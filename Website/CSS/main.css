@@ -1,0 +1,47 @@
+
+#BDAT_Upload{
+    padding: 1em;
+    margin-bottom: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.WhiteBorder{
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 4px;
+}
+
+#Header{
+    font-size: 75; 
+    margin-bottom: 1em;
+    overflow: hidden;
+}
+#BDAT_Upload:hover{
+    background-color: rgb(60, 23, 23);
+}
+
+#RandomizerOptions{
+    padding: 5em;
+
+}
+
+.Checkboxes{
+    margin-left: 2em;
+    margin-right: 0.5em;
+    margin-bottom: 3em;
+}
+
+#Category{
+    margin: 1em;
+}
+body{
+    caret-color: transparent;
+    color: white;
+    background-color: rgb(99, 36, 36);
+}
+
+.container{
+
+    padding: 100px;
+}

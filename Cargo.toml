@@ -1,0 +1,7 @@
+[package]
+name = "Xenoblade2_Randomizer"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bdat-rs = "0.5.0"
