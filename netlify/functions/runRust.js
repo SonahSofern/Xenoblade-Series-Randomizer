@@ -3,7 +3,7 @@ const { exec } = require('child_process');
 
 exports.handler = async function(event, context) {
   return new Promise((resolve, reject) => {
-    exec('/XC2_Randomizer/bdat-toolset-win64.exe', (error, stdout, stderr) => {
+    exec('./XC2_Randomizer/bdat-toolset-win64.exe', (error, stdout, stderr) => {
       if (error) {
         console.error(`Error executing Rust binary: ${error}`);
         return reject({
