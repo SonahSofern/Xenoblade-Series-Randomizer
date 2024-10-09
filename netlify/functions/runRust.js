@@ -1,5 +1,6 @@
 // netlify/functions/runRust.js
 const { exec } = require('child_process');
+const path = require('path'); 
 
 exports.handler = async function(event, context) {
     const linuxBdatPath = path.join(__dirname, './linuxBDAT');
