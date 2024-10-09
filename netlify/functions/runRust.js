@@ -3,6 +3,7 @@ const { exec } = require('child_process');
 
 exports.handler = async function(event, context) {
     console.log("ITS ALIVE!!!");
+    console.log('Current working directory:', __dirname);
   return new Promise((resolve, reject) => {
     exec('../../linuxBDAT', (error, stdout, stderr) => {
       if (error) {
