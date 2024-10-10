@@ -1,9 +1,0 @@
-[build]
-  # Your build command if any
-  # build_command = "npm run build"
-
-[functions]
-  directory = "netlify/functions"
-  included_files = [
-    "XC2_Randomizer/linuxBDAT"
-  ]

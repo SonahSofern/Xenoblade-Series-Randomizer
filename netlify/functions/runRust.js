@@ -3,7 +3,7 @@ const { exec } = require('child_process');
 const path = require('path'); 
 
 exports.handler = async function(event, context) {
-    const linuxBdatPath = path.join(__dirname, './linuxBDAT');
+    const linuxBdatPath = path.join(__dirname, '/linuxBDAT');
     console.log(linuxBdatPath);
     var fs = require('fs');
     var files = fs.readdirSync("/var");
