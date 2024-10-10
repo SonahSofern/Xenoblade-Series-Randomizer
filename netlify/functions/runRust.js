@@ -4,6 +4,7 @@ const path = require('path');
 
 exports.handler = async function(event, context) {
     const linuxBdatPath = path.join(__dirname, './linuxBDAT');
+    console.log(linuxBdatPath);
     console.log('Current working directory:', __dirname);
   return new Promise((resolve, reject) => {
     exec(linuxBdatPath, (error, stdout, stderr) => {
