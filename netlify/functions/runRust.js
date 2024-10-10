@@ -10,7 +10,7 @@ exports.handler = async function(event, context) {
     console.log(files);
     console.log('Current working directory:', __dirname);
   return new Promise((resolve, reject) => {
-    exec(linuxBdatPath, (error, stdout, stderr) => {
+    exec("xenoblade2randomizer/netlify/functions/linuxbdat", (error, stdout, stderr) => {
       if (error) {
         console.error(`Error executing Rust binary: ${error}`);
         return reject({
