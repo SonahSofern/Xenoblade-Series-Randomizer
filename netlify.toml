@@ -1,0 +1,13 @@
+[build]
+  # Your build command if any
+  # build_command = "npm run build"
+
+[[functions]]
+  # Point to the folder containing your functions (the 'netlify/functions' folder from your screenshot)
+  directory = "netlify/functions"
+
+[functions]
+  # Ensure your binary is included in the bundle
+  included_files = [
+    "XC2_Randomizer/linuxBDAT"
+  ]
