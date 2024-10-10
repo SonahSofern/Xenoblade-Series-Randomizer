@@ -5,7 +5,7 @@ const path = require('path');
 exports.handler = async function (event, context) {
   return new Promise((resolve, reject) => {
     // Call the Rust binary with arguments
-    exec('./bdat-toolset info file.bdat -t TableName', (error, stdout, stderr) => {
+    exec('./linuxBDAT info file.bdat -t TableName', (error, stdout, stderr) => {
       if (error) {
         console.error('Error executing Rust binary:', error);
         reject({
