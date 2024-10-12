@@ -34,15 +34,22 @@ tabControl.pack(expand = 1, fill ="both", padx=10, pady= 10)
 
 
 def UploadBDAT(event=None):
-    filepath = filedialog.askopenfilename(filetypes=[("BDAT files", "*.bdat")])
+    filepath = filedialog.askopenfilename(filetypes=[("BDAT file", "*.bdat")])
     # here is the logic to use rust command on filepath if(filepath)
 
 bdatButton = tk.Button(root, text='Browse', command=UploadBDAT)
 msBdatButton = tk.Button(root, text='Browse', command=UploadBDAT)
+bdatFilePathEntry = tk.Entry(root,textvariable = "", font=('calibre',10,'normal'))
+msBdatFilePathEntry = tk.Entry(root,textvariable = "", font=('calibre',10,'normal'))
+RandomizeButton = tk.Button(root, text='Randomize')
 
-bdatButton.config(anchor="w")
-msBdatButton.config(anchor="w")
-bdatButton.pack(anchor="ne", padx=5, pady=5)
-msBdatButton.pack(anchor="ne", padx=5, pady=5)
+
+bdatButton.pack(anchor="w", padx=10)
+bdatFilePathEntry.pack(anchor="w", pady=5,  padx=10)
+
+msBdatButton.pack(anchor="w", padx=10)
+msBdatFilePathEntry.pack(anchor="w",  padx=10, pady=5)
+
+RandomizeButton.pack(pady=5)
 
 root.mainloop()
