@@ -1,4 +1,4 @@
-import tkinter as tk;
+import tkinter as tk
 from tkinter import PhotoImage
 import os
 import sys
@@ -11,22 +11,23 @@ root.title("Xenoblade Chronicles 2 Randomizer 0.1.0")
 root.configure(background='#632424')
 root.geometry('800x800')
 
+MainWindow = ttk.Notebook(root) 
 
-tabControl = ttk.Notebook(root) 
+MainWindow.bind("<FocusIn>", lambda e: MainWindow.state(["!focus"])) # removes highlights of tabs
   
-tab1 = ttk.Frame(tabControl) 
-tab2 = ttk.Frame(tabControl) 
-tab3 = ttk.Frame(tabControl) 
-tab4 = ttk.Frame(tabControl) 
-tab5 = ttk.Frame(tabControl) 
+TabGeneral = ttk.Frame(MainWindow) 
+TabDrivers = ttk.Frame(MainWindow) 
+TabBlades = ttk.Frame(MainWindow) 
+TabEnemies = ttk.Frame(MainWindow) 
+TabMisc = ttk.Frame(MainWindow) 
   
-tabControl.add(tab1, text ='General') 
-tabControl.add(tab2, text ='Drivers') 
-tabControl.add(tab3, text ='Blades') 
-tabControl.add(tab4, text ='Enemies') 
-tabControl.add(tab5, text ='Misc') 
+MainWindow.add(TabGeneral, text ='General') 
+MainWindow.add(TabDrivers, text ='Drivers') 
+MainWindow.add(TabBlades, text ='Blades') 
+MainWindow.add(TabEnemies, text ='Enemies') 
+MainWindow.add(TabMisc, text ='Misc') 
 
-tabControl.pack(expand = 1, fill ="both", padx=10, pady= 10) 
+MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10) 
 
 
 # icon = PhotoImage(file = os.path.join(sys._MEIPASS, 'Images\XC2Icon.png'))
@@ -37,19 +38,25 @@ def UploadBDAT(event=None):
     filepath = filedialog.askopenfilename(filetypes=[("BDAT file", "*.bdat")])
     # here is the logic to use rust command on filepath if(filepath)
 
-bdatButton = tk.Button(root, text='Browse', command=UploadBDAT)
-msBdatButton = tk.Button(root, text='Browse', command=UploadBDAT)
-bdatFilePathEntry = tk.Entry(root,textvariable = "", font=('calibre',10,'normal'))
-msBdatFilePathEntry = tk.Entry(root,textvariable = "", font=('calibre',10,'normal'))
-RandomizeButton = tk.Button(root, text='Randomize')
+def Randomize():
+    print("Test")
+
+# msBdatButton = tk.Button(root, text='Browse', command=UploadBDAT)
+bdatFilePathEntry = tk.Entry(root,textvariable = "", font=('calibre',22,'normal'))
+# msBdatFilePathEntry = tk.Entry(root,textvariable = "", font=('calibre',10,'normal'))
 
 
-bdatButton.pack(anchor="w", padx=10)
-bdatFilePathEntry.pack(anchor="w", pady=5,  padx=10)
+bdatcommonFrame = tk.Frame(root, background='#581f1f')
+bdatcommonFrame.pack(anchor="w", padx=10)
+bdatButton = tk.Button(bdatcommonFrame, text='Choose your "common.bdat"', command=UploadBDAT)
+bdatFilePathEntry = tk.Entry(bdatcommonFrame, width=255)
+bdatButton.pack(side="left", padx=2, pady=2)
+bdatFilePathEntry.pack(side="left", padx=2)
+RandomizeButton = tk.Button(text='Randomize', command=Randomize)
 
-msBdatButton.pack(anchor="w", padx=10)
-msBdatFilePathEntry.pack(anchor="w",  padx=10, pady=5)
+# msBdatButton.pack(anchor="w", padx=10)
+# msBdatFilePathEntry.pack(anchor="w",  padx=10, pady=5)
 
-RandomizeButton.pack(pady=5)
+RandomizeButton.pack(pady=10)
 
 root.mainloop()
