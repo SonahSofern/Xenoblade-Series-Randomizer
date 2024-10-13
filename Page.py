@@ -6,6 +6,7 @@ from tkinter import filedialog
 from tkinter import ttk
 import random
 import subprocess
+import BladeRandomization
 
 root = tk.Tk()
 
@@ -64,6 +65,9 @@ def Randomize():
     random.seed(randoSeedEntry.get())
     print("seed: " + randoSeedEntry.get())
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {filepath} -o {JsonOutput} -f json --pretty")
+
+    BladeRandomization.TotalBladeRandomize()
+
     # Randomize JSONS HERE
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {cmnBdatOutput} -f json")
 

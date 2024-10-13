@@ -5,7 +5,7 @@ a = Analysis(
     ['page.py'],
     pathex=[],
     binaries=[],
-    datas=[('_internal/Images', 'Images'), ('_internal/Toolset/bdat-toolset-win64.exe', 'Toolset')],
+    datas=[('_internal/Images', 'Images'), ('_internal/Toolset/bdat-toolset-win64.exe', 'Toolset'), ('__pycache__', '__pycache__')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -26,12 +26,13 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=False,
+    console=True,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon='_internal/Images/XC2Icon.ico'
 )
 coll = COLLECT(
     exe,
