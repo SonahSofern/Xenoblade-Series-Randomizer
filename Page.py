@@ -4,6 +4,7 @@ import os
 import sys
 from tkinter import filedialog
 from tkinter import ttk
+import random
 
 root = tk.Tk()
 
@@ -36,26 +37,44 @@ MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10)
 
 def UploadBDAT(event=None):
     filepath = filedialog.askopenfilename(filetypes=[("BDAT file", "*.bdat")])
+    bdatFilePathEntry.delete(0, tk.END)
+    bdatFilePathEntry.insert(0, filepath)
     # here is the logic to use rust command on filepath if(filepath)
 
 def Randomize():
-    print("Test")
+    random.seed(randoSeedEntry.get())
+    print("seed: " + randoSeedEntry.get())
 
+def GenRandomSeed():
+    print("Gen Random Seed")
 # msBdatButton = tk.Button(root, text='Browse', command=UploadBDAT)
-bdatFilePathEntry = tk.Entry(root,textvariable = "", font=('calibre',22,'normal'))
 # msBdatFilePathEntry = tk.Entry(root,textvariable = "", font=('calibre',10,'normal'))
-
-
-bdatcommonFrame = tk.Frame(root, background='#581f1f')
-bdatcommonFrame.pack(anchor="w", padx=10)
-bdatButton = tk.Button(bdatcommonFrame, text='Choose your "common.bdat"', command=UploadBDAT)
-bdatFilePathEntry = tk.Entry(bdatcommonFrame, width=255)
-bdatButton.pack(side="left", padx=2, pady=2)
-bdatFilePathEntry.pack(side="left", padx=2)
-RandomizeButton = tk.Button(text='Randomize', command=Randomize)
-
 # msBdatButton.pack(anchor="w", padx=10)
 # msBdatFilePathEntry.pack(anchor="w",  padx=10, pady=5)
+
+bdatcommonFrame = tk.Frame(root, background='#632424')
+bdatcommonFrame.pack(anchor="w", padx=10)
+
+bdatButton = tk.Button(bdatcommonFrame, text='Browse for "common.bdat"', command=UploadBDAT)
+bdatButton.pack(side="left", padx=2, pady=2)
+
+bdatFilePathEntry = tk.Entry(bdatcommonFrame)
+bdatFilePathEntry.pack(side="left", padx=2)
+
+
+SeedFrame = tk.Frame(root, background='#632424')
+SeedFrame.pack(anchor="w", padx=10)
+
+seedDesc = tk.Button(SeedFrame, text="Seed", command=GenRandomSeed)
+seedDesc.pack(side='left', padx=2, pady=2)
+
+randoSeedEntry = tk.Entry(SeedFrame)
+randoSeedEntry.pack(side='left', padx=2)
+
+
+RandomizeButton = tk.Button(text='Randomize', command=Randomize)
+
+
 
 RandomizeButton.pack(pady=10)
 
