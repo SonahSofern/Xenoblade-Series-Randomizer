@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['page.py'],
+    ['XC2_Randomizer.py'],
     pathex=[],
     binaries=[],
     datas=[('_internal/Images', 'Images'), ('_internal/Toolset/bdat-toolset-win64.exe', 'Toolset'), ('__pycache__', '__pycache__')],
@@ -21,7 +21,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='page',
+    name='XC2_Randomizer',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -41,6 +41,6 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='page',
+    name='XC2_Randomizer',
     distpath='./dist',
 )
