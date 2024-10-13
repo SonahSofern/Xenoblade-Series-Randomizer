@@ -5,6 +5,7 @@ import sys
 from tkinter import filedialog
 from tkinter import ttk
 import random
+import subprocess
 
 root = tk.Tk()
 
@@ -31,11 +32,14 @@ MainWindow.add(TabMisc, text ='Misc')
 MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10) 
 
 
+
 # icon = PhotoImage(file = os.path.join(sys._MEIPASS, 'Images\XC2Icon.png'))
 # root.iconphoto(True, icon)
 
+filepath = ""
 
-def UploadBDAT(event=None):
+def UploadBDAT():
+    global filepath
     filepath = filedialog.askopenfilename(filetypes=[("BDAT file", "*.bdat")])
     bdatFilePathEntry.delete(0, tk.END)
     bdatFilePathEntry.insert(0, filepath)
@@ -43,7 +47,7 @@ def UploadBDAT(event=None):
 def Randomize():
     random.seed(randoSeedEntry.get())
     print("seed: " + randoSeedEntry.get())
-        # here is the logic to use rust command on filepath if(filepath)
+    subprocess.run(f"./bdat-toolset-win64.exe extract {filepath} -o OutputJsons -f json --pretty")
 
 def GenRandomSeed():
     print("Gen Random Seed")
@@ -59,7 +63,7 @@ bdatcommonFrame.pack(anchor="w", padx=10)
 bdatButton = tk.Button(bdatcommonFrame, text='Browse for "common.bdat"', command=UploadBDAT)
 bdatButton.pack(side="left", padx=2, pady=2)
 
-bdatFilePathEntry = tk.Entry(bdatcommonFrame)
+bdatFilePathEntry = tk.Entry(bdatcommonFrame, width=500)
 bdatFilePathEntry.pack(side="left", padx=2)
 
 
