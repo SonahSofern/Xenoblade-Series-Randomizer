@@ -31,6 +31,15 @@ MainWindow.add(TabMisc, text ='Misc')
 MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10) 
 
 
+
+BladeSpecialReaction = tk.Label(TabBlades, text="Blade Special Reactions")
+BladeSpecialReaction.grid(row=0, column=0, sticky="s")
+BladeSpecialReactionSlider = tk.Scale(TabBlades, from_=0, to=100, orient=tk.HORIZONTAL, sliderlength=10)
+BladeSpecialReactionSlider.grid(row=0, column=1)
+BladeSpecialReactionDescription = tk.Label(TabBlades, text="Randomizes each hit of a blade special to have a random effect such as break, knockback etc.")
+BladeSpecialReactionDescription.grid(row=0, column=2, sticky="s")
+
+
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
 

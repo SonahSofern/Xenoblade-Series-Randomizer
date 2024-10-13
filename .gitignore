@@ -1,3 +1,5 @@
 TextBDAT/
 BDAT_JSON/
 JsonOutputs/
+dist/
+build/
