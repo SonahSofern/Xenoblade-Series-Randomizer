@@ -39,14 +39,15 @@ def UploadBDAT(event=None):
     filepath = filedialog.askopenfilename(filetypes=[("BDAT file", "*.bdat")])
     bdatFilePathEntry.delete(0, tk.END)
     bdatFilePathEntry.insert(0, filepath)
-    # here is the logic to use rust command on filepath if(filepath)
 
 def Randomize():
     random.seed(randoSeedEntry.get())
     print("seed: " + randoSeedEntry.get())
+        # here is the logic to use rust command on filepath if(filepath)
 
 def GenRandomSeed():
     print("Gen Random Seed")
+
 # msBdatButton = tk.Button(root, text='Browse', command=UploadBDAT)
 # msBdatFilePathEntry = tk.Entry(root,textvariable = "", font=('calibre',10,'normal'))
 # msBdatButton.pack(anchor="w", padx=10)
