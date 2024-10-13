@@ -28,13 +28,9 @@ MainWindow.add(TabDrivers, text ='Drivers')
 MainWindow.add(TabBlades, text ='Blades') 
 MainWindow.add(TabEnemies, text ='Enemies') 
 MainWindow.add(TabMisc, text ='Misc') 
-
 MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10) 
 
 
-
-# icon = PhotoImage(file = os.path.join(sys._MEIPASS, 'Images\XC2Icon.png'))
-# root.iconphoto(True, icon)
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
 
@@ -42,11 +38,18 @@ filepath = ""
 JsonOutput = "JsonOutputs"
 cmnBdatOutput = "RandomizedBDATOutput"
 
-def UploadBDAT():
+def BDATDirectory():
     global filepath
     filepath = filedialog.askopenfilename(filetypes=[("BDAT file", "*.bdat")])
     bdatFilePathEntry.delete(0, tk.END)
     bdatFilePathEntry.insert(0, filepath)
+
+def OutputDirectory():
+    global cmnBdatOutput
+    cmnBdatOutput = filedialog.askdirectory(title="Select an output folder")
+    outDirEntry.delete(0, tk.END)
+    outDirEntry.insert(0, cmnBdatOutput)
+
 
 def Randomize():
     random.seed(randoSeedEntry.get())
@@ -66,7 +69,7 @@ def GenRandomSeed():
 bdatcommonFrame = tk.Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
 
-bdatButton = tk.Button(bdatcommonFrame, text="Choose Input (commmon.bdat)", command=UploadBDAT)
+bdatButton = tk.Button(bdatcommonFrame, text="Choose Input (commmon.bdat)", command=BDATDirectory)
 bdatButton.pack(side="left", padx=2, pady=2)
 
 bdatFilePathEntry = tk.Entry(bdatcommonFrame, width=500)
@@ -76,7 +79,7 @@ bdatFilePathEntry.pack(side="left", padx=2)
 OutputDirectoryFrame = tk.Frame(root, background='#632424')
 OutputDirectoryFrame.pack(anchor="w", padx=10)
 
-outputDirButton = tk.Button(OutputDirectoryFrame, text='Choose Output Directory')
+outputDirButton = tk.Button(OutputDirectoryFrame, text='Choose Output Directory', command=OutputDirectory)
 outputDirButton.pack(side="left", padx=2, pady=2)
 
 outDirEntry = tk.Entry(OutputDirectoryFrame, width=500)
