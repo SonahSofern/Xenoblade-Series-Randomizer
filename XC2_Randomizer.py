@@ -32,13 +32,17 @@ MainWindow.add(TabMisc, text ='Misc')
 MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10) 
 
 
+def GenOption(name, parentTab, desc, row):
+    option = tk.Label(parentTab, text=name)
+    option.grid(row=row, column=0, sticky="sw")
+    optionSlider = tk.Scale(parentTab, from_=0, to=100, orient=tk.HORIZONTAL, sliderlength=10)
+    optionSlider.grid(row=row, column=1)
+    optionDesc = tk.Label(parentTab, text=desc)
+    optionDesc.grid(row=row, column=2, sticky="sw")
+    return optionSlider.get()
 
-BladeSpecialReaction = tk.Label(TabBlades, text="Blade Special Reactions")
-BladeSpecialReaction.grid(row=0, column=0, sticky="s")
-BladeSpecialReactionSlider = tk.Scale(TabBlades, from_=0, to=100, orient=tk.HORIZONTAL, sliderlength=10)
-BladeSpecialReactionSlider.grid(row=0, column=1)
-BladeSpecialReactionDescription = tk.Label(TabBlades, text="Randomizes each hit of a blade special to have a random effect such as break, knockback etc.")
-BladeSpecialReactionDescription.grid(row=0, column=2, sticky="s")
+BladeSpecialReactionSlider = GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", 0)
+BladeSpecialLevelSlider = GenOption("Blade Special Levels", TabBlades, "Randomizes blades special levels 1-3", 1)
 
 
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
@@ -61,14 +65,13 @@ def OutputDirectory():
     outDirEntry.insert(0, cmnBdatOutput)
 
 
-def KingRandomize():
+def Main():
     random.seed(randoSeedEntry.get())
     print("seed: " + randoSeedEntry.get())
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {filepath} -o {JsonOutput} -f json --pretty")
 
-    JSONParser.Randomize("Randomizing Blade Reactions", "./_internal/JsonOutputs/common/BTL_Arts_Bl.json", "ReAct", 0, 14, BladeSpecialReactionSlider.get(), [43,44])
+    JSONParser.Randomize("Randomizing Blade Reactions", "./_internal/JsonOutputs/common/BTL_Arts_Bl.json", "ReAct", 0, 14, BladeSpecialReactionSlider, [43,44])
 
-    # Randomize JSONS HERE
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {cmnBdatOutput} -f json")
 
 def GenRandomSeed():
@@ -110,7 +113,7 @@ randoSeedEntry.pack(side='left', padx=2)
 
 
 
-RandomizeButton = tk.Button(text='Randomize', command=KingRandomize)
+RandomizeButton = tk.Button(text='Randomize', command=Main)
 
 
 
