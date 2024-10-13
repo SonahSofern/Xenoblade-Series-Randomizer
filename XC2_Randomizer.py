@@ -6,7 +6,7 @@ from tkinter import filedialog
 from tkinter import ttk
 import random
 import subprocess
-import BladeRandomization
+import JSONParser
 
 root = tk.Tk()
 
@@ -61,12 +61,12 @@ def OutputDirectory():
     outDirEntry.insert(0, cmnBdatOutput)
 
 
-def Randomize():
+def KingRandomize():
     random.seed(randoSeedEntry.get())
     print("seed: " + randoSeedEntry.get())
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {filepath} -o {JsonOutput} -f json --pretty")
 
-    BladeRandomization.TotalBladeRandomize()
+    JSONParser.Randomize("Randomizing Blade Reactions", "./_internal/JsonOutputs/common/BTL_Arts_Bl.json", "ReAct", 0, 14, BladeSpecialReactionSlider.get(), [43,44])
 
     # Randomize JSONS HERE
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {cmnBdatOutput} -f json")
@@ -110,7 +110,7 @@ randoSeedEntry.pack(side='left', padx=2)
 
 
 
-RandomizeButton = tk.Button(text='Randomize', command=Randomize)
+RandomizeButton = tk.Button(text='Randomize', command=KingRandomize)
 
 
 
