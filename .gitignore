@@ -3,3 +3,5 @@ BDAT_JSON/
 JsonOutputs/
 dist/
 build/
+RandomizedBDATOutput/
+OriginalBDAT/

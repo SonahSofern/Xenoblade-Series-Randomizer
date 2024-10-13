@@ -45,7 +45,7 @@ icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
 
 filepath = ""
-JsonOutput = "JsonOutputs"
+JsonOutput = "./_internal/JsonOutputs"
 cmnBdatOutput = "RandomizedBDATOutput"
 
 def BDATDirectory():
