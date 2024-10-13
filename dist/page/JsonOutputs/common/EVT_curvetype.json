@@ -1,0 +1,44 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "value",
+      "type": 5
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "name": "LINEAR",
+      "value": 1
+    },
+    {
+      "$id": 2,
+      "name": "S_F_S",
+      "value": 2
+    },
+    {
+      "$id": 3,
+      "name": "S_F",
+      "value": 3
+    },
+    {
+      "$id": 4,
+      "name": "F_S",
+      "value": 4
+    },
+    {
+      "$id": 5,
+      "name": "S_L",
+      "value": 5
+    },
+    {
+      "$id": 6,
+      "name": "L_S",
+      "value": 6
+    }
+  ]
+}

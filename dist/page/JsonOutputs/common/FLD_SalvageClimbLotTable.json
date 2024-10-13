@@ -1,0 +1,124 @@
+{
+  "schema": [
+    {
+      "name": "NoTBox",
+      "type": 1
+    },
+    {
+      "name": "TBox",
+      "type": 1
+    },
+    {
+      "name": "RTBox",
+      "type": 1
+    },
+    {
+      "name": "SRTBox",
+      "type": 1
+    },
+    {
+      "name": "Enemy",
+      "type": 1
+    },
+    {
+      "name": "REnemy",
+      "type": 1
+    },
+    {
+      "name": "Voice1",
+      "type": 7
+    },
+    {
+      "name": "Voice2",
+      "type": 7
+    },
+    {
+      "name": "Voice3",
+      "type": 7
+    },
+    {
+      "name": "Voice4",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "NoTBox": 25,
+      "TBox": 25,
+      "RTBox": 0,
+      "SRTBox": 0,
+      "Enemy": 20,
+      "REnemy": 0,
+      "Voice1": "",
+      "Voice2": "",
+      "Voice3": "",
+      "Voice4": ""
+    },
+    {
+      "$id": 2,
+      "NoTBox": 25,
+      "TBox": 25,
+      "RTBox": 25,
+      "SRTBox": 0,
+      "Enemy": 20,
+      "REnemy": 30,
+      "Voice1": "",
+      "Voice2": "",
+      "Voice3": "",
+      "Voice4": ""
+    },
+    {
+      "$id": 3,
+      "NoTBox": 25,
+      "TBox": 25,
+      "RTBox": 25,
+      "SRTBox": 30,
+      "Enemy": 0,
+      "REnemy": 0,
+      "Voice1": "",
+      "Voice2": "",
+      "Voice3": "",
+      "Voice4": ""
+    },
+    {
+      "$id": 4,
+      "NoTBox": 0,
+      "TBox": 0,
+      "RTBox": 25,
+      "SRTBox": 30,
+      "Enemy": 20,
+      "REnemy": 30,
+      "Voice1": "",
+      "Voice2": "",
+      "Voice3": "",
+      "Voice4": ""
+    },
+    {
+      "$id": 5,
+      "NoTBox": 25,
+      "TBox": 25,
+      "RTBox": 25,
+      "SRTBox": 0,
+      "Enemy": 20,
+      "REnemy": 0,
+      "Voice1": "",
+      "Voice2": "",
+      "Voice3": "",
+      "Voice4": ""
+    },
+    {
+      "$id": 6,
+      "NoTBox": 0,
+      "TBox": 0,
+      "RTBox": 0,
+      "SRTBox": 30,
+      "Enemy": 20,
+      "REnemy": 30,
+      "Voice1": "",
+      "Voice2": "",
+      "Voice3": "",
+      "Voice4": ""
+    }
+  ]
+}

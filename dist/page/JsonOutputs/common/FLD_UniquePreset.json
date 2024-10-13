@@ -1,0 +1,280 @@
+{
+  "schema": [
+    {
+      "name": "Frequency",
+      "type": 2
+    },
+    {
+      "name": "Chara0",
+      "type": 2
+    },
+    {
+      "name": "Motion0",
+      "type": 1
+    },
+    {
+      "name": "Delay0",
+      "type": 8
+    },
+    {
+      "name": "Chara1",
+      "type": 2
+    },
+    {
+      "name": "Motion1",
+      "type": 1
+    },
+    {
+      "name": "Delay1",
+      "type": 8
+    },
+    {
+      "name": "Chara2",
+      "type": 2
+    },
+    {
+      "name": "Motion2",
+      "type": 1
+    },
+    {
+      "name": "Delay2",
+      "type": 8
+    },
+    {
+      "name": "Chara3",
+      "type": 2
+    },
+    {
+      "name": "Motion3",
+      "type": 1
+    },
+    {
+      "name": "Delay3",
+      "type": 8
+    },
+    {
+      "name": "Chara4",
+      "type": 2
+    },
+    {
+      "name": "Motion4",
+      "type": 1
+    },
+    {
+      "name": "Delay4",
+      "type": 8
+    },
+    {
+      "name": "Chara5",
+      "type": 2
+    },
+    {
+      "name": "Motion5",
+      "type": 1
+    },
+    {
+      "name": "Delay5",
+      "type": 8
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Frequency": 10,
+      "Chara0": 3,
+      "Motion0": 2,
+      "Delay0": 0.0,
+      "Chara1": 1010,
+      "Motion1": 0,
+      "Delay1": 0.0,
+      "Chara2": 0,
+      "Motion2": 0,
+      "Delay2": 0.0,
+      "Chara3": 0,
+      "Motion3": 0,
+      "Delay3": 0.0,
+      "Chara4": 0,
+      "Motion4": 0,
+      "Delay4": 0.0,
+      "Chara5": 0,
+      "Motion5": 0,
+      "Delay5": 0.0
+    },
+    {
+      "$id": 2,
+      "Frequency": 10,
+      "Chara0": 4,
+      "Motion0": 1,
+      "Delay0": 0.0,
+      "Chara1": 1005,
+      "Motion1": 2,
+      "Delay1": 0.0,
+      "Chara2": 0,
+      "Motion2": 0,
+      "Delay2": 0.0,
+      "Chara3": 0,
+      "Motion3": 0,
+      "Delay3": 0.0,
+      "Chara4": 0,
+      "Motion4": 0,
+      "Delay4": 0.0,
+      "Chara5": 0,
+      "Motion5": 0,
+      "Delay5": 0.0
+    },
+    {
+      "$id": 3,
+      "Frequency": 10,
+      "Chara0": 4,
+      "Motion0": 1,
+      "Delay0": 0.0,
+      "Chara1": 1006,
+      "Motion1": 2,
+      "Delay1": 0.0,
+      "Chara2": 0,
+      "Motion2": 0,
+      "Delay2": 0.0,
+      "Chara3": 0,
+      "Motion3": 0,
+      "Delay3": 0.0,
+      "Chara4": 0,
+      "Motion4": 0,
+      "Delay4": 0.0,
+      "Chara5": 0,
+      "Motion5": 0,
+      "Delay5": 0.0
+    },
+    {
+      "$id": 4,
+      "Frequency": 10,
+      "Chara0": 4,
+      "Motion0": 1,
+      "Delay0": 0.0,
+      "Chara1": 1007,
+      "Motion1": 1,
+      "Delay1": 0.0,
+      "Chara2": 0,
+      "Motion2": 0,
+      "Delay2": 0.0,
+      "Chara3": 0,
+      "Motion3": 0,
+      "Delay3": 0.0,
+      "Chara4": 0,
+      "Motion4": 0,
+      "Delay4": 0.0,
+      "Chara5": 0,
+      "Motion5": 0,
+      "Delay5": 0.0
+    },
+    {
+      "$id": 5,
+      "Frequency": 10,
+      "Chara0": 1016,
+      "Motion0": 2,
+      "Delay0": 0.0,
+      "Chara1": 1037,
+      "Motion1": 2,
+      "Delay1": 0.0,
+      "Chara2": 0,
+      "Motion2": 0,
+      "Delay2": 0.0,
+      "Chara3": 0,
+      "Motion3": 0,
+      "Delay3": 0.0,
+      "Chara4": 0,
+      "Motion4": 0,
+      "Delay4": 0.0,
+      "Chara5": 0,
+      "Motion5": 0,
+      "Delay5": 0.0
+    },
+    {
+      "$id": 6,
+      "Frequency": 10,
+      "Chara0": 1024,
+      "Motion0": 2,
+      "Delay0": 0.0,
+      "Chara1": 1025,
+      "Motion1": 1,
+      "Delay1": 0.0,
+      "Chara2": 0,
+      "Motion2": 0,
+      "Delay2": 0.0,
+      "Chara3": 0,
+      "Motion3": 0,
+      "Delay3": 0.0,
+      "Chara4": 0,
+      "Motion4": 0,
+      "Delay4": 0.0,
+      "Chara5": 0,
+      "Motion5": 0,
+      "Delay5": 0.0
+    },
+    {
+      "$id": 7,
+      "Frequency": 10,
+      "Chara0": 2,
+      "Motion0": 1,
+      "Delay0": 0.0,
+      "Chara1": 1005,
+      "Motion1": 1,
+      "Delay1": 0.0,
+      "Chara2": 0,
+      "Motion2": 0,
+      "Delay2": 0.0,
+      "Chara3": 0,
+      "Motion3": 0,
+      "Delay3": 0.0,
+      "Chara4": 0,
+      "Motion4": 0,
+      "Delay4": 0.0,
+      "Chara5": 0,
+      "Motion5": 0,
+      "Delay5": 0.0
+    },
+    {
+      "$id": 8,
+      "Frequency": 10,
+      "Chara0": 1001,
+      "Motion0": 0,
+      "Delay0": 0.0,
+      "Chara1": 1009,
+      "Motion1": 2,
+      "Delay1": 0.0,
+      "Chara2": 0,
+      "Motion2": 0,
+      "Delay2": 0.0,
+      "Chara3": 0,
+      "Motion3": 0,
+      "Delay3": 0.0,
+      "Chara4": 0,
+      "Motion4": 0,
+      "Delay4": 0.0,
+      "Chara5": 0,
+      "Motion5": 0,
+      "Delay5": 0.0
+    },
+    {
+      "$id": 9,
+      "Frequency": 10,
+      "Chara0": 3,
+      "Motion0": 1,
+      "Delay0": 0.0,
+      "Chara1": 1010,
+      "Motion1": 2,
+      "Delay1": 0.0,
+      "Chara2": 0,
+      "Motion2": 0,
+      "Delay2": 0.0,
+      "Chara3": 0,
+      "Motion3": 0,
+      "Delay3": 0.0,
+      "Chara4": 0,
+      "Motion4": 0,
+      "Delay4": 0.0,
+      "Chara5": 0,
+      "Motion5": 0,
+      "Delay5": 0.0
+    }
+  ]
+}

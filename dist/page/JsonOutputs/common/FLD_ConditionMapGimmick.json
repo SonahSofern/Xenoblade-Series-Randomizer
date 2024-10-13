@@ -1,0 +1,114 @@
+{
+  "schema": [
+    {
+      "name": "MapGimmickID",
+      "type": 2
+    },
+    {
+      "name": "EndCheck",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "MapGimmickID": 163,
+      "EndCheck": 0
+    },
+    {
+      "$id": 2,
+      "MapGimmickID": 134,
+      "EndCheck": 1
+    },
+    {
+      "$id": 3,
+      "MapGimmickID": 148,
+      "EndCheck": 1
+    },
+    {
+      "$id": 4,
+      "MapGimmickID": 154,
+      "EndCheck": 1
+    },
+    {
+      "$id": 5,
+      "MapGimmickID": 155,
+      "EndCheck": 1
+    },
+    {
+      "$id": 6,
+      "MapGimmickID": 156,
+      "EndCheck": 1
+    },
+    {
+      "$id": 7,
+      "MapGimmickID": 157,
+      "EndCheck": 1
+    },
+    {
+      "$id": 8,
+      "MapGimmickID": 158,
+      "EndCheck": 1
+    },
+    {
+      "$id": 9,
+      "MapGimmickID": 159,
+      "EndCheck": 1
+    },
+    {
+      "$id": 10,
+      "MapGimmickID": 160,
+      "EndCheck": 1
+    },
+    {
+      "$id": 11,
+      "MapGimmickID": 161,
+      "EndCheck": 1
+    },
+    {
+      "$id": 12,
+      "MapGimmickID": 162,
+      "EndCheck": 1
+    },
+    {
+      "$id": 13,
+      "MapGimmickID": 164,
+      "EndCheck": 0
+    },
+    {
+      "$id": 14,
+      "MapGimmickID": 165,
+      "EndCheck": 0
+    },
+    {
+      "$id": 15,
+      "MapGimmickID": 166,
+      "EndCheck": 0
+    },
+    {
+      "$id": 16,
+      "MapGimmickID": 149,
+      "EndCheck": 1
+    },
+    {
+      "$id": 17,
+      "MapGimmickID": 150,
+      "EndCheck": 1
+    },
+    {
+      "$id": 18,
+      "MapGimmickID": 151,
+      "EndCheck": 1
+    },
+    {
+      "$id": 19,
+      "MapGimmickID": 152,
+      "EndCheck": 1
+    },
+    {
+      "$id": 20,
+      "MapGimmickID": 153,
+      "EndCheck": 1
+    }
+  ]
+}

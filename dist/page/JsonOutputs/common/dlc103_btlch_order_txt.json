@@ -1,0 +1,419 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_header_index",
+      "text_id": 1864
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_header_index_shadow",
+      "text_id": 1864
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_header_guide",
+      "text_id": 1865
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_header_guide_shadow",
+      "text_id": 1865
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_difficulty_index",
+      "text_id": 1866
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_list_column@01",
+      "text_id": 1867
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_list_column@02",
+      "text_id": 1868
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_list_item_name@01",
+      "text_id": 1869
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_list_item_special@01",
+      "text_id": 1870
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_list_item_name@02",
+      "text_id": 1869
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_list_item_special@02",
+      "text_id": 1870
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_list_item_name@03",
+      "text_id": 1869
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_list_item_special@03",
+      "text_id": 1870
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_list_item_name@04",
+      "text_id": 1869
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_list_item_special@04",
+      "text_id": 1870
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_list_item_name@05",
+      "text_id": 1869
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_list_item_special@05",
+      "text_id": 1870
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_list_item_name@06",
+      "text_id": 1869
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_list_item_special@06",
+      "text_id": 1870
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_list_item_name@07",
+      "text_id": 1869
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_list_item_special@07",
+      "text_id": 1870
+    },
+    {
+      "$id": 22,
+      "obj_name": "TXT_list_item_name@08",
+      "text_id": 1869
+    },
+    {
+      "$id": 23,
+      "obj_name": "TXT_list_item_special@08",
+      "text_id": 1870
+    },
+    {
+      "$id": 24,
+      "obj_name": "TXT_detail_rule_summary",
+      "text_id": 1871
+    },
+    {
+      "$id": 25,
+      "obj_name": "TXT_detail_rule_index",
+      "text_id": 1872
+    },
+    {
+      "$id": 26,
+      "obj_name": "TXT_detail_rule_time_index",
+      "text_id": 1873
+    },
+    {
+      "$id": 27,
+      "obj_name": "TXT_detail_rule_time_num",
+      "text_id": 1874
+    },
+    {
+      "$id": 28,
+      "obj_name": "TXT_detail_rule_limit_index",
+      "text_id": 1875
+    },
+    {
+      "$id": 29,
+      "obj_name": "TXT_detail_rule_limit_lv",
+      "text_id": 1876
+    },
+    {
+      "$id": 30,
+      "obj_name": "TXT_detail_rule_limit_wpn",
+      "text_id": 0
+    },
+    {
+      "$id": 31,
+      "obj_name": "TXT_detail_rule_dr_index",
+      "text_id": 1878
+    },
+    {
+      "$id": 32,
+      "obj_name": "TXT_detail_rule_driver_fixed@01",
+      "text_id": 1879
+    },
+    {
+      "$id": 33,
+      "obj_name": "TXT_detail_rule_driver_free@01",
+      "text_id": 1880
+    },
+    {
+      "$id": 34,
+      "obj_name": "TXT_detail_rule_driver_fixed@02",
+      "text_id": 1879
+    },
+    {
+      "$id": 35,
+      "obj_name": "TXT_detail_rule_driver_free@02",
+      "text_id": 1880
+    },
+    {
+      "$id": 36,
+      "obj_name": "TXT_detail_rule_driver_fixed@03",
+      "text_id": 1879
+    },
+    {
+      "$id": 37,
+      "obj_name": "TXT_detail_rule_driver_free@03",
+      "text_id": 1880
+    },
+    {
+      "$id": 38,
+      "obj_name": "TXT_detail_disable",
+      "text_id": 1871
+    },
+    {
+      "$id": 39,
+      "obj_name": "TXT_detail_rule_limit_bl_index",
+      "text_id": 1877
+    },
+    {
+      "$id": 40,
+      "obj_name": "TXT_detail_rule_limit_bl_on",
+      "text_id": 1956
+    },
+    {
+      "$id": 41,
+      "obj_name": "TXT_detail_rule_limit_bl_off",
+      "text_id": 1957
+    },
+    {
+      "$id": 42,
+      "obj_name": "TXT_detail_rule_to_detail@01",
+      "text_id": 1958
+    },
+    {
+      "$id": 43,
+      "obj_name": "TXT_detail_rule_to_detail@02",
+      "text_id": 1958
+    },
+    {
+      "$id": 44,
+      "obj_name": "TXT_detail_rule_dr_on",
+      "text_id": 1956
+    },
+    {
+      "$id": 45,
+      "obj_name": "TXT_detail_rule_dr_off",
+      "text_id": 1957
+    },
+    {
+      "$id": 46,
+      "obj_name": "TXT_time_shadow",
+      "text_id": 1849
+    },
+    {
+      "$id": 47,
+      "obj_name": "TXT_time",
+      "text_id": 1849
+    },
+    {
+      "$id": 48,
+      "obj_name": "TXT_time_new_record",
+      "text_id": 1855
+    },
+    {
+      "$id": 49,
+      "obj_name": "TXT_ether_num_shadow",
+      "text_id": 1850
+    },
+    {
+      "$id": 50,
+      "obj_name": "TXT_ether_num",
+      "text_id": 1850
+    },
+    {
+      "$id": 51,
+      "obj_name": "TXT_ether_box_get",
+      "text_id": 1856
+    },
+    {
+      "$id": 52,
+      "obj_name": "TXT_score_index_score_shadow",
+      "text_id": 1852
+    },
+    {
+      "$id": 53,
+      "obj_name": "TXT_score_index_score",
+      "text_id": 1852
+    },
+    {
+      "$id": 54,
+      "obj_name": "TXT_score_index_kill_shadow",
+      "text_id": 1854
+    },
+    {
+      "$id": 55,
+      "obj_name": "TXT_score_index_kill",
+      "text_id": 1854
+    },
+    {
+      "$id": 56,
+      "obj_name": "TXT_score_index_lv_shadow",
+      "text_id": 1853
+    },
+    {
+      "$id": 57,
+      "obj_name": "TXT_score_index_lv",
+      "text_id": 1853
+    },
+    {
+      "$id": 58,
+      "obj_name": "TXT_score_num_shadow",
+      "text_id": 1851
+    },
+    {
+      "$id": 59,
+      "obj_name": "TXT_score_num",
+      "text_id": 1851
+    },
+    {
+      "$id": 60,
+      "obj_name": "TXT_limit_caption",
+      "text_id": 1881
+    },
+    {
+      "$id": 61,
+      "obj_name": "TXT_limit_dr_caption",
+      "text_id": 1882
+    },
+    {
+      "$id": 62,
+      "obj_name": "TXT_limit_dr_lv_before@01",
+      "text_id": 1884
+    },
+    {
+      "$id": 63,
+      "obj_name": "TXT_limit_dr_lv_after@01",
+      "text_id": 1884
+    },
+    {
+      "$id": 64,
+      "obj_name": "TXT_limit_dr_lv_before@02",
+      "text_id": 1884
+    },
+    {
+      "$id": 65,
+      "obj_name": "TXT_limit_dr_lv_after@02",
+      "text_id": 1884
+    },
+    {
+      "$id": 66,
+      "obj_name": "TXT_limit_dr_lv_before@03",
+      "text_id": 1884
+    },
+    {
+      "$id": 67,
+      "obj_name": "TXT_limit_dr_lv_after@03",
+      "text_id": 1884
+    },
+    {
+      "$id": 68,
+      "obj_name": "TXT_limit_bl_caption",
+      "text_id": 1883
+    },
+    {
+      "$id": 69,
+      "obj_name": "TXT_limit_bl_name@01",
+      "text_id": 1885
+    },
+    {
+      "$id": 70,
+      "obj_name": "TXT_limit_bl_name@02",
+      "text_id": 1885
+    },
+    {
+      "$id": 71,
+      "obj_name": "TXT_limit_bl_name@03",
+      "text_id": 1885
+    },
+    {
+      "$id": 72,
+      "obj_name": "TXT_limit_bl_name@04",
+      "text_id": 1885
+    },
+    {
+      "$id": 73,
+      "obj_name": "TXT_limit_bl_name@05",
+      "text_id": 1885
+    },
+    {
+      "$id": 74,
+      "obj_name": "TXT_limit_bl_name@06",
+      "text_id": 1885
+    },
+    {
+      "$id": 75,
+      "obj_name": "TXT_limit_bl_name@07",
+      "text_id": 1885
+    },
+    {
+      "$id": 76,
+      "obj_name": "TXT_limit_bl_name@08",
+      "text_id": 1885
+    },
+    {
+      "$id": 77,
+      "obj_name": "TXT_limit_bl_name@09",
+      "text_id": 1885
+    },
+    {
+      "$id": 78,
+      "obj_name": "TXT_limit_bl_name@10",
+      "text_id": 1885
+    },
+    {
+      "$id": 79,
+      "obj_name": "TXT_limit_bl_name@11",
+      "text_id": 1885
+    },
+    {
+      "$id": 80,
+      "obj_name": "TXT_detail_rule_wave_index",
+      "text_id": 1978
+    },
+    {
+      "$id": 81,
+      "obj_name": "TXT_detail_rule_wave_num",
+      "text_id": 1979
+    }
+  ]
+}

@@ -1,0 +1,339 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_form_unit_bl_inex",
+      "text_id": 298
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_form_unit_apply",
+      "text_id": 299
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_form_list_bl_index",
+      "text_id": 297
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_form_list_bl_sort_index",
+      "text_id": 1635
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_form_list_bl_sort_label",
+      "text_id": 1636
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_form_mis_cond_index",
+      "text_id": 269
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_form_mis_cond_txt@01",
+      "text_id": 270
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_form_mis_cond_val@01",
+      "text_id": 271
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_form_mis_cond_lv@01",
+      "text_id": 272
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_form_mis_cond_num@01",
+      "text_id": 273
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_form_mis_cond_max@01",
+      "text_id": 273
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_form_mis_cond_slash@01",
+      "text_id": 275
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_form_mis_cond_txt@02",
+      "text_id": 270
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_form_mis_cond_val@02",
+      "text_id": 271
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_form_mis_cond_lv@02",
+      "text_id": 272
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_form_mis_cond_num@02",
+      "text_id": 273
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_form_mis_cond_max@02",
+      "text_id": 273
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_form_mis_cond_slash@02",
+      "text_id": 275
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_form_mis_cond_txt@03",
+      "text_id": 270
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_form_mis_cond_val@03",
+      "text_id": 271
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_form_mis_cond_lv@03",
+      "text_id": 272
+    },
+    {
+      "$id": 22,
+      "obj_name": "TXT_form_mis_cond_num@03",
+      "text_id": 273
+    },
+    {
+      "$id": 23,
+      "obj_name": "TXT_form_mis_cond_max@03",
+      "text_id": 273
+    },
+    {
+      "$id": 24,
+      "obj_name": "TXT_form_mis_cond_slash@03",
+      "text_id": 275
+    },
+    {
+      "$id": 25,
+      "obj_name": "TXT_form_mis_fs_index",
+      "text_id": 267
+    },
+    {
+      "$id": 26,
+      "obj_name": "TXT_form_mis_fs_name@01",
+      "text_id": 268
+    },
+    {
+      "$id": 27,
+      "obj_name": "TXT_form_mis_fs_bl_num@01",
+      "text_id": 274
+    },
+    {
+      "$id": 28,
+      "obj_name": "TXT_form_mis_fs_name@02",
+      "text_id": 268
+    },
+    {
+      "$id": 29,
+      "obj_name": "TXT_form_mis_fs_bl_num@02",
+      "text_id": 274
+    },
+    {
+      "$id": 30,
+      "obj_name": "TXT_form_mis_fs_name@03",
+      "text_id": 268
+    },
+    {
+      "$id": 31,
+      "obj_name": "TXT_form_mis_fs_bl_num@03",
+      "text_id": 274
+    },
+    {
+      "$id": 32,
+      "obj_name": "TXT_start_unit_name",
+      "text_id": 277
+    },
+    {
+      "$id": 33,
+      "obj_name": "TXT_start_fs_on",
+      "text_id": 300
+    },
+    {
+      "$id": 34,
+      "obj_name": "TXT_start_fs_info_idx",
+      "text_id": 300
+    },
+    {
+      "$id": 35,
+      "obj_name": "TXT_start_fs_info_time_idx",
+      "text_id": 303
+    },
+    {
+      "$id": 36,
+      "obj_name": "TXT_start_fs_info_time_before",
+      "text_id": 304
+    },
+    {
+      "$id": 37,
+      "obj_name": "TXT_start_fs_info_time_after",
+      "text_id": 305
+    },
+    {
+      "$id": 38,
+      "obj_name": "TXT_start_fs_name@01",
+      "text_id": 301
+    },
+    {
+      "$id": 39,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0101",
+      "text_id": 302
+    },
+    {
+      "$id": 40,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0102",
+      "text_id": 302
+    },
+    {
+      "$id": 41,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0103",
+      "text_id": 302
+    },
+    {
+      "$id": 42,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0104",
+      "text_id": 302
+    },
+    {
+      "$id": 43,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0105",
+      "text_id": 302
+    },
+    {
+      "$id": 44,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0106",
+      "text_id": 302
+    },
+    {
+      "$id": 45,
+      "obj_name": "TXT_start_fs_name@02",
+      "text_id": 301
+    },
+    {
+      "$id": 46,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0201",
+      "text_id": 302
+    },
+    {
+      "$id": 47,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0202",
+      "text_id": 302
+    },
+    {
+      "$id": 48,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0203",
+      "text_id": 302
+    },
+    {
+      "$id": 49,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0204",
+      "text_id": 302
+    },
+    {
+      "$id": 50,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0205",
+      "text_id": 302
+    },
+    {
+      "$id": 51,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0206",
+      "text_id": 302
+    },
+    {
+      "$id": 52,
+      "obj_name": "TXT_start_fs_name@03",
+      "text_id": 301
+    },
+    {
+      "$id": 53,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0301",
+      "text_id": 302
+    },
+    {
+      "$id": 54,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0302",
+      "text_id": 302
+    },
+    {
+      "$id": 55,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0303",
+      "text_id": 302
+    },
+    {
+      "$id": 56,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0304",
+      "text_id": 302
+    },
+    {
+      "$id": 57,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0305",
+      "text_id": 302
+    },
+    {
+      "$id": 58,
+      "obj_name": "TXT_start_fs_info_bl_fs_lv@0306",
+      "text_id": 302
+    },
+    {
+      "$id": 59,
+      "obj_name": "TXT_preset_idx",
+      "text_id": 314
+    },
+    {
+      "$id": 60,
+      "obj_name": "TXT_preset_bl_no@01",
+      "text_id": 315
+    },
+    {
+      "$id": 61,
+      "obj_name": "TXT_preset_bl_no@02",
+      "text_id": 315
+    },
+    {
+      "$id": 62,
+      "obj_name": "TXT_preset_bl_no@03",
+      "text_id": 315
+    },
+    {
+      "$id": 63,
+      "obj_name": "TXT_leader_sel_index_name",
+      "text_id": 316
+    },
+    {
+      "$id": 64,
+      "obj_name": "TXT_leader_sel_info_name_idx",
+      "text_id": 318
+    },
+    {
+      "$id": 65,
+      "obj_name": "TXT_leader_sel_info_name",
+      "text_id": 317
+    }
+  ]
+}

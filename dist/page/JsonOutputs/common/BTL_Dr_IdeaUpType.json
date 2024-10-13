@@ -1,0 +1,85 @@
+{
+  "schema": [
+    {
+      "name": "IdeaBlue",
+      "type": 1
+    },
+    {
+      "name": "IdeaRed",
+      "type": 1
+    },
+    {
+      "name": "IdeaWhite",
+      "type": 1
+    },
+    {
+      "name": "IdeaBlack",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "IdeaBlue": 20,
+      "IdeaRed": 40,
+      "IdeaWhite": 20,
+      "IdeaBlack": 20
+    },
+    {
+      "$id": 2,
+      "IdeaBlue": 20,
+      "IdeaRed": 20,
+      "IdeaWhite": 20,
+      "IdeaBlack": 40
+    },
+    {
+      "$id": 3,
+      "IdeaBlue": 20,
+      "IdeaRed": 20,
+      "IdeaWhite": 40,
+      "IdeaBlack": 20
+    },
+    {
+      "$id": 4,
+      "IdeaBlue": 40,
+      "IdeaRed": 20,
+      "IdeaWhite": 20,
+      "IdeaBlack": 20
+    },
+    {
+      "$id": 5,
+      "IdeaBlue": 25,
+      "IdeaRed": 25,
+      "IdeaWhite": 25,
+      "IdeaBlack": 25
+    },
+    {
+      "$id": 6,
+      "IdeaBlue": 40,
+      "IdeaRed": 40,
+      "IdeaWhite": 10,
+      "IdeaBlack": 10
+    },
+    {
+      "$id": 7,
+      "IdeaBlue": 10,
+      "IdeaRed": 10,
+      "IdeaWhite": 40,
+      "IdeaBlack": 40
+    },
+    {
+      "$id": 8,
+      "IdeaBlue": 25,
+      "IdeaRed": 25,
+      "IdeaWhite": 25,
+      "IdeaBlack": 25
+    },
+    {
+      "$id": 9,
+      "IdeaBlue": 10,
+      "IdeaRed": 10,
+      "IdeaWhite": 40,
+      "IdeaBlack": 40
+    }
+  ]
+}

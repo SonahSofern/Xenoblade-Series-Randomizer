@@ -1,0 +1,903 @@
+{
+  "schema": [
+    {
+      "name": "Camera1",
+      "type": 1
+    },
+    {
+      "name": "Camera2",
+      "type": 1
+    },
+    {
+      "name": "Camera3",
+      "type": 1
+    },
+    {
+      "name": "Camera4",
+      "type": 1
+    },
+    {
+      "name": "Camera5",
+      "type": 1
+    },
+    {
+      "name": "Camera6",
+      "type": 1
+    },
+    {
+      "name": "Camera7",
+      "type": 1
+    },
+    {
+      "name": "Flag",
+      "type": 1,
+      "flags": [
+        {
+          "label": "EnTarget",
+          "mask": 1,
+          "index": 0
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Camera1": 1,
+      "Camera2": 6,
+      "Camera3": 11,
+      "Camera4": 12,
+      "Camera5": 6,
+      "Camera6": 11,
+      "Camera7": 12,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 2,
+      "Camera1": 7,
+      "Camera2": 6,
+      "Camera3": 11,
+      "Camera4": 12,
+      "Camera5": 6,
+      "Camera6": 11,
+      "Camera7": 12,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 3,
+      "Camera1": 101,
+      "Camera2": 101,
+      "Camera3": 101,
+      "Camera4": 101,
+      "Camera5": 101,
+      "Camera6": 101,
+      "Camera7": 101,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 4,
+      "Camera1": 102,
+      "Camera2": 102,
+      "Camera3": 102,
+      "Camera4": 102,
+      "Camera5": 102,
+      "Camera6": 102,
+      "Camera7": 102,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 5,
+      "Camera1": 1,
+      "Camera2": 2,
+      "Camera3": 3,
+      "Camera4": 4,
+      "Camera5": 5,
+      "Camera6": 6,
+      "Camera7": 0,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 6,
+      "Camera1": 104,
+      "Camera2": 104,
+      "Camera3": 104,
+      "Camera4": 104,
+      "Camera5": 104,
+      "Camera6": 104,
+      "Camera7": 104,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 7,
+      "Camera1": 105,
+      "Camera2": 105,
+      "Camera3": 105,
+      "Camera4": 105,
+      "Camera5": 105,
+      "Camera6": 105,
+      "Camera7": 105,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 8,
+      "Camera1": 108,
+      "Camera2": 108,
+      "Camera3": 108,
+      "Camera4": 108,
+      "Camera5": 108,
+      "Camera6": 108,
+      "Camera7": 108,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 9,
+      "Camera1": 115,
+      "Camera2": 115,
+      "Camera3": 115,
+      "Camera4": 115,
+      "Camera5": 115,
+      "Camera6": 115,
+      "Camera7": 115,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 10,
+      "Camera1": 119,
+      "Camera2": 119,
+      "Camera3": 119,
+      "Camera4": 119,
+      "Camera5": 119,
+      "Camera6": 119,
+      "Camera7": 119,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 11,
+      "Camera1": 118,
+      "Camera2": 118,
+      "Camera3": 118,
+      "Camera4": 118,
+      "Camera5": 118,
+      "Camera6": 118,
+      "Camera7": 118,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 12,
+      "Camera1": 126,
+      "Camera2": 126,
+      "Camera3": 126,
+      "Camera4": 126,
+      "Camera5": 126,
+      "Camera6": 126,
+      "Camera7": 126,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 13,
+      "Camera1": 123,
+      "Camera2": 123,
+      "Camera3": 123,
+      "Camera4": 123,
+      "Camera5": 123,
+      "Camera6": 123,
+      "Camera7": 123,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 14,
+      "Camera1": 129,
+      "Camera2": 129,
+      "Camera3": 129,
+      "Camera4": 129,
+      "Camera5": 129,
+      "Camera6": 129,
+      "Camera7": 129,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 15,
+      "Camera1": 125,
+      "Camera2": 125,
+      "Camera3": 125,
+      "Camera4": 125,
+      "Camera5": 125,
+      "Camera6": 125,
+      "Camera7": 125,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 16,
+      "Camera1": 128,
+      "Camera2": 128,
+      "Camera3": 128,
+      "Camera4": 128,
+      "Camera5": 128,
+      "Camera6": 128,
+      "Camera7": 128,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 17,
+      "Camera1": 113,
+      "Camera2": 113,
+      "Camera3": 113,
+      "Camera4": 113,
+      "Camera5": 113,
+      "Camera6": 113,
+      "Camera7": 113,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 18,
+      "Camera1": 114,
+      "Camera2": 114,
+      "Camera3": 114,
+      "Camera4": 114,
+      "Camera5": 114,
+      "Camera6": 114,
+      "Camera7": 114,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 19,
+      "Camera1": 133,
+      "Camera2": 133,
+      "Camera3": 133,
+      "Camera4": 133,
+      "Camera5": 133,
+      "Camera6": 133,
+      "Camera7": 133,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 20,
+      "Camera1": 135,
+      "Camera2": 135,
+      "Camera3": 135,
+      "Camera4": 135,
+      "Camera5": 135,
+      "Camera6": 135,
+      "Camera7": 135,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 21,
+      "Camera1": 10,
+      "Camera2": 10,
+      "Camera3": 10,
+      "Camera4": 10,
+      "Camera5": 10,
+      "Camera6": 10,
+      "Camera7": 10,
+      "Flag": {
+        "EnTarget": 1
+      }
+    },
+    {
+      "$id": 22,
+      "Camera1": 110,
+      "Camera2": 110,
+      "Camera3": 110,
+      "Camera4": 110,
+      "Camera5": 110,
+      "Camera6": 110,
+      "Camera7": 110,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 23,
+      "Camera1": 109,
+      "Camera2": 109,
+      "Camera3": 109,
+      "Camera4": 109,
+      "Camera5": 109,
+      "Camera6": 109,
+      "Camera7": 109,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 24,
+      "Camera1": 106,
+      "Camera2": 106,
+      "Camera3": 106,
+      "Camera4": 106,
+      "Camera5": 106,
+      "Camera6": 106,
+      "Camera7": 106,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 25,
+      "Camera1": 122,
+      "Camera2": 122,
+      "Camera3": 122,
+      "Camera4": 122,
+      "Camera5": 122,
+      "Camera6": 122,
+      "Camera7": 122,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 26,
+      "Camera1": 121,
+      "Camera2": 121,
+      "Camera3": 121,
+      "Camera4": 121,
+      "Camera5": 121,
+      "Camera6": 121,
+      "Camera7": 121,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 27,
+      "Camera1": 138,
+      "Camera2": 138,
+      "Camera3": 138,
+      "Camera4": 138,
+      "Camera5": 138,
+      "Camera6": 138,
+      "Camera7": 138,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 28,
+      "Camera1": 111,
+      "Camera2": 111,
+      "Camera3": 111,
+      "Camera4": 111,
+      "Camera5": 111,
+      "Camera6": 111,
+      "Camera7": 111,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 29,
+      "Camera1": 130,
+      "Camera2": 130,
+      "Camera3": 130,
+      "Camera4": 130,
+      "Camera5": 130,
+      "Camera6": 130,
+      "Camera7": 130,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 30,
+      "Camera1": 131,
+      "Camera2": 131,
+      "Camera3": 131,
+      "Camera4": 131,
+      "Camera5": 131,
+      "Camera6": 131,
+      "Camera7": 131,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 31,
+      "Camera1": 132,
+      "Camera2": 132,
+      "Camera3": 132,
+      "Camera4": 132,
+      "Camera5": 132,
+      "Camera6": 132,
+      "Camera7": 132,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 32,
+      "Camera1": 116,
+      "Camera2": 116,
+      "Camera3": 116,
+      "Camera4": 116,
+      "Camera5": 116,
+      "Camera6": 116,
+      "Camera7": 116,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 33,
+      "Camera1": 139,
+      "Camera2": 139,
+      "Camera3": 139,
+      "Camera4": 139,
+      "Camera5": 139,
+      "Camera6": 139,
+      "Camera7": 139,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 34,
+      "Camera1": 112,
+      "Camera2": 112,
+      "Camera3": 112,
+      "Camera4": 112,
+      "Camera5": 112,
+      "Camera6": 112,
+      "Camera7": 112,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 35,
+      "Camera1": 124,
+      "Camera2": 124,
+      "Camera3": 124,
+      "Camera4": 124,
+      "Camera5": 124,
+      "Camera6": 124,
+      "Camera7": 124,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 36,
+      "Camera1": 120,
+      "Camera2": 120,
+      "Camera3": 120,
+      "Camera4": 120,
+      "Camera5": 120,
+      "Camera6": 120,
+      "Camera7": 120,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 37,
+      "Camera1": 127,
+      "Camera2": 127,
+      "Camera3": 127,
+      "Camera4": 127,
+      "Camera5": 127,
+      "Camera6": 127,
+      "Camera7": 127,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 38,
+      "Camera1": 168,
+      "Camera2": 168,
+      "Camera3": 168,
+      "Camera4": 168,
+      "Camera5": 168,
+      "Camera6": 168,
+      "Camera7": 168,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 39,
+      "Camera1": 140,
+      "Camera2": 140,
+      "Camera3": 140,
+      "Camera4": 140,
+      "Camera5": 140,
+      "Camera6": 140,
+      "Camera7": 140,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 40,
+      "Camera1": 117,
+      "Camera2": 117,
+      "Camera3": 117,
+      "Camera4": 117,
+      "Camera5": 117,
+      "Camera6": 117,
+      "Camera7": 117,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 41,
+      "Camera1": 107,
+      "Camera2": 107,
+      "Camera3": 107,
+      "Camera4": 107,
+      "Camera5": 107,
+      "Camera6": 107,
+      "Camera7": 107,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 42,
+      "Camera1": 136,
+      "Camera2": 136,
+      "Camera3": 136,
+      "Camera4": 136,
+      "Camera5": 136,
+      "Camera6": 136,
+      "Camera7": 136,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 43,
+      "Camera1": 146,
+      "Camera2": 146,
+      "Camera3": 146,
+      "Camera4": 146,
+      "Camera5": 146,
+      "Camera6": 146,
+      "Camera7": 146,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 44,
+      "Camera1": 137,
+      "Camera2": 137,
+      "Camera3": 137,
+      "Camera4": 137,
+      "Camera5": 137,
+      "Camera6": 137,
+      "Camera7": 137,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 45,
+      "Camera1": 145,
+      "Camera2": 145,
+      "Camera3": 145,
+      "Camera4": 145,
+      "Camera5": 145,
+      "Camera6": 145,
+      "Camera7": 145,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 46,
+      "Camera1": 144,
+      "Camera2": 144,
+      "Camera3": 144,
+      "Camera4": 144,
+      "Camera5": 144,
+      "Camera6": 144,
+      "Camera7": 144,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 47,
+      "Camera1": 141,
+      "Camera2": 141,
+      "Camera3": 141,
+      "Camera4": 141,
+      "Camera5": 141,
+      "Camera6": 141,
+      "Camera7": 141,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 48,
+      "Camera1": 143,
+      "Camera2": 143,
+      "Camera3": 143,
+      "Camera4": 143,
+      "Camera5": 143,
+      "Camera6": 143,
+      "Camera7": 143,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 49,
+      "Camera1": 142,
+      "Camera2": 142,
+      "Camera3": 142,
+      "Camera4": 142,
+      "Camera5": 142,
+      "Camera6": 142,
+      "Camera7": 142,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 50,
+      "Camera1": 103,
+      "Camera2": 103,
+      "Camera3": 103,
+      "Camera4": 103,
+      "Camera5": 103,
+      "Camera6": 103,
+      "Camera7": 103,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 51,
+      "Camera1": 171,
+      "Camera2": 171,
+      "Camera3": 171,
+      "Camera4": 171,
+      "Camera5": 171,
+      "Camera6": 171,
+      "Camera7": 171,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 52,
+      "Camera1": 172,
+      "Camera2": 172,
+      "Camera3": 172,
+      "Camera4": 172,
+      "Camera5": 172,
+      "Camera6": 172,
+      "Camera7": 172,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 53,
+      "Camera1": 169,
+      "Camera2": 169,
+      "Camera3": 169,
+      "Camera4": 169,
+      "Camera5": 169,
+      "Camera6": 169,
+      "Camera7": 169,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 54,
+      "Camera1": 170,
+      "Camera2": 170,
+      "Camera3": 170,
+      "Camera4": 170,
+      "Camera5": 170,
+      "Camera6": 170,
+      "Camera7": 170,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 55,
+      "Camera1": 201,
+      "Camera2": 201,
+      "Camera3": 201,
+      "Camera4": 201,
+      "Camera5": 201,
+      "Camera6": 201,
+      "Camera7": 201,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 56,
+      "Camera1": 202,
+      "Camera2": 202,
+      "Camera3": 202,
+      "Camera4": 202,
+      "Camera5": 202,
+      "Camera6": 202,
+      "Camera7": 202,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 57,
+      "Camera1": 204,
+      "Camera2": 204,
+      "Camera3": 204,
+      "Camera4": 204,
+      "Camera5": 204,
+      "Camera6": 204,
+      "Camera7": 204,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 58,
+      "Camera1": 205,
+      "Camera2": 205,
+      "Camera3": 205,
+      "Camera4": 205,
+      "Camera5": 205,
+      "Camera6": 205,
+      "Camera7": 205,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 59,
+      "Camera1": 203,
+      "Camera2": 203,
+      "Camera3": 203,
+      "Camera4": 203,
+      "Camera5": 203,
+      "Camera6": 203,
+      "Camera7": 203,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 60,
+      "Camera1": 174,
+      "Camera2": 174,
+      "Camera3": 174,
+      "Camera4": 174,
+      "Camera5": 174,
+      "Camera6": 174,
+      "Camera7": 174,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 61,
+      "Camera1": 207,
+      "Camera2": 207,
+      "Camera3": 207,
+      "Camera4": 207,
+      "Camera5": 207,
+      "Camera6": 207,
+      "Camera7": 207,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 62,
+      "Camera1": 208,
+      "Camera2": 208,
+      "Camera3": 208,
+      "Camera4": 208,
+      "Camera5": 208,
+      "Camera6": 208,
+      "Camera7": 208,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 63,
+      "Camera1": 209,
+      "Camera2": 209,
+      "Camera3": 209,
+      "Camera4": 209,
+      "Camera5": 209,
+      "Camera6": 209,
+      "Camera7": 209,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 64,
+      "Camera1": 175,
+      "Camera2": 175,
+      "Camera3": 175,
+      "Camera4": 175,
+      "Camera5": 175,
+      "Camera6": 175,
+      "Camera7": 175,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 65,
+      "Camera1": 206,
+      "Camera2": 206,
+      "Camera3": 206,
+      "Camera4": 206,
+      "Camera5": 206,
+      "Camera6": 206,
+      "Camera7": 206,
+      "Flag": {
+        "EnTarget": 0
+      }
+    },
+    {
+      "$id": 66,
+      "Camera1": 173,
+      "Camera2": 173,
+      "Camera3": 173,
+      "Camera4": 173,
+      "Camera5": 173,
+      "Camera6": 173,
+      "Camera7": 173,
+      "Flag": {
+        "EnTarget": 0
+      }
+    }
+  ]
+}

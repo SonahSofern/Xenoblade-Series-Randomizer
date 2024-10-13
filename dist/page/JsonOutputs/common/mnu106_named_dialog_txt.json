@@ -1,0 +1,44 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_en_name",
+      "text_id": 1897
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_en_lv_index",
+      "text_id": 1898
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_en_lv_num",
+      "text_id": 1899
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_en_record_index",
+      "text_id": 1900
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_en_record_time",
+      "text_id": 1901
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_en_diff",
+      "text_id": 1866
+    }
+  ]
+}

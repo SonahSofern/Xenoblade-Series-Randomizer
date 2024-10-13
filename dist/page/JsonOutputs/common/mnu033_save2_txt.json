@@ -1,0 +1,99 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_index",
+      "text_id": 1644
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_time_index",
+      "text_id": 1645
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_year_num",
+      "text_id": 1646
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_time_num",
+      "text_id": 1647
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_progress_index",
+      "text_id": 1648
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_progress",
+      "text_id": 1649
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_game_time_index",
+      "text_id": 1650
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_game_time",
+      "text_id": 1651
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_area_index",
+      "text_id": 1652
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_area",
+      "text_id": 1653
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_char_name@01",
+      "text_id": 1654
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_lv_num@01",
+      "text_id": 1655
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_char_name@02",
+      "text_id": 1656
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_lv_num@02",
+      "text_id": 1657
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_char_name@03",
+      "text_id": 1658
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_lv_num@03",
+      "text_id": 1659
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_no_data",
+      "text_id": 1805
+    }
+  ]
+}

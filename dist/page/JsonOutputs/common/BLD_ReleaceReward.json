@@ -1,0 +1,84 @@
+{
+  "schema": [
+    {
+      "name": "Releace001",
+      "type": 2
+    },
+    {
+      "name": "Releace002",
+      "type": 2
+    },
+    {
+      "name": "Releace003",
+      "type": 2
+    },
+    {
+      "name": "Releace004",
+      "type": 2
+    },
+    {
+      "name": "Releace005",
+      "type": 2
+    },
+    {
+      "name": "Releace006",
+      "type": 2
+    },
+    {
+      "name": "Releace007",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Releace001": 1,
+      "Releace002": 1,
+      "Releace003": 2,
+      "Releace004": 2,
+      "Releace005": 3,
+      "Releace006": 3,
+      "Releace007": 5
+    },
+    {
+      "$id": 2,
+      "Releace001": 1,
+      "Releace002": 2,
+      "Releace003": 3,
+      "Releace004": 4,
+      "Releace005": 5,
+      "Releace006": 6,
+      "Releace007": 7
+    },
+    {
+      "$id": 3,
+      "Releace001": 1,
+      "Releace002": 3,
+      "Releace003": 4,
+      "Releace004": 5,
+      "Releace005": 6,
+      "Releace006": 8,
+      "Releace007": 10
+    },
+    {
+      "$id": 4,
+      "Releace001": 1,
+      "Releace002": 4,
+      "Releace003": 5,
+      "Releace004": 6,
+      "Releace005": 8,
+      "Releace006": 10,
+      "Releace007": 25408
+    },
+    {
+      "$id": 5,
+      "Releace001": 1,
+      "Releace002": 5,
+      "Releace003": 6,
+      "Releace004": 7,
+      "Releace005": 9,
+      "Releace006": 12,
+      "Releace007": 15
+    }
+  ]
+}

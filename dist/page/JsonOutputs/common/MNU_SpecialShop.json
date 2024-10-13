@@ -1,0 +1,29 @@
+{
+  "schema": [
+    {
+      "name": "shop_id",
+      "type": 2
+    },
+    {
+      "name": "scenario_flag",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "shop_id": 11,
+      "scenario_flag": 1011
+    },
+    {
+      "$id": 2,
+      "shop_id": 212,
+      "scenario_flag": 2029
+    },
+    {
+      "$id": 3,
+      "shop_id": 159,
+      "scenario_flag": 0
+    }
+  ]
+}

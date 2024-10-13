@@ -1,0 +1,400 @@
+{
+  "schema": [
+    {
+      "name": "include_map",
+      "type": 7
+    },
+    {
+      "name": "disp_name",
+      "type": 2
+    },
+    {
+      "name": "under_water",
+      "type": 1
+    },
+    {
+      "name": "condition",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "include_map": "ma02a",
+      "disp_name": 148,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 2,
+      "include_map": "ma02a",
+      "disp_name": 0,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 3,
+      "include_map": "ma03a",
+      "disp_name": 149,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 4,
+      "include_map": "ma04a",
+      "disp_name": 160,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 5,
+      "include_map": "ma05a",
+      "disp_name": 145,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 6,
+      "include_map": "ma05a",
+      "disp_name": 143,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 7,
+      "include_map": "ma05a",
+      "disp_name": 144,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 8,
+      "include_map": "ma05a",
+      "disp_name": 147,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 9,
+      "include_map": "ma05a",
+      "disp_name": 146,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 10,
+      "include_map": "ma07a",
+      "disp_name": 150,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 11,
+      "include_map": "ma07a",
+      "disp_name": 151,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 12,
+      "include_map": "ma07a",
+      "disp_name": 161,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 13,
+      "include_map": "ma07a",
+      "disp_name": 162,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 14,
+      "include_map": "ma07a",
+      "disp_name": 163,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 15,
+      "include_map": "ma08a",
+      "disp_name": 152,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 16,
+      "include_map": "ma08a",
+      "disp_name": 153,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 17,
+      "include_map": "ma08a",
+      "disp_name": 164,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 18,
+      "include_map": "ma08a",
+      "disp_name": 165,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 19,
+      "include_map": "ma08a",
+      "disp_name": 166,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 20,
+      "include_map": "ma10a",
+      "disp_name": 167,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 21,
+      "include_map": "ma10a",
+      "disp_name": 168,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 22,
+      "include_map": "ma10a",
+      "disp_name": 169,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 23,
+      "include_map": "ma11a",
+      "disp_name": 155,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 24,
+      "include_map": "ma11a",
+      "disp_name": 156,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 25,
+      "include_map": "ma11a",
+      "disp_name": 157,
+      "under_water": 0,
+      "condition": 2666
+    },
+    {
+      "$id": 26,
+      "include_map": "ma13a",
+      "disp_name": 158,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 27,
+      "include_map": "ma13a",
+      "disp_name": 159,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 28,
+      "include_map": "ma13a",
+      "disp_name": 170,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 29,
+      "include_map": "ma13a",
+      "disp_name": 171,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 30,
+      "include_map": "ma13a",
+      "disp_name": 172,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 31,
+      "include_map": "ma15a",
+      "disp_name": 154,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 32,
+      "include_map": "ma15a",
+      "disp_name": 173,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 33,
+      "include_map": "ma15a",
+      "disp_name": 174,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 34,
+      "include_map": "ma15a",
+      "disp_name": 175,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 35,
+      "include_map": "ma16a",
+      "disp_name": 176,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 36,
+      "include_map": "ma16a",
+      "disp_name": 177,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 37,
+      "include_map": "ma16a",
+      "disp_name": 178,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 38,
+      "include_map": "ma17a",
+      "disp_name": 179,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 39,
+      "include_map": "ma17a",
+      "disp_name": 180,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 40,
+      "include_map": "ma18a",
+      "disp_name": 181,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 41,
+      "include_map": "ma18a",
+      "disp_name": 182,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 42,
+      "include_map": "ma18a",
+      "disp_name": 183,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 43,
+      "include_map": "ma20a",
+      "disp_name": 184,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 44,
+      "include_map": "ma20a",
+      "disp_name": 185,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 45,
+      "include_map": "ma20a",
+      "disp_name": 188,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 46,
+      "include_map": "ma21a",
+      "disp_name": 186,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 47,
+      "include_map": "ma21a",
+      "disp_name": 187,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 48,
+      "include_map": "ma49a",
+      "disp_name": 189,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 49,
+      "include_map": "ma40a",
+      "disp_name": 191,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 50,
+      "include_map": "ma40a",
+      "disp_name": 192,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 51,
+      "include_map": "ma40a",
+      "disp_name": 193,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 52,
+      "include_map": "ma40a",
+      "disp_name": 194,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 53,
+      "include_map": "ma40a",
+      "disp_name": 195,
+      "under_water": 0,
+      "condition": 0
+    },
+    {
+      "$id": 54,
+      "include_map": "ma41a",
+      "disp_name": 196,
+      "under_water": 0,
+      "condition": 0
+    }
+  ]
+}

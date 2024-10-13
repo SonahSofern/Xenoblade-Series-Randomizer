@@ -1,0 +1,90 @@
+{
+  "schema": [
+    {
+      "name": "EnemyID",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "EnemyID": 1563
+    },
+    {
+      "$id": 2,
+      "EnemyID": 1564
+    },
+    {
+      "$id": 3,
+      "EnemyID": 1566
+    },
+    {
+      "$id": 4,
+      "EnemyID": 1567
+    },
+    {
+      "$id": 5,
+      "EnemyID": 1657
+    },
+    {
+      "$id": 6,
+      "EnemyID": 1658
+    },
+    {
+      "$id": 7,
+      "EnemyID": 1659
+    },
+    {
+      "$id": 8,
+      "EnemyID": 1660
+    },
+    {
+      "$id": 9,
+      "EnemyID": 1661
+    },
+    {
+      "$id": 10,
+      "EnemyID": 1662
+    },
+    {
+      "$id": 11,
+      "EnemyID": 1663
+    },
+    {
+      "$id": 12,
+      "EnemyID": 1664
+    },
+    {
+      "$id": 13,
+      "EnemyID": 1665
+    },
+    {
+      "$id": 14,
+      "EnemyID": 1666
+    },
+    {
+      "$id": 15,
+      "EnemyID": 1667
+    },
+    {
+      "$id": 16,
+      "EnemyID": 1670
+    },
+    {
+      "$id": 17,
+      "EnemyID": 1559
+    },
+    {
+      "$id": 18,
+      "EnemyID": 1560
+    },
+    {
+      "$id": 19,
+      "EnemyID": 1561
+    },
+    {
+      "$id": 20,
+      "EnemyID": 1562
+    }
+  ]
+}

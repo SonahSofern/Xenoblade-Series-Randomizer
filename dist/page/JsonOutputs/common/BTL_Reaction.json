@@ -1,0 +1,294 @@
+{
+  "schema": [
+    {
+      "name": "Name",
+      "type": 1
+    },
+    {
+      "name": "DebugName",
+      "type": 7
+    },
+    {
+      "name": "Priority",
+      "type": 1
+    },
+    {
+      "name": "PowLv1_S",
+      "type": 2
+    },
+    {
+      "name": "PowLv1_M",
+      "type": 2
+    },
+    {
+      "name": "PowLv1_L",
+      "type": 2
+    },
+    {
+      "name": "PowLv1_LL",
+      "type": 2
+    },
+    {
+      "name": "PowLv2_S",
+      "type": 2
+    },
+    {
+      "name": "PowLv2_M",
+      "type": 2
+    },
+    {
+      "name": "PowLv2_L",
+      "type": 2
+    },
+    {
+      "name": "PowLv2_LL",
+      "type": 2
+    },
+    {
+      "name": "PowLv3_S",
+      "type": 2
+    },
+    {
+      "name": "PowLv3_M",
+      "type": 2
+    },
+    {
+      "name": "PowLv3_L",
+      "type": 2
+    },
+    {
+      "name": "PowLv3_LL",
+      "type": 2
+    },
+    {
+      "name": "PowLv4_S",
+      "type": 2
+    },
+    {
+      "name": "PowLv4_M",
+      "type": 2
+    },
+    {
+      "name": "PowLv4_L",
+      "type": 2
+    },
+    {
+      "name": "PowLv4_LL",
+      "type": 2
+    },
+    {
+      "name": "PowLv5_S",
+      "type": 2
+    },
+    {
+      "name": "PowLv5_M",
+      "type": 2
+    },
+    {
+      "name": "PowLv5_L",
+      "type": 2
+    },
+    {
+      "name": "PowLv5_LL",
+      "type": 2
+    },
+    {
+      "name": "PowLv6_S",
+      "type": 2
+    },
+    {
+      "name": "PowLv6_M",
+      "type": 2
+    },
+    {
+      "name": "PowLv6_L",
+      "type": 2
+    },
+    {
+      "name": "PowLv6_LL",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Name": 40,
+      "DebugName": "ノックバック",
+      "Priority": 2,
+      "PowLv1_S": 99,
+      "PowLv1_M": 90,
+      "PowLv1_L": 81,
+      "PowLv1_LL": 72,
+      "PowLv2_S": 117,
+      "PowLv2_M": 108,
+      "PowLv2_L": 99,
+      "PowLv2_LL": 90,
+      "PowLv3_S": 135,
+      "PowLv3_M": 126,
+      "PowLv3_L": 117,
+      "PowLv3_LL": 108,
+      "PowLv4_S": 153,
+      "PowLv4_M": 144,
+      "PowLv4_L": 135,
+      "PowLv4_LL": 126,
+      "PowLv5_S": 171,
+      "PowLv5_M": 162,
+      "PowLv5_L": 153,
+      "PowLv5_LL": 144,
+      "PowLv6_S": 189,
+      "PowLv6_M": 180,
+      "PowLv6_L": 171,
+      "PowLv6_LL": 162
+    },
+    {
+      "$id": 2,
+      "Name": 41,
+      "DebugName": "吹き飛び",
+      "Priority": 3,
+      "PowLv1_S": 110,
+      "PowLv1_M": 100,
+      "PowLv1_L": 90,
+      "PowLv1_LL": 80,
+      "PowLv2_S": 130,
+      "PowLv2_M": 120,
+      "PowLv2_L": 110,
+      "PowLv2_LL": 100,
+      "PowLv3_S": 150,
+      "PowLv3_M": 140,
+      "PowLv3_L": 130,
+      "PowLv3_LL": 120,
+      "PowLv4_S": 170,
+      "PowLv4_M": 160,
+      "PowLv4_L": 150,
+      "PowLv4_LL": 140,
+      "PowLv5_S": 190,
+      "PowLv5_M": 180,
+      "PowLv5_L": 170,
+      "PowLv5_LL": 160,
+      "PowLv6_S": 210,
+      "PowLv6_M": 200,
+      "PowLv6_L": 190,
+      "PowLv6_LL": 180
+    },
+    {
+      "$id": 3,
+      "Name": 0,
+      "DebugName": "崩し",
+      "Priority": 1,
+      "PowLv1_S": 0,
+      "PowLv1_M": 0,
+      "PowLv1_L": 0,
+      "PowLv1_LL": 0,
+      "PowLv2_S": 0,
+      "PowLv2_M": 0,
+      "PowLv2_L": 0,
+      "PowLv2_LL": 0,
+      "PowLv3_S": 0,
+      "PowLv3_M": 0,
+      "PowLv3_L": 0,
+      "PowLv3_LL": 0,
+      "PowLv4_S": 0,
+      "PowLv4_M": 0,
+      "PowLv4_L": 0,
+      "PowLv4_LL": 0,
+      "PowLv5_S": 0,
+      "PowLv5_M": 0,
+      "PowLv5_L": 0,
+      "PowLv5_LL": 0,
+      "PowLv6_S": 0,
+      "PowLv6_M": 0,
+      "PowLv6_L": 0,
+      "PowLv6_LL": 0
+    },
+    {
+      "$id": 4,
+      "Name": 0,
+      "DebugName": "転倒",
+      "Priority": 4,
+      "PowLv1_S": 0,
+      "PowLv1_M": 0,
+      "PowLv1_L": 0,
+      "PowLv1_LL": 0,
+      "PowLv2_S": 0,
+      "PowLv2_M": 0,
+      "PowLv2_L": 0,
+      "PowLv2_LL": 0,
+      "PowLv3_S": 0,
+      "PowLv3_M": 0,
+      "PowLv3_L": 0,
+      "PowLv3_LL": 0,
+      "PowLv4_S": 0,
+      "PowLv4_M": 0,
+      "PowLv4_L": 0,
+      "PowLv4_LL": 0,
+      "PowLv5_S": 0,
+      "PowLv5_M": 0,
+      "PowLv5_L": 0,
+      "PowLv5_LL": 0,
+      "PowLv6_S": 0,
+      "PowLv6_M": 0,
+      "PowLv6_L": 0,
+      "PowLv6_LL": 0
+    },
+    {
+      "$id": 5,
+      "Name": 0,
+      "DebugName": "打ち上げ",
+      "Priority": 5,
+      "PowLv1_S": 0,
+      "PowLv1_M": 0,
+      "PowLv1_L": 0,
+      "PowLv1_LL": 0,
+      "PowLv2_S": 0,
+      "PowLv2_M": 0,
+      "PowLv2_L": 0,
+      "PowLv2_LL": 0,
+      "PowLv3_S": 0,
+      "PowLv3_M": 0,
+      "PowLv3_L": 0,
+      "PowLv3_LL": 0,
+      "PowLv4_S": 0,
+      "PowLv4_M": 0,
+      "PowLv4_L": 0,
+      "PowLv4_LL": 0,
+      "PowLv5_S": 0,
+      "PowLv5_M": 0,
+      "PowLv5_L": 0,
+      "PowLv5_LL": 0,
+      "PowLv6_S": 0,
+      "PowLv6_M": 0,
+      "PowLv6_L": 0,
+      "PowLv6_LL": 0
+    },
+    {
+      "$id": 6,
+      "Name": 0,
+      "DebugName": "叩きつけ",
+      "Priority": 6,
+      "PowLv1_S": 0,
+      "PowLv1_M": 0,
+      "PowLv1_L": 0,
+      "PowLv1_LL": 0,
+      "PowLv2_S": 0,
+      "PowLv2_M": 0,
+      "PowLv2_L": 0,
+      "PowLv2_LL": 0,
+      "PowLv3_S": 0,
+      "PowLv3_M": 0,
+      "PowLv3_L": 0,
+      "PowLv3_LL": 0,
+      "PowLv4_S": 0,
+      "PowLv4_M": 0,
+      "PowLv4_L": 0,
+      "PowLv4_LL": 0,
+      "PowLv5_S": 0,
+      "PowLv5_M": 0,
+      "PowLv5_L": 0,
+      "PowLv5_LL": 0,
+      "PowLv6_S": 0,
+      "PowLv6_M": 0,
+      "PowLv6_L": 0,
+      "PowLv6_LL": 0
+    }
+  ]
+}

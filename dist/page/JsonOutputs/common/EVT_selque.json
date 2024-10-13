@@ -1,0 +1,78 @@
+{
+  "schema": [
+    {
+      "name": "grpName",
+      "type": 7
+    },
+    {
+      "name": "grpNameJP",
+      "type": 7
+    },
+    {
+      "name": "atrDisp",
+      "type": 1
+    },
+    {
+      "name": "atrName",
+      "type": 7
+    },
+    {
+      "name": "atrNameJP",
+      "type": 7
+    },
+    {
+      "name": "atrType",
+      "type": 1
+    },
+    {
+      "name": "atrOptStr1",
+      "type": 7
+    },
+    {
+      "name": "atrOptStr2",
+      "type": 7
+    },
+    {
+      "name": "atrDefStr1",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "grpName": "",
+      "grpNameJP": "",
+      "atrDisp": 1,
+      "atrName": "text",
+      "atrNameJP": "設問テキスト",
+      "atrType": 3,
+      "atrOptStr1": "",
+      "atrOptStr2": "",
+      "atrDefStr1": ""
+    },
+    {
+      "$id": 2,
+      "grpName": "",
+      "grpNameJP": "",
+      "atrDisp": 0,
+      "atrName": "type",
+      "atrNameJP": "選択タイプ",
+      "atrType": 13,
+      "atrOptStr1": "EVT_seltype",
+      "atrOptStr2": "",
+      "atrDefStr1": ""
+    },
+    {
+      "$id": 3,
+      "grpName": "",
+      "grpNameJP": "",
+      "atrDisp": 0,
+      "atrName": "chara",
+      "atrNameJP": "話者",
+      "atrType": 14,
+      "atrOptStr1": "",
+      "atrOptStr2": "",
+      "atrDefStr1": ""
+    }
+  ]
+}

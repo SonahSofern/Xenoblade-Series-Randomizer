@@ -1,0 +1,164 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_areaindex",
+      "text_id": 958
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_zonename_@01",
+      "text_id": 959
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_zonename_@02",
+      "text_id": 959
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_zonename_@03",
+      "text_id": 959
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_zonename_@04",
+      "text_id": 959
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_zonename_@05",
+      "text_id": 959
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_zonename_@06",
+      "text_id": 959
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_zonename_@07",
+      "text_id": 959
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_zonename_@08",
+      "text_id": 959
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_helptxt@01",
+      "text_id": 974
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_helptxt@02",
+      "text_id": 975
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_helptxt@03",
+      "text_id": 976
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_helptxt@04",
+      "text_id": 977
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_helptxt@05",
+      "text_id": 978
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_helptxt@06",
+      "text_id": 979
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_helptxt@07",
+      "text_id": 980
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_helptxt@08",
+      "text_id": 981
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_helptxt@09",
+      "text_id": 982
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_helptxt@10",
+      "text_id": 983
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_helptxt@11",
+      "text_id": 984
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_helptxt@12",
+      "text_id": 985
+    },
+    {
+      "$id": 22,
+      "obj_name": "TXT_helptxt@13",
+      "text_id": 985
+    },
+    {
+      "$id": 23,
+      "obj_name": "TXT_pointname_@01",
+      "text_id": 959
+    },
+    {
+      "$id": 24,
+      "obj_name": "TXT_pointname_@02",
+      "text_id": 959
+    },
+    {
+      "$id": 25,
+      "obj_name": "TXT_pointname_@03",
+      "text_id": 959
+    },
+    {
+      "$id": 26,
+      "obj_name": "TXT_pointname_@04",
+      "text_id": 959
+    },
+    {
+      "$id": 27,
+      "obj_name": "TXT_pointname_@05",
+      "text_id": 959
+    },
+    {
+      "$id": 28,
+      "obj_name": "TXT_pointname_@06",
+      "text_id": 959
+    },
+    {
+      "$id": 29,
+      "obj_name": "TXT_pointname_@07",
+      "text_id": 959
+    },
+    {
+      "$id": 30,
+      "obj_name": "TXT_pointname_@08",
+      "text_id": 959
+    }
+  ]
+}

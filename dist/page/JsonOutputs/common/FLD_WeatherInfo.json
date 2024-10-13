@@ -1,0 +1,186 @@
+{
+  "schema": [
+    {
+      "name": "msg",
+      "type": 2
+    },
+    {
+      "name": "eff",
+      "type": 7
+    },
+    {
+      "name": "snd",
+      "type": 7
+    },
+    {
+      "name": "snd_ira",
+      "type": 7
+    },
+    {
+      "name": "sndBegin",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "msg": 29,
+      "eff": "",
+      "snd": "",
+      "snd_ira": "",
+      "sndBegin": ""
+    },
+    {
+      "$id": 2,
+      "msg": 30,
+      "eff": "",
+      "snd": "se_fld_allmap_002",
+      "snd_ira": "se_fld_allmap_002",
+      "sndBegin": ""
+    },
+    {
+      "$id": 3,
+      "msg": 31,
+      "eff": "cmn_250_030",
+      "snd": "se_fld_allmap_003",
+      "snd_ira": "se_fld_allmap_003",
+      "sndBegin": ""
+    },
+    {
+      "$id": 4,
+      "msg": 32,
+      "eff": "cmn_250_040",
+      "snd": "se_fld_allmap_004",
+      "snd_ira": "se_fld_allmap_004",
+      "sndBegin": ""
+    },
+    {
+      "$id": 5,
+      "msg": 33,
+      "eff": "cmn_250_050",
+      "snd": "se_fld_allmap_005",
+      "snd_ira": "",
+      "sndBegin": ""
+    },
+    {
+      "$id": 6,
+      "msg": 34,
+      "eff": "",
+      "snd": "",
+      "snd_ira": "",
+      "sndBegin": ""
+    },
+    {
+      "$id": 7,
+      "msg": 35,
+      "eff": "cmn_250_070",
+      "snd": "se_fld_allmap_007",
+      "snd_ira": "",
+      "sndBegin": ""
+    },
+    {
+      "$id": 8,
+      "msg": 36,
+      "eff": "cmn_250_080",
+      "snd": "se_fld_allmap_008",
+      "snd_ira": "",
+      "sndBegin": ""
+    },
+    {
+      "$id": 9,
+      "msg": 37,
+      "eff": "cmn_250_090",
+      "snd": "se_fld_allmap_009",
+      "snd_ira": "",
+      "sndBegin": "se_fld_allmap_017"
+    },
+    {
+      "$id": 10,
+      "msg": 38,
+      "eff": "cmn_250_100",
+      "snd": "se_fld_allmap_010",
+      "snd_ira": "",
+      "sndBegin": ""
+    },
+    {
+      "$id": 11,
+      "msg": 39,
+      "eff": "cmn_250_110",
+      "snd": "se_fld_allmap_011",
+      "snd_ira": "",
+      "sndBegin": ""
+    },
+    {
+      "$id": 12,
+      "msg": 29,
+      "eff": "",
+      "snd": "",
+      "snd_ira": "dlc_fld_allmap_004",
+      "sndBegin": ""
+    },
+    {
+      "$id": 13,
+      "msg": 41,
+      "eff": "",
+      "snd": "se_fld_allmap_013",
+      "snd_ira": "se_fld_allmap_013",
+      "sndBegin": ""
+    },
+    {
+      "$id": 14,
+      "msg": 42,
+      "eff": "cmn_250_140",
+      "snd": "se_fld_allmap_014",
+      "snd_ira": "",
+      "sndBegin": ""
+    },
+    {
+      "$id": 15,
+      "msg": 0,
+      "eff": "",
+      "snd": "",
+      "snd_ira": "",
+      "sndBegin": ""
+    },
+    {
+      "$id": 16,
+      "msg": 0,
+      "eff": "",
+      "snd": "",
+      "snd_ira": "",
+      "sndBegin": ""
+    },
+    {
+      "$id": 17,
+      "msg": 0,
+      "eff": "",
+      "snd": "",
+      "snd_ira": "",
+      "sndBegin": ""
+    },
+    {
+      "$id": 18,
+      "msg": 0,
+      "eff": "",
+      "snd": "",
+      "snd_ira": "",
+      "sndBegin": ""
+    },
+    {
+      "$id": 19,
+      "msg": 0,
+      "eff": "",
+      "snd": "",
+      "snd_ira": "",
+      "sndBegin": ""
+    },
+    {
+      "$id": 20,
+      "msg": 0,
+      "eff": "",
+      "snd": "",
+      "snd_ira": "",
+      "sndBegin": ""
+    }
+  ]
+}

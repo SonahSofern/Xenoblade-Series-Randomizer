@@ -1,0 +1,54 @@
+{
+  "schema": [
+    {
+      "name": "GroupRev1",
+      "type": 1
+    },
+    {
+      "name": "GroupRev2",
+      "type": 1
+    },
+    {
+      "name": "GroupRev3",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "GroupRev1": 1,
+      "GroupRev2": 1,
+      "GroupRev3": 2
+    },
+    {
+      "$id": 2,
+      "GroupRev1": 1,
+      "GroupRev2": 1,
+      "GroupRev3": 2
+    },
+    {
+      "$id": 3,
+      "GroupRev1": 6,
+      "GroupRev2": 4,
+      "GroupRev3": 7
+    },
+    {
+      "$id": 4,
+      "GroupRev1": 6,
+      "GroupRev2": 4,
+      "GroupRev3": 7
+    },
+    {
+      "$id": 5,
+      "GroupRev1": 6,
+      "GroupRev2": 4,
+      "GroupRev3": 7
+    },
+    {
+      "$id": 6,
+      "GroupRev1": 12,
+      "GroupRev2": 10,
+      "GroupRev3": 13
+    }
+  ]
+}

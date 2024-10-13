@@ -1,0 +1,1146 @@
+{
+  "schema": [
+    {
+      "name": "setupName",
+      "type": 7
+    },
+    {
+      "name": "objName",
+      "type": 7
+    },
+    {
+      "name": "objType",
+      "type": 1
+    },
+    {
+      "name": "objID",
+      "type": 7
+    },
+    {
+      "name": "objModel",
+      "type": 7
+    },
+    {
+      "name": "wpnBlade",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 29001,
+      "setupName": "bf10_300_100",
+      "objName": "男子供A",
+      "objType": 5,
+      "objID": "RSC_NP451001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29002,
+      "setupName": "",
+      "objName": "女子供A",
+      "objType": 5,
+      "objID": "RSC_NP452001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29003,
+      "setupName": "",
+      "objName": "男大人A",
+      "objType": 5,
+      "objID": "RSC_NP453000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29004,
+      "setupName": "",
+      "objName": "女大人A",
+      "objType": 5,
+      "objID": "RSC_NP454000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29005,
+      "setupName": "",
+      "objName": "ノポン男大人A",
+      "objType": 5,
+      "objID": "RSC_NP423601",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29006,
+      "setupName": "",
+      "objName": "ノポン女大人A",
+      "objType": 5,
+      "objID": "RSC_NP423501",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29007,
+      "setupName": "",
+      "objName": "スペルビア兵士A",
+      "objType": 5,
+      "objID": "RSC_NP453201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29008,
+      "setupName": "",
+      "objName": "スペルビア兵士B",
+      "objType": 5,
+      "objID": "RSC_NP453201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29009,
+      "setupName": "",
+      "objName": "男おっさんA",
+      "objType": 5,
+      "objID": "RSC_NP455001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29010,
+      "setupName": "",
+      "objName": "女おばさんA",
+      "objType": 5,
+      "objID": "RSC_NP456001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29011,
+      "setupName": "mv10300101",
+      "objName": "男子供A",
+      "objType": 5,
+      "objID": "RSC_NP441001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29012,
+      "setupName": "",
+      "objName": "女子供A",
+      "objType": 5,
+      "objID": "RSC_NP442001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29013,
+      "setupName": "",
+      "objName": "女子供B",
+      "objType": 5,
+      "objID": "RSC_NP442001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29014,
+      "setupName": "",
+      "objName": "男大人A",
+      "objType": 5,
+      "objID": "RSC_NP443000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29015,
+      "setupName": "",
+      "objName": "男大人B",
+      "objType": 5,
+      "objID": "RSC_NP443000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29016,
+      "setupName": "",
+      "objName": "女大人A",
+      "objType": 5,
+      "objID": "RSC_NP444000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29017,
+      "setupName": "",
+      "objName": "ノポン女大人A",
+      "objType": 5,
+      "objID": "RSC_NP423501",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29018,
+      "setupName": "",
+      "objName": "ノポン女子供A",
+      "objType": 5,
+      "objID": "RSC_NP422001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29019,
+      "setupName": "",
+      "objName": "ルクスリア兵士A",
+      "objType": 5,
+      "objID": "RSC_NP443101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29020,
+      "setupName": "",
+      "objName": "男老人A",
+      "objType": 5,
+      "objID": "RSC_NP445001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29021,
+      "setupName": "mv10300102",
+      "objName": "男子供A",
+      "objType": 5,
+      "objID": "RSC_NP431001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29022,
+      "setupName": "",
+      "objName": "男子供B",
+      "objType": 5,
+      "objID": "RSC_NP431001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29023,
+      "setupName": "",
+      "objName": "女大人A",
+      "objType": 5,
+      "objID": "RSC_NP434000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29024,
+      "setupName": "",
+      "objName": "女大人B",
+      "objType": 5,
+      "objID": "RSC_NP434000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29025,
+      "setupName": "",
+      "objName": "ノポン男大人A",
+      "objType": 5,
+      "objID": "RSC_NP423601",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29026,
+      "setupName": "",
+      "objName": "ノポン男大人B",
+      "objType": 5,
+      "objID": "RSC_NP423601",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29027,
+      "setupName": "",
+      "objName": "ノポン女大人",
+      "objType": 5,
+      "objID": "RSC_NP423501",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29028,
+      "setupName": "",
+      "objName": "男大人傭兵A",
+      "objType": 5,
+      "objID": "RSC_NP433201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29029,
+      "setupName": "",
+      "objName": "男大人傭兵B",
+      "objType": 5,
+      "objID": "RSC_NP433201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29030,
+      "setupName": "",
+      "objName": "女大人傭兵A",
+      "objType": 5,
+      "objID": "RSC_NP434201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29031,
+      "setupName": "mv10390130",
+      "objName": "ネフェル",
+      "objType": 5,
+      "objID": "RSC_NP001001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29032,
+      "setupName": "",
+      "objName": "男子供A",
+      "objType": 5,
+      "objID": "RSC_NP451001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29033,
+      "setupName": "",
+      "objName": "男子供B",
+      "objType": 5,
+      "objID": "RSC_NP451001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29034,
+      "setupName": "",
+      "objName": "男大人A",
+      "objType": 5,
+      "objID": "RSC_NP453000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29035,
+      "setupName": "",
+      "objName": "男大人B",
+      "objType": 5,
+      "objID": "RSC_NP453000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29036,
+      "setupName": "",
+      "objName": "男大人C",
+      "objType": 5,
+      "objID": "RSC_NP453000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29037,
+      "setupName": "",
+      "objName": "女大人A",
+      "objType": 5,
+      "objID": "RSC_NP454000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29038,
+      "setupName": "",
+      "objName": "女大人B",
+      "objType": 5,
+      "objID": "RSC_NP454000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29039,
+      "setupName": "",
+      "objName": "女大人C",
+      "objType": 5,
+      "objID": "RSC_NP454000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29040,
+      "setupName": "",
+      "objName": "女おばさんA",
+      "objType": 5,
+      "objID": "RSC_NP456001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29041,
+      "setupName": "",
+      "objName": "女おばさんB",
+      "objType": 5,
+      "objID": "RSC_NP456001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29042,
+      "setupName": "",
+      "objName": "ガーゴイルA",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29043,
+      "setupName": "",
+      "objName": "ガーゴイルB",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29044,
+      "setupName": "",
+      "objName": "ガーゴイルC",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29045,
+      "setupName": "",
+      "objName": "ガーゴイルD",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29046,
+      "setupName": "mv10390131",
+      "objName": "ゼーリッヒ",
+      "objType": 5,
+      "objID": "RSC_NP001201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29047,
+      "setupName": "",
+      "objName": "女子供A",
+      "objType": 5,
+      "objID": "RSC_NP442001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29048,
+      "setupName": "",
+      "objName": "男大人A",
+      "objType": 5,
+      "objID": "RSC_NP443000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29049,
+      "setupName": "",
+      "objName": "女大人A",
+      "objType": 5,
+      "objID": "RSC_NP444000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29050,
+      "setupName": "",
+      "objName": "女大人B",
+      "objType": 5,
+      "objID": "RSC_NP444000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29051,
+      "setupName": "",
+      "objName": "ガーゴイルA",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29052,
+      "setupName": "",
+      "objName": "ガーゴイルB",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29053,
+      "setupName": "",
+      "objName": "ガーゴイルC",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29054,
+      "setupName": "mv10390132",
+      "objName": "ラゲルト",
+      "objType": 5,
+      "objID": "RSC_NP001501",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29055,
+      "setupName": "",
+      "objName": "ラゲルト側近A",
+      "objType": 5,
+      "objID": "RSC_NP006201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29056,
+      "setupName": "",
+      "objName": "ラゲルト側近B",
+      "objType": 5,
+      "objID": "RSC_NP006601",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29057,
+      "setupName": "",
+      "objName": "インヴィディア兵士A",
+      "objType": 5,
+      "objID": "RSC_NP433101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29058,
+      "setupName": "",
+      "objName": "インヴィディア兵士B",
+      "objType": 5,
+      "objID": "RSC_NP433101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29059,
+      "setupName": "",
+      "objName": "インヴィディア兵士C",
+      "objType": 5,
+      "objID": "RSC_NP433101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29060,
+      "setupName": "",
+      "objName": "インヴィディア兵士D",
+      "objType": 5,
+      "objID": "RSC_NP433101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29061,
+      "setupName": "",
+      "objName": "インヴィディア兵士E",
+      "objType": 5,
+      "objID": "RSC_NP433101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29062,
+      "setupName": "",
+      "objName": "ガーゴイルA",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29063,
+      "setupName": "",
+      "objName": "ガーゴイルB",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29064,
+      "setupName": "",
+      "objName": "ガーゴイルC",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29065,
+      "setupName": "mv10420100",
+      "objName": "ネフェル",
+      "objType": 5,
+      "objID": "RSC_NP001001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29066,
+      "setupName": "",
+      "objName": "女子供A",
+      "objType": 5,
+      "objID": "RSC_NP452001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29067,
+      "setupName": "",
+      "objName": "男大人A",
+      "objType": 5,
+      "objID": "RSC_NP453000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29068,
+      "setupName": "",
+      "objName": "男大人B",
+      "objType": 5,
+      "objID": "RSC_NP453000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29069,
+      "setupName": "",
+      "objName": "女大人A",
+      "objType": 5,
+      "objID": "RSC_NP454000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29070,
+      "setupName": "",
+      "objName": "男おっさん",
+      "objType": 5,
+      "objID": "RSC_NP455001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29071,
+      "setupName": "",
+      "objName": "スペルビア兵士A",
+      "objType": 5,
+      "objID": "RSC_NP453201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29072,
+      "setupName": "",
+      "objName": "スペルビア兵士B",
+      "objType": 5,
+      "objID": "RSC_NP453201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29073,
+      "setupName": "",
+      "objName": "ガーゴイルA",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29074,
+      "setupName": "",
+      "objName": "ガーゴイルB",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29075,
+      "setupName": "mv10420101",
+      "objName": "ゼーリッヒ",
+      "objType": 5,
+      "objID": "RSC_NP001201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29076,
+      "setupName": "",
+      "objName": "女子供A",
+      "objType": 5,
+      "objID": "RSC_NP442001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29077,
+      "setupName": "",
+      "objName": "女子供B",
+      "objType": 5,
+      "objID": "RSC_NP442001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29078,
+      "setupName": "",
+      "objName": "男大人A",
+      "objType": 5,
+      "objID": "RSC_NP443000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29079,
+      "setupName": "",
+      "objName": "男大人B",
+      "objType": 5,
+      "objID": "RSC_NP443000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29080,
+      "setupName": "",
+      "objName": "女大人A",
+      "objType": 5,
+      "objID": "RSC_NP444000",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29081,
+      "setupName": "",
+      "objName": "男老人A",
+      "objType": 5,
+      "objID": "RSC_NP445001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29082,
+      "setupName": "",
+      "objName": "女老人A",
+      "objType": 5,
+      "objID": "RSC_NP445101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29083,
+      "setupName": "",
+      "objName": "ルクスリア兵A",
+      "objType": 5,
+      "objID": "RSC_NP443101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29084,
+      "setupName": "",
+      "objName": "ルクスリア兵B",
+      "objType": 5,
+      "objID": "RSC_NP443101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29085,
+      "setupName": "",
+      "objName": "ガーゴイルA",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29086,
+      "setupName": "",
+      "objName": "ガーゴイルB",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29087,
+      "setupName": "",
+      "objName": "ガーゴイルC",
+      "objType": 6,
+      "objID": "boss_ma17a04",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29088,
+      "setupName": "mv10420102",
+      "objName": "ラゲルト",
+      "objType": 5,
+      "objID": "RSC_NP001501",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29089,
+      "setupName": "",
+      "objName": "ラゲルト側近A",
+      "objType": 5,
+      "objID": "RSC_NP006201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29090,
+      "setupName": "",
+      "objName": "ラゲルト側近B",
+      "objType": 5,
+      "objID": "RSC_NP006601",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29091,
+      "setupName": "",
+      "objName": "インヴィディア兵士A",
+      "objType": 5,
+      "objID": "RSC_NP433101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29092,
+      "setupName": "",
+      "objName": "インヴィディア兵士B",
+      "objType": 5,
+      "objID": "RSC_NP433101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29093,
+      "setupName": "",
+      "objName": "インヴィディア兵士C",
+      "objType": 5,
+      "objID": "RSC_NP433101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29094,
+      "setupName": "bf00001001",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29095,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP190002",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29096,
+      "setupName": "",
+      "objName": "世界樹",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj190801",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29097,
+      "setupName": "bf00001002",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29098,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29099,
+      "setupName": "bf00001003",
+      "objName": "ジーク",
+      "objType": 3,
+      "objID": "DRIVER_SIEG",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29100,
+      "setupName": "",
+      "objName": "サイカ",
+      "objType": 4,
+      "objID": "BLADE_SAIKA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29101,
+      "setupName": "bf00001004",
+      "objName": "メレフ",
+      "objType": 3,
+      "objID": "DRIVER_MELEF",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29102,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29103,
+      "setupName": "bf00001005",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29104,
+      "setupName": "bf00001010",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29105,
+      "setupName": "",
+      "objName": "覚醒ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29106,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29107,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29108,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29109,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29110,
+      "setupName": "",
+      "objName": "メレフ",
+      "objType": 3,
+      "objID": "DRIVER_MELEF",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29111,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29112,
+      "setupName": "",
+      "objName": "ジーク",
+      "objType": 3,
+      "objID": "DRIVER_SIEG",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29113,
+      "setupName": "",
+      "objName": "サイカ",
+      "objType": 4,
+      "objID": "BLADE_SAIKA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29114,
+      "setupName": "",
+      "objName": "ハナ（JK)",
+      "objType": 4,
+      "objID": "BLADE_HANA_2",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29115,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29116,
+      "setupName": "bf00001201",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29117,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29118,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29119,
+      "setupName": "",
+      "objName": "世界樹",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj190801",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29120,
+      "setupName": "bf00001501",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29121,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29122,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29123,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 29124,
+      "setupName": "",
+      "objName": "世界樹",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj190801",
+      "wpnBlade": ""
+    }
+  ]
+}

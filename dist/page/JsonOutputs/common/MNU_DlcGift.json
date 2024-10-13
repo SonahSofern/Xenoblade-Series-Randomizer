@@ -1,0 +1,643 @@
+{
+  "schema": [
+    {
+      "name": "releasecount",
+      "type": 4
+    },
+    {
+      "name": "title",
+      "type": 2
+    },
+    {
+      "name": "condition",
+      "type": 2
+    },
+    {
+      "name": "category",
+      "type": 1
+    },
+    {
+      "name": "item_id",
+      "type": 2
+    },
+    {
+      "name": "value",
+      "type": 2
+    },
+    {
+      "name": "disp_item_info",
+      "type": 1
+    },
+    {
+      "name": "getflag",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "releasecount": 1,
+      "title": 1,
+      "condition": 2761,
+      "category": 2,
+      "item_id": 0,
+      "value": 50000,
+      "disp_item_info": 0,
+      "getflag": 35353
+    },
+    {
+      "$id": 2,
+      "releasecount": 1,
+      "title": 2,
+      "condition": 2763,
+      "category": 1,
+      "item_id": 40296,
+      "value": 3,
+      "disp_item_info": 0,
+      "getflag": 35354
+    },
+    {
+      "$id": 3,
+      "releasecount": 1,
+      "title": 3,
+      "condition": 2762,
+      "category": 1,
+      "item_id": 20002,
+      "value": 10,
+      "disp_item_info": 0,
+      "getflag": 35355
+    },
+    {
+      "$id": 4,
+      "releasecount": 1,
+      "title": 4,
+      "condition": 2764,
+      "category": 1,
+      "item_id": 45011,
+      "value": 5,
+      "disp_item_info": 0,
+      "getflag": 35356
+    },
+    {
+      "$id": 5,
+      "releasecount": 2,
+      "title": 5,
+      "condition": 2806,
+      "category": 1,
+      "item_id": 45012,
+      "value": 10,
+      "disp_item_info": 0,
+      "getflag": 35361
+    },
+    {
+      "$id": 6,
+      "releasecount": 2,
+      "title": 5,
+      "condition": 2806,
+      "category": 1,
+      "item_id": 45013,
+      "value": 1,
+      "disp_item_info": 0,
+      "getflag": 35362
+    },
+    {
+      "$id": 7,
+      "releasecount": 2,
+      "title": 5,
+      "condition": 2806,
+      "category": 1,
+      "item_id": 25408,
+      "value": 3,
+      "disp_item_info": 0,
+      "getflag": 35363
+    },
+    {
+      "$id": 8,
+      "releasecount": 2,
+      "title": 6,
+      "condition": 2807,
+      "category": 3,
+      "item_id": 0,
+      "value": 30000,
+      "disp_item_info": 0,
+      "getflag": 35364
+    },
+    {
+      "$id": 9,
+      "releasecount": 2,
+      "title": 28,
+      "condition": 2808,
+      "category": 1,
+      "item_id": 40112,
+      "value": 5,
+      "disp_item_info": 0,
+      "getflag": 35365
+    },
+    {
+      "$id": 10,
+      "releasecount": 2,
+      "title": 29,
+      "condition": 2809,
+      "category": 1,
+      "item_id": 40302,
+      "value": 5,
+      "disp_item_info": 0,
+      "getflag": 35366
+    },
+    {
+      "$id": 11,
+      "releasecount": 3,
+      "title": 30,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25410,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35367
+    },
+    {
+      "$id": 12,
+      "releasecount": 3,
+      "title": 30,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25411,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35368
+    },
+    {
+      "$id": 13,
+      "releasecount": 3,
+      "title": 30,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25412,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35369
+    },
+    {
+      "$id": 14,
+      "releasecount": 3,
+      "title": 30,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25413,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35370
+    },
+    {
+      "$id": 15,
+      "releasecount": 3,
+      "title": 30,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25414,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35371
+    },
+    {
+      "$id": 16,
+      "releasecount": 4,
+      "title": 37,
+      "condition": 2806,
+      "category": 1,
+      "item_id": 45012,
+      "value": 10,
+      "disp_item_info": 0,
+      "getflag": 35372
+    },
+    {
+      "$id": 17,
+      "releasecount": 4,
+      "title": 37,
+      "condition": 2806,
+      "category": 1,
+      "item_id": 45013,
+      "value": 1,
+      "disp_item_info": 0,
+      "getflag": 35373
+    },
+    {
+      "$id": 18,
+      "releasecount": 4,
+      "title": 37,
+      "condition": 2806,
+      "category": 1,
+      "item_id": 25408,
+      "value": 1,
+      "disp_item_info": 0,
+      "getflag": 35374
+    },
+    {
+      "$id": 19,
+      "releasecount": 4,
+      "title": 34,
+      "condition": 2843,
+      "category": 1,
+      "item_id": 40001,
+      "value": 3,
+      "disp_item_info": 0,
+      "getflag": 35375
+    },
+    {
+      "$id": 20,
+      "releasecount": 4,
+      "title": 35,
+      "condition": 2843,
+      "category": 1,
+      "item_id": 40016,
+      "value": 3,
+      "disp_item_info": 0,
+      "getflag": 35376
+    },
+    {
+      "$id": 21,
+      "releasecount": 4,
+      "title": 36,
+      "condition": 2844,
+      "category": 1,
+      "item_id": 118,
+      "value": 1,
+      "disp_item_info": 0,
+      "getflag": 35377
+    },
+    {
+      "$id": 22,
+      "releasecount": 5,
+      "title": 43,
+      "condition": 2807,
+      "category": 3,
+      "item_id": 0,
+      "value": 30000,
+      "disp_item_info": 0,
+      "getflag": 35378
+    },
+    {
+      "$id": 23,
+      "releasecount": 5,
+      "title": 42,
+      "condition": 2806,
+      "category": 1,
+      "item_id": 25408,
+      "value": 3,
+      "disp_item_info": 0,
+      "getflag": 35379
+    },
+    {
+      "$id": 24,
+      "releasecount": 5,
+      "title": 42,
+      "condition": 2806,
+      "category": 1,
+      "item_id": 45013,
+      "value": 8,
+      "disp_item_info": 0,
+      "getflag": 35380
+    },
+    {
+      "$id": 25,
+      "releasecount": 6,
+      "title": 31,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25415,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35381
+    },
+    {
+      "$id": 26,
+      "releasecount": 6,
+      "title": 31,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25416,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35382
+    },
+    {
+      "$id": 27,
+      "releasecount": 6,
+      "title": 31,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25417,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35383
+    },
+    {
+      "$id": 28,
+      "releasecount": 6,
+      "title": 31,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25418,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35384
+    },
+    {
+      "$id": 29,
+      "releasecount": 6,
+      "title": 31,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25419,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35385
+    },
+    {
+      "$id": 30,
+      "releasecount": 7,
+      "title": 54,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25467,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35396
+    },
+    {
+      "$id": 31,
+      "releasecount": 8,
+      "title": 32,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25420,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35386
+    },
+    {
+      "$id": 32,
+      "releasecount": 8,
+      "title": 32,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25421,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35387
+    },
+    {
+      "$id": 33,
+      "releasecount": 8,
+      "title": 32,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25422,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35388
+    },
+    {
+      "$id": 34,
+      "releasecount": 8,
+      "title": 32,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25423,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35389
+    },
+    {
+      "$id": 35,
+      "releasecount": 8,
+      "title": 32,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25424,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35390
+    },
+    {
+      "$id": 36,
+      "releasecount": 9,
+      "title": 58,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25443,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35397
+    },
+    {
+      "$id": 37,
+      "releasecount": 9,
+      "title": 58,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25495,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35398
+    },
+    {
+      "$id": 38,
+      "releasecount": 10,
+      "title": 33,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25425,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35391
+    },
+    {
+      "$id": 39,
+      "releasecount": 10,
+      "title": 33,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25426,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35392
+    },
+    {
+      "$id": 40,
+      "releasecount": 10,
+      "title": 33,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25427,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35393
+    },
+    {
+      "$id": 41,
+      "releasecount": 10,
+      "title": 33,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25428,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35394
+    },
+    {
+      "$id": 42,
+      "releasecount": 10,
+      "title": 33,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25429,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35395
+    },
+    {
+      "$id": 43,
+      "releasecount": 11,
+      "title": 55,
+      "condition": 2806,
+      "category": 1,
+      "item_id": 25499,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35399
+    },
+    {
+      "$id": 44,
+      "releasecount": 12,
+      "title": 59,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25496,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35400
+    },
+    {
+      "$id": 45,
+      "releasecount": 12,
+      "title": 59,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25542,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35401
+    },
+    {
+      "$id": 46,
+      "releasecount": 13,
+      "title": 60,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25497,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35402
+    },
+    {
+      "$id": 47,
+      "releasecount": 13,
+      "title": 60,
+      "condition": 1,
+      "category": 1,
+      "item_id": 25543,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35403
+    },
+    {
+      "$id": 48,
+      "releasecount": 14,
+      "title": 56,
+      "condition": 2806,
+      "category": 1,
+      "item_id": 25498,
+      "value": 1,
+      "disp_item_info": 1,
+      "getflag": 35404
+    },
+    {
+      "$id": 49,
+      "releasecount": 15,
+      "title": 57,
+      "condition": 2806,
+      "category": 1,
+      "item_id": 45013,
+      "value": 15,
+      "disp_item_info": 0,
+      "getflag": 35405
+    },
+    {
+      "$id": 50,
+      "releasecount": 15,
+      "title": 57,
+      "condition": 2806,
+      "category": 1,
+      "item_id": 25408,
+      "value": 3,
+      "disp_item_info": 0,
+      "getflag": 35406
+    },
+    {
+      "$id": 51,
+      "releasecount": 15,
+      "title": 57,
+      "condition": 1,
+      "category": 1,
+      "item_id": 40314,
+      "value": 10,
+      "disp_item_info": 0,
+      "getflag": 35407
+    },
+    {
+      "$id": 52,
+      "releasecount": -1,
+      "title": 63,
+      "condition": 2806,
+      "category": 1,
+      "item_id": 45013,
+      "value": 15,
+      "disp_item_info": 0,
+      "getflag": 35408
+    },
+    {
+      "$id": 53,
+      "releasecount": -1,
+      "title": 63,
+      "condition": 1,
+      "category": 1,
+      "item_id": 40097,
+      "value": 3,
+      "disp_item_info": 0,
+      "getflag": 35409
+    },
+    {
+      "$id": 54,
+      "releasecount": -1,
+      "title": 63,
+      "condition": 1,
+      "category": 1,
+      "item_id": 40020,
+      "value": 3,
+      "disp_item_info": 0,
+      "getflag": 35410
+    },
+    {
+      "$id": 55,
+      "releasecount": -1,
+      "title": 63,
+      "condition": 1,
+      "category": 1,
+      "item_id": 40026,
+      "value": 3,
+      "disp_item_info": 0,
+      "getflag": 35411
+    }
+  ]
+}

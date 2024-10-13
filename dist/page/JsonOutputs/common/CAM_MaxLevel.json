@@ -1,0 +1,29 @@
+{
+  "schema": [
+    {
+      "name": "RevReset",
+      "type": 1
+    },
+    {
+      "name": "RevAuto",
+      "type": 1
+    },
+    {
+      "name": "RotSpeed",
+      "type": 1
+    },
+    {
+      "name": "ZoomSpeed",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "RevReset": 3,
+      "RevAuto": 3,
+      "RotSpeed": 3,
+      "ZoomSpeed": 3
+    }
+  ]
+}

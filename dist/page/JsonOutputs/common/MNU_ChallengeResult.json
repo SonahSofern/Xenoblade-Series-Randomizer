@@ -1,0 +1,29 @@
+{
+  "schema": [
+    {
+      "name": "Point",
+      "type": 1
+    },
+    {
+      "name": "Text",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Point": 30,
+      "Text": 442
+    },
+    {
+      "$id": 2,
+      "Point": 60,
+      "Text": 443
+    },
+    {
+      "$id": 3,
+      "Point": 100,
+      "Text": 444
+    }
+  ]
+}

@@ -1,0 +1,300 @@
+{
+  "schema": [
+    {
+      "name": "Name",
+      "type": 7
+    },
+    {
+      "name": "MoveType",
+      "type": 1
+    },
+    {
+      "name": "HitType",
+      "type": 1
+    },
+    {
+      "name": "HitW",
+      "type": 1
+    },
+    {
+      "name": "HitH",
+      "type": 1
+    },
+    {
+      "name": "Atk",
+      "type": 1
+    },
+    {
+      "name": "Speed",
+      "type": 2
+    },
+    {
+      "name": "Range",
+      "type": 2
+    },
+    {
+      "name": "Search",
+      "type": 2
+    },
+    {
+      "name": "ActSpd",
+      "type": 2
+    },
+    {
+      "name": "Hp",
+      "type": 1
+    },
+    {
+      "name": "BackFrm",
+      "type": 1
+    },
+    {
+      "name": "BackSpd",
+      "type": 2
+    },
+    {
+      "name": "Score",
+      "type": 2
+    },
+    {
+      "name": "ResID",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "Name": "same1",
+      "MoveType": 1,
+      "HitType": 0,
+      "HitW": 20,
+      "HitH": 8,
+      "Atk": 100,
+      "Speed": 150,
+      "Range": 80,
+      "Search": 100,
+      "ActSpd": 200,
+      "Hp": 1,
+      "BackFrm": 30,
+      "BackSpd": 0,
+      "Score": 80,
+      "ResID": 0
+    },
+    {
+      "$id": 1,
+      "Name": "uni",
+      "MoveType": 0,
+      "HitType": 3,
+      "HitW": 8,
+      "HitH": 8,
+      "Atk": 255,
+      "Speed": 0,
+      "Range": 0,
+      "Search": 0,
+      "ActSpd": 0,
+      "Hp": 1,
+      "BackFrm": 30,
+      "BackSpd": 0,
+      "Score": 1,
+      "ResID": 1
+    },
+    {
+      "$id": 2,
+      "Name": "kame",
+      "MoveType": 1,
+      "HitType": 2,
+      "HitW": 16,
+      "HitH": 8,
+      "Atk": 50,
+      "Speed": 100,
+      "Range": 50,
+      "Search": 100,
+      "ActSpd": 100,
+      "Hp": 1,
+      "BackFrm": 30,
+      "BackSpd": 0,
+      "Score": 100,
+      "ResID": 2
+    },
+    {
+      "$id": 3,
+      "Name": "kurage",
+      "MoveType": 2,
+      "HitType": 1,
+      "HitW": 12,
+      "HitH": 20,
+      "Atk": 75,
+      "Speed": 30,
+      "Range": 10,
+      "Search": 100,
+      "ActSpd": 100,
+      "Hp": 1,
+      "BackFrm": 30,
+      "BackSpd": 0,
+      "Score": 85,
+      "ResID": 3
+    },
+    {
+      "$id": 4,
+      "Name": "umiusi",
+      "MoveType": 4,
+      "HitType": 0,
+      "HitW": 12,
+      "HitH": 12,
+      "Atk": 30,
+      "Speed": 100,
+      "Range": 70,
+      "Search": 100,
+      "ActSpd": 250,
+      "Hp": 1,
+      "BackFrm": 30,
+      "BackSpd": 0,
+      "Score": 200,
+      "ResID": 4
+    },
+    {
+      "$id": 5,
+      "Name": "ankou",
+      "MoveType": 5,
+      "HitType": 0,
+      "HitW": 12,
+      "HitH": 12,
+      "Atk": 75,
+      "Speed": 150,
+      "Range": 100,
+      "Search": 75,
+      "ActSpd": 1300,
+      "Hp": 1,
+      "BackFrm": 30,
+      "BackSpd": 0,
+      "Score": 75,
+      "ResID": 5
+    },
+    {
+      "$id": 6,
+      "Name": "utubo",
+      "MoveType": 6,
+      "HitType": 0,
+      "HitW": 12,
+      "HitH": 24,
+      "Atk": 100,
+      "Speed": 500,
+      "Range": 100,
+      "Search": 150,
+      "ActSpd": 1600,
+      "Hp": 1,
+      "BackFrm": 30,
+      "BackSpd": 0,
+      "Score": 115,
+      "ResID": 6
+    },
+    {
+      "$id": 7,
+      "Name": "kani",
+      "MoveType": 7,
+      "HitType": 0,
+      "HitW": 12,
+      "HitH": 12,
+      "Atk": 75,
+      "Speed": 300,
+      "Range": 100,
+      "Search": 120,
+      "ActSpd": 1400,
+      "Hp": 1,
+      "BackFrm": 30,
+      "BackSpd": 0,
+      "Score": 70,
+      "ResID": 7
+    },
+    {
+      "$id": 8,
+      "Name": "same2",
+      "MoveType": 3,
+      "HitType": 0,
+      "HitW": 20,
+      "HitH": 8,
+      "Atk": 125,
+      "Speed": 100,
+      "Range": 80,
+      "Search": 80,
+      "ActSpd": 150,
+      "Hp": 2,
+      "BackFrm": 10,
+      "BackSpd": 75,
+      "Score": 120,
+      "ResID": 10
+    },
+    {
+      "$id": 9,
+      "Name": "uni2",
+      "MoveType": 0,
+      "HitType": 3,
+      "HitW": 8,
+      "HitH": 8,
+      "Atk": 255,
+      "Speed": 0,
+      "Range": 0,
+      "Search": 0,
+      "ActSpd": 0,
+      "Hp": 1,
+      "BackFrm": 30,
+      "BackSpd": 0,
+      "Score": 1,
+      "ResID": 1
+    },
+    {
+      "$id": 10,
+      "Name": "same3",
+      "MoveType": 3,
+      "HitType": 0,
+      "HitW": 20,
+      "HitH": 8,
+      "Atk": 125,
+      "Speed": 150,
+      "Range": 80,
+      "Search": 80,
+      "ActSpd": 200,
+      "Hp": 3,
+      "BackFrm": 10,
+      "BackSpd": 75,
+      "Score": 130,
+      "ResID": 10
+    },
+    {
+      "$id": 11,
+      "Name": "taco",
+      "MoveType": 9,
+      "HitType": 3,
+      "HitW": 12,
+      "HitH": 12,
+      "Atk": 50,
+      "Speed": 0,
+      "Range": 0,
+      "Search": 0,
+      "ActSpd": 0,
+      "Hp": 1,
+      "BackFrm": 30,
+      "BackSpd": 0,
+      "Score": 0,
+      "ResID": 8
+    },
+    {
+      "$id": 12,
+      "Name": "bonus",
+      "MoveType": 10,
+      "HitType": 3,
+      "HitW": 1,
+      "HitH": 16,
+      "Atk": 0,
+      "Speed": 0,
+      "Range": 0,
+      "Search": 0,
+      "ActSpd": 0,
+      "Hp": 1,
+      "BackFrm": 30,
+      "BackSpd": 0,
+      "Score": 0,
+      "ResID": 11
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "schema": [
+    {
+      "name": "SpdD",
+      "type": 2
+    },
+    {
+      "name": "SpdU",
+      "type": 2
+    },
+    {
+      "name": "AccU",
+      "type": 2
+    },
+    {
+      "name": "MaxU",
+      "type": 2
+    },
+    {
+      "name": "Scroll",
+      "type": 2
+    },
+    {
+      "name": "Bonus",
+      "type": 2
+    },
+    {
+      "name": "StarRate",
+      "type": 2
+    },
+    {
+      "name": "BotRate",
+      "type": 2
+    },
+    {
+      "name": "BotVal",
+      "type": 1
+    },
+    {
+      "name": "BonusTime",
+      "type": 2
+    },
+    {
+      "name": "UniRate",
+      "type": 2
+    },
+    {
+      "name": "EthRate",
+      "type": 1
+    },
+    {
+      "name": "BonusEntry",
+      "type": 1
+    },
+    {
+      "name": "Condition",
+      "type": 2
+    },
+    {
+      "name": "Res",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "SpdD": 125,
+      "SpdU": 240,
+      "AccU": 2,
+      "MaxU": 400,
+      "Scroll": 0,
+      "Bonus": 1000,
+      "StarRate": 200,
+      "BotRate": 500,
+      "BotVal": 120,
+      "BonusTime": 450,
+      "UniRate": 2200,
+      "EthRate": 20,
+      "BonusEntry": 5,
+      "Condition": 0,
+      "Res": "map1"
+    },
+    {
+      "$id": 1,
+      "SpdD": 125,
+      "SpdU": 240,
+      "AccU": 2,
+      "MaxU": 400,
+      "Scroll": 0,
+      "Bonus": 1000,
+      "StarRate": 200,
+      "BotRate": 500,
+      "BotVal": 120,
+      "BonusTime": 450,
+      "UniRate": 2300,
+      "EthRate": 20,
+      "BonusEntry": 5,
+      "Condition": 1481,
+      "Res": "map2"
+    },
+    {
+      "$id": 2,
+      "SpdD": 125,
+      "SpdU": 240,
+      "AccU": 3,
+      "MaxU": 400,
+      "Scroll": 0,
+      "Bonus": 1000,
+      "StarRate": 200,
+      "BotRate": 500,
+      "BotVal": 120,
+      "BonusTime": 450,
+      "UniRate": 2400,
+      "EthRate": 25,
+      "BonusEntry": 5,
+      "Condition": 1482,
+      "Res": "map3"
+    },
+    {
+      "$id": 3,
+      "SpdD": 125,
+      "SpdU": 240,
+      "AccU": 4,
+      "MaxU": 400,
+      "Scroll": 0,
+      "Bonus": 1000,
+      "StarRate": 200,
+      "BotRate": 500,
+      "BotVal": 120,
+      "BonusTime": 450,
+      "UniRate": 2500,
+      "EthRate": 25,
+      "BonusEntry": 5,
+      "Condition": 1483,
+      "Res": "map4"
+    },
+    {
+      "$id": 4,
+      "SpdD": 125,
+      "SpdU": 240,
+      "AccU": 5,
+      "MaxU": 400,
+      "Scroll": 0,
+      "Bonus": 1000,
+      "StarRate": 200,
+      "BotRate": 500,
+      "BotVal": 120,
+      "BonusTime": 450,
+      "UniRate": 2600,
+      "EthRate": 30,
+      "BonusEntry": 5,
+      "Condition": 1484,
+      "Res": "map5"
+    },
+    {
+      "$id": 5,
+      "SpdD": 100,
+      "SpdU": 200,
+      "AccU": 0,
+      "MaxU": 400,
+      "Scroll": 160,
+      "Bonus": 0,
+      "StarRate": 0,
+      "BotRate": 0,
+      "BotVal": 0,
+      "BonusTime": 0,
+      "UniRate": 0,
+      "EthRate": 0,
+      "BonusEntry": 0,
+      "Condition": 0,
+      "Res": "map6"
+    },
+    {
+      "$id": 6,
+      "SpdD": 100,
+      "SpdU": 180,
+      "AccU": 2,
+      "MaxU": 400,
+      "Scroll": 160,
+      "Bonus": 1000,
+      "StarRate": 500,
+      "BotRate": 500,
+      "BotVal": 255,
+      "BonusTime": 450,
+      "UniRate": 2200,
+      "EthRate": 20,
+      "BonusEntry": 5,
+      "Condition": 0,
+      "Res": "map7"
+    },
+    {
+      "$id": 7,
+      "SpdD": 100,
+      "SpdU": 100,
+      "AccU": 0,
+      "MaxU": 400,
+      "Scroll": 160,
+      "Bonus": 1000,
+      "StarRate": 10000,
+      "BotRate": 10000,
+      "BotVal": 255,
+      "BonusTime": 450,
+      "UniRate": 2200,
+      "EthRate": 20,
+      "BonusEntry": 5,
+      "Condition": 0,
+      "Res": "map8"
+    }
+  ]
+}

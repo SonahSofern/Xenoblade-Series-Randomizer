@@ -1,0 +1,114 @@
+{
+  "schema": [
+    {
+      "name": "Condition",
+      "type": 2
+    },
+    {
+      "name": "StandDeadVoice",
+      "type": 1
+    },
+    {
+      "name": "StandBossID",
+      "type": 2
+    },
+    {
+      "name": "StandState",
+      "type": 1
+    },
+    {
+      "name": "EnemyCall",
+      "type": 1
+    },
+    {
+      "name": "CallRadius",
+      "type": 2
+    },
+    {
+      "name": "BlackOut",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Condition": 3300,
+      "StandDeadVoice": 0,
+      "StandBossID": 0,
+      "StandState": 0,
+      "EnemyCall": 1,
+      "CallRadius": 50,
+      "BlackOut": 60
+    },
+    {
+      "$id": 2,
+      "Condition": 3301,
+      "StandDeadVoice": 1,
+      "StandBossID": 0,
+      "StandState": 0,
+      "EnemyCall": 0,
+      "CallRadius": 0,
+      "BlackOut": 0
+    },
+    {
+      "$id": 3,
+      "Condition": 3302,
+      "StandDeadVoice": 1,
+      "StandBossID": 1434,
+      "StandState": 0,
+      "EnemyCall": 1,
+      "CallRadius": 50,
+      "BlackOut": 0
+    },
+    {
+      "$id": 4,
+      "Condition": 3303,
+      "StandDeadVoice": 1,
+      "StandBossID": 1437,
+      "StandState": 0,
+      "EnemyCall": 0,
+      "CallRadius": 0,
+      "BlackOut": 0
+    },
+    {
+      "$id": 5,
+      "Condition": 3304,
+      "StandDeadVoice": 1,
+      "StandBossID": 1443,
+      "StandState": 1,
+      "EnemyCall": 0,
+      "CallRadius": 0,
+      "BlackOut": 0
+    },
+    {
+      "$id": 6,
+      "Condition": 3305,
+      "StandDeadVoice": 0,
+      "StandBossID": 0,
+      "StandState": 0,
+      "EnemyCall": 1,
+      "CallRadius": 50,
+      "BlackOut": 60
+    },
+    {
+      "$id": 7,
+      "Condition": 3306,
+      "StandDeadVoice": 1,
+      "StandBossID": 1446,
+      "StandState": 1,
+      "EnemyCall": 0,
+      "CallRadius": 0,
+      "BlackOut": 0
+    },
+    {
+      "$id": 8,
+      "Condition": 3307,
+      "StandDeadVoice": 1,
+      "StandBossID": 1447,
+      "StandState": 1,
+      "EnemyCall": 0,
+      "CallRadius": 0,
+      "BlackOut": 0
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_end_index",
+      "text_id": 1237
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_end_title",
+      "text_id": 1238
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_avan_title_index",
+      "text_id": 1742
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_avan_title_name",
+      "text_id": 1743
+    }
+  ]
+}

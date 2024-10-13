@@ -1,0 +1,2442 @@
+{
+  "schema": [
+    {
+      "name": "Category",
+      "type": 1
+    },
+    {
+      "name": "MapID",
+      "type": 2
+    },
+    {
+      "name": "PlaceID",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Category": 1,
+      "MapID": 2,
+      "PlaceID": 1
+    },
+    {
+      "$id": 2,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2003
+    },
+    {
+      "$id": 3,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2002
+    },
+    {
+      "$id": 4,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2004
+    },
+    {
+      "$id": 5,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2005
+    },
+    {
+      "$id": 6,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2006
+    },
+    {
+      "$id": 7,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2007
+    },
+    {
+      "$id": 8,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2008
+    },
+    {
+      "$id": 9,
+      "Category": 3,
+      "MapID": 4,
+      "PlaceID": 3001
+    },
+    {
+      "$id": 10,
+      "Category": 3,
+      "MapID": 5,
+      "PlaceID": 4001
+    },
+    {
+      "$id": 11,
+      "Category": 3,
+      "MapID": 5,
+      "PlaceID": 4002
+    },
+    {
+      "$id": 12,
+      "Category": 3,
+      "MapID": 22,
+      "PlaceID": 30001
+    },
+    {
+      "$id": 13,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5001
+    },
+    {
+      "$id": 14,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5002
+    },
+    {
+      "$id": 15,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5003
+    },
+    {
+      "$id": 16,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5004
+    },
+    {
+      "$id": 17,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5005
+    },
+    {
+      "$id": 18,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5006
+    },
+    {
+      "$id": 19,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5007
+    },
+    {
+      "$id": 20,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5008
+    },
+    {
+      "$id": 21,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5009
+    },
+    {
+      "$id": 22,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5010
+    },
+    {
+      "$id": 23,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5011
+    },
+    {
+      "$id": 24,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5012
+    },
+    {
+      "$id": 25,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5013
+    },
+    {
+      "$id": 26,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5014
+    },
+    {
+      "$id": 27,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5017
+    },
+    {
+      "$id": 28,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7001
+    },
+    {
+      "$id": 29,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7002
+    },
+    {
+      "$id": 30,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7004
+    },
+    {
+      "$id": 31,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7005
+    },
+    {
+      "$id": 32,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7006
+    },
+    {
+      "$id": 33,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7006
+    },
+    {
+      "$id": 34,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 0
+    },
+    {
+      "$id": 35,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7007
+    },
+    {
+      "$id": 36,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7008
+    },
+    {
+      "$id": 37,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7009
+    },
+    {
+      "$id": 38,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7010
+    },
+    {
+      "$id": 39,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7011
+    },
+    {
+      "$id": 40,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7012
+    },
+    {
+      "$id": 41,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2011
+    },
+    {
+      "$id": 42,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8002
+    },
+    {
+      "$id": 43,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2009
+    },
+    {
+      "$id": 44,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2010
+    },
+    {
+      "$id": 45,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5018
+    },
+    {
+      "$id": 46,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5019
+    },
+    {
+      "$id": 47,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5020
+    },
+    {
+      "$id": 48,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8003
+    },
+    {
+      "$id": 49,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8013
+    },
+    {
+      "$id": 50,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8014
+    },
+    {
+      "$id": 51,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8015
+    },
+    {
+      "$id": 52,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8004
+    },
+    {
+      "$id": 53,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8005
+    },
+    {
+      "$id": 54,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8006
+    },
+    {
+      "$id": 55,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8007
+    },
+    {
+      "$id": 56,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8008
+    },
+    {
+      "$id": 57,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8009
+    },
+    {
+      "$id": 58,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8010
+    },
+    {
+      "$id": 59,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8011
+    },
+    {
+      "$id": 60,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8012
+    },
+    {
+      "$id": 61,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15001
+    },
+    {
+      "$id": 62,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15002
+    },
+    {
+      "$id": 63,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15004
+    },
+    {
+      "$id": 64,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15005
+    },
+    {
+      "$id": 65,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 1
+    },
+    {
+      "$id": 66,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15006
+    },
+    {
+      "$id": 67,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11001
+    },
+    {
+      "$id": 68,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11002
+    },
+    {
+      "$id": 69,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11003
+    },
+    {
+      "$id": 70,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11004
+    },
+    {
+      "$id": 71,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11005
+    },
+    {
+      "$id": 72,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11006
+    },
+    {
+      "$id": 73,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10001
+    },
+    {
+      "$id": 74,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10002
+    },
+    {
+      "$id": 75,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11007
+    },
+    {
+      "$id": 76,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11008
+    },
+    {
+      "$id": 77,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11009
+    },
+    {
+      "$id": 78,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13002
+    },
+    {
+      "$id": 79,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13003
+    },
+    {
+      "$id": 80,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13004
+    },
+    {
+      "$id": 81,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13005
+    },
+    {
+      "$id": 82,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13006
+    },
+    {
+      "$id": 83,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13007
+    },
+    {
+      "$id": 84,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13008
+    },
+    {
+      "$id": 85,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13009
+    },
+    {
+      "$id": 86,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13010
+    },
+    {
+      "$id": 87,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13011
+    },
+    {
+      "$id": 88,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 1
+    },
+    {
+      "$id": 89,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11008
+    },
+    {
+      "$id": 90,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11010
+    },
+    {
+      "$id": 91,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11011
+    },
+    {
+      "$id": 92,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11012
+    },
+    {
+      "$id": 93,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11013
+    },
+    {
+      "$id": 94,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13012
+    },
+    {
+      "$id": 95,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15007
+    },
+    {
+      "$id": 96,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15008
+    },
+    {
+      "$id": 97,
+      "Category": 3,
+      "MapID": 15,
+      "PlaceID": 16001
+    },
+    {
+      "$id": 98,
+      "Category": 3,
+      "MapID": 15,
+      "PlaceID": 16002
+    },
+    {
+      "$id": 99,
+      "Category": 3,
+      "MapID": 15,
+      "PlaceID": 16003
+    },
+    {
+      "$id": 100,
+      "Category": 3,
+      "MapID": 15,
+      "PlaceID": 16004
+    },
+    {
+      "$id": 101,
+      "Category": 3,
+      "MapID": 15,
+      "PlaceID": 16005
+    },
+    {
+      "$id": 102,
+      "Category": 3,
+      "MapID": 15,
+      "PlaceID": 16006
+    },
+    {
+      "$id": 103,
+      "Category": 3,
+      "MapID": 15,
+      "PlaceID": 16007
+    },
+    {
+      "$id": 104,
+      "Category": 3,
+      "MapID": 15,
+      "PlaceID": 16008
+    },
+    {
+      "$id": 105,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15010
+    },
+    {
+      "$id": 106,
+      "Category": 3,
+      "MapID": 16,
+      "PlaceID": 17001
+    },
+    {
+      "$id": 107,
+      "Category": 3,
+      "MapID": 16,
+      "PlaceID": 17002
+    },
+    {
+      "$id": 108,
+      "Category": 3,
+      "MapID": 16,
+      "PlaceID": 17003
+    },
+    {
+      "$id": 109,
+      "Category": 3,
+      "MapID": 16,
+      "PlaceID": 17004
+    },
+    {
+      "$id": 110,
+      "Category": 3,
+      "MapID": 18,
+      "PlaceID": 18001
+    },
+    {
+      "$id": 111,
+      "Category": 3,
+      "MapID": 18,
+      "PlaceID": 18002
+    },
+    {
+      "$id": 112,
+      "Category": 3,
+      "MapID": 18,
+      "PlaceID": 18003
+    },
+    {
+      "$id": 113,
+      "Category": 3,
+      "MapID": 18,
+      "PlaceID": 18004
+    },
+    {
+      "$id": 114,
+      "Category": 3,
+      "MapID": 18,
+      "PlaceID": 18005
+    },
+    {
+      "$id": 115,
+      "Category": 3,
+      "MapID": 18,
+      "PlaceID": 18006
+    },
+    {
+      "$id": 116,
+      "Category": 3,
+      "MapID": 18,
+      "PlaceID": 18007
+    },
+    {
+      "$id": 117,
+      "Category": 3,
+      "MapID": 18,
+      "PlaceID": 18008
+    },
+    {
+      "$id": 118,
+      "Category": 3,
+      "MapID": 20,
+      "PlaceID": 20005
+    },
+    {
+      "$id": 119,
+      "Category": 3,
+      "MapID": 20,
+      "PlaceID": 20001
+    },
+    {
+      "$id": 120,
+      "Category": 3,
+      "MapID": 20,
+      "PlaceID": 20006
+    },
+    {
+      "$id": 121,
+      "Category": 3,
+      "MapID": 20,
+      "PlaceID": 20002
+    },
+    {
+      "$id": 122,
+      "Category": 3,
+      "MapID": 20,
+      "PlaceID": 20003
+    },
+    {
+      "$id": 123,
+      "Category": 3,
+      "MapID": 20,
+      "PlaceID": 20004
+    },
+    {
+      "$id": 124,
+      "Category": 3,
+      "MapID": 20,
+      "PlaceID": 20007
+    },
+    {
+      "$id": 125,
+      "Category": 3,
+      "MapID": 20,
+      "PlaceID": 20008
+    },
+    {
+      "$id": 126,
+      "Category": 3,
+      "MapID": 20,
+      "PlaceID": 20009
+    },
+    {
+      "$id": 127,
+      "Category": 3,
+      "MapID": 20,
+      "PlaceID": 20011
+    },
+    {
+      "$id": 128,
+      "Category": 3,
+      "MapID": 21,
+      "PlaceID": 21002
+    },
+    {
+      "$id": 129,
+      "Category": 3,
+      "MapID": 21,
+      "PlaceID": 21003
+    },
+    {
+      "$id": 130,
+      "Category": 3,
+      "MapID": 21,
+      "PlaceID": 21004
+    },
+    {
+      "$id": 131,
+      "Category": 3,
+      "MapID": 21,
+      "PlaceID": 21005
+    },
+    {
+      "$id": 132,
+      "Category": 3,
+      "MapID": 21,
+      "PlaceID": 21006
+    },
+    {
+      "$id": 133,
+      "Category": 3,
+      "MapID": 21,
+      "PlaceID": 21007
+    },
+    {
+      "$id": 134,
+      "Category": 3,
+      "MapID": 21,
+      "PlaceID": 21001
+    },
+    {
+      "$id": 135,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13036
+    },
+    {
+      "$id": 136,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5024
+    },
+    {
+      "$id": 137,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7016
+    },
+    {
+      "$id": 138,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7017
+    },
+    {
+      "$id": 139,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13013
+    },
+    {
+      "$id": 140,
+      "Category": 3,
+      "MapID": 20,
+      "PlaceID": 20012
+    },
+    {
+      "$id": 141,
+      "Category": 3,
+      "MapID": 20,
+      "PlaceID": 20013
+    },
+    {
+      "$id": 142,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5027
+    },
+    {
+      "$id": 143,
+      "Category": 0,
+      "MapID": 0,
+      "PlaceID": 0
+    },
+    {
+      "$id": 144,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8017
+    },
+    {
+      "$id": 145,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8018
+    },
+    {
+      "$id": 146,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8019
+    },
+    {
+      "$id": 147,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 0
+    },
+    {
+      "$id": 148,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15012
+    },
+    {
+      "$id": 149,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 0
+    },
+    {
+      "$id": 150,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13014
+    },
+    {
+      "$id": 151,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10016
+    },
+    {
+      "$id": 152,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2013
+    },
+    {
+      "$id": 153,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5029
+    },
+    {
+      "$id": 154,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5030
+    },
+    {
+      "$id": 155,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5031
+    },
+    {
+      "$id": 156,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5032
+    },
+    {
+      "$id": 157,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5033
+    },
+    {
+      "$id": 158,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5034
+    },
+    {
+      "$id": 159,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5035
+    },
+    {
+      "$id": 160,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5036
+    },
+    {
+      "$id": 161,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7020
+    },
+    {
+      "$id": 162,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7021
+    },
+    {
+      "$id": 163,
+      "Category": 3,
+      "MapID": 15,
+      "PlaceID": 16009
+    },
+    {
+      "$id": 164,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7024
+    },
+    {
+      "$id": 165,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7025
+    },
+    {
+      "$id": 166,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7026
+    },
+    {
+      "$id": 167,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10004
+    },
+    {
+      "$id": 168,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10005
+    },
+    {
+      "$id": 169,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10006
+    },
+    {
+      "$id": 170,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10007
+    },
+    {
+      "$id": 171,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8021
+    },
+    {
+      "$id": 172,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8022
+    },
+    {
+      "$id": 173,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5037
+    },
+    {
+      "$id": 174,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8023
+    },
+    {
+      "$id": 175,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8024
+    },
+    {
+      "$id": 176,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8025
+    },
+    {
+      "$id": 177,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8026
+    },
+    {
+      "$id": 178,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8027
+    },
+    {
+      "$id": 179,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8028
+    },
+    {
+      "$id": 180,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8029
+    },
+    {
+      "$id": 181,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8030
+    },
+    {
+      "$id": 182,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7028
+    },
+    {
+      "$id": 183,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7029
+    },
+    {
+      "$id": 184,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15013
+    },
+    {
+      "$id": 185,
+      "Category": 3,
+      "MapID": 15,
+      "PlaceID": 16010
+    },
+    {
+      "$id": 186,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8031
+    },
+    {
+      "$id": 187,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8032
+    },
+    {
+      "$id": 188,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15014
+    },
+    {
+      "$id": 189,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15015
+    },
+    {
+      "$id": 190,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15016
+    },
+    {
+      "$id": 191,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15017
+    },
+    {
+      "$id": 192,
+      "Category": 3,
+      "MapID": 16,
+      "PlaceID": 17005
+    },
+    {
+      "$id": 193,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15018
+    },
+    {
+      "$id": 194,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15019
+    },
+    {
+      "$id": 195,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5039
+    },
+    {
+      "$id": 196,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5040
+    },
+    {
+      "$id": 197,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5041
+    },
+    {
+      "$id": 198,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13015
+    },
+    {
+      "$id": 199,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13016
+    },
+    {
+      "$id": 200,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13017
+    },
+    {
+      "$id": 201,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13018
+    },
+    {
+      "$id": 202,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13019
+    },
+    {
+      "$id": 203,
+      "Category": 3,
+      "MapID": 15,
+      "PlaceID": 16013
+    },
+    {
+      "$id": 204,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15020
+    },
+    {
+      "$id": 205,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15021
+    },
+    {
+      "$id": 206,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15022
+    },
+    {
+      "$id": 207,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2014
+    },
+    {
+      "$id": 208,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8034
+    },
+    {
+      "$id": 209,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13020
+    },
+    {
+      "$id": 210,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13021
+    },
+    {
+      "$id": 211,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13023
+    },
+    {
+      "$id": 212,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13024
+    },
+    {
+      "$id": 213,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13025
+    },
+    {
+      "$id": 214,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13026
+    },
+    {
+      "$id": 215,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8036
+    },
+    {
+      "$id": 216,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8037
+    },
+    {
+      "$id": 217,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8038
+    },
+    {
+      "$id": 218,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8039
+    },
+    {
+      "$id": 219,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15023
+    },
+    {
+      "$id": 220,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15024
+    },
+    {
+      "$id": 221,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7031
+    },
+    {
+      "$id": 222,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10010
+    },
+    {
+      "$id": 223,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2017
+    },
+    {
+      "$id": 224,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2018
+    },
+    {
+      "$id": 225,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10011
+    },
+    {
+      "$id": 226,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7033
+    },
+    {
+      "$id": 227,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5042
+    },
+    {
+      "$id": 228,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5043
+    },
+    {
+      "$id": 229,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5044
+    },
+    {
+      "$id": 230,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5045
+    },
+    {
+      "$id": 231,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5046
+    },
+    {
+      "$id": 232,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8042
+    },
+    {
+      "$id": 233,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5048
+    },
+    {
+      "$id": 234,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8043
+    },
+    {
+      "$id": 235,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10009
+    },
+    {
+      "$id": 236,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7036
+    },
+    {
+      "$id": 237,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7037
+    },
+    {
+      "$id": 238,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7038
+    },
+    {
+      "$id": 239,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7039
+    },
+    {
+      "$id": 240,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7044
+    },
+    {
+      "$id": 241,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13027
+    },
+    {
+      "$id": 242,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8044
+    },
+    {
+      "$id": 243,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8045
+    },
+    {
+      "$id": 244,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8046
+    },
+    {
+      "$id": 245,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2023
+    },
+    {
+      "$id": 246,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7040
+    },
+    {
+      "$id": 247,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7041
+    },
+    {
+      "$id": 248,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8058
+    },
+    {
+      "$id": 249,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8047
+    },
+    {
+      "$id": 250,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8048
+    },
+    {
+      "$id": 251,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8049
+    },
+    {
+      "$id": 252,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8050
+    },
+    {
+      "$id": 253,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15026
+    },
+    {
+      "$id": 254,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7043
+    },
+    {
+      "$id": 255,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10012
+    },
+    {
+      "$id": 256,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10013
+    },
+    {
+      "$id": 257,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2019
+    },
+    {
+      "$id": 258,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2020
+    },
+    {
+      "$id": 259,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2021
+    },
+    {
+      "$id": 260,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8051
+    },
+    {
+      "$id": 261,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8052
+    },
+    {
+      "$id": 262,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5050
+    },
+    {
+      "$id": 263,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5051
+    },
+    {
+      "$id": 264,
+      "Category": 3,
+      "MapID": 20,
+      "PlaceID": 20014
+    },
+    {
+      "$id": 265,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5053
+    },
+    {
+      "$id": 266,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5054
+    },
+    {
+      "$id": 267,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5055
+    },
+    {
+      "$id": 268,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 0
+    },
+    {
+      "$id": 269,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5056
+    },
+    {
+      "$id": 270,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5057
+    },
+    {
+      "$id": 271,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13028
+    },
+    {
+      "$id": 272,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13029
+    },
+    {
+      "$id": 273,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15028
+    },
+    {
+      "$id": 274,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8053
+    },
+    {
+      "$id": 275,
+      "Category": 3,
+      "MapID": 18,
+      "PlaceID": 18009
+    },
+    {
+      "$id": 276,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10014
+    },
+    {
+      "$id": 277,
+      "Category": 3,
+      "MapID": 15,
+      "PlaceID": 16014
+    },
+    {
+      "$id": 278,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8054
+    },
+    {
+      "$id": 279,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5058
+    },
+    {
+      "$id": 280,
+      "Category": 3,
+      "MapID": 15,
+      "PlaceID": 16015
+    },
+    {
+      "$id": 281,
+      "Category": 3,
+      "MapID": 18,
+      "PlaceID": 18010
+    },
+    {
+      "$id": 282,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13031
+    },
+    {
+      "$id": 283,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13032
+    },
+    {
+      "$id": 284,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5059
+    },
+    {
+      "$id": 285,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 0
+    },
+    {
+      "$id": 286,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7045
+    },
+    {
+      "$id": 287,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5061
+    },
+    {
+      "$id": 288,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5063
+    },
+    {
+      "$id": 289,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8055
+    },
+    {
+      "$id": 290,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8056
+    },
+    {
+      "$id": 291,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8057
+    },
+    {
+      "$id": 292,
+      "Category": 3,
+      "MapID": 12,
+      "PlaceID": 11015
+    },
+    {
+      "$id": 293,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5062
+    },
+    {
+      "$id": 294,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7046
+    },
+    {
+      "$id": 295,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7013
+    },
+    {
+      "$id": 296,
+      "Category": 2,
+      "MapID": 13,
+      "PlaceID": 1313
+    },
+    {
+      "$id": 297,
+      "Category": 2,
+      "MapID": 16,
+      "PlaceID": 1705
+    },
+    {
+      "$id": 298,
+      "Category": 2,
+      "MapID": 6,
+      "PlaceID": 514
+    },
+    {
+      "$id": 299,
+      "Category": 2,
+      "MapID": 15,
+      "PlaceID": 1608
+    },
+    {
+      "$id": 300,
+      "Category": 2,
+      "MapID": 9,
+      "PlaceID": 714
+    },
+    {
+      "$id": 301,
+      "Category": 2,
+      "MapID": 18,
+      "PlaceID": 1807
+    },
+    {
+      "$id": 302,
+      "Category": 2,
+      "MapID": 10,
+      "PlaceID": 811
+    },
+    {
+      "$id": 303,
+      "Category": 2,
+      "MapID": 11,
+      "PlaceID": 1011
+    },
+    {
+      "$id": 304,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2025
+    },
+    {
+      "$id": 305,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15029
+    },
+    {
+      "$id": 306,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2026
+    },
+    {
+      "$id": 307,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7048
+    },
+    {
+      "$id": 308,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8059
+    },
+    {
+      "$id": 309,
+      "Category": 0,
+      "MapID": 0,
+      "PlaceID": 0
+    },
+    {
+      "$id": 310,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13033
+    },
+    {
+      "$id": 311,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5064
+    },
+    {
+      "$id": 312,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13034
+    },
+    {
+      "$id": 313,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8060
+    },
+    {
+      "$id": 314,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7049
+    },
+    {
+      "$id": 315,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7050
+    },
+    {
+      "$id": 316,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8061
+    },
+    {
+      "$id": 317,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8062
+    },
+    {
+      "$id": 318,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8063
+    },
+    {
+      "$id": 319,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5065
+    },
+    {
+      "$id": 320,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8064
+    },
+    {
+      "$id": 321,
+      "Category": 3,
+      "MapID": 9,
+      "PlaceID": 7022
+    },
+    {
+      "$id": 322,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5066
+    },
+    {
+      "$id": 323,
+      "Category": 3,
+      "MapID": 21,
+      "PlaceID": 21008
+    },
+    {
+      "$id": 324,
+      "Category": 3,
+      "MapID": 21,
+      "PlaceID": 21009
+    },
+    {
+      "$id": 325,
+      "Category": 3,
+      "MapID": 21,
+      "PlaceID": 21010
+    },
+    {
+      "$id": 326,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10015
+    },
+    {
+      "$id": 327,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13037
+    },
+    {
+      "$id": 328,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5067
+    },
+    {
+      "$id": 329,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8065
+    },
+    {
+      "$id": 330,
+      "Category": 3,
+      "MapID": 6,
+      "PlaceID": 5068
+    },
+    {
+      "$id": 331,
+      "Category": 3,
+      "MapID": 3,
+      "PlaceID": 2029
+    },
+    {
+      "$id": 332,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15030
+    },
+    {
+      "$id": 333,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15031
+    },
+    {
+      "$id": 334,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13038
+    },
+    {
+      "$id": 335,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13039
+    },
+    {
+      "$id": 336,
+      "Category": 3,
+      "MapID": 11,
+      "PlaceID": 10017
+    },
+    {
+      "$id": 337,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8066
+    },
+    {
+      "$id": 338,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8067
+    },
+    {
+      "$id": 339,
+      "Category": 3,
+      "MapID": 20,
+      "PlaceID": 20016
+    },
+    {
+      "$id": 340,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8068
+    },
+    {
+      "$id": 341,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40001
+    },
+    {
+      "$id": 342,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40002
+    },
+    {
+      "$id": 343,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40045
+    },
+    {
+      "$id": 344,
+      "Category": 3,
+      "MapID": 53,
+      "PlaceID": 41001
+    },
+    {
+      "$id": 345,
+      "Category": 3,
+      "MapID": 53,
+      "PlaceID": 41002
+    },
+    {
+      "$id": 346,
+      "Category": 3,
+      "MapID": 53,
+      "PlaceID": 41003
+    },
+    {
+      "$id": 347,
+      "Category": 3,
+      "MapID": 53,
+      "PlaceID": 41004
+    },
+    {
+      "$id": 348,
+      "Category": 3,
+      "MapID": 53,
+      "PlaceID": 41005
+    },
+    {
+      "$id": 349,
+      "Category": 3,
+      "MapID": 53,
+      "PlaceID": 41006
+    },
+    {
+      "$id": 350,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40004
+    },
+    {
+      "$id": 351,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40005
+    },
+    {
+      "$id": 352,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40006
+    },
+    {
+      "$id": 353,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40007
+    },
+    {
+      "$id": 354,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40008
+    },
+    {
+      "$id": 355,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40009
+    },
+    {
+      "$id": 356,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40010
+    },
+    {
+      "$id": 357,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40011
+    },
+    {
+      "$id": 358,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40014
+    },
+    {
+      "$id": 359,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40016
+    },
+    {
+      "$id": 360,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40018
+    },
+    {
+      "$id": 361,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40019
+    },
+    {
+      "$id": 362,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40020
+    },
+    {
+      "$id": 363,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40021
+    },
+    {
+      "$id": 364,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40022
+    },
+    {
+      "$id": 365,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40024
+    },
+    {
+      "$id": 366,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40026
+    },
+    {
+      "$id": 367,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40052
+    },
+    {
+      "$id": 368,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40027
+    },
+    {
+      "$id": 369,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40028
+    },
+    {
+      "$id": 370,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40029
+    },
+    {
+      "$id": 371,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40031
+    },
+    {
+      "$id": 372,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8069
+    },
+    {
+      "$id": 373,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8070
+    },
+    {
+      "$id": 374,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8071
+    },
+    {
+      "$id": 375,
+      "Category": 3,
+      "MapID": 10,
+      "PlaceID": 8072
+    },
+    {
+      "$id": 376,
+      "Category": 3,
+      "MapID": 53,
+      "PlaceID": 41009
+    },
+    {
+      "$id": 377,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40032
+    },
+    {
+      "$id": 378,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40033
+    },
+    {
+      "$id": 379,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40034
+    },
+    {
+      "$id": 380,
+      "Category": 3,
+      "MapID": 53,
+      "PlaceID": 41010
+    },
+    {
+      "$id": 381,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40036
+    },
+    {
+      "$id": 382,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40038
+    },
+    {
+      "$id": 383,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40041
+    },
+    {
+      "$id": 384,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40042
+    },
+    {
+      "$id": 385,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40043
+    },
+    {
+      "$id": 386,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40044
+    },
+    {
+      "$id": 387,
+      "Category": 3,
+      "MapID": 53,
+      "PlaceID": 41011
+    },
+    {
+      "$id": 388,
+      "Category": 3,
+      "MapID": 53,
+      "PlaceID": 41013
+    },
+    {
+      "$id": 389,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40046
+    },
+    {
+      "$id": 390,
+      "Category": 3,
+      "MapID": 53,
+      "PlaceID": 41007
+    },
+    {
+      "$id": 391,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40013
+    },
+    {
+      "$id": 392,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40003
+    },
+    {
+      "$id": 393,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40012
+    },
+    {
+      "$id": 394,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40025
+    },
+    {
+      "$id": 395,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15032
+    },
+    {
+      "$id": 396,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15033
+    },
+    {
+      "$id": 397,
+      "Category": 3,
+      "MapID": 14,
+      "PlaceID": 15034
+    },
+    {
+      "$id": 398,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13040
+    },
+    {
+      "$id": 399,
+      "Category": 3,
+      "MapID": 13,
+      "PlaceID": 13041
+    },
+    {
+      "$id": 400,
+      "Category": 3,
+      "MapID": 53,
+      "PlaceID": 41012
+    },
+    {
+      "$id": 401,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40049
+    },
+    {
+      "$id": 402,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40050
+    },
+    {
+      "$id": 403,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40051
+    },
+    {
+      "$id": 404,
+      "Category": 3,
+      "MapID": 52,
+      "PlaceID": 40058
+    }
+  ]
+}

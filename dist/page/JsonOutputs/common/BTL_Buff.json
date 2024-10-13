@@ -1,0 +1,696 @@
+{
+  "schema": [
+    {
+      "name": "Name",
+      "type": 1
+    },
+    {
+      "name": "DebugName",
+      "type": 7
+    },
+    {
+      "name": "Caption",
+      "type": 1
+    },
+    {
+      "name": "BaseNum",
+      "type": 2
+    },
+    {
+      "name": "BaseTime",
+      "type": 2
+    },
+    {
+      "name": "BaseRecast",
+      "type": 2
+    },
+    {
+      "name": "BaseProb",
+      "type": 1
+    },
+    {
+      "name": "Interval",
+      "type": 2
+    },
+    {
+      "name": "Effect",
+      "type": 7
+    },
+    {
+      "name": "VoiceNum",
+      "type": 1
+    },
+    {
+      "name": "Flag",
+      "type": 1,
+      "flags": [
+        {
+          "label": "Buff",
+          "mask": 1,
+          "index": 0
+        },
+        {
+          "label": "SE",
+          "mask": 2,
+          "index": 1
+        }
+      ]
+    },
+    {
+      "name": "Icon",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Name": 1,
+      "DebugName": "会心アップ",
+      "Caption": 1,
+      "BaseNum": 25,
+      "BaseTime": 450,
+      "BaseRecast": 600,
+      "BaseProb": 75,
+      "Interval": 90,
+      "Effect": "cmn_009_000",
+      "VoiceNum": 1,
+      "Flag": {
+        "Buff": 1,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 2,
+      "Name": 2,
+      "DebugName": "命中アップ",
+      "Caption": 2,
+      "BaseNum": 25,
+      "BaseTime": 450,
+      "BaseRecast": 600,
+      "BaseProb": 75,
+      "Interval": 90,
+      "Effect": "cmn_009_000",
+      "VoiceNum": 2,
+      "Flag": {
+        "Buff": 1,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 3,
+      "Name": 3,
+      "DebugName": "アーツ強化",
+      "Caption": 3,
+      "BaseNum": 50,
+      "BaseTime": 0,
+      "BaseRecast": 750,
+      "BaseProb": 50,
+      "Interval": 90,
+      "Effect": "cmn_009_000",
+      "VoiceNum": 3,
+      "Flag": {
+        "Buff": 1,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 4,
+      "Name": 4,
+      "DebugName": "リキャストアップ",
+      "Caption": 4,
+      "BaseNum": 50,
+      "BaseTime": 450,
+      "BaseRecast": 900,
+      "BaseProb": 50,
+      "Interval": 90,
+      "Effect": "cmn_009_000",
+      "VoiceNum": 4,
+      "Flag": {
+        "Buff": 1,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 5,
+      "Name": 5,
+      "DebugName": "ダメージ吸収",
+      "Caption": 5,
+      "BaseNum": 10,
+      "BaseTime": 0,
+      "BaseRecast": 900,
+      "BaseProb": 50,
+      "Interval": 90,
+      "Effect": "cmn_009_000",
+      "VoiceNum": 5,
+      "Flag": {
+        "Buff": 1,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 6,
+      "Name": 6,
+      "DebugName": "リアクション無効",
+      "Caption": 6,
+      "BaseNum": 0,
+      "BaseTime": 450,
+      "BaseRecast": 900,
+      "BaseProb": 75,
+      "Interval": 90,
+      "Effect": "cmn_009_000",
+      "VoiceNum": 6,
+      "Flag": {
+        "Buff": 1,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 7,
+      "Name": 7,
+      "DebugName": "弱体リセット",
+      "Caption": 7,
+      "BaseNum": 0,
+      "BaseTime": 0,
+      "BaseRecast": 600,
+      "BaseProb": 50,
+      "Interval": 90,
+      "Effect": "cmn_009_000",
+      "VoiceNum": 7,
+      "Flag": {
+        "Buff": 1,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 8,
+      "Name": 8,
+      "DebugName": "背面攻撃アップ",
+      "Caption": 8,
+      "BaseNum": 50,
+      "BaseTime": 450,
+      "BaseRecast": 600,
+      "BaseProb": 75,
+      "Interval": 90,
+      "Effect": "cmn_009_000",
+      "VoiceNum": 8,
+      "Flag": {
+        "Buff": 1,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 9,
+      "Name": 9,
+      "DebugName": "ヘイト獲得",
+      "Caption": 9,
+      "BaseNum": 50,
+      "BaseTime": 0,
+      "BaseRecast": 600,
+      "BaseProb": 75,
+      "Interval": 90,
+      "Effect": "cmn_009_000",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 1,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 10,
+      "Name": 19,
+      "DebugName": "無敵",
+      "Caption": 0,
+      "BaseNum": 0,
+      "BaseTime": 0,
+      "BaseRecast": 0,
+      "BaseProb": 0,
+      "Interval": 0,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 1,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 11,
+      "Name": 10,
+      "DebugName": "挑発",
+      "Caption": 0,
+      "BaseNum": 0,
+      "BaseTime": 450,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "cmn_000_003",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 12,
+      "Name": 11,
+      "DebugName": "悪臭",
+      "Caption": 0,
+      "BaseNum": 100,
+      "BaseTime": 600,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "cmn_020_002",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 13,
+      "Name": 12,
+      "DebugName": "金縛り",
+      "Caption": 0,
+      "BaseNum": 100,
+      "BaseTime": 180,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "cmn_020_003",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 14,
+      "Name": 13,
+      "DebugName": "ブレイド封鎖",
+      "Caption": 0,
+      "BaseNum": 100,
+      "BaseTime": 450,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "cmn_020_000",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 15,
+      "Name": 14,
+      "DebugName": "回復無効",
+      "Caption": 0,
+      "BaseNum": 100,
+      "BaseTime": 450,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "cmn_020_004",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 16,
+      "Name": 15,
+      "DebugName": "モナドアーマー",
+      "Caption": 0,
+      "BaseNum": 20,
+      "BaseTime": 900,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "cmn_020_001",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 1,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 17,
+      "Name": 16,
+      "DebugName": "金剛力",
+      "Caption": 0,
+      "BaseNum": 150,
+      "BaseTime": 900,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "cmn_009_000",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 1,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 18,
+      "Name": 0,
+      "DebugName": "スタンプＡ",
+      "Caption": 0,
+      "BaseNum": 100,
+      "BaseTime": 150,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 19,
+      "Name": 0,
+      "DebugName": "スタンプＢ",
+      "Caption": 0,
+      "BaseNum": 100,
+      "BaseTime": 150,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 20,
+      "Name": 0,
+      "DebugName": "スタンプＣ",
+      "Caption": 0,
+      "BaseNum": 100,
+      "BaseTime": 150,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 21,
+      "Name": 17,
+      "DebugName": "効果終了時に死亡",
+      "Caption": 0,
+      "BaseNum": 0,
+      "BaseTime": 150,
+      "BaseRecast": 0,
+      "BaseProb": 80,
+      "Interval": 0,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 22,
+      "Name": 0,
+      "DebugName": "ダメージ時リキャスト回復",
+      "Caption": 0,
+      "BaseNum": 0,
+      "BaseTime": 0,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 1,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 23,
+      "Name": 59,
+      "DebugName": "物理防御ダウン",
+      "Caption": 0,
+      "BaseNum": 25,
+      "BaseTime": 450,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "cmn_009_001",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 24,
+      "Name": 60,
+      "DebugName": "エーテル防御ダウン",
+      "Caption": 0,
+      "BaseNum": 25,
+      "BaseTime": 450,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "cmn_009_001",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 25,
+      "Name": 61,
+      "DebugName": "レジストダウン",
+      "Caption": 0,
+      "BaseNum": 25,
+      "BaseTime": 450,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "cmn_009_001",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 1
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 26,
+      "Name": 0,
+      "DebugName": "[ラウラ]",
+      "Caption": 0,
+      "BaseNum": 0,
+      "BaseTime": 0,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 1,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 27,
+      "Name": 0,
+      "DebugName": "[アデル]",
+      "Caption": 0,
+      "BaseNum": 0,
+      "BaseTime": 0,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 28,
+      "Name": 0,
+      "DebugName": "[ユーゴ]",
+      "Caption": 0,
+      "BaseNum": 0,
+      "BaseTime": 450,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 1,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 29,
+      "Name": 0,
+      "DebugName": "[シン]",
+      "Caption": 0,
+      "BaseNum": 10,
+      "BaseTime": 900,
+      "BaseRecast": 20,
+      "BaseProb": 100,
+      "Interval": 300,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 1,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 30,
+      "Name": 62,
+      "DebugName": "[カスミ]",
+      "Caption": 0,
+      "BaseNum": 0,
+      "BaseTime": 150,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "cmn_500_003",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 31,
+      "Name": 0,
+      "DebugName": "[ヒカリ]",
+      "Caption": 0,
+      "BaseNum": 15,
+      "BaseTime": 0,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 1,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 32,
+      "Name": 0,
+      "DebugName": "[ミノチ]",
+      "Caption": 0,
+      "BaseNum": 100,
+      "BaseTime": 0,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 300,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 1,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 33,
+      "Name": 0,
+      "DebugName": "[カグツチ]",
+      "Caption": 0,
+      "BaseNum": 5,
+      "BaseTime": 0,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 1,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 34,
+      "Name": 0,
+      "DebugName": "[ワダツミ]",
+      "Caption": 0,
+      "BaseNum": 500,
+      "BaseTime": 900,
+      "BaseRecast": 0,
+      "BaseProb": 100,
+      "Interval": 0,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 1,
+        "SE": 0
+      },
+      "Icon": 0
+    },
+    {
+      "$id": 35,
+      "Name": 63,
+      "DebugName": "怒りの一撃",
+      "Caption": 0,
+      "BaseNum": 200,
+      "BaseTime": 0,
+      "BaseRecast": 0,
+      "BaseProb": 0,
+      "Interval": 0,
+      "Effect": "",
+      "VoiceNum": 0,
+      "Flag": {
+        "Buff": 0,
+        "SE": 0
+      },
+      "Icon": 0
+    }
+  ]
+}

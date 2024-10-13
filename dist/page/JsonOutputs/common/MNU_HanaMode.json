@@ -1,0 +1,203 @@
+{
+  "schema": [
+    {
+      "name": "JS_SET",
+      "type": 2
+    },
+    {
+      "name": "JK_SET",
+      "type": 2
+    },
+    {
+      "name": "JD_SET",
+      "type": 2
+    },
+    {
+      "name": "JS_EXPAND",
+      "type": 2
+    },
+    {
+      "name": "JK_EXPAND",
+      "type": 2
+    },
+    {
+      "name": "JD_EXPAND",
+      "type": 2
+    },
+    {
+      "name": "ITEM_MAKE",
+      "type": 2
+    },
+    {
+      "name": "BASE_SET",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "JS_SET": 15,
+      "JK_SET": 15,
+      "JD_SET": 15,
+      "JS_EXPAND": 15,
+      "JK_EXPAND": 15,
+      "JD_EXPAND": 15,
+      "ITEM_MAKE": 1,
+      "BASE_SET": 15
+    },
+    {
+      "$id": 2,
+      "JS_SET": 1,
+      "JK_SET": 1,
+      "JD_SET": 1,
+      "JS_EXPAND": 16,
+      "JK_EXPAND": 16,
+      "JD_EXPAND": 16,
+      "ITEM_MAKE": 2,
+      "BASE_SET": 1
+    },
+    {
+      "$id": 3,
+      "JS_SET": 2,
+      "JK_SET": 2,
+      "JD_SET": 2,
+      "JS_EXPAND": 17,
+      "JK_EXPAND": 17,
+      "JD_EXPAND": 17,
+      "ITEM_MAKE": 3,
+      "BASE_SET": 2
+    },
+    {
+      "$id": 4,
+      "JS_SET": 3,
+      "JK_SET": 3,
+      "JD_SET": 3,
+      "JS_EXPAND": 18,
+      "JK_EXPAND": 18,
+      "JD_EXPAND": 18,
+      "ITEM_MAKE": 9,
+      "BASE_SET": 3
+    },
+    {
+      "$id": 5,
+      "JS_SET": 4,
+      "JK_SET": 4,
+      "JD_SET": 4,
+      "JS_EXPAND": 19,
+      "JK_EXPAND": 19,
+      "JD_EXPAND": 19,
+      "ITEM_MAKE": 6,
+      "BASE_SET": 6
+    },
+    {
+      "$id": 6,
+      "JS_SET": 6,
+      "JK_SET": 6,
+      "JD_SET": 5,
+      "JS_EXPAND": 20,
+      "JK_EXPAND": 20,
+      "JD_EXPAND": 20,
+      "ITEM_MAKE": 0,
+      "BASE_SET": 9
+    },
+    {
+      "$id": 7,
+      "JS_SET": 9,
+      "JK_SET": 7,
+      "JD_SET": 6,
+      "JS_EXPAND": 0,
+      "JK_EXPAND": 0,
+      "JD_EXPAND": 21,
+      "ITEM_MAKE": 0,
+      "BASE_SET": 12
+    },
+    {
+      "$id": 8,
+      "JS_SET": 10,
+      "JK_SET": 9,
+      "JD_SET": 7,
+      "JS_EXPAND": 0,
+      "JK_EXPAND": 0,
+      "JD_EXPAND": 0,
+      "ITEM_MAKE": 0,
+      "BASE_SET": 0
+    },
+    {
+      "$id": 9,
+      "JS_SET": 11,
+      "JK_SET": 10,
+      "JD_SET": 8,
+      "JS_EXPAND": 0,
+      "JK_EXPAND": 0,
+      "JD_EXPAND": 0,
+      "ITEM_MAKE": 0,
+      "BASE_SET": 0
+    },
+    {
+      "$id": 10,
+      "JS_SET": 12,
+      "JK_SET": 11,
+      "JD_SET": 9,
+      "JS_EXPAND": 0,
+      "JK_EXPAND": 0,
+      "JD_EXPAND": 0,
+      "ITEM_MAKE": 0,
+      "BASE_SET": 0
+    },
+    {
+      "$id": 11,
+      "JS_SET": 13,
+      "JK_SET": 12,
+      "JD_SET": 10,
+      "JS_EXPAND": 0,
+      "JK_EXPAND": 0,
+      "JD_EXPAND": 0,
+      "ITEM_MAKE": 0,
+      "BASE_SET": 0
+    },
+    {
+      "$id": 12,
+      "JS_SET": 0,
+      "JK_SET": 13,
+      "JD_SET": 11,
+      "JS_EXPAND": 0,
+      "JK_EXPAND": 0,
+      "JD_EXPAND": 0,
+      "ITEM_MAKE": 0,
+      "BASE_SET": 0
+    },
+    {
+      "$id": 13,
+      "JS_SET": 0,
+      "JK_SET": 0,
+      "JD_SET": 12,
+      "JS_EXPAND": 0,
+      "JK_EXPAND": 0,
+      "JD_EXPAND": 0,
+      "ITEM_MAKE": 0,
+      "BASE_SET": 0
+    },
+    {
+      "$id": 14,
+      "JS_SET": 0,
+      "JK_SET": 0,
+      "JD_SET": 13,
+      "JS_EXPAND": 0,
+      "JK_EXPAND": 0,
+      "JD_EXPAND": 0,
+      "ITEM_MAKE": 0,
+      "BASE_SET": 0
+    },
+    {
+      "$id": 15,
+      "JS_SET": 0,
+      "JK_SET": 0,
+      "JD_SET": 14,
+      "JS_EXPAND": 0,
+      "JK_EXPAND": 0,
+      "JD_EXPAND": 0,
+      "ITEM_MAKE": 0,
+      "BASE_SET": 0
+    }
+  ]
+}

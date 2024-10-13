@@ -1,0 +1,71 @@
+{
+  "schema": [
+    {
+      "name": "Slow",
+      "type": 1
+    },
+    {
+      "name": "Slowf",
+      "type": 1
+    },
+    {
+      "name": "Camera",
+      "type": 1
+    },
+    {
+      "name": "Waitf",
+      "type": 1
+    },
+    {
+      "name": "UIEffType",
+      "type": 1
+    },
+    {
+      "name": "UIStartf",
+      "type": 1
+    },
+    {
+      "name": "UIEndf",
+      "type": 1
+    },
+    {
+      "name": "Voicef",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Slow": 10,
+      "Slowf": 20,
+      "Camera": 0,
+      "Waitf": 0,
+      "UIEffType": 0,
+      "UIStartf": 0,
+      "UIEndf": 0,
+      "Voicef": 1
+    },
+    {
+      "$id": 2,
+      "Slow": 2,
+      "Slowf": 0,
+      "Camera": 1,
+      "Waitf": 60,
+      "UIEffType": 1,
+      "UIStartf": 10,
+      "UIEndf": 30,
+      "Voicef": 10
+    },
+    {
+      "$id": 3,
+      "Slow": 2,
+      "Slowf": 0,
+      "Camera": 2,
+      "Waitf": 60,
+      "UIEffType": 1,
+      "UIStartf": 20,
+      "UIEndf": 30,
+      "Voicef": 15
+    }
+  ]
+}

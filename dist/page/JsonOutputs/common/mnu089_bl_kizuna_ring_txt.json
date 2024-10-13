@@ -1,0 +1,119 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_stockslash",
+      "text_id": 1134
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_stockmax",
+      "text_id": 1133
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_stocknum",
+      "text_id": 1133
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_stockindex",
+      "text_id": 1135
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_questinfo1@01",
+      "text_id": 1362
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_questinfo2@01",
+      "text_id": 1363
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_ahislash",
+      "text_id": 1134
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_achimax",
+      "text_id": 1704
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_achinum",
+      "text_id": 1704
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_achindex",
+      "text_id": 1364
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_questtitle",
+      "text_id": 1365
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_questindex",
+      "text_id": 1366
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_skillname@01",
+      "text_id": 1138
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_questtitle2",
+      "text_id": 1365
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_idea_up@01",
+      "text_id": 1361
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_idea_up@02",
+      "text_id": 1361
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_questinfo1@02",
+      "text_id": 1362
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_questinfo2@02",
+      "text_id": 1363
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_skillname@02",
+      "text_id": 1138
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_bl_name",
+      "text_id": 1748
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_complete",
+      "text_id": 1789
+    }
+  ]
+}

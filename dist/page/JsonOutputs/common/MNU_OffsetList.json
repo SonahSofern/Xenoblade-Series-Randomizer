@@ -1,0 +1,1737 @@
+{
+  "schema": [
+    {
+      "name": "offs_x",
+      "type": 8
+    },
+    {
+      "name": "offs_y",
+      "type": 8
+    },
+    {
+      "name": "offs_z",
+      "type": 8
+    },
+    {
+      "name": "bone_name",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 2,
+      "offs_x": 0.0,
+      "offs_y": 2.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 3,
+      "offs_x": 0.0,
+      "offs_y": 1.7000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 4,
+      "offs_x": 0.0,
+      "offs_y": 1.100000023841858,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 5,
+      "offs_x": 0.0,
+      "offs_y": 1.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 6,
+      "offs_x": 0.0,
+      "offs_y": 0.20000000298023224,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 7,
+      "offs_x": 0.0,
+      "offs_y": 0.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 8,
+      "offs_x": 0.0,
+      "offs_y": 1.2999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 9,
+      "offs_x": 0.0,
+      "offs_y": 1.2999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 10,
+      "offs_x": 0.0,
+      "offs_y": 2.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 11,
+      "offs_x": 0.0,
+      "offs_y": 0.44999998807907104,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 12,
+      "offs_x": 0.0,
+      "offs_y": 0.6000000238418579,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 13,
+      "offs_x": 0.0,
+      "offs_y": 1.399999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 14,
+      "offs_x": 0.0,
+      "offs_y": 1.7999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 15,
+      "offs_x": 0.0,
+      "offs_y": 1.899999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 16,
+      "offs_x": 0.0,
+      "offs_y": 1.600000023841858,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 17,
+      "offs_x": 0.0,
+      "offs_y": 1.899999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 18,
+      "offs_x": 0.0,
+      "offs_y": 1.899999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 19,
+      "offs_x": 0.0,
+      "offs_y": 1.75,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 20,
+      "offs_x": 0.0,
+      "offs_y": 1.7999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 21,
+      "offs_x": 0.0,
+      "offs_y": 1.600000023841858,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 22,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 23,
+      "offs_x": 0.0,
+      "offs_y": 1.5,
+      "offs_z": 0.5,
+      "bone_name": ""
+    },
+    {
+      "$id": 24,
+      "offs_x": 0.0,
+      "offs_y": 0.800000011920929,
+      "offs_z": 0.5,
+      "bone_name": ""
+    },
+    {
+      "$id": 25,
+      "offs_x": 0.0,
+      "offs_y": 0.8999999761581421,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 26,
+      "offs_x": 0.0,
+      "offs_y": 1.100000023841858,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 27,
+      "offs_x": 0.0,
+      "offs_y": 1.2000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 28,
+      "offs_x": 0.0,
+      "offs_y": 2.4000000953674316,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 29,
+      "offs_x": 0.0,
+      "offs_y": 2.4000000953674316,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 30,
+      "offs_x": 0.0,
+      "offs_y": 1.899999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 31,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 32,
+      "offs_x": 0.0,
+      "offs_y": 2.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 33,
+      "offs_x": 0.0,
+      "offs_y": 2.200000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 34,
+      "offs_x": 0.0,
+      "offs_y": 2.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 35,
+      "offs_x": 0.0,
+      "offs_y": 1.7000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 36,
+      "offs_x": 0.0,
+      "offs_y": 1.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 37,
+      "offs_x": 0.0,
+      "offs_y": 1.7000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 38,
+      "offs_x": 0.0,
+      "offs_y": 1.899999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 39,
+      "offs_x": 0.0,
+      "offs_y": 2.200000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 40,
+      "offs_x": 0.0,
+      "offs_y": 1.7999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 41,
+      "offs_x": 0.0,
+      "offs_y": 1.7999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 42,
+      "offs_x": 0.0,
+      "offs_y": 1.7000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 43,
+      "offs_x": 0.0,
+      "offs_y": 0.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 44,
+      "offs_x": 0.0,
+      "offs_y": 0.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 45,
+      "offs_x": 0.0,
+      "offs_y": 2.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 46,
+      "offs_x": 0.0,
+      "offs_y": 1.899999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 47,
+      "offs_x": 0.0,
+      "offs_y": 2.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 48,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 49,
+      "offs_x": 0.0,
+      "offs_y": 1.7999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 50,
+      "offs_x": 0.0,
+      "offs_y": 1.7999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 51,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 52,
+      "offs_x": 0.0,
+      "offs_y": 2.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 53,
+      "offs_x": 0.0,
+      "offs_y": 2.200000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 54,
+      "offs_x": 0.0,
+      "offs_y": 1.7000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 55,
+      "offs_x": 0.0,
+      "offs_y": 1.7000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 56,
+      "offs_x": 0.0,
+      "offs_y": 1.600000023841858,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 57,
+      "offs_x": 0.0,
+      "offs_y": 1.7999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 58,
+      "offs_x": 0.0,
+      "offs_y": 1.7000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 59,
+      "offs_x": 0.0,
+      "offs_y": 1.899999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 60,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 61,
+      "offs_x": 0.0,
+      "offs_y": 1.7000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 62,
+      "offs_x": 0.0,
+      "offs_y": 1.7000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 63,
+      "offs_x": 0.0,
+      "offs_y": 2.0,
+      "offs_z": -0.699999988079071,
+      "bone_name": ""
+    },
+    {
+      "$id": 64,
+      "offs_x": 0.0,
+      "offs_y": 2.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 65,
+      "offs_x": 0.0,
+      "offs_y": 1.899999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 66,
+      "offs_x": 0.0,
+      "offs_y": 1.399999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 67,
+      "offs_x": 0.0,
+      "offs_y": 1.899999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 68,
+      "offs_x": 0.0,
+      "offs_y": 1.399999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 69,
+      "offs_x": 0.0,
+      "offs_y": 1.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 70,
+      "offs_x": 0.0,
+      "offs_y": 1.7999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 71,
+      "offs_x": 0.0,
+      "offs_y": 2.9000000953674316,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 72,
+      "offs_x": 0.0,
+      "offs_y": 1.899999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 73,
+      "offs_x": 0.0,
+      "offs_y": 2.200000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 74,
+      "offs_x": 0.0,
+      "offs_y": 2.299999952316284,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 75,
+      "offs_x": 0.0,
+      "offs_y": 2.299999952316284,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 76,
+      "offs_x": 0.0,
+      "offs_y": 2.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 77,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 78,
+      "offs_x": 0.0,
+      "offs_y": 2.4000000953674316,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 79,
+      "offs_x": 0.0,
+      "offs_y": 3.200000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 80,
+      "offs_x": 0.0,
+      "offs_y": 1.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 81,
+      "offs_x": 0.0,
+      "offs_y": 1.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 82,
+      "offs_x": 0.0,
+      "offs_y": 1.2999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 83,
+      "offs_x": 0.0,
+      "offs_y": 1.2999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 84,
+      "offs_x": 0.0,
+      "offs_y": 1.2999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 85,
+      "offs_x": 0.0,
+      "offs_y": 3.9000000953674316,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 86,
+      "offs_x": 0.0,
+      "offs_y": 3.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 87,
+      "offs_x": 0.0,
+      "offs_y": 3.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 88,
+      "offs_x": 0.0,
+      "offs_y": 3.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 89,
+      "offs_x": 0.0,
+      "offs_y": 3.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 90,
+      "offs_x": 0.0,
+      "offs_y": 4.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 91,
+      "offs_x": 0.0,
+      "offs_y": 4.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 92,
+      "offs_x": 0.0,
+      "offs_y": 4.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 93,
+      "offs_x": 0.0,
+      "offs_y": 1.5,
+      "offs_z": 0.0,
+      "bone_name": "JU_head"
+    },
+    {
+      "$id": 94,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 95,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 96,
+      "offs_x": 0.0,
+      "offs_y": 5.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 97,
+      "offs_x": 0.0,
+      "offs_y": 5.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 98,
+      "offs_x": 0.0,
+      "offs_y": 3.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 99,
+      "offs_x": 0.0,
+      "offs_y": 3.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 100,
+      "offs_x": 0.0,
+      "offs_y": 5.300000190734863,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 101,
+      "offs_x": 0.0,
+      "offs_y": 5.300000190734863,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 102,
+      "offs_x": 0.0,
+      "offs_y": 4.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 103,
+      "offs_x": 0.0,
+      "offs_y": 4.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 104,
+      "offs_x": 0.0,
+      "offs_y": 2.299999952316284,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 105,
+      "offs_x": 0.0,
+      "offs_y": 2.299999952316284,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 106,
+      "offs_x": 0.0,
+      "offs_y": 2.700000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 107,
+      "offs_x": 0.0,
+      "offs_y": 1.2000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 108,
+      "offs_x": 0.0,
+      "offs_y": 1.2000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 109,
+      "offs_x": 0.0,
+      "offs_y": 13.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 110,
+      "offs_x": 0.0,
+      "offs_y": 7.599999904632568,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 111,
+      "offs_x": 0.0,
+      "offs_y": 7.599999904632568,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 112,
+      "offs_x": 0.0,
+      "offs_y": 7.599999904632568,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 113,
+      "offs_x": 0.0,
+      "offs_y": 7.599999904632568,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 114,
+      "offs_x": 0.0,
+      "offs_y": 6.699999809265137,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 115,
+      "offs_x": 0.0,
+      "offs_y": 6.699999809265137,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 116,
+      "offs_x": 0.0,
+      "offs_y": 6.699999809265137,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 117,
+      "offs_x": 0.0,
+      "offs_y": 1.2000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 118,
+      "offs_x": 0.0,
+      "offs_y": 1.2000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 119,
+      "offs_x": 0.0,
+      "offs_y": 12.300000190734863,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 120,
+      "offs_x": 0.0,
+      "offs_y": 3.4000000953674316,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 121,
+      "offs_x": 0.0,
+      "offs_y": 1.2000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 122,
+      "offs_x": 0.0,
+      "offs_y": 1.2000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 123,
+      "offs_x": 0.0,
+      "offs_y": 3.299999952316284,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 124,
+      "offs_x": 0.0,
+      "offs_y": 3.299999952316284,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 125,
+      "offs_x": 0.0,
+      "offs_y": 1.2999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 126,
+      "offs_x": 0.0,
+      "offs_y": 1.2999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 127,
+      "offs_x": 0.0,
+      "offs_y": 1.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 128,
+      "offs_x": 0.0,
+      "offs_y": 2.200000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 129,
+      "offs_x": 0.0,
+      "offs_y": 2.200000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 130,
+      "offs_x": 0.0,
+      "offs_y": 1.2999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 131,
+      "offs_x": 0.0,
+      "offs_y": 3.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 132,
+      "offs_x": 0.0,
+      "offs_y": 4.800000190734863,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 133,
+      "offs_x": 0.0,
+      "offs_y": 3.4000000953674316,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 134,
+      "offs_x": 0.0,
+      "offs_y": 6.199999809265137,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 135,
+      "offs_x": 0.0,
+      "offs_y": 3.299999952316284,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 136,
+      "offs_x": 0.0,
+      "offs_y": 3.299999952316284,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 137,
+      "offs_x": 0.0,
+      "offs_y": 2.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 138,
+      "offs_x": 0.0,
+      "offs_y": 1.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 139,
+      "offs_x": 0.0,
+      "offs_y": 1.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 140,
+      "offs_x": 0.0,
+      "offs_y": 1.100000023841858,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 141,
+      "offs_x": 0.0,
+      "offs_y": 1.100000023841858,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 142,
+      "offs_x": 0.0,
+      "offs_y": 1.100000023841858,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 143,
+      "offs_x": 0.0,
+      "offs_y": 4.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 144,
+      "offs_x": 0.0,
+      "offs_y": 6.5,
+      "offs_z": 6.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 145,
+      "offs_x": 0.0,
+      "offs_y": 6.5,
+      "offs_z": 6.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 146,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 147,
+      "offs_x": 0.0,
+      "offs_y": 1.600000023841858,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 148,
+      "offs_x": 0.0,
+      "offs_y": 1.600000023841858,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 149,
+      "offs_x": 0.0,
+      "offs_y": 3.9000000953674316,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 150,
+      "offs_x": 0.0,
+      "offs_y": 1.2999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 151,
+      "offs_x": 0.0,
+      "offs_y": 1.2999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 152,
+      "offs_x": 0.0,
+      "offs_y": 1.2999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 153,
+      "offs_x": 0.0,
+      "offs_y": 1.2999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 154,
+      "offs_x": 0.0,
+      "offs_y": 1.2999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 155,
+      "offs_x": 0.0,
+      "offs_y": 2.4000000953674316,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 156,
+      "offs_x": 0.0,
+      "offs_y": 2.4000000953674316,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 157,
+      "offs_x": 0.0,
+      "offs_y": 7.900000095367432,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 158,
+      "offs_x": 0.0,
+      "offs_y": 7.900000095367432,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 159,
+      "offs_x": 0.0,
+      "offs_y": 10.5,
+      "offs_z": 9.5,
+      "bone_name": ""
+    },
+    {
+      "$id": 160,
+      "offs_x": 0.0,
+      "offs_y": 10.5,
+      "offs_z": 9.5,
+      "bone_name": ""
+    },
+    {
+      "$id": 161,
+      "offs_x": 0.0,
+      "offs_y": 1.399999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 162,
+      "offs_x": 0.0,
+      "offs_y": 1.399999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 163,
+      "offs_x": 0.0,
+      "offs_y": 32.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 164,
+      "offs_x": 0.0,
+      "offs_y": 7.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 165,
+      "offs_x": 0.0,
+      "offs_y": 1.7999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 166,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 167,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 168,
+      "offs_x": 0.0,
+      "offs_y": 4.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 169,
+      "offs_x": 0.0,
+      "offs_y": 4.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 170,
+      "offs_x": 0.0,
+      "offs_y": 2.200000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 171,
+      "offs_x": 0.0,
+      "offs_y": 2.200000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 172,
+      "offs_x": 0.0,
+      "offs_y": 2.700000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 173,
+      "offs_x": 0.0,
+      "offs_y": 2.700000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 174,
+      "offs_x": 0.0,
+      "offs_y": 1.399999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 175,
+      "offs_x": 0.0,
+      "offs_y": 1.399999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 176,
+      "offs_x": 0.0,
+      "offs_y": 0.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 177,
+      "offs_x": 0.0,
+      "offs_y": 1.899999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 178,
+      "offs_x": 0.0,
+      "offs_y": 1.7999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 179,
+      "offs_x": 0.0,
+      "offs_y": 9.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 180,
+      "offs_x": 0.0,
+      "offs_y": 9.399999618530273,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 181,
+      "offs_x": 0.0,
+      "offs_y": 1.5,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 182,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 183,
+      "offs_x": 0.0,
+      "offs_y": 5.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 184,
+      "offs_x": 0.0,
+      "offs_y": 2.200000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 185,
+      "offs_x": 0.0,
+      "offs_y": 6.300000190734863,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 186,
+      "offs_x": 0.0,
+      "offs_y": 7.599999904632568,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 187,
+      "offs_x": 0.0,
+      "offs_y": 4.699999809265137,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 188,
+      "offs_x": 0.0,
+      "offs_y": 6.400000095367432,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 189,
+      "offs_x": 0.0,
+      "offs_y": 1.7999999523162842,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 190,
+      "offs_x": 0.0,
+      "offs_y": 2.700000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 191,
+      "offs_x": 0.0,
+      "offs_y": 2.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 192,
+      "offs_x": 0.0,
+      "offs_y": 2.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 193,
+      "offs_x": 0.0,
+      "offs_y": 2.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 194,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 195,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 196,
+      "offs_x": 0.0,
+      "offs_y": 2.200000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 197,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 198,
+      "offs_x": 0.0,
+      "offs_y": 2.200000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 199,
+      "offs_x": 0.0,
+      "offs_y": 0.5,
+      "offs_z": 0.0,
+      "bone_name": "JU_head"
+    },
+    {
+      "$id": 200,
+      "offs_x": 0.0,
+      "offs_y": 0.8999999761581421,
+      "offs_z": 0.0,
+      "bone_name": "JU_head"
+    },
+    {
+      "$id": 201,
+      "offs_x": 0.0,
+      "offs_y": 2.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 202,
+      "offs_x": 0.0,
+      "offs_y": 2.700000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 203,
+      "offs_x": 0.0,
+      "offs_y": 2.700000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 204,
+      "offs_x": 0.0,
+      "offs_y": 2.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 205,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 206,
+      "offs_x": 0.0,
+      "offs_y": 1.7000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 207,
+      "offs_x": 0.0,
+      "offs_y": 11.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 208,
+      "offs_x": 0.0,
+      "offs_y": 2.4000000953674316,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 209,
+      "offs_x": 0.0,
+      "offs_y": 11.300000190734863,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 210,
+      "offs_x": 0.0,
+      "offs_y": 75.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 211,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 212,
+      "offs_x": 0.0,
+      "offs_y": 2.200000047683716,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 213,
+      "offs_x": 0.0,
+      "offs_y": 6.099999904632568,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 214,
+      "offs_x": 0.0,
+      "offs_y": 53.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 215,
+      "offs_x": 0.0,
+      "offs_y": 4.0,
+      "offs_z": 0.0,
+      "bone_name": "JD_hip"
+    },
+    {
+      "$id": 216,
+      "offs_x": 0.0,
+      "offs_y": 52.34000015258789,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 217,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 218,
+      "offs_x": 0.0,
+      "offs_y": 3.299999952316284,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 219,
+      "offs_x": 0.0,
+      "offs_y": 6.400000095367432,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 220,
+      "offs_x": 0.0,
+      "offs_y": 11.300000190734863,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 221,
+      "offs_x": 0.0,
+      "offs_y": 13.699999809265137,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 222,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 223,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 224,
+      "offs_x": 0.0,
+      "offs_y": 0.23999999463558197,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 225,
+      "offs_x": 0.0,
+      "offs_y": 3.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 226,
+      "offs_x": 0.0,
+      "offs_y": 1.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 227,
+      "offs_x": 0.0,
+      "offs_y": 1.600000023841858,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 228,
+      "offs_x": 0.0,
+      "offs_y": 1.600000023841858,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 229,
+      "offs_x": 0.0,
+      "offs_y": 1.899999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 230,
+      "offs_x": 0.0,
+      "offs_y": 1.0399999618530273,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 231,
+      "offs_x": 0.0,
+      "offs_y": 1.9199999570846558,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 232,
+      "offs_x": 0.0,
+      "offs_y": 2.0799999237060547,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 233,
+      "offs_x": 0.0,
+      "offs_y": 1.840000033378601,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 234,
+      "offs_x": 0.0,
+      "offs_y": 2.069999933242798,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 235,
+      "offs_x": 0.0,
+      "offs_y": 1.399999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 236,
+      "offs_x": 0.0,
+      "offs_y": 1.2000000476837158,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 237,
+      "offs_x": 0.0,
+      "offs_y": 0.699999988079071,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 238,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 239,
+      "offs_x": 0.0,
+      "offs_y": 1.399999976158142,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 240,
+      "offs_x": 0.0,
+      "offs_y": 2.299999952316284,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 241,
+      "offs_x": 0.0,
+      "offs_y": 2.0999999046325684,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 242,
+      "offs_x": 0.0,
+      "offs_y": 2.0,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 243,
+      "offs_x": 0.0,
+      "offs_y": 0.75,
+      "offs_z": 0.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 244,
+      "offs_x": 0.0,
+      "offs_y": 20.0,
+      "offs_z": 4.0,
+      "bone_name": ""
+    },
+    {
+      "$id": 245,
+      "offs_x": -0.5,
+      "offs_y": 9.0,
+      "offs_z": 8.0,
+      "bone_name": ""
+    }
+  ]
+}

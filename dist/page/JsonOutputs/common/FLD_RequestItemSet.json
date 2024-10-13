@@ -1,0 +1,73 @@
+{
+  "schema": [
+    {
+      "name": "ItemID1",
+      "type": 2
+    },
+    {
+      "name": "Count1",
+      "type": 1
+    },
+    {
+      "name": "ItemID2",
+      "type": 2
+    },
+    {
+      "name": "Count2",
+      "type": 1
+    },
+    {
+      "name": "ItemID3",
+      "type": 2
+    },
+    {
+      "name": "Count3",
+      "type": 1
+    },
+    {
+      "name": "ItemID4",
+      "type": 2
+    },
+    {
+      "name": "Count4",
+      "type": 1
+    },
+    {
+      "name": "ItemID5",
+      "type": 2
+    },
+    {
+      "name": "Count5",
+      "type": 1
+    },
+    {
+      "name": "Count5",
+      "type": 1
+    },
+    {
+      "name": "MapID",
+      "type": 2
+    },
+    {
+      "name": "NpcID",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "ItemID1": 8,
+      "Count1": 1,
+      "ItemID2": 0,
+      "Count2": 0,
+      "ItemID3": 0,
+      "Count3": 0,
+      "ItemID4": 0,
+      "Count4": 0,
+      "ItemID5": 0,
+      "Count5": 0,
+      "MapID": 0,
+      "NpcID": 0
+    }
+  ]
+}

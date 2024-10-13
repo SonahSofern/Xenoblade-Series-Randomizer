@@ -1,0 +1,236 @@
+{
+  "schema": [
+    {
+      "name": "mapId",
+      "type": 2
+    },
+    {
+      "name": "cond1",
+      "type": 2
+    },
+    {
+      "name": "pos1",
+      "type": 2
+    },
+    {
+      "name": "cond2",
+      "type": 2
+    },
+    {
+      "name": "pos2",
+      "type": 2
+    },
+    {
+      "name": "cond3",
+      "type": 2
+    },
+    {
+      "name": "pos3",
+      "type": 2
+    },
+    {
+      "name": "enter",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "mapId": 3,
+      "cond1": 1850,
+      "pos1": 1,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 2,
+      "mapId": 4,
+      "cond1": 1851,
+      "pos1": 2,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 3,
+      "mapId": 5,
+      "cond1": 1852,
+      "pos1": 3,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 4,
+      "mapId": 6,
+      "cond1": 1853,
+      "pos1": 4,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 5,
+      "mapId": 9,
+      "cond1": 1855,
+      "pos1": 5,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 6,
+      "mapId": 10,
+      "cond1": 1856,
+      "pos1": 6,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 7,
+      "mapId": 11,
+      "cond1": 1857,
+      "pos1": 7,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 8,
+      "mapId": 12,
+      "cond1": 1858,
+      "pos1": 8,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 2383
+    },
+    {
+      "$id": 9,
+      "mapId": 13,
+      "cond1": 1859,
+      "pos1": 9,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 10,
+      "mapId": 14,
+      "cond1": 1860,
+      "pos1": 10,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 11,
+      "mapId": 15,
+      "cond1": 1861,
+      "pos1": 11,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 12,
+      "mapId": 16,
+      "cond1": 2693,
+      "pos1": 12,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 13,
+      "mapId": 18,
+      "cond1": 1863,
+      "pos1": 13,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 14,
+      "mapId": 20,
+      "cond1": 1864,
+      "pos1": 14,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 15,
+      "mapId": 21,
+      "cond1": 1865,
+      "pos1": 15,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 16,
+      "mapId": 58,
+      "cond1": 2921,
+      "pos1": 0,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 17,
+      "mapId": 52,
+      "cond1": 1,
+      "pos1": 0,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    },
+    {
+      "$id": 18,
+      "mapId": 53,
+      "cond1": 3710,
+      "pos1": 0,
+      "cond2": 0,
+      "pos2": 0,
+      "cond3": 0,
+      "pos3": 0,
+      "enter": 0
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schema": [
+    {
+      "name": "Condition",
+      "type": 2
+    },
+    {
+      "name": "EventID",
+      "type": 2
+    },
+    {
+      "name": "KizunaTalkID",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Condition": 0,
+      "EventID": 0,
+      "KizunaTalkID": 0
+    }
+  ]
+}

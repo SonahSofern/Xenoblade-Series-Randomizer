@@ -1,0 +1,246 @@
+{
+  "schema": [
+    {
+      "name": "id",
+      "type": 5
+    },
+    {
+      "name": "blade",
+      "type": 5
+    },
+    {
+      "name": "resourceR",
+      "type": 7
+    },
+    {
+      "name": "resourceL",
+      "type": 7
+    },
+    {
+      "name": "scenarioMin",
+      "type": 6
+    },
+    {
+      "name": "scenarioMax",
+      "type": 6
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "id": 1,
+      "blade": 1012,
+      "resourceR": "wp010101",
+      "resourceL": "",
+      "scenarioMin": 0,
+      "scenarioMax": 1025
+    },
+    {
+      "$id": 2,
+      "id": 1,
+      "blade": 1001,
+      "resourceR": "wp010101",
+      "resourceL": "",
+      "scenarioMin": 1025,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 3,
+      "id": 1,
+      "blade": 1002,
+      "resourceR": "wp011101",
+      "resourceL": "",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 4,
+      "id": 1,
+      "blade": 1003,
+      "resourceR": "wp012101",
+      "resourceL": "",
+      "scenarioMin": 0,
+      "scenarioMax": 10042
+    },
+    {
+      "$id": 5,
+      "id": 1,
+      "blade": 1012,
+      "resourceR": "wp012101",
+      "resourceL": "",
+      "scenarioMin": 10042,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 6,
+      "id": 1,
+      "blade": 1011,
+      "resourceR": "wp020101",
+      "resourceL": "",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 7,
+      "id": 1,
+      "blade": 1008,
+      "resourceR": "wp090101_r",
+      "resourceL": "wp090101_l",
+      "scenarioMin": 4001,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 8,
+      "id": 2,
+      "blade": 1004,
+      "resourceR": "wp030101_r",
+      "resourceL": "wp030101_l",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 9,
+      "id": 3,
+      "blade": 1010,
+      "resourceR": "wp080101",
+      "resourceL": "",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 10,
+      "id": 4,
+      "blade": 1005,
+      "resourceR": "wp040101",
+      "resourceL": "",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 11,
+      "id": 4,
+      "blade": 1006,
+      "resourceR": "wp050101_r",
+      "resourceL": "wp050101_l",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 12,
+      "id": 5,
+      "blade": 1008,
+      "resourceR": "wp090101_r",
+      "resourceL": "wp090101_l",
+      "scenarioMin": 0,
+      "scenarioMax": 4001
+    },
+    {
+      "$id": 13,
+      "id": 6,
+      "blade": 1009,
+      "resourceR": "wp070101_r",
+      "resourceL": "wp070101_l",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 14,
+      "id": 7,
+      "blade": 1013,
+      "resourceR": "we021201",
+      "resourceL": "",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 15,
+      "id": 8,
+      "blade": 1042,
+      "resourceR": "we021301",
+      "resourceL": "",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 16,
+      "id": 17,
+      "blade": 1124,
+      "resourceR": "wp727011",
+      "resourceL": "",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 17,
+      "id": 18,
+      "blade": 1125,
+      "resourceR": "wp728011",
+      "resourceL": "",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 18,
+      "id": 19,
+      "blade": 1126,
+      "resourceR": "wp729011_ｒ",
+      "resourceL": "wp729011_l",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 19,
+      "id": 20,
+      "blade": 1127,
+      "resourceR": "wp718011",
+      "resourceL": "",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 20,
+      "id": 21,
+      "blade": 1128,
+      "resourceR": "wp730011",
+      "resourceL": "",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 21,
+      "id": 22,
+      "blade": 1129,
+      "resourceR": "wp701011",
+      "resourceL": "",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 22,
+      "id": 23,
+      "blade": 1130,
+      "resourceR": "wp731011_r",
+      "resourceL": "wp731011_l",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 23,
+      "id": 24,
+      "blade": 1131,
+      "resourceR": "wp707011_r",
+      "resourceL": "wp707011_l",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    },
+    {
+      "$id": 24,
+      "id": 25,
+      "blade": 1132,
+      "resourceR": "wp714011",
+      "resourceL": "",
+      "scenarioMin": 0,
+      "scenarioMax": 0
+    }
+  ]
+}

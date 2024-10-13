@@ -1,0 +1,210 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "pointer_speed",
+      "type": 4
+    },
+    {
+      "name": "snap",
+      "type": 1
+    },
+    {
+      "name": "select_text",
+      "type": 2
+    },
+    {
+      "name": "key_sort",
+      "type": 1
+    },
+    {
+      "name": "pad_decide",
+      "type": 4
+    },
+    {
+      "name": "pad_cancel",
+      "type": 4
+    },
+    {
+      "name": "pad_A",
+      "type": 4
+    },
+    {
+      "name": "pad_B",
+      "type": 4
+    },
+    {
+      "name": "pad_X",
+      "type": 4
+    },
+    {
+      "name": "pad_Y",
+      "type": 4
+    },
+    {
+      "name": "pad_L1",
+      "type": 4
+    },
+    {
+      "name": "pad_L2",
+      "type": 4
+    },
+    {
+      "name": "pad_R1",
+      "type": 4
+    },
+    {
+      "name": "pad_R2",
+      "type": 4
+    },
+    {
+      "name": "pad_START",
+      "type": 4
+    },
+    {
+      "name": "pad_SELECT",
+      "type": 4
+    },
+    {
+      "name": "pad_UP",
+      "type": 4
+    },
+    {
+      "name": "pad_DOWN",
+      "type": 4
+    },
+    {
+      "name": "pad_RIGHT",
+      "type": 4
+    },
+    {
+      "name": "pad_LEFT",
+      "type": 4
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "name": "INPUT_FREE_WORLD_MAP",
+      "pointer_speed": 8,
+      "snap": 1,
+      "select_text": 26,
+      "key_sort": 0,
+      "pad_decide": 0,
+      "pad_cancel": 0,
+      "pad_A": 0,
+      "pad_B": 0,
+      "pad_X": 0,
+      "pad_Y": 0,
+      "pad_L1": 0,
+      "pad_L2": 0,
+      "pad_R1": 0,
+      "pad_R2": 0,
+      "pad_START": 6,
+      "pad_SELECT": 0,
+      "pad_UP": 0,
+      "pad_DOWN": 0,
+      "pad_RIGHT": 0,
+      "pad_LEFT": 0
+    },
+    {
+      "$id": 2,
+      "name": "INPUT_FREE_ZONE_MAP",
+      "pointer_speed": 12,
+      "snap": 1,
+      "select_text": 26,
+      "key_sort": 0,
+      "pad_decide": 0,
+      "pad_cancel": 0,
+      "pad_A": 0,
+      "pad_B": 0,
+      "pad_X": 0,
+      "pad_Y": 0,
+      "pad_L1": 0,
+      "pad_L2": 78,
+      "pad_R1": 0,
+      "pad_R2": 77,
+      "pad_START": 6,
+      "pad_SELECT": 0,
+      "pad_UP": 0,
+      "pad_DOWN": 0,
+      "pad_RIGHT": 0,
+      "pad_LEFT": 0
+    },
+    {
+      "$id": 3,
+      "name": "INPUT_FREE_KIZUNA_RING",
+      "pointer_speed": 18,
+      "snap": 1,
+      "select_text": 41,
+      "key_sort": 0,
+      "pad_decide": 0,
+      "pad_cancel": 0,
+      "pad_A": 0,
+      "pad_B": 0,
+      "pad_X": 0,
+      "pad_Y": 0,
+      "pad_L1": 0,
+      "pad_L2": 0,
+      "pad_R1": 0,
+      "pad_R2": 0,
+      "pad_START": 0,
+      "pad_SELECT": 0,
+      "pad_UP": 0,
+      "pad_DOWN": 0,
+      "pad_RIGHT": 0,
+      "pad_LEFT": 0
+    },
+    {
+      "$id": 4,
+      "name": "INPUT_FREE_KIZUNA_RING_BL",
+      "pointer_speed": 18,
+      "snap": 1,
+      "select_text": 41,
+      "key_sort": 0,
+      "pad_decide": 0,
+      "pad_cancel": 0,
+      "pad_A": 0,
+      "pad_B": 0,
+      "pad_X": 0,
+      "pad_Y": 0,
+      "pad_L1": 0,
+      "pad_L2": 0,
+      "pad_R1": 0,
+      "pad_R2": 0,
+      "pad_START": 0,
+      "pad_SELECT": 0,
+      "pad_UP": 0,
+      "pad_DOWN": 0,
+      "pad_RIGHT": 0,
+      "pad_LEFT": 0
+    },
+    {
+      "$id": 5,
+      "name": "INPUT_FREE_BL_BOOK",
+      "pointer_speed": 12,
+      "snap": 0,
+      "select_text": 26,
+      "key_sort": 1,
+      "pad_decide": 0,
+      "pad_cancel": 5,
+      "pad_A": 111,
+      "pad_B": 0,
+      "pad_X": 110,
+      "pad_Y": 109,
+      "pad_L1": 0,
+      "pad_L2": 108,
+      "pad_R1": 0,
+      "pad_R2": 107,
+      "pad_START": 0,
+      "pad_SELECT": 0,
+      "pad_UP": 0,
+      "pad_DOWN": 0,
+      "pad_RIGHT": 0,
+      "pad_LEFT": 0
+    }
+  ]
+}

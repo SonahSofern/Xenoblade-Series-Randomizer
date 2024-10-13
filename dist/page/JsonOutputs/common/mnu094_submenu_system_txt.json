@@ -1,0 +1,44 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_item@01",
+      "text_id": 1523
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_item@02",
+      "text_id": 1524
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_item@03",
+      "text_id": 1525
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_item_info",
+      "text_id": 1753
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_item@04",
+      "text_id": 1954
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_item@05",
+      "text_id": 1523
+    }
+  ]
+}

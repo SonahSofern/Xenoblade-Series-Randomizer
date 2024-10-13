@@ -1,0 +1,114 @@
+{
+  "schema": [
+    {
+      "name": "layer",
+      "type": 2
+    },
+    {
+      "name": "useCond",
+      "type": 2
+    },
+    {
+      "name": "guide",
+      "type": 2
+    },
+    {
+      "name": "title",
+      "type": 2
+    },
+    {
+      "name": "titleIcon",
+      "type": 2
+    },
+    {
+      "name": "subTitle",
+      "type": 2
+    },
+    {
+      "name": "resName",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "layer": 301,
+      "useCond": 37,
+      "guide": 47,
+      "title": 1,
+      "titleIcon": 0,
+      "subTitle": 1,
+      "resName": "mnu076_char_menu"
+    },
+    {
+      "$id": 2,
+      "layer": 49,
+      "useCond": 38,
+      "guide": 48,
+      "title": 2,
+      "titleIcon": 1,
+      "subTitle": 11,
+      "resName": "mnu018_world_map"
+    },
+    {
+      "$id": 3,
+      "layer": 47,
+      "useCond": 39,
+      "guide": 49,
+      "title": 4,
+      "titleIcon": 3,
+      "subTitle": 13,
+      "resName": "mnu020_quest_list"
+    },
+    {
+      "$id": 4,
+      "layer": 303,
+      "useCond": 40,
+      "guide": 74,
+      "title": 12,
+      "titleIcon": 5,
+      "subTitle": 32,
+      "resName": "mnu020_quest_list"
+    },
+    {
+      "$id": 5,
+      "layer": 57,
+      "useCond": 41,
+      "guide": 52,
+      "title": 3,
+      "titleIcon": 2,
+      "subTitle": 12,
+      "resName": "mnu048_itemlist_main"
+    },
+    {
+      "$id": 6,
+      "layer": 67,
+      "useCond": 42,
+      "guide": 54,
+      "title": 8,
+      "titleIcon": 7,
+      "subTitle": 17,
+      "resName": "mnu094_submenu_system"
+    },
+    {
+      "$id": 7,
+      "layer": 70,
+      "useCond": 43,
+      "guide": 69,
+      "title": 10,
+      "titleIcon": 4,
+      "subTitle": 29,
+      "resName": "mnu104_gift_box"
+    },
+    {
+      "$id": 8,
+      "layer": 71,
+      "useCond": 43,
+      "guide": 75,
+      "title": 11,
+      "titleIcon": 8,
+      "subTitle": 30,
+      "resName": "mnu105_announce"
+    }
+  ]
+}

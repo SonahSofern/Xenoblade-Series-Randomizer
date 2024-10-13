@@ -1,0 +1,288 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "value",
+      "type": 5
+    },
+    {
+      "name": "id",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "name": "",
+      "value": 0,
+      "id": "RAND_NONE"
+    },
+    {
+      "$id": 1,
+      "name": "気に掛け",
+      "value": 1,
+      "id": "RAND_NOTICE"
+    },
+    {
+      "$id": 2,
+      "name": "話題",
+      "value": 2,
+      "id": "RAND_TOPIC"
+    },
+    {
+      "$id": 3,
+      "name": "挨拶",
+      "value": 3,
+      "id": "RAND_GREET"
+    },
+    {
+      "$id": 4,
+      "name": "興味",
+      "value": 4,
+      "id": "RAND_INTREST"
+    },
+    {
+      "$id": 5,
+      "name": "受注1",
+      "value": 5,
+      "id": "RAND_ORDER1"
+    },
+    {
+      "$id": 6,
+      "name": "受注2",
+      "value": 6,
+      "id": "RAND_ORDER2"
+    },
+    {
+      "$id": 7,
+      "name": "終了1",
+      "value": 7,
+      "id": "RAND_END1"
+    },
+    {
+      "$id": 8,
+      "name": "終了2",
+      "value": 8,
+      "id": "RAND_END2"
+    },
+    {
+      "$id": 9,
+      "name": "同情",
+      "value": 9,
+      "id": "RAND_SYMPATHY"
+    },
+    {
+      "$id": 10,
+      "name": "悩む",
+      "value": 10,
+      "id": "RAND_WARRY"
+    },
+    {
+      "$id": 11,
+      "name": "分岐",
+      "value": 11,
+      "id": "RAND_SELECT"
+    },
+    {
+      "$id": 12,
+      "name": "救い",
+      "value": 12,
+      "id": "RAND_HELP1"
+    },
+    {
+      "$id": 13,
+      "name": "救い2",
+      "value": 13,
+      "id": "RAND_HELP2"
+    },
+    {
+      "$id": 14,
+      "name": "傭兵団",
+      "value": 14,
+      "id": "RAND_MERCENARY"
+    },
+    {
+      "$id": 15,
+      "name": "納得",
+      "value": 15,
+      "id": "RAND_UNDERSTAND"
+    },
+    {
+      "$id": 16,
+      "name": "了解",
+      "value": 16,
+      "id": "RAND_ROGER"
+    },
+    {
+      "$id": 17,
+      "name": "疑問",
+      "value": 17,
+      "id": "RAND_DOUBT"
+    },
+    {
+      "$id": 18,
+      "name": "感謝",
+      "value": 18,
+      "id": "RAND_THANKS"
+    },
+    {
+      "$id": 19,
+      "name": "無言",
+      "value": 19,
+      "id": "RAND_SILENCE"
+    },
+    {
+      "$id": 20,
+      "name": "呆れる",
+      "value": 20,
+      "id": "RAND_AMAZE"
+    },
+    {
+      "$id": 21,
+      "name": "参上",
+      "value": 21,
+      "id": "RAND_OK1"
+    },
+    {
+      "$id": 22,
+      "name": "心配",
+      "value": 22,
+      "id": "RAND_OK2"
+    },
+    {
+      "$id": 23,
+      "name": "謙虚",
+      "value": 23,
+      "id": "RAND_MODEST"
+    },
+    {
+      "$id": 24,
+      "name": "肯定",
+      "value": 24,
+      "id": "RAND_YES"
+    },
+    {
+      "$id": 25,
+      "name": "否定",
+      "value": 25,
+      "id": "RAND_NO"
+    },
+    {
+      "$id": 26,
+      "name": "謝罪",
+      "value": 26,
+      "id": "RAND_SORRY"
+    },
+    {
+      "$id": 27,
+      "name": "名乗り",
+      "value": 27,
+      "id": "RAND_NAME"
+    },
+    {
+      "$id": 28,
+      "name": "断る",
+      "value": 28,
+      "id": "RAND_REJECTION"
+    },
+    {
+      "$id": 29,
+      "name": "帰還",
+      "value": 29,
+      "id": "RAND_BACK"
+    },
+    {
+      "$id": 30,
+      "name": "驚く1",
+      "value": 30,
+      "id": "RAND_SURPRISE1"
+    },
+    {
+      "$id": 31,
+      "name": "驚く2",
+      "value": 31,
+      "id": "RAND_SURPRISE2"
+    },
+    {
+      "$id": 32,
+      "name": "了承",
+      "value": 32,
+      "id": "RAND_NOPROBLEM"
+    },
+    {
+      "$id": 33,
+      "name": "得意気",
+      "value": 33,
+      "id": "RAND_OFFCOURCE"
+    },
+    {
+      "$id": 34,
+      "name": "渡す",
+      "value": 34,
+      "id": "RAND_PRESENT"
+    },
+    {
+      "$id": 35,
+      "name": "説明",
+      "value": 35,
+      "id": "RAND_EXPLANATION"
+    },
+    {
+      "$id": 36,
+      "name": "ツッコミ",
+      "value": 36,
+      "id": "RAND_TSUKKOMI"
+    },
+    {
+      "$id": 37,
+      "name": "調べる1",
+      "value": 37,
+      "id": "RAND_CHECK1"
+    },
+    {
+      "$id": 38,
+      "name": "調べる2",
+      "value": 38,
+      "id": "RAND_CHECK2"
+    },
+    {
+      "$id": 39,
+      "name": "感心",
+      "value": 39,
+      "id": "RAND_ADMIRATION"
+    },
+    {
+      "$id": 40,
+      "name": "小達成",
+      "value": 40,
+      "id": "RAND_CLEAR"
+    },
+    {
+      "$id": 41,
+      "name": "情報収集1",
+      "value": 41,
+      "id": "RAND_INFO1"
+    },
+    {
+      "$id": 42,
+      "name": "情報収集2",
+      "value": 42,
+      "id": "RAND_INFO2"
+    },
+    {
+      "$id": 43,
+      "name": "情報収集3",
+      "value": 43,
+      "id": "RAND_INFO3"
+    },
+    {
+      "$id": 44,
+      "name": "情報収集4",
+      "value": 44,
+      "id": "RAND_INFO4"
+    }
+  ]
+}

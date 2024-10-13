@@ -1,0 +1,59 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "value",
+      "type": 5
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "name": "POSCV_WARP",
+      "value": 0
+    },
+    {
+      "$id": 1,
+      "name": "POSCV_WALK",
+      "value": 1
+    },
+    {
+      "$id": 2,
+      "name": "POSCV_RUN",
+      "value": 2
+    },
+    {
+      "$id": 3,
+      "name": "POSCV_WALK_ST",
+      "value": 3
+    },
+    {
+      "$id": 4,
+      "name": "POSCV_RUN_ST",
+      "value": 4
+    },
+    {
+      "$id": 5,
+      "name": "POSCV_WALK_END",
+      "value": 5
+    },
+    {
+      "$id": 6,
+      "name": "POSCV_RUN_END",
+      "value": 6
+    },
+    {
+      "$id": 7,
+      "name": "POSCV_WALK_SYNC",
+      "value": 7
+    },
+    {
+      "$id": 8,
+      "name": "POSCV_RUN_SYNC",
+      "value": 8
+    }
+  ]
+}

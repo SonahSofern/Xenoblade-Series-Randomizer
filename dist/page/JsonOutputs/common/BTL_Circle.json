@@ -1,0 +1,114 @@
+{
+  "schema": [
+    {
+      "name": "Point",
+      "type": 1
+    },
+    {
+      "name": "Radius",
+      "type": 1
+    },
+    {
+      "name": "Damage",
+      "type": 2
+    },
+    {
+      "name": "SubType",
+      "type": 1
+    },
+    {
+      "name": "SubParam",
+      "type": 2
+    },
+    {
+      "name": "Target",
+      "type": 1
+    },
+    {
+      "name": "Interval",
+      "type": 1
+    },
+    {
+      "name": "Lifespan",
+      "type": 2
+    },
+    {
+      "name": "Effect",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Point": 0,
+      "Radius": 6,
+      "Damage": 150,
+      "SubType": 0,
+      "SubParam": 0,
+      "Target": 0,
+      "Interval": 60,
+      "Lifespan": 600,
+      "Effect": "cmn_020_006"
+    },
+    {
+      "$id": 2,
+      "Point": 1,
+      "Radius": 4,
+      "Damage": 1000,
+      "SubType": 0,
+      "SubParam": 0,
+      "Target": 5,
+      "Interval": 60,
+      "Lifespan": 600,
+      "Effect": "cmn_020_005"
+    },
+    {
+      "$id": 3,
+      "Point": 0,
+      "Radius": 6,
+      "Damage": 500,
+      "SubType": 0,
+      "SubParam": 0,
+      "Target": 0,
+      "Interval": 60,
+      "Lifespan": 600,
+      "Effect": "cmn_020_006"
+    },
+    {
+      "$id": 4,
+      "Point": 0,
+      "Radius": 6,
+      "Damage": 300,
+      "SubType": 0,
+      "SubParam": 0,
+      "Target": 0,
+      "Interval": 60,
+      "Lifespan": 600,
+      "Effect": "cmn_020_006"
+    },
+    {
+      "$id": 5,
+      "Point": 2,
+      "Radius": 6,
+      "Damage": 300,
+      "SubType": 1,
+      "SubParam": 25,
+      "Target": 1,
+      "Interval": 60,
+      "Lifespan": 600,
+      "Effect": "cmn_500_002"
+    },
+    {
+      "$id": 6,
+      "Point": 2,
+      "Radius": 5,
+      "Damage": 500,
+      "SubType": 0,
+      "SubParam": 0,
+      "Target": 0,
+      "Interval": 30,
+      "Lifespan": 300,
+      "Effect": "cmn_020_006"
+    }
+  ]
+}

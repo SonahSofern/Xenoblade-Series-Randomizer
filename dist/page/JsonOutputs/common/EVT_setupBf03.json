@@ -1,0 +1,3117 @@
+{
+  "schema": [
+    {
+      "name": "setupName",
+      "type": 7
+    },
+    {
+      "name": "objName",
+      "type": 7
+    },
+    {
+      "name": "objType",
+      "type": 4
+    },
+    {
+      "name": "objID",
+      "type": 7
+    },
+    {
+      "name": "objModel",
+      "type": 7
+    },
+    {
+      "name": "wpnBlade",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 13001,
+      "setupName": "bf03_010_100",
+      "objName": "モノケロス",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj180001",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13002,
+      "setupName": "bf03_030_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13003,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13004,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13005,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13006,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13007,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13008,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13009,
+      "setupName": "",
+      "objName": "雲海羅針盤",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj102001",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13010,
+      "setupName": "bf03_040_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13011,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13012,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13013,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13014,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13015,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13016,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13017,
+      "setupName": "",
+      "objName": "ウモン",
+      "objType": 5,
+      "objID": "RSC_NP004601",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13018,
+      "setupName": "",
+      "objName": "ウモン所持の船",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj180003",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13019,
+      "setupName": "bf03_040_150",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13020,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13021,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13022,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13023,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13024,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13025,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13026,
+      "setupName": "",
+      "objName": "ウモン",
+      "objType": 5,
+      "objID": "RSC_NP004601",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13027,
+      "setupName": "",
+      "objName": "ウモン所持の船",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj180003",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13028,
+      "setupName": "bf03_060_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13029,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13030,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13031,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13032,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13033,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13034,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13035,
+      "setupName": "",
+      "objName": "携帯ランプ",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj103005",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13036,
+      "setupName": "bf03_080_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13037,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13038,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13039,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13040,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13041,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13042,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13043,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13044,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13045,
+      "setupName": "",
+      "objName": "ユウ",
+      "objType": 5,
+      "objID": "RSC_NP003401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13046,
+      "setupName": "",
+      "objName": "ユウブレイド",
+      "objType": 5,
+      "objID": "RSC_NP20010141",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13047,
+      "setupName": "",
+      "objName": "ズオ",
+      "objType": 5,
+      "objID": "RSC_NP003501",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13048,
+      "setupName": "",
+      "objName": "ズオブレイド",
+      "objType": 5,
+      "objID": "RSC_NP20010142",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13049,
+      "setupName": "",
+      "objName": "ユウ槍",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/wp/wp110101",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13050,
+      "setupName": "",
+      "objName": "ズオ斧",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/wp/wp100101",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13051,
+      "setupName": "bf03_110_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13052,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13053,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13054,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13055,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13056,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13057,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13058,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13059,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13060,
+      "setupName": "",
+      "objName": "ユウ",
+      "objType": 5,
+      "objID": "RSC_NP003401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13061,
+      "setupName": "",
+      "objName": "ユウブレイド",
+      "objType": 5,
+      "objID": "RSC_NP20010141",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13062,
+      "setupName": "",
+      "objName": "ズオ",
+      "objType": 5,
+      "objID": "RSC_NP003501",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13063,
+      "setupName": "",
+      "objName": "ズオブレイド",
+      "objType": 5,
+      "objID": "RSC_NP20010142",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13064,
+      "setupName": "",
+      "objName": "グーラ少年A",
+      "objType": 5,
+      "objID": "RSC_NP411001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13065,
+      "setupName": "",
+      "objName": "グーラ少女",
+      "objType": 5,
+      "objID": "RSC_NP412001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13066,
+      "setupName": "",
+      "objName": "グーラ少年B",
+      "objType": 5,
+      "objID": "RSC_NP411001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13067,
+      "setupName": "",
+      "objName": "ノポン少年",
+      "objType": 5,
+      "objID": "RSC_NP421001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13068,
+      "setupName": "",
+      "objName": "ユウ槍",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/wp/wp110101",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13069,
+      "setupName": "",
+      "objName": "ズオ斧",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/wp/wp100101",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13070,
+      "setupName": "bf03_120_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13071,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13072,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13073,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13074,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13075,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13076,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13077,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13078,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13079,
+      "setupName": "",
+      "objName": "インヴィディア料理A",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170007",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13080,
+      "setupName": "",
+      "objName": "インヴィディア料理B",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170007",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13081,
+      "setupName": "",
+      "objName": "インヴィディア料理C",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170007",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13082,
+      "setupName": "",
+      "objName": "インヴィディア料理D",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170007",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13083,
+      "setupName": "",
+      "objName": "インヴィディア料理E",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170007",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13084,
+      "setupName": "",
+      "objName": "インヴィディア料理F",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170007",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13085,
+      "setupName": "",
+      "objName": "インヴィディア料理G",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170007",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13086,
+      "setupName": "",
+      "objName": "パンかごA",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170019",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13087,
+      "setupName": "",
+      "objName": "パンかごB",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170019",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13088,
+      "setupName": "",
+      "objName": "パンかごC",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170019",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13089,
+      "setupName": "",
+      "objName": "パンA",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170009",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13090,
+      "setupName": "",
+      "objName": "パンB",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170009",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13091,
+      "setupName": "",
+      "objName": "パンC",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170009",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13092,
+      "setupName": "",
+      "objName": "パンD",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170009",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13093,
+      "setupName": "",
+      "objName": "ナイフA",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170002",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13094,
+      "setupName": "",
+      "objName": "ナイフB",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170002",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13095,
+      "setupName": "",
+      "objName": "パン（トラ用）",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170009",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13096,
+      "setupName": "",
+      "objName": "フォークA",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170003",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13097,
+      "setupName": "",
+      "objName": "フォークB",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170003",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13098,
+      "setupName": "",
+      "objName": "フォークC",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj170003",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13099,
+      "setupName": "bf03_130_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13100,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13101,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13102,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13103,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13104,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13105,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13106,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13107,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13108,
+      "setupName": "bf03_130_150",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13109,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13110,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13111,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13112,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13113,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13114,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13115,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13116,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13117,
+      "setupName": "bf03_150_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13118,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13119,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13120,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13121,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13122,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13123,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13124,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13125,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13126,
+      "setupName": "bf03_160_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13127,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13128,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13129,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13130,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13131,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13132,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13133,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13134,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13135,
+      "setupName": "",
+      "objName": "クモ",
+      "objType": 6,
+      "objID": "boss_ma07a05",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13136,
+      "setupName": "",
+      "objName": "ヂカラオ",
+      "objType": 4,
+      "objID": "BLADE_RARE_003",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13137,
+      "setupName": "",
+      "objName": "アルスの亡骸",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj400045",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13138,
+      "setupName": "bf03_170_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13139,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13140,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13141,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13142,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13143,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13144,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13145,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13146,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13147,
+      "setupName": "",
+      "objName": "クモ",
+      "objType": 6,
+      "objID": "boss_ma07a05",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13148,
+      "setupName": "",
+      "objName": "ヂカラオ",
+      "objType": 4,
+      "objID": "BLADE_RARE_003",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13149,
+      "setupName": "",
+      "objName": "コアクリスタルA",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj160101",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13150,
+      "setupName": "",
+      "objName": "コアクリスタルB",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj160101",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13151,
+      "setupName": "",
+      "objName": "アルスの亡骸",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj400045",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13152,
+      "setupName": "bf03_180_150",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13153,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13154,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13155,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13156,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13157,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13158,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13159,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13160,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13161,
+      "setupName": "",
+      "objName": "ユウ",
+      "objType": 5,
+      "objID": "RSC_NP003401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13162,
+      "setupName": "",
+      "objName": "ユウブレイド",
+      "objType": 5,
+      "objID": "RSC_NP20010141",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13163,
+      "setupName": "",
+      "objName": "ズオ",
+      "objType": 5,
+      "objID": "RSC_NP003501",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13164,
+      "setupName": "",
+      "objName": "ズオブレイド",
+      "objType": 5,
+      "objID": "RSC_NP20010142",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13165,
+      "setupName": "",
+      "objName": "ヨシツネ",
+      "objType": 5,
+      "objID": "RSC_NP100501",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13166,
+      "setupName": "",
+      "objName": "カムイ",
+      "objType": 4,
+      "objID": "BLADE_KAMUI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13167,
+      "setupName": "",
+      "objName": "ユウ槍",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/wp/wp110101",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13168,
+      "setupName": "",
+      "objName": "ズオ斧",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/wp/wp100101",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13169,
+      "setupName": "",
+      "objName": "ヨシツネ武器_L",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/we/we020101_l",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13170,
+      "setupName": "",
+      "objName": "ヨシツネ武器_R",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/we/we020101_r",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13171,
+      "setupName": "bf03_200_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13172,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13173,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13174,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13175,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13176,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13177,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13178,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13179,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13180,
+      "setupName": "bf03_210_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13181,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13182,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13183,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13184,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13185,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13186,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13187,
+      "setupName": "bf03_220_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13188,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13189,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13190,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13191,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13192,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13193,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13194,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13195,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13196,
+      "setupName": "bf03_230_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13197,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13198,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13199,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13200,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13201,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13202,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13203,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13204,
+      "setupName": "",
+      "objName": "ジーク",
+      "objType": 3,
+      "objID": "DRIVER_SIEG2",
+      "objModel": "",
+      "wpnBlade": "BLADE_SAIKA2"
+    },
+    {
+      "$id": 13205,
+      "setupName": "",
+      "objName": "サイカ",
+      "objType": 4,
+      "objID": "BLADE_SAIKA2",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13206,
+      "setupName": "",
+      "objName": "ユウ",
+      "objType": 5,
+      "objID": "RSC_NP003401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13207,
+      "setupName": "",
+      "objName": "ユウブレイド",
+      "objType": 5,
+      "objID": "RSC_NP20010141",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13208,
+      "setupName": "",
+      "objName": "ズオ",
+      "objType": 5,
+      "objID": "RSC_NP003501",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13209,
+      "setupName": "",
+      "objName": "ズオブレイド",
+      "objType": 5,
+      "objID": "RSC_NP20010142",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13210,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13211,
+      "setupName": "",
+      "objName": "ユウ槍",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/wp/wp110101",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13212,
+      "setupName": "",
+      "objName": "ズオ斧",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/wp/wp100101",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13213,
+      "setupName": "bf03_290_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13214,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13215,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13216,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13217,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13218,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13219,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13220,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13221,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13222,
+      "setupName": "bf03_300_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13223,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13224,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13225,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13226,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13227,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13228,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13229,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13230,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13231,
+      "setupName": "",
+      "objName": "イオン",
+      "objType": 5,
+      "objID": "RSC_NP002401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13232,
+      "setupName": "",
+      "objName": "係員",
+      "objType": 5,
+      "objID": "RSC_NP433101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13233,
+      "setupName": "",
+      "objName": "ヤサグレた兵士",
+      "objType": 5,
+      "objID": "RSC_NP437001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13234,
+      "setupName": "",
+      "objName": "兵士ブレイド",
+      "objType": 4,
+      "objID": "ACT_ANIMAL_01",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13235,
+      "setupName": "",
+      "objName": "配給物",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj103007",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13236,
+      "setupName": "",
+      "objName": "ヤサグレ武器_L",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/wp/wp030101_l",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13237,
+      "setupName": "",
+      "objName": "ヤサグレ武器_R",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/wp/wp030101_r",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13238,
+      "setupName": "",
+      "objName": "街人A",
+      "objType": 5,
+      "objID": "RSC_MB433101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13239,
+      "setupName": "",
+      "objName": "街人B",
+      "objType": 5,
+      "objID": "RSC_MB433001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13240,
+      "setupName": "",
+      "objName": "街人C",
+      "objType": 5,
+      "objID": "RSC_MB434001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13241,
+      "setupName": "",
+      "objName": "街人D",
+      "objType": 5,
+      "objID": "RSC_MB432002",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13242,
+      "setupName": "",
+      "objName": "街人E",
+      "objType": 5,
+      "objID": "RSC_MB433001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13243,
+      "setupName": "",
+      "objName": "街人F",
+      "objType": 5,
+      "objID": "RSC_MB431002",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13244,
+      "setupName": "",
+      "objName": "街人G",
+      "objType": 5,
+      "objID": "RSC_MB434001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13245,
+      "setupName": "",
+      "objName": "街人H",
+      "objType": 5,
+      "objID": "RSC_MB433001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13246,
+      "setupName": "",
+      "objName": "街人I",
+      "objType": 5,
+      "objID": "RSC_MB433001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13247,
+      "setupName": "",
+      "objName": "街人J",
+      "objType": 5,
+      "objID": "RSC_MB435001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13248,
+      "setupName": "",
+      "objName": "街人K",
+      "objType": 5,
+      "objID": "RSC_MB433001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13249,
+      "setupName": "",
+      "objName": "街人L",
+      "objType": 5,
+      "objID": "RSC_MB432002",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13250,
+      "setupName": "",
+      "objName": "街人M",
+      "objType": 5,
+      "objID": "RSC_MB434001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13251,
+      "setupName": "bf03_310_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13252,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13253,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13254,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13255,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13256,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13257,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13258,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13259,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13260,
+      "setupName": "",
+      "objName": "イオン",
+      "objType": 5,
+      "objID": "RSC_NP002401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13261,
+      "setupName": "",
+      "objName": "係員",
+      "objType": 5,
+      "objID": "RSC_NP433101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13262,
+      "setupName": "",
+      "objName": "ヤサグレた兵士",
+      "objType": 5,
+      "objID": "RSC_NP437001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13263,
+      "setupName": "",
+      "objName": "兵士ブレイド",
+      "objType": 4,
+      "objID": "ACT_ANIMAL_01",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13264,
+      "setupName": "",
+      "objName": "ヤサグレ武器_L",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/wp/wp030101_l",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13265,
+      "setupName": "",
+      "objName": "ヤサグレ武器_R",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/wp/wp030101_r",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13266,
+      "setupName": "bf03_330_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13267,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13268,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13269,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13270,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13271,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13272,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13273,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13274,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13275,
+      "setupName": "",
+      "objName": "イオン",
+      "objType": 5,
+      "objID": "RSC_NP002401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13276,
+      "setupName": "",
+      "objName": "講釈師",
+      "objType": 5,
+      "objID": "RSC_NP003601",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13277,
+      "setupName": "",
+      "objName": "男優",
+      "objType": 5,
+      "objID": "RSC_NP003701",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13278,
+      "setupName": "",
+      "objName": "女優",
+      "objType": 5,
+      "objID": "RSC_NP003801",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13279,
+      "setupName": "",
+      "objName": "舞台のモンスターA",
+      "objType": 5,
+      "objID": "RSC_NP004801",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13280,
+      "setupName": "",
+      "objName": "舞台のモンスターB",
+      "objType": 5,
+      "objID": "RSC_NP004801",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13281,
+      "setupName": "",
+      "objName": "舞台のモンスターC",
+      "objType": 5,
+      "objID": "RSC_NP004801",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13282,
+      "setupName": "",
+      "objName": "舞台の幕",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj103015",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13283,
+      "setupName": "",
+      "objName": "薄布A",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj103016",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13284,
+      "setupName": "",
+      "objName": "演劇用の剣",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj103018",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13285,
+      "setupName": "",
+      "objName": "薄布B",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj103016",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13286,
+      "setupName": "",
+      "objName": "薄布C",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj103016",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13287,
+      "setupName": "bf03_340_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13288,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13289,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13290,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13291,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13292,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13293,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13294,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13295,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13296,
+      "setupName": "",
+      "objName": "イオン",
+      "objType": 5,
+      "objID": "RSC_NP002401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13297,
+      "setupName": "bf03_350_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13298,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13299,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13300,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13301,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13302,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13303,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13304,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13305,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13306,
+      "setupName": "",
+      "objName": "イオン",
+      "objType": 5,
+      "objID": "RSC_NP002401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13307,
+      "setupName": "",
+      "objName": "コール",
+      "objType": 5,
+      "objID": "RSC_NP002301",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13308,
+      "setupName": "bf03_360_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13309,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13310,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13311,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13312,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13313,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13314,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13315,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13316,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13317,
+      "setupName": "",
+      "objName": "イオン",
+      "objType": 5,
+      "objID": "RSC_NP002401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13318,
+      "setupName": "",
+      "objName": "コール",
+      "objType": 5,
+      "objID": "RSC_NP002301",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13319,
+      "setupName": "bf03_370_100",
+      "objName": "メツ",
+      "objType": 5,
+      "objID": "RSC_NP100201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13320,
+      "setupName": "",
+      "objName": "ヨシツネ",
+      "objType": 5,
+      "objID": "RSC_NP100501",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13321,
+      "setupName": "",
+      "objName": "イオン",
+      "objType": 5,
+      "objID": "RSC_NP002401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13322,
+      "setupName": "",
+      "objName": "コール",
+      "objType": 5,
+      "objID": "RSC_NP002301",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13323,
+      "setupName": "",
+      "objName": "古い短剣",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj103008",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13324,
+      "setupName": "bf03_380_100",
+      "objName": "メツ",
+      "objType": 5,
+      "objID": "RSC_NP100201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13325,
+      "setupName": "",
+      "objName": "ヨシツネ",
+      "objType": 5,
+      "objID": "RSC_NP100501",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13326,
+      "setupName": "",
+      "objName": "イオン",
+      "objType": 5,
+      "objID": "RSC_NP002401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13327,
+      "setupName": "bf03_390_100",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13328,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13329,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13330,
+      "setupName": "bf03_400_100",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13331,
+      "setupName": "",
+      "objName": "メツ",
+      "objType": 5,
+      "objID": "RSC_NP100201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13332,
+      "setupName": "bf03_410_100",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13333,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13334,
+      "setupName": "bf03_420_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 13335,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 13336,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13337,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 13338,
+      "setupName": "",
+      "objName": "ハナ（JS)",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13339,
+      "setupName": "",
+      "objName": "ヴァンダム",
+      "objType": 3,
+      "objID": "DRIVER_VANDAMME",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13340,
+      "setupName": "",
+      "objName": "スザク",
+      "objType": 4,
+      "objID": "BLADE_SUZAKU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13341,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13342,
+      "setupName": "",
+      "objName": "コール",
+      "objType": 5,
+      "objID": "RSC_NP002301",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 13343,
+      "setupName": "",
+      "objName": "オヤジ",
+      "objType": 5,
+      "objID": "RSC_NP43400044",
+      "objModel": "",
+      "wpnBlade": ""
+    }
+  ]
+}

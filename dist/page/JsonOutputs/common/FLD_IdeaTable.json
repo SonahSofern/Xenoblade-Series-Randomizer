@@ -1,0 +1,174 @@
+{
+  "schema": [
+    {
+      "name": "TrustPoint",
+      "type": 3
+    },
+    {
+      "name": "WpnRatio",
+      "type": 2
+    },
+    {
+      "name": "NArtsProbRev",
+      "type": 1
+    },
+    {
+      "name": "BladeChangeRev",
+      "type": 5
+    },
+    {
+      "name": "BladeArtsRev",
+      "type": 5
+    },
+    {
+      "name": "FormSwichF",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "TrustPoint": 0,
+      "WpnRatio": 90,
+      "NArtsProbRev": 100,
+      "BladeChangeRev": 90,
+      "BladeArtsRev": 100,
+      "FormSwichF": 450
+    },
+    {
+      "$id": 2,
+      "TrustPoint": 0,
+      "WpnRatio": 95,
+      "NArtsProbRev": 105,
+      "BladeChangeRev": 45,
+      "BladeArtsRev": 100,
+      "FormSwichF": 420
+    },
+    {
+      "$id": 3,
+      "TrustPoint": 0,
+      "WpnRatio": 100,
+      "NArtsProbRev": 110,
+      "BladeChangeRev": 0,
+      "BladeArtsRev": 100,
+      "FormSwichF": 390
+    },
+    {
+      "$id": 4,
+      "TrustPoint": 0,
+      "WpnRatio": 105,
+      "NArtsProbRev": 115,
+      "BladeChangeRev": -45,
+      "BladeArtsRev": 100,
+      "FormSwichF": 360
+    },
+    {
+      "$id": 5,
+      "TrustPoint": 0,
+      "WpnRatio": 110,
+      "NArtsProbRev": 120,
+      "BladeChangeRev": -90,
+      "BladeArtsRev": 100,
+      "FormSwichF": 330
+    },
+    {
+      "$id": 6,
+      "TrustPoint": 13000,
+      "WpnRatio": 120,
+      "NArtsProbRev": 130,
+      "BladeChangeRev": -120,
+      "BladeArtsRev": 100,
+      "FormSwichF": 300
+    },
+    {
+      "$id": 7,
+      "TrustPoint": 16000,
+      "WpnRatio": 125,
+      "NArtsProbRev": 135,
+      "BladeChangeRev": -130,
+      "BladeArtsRev": 105,
+      "FormSwichF": 300
+    },
+    {
+      "$id": 8,
+      "TrustPoint": 19500,
+      "WpnRatio": 130,
+      "NArtsProbRev": 140,
+      "BladeChangeRev": -130,
+      "BladeArtsRev": 110,
+      "FormSwichF": 300
+    },
+    {
+      "$id": 9,
+      "TrustPoint": 23500,
+      "WpnRatio": 135,
+      "NArtsProbRev": 145,
+      "BladeChangeRev": -140,
+      "BladeArtsRev": 115,
+      "FormSwichF": 300
+    },
+    {
+      "$id": 10,
+      "TrustPoint": 28000,
+      "WpnRatio": 140,
+      "NArtsProbRev": 150,
+      "BladeChangeRev": -140,
+      "BladeArtsRev": 120,
+      "FormSwichF": 270
+    },
+    {
+      "$id": 11,
+      "TrustPoint": 33000,
+      "WpnRatio": 145,
+      "NArtsProbRev": 155,
+      "BladeChangeRev": -150,
+      "BladeArtsRev": 125,
+      "FormSwichF": 270
+    },
+    {
+      "$id": 12,
+      "TrustPoint": 38500,
+      "WpnRatio": 150,
+      "NArtsProbRev": 160,
+      "BladeChangeRev": -150,
+      "BladeArtsRev": 130,
+      "FormSwichF": 270
+    },
+    {
+      "$id": 13,
+      "TrustPoint": 44500,
+      "WpnRatio": 155,
+      "NArtsProbRev": 165,
+      "BladeChangeRev": -160,
+      "BladeArtsRev": 135,
+      "FormSwichF": 270
+    },
+    {
+      "$id": 14,
+      "TrustPoint": 51000,
+      "WpnRatio": 160,
+      "NArtsProbRev": 170,
+      "BladeChangeRev": -160,
+      "BladeArtsRev": 140,
+      "FormSwichF": 270
+    },
+    {
+      "$id": 15,
+      "TrustPoint": 59000,
+      "WpnRatio": 165,
+      "NArtsProbRev": 175,
+      "BladeChangeRev": -170,
+      "BladeArtsRev": 145,
+      "FormSwichF": 270
+    },
+    {
+      "$id": 16,
+      "TrustPoint": 0,
+      "WpnRatio": 180,
+      "NArtsProbRev": 190,
+      "BladeChangeRev": -180,
+      "BladeArtsRev": 160,
+      "FormSwichF": 240
+    }
+  ]
+}

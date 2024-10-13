@@ -1,0 +1,129 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_index_title_sw",
+      "text_id": 1932
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_index_title",
+      "text_id": 1932
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_index_guide_sw",
+      "text_id": 1933
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_index_guide",
+      "text_id": 1933
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_select_info_sleep",
+      "text_id": 1935
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_select_info_craft",
+      "text_id": 1937
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_select_info_talk",
+      "text_id": 1939
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_select_craft",
+      "text_id": 1936
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_select_craft_sw",
+      "text_id": 1936
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_select_sleep",
+      "text_id": 1934
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_select_sleep_sw",
+      "text_id": 1934
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_select_talk",
+      "text_id": 1938
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_select_talk_sw",
+      "text_id": 1938
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_craft_index",
+      "text_id": 1940
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_craft_info",
+      "text_id": 1941
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_shop_header_guide_sw",
+      "text_id": 1941
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_shop_header_guide",
+      "text_id": 1941
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_shop_header_name_sw",
+      "text_id": 1932
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_shop_header_name",
+      "text_id": 1932
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_shop_header_name_sw2",
+      "text_id": 1932
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_shop_header_name2",
+      "text_id": 1932
+    },
+    {
+      "$id": 22,
+      "obj_name": "TXT_index_title_sw2",
+      "text_id": 1932
+    },
+    {
+      "$id": 23,
+      "obj_name": "TXT_index_title2",
+      "text_id": 1932
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "schema": [
+    {
+      "name": "StageSum",
+      "type": 1
+    },
+    {
+      "name": "NorDamageBonus",
+      "type": 1
+    },
+    {
+      "name": "NorTimeBonus",
+      "type": 1
+    },
+    {
+      "name": "NorPartyBonus",
+      "type": 1
+    },
+    {
+      "name": "BonusRate",
+      "type": 1
+    },
+    {
+      "name": "Direction",
+      "type": 1
+    },
+    {
+      "name": "DamageBonusNum",
+      "type": 1
+    },
+    {
+      "name": "TimeBonusNum",
+      "type": 1
+    },
+    {
+      "name": "PartyBonusNum",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "StageSum": 2,
+      "NorDamageBonus": 50,
+      "NorTimeBonus": 10,
+      "NorPartyBonus": 10,
+      "BonusRate": 40,
+      "Direction": 1,
+      "DamageBonusNum": 1,
+      "TimeBonusNum": 1,
+      "PartyBonusNum": 1
+    },
+    {
+      "$id": 2,
+      "StageSum": 3,
+      "NorDamageBonus": 50,
+      "NorTimeBonus": 10,
+      "NorPartyBonus": 10,
+      "BonusRate": 50,
+      "Direction": 1,
+      "DamageBonusNum": 1,
+      "TimeBonusNum": 1,
+      "PartyBonusNum": 1
+    },
+    {
+      "$id": 3,
+      "StageSum": 4,
+      "NorDamageBonus": 75,
+      "NorTimeBonus": 20,
+      "NorPartyBonus": 15,
+      "BonusRate": 60,
+      "Direction": 2,
+      "DamageBonusNum": 2,
+      "TimeBonusNum": 2,
+      "PartyBonusNum": 2
+    },
+    {
+      "$id": 4,
+      "StageSum": 5,
+      "NorDamageBonus": 75,
+      "NorTimeBonus": 20,
+      "NorPartyBonus": 15,
+      "BonusRate": 70,
+      "Direction": 2,
+      "DamageBonusNum": 2,
+      "TimeBonusNum": 2,
+      "PartyBonusNum": 2
+    },
+    {
+      "$id": 5,
+      "StageSum": 6,
+      "NorDamageBonus": 100,
+      "NorTimeBonus": 30,
+      "NorPartyBonus": 20,
+      "BonusRate": 80,
+      "Direction": 3,
+      "DamageBonusNum": 3,
+      "TimeBonusNum": 3,
+      "PartyBonusNum": 3
+    },
+    {
+      "$id": 6,
+      "StageSum": 7,
+      "NorDamageBonus": 100,
+      "NorTimeBonus": 30,
+      "NorPartyBonus": 20,
+      "BonusRate": 100,
+      "Direction": 3,
+      "DamageBonusNum": 3,
+      "TimeBonusNum": 3,
+      "PartyBonusNum": 3
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schema": [
+    {
+      "name": "TargetFile",
+      "type": 7
+    },
+    {
+      "name": "Condition",
+      "type": 2
+    },
+    {
+      "name": "ChangeFile",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "TargetFile": "01010101",
+      "Condition": 2120,
+      "ChangeFile": "01010102"
+    },
+    {
+      "$id": 2,
+      "TargetFile": "05520101",
+      "Condition": 0,
+      "ChangeFile": "05060101"
+    },
+    {
+      "$id": 3,
+      "TargetFile": "06420401",
+      "Condition": 2926,
+      "ChangeFile": "06420402"
+    },
+    {
+      "$id": 4,
+      "TargetFile": "701530101",
+      "Condition": 3820,
+      "ChangeFile": ""
+    },
+    {
+      "$id": 5,
+      "TargetFile": "701530102",
+      "Condition": 3820,
+      "ChangeFile": ""
+    },
+    {
+      "$id": 6,
+      "TargetFile": "701540101",
+      "Condition": 3820,
+      "ChangeFile": ""
+    },
+    {
+      "$id": 7,
+      "TargetFile": "701540102",
+      "Condition": 3820,
+      "ChangeFile": ""
+    },
+    {
+      "$id": 8,
+      "TargetFile": "703670101",
+      "Condition": 3851,
+      "ChangeFile": "701670101"
+    },
+    {
+      "$id": 9,
+      "TargetFile": "703670102",
+      "Condition": 3851,
+      "ChangeFile": "702670102"
+    },
+    {
+      "$id": 10,
+      "TargetFile": "709670101",
+      "Condition": 3851,
+      "ChangeFile": "704670101"
+    },
+    {
+      "$id": 11,
+      "TargetFile": "709670102",
+      "Condition": 3851,
+      "ChangeFile": "705670102"
+    },
+    {
+      "$id": 12,
+      "TargetFile": "01250175",
+      "Condition": 0,
+      "ChangeFile": "01250201"
+    },
+    {
+      "$id": 13,
+      "TargetFile": "02250175",
+      "Condition": 0,
+      "ChangeFile": "02370101"
+    },
+    {
+      "$id": 14,
+      "TargetFile": "05250175",
+      "Condition": 0,
+      "ChangeFile": "05250201"
+    },
+    {
+      "$id": 15,
+      "TargetFile": "06250175",
+      "Condition": 0,
+      "ChangeFile": "06250201"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_slot_item_name@01",
+      "text_id": 798
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_slot_item_enhance@01",
+      "text_id": 799
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_slot_item_name@02",
+      "text_id": 798
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_slot_item_enhance@02",
+      "text_id": 799
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_slot_item_name@03",
+      "text_id": 798
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_slot_item_enhance@03",
+      "text_id": 799
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_item_name@01",
+      "text_id": 802
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_item_num@01",
+      "text_id": 803
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_item_name@02",
+      "text_id": 802
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_item_num@02",
+      "text_id": 803
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_item_name@03",
+      "text_id": 802
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_item_num@03",
+      "text_id": 803
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_item_name@04",
+      "text_id": 802
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_item_num@04",
+      "text_id": 803
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_item_name@05",
+      "text_id": 802
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_item_num@05",
+      "text_id": 803
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_item_name@06",
+      "text_id": 802
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_item_num@06",
+      "text_id": 803
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_detail_enhance_index",
+      "text_id": 800
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_detail_enhance_text",
+      "text_id": 801
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_unite_combo_finish",
+      "text_id": 460
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_fusion_combo_fight_sw",
+      "text_id": 1756
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_fusion_combo_fight_eff",
+      "text_id": 1756
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_fusion_combo_fight",
+      "text_id": 1756
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_fusion_combo_elem_sw",
+      "text_id": 1756
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_fusion_combo_elem_eff",
+      "text_id": 1756
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_fusion_combo_elem",
+      "text_id": 1756
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_fusion_bonus_index@01",
+      "text_id": 1761
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_fusion_bonus_param@01",
+      "text_id": 1764
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_fusion_bonus_index@02",
+      "text_id": 1761
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_fusion_bonus_param@02",
+      "text_id": 1764
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_fusion_bonus_index@03",
+      "text_id": 1761
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_fusion_bonus_param@03",
+      "text_id": 1764
+    }
+  ]
+}

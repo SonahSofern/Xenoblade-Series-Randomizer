@@ -1,0 +1,156 @@
+{
+  "schema": [
+    {
+      "name": "nodeName",
+      "type": 7
+    },
+    {
+      "name": "nodeNameJP",
+      "type": 7
+    },
+    {
+      "name": "nodeExtra",
+      "type": 1
+    },
+    {
+      "name": "nodeWidth",
+      "type": 1
+    },
+    {
+      "name": "grpName",
+      "type": 7
+    },
+    {
+      "name": "grpNameJP",
+      "type": 7
+    },
+    {
+      "name": "grpExtra",
+      "type": 1
+    },
+    {
+      "name": "grpArray",
+      "type": 1
+    },
+    {
+      "name": "atrDisp",
+      "type": 1
+    },
+    {
+      "name": "atrName",
+      "type": 7
+    },
+    {
+      "name": "atrNameJP",
+      "type": 7
+    },
+    {
+      "name": "atrType",
+      "type": 1
+    },
+    {
+      "name": "atrOptStr1",
+      "type": 7
+    },
+    {
+      "name": "atrOptStr2",
+      "type": 7
+    },
+    {
+      "name": "atrDefStr1",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "nodeName": "play",
+      "nodeNameJP": "ファイル",
+      "nodeExtra": 0,
+      "nodeWidth": 1,
+      "grpName": "play",
+      "grpNameJP": "デフォルト設定（play）",
+      "grpExtra": 0,
+      "grpArray": 0,
+      "atrDisp": 1,
+      "atrName": "file",
+      "atrNameJP": "ファイル名",
+      "atrType": 6,
+      "atrOptStr1": "",
+      "atrOptStr2": "",
+      "atrDefStr1": ""
+    },
+    {
+      "$id": 2,
+      "nodeName": "",
+      "nodeNameJP": "",
+      "nodeExtra": 0,
+      "nodeWidth": 0,
+      "grpName": "option",
+      "grpNameJP": "エクストラ設定（option）",
+      "grpExtra": 1,
+      "grpArray": 0,
+      "atrDisp": 0,
+      "atrName": "hasWidth",
+      "atrNameJP": "一定時間再生",
+      "atrType": 13,
+      "atrOptStr1": "EVT_offontype",
+      "atrOptStr2": "",
+      "atrDefStr1": ""
+    },
+    {
+      "$id": 3,
+      "nodeName": "",
+      "nodeNameJP": "",
+      "nodeExtra": 0,
+      "nodeWidth": 0,
+      "grpName": "",
+      "grpNameJP": "",
+      "grpExtra": 0,
+      "grpArray": 0,
+      "atrDisp": 0,
+      "atrName": "fadeIn",
+      "atrNameJP": "フェードイン",
+      "atrType": 7,
+      "atrOptStr1": "0",
+      "atrOptStr2": "",
+      "atrDefStr1": ""
+    },
+    {
+      "$id": 4,
+      "nodeName": "",
+      "nodeNameJP": "",
+      "nodeExtra": 0,
+      "nodeWidth": 0,
+      "grpName": "",
+      "grpNameJP": "",
+      "grpExtra": 0,
+      "grpArray": 0,
+      "atrDisp": 0,
+      "atrName": "fadeOut",
+      "atrNameJP": "フェードアウト",
+      "atrType": 7,
+      "atrOptStr1": "0",
+      "atrOptStr2": "",
+      "atrDefStr1": ""
+    },
+    {
+      "$id": 5,
+      "nodeName": "",
+      "nodeNameJP": "",
+      "nodeExtra": 0,
+      "nodeWidth": 0,
+      "grpName": "",
+      "grpNameJP": "",
+      "grpExtra": 0,
+      "grpArray": 0,
+      "atrDisp": 0,
+      "atrName": "volume",
+      "atrNameJP": "ボリューム",
+      "atrType": 19,
+      "atrOptStr1": "0",
+      "atrOptStr2": "1",
+      "atrDefStr1": "1"
+    }
+  ]
+}

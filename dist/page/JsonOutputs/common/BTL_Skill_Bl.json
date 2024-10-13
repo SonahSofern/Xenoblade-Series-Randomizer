@@ -1,0 +1,5473 @@
+{
+  "schema": [
+    {
+      "name": "Name",
+      "type": 2
+    },
+    {
+      "name": "DebugName",
+      "type": 7
+    },
+    {
+      "name": "Enhance1",
+      "type": 2
+    },
+    {
+      "name": "Enhance2",
+      "type": 2
+    },
+    {
+      "name": "Enhance3",
+      "type": 2
+    },
+    {
+      "name": "Enhance4",
+      "type": 2
+    },
+    {
+      "name": "Enhance5",
+      "type": 2
+    },
+    {
+      "name": "Flag",
+      "type": 1,
+      "flags": [
+        {
+          "label": "common",
+          "mask": 1,
+          "index": 0
+        }
+      ]
+    },
+    {
+      "name": "Tank",
+      "type": 1
+    },
+    {
+      "name": "Attacker",
+      "type": 1
+    },
+    {
+      "name": "Healer",
+      "type": 1
+    },
+    {
+      "name": "UI",
+      "type": 2
+    },
+    {
+      "name": "Role",
+      "type": 1
+    },
+    {
+      "name": "MaxLv",
+      "type": 1
+    },
+    {
+      "name": "Caption",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Name": 1,
+      "DebugName": "ホムラ1",
+      "Enhance1": 1541,
+      "Enhance2": 1542,
+      "Enhance3": 1543,
+      "Enhance4": 1544,
+      "Enhance5": 1545,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 2,
+      "Name": 2,
+      "DebugName": "ホムラ2",
+      "Enhance1": 1546,
+      "Enhance2": 1547,
+      "Enhance3": 1548,
+      "Enhance4": 1549,
+      "Enhance5": 1550,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 3,
+      "Name": 3,
+      "DebugName": "ホムラ3",
+      "Enhance1": 1551,
+      "Enhance2": 1552,
+      "Enhance3": 1553,
+      "Enhance4": 1554,
+      "Enhance5": 1555,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 4,
+      "Name": 4,
+      "DebugName": "ヒカリ1",
+      "Enhance1": 1556,
+      "Enhance2": 1557,
+      "Enhance3": 1558,
+      "Enhance4": 1559,
+      "Enhance5": 1560,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 5,
+      "Name": 5,
+      "DebugName": "ヒカリ2",
+      "Enhance1": 1561,
+      "Enhance2": 1562,
+      "Enhance3": 1563,
+      "Enhance4": 1564,
+      "Enhance5": 1565,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 6,
+      "Name": 6,
+      "DebugName": "ヒカリ3",
+      "Enhance1": 1566,
+      "Enhance2": 1567,
+      "Enhance3": 1568,
+      "Enhance4": 1569,
+      "Enhance5": 1570,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 7,
+      "Name": 7,
+      "DebugName": "覚醒ホムラ1",
+      "Enhance1": 1571,
+      "Enhance2": 1572,
+      "Enhance3": 1573,
+      "Enhance4": 1574,
+      "Enhance5": 1575,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 8,
+      "Name": 8,
+      "DebugName": "覚醒ホムラ2",
+      "Enhance1": 1576,
+      "Enhance2": 1577,
+      "Enhance3": 1578,
+      "Enhance4": 1579,
+      "Enhance5": 1580,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 9,
+      "Name": 9,
+      "DebugName": "覚醒ホムラ3",
+      "Enhance1": 1581,
+      "Enhance2": 1582,
+      "Enhance3": 1583,
+      "Enhance4": 1584,
+      "Enhance5": 1585,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 10,
+      "Name": 10,
+      "DebugName": "ビャッコ1",
+      "Enhance1": 1586,
+      "Enhance2": 1587,
+      "Enhance3": 1588,
+      "Enhance4": 1589,
+      "Enhance5": 1590,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 11,
+      "Name": 11,
+      "DebugName": "ビャッコ2",
+      "Enhance1": 1591,
+      "Enhance2": 1592,
+      "Enhance3": 1593,
+      "Enhance4": 1594,
+      "Enhance5": 1595,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 12,
+      "Name": 12,
+      "DebugName": "ビャッコ3",
+      "Enhance1": 1596,
+      "Enhance2": 1597,
+      "Enhance3": 1598,
+      "Enhance4": 1599,
+      "Enhance5": 1600,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 13,
+      "Name": 13,
+      "DebugName": "ハナJS1",
+      "Enhance1": 1601,
+      "Enhance2": 1602,
+      "Enhance3": 1603,
+      "Enhance4": 1604,
+      "Enhance5": 1605,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 14,
+      "Name": 14,
+      "DebugName": "ハナJS2",
+      "Enhance1": 1606,
+      "Enhance2": 1607,
+      "Enhance3": 1608,
+      "Enhance4": 1609,
+      "Enhance5": 1610,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 15,
+      "Name": 15,
+      "DebugName": "ハナJS3",
+      "Enhance1": 1611,
+      "Enhance2": 1612,
+      "Enhance3": 1613,
+      "Enhance4": 1614,
+      "Enhance5": 1615,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 16,
+      "Name": 16,
+      "DebugName": "ハナJK1",
+      "Enhance1": 1616,
+      "Enhance2": 1617,
+      "Enhance3": 1618,
+      "Enhance4": 1619,
+      "Enhance5": 1620,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 17,
+      "Name": 17,
+      "DebugName": "ハナJK2",
+      "Enhance1": 1621,
+      "Enhance2": 1622,
+      "Enhance3": 1623,
+      "Enhance4": 1624,
+      "Enhance5": 1625,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 18,
+      "Name": 18,
+      "DebugName": "ハナJK3",
+      "Enhance1": 1626,
+      "Enhance2": 1627,
+      "Enhance3": 1628,
+      "Enhance4": 1629,
+      "Enhance5": 1630,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 19,
+      "Name": 19,
+      "DebugName": "ハナJD1",
+      "Enhance1": 1631,
+      "Enhance2": 1632,
+      "Enhance3": 1633,
+      "Enhance4": 1634,
+      "Enhance5": 1635,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 20,
+      "Name": 20,
+      "DebugName": "ハナJD2",
+      "Enhance1": 1636,
+      "Enhance2": 1637,
+      "Enhance3": 1638,
+      "Enhance4": 1639,
+      "Enhance5": 1640,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 21,
+      "Name": 21,
+      "DebugName": "ハナJD3",
+      "Enhance1": 1641,
+      "Enhance2": 1642,
+      "Enhance3": 1643,
+      "Enhance4": 1644,
+      "Enhance5": 1645,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 22,
+      "Name": 22,
+      "DebugName": "スザク1",
+      "Enhance1": 1646,
+      "Enhance2": 1647,
+      "Enhance3": 1648,
+      "Enhance4": 1649,
+      "Enhance5": 1650,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 23,
+      "Name": 23,
+      "DebugName": "スザク2",
+      "Enhance1": 1651,
+      "Enhance2": 1652,
+      "Enhance3": 1653,
+      "Enhance4": 1654,
+      "Enhance5": 1655,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 24,
+      "Name": 24,
+      "DebugName": "スザク3",
+      "Enhance1": 1656,
+      "Enhance2": 1657,
+      "Enhance3": 1658,
+      "Enhance4": 1659,
+      "Enhance5": 1660,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 25,
+      "Name": 25,
+      "DebugName": "カグツチ1",
+      "Enhance1": 1661,
+      "Enhance2": 1662,
+      "Enhance3": 1663,
+      "Enhance4": 1664,
+      "Enhance5": 1665,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 26,
+      "Name": 27,
+      "DebugName": "カグツチ2",
+      "Enhance1": 1666,
+      "Enhance2": 1667,
+      "Enhance3": 1668,
+      "Enhance4": 1669,
+      "Enhance5": 1670,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 27,
+      "Name": 26,
+      "DebugName": "カグツチ3",
+      "Enhance1": 1671,
+      "Enhance2": 1672,
+      "Enhance3": 1673,
+      "Enhance4": 1674,
+      "Enhance5": 1675,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 28,
+      "Name": 28,
+      "DebugName": "サイカ1",
+      "Enhance1": 1676,
+      "Enhance2": 1677,
+      "Enhance3": 1678,
+      "Enhance4": 1679,
+      "Enhance5": 1680,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 29,
+      "Name": 29,
+      "DebugName": "サイカ2",
+      "Enhance1": 1681,
+      "Enhance2": 1682,
+      "Enhance3": 1683,
+      "Enhance4": 1684,
+      "Enhance5": 1685,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 30,
+      "Name": 30,
+      "DebugName": "サイカ3",
+      "Enhance1": 1686,
+      "Enhance2": 1687,
+      "Enhance3": 1688,
+      "Enhance4": 1689,
+      "Enhance5": 1690,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 31,
+      "Name": 31,
+      "DebugName": "ニア（BL）1",
+      "Enhance1": 1691,
+      "Enhance2": 1692,
+      "Enhance3": 1693,
+      "Enhance4": 1694,
+      "Enhance5": 1695,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 32,
+      "Name": 32,
+      "DebugName": "ニア（BL）2",
+      "Enhance1": 1696,
+      "Enhance2": 1697,
+      "Enhance3": 1698,
+      "Enhance4": 1699,
+      "Enhance5": 1700,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 33,
+      "Name": 33,
+      "DebugName": "ニア（BL）3",
+      "Enhance1": 1701,
+      "Enhance2": 1702,
+      "Enhance3": 1703,
+      "Enhance4": 1704,
+      "Enhance5": 1705,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 34,
+      "Name": 34,
+      "DebugName": "ワダツミ1",
+      "Enhance1": 1706,
+      "Enhance2": 1707,
+      "Enhance3": 1708,
+      "Enhance4": 1709,
+      "Enhance5": 1710,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 35,
+      "Name": 35,
+      "DebugName": "ワダツミ2",
+      "Enhance1": 1711,
+      "Enhance2": 1712,
+      "Enhance3": 1713,
+      "Enhance4": 1714,
+      "Enhance5": 1715,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 36,
+      "Name": 36,
+      "DebugName": "ワダツミ3",
+      "Enhance1": 1716,
+      "Enhance2": 1717,
+      "Enhance3": 1718,
+      "Enhance4": 1719,
+      "Enhance5": 1720,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 37,
+      "Name": 37,
+      "DebugName": "グレン1",
+      "Enhance1": 1721,
+      "Enhance2": 1722,
+      "Enhance3": 1723,
+      "Enhance4": 1724,
+      "Enhance5": 1725,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 38,
+      "Name": 38,
+      "DebugName": "グレン2",
+      "Enhance1": 1726,
+      "Enhance2": 1727,
+      "Enhance3": 1728,
+      "Enhance4": 1729,
+      "Enhance5": 1730,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 39,
+      "Name": 39,
+      "DebugName": "グレン3",
+      "Enhance1": 1731,
+      "Enhance2": 1732,
+      "Enhance3": 1733,
+      "Enhance4": 1734,
+      "Enhance5": 1735,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 40,
+      "Name": 40,
+      "DebugName": "ヂカラオ1",
+      "Enhance1": 1736,
+      "Enhance2": 1737,
+      "Enhance3": 1738,
+      "Enhance4": 1739,
+      "Enhance5": 1740,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 41,
+      "Name": 41,
+      "DebugName": "ヂカラオ2",
+      "Enhance1": 1741,
+      "Enhance2": 1742,
+      "Enhance3": 1743,
+      "Enhance4": 1744,
+      "Enhance5": 1745,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 42,
+      "Name": 42,
+      "DebugName": "ヂカラオ3",
+      "Enhance1": 1746,
+      "Enhance2": 1747,
+      "Enhance3": 1748,
+      "Enhance4": 1749,
+      "Enhance5": 1750,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 43,
+      "Name": 43,
+      "DebugName": "ヴァサラ1",
+      "Enhance1": 1751,
+      "Enhance2": 1752,
+      "Enhance3": 1753,
+      "Enhance4": 1754,
+      "Enhance5": 1755,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 44,
+      "Name": 44,
+      "DebugName": "ヴァサラ2",
+      "Enhance1": 1756,
+      "Enhance2": 1757,
+      "Enhance3": 1758,
+      "Enhance4": 1759,
+      "Enhance5": 1760,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 45,
+      "Name": 45,
+      "DebugName": "ヴァサラ3",
+      "Enhance1": 1761,
+      "Enhance2": 1762,
+      "Enhance3": 1763,
+      "Enhance4": 1764,
+      "Enhance5": 1765,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 46,
+      "Name": 46,
+      "DebugName": "メイ1",
+      "Enhance1": 1766,
+      "Enhance2": 1767,
+      "Enhance3": 1768,
+      "Enhance4": 1769,
+      "Enhance5": 1770,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 47,
+      "Name": 47,
+      "DebugName": "メイ2",
+      "Enhance1": 1771,
+      "Enhance2": 1772,
+      "Enhance3": 1773,
+      "Enhance4": 1774,
+      "Enhance5": 1775,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 48,
+      "Name": 48,
+      "DebugName": "メイ3",
+      "Enhance1": 1776,
+      "Enhance2": 1777,
+      "Enhance3": 1778,
+      "Enhance4": 1779,
+      "Enhance5": 1780,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 49,
+      "Name": 49,
+      "DebugName": "メノウ1",
+      "Enhance1": 1781,
+      "Enhance2": 1782,
+      "Enhance3": 1783,
+      "Enhance4": 1784,
+      "Enhance5": 1785,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 50,
+      "Name": 50,
+      "DebugName": "メノウ2",
+      "Enhance1": 1786,
+      "Enhance2": 1787,
+      "Enhance3": 1788,
+      "Enhance4": 1789,
+      "Enhance5": 1790,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 51,
+      "Name": 51,
+      "DebugName": "メノウ3",
+      "Enhance1": 1791,
+      "Enhance2": 1792,
+      "Enhance3": 1793,
+      "Enhance4": 1794,
+      "Enhance5": 1795,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 52,
+      "Name": 52,
+      "DebugName": "ユウオウ1",
+      "Enhance1": 1796,
+      "Enhance2": 1797,
+      "Enhance3": 1798,
+      "Enhance4": 1799,
+      "Enhance5": 1800,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 53,
+      "Name": 53,
+      "DebugName": "ユウオウ2",
+      "Enhance1": 1801,
+      "Enhance2": 1802,
+      "Enhance3": 1803,
+      "Enhance4": 1804,
+      "Enhance5": 1805,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 54,
+      "Name": 54,
+      "DebugName": "ユウオウ3",
+      "Enhance1": 1806,
+      "Enhance2": 1807,
+      "Enhance3": 1808,
+      "Enhance4": 1809,
+      "Enhance5": 1810,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 55,
+      "Name": 55,
+      "DebugName": "イダテン1",
+      "Enhance1": 1811,
+      "Enhance2": 1812,
+      "Enhance3": 1813,
+      "Enhance4": 1814,
+      "Enhance5": 1815,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 56,
+      "Name": 56,
+      "DebugName": "イダテン2",
+      "Enhance1": 1816,
+      "Enhance2": 1817,
+      "Enhance3": 1818,
+      "Enhance4": 1819,
+      "Enhance5": 1820,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 57,
+      "Name": 57,
+      "DebugName": "イダテン3",
+      "Enhance1": 1821,
+      "Enhance2": 1822,
+      "Enhance3": 1823,
+      "Enhance4": 1824,
+      "Enhance5": 1825,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 58,
+      "Name": 58,
+      "DebugName": "クビラ1_1",
+      "Enhance1": 1826,
+      "Enhance2": 1827,
+      "Enhance3": 1828,
+      "Enhance4": 1829,
+      "Enhance5": 1830,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 59,
+      "Name": 59,
+      "DebugName": "クビラ1_2",
+      "Enhance1": 1831,
+      "Enhance2": 1832,
+      "Enhance3": 1833,
+      "Enhance4": 1834,
+      "Enhance5": 1835,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 60,
+      "Name": 60,
+      "DebugName": "クビラ1_3",
+      "Enhance1": 1836,
+      "Enhance2": 1837,
+      "Enhance3": 1838,
+      "Enhance4": 1839,
+      "Enhance5": 1840,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 61,
+      "Name": 58,
+      "DebugName": "クビラ2_1",
+      "Enhance1": 1841,
+      "Enhance2": 1842,
+      "Enhance3": 1843,
+      "Enhance4": 1844,
+      "Enhance5": 1845,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 62,
+      "Name": 59,
+      "DebugName": "クビラ2_2",
+      "Enhance1": 1846,
+      "Enhance2": 1847,
+      "Enhance3": 1848,
+      "Enhance4": 1849,
+      "Enhance5": 1850,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 63,
+      "Name": 60,
+      "DebugName": "クビラ2_3",
+      "Enhance1": 1851,
+      "Enhance2": 1852,
+      "Enhance3": 1853,
+      "Enhance4": 1854,
+      "Enhance5": 1855,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 64,
+      "Name": 61,
+      "DebugName": "カサネ1",
+      "Enhance1": 1856,
+      "Enhance2": 1857,
+      "Enhance3": 1858,
+      "Enhance4": 1859,
+      "Enhance5": 1860,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 65,
+      "Name": 62,
+      "DebugName": "カサネ2",
+      "Enhance1": 1861,
+      "Enhance2": 1862,
+      "Enhance3": 1863,
+      "Enhance4": 1864,
+      "Enhance5": 1865,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 66,
+      "Name": 63,
+      "DebugName": "カサネ3",
+      "Enhance1": 1866,
+      "Enhance2": 1867,
+      "Enhance3": 1868,
+      "Enhance4": 1869,
+      "Enhance5": 1870,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 67,
+      "Name": 64,
+      "DebugName": "ミクマリ1",
+      "Enhance1": 1871,
+      "Enhance2": 1872,
+      "Enhance3": 1873,
+      "Enhance4": 1874,
+      "Enhance5": 1875,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 68,
+      "Name": 65,
+      "DebugName": "ミクマリ2",
+      "Enhance1": 1876,
+      "Enhance2": 1877,
+      "Enhance3": 1878,
+      "Enhance4": 1879,
+      "Enhance5": 1880,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 69,
+      "Name": 66,
+      "DebugName": "ミクマリ3",
+      "Enhance1": 1881,
+      "Enhance2": 1882,
+      "Enhance3": 1883,
+      "Enhance4": 1884,
+      "Enhance5": 1885,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 70,
+      "Name": 67,
+      "DebugName": "セオリ1",
+      "Enhance1": 1886,
+      "Enhance2": 1887,
+      "Enhance3": 1888,
+      "Enhance4": 1889,
+      "Enhance5": 1890,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 71,
+      "Name": 68,
+      "DebugName": "セオリ2",
+      "Enhance1": 1891,
+      "Enhance2": 1892,
+      "Enhance3": 1893,
+      "Enhance4": 1894,
+      "Enhance5": 1895,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 72,
+      "Name": 69,
+      "DebugName": "セオリ3",
+      "Enhance1": 1896,
+      "Enhance2": 1897,
+      "Enhance3": 1898,
+      "Enhance4": 1899,
+      "Enhance5": 1900,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 73,
+      "Name": 70,
+      "DebugName": "トキハ1",
+      "Enhance1": 1901,
+      "Enhance2": 1902,
+      "Enhance3": 1903,
+      "Enhance4": 1904,
+      "Enhance5": 1905,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 74,
+      "Name": 71,
+      "DebugName": "トキハ2",
+      "Enhance1": 1906,
+      "Enhance2": 1907,
+      "Enhance3": 1908,
+      "Enhance4": 1909,
+      "Enhance5": 1910,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 75,
+      "Name": 72,
+      "DebugName": "トキハ3",
+      "Enhance1": 1911,
+      "Enhance2": 1912,
+      "Enhance3": 1913,
+      "Enhance4": 1914,
+      "Enhance5": 1915,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 76,
+      "Name": 73,
+      "DebugName": "ザクロ1",
+      "Enhance1": 1916,
+      "Enhance2": 1917,
+      "Enhance3": 1918,
+      "Enhance4": 1919,
+      "Enhance5": 1920,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 77,
+      "Name": 74,
+      "DebugName": "ザクロ2",
+      "Enhance1": 1921,
+      "Enhance2": 1922,
+      "Enhance3": 1923,
+      "Enhance4": 1924,
+      "Enhance5": 1925,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 78,
+      "Name": 75,
+      "DebugName": "ザクロ3",
+      "Enhance1": 1926,
+      "Enhance2": 1927,
+      "Enhance3": 1928,
+      "Enhance4": 1929,
+      "Enhance5": 1930,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 79,
+      "Name": 76,
+      "DebugName": "アザミ1",
+      "Enhance1": 1931,
+      "Enhance2": 1932,
+      "Enhance3": 1933,
+      "Enhance4": 1934,
+      "Enhance5": 1935,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 80,
+      "Name": 77,
+      "DebugName": "アザミ2",
+      "Enhance1": 1936,
+      "Enhance2": 1937,
+      "Enhance3": 1938,
+      "Enhance4": 1939,
+      "Enhance5": 1940,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 81,
+      "Name": 78,
+      "DebugName": "アザミ3",
+      "Enhance1": 1941,
+      "Enhance2": 1942,
+      "Enhance3": 1943,
+      "Enhance4": 1944,
+      "Enhance5": 1945,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 82,
+      "Name": 79,
+      "DebugName": "ナナコオリ1",
+      "Enhance1": 1946,
+      "Enhance2": 1947,
+      "Enhance3": 1948,
+      "Enhance4": 1949,
+      "Enhance5": 1950,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 83,
+      "Name": 80,
+      "DebugName": "ナナコオリ2",
+      "Enhance1": 1951,
+      "Enhance2": 1952,
+      "Enhance3": 1953,
+      "Enhance4": 1954,
+      "Enhance5": 1955,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 84,
+      "Name": 81,
+      "DebugName": "ナナコオリ3",
+      "Enhance1": 1956,
+      "Enhance2": 1957,
+      "Enhance3": 1958,
+      "Enhance4": 1959,
+      "Enhance5": 1960,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 85,
+      "Name": 82,
+      "DebugName": "ニューツ1",
+      "Enhance1": 1961,
+      "Enhance2": 1962,
+      "Enhance3": 1963,
+      "Enhance4": 1964,
+      "Enhance5": 1965,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 86,
+      "Name": 83,
+      "DebugName": "ニューツ2",
+      "Enhance1": 1966,
+      "Enhance2": 1967,
+      "Enhance3": 1968,
+      "Enhance4": 1969,
+      "Enhance5": 1970,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 87,
+      "Name": 84,
+      "DebugName": "ニューツ3",
+      "Enhance1": 1971,
+      "Enhance2": 1972,
+      "Enhance3": 1973,
+      "Enhance4": 1974,
+      "Enhance5": 1975,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 88,
+      "Name": 85,
+      "DebugName": "ウカ1",
+      "Enhance1": 1976,
+      "Enhance2": 1977,
+      "Enhance3": 1978,
+      "Enhance4": 1979,
+      "Enhance5": 1980,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 89,
+      "Name": 86,
+      "DebugName": "ウカ2",
+      "Enhance1": 1981,
+      "Enhance2": 1982,
+      "Enhance3": 1983,
+      "Enhance4": 1984,
+      "Enhance5": 1985,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 90,
+      "Name": 87,
+      "DebugName": "ウカ3",
+      "Enhance1": 1986,
+      "Enhance2": 1987,
+      "Enhance3": 1988,
+      "Enhance4": 1989,
+      "Enhance5": 1990,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 91,
+      "Name": 88,
+      "DebugName": "リンネ1",
+      "Enhance1": 1991,
+      "Enhance2": 1992,
+      "Enhance3": 1993,
+      "Enhance4": 1994,
+      "Enhance5": 1995,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 92,
+      "Name": 89,
+      "DebugName": "リンネ2",
+      "Enhance1": 1996,
+      "Enhance2": 1997,
+      "Enhance3": 1998,
+      "Enhance4": 1999,
+      "Enhance5": 2000,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 93,
+      "Name": 90,
+      "DebugName": "リンネ3",
+      "Enhance1": 2001,
+      "Enhance2": 2002,
+      "Enhance3": 2003,
+      "Enhance4": 2004,
+      "Enhance5": 2005,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 94,
+      "Name": 91,
+      "DebugName": "ムスビ1",
+      "Enhance1": 2006,
+      "Enhance2": 2007,
+      "Enhance3": 2008,
+      "Enhance4": 2009,
+      "Enhance5": 2010,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 95,
+      "Name": 92,
+      "DebugName": "ムスビ2",
+      "Enhance1": 2011,
+      "Enhance2": 2012,
+      "Enhance3": 2013,
+      "Enhance4": 2014,
+      "Enhance5": 2015,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 96,
+      "Name": 93,
+      "DebugName": "ムスビ3",
+      "Enhance1": 2016,
+      "Enhance2": 2017,
+      "Enhance3": 2018,
+      "Enhance4": 2019,
+      "Enhance5": 2020,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 97,
+      "Name": 94,
+      "DebugName": "シキ1",
+      "Enhance1": 2021,
+      "Enhance2": 2022,
+      "Enhance3": 2023,
+      "Enhance4": 2024,
+      "Enhance5": 2025,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 98,
+      "Name": 95,
+      "DebugName": "シキ2",
+      "Enhance1": 2026,
+      "Enhance2": 2027,
+      "Enhance3": 2028,
+      "Enhance4": 2029,
+      "Enhance5": 2030,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 99,
+      "Name": 96,
+      "DebugName": "シキ3",
+      "Enhance1": 2031,
+      "Enhance2": 2032,
+      "Enhance3": 2033,
+      "Enhance4": 2034,
+      "Enhance5": 2035,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 100,
+      "Name": 97,
+      "DebugName": "ライコ1",
+      "Enhance1": 2036,
+      "Enhance2": 2037,
+      "Enhance3": 2038,
+      "Enhance4": 2039,
+      "Enhance5": 2040,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 101,
+      "Name": 98,
+      "DebugName": "ライコ2",
+      "Enhance1": 2041,
+      "Enhance2": 2042,
+      "Enhance3": 2043,
+      "Enhance4": 2044,
+      "Enhance5": 2045,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 102,
+      "Name": 99,
+      "DebugName": "ライコ3",
+      "Enhance1": 2046,
+      "Enhance2": 2047,
+      "Enhance3": 2048,
+      "Enhance4": 2049,
+      "Enhance5": 2050,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 103,
+      "Name": 100,
+      "DebugName": "ヤエギリ1",
+      "Enhance1": 2051,
+      "Enhance2": 2052,
+      "Enhance3": 2053,
+      "Enhance4": 2054,
+      "Enhance5": 2055,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 104,
+      "Name": 101,
+      "DebugName": "ヤエギリ2",
+      "Enhance1": 2056,
+      "Enhance2": 2057,
+      "Enhance3": 2058,
+      "Enhance4": 2059,
+      "Enhance5": 2060,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 105,
+      "Name": 102,
+      "DebugName": "ヤエギリ3",
+      "Enhance1": 2061,
+      "Enhance2": 2062,
+      "Enhance3": 2063,
+      "Enhance4": 2064,
+      "Enhance5": 2065,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 106,
+      "Name": 103,
+      "DebugName": "イブキ1",
+      "Enhance1": 2066,
+      "Enhance2": 2067,
+      "Enhance3": 2068,
+      "Enhance4": 2069,
+      "Enhance5": 2070,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 107,
+      "Name": 104,
+      "DebugName": "イブキ2",
+      "Enhance1": 2071,
+      "Enhance2": 2072,
+      "Enhance3": 2073,
+      "Enhance4": 2074,
+      "Enhance5": 2075,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 108,
+      "Name": 105,
+      "DebugName": "イブキ3",
+      "Enhance1": 2076,
+      "Enhance2": 2077,
+      "Enhance3": 2078,
+      "Enhance4": 2079,
+      "Enhance5": 2080,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 109,
+      "Name": 106,
+      "DebugName": "ホタル1",
+      "Enhance1": 2081,
+      "Enhance2": 2082,
+      "Enhance3": 2083,
+      "Enhance4": 2084,
+      "Enhance5": 2085,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 110,
+      "Name": 107,
+      "DebugName": "ホタル2",
+      "Enhance1": 2086,
+      "Enhance2": 2087,
+      "Enhance3": 2088,
+      "Enhance4": 2089,
+      "Enhance5": 2090,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 111,
+      "Name": 108,
+      "DebugName": "ホタル3",
+      "Enhance1": 2091,
+      "Enhance2": 2092,
+      "Enhance3": 2093,
+      "Enhance4": 2094,
+      "Enhance5": 2095,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 112,
+      "Name": 109,
+      "DebugName": "コスモス1",
+      "Enhance1": 2096,
+      "Enhance2": 2097,
+      "Enhance3": 2098,
+      "Enhance4": 2099,
+      "Enhance5": 2100,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 113,
+      "Name": 110,
+      "DebugName": "コスモス2",
+      "Enhance1": 2101,
+      "Enhance2": 2102,
+      "Enhance3": 2103,
+      "Enhance4": 2104,
+      "Enhance5": 2105,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 114,
+      "Name": 111,
+      "DebugName": "コスモス3",
+      "Enhance1": 2106,
+      "Enhance2": 2107,
+      "Enhance3": 2108,
+      "Enhance4": 2109,
+      "Enhance5": 2110,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 115,
+      "Name": 112,
+      "DebugName": "テンイ1",
+      "Enhance1": 2111,
+      "Enhance2": 2112,
+      "Enhance3": 2113,
+      "Enhance4": 2114,
+      "Enhance5": 2115,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 116,
+      "Name": 113,
+      "DebugName": "テンイ2",
+      "Enhance1": 2116,
+      "Enhance2": 2117,
+      "Enhance3": 2118,
+      "Enhance4": 2119,
+      "Enhance5": 2120,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 117,
+      "Name": 114,
+      "DebugName": "テンイ3",
+      "Enhance1": 2121,
+      "Enhance2": 2122,
+      "Enhance3": 2123,
+      "Enhance4": 2124,
+      "Enhance5": 2125,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 118,
+      "Name": 115,
+      "DebugName": "ツキ1",
+      "Enhance1": 2126,
+      "Enhance2": 2127,
+      "Enhance3": 2128,
+      "Enhance4": 2129,
+      "Enhance5": 2130,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 119,
+      "Name": 116,
+      "DebugName": "ツキ2",
+      "Enhance1": 2131,
+      "Enhance2": 2132,
+      "Enhance3": 2133,
+      "Enhance4": 2134,
+      "Enhance5": 2135,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 120,
+      "Name": 117,
+      "DebugName": "ツキ3",
+      "Enhance1": 2136,
+      "Enhance2": 2137,
+      "Enhance3": 2138,
+      "Enhance4": 2139,
+      "Enhance5": 2140,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 121,
+      "Name": 118,
+      "DebugName": "ザンテツ1",
+      "Enhance1": 2141,
+      "Enhance2": 2142,
+      "Enhance3": 2143,
+      "Enhance4": 2144,
+      "Enhance5": 2145,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 122,
+      "Name": 119,
+      "DebugName": "ザンテツ2",
+      "Enhance1": 2146,
+      "Enhance2": 2147,
+      "Enhance3": 2148,
+      "Enhance4": 2149,
+      "Enhance5": 2150,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 123,
+      "Name": 120,
+      "DebugName": "ザンテツ3",
+      "Enhance1": 2151,
+      "Enhance2": 2152,
+      "Enhance3": 2153,
+      "Enhance4": 2154,
+      "Enhance5": 2155,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 124,
+      "Name": 121,
+      "DebugName": "ヨシツネ1",
+      "Enhance1": 2156,
+      "Enhance2": 2157,
+      "Enhance3": 2158,
+      "Enhance4": 2159,
+      "Enhance5": 2160,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 125,
+      "Name": 122,
+      "DebugName": "ヨシツネ2",
+      "Enhance1": 2161,
+      "Enhance2": 2162,
+      "Enhance3": 2163,
+      "Enhance4": 2164,
+      "Enhance5": 2165,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 126,
+      "Name": 123,
+      "DebugName": "ヨシツネ3",
+      "Enhance1": 2166,
+      "Enhance2": 2167,
+      "Enhance3": 2168,
+      "Enhance4": 2169,
+      "Enhance5": 2170,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 127,
+      "Name": 124,
+      "DebugName": "ベンケイ1",
+      "Enhance1": 2171,
+      "Enhance2": 2172,
+      "Enhance3": 2173,
+      "Enhance4": 2174,
+      "Enhance5": 2175,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 128,
+      "Name": 125,
+      "DebugName": "ベンケイ2",
+      "Enhance1": 2176,
+      "Enhance2": 2177,
+      "Enhance3": 2178,
+      "Enhance4": 2179,
+      "Enhance5": 2180,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 129,
+      "Name": 126,
+      "DebugName": "ベンケイ3",
+      "Enhance1": 2181,
+      "Enhance2": 2182,
+      "Enhance3": 2183,
+      "Enhance4": 2184,
+      "Enhance5": 2185,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 130,
+      "Name": 127,
+      "DebugName": "サタヒコ1",
+      "Enhance1": 2186,
+      "Enhance2": 2187,
+      "Enhance3": 2188,
+      "Enhance4": 2189,
+      "Enhance5": 2190,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 131,
+      "Name": 128,
+      "DebugName": "サタヒコ2",
+      "Enhance1": 2191,
+      "Enhance2": 2192,
+      "Enhance3": 2193,
+      "Enhance4": 2194,
+      "Enhance5": 2195,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 132,
+      "Name": 129,
+      "DebugName": "サタヒコ3",
+      "Enhance1": 2196,
+      "Enhance2": 2197,
+      "Enhance3": 2198,
+      "Enhance4": 2199,
+      "Enhance5": 2200,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 133,
+      "Name": 130,
+      "DebugName": "カムイ1",
+      "Enhance1": 2201,
+      "Enhance2": 2202,
+      "Enhance3": 2203,
+      "Enhance4": 2204,
+      "Enhance5": 2205,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 134,
+      "Name": 131,
+      "DebugName": "カムイ2",
+      "Enhance1": 2206,
+      "Enhance2": 2207,
+      "Enhance3": 2208,
+      "Enhance4": 2209,
+      "Enhance5": 2210,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 135,
+      "Name": 132,
+      "DebugName": "カムイ3",
+      "Enhance1": 2211,
+      "Enhance2": 2212,
+      "Enhance3": 2213,
+      "Enhance4": 2214,
+      "Enhance5": 2215,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 136,
+      "Name": 133,
+      "DebugName": "ラゴウ1",
+      "Enhance1": 2216,
+      "Enhance2": 2217,
+      "Enhance3": 2218,
+      "Enhance4": 2219,
+      "Enhance5": 2220,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 137,
+      "Name": 134,
+      "DebugName": "ラゴウ2",
+      "Enhance1": 2221,
+      "Enhance2": 2222,
+      "Enhance3": 2223,
+      "Enhance4": 2224,
+      "Enhance5": 2225,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 138,
+      "Name": 135,
+      "DebugName": "ラゴウ3",
+      "Enhance1": 2226,
+      "Enhance2": 2227,
+      "Enhance3": 2228,
+      "Enhance4": 2229,
+      "Enhance5": 2230,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 139,
+      "Name": 136,
+      "DebugName": "オオツチ1",
+      "Enhance1": 2231,
+      "Enhance2": 2232,
+      "Enhance3": 2233,
+      "Enhance4": 2234,
+      "Enhance5": 2235,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 140,
+      "Name": 137,
+      "DebugName": "オオツチ2",
+      "Enhance1": 2236,
+      "Enhance2": 2237,
+      "Enhance3": 2238,
+      "Enhance4": 2239,
+      "Enhance5": 2240,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 141,
+      "Name": 138,
+      "DebugName": "オオツチ3",
+      "Enhance1": 2241,
+      "Enhance2": 2242,
+      "Enhance3": 2243,
+      "Enhance4": 2244,
+      "Enhance5": 2245,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 142,
+      "Name": 0,
+      "DebugName": "シン・ダミー1",
+      "Enhance1": 2246,
+      "Enhance2": 2246,
+      "Enhance3": 2246,
+      "Enhance4": 2246,
+      "Enhance5": 2246,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 143,
+      "Name": 0,
+      "DebugName": "シン・ダミー2",
+      "Enhance1": 2247,
+      "Enhance2": 2247,
+      "Enhance3": 2247,
+      "Enhance4": 2247,
+      "Enhance5": 2247,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 144,
+      "Name": 0,
+      "DebugName": "シン・ダミー3",
+      "Enhance1": 2248,
+      "Enhance2": 2248,
+      "Enhance3": 2248,
+      "Enhance4": 2248,
+      "Enhance5": 2248,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 145,
+      "Name": 139,
+      "DebugName": "",
+      "Enhance1": 2250,
+      "Enhance2": 2251,
+      "Enhance3": 2252,
+      "Enhance4": 2253,
+      "Enhance5": 2254,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 146,
+      "Name": 140,
+      "DebugName": "",
+      "Enhance1": 2255,
+      "Enhance2": 2256,
+      "Enhance3": 2257,
+      "Enhance4": 2258,
+      "Enhance5": 2259,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 147,
+      "Name": 141,
+      "DebugName": "",
+      "Enhance1": 2260,
+      "Enhance2": 2261,
+      "Enhance3": 2262,
+      "Enhance4": 2263,
+      "Enhance5": 2264,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 148,
+      "Name": 142,
+      "DebugName": "",
+      "Enhance1": 2265,
+      "Enhance2": 2266,
+      "Enhance3": 2267,
+      "Enhance4": 2268,
+      "Enhance5": 2269,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 149,
+      "Name": 143,
+      "DebugName": "",
+      "Enhance1": 2270,
+      "Enhance2": 2271,
+      "Enhance3": 2272,
+      "Enhance4": 2273,
+      "Enhance5": 2274,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 150,
+      "Name": 144,
+      "DebugName": "",
+      "Enhance1": 2275,
+      "Enhance2": 2276,
+      "Enhance3": 2277,
+      "Enhance4": 2278,
+      "Enhance5": 2279,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 151,
+      "Name": 145,
+      "DebugName": "",
+      "Enhance1": 2280,
+      "Enhance2": 2281,
+      "Enhance3": 2282,
+      "Enhance4": 2283,
+      "Enhance5": 2284,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 152,
+      "Name": 146,
+      "DebugName": "",
+      "Enhance1": 2285,
+      "Enhance2": 2286,
+      "Enhance3": 2287,
+      "Enhance4": 2288,
+      "Enhance5": 2289,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 153,
+      "Name": 147,
+      "DebugName": "",
+      "Enhance1": 2290,
+      "Enhance2": 2291,
+      "Enhance3": 2292,
+      "Enhance4": 2293,
+      "Enhance5": 2294,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 154,
+      "Name": 148,
+      "DebugName": "",
+      "Enhance1": 2295,
+      "Enhance2": 2296,
+      "Enhance3": 2297,
+      "Enhance4": 2298,
+      "Enhance5": 2299,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 155,
+      "Name": 149,
+      "DebugName": "",
+      "Enhance1": 2300,
+      "Enhance2": 2301,
+      "Enhance3": 2302,
+      "Enhance4": 2303,
+      "Enhance5": 2304,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 156,
+      "Name": 150,
+      "DebugName": "",
+      "Enhance1": 2305,
+      "Enhance2": 2306,
+      "Enhance3": 2307,
+      "Enhance4": 2308,
+      "Enhance5": 2309,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 157,
+      "Name": 151,
+      "DebugName": "",
+      "Enhance1": 2310,
+      "Enhance2": 2311,
+      "Enhance3": 2312,
+      "Enhance4": 2313,
+      "Enhance5": 2314,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 158,
+      "Name": 152,
+      "DebugName": "",
+      "Enhance1": 2315,
+      "Enhance2": 2316,
+      "Enhance3": 2317,
+      "Enhance4": 2318,
+      "Enhance5": 2319,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 159,
+      "Name": 153,
+      "DebugName": "",
+      "Enhance1": 2320,
+      "Enhance2": 2321,
+      "Enhance3": 2322,
+      "Enhance4": 2323,
+      "Enhance5": 2324,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 160,
+      "Name": 154,
+      "DebugName": "",
+      "Enhance1": 2325,
+      "Enhance2": 2326,
+      "Enhance3": 2327,
+      "Enhance4": 2328,
+      "Enhance5": 2329,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 161,
+      "Name": 155,
+      "DebugName": "",
+      "Enhance1": 2330,
+      "Enhance2": 2331,
+      "Enhance3": 2332,
+      "Enhance4": 2333,
+      "Enhance5": 2334,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 162,
+      "Name": 156,
+      "DebugName": "",
+      "Enhance1": 2335,
+      "Enhance2": 2336,
+      "Enhance3": 2337,
+      "Enhance4": 2338,
+      "Enhance5": 2339,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 163,
+      "Name": 157,
+      "DebugName": "",
+      "Enhance1": 2340,
+      "Enhance2": 2341,
+      "Enhance3": 2342,
+      "Enhance4": 2343,
+      "Enhance5": 2344,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 164,
+      "Name": 158,
+      "DebugName": "",
+      "Enhance1": 2345,
+      "Enhance2": 2346,
+      "Enhance3": 2347,
+      "Enhance4": 2348,
+      "Enhance5": 2349,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 165,
+      "Name": 159,
+      "DebugName": "",
+      "Enhance1": 2350,
+      "Enhance2": 2351,
+      "Enhance3": 2352,
+      "Enhance4": 2353,
+      "Enhance5": 2354,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 166,
+      "Name": 160,
+      "DebugName": "",
+      "Enhance1": 2355,
+      "Enhance2": 2356,
+      "Enhance3": 2357,
+      "Enhance4": 2358,
+      "Enhance5": 2359,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 167,
+      "Name": 161,
+      "DebugName": "",
+      "Enhance1": 2360,
+      "Enhance2": 2361,
+      "Enhance3": 2362,
+      "Enhance4": 2363,
+      "Enhance5": 2364,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 168,
+      "Name": 162,
+      "DebugName": "",
+      "Enhance1": 2365,
+      "Enhance2": 2366,
+      "Enhance3": 2367,
+      "Enhance4": 2368,
+      "Enhance5": 2369,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 169,
+      "Name": 163,
+      "DebugName": "",
+      "Enhance1": 2370,
+      "Enhance2": 2371,
+      "Enhance3": 2372,
+      "Enhance4": 2373,
+      "Enhance5": 2374,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 170,
+      "Name": 164,
+      "DebugName": "",
+      "Enhance1": 2375,
+      "Enhance2": 2376,
+      "Enhance3": 2377,
+      "Enhance4": 2378,
+      "Enhance5": 2379,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 171,
+      "Name": 165,
+      "DebugName": "",
+      "Enhance1": 2380,
+      "Enhance2": 2381,
+      "Enhance3": 2382,
+      "Enhance4": 2383,
+      "Enhance5": 2384,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 172,
+      "Name": 166,
+      "DebugName": "",
+      "Enhance1": 2385,
+      "Enhance2": 2386,
+      "Enhance3": 2387,
+      "Enhance4": 2388,
+      "Enhance5": 2389,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 173,
+      "Name": 167,
+      "DebugName": "",
+      "Enhance1": 2390,
+      "Enhance2": 2391,
+      "Enhance3": 2392,
+      "Enhance4": 2393,
+      "Enhance5": 2394,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 174,
+      "Name": 168,
+      "DebugName": "",
+      "Enhance1": 2395,
+      "Enhance2": 2396,
+      "Enhance3": 2397,
+      "Enhance4": 2398,
+      "Enhance5": 2399,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 175,
+      "Name": 169,
+      "DebugName": "",
+      "Enhance1": 2400,
+      "Enhance2": 2401,
+      "Enhance3": 2402,
+      "Enhance4": 2403,
+      "Enhance5": 2404,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 176,
+      "Name": 170,
+      "DebugName": "",
+      "Enhance1": 2405,
+      "Enhance2": 2406,
+      "Enhance3": 2407,
+      "Enhance4": 2408,
+      "Enhance5": 2409,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 177,
+      "Name": 171,
+      "DebugName": "",
+      "Enhance1": 2410,
+      "Enhance2": 2411,
+      "Enhance3": 2412,
+      "Enhance4": 2413,
+      "Enhance5": 2414,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 178,
+      "Name": 172,
+      "DebugName": "",
+      "Enhance1": 2415,
+      "Enhance2": 2416,
+      "Enhance3": 2417,
+      "Enhance4": 2418,
+      "Enhance5": 2419,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 179,
+      "Name": 173,
+      "DebugName": "",
+      "Enhance1": 2420,
+      "Enhance2": 2421,
+      "Enhance3": 2422,
+      "Enhance4": 2423,
+      "Enhance5": 2424,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 180,
+      "Name": 174,
+      "DebugName": "",
+      "Enhance1": 2425,
+      "Enhance2": 2426,
+      "Enhance3": 2427,
+      "Enhance4": 2428,
+      "Enhance5": 2429,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 181,
+      "Name": 175,
+      "DebugName": "",
+      "Enhance1": 2430,
+      "Enhance2": 2431,
+      "Enhance3": 2432,
+      "Enhance4": 2433,
+      "Enhance5": 2434,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 182,
+      "Name": 176,
+      "DebugName": "",
+      "Enhance1": 2435,
+      "Enhance2": 2436,
+      "Enhance3": 2437,
+      "Enhance4": 2438,
+      "Enhance5": 2439,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 183,
+      "Name": 177,
+      "DebugName": "",
+      "Enhance1": 2440,
+      "Enhance2": 2441,
+      "Enhance3": 2442,
+      "Enhance4": 2443,
+      "Enhance5": 2444,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 184,
+      "Name": 178,
+      "DebugName": "",
+      "Enhance1": 2445,
+      "Enhance2": 2446,
+      "Enhance3": 2447,
+      "Enhance4": 2448,
+      "Enhance5": 2449,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 185,
+      "Name": 179,
+      "DebugName": "",
+      "Enhance1": 2450,
+      "Enhance2": 2451,
+      "Enhance3": 2452,
+      "Enhance4": 2453,
+      "Enhance5": 2454,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 186,
+      "Name": 180,
+      "DebugName": "",
+      "Enhance1": 2455,
+      "Enhance2": 2456,
+      "Enhance3": 2457,
+      "Enhance4": 2458,
+      "Enhance5": 2459,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 187,
+      "Name": 181,
+      "DebugName": "",
+      "Enhance1": 2460,
+      "Enhance2": 2461,
+      "Enhance3": 2462,
+      "Enhance4": 2463,
+      "Enhance5": 2464,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 188,
+      "Name": 182,
+      "DebugName": "",
+      "Enhance1": 2465,
+      "Enhance2": 2466,
+      "Enhance3": 2467,
+      "Enhance4": 2468,
+      "Enhance5": 2469,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 189,
+      "Name": 183,
+      "DebugName": "",
+      "Enhance1": 2470,
+      "Enhance2": 2471,
+      "Enhance3": 2472,
+      "Enhance4": 2473,
+      "Enhance5": 2474,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 190,
+      "Name": 184,
+      "DebugName": "",
+      "Enhance1": 2475,
+      "Enhance2": 2476,
+      "Enhance3": 2477,
+      "Enhance4": 2478,
+      "Enhance5": 2479,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 191,
+      "Name": 185,
+      "DebugName": "",
+      "Enhance1": 2480,
+      "Enhance2": 2481,
+      "Enhance3": 2482,
+      "Enhance4": 2483,
+      "Enhance5": 2484,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 192,
+      "Name": 186,
+      "DebugName": "",
+      "Enhance1": 2485,
+      "Enhance2": 2486,
+      "Enhance3": 2487,
+      "Enhance4": 2488,
+      "Enhance5": 2489,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 193,
+      "Name": 187,
+      "DebugName": "",
+      "Enhance1": 2490,
+      "Enhance2": 2491,
+      "Enhance3": 2492,
+      "Enhance4": 2493,
+      "Enhance5": 2494,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 194,
+      "Name": 188,
+      "DebugName": "",
+      "Enhance1": 2495,
+      "Enhance2": 2496,
+      "Enhance3": 2497,
+      "Enhance4": 2498,
+      "Enhance5": 2499,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 195,
+      "Name": 189,
+      "DebugName": "",
+      "Enhance1": 2500,
+      "Enhance2": 2501,
+      "Enhance3": 2502,
+      "Enhance4": 2503,
+      "Enhance5": 2504,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 196,
+      "Name": 190,
+      "DebugName": "",
+      "Enhance1": 2505,
+      "Enhance2": 2506,
+      "Enhance3": 2507,
+      "Enhance4": 2508,
+      "Enhance5": 2509,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 197,
+      "Name": 191,
+      "DebugName": "",
+      "Enhance1": 2510,
+      "Enhance2": 2511,
+      "Enhance3": 2512,
+      "Enhance4": 2513,
+      "Enhance5": 2514,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 198,
+      "Name": 192,
+      "DebugName": "",
+      "Enhance1": 2515,
+      "Enhance2": 2516,
+      "Enhance3": 2517,
+      "Enhance4": 2518,
+      "Enhance5": 2519,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 199,
+      "Name": 193,
+      "DebugName": "",
+      "Enhance1": 2520,
+      "Enhance2": 2521,
+      "Enhance3": 2522,
+      "Enhance4": 2523,
+      "Enhance5": 2524,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 200,
+      "Name": 194,
+      "DebugName": "",
+      "Enhance1": 2525,
+      "Enhance2": 2526,
+      "Enhance3": 2527,
+      "Enhance4": 2528,
+      "Enhance5": 2529,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 201,
+      "Name": 195,
+      "DebugName": "",
+      "Enhance1": 2530,
+      "Enhance2": 2531,
+      "Enhance3": 2532,
+      "Enhance4": 2533,
+      "Enhance5": 2534,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 202,
+      "Name": 196,
+      "DebugName": "",
+      "Enhance1": 2535,
+      "Enhance2": 2536,
+      "Enhance3": 2537,
+      "Enhance4": 2538,
+      "Enhance5": 2539,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 203,
+      "Name": 197,
+      "DebugName": "",
+      "Enhance1": 2540,
+      "Enhance2": 2541,
+      "Enhance3": 2542,
+      "Enhance4": 2543,
+      "Enhance5": 2544,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 204,
+      "Name": 200,
+      "DebugName": "",
+      "Enhance1": 2545,
+      "Enhance2": 2546,
+      "Enhance3": 2547,
+      "Enhance4": 2548,
+      "Enhance5": 2549,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 205,
+      "Name": 199,
+      "DebugName": "",
+      "Enhance1": 2550,
+      "Enhance2": 2551,
+      "Enhance3": 2552,
+      "Enhance4": 2553,
+      "Enhance5": 2554,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 206,
+      "Name": 198,
+      "DebugName": "",
+      "Enhance1": 2555,
+      "Enhance2": 2556,
+      "Enhance3": 2557,
+      "Enhance4": 2558,
+      "Enhance5": 2559,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 207,
+      "Name": 201,
+      "DebugName": "",
+      "Enhance1": 2560,
+      "Enhance2": 2561,
+      "Enhance3": 2562,
+      "Enhance4": 2563,
+      "Enhance5": 2564,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 208,
+      "Name": 202,
+      "DebugName": "",
+      "Enhance1": 2565,
+      "Enhance2": 2566,
+      "Enhance3": 2567,
+      "Enhance4": 2568,
+      "Enhance5": 2569,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 209,
+      "Name": 203,
+      "DebugName": "",
+      "Enhance1": 2570,
+      "Enhance2": 2571,
+      "Enhance3": 2572,
+      "Enhance4": 2573,
+      "Enhance5": 2574,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 210,
+      "Name": 204,
+      "DebugName": "",
+      "Enhance1": 2575,
+      "Enhance2": 2576,
+      "Enhance3": 2577,
+      "Enhance4": 2578,
+      "Enhance5": 2579,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 211,
+      "Name": 205,
+      "DebugName": "",
+      "Enhance1": 2580,
+      "Enhance2": 2581,
+      "Enhance3": 2582,
+      "Enhance4": 2583,
+      "Enhance5": 2584,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 212,
+      "Name": 206,
+      "DebugName": "",
+      "Enhance1": 2585,
+      "Enhance2": 2586,
+      "Enhance3": 2587,
+      "Enhance4": 2588,
+      "Enhance5": 2589,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 213,
+      "Name": 207,
+      "DebugName": "",
+      "Enhance1": 2590,
+      "Enhance2": 2591,
+      "Enhance3": 2592,
+      "Enhance4": 2593,
+      "Enhance5": 2594,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 214,
+      "Name": 208,
+      "DebugName": "",
+      "Enhance1": 2595,
+      "Enhance2": 2596,
+      "Enhance3": 2597,
+      "Enhance4": 2598,
+      "Enhance5": 2599,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 215,
+      "Name": 210,
+      "DebugName": "",
+      "Enhance1": 2605,
+      "Enhance2": 2606,
+      "Enhance3": 2607,
+      "Enhance4": 2608,
+      "Enhance5": 2609,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 216,
+      "Name": 211,
+      "DebugName": "",
+      "Enhance1": 2610,
+      "Enhance2": 2611,
+      "Enhance3": 2612,
+      "Enhance4": 2613,
+      "Enhance5": 2614,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 217,
+      "Name": 212,
+      "DebugName": "",
+      "Enhance1": 2615,
+      "Enhance2": 2616,
+      "Enhance3": 2617,
+      "Enhance4": 2618,
+      "Enhance5": 2619,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 218,
+      "Name": 213,
+      "DebugName": "",
+      "Enhance1": 2620,
+      "Enhance2": 2621,
+      "Enhance3": 2622,
+      "Enhance4": 2623,
+      "Enhance5": 2624,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 219,
+      "Name": 214,
+      "DebugName": "",
+      "Enhance1": 2625,
+      "Enhance2": 2626,
+      "Enhance3": 2627,
+      "Enhance4": 2628,
+      "Enhance5": 2629,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 220,
+      "Name": 215,
+      "DebugName": "",
+      "Enhance1": 2630,
+      "Enhance2": 2631,
+      "Enhance3": 2632,
+      "Enhance4": 2633,
+      "Enhance5": 2634,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 221,
+      "Name": 216,
+      "DebugName": "",
+      "Enhance1": 2635,
+      "Enhance2": 2636,
+      "Enhance3": 2637,
+      "Enhance4": 2638,
+      "Enhance5": 2639,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 222,
+      "Name": 217,
+      "DebugName": "",
+      "Enhance1": 2640,
+      "Enhance2": 2641,
+      "Enhance3": 2642,
+      "Enhance4": 2643,
+      "Enhance5": 2644,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 223,
+      "Name": 218,
+      "DebugName": "",
+      "Enhance1": 2645,
+      "Enhance2": 2646,
+      "Enhance3": 2647,
+      "Enhance4": 2648,
+      "Enhance5": 2649,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 224,
+      "Name": 219,
+      "DebugName": "",
+      "Enhance1": 2650,
+      "Enhance2": 2651,
+      "Enhance3": 2652,
+      "Enhance4": 2653,
+      "Enhance5": 2654,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 225,
+      "Name": 220,
+      "DebugName": "",
+      "Enhance1": 2655,
+      "Enhance2": 2656,
+      "Enhance3": 2657,
+      "Enhance4": 2658,
+      "Enhance5": 2659,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 0,
+      "Attacker": 1,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 226,
+      "Name": 221,
+      "DebugName": "",
+      "Enhance1": 2660,
+      "Enhance2": 2661,
+      "Enhance3": 2662,
+      "Enhance4": 2663,
+      "Enhance5": 2664,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 227,
+      "Name": 222,
+      "DebugName": "",
+      "Enhance1": 2665,
+      "Enhance2": 2666,
+      "Enhance3": 2667,
+      "Enhance4": 2668,
+      "Enhance5": 2669,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 228,
+      "Name": 223,
+      "DebugName": "",
+      "Enhance1": 2670,
+      "Enhance2": 2671,
+      "Enhance3": 2672,
+      "Enhance4": 2673,
+      "Enhance5": 2674,
+      "Flag": {
+        "common": 1
+      },
+      "Tank": 1,
+      "Attacker": 1,
+      "Healer": 1,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 229,
+      "Name": 109,
+      "DebugName": "スキル1",
+      "Enhance1": 3603,
+      "Enhance2": 3604,
+      "Enhance3": 3605,
+      "Enhance4": 3606,
+      "Enhance5": 3607,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 230,
+      "Name": 224,
+      "DebugName": "スキル2",
+      "Enhance1": 3608,
+      "Enhance2": 3609,
+      "Enhance3": 3610,
+      "Enhance4": 3611,
+      "Enhance5": 3612,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 231,
+      "Name": 225,
+      "DebugName": "スキル3",
+      "Enhance1": 3613,
+      "Enhance2": 3614,
+      "Enhance3": 3615,
+      "Enhance4": 3616,
+      "Enhance5": 3617,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 232,
+      "Name": 226,
+      "DebugName": "スキル1",
+      "Enhance1": 3618,
+      "Enhance2": 3619,
+      "Enhance3": 3620,
+      "Enhance4": 3621,
+      "Enhance5": 3622,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 233,
+      "Name": 227,
+      "DebugName": "スキル2",
+      "Enhance1": 3623,
+      "Enhance2": 3624,
+      "Enhance3": 3625,
+      "Enhance4": 3626,
+      "Enhance5": 3627,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 234,
+      "Name": 228,
+      "DebugName": "スキル3",
+      "Enhance1": 3628,
+      "Enhance2": 3629,
+      "Enhance3": 3630,
+      "Enhance4": 3631,
+      "Enhance5": 3632,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 235,
+      "Name": 229,
+      "DebugName": "スキル1",
+      "Enhance1": 3633,
+      "Enhance2": 3634,
+      "Enhance3": 3635,
+      "Enhance4": 3636,
+      "Enhance5": 3637,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 236,
+      "Name": 230,
+      "DebugName": "スキル2",
+      "Enhance1": 3638,
+      "Enhance2": 3639,
+      "Enhance3": 3640,
+      "Enhance4": 3641,
+      "Enhance5": 3642,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 237,
+      "Name": 231,
+      "DebugName": "スキル3",
+      "Enhance1": 3643,
+      "Enhance2": 3644,
+      "Enhance3": 3645,
+      "Enhance4": 3646,
+      "Enhance5": 3647,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 238,
+      "Name": 232,
+      "DebugName": "スキル1",
+      "Enhance1": 3648,
+      "Enhance2": 3649,
+      "Enhance3": 3650,
+      "Enhance4": 3651,
+      "Enhance5": 3652,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 239,
+      "Name": 233,
+      "DebugName": "スキル2",
+      "Enhance1": 3653,
+      "Enhance2": 3654,
+      "Enhance3": 3655,
+      "Enhance4": 3656,
+      "Enhance5": 3657,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 240,
+      "Name": 234,
+      "DebugName": "スキル3",
+      "Enhance1": 3658,
+      "Enhance2": 3659,
+      "Enhance3": 3660,
+      "Enhance4": 3661,
+      "Enhance5": 3662,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 241,
+      "Name": 235,
+      "DebugName": "スキル1",
+      "Enhance1": 3663,
+      "Enhance2": 3664,
+      "Enhance3": 3665,
+      "Enhance4": 3666,
+      "Enhance5": 3667,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 242,
+      "Name": 236,
+      "DebugName": "スキル2",
+      "Enhance1": 3668,
+      "Enhance2": 3669,
+      "Enhance3": 3670,
+      "Enhance4": 3671,
+      "Enhance5": 3672,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 243,
+      "Name": 237,
+      "DebugName": "スキル3",
+      "Enhance1": 3673,
+      "Enhance2": 3674,
+      "Enhance3": 3675,
+      "Enhance4": 3676,
+      "Enhance5": 3677,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 244,
+      "Name": 238,
+      "DebugName": "スキル1",
+      "Enhance1": 3678,
+      "Enhance2": 3679,
+      "Enhance3": 3680,
+      "Enhance4": 3681,
+      "Enhance5": 3682,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 245,
+      "Name": 239,
+      "DebugName": "スキル2",
+      "Enhance1": 3683,
+      "Enhance2": 3684,
+      "Enhance3": 3685,
+      "Enhance4": 3686,
+      "Enhance5": 3687,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 246,
+      "Name": 240,
+      "DebugName": "スキル3",
+      "Enhance1": 3688,
+      "Enhance2": 3689,
+      "Enhance3": 3690,
+      "Enhance4": 3691,
+      "Enhance5": 3692,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 247,
+      "Name": 241,
+      "DebugName": "スキル1",
+      "Enhance1": 3805,
+      "Enhance2": 3806,
+      "Enhance3": 3807,
+      "Enhance4": 3808,
+      "Enhance5": 3809,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 248,
+      "Name": 242,
+      "DebugName": "スキル2",
+      "Enhance1": 3810,
+      "Enhance2": 3811,
+      "Enhance3": 3812,
+      "Enhance4": 3813,
+      "Enhance5": 3814,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 249,
+      "Name": 243,
+      "DebugName": "スキル3",
+      "Enhance1": 3815,
+      "Enhance2": 3816,
+      "Enhance3": 3817,
+      "Enhance4": 3818,
+      "Enhance5": 3819,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 250,
+      "Name": 244,
+      "DebugName": "スキル1",
+      "Enhance1": 3820,
+      "Enhance2": 3821,
+      "Enhance3": 3822,
+      "Enhance4": 3823,
+      "Enhance5": 3824,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 251,
+      "Name": 245,
+      "DebugName": "スキル2",
+      "Enhance1": 3825,
+      "Enhance2": 3826,
+      "Enhance3": 3827,
+      "Enhance4": 3828,
+      "Enhance5": 3829,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 252,
+      "Name": 246,
+      "DebugName": "スキル3",
+      "Enhance1": 3830,
+      "Enhance2": 3831,
+      "Enhance3": 3832,
+      "Enhance4": 3833,
+      "Enhance5": 3834,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 253,
+      "Name": 4,
+      "DebugName": "スキル1",
+      "Enhance1": 3835,
+      "Enhance2": 3836,
+      "Enhance3": 3837,
+      "Enhance4": 3838,
+      "Enhance5": 3839,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 254,
+      "Name": 5,
+      "DebugName": "スキル2",
+      "Enhance1": 3840,
+      "Enhance2": 3841,
+      "Enhance3": 3842,
+      "Enhance4": 3843,
+      "Enhance5": 3844,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 255,
+      "Name": 6,
+      "DebugName": "スキル3",
+      "Enhance1": 3845,
+      "Enhance2": 3846,
+      "Enhance3": 3847,
+      "Enhance4": 3848,
+      "Enhance5": 3849,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 256,
+      "Name": 247,
+      "DebugName": "スキル1",
+      "Enhance1": 3850,
+      "Enhance2": 3851,
+      "Enhance3": 3852,
+      "Enhance4": 3853,
+      "Enhance5": 3854,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 257,
+      "Name": 248,
+      "DebugName": "スキル2",
+      "Enhance1": 3855,
+      "Enhance2": 3856,
+      "Enhance3": 3857,
+      "Enhance4": 3858,
+      "Enhance5": 3859,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 258,
+      "Name": 249,
+      "DebugName": "スキル3",
+      "Enhance1": 3860,
+      "Enhance2": 3861,
+      "Enhance3": 3862,
+      "Enhance4": 3863,
+      "Enhance5": 3864,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 259,
+      "Name": 25,
+      "DebugName": "スキル1",
+      "Enhance1": 3865,
+      "Enhance2": 3866,
+      "Enhance3": 3867,
+      "Enhance4": 3868,
+      "Enhance5": 3869,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 260,
+      "Name": 27,
+      "DebugName": "スキル2",
+      "Enhance1": 3870,
+      "Enhance2": 3871,
+      "Enhance3": 3872,
+      "Enhance4": 3873,
+      "Enhance5": 3874,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 261,
+      "Name": 26,
+      "DebugName": "スキル3",
+      "Enhance1": 3875,
+      "Enhance2": 3876,
+      "Enhance3": 3877,
+      "Enhance4": 3878,
+      "Enhance5": 3879,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 262,
+      "Name": 34,
+      "DebugName": "スキル1",
+      "Enhance1": 3880,
+      "Enhance2": 3881,
+      "Enhance3": 3882,
+      "Enhance4": 3883,
+      "Enhance5": 3884,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 263,
+      "Name": 35,
+      "DebugName": "スキル2",
+      "Enhance1": 3885,
+      "Enhance2": 3886,
+      "Enhance3": 3887,
+      "Enhance4": 3888,
+      "Enhance5": 3889,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 264,
+      "Name": 36,
+      "DebugName": "スキル3",
+      "Enhance1": 3890,
+      "Enhance2": 3891,
+      "Enhance3": 3892,
+      "Enhance4": 3893,
+      "Enhance5": 3894,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 265,
+      "Name": 0,
+      "DebugName": "スキル1",
+      "Enhance1": 2246,
+      "Enhance2": 2246,
+      "Enhance3": 2246,
+      "Enhance4": 2246,
+      "Enhance5": 2246,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 266,
+      "Name": 0,
+      "DebugName": "スキル2",
+      "Enhance1": 2249,
+      "Enhance2": 2249,
+      "Enhance3": 2249,
+      "Enhance4": 2249,
+      "Enhance5": 2249,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 267,
+      "Name": 0,
+      "DebugName": "スキル3",
+      "Enhance1": 1268,
+      "Enhance2": 1268,
+      "Enhance3": 1268,
+      "Enhance4": 1268,
+      "Enhance5": 1268,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 0,
+      "Caption": 0
+    },
+    {
+      "$id": 268,
+      "Name": 250,
+      "DebugName": "スキル1",
+      "Enhance1": 3693,
+      "Enhance2": 3694,
+      "Enhance3": 3695,
+      "Enhance4": 3696,
+      "Enhance5": 3697,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 269,
+      "Name": 251,
+      "DebugName": "スキル2",
+      "Enhance1": 3698,
+      "Enhance2": 3699,
+      "Enhance3": 3700,
+      "Enhance4": 3701,
+      "Enhance5": 3702,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    },
+    {
+      "$id": 270,
+      "Name": 252,
+      "DebugName": "スキル3",
+      "Enhance1": 3703,
+      "Enhance2": 3704,
+      "Enhance3": 3705,
+      "Enhance4": 3706,
+      "Enhance5": 3707,
+      "Flag": {
+        "common": 0
+      },
+      "Tank": 0,
+      "Attacker": 0,
+      "Healer": 0,
+      "UI": 0,
+      "Role": 0,
+      "MaxLv": 5,
+      "Caption": 0
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema": [
+    {
+      "name": "Point",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Point": 1
+    },
+    {
+      "$id": 2,
+      "Point": 2
+    },
+    {
+      "$id": 3,
+      "Point": 5
+    }
+  ]
+}

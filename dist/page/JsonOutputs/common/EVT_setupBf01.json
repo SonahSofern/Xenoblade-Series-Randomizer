@@ -1,0 +1,1011 @@
+{
+  "schema": [
+    {
+      "name": "setupName",
+      "type": 7
+    },
+    {
+      "name": "objName",
+      "type": 7
+    },
+    {
+      "name": "objType",
+      "type": 4
+    },
+    {
+      "name": "objID",
+      "type": 7
+    },
+    {
+      "name": "objModel",
+      "type": 7
+    },
+    {
+      "name": "wpnBlade",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 11001,
+      "setupName": "bf01_050_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11002,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP190002",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11003,
+      "setupName": "bf01_070_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11004,
+      "setupName": "",
+      "objName": "港湾職員",
+      "objType": 5,
+      "objID": "RSC_NP45300015",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11005,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP190002",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11006,
+      "setupName": "bf01_080_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11007,
+      "setupName": "",
+      "objName": "商会ノポン",
+      "objType": 5,
+      "objID": "RSC_NP006001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11008,
+      "setupName": "",
+      "objName": "スペルビア兵1",
+      "objType": 5,
+      "objID": "RSC_NP453201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11009,
+      "setupName": "",
+      "objName": "スペルビア兵2",
+      "objType": 5,
+      "objID": "RSC_NP453201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11010,
+      "setupName": "",
+      "objName": "スペルビア兵3",
+      "objType": 5,
+      "objID": "RSC_NP453201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11011,
+      "setupName": "",
+      "objName": "インヴィディア兵1",
+      "objType": 5,
+      "objID": "RSC_NP433101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11012,
+      "setupName": "",
+      "objName": "インヴィディア兵2",
+      "objType": 5,
+      "objID": "RSC_NP433101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11013,
+      "setupName": "bf01_090_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11014,
+      "setupName": "",
+      "objName": "プニン",
+      "objType": 5,
+      "objID": "RSC_NP000401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11015,
+      "setupName": "",
+      "objName": "スペルビア人/男/屈強/用心棒1",
+      "objType": 5,
+      "objID": "RSC_NP457101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11016,
+      "setupName": "",
+      "objName": "スペルビア人/男/屈強/用心棒2",
+      "objType": 5,
+      "objID": "RSC_NP457101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11017,
+      "setupName": "bf01_100_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11018,
+      "setupName": "",
+      "objName": "バーン",
+      "objType": 5,
+      "objID": "RSC_NP000301",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11019,
+      "setupName": "",
+      "objName": "スペルビア人/女/大人/遊び人1",
+      "objType": 5,
+      "objID": "RSC_NP454501",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11020,
+      "setupName": "",
+      "objName": "スペルビア人/女/大人/遊び人2",
+      "objType": 5,
+      "objID": "RSC_NP45450112",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11021,
+      "setupName": "bf01_110_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11022,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP190002",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11023,
+      "setupName": "bf01_120_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11024,
+      "setupName": "",
+      "objName": "プニン",
+      "objType": 5,
+      "objID": "RSC_NP000401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11025,
+      "setupName": "",
+      "objName": "スペルビア人/男/屈強/用心棒1",
+      "objType": 5,
+      "objID": "RSC_NP457101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11026,
+      "setupName": "",
+      "objName": "スペルビア人/男/屈強/用心棒2",
+      "objType": 5,
+      "objID": "RSC_NP457101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11027,
+      "setupName": "",
+      "objName": "作業員",
+      "objType": 5,
+      "objID": "RSC_NP45340112",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11028,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11029,
+      "setupName": "",
+      "objName": "メツ",
+      "objType": 3,
+      "objID": "DRIVER_METSU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11030,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11031,
+      "setupName": "",
+      "objName": "ザンテツ",
+      "objType": 4,
+      "objID": "BLADE_ZANTETSU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11032,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11033,
+      "setupName": "bf01_120_150",
+      "objName": "ウズシオ",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj180101",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11034,
+      "setupName": "bf01_140_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11035,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11036,
+      "setupName": "",
+      "objName": "双眼鏡",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj101010",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11037,
+      "setupName": "",
+      "objName": "モノケロス",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj180001",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11038,
+      "setupName": "bf01_160_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11039,
+      "setupName": "",
+      "objName": "ヘルメット",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj101013",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11040,
+      "setupName": "bf01_170_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX2",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11041,
+      "setupName": "",
+      "objName": "リーダー",
+      "objType": 5,
+      "objID": "RSC_NP45340112",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11042,
+      "setupName": "",
+      "objName": "スペルビア人/男/大人/サルベージャー1",
+      "objType": 5,
+      "objID": "RSC_NP453401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11043,
+      "setupName": "",
+      "objName": "スペルビア人/男/大人/サルベージャー2",
+      "objType": 5,
+      "objID": "RSC_NP453401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11044,
+      "setupName": "",
+      "objName": "スペルビア人/男/大人/サルベージャー3",
+      "objType": 5,
+      "objID": "RSC_NP453401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11045,
+      "setupName": "",
+      "objName": "スペルビア人/男/大人/サルベージャー4",
+      "objType": 5,
+      "objID": "RSC_NP453401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11046,
+      "setupName": "",
+      "objName": "ノポン/男/大人/サルベージャー1",
+      "objType": 5,
+      "objID": "RSC_NP423401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11047,
+      "setupName": "",
+      "objName": "ノポン/男/大人/サルベージャー2",
+      "objType": 5,
+      "objID": "RSC_NP423401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11048,
+      "setupName": "",
+      "objName": "ノポン/男/大人/サルベージャー3",
+      "objType": 5,
+      "objID": "RSC_NP423401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11049,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11050,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11051,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11052,
+      "setupName": "",
+      "objName": "メツ",
+      "objType": 3,
+      "objID": "DRIVER_METSU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11053,
+      "setupName": "",
+      "objName": "ザンテツ",
+      "objType": 4,
+      "objID": "BLADE_ZANTETSU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11054,
+      "setupName": "",
+      "objName": "ウズシオ",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj180101",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11055,
+      "setupName": "bf01_190_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11056,
+      "setupName": "",
+      "objName": "スペルビア人/男/屈強/サルベージャー",
+      "objType": 5,
+      "objID": "RSC_NP45340112",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11057,
+      "setupName": "",
+      "objName": "スペルビア人/男/大人/サルベージャー1",
+      "objType": 5,
+      "objID": "RSC_NP453401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11058,
+      "setupName": "",
+      "objName": "スペルビア人/男/大人/サルベージャー2",
+      "objType": 5,
+      "objID": "RSC_NP453401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11059,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11060,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11061,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11062,
+      "setupName": "",
+      "objName": "メツ",
+      "objType": 3,
+      "objID": "DRIVER_METSU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11063,
+      "setupName": "",
+      "objName": "ザンテツ",
+      "objType": 4,
+      "objID": "BLADE_ZANTETSU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11064,
+      "setupName": "",
+      "objName": "プニン",
+      "objType": 5,
+      "objID": "RSC_NP000401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11065,
+      "setupName": "",
+      "objName": "スペルビア人/男/屈強/用心棒1",
+      "objType": 5,
+      "objID": "RSC_NP457101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11066,
+      "setupName": "",
+      "objName": "スペルビア人/男/屈強/用心棒2",
+      "objType": 5,
+      "objID": "RSC_NP457101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11067,
+      "setupName": "bf01_200_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11068,
+      "setupName": "",
+      "objName": "スペルビア人/男/屈強/サルベージャー",
+      "objType": 5,
+      "objID": "RSC_NP457001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11069,
+      "setupName": "",
+      "objName": "スペルビア人/男/大人/サルベージャー1",
+      "objType": 5,
+      "objID": "RSC_NP453401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11070,
+      "setupName": "",
+      "objName": "スペルビア人/男/大人/サルベージャー2",
+      "objType": 5,
+      "objID": "RSC_NP453401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11071,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11072,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11073,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11074,
+      "setupName": "",
+      "objName": "メツ",
+      "objType": 3,
+      "objID": "DRIVER_METSU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11075,
+      "setupName": "",
+      "objName": "ザンテツ",
+      "objType": 4,
+      "objID": "BLADE_ZANTETSU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11076,
+      "setupName": "",
+      "objName": "雲海フナムシ",
+      "objType": 6,
+      "objID": "boss_ma04a01",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11077,
+      "setupName": "",
+      "objName": "古代船甲板の扉",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj101030",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11078,
+      "setupName": "bf01_210_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11079,
+      "setupName": "",
+      "objName": "作業員1",
+      "objType": 5,
+      "objID": "RSC_NP457001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11080,
+      "setupName": "",
+      "objName": "作業員2",
+      "objType": 5,
+      "objID": "RSC_NP453401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11081,
+      "setupName": "",
+      "objName": "作業員3",
+      "objType": 5,
+      "objID": "RSC_NP453401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11082,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11083,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11084,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11085,
+      "setupName": "",
+      "objName": "メツ",
+      "objType": 3,
+      "objID": "DRIVER_METSU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11086,
+      "setupName": "",
+      "objName": "ザンテツ",
+      "objType": 4,
+      "objID": "BLADE_ZANTETSU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11087,
+      "setupName": "",
+      "objName": "プニン",
+      "objType": 5,
+      "objID": "RSC_NP000401",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11088,
+      "setupName": "",
+      "objName": "スペルビア人/男/屈強/用心棒1",
+      "objType": 5,
+      "objID": "RSC_NP457101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11089,
+      "setupName": "",
+      "objName": "スペルビア人/男/屈強/用心棒2",
+      "objType": 5,
+      "objID": "RSC_NP457101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11090,
+      "setupName": "",
+      "objName": "雲海フナムシ",
+      "objType": 6,
+      "objID": "boss_ma04a01",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11091,
+      "setupName": "bf01_220_100",
+      "objName": "バーン",
+      "objType": 5,
+      "objID": "RSC_NP000301",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11092,
+      "setupName": "",
+      "objName": "水晶通信モニター",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj101011",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11093,
+      "setupName": "",
+      "objName": "動画用水晶モニター",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj150022",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11094,
+      "setupName": "bf01_230_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11095,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11096,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11097,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11098,
+      "setupName": "",
+      "objName": "メツ",
+      "objType": 3,
+      "objID": "DRIVER_METSU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11099,
+      "setupName": "",
+      "objName": "ザンテツ",
+      "objType": 4,
+      "objID": "BLADE_ZANTETSU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11100,
+      "setupName": "",
+      "objName": "海トカゲ",
+      "objType": 6,
+      "objID": "boss_ma04a02",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11101,
+      "setupName": "bf01_240_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11102,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11103,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11104,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11105,
+      "setupName": "",
+      "objName": "メツ",
+      "objType": 3,
+      "objID": "DRIVER_METSU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11106,
+      "setupName": "",
+      "objName": "ザンテツ",
+      "objType": 4,
+      "objID": "BLADE_ZANTETSU",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11107,
+      "setupName": "",
+      "objName": "海トカゲ",
+      "objType": 6,
+      "objID": "boss_ma04a02",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11108,
+      "setupName": "bf01_260_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 11109,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    }
+  ]
+}

@@ -1,0 +1,443 @@
+{
+  "schema": [
+    {
+      "name": "Model",
+      "type": 7
+    },
+    {
+      "name": "Motion",
+      "type": 7
+    },
+    {
+      "name": "Effect",
+      "type": 7
+    },
+    {
+      "name": "SE",
+      "type": 7
+    },
+    {
+      "name": "baseHeight",
+      "type": 8
+    },
+    {
+      "name": "box_distance",
+      "type": 8
+    },
+    {
+      "name": "initWaitTime",
+      "type": 8
+    },
+    {
+      "name": "initWaitTimeRand",
+      "type": 8
+    },
+    {
+      "name": "offsetID",
+      "type": 2
+    },
+    {
+      "name": "MSG_ID",
+      "type": 2
+    },
+    {
+      "name": "visible_Radius",
+      "type": 2
+    },
+    {
+      "name": "invisible_Radius",
+      "type": 2
+    },
+    {
+      "name": "shapeType",
+      "type": 1
+    },
+    {
+      "name": "posX",
+      "type": 8
+    },
+    {
+      "name": "posY",
+      "type": 8
+    },
+    {
+      "name": "posZ",
+      "type": 8
+    },
+    {
+      "name": "base_offset_Y",
+      "type": 8
+    },
+    {
+      "name": "FS_starttime",
+      "type": 8
+    },
+    {
+      "name": "TBOX_open_starttime",
+      "type": 8
+    },
+    {
+      "name": "flag",
+      "type": 1,
+      "flags": [
+        {
+          "label": "TBOX_category",
+          "mask": 1,
+          "index": 0
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Model": "oj/oj200001",
+      "Motion": "oj/oj200001",
+      "Effect": "",
+      "SE": "",
+      "baseHeight": 0.10000000149011612,
+      "box_distance": 0.0,
+      "initWaitTime": 0.0,
+      "initWaitTimeRand": 0.30000001192092896,
+      "offsetID": 26,
+      "MSG_ID": 2,
+      "visible_Radius": 220,
+      "invisible_Radius": 240,
+      "shapeType": 2,
+      "posX": 2.0,
+      "posY": 0.0,
+      "posZ": 0.0,
+      "base_offset_Y": 0.0,
+      "FS_starttime": 0.5,
+      "TBOX_open_starttime": 1.5,
+      "flag": {
+        "TBOX_category": 0
+      }
+    },
+    {
+      "$id": 2,
+      "Model": "oj/oj200002",
+      "Motion": "oj/oj200001",
+      "Effect": "",
+      "SE": "",
+      "baseHeight": 0.10000000149011612,
+      "box_distance": 0.0,
+      "initWaitTime": 0.0,
+      "initWaitTimeRand": 0.30000001192092896,
+      "offsetID": 26,
+      "MSG_ID": 2,
+      "visible_Radius": 220,
+      "invisible_Radius": 240,
+      "shapeType": 2,
+      "posX": 2.0,
+      "posY": 0.0,
+      "posZ": 0.0,
+      "base_offset_Y": 0.0,
+      "FS_starttime": 0.5,
+      "TBOX_open_starttime": 1.5,
+      "flag": {
+        "TBOX_category": 0
+      }
+    },
+    {
+      "$id": 3,
+      "Model": "oj/oj200003",
+      "Motion": "oj/oj200003",
+      "Effect": "",
+      "SE": "",
+      "baseHeight": 0.10000000149011612,
+      "box_distance": 0.5,
+      "initWaitTime": 0.10000000149011612,
+      "initWaitTimeRand": 0.5,
+      "offsetID": 26,
+      "MSG_ID": 2,
+      "visible_Radius": 220,
+      "invisible_Radius": 240,
+      "shapeType": 2,
+      "posX": 2.0,
+      "posY": 0.0,
+      "posZ": 0.0,
+      "base_offset_Y": 0.0,
+      "FS_starttime": 0.5,
+      "TBOX_open_starttime": 1.5,
+      "flag": {
+        "TBOX_category": 0
+      }
+    },
+    {
+      "$id": 4,
+      "Model": "oj/oj200004",
+      "Motion": "oj/oj200004",
+      "Effect": "",
+      "SE": "",
+      "baseHeight": 0.0,
+      "box_distance": 0.0,
+      "initWaitTime": 0.0,
+      "initWaitTimeRand": 0.4000000059604645,
+      "offsetID": 25,
+      "MSG_ID": 2,
+      "visible_Radius": 100,
+      "invisible_Radius": 120,
+      "shapeType": 2,
+      "posX": 2.0,
+      "posY": 0.0,
+      "posZ": 0.0,
+      "base_offset_Y": 0.0,
+      "FS_starttime": 0.5,
+      "TBOX_open_starttime": 1.5,
+      "flag": {
+        "TBOX_category": 0
+      }
+    },
+    {
+      "$id": 5,
+      "Model": "oj/oj200006",
+      "Motion": "oj/oj200004",
+      "Effect": "",
+      "SE": "",
+      "baseHeight": 0.0,
+      "box_distance": 0.0,
+      "initWaitTime": 0.0,
+      "initWaitTimeRand": 0.4000000059604645,
+      "offsetID": 25,
+      "MSG_ID": 2,
+      "visible_Radius": 100,
+      "invisible_Radius": 120,
+      "shapeType": 2,
+      "posX": 2.0,
+      "posY": 0.0,
+      "posZ": 0.0,
+      "base_offset_Y": 0.0,
+      "FS_starttime": 0.5,
+      "TBOX_open_starttime": 1.5,
+      "flag": {
+        "TBOX_category": 0
+      }
+    },
+    {
+      "$id": 6,
+      "Model": "oj/oj200007",
+      "Motion": "oj/oj200004",
+      "Effect": "",
+      "SE": "",
+      "baseHeight": 0.0,
+      "box_distance": 0.0,
+      "initWaitTime": 0.0,
+      "initWaitTimeRand": 0.4000000059604645,
+      "offsetID": 25,
+      "MSG_ID": 2,
+      "visible_Radius": 100,
+      "invisible_Radius": 120,
+      "shapeType": 2,
+      "posX": 2.0,
+      "posY": 0.0,
+      "posZ": 0.0,
+      "base_offset_Y": 0.0,
+      "FS_starttime": 0.5,
+      "TBOX_open_starttime": 1.5,
+      "flag": {
+        "TBOX_category": 0
+      }
+    },
+    {
+      "$id": 7,
+      "Model": "oj/oj200005",
+      "Motion": "oj/oj200005",
+      "Effect": "",
+      "SE": "",
+      "baseHeight": 0.20000000298023224,
+      "box_distance": 0.0,
+      "initWaitTime": 0.0,
+      "initWaitTimeRand": 0.30000001192092896,
+      "offsetID": 27,
+      "MSG_ID": 2,
+      "visible_Radius": 80,
+      "invisible_Radius": 90,
+      "shapeType": 2,
+      "posX": 2.0,
+      "posY": 0.0,
+      "posZ": 0.0,
+      "base_offset_Y": 0.0,
+      "FS_starttime": 0.5,
+      "TBOX_open_starttime": 1.2999999523162842,
+      "flag": {
+        "TBOX_category": 1
+      }
+    },
+    {
+      "$id": 8,
+      "Model": "oj/oj200002",
+      "Motion": "oj/oj200001",
+      "Effect": "",
+      "SE": "",
+      "baseHeight": 0.10000000149011612,
+      "box_distance": 0.0,
+      "initWaitTime": 0.0,
+      "initWaitTimeRand": 2.200000047683716,
+      "offsetID": 26,
+      "MSG_ID": 2,
+      "visible_Radius": 220,
+      "invisible_Radius": 240,
+      "shapeType": 2,
+      "posX": 2.0,
+      "posY": 0.0,
+      "posZ": 0.0,
+      "base_offset_Y": 0.0,
+      "FS_starttime": 0.5,
+      "TBOX_open_starttime": 1.5,
+      "flag": {
+        "TBOX_category": 0
+      }
+    },
+    {
+      "$id": 9,
+      "Model": "oj/oj200003",
+      "Motion": "oj/oj200003",
+      "Effect": "",
+      "SE": "",
+      "baseHeight": 0.10000000149011612,
+      "box_distance": 1.0,
+      "initWaitTime": 0.10000000149011612,
+      "initWaitTimeRand": 3.5,
+      "offsetID": 26,
+      "MSG_ID": 2,
+      "visible_Radius": 220,
+      "invisible_Radius": 240,
+      "shapeType": 2,
+      "posX": 2.0,
+      "posY": 0.0,
+      "posZ": 0.0,
+      "base_offset_Y": 0.0,
+      "FS_starttime": 0.5,
+      "TBOX_open_starttime": 1.5,
+      "flag": {
+        "TBOX_category": 0
+      }
+    },
+    {
+      "$id": 10,
+      "Model": "oj/oj730005",
+      "Motion": "oj/oj730005",
+      "Effect": "",
+      "SE": "",
+      "baseHeight": 0.20000000298023224,
+      "box_distance": 0.0,
+      "initWaitTime": 0.0,
+      "initWaitTimeRand": 0.30000001192092896,
+      "offsetID": 27,
+      "MSG_ID": 128,
+      "visible_Radius": 80,
+      "invisible_Radius": 90,
+      "shapeType": 2,
+      "posX": 2.0,
+      "posY": 0.0,
+      "posZ": 0.0,
+      "base_offset_Y": 0.0,
+      "FS_starttime": 0.5,
+      "TBOX_open_starttime": 1.2999999523162842,
+      "flag": {
+        "TBOX_category": 1
+      }
+    },
+    {
+      "$id": 11,
+      "Model": "oj/oj730001",
+      "Motion": "oj/oj730001",
+      "Effect": "",
+      "SE": "",
+      "baseHeight": 0.10000000149011612,
+      "box_distance": 0.0,
+      "initWaitTime": 0.0,
+      "initWaitTimeRand": 0.30000001192092896,
+      "offsetID": 26,
+      "MSG_ID": 2,
+      "visible_Radius": 220,
+      "invisible_Radius": 240,
+      "shapeType": 2,
+      "posX": 2.0,
+      "posY": 0.0,
+      "posZ": 0.0,
+      "base_offset_Y": 0.0,
+      "FS_starttime": 0.5,
+      "TBOX_open_starttime": 1.5,
+      "flag": {
+        "TBOX_category": 0
+      }
+    },
+    {
+      "$id": 12,
+      "Model": "oj/oj730002",
+      "Motion": "oj/oj730001",
+      "Effect": "",
+      "SE": "",
+      "baseHeight": 0.10000000149011612,
+      "box_distance": 0.0,
+      "initWaitTime": 0.0,
+      "initWaitTimeRand": 0.30000001192092896,
+      "offsetID": 26,
+      "MSG_ID": 2,
+      "visible_Radius": 220,
+      "invisible_Radius": 240,
+      "shapeType": 2,
+      "posX": 2.0,
+      "posY": 0.0,
+      "posZ": 0.0,
+      "base_offset_Y": 0.0,
+      "FS_starttime": 0.5,
+      "TBOX_open_starttime": 1.5,
+      "flag": {
+        "TBOX_category": 0
+      }
+    },
+    {
+      "$id": 13,
+      "Model": "oj/oj730003",
+      "Motion": "oj/oj730003",
+      "Effect": "",
+      "SE": "",
+      "baseHeight": 0.10000000149011612,
+      "box_distance": 0.5,
+      "initWaitTime": 0.10000000149011612,
+      "initWaitTimeRand": 0.5,
+      "offsetID": 26,
+      "MSG_ID": 2,
+      "visible_Radius": 220,
+      "invisible_Radius": 240,
+      "shapeType": 2,
+      "posX": 2.0,
+      "posY": 0.0,
+      "posZ": 0.0,
+      "base_offset_Y": 0.0,
+      "FS_starttime": 0.5,
+      "TBOX_open_starttime": 1.5,
+      "flag": {
+        "TBOX_category": 0
+      }
+    },
+    {
+      "$id": 14,
+      "Model": "oj/oj730004",
+      "Motion": "oj/oj730004",
+      "Effect": "",
+      "SE": "",
+      "baseHeight": 0.10000000149011612,
+      "box_distance": 0.5,
+      "initWaitTime": 0.10000000149011612,
+      "initWaitTimeRand": 0.5,
+      "offsetID": 25,
+      "MSG_ID": 2,
+      "visible_Radius": 220,
+      "invisible_Radius": 240,
+      "shapeType": 2,
+      "posX": 2.0,
+      "posY": 0.0,
+      "posZ": 0.0,
+      "base_offset_Y": 0.0,
+      "FS_starttime": 0.5,
+      "TBOX_open_starttime": 1.5,
+      "flag": {
+        "TBOX_category": 0
+      }
+    }
+  ]
+}

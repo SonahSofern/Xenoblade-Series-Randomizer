@@ -1,0 +1,354 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "value",
+      "type": 5
+    },
+    {
+      "name": "stat0",
+      "type": 7
+    },
+    {
+      "name": "stat1",
+      "type": 7
+    },
+    {
+      "name": "stat2",
+      "type": 7
+    },
+    {
+      "name": "statI",
+      "type": 7
+    },
+    {
+      "name": "cmd0",
+      "type": 7
+    },
+    {
+      "name": "cmd1",
+      "type": 7
+    },
+    {
+      "name": "cmd2",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "name": "ACT_NONE",
+      "value": 0,
+      "stat0": "",
+      "stat1": "",
+      "stat2": "",
+      "statI": "",
+      "cmd0": "",
+      "cmd1": "",
+      "cmd2": ""
+    },
+    {
+      "$id": 1,
+      "name": "ACT_TALK_A",
+      "value": 1,
+      "stat0": "S_talkA_00",
+      "stat1": "S_talkA_01",
+      "stat2": "S_talkA_02",
+      "statI": "S_idle",
+      "cmd0": "C_talkA_00",
+      "cmd1": "C_talkA_01",
+      "cmd2": "C_talkA_02"
+    },
+    {
+      "$id": 2,
+      "name": "ACT_ACTION_00",
+      "value": 2,
+      "stat0": "S_action_00_00",
+      "stat1": "S_action_00_01",
+      "stat2": "S_action_00_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_00_00",
+      "cmd1": "C_action_00_01",
+      "cmd2": "C_action_00_02"
+    },
+    {
+      "$id": 3,
+      "name": "ACT_ACTION_01",
+      "value": 3,
+      "stat0": "S_action_01_00",
+      "stat1": "S_action_01_01",
+      "stat2": "S_action_01_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_01_00",
+      "cmd1": "C_action_01_01",
+      "cmd2": "C_action_01_02"
+    },
+    {
+      "$id": 4,
+      "name": "ACT_ACTION_02",
+      "value": 4,
+      "stat0": "S_action_02_00",
+      "stat1": "S_action_02_01",
+      "stat2": "S_action_02_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_02_00",
+      "cmd1": "C_action_02_01",
+      "cmd2": "C_action_02_02"
+    },
+    {
+      "$id": 5,
+      "name": "ACT_ACTION_03",
+      "value": 5,
+      "stat0": "S_action_03_00",
+      "stat1": "S_action_03_01",
+      "stat2": "S_action_03_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_03_00",
+      "cmd1": "C_action_03_01",
+      "cmd2": "C_action_03_02"
+    },
+    {
+      "$id": 6,
+      "name": "ACT_ACTION_04",
+      "value": 6,
+      "stat0": "S_action_04_00",
+      "stat1": "S_action_04_01",
+      "stat2": "S_action_04_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_04_00",
+      "cmd1": "C_action_04_01",
+      "cmd2": "C_action_04_02"
+    },
+    {
+      "$id": 7,
+      "name": "ACT_ACTION_05",
+      "value": 7,
+      "stat0": "S_action_05_00",
+      "stat1": "S_action_05_01",
+      "stat2": "S_action_05_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_05_00",
+      "cmd1": "C_action_05_01",
+      "cmd2": "C_action_05_02"
+    },
+    {
+      "$id": 8,
+      "name": "ACT_ACTION_06",
+      "value": 8,
+      "stat0": "S_action_06_00",
+      "stat1": "S_action_06_01",
+      "stat2": "S_action_06_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_06_00",
+      "cmd1": "C_action_06_01",
+      "cmd2": "C_action_06_02"
+    },
+    {
+      "$id": 9,
+      "name": "ACT_ACTION_07",
+      "value": 9,
+      "stat0": "S_action_07_00",
+      "stat1": "S_action_07_01",
+      "stat2": "S_action_07_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_07_00",
+      "cmd1": "C_action_07_01",
+      "cmd2": "C_action_07_02"
+    },
+    {
+      "$id": 10,
+      "name": "ACT_ACTION_08",
+      "value": 10,
+      "stat0": "S_action_08_00",
+      "stat1": "S_action_08_01",
+      "stat2": "S_action_08_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_08_00",
+      "cmd1": "C_action_08_01",
+      "cmd2": "C_action_08_02"
+    },
+    {
+      "$id": 11,
+      "name": "ACT_ACTION_09",
+      "value": 11,
+      "stat0": "S_action_09_00",
+      "stat1": "S_action_09_01",
+      "stat2": "S_action_09_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_09_00",
+      "cmd1": "C_action_09_01",
+      "cmd2": "C_action_09_02"
+    },
+    {
+      "$id": 12,
+      "name": "ACT_ACTION_10",
+      "value": 12,
+      "stat0": "S_action_10_00",
+      "stat1": "S_action_10_01",
+      "stat2": "S_action_10_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_10_00",
+      "cmd1": "C_action_10_01",
+      "cmd2": "C_action_10_02"
+    },
+    {
+      "$id": 13,
+      "name": "ACT_ACTION_11",
+      "value": 13,
+      "stat0": "S_action_11_00",
+      "stat1": "S_action_11_01",
+      "stat2": "S_action_11_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_11_00",
+      "cmd1": "C_action_11_01",
+      "cmd2": "C_action_11_02"
+    },
+    {
+      "$id": 14,
+      "name": "ACT_ACTION_12",
+      "value": 14,
+      "stat0": "S_action_12_00",
+      "stat1": "S_action_12_01",
+      "stat2": "S_action_12_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_12_00",
+      "cmd1": "C_action_12_01",
+      "cmd2": "C_action_12_02"
+    },
+    {
+      "$id": 15,
+      "name": "ACT_ACTION_13",
+      "value": 15,
+      "stat0": "S_action_13_00",
+      "stat1": "S_action_13_01",
+      "stat2": "S_action_13_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_13_00",
+      "cmd1": "C_action_13_01",
+      "cmd2": "C_action_13_02"
+    },
+    {
+      "$id": 16,
+      "name": "ACT_ACTION_14",
+      "value": 16,
+      "stat0": "S_action_14_00",
+      "stat1": "S_action_14_01",
+      "stat2": "S_action_14_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_14_00",
+      "cmd1": "C_action_14_01",
+      "cmd2": "C_action_14_02"
+    },
+    {
+      "$id": 17,
+      "name": "ACT_ACTION_15",
+      "value": 17,
+      "stat0": "S_action_15_00",
+      "stat1": "S_action_15_01",
+      "stat2": "S_action_15_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_15_00",
+      "cmd1": "C_action_15_01",
+      "cmd2": "C_action_15_02"
+    },
+    {
+      "$id": 18,
+      "name": "ACT_ACTION_16",
+      "value": 18,
+      "stat0": "S_action_16_00",
+      "stat1": "S_action_16_01",
+      "stat2": "S_action_16_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_16_00",
+      "cmd1": "C_action_16_01",
+      "cmd2": "C_action_16_02"
+    },
+    {
+      "$id": 19,
+      "name": "ACT_ACTION_17",
+      "value": 19,
+      "stat0": "S_action_17_00",
+      "stat1": "S_action_17_01",
+      "stat2": "S_action_17_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_17_00",
+      "cmd1": "C_action_17_01",
+      "cmd2": "C_action_17_02"
+    },
+    {
+      "$id": 20,
+      "name": "ACT_ACTION_18",
+      "value": 20,
+      "stat0": "S_action_18_00",
+      "stat1": "S_action_18_01",
+      "stat2": "S_action_18_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_18_00",
+      "cmd1": "C_action_18_01",
+      "cmd2": "C_action_18_02"
+    },
+    {
+      "$id": 21,
+      "name": "ACT_ACTION_19",
+      "value": 21,
+      "stat0": "S_action_19_00",
+      "stat1": "S_action_19_01",
+      "stat2": "S_action_19_02",
+      "statI": "S_idle",
+      "cmd0": "C_action_19_00",
+      "cmd1": "C_action_19_01",
+      "cmd2": "C_action_19_02"
+    },
+    {
+      "$id": 22,
+      "name": "ACT_BATTLE",
+      "value": 22,
+      "stat0": "S_btstart",
+      "stat1": "S_btidle",
+      "stat2": "S_btend",
+      "statI": "S_idle",
+      "cmd0": "C_btstart",
+      "cmd1": "C_btidle",
+      "cmd2": "C_btend"
+    },
+    {
+      "$id": 23,
+      "name": "ACT_TALK_B",
+      "value": 23,
+      "stat0": "S_talkB_00",
+      "stat1": "S_talkB_01",
+      "stat2": "S_talkB_02",
+      "statI": "S_idleB",
+      "cmd0": "C_talkB_00",
+      "cmd1": "C_talkB_01",
+      "cmd2": "C_talkB_02"
+    },
+    {
+      "$id": 24,
+      "name": "ACT_TALK_C",
+      "value": 24,
+      "stat0": "S_talkC_00",
+      "stat1": "S_talkC_01",
+      "stat2": "S_talkC_02",
+      "statI": "S_idleC",
+      "cmd0": "C_talkC_00",
+      "cmd1": "C_talkC_01",
+      "cmd2": "C_talkC_02"
+    },
+    {
+      "$id": 25,
+      "name": "ACT_TALK_D",
+      "value": 25,
+      "stat0": "S_talkD_00",
+      "stat1": "S_talkD_01",
+      "stat2": "S_talkD_02",
+      "statI": "S_idleD",
+      "cmd0": "C_talkD_00",
+      "cmd1": "C_talkD_01",
+      "cmd2": "C_talkD_02"
+    }
+  ]
+}

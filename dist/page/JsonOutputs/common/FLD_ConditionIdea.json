@@ -1,0 +1,1224 @@
+{
+  "schema": [
+    {
+      "name": "PCID",
+      "type": 2
+    },
+    {
+      "name": "IdeaLevelBlue",
+      "type": 1
+    },
+    {
+      "name": "IdeaLevelRed",
+      "type": 1
+    },
+    {
+      "name": "IdeaLevelWhite",
+      "type": 1
+    },
+    {
+      "name": "IdeaLevelBlack",
+      "type": 1
+    },
+    {
+      "name": "Compatibility",
+      "type": 2
+    },
+    {
+      "name": "TrustPoint",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "PCID": 1,
+      "IdeaLevelBlue": 1,
+      "IdeaLevelRed": 1,
+      "IdeaLevelWhite": 1,
+      "IdeaLevelBlack": 1,
+      "Compatibility": 3,
+      "TrustPoint": 1000
+    },
+    {
+      "$id": 2,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 3,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1600
+    },
+    {
+      "$id": 4,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 4600
+    },
+    {
+      "$id": 5,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 10600
+    },
+    {
+      "$id": 6,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 7,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1300
+    },
+    {
+      "$id": 8,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 3800
+    },
+    {
+      "$id": 9,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 8800
+    },
+    {
+      "$id": 10,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 11,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1600
+    },
+    {
+      "$id": 12,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 4600
+    },
+    {
+      "$id": 13,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 10600
+    },
+    {
+      "$id": 14,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 15,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1600
+    },
+    {
+      "$id": 16,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 4600
+    },
+    {
+      "$id": 17,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 10600
+    },
+    {
+      "$id": 18,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 19,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1300
+    },
+    {
+      "$id": 20,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 3800
+    },
+    {
+      "$id": 21,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 8800
+    },
+    {
+      "$id": 22,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 23,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1100
+    },
+    {
+      "$id": 24,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 3300
+    },
+    {
+      "$id": 25,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 7800
+    },
+    {
+      "$id": 26,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 27,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1300
+    },
+    {
+      "$id": 28,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 3800
+    },
+    {
+      "$id": 29,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 8800
+    },
+    {
+      "$id": 30,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 31,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1300
+    },
+    {
+      "$id": 32,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 3800
+    },
+    {
+      "$id": 33,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 8800
+    },
+    {
+      "$id": 34,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 35,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1300
+    },
+    {
+      "$id": 36,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 3800
+    },
+    {
+      "$id": 37,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 8800
+    },
+    {
+      "$id": 38,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 39,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1100
+    },
+    {
+      "$id": 40,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 3300
+    },
+    {
+      "$id": 41,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 7800
+    },
+    {
+      "$id": 42,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 43,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1300
+    },
+    {
+      "$id": 44,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 3800
+    },
+    {
+      "$id": 45,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 9800
+    },
+    {
+      "$id": 46,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 10
+    },
+    {
+      "$id": 47,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 50
+    },
+    {
+      "$id": 48,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 150
+    },
+    {
+      "$id": 49,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 400
+    },
+    {
+      "$id": 50,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 10
+    },
+    {
+      "$id": 51,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 50
+    },
+    {
+      "$id": 52,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 150
+    },
+    {
+      "$id": 53,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 400
+    },
+    {
+      "$id": 54,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 10
+    },
+    {
+      "$id": 55,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 50
+    },
+    {
+      "$id": 56,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 150
+    },
+    {
+      "$id": 57,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 400
+    },
+    {
+      "$id": 58,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 50
+    },
+    {
+      "$id": 59,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 500
+    },
+    {
+      "$id": 60,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1500
+    },
+    {
+      "$id": 61,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 9800
+    },
+    {
+      "$id": 62,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 63,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 800
+    },
+    {
+      "$id": 64,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 3800
+    },
+    {
+      "$id": 65,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 66,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1100
+    },
+    {
+      "$id": 67,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 3300
+    },
+    {
+      "$id": 68,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 7800
+    },
+    {
+      "$id": 69,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 70,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 700
+    },
+    {
+      "$id": 71,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 2000
+    },
+    {
+      "$id": 72,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 4000
+    },
+    {
+      "$id": 73,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 74,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1500
+    },
+    {
+      "$id": 75,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 3000
+    },
+    {
+      "$id": 76,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 5000
+    },
+    {
+      "$id": 77,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 78,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 700
+    },
+    {
+      "$id": 79,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 2000
+    },
+    {
+      "$id": 80,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 4000
+    },
+    {
+      "$id": 81,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 500
+    },
+    {
+      "$id": 82,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 2000
+    },
+    {
+      "$id": 83,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 5000
+    },
+    {
+      "$id": 84,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 30
+    },
+    {
+      "$id": 85,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 500
+    },
+    {
+      "$id": 86,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 2000
+    },
+    {
+      "$id": 87,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 4500
+    },
+    {
+      "$id": 88,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 30
+    },
+    {
+      "$id": 89,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 500
+    },
+    {
+      "$id": 90,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1750
+    },
+    {
+      "$id": 91,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 4500
+    },
+    {
+      "$id": 92,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 30
+    },
+    {
+      "$id": 93,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 500
+    },
+    {
+      "$id": 94,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1750
+    },
+    {
+      "$id": 95,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 4500
+    },
+    {
+      "$id": 96,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 30
+    },
+    {
+      "$id": 97,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 500
+    },
+    {
+      "$id": 98,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1500
+    },
+    {
+      "$id": 99,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 4500
+    },
+    {
+      "$id": 100,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 75
+    },
+    {
+      "$id": 101,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 500
+    },
+    {
+      "$id": 102,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 2000
+    },
+    {
+      "$id": 103,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 4500
+    },
+    {
+      "$id": 104,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 30
+    },
+    {
+      "$id": 105,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 250
+    },
+    {
+      "$id": 106,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 1500
+    },
+    {
+      "$id": 107,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 4500
+    },
+    {
+      "$id": 108,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 109,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 700
+    },
+    {
+      "$id": 110,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 2000
+    },
+    {
+      "$id": 111,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 4000
+    },
+    {
+      "$id": 112,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 113,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 700
+    },
+    {
+      "$id": 114,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 2000
+    },
+    {
+      "$id": 115,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 4000
+    },
+    {
+      "$id": 116,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 100
+    },
+    {
+      "$id": 117,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 700
+    },
+    {
+      "$id": 118,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 2000
+    },
+    {
+      "$id": 119,
+      "PCID": 0,
+      "IdeaLevelBlue": 0,
+      "IdeaLevelRed": 0,
+      "IdeaLevelWhite": 0,
+      "IdeaLevelBlack": 0,
+      "Compatibility": 0,
+      "TrustPoint": 4000
+    }
+  ]
+}

@@ -1,0 +1,2044 @@
+{
+  "schema": [
+    {
+      "name": "LevelExp",
+      "type": 3
+    },
+    {
+      "name": "LevelExp2",
+      "type": 3
+    },
+    {
+      "name": "EnemyExp",
+      "type": 2
+    },
+    {
+      "name": "EnemyWP",
+      "type": 2
+    },
+    {
+      "name": "EnemySP",
+      "type": 2
+    },
+    {
+      "name": "EnemyGold",
+      "type": 3
+    },
+    {
+      "name": "GoldDivide",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "LevelExp": 0,
+      "LevelExp2": 0,
+      "EnemyExp": 20,
+      "EnemyWP": 4,
+      "EnemySP": 2,
+      "EnemyGold": 33,
+      "GoldDivide": 2
+    },
+    {
+      "$id": 2,
+      "LevelExp": 20,
+      "LevelExp2": 10,
+      "EnemyExp": 24,
+      "EnemyWP": 4,
+      "EnemySP": 3,
+      "EnemyGold": 36,
+      "GoldDivide": 2
+    },
+    {
+      "$id": 3,
+      "LevelExp": 60,
+      "LevelExp2": 30,
+      "EnemyExp": 28,
+      "EnemyWP": 4,
+      "EnemySP": 3,
+      "EnemyGold": 40,
+      "GoldDivide": 2
+    },
+    {
+      "$id": 4,
+      "LevelExp": 110,
+      "LevelExp2": 55,
+      "EnemyExp": 32,
+      "EnemyWP": 5,
+      "EnemySP": 3,
+      "EnemyGold": 44,
+      "GoldDivide": 2
+    },
+    {
+      "$id": 5,
+      "LevelExp": 170,
+      "LevelExp2": 85,
+      "EnemyExp": 36,
+      "EnemyWP": 5,
+      "EnemySP": 4,
+      "EnemyGold": 48,
+      "GoldDivide": 2
+    },
+    {
+      "$id": 6,
+      "LevelExp": 240,
+      "LevelExp2": 120,
+      "EnemyExp": 40,
+      "EnemyWP": 6,
+      "EnemySP": 4,
+      "EnemyGold": 52,
+      "GoldDivide": 2
+    },
+    {
+      "$id": 7,
+      "LevelExp": 320,
+      "LevelExp2": 160,
+      "EnemyExp": 44,
+      "EnemyWP": 7,
+      "EnemySP": 4,
+      "EnemyGold": 57,
+      "GoldDivide": 2
+    },
+    {
+      "$id": 8,
+      "LevelExp": 400,
+      "LevelExp2": 200,
+      "EnemyExp": 48,
+      "EnemyWP": 7,
+      "EnemySP": 4,
+      "EnemyGold": 62,
+      "GoldDivide": 2
+    },
+    {
+      "$id": 9,
+      "LevelExp": 500,
+      "LevelExp2": 250,
+      "EnemyExp": 52,
+      "EnemyWP": 8,
+      "EnemySP": 5,
+      "EnemyGold": 67,
+      "GoldDivide": 2
+    },
+    {
+      "$id": 10,
+      "LevelExp": 620,
+      "LevelExp2": 310,
+      "EnemyExp": 56,
+      "EnemyWP": 8,
+      "EnemySP": 5,
+      "EnemyGold": 72,
+      "GoldDivide": 2
+    },
+    {
+      "$id": 11,
+      "LevelExp": 880,
+      "LevelExp2": 440,
+      "EnemyExp": 60,
+      "EnemyWP": 9,
+      "EnemySP": 5,
+      "EnemyGold": 77,
+      "GoldDivide": 2
+    },
+    {
+      "$id": 12,
+      "LevelExp": 1140,
+      "LevelExp2": 570,
+      "EnemyExp": 77,
+      "EnemyWP": 9,
+      "EnemySP": 5,
+      "EnemyGold": 82,
+      "GoldDivide": 2
+    },
+    {
+      "$id": 13,
+      "LevelExp": 1360,
+      "LevelExp2": 680,
+      "EnemyExp": 82,
+      "EnemyWP": 10,
+      "EnemySP": 5,
+      "EnemyGold": 88,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 14,
+      "LevelExp": 1500,
+      "LevelExp2": 750,
+      "EnemyExp": 86,
+      "EnemyWP": 10,
+      "EnemySP": 6,
+      "EnemyGold": 94,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 15,
+      "LevelExp": 1740,
+      "LevelExp2": 870,
+      "EnemyExp": 91,
+      "EnemyWP": 11,
+      "EnemySP": 6,
+      "EnemyGold": 100,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 16,
+      "LevelExp": 1980,
+      "LevelExp2": 990,
+      "EnemyExp": 96,
+      "EnemyWP": 12,
+      "EnemySP": 6,
+      "EnemyGold": 106,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 17,
+      "LevelExp": 2220,
+      "LevelExp2": 1110,
+      "EnemyExp": 101,
+      "EnemyWP": 12,
+      "EnemySP": 6,
+      "EnemyGold": 112,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 18,
+      "LevelExp": 2460,
+      "LevelExp2": 1230,
+      "EnemyExp": 106,
+      "EnemyWP": 12,
+      "EnemySP": 6,
+      "EnemyGold": 118,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 19,
+      "LevelExp": 2700,
+      "LevelExp2": 1350,
+      "EnemyExp": 115,
+      "EnemyWP": 13,
+      "EnemySP": 7,
+      "EnemyGold": 124,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 20,
+      "LevelExp": 2940,
+      "LevelExp2": 1470,
+      "EnemyExp": 125,
+      "EnemyWP": 13,
+      "EnemySP": 7,
+      "EnemyGold": 130,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 21,
+      "LevelExp": 3200,
+      "LevelExp2": 1600,
+      "EnemyExp": 134,
+      "EnemyWP": 14,
+      "EnemySP": 7,
+      "EnemyGold": 137,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 22,
+      "LevelExp": 3460,
+      "LevelExp2": 1730,
+      "EnemyExp": 144,
+      "EnemyWP": 14,
+      "EnemySP": 7,
+      "EnemyGold": 144,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 23,
+      "LevelExp": 3720,
+      "LevelExp2": 1860,
+      "EnemyExp": 154,
+      "EnemyWP": 15,
+      "EnemySP": 7,
+      "EnemyGold": 151,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 24,
+      "LevelExp": 3980,
+      "LevelExp2": 1990,
+      "EnemyExp": 163,
+      "EnemyWP": 15,
+      "EnemySP": 7,
+      "EnemyGold": 158,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 25,
+      "LevelExp": 4260,
+      "LevelExp2": 2130,
+      "EnemyExp": 173,
+      "EnemyWP": 16,
+      "EnemySP": 8,
+      "EnemyGold": 165,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 26,
+      "LevelExp": 4540,
+      "LevelExp2": 2270,
+      "EnemyExp": 182,
+      "EnemyWP": 16,
+      "EnemySP": 8,
+      "EnemyGold": 172,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 27,
+      "LevelExp": 4820,
+      "LevelExp2": 2410,
+      "EnemyExp": 192,
+      "EnemyWP": 17,
+      "EnemySP": 8,
+      "EnemyGold": 179,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 28,
+      "LevelExp": 5100,
+      "LevelExp2": 2550,
+      "EnemyExp": 202,
+      "EnemyWP": 17,
+      "EnemySP": 8,
+      "EnemyGold": 186,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 29,
+      "LevelExp": 5380,
+      "LevelExp2": 2690,
+      "EnemyExp": 211,
+      "EnemyWP": 18,
+      "EnemySP": 8,
+      "EnemyGold": 193,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 30,
+      "LevelExp": 5660,
+      "LevelExp2": 2830,
+      "EnemyExp": 221,
+      "EnemyWP": 18,
+      "EnemySP": 8,
+      "EnemyGold": 200,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 31,
+      "LevelExp": 5980,
+      "LevelExp2": 2990,
+      "EnemyExp": 230,
+      "EnemyWP": 18,
+      "EnemySP": 9,
+      "EnemyGold": 208,
+      "GoldDivide": 3
+    },
+    {
+      "$id": 32,
+      "LevelExp": 6300,
+      "LevelExp2": 3150,
+      "EnemyExp": 240,
+      "EnemyWP": 19,
+      "EnemySP": 9,
+      "EnemyGold": 216,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 33,
+      "LevelExp": 6620,
+      "LevelExp2": 3310,
+      "EnemyExp": 250,
+      "EnemyWP": 19,
+      "EnemySP": 9,
+      "EnemyGold": 224,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 34,
+      "LevelExp": 6940,
+      "LevelExp2": 3470,
+      "EnemyExp": 259,
+      "EnemyWP": 20,
+      "EnemySP": 9,
+      "EnemyGold": 232,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 35,
+      "LevelExp": 7260,
+      "LevelExp2": 3630,
+      "EnemyExp": 269,
+      "EnemyWP": 20,
+      "EnemySP": 9,
+      "EnemyGold": 240,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 36,
+      "LevelExp": 7620,
+      "LevelExp2": 3810,
+      "EnemyExp": 278,
+      "EnemyWP": 21,
+      "EnemySP": 9,
+      "EnemyGold": 248,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 37,
+      "LevelExp": 7980,
+      "LevelExp2": 3990,
+      "EnemyExp": 288,
+      "EnemyWP": 21,
+      "EnemySP": 9,
+      "EnemyGold": 256,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 38,
+      "LevelExp": 8340,
+      "LevelExp2": 4170,
+      "EnemyExp": 298,
+      "EnemyWP": 21,
+      "EnemySP": 10,
+      "EnemyGold": 264,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 39,
+      "LevelExp": 8700,
+      "LevelExp2": 4350,
+      "EnemyExp": 312,
+      "EnemyWP": 22,
+      "EnemySP": 10,
+      "EnemyGold": 272,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 40,
+      "LevelExp": 9160,
+      "LevelExp2": 4580,
+      "EnemyExp": 326,
+      "EnemyWP": 22,
+      "EnemySP": 10,
+      "EnemyGold": 280,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 41,
+      "LevelExp": 9620,
+      "LevelExp2": 4810,
+      "EnemyExp": 341,
+      "EnemyWP": 23,
+      "EnemySP": 10,
+      "EnemyGold": 288,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 42,
+      "LevelExp": 10080,
+      "LevelExp2": 5040,
+      "EnemyExp": 355,
+      "EnemyWP": 23,
+      "EnemySP": 10,
+      "EnemyGold": 296,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 43,
+      "LevelExp": 10540,
+      "LevelExp2": 5270,
+      "EnemyExp": 370,
+      "EnemyWP": 23,
+      "EnemySP": 10,
+      "EnemyGold": 305,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 44,
+      "LevelExp": 11000,
+      "LevelExp2": 5500,
+      "EnemyExp": 384,
+      "EnemyWP": 24,
+      "EnemySP": 10,
+      "EnemyGold": 314,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 45,
+      "LevelExp": 11460,
+      "LevelExp2": 5730,
+      "EnemyExp": 398,
+      "EnemyWP": 24,
+      "EnemySP": 11,
+      "EnemyGold": 323,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 46,
+      "LevelExp": 12060,
+      "LevelExp2": 6030,
+      "EnemyExp": 413,
+      "EnemyWP": 25,
+      "EnemySP": 11,
+      "EnemyGold": 332,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 47,
+      "LevelExp": 12660,
+      "LevelExp2": 6330,
+      "EnemyExp": 427,
+      "EnemyWP": 25,
+      "EnemySP": 11,
+      "EnemyGold": 341,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 48,
+      "LevelExp": 13260,
+      "LevelExp2": 6630,
+      "EnemyExp": 442,
+      "EnemyWP": 25,
+      "EnemySP": 11,
+      "EnemyGold": 350,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 49,
+      "LevelExp": 13860,
+      "LevelExp2": 6930,
+      "EnemyExp": 456,
+      "EnemyWP": 26,
+      "EnemySP": 11,
+      "EnemyGold": 359,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 50,
+      "LevelExp": 14460,
+      "LevelExp2": 7230,
+      "EnemyExp": 470,
+      "EnemyWP": 26,
+      "EnemySP": 11,
+      "EnemyGold": 368,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 51,
+      "LevelExp": 15260,
+      "LevelExp2": 7630,
+      "EnemyExp": 485,
+      "EnemyWP": 27,
+      "EnemySP": 11,
+      "EnemyGold": 377,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 52,
+      "LevelExp": 16060,
+      "LevelExp2": 8030,
+      "EnemyExp": 499,
+      "EnemyWP": 27,
+      "EnemySP": 11,
+      "EnemyGold": 386,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 53,
+      "LevelExp": 16860,
+      "LevelExp2": 8430,
+      "EnemyExp": 514,
+      "EnemyWP": 27,
+      "EnemySP": 12,
+      "EnemyGold": 395,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 54,
+      "LevelExp": 17660,
+      "LevelExp2": 8830,
+      "EnemyExp": 528,
+      "EnemyWP": 28,
+      "EnemySP": 12,
+      "EnemyGold": 404,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 55,
+      "LevelExp": 18460,
+      "LevelExp2": 9230,
+      "EnemyExp": 542,
+      "EnemyWP": 28,
+      "EnemySP": 12,
+      "EnemyGold": 413,
+      "GoldDivide": 4
+    },
+    {
+      "$id": 56,
+      "LevelExp": 19520,
+      "LevelExp2": 9760,
+      "EnemyExp": 557,
+      "EnemyWP": 28,
+      "EnemySP": 12,
+      "EnemyGold": 422,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 57,
+      "LevelExp": 20580,
+      "LevelExp2": 10290,
+      "EnemyExp": 571,
+      "EnemyWP": 29,
+      "EnemySP": 12,
+      "EnemyGold": 432,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 58,
+      "LevelExp": 21640,
+      "LevelExp2": 10820,
+      "EnemyExp": 586,
+      "EnemyWP": 29,
+      "EnemySP": 12,
+      "EnemyGold": 442,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 59,
+      "LevelExp": 22700,
+      "LevelExp2": 11350,
+      "EnemyExp": 605,
+      "EnemyWP": 30,
+      "EnemySP": 12,
+      "EnemyGold": 452,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 60,
+      "LevelExp": 23760,
+      "LevelExp2": 11880,
+      "EnemyExp": 624,
+      "EnemyWP": 30,
+      "EnemySP": 12,
+      "EnemyGold": 462,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 61,
+      "LevelExp": 24820,
+      "LevelExp2": 12410,
+      "EnemyExp": 643,
+      "EnemyWP": 30,
+      "EnemySP": 13,
+      "EnemyGold": 472,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 62,
+      "LevelExp": 25880,
+      "LevelExp2": 12940,
+      "EnemyExp": 662,
+      "EnemyWP": 31,
+      "EnemySP": 13,
+      "EnemyGold": 482,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 63,
+      "LevelExp": 26940,
+      "LevelExp2": 13470,
+      "EnemyExp": 682,
+      "EnemyWP": 31,
+      "EnemySP": 13,
+      "EnemyGold": 492,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 64,
+      "LevelExp": 28000,
+      "LevelExp2": 14000,
+      "EnemyExp": 701,
+      "EnemyWP": 32,
+      "EnemySP": 13,
+      "EnemyGold": 502,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 65,
+      "LevelExp": 29060,
+      "LevelExp2": 14530,
+      "EnemyExp": 720,
+      "EnemyWP": 32,
+      "EnemySP": 13,
+      "EnemyGold": 512,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 66,
+      "LevelExp": 30440,
+      "LevelExp2": 15220,
+      "EnemyExp": 739,
+      "EnemyWP": 32,
+      "EnemySP": 13,
+      "EnemyGold": 522,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 67,
+      "LevelExp": 31820,
+      "LevelExp2": 15910,
+      "EnemyExp": 758,
+      "EnemyWP": 33,
+      "EnemySP": 13,
+      "EnemyGold": 532,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 68,
+      "LevelExp": 33200,
+      "LevelExp2": 16600,
+      "EnemyExp": 778,
+      "EnemyWP": 33,
+      "EnemySP": 13,
+      "EnemyGold": 542,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 69,
+      "LevelExp": 34580,
+      "LevelExp2": 17290,
+      "EnemyExp": 797,
+      "EnemyWP": 33,
+      "EnemySP": 14,
+      "EnemyGold": 552,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 70,
+      "LevelExp": 35960,
+      "LevelExp2": 17980,
+      "EnemyExp": 816,
+      "EnemyWP": 34,
+      "EnemySP": 14,
+      "EnemyGold": 562,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 71,
+      "LevelExp": 37340,
+      "LevelExp2": 18670,
+      "EnemyExp": 835,
+      "EnemyWP": 34,
+      "EnemySP": 14,
+      "EnemyGold": 572,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 72,
+      "LevelExp": 38720,
+      "LevelExp2": 19360,
+      "EnemyExp": 854,
+      "EnemyWP": 34,
+      "EnemySP": 14,
+      "EnemyGold": 582,
+      "GoldDivide": 5
+    },
+    {
+      "$id": 73,
+      "LevelExp": 40100,
+      "LevelExp2": 20050,
+      "EnemyExp": 874,
+      "EnemyWP": 35,
+      "EnemySP": 14,
+      "EnemyGold": 593,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 74,
+      "LevelExp": 41480,
+      "LevelExp2": 20740,
+      "EnemyExp": 893,
+      "EnemyWP": 35,
+      "EnemySP": 14,
+      "EnemyGold": 604,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 75,
+      "LevelExp": 42860,
+      "LevelExp2": 21430,
+      "EnemyExp": 912,
+      "EnemyWP": 36,
+      "EnemySP": 14,
+      "EnemyGold": 615,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 76,
+      "LevelExp": 44640,
+      "LevelExp2": 22320,
+      "EnemyExp": 931,
+      "EnemyWP": 36,
+      "EnemySP": 14,
+      "EnemyGold": 626,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 77,
+      "LevelExp": 46420,
+      "LevelExp2": 23210,
+      "EnemyExp": 950,
+      "EnemyWP": 36,
+      "EnemySP": 15,
+      "EnemyGold": 637,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 78,
+      "LevelExp": 48200,
+      "LevelExp2": 24100,
+      "EnemyExp": 970,
+      "EnemyWP": 37,
+      "EnemySP": 15,
+      "EnemyGold": 648,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 79,
+      "LevelExp": 49980,
+      "LevelExp2": 24990,
+      "EnemyExp": 994,
+      "EnemyWP": 37,
+      "EnemySP": 15,
+      "EnemyGold": 659,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 80,
+      "LevelExp": 51760,
+      "LevelExp2": 25880,
+      "EnemyExp": 1018,
+      "EnemyWP": 37,
+      "EnemySP": 15,
+      "EnemyGold": 670,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 81,
+      "LevelExp": 53540,
+      "LevelExp2": 26770,
+      "EnemyExp": 1042,
+      "EnemyWP": 38,
+      "EnemySP": 15,
+      "EnemyGold": 681,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 82,
+      "LevelExp": 55320,
+      "LevelExp2": 27660,
+      "EnemyExp": 1066,
+      "EnemyWP": 38,
+      "EnemySP": 15,
+      "EnemyGold": 692,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 83,
+      "LevelExp": 57100,
+      "LevelExp2": 28550,
+      "EnemyExp": 1090,
+      "EnemyWP": 38,
+      "EnemySP": 15,
+      "EnemyGold": 703,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 84,
+      "LevelExp": 58880,
+      "LevelExp2": 29440,
+      "EnemyExp": 1114,
+      "EnemyWP": 39,
+      "EnemySP": 15,
+      "EnemyGold": 714,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 85,
+      "LevelExp": 60660,
+      "LevelExp2": 30330,
+      "EnemyExp": 1138,
+      "EnemyWP": 39,
+      "EnemySP": 16,
+      "EnemyGold": 725,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 86,
+      "LevelExp": 62920,
+      "LevelExp2": 31460,
+      "EnemyExp": 1162,
+      "EnemyWP": 40,
+      "EnemySP": 16,
+      "EnemyGold": 736,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 87,
+      "LevelExp": 65180,
+      "LevelExp2": 32590,
+      "EnemyExp": 1186,
+      "EnemyWP": 40,
+      "EnemySP": 16,
+      "EnemyGold": 747,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 88,
+      "LevelExp": 67440,
+      "LevelExp2": 33720,
+      "EnemyExp": 1210,
+      "EnemyWP": 40,
+      "EnemySP": 16,
+      "EnemyGold": 758,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 89,
+      "LevelExp": 69700,
+      "LevelExp2": 34850,
+      "EnemyExp": 1234,
+      "EnemyWP": 41,
+      "EnemySP": 16,
+      "EnemyGold": 769,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 90,
+      "LevelExp": 71960,
+      "LevelExp2": 35980,
+      "EnemyExp": 1258,
+      "EnemyWP": 41,
+      "EnemySP": 16,
+      "EnemyGold": 780,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 91,
+      "LevelExp": 74220,
+      "LevelExp2": 37110,
+      "EnemyExp": 1282,
+      "EnemyWP": 41,
+      "EnemySP": 16,
+      "EnemyGold": 792,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 92,
+      "LevelExp": 76480,
+      "LevelExp2": 38240,
+      "EnemyExp": 1306,
+      "EnemyWP": 42,
+      "EnemySP": 16,
+      "EnemyGold": 804,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 93,
+      "LevelExp": 78740,
+      "LevelExp2": 39370,
+      "EnemyExp": 1330,
+      "EnemyWP": 42,
+      "EnemySP": 16,
+      "EnemyGold": 816,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 94,
+      "LevelExp": 81000,
+      "LevelExp2": 40500,
+      "EnemyExp": 1354,
+      "EnemyWP": 42,
+      "EnemySP": 17,
+      "EnemyGold": 828,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 95,
+      "LevelExp": 83260,
+      "LevelExp2": 41630,
+      "EnemyExp": 1378,
+      "EnemyWP": 43,
+      "EnemySP": 17,
+      "EnemyGold": 840,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 96,
+      "LevelExp": 86100,
+      "LevelExp2": 43050,
+      "EnemyExp": 1402,
+      "EnemyWP": 43,
+      "EnemySP": 17,
+      "EnemyGold": 852,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 97,
+      "LevelExp": 88940,
+      "LevelExp2": 44470,
+      "EnemyExp": 1426,
+      "EnemyWP": 43,
+      "EnemySP": 17,
+      "EnemyGold": 864,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 98,
+      "LevelExp": 91780,
+      "LevelExp2": 45890,
+      "EnemyExp": 1450,
+      "EnemyWP": 44,
+      "EnemySP": 17,
+      "EnemyGold": 876,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 99,
+      "LevelExp": 94620,
+      "LevelExp2": 47310,
+      "EnemyExp": 1474,
+      "EnemyWP": 44,
+      "EnemySP": 17,
+      "EnemyGold": 888,
+      "GoldDivide": 6
+    },
+    {
+      "$id": 100,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1498,
+      "EnemyWP": 45,
+      "EnemySP": 17,
+      "EnemyGold": 900,
+      "GoldDivide": 7
+    },
+    {
+      "$id": 101,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1522,
+      "EnemyWP": 45,
+      "EnemySP": 17,
+      "EnemyGold": 912,
+      "GoldDivide": 7
+    },
+    {
+      "$id": 102,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1546,
+      "EnemyWP": 45,
+      "EnemySP": 17,
+      "EnemyGold": 924,
+      "GoldDivide": 7
+    },
+    {
+      "$id": 103,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1570,
+      "EnemyWP": 46,
+      "EnemySP": 18,
+      "EnemyGold": 936,
+      "GoldDivide": 7
+    },
+    {
+      "$id": 104,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1594,
+      "EnemyWP": 46,
+      "EnemySP": 18,
+      "EnemyGold": 948,
+      "GoldDivide": 7
+    },
+    {
+      "$id": 105,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1618,
+      "EnemyWP": 46,
+      "EnemySP": 18,
+      "EnemyGold": 960,
+      "GoldDivide": 7
+    },
+    {
+      "$id": 106,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1642,
+      "EnemyWP": 47,
+      "EnemySP": 18,
+      "EnemyGold": 972,
+      "GoldDivide": 7
+    },
+    {
+      "$id": 107,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1666,
+      "EnemyWP": 47,
+      "EnemySP": 18,
+      "EnemyGold": 984,
+      "GoldDivide": 7
+    },
+    {
+      "$id": 108,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1690,
+      "EnemyWP": 47,
+      "EnemySP": 18,
+      "EnemyGold": 996,
+      "GoldDivide": 7
+    },
+    {
+      "$id": 109,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1714,
+      "EnemyWP": 48,
+      "EnemySP": 18,
+      "EnemyGold": 1008,
+      "GoldDivide": 7
+    },
+    {
+      "$id": 110,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1738,
+      "EnemyWP": 48,
+      "EnemySP": 18,
+      "EnemyGold": 1020,
+      "GoldDivide": 8
+    },
+    {
+      "$id": 111,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1762,
+      "EnemyWP": 48,
+      "EnemySP": 18,
+      "EnemyGold": 1033,
+      "GoldDivide": 8
+    },
+    {
+      "$id": 112,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1786,
+      "EnemyWP": 49,
+      "EnemySP": 19,
+      "EnemyGold": 1046,
+      "GoldDivide": 8
+    },
+    {
+      "$id": 113,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1810,
+      "EnemyWP": 49,
+      "EnemySP": 19,
+      "EnemyGold": 1059,
+      "GoldDivide": 8
+    },
+    {
+      "$id": 114,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1834,
+      "EnemyWP": 49,
+      "EnemySP": 19,
+      "EnemyGold": 1072,
+      "GoldDivide": 8
+    },
+    {
+      "$id": 115,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1858,
+      "EnemyWP": 50,
+      "EnemySP": 19,
+      "EnemyGold": 1085,
+      "GoldDivide": 8
+    },
+    {
+      "$id": 116,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1882,
+      "EnemyWP": 50,
+      "EnemySP": 19,
+      "EnemyGold": 1098,
+      "GoldDivide": 8
+    },
+    {
+      "$id": 117,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1906,
+      "EnemyWP": 50,
+      "EnemySP": 19,
+      "EnemyGold": 1111,
+      "GoldDivide": 8
+    },
+    {
+      "$id": 118,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1930,
+      "EnemyWP": 51,
+      "EnemySP": 19,
+      "EnemyGold": 1124,
+      "GoldDivide": 8
+    },
+    {
+      "$id": 119,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1954,
+      "EnemyWP": 51,
+      "EnemySP": 19,
+      "EnemyGold": 1137,
+      "GoldDivide": 8
+    },
+    {
+      "$id": 120,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 1978,
+      "EnemyWP": 51,
+      "EnemySP": 19,
+      "EnemyGold": 1150,
+      "GoldDivide": 8
+    },
+    {
+      "$id": 121,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2002,
+      "EnemyWP": 52,
+      "EnemySP": 19,
+      "EnemyGold": 1163,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 122,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2026,
+      "EnemyWP": 52,
+      "EnemySP": 19,
+      "EnemyGold": 1176,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 123,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2050,
+      "EnemyWP": 52,
+      "EnemySP": 19,
+      "EnemyGold": 1189,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 124,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2074,
+      "EnemyWP": 53,
+      "EnemySP": 20,
+      "EnemyGold": 1202,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 125,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2098,
+      "EnemyWP": 53,
+      "EnemySP": 20,
+      "EnemyGold": 1215,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 126,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2122,
+      "EnemyWP": 53,
+      "EnemySP": 20,
+      "EnemyGold": 1228,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 127,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2146,
+      "EnemyWP": 54,
+      "EnemySP": 20,
+      "EnemyGold": 1241,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 128,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2170,
+      "EnemyWP": 54,
+      "EnemySP": 20,
+      "EnemyGold": 1254,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 129,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2194,
+      "EnemyWP": 54,
+      "EnemySP": 20,
+      "EnemyGold": 1267,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 130,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2218,
+      "EnemyWP": 55,
+      "EnemySP": 20,
+      "EnemyGold": 1280,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 131,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2242,
+      "EnemyWP": 55,
+      "EnemySP": 21,
+      "EnemyGold": 1282,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 132,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2266,
+      "EnemyWP": 55,
+      "EnemySP": 21,
+      "EnemyGold": 1284,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 133,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2290,
+      "EnemyWP": 56,
+      "EnemySP": 21,
+      "EnemyGold": 1286,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 134,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2314,
+      "EnemyWP": 56,
+      "EnemySP": 21,
+      "EnemyGold": 1288,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 135,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2338,
+      "EnemyWP": 56,
+      "EnemySP": 21,
+      "EnemyGold": 1290,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 136,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2362,
+      "EnemyWP": 57,
+      "EnemySP": 21,
+      "EnemyGold": 1292,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 137,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2386,
+      "EnemyWP": 57,
+      "EnemySP": 21,
+      "EnemyGold": 1294,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 138,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2410,
+      "EnemyWP": 57,
+      "EnemySP": 22,
+      "EnemyGold": 1296,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 139,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2434,
+      "EnemyWP": 58,
+      "EnemySP": 22,
+      "EnemyGold": 1298,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 140,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2458,
+      "EnemyWP": 58,
+      "EnemySP": 22,
+      "EnemyGold": 1300,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 141,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2482,
+      "EnemyWP": 58,
+      "EnemySP": 22,
+      "EnemyGold": 1302,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 142,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2506,
+      "EnemyWP": 59,
+      "EnemySP": 22,
+      "EnemyGold": 1304,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 143,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2530,
+      "EnemyWP": 59,
+      "EnemySP": 22,
+      "EnemyGold": 1306,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 144,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2554,
+      "EnemyWP": 59,
+      "EnemySP": 22,
+      "EnemyGold": 1308,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 145,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2578,
+      "EnemyWP": 60,
+      "EnemySP": 23,
+      "EnemyGold": 1310,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 146,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2602,
+      "EnemyWP": 60,
+      "EnemySP": 23,
+      "EnemyGold": 1312,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 147,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2626,
+      "EnemyWP": 60,
+      "EnemySP": 23,
+      "EnemyGold": 1314,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 148,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2650,
+      "EnemyWP": 61,
+      "EnemySP": 23,
+      "EnemyGold": 1316,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 149,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2674,
+      "EnemyWP": 61,
+      "EnemySP": 23,
+      "EnemyGold": 1318,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 150,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2698,
+      "EnemyWP": 61,
+      "EnemySP": 23,
+      "EnemyGold": 1320,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 151,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2722,
+      "EnemyWP": 62,
+      "EnemySP": 23,
+      "EnemyGold": 1322,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 152,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2746,
+      "EnemyWP": 62,
+      "EnemySP": 24,
+      "EnemyGold": 1324,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 153,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2770,
+      "EnemyWP": 62,
+      "EnemySP": 24,
+      "EnemyGold": 1326,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 154,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2794,
+      "EnemyWP": 63,
+      "EnemySP": 24,
+      "EnemyGold": 1328,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 155,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2818,
+      "EnemyWP": 63,
+      "EnemySP": 24,
+      "EnemyGold": 1330,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 156,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2842,
+      "EnemyWP": 63,
+      "EnemySP": 24,
+      "EnemyGold": 1332,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 157,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2866,
+      "EnemyWP": 64,
+      "EnemySP": 24,
+      "EnemyGold": 1334,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 158,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2890,
+      "EnemyWP": 64,
+      "EnemySP": 24,
+      "EnemyGold": 1336,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 159,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2914,
+      "EnemyWP": 64,
+      "EnemySP": 25,
+      "EnemyGold": 1338,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 160,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2938,
+      "EnemyWP": 65,
+      "EnemySP": 25,
+      "EnemyGold": 1340,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 161,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2962,
+      "EnemyWP": 65,
+      "EnemySP": 25,
+      "EnemyGold": 1342,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 162,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 2986,
+      "EnemyWP": 65,
+      "EnemySP": 25,
+      "EnemyGold": 1344,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 163,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3010,
+      "EnemyWP": 66,
+      "EnemySP": 25,
+      "EnemyGold": 1346,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 164,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3034,
+      "EnemyWP": 66,
+      "EnemySP": 25,
+      "EnemyGold": 1348,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 165,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3058,
+      "EnemyWP": 66,
+      "EnemySP": 25,
+      "EnemyGold": 1350,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 166,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3082,
+      "EnemyWP": 67,
+      "EnemySP": 26,
+      "EnemyGold": 1352,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 167,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3106,
+      "EnemyWP": 67,
+      "EnemySP": 26,
+      "EnemyGold": 1354,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 168,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3130,
+      "EnemyWP": 67,
+      "EnemySP": 26,
+      "EnemyGold": 1356,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 169,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3154,
+      "EnemyWP": 68,
+      "EnemySP": 26,
+      "EnemyGold": 1358,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 170,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3178,
+      "EnemyWP": 68,
+      "EnemySP": 26,
+      "EnemyGold": 1360,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 171,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3202,
+      "EnemyWP": 68,
+      "EnemySP": 26,
+      "EnemyGold": 1362,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 172,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3226,
+      "EnemyWP": 69,
+      "EnemySP": 26,
+      "EnemyGold": 1364,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 173,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3250,
+      "EnemyWP": 69,
+      "EnemySP": 27,
+      "EnemyGold": 1366,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 174,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3274,
+      "EnemyWP": 69,
+      "EnemySP": 27,
+      "EnemyGold": 1368,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 175,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3298,
+      "EnemyWP": 70,
+      "EnemySP": 27,
+      "EnemyGold": 1370,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 176,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3322,
+      "EnemyWP": 70,
+      "EnemySP": 27,
+      "EnemyGold": 1372,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 177,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3346,
+      "EnemyWP": 70,
+      "EnemySP": 27,
+      "EnemyGold": 1374,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 178,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3370,
+      "EnemyWP": 71,
+      "EnemySP": 27,
+      "EnemyGold": 1376,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 179,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3394,
+      "EnemyWP": 71,
+      "EnemySP": 27,
+      "EnemyGold": 1378,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 180,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3418,
+      "EnemyWP": 71,
+      "EnemySP": 28,
+      "EnemyGold": 1380,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 181,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3442,
+      "EnemyWP": 72,
+      "EnemySP": 28,
+      "EnemyGold": 1382,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 182,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3466,
+      "EnemyWP": 72,
+      "EnemySP": 28,
+      "EnemyGold": 1384,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 183,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3490,
+      "EnemyWP": 72,
+      "EnemySP": 28,
+      "EnemyGold": 1386,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 184,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3514,
+      "EnemyWP": 73,
+      "EnemySP": 28,
+      "EnemyGold": 1388,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 185,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3538,
+      "EnemyWP": 73,
+      "EnemySP": 28,
+      "EnemyGold": 1390,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 186,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3562,
+      "EnemyWP": 73,
+      "EnemySP": 28,
+      "EnemyGold": 1392,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 187,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3586,
+      "EnemyWP": 74,
+      "EnemySP": 29,
+      "EnemyGold": 1394,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 188,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3610,
+      "EnemyWP": 74,
+      "EnemySP": 29,
+      "EnemyGold": 1396,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 189,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3634,
+      "EnemyWP": 74,
+      "EnemySP": 29,
+      "EnemyGold": 1398,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 190,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3658,
+      "EnemyWP": 75,
+      "EnemySP": 29,
+      "EnemyGold": 1400,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 191,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3682,
+      "EnemyWP": 75,
+      "EnemySP": 29,
+      "EnemyGold": 1402,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 192,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3706,
+      "EnemyWP": 75,
+      "EnemySP": 29,
+      "EnemyGold": 1404,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 193,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3730,
+      "EnemyWP": 76,
+      "EnemySP": 29,
+      "EnemyGold": 1406,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 194,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3754,
+      "EnemyWP": 76,
+      "EnemySP": 30,
+      "EnemyGold": 1408,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 195,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3778,
+      "EnemyWP": 76,
+      "EnemySP": 30,
+      "EnemyGold": 1410,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 196,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3802,
+      "EnemyWP": 77,
+      "EnemySP": 30,
+      "EnemyGold": 1412,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 197,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3826,
+      "EnemyWP": 77,
+      "EnemySP": 30,
+      "EnemyGold": 1414,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 198,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3850,
+      "EnemyWP": 77,
+      "EnemySP": 30,
+      "EnemyGold": 1416,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 199,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3874,
+      "EnemyWP": 78,
+      "EnemySP": 30,
+      "EnemyGold": 1418,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 200,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3898,
+      "EnemyWP": 78,
+      "EnemySP": 30,
+      "EnemyGold": 1420,
+      "GoldDivide": 9
+    },
+    {
+      "$id": 201,
+      "LevelExp": 99999,
+      "LevelExp2": 99999,
+      "EnemyExp": 3922,
+      "EnemyWP": 78,
+      "EnemySP": 31,
+      "EnemyGold": 1422,
+      "GoldDivide": 9
+    }
+  ]
+}

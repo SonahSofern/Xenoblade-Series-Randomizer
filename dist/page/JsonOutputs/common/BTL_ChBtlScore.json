@@ -1,0 +1,108 @@
+{
+  "schema": [
+    {
+      "name": "Score",
+      "type": 2
+    },
+    {
+      "name": "Cube",
+      "type": 2
+    },
+    {
+      "name": "CubeDiv",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "Score": 30,
+      "Cube": 5,
+      "CubeDiv": 1
+    },
+    {
+      "$id": 1,
+      "Score": 50,
+      "Cube": 5,
+      "CubeDiv": 1
+    },
+    {
+      "$id": 2,
+      "Score": 100,
+      "Cube": 5,
+      "CubeDiv": 1
+    },
+    {
+      "$id": 3,
+      "Score": 200,
+      "Cube": 5,
+      "CubeDiv": 1
+    },
+    {
+      "$id": 4,
+      "Score": 500,
+      "Cube": 10,
+      "CubeDiv": 1
+    },
+    {
+      "$id": 5,
+      "Score": 50,
+      "Cube": 5,
+      "CubeDiv": 1
+    },
+    {
+      "$id": 6,
+      "Score": 150,
+      "Cube": 10,
+      "CubeDiv": 1
+    },
+    {
+      "$id": 7,
+      "Score": 300,
+      "Cube": 15,
+      "CubeDiv": 1
+    },
+    {
+      "$id": 8,
+      "Score": 500,
+      "Cube": 15,
+      "CubeDiv": 1
+    },
+    {
+      "$id": 9,
+      "Score": 500,
+      "Cube": 15,
+      "CubeDiv": 1
+    },
+    {
+      "$id": 10,
+      "Score": 1000,
+      "Cube": 20,
+      "CubeDiv": 1
+    },
+    {
+      "$id": 11,
+      "Score": 1500,
+      "Cube": 50,
+      "CubeDiv": 1
+    },
+    {
+      "$id": 12,
+      "Score": 30,
+      "Cube": 0,
+      "CubeDiv": 0
+    },
+    {
+      "$id": 13,
+      "Score": 60,
+      "Cube": 0,
+      "CubeDiv": 0
+    },
+    {
+      "$id": 14,
+      "Score": 120,
+      "Cube": 0,
+      "CubeDiv": 0
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "value",
+      "type": 5
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "name": "OFF",
+      "value": 0
+    },
+    {
+      "$id": 1,
+      "name": "ON",
+      "value": 1
+    },
+    {
+      "$id": 2,
+      "name": "TYPE_SS",
+      "value": 2
+    },
+    {
+      "$id": 3,
+      "name": "TYPE_S",
+      "value": 3
+    },
+    {
+      "$id": 4,
+      "name": "TYPE_M",
+      "value": 4
+    },
+    {
+      "$id": 5,
+      "name": "TYPE_L",
+      "value": 5
+    }
+  ]
+}

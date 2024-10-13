@@ -1,0 +1,168 @@
+{
+  "schema": [
+    {
+      "name": "WpnDmg1",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg2",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg3",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg4",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg5",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg6",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg7",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg8",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg9",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg10",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg11",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg12",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg13",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg14",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg15",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg16",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg17",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg18",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg19",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg20",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg21",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg22",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg23",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg24",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg25",
+      "type": 2
+    },
+    {
+      "name": "WpnDmg26",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "WpnDmg1": 335,
+      "WpnDmg2": 299,
+      "WpnDmg3": 245,
+      "WpnDmg4": 259,
+      "WpnDmg5": 286,
+      "WpnDmg6": 362,
+      "WpnDmg7": 293,
+      "WpnDmg8": 379,
+      "WpnDmg9": 302,
+      "WpnDmg10": 351,
+      "WpnDmg11": 312,
+      "WpnDmg12": 327,
+      "WpnDmg13": 272,
+      "WpnDmg14": 286,
+      "WpnDmg15": 232,
+      "WpnDmg16": 278,
+      "WpnDmg17": 335,
+      "WpnDmg18": 365,
+      "WpnDmg19": 340,
+      "WpnDmg20": 267,
+      "WpnDmg21": 304,
+      "WpnDmg22": 279,
+      "WpnDmg23": 255,
+      "WpnDmg24": 304,
+      "WpnDmg25": 255,
+      "WpnDmg26": 267
+    },
+    {
+      "$id": 2,
+      "WpnDmg1": 665,
+      "WpnDmg2": 595,
+      "WpnDmg3": 487,
+      "WpnDmg4": 514,
+      "WpnDmg5": 568,
+      "WpnDmg6": 719,
+      "WpnDmg7": 584,
+      "WpnDmg8": 752,
+      "WpnDmg9": 600,
+      "WpnDmg10": 697,
+      "WpnDmg11": 622,
+      "WpnDmg12": 649,
+      "WpnDmg13": 541,
+      "WpnDmg14": 568,
+      "WpnDmg15": 460,
+      "WpnDmg16": 551,
+      "WpnDmg17": 665,
+      "WpnDmg18": 765,
+      "WpnDmg19": 714,
+      "WpnDmg20": 561,
+      "WpnDmg21": 638,
+      "WpnDmg22": 587,
+      "WpnDmg23": 536,
+      "WpnDmg24": 638,
+      "WpnDmg25": 536,
+      "WpnDmg26": 561
+    }
+  ]
+}

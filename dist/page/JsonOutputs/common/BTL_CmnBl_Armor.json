@@ -1,0 +1,90 @@
+{
+  "schema": [
+    {
+      "name": "WpnType",
+      "type": 1
+    },
+    {
+      "name": "PArmorCon",
+      "type": 1
+    },
+    {
+      "name": "PArmorRand",
+      "type": 1
+    },
+    {
+      "name": "EArmorCon",
+      "type": 1
+    },
+    {
+      "name": "EArmorRand",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "WpnType": 3,
+      "PArmorCon": 0,
+      "PArmorRand": 5,
+      "EArmorCon": 20,
+      "EArmorRand": 15
+    },
+    {
+      "$id": 2,
+      "WpnType": 10,
+      "PArmorCon": 5,
+      "PArmorRand": 15,
+      "EArmorCon": 5,
+      "EArmorRand": 10
+    },
+    {
+      "$id": 3,
+      "WpnType": 11,
+      "PArmorCon": 3,
+      "PArmorRand": 7,
+      "EArmorCon": 3,
+      "EArmorRand": 7
+    },
+    {
+      "$id": 4,
+      "WpnType": 12,
+      "PArmorCon": 0,
+      "PArmorRand": 5,
+      "EArmorCon": 5,
+      "EArmorRand": 10
+    },
+    {
+      "$id": 5,
+      "WpnType": 13,
+      "PArmorCon": 20,
+      "PArmorRand": 15,
+      "EArmorCon": 20,
+      "EArmorRand": 10
+    },
+    {
+      "$id": 6,
+      "WpnType": 14,
+      "PArmorCon": 15,
+      "PArmorRand": 10,
+      "EArmorCon": 10,
+      "EArmorRand": 15
+    },
+    {
+      "$id": 7,
+      "WpnType": 15,
+      "PArmorCon": 0,
+      "PArmorRand": 5,
+      "EArmorCon": 10,
+      "EArmorRand": 5
+    },
+    {
+      "$id": 8,
+      "WpnType": 16,
+      "PArmorCon": 10,
+      "PArmorRand": 5,
+      "EArmorCon": 5,
+      "EArmorRand": 5
+    }
+  ]
+}

@@ -1,0 +1,327 @@
+{
+  "schema": [
+    {
+      "name": "chgName",
+      "type": 7
+    },
+    {
+      "name": "chgType",
+      "type": 4
+    },
+    {
+      "name": "id",
+      "type": 6
+    },
+    {
+      "name": "value0",
+      "type": 6
+    },
+    {
+      "name": "value1",
+      "type": 6
+    },
+    {
+      "name": "string0",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 60001,
+      "chgName": "deb999998",
+      "chgType": 1,
+      "id": 10000,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60002,
+      "chgName": "",
+      "chgType": 1,
+      "id": 10001,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60003,
+      "chgName": "deb999999F",
+      "chgType": 1,
+      "id": 1003,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60004,
+      "chgName": "",
+      "chgType": 52,
+      "id": 1,
+      "value0": 0,
+      "value1": 0,
+      "string0": "body_mesh32"
+    },
+    {
+      "$id": 60005,
+      "chgName": "",
+      "chgType": 50,
+      "id": 1,
+      "value0": 0,
+      "value1": 0,
+      "string0": "body_mesh32"
+    },
+    {
+      "$id": 60006,
+      "chgName": "",
+      "chgType": 59,
+      "id": 1,
+      "value0": 1,
+      "value1": 0,
+      "string0": "mayu_sad_L"
+    },
+    {
+      "$id": 60007,
+      "chgName": "",
+      "chgType": 62,
+      "id": 0,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60008,
+      "chgName": "",
+      "chgType": 42,
+      "id": 47,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60009,
+      "chgName": "deb999999",
+      "chgType": 1,
+      "id": 1003,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60010,
+      "chgName": "",
+      "chgType": 6,
+      "id": 1,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60011,
+      "chgName": "",
+      "chgType": 9,
+      "id": 1,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60012,
+      "chgName": "",
+      "chgType": 12,
+      "id": 1,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60013,
+      "chgName": "",
+      "chgType": 14,
+      "id": 0,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60014,
+      "chgName": "",
+      "chgType": 17,
+      "id": 1,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60015,
+      "chgName": "",
+      "chgType": 20,
+      "id": 1,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60016,
+      "chgName": "",
+      "chgType": 22,
+      "id": 1,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60017,
+      "chgName": "",
+      "chgType": 25,
+      "id": 1,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60018,
+      "chgName": "",
+      "chgType": 28,
+      "id": 1,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60019,
+      "chgName": "",
+      "chgType": 34,
+      "id": 1,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60020,
+      "chgName": "",
+      "chgType": 36,
+      "id": 1,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60021,
+      "chgName": "",
+      "chgType": 38,
+      "id": 1001,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60022,
+      "chgName": "",
+      "chgType": 44,
+      "id": 401,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60023,
+      "chgName": "",
+      "chgType": 46,
+      "id": 401,
+      "value0": 0,
+      "value1": 1,
+      "string0": ""
+    },
+    {
+      "$id": 60024,
+      "chgName": "",
+      "chgType": 54,
+      "id": 0,
+      "value0": 100,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60025,
+      "chgName": "",
+      "chgType": 55,
+      "id": 1001,
+      "value0": 100,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60026,
+      "chgName": "",
+      "chgType": 57,
+      "id": 1,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60027,
+      "chgName": "",
+      "chgType": 67,
+      "id": 0,
+      "value0": 100,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60028,
+      "chgName": "",
+      "chgType": 68,
+      "id": 3447,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60029,
+      "chgName": "",
+      "chgType": 73,
+      "id": 0,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60030,
+      "chgName": "",
+      "chgType": 74,
+      "id": 0,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60031,
+      "chgName": "",
+      "chgType": 75,
+      "id": 4015,
+      "value0": 3,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60032,
+      "chgName": "",
+      "chgType": 77,
+      "id": 1,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 60033,
+      "chgName": "bf99010100F",
+      "chgType": 50,
+      "id": 1,
+      "value0": 0,
+      "value1": 0,
+      "string0": "body_mesh32"
+    }
+  ]
+}

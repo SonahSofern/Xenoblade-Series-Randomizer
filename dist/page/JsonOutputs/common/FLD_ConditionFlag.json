@@ -1,0 +1,11124 @@
+{
+  "schema": [
+    {
+      "name": "FlagType",
+      "type": 1
+    },
+    {
+      "name": "FlagID",
+      "type": 2
+    },
+    {
+      "name": "FlagMin",
+      "type": 2
+    },
+    {
+      "name": "FlagMax",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "FlagType": 1,
+      "FlagID": 49968,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 2,
+      "FlagType": 1,
+      "FlagID": 49969,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 3,
+      "FlagType": 1,
+      "FlagID": 49970,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 4,
+      "FlagType": 1,
+      "FlagID": 49960,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 5,
+      "FlagType": 1,
+      "FlagID": 49961,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 6,
+      "FlagType": 1,
+      "FlagID": 49962,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 7,
+      "FlagType": 1,
+      "FlagID": 49963,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 8,
+      "FlagType": 1,
+      "FlagID": 49964,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 9,
+      "FlagType": 1,
+      "FlagID": 49968,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 10,
+      "FlagType": 1,
+      "FlagID": 49969,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 11,
+      "FlagType": 1,
+      "FlagID": 49970,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 12,
+      "FlagType": 1,
+      "FlagID": 49971,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 13,
+      "FlagType": 1,
+      "FlagID": 49972,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 14,
+      "FlagType": 1,
+      "FlagID": 49973,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 15,
+      "FlagType": 1,
+      "FlagID": 49974,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 16,
+      "FlagType": 1,
+      "FlagID": 49975,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 17,
+      "FlagType": 1,
+      "FlagID": 49967,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 18,
+      "FlagType": 1,
+      "FlagID": 49976,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 19,
+      "FlagType": 8,
+      "FlagID": 2224,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 20,
+      "FlagType": 1,
+      "FlagID": 49977,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 21,
+      "FlagType": 1,
+      "FlagID": 49978,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 22,
+      "FlagType": 1,
+      "FlagID": 49979,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 23,
+      "FlagType": 1,
+      "FlagID": 50003,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 24,
+      "FlagType": 1,
+      "FlagID": 49980,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 25,
+      "FlagType": 1,
+      "FlagID": 49981,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 26,
+      "FlagType": 1,
+      "FlagID": 49982,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 27,
+      "FlagType": 1,
+      "FlagID": 49985,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 28,
+      "FlagType": 1,
+      "FlagID": 50125,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 29,
+      "FlagType": 1,
+      "FlagID": 49986,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 30,
+      "FlagType": 1,
+      "FlagID": 49987,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 31,
+      "FlagType": 1,
+      "FlagID": 49989,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 32,
+      "FlagType": 1,
+      "FlagID": 49990,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 33,
+      "FlagType": 1,
+      "FlagID": 49991,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 34,
+      "FlagType": 1,
+      "FlagID": 50002,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 35,
+      "FlagType": 1,
+      "FlagID": 50004,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 36,
+      "FlagType": 1,
+      "FlagID": 49980,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 37,
+      "FlagType": 1,
+      "FlagID": 50011,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 38,
+      "FlagType": 1,
+      "FlagID": 50011,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 39,
+      "FlagType": 1,
+      "FlagID": 49981,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 40,
+      "FlagType": 1,
+      "FlagID": 49982,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 41,
+      "FlagType": 1,
+      "FlagID": 50009,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 42,
+      "FlagType": 1,
+      "FlagID": 50009,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 43,
+      "FlagType": 1,
+      "FlagID": 50012,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 44,
+      "FlagType": 1,
+      "FlagID": 50013,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 45,
+      "FlagType": 1,
+      "FlagID": 50014,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 46,
+      "FlagType": 1,
+      "FlagID": 50015,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 47,
+      "FlagType": 1,
+      "FlagID": 50016,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 48,
+      "FlagType": 1,
+      "FlagID": 50017,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 49,
+      "FlagType": 1,
+      "FlagID": 50043,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 50,
+      "FlagType": 1,
+      "FlagID": 50510,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 51,
+      "FlagType": 1,
+      "FlagID": 50511,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 52,
+      "FlagType": 1,
+      "FlagID": 50512,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 53,
+      "FlagType": 1,
+      "FlagID": 50021,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 54,
+      "FlagType": 1,
+      "FlagID": 50022,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 55,
+      "FlagType": 1,
+      "FlagID": 50023,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 56,
+      "FlagType": 1,
+      "FlagID": 50024,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 57,
+      "FlagType": 1,
+      "FlagID": 50025,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 58,
+      "FlagType": 1,
+      "FlagID": 50026,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 59,
+      "FlagType": 1,
+      "FlagID": 50027,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 60,
+      "FlagType": 1,
+      "FlagID": 50028,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 61,
+      "FlagType": 1,
+      "FlagID": 50029,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 62,
+      "FlagType": 1,
+      "FlagID": 50031,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 63,
+      "FlagType": 1,
+      "FlagID": 50034,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 64,
+      "FlagType": 1,
+      "FlagID": 50032,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 65,
+      "FlagType": 1,
+      "FlagID": 50033,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 66,
+      "FlagType": 1,
+      "FlagID": 50035,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 67,
+      "FlagType": 1,
+      "FlagID": 50036,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 68,
+      "FlagType": 1,
+      "FlagID": 50037,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 69,
+      "FlagType": 1,
+      "FlagID": 50038,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 70,
+      "FlagType": 1,
+      "FlagID": 50039,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 71,
+      "FlagType": 1,
+      "FlagID": 50040,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 72,
+      "FlagType": 1,
+      "FlagID": 50221,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 73,
+      "FlagType": 1,
+      "FlagID": 50222,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 74,
+      "FlagType": 1,
+      "FlagID": 50102,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 75,
+      "FlagType": 1,
+      "FlagID": 50055,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 76,
+      "FlagType": 1,
+      "FlagID": 50420,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 77,
+      "FlagType": 1,
+      "FlagID": 50046,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 78,
+      "FlagType": 1,
+      "FlagID": 50047,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 79,
+      "FlagType": 1,
+      "FlagID": 50048,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 80,
+      "FlagType": 1,
+      "FlagID": 50049,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 81,
+      "FlagType": 1,
+      "FlagID": 50050,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 82,
+      "FlagType": 1,
+      "FlagID": 50051,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 83,
+      "FlagType": 1,
+      "FlagID": 50046,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 84,
+      "FlagType": 1,
+      "FlagID": 50047,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 85,
+      "FlagType": 1,
+      "FlagID": 50048,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 86,
+      "FlagType": 1,
+      "FlagID": 50035,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 87,
+      "FlagType": 1,
+      "FlagID": 50036,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 88,
+      "FlagType": 1,
+      "FlagID": 50037,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 89,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 90,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 91,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 92,
+      "FlagType": 1,
+      "FlagID": 50059,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 93,
+      "FlagType": 1,
+      "FlagID": 50060,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 94,
+      "FlagType": 1,
+      "FlagID": 50061,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 95,
+      "FlagType": 1,
+      "FlagID": 50058,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 96,
+      "FlagType": 1,
+      "FlagID": 50062,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 97,
+      "FlagType": 1,
+      "FlagID": 50660,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 98,
+      "FlagType": 1,
+      "FlagID": 50064,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 99,
+      "FlagType": 1,
+      "FlagID": 50065,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 100,
+      "FlagType": 1,
+      "FlagID": 50066,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 101,
+      "FlagType": 1,
+      "FlagID": 50067,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 102,
+      "FlagType": 1,
+      "FlagID": 50068,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 103,
+      "FlagType": 1,
+      "FlagID": 50069,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 104,
+      "FlagType": 1,
+      "FlagID": 50070,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 105,
+      "FlagType": 1,
+      "FlagID": 50071,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 106,
+      "FlagType": 1,
+      "FlagID": 50072,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 107,
+      "FlagType": 1,
+      "FlagID": 49983,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 108,
+      "FlagType": 1,
+      "FlagID": 49984,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 109,
+      "FlagType": 1,
+      "FlagID": 50073,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 110,
+      "FlagType": 1,
+      "FlagID": 50074,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 111,
+      "FlagType": 1,
+      "FlagID": 50075,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 112,
+      "FlagType": 1,
+      "FlagID": 50076,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 113,
+      "FlagType": 1,
+      "FlagID": 50077,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 114,
+      "FlagType": 1,
+      "FlagID": 49998,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 115,
+      "FlagType": 1,
+      "FlagID": 49999,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 116,
+      "FlagType": 1,
+      "FlagID": 50000,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 117,
+      "FlagType": 1,
+      "FlagID": 50001,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 118,
+      "FlagType": 1,
+      "FlagID": 50010,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 119,
+      "FlagType": 1,
+      "FlagID": 50078,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 120,
+      "FlagType": 1,
+      "FlagID": 50091,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 121,
+      "FlagType": 1,
+      "FlagID": 50089,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 122,
+      "FlagType": 1,
+      "FlagID": 50090,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 123,
+      "FlagType": 1,
+      "FlagID": 50092,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 124,
+      "FlagType": 1,
+      "FlagID": 50093,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 125,
+      "FlagType": 1,
+      "FlagID": 50079,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 126,
+      "FlagType": 1,
+      "FlagID": 50080,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 127,
+      "FlagType": 1,
+      "FlagID": 50081,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 128,
+      "FlagType": 1,
+      "FlagID": 50082,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 129,
+      "FlagType": 1,
+      "FlagID": 50083,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 130,
+      "FlagType": 1,
+      "FlagID": 50084,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 131,
+      "FlagType": 1,
+      "FlagID": 50094,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 132,
+      "FlagType": 1,
+      "FlagID": 50095,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 133,
+      "FlagType": 1,
+      "FlagID": 50096,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 134,
+      "FlagType": 1,
+      "FlagID": 50097,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 135,
+      "FlagType": 1,
+      "FlagID": 50094,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 136,
+      "FlagType": 1,
+      "FlagID": 50095,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 137,
+      "FlagType": 1,
+      "FlagID": 50096,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 138,
+      "FlagType": 1,
+      "FlagID": 50097,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 139,
+      "FlagType": 1,
+      "FlagID": 50257,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 140,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 141,
+      "FlagType": 1,
+      "FlagID": 50104,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 142,
+      "FlagType": 1,
+      "FlagID": 50105,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 143,
+      "FlagType": 1,
+      "FlagID": 50106,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 144,
+      "FlagType": 1,
+      "FlagID": 50107,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 145,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 146,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 147,
+      "FlagType": 1,
+      "FlagID": 50158,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 148,
+      "FlagType": 1,
+      "FlagID": 50160,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 149,
+      "FlagType": 1,
+      "FlagID": 50161,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 150,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 151,
+      "FlagType": 1,
+      "FlagID": 50116,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 152,
+      "FlagType": 1,
+      "FlagID": 50117,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 153,
+      "FlagType": 1,
+      "FlagID": 50143,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 154,
+      "FlagType": 1,
+      "FlagID": 50149,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 155,
+      "FlagType": 1,
+      "FlagID": 50145,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 156,
+      "FlagType": 1,
+      "FlagID": 50146,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 157,
+      "FlagType": 1,
+      "FlagID": 50147,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 158,
+      "FlagType": 1,
+      "FlagID": 50148,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 159,
+      "FlagType": 1,
+      "FlagID": 50150,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 160,
+      "FlagType": 1,
+      "FlagID": 50151,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 161,
+      "FlagType": 1,
+      "FlagID": 50152,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 162,
+      "FlagType": 1,
+      "FlagID": 50155,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 163,
+      "FlagType": 1,
+      "FlagID": 50156,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 164,
+      "FlagType": 1,
+      "FlagID": 50157,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 165,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 166,
+      "FlagType": 1,
+      "FlagID": 50400,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 167,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 168,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 169,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 170,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 171,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 172,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 173,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 174,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 175,
+      "FlagType": 1,
+      "FlagID": 50168,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 176,
+      "FlagType": 1,
+      "FlagID": 50169,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 177,
+      "FlagType": 1,
+      "FlagID": 50170,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 178,
+      "FlagType": 1,
+      "FlagID": 50171,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 179,
+      "FlagType": 1,
+      "FlagID": 50172,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 180,
+      "FlagType": 1,
+      "FlagID": 50172,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 181,
+      "FlagType": 1,
+      "FlagID": 50175,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 182,
+      "FlagType": 1,
+      "FlagID": 50122,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 183,
+      "FlagType": 1,
+      "FlagID": 50123,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 184,
+      "FlagType": 1,
+      "FlagID": 50124,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 185,
+      "FlagType": 1,
+      "FlagID": 50078,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 186,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 187,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 188,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 189,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 190,
+      "FlagType": 1,
+      "FlagID": 50190,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 191,
+      "FlagType": 1,
+      "FlagID": 50191,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 192,
+      "FlagType": 1,
+      "FlagID": 50193,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 193,
+      "FlagType": 1,
+      "FlagID": 50194,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 194,
+      "FlagType": 1,
+      "FlagID": 50195,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 195,
+      "FlagType": 1,
+      "FlagID": 50196,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 196,
+      "FlagType": 1,
+      "FlagID": 50197,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 197,
+      "FlagType": 1,
+      "FlagID": 50198,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 198,
+      "FlagType": 1,
+      "FlagID": 50199,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 199,
+      "FlagType": 1,
+      "FlagID": 50200,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 200,
+      "FlagType": 1,
+      "FlagID": 50201,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 201,
+      "FlagType": 1,
+      "FlagID": 50202,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 202,
+      "FlagType": 1,
+      "FlagID": 50203,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 203,
+      "FlagType": 1,
+      "FlagID": 50204,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 204,
+      "FlagType": 1,
+      "FlagID": 50205,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 205,
+      "FlagType": 1,
+      "FlagID": 50206,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 206,
+      "FlagType": 1,
+      "FlagID": 50207,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 207,
+      "FlagType": 1,
+      "FlagID": 50208,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 208,
+      "FlagType": 1,
+      "FlagID": 50209,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 209,
+      "FlagType": 1,
+      "FlagID": 50210,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 210,
+      "FlagType": 1,
+      "FlagID": 50211,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 211,
+      "FlagType": 1,
+      "FlagID": 50212,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 212,
+      "FlagType": 1,
+      "FlagID": 50213,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 213,
+      "FlagType": 1,
+      "FlagID": 50214,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 214,
+      "FlagType": 1,
+      "FlagID": 50187,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 215,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 216,
+      "FlagType": 1,
+      "FlagID": 50145,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 217,
+      "FlagType": 1,
+      "FlagID": 50146,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 218,
+      "FlagType": 1,
+      "FlagID": 50147,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 219,
+      "FlagType": 1,
+      "FlagID": 50148,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 220,
+      "FlagType": 1,
+      "FlagID": 50184,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 221,
+      "FlagType": 1,
+      "FlagID": 50392,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 222,
+      "FlagType": 1,
+      "FlagID": 50142,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 223,
+      "FlagType": 1,
+      "FlagID": 50142,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 224,
+      "FlagType": 1,
+      "FlagID": 50130,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 225,
+      "FlagType": 1,
+      "FlagID": 50131,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 226,
+      "FlagType": 1,
+      "FlagID": 50132,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 227,
+      "FlagType": 1,
+      "FlagID": 50133,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 228,
+      "FlagType": 1,
+      "FlagID": 50134,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 229,
+      "FlagType": 1,
+      "FlagID": 50135,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 230,
+      "FlagType": 1,
+      "FlagID": 50136,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 231,
+      "FlagType": 1,
+      "FlagID": 50137,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 232,
+      "FlagType": 1,
+      "FlagID": 50138,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 233,
+      "FlagType": 1,
+      "FlagID": 50139,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 234,
+      "FlagType": 1,
+      "FlagID": 50140,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 235,
+      "FlagType": 1,
+      "FlagID": 50192,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 236,
+      "FlagType": 1,
+      "FlagID": 50192,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 237,
+      "FlagType": 1,
+      "FlagID": 50153,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 238,
+      "FlagType": 1,
+      "FlagID": 50141,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 239,
+      "FlagType": 1,
+      "FlagID": 50141,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 240,
+      "FlagType": 1,
+      "FlagID": 50154,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 241,
+      "FlagType": 1,
+      "FlagID": 50188,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 242,
+      "FlagType": 1,
+      "FlagID": 50231,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 243,
+      "FlagType": 1,
+      "FlagID": 50232,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 244,
+      "FlagType": 1,
+      "FlagID": 50233,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 245,
+      "FlagType": 1,
+      "FlagID": 50049,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 246,
+      "FlagType": 1,
+      "FlagID": 50050,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 247,
+      "FlagType": 1,
+      "FlagID": 50051,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 248,
+      "FlagType": 1,
+      "FlagID": 50216,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 249,
+      "FlagType": 1,
+      "FlagID": 50217,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 250,
+      "FlagType": 1,
+      "FlagID": 50223,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 251,
+      "FlagType": 1,
+      "FlagID": 50185,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 252,
+      "FlagType": 1,
+      "FlagID": 50186,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 253,
+      "FlagType": 1,
+      "FlagID": 50189,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 254,
+      "FlagType": 1,
+      "FlagID": 50259,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 255,
+      "FlagType": 1,
+      "FlagID": 50260,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 256,
+      "FlagType": 1,
+      "FlagID": 50261,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 257,
+      "FlagType": 1,
+      "FlagID": 50262,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 258,
+      "FlagType": 1,
+      "FlagID": 50263,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 259,
+      "FlagType": 1,
+      "FlagID": 50264,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 260,
+      "FlagType": 1,
+      "FlagID": 50265,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 261,
+      "FlagType": 1,
+      "FlagID": 50266,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 262,
+      "FlagType": 1,
+      "FlagID": 50268,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 263,
+      "FlagType": 1,
+      "FlagID": 50269,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 264,
+      "FlagType": 1,
+      "FlagID": 50270,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 265,
+      "FlagType": 1,
+      "FlagID": 50271,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 266,
+      "FlagType": 1,
+      "FlagID": 50272,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 267,
+      "FlagType": 1,
+      "FlagID": 50273,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 268,
+      "FlagType": 1,
+      "FlagID": 50274,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 269,
+      "FlagType": 1,
+      "FlagID": 50275,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 270,
+      "FlagType": 1,
+      "FlagID": 50276,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 271,
+      "FlagType": 1,
+      "FlagID": 50277,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 272,
+      "FlagType": 1,
+      "FlagID": 50278,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 273,
+      "FlagType": 1,
+      "FlagID": 50279,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 274,
+      "FlagType": 1,
+      "FlagID": 50280,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 275,
+      "FlagType": 1,
+      "FlagID": 50281,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 276,
+      "FlagType": 1,
+      "FlagID": 50282,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 277,
+      "FlagType": 1,
+      "FlagID": 50283,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 278,
+      "FlagType": 1,
+      "FlagID": 50285,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 279,
+      "FlagType": 1,
+      "FlagID": 50286,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 280,
+      "FlagType": 1,
+      "FlagID": 50287,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 281,
+      "FlagType": 1,
+      "FlagID": 50288,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 282,
+      "FlagType": 1,
+      "FlagID": 50289,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 283,
+      "FlagType": 1,
+      "FlagID": 50290,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 284,
+      "FlagType": 1,
+      "FlagID": 50291,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 285,
+      "FlagType": 1,
+      "FlagID": 50292,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 286,
+      "FlagType": 1,
+      "FlagID": 50293,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 287,
+      "FlagType": 1,
+      "FlagID": 50294,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 288,
+      "FlagType": 1,
+      "FlagID": 50295,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 289,
+      "FlagType": 1,
+      "FlagID": 50296,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 290,
+      "FlagType": 1,
+      "FlagID": 50297,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 291,
+      "FlagType": 1,
+      "FlagID": 50298,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 292,
+      "FlagType": 1,
+      "FlagID": 50299,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 293,
+      "FlagType": 1,
+      "FlagID": 50300,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 294,
+      "FlagType": 1,
+      "FlagID": 50301,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 295,
+      "FlagType": 1,
+      "FlagID": 50302,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 296,
+      "FlagType": 1,
+      "FlagID": 50303,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 297,
+      "FlagType": 1,
+      "FlagID": 50304,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 298,
+      "FlagType": 1,
+      "FlagID": 50253,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 299,
+      "FlagType": 1,
+      "FlagID": 50242,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 300,
+      "FlagType": 1,
+      "FlagID": 50243,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 301,
+      "FlagType": 1,
+      "FlagID": 50244,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 302,
+      "FlagType": 1,
+      "FlagID": 50245,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 303,
+      "FlagType": 1,
+      "FlagID": 50246,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 304,
+      "FlagType": 1,
+      "FlagID": 50247,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 305,
+      "FlagType": 1,
+      "FlagID": 50248,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 306,
+      "FlagType": 1,
+      "FlagID": 50249,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 307,
+      "FlagType": 1,
+      "FlagID": 50250,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 308,
+      "FlagType": 1,
+      "FlagID": 50251,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 309,
+      "FlagType": 1,
+      "FlagID": 50252,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 310,
+      "FlagType": 1,
+      "FlagID": 50305,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 311,
+      "FlagType": 1,
+      "FlagID": 50306,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 312,
+      "FlagType": 1,
+      "FlagID": 50307,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 313,
+      "FlagType": 1,
+      "FlagID": 50308,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 314,
+      "FlagType": 1,
+      "FlagID": 50309,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 315,
+      "FlagType": 1,
+      "FlagID": 50310,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 316,
+      "FlagType": 1,
+      "FlagID": 50311,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 317,
+      "FlagType": 1,
+      "FlagID": 50312,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 318,
+      "FlagType": 1,
+      "FlagID": 50313,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 319,
+      "FlagType": 1,
+      "FlagID": 50314,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 320,
+      "FlagType": 1,
+      "FlagID": 50315,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 321,
+      "FlagType": 1,
+      "FlagID": 50316,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 322,
+      "FlagType": 1,
+      "FlagID": 50317,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 323,
+      "FlagType": 1,
+      "FlagID": 50318,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 324,
+      "FlagType": 1,
+      "FlagID": 50319,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 325,
+      "FlagType": 1,
+      "FlagID": 50320,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 326,
+      "FlagType": 1,
+      "FlagID": 50234,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 327,
+      "FlagType": 1,
+      "FlagID": 50235,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 328,
+      "FlagType": 1,
+      "FlagID": 50236,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 329,
+      "FlagType": 1,
+      "FlagID": 50237,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 330,
+      "FlagType": 1,
+      "FlagID": 50238,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 331,
+      "FlagType": 1,
+      "FlagID": 50239,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 332,
+      "FlagType": 1,
+      "FlagID": 50240,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 333,
+      "FlagType": 1,
+      "FlagID": 50240,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 334,
+      "FlagType": 1,
+      "FlagID": 50241,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 335,
+      "FlagType": 1,
+      "FlagID": 50321,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 336,
+      "FlagType": 1,
+      "FlagID": 50322,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 337,
+      "FlagType": 1,
+      "FlagID": 50323,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 338,
+      "FlagType": 1,
+      "FlagID": 50324,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 339,
+      "FlagType": 1,
+      "FlagID": 50325,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 340,
+      "FlagType": 1,
+      "FlagID": 50326,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 341,
+      "FlagType": 1,
+      "FlagID": 50327,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 342,
+      "FlagType": 1,
+      "FlagID": 50328,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 343,
+      "FlagType": 1,
+      "FlagID": 50329,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 344,
+      "FlagType": 1,
+      "FlagID": 50330,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 345,
+      "FlagType": 1,
+      "FlagID": 50331,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 346,
+      "FlagType": 1,
+      "FlagID": 50332,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 347,
+      "FlagType": 1,
+      "FlagID": 50333,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 348,
+      "FlagType": 1,
+      "FlagID": 50334,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 349,
+      "FlagType": 1,
+      "FlagID": 50335,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 350,
+      "FlagType": 1,
+      "FlagID": 50336,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 351,
+      "FlagType": 1,
+      "FlagID": 50337,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 352,
+      "FlagType": 1,
+      "FlagID": 50224,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 353,
+      "FlagType": 1,
+      "FlagID": 50225,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 354,
+      "FlagType": 1,
+      "FlagID": 50226,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 355,
+      "FlagType": 1,
+      "FlagID": 50227,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 356,
+      "FlagType": 1,
+      "FlagID": 50228,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 357,
+      "FlagType": 1,
+      "FlagID": 50229,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 358,
+      "FlagType": 1,
+      "FlagID": 50342,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 359,
+      "FlagType": 1,
+      "FlagID": 50343,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 360,
+      "FlagType": 1,
+      "FlagID": 50344,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 361,
+      "FlagType": 1,
+      "FlagID": 50345,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 362,
+      "FlagType": 1,
+      "FlagID": 50346,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 363,
+      "FlagType": 1,
+      "FlagID": 50347,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 364,
+      "FlagType": 1,
+      "FlagID": 50348,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 365,
+      "FlagType": 1,
+      "FlagID": 50349,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 366,
+      "FlagType": 1,
+      "FlagID": 50350,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 367,
+      "FlagType": 1,
+      "FlagID": 50351,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 368,
+      "FlagType": 1,
+      "FlagID": 50352,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 369,
+      "FlagType": 1,
+      "FlagID": 50353,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 370,
+      "FlagType": 1,
+      "FlagID": 50354,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 371,
+      "FlagType": 1,
+      "FlagID": 50355,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 372,
+      "FlagType": 1,
+      "FlagID": 50356,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 373,
+      "FlagType": 1,
+      "FlagID": 50357,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 374,
+      "FlagType": 1,
+      "FlagID": 50358,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 375,
+      "FlagType": 1,
+      "FlagID": 50360,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 376,
+      "FlagType": 1,
+      "FlagID": 50361,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 377,
+      "FlagType": 1,
+      "FlagID": 50052,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 378,
+      "FlagType": 1,
+      "FlagID": 50088,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 379,
+      "FlagType": 1,
+      "FlagID": 50215,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 380,
+      "FlagType": 1,
+      "FlagID": 50359,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 381,
+      "FlagType": 1,
+      "FlagID": 50098,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 382,
+      "FlagType": 1,
+      "FlagID": 50099,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 383,
+      "FlagType": 1,
+      "FlagID": 50100,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 384,
+      "FlagType": 1,
+      "FlagID": 50101,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 385,
+      "FlagType": 1,
+      "FlagID": 50074,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 386,
+      "FlagType": 1,
+      "FlagID": 50086,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 387,
+      "FlagType": 1,
+      "FlagID": 50087,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 388,
+      "FlagType": 1,
+      "FlagID": 50035,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 389,
+      "FlagType": 1,
+      "FlagID": 50036,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 390,
+      "FlagType": 1,
+      "FlagID": 50037,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 391,
+      "FlagType": 1,
+      "FlagID": 50387,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 392,
+      "FlagType": 1,
+      "FlagID": 50085,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 393,
+      "FlagType": 1,
+      "FlagID": 50079,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 394,
+      "FlagType": 1,
+      "FlagID": 50080,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 395,
+      "FlagType": 1,
+      "FlagID": 50081,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 396,
+      "FlagType": 1,
+      "FlagID": 50082,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 397,
+      "FlagType": 1,
+      "FlagID": 50083,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 398,
+      "FlagType": 1,
+      "FlagID": 50084,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 399,
+      "FlagType": 1,
+      "FlagID": 50085,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 400,
+      "FlagType": 1,
+      "FlagID": 50388,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 401,
+      "FlagType": 1,
+      "FlagID": 50363,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 402,
+      "FlagType": 1,
+      "FlagID": 50364,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 403,
+      "FlagType": 1,
+      "FlagID": 50365,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 404,
+      "FlagType": 1,
+      "FlagID": 50366,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 405,
+      "FlagType": 1,
+      "FlagID": 50367,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 406,
+      "FlagType": 1,
+      "FlagID": 50368,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 407,
+      "FlagType": 1,
+      "FlagID": 50369,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 408,
+      "FlagType": 1,
+      "FlagID": 50370,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 409,
+      "FlagType": 1,
+      "FlagID": 50371,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 410,
+      "FlagType": 1,
+      "FlagID": 50372,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 411,
+      "FlagType": 1,
+      "FlagID": 50373,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 412,
+      "FlagType": 1,
+      "FlagID": 50382,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 413,
+      "FlagType": 1,
+      "FlagID": 50383,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 414,
+      "FlagType": 1,
+      "FlagID": 50384,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 415,
+      "FlagType": 1,
+      "FlagID": 50385,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 416,
+      "FlagType": 1,
+      "FlagID": 49999,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 417,
+      "FlagType": 1,
+      "FlagID": 50000,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 418,
+      "FlagType": 1,
+      "FlagID": 50001,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 419,
+      "FlagType": 1,
+      "FlagID": 50010,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 420,
+      "FlagType": 1,
+      "FlagID": 50386,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 421,
+      "FlagType": 1,
+      "FlagID": 50391,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 422,
+      "FlagType": 1,
+      "FlagID": 50390,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 423,
+      "FlagType": 1,
+      "FlagID": 50230,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 424,
+      "FlagType": 1,
+      "FlagID": 50230,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 425,
+      "FlagType": 1,
+      "FlagID": 50232,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 426,
+      "FlagType": 1,
+      "FlagID": 50231,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 427,
+      "FlagType": 1,
+      "FlagID": 50232,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 428,
+      "FlagType": 1,
+      "FlagID": 50233,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 429,
+      "FlagType": 1,
+      "FlagID": 50173,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 430,
+      "FlagType": 1,
+      "FlagID": 50174,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 431,
+      "FlagType": 1,
+      "FlagID": 50393,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 432,
+      "FlagType": 1,
+      "FlagID": 50394,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 433,
+      "FlagType": 1,
+      "FlagID": 50395,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 434,
+      "FlagType": 1,
+      "FlagID": 50173,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 435,
+      "FlagType": 1,
+      "FlagID": 50174,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 436,
+      "FlagType": 1,
+      "FlagID": 50393,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 437,
+      "FlagType": 1,
+      "FlagID": 50394,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 438,
+      "FlagType": 1,
+      "FlagID": 50395,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 439,
+      "FlagType": 1,
+      "FlagID": 50396,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 440,
+      "FlagType": 1,
+      "FlagID": 50224,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 441,
+      "FlagType": 1,
+      "FlagID": 50225,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 442,
+      "FlagType": 1,
+      "FlagID": 50226,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 443,
+      "FlagType": 1,
+      "FlagID": 50227,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 444,
+      "FlagType": 1,
+      "FlagID": 50228,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 445,
+      "FlagType": 1,
+      "FlagID": 50229,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 446,
+      "FlagType": 1,
+      "FlagID": 50053,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 447,
+      "FlagType": 1,
+      "FlagID": 50389,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 448,
+      "FlagType": 1,
+      "FlagID": 50389,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 449,
+      "FlagType": 1,
+      "FlagID": 50063,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 450,
+      "FlagType": 1,
+      "FlagID": 50397,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 451,
+      "FlagType": 1,
+      "FlagID": 50398,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 452,
+      "FlagType": 1,
+      "FlagID": 50399,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 453,
+      "FlagType": 1,
+      "FlagID": 50402,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 454,
+      "FlagType": 1,
+      "FlagID": 50403,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 455,
+      "FlagType": 1,
+      "FlagID": 50401,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 456,
+      "FlagType": 1,
+      "FlagID": 50404,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 457,
+      "FlagType": 1,
+      "FlagID": 50405,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 458,
+      "FlagType": 1,
+      "FlagID": 50406,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 459,
+      "FlagType": 1,
+      "FlagID": 50407,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 460,
+      "FlagType": 1,
+      "FlagID": 50408,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 461,
+      "FlagType": 1,
+      "FlagID": 50409,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 462,
+      "FlagType": 1,
+      "FlagID": 50410,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 463,
+      "FlagType": 1,
+      "FlagID": 50411,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 464,
+      "FlagType": 1,
+      "FlagID": 50412,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 465,
+      "FlagType": 1,
+      "FlagID": 50413,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 466,
+      "FlagType": 1,
+      "FlagID": 50414,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 467,
+      "FlagType": 1,
+      "FlagID": 50415,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 468,
+      "FlagType": 1,
+      "FlagID": 50416,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 469,
+      "FlagType": 1,
+      "FlagID": 50417,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 470,
+      "FlagType": 1,
+      "FlagID": 50418,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 471,
+      "FlagType": 1,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 472,
+      "FlagType": 1,
+      "FlagID": 50195,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 473,
+      "FlagType": 1,
+      "FlagID": 50197,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 474,
+      "FlagType": 1,
+      "FlagID": 50198,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 475,
+      "FlagType": 1,
+      "FlagID": 50201,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 476,
+      "FlagType": 1,
+      "FlagID": 50204,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 477,
+      "FlagType": 1,
+      "FlagID": 50211,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 478,
+      "FlagType": 1,
+      "FlagID": 50214,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 479,
+      "FlagType": 4,
+      "FlagID": 507,
+      "FlagMin": 4,
+      "FlagMax": 10
+    },
+    {
+      "$id": 480,
+      "FlagType": 4,
+      "FlagID": 508,
+      "FlagMin": 2,
+      "FlagMax": 10
+    },
+    {
+      "$id": 481,
+      "FlagType": 4,
+      "FlagID": 509,
+      "FlagMin": 1,
+      "FlagMax": 10
+    },
+    {
+      "$id": 482,
+      "FlagType": 4,
+      "FlagID": 512,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 483,
+      "FlagType": 4,
+      "FlagID": 513,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 484,
+      "FlagType": 4,
+      "FlagID": 514,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 485,
+      "FlagType": 4,
+      "FlagID": 511,
+      "FlagMin": 10,
+      "FlagMax": 10
+    },
+    {
+      "$id": 486,
+      "FlagType": 8,
+      "FlagID": 2127,
+      "FlagMin": 2,
+      "FlagMax": 9
+    },
+    {
+      "$id": 487,
+      "FlagType": 8,
+      "FlagID": 2127,
+      "FlagMin": 4,
+      "FlagMax": 9
+    },
+    {
+      "$id": 488,
+      "FlagType": 8,
+      "FlagID": 2128,
+      "FlagMin": 2,
+      "FlagMax": 9
+    },
+    {
+      "$id": 489,
+      "FlagType": 8,
+      "FlagID": 2128,
+      "FlagMin": 4,
+      "FlagMax": 9
+    },
+    {
+      "$id": 490,
+      "FlagType": 8,
+      "FlagID": 2129,
+      "FlagMin": 2,
+      "FlagMax": 9
+    },
+    {
+      "$id": 491,
+      "FlagType": 8,
+      "FlagID": 2129,
+      "FlagMin": 4,
+      "FlagMax": 9
+    },
+    {
+      "$id": 492,
+      "FlagType": 16,
+      "FlagID": 2121,
+      "FlagMin": 5000,
+      "FlagMax": 65535
+    },
+    {
+      "$id": 493,
+      "FlagType": 8,
+      "FlagID": 2131,
+      "FlagMin": 10,
+      "FlagMax": 10
+    },
+    {
+      "$id": 494,
+      "FlagType": 8,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 495,
+      "FlagType": 8,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 496,
+      "FlagType": 8,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 497,
+      "FlagType": 8,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 498,
+      "FlagType": 8,
+      "FlagID": 2122,
+      "FlagMin": 11,
+      "FlagMax": 11
+    },
+    {
+      "$id": 499,
+      "FlagType": 8,
+      "FlagID": 2123,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 500,
+      "FlagType": 8,
+      "FlagID": 2123,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 501,
+      "FlagType": 8,
+      "FlagID": 2123,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 502,
+      "FlagType": 8,
+      "FlagID": 2123,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 503,
+      "FlagType": 8,
+      "FlagID": 2123,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 504,
+      "FlagType": 8,
+      "FlagID": 2123,
+      "FlagMin": 5,
+      "FlagMax": 5
+    },
+    {
+      "$id": 505,
+      "FlagType": 8,
+      "FlagID": 2123,
+      "FlagMin": 6,
+      "FlagMax": 6
+    },
+    {
+      "$id": 506,
+      "FlagType": 8,
+      "FlagID": 2123,
+      "FlagMin": 7,
+      "FlagMax": 7
+    },
+    {
+      "$id": 507,
+      "FlagType": 8,
+      "FlagID": 2123,
+      "FlagMin": 8,
+      "FlagMax": 8
+    },
+    {
+      "$id": 508,
+      "FlagType": 8,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 509,
+      "FlagType": 8,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 510,
+      "FlagType": 8,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 511,
+      "FlagType": 8,
+      "FlagID": 2122,
+      "FlagMin": 11,
+      "FlagMax": 13
+    },
+    {
+      "$id": 512,
+      "FlagType": 8,
+      "FlagID": 2137,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 513,
+      "FlagType": 8,
+      "FlagID": 2137,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 514,
+      "FlagType": 8,
+      "FlagID": 2137,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 515,
+      "FlagType": 8,
+      "FlagID": 2137,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 516,
+      "FlagType": 8,
+      "FlagID": 2136,
+      "FlagMin": 2,
+      "FlagMax": 11
+    },
+    {
+      "$id": 517,
+      "FlagType": 8,
+      "FlagID": 2136,
+      "FlagMin": 4,
+      "FlagMax": 11
+    },
+    {
+      "$id": 518,
+      "FlagType": 8,
+      "FlagID": 2136,
+      "FlagMin": 7,
+      "FlagMax": 11
+    },
+    {
+      "$id": 519,
+      "FlagType": 8,
+      "FlagID": 2136,
+      "FlagMin": 9,
+      "FlagMax": 11
+    },
+    {
+      "$id": 520,
+      "FlagType": 8,
+      "FlagID": 2126,
+      "FlagMin": 20,
+      "FlagMax": 100
+    },
+    {
+      "$id": 521,
+      "FlagType": 8,
+      "FlagID": 2126,
+      "FlagMin": 40,
+      "FlagMax": 100
+    },
+    {
+      "$id": 522,
+      "FlagType": 8,
+      "FlagID": 2126,
+      "FlagMin": 60,
+      "FlagMax": 100
+    },
+    {
+      "$id": 523,
+      "FlagType": 8,
+      "FlagID": 2126,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 524,
+      "FlagType": 8,
+      "FlagID": 2135,
+      "FlagMin": 2,
+      "FlagMax": 7
+    },
+    {
+      "$id": 525,
+      "FlagType": 8,
+      "FlagID": 2135,
+      "FlagMin": 4,
+      "FlagMax": 7
+    },
+    {
+      "$id": 526,
+      "FlagType": 8,
+      "FlagID": 2135,
+      "FlagMin": 6,
+      "FlagMax": 7
+    },
+    {
+      "$id": 527,
+      "FlagType": 8,
+      "FlagID": 2135,
+      "FlagMin": 7,
+      "FlagMax": 7
+    },
+    {
+      "$id": 528,
+      "FlagType": 8,
+      "FlagID": 2127,
+      "FlagMin": 2,
+      "FlagMax": 4
+    },
+    {
+      "$id": 529,
+      "FlagType": 8,
+      "FlagID": 2127,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 530,
+      "FlagType": 8,
+      "FlagID": 2128,
+      "FlagMin": 2,
+      "FlagMax": 4
+    },
+    {
+      "$id": 531,
+      "FlagType": 8,
+      "FlagID": 2128,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 532,
+      "FlagType": 8,
+      "FlagID": 2129,
+      "FlagMin": 2,
+      "FlagMax": 4
+    },
+    {
+      "$id": 533,
+      "FlagType": 8,
+      "FlagID": 2129,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 534,
+      "FlagType": 8,
+      "FlagID": 2147,
+      "FlagMin": 4,
+      "FlagMax": 13
+    },
+    {
+      "$id": 535,
+      "FlagType": 8,
+      "FlagID": 2147,
+      "FlagMin": 8,
+      "FlagMax": 13
+    },
+    {
+      "$id": 536,
+      "FlagType": 8,
+      "FlagID": 2139,
+      "FlagMin": 8,
+      "FlagMax": 22
+    },
+    {
+      "$id": 537,
+      "FlagType": 8,
+      "FlagID": 2140,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 538,
+      "FlagType": 8,
+      "FlagID": 2140,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 539,
+      "FlagType": 8,
+      "FlagID": 2140,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 540,
+      "FlagType": 8,
+      "FlagID": 2140,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 541,
+      "FlagType": 8,
+      "FlagID": 2132,
+      "FlagMin": 15,
+      "FlagMax": 255
+    },
+    {
+      "$id": 542,
+      "FlagType": 8,
+      "FlagID": 2132,
+      "FlagMin": 30,
+      "FlagMax": 255
+    },
+    {
+      "$id": 543,
+      "FlagType": 8,
+      "FlagID": 2132,
+      "FlagMin": 60,
+      "FlagMax": 255
+    },
+    {
+      "$id": 544,
+      "FlagType": 8,
+      "FlagID": 2132,
+      "FlagMin": 120,
+      "FlagMax": 255
+    },
+    {
+      "$id": 545,
+      "FlagType": 8,
+      "FlagID": 2132,
+      "FlagMin": 250,
+      "FlagMax": 255
+    },
+    {
+      "$id": 546,
+      "FlagType": 8,
+      "FlagID": 2141,
+      "FlagMin": 10,
+      "FlagMax": 255
+    },
+    {
+      "$id": 547,
+      "FlagType": 8,
+      "FlagID": 2141,
+      "FlagMin": 50,
+      "FlagMax": 255
+    },
+    {
+      "$id": 548,
+      "FlagType": 8,
+      "FlagID": 2142,
+      "FlagMin": 10,
+      "FlagMax": 255
+    },
+    {
+      "$id": 549,
+      "FlagType": 8,
+      "FlagID": 2142,
+      "FlagMin": 25,
+      "FlagMax": 255
+    },
+    {
+      "$id": 550,
+      "FlagType": 8,
+      "FlagID": 2142,
+      "FlagMin": 50,
+      "FlagMax": 255
+    },
+    {
+      "$id": 551,
+      "FlagType": 8,
+      "FlagID": 2142,
+      "FlagMin": 100,
+      "FlagMax": 255
+    },
+    {
+      "$id": 552,
+      "FlagType": 8,
+      "FlagID": 2143,
+      "FlagMin": 10,
+      "FlagMax": 255
+    },
+    {
+      "$id": 553,
+      "FlagType": 8,
+      "FlagID": 2143,
+      "FlagMin": 50,
+      "FlagMax": 255
+    },
+    {
+      "$id": 554,
+      "FlagType": 8,
+      "FlagID": 2144,
+      "FlagMin": 10,
+      "FlagMax": 255
+    },
+    {
+      "$id": 555,
+      "FlagType": 8,
+      "FlagID": 2144,
+      "FlagMin": 50,
+      "FlagMax": 255
+    },
+    {
+      "$id": 556,
+      "FlagType": 8,
+      "FlagID": 2145,
+      "FlagMin": 10,
+      "FlagMax": 255
+    },
+    {
+      "$id": 557,
+      "FlagType": 8,
+      "FlagID": 2145,
+      "FlagMin": 50,
+      "FlagMax": 255
+    },
+    {
+      "$id": 558,
+      "FlagType": 8,
+      "FlagID": 2224,
+      "FlagMin": 30,
+      "FlagMax": 30
+    },
+    {
+      "$id": 559,
+      "FlagType": 8,
+      "FlagID": 2225,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 560,
+      "FlagType": 8,
+      "FlagID": 2226,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 561,
+      "FlagType": 8,
+      "FlagID": 2227,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 562,
+      "FlagType": 8,
+      "FlagID": 2228,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 563,
+      "FlagType": 8,
+      "FlagID": 2229,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 564,
+      "FlagType": 8,
+      "FlagID": 2230,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 565,
+      "FlagType": 8,
+      "FlagID": 2231,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 566,
+      "FlagType": 8,
+      "FlagID": 2232,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 567,
+      "FlagType": 8,
+      "FlagID": 2233,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 568,
+      "FlagType": 8,
+      "FlagID": 2234,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 569,
+      "FlagType": 8,
+      "FlagID": 2235,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 570,
+      "FlagType": 8,
+      "FlagID": 2236,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 571,
+      "FlagType": 8,
+      "FlagID": 2237,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 572,
+      "FlagType": 8,
+      "FlagID": 2238,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 573,
+      "FlagType": 8,
+      "FlagID": 2239,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 574,
+      "FlagType": 8,
+      "FlagID": 2240,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 575,
+      "FlagType": 8,
+      "FlagID": 2241,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 576,
+      "FlagType": 8,
+      "FlagID": 2242,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 577,
+      "FlagType": 8,
+      "FlagID": 2243,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 578,
+      "FlagType": 8,
+      "FlagID": 2244,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 579,
+      "FlagType": 8,
+      "FlagID": 2224,
+      "FlagMin": 70,
+      "FlagMax": 70
+    },
+    {
+      "$id": 580,
+      "FlagType": 8,
+      "FlagID": 2224,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 581,
+      "FlagType": 8,
+      "FlagID": 2245,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 582,
+      "FlagType": 8,
+      "FlagID": 2246,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 583,
+      "FlagType": 8,
+      "FlagID": 2247,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 584,
+      "FlagType": 8,
+      "FlagID": 2253,
+      "FlagMin": 20,
+      "FlagMax": 20
+    },
+    {
+      "$id": 585,
+      "FlagType": 8,
+      "FlagID": 2253,
+      "FlagMin": 50,
+      "FlagMax": 50
+    },
+    {
+      "$id": 586,
+      "FlagType": 8,
+      "FlagID": 2253,
+      "FlagMin": 90,
+      "FlagMax": 90
+    },
+    {
+      "$id": 587,
+      "FlagType": 8,
+      "FlagID": 2253,
+      "FlagMin": 140,
+      "FlagMax": 140
+    },
+    {
+      "$id": 588,
+      "FlagType": 8,
+      "FlagID": 2253,
+      "FlagMin": 200,
+      "FlagMax": 200
+    },
+    {
+      "$id": 589,
+      "FlagType": 8,
+      "FlagID": 2248,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 590,
+      "FlagType": 8,
+      "FlagID": 2249,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 591,
+      "FlagType": 8,
+      "FlagID": 2250,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 592,
+      "FlagType": 8,
+      "FlagID": 2251,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 593,
+      "FlagType": 8,
+      "FlagID": 2255,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 594,
+      "FlagType": 8,
+      "FlagID": 2240,
+      "FlagMin": 50,
+      "FlagMax": 100
+    },
+    {
+      "$id": 595,
+      "FlagType": 8,
+      "FlagID": 2241,
+      "FlagMin": 50,
+      "FlagMax": 100
+    },
+    {
+      "$id": 596,
+      "FlagType": 8,
+      "FlagID": 2242,
+      "FlagMin": 50,
+      "FlagMax": 100
+    },
+    {
+      "$id": 597,
+      "FlagType": 8,
+      "FlagID": 2256,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 598,
+      "FlagType": 8,
+      "FlagID": 2257,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 599,
+      "FlagType": 2,
+      "FlagID": 2,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 600,
+      "FlagType": 2,
+      "FlagID": 2,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 601,
+      "FlagType": 2,
+      "FlagID": 3,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 602,
+      "FlagType": 2,
+      "FlagID": 4,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 603,
+      "FlagType": 2,
+      "FlagID": 4,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 604,
+      "FlagType": 2,
+      "FlagID": 5,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 605,
+      "FlagType": 2,
+      "FlagID": 5,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 606,
+      "FlagType": 2,
+      "FlagID": 6,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 607,
+      "FlagType": 2,
+      "FlagID": 6,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 608,
+      "FlagType": 2,
+      "FlagID": 7,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 609,
+      "FlagType": 2,
+      "FlagID": 7,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 610,
+      "FlagType": 2,
+      "FlagID": 8,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 611,
+      "FlagType": 2,
+      "FlagID": 8,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 612,
+      "FlagType": 2,
+      "FlagID": 9,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 613,
+      "FlagType": 2,
+      "FlagID": 9,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 614,
+      "FlagType": 2,
+      "FlagID": 10,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 615,
+      "FlagType": 2,
+      "FlagID": 11,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 616,
+      "FlagType": 2,
+      "FlagID": 11,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 617,
+      "FlagType": 2,
+      "FlagID": 12,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 618,
+      "FlagType": 2,
+      "FlagID": 12,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 619,
+      "FlagType": 2,
+      "FlagID": 13,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 620,
+      "FlagType": 2,
+      "FlagID": 14,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 621,
+      "FlagType": 2,
+      "FlagID": 14,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 622,
+      "FlagType": 2,
+      "FlagID": 15,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 623,
+      "FlagType": 2,
+      "FlagID": 16,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 624,
+      "FlagType": 2,
+      "FlagID": 16,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 625,
+      "FlagType": 2,
+      "FlagID": 17,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 626,
+      "FlagType": 2,
+      "FlagID": 17,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 627,
+      "FlagType": 2,
+      "FlagID": 18,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 628,
+      "FlagType": 2,
+      "FlagID": 19,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 629,
+      "FlagType": 2,
+      "FlagID": 20,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 630,
+      "FlagType": 2,
+      "FlagID": 20,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 631,
+      "FlagType": 2,
+      "FlagID": 21,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 632,
+      "FlagType": 2,
+      "FlagID": 22,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 633,
+      "FlagType": 2,
+      "FlagID": 23,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 634,
+      "FlagType": 2,
+      "FlagID": 23,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 635,
+      "FlagType": 2,
+      "FlagID": 24,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 636,
+      "FlagType": 2,
+      "FlagID": 24,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 637,
+      "FlagType": 2,
+      "FlagID": 25,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 638,
+      "FlagType": 2,
+      "FlagID": 26,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 639,
+      "FlagType": 2,
+      "FlagID": 26,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 640,
+      "FlagType": 2,
+      "FlagID": 27,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 641,
+      "FlagType": 2,
+      "FlagID": 27,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 642,
+      "FlagType": 2,
+      "FlagID": 28,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 643,
+      "FlagType": 2,
+      "FlagID": 28,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 644,
+      "FlagType": 2,
+      "FlagID": 29,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 645,
+      "FlagType": 2,
+      "FlagID": 29,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 646,
+      "FlagType": 2,
+      "FlagID": 30,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 647,
+      "FlagType": 2,
+      "FlagID": 30,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 648,
+      "FlagType": 2,
+      "FlagID": 31,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 649,
+      "FlagType": 2,
+      "FlagID": 32,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 650,
+      "FlagType": 2,
+      "FlagID": 33,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 651,
+      "FlagType": 2,
+      "FlagID": 33,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 652,
+      "FlagType": 2,
+      "FlagID": 34,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 653,
+      "FlagType": 2,
+      "FlagID": 35,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 654,
+      "FlagType": 2,
+      "FlagID": 36,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 655,
+      "FlagType": 2,
+      "FlagID": 36,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 656,
+      "FlagType": 2,
+      "FlagID": 37,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 657,
+      "FlagType": 2,
+      "FlagID": 38,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 658,
+      "FlagType": 2,
+      "FlagID": 39,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 659,
+      "FlagType": 2,
+      "FlagID": 39,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 660,
+      "FlagType": 2,
+      "FlagID": 40,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 661,
+      "FlagType": 2,
+      "FlagID": 41,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 662,
+      "FlagType": 2,
+      "FlagID": 42,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 663,
+      "FlagType": 2,
+      "FlagID": 43,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 664,
+      "FlagType": 2,
+      "FlagID": 44,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 665,
+      "FlagType": 2,
+      "FlagID": 44,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 666,
+      "FlagType": 2,
+      "FlagID": 45,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 667,
+      "FlagType": 2,
+      "FlagID": 46,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 668,
+      "FlagType": 2,
+      "FlagID": 46,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 669,
+      "FlagType": 2,
+      "FlagID": 48,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 670,
+      "FlagType": 2,
+      "FlagID": 49,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 671,
+      "FlagType": 2,
+      "FlagID": 49,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 672,
+      "FlagType": 2,
+      "FlagID": 50,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 673,
+      "FlagType": 2,
+      "FlagID": 51,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 674,
+      "FlagType": 2,
+      "FlagID": 51,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 675,
+      "FlagType": 2,
+      "FlagID": 52,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 676,
+      "FlagType": 2,
+      "FlagID": 52,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 677,
+      "FlagType": 2,
+      "FlagID": 53,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 678,
+      "FlagType": 2,
+      "FlagID": 54,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 679,
+      "FlagType": 2,
+      "FlagID": 54,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 680,
+      "FlagType": 2,
+      "FlagID": 56,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 681,
+      "FlagType": 2,
+      "FlagID": 56,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 682,
+      "FlagType": 2,
+      "FlagID": 57,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 683,
+      "FlagType": 2,
+      "FlagID": 57,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 684,
+      "FlagType": 2,
+      "FlagID": 58,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 685,
+      "FlagType": 2,
+      "FlagID": 59,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 686,
+      "FlagType": 2,
+      "FlagID": 60,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 687,
+      "FlagType": 2,
+      "FlagID": 60,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 688,
+      "FlagType": 2,
+      "FlagID": 61,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 689,
+      "FlagType": 2,
+      "FlagID": 61,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 690,
+      "FlagType": 2,
+      "FlagID": 62,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 691,
+      "FlagType": 2,
+      "FlagID": 62,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 692,
+      "FlagType": 2,
+      "FlagID": 63,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 693,
+      "FlagType": 2,
+      "FlagID": 63,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 694,
+      "FlagType": 2,
+      "FlagID": 64,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 695,
+      "FlagType": 2,
+      "FlagID": 65,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 696,
+      "FlagType": 2,
+      "FlagID": 65,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 697,
+      "FlagType": 2,
+      "FlagID": 66,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 698,
+      "FlagType": 2,
+      "FlagID": 66,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 699,
+      "FlagType": 2,
+      "FlagID": 67,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 700,
+      "FlagType": 2,
+      "FlagID": 67,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 701,
+      "FlagType": 2,
+      "FlagID": 68,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 702,
+      "FlagType": 2,
+      "FlagID": 68,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 703,
+      "FlagType": 2,
+      "FlagID": 69,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 704,
+      "FlagType": 2,
+      "FlagID": 69,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 705,
+      "FlagType": 2,
+      "FlagID": 70,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 706,
+      "FlagType": 2,
+      "FlagID": 70,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 707,
+      "FlagType": 2,
+      "FlagID": 71,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 708,
+      "FlagType": 2,
+      "FlagID": 72,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 709,
+      "FlagType": 2,
+      "FlagID": 72,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 710,
+      "FlagType": 2,
+      "FlagID": 73,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 711,
+      "FlagType": 2,
+      "FlagID": 73,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 712,
+      "FlagType": 2,
+      "FlagID": 74,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 713,
+      "FlagType": 2,
+      "FlagID": 74,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 714,
+      "FlagType": 2,
+      "FlagID": 75,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 715,
+      "FlagType": 2,
+      "FlagID": 75,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 716,
+      "FlagType": 2,
+      "FlagID": 76,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 717,
+      "FlagType": 2,
+      "FlagID": 77,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 718,
+      "FlagType": 2,
+      "FlagID": 78,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 719,
+      "FlagType": 2,
+      "FlagID": 78,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 720,
+      "FlagType": 2,
+      "FlagID": 79,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 721,
+      "FlagType": 2,
+      "FlagID": 80,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 722,
+      "FlagType": 2,
+      "FlagID": 80,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 723,
+      "FlagType": 2,
+      "FlagID": 81,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 724,
+      "FlagType": 2,
+      "FlagID": 81,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 725,
+      "FlagType": 2,
+      "FlagID": 82,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 726,
+      "FlagType": 2,
+      "FlagID": 83,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 727,
+      "FlagType": 2,
+      "FlagID": 83,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 728,
+      "FlagType": 2,
+      "FlagID": 2,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 729,
+      "FlagType": 2,
+      "FlagID": 3,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 730,
+      "FlagType": 2,
+      "FlagID": 4,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 731,
+      "FlagType": 2,
+      "FlagID": 5,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 732,
+      "FlagType": 2,
+      "FlagID": 6,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 733,
+      "FlagType": 2,
+      "FlagID": 7,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 734,
+      "FlagType": 2,
+      "FlagID": 8,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 735,
+      "FlagType": 2,
+      "FlagID": 9,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 736,
+      "FlagType": 2,
+      "FlagID": 10,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 737,
+      "FlagType": 2,
+      "FlagID": 11,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 738,
+      "FlagType": 2,
+      "FlagID": 12,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 739,
+      "FlagType": 2,
+      "FlagID": 13,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 740,
+      "FlagType": 2,
+      "FlagID": 14,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 741,
+      "FlagType": 2,
+      "FlagID": 15,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 742,
+      "FlagType": 2,
+      "FlagID": 16,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 743,
+      "FlagType": 2,
+      "FlagID": 17,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 744,
+      "FlagType": 2,
+      "FlagID": 18,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 745,
+      "FlagType": 2,
+      "FlagID": 19,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 746,
+      "FlagType": 2,
+      "FlagID": 20,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 747,
+      "FlagType": 2,
+      "FlagID": 21,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 748,
+      "FlagType": 2,
+      "FlagID": 22,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 749,
+      "FlagType": 2,
+      "FlagID": 23,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 750,
+      "FlagType": 2,
+      "FlagID": 24,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 751,
+      "FlagType": 2,
+      "FlagID": 25,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 752,
+      "FlagType": 2,
+      "FlagID": 26,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 753,
+      "FlagType": 2,
+      "FlagID": 27,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 754,
+      "FlagType": 2,
+      "FlagID": 28,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 755,
+      "FlagType": 2,
+      "FlagID": 29,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 756,
+      "FlagType": 2,
+      "FlagID": 30,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 757,
+      "FlagType": 2,
+      "FlagID": 31,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 758,
+      "FlagType": 2,
+      "FlagID": 32,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 759,
+      "FlagType": 2,
+      "FlagID": 33,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 760,
+      "FlagType": 2,
+      "FlagID": 34,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 761,
+      "FlagType": 2,
+      "FlagID": 35,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 762,
+      "FlagType": 2,
+      "FlagID": 36,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 763,
+      "FlagType": 2,
+      "FlagID": 37,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 764,
+      "FlagType": 2,
+      "FlagID": 38,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 765,
+      "FlagType": 2,
+      "FlagID": 39,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 766,
+      "FlagType": 2,
+      "FlagID": 40,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 767,
+      "FlagType": 2,
+      "FlagID": 41,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 768,
+      "FlagType": 2,
+      "FlagID": 42,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 769,
+      "FlagType": 2,
+      "FlagID": 43,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 770,
+      "FlagType": 2,
+      "FlagID": 44,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 771,
+      "FlagType": 2,
+      "FlagID": 45,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 772,
+      "FlagType": 2,
+      "FlagID": 46,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 773,
+      "FlagType": 2,
+      "FlagID": 47,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 774,
+      "FlagType": 2,
+      "FlagID": 48,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 775,
+      "FlagType": 2,
+      "FlagID": 49,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 776,
+      "FlagType": 2,
+      "FlagID": 50,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 777,
+      "FlagType": 2,
+      "FlagID": 51,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 778,
+      "FlagType": 2,
+      "FlagID": 52,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 779,
+      "FlagType": 2,
+      "FlagID": 53,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 780,
+      "FlagType": 2,
+      "FlagID": 54,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 781,
+      "FlagType": 2,
+      "FlagID": 55,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 782,
+      "FlagType": 2,
+      "FlagID": 56,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 783,
+      "FlagType": 2,
+      "FlagID": 57,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 784,
+      "FlagType": 2,
+      "FlagID": 58,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 785,
+      "FlagType": 2,
+      "FlagID": 59,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 786,
+      "FlagType": 2,
+      "FlagID": 60,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 787,
+      "FlagType": 2,
+      "FlagID": 61,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 788,
+      "FlagType": 2,
+      "FlagID": 62,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 789,
+      "FlagType": 2,
+      "FlagID": 63,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 790,
+      "FlagType": 2,
+      "FlagID": 64,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 791,
+      "FlagType": 2,
+      "FlagID": 65,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 792,
+      "FlagType": 2,
+      "FlagID": 66,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 793,
+      "FlagType": 2,
+      "FlagID": 67,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 794,
+      "FlagType": 2,
+      "FlagID": 68,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 795,
+      "FlagType": 2,
+      "FlagID": 69,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 796,
+      "FlagType": 2,
+      "FlagID": 70,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 797,
+      "FlagType": 2,
+      "FlagID": 71,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 798,
+      "FlagType": 2,
+      "FlagID": 72,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 799,
+      "FlagType": 2,
+      "FlagID": 73,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 800,
+      "FlagType": 2,
+      "FlagID": 74,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 801,
+      "FlagType": 2,
+      "FlagID": 75,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 802,
+      "FlagType": 2,
+      "FlagID": 76,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 803,
+      "FlagType": 2,
+      "FlagID": 77,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 804,
+      "FlagType": 2,
+      "FlagID": 78,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 805,
+      "FlagType": 2,
+      "FlagID": 79,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 806,
+      "FlagType": 2,
+      "FlagID": 80,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 807,
+      "FlagType": 2,
+      "FlagID": 81,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 808,
+      "FlagType": 2,
+      "FlagID": 82,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 809,
+      "FlagType": 2,
+      "FlagID": 83,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 810,
+      "FlagType": 4,
+      "FlagID": 252,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 811,
+      "FlagType": 4,
+      "FlagID": 252,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 812,
+      "FlagType": 4,
+      "FlagID": 252,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 813,
+      "FlagType": 4,
+      "FlagID": 2,
+      "FlagMin": 1,
+      "FlagMax": 5
+    },
+    {
+      "$id": 814,
+      "FlagType": 4,
+      "FlagID": 2,
+      "FlagMin": 2,
+      "FlagMax": 5
+    },
+    {
+      "$id": 815,
+      "FlagType": 4,
+      "FlagID": 2,
+      "FlagMin": 3,
+      "FlagMax": 5
+    },
+    {
+      "$id": 816,
+      "FlagType": 4,
+      "FlagID": 2,
+      "FlagMin": 4,
+      "FlagMax": 5
+    },
+    {
+      "$id": 817,
+      "FlagType": 4,
+      "FlagID": 2,
+      "FlagMin": 5,
+      "FlagMax": 5
+    },
+    {
+      "$id": 818,
+      "FlagType": 4,
+      "FlagID": 636,
+      "FlagMin": 1,
+      "FlagMax": 5
+    },
+    {
+      "$id": 819,
+      "FlagType": 4,
+      "FlagID": 636,
+      "FlagMin": 2,
+      "FlagMax": 5
+    },
+    {
+      "$id": 820,
+      "FlagType": 4,
+      "FlagID": 636,
+      "FlagMin": 3,
+      "FlagMax": 5
+    },
+    {
+      "$id": 821,
+      "FlagType": 4,
+      "FlagID": 636,
+      "FlagMin": 4,
+      "FlagMax": 5
+    },
+    {
+      "$id": 822,
+      "FlagType": 4,
+      "FlagID": 636,
+      "FlagMin": 5,
+      "FlagMax": 5
+    },
+    {
+      "$id": 823,
+      "FlagType": 4,
+      "FlagID": 637,
+      "FlagMin": 1,
+      "FlagMax": 5
+    },
+    {
+      "$id": 824,
+      "FlagType": 4,
+      "FlagID": 637,
+      "FlagMin": 2,
+      "FlagMax": 5
+    },
+    {
+      "$id": 825,
+      "FlagType": 4,
+      "FlagID": 637,
+      "FlagMin": 3,
+      "FlagMax": 5
+    },
+    {
+      "$id": 826,
+      "FlagType": 4,
+      "FlagID": 637,
+      "FlagMin": 4,
+      "FlagMax": 5
+    },
+    {
+      "$id": 827,
+      "FlagType": 4,
+      "FlagID": 637,
+      "FlagMin": 5,
+      "FlagMax": 5
+    },
+    {
+      "$id": 828,
+      "FlagType": 4,
+      "FlagID": 638,
+      "FlagMin": 1,
+      "FlagMax": 5
+    },
+    {
+      "$id": 829,
+      "FlagType": 4,
+      "FlagID": 638,
+      "FlagMin": 2,
+      "FlagMax": 5
+    },
+    {
+      "$id": 830,
+      "FlagType": 4,
+      "FlagID": 638,
+      "FlagMin": 3,
+      "FlagMax": 5
+    },
+    {
+      "$id": 831,
+      "FlagType": 4,
+      "FlagID": 638,
+      "FlagMin": 4,
+      "FlagMax": 5
+    },
+    {
+      "$id": 832,
+      "FlagType": 4,
+      "FlagID": 638,
+      "FlagMin": 5,
+      "FlagMax": 5
+    },
+    {
+      "$id": 833,
+      "FlagType": 4,
+      "FlagID": 639,
+      "FlagMin": 1,
+      "FlagMax": 5
+    },
+    {
+      "$id": 834,
+      "FlagType": 4,
+      "FlagID": 639,
+      "FlagMin": 2,
+      "FlagMax": 5
+    },
+    {
+      "$id": 835,
+      "FlagType": 4,
+      "FlagID": 639,
+      "FlagMin": 3,
+      "FlagMax": 5
+    },
+    {
+      "$id": 836,
+      "FlagType": 4,
+      "FlagID": 639,
+      "FlagMin": 4,
+      "FlagMax": 5
+    },
+    {
+      "$id": 837,
+      "FlagType": 4,
+      "FlagID": 639,
+      "FlagMin": 5,
+      "FlagMax": 5
+    },
+    {
+      "$id": 838,
+      "FlagType": 4,
+      "FlagID": 640,
+      "FlagMin": 1,
+      "FlagMax": 5
+    },
+    {
+      "$id": 839,
+      "FlagType": 4,
+      "FlagID": 640,
+      "FlagMin": 2,
+      "FlagMax": 5
+    },
+    {
+      "$id": 840,
+      "FlagType": 4,
+      "FlagID": 640,
+      "FlagMin": 3,
+      "FlagMax": 5
+    },
+    {
+      "$id": 841,
+      "FlagType": 4,
+      "FlagID": 640,
+      "FlagMin": 4,
+      "FlagMax": 5
+    },
+    {
+      "$id": 842,
+      "FlagType": 4,
+      "FlagID": 640,
+      "FlagMin": 5,
+      "FlagMax": 5
+    },
+    {
+      "$id": 843,
+      "FlagType": 4,
+      "FlagID": 642,
+      "FlagMin": 1,
+      "FlagMax": 5
+    },
+    {
+      "$id": 844,
+      "FlagType": 4,
+      "FlagID": 642,
+      "FlagMin": 2,
+      "FlagMax": 5
+    },
+    {
+      "$id": 845,
+      "FlagType": 4,
+      "FlagID": 642,
+      "FlagMin": 3,
+      "FlagMax": 5
+    },
+    {
+      "$id": 846,
+      "FlagType": 4,
+      "FlagID": 642,
+      "FlagMin": 4,
+      "FlagMax": 5
+    },
+    {
+      "$id": 847,
+      "FlagType": 4,
+      "FlagID": 642,
+      "FlagMin": 5,
+      "FlagMax": 5
+    },
+    {
+      "$id": 848,
+      "FlagType": 4,
+      "FlagID": 234,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 849,
+      "FlagType": 4,
+      "FlagID": 235,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 850,
+      "FlagType": 4,
+      "FlagID": 236,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 851,
+      "FlagType": 4,
+      "FlagID": 237,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 852,
+      "FlagType": 4,
+      "FlagID": 238,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 853,
+      "FlagType": 4,
+      "FlagID": 239,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 854,
+      "FlagType": 4,
+      "FlagID": 240,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 855,
+      "FlagType": 4,
+      "FlagID": 241,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 856,
+      "FlagType": 4,
+      "FlagID": 242,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 857,
+      "FlagType": 4,
+      "FlagID": 243,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 858,
+      "FlagType": 4,
+      "FlagID": 244,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 859,
+      "FlagType": 4,
+      "FlagID": 245,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 860,
+      "FlagType": 4,
+      "FlagID": 246,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 861,
+      "FlagType": 4,
+      "FlagID": 247,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 862,
+      "FlagType": 4,
+      "FlagID": 248,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 863,
+      "FlagType": 4,
+      "FlagID": 249,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 864,
+      "FlagType": 4,
+      "FlagID": 250,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 865,
+      "FlagType": 4,
+      "FlagID": 251,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 866,
+      "FlagType": 4,
+      "FlagID": 223,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 867,
+      "FlagType": 4,
+      "FlagID": 224,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 868,
+      "FlagType": 4,
+      "FlagID": 225,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 869,
+      "FlagType": 4,
+      "FlagID": 226,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 870,
+      "FlagType": 4,
+      "FlagID": 182,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 871,
+      "FlagType": 4,
+      "FlagID": 217,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 872,
+      "FlagType": 4,
+      "FlagID": 218,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 873,
+      "FlagType": 4,
+      "FlagID": 219,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 874,
+      "FlagType": 4,
+      "FlagID": 220,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 875,
+      "FlagType": 4,
+      "FlagID": 254,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 876,
+      "FlagType": 4,
+      "FlagID": 255,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 877,
+      "FlagType": 4,
+      "FlagID": 256,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 878,
+      "FlagType": 4,
+      "FlagID": 257,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 879,
+      "FlagType": 8,
+      "FlagID": 2127,
+      "FlagMin": 2,
+      "FlagMax": 9
+    },
+    {
+      "$id": 880,
+      "FlagType": 8,
+      "FlagID": 2127,
+      "FlagMin": 3,
+      "FlagMax": 9
+    },
+    {
+      "$id": 881,
+      "FlagType": 8,
+      "FlagID": 2127,
+      "FlagMin": 4,
+      "FlagMax": 9
+    },
+    {
+      "$id": 882,
+      "FlagType": 8,
+      "FlagID": 2127,
+      "FlagMin": 5,
+      "FlagMax": 9
+    },
+    {
+      "$id": 883,
+      "FlagType": 8,
+      "FlagID": 2127,
+      "FlagMin": 6,
+      "FlagMax": 9
+    },
+    {
+      "$id": 884,
+      "FlagType": 8,
+      "FlagID": 2127,
+      "FlagMin": 7,
+      "FlagMax": 9
+    },
+    {
+      "$id": 885,
+      "FlagType": 8,
+      "FlagID": 2127,
+      "FlagMin": 8,
+      "FlagMax": 9
+    },
+    {
+      "$id": 886,
+      "FlagType": 8,
+      "FlagID": 2127,
+      "FlagMin": 9,
+      "FlagMax": 9
+    },
+    {
+      "$id": 887,
+      "FlagType": 8,
+      "FlagID": 2128,
+      "FlagMin": 2,
+      "FlagMax": 9
+    },
+    {
+      "$id": 888,
+      "FlagType": 8,
+      "FlagID": 2128,
+      "FlagMin": 3,
+      "FlagMax": 9
+    },
+    {
+      "$id": 889,
+      "FlagType": 8,
+      "FlagID": 2128,
+      "FlagMin": 4,
+      "FlagMax": 9
+    },
+    {
+      "$id": 890,
+      "FlagType": 8,
+      "FlagID": 2128,
+      "FlagMin": 5,
+      "FlagMax": 9
+    },
+    {
+      "$id": 891,
+      "FlagType": 8,
+      "FlagID": 2128,
+      "FlagMin": 6,
+      "FlagMax": 9
+    },
+    {
+      "$id": 892,
+      "FlagType": 8,
+      "FlagID": 2128,
+      "FlagMin": 7,
+      "FlagMax": 9
+    },
+    {
+      "$id": 893,
+      "FlagType": 8,
+      "FlagID": 2128,
+      "FlagMin": 8,
+      "FlagMax": 9
+    },
+    {
+      "$id": 894,
+      "FlagType": 8,
+      "FlagID": 2128,
+      "FlagMin": 9,
+      "FlagMax": 9
+    },
+    {
+      "$id": 895,
+      "FlagType": 8,
+      "FlagID": 2129,
+      "FlagMin": 2,
+      "FlagMax": 9
+    },
+    {
+      "$id": 896,
+      "FlagType": 8,
+      "FlagID": 2129,
+      "FlagMin": 3,
+      "FlagMax": 9
+    },
+    {
+      "$id": 897,
+      "FlagType": 8,
+      "FlagID": 2129,
+      "FlagMin": 4,
+      "FlagMax": 9
+    },
+    {
+      "$id": 898,
+      "FlagType": 8,
+      "FlagID": 2129,
+      "FlagMin": 5,
+      "FlagMax": 9
+    },
+    {
+      "$id": 899,
+      "FlagType": 8,
+      "FlagID": 2129,
+      "FlagMin": 6,
+      "FlagMax": 9
+    },
+    {
+      "$id": 900,
+      "FlagType": 8,
+      "FlagID": 2129,
+      "FlagMin": 7,
+      "FlagMax": 9
+    },
+    {
+      "$id": 901,
+      "FlagType": 8,
+      "FlagID": 2129,
+      "FlagMin": 8,
+      "FlagMax": 9
+    },
+    {
+      "$id": 902,
+      "FlagType": 8,
+      "FlagID": 2129,
+      "FlagMin": 9,
+      "FlagMax": 9
+    },
+    {
+      "$id": 903,
+      "FlagType": 16,
+      "FlagID": 1550,
+      "FlagMin": 500,
+      "FlagMax": 65535
+    },
+    {
+      "$id": 904,
+      "FlagType": 16,
+      "FlagID": 1550,
+      "FlagMin": 1000,
+      "FlagMax": 65535
+    },
+    {
+      "$id": 905,
+      "FlagType": 16,
+      "FlagID": 1550,
+      "FlagMin": 1500,
+      "FlagMax": 65535
+    },
+    {
+      "$id": 906,
+      "FlagType": 16,
+      "FlagID": 1550,
+      "FlagMin": 2000,
+      "FlagMax": 65535
+    },
+    {
+      "$id": 907,
+      "FlagType": 16,
+      "FlagID": 1550,
+      "FlagMin": 2500,
+      "FlagMax": 65535
+    },
+    {
+      "$id": 908,
+      "FlagType": 16,
+      "FlagID": 1550,
+      "FlagMin": 3000,
+      "FlagMax": 65535
+    },
+    {
+      "$id": 909,
+      "FlagType": 16,
+      "FlagID": 1550,
+      "FlagMin": 3500,
+      "FlagMax": 65535
+    },
+    {
+      "$id": 910,
+      "FlagType": 16,
+      "FlagID": 1550,
+      "FlagMin": 4000,
+      "FlagMax": 65535
+    },
+    {
+      "$id": 911,
+      "FlagType": 8,
+      "FlagID": 2131,
+      "FlagMin": 4000,
+      "FlagMax": 4000
+    },
+    {
+      "$id": 912,
+      "FlagType": 1,
+      "FlagID": 50421,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 913,
+      "FlagType": 1,
+      "FlagID": 50422,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 914,
+      "FlagType": 1,
+      "FlagID": 50423,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 915,
+      "FlagType": 1,
+      "FlagID": 50385,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 916,
+      "FlagType": 1,
+      "FlagID": 50424,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 917,
+      "FlagType": 16,
+      "FlagID": 3,
+      "FlagMin": 500,
+      "FlagMax": 65000
+    },
+    {
+      "$id": 918,
+      "FlagType": 16,
+      "FlagID": 3,
+      "FlagMin": 3000,
+      "FlagMax": 65000
+    },
+    {
+      "$id": 919,
+      "FlagType": 16,
+      "FlagID": 3,
+      "FlagMin": 8000,
+      "FlagMax": 65000
+    },
+    {
+      "$id": 920,
+      "FlagType": 16,
+      "FlagID": 3,
+      "FlagMin": 20000,
+      "FlagMax": 65000
+    },
+    {
+      "$id": 921,
+      "FlagType": 1,
+      "FlagID": 50425,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 922,
+      "FlagType": 1,
+      "FlagID": 50426,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 923,
+      "FlagType": 1,
+      "FlagID": 50427,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 924,
+      "FlagType": 4,
+      "FlagID": 252,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 925,
+      "FlagType": 2,
+      "FlagID": 55,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 926,
+      "FlagType": 2,
+      "FlagID": 55,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 927,
+      "FlagType": 1,
+      "FlagID": 50433,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 928,
+      "FlagType": 1,
+      "FlagID": 50434,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 929,
+      "FlagType": 1,
+      "FlagID": 50435,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 930,
+      "FlagType": 1,
+      "FlagID": 50436,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 931,
+      "FlagType": 1,
+      "FlagID": 50437,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 932,
+      "FlagType": 1,
+      "FlagID": 50438,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 933,
+      "FlagType": 1,
+      "FlagID": 50439,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 934,
+      "FlagType": 4,
+      "FlagID": 227,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 935,
+      "FlagType": 1,
+      "FlagID": 48589,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 936,
+      "FlagType": 4,
+      "FlagID": 205,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 937,
+      "FlagType": 4,
+      "FlagID": 206,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 938,
+      "FlagType": 4,
+      "FlagID": 207,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 939,
+      "FlagType": 16,
+      "FlagID": 1550,
+      "FlagMin": 5000,
+      "FlagMax": 65535
+    },
+    {
+      "$id": 940,
+      "FlagType": 1,
+      "FlagID": 50441,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 941,
+      "FlagType": 1,
+      "FlagID": 50442,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 942,
+      "FlagType": 1,
+      "FlagID": 50443,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 943,
+      "FlagType": 1,
+      "FlagID": 50444,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 944,
+      "FlagType": 8,
+      "FlagID": 2146,
+      "FlagMin": 12,
+      "FlagMax": 12
+    },
+    {
+      "$id": 945,
+      "FlagType": 1,
+      "FlagID": 50447,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 946,
+      "FlagType": 1,
+      "FlagID": 50448,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 947,
+      "FlagType": 4,
+      "FlagID": 253,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 948,
+      "FlagType": 1,
+      "FlagID": 50449,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 949,
+      "FlagType": 1,
+      "FlagID": 50450,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 950,
+      "FlagType": 1,
+      "FlagID": 50451,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 951,
+      "FlagType": 1,
+      "FlagID": 50111,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 952,
+      "FlagType": 1,
+      "FlagID": 50112,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 953,
+      "FlagType": 1,
+      "FlagID": 50126,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 954,
+      "FlagType": 1,
+      "FlagID": 50127,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 955,
+      "FlagType": 1,
+      "FlagID": 50128,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 956,
+      "FlagType": 1,
+      "FlagID": 50129,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 957,
+      "FlagType": 1,
+      "FlagID": 50162,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 958,
+      "FlagType": 1,
+      "FlagID": 50163,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 959,
+      "FlagType": 1,
+      "FlagID": 50164,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 960,
+      "FlagType": 1,
+      "FlagID": 50165,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 961,
+      "FlagType": 4,
+      "FlagID": 38,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 962,
+      "FlagType": 1,
+      "FlagID": 50168,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 963,
+      "FlagType": 1,
+      "FlagID": 50169,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 964,
+      "FlagType": 1,
+      "FlagID": 50170,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 965,
+      "FlagType": 1,
+      "FlagID": 50171,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 966,
+      "FlagType": 4,
+      "FlagID": 39,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 967,
+      "FlagType": 1,
+      "FlagID": 50452,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 968,
+      "FlagType": 1,
+      "FlagID": 50453,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 969,
+      "FlagType": 1,
+      "FlagID": 50454,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 970,
+      "FlagType": 1,
+      "FlagID": 50455,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 971,
+      "FlagType": 1,
+      "FlagID": 50452,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 972,
+      "FlagType": 1,
+      "FlagID": 50453,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 973,
+      "FlagType": 1,
+      "FlagID": 50454,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 974,
+      "FlagType": 1,
+      "FlagID": 50455,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 975,
+      "FlagType": 1,
+      "FlagID": 50166,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 976,
+      "FlagType": 1,
+      "FlagID": 50166,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 977,
+      "FlagType": 1,
+      "FlagID": 50167,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 978,
+      "FlagType": 1,
+      "FlagID": 50419,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 979,
+      "FlagType": 1,
+      "FlagID": 50456,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 980,
+      "FlagType": 1,
+      "FlagID": 50457,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 981,
+      "FlagType": 1,
+      "FlagID": 50458,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 982,
+      "FlagType": 1,
+      "FlagID": 49759,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 983,
+      "FlagType": 1,
+      "FlagID": 49760,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 984,
+      "FlagType": 1,
+      "FlagID": 49761,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 985,
+      "FlagType": 1,
+      "FlagID": 49762,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 986,
+      "FlagType": 1,
+      "FlagID": 49763,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 987,
+      "FlagType": 1,
+      "FlagID": 49764,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 988,
+      "FlagType": 1,
+      "FlagID": 49765,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 989,
+      "FlagType": 1,
+      "FlagID": 49766,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 990,
+      "FlagType": 1,
+      "FlagID": 49767,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 991,
+      "FlagType": 1,
+      "FlagID": 49768,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 992,
+      "FlagType": 1,
+      "FlagID": 49769,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 993,
+      "FlagType": 1,
+      "FlagID": 49770,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 994,
+      "FlagType": 1,
+      "FlagID": 49771,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 995,
+      "FlagType": 1,
+      "FlagID": 49772,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 996,
+      "FlagType": 1,
+      "FlagID": 49773,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 997,
+      "FlagType": 1,
+      "FlagID": 49774,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 998,
+      "FlagType": 1,
+      "FlagID": 49775,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 999,
+      "FlagType": 1,
+      "FlagID": 49776,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1000,
+      "FlagType": 1,
+      "FlagID": 49777,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1001,
+      "FlagType": 1,
+      "FlagID": 49778,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1002,
+      "FlagType": 1,
+      "FlagID": 49779,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1003,
+      "FlagType": 1,
+      "FlagID": 49780,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1004,
+      "FlagType": 1,
+      "FlagID": 49781,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1005,
+      "FlagType": 1,
+      "FlagID": 49782,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1006,
+      "FlagType": 1,
+      "FlagID": 49783,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1007,
+      "FlagType": 1,
+      "FlagID": 49784,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1008,
+      "FlagType": 1,
+      "FlagID": 49785,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1009,
+      "FlagType": 1,
+      "FlagID": 49786,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1010,
+      "FlagType": 1,
+      "FlagID": 49787,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1011,
+      "FlagType": 1,
+      "FlagID": 49788,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1012,
+      "FlagType": 16,
+      "FlagID": 1551,
+      "FlagMin": 30000,
+      "FlagMax": 65535
+    },
+    {
+      "$id": 1013,
+      "FlagType": 1,
+      "FlagID": 49999,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1014,
+      "FlagType": 1,
+      "FlagID": 50000,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1015,
+      "FlagType": 1,
+      "FlagID": 50001,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1016,
+      "FlagType": 1,
+      "FlagID": 50010,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1017,
+      "FlagType": 1,
+      "FlagID": 50460,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1018,
+      "FlagType": 1,
+      "FlagID": 50188,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1019,
+      "FlagType": 8,
+      "FlagID": 2122,
+      "FlagMin": 12,
+      "FlagMax": 12
+    },
+    {
+      "$id": 1020,
+      "FlagType": 0,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1021,
+      "FlagType": 0,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1022,
+      "FlagType": 0,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1023,
+      "FlagType": 1,
+      "FlagID": 50496,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1024,
+      "FlagType": 4,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1025,
+      "FlagType": 4,
+      "FlagID": 61,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1026,
+      "FlagType": 4,
+      "FlagID": 516,
+      "FlagMin": 15,
+      "FlagMax": 15
+    },
+    {
+      "$id": 1027,
+      "FlagType": 1,
+      "FlagID": 50497,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1028,
+      "FlagType": 1,
+      "FlagID": 50500,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1029,
+      "FlagType": 1,
+      "FlagID": 50501,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1030,
+      "FlagType": 1,
+      "FlagID": 49967,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1031,
+      "FlagType": 1,
+      "FlagID": 50501,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1032,
+      "FlagType": 1,
+      "FlagID": 50098,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1033,
+      "FlagType": 1,
+      "FlagID": 50099,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1034,
+      "FlagType": 1,
+      "FlagID": 50100,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1035,
+      "FlagType": 1,
+      "FlagID": 50101,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1036,
+      "FlagType": 4,
+      "FlagID": 161,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1037,
+      "FlagType": 2,
+      "FlagID": 16,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1038,
+      "FlagType": 2,
+      "FlagID": 19,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1039,
+      "FlagType": 2,
+      "FlagID": 21,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1040,
+      "FlagType": 2,
+      "FlagID": 41,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1041,
+      "FlagType": 2,
+      "FlagID": 60,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1042,
+      "FlagType": 2,
+      "FlagID": 61,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1043,
+      "FlagType": 2,
+      "FlagID": 62,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1044,
+      "FlagType": 2,
+      "FlagID": 63,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1045,
+      "FlagType": 2,
+      "FlagID": 66,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1046,
+      "FlagType": 2,
+      "FlagID": 67,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1047,
+      "FlagType": 2,
+      "FlagID": 68,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1048,
+      "FlagType": 2,
+      "FlagID": 70,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1049,
+      "FlagType": 2,
+      "FlagID": 72,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1050,
+      "FlagType": 2,
+      "FlagID": 74,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1051,
+      "FlagType": 2,
+      "FlagID": 79,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1052,
+      "FlagType": 2,
+      "FlagID": 81,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1053,
+      "FlagType": 2,
+      "FlagID": 2,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1054,
+      "FlagType": 2,
+      "FlagID": 3,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1055,
+      "FlagType": 2,
+      "FlagID": 4,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1056,
+      "FlagType": 2,
+      "FlagID": 5,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1057,
+      "FlagType": 2,
+      "FlagID": 6,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1058,
+      "FlagType": 2,
+      "FlagID": 7,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1059,
+      "FlagType": 2,
+      "FlagID": 9,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1060,
+      "FlagType": 2,
+      "FlagID": 10,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1061,
+      "FlagType": 2,
+      "FlagID": 11,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1062,
+      "FlagType": 2,
+      "FlagID": 13,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1063,
+      "FlagType": 2,
+      "FlagID": 14,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1064,
+      "FlagType": 2,
+      "FlagID": 18,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1065,
+      "FlagType": 2,
+      "FlagID": 20,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1066,
+      "FlagType": 2,
+      "FlagID": 22,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1067,
+      "FlagType": 2,
+      "FlagID": 24,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1068,
+      "FlagType": 2,
+      "FlagID": 25,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1069,
+      "FlagType": 2,
+      "FlagID": 26,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1070,
+      "FlagType": 2,
+      "FlagID": 27,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1071,
+      "FlagType": 2,
+      "FlagID": 28,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1072,
+      "FlagType": 2,
+      "FlagID": 29,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1073,
+      "FlagType": 2,
+      "FlagID": 31,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1074,
+      "FlagType": 2,
+      "FlagID": 32,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1075,
+      "FlagType": 2,
+      "FlagID": 33,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1076,
+      "FlagType": 2,
+      "FlagID": 34,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1077,
+      "FlagType": 2,
+      "FlagID": 35,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1078,
+      "FlagType": 2,
+      "FlagID": 37,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1079,
+      "FlagType": 2,
+      "FlagID": 38,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1080,
+      "FlagType": 2,
+      "FlagID": 40,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1081,
+      "FlagType": 2,
+      "FlagID": 42,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1082,
+      "FlagType": 2,
+      "FlagID": 43,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1083,
+      "FlagType": 2,
+      "FlagID": 44,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1084,
+      "FlagType": 2,
+      "FlagID": 45,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1085,
+      "FlagType": 2,
+      "FlagID": 46,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1086,
+      "FlagType": 2,
+      "FlagID": 48,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1087,
+      "FlagType": 2,
+      "FlagID": 49,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1088,
+      "FlagType": 2,
+      "FlagID": 50,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1089,
+      "FlagType": 2,
+      "FlagID": 51,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1090,
+      "FlagType": 2,
+      "FlagID": 52,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1091,
+      "FlagType": 2,
+      "FlagID": 53,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1092,
+      "FlagType": 2,
+      "FlagID": 54,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1093,
+      "FlagType": 2,
+      "FlagID": 55,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1094,
+      "FlagType": 2,
+      "FlagID": 56,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1095,
+      "FlagType": 2,
+      "FlagID": 57,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1096,
+      "FlagType": 2,
+      "FlagID": 58,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1097,
+      "FlagType": 2,
+      "FlagID": 59,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1098,
+      "FlagType": 2,
+      "FlagID": 64,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1099,
+      "FlagType": 2,
+      "FlagID": 65,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1100,
+      "FlagType": 2,
+      "FlagID": 69,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1101,
+      "FlagType": 2,
+      "FlagID": 71,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1102,
+      "FlagType": 2,
+      "FlagID": 73,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1103,
+      "FlagType": 2,
+      "FlagID": 75,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1104,
+      "FlagType": 2,
+      "FlagID": 76,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1105,
+      "FlagType": 2,
+      "FlagID": 77,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1106,
+      "FlagType": 2,
+      "FlagID": 78,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1107,
+      "FlagType": 2,
+      "FlagID": 80,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1108,
+      "FlagType": 2,
+      "FlagID": 82,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1109,
+      "FlagType": 2,
+      "FlagID": 83,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1110,
+      "FlagType": 1,
+      "FlagID": 50502,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1111,
+      "FlagType": 8,
+      "FlagID": 2135,
+      "FlagMin": 0,
+      "FlagMax": 5
+    },
+    {
+      "$id": 1112,
+      "FlagType": 8,
+      "FlagID": 2254,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1113,
+      "FlagType": 4,
+      "FlagID": 221,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1114,
+      "FlagType": 1,
+      "FlagID": 50503,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1115,
+      "FlagType": 1,
+      "FlagID": 50504,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1116,
+      "FlagType": 1,
+      "FlagID": 50505,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1117,
+      "FlagType": 8,
+      "FlagID": 2252,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1118,
+      "FlagType": 1,
+      "FlagID": 48589,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1119,
+      "FlagType": 1,
+      "FlagID": 50506,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1120,
+      "FlagType": 8,
+      "FlagID": 2133,
+      "FlagMin": 10,
+      "FlagMax": 255
+    },
+    {
+      "$id": 1121,
+      "FlagType": 1,
+      "FlagID": 50154,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1122,
+      "FlagType": 1,
+      "FlagID": 50215,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1123,
+      "FlagType": 1,
+      "FlagID": 50507,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1124,
+      "FlagType": 1,
+      "FlagID": 50375,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1125,
+      "FlagType": 1,
+      "FlagID": 50376,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1126,
+      "FlagType": 1,
+      "FlagID": 50374,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1127,
+      "FlagType": 1,
+      "FlagID": 50509,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1128,
+      "FlagType": 1,
+      "FlagID": 50508,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1129,
+      "FlagType": 1,
+      "FlagID": 50513,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1130,
+      "FlagType": 4,
+      "FlagID": 232,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1131,
+      "FlagType": 1,
+      "FlagID": 50514,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1132,
+      "FlagType": 4,
+      "FlagID": 179,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 1133,
+      "FlagType": 1,
+      "FlagID": 50515,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1134,
+      "FlagType": 8,
+      "FlagID": 2147,
+      "FlagMin": 8,
+      "FlagMax": 255
+    },
+    {
+      "$id": 1135,
+      "FlagType": 1,
+      "FlagID": 50516,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1136,
+      "FlagType": 1,
+      "FlagID": 50517,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1137,
+      "FlagType": 1,
+      "FlagID": 50519,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1138,
+      "FlagType": 1,
+      "FlagID": 50520,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1139,
+      "FlagType": 1,
+      "FlagID": 50521,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1140,
+      "FlagType": 1,
+      "FlagID": 50522,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1141,
+      "FlagType": 1,
+      "FlagID": 50523,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1142,
+      "FlagType": 1,
+      "FlagID": 50524,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1143,
+      "FlagType": 1,
+      "FlagID": 50525,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1144,
+      "FlagType": 4,
+      "FlagID": 222,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1145,
+      "FlagType": 1,
+      "FlagID": 50526,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1146,
+      "FlagType": 1,
+      "FlagID": 50527,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1147,
+      "FlagType": 1,
+      "FlagID": 50528,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1148,
+      "FlagType": 1,
+      "FlagID": 50529,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1149,
+      "FlagType": 1,
+      "FlagID": 50530,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1150,
+      "FlagType": 4,
+      "FlagID": 181,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 1151,
+      "FlagType": 1,
+      "FlagID": 50241,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1152,
+      "FlagType": 1,
+      "FlagID": 35324,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1153,
+      "FlagType": 1,
+      "FlagID": 50531,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1154,
+      "FlagType": 8,
+      "FlagID": 2124,
+      "FlagMin": 1,
+      "FlagMax": 5
+    },
+    {
+      "$id": 1155,
+      "FlagType": 1,
+      "FlagID": 50535,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1156,
+      "FlagType": 1,
+      "FlagID": 50536,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1157,
+      "FlagType": 1,
+      "FlagID": 50537,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1158,
+      "FlagType": 8,
+      "FlagID": 2148,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1159,
+      "FlagType": 1,
+      "FlagID": 50541,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1160,
+      "FlagType": 1,
+      "FlagID": 50541,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1161,
+      "FlagType": 1,
+      "FlagID": 50542,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1162,
+      "FlagType": 1,
+      "FlagID": 50542,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1163,
+      "FlagType": 1,
+      "FlagID": 50543,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1164,
+      "FlagType": 1,
+      "FlagID": 50544,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1165,
+      "FlagType": 1,
+      "FlagID": 50545,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1166,
+      "FlagType": 1,
+      "FlagID": 50545,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1167,
+      "FlagType": 1,
+      "FlagID": 50546,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1168,
+      "FlagType": 1,
+      "FlagID": 50547,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1169,
+      "FlagType": 8,
+      "FlagID": 2149,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 1170,
+      "FlagType": 1,
+      "FlagID": 50548,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1171,
+      "FlagType": 1,
+      "FlagID": 50551,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1172,
+      "FlagType": 8,
+      "FlagID": 2258,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1173,
+      "FlagType": 4,
+      "FlagID": 641,
+      "FlagMin": 1,
+      "FlagMax": 5
+    },
+    {
+      "$id": 1174,
+      "FlagType": 4,
+      "FlagID": 641,
+      "FlagMin": 2,
+      "FlagMax": 5
+    },
+    {
+      "$id": 1175,
+      "FlagType": 4,
+      "FlagID": 641,
+      "FlagMin": 3,
+      "FlagMax": 5
+    },
+    {
+      "$id": 1176,
+      "FlagType": 4,
+      "FlagID": 641,
+      "FlagMin": 4,
+      "FlagMax": 5
+    },
+    {
+      "$id": 1177,
+      "FlagType": 4,
+      "FlagID": 641,
+      "FlagMin": 5,
+      "FlagMax": 5
+    },
+    {
+      "$id": 1178,
+      "FlagType": 1,
+      "FlagID": 50552,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1179,
+      "FlagType": 4,
+      "FlagID": 216,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1180,
+      "FlagType": 8,
+      "FlagID": 2134,
+      "FlagMin": 3,
+      "FlagMax": 255
+    },
+    {
+      "$id": 1181,
+      "FlagType": 4,
+      "FlagID": 227,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 1182,
+      "FlagType": 1,
+      "FlagID": 50553,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1183,
+      "FlagType": 1,
+      "FlagID": 50554,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1184,
+      "FlagType": 1,
+      "FlagID": 50554,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1185,
+      "FlagType": 1,
+      "FlagID": 50555,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1186,
+      "FlagType": 1,
+      "FlagID": 50556,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1187,
+      "FlagType": 1,
+      "FlagID": 50557,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1188,
+      "FlagType": 1,
+      "FlagID": 35332,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1189,
+      "FlagType": 1,
+      "FlagID": 35333,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1190,
+      "FlagType": 1,
+      "FlagID": 49967,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1191,
+      "FlagType": 1,
+      "FlagID": 50559,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1192,
+      "FlagType": 1,
+      "FlagID": 50560,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1193,
+      "FlagType": 1,
+      "FlagID": 50563,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1194,
+      "FlagType": 1,
+      "FlagID": 50564,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1195,
+      "FlagType": 1,
+      "FlagID": 50565,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1196,
+      "FlagType": 1,
+      "FlagID": 50565,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1197,
+      "FlagType": 1,
+      "FlagID": 50566,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1198,
+      "FlagType": 1,
+      "FlagID": 50303,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1199,
+      "FlagType": 1,
+      "FlagID": 50567,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1200,
+      "FlagType": 1,
+      "FlagID": 50568,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1201,
+      "FlagType": 1,
+      "FlagID": 50568,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1202,
+      "FlagType": 1,
+      "FlagID": 50569,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1203,
+      "FlagType": 1,
+      "FlagID": 50570,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1204,
+      "FlagType": 8,
+      "FlagID": 2126,
+      "FlagMin": 0,
+      "FlagMax": 99
+    },
+    {
+      "$id": 1205,
+      "FlagType": 8,
+      "FlagID": 2126,
+      "FlagMin": 100,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1206,
+      "FlagType": 1,
+      "FlagID": 50459,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1207,
+      "FlagType": 8,
+      "FlagID": 2124,
+      "FlagMin": 6,
+      "FlagMax": 10
+    },
+    {
+      "$id": 1208,
+      "FlagType": 8,
+      "FlagID": 2124,
+      "FlagMin": 10,
+      "FlagMax": 15
+    },
+    {
+      "$id": 1209,
+      "FlagType": 1,
+      "FlagID": 50556,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1210,
+      "FlagType": 8,
+      "FlagID": 2259,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1211,
+      "FlagType": 1,
+      "FlagID": 50571,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1212,
+      "FlagType": 1,
+      "FlagID": 50572,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1213,
+      "FlagType": 1,
+      "FlagID": 50573,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1214,
+      "FlagType": 1,
+      "FlagID": 49967,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1215,
+      "FlagType": 8,
+      "FlagID": 2260,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1216,
+      "FlagType": 1,
+      "FlagID": 50574,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1217,
+      "FlagType": 1,
+      "FlagID": 50575,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1218,
+      "FlagType": 1,
+      "FlagID": 50576,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1219,
+      "FlagType": 1,
+      "FlagID": 50577,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1220,
+      "FlagType": 8,
+      "FlagID": 2261,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1221,
+      "FlagType": 1,
+      "FlagID": 50578,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1222,
+      "FlagType": 1,
+      "FlagID": 55169,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1223,
+      "FlagType": 1,
+      "FlagID": 55170,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1224,
+      "FlagType": 1,
+      "FlagID": 55171,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1225,
+      "FlagType": 1,
+      "FlagID": 55172,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1226,
+      "FlagType": 1,
+      "FlagID": 50574,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1227,
+      "FlagType": 1,
+      "FlagID": 50575,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1228,
+      "FlagType": 1,
+      "FlagID": 50576,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1229,
+      "FlagType": 1,
+      "FlagID": 50577,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1230,
+      "FlagType": 1,
+      "FlagID": 50579,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1231,
+      "FlagType": 1,
+      "FlagID": 50579,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1232,
+      "FlagType": 4,
+      "FlagID": 281,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1233,
+      "FlagType": 4,
+      "FlagID": 282,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1234,
+      "FlagType": 1,
+      "FlagID": 50580,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1235,
+      "FlagType": 1,
+      "FlagID": 50581,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1236,
+      "FlagType": 1,
+      "FlagID": 50581,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1237,
+      "FlagType": 4,
+      "FlagID": 272,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1238,
+      "FlagType": 4,
+      "FlagID": 273,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1239,
+      "FlagType": 4,
+      "FlagID": 274,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1240,
+      "FlagType": 4,
+      "FlagID": 275,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1241,
+      "FlagType": 4,
+      "FlagID": 276,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1242,
+      "FlagType": 4,
+      "FlagID": 277,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1243,
+      "FlagType": 4,
+      "FlagID": 288,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1244,
+      "FlagType": 1,
+      "FlagID": 48589,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1245,
+      "FlagType": 1,
+      "FlagID": 50460,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1246,
+      "FlagType": 1,
+      "FlagID": 55173,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1247,
+      "FlagType": 4,
+      "FlagID": 284,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1248,
+      "FlagType": 4,
+      "FlagID": 285,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1249,
+      "FlagType": 4,
+      "FlagID": 286,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1250,
+      "FlagType": 4,
+      "FlagID": 280,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1251,
+      "FlagType": 4,
+      "FlagID": 279,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1252,
+      "FlagType": 4,
+      "FlagID": 280,
+      "FlagMin": 2,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1253,
+      "FlagType": 4,
+      "FlagID": 279,
+      "FlagMin": 2,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1254,
+      "FlagType": 4,
+      "FlagID": 289,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1255,
+      "FlagType": 4,
+      "FlagID": 290,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1256,
+      "FlagType": 4,
+      "FlagID": 265,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1257,
+      "FlagType": 4,
+      "FlagID": 266,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1258,
+      "FlagType": 8,
+      "FlagID": 2262,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1259,
+      "FlagType": 4,
+      "FlagID": 2,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1260,
+      "FlagType": 4,
+      "FlagID": 2,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1261,
+      "FlagType": 4,
+      "FlagID": 2,
+      "FlagMin": 1,
+      "FlagMax": 2
+    },
+    {
+      "$id": 1262,
+      "FlagType": 4,
+      "FlagID": 2,
+      "FlagMin": 1,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1263,
+      "FlagType": 4,
+      "FlagID": 2,
+      "FlagMin": 1,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1264,
+      "FlagType": 1,
+      "FlagID": 50582,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1265,
+      "FlagType": 1,
+      "FlagID": 55174,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1266,
+      "FlagType": 1,
+      "FlagID": 50583,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1267,
+      "FlagType": 1,
+      "FlagID": 50759,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1268,
+      "FlagType": 1,
+      "FlagID": 55170,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1269,
+      "FlagType": 1,
+      "FlagID": 50584,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1270,
+      "FlagType": 1,
+      "FlagID": 50760,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1271,
+      "FlagType": 1,
+      "FlagID": 50760,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1272,
+      "FlagType": 1,
+      "FlagID": 50761,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1273,
+      "FlagType": 1,
+      "FlagID": 50762,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1274,
+      "FlagType": 1,
+      "FlagID": 50763,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1275,
+      "FlagType": 1,
+      "FlagID": 50761,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1276,
+      "FlagType": 1,
+      "FlagID": 50762,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1277,
+      "FlagType": 1,
+      "FlagID": 50763,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1278,
+      "FlagType": 1,
+      "FlagID": 50585,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1279,
+      "FlagType": 1,
+      "FlagID": 50586,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1280,
+      "FlagType": 4,
+      "FlagID": 280,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1281,
+      "FlagType": 4,
+      "FlagID": 279,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1282,
+      "FlagType": 1,
+      "FlagID": 50587,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1283,
+      "FlagType": 8,
+      "FlagID": 2263,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1284,
+      "FlagType": 1,
+      "FlagID": 50764,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1285,
+      "FlagType": 1,
+      "FlagID": 50765,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1286,
+      "FlagType": 1,
+      "FlagID": 50766,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1287,
+      "FlagType": 1,
+      "FlagID": 50767,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1288,
+      "FlagType": 1,
+      "FlagID": 50764,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1289,
+      "FlagType": 1,
+      "FlagID": 50765,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1290,
+      "FlagType": 1,
+      "FlagID": 50766,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1291,
+      "FlagType": 1,
+      "FlagID": 50767,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1292,
+      "FlagType": 1,
+      "FlagID": 50768,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1293,
+      "FlagType": 1,
+      "FlagID": 50769,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1294,
+      "FlagType": 1,
+      "FlagID": 50770,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1295,
+      "FlagType": 1,
+      "FlagID": 50771,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1296,
+      "FlagType": 1,
+      "FlagID": 50768,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1297,
+      "FlagType": 1,
+      "FlagID": 50769,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1298,
+      "FlagType": 1,
+      "FlagID": 50770,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1299,
+      "FlagType": 1,
+      "FlagID": 50771,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1300,
+      "FlagType": 1,
+      "FlagID": 50772,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1301,
+      "FlagType": 1,
+      "FlagID": 50773,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1302,
+      "FlagType": 1,
+      "FlagID": 50774,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1303,
+      "FlagType": 1,
+      "FlagID": 50775,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1304,
+      "FlagType": 1,
+      "FlagID": 50772,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1305,
+      "FlagType": 1,
+      "FlagID": 50773,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1306,
+      "FlagType": 1,
+      "FlagID": 50774,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1307,
+      "FlagType": 1,
+      "FlagID": 50775,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1308,
+      "FlagType": 1,
+      "FlagID": 50776,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1309,
+      "FlagType": 1,
+      "FlagID": 50777,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1310,
+      "FlagType": 8,
+      "FlagID": 2264,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1311,
+      "FlagType": 1,
+      "FlagID": 50778,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1312,
+      "FlagType": 1,
+      "FlagID": 50779,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1313,
+      "FlagType": 1,
+      "FlagID": 50710,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1314,
+      "FlagType": 1,
+      "FlagID": 50711,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1315,
+      "FlagType": 1,
+      "FlagID": 50712,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1316,
+      "FlagType": 1,
+      "FlagID": 50713,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1317,
+      "FlagType": 1,
+      "FlagID": 50714,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1318,
+      "FlagType": 1,
+      "FlagID": 50715,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1319,
+      "FlagType": 1,
+      "FlagID": 50716,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1320,
+      "FlagType": 1,
+      "FlagID": 50717,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1321,
+      "FlagType": 1,
+      "FlagID": 50718,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1322,
+      "FlagType": 1,
+      "FlagID": 50719,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1323,
+      "FlagType": 8,
+      "FlagID": 2161,
+      "FlagMin": 10,
+      "FlagMax": 10
+    },
+    {
+      "$id": 1324,
+      "FlagType": 1,
+      "FlagID": 50720,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1325,
+      "FlagType": 1,
+      "FlagID": 50787,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1326,
+      "FlagType": 1,
+      "FlagID": 50788,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1327,
+      "FlagType": 1,
+      "FlagID": 50789,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1328,
+      "FlagType": 1,
+      "FlagID": 50790,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1329,
+      "FlagType": 1,
+      "FlagID": 50791,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1330,
+      "FlagType": 1,
+      "FlagID": 50792,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1331,
+      "FlagType": 1,
+      "FlagID": 50793,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1332,
+      "FlagType": 1,
+      "FlagID": 50721,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1333,
+      "FlagType": 1,
+      "FlagID": 50787,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1334,
+      "FlagType": 1,
+      "FlagID": 50788,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1335,
+      "FlagType": 1,
+      "FlagID": 50789,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1336,
+      "FlagType": 1,
+      "FlagID": 50790,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1337,
+      "FlagType": 1,
+      "FlagID": 50791,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1338,
+      "FlagType": 1,
+      "FlagID": 50792,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1339,
+      "FlagType": 1,
+      "FlagID": 50793,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1340,
+      "FlagType": 1,
+      "FlagID": 50794,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1341,
+      "FlagType": 1,
+      "FlagID": 50795,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1342,
+      "FlagType": 8,
+      "FlagID": 2265,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1343,
+      "FlagType": 1,
+      "FlagID": 50796,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1344,
+      "FlagType": 1,
+      "FlagID": 50796,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1345,
+      "FlagType": 1,
+      "FlagID": 50799,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1346,
+      "FlagType": 1,
+      "FlagID": 50800,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1347,
+      "FlagType": 1,
+      "FlagID": 50801,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1348,
+      "FlagType": 1,
+      "FlagID": 50802,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1349,
+      "FlagType": 8,
+      "FlagID": 2266,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1350,
+      "FlagType": 1,
+      "FlagID": 50722,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1351,
+      "FlagType": 1,
+      "FlagID": 50803,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1352,
+      "FlagType": 1,
+      "FlagID": 50804,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1353,
+      "FlagType": 1,
+      "FlagID": 50805,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1354,
+      "FlagType": 1,
+      "FlagID": 50806,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1355,
+      "FlagType": 1,
+      "FlagID": 50813,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1356,
+      "FlagType": 0,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1357,
+      "FlagType": 1,
+      "FlagID": 50816,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1358,
+      "FlagType": 1,
+      "FlagID": 50817,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1359,
+      "FlagType": 1,
+      "FlagID": 50814,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1360,
+      "FlagType": 8,
+      "FlagID": 2267,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1361,
+      "FlagType": 8,
+      "FlagID": 2268,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1362,
+      "FlagType": 8,
+      "FlagID": 2269,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1363,
+      "FlagType": 1,
+      "FlagID": 50818,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1364,
+      "FlagType": 1,
+      "FlagID": 50819,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1365,
+      "FlagType": 8,
+      "FlagID": 2270,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1366,
+      "FlagType": 8,
+      "FlagID": 2271,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1367,
+      "FlagType": 1,
+      "FlagID": 50820,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1368,
+      "FlagType": 8,
+      "FlagID": 2272,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1369,
+      "FlagType": 8,
+      "FlagID": 2273,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1370,
+      "FlagType": 1,
+      "FlagID": 50821,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1371,
+      "FlagType": 1,
+      "FlagID": 50822,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1372,
+      "FlagType": 1,
+      "FlagID": 50821,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1373,
+      "FlagType": 1,
+      "FlagID": 50823,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1374,
+      "FlagType": 1,
+      "FlagID": 50824,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1375,
+      "FlagType": 1,
+      "FlagID": 50825,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1376,
+      "FlagType": 1,
+      "FlagID": 50826,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1377,
+      "FlagType": 1,
+      "FlagID": 50827,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1378,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1379,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 0,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1380,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 0,
+      "FlagMax": 2
+    },
+    {
+      "$id": 1381,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 0,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1382,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 0,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1383,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 0,
+      "FlagMax": 6
+    },
+    {
+      "$id": 1384,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1385,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 2,
+      "FlagMax": 2
+    },
+    {
+      "$id": 1386,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 3,
+      "FlagMax": 3
+    },
+    {
+      "$id": 1387,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 4,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1388,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 5,
+      "FlagMax": 6
+    },
+    {
+      "$id": 1389,
+      "FlagType": 1,
+      "FlagID": 50664,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1390,
+      "FlagType": 1,
+      "FlagID": 50665,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1391,
+      "FlagType": 16,
+      "FlagID": 1552,
+      "FlagMin": 0,
+      "FlagMax": 50
+    },
+    {
+      "$id": 1392,
+      "FlagType": 16,
+      "FlagID": 1552,
+      "FlagMin": 0,
+      "FlagMax": 900
+    },
+    {
+      "$id": 1393,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 1,
+      "FlagMax": 6
+    },
+    {
+      "$id": 1394,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 2,
+      "FlagMax": 6
+    },
+    {
+      "$id": 1395,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 3,
+      "FlagMax": 6
+    },
+    {
+      "$id": 1396,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 4,
+      "FlagMax": 6
+    },
+    {
+      "$id": 1397,
+      "FlagType": 1,
+      "FlagID": 50828,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1398,
+      "FlagType": 1,
+      "FlagID": 50829,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1399,
+      "FlagType": 1,
+      "FlagID": 50830,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1400,
+      "FlagType": 1,
+      "FlagID": 50831,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1401,
+      "FlagType": 8,
+      "FlagID": 2274,
+      "FlagMin": 100,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1402,
+      "FlagType": 1,
+      "FlagID": 50832,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1403,
+      "FlagType": 1,
+      "FlagID": 50833,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1404,
+      "FlagType": 1,
+      "FlagID": 50838,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1405,
+      "FlagType": 1,
+      "FlagID": 55176,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1406,
+      "FlagType": 1,
+      "FlagID": 55393,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1407,
+      "FlagType": 1,
+      "FlagID": 50839,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1408,
+      "FlagType": 1,
+      "FlagID": 50840,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1409,
+      "FlagType": 1,
+      "FlagID": 50836,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1410,
+      "FlagType": 16,
+      "FlagID": 1553,
+      "FlagMin": 500,
+      "FlagMax": 500
+    },
+    {
+      "$id": 1411,
+      "FlagType": 1,
+      "FlagID": 50843,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1412,
+      "FlagType": 1,
+      "FlagID": 55394,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1413,
+      "FlagType": 1,
+      "FlagID": 55394,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1414,
+      "FlagType": 2,
+      "FlagID": 60711,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1415,
+      "FlagType": 8,
+      "FlagID": 2164,
+      "FlagMin": 16,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1416,
+      "FlagType": 1,
+      "FlagID": 50847,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1417,
+      "FlagType": 1,
+      "FlagID": 50780,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1418,
+      "FlagType": 1,
+      "FlagID": 50844,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1419,
+      "FlagType": 1,
+      "FlagID": 50845,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1420,
+      "FlagType": 1,
+      "FlagID": 50846,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1421,
+      "FlagType": 1,
+      "FlagID": 35337,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1422,
+      "FlagType": 1,
+      "FlagID": 35339,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1423,
+      "FlagType": 1,
+      "FlagID": 35340,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1424,
+      "FlagType": 1,
+      "FlagID": 35341,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1425,
+      "FlagType": 1,
+      "FlagID": 35342,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1426,
+      "FlagType": 1,
+      "FlagID": 35343,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1427,
+      "FlagType": 1,
+      "FlagID": 50819,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1428,
+      "FlagType": 2,
+      "FlagID": 60726,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1429,
+      "FlagType": 2,
+      "FlagID": 60678,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1430,
+      "FlagType": 2,
+      "FlagID": 60686,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1431,
+      "FlagType": 2,
+      "FlagID": 60688,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1432,
+      "FlagType": 2,
+      "FlagID": 60690,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1433,
+      "FlagType": 2,
+      "FlagID": 60716,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1434,
+      "FlagType": 2,
+      "FlagID": 60726,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1435,
+      "FlagType": 2,
+      "FlagID": 60794,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1436,
+      "FlagType": 2,
+      "FlagID": 60795,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1437,
+      "FlagType": 2,
+      "FlagID": 60796,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1438,
+      "FlagType": 2,
+      "FlagID": 60797,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1439,
+      "FlagType": 2,
+      "FlagID": 60798,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1440,
+      "FlagType": 2,
+      "FlagID": 60806,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1441,
+      "FlagType": 2,
+      "FlagID": 60755,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1442,
+      "FlagType": 2,
+      "FlagID": 60812,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1443,
+      "FlagType": 2,
+      "FlagID": 60813,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1444,
+      "FlagType": 1,
+      "FlagID": 50850,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1445,
+      "FlagType": 8,
+      "FlagID": 2274,
+      "FlagMin": 0,
+      "FlagMax": 30
+    },
+    {
+      "$id": 1446,
+      "FlagType": 8,
+      "FlagID": 2274,
+      "FlagMin": 0,
+      "FlagMax": 60
+    },
+    {
+      "$id": 1447,
+      "FlagType": 8,
+      "FlagID": 2274,
+      "FlagMin": 0,
+      "FlagMax": 100
+    },
+    {
+      "$id": 1448,
+      "FlagType": 1,
+      "FlagID": 50852,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1449,
+      "FlagType": 8,
+      "FlagID": 2168,
+      "FlagMin": 15,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1450,
+      "FlagType": 8,
+      "FlagID": 2163,
+      "FlagMin": 88,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1451,
+      "FlagType": 8,
+      "FlagID": 2167,
+      "FlagMin": 15,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1452,
+      "FlagType": 8,
+      "FlagID": 2165,
+      "FlagMin": 3,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1453,
+      "FlagType": 8,
+      "FlagID": 2169,
+      "FlagMin": 5,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1454,
+      "FlagType": 8,
+      "FlagID": 2162,
+      "FlagMin": 88,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1455,
+      "FlagType": 8,
+      "FlagID": 2166,
+      "FlagMin": 5,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1456,
+      "FlagType": 8,
+      "FlagID": 2166,
+      "FlagMin": 15,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1457,
+      "FlagType": 8,
+      "FlagID": 2168,
+      "FlagMin": 5,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1458,
+      "FlagType": 8,
+      "FlagID": 2171,
+      "FlagMin": 10,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1459,
+      "FlagType": 1,
+      "FlagID": 50837,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1460,
+      "FlagType": 1,
+      "FlagID": 50853,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1461,
+      "FlagType": 1,
+      "FlagID": 50854,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1462,
+      "FlagType": 1,
+      "FlagID": 50837,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1463,
+      "FlagType": 1,
+      "FlagID": 50835,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1464,
+      "FlagType": 1,
+      "FlagID": 50834,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1465,
+      "FlagType": 1,
+      "FlagID": 50853,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1466,
+      "FlagType": 1,
+      "FlagID": 50854,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1467,
+      "FlagType": 1,
+      "FlagID": 50856,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1468,
+      "FlagType": 8,
+      "FlagID": 2163,
+      "FlagMin": 14,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1469,
+      "FlagType": 8,
+      "FlagID": 2163,
+      "FlagMin": 42,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1470,
+      "FlagType": 8,
+      "FlagID": 2163,
+      "FlagMin": 56,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1471,
+      "FlagType": 8,
+      "FlagID": 2163,
+      "FlagMin": 28,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1472,
+      "FlagType": 8,
+      "FlagID": 2163,
+      "FlagMin": 7,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1473,
+      "FlagType": 8,
+      "FlagID": 2163,
+      "FlagMin": 77,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1474,
+      "FlagType": 1,
+      "FlagID": 50860,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1475,
+      "FlagType": 1,
+      "FlagID": 50592,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1476,
+      "FlagType": 1,
+      "FlagID": 50592,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1477,
+      "FlagType": 1,
+      "FlagID": 55424,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1478,
+      "FlagType": 1,
+      "FlagID": 50862,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1479,
+      "FlagType": 1,
+      "FlagID": 50593,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1480,
+      "FlagType": 1,
+      "FlagID": 50594,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1481,
+      "FlagType": 1,
+      "FlagID": 50595,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1482,
+      "FlagType": 1,
+      "FlagID": 50596,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1483,
+      "FlagType": 1,
+      "FlagID": 50597,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1484,
+      "FlagType": 1,
+      "FlagID": 50598,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1485,
+      "FlagType": 1,
+      "FlagID": 50599,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1486,
+      "FlagType": 1,
+      "FlagID": 50600,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1487,
+      "FlagType": 1,
+      "FlagID": 50601,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1488,
+      "FlagType": 1,
+      "FlagID": 50601,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1489,
+      "FlagType": 1,
+      "FlagID": 50593,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1490,
+      "FlagType": 1,
+      "FlagID": 50594,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1491,
+      "FlagType": 1,
+      "FlagID": 50595,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1492,
+      "FlagType": 1,
+      "FlagID": 50596,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1493,
+      "FlagType": 2,
+      "FlagID": 60687,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1494,
+      "FlagType": 1,
+      "FlagID": 50597,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1495,
+      "FlagType": 1,
+      "FlagID": 50598,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1496,
+      "FlagType": 1,
+      "FlagID": 50599,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1497,
+      "FlagType": 1,
+      "FlagID": 50600,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1498,
+      "FlagType": 8,
+      "FlagID": 2172,
+      "FlagMin": 5,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1499,
+      "FlagType": 8,
+      "FlagID": 2173,
+      "FlagMin": 3,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1500,
+      "FlagType": 8,
+      "FlagID": 2174,
+      "FlagMin": 5,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1501,
+      "FlagType": 8,
+      "FlagID": 2175,
+      "FlagMin": 5,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1502,
+      "FlagType": 8,
+      "FlagID": 2176,
+      "FlagMin": 10,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1503,
+      "FlagType": 1,
+      "FlagID": 50606,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1504,
+      "FlagType": 1,
+      "FlagID": 50607,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1505,
+      "FlagType": 1,
+      "FlagID": 56333,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1506,
+      "FlagType": 1,
+      "FlagID": 50608,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1507,
+      "FlagType": 1,
+      "FlagID": 50864,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1508,
+      "FlagType": 1,
+      "FlagID": 50865,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1509,
+      "FlagType": 1,
+      "FlagID": 50609,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1510,
+      "FlagType": 1,
+      "FlagID": 50867,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1511,
+      "FlagType": 1,
+      "FlagID": 50866,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1512,
+      "FlagType": 1,
+      "FlagID": 50868,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1513,
+      "FlagType": 0,
+      "FlagID": 0,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1514,
+      "FlagType": 8,
+      "FlagID": 2183,
+      "FlagMin": 70,
+      "FlagMax": 90
+    },
+    {
+      "$id": 1515,
+      "FlagType": 1,
+      "FlagID": 50849,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1516,
+      "FlagType": 8,
+      "FlagID": 4278,
+      "FlagMin": 15,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1517,
+      "FlagType": 8,
+      "FlagID": 4279,
+      "FlagMin": 10,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1518,
+      "FlagType": 8,
+      "FlagID": 4280,
+      "FlagMin": 15,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1519,
+      "FlagType": 8,
+      "FlagID": 4281,
+      "FlagMin": 9,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1520,
+      "FlagType": 8,
+      "FlagID": 4282,
+      "FlagMin": 10,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1521,
+      "FlagType": 8,
+      "FlagID": 4283,
+      "FlagMin": 15,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1522,
+      "FlagType": 1,
+      "FlagID": 55191,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1523,
+      "FlagType": 1,
+      "FlagID": 55192,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1524,
+      "FlagType": 1,
+      "FlagID": 55193,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1525,
+      "FlagType": 1,
+      "FlagID": 55194,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1526,
+      "FlagType": 1,
+      "FlagID": 50871,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1527,
+      "FlagType": 1,
+      "FlagID": 50872,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1528,
+      "FlagType": 1,
+      "FlagID": 50873,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1529,
+      "FlagType": 1,
+      "FlagID": 50874,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1530,
+      "FlagType": 1,
+      "FlagID": 55424,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1531,
+      "FlagType": 1,
+      "FlagID": 50851,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1532,
+      "FlagType": 4,
+      "FlagID": 652,
+      "FlagMin": 3,
+      "FlagMax": 4
+    },
+    {
+      "$id": 1533,
+      "FlagType": 1,
+      "FlagID": 50610,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1534,
+      "FlagType": 1,
+      "FlagID": 50611,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1535,
+      "FlagType": 1,
+      "FlagID": 50612,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1536,
+      "FlagType": 1,
+      "FlagID": 50613,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1537,
+      "FlagType": 1,
+      "FlagID": 50614,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1538,
+      "FlagType": 1,
+      "FlagID": 50875,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1539,
+      "FlagType": 1,
+      "FlagID": 50876,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1540,
+      "FlagType": 1,
+      "FlagID": 50877,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1541,
+      "FlagType": 1,
+      "FlagID": 50878,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1542,
+      "FlagType": 1,
+      "FlagID": 50879,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1543,
+      "FlagType": 1,
+      "FlagID": 50880,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1544,
+      "FlagType": 1,
+      "FlagID": 50881,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1545,
+      "FlagType": 1,
+      "FlagID": 50779,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1546,
+      "FlagType": 2,
+      "FlagID": 60828,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1547,
+      "FlagType": 1,
+      "FlagID": 50882,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1548,
+      "FlagType": 1,
+      "FlagID": 50883,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1549,
+      "FlagType": 1,
+      "FlagID": 50884,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1550,
+      "FlagType": 1,
+      "FlagID": 50885,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1551,
+      "FlagType": 1,
+      "FlagID": 50783,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1552,
+      "FlagType": 1,
+      "FlagID": 50610,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1553,
+      "FlagType": 1,
+      "FlagID": 50611,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1554,
+      "FlagType": 1,
+      "FlagID": 50612,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1555,
+      "FlagType": 1,
+      "FlagID": 50613,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1556,
+      "FlagType": 1,
+      "FlagID": 50614,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1557,
+      "FlagType": 1,
+      "FlagID": 50887,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1558,
+      "FlagType": 1,
+      "FlagID": 55395,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1559,
+      "FlagType": 1,
+      "FlagID": 55395,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1560,
+      "FlagType": 1,
+      "FlagID": 50891,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1561,
+      "FlagType": 8,
+      "FlagID": 2165,
+      "FlagMin": 5,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1562,
+      "FlagType": 8,
+      "FlagID": 2164,
+      "FlagMin": 8,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1563,
+      "FlagType": 1,
+      "FlagID": 50892,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1564,
+      "FlagType": 1,
+      "FlagID": 50615,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1565,
+      "FlagType": 1,
+      "FlagID": 50615,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1566,
+      "FlagType": 1,
+      "FlagID": 50616,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1567,
+      "FlagType": 1,
+      "FlagID": 50616,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1568,
+      "FlagType": 1,
+      "FlagID": 50893,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1569,
+      "FlagType": 8,
+      "FlagID": 2164,
+      "FlagMin": 4,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1570,
+      "FlagType": 1,
+      "FlagID": 44015,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1571,
+      "FlagType": 1,
+      "FlagID": 44015,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1572,
+      "FlagType": 1,
+      "FlagID": 50784,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1573,
+      "FlagType": 1,
+      "FlagID": 50784,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1574,
+      "FlagType": 1,
+      "FlagID": 50894,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1575,
+      "FlagType": 1,
+      "FlagID": 50895,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1576,
+      "FlagType": 1,
+      "FlagID": 50896,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1577,
+      "FlagType": 2,
+      "FlagID": 60711,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1578,
+      "FlagType": 8,
+      "FlagID": 2164,
+      "FlagMin": 20,
+      "FlagMax": 256
+    },
+    {
+      "$id": 1579,
+      "FlagType": 2,
+      "FlagID": 60828,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1580,
+      "FlagType": 1,
+      "FlagID": 50897,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1581,
+      "FlagType": 1,
+      "FlagID": 50897,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1582,
+      "FlagType": 1,
+      "FlagID": 50898,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1583,
+      "FlagType": 1,
+      "FlagID": 50899,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1584,
+      "FlagType": 1,
+      "FlagID": 50617,
+      "FlagMin": 0,
+      "FlagMax": 0
+    },
+    {
+      "$id": 1585,
+      "FlagType": 1,
+      "FlagID": 35344,
+      "FlagMin": 1,
+      "FlagMax": 1
+    },
+    {
+      "$id": 1586,
+      "FlagType": 1,
+      "FlagID": 50900,
+      "FlagMin": 1,
+      "FlagMax": 1
+    }
+  ]
+}

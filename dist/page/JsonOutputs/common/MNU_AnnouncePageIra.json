@@ -1,0 +1,24 @@
+{
+  "schema": [
+    {
+      "name": "title",
+      "type": 2
+    },
+    {
+      "name": "summary",
+      "type": 2
+    },
+    {
+      "name": "image",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "title": 48,
+      "summary": 49,
+      "image": 1
+    }
+  ]
+}

@@ -1,0 +1,2658 @@
+{
+  "schema": [
+    {
+      "name": "Name",
+      "type": 2
+    },
+    {
+      "name": "DebugName",
+      "type": 7
+    },
+    {
+      "name": "Enhance1",
+      "type": 2
+    },
+    {
+      "name": "Enhance2",
+      "type": 2
+    },
+    {
+      "name": "Enhance3",
+      "type": 2
+    },
+    {
+      "name": "ChangeAtr",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Name": 1,
+      "DebugName": "テスト用怒り",
+      "Enhance1": 262,
+      "Enhance2": 268,
+      "Enhance3": 274,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 2,
+      "Name": 1,
+      "DebugName": "ウサギ",
+      "Enhance1": 3194,
+      "Enhance2": 3195,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 3,
+      "Name": 1,
+      "DebugName": "ウサギ",
+      "Enhance1": 3194,
+      "Enhance2": 3195,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 4,
+      "Name": 1,
+      "DebugName": "ウサギ",
+      "Enhance1": 3194,
+      "Enhance2": 3195,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 5,
+      "Name": 1,
+      "DebugName": "ウサギ",
+      "Enhance1": 3194,
+      "Enhance2": 3195,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 6,
+      "Name": 1,
+      "DebugName": "オオカミ",
+      "Enhance1": 3196,
+      "Enhance2": 3197,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 7,
+      "Name": 1,
+      "DebugName": "オオカミ",
+      "Enhance1": 3198,
+      "Enhance2": 3199,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 8,
+      "Name": 1,
+      "DebugName": "オオカミ",
+      "Enhance1": 3200,
+      "Enhance2": 3201,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 9,
+      "Name": 1,
+      "DebugName": "アルマ",
+      "Enhance1": 3202,
+      "Enhance2": 3203,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 10,
+      "Name": 1,
+      "DebugName": "アルマ",
+      "Enhance1": 3202,
+      "Enhance2": 3203,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 11,
+      "Name": 1,
+      "DebugName": "アルマ",
+      "Enhance1": 3202,
+      "Enhance2": 3203,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 12,
+      "Name": 1,
+      "DebugName": "アルマ",
+      "Enhance1": 3202,
+      "Enhance2": 3203,
+      "Enhance3": 0,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 13,
+      "Name": 1,
+      "DebugName": "ウマ",
+      "Enhance1": 3204,
+      "Enhance2": 3205,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 14,
+      "Name": 1,
+      "DebugName": "ウマ",
+      "Enhance1": 3204,
+      "Enhance2": 3205,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 15,
+      "Name": 1,
+      "DebugName": "ウマ",
+      "Enhance1": 3204,
+      "Enhance2": 3205,
+      "Enhance3": 0,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 16,
+      "Name": 1,
+      "DebugName": "ゴリラ",
+      "Enhance1": 3206,
+      "Enhance2": 3207,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 17,
+      "Name": 1,
+      "DebugName": "ゴリラ",
+      "Enhance1": 3206,
+      "Enhance2": 3207,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 18,
+      "Name": 1,
+      "DebugName": "ゴリラ",
+      "Enhance1": 3206,
+      "Enhance2": 3207,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 19,
+      "Name": 1,
+      "DebugName": "フラミンゴ",
+      "Enhance1": 3208,
+      "Enhance2": 3209,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 20,
+      "Name": 1,
+      "DebugName": "フラミンゴ",
+      "Enhance1": 3208,
+      "Enhance2": 3209,
+      "Enhance3": 0,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 21,
+      "Name": 1,
+      "DebugName": "フラミンゴ",
+      "Enhance1": 3208,
+      "Enhance2": 3209,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 22,
+      "Name": 1,
+      "DebugName": "フラミンゴ",
+      "Enhance1": 3208,
+      "Enhance2": 3209,
+      "Enhance3": 0,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 23,
+      "Name": 1,
+      "DebugName": "背高草食動物",
+      "Enhance1": 3210,
+      "Enhance2": 3211,
+      "Enhance3": 0,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 24,
+      "Name": 1,
+      "DebugName": "背高草食動物",
+      "Enhance1": 3210,
+      "Enhance2": 3211,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 25,
+      "Name": 1,
+      "DebugName": "背高草食動物",
+      "Enhance1": 3210,
+      "Enhance2": 3211,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 26,
+      "Name": 1,
+      "DebugName": "背高草食動物",
+      "Enhance1": 3210,
+      "Enhance2": 3211,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 27,
+      "Name": 1,
+      "DebugName": "山岳草食動物",
+      "Enhance1": 3212,
+      "Enhance2": 3213,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 28,
+      "Name": 1,
+      "DebugName": "山岳草食動物",
+      "Enhance1": 3212,
+      "Enhance2": 3213,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 29,
+      "Name": 1,
+      "DebugName": "山岳草食動物",
+      "Enhance1": 3214,
+      "Enhance2": 3215,
+      "Enhance3": 3216,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 30,
+      "Name": 1,
+      "DebugName": "山岳草食動物",
+      "Enhance1": 3214,
+      "Enhance2": 3215,
+      "Enhance3": 3216,
+      "ChangeAtr": 7
+    },
+    {
+      "$id": 31,
+      "Name": 1,
+      "DebugName": "雪山巨大生物",
+      "Enhance1": 3217,
+      "Enhance2": 3218,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 32,
+      "Name": 1,
+      "DebugName": "雪山巨大生物",
+      "Enhance1": 3217,
+      "Enhance2": 3218,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 33,
+      "Name": 1,
+      "DebugName": "雪山巨大生物",
+      "Enhance1": 3217,
+      "Enhance2": 3218,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 34,
+      "Name": 1,
+      "DebugName": "雪山巨大生物",
+      "Enhance1": 3217,
+      "Enhance2": 3218,
+      "Enhance3": 0,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 35,
+      "Name": 1,
+      "DebugName": "雪山肉食動物",
+      "Enhance1": 3219,
+      "Enhance2": 3220,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 36,
+      "Name": 1,
+      "DebugName": "雪山肉食動物",
+      "Enhance1": 3219,
+      "Enhance2": 3220,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 37,
+      "Name": 1,
+      "DebugName": "雪山肉食動物",
+      "Enhance1": 3221,
+      "Enhance2": 3222,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 38,
+      "Name": 1,
+      "DebugName": "雪山肉食動物",
+      "Enhance1": 3221,
+      "Enhance2": 3222,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 39,
+      "Name": 1,
+      "DebugName": "雪山クズリ",
+      "Enhance1": 3223,
+      "Enhance2": 3224,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 40,
+      "Name": 1,
+      "DebugName": "雪山クズリ",
+      "Enhance1": 3223,
+      "Enhance2": 3224,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 41,
+      "Name": 1,
+      "DebugName": "雪山クズリ",
+      "Enhance1": 3223,
+      "Enhance2": 3224,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 42,
+      "Name": 1,
+      "DebugName": "雪山クズリ",
+      "Enhance1": 3223,
+      "Enhance2": 3224,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 43,
+      "Name": 1,
+      "DebugName": "巨大カエル",
+      "Enhance1": 3225,
+      "Enhance2": 3226,
+      "Enhance3": 0,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 44,
+      "Name": 1,
+      "DebugName": "巨大カエル",
+      "Enhance1": 3225,
+      "Enhance2": 3226,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 45,
+      "Name": 1,
+      "DebugName": "巨大カエル",
+      "Enhance1": 3225,
+      "Enhance2": 3226,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 46,
+      "Name": 1,
+      "DebugName": "巨大カエル",
+      "Enhance1": 3225,
+      "Enhance2": 3226,
+      "Enhance3": 0,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 47,
+      "Name": 1,
+      "DebugName": "半魚人",
+      "Enhance1": 3227,
+      "Enhance2": 3228,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 48,
+      "Name": 1,
+      "DebugName": "半魚人",
+      "Enhance1": 3229,
+      "Enhance2": 3230,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 49,
+      "Name": 1,
+      "DebugName": "大型恐竜",
+      "Enhance1": 3231,
+      "Enhance2": 3232,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 50,
+      "Name": 1,
+      "DebugName": "プテラ",
+      "Enhance1": 3233,
+      "Enhance2": 3234,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 51,
+      "Name": 1,
+      "DebugName": "プテラ",
+      "Enhance1": 3233,
+      "Enhance2": 3234,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 52,
+      "Name": 1,
+      "DebugName": "プテラ",
+      "Enhance1": 3233,
+      "Enhance2": 3234,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 53,
+      "Name": 1,
+      "DebugName": "プテラ",
+      "Enhance1": 3233,
+      "Enhance2": 3234,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 54,
+      "Name": 1,
+      "DebugName": "ベヒモス・ガワ・一部",
+      "Enhance1": 3235,
+      "Enhance2": 3236,
+      "Enhance3": 0,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 55,
+      "Name": 1,
+      "DebugName": "ベヒモス・ガワ・一部",
+      "Enhance1": 3235,
+      "Enhance2": 3236,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 56,
+      "Name": 1,
+      "DebugName": "小型草食恐竜",
+      "Enhance1": 3237,
+      "Enhance2": 3238,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 57,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3237,
+      "Enhance2": 3238,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 58,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3237,
+      "Enhance2": 3238,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 59,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3237,
+      "Enhance2": 3238,
+      "Enhance3": 0,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 60,
+      "Name": 1,
+      "DebugName": "アンチ神獣（ウラボス）",
+      "Enhance1": 3239,
+      "Enhance2": 3240,
+      "Enhance3": 3241,
+      "ChangeAtr": 254
+    },
+    {
+      "$id": 61,
+      "Name": 1,
+      "DebugName": "中型ヘビ",
+      "Enhance1": 3242,
+      "Enhance2": 3243,
+      "Enhance3": 3244,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 62,
+      "Name": 1,
+      "DebugName": "中型ヘビ",
+      "Enhance1": 3242,
+      "Enhance2": 3243,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 63,
+      "Name": 1,
+      "DebugName": "クモ",
+      "Enhance1": 3245,
+      "Enhance2": 3246,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 64,
+      "Name": 1,
+      "DebugName": "クモ",
+      "Enhance1": 3245,
+      "Enhance2": 3246,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 65,
+      "Name": 1,
+      "DebugName": "クモ",
+      "Enhance1": 3245,
+      "Enhance2": 3246,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 66,
+      "Name": 1,
+      "DebugName": "クモ",
+      "Enhance1": 3245,
+      "Enhance2": 3246,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 67,
+      "Name": 1,
+      "DebugName": "女王グモ",
+      "Enhance1": 3247,
+      "Enhance2": 3248,
+      "Enhance3": 0,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 68,
+      "Name": 1,
+      "DebugName": "女王グモ",
+      "Enhance1": 3247,
+      "Enhance2": 3248,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 69,
+      "Name": 1,
+      "DebugName": "女王グモ",
+      "Enhance1": 3247,
+      "Enhance2": 3248,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 70,
+      "Name": 1,
+      "DebugName": "イモムシ",
+      "Enhance1": 3249,
+      "Enhance2": 3250,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 71,
+      "Name": 1,
+      "DebugName": "イモムシ",
+      "Enhance1": 3249,
+      "Enhance2": 3250,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 72,
+      "Name": 1,
+      "DebugName": "神獣寄生虫",
+      "Enhance1": 3251,
+      "Enhance2": 3252,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 73,
+      "Name": 1,
+      "DebugName": "神獣中型寄生虫",
+      "Enhance1": 3253,
+      "Enhance2": 3254,
+      "Enhance3": 0,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 74,
+      "Name": 1,
+      "DebugName": "神獣大型寄生虫",
+      "Enhance1": 3255,
+      "Enhance2": 3256,
+      "Enhance3": 0,
+      "ChangeAtr": 7
+    },
+    {
+      "$id": 75,
+      "Name": 1,
+      "DebugName": "鎧サソリ",
+      "Enhance1": 3257,
+      "Enhance2": 3258,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 76,
+      "Name": 1,
+      "DebugName": "カニ",
+      "Enhance1": 3259,
+      "Enhance2": 3260,
+      "Enhance3": 0,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 77,
+      "Name": 1,
+      "DebugName": "雲海フナムシ",
+      "Enhance1": 3261,
+      "Enhance2": 3262,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 78,
+      "Name": 1,
+      "DebugName": "雲海フナムシ",
+      "Enhance1": 3261,
+      "Enhance2": 3262,
+      "Enhance3": 0,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 79,
+      "Name": 1,
+      "DebugName": "遠隔攻撃昆虫",
+      "Enhance1": 3263,
+      "Enhance2": 3264,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 80,
+      "Name": 1,
+      "DebugName": "遠隔攻撃昆虫",
+      "Enhance1": 3263,
+      "Enhance2": 3264,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 81,
+      "Name": 1,
+      "DebugName": "遠隔攻撃昆虫",
+      "Enhance1": 3263,
+      "Enhance2": 3264,
+      "Enhance3": 0,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 82,
+      "Name": 1,
+      "DebugName": "巨大飛行昆虫",
+      "Enhance1": 3265,
+      "Enhance2": 3266,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 83,
+      "Name": 1,
+      "DebugName": "タカ",
+      "Enhance1": 3267,
+      "Enhance2": 3268,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 84,
+      "Name": 1,
+      "DebugName": "タカ",
+      "Enhance1": 3267,
+      "Enhance2": 3268,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 85,
+      "Name": 1,
+      "DebugName": "タカ",
+      "Enhance1": 3267,
+      "Enhance2": 3268,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 86,
+      "Name": 1,
+      "DebugName": "タカ",
+      "Enhance1": 3267,
+      "Enhance2": 3268,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 87,
+      "Name": 1,
+      "DebugName": "タカ",
+      "Enhance1": 3267,
+      "Enhance2": 3268,
+      "Enhance3": 0,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 88,
+      "Name": 1,
+      "DebugName": "タカ",
+      "Enhance1": 3267,
+      "Enhance2": 3268,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 89,
+      "Name": 1,
+      "DebugName": "フクロウ",
+      "Enhance1": 3269,
+      "Enhance2": 3270,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 90,
+      "Name": 1,
+      "DebugName": "フクロウ",
+      "Enhance1": 3269,
+      "Enhance2": 3270,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 91,
+      "Name": 1,
+      "DebugName": "フクロウ",
+      "Enhance1": 3269,
+      "Enhance2": 3270,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 92,
+      "Name": 1,
+      "DebugName": "コウモリ",
+      "Enhance1": 3271,
+      "Enhance2": 3272,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 93,
+      "Name": 1,
+      "DebugName": "コウモリ",
+      "Enhance1": 3271,
+      "Enhance2": 3272,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 94,
+      "Name": 1,
+      "DebugName": "コウモリ",
+      "Enhance1": 3273,
+      "Enhance2": 3274,
+      "Enhance3": 0,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 95,
+      "Name": 1,
+      "DebugName": "ハチ",
+      "Enhance1": 3275,
+      "Enhance2": 3276,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 96,
+      "Name": 1,
+      "DebugName": "ハチ",
+      "Enhance1": 3277,
+      "Enhance2": 3278,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 97,
+      "Name": 1,
+      "DebugName": "ハチ",
+      "Enhance1": 3279,
+      "Enhance2": 3280,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 98,
+      "Name": 1,
+      "DebugName": "飛びエイ",
+      "Enhance1": 3281,
+      "Enhance2": 3282,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 99,
+      "Name": 1,
+      "DebugName": "飛びエイ",
+      "Enhance1": 3281,
+      "Enhance2": 3282,
+      "Enhance3": 0,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 100,
+      "Name": 1,
+      "DebugName": "海竜（飛行）",
+      "Enhance1": 3283,
+      "Enhance2": 3284,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 101,
+      "Name": 1,
+      "DebugName": "海竜（飛行）",
+      "Enhance1": 3283,
+      "Enhance2": 3284,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 102,
+      "Name": 1,
+      "DebugName": "海竜（飛行）",
+      "Enhance1": 3283,
+      "Enhance2": 3284,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 103,
+      "Name": 1,
+      "DebugName": "海竜（飛行）",
+      "Enhance1": 3283,
+      "Enhance2": 3285,
+      "Enhance3": 3286,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 104,
+      "Name": 1,
+      "DebugName": "浮遊生物",
+      "Enhance1": 3287,
+      "Enhance2": 3288,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 105,
+      "Name": 1,
+      "DebugName": "海鳥",
+      "Enhance1": 3289,
+      "Enhance2": 3290,
+      "Enhance3": 0,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 106,
+      "Name": 1,
+      "DebugName": "海鳥",
+      "Enhance1": 3289,
+      "Enhance2": 3290,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 107,
+      "Name": 1,
+      "DebugName": "海鳥",
+      "Enhance1": 3289,
+      "Enhance2": 3290,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 108,
+      "Name": 1,
+      "DebugName": "海鳥",
+      "Enhance1": 3289,
+      "Enhance2": 3290,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 109,
+      "Name": 1,
+      "DebugName": "神獣ガンシップ",
+      "Enhance1": 3293,
+      "Enhance2": 3294,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 110,
+      "Name": 1,
+      "DebugName": "ヤドカリ",
+      "Enhance1": 3293,
+      "Enhance2": 3294,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 111,
+      "Name": 1,
+      "DebugName": "ヤドカリ",
+      "Enhance1": 3293,
+      "Enhance2": 3294,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 112,
+      "Name": 1,
+      "DebugName": "ヤドカリ",
+      "Enhance1": 3293,
+      "Enhance2": 3294,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 113,
+      "Name": 1,
+      "DebugName": "サーモン",
+      "Enhance1": 3295,
+      "Enhance2": 3296,
+      "Enhance3": 0,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 114,
+      "Name": 1,
+      "DebugName": "サーモン",
+      "Enhance1": 3295,
+      "Enhance2": 3296,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 115,
+      "Name": 1,
+      "DebugName": "サーモン",
+      "Enhance1": 3297,
+      "Enhance2": 3298,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 116,
+      "Name": 1,
+      "DebugName": "サーモン",
+      "Enhance1": 3297,
+      "Enhance2": 3298,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 117,
+      "Name": 1,
+      "DebugName": "海トカゲ",
+      "Enhance1": 3299,
+      "Enhance2": 3300,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 118,
+      "Name": 1,
+      "DebugName": "海トカゲ",
+      "Enhance1": 3299,
+      "Enhance2": 3300,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 119,
+      "Name": 1,
+      "DebugName": "海トカゲ",
+      "Enhance1": 3299,
+      "Enhance2": 3300,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 120,
+      "Name": 1,
+      "DebugName": "海トカゲ",
+      "Enhance1": 3303,
+      "Enhance2": 3304,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 121,
+      "Name": 1,
+      "DebugName": "改造亀型神獣",
+      "Enhance1": 3305,
+      "Enhance2": 0,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 122,
+      "Name": 1,
+      "DebugName": "巨大雲海魚",
+      "Enhance1": 3307,
+      "Enhance2": 3308,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 123,
+      "Name": 1,
+      "DebugName": "水辺草食獣",
+      "Enhance1": 3309,
+      "Enhance2": 3310,
+      "Enhance3": 0,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 124,
+      "Name": 1,
+      "DebugName": "水辺草食獣",
+      "Enhance1": 3309,
+      "Enhance2": 3310,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 125,
+      "Name": 1,
+      "DebugName": "水辺草食獣",
+      "Enhance1": 3309,
+      "Enhance2": 3310,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 126,
+      "Name": 1,
+      "DebugName": "水辺草食獣",
+      "Enhance1": 3309,
+      "Enhance2": 3310,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 127,
+      "Name": 1,
+      "DebugName": "雲海巨大生物",
+      "Enhance1": 3311,
+      "Enhance2": 3312,
+      "Enhance3": 0,
+      "ChangeAtr": 254
+    },
+    {
+      "$id": 128,
+      "Name": 1,
+      "DebugName": "水棲哺乳類",
+      "Enhance1": 3313,
+      "Enhance2": 3314,
+      "Enhance3": 0,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 129,
+      "Name": 1,
+      "DebugName": "ターキン",
+      "Enhance1": 3315,
+      "Enhance2": 3319,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 130,
+      "Name": 1,
+      "DebugName": "ターキン",
+      "Enhance1": 3315,
+      "Enhance2": 3316,
+      "Enhance3": 3319,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 131,
+      "Name": 1,
+      "DebugName": "ターキン",
+      "Enhance1": 3315,
+      "Enhance2": 3318,
+      "Enhance3": 3319,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 132,
+      "Name": 1,
+      "DebugName": "ターキン",
+      "Enhance1": 3315,
+      "Enhance2": 3317,
+      "Enhance3": 3319,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 133,
+      "Name": 1,
+      "DebugName": "ターキン",
+      "Enhance1": 3315,
+      "Enhance2": 3319,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 134,
+      "Name": 1,
+      "DebugName": "ターキン",
+      "Enhance1": 3315,
+      "Enhance2": 3316,
+      "Enhance3": 3319,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 135,
+      "Name": 1,
+      "DebugName": "ターキン",
+      "Enhance1": 3315,
+      "Enhance2": 3318,
+      "Enhance3": 3319,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 136,
+      "Name": 1,
+      "DebugName": "ターキン",
+      "Enhance1": 3315,
+      "Enhance2": 3317,
+      "Enhance3": 3319,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 137,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 3321,
+      "Enhance3": 3324,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 138,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 3321,
+      "Enhance3": 3324,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 139,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 0,
+      "Enhance3": 3324,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 140,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 3323,
+      "Enhance3": 3324,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 141,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 3322,
+      "Enhance3": 3324,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 142,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 3321,
+      "Enhance3": 3324,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 143,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 3321,
+      "Enhance3": 3324,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 144,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 0,
+      "Enhance3": 3324,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 145,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 3323,
+      "Enhance3": 3324,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 146,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 3322,
+      "Enhance3": 3324,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 147,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 3321,
+      "Enhance3": 3324,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 148,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 3321,
+      "Enhance3": 3324,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 149,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 0,
+      "Enhance3": 3324,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 150,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 3323,
+      "Enhance3": 3324,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 151,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3320,
+      "Enhance2": 3322,
+      "Enhance3": 3324,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 152,
+      "Name": 1,
+      "DebugName": "イグーナ",
+      "Enhance1": 3492,
+      "Enhance2": 3493,
+      "Enhance3": 3494,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 153,
+      "Name": 1,
+      "DebugName": "騎乗生物・イグーナ",
+      "Enhance1": 3325,
+      "Enhance2": 3326,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 154,
+      "Name": 1,
+      "DebugName": "デク",
+      "Enhance1": 3327,
+      "Enhance2": 3328,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 155,
+      "Name": 1,
+      "DebugName": "デク",
+      "Enhance1": 3327,
+      "Enhance2": 3328,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 156,
+      "Name": 1,
+      "DebugName": "デク",
+      "Enhance1": 3327,
+      "Enhance2": 3328,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 157,
+      "Name": 1,
+      "DebugName": "デク",
+      "Enhance1": 3327,
+      "Enhance2": 3328,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 158,
+      "Name": 1,
+      "DebugName": "新規メカ①",
+      "Enhance1": 3329,
+      "Enhance2": 3330,
+      "Enhance3": 0,
+      "ChangeAtr": 254
+    },
+    {
+      "$id": 159,
+      "Name": 1,
+      "DebugName": "新規メカ②",
+      "Enhance1": 3331,
+      "Enhance2": 3332,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 160,
+      "Name": 1,
+      "DebugName": "新規メカ③",
+      "Enhance1": 3333,
+      "Enhance2": 3334,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 161,
+      "Name": 1,
+      "DebugName": "小型近距離メカ",
+      "Enhance1": 3335,
+      "Enhance2": 3336,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 162,
+      "Name": 1,
+      "DebugName": "中型近距離メカ",
+      "Enhance1": 3337,
+      "Enhance2": 3338,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 163,
+      "Name": 1,
+      "DebugName": "変形支援メカ",
+      "Enhance1": 3339,
+      "Enhance2": 3340,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 164,
+      "Name": 1,
+      "DebugName": "逃亡生物",
+      "Enhance1": 3341,
+      "Enhance2": 0,
+      "Enhance3": 0,
+      "ChangeAtr": 254
+    },
+    {
+      "$id": 165,
+      "Name": 1,
+      "DebugName": "不定形生命体",
+      "Enhance1": 3342,
+      "Enhance2": 3343,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 166,
+      "Name": 1,
+      "DebugName": "不定形生命体・カラー",
+      "Enhance1": 3342,
+      "Enhance2": 3343,
+      "Enhance3": 0,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 167,
+      "Name": 1,
+      "DebugName": "人工ブレイド",
+      "Enhance1": 3344,
+      "Enhance2": 3345,
+      "Enhance3": 0,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 168,
+      "Name": 1,
+      "DebugName": "異形モンスター・ザコ",
+      "Enhance1": 3346,
+      "Enhance2": 3347,
+      "Enhance3": 3349,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 169,
+      "Name": 1,
+      "DebugName": "異形モンスター・ザコ赤",
+      "Enhance1": 3346,
+      "Enhance2": 3348,
+      "Enhance3": 3349,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 170,
+      "Name": 1,
+      "DebugName": "神獣多弾頭砲戦車",
+      "Enhance1": 3350,
+      "Enhance2": 3351,
+      "Enhance3": 3352,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 171,
+      "Name": 1,
+      "DebugName": "神獣戦闘機",
+      "Enhance1": 3353,
+      "Enhance2": 3354,
+      "Enhance3": 3355,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 172,
+      "Name": 1,
+      "DebugName": "帝国兵",
+      "Enhance1": 3356,
+      "Enhance2": 3357,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 173,
+      "Name": 1,
+      "DebugName": "帝国兵・上官",
+      "Enhance1": 3358,
+      "Enhance2": 3359,
+      "Enhance3": 3360,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 174,
+      "Name": 1,
+      "DebugName": "アーケディア僧兵",
+      "Enhance1": 3361,
+      "Enhance2": 3362,
+      "Enhance3": 0,
+      "ChangeAtr": 7
+    },
+    {
+      "$id": 175,
+      "Name": 1,
+      "DebugName": "ルクスリア兵",
+      "Enhance1": 3363,
+      "Enhance2": 3364,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 176,
+      "Name": 1,
+      "DebugName": "サーペント",
+      "Enhance1": 3365,
+      "Enhance2": 3366,
+      "Enhance3": 0,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 177,
+      "Name": 1,
+      "DebugName": "タイタン",
+      "Enhance1": 3367,
+      "Enhance2": 3368,
+      "Enhance3": 0,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 178,
+      "Name": 1,
+      "DebugName": "巨大飛行昆虫",
+      "Enhance1": 3440,
+      "Enhance2": 3441,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 179,
+      "Name": 1,
+      "DebugName": "野良ブレイド槍",
+      "Enhance1": 3370,
+      "Enhance2": 3371,
+      "Enhance3": 3372,
+      "ChangeAtr": 254
+    },
+    {
+      "$id": 180,
+      "Name": 1,
+      "DebugName": "野良ブレイド斧",
+      "Enhance1": 3373,
+      "Enhance2": 3374,
+      "Enhance3": 3375,
+      "ChangeAtr": 254
+    },
+    {
+      "$id": 181,
+      "Name": 1,
+      "DebugName": "野良ブレイド輪",
+      "Enhance1": 3376,
+      "Enhance2": 3377,
+      "Enhance3": 3378,
+      "ChangeAtr": 254
+    },
+    {
+      "$id": 182,
+      "Name": 1,
+      "DebugName": "野良ブレイド刀",
+      "Enhance1": 3379,
+      "Enhance2": 3380,
+      "Enhance3": 3381,
+      "ChangeAtr": 254
+    },
+    {
+      "$id": 183,
+      "Name": 1,
+      "DebugName": "野良ブレイド刀",
+      "Enhance1": 3379,
+      "Enhance2": 3380,
+      "Enhance3": 0,
+      "ChangeAtr": 254
+    },
+    {
+      "$id": 184,
+      "Name": 1,
+      "DebugName": "サメ",
+      "Enhance1": 3382,
+      "Enhance2": 0,
+      "Enhance3": 0,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 185,
+      "Name": 1,
+      "DebugName": "アルドン",
+      "Enhance1": 3383,
+      "Enhance2": 3384,
+      "Enhance3": 3385,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 186,
+      "Name": 1,
+      "DebugName": "小型草食恐竜・ガワ",
+      "Enhance1": 3386,
+      "Enhance2": 3387,
+      "Enhance3": 3388,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 187,
+      "Name": 1,
+      "DebugName": "モーフ",
+      "Enhance1": 3389,
+      "Enhance2": 3390,
+      "Enhance3": 3391,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 188,
+      "Name": 1,
+      "DebugName": "シン",
+      "Enhance1": 3456,
+      "Enhance2": 3457,
+      "Enhance3": 3458,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 189,
+      "Name": 1,
+      "DebugName": "シン最終",
+      "Enhance1": 3456,
+      "Enhance2": 3457,
+      "Enhance3": 3458,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 190,
+      "Name": 1,
+      "DebugName": "メツ",
+      "Enhance1": 3392,
+      "Enhance2": 3393,
+      "Enhance3": 3394,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 191,
+      "Name": 1,
+      "DebugName": "メツ最終",
+      "Enhance1": 3395,
+      "Enhance2": 3396,
+      "Enhance3": 3397,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 192,
+      "Name": 1,
+      "DebugName": "キク",
+      "Enhance1": 3398,
+      "Enhance2": 3399,
+      "Enhance3": 3400,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 193,
+      "Name": 1,
+      "DebugName": "巨大人工ブレイド・サクラ",
+      "Enhance1": 3401,
+      "Enhance2": 3402,
+      "Enhance3": 3403,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 194,
+      "Name": 1,
+      "DebugName": "Gサクラ",
+      "Enhance1": 3404,
+      "Enhance2": 3405,
+      "Enhance3": 3406,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 195,
+      "Name": 1,
+      "DebugName": "ヨシツネ",
+      "Enhance1": 3407,
+      "Enhance2": 3408,
+      "Enhance3": 3409,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 196,
+      "Name": 1,
+      "DebugName": "ヨシツネ最終",
+      "Enhance1": 3410,
+      "Enhance2": 3411,
+      "Enhance3": 3412,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 197,
+      "Name": 1,
+      "DebugName": "サタヒコ",
+      "Enhance1": 3413,
+      "Enhance2": 3414,
+      "Enhance3": 3415,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 198,
+      "Name": 1,
+      "DebugName": "サタヒコ最終",
+      "Enhance1": 3416,
+      "Enhance2": 3417,
+      "Enhance3": 3418,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 199,
+      "Name": 1,
+      "DebugName": "ベンケイ",
+      "Enhance1": 3419,
+      "Enhance2": 3420,
+      "Enhance3": 3421,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 200,
+      "Name": 1,
+      "DebugName": "ベンケイ最終",
+      "Enhance1": 3422,
+      "Enhance2": 3423,
+      "Enhance3": 3424,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 201,
+      "Name": 1,
+      "DebugName": "テンペランティア（ボス）",
+      "Enhance1": 3425,
+      "Enhance2": 3426,
+      "Enhance3": 3427,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 202,
+      "Name": 1,
+      "DebugName": "テンペランティア（ボス）",
+      "Enhance1": 3428,
+      "Enhance2": 3429,
+      "Enhance3": 3430,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 203,
+      "Name": 1,
+      "DebugName": "マルベーニ最終形態",
+      "Enhance1": 3431,
+      "Enhance2": 3432,
+      "Enhance3": 3433,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 204,
+      "Name": 1,
+      "DebugName": "アイオーン",
+      "Enhance1": 3468,
+      "Enhance2": 3469,
+      "Enhance3": 3470,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 205,
+      "Name": 1,
+      "DebugName": "幻影",
+      "Enhance1": 262,
+      "Enhance2": 0,
+      "Enhance3": 0,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 206,
+      "Name": 1,
+      "DebugName": "異形モンスター・ボス",
+      "Enhance1": 3434,
+      "Enhance2": 3435,
+      "Enhance3": 3436,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 207,
+      "Name": 1,
+      "DebugName": "横暴ドライバー",
+      "Enhance1": 3437,
+      "Enhance2": 3438,
+      "Enhance3": 3439,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 208,
+      "Name": 1,
+      "DebugName": "シン（バトルモード",
+      "Enhance1": 262,
+      "Enhance2": 0,
+      "Enhance3": 0,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 209,
+      "Name": 1,
+      "DebugName": "ジーク",
+      "Enhance1": 3442,
+      "Enhance2": 3443,
+      "Enhance3": 0,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 210,
+      "Name": 1,
+      "DebugName": "海鳥",
+      "Enhance1": 3444,
+      "Enhance2": 3445,
+      "Enhance3": 3446,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 211,
+      "Name": 1,
+      "DebugName": "野盗ドライバー槍",
+      "Enhance1": 3447,
+      "Enhance2": 3448,
+      "Enhance3": 3449,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 212,
+      "Name": 1,
+      "DebugName": "野盗ドライバー斧",
+      "Enhance1": 3450,
+      "Enhance2": 3451,
+      "Enhance3": 3452,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 213,
+      "Name": 1,
+      "DebugName": "野盗ドライバー輪",
+      "Enhance1": 3453,
+      "Enhance2": 3454,
+      "Enhance3": 3455,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 214,
+      "Name": 1,
+      "DebugName": "メレフ",
+      "Enhance1": 3459,
+      "Enhance2": 3460,
+      "Enhance3": 3461,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 215,
+      "Name": 1,
+      "DebugName": "火龍団",
+      "Enhance1": 3462,
+      "Enhance2": 3463,
+      "Enhance3": 3464,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 216,
+      "Name": 0,
+      "DebugName": "ベンケイの錫杖",
+      "Enhance1": 3465,
+      "Enhance2": 0,
+      "Enhance3": 0,
+      "ChangeAtr": 254
+    },
+    {
+      "$id": 217,
+      "Name": 3,
+      "DebugName": "電源コード",
+      "Enhance1": 3466,
+      "Enhance2": 3467,
+      "Enhance3": 0,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 218,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3471,
+      "Enhance2": 3472,
+      "Enhance3": 3473,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 219,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3474,
+      "Enhance2": 3475,
+      "Enhance3": 3476,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 220,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3477,
+      "Enhance2": 3478,
+      "Enhance3": 3479,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 221,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3480,
+      "Enhance2": 3481,
+      "Enhance3": 3482,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 222,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3483,
+      "Enhance2": 3484,
+      "Enhance3": 3485,
+      "ChangeAtr": 7
+    },
+    {
+      "$id": 223,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3486,
+      "Enhance2": 3487,
+      "Enhance3": 3488,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 224,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3489,
+      "Enhance2": 3490,
+      "Enhance3": 3491,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 225,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3495,
+      "Enhance2": 3496,
+      "Enhance3": 3497,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 226,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3498,
+      "Enhance2": 0,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 227,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3499,
+      "Enhance2": 3500,
+      "Enhance3": 0,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 228,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3501,
+      "Enhance2": 3502,
+      "Enhance3": 3503,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 229,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3504,
+      "Enhance2": 3505,
+      "Enhance3": 3506,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 230,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3507,
+      "Enhance2": 3508,
+      "Enhance3": 3509,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 231,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3510,
+      "Enhance2": 3511,
+      "Enhance3": 3512,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 232,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3513,
+      "Enhance2": 3514,
+      "Enhance3": 3515,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 233,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3516,
+      "Enhance2": 3517,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 234,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3518,
+      "Enhance2": 3519,
+      "Enhance3": 3520,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 235,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3521,
+      "Enhance2": 3522,
+      "Enhance3": 3523,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 236,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3524,
+      "Enhance2": 3525,
+      "Enhance3": 3526,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 237,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3527,
+      "Enhance2": 3528,
+      "Enhance3": 3529,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 238,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3530,
+      "Enhance2": 3531,
+      "Enhance3": 3532,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 239,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3533,
+      "Enhance2": 3534,
+      "Enhance3": 3535,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 240,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3536,
+      "Enhance2": 3537,
+      "Enhance3": 3538,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 241,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3539,
+      "Enhance2": 3540,
+      "Enhance3": 3541,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 242,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3542,
+      "Enhance2": 3543,
+      "Enhance3": 3544,
+      "ChangeAtr": 6
+    },
+    {
+      "$id": 243,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3545,
+      "Enhance2": 3546,
+      "Enhance3": 3547,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 244,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3548,
+      "Enhance2": 3549,
+      "Enhance3": 3550,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 245,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3551,
+      "Enhance2": 3552,
+      "Enhance3": 3553,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 246,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3554,
+      "Enhance2": 3555,
+      "Enhance3": 3556,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 247,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3557,
+      "Enhance2": 3558,
+      "Enhance3": 3559,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 248,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3560,
+      "Enhance2": 3561,
+      "Enhance3": 3562,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 249,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3563,
+      "Enhance2": 3564,
+      "Enhance3": 3565,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 250,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3566,
+      "Enhance2": 3567,
+      "Enhance3": 3568,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 251,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3569,
+      "Enhance2": 3570,
+      "Enhance3": 3571,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 252,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3572,
+      "Enhance2": 3573,
+      "Enhance3": 3574,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 253,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3575,
+      "Enhance2": 3576,
+      "Enhance3": 3577,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 254,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3578,
+      "Enhance2": 3579,
+      "Enhance3": 3580,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 255,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3581,
+      "Enhance2": 3582,
+      "Enhance3": 3583,
+      "ChangeAtr": 7
+    },
+    {
+      "$id": 256,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3584,
+      "Enhance2": 3585,
+      "Enhance3": 3586,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 257,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3587,
+      "Enhance2": 3588,
+      "Enhance3": 3589,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 258,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3590,
+      "Enhance2": 3591,
+      "Enhance3": 3592,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 259,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3593,
+      "Enhance2": 3594,
+      "Enhance3": 3595,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 260,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3596,
+      "Enhance2": 3597,
+      "Enhance3": 3598,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 261,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3599,
+      "Enhance2": 3600,
+      "Enhance3": 3601,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 262,
+      "Name": 1,
+      "DebugName": "アルマ",
+      "Enhance1": 3723,
+      "Enhance2": 3724,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 263,
+      "Name": 1,
+      "DebugName": "アルドン",
+      "Enhance1": 3725,
+      "Enhance2": 3726,
+      "Enhance3": 3727,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 264,
+      "Name": 1,
+      "DebugName": "亀型戦車",
+      "Enhance1": 3728,
+      "Enhance2": 3729,
+      "Enhance3": 0,
+      "ChangeAtr": 4
+    },
+    {
+      "$id": 265,
+      "Name": 1,
+      "DebugName": "重爆撃のドルメス",
+      "Enhance1": 3730,
+      "Enhance2": 3731,
+      "Enhance3": 3732,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 266,
+      "Name": 1,
+      "DebugName": "フクロウ",
+      "Enhance1": 3733,
+      "Enhance2": 3734,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 267,
+      "Name": 0,
+      "DebugName": "トーテム",
+      "Enhance1": 3735,
+      "Enhance2": 3736,
+      "Enhance3": 0,
+      "ChangeAtr": 254
+    },
+    {
+      "$id": 268,
+      "Name": 1,
+      "DebugName": "恐竜",
+      "Enhance1": 3737,
+      "Enhance2": 3738,
+      "Enhance3": 3739,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 269,
+      "Name": 1,
+      "DebugName": "雲海大王",
+      "Enhance1": 3745,
+      "Enhance2": 3746,
+      "Enhance3": 3747,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 270,
+      "Name": 1,
+      "DebugName": "真サクラ",
+      "Enhance1": 3740,
+      "Enhance2": 3741,
+      "Enhance3": 3742,
+      "ChangeAtr": 7
+    },
+    {
+      "$id": 271,
+      "Name": 1,
+      "DebugName": "ミニサクラ",
+      "Enhance1": 3743,
+      "Enhance2": 3744,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 272,
+      "Name": 1,
+      "DebugName": "天輪拳リーチ",
+      "Enhance1": 3748,
+      "Enhance2": 3749,
+      "Enhance3": 3750,
+      "ChangeAtr": 2
+    },
+    {
+      "$id": 273,
+      "Name": 1,
+      "DebugName": "ウラボス",
+      "Enhance1": 3751,
+      "Enhance2": 3752,
+      "Enhance3": 3753,
+      "ChangeAtr": 254
+    },
+    {
+      "$id": 274,
+      "Name": 1,
+      "DebugName": "ダークロッド",
+      "Enhance1": 3754,
+      "Enhance2": 3755,
+      "Enhance3": 3756,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 275,
+      "Name": 1,
+      "DebugName": "逃亡生物（黒",
+      "Enhance1": 3757,
+      "Enhance2": 3758,
+      "Enhance3": 3759,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 276,
+      "Name": 1,
+      "DebugName": "モノポン",
+      "Enhance1": 3760,
+      "Enhance2": 3761,
+      "Enhance3": 3762,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 277,
+      "Name": 1,
+      "DebugName": "ゴリ新ボス",
+      "Enhance1": 3763,
+      "Enhance2": 3764,
+      "Enhance3": 3765,
+      "ChangeAtr": 7
+    },
+    {
+      "$id": 278,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3766,
+      "Enhance2": 3767,
+      "Enhance3": 3768,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 279,
+      "Name": 1,
+      "DebugName": "毒王",
+      "Enhance1": 3769,
+      "Enhance2": 3770,
+      "Enhance3": 0,
+      "ChangeAtr": 254
+    },
+    {
+      "$id": 280,
+      "Name": 1,
+      "DebugName": "ヒカリ",
+      "Enhance1": 3777,
+      "Enhance2": 3778,
+      "Enhance3": 0,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 281,
+      "Name": 1,
+      "DebugName": "カグツチ",
+      "Enhance1": 3779,
+      "Enhance2": 3780,
+      "Enhance3": 0,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 282,
+      "Name": 1,
+      "DebugName": "ゴウト",
+      "Enhance1": 3781,
+      "Enhance2": 3782,
+      "Enhance3": 0,
+      "ChangeAtr": 255
+    },
+    {
+      "$id": 283,
+      "Name": 1,
+      "DebugName": "シャガール",
+      "Enhance1": 3783,
+      "Enhance2": 3784,
+      "Enhance3": 0,
+      "ChangeAtr": 5
+    },
+    {
+      "$id": 284,
+      "Name": 1,
+      "DebugName": "ガーゴイル",
+      "Enhance1": 3785,
+      "Enhance2": 3786,
+      "Enhance3": 3787,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 285,
+      "Name": 1,
+      "DebugName": "メツ　※王都",
+      "Enhance1": 3788,
+      "Enhance2": 3789,
+      "Enhance3": 3790,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 286,
+      "Name": 1,
+      "DebugName": "ゴウトＭ",
+      "Enhance1": 3791,
+      "Enhance2": 0,
+      "Enhance3": 0,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 287,
+      "Name": 1,
+      "DebugName": "ターキン（弓",
+      "Enhance1": 3792,
+      "Enhance2": 3793,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 288,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 0,
+      "Enhance2": 0,
+      "Enhance3": 0,
+      "ChangeAtr": 0
+    },
+    {
+      "$id": 289,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3802,
+      "Enhance2": 3803,
+      "Enhance3": 0,
+      "ChangeAtr": 3
+    },
+    {
+      "$id": 290,
+      "Name": 1,
+      "DebugName": "",
+      "Enhance1": 3794,
+      "Enhance2": 3795,
+      "Enhance3": 3796,
+      "ChangeAtr": 8
+    },
+    {
+      "$id": 291,
+      "Name": 1,
+      "DebugName": "ウニ",
+      "Enhance1": 3797,
+      "Enhance2": 3798,
+      "Enhance3": 3799,
+      "ChangeAtr": 1
+    },
+    {
+      "$id": 292,
+      "Name": 1,
+      "DebugName": "ウニみに",
+      "Enhance1": 3800,
+      "Enhance2": 3800,
+      "Enhance3": 0,
+      "ChangeAtr": 1
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schema": [
+    {
+      "name": "Name",
+      "type": 2
+    },
+    {
+      "name": "NormalProb",
+      "type": 1
+    },
+    {
+      "name": "AngryProb",
+      "type": 1
+    },
+    {
+      "name": "AttackBonus",
+      "type": 1
+    },
+    {
+      "name": "RecastBonus",
+      "type": 1
+    },
+    {
+      "name": "ReduceElmCombo",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Name": 57,
+      "NormalProb": 50,
+      "AngryProb": 100,
+      "AttackBonus": 20,
+      "RecastBonus": 15,
+      "ReduceElmCombo": 300
+    },
+    {
+      "$id": 2,
+      "Name": 57,
+      "NormalProb": 50,
+      "AngryProb": 100,
+      "AttackBonus": 25,
+      "RecastBonus": 20,
+      "ReduceElmCombo": 450
+    },
+    {
+      "$id": 3,
+      "Name": 57,
+      "NormalProb": 50,
+      "AngryProb": 100,
+      "AttackBonus": 30,
+      "RecastBonus": 25,
+      "ReduceElmCombo": 600
+    },
+    {
+      "$id": 4,
+      "Name": 57,
+      "NormalProb": 30,
+      "AngryProb": 100,
+      "AttackBonus": 15,
+      "RecastBonus": 10,
+      "ReduceElmCombo": 300
+    },
+    {
+      "$id": 5,
+      "Name": 57,
+      "NormalProb": 30,
+      "AngryProb": 100,
+      "AttackBonus": 20,
+      "RecastBonus": 15,
+      "ReduceElmCombo": 450
+    },
+    {
+      "$id": 6,
+      "Name": 57,
+      "NormalProb": 30,
+      "AngryProb": 100,
+      "AttackBonus": 30,
+      "RecastBonus": 20,
+      "ReduceElmCombo": 600
+    },
+    {
+      "$id": 7,
+      "Name": 57,
+      "NormalProb": 0,
+      "AngryProb": 100,
+      "AttackBonus": 5,
+      "RecastBonus": 10,
+      "ReduceElmCombo": 600
+    },
+    {
+      "$id": 8,
+      "Name": 57,
+      "NormalProb": 5,
+      "AngryProb": 10,
+      "AttackBonus": 30,
+      "RecastBonus": 10,
+      "ReduceElmCombo": 600
+    },
+    {
+      "$id": 9,
+      "Name": 57,
+      "NormalProb": 0,
+      "AngryProb": 50,
+      "AttackBonus": 20,
+      "RecastBonus": 10,
+      "ReduceElmCombo": 300
+    }
+  ]
+}

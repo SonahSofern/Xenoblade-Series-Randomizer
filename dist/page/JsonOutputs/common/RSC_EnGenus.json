@@ -1,0 +1,897 @@
+{
+  "schema": [
+    {
+      "name": "NAME",
+      "type": 1
+    },
+    {
+      "name": "CAPTION",
+      "type": 1
+    },
+    {
+      "name": "Flag",
+      "type": 1,
+      "flags": [
+        {
+          "label": "gimmicktype",
+          "mask": 1,
+          "index": 0
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "NAME": 1,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 2,
+      "NAME": 2,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 3,
+      "NAME": 3,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 4,
+      "NAME": 4,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 1
+      }
+    },
+    {
+      "$id": 5,
+      "NAME": 5,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 1
+      }
+    },
+    {
+      "$id": 6,
+      "NAME": 6,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 1
+      }
+    },
+    {
+      "$id": 7,
+      "NAME": 7,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 1
+      }
+    },
+    {
+      "$id": 8,
+      "NAME": 8,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 9,
+      "NAME": 9,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 10,
+      "NAME": 10,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 1
+      }
+    },
+    {
+      "$id": 11,
+      "NAME": 11,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 1
+      }
+    },
+    {
+      "$id": 12,
+      "NAME": 12,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 13,
+      "NAME": 13,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 1
+      }
+    },
+    {
+      "$id": 14,
+      "NAME": 14,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 15,
+      "NAME": 15,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 16,
+      "NAME": 16,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 17,
+      "NAME": 17,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 18,
+      "NAME": 18,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 19,
+      "NAME": 19,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 20,
+      "NAME": 20,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 21,
+      "NAME": 21,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 22,
+      "NAME": 22,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 23,
+      "NAME": 23,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 24,
+      "NAME": 24,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 25,
+      "NAME": 25,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 26,
+      "NAME": 26,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 27,
+      "NAME": 27,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 28,
+      "NAME": 28,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 29,
+      "NAME": 29,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 30,
+      "NAME": 30,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 31,
+      "NAME": 31,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 32,
+      "NAME": 32,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 33,
+      "NAME": 33,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 34,
+      "NAME": 34,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 35,
+      "NAME": 35,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 36,
+      "NAME": 36,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 37,
+      "NAME": 37,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 38,
+      "NAME": 38,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 39,
+      "NAME": 39,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 40,
+      "NAME": 40,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 41,
+      "NAME": 41,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 42,
+      "NAME": 42,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 43,
+      "NAME": 43,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 44,
+      "NAME": 44,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 45,
+      "NAME": 45,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 46,
+      "NAME": 46,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 47,
+      "NAME": 47,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 48,
+      "NAME": 48,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 49,
+      "NAME": 49,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 50,
+      "NAME": 50,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 51,
+      "NAME": 51,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 52,
+      "NAME": 52,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 53,
+      "NAME": 53,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 54,
+      "NAME": 54,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 55,
+      "NAME": 55,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 56,
+      "NAME": 56,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 57,
+      "NAME": 57,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 58,
+      "NAME": 58,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 59,
+      "NAME": 59,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 60,
+      "NAME": 60,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 61,
+      "NAME": 61,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 62,
+      "NAME": 62,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 63,
+      "NAME": 63,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 64,
+      "NAME": 64,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 65,
+      "NAME": 65,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 66,
+      "NAME": 66,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 67,
+      "NAME": 67,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 68,
+      "NAME": 68,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 69,
+      "NAME": 69,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 70,
+      "NAME": 70,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 71,
+      "NAME": 71,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 72,
+      "NAME": 72,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 73,
+      "NAME": 73,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 74,
+      "NAME": 74,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 75,
+      "NAME": 75,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 76,
+      "NAME": 76,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 77,
+      "NAME": 77,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 78,
+      "NAME": 78,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 79,
+      "NAME": 79,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 80,
+      "NAME": 80,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 81,
+      "NAME": 81,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 82,
+      "NAME": 82,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 1
+      }
+    },
+    {
+      "$id": 83,
+      "NAME": 83,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 84,
+      "NAME": 84,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 85,
+      "NAME": 85,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 86,
+      "NAME": 86,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 87,
+      "NAME": 87,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 88,
+      "NAME": 88,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 89,
+      "NAME": 89,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 90,
+      "NAME": 90,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 91,
+      "NAME": 91,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 92,
+      "NAME": 92,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 93,
+      "NAME": 93,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 94,
+      "NAME": 94,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 95,
+      "NAME": 95,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 96,
+      "NAME": 96,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 97,
+      "NAME": 97,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 98,
+      "NAME": 98,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 1
+      }
+    },
+    {
+      "$id": 99,
+      "NAME": 99,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 1
+      }
+    },
+    {
+      "$id": 100,
+      "NAME": 100,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 101,
+      "NAME": 101,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 102,
+      "NAME": 102,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 103,
+      "NAME": 103,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 104,
+      "NAME": 104,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 105,
+      "NAME": 105,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 106,
+      "NAME": 106,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 107,
+      "NAME": 107,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 1
+      }
+    },
+    {
+      "$id": 108,
+      "NAME": 108,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 0
+      }
+    },
+    {
+      "$id": 109,
+      "NAME": 12,
+      "CAPTION": 0,
+      "Flag": {
+        "gimmicktype": 1
+      }
+    }
+  ]
+}

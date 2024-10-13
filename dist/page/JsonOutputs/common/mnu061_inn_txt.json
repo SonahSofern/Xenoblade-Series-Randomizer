@@ -1,0 +1,349 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_title",
+      "text_id": 577
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_mode_select_index",
+      "text_id": 577
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_mode_select@01",
+      "text_id": 587
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_mode_select@02",
+      "text_id": 587
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_mode_select@03",
+      "text_id": 588
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_mode_select@04",
+      "text_id": 589
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_lv_select_index",
+      "text_id": 591
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_lv_select_num@01",
+      "text_id": 592
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_lv_select_num@02",
+      "text_id": 592
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_lv_select_num@03",
+      "text_id": 592
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_lv_select_info_index@01",
+      "text_id": 593
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_lv_select_info_num@01",
+      "text_id": 599
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_lv_select_info_index@02",
+      "text_id": 594
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_lv_select_info_num@02",
+      "text_id": 599
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_lv_select_info_index@03",
+      "text_id": 595
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_lv_select_info_num@03",
+      "text_id": 599
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_dr_name@01",
+      "text_id": 576
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_dr_lv@01",
+      "text_id": 585
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_dr_lv_up@01",
+      "text_id": 578
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_dr_hp_index@01",
+      "text_id": 583
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_dr_hp_num@01",
+      "text_id": 584
+    },
+    {
+      "$id": 22,
+      "obj_name": "TXT_dr_hp_slash@01",
+      "text_id": 586
+    },
+    {
+      "$id": 23,
+      "obj_name": "TXT_dr_hpmax@01",
+      "text_id": 584
+    },
+    {
+      "$id": 24,
+      "obj_name": "TXT_dr_exp@01",
+      "text_id": 582
+    },
+    {
+      "$id": 25,
+      "obj_name": "TXT_dr_exp_next@01",
+      "text_id": 582
+    },
+    {
+      "$id": 26,
+      "obj_name": "TXT_dr_exp_total@01",
+      "text_id": 582
+    },
+    {
+      "$id": 27,
+      "obj_name": "TXT_dr_name@02",
+      "text_id": 576
+    },
+    {
+      "$id": 28,
+      "obj_name": "TXT_dr_lv@02",
+      "text_id": 585
+    },
+    {
+      "$id": 29,
+      "obj_name": "TXT_dr_lv_up@02",
+      "text_id": 578
+    },
+    {
+      "$id": 30,
+      "obj_name": "TXT_dr_hp_index@02",
+      "text_id": 583
+    },
+    {
+      "$id": 31,
+      "obj_name": "TXT_dr_hp_num@02",
+      "text_id": 584
+    },
+    {
+      "$id": 32,
+      "obj_name": "TXT_dr_hp_slash@02",
+      "text_id": 586
+    },
+    {
+      "$id": 33,
+      "obj_name": "TXT_dr_hpmax@02",
+      "text_id": 584
+    },
+    {
+      "$id": 34,
+      "obj_name": "TXT_dr_exp@02",
+      "text_id": 582
+    },
+    {
+      "$id": 35,
+      "obj_name": "TXT_dr_exp_next@02",
+      "text_id": 582
+    },
+    {
+      "$id": 36,
+      "obj_name": "TXT_dr_exp_total@02",
+      "text_id": 582
+    },
+    {
+      "$id": 37,
+      "obj_name": "TXT_dr_name@03",
+      "text_id": 576
+    },
+    {
+      "$id": 38,
+      "obj_name": "TXT_dr_lv@03",
+      "text_id": 585
+    },
+    {
+      "$id": 39,
+      "obj_name": "TXT_dr_lv_up@03",
+      "text_id": 578
+    },
+    {
+      "$id": 40,
+      "obj_name": "TXT_dr_hp_index@03",
+      "text_id": 583
+    },
+    {
+      "$id": 41,
+      "obj_name": "TXT_dr_hp_num@03",
+      "text_id": 584
+    },
+    {
+      "$id": 42,
+      "obj_name": "TXT_dr_hp_slash@03",
+      "text_id": 586
+    },
+    {
+      "$id": 43,
+      "obj_name": "TXT_dr_hpmax@03",
+      "text_id": 584
+    },
+    {
+      "$id": 44,
+      "obj_name": "TXT_dr_exp@03",
+      "text_id": 582
+    },
+    {
+      "$id": 45,
+      "obj_name": "TXT_dr_exp_next@03",
+      "text_id": 582
+    },
+    {
+      "$id": 46,
+      "obj_name": "TXT_dr_exp_total@03",
+      "text_id": 582
+    },
+    {
+      "$id": 47,
+      "obj_name": "TXT_dr_name@04",
+      "text_id": 576
+    },
+    {
+      "$id": 48,
+      "obj_name": "TXT_dr_lv@04",
+      "text_id": 585
+    },
+    {
+      "$id": 49,
+      "obj_name": "TXT_dr_lv_up@04",
+      "text_id": 578
+    },
+    {
+      "$id": 50,
+      "obj_name": "TXT_dr_hp_index@04",
+      "text_id": 583
+    },
+    {
+      "$id": 51,
+      "obj_name": "TXT_dr_hp_num@04",
+      "text_id": 584
+    },
+    {
+      "$id": 52,
+      "obj_name": "TXT_dr_hp_slash@04",
+      "text_id": 586
+    },
+    {
+      "$id": 53,
+      "obj_name": "TXT_dr_hpmax@04",
+      "text_id": 584
+    },
+    {
+      "$id": 54,
+      "obj_name": "TXT_dr_exp@04",
+      "text_id": 582
+    },
+    {
+      "$id": 55,
+      "obj_name": "TXT_dr_exp_next@04",
+      "text_id": 582
+    },
+    {
+      "$id": 56,
+      "obj_name": "TXT_dr_exp_total@04",
+      "text_id": 582
+    },
+    {
+      "$id": 57,
+      "obj_name": "TXT_dr_name@05",
+      "text_id": 576
+    },
+    {
+      "$id": 58,
+      "obj_name": "TXT_dr_lv@05",
+      "text_id": 585
+    },
+    {
+      "$id": 59,
+      "obj_name": "TXT_dr_lv_up@05",
+      "text_id": 578
+    },
+    {
+      "$id": 60,
+      "obj_name": "TXT_dr_hp_index@05",
+      "text_id": 583
+    },
+    {
+      "$id": 61,
+      "obj_name": "TXT_dr_hp_num@05",
+      "text_id": 584
+    },
+    {
+      "$id": 62,
+      "obj_name": "TXT_dr_hp_slash@05",
+      "text_id": 586
+    },
+    {
+      "$id": 63,
+      "obj_name": "TXT_dr_hpmax@05",
+      "text_id": 584
+    },
+    {
+      "$id": 64,
+      "obj_name": "TXT_dr_exp@05",
+      "text_id": 582
+    },
+    {
+      "$id": 65,
+      "obj_name": "TXT_dr_exp_next@05",
+      "text_id": 582
+    },
+    {
+      "$id": 66,
+      "obj_name": "TXT_dr_exp_total@05",
+      "text_id": 582
+    },
+    {
+      "$id": 67,
+      "obj_name": "TXT_lv_up_caption",
+      "text_id": 600
+    }
+  ]
+}

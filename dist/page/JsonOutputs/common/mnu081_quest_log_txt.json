@@ -1,0 +1,114 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_title",
+      "text_id": 1144
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_title_sub_scenario",
+      "text_id": 1145
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_title_sub_normal",
+      "text_id": 1146
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_order",
+      "text_id": 1147
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_log_index@01",
+      "text_id": 1227
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_log_index@02",
+      "text_id": 1227
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_log_info_to_detail",
+      "text_id": 1229
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_log_info_task",
+      "text_id": 1230
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_log_info_task_item",
+      "text_id": 1231
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_log_info_task_item_max",
+      "text_id": 1232
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_log_info_task_item_num",
+      "text_id": 1232
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_log_info_task_item_slash",
+      "text_id": 1233
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_log_info_task_page_max",
+      "text_id": 1234
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_log_info_task_page_num",
+      "text_id": 1234
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_log_info_task_page_slash",
+      "text_id": 1235
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_log_complete",
+      "text_id": 1236
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_complete",
+      "text_id": 1148
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_comp_ret_win_title",
+      "text_id": 1332
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_comp_ret_win_result",
+      "text_id": 1333
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_comp_ret_complete",
+      "text_id": 1360
+    }
+  ]
+}

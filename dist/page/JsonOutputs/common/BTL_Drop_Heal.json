@@ -1,0 +1,132 @@
+{
+  "schema": [
+    {
+      "name": "RatioDeath",
+      "type": 1
+    },
+    {
+      "name": "PotNumMin1",
+      "type": 1
+    },
+    {
+      "name": "PotNumMax1",
+      "type": 1
+    },
+    {
+      "name": "PotLvMin1",
+      "type": 1
+    },
+    {
+      "name": "PotLvMax1",
+      "type": 1
+    },
+    {
+      "name": "RatioStumbled",
+      "type": 1
+    },
+    {
+      "name": "PotNumMin2",
+      "type": 1
+    },
+    {
+      "name": "PotNumMax2",
+      "type": 1
+    },
+    {
+      "name": "PotLvMin2",
+      "type": 1
+    },
+    {
+      "name": "PotLvMax2",
+      "type": 1
+    },
+    {
+      "name": "RatioLaunch",
+      "type": 1
+    },
+    {
+      "name": "PotNumMin3",
+      "type": 1
+    },
+    {
+      "name": "PotNumMax3",
+      "type": 1
+    },
+    {
+      "name": "PotLvMin3",
+      "type": 1
+    },
+    {
+      "name": "PotLvMax3",
+      "type": 1
+    },
+    {
+      "name": "RatioStrike",
+      "type": 1
+    },
+    {
+      "name": "PotNumMin4",
+      "type": 1
+    },
+    {
+      "name": "PotNumMax4",
+      "type": 1
+    },
+    {
+      "name": "PotLvMin4",
+      "type": 1
+    },
+    {
+      "name": "PotLvMax4",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "RatioDeath": 0,
+      "PotNumMin1": 0,
+      "PotNumMax1": 0,
+      "PotLvMin1": 0,
+      "PotLvMax1": 0,
+      "RatioStumbled": 100,
+      "PotNumMin2": 1,
+      "PotNumMax2": 1,
+      "PotLvMin2": 2,
+      "PotLvMax2": 2,
+      "RatioLaunch": 100,
+      "PotNumMin3": 1,
+      "PotNumMax3": 1,
+      "PotLvMin3": 2,
+      "PotLvMax3": 2,
+      "RatioStrike": 100,
+      "PotNumMin4": 1,
+      "PotNumMax4": 1,
+      "PotLvMin4": 3,
+      "PotLvMax4": 3
+    },
+    {
+      "$id": 2,
+      "RatioDeath": 0,
+      "PotNumMin1": 0,
+      "PotNumMax1": 0,
+      "PotLvMin1": 0,
+      "PotLvMax1": 0,
+      "RatioStumbled": 100,
+      "PotNumMin2": 1,
+      "PotNumMax2": 1,
+      "PotLvMin2": 2,
+      "PotLvMax2": 2,
+      "RatioLaunch": 100,
+      "PotNumMin3": 1,
+      "PotNumMax3": 1,
+      "PotLvMin3": 2,
+      "PotLvMax3": 2,
+      "RatioStrike": 100,
+      "PotNumMin4": 1,
+      "PotNumMax4": 1,
+      "PotLvMin4": 2,
+      "PotLvMax4": 3
+    }
+  ]
+}

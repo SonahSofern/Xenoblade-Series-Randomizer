@@ -1,0 +1,64 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_item01",
+      "text_id": 16
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_item02",
+      "text_id": 16
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_item03",
+      "text_id": 16
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_item04",
+      "text_id": 16
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_item05",
+      "text_id": 16
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_item06",
+      "text_id": 16
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_item07",
+      "text_id": 16
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_item08",
+      "text_id": 16
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_title01",
+      "text_id": 176
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_title02",
+      "text_id": 177
+    }
+  ]
+}

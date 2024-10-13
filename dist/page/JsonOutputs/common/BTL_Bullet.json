@@ -1,0 +1,1989 @@
+{
+  "schema": [
+    {
+      "name": "MoveType",
+      "type": 1
+    },
+    {
+      "name": "SpdFirst",
+      "type": 2
+    },
+    {
+      "name": "SpdLast",
+      "type": 2
+    },
+    {
+      "name": "AclStart",
+      "type": 2
+    },
+    {
+      "name": "AclEnd",
+      "type": 2
+    },
+    {
+      "name": "ExpNum",
+      "type": 1
+    },
+    {
+      "name": "ExpDelay",
+      "type": 1
+    },
+    {
+      "name": "BltMaxAng",
+      "type": 1
+    },
+    {
+      "name": "Flag",
+      "type": 1,
+      "flags": [
+        {
+          "label": "Ball",
+          "mask": 1,
+          "index": 0
+        },
+        {
+          "label": "Pierce",
+          "mask": 2,
+          "index": 1
+        }
+      ]
+    },
+    {
+      "name": "ReboundDir",
+      "type": 1
+    },
+    {
+      "name": "UpDist",
+      "type": 1
+    },
+    {
+      "name": "AddAtkNum",
+      "type": 1
+    },
+    {
+      "name": "AddAtkDelay",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "MoveType": 1,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 2,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 3,
+      "MoveType": 2,
+      "SpdFirst": 30,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 30,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 4,
+      "MoveType": 2,
+      "SpdFirst": 80,
+      "SpdLast": 80,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 30,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 5,
+      "MoveType": 2,
+      "SpdFirst": 0,
+      "SpdLast": 60,
+      "AclStart": 16,
+      "AclEnd": 26,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 6,
+      "MoveType": 2,
+      "SpdFirst": 30,
+      "SpdLast": 80,
+      "AclStart": 0,
+      "AclEnd": 30,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 7,
+      "MoveType": 2,
+      "SpdFirst": 30,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 90,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 8,
+      "MoveType": 2,
+      "SpdFirst": 55,
+      "SpdLast": 35,
+      "AclStart": 0,
+      "AclEnd": 45,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 9,
+      "MoveType": 0,
+      "SpdFirst": 120,
+      "SpdLast": 120,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 60,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 10,
+      "MoveType": 2,
+      "SpdFirst": 0,
+      "SpdLast": 80,
+      "AclStart": 70,
+      "AclEnd": 80,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 11,
+      "MoveType": 2,
+      "SpdFirst": 0,
+      "SpdLast": 80,
+      "AclStart": 70,
+      "AclEnd": 80,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 12,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 13,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 14,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 15,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 16,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 17,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 18,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 19,
+      "MoveType": 2,
+      "SpdFirst": 30,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 20,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 21,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 22,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 23,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 24,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 25,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 26,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 27,
+      "MoveType": 2,
+      "SpdFirst": 80,
+      "SpdLast": 80,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 28,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 29,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 30,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 31,
+      "MoveType": 2,
+      "SpdFirst": 80,
+      "SpdLast": 80,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 32,
+      "MoveType": 2,
+      "SpdFirst": 80,
+      "SpdLast": 80,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 33,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 34,
+      "MoveType": 2,
+      "SpdFirst": 80,
+      "SpdLast": 80,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 35,
+      "MoveType": 2,
+      "SpdFirst": 80,
+      "SpdLast": 80,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 36,
+      "MoveType": 0,
+      "SpdFirst": 300,
+      "SpdLast": 300,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 37,
+      "MoveType": 2,
+      "SpdFirst": 80,
+      "SpdLast": 80,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 38,
+      "MoveType": 0,
+      "SpdFirst": 150,
+      "SpdLast": 180,
+      "AclStart": 0,
+      "AclEnd": 90,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 10,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 39,
+      "MoveType": 0,
+      "SpdFirst": 150,
+      "SpdLast": 180,
+      "AclStart": 0,
+      "AclEnd": 30,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 40,
+      "MoveType": 2,
+      "SpdFirst": 40,
+      "SpdLast": 80,
+      "AclStart": 0,
+      "AclEnd": 60,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 41,
+      "MoveType": 2,
+      "SpdFirst": 40,
+      "SpdLast": 80,
+      "AclStart": 0,
+      "AclEnd": 60,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 42,
+      "MoveType": 1,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 43,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 180,
+      "Flag": {
+        "Ball": 1,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 44,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 180,
+      "Flag": {
+        "Ball": 1,
+        "Pierce": 0
+      },
+      "ReboundDir": 1,
+      "UpDist": 3,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 45,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 180,
+      "Flag": {
+        "Ball": 1,
+        "Pierce": 1
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 46,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 180,
+      "Flag": {
+        "Ball": 1,
+        "Pierce": 0
+      },
+      "ReboundDir": 2,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 47,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 180,
+      "Flag": {
+        "Ball": 1,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 3,
+      "AddAtkDelay": 5
+    },
+    {
+      "$id": 48,
+      "MoveType": 1,
+      "SpdFirst": 50,
+      "SpdLast": 50,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 180,
+      "Flag": {
+        "Ball": 1,
+        "Pierce": 0
+      },
+      "ReboundDir": 1,
+      "UpDist": 3,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 49,
+      "MoveType": 0,
+      "SpdFirst": 150,
+      "SpdLast": 150,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 180,
+      "Flag": {
+        "Ball": 1,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 2,
+      "AddAtkDelay": 6
+    },
+    {
+      "$id": 50,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 180,
+      "Flag": {
+        "Ball": 1,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 6,
+      "AddAtkDelay": 8
+    },
+    {
+      "$id": 51,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 52,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 53,
+      "MoveType": 0,
+      "SpdFirst": 0,
+      "SpdLast": 200,
+      "AclStart": 26,
+      "AclEnd": 90,
+      "ExpNum": 0,
+      "ExpDelay": 0,
+      "BltMaxAng": 20,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 54,
+      "MoveType": 0,
+      "SpdFirst": 80,
+      "SpdLast": 80,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 55,
+      "MoveType": 0,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 56,
+      "MoveType": 0,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 57,
+      "MoveType": 0,
+      "SpdFirst": 50,
+      "SpdLast": 50,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 58,
+      "MoveType": 0,
+      "SpdFirst": 50,
+      "SpdLast": 50,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 59,
+      "MoveType": 2,
+      "SpdFirst": 50,
+      "SpdLast": 50,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 60,
+      "MoveType": 1,
+      "SpdFirst": 50,
+      "SpdLast": 50,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 61,
+      "MoveType": 2,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 62,
+      "MoveType": 2,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 63,
+      "MoveType": 2,
+      "SpdFirst": 40,
+      "SpdLast": 40,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 64,
+      "MoveType": 1,
+      "SpdFirst": 30,
+      "SpdLast": 30,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 180,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 65,
+      "MoveType": 0,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 66,
+      "MoveType": 2,
+      "SpdFirst": 50,
+      "SpdLast": 50,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 67,
+      "MoveType": 1,
+      "SpdFirst": 70,
+      "SpdLast": 70,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 68,
+      "MoveType": 1,
+      "SpdFirst": 70,
+      "SpdLast": 70,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 69,
+      "MoveType": 0,
+      "SpdFirst": 120,
+      "SpdLast": 120,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 70,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 71,
+      "MoveType": 2,
+      "SpdFirst": 50,
+      "SpdLast": 50,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 72,
+      "MoveType": 2,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 73,
+      "MoveType": 2,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 74,
+      "MoveType": 2,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 75,
+      "MoveType": 0,
+      "SpdFirst": 80,
+      "SpdLast": 80,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 76,
+      "MoveType": 0,
+      "SpdFirst": 50,
+      "SpdLast": 50,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 90,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 77,
+      "MoveType": 0,
+      "SpdFirst": 50,
+      "SpdLast": 50,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 90,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 78,
+      "MoveType": 1,
+      "SpdFirst": 40,
+      "SpdLast": 40,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 180,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 79,
+      "MoveType": 0,
+      "SpdFirst": 70,
+      "SpdLast": 70,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 80,
+      "MoveType": 2,
+      "SpdFirst": 20,
+      "SpdLast": 40,
+      "AclStart": 0,
+      "AclEnd": 8,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 45,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 81,
+      "MoveType": 0,
+      "SpdFirst": 50,
+      "SpdLast": 50,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 82,
+      "MoveType": 2,
+      "SpdFirst": 50,
+      "SpdLast": 50,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 83,
+      "MoveType": 2,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 8,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 84,
+      "MoveType": 2,
+      "SpdFirst": 45,
+      "SpdLast": 45,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 85,
+      "MoveType": 2,
+      "SpdFirst": 70,
+      "SpdLast": 70,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 86,
+      "MoveType": 2,
+      "SpdFirst": 50,
+      "SpdLast": 50,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 87,
+      "MoveType": 2,
+      "SpdFirst": 50,
+      "SpdLast": 50,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 88,
+      "MoveType": 2,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 89,
+      "MoveType": 0,
+      "SpdFirst": 80,
+      "SpdLast": 80,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 90,
+      "MoveType": 0,
+      "SpdFirst": 80,
+      "SpdLast": 80,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 91,
+      "MoveType": 2,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 92,
+      "MoveType": 2,
+      "SpdFirst": 40,
+      "SpdLast": 40,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 93,
+      "MoveType": 2,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 94,
+      "MoveType": 2,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 95,
+      "MoveType": 2,
+      "SpdFirst": 70,
+      "SpdLast": 70,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 96,
+      "MoveType": 2,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 97,
+      "MoveType": 2,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 98,
+      "MoveType": 2,
+      "SpdFirst": 400,
+      "SpdLast": 400,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 99,
+      "MoveType": 2,
+      "SpdFirst": 400,
+      "SpdLast": 400,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 100,
+      "MoveType": 0,
+      "SpdFirst": 60,
+      "SpdLast": 60,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 0,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    },
+    {
+      "$id": 101,
+      "MoveType": 0,
+      "SpdFirst": 100,
+      "SpdLast": 100,
+      "AclStart": 0,
+      "AclEnd": 0,
+      "ExpNum": 1,
+      "ExpDelay": 0,
+      "BltMaxAng": 1,
+      "Flag": {
+        "Ball": 0,
+        "Pierce": 0
+      },
+      "ReboundDir": 0,
+      "UpDist": 0,
+      "AddAtkNum": 0,
+      "AddAtkDelay": 0
+    }
+  ]
+}

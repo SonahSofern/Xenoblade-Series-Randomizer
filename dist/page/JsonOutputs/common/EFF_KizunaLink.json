@@ -1,0 +1,194 @@
+{
+  "schema": [
+    {
+      "name": "WavePower",
+      "type": 5
+    },
+    {
+      "name": "WaveInterval",
+      "type": 5
+    },
+    {
+      "name": "WaveSpeed",
+      "type": 5
+    },
+    {
+      "name": "UTiling",
+      "type": 5
+    },
+    {
+      "name": "VTiling",
+      "type": 5
+    },
+    {
+      "name": "UScroll",
+      "type": 5
+    },
+    {
+      "name": "VScroll",
+      "type": 5
+    },
+    {
+      "name": "Bloom",
+      "type": 5
+    },
+    {
+      "name": "Red1",
+      "type": 1
+    },
+    {
+      "name": "Green1",
+      "type": 1
+    },
+    {
+      "name": "Blue1",
+      "type": 1
+    },
+    {
+      "name": "Alpha1",
+      "type": 1
+    },
+    {
+      "name": "Red2",
+      "type": 1
+    },
+    {
+      "name": "Green2",
+      "type": 1
+    },
+    {
+      "name": "Blue2",
+      "type": 1
+    },
+    {
+      "name": "Alpha2",
+      "type": 1
+    },
+    {
+      "name": "Texture",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "WavePower": 100,
+      "WaveInterval": 60,
+      "WaveSpeed": 100,
+      "UTiling": 100,
+      "VTiling": 7,
+      "UScroll": 6,
+      "VScroll": 6,
+      "Bloom": 80,
+      "Red1": 95,
+      "Green1": 123,
+      "Blue1": 230,
+      "Alpha1": 120,
+      "Red2": 58,
+      "Green2": 31,
+      "Blue2": 211,
+      "Alpha2": 0,
+      "Texture": "himo_06"
+    },
+    {
+      "$id": 2,
+      "WavePower": 120,
+      "WaveInterval": 60,
+      "WaveSpeed": 120,
+      "UTiling": 100,
+      "VTiling": 7,
+      "UScroll": 6,
+      "VScroll": 6,
+      "Bloom": 80,
+      "Red1": 111,
+      "Green1": 157,
+      "Blue1": 235,
+      "Alpha1": 140,
+      "Red2": 46,
+      "Green2": 49,
+      "Blue2": 211,
+      "Alpha2": 20,
+      "Texture": "himo_06"
+    },
+    {
+      "$id": 3,
+      "WavePower": 140,
+      "WaveInterval": 60,
+      "WaveSpeed": 140,
+      "UTiling": 100,
+      "VTiling": 7,
+      "UScroll": 6,
+      "VScroll": 6,
+      "Bloom": 80,
+      "Red1": 127,
+      "Green1": 188,
+      "Blue1": 241,
+      "Alpha1": 160,
+      "Red2": 61,
+      "Green2": 89,
+      "Blue2": 213,
+      "Alpha2": 40,
+      "Texture": "himo_06"
+    },
+    {
+      "$id": 4,
+      "WavePower": 200,
+      "WaveInterval": 60,
+      "WaveSpeed": 160,
+      "UTiling": 100,
+      "VTiling": 7,
+      "UScroll": 6,
+      "VScroll": 6,
+      "Bloom": 80,
+      "Red1": 141,
+      "Green1": 216,
+      "Blue1": 248,
+      "Alpha1": 180,
+      "Red2": 73,
+      "Green2": 122,
+      "Blue2": 217,
+      "Alpha2": 60,
+      "Texture": "himo_06"
+    },
+    {
+      "$id": 5,
+      "WavePower": 300,
+      "WaveInterval": 60,
+      "WaveSpeed": 200,
+      "UTiling": 100,
+      "VTiling": 7,
+      "UScroll": 6,
+      "VScroll": 6,
+      "Bloom": 80,
+      "Red1": 153,
+      "Green1": 242,
+      "Blue1": 255,
+      "Alpha1": 200,
+      "Red2": 84,
+      "Green2": 154,
+      "Blue2": 220,
+      "Alpha2": 80,
+      "Texture": "himo_06"
+    },
+    {
+      "$id": 6,
+      "WavePower": 400,
+      "WaveInterval": 60,
+      "WaveSpeed": 300,
+      "UTiling": 100,
+      "VTiling": 7,
+      "UScroll": 6,
+      "VScroll": 6,
+      "Bloom": 80,
+      "Red1": 255,
+      "Green1": 251,
+      "Blue1": 208,
+      "Alpha1": 255,
+      "Red2": 255,
+      "Green2": 217,
+      "Blue2": 139,
+      "Alpha2": 200,
+      "Texture": "himo_06"
+    }
+  ]
+}

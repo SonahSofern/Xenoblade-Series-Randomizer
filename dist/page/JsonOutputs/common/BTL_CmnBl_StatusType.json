@@ -1,0 +1,114 @@
+{
+  "schema": [
+    {
+      "name": "WpnType",
+      "type": 1
+    },
+    {
+      "name": "Status01",
+      "type": 1
+    },
+    {
+      "name": "Status02",
+      "type": 1
+    },
+    {
+      "name": "Status03",
+      "type": 1
+    },
+    {
+      "name": "Status04",
+      "type": 1
+    },
+    {
+      "name": "Status05",
+      "type": 1
+    },
+    {
+      "name": "Status06",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "WpnType": 3,
+      "Status01": 5,
+      "Status02": 10,
+      "Status03": 40,
+      "Status04": 20,
+      "Status05": 20,
+      "Status06": 5
+    },
+    {
+      "$id": 2,
+      "WpnType": 10,
+      "Status01": 35,
+      "Status02": 40,
+      "Status03": 10,
+      "Status04": 5,
+      "Status05": 5,
+      "Status06": 5
+    },
+    {
+      "$id": 3,
+      "WpnType": 11,
+      "Status01": 5,
+      "Status02": 20,
+      "Status03": 20,
+      "Status04": 40,
+      "Status05": 10,
+      "Status06": 5
+    },
+    {
+      "$id": 4,
+      "WpnType": 12,
+      "Status01": 5,
+      "Status02": 25,
+      "Status03": 40,
+      "Status04": 20,
+      "Status05": 5,
+      "Status06": 5
+    },
+    {
+      "$id": 5,
+      "WpnType": 13,
+      "Status01": 50,
+      "Status02": 15,
+      "Status03": 15,
+      "Status04": 10,
+      "Status05": 5,
+      "Status06": 5
+    },
+    {
+      "$id": 6,
+      "WpnType": 14,
+      "Status01": 10,
+      "Status02": 20,
+      "Status03": 10,
+      "Status04": 15,
+      "Status05": 40,
+      "Status06": 5
+    },
+    {
+      "$id": 7,
+      "WpnType": 15,
+      "Status01": 25,
+      "Status02": 5,
+      "Status03": 40,
+      "Status04": 15,
+      "Status05": 10,
+      "Status06": 5
+    },
+    {
+      "$id": 8,
+      "WpnType": 16,
+      "Status01": 10,
+      "Status02": 20,
+      "Status03": 20,
+      "Status04": 25,
+      "Status05": 20,
+      "Status06": 5
+    }
+  ]
+}

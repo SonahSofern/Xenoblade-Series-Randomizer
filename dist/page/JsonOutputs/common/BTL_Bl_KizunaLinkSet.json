@@ -1,0 +1,802 @@
+{
+  "schema": [
+    {
+      "name": "KizunaLink1",
+      "type": 2
+    },
+    {
+      "name": "KizunaLink2",
+      "type": 2
+    },
+    {
+      "name": "LinkChType",
+      "type": 2
+    },
+    {
+      "name": "LinkChNum",
+      "type": 2
+    },
+    {
+      "name": "VoiceID",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "KizunaLink1": 1,
+      "KizunaLink2": 2,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 2,
+      "KizunaLink1": 3,
+      "KizunaLink2": 4,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 3,
+      "KizunaLink1": 5,
+      "KizunaLink2": 6,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 4,
+      "KizunaLink1": 7,
+      "KizunaLink2": 8,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 5,
+      "KizunaLink1": 9,
+      "KizunaLink2": 10,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 6,
+      "KizunaLink1": 11,
+      "KizunaLink2": 12,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 7,
+      "KizunaLink1": 13,
+      "KizunaLink2": 14,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 8,
+      "KizunaLink1": 15,
+      "KizunaLink2": 16,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 9,
+      "KizunaLink1": 17,
+      "KizunaLink2": 18,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 10,
+      "KizunaLink1": 19,
+      "KizunaLink2": 20,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 11,
+      "KizunaLink1": 21,
+      "KizunaLink2": 22,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 12,
+      "KizunaLink1": 23,
+      "KizunaLink2": 24,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 13,
+      "KizunaLink1": 25,
+      "KizunaLink2": 26,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 14,
+      "KizunaLink1": 27,
+      "KizunaLink2": 28,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 15,
+      "KizunaLink1": 29,
+      "KizunaLink2": 30,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 16,
+      "KizunaLink1": 31,
+      "KizunaLink2": 32,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 17,
+      "KizunaLink1": 33,
+      "KizunaLink2": 34,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 18,
+      "KizunaLink1": 35,
+      "KizunaLink2": 36,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 19,
+      "KizunaLink1": 37,
+      "KizunaLink2": 38,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 20,
+      "KizunaLink1": 39,
+      "KizunaLink2": 40,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 21,
+      "KizunaLink1": 41,
+      "KizunaLink2": 42,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 22,
+      "KizunaLink1": 43,
+      "KizunaLink2": 44,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 23,
+      "KizunaLink1": 45,
+      "KizunaLink2": 46,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 24,
+      "KizunaLink1": 47,
+      "KizunaLink2": 48,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 25,
+      "KizunaLink1": 49,
+      "KizunaLink2": 50,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 26,
+      "KizunaLink1": 51,
+      "KizunaLink2": 52,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 27,
+      "KizunaLink1": 53,
+      "KizunaLink2": 54,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 28,
+      "KizunaLink1": 55,
+      "KizunaLink2": 56,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 29,
+      "KizunaLink1": 57,
+      "KizunaLink2": 58,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 30,
+      "KizunaLink1": 59,
+      "KizunaLink2": 60,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 31,
+      "KizunaLink1": 61,
+      "KizunaLink2": 62,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 32,
+      "KizunaLink1": 63,
+      "KizunaLink2": 64,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 33,
+      "KizunaLink1": 65,
+      "KizunaLink2": 66,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 34,
+      "KizunaLink1": 67,
+      "KizunaLink2": 68,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 35,
+      "KizunaLink1": 69,
+      "KizunaLink2": 70,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 36,
+      "KizunaLink1": 71,
+      "KizunaLink2": 72,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 37,
+      "KizunaLink1": 73,
+      "KizunaLink2": 74,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 38,
+      "KizunaLink1": 75,
+      "KizunaLink2": 76,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 39,
+      "KizunaLink1": 77,
+      "KizunaLink2": 78,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 40,
+      "KizunaLink1": 79,
+      "KizunaLink2": 80,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 41,
+      "KizunaLink1": 81,
+      "KizunaLink2": 82,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 42,
+      "KizunaLink1": 83,
+      "KizunaLink2": 84,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 43,
+      "KizunaLink1": 85,
+      "KizunaLink2": 86,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 44,
+      "KizunaLink1": 87,
+      "KizunaLink2": 88,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 45,
+      "KizunaLink1": 89,
+      "KizunaLink2": 90,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 46,
+      "KizunaLink1": 91,
+      "KizunaLink2": 92,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 47,
+      "KizunaLink1": 94,
+      "KizunaLink2": 95,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 48,
+      "KizunaLink1": 96,
+      "KizunaLink2": 97,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 49,
+      "KizunaLink1": 93,
+      "KizunaLink2": 93,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 50,
+      "KizunaLink1": 98,
+      "KizunaLink2": 99,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 61
+    },
+    {
+      "$id": 51,
+      "KizunaLink1": 98,
+      "KizunaLink2": 99,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 62
+    },
+    {
+      "$id": 52,
+      "KizunaLink1": 100,
+      "KizunaLink2": 101,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 63
+    },
+    {
+      "$id": 53,
+      "KizunaLink1": 100,
+      "KizunaLink2": 101,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 64
+    },
+    {
+      "$id": 54,
+      "KizunaLink1": 102,
+      "KizunaLink2": 103,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 65
+    },
+    {
+      "$id": 55,
+      "KizunaLink1": 102,
+      "KizunaLink2": 103,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 66
+    },
+    {
+      "$id": 56,
+      "KizunaLink1": 104,
+      "KizunaLink2": 105,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 67
+    },
+    {
+      "$id": 57,
+      "KizunaLink1": 104,
+      "KizunaLink2": 105,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 68
+    },
+    {
+      "$id": 58,
+      "KizunaLink1": 106,
+      "KizunaLink2": 107,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 69
+    },
+    {
+      "$id": 59,
+      "KizunaLink1": 106,
+      "KizunaLink2": 107,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 70
+    },
+    {
+      "$id": 60,
+      "KizunaLink1": 108,
+      "KizunaLink2": 109,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 71
+    },
+    {
+      "$id": 61,
+      "KizunaLink1": 108,
+      "KizunaLink2": 109,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 72
+    },
+    {
+      "$id": 62,
+      "KizunaLink1": 110,
+      "KizunaLink2": 111,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 73
+    },
+    {
+      "$id": 63,
+      "KizunaLink1": 110,
+      "KizunaLink2": 111,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 74
+    },
+    {
+      "$id": 64,
+      "KizunaLink1": 112,
+      "KizunaLink2": 113,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 75
+    },
+    {
+      "$id": 65,
+      "KizunaLink1": 112,
+      "KizunaLink2": 113,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 76
+    },
+    {
+      "$id": 66,
+      "KizunaLink1": 114,
+      "KizunaLink2": 115,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 77
+    },
+    {
+      "$id": 67,
+      "KizunaLink1": 114,
+      "KizunaLink2": 115,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 78
+    },
+    {
+      "$id": 68,
+      "KizunaLink1": 116,
+      "KizunaLink2": 117,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 79
+    },
+    {
+      "$id": 69,
+      "KizunaLink1": 116,
+      "KizunaLink2": 117,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 80
+    },
+    {
+      "$id": 70,
+      "KizunaLink1": 118,
+      "KizunaLink2": 119,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 81
+    },
+    {
+      "$id": 71,
+      "KizunaLink1": 118,
+      "KizunaLink2": 119,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 82
+    },
+    {
+      "$id": 72,
+      "KizunaLink1": 120,
+      "KizunaLink2": 121,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 83
+    },
+    {
+      "$id": 73,
+      "KizunaLink1": 120,
+      "KizunaLink2": 121,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 84
+    },
+    {
+      "$id": 74,
+      "KizunaLink1": 122,
+      "KizunaLink2": 123,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 85
+    },
+    {
+      "$id": 75,
+      "KizunaLink1": 122,
+      "KizunaLink2": 123,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 86
+    },
+    {
+      "$id": 76,
+      "KizunaLink1": 124,
+      "KizunaLink2": 125,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 87
+    },
+    {
+      "$id": 77,
+      "KizunaLink1": 124,
+      "KizunaLink2": 125,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 88
+    },
+    {
+      "$id": 78,
+      "KizunaLink1": 126,
+      "KizunaLink2": 127,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 89
+    },
+    {
+      "$id": 79,
+      "KizunaLink1": 126,
+      "KizunaLink2": 127,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 90
+    },
+    {
+      "$id": 80,
+      "KizunaLink1": 128,
+      "KizunaLink2": 129,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 91
+    },
+    {
+      "$id": 81,
+      "KizunaLink1": 128,
+      "KizunaLink2": 129,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 92
+    },
+    {
+      "$id": 82,
+      "KizunaLink1": 130,
+      "KizunaLink2": 131,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 83,
+      "KizunaLink1": 132,
+      "KizunaLink2": 133,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 84,
+      "KizunaLink1": 134,
+      "KizunaLink2": 135,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 85,
+      "KizunaLink1": 136,
+      "KizunaLink2": 137,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 86,
+      "KizunaLink1": 138,
+      "KizunaLink2": 139,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 87,
+      "KizunaLink1": 140,
+      "KizunaLink2": 141,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 88,
+      "KizunaLink1": 142,
+      "KizunaLink2": 143,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 89,
+      "KizunaLink1": 144,
+      "KizunaLink2": 145,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 90,
+      "KizunaLink1": 146,
+      "KizunaLink2": 147,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 91,
+      "KizunaLink1": 148,
+      "KizunaLink2": 149,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 92,
+      "KizunaLink1": 150,
+      "KizunaLink2": 151,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 93,
+      "KizunaLink1": 152,
+      "KizunaLink2": 153,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 94,
+      "KizunaLink1": 154,
+      "KizunaLink2": 155,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 95,
+      "KizunaLink1": 156,
+      "KizunaLink2": 157,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    },
+    {
+      "$id": 96,
+      "KizunaLink1": 158,
+      "KizunaLink2": 159,
+      "LinkChType": 1,
+      "LinkChNum": 3,
+      "VoiceID": 0
+    },
+    {
+      "$id": 97,
+      "KizunaLink1": 160,
+      "KizunaLink2": 161,
+      "LinkChType": 1,
+      "LinkChNum": 5,
+      "VoiceID": 0
+    }
+  ]
+}

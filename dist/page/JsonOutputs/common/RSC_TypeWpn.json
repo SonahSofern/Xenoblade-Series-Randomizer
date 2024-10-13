@@ -1,0 +1,247 @@
+{
+  "schema": [
+    {
+      "name": "rex",
+      "type": 7
+    },
+    {
+      "name": "nia",
+      "type": 7
+    },
+    {
+      "name": "sieg",
+      "type": 7
+    },
+    {
+      "name": "tora",
+      "type": 7
+    },
+    {
+      "name": "vandamme",
+      "type": 7
+    },
+    {
+      "name": "melef",
+      "type": 7
+    },
+    {
+      "name": "sin",
+      "type": 7
+    },
+    {
+      "name": "metsu",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "rex": "pc/pc000101_01",
+      "nia": "",
+      "sieg": "",
+      "tora": "",
+      "vandamme": "",
+      "melef": "",
+      "sin": "",
+      "metsu": ""
+    },
+    {
+      "$id": 2,
+      "rex": "pc/pc000101_02",
+      "nia": "",
+      "sieg": "",
+      "tora": "",
+      "vandamme": "",
+      "melef": "",
+      "sin": "",
+      "metsu": ""
+    },
+    {
+      "$id": 3,
+      "rex": "",
+      "nia": "pc/pc000201_03",
+      "sieg": "pc/pc000501_03",
+      "tora": "",
+      "vandamme": "",
+      "melef": "pc/pc000201_03",
+      "sin": "",
+      "metsu": "pc/pc000501_03"
+    },
+    {
+      "$id": 4,
+      "rex": "",
+      "nia": "",
+      "sieg": "",
+      "tora": "pc/pc000101_04",
+      "vandamme": "",
+      "melef": "",
+      "sin": "",
+      "metsu": ""
+    },
+    {
+      "$id": 5,
+      "rex": "",
+      "nia": "",
+      "sieg": "",
+      "tora": "pc/pc000101_05",
+      "vandamme": "",
+      "melef": "",
+      "sin": "",
+      "metsu": ""
+    },
+    {
+      "$id": 6,
+      "rex": "",
+      "nia": "",
+      "sieg": "",
+      "tora": "pc/pc000101_06",
+      "vandamme": "",
+      "melef": "",
+      "sin": "",
+      "metsu": ""
+    },
+    {
+      "$id": 7,
+      "rex": "pc/pc000101_07",
+      "nia": "",
+      "sieg": "",
+      "tora": "",
+      "vandamme": "",
+      "melef": "pc/pc000201_07",
+      "sin": "",
+      "metsu": ""
+    },
+    {
+      "$id": 8,
+      "rex": "",
+      "nia": "",
+      "sieg": "pc/pc000501_08",
+      "tora": "",
+      "vandamme": "",
+      "melef": "",
+      "sin": "",
+      "metsu": "pc/pc000501_08"
+    },
+    {
+      "$id": 9,
+      "rex": "pc/pc000101_09",
+      "nia": "pc/pc000201_09",
+      "sieg": "pc/pc000501_09",
+      "tora": "",
+      "vandamme": "pc/pc000501_09",
+      "melef": "pc/pc000201_09",
+      "sin": "",
+      "metsu": ""
+    },
+    {
+      "$id": 10,
+      "rex": "pc/pc000101_10",
+      "nia": "pc/pc000201_10",
+      "sieg": "pc/pc000501_10",
+      "tora": "pc/pc000101_10",
+      "vandamme": "",
+      "melef": "pc/pc000201_10",
+      "sin": "",
+      "metsu": "pc/pc000501_10"
+    },
+    {
+      "$id": 11,
+      "rex": "pc/pc000101_11",
+      "nia": "pc/pc000201_11",
+      "sieg": "pc/pc000501_11",
+      "tora": "",
+      "vandamme": "pc/pc000501_11",
+      "melef": "pc/pc000201_l1",
+      "sin": "",
+      "metsu": "pc/pc000501_11"
+    },
+    {
+      "$id": 12,
+      "rex": "pc/pc000101_12",
+      "nia": "pc/pc000201_12",
+      "sieg": "pc/pc000501_12",
+      "tora": "",
+      "vandamme": "",
+      "melef": "pc/pc000201_12",
+      "sin": "",
+      "metsu": "pc/pc000501_12"
+    },
+    {
+      "$id": 13,
+      "rex": "pc/pc000101_13",
+      "nia": "pc/pc000201_13",
+      "sieg": "pc/pc000501_13",
+      "tora": "",
+      "vandamme": "",
+      "melef": "pc/pc000201_13",
+      "sin": "",
+      "metsu": "pc/pc000501_13"
+    },
+    {
+      "$id": 14,
+      "rex": "pc/pc000101_14",
+      "nia": "pc/pc000201_14",
+      "sieg": "pc/pc000501_14",
+      "tora": "",
+      "vandamme": "",
+      "melef": "pc/pc000201_14",
+      "sin": "",
+      "metsu": "pc/pc000501_14"
+    },
+    {
+      "$id": 15,
+      "rex": "pc/pc000101_15",
+      "nia": "pc/pc000201_15",
+      "sieg": "pc/pc000501_15",
+      "tora": "",
+      "vandamme": "pc/pc000501_15",
+      "melef": "pc/pc000201_15",
+      "sin": "",
+      "metsu": "pc/pc000501_15"
+    },
+    {
+      "$id": 16,
+      "rex": "pc/pc000101_16",
+      "nia": "pc/pc000201_16",
+      "sieg": "pc/pc000501_16",
+      "tora": "",
+      "vandamme": "",
+      "melef": "pc/pc000201_16",
+      "sin": "",
+      "metsu": "pc/pc000501_16"
+    },
+    {
+      "$id": 17,
+      "rex": "pc/pc000101_17",
+      "nia": "",
+      "sieg": "",
+      "tora": "",
+      "vandamme": "",
+      "melef": "",
+      "sin": "",
+      "metsu": ""
+    },
+    {
+      "$id": 18,
+      "rex": "",
+      "nia": "",
+      "sieg": "",
+      "tora": "",
+      "vandamme": "",
+      "melef": "",
+      "sin": "pc/pc000101_18",
+      "metsu": ""
+    },
+    {
+      "$id": 19,
+      "rex": "",
+      "nia": "",
+      "sieg": "",
+      "tora": "",
+      "vandamme": "",
+      "melef": "",
+      "sin": "",
+      "metsu": ""
+    }
+  ]
+}

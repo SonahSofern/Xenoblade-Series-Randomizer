@@ -1,0 +1,39 @@
+{
+  "schema": [
+    {
+      "name": "RevType",
+      "type": 1
+    },
+    {
+      "name": "RstFiCombo",
+      "type": 2
+    },
+    {
+      "name": "IvdFiCombo",
+      "type": 2
+    },
+    {
+      "name": "RstDebuffRev",
+      "type": 3
+    },
+    {
+      "name": "IvdDebuffRev",
+      "type": 3
+    },
+    {
+      "name": "WeakDebuffRev",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "RevType": 0,
+      "RstFiCombo": 0,
+      "IvdFiCombo": 0,
+      "RstDebuffRev": 0,
+      "IvdDebuffRev": 0,
+      "WeakDebuffRev": 0
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema": [
+    {
+      "name": "base_npc",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "base_npc": 3371
+    },
+    {
+      "$id": 2,
+      "base_npc": 3373
+    },
+    {
+      "$id": 3,
+      "base_npc": 3374
+    }
+  ]
+}

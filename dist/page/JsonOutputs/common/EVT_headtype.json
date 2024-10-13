@@ -1,0 +1,74 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "value",
+      "type": 5
+    },
+    {
+      "name": "stat",
+      "type": 7
+    },
+    {
+      "name": "blend",
+      "type": 5
+    },
+    {
+      "name": "weight",
+      "type": 8
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "name": "HEAD_NONE",
+      "value": 0,
+      "stat": "",
+      "blend": 0,
+      "weight": 0.0
+    },
+    {
+      "$id": 1,
+      "name": "HEAD_YES",
+      "value": 1,
+      "stat": "S_headyes",
+      "blend": 5,
+      "weight": 1.0
+    },
+    {
+      "$id": 2,
+      "name": "HEAD_NO",
+      "value": 2,
+      "stat": "S_headno",
+      "blend": 5,
+      "weight": 1.0
+    },
+    {
+      "$id": 3,
+      "name": "HEAD_SIDE",
+      "value": 3,
+      "stat": "S_headside",
+      "blend": 15,
+      "weight": 1.0
+    },
+    {
+      "$id": 4,
+      "name": "HEAD_LOWER",
+      "value": 4,
+      "stat": "S_headlower",
+      "blend": 15,
+      "weight": 1.0
+    },
+    {
+      "$id": 5,
+      "name": "HEAD_DOWN",
+      "value": 5,
+      "stat": "S_headdown",
+      "blend": 15,
+      "weight": 1.0
+    }
+  ]
+}

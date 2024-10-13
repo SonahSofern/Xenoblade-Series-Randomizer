@@ -1,0 +1,90 @@
+{
+  "schema": [
+    {
+      "name": "angle_range",
+      "type": 2
+    },
+    {
+      "name": "start_angle",
+      "type": 2
+    },
+    {
+      "name": "def_select",
+      "type": 1
+    },
+    {
+      "name": "theme_col",
+      "type": 7
+    },
+    {
+      "name": "item_sheet",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "angle_range": 360,
+      "start_angle": 180,
+      "def_select": 0,
+      "theme_col": "cmm_themeA",
+      "item_sheet": "mnu010_jog_top"
+    },
+    {
+      "$id": 2,
+      "angle_range": 45,
+      "start_angle": 180,
+      "def_select": 0,
+      "theme_col": "cmm_themeB",
+      "item_sheet": "mnu010_jog_character"
+    },
+    {
+      "$id": 3,
+      "angle_range": 45,
+      "start_angle": 180,
+      "def_select": 0,
+      "theme_col": "cmm_themeC",
+      "item_sheet": "mnu010_jog_custom"
+    },
+    {
+      "$id": 4,
+      "angle_range": 60,
+      "start_angle": 180,
+      "def_select": 1,
+      "theme_col": "cmm_themeB",
+      "item_sheet": "mnu054_jog_top"
+    },
+    {
+      "$id": 5,
+      "angle_range": 90,
+      "start_angle": 180,
+      "def_select": 0,
+      "theme_col": "cmm_themeC",
+      "item_sheet": "mnu011_dr_custom"
+    },
+    {
+      "$id": 6,
+      "angle_range": 60,
+      "start_angle": 180,
+      "def_select": 0,
+      "theme_col": "cmm_themeC",
+      "item_sheet": "mnu012_bl_custom"
+    },
+    {
+      "$id": 7,
+      "angle_range": 90,
+      "start_angle": 180,
+      "def_select": 0,
+      "theme_col": "cmm_themeB",
+      "item_sheet": "mnu010_jog_setup"
+    },
+    {
+      "$id": 8,
+      "angle_range": 60,
+      "start_angle": 180,
+      "def_select": 0,
+      "theme_col": "cmm_themeB",
+      "item_sheet": "mnu010_jog_story"
+    }
+  ]
+}

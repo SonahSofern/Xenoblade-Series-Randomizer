@@ -1,0 +1,50 @@
+{
+  "schema": [
+    {
+      "name": "RevReset",
+      "type": 1
+    },
+    {
+      "name": "RevAuto",
+      "type": 1
+    },
+    {
+      "name": "YawRotSpeed",
+      "type": 1
+    },
+    {
+      "name": "PitchRotSpeed",
+      "type": 1
+    },
+    {
+      "name": "ZoomSpeed",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "RevReset": 20,
+      "RevAuto": 7,
+      "YawRotSpeed": 3,
+      "PitchRotSpeed": 3,
+      "ZoomSpeed": 80
+    },
+    {
+      "$id": 2,
+      "RevReset": 30,
+      "RevAuto": 14,
+      "YawRotSpeed": 4,
+      "PitchRotSpeed": 4,
+      "ZoomSpeed": 120
+    },
+    {
+      "$id": 3,
+      "RevReset": 40,
+      "RevAuto": 28,
+      "YawRotSpeed": 5,
+      "PitchRotSpeed": 5,
+      "ZoomSpeed": 160
+    }
+  ]
+}

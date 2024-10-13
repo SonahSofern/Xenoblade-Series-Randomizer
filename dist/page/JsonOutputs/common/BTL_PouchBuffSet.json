@@ -1,0 +1,3630 @@
+{
+  "schema": [
+    {
+      "name": "PBuff1",
+      "type": 1
+    },
+    {
+      "name": "PBuffParam1",
+      "type": 8
+    },
+    {
+      "name": "PBuff2",
+      "type": 1
+    },
+    {
+      "name": "PBuffParam2",
+      "type": 8
+    },
+    {
+      "name": "PBuff3",
+      "type": 1
+    },
+    {
+      "name": "PBuffParam3",
+      "type": 8
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "PBuff1": 1,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 2,
+      "PBuff1": 1,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 3,
+      "PBuff1": 1,
+      "PBuffParam1": 20.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 4,
+      "PBuff1": 1,
+      "PBuffParam1": 15.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 5,
+      "PBuff1": 1,
+      "PBuffParam1": 15.0,
+      "PBuff2": 2,
+      "PBuffParam2": 5.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 6,
+      "PBuff1": 1,
+      "PBuffParam1": 25.0,
+      "PBuff2": 6,
+      "PBuffParam2": 20.0,
+      "PBuff3": 2,
+      "PBuffParam3": 8.0
+    },
+    {
+      "$id": 7,
+      "PBuff1": 4,
+      "PBuffParam1": 3.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 8,
+      "PBuff1": 4,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 9,
+      "PBuff1": 4,
+      "PBuffParam1": 4.0,
+      "PBuff2": 2,
+      "PBuffParam2": 5.0,
+      "PBuff3": 6,
+      "PBuffParam3": 8.0
+    },
+    {
+      "$id": 10,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 11,
+      "PBuff1": 5,
+      "PBuffParam1": 0.20000000298023224,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 12,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 13,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 3,
+      "PBuffParam2": 2.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 14,
+      "PBuff1": 5,
+      "PBuffParam1": 0.4000000059604645,
+      "PBuff2": 3,
+      "PBuffParam2": 4.0,
+      "PBuff3": 4,
+      "PBuffParam3": 3.0
+    },
+    {
+      "$id": 15,
+      "PBuff1": 6,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 16,
+      "PBuff1": 6,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 17,
+      "PBuff1": 6,
+      "PBuffParam1": 15.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 18,
+      "PBuff1": 6,
+      "PBuffParam1": 25.0,
+      "PBuff2": 2,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 19,
+      "PBuff1": 6,
+      "PBuffParam1": 25.0,
+      "PBuff2": 4,
+      "PBuffParam2": 5.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 20,
+      "PBuff1": 6,
+      "PBuffParam1": 30.0,
+      "PBuff2": 1,
+      "PBuffParam2": 25.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 21,
+      "PBuff1": 10,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 22,
+      "PBuff1": 10,
+      "PBuffParam1": 0.5,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 23,
+      "PBuff1": 10,
+      "PBuffParam1": 0.800000011920929,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 24,
+      "PBuff1": 10,
+      "PBuffParam1": 1.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 25,
+      "PBuff1": 10,
+      "PBuffParam1": 0.800000011920929,
+      "PBuff2": 8,
+      "PBuffParam2": 6.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 26,
+      "PBuff1": 10,
+      "PBuffParam1": 2.0,
+      "PBuff2": 9,
+      "PBuffParam2": 13.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 27,
+      "PBuff1": 12,
+      "PBuffParam1": 6.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 28,
+      "PBuff1": 12,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 29,
+      "PBuff1": 12,
+      "PBuffParam1": 12.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 30,
+      "PBuff1": 12,
+      "PBuffParam1": 12.0,
+      "PBuff2": 10,
+      "PBuffParam2": 0.30000001192092896,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 31,
+      "PBuff1": 12,
+      "PBuffParam1": 16.0,
+      "PBuff2": 8,
+      "PBuffParam2": 10.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 32,
+      "PBuff1": 11,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 33,
+      "PBuff1": 11,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 34,
+      "PBuff1": 11,
+      "PBuffParam1": 14.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 35,
+      "PBuff1": 11,
+      "PBuffParam1": 20.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 36,
+      "PBuff1": 11,
+      "PBuffParam1": 14.0,
+      "PBuff2": 10,
+      "PBuffParam2": 0.5,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 37,
+      "PBuff1": 11,
+      "PBuffParam1": 20.0,
+      "PBuff2": 8,
+      "PBuffParam2": 6.0,
+      "PBuff3": 10,
+      "PBuffParam3": 0.5
+    },
+    {
+      "$id": 38,
+      "PBuff1": 7,
+      "PBuffParam1": 50.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 39,
+      "PBuff1": 7,
+      "PBuffParam1": 75.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 40,
+      "PBuff1": 7,
+      "PBuffParam1": 100.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 41,
+      "PBuff1": 7,
+      "PBuffParam1": 125.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 42,
+      "PBuff1": 7,
+      "PBuffParam1": 100.0,
+      "PBuff2": 8,
+      "PBuffParam2": 5.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 43,
+      "PBuff1": 7,
+      "PBuffParam1": 125.0,
+      "PBuff2": 12,
+      "PBuffParam2": 12.0,
+      "PBuff3": 9,
+      "PBuffParam3": 5.0
+    },
+    {
+      "$id": 44,
+      "PBuff1": 1,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 45,
+      "PBuff1": 1,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 46,
+      "PBuff1": 1,
+      "PBuffParam1": 15.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 47,
+      "PBuff1": 1,
+      "PBuffParam1": 15.0,
+      "PBuff2": 3,
+      "PBuffParam2": 2.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 48,
+      "PBuff1": 1,
+      "PBuffParam1": 20.0,
+      "PBuff2": 4,
+      "PBuffParam2": 5.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 49,
+      "PBuff1": 2,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 50,
+      "PBuff1": 2,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 51,
+      "PBuff1": 2,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 52,
+      "PBuff1": 2,
+      "PBuffParam1": 8.0,
+      "PBuff2": 1,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 53,
+      "PBuff1": 2,
+      "PBuffParam1": 13.0,
+      "PBuff2": 6,
+      "PBuffParam2": 20.0,
+      "PBuff3": 1,
+      "PBuffParam3": 15.0
+    },
+    {
+      "$id": 54,
+      "PBuff1": 3,
+      "PBuffParam1": 3.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 55,
+      "PBuff1": 3,
+      "PBuffParam1": 2.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 56,
+      "PBuff1": 3,
+      "PBuffParam1": 4.0,
+      "PBuff2": 6,
+      "PBuffParam2": 10.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 57,
+      "PBuff1": 3,
+      "PBuffParam1": 7.0,
+      "PBuff2": 4,
+      "PBuffParam2": 5.0,
+      "PBuff3": 6,
+      "PBuffParam3": 15.0
+    },
+    {
+      "$id": 58,
+      "PBuff1": 4,
+      "PBuffParam1": 3.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 59,
+      "PBuff1": 4,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 60,
+      "PBuff1": 4,
+      "PBuffParam1": 5.0,
+      "PBuff2": 1,
+      "PBuffParam2": 15.0,
+      "PBuff3": 5,
+      "PBuffParam3": 0.20000000298023224
+    },
+    {
+      "$id": 61,
+      "PBuff1": 6,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 62,
+      "PBuff1": 6,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 63,
+      "PBuff1": 6,
+      "PBuffParam1": 15.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 64,
+      "PBuff1": 6,
+      "PBuffParam1": 15.0,
+      "PBuff2": 4,
+      "PBuffParam2": 3.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 65,
+      "PBuff1": 6,
+      "PBuffParam1": 20.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.30000001192092896,
+      "PBuff3": 2,
+      "PBuffParam3": 5.0
+    },
+    {
+      "$id": 66,
+      "PBuff1": 10,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 67,
+      "PBuff1": 10,
+      "PBuffParam1": 0.5,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 68,
+      "PBuff1": 10,
+      "PBuffParam1": 0.800000011920929,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 69,
+      "PBuff1": 10,
+      "PBuffParam1": 0.800000011920929,
+      "PBuff2": 11,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 70,
+      "PBuff1": 10,
+      "PBuffParam1": 1.0,
+      "PBuff2": 12,
+      "PBuffParam2": 12.0,
+      "PBuff3": 8,
+      "PBuffParam3": 5.0
+    },
+    {
+      "$id": 71,
+      "PBuff1": 8,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 72,
+      "PBuff1": 8,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 73,
+      "PBuff1": 8,
+      "PBuffParam1": 6.0,
+      "PBuff2": 11,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 74,
+      "PBuff1": 8,
+      "PBuffParam1": 10.0,
+      "PBuff2": 11,
+      "PBuffParam2": 14.0,
+      "PBuff3": 9,
+      "PBuffParam3": 5.0
+    },
+    {
+      "$id": 75,
+      "PBuff1": 7,
+      "PBuffParam1": 50.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 76,
+      "PBuff1": 7,
+      "PBuffParam1": 75.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 77,
+      "PBuff1": 7,
+      "PBuffParam1": 100.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 78,
+      "PBuff1": 7,
+      "PBuffParam1": 100.0,
+      "PBuff2": 9,
+      "PBuffParam2": 6.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 79,
+      "PBuff1": 7,
+      "PBuffParam1": 175.0,
+      "PBuff2": 10,
+      "PBuffParam2": 1.5,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 80,
+      "PBuff1": 9,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 81,
+      "PBuff1": 9,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 82,
+      "PBuff1": 9,
+      "PBuffParam1": 6.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 83,
+      "PBuff1": 9,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 84,
+      "PBuff1": 9,
+      "PBuffParam1": 6.0,
+      "PBuff2": 10,
+      "PBuffParam2": 0.800000011920929,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 85,
+      "PBuff1": 9,
+      "PBuffParam1": 13.0,
+      "PBuff2": 8,
+      "PBuffParam2": 10.0,
+      "PBuff3": 7,
+      "PBuffParam3": 100.0
+    },
+    {
+      "$id": 86,
+      "PBuff1": 1,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 87,
+      "PBuff1": 1,
+      "PBuffParam1": 15.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 88,
+      "PBuff1": 1,
+      "PBuffParam1": 15.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.10000000149011612,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 89,
+      "PBuff1": 1,
+      "PBuffParam1": 20.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.30000001192092896,
+      "PBuff3": 3,
+      "PBuffParam3": 3.0
+    },
+    {
+      "$id": 90,
+      "PBuff1": 2,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 91,
+      "PBuff1": 2,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 92,
+      "PBuff1": 2,
+      "PBuffParam1": 8.0,
+      "PBuff2": 3,
+      "PBuffParam2": 3.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 93,
+      "PBuff1": 2,
+      "PBuffParam1": 10.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.30000001192092896,
+      "PBuff3": 4,
+      "PBuffParam3": 3.0
+    },
+    {
+      "$id": 94,
+      "PBuff1": 3,
+      "PBuffParam1": 3.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 95,
+      "PBuff1": 3,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 96,
+      "PBuff1": 3,
+      "PBuffParam1": 4.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.20000000298023224,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 97,
+      "PBuff1": 3,
+      "PBuffParam1": 7.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.4000000059604645,
+      "PBuff3": 2,
+      "PBuffParam3": 8.0
+    },
+    {
+      "$id": 98,
+      "PBuff1": 4,
+      "PBuffParam1": 3.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 99,
+      "PBuff1": 4,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 100,
+      "PBuff1": 4,
+      "PBuffParam1": 4.0,
+      "PBuff2": 3,
+      "PBuffParam2": 2.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 101,
+      "PBuff1": 4,
+      "PBuffParam1": 5.0,
+      "PBuff2": 6,
+      "PBuffParam2": 15.0,
+      "PBuff3": 3,
+      "PBuffParam3": 3.0
+    },
+    {
+      "$id": 102,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 103,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 104,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 2,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 105,
+      "PBuff1": 5,
+      "PBuffParam1": 0.20000000298023224,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 106,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 107,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 108,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 109,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 3,
+      "PBuffParam2": 3.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 110,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 4,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 111,
+      "PBuff1": 6,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 112,
+      "PBuff1": 6,
+      "PBuffParam1": 15.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 113,
+      "PBuff1": 6,
+      "PBuffParam1": 15.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.10000000149011612,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 114,
+      "PBuff1": 6,
+      "PBuffParam1": 25.0,
+      "PBuff2": 2,
+      "PBuffParam2": 10.0,
+      "PBuff3": 1,
+      "PBuffParam3": 15.0
+    },
+    {
+      "$id": 115,
+      "PBuff1": 10,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 116,
+      "PBuff1": 10,
+      "PBuffParam1": 0.5,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 117,
+      "PBuff1": 10,
+      "PBuffParam1": 0.800000011920929,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 118,
+      "PBuff1": 10,
+      "PBuffParam1": 0.800000011920929,
+      "PBuff2": 12,
+      "PBuffParam2": 6.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 119,
+      "PBuff1": 10,
+      "PBuffParam1": 1.0,
+      "PBuff2": 7,
+      "PBuffParam2": 125.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 120,
+      "PBuff1": 8,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 121,
+      "PBuff1": 8,
+      "PBuffParam1": 6.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 122,
+      "PBuff1": 8,
+      "PBuffParam1": 6.0,
+      "PBuff2": 12,
+      "PBuffParam2": 12.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 123,
+      "PBuff1": 8,
+      "PBuffParam1": 13.0,
+      "PBuff2": 7,
+      "PBuffParam2": 125.0,
+      "PBuff3": 11,
+      "PBuffParam3": 14.0
+    },
+    {
+      "$id": 124,
+      "PBuff1": 12,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 125,
+      "PBuff1": 12,
+      "PBuffParam1": 12.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 126,
+      "PBuff1": 12,
+      "PBuffParam1": 12.0,
+      "PBuff2": 9,
+      "PBuffParam2": 5.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 127,
+      "PBuff1": 12,
+      "PBuffParam1": 16.0,
+      "PBuff2": 11,
+      "PBuffParam2": 14.0,
+      "PBuff3": 9,
+      "PBuffParam3": 5.0
+    },
+    {
+      "$id": 128,
+      "PBuff1": 11,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 129,
+      "PBuff1": 11,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 130,
+      "PBuff1": 11,
+      "PBuffParam1": 14.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 131,
+      "PBuff1": 11,
+      "PBuffParam1": 20.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 132,
+      "PBuff1": 11,
+      "PBuffParam1": 14.0,
+      "PBuff2": 10,
+      "PBuffParam2": 0.30000001192092896,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 133,
+      "PBuff1": 11,
+      "PBuffParam1": 26.0,
+      "PBuff2": 9,
+      "PBuffParam2": 10.0,
+      "PBuff3": 7,
+      "PBuffParam3": 100.0
+    },
+    {
+      "$id": 134,
+      "PBuff1": 7,
+      "PBuffParam1": 75.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 135,
+      "PBuff1": 7,
+      "PBuffParam1": 100.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 136,
+      "PBuff1": 7,
+      "PBuffParam1": 125.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 137,
+      "PBuff1": 7,
+      "PBuffParam1": 100.0,
+      "PBuff2": 10,
+      "PBuffParam2": 0.30000001192092896,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 138,
+      "PBuff1": 7,
+      "PBuffParam1": 125.0,
+      "PBuff2": 11,
+      "PBuffParam2": 20.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 139,
+      "PBuff1": 9,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 140,
+      "PBuff1": 9,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 141,
+      "PBuff1": 9,
+      "PBuffParam1": 6.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 142,
+      "PBuff1": 9,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 143,
+      "PBuff1": 9,
+      "PBuffParam1": 6.0,
+      "PBuff2": 12,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 144,
+      "PBuff1": 9,
+      "PBuffParam1": 10.0,
+      "PBuff2": 11,
+      "PBuffParam2": 14.0,
+      "PBuff3": 8,
+      "PBuffParam3": 5.0
+    },
+    {
+      "$id": 145,
+      "PBuff1": 2,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 146,
+      "PBuff1": 2,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 147,
+      "PBuff1": 2,
+      "PBuffParam1": 8.0,
+      "PBuff2": 4,
+      "PBuffParam2": 2.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 148,
+      "PBuff1": 2,
+      "PBuffParam1": 10.0,
+      "PBuff2": 4,
+      "PBuffParam2": 4.0,
+      "PBuff3": 3,
+      "PBuffParam3": 3.0
+    },
+    {
+      "$id": 149,
+      "PBuff1": 3,
+      "PBuffParam1": 3.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 150,
+      "PBuff1": 3,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 151,
+      "PBuff1": 3,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 152,
+      "PBuff1": 3,
+      "PBuffParam1": 4.0,
+      "PBuff2": 4,
+      "PBuffParam2": 2.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 153,
+      "PBuff1": 3,
+      "PBuffParam1": 5.0,
+      "PBuff2": 2,
+      "PBuffParam2": 10.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 154,
+      "PBuff1": 4,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 155,
+      "PBuff1": 4,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 156,
+      "PBuff1": 4,
+      "PBuffParam1": 4.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.20000000298023224,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 157,
+      "PBuff1": 4,
+      "PBuffParam1": 7.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.4000000059604645,
+      "PBuff3": 2,
+      "PBuffParam3": 8.0
+    },
+    {
+      "$id": 158,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 159,
+      "PBuff1": 5,
+      "PBuffParam1": 0.20000000298023224,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 160,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 161,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 162,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 1,
+      "PBuffParam2": 15.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 163,
+      "PBuff1": 5,
+      "PBuffParam1": 0.4000000059604645,
+      "PBuff2": 6,
+      "PBuffParam2": 15.0,
+      "PBuff3": 3,
+      "PBuffParam3": 3.0
+    },
+    {
+      "$id": 164,
+      "PBuff1": 10,
+      "PBuffParam1": 0.5,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 165,
+      "PBuff1": 10,
+      "PBuffParam1": 0.800000011920929,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 166,
+      "PBuff1": 10,
+      "PBuffParam1": 1.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 167,
+      "PBuff1": 10,
+      "PBuffParam1": 1.5,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 168,
+      "PBuff1": 10,
+      "PBuffParam1": 0.800000011920929,
+      "PBuff2": 9,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 169,
+      "PBuff1": 10,
+      "PBuffParam1": 1.0,
+      "PBuff2": 11,
+      "PBuffParam2": 14.0,
+      "PBuff3": 9,
+      "PBuffParam3": 5.0
+    },
+    {
+      "$id": 170,
+      "PBuff1": 8,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 171,
+      "PBuff1": 8,
+      "PBuffParam1": 6.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 172,
+      "PBuff1": 8,
+      "PBuffParam1": 6.0,
+      "PBuff2": 9,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 173,
+      "PBuff1": 8,
+      "PBuffParam1": 10.0,
+      "PBuff2": 7,
+      "PBuffParam2": 125.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 174,
+      "PBuff1": 12,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 175,
+      "PBuff1": 12,
+      "PBuffParam1": 12.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 176,
+      "PBuff1": 12,
+      "PBuffParam1": 16.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 177,
+      "PBuff1": 12,
+      "PBuffParam1": 16.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 178,
+      "PBuff1": 12,
+      "PBuffParam1": 12.0,
+      "PBuff2": 7,
+      "PBuffParam2": 75.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 179,
+      "PBuff1": 12,
+      "PBuffParam1": 16.0,
+      "PBuff2": 7,
+      "PBuffParam2": 100.0,
+      "PBuff3": 10,
+      "PBuffParam3": 0.5
+    },
+    {
+      "$id": 180,
+      "PBuff1": 11,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 181,
+      "PBuff1": 11,
+      "PBuffParam1": 14.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 182,
+      "PBuff1": 11,
+      "PBuffParam1": 20.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 183,
+      "PBuff1": 11,
+      "PBuffParam1": 26.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 184,
+      "PBuff1": 11,
+      "PBuffParam1": 14.0,
+      "PBuff2": 7,
+      "PBuffParam2": 75.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 185,
+      "PBuff1": 11,
+      "PBuffParam1": 32.0,
+      "PBuff2": 12,
+      "PBuffParam2": 20.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 186,
+      "PBuff1": 2,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 187,
+      "PBuff1": 2,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 188,
+      "PBuff1": 2,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 189,
+      "PBuff1": 2,
+      "PBuffParam1": 8.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.10000000149011612,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 190,
+      "PBuff1": 2,
+      "PBuffParam1": 13.0,
+      "PBuff2": 3,
+      "PBuffParam2": 5.0,
+      "PBuff3": 6,
+      "PBuffParam3": 15.0
+    },
+    {
+      "$id": 191,
+      "PBuff1": 3,
+      "PBuffParam1": 2.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 192,
+      "PBuff1": 3,
+      "PBuffParam1": 3.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 193,
+      "PBuff1": 3,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 194,
+      "PBuff1": 3,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 195,
+      "PBuff1": 3,
+      "PBuffParam1": 4.0,
+      "PBuff2": 1,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 196,
+      "PBuff1": 3,
+      "PBuffParam1": 5.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.4000000059604645,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 197,
+      "PBuff1": 4,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 198,
+      "PBuff1": 4,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 199,
+      "PBuff1": 4,
+      "PBuffParam1": 5.0,
+      "PBuff2": 3,
+      "PBuffParam2": 5.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 200,
+      "PBuff1": 4,
+      "PBuffParam1": 4.0,
+      "PBuff2": 6,
+      "PBuffParam2": 10.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 201,
+      "PBuff1": 4,
+      "PBuffParam1": 7.0,
+      "PBuff2": 3,
+      "PBuffParam2": 5.0,
+      "PBuff3": 1,
+      "PBuffParam3": 15.0
+    },
+    {
+      "$id": 202,
+      "PBuff1": 6,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 203,
+      "PBuff1": 6,
+      "PBuffParam1": 15.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 204,
+      "PBuff1": 6,
+      "PBuffParam1": 20.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 205,
+      "PBuff1": 6,
+      "PBuffParam1": 15.0,
+      "PBuff2": 3,
+      "PBuffParam2": 3.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 206,
+      "PBuff1": 6,
+      "PBuffParam1": 20.0,
+      "PBuff2": 4,
+      "PBuffParam2": 4.0,
+      "PBuff3": 3,
+      "PBuffParam3": 3.0
+    },
+    {
+      "$id": 207,
+      "PBuff1": 8,
+      "PBuffParam1": 6.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 208,
+      "PBuff1": 8,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 209,
+      "PBuff1": 8,
+      "PBuffParam1": 6.0,
+      "PBuff2": 11,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 210,
+      "PBuff1": 8,
+      "PBuffParam1": 10.0,
+      "PBuff2": 10,
+      "PBuffParam2": 0.800000011920929,
+      "PBuff3": 12,
+      "PBuffParam3": 8.0
+    },
+    {
+      "$id": 211,
+      "PBuff1": 9,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 212,
+      "PBuff1": 9,
+      "PBuffParam1": 6.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 213,
+      "PBuff1": 9,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 214,
+      "PBuff1": 9,
+      "PBuffParam1": 13.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 215,
+      "PBuff1": 9,
+      "PBuffParam1": 6.0,
+      "PBuff2": 7,
+      "PBuffParam2": 50.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 216,
+      "PBuff1": 9,
+      "PBuffParam1": 10.0,
+      "PBuff2": 11,
+      "PBuffParam2": 20.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 217,
+      "PBuff1": 1,
+      "PBuffParam1": 15.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 218,
+      "PBuff1": 1,
+      "PBuffParam1": 20.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 219,
+      "PBuff1": 1,
+      "PBuffParam1": 15.0,
+      "PBuff2": 6,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 220,
+      "PBuff1": 1,
+      "PBuffParam1": 20.0,
+      "PBuff2": 4,
+      "PBuffParam2": 4.0,
+      "PBuff3": 5,
+      "PBuffParam3": 0.20000000298023224
+    },
+    {
+      "$id": 221,
+      "PBuff1": 2,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 222,
+      "PBuff1": 2,
+      "PBuffParam1": 13.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 223,
+      "PBuff1": 2,
+      "PBuffParam1": 8.0,
+      "PBuff2": 6,
+      "PBuffParam2": 10.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 224,
+      "PBuff1": 2,
+      "PBuffParam1": 15.0,
+      "PBuff2": 1,
+      "PBuffParam2": 25.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 225,
+      "PBuff1": 4,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 226,
+      "PBuff1": 4,
+      "PBuffParam1": 7.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 227,
+      "PBuff1": 4,
+      "PBuffParam1": 4.0,
+      "PBuff2": 1,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 228,
+      "PBuff1": 4,
+      "PBuffParam1": 5.0,
+      "PBuff2": 2,
+      "PBuffParam2": 10.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 229,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 230,
+      "PBuff1": 5,
+      "PBuffParam1": 0.20000000298023224,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 231,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 232,
+      "PBuff1": 5,
+      "PBuffParam1": 0.4000000059604645,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 233,
+      "PBuff1": 5,
+      "PBuffParam1": 0.20000000298023224,
+      "PBuff2": 6,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 234,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 2,
+      "PBuffParam2": 5.0,
+      "PBuff3": 1,
+      "PBuffParam3": 8.0
+    },
+    {
+      "$id": 235,
+      "PBuff1": 8,
+      "PBuffParam1": 6.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 236,
+      "PBuff1": 8,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 237,
+      "PBuff1": 8,
+      "PBuffParam1": 13.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 238,
+      "PBuff1": 12,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 239,
+      "PBuff1": 12,
+      "PBuffParam1": 12.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 240,
+      "PBuff1": 12,
+      "PBuffParam1": 16.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 241,
+      "PBuff1": 12,
+      "PBuffParam1": 20.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 242,
+      "PBuff1": 12,
+      "PBuffParam1": 12.0,
+      "PBuff2": 11,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 243,
+      "PBuff1": 12,
+      "PBuffParam1": 24.0,
+      "PBuff2": 8,
+      "PBuffParam2": 13.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 244,
+      "PBuff1": 11,
+      "PBuffParam1": 14.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 245,
+      "PBuff1": 11,
+      "PBuffParam1": 20.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 246,
+      "PBuff1": 11,
+      "PBuffParam1": 26.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 247,
+      "PBuff1": 11,
+      "PBuffParam1": 14.0,
+      "PBuff2": 10,
+      "PBuffParam2": 0.30000001192092896,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 248,
+      "PBuff1": 11,
+      "PBuffParam1": 20.0,
+      "PBuff2": 8,
+      "PBuffParam2": 10.0,
+      "PBuff3": 9,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 249,
+      "PBuff1": 7,
+      "PBuffParam1": 100.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 250,
+      "PBuff1": 7,
+      "PBuffParam1": 125.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 251,
+      "PBuff1": 7,
+      "PBuffParam1": 150.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 252,
+      "PBuff1": 7,
+      "PBuffParam1": 100.0,
+      "PBuff2": 11,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 253,
+      "PBuff1": 7,
+      "PBuffParam1": 125.0,
+      "PBuff2": 8,
+      "PBuffParam2": 6.0,
+      "PBuff3": 12,
+      "PBuffParam3": 8.0
+    },
+    {
+      "$id": 254,
+      "PBuff1": 9,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 255,
+      "PBuff1": 9,
+      "PBuffParam1": 6.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 256,
+      "PBuff1": 9,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 257,
+      "PBuff1": 9,
+      "PBuffParam1": 13.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 258,
+      "PBuff1": 9,
+      "PBuffParam1": 6.0,
+      "PBuff2": 8,
+      "PBuffParam2": 6.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 259,
+      "PBuff1": 9,
+      "PBuffParam1": 13.0,
+      "PBuff2": 10,
+      "PBuffParam2": 1.0,
+      "PBuff3": 12,
+      "PBuffParam3": 12.0
+    },
+    {
+      "$id": 260,
+      "PBuff1": 1,
+      "PBuffParam1": 15.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 261,
+      "PBuff1": 1,
+      "PBuffParam1": 25.0,
+      "PBuff2": 2,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 262,
+      "PBuff1": 2,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 263,
+      "PBuff1": 2,
+      "PBuffParam1": 13.0,
+      "PBuff2": 1,
+      "PBuffParam2": 20.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 264,
+      "PBuff1": 3,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 265,
+      "PBuff1": 3,
+      "PBuffParam1": 7.0,
+      "PBuff2": 4,
+      "PBuffParam2": 7.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 266,
+      "PBuff1": 3,
+      "PBuffParam1": 7.0,
+      "PBuff2": 6,
+      "PBuffParam2": 20.0,
+      "PBuff3": 2,
+      "PBuffParam3": 8.0
+    },
+    {
+      "$id": 267,
+      "PBuff1": 3,
+      "PBuffParam1": 9.0,
+      "PBuff2": 2,
+      "PBuffParam2": 13.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 268,
+      "PBuff1": 4,
+      "PBuffParam1": 9.0,
+      "PBuff2": 3,
+      "PBuffParam2": 7.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 269,
+      "PBuff1": 1,
+      "PBuffParam1": 15.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 270,
+      "PBuff1": 1,
+      "PBuffParam1": 15.0,
+      "PBuff2": 4,
+      "PBuffParam2": 2.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 271,
+      "PBuff1": 1,
+      "PBuffParam1": 20.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.30000001192092896,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 272,
+      "PBuff1": 1,
+      "PBuffParam1": 25.0,
+      "PBuff2": 3,
+      "PBuffParam2": 7.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 273,
+      "PBuff1": 3,
+      "PBuffParam1": 7.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 274,
+      "PBuff1": 2,
+      "PBuffParam1": 5.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.10000000149011612,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 275,
+      "PBuff1": 4,
+      "PBuffParam1": 4.0,
+      "PBuff2": 7,
+      "PBuffParam2": 75.0,
+      "PBuff3": 1,
+      "PBuffParam3": 8.0
+    },
+    {
+      "$id": 276,
+      "PBuff1": 4,
+      "PBuffParam1": 5.0,
+      "PBuff2": 10,
+      "PBuffParam2": 0.800000011920929,
+      "PBuff3": 12,
+      "PBuffParam3": 8.0
+    },
+    {
+      "$id": 277,
+      "PBuff1": 1,
+      "PBuffParam1": 25.0,
+      "PBuff2": 2,
+      "PBuffParam2": 10.0,
+      "PBuff3": 6,
+      "PBuffParam3": 15.0
+    },
+    {
+      "$id": 278,
+      "PBuff1": 5,
+      "PBuffParam1": 0.5,
+      "PBuff2": 1,
+      "PBuffParam2": 25.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 279,
+      "PBuff1": 4,
+      "PBuffParam1": 9.0,
+      "PBuff2": 3,
+      "PBuffParam2": 7.0,
+      "PBuff3": 5,
+      "PBuffParam3": 0.4000000059604645
+    },
+    {
+      "$id": 280,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 281,
+      "PBuff1": 5,
+      "PBuffParam1": 0.4000000059604645,
+      "PBuff2": 4,
+      "PBuffParam2": 4.0,
+      "PBuff3": 2,
+      "PBuffParam3": 5.0
+    },
+    {
+      "$id": 282,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 283,
+      "PBuff1": 5,
+      "PBuffParam1": 0.20000000298023224,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 284,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 285,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 286,
+      "PBuff1": 6,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 287,
+      "PBuff1": 6,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 288,
+      "PBuff1": 6,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 289,
+      "PBuff1": 6,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 290,
+      "PBuff1": 8,
+      "PBuffParam1": 5.0,
+      "PBuff2": 7,
+      "PBuffParam2": 50.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 291,
+      "PBuff1": 8,
+      "PBuffParam1": 10.0,
+      "PBuff2": 12,
+      "PBuffParam2": 12.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 292,
+      "PBuff1": 8,
+      "PBuffParam1": 10.0,
+      "PBuff2": 9,
+      "PBuffParam2": 6.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 293,
+      "PBuff1": 8,
+      "PBuffParam1": 13.0,
+      "PBuff2": 10,
+      "PBuffParam2": 1.5,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 294,
+      "PBuff1": 8,
+      "PBuffParam1": 17.0,
+      "PBuff2": 10,
+      "PBuffParam2": 1.5,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 295,
+      "PBuff1": 3,
+      "PBuffParam1": 5.0,
+      "PBuff2": 6,
+      "PBuffParam2": 15.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 296,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 297,
+      "PBuff1": 12,
+      "PBuffParam1": 12.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 298,
+      "PBuff1": 12,
+      "PBuffParam1": 24.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 299,
+      "PBuff1": 3,
+      "PBuffParam1": 5.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 300,
+      "PBuff1": 11,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 301,
+      "PBuff1": 1,
+      "PBuffParam1": 20.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 302,
+      "PBuff1": 8,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 303,
+      "PBuff1": 1,
+      "PBuffParam1": 25.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 304,
+      "PBuff1": 1,
+      "PBuffParam1": 20.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 305,
+      "PBuff1": 1,
+      "PBuffParam1": 30.0,
+      "PBuff2": 3,
+      "PBuffParam2": 7.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 306,
+      "PBuff1": 5,
+      "PBuffParam1": 0.20000000298023224,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 307,
+      "PBuff1": 9,
+      "PBuffParam1": 5.0,
+      "PBuff2": 10,
+      "PBuffParam2": 0.30000001192092896,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 308,
+      "PBuff1": 9,
+      "PBuffParam1": 6.0,
+      "PBuff2": 12,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 309,
+      "PBuff1": 9,
+      "PBuffParam1": 10.0,
+      "PBuff2": 10,
+      "PBuffParam2": 0.800000011920929,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 310,
+      "PBuff1": 9,
+      "PBuffParam1": 13.0,
+      "PBuff2": 12,
+      "PBuffParam2": 16.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 311,
+      "PBuff1": 9,
+      "PBuffParam1": 17.0,
+      "PBuff2": 10,
+      "PBuffParam2": 1.5,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 312,
+      "PBuff1": 4,
+      "PBuffParam1": 9.0,
+      "PBuff2": 3,
+      "PBuffParam2": 7.0,
+      "PBuff3": 1,
+      "PBuffParam3": 20.0
+    },
+    {
+      "$id": 313,
+      "PBuff1": 9,
+      "PBuffParam1": 17.0,
+      "PBuff2": 10,
+      "PBuffParam2": 1.5,
+      "PBuff3": 8,
+      "PBuffParam3": 10.0
+    },
+    {
+      "$id": 314,
+      "PBuff1": 6,
+      "PBuffParam1": 15.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 315,
+      "PBuff1": 6,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 316,
+      "PBuff1": 6,
+      "PBuffParam1": 8.0,
+      "PBuff2": 7,
+      "PBuffParam2": 50.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 317,
+      "PBuff1": 6,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 318,
+      "PBuff1": 6,
+      "PBuffParam1": 10.0,
+      "PBuff2": 3,
+      "PBuffParam2": 2.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 319,
+      "PBuff1": 6,
+      "PBuffParam1": 15.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 320,
+      "PBuff1": 6,
+      "PBuffParam1": 10.0,
+      "PBuff2": 12,
+      "PBuffParam2": 6.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 321,
+      "PBuff1": 6,
+      "PBuffParam1": 20.0,
+      "PBuff2": 1,
+      "PBuffParam2": 10.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 322,
+      "PBuff1": 6,
+      "PBuffParam1": 15.0,
+      "PBuff2": 2,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 323,
+      "PBuff1": 6,
+      "PBuffParam1": 20.0,
+      "PBuff2": 10,
+      "PBuffParam2": 0.5,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 324,
+      "PBuff1": 6,
+      "PBuffParam1": 25.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.20000000298023224,
+      "PBuff3": 12,
+      "PBuffParam3": 6.0
+    },
+    {
+      "$id": 325,
+      "PBuff1": 1,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 326,
+      "PBuff1": 1,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 327,
+      "PBuff1": 2,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 328,
+      "PBuff1": 3,
+      "PBuffParam1": 2.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 329,
+      "PBuff1": 3,
+      "PBuffParam1": 3.0,
+      "PBuff2": 8,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 330,
+      "PBuff1": 3,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 331,
+      "PBuff1": 4,
+      "PBuffParam1": 2.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 332,
+      "PBuff1": 5,
+      "PBuffParam1": 0.20000000298023224,
+      "PBuff2": 7,
+      "PBuffParam2": 50.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 333,
+      "PBuff1": 1,
+      "PBuffParam1": 20.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.20000000298023224,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 334,
+      "PBuff1": 2,
+      "PBuffParam1": 8.0,
+      "PBuff2": 6,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 335,
+      "PBuff1": 2,
+      "PBuffParam1": 10.0,
+      "PBuff2": 1,
+      "PBuffParam2": 10.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 336,
+      "PBuff1": 3,
+      "PBuffParam1": 3.0,
+      "PBuff2": 4,
+      "PBuffParam2": 2.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 337,
+      "PBuff1": 3,
+      "PBuffParam1": 7.0,
+      "PBuff2": 1,
+      "PBuffParam2": 15.0,
+      "PBuff3": 4,
+      "PBuffParam3": 3.0
+    },
+    {
+      "$id": 338,
+      "PBuff1": 4,
+      "PBuffParam1": 4.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 339,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 2,
+      "PBuffParam2": 8.0,
+      "PBuff3": 6,
+      "PBuffParam3": 10.0
+    },
+    {
+      "$id": 340,
+      "PBuff1": 10,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 341,
+      "PBuff1": 10,
+      "PBuffParam1": 0.5,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 342,
+      "PBuff1": 10,
+      "PBuffParam1": 0.5,
+      "PBuff2": 9,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 343,
+      "PBuff1": 10,
+      "PBuffParam1": 0.800000011920929,
+      "PBuff2": 2,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 344,
+      "PBuff1": 10,
+      "PBuffParam1": 0.800000011920929,
+      "PBuff2": 12,
+      "PBuffParam2": 6.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 345,
+      "PBuff1": 10,
+      "PBuffParam1": 0.5,
+      "PBuff2": 12,
+      "PBuffParam2": 6.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 346,
+      "PBuff1": 10,
+      "PBuffParam1": 0.5,
+      "PBuff2": 4,
+      "PBuffParam2": 2.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 347,
+      "PBuff1": 10,
+      "PBuffParam1": 1.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.20000000298023224,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 348,
+      "PBuff1": 10,
+      "PBuffParam1": 1.0,
+      "PBuff2": 3,
+      "PBuffParam2": 3.0,
+      "PBuff3": 4,
+      "PBuffParam3": 2.0
+    },
+    {
+      "$id": 349,
+      "PBuff1": 10,
+      "PBuffParam1": 1.5,
+      "PBuff2": 1,
+      "PBuffParam2": 15.0,
+      "PBuff3": 2,
+      "PBuffParam3": 5.0
+    },
+    {
+      "$id": 350,
+      "PBuff1": 1,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 351,
+      "PBuff1": 3,
+      "PBuffParam1": 2.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 352,
+      "PBuff1": 3,
+      "PBuffParam1": 2.0,
+      "PBuff2": 8,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 353,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 354,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 9,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 355,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 12,
+      "PBuffParam2": 6.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 356,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 10,
+      "PBuffParam2": 0.30000001192092896,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 357,
+      "PBuff1": 1,
+      "PBuffParam1": 8.0,
+      "PBuff2": 7,
+      "PBuffParam2": 50.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 358,
+      "PBuff1": 2,
+      "PBuffParam1": 4.0,
+      "PBuff2": 9,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 359,
+      "PBuff1": 3,
+      "PBuffParam1": 2.0,
+      "PBuff2": 8,
+      "PBuffParam2": 4.0,
+      "PBuff3": 9,
+      "PBuffParam3": 4.0
+    },
+    {
+      "$id": 360,
+      "PBuff1": 3,
+      "PBuffParam1": 2.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.10000000149011612,
+      "PBuff3": 10,
+      "PBuffParam3": 0.30000001192092896
+    },
+    {
+      "$id": 361,
+      "PBuff1": 4,
+      "PBuffParam1": 2.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 362,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 8,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 363,
+      "PBuff1": 5,
+      "PBuffParam1": 0.10000000149011612,
+      "PBuff2": 3,
+      "PBuffParam2": 2.0,
+      "PBuff3": 4,
+      "PBuffParam3": 2.0
+    },
+    {
+      "$id": 364,
+      "PBuff1": 5,
+      "PBuffParam1": 0.30000001192092896,
+      "PBuff2": 10,
+      "PBuffParam2": 1.0,
+      "PBuff3": 12,
+      "PBuffParam3": 12.0
+    },
+    {
+      "$id": 365,
+      "PBuff1": 12,
+      "PBuffParam1": 6.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 366,
+      "PBuff1": 12,
+      "PBuffParam1": 8.0,
+      "PBuff2": 1,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 367,
+      "PBuff1": 12,
+      "PBuffParam1": 8.0,
+      "PBuff2": 8,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 368,
+      "PBuff1": 12,
+      "PBuffParam1": 12.0,
+      "PBuff2": 1,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 369,
+      "PBuff1": 12,
+      "PBuffParam1": 12.0,
+      "PBuff2": 3,
+      "PBuffParam2": 2.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 370,
+      "PBuff1": 12,
+      "PBuffParam1": 16.0,
+      "PBuff2": 2,
+      "PBuffParam2": 5.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 371,
+      "PBuff1": 12,
+      "PBuffParam1": 16.0,
+      "PBuff2": 9,
+      "PBuffParam2": 5.0,
+      "PBuff3": 8,
+      "PBuffParam3": 4.0
+    },
+    {
+      "$id": 372,
+      "PBuff1": 12,
+      "PBuffParam1": 20.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.20000000298023224,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 373,
+      "PBuff1": 12,
+      "PBuffParam1": 8.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 374,
+      "PBuff1": 12,
+      "PBuffParam1": 20.0,
+      "PBuff2": 6,
+      "PBuffParam2": 10.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 375,
+      "PBuff1": 7,
+      "PBuffParam1": 50.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 376,
+      "PBuff1": 7,
+      "PBuffParam1": 75.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 377,
+      "PBuff1": 7,
+      "PBuffParam1": 75.0,
+      "PBuff2": 8,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 378,
+      "PBuff1": 7,
+      "PBuffParam1": 75.0,
+      "PBuff2": 1,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 379,
+      "PBuff1": 7,
+      "PBuffParam1": 100.0,
+      "PBuff2": 12,
+      "PBuffParam2": 6.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 380,
+      "PBuff1": 7,
+      "PBuffParam1": 75.0,
+      "PBuff2": 2,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 381,
+      "PBuff1": 7,
+      "PBuffParam1": 100.0,
+      "PBuff2": 6,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 382,
+      "PBuff1": 7,
+      "PBuffParam1": 125.0,
+      "PBuff2": 5,
+      "PBuffParam2": 0.20000000298023224,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 383,
+      "PBuff1": 7,
+      "PBuffParam1": 150.0,
+      "PBuff2": 3,
+      "PBuffParam2": 3.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 384,
+      "PBuff1": 7,
+      "PBuffParam1": 150.0,
+      "PBuff2": 8,
+      "PBuffParam2": 5.0,
+      "PBuff3": 9,
+      "PBuffParam3": 4.0
+    },
+    {
+      "$id": 385,
+      "PBuff1": 1,
+      "PBuffParam1": 10.0,
+      "PBuff2": 3,
+      "PBuffParam2": 2.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 386,
+      "PBuff1": 1,
+      "PBuffParam1": 15.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 387,
+      "PBuff1": 2,
+      "PBuffParam1": 5.0,
+      "PBuff2": 4,
+      "PBuffParam2": 2.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 388,
+      "PBuff1": 2,
+      "PBuffParam1": 8.0,
+      "PBuff2": 3,
+      "PBuffParam2": 2.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 389,
+      "PBuff1": 4,
+      "PBuffParam1": 3.0,
+      "PBuff2": 8,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 390,
+      "PBuff1": 4,
+      "PBuffParam1": 3.0,
+      "PBuff2": 9,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 391,
+      "PBuff1": 4,
+      "PBuffParam1": 4.0,
+      "PBuff2": 2,
+      "PBuffParam2": 4.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 392,
+      "PBuff1": 4,
+      "PBuffParam1": 4.0,
+      "PBuff2": 3,
+      "PBuffParam2": 2.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 393,
+      "PBuff1": 1,
+      "PBuffParam1": 20.0,
+      "PBuff2": 12,
+      "PBuffParam2": 8.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 394,
+      "PBuff1": 1,
+      "PBuffParam1": 25.0,
+      "PBuff2": 7,
+      "PBuffParam2": 75.0,
+      "PBuff3": 8,
+      "PBuffParam3": 4.0
+    },
+    {
+      "$id": 395,
+      "PBuff1": 2,
+      "PBuffParam1": 10.0,
+      "PBuff2": 0,
+      "PBuffParam2": 0.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 396,
+      "PBuff1": 2,
+      "PBuffParam1": 13.0,
+      "PBuff2": 12,
+      "PBuffParam2": 8.0,
+      "PBuff3": 10,
+      "PBuffParam3": 0.30000001192092896
+    },
+    {
+      "$id": 397,
+      "PBuff1": 2,
+      "PBuffParam1": 10.0,
+      "PBuff2": 4,
+      "PBuffParam2": 3.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 398,
+      "PBuff1": 4,
+      "PBuffParam1": 5.0,
+      "PBuff2": 1,
+      "PBuffParam2": 10.0,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 399,
+      "PBuff1": 4,
+      "PBuffParam1": 7.0,
+      "PBuff2": 10,
+      "PBuffParam2": 0.800000011920929,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    },
+    {
+      "$id": 400,
+      "PBuff1": 5,
+      "PBuffParam1": 0.4000000059604645,
+      "PBuff2": 10,
+      "PBuffParam2": 0.800000011920929,
+      "PBuff3": 0,
+      "PBuffParam3": 0.0
+    }
+  ]
+}

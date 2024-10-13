@@ -1,0 +1,109 @@
+{
+  "schema": [
+    {
+      "name": "icon_id",
+      "type": 2
+    },
+    {
+      "name": "name",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "icon_id": 430,
+      "name": 1
+    },
+    {
+      "$id": 2,
+      "icon_id": 431,
+      "name": 2
+    },
+    {
+      "$id": 3,
+      "icon_id": 432,
+      "name": 3
+    },
+    {
+      "$id": 4,
+      "icon_id": 433,
+      "name": 4
+    },
+    {
+      "$id": 5,
+      "icon_id": 434,
+      "name": 5
+    },
+    {
+      "$id": 6,
+      "icon_id": 435,
+      "name": 6
+    },
+    {
+      "$id": 7,
+      "icon_id": 436,
+      "name": 7
+    },
+    {
+      "$id": 8,
+      "icon_id": 437,
+      "name": 8
+    },
+    {
+      "$id": 9,
+      "icon_id": 438,
+      "name": 9
+    },
+    {
+      "$id": 10,
+      "icon_id": 439,
+      "name": 10
+    },
+    {
+      "$id": 11,
+      "icon_id": 440,
+      "name": 11
+    },
+    {
+      "$id": 12,
+      "icon_id": 441,
+      "name": 12
+    },
+    {
+      "$id": 13,
+      "icon_id": 442,
+      "name": 13
+    },
+    {
+      "$id": 14,
+      "icon_id": 443,
+      "name": 14
+    },
+    {
+      "$id": 15,
+      "icon_id": 444,
+      "name": 15
+    },
+    {
+      "$id": 16,
+      "icon_id": 445,
+      "name": 16
+    },
+    {
+      "$id": 17,
+      "icon_id": 446,
+      "name": 17
+    },
+    {
+      "$id": 18,
+      "icon_id": 429,
+      "name": 18
+    },
+    {
+      "$id": 19,
+      "icon_id": 428,
+      "name": 19
+    }
+  ]
+}

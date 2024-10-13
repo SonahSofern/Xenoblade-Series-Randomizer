@@ -1,0 +1,36 @@
+{
+  "schema": [
+    {
+      "name": "name_id",
+      "type": 2
+    },
+    {
+      "name": "cap_id",
+      "type": 2
+    },
+    {
+      "name": "max_level",
+      "type": 1
+    },
+    {
+      "name": "default_level",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "name_id": 20,
+      "cap_id": 20,
+      "max_level": 4,
+      "default_level": 2
+    },
+    {
+      "$id": 2,
+      "name_id": 40,
+      "cap_id": 37,
+      "max_level": 2,
+      "default_level": 1
+    }
+  ]
+}

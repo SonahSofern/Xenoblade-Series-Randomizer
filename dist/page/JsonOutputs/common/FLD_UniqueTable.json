@@ -1,0 +1,954 @@
+{
+  "schema": [
+    {
+      "name": "RefID",
+      "type": 2
+    },
+    {
+      "name": "Probability",
+      "type": 2
+    },
+    {
+      "name": "DelayMin",
+      "type": 8
+    },
+    {
+      "name": "DelayMax",
+      "type": 8
+    },
+    {
+      "name": "FrequencyA",
+      "type": 2
+    },
+    {
+      "name": "FrequencyB",
+      "type": 2
+    },
+    {
+      "name": "FrequencyC",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "RefID": 1,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 2,
+      "RefID": 2,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 3,
+      "RefID": 3,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 4,
+      "RefID": 4,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 5,
+      "RefID": 5,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 6,
+      "RefID": 6,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 7,
+      "RefID": 7,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 8,
+      "RefID": 8,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 9,
+      "RefID": 1001,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 10,
+      "RefID": 1002,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 11,
+      "RefID": 1004,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 12,
+      "RefID": 1005,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 13,
+      "RefID": 1006,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 14,
+      "RefID": 1007,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 15,
+      "RefID": 1009,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 16,
+      "RefID": 1010,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 17,
+      "RefID": 1011,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 18,
+      "RefID": 1014,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 19,
+      "RefID": 1015,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 20,
+      "RefID": 1016,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 21,
+      "RefID": 1017,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 22,
+      "RefID": 1018,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 23,
+      "RefID": 1019,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 24,
+      "RefID": 1020,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 25,
+      "RefID": 1021,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 26,
+      "RefID": 1022,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 27,
+      "RefID": 1023,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 28,
+      "RefID": 1024,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 29,
+      "RefID": 1025,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 30,
+      "RefID": 1026,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 31,
+      "RefID": 1027,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 32,
+      "RefID": 1028,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 33,
+      "RefID": 1029,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 34,
+      "RefID": 1030,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 35,
+      "RefID": 1031,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 36,
+      "RefID": 1032,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 37,
+      "RefID": 1033,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 38,
+      "RefID": 1034,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 39,
+      "RefID": 1035,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 40,
+      "RefID": 1036,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 41,
+      "RefID": 1037,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 42,
+      "RefID": 1038,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 43,
+      "RefID": 1039,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 44,
+      "RefID": 1040,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 45,
+      "RefID": 1041,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 46,
+      "RefID": 1042,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 47,
+      "RefID": 1043,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 48,
+      "RefID": 1044,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 49,
+      "RefID": 1045,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 50,
+      "RefID": 1046,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 51,
+      "RefID": 1047,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 52,
+      "RefID": 1048,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 53,
+      "RefID": 1049,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 54,
+      "RefID": 1050,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 55,
+      "RefID": 1051,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 56,
+      "RefID": 1052,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 57,
+      "RefID": 1053,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 58,
+      "RefID": 1054,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 59,
+      "RefID": 1055,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 60,
+      "RefID": 1056,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 61,
+      "RefID": 1057,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 62,
+      "RefID": 1058,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 63,
+      "RefID": 1059,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 64,
+      "RefID": 1060,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 65,
+      "RefID": 1061,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 66,
+      "RefID": 1062,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 67,
+      "RefID": 1063,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 68,
+      "RefID": 1064,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 69,
+      "RefID": 1065,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 70,
+      "RefID": 1066,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 71,
+      "RefID": 1067,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 72,
+      "RefID": 1068,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 73,
+      "RefID": 1069,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 74,
+      "RefID": 1070,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 75,
+      "RefID": 1071,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 76,
+      "RefID": 1072,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 77,
+      "RefID": 1105,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 78,
+      "RefID": 1104,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 79,
+      "RefID": 1106,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 80,
+      "RefID": 1107,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 81,
+      "RefID": 1108,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 82,
+      "RefID": 1109,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    },
+    {
+      "$id": 83,
+      "RefID": 17,
+      "Probability": 20,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 84,
+      "RefID": 18,
+      "Probability": 20,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 85,
+      "RefID": 19,
+      "Probability": 20,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 86,
+      "RefID": 20,
+      "Probability": 20,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 87,
+      "RefID": 21,
+      "Probability": 20,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 88,
+      "RefID": 22,
+      "Probability": 20,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 89,
+      "RefID": 23,
+      "Probability": 20,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 90,
+      "RefID": 24,
+      "Probability": 20,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 91,
+      "RefID": 25,
+      "Probability": 20,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 100,
+      "FrequencyB": 0,
+      "FrequencyC": 0
+    },
+    {
+      "$id": 92,
+      "RefID": 1111,
+      "Probability": 25,
+      "DelayMin": 0.0,
+      "DelayMax": 5.0,
+      "FrequencyA": 34,
+      "FrequencyB": 33,
+      "FrequencyC": 33
+    }
+  ]
+}

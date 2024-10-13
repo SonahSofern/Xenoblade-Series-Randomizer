@@ -1,0 +1,71 @@
+{
+  "schema": [
+    {
+      "name": "AtkLv1",
+      "type": 2
+    },
+    {
+      "name": "AtkLv99",
+      "type": 2
+    },
+    {
+      "name": "StbLv1",
+      "type": 1
+    },
+    {
+      "name": "StbLv99",
+      "type": 1
+    },
+    {
+      "name": "CriRateLv1",
+      "type": 1
+    },
+    {
+      "name": "CriRateLv99",
+      "type": 1
+    },
+    {
+      "name": "GuardRateLv1",
+      "type": 1
+    },
+    {
+      "name": "GuardRateLv99",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "AtkLv1": 16,
+      "AtkLv99": 750,
+      "StbLv1": 5,
+      "StbLv99": 5,
+      "CriRateLv1": 15,
+      "CriRateLv99": 15,
+      "GuardRateLv1": 5,
+      "GuardRateLv99": 5
+    },
+    {
+      "$id": 2,
+      "AtkLv1": 20,
+      "AtkLv99": 800,
+      "StbLv1": 15,
+      "StbLv99": 15,
+      "CriRateLv1": 10,
+      "CriRateLv99": 10,
+      "GuardRateLv1": 10,
+      "GuardRateLv99": 10
+    },
+    {
+      "$id": 3,
+      "AtkLv1": 16,
+      "AtkLv99": 700,
+      "StbLv1": 10,
+      "StbLv99": 10,
+      "CriRateLv1": 5,
+      "CriRateLv99": 5,
+      "GuardRateLv1": 30,
+      "GuardRateLv99": 30
+    }
+  ]
+}

@@ -1,0 +1,629 @@
+{
+  "schema": [
+    {
+      "name": "AchievementSetID",
+      "type": 2
+    },
+    {
+      "name": "Value",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "AchievementSetID": 315,
+      "Value": 2
+    },
+    {
+      "$id": 2,
+      "AchievementSetID": 315,
+      "Value": 3
+    },
+    {
+      "$id": 3,
+      "AchievementSetID": 315,
+      "Value": 4
+    },
+    {
+      "$id": 4,
+      "AchievementSetID": 75,
+      "Value": 4
+    },
+    {
+      "$id": 5,
+      "AchievementSetID": 465,
+      "Value": 3
+    },
+    {
+      "$id": 6,
+      "AchievementSetID": 425,
+      "Value": 4
+    },
+    {
+      "$id": 7,
+      "AchievementSetID": 455,
+      "Value": 4
+    },
+    {
+      "$id": 8,
+      "AchievementSetID": 435,
+      "Value": 4
+    },
+    {
+      "$id": 9,
+      "AchievementSetID": 445,
+      "Value": 3
+    },
+    {
+      "$id": 10,
+      "AchievementSetID": 125,
+      "Value": 5
+    },
+    {
+      "$id": 11,
+      "AchievementSetID": 155,
+      "Value": 3
+    },
+    {
+      "$id": 12,
+      "AchievementSetID": 165,
+      "Value": 3
+    },
+    {
+      "$id": 13,
+      "AchievementSetID": 205,
+      "Value": 4
+    },
+    {
+      "$id": 14,
+      "AchievementSetID": 185,
+      "Value": 2
+    },
+    {
+      "$id": 15,
+      "AchievementSetID": 225,
+      "Value": 3
+    },
+    {
+      "$id": 16,
+      "AchievementSetID": 215,
+      "Value": 5
+    },
+    {
+      "$id": 17,
+      "AchievementSetID": 235,
+      "Value": 3
+    },
+    {
+      "$id": 18,
+      "AchievementSetID": 245,
+      "Value": 3
+    },
+    {
+      "$id": 19,
+      "AchievementSetID": 255,
+      "Value": 5
+    },
+    {
+      "$id": 20,
+      "AchievementSetID": 265,
+      "Value": 1
+    },
+    {
+      "$id": 21,
+      "AchievementSetID": 285,
+      "Value": 4
+    },
+    {
+      "$id": 22,
+      "AchievementSetID": 295,
+      "Value": 3
+    },
+    {
+      "$id": 23,
+      "AchievementSetID": 305,
+      "Value": 4
+    },
+    {
+      "$id": 24,
+      "AchievementSetID": 315,
+      "Value": 3
+    },
+    {
+      "$id": 25,
+      "AchievementSetID": 345,
+      "Value": 3
+    },
+    {
+      "$id": 26,
+      "AchievementSetID": 365,
+      "Value": 1
+    },
+    {
+      "$id": 27,
+      "AchievementSetID": 375,
+      "Value": 3
+    },
+    {
+      "$id": 28,
+      "AchievementSetID": 395,
+      "Value": 5
+    },
+    {
+      "$id": 29,
+      "AchievementSetID": 415,
+      "Value": 3
+    },
+    {
+      "$id": 30,
+      "AchievementSetID": 405,
+      "Value": 3
+    },
+    {
+      "$id": 31,
+      "AchievementSetID": 115,
+      "Value": 4
+    },
+    {
+      "$id": 32,
+      "AchievementSetID": 135,
+      "Value": 2
+    },
+    {
+      "$id": 33,
+      "AchievementSetID": 145,
+      "Value": 5
+    },
+    {
+      "$id": 34,
+      "AchievementSetID": 195,
+      "Value": 5
+    },
+    {
+      "$id": 35,
+      "AchievementSetID": 275,
+      "Value": 3
+    },
+    {
+      "$id": 36,
+      "AchievementSetID": 325,
+      "Value": 5
+    },
+    {
+      "$id": 37,
+      "AchievementSetID": 335,
+      "Value": 4
+    },
+    {
+      "$id": 38,
+      "AchievementSetID": 355,
+      "Value": 3
+    },
+    {
+      "$id": 39,
+      "AchievementSetID": 385,
+      "Value": 5
+    },
+    {
+      "$id": 40,
+      "AchievementSetID": 365,
+      "Value": 5
+    },
+    {
+      "$id": 41,
+      "AchievementSetID": 215,
+      "Value": 4
+    },
+    {
+      "$id": 42,
+      "AchievementSetID": 135,
+      "Value": 3
+    },
+    {
+      "$id": 43,
+      "AchievementSetID": 205,
+      "Value": 3
+    },
+    {
+      "$id": 44,
+      "AchievementSetID": 125,
+      "Value": 4
+    },
+    {
+      "$id": 45,
+      "AchievementSetID": 145,
+      "Value": 3
+    },
+    {
+      "$id": 46,
+      "AchievementSetID": 295,
+      "Value": 5
+    },
+    {
+      "$id": 47,
+      "AchievementSetID": 235,
+      "Value": 4
+    },
+    {
+      "$id": 48,
+      "AchievementSetID": 165,
+      "Value": 5
+    },
+    {
+      "$id": 49,
+      "AchievementSetID": 345,
+      "Value": 5
+    },
+    {
+      "$id": 50,
+      "AchievementSetID": 375,
+      "Value": 5
+    },
+    {
+      "$id": 51,
+      "AchievementSetID": 185,
+      "Value": 2
+    },
+    {
+      "$id": 52,
+      "AchievementSetID": 185,
+      "Value": 3
+    },
+    {
+      "$id": 53,
+      "AchievementSetID": 185,
+      "Value": 4
+    },
+    {
+      "$id": 54,
+      "AchievementSetID": 185,
+      "Value": 5
+    },
+    {
+      "$id": 55,
+      "AchievementSetID": 315,
+      "Value": 5
+    },
+    {
+      "$id": 56,
+      "AchievementSetID": 395,
+      "Value": 2
+    },
+    {
+      "$id": 57,
+      "AchievementSetID": 335,
+      "Value": 5
+    },
+    {
+      "$id": 58,
+      "AchievementSetID": 255,
+      "Value": 2
+    },
+    {
+      "$id": 59,
+      "AchievementSetID": 285,
+      "Value": 3
+    },
+    {
+      "$id": 60,
+      "AchievementSetID": 245,
+      "Value": 5
+    },
+    {
+      "$id": 61,
+      "AchievementSetID": 355,
+      "Value": 4
+    },
+    {
+      "$id": 62,
+      "AchievementSetID": 208,
+      "Value": 4
+    },
+    {
+      "$id": 63,
+      "AchievementSetID": 225,
+      "Value": 2
+    },
+    {
+      "$id": 64,
+      "AchievementSetID": 375,
+      "Value": 2
+    },
+    {
+      "$id": 65,
+      "AchievementSetID": 314,
+      "Value": 2
+    },
+    {
+      "$id": 66,
+      "AchievementSetID": 314,
+      "Value": 3
+    },
+    {
+      "$id": 67,
+      "AchievementSetID": 385,
+      "Value": 2
+    },
+    {
+      "$id": 68,
+      "AchievementSetID": 208,
+      "Value": 5
+    },
+    {
+      "$id": 69,
+      "AchievementSetID": 208,
+      "Value": 4
+    },
+    {
+      "$id": 70,
+      "AchievementSetID": 314,
+      "Value": 4
+    },
+    {
+      "$id": 71,
+      "AchievementSetID": 344,
+      "Value": 5
+    },
+    {
+      "$id": 72,
+      "AchievementSetID": 1668,
+      "Value": 4
+    },
+    {
+      "$id": 73,
+      "AchievementSetID": 1749,
+      "Value": 2
+    },
+    {
+      "$id": 74,
+      "AchievementSetID": 1749,
+      "Value": 3
+    },
+    {
+      "$id": 75,
+      "AchievementSetID": 1749,
+      "Value": 4
+    },
+    {
+      "$id": 76,
+      "AchievementSetID": 1749,
+      "Value": 5
+    },
+    {
+      "$id": 77,
+      "AchievementSetID": 1756,
+      "Value": 1
+    },
+    {
+      "$id": 78,
+      "AchievementSetID": 1756,
+      "Value": 2
+    },
+    {
+      "$id": 79,
+      "AchievementSetID": 1756,
+      "Value": 3
+    },
+    {
+      "$id": 80,
+      "AchievementSetID": 1756,
+      "Value": 4
+    },
+    {
+      "$id": 81,
+      "AchievementSetID": 1756,
+      "Value": 1
+    },
+    {
+      "$id": 82,
+      "AchievementSetID": 1756,
+      "Value": 2
+    },
+    {
+      "$id": 83,
+      "AchievementSetID": 1756,
+      "Value": 3
+    },
+    {
+      "$id": 84,
+      "AchievementSetID": 1756,
+      "Value": 4
+    },
+    {
+      "$id": 85,
+      "AchievementSetID": 1756,
+      "Value": 5
+    },
+    {
+      "$id": 86,
+      "AchievementSetID": 1699,
+      "Value": 2
+    },
+    {
+      "$id": 87,
+      "AchievementSetID": 1699,
+      "Value": 3
+    },
+    {
+      "$id": 88,
+      "AchievementSetID": 1699,
+      "Value": 4
+    },
+    {
+      "$id": 89,
+      "AchievementSetID": 1699,
+      "Value": 5
+    },
+    {
+      "$id": 90,
+      "AchievementSetID": 1719,
+      "Value": 2
+    },
+    {
+      "$id": 91,
+      "AchievementSetID": 1719,
+      "Value": 3
+    },
+    {
+      "$id": 92,
+      "AchievementSetID": 1719,
+      "Value": 4
+    },
+    {
+      "$id": 93,
+      "AchievementSetID": 1719,
+      "Value": 5
+    },
+    {
+      "$id": 94,
+      "AchievementSetID": 1689,
+      "Value": 2
+    },
+    {
+      "$id": 95,
+      "AchievementSetID": 1689,
+      "Value": 3
+    },
+    {
+      "$id": 96,
+      "AchievementSetID": 1689,
+      "Value": 4
+    },
+    {
+      "$id": 97,
+      "AchievementSetID": 1689,
+      "Value": 5
+    },
+    {
+      "$id": 98,
+      "AchievementSetID": 1709,
+      "Value": 2
+    },
+    {
+      "$id": 99,
+      "AchievementSetID": 1709,
+      "Value": 3
+    },
+    {
+      "$id": 100,
+      "AchievementSetID": 1709,
+      "Value": 4
+    },
+    {
+      "$id": 101,
+      "AchievementSetID": 1709,
+      "Value": 5
+    },
+    {
+      "$id": 102,
+      "AchievementSetID": 1679,
+      "Value": 2
+    },
+    {
+      "$id": 103,
+      "AchievementSetID": 1679,
+      "Value": 3
+    },
+    {
+      "$id": 104,
+      "AchievementSetID": 1679,
+      "Value": 4
+    },
+    {
+      "$id": 105,
+      "AchievementSetID": 1679,
+      "Value": 5
+    },
+    {
+      "$id": 106,
+      "AchievementSetID": 1729,
+      "Value": 2
+    },
+    {
+      "$id": 107,
+      "AchievementSetID": 1729,
+      "Value": 3
+    },
+    {
+      "$id": 108,
+      "AchievementSetID": 1729,
+      "Value": 4
+    },
+    {
+      "$id": 109,
+      "AchievementSetID": 1729,
+      "Value": 5
+    },
+    {
+      "$id": 110,
+      "AchievementSetID": 1746,
+      "Value": 2
+    },
+    {
+      "$id": 111,
+      "AchievementSetID": 1746,
+      "Value": 3
+    },
+    {
+      "$id": 112,
+      "AchievementSetID": 1746,
+      "Value": 4
+    },
+    {
+      "$id": 113,
+      "AchievementSetID": 1746,
+      "Value": 5
+    },
+    {
+      "$id": 114,
+      "AchievementSetID": 1739,
+      "Value": 5
+    },
+    {
+      "$id": 115,
+      "AchievementSetID": 1759,
+      "Value": 2
+    },
+    {
+      "$id": 116,
+      "AchievementSetID": 1759,
+      "Value": 3
+    },
+    {
+      "$id": 117,
+      "AchievementSetID": 1759,
+      "Value": 4
+    },
+    {
+      "$id": 118,
+      "AchievementSetID": 1759,
+      "Value": 5
+    },
+    {
+      "$id": 119,
+      "AchievementSetID": 1766,
+      "Value": 1
+    },
+    {
+      "$id": 120,
+      "AchievementSetID": 1766,
+      "Value": 2
+    },
+    {
+      "$id": 121,
+      "AchievementSetID": 1766,
+      "Value": 3
+    },
+    {
+      "$id": 122,
+      "AchievementSetID": 1766,
+      "Value": 4
+    },
+    {
+      "$id": 123,
+      "AchievementSetID": 1767,
+      "Value": 5
+    }
+  ]
+}

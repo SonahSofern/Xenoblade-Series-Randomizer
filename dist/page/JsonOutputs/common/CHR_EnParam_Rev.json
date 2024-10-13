@@ -1,0 +1,3090 @@
+{
+  "schema": [
+    {
+      "name": "HpMaxRev",
+      "type": 2
+    },
+    {
+      "name": "StrengthRev",
+      "type": 2
+    },
+    {
+      "name": "PowEtherRev",
+      "type": 2
+    },
+    {
+      "name": "DexRev",
+      "type": 2
+    },
+    {
+      "name": "AgilityRev",
+      "type": 2
+    },
+    {
+      "name": "LuckRev",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "HpMaxRev": 500,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 2,
+      "HpMaxRev": 900,
+      "StrengthRev": 900,
+      "PowEtherRev": 900,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 3,
+      "HpMaxRev": 850,
+      "StrengthRev": 850,
+      "PowEtherRev": 850,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 4,
+      "HpMaxRev": 800,
+      "StrengthRev": 800,
+      "PowEtherRev": 800,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 5,
+      "HpMaxRev": 750,
+      "StrengthRev": 750,
+      "PowEtherRev": 750,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 6,
+      "HpMaxRev": 700,
+      "StrengthRev": 700,
+      "PowEtherRev": 700,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 7,
+      "HpMaxRev": 700,
+      "StrengthRev": 850,
+      "PowEtherRev": 850,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 8,
+      "HpMaxRev": 600,
+      "StrengthRev": 650,
+      "PowEtherRev": 650,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 9,
+      "HpMaxRev": 900,
+      "StrengthRev": 650,
+      "PowEtherRev": 650,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 10,
+      "HpMaxRev": 500,
+      "StrengthRev": 600,
+      "PowEtherRev": 500,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 11,
+      "HpMaxRev": 500,
+      "StrengthRev": 750,
+      "PowEtherRev": 650,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 12,
+      "HpMaxRev": 300,
+      "StrengthRev": 400,
+      "PowEtherRev": 400,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 13,
+      "HpMaxRev": 550,
+      "StrengthRev": 400,
+      "PowEtherRev": 400,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 14,
+      "HpMaxRev": 250,
+      "StrengthRev": 250,
+      "PowEtherRev": 250,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 15,
+      "HpMaxRev": 500,
+      "StrengthRev": 250,
+      "PowEtherRev": 250,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 16,
+      "HpMaxRev": 200,
+      "StrengthRev": 200,
+      "PowEtherRev": 200,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 17,
+      "HpMaxRev": 150,
+      "StrengthRev": 150,
+      "PowEtherRev": 150,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 18,
+      "HpMaxRev": 800,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 19,
+      "HpMaxRev": 700,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 20,
+      "HpMaxRev": 600,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 21,
+      "HpMaxRev": 550,
+      "StrengthRev": 500,
+      "PowEtherRev": 500,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 22,
+      "HpMaxRev": 900,
+      "StrengthRev": 900,
+      "PowEtherRev": 900,
+      "DexRev": 1000,
+      "AgilityRev": 500,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 23,
+      "HpMaxRev": 900,
+      "StrengthRev": 800,
+      "PowEtherRev": 450,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 24,
+      "HpMaxRev": 400,
+      "StrengthRev": 2000,
+      "PowEtherRev": 2000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 25,
+      "HpMaxRev": 300,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1000,
+      "DexRev": 800,
+      "AgilityRev": 600,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 26,
+      "HpMaxRev": 500,
+      "StrengthRev": 800,
+      "PowEtherRev": 800,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 27,
+      "HpMaxRev": 350,
+      "StrengthRev": 500,
+      "PowEtherRev": 500,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 28,
+      "HpMaxRev": 1000,
+      "StrengthRev": 800,
+      "PowEtherRev": 600,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 29,
+      "HpMaxRev": 500,
+      "StrengthRev": 700,
+      "PowEtherRev": 700,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 30,
+      "HpMaxRev": 250,
+      "StrengthRev": 450,
+      "PowEtherRev": 400,
+      "DexRev": 900,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 31,
+      "HpMaxRev": 400,
+      "StrengthRev": 680,
+      "PowEtherRev": 680,
+      "DexRev": 900,
+      "AgilityRev": 800,
+      "LuckRev": 900
+    },
+    {
+      "$id": 32,
+      "HpMaxRev": 250,
+      "StrengthRev": 400,
+      "PowEtherRev": 400,
+      "DexRev": 750,
+      "AgilityRev": 300,
+      "LuckRev": 900
+    },
+    {
+      "$id": 33,
+      "HpMaxRev": 130,
+      "StrengthRev": 150,
+      "PowEtherRev": 150,
+      "DexRev": 500,
+      "AgilityRev": 100,
+      "LuckRev": 900
+    },
+    {
+      "$id": 34,
+      "HpMaxRev": 500,
+      "StrengthRev": 700,
+      "PowEtherRev": 700,
+      "DexRev": 900,
+      "AgilityRev": 800,
+      "LuckRev": 900
+    },
+    {
+      "$id": 35,
+      "HpMaxRev": 1100,
+      "StrengthRev": 1100,
+      "PowEtherRev": 1100,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 36,
+      "HpMaxRev": 1150,
+      "StrengthRev": 1150,
+      "PowEtherRev": 1150,
+      "DexRev": 1150,
+      "AgilityRev": 1100,
+      "LuckRev": 1150
+    },
+    {
+      "$id": 37,
+      "HpMaxRev": 1200,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1200,
+      "DexRev": 1200,
+      "AgilityRev": 1100,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 38,
+      "HpMaxRev": 1250,
+      "StrengthRev": 1250,
+      "PowEtherRev": 1250,
+      "DexRev": 1250,
+      "AgilityRev": 1100,
+      "LuckRev": 1250
+    },
+    {
+      "$id": 39,
+      "HpMaxRev": 1300,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1300,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 40,
+      "HpMaxRev": 1400,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1400,
+      "DexRev": 1400,
+      "AgilityRev": 1100,
+      "LuckRev": 1400
+    },
+    {
+      "$id": 41,
+      "HpMaxRev": 1500,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1500,
+      "AgilityRev": 1100,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 42,
+      "HpMaxRev": 2000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 43,
+      "HpMaxRev": 1100,
+      "StrengthRev": 1300,
+      "PowEtherRev": 800,
+      "DexRev": 900,
+      "AgilityRev": 900,
+      "LuckRev": 600
+    },
+    {
+      "$id": 44,
+      "HpMaxRev": 1100,
+      "StrengthRev": 1250,
+      "PowEtherRev": 1250,
+      "DexRev": 1250,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 45,
+      "HpMaxRev": 1200,
+      "StrengthRev": 1250,
+      "PowEtherRev": 1100,
+      "DexRev": 1250,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 46,
+      "HpMaxRev": 1100,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1100,
+      "DexRev": 1250,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 47,
+      "HpMaxRev": 1100,
+      "StrengthRev": 1100,
+      "PowEtherRev": 1250,
+      "DexRev": 1250,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 48,
+      "HpMaxRev": 800,
+      "StrengthRev": 650,
+      "PowEtherRev": 500,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 49,
+      "HpMaxRev": 800,
+      "StrengthRev": 700,
+      "PowEtherRev": 600,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 50,
+      "HpMaxRev": 700,
+      "StrengthRev": 700,
+      "PowEtherRev": 600,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 51,
+      "HpMaxRev": 700,
+      "StrengthRev": 600,
+      "PowEtherRev": 600,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 52,
+      "HpMaxRev": 2500,
+      "StrengthRev": 1100,
+      "PowEtherRev": 1100,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 53,
+      "HpMaxRev": 2500,
+      "StrengthRev": 1100,
+      "PowEtherRev": 1100,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 54,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 55,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1500,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 56,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1800,
+      "PowEtherRev": 1800,
+      "DexRev": 1500,
+      "AgilityRev": 1100,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 57,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 58,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1600,
+      "PowEtherRev": 1800,
+      "DexRev": 1500,
+      "AgilityRev": 1300,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 59,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 60,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 61,
+      "HpMaxRev": 5400,
+      "StrengthRev": 2000,
+      "PowEtherRev": 1400,
+      "DexRev": 1400,
+      "AgilityRev": 1300,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 62,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 63,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 64,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 65,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 66,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 67,
+      "HpMaxRev": 4500,
+      "StrengthRev": 1700,
+      "PowEtherRev": 1400,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 68,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 69,
+      "HpMaxRev": 3000,
+      "StrengthRev": 1030,
+      "PowEtherRev": 1000,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 70,
+      "HpMaxRev": 8000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 71,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 72,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 2000,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 73,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 74,
+      "HpMaxRev": 4300,
+      "StrengthRev": 1350,
+      "PowEtherRev": 950,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 75,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1600,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 76,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1600,
+      "PowEtherRev": 1400,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 77,
+      "HpMaxRev": 6500,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1600,
+      "DexRev": 1400,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 78,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 79,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1700,
+      "PowEtherRev": 1400,
+      "DexRev": 1300,
+      "AgilityRev": 1200,
+      "LuckRev": 1400
+    },
+    {
+      "$id": 80,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1400,
+      "DexRev": 1100,
+      "AgilityRev": 1000,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 81,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 82,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 83,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 84,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 85,
+      "HpMaxRev": 2200,
+      "StrengthRev": 1000,
+      "PowEtherRev": 800,
+      "DexRev": 900,
+      "AgilityRev": 1000,
+      "LuckRev": 1800
+    },
+    {
+      "$id": 86,
+      "HpMaxRev": 10400,
+      "StrengthRev": 2000,
+      "PowEtherRev": 2000,
+      "DexRev": 1500,
+      "AgilityRev": 1200,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 87,
+      "HpMaxRev": 3500,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1200,
+      "AgilityRev": 1200,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 88,
+      "HpMaxRev": 3000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1300,
+      "DexRev": 1200,
+      "AgilityRev": 1200,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 89,
+      "HpMaxRev": 1900,
+      "StrengthRev": 920,
+      "PowEtherRev": 1200,
+      "DexRev": 1100,
+      "AgilityRev": 1000,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 90,
+      "HpMaxRev": 2500,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 91,
+      "HpMaxRev": 2500,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1300,
+      "AgilityRev": 1000,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 92,
+      "HpMaxRev": 7600,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1500,
+      "AgilityRev": 1200,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 93,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 94,
+      "HpMaxRev": 1000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 95,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1100,
+      "DexRev": 1500,
+      "AgilityRev": 1300,
+      "LuckRev": 1600
+    },
+    {
+      "$id": 96,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1300,
+      "AgilityRev": 1200,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 97,
+      "HpMaxRev": 6800,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 98,
+      "HpMaxRev": 5800,
+      "StrengthRev": 920,
+      "PowEtherRev": 1150,
+      "DexRev": 1550,
+      "AgilityRev": 1100,
+      "LuckRev": 3000
+    },
+    {
+      "$id": 99,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1300,
+      "DexRev": 1300,
+      "AgilityRev": 1100,
+      "LuckRev": 1800
+    },
+    {
+      "$id": 100,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 101,
+      "HpMaxRev": 4500,
+      "StrengthRev": 1150,
+      "PowEtherRev": 1000,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 102,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1150,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 103,
+      "HpMaxRev": 7000,
+      "StrengthRev": 1450,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1000,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 104,
+      "HpMaxRev": 7000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1300,
+      "DexRev": 1200,
+      "AgilityRev": 1100,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 105,
+      "HpMaxRev": 3500,
+      "StrengthRev": 1330,
+      "PowEtherRev": 1420,
+      "DexRev": 1100,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 106,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 107,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1800
+    },
+    {
+      "$id": 108,
+      "HpMaxRev": 8000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 109,
+      "HpMaxRev": 7000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1400,
+      "DexRev": 1200,
+      "AgilityRev": 1200,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 110,
+      "HpMaxRev": 7000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1500,
+      "AgilityRev": 1200,
+      "LuckRev": 2000
+    },
+    {
+      "$id": 111,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1300,
+      "DexRev": 1300,
+      "AgilityRev": 1200,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 112,
+      "HpMaxRev": 2000,
+      "StrengthRev": 1250,
+      "PowEtherRev": 1300,
+      "DexRev": 1500,
+      "AgilityRev": 1100,
+      "LuckRev": 1800
+    },
+    {
+      "$id": 113,
+      "HpMaxRev": 7000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1400,
+      "AgilityRev": 1300,
+      "LuckRev": 1400
+    },
+    {
+      "$id": 114,
+      "HpMaxRev": 6500,
+      "StrengthRev": 1320,
+      "PowEtherRev": 1400,
+      "DexRev": 1150,
+      "AgilityRev": 1100,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 115,
+      "HpMaxRev": 1000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 116,
+      "HpMaxRev": 7000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1500,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 117,
+      "HpMaxRev": 8000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 118,
+      "HpMaxRev": 9000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1300,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 119,
+      "HpMaxRev": 5500,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 120,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 121,
+      "HpMaxRev": 6500,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1500,
+      "DexRev": 1300,
+      "AgilityRev": 1100,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 122,
+      "HpMaxRev": 4500,
+      "StrengthRev": 1350,
+      "PowEtherRev": 1400,
+      "DexRev": 1500,
+      "AgilityRev": 1100,
+      "LuckRev": 1800
+    },
+    {
+      "$id": 123,
+      "HpMaxRev": 5500,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1300,
+      "AgilityRev": 1500,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 124,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1300,
+      "DexRev": 1600,
+      "AgilityRev": 1200,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 125,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1300,
+      "AgilityRev": 1000,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 126,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1200,
+      "AgilityRev": 1000,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 127,
+      "HpMaxRev": 2000,
+      "StrengthRev": 1900,
+      "PowEtherRev": 2500,
+      "DexRev": 1000,
+      "AgilityRev": 800,
+      "LuckRev": 600
+    },
+    {
+      "$id": 128,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1500,
+      "DexRev": 1300,
+      "AgilityRev": 1200,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 129,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1300,
+      "DexRev": 1500,
+      "AgilityRev": 1300,
+      "LuckRev": 1600
+    },
+    {
+      "$id": 130,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 131,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 132,
+      "HpMaxRev": 4500,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 133,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1300,
+      "DexRev": 1500,
+      "AgilityRev": 1300,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 134,
+      "HpMaxRev": 5500,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1400,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 135,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1500,
+      "DexRev": 1300,
+      "AgilityRev": 1200,
+      "LuckRev": 1400
+    },
+    {
+      "$id": 136,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1300,
+      "DexRev": 1200,
+      "AgilityRev": 1000,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 137,
+      "HpMaxRev": 3000,
+      "StrengthRev": 980,
+      "PowEtherRev": 800,
+      "DexRev": 1300,
+      "AgilityRev": 1000,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 138,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1300,
+      "AgilityRev": 1000,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 139,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1200,
+      "AgilityRev": 1000,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 140,
+      "HpMaxRev": 2000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 900,
+      "AgilityRev": 600,
+      "LuckRev": 800
+    },
+    {
+      "$id": 141,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1400,
+      "DexRev": 1300,
+      "AgilityRev": 1000,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 142,
+      "HpMaxRev": 2500,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1400,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 143,
+      "HpMaxRev": 4500,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1200,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 144,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1500,
+      "AgilityRev": 1000,
+      "LuckRev": 1800
+    },
+    {
+      "$id": 145,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1400,
+      "DexRev": 1500,
+      "AgilityRev": 1200,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 146,
+      "HpMaxRev": 3000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1100,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 800
+    },
+    {
+      "$id": 147,
+      "HpMaxRev": 8000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1500,
+      "AgilityRev": 1300,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 148,
+      "HpMaxRev": 1000,
+      "StrengthRev": 780,
+      "PowEtherRev": 750,
+      "DexRev": 800,
+      "AgilityRev": 900,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 149,
+      "HpMaxRev": 4500,
+      "StrengthRev": 710,
+      "PowEtherRev": 820,
+      "DexRev": 1200,
+      "AgilityRev": 1000,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 150,
+      "HpMaxRev": 3000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1400,
+      "DexRev": 1300,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 151,
+      "HpMaxRev": 8000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1300,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 152,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1300,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 153,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1300,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 154,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1400,
+      "DexRev": 1300,
+      "AgilityRev": 1200,
+      "LuckRev": 1800
+    },
+    {
+      "$id": 155,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1200,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 156,
+      "HpMaxRev": 8000,
+      "StrengthRev": 1600,
+      "PowEtherRev": 1600,
+      "DexRev": 1300,
+      "AgilityRev": 1100,
+      "LuckRev": 2000
+    },
+    {
+      "$id": 157,
+      "HpMaxRev": 1500,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 158,
+      "HpMaxRev": 2000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1200,
+      "DexRev": 1200,
+      "AgilityRev": 1000,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 159,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 160,
+      "HpMaxRev": 250,
+      "StrengthRev": 150,
+      "PowEtherRev": 150,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 161,
+      "HpMaxRev": 3000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1500,
+      "DexRev": 2000,
+      "AgilityRev": 1300,
+      "LuckRev": 2000
+    },
+    {
+      "$id": 162,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1200,
+      "DexRev": 1600,
+      "AgilityRev": 1200,
+      "LuckRev": 1800
+    },
+    {
+      "$id": 163,
+      "HpMaxRev": 3000,
+      "StrengthRev": 1100,
+      "PowEtherRev": 1300,
+      "DexRev": 1200,
+      "AgilityRev": 1100,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 164,
+      "HpMaxRev": 3000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1300,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 165,
+      "HpMaxRev": 1500,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1100,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 166,
+      "HpMaxRev": 2000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1200,
+      "DexRev": 1300,
+      "AgilityRev": 1300,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 167,
+      "HpMaxRev": 700,
+      "StrengthRev": 900,
+      "PowEtherRev": 650,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 168,
+      "HpMaxRev": 2000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1300,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 169,
+      "HpMaxRev": 2500,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1500,
+      "AgilityRev": 1200,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 170,
+      "HpMaxRev": 1600,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1200,
+      "DexRev": 1300,
+      "AgilityRev": 1300,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 171,
+      "HpMaxRev": 1800,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1300,
+      "DexRev": 1500,
+      "AgilityRev": 1300,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 172,
+      "HpMaxRev": 1600,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1200,
+      "DexRev": 1300,
+      "AgilityRev": 1300,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 173,
+      "HpMaxRev": 1800,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1300,
+      "DexRev": 1500,
+      "AgilityRev": 1300,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 174,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1300,
+      "DexRev": 1600,
+      "AgilityRev": 1500,
+      "LuckRev": 1800
+    },
+    {
+      "$id": 175,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1300,
+      "DexRev": 1200,
+      "AgilityRev": 1000,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 176,
+      "HpMaxRev": 1500,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 177,
+      "HpMaxRev": 1300,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1200,
+      "DexRev": 1500,
+      "AgilityRev": 1200,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 178,
+      "HpMaxRev": 15000,
+      "StrengthRev": 2300,
+      "PowEtherRev": 2000,
+      "DexRev": 1800,
+      "AgilityRev": 1100,
+      "LuckRev": 1800
+    },
+    {
+      "$id": 179,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1100,
+      "PowEtherRev": 2500,
+      "DexRev": 1800,
+      "AgilityRev": 1800,
+      "LuckRev": 2000
+    },
+    {
+      "$id": 180,
+      "HpMaxRev": 4800,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1500,
+      "DexRev": 1600,
+      "AgilityRev": 1400,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 181,
+      "HpMaxRev": 2000,
+      "StrengthRev": 1600,
+      "PowEtherRev": 1300,
+      "DexRev": 1600,
+      "AgilityRev": 1000,
+      "LuckRev": 2000
+    },
+    {
+      "$id": 182,
+      "HpMaxRev": 1000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1300,
+      "DexRev": 1800,
+      "AgilityRev": 1200,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 183,
+      "HpMaxRev": 1500,
+      "StrengthRev": 1800,
+      "PowEtherRev": 1800,
+      "DexRev": 1600,
+      "AgilityRev": 1400,
+      "LuckRev": 1600
+    },
+    {
+      "$id": 184,
+      "HpMaxRev": 13000,
+      "StrengthRev": 1600,
+      "PowEtherRev": 1400,
+      "DexRev": 1400,
+      "AgilityRev": 1000,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 185,
+      "HpMaxRev": 850,
+      "StrengthRev": 1100,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 186,
+      "HpMaxRev": 700,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 187,
+      "HpMaxRev": 700,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 188,
+      "HpMaxRev": 800,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 189,
+      "HpMaxRev": 800,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1200,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 190,
+      "HpMaxRev": 900,
+      "StrengthRev": 1300,
+      "PowEtherRev": 2500,
+      "DexRev": 1500,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 191,
+      "HpMaxRev": 600,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 192,
+      "HpMaxRev": 2500,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1400,
+      "DexRev": 1100,
+      "AgilityRev": 800,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 193,
+      "HpMaxRev": 500,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 194,
+      "HpMaxRev": 800,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1000,
+      "AgilityRev": 600,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 195,
+      "HpMaxRev": 2000,
+      "StrengthRev": 1600,
+      "PowEtherRev": 1400,
+      "DexRev": 1200,
+      "AgilityRev": 800,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 196,
+      "HpMaxRev": 900,
+      "StrengthRev": 1100,
+      "PowEtherRev": 1100,
+      "DexRev": 1000,
+      "AgilityRev": 600,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 197,
+      "HpMaxRev": 500,
+      "StrengthRev": 1100,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 800,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 198,
+      "HpMaxRev": 2300,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1200,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 199,
+      "HpMaxRev": 850,
+      "StrengthRev": 1800,
+      "PowEtherRev": 1300,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 200,
+      "HpMaxRev": 600,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 201,
+      "HpMaxRev": 2400,
+      "StrengthRev": 1800,
+      "PowEtherRev": 2400,
+      "DexRev": 1300,
+      "AgilityRev": 600,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 202,
+      "HpMaxRev": 900,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1800,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 203,
+      "HpMaxRev": 1000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 204,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1200,
+      "DexRev": 2000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 205,
+      "HpMaxRev": 350,
+      "StrengthRev": 800,
+      "PowEtherRev": 900,
+      "DexRev": 1300,
+      "AgilityRev": 1300,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 206,
+      "HpMaxRev": 500,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1200,
+      "DexRev": 1600,
+      "AgilityRev": 1800,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 207,
+      "HpMaxRev": 800,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1150,
+      "DexRev": 1600,
+      "AgilityRev": 1600,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 208,
+      "HpMaxRev": 1000,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1200,
+      "DexRev": 1500,
+      "AgilityRev": 1200,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 209,
+      "HpMaxRev": 1000,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1200,
+      "DexRev": 1500,
+      "AgilityRev": 1300,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 210,
+      "HpMaxRev": 3000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1400,
+      "AgilityRev": 1400,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 211,
+      "HpMaxRev": 500,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 212,
+      "HpMaxRev": 3000,
+      "StrengthRev": 2000,
+      "PowEtherRev": 1800,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 213,
+      "HpMaxRev": 2500,
+      "StrengthRev": 1600,
+      "PowEtherRev": 1600,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 214,
+      "HpMaxRev": 800,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1400,
+      "DexRev": 1500,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 215,
+      "HpMaxRev": 900,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1400,
+      "DexRev": 1500,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 216,
+      "HpMaxRev": 1500,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1100,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 217,
+      "HpMaxRev": 300,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1200,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 218,
+      "HpMaxRev": 500,
+      "StrengthRev": 1350,
+      "PowEtherRev": 1350,
+      "DexRev": 2000,
+      "AgilityRev": 1500,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 219,
+      "HpMaxRev": 3000,
+      "StrengthRev": 1800,
+      "PowEtherRev": 1800,
+      "DexRev": 1500,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 220,
+      "HpMaxRev": 5000,
+      "StrengthRev": 2200,
+      "PowEtherRev": 2200,
+      "DexRev": 2000,
+      "AgilityRev": 1500,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 221,
+      "HpMaxRev": 1000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 2000,
+      "AgilityRev": 1000,
+      "LuckRev": 2000
+    },
+    {
+      "$id": 222,
+      "HpMaxRev": 1000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 2000,
+      "AgilityRev": 1000,
+      "LuckRev": 2000
+    },
+    {
+      "$id": 223,
+      "HpMaxRev": 9000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1400,
+      "DexRev": 1400,
+      "AgilityRev": 800,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 224,
+      "HpMaxRev": 400,
+      "StrengthRev": 1100,
+      "PowEtherRev": 1100,
+      "DexRev": 1300,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 225,
+      "HpMaxRev": 2000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1100,
+      "AgilityRev": 600,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 226,
+      "HpMaxRev": 500,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1500,
+      "DexRev": 1400,
+      "AgilityRev": 1200,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 227,
+      "HpMaxRev": 200,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1300,
+      "AgilityRev": 1000,
+      "LuckRev": 3000
+    },
+    {
+      "$id": 228,
+      "HpMaxRev": 500,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 229,
+      "HpMaxRev": 400,
+      "StrengthRev": 900,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 230,
+      "HpMaxRev": 600,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 231,
+      "HpMaxRev": 800,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 232,
+      "HpMaxRev": 500,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 233,
+      "HpMaxRev": 600,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 234,
+      "HpMaxRev": 400,
+      "StrengthRev": 900,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 235,
+      "HpMaxRev": 800,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 236,
+      "HpMaxRev": 800,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 237,
+      "HpMaxRev": 800,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 238,
+      "HpMaxRev": 1000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 239,
+      "HpMaxRev": 1200,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 240,
+      "HpMaxRev": 1800,
+      "StrengthRev": 1100,
+      "PowEtherRev": 1200,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 241,
+      "HpMaxRev": 3000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1000,
+      "DexRev": 1500,
+      "AgilityRev": 1500,
+      "LuckRev": 2000
+    },
+    {
+      "$id": 242,
+      "HpMaxRev": 3000,
+      "StrengthRev": 1100,
+      "PowEtherRev": 1100,
+      "DexRev": 1500,
+      "AgilityRev": 1500,
+      "LuckRev": 2000
+    },
+    {
+      "$id": 243,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1100,
+      "PowEtherRev": 1100,
+      "DexRev": 1300,
+      "AgilityRev": 1000,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 244,
+      "HpMaxRev": 12000,
+      "StrengthRev": 1600,
+      "PowEtherRev": 1500,
+      "DexRev": 2000,
+      "AgilityRev": 2000,
+      "LuckRev": 3000
+    },
+    {
+      "$id": 245,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1800,
+      "DexRev": 1500,
+      "AgilityRev": 1500,
+      "LuckRev": 2000
+    },
+    {
+      "$id": 246,
+      "HpMaxRev": 14000,
+      "StrengthRev": 1800,
+      "PowEtherRev": 1200,
+      "DexRev": 1300,
+      "AgilityRev": 1000,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 247,
+      "HpMaxRev": 800,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 248,
+      "HpMaxRev": 1000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 249,
+      "HpMaxRev": 1000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 250,
+      "HpMaxRev": 2200,
+      "StrengthRev": 1000,
+      "PowEtherRev": 800,
+      "DexRev": 900,
+      "AgilityRev": 1000,
+      "LuckRev": 1800
+    },
+    {
+      "$id": 251,
+      "HpMaxRev": 1000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 800,
+      "DexRev": 900,
+      "AgilityRev": 1000,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 252,
+      "HpMaxRev": 500,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 253,
+      "HpMaxRev": 16000,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1250,
+      "DexRev": 1100,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 254,
+      "HpMaxRev": 200,
+      "StrengthRev": 900,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 255,
+      "HpMaxRev": 100,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 256,
+      "HpMaxRev": 300,
+      "StrengthRev": 900,
+      "PowEtherRev": 900,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 257,
+      "HpMaxRev": 400,
+      "StrengthRev": 900,
+      "PowEtherRev": 800,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 258,
+      "HpMaxRev": 800,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 259,
+      "HpMaxRev": 1500,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 260,
+      "HpMaxRev": 1800,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 261,
+      "HpMaxRev": 20000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1100,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 262,
+      "HpMaxRev": 600,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 263,
+      "HpMaxRev": 800,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 264,
+      "HpMaxRev": 400,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 265,
+      "HpMaxRev": 500,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 266,
+      "HpMaxRev": 500,
+      "StrengthRev": 900,
+      "PowEtherRev": 900,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 267,
+      "HpMaxRev": 2000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1800,
+      "AgilityRev": 1800,
+      "LuckRev": 2000
+    },
+    {
+      "$id": 268,
+      "HpMaxRev": 2000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 269,
+      "HpMaxRev": 9000,
+      "StrengthRev": 1250,
+      "PowEtherRev": 1200,
+      "DexRev": 1800,
+      "AgilityRev": 1200,
+      "LuckRev": 1600
+    },
+    {
+      "$id": 270,
+      "HpMaxRev": 200,
+      "StrengthRev": 800,
+      "PowEtherRev": 800,
+      "DexRev": 1500,
+      "AgilityRev": 800,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 271,
+      "HpMaxRev": 600,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 272,
+      "HpMaxRev": 400,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 2000,
+      "AgilityRev": 1500,
+      "LuckRev": 2000
+    },
+    {
+      "$id": 273,
+      "HpMaxRev": 600,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 274,
+      "HpMaxRev": 500,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 275,
+      "HpMaxRev": 1300,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 276,
+      "HpMaxRev": 300,
+      "StrengthRev": 900,
+      "PowEtherRev": 900,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 277,
+      "HpMaxRev": 400,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 3000,
+      "AgilityRev": 1000,
+      "LuckRev": 2000
+    },
+    {
+      "$id": 278,
+      "HpMaxRev": 250,
+      "StrengthRev": 500,
+      "PowEtherRev": 500,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 279,
+      "HpMaxRev": 300,
+      "StrengthRev": 600,
+      "PowEtherRev": 600,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 280,
+      "HpMaxRev": 150,
+      "StrengthRev": 300,
+      "PowEtherRev": 400,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 281,
+      "HpMaxRev": 150,
+      "StrengthRev": 300,
+      "PowEtherRev": 400,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 282,
+      "HpMaxRev": 1000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1500,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 283,
+      "HpMaxRev": 400,
+      "StrengthRev": 800,
+      "PowEtherRev": 500,
+      "DexRev": 1300,
+      "AgilityRev": 800,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 284,
+      "HpMaxRev": 250,
+      "StrengthRev": 800,
+      "PowEtherRev": 600,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 285,
+      "HpMaxRev": 200,
+      "StrengthRev": 800,
+      "PowEtherRev": 500,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 286,
+      "HpMaxRev": 600,
+      "StrengthRev": 800,
+      "PowEtherRev": 500,
+      "DexRev": 1300,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 287,
+      "HpMaxRev": 1500,
+      "StrengthRev": 1100,
+      "PowEtherRev": 1100,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 288,
+      "HpMaxRev": 1000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 289,
+      "HpMaxRev": 150,
+      "StrengthRev": 600,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 500,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 290,
+      "HpMaxRev": 350,
+      "StrengthRev": 600,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 600,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 291,
+      "HpMaxRev": 140,
+      "StrengthRev": 800,
+      "PowEtherRev": 800,
+      "DexRev": 1000,
+      "AgilityRev": 800,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 292,
+      "HpMaxRev": 500,
+      "StrengthRev": 800,
+      "PowEtherRev": 900,
+      "DexRev": 1000,
+      "AgilityRev": 800,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 293,
+      "HpMaxRev": 500,
+      "StrengthRev": 900,
+      "PowEtherRev": 1200,
+      "DexRev": 1000,
+      "AgilityRev": 500,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 294,
+      "HpMaxRev": 1200,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1000,
+      "AgilityRev": 800,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 295,
+      "HpMaxRev": 800,
+      "StrengthRev": 1100,
+      "PowEtherRev": 700,
+      "DexRev": 1000,
+      "AgilityRev": 800,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 296,
+      "HpMaxRev": 800,
+      "StrengthRev": 1100,
+      "PowEtherRev": 700,
+      "DexRev": 1000,
+      "AgilityRev": 800,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 297,
+      "HpMaxRev": 15000,
+      "StrengthRev": 1600,
+      "PowEtherRev": 1600,
+      "DexRev": 1800,
+      "AgilityRev": 1600,
+      "LuckRev": 1600
+    },
+    {
+      "$id": 298,
+      "HpMaxRev": 2500,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1200,
+      "DexRev": 1600,
+      "AgilityRev": 1000,
+      "LuckRev": 1400
+    },
+    {
+      "$id": 299,
+      "HpMaxRev": 30000,
+      "StrengthRev": 1600,
+      "PowEtherRev": 1600,
+      "DexRev": 1800,
+      "AgilityRev": 1600,
+      "LuckRev": 1600
+    },
+    {
+      "$id": 300,
+      "HpMaxRev": 4000,
+      "StrengthRev": 800,
+      "PowEtherRev": 800,
+      "DexRev": 1400,
+      "AgilityRev": 1000,
+      "LuckRev": 1400
+    },
+    {
+      "$id": 301,
+      "HpMaxRev": 22000,
+      "StrengthRev": 1000,
+      "PowEtherRev": 1000,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 302,
+      "HpMaxRev": 3000,
+      "StrengthRev": 1250,
+      "PowEtherRev": 1200,
+      "DexRev": 1200,
+      "AgilityRev": 1000,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 303,
+      "HpMaxRev": 650,
+      "StrengthRev": 850,
+      "PowEtherRev": 800,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 304,
+      "HpMaxRev": 700,
+      "StrengthRev": 650,
+      "PowEtherRev": 650,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 305,
+      "HpMaxRev": 18000,
+      "StrengthRev": 850,
+      "PowEtherRev": 850,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 306,
+      "HpMaxRev": 300,
+      "StrengthRev": 150,
+      "PowEtherRev": 150,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 307,
+      "HpMaxRev": 110,
+      "StrengthRev": 150,
+      "PowEtherRev": 150,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 308,
+      "HpMaxRev": 500,
+      "StrengthRev": 200,
+      "PowEtherRev": 200,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 309,
+      "HpMaxRev": 3500,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1500,
+      "DexRev": 1800,
+      "AgilityRev": 1300,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 310,
+      "HpMaxRev": 4000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1300,
+      "DexRev": 1500,
+      "AgilityRev": 1200,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 311,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1200,
+      "DexRev": 1600,
+      "AgilityRev": 1300,
+      "LuckRev": 1400
+    },
+    {
+      "$id": 312,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1500,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 313,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1300,
+      "DexRev": 1500,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 314,
+      "HpMaxRev": 3200,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1100,
+      "DexRev": 1200,
+      "AgilityRev": 800,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 315,
+      "HpMaxRev": 2500,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1200,
+      "DexRev": 1400,
+      "AgilityRev": 1200,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 316,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1300,
+      "DexRev": 1500,
+      "AgilityRev": 1200,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 317,
+      "HpMaxRev": 2800,
+      "StrengthRev": 1350,
+      "PowEtherRev": 1300,
+      "DexRev": 1400,
+      "AgilityRev": 1100,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 318,
+      "HpMaxRev": 1500,
+      "StrengthRev": 1600,
+      "PowEtherRev": 1300,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 319,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1500,
+      "DexRev": 1500,
+      "AgilityRev": 1000,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 320,
+      "HpMaxRev": 9000,
+      "StrengthRev": 1600,
+      "PowEtherRev": 1400,
+      "DexRev": 1600,
+      "AgilityRev": 1600,
+      "LuckRev": 1600
+    },
+    {
+      "$id": 321,
+      "HpMaxRev": 8000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1300,
+      "DexRev": 1200,
+      "AgilityRev": 1000,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 322,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1400,
+      "DexRev": 1200,
+      "AgilityRev": 1000,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 323,
+      "HpMaxRev": 15000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1600,
+      "DexRev": 1600,
+      "AgilityRev": 1500,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 324,
+      "HpMaxRev": 10000,
+      "StrengthRev": 1700,
+      "PowEtherRev": 1400,
+      "DexRev": 1300,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 325,
+      "HpMaxRev": 10000,
+      "StrengthRev": 1550,
+      "PowEtherRev": 1600,
+      "DexRev": 1200,
+      "AgilityRev": 1000,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 326,
+      "HpMaxRev": 13000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1400,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 327,
+      "HpMaxRev": 120,
+      "StrengthRev": 500,
+      "PowEtherRev": 500,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 328,
+      "HpMaxRev": 850,
+      "StrengthRev": 800,
+      "PowEtherRev": 900,
+      "DexRev": 1000,
+      "AgilityRev": 1000,
+      "LuckRev": 1000
+    },
+    {
+      "$id": 329,
+      "HpMaxRev": 15000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1300,
+      "AgilityRev": 1300,
+      "LuckRev": 1600
+    },
+    {
+      "$id": 330,
+      "HpMaxRev": 13000,
+      "StrengthRev": 1450,
+      "PowEtherRev": 1500,
+      "DexRev": 1200,
+      "AgilityRev": 1100,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 331,
+      "HpMaxRev": 10000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1500,
+      "AgilityRev": 1200,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 332,
+      "HpMaxRev": 9000,
+      "StrengthRev": 1500,
+      "PowEtherRev": 1500,
+      "DexRev": 1500,
+      "AgilityRev": 1300,
+      "LuckRev": 1100
+    },
+    {
+      "$id": 333,
+      "HpMaxRev": 8000,
+      "StrengthRev": 1200,
+      "PowEtherRev": 1300,
+      "DexRev": 1800,
+      "AgilityRev": 1400,
+      "LuckRev": 1600
+    },
+    {
+      "$id": 334,
+      "HpMaxRev": 9000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1300,
+      "DexRev": 1500,
+      "AgilityRev": 1200,
+      "LuckRev": 1300
+    },
+    {
+      "$id": 335,
+      "HpMaxRev": 8000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1200,
+      "DexRev": 1500,
+      "AgilityRev": 1300,
+      "LuckRev": 1500
+    },
+    {
+      "$id": 336,
+      "HpMaxRev": 6000,
+      "StrengthRev": 1300,
+      "PowEtherRev": 1350,
+      "DexRev": 1200,
+      "AgilityRev": 1000,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 337,
+      "HpMaxRev": 7000,
+      "StrengthRev": 1350,
+      "PowEtherRev": 1300,
+      "DexRev": 1300,
+      "AgilityRev": 1200,
+      "LuckRev": 1400
+    },
+    {
+      "$id": 338,
+      "HpMaxRev": 5000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1200,
+      "DexRev": 1100,
+      "AgilityRev": 1100,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 339,
+      "HpMaxRev": 8000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1400,
+      "DexRev": 1400,
+      "AgilityRev": 1500,
+      "LuckRev": 1200
+    },
+    {
+      "$id": 340,
+      "HpMaxRev": 9000,
+      "StrengthRev": 1400,
+      "PowEtherRev": 1300,
+      "DexRev": 1300,
+      "AgilityRev": 1200,
+      "LuckRev": 1300
+    }
+  ]
+}

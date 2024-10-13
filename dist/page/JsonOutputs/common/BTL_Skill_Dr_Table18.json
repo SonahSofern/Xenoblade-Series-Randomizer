@@ -1,0 +1,266 @@
+{
+  "schema": [
+    {
+      "name": "SkillID",
+      "type": 2
+    },
+    {
+      "name": "NeedSp",
+      "type": 2
+    },
+    {
+      "name": "Round",
+      "type": 1
+    },
+    {
+      "name": "ColumnNum",
+      "type": 1
+    },
+    {
+      "name": "RowNum",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "SkillID": 221,
+      "NeedSp": 250,
+      "Round": 1,
+      "ColumnNum": 1,
+      "RowNum": 1
+    },
+    {
+      "$id": 2,
+      "SkillID": 214,
+      "NeedSp": 750,
+      "Round": 1,
+      "ColumnNum": 1,
+      "RowNum": 2
+    },
+    {
+      "$id": 3,
+      "SkillID": 235,
+      "NeedSp": 1650,
+      "Round": 1,
+      "ColumnNum": 1,
+      "RowNum": 3
+    },
+    {
+      "$id": 4,
+      "SkillID": 222,
+      "NeedSp": 125,
+      "Round": 1,
+      "ColumnNum": 2,
+      "RowNum": 1
+    },
+    {
+      "$id": 5,
+      "SkillID": 223,
+      "NeedSp": 1250,
+      "Round": 1,
+      "ColumnNum": 2,
+      "RowNum": 2
+    },
+    {
+      "$id": 6,
+      "SkillID": 234,
+      "NeedSp": 2750,
+      "Round": 1,
+      "ColumnNum": 2,
+      "RowNum": 3
+    },
+    {
+      "$id": 7,
+      "SkillID": 231,
+      "NeedSp": 375,
+      "Round": 1,
+      "ColumnNum": 3,
+      "RowNum": 1
+    },
+    {
+      "$id": 8,
+      "SkillID": 224,
+      "NeedSp": 1250,
+      "Round": 1,
+      "ColumnNum": 3,
+      "RowNum": 2
+    },
+    {
+      "$id": 9,
+      "SkillID": 233,
+      "NeedSp": 1100,
+      "Round": 1,
+      "ColumnNum": 3,
+      "RowNum": 3
+    },
+    {
+      "$id": 10,
+      "SkillID": 211,
+      "NeedSp": 200,
+      "Round": 1,
+      "ColumnNum": 4,
+      "RowNum": 1
+    },
+    {
+      "$id": 11,
+      "SkillID": 225,
+      "NeedSp": 1500,
+      "Round": 1,
+      "ColumnNum": 4,
+      "RowNum": 2
+    },
+    {
+      "$id": 12,
+      "SkillID": 232,
+      "NeedSp": 2200,
+      "Round": 1,
+      "ColumnNum": 4,
+      "RowNum": 3
+    },
+    {
+      "$id": 13,
+      "SkillID": 212,
+      "NeedSp": 325,
+      "Round": 1,
+      "ColumnNum": 5,
+      "RowNum": 1
+    },
+    {
+      "$id": 14,
+      "SkillID": 213,
+      "NeedSp": 1000,
+      "Round": 1,
+      "ColumnNum": 5,
+      "RowNum": 2
+    },
+    {
+      "$id": 15,
+      "SkillID": 215,
+      "NeedSp": 3300,
+      "Round": 1,
+      "ColumnNum": 5,
+      "RowNum": 3
+    },
+    {
+      "$id": 16,
+      "SkillID": 236,
+      "NeedSp": 3750,
+      "Round": 2,
+      "ColumnNum": 1,
+      "RowNum": 1
+    },
+    {
+      "$id": 17,
+      "SkillID": 230,
+      "NeedSp": 7500,
+      "Round": 2,
+      "ColumnNum": 1,
+      "RowNum": 2
+    },
+    {
+      "$id": 18,
+      "SkillID": 220,
+      "NeedSp": 12500,
+      "Round": 2,
+      "ColumnNum": 1,
+      "RowNum": 3
+    },
+    {
+      "$id": 19,
+      "SkillID": 216,
+      "NeedSp": 2500,
+      "Round": 2,
+      "ColumnNum": 2,
+      "RowNum": 1
+    },
+    {
+      "$id": 20,
+      "SkillID": 229,
+      "NeedSp": 3750,
+      "Round": 2,
+      "ColumnNum": 2,
+      "RowNum": 2
+    },
+    {
+      "$id": 21,
+      "SkillID": 239,
+      "NeedSp": 5000,
+      "Round": 2,
+      "ColumnNum": 2,
+      "RowNum": 3
+    },
+    {
+      "$id": 22,
+      "SkillID": 217,
+      "NeedSp": 1875,
+      "Round": 2,
+      "ColumnNum": 3,
+      "RowNum": 1
+    },
+    {
+      "$id": 23,
+      "SkillID": 228,
+      "NeedSp": 2500,
+      "Round": 2,
+      "ColumnNum": 3,
+      "RowNum": 2
+    },
+    {
+      "$id": 24,
+      "SkillID": 238,
+      "NeedSp": 15000,
+      "Round": 2,
+      "ColumnNum": 3,
+      "RowNum": 3
+    },
+    {
+      "$id": 25,
+      "SkillID": 227,
+      "NeedSp": 3125,
+      "Round": 2,
+      "ColumnNum": 4,
+      "RowNum": 1
+    },
+    {
+      "$id": 26,
+      "SkillID": 219,
+      "NeedSp": 5000,
+      "Round": 2,
+      "ColumnNum": 4,
+      "RowNum": 2
+    },
+    {
+      "$id": 27,
+      "SkillID": 237,
+      "NeedSp": 10000,
+      "Round": 2,
+      "ColumnNum": 4,
+      "RowNum": 3
+    },
+    {
+      "$id": 28,
+      "SkillID": 226,
+      "NeedSp": 1250,
+      "Round": 2,
+      "ColumnNum": 5,
+      "RowNum": 1
+    },
+    {
+      "$id": 29,
+      "SkillID": 218,
+      "NeedSp": 6250,
+      "Round": 2,
+      "ColumnNum": 5,
+      "RowNum": 2
+    },
+    {
+      "$id": 30,
+      "SkillID": 240,
+      "NeedSp": 7500,
+      "Round": 2,
+      "ColumnNum": 5,
+      "RowNum": 3
+    }
+  ]
+}

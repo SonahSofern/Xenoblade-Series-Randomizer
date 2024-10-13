@@ -1,0 +1,84 @@
+{
+  "schema": [
+    {
+      "name": "resource",
+      "type": 7
+    },
+    {
+      "name": "id",
+      "type": 5
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "resource": "bl000101",
+      "id": 1001
+    },
+    {
+      "$id": 2,
+      "resource": "bl000201",
+      "id": 1002
+    },
+    {
+      "$id": 3,
+      "resource": "bl000301",
+      "id": 1003
+    },
+    {
+      "$id": 4,
+      "resource": "bl000501",
+      "id": 1004
+    },
+    {
+      "$id": 5,
+      "resource": "bl000601",
+      "id": 1005
+    },
+    {
+      "$id": 6,
+      "resource": "bl000701",
+      "id": 1006
+    },
+    {
+      "$id": 7,
+      "resource": "bl000801",
+      "id": 1007
+    },
+    {
+      "$id": 8,
+      "resource": "bl001101",
+      "id": 1008
+    },
+    {
+      "$id": 9,
+      "resource": "bl001001",
+      "id": 1009
+    },
+    {
+      "$id": 10,
+      "resource": "bl000901",
+      "id": 1010
+    },
+    {
+      "$id": 11,
+      "resource": "np100501",
+      "id": 1043
+    },
+    {
+      "$id": 12,
+      "resource": "np100401",
+      "id": 1044
+    },
+    {
+      "$id": 13,
+      "resource": "np100301",
+      "id": 1045
+    },
+    {
+      "$id": 14,
+      "resource": "bl303101",
+      "id": 1104
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "schema": [
+    {
+      "name": "VolumeName",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "VolumeName": "enemy_dead_fire"
+    },
+    {
+      "$id": 2,
+      "VolumeName": "enemy_dead_aqua"
+    },
+    {
+      "$id": 3,
+      "VolumeName": "enemy_dead_wind"
+    },
+    {
+      "$id": 4,
+      "VolumeName": "enemy_dead_earth"
+    },
+    {
+      "$id": 5,
+      "VolumeName": "enemy_dead_volt"
+    },
+    {
+      "$id": 6,
+      "VolumeName": "enemy_dead_ice"
+    },
+    {
+      "$id": 7,
+      "VolumeName": "enemy_dead_light"
+    },
+    {
+      "$id": 8,
+      "VolumeName": "enemy_dead_dark"
+    },
+    {
+      "$id": 9,
+      "VolumeName": "blade_cleate_01"
+    },
+    {
+      "$id": 10,
+      "VolumeName": "cs_arusu_born_01"
+    },
+    {
+      "$id": 11,
+      "VolumeName": "cs_arusu_dead_01"
+    },
+    {
+      "$id": 12,
+      "VolumeName": "cs_hologram_01"
+    },
+    {
+      "$id": 13,
+      "VolumeName": "cs_homura_01"
+    },
+    {
+      "$id": 14,
+      "VolumeName": "sev_metsu"
+    },
+    {
+      "$id": 15,
+      "VolumeName": "cs_sieg_wpn"
+    },
+    {
+      "$id": 16,
+      "VolumeName": "enemy_dead_fire_02"
+    },
+    {
+      "$id": 17,
+      "VolumeName": "sev_niseblade"
+    },
+    {
+      "$id": 18,
+      "VolumeName": "sev_sanrinsya"
+    },
+    {
+      "$id": 19,
+      "VolumeName": "sev_metsu2"
+    },
+    {
+      "$id": 20,
+      "VolumeName": "cs_origin_01"
+    },
+    {
+      "$id": 21,
+      "VolumeName": "dlc_cs_photo"
+    },
+    {
+      "$id": 22,
+      "VolumeName": "dlc_cs_vanishi_01"
+    }
+  ]
+}

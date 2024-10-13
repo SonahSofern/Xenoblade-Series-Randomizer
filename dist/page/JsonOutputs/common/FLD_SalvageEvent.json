@@ -1,0 +1,69 @@
+{
+  "schema": [
+    {
+      "name": "EventID1",
+      "type": 2
+    },
+    {
+      "name": "Percent1",
+      "type": 1
+    },
+    {
+      "name": "EventID2",
+      "type": 2
+    },
+    {
+      "name": "Percent2",
+      "type": 1
+    },
+    {
+      "name": "EventID3",
+      "type": 2
+    },
+    {
+      "name": "Percent3",
+      "type": 1
+    },
+    {
+      "name": "EventID4",
+      "type": 2
+    },
+    {
+      "name": "Percent4",
+      "type": 1
+    },
+    {
+      "name": "EventID5",
+      "type": 2
+    },
+    {
+      "name": "Percent5",
+      "type": 1
+    },
+    {
+      "name": "EventID6",
+      "type": 2
+    },
+    {
+      "name": "Percent6",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "EventID1": 0,
+      "Percent1": 0,
+      "EventID2": 0,
+      "Percent2": 0,
+      "EventID3": 0,
+      "Percent3": 0,
+      "EventID4": 0,
+      "Percent4": 0,
+      "EventID5": 0,
+      "Percent5": 0,
+      "EventID6": 0,
+      "Percent6": 0
+    }
+  ]
+}

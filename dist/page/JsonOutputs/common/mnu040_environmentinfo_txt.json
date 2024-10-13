@@ -1,0 +1,29 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_time",
+      "text_id": 1615
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_time_division",
+      "text_id": 1614
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_location",
+      "text_id": 1613
+    }
+  ]
+}

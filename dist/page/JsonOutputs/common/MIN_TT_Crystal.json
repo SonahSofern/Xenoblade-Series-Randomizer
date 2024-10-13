@@ -1,0 +1,24 @@
+{
+  "schema": [
+    {
+      "name": "Score",
+      "type": 2
+    },
+    {
+      "name": "Res",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "Score": 100,
+      "Res": "-"
+    },
+    {
+      "$id": 1,
+      "Score": 100,
+      "Res": "-"
+    }
+  ]
+}

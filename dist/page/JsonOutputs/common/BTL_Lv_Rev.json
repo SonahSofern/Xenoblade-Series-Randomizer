@@ -1,0 +1,234 @@
+{
+  "schema": [
+    {
+      "name": "ExpRevHigh",
+      "type": 2
+    },
+    {
+      "name": "ExpRevLow",
+      "type": 2
+    },
+    {
+      "name": "ExpRevLow2",
+      "type": 2
+    },
+    {
+      "name": "DamageRevHigh",
+      "type": 2
+    },
+    {
+      "name": "DamageRevLow",
+      "type": 2
+    },
+    {
+      "name": "HitRevLow",
+      "type": 2
+    },
+    {
+      "name": "ReactRevHigh",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "ExpRevHigh": 105,
+      "ExpRevLow": 95,
+      "ExpRevLow2": 100,
+      "DamageRevHigh": 100,
+      "DamageRevLow": 100,
+      "HitRevLow": 110,
+      "ReactRevHigh": 0
+    },
+    {
+      "$id": 2,
+      "ExpRevHigh": 110,
+      "ExpRevLow": 86,
+      "ExpRevLow2": 95,
+      "DamageRevHigh": 100,
+      "DamageRevLow": 100,
+      "HitRevLow": 115,
+      "ReactRevHigh": 0
+    },
+    {
+      "$id": 3,
+      "ExpRevHigh": 117,
+      "ExpRevLow": 77,
+      "ExpRevLow2": 88,
+      "DamageRevHigh": 100,
+      "DamageRevLow": 100,
+      "HitRevLow": 122,
+      "ReactRevHigh": 0
+    },
+    {
+      "$id": 4,
+      "ExpRevHigh": 124,
+      "ExpRevLow": 69,
+      "ExpRevLow2": 81,
+      "DamageRevHigh": 105,
+      "DamageRevLow": 98,
+      "HitRevLow": 129,
+      "ReactRevHigh": 0
+    },
+    {
+      "$id": 5,
+      "ExpRevHigh": 134,
+      "ExpRevLow": 62,
+      "ExpRevLow2": 75,
+      "DamageRevHigh": 110,
+      "DamageRevLow": 96,
+      "HitRevLow": 138,
+      "ReactRevHigh": 0
+    },
+    {
+      "$id": 6,
+      "ExpRevHigh": 145,
+      "ExpRevLow": 56,
+      "ExpRevLow2": 69,
+      "DamageRevHigh": 125,
+      "DamageRevLow": 94,
+      "HitRevLow": 147,
+      "ReactRevHigh": 0
+    },
+    {
+      "$id": 7,
+      "ExpRevHigh": 157,
+      "ExpRevLow": 50,
+      "ExpRevLow2": 64,
+      "DamageRevHigh": 140,
+      "DamageRevLow": 92,
+      "HitRevLow": 158,
+      "ReactRevHigh": 0
+    },
+    {
+      "$id": 8,
+      "ExpRevHigh": 170,
+      "ExpRevLow": 45,
+      "ExpRevLow2": 56,
+      "DamageRevHigh": 160,
+      "DamageRevLow": 90,
+      "HitRevLow": 169,
+      "ReactRevHigh": 0
+    },
+    {
+      "$id": 9,
+      "ExpRevHigh": 184,
+      "ExpRevLow": 41,
+      "ExpRevLow2": 49,
+      "DamageRevHigh": 180,
+      "DamageRevLow": 88,
+      "HitRevLow": 182,
+      "ReactRevHigh": 0
+    },
+    {
+      "$id": 10,
+      "ExpRevHigh": 200,
+      "ExpRevLow": 37,
+      "ExpRevLow2": 43,
+      "DamageRevHigh": 200,
+      "DamageRevLow": 86,
+      "HitRevLow": 195,
+      "ReactRevHigh": 20
+    },
+    {
+      "$id": 11,
+      "ExpRevHigh": 200,
+      "ExpRevLow": 33,
+      "ExpRevLow2": 38,
+      "DamageRevHigh": 220,
+      "DamageRevLow": 84,
+      "HitRevLow": 210,
+      "ReactRevHigh": 40
+    },
+    {
+      "$id": 12,
+      "ExpRevHigh": 200,
+      "ExpRevLow": 30,
+      "ExpRevLow2": 33,
+      "DamageRevHigh": 240,
+      "DamageRevLow": 82,
+      "HitRevLow": 225,
+      "ReactRevHigh": 60
+    },
+    {
+      "$id": 13,
+      "ExpRevHigh": 200,
+      "ExpRevLow": 27,
+      "ExpRevLow2": 29,
+      "DamageRevHigh": 260,
+      "DamageRevLow": 80,
+      "HitRevLow": 242,
+      "ReactRevHigh": 80
+    },
+    {
+      "$id": 14,
+      "ExpRevHigh": 200,
+      "ExpRevLow": 24,
+      "ExpRevLow2": 25,
+      "DamageRevHigh": 280,
+      "DamageRevLow": 78,
+      "HitRevLow": 259,
+      "ReactRevHigh": 100
+    },
+    {
+      "$id": 15,
+      "ExpRevHigh": 200,
+      "ExpRevLow": 22,
+      "ExpRevLow2": 22,
+      "DamageRevHigh": 300,
+      "DamageRevLow": 76,
+      "HitRevLow": 278,
+      "ReactRevHigh": 100
+    },
+    {
+      "$id": 16,
+      "ExpRevHigh": 200,
+      "ExpRevLow": 20,
+      "ExpRevLow2": 20,
+      "DamageRevHigh": 320,
+      "DamageRevLow": 74,
+      "HitRevLow": 297,
+      "ReactRevHigh": 100
+    },
+    {
+      "$id": 17,
+      "ExpRevHigh": 200,
+      "ExpRevLow": 18,
+      "ExpRevLow2": 18,
+      "DamageRevHigh": 340,
+      "DamageRevLow": 72,
+      "HitRevLow": 318,
+      "ReactRevHigh": 100
+    },
+    {
+      "$id": 18,
+      "ExpRevHigh": 200,
+      "ExpRevLow": 16,
+      "ExpRevLow2": 16,
+      "DamageRevHigh": 360,
+      "DamageRevLow": 70,
+      "HitRevLow": 339,
+      "ReactRevHigh": 100
+    },
+    {
+      "$id": 19,
+      "ExpRevHigh": 200,
+      "ExpRevLow": 14,
+      "ExpRevLow2": 14,
+      "DamageRevHigh": 380,
+      "DamageRevLow": 68,
+      "HitRevLow": 362,
+      "ReactRevHigh": 100
+    },
+    {
+      "$id": 20,
+      "ExpRevHigh": 200,
+      "ExpRevLow": 13,
+      "ExpRevLow2": 13,
+      "DamageRevHigh": 400,
+      "DamageRevLow": 66,
+      "HitRevLow": 385,
+      "ReactRevHigh": 100
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "value",
+      "type": 5
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "name": "WINK_IDLE",
+      "value": 0
+    },
+    {
+      "$id": 1,
+      "name": "WINK_OPEN",
+      "value": 1
+    },
+    {
+      "$id": 2,
+      "name": "WINK_CLOSE",
+      "value": 2
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "schema": [
+    {
+      "name": "NCondNum",
+      "type": 1
+    },
+    {
+      "name": "ECondNum",
+      "type": 1
+    },
+    {
+      "name": "NArtsNum",
+      "type": 1
+    },
+    {
+      "name": "Circuit1Num",
+      "type": 2
+    },
+    {
+      "name": "Circuit2Num",
+      "type": 2
+    },
+    {
+      "name": "Circuit3Num",
+      "type": 2
+    },
+    {
+      "name": "Circuit4Num",
+      "type": 2
+    },
+    {
+      "name": "Circuit5Num",
+      "type": 2
+    },
+    {
+      "name": "Circuit6Num",
+      "type": 2
+    },
+    {
+      "name": "UI",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "NCondNum": 1,
+      "ECondNum": 2,
+      "NArtsNum": 2,
+      "Circuit1Num": 1000,
+      "Circuit2Num": 1500,
+      "Circuit3Num": 2000,
+      "Circuit4Num": 6000,
+      "Circuit5Num": 10000,
+      "Circuit6Num": 0,
+      "UI": ""
+    },
+    {
+      "$id": 2,
+      "NCondNum": 2,
+      "ECondNum": 2,
+      "NArtsNum": 2,
+      "Circuit1Num": 1500,
+      "Circuit2Num": 2000,
+      "Circuit3Num": 2500,
+      "Circuit4Num": 8000,
+      "Circuit5Num": 15000,
+      "Circuit6Num": 0,
+      "UI": ""
+    },
+    {
+      "$id": 3,
+      "NCondNum": 3,
+      "ECondNum": 3,
+      "NArtsNum": 3,
+      "Circuit1Num": 2000,
+      "Circuit2Num": 2500,
+      "Circuit3Num": 3000,
+      "Circuit4Num": 10000,
+      "Circuit5Num": 15000,
+      "Circuit6Num": 20000,
+      "UI": ""
+    }
+  ]
+}

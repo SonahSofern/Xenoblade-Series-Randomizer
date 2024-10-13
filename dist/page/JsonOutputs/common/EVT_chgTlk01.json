@@ -1,0 +1,156 @@
+{
+  "schema": [
+    {
+      "name": "chgName",
+      "type": 7
+    },
+    {
+      "name": "chgType",
+      "type": 4
+    },
+    {
+      "name": "id",
+      "type": 6
+    },
+    {
+      "name": "value0",
+      "type": 6
+    },
+    {
+      "name": "value1",
+      "type": 6
+    },
+    {
+      "name": "string0",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 40001,
+      "chgName": "tlk002003",
+      "chgType": 1,
+      "id": 10000,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 40002,
+      "chgName": "",
+      "chgType": 1,
+      "id": 10001,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 40003,
+      "chgName": "tlk002004",
+      "chgType": 1,
+      "id": 10000,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 40004,
+      "chgName": "",
+      "chgType": 1,
+      "id": 10001,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 40005,
+      "chgName": "tlk001017",
+      "chgType": 12,
+      "id": 2,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 40006,
+      "chgName": "tlk001018",
+      "chgType": 12,
+      "id": 3,
+      "value0": 0,
+      "value1": 1,
+      "string0": ""
+    },
+    {
+      "$id": 40007,
+      "chgName": "tlk0010191",
+      "chgType": 12,
+      "id": 4,
+      "value0": 0,
+      "value1": 1,
+      "string0": ""
+    },
+    {
+      "$id": 40008,
+      "chgName": "tlk000502",
+      "chgType": 3,
+      "id": 180,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 40009,
+      "chgName": "tlk000503",
+      "chgType": 3,
+      "id": 193,
+      "value0": 0,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 40010,
+      "chgName": "tlk001022",
+      "chgType": 12,
+      "id": 208,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 40011,
+      "chgName": "tlk001023",
+      "chgType": 12,
+      "id": 460,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 40012,
+      "chgName": "tlk001024",
+      "chgType": 12,
+      "id": 497,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 40013,
+      "chgName": "tlk001025",
+      "chgType": 12,
+      "id": 498,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    },
+    {
+      "$id": 40014,
+      "chgName": "tlk001019",
+      "chgType": 12,
+      "id": 499,
+      "value0": 1,
+      "value1": 0,
+      "string0": ""
+    }
+  ]
+}

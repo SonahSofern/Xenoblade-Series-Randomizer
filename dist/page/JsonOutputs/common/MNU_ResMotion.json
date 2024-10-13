@@ -1,0 +1,166 @@
+{
+  "schema": [
+    {
+      "name": "file",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "file": "sample"
+    },
+    {
+      "$id": 2,
+      "file": "window_open_test"
+    },
+    {
+      "$id": 3,
+      "file": "fadein"
+    },
+    {
+      "$id": 4,
+      "file": "pulse"
+    },
+    {
+      "$id": 5,
+      "file": "cmn_levelup_text_fadein"
+    },
+    {
+      "$id": 6,
+      "file": "cmn_levelup_text_fadein_blur"
+    },
+    {
+      "$id": 7,
+      "file": "cmn_stretch"
+    },
+    {
+      "$id": 8,
+      "file": "cmn_fade_motion_lr"
+    },
+    {
+      "$id": 9,
+      "file": "cmn_fade_motion_zoom"
+    },
+    {
+      "$id": 10,
+      "file": "cmn_fade_motion_zoom_2"
+    },
+    {
+      "$id": 11,
+      "file": "cmn_fade_emotion"
+    },
+    {
+      "$id": 12,
+      "file": "mnu090_anim_leader"
+    },
+    {
+      "$id": 13,
+      "file": "mnu090_anim_sub_1"
+    },
+    {
+      "$id": 14,
+      "file": "mnu090_anim_sub_2"
+    },
+    {
+      "$id": 15,
+      "file": "mnu090_anim_sub_3"
+    },
+    {
+      "$id": 16,
+      "file": "mnu090_anim_sub_4"
+    },
+    {
+      "$id": 17,
+      "file": "mnu090_anim_sub_5"
+    },
+    {
+      "$id": 18,
+      "file": "cmn_fade_btresult"
+    },
+    {
+      "$id": 19,
+      "file": "getitem"
+    },
+    {
+      "$id": 20,
+      "file": "cmn_zoomin_a"
+    },
+    {
+      "$id": 21,
+      "file": "cmn_damage"
+    },
+    {
+      "$id": 22,
+      "file": "mnu065_fb_base"
+    },
+    {
+      "$id": 23,
+      "file": "mnu065_fb_base_hilight"
+    },
+    {
+      "$id": 24,
+      "file": "mnu004_range_anim_elem"
+    },
+    {
+      "$id": 25,
+      "file": "cmn_fade_motion_up_down"
+    },
+    {
+      "$id": 26,
+      "file": "mnu070_item"
+    },
+    {
+      "$id": 27,
+      "file": "mnu070_heart"
+    },
+    {
+      "$id": 28,
+      "file": "mnu071_wep_flash"
+    },
+    {
+      "$id": 29,
+      "file": "mnu071_wep_select"
+    },
+    {
+      "$id": 30,
+      "file": "mnu034_levelup_move"
+    },
+    {
+      "$id": 31,
+      "file": "mnu034_levelup_scale"
+    },
+    {
+      "$id": 32,
+      "file": "mnu062_elemcombo"
+    },
+    {
+      "$id": 33,
+      "file": "mnu062_elemcombo_flash"
+    },
+    {
+      "$id": 34,
+      "file": "mnu062_fightcombo"
+    },
+    {
+      "$id": 35,
+      "file": "mnu062_fightcombo_flash"
+    },
+    {
+      "$id": 36,
+      "file": "mnu061_levelup"
+    },
+    {
+      "$id": 37,
+      "file": "mnu061_levelup_shadow"
+    },
+    {
+      "$id": 38,
+      "file": "mnu89_complete_telop"
+    },
+    {
+      "$id": 39,
+      "file": "cmn_cursorblink"
+    }
+  ]
+}

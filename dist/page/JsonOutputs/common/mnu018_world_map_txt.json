@@ -1,0 +1,299 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_devptgauge@01",
+      "text_id": 960
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_devptindex@01",
+      "text_id": 961
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_devptnum@01",
+      "text_id": 962
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_devptgauge@03",
+      "text_id": 960
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_devptindex@03",
+      "text_id": 961
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_devptnum@03",
+      "text_id": 962
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_devptgauge@04",
+      "text_id": 960
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_devptindex@04",
+      "text_id": 961
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_devptnum@04",
+      "text_id": 962
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_devptgauge@05",
+      "text_id": 960
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_devptindex@05",
+      "text_id": 961
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_devptnum@05",
+      "text_id": 962
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_devptgauge@06",
+      "text_id": 960
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_devptindex@06",
+      "text_id": 961
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_devptnum@06",
+      "text_id": 962
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_devptgauge@07",
+      "text_id": 960
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_devptindex@07",
+      "text_id": 961
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_devptnum@07",
+      "text_id": 962
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_devptgauge@09",
+      "text_id": 960
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_devptindex@09",
+      "text_id": 961
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_devptnum@09",
+      "text_id": 962
+    },
+    {
+      "$id": 22,
+      "obj_name": "TXT_areaname@01",
+      "text_id": 958
+    },
+    {
+      "$id": 23,
+      "obj_name": "TXT_areaname@02",
+      "text_id": 958
+    },
+    {
+      "$id": 24,
+      "obj_name": "TXT_areaname@03",
+      "text_id": 958
+    },
+    {
+      "$id": 25,
+      "obj_name": "TXT_areaname@04",
+      "text_id": 958
+    },
+    {
+      "$id": 26,
+      "obj_name": "TXT_areaname@05",
+      "text_id": 958
+    },
+    {
+      "$id": 27,
+      "obj_name": "TXT_areaname@06",
+      "text_id": 958
+    },
+    {
+      "$id": 28,
+      "obj_name": "TXT_areaname@07",
+      "text_id": 958
+    },
+    {
+      "$id": 29,
+      "obj_name": "TXT_areaname@08",
+      "text_id": 958
+    },
+    {
+      "$id": 30,
+      "obj_name": "TXT_areaname@09",
+      "text_id": 958
+    },
+    {
+      "$id": 31,
+      "obj_name": "TXT_areaname_select",
+      "text_id": 958
+    },
+    {
+      "$id": 32,
+      "obj_name": "TXT_zonename_@01",
+      "text_id": 959
+    },
+    {
+      "$id": 33,
+      "obj_name": "TXT_zonename_@02",
+      "text_id": 959
+    },
+    {
+      "$id": 34,
+      "obj_name": "TXT_zonename_@03",
+      "text_id": 959
+    },
+    {
+      "$id": 35,
+      "obj_name": "TXT_zonename_@04",
+      "text_id": 959
+    },
+    {
+      "$id": 36,
+      "obj_name": "TXT_zonename_@05",
+      "text_id": 959
+    },
+    {
+      "$id": 37,
+      "obj_name": "TXT_zonename_@06",
+      "text_id": 959
+    },
+    {
+      "$id": 38,
+      "obj_name": "TXT_zonename_@07",
+      "text_id": 959
+    },
+    {
+      "$id": 39,
+      "obj_name": "TXT_zonename_@08",
+      "text_id": 959
+    },
+    {
+      "$id": 40,
+      "obj_name": "TXT_pointname_@01",
+      "text_id": 959
+    },
+    {
+      "$id": 41,
+      "obj_name": "TXT_pointname_@02",
+      "text_id": 959
+    },
+    {
+      "$id": 42,
+      "obj_name": "TXT_pointname_@03",
+      "text_id": 959
+    },
+    {
+      "$id": 43,
+      "obj_name": "TXT_pointname_@04",
+      "text_id": 959
+    },
+    {
+      "$id": 44,
+      "obj_name": "TXT_pointname_@05",
+      "text_id": 959
+    },
+    {
+      "$id": 45,
+      "obj_name": "TXT_pointname_@06",
+      "text_id": 959
+    },
+    {
+      "$id": 46,
+      "obj_name": "TXT_pointname_@07",
+      "text_id": 959
+    },
+    {
+      "$id": 47,
+      "obj_name": "TXT_pointname_@08",
+      "text_id": 959
+    },
+    {
+      "$id": 48,
+      "obj_name": "TXT_icon_filter_index",
+      "text_id": 985
+    },
+    {
+      "$id": 49,
+      "obj_name": "TXT_frame_cursor",
+      "text_id": 959
+    },
+    {
+      "$id": 50,
+      "obj_name": "TXT_field_skill_name@01",
+      "text_id": 1765
+    },
+    {
+      "$id": 51,
+      "obj_name": "TXT_field_skill_lv@01",
+      "text_id": 1766
+    },
+    {
+      "$id": 52,
+      "obj_name": "TXT_field_skill_name@02",
+      "text_id": 1765
+    },
+    {
+      "$id": 53,
+      "obj_name": "TXT_field_skill_lv@02",
+      "text_id": 1766
+    },
+    {
+      "$id": 54,
+      "obj_name": "TXT_devptgauge@08",
+      "text_id": 960
+    },
+    {
+      "$id": 55,
+      "obj_name": "TXT_devptgauge@10",
+      "text_id": 960
+    },
+    {
+      "$id": 56,
+      "obj_name": "TXT_map_obj_name@01",
+      "text_id": 958
+    },
+    {
+      "$id": 57,
+      "obj_name": "TXT_map_obj_name@02",
+      "text_id": 958
+    }
+  ]
+}

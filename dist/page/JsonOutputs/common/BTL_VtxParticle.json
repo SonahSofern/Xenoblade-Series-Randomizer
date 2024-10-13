@@ -1,0 +1,78 @@
+{
+  "schema": [
+    {
+      "name": "Name",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Name": "enemy_dead_fire"
+    },
+    {
+      "$id": 2,
+      "Name": "enemy_dead_aqua"
+    },
+    {
+      "$id": 3,
+      "Name": "enemy_dead_wind"
+    },
+    {
+      "$id": 4,
+      "Name": "enemy_dead_earth"
+    },
+    {
+      "$id": 5,
+      "Name": "enemy_dead_volt"
+    },
+    {
+      "$id": 6,
+      "Name": "enemy_dead_ice"
+    },
+    {
+      "$id": 7,
+      "Name": "enemy_dead_light"
+    },
+    {
+      "$id": 8,
+      "Name": "enemy_dead_dark"
+    },
+    {
+      "$id": 9,
+      "Name": "blade_change_fire"
+    },
+    {
+      "$id": 10,
+      "Name": "blade_change_aqua"
+    },
+    {
+      "$id": 11,
+      "Name": "blade_change_wind"
+    },
+    {
+      "$id": 12,
+      "Name": "blade_change_earth"
+    },
+    {
+      "$id": 13,
+      "Name": "blade_change_volt"
+    },
+    {
+      "$id": 14,
+      "Name": "blade_change_ice"
+    },
+    {
+      "$id": 15,
+      "Name": "blade_change_light"
+    },
+    {
+      "$id": 16,
+      "Name": "blade_change_dark"
+    },
+    {
+      "$id": 17,
+      "Name": "blade_change_fire_02"
+    }
+  ]
+}

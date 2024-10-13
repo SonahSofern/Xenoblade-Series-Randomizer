@@ -1,0 +1,102 @@
+{
+  "schema": [
+    {
+      "name": "DamageRate",
+      "type": 2
+    },
+    {
+      "name": "FBGauge",
+      "type": 2
+    },
+    {
+      "name": "FBBonus",
+      "type": 2
+    },
+    {
+      "name": "DamageRate2",
+      "type": 2
+    },
+    {
+      "name": "FBGauge2",
+      "type": 2
+    },
+    {
+      "name": "FBBonus2",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "DamageRate": 200,
+      "FBGauge": 50,
+      "FBBonus": 500,
+      "DamageRate2": 100,
+      "FBGauge2": 50,
+      "FBBonus2": 200
+    },
+    {
+      "$id": 2,
+      "DamageRate": 200,
+      "FBGauge": 100,
+      "FBBonus": 1000,
+      "DamageRate2": 100,
+      "FBGauge2": 100,
+      "FBBonus2": 400
+    },
+    {
+      "$id": 3,
+      "DamageRate": 200,
+      "FBGauge": 100,
+      "FBBonus": 2500,
+      "DamageRate2": 100,
+      "FBGauge2": 100,
+      "FBBonus2": 600
+    },
+    {
+      "$id": 4,
+      "DamageRate": 200,
+      "FBGauge": 100,
+      "FBBonus": 5000,
+      "DamageRate2": 100,
+      "FBGauge2": 100,
+      "FBBonus2": 800
+    },
+    {
+      "$id": 5,
+      "DamageRate": 200,
+      "FBGauge": 100,
+      "FBBonus": 6000,
+      "DamageRate2": 100,
+      "FBGauge2": 100,
+      "FBBonus2": 1000
+    },
+    {
+      "$id": 6,
+      "DamageRate": 200,
+      "FBGauge": 100,
+      "FBBonus": 6000,
+      "DamageRate2": 100,
+      "FBGauge2": 100,
+      "FBBonus2": 1000
+    },
+    {
+      "$id": 7,
+      "DamageRate": 200,
+      "FBGauge": 100,
+      "FBBonus": 6000,
+      "DamageRate2": 100,
+      "FBGauge2": 100,
+      "FBBonus2": 1000
+    },
+    {
+      "$id": 8,
+      "DamageRate": 200,
+      "FBGauge": 100,
+      "FBBonus": 6000,
+      "DamageRate2": 100,
+      "FBGauge2": 100,
+      "FBBonus2": 1000
+    }
+  ]
+}

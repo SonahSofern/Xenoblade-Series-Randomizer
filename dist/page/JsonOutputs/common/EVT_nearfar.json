@@ -1,0 +1,54 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "near",
+      "type": 8
+    },
+    {
+      "name": "far",
+      "type": 8
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "name": "OFF",
+      "near": 0.0,
+      "far": 0.0
+    },
+    {
+      "$id": 1,
+      "name": "NF_NEAR_HI",
+      "near": 0.009999999776482582,
+      "far": 40000.0
+    },
+    {
+      "$id": 2,
+      "name": "NF_NEAR",
+      "near": 0.05000000074505806,
+      "far": 40000.0
+    },
+    {
+      "$id": 3,
+      "name": "NF_MIDDLE",
+      "near": 0.10000000149011612,
+      "far": 40000.0
+    },
+    {
+      "$id": 4,
+      "name": "NF_FAR",
+      "near": 1.0,
+      "far": 80000.0
+    },
+    {
+      "$id": 5,
+      "name": "NF_FAR_HI",
+      "near": 2.0,
+      "far": 80000.0
+    }
+  ]
+}

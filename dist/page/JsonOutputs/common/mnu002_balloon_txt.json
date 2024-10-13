@@ -1,0 +1,184 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_text_evt",
+      "text_id": 7
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_name_evt",
+      "text_id": 17
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_text_fld",
+      "text_id": 7
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_name_evt_select",
+      "text_id": 17
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_sel_money_title",
+      "text_id": 1622
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_sel_money_item@01",
+      "text_id": 1621
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_sel_money_item@02",
+      "text_id": 1621
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_sel_money_item@03",
+      "text_id": 1621
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_sel_money_item@04",
+      "text_id": 1621
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_select_money_info_num",
+      "text_id": 917
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_get_item_title",
+      "text_id": 842
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_get_item_name@01",
+      "text_id": 843
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_get_item_num_cross@01",
+      "text_id": 1681
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_get_item_num@01",
+      "text_id": 844
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_get_item_name@02",
+      "text_id": 843
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_get_item_num_cross@02",
+      "text_id": 1681
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_get_item_num@02",
+      "text_id": 844
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_get_item_name@03",
+      "text_id": 843
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_get_item_num_cross@03",
+      "text_id": 1681
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_get_item_num@03",
+      "text_id": 844
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_get_item_btn_ok",
+      "text_id": 1827
+    },
+    {
+      "$id": 22,
+      "obj_name": "TXT_ev_talk_name",
+      "text_id": 1618
+    },
+    {
+      "$id": 23,
+      "obj_name": "TXT_ev_talk_msg",
+      "text_id": 1617
+    },
+    {
+      "$id": 24,
+      "obj_name": "TXT_auto_talk_msg",
+      "text_id": 1617
+    },
+    {
+      "$id": 25,
+      "obj_name": "TXT_ev_select_msg_title",
+      "text_id": 1620
+    },
+    {
+      "$id": 26,
+      "obj_name": "TXT_ev_select_msg@01",
+      "text_id": 1619
+    },
+    {
+      "$id": 27,
+      "obj_name": "TXT_ev_select_msg@02",
+      "text_id": 1619
+    },
+    {
+      "$id": 28,
+      "obj_name": "TXT_ev_select_name",
+      "text_id": 1618
+    },
+    {
+      "$id": 29,
+      "obj_name": "TXT_sel_title",
+      "text_id": 1622
+    },
+    {
+      "$id": 30,
+      "obj_name": "TXT_sel_item@01",
+      "text_id": 1621
+    },
+    {
+      "$id": 31,
+      "obj_name": "TXT_sel_item@02",
+      "text_id": 1621
+    },
+    {
+      "$id": 32,
+      "obj_name": "TXT_sel_item@03",
+      "text_id": 1621
+    },
+    {
+      "$id": 33,
+      "obj_name": "TXT_select_money_exp_num",
+      "text_id": 1841
+    },
+    {
+      "$id": 34,
+      "obj_name": "TXT_select_money_exp_index",
+      "text_id": 1840
+    }
+  ]
+}

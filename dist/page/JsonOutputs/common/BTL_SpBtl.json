@@ -1,0 +1,138 @@
+{
+  "schema": [
+    {
+      "name": "ArrangeID",
+      "type": 2
+    },
+    {
+      "name": "Gun",
+      "type": 2
+    },
+    {
+      "name": "Lance",
+      "type": 2
+    },
+    {
+      "name": "DamageLV1",
+      "type": 2
+    },
+    {
+      "name": "DamageLV2",
+      "type": 2
+    },
+    {
+      "name": "DamageLV3",
+      "type": 2
+    },
+    {
+      "name": "DamageLV4",
+      "type": 2
+    },
+    {
+      "name": "GaugeLV1",
+      "type": 2
+    },
+    {
+      "name": "GaugeLV2",
+      "type": 2
+    },
+    {
+      "name": "GaugeLV3",
+      "type": 2
+    },
+    {
+      "name": "GaugeLV4",
+      "type": 2
+    },
+    {
+      "name": "GaugeBonus",
+      "type": 2
+    },
+    {
+      "name": "DownLV1",
+      "type": 1
+    },
+    {
+      "name": "DownLV2",
+      "type": 1
+    },
+    {
+      "name": "DownLV3",
+      "type": 1
+    },
+    {
+      "name": "DownLV4",
+      "type": 1
+    },
+    {
+      "name": "ShotNumLV1",
+      "type": 1
+    },
+    {
+      "name": "ShotNumLV2",
+      "type": 1
+    },
+    {
+      "name": "ShotNumLV3",
+      "type": 1
+    },
+    {
+      "name": "ShotNumLV4",
+      "type": 1
+    },
+    {
+      "name": "ShotFrame",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "ArrangeID": 1449,
+      "Gun": 0,
+      "Lance": 1452,
+      "DamageLV1": 100,
+      "DamageLV2": 200,
+      "DamageLV3": 300,
+      "DamageLV4": 400,
+      "GaugeLV1": 80,
+      "GaugeLV2": 70,
+      "GaugeLV3": 60,
+      "GaugeLV4": 100,
+      "GaugeBonus": 200,
+      "DownLV1": 12,
+      "DownLV2": 15,
+      "DownLV3": 20,
+      "DownLV4": 30,
+      "ShotNumLV1": 6,
+      "ShotNumLV2": 6,
+      "ShotNumLV3": 6,
+      "ShotNumLV4": 6,
+      "ShotFrame": 8
+    },
+    {
+      "$id": 2,
+      "ArrangeID": 1450,
+      "Gun": 1451,
+      "Lance": 1453,
+      "DamageLV1": 30,
+      "DamageLV2": 50,
+      "DamageLV3": 65,
+      "DamageLV4": 80,
+      "GaugeLV1": 80,
+      "GaugeLV2": 70,
+      "GaugeLV3": 60,
+      "GaugeLV4": 100,
+      "GaugeBonus": 150,
+      "DownLV1": 12,
+      "DownLV2": 15,
+      "DownLV3": 20,
+      "DownLV4": 30,
+      "ShotNumLV1": 8,
+      "ShotNumLV2": 8,
+      "ShotNumLV3": 8,
+      "ShotNumLV4": 8,
+      "ShotFrame": 8
+    }
+  ]
+}

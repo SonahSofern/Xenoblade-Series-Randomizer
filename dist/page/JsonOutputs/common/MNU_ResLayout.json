@@ -1,0 +1,170 @@
+{
+  "schema": [
+    {
+      "name": "file",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "file": "mnu999_fs_dummy"
+    },
+    {
+      "$id": 2,
+      "file": "mnu001_title"
+    },
+    {
+      "$id": 3,
+      "file": "mnu002_balloon_main"
+    },
+    {
+      "$id": 4,
+      "file": "mnu003_main"
+    },
+    {
+      "$id": 5,
+      "file": "mnu004_palette"
+    },
+    {
+      "$id": 6,
+      "file": "mnu004_gauge"
+    },
+    {
+      "$id": 7,
+      "file": "mnu007_damage"
+    },
+    {
+      "$id": 8,
+      "file": "mnu007_buff"
+    },
+    {
+      "$id": 9,
+      "file": "mnu009_main"
+    },
+    {
+      "$id": 10,
+      "file": "mnu010_main"
+    },
+    {
+      "$id": 11,
+      "file": "mnu016_main"
+    },
+    {
+      "$id": 12,
+      "file": "mnu020_top"
+    },
+    {
+      "$id": 13,
+      "file": "mnu025_fade_main"
+    },
+    {
+      "$id": 14,
+      "file": "mnu027_text"
+    },
+    {
+      "$id": 15,
+      "file": "mnu027_list"
+    },
+    {
+      "$id": 16,
+      "file": "mnu028_driver"
+    },
+    {
+      "$id": 17,
+      "file": "mnu029_main"
+    },
+    {
+      "$id": 18,
+      "file": "mnu029_cylinderselect"
+    },
+    {
+      "$id": 19,
+      "file": "mnu030_maincursor"
+    },
+    {
+      "$id": 20,
+      "file": "mnu030_eneinfo"
+    },
+    {
+      "$id": 21,
+      "file": "mnu030_otherinfo"
+    },
+    {
+      "$id": 22,
+      "file": "mnu030_enestatus"
+    },
+    {
+      "$id": 23,
+      "file": "mnu030_actionwindow"
+    },
+    {
+      "$id": 24,
+      "file": "mnu030_infoicon"
+    },
+    {
+      "$id": 25,
+      "file": "mnu031_main"
+    },
+    {
+      "$id": 26,
+      "file": "mnu032_btnchal"
+    },
+    {
+      "$id": 27,
+      "file": "mnu033_save"
+    },
+    {
+      "$id": 28,
+      "file": "mnu034_ptstatus"
+    },
+    {
+      "$id": 29,
+      "file": "mnu035_main"
+    },
+    {
+      "$id": 30,
+      "file": "mnu036_event_subtitle"
+    },
+    {
+      "$id": 31,
+      "file": "mnu037_main"
+    },
+    {
+      "$id": 32,
+      "file": "mnu038_main"
+    },
+    {
+      "$id": 33,
+      "file": "mnu040_main"
+    },
+    {
+      "$id": 34,
+      "file": "mnu041_main"
+    },
+    {
+      "$id": 35,
+      "file": "mnu042_main"
+    },
+    {
+      "$id": 36,
+      "file": "mnu043_main"
+    },
+    {
+      "$id": 37,
+      "file": "mnu100_main"
+    },
+    {
+      "$id": 38,
+      "file": "mnu999_fs_imgonly"
+    },
+    {
+      "$id": 39,
+      "file": "mnu999_chaincount"
+    },
+    {
+      "$id": 40,
+      "file": "mnu999_chainicon"
+    }
+  ]
+}

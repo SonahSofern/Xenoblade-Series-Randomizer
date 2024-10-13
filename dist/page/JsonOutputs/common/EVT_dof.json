@@ -1,0 +1,137 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "dist",
+      "type": 8
+    },
+    {
+      "name": "range",
+      "type": 8
+    },
+    {
+      "name": "foMin",
+      "type": 8
+    },
+    {
+      "name": "pixel",
+      "type": 8
+    },
+    {
+      "name": "lens",
+      "type": 8
+    },
+    {
+      "name": "strength",
+      "type": 8
+    },
+    {
+      "name": "blend",
+      "type": 8
+    },
+    {
+      "name": "pixelLv",
+      "type": 5
+    },
+    {
+      "name": "hlv",
+      "type": 5
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "name": "DOF_DEFAULT",
+      "dist": 0.0,
+      "range": 5.0,
+      "foMin": 6.0,
+      "pixel": 0.10000000149011612,
+      "lens": 0.0,
+      "strength": 1.0,
+      "blend": 0.800000011920929,
+      "pixelLv": 1,
+      "hlv": 0
+    },
+    {
+      "$id": 1,
+      "name": "DOF_SOFT",
+      "dist": 0.0,
+      "range": 5.0,
+      "foMin": 6.0,
+      "pixel": 0.10000000149011612,
+      "lens": 0.0,
+      "strength": 1.0,
+      "blend": 0.6000000238418579,
+      "pixelLv": 1,
+      "hlv": 0
+    },
+    {
+      "$id": 2,
+      "name": "DOF_MIDDLE",
+      "dist": 0.0,
+      "range": 5.0,
+      "foMin": 6.0,
+      "pixel": 0.10000000149011612,
+      "lens": 0.0,
+      "strength": 1.0,
+      "blend": 0.800000011920929,
+      "pixelLv": 1,
+      "hlv": 0
+    },
+    {
+      "$id": 3,
+      "name": "DOF_HARD",
+      "dist": 0.0,
+      "range": 5.0,
+      "foMin": 6.0,
+      "pixel": 2.0,
+      "lens": 0.0,
+      "strength": 1.0,
+      "blend": 1.0,
+      "pixelLv": 1,
+      "hlv": 0
+    },
+    {
+      "$id": 4,
+      "name": "DOF_SOFT_N",
+      "dist": 0.0,
+      "range": 5.0,
+      "foMin": 3.0,
+      "pixel": 0.10000000149011612,
+      "lens": 0.0,
+      "strength": 1.0,
+      "blend": 0.6000000238418579,
+      "pixelLv": 1,
+      "hlv": 0
+    },
+    {
+      "$id": 5,
+      "name": "DOF_MIDDLE_N",
+      "dist": 0.0,
+      "range": 5.0,
+      "foMin": 3.0,
+      "pixel": 0.10000000149011612,
+      "lens": 0.0,
+      "strength": 1.0,
+      "blend": 0.800000011920929,
+      "pixelLv": 1,
+      "hlv": 0
+    },
+    {
+      "$id": 6,
+      "name": "DOF_HARD_N",
+      "dist": 0.0,
+      "range": 5.0,
+      "foMin": 3.0,
+      "pixel": 2.0,
+      "lens": 0.0,
+      "strength": 1.0,
+      "blend": 1.0,
+      "pixelLv": 1,
+      "hlv": 0
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "schema": [
+    {
+      "name": "nodeName",
+      "type": 7
+    },
+    {
+      "name": "nodeNameJP",
+      "type": 7
+    },
+    {
+      "name": "nodeExtra",
+      "type": 1
+    },
+    {
+      "name": "nodeWidth",
+      "type": 1
+    },
+    {
+      "name": "grpName",
+      "type": 7
+    },
+    {
+      "name": "grpNameJP",
+      "type": 7
+    },
+    {
+      "name": "grpExtra",
+      "type": 1
+    },
+    {
+      "name": "grpArray",
+      "type": 1
+    },
+    {
+      "name": "atrDisp",
+      "type": 1
+    },
+    {
+      "name": "atrName",
+      "type": 7
+    },
+    {
+      "name": "atrNameJP",
+      "type": 7
+    },
+    {
+      "name": "atrType",
+      "type": 1
+    },
+    {
+      "name": "atrOptStr1",
+      "type": 7
+    },
+    {
+      "name": "atrOptStr2",
+      "type": 7
+    },
+    {
+      "name": "atrDefStr1",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "nodeName": "",
+      "nodeNameJP": "",
+      "nodeExtra": 0,
+      "nodeWidth": 0,
+      "grpName": "",
+      "grpNameJP": "",
+      "grpExtra": 0,
+      "grpArray": 0,
+      "atrDisp": 0,
+      "atrName": "",
+      "atrNameJP": "",
+      "atrType": 0,
+      "atrOptStr1": "",
+      "atrOptStr2": "",
+      "atrDefStr1": ""
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "value",
+      "type": 5
+    },
+    {
+      "name": "stat",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "name": "BROW_NONE",
+      "value": 0,
+      "stat": ""
+    },
+    {
+      "$id": 1,
+      "name": "BROW_HAPPY",
+      "value": 1,
+      "stat": "S_brow_happy"
+    },
+    {
+      "$id": 2,
+      "name": "BROW_ANGRY",
+      "value": 2,
+      "stat": "S_brow_angry"
+    },
+    {
+      "$id": 3,
+      "name": "BROW_SAD",
+      "value": 3,
+      "stat": "S_brow_sad"
+    },
+    {
+      "$id": 4,
+      "name": "BROW_SURPRISE",
+      "value": 4,
+      "stat": "S_brow_surprise"
+    },
+    {
+      "$id": 5,
+      "name": "BROW_FEAR",
+      "value": 5,
+      "stat": "S_brow_fear"
+    },
+    {
+      "$id": 6,
+      "name": "BROW_EX1",
+      "value": 6,
+      "stat": "S_brow_ex1"
+    },
+    {
+      "$id": 7,
+      "name": "BROW_EX2",
+      "value": 7,
+      "stat": "S_brow_ex2"
+    },
+    {
+      "$id": 8,
+      "name": "BROW_EX3",
+      "value": 8,
+      "stat": "S_brow_ex3"
+    },
+    {
+      "$id": 9,
+      "name": "BROW_EX4",
+      "value": 9,
+      "stat": "S_brow_ex4"
+    },
+    {
+      "$id": 10,
+      "name": "BROW_EX5",
+      "value": 10,
+      "stat": "S_brow_ex5"
+    },
+    {
+      "$id": 11,
+      "name": "BROW_EX6",
+      "value": 11,
+      "stat": "S_brow_ex6"
+    },
+    {
+      "$id": 12,
+      "name": "BROW_EX7",
+      "value": 12,
+      "stat": "S_brow_ex7"
+    },
+    {
+      "$id": 13,
+      "name": "BROW_EX8",
+      "value": 13,
+      "stat": "S_brow_ex8"
+    },
+    {
+      "$id": 14,
+      "name": "BROW_EX9",
+      "value": 14,
+      "stat": "S_brow_ex9"
+    },
+    {
+      "$id": 15,
+      "name": "BROW_EX10",
+      "value": 15,
+      "stat": "S_brow_ex10"
+    },
+    {
+      "$id": 16,
+      "name": "BROW_EX11",
+      "value": 16,
+      "stat": "S_brow_ex11"
+    },
+    {
+      "$id": 17,
+      "name": "BROW_EX12",
+      "value": 17,
+      "stat": "S_brow_ex12"
+    }
+  ]
+}

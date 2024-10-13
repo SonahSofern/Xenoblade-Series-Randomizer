@@ -1,0 +1,134 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "value",
+      "type": 5
+    },
+    {
+      "name": "stat",
+      "type": 7
+    },
+    {
+      "name": "disableWink",
+      "type": 4
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "name": "EYE_NONE",
+      "value": 0,
+      "stat": "",
+      "disableWink": 0
+    },
+    {
+      "$id": 1,
+      "name": "EYE_CLOSE",
+      "value": 1,
+      "stat": "S_eye_close",
+      "disableWink": 0
+    },
+    {
+      "$id": 2,
+      "name": "EYE_SURPISE",
+      "value": 2,
+      "stat": "S_eye_surprise",
+      "disableWink": 1
+    },
+    {
+      "$id": 3,
+      "name": "EYE_PEER",
+      "value": 3,
+      "stat": "S_eye_peer",
+      "disableWink": 1
+    },
+    {
+      "$id": 4,
+      "name": "EYE_EX1",
+      "value": 4,
+      "stat": "S_eye_ex1",
+      "disableWink": 1
+    },
+    {
+      "$id": 5,
+      "name": "EYE_EX2",
+      "value": 5,
+      "stat": "S_eye_ex2",
+      "disableWink": 1
+    },
+    {
+      "$id": 6,
+      "name": "EYE_EX3",
+      "value": 6,
+      "stat": "S_eye_ex3",
+      "disableWink": 1
+    },
+    {
+      "$id": 7,
+      "name": "EYE_EX4",
+      "value": 7,
+      "stat": "S_eye_ex4",
+      "disableWink": 1
+    },
+    {
+      "$id": 8,
+      "name": "EYE_EX5",
+      "value": 8,
+      "stat": "S_eye_ex5",
+      "disableWink": 1
+    },
+    {
+      "$id": 9,
+      "name": "EYE_EX6",
+      "value": 9,
+      "stat": "S_eye_ex6",
+      "disableWink": 1
+    },
+    {
+      "$id": 10,
+      "name": "EYE_EX7",
+      "value": 10,
+      "stat": "S_eye_ex7",
+      "disableWink": 1
+    },
+    {
+      "$id": 11,
+      "name": "EYE_EX8",
+      "value": 11,
+      "stat": "S_eye_ex8",
+      "disableWink": 1
+    },
+    {
+      "$id": 12,
+      "name": "EYE_EX9",
+      "value": 12,
+      "stat": "S_eye_ex9",
+      "disableWink": 1
+    },
+    {
+      "$id": 13,
+      "name": "EYE_EX10",
+      "value": 13,
+      "stat": "S_eye_ex10",
+      "disableWink": 1
+    },
+    {
+      "$id": 14,
+      "name": "EYE_EX11",
+      "value": 14,
+      "stat": "S_eye_ex11",
+      "disableWink": 1
+    },
+    {
+      "$id": 15,
+      "name": "EYE_EX12",
+      "value": 15,
+      "stat": "S_eye_ex12",
+      "disableWink": 1
+    }
+  ]
+}

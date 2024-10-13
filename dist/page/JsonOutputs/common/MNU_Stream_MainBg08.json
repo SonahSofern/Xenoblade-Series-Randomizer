@@ -1,0 +1,22 @@
+{
+  "schema": [
+    {
+      "name": "filename",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "filename": "mnu077_bg08_a"
+    },
+    {
+      "$id": 2,
+      "filename": "mnu077_bg08_b"
+    },
+    {
+      "$id": 3,
+      "filename": "mnu077_bg08_c"
+    }
+  ]
+}

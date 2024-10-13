@@ -1,0 +1,1926 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "col_r",
+      "type": 1
+    },
+    {
+      "name": "col_g",
+      "type": 1
+    },
+    {
+      "name": "col_b",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "name": "red",
+      "col_r": 255,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 2,
+      "name": "green",
+      "col_r": 0,
+      "col_g": 255,
+      "col_b": 0
+    },
+    {
+      "$id": 3,
+      "name": "blue",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 255
+    },
+    {
+      "$id": 4,
+      "name": "cyan",
+      "col_r": 0,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 5,
+      "name": "magenta",
+      "col_r": 255,
+      "col_g": 0,
+      "col_b": 255
+    },
+    {
+      "$id": 6,
+      "name": "yellow",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 0
+    },
+    {
+      "$id": 7,
+      "name": "gray",
+      "col_r": 127,
+      "col_g": 127,
+      "col_b": 127
+    },
+    {
+      "$id": 8,
+      "name": "OK",
+      "col_r": 153,
+      "col_g": 204,
+      "col_b": 255
+    },
+    {
+      "$id": 9,
+      "name": "NG",
+      "col_r": 164,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 10,
+      "name": "select",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 11,
+      "name": "unuse",
+      "col_r": 127,
+      "col_g": 127,
+      "col_b": 127
+    },
+    {
+      "$id": 12,
+      "name": "darkgray",
+      "col_r": 100,
+      "col_g": 100,
+      "col_b": 100
+    },
+    {
+      "$id": 13,
+      "name": "cmm_themeA",
+      "col_r": 0,
+      "col_g": 230,
+      "col_b": 115
+    },
+    {
+      "$id": 14,
+      "name": "cmm_themeB",
+      "col_r": 20,
+      "col_g": 150,
+      "col_b": 255
+    },
+    {
+      "$id": 15,
+      "name": "cmm_themeC",
+      "col_r": 123,
+      "col_g": 73,
+      "col_b": 223
+    },
+    {
+      "$id": 16,
+      "name": "cmm_cursorA",
+      "col_r": 0,
+      "col_g": 255,
+      "col_b": 0
+    },
+    {
+      "$id": 17,
+      "name": "cmm_cursorB",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 0
+    },
+    {
+      "$id": 18,
+      "name": "cmm_decoA",
+      "col_r": 255,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 19,
+      "name": "cmm_decoB",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 255
+    },
+    {
+      "$id": 20,
+      "name": "quest_fontAdd",
+      "col_r": 231,
+      "col_g": 184,
+      "col_b": 109
+    },
+    {
+      "$id": 21,
+      "name": "quest_fontMul",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 22,
+      "name": "fs_activateA",
+      "col_r": 239,
+      "col_g": 138,
+      "col_b": 7
+    },
+    {
+      "$id": 23,
+      "name": "fs_activateB",
+      "col_r": 0,
+      "col_g": 130,
+      "col_b": 80
+    },
+    {
+      "$id": 24,
+      "name": "fs_activateC",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 0
+    },
+    {
+      "$id": 25,
+      "name": "quest_stamp",
+      "col_r": 199,
+      "col_g": 52,
+      "col_b": 14
+    },
+    {
+      "$id": 26,
+      "name": "diff_high",
+      "col_r": 138,
+      "col_g": 255,
+      "col_b": 207
+    },
+    {
+      "$id": 27,
+      "name": "diff_low",
+      "col_r": 240,
+      "col_g": 108,
+      "col_b": 87
+    },
+    {
+      "$id": 28,
+      "name": "blset_bl_form",
+      "col_r": 0,
+      "col_g": 199,
+      "col_b": 255
+    },
+    {
+      "$id": 29,
+      "name": "blset_release",
+      "col_r": 99,
+      "col_g": 68,
+      "col_b": 134
+    },
+    {
+      "$id": 30,
+      "name": "blset_sort",
+      "col_r": 30,
+      "col_g": 65,
+      "col_b": 255
+    },
+    {
+      "$id": 31,
+      "name": "blset_mer_slot",
+      "col_r": 197,
+      "col_g": 41,
+      "col_b": 2
+    },
+    {
+      "$id": 32,
+      "name": "blset_mer_cond",
+      "col_r": 10,
+      "col_g": 30,
+      "col_b": 50
+    },
+    {
+      "$id": 33,
+      "name": "blset_mer_fs",
+      "col_r": 10,
+      "col_g": 10,
+      "col_b": 40
+    },
+    {
+      "$id": 34,
+      "name": "black",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 35,
+      "name": "white",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 36,
+      "name": "mer_unit_ready",
+      "col_r": 0,
+      "col_g": 255,
+      "col_b": 0
+    },
+    {
+      "$id": 37,
+      "name": "mer_unit_active",
+      "col_r": 197,
+      "col_g": 41,
+      "col_b": 2
+    },
+    {
+      "$id": 38,
+      "name": "mer_unit_complete",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 255
+    },
+    {
+      "$id": 39,
+      "name": "mer_form_btn",
+      "col_r": 78,
+      "col_g": 110,
+      "col_b": 225
+    },
+    {
+      "$id": 40,
+      "name": "btl_com_dmg_fr",
+      "col_r": 218,
+      "col_g": 253,
+      "col_b": 254
+    },
+    {
+      "$id": 41,
+      "name": "btl_com_dmg_pl",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 230
+    },
+    {
+      "$id": 42,
+      "name": "btl_com_dmg_en",
+      "col_r": 255,
+      "col_g": 64,
+      "col_b": 150
+    },
+    {
+      "$id": 43,
+      "name": "btl_com_heal",
+      "col_r": 0,
+      "col_g": 231,
+      "col_b": 174
+    },
+    {
+      "$id": 44,
+      "name": "btl_com_heal_en",
+      "col_r": 0,
+      "col_g": 231,
+      "col_b": 174
+    },
+    {
+      "$id": 45,
+      "name": "talk_font",
+      "col_r": 20,
+      "col_g": 20,
+      "col_b": 100
+    },
+    {
+      "$id": 46,
+      "name": "telop_landmark",
+      "col_r": 255,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 47,
+      "name": "telop_unexplored",
+      "col_r": 0,
+      "col_g": 255,
+      "col_b": 0
+    },
+    {
+      "$id": 48,
+      "name": "telop_location",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 0
+    },
+    {
+      "$id": 49,
+      "name": "telop_second",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 50,
+      "name": "elemental00",
+      "col_r": 166,
+      "col_g": 166,
+      "col_b": 166
+    },
+    {
+      "$id": 51,
+      "name": "elemental01",
+      "col_r": 250,
+      "col_g": 65,
+      "col_b": 16
+    },
+    {
+      "$id": 52,
+      "name": "elemental02",
+      "col_r": 19,
+      "col_g": 115,
+      "col_b": 250
+    },
+    {
+      "$id": 53,
+      "name": "elemental03",
+      "col_r": 70,
+      "col_g": 230,
+      "col_b": 120
+    },
+    {
+      "$id": 54,
+      "name": "elemental04",
+      "col_r": 200,
+      "col_g": 125,
+      "col_b": 25
+    },
+    {
+      "$id": 55,
+      "name": "elemental05",
+      "col_r": 255,
+      "col_g": 230,
+      "col_b": 0
+    },
+    {
+      "$id": 56,
+      "name": "elemental06",
+      "col_r": 33,
+      "col_g": 230,
+      "col_b": 230
+    },
+    {
+      "$id": 57,
+      "name": "elemental07",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 165
+    },
+    {
+      "$id": 58,
+      "name": "elemental08",
+      "col_r": 125,
+      "col_g": 90,
+      "col_b": 210
+    },
+    {
+      "$id": 59,
+      "name": "elemental09",
+      "col_r": 255,
+      "col_g": 115,
+      "col_b": 90
+    },
+    {
+      "$id": 60,
+      "name": "ptst_index_add",
+      "col_r": 62,
+      "col_g": 98,
+      "col_b": 255
+    },
+    {
+      "$id": 61,
+      "name": "ptst_index_mul",
+      "col_r": 141,
+      "col_g": 222,
+      "col_b": 228
+    },
+    {
+      "$id": 62,
+      "name": "ptst_num_add",
+      "col_r": 62,
+      "col_g": 98,
+      "col_b": 255
+    },
+    {
+      "$id": 63,
+      "name": "ptst_num_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 64,
+      "name": "ptst_name_add",
+      "col_r": 74,
+      "col_g": 152,
+      "col_b": 172
+    },
+    {
+      "$id": 65,
+      "name": "ptst_name_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 66,
+      "name": "dr_hp_normal",
+      "col_r": 49,
+      "col_g": 230,
+      "col_b": 236
+    },
+    {
+      "$id": 67,
+      "name": "dr_hp_pinch",
+      "col_r": 250,
+      "col_g": 50,
+      "col_b": 75
+    },
+    {
+      "$id": 68,
+      "name": "en_hp",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 210
+    },
+    {
+      "$id": 69,
+      "name": "en_st_name",
+      "col_r": 255,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 70,
+      "name": "arts_recast",
+      "col_r": 255,
+      "col_g": 130,
+      "col_b": 130
+    },
+    {
+      "$id": 71,
+      "name": "bl_change_recast",
+      "col_r": 255,
+      "col_g": 130,
+      "col_b": 130
+    },
+    {
+      "$id": 72,
+      "name": "bl_sp_recast",
+      "col_r": 255,
+      "col_g": 130,
+      "col_b": 130
+    },
+    {
+      "$id": 73,
+      "name": "main_item",
+      "col_r": 188,
+      "col_g": 245,
+      "col_b": 255
+    },
+    {
+      "$id": 74,
+      "name": "main_item_border",
+      "col_r": 12,
+      "col_g": 102,
+      "col_b": 212
+    },
+    {
+      "$id": 75,
+      "name": "main_btn",
+      "col_r": 168,
+      "col_g": 221,
+      "col_b": 248
+    },
+    {
+      "$id": 76,
+      "name": "bg_afternoon_add_01",
+      "col_r": 0,
+      "col_g": 100,
+      "col_b": 225
+    },
+    {
+      "$id": 77,
+      "name": "bg_afternoon_add_02",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 78,
+      "name": "bg_afternoon_add_03",
+      "col_r": 100,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 79,
+      "name": "bg_afternoon_add_04",
+      "col_r": 0,
+      "col_g": 20,
+      "col_b": 10
+    },
+    {
+      "$id": 80,
+      "name": "bg_afternoon_add_05",
+      "col_r": 0,
+      "col_g": 10,
+      "col_b": 0
+    },
+    {
+      "$id": 81,
+      "name": "bg_afternoon_mul_01",
+      "col_r": 0,
+      "col_g": 100,
+      "col_b": 225
+    },
+    {
+      "$id": 82,
+      "name": "bg_afternoon_mul_02",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 83,
+      "name": "bg_afternoon_mul_03",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 84,
+      "name": "bg_afternoon_mul_04",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 85,
+      "name": "bg_afternoon_mul_05",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 86,
+      "name": "bg_evening_add_01",
+      "col_r": 255,
+      "col_g": 30,
+      "col_b": 0
+    },
+    {
+      "$id": 87,
+      "name": "bg_evening_add_02",
+      "col_r": 150,
+      "col_g": 44,
+      "col_b": 0
+    },
+    {
+      "$id": 88,
+      "name": "bg_evening_add_03",
+      "col_r": 200,
+      "col_g": 100,
+      "col_b": 0
+    },
+    {
+      "$id": 89,
+      "name": "bg_evening_add_04",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 90,
+      "name": "bg_evening_add_05",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 91,
+      "name": "bg_evening_mul_01",
+      "col_r": 255,
+      "col_g": 128,
+      "col_b": 0
+    },
+    {
+      "$id": 92,
+      "name": "bg_evening_mul_02",
+      "col_r": 30,
+      "col_g": 30,
+      "col_b": 30
+    },
+    {
+      "$id": 93,
+      "name": "bg_evening_mul_03",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 200
+    },
+    {
+      "$id": 94,
+      "name": "bg_evening_mul_04",
+      "col_r": 200,
+      "col_g": 80,
+      "col_b": 60
+    },
+    {
+      "$id": 95,
+      "name": "bg_evening_mul_05",
+      "col_r": 80,
+      "col_g": 30,
+      "col_b": 60
+    },
+    {
+      "$id": 96,
+      "name": "bg_night_add_01",
+      "col_r": 0,
+      "col_g": 60,
+      "col_b": 140
+    },
+    {
+      "$id": 97,
+      "name": "bg_night_add_02",
+      "col_r": 0,
+      "col_g": 30,
+      "col_b": 80
+    },
+    {
+      "$id": 98,
+      "name": "bg_night_add_03",
+      "col_r": 0,
+      "col_g": 30,
+      "col_b": 100
+    },
+    {
+      "$id": 99,
+      "name": "bg_night_add_04",
+      "col_r": 5,
+      "col_g": 10,
+      "col_b": 30
+    },
+    {
+      "$id": 100,
+      "name": "bg_night_add_05",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 30
+    },
+    {
+      "$id": 101,
+      "name": "bg_night_mul_01",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 40
+    },
+    {
+      "$id": 102,
+      "name": "bg_night_mul_02",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 30
+    },
+    {
+      "$id": 103,
+      "name": "bg_night_mul_03",
+      "col_r": 80,
+      "col_g": 100,
+      "col_b": 100
+    },
+    {
+      "$id": 104,
+      "name": "bg_night_mul_04",
+      "col_r": 40,
+      "col_g": 30,
+      "col_b": 80
+    },
+    {
+      "$id": 105,
+      "name": "bg_night_mul_05",
+      "col_r": 38,
+      "col_g": 40,
+      "col_b": 85
+    },
+    {
+      "$id": 106,
+      "name": "filter_icon_select",
+      "col_r": 211,
+      "col_g": 110,
+      "col_b": 249
+    },
+    {
+      "$id": 107,
+      "name": "kizuna_skill_info",
+      "col_r": 105,
+      "col_g": 192,
+      "col_b": 217
+    },
+    {
+      "$id": 108,
+      "name": "char_unselect",
+      "col_r": 175,
+      "col_g": 178,
+      "col_b": 192
+    },
+    {
+      "$id": 109,
+      "name": "char_shadow",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 110,
+      "name": "sys_disable",
+      "col_r": 150,
+      "col_g": 0,
+      "col_b": 100
+    },
+    {
+      "$id": 111,
+      "name": "bcur_high02",
+      "col_r": 220,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 112,
+      "name": "bcur_high01",
+      "col_r": 255,
+      "col_g": 186,
+      "col_b": 61
+    },
+    {
+      "$id": 113,
+      "name": "bcur_near",
+      "col_r": 255,
+      "col_g": 225,
+      "col_b": 225
+    },
+    {
+      "$id": 114,
+      "name": "bcur_low01",
+      "col_r": 97,
+      "col_g": 134,
+      "col_b": 240
+    },
+    {
+      "$id": 115,
+      "name": "bcur_low02",
+      "col_r": 50,
+      "col_g": 40,
+      "col_b": 100
+    },
+    {
+      "$id": 116,
+      "name": "dr_thema01",
+      "col_r": 11,
+      "col_g": 151,
+      "col_b": 186
+    },
+    {
+      "$id": 117,
+      "name": "dr_thema01_light",
+      "col_r": 120,
+      "col_g": 204,
+      "col_b": 227
+    },
+    {
+      "$id": 118,
+      "name": "dr_thema01_dark",
+      "col_r": 50,
+      "col_g": 124,
+      "col_b": 163
+    },
+    {
+      "$id": 119,
+      "name": "sys_select",
+      "col_r": 235,
+      "col_g": 125,
+      "col_b": 215
+    },
+    {
+      "$id": 120,
+      "name": "sys_hold",
+      "col_r": 250,
+      "col_g": 200,
+      "col_b": 0
+    },
+    {
+      "$id": 121,
+      "name": "chr_status_line",
+      "col_r": 90,
+      "col_g": 112,
+      "col_b": 159
+    },
+    {
+      "$id": 122,
+      "name": "mer_flag_def",
+      "col_r": 50,
+      "col_g": 125,
+      "col_b": 185
+    },
+    {
+      "$id": 123,
+      "name": "mer_flag_sel",
+      "col_r": 185,
+      "col_g": 75,
+      "col_b": 135
+    },
+    {
+      "$id": 124,
+      "name": "mer_gauge_base",
+      "col_r": 50,
+      "col_g": 115,
+      "col_b": 225
+    },
+    {
+      "$id": 125,
+      "name": "mer_gauge_bar",
+      "col_r": 250,
+      "col_g": 200,
+      "col_b": 235
+    },
+    {
+      "$id": 126,
+      "name": "mer_unit_progress",
+      "col_r": 236,
+      "col_g": 94,
+      "col_b": 213
+    },
+    {
+      "$id": 127,
+      "name": "mer_unit_empty",
+      "col_r": 50,
+      "col_g": 150,
+      "col_b": 250
+    },
+    {
+      "$id": 128,
+      "name": "mer_cond_ok",
+      "col_r": 12,
+      "col_g": 102,
+      "col_b": 212
+    },
+    {
+      "$id": 129,
+      "name": "mer_cond_ng",
+      "col_r": 150,
+      "col_g": 25,
+      "col_b": 15
+    },
+    {
+      "$id": 130,
+      "name": "mer_cond_ng2",
+      "col_r": 125,
+      "col_g": 125,
+      "col_b": 125
+    },
+    {
+      "$id": 131,
+      "name": "popup_driver",
+      "col_r": 75,
+      "col_g": 195,
+      "col_b": 215
+    },
+    {
+      "$id": 132,
+      "name": "popup_blade",
+      "col_r": 242,
+      "col_g": 153,
+      "col_b": 191
+    },
+    {
+      "$id": 133,
+      "name": "popup_field",
+      "col_r": 240,
+      "col_g": 165,
+      "col_b": 100
+    },
+    {
+      "$id": 134,
+      "name": "popup_mer",
+      "col_r": 75,
+      "col_g": 198,
+      "col_b": 145
+    },
+    {
+      "$id": 135,
+      "name": "popup_quest",
+      "col_r": 115,
+      "col_g": 95,
+      "col_b": 190
+    },
+    {
+      "$id": 136,
+      "name": "popup_system",
+      "col_r": 150,
+      "col_g": 150,
+      "col_b": 150
+    },
+    {
+      "$id": 137,
+      "name": "fight_combo",
+      "col_r": 222,
+      "col_g": 112,
+      "col_b": 24
+    },
+    {
+      "$id": 138,
+      "name": "tgt_cursor_lv01",
+      "col_r": 220,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 139,
+      "name": "tgt_cursor_lv02",
+      "col_r": 255,
+      "col_g": 186,
+      "col_b": 61
+    },
+    {
+      "$id": 140,
+      "name": "tgt_cursor_lv03",
+      "col_r": 255,
+      "col_g": 225,
+      "col_b": 225
+    },
+    {
+      "$id": 141,
+      "name": "tgt_cursor_lv04",
+      "col_r": 97,
+      "col_g": 134,
+      "col_b": 240
+    },
+    {
+      "$id": 142,
+      "name": "tgt_cursor_lv05",
+      "col_r": 50,
+      "col_g": 40,
+      "col_b": 100
+    },
+    {
+      "$id": 143,
+      "name": "dmg_buff",
+      "col_r": 0,
+      "col_g": 10,
+      "col_b": 80
+    },
+    {
+      "$id": 144,
+      "name": "dmg_debuff",
+      "col_r": 30,
+      "col_g": 20,
+      "col_b": 80
+    },
+    {
+      "$id": 145,
+      "name": "dmg_combo",
+      "col_r": 128,
+      "col_g": 0,
+      "col_b": 128
+    },
+    {
+      "$id": 146,
+      "name": "win_sub_other_line",
+      "col_r": 97,
+      "col_g": 134,
+      "col_b": 240
+    },
+    {
+      "$id": 147,
+      "name": "info_line",
+      "col_r": 127,
+      "col_g": 55,
+      "col_b": 126
+    },
+    {
+      "$id": 148,
+      "name": "hana_parts_icon",
+      "col_r": 250,
+      "col_g": 125,
+      "col_b": 50
+    },
+    {
+      "$id": 149,
+      "name": "hana_parts_icon_disable",
+      "col_r": 173,
+      "col_g": 133,
+      "col_b": 100
+    },
+    {
+      "$id": 150,
+      "name": "hana_info_line",
+      "col_r": 142,
+      "col_g": 61,
+      "col_b": 37
+    },
+    {
+      "$id": 151,
+      "name": "bl_thema01",
+      "col_r": 180,
+      "col_g": 46,
+      "col_b": 156
+    },
+    {
+      "$id": 152,
+      "name": "bl_thema01_light",
+      "col_r": 220,
+      "col_g": 109,
+      "col_b": 206
+    },
+    {
+      "$id": 153,
+      "name": "bl_thema01_dark",
+      "col_r": 165,
+      "col_g": 45,
+      "col_b": 168
+    },
+    {
+      "$id": 154,
+      "name": "txt_normal_add",
+      "col_r": 46,
+      "col_g": 139,
+      "col_b": 192
+    },
+    {
+      "$id": 155,
+      "name": "txt_normal_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 156,
+      "name": "txt_index_s_add",
+      "col_r": 56,
+      "col_g": 93,
+      "col_b": 114
+    },
+    {
+      "$id": 157,
+      "name": "txt_index_s_mul",
+      "col_r": 176,
+      "col_g": 222,
+      "col_b": 234
+    },
+    {
+      "$id": 158,
+      "name": "txt_highlight_add",
+      "col_r": 100,
+      "col_g": 16,
+      "col_b": 42
+    },
+    {
+      "$id": 159,
+      "name": "txt_highlight_mul",
+      "col_r": 247,
+      "col_g": 117,
+      "col_b": 203
+    },
+    {
+      "$id": 160,
+      "name": "txt_disable_add",
+      "col_r": 65,
+      "col_g": 71,
+      "col_b": 74
+    },
+    {
+      "$id": 161,
+      "name": "txt_disable_mul",
+      "col_r": 180,
+      "col_g": 180,
+      "col_b": 255
+    },
+    {
+      "$id": 162,
+      "name": "txt_list_item_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 163,
+      "name": "txt_list_item_mul",
+      "col_r": 102,
+      "col_g": 193,
+      "col_b": 216
+    },
+    {
+      "$id": 164,
+      "name": "txt_list_select_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 165,
+      "name": "txt_list_select_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 166,
+      "name": "txt_list_info_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 167,
+      "name": "txt_list_info_mul",
+      "col_r": 189,
+      "col_g": 245,
+      "col_b": 244
+    },
+    {
+      "$id": 168,
+      "name": "txt_list_index_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 169,
+      "name": "txt_list_index_mul",
+      "col_r": 37,
+      "col_g": 47,
+      "col_b": 104
+    },
+    {
+      "$id": 170,
+      "name": "txt_shop_index_add",
+      "col_r": 0,
+      "col_g": 6,
+      "col_b": 255
+    },
+    {
+      "$id": 171,
+      "name": "txt_shop_index_mul",
+      "col_r": 123,
+      "col_g": 207,
+      "col_b": 255
+    },
+    {
+      "$id": 172,
+      "name": "txt_reserve_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 173,
+      "name": "txt_reserve_mul",
+      "col_r": 216,
+      "col_g": 204,
+      "col_b": 102
+    },
+    {
+      "$id": 174,
+      "name": "txt_warning_add",
+      "col_r": 170,
+      "col_g": 40,
+      "col_b": 30
+    },
+    {
+      "$id": 175,
+      "name": "txt_warning_mul",
+      "col_r": 255,
+      "col_g": 203,
+      "col_b": 199
+    },
+    {
+      "$id": 176,
+      "name": "txt_kizuna_index_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 177,
+      "name": "txt_kizuna_index_mul",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 178,
+      "name": "txt_quest_comp_add",
+      "col_r": 175,
+      "col_g": 75,
+      "col_b": 0
+    },
+    {
+      "$id": 179,
+      "name": "txt_quest_comp_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 180,
+      "name": "txt_bl_index_add",
+      "col_r": 220,
+      "col_g": 81,
+      "col_b": 224
+    },
+    {
+      "$id": 181,
+      "name": "txt_bl_index_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 182,
+      "name": "txt_bl_item_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 183,
+      "name": "txt_bl_item_mul",
+      "col_r": 126,
+      "col_g": 34,
+      "col_b": 73
+    },
+    {
+      "$id": 184,
+      "name": "txt_bl_info_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 185,
+      "name": "txt_bl_info_mul",
+      "col_r": 221,
+      "col_g": 153,
+      "col_b": 220
+    },
+    {
+      "$id": 186,
+      "name": "txt_bl_orb_slot_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 187,
+      "name": "txt_bl_orb_slot_mul",
+      "col_r": 255,
+      "col_g": 190,
+      "col_b": 142
+    },
+    {
+      "$id": 188,
+      "name": "txt_dr_index_add",
+      "col_r": 13,
+      "col_g": 92,
+      "col_b": 163
+    },
+    {
+      "$id": 189,
+      "name": "txt_dr_index_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 190,
+      "name": "txt_dr_item_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 191,
+      "name": "txt_dr_item_mul",
+      "col_r": 6,
+      "col_g": 65,
+      "col_b": 132
+    },
+    {
+      "$id": 192,
+      "name": "txt_dr_info_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 193,
+      "name": "txt_dr_info_mul",
+      "col_r": 176,
+      "col_g": 222,
+      "col_b": 234
+    },
+    {
+      "$id": 194,
+      "name": "txt_evth_item_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 195,
+      "name": "txt_evth_item_mul",
+      "col_r": 255,
+      "col_g": 200,
+      "col_b": 250
+    },
+    {
+      "$id": 196,
+      "name": "txt_ztelop_add",
+      "col_r": 35,
+      "col_g": 15,
+      "col_b": 0
+    },
+    {
+      "$id": 197,
+      "name": "txt_ztelop_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 198,
+      "name": "txt_levelup_add",
+      "col_r": 223,
+      "col_g": 13,
+      "col_b": 45
+    },
+    {
+      "$id": 199,
+      "name": "txt_levelup_mul",
+      "col_r": 255,
+      "col_g": 248,
+      "col_b": 221
+    },
+    {
+      "$id": 200,
+      "name": "txt_title_normal_add",
+      "col_r": 25,
+      "col_g": 50,
+      "col_b": 100
+    },
+    {
+      "$id": 201,
+      "name": "txt_title_normal_mul",
+      "col_r": 125,
+      "col_g": 175,
+      "col_b": 225
+    },
+    {
+      "$id": 202,
+      "name": "txt_title_sel_add",
+      "col_r": 65,
+      "col_g": 135,
+      "col_b": 215
+    },
+    {
+      "$id": 203,
+      "name": "txt_title_sel_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 204,
+      "name": "txt_title_copy_add",
+      "col_r": 25,
+      "col_g": 50,
+      "col_b": 100
+    },
+    {
+      "$id": 205,
+      "name": "txt_title_copy_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 206,
+      "name": "txt_env_add",
+      "col_r": 12,
+      "col_g": 102,
+      "col_b": 212
+    },
+    {
+      "$id": 207,
+      "name": "txt_env_mul",
+      "col_r": 178,
+      "col_g": 237,
+      "col_b": 252
+    },
+    {
+      "$id": 208,
+      "name": "txt_ev_talk_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 209,
+      "name": "txt_ev_talk_mul",
+      "col_r": 55,
+      "col_g": 61,
+      "col_b": 89
+    },
+    {
+      "$id": 210,
+      "name": "txt_sys_disable_add",
+      "col_r": 114,
+      "col_g": 45,
+      "col_b": 192
+    },
+    {
+      "$id": 211,
+      "name": "txt_sys_disable_mul",
+      "col_r": 244,
+      "col_g": 151,
+      "col_b": 193
+    },
+    {
+      "$id": 212,
+      "name": "txt_ch_burst_add",
+      "col_r": 164,
+      "col_g": 56,
+      "col_b": 233
+    },
+    {
+      "$id": 213,
+      "name": "txt_ch_burst_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 214,
+      "name": "txt_ch_damege_add",
+      "col_r": 233,
+      "col_g": 190,
+      "col_b": 5
+    },
+    {
+      "$id": 215,
+      "name": "txt_ch_damege_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 216,
+      "name": "txt_mm_money_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 217,
+      "name": "txt_mm_money_mul",
+      "col_r": 84,
+      "col_g": 116,
+      "col_b": 187
+    },
+    {
+      "$id": 218,
+      "name": "txt_normal2_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 219,
+      "name": "txt_normal2_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 220,
+      "name": "txt_lvup_add",
+      "col_r": 150,
+      "col_g": 75,
+      "col_b": 25
+    },
+    {
+      "$id": 221,
+      "name": "txt_lvup_mul",
+      "col_r": 250,
+      "col_g": 200,
+      "col_b": 0
+    },
+    {
+      "$id": 222,
+      "name": "txt_column_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 223,
+      "name": "txt_column_mul",
+      "col_r": 81,
+      "col_g": 84,
+      "col_b": 86
+    },
+    {
+      "$id": 224,
+      "name": "txt_sys_up_add",
+      "col_r": 31,
+      "col_g": 101,
+      "col_b": 171
+    },
+    {
+      "$id": 225,
+      "name": "txt_sys_up_mul",
+      "col_r": 199,
+      "col_g": 227,
+      "col_b": 255
+    },
+    {
+      "$id": 226,
+      "name": "txt_cmm_column_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 227,
+      "name": "txt_cmm_column_mul",
+      "col_r": 200,
+      "col_g": 215,
+      "col_b": 250
+    },
+    {
+      "$id": 228,
+      "name": "txt_arts_info_add",
+      "col_r": 55,
+      "col_g": 125,
+      "col_b": 170
+    },
+    {
+      "$id": 229,
+      "name": "txt_arts_info_mul",
+      "col_r": 180,
+      "col_g": 225,
+      "col_b": 235
+    },
+    {
+      "$id": 230,
+      "name": "txt_en_name_add",
+      "col_r": 255,
+      "col_g": 30,
+      "col_b": 200
+    },
+    {
+      "$id": 231,
+      "name": "txt_en_name_mul",
+      "col_r": 255,
+      "col_g": 225,
+      "col_b": 255
+    },
+    {
+      "$id": 232,
+      "name": "txt_get_exp_add",
+      "col_r": 31,
+      "col_g": 101,
+      "col_b": 171
+    },
+    {
+      "$id": 233,
+      "name": "txt_get_exp_mul",
+      "col_r": 199,
+      "col_g": 227,
+      "col_b": 255
+    },
+    {
+      "$id": 234,
+      "name": "txt_get_sp_add",
+      "col_r": 129,
+      "col_g": 5,
+      "col_b": 255
+    },
+    {
+      "$id": 235,
+      "name": "txt_get_sp_mul",
+      "col_r": 246,
+      "col_g": 242,
+      "col_b": 255
+    },
+    {
+      "$id": 236,
+      "name": "txt_get_wp_add",
+      "col_r": 11,
+      "col_g": 151,
+      "col_b": 186
+    },
+    {
+      "$id": 237,
+      "name": "txt_get_wp_mul",
+      "col_r": 238,
+      "col_g": 255,
+      "col_b": 252
+    },
+    {
+      "$id": 238,
+      "name": "txt_get_shadow_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 239,
+      "name": "txt_get_shadow_mul",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 240,
+      "name": "txt_ch_fullburst_add",
+      "col_r": 236,
+      "col_g": 127,
+      "col_b": 0
+    },
+    {
+      "$id": 241,
+      "name": "txt_ch_fullburst_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 242,
+      "name": "txt_map_zone_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 243,
+      "name": "txt_map_zone_mul",
+      "col_r": 96,
+      "col_g": 86,
+      "col_b": 86
+    },
+    {
+      "$id": 244,
+      "name": "txt_main_title_add",
+      "col_r": 59,
+      "col_g": 142,
+      "col_b": 255
+    },
+    {
+      "$id": 245,
+      "name": "txt_main_title_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    },
+    {
+      "$id": 246,
+      "name": "txt_main_title_shadow_add",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 247,
+      "name": "txt_main_title_shadow_mul",
+      "col_r": 25,
+      "col_g": 50,
+      "col_b": 150
+    },
+    {
+      "$id": 248,
+      "name": "txt_main_select_add",
+      "col_r": 155,
+      "col_g": 35,
+      "col_b": 150
+    },
+    {
+      "$id": 249,
+      "name": "txt_main_select_mul",
+      "col_r": 250,
+      "col_g": 175,
+      "col_b": 250
+    },
+    {
+      "$id": 250,
+      "name": "txt_bch_result_exc_add",
+      "col_r": 75,
+      "col_g": 25,
+      "col_b": 35
+    },
+    {
+      "$id": 251,
+      "name": "txt_bch_result_exc_mul",
+      "col_r": 75,
+      "col_g": 25,
+      "col_b": 35
+    },
+    {
+      "$id": 252,
+      "name": "txt_bch_result_good_add",
+      "col_r": 0,
+      "col_g": 25,
+      "col_b": 50
+    },
+    {
+      "$id": 253,
+      "name": "txt_bch_result_good_mul",
+      "col_r": 0,
+      "col_g": 25,
+      "col_b": 50
+    },
+    {
+      "$id": 254,
+      "name": "txt_menuindex_add",
+      "col_r": 60,
+      "col_g": 120,
+      "col_b": 250
+    },
+    {
+      "$id": 255,
+      "name": "txt_menuindex_mul",
+      "col_r": 180,
+      "col_g": 220,
+      "col_b": 255
+    },
+    {
+      "$id": 256,
+      "name": "txt_player_dmg_add",
+      "col_r": 37,
+      "col_g": 97,
+      "col_b": 159
+    },
+    {
+      "$id": 257,
+      "name": "txt_player_dmg_mul",
+      "col_r": 227,
+      "col_g": 249,
+      "col_b": 255
+    },
+    {
+      "$id": 258,
+      "name": "txt_party_dmg_add",
+      "col_r": 0,
+      "col_g": 104,
+      "col_b": 211
+    },
+    {
+      "$id": 259,
+      "name": "txt_party_dmg_mul",
+      "col_r": 162,
+      "col_g": 228,
+      "col_b": 244
+    },
+    {
+      "$id": 260,
+      "name": "txt_enemy_dmg_add",
+      "col_r": 103,
+      "col_g": 0,
+      "col_b": 29
+    },
+    {
+      "$id": 261,
+      "name": "txt_enemy_dmg_mul",
+      "col_r": 234,
+      "col_g": 77,
+      "col_b": 77
+    },
+    {
+      "$id": 262,
+      "name": "txt_party_heal_add",
+      "col_r": 28,
+      "col_g": 90,
+      "col_b": 97
+    },
+    {
+      "$id": 263,
+      "name": "txt_party_heal_mul",
+      "col_r": 153,
+      "col_g": 243,
+      "col_b": 212
+    },
+    {
+      "$id": 264,
+      "name": "txt_enemy_heal_add",
+      "col_r": 28,
+      "col_g": 90,
+      "col_b": 97
+    },
+    {
+      "$id": 265,
+      "name": "txt_enemy_heal_mul",
+      "col_r": 153,
+      "col_g": 243,
+      "col_b": 212
+    },
+    {
+      "$id": 266,
+      "name": "txt_dotdmg_add",
+      "col_r": 129,
+      "col_g": 73,
+      "col_b": 19
+    },
+    {
+      "$id": 267,
+      "name": "txt_dotdmg_mul",
+      "col_r": 255,
+      "col_g": 173,
+      "col_b": 118
+    },
+    {
+      "$id": 268,
+      "name": "txt_spikedmg_add",
+      "col_r": 101,
+      "col_g": 24,
+      "col_b": 150
+    },
+    {
+      "$id": 269,
+      "name": "txt_spikedmg_mul",
+      "col_r": 221,
+      "col_g": 148,
+      "col_b": 255
+    },
+    {
+      "$id": 270,
+      "name": "",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0
+    },
+    {
+      "$id": 271,
+      "name": "txt_btl_ch_score_add",
+      "col_r": 0,
+      "col_g": 50,
+      "col_b": 46
+    },
+    {
+      "$id": 272,
+      "name": "txt_btl_ch_score_mul",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 255
+    }
+  ]
+}

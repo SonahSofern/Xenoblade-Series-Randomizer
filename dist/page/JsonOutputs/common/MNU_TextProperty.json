@@ -1,0 +1,90 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "col_r",
+      "type": 1
+    },
+    {
+      "name": "col_g",
+      "type": 1
+    },
+    {
+      "name": "col_b",
+      "type": 1
+    },
+    {
+      "name": "Bold",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "name": "TEXT_PROP_RED",
+      "col_r": 255,
+      "col_g": 0,
+      "col_b": 0,
+      "Bold": 0
+    },
+    {
+      "$id": 2,
+      "name": "TEXT_PROP_GREEN",
+      "col_r": 0,
+      "col_g": 255,
+      "col_b": 0,
+      "Bold": 0
+    },
+    {
+      "$id": 3,
+      "name": "TEXT_PROP_BLUE",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 255,
+      "Bold": 0
+    },
+    {
+      "$id": 4,
+      "name": "TEXT_PROP_CYAN",
+      "col_r": 0,
+      "col_g": 255,
+      "col_b": 255,
+      "Bold": 0
+    },
+    {
+      "$id": 5,
+      "name": "TEXT_PROP_MAGENTA",
+      "col_r": 255,
+      "col_g": 0,
+      "col_b": 255,
+      "Bold": 0
+    },
+    {
+      "$id": 6,
+      "name": "TEXT_PROP_YELLOW",
+      "col_r": 255,
+      "col_g": 255,
+      "col_b": 0,
+      "Bold": 0
+    },
+    {
+      "$id": 7,
+      "name": "TEXT_PROP_GRAY",
+      "col_r": 127,
+      "col_g": 127,
+      "col_b": 127,
+      "Bold": 0
+    },
+    {
+      "$id": 8,
+      "name": "TEXT_PROP_BLACK",
+      "col_r": 0,
+      "col_g": 0,
+      "col_b": 0,
+      "Bold": 0
+    }
+  ]
+}

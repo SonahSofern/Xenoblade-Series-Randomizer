@@ -1,0 +1,504 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_header_zone_name",
+      "text_id": 236
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_header_zone_dev_idx",
+      "text_id": 237
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_header_mis_name",
+      "text_id": 263
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_header_mis_zone",
+      "text_id": 264
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_zone_info_name",
+      "text_id": 236
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_zone_notice_quest",
+      "text_id": 242
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_zone_info_mer_lv",
+      "text_id": 238
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_zone_mer_lv_next_index",
+      "text_id": 241
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_zone_mer_lv_next_num",
+      "text_id": 239
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_zone_mer_lv_next_max",
+      "text_id": 239
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_zone_mer_lv_next_slash",
+      "text_id": 240
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_zone_unit_index",
+      "text_id": 243
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_zone_unit_name@01",
+      "text_id": 245
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_zone_unit_mission_name@01",
+      "text_id": 246
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_zone_unit_mission_time@01",
+      "text_id": 244
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_zone_unit_mission_inf@01",
+      "text_id": 1784
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_zone_unit_come_back@01",
+      "text_id": 247
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_zone_unit_ready@01",
+      "text_id": 250
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_zone_unit_name@02",
+      "text_id": 245
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_zone_unit_mission_name@02",
+      "text_id": 246
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_zone_unit_mission_time@02",
+      "text_id": 244
+    },
+    {
+      "$id": 22,
+      "obj_name": "TXT_zone_unit_mission_inf@02",
+      "text_id": 1784
+    },
+    {
+      "$id": 23,
+      "obj_name": "TXT_zone_unit_come_back@02",
+      "text_id": 247
+    },
+    {
+      "$id": 24,
+      "obj_name": "TXT_zone_unit_ready@02",
+      "text_id": 250
+    },
+    {
+      "$id": 25,
+      "obj_name": "TXT_zone_unit_name@03",
+      "text_id": 245
+    },
+    {
+      "$id": 26,
+      "obj_name": "TXT_zone_unit_mission_name@03",
+      "text_id": 246
+    },
+    {
+      "$id": 27,
+      "obj_name": "TXT_zone_unit_mission_time@03",
+      "text_id": 244
+    },
+    {
+      "$id": 28,
+      "obj_name": "TXT_zone_unit_mission_inf@03",
+      "text_id": 1784
+    },
+    {
+      "$id": 29,
+      "obj_name": "TXT_zone_unit_come_back@03",
+      "text_id": 247
+    },
+    {
+      "$id": 30,
+      "obj_name": "TXT_zone_unit_ready@03",
+      "text_id": 250
+    },
+    {
+      "$id": 31,
+      "obj_name": "TXT_mis_sel_column@01",
+      "text_id": 258
+    },
+    {
+      "$id": 32,
+      "obj_name": "TXT_mis_sel_column@02",
+      "text_id": 257
+    },
+    {
+      "$id": 33,
+      "obj_name": "TXT_mis_sel_title@01",
+      "text_id": 256
+    },
+    {
+      "$id": 34,
+      "obj_name": "TXT_mis_sel_title@01",
+      "text_id": 256
+    },
+    {
+      "$id": 35,
+      "obj_name": "TXT_mis_sel_time@01",
+      "text_id": 262
+    },
+    {
+      "$id": 36,
+      "obj_name": "TXT_mis_sel_time_inf@01",
+      "text_id": 1784
+    },
+    {
+      "$id": 37,
+      "obj_name": "TXT_mis_sel_title@02",
+      "text_id": 256
+    },
+    {
+      "$id": 38,
+      "obj_name": "TXT_mis_sel_time@02",
+      "text_id": 262
+    },
+    {
+      "$id": 39,
+      "obj_name": "TXT_mis_sel_time_inf@02",
+      "text_id": 1784
+    },
+    {
+      "$id": 40,
+      "obj_name": "TXT_mis_sel_title@03",
+      "text_id": 256
+    },
+    {
+      "$id": 41,
+      "obj_name": "TXT_mis_sel_time@03",
+      "text_id": 262
+    },
+    {
+      "$id": 42,
+      "obj_name": "TXT_mis_sel_time_inf@03",
+      "text_id": 1784
+    },
+    {
+      "$id": 43,
+      "obj_name": "TXT_mis_sel_title@04",
+      "text_id": 256
+    },
+    {
+      "$id": 44,
+      "obj_name": "TXT_mis_sel_time@04",
+      "text_id": 262
+    },
+    {
+      "$id": 45,
+      "obj_name": "TXT_mis_sel_time_inf@04",
+      "text_id": 1784
+    },
+    {
+      "$id": 46,
+      "obj_name": "TXT_mis_sel_title@05",
+      "text_id": 256
+    },
+    {
+      "$id": 47,
+      "obj_name": "TXT_mis_sel_time@05",
+      "text_id": 262
+    },
+    {
+      "$id": 48,
+      "obj_name": "TXT_mis_sel_time_inf@05",
+      "text_id": 1784
+    },
+    {
+      "$id": 49,
+      "obj_name": "TXT_mis_sel_title@06",
+      "text_id": 256
+    },
+    {
+      "$id": 50,
+      "obj_name": "TXT_mis_sel_time@06",
+      "text_id": 262
+    },
+    {
+      "$id": 51,
+      "obj_name": "TXT_mis_sel_time_inf@06",
+      "text_id": 1784
+    },
+    {
+      "$id": 52,
+      "obj_name": "TXT_mis_sel_cond_index",
+      "text_id": 269
+    },
+    {
+      "$id": 53,
+      "obj_name": "TXT_mis_sel_cond_txt@01",
+      "text_id": 270
+    },
+    {
+      "$id": 54,
+      "obj_name": "TXT_mis_sel_cond_lv@01",
+      "text_id": 272
+    },
+    {
+      "$id": 55,
+      "obj_name": "TXT_mis_sel_cond_val@01",
+      "text_id": 271
+    },
+    {
+      "$id": 56,
+      "obj_name": "TXT_mis_sel_cond_max@01",
+      "text_id": 274
+    },
+    {
+      "$id": 57,
+      "obj_name": "TXT_mis_sel_cond_txt@02",
+      "text_id": 270
+    },
+    {
+      "$id": 58,
+      "obj_name": "TXT_mis_sel_cond_lv@02",
+      "text_id": 272
+    },
+    {
+      "$id": 59,
+      "obj_name": "TXT_mis_sel_cond_val@02",
+      "text_id": 271
+    },
+    {
+      "$id": 60,
+      "obj_name": "TXT_mis_sel_cond_max@02",
+      "text_id": 274
+    },
+    {
+      "$id": 61,
+      "obj_name": "TXT_mis_sel_cond_txt@03",
+      "text_id": 270
+    },
+    {
+      "$id": 62,
+      "obj_name": "TXT_mis_sel_cond_lv@03",
+      "text_id": 272
+    },
+    {
+      "$id": 63,
+      "obj_name": "TXT_mis_sel_cond_val@03",
+      "text_id": 271
+    },
+    {
+      "$id": 64,
+      "obj_name": "TXT_mis_sel_cond_max@03",
+      "text_id": 274
+    },
+    {
+      "$id": 65,
+      "obj_name": "TXT_mis_sel_detail_info",
+      "text_id": 265
+    },
+    {
+      "$id": 66,
+      "obj_name": "TXT_detail_info",
+      "text_id": 265
+    },
+    {
+      "$id": 67,
+      "obj_name": "TXT_detail_idx@01",
+      "text_id": 266
+    },
+    {
+      "$id": 68,
+      "obj_name": "TXT_detail_time_ready_idx",
+      "text_id": 257
+    },
+    {
+      "$id": 69,
+      "obj_name": "TXT_detail_time_ready",
+      "text_id": 259
+    },
+    {
+      "$id": 70,
+      "obj_name": "TXT_detail_time_prog_idx",
+      "text_id": 260
+    },
+    {
+      "$id": 71,
+      "obj_name": "TXT_detail_time_prog",
+      "text_id": 261
+    },
+    {
+      "$id": 72,
+      "obj_name": "TXT_detail_idx@02",
+      "text_id": 267
+    },
+    {
+      "$id": 73,
+      "obj_name": "TXT_detail_skill@01",
+      "text_id": 268
+    },
+    {
+      "$id": 74,
+      "obj_name": "TXT_detail_skill@02",
+      "text_id": 268
+    },
+    {
+      "$id": 75,
+      "obj_name": "TXT_detail_skill@03",
+      "text_id": 268
+    },
+    {
+      "$id": 76,
+      "obj_name": "TXT_detail_idx@03",
+      "text_id": 269
+    },
+    {
+      "$id": 77,
+      "obj_name": "TXT_detail_cond_txt@01",
+      "text_id": 270
+    },
+    {
+      "$id": 78,
+      "obj_name": "TXT_detail_cond_val@01",
+      "text_id": 271
+    },
+    {
+      "$id": 79,
+      "obj_name": "TXT_detail_cond_lv@01",
+      "text_id": 272
+    },
+    {
+      "$id": 80,
+      "obj_name": "TXT_detail_cond_num@01",
+      "text_id": 274
+    },
+    {
+      "$id": 81,
+      "obj_name": "TXT_detail_cond_max@01",
+      "text_id": 274
+    },
+    {
+      "$id": 82,
+      "obj_name": "TXT_detail_cond_slash@01",
+      "text_id": 275
+    },
+    {
+      "$id": 83,
+      "obj_name": "TXT_detail_cond_txt@02",
+      "text_id": 270
+    },
+    {
+      "$id": 84,
+      "obj_name": "TXT_detail_cond_val@02",
+      "text_id": 271
+    },
+    {
+      "$id": 85,
+      "obj_name": "TXT_detail_cond_lv@02",
+      "text_id": 272
+    },
+    {
+      "$id": 86,
+      "obj_name": "TXT_detail_cond_num@02",
+      "text_id": 274
+    },
+    {
+      "$id": 87,
+      "obj_name": "TXT_detail_cond_max@02",
+      "text_id": 274
+    },
+    {
+      "$id": 88,
+      "obj_name": "TXT_detail_cond_slash@02",
+      "text_id": 275
+    },
+    {
+      "$id": 89,
+      "obj_name": "TXT_detail_cond_txt@03",
+      "text_id": 270
+    },
+    {
+      "$id": 90,
+      "obj_name": "TXT_detail_cond_val@03",
+      "text_id": 271
+    },
+    {
+      "$id": 91,
+      "obj_name": "TXT_detail_cond_lv@03",
+      "text_id": 272
+    },
+    {
+      "$id": 92,
+      "obj_name": "TXT_detail_cond_num@03",
+      "text_id": 274
+    },
+    {
+      "$id": 93,
+      "obj_name": "TXT_detail_cond_max@03",
+      "text_id": 274
+    },
+    {
+      "$id": 94,
+      "obj_name": "TXT_detail_cond_slash@03",
+      "text_id": 275
+    },
+    {
+      "$id": 95,
+      "obj_name": "TXT_detail_idx@04",
+      "text_id": 276
+    },
+    {
+      "$id": 96,
+      "obj_name": "TXT_detail_team_name",
+      "text_id": 277
+    },
+    {
+      "$id": 97,
+      "obj_name": "TXT_detail_btn_to_form",
+      "text_id": 278
+    },
+    {
+      "$id": 98,
+      "obj_name": "TXT_detail_btn_release",
+      "text_id": 279
+    }
+  ]
+}

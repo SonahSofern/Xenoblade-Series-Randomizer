@@ -1,0 +1,149 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_char_pos_front@01",
+      "text_id": 1926
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_char_pos_back@01",
+      "text_id": 1927
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_char_pos_front@02",
+      "text_id": 1926
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_char_pos_back@02",
+      "text_id": 1927
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_char_pos_front@03",
+      "text_id": 1926
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_char_pos_back@03",
+      "text_id": 1927
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_char_pos_front@04",
+      "text_id": 1926
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_char_pos_back@04",
+      "text_id": 1927
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_btl_mode@01",
+      "text_id": 1906
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_btl_mode@02",
+      "text_id": 1907
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_talent_info_name",
+      "text_id": 885
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_talent_info_cap",
+      "text_id": 886
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_name_info_solo@01",
+      "text_id": 885
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_name_info_main@01",
+      "text_id": 885
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_name_info_sub@01",
+      "text_id": 885
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_name_info_solo@02",
+      "text_id": 885
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_name_info_main@02",
+      "text_id": 885
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_name_info_sub@02",
+      "text_id": 885
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_combo_info_solo@01",
+      "text_id": 885
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_combo_info_main@01",
+      "text_id": 885
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_combo_info_sub@01",
+      "text_id": 885
+    },
+    {
+      "$id": 22,
+      "obj_name": "TXT_combo_info_solo@02",
+      "text_id": 885
+    },
+    {
+      "$id": 23,
+      "obj_name": "TXT_combo_info_main@02",
+      "text_id": 885
+    },
+    {
+      "$id": 24,
+      "obj_name": "TXT_combo_info_sub@02",
+      "text_id": 885
+    },
+    {
+      "$id": 25,
+      "obj_name": "TXT_chain_info_name@01",
+      "text_id": 885
+    },
+    {
+      "$id": 26,
+      "obj_name": "TXT_chain_info_name@02",
+      "text_id": 885
+    },
+    {
+      "$id": 27,
+      "obj_name": "TXT_chain_info_name@03",
+      "text_id": 885
+    }
+  ]
+}

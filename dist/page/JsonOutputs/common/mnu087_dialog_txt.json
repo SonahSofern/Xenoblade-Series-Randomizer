@@ -1,0 +1,339 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_dialog_title",
+      "text_id": 1085
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_dialog_text",
+      "text_id": 1086
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_dialog_ok_only",
+      "text_id": 1088
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_dialog_ok",
+      "text_id": 1088
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_dialog_select_cancel",
+      "text_id": 1089
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_error",
+      "text_id": 1090
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_dialog_mer_main_text",
+      "text_id": 1087
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_dialog_mer_info_unit_name",
+      "text_id": 245
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_dialog_mer_info_mis_name",
+      "text_id": 246
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_dialog_mer_info_time",
+      "text_id": 244
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_dialog_mer_info_time_inf",
+      "text_id": 1784
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_dialog_mer_come_back",
+      "text_id": 247
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_dialog_mer_ok_only",
+      "text_id": 1088
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_dialog_mer_ok",
+      "text_id": 1088
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_dialog_mer_cancel",
+      "text_id": 1089
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_dialog_kizuna_title",
+      "text_id": 1085
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_dialog_kizuna_main_text",
+      "text_id": 1732
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_dialog_kizuna_ok_only",
+      "text_id": 1088
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_get_item_title",
+      "text_id": 842
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_get_item_name@01",
+      "text_id": 843
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_get_item_num_cross@01",
+      "text_id": 1681
+    },
+    {
+      "$id": 22,
+      "obj_name": "TXT_get_item_num@01",
+      "text_id": 844
+    },
+    {
+      "$id": 23,
+      "obj_name": "TXT_get_item_name@02",
+      "text_id": 843
+    },
+    {
+      "$id": 24,
+      "obj_name": "TXT_get_item_num_cross@02",
+      "text_id": 1681
+    },
+    {
+      "$id": 25,
+      "obj_name": "TXT_get_item_num@02",
+      "text_id": 844
+    },
+    {
+      "$id": 26,
+      "obj_name": "TXT_get_item_name@03",
+      "text_id": 843
+    },
+    {
+      "$id": 27,
+      "obj_name": "TXT_get_item_num_cross@03",
+      "text_id": 1681
+    },
+    {
+      "$id": 28,
+      "obj_name": "TXT_get_item_num@03",
+      "text_id": 844
+    },
+    {
+      "$id": 29,
+      "obj_name": "TXT_get_item_name@04",
+      "text_id": 843
+    },
+    {
+      "$id": 30,
+      "obj_name": "TXT_get_item_num_cross@04",
+      "text_id": 1681
+    },
+    {
+      "$id": 31,
+      "obj_name": "TXT_get_item_num@04",
+      "text_id": 844
+    },
+    {
+      "$id": 32,
+      "obj_name": "TXT_get_item_name@05",
+      "text_id": 843
+    },
+    {
+      "$id": 33,
+      "obj_name": "TXT_get_item_num_cross@05",
+      "text_id": 1681
+    },
+    {
+      "$id": 34,
+      "obj_name": "TXT_get_item_num@05",
+      "text_id": 844
+    },
+    {
+      "$id": 35,
+      "obj_name": "TXT_get_item_ok_only",
+      "text_id": 1088
+    },
+    {
+      "$id": 36,
+      "obj_name": "TXT_sel_title",
+      "text_id": 1774
+    },
+    {
+      "$id": 37,
+      "obj_name": "TXT_sel_item@01",
+      "text_id": 1621
+    },
+    {
+      "$id": 38,
+      "obj_name": "TXT_sel_item@02",
+      "text_id": 1621
+    },
+    {
+      "$id": 39,
+      "obj_name": "TXT_sel_item@03",
+      "text_id": 1621
+    },
+    {
+      "$id": 40,
+      "obj_name": "TXT_dr_change_caption",
+      "text_id": 1778
+    },
+    {
+      "$id": 41,
+      "obj_name": "TXT_owner_change_caption",
+      "text_id": 1779
+    },
+    {
+      "$id": 42,
+      "obj_name": "TXT_owner_change_caption_rex",
+      "text_id": 1780
+    },
+    {
+      "$id": 43,
+      "obj_name": "TXT_owner_change_caption_rex2",
+      "text_id": 1782
+    },
+    {
+      "$id": 44,
+      "obj_name": "TXT_owner_ch_ok_only",
+      "text_id": 1088
+    },
+    {
+      "$id": 45,
+      "obj_name": "TXT_num_select_value",
+      "text_id": 1012
+    },
+    {
+      "$id": 46,
+      "obj_name": "TXT_num_select_total_price",
+      "text_id": 1013
+    },
+    {
+      "$id": 47,
+      "obj_name": "TXT_num_select_index@01",
+      "text_id": 1014
+    },
+    {
+      "$id": 48,
+      "obj_name": "TXT_num_select_index@02",
+      "text_id": 1015
+    },
+    {
+      "$id": 49,
+      "obj_name": "TXT_sel_title_item",
+      "text_id": 1798
+    },
+    {
+      "$id": 50,
+      "obj_name": "TXT_sel_item_name@01",
+      "text_id": 1799
+    },
+    {
+      "$id": 51,
+      "obj_name": "TXT_sel_item_num@01",
+      "text_id": 1800
+    },
+    {
+      "$id": 52,
+      "obj_name": "TXT_sel_item_name@02",
+      "text_id": 1799
+    },
+    {
+      "$id": 53,
+      "obj_name": "TXT_sel_item_num@02",
+      "text_id": 1800
+    },
+    {
+      "$id": 54,
+      "obj_name": "TXT_sel_item_name@03",
+      "text_id": 1799
+    },
+    {
+      "$id": 55,
+      "obj_name": "TXT_sel_item_num@03",
+      "text_id": 1800
+    },
+    {
+      "$id": 56,
+      "obj_name": "TXT_dialog_ok_long@01",
+      "text_id": 1846
+    },
+    {
+      "$id": 57,
+      "obj_name": "TXT_dialog_ok_long@02",
+      "text_id": 1846
+    },
+    {
+      "$id": 58,
+      "obj_name": "TXT_dialog_select_cancel_long",
+      "text_id": 1846
+    },
+    {
+      "$id": 59,
+      "obj_name": "TXT_sel_item@04",
+      "text_id": 1621
+    },
+    {
+      "$id": 60,
+      "obj_name": "TXT_sel_item_name@04",
+      "text_id": 1799
+    },
+    {
+      "$id": 61,
+      "obj_name": "TXT_sel_item_num@04",
+      "text_id": 1800
+    },
+    {
+      "$id": 62,
+      "obj_name": "TXT_sel_title_item@01",
+      "text_id": 1798
+    },
+    {
+      "$id": 63,
+      "obj_name": "TXT_sel_title_item@02",
+      "text_id": 2005
+    },
+    {
+      "$id": 64,
+      "obj_name": "TXT_sel_title_item@03",
+      "text_id": 2005
+    },
+    {
+      "$id": 65,
+      "obj_name": "TXT_sel_title_item@04",
+      "text_id": 2005
+    }
+  ]
+}

@@ -1,0 +1,1338 @@
+{
+  "schema": [
+    {
+      "name": "Category",
+      "type": 1
+    },
+    {
+      "name": "PCID1",
+      "type": 2
+    },
+    {
+      "name": "PCID2",
+      "type": 2
+    },
+    {
+      "name": "PCID3",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "Category": 2,
+      "PCID1": 1,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 2,
+      "Category": 2,
+      "PCID1": 2,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 3,
+      "Category": 2,
+      "PCID1": 3,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 4,
+      "Category": 2,
+      "PCID1": 4,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 5,
+      "Category": 2,
+      "PCID1": 6,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 6,
+      "Category": 2,
+      "PCID1": 1001,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 7,
+      "Category": 2,
+      "PCID1": 1002,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 8,
+      "Category": 2,
+      "PCID1": 1004,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 9,
+      "Category": 2,
+      "PCID1": 1010,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 10,
+      "Category": 2,
+      "PCID1": 5,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 11,
+      "Category": 2,
+      "PCID1": 1005,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 12,
+      "Category": 2,
+      "PCID1": 1006,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 13,
+      "Category": 2,
+      "PCID1": 1007,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 14,
+      "Category": 2,
+      "PCID1": 1009,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 15,
+      "Category": 2,
+      "PCID1": 1008,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 16,
+      "Category": 2,
+      "PCID1": 7,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 17,
+      "Category": 0,
+      "PCID1": 1,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 18,
+      "Category": 0,
+      "PCID1": 1,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 19,
+      "Category": 0,
+      "PCID1": 2,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 20,
+      "Category": 0,
+      "PCID1": 3,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 21,
+      "Category": 0,
+      "PCID1": 4,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 22,
+      "Category": 0,
+      "PCID1": 6,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 23,
+      "Category": 0,
+      "PCID1": 1001,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 24,
+      "Category": 0,
+      "PCID1": 1002,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 25,
+      "Category": 0,
+      "PCID1": 1004,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 26,
+      "Category": 0,
+      "PCID1": 1010,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 27,
+      "Category": 0,
+      "PCID1": 1005,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 28,
+      "Category": 0,
+      "PCID1": 1006,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 29,
+      "Category": 0,
+      "PCID1": 1007,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 30,
+      "Category": 0,
+      "PCID1": 1009,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 31,
+      "Category": 0,
+      "PCID1": 1008,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 32,
+      "Category": 0,
+      "PCID1": 7,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 33,
+      "Category": 0,
+      "PCID1": 1014,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 34,
+      "Category": 0,
+      "PCID1": 1015,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 35,
+      "Category": 0,
+      "PCID1": 1016,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 36,
+      "Category": 0,
+      "PCID1": 1017,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 37,
+      "Category": 0,
+      "PCID1": 1020,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 38,
+      "Category": 0,
+      "PCID1": 1022,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 39,
+      "Category": 0,
+      "PCID1": 1021,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 40,
+      "Category": 0,
+      "PCID1": 1038,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 41,
+      "Category": 0,
+      "PCID1": 1023,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 42,
+      "Category": 0,
+      "PCID1": 1024,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 43,
+      "Category": 0,
+      "PCID1": 1025,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 44,
+      "Category": 0,
+      "PCID1": 1026,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 45,
+      "Category": 0,
+      "PCID1": 1027,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 46,
+      "Category": 0,
+      "PCID1": 1028,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 47,
+      "Category": 0,
+      "PCID1": 1029,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 48,
+      "Category": 0,
+      "PCID1": 1030,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 49,
+      "Category": 0,
+      "PCID1": 1031,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 50,
+      "Category": 0,
+      "PCID1": 1032,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 51,
+      "Category": 0,
+      "PCID1": 1033,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 52,
+      "Category": 0,
+      "PCID1": 1034,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 53,
+      "Category": 0,
+      "PCID1": 1035,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 54,
+      "Category": 0,
+      "PCID1": 1036,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 55,
+      "Category": 0,
+      "PCID1": 1037,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 56,
+      "Category": 0,
+      "PCID1": 1039,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 57,
+      "Category": 0,
+      "PCID1": 1040,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 58,
+      "Category": 0,
+      "PCID1": 1041,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 59,
+      "Category": 0,
+      "PCID1": 1018,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 60,
+      "Category": 0,
+      "PCID1": 1019,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 61,
+      "Category": 1,
+      "PCID1": 1001,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 62,
+      "Category": 1,
+      "PCID1": 1002,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 63,
+      "Category": 1,
+      "PCID1": 3,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 64,
+      "Category": 1,
+      "PCID1": 1010,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 65,
+      "Category": 1,
+      "PCID1": 6,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 66,
+      "Category": 1,
+      "PCID1": 1009,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 67,
+      "Category": 4,
+      "PCID1": 1017,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 68,
+      "Category": 4,
+      "PCID1": 1028,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 69,
+      "Category": 4,
+      "PCID1": 1029,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 70,
+      "Category": 4,
+      "PCID1": 1032,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 71,
+      "Category": 4,
+      "PCID1": 1034,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 72,
+      "Category": 4,
+      "PCID1": 1036,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 73,
+      "Category": 4,
+      "PCID1": 1026,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 74,
+      "Category": 4,
+      "PCID1": 1015,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 75,
+      "Category": 4,
+      "PCID1": 1038,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 76,
+      "Category": 5,
+      "PCID1": 1031,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 77,
+      "Category": 5,
+      "PCID1": 1021,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 78,
+      "Category": 5,
+      "PCID1": 1032,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 79,
+      "Category": 5,
+      "PCID1": 1034,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 80,
+      "Category": 5,
+      "PCID1": 1041,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 81,
+      "Category": 3,
+      "PCID1": 6,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 82,
+      "Category": 3,
+      "PCID1": 1038,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 83,
+      "Category": 3,
+      "PCID1": 1,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 84,
+      "Category": 3,
+      "PCID1": 3,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 85,
+      "Category": 5,
+      "PCID1": 1028,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 86,
+      "Category": 5,
+      "PCID1": 1036,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 87,
+      "Category": 5,
+      "PCID1": 1015,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 88,
+      "Category": 0,
+      "PCID1": 2,
+      "PCID2": 3,
+      "PCID3": 0
+    },
+    {
+      "$id": 89,
+      "Category": 0,
+      "PCID1": 4,
+      "PCID2": 6,
+      "PCID3": 0
+    },
+    {
+      "$id": 90,
+      "Category": 3,
+      "PCID1": 1037,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 91,
+      "Category": 0,
+      "PCID1": 2,
+      "PCID2": 4,
+      "PCID3": 6
+    },
+    {
+      "$id": 92,
+      "Category": 3,
+      "PCID1": 1024,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 93,
+      "Category": 3,
+      "PCID1": 1025,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 94,
+      "Category": 5,
+      "PCID1": 1008,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 95,
+      "Category": 3,
+      "PCID1": 1018,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 96,
+      "Category": 0,
+      "PCID1": 1050,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 97,
+      "Category": 1,
+      "PCID1": 1036,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 98,
+      "Category": 7,
+      "PCID1": 1023,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 99,
+      "Category": 7,
+      "PCID1": 1032,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 100,
+      "Category": 7,
+      "PCID1": 1040,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 101,
+      "Category": 7,
+      "PCID1": 1014,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 102,
+      "Category": 7,
+      "PCID1": 1024,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 103,
+      "Category": 7,
+      "PCID1": 1025,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 104,
+      "Category": 7,
+      "PCID1": 1033,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 105,
+      "Category": 7,
+      "PCID1": 1016,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 106,
+      "Category": 0,
+      "PCID1": 1011,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 107,
+      "Category": 0,
+      "PCID1": 1043,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 108,
+      "Category": 0,
+      "PCID1": 1044,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 109,
+      "Category": 0,
+      "PCID1": 1045,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 110,
+      "Category": 0,
+      "PCID1": 1046,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 111,
+      "Category": 0,
+      "PCID1": 1047,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 112,
+      "Category": 0,
+      "PCID1": 1048,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 113,
+      "Category": 6,
+      "PCID1": 1045,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 114,
+      "Category": 6,
+      "PCID1": 1043,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 115,
+      "Category": 6,
+      "PCID1": 1044,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 116,
+      "Category": 6,
+      "PCID1": 1046,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 117,
+      "Category": 0,
+      "PCID1": 1049,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 118,
+      "Category": 6,
+      "PCID1": 1049,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 119,
+      "Category": 6,
+      "PCID1": 1048,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 120,
+      "Category": 6,
+      "PCID1": 1047,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 121,
+      "Category": 6,
+      "PCID1": 1015,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 122,
+      "Category": 6,
+      "PCID1": 1016,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 123,
+      "Category": 6,
+      "PCID1": 1017,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 124,
+      "Category": 6,
+      "PCID1": 1020,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 125,
+      "Category": 6,
+      "PCID1": 1022,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 126,
+      "Category": 6,
+      "PCID1": 1021,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 127,
+      "Category": 6,
+      "PCID1": 1038,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 128,
+      "Category": 6,
+      "PCID1": 1023,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 129,
+      "Category": 6,
+      "PCID1": 1024,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 130,
+      "Category": 6,
+      "PCID1": 1025,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 131,
+      "Category": 6,
+      "PCID1": 1026,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 132,
+      "Category": 6,
+      "PCID1": 1027,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 133,
+      "Category": 6,
+      "PCID1": 1028,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 134,
+      "Category": 6,
+      "PCID1": 1029,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 135,
+      "Category": 6,
+      "PCID1": 1030,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 136,
+      "Category": 6,
+      "PCID1": 1031,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 137,
+      "Category": 6,
+      "PCID1": 1032,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 138,
+      "Category": 6,
+      "PCID1": 1033,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 139,
+      "Category": 6,
+      "PCID1": 1034,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 140,
+      "Category": 6,
+      "PCID1": 1035,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 141,
+      "Category": 6,
+      "PCID1": 1036,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 142,
+      "Category": 6,
+      "PCID1": 1037,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 143,
+      "Category": 6,
+      "PCID1": 1039,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 144,
+      "Category": 6,
+      "PCID1": 1040,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 145,
+      "Category": 6,
+      "PCID1": 1041,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 146,
+      "Category": 6,
+      "PCID1": 1018,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 147,
+      "Category": 6,
+      "PCID1": 1019,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 148,
+      "Category": 5,
+      "PCID1": 1033,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 149,
+      "Category": 5,
+      "PCID1": 1040,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 150,
+      "Category": 0,
+      "PCID1": 1041,
+      "PCID2": 1001,
+      "PCID3": 0
+    },
+    {
+      "$id": 151,
+      "Category": 1,
+      "PCID1": 1034,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 152,
+      "Category": 8,
+      "PCID1": 1034,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 153,
+      "Category": 2,
+      "PCID1": 9,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 154,
+      "Category": 4,
+      "PCID1": 1021,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 155,
+      "Category": 7,
+      "PCID1": 1045,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 156,
+      "Category": 0,
+      "PCID1": 1032,
+      "PCID2": 1027,
+      "PCID3": 1023
+    },
+    {
+      "$id": 157,
+      "Category": 0,
+      "PCID1": 1024,
+      "PCID2": 1025,
+      "PCID3": 0
+    },
+    {
+      "$id": 158,
+      "Category": 0,
+      "PCID1": 6,
+      "PCID2": 1009,
+      "PCID3": 1031
+    },
+    {
+      "$id": 159,
+      "Category": 0,
+      "PCID1": 1104,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 160,
+      "Category": 5,
+      "PCID1": 1039,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 161,
+      "Category": 0,
+      "PCID1": 1105,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 162,
+      "Category": 0,
+      "PCID1": 17,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 163,
+      "Category": 0,
+      "PCID1": 18,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 164,
+      "Category": 0,
+      "PCID1": 19,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 165,
+      "Category": 0,
+      "PCID1": 20,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 166,
+      "Category": 0,
+      "PCID1": 21,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 167,
+      "Category": 0,
+      "PCID1": 22,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 168,
+      "Category": 0,
+      "PCID1": 23,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 169,
+      "Category": 0,
+      "PCID1": 24,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 170,
+      "Category": 0,
+      "PCID1": 25,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 171,
+      "Category": 1,
+      "PCID1": 17,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 172,
+      "Category": 1,
+      "PCID1": 21,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 173,
+      "Category": 0,
+      "PCID1": 1108,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 174,
+      "Category": 0,
+      "PCID1": 1,
+      "PCID2": 2,
+      "PCID3": 4
+    },
+    {
+      "$id": 175,
+      "Category": 0,
+      "PCID1": 3,
+      "PCID2": 6,
+      "PCID3": 1006
+    },
+    {
+      "$id": 176,
+      "Category": 0,
+      "PCID1": 1109,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 177,
+      "Category": 3,
+      "PCID1": 7,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 178,
+      "Category": 3,
+      "PCID1": 8,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 179,
+      "Category": 3,
+      "PCID1": 5,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 180,
+      "Category": 3,
+      "PCID1": 9,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 181,
+      "Category": 0,
+      "PCID1": 2,
+      "PCID2": 4,
+      "PCID3": 0
+    },
+    {
+      "$id": 182,
+      "Category": 7,
+      "PCID1": 1108,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 183,
+      "Category": 7,
+      "PCID1": 1109,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 184,
+      "Category": 0,
+      "PCID1": 1111,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 185,
+      "Category": 0,
+      "PCID1": 1106,
+      "PCID2": 0,
+      "PCID3": 0
+    },
+    {
+      "$id": 186,
+      "Category": 0,
+      "PCID1": 6,
+      "PCID2": 3,
+      "PCID3": 1001
+    },
+    {
+      "$id": 187,
+      "Category": 0,
+      "PCID1": 1004,
+      "PCID2": 1005,
+      "PCID3": 1009
+    },
+    {
+      "$id": 188,
+      "Category": 0,
+      "PCID1": 1010,
+      "PCID2": 1106,
+      "PCID3": 1107
+    }
+  ]
+}

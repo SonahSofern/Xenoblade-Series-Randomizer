@@ -1,0 +1,30 @@
+{
+  "schema": [
+    {
+      "name": "fs_menu_id",
+      "type": 2
+    },
+    {
+      "name": "txt",
+      "type": 2
+    },
+    {
+      "name": "lock_flag",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "fs_menu_id": 15,
+      "txt": 19,
+      "lock_flag": 0
+    },
+    {
+      "$id": 2,
+      "fs_menu_id": 21,
+      "txt": 20,
+      "lock_flag": 0
+    }
+  ]
+}

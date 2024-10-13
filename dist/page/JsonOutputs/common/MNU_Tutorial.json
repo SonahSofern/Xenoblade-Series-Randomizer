@@ -1,0 +1,228 @@
+{
+  "schema": [
+    {
+      "name": "script_file",
+      "type": 7
+    },
+    {
+      "name": "start_id",
+      "type": 1
+    },
+    {
+      "name": "param1",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "script_file": "tut_btl01",
+      "start_id": 0,
+      "param1": 179
+    },
+    {
+      "$id": 2,
+      "script_file": "tut_btl02",
+      "start_id": 0,
+      "param1": 179
+    },
+    {
+      "$id": 3,
+      "script_file": "tut_btl03",
+      "start_id": 0,
+      "param1": 179
+    },
+    {
+      "$id": 4,
+      "script_file": "tut_btl04",
+      "start_id": 0,
+      "param1": 179
+    },
+    {
+      "$id": 5,
+      "script_file": "tut_btl05",
+      "start_id": 0,
+      "param1": 181
+    },
+    {
+      "$id": 6,
+      "script_file": "tut_btl06",
+      "start_id": 0,
+      "param1": 182
+    },
+    {
+      "$id": 7,
+      "script_file": "tut_btl07",
+      "start_id": 0,
+      "param1": 182
+    },
+    {
+      "$id": 8,
+      "script_file": "tut_btl08",
+      "start_id": 0,
+      "param1": 182
+    },
+    {
+      "$id": 9,
+      "script_file": "tut_btl09",
+      "start_id": 0,
+      "param1": 182
+    },
+    {
+      "$id": 10,
+      "script_file": "tut_btl10",
+      "start_id": 0,
+      "param1": 182
+    },
+    {
+      "$id": 11,
+      "script_file": "tut_btl11",
+      "start_id": 0,
+      "param1": 184
+    },
+    {
+      "$id": 12,
+      "script_file": "tut_btl12",
+      "start_id": 0,
+      "param1": 184
+    },
+    {
+      "$id": 13,
+      "script_file": "tut_btl13",
+      "start_id": 0,
+      "param1": 184
+    },
+    {
+      "$id": 14,
+      "script_file": "tut_btl14",
+      "start_id": 0,
+      "param1": 187
+    },
+    {
+      "$id": 15,
+      "script_file": "tut_btl15",
+      "start_id": 0,
+      "param1": 191
+    },
+    {
+      "$id": 16,
+      "script_file": "tut_btl16",
+      "start_id": 0,
+      "param1": 191
+    },
+    {
+      "$id": 17,
+      "script_file": "tut_btl17",
+      "start_id": 0,
+      "param1": 193
+    },
+    {
+      "$id": 18,
+      "script_file": "tut_btl18",
+      "start_id": 0,
+      "param1": 199
+    },
+    {
+      "$id": 19,
+      "script_file": "tut_btl19",
+      "start_id": 0,
+      "param1": 203
+    },
+    {
+      "$id": 20,
+      "script_file": "tut_btl20",
+      "start_id": 0,
+      "param1": 203
+    },
+    {
+      "$id": 21,
+      "script_file": "tut_btl21",
+      "start_id": 0,
+      "param1": 206
+    },
+    {
+      "$id": 22,
+      "script_file": "tut_btl22",
+      "start_id": 0,
+      "param1": 272
+    },
+    {
+      "$id": 23,
+      "script_file": "tut_btl23",
+      "start_id": 0,
+      "param1": 254
+    },
+    {
+      "$id": 24,
+      "script_file": "tut_btl24",
+      "start_id": 0,
+      "param1": 185
+    },
+    {
+      "$id": 25,
+      "script_file": "tut_btl25",
+      "start_id": 0,
+      "param1": 193
+    },
+    {
+      "$id": 26,
+      "script_file": "tut_btl26",
+      "start_id": 0,
+      "param1": 250
+    },
+    {
+      "$id": 27,
+      "script_file": "aoc_challenge_tutorial",
+      "start_id": 1,
+      "param1": 0
+    },
+    {
+      "$id": 28,
+      "script_file": "aoc_challenge_tutorial",
+      "start_id": 2,
+      "param1": 0
+    },
+    {
+      "$id": 29,
+      "script_file": "aoc_challenge_tutorial",
+      "start_id": 3,
+      "param1": 0
+    },
+    {
+      "$id": 30,
+      "script_file": "aoc_challenge_tutorial",
+      "start_id": 4,
+      "param1": 0
+    },
+    {
+      "$id": 31,
+      "script_file": "aoc_challenge_tutorial",
+      "start_id": 5,
+      "param1": 0
+    },
+    {
+      "$id": 32,
+      "script_file": "aoc_challenge_tutorial",
+      "start_id": 6,
+      "param1": 0
+    },
+    {
+      "$id": 33,
+      "script_file": "aoc_challenge_tutorial",
+      "start_id": 7,
+      "param1": 0
+    },
+    {
+      "$id": 34,
+      "script_file": "aoc_challenge_tutorial",
+      "start_id": 8,
+      "param1": 0
+    },
+    {
+      "$id": 35,
+      "script_file": "aoc_challenge_tutorial",
+      "start_id": 9,
+      "param1": 0
+    }
+  ]
+}

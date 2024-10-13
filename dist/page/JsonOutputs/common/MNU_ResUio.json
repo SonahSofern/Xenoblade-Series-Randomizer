@@ -1,0 +1,58 @@
+{
+  "schema": [
+    {
+      "name": "file",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "file": "mnu075_main_menu"
+    },
+    {
+      "$id": 2,
+      "file": "mnu076_char_menu"
+    },
+    {
+      "$id": 3,
+      "file": "mnu018_world_map"
+    },
+    {
+      "$id": 4,
+      "file": "mnu020_quest_list"
+    },
+    {
+      "$id": 5,
+      "file": "mnu090_mercenary_root"
+    },
+    {
+      "$id": 6,
+      "file": "mnu090_mercenary_top"
+    },
+    {
+      "$id": 7,
+      "file": "mnu090_mercenary_report"
+    },
+    {
+      "$id": 8,
+      "file": "mnu048_itemlist_main"
+    },
+    {
+      "$id": 9,
+      "file": "mnu094_submenu_book"
+    },
+    {
+      "$id": 10,
+      "file": "mnu094_submenu_crystal"
+    },
+    {
+      "$id": 11,
+      "file": "mnu094_submenu_system"
+    },
+    {
+      "$id": 12,
+      "file": "mnu104_gift_box"
+    }
+  ]
+}

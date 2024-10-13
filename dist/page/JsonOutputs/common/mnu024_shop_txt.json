@@ -1,0 +1,969 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_index",
+      "text_id": 660
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_shop_name",
+      "text_id": 637
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_index_money",
+      "text_id": 644
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_location_name",
+      "text_id": 638
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_location_lv_caption",
+      "text_id": 639
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_store_action_buy",
+      "text_id": 640
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_store_action_sell",
+      "text_id": 641
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_store_item_name@01",
+      "text_id": 645
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_store_item_price@01",
+      "text_id": 648
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_store_item_name@02",
+      "text_id": 645
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_store_item_price@02",
+      "text_id": 648
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_store_item_name@03",
+      "text_id": 645
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_store_item_price@03",
+      "text_id": 648
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_store_item_name@04",
+      "text_id": 645
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_store_item_price@04",
+      "text_id": 648
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_store_item_name@05",
+      "text_id": 645
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_store_item_price@05",
+      "text_id": 648
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_store_item_name@06",
+      "text_id": 645
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_store_item_price@06",
+      "text_id": 648
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_store_item_name@07",
+      "text_id": 645
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_store_item_price@07",
+      "text_id": 648
+    },
+    {
+      "$id": 22,
+      "obj_name": "TXT_store_item_name@08",
+      "text_id": 645
+    },
+    {
+      "$id": 23,
+      "obj_name": "TXT_store_item_price@08",
+      "text_id": 648
+    },
+    {
+      "$id": 24,
+      "obj_name": "TXT_store_item_name@09",
+      "text_id": 645
+    },
+    {
+      "$id": 25,
+      "obj_name": "TXT_store_item_price@09",
+      "text_id": 648
+    },
+    {
+      "$id": 26,
+      "obj_name": "TXT_store_item_name@10",
+      "text_id": 645
+    },
+    {
+      "$id": 27,
+      "obj_name": "TXT_store_item_price@10",
+      "text_id": 648
+    },
+    {
+      "$id": 28,
+      "obj_name": "TXT_store_item_name@11",
+      "text_id": 645
+    },
+    {
+      "$id": 29,
+      "obj_name": "TXT_store_item_price@11",
+      "text_id": 648
+    },
+    {
+      "$id": 30,
+      "obj_name": "TXT_store_item_name@12",
+      "text_id": 645
+    },
+    {
+      "$id": 31,
+      "obj_name": "TXT_store_item_price@12",
+      "text_id": 648
+    },
+    {
+      "$id": 32,
+      "obj_name": "TXT_store_item_name@13",
+      "text_id": 645
+    },
+    {
+      "$id": 33,
+      "obj_name": "TXT_store_item_price@13",
+      "text_id": 648
+    },
+    {
+      "$id": 34,
+      "obj_name": "TXT_store_item_name@14",
+      "text_id": 645
+    },
+    {
+      "$id": 35,
+      "obj_name": "TXT_store_item_price@14",
+      "text_id": 648
+    },
+    {
+      "$id": 36,
+      "obj_name": "TXT_store_item_name@15",
+      "text_id": 645
+    },
+    {
+      "$id": 37,
+      "obj_name": "TXT_store_item_price@15",
+      "text_id": 648
+    },
+    {
+      "$id": 38,
+      "obj_name": "TXT_store_item_name@16",
+      "text_id": 645
+    },
+    {
+      "$id": 39,
+      "obj_name": "TXT_store_item_price@16",
+      "text_id": 648
+    },
+    {
+      "$id": 40,
+      "obj_name": "TXT_inn_action",
+      "text_id": 642
+    },
+    {
+      "$id": 41,
+      "obj_name": "TXT_inn_action_money",
+      "text_id": 644
+    },
+    {
+      "$id": 42,
+      "obj_name": "TXT_num_select_value",
+      "text_id": 688
+    },
+    {
+      "$id": 43,
+      "obj_name": "TXT_num_select_total_price",
+      "text_id": 687
+    },
+    {
+      "$id": 44,
+      "obj_name": "TXT_num_select_buy",
+      "text_id": 689
+    },
+    {
+      "$id": 45,
+      "obj_name": "TXT_orb_item_name@01",
+      "text_id": 645
+    },
+    {
+      "$id": 46,
+      "obj_name": "TXT_orb_item_num@01",
+      "text_id": 650
+    },
+    {
+      "$id": 47,
+      "obj_name": "TXT_orb_item_name@02",
+      "text_id": 645
+    },
+    {
+      "$id": 48,
+      "obj_name": "TXT_orb_item_num@02",
+      "text_id": 650
+    },
+    {
+      "$id": 49,
+      "obj_name": "TXT_orb_item_name@03",
+      "text_id": 645
+    },
+    {
+      "$id": 50,
+      "obj_name": "TXT_orb_item_num@03",
+      "text_id": 650
+    },
+    {
+      "$id": 51,
+      "obj_name": "TXT_orb_item_name@04",
+      "text_id": 645
+    },
+    {
+      "$id": 52,
+      "obj_name": "TXT_orb_item_num@04",
+      "text_id": 650
+    },
+    {
+      "$id": 53,
+      "obj_name": "TXT_orb_item_name@05",
+      "text_id": 645
+    },
+    {
+      "$id": 54,
+      "obj_name": "TXT_orb_item_num@05",
+      "text_id": 650
+    },
+    {
+      "$id": 55,
+      "obj_name": "TXT_orb_item_name@06",
+      "text_id": 645
+    },
+    {
+      "$id": 56,
+      "obj_name": "TXT_orb_item_num@06",
+      "text_id": 650
+    },
+    {
+      "$id": 57,
+      "obj_name": "TXT_orb_item_name@07",
+      "text_id": 645
+    },
+    {
+      "$id": 58,
+      "obj_name": "TXT_orb_item_num@07",
+      "text_id": 650
+    },
+    {
+      "$id": 59,
+      "obj_name": "TXT_orb_item_name@08",
+      "text_id": 645
+    },
+    {
+      "$id": 60,
+      "obj_name": "TXT_orb_item_num@08",
+      "text_id": 650
+    },
+    {
+      "$id": 61,
+      "obj_name": "TXT_orb_detaiL_enhance_index",
+      "text_id": 658
+    },
+    {
+      "$id": 62,
+      "obj_name": "TXT_orb_detaiL_enhance_text",
+      "text_id": 659
+    },
+    {
+      "$id": 63,
+      "obj_name": "TXT_orb_obj_item_name@01",
+      "text_id": 645
+    },
+    {
+      "$id": 64,
+      "obj_name": "TXT_orb_obj_item_num@01",
+      "text_id": 650
+    },
+    {
+      "$id": 65,
+      "obj_name": "TXT_orb_obj_item_num_ret@01",
+      "text_id": 650
+    },
+    {
+      "$id": 66,
+      "obj_name": "TXT_orb_obj_item_req_index@01",
+      "text_id": 655
+    },
+    {
+      "$id": 67,
+      "obj_name": "TXT_orb_obj_item_req@01",
+      "text_id": 650
+    },
+    {
+      "$id": 68,
+      "obj_name": "TXT_orb_obj_item_name@02",
+      "text_id": 645
+    },
+    {
+      "$id": 69,
+      "obj_name": "TXT_orb_obj_item_num@02",
+      "text_id": 650
+    },
+    {
+      "$id": 70,
+      "obj_name": "TXT_orb_obj_item_num_ret@02",
+      "text_id": 650
+    },
+    {
+      "$id": 71,
+      "obj_name": "TXT_orb_obj_item_req_index@02",
+      "text_id": 655
+    },
+    {
+      "$id": 72,
+      "obj_name": "TXT_orb_obj_item_req@02",
+      "text_id": 650
+    },
+    {
+      "$id": 73,
+      "obj_name": "TXT_orb_obj_item_name@03",
+      "text_id": 645
+    },
+    {
+      "$id": 74,
+      "obj_name": "TXT_orb_obj_item_num@03",
+      "text_id": 650
+    },
+    {
+      "$id": 75,
+      "obj_name": "TXT_orb_obj_item_num_ret@03",
+      "text_id": 650
+    },
+    {
+      "$id": 76,
+      "obj_name": "TXT_orb_obj_item_req_index@03",
+      "text_id": 655
+    },
+    {
+      "$id": 77,
+      "obj_name": "TXT_orb_obj_item_req@03",
+      "text_id": 650
+    },
+    {
+      "$id": 78,
+      "obj_name": "TXT_orb_obj_item_name@04",
+      "text_id": 645
+    },
+    {
+      "$id": 79,
+      "obj_name": "TXT_orb_obj_item_num@04",
+      "text_id": 650
+    },
+    {
+      "$id": 80,
+      "obj_name": "TXT_orb_obj_item_num_ret@04",
+      "text_id": 650
+    },
+    {
+      "$id": 81,
+      "obj_name": "TXT_orb_obj_item_req_index@04",
+      "text_id": 655
+    },
+    {
+      "$id": 82,
+      "obj_name": "TXT_orb_obj_item_req@04",
+      "text_id": 650
+    },
+    {
+      "$id": 83,
+      "obj_name": "TXT_orb_obj_item_name@05",
+      "text_id": 645
+    },
+    {
+      "$id": 84,
+      "obj_name": "TXT_orb_obj_item_num@05",
+      "text_id": 650
+    },
+    {
+      "$id": 85,
+      "obj_name": "TXT_orb_obj_item_num_ret@05",
+      "text_id": 650
+    },
+    {
+      "$id": 86,
+      "obj_name": "TXT_orb_obj_item_req_index@05",
+      "text_id": 655
+    },
+    {
+      "$id": 87,
+      "obj_name": "TXT_orb_obj_item_req@05",
+      "text_id": 650
+    },
+    {
+      "$id": 88,
+      "obj_name": "TXT_orb_obj_item_name@06",
+      "text_id": 645
+    },
+    {
+      "$id": 89,
+      "obj_name": "TXT_orb_obj_item_num@06",
+      "text_id": 650
+    },
+    {
+      "$id": 90,
+      "obj_name": "TXT_orb_obj_item_num_ret@06",
+      "text_id": 650
+    },
+    {
+      "$id": 91,
+      "obj_name": "TXT_orb_obj_item_req_index@06",
+      "text_id": 655
+    },
+    {
+      "$id": 92,
+      "obj_name": "TXT_orb_obj_item_req@06",
+      "text_id": 650
+    },
+    {
+      "$id": 93,
+      "obj_name": "TXT_orb_obj_item_name@07",
+      "text_id": 645
+    },
+    {
+      "$id": 94,
+      "obj_name": "TXT_orb_obj_item_num@07",
+      "text_id": 650
+    },
+    {
+      "$id": 95,
+      "obj_name": "TXT_orb_obj_item_num_ret@07",
+      "text_id": 650
+    },
+    {
+      "$id": 96,
+      "obj_name": "TXT_orb_obj_item_req_index@07",
+      "text_id": 655
+    },
+    {
+      "$id": 97,
+      "obj_name": "TXT_orb_obj_item_req@07",
+      "text_id": 650
+    },
+    {
+      "$id": 98,
+      "obj_name": "TXT_orb_obj_item_name@08",
+      "text_id": 645
+    },
+    {
+      "$id": 99,
+      "obj_name": "TXT_orb_obj_item_num@08",
+      "text_id": 650
+    },
+    {
+      "$id": 100,
+      "obj_name": "TXT_orb_obj_item_num_ret@08",
+      "text_id": 650
+    },
+    {
+      "$id": 101,
+      "obj_name": "TXT_orb_obj_item_req_index@08",
+      "text_id": 655
+    },
+    {
+      "$id": 102,
+      "obj_name": "TXT_orb_obj_item_req@08",
+      "text_id": 650
+    },
+    {
+      "$id": 103,
+      "obj_name": "TXT_orb_pour_rest_index",
+      "text_id": 656
+    },
+    {
+      "$id": 104,
+      "obj_name": "TXT_orb_pour_rest_num",
+      "text_id": 651
+    },
+    {
+      "$id": 105,
+      "obj_name": "TXT_orb_pour_type_rare_index",
+      "text_id": 691
+    },
+    {
+      "$id": 106,
+      "obj_name": "TXT_orb_pour_type_cate_index",
+      "text_id": 692
+    },
+    {
+      "$id": 107,
+      "obj_name": "TXT_orb_pour_type_cate_name",
+      "text_id": 677
+    },
+    {
+      "$id": 108,
+      "obj_name": "TXT_orb_pour_item_name@01",
+      "text_id": 645
+    },
+    {
+      "$id": 109,
+      "obj_name": "TXT_orb_pour_item_index@01",
+      "text_id": 654
+    },
+    {
+      "$id": 110,
+      "obj_name": "TXT_orb_pour_item_num@01",
+      "text_id": 650
+    },
+    {
+      "$id": 111,
+      "obj_name": "TXT_orb_pour_item_sel_num@01",
+      "text_id": 650
+    },
+    {
+      "$id": 112,
+      "obj_name": "TXT_orb_pour_item_name@02",
+      "text_id": 645
+    },
+    {
+      "$id": 113,
+      "obj_name": "TXT_orb_pour_item_index@02",
+      "text_id": 654
+    },
+    {
+      "$id": 114,
+      "obj_name": "TXT_orb_pour_item_num@02",
+      "text_id": 650
+    },
+    {
+      "$id": 115,
+      "obj_name": "TXT_orb_pour_item_sel_num@02",
+      "text_id": 650
+    },
+    {
+      "$id": 116,
+      "obj_name": "TXT_orb_pour_item_name@03",
+      "text_id": 645
+    },
+    {
+      "$id": 117,
+      "obj_name": "TXT_orb_pour_item_index@03",
+      "text_id": 654
+    },
+    {
+      "$id": 118,
+      "obj_name": "TXT_orb_pour_item_num@03",
+      "text_id": 650
+    },
+    {
+      "$id": 119,
+      "obj_name": "TXT_orb_pour_item_sel_num@03",
+      "text_id": 650
+    },
+    {
+      "$id": 120,
+      "obj_name": "TXT_orb_pour_item_name@04",
+      "text_id": 645
+    },
+    {
+      "$id": 121,
+      "obj_name": "TXT_orb_pour_item_index@04",
+      "text_id": 654
+    },
+    {
+      "$id": 122,
+      "obj_name": "TXT_orb_pour_item_num@04",
+      "text_id": 650
+    },
+    {
+      "$id": 123,
+      "obj_name": "TXT_orb_pour_item_sel_num@04",
+      "text_id": 650
+    },
+    {
+      "$id": 124,
+      "obj_name": "TXT_orb_pour_item_name@05",
+      "text_id": 645
+    },
+    {
+      "$id": 125,
+      "obj_name": "TXT_orb_pour_item_index@05",
+      "text_id": 654
+    },
+    {
+      "$id": 126,
+      "obj_name": "TXT_orb_pour_item_num@05",
+      "text_id": 650
+    },
+    {
+      "$id": 127,
+      "obj_name": "TXT_orb_pour_item_sel_num@05",
+      "text_id": 650
+    },
+    {
+      "$id": 128,
+      "obj_name": "TXT_orb_pour_item_name@06",
+      "text_id": 645
+    },
+    {
+      "$id": 129,
+      "obj_name": "TXT_orb_pour_item_index@06",
+      "text_id": 654
+    },
+    {
+      "$id": 130,
+      "obj_name": "TXT_orb_pour_item_num@06",
+      "text_id": 650
+    },
+    {
+      "$id": 131,
+      "obj_name": "TXT_orb_pour_item_sel_num@06",
+      "text_id": 650
+    },
+    {
+      "$id": 132,
+      "obj_name": "TXT_orb_pour_item_name@07",
+      "text_id": 645
+    },
+    {
+      "$id": 133,
+      "obj_name": "TXT_orb_pour_item_index@07",
+      "text_id": 654
+    },
+    {
+      "$id": 134,
+      "obj_name": "TXT_orb_pour_item_num@07",
+      "text_id": 650
+    },
+    {
+      "$id": 135,
+      "obj_name": "TXT_orb_pour_item_sel_num@07",
+      "text_id": 650
+    },
+    {
+      "$id": 136,
+      "obj_name": "TXT_orb_pour_item_name@08",
+      "text_id": 645
+    },
+    {
+      "$id": 137,
+      "obj_name": "TXT_orb_pour_item_index@08",
+      "text_id": 654
+    },
+    {
+      "$id": 138,
+      "obj_name": "TXT_orb_pour_item_num@08",
+      "text_id": 650
+    },
+    {
+      "$id": 139,
+      "obj_name": "TXT_orb_pour_item_sel_num@08",
+      "text_id": 650
+    },
+    {
+      "$id": 140,
+      "obj_name": "TXT_orb_obj2_type_rest_index",
+      "text_id": 656
+    },
+    {
+      "$id": 141,
+      "obj_name": "TXT_orb_obj2_type_rest_num",
+      "text_id": 651
+    },
+    {
+      "$id": 142,
+      "obj_name": "TXT_orb_obj2_type_rare_index",
+      "text_id": 691
+    },
+    {
+      "$id": 143,
+      "obj_name": "TXT_orb_obj2_type_cate_index",
+      "text_id": 692
+    },
+    {
+      "$id": 144,
+      "obj_name": "TXT_orb_obj2_type_cate_name",
+      "text_id": 677
+    },
+    {
+      "$id": 145,
+      "obj_name": "TXT_exc_task_name@01",
+      "text_id": 652
+    },
+    {
+      "$id": 146,
+      "obj_name": "TXT_exc_task_name@02",
+      "text_id": 652
+    },
+    {
+      "$id": 147,
+      "obj_name": "TXT_exc_task_name@03",
+      "text_id": 652
+    },
+    {
+      "$id": 148,
+      "obj_name": "TXT_exc_task_name@04",
+      "text_id": 652
+    },
+    {
+      "$id": 149,
+      "obj_name": "TXT_exc_task_name@05",
+      "text_id": 652
+    },
+    {
+      "$id": 150,
+      "obj_name": "TXT_exc_task_name@06",
+      "text_id": 652
+    },
+    {
+      "$id": 151,
+      "obj_name": "TXT_exc_task_name@07",
+      "text_id": 652
+    },
+    {
+      "$id": 152,
+      "obj_name": "TXT_exc_task_name@08",
+      "text_id": 652
+    },
+    {
+      "$id": 153,
+      "obj_name": "TXT_exc_obj_item_name@01",
+      "text_id": 645
+    },
+    {
+      "$id": 154,
+      "obj_name": "TXT_exc_obj_item_num@01",
+      "text_id": 650
+    },
+    {
+      "$id": 155,
+      "obj_name": "TXT_exc_obj_item_num_ret@01",
+      "text_id": 650
+    },
+    {
+      "$id": 156,
+      "obj_name": "TXT_exc_obj_item_req_index@01",
+      "text_id": 655
+    },
+    {
+      "$id": 157,
+      "obj_name": "TXT_exc_obj_item_req@01",
+      "text_id": 650
+    },
+    {
+      "$id": 158,
+      "obj_name": "TXT_exc_obj_item_name@02",
+      "text_id": 645
+    },
+    {
+      "$id": 159,
+      "obj_name": "TXT_exc_obj_item_num@02",
+      "text_id": 650
+    },
+    {
+      "$id": 160,
+      "obj_name": "TXT_exc_obj_item_num_ret@02",
+      "text_id": 650
+    },
+    {
+      "$id": 161,
+      "obj_name": "TXT_exc_obj_item_req_index@02",
+      "text_id": 655
+    },
+    {
+      "$id": 162,
+      "obj_name": "TXT_exc_obj_item_req@02",
+      "text_id": 650
+    },
+    {
+      "$id": 163,
+      "obj_name": "TXT_exc_obj_item_name@03",
+      "text_id": 645
+    },
+    {
+      "$id": 164,
+      "obj_name": "TXT_exc_obj_item_num@03",
+      "text_id": 650
+    },
+    {
+      "$id": 165,
+      "obj_name": "TXT_exc_obj_item_num_ret@03",
+      "text_id": 650
+    },
+    {
+      "$id": 166,
+      "obj_name": "TXT_exc_obj_item_req_index@03",
+      "text_id": 655
+    },
+    {
+      "$id": 167,
+      "obj_name": "TXT_exc_obj_item_req@03",
+      "text_id": 650
+    },
+    {
+      "$id": 168,
+      "obj_name": "TXT_exc_obj_item_name@04",
+      "text_id": 645
+    },
+    {
+      "$id": 169,
+      "obj_name": "TXT_exc_obj_item_num@04",
+      "text_id": 650
+    },
+    {
+      "$id": 170,
+      "obj_name": "TXT_exc_obj_item_num_ret@04",
+      "text_id": 650
+    },
+    {
+      "$id": 171,
+      "obj_name": "TXT_exc_obj_item_req_index@04",
+      "text_id": 655
+    },
+    {
+      "$id": 172,
+      "obj_name": "TXT_exc_obj_item_req@04",
+      "text_id": 650
+    },
+    {
+      "$id": 173,
+      "obj_name": "TXT_exc_obj_item_name@05",
+      "text_id": 645
+    },
+    {
+      "$id": 174,
+      "obj_name": "TXT_exc_obj_item_num@05",
+      "text_id": 650
+    },
+    {
+      "$id": 175,
+      "obj_name": "TXT_exc_obj_item_num_ret@05",
+      "text_id": 650
+    },
+    {
+      "$id": 176,
+      "obj_name": "TXT_exc_obj_item_req_index@05",
+      "text_id": 655
+    },
+    {
+      "$id": 177,
+      "obj_name": "TXT_exc_obj_item_req@05",
+      "text_id": 650
+    },
+    {
+      "$id": 178,
+      "obj_name": "TXT_exc_reward_index",
+      "text_id": 693
+    },
+    {
+      "$id": 179,
+      "obj_name": "TXT_exc_reward_money_num",
+      "text_id": 644
+    },
+    {
+      "$id": 180,
+      "obj_name": "TXT_exc_reward_item_name@01",
+      "text_id": 645
+    },
+    {
+      "$id": 181,
+      "obj_name": "TXT_exc_reward_item_num@01",
+      "text_id": 650
+    },
+    {
+      "$id": 182,
+      "obj_name": "TXT_exc_reward_item_name@02",
+      "text_id": 645
+    },
+    {
+      "$id": 183,
+      "obj_name": "TXT_exc_reward_item_num@02",
+      "text_id": 650
+    },
+    {
+      "$id": 184,
+      "obj_name": "TXT_exc_reward_item_name@03",
+      "text_id": 645
+    },
+    {
+      "$id": 185,
+      "obj_name": "TXT_exc_reward_item_num@03",
+      "text_id": 650
+    },
+    {
+      "$id": 186,
+      "obj_name": "TXT_exc_reward_item_name@04",
+      "text_id": 645
+    },
+    {
+      "$id": 187,
+      "obj_name": "TXT_exc_reward_item_num@04",
+      "text_id": 650
+    },
+    {
+      "$id": 188,
+      "obj_name": "TXT_exc_quest_reward_index",
+      "text_id": 694
+    },
+    {
+      "$id": 189,
+      "obj_name": "TXT_exc_quest_reward_task",
+      "text_id": 695
+    },
+    {
+      "$id": 190,
+      "obj_name": "TXT_exc_quest_reward_num",
+      "text_id": 696
+    },
+    {
+      "$id": 191,
+      "obj_name": "TXT_exc_quest_reward_unit",
+      "text_id": 697
+    }
+  ]
+}

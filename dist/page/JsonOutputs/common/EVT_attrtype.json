@@ -1,0 +1,59 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "value",
+      "type": 5
+    }
+  ],
+  "rows": [
+    {
+      "$id": 0,
+      "name": "dark",
+      "value": 0
+    },
+    {
+      "$id": 1,
+      "name": "fire",
+      "value": 1
+    },
+    {
+      "$id": 2,
+      "name": "water",
+      "value": 2
+    },
+    {
+      "$id": 3,
+      "name": "wind",
+      "value": 3
+    },
+    {
+      "$id": 4,
+      "name": "earth",
+      "value": 4
+    },
+    {
+      "$id": 5,
+      "name": "volt",
+      "value": 5
+    },
+    {
+      "$id": 6,
+      "name": "ice",
+      "value": 6
+    },
+    {
+      "$id": 7,
+      "name": "light",
+      "value": 7
+    },
+    {
+      "$id": 8,
+      "name": "dark",
+      "value": 8
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "schema": [
+    {
+      "name": "FieldSkillID",
+      "type": 1
+    },
+    {
+      "name": "Count",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "FieldSkillID": 0,
+      "Count": 0
+    },
+    {
+      "$id": 2,
+      "FieldSkillID": 51,
+      "Count": 5
+    },
+    {
+      "$id": 3,
+      "FieldSkillID": 51,
+      "Count": 5
+    },
+    {
+      "$id": 4,
+      "FieldSkillID": 43,
+      "Count": 5
+    },
+    {
+      "$id": 5,
+      "FieldSkillID": 43,
+      "Count": 5
+    },
+    {
+      "$id": 6,
+      "FieldSkillID": 43,
+      "Count": 5
+    },
+    {
+      "$id": 7,
+      "FieldSkillID": 43,
+      "Count": 5
+    },
+    {
+      "$id": 8,
+      "FieldSkillID": 32,
+      "Count": 5
+    },
+    {
+      "$id": 9,
+      "FieldSkillID": 32,
+      "Count": 5
+    },
+    {
+      "$id": 10,
+      "FieldSkillID": 10,
+      "Count": 5
+    },
+    {
+      "$id": 11,
+      "FieldSkillID": 10,
+      "Count": 5
+    },
+    {
+      "$id": 12,
+      "FieldSkillID": 49,
+      "Count": 5
+    },
+    {
+      "$id": 13,
+      "FieldSkillID": 49,
+      "Count": 5
+    },
+    {
+      "$id": 14,
+      "FieldSkillID": 37,
+      "Count": 5
+    },
+    {
+      "$id": 15,
+      "FieldSkillID": 17,
+      "Count": 1
+    },
+    {
+      "$id": 16,
+      "FieldSkillID": 17,
+      "Count": 3
+    },
+    {
+      "$id": 17,
+      "FieldSkillID": 26,
+      "Count": 1
+    },
+    {
+      "$id": 18,
+      "FieldSkillID": 26,
+      "Count": 3
+    }
+  ]
+}

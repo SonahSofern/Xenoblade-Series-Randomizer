@@ -1,0 +1,4866 @@
+{
+  "schema": [
+    {
+      "name": "BaseEnemyID",
+      "type": 2
+    },
+    {
+      "name": "BOOK_POP_TIME",
+      "type": 3
+    },
+    {
+      "name": "BOOK_popWeather",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "BaseEnemyID": 630,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 2,
+      "BaseEnemyID": 631,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 3,
+      "BaseEnemyID": 632,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 4,
+      "BaseEnemyID": 633,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 5,
+      "BaseEnemyID": 634,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 6,
+      "BaseEnemyID": 635,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 7,
+      "BaseEnemyID": 636,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 8,
+      "BaseEnemyID": 637,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 9,
+      "BaseEnemyID": 638,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 10,
+      "BaseEnemyID": 639,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 11,
+      "BaseEnemyID": 640,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 12,
+      "BaseEnemyID": 641,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 13,
+      "BaseEnemyID": 642,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 14,
+      "BaseEnemyID": 643,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 15,
+      "BaseEnemyID": 644,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 16,
+      "BaseEnemyID": 645,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 17,
+      "BaseEnemyID": 646,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 18,
+      "BaseEnemyID": 647,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 19,
+      "BaseEnemyID": 648,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 20,
+      "BaseEnemyID": 649,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 21,
+      "BaseEnemyID": 650,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 22,
+      "BaseEnemyID": 651,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 23,
+      "BaseEnemyID": 652,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 24,
+      "BaseEnemyID": 653,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 25,
+      "BaseEnemyID": 654,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 26,
+      "BaseEnemyID": 655,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 27,
+      "BaseEnemyID": 656,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 28,
+      "BaseEnemyID": 658,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 29,
+      "BaseEnemyID": 659,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 30,
+      "BaseEnemyID": 660,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 31,
+      "BaseEnemyID": 661,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 32,
+      "BaseEnemyID": 662,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 33,
+      "BaseEnemyID": 663,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 34,
+      "BaseEnemyID": 664,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 35,
+      "BaseEnemyID": 665,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 36,
+      "BaseEnemyID": 666,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 37,
+      "BaseEnemyID": 667,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 38,
+      "BaseEnemyID": 668,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 39,
+      "BaseEnemyID": 669,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 40,
+      "BaseEnemyID": 670,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 41,
+      "BaseEnemyID": 671,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 42,
+      "BaseEnemyID": 672,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 43,
+      "BaseEnemyID": 673,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 44,
+      "BaseEnemyID": 674,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 45,
+      "BaseEnemyID": 675,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 46,
+      "BaseEnemyID": 676,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 47,
+      "BaseEnemyID": 677,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 48,
+      "BaseEnemyID": 678,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 49,
+      "BaseEnemyID": 679,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 50,
+      "BaseEnemyID": 680,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 51,
+      "BaseEnemyID": 681,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 52,
+      "BaseEnemyID": 682,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 53,
+      "BaseEnemyID": 683,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 54,
+      "BaseEnemyID": 684,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 55,
+      "BaseEnemyID": 685,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 56,
+      "BaseEnemyID": 686,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 57,
+      "BaseEnemyID": 687,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 58,
+      "BaseEnemyID": 688,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 59,
+      "BaseEnemyID": 689,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 60,
+      "BaseEnemyID": 691,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 61,
+      "BaseEnemyID": 692,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 62,
+      "BaseEnemyID": 693,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 63,
+      "BaseEnemyID": 694,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 64,
+      "BaseEnemyID": 695,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 65,
+      "BaseEnemyID": 696,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 66,
+      "BaseEnemyID": 697,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 67,
+      "BaseEnemyID": 705,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 68,
+      "BaseEnemyID": 706,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 69,
+      "BaseEnemyID": 707,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 70,
+      "BaseEnemyID": 708,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 71,
+      "BaseEnemyID": 709,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 72,
+      "BaseEnemyID": 710,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 73,
+      "BaseEnemyID": 711,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 74,
+      "BaseEnemyID": 712,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 75,
+      "BaseEnemyID": 713,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 76,
+      "BaseEnemyID": 714,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 77,
+      "BaseEnemyID": 715,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 78,
+      "BaseEnemyID": 716,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 79,
+      "BaseEnemyID": 717,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 80,
+      "BaseEnemyID": 718,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 81,
+      "BaseEnemyID": 719,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 82,
+      "BaseEnemyID": 720,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 83,
+      "BaseEnemyID": 721,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 84,
+      "BaseEnemyID": 722,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 85,
+      "BaseEnemyID": 723,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 86,
+      "BaseEnemyID": 729,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 87,
+      "BaseEnemyID": 730,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 88,
+      "BaseEnemyID": 731,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 89,
+      "BaseEnemyID": 732,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 90,
+      "BaseEnemyID": 733,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 91,
+      "BaseEnemyID": 734,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 92,
+      "BaseEnemyID": 735,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 93,
+      "BaseEnemyID": 736,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 94,
+      "BaseEnemyID": 738,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 95,
+      "BaseEnemyID": 739,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 96,
+      "BaseEnemyID": 740,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 97,
+      "BaseEnemyID": 741,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 98,
+      "BaseEnemyID": 742,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 99,
+      "BaseEnemyID": 743,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 100,
+      "BaseEnemyID": 744,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 101,
+      "BaseEnemyID": 745,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 102,
+      "BaseEnemyID": 746,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 103,
+      "BaseEnemyID": 747,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 104,
+      "BaseEnemyID": 748,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 105,
+      "BaseEnemyID": 749,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 106,
+      "BaseEnemyID": 750,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 107,
+      "BaseEnemyID": 751,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 108,
+      "BaseEnemyID": 752,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 109,
+      "BaseEnemyID": 753,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 110,
+      "BaseEnemyID": 754,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 111,
+      "BaseEnemyID": 755,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 112,
+      "BaseEnemyID": 756,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 113,
+      "BaseEnemyID": 757,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 114,
+      "BaseEnemyID": 758,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 115,
+      "BaseEnemyID": 759,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 116,
+      "BaseEnemyID": 760,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 117,
+      "BaseEnemyID": 761,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 118,
+      "BaseEnemyID": 762,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 119,
+      "BaseEnemyID": 763,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 120,
+      "BaseEnemyID": 764,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 121,
+      "BaseEnemyID": 765,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 122,
+      "BaseEnemyID": 766,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 123,
+      "BaseEnemyID": 767,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 124,
+      "BaseEnemyID": 768,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 125,
+      "BaseEnemyID": 769,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 126,
+      "BaseEnemyID": 770,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 127,
+      "BaseEnemyID": 771,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 128,
+      "BaseEnemyID": 772,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 129,
+      "BaseEnemyID": 773,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 130,
+      "BaseEnemyID": 774,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 131,
+      "BaseEnemyID": 775,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 132,
+      "BaseEnemyID": 776,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 133,
+      "BaseEnemyID": 777,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 134,
+      "BaseEnemyID": 778,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 135,
+      "BaseEnemyID": 779,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 136,
+      "BaseEnemyID": 780,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 137,
+      "BaseEnemyID": 781,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 138,
+      "BaseEnemyID": 782,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 139,
+      "BaseEnemyID": 783,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 140,
+      "BaseEnemyID": 784,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 141,
+      "BaseEnemyID": 785,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 142,
+      "BaseEnemyID": 786,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 143,
+      "BaseEnemyID": 787,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 144,
+      "BaseEnemyID": 788,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 145,
+      "BaseEnemyID": 789,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 146,
+      "BaseEnemyID": 790,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 147,
+      "BaseEnemyID": 791,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 148,
+      "BaseEnemyID": 792,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 149,
+      "BaseEnemyID": 793,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 150,
+      "BaseEnemyID": 794,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 151,
+      "BaseEnemyID": 795,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 152,
+      "BaseEnemyID": 796,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 153,
+      "BaseEnemyID": 797,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 154,
+      "BaseEnemyID": 798,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 155,
+      "BaseEnemyID": 800,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 156,
+      "BaseEnemyID": 802,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 157,
+      "BaseEnemyID": 808,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 158,
+      "BaseEnemyID": 809,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 159,
+      "BaseEnemyID": 810,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 160,
+      "BaseEnemyID": 811,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 161,
+      "BaseEnemyID": 812,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 162,
+      "BaseEnemyID": 814,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 163,
+      "BaseEnemyID": 815,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 164,
+      "BaseEnemyID": 816,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 165,
+      "BaseEnemyID": 817,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 166,
+      "BaseEnemyID": 821,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 167,
+      "BaseEnemyID": 822,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 168,
+      "BaseEnemyID": 823,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 169,
+      "BaseEnemyID": 824,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 170,
+      "BaseEnemyID": 825,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 171,
+      "BaseEnemyID": 826,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 172,
+      "BaseEnemyID": 827,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 173,
+      "BaseEnemyID": 828,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 174,
+      "BaseEnemyID": 829,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 175,
+      "BaseEnemyID": 830,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 176,
+      "BaseEnemyID": 831,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 177,
+      "BaseEnemyID": 832,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 178,
+      "BaseEnemyID": 833,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 179,
+      "BaseEnemyID": 834,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 180,
+      "BaseEnemyID": 835,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 181,
+      "BaseEnemyID": 836,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 182,
+      "BaseEnemyID": 837,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 183,
+      "BaseEnemyID": 838,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 184,
+      "BaseEnemyID": 839,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 185,
+      "BaseEnemyID": 840,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 186,
+      "BaseEnemyID": 841,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 187,
+      "BaseEnemyID": 842,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 188,
+      "BaseEnemyID": 843,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 189,
+      "BaseEnemyID": 844,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 190,
+      "BaseEnemyID": 845,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 191,
+      "BaseEnemyID": 846,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 192,
+      "BaseEnemyID": 847,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 193,
+      "BaseEnemyID": 848,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 194,
+      "BaseEnemyID": 849,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 195,
+      "BaseEnemyID": 850,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 196,
+      "BaseEnemyID": 851,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 197,
+      "BaseEnemyID": 852,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 198,
+      "BaseEnemyID": 853,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 199,
+      "BaseEnemyID": 854,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 200,
+      "BaseEnemyID": 855,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 201,
+      "BaseEnemyID": 856,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 202,
+      "BaseEnemyID": 857,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 203,
+      "BaseEnemyID": 858,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 204,
+      "BaseEnemyID": 859,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 205,
+      "BaseEnemyID": 860,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 206,
+      "BaseEnemyID": 862,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 207,
+      "BaseEnemyID": 863,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 208,
+      "BaseEnemyID": 864,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 209,
+      "BaseEnemyID": 865,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 210,
+      "BaseEnemyID": 866,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 211,
+      "BaseEnemyID": 867,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 212,
+      "BaseEnemyID": 868,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 213,
+      "BaseEnemyID": 869,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 214,
+      "BaseEnemyID": 870,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 215,
+      "BaseEnemyID": 871,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 216,
+      "BaseEnemyID": 872,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 217,
+      "BaseEnemyID": 873,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 218,
+      "BaseEnemyID": 874,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 219,
+      "BaseEnemyID": 875,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 220,
+      "BaseEnemyID": 876,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 221,
+      "BaseEnemyID": 877,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 222,
+      "BaseEnemyID": 878,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 223,
+      "BaseEnemyID": 879,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 224,
+      "BaseEnemyID": 880,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 225,
+      "BaseEnemyID": 881,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 226,
+      "BaseEnemyID": 883,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 227,
+      "BaseEnemyID": 890,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 228,
+      "BaseEnemyID": 891,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 229,
+      "BaseEnemyID": 892,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 230,
+      "BaseEnemyID": 893,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 231,
+      "BaseEnemyID": 894,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 232,
+      "BaseEnemyID": 895,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 233,
+      "BaseEnemyID": 896,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 234,
+      "BaseEnemyID": 898,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 235,
+      "BaseEnemyID": 901,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 236,
+      "BaseEnemyID": 902,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 237,
+      "BaseEnemyID": 903,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 238,
+      "BaseEnemyID": 904,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 239,
+      "BaseEnemyID": 905,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 240,
+      "BaseEnemyID": 906,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 241,
+      "BaseEnemyID": 907,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 242,
+      "BaseEnemyID": 908,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 243,
+      "BaseEnemyID": 909,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 244,
+      "BaseEnemyID": 910,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 245,
+      "BaseEnemyID": 911,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 246,
+      "BaseEnemyID": 912,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 247,
+      "BaseEnemyID": 913,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 248,
+      "BaseEnemyID": 914,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 249,
+      "BaseEnemyID": 915,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 250,
+      "BaseEnemyID": 916,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 251,
+      "BaseEnemyID": 917,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 252,
+      "BaseEnemyID": 918,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 253,
+      "BaseEnemyID": 919,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 254,
+      "BaseEnemyID": 920,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 255,
+      "BaseEnemyID": 922,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 256,
+      "BaseEnemyID": 924,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 257,
+      "BaseEnemyID": 926,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 258,
+      "BaseEnemyID": 927,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 259,
+      "BaseEnemyID": 928,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 260,
+      "BaseEnemyID": 929,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 261,
+      "BaseEnemyID": 930,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 262,
+      "BaseEnemyID": 931,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 263,
+      "BaseEnemyID": 932,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 264,
+      "BaseEnemyID": 933,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 265,
+      "BaseEnemyID": 934,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 266,
+      "BaseEnemyID": 935,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 267,
+      "BaseEnemyID": 936,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 268,
+      "BaseEnemyID": 937,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 269,
+      "BaseEnemyID": 938,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 270,
+      "BaseEnemyID": 939,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 271,
+      "BaseEnemyID": 940,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 272,
+      "BaseEnemyID": 941,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 273,
+      "BaseEnemyID": 942,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 274,
+      "BaseEnemyID": 943,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 275,
+      "BaseEnemyID": 944,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 276,
+      "BaseEnemyID": 945,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 277,
+      "BaseEnemyID": 946,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 278,
+      "BaseEnemyID": 947,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 279,
+      "BaseEnemyID": 948,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 280,
+      "BaseEnemyID": 949,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 281,
+      "BaseEnemyID": 950,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 282,
+      "BaseEnemyID": 951,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 283,
+      "BaseEnemyID": 952,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 284,
+      "BaseEnemyID": 953,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 285,
+      "BaseEnemyID": 954,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 286,
+      "BaseEnemyID": 955,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 287,
+      "BaseEnemyID": 957,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 288,
+      "BaseEnemyID": 958,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 289,
+      "BaseEnemyID": 959,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 290,
+      "BaseEnemyID": 960,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 291,
+      "BaseEnemyID": 961,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 292,
+      "BaseEnemyID": 962,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 293,
+      "BaseEnemyID": 963,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 294,
+      "BaseEnemyID": 964,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 295,
+      "BaseEnemyID": 965,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 296,
+      "BaseEnemyID": 966,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 297,
+      "BaseEnemyID": 967,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 298,
+      "BaseEnemyID": 968,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 299,
+      "BaseEnemyID": 969,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 300,
+      "BaseEnemyID": 970,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 301,
+      "BaseEnemyID": 971,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 302,
+      "BaseEnemyID": 972,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 303,
+      "BaseEnemyID": 973,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 304,
+      "BaseEnemyID": 974,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 305,
+      "BaseEnemyID": 975,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 306,
+      "BaseEnemyID": 976,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 307,
+      "BaseEnemyID": 977,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 308,
+      "BaseEnemyID": 978,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 309,
+      "BaseEnemyID": 979,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 310,
+      "BaseEnemyID": 980,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 311,
+      "BaseEnemyID": 981,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 312,
+      "BaseEnemyID": 982,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 313,
+      "BaseEnemyID": 983,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 314,
+      "BaseEnemyID": 984,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 315,
+      "BaseEnemyID": 985,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 316,
+      "BaseEnemyID": 986,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 317,
+      "BaseEnemyID": 987,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 318,
+      "BaseEnemyID": 988,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 319,
+      "BaseEnemyID": 989,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 320,
+      "BaseEnemyID": 990,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 321,
+      "BaseEnemyID": 991,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 322,
+      "BaseEnemyID": 992,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 323,
+      "BaseEnemyID": 993,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 324,
+      "BaseEnemyID": 994,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 325,
+      "BaseEnemyID": 995,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 326,
+      "BaseEnemyID": 996,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 327,
+      "BaseEnemyID": 997,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 328,
+      "BaseEnemyID": 998,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 329,
+      "BaseEnemyID": 999,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 330,
+      "BaseEnemyID": 1000,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 331,
+      "BaseEnemyID": 1001,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 332,
+      "BaseEnemyID": 1002,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 333,
+      "BaseEnemyID": 1003,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 334,
+      "BaseEnemyID": 1004,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 335,
+      "BaseEnemyID": 1005,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 336,
+      "BaseEnemyID": 1006,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 337,
+      "BaseEnemyID": 1007,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 338,
+      "BaseEnemyID": 1008,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 339,
+      "BaseEnemyID": 1009,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 340,
+      "BaseEnemyID": 1010,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 341,
+      "BaseEnemyID": 1011,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 342,
+      "BaseEnemyID": 1012,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 343,
+      "BaseEnemyID": 1013,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 344,
+      "BaseEnemyID": 1014,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 345,
+      "BaseEnemyID": 1015,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 346,
+      "BaseEnemyID": 1016,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 347,
+      "BaseEnemyID": 1017,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 348,
+      "BaseEnemyID": 1019,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 349,
+      "BaseEnemyID": 1020,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 350,
+      "BaseEnemyID": 1022,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 351,
+      "BaseEnemyID": 1023,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 352,
+      "BaseEnemyID": 1025,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 353,
+      "BaseEnemyID": 1026,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 354,
+      "BaseEnemyID": 1027,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 355,
+      "BaseEnemyID": 1028,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 356,
+      "BaseEnemyID": 1029,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 357,
+      "BaseEnemyID": 1030,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 358,
+      "BaseEnemyID": 1031,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 359,
+      "BaseEnemyID": 1032,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 360,
+      "BaseEnemyID": 1033,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 361,
+      "BaseEnemyID": 1034,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 362,
+      "BaseEnemyID": 1035,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 363,
+      "BaseEnemyID": 1036,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 364,
+      "BaseEnemyID": 1037,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 365,
+      "BaseEnemyID": 1038,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 366,
+      "BaseEnemyID": 1039,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 367,
+      "BaseEnemyID": 1040,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 368,
+      "BaseEnemyID": 1041,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 369,
+      "BaseEnemyID": 1042,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 370,
+      "BaseEnemyID": 1043,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 371,
+      "BaseEnemyID": 1044,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 372,
+      "BaseEnemyID": 1045,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 373,
+      "BaseEnemyID": 1046,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 374,
+      "BaseEnemyID": 1047,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 375,
+      "BaseEnemyID": 1048,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 376,
+      "BaseEnemyID": 1049,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 377,
+      "BaseEnemyID": 1050,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 378,
+      "BaseEnemyID": 1051,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 379,
+      "BaseEnemyID": 1052,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 380,
+      "BaseEnemyID": 1053,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 381,
+      "BaseEnemyID": 1054,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 382,
+      "BaseEnemyID": 1055,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 383,
+      "BaseEnemyID": 1056,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 384,
+      "BaseEnemyID": 1057,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 385,
+      "BaseEnemyID": 1058,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 386,
+      "BaseEnemyID": 1059,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 387,
+      "BaseEnemyID": 1060,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 388,
+      "BaseEnemyID": 1061,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 389,
+      "BaseEnemyID": 1062,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 390,
+      "BaseEnemyID": 1063,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 391,
+      "BaseEnemyID": 1064,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 392,
+      "BaseEnemyID": 1065,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 393,
+      "BaseEnemyID": 1066,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 394,
+      "BaseEnemyID": 1067,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 395,
+      "BaseEnemyID": 1068,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 396,
+      "BaseEnemyID": 1069,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 397,
+      "BaseEnemyID": 1070,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 398,
+      "BaseEnemyID": 1071,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 399,
+      "BaseEnemyID": 1072,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 400,
+      "BaseEnemyID": 1073,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 401,
+      "BaseEnemyID": 1074,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 402,
+      "BaseEnemyID": 1075,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 403,
+      "BaseEnemyID": 1076,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 404,
+      "BaseEnemyID": 1077,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 405,
+      "BaseEnemyID": 1078,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 406,
+      "BaseEnemyID": 1079,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 407,
+      "BaseEnemyID": 1080,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 408,
+      "BaseEnemyID": 1081,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 409,
+      "BaseEnemyID": 1082,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 410,
+      "BaseEnemyID": 1083,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 411,
+      "BaseEnemyID": 1084,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 412,
+      "BaseEnemyID": 1085,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 413,
+      "BaseEnemyID": 1086,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 414,
+      "BaseEnemyID": 1087,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 415,
+      "BaseEnemyID": 1088,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 416,
+      "BaseEnemyID": 1089,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 417,
+      "BaseEnemyID": 1090,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 418,
+      "BaseEnemyID": 1091,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 419,
+      "BaseEnemyID": 1092,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 420,
+      "BaseEnemyID": 1093,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 421,
+      "BaseEnemyID": 1094,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 422,
+      "BaseEnemyID": 1095,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 423,
+      "BaseEnemyID": 1096,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 424,
+      "BaseEnemyID": 1097,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 425,
+      "BaseEnemyID": 1098,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 426,
+      "BaseEnemyID": 1099,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 427,
+      "BaseEnemyID": 1100,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 428,
+      "BaseEnemyID": 1101,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 429,
+      "BaseEnemyID": 1102,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 430,
+      "BaseEnemyID": 1104,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 431,
+      "BaseEnemyID": 1106,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 432,
+      "BaseEnemyID": 1108,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 433,
+      "BaseEnemyID": 1109,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 434,
+      "BaseEnemyID": 1110,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 435,
+      "BaseEnemyID": 1111,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 436,
+      "BaseEnemyID": 1112,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 437,
+      "BaseEnemyID": 1113,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 438,
+      "BaseEnemyID": 1114,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 439,
+      "BaseEnemyID": 1115,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 440,
+      "BaseEnemyID": 1116,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 441,
+      "BaseEnemyID": 1117,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 442,
+      "BaseEnemyID": 1118,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 443,
+      "BaseEnemyID": 1119,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 444,
+      "BaseEnemyID": 1120,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 445,
+      "BaseEnemyID": 1121,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 446,
+      "BaseEnemyID": 1122,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 447,
+      "BaseEnemyID": 1123,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 448,
+      "BaseEnemyID": 1124,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 449,
+      "BaseEnemyID": 1125,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 450,
+      "BaseEnemyID": 1126,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 451,
+      "BaseEnemyID": 1127,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 452,
+      "BaseEnemyID": 1128,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 453,
+      "BaseEnemyID": 1131,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 454,
+      "BaseEnemyID": 1132,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 455,
+      "BaseEnemyID": 1134,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 456,
+      "BaseEnemyID": 1135,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 457,
+      "BaseEnemyID": 1137,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 458,
+      "BaseEnemyID": 1138,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 459,
+      "BaseEnemyID": 1139,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 460,
+      "BaseEnemyID": 1140,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 461,
+      "BaseEnemyID": 1141,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 462,
+      "BaseEnemyID": 1142,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 463,
+      "BaseEnemyID": 1143,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 464,
+      "BaseEnemyID": 1144,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 465,
+      "BaseEnemyID": 1145,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 466,
+      "BaseEnemyID": 1146,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 467,
+      "BaseEnemyID": 1147,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 468,
+      "BaseEnemyID": 1148,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 469,
+      "BaseEnemyID": 1149,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 470,
+      "BaseEnemyID": 1150,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 471,
+      "BaseEnemyID": 1151,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 472,
+      "BaseEnemyID": 1152,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 473,
+      "BaseEnemyID": 1153,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 474,
+      "BaseEnemyID": 1154,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 475,
+      "BaseEnemyID": 1155,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 476,
+      "BaseEnemyID": 1156,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 477,
+      "BaseEnemyID": 1157,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 478,
+      "BaseEnemyID": 1158,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 479,
+      "BaseEnemyID": 1159,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 480,
+      "BaseEnemyID": 1160,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 481,
+      "BaseEnemyID": 1161,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 482,
+      "BaseEnemyID": 1162,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 483,
+      "BaseEnemyID": 1163,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 484,
+      "BaseEnemyID": 1164,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 485,
+      "BaseEnemyID": 1165,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 486,
+      "BaseEnemyID": 1166,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 487,
+      "BaseEnemyID": 1167,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 488,
+      "BaseEnemyID": 1168,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 489,
+      "BaseEnemyID": 1169,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 490,
+      "BaseEnemyID": 1170,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 491,
+      "BaseEnemyID": 1171,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 492,
+      "BaseEnemyID": 1172,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 493,
+      "BaseEnemyID": 1173,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 494,
+      "BaseEnemyID": 1174,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 495,
+      "BaseEnemyID": 1175,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 496,
+      "BaseEnemyID": 1176,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 497,
+      "BaseEnemyID": 1177,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 498,
+      "BaseEnemyID": 1178,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 499,
+      "BaseEnemyID": 1181,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 500,
+      "BaseEnemyID": 1182,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 501,
+      "BaseEnemyID": 1183,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 502,
+      "BaseEnemyID": 1184,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 503,
+      "BaseEnemyID": 1185,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 504,
+      "BaseEnemyID": 1186,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 505,
+      "BaseEnemyID": 1187,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 506,
+      "BaseEnemyID": 1188,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 507,
+      "BaseEnemyID": 1189,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 508,
+      "BaseEnemyID": 1190,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 509,
+      "BaseEnemyID": 1191,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 510,
+      "BaseEnemyID": 1192,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 511,
+      "BaseEnemyID": 1193,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 512,
+      "BaseEnemyID": 1194,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 513,
+      "BaseEnemyID": 1195,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 514,
+      "BaseEnemyID": 1196,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 515,
+      "BaseEnemyID": 1197,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 516,
+      "BaseEnemyID": 1198,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 517,
+      "BaseEnemyID": 1199,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 518,
+      "BaseEnemyID": 1200,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 519,
+      "BaseEnemyID": 1201,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 520,
+      "BaseEnemyID": 1202,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 521,
+      "BaseEnemyID": 1203,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 522,
+      "BaseEnemyID": 1204,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 523,
+      "BaseEnemyID": 1205,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 524,
+      "BaseEnemyID": 1206,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 525,
+      "BaseEnemyID": 1207,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 526,
+      "BaseEnemyID": 1208,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 527,
+      "BaseEnemyID": 1209,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 528,
+      "BaseEnemyID": 1210,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 529,
+      "BaseEnemyID": 1211,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 530,
+      "BaseEnemyID": 1212,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 531,
+      "BaseEnemyID": 1213,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 532,
+      "BaseEnemyID": 1214,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 533,
+      "BaseEnemyID": 1215,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 534,
+      "BaseEnemyID": 1216,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 535,
+      "BaseEnemyID": 1217,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 536,
+      "BaseEnemyID": 1218,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 537,
+      "BaseEnemyID": 1219,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 538,
+      "BaseEnemyID": 1220,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 539,
+      "BaseEnemyID": 1221,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 540,
+      "BaseEnemyID": 1222,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 541,
+      "BaseEnemyID": 1223,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 542,
+      "BaseEnemyID": 1224,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 543,
+      "BaseEnemyID": 1225,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 544,
+      "BaseEnemyID": 1226,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 545,
+      "BaseEnemyID": 1227,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 546,
+      "BaseEnemyID": 1228,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 547,
+      "BaseEnemyID": 1229,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 548,
+      "BaseEnemyID": 1230,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 549,
+      "BaseEnemyID": 1231,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 550,
+      "BaseEnemyID": 1232,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 551,
+      "BaseEnemyID": 1233,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 552,
+      "BaseEnemyID": 1234,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 553,
+      "BaseEnemyID": 1235,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 554,
+      "BaseEnemyID": 1236,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 555,
+      "BaseEnemyID": 1237,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 556,
+      "BaseEnemyID": 1238,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 557,
+      "BaseEnemyID": 1239,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 558,
+      "BaseEnemyID": 1240,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 559,
+      "BaseEnemyID": 1241,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 560,
+      "BaseEnemyID": 1242,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 561,
+      "BaseEnemyID": 1243,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 562,
+      "BaseEnemyID": 1244,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 563,
+      "BaseEnemyID": 1245,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 564,
+      "BaseEnemyID": 1246,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 565,
+      "BaseEnemyID": 1247,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 566,
+      "BaseEnemyID": 1248,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 567,
+      "BaseEnemyID": 1249,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 568,
+      "BaseEnemyID": 1250,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 569,
+      "BaseEnemyID": 1251,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 570,
+      "BaseEnemyID": 1254,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 571,
+      "BaseEnemyID": 1255,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 572,
+      "BaseEnemyID": 1256,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 573,
+      "BaseEnemyID": 1258,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 574,
+      "BaseEnemyID": 1259,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 575,
+      "BaseEnemyID": 1260,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 576,
+      "BaseEnemyID": 1261,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 577,
+      "BaseEnemyID": 1262,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 578,
+      "BaseEnemyID": 1264,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 579,
+      "BaseEnemyID": 1265,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 580,
+      "BaseEnemyID": 1266,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 581,
+      "BaseEnemyID": 1267,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 582,
+      "BaseEnemyID": 1268,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 583,
+      "BaseEnemyID": 1269,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 584,
+      "BaseEnemyID": 1270,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 585,
+      "BaseEnemyID": 1271,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 586,
+      "BaseEnemyID": 1272,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 587,
+      "BaseEnemyID": 1273,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 588,
+      "BaseEnemyID": 1274,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 589,
+      "BaseEnemyID": 1275,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 590,
+      "BaseEnemyID": 1276,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 591,
+      "BaseEnemyID": 1277,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 592,
+      "BaseEnemyID": 1279,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 593,
+      "BaseEnemyID": 1280,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 594,
+      "BaseEnemyID": 1281,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 595,
+      "BaseEnemyID": 1282,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 596,
+      "BaseEnemyID": 1283,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 597,
+      "BaseEnemyID": 1284,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 598,
+      "BaseEnemyID": 1286,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 599,
+      "BaseEnemyID": 1287,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 600,
+      "BaseEnemyID": 1288,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 601,
+      "BaseEnemyID": 180,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 602,
+      "BaseEnemyID": 181,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 603,
+      "BaseEnemyID": 184,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 604,
+      "BaseEnemyID": 185,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 605,
+      "BaseEnemyID": 187,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 606,
+      "BaseEnemyID": 195,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 607,
+      "BaseEnemyID": 196,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 608,
+      "BaseEnemyID": 197,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 609,
+      "BaseEnemyID": 198,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 610,
+      "BaseEnemyID": 199,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 611,
+      "BaseEnemyID": 201,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 612,
+      "BaseEnemyID": 202,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 613,
+      "BaseEnemyID": 204,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 614,
+      "BaseEnemyID": 210,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 615,
+      "BaseEnemyID": 217,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 616,
+      "BaseEnemyID": 220,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 617,
+      "BaseEnemyID": 221,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 618,
+      "BaseEnemyID": 229,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 619,
+      "BaseEnemyID": 234,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 620,
+      "BaseEnemyID": 235,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 621,
+      "BaseEnemyID": 236,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 622,
+      "BaseEnemyID": 238,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 623,
+      "BaseEnemyID": 239,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 624,
+      "BaseEnemyID": 240,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 625,
+      "BaseEnemyID": 242,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 626,
+      "BaseEnemyID": 248,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 627,
+      "BaseEnemyID": 249,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 628,
+      "BaseEnemyID": 250,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 629,
+      "BaseEnemyID": 251,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 630,
+      "BaseEnemyID": 252,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 631,
+      "BaseEnemyID": 253,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 632,
+      "BaseEnemyID": 254,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 633,
+      "BaseEnemyID": 255,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 634,
+      "BaseEnemyID": 266,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 635,
+      "BaseEnemyID": 267,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 636,
+      "BaseEnemyID": 268,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 637,
+      "BaseEnemyID": 269,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 638,
+      "BaseEnemyID": 270,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 639,
+      "BaseEnemyID": 271,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 640,
+      "BaseEnemyID": 273,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 641,
+      "BaseEnemyID": 274,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 642,
+      "BaseEnemyID": 275,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 643,
+      "BaseEnemyID": 1428,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 644,
+      "BaseEnemyID": 1429,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 645,
+      "BaseEnemyID": 1430,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 646,
+      "BaseEnemyID": 1431,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 647,
+      "BaseEnemyID": 1432,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 648,
+      "BaseEnemyID": 1433,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 649,
+      "BaseEnemyID": 1434,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 650,
+      "BaseEnemyID": 1435,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 651,
+      "BaseEnemyID": 1436,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 652,
+      "BaseEnemyID": 1437,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 653,
+      "BaseEnemyID": 1438,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 654,
+      "BaseEnemyID": 1439,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 655,
+      "BaseEnemyID": 1440,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 656,
+      "BaseEnemyID": 1441,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 657,
+      "BaseEnemyID": 1442,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 658,
+      "BaseEnemyID": 1443,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 659,
+      "BaseEnemyID": 1444,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 660,
+      "BaseEnemyID": 1445,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 661,
+      "BaseEnemyID": 1446,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 662,
+      "BaseEnemyID": 1447,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 663,
+      "BaseEnemyID": 1448,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 664,
+      "BaseEnemyID": 1449,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 665,
+      "BaseEnemyID": 1450,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 666,
+      "BaseEnemyID": 1451,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 667,
+      "BaseEnemyID": 1452,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 668,
+      "BaseEnemyID": 1453,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 669,
+      "BaseEnemyID": 1498,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 670,
+      "BaseEnemyID": 1499,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 671,
+      "BaseEnemyID": 1500,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 672,
+      "BaseEnemyID": 1501,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 673,
+      "BaseEnemyID": 1502,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 674,
+      "BaseEnemyID": 1503,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 675,
+      "BaseEnemyID": 1504,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 676,
+      "BaseEnemyID": 1505,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 677,
+      "BaseEnemyID": 1506,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 678,
+      "BaseEnemyID": 1507,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 679,
+      "BaseEnemyID": 1508,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 680,
+      "BaseEnemyID": 1512,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 681,
+      "BaseEnemyID": 1513,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 682,
+      "BaseEnemyID": 1514,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 683,
+      "BaseEnemyID": 1515,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 684,
+      "BaseEnemyID": 1516,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 685,
+      "BaseEnemyID": 1517,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 686,
+      "BaseEnemyID": 1518,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 687,
+      "BaseEnemyID": 1519,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 688,
+      "BaseEnemyID": 1522,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 689,
+      "BaseEnemyID": 1526,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 690,
+      "BaseEnemyID": 1527,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 691,
+      "BaseEnemyID": 1528,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 692,
+      "BaseEnemyID": 1529,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 693,
+      "BaseEnemyID": 1530,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 694,
+      "BaseEnemyID": 1531,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 695,
+      "BaseEnemyID": 1532,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 696,
+      "BaseEnemyID": 1533,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 697,
+      "BaseEnemyID": 1534,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 698,
+      "BaseEnemyID": 1535,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 699,
+      "BaseEnemyID": 1536,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 700,
+      "BaseEnemyID": 1537,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 701,
+      "BaseEnemyID": 1539,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 702,
+      "BaseEnemyID": 1540,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 703,
+      "BaseEnemyID": 1541,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 704,
+      "BaseEnemyID": 1542,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 705,
+      "BaseEnemyID": 1543,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 706,
+      "BaseEnemyID": 1544,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 707,
+      "BaseEnemyID": 1545,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 708,
+      "BaseEnemyID": 1546,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 709,
+      "BaseEnemyID": 1547,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 710,
+      "BaseEnemyID": 1548,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 711,
+      "BaseEnemyID": 1549,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 712,
+      "BaseEnemyID": 1550,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 713,
+      "BaseEnemyID": 1551,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 714,
+      "BaseEnemyID": 1563,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 715,
+      "BaseEnemyID": 1564,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 716,
+      "BaseEnemyID": 1566,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 717,
+      "BaseEnemyID": 1567,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 718,
+      "BaseEnemyID": 1570,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 719,
+      "BaseEnemyID": 1571,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 720,
+      "BaseEnemyID": 1573,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 721,
+      "BaseEnemyID": 1574,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 722,
+      "BaseEnemyID": 1575,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 723,
+      "BaseEnemyID": 1576,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 724,
+      "BaseEnemyID": 1577,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 725,
+      "BaseEnemyID": 1578,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 726,
+      "BaseEnemyID": 1579,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 727,
+      "BaseEnemyID": 1580,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 728,
+      "BaseEnemyID": 1581,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 729,
+      "BaseEnemyID": 1582,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 730,
+      "BaseEnemyID": 1583,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 731,
+      "BaseEnemyID": 1584,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 732,
+      "BaseEnemyID": 1585,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 733,
+      "BaseEnemyID": 1587,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 734,
+      "BaseEnemyID": 1588,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 735,
+      "BaseEnemyID": 1589,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 736,
+      "BaseEnemyID": 1590,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 737,
+      "BaseEnemyID": 1591,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 738,
+      "BaseEnemyID": 1592,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 739,
+      "BaseEnemyID": 1593,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 740,
+      "BaseEnemyID": 1594,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 741,
+      "BaseEnemyID": 1595,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 742,
+      "BaseEnemyID": 1596,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 743,
+      "BaseEnemyID": 1597,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 744,
+      "BaseEnemyID": 1598,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 745,
+      "BaseEnemyID": 1599,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 746,
+      "BaseEnemyID": 1600,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 747,
+      "BaseEnemyID": 1601,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 748,
+      "BaseEnemyID": 1602,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 749,
+      "BaseEnemyID": 1604,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 750,
+      "BaseEnemyID": 1605,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 751,
+      "BaseEnemyID": 1607,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 752,
+      "BaseEnemyID": 1608,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 753,
+      "BaseEnemyID": 1609,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 754,
+      "BaseEnemyID": 1610,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 755,
+      "BaseEnemyID": 1611,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 756,
+      "BaseEnemyID": 1612,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 757,
+      "BaseEnemyID": 1613,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 758,
+      "BaseEnemyID": 1614,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 759,
+      "BaseEnemyID": 1616,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 760,
+      "BaseEnemyID": 1617,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 761,
+      "BaseEnemyID": 1618,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 762,
+      "BaseEnemyID": 1619,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 763,
+      "BaseEnemyID": 1621,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 764,
+      "BaseEnemyID": 1622,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 765,
+      "BaseEnemyID": 1623,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 766,
+      "BaseEnemyID": 1624,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 767,
+      "BaseEnemyID": 1625,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 768,
+      "BaseEnemyID": 1626,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 769,
+      "BaseEnemyID": 1627,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 770,
+      "BaseEnemyID": 1628,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 771,
+      "BaseEnemyID": 1629,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 772,
+      "BaseEnemyID": 1630,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 773,
+      "BaseEnemyID": 1631,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 774,
+      "BaseEnemyID": 1632,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 775,
+      "BaseEnemyID": 1633,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 776,
+      "BaseEnemyID": 1634,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 777,
+      "BaseEnemyID": 1635,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 778,
+      "BaseEnemyID": 1636,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 779,
+      "BaseEnemyID": 1637,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 780,
+      "BaseEnemyID": 1638,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 781,
+      "BaseEnemyID": 1639,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 782,
+      "BaseEnemyID": 1640,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 783,
+      "BaseEnemyID": 1641,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 784,
+      "BaseEnemyID": 1642,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 785,
+      "BaseEnemyID": 1643,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 786,
+      "BaseEnemyID": 1644,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 787,
+      "BaseEnemyID": 1645,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 788,
+      "BaseEnemyID": 1646,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 789,
+      "BaseEnemyID": 1647,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 790,
+      "BaseEnemyID": 1648,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 791,
+      "BaseEnemyID": 1649,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 792,
+      "BaseEnemyID": 1650,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 793,
+      "BaseEnemyID": 1651,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 794,
+      "BaseEnemyID": 1652,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 795,
+      "BaseEnemyID": 1653,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 796,
+      "BaseEnemyID": 1655,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 797,
+      "BaseEnemyID": 1657,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 798,
+      "BaseEnemyID": 1658,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 799,
+      "BaseEnemyID": 1659,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 800,
+      "BaseEnemyID": 1660,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 801,
+      "BaseEnemyID": 1661,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 802,
+      "BaseEnemyID": 1662,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 803,
+      "BaseEnemyID": 1663,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 804,
+      "BaseEnemyID": 1664,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 805,
+      "BaseEnemyID": 1665,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 806,
+      "BaseEnemyID": 1666,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 807,
+      "BaseEnemyID": 1667,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    },
+    {
+      "$id": 808,
+      "BaseEnemyID": 1670,
+      "BOOK_POP_TIME": 0,
+      "BOOK_popWeather": 0
+    }
+  ]
+}

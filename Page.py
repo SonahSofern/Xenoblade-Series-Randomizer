@@ -35,10 +35,12 @@ MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10)
 
 # icon = PhotoImage(file = os.path.join(sys._MEIPASS, 'Images\XC2Icon.png'))
 # root.iconphoto(True, icon)
+icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
+root.iconphoto(True, icon)
 
 filepath = ""
 JsonOutput = "JsonOutputs"
-cmnBdatOutput = "RANDOMIZEDVERSION"
+cmnBdatOutput = "RandomizedBDATOutput"
 
 def UploadBDAT():
     global filepath
@@ -49,9 +51,9 @@ def UploadBDAT():
 def Randomize():
     random.seed(randoSeedEntry.get())
     print("seed: " + randoSeedEntry.get())
-    subprocess.run(f"./bdat-toolset-win64.exe extract {filepath} -o {JsonOutput} -f json --pretty")
+    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {filepath} -o {JsonOutput} -f json --pretty")
     # Randomize JSONS HERE
-    subprocess.run(f"./bdat-toolset-win64.exe pack {JsonOutput} -o {cmnBdatOutput} -f json")
+    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {cmnBdatOutput} -f json")
 
 def GenRandomSeed():
     print("Gen Random Seed")
@@ -64,11 +66,21 @@ def GenRandomSeed():
 bdatcommonFrame = tk.Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
 
-bdatButton = tk.Button(bdatcommonFrame, text='Browse for "common.bdat"', command=UploadBDAT)
+bdatButton = tk.Button(bdatcommonFrame, text="Choose Input (commmon.bdat)", command=UploadBDAT)
 bdatButton.pack(side="left", padx=2, pady=2)
 
 bdatFilePathEntry = tk.Entry(bdatcommonFrame, width=500)
 bdatFilePathEntry.pack(side="left", padx=2)
+
+
+OutputDirectoryFrame = tk.Frame(root, background='#632424')
+OutputDirectoryFrame.pack(anchor="w", padx=10)
+
+outputDirButton = tk.Button(OutputDirectoryFrame, text='Choose Output Directory')
+outputDirButton.pack(side="left", padx=2, pady=2)
+
+outDirEntry = tk.Entry(OutputDirectoryFrame, width=500)
+outDirEntry.pack(side="left", padx=2)
 
 
 SeedFrame = tk.Frame(root, background='#632424')
@@ -79,6 +91,7 @@ seedDesc.pack(side='left', padx=2, pady=2)
 
 randoSeedEntry = tk.Entry(SeedFrame)
 randoSeedEntry.pack(side='left', padx=2)
+
 
 
 RandomizeButton = tk.Button(text='Randomize', command=Randomize)

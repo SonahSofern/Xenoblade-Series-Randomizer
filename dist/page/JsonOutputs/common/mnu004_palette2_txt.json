@@ -1,0 +1,74 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_bl_sp_lv_txt@01",
+      "text_id": 46
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_bl_sp_lv_num@01",
+      "text_id": 83
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_bl_recast_full@01",
+      "text_id": 887
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_bl_sp_lv_txt@02",
+      "text_id": 46
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_bl_sp_lv_num@02",
+      "text_id": 83
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_bl_recast_full@02",
+      "text_id": 887
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_bl_sp_lv_txt@03",
+      "text_id": 46
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_bl_sp_lv_num@03",
+      "text_id": 83
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_bl_recast_full@03",
+      "text_id": 887
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_arts_detail_name",
+      "text_id": 885
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_arts_detail_summary",
+      "text_id": 886
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_party_gauge",
+      "text_id": 888
+    }
+  ]
+}

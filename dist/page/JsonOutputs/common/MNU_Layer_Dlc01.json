@@ -1,0 +1,232 @@
+{
+  "schema": [
+    {
+      "name": "group",
+      "type": 1
+    },
+    {
+      "name": "sheet01",
+      "type": 7
+    },
+    {
+      "name": "prio01",
+      "type": 1
+    },
+    {
+      "name": "sheet02",
+      "type": 7
+    },
+    {
+      "name": "prio02",
+      "type": 1
+    },
+    {
+      "name": "sheet03",
+      "type": 7
+    },
+    {
+      "name": "prio03",
+      "type": 1
+    },
+    {
+      "name": "sheet04",
+      "type": 7
+    },
+    {
+      "name": "prio04",
+      "type": 1
+    },
+    {
+      "name": "sheet05",
+      "type": 7
+    },
+    {
+      "name": "prio05",
+      "type": 1
+    },
+    {
+      "name": "sheet06",
+      "type": 7
+    },
+    {
+      "name": "prio06",
+      "type": 1
+    },
+    {
+      "name": "hud_group",
+      "type": 1
+    }
+  ],
+  "rows": [
+    {
+      "$id": 100,
+      "group": 3,
+      "sheet01": "mnu999_dummyfs",
+      "prio01": 8,
+      "sheet02": "",
+      "prio02": 0,
+      "sheet03": "",
+      "prio03": 0,
+      "sheet04": "",
+      "prio04": 0,
+      "sheet05": "",
+      "prio05": 0,
+      "sheet06": "",
+      "prio06": 0,
+      "hud_group": 0
+    },
+    {
+      "$id": 101,
+      "group": 3,
+      "sheet01": "dlc103_btlch_order",
+      "prio01": 8,
+      "sheet02": "",
+      "prio02": 0,
+      "sheet03": "",
+      "prio03": 0,
+      "sheet04": "",
+      "prio04": 0,
+      "sheet05": "",
+      "prio05": 0,
+      "sheet06": "",
+      "prio06": 0,
+      "hud_group": 0
+    },
+    {
+      "$id": 102,
+      "group": 3,
+      "sheet01": "dlc105_btlch_telop",
+      "prio01": 2,
+      "sheet02": "",
+      "prio02": 0,
+      "sheet03": "",
+      "prio03": 0,
+      "sheet04": "",
+      "prio04": 0,
+      "sheet05": "",
+      "prio05": 0,
+      "sheet06": "",
+      "prio06": 0,
+      "hud_group": 0
+    },
+    {
+      "$id": 103,
+      "group": 3,
+      "sheet01": "dlc108_btlch_tutorial",
+      "prio01": 1,
+      "sheet02": "",
+      "prio02": 0,
+      "sheet03": "",
+      "prio03": 0,
+      "sheet04": "",
+      "prio04": 0,
+      "sheet05": "",
+      "prio05": 0,
+      "sheet06": "",
+      "prio06": 0,
+      "hud_group": 0
+    },
+    {
+      "$id": 104,
+      "group": 3,
+      "sheet01": "dlc240_special",
+      "prio01": 8,
+      "sheet02": "",
+      "prio02": 0,
+      "sheet03": "",
+      "prio03": 0,
+      "sheet04": "",
+      "prio04": 0,
+      "sheet05": "",
+      "prio05": 0,
+      "sheet06": "",
+      "prio06": 0,
+      "hud_group": 0
+    },
+    {
+      "$id": 105,
+      "group": 0,
+      "sheet01": "",
+      "prio01": 0,
+      "sheet02": "",
+      "prio02": 0,
+      "sheet03": "",
+      "prio03": 0,
+      "sheet04": "",
+      "prio04": 0,
+      "sheet05": "",
+      "prio05": 0,
+      "sheet06": "",
+      "prio06": 0,
+      "hud_group": 0
+    },
+    {
+      "$id": 106,
+      "group": 2,
+      "sheet01": "dlc107_vision",
+      "prio01": 1,
+      "sheet02": "",
+      "prio02": 0,
+      "sheet03": "",
+      "prio03": 0,
+      "sheet04": "",
+      "prio04": 0,
+      "sheet05": "",
+      "prio05": 0,
+      "sheet06": "",
+      "prio06": 0,
+      "hud_group": 3
+    },
+    {
+      "$id": 107,
+      "group": 4,
+      "sheet01": "",
+      "prio01": 0,
+      "sheet02": "",
+      "prio02": 0,
+      "sheet03": "",
+      "prio03": 0,
+      "sheet04": "",
+      "prio04": 0,
+      "sheet05": "",
+      "prio05": 0,
+      "sheet06": "",
+      "prio06": 0,
+      "hud_group": 4
+    },
+    {
+      "$id": 108,
+      "group": 1,
+      "sheet01": "",
+      "prio01": 0,
+      "sheet02": "",
+      "prio02": 0,
+      "sheet03": "",
+      "prio03": 0,
+      "sheet04": "",
+      "prio04": 0,
+      "sheet05": "",
+      "prio05": 0,
+      "sheet06": "",
+      "prio06": 0,
+      "hud_group": 2
+    },
+    {
+      "$id": 109,
+      "group": 0,
+      "sheet01": "",
+      "prio01": 0,
+      "sheet02": "",
+      "prio02": 0,
+      "sheet03": "",
+      "prio03": 0,
+      "sheet04": "",
+      "prio04": 0,
+      "sheet05": "",
+      "prio05": 0,
+      "sheet06": "",
+      "prio06": 0,
+      "hud_group": 0
+    }
+  ]
+}

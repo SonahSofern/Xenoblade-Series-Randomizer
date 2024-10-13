@@ -1,0 +1,24 @@
+{
+  "schema": [
+    {
+      "name": "OffsetBlX",
+      "type": 8
+    },
+    {
+      "name": "OffsetBlZ",
+      "type": 8
+    },
+    {
+      "name": "OffsetBlRotY",
+      "type": 8
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "OffsetBlX": 1.0,
+      "OffsetBlZ": -1.0,
+      "OffsetBlRotY": 0.0
+    }
+  ]
+}

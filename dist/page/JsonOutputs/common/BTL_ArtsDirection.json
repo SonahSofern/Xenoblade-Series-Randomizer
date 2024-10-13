@@ -1,0 +1,89 @@
+{
+  "schema": [
+    {
+      "name": "MotionNo1",
+      "type": 1
+    },
+    {
+      "name": "Startf1",
+      "type": 2
+    },
+    {
+      "name": "Keepf1",
+      "type": 2
+    },
+    {
+      "name": "SlowRate1",
+      "type": 2
+    },
+    {
+      "name": "MotionNo2",
+      "type": 1
+    },
+    {
+      "name": "Startf2",
+      "type": 2
+    },
+    {
+      "name": "Keepf2",
+      "type": 2
+    },
+    {
+      "name": "SlowRate2",
+      "type": 2
+    },
+    {
+      "name": "MotionNo3",
+      "type": 1
+    },
+    {
+      "name": "Startf3",
+      "type": 2
+    },
+    {
+      "name": "Keepf3",
+      "type": 2
+    },
+    {
+      "name": "SlowRate3",
+      "type": 2
+    },
+    {
+      "name": "MotionNo4",
+      "type": 1
+    },
+    {
+      "name": "Startf4",
+      "type": 2
+    },
+    {
+      "name": "Keepf4",
+      "type": 2
+    },
+    {
+      "name": "SlowRate4",
+      "type": 2
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "MotionNo1": 1,
+      "Startf1": 72,
+      "Keepf1": 32,
+      "SlowRate1": 25,
+      "MotionNo2": 1,
+      "Startf2": 85,
+      "Keepf2": 40,
+      "SlowRate2": 1,
+      "MotionNo3": 0,
+      "Startf3": 0,
+      "Keepf3": 0,
+      "SlowRate3": 0,
+      "MotionNo4": 0,
+      "Startf4": 0,
+      "Keepf4": 0,
+      "SlowRate4": 0
+    }
+  ]
+}

@@ -1,0 +1,434 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_hplist_etnum",
+      "text_id": 1469
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_hplist_etid",
+      "text_id": 1468
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_partsname@01",
+      "text_id": 1472
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_partsname@02",
+      "text_id": 1472
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_partsname@03",
+      "text_id": 1472
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_partsname@04",
+      "text_id": 1472
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_partsname@05",
+      "text_id": 1472
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_melist_title_make",
+      "text_id": 1470
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_partsname@01",
+      "text_id": 1472
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_partsname@02",
+      "text_id": 1472
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_partsname@03",
+      "text_id": 1472
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_partsname@04",
+      "text_id": 1472
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_partsname@05",
+      "text_id": 1472
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_sbpartsname@01",
+      "text_id": 1472
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_sbpartsname@02",
+      "text_id": 1472
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_sbpartsname@03",
+      "text_id": 1472
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_sbpartsname@04",
+      "text_id": 1472
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_sbpartsname@05",
+      "text_id": 1472
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_sbpartsname@06",
+      "text_id": 1472
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_sbpartsname@07",
+      "text_id": 1472
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_sbpartsname@08",
+      "text_id": 1472
+    },
+    {
+      "$id": 22,
+      "obj_name": "TXT_sbpartsname@09",
+      "text_id": 1472
+    },
+    {
+      "$id": 23,
+      "obj_name": "TXT_sbparts_etlnum@01",
+      "text_id": 1473
+    },
+    {
+      "$id": 24,
+      "obj_name": "TXT_sbparts_etlnum@02",
+      "text_id": 1473
+    },
+    {
+      "$id": 25,
+      "obj_name": "TXT_sbparts_etlnum@03",
+      "text_id": 1473
+    },
+    {
+      "$id": 26,
+      "obj_name": "TXT_sbparts_etlnum@04",
+      "text_id": 1473
+    },
+    {
+      "$id": 27,
+      "obj_name": "TXT_sbparts_etlnum@05",
+      "text_id": 1473
+    },
+    {
+      "$id": 28,
+      "obj_name": "TXT_sbparts_etlnum@06",
+      "text_id": 1473
+    },
+    {
+      "$id": 29,
+      "obj_name": "TXT_sbparts_etlnum@07",
+      "text_id": 1473
+    },
+    {
+      "$id": 30,
+      "obj_name": "TXT_sbparts_etlnum@08",
+      "text_id": 1473
+    },
+    {
+      "$id": 31,
+      "obj_name": "TXT_sbparts_etlnum@09",
+      "text_id": 1473
+    },
+    {
+      "$id": 32,
+      "obj_name": "TXT_parts_enid@01",
+      "text_id": 1488
+    },
+    {
+      "$id": 33,
+      "obj_name": "TXT_parts_ennum@01",
+      "text_id": 1486
+    },
+    {
+      "$id": 34,
+      "obj_name": "TXT_sparts_etxt@01",
+      "text_id": 1506
+    },
+    {
+      "$id": 35,
+      "obj_name": "TXT_ptrl_id@01",
+      "text_id": 1507
+    },
+    {
+      "$id": 36,
+      "obj_name": "TXT_ptrl_name@01",
+      "text_id": 1508
+    },
+    {
+      "$id": 37,
+      "obj_name": "TXT_ptsp_num@01",
+      "text_id": 1513
+    },
+    {
+      "$id": 38,
+      "obj_name": "TXT_ptpdf_id@01",
+      "text_id": 1509
+    },
+    {
+      "$id": 39,
+      "obj_name": "TXT_ptpdf_num@01",
+      "text_id": 1511
+    },
+    {
+      "$id": 40,
+      "obj_name": "TXT_ptedf_id@01",
+      "text_id": 1510
+    },
+    {
+      "$id": 41,
+      "obj_name": "TXT_ptedf_num@01",
+      "text_id": 1511
+    },
+    {
+      "$id": 42,
+      "obj_name": "TXT_num_select_value",
+      "text_id": 1516
+    },
+    {
+      "$id": 43,
+      "obj_name": "TXT_num_select_total_price",
+      "text_id": 1517
+    },
+    {
+      "$id": 44,
+      "obj_name": "TXT_num_select_index@01",
+      "text_id": 1514
+    },
+    {
+      "$id": 45,
+      "obj_name": "TXT_num_select_index@02",
+      "text_id": 1515
+    },
+    {
+      "$id": 46,
+      "obj_name": "TXT_sbparts_num@01",
+      "text_id": 1477
+    },
+    {
+      "$id": 47,
+      "obj_name": "TXT_sbparts_num@02",
+      "text_id": 1477
+    },
+    {
+      "$id": 48,
+      "obj_name": "TXT_sbparts_num@03",
+      "text_id": 1477
+    },
+    {
+      "$id": 49,
+      "obj_name": "TXT_sbparts_num@04",
+      "text_id": 1477
+    },
+    {
+      "$id": 50,
+      "obj_name": "TXT_sbparts_num@05",
+      "text_id": 1477
+    },
+    {
+      "$id": 51,
+      "obj_name": "TXT_sbparts_num@06",
+      "text_id": 1477
+    },
+    {
+      "$id": 52,
+      "obj_name": "TXT_sbparts_num@07",
+      "text_id": 1477
+    },
+    {
+      "$id": 53,
+      "obj_name": "TXT_sbparts_num@08",
+      "text_id": 1477
+    },
+    {
+      "$id": 54,
+      "obj_name": "TXT_sbparts_num@09",
+      "text_id": 1477
+    },
+    {
+      "$id": 55,
+      "obj_name": "TXT_hplist_etid",
+      "text_id": 1498
+    },
+    {
+      "$id": 56,
+      "obj_name": "TXT_hplist_etnum",
+      "text_id": 1499
+    },
+    {
+      "$id": 57,
+      "obj_name": "TXT_hn_rol",
+      "text_id": 1492
+    },
+    {
+      "$id": 58,
+      "obj_name": "TXT_hn_enu_max",
+      "text_id": 1745
+    },
+    {
+      "$id": 59,
+      "obj_name": "TXT_hn_enu_num",
+      "text_id": 1489
+    },
+    {
+      "$id": 60,
+      "obj_name": "TXT_melist_col_name",
+      "text_id": 1717
+    },
+    {
+      "$id": 61,
+      "obj_name": "TXT_melist_col_num",
+      "text_id": 1719
+    },
+    {
+      "$id": 62,
+      "obj_name": "TXT_melist_col_make",
+      "text_id": 1471
+    },
+    {
+      "$id": 63,
+      "obj_name": "TXT_melist_title_crystal",
+      "text_id": 1475
+    },
+    {
+      "$id": 64,
+      "obj_name": "TXT_melist_col_crystal",
+      "text_id": 1476
+    },
+    {
+      "$id": 65,
+      "obj_name": "TXT_reclist_stcnum@01",
+      "text_id": 1473
+    },
+    {
+      "$id": 66,
+      "obj_name": "TXT_reclist_stcnum@02",
+      "text_id": 1473
+    },
+    {
+      "$id": 67,
+      "obj_name": "TXT_reclist_stcnum@03",
+      "text_id": 1473
+    },
+    {
+      "$id": 68,
+      "obj_name": "TXT_reclist_stcnum@04",
+      "text_id": 1473
+    },
+    {
+      "$id": 69,
+      "obj_name": "TXT_reclist_stcnum@05",
+      "text_id": 1473
+    },
+    {
+      "$id": 70,
+      "obj_name": "TXT_reclist_stcnum@06",
+      "text_id": 1473
+    },
+    {
+      "$id": 71,
+      "obj_name": "TXT_reclist_stcnum@07",
+      "text_id": 1473
+    },
+    {
+      "$id": 72,
+      "obj_name": "TXT_reclist_stcnum@08",
+      "text_id": 1473
+    },
+    {
+      "$id": 73,
+      "obj_name": "TXT_reclist_stcnum@09",
+      "text_id": 1473
+    },
+    {
+      "$id": 74,
+      "obj_name": "TXT_item_sort_index",
+      "text_id": 1635
+    },
+    {
+      "$id": 75,
+      "obj_name": "TXT_item_sort_label",
+      "text_id": 1636
+    },
+    {
+      "$id": 76,
+      "obj_name": "TXT_ptsp_id_hpmax@01",
+      "text_id": 1811
+    },
+    {
+      "$id": 77,
+      "obj_name": "TXT_ptsp_id_str@01",
+      "text_id": 1812
+    },
+    {
+      "$id": 78,
+      "obj_name": "TXT_ptsp_id_ether@01",
+      "text_id": 1813
+    },
+    {
+      "$id": 79,
+      "obj_name": "TXT_ptsp_id_dex@01",
+      "text_id": 1814
+    },
+    {
+      "$id": 80,
+      "obj_name": "TXT_ptsp_id_agi@01",
+      "text_id": 1815
+    },
+    {
+      "$id": 81,
+      "obj_name": "TXT_ptsp_id_luck@01",
+      "text_id": 1816
+    },
+    {
+      "$id": 82,
+      "obj_name": "TXT_stock_num",
+      "text_id": 1708
+    },
+    {
+      "$id": 83,
+      "obj_name": "TXT_stock_max",
+      "text_id": 1708
+    },
+    {
+      "$id": 84,
+      "obj_name": "TXT_stock_slash",
+      "text_id": 1709
+    }
+  ]
+}

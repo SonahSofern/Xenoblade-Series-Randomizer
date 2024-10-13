@@ -1,0 +1,39 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_index_area",
+      "text_id": 976
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_index_landmark",
+      "text_id": 975
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_index_secret",
+      "text_id": 977
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_name_area",
+      "text_id": 1682
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_name_other",
+      "text_id": 1682
+    }
+  ]
+}

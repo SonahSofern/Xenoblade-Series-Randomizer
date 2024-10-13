@@ -1,0 +1,2262 @@
+{
+  "schema": [
+    {
+      "name": "setupName",
+      "type": 7
+    },
+    {
+      "name": "objName",
+      "type": 7
+    },
+    {
+      "name": "objType",
+      "type": 4
+    },
+    {
+      "name": "objID",
+      "type": 7
+    },
+    {
+      "name": "objModel",
+      "type": 7
+    },
+    {
+      "name": "wpnBlade",
+      "type": 7
+    }
+  ],
+  "rows": [
+    {
+      "$id": 18001,
+      "setupName": "bf08_010_050",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18002,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18003,
+      "setupName": "",
+      "objName": "覚醒ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18004,
+      "setupName": "bf08_030_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18005,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18006,
+      "setupName": "bf08_040_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18007,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18008,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18009,
+      "setupName": "",
+      "objName": "異形モンスター",
+      "objType": 6,
+      "objID": "boss_ma18a01",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18010,
+      "setupName": "",
+      "objName": "シンの刀",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/we/we021201",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18011,
+      "setupName": "bf08_050_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18012,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18013,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18014,
+      "setupName": "",
+      "objName": "異形モンスター",
+      "objType": 6,
+      "objID": "boss_ma18a01",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18015,
+      "setupName": "bf08_070_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18016,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18017,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18018,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18019,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18020,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18021,
+      "setupName": "",
+      "objName": "異形モンスター",
+      "objType": 6,
+      "objID": "boss_ma18a01",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18022,
+      "setupName": "bf08_080_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18023,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18024,
+      "setupName": "",
+      "objName": "覚醒ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18025,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18026,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18027,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18028,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18029,
+      "setupName": "",
+      "objName": "覚醒ホムラ剣",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj160013",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18030,
+      "setupName": "bf08_090_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18031,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18032,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18033,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18034,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18035,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 5,
+      "objID": "RSC_NP100101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18036,
+      "setupName": "bf08_100_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18037,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18038,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18039,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18040,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18041,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 5,
+      "objID": "RSC_NP100101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18042,
+      "setupName": "",
+      "objName": "カグツチの日記帳",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj105005",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18043,
+      "setupName": "bf08_120_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18044,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18045,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18046,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18047,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18048,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18049,
+      "setupName": "bf08_140_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18050,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18051,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18052,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18053,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18054,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18055,
+      "setupName": "bf08_140_150",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18056,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18057,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18058,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18059,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18060,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18061,
+      "setupName": "",
+      "objName": "異形モンスターA",
+      "objType": 6,
+      "objID": "boss_ma18a02",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18062,
+      "setupName": "",
+      "objName": "異形モンスターB",
+      "objType": 6,
+      "objID": "boss_ma18a02",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18063,
+      "setupName": "",
+      "objName": "異形モンスターC",
+      "objType": 6,
+      "objID": "boss_ma18a02",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18064,
+      "setupName": "",
+      "objName": "異形モンスターD",
+      "objType": 6,
+      "objID": "boss_ma18a02",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18065,
+      "setupName": "",
+      "objName": "異形モンスターE",
+      "objType": 6,
+      "objID": "boss_ma18a02",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18066,
+      "setupName": "",
+      "objName": "異形モンスターF",
+      "objType": 6,
+      "objID": "boss_ma18a02",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18067,
+      "setupName": "",
+      "objName": "異形モンスターG",
+      "objType": 6,
+      "objID": "boss_ma18a02",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18068,
+      "setupName": "",
+      "objName": "異形モンスターH",
+      "objType": 6,
+      "objID": "boss_ma18a02",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18069,
+      "setupName": "bf08_150_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18070,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18071,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18072,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18073,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18074,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18075,
+      "setupName": "bf08_160_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18076,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18077,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18078,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18079,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18080,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18081,
+      "setupName": "",
+      "objName": "ブレイドの骸A",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj108001",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18082,
+      "setupName": "",
+      "objName": "ブレイドの骸B",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj108001",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18083,
+      "setupName": "bf08_180_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18084,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18085,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18086,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18087,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18088,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18089,
+      "setupName": "",
+      "objName": "ブレイドの骸A",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj108001",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18090,
+      "setupName": "",
+      "objName": "ブレイドの骸B",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj108001",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18091,
+      "setupName": "bf08_190_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18092,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18093,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18094,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18095,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18096,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18097,
+      "setupName": "bf08_210_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HIKARI"
+    },
+    {
+      "$id": 18098,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18099,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18100,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18101,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18102,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18103,
+      "setupName": "bf08_230_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 18104,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18105,
+      "setupName": "",
+      "objName": "ヒカリ",
+      "objType": 4,
+      "objID": "BLADE_HIKARI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18106,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18107,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18108,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18109,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18110,
+      "setupName": "",
+      "objName": "ヒカリ剣",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj160012",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18111,
+      "setupName": "bf08_250_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 18112,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18113,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18114,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18115,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18116,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18117,
+      "setupName": "",
+      "objName": "巨大モンスター",
+      "objType": 6,
+      "objID": "boss_ma18a03_sev",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18118,
+      "setupName": "bf08_260_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 18119,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18120,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 18121,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18122,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 18123,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18124,
+      "setupName": "",
+      "objName": "メレフ",
+      "objType": 3,
+      "objID": "DRIVER_MELEF",
+      "objModel": "",
+      "wpnBlade": "BLADE_KAGUTSUCHI"
+    },
+    {
+      "$id": 18125,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18126,
+      "setupName": "",
+      "objName": "ジーク",
+      "objType": 3,
+      "objID": "DRIVER_SIEG",
+      "objModel": "",
+      "wpnBlade": "BLADE_SAIKA"
+    },
+    {
+      "$id": 18127,
+      "setupName": "",
+      "objName": "サイカ",
+      "objType": 4,
+      "objID": "BLADE_SAIKA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18128,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18129,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18130,
+      "setupName": "",
+      "objName": "巨大モンスター",
+      "objType": 6,
+      "objID": "boss_ma18a03_sev",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18131,
+      "setupName": "bf08_270_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 18132,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18133,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 18134,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18135,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 18136,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18137,
+      "setupName": "",
+      "objName": "メレフ",
+      "objType": 3,
+      "objID": "DRIVER_MELEF",
+      "objModel": "",
+      "wpnBlade": "BLADE_KAGUTSUCHI"
+    },
+    {
+      "$id": 18138,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18139,
+      "setupName": "",
+      "objName": "ジーク",
+      "objType": 3,
+      "objID": "DRIVER_SIEG",
+      "objModel": "",
+      "wpnBlade": "BLADE_SAIKA"
+    },
+    {
+      "$id": 18140,
+      "setupName": "",
+      "objName": "サイカ",
+      "objType": 4,
+      "objID": "BLADE_SAIKA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18141,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18142,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18143,
+      "setupName": "",
+      "objName": "巨大モンスター",
+      "objType": 6,
+      "objID": "boss_ma18a03_sev",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18144,
+      "setupName": "",
+      "objName": "透明プレート",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj108007",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18145,
+      "setupName": "bf08_280_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 18146,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18147,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 18148,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18149,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 18150,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18151,
+      "setupName": "",
+      "objName": "メレフ",
+      "objType": 3,
+      "objID": "DRIVER_MELEF",
+      "objModel": "",
+      "wpnBlade": "BLADE_KAGUTSUCHI"
+    },
+    {
+      "$id": 18152,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18153,
+      "setupName": "",
+      "objName": "ジーク",
+      "objType": 3,
+      "objID": "DRIVER_SIEG",
+      "objModel": "",
+      "wpnBlade": "BLADE_SAIKA"
+    },
+    {
+      "$id": 18154,
+      "setupName": "",
+      "objName": "サイカ",
+      "objType": 4,
+      "objID": "BLADE_SAIKA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18155,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18156,
+      "setupName": "",
+      "objName": "シン",
+      "objType": 3,
+      "objID": "DRIVER_SIN",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18157,
+      "setupName": "",
+      "objName": "モノケロス",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj180001",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18158,
+      "setupName": "bf08_290_150",
+      "objName": "ネフェル",
+      "objType": 5,
+      "objID": "RSC_NP001001",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18159,
+      "setupName": "",
+      "objName": "スペルビア兵",
+      "objType": 5,
+      "objID": "RSC_NP453201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18160,
+      "setupName": "",
+      "objName": "報告書",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj104008",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18161,
+      "setupName": "bf08_310_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 18162,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18163,
+      "setupName": "",
+      "objName": "覚醒ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18164,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 18165,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18166,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 18167,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18168,
+      "setupName": "",
+      "objName": "メレフ",
+      "objType": 3,
+      "objID": "DRIVER_MELEF",
+      "objModel": "",
+      "wpnBlade": "BLADE_KAGUTSUCHI"
+    },
+    {
+      "$id": 18169,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18170,
+      "setupName": "",
+      "objName": "ジーク",
+      "objType": 3,
+      "objID": "DRIVER_SIEG",
+      "objModel": "",
+      "wpnBlade": "BLADE_SAIKA"
+    },
+    {
+      "$id": 18171,
+      "setupName": "",
+      "objName": "サイカ",
+      "objType": 4,
+      "objID": "BLADE_SAIKA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18172,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18173,
+      "setupName": "",
+      "objName": "覚醒ホムラ剣",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj160013",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18174,
+      "setupName": "bf08_320_100",
+      "objName": "シン",
+      "objType": 5,
+      "objID": "RSC_NP100101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18175,
+      "setupName": "",
+      "objName": "メツ",
+      "objType": 5,
+      "objID": "RSC_NP100201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18176,
+      "setupName": "",
+      "objName": "氷漬けのラウラ",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj160005",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18177,
+      "setupName": "bf08_340_100",
+      "objName": "シン",
+      "objType": 5,
+      "objID": "RSC_NP100101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18178,
+      "setupName": "",
+      "objName": "メツ",
+      "objType": 5,
+      "objID": "RSC_NP100201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18179,
+      "setupName": "",
+      "objName": "氷漬けのラウラ",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj160005",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18180,
+      "setupName": "bf08_350_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 18181,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18182,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 18183,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18184,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 18185,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18186,
+      "setupName": "",
+      "objName": "メレフ",
+      "objType": 3,
+      "objID": "DRIVER_MELEF",
+      "objModel": "",
+      "wpnBlade": "BLADE_KAGUTSUCHI"
+    },
+    {
+      "$id": 18187,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18188,
+      "setupName": "",
+      "objName": "ジーク",
+      "objType": 3,
+      "objID": "DRIVER_SIEG",
+      "objModel": "",
+      "wpnBlade": "BLADE_SAIKA"
+    },
+    {
+      "$id": 18189,
+      "setupName": "",
+      "objName": "サイカ",
+      "objType": 4,
+      "objID": "BLADE_SAIKA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18190,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18191,
+      "setupName": "bf08_370_100",
+      "objName": "マルベーニ",
+      "objType": 5,
+      "objID": "RSC_NP000901",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18192,
+      "setupName": "",
+      "objName": "僧兵A",
+      "objType": 5,
+      "objID": "RSC_NP463201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18193,
+      "setupName": "",
+      "objName": "僧兵B",
+      "objType": 5,
+      "objID": "RSC_NP463201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18194,
+      "setupName": "",
+      "objName": "僧兵C",
+      "objType": 5,
+      "objID": "RSC_NP463201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18195,
+      "setupName": "",
+      "objName": "僧兵D",
+      "objType": 5,
+      "objID": "RSC_NP463201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18196,
+      "setupName": "",
+      "objName": "僧兵E",
+      "objType": 5,
+      "objID": "RSC_NP463201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18197,
+      "setupName": "",
+      "objName": "僧兵F",
+      "objType": 5,
+      "objID": "RSC_NP463201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18198,
+      "setupName": "",
+      "objName": "祈る神官達",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj130006",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18199,
+      "setupName": "",
+      "objName": "通信モニター（大聖堂用）",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj150017",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18200,
+      "setupName": "bf08_390_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 18201,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18202,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 18203,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18204,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 18205,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18206,
+      "setupName": "",
+      "objName": "メレフ",
+      "objType": 3,
+      "objID": "DRIVER_MELEF",
+      "objModel": "",
+      "wpnBlade": "BLADE_KAGUTSUCHI"
+    },
+    {
+      "$id": 18207,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18208,
+      "setupName": "",
+      "objName": "ジーク",
+      "objType": 3,
+      "objID": "DRIVER_SIEG",
+      "objModel": "",
+      "wpnBlade": "BLADE_SAIKA"
+    },
+    {
+      "$id": 18209,
+      "setupName": "",
+      "objName": "サイカ",
+      "objType": 4,
+      "objID": "BLADE_SAIKA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18210,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18211,
+      "setupName": "bf08_400_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 18212,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18213,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 18214,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18215,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 18216,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18217,
+      "setupName": "",
+      "objName": "メレフ",
+      "objType": 3,
+      "objID": "DRIVER_MELEF",
+      "objModel": "",
+      "wpnBlade": "BLADE_KAGUTSUCHI"
+    },
+    {
+      "$id": 18218,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18219,
+      "setupName": "",
+      "objName": "ジーク",
+      "objType": 3,
+      "objID": "DRIVER_SIEG",
+      "objModel": "",
+      "wpnBlade": "BLADE_SAIKA"
+    },
+    {
+      "$id": 18220,
+      "setupName": "",
+      "objName": "サイカ",
+      "objType": 4,
+      "objID": "BLADE_SAIKA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18221,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18222,
+      "setupName": "",
+      "objName": "マルサネス",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj180701",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18223,
+      "setupName": "",
+      "objName": "アーケディア巨神獣",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj190501",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18224,
+      "setupName": "bf08_430_100",
+      "objName": "メツ",
+      "objType": 5,
+      "objID": "RSC_NP100201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18225,
+      "setupName": "",
+      "objName": "マルベーニ",
+      "objType": 5,
+      "objID": "RSC_NP003301",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18226,
+      "setupName": "",
+      "objName": "ホムラのコアクリスタル",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/oj/oj160103",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18227,
+      "setupName": "bf08_450_100",
+      "objName": "レックス",
+      "objType": 3,
+      "objID": "DRIVER_REX",
+      "objModel": "",
+      "wpnBlade": "BLADE_HOMURA"
+    },
+    {
+      "$id": 18228,
+      "setupName": "",
+      "objName": "ホムラ",
+      "objType": 4,
+      "objID": "BLADE_HOMURA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18229,
+      "setupName": "",
+      "objName": "ニア",
+      "objType": 3,
+      "objID": "DRIVER_NIA",
+      "objModel": "",
+      "wpnBlade": "BLADE_BYAKKO"
+    },
+    {
+      "$id": 18230,
+      "setupName": "",
+      "objName": "ビャッコ",
+      "objType": 4,
+      "objID": "BLADE_BYAKKO",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18231,
+      "setupName": "",
+      "objName": "トラ",
+      "objType": 3,
+      "objID": "DRIVER_TORA",
+      "objModel": "",
+      "wpnBlade": "BLADE_HANA_1"
+    },
+    {
+      "$id": 18232,
+      "setupName": "",
+      "objName": "ハナ（JS）",
+      "objType": 4,
+      "objID": "BLADE_HANA_1",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18233,
+      "setupName": "",
+      "objName": "メレフ",
+      "objType": 3,
+      "objID": "DRIVER_MELEF",
+      "objModel": "",
+      "wpnBlade": "BLADE_KAGUTSUCHI"
+    },
+    {
+      "$id": 18234,
+      "setupName": "",
+      "objName": "カグツチ",
+      "objType": 4,
+      "objID": "BLADE_KAGUTSUCHI",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18235,
+      "setupName": "",
+      "objName": "ジーク",
+      "objType": 3,
+      "objID": "DRIVER_SIEG",
+      "objModel": "",
+      "wpnBlade": "BLADE_SAIKA"
+    },
+    {
+      "$id": 18236,
+      "setupName": "",
+      "objName": "サイカ",
+      "objType": 4,
+      "objID": "BLADE_SAIKA",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18237,
+      "setupName": "",
+      "objName": "じっちゃん",
+      "objType": 5,
+      "objID": "RSC_NP000101",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18238,
+      "setupName": "",
+      "objName": "僧兵A",
+      "objType": 5,
+      "objID": "RSC_NP463201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18239,
+      "setupName": "",
+      "objName": "僧兵B",
+      "objType": 5,
+      "objID": "RSC_NP463201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18240,
+      "setupName": "",
+      "objName": "僧兵C",
+      "objType": 5,
+      "objID": "RSC_NP463201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18241,
+      "setupName": "",
+      "objName": "僧兵D",
+      "objType": 5,
+      "objID": "RSC_NP463201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18242,
+      "setupName": "",
+      "objName": "飛行型巨神獣",
+      "objType": 6,
+      "objID": "boss_ma20a01",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18243,
+      "setupName": "",
+      "objName": "僧兵E",
+      "objType": 5,
+      "objID": "RSC_NP463201",
+      "objModel": "",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18244,
+      "setupName": "",
+      "objName": "僧兵槍A",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/we/we020901",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18245,
+      "setupName": "",
+      "objName": "僧兵槍B",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/we/we020901",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18246,
+      "setupName": "",
+      "objName": "僧兵槍C",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/we/we020901",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18247,
+      "setupName": "",
+      "objName": "僧兵槍D",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/we/we020901",
+      "wpnBlade": ""
+    },
+    {
+      "$id": 18248,
+      "setupName": "",
+      "objName": "僧兵槍E",
+      "objType": 7,
+      "objID": "",
+      "objModel": "model/we/we020901",
+      "wpnBlade": ""
+    }
+  ]
+}

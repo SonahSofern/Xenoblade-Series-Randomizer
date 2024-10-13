@@ -1,0 +1,334 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_dr_status_name@01",
+      "text_id": 986
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_dr_status_hp_idx@01",
+      "text_id": 990
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_dr_status_hp_num@01",
+      "text_id": 991
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_dr_status_lv_idx@01",
+      "text_id": 989
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_dr_status_lv_num@01",
+      "text_id": 992
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_dr_status_name@02",
+      "text_id": 986
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_dr_status_hp_idx@02",
+      "text_id": 990
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_dr_status_hp_num@02",
+      "text_id": 991
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_dr_status_lv_idx@02",
+      "text_id": 989
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_dr_status_lv_num@02",
+      "text_id": 992
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_dr_status_name@03",
+      "text_id": 986
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_dr_status_hp_idx@03",
+      "text_id": 990
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_dr_status_hp_num@03",
+      "text_id": 991
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_dr_status_lv_idx@03",
+      "text_id": 989
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_dr_status_lv_num@03",
+      "text_id": 992
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_dr_status_name@04",
+      "text_id": 986
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_dr_status_hp_idx@04",
+      "text_id": 990
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_dr_status_hp_num@04",
+      "text_id": 991
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_dr_status_lv_idx@04",
+      "text_id": 989
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_dr_status_lv_num@04",
+      "text_id": 992
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_dr_status_name@05",
+      "text_id": 986
+    },
+    {
+      "$id": 22,
+      "obj_name": "TXT_dr_status_hp_idx@05",
+      "text_id": 990
+    },
+    {
+      "$id": 23,
+      "obj_name": "TXT_dr_status_hp_num@05",
+      "text_id": 991
+    },
+    {
+      "$id": 24,
+      "obj_name": "TXT_dr_status_lv_idx@05",
+      "text_id": 989
+    },
+    {
+      "$id": 25,
+      "obj_name": "TXT_dr_status_lv_num@05",
+      "text_id": 992
+    },
+    {
+      "$id": 26,
+      "obj_name": "TXT_dr_status_name@06",
+      "text_id": 986
+    },
+    {
+      "$id": 27,
+      "obj_name": "TXT_dr_status_hp_idx@06",
+      "text_id": 990
+    },
+    {
+      "$id": 28,
+      "obj_name": "TXT_dr_status_hp_num@06",
+      "text_id": 991
+    },
+    {
+      "$id": 29,
+      "obj_name": "TXT_dr_status_lv_idx@06",
+      "text_id": 989
+    },
+    {
+      "$id": 30,
+      "obj_name": "TXT_dr_status_lv_num@06",
+      "text_id": 992
+    },
+    {
+      "$id": 31,
+      "obj_name": "TXT_dr_status_name@07",
+      "text_id": 986
+    },
+    {
+      "$id": 32,
+      "obj_name": "TXT_dr_status_hp_idx@07",
+      "text_id": 990
+    },
+    {
+      "$id": 33,
+      "obj_name": "TXT_dr_status_hp_num@07",
+      "text_id": 991
+    },
+    {
+      "$id": 34,
+      "obj_name": "TXT_dr_status_lv_idx@07",
+      "text_id": 989
+    },
+    {
+      "$id": 35,
+      "obj_name": "TXT_dr_status_lv_num@07",
+      "text_id": 992
+    },
+    {
+      "$id": 36,
+      "obj_name": "TXT_index",
+      "text_id": 908
+    },
+    {
+      "$id": 37,
+      "obj_name": "TXT_index_sub",
+      "text_id": 909
+    },
+    {
+      "$id": 38,
+      "obj_name": "TXT_dr_status_lv_num2@01",
+      "text_id": 1985
+    },
+    {
+      "$id": 39,
+      "obj_name": "TXT_dr_status_lv_num2@02",
+      "text_id": 1985
+    },
+    {
+      "$id": 40,
+      "obj_name": "TXT_dr_status_lv_num2@03",
+      "text_id": 1985
+    },
+    {
+      "$id": 41,
+      "obj_name": "TXT_dr_status_lv_num2@04",
+      "text_id": 1985
+    },
+    {
+      "$id": 42,
+      "obj_name": "TXT_dr_status_lv_num2@05",
+      "text_id": 1985
+    },
+    {
+      "$id": 43,
+      "obj_name": "TXT_guest_name@01",
+      "text_id": 1986
+    },
+    {
+      "$id": 44,
+      "obj_name": "TXT_guest_name@02",
+      "text_id": 1987
+    },
+    {
+      "$id": 45,
+      "obj_name": "TXT_dr_status_lv_num2_sw@01",
+      "text_id": 1985
+    },
+    {
+      "$id": 46,
+      "obj_name": "TXT_dr_status_lv_num2_sw@02",
+      "text_id": 1985
+    },
+    {
+      "$id": 47,
+      "obj_name": "TXT_dr_status_lv_num2_sw@03",
+      "text_id": 1985
+    },
+    {
+      "$id": 48,
+      "obj_name": "TXT_dr_status_lv_num2_sw@04",
+      "text_id": 1985
+    },
+    {
+      "$id": 49,
+      "obj_name": "TXT_dr_status_lv_num2_sw@05",
+      "text_id": 1985
+    },
+    {
+      "$id": 50,
+      "obj_name": "TXT_dr_status_lv_idx_sw@01",
+      "text_id": 989
+    },
+    {
+      "$id": 51,
+      "obj_name": "TXT_dr_status_lv_idx_sw@02",
+      "text_id": 989
+    },
+    {
+      "$id": 52,
+      "obj_name": "TXT_dr_status_lv_idx_sw@03",
+      "text_id": 989
+    },
+    {
+      "$id": 53,
+      "obj_name": "TXT_dr_status_lv_idx_sw@04",
+      "text_id": 989
+    },
+    {
+      "$id": 54,
+      "obj_name": "TXT_dr_status_lv_idx_sw@05",
+      "text_id": 989
+    },
+    {
+      "$id": 55,
+      "obj_name": "TXT_dr_status_name2@01",
+      "text_id": 1988
+    },
+    {
+      "$id": 56,
+      "obj_name": "TXT_dr_status_name2@02",
+      "text_id": 1988
+    },
+    {
+      "$id": 57,
+      "obj_name": "TXT_dr_status_name2@03",
+      "text_id": 1988
+    },
+    {
+      "$id": 58,
+      "obj_name": "TXT_dr_status_name2@04",
+      "text_id": 1988
+    },
+    {
+      "$id": 59,
+      "obj_name": "TXT_dr_status_name2@05",
+      "text_id": 1988
+    },
+    {
+      "$id": 60,
+      "obj_name": "TXT_dr_status_name2_sw@01",
+      "text_id": 1988
+    },
+    {
+      "$id": 61,
+      "obj_name": "TXT_dr_status_name2_sw@02",
+      "text_id": 1988
+    },
+    {
+      "$id": 62,
+      "obj_name": "TXT_dr_status_name2_sw@03",
+      "text_id": 1988
+    },
+    {
+      "$id": 63,
+      "obj_name": "TXT_dr_status_name2_sw@04",
+      "text_id": 1988
+    },
+    {
+      "$id": 64,
+      "obj_name": "TXT_dr_status_name2_sw@05",
+      "text_id": 1988
+    }
+  ]
+}

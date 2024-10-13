@@ -1,0 +1,24 @@
+{
+  "schema": [
+    {
+      "name": "name",
+      "type": 7
+    },
+    {
+      "name": "value",
+      "type": 5
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "name": "0：OFF",
+      "value": 0
+    },
+    {
+      "$id": 2,
+      "name": "1：ON",
+      "value": 1
+    }
+  ]
+}

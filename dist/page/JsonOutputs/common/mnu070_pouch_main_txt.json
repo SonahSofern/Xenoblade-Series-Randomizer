@@ -1,0 +1,664 @@
+{
+  "schema": [
+    {
+      "name": "obj_name",
+      "type": 7
+    },
+    {
+      "name": "text_id",
+      "type": 3
+    }
+  ],
+  "rows": [
+    {
+      "$id": 1,
+      "obj_name": "TXT_chr_fvitname01@01",
+      "text_id": 1411
+    },
+    {
+      "$id": 2,
+      "obj_name": "TXT_chr_fvitname02@01",
+      "text_id": 1412
+    },
+    {
+      "$id": 3,
+      "obj_name": "TXT_chr_fvitname01@02",
+      "text_id": 1411
+    },
+    {
+      "$id": 4,
+      "obj_name": "TXT_chr_fvitname02@02",
+      "text_id": 1412
+    },
+    {
+      "$id": 5,
+      "obj_name": "TXT_chr_fvitname01@03",
+      "text_id": 1411
+    },
+    {
+      "$id": 6,
+      "obj_name": "TXT_chr_fvitname02@03",
+      "text_id": 1412
+    },
+    {
+      "$id": 7,
+      "obj_name": "TXT_chr_fvitname01@04",
+      "text_id": 1411
+    },
+    {
+      "$id": 8,
+      "obj_name": "TXT_chr_fvitname02@04",
+      "text_id": 1412
+    },
+    {
+      "$id": 9,
+      "obj_name": "TXT_chr_fvitnameit@01",
+      "text_id": 1411
+    },
+    {
+      "$id": 10,
+      "obj_name": "TXT_chr_fvitnameit2@01",
+      "text_id": 1412
+    },
+    {
+      "$id": 11,
+      "obj_name": "TXT_chr_fvitnameit@02",
+      "text_id": 1411
+    },
+    {
+      "$id": 12,
+      "obj_name": "TXT_chr_fvitnameit2@02",
+      "text_id": 1412
+    },
+    {
+      "$id": 13,
+      "obj_name": "TXT_chr_fvitnameit@03",
+      "text_id": 1411
+    },
+    {
+      "$id": 14,
+      "obj_name": "TXT_chr_fvitnameit2@03",
+      "text_id": 1412
+    },
+    {
+      "$id": 15,
+      "obj_name": "TXT_chr_fvitnameit@04",
+      "text_id": 1411
+    },
+    {
+      "$id": 16,
+      "obj_name": "TXT_chr_fvitnameit2@04",
+      "text_id": 1412
+    },
+    {
+      "$id": 17,
+      "obj_name": "TXT_chr_fiid@01",
+      "text_id": 1409
+    },
+    {
+      "$id": 18,
+      "obj_name": "TXT_chr_fiidit@01",
+      "text_id": 1410
+    },
+    {
+      "$id": 19,
+      "obj_name": "TXT_chr_fiid@02",
+      "text_id": 1409
+    },
+    {
+      "$id": 20,
+      "obj_name": "TXT_chr_fiidit@02",
+      "text_id": 1410
+    },
+    {
+      "$id": 21,
+      "obj_name": "TXT_chr_fiid@03",
+      "text_id": 1409
+    },
+    {
+      "$id": 22,
+      "obj_name": "TXT_chr_fiidit@03",
+      "text_id": 1410
+    },
+    {
+      "$id": 23,
+      "obj_name": "TXT_chr_fiid@04",
+      "text_id": 1409
+    },
+    {
+      "$id": 24,
+      "obj_name": "TXT_chr_fiidit@04",
+      "text_id": 1410
+    },
+    {
+      "$id": 25,
+      "obj_name": "TXT_chr_opr01",
+      "text_id": 1413
+    },
+    {
+      "$id": 26,
+      "obj_name": "TXT_chr_opr02",
+      "text_id": 1414
+    },
+    {
+      "$id": 27,
+      "obj_name": "TXT_fvif_id@01",
+      "text_id": 1416
+    },
+    {
+      "$id": 28,
+      "obj_name": "TXT_itemname",
+      "text_id": 1426
+    },
+    {
+      "$id": 29,
+      "obj_name": "TXT_fvif_id@02",
+      "text_id": 1417
+    },
+    {
+      "$id": 30,
+      "obj_name": "TXT_fvif_dtext01",
+      "text_id": 1431
+    },
+    {
+      "$id": 31,
+      "obj_name": "TXT_fvif_dtext02",
+      "text_id": 1431
+    },
+    {
+      "$id": 32,
+      "obj_name": "TXT_fvif_dtext03",
+      "text_id": 1431
+    },
+    {
+      "$id": 33,
+      "obj_name": "TXT_fvif_id@03",
+      "text_id": 1418
+    },
+    {
+      "$id": 34,
+      "obj_name": "TXT_fvif_catg",
+      "text_id": 1428
+    },
+    {
+      "$id": 35,
+      "obj_name": "TXT_fvif_id@04",
+      "text_id": 1419
+    },
+    {
+      "$id": 36,
+      "obj_name": "TXT_fvif_area",
+      "text_id": 1429
+    },
+    {
+      "$id": 37,
+      "obj_name": "TXT_fvif_id@05",
+      "text_id": 1420
+    },
+    {
+      "$id": 38,
+      "obj_name": "TXT_fvif_price",
+      "text_id": 1430
+    },
+    {
+      "$id": 39,
+      "obj_name": "TXT_fvif_id@06",
+      "text_id": 1421
+    },
+    {
+      "$id": 40,
+      "obj_name": "TXT_fvif_efftype",
+      "text_id": 1431
+    },
+    {
+      "$id": 41,
+      "obj_name": "TXT_fvif_id@07",
+      "text_id": 1422
+    },
+    {
+      "$id": 42,
+      "obj_name": "TXT_fvif_efftime",
+      "text_id": 1432
+    },
+    {
+      "$id": 43,
+      "obj_name": "TXT_fvif_id@08",
+      "text_id": 1423
+    },
+    {
+      "$id": 44,
+      "obj_name": "TXT_fvif_maxnum",
+      "text_id": 1434
+    },
+    {
+      "$id": 45,
+      "obj_name": "TXT_fvif_slash",
+      "text_id": 1433
+    },
+    {
+      "$id": 46,
+      "obj_name": "TXT_fvif_stnum",
+      "text_id": 1434
+    },
+    {
+      "$id": 47,
+      "obj_name": "TXT_fvif_id@09",
+      "text_id": 1424
+    },
+    {
+      "$id": 48,
+      "obj_name": "TXT_fvif_bidecatg",
+      "text_id": 1435
+    },
+    {
+      "$id": 49,
+      "obj_name": "TXT_fvif_id@10",
+      "text_id": 1425
+    },
+    {
+      "$id": 50,
+      "obj_name": "TXT_fvif_bidepnt",
+      "text_id": 1436
+    },
+    {
+      "$id": 51,
+      "obj_name": "TXT_fvif_index",
+      "text_id": 1415
+    },
+    {
+      "$id": 52,
+      "obj_name": "TXT_eqpouch_index",
+      "text_id": 1437
+    },
+    {
+      "$id": 53,
+      "obj_name": "TXT_eqpouch_efftime@01",
+      "text_id": 1438
+    },
+    {
+      "$id": 54,
+      "obj_name": "TXT_eqpouch_efftime@02",
+      "text_id": 1438
+    },
+    {
+      "$id": 55,
+      "obj_name": "TXT_eqpouch_efftime@03",
+      "text_id": 1438
+    },
+    {
+      "$id": 56,
+      "obj_name": "TXT_eqpouch_fvcatg",
+      "text_id": 1439
+    },
+    {
+      "$id": 57,
+      "obj_name": "TXT_eqpouch_itname",
+      "text_id": 1440
+    },
+    {
+      "$id": 58,
+      "obj_name": "TXT_fvstock_index",
+      "text_id": 1441
+    },
+    {
+      "$id": 59,
+      "obj_name": "TXT_stf_fllabel",
+      "text_id": 1448
+    },
+    {
+      "$id": 60,
+      "obj_name": "TXT_stf_flindeex",
+      "text_id": 1447
+    },
+    {
+      "$id": 61,
+      "obj_name": "TXT_fvstock_itname@01",
+      "text_id": 1444
+    },
+    {
+      "$id": 62,
+      "obj_name": "TXT_fvstock_stck@01",
+      "text_id": 1445
+    },
+    {
+      "$id": 63,
+      "obj_name": "TXT_fvstock_stcknum@01",
+      "text_id": 1446
+    },
+    {
+      "$id": 64,
+      "obj_name": "TXT_fvstock_itname@02",
+      "text_id": 1444
+    },
+    {
+      "$id": 65,
+      "obj_name": "TXT_fvstock_stck@02",
+      "text_id": 1445
+    },
+    {
+      "$id": 66,
+      "obj_name": "TXT_fvstock_stcknum@02",
+      "text_id": 1446
+    },
+    {
+      "$id": 67,
+      "obj_name": "TXT_fvstock_itname@03",
+      "text_id": 1444
+    },
+    {
+      "$id": 68,
+      "obj_name": "TXT_fvstock_stck@03",
+      "text_id": 1445
+    },
+    {
+      "$id": 69,
+      "obj_name": "TXT_fvstock_stcknum@03",
+      "text_id": 1446
+    },
+    {
+      "$id": 70,
+      "obj_name": "TXT_fvstock_itname@04",
+      "text_id": 1444
+    },
+    {
+      "$id": 71,
+      "obj_name": "TXT_fvstock_stck@04",
+      "text_id": 1445
+    },
+    {
+      "$id": 72,
+      "obj_name": "TXT_fvstock_stcknum@04",
+      "text_id": 1446
+    },
+    {
+      "$id": 73,
+      "obj_name": "TXT_fvstock_itname@05",
+      "text_id": 1444
+    },
+    {
+      "$id": 74,
+      "obj_name": "TXT_fvstock_stck@05",
+      "text_id": 1445
+    },
+    {
+      "$id": 75,
+      "obj_name": "TXT_fvstock_stcknum@05",
+      "text_id": 1446
+    },
+    {
+      "$id": 76,
+      "obj_name": "TXT_fvstock_itname@06",
+      "text_id": 1444
+    },
+    {
+      "$id": 77,
+      "obj_name": "TXT_fvstock_stck@06",
+      "text_id": 1445
+    },
+    {
+      "$id": 78,
+      "obj_name": "TXT_fvstock_stcknum@06",
+      "text_id": 1446
+    },
+    {
+      "$id": 79,
+      "obj_name": "TXT_fvstock_itname@07",
+      "text_id": 1444
+    },
+    {
+      "$id": 80,
+      "obj_name": "TXT_fvstock_stck@07",
+      "text_id": 1445
+    },
+    {
+      "$id": 81,
+      "obj_name": "TXT_fvstock_stcknum@07",
+      "text_id": 1446
+    },
+    {
+      "$id": 82,
+      "obj_name": "TXT_fvstock_itname@08",
+      "text_id": 1444
+    },
+    {
+      "$id": 83,
+      "obj_name": "TXT_fvstock_stck@08",
+      "text_id": 1445
+    },
+    {
+      "$id": 84,
+      "obj_name": "TXT_fvstock_stcknum@08",
+      "text_id": 1446
+    },
+    {
+      "$id": 85,
+      "obj_name": "TXT_fvstock_itname@09",
+      "text_id": 1444
+    },
+    {
+      "$id": 86,
+      "obj_name": "TXT_fvstock_stck@09",
+      "text_id": 1445
+    },
+    {
+      "$id": 87,
+      "obj_name": "TXT_fvstock_stcknum@09",
+      "text_id": 1446
+    },
+    {
+      "$id": 88,
+      "obj_name": "TXT_fvstock_itname@10",
+      "text_id": 1444
+    },
+    {
+      "$id": 89,
+      "obj_name": "TXT_fvstock_stck@10",
+      "text_id": 1445
+    },
+    {
+      "$id": 90,
+      "obj_name": "TXT_fvstock_stcknum@10",
+      "text_id": 1446
+    },
+    {
+      "$id": 91,
+      "obj_name": "TXT_item_info",
+      "text_id": 1637
+    },
+    {
+      "$id": 92,
+      "obj_name": "TXT_fvstock_info_index",
+      "text_id": 1640
+    },
+    {
+      "$id": 93,
+      "obj_name": "TXT_fvstock_info_eff@01",
+      "text_id": 1431
+    },
+    {
+      "$id": 94,
+      "obj_name": "TXT_fvstock_info_eff@02",
+      "text_id": 1431
+    },
+    {
+      "$id": 95,
+      "obj_name": "TXT_fvstock_info_eff@03",
+      "text_id": 1431
+    },
+    {
+      "$id": 96,
+      "obj_name": "TXT_fvstock_info_time_index",
+      "text_id": 1641
+    },
+    {
+      "$id": 97,
+      "obj_name": "TXT_fvstock_info_time_num",
+      "text_id": 1734
+    },
+    {
+      "$id": 98,
+      "obj_name": "TXT_res_index",
+      "text_id": 1638
+    },
+    {
+      "$id": 99,
+      "obj_name": "TXT_res_item_name@01",
+      "text_id": 1426
+    },
+    {
+      "$id": 100,
+      "obj_name": "TXT_res_time@01",
+      "text_id": 1432
+    },
+    {
+      "$id": 101,
+      "obj_name": "TXT_res_eff1@01",
+      "text_id": 1431
+    },
+    {
+      "$id": 102,
+      "obj_name": "TXT_res_eff2@01",
+      "text_id": 1431
+    },
+    {
+      "$id": 103,
+      "obj_name": "TXT_res_eff3@01",
+      "text_id": 1431
+    },
+    {
+      "$id": 104,
+      "obj_name": "TXT_res_item_name@02",
+      "text_id": 1426
+    },
+    {
+      "$id": 105,
+      "obj_name": "TXT_res_time@02",
+      "text_id": 1432
+    },
+    {
+      "$id": 106,
+      "obj_name": "TXT_res_eff1@02",
+      "text_id": 1431
+    },
+    {
+      "$id": 107,
+      "obj_name": "TXT_res_eff2@02",
+      "text_id": 1431
+    },
+    {
+      "$id": 108,
+      "obj_name": "TXT_res_eff3@02",
+      "text_id": 1431
+    },
+    {
+      "$id": 109,
+      "obj_name": "TXT_res_item_name@03",
+      "text_id": 1426
+    },
+    {
+      "$id": 110,
+      "obj_name": "TXT_res_time@03",
+      "text_id": 1432
+    },
+    {
+      "$id": 111,
+      "obj_name": "TXT_res_eff1@03",
+      "text_id": 1431
+    },
+    {
+      "$id": 112,
+      "obj_name": "TXT_res_eff2@03",
+      "text_id": 1431
+    },
+    {
+      "$id": 113,
+      "obj_name": "TXT_res_eff3@03",
+      "text_id": 1431
+    },
+    {
+      "$id": 114,
+      "obj_name": "TXT_eqpouch_name@01",
+      "text_id": 1639
+    },
+    {
+      "$id": 115,
+      "obj_name": "TXT_eqpouch_name@02",
+      "text_id": 1639
+    },
+    {
+      "$id": 116,
+      "obj_name": "TXT_eqpouch_name@03",
+      "text_id": 1639
+    },
+    {
+      "$id": 117,
+      "obj_name": "TXT_head_item",
+      "text_id": 1717
+    },
+    {
+      "$id": 118,
+      "obj_name": "TXT_head_reality",
+      "text_id": 1718
+    },
+    {
+      "$id": 119,
+      "obj_name": "TXT_head_stock",
+      "text_id": 1719
+    },
+    {
+      "$id": 120,
+      "obj_name": "TXT_res_empty@01",
+      "text_id": 1720
+    },
+    {
+      "$id": 121,
+      "obj_name": "TXT_res_empty@02",
+      "text_id": 1720
+    },
+    {
+      "$id": 122,
+      "obj_name": "TXT_res_empty@03",
+      "text_id": 1720
+    },
+    {
+      "$id": 123,
+      "obj_name": "TXT_eqpouch_no@01",
+      "text_id": 1738
+    },
+    {
+      "$id": 124,
+      "obj_name": "TXT_eqpouch_no@02",
+      "text_id": 1739
+    },
+    {
+      "$id": 125,
+      "obj_name": "TXT_eqpouch_no@03",
+      "text_id": 1740
+    },
+    {
+      "$id": 126,
+      "obj_name": "TXT_res_pouch_no@01",
+      "text_id": 1738
+    },
+    {
+      "$id": 127,
+      "obj_name": "TXT_res_pouch_no@02",
+      "text_id": 1739
+    },
+    {
+      "$id": 128,
+      "obj_name": "TXT_res_pouch_no@03",
+      "text_id": 1740
+    },
+    {
+      "$id": 129,
+      "obj_name": "TXT_item_sort_index",
+      "text_id": 1635
+    },
+    {
+      "$id": 130,
+      "obj_name": "TXT_item_sort_label",
+      "text_id": 1636
+    }
+  ]
+}
