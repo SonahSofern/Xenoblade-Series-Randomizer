@@ -37,6 +37,8 @@ MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10)
 # root.iconphoto(True, icon)
 
 filepath = ""
+JsonOutput = "JsonOutputs"
+cmnBdatOutput = "RANDOMIZEDVERSION"
 
 def UploadBDAT():
     global filepath
@@ -47,7 +49,9 @@ def UploadBDAT():
 def Randomize():
     random.seed(randoSeedEntry.get())
     print("seed: " + randoSeedEntry.get())
-    subprocess.run(f"./bdat-toolset-win64.exe extract {filepath} -o OutputJsons -f json --pretty")
+    subprocess.run(f"./bdat-toolset-win64.exe extract {filepath} -o {JsonOutput} -f json --pretty")
+    # Randomize JSONS HERE
+    subprocess.run(f"./bdat-toolset-win64.exe pack {JsonOutput} -o {cmnBdatOutput} -f json")
 
 def GenRandomSeed():
     print("Gen Random Seed")
