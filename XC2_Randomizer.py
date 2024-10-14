@@ -41,23 +41,20 @@ def GenOption(name, parentTab, desc, row):
     optionDesc.grid(row=row, column=2, sticky="sw")
     return optionSlider
 
-BladeSpecialReactionSlider = GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", 0)
-# BladeSpecialLevelSlider = GenOption("Blade Special Levels", TabBlades, "Randomizes blades special levels 1-3", 1)
-BladeSpecialDamageType = GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", 2)
-BladeSpecialButtonChallenge = GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button challenge a special uses", 3)
+
 
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
 
-filepath = ""
+CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
 cmnBdatOutput = "RandomizedBDATOutput"
 
 def BDATDirectory():
-    global filepath
-    filepath = filedialog.askopenfilename(filetypes=[("BDAT file", "*.bdat")])
+    global CommonBdatInput
+    CommonBdatInput = filedialog.askopenfilename(filetypes=[("BDAT file", "*.bdat")])
     bdatFilePathEntry.delete(0, tk.END)
-    bdatFilePathEntry.insert(0, filepath)
+    bdatFilePathEntry.insert(0, CommonBdatInput)
 
 def OutputDirectory():
     global cmnBdatOutput
@@ -66,14 +63,23 @@ def OutputDirectory():
     outDirEntry.insert(0, cmnBdatOutput)
 
 
+BladeSpecialReactionSlider = GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", 0)
+# BladeSpecialLevelSlider = GenOption("Blade Special Levels", TabBlades, "Randomizes blades special levels 1-3", 1)
+BladeSpecialDamageTypeSlider = GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", 2)
+BladeSpecialButtonChallengeSlider = GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button a special uses for its button challenge", 3)
+PouchItemShopSlider = GenOption("Randomize Pouch Item Shops", TabGeneral, "Randomizes what items appear in pouch item shops", 4)
+
 def Main():
     random.seed(randoSeedEntry.get())
     print("seed: " + randoSeedEntry.get())
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()} -o {JsonOutput} -f json --pretty")
 
-    JSONParser.RandomizeBetweenRange("Randomizing Blade Reactions", "./_internal/JsonOutputs/common/BTL_Arts_Bl.json", "ReAct", 0, 14, BladeSpecialReactionSlider.get(), [43,44])
-    JSONParser.RandomizeBetweenRange("Randomizing Blade Special Damage Type", "./_internal/JsonOutputs/common/BTL_Arts_Bl.json", "ArtsType", 1, 2, BladeSpecialDamageType.get(), [5])
-    JSONParser.RandomizeBetweenRange("Randomizing Blade Special Button Challenges", "./_internal/JsonOutputs/common/MNU_BtnChallenge2.json", "BtnType", 1, 5, BladeSpecialButtonChallenge.get(), [0])
+    JSONParser.RandomizeBetweenRange("Randomizing Blade Reactions", "BTL_Arts_Bl.json", "ReAct", 0, 14, BladeSpecialReactionSlider.get(), list(range(0,15)))
+    JSONParser.RandomizeBetweenRange("Randomizing Blade Special Damage Type", "BTL_Arts_Bl.json", "ArtsType", 1, 2, BladeSpecialDamageTypeSlider.get(), [1,2])
+    JSONParser.RandomizeBetweenRange("Randomizing Blade Special Button Challenges", "MNU_BtnChallenge2.json", "BtnType", 1, 5, BladeSpecialButtonChallengeSlider.get(), list(range(1,6)))
+    JSONParser.RandomizeBetweenRange("Randomizing Pouch Items Shops", "MNU_ShopNormal.json", "DefItem", 40001, 40428, PouchItemShopSlider.get(), list(range(40001,40429)), [40106, 40107, 40280, 40282, 40284, 40285, 40300, 40387] + list(range(40350, 40364)) + list(range(40389, 40403)))
+
+
 
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
@@ -92,6 +98,7 @@ bdatButton = tk.Button(bdatcommonFrame, text="Choose Input (commmon.bdat)", comm
 bdatButton.pack(side="left", padx=2, pady=2)
 
 bdatFilePathEntry = tk.Entry(bdatcommonFrame, width=500)
+bdatFilePathEntry.insert(0, "C:/Users/benja/Desktop/XC2_Randomizer/OriginalBDAT/common.bdat")
 bdatFilePathEntry.pack(side="left", padx=2)
 
 
@@ -102,6 +109,7 @@ outputDirButton = tk.Button(OutputDirectoryFrame, text='Choose Output Directory'
 outputDirButton.pack(side="left", padx=2, pady=2)
 
 outDirEntry = tk.Entry(OutputDirectoryFrame, width=500)
+outDirEntry.insert(0,"C:/Users/benja/AppData/Roaming/yuzu/load/0100E95004039001/0100E95004039001/romfs/bdat")
 outDirEntry.pack(side="left", padx=2)
 
 
