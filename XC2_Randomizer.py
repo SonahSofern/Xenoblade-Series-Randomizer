@@ -32,13 +32,16 @@ MainWindow.add(TabMisc, text ='Misc')
 MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10) 
 
 
-def GenOption(name, parentTab, desc, row):
+rowIncrement = 0
+def GenOption(name, parentTab, desc):
+    global rowIncrement
     option = tk.Label(parentTab, text=name)
-    option.grid(row=row, column=0, sticky="sw")
+    option.grid(row=rowIncrement, column=0, sticky="sw")
     optionSlider = tk.Scale(parentTab, from_=0, to=100, orient=tk.HORIZONTAL, sliderlength=10)
-    optionSlider.grid(row=row, column=1)
+    optionSlider.grid(row=rowIncrement, column=1)
     optionDesc = tk.Label(parentTab, text=desc)
-    optionDesc.grid(row=row, column=2, sticky="sw")
+    optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
+    rowIncrement += 1
     return optionSlider
 
 
@@ -49,6 +52,9 @@ root.iconphoto(True, icon)
 CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
 cmnBdatOutput = "RandomizedBDATOutput"
+
+def inclRange(start, end):
+     return range(start, end+1)
 
 def BDATDirectory():
     global CommonBdatInput
@@ -63,23 +69,25 @@ def OutputDirectory():
     outDirEntry.insert(0, cmnBdatOutput)
 
 
-BladeSpecialReactionSlider = GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", 0)
+BladeSpecialReactionSlider = GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.")
 # BladeSpecialLevelSlider = GenOption("Blade Special Levels", TabBlades, "Randomizes blades special levels 1-3", 1)
-BladeSpecialDamageTypeSlider = GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", 2)
-BladeSpecialButtonChallengeSlider = GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button a special uses for its button challenge", 3)
-PouchItemShopSlider = GenOption("Randomize Pouch Item Shops", TabGeneral, "Randomizes what items appear in pouch item shops", 4)
+BladeSpecialDamageTypeSlider = GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage")
+BladeSpecialButtonChallengeSlider = GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button a special uses for its button challenge")
+PouchItemShopSlider = GenOption("Randomize Pouch Item Shops", TabGeneral, "Randomizes what items appear in Pouch Item shops")
+EquipmentShopSlider = GenOption("Randomize Equipment Shops", TabGeneral, "Randomizes what items appear in Equipment Shops")
+ChipShopSlider = GenOption("Randomize Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Chip Shops")
 
 def Main():
     random.seed(randoSeedEntry.get())
     print("seed: " + randoSeedEntry.get())
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()} -o {JsonOutput} -f json --pretty")
 
-    JSONParser.RandomizeBetweenRange("Randomizing Blade Reactions", "BTL_Arts_Bl.json", "ReAct", 0, 14, BladeSpecialReactionSlider.get(), list(range(0,15)))
+    JSONParser.RandomizeBetweenRange("Randomizing Blade Reactions", "BTL_Arts_Bl.json", "ReAct", 0, 14, BladeSpecialReactionSlider.get(), list(inclRange(0,14)))
     JSONParser.RandomizeBetweenRange("Randomizing Blade Special Damage Type", "BTL_Arts_Bl.json", "ArtsType", 1, 2, BladeSpecialDamageTypeSlider.get(), [1,2])
-    JSONParser.RandomizeBetweenRange("Randomizing Blade Special Button Challenges", "MNU_BtnChallenge2.json", "BtnType", 1, 5, BladeSpecialButtonChallengeSlider.get(), list(range(1,6)))
-    JSONParser.RandomizeBetweenRange("Randomizing Pouch Items Shops", "MNU_ShopNormal.json", "DefItem", 40001, 40428, PouchItemShopSlider.get(), list(range(40001,40429)), [40106, 40107, 40280, 40282, 40284, 40285, 40300, 40387] + list(range(40350, 40364)) + list(range(40389, 40403)))
-
-
+    JSONParser.RandomizeBetweenRange("Randomizing Blade Special Button Challenges", "MNU_BtnChallenge2.json", "BtnType", 1, 5, BladeSpecialButtonChallengeSlider.get(), list(inclRange(1,5)))
+    JSONParser.RandomizeBetweenRange("Randomizing Pouch Items Shops", "MNU_ShopNormal.json", "DefItem", 40001, 40428, PouchItemShopSlider.get(), list(inclRange(40001,40428)), [40106, 40107, 40280, 40282, 40284, 40285, 40300, 40387] + list(inclRange(40350, 40363)) + list(inclRange(40389, 40402)))
+    JSONParser.RandomizeBetweenRange("Randomizing Equipment Shops", "MNU_ShopNormal.json", "DefItem",1,687, EquipmentShopSlider.get(),  list(inclRange(1,687)), list(inclRange(448,455)))
+    JSONParser.RandomizeBetweenRange("Randomizing Chip Shops", "MNU_ShopNormal.json", "DefItem", 10001, 10060, ChipShopSlider.get(), list(inclRange(10001, 10060)))
 
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 

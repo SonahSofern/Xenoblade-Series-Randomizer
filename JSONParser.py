@@ -13,7 +13,7 @@ def RandomizeBetweenRange(cmdDescription, Filename, keyWord, lowRange, highRange
                     if ((random.randint(0,100) <= odds) and ((row[key] in targetList))):
                         potentialVal = random.randint(lowRange,highRange)
                         while (potentialVal in invalidIndex):
-                            #print("Rolled Bad Value")
+                            print("Rolled Bad Value")
                             potentialVal = random.randint(lowRange,highRange)
                         row[key] = potentialVal
         file.seek(0)
