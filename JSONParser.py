@@ -1,7 +1,7 @@
 import json
 import random
 
-def Randomize(cmdDescription, filePath, keyWord, lowRange, highRange, odds, ignoreList = []): # make this a function to reuse, check the settings ot see if we even do this
+def RandomizeBetweenRange(cmdDescription, filePath, keyWord, lowRange, highRange, odds, ignoreList = []): # make this a function to reuse, check the settings ot see if we even do this
     if (odds == 0):
         return
     print(cmdDescription)   

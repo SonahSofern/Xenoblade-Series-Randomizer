@@ -7,3 +7,6 @@ turns your common.bdat into json
 changes/randomizes values of the json based on sliders values
 change back to bdat
 automatically downloads it when done
+
+C:/Users/benja/Desktop/XC2_Randomizer/OriginalBDAT/common.bdat
+C:/Users/benja/AppData/Roaming/yuzu/load/0100E95004039001/0100E95004039001/romfs/bdat

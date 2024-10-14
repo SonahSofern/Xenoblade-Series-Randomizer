@@ -39,11 +39,12 @@ def GenOption(name, parentTab, desc, row):
     optionSlider.grid(row=row, column=1)
     optionDesc = tk.Label(parentTab, text=desc)
     optionDesc.grid(row=row, column=2, sticky="sw")
-    return optionSlider.get()
+    return optionSlider
 
 BladeSpecialReactionSlider = GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", 0)
-BladeSpecialLevelSlider = GenOption("Blade Special Levels", TabBlades, "Randomizes blades special levels 1-3", 1)
-
+# BladeSpecialLevelSlider = GenOption("Blade Special Levels", TabBlades, "Randomizes blades special levels 1-3", 1)
+BladeSpecialDamageType = GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", 2)
+BladeSpecialButtonChallenge = GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button challenge a special uses", 3)
 
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
@@ -68,11 +69,13 @@ def OutputDirectory():
 def Main():
     random.seed(randoSeedEntry.get())
     print("seed: " + randoSeedEntry.get())
-    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {filepath} -o {JsonOutput} -f json --pretty")
+    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()} -o {JsonOutput} -f json --pretty")
 
-    JSONParser.Randomize("Randomizing Blade Reactions", "./_internal/JsonOutputs/common/BTL_Arts_Bl.json", "ReAct", 0, 14, BladeSpecialReactionSlider, [43,44])
+    JSONParser.RandomizeBetweenRange("Randomizing Blade Reactions", "./_internal/JsonOutputs/common/BTL_Arts_Bl.json", "ReAct", 0, 14, BladeSpecialReactionSlider.get(), [43,44])
+    JSONParser.RandomizeBetweenRange("Randomizing Blade Special Damage Type", "./_internal/JsonOutputs/common/BTL_Arts_Bl.json", "ArtsType", 1, 2, BladeSpecialDamageType.get(), [5])
+    JSONParser.RandomizeBetweenRange("Randomizing Blade Special Button Challenges", "./_internal/JsonOutputs/common/MNU_BtnChallenge2.json", "BtnType", 1, 5, BladeSpecialButtonChallenge.get(), [0])
 
-    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {cmnBdatOutput} -f json")
+    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
 def GenRandomSeed():
     print("Gen Random Seed")
