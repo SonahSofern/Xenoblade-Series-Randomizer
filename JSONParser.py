@@ -1,7 +1,7 @@
 import json
 import random
 
-def RandomizeBetweenRange(cmdDescription, Filename, keyWord, lowRange, highRange, odds, targetList, invalidIndex = []): # make this a function to reuse, check the settings ot see if we even do this
+def RandomizeBetweenRange(cmdDescription, Filename, keyWord, rangeValuesToReplace, odds, rangeValidReplacements): # make this a function to reuse, check the settings ot see if we even do this
     if (odds == 0):
         return
     print(cmdDescription)   
@@ -10,11 +10,11 @@ def RandomizeBetweenRange(cmdDescription, Filename, keyWord, lowRange, highRange
         for row in data['rows']:
             for key, value in row.items():
                 if key.startswith(keyWord):
-                    if ((random.randint(0,100) <= odds) and ((row[key] in targetList))):
-                        potentialVal = random.randint(lowRange,highRange)
-                        while (potentialVal in invalidIndex):
+                    if ((random.randint(0,100) <= odds) and ((row[key] in rangeValidReplacements))):
+                        potentialVal = random.randint(rangeValuesToReplace[0],rangeValuesToReplace[1])
+                        while not(potentialVal in rangeValidReplacements):
                             print("Rolled Bad Value")
-                            potentialVal = random.randint(lowRange,highRange)
+                            potentialVal = random.randint(rangeValuesToReplace[0],rangeValuesToReplace[1])
                         row[key] = potentialVal
         file.seek(0)
         file.truncate()

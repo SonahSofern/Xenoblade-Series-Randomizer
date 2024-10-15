@@ -57,19 +57,17 @@ def OutputDirectory():
     outDirEntry.delete(0, tk.END)
     outDirEntry.insert(0, cmnBdatOutput)
 
-def OptionCarveouts( badValuesList = list, badIndexValue = int, stateOfButton = int):
-    if stateOfButton == 1:
-        badValuesList.append(badIndexValue)
+def OptionCarveouts( ToggleableBadValuesList = list, badIndexValue = int, stateOfButton = int):
+    if stateOfButton == 0:
+        ToggleableBadValuesList.append(badIndexValue)
     else:
-        badValuesList.remove(badIndexValue)
-    print(badValuesList)
+        ToggleableBadValuesList.remove(badIndexValue)
+    print(ToggleableBadValuesList)
     
-
-DriverArtDebuffsBadValues = []
 OptionsRunList = []
 
 rowIncrement = 0
-def GenOption(optionName, parentTab, desc, randomize_parameters=[], amountOfCheckBoxes = [], BadValuesList = [], ToggleableIndicesIntList=[],):
+def GenOption(optionName, parentTab, desc, randomize_parameters=[], ForcedBadValuesList = [],  OptionNameANDIndexValue = []):
     global rowIncrement
     global OptionsRunList
     parentTab.bind("<FocusIn>", lambda e: parentTab.state(["!focus"])) # removes highlights of inner tabs
@@ -88,23 +86,24 @@ def GenOption(optionName, parentTab, desc, randomize_parameters=[], amountOfChec
     optionSlider.grid(row=rowIncrement, column=1, sticky='n')
     optionDesc = tk.Label(optionPanel, text=desc, background=desColor, width=900, anchor='w')
     optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
-    for i in range(len(amountOfCheckBoxes)):
+    for i in range((len(OptionNameANDIndexValue))//2):
+        print("thisn runnn")
         var = tk.IntVar()
         var.set(0)
-        box = tk.Checkbutton(optionPanel, background=desColor, text=amountOfCheckBoxes[i], variable=var, command=lambda i=i: OptionCarveouts(BadValuesList, ToggleableIndicesIntList, var.get()))
+        box = tk.Checkbutton(optionPanel, background=desColor, text=OptionNameANDIndexValue[2*i], variable=var, command=lambda i=i: OptionCarveouts(randomize_parameters[3], OptionNameANDIndexValue[i+1], var.get()))
         box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
     rowIncrement += 1
     if (optionSlider.get() == 0):
         return
-    OptionsRunList.append(lambda: JSONParser.RandomizeBetweenRange("Randomizing " + optionName, randomize_parameters[0], randomize_parameters[1], randomize_parameters[2], randomize_parameters[3], optionSlider.get(), randomize_parameters[4], randomize_parameters[5]))
+    OptionsRunList.append(lambda: JSONParser.RandomizeBetweenRange("Randomizing " + optionName, randomize_parameters[0], randomize_parameters[1], randomize_parameters[2], optionSlider.get(), randomize_parameters[3].remove(ForcedBadValuesList)))
 
-GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", ["BTL_Arts_Bl.json", "ReAct", 0, 14, inclRange(0,14), []])
-GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", ["BTL_Arts_Bl.json", "ArtsType", 1, 2, [1,2], []])
-GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button a special uses for its button challenge", ["MNU_BtnChallenge2.json", "BtnType", 1, 5, inclRange(1,5), []])
-GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", ["MNU_ShopNormal.json", "DefItem", 40001, 40428, inclRange(40001,40428), [40106, 40107, 40280, 40282, 40284, 40285, 40300, 40387] + inclRange(40350, 40363) + inclRange(40389, 40402)])
-GenOption("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", ["MNU_ShopNormal.json", "DefItem",1,687,  inclRange(1,687), inclRange(448,455), []])
-GenOption("Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Chip Shops", ["MNU_ShopNormal.json", "DefItem", 10001, 10060, inclRange(10001, 10060), []])
-GenOption("Randomize Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", ["BTL_Arts_Dr.json", "ArtsDeBuff", 1, 35, inclRange(0,35), DriverArtDebuffsBadValues], ["Doom", 21], DriverArtDebuffsBadValues)
+GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", ["BTL_Arts_Bl.json", "ReAct", [0, 14], inclRange(0,14)])
+GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", ["BTL_Arts_Bl.json", "ArtsType", [1, 2], [1,2]])
+GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button a special uses for its button challenge", ["MNU_BtnChallenge2.json", "BtnType", [1, 5], inclRange(1,5)])
+GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", ["MNU_ShopNormal.json", "DefItem", [40001, 40428], inclRange(40001,40428)], [40106, 40107, 40280, 40282, 40284, 40285, 40300, 40387] + inclRange(40350, 40363) + inclRange(40389, 40402))
+GenOption("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", ["MNU_ShopNormal.json", "DefItem",[1,687],  inclRange(1,687), inclRange(448,455)])
+GenOption("Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Chip Shops", ["MNU_ShopNormal.json", "DefItem", [10001, 10060], inclRange(10001, 10060)])
+GenOption("Randomize Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", ["BTL_Arts_Dr.json", "ArtsDeBuff", [1, 35], inclRange(0,35)],[], ["Doom", 21] )
 
 
 def Main():
