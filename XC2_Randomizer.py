@@ -33,7 +33,7 @@ MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10)
 
 
 rowIncrement = 0
-def GenOption(name, parentTab, desc, amountOfCheckBoxes = []):
+def GenOption(name, parentTab, desc, amountOfCheckBoxes = [], BadValuesList = [], ToggleableIndicesIntList=[]):
     global rowIncrement
     parentTab.bind("<FocusIn>", lambda e: parentTab.state(["!focus"])) # removes highlights of inner tabs
     optionPanel = tk.Frame(parentTab, padx=10, pady=10)
@@ -54,7 +54,7 @@ def GenOption(name, parentTab, desc, amountOfCheckBoxes = []):
     for i in range(len(amountOfCheckBoxes)):
         var = tk.IntVar()
         var.set(0)
-        box = tk.Checkbutton(optionPanel, background=desColor, text=amountOfCheckBoxes[i], variable=var, command=lambda i=i: OptionCarveouts(DriverArtDebuffsBadValues, 21, var.get()))
+        box = tk.Checkbutton(optionPanel, background=desColor, text=amountOfCheckBoxes[i], variable=var, command=lambda i=i: OptionCarveouts(BadValuesList, ToggleableIndicesIntList, var.get()))
         box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
     rowIncrement += 1
     return optionSlider
@@ -99,7 +99,7 @@ BladeSpecialButtonChallengeSlider = GenOption("Blade Special Button Challenges",
 PouchItemShopSlider = GenOption("Randomize Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops")
 AccessoryShopSlider = GenOption("Randomize Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops")
 ChipShopSlider = GenOption("Randomize Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Chip Shops")
-DriverArtEffectSlider = GenOption("Randomize Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", ["Doom"])
+DriverArtEffectSlider = GenOption("Randomize Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", ["Doom"], DriverArtDebuffsBadValues)
 
 def Main():
     random.seed(randoSeedEntry.get())
