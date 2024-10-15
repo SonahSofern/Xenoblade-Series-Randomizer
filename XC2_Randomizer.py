@@ -96,15 +96,20 @@ def GenOption(optionName, parentTab, desc, randomize_parameters=[], ForcedBadVal
     rowIncrement += 1
     OptionsRunList.append(lambda: JSONParser.RandomizeBetweenRange("Randomizing " + optionName, randomize_parameters[0], randomize_parameters[1], randomize_parameters[2], optionSlider.get(),randomize_parameters[3] if ForcedBadValuesList not in randomize_parameters[3] else randomize_parameters[3].remove(ForcedBadValuesList)))
 
-GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", ["BTL_Arts_Bl.json", "ReAct", inclRange(0,14), inclRange(0,14)])
-GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", ["BTL_Arts_Bl.json", "ArtsType", [1, 2], [1,2]])
-GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button a special uses for its button challenge", ["MNU_BtnChallenge2.json", "BtnType", inclRange(1,5), inclRange(1,5)])
 GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", ["MNU_ShopNormal.json", "DefItem", inclRange(40001,40428), inclRange(40001,40428)], [40106, 40107, 40280, 40282, 40284, 40285, 40300, 40387] + inclRange(40350, 40363) + inclRange(40389, 40402))
 GenOption("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", ["MNU_ShopNormal.json", "DefItem",inclRange(1,687),  inclRange(1,687) + inclRange(448,455)])
 GenOption("Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Chip Shops", ["MNU_ShopNormal.json", "DefItem", inclRange(10001, 10060), inclRange(10001, 10060)])
+
 GenOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", ["BTL_Arts_Dr.json", "ArtsDeBuff", inclRange(0,35), inclRange(0,35)],[], ["Doom", 21] )
-GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", ["BTL_EnDropItem.json", "ItemID", inclRange(15001, 15406) + inclRange(1, 687) + inclRange(10001, 10060), inclRange(15001, 15406) + inclRange(1, 687) + inclRange(10001, 10060)])
 GenOption("Driver Art Distance", TabDrivers, "Randomizes how far away you can cast an art", ["BTL_Arts_Dr.json", "Distance", inclRange(0, 20), inclRange(1,20)])
+
+GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", ["BTL_Arts_Bl.json", "ReAct", inclRange(0,14), inclRange(0,14)])
+GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", ["BTL_Arts_Bl.json", "ArtsType", [1, 2], [1,2]])
+GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button a special uses for its button challenge", ["MNU_BtnChallenge2.json", "BtnType", inclRange(1,5), inclRange(1,5)])
+
+GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", ["BTL_EnDropItem.json", "ItemID", inclRange(15001, 15406) + inclRange(1, 687) + inclRange(10001, 10060), inclRange(15001, 15406) + inclRange(1, 687) + inclRange(10001, 10060)])
+GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", ["CHR_EnArrange.json", "Scale", inclRange(0, 1000), inclRange(1, 1000)])
+GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", ["CHR_EnArrange.json", "ParamID", inclRange(1,1888), inclRange(1,1888)])
 
 
 def Main():
