@@ -45,11 +45,10 @@ cmnBdatOutput = "RandomizedBDATOutput"
 def inclRange(start, end):
      return list(range(start, end+1))
 
-def BDATDirectory():
-    global CommonBdatInput
-    CommonBdatInput = filedialog.askopenfilename(filetypes=[("BDAT file", "*.bdat")])
-    bdatFilePathEntry.delete(0, tk.END)
-    bdatFilePathEntry.insert(0, CommonBdatInput)
+def DirectoryChoice(FileTypesName, FileTypeEndCode, EntryField):
+    InputOrOutput = filedialog.askopenfilename(filetypes=[(FileTypesName, FileTypeEndCode)])
+    EntryField.delete(0, tk.END)
+    EntryField.insert(0, InputOrOutput)
 
 def OutputDirectory():
     global cmnBdatOutput
@@ -114,14 +113,6 @@ def Main():
     for Option in OptionsRunList:
         Option()
 
-    # JSONParser.RandomizeBetweenRange("Randomizing Blade Reactions", "BTL_Arts_Bl.json", "ReAct", 0, 14, BladeSpecialReactionSlider.get(), inclRange(0,14))
-    # JSONParser.RandomizeBetweenRange("Randomizing Blade Special Damage Type", "BTL_Arts_Bl.json", "ArtsType", 1, 2, BladeSpecialDamageTypeSlider.get(), [1,2])
-    # JSONParser.RandomizeBetweenRange("Randomizing Blade Special Button Challenges", "MNU_BtnChallenge2.json", "BtnType", 1, 5, BladeSpecialButtonChallengeSlider.get(), inclRange(1,5))
-    # JSONParser.RandomizeBetweenRange("Randomizing Pouch Items Shops", "MNU_ShopNormal.json", "DefItem", 40001, 40428, PouchItemShopSlider.get(), inclRange(40001,40428), [40106, 40107, 40280, 40282, 40284, 40285, 40300, 40387] + inclRange(40350, 40363) + inclRange(40389, 40402))
-    # JSONParser.RandomizeBetweenRange("Randomizing Accessory Shops", "MNU_ShopNormal.json", "DefItem",1,687, AccessoryShopSlider.get(),  inclRange(1,687), inclRange(448,455))
-    # JSONParser.RandomizeBetweenRange("Randomizing Chip Shops", "MNU_ShopNormal.json", "DefItem", 10001, 10060, ChipShopSlider.get(), inclRange(10001, 10060))
-    # JSONParser.RandomizeBetweenRange("Randomizing Driver Art Debuffs", "BTL_Arts_Dr.json", "ArtsDeBuff", 1, 35, DriverArtEffectSlider.get(), inclRange(0,35), DriverArtDebuffsBadValues)
-
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
 def GenRandomSeed():
@@ -130,7 +121,7 @@ def GenRandomSeed():
 bdatcommonFrame = tk.Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
 
-bdatButton = tk.Button(bdatcommonFrame, text="Choose Input (commmon.bdat)", command=BDATDirectory)
+bdatButton = tk.Button(bdatcommonFrame, text="Choose Input (commmon.bdat)", command= lambda: DirectoryChoice("BDAT File", "*.bdat", bdatFilePathEntry))
 bdatButton.pack(side="left", padx=2, pady=2)
 
 bdatFilePathEntry = tk.Entry(bdatcommonFrame, width=500)
