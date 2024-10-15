@@ -125,6 +125,8 @@ GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", [["CHR_EnA
 GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", [["CHR_EnArrange.json"], ["ParamID"], inclRange(1,1888), inclRange(1,1888)]) # change text name and stats?
 GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", [["CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], inclRange(0,100), inclRange(0,100) + inclRange(250,255)])
 
+GenOption("Music", TabMisc, "Randomizes what music plays where", [["RSC_BgmCondition.json"], ["BgmIDA", "BgmIDB", "BgmIDC", "BgmIDD"], inclRange(1,180), inclRange(1,180)])
+
 def Main():
     global OptionsRunList
     random.seed(randoSeedEntry.get())
