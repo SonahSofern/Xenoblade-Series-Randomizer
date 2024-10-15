@@ -57,12 +57,14 @@ def OutputDirectory():
     outDirEntry.delete(0, tk.END)
     outDirEntry.insert(0, cmnBdatOutput)
 
-def OptionCarveouts( ToggleableBadValuesList = list, badIndexValue = int, stateOfButton = int):
-    if stateOfButton == 0:
-        ToggleableBadValuesList.append(badIndexValue)
-    else:
-        ToggleableBadValuesList.remove(badIndexValue)
-    print(ToggleableBadValuesList)
+def OptionCarveouts( ValidValuesList = list, ToggleableIndexValue = int, stateOfButton = int):
+    if stateOfButton == 1:
+        if ToggleableIndexValue not in ValidValuesList:
+            ValidValuesList.append(ToggleableIndexValue)
+    elif stateOfButton == 0:
+        if ToggleableIndexValue in ValidValuesList:
+            ValidValuesList.remove(ToggleableIndexValue)
+    print(ValidValuesList)
     
 OptionsRunList = []
 
@@ -87,9 +89,8 @@ def GenOption(optionName, parentTab, desc, randomize_parameters=[], ForcedBadVal
     optionDesc = tk.Label(optionPanel, text=desc, background=desColor, width=900, anchor='w')
     optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
     for i in range((len(OptionNameANDIndexValue))//2):
-        print("thisn runnn")
         var = tk.IntVar()
-        var.set(0)
+        OptionCarveouts(randomize_parameters[3], OptionNameANDIndexValue[i+1], var.get())
         box = tk.Checkbutton(optionPanel, background=desColor, text=OptionNameANDIndexValue[2*i], variable=var, command=lambda i=i: OptionCarveouts(randomize_parameters[3], OptionNameANDIndexValue[i+1], var.get()))
         box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
     rowIncrement += 1
