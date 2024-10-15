@@ -104,6 +104,8 @@ GenOption("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in 
 GenOption("Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Chip Shops", ["MNU_ShopNormal.json", "DefItem", inclRange(10001, 10060), inclRange(10001, 10060)])
 GenOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", ["BTL_Arts_Dr.json", "ArtsDeBuff", inclRange(0,35), inclRange(0,35)],[], ["Doom", 21] )
 GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", ["BTL_EnDropItem.json", "ItemID", inclRange(15001, 15406) + inclRange(1, 687) + inclRange(10001, 10060), inclRange(15001, 15406) + inclRange(1, 687) + inclRange(10001, 10060)])
+GenOption("Driver Art Distance", TabDrivers, "Randomizes how far away you can cast an art", ["BTL_Arts_Dr.json", "Distance", inclRange(0, 20), inclRange(1,20)])
+
 
 def Main():
     global OptionsRunList
