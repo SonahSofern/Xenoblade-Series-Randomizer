@@ -64,7 +64,7 @@ def OptionCarveouts( ValidValuesList = list, ToggleableIndexValue = int, stateOf
     elif stateOfButton == 0:
         if ToggleableIndexValue in ValidValuesList:
             ValidValuesList.remove(ToggleableIndexValue)
-    print(ValidValuesList)
+    #print(ValidValuesList)
     
 OptionsRunList = []
 
@@ -90,13 +90,11 @@ def GenOption(optionName, parentTab, desc, randomize_parameters=[], ForcedBadVal
     optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
     for i in range((len(OptionNameANDIndexValue))//2):
         var = tk.IntVar()
-        OptionCarveouts(randomize_parameters[3], OptionNameANDIndexValue[i+1], var.get())
+        OptionCarveouts(randomize_parameters[3], OptionNameANDIndexValue[i+1], var.get()) # run it initially
         box = tk.Checkbutton(optionPanel, background=desColor, text=OptionNameANDIndexValue[2*i], variable=var, command=lambda i=i: OptionCarveouts(randomize_parameters[3], OptionNameANDIndexValue[i+1], var.get()))
         box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
     rowIncrement += 1
-    if (optionSlider.get() == 0):
-        return
-    OptionsRunList.append(lambda: JSONParser.RandomizeBetweenRange("Randomizing " + optionName, randomize_parameters[0], randomize_parameters[1], randomize_parameters[2], optionSlider.get(), randomize_parameters[3].remove(ForcedBadValuesList)))
+    OptionsRunList.append(lambda: JSONParser.RandomizeBetweenRange("Randomizing " + optionName, randomize_parameters[0], randomize_parameters[1], randomize_parameters[2], optionSlider.get(),randomize_parameters[3] if ForcedBadValuesList not in randomize_parameters[3] else randomize_parameters[3].remove(ForcedBadValuesList)))
 
 GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", ["BTL_Arts_Bl.json", "ReAct", [0, 14], inclRange(0,14)])
 GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", ["BTL_Arts_Bl.json", "ArtsType", [1, 2], [1,2]])
