@@ -11,12 +11,8 @@ def RandomizeBetweenRange(cmdDescription, Filename, keyWord, rangeValuesToReplac
         for row in data['rows']:
             for key, value in row.items():
                 if key.startswith(keyWord):
-                    if ((random.randint(0,100) <= sliderOdds) and ((row[key] in rangeValidReplacements))):
-                        potentialVal = random.randint(rangeValuesToReplace[0],rangeValuesToReplace[1])
-                        while not(potentialVal in rangeValidReplacements):
-                            print("Rolled Bad Value")
-                            potentialVal = random.randint(rangeValuesToReplace[0],rangeValuesToReplace[1])
-                        row[key] = potentialVal
+                    if ((random.randint(0,100) <= sliderOdds) and ((row[key] in rangeValuesToReplace))):
+                        row[key] = random.choice(rangeValidReplacements)
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
