@@ -33,21 +33,30 @@ MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10)
 
 
 rowIncrement = 0
-def GenOption(name, parentTab, desc, amountOfCheckBoxes = 0):
+def GenOption(name, parentTab, desc, amountOfCheckBoxes = []):
     global rowIncrement
+    parentTab.bind("<FocusIn>", lambda e: parentTab.state(["!focus"])) # removes highlights of inner tabs
+    optionPanel = tk.Frame(parentTab, padx=10, pady=10)
+    optionPanel.grid(row=rowIncrement, column= 0, sticky="sw")
 
-    testPanel = tk.Frame(parentTab, background="#ffffff")
-    testPanel.grid(row=rowIncrement, column= 0, padx=12, pady=12)
-    option = tk.Label(testPanel, text=name)
+    if (rowIncrement %2 == 0):
+        desColor = "#ffffff"
+    else:
+        desColor ="#D5D5D5"
+    
+    optionPanel.config(background=desColor)
+    option = tk.Label(optionPanel, text=name, background=desColor, width=30, anchor="w")
     option.grid(row=rowIncrement, column=0, sticky="sw")
-    optionSlider = tk.Scale(testPanel, from_=0, to=100, orient=tk.HORIZONTAL, sliderlength=10)
-    optionSlider.grid(row=rowIncrement, column=1)
-    optionDesc = tk.Label(testPanel, text=desc)
+    optionSlider = tk.Scale(optionPanel, from_=0, to=100, orient=tk.HORIZONTAL, sliderlength=10, background=desColor, highlightthickness=0)
+    optionSlider.grid(row=rowIncrement, column=1, sticky='n')
+    optionDesc = tk.Label(optionPanel, text=desc, background=desColor, width=900, anchor='w')
     optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
-    for boxesToMake in range(amountOfCheckBoxes):
-        box = tk.Checkbutton(testPanel)
-        box.grid(row=rowIncrement+1, column=0, sticky="sw") # making checkboxes for carveouts like dont include doom or monado armor in debuffs
-    rowIncrement += 2
+    for i in range(len(amountOfCheckBoxes)):
+        var = tk.IntVar()
+        var.set(0)
+        box = tk.Checkbutton(optionPanel, background=desColor, text=amountOfCheckBoxes[i], variable=var, command=lambda i=i: OptionCarveouts(DriverArtDebuffsBadValues, 21, var.get()))
+        box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
+    rowIncrement += 1
     return optionSlider
 
 
@@ -74,6 +83,15 @@ def OutputDirectory():
     outDirEntry.delete(0, tk.END)
     outDirEntry.insert(0, cmnBdatOutput)
 
+def OptionCarveouts( badValuesList = list, badIndexValue = int, stateOfButton = int):
+    if stateOfButton == 1:
+        badValuesList.append(badIndexValue)
+    else:
+        badValuesList.remove(badIndexValue)
+    print(badValuesList)
+    
+
+DriverArtDebuffsBadValues = []
 
 BladeSpecialReactionSlider = GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.")
 BladeSpecialDamageTypeSlider = GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage")
@@ -81,7 +99,7 @@ BladeSpecialButtonChallengeSlider = GenOption("Blade Special Button Challenges",
 PouchItemShopSlider = GenOption("Randomize Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops")
 AccessoryShopSlider = GenOption("Randomize Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops")
 ChipShopSlider = GenOption("Randomize Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Chip Shops")
-DriverArtEffectSlider = GenOption("Randomize Driver Art Buffs/Debuffs", TabDrivers, "Randomizes a Driver Art's buff/debuff effect", 3)
+DriverArtEffectSlider = GenOption("Randomize Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", ["Doom"])
 
 def Main():
     random.seed(randoSeedEntry.get())
@@ -94,17 +112,12 @@ def Main():
     JSONParser.RandomizeBetweenRange("Randomizing Pouch Items Shops", "MNU_ShopNormal.json", "DefItem", 40001, 40428, PouchItemShopSlider.get(), inclRange(40001,40428), [40106, 40107, 40280, 40282, 40284, 40285, 40300, 40387] + inclRange(40350, 40363) + inclRange(40389, 40402))
     JSONParser.RandomizeBetweenRange("Randomizing Accessory Shops", "MNU_ShopNormal.json", "DefItem",1,687, AccessoryShopSlider.get(),  inclRange(1,687), inclRange(448,455))
     JSONParser.RandomizeBetweenRange("Randomizing Chip Shops", "MNU_ShopNormal.json", "DefItem", 10001, 10060, ChipShopSlider.get(), inclRange(10001, 10060))
-    JSONParser.RandomizeBetweenRange("Randomizing Driver Art Buffs/Debuffs", "BTL_Arts_Dr.json", "ArtsDeBuff", 1, 35, DriverArtEffectSlider.get(), inclRange(0,35))
+    JSONParser.RandomizeBetweenRange("Randomizing Driver Art Debuffs", "BTL_Arts_Dr.json", "ArtsDeBuff", 1, 35, DriverArtEffectSlider.get(), inclRange(0,35), DriverArtDebuffsBadValues)
 
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
 def GenRandomSeed():
     print("Gen Random Seed")
-
-# msBdatButton = tk.Button(root, text='Browse', command=UploadBDAT)
-# msBdatFilePathEntry = tk.Entry(root,textvariable = "", font=('calibre',10,'normal'))
-# msBdatButton.pack(anchor="w", padx=10)
-# msBdatFilePathEntry.pack(anchor="w",  padx=10, pady=5)
 
 bdatcommonFrame = tk.Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
