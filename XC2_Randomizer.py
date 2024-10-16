@@ -49,7 +49,6 @@ def StartsWithHelper(startingWord, lowNum, highNum):
     listofWords = []
     for i in range(lowNum, highNum + 1):
         listofWords.append(startingWord + str(i))
-    print(listofWords)
     return listofWords
 
 def DirectoryChoice(FileDescription, EntryField):
@@ -67,7 +66,6 @@ def OptionCarveouts( ValidValuesList = list, ToggleableIndexValue = int, stateOf
     #print(ValidValuesList)
     
 OptionsRunList = []
-HighestIndex = 10000000
 
 rowIncrement = 0
 def GenOption(optionName, parentTab, desc, randomize_parameters=[], ForcedBadValuesList = [],  OptionNameANDIndexValue = []):
@@ -98,10 +96,6 @@ def GenOption(optionName, parentTab, desc, randomize_parameters=[], ForcedBadVal
     OptionsRunList.append(lambda: JSONParser.RandomizeBetweenRange("Randomizing " + optionName, randomize_parameters[0], randomize_parameters[1], randomize_parameters[2], optionSlider.get(),randomize_parameters[3] if ForcedBadValuesList not in randomize_parameters[3] else randomize_parameters[3].remove(ForcedBadValuesList)))
 
 
-        
-
-
-
 GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", [["MNU_ShopNormal.json"], StartsWithHelper("DefItem", 1, 10), inclRange(40001,40428), inclRange(40001,40428)], [40106, 40107, 40280, 40282, 40284, 40285, 40300, 40387] + inclRange(40350, 40363) + inclRange(40389, 40402))
 GenOption("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", [["MNU_ShopNormal.json"], StartsWithHelper("DefItem", 1, 10),inclRange(1,687),  inclRange(1,687) + inclRange(448,455)])
 GenOption("Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Chip Shops", [["MNU_ShopNormal.json"], StartsWithHelper("DefItem", 1, 10), inclRange(10001, 10060), inclRange(10001, 10060)])
@@ -112,9 +106,9 @@ GenOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees
 
 GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [["BTL_Arts_Bl.json"], StartsWithHelper("ReAct", 1, 16), inclRange(0,14), inclRange(0,14)])
 GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", [["BTL_Arts_Bl.json"], ["ArtsType"], [1, 2], [1,2]])
-GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button a special uses for its button challenge", [["MNU_BtnChallenge2.json"], ["BtnType"], inclRange(1,5), inclRange(1,5)])
+GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button a special uses for its button challenge", [["MNU_BtnChallenge2.json"], StartsWithHelper("BtnType", 1, 3), inclRange(1,5), inclRange(1,5)])
 
-GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", [["BTL_EnDropItem.json"], ["ItemID"], inclRange(15001, 15406) + inclRange(1, 687) + inclRange(10001, 10060), inclRange(15001, 15406) + inclRange(1, 687) + inclRange(10001, 10060)])
+GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", [["BTL_EnDropItem.json"], StartsWithHelper("ItemID", 1, 8), inclRange(15001, 15406) + inclRange(1, 687) + inclRange(10001, 10060), inclRange(15001, 15406) + inclRange(1, 687) + inclRange(10001, 10060)])
 GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", [["CHR_EnArrange.json"], ["Scale"], inclRange(0, 1000), inclRange(1, 200) + inclRange(975,1000) + [9999]])
 GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", [["CHR_EnArrange.json"], ["ParamID"], inclRange(1,1888), inclRange(1,1888)]) # change text name and stats?
 GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", [["CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], inclRange(0,100), inclRange(0,100) + inclRange(250,255)])
@@ -141,7 +135,7 @@ def GenRandomSeed():
 bdatcommonFrame = tk.Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
 
-bdatButton = tk.Button(bdatcommonFrame, text="Choose Input (commmon.bdat)", command= lambda: DirectoryChoice("Choose your bdat folder", bdatFilePathEntry))
+bdatButton = tk.Button(bdatcommonFrame, text="Choose Input Folder (bdat)", command= lambda: DirectoryChoice("Choose your bdat folder", bdatFilePathEntry))
 bdatButton.pack(side="left", padx=2, pady=2)
 
 bdatFilePathEntry = tk.Entry(bdatcommonFrame, width=500)
@@ -152,7 +146,7 @@ bdatFilePathEntry.pack(side="left", padx=2)
 OutputDirectoryFrame = tk.Frame(root, background='#632424')
 OutputDirectoryFrame.pack(anchor="w", padx=10)
 
-outputDirButton = tk.Button(OutputDirectoryFrame, text='Choose Output Directory', command= lambda: DirectoryChoice("Choose an output folder", outDirEntry))
+outputDirButton = tk.Button(OutputDirectoryFrame, text='Choose Output Folder', command= lambda: DirectoryChoice("Choose an output folder", outDirEntry))
 outputDirButton.pack(side="left", padx=2, pady=2)
 
 outDirEntry = tk.Entry(OutputDirectoryFrame, width=500)
