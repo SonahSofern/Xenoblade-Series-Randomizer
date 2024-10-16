@@ -87,20 +87,22 @@ CoreCrystals = Helper.inclRange(45001,45057)
 Accessories = Helper.inclRange(1,687)
 PreciousItems = Helper.inclRange(25001, 25499)
 PouchItems =  [x for x in Helper.inclRange(40001,40428) if x not in ([40106, 40107, 40280, 40282, 40284, 40285, 40300, 40387] + Helper.inclRange(40350, 40363) + Helper.inclRange(40389, 40402))]   
-ArtDebuffs = Helper.inclRange(0,35)
+ArtDebuffs = [0,1,2,3,4,5,6,7,8,9,16,17,21]
+ArtBuffs = [0,11,12,13,14,15,21,23,24,25,30,35]
 DriverSkillTrees = Helper.inclRange(1,270)
 HitReactions = Helper.inclRange(1,14)
 ButtonCombos = Helper.inclRange(1,5)
 BladeBattleSkills = Helper.inclRange(1,270)
 BladeFieldSkills = Helper.inclRange(1,74)
 BladeSpecials = Helper.inclRange(1,269)
+BladeTreeUnlockConditions = Helper.inclRange(1,1768)
 
 GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", [["common/MNU_ShopNormal.json"], Helper.StartsWithHelper("DefItem", 1, 10), PouchItems, PouchItems])
 GenOption("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", [["common/MNU_ShopNormal.json"], Helper.StartsWithHelper("DefItem", 1, 10), Accessories, Accessories + Helper.inclRange(448,455)])
 GenOption("Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Chip Shops", [["common/MNU_ShopNormal.json"], Helper.StartsWithHelper("DefItem", 1, 10), WeaponChips, WeaponChips])
 GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of a treasure chest", [Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "commmon_gmk/"), Helper.InsertHelper(3,1,8,"itmID", ""), PouchItems + Accessories + WeaponChips + AuxCores + CoreCrystals, PouchItems + Accessories + WeaponChips + AuxCores + CoreCrystals])
 
-GenOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, ArtDebuffs],[], ["Doom", 21] )
+GenOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs + ArtBuffs, ArtDebuffs + ArtBuffs],[], ["Doom", 21] )
 GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", [["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20)])
 GenOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", [["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees])
 
@@ -112,6 +114,8 @@ GenOption("Blade Battle Skills", TabBlades, "Randomizes blades battle (yellow) s
 GenOption("Blade Green Skills", TabBlades, "Randomizes blades field (green) skill tree", [["common/CHR_Bl.json"], Helper.StartsWithHelper("FSkill", 1, 3), BladeFieldSkills, BladeFieldSkills])
 GenOption("Blade Specials", TabBlades, "Randomizes blades specials", [["common/CHR_Bl.json"], Helper.StartsWithHelper("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials, BladeSpecials])
 GenOption("Blade Cooldowns", TabBlades, "Randomizes a blades cooldown", [["common/CHR_Bl.json"], ["CoolTime"], Helper.inclRange(1,1000), Helper.inclRange(1,1000)])
+GenOption("Blade Arts", TabBlades, "Randomizes your blades arts", [["common/CHR_Bl.json"], Helper.StartsWithHelper("NArts",1,3), ArtDebuffs + ArtBuffs, ArtDebuffs + ArtBuffs])
+# add functionality so that you can choose checkboxes for each color of blade tree to randomize so we dont have so many options
 
 GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", [["common/BTL_EnDropItem.json"], Helper.StartsWithHelper("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips])
 GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", [["common/CHR_EnArrange.json"], ["Scale"], Helper.inclRange(0, 1000), Helper.inclRange(1, 200) + Helper.inclRange(975,1000) + [9999]])
