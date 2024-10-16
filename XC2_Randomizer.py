@@ -103,6 +103,7 @@ GenOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees
 GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [["common/BTL_Arts_Bl.json"], Helper.StartsWithHelper("ReAct", 1, 16), HitReactions, HitReactions])
 GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", [["common/BTL_Arts_Bl.json"], ["ArtsType"], [1, 2], [1,2]])
 GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button a special uses for its button challenge", [["common/MNU_BtnChallenge2.json"], Helper.StartsWithHelper("BtnType", 1, 3), ButtonCombos, ButtonCombos])
+GenOption("Blade Element", TabBlades, "Randomizes what element a blade is", [["common/CHR_BL.json"],["Atr"], Helper.inclRange(1,8), Helper.inclRange(1,8)])
 
 GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", [["common/BTL_EnDropItem.json"], Helper.StartsWithHelper("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips])
 GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", [["common/CHR_EnArrange.json"], ["Scale"], Helper.inclRange(0, 1000), Helper.inclRange(1, 200) + Helper.inclRange(975,1000) + [9999]])
