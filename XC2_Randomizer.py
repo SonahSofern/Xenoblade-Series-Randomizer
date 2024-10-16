@@ -52,16 +52,10 @@ def StartsWithHelper(startingWord, lowNum, highNum):
     print(listofWords)
     return listofWords
 
-def DirectoryChoice(FileTypesName, FileTypeEndCode, EntryField):
-    InputOrOutput = filedialog.askopenfilename(filetypes=[(FileTypesName, FileTypeEndCode)])
+def DirectoryChoice(FileDescription, EntryField):
+    Directory = filedialog.askdirectory(title=FileDescription)
     EntryField.delete(0, tk.END)
-    EntryField.insert(0, InputOrOutput)
-
-def OutputDirectory():
-    global cmnBdatOutput
-    cmnBdatOutput = filedialog.askdirectory(title="Select an output folder")
-    outDirEntry.delete(0, tk.END)
-    outDirEntry.insert(0, cmnBdatOutput)
+    EntryField.insert(0, Directory)
 
 def OptionCarveouts( ValidValuesList = list, ToggleableIndexValue = int, stateOfButton = int):
     if stateOfButton == 1:
@@ -131,7 +125,9 @@ def Main():
     global OptionsRunList
     random.seed(randoSeedEntry.get())
     print("seed: " + randoSeedEntry.get())
-    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()} -o {JsonOutput} -f json --pretty")
+    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common.bdat -o {JsonOutput} -f json --pretty")
+    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty")
+    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
 
     for Option in OptionsRunList:
         Option()
@@ -145,18 +141,18 @@ def GenRandomSeed():
 bdatcommonFrame = tk.Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
 
-bdatButton = tk.Button(bdatcommonFrame, text="Choose Input (commmon.bdat)", command= lambda: DirectoryChoice("BDAT File", "*.bdat", bdatFilePathEntry))
+bdatButton = tk.Button(bdatcommonFrame, text="Choose Input (commmon.bdat)", command= lambda: DirectoryChoice("Choose your bdat folder", bdatFilePathEntry))
 bdatButton.pack(side="left", padx=2, pady=2)
 
 bdatFilePathEntry = tk.Entry(bdatcommonFrame, width=500)
-bdatFilePathEntry.insert(0, "C:/Users/benja/Desktop/XC2_Randomizer/OriginalBDAT/common.bdat")
+bdatFilePathEntry.insert(0, "C:/Users/benja/Desktop/XC2_Randomizer/bdat")
 bdatFilePathEntry.pack(side="left", padx=2)
 
 
 OutputDirectoryFrame = tk.Frame(root, background='#632424')
 OutputDirectoryFrame.pack(anchor="w", padx=10)
 
-outputDirButton = tk.Button(OutputDirectoryFrame, text='Choose Output Directory', command=OutputDirectory)
+outputDirButton = tk.Button(OutputDirectoryFrame, text='Choose Output Directory', command= lambda: DirectoryChoice("Choose an output folder", outDirEntry))
 outputDirButton.pack(side="left", padx=2, pady=2)
 
 outDirEntry = tk.Entry(OutputDirectoryFrame, width=500)
