@@ -1,5 +1,6 @@
 import json
 import random
+import os
 
 def RandomizeBetweenRange(cmdDescription, Filename, keyWord, rangeValuesToReplace, sliderOdds, rangeValidReplacements): # make this a function to reuse, check the settings ot see if we even do this
     if (sliderOdds == 0):
@@ -7,7 +8,10 @@ def RandomizeBetweenRange(cmdDescription, Filename, keyWord, rangeValuesToReplac
         return
     print(cmdDescription)   
     for name in Filename:
-      with open("./_internal/JsonOutputs/common/" + name, 'r+', encoding='utf-8') as file:
+        filePath = "./_internal/JsonOutputs/" + name
+        if not os.path.exists(filePath):
+          continue
+        with open(filePath, 'r+', encoding='utf-8') as file:
           data = json.load(file)
           for row in data['rows']:
               for key, value in row.items():
