@@ -79,6 +79,7 @@ def GenOption(optionName, parentTab, desc, randomize_parameters=[], ForcedBadVal
         randomize_parameters[3] = [i for i in randomize_parameters[3] if i not in ForcedBadValuesList]
     OptionsRunList.append(lambda: JSONParser.RandomizeBetweenRange("Randomizing " + optionName, randomize_parameters[0], randomize_parameters[1], randomize_parameters[2], optionSlider.get(), randomize_parameters[3]))
 
+#HELPFUL VARIABLES
 #AuxCores = inclRange(17001, 17424) # i cant find what these were?
 AuxCores = Helper.inclRange(15001, 15406)
 WeaponChips = Helper.inclRange(10001, 10060)
@@ -90,6 +91,9 @@ ArtDebuffs = Helper.inclRange(0,35)
 DriverSkillTrees = Helper.inclRange(1,270)
 HitReactions = Helper.inclRange(1,14)
 ButtonCombos = Helper.inclRange(1,5)
+BladeBattleSkills = Helper.inclRange(1,270)
+BladeFieldSkills = Helper.inclRange(1,74)
+BladeSpecials = Helper.inclRange(1,269)
 
 GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", [["common/MNU_ShopNormal.json"], Helper.StartsWithHelper("DefItem", 1, 10), PouchItems, PouchItems])
 GenOption("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", [["common/MNU_ShopNormal.json"], Helper.StartsWithHelper("DefItem", 1, 10), Accessories, Accessories + Helper.inclRange(448,455)])
@@ -103,7 +107,11 @@ GenOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees
 GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [["common/BTL_Arts_Bl.json"], Helper.StartsWithHelper("ReAct", 1, 16), HitReactions, HitReactions])
 GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", [["common/BTL_Arts_Bl.json"], ["ArtsType"], [1, 2], [1,2]])
 GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button a special uses for its button challenge", [["common/MNU_BtnChallenge2.json"], Helper.StartsWithHelper("BtnType", 1, 3), ButtonCombos, ButtonCombos])
-GenOption("Blade Element", TabBlades, "Randomizes what element a blade is", [["common/CHR_BL.json"],["Atr"], Helper.inclRange(1,8), Helper.inclRange(1,8)])
+GenOption("Blade Elements", TabBlades, "Randomizes what element a blade is", [["common/CHR_Bl.json"],["Atr"], Helper.inclRange(1,8), Helper.inclRange(1,8)])
+GenOption("Blade Battle Skills", TabBlades, "Randomizes blades battle (yellow) skill tree", [["common/CHR_Bl.json"], Helper.StartsWithHelper("BSkill", 1, 3), BladeBattleSkills, BladeBattleSkills])
+GenOption("Blade Green Skills", TabBlades, "Randomizes blades field (green) skill tree", [["common/CHR_Bl.json"], Helper.StartsWithHelper("FSkill", 1, 3), BladeFieldSkills, BladeFieldSkills])
+GenOption("Blade Specials", TabBlades, "Randomizes blades specials", [["common/CHR_Bl.json"], Helper.StartsWithHelper("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials, BladeSpecials])
+GenOption("Blade Cooldowns", TabBlades, "Randomizes a blades cooldown", [["common/CHR_Bl.json"], ["CoolTime"], Helper.inclRange(1,1000), Helper.inclRange(1,1000)])
 
 GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", [["common/BTL_EnDropItem.json"], Helper.StartsWithHelper("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips])
 GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", [["common/CHR_EnArrange.json"], ["Scale"], Helper.inclRange(0, 1000), Helper.inclRange(1, 200) + Helper.inclRange(975,1000) + [9999]])
@@ -126,6 +134,7 @@ def Main():
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
 def GenRandomSeed():
+    print(Helper.StartsWithHelper("BSkill", 1, 3))
     #FindBadValuesList("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["Lv"], [0,1], "ParamID")
     # FindBadValuesList("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EnemyPop.json", ["ene1ID"], inclRange(0,100000), "ene1ID")
     print("Gen Random Seed")
