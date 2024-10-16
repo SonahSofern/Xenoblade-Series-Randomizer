@@ -115,6 +115,8 @@ GenOption("Blade Green Skills", TabBlades, "Randomizes blades field (green) skil
 GenOption("Blade Specials", TabBlades, "Randomizes blades specials", [["common/CHR_Bl.json"], Helper.StartsWithHelper("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials, BladeSpecials])
 GenOption("Blade Cooldowns", TabBlades, "Randomizes a blades cooldown", [["common/CHR_Bl.json"], ["CoolTime"], Helper.inclRange(1,1000), Helper.inclRange(1,1000)])
 GenOption("Blade Arts", TabBlades, "Randomizes your blades arts", [["common/CHR_Bl.json"], Helper.StartsWithHelper("NArts",1,3), ArtDebuffs + ArtBuffs, ArtDebuffs + ArtBuffs])
+GenOption("Blade Aux Core Slots", TabBlades, "Randomizes how many Aux Core slots a Blade gets", [["common/CHR_Bl.json"],["OrbNum"], Helper.inclRange(0,3), Helper.inclRange(0,5)])
+
 # add functionality so that you can choose checkboxes for each color of blade tree to randomize so we dont have so many options
 
 GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", [["common/BTL_EnDropItem.json"], Helper.StartsWithHelper("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips])
