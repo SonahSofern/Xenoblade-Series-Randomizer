@@ -2,7 +2,7 @@ import json
 import random
 import os
 
-def RandomizeBetweenRange(cmdDescription, Filename, keyWord, rangeValuesToReplace, sliderOdds, rangeValidReplacements): # make this a function to reuse, check the settings ot see if we even do this
+def RandomizeBetweenRange(cmdDescription, Filename, keyWord, rangeValuesToReplace, sliderOdds, rangeValidReplacements, idsToReplace): # make this a function to reuse, check the settings ot see if we even do this
     if (sliderOdds == 0):
         # print(cmdDescription + " Slider at zero") 
         return

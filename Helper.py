@@ -6,7 +6,7 @@ import tkinter as tk
 def inclRange(start, end):
      return list(range(start, end+1))
 
-def StartsWithHelper(startingWord, lowNum, highNum):
+def StartsWith(startingWord, lowNum, highNum):
     listofWords = []
     for i in range(lowNum, highNum + 1):
         listofWords.append(startingWord + str(i))
