@@ -140,7 +140,7 @@ def Main():
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
 def GenRandomSeed():
-    print(Helper.StartsWithHelper("BSkill", 1, 3))
+    #print(Helper.StartsWithHelper("BSkill", 1, 3))
     #FindBadValuesList("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["Lv"], [0,1], "ParamID")
     # FindBadValuesList("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EnemyPop.json", ["ene1ID"], inclRange(0,100000), "ene1ID")
     print("Gen Random Seed")
