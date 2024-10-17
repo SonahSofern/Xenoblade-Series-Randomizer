@@ -30,7 +30,7 @@ def FindBadValuesList(filePath, keyWordList, keywordBadValueList, returnedKeyWor
                 if key in keyWordList and value in keywordBadValueList:
                     bad_values_found.append(row[returnedKeyWordValue]) 
     
-    print(bad_values_found)
+    #print(bad_values_found)
 
 
 def DirectoryChoice(FileDescription, EntryField):
@@ -43,7 +43,7 @@ def OptionCarveouts( ValidValuesList = list, ToggleableIndexValue = int, stateOf
         if ToggleableIndexValue not in ValidValuesList:
             ValidValuesList.append(ToggleableIndexValue)
     elif stateOfButton == 0:
-        if ToggleableIndexValue in ValidValuesList:
+        while ToggleableIndexValue in ValidValuesList:
             ValidValuesList.remove(ToggleableIndexValue)
     #print(ValidValuesList)
     
