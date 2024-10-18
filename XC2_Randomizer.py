@@ -60,7 +60,7 @@ def GenOption(optionName, parentTab, desc, Filename, keyWords, rangeOfValuesToRe
     option = tk.Label(optionPanel, text=optionName, background=desColor, width=30, anchor="w")
     option.grid(row=rowIncrement, column=0, sticky="sw")
     optionSlider = tk.Scale(optionPanel, from_=0, to=100, orient=tk.HORIZONTAL, sliderlength=10, background=desColor, highlightthickness=0)
-    optionSlider.set(100)
+    optionSlider.set(0)
     optionSlider.grid(row=rowIncrement, column=1, sticky='n')
     optionDesc = tk.Label(optionPanel, text=desc, background=desColor, width=900, anchor='w')
     optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
@@ -94,6 +94,7 @@ BladeBattleSkills = Helper.inclRange(1,270)
 BladeFieldSkills = Helper.inclRange(1,74)
 BladeSpecials = Helper.inclRange(1,269)
 BladeTreeUnlockConditions = Helper.inclRange(1,1768)
+BladeNames = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 52, 53, 54, 55, 78, 79, 56, 58, 57, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 59, 75, 76, 77, 45, 46, 47, 48, 49, 50, 51, 45, 57, 45, 49, 50, 51, 76, 102, 103, 104, 105, 106, 107, 108]
 
 GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", ["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), PouchItems, PouchItems)
 GenOption("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", ["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), Accessories, Accessories + Helper.inclRange(448,455))
@@ -116,6 +117,7 @@ GenOption("Blade Specials", TabBlades, "Randomizes blades specials", ["common/CH
 GenOption("Blade Cooldowns", TabBlades, "Randomizes a blades cooldown", ["common/CHR_Bl.json"], ["CoolTime"], Helper.inclRange(1,1000), Helper.inclRange(1,1000))
 GenOption("Blade Arts", TabBlades, "Randomizes your blade's arts", ["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), ArtDebuffs + ArtBuffs, ArtDebuffs + ArtBuffs)
 GenOption("Blade Aux Core Slots", TabBlades, "Randomizes how many Aux Core slots a Blade gets", ["common/CHR_Bl.json"],["OrbNum"], Helper.inclRange(0,3), Helper.inclRange(0,3))
+GenOption("Blade Names", TabBlades, "Randomizes the names of blades",["common/CHR_Bl.json"], ["Name"], Helper.inclRange(0,1000), BladeNames)
 
 # add functionality so that you can choose checkboxes for each color of blade tree to randomize so we dont have so many options
 
@@ -133,7 +135,7 @@ def Randomize():
     print("Seed: " + randoSeedEntry.get())
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common.bdat -o {JsonOutput} -f json --pretty")
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty")
-    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
+    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput}/gb -f json --pretty")
 
     for Option in OptionsRunList:
         Option()
