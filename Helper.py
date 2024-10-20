@@ -41,9 +41,8 @@ def DirectoryChoice(FileDescription, EntryField):
 def OptionCarveouts(ValidValuesList, ToggleableIndexValues, stateOfButton = None):
     if stateOfButton.get() == True:
         ValidValuesList += ToggleableIndexValues
-    elif stateOfButton.get() == False:
-        StoreList = ValidValuesList
-        ValidValuesList = [x for x in ValidValuesList if x not in ToggleableIndexValues]
+    else:
+        ValidValuesList[:] = [x for x in ValidValuesList if x not in ToggleableIndexValues]
     print(ValidValuesList)
     print()
     print()
