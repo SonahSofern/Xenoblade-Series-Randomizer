@@ -6,6 +6,7 @@ import subprocess
 import JSONParser
 import Helper
 from tkinter import *
+import SeedNames
 
 root = tk.Tk()
 
@@ -21,8 +22,6 @@ JsonOutput = "./_internal/JsonOutputs"
 
 MainWindow = ttk.Notebook(root, height=2) 
 
-MainWindow.bind("<FocusIn>", lambda e: MainWindow.state(["!focus"])) # removes highlights of tabs
-
 
 #Frames in the notebook
 TabGeneralOuter = tk.Frame(MainWindow) 
@@ -31,14 +30,12 @@ TabBladesOuter = tk.Frame(MainWindow)
 TabEnemiesOuter = tk.Frame(MainWindow) 
 TabMiscOuter = tk.Frame(MainWindow) 
 
-TabDriversOuter.config(highlightthickness=0)
 # Canvas 
 TabGeneralCanvas = tk.Canvas(TabGeneralOuter) 
 TabDriversCanvas = tk.Canvas(TabDriversOuter) 
 TabBladesCanvas = tk.Canvas(TabBladesOuter)
 TabEnemiesCanvas = tk.Canvas(TabEnemiesOuter) 
 TabMiscCanvas = tk.Canvas(TabMiscOuter)
-
 
 # Actual Scrollable Content
 TabGeneral = tk.Frame(TabGeneralCanvas) 
@@ -47,7 +44,7 @@ TabBlades = tk.Frame(TabBladesCanvas)
 TabEnemies = tk.Frame(TabEnemiesCanvas) 
 TabMisc = tk.Frame(TabMiscCanvas)
 
-def CreateScrollBars(OuterFrames, Canvases, InnerFrames):
+def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
         scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
         Canvases[i].config(yscrollcommand=scrollbar.set, highlightthickness=0)
@@ -58,7 +55,7 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames):
         OuterFrames[i].pack_propagate(False)
         Canvases[i].create_window((0, 0), window=InnerFrames[i], anchor="nw")
         Canvases[i].pack(side="left", fill="both", expand=True)
-        #scrollbar.pack(side="right", fill="y")
+        #scrollbar.pack(side="right", fill="y") Will show scrollbar if uncommented
 
         def _on_mousewheel(event, canvas=Canvases[i]):
             canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
@@ -195,7 +192,9 @@ def GenRandomSeed():
     #Helper.FindBadValuesList("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["Name"], [0], "$id")
     # Helper.FindBadValuesList("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["ParamID"], [1,307,308,285,1261,314,339,1143,350,892,1041,303,942,1153,1015,1016,941,891,317,1258,1250,352,331,281,343, 3, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21,1116,1118,1172, 1178,1179,1134,1135,1136,1154,1194,1195,1196,1197,1199,1200,332, 0, 22, 23, 24, 25, 26, 27, 28, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 140, 0, 141, 142, 143, 144, 145, 146, 147, 149, 150, 151, 152, 153, 154, 155, 156, 0, 157, 158, 159, 160, 161, 0, 163, 164, 166, 165, 348, 167, 168, 169, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 220, 221, 222, 286, 348, 126, 286, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 196, 197, 198, 199, 205, 207, 208, 209, 1052, 1053, 1052, 1055, 1056, 1057, 1058, 1062, 1068, 1070, 1072, 1073, 1077, 1078, 1083, 1084, 1086, 1087, 1089, 1090, 1091, 1092, 1093, 1094, 1096, 1099, 1100, 1109, 1110, 1111, 1113, 1114, 1117, 1119, 1120, 1122, 1124, 1126, 1127, 1133, 1137, 1138, 1144, 1156, 1158, 1164, 1166, 1168, 1175, 1176, 1177, 1181, 1183, 1185, 1187, 1189, 1191, 1198, 1205, 1208, 1209, 1216, 1221, 1223, 1225, 1227, 1228, 1229, 1234, 1236, 1238, 1240, 1242, 1255, 1263, 1265, 1267, 1270, 1272, 1274, 1276, 1278, 1280, 1282, 1283, 1284, 1285, 1286, 1287, 1293, 1295, 1297, 1299, 1301, 1310, 1312, 1330, 1331, 1336, 1338, 1340, 1341, 1342, 1343, 1345, 1346, 1348, 1350, 1351, 1352, 1353, 1355, 1361, 1362, 1370, 1371, 386, 195, 354, 387, 388, 356, 189, 190, 370, 371, 372, 373, 459, 461, 463, 498, 560, 562, 564, 566, 568, 574, 579, 581, 644, 647, 649, 651, 659, 662, 683, 685, 687, 689, 718, 782, 785, 865, 867, 869, 895, 898, 1020, 1022, 1026, 1037, 1038, 1043, 346, 272, 272, 273, 273, 274, 275, 276, 277, 278, 279, 279, 280, 281, 193, 162, 325, 162, 264, 228, 229, 230, 231, 232, 233, 282, 283, 284, 1375, 1377, 210, 212, 213, 214, 215, 217, 218, 219, 272, 279, 281, 392, 1383, 1385, 1387, 1394, 1396, 1399, 1401,1067,1083,1084,181,184,300,1492,457,1173,1184,1190,1182,1188,1180,1186,579, 0, 0, 1413, 1437, 1438, 1439, 0, 0, 0, 0, 0, 0, 0, 1486, 1487, 1488, 1491, 1496, 1499, 1502, 1505, 1506, 1507, 1521, 0, 0, 0, 0, 0, 0, 0, 1584, 1589, 1624, 1639, 1640, 1642, 0, 0, 1660, 0], "$id")
     # FindBadValuesList("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EnemyPop.json", ["ene1ID"], inclRange(0,100000), "ene1ID")
-    print("Gen Random Seed")
+    randoSeedEntry.delete(0, tk.END)
+    randoSeedEntry.insert(0,SeedNames.RandomSeedName())
+    
 
 bdatcommonFrame = tk.Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
@@ -227,8 +226,6 @@ seedDesc.pack(side='left', padx=2, pady=2)
 
 randoSeedEntry = tk.Entry(SeedFrame)
 randoSeedEntry.pack(side='left', padx=2)
-
-
 
 RandomizeButton = tk.Button(text='Randomize', command=Randomize)
 RandomizeButton.pack(pady=10)
