@@ -20,7 +20,7 @@ root.iconphoto(True, icon)
 CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
 
-MainWindow = ttk.Notebook(root, height=2) 
+MainWindow = ttk.Notebook(root, height=2)
 
 
 #Frames in the notebook
@@ -65,8 +65,6 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touc
         OuterFrames[i].pack(expand=True, fill="both")
 
 CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc])
-
-
 MainWindow.add(TabGeneralOuter, text ='General') 
 MainWindow.add(TabDriversOuter, text ='Drivers') 
 MainWindow.add(TabBladesOuter, text ='Blades') 
@@ -76,7 +74,6 @@ MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10)
 
 
 OptionsRunList = []
-
 rowIncrement = 0
 def GenOption(optionName, parentTab, desc, Filename, keyWords, rangeOfValuesToReplace, rangeOfValidReplacements,  OptionNameANDIndexValue = [], InvalidTargetIDs =[]):
     global rowIncrement
@@ -224,7 +221,7 @@ SeedFrame.pack(anchor="w", padx=10)
 seedDesc = tk.Button(SeedFrame, text="Seed", command=GenRandomSeed)
 seedDesc.pack(side='left', padx=2, pady=2)
 
-randoSeedEntry = tk.Entry(SeedFrame)
+randoSeedEntry = tk.Entry(SeedFrame, width=30)
 randoSeedEntry.pack(side='left', padx=2)
 
 RandomizeButton = tk.Button(text='Randomize', command=Randomize)

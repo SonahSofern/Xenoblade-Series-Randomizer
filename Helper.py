@@ -49,5 +49,5 @@ def OptionCarveouts( ValidValuesList = list, ToggleableIndexValue = [], stateOfB
         for i in ToggleableIndexValue:
             if i in ValidValuesList:
                 ValidValuesList.remove(i)
-    print(ValidValuesList)
+    #print(ValidValuesList)
     
