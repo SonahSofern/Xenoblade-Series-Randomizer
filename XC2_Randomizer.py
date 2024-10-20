@@ -22,7 +22,7 @@ JsonOutput = "./_internal/JsonOutputs"
 MainWindow = ttk.Notebook(root, height=2) 
 
 MainWindow.bind("<FocusIn>", lambda e: MainWindow.state(["!focus"])) # removes highlights of tabs
-  
+
 
 #Frames in the notebook
 TabGeneralOuter = tk.Frame(MainWindow) 
@@ -31,34 +31,43 @@ TabBladesOuter = tk.Frame(MainWindow)
 TabEnemiesOuter = tk.Frame(MainWindow) 
 TabMiscOuter = tk.Frame(MainWindow) 
 
+TabDriversOuter.config(highlightthickness=0)
 # Canvas 
-TabGeneralCanvas = tk.Canvas() 
-TabDriversCanvas = tk.Canvas() 
+TabGeneralCanvas = tk.Canvas(TabGeneralOuter) 
+TabDriversCanvas = tk.Canvas(TabDriversOuter) 
 TabBladesCanvas = tk.Canvas(TabBladesOuter)
-TabEnemiesCanvas = tk.Canvas() 
-TabMiscCanvas = tk.Canvas()
+TabEnemiesCanvas = tk.Canvas(TabEnemiesOuter) 
+TabMiscCanvas = tk.Canvas(TabMiscOuter)
+
 
 # Actual Scrollable Content
-TabGeneral = tk.Frame() 
-TabDrivers = tk.Frame() 
+TabGeneral = tk.Frame(TabGeneralCanvas) 
+TabDrivers = tk.Frame(TabDriversCanvas) 
 TabBlades = tk.Frame(TabBladesCanvas)
-TabEnemies = tk.Frame() 
-TabMisc = tk.Frame()
+TabEnemies = tk.Frame(TabEnemiesCanvas) 
+TabMisc = tk.Frame(TabMiscCanvas)
 
+def CreateScrollBars(OuterFrames, Canvases, InnerFrames):
+    for i in range(len(Canvases)):
+        scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
+        Canvases[i].config(yscrollcommand=scrollbar.set, highlightthickness=0)
+        OuterFrames[i].config(highlightthickness=0)
+        InnerFrames[i].config(highlightthickness=0)
+        InnerFrames[i].bind("<Configure>", lambda e, canvas=Canvases[i]: canvas.configure(scrollregion=canvas.bbox("all")))
+  
+        OuterFrames[i].pack_propagate(False)
+        Canvases[i].create_window((0, 0), window=InnerFrames[i], anchor="nw")
+        Canvases[i].pack(side="left", fill="both", expand=True)
+        #scrollbar.pack(side="right", fill="y")
 
+        def _on_mousewheel(event, canvas=Canvases[i]):
+            canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
+        Canvases[i].bind("<Enter>", lambda e, canvas=Canvases[i]: canvas.bind_all("<MouseWheel>", lambda event: _on_mousewheel(event, canvas)))
+        Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
+        OuterFrames[i].pack(expand=True, fill="both")
 
-scrollbar = ttk.Scrollbar(TabBladesOuter, orient="vertical", command=TabBladesCanvas.yview)
-TabBlades.bind("<Configure>", lambda e: TabBladesCanvas.configure(scrollregion=TabBladesCanvas.bbox("all")))
-
-TabBladesCanvas.create_window((0, 0), window=TabBlades, anchor="nw")
-TabBladesCanvas.grid(row=0, column=0, sticky="nsew")
-scrollbar.grid(row=0, column=1, sticky="ns")
-
-def _on_mousewheel(event):
-   TabBladesCanvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-
-TabBladesCanvas.bind_all("<MouseWheel>", _on_mousewheel)
+CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc])
 
 
 MainWindow.add(TabGeneralOuter, text ='General') 
@@ -78,7 +87,7 @@ def GenOption(optionName, parentTab, desc, Filename, keyWords, rangeOfValuesToRe
 
     optionPanel = tk.Frame(parentTab, padx=10, pady=10)
     optionPanel.grid(row=rowIncrement, column= 0, sticky="sw")
-    #optionPanel.bind("<FocusIn>", lambda e: optionPanel.state(["!focus"])) # removes highlights of tabs
+
     if (rowIncrement %2 == 0):
         OptionColor = "#ffffff"
     else:
@@ -97,7 +106,7 @@ def GenOption(optionName, parentTab, desc, Filename, keyWords, rangeOfValuesToRe
         var = tk.IntVar()
         
         Helper.OptionCarveouts(rangeOfValidReplacements, OptionNameANDIndexValue[i+1], var.get()) # run it initially
-        box = tk.Checkbutton(optionPanel, background=OptionColor, text=OptionNameANDIndexValue[2*i], variable=var, command=lambda i=i: Helper.OptionCarveouts(rangeOfValidReplacements, OptionNameANDIndexValue[i+1], var.get()))
+        box = tk.Checkbutton(optionPanel, background=OptionColor, text=OptionNameANDIndexValue[2*i], variable=var, command=lambda i=i: Helper.OptionCarveouts(rangeOfValidReplacements, OptionNameANDIndexValue[i+1], var.get()), highlightthickness=0)
         box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
     rowIncrement += 1
 
