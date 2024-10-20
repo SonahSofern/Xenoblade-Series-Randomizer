@@ -38,12 +38,16 @@ def DirectoryChoice(FileDescription, EntryField):
     EntryField.delete(0, tk.END)
     EntryField.insert(0, Directory)
 
-def OptionCarveouts( ValidValuesList = list, ToggleableIndexValue = int, stateOfButton = int):
+def OptionCarveouts( ValidValuesList = list, ToggleableIndexValue = [], stateOfButton = int):
     if stateOfButton == 1:
-        if ToggleableIndexValue not in ValidValuesList:
-            ValidValuesList.append(ToggleableIndexValue)
+        TestList = ValidValuesList
+
+        ValidValuesList = [x for x in ToggleableIndexValue if x not in TestList]
+        # if ToggleableIndexValue not in ValidValuesList:
+        #     ValidValuesList.append(ToggleableIndexValue)
     elif stateOfButton == 0:
-        while ToggleableIndexValue in ValidValuesList:
-            ValidValuesList.remove(ToggleableIndexValue)
-    #print(ValidValuesList)
+        for i in ToggleableIndexValue:
+            if i in ValidValuesList:
+                ValidValuesList.remove(i)
+    print(ValidValuesList)
     

@@ -5,40 +5,68 @@ import random
 import subprocess
 import JSONParser
 import Helper
+from tkinter import *
 
 root = tk.Tk()
 
 root.title("Xenoblade Chronicles 2 Randomizer 0.1.0")
 root.configure(background='#632424')
-root.geometry('800x800')
-
-MainWindow = ttk.Notebook(root) 
-
-MainWindow.bind("<FocusIn>", lambda e: MainWindow.state(["!focus"])) # removes highlights of tabs
-  
-TabGeneral = ttk.Frame(MainWindow) 
-TabDrivers = ttk.Frame(MainWindow) 
-TabBlades = ttk.Frame(MainWindow) 
-TabEnemies = ttk.Frame(MainWindow) 
-TabMisc = ttk.Frame(MainWindow) 
-  
-MainWindow.add(TabGeneral, text ='General') 
-MainWindow.add(TabDrivers, text ='Drivers') 
-MainWindow.add(TabBlades, text ='Blades') 
-MainWindow.add(TabEnemies, text ='Enemies') 
-MainWindow.add(TabMisc, text ='Misc') 
-MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10) 
-
-
-
-
+root.geometry('800x1000')
 
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
 
 CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
-cmnBdatOutput = "RandomizedBDATOutput"
+
+MainWindow = ttk.Notebook(root, height=2) 
+
+MainWindow.bind("<FocusIn>", lambda e: MainWindow.state(["!focus"])) # removes highlights of tabs
+  
+
+#Frames in the notebook
+TabGeneralOuter = tk.Frame(MainWindow) 
+TabDriversOuter = tk.Frame(MainWindow) 
+TabBladesOuter = tk.Frame(MainWindow) 
+TabEnemiesOuter = tk.Frame(MainWindow) 
+TabMiscOuter = tk.Frame(MainWindow) 
+
+# Canvas 
+TabGeneralCanvas = tk.Canvas() 
+TabDriversCanvas = tk.Canvas() 
+TabBladesCanvas = tk.Canvas(TabBladesOuter)
+TabEnemiesCanvas = tk.Canvas() 
+TabMiscCanvas = tk.Canvas()
+
+# Actual Scrollable Content
+TabGeneral = tk.Frame() 
+TabDrivers = tk.Frame() 
+TabBlades = tk.Frame(TabBladesCanvas)
+TabEnemies = tk.Frame() 
+TabMisc = tk.Frame()
+
+
+
+
+scrollbar = ttk.Scrollbar(TabBladesOuter, orient="vertical", command=TabBladesCanvas.yview)
+TabBlades.bind("<Configure>", lambda e: TabBladesCanvas.configure(scrollregion=TabBladesCanvas.bbox("all")))
+
+TabBladesCanvas.create_window((0, 0), window=TabBlades, anchor="nw")
+TabBladesCanvas.grid(row=0, column=0, sticky="nsew")
+scrollbar.grid(row=0, column=1, sticky="ns")
+
+def _on_mousewheel(event):
+   TabBladesCanvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+
+TabBladesCanvas.bind_all("<MouseWheel>", _on_mousewheel)
+
+
+MainWindow.add(TabGeneralOuter, text ='General') 
+MainWindow.add(TabDriversOuter, text ='Drivers') 
+MainWindow.add(TabBladesOuter, text ='Blades') 
+MainWindow.add(TabEnemiesOuter, text ='Enemies') 
+MainWindow.add(TabMiscOuter, text ='Misc') 
+MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10) 
 
 
 OptionsRunList = []
@@ -47,29 +75,29 @@ rowIncrement = 0
 def GenOption(optionName, parentTab, desc, Filename, keyWords, rangeOfValuesToReplace, rangeOfValidReplacements,  OptionNameANDIndexValue = [], InvalidTargetIDs =[]):
     global rowIncrement
     global OptionsRunList
-    parentTab.bind("<FocusIn>", lambda e: parentTab.state(["!focus"])) # removes highlights of inner tabs
+
     optionPanel = tk.Frame(parentTab, padx=10, pady=10)
     optionPanel.grid(row=rowIncrement, column= 0, sticky="sw")
-
+    #optionPanel.bind("<FocusIn>", lambda e: optionPanel.state(["!focus"])) # removes highlights of tabs
     if (rowIncrement %2 == 0):
-        desColor = "#ffffff"
+        OptionColor = "#ffffff"
     else:
-        desColor ="#D5D5D5"
+        OptionColor ="#D5D5D5"
     
-    optionPanel.config(background=desColor)
-    option = tk.Label(optionPanel, text=optionName, background=desColor, width=30, anchor="w")
+    optionPanel.config(background=OptionColor)
+    option = tk.Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w")
     option.grid(row=rowIncrement, column=0, sticky="sw")
-    optionSlider = tk.Scale(optionPanel, from_=0, to=100, orient=tk.HORIZONTAL, sliderlength=10, background=desColor, highlightthickness=0)
-    optionSlider.set(0)
+    optionSlider = tk.Scale(optionPanel, from_=0, to=100, orient=tk.HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
+    optionSlider.set(100)
     optionSlider.grid(row=rowIncrement, column=1, sticky='n')
-    optionDesc = tk.Label(optionPanel, text=desc, background=desColor, width=900, anchor='w')
+    optionDesc = tk.Label(optionPanel, text=desc, background=OptionColor, width=900, anchor='w')
     optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
 
     for i in range((len(OptionNameANDIndexValue))//2):
         var = tk.IntVar()
         
         Helper.OptionCarveouts(rangeOfValidReplacements, OptionNameANDIndexValue[i+1], var.get()) # run it initially
-        box = tk.Checkbutton(optionPanel, background=desColor, text=OptionNameANDIndexValue[2*i], variable=var, command=lambda i=i: Helper.OptionCarveouts(rangeOfValidReplacements, OptionNameANDIndexValue[i+1], var.get()))
+        box = tk.Checkbutton(optionPanel, background=OptionColor, text=OptionNameANDIndexValue[2*i], variable=var, command=lambda i=i: Helper.OptionCarveouts(rangeOfValidReplacements, OptionNameANDIndexValue[i+1], var.get()))
         box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
     rowIncrement += 1
 
@@ -95,26 +123,33 @@ BladeFieldSkills = Helper.inclRange(1,74)
 BladeSpecials = Helper.inclRange(1,269)
 BladeTreeUnlockConditions = Helper.inclRange(1,1768)
 BladeNames = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 52, 53, 54, 55, 78, 79, 56, 58, 57, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 59, 75, 76, 77, 45, 46, 47, 48, 49, 50, 51, 45, 57, 45, 49, 50, 51, 76, 102, 103, 104, 105, 106, 107, 108]
+AllValues = Helper.inclRange(0,10000000)
+
 
 GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", ["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), PouchItems, PouchItems)
 GenOption("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", ["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), Accessories, Accessories + Helper.inclRange(448,455))
 GenOption("Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Chip Shops", ["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)
 GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of treasure chests", Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "commmon_gmk/"), Helper.InsertHelper(3,1,8,"itmID", ""), PouchItems + Accessories + WeaponChips + AuxCores + CoreCrystals, PouchItems + Accessories + WeaponChips + AuxCores + CoreCrystals)
 
-GenOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", ["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, ArtDebuffs + ArtBuffs, ["Doom", 21])
+GenOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", ["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, ArtDebuffs + ArtBuffs, ["Doom", [21]])
 GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", ["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20))
 GenOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", ["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees)
 GenOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a random effect such as break, knockback etc.", ["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactions, InvalidTargetIDs=AutoAttacks) # we want id numbers no edit the 1/6 react stuff
+GenOption("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with",["common/CHR_Dr.json"], ["DefAcce"], AllValues, Accessories, ["Remove All Starting Accessories", [Accessories]] )
 
 GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", ["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)
 GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", ["common/BTL_Arts_Bl.json"], ["ArtsType"], [1, 2], [1,2])
 GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button a special uses for its button challenge", ["common/MNU_BtnChallenge2.json"], Helper.StartsWith("BtnType", 1, 3), ButtonCombos, ButtonCombos)
 GenOption("Blade Elements", TabBlades, "Randomizes what element a blade is", ["common/CHR_Bl.json"],["Atr"], Helper.inclRange(1,8), Helper.inclRange(1,8))
 GenOption("Blade Battle Skills", TabBlades, "Randomizes blades battle (yellow) skill tree", ["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), BladeBattleSkills, BladeBattleSkills)
-GenOption("Blade Skills", TabBlades, "Randomizes blades skill tree", ["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), BladeBattleSkills, BladeBattleSkills, ["Special Skills", 0, "Battle Skills" , 0, "Field Skills", 0])
+GenOption("Blade Skills", TabBlades, "Randomizes blades skill tree", ["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), BladeBattleSkills, BladeBattleSkills, ["Special Skills", [0], "Battle Skills" , [0], "Field Skills", [0]])
 GenOption("Blade Green Skills", TabBlades, "Randomizes blades field (green) skill tree", ["common/CHR_Bl.json"], Helper.StartsWith("FSkill", 1, 3), BladeFieldSkills, BladeFieldSkills)
 GenOption("Blade Specials", TabBlades, "Randomizes blades specials", ["common/CHR_Bl.json"], Helper.StartsWith("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials, BladeSpecials)
 GenOption("Blade Cooldowns", TabBlades, "Randomizes a blades cooldown", ["common/CHR_Bl.json"], ["CoolTime"], Helper.inclRange(1,1000), Helper.inclRange(1,1000))
+GenOption("Blade Arts", TabBlades, "Randomizes your blade's arts", ["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), ArtDebuffs + ArtBuffs, ArtDebuffs + ArtBuffs)
+GenOption("Blade Aux Core Slots", TabBlades, "Randomizes how many Aux Core slots a Blade gets", ["common/CHR_Bl.json"],["OrbNum"], Helper.inclRange(0,3), Helper.inclRange(0,3))
+GenOption("Blade Names", TabBlades, "Randomizes the names of blades",["common/CHR_Bl.json"], ["Name"], Helper.inclRange(0,1000), BladeNames)
+
 GenOption("Blade Arts", TabBlades, "Randomizes your blade's arts", ["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), ArtDebuffs + ArtBuffs, ArtDebuffs + ArtBuffs)
 GenOption("Blade Aux Core Slots", TabBlades, "Randomizes how many Aux Core slots a Blade gets", ["common/CHR_Bl.json"],["OrbNum"], Helper.inclRange(0,3), Helper.inclRange(0,3))
 GenOption("Blade Names", TabBlades, "Randomizes the names of blades",["common/CHR_Bl.json"], ["Name"], Helper.inclRange(0,1000), BladeNames)
@@ -139,10 +174,10 @@ def Randomize():
     print("Seed: " + randoSeedEntry.get())
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common.bdat -o {JsonOutput} -f json --pretty")
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty")
-    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput}/gb -f json --pretty")
+    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
 
-    for Option in OptionsRunList:
-        Option()
+    for OptionRun in OptionsRunList:
+        OptionRun()
 
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
@@ -187,9 +222,6 @@ randoSeedEntry.pack(side='left', padx=2)
 
 
 RandomizeButton = tk.Button(text='Randomize', command=Randomize)
-
-
-
 RandomizeButton.pack(pady=10)
 
 root.mainloop()
