@@ -5,6 +5,7 @@ import tkinter as tk
 import JSONParser
 import Helper
 import random
+import time
 
 BossDefaultEnem1Levels = [1, 2, 4, 5, 4, 6, 8, 10, 12, 13, 13, 15, 22, 26, 60, 20, 21, 22, 24, 23, 23, 24, 24, 29, 31, 32, 29, 31, 32, 32, 34, 33, 39, 42, 42, 43, 46, 35, 44, 52, 56, 54, 60, 60, 52, 50, 60, 60, 60, 57, 66, 68, 60, 60, 60, 60, 70, 70, 8, 10, 29, 29, 40, 38, 50, 50, 50, 50, 1, 1, 1, 2, 2, 3, 32, 32, 32, 32, 14, 20, 53]
 BossDefaultEnem2Levels = [6, 8, 11, 13, 13, 22, 25, 18, 26, 26, 27, 29, 33, 34, 39, 42, 44, 44, 54, 56, 50, 57, 10, 38, 48, 1, 10, 16]
@@ -177,7 +178,7 @@ def ReadPostRandomizationChanges(filepath, keyword1): # file to read after rando
     return retIDmatrix, retkey1matrix
 
 def ReworkedEnemyRando (DefaultEnemyIDs, RandomizedEnemyIDs):
-    for i in range(1,90):
+    for i in range(1,51):
         if i > 10:
             mapnum = str(i)
         if i <= 10:
@@ -193,84 +194,154 @@ def ReworkedEnemyRando (DefaultEnemyIDs, RandomizedEnemyIDs):
             try:
                 with open(enemypopfile, 'r+', encoding='utf-8') as file:
                     data = json.load(file)
-                    for row in data['rows']:
-                        for k in range(0, len(DefaultEnemyIDs)):
-                            for key, value in row.items():
-                                if key == "ene1ID" and value == DefaultEnemyIDs[k]:
-                                    row[key] = RandomizedEnemyIDs[k]
-                                if key == "ene2ID" and value == DefaultEnemyIDs[k]:
-                                    if row.get(key) != 0 and row.get(key) != "":
-                                        row[key] = RandomizedEnemyIDs[k]
-                                if key == "ene3ID" and value == DefaultEnemyIDs[k]:
-                                    if row.get(key) != 0 and row.get(key) != "":
-                                        row[key] = RandomizedEnemyIDs[k]
-                                if key == "ene4ID" and value == DefaultEnemyIDs[k]:
-                                    if row.get(key) != 0 and row.get(key) != "":
-                                        row[key] = RandomizedEnemyIDs[k]
+                    for row in data['rows']: #for each row in the Enemy Pop file
+                        if row["ene1ID"] == 0:
+                            continue
+                        ene1changed = 0
+                        ene2changed = 0
+                        ene3changed = 0
+                        ene4changed = 0
+                        for key, value in row.items():
+                            if row["ene2ID"] == 0:
+                                ene2changed = 1
+                            if row["ene3ID"] == 0:
+                                ene3changed = 1
+                            if row["ene4ID"] == 0:
+                                ene4changed = 1
+                            if ene1changed + ene2changed + ene3changed + ene4changed == 4:
+                                break
+                            if key not in ("ene1ID", "ene2ID", "ene3ID", "ene4ID"):
+                                continue
+                            for k in range(0, len(DefaultEnemyIDs)):
+                                if ene1changed == 0:
+                                    if row["ene1ID"] == DefaultEnemyIDs[k]: 
+                                        row["ene1ID"] = RandomizedEnemyIDs[k]
+                                        ene1changed = 1
+                                if ene2changed == 0:
+                                    if row["ene2ID"] == DefaultEnemyIDs[k]: 
+                                        row["ene2ID"] = RandomizedEnemyIDs[k]
+                                        ene2changed = 1
+                                if ene3changed == 0:
+                                    if row["ene3ID"] == DefaultEnemyIDs[k]: 
+                                        row["ene3ID"] = RandomizedEnemyIDs[k]
+                                        ene3changed = 1      
+                                if ene4changed == 0:
+                                    if row["ene4ID"] == DefaultEnemyIDs[k]: 
+                                        row["ene4ID"] = RandomizedEnemyIDs[k]
+                                        ene4changed = 1
+                                if ene1changed + ene2changed + ene3changed + ene4changed == 4:
+                                    break
                     file.seek(0)
                     file.truncate()
-                    json.dump(data, file, indent=2)                                               
+                    json.dump(data, file, indent=2)
             except:
-                pass
+                pass     
     with open("./_internal/JsonOutputs/common/FLD_QuestBattle.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
-            for k in range(0, len(DefaultEnemyIDs)):
-                for key, value in row.items(): 
-                    if key == "EnemyID" and value == DefaultEnemyIDs[k]:
-                        if row.get(key) != 0 and row.get(key) != "":
-                            row[key] = RandomizedEnemyIDs[k]
-
+            enechanged = 0
+            if row["EnemyID"] != 0:
+                for k in range(0, len(DefaultEnemyIDs)):
+                    if enechanged == 1:
+                        break
+                    if enechanged == 0:
+                        if row["EnemyID"] == DefaultEnemyIDs[k]:
+                            row["EnemyID"] = RandomizedEnemyIDs[k]
+                            enechanged = 1                 
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
     with open("./_internal/JsonOutputs/common/FLD_EnemyGroup.json", 'r+', encoding='utf-8') as file:
+        start_time = time.time()
         data = json.load(file)
         for row in data["rows"]:
-            for k in range(0, len(DefaultEnemyIDs)):
-                for key, value in row.items():
-                    for l in range (1,13):
-                        keymatchval = "EnemyID" + str(l)
-                        if key == keymatchval and value == DefaultEnemyIDs[k]:
-                            if row.get(key) != 0 and row.get(key) != "":
-                                row[key] = RandomizedEnemyIDs[k]
+            for l in range (1,13):
+                keymatchval = str("EnemyID" + str(l))
+                matching = 0
+                if row[keymatchval] == 0:
+                    break
+                for k in range(0, len(DefaultEnemyIDs)):
+                    if matching == 1:
+                        break
+                    if row[keymatchval] == DefaultEnemyIDs[k]:
+                        row[keymatchval] = RandomizedEnemyIDs[k]
+                        matching = 1                  
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+    with open("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data['rows']: #for each row in the Enemy Pop file
+            if row["ene1ID"] == 0:
+                continue
+            ene1changed = 0
+            ene2changed = 0
+            ene3changed = 0
+            ene4changed = 0
+            for key, value in row.items():
+                if row["ene2ID"] == 0:
+                    ene2changed = 1
+                if row["ene3ID"] == 0:
+                    ene3changed = 1
+                if row["ene4ID"] == 0:
+                    ene4changed = 1
+                if ene1changed + ene2changed + ene3changed + ene4changed == 4:
+                    break
+                if key not in ("ene1ID", "ene2ID", "ene3ID", "ene4ID"):
+                    continue
+                for k in range(0, len(DefaultEnemyIDs)):
+                    if ene1changed == 0:
+                        if row["ene1ID"] == DefaultEnemyIDs[k]: 
+                            row["ene1ID"] = RandomizedEnemyIDs[k]
+                            ene1changed = 1
+                    if ene2changed == 0:
+                        if row["ene2ID"] == DefaultEnemyIDs[k]: 
+                            row["ene2ID"] = RandomizedEnemyIDs[k]
+                            ene2changed = 1
+                    if ene3changed == 0:
+                        if row["ene3ID"] == DefaultEnemyIDs[k]: 
+                            row["ene3ID"] = RandomizedEnemyIDs[k]
+                            ene3changed = 1      
+                    if ene4changed == 0:
+                        if row["ene4ID"] == DefaultEnemyIDs[k]: 
+                            row["ene4ID"] = RandomizedEnemyIDs[k]
+                            ene4changed = 1
+                    if ene1changed + ene2changed + ene3changed + ene4changed == 4:
+                        break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
 
-    with open("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data['rows']:
-            for k in range(0, len(DefaultEnemyIDs)):
-                for key, value in row.items():
-                    if key == "ene1ID" and value == DefaultEnemyIDs[k]:
-                        row[key] = RandomizedEnemyIDs[k]
-                    if key == "ene2ID" and value == DefaultEnemyIDs[k]:
-                        if row.get(key) != 0 and row.get(key) != "":
-                            row[key] = RandomizedEnemyIDs[k]
-                    if key == "ene3ID" and value == DefaultEnemyIDs[k]:
-                        if row.get(key) != 0 and row.get(key) != "":
-                            row[key] = RandomizedEnemyIDs[k]
-                    if key == "ene4ID" and value == DefaultEnemyIDs[k]:
-                        if row.get(key) != 0 and row.get(key) != "":
-                            row[key] = RandomizedEnemyIDs[k]
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)   
-
-def RemoveLevelRanges(Filename):
+def RemoveLevelRanges(Filename, clearedrows):
     with open(Filename, 'r+', encoding='utf-8') as file:
         data = json.load(file)
-        for row in data["rows"]:
-            for key, value in row.items():
-                if key == "LvRand" and value >= 0:
-                    row[key] = 0
+        for k in range(0, len(clearedrows)):
+            for row in data["rows"]:
+                for key, value in row.items():
+                    if key != clearedrows[k]:
+                        continue
+                    row[clearedrows[k]] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
 
+def ReducePCHPBattle1():
+    filename = "./_internal/JsonOutputs/common/FLD_QuestBattle.json"
+    with open(filename, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 3:
+                row["ReducePCHP"] = 1
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+                            
 def EnemyLogic(CheckboxList, CheckboxStates):
     RandomizedEnemyIDs = []
-    ValidEnemies =  [x for x in Helper.inclRange(0,1888) if x not in ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 183, 185, 186, 188, 189, 190, 192, 194, 200, 201, 205, 207, 209, 211, 213, 215, 218, 219, 220, 224, 226, 228, 230, 237, 238, 240, 246, 251, 255, 257, 259, 261, 263, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 306, 311, 312, 314, 316, 317, 321, 322, 327, 328, 330, 331, 333, 334, 335, 336, 337, 338, 340, 343, 344, 353, 354, 355, 357, 358, 360, 361, 362, 363, 364, 366, 368, 370, 371, 377, 378, 379, 380, 381, 382, 387, 388, 397, 398, 400, 402, 408, 410, 412, 416, 417, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 438, 439, 440, 441, 442, 443, 444, 449, 452, 453, 460, 465, 467, 469, 471, 472, 473, 478, 480, 482, 484, 486, 494, 499, 502, 505, 507, 509, 511, 514, 516, 518, 520, 522, 524, 526, 527, 528, 529, 530, 531, 537, 539, 541, 543, 545, 554, 556, 574, 575, 580, 582, 584, 585, 586, 587, 589, 590, 592, 594, 595, 596, 597, 599, 605, 606, 614, 615, 616, 617, 618, 619, 620, 621, 622, 623, 624, 625, 626, 627, 628, 629, 633, 698, 700, 702, 704, 737, 799, 801, 803, 805, 807, 813, 818, 820, 883, 885, 887, 889, 897, 900, 921, 923, 925, 927, 956, 1012, 1013, 1014, 1021, 1024, 1103, 1105, 1107, 1129, 1130, 1133, 1136, 1179, 1180, 1252, 1253, 1257, 1259, 1263, 1274, 1275, 1278, 1280, 1289, 1290, 1291, 1292, 1293, 1294, 1295, 1296, 1297, 1298, 1299, 1300, 1301, 1302, 1303, 1305, 1306, 1307, 1309, 1310, 1311, 1312, 1313, 1314, 1315, 1316, 1317, 1318, 1323, 1325, 1327, 1328, 1331, 1332, 1333, 1334, 1335, 1336, 1337, 1338, 1339, 1340, 1341, 1346, 1390, 1392, 1394, 1401, 1403, 1409, 1411, 1426, 1427, 1428, 1451, 1452, 1453, 1475, 1480, 1481, 1492, 1493, 1494, 1495, 1504, 1505, 1506, 1509, 1510, 1514, 1517, 1520, 1523, 1524, 1525, 1538, 1552, 1553, 1554, 1555, 1556, 1557, 1558, 1615, 1620, 1654, 1668, 1669, 1671, 1672, 1673, 1685, 1750, 1751, 1752, 1753, 1887])]
-    DefaultEnemyIDs = ValidEnemies
-    RandomizedEnemyIDs = DefaultEnemyIDs
+    ValidEnemies =  [x for x in Helper.inclRange(0,1888) if x not in ([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 183, 185, 186, 188, 189, 190, 192, 194, 200, 201, 205, 207, 209, 211, 213, 215, 218, 219, 220, 224, 226, 228, 230, 237, 238, 240, 246, 251, 255, 257, 259, 261, 263, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 306, 311, 312, 314, 316, 317, 321, 322, 327, 328, 330, 331, 333, 334, 335, 336, 337, 338, 340, 343, 344, 353, 354, 355, 357, 358, 360, 361, 362, 363, 364, 366, 368, 370, 371, 377, 378, 379, 380, 381, 382, 387, 388, 397, 398, 400, 402, 408, 410, 412, 416, 417, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 438, 439, 440, 441, 442, 443, 444, 449, 452, 453, 460, 465, 467, 469, 471, 472, 473, 478, 480, 482, 484, 486, 494, 499, 502, 505, 507, 509, 511, 514, 516, 518, 520, 522, 524, 526, 527, 528, 529, 530, 531, 537, 539, 541, 543, 545, 554, 556, 574, 575, 580, 582, 584, 585, 586, 587, 589, 590, 592, 594, 595, 596, 597, 599, 605, 606, 614, 615, 616, 617, 618, 619, 620, 621, 622, 623, 624, 625, 626, 627, 628, 629, 633, 698, 700, 702, 704, 737, 799, 801, 803, 805, 807, 813, 818, 820, 883, 885, 887, 889, 897, 900, 921, 923, 925, 927, 956, 1012, 1013, 1014, 1021, 1024, 1103, 1105, 1107, 1129, 1130, 1133, 1136, 1179, 1180, 1252, 1253, 1257, 1259, 1263, 1274, 1275, 1278, 1280, 1289, 1290, 1291, 1292, 1293, 1294, 1295, 1296, 1297, 1298, 1299, 1300, 1301, 1302, 1303, 1305, 1306, 1307, 1309, 1310, 1311, 1312, 1313, 1314, 1315, 1316, 1317, 1318, 1323, 1325, 1327, 1328, 1331, 1332, 1333, 1334, 1335, 1336, 1337, 1338, 1339, 1340, 1341, 1346, 1390, 1392, 1394, 1401, 1403, 1409, 1411, 1426, 1427, 1428, 1451, 1452, 1453, 1475, 1480, 1481, 1492, 1493, 1494, 1495, 1504, 1505, 1506, 1509, 1510, 1514, 1517, 1520, 1523, 1524, 1525, 1538, 1552, 1553, 1554, 1555, 1556, 1557, 1558, 1615, 1620, 1654, 1668, 1669, 1671, 1672, 1673, 1685, 1750, 1751, 1752, 1753, 1887])]
+    DefaultEnemyIDs = ValidEnemies.copy()
+    RandomizedEnemyIDs = DefaultEnemyIDs.copy()
     random.shuffle(RandomizedEnemyIDs)
 
     for n in range(0, len(CheckboxList)):
@@ -283,6 +354,9 @@ def EnemyLogic(CheckboxList, CheckboxStates):
                     ReverseSpecificChanges("", "", "name", "ene2ID", "$id", "Lv", "$id", "Lv", BossDefaultEnem2Levels, "ene2num")
                     ReverseSpecificChanges("", "", "name", "ene3ID", "$id", "Lv", "$id", "Lv", BossDefaultEnem3Levels, "ene3num")
                     ReverseSpecificChanges("", "", "name", "ene4ID", "$id", "Lv", "$id", "Lv", BossDefaultEnem4Levels, "ene4num")
+            ReducePCHPBattle1()
 
-            
-    RemoveLevelRanges("./_internal/JsonOutputs/common/CHR_EnArrange.json")
+    RemoveLevelRanges("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["LvRand"])
+    RemoveLevelRanges("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"])
+
+    print("Finished Randomizing Enemies")
