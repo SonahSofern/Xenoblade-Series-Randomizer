@@ -7,6 +7,7 @@ import JSONParser
 import Helper
 from tkinter import *
 import SeedNames
+import EnemyRandoLogic
 
 root = tk.Tk()
 
@@ -73,6 +74,7 @@ MainWindow.add(TabMiscOuter, text ='Misc')
 MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10) 
 
 CheckboxStates = []
+CheckboxList = []
 OptionsRunList = []
 rowIncrement = 0
 def GenOption(optionName, parentTab, desc, Filename, keyWords, rangeOfValuesToReplace, rangeOfValidReplacements,  OptionNameANDIndexValue = [], InvalidTargetIDs =[]):
@@ -100,7 +102,7 @@ def GenOption(optionName, parentTab, desc, Filename, keyWords, rangeOfValuesToRe
         var = tk.BooleanVar()
         box = tk.Checkbutton(optionPanel, background=OptionColor, text=OptionNameANDIndexValue[2*i], variable=var, command=lambda i=i, var=var: Helper.OptionCarveouts(rangeOfValidReplacements, OptionNameANDIndexValue[2*i+1], var), highlightthickness=0)
         CheckboxStates.append(var)
-        
+        CheckboxList.append(OptionNameANDIndexValue[2*i] + " Box")
         box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
     rowIncrement += 1
 
@@ -162,7 +164,7 @@ GenOption("Blade Names", TabBlades, "Randomizes the names of blades",["common/CH
 
 GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", ["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips)
 GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", ["common/CHR_EnArrange.json"], ["Scale"], Helper.inclRange(0, 1000), Helper.inclRange(1, 200) + Helper.inclRange(990,1000))
-GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies)
+GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies,  ["Story Boss Levels", [1999]])
 #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30))
 GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", ["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.inclRange(0,100), Helper.inclRange(0,100) + Helper.inclRange(250,255))
 
@@ -183,6 +185,7 @@ def Randomize():
     for OptionRun in OptionsRunList:
         OptionRun()
 
+    EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates)
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
 def GenRandomSeed():
