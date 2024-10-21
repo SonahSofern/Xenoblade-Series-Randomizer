@@ -3,17 +3,14 @@ from tkinter import PhotoImage
 from tkinter import ttk
 import random
 import subprocess
-import JSONParser
-import Helper
 from tkinter import *
-import SeedNames
-import EnemyRandoLogic
+import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser
 
 root = tk.Tk()
 
 root.title("Xenoblade Chronicles 2 Randomizer 0.1.0")
 root.configure(background='#632424')
-root.geometry('800x1000')
+root.geometry('800x800')
 
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
@@ -87,7 +84,7 @@ def GenOption(optionName, parentTab, desc, Filename, keyWords, rangeOfValuesToRe
     if (rowIncrement %2 == 0):
         OptionColor = "#ffffff"
     else:
-        OptionColor ="#D5D5D5"
+        OptionColor = "#D5D5D5"
     
     optionPanel.config(background=OptionColor)
     option = tk.Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w")
@@ -144,9 +141,8 @@ GenOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff ef
 GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", ["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20))
 GenOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", ["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees)
 GenOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a random effect such as break, knockback etc.", ["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactions, InvalidTargetIDs=AutoAttacks) # we want id numbers no edit the 1/6 react stuff
-#GenOption("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with",["common/CHR_Dr.json"], ["DefAcce"], AllValues, Accessories, ["Remove All Starting Accessories", Accessories] ) only problem is the button on of off changin the values we want
 GenOption("Driver Art Speed", TabDrivers, "Randomizes art animation speeds", ["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.inclRange(0,255), Helper.inclRange(50,255), InvalidTargetIDs=AutoAttacks)
-
+#GenOption("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with",["common/CHR_Dr.json"], ["DefAcce"], AllValues, Accessories, ["Remove All Starting Accessories", Accessories] ) only problem is the button on of off changin the values we want
 
 GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", ["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)
 GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", ["common/BTL_Arts_Bl.json"], ["ArtsType"], [1, 2], [1,2])
@@ -160,13 +156,11 @@ GenOption("Blade Arts", TabBlades, "Randomizes your blade's arts", ["common/CHR_
 GenOption("Blade Aux Core Slots", TabBlades, "Randomizes how many Aux Core slots a Blade gets", ["common/CHR_Bl.json"],["OrbNum"], Helper.inclRange(0,3), Helper.inclRange(0,3))
 GenOption("Blade Names", TabBlades, "Randomizes the names of blades",["common/CHR_Bl.json"], ["Name"], Helper.inclRange(0,1000), BladeNames)
 
-# add functionality so that you can choose checkboxes for each color of blade tree to randomize so we dont have so many options
-
 GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", ["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips)
 GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", ["common/CHR_EnArrange.json"], ["Scale"], Helper.inclRange(0, 1000), Helper.inclRange(1, 200) + Helper.inclRange(990,1000))
 GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies,  ["Story Boss Levels", [1999]])
-#GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30))
 GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", ["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.inclRange(0,100), Helper.inclRange(0,100) + Helper.inclRange(250,255))
+#GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30))
 
 GenOption("Music", TabMisc, "Randomizes what music plays where", ["common/RSC_BgmCondition.json"], ["BgmIDA", "BgmIDB", "BgmIDC", "BgmIDD"], BackgroundMusic, BackgroundMusic)
 GenOption("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.inclRange(0,3721), Helper.inclRange(2001,3721))
@@ -176,8 +170,10 @@ GenOption("NPCs Size", TabMisc, "Randomizes the size of NPCs", ["common/RSC_NpcL
 
 def Randomize():
     global OptionsRunList
+
     random.seed(randoSeedEntry.get())
     print("Seed: " + randoSeedEntry.get())
+
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common.bdat -o {JsonOutput} -f json --pretty")
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty")
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
@@ -185,7 +181,7 @@ def Randomize():
     for OptionRun in OptionsRunList:
         OptionRun()
 
-    EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates)
+    EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates) # gonna hide this in the Gen option command
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
 def GenRandomSeed():
@@ -195,8 +191,7 @@ def GenRandomSeed():
     # FindBadValuesList("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EnemyPop.json", ["ene1ID"], inclRange(0,100000), "ene1ID")
     #print(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/")) 
     randoSeedEntry.delete(0, tk.END)
-    randoSeedEntry.insert(0,SeedNames.RandomSeedName())
-    
+    randoSeedEntry.insert(0,SeedNames.RandomSeedName())    
 
 bdatcommonFrame = tk.Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
@@ -205,7 +200,6 @@ bdatButton = tk.Button(bdatcommonFrame, text="Choose Input Folder (bdat)", comma
 bdatButton.pack(side="left", padx=2, pady=2)
 
 bdatFilePathEntry = tk.Entry(bdatcommonFrame, width=500)
-bdatFilePathEntry.insert(0, "C:/Users/benja/Desktop/XC2_Randomizer/bdat")
 bdatFilePathEntry.pack(side="left", padx=2)
 
 
@@ -216,7 +210,6 @@ outputDirButton = tk.Button(OutputDirectoryFrame, text='Choose Output Folder', c
 outputDirButton.pack(side="left", padx=2, pady=2)
 
 outDirEntry = tk.Entry(OutputDirectoryFrame, width=500)
-outDirEntry.insert(0,"C:/Users/benja/AppData/Roaming/yuzu/load/0100E95004039001/0100E95004039001/romfs/bdat")
 outDirEntry.pack(side="left", padx=2)
 
 
@@ -230,6 +223,11 @@ randoSeedEntry = tk.Entry(SeedFrame, width=30)
 randoSeedEntry.pack(side='left', padx=2)
 
 RandomizeButton = tk.Button(text='Randomize', command=Randomize)
-RandomizeButton.pack(pady=10)
+RandomizeButton.pack(pady=10) 
+
+EveryObjectSave = ([bdatFilePathEntry, outDirEntry] + CheckboxStates)
+
+root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectSave), root.destroy())) # Runs right before window is deleted
+
 
 root.mainloop()
