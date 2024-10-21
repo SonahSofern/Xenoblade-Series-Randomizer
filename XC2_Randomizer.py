@@ -165,7 +165,7 @@ GenOption("Blade Names", TabBlades, "Randomizes the names of blades",["common/CH
 
 GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", ["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips)
 GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", ["common/CHR_EnArrange.json"], ["Scale"], Helper.inclRange(0, 1000), Helper.inclRange(1, 200) + Helper.inclRange(990,1000))
-GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies,  ["Story Boss Levels", 1999, "Randomize Enemies", 2000])
+GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies,  ["Story Boss Levels", [1999], "Randomize Enemies", [2000]])
 #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30))
 GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", ["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.inclRange(0,100), Helper.inclRange(0,100) + Helper.inclRange(250,255))
 
@@ -187,6 +187,7 @@ def Randomize():
         OptionRun()
 
     EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates)
+
     subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
 def GenRandomSeed():
@@ -197,6 +198,7 @@ def GenRandomSeed():
     #print(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/")) 
     randoSeedEntry.delete(0, tk.END)
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
+    print(CheckboxStates[0].get())
     
 
 bdatcommonFrame = tk.Frame(root, background='#632424')
@@ -206,7 +208,7 @@ bdatButton = tk.Button(bdatcommonFrame, text="Choose Input Folder (bdat)", comma
 bdatButton.pack(side="left", padx=2, pady=2)
 
 bdatFilePathEntry = tk.Entry(bdatcommonFrame, width=500)
-bdatFilePathEntry.insert(0, "C:/Users/benja/Desktop/XC2_Randomizer/bdat")
+bdatFilePathEntry.insert(0, "C:/Users/ofc20/Desktop/bdatoriginal/bdat")
 bdatFilePathEntry.pack(side="left", padx=2)
 
 
@@ -217,7 +219,7 @@ outputDirButton = tk.Button(OutputDirectoryFrame, text='Choose Output Folder', c
 outputDirButton.pack(side="left", padx=2, pady=2)
 
 outDirEntry = tk.Entry(OutputDirectoryFrame, width=500)
-outDirEntry.insert(0,"C:/Users/benja/AppData/Roaming/yuzu/load/0100E95004039001/0100E95004039001/romfs/bdat")
+outDirEntry.insert(0,"C:/Users/ofc20/AppData/Roaming/yuzu/load/0100E95004039001/0100E95004039001/romfs/bdat")
 outDirEntry.pack(side="left", padx=2)
 
 

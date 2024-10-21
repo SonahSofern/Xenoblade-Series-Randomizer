@@ -273,14 +273,16 @@ def EnemyLogic(CheckboxList, CheckboxStates):
     RandomizedEnemyIDs = DefaultEnemyIDs
     random.shuffle(RandomizedEnemyIDs)
 
-    if CheckboxStates[5] == 1:
-        ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
-        for k in range(0, len(CheckboxList)):
-            if CheckboxList[k] == "Story Boss Levels Box" and CheckboxStates[k] == 1:
-                ReverseSpecificChanges("", "", "name", "ene1ID", "$id", "Lv", "$id", "Lv", BossDefaultEnem1Levels, "ene1num")
-                ReverseSpecificChanges("", "", "name", "ene2ID", "$id", "Lv", "$id", "Lv", BossDefaultEnem2Levels, "ene2num")
-                ReverseSpecificChanges("", "", "name", "ene3ID", "$id", "Lv", "$id", "Lv", BossDefaultEnem3Levels, "ene3num")
-                ReverseSpecificChanges("", "", "name", "ene4ID", "$id", "Lv", "$id", "Lv", BossDefaultEnem4Levels, "ene4num")
+    for n in range(0, len(CheckboxList)):
+        print(CheckboxStates[n].get())
+        if CheckboxList[n] == "Randomize Enemies Box" and CheckboxStates[n].get() == True:
+            ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
+            for k in range(0, len(CheckboxList)):
+                if CheckboxList[k] == "Story Boss Levels Box" and CheckboxStates[k].get() == True:
+                    ReverseSpecificChanges("", "", "name", "ene1ID", "$id", "Lv", "$id", "Lv", BossDefaultEnem1Levels, "ene1num")
+                    ReverseSpecificChanges("", "", "name", "ene2ID", "$id", "Lv", "$id", "Lv", BossDefaultEnem2Levels, "ene2num")
+                    ReverseSpecificChanges("", "", "name", "ene3ID", "$id", "Lv", "$id", "Lv", BossDefaultEnem3Levels, "ene3num")
+                    ReverseSpecificChanges("", "", "name", "ene4ID", "$id", "Lv", "$id", "Lv", BossDefaultEnem4Levels, "ene4num")
 
             
     RemoveLevelRanges("./_internal/JsonOutputs/common/CHR_EnArrange.json")
