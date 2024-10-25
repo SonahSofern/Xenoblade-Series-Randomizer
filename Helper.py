@@ -43,7 +43,6 @@ def OptionCarveouts(ValidValuesList, ToggleableIndexValues, stateOfButton = None
         ValidValuesList += ToggleableIndexValues
     else:
         ValidValuesList[:] = [x for x in ValidValuesList if x not in ToggleableIndexValues]
-    print(ValidValuesList)
-    print()
-    print()
+    print(ValidValuesList, end='\n\n')
+
     

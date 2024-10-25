@@ -1,7 +1,7 @@
 C:/Users/benja/Desktop/XC2_Randomizer/bdat
 C:/Users/benja/AppData/Roaming/yuzu/load/0100E95004039001/0100E95004039001/romfs/bdat
 MinothDestroysPyra
-False
+True
 True
 True
 True
