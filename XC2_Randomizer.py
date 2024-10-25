@@ -135,7 +135,7 @@ BladeTreeUnlockConditions = Helper.inclRange(1,1768)
 BladeNames = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 52, 53, 54, 55, 78, 79, 56, 58, 57, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 59, 75, 76, 77, 45, 46, 47, 48, 49, 50, 51, 45, 57, 45, 49, 50, 51, 76, 102, 103, 104, 105, 106, 107, 108]
 BackgroundMusic = Helper.inclRange(1,62) + Helper.inclRange(64,100) + Helper.inclRange(117,128) + [132,133,141,142,149,150,153,154] + Helper.inclRange(157,169) + Helper.inclRange(176,180)
 Jingles = Helper.inclRange(102,116)
-CollectionPointMaterials = Helper.inclRange(30001,30445)
+CollectionPointMaterials = [x for x in Helper.inclRange(30001,30445) if x not in [30232, 30233, 30237, 30236, 30243, 30244, 30245, 30246]]
 AllValues = Helper.inclRange(0,10000000)
 Deeds = Helper.inclRange(25249,25300)
 
