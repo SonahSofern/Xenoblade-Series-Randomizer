@@ -27,6 +27,7 @@ TabDriversOuter = tk.Frame(MainWindow)
 TabBladesOuter = tk.Frame(MainWindow) 
 TabEnemiesOuter = tk.Frame(MainWindow) 
 TabMiscOuter = tk.Frame(MainWindow) 
+TabQOLOuter = tk.Frame(MainWindow)
 
 # Canvas 
 TabGeneralCanvas = tk.Canvas(TabGeneralOuter) 
@@ -34,6 +35,7 @@ TabDriversCanvas = tk.Canvas(TabDriversOuter)
 TabBladesCanvas = tk.Canvas(TabBladesOuter)
 TabEnemiesCanvas = tk.Canvas(TabEnemiesOuter) 
 TabMiscCanvas = tk.Canvas(TabMiscOuter)
+TabQOLCanvas = tk.Canvas(TabQOLOuter)
 
 # Actual Scrollable Content
 TabGeneral = tk.Frame(TabGeneralCanvas) 
@@ -41,6 +43,7 @@ TabDrivers = tk.Frame(TabDriversCanvas)
 TabBlades = tk.Frame(TabBladesCanvas)
 TabEnemies = tk.Frame(TabEnemiesCanvas) 
 TabMisc = tk.Frame(TabMiscCanvas)
+TabQOL = tk.Frame(TabQOLCanvas)
 
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
@@ -67,7 +70,8 @@ MainWindow.add(TabGeneralOuter, text ='General')
 MainWindow.add(TabDriversOuter, text ='Drivers') 
 MainWindow.add(TabBladesOuter, text ='Blades') 
 MainWindow.add(TabEnemiesOuter, text ='Enemies') 
-MainWindow.add(TabMiscOuter, text ='Misc') 
+MainWindow.add(TabMiscOuter, text ='Misc.') 
+MainWindow.add(TabQOLOuter, text = 'Quality of Life')
 MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10) 
 
 CheckboxStates = []

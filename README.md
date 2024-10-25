@@ -7,9 +7,9 @@ All you need is a common.bdat file and the knowledge on where to place it
  Planned:
 
 
- Save Most Recent chosen settings 
+ Save Most Recent chosen settings DONE
 
- Save Most Recent FilePaths
+ Save Most Recent FilePaths DONE
 
  Make option sliders in my UI for the in game option sliders
 
