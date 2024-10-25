@@ -1,19 +1,19 @@
 import json
-
+import tkinter as tk
 
 def saveData(DataList):
-    print("thing closed")
     with open('SavedOptions.txt', 'w') as file:
-        for it in DataList:
-            file.write(f"{it.get()} + '\n'")
+        for saveData in DataList:
+            file.write(f"{saveData.get()}" + '\n')
 
 
 
 def loadData(DataList):
-    None
-
-
-# with open('directories.json', 'r') as file:
-#     data = json.load(file)
-#     InputDirectory = data['InputDirectory']
-#     OutputDirectory = data['OutputDirectory']
+    with open('SavedOptions.txt', 'r') as file:
+        savedLines = file.readlines()
+        for i in range(len(DataList)):
+            if isinstance(DataList[i], tk.Entry):
+                DataList[i].delete(0,tk.END)
+                DataList[i].insert(0, savedLines[i].strip())
+            else:
+                DataList[i].set(savedLines[i].strip())

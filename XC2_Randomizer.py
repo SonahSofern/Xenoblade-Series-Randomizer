@@ -227,6 +227,7 @@ RandomizeButton.pack(pady=10)
 
 EveryObjectSave = ([bdatFilePathEntry, outDirEntry] + CheckboxStates)
 
+SavedOptions.loadData(EveryObjectSave)
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectSave), root.destroy())) # Runs right before window is deleted
 
 
