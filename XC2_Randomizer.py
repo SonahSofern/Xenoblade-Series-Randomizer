@@ -7,19 +7,24 @@ from tkinter import *
 import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser
 
 root = tk.Tk()
-
 root.title("Xenoblade Chronicles 2 Randomizer 0.1.0")
 root.configure(background='#632424')
 root.geometry('800x800')
-
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
 
+
 CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
+CheckboxStates = []
+CheckboxList = []
+OptionsRunList = []
+OptionSliders = []
+rowIncrement = 0
 
+
+# The Notebook
 MainWindow = ttk.Notebook(root, height=2)
-
 
 #Frames in the notebook
 TabGeneralOuter = tk.Frame(MainWindow) 
@@ -72,13 +77,9 @@ MainWindow.add(TabBladesOuter, text ='Blades')
 MainWindow.add(TabEnemiesOuter, text ='Enemies') 
 MainWindow.add(TabMiscOuter, text ='Misc.') 
 MainWindow.add(TabQOLOuter, text = 'Quality of Life')
-MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10) 
+MainWindow.pack(expand = 1, fill ="both", padx=10, pady=10) 
 
-CheckboxStates = []
-CheckboxList = []
-OptionsRunList = []
-OptionSliders = []
-rowIncrement = 0
+
 def GenOption(optionName, parentTab, desc, Filename, keyWords, rangeOfValuesToReplace, rangeOfValidReplacements,  OptionNameANDIndexValue = [], InvalidTargetIDs =[]):
     global rowIncrement
     global OptionsRunList
@@ -174,7 +175,6 @@ GenOption("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still test
 GenOption("NPCs Size", TabMisc, "Randomizes the size of NPCs", ["common/RSC_NpcList.json"], ["Scale"], Helper.inclRange(1,100), Helper.inclRange(1,250))
 
 
-
 def Randomize():
     global OptionsRunList
 
@@ -202,38 +202,27 @@ def GenRandomSeed():
 
 bdatcommonFrame = tk.Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
-
 bdatButton = tk.Button(bdatcommonFrame, text="Choose Input Folder (bdat)", command= lambda: Helper.DirectoryChoice("Choose your bdat folder", bdatFilePathEntry))
 bdatButton.pack(side="left", padx=2, pady=2)
-
 bdatFilePathEntry = tk.Entry(bdatcommonFrame, width=500)
 bdatFilePathEntry.pack(side="left", padx=2)
-
-
 OutputDirectoryFrame = tk.Frame(root, background='#632424')
 OutputDirectoryFrame.pack(anchor="w", padx=10)
-
 outputDirButton = tk.Button(OutputDirectoryFrame, text='Choose Output Folder', command= lambda: Helper.DirectoryChoice("Choose an output folder", outDirEntry))
 outputDirButton.pack(side="left", padx=2, pady=2)
-
 outDirEntry = tk.Entry(OutputDirectoryFrame, width=500)
 outDirEntry.pack(side="left", padx=2)
-
-
 SeedFrame = tk.Frame(root, background='#632424')
 SeedFrame.pack(anchor="w", padx=10)
-
 seedDesc = tk.Button(SeedFrame, text="Seed", command=GenRandomSeed)
 seedDesc.pack(side='left', padx=2, pady=2)
-
 randoSeedEntry = tk.Entry(SeedFrame, width=30)
 randoSeedEntry.pack(side='left', padx=2)
-
 RandomizeButton = tk.Button(text='Randomize', command=Randomize)
 RandomizeButton.pack(pady=10) 
 
-EveryObjectSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + CheckboxStates + OptionSliders)
 
+EveryObjectSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + CheckboxStates + OptionSliders)
 SavedOptions.loadData(EveryObjectSave)
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectSave), root.destroy())) # Runs right before window is deleted
 
