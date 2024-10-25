@@ -11,7 +11,7 @@ def saveData(DataList):
 def loadData(DataList):
     with open('SavedOptions.txt', 'r') as file:
         savedLines = file.readlines()
-        for i in range(len(DataList)):
+        for i in range(len(savedLines)):
             if isinstance(DataList[i], tk.Entry):
                 DataList[i].delete(0,tk.END)
                 DataList[i].insert(0, savedLines[i].strip())

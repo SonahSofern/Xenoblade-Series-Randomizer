@@ -73,10 +73,12 @@ MainWindow.pack(expand = 1, fill ="both", padx=10, pady= 10)
 CheckboxStates = []
 CheckboxList = []
 OptionsRunList = []
+OptionSliders = []
 rowIncrement = 0
 def GenOption(optionName, parentTab, desc, Filename, keyWords, rangeOfValuesToReplace, rangeOfValidReplacements,  OptionNameANDIndexValue = [], InvalidTargetIDs =[]):
     global rowIncrement
     global OptionsRunList
+    global OptionSliders
 
     optionPanel = tk.Frame(parentTab, padx=10, pady=10)
     optionPanel.grid(row=rowIncrement, column= 0, sticky="sw")
@@ -90,6 +92,7 @@ def GenOption(optionName, parentTab, desc, Filename, keyWords, rangeOfValuesToRe
     option = tk.Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w")
     option.grid(row=rowIncrement, column=0, sticky="sw")
     optionSlider = tk.Scale(optionPanel, from_=0, to=100, orient=tk.HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
+    OptionSliders.append(optionSlider)
     optionSlider.set(0)
     optionSlider.grid(row=rowIncrement, column=1, sticky='n')
     optionDesc = tk.Label(optionPanel, text=desc, background=OptionColor, width=900, anchor='w')
@@ -225,7 +228,7 @@ randoSeedEntry.pack(side='left', padx=2)
 RandomizeButton = tk.Button(text='Randomize', command=Randomize)
 RandomizeButton.pack(pady=10) 
 
-EveryObjectSave = ([bdatFilePathEntry, outDirEntry] + CheckboxStates)
+EveryObjectSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + CheckboxStates + OptionSliders)
 
 SavedOptions.loadData(EveryObjectSave)
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectSave), root.destroy())) # Runs right before window is deleted
