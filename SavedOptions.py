@@ -9,7 +9,8 @@ def saveData(DataList):
 
 
 def loadData(DataList):
-    with open('SavedOptions.txt', 'r') as file:
+    with open('SavedOptions.txt', 'a+') as file:
+        file.seek(0)
         savedLines = file.readlines()
         for i in range(len(savedLines)):
             if isinstance(DataList[i], tk.Entry):
