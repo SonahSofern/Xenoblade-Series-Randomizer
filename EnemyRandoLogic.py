@@ -346,36 +346,49 @@ def LevelReversion(FullDefaultIDs, FullRandomizedIDs, SpecificDefaultIDs, Specif
 def EnemyLogic(CheckboxList, CheckboxStates):
     EnemyRandoOn = False
     EnemiestoPass = []
+    LevelstoPass = []
     for k in range(0, len(CheckboxList)):
         if CheckboxList[k] == "Story Bosses Box":
             if (CheckboxStates[k].get() == True) or (CheckboxStates[k+1].get() == True) or (CheckboxStates[k+2].get() == True) or (CheckboxStates[k+3].get() == True) or (CheckboxStates[k+4].get() == True):
                 EnemyRandoOn = True
                 break
-    if EnemyRandoOn == True:            
+    if EnemyRandoOn == True:
         for n in range(0, len(CheckboxList)):
             if CheckboxList[n] == "Mix Enemies Between Types Box" and CheckboxStates[n].get() == True:
-                for o in range(0, len(CheckboxList)):
-                    if CheckboxList[o] == "Story Bosses Box" and CheckboxStates[o].get() == True:
-                        EnemiestoPass += AllBossDefaultIDs
-                    if CheckboxList[o] == "Quest Enemies Box" and CheckboxStates[o].get() == True:
-                        EnemiestoPass += AllQuestDefaultEnemyIDs
-                    if CheckboxList[o] == "Unique Monsters Box" and CheckboxStates[o].get() == True:
-                        EnemiestoPass += AllUniqueMonsterDefaultIDs
-                    if CheckboxList[o] == "Superbosses Box" and CheckboxStates[o].get() == True:
-                        EnemiestoPass += AllSuperbossDefaultIDs
-                    if CheckboxList[o] == "Normal Enemies Box" and CheckboxStates[o].get() == True:
-                        EnemiestoPass += AllNormalEnemyDefaultIDs
-                LevelstoPass = Helper.FindBadValuesList("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["$id"], EnemiestoPass, "Lv")
+                if CheckboxStates[CheckboxList == "Story Bosses Box"].get == True:
+                    EnemiestoPass += AllBossDefaultIDs
+                    if CheckboxStates[CheckboxList == "Keep Story Boss Levels Box"].get() == True:
+                        LevelstoPass += AllBossDefaultLevels
+                if CheckboxStates[CheckboxList == "Quest Enemies Box"].get == True:
+                    EnemiestoPass += AllQuestDefaultEnemyIDs
+                    if CheckboxStates[CheckboxList == "Keep Quest Enemy Levels Box"].get() == True:
+                        LevelstoPass += AllQuestEnemyDefaultLevels
+                if CheckboxStates[CheckboxList == "Unique Monsters Box"].get == True:
+                    EnemiestoPass += AllUniqueMonsterDefaultIDs
+                if CheckboxStates[CheckboxList == "Superbosses Box"].get == True:
+                    EnemiestoPass += AllUniqueMonsterDefaultIDs                
+                if CheckboxStates[CheckboxList == "Normal Enemies Box"].get == True:
+                    EnemiestoPass += AllUniqueMonsterDefaultIDs                
                 DefaultEnemyIDs = EnemiestoPass.copy()
                 RandomizedEnemyIDs = DefaultEnemyIDs.copy()
                 random.shuffle(RandomizedEnemyIDs)
                 ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
+                if EnemiestoPass:
+                    if CheckboxStates[CheckboxList == "Keep All Enemy Levels Box"].get() == True:
+                        LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, AllEnemyDefaultLevels)
+                        break
+                    if CheckboxStates[CheckboxList == "Quest Enemies Box"].get() == True:
+                        if CheckboxStates[CheckboxList == "Keep Quest Enemy Levels Box"].get() == True:
+                            LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
+                    if CheckboxStates[CheckboxList == "Story Bosses Box"].get() == True:
+                        if CheckboxStates[CheckboxList == "Keep Story Boss Levels Box"].get() == True:
+                            LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
             if CheckboxList[n] == "Mix Enemies Between Types Box" and CheckboxStates[n].get() == False:
                 for o in range(0, len(CheckboxList)):
                     if CheckboxList[o] == "Story Bosses Box" and CheckboxStates[o].get() == True:
                         EnemiestoPass = AllBossDefaultIDs
                     if CheckboxList[o] == "Quest Enemies Box" and CheckboxStates[o].get() == True:
-                        EnemiestoPass = AllQuestDefaultEnemyIDs
+                        EnemiestoPass = AllQuestDefaultEnemyIDs                      
                     if CheckboxList[o] == "Unique Monsters Box" and CheckboxStates[o].get() == True:
                         EnemiestoPass = AllUniqueMonsterDefaultIDs
                     if CheckboxList[o] == "Superbosses Box" and CheckboxStates[o].get() == True:
@@ -386,15 +399,16 @@ def EnemyLogic(CheckboxList, CheckboxStates):
                         DefaultEnemyIDs = EnemiestoPass.copy()
                         RandomizedEnemyIDs = DefaultEnemyIDs.copy()
                         random.shuffle(RandomizedEnemyIDs)
+                        if CheckboxList[o] == "Quest Enemies Box" and CheckboxStates[o].get() == True:
+                            if CheckboxStates[CheckboxList == "Keep Quest Enemy Levels Box"].get() == True:
+                                LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
+                        if CheckboxList[o] == "Story Bosses Box" and CheckboxStates[o].get() == True:
+                            if CheckboxStates[CheckboxList == "Keep Story Boss Levels Box"].get() == True:
+                                LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
                         ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
-                        EnemiestoPass = []                    
-            if CheckboxList[n] == "Keep All Enemy Levels Box" and CheckboxStates[n].get() == True:
-                LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, AllEnemyDefaultLevels)
-                break
-            if CheckboxList[n] == "Keep Story Boss Levels Box" and CheckboxStates[n].get() == True:
-                LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
-            if CheckboxList[n] == "Keep Quest Enemy Levels Box" and CheckboxStates[n].get() == True:
-                LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
+                        if CheckboxStates[CheckboxList == "Keep All Enemy Levels Box"].get() == True:
+                            LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, AllEnemyDefaultLevels)
+                        EnemiestoPass = []
         SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "AlwaysAttack", 0)
         BossQuestAggroAdjustments(DefaultEnemyIDs, RandomizedEnemyIDs)
         ReducePCHPBattle1()

@@ -196,6 +196,7 @@ def GenRandomSeed():
     #print(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"))
     # Helper.FindSubOptionValuesList("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "AlwaysAttack", 1, "$id") 
     EnemyRandoLogic.FindMatchingInfo
+    
     randoSeedEntry.delete(0, tk.END)
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
     # print(CheckboxStates[0].get())
