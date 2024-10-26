@@ -403,7 +403,7 @@ def EnemyLogic(CheckboxList, CheckboxStates):
                             if CheckboxStates[CheckboxList == "Keep Quest Enemy Levels Box"].get() == True:
                                 LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
                         if CheckboxList[o] == "Story Bosses Box" and CheckboxStates[o].get() == True:
-                            if CheckboxStates[CheckboxList == "Keep Story Boss Levels Box"].get() == True:
+                            if CheckboxStates[CheckboxList == "Keep Story Boss Levels Box"].get() == True: # need to change this to check specific index instead of using == to value of checkboxlist, probably in initial loop find index corresponding to this box then use this
                                 LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
                         ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
                         if CheckboxStates[CheckboxList == "Keep All Enemy Levels Box"].get() == True:
