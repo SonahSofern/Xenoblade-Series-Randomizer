@@ -1,19 +1,4 @@
-# RexCosmetics = []
-# NiaDriverCosmetics = []
-# ToraCosmetics = []
-# MoragCosmetics = []
-# ZekeCosmetics = []
-
-# PyraCosmetics = []
-# MythraCosmetics = []
-# DromarchCosmetics =[]
-# PoppiaCosmetics = []
-# PoppiQTCosmetics = []
-# PoppiQTPiCosmetics = []
-# BrighidCosmetics = []
-# PandoriaCosmetics = []
-# NiaBladeCosmetics = []
-
+#Blades
 JadeOrchidBrighid = "bl/bl121001"
 MagicalPinkPandoria = "bl/bl120901"
 ObsidianDromarch = "bl/bl120501"
@@ -33,6 +18,7 @@ PyraStyleMythra = "bl/bl100201"
 MythraStylePyra = "bl/bl100102"
 DisguisedPyra = "bl/bl100101"
 
+#Drivers
 ScarletInquisitorMorag = "pc/pc120601"
 ShiningJusticeZeke = "pc/pc120501"
 SkullfacePunkTora = "pc/pc120301"
@@ -48,3 +34,18 @@ BestGirlFanTora = "pc/pc110301"
 BusterModeTora = "pc/pc100301"
 FancySundressNia = "pc/pc110201"
 CandyStripeNia = "pc/pc100201"
+
+#Drivers
+RexCosmetics = [CloudSeaKingRex, CloudSeaSharkRex, PrototypeSuitRex]
+NiaDriverCosmetics = [CandyStripeNia, FancySundressNia, BloodWitchNia]
+ToraCosmetics = [BusterModeTora, BestGirlFanTora, SkullfacePunkTora]
+MoragCosmetics = [DressUniformMorag, ObligatoryLeaveMorag, ScarletInquisitorMorag]
+ZekeCosmetics = [EmbercakeZeke, SurfinatorZeke, ShiningJusticeZeke]
+
+#Blades
+PyraCosmetics = [BlueSkyPyra, DisguisedPyra, ProSwimmerPyra, MythraStylePyra]
+MythraCosmetics = [CarbonMythra, PyraStyleMythra, RadiantBeachMythra]
+DromarchCosmetics =[ObsidianDromarch, SavageDromarch]
+BrighidCosmetics = [WaterLilyBrighid, JadeOrchidBrighid, CrimsonOrchidBrighid]
+PandoriaCosmetics = [BeachDatePandoria, MagicalPinkPandoria, MermaidBluePandoria]
+NiaBladeCosmetics = [DevotedMarigoldNia, LoyalBellflowerNia, SincerePrimroseNia]
