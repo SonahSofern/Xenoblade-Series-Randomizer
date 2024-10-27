@@ -4,7 +4,7 @@ from tkinter import ttk
 import random
 import subprocess
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser
+import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, DriverSkillTreeAdjustment
 import threading
 
 root = tk.Tk()
@@ -110,7 +110,7 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
         box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
     rowIncrement += 1
 
-    if optionName != "Enemies":
+    if optionName != "Enemies" or optionName != "Driver Skill Trees":
         OptionsRunList.append(lambda: JSONParser.RandomizeBetweenRange("Randomizing " + optionName, Filename, keyWords, rangeOfValuesToReplace, optionSlider.get(), rangeOfValidReplacements, InvalidTargetIDs))
 
 #HELPFUL VARIABLES
@@ -142,8 +142,6 @@ Deeds = Helper.inclRange(25249,25300)
 BladeDefenseDistribution = [0,0,0,0,5,5,5,5,5,5,5,10,10,10,10,10,15,15,15,15,15,15,15,15,20,20,20,20,20,20,20,20,25,25,25,30,30,35,35,40,40,45,50,55,60,65,70,75,80,85,90,95,100]
 BladeModDistribution = [0,0,0,5,5,5,10,10,10,10,10,15,15,15,20,20,20,25,25,25,25,25,30,30,30,30,35,35,40,40,45,45,50,70,100]
 
-
-
 GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", ["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), PouchItems, PouchItems)
 GenOption("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", ["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), Accessories, Accessories + Helper.inclRange(448,455))
 GenOption("Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Chip Shops", ["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)
@@ -152,7 +150,7 @@ GenOption("Collection Points", TabGeneral, "Randomizes the contents of Collectio
 
 GenOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", ["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, ArtDebuffs + ArtBuffs, ["Doom", [21]],  InvalidTargetIDs=AutoAttacks)
 GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", ["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20))
-GenOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", ["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees)
+GenOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", ["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees, ["Arts Canceling Unlocked", [2000]])
 GenOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a random effect such as break, knockback etc.", ["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactions, InvalidTargetIDs=AutoAttacks) # we want id numbers no edit the 1/6 react stuff
 GenOption("Driver Animation Speed", TabDrivers, "Randomizes animation speeds", ["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.inclRange(0,255), Helper.inclRange(50,255), InvalidTargetIDs=AutoAttacks)
 #GenOption("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with",["common/CHR_Dr.json"], ["DefAcce"], AllValues, Accessories, ["Remove All Starting Accessories", Accessories] ) only problem is the button on of off changin the values we want
@@ -171,7 +169,6 @@ GenOption("Blade Names", TabBlades, "Randomizes the names of blades",["common/CH
 GenOption("Blade Defenses", TabBlades, "Randomizes Blade Physical and Ether Defense", ["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.inclRange(0,100), BladeDefenseDistribution)
 GenOption("Blade Mods", TabBlades, "Randomizes Blade Stat Modifiers", ["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.inclRange(0,100), BladeModDistribution)
 GenOption("Blade Scale", TabBlades, "Randomizes the size of Blades", ["common/CHR_Bl.json"], ["Scale", "WpnScale"],AllValues, Helper.inclRange(1,250) + [1000,16000]) # Make sure these work for common blades
-
 
 GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", ["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips)
 GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", ["common/CHR_EnArrange.json"], ["Scale"], Helper.inclRange(0, 1000), Helper.inclRange(1, 200) + Helper.inclRange(990,1000))
@@ -202,19 +199,12 @@ def Randomize():
         for OptionRun in OptionsRunList:
             OptionRun()
 
+        DriverSkillTreeAdjustment.ArtsCancelBehavior()
         EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates) # gonna hide this in a Gen option command
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
         RandomizeButton.config(state=NORMAL)
     threading.Thread(target=ThreadedRandomize).start()
-
-def GenRandomSeed():
-    randoSeedEntry.delete(0, tk.END)
-    randoSeedEntry.insert(0,SeedNames.RandomSeedName())    
-
-    EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates)
-
-    subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
 def GenRandomSeed():
     #print(Helper.StartsWithHelper("BSkill", 1, 3))
