@@ -4,7 +4,7 @@ from tkinter import ttk
 import random
 import subprocess
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser
+import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, Cosmetics
 import threading
 
 root = tk.Tk()
@@ -13,7 +13,6 @@ root.configure(background='#632424')
 root.geometry('1000x800')
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
-
 
 CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
@@ -33,6 +32,7 @@ TabBladesOuter = tk.Frame(MainWindow)
 TabEnemiesOuter = tk.Frame(MainWindow) 
 TabMiscOuter = tk.Frame(MainWindow) 
 TabQOLOuter = tk.Frame(MainWindow)
+TabCosmeticsOuter = tk.Frame(MainWindow)
 
 # Canvas 
 TabGeneralCanvas = tk.Canvas(TabGeneralOuter) 
@@ -41,6 +41,7 @@ TabBladesCanvas = tk.Canvas(TabBladesOuter)
 TabEnemiesCanvas = tk.Canvas(TabEnemiesOuter) 
 TabMiscCanvas = tk.Canvas(TabMiscOuter)
 TabQOLCanvas = tk.Canvas(TabQOLOuter)
+TabCosmeticsCanvas = tk.Canvas(TabCosmeticsOuter)
 
 # Actual Scrollable Content
 TabGeneral = tk.Frame(TabGeneralCanvas) 
@@ -49,6 +50,8 @@ TabBlades = tk.Frame(TabBladesCanvas)
 TabEnemies = tk.Frame(TabEnemiesCanvas) 
 TabMisc = tk.Frame(TabMiscCanvas)
 TabQOL = tk.Frame(TabQOLCanvas)
+TabCosmetics = tk.Frame(TabCosmeticsCanvas)
+
 
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
@@ -70,14 +73,17 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touc
         Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
         OuterFrames[i].pack(expand=True, fill="both")
 
-CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL])
+CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics])
+
+
 MainWindow.add(TabGeneralOuter, text ='General') 
 MainWindow.add(TabDriversOuter, text ='Drivers') 
 MainWindow.add(TabBladesOuter, text ='Blades') 
 MainWindow.add(TabEnemiesOuter, text ='Enemies') 
 MainWindow.add(TabMiscOuter, text ='Misc.') 
 MainWindow.add(TabQOLOuter, text = 'Quality of Life')
-MainWindow.pack(expand = 1, fill ="both", padx=10, pady=10) 
+MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
+MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 
 def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValuesToReplace=[], rangeOfValidReplacements=[],  OptionNameANDIndexValue = [], InvalidTargetIDs =[]):
@@ -103,7 +109,7 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
     optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
 
     for i in range((len(OptionNameANDIndexValue))//2):
-        var = tk.BooleanVar()
+        var = tk.BooleanVar(value = True)
         box = tk.Checkbutton(optionPanel, background=OptionColor, text=OptionNameANDIndexValue[2*i], variable=var, command=lambda i=i, var=var: Helper.OptionCarveouts(rangeOfValidReplacements, OptionNameANDIndexValue[2*i+1], var), highlightthickness=0)
         CheckboxStates.append(var)
         CheckboxList.append(OptionNameANDIndexValue[2*i] + " Box")
@@ -170,7 +176,7 @@ GenOption("Blade Aux Core Slots", TabBlades, "Randomizes how many Aux Core slots
 GenOption("Blade Names", TabBlades, "Randomizes the names of blades",["common/CHR_Bl.json"], ["Name"], Helper.inclRange(0,1000), BladeNames)
 GenOption("Blade Defenses", TabBlades, "Randomizes Blade Physical and Ether Defense", ["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.inclRange(0,100), BladeDefenseDistribution)
 GenOption("Blade Mods", TabBlades, "Randomizes Blade Stat Modifiers", ["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.inclRange(0,100), BladeModDistribution)
-GenOption("Blade Scale", TabBlades, "Randomizes the size of Blades", ["common/CHR_Bl.json"], ["Scale", "WpnScale"],AllValues, Helper.inclRange(1,250) + [1000,16000]) # Make sure these work for common blades
+GenOption("Blade Scale", TabBlades, "Randomizes the size of Blades", ["common/CHR_Bl.json"], ["Scale", "WpnScale"], AllValues, Helper.inclRange(1,250) + [1000,16000]) # Make sure these work for common blades
 
 
 GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", ["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips)
@@ -179,7 +185,7 @@ GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", 
 GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", ["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.inclRange(0,100), Helper.inclRange(0,100) + Helper.inclRange(250,255))
 #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30))
 
-GenOption("Music", TabMisc, "Randomizes what music plays where", ["common/RSC_BgmCondition.json"], ["BgmIDA", "BgmIDB", "BgmIDC", "BgmIDD"], BackgroundMusic, BackgroundMusic)
+GenOption("Music", TabMisc, "Randomizes what music plays where", ["common/RSC_BgmCondition.json"], ["BgmIDA", "BgmIDB", "BgmIDC", "BgmIDD"], BackgroundMusic, BackgroundMusic) # need to change title screen music
 GenOption("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.inclRange(0,3721), Helper.inclRange(2001,3721))
 GenOption("NPCs Size", TabMisc, "Randomizes the size of NPCs", ["common/RSC_NpcList.json"], ["Scale"], Helper.inclRange(1,100), Helper.inclRange(1,250))
 
@@ -187,8 +193,23 @@ GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in
 GenOption("Running Speed", TabQOL, "Set your starting run speed bonus")
 #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
 
+GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], Cosmetics.RexCosmetics, [], ["Default Rex", [Cosmetics.DefaultRex], "Master Driver Rex", [Cosmetics.MasterDriverRex], "Cloud Sea King Rex", [Cosmetics.CloudSeaKingRex], "Cloud Sea Shark Rex", [Cosmetics.CloudSeaSharkRex], "Prototype Suit Rex", [Cosmetics.PrototypeSuitRex], "Helmeted Rex", [Cosmetics.HelmetedRex]])
+GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], Cosmetics.PyraCosmetics, [], ["Blue Sky Pyra", [Cosmetics.BlueSkyPyra], "Disguised Pyra", [Cosmetics.DisguisedPyra], "Mythra-Style-Pyra", [Cosmetics.MythraStylePyra], "Pro Swimmer Pyra", [Cosmetics.ProSwimmerPyra]])
+GenOption("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits", ["common/CHR_Bl.json"], ["Model"], Cosmetics.MythraCosmetics, [], ["Carbon Mythra", [Cosmetics.CarbonMythra], "Pyra-Style-Mythra", [Cosmetics.PyraStyleMythra], "Radiant Beach Mythra", [Cosmetics.RadiantBeachMythra]])
+GenOption("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits", ["common/CHR_Dr.json"], ["Model"], Cosmetics.NiaDriverCosmetics, [], ["Blood Witch Nia", [Cosmetics.BloodWitchNia], "Candy Stripe Nia", [Cosmetics.CandyStripeNia], "Fancy Sundress Nia", [Cosmetics.FancySundressNia]])
+GenOption("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], Cosmetics.NiaBladeCosmetics, [], ["Devoted Marigold Nia", [Cosmetics.DevotedMarigoldNia], "Sincere Primrose Nia", [Cosmetics.SincerePrimroseNia], "Loyal Bellflower Nia", [Cosmetics.LoyalBellflowerNia]])
+GenOption("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], Cosmetics.DromarchCosmetics, [], ["Obsidian Dromarch", [Cosmetics.ObsidianDromarch], "Savage Dromarch", [Cosmetics.SavageDromarch]])
+GenOption("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits", ["common/CHR_Dr.json"], ["Model"], Cosmetics.ToraCosmetics, [], ["Buster Mode Tora", [Cosmetics.BusterModeTora], "Skullface Punk Tora", [Cosmetics.SkullfacePunkTora], "Best Girlfan Tora", [Cosmetics.BestGirlFanTora]])
+GenOption("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits", ["common/CHR_Dr.json"], ["Model"], Cosmetics.MoragCosmetics, [], ["Dress Uniform Morag", [Cosmetics.DressUniformMorag], "Scarlet Inquisitor Morag", [Cosmetics.ScarletInquisitorMorag], "Obligatory Leave Morag", [Cosmetics.ObligatoryLeaveMorag]])
+GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], Cosmetics.BrighidCosmetics, [], ["Jade Orchid Brighid", [Cosmetics.JadeOrchidBrighid], "Crimson Orchid Brighid", [Cosmetics.CrimsonOrchidBrighid], "Water Lily Brighid", [Cosmetics.WaterLilyBrighid]])
+GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], Cosmetics.ZekeCosmetics, [], ["Shining Justice Zeke", [Cosmetics.ShiningJusticeZeke], "Embercake Zeke", [Cosmetics.EmbercakeZeke], "Surfinator Zeke", [Cosmetics.SurfinatorZeke]])
+GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], Cosmetics.PandoriaCosmetics, [], ["Magical Pink Pandoria", [Cosmetics.MagicalPinkPandoria], "Mermaid Blue Pandoria", [Cosmetics.MermaidBluePandoria], "Beach Date Pandoria", [Cosmetics.BeachDatePandoria]])
+
+
+
+
 def Randomize():
-    def ThreadedRandomize(): # added threading because the GUI wont update when subprocess calls are happening
+    def ThreadedRandomize():
         global OptionsRunList
         global RandomizeButton
         RandomizeButton.config(state=DISABLED)
