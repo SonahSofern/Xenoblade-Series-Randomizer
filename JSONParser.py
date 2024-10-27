@@ -6,7 +6,7 @@ def RandomizeBetweenRange(cmdDescription, Filename, keyWords, rangeofValuesToRep
     if (sliderOdds == 0):
         #print(cmdDescription + " Slider at zero") 
         return
-    print(cmdDescription)   
+    print("Randomizing " + cmdDescription)   
     for name in Filename:
         filePath = "./_internal/JsonOutputs/" + name
         if not os.path.exists(filePath):

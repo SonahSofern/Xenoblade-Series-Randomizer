@@ -6,10 +6,8 @@ All you need is a common.bdat file and the knowledge on where to place it
 
  Planned:
 
+Remove Field Tutorials (RSC_GmkSetList might help)
 
- Save Most Recent chosen settings DONE
-
- Save Most Recent FilePaths DONE
 
  Make option sliders in my UI for the in game option sliders
 
@@ -17,6 +15,6 @@ All you need is a common.bdat file and the knowledge on where to place it
 
  Arts Cancel as an option to start the game with
 
- Faster movement (find where player movespeed integer is kept, probably found threough the precious items that increase speed.) FLD owner bonus and the max parameter
+ Faster movement (find where player movespeed integer is kept, probably found threough the precious items that increase speed.) FLD owner bonus and the max parameter (Maybe turn condition to false for battle movement speed https://xenobladedata.github.io/xb2/bdat/common/BTL_EnhanceEff.html#211)4
 
  Make a option to change some of the base game text that is unclear (like narrator volume and blades autoattack stat)

@@ -10,7 +10,7 @@ import threading
 root = tk.Tk()
 root.title("Xenoblade Chronicles 2 Randomizer 0.1.0")
 root.configure(background='#632424')
-root.geometry('1000x800')
+root.geometry('700x800')
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
 
@@ -116,8 +116,8 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
         box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
     rowIncrement += 1
 
-    if optionName != "Enemies":
-        OptionsRunList.append(lambda: JSONParser.RandomizeBetweenRange("Randomizing " + optionName, Filename, keyWords, rangeOfValuesToReplace, optionSlider.get(), rangeOfValidReplacements, InvalidTargetIDs))
+    if optionName != "Enemies": # make this pass an anonymous function so the genoption calls have the decision of what funciton to run
+        OptionsRunList.append(lambda: JSONParser.RandomizeBetweenRange(optionName, Filename, keyWords, rangeOfValuesToReplace, optionSlider.get(), rangeOfValidReplacements, InvalidTargetIDs))
 
 #HELPFUL VARIABLES
 #AuxCores = inclRange(17001, 17424) # i cant find what these were?
@@ -193,17 +193,29 @@ GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in
 GenOption("Running Speed", TabQOL, "Set your starting run speed bonus")
 #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
 
-GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], Cosmetics.RexCosmetics, [], ["Default Rex", [Cosmetics.DefaultRex], "Master Driver Rex", [Cosmetics.MasterDriverRex], "Cloud Sea King Rex", [Cosmetics.CloudSeaKingRex], "Cloud Sea Shark Rex", [Cosmetics.CloudSeaSharkRex], "Prototype Suit Rex", [Cosmetics.PrototypeSuitRex], "Helmeted Rex", [Cosmetics.HelmetedRex]])
-GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], Cosmetics.PyraCosmetics, [], ["Blue Sky Pyra", [Cosmetics.BlueSkyPyra], "Disguised Pyra", [Cosmetics.DisguisedPyra], "Mythra-Style-Pyra", [Cosmetics.MythraStylePyra], "Pro Swimmer Pyra", [Cosmetics.ProSwimmerPyra]])
-GenOption("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits", ["common/CHR_Bl.json"], ["Model"], Cosmetics.MythraCosmetics, [], ["Carbon Mythra", [Cosmetics.CarbonMythra], "Pyra-Style-Mythra", [Cosmetics.PyraStyleMythra], "Radiant Beach Mythra", [Cosmetics.RadiantBeachMythra]])
-GenOption("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits", ["common/CHR_Dr.json"], ["Model"], Cosmetics.NiaDriverCosmetics, [], ["Blood Witch Nia", [Cosmetics.BloodWitchNia], "Candy Stripe Nia", [Cosmetics.CandyStripeNia], "Fancy Sundress Nia", [Cosmetics.FancySundressNia]])
-GenOption("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], Cosmetics.NiaBladeCosmetics, [], ["Devoted Marigold Nia", [Cosmetics.DevotedMarigoldNia], "Sincere Primrose Nia", [Cosmetics.SincerePrimroseNia], "Loyal Bellflower Nia", [Cosmetics.LoyalBellflowerNia]])
-GenOption("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], Cosmetics.DromarchCosmetics, [], ["Obsidian Dromarch", [Cosmetics.ObsidianDromarch], "Savage Dromarch", [Cosmetics.SavageDromarch]])
-GenOption("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits", ["common/CHR_Dr.json"], ["Model"], Cosmetics.ToraCosmetics, [], ["Buster Mode Tora", [Cosmetics.BusterModeTora], "Skullface Punk Tora", [Cosmetics.SkullfacePunkTora], "Best Girlfan Tora", [Cosmetics.BestGirlFanTora]])
-GenOption("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits", ["common/CHR_Dr.json"], ["Model"], Cosmetics.MoragCosmetics, [], ["Dress Uniform Morag", [Cosmetics.DressUniformMorag], "Scarlet Inquisitor Morag", [Cosmetics.ScarletInquisitorMorag], "Obligatory Leave Morag", [Cosmetics.ObligatoryLeaveMorag]])
-GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], Cosmetics.BrighidCosmetics, [], ["Jade Orchid Brighid", [Cosmetics.JadeOrchidBrighid], "Crimson Orchid Brighid", [Cosmetics.CrimsonOrchidBrighid], "Water Lily Brighid", [Cosmetics.WaterLilyBrighid]])
-GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], Cosmetics.ZekeCosmetics, [], ["Shining Justice Zeke", [Cosmetics.ShiningJusticeZeke], "Embercake Zeke", [Cosmetics.EmbercakeZeke], "Surfinator Zeke", [Cosmetics.SurfinatorZeke]])
-GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], Cosmetics.PandoriaCosmetics, [], ["Magical Pink Pandoria", [Cosmetics.MagicalPinkPandoria], "Mermaid Blue Pandoria", [Cosmetics.MermaidBluePandoria], "Beach Date Pandoria", [Cosmetics.BeachDatePandoria]])
+# GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultRex], [], Cosmetics.RexCosmetics)
+# GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultPyra], [], Cosmetics.PyraCosmetics)
+# GenOption("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultMythra], [], Cosmetics.MythraCosmetics)
+# GenOption("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultDriverNia], [], Cosmetics.NiaDriverCosmetics)
+# GenOption("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultBladeNia], [], Cosmetics.NiaBladeCosmetics)
+# GenOption("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultDromarch], [], Cosmetics.DromarchCosmetics)
+# GenOption("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultTora], [], Cosmetics.ToraCosmetics)
+# GenOption("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultMorag], [], Cosmetics.MoragCosmetics)
+# GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultBrighid], [], Cosmetics.BrighidCosmetics)
+# GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultZeke], [], Cosmetics.ZekeCosmetics)
+# GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultPandoria], [], Cosmetics.PandoriaCosmetics)
+
+GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultRex], [], Cosmetics.RexCosmetics)
+GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultPyra], [], Cosmetics.PyraCosmetics)
+GenOption("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultMythra], [], Cosmetics.MythraCosmetics)
+GenOption("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultDriverNia], [], Cosmetics.NiaDriverCosmetics)
+GenOption("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultBladeNia], [], Cosmetics.NiaBladeCosmetics)
+GenOption("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultDromarch], [], Cosmetics.DromarchCosmetics)
+GenOption("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultTora], [], Cosmetics.ToraCosmetics)
+GenOption("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultMorag], [], Cosmetics.MoragCosmetics)
+GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultBrighid], [], Cosmetics.BrighidCosmetics)
+GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultZeke], [], Cosmetics.ZekeCosmetics)
+GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultPandoria], [], Cosmetics.PandoriaCosmetics)
 
 
 

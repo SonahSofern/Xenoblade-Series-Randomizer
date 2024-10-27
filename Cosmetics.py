@@ -25,6 +25,9 @@ DisguisedPyra = "bl/bl100101"
 BlueSkyPyra = "bl/bl120101"
 ProSwimmerPyra = "bl/bl110101"
 DefaultPyra = "bl/bl000101"
+DefaultPoppiα = "bl/bl000601"
+DefaultPoppiQT = "bl/bl000701"
+DefaultPoppiQTPi = "bl/bl000801"
 
 #Drivers
 CloudSeaKingRex = "pc/pc120101"
@@ -52,16 +55,16 @@ BloodWitchNia = "pc/pc120201"
 DefaultDriverNia  = "pc/pc000201"
 
 #Drivers
-RexCosmetics = [CloudSeaKingRex, CloudSeaSharkRex, PrototypeSuitRex, MasterDriverRex, DefaultRex, HelmetedRex]
-NiaDriverCosmetics = [CandyStripeNia, FancySundressNia, BloodWitchNia, DefaultDriverNia]
-ToraCosmetics = [BusterModeTora, BestGirlFanTora, SkullfacePunkTora, DefaultTora]
-MoragCosmetics = [DressUniformMorag, ObligatoryLeaveMorag, ScarletInquisitorMorag, DefaultMorag]
-ZekeCosmetics = [EmbercakeZeke, SurfinatorZeke, ShiningJusticeZeke, HoodedZeke, DefaultZeke]
+RexCosmetics = ["Default Rex", [DefaultRex], "Master Driver Rex", [MasterDriverRex], "Cloud Sea King Rex", [CloudSeaKingRex], "Cloud Sea Shark Rex", [CloudSeaSharkRex], "Prototype Suit Rex", [PrototypeSuitRex], "Helmeted Rex", [HelmetedRex]]
+NiaDriverCosmetics = ["Blood Witch Nia", [BloodWitchNia], "Candy Stripe Nia", [CandyStripeNia], "Fancy Sundress Nia", [FancySundressNia]]
+ToraCosmetics = ["Buster Mode Tora", [BusterModeTora], "Skullface Punk Tora", [SkullfacePunkTora], "Best Girlfan Tora", [BestGirlFanTora]]
+MoragCosmetics = ["Dress Uniform Morag", [DressUniformMorag], "Scarlet Inquisitor Morag", [ScarletInquisitorMorag], "Obligatory Leave Morag", [ObligatoryLeaveMorag]]
+ZekeCosmetics = ["Shining Justice Zeke", [ShiningJusticeZeke], "Embercake Zeke", [EmbercakeZeke], "Surfinator Zeke", [SurfinatorZeke]]
 
 #Blades
-PyraCosmetics = [BlueSkyPyra, DisguisedPyra, ProSwimmerPyra, MythraStylePyra, DefaultPyra]
-MythraCosmetics = [CarbonMythra, PyraStyleMythra, RadiantBeachMythra, DefaultMythra]
-DromarchCosmetics =[ObsidianDromarch, SavageDromarch, DefaultDromarch]
-BrighidCosmetics = [WaterLilyBrighid, JadeOrchidBrighid, CrimsonOrchidBrighid, DefaultBrighid]
-PandoriaCosmetics = [BeachDatePandoria, MagicalPinkPandoria, MermaidBluePandoria, ClearGlassesPandoria, DefaultPandoria]
-NiaBladeCosmetics = [DevotedMarigoldNia, LoyalBellflowerNia, SincerePrimroseNia, DefaultBladeNia]
+PyraCosmetics = ["Default Pyra", [DefaultPyra], "Blue Sky Pyra", [BlueSkyPyra], "Disguised Pyra", [DisguisedPyra], "Mythra-Style-Pyra", [MythraStylePyra], "Pro Swimmer Pyra", [ProSwimmerPyra]]
+MythraCosmetics = ["Carbon Mythra", [CarbonMythra], "Pyra-Style-Mythra", [PyraStyleMythra], "Radiant Beach Mythra", [RadiantBeachMythra]]
+DromarchCosmetics = ["Obsidian Dromarch", [ObsidianDromarch], "Savage Dromarch", [SavageDromarch]]
+BrighidCosmetics = ["Jade Orchid Brighid", [JadeOrchidBrighid], "Crimson Orchid Brighid", [CrimsonOrchidBrighid], "Water Lily Brighid", [WaterLilyBrighid]]
+PandoriaCosmetics = ["Magical Pink Pandoria", [MagicalPinkPandoria], "Mermaid Blue Pandoria", [MermaidBluePandoria], "Beach Date Pandoria", [BeachDatePandoria]]
+NiaBladeCosmetics = ["Devoted Marigold Nia", [DevotedMarigoldNia], "Sincere Primrose Nia", [SincerePrimroseNia], "Loyal Bellflower Nia", [LoyalBellflowerNia]]
