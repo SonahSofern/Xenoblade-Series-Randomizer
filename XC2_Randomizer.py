@@ -98,7 +98,6 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
     option.grid(row=rowIncrement, column=0, sticky="sw")
     optionSlider = tk.Scale(optionPanel, from_=0, to=100, orient=tk.HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
     OptionSliders.append(optionSlider)
-    optionSlider.set(0)
     optionSlider.grid(row=rowIncrement, column=1, sticky='n')
     optionDesc = tk.Label(optionPanel, text=desc, background=OptionColor, width=900, anchor='w')
     optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
