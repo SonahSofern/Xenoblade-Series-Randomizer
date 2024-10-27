@@ -391,9 +391,9 @@ def EnemyLogic(CheckboxList, CheckboxStates):
                 if CheckboxStates[UniqueMonstersBox].get() == True:
                     EnemiestoPass += AllUniqueMonsterDefaultIDs
                 if CheckboxStates[SuperbossesBox].get() == True:
-                    EnemiestoPass += AllUniqueMonsterDefaultIDs                
+                    EnemiestoPass += AllSuperbossDefaultIDs                
                 if CheckboxStates[NormalEnemiesBox].get() == True:
-                    EnemiestoPass += AllUniqueMonsterDefaultIDs                
+                    EnemiestoPass += AllNormalEnemyDefaultIDs                
                 DefaultEnemyIDs = EnemiestoPass.copy()
                 RandomizedEnemyIDs = DefaultEnemyIDs.copy()
                 random.shuffle(RandomizedEnemyIDs)
