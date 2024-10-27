@@ -344,6 +344,7 @@ def LevelReversion(FullDefaultIDs, FullRandomizedIDs, SpecificDefaultIDs, Specif
         json.dump(data, file, indent=2)                        
                      
 def EnemyLogic(CheckboxList, CheckboxStates):
+    print("Randomizing Enemies")
     EnemyRandoOn = False
     EnemiestoPass = []
     LevelstoPass = []
@@ -440,5 +441,3 @@ def EnemyLogic(CheckboxList, CheckboxStates):
 
     ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["LvRand"], 0)
     ColumnAdjust("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], 0)
-
-    print("Finished Randomizing Enemies")
