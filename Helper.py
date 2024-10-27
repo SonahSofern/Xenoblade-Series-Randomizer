@@ -19,7 +19,7 @@ def InsertHelper(insertIndex,  lowNum, highNum, mainString = str, pathTo = str):
     # print(listOfFiles)
     return listOfFiles
 
-def FindBadValuesList(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue): # used for me to find a list of values from a file with certain characteristsics that i want to remove
+def FindValues(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue): # used for me to find a list of values from a file with certain characteristsics that i want to remove
     bad_values_found = []
     
     with open(filePath, 'r+', encoding='utf-8') as file:
@@ -29,6 +29,21 @@ def FindBadValuesList(filePath, keyWordList, keywordBadValueList, returnedKeyWor
             for key, value in row.items():
                 if key in keyWordList and value in keywordBadValueList:
                     bad_values_found.append(row[returnedKeyWordValue]) 
+    
+    print(bad_values_found)
+    return(bad_values_found)
+
+def AdjustedFindBadValuesList(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue):
+    bad_values_found = []
+    
+    with open(filePath, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for j in range(0, len(keyWordList)):
+            for i in range(0, len(keywordBadValueList)):
+                for row in data['rows']:
+                    if row[keyWordList[j]] == keywordBadValueList[i]:
+                        bad_values_found.append(row[returnedKeyWordValue])
+                        break 
     
     #print(bad_values_found)
     return(bad_values_found)
@@ -41,7 +56,7 @@ def FindSubOptionValuesList(filePath, dictName, subDictName, subDictValue, retur
             if row[dictName][subDictName] == subDictValue:
                 bad_values.append(row[returndictValue])
     
-    #print(bad_values)
+    print(bad_values)
     return(bad_values)
 
 
