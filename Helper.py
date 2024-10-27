@@ -33,6 +33,21 @@ def FindBadValuesList(filePath, keyWordList, keywordBadValueList, returnedKeyWor
     #print(bad_values_found)
     return(bad_values_found)
 
+def AdjustedFindBadValuesList(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue):
+    bad_values_found = []
+    
+    with open(filePath, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for j in range(0, len(keyWordList)):
+            for i in range(0, len(keywordBadValueList)):
+                for row in data['rows']:
+                    if row[keyWordList[j]] == keywordBadValueList[i]:
+                        bad_values_found.append(row[returnedKeyWordValue])
+                        break 
+    
+    #print(bad_values_found)
+    return(bad_values_found)
+
 def FindSubOptionValuesList(filePath, dictName, subDictName, subDictValue, returndictValue):
     bad_values = []
     with open(filePath, 'r+', encoding='utf-8') as file:
