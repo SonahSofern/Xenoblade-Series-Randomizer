@@ -16,7 +16,7 @@ def InsertHelper(insertIndex,  lowNum, highNum, mainString = str, pathTo = str):
     listOfFiles = []
     for i in range(lowNum, highNum):
         listOfFiles.append(pathTo + mainString[:insertIndex] + f"{i:02}" + mainString[insertIndex:]) # fstring allows us to format with 2 digits like xc2 wants
-    #print(listOfFiles)
+    # print(listOfFiles)
     return listOfFiles
 
 def FindBadValuesList(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue): # used for me to find a list of values from a file with certain characteristsics that i want to remove
@@ -31,6 +31,18 @@ def FindBadValuesList(filePath, keyWordList, keywordBadValueList, returnedKeyWor
                     bad_values_found.append(row[returnedKeyWordValue]) 
     
     #print(bad_values_found)
+    return(bad_values_found)
+
+def FindSubOptionValuesList(filePath, dictName, subDictName, subDictValue, returndictValue):
+    bad_values = []
+    with open(filePath, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row[dictName][subDictName] == subDictValue:
+                bad_values.append(row[returndictValue])
+    
+    #print(bad_values)
+    return(bad_values)
 
 
 def DirectoryChoice(FileDescription, EntryField):
@@ -44,5 +56,4 @@ def OptionCarveouts(ValidValuesList, ToggleableIndexValues, stateOfButton = None
     else:
         ValidValuesList[:] = [x for x in ValidValuesList if x not in ToggleableIndexValues]
     #print(ValidValuesList, end='\n\n')
-
     
