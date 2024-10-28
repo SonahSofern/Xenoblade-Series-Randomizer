@@ -1,8 +1,4 @@
 import json
-import os
-from tkinter import filedialog
-import tkinter as tk
-import JSONParser
 import Helper
 import random
 import time
