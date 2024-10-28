@@ -214,9 +214,6 @@ GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits", [
 GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultZeke], [], Cosmetics.ZekeCosmetics)
 GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultPandoria], [], Cosmetics.PandoriaCosmetics)
 
-
-
-
 def Randomize():
     def ThreadedRandomize():
         global OptionsRunList
@@ -233,7 +230,8 @@ def Randomize():
         for OptionRun in OptionsRunList:
             OptionRun()
 
-        # DriverSkillTreeAdjustment.ArtsCancelBehavior()
+
+        #DriverSkillTreeAdjustment.ArtsCancelBehavior()
         EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates) # gonna hide this in a Gen option command
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
