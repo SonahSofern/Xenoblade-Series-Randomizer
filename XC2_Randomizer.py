@@ -233,7 +233,7 @@ def Randomize():
         for OptionRun in OptionsRunList:
             OptionRun()
 
-        DriverSkillTreeAdjustment.ArtsCancelBehavior()
+        # DriverSkillTreeAdjustment.ArtsCancelBehavior()
         EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates) # gonna hide this in a Gen option command
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 

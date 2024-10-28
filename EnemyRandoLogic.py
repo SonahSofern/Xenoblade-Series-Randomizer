@@ -456,6 +456,5 @@ def EnemyLogic(CheckboxList, CheckboxStates):
 
         ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["LvRand"], 0)
         ColumnAdjust("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], 0)
-        print("Finished Randomizing Enemies")
         
 
