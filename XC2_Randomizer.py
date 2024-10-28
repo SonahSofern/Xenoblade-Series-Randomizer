@@ -4,7 +4,7 @@ from tkinter import ttk
 import random
 import subprocess
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, DriverSkillTreeAdjustment
+import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, DriverSkillTreeAdjustment, Cosmetics
 import threading
 
 root = tk.Tk()
