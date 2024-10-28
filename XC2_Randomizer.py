@@ -4,7 +4,7 @@ from tkinter import ttk
 import random
 import subprocess
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, ArtsCancelSkill, Cosmetics
+import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, ArtsCancelSkill, Cosmetics, CoreCrystalAdjustments
 import threading
 
 root = tk.Tk()
@@ -146,6 +146,8 @@ CollectionPointMaterials = [x for x in Helper.inclRange(30001,30445) if x not in
 AllValues = Helper.inclRange(0,10000000)
 Deeds = Helper.inclRange(25249,25300)
 
+
+
 BladeDefenseDistribution = [0,0,0,0,5,5,5,5,5,5,5,10,10,10,10,10,15,15,15,15,15,15,15,15,20,20,20,20,20,20,20,20,25,25,25,30,30,35,35,40,40,45,50,55,60,65,70,75,80,85,90,95,100]
 BladeModDistribution = [0,0,0,5,5,5,10,10,10,10,10,15,15,15,20,20,20,25,25,25,25,25,30,30,30,30,35,35,40,40,45,45,50,70,100]
 
@@ -167,7 +169,7 @@ GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's
 GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button a special uses for its button challenge", ["common/MNU_BtnChallenge2.json"], Helper.StartsWith("BtnType", 1, 3), ButtonCombos, ButtonCombos)
 GenOption("Blade Elements", TabBlades, "Randomizes what element a blade is", ["common/CHR_Bl.json"],["Atr"], Helper.inclRange(1,8), Helper.inclRange(1,8))
 GenOption("Blade Battle Skills", TabBlades, "Randomizes blades battle (yellow) skill tree", ["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), BladeBattleSkills, BladeBattleSkills)
-GenOption("Blade Green Skills", TabBlades, "Randomizes blades field (green) skill tree", ["common/CHR_Bl.json"], Helper.StartsWith("FSkill", 1, 3), BladeFieldSkills, BladeFieldSkills)
+GenOption("Blade Green Skills", TabBlades, "Randomizes blades field (green) skill tree", ["common/CHR_Bl.json"], Helper.StartsWith("FSkill", 1, 3), BladeFieldSkills, BladeFieldSkills, ["Field Skill QOL", [1135]], InvalidTargetIDs=[1135])
 GenOption("Blade Specials", TabBlades, "Randomizes blades special (red) skill tree", ["common/CHR_Bl.json"], Helper.StartsWith("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials, BladeSpecials)
 GenOption("Blade Cooldowns", TabBlades, "Randomizes a blades cooldown", ["common/CHR_Bl.json"], ["CoolTime"], Helper.inclRange(1,1000), Helper.inclRange(1,1000))
 GenOption("Blade Arts", TabBlades, "Randomizes your blade's arts", ["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), ArtBuffs, ArtBuffs)
@@ -179,13 +181,15 @@ GenOption("Blade Scale", TabBlades, "Randomizes the size of Blades", ["common/CH
 
 GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", ["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips)
 GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", ["common/CHR_EnArrange.json"], ["Scale"], Helper.inclRange(0, 1000), Helper.inclRange(1, 200) + Helper.inclRange(990,1000))
-GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies, ["Story Bosses", [1998], "Quest Enemies", [1999], "Unique Monsters", [2000], "Superbosses", [2001], "Normal Enemies", [2002], "Mix Enemies Between Types", [2003], "Keep All Enemy Levels", [2004], "Keep Quest Enemy Levels", [2005], "Keep Story Boss Levels", [2006]])
+GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies, ["Story Bosses", [1998], "Quest Enemies", [1999], "Unique Monsters", [2000], "Superbosses", [2001], "Normal Enemies", [2002], "Mix Enemies Between Types", [2003], "Keep All Enemy Levels", [2004], "Keep Quest Enemy Levels", [2005], "Keep Story Boss Levels", [2006], "Core Crystal Changes", [2007]])
 GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", ["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.inclRange(0,100), Helper.inclRange(0,100) + Helper.inclRange(250,255))
 #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30))
 
 GenOption("Music", TabMisc, "Randomizes what music plays where", ["common/RSC_BgmCondition.json"], ["BgmIDA", "BgmIDB", "BgmIDC", "BgmIDD"], BackgroundMusic, BackgroundMusic) # need to change title screen music
 GenOption("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.inclRange(0,3721), Helper.inclRange(2001,3721))
 GenOption("NPCs Size", TabMisc, "Randomizes the size of NPCs", ["common/RSC_NpcList.json"], ["Scale"], Helper.inclRange(1,100), Helper.inclRange(1,250))
+#GenOption("Core Crystal Changes", TabMisc, "Removes Gacha System", ["common/ITM_CrystalList.json"], ["BladeID"],)
+
 GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in the game") #common_ms/menu_ms
 GenOption("Running Speed", TabQOL, "Set your starting run speed bonus")
 #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
@@ -214,9 +218,6 @@ GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits", [
 GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultZeke], [], Cosmetics.ZekeCosmetics)
 GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultPandoria], [], Cosmetics.PandoriaCosmetics)
 
-
-
-
 def Randomize():
     def ThreadedRandomize():
         global OptionsRunList
@@ -235,11 +236,12 @@ def Randomize():
 
         # DriverSkillTreeAdjustment.ArtsCancelBehavior()
         EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates) # gonna hide this in a Gen option command
+        CoreCrystalAdjustments.CoreCrystalChanges(CheckboxList, CheckboxStates)
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
-
         RandomizeButton.config(state=NORMAL)
+        print("Done")
     threading.Thread(target=ThreadedRandomize).start()
-
+    
 def GenRandomSeed():
     #print(Helper.StartsWithHelper("BSkill", 1, 3))
     #Helper.FindBadValuesList("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["Name"], [0], "$id")
@@ -248,6 +250,7 @@ def GenRandomSeed():
     #print(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"))
     # Helper.FindSubOptionValuesList("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "AlwaysAttack", 1, "$id") 
     #EnemyRandoLogic.FindMatchingInfo
+    #Helper.FindValues("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["$id"], Helper.inclRange(1,37), "Blade")
     randoSeedEntry.delete(0, tk.END)
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
