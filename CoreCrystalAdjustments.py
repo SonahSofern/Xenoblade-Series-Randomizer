@@ -40,18 +40,21 @@ def FieldSkillLevelAdjustment(CheckboxList, CheckboxStates):
         with open(FieldAchievementSetFile, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data["rows"]:
-                if row["$id"] == 1404:
-                    row["AbilityLevel"] = 1
+                if row["AchievementID1"] != 0:
                     row["AchievementID1"] = 40
-                    row["AchievementID2"] = 0
-                    row["AchievementID3"] = 0
-                    row["AchievementID4"] = 0
-                    row["AchievementID5"] = 0
+                if row["AchievementID2"] != 0:
+                    row["AchievementID2"] = 40
+                if row["AchievementID3"] != 0:
+                    row["AchievementID3"] = 40
+                if row["AchievementID4"] != 0:
+                    row["AchievementID4"] = 40
+                if row["AchievementID5"] != 0:
+                    row["AchievementID5"] = 40
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)
-        BladeAdjustmentFile = "./_internal/JsonOutputs/common/CHR_Bl.json"
-        with open(BladeAdjustmentFile, 'r+', encoding='utf-8') as file:
+        #BladeAdjustmentFile = "./_internal/JsonOutputs/common/CHR_Bl.json"
+        """ with open(BladeAdjustmentFile, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data["rows"]:
                 row["FskillAchivement1"] = 1404
@@ -59,7 +62,7 @@ def FieldSkillLevelAdjustment(CheckboxList, CheckboxStates):
                 row["FskillAchivement3"] = 1404
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2) """
 
 def FieldSkillChecksAdjustment(CheckboxList, CheckboxStates):
     for j in range(0, len(CheckboxList)):
@@ -139,7 +142,7 @@ def ChangeChestContents(CheckboxList, CheckboxStates):
 
 def CoreCrystalChanges(CheckboxList, CheckboxStates):
     AllRareBlades()
-    FieldSkillChecksAdjustment(CheckboxList, CheckboxStates)
+    #FieldSkillChecksAdjustment(CheckboxList, CheckboxStates)
     FieldSkillLevelAdjustment(CheckboxList, CheckboxStates)
     AdjustingCrystalList(CheckboxList, CheckboxStates)
     # ChangeChestContents(CheckboxList, CheckboxStates)
