@@ -79,9 +79,12 @@ def BalancingSkillTreeRando(CheckboxList, CheckboxStates):
                     if row["$id"] == 1:
                         row["SkillID"] = CorrEntry
                         row["NeedSp"] = 0
-                    if (row["RowNum"] == ReplRow) and (row["ColumnNum"] == ReplCol) and (row["Round"] == ReplRound):
-                        row["SkillID"] = OrigID
-                        break
+                    try:
+                        if (row["RowNum"] == ReplRow) and (row["ColumnNum"] == ReplCol) and (row["Round"] == ReplRound):
+                            row["SkillID"] = OrigID
+                            break
+                    except:
+                        pass
                 file.seek(0)
                 file.truncate()
                 json.dump(data, file, indent=2)
