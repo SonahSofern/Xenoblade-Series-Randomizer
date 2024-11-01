@@ -105,7 +105,15 @@ def AdjustingCrystalList(CheckboxList, CheckboxStates):
                         row["NoMultiple"] = k + 1
                         row["ValueMax"] = 1
                         row["BladeID"] = RandomBlades[k]
+                        row["Name"] = 12
                         break
+            for row in data["rows"]:
+                for i in range(45011,45014):
+                    if row["$id"] == i:
+                        row["RareTableProb"] = 0
+                        row["RareBladeRev"] = 0
+                        row["CommonPow"] = 0
+                        row["AssureP"] = 0
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)        
@@ -144,5 +152,5 @@ def CoreCrystalChanges(CheckboxList, CheckboxStates):
     AllRareBlades()
     #FieldSkillChecksAdjustment(CheckboxList, CheckboxStates)
     FieldSkillLevelAdjustment(CheckboxList, CheckboxStates)
-    AdjustingCrystalList(CheckboxList, CheckboxStates)
+    #AdjustingCrystalList(CheckboxList, CheckboxStates)
     # ChangeChestContents(CheckboxList, CheckboxStates)
