@@ -4,7 +4,7 @@ from tkinter import ttk
 import random
 import subprocess
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, SkillTreeAdjustments, Cosmetics, CoreCrystalAdjustments
+import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, SkillTreeAdjustments, Cosmetics, CoreCrystalAdjustments, TestingStuff
 import threading
 
 root = tk.Tk()
@@ -232,6 +232,7 @@ def Randomize():
         for OptionRun in OptionsRunList:
             OptionRun()
 
+        #TestingStuff.Beta()
         SkillTreeAdjustments.BalancingSkillTreeRando(CheckboxList, CheckboxStates)
         EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates) # gonna hide this in a Gen option command
         CoreCrystalAdjustments.CoreCrystalChanges(CheckboxList, CheckboxStates)

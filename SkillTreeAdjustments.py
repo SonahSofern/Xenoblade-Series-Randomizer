@@ -78,7 +78,7 @@ def BalancingSkillTreeRando(CheckboxList, CheckboxStates):
                     try:
                         if (row["RowNum"] == ReplRow) and (row["ColumnNum"] == ReplCol) and (row["Round"] == ReplRound):
                             row["SkillID"] = OrigID
-                            break
+                            #break
                     except:
                         pass
                 file.seek(0)
