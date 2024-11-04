@@ -331,6 +331,10 @@ def BossQuestAggroAdjustments(DefaultIDs, RandomizedIDs):
                 for row in data["rows"]: # for each row in CHR_EnArrange
                     if row["$id"] == RandomizedIDs[i]: # If the row's ID corresponds to the randomized ID with index i
                         row["Flag"]["AlwaysAttack"] = 1
+                        row["Detects"] = 3
+                        row["SearchRange"] = 300
+                        row["SearchAngle"] = 360
+                        row["SearchRadius"] = 200
                         break
         file.seek(0)
         file.truncate()
@@ -456,6 +460,7 @@ def EnemyLogic(CheckboxList, CheckboxStates):
                             if CheckboxStates[KeepStoryBossesLevelsBox].get() == True: # need to change this to check specific index instead of using == to value of checkboxlist, probably in initial loop find index corresponding to this box then use this
                                 LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
         SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "AlwaysAttack", 0)
+        ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["SearchRange", "SearchRadius", "SearchAngle", "Detects"], 0)
         BossQuestAggroAdjustments(DefaultEnemyIDs, RandomizedEnemyIDs)
         ReducePCHPBattle1()
 
