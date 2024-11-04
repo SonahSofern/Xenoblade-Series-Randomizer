@@ -232,7 +232,7 @@ def Randomize():
         for OptionRun in OptionsRunList:
             OptionRun()
 
-        #TestingStuff.Beta()
+        # TestingStuff.Beta()
         SkillTreeAdjustments.BalancingSkillTreeRando(CheckboxList, CheckboxStates)
         EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates) # gonna hide this in a Gen option command
         CoreCrystalAdjustments.CoreCrystalChanges(CheckboxList, CheckboxStates)
