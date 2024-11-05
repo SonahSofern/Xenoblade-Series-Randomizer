@@ -123,11 +123,11 @@ def ChangeChestContents(CheckboxList, CheckboxStates):
         if CheckboxList[j] == "Core Crystal Changes Box":
             CoreCrystalChangesBox = j
     if CheckboxStates[CoreCrystalChangesBox].get() == True:
-        ChestFile = "./_internal/JsonOutputs/common_gmk/ma05a_FLD_TboxPop.json"
+        ChestFile = "./_internal/JsonOutputs/common_gmk/ma21a_FLD_TboxPop.json"
         with open(ChestFile, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data["rows"]:
-                if row["$id"] == 555:
+                if row["$id"] == 2116:
                     row["itm1ID"] = 45020
                     row["itm2ID"] = 45021
                     row["itm3ID"] = 45022

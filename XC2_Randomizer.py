@@ -232,10 +232,10 @@ def Randomize():
         for OptionRun in OptionsRunList:
             OptionRun()
 
-        TestingStuff.Beta()
         SkillTreeAdjustments.BalancingSkillTreeRando(CheckboxList, CheckboxStates)
         EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates) # gonna hide this in a Gen option command
         CoreCrystalAdjustments.CoreCrystalChanges(CheckboxList, CheckboxStates)
+        TestingStuff.Beta()
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
         RandomizeButton.config(state=NORMAL)
         print("Done")
