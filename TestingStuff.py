@@ -35,100 +35,64 @@ DamageRevLow = [100, 100, 100, 98, 96, 94, 92, 90, 88, 86, 84, 82, 80, 78, 76, 7
 HitRevLow = [110, 115, 122, 129, 138, 147, 158, 169, 182, 195, 210, 225, 242, 259, 278, 297, 318, 339, 362, 385]
 ReactRevHigh = [0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 40, 60, 80, 100, 100, 100, 100, 100, 100, 100]
 
-def Beta():
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common_gmk/RSC_GmkSetList.json", ["tutorial", "tutorial_bdat"], "") #maybe removes tutorials
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_Tutorial.json", ["ScenarioFlagMin", "QuestFlag", "QuestFlagMin", "QuestFlagMax", "SysMultiFlag"], 0) #maybe removes tutorials
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Condition.json", ["cond"], 1) #unlocks the world maps
-    # EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma21a_FLD_LandmarkPop.json", ["cndID"], 0) #removes requirement to unlock location
-    """ 
-    for i in range(0, len(RaceModeDungeons)):
-        for j in range(0, len(AreaList)):
-            if RaceModeDungeons[i] == AreaList[j]:
-                RaceModeMSGIDs.append(MSGIDList[j])
+def Beta(CheckboxList, CheckboxStates):
+    for j in range(0, len(CheckboxList)):
+        if CheckboxList[j] == "Beta Stuff Box":
+            BetaStuffBox = j
+            break
+    if CheckboxStates[BetaStuffBox].get() == True:    
+        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common_gmk/RSC_GmkSetList.json", ["tutorial", "tutorial_bdat"], "") #maybe removes tutorials
+        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
+        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_Tutorial.json", ["ScenarioFlagMin", "QuestFlag", "QuestFlagMin", "QuestFlagMax", "SysMultiFlag"], 0) #maybe removes tutorials
+        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
+        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Condition.json", ["cond"], 1) #unlocks the world maps
+        # EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma21a_FLD_LandmarkPop.json", ["cndID"], 0) #removes requirement to unlock location
+        """ 
+        for i in range(0, len(RaceModeDungeons)):
+            for j in range(0, len(AreaList)):
+                if RaceModeDungeons[i] == AreaList[j]:
+                    RaceModeMSGIDs.append(MSGIDList[j])
 
-    RaceModeDungeons.append(200)
-    RaceModeMSGIDs.append(470) 
-     """
-    """     with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: #adds landmarks for each race area you need to finish
-        data = json.load(file)
-        for i in range(207,212):
+        RaceModeDungeons.append(200)
+        RaceModeMSGIDs.append(470) 
+        """
+        """     with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: #adds landmarks for each race area you need to finish
+            data = json.load(file)
+            for i in range(207,212):
+                for row in data["rows"]:
+                    if row["$id"] == i:
+                        row["MAPJUMPID"] = RaceModeDungeons[i - 207]
+                        row["category"] = 0
+                        row["menuPriority"] = TestingMenuPrios[i - 207]
+                        row["MSGID"] = RaceModeMSGIDs[i - 207]
+                        row["menu_transX"] = TestingXOffsets[i - 207]
+                        row["menu_transY"] = TestingYOffsets[i - 207]
+                        break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2)
+            pass """
+
+        with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: #race mode implementation
+            data = json.load(file)
             for row in data["rows"]:
-                if row["$id"] == i:
-                    row["MAPJUMPID"] = RaceModeDungeons[i - 207]
-                    row["category"] = 0
-                    row["menuPriority"] = TestingMenuPrios[i - 207]
-                    row["MSGID"] = RaceModeMSGIDs[i - 207]
-                    row["menu_transX"] = TestingXOffsets[i - 207]
-                    row["menu_transY"] = TestingYOffsets[i - 207]
-                    break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
-        pass """
+                if row["$id"] == 24:
+                    row["CallEventA"] = 10088 # testing uraya, this should be a choice later
+                    row["FlagCLD"] = 685 #uraya flag
+                    row["NextQuestA"] = 56 #set out for village in uraya
+                if (row["$id"] >= 52) and (row["$id"]) <= 81:
+                    row["PRTQuestID"] = 25
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2)
 
-    with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_EventPop.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 2008:
-                row["ScenarioFlagMin"] = 1008
-                row["ScenarioFlagMax"] = 1022
-                break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
-
-    with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 2045:
-                row["ScenarioFlagMin"] = 10047
-                row["ScenarioFlagMax"] = 10048
-            if row["$id"] == 2046:
-                row["ScenarioFlagMin"] = 1008
-                row["ScenarioFlagMax"] = 1022
-                break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
-
-    with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: #shortens tutorials
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 10: #if we enter bana's room
-                row["NextQuestA"] = 15 # reach goldmouth exit dock
-            if row["$id"] == 15: #talk to spraine
-                row["NextQuestA"] = 17 #sets next quest to be to go to the top of the Maelstrom
-                break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
-
-    with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: #race mode implementation
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 24:
-                row["CallEventA"] = 10088 # testing uraya, this should be a choice later
-                row["FlagCLD"] = 685 #uraya flag
-                row["NextQuestA"] = 56 #set out for village in uraya
-            if (row["$id"] >= 52) and (row["$id"]) <= 81:
-                row["PRTQuestID"] = 25
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
-
-    with open("./_internal/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: #adjusting level based exp gains to make it less grindy
-        data = json.load(file)
-        for row in data["rows"]:
-            row["ExpRevHigh"] = 110 + 20 * row["$id"]
-            row["ExpRevLow"] = 100
-            if row["$id"] >= 10:
-                row["DamageRevHigh"] = 200
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
-
-
-
-
+        with open("./_internal/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: #adjusting level based exp gains to make it less grindy
+            data = json.load(file)
+            for row in data["rows"]:
+                row["ExpRevHigh"] = 210 + 20 * row["$id"]
+                row["ExpRevLow"] = 100
+                if row["$id"] >= 10:
+                    row["DamageRevHigh"] = 200
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2)
