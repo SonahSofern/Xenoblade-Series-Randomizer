@@ -3,19 +3,28 @@ import json
 import EnemyRandoLogic
 import random
 
-AreaList = [41, 68, 90, 125, 133, 152, 168, 175, 187] #list of MapJump IDs for the first landmark in each map (114 is Temperantia (combining with Indol for now)), (180 is Land of Morytha (combining with Cliffs of Morytha for now))
+AreaList1 = [41, 68] #list of MapJump IDs for the first landmark in each map (114 is Temperantia (combining with Indol for now)), (180 is Land of Morytha (combining with Cliffs of Morytha for now))
+AreaList2 = [90, 152]
+AreaList3 = [125, 133, 168]
+AreaList4 = [175, 187]
+
+AreaList = [41, 68, 90, 125, 133, 152, 168, 175, 187]
 
 MSGIDList = [63, 141, 205, 299, 314, 367, 396, 413, 445] #list of MSGIDs for each of the landmarks in Area List (276 for Temperantia) (427 for Land of Morytha) 
 
-RaceModeDungeons = random.sample(AreaList, 4) #take our race mode dungeons
+RaceModeDungeons = []
+RaceModeDungeons.append(random.choice(AreaList1))
+RaceModeDungeons.append(random.choice(AreaList2))
+RaceModeDungeons.append(random.choice(AreaList3))
+RaceModeDungeons.append(random.choice(AreaList4))
 
-RaceModeMSGIDs = [] #take the race mode msg IDs (so you can see what dungeons you have, and where a warp takes you)
+""" RaceModeMSGIDs = [] #take the race mode msg IDs (so you can see what areas you have, and where a warp takes you)
 
 TestingMenuPrios = [1, 2, 3, 4, 5] # Controls the Map Priority
 
 TestingXOffsets = [-154, -200, -155, -90, -153] # These two control the positions of the markers on Argentum
 
-TestingYOffsets = [-207, -100, -63, -100, 72]
+TestingYOffsets = [-207, -100, -63, -100, -72] """
 
 # Default Level-Based Modifiers for EXP, Damage Taken/Given, Accuracy, and Odds of getting a reaction (on an enemy?) (break/topple/launch/smash)
 ExpRevHigh = [105, 110, 117, 124, 134, 145, 157, 170, 184, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200]
@@ -33,16 +42,16 @@ def Beta():
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Condition.json", ["cond"], 1) #unlocks the world maps
     # EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma21a_FLD_LandmarkPop.json", ["cndID"], 0) #removes requirement to unlock location
-
+    """ 
     for i in range(0, len(RaceModeDungeons)):
         for j in range(0, len(AreaList)):
             if RaceModeDungeons[i] == AreaList[j]:
                 RaceModeMSGIDs.append(MSGIDList[j])
 
     RaceModeDungeons.append(200)
-    RaceModeMSGIDs.append(470)
-
-    with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file:
+    RaceModeMSGIDs.append(470) 
+     """
+    """     with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: #adds landmarks for each race area you need to finish
         data = json.load(file)
         for i in range(207,212):
             for row in data["rows"]:
@@ -57,40 +66,14 @@ def Beta():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
-        pass
-
-    with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 10:
-                row["NextQuestA"] = 15
-                row["FlagCLD"] = 645
-                row["CallEventA"] = 10481
-            if row["$id"] == 15:
-                row["NextQuestA"] = 17
-                row["FlagCLD"] = 680
-                break           
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
-
-    with open("./_internal/JsonOutputs/common/FLD_QuestListNormal.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 2001:
-                row["NextQuestA"] = 2008
-                row["FlagCLD"] = 36075
-                break   
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
+        pass """
 
     with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_EventPop.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 2008:
                 row["ScenarioFlagMin"] = 1008
-                row["ScenarioFlagMax"] = 10048
+                row["ScenarioFlagMax"] = 1022
                 break
         file.seek(0)
         file.truncate()
@@ -104,7 +87,33 @@ def Beta():
                 row["ScenarioFlagMax"] = 10048
             if row["$id"] == 2046:
                 row["ScenarioFlagMin"] = 1008
+                row["ScenarioFlagMax"] = 1022
                 break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+
+    with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: #shortens tutorials
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 10: #if we enter bana's room
+                row["NextQuestA"] = 15 # reach goldmouth exit dock
+            if row["$id"] == 15: #talk to spraine
+                row["NextQuestA"] = 17 #sets next quest to be to go to the top of the Maelstrom
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+
+    with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: #race mode implementation
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 24:
+                row["CallEventA"] = 10088 # testing uraya, this should be a choice later
+                row["FlagCLD"] = 685 #uraya flag
+                row["NextQuestA"] = 56 #set out for village in uraya
+            if (row["$id"] >= 52) and (row["$id"]) <= 81:
+                row["PRTQuestID"] = 25
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
@@ -120,85 +129,6 @@ def Beta():
         file.truncate()
         json.dump(data, file, indent=2)
 
-    with open("./_internal/JsonOutputs/common/FLD_ConditionScenario.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 202:
-                row["ScenarioMin"] = 1010
-                row["NotScenarioMax"] = 10019
-                break   
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
 
-    with open("./_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: 
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 10480:
-                row["nextID"] = 10483
-                row["nextIDtheater"] = 10483
-            if row["$id"] == 10482:
-                #row["stFormID"] = 1035
-                #row["edFormID"] = 1035
-                #row["nextID"] = 0
-                row["scenarioFlag"] = 10026
-                #row["linkID"] = 0
-                #row["zoneID"] = 3
-                #row["zoneX"] = -30.52
-                #row["zoneY"] = -8.5
-                #row["zoneZ"] = 58.52
-                #row["zoneR"] = 90
-                #row["nextIDtheater"] = 0
-                break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
 
-    with open("./_internal/JsonOutputs/common/EVT_chgBf01.json", 'r+', encoding='utf-8') as file: 
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 10474:
-                row["id"] = 10027
-                row["value1"] = 1
-            if row["$id"] == 10475:
-                row["id"] = 10027
-                row["value1"] = 0
-                #row["id"] = 1011 #doesnt matter too much, needs to be between 1010 and 1012 if I think the flag matters        
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
 
-"""     with open("./_internal/JsonOutputs/common_gmk/ma20a_FLD_EventPop.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 20001:
-                row["ScenarioFlagMin"] = 0
-                row["ScenarioFlagMax"] = 0
-            if row["$id"] == 20002:
-                row["ScenarioFlagMin"] = 1001
-                row["ScenarioFlagMax"] = 10048
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2) """
-
-"""         with open("./_internal/JsonOutputs/common/FLD_ConditionScenario.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] != 0:
-                row["ScenarioMin"] = 1004
-                row["ScenarioMax"] = 10048
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2) """
-
-"""     with open("./_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 10461:
-                row["scenarioFlag"] = 1004
-            if row["$id"] == 10005:
-                row["stFormID"] = 1264
-                row["edFormID"] = 1264
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2) """
