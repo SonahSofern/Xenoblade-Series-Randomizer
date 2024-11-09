@@ -117,7 +117,7 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
     rowIncrement += 1
 
     if optionName != "Enemies": # make this pass an anonymous function so the genoption calls have the decision of what funciton to run
-        OptionsRunList.append(lambda: JSONParser.RandomizeBetweenRange(optionName, Filename, keyWords, rangeOfValuesToReplace, optionSlider.get(), rangeOfValidReplacements, InvalidTargetIDs))
+        OptionsRunList.append(lambda: JSONParser.ChangeJSON(optionName, Filename, keyWords, rangeOfValuesToReplace, optionSlider.get(), rangeOfValidReplacements, InvalidTargetIDs, OptionNameANDIndexValue))
 
 
 #HELPFUL VARIABLES
@@ -186,21 +186,10 @@ GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in t
 GenOption("Music", TabMisc, "Randomizes what music plays where", ["common/RSC_BgmCondition.json"], ["BgmIDA", "BgmIDB", "BgmIDC", "BgmIDD"], BackgroundMusic, BackgroundMusic) # need to change title screen music
 GenOption("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.inclRange(0,3721), Helper.inclRange(2001,3721))
 GenOption("NPCs Size", TabMisc, "Randomizes the size of NPCs", ["common/RSC_NpcList.json"], ["Scale"], Helper.inclRange(1,100), Helper.inclRange(1,250))
+
 GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in the game") #common_ms/menu_ms
 GenOption("Running Speed", TabQOL, "Set your starting run speed bonus")
 #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
-
-# GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultRex], [], Cosmetics.RexCosmetics)
-# GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultPyra], [], Cosmetics.PyraCosmetics)
-# GenOption("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultMythra], [], Cosmetics.MythraCosmetics)
-# GenOption("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultDriverNia], [], Cosmetics.NiaDriverCosmetics)
-# GenOption("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultBladeNia], [], Cosmetics.NiaBladeCosmetics)
-# GenOption("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultDromarch], [], Cosmetics.DromarchCosmetics)
-# GenOption("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultTora], [], Cosmetics.ToraCosmetics)
-# GenOption("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultMorag], [], Cosmetics.MoragCosmetics)
-# GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultBrighid], [], Cosmetics.BrighidCosmetics)
-# GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultZeke], [], Cosmetics.ZekeCosmetics)
-# GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultPandoria], [], Cosmetics.PandoriaCosmetics)
 
 GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultRex], [], Cosmetics.RexCosmetics)
 GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultPyra], [], Cosmetics.PyraCosmetics)
@@ -214,6 +203,7 @@ GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits", [
 GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultZeke], [], Cosmetics.ZekeCosmetics)
 GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultPandoria], [], Cosmetics.PandoriaCosmetics)
 
+OptionsRunList.append(lambda: EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates))
 
 
 
@@ -233,8 +223,7 @@ def Randomize():
         for OptionRun in OptionsRunList:
             OptionRun()
 
-        # DriverSkillTreeAdjustment.ArtsCancelBehavior()
-        EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates) # gonna hide this in a Gen option command
+        
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
         RandomizeButton.config(state=NORMAL)

@@ -2,14 +2,18 @@ import json
 import random
 import os
 
-def RandomizeBetweenRange(cmdDescription, Filename, keyWords, rangeofValuesToReplace, sliderOdds, rangeValidReplacements, InvalidTargetIDs): # make this a function to reuse, check the settings ot see if we even do this
+def ChangeJSON(cmdDescription, Filename, keyWords, rangeofValuesToReplace, sliderOdds, rangeValidReplacements, InvalidTargetIDs): # make this a function to reuse, check the settings ot see if we even do this
+    
+    
     if (sliderOdds == 0):
         #print(cmdDescription + " Slider at zero") 
         return
-    print("Randomizing " + cmdDescription)   
+    if (cmdDescription != ""):
+        print("Randomizing " + cmdDescription)   
     for name in Filename:
         filePath = "./_internal/JsonOutputs/" + name
         if not os.path.exists(filePath):
+          print(filePath + " filepath does not exist.")
           continue
         with open(filePath, 'r+', encoding='utf-8') as file:
             data = json.load(file)
@@ -21,4 +25,4 @@ def RandomizeBetweenRange(cmdDescription, Filename, keyWords, rangeofValuesToRep
                                 item[key] = random.choice(rangeValidReplacements)
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
