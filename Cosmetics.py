@@ -19,6 +19,7 @@ CarbonMythra = "bl/bl120201"
 RadiantBeachMythra = "bl/bl110201"
 PyraStyleMythra = "bl/bl100201"
 DefaultMythra = "bl/bl000201"
+MassiveMeleeMythra = ""
 # Cant find Massive Melee Mythra
 MythraStylePyra = "bl/bl100102"
 DisguisedPyra = "bl/bl100101"
@@ -63,7 +64,7 @@ ZekeCosmetics = ["Shining Justice Zeke", [ShiningJusticeZeke], "Embercake Zeke",
 
 #Blades
 PyraCosmetics = ["Default Pyra", [DefaultPyra], "Blue Sky Pyra", [BlueSkyPyra], "Disguised Pyra", [DisguisedPyra], "Mythra-Style-Pyra", [MythraStylePyra], "Pro Swimmer Pyra", [ProSwimmerPyra]]
-MythraCosmetics = ["Carbon Mythra", [CarbonMythra], "Pyra-Style-Mythra", [PyraStyleMythra], "Radiant Beach Mythra", [RadiantBeachMythra]]
+MythraCosmetics = ["Carbon Mythra", [CarbonMythra], "Pyra-Style-Mythra", [PyraStyleMythra], "Radiant Beach Mythra", [RadiantBeachMythra], "Massive Melee Mythra", []]
 DromarchCosmetics = ["Obsidian Dromarch", [ObsidianDromarch], "Savage Dromarch", [SavageDromarch]]
 BrighidCosmetics = ["Jade Orchid Brighid", [JadeOrchidBrighid], "Crimson Orchid Brighid", [CrimsonOrchidBrighid], "Water Lily Brighid", [WaterLilyBrighid]]
 PandoriaCosmetics = ["Magical Pink Pandoria", [MagicalPinkPandoria], "Mermaid Blue Pandoria", [MermaidBluePandoria], "Beach Date Pandoria", [BeachDatePandoria]]
