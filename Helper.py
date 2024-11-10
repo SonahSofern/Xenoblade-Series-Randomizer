@@ -66,6 +66,7 @@ def DirectoryChoice(FileDescription, EntryField):
     EntryField.insert(0, Directory)
 
 def OptionCarveouts(ValidValuesList, ToggleableIndexValues, stateOfButton = None):
+    print("Updated Valid Values: " + str(stateOfButton))
     if stateOfButton.get() == True:
         ValidValuesList += ToggleableIndexValues
     else:

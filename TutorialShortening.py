@@ -13,7 +13,7 @@ def ShortenedTutorial(CheckboxList, CheckboxStates):
                     row["ScenarioFlagMin"] = 1003
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
         with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: #this makes it so spraine will talk to us no matter how small the flag
             data = json.load(file)
             for row in data["rows"]:
@@ -26,7 +26,7 @@ def ShortenedTutorial(CheckboxList, CheckboxStates):
                     break
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
         with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: # shortens opening section
             data = json.load(file)
             for row in data["rows"]:
@@ -41,7 +41,7 @@ def ShortenedTutorial(CheckboxList, CheckboxStates):
                     break
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
         with open("./_internal/JsonOutputs/common/FLD_QuestListNormal.json", 'r+', encoding='utf-8') as file: #shortens tutorials
             data = json.load(file)
             for row in data["rows"]:
@@ -52,7 +52,7 @@ def ShortenedTutorial(CheckboxList, CheckboxStates):
                     break
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
         with open("./_internal/JsonOutputs/common/FLD_QuestTaskNormal.json", 'r+', encoding='utf-8') as file: #adjusting tutorial quests
             data = json.load(file)
             for row in data["rows"]:
@@ -63,7 +63,7 @@ def ShortenedTutorial(CheckboxList, CheckboxStates):
                     break
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
         with open("./_internal/JsonOutputs/common/FLD_Achievement.json", 'r+', encoding='utf-8') as file: #adjusting tutorial quests
             data = json.load(file)
             for row in data["rows"]:
@@ -74,7 +74,7 @@ def ShortenedTutorial(CheckboxList, CheckboxStates):
                     break
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
         with open("./_internal/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing tutorials in tutorial
             data = json.load(file)
             for row in data["rows"]:
@@ -85,4 +85,4 @@ def ShortenedTutorial(CheckboxList, CheckboxStates):
                     row["scriptStartId"] = 0
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)

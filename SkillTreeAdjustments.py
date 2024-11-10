@@ -53,7 +53,7 @@ def BalancingSkillTreeRando(CheckboxList, CheckboxStates):
                         row["NeedSp"] = 0
                 file.seek(0)
                 file.truncate()
-                json.dump(data, file, indent=2)
+                json.dump(data, file, indent=2, ensure_ascii=False)
     if (CheckboxStates[BalancedBox].get() == False) and (CheckboxStates[ArtsCancelBox].get() == True): 
         for i in range(0, 9):
             CurrFile = FilePaths[i]
@@ -83,4 +83,4 @@ def BalancingSkillTreeRando(CheckboxList, CheckboxStates):
                         pass
                 file.seek(0)
                 file.truncate()
-                json.dump(data, file, indent=2)
+                json.dump(data, file, indent=2, ensure_ascii=False)

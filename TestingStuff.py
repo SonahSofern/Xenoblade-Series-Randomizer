@@ -70,7 +70,7 @@ def Beta(CheckboxList, CheckboxStates):
                         break
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
             pass """
 
         with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: #race mode implementation
@@ -84,7 +84,7 @@ def Beta(CheckboxList, CheckboxStates):
                     row["PRTQuestID"] = 25
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
 
         with open("./_internal/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: #adjusting level based exp gains to make it less grindy
             data = json.load(file)
@@ -95,4 +95,4 @@ def Beta(CheckboxList, CheckboxStates):
                     row["DamageRevHigh"] = 200
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)

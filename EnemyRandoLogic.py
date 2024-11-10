@@ -209,7 +209,7 @@ def ReworkedEnemyRando (DefaultEnemyIDs, RandomizedEnemyIDs):
                                     break
                     file.seek(0)
                     file.truncate()
-                    json.dump(data, file, indent=2)
+                    json.dump(data, file, indent=2, ensure_ascii=False)
             except:
                 pass     
     with open("./_internal/JsonOutputs/common/FLD_QuestBattle.json", 'r+', encoding='utf-8') as file:
@@ -226,7 +226,7 @@ def ReworkedEnemyRando (DefaultEnemyIDs, RandomizedEnemyIDs):
                             enechanged = 1                 
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
     with open("./_internal/JsonOutputs/common/FLD_EnemyGroup.json", 'r+', encoding='utf-8') as file:
         start_time = time.time()
         data = json.load(file)
@@ -244,7 +244,7 @@ def ReworkedEnemyRando (DefaultEnemyIDs, RandomizedEnemyIDs):
                         matching = 1                  
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
     with open("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data['rows']: #for each row in the Enemy Pop file
@@ -286,7 +286,7 @@ def ReworkedEnemyRando (DefaultEnemyIDs, RandomizedEnemyIDs):
                         break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def ColumnAdjust(filename, clearedCols, desiredValue):
     with open(filename, 'r+', encoding='utf-8') as file:
@@ -299,7 +299,7 @@ def ColumnAdjust(filename, clearedCols, desiredValue):
                     row[clearedCols[k]] = desiredValue
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def SubColumnAdjust(filename, colName, adjustedSubColName, desiredValue): #when your column you want to adjust is nested inside a dict
     with open(filename, 'r+', encoding='utf-8') as file:
@@ -308,7 +308,7 @@ def SubColumnAdjust(filename, colName, adjustedSubColName, desiredValue): #when 
             row[colName][adjustedSubColName] = desiredValue
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def ReducePCHPBattle1():
     filename = "./_internal/JsonOutputs/common/FLD_QuestBattle.json"
@@ -320,7 +320,7 @@ def ReducePCHPBattle1():
                 break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def BossQuestAggroAdjustments(DefaultIDs, RandomizedIDs):
     filename = "./_internal/JsonOutputs/common/CHR_EnArrange.json"
@@ -338,7 +338,7 @@ def BossQuestAggroAdjustments(DefaultIDs, RandomizedIDs):
                         break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def LevelReversion(FullDefaultIDs, FullRandomizedIDs, SpecificDefaultIDs, SpecificDefaultLevels): #specificdefaultids is boss or quest at the moment (not randomized)
     filename = "./_internal/JsonOutputs/common/CHR_EnArrange.json"
@@ -358,7 +358,7 @@ def LevelReversion(FullDefaultIDs, FullRandomizedIDs, SpecificDefaultIDs, Specif
                                 break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)                        
+        json.dump(data, file, indent=2, ensure_ascii=False)                        
                      
 def EnemyLogic(CheckboxList, CheckboxStates):
     print("Randomizing Enemies")

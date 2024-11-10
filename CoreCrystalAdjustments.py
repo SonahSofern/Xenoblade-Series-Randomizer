@@ -2,12 +2,12 @@ import EnemyRandoLogic
 import json
 import math
 import Helper
-import time
 import random
 
 FLDSkillMaxLv = [3, 5, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 3, 5, 3, 3, 3, 5, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 5, 3, 3, 5, 3, 5, 3, 3, 5, 5, 5, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 5, 5]
 # Helper.FindValues("./_internal/JsonOutputs/common/FLD_FieldSkillList.json", ["$id"], Helper.inclRange(2, 7) + Helper.inclRange(9,74), "MaxLevel")
-FLDSkillIDs = [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74]
+
+BladeFieldSkills = [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74]
 # print(Helper.inclRange(2,7) + Helper.inclRange(9,74))
 
 AdjustedFLDSkillSettingID1 = [1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 1, 1, 33, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 2, 2, 2, 2, 2, 2, 3, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 0, 0, 0, 1, 1, 1, 1, 2, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 3, 1, 2, 1, 1, 1, 2, 1, 2, 0, 0, 2, 2, 3, 2, 2, 1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 2, 2, 4, 1, 1, 1, 1, 2, 2, 2, 3, 2, 1, 2, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 3, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 20, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -52,7 +52,7 @@ def FieldSkillLevelAdjustment(CheckboxList, CheckboxStates):
                     row["AchievementID5"] = 40
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
         #BladeAdjustmentFile = "./_internal/JsonOutputs/common/CHR_Bl.json"
         """ with open(BladeAdjustmentFile, 'r+', encoding='utf-8') as file:
             data = json.load(file)
@@ -62,7 +62,7 @@ def FieldSkillLevelAdjustment(CheckboxList, CheckboxStates):
                 row["FskillAchivement3"] = 1404
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2) """
+            json.dump(data, file, indent=2, ensure_ascii=False) """
 
 def FieldSkillChecksAdjustment(CheckboxList, CheckboxStates):
     for j in range(0, len(CheckboxList)):
@@ -74,16 +74,16 @@ def FieldSkillChecksAdjustment(CheckboxList, CheckboxStates):
             data = json.load(file)
             for row in data["rows"]:
                 if row["FieldSkillID1"]:
-                    for i in range(0, len(FLDSkillIDs)):
-                        if row["FieldSkillID1"] == FLDSkillIDs[i]:
+                    for i in range(0, len(BladeFieldSkills)):
+                        if row["FieldSkillID1"] == BladeFieldSkills[i]:
                             row["FieldSkillLevel1"] = math.ceil(row["FieldSkillLevel1"]/FLDSkillMaxLv[i])
                 if row["FieldSkillID2"]:    
-                    for i in range(0, len(FLDSkillIDs)):
-                        if row["FieldSkillID2"] == FLDSkillIDs[i]:
+                    for i in range(0, len(BladeFieldSkills)):
+                        if row["FieldSkillID2"] == BladeFieldSkills[i]:
                             row["FieldSkillLevel2"] = math.ceil(row["FieldSkillLevel2"]/FLDSkillMaxLv[i])
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
 
 def AdjustingCrystalList(CheckboxList, CheckboxStates):
     for j in range(0, len(CheckboxList)):
@@ -116,7 +116,7 @@ def AdjustingCrystalList(CheckboxList, CheckboxStates):
                         row["AssureP"] = 0
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)        
+            json.dump(data, file, indent=2, ensure_ascii=False)        
 
 def ChangeChestContents(CheckboxList, CheckboxStates):
     for j in range(0, len(CheckboxList)):
@@ -146,7 +146,7 @@ def ChangeChestContents(CheckboxList, CheckboxStates):
                     break
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
 
 def CoreCrystalChanges(CheckboxList, CheckboxStates):
     AllRareBlades()
