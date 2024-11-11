@@ -7,6 +7,8 @@ import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, SkillTreeAd
 import threading
 from IDs import *
 from Cosmetics import *
+import shutil
+import os
 
 root = Tk()
 root.title("Xenoblade Chronicles 2 Randomizer 0.1.0")
@@ -110,6 +112,7 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
     optionDesc = Label(optionPanel, text=desc, background=OptionColor, width=900, anchor='w')
     optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
 
+
     for i in range((len(OptionNameANDIndexValue))//2):
         var = BooleanVar()
 
@@ -128,7 +131,7 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
     rowIncrement += 1
 
     if optionName != "Enemies": # make this pass an anonymous function so the genoption calls have the decision of what funciton to run
-        OptionsRunList.append(lambda: JSONParser.ChangeJSON(optionName, Filename, keyWords, rangeOfValuesToReplace, optionSlider.get(), rangeOfValidReplacements, InvalidTargetIDs, OptionNameANDIndexValue))
+        OptionsRunList.append(lambda: JSONParser.ChangeJSON(optionName, Filename, keyWords, rangeOfValuesToReplace, optionSlider.get(), rangeOfValidReplacements, InvalidTargetIDs))
 
 
 GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", ["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)
@@ -170,7 +173,12 @@ GenOption("Music", TabMisc, "Randomizes what music plays where", ["common/RSC_Bg
 GenOption("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.inclRange(0,3721), Helper.inclRange(2001,3721))
 GenOption("NPCs Size", TabMisc, "Randomizes the size of NPCs", ["common/RSC_NpcList.json"], ["Scale"], Helper.inclRange(1,100), Helper.inclRange(1,250))
 #GenOption("Core Crystal Changes", TabMisc, "Removes Gacha System", ["common/ITM_CrystalList.json"], ["BladeID"],)
+#GenOption("Funny Faces", TabMisc, "Randomizes Facial Expressions", ["common/EVT_eyetype.json"], ["$id"], Helper.inclRange(0,15), Helper.inclRange(0,15)) # doesnt work yet
+GenOption("Menu Colors", TabMisc, "Randomizes Colors in the UI", ["common/MNU_ColorList.json"], ["col_r", "col_g", "col_b"], Helper.inclRange(0,255), Helper.inclRange(0,0))
 
+# this changed animations on text but not in a good way:
+# GenOption("Text Effects", TabMisc, "Randomizes text movement", ["common/MNU_ResMotion.json"], ["$id"], Helper.inclRange(1,39), Helper.inclRange(1,39))
+# EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_ResMotion.json", ["file"], "sample") 
 
 GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in the game") #common_ms/menu_ms
 GenOption("Running Speed", TabQOL, "Set your starting run speed bonus")
@@ -197,7 +205,6 @@ OptionsRunList.append(lambda: TutorialShortening.ShortenedTutorial(CheckboxList,
 def Randomize():
     def ThreadedRandomize():
         global OptionsRunList
-        global RandomizeButton
         RandomizeButton.config(state=DISABLED)
 
         random.seed(randoSeedEntry.get())
@@ -211,6 +218,10 @@ def Randomize():
             OptionRun()
 
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
+        os.makedirs(f"{outDirEntry.get()}/gb", exist_ok=True)
+        shutil.move(f"{outDirEntry.get()}/common_ms.bdat", f"{outDirEntry.get()}/gb/common_ms.bdat")
+
+
         RandomizeButton.config(state=NORMAL)
         print("Done")
 
