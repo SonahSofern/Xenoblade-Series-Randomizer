@@ -1,7 +1,8 @@
 import json
 import random
 import time
-from IDs import *
+import Helper
+from IDs import ValidEnemies
 
 #Notes: This: (Sets enemy levels to the enemy they replace) (Allows some fights to be losable) (Allows swapping between types of enemies only) (Sets always attack to shuffled bosses)
 
@@ -321,6 +322,18 @@ def ReducePCHPBattle1():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
+    with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if (row["$id"] == 633) or (row["$id"] == 1346): #battle on gramps at start of game
+                row["ExpRev"] = 1000
+            if row["$id"] == 1346:
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+
+    
 
 def BossQuestAggroAdjustments(DefaultIDs, RandomizedIDs):
     filename = "./_internal/JsonOutputs/common/CHR_EnArrange.json"

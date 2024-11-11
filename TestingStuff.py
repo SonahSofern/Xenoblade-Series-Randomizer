@@ -3,6 +3,7 @@ import json
 import EnemyRandoLogic
 import random
 
+
 AreaList1 = [41, 68] #list of MapJump IDs for the first landmark in each map (114 is Temperantia (combining with Indol for now)), (180 is Land of Morytha (combining with Cliffs of Morytha for now))
 AreaList2 = [90, 152]
 AreaList3 = [125, 133, 168]
@@ -72,16 +73,61 @@ def Beta(CheckboxList, CheckboxStates):
             file.truncate()
             json.dump(data, file, indent=2)
             pass """
-
-        with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: #race mode implementation
+        
+        with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: #race mode implementation #these just adjust the quest markers as far as I can tell
             data = json.load(file)
             for row in data["rows"]:
-                if row["$id"] == 24:
-                    row["CallEventA"] = 10088 # testing uraya, this should be a choice later
-                    row["FlagCLD"] = 685 #uraya flag
-                    row["NextQuestA"] = 56 #set out for village in uraya
-                if (row["$id"] >= 52) and (row["$id"]) <= 81:
+                if (row["$id"] >= 26) and (row["$id"] <= 50):
                     row["PRTQuestID"] = 25
+                if row["$id"] == 26:
+                    row["NextQuestA"] = 40 # tora + poppy
+                    #row["CallEventA"] = 10088 # testing uraya, this should be a choice later
+                    #row["FlagCLD"] = 685 # uraya flag
+                    #row["NextQuestA"] = 56 #set out for village in uraya 
+                if row["$id"] == 40:
+                    row["NextQuestA"] = 45
+                if row["$id"] == 45: # nia + dromarch quest
+                    row["PurposeID"] == 39
+                    row["NextQuestA"] = 55 # quest in uraya
+                if (row["$id"] >= 52) and (row["$id"] <= 81):
+                    row["PRTQuestID"] = 24
+                if row["$id"] == 55:
+                    row["CallEventA"] = 10088
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2)
+
+        """         with open("./_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: #tora+poppy
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] == 10033: #after pupunin cutscene to start chapter 2, instantly warp to tora's house and start the tiger!tiger! cutscene
+                    row["nextID"] = 10064
+                    row["chgEdID"] = 10059 #different than the nextID and nextIDtheater
+                    row["scenarioFlag"] = 2032
+                    row["nextIDtheater"] = 10064
+                if row["$id"] == 10065:
+                    row["edFormID"] = 1067
+                    row["nextID"] = 10074
+                    row["nextIDtheater"] = 10074
+                    row["linkID"] = 10074
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2) """
+
+        with open("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EventPop.json", 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] == 5008: #tora+poppy, plays event 10064, which sets the scenario to 2034 afterwards
+                    row["QuestFlag"] = 0
+                    row["QuestFlagMin"] = 0
+                    row["QuestFlagMax"] = 0
+                    row["Condition"] = 0
+                    row["ScenarioFlagMin"] = 2032
+                    row["ScenarioFlagMax"] = 2032
+                    row["EventID"] = 10064
+                if row["$id"] == 5009: #nia+dromarch since the scenario flag is 2032, we then play the nia+dromarch cutscene in Tora's house
+                    row["EventID"] = 10074 #play the event of nia breaking out of cell
+                    break
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)
@@ -96,3 +142,4 @@ def Beta(CheckboxList, CheckboxStates):
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)
+

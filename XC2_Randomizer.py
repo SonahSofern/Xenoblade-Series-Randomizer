@@ -1,14 +1,14 @@
-import tkinter as tk
 from tkinter import PhotoImage
 from tkinter import ttk
 import random
 import subprocess
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, SkillTreeAdjustments, Cosmetics, CoreCrystalAdjustments, TestingStuff, TutorialShortening
+import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, TutorialShortening
 import threading
 from IDs import *
+from Cosmetics import *
 
-root = tk.Tk()
+root = Tk()
 root.title("Xenoblade Chronicles 2 Randomizer 0.1.0")
 root.configure(background='#632424')
 root.geometry('900x800')
@@ -22,36 +22,37 @@ CheckboxList = []
 OptionsRunList = []
 OptionSliders = []
 rowIncrement = 0
+CheckBoxFunctions = []
 
 # The Notebook
 MainWindow = ttk.Notebook(root, height=2)
 
 #Frames in the notebook
-TabGeneralOuter = tk.Frame(MainWindow) 
-TabDriversOuter = tk.Frame(MainWindow) 
-TabBladesOuter = tk.Frame(MainWindow) 
-TabEnemiesOuter = tk.Frame(MainWindow) 
-TabMiscOuter = tk.Frame(MainWindow) 
-TabQOLOuter = tk.Frame(MainWindow)
-TabCosmeticsOuter = tk.Frame(MainWindow)
+TabGeneralOuter = Frame(MainWindow) 
+TabDriversOuter = Frame(MainWindow) 
+TabBladesOuter = Frame(MainWindow) 
+TabEnemiesOuter = Frame(MainWindow) 
+TabMiscOuter = Frame(MainWindow) 
+TabQOLOuter = Frame(MainWindow)
+TabCosmeticsOuter = Frame(MainWindow)
 
 # Canvas 
-TabGeneralCanvas = tk.Canvas(TabGeneralOuter) 
-TabDriversCanvas = tk.Canvas(TabDriversOuter) 
-TabBladesCanvas = tk.Canvas(TabBladesOuter)
-TabEnemiesCanvas = tk.Canvas(TabEnemiesOuter) 
-TabMiscCanvas = tk.Canvas(TabMiscOuter)
-TabQOLCanvas = tk.Canvas(TabQOLOuter)
-TabCosmeticsCanvas = tk.Canvas(TabCosmeticsOuter)
+TabGeneralCanvas = Canvas(TabGeneralOuter) 
+TabDriversCanvas = Canvas(TabDriversOuter) 
+TabBladesCanvas = Canvas(TabBladesOuter)
+TabEnemiesCanvas = Canvas(TabEnemiesOuter) 
+TabMiscCanvas = Canvas(TabMiscOuter)
+TabQOLCanvas = Canvas(TabQOLOuter)
+TabCosmeticsCanvas = Canvas(TabCosmeticsOuter)
 
 # Actual Scrollable Content
-TabGeneral = tk.Frame(TabGeneralCanvas) 
-TabDrivers = tk.Frame(TabDriversCanvas) 
-TabBlades = tk.Frame(TabBladesCanvas)
-TabEnemies = tk.Frame(TabEnemiesCanvas) 
-TabMisc = tk.Frame(TabMiscCanvas)
-TabQOL = tk.Frame(TabQOLCanvas)
-TabCosmetics = tk.Frame(TabCosmeticsCanvas)
+TabGeneral = Frame(TabGeneralCanvas) 
+TabDrivers = Frame(TabDriversCanvas) 
+TabBlades = Frame(TabBladesCanvas)
+TabEnemies = Frame(TabEnemiesCanvas) 
+TabMisc = Frame(TabMiscCanvas)
+TabQOL = Frame(TabQOLCanvas)
+TabCosmetics = Frame(TabCosmeticsCanvas)
 
 
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
@@ -92,7 +93,7 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
     global OptionsRunList
     global OptionSliders
 
-    optionPanel = tk.Frame(parentTab, padx=10, pady=10)
+    optionPanel = Frame(parentTab, padx=10, pady=10)
     optionPanel.grid(row=rowIncrement, column= 0, sticky="sw")
 
     if (rowIncrement %2 == 0):
@@ -101,17 +102,25 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
         OptionColor = "#D5D5D5"
     
     optionPanel.config(background=OptionColor)
-    option = tk.Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w")
+    option = Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w")
     option.grid(row=rowIncrement, column=0, sticky="sw")
-    optionSlider = tk.Scale(optionPanel, from_=0, to=100, orient=tk.HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
+    optionSlider = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
     OptionSliders.append(optionSlider)
     optionSlider.grid(row=rowIncrement, column=1, sticky='n')
-    optionDesc = tk.Label(optionPanel, text=desc, background=OptionColor, width=900, anchor='w')
+    optionDesc = Label(optionPanel, text=desc, background=OptionColor, width=900, anchor='w')
     optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
 
     for i in range((len(OptionNameANDIndexValue))//2):
-        var = tk.BooleanVar(value = True)
-        box = tk.Checkbutton(optionPanel, background=OptionColor, text=OptionNameANDIndexValue[2*i], variable=var, command=lambda i=i, var=var: Helper.OptionCarveouts(rangeOfValidReplacements, OptionNameANDIndexValue[2*i+1], var), highlightthickness=0)
+        var = BooleanVar()
+
+        checkFunction = lambda i=i, var=var: Helper.OptionCarveouts(rangeOfValidReplacements, OptionNameANDIndexValue[2*i+1], var)
+
+        box = Checkbutton(optionPanel, background=OptionColor, text=OptionNameANDIndexValue[2*i], variable=var, command = checkFunction, highlightthickness=0)
+        
+        #HACKY want to fix
+        CheckBoxFunctions.append(checkFunction)
+
+
         CheckboxStates.append(var)
         CheckboxList.append(OptionNameANDIndexValue[2*i] + " Box")
         box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
@@ -119,7 +128,7 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
     rowIncrement += 1
 
     if optionName != "Enemies": # make this pass an anonymous function so the genoption calls have the decision of what funciton to run
-        OptionsRunList.append(lambda: JSONParser.ChangeJSON(optionName, Filename, keyWords, rangeOfValuesToReplace, optionSlider.get(), rangeOfValidReplacements, InvalidTargetIDs, OptionNameANDIndexValue))
+        OptionsRunList.append(lambda: JSONParser.ChangeJSON(optionName, Filename, keyWords, rangeOfValuesToReplace, optionSlider.get(), rangeOfValidReplacements, InvalidTargetIDs))
 
 
 GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", ["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)
@@ -162,22 +171,21 @@ GenOption("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still test
 GenOption("NPCs Size", TabMisc, "Randomizes the size of NPCs", ["common/RSC_NpcList.json"], ["Scale"], Helper.inclRange(1,100), Helper.inclRange(1,250))
 #GenOption("Core Crystal Changes", TabMisc, "Removes Gacha System", ["common/ITM_CrystalList.json"], ["BladeID"],)
 
-
 GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in the game") #common_ms/menu_ms
 GenOption("Running Speed", TabQOL, "Set your starting run speed bonus")
 #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
 
-GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultRex], [], Cosmetics.RexCosmetics)
-GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultPyra], [], Cosmetics.PyraCosmetics)
-GenOption("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultMythra], [], Cosmetics.MythraCosmetics)
-GenOption("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultDriverNia], [], Cosmetics.NiaDriverCosmetics)
-GenOption("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultBladeNia], [], Cosmetics.NiaBladeCosmetics)
-GenOption("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultDromarch], [], Cosmetics.DromarchCosmetics)
-GenOption("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultTora], [], Cosmetics.ToraCosmetics)
-GenOption("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultMorag], [], Cosmetics.MoragCosmetics)
-GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultBrighid], [], Cosmetics.BrighidCosmetics)
-GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [Cosmetics.DefaultZeke], [], Cosmetics.ZekeCosmetics)
-GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [Cosmetics.DefaultPandoria], [], Cosmetics.PandoriaCosmetics)
+GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultRex], [], RexCosmetics)
+GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPyra], [], PyraCosmetics)
+GenOption("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultMythra], [], MythraCosmetics)
+GenOption("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultDriverNia], [], NiaDriverCosmetics)
+GenOption("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBladeNia], [], NiaBladeCosmetics)
+GenOption("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultDromarch], [], DromarchCosmetics)
+GenOption("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultTora], [], ToraCosmetics)
+GenOption("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultMorag], [], MoragCosmetics)
+GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBrighid], [], BrighidCosmetics)
+GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultZeke], [], ZekeCosmetics)
+GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPandoria], [], PandoriaCosmetics)
 
 OptionsRunList.append(lambda: EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates))
 OptionsRunList.append(lambda: SkillTreeAdjustments.BalancingSkillTreeRando(CheckboxList, CheckboxStates))
@@ -216,29 +224,29 @@ def GenRandomSeed():
     # Helper.FindSubOptionValuesList("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "AlwaysAttack", 1, "$id") 
     #EnemyRandoLogic.FindMatchingInfo
     #Helper.FindValues("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["$id"], Helper.inclRange(1,37), "Blade")
-    randoSeedEntry.delete(0, tk.END)
+    randoSeedEntry.delete(0, END)
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
 
-bdatcommonFrame = tk.Frame(root, background='#632424')
+bdatcommonFrame = Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
-bdatButton = tk.Button(bdatcommonFrame, text="Choose Input Folder (bdat)", command= lambda: Helper.DirectoryChoice("Choose your bdat folder", bdatFilePathEntry))
+bdatButton = Button(bdatcommonFrame, text="Choose Input Folder (bdat)", command= lambda: Helper.DirectoryChoice("Choose your bdat folder", bdatFilePathEntry))
 bdatButton.pack(side="left", padx=2, pady=2)
-bdatFilePathEntry = tk.Entry(bdatcommonFrame, width=500)
+bdatFilePathEntry = Entry(bdatcommonFrame, width=500)
 bdatFilePathEntry.pack(side="left", padx=2)
-OutputDirectoryFrame = tk.Frame(root, background='#632424')
+OutputDirectoryFrame = Frame(root, background='#632424')
 OutputDirectoryFrame.pack(anchor="w", padx=10)
-outputDirButton = tk.Button(OutputDirectoryFrame, text='Choose Output Folder', command= lambda: Helper.DirectoryChoice("Choose an output folder", outDirEntry))
+outputDirButton = Button(OutputDirectoryFrame, text='Choose Output Folder', command= lambda: Helper.DirectoryChoice("Choose an output folder", outDirEntry))
 outputDirButton.pack(side="left", padx=2, pady=2)
-outDirEntry = tk.Entry(OutputDirectoryFrame, width=500)
+outDirEntry = Entry(OutputDirectoryFrame, width=500)
 outDirEntry.pack(side="left", padx=2)
-SeedFrame = tk.Frame(root, background='#632424')
+SeedFrame = Frame(root, background='#632424')
 SeedFrame.pack(anchor="w", padx=10)
-seedDesc = tk.Button(SeedFrame, text="Seed", command=GenRandomSeed)
+seedDesc = Button(SeedFrame, text="Seed", command=GenRandomSeed)
 seedDesc.pack(side='left', padx=2, pady=2)
-randoSeedEntry = tk.Entry(SeedFrame, width=25)
+randoSeedEntry = Entry(SeedFrame, width=25)
 randoSeedEntry.pack(side='left', padx=2)
-RandomizeButton = tk.Button(text='Randomize', command=Randomize)
+RandomizeButton = Button(text='Randomize', command=Randomize)
 RandomizeButton.pack(pady=10) 
 
 
@@ -246,5 +254,8 @@ EveryObjectSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + CheckboxSt
 SavedOptions.loadData(EveryObjectSave) # this doesnt set the states like we need for chekcboxzes. it should read the states of checboxes when you click randomize
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectSave), root.destroy()))
 
+#HACKY want to fix 
+for boxFunction in CheckBoxFunctions:
+    boxFunction()
 
 root.mainloop()
