@@ -74,7 +74,7 @@ def Beta(CheckboxList, CheckboxStates):
             json.dump(data, file, indent=2)
             pass """
         
-        with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: #race mode implementation #these just adjust the quest markers as far as I can tell
+        """         with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: #race mode implementation #these just adjust the quest markers as far as I can tell
             data = json.load(file)
             for row in data["rows"]:
                 if (row["$id"] >= 26) and (row["$id"] <= 50):
@@ -95,7 +95,7 @@ def Beta(CheckboxList, CheckboxStates):
                     row["CallEventA"] = 10088
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2) """
 
         """         with open("./_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: #tora+poppy
             data = json.load(file)
@@ -114,7 +114,7 @@ def Beta(CheckboxList, CheckboxStates):
             file.truncate()
             json.dump(data, file, indent=2) """
 
-        with open("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EventPop.json", 'r+', encoding='utf-8') as file:
+        """         with open("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EventPop.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data["rows"]:
                 if row["$id"] == 5008: #tora+poppy, plays event 10064, which sets the scenario to 2034 afterwards
@@ -130,7 +130,7 @@ def Beta(CheckboxList, CheckboxStates):
                     break
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2) """
 
         with open("./_internal/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: #adjusting level based exp gains to make it less grindy
             data = json.load(file)
