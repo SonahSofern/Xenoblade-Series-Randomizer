@@ -36,17 +36,60 @@ DamageRevLow = [100, 100, 100, 98, 96, 94, 92, 90, 88, 86, 84, 82, 80, 78, 76, 7
 HitRevLow = [110, 115, 122, 129, 138, 147, 158, 169, 182, 195, 210, 225, 242, 259, 278, 297, 318, 339, 362, 385]
 ReactRevHigh = [0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 40, 60, 80, 100, 100, 100, 100, 100, 100, 100]
 
+
+# Save File Loc
+InputSaveFileLoc = "C:\\Users\\ofc20\\Desktop\\Testing Flags\\Fresh Save\\bf2savefile.sav"
+OutputSaveFileLoc = "C:\\Users\\ofc20\\AppData\\Roaming\\yuzu\\nand\\user\\save\\0000000000000000\\BF50755B382CCC6AC0A69D441CBBF62C\\0100E95004038000\\bf2savefile.sav"
+
+# Misc Tab Inputs
+
+PartyMembersMemberBoxInputs = ["Member 2", "Member 3", "Member 4", "Member 5"]
+PartyMembersDriverBoxInputs = [2, 3, 4, 6]
+
+# Drivers Tab Inputs
+# Goes in Order: [Rex, Nia, Zeke, Tora, Vandham, Morag]
+IsInParty = [1, 1, 1, 1, 0, 1]
+Blade1BoxInputs = [1001, 1004, 1010, 1005, 0, 1009]
+SetBladeInputs= [0, 0, 0, 0, -1, 0]
+SelectWeaponInputs = ["Aegis Sword", "Twin Rings", "Big Bang Edge", "Drill Shield", "(none)", "Whipswords"]
+Art1IDInputs = [4, 31, 88, 46, 0, 75]
+Art2IDInputs = [5, 32, 89, 47, 0, 76]
+Art3IDInputs = [6, 33, 90, 48, 0, 77]
+ArtLevelBoxInputs = 1
+
+# Blades Tab Inputs
+
+# Misc Sub-Tab
+
+# Goes In Order: [Pyra, Dromarch, Pandoria, Poppy Alpha, None, Brighid]
+
+IsEnabled = 1
+SetDriver = [1, 2, 3, 4, 0, 6]
+IsEngagedWithRex = [1, 0, 0, 0, 0, 0]
+TimeAwakened = [1, 1, 1, 1, 0, 1]
+WeaponEquipped = [5001, 5121, 5421, 5181, 0, 5361]
+
+# Specials Sub-Tab
+
+BladeSpecialsLevels = 1
+
+# Skills Sub-Tab
+
+BattleSkillLevels = 1
+
+# Game Flag Data Inputs
+
+OneBitFlagTurnOnID = 48590
+OneBitFlagTurnOnValue = 1
+
 def Beta(CheckboxList, CheckboxStates):
     for j in range(0, len(CheckboxList)):
         if CheckboxList[j] == "Beta Stuff Box":
             BetaStuffBox = j
             break
     if CheckboxStates[BetaStuffBox].get() == True:    
-        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common_gmk/RSC_GmkSetList.json", ["tutorial", "tutorial_bdat"], "") #maybe removes tutorials
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
-        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_Tutorial.json", ["ScenarioFlagMin", "QuestFlag", "QuestFlagMin", "QuestFlagMax", "SysMultiFlag"], 0) #maybe removes tutorials
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
-        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Condition.json", ["cond"], 1) #unlocks the world maps
         # EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma21a_FLD_LandmarkPop.json", ["cndID"], 0) #removes requirement to unlock location
         """ 
         for i in range(0, len(RaceModeDungeons)):

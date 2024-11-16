@@ -17,6 +17,8 @@ BladeIDs = [1008,1016] + Helper.FindValues("./_internal/JsonOutputs/common/BLD_R
 
 ValidCrystalListIDs = Helper.inclRange(45002,45010) + [45016] + Helper.inclRange(45017,45043) + [45056, 45057]
 
+FieldSkillAchievementIDs = [12, 13, 14, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84, 92, 93, 94, 102, 103, 104, 112, 113, 114, 122, 123, 124, 132, 133, 134, 142, 143, 144, 152, 153, 154, 162, 163, 164, 172, 173, 174, 182, 183, 184, 192, 193, 194, 202, 203, 204, 212, 213, 214, 222, 223, 224, 232, 233, 234, 242, 243, 244, 252, 253, 254, 262, 263, 264, 272, 273, 274, 282, 283, 284, 292, 293, 294, 302, 303, 304, 312, 313, 314, 322, 323, 324, 332, 333, 334, 342, 343, 344, 352, 353, 354, 362, 363, 364, 372, 373, 374, 382, 383, 384, 392, 393, 394, 402, 403, 404, 412, 413, 414, 422, 423, 424, 432, 433, 434, 442, 443, 444, 452, 453, 454, 462, 463, 464, 1645, 1646, 1647, 1655, 1656, 1657, 1665, 1666, 1667, 1675, 1676, 1677, 1746, 1747, 1748, 1756, 1757, 1758, 1766, 1767, 1768]
+
 def AllRareBlades():
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Condition"] , 0)
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Prob1"] , 1)
@@ -40,16 +42,19 @@ def FieldSkillLevelAdjustment(CheckboxList, CheckboxStates):
         with open(FieldAchievementSetFile, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data["rows"]:
-                if row["AchievementID1"] != 0:
-                    row["AchievementID1"] = 40
-                if row["AchievementID2"] != 0:
-                    row["AchievementID2"] = 40
-                if row["AchievementID3"] != 0:
-                    row["AchievementID3"] = 40
-                if row["AchievementID4"] != 0:
-                    row["AchievementID4"] = 40
-                if row["AchievementID5"] != 0:
-                    row["AchievementID5"] = 40
+                for i in range(0, len(FieldSkillAchievementIDs)):
+                    if row["$id"] == FieldSkillAchievementIDs[i]:
+                        if row["AchievementID1"] != 0:
+                            row["AchievementID1"] = 40
+                        if row["AchievementID2"] != 0:
+                            row["AchievementID2"] = 40
+                        if row["AchievementID3"] != 0:
+                            row["AchievementID3"] = 40
+                        if row["AchievementID4"] != 0:
+                            row["AchievementID4"] = 40
+                        if row["AchievementID5"] != 0:
+                            row["AchievementID5"] = 40
+                        break
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)

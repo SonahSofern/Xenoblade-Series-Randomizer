@@ -16,7 +16,7 @@ def InsertHelper(insertIndex,  lowNum, highNum, mainString = str, pathTo = str):
     listOfFiles = []
     for i in range(lowNum, highNum):
         listOfFiles.append(pathTo + mainString[:insertIndex] + f"{i:02}" + mainString[insertIndex:]) # fstring allows us to format with 2 digits like xc2 wants
-    # print(listOfFiles)
+    #print(listOfFiles)
     return listOfFiles
 
 def FindValues(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue): # used for me to find a list of values from a file with certain characteristsics that i want to remove

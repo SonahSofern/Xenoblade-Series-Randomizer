@@ -214,7 +214,7 @@ def Randomize():
         print("Done")
 
     threading.Thread(target=ThreadedRandomize).start()
-    
+
 def GenRandomSeed():
     #print(Helper.StartsWithHelper("BSkill", 1, 3))
     #Helper.FindBadValuesList("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["Name"], [0], "$id")
@@ -226,7 +226,6 @@ def GenRandomSeed():
     #Helper.FindValues("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["$id"], Helper.inclRange(1,37), "Blade")
     randoSeedEntry.delete(0, END)
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
-
 
 bdatcommonFrame = Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
