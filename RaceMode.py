@@ -12,8 +12,8 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
         
-        AreaList1 = [41] # readd 68
-        AreaList2 = [90, 152]
+        AreaList1 = [41] #68
+        AreaList2 = [90] #152
         AreaList3 = [125, 133, 168]
         AreaList4 = [175, 187]
 
@@ -45,8 +45,9 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
         # [Gormott, Uraya, Mor Ardain, Leftherian Archipelago, Temperantia + Indoline Praetorium, Tantal, Spirit Crucible Elpys, Cliffs of Morytha + Land of Morytha, World Tree, Final Stretch]
 
         ContinentWarpCutscenes = [10034, 10088, 10156, 10197, 10213, 10270, 10325, 10350, 10399, 10476] # We want to call these after the boss fight cutscenes
-        ScenarioFlagLists = [2001, 3005]
-        NextQuestAList = [26, 56, 100, 128, 136, 163, 183, 194, 214, 238]
+        FinalContinentCutscenes = [10079, 10130, 10189, 10212, 10266, 10304, 10345, 10392, 10451, 30000]
+        ScenarioFlagLists = [2001, 3005, 4025, 5005, 5021, 6028, 7018, 7043, 8031, 10026]
+        NextQuestAList = [27, 56, 100, 128, 136, 163, 184, 194, 214, 238]
         LastQuestAList = [50, 81, 125, 135, 161, 177, 191, 211, 227, 270]
         LevelAtStartofArea = [5, 20, 29, 35, 38, 42, 46, 51, 59, 68] #Level going to: # Level(ish) of the first boss of the current area (so you want to be around this level after warping)
         LevelAtEndofArea = [15, 26, 34, 35, 42, 46, 46, 59, 68, 70]  #Level going from: # Level the last boss of the previous area was (so you should be around the same level before warping to new area)
@@ -100,7 +101,11 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
         for i in range(0, len(ChosenIndices)): # Defines what files we want to target and what map ids in that file we want to target  
             LandmarkFilestoTarget.append(FileStart + AllMapIDs[ChosenIndices[i]][1] + FileEnd)
             LandmarkMapSpecificIDstoTarget.append(MapSpecificIDs[ChosenIndices[i]])
-            
+        
+        if ChosenIndices[0] == 0: # Because Gormott warp is broken currently, we 
+            LandmarkFilestoTarget[0] = "./_internal/JsonOutputs/common_gmk/ma02a_FLD_LandmarkPop.json"
+            LandmarkMapSpecificIDstoTarget[0] = 210
+
         for i in range(0, len(LandmarkFilestoTarget)):  # Adjusts the EXP gained from the first landmark in each race-mode location
             with open(LandmarkFilestoTarget[i], 'r+', encoding='utf-8') as file:
                 data = json.load(file)
@@ -108,6 +113,11 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
                     if row["$id"] == LandmarkMapSpecificIDstoTarget[i]:
                         row["getEXP"] = ExpDiff[i]
                         row["getSP"] = 5000 * ChosenIndices[i]
+                        if row["$id"] == 210: # because the Gormott warp is currently broken, we need a skip travel point there in case the player dies before getting a landmark.
+                            row["category"] = 0
+                            row["MAPJUMPID"] = 41
+                            row["menuPriority"] = 1
+                            row["MSGID"] = 63
                         break
                 file.seek(0)
                 file.truncate()
@@ -120,6 +130,11 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
                     row["PRTQuestID"] = 6
                 if row["$id"] == 15: # Talking to Spraine
                     row["NextQuestA"] = NextQuestAList[ChosenIndices[0]]
+            for i in range(1, len(ChosenIndices) - 1):
+                for row in data["rows"]:
+                    if row["$id"] == LastQuestAList[ChosenIndices[i]]:
+                        row["NextQuestA"] = NextQuestAList[ChosenIndices[i+1]]
+                        break
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)
@@ -130,24 +145,63 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
                 if row["$id"] == 10013:
                     if ChosenIndices[0] == 0:
                         # Gormott
-                        row["nextID"] = 10034
-                        row["scenarioFlag"] = 2001
-                        row["nextIDtheater"] = 10034
+                        row["nextID"] = 10035
+                        row["scenarioFlag"] = 2002
+                        row["nextIDtheater"] = 10035
+                        break
                     if ChosenIndices[0] == 1:
                         # Uraya
                         row["nextID"] = 10088
                         row["scenarioFlag"] = 3005
                         row["nextIDtheater"] = 10088
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2)
-
-        with open("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: #race mode implementation #these just adjust the quest markers as far as I can tell
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] == 5001:
-                    row["ScenarioFlagMin"] = 0
-                    break
+                        break
+            for i in range(1, len(ChosenIndices) - 1):
+                for row in data["rows"]:
+                    if row["$id"] == FinalContinentCutscenes[ChosenIndices[i]]:
+                        row["nextID"] = ContinentWarpCutscenes[ChosenIndices[i+1]]
+                        row["nextIDtheater"] = ContinentWarpCutscenes[ChosenIndices[i+1]]
+                        row["scenarioFlag"] = ScenarioFlagLists[ChosenIndices[i+1]]
+                        break
+                #if ChosenIndices[1] == 2:
+                    # Mor Ardain
+                    #row["nextID"] = 10156
+                    #row["scenarioFlag"] = 4025
+                    #row["nextIDtheater"] = 10156
+                #if ChosenIndices[1] == 3:
+                    # Leftherian Archipelago
+                    #row["nextID"] = 10197
+                    #row["scenarioFlag"] = 5005
+                    #row["nextIDtheater"] = 10197
+                #if ChosenIndices[2] == 4:
+                    # Temperantia + Indol
+                    #row["nextID"] = 10213
+                    #row["scenarioFlag"] = 5021
+                    #row["nextIDtheater"] = 10213
+                #if ChosenIndices[2] == 5:
+                    # Tantal
+                    #row["nextID"] = 10270
+                    #row["scenarioFlag"] = 6028
+                    #row["nextIDtheater"] = 10270
+                #if ChosenIndices[2] == 6:
+                    # Spirit Crucible Elpys
+                    #row["nextID"] = 10325
+                    #row["scenarioFlag"] = 7018
+                    #row["nextIDtheater"] = 10325
+                #if ChosenIndices[3] == 7:
+                    # Cliffs of Morytha + Land of Morytha
+                    #row["nextID"] = 10350
+                    #row["scenarioFlag"] = 7043
+                    #row["nextIDtheater"] = 10350
+                #if ChosenIndices[3] == 8:
+                    # World Tree This does not spawn in the marker, but it recognizes the correct area at least. Could maybe make the warp point the elevator base in the land of morytha
+                    #row["nextID"] = 10399
+                    #row["scenarioFlag"] = 8031
+                    #row["nextIDtheater"] = 10399
+                #if ChosenIndices[4] == 9:
+                    # Final Stretch
+                    #row["nextID"] = 10482 #10476
+                    #row["scenarioFlag"] = 10026 #10019
+                    #row["nextIDtheater"] = 10482 #10476
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)

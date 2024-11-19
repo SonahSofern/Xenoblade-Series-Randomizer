@@ -333,8 +333,6 @@ def ReducePCHPBattle1():
         file.truncate()
         json.dump(data, file, indent=2)
 
-    
-
 def BossQuestAggroAdjustments(DefaultIDs, RandomizedIDs):
     filename = "./_internal/JsonOutputs/common/CHR_EnArrange.json"
     with open(filename, 'r+', encoding='utf-8') as file:
@@ -345,10 +343,23 @@ def BossQuestAggroAdjustments(DefaultIDs, RandomizedIDs):
                     if row["$id"] == RandomizedIDs[i]: # If the row's ID corresponds to the randomized ID with index i
                         row["Flag"]["AlwaysAttack"] = 1
                         row["Detects"] = 3
-                        row["SearchRange"] = 300
+                        row["SearchRange"] = 10
                         row["SearchAngle"] = 360
-                        row["SearchRadius"] = 200
+                        row["SearchRadius"] = 5
                         break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+
+def KeyItemsReAdd(): #need to add more than just this one, plenty of enemies drop key items, and I need to make sure all of them get put instead with the enemy that replaces them
+    SargeID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EnemyPop.json", ["$id"], [5502] , "ene1ID")
+    filename = "./_internal/JsonOutputs/common/CHR_EnArrange.json"
+    with open(filename, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == SargeID[0]:
+                row["PreciousID"] = 25224
+                break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
@@ -479,5 +490,5 @@ def EnemyLogic(CheckboxList, CheckboxStates):
 
         ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["LvRand"], 0)
         ColumnAdjust("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], 0)
-        
+        KeyItemsReAdd()
 
