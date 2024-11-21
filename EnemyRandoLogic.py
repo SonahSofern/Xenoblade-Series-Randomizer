@@ -351,15 +351,65 @@ def BossQuestAggroAdjustments(DefaultIDs, RandomizedIDs):
         file.truncate()
         json.dump(data, file, indent=2)
 
-def KeyItemsReAdd(): #need to add more than just this one, plenty of enemies drop key items, and I need to make sure all of them get put instead with the enemy that replaces them
-    SargeID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EnemyPop.json", ["$id"], [5502] , "ene1ID")
+def SummonsLevelAdjustment(): # We want the summoned enemies to be the same level as the enemy that summoned them
+    OriginalSummonedFirstIDs = [1, 1, 724, 122, 66, 1369, 1304, 1385, 1372, 1308, 242, 1376, 1378, 1379, 1807, 150, 1373, 1377, 1380, 1806, 1285, 1285, 1381, 725, 725, 1358, 1362, 1700, 1521, 728, 846, 1420, 1347, 1370, 1354, 1354, 1352, 1367, 1371, 1368, 1356, 1357, 1365, 1384, 1593, 1599, 1353, 1349, 1355, 1361, 1382, 1364, 1350, 1724, 1724, 1724, 1724, 1731, 1787, 1788, 1789, 1805, 1881, 1883, 1885, 1641, 1533, 1568, 1569, 1569]
+    OriginalSummonedSecondIDs = [0, 0, 0, 0, 67, 0, 0, 0, 0, 0, 0, 1376, 1378, 1379, 1807, 152, 1374, 0, 0, 0, 0, 0, 1381, 726, 727, 1359, 1362, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1382, 0, 1350, 1725, 1725, 1725, 1726, 0, 0, 0, 0, 1805, 0, 1883, 1885, 0, 0, 0, 0, 0]
+    OriginalSummonedThirdIDs = [6, 6, 0, 0, 135, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 154, 1375, 0, 0, 0, 0, 0, 1381, 727, 0, 1360, 1363, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1383, 0, 1351, 0, 1726, 1727, 1727, 0, 0, 0, 0, 1805, 0, 1883, 1885, 0, 0, 0, 0, 0]
+    EnemyIDThatSummonedThem = [[0], [0], [184], [0], [0], [957], [222, 269], [236], [250, 274, 351], [239], [242], [1168, 1177, 326], [1188], [1380], [1803], [0], [1165, 1184, 558], [1184], [1189], [1802], [0], [265, 275], [0], [655], [0], [1046], [1109], [1699], [1516], [711], [862], [0], [688], [1128], [860], [0], [794], [951], [1154], [950], [1009], [1010], [1081], [1212], [1635], [1630], [795], [710], [892], [772, 1065, 1066, 1115, 1225, 1613, 1717], [1260], [1114], [714], [1723], [1723], [1723], [1723], [1733], [1786], [1786], [1786], [1804], [1864], [1882, 1883, 1885], [1884], [1629], [1547], [1562], [1560], [1560]]  
+    MinLevels = []
+    MinLevel = 255
     filename = "./_internal/JsonOutputs/common/CHR_EnArrange.json"
     with open(filename, 'r+', encoding='utf-8') as file:
         data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == SargeID[0]:
-                row["PreciousID"] = 25224
-                break
+        for i in range(0, len(EnemyIDThatSummonedThem)):
+            MinLevel = 255
+            for j in range(0, len(EnemyIDThatSummonedThem[i])):
+                if EnemyIDThatSummonedThem[i][0] == 0:
+                    MinLevel = 1
+                    break
+                for row in data["rows"]:
+                    if row["$id"] == EnemyIDThatSummonedThem[i][j]:
+                        if row["Lv"] < MinLevel:
+                            MinLevel = row["Lv"]
+                            break
+            MinLevels.append(MinLevel)
+        for i in range(0, len(OriginalSummonedFirstIDs)):
+            for row in data["rows"]:
+                if (row["$id"] == OriginalSummonedFirstIDs[i]) and (MinLevels[i] != 255):
+                    row["Lv"] = MinLevels(i)
+                if (row["$id"] == OriginalSummonedSecondIDs[i]) and (MinLevels[i] != 255):
+                    row["Lv"] = MinLevels(i)
+                if (row["$id"] == OriginalSummonedThirdIDs[i]) and (MinLevels[i] != 255):
+                    row["Lv"] = MinLevels(i)
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+
+def KeyItemsReAdd(): 
+    ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["PreciousID"], 0)
+    #The following are all the replacement enemy IDs that replaced the original ID in the FLD_EnemyPop file. The variable name is the name of the original enemy that was replaced
+    SargeantID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EnemyPop.json", ["$id"], [5502] , "ene1ID")
+    DughallID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EnemyPop.json", ["$id"], [5504] , "ene2ID")
+    HermitTirkinID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EnemyPop.json", ["$id"], [5554] , "ene1ID")
+    SlyKrabbleID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["$id"], [148] , "ene1ID")
+    EngineerTirkinID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma08a_FLD_EnemyPop.json", ["$id"], [8387] , "ene1ID")
+    SecurityTirkinID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma08a_FLD_EnemyPop.json", ["$id"], [8374] , "ene1ID")
+    GigaRosaID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma11a_FLD_EnemyPop.json", ["$id"], [11002] , "ene1ID")
+    GeglQuadwingID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma15a_FLD_EnemyPop.json", ["$id"], [15358] , "ene1ID")
+    ArtificeOphionID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma17a_FLD_EnemyPop.json", ["$id"], [17059] , "ene1ID")
+    RelicHolderTyrannorID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma18a_FLD_EnemyPop.json", ["$id"], [18098] , "ene1ID")
+    StopperSovereign1ID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma18a_FLD_EnemyPop.json", ["$id"], [18101] , "ene1ID")
+    StopperSovereign2ID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma18a_FLD_EnemyPop.json", ["$id"], [18102] , "ene1ID")
+    OriginalEnemyIDsList = [SargeantID, DughallID, HermitTirkinID, SlyKrabbleID, EngineerTirkinID, SecurityTirkinID, GigaRosaID, GeglQuadwingID, ArtificeOphionID, RelicHolderTyrannorID, StopperSovereign1ID, StopperSovereign2ID]
+    PreciousIDsList = [25224, 25305, 25442, 25149, 25227, 25228, 25305, 25017, 25404, 25084, 25451, 25452]
+    filename = "./_internal/JsonOutputs/common/CHR_EnArrange.json"
+    with open(filename, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for i in range(0, len(OriginalEnemyIDsList)):
+            for row in data["rows"]:
+                if row["$id"] == OriginalEnemyIDsList[i]:
+                    row["PreciousID"] = PreciousIDsList[i]
+                    break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
@@ -420,6 +470,8 @@ def EnemyLogic(CheckboxList, CheckboxStates):
                 EnemyRandoOn = True
                 break
     if EnemyRandoOn == True:
+        TotalDefaultEnemyIDs = []
+        TotalRandomizedEnemyIDs = []
         for n in range(0, len(CheckboxList)):
             if CheckboxList[n] == "Mix Enemies Between Types Box" and CheckboxStates[n].get() == True:
                 if CheckboxStates[StoryBossesBox].get() == True:
@@ -440,6 +492,8 @@ def EnemyLogic(CheckboxList, CheckboxStates):
                 DefaultEnemyIDs = EnemiestoPass.copy()
                 RandomizedEnemyIDs = DefaultEnemyIDs.copy()
                 random.shuffle(RandomizedEnemyIDs)
+                TotalDefaultEnemyIDs = DefaultEnemyIDs
+                TotalRandomizedEnemyIDs = RandomizedEnemyIDs
                 ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
                 if EnemiestoPass:
                     if CheckboxStates[KeepAllEnemyLevelsBox].get() == True:
@@ -473,7 +527,9 @@ def EnemyLogic(CheckboxList, CheckboxStates):
                     if EnemiestoPass: #if the list of enemies to pass is not empty
                         DefaultEnemyIDs = EnemiestoPass.copy()
                         RandomizedEnemyIDs = DefaultEnemyIDs.copy()
+                        TotalDefaultEnemyIDs.append(DefaultEnemyIDs)
                         random.shuffle(RandomizedEnemyIDs)
+                        TotalRandomizedEnemyIDs.append(RandomizedEnemyIDs)
                         ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
                         if CheckboxStates[KeepAllEnemyLevelsBox].get() == True:
                             LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, LevelstoPass)
@@ -485,10 +541,11 @@ def EnemyLogic(CheckboxList, CheckboxStates):
                                 LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
         SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "AlwaysAttack", 0)
         ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["SearchRange", "SearchRadius", "SearchAngle", "Detects"], 0)
-        BossQuestAggroAdjustments(DefaultEnemyIDs, RandomizedEnemyIDs)
+        BossQuestAggroAdjustments(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
         ReducePCHPBattle1()
 
         ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["LvRand"], 0)
         ColumnAdjust("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], 0)
         KeyItemsReAdd()
+        SummonsLevelAdjustment()
 

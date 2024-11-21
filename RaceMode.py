@@ -12,8 +12,8 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
         
-        AreaList1 = [41] #68
-        AreaList2 = [90] #152
+        AreaList1 = [41, 68]
+        AreaList2 = [90, 152]
         AreaList3 = [125, 133, 168]
         AreaList4 = [175, 187]
 
@@ -162,46 +162,6 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
                         row["nextIDtheater"] = ContinentWarpCutscenes[ChosenIndices[i+1]]
                         row["scenarioFlag"] = ScenarioFlagLists[ChosenIndices[i+1]]
                         break
-                #if ChosenIndices[1] == 2:
-                    # Mor Ardain
-                    #row["nextID"] = 10156
-                    #row["scenarioFlag"] = 4025
-                    #row["nextIDtheater"] = 10156
-                #if ChosenIndices[1] == 3:
-                    # Leftherian Archipelago
-                    #row["nextID"] = 10197
-                    #row["scenarioFlag"] = 5005
-                    #row["nextIDtheater"] = 10197
-                #if ChosenIndices[2] == 4:
-                    # Temperantia + Indol
-                    #row["nextID"] = 10213
-                    #row["scenarioFlag"] = 5021
-                    #row["nextIDtheater"] = 10213
-                #if ChosenIndices[2] == 5:
-                    # Tantal
-                    #row["nextID"] = 10270
-                    #row["scenarioFlag"] = 6028
-                    #row["nextIDtheater"] = 10270
-                #if ChosenIndices[2] == 6:
-                    # Spirit Crucible Elpys
-                    #row["nextID"] = 10325
-                    #row["scenarioFlag"] = 7018
-                    #row["nextIDtheater"] = 10325
-                #if ChosenIndices[3] == 7:
-                    # Cliffs of Morytha + Land of Morytha
-                    #row["nextID"] = 10350
-                    #row["scenarioFlag"] = 7043
-                    #row["nextIDtheater"] = 10350
-                #if ChosenIndices[3] == 8:
-                    # World Tree This does not spawn in the marker, but it recognizes the correct area at least. Could maybe make the warp point the elevator base in the land of morytha
-                    #row["nextID"] = 10399
-                    #row["scenarioFlag"] = 8031
-                    #row["nextIDtheater"] = 10399
-                #if ChosenIndices[4] == 9:
-                    # Final Stretch
-                    #row["nextID"] = 10482 #10476
-                    #row["scenarioFlag"] = 10026 #10019
-                    #row["nextIDtheater"] = 10482 #10476
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)
