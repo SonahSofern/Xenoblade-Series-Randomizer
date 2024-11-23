@@ -20,6 +20,8 @@ OptionsRunList = []
 OptionInputs = []
 rowIncrement = 0
 CheckBoxFunctions = []
+White = "#ffffff"
+Gray = "#D5D5D5"
 
 # The Notebook
 MainWindow = ttk.Notebook(root, height=2)
@@ -94,9 +96,9 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
     optionPanel.grid(row = rowIncrement, column= 0, sticky="sw")
 
     if (rowIncrement %2 == 0):
-        OptionColor = "#ffffff"
+        OptionColor = White
     else:
-        OptionColor = "#D5D5D5"
+        OptionColor = Gray
     
     optionPanel.config(background=OptionColor)
     option = Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w")
@@ -140,7 +142,7 @@ GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Tr
 GenOption("Collection Points", TabGeneral, "Randomizes the contents of Collection Points", Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID"], list(set(CollectionPointMaterials) - set([30019])), [], ["Accessories", Accessories,"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials])
 
 GenOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", ["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, ArtDebuffs + ArtBuffs, ["Doom", [21]],  InvalidTargetIDs=AutoAttacks)
-GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", ["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20))
+# GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", ["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20)) Nothing wrong with this just kinda niche/silly
 GenOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", ["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees)
 GenOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a random effect such as break, knockback etc.", ["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactions, InvalidTargetIDs=AutoAttacks) # we want id numbers no edit the 1/6 react stuff
 GenOption("Driver Animation Speed", TabDrivers, "Randomizes animation speeds", ["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.inclRange(0,255), Helper.inclRange(50,255), InvalidTargetIDs=AutoAttacks)
@@ -241,13 +243,13 @@ def GenRandomSeed():
 
 bdatcommonFrame = Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
-bdatButton = Button(bdatcommonFrame, text="Choose Input Folder (bdat)", command= lambda: Helper.DirectoryChoice("Choose your bdat folder", bdatFilePathEntry))
+bdatButton = Button(bdatcommonFrame, width=20, text="Choose Input Folder", command= lambda: Helper.DirectoryChoice("Choose your folder containing common.bdat, common_ms.bdat and common_gmk.bdat", bdatFilePathEntry))
 bdatButton.pack(side="left", padx=2, pady=2)
 bdatFilePathEntry = Entry(bdatcommonFrame, width=500)
 bdatFilePathEntry.pack(side="left", padx=2)
 OutputDirectoryFrame = Frame(root, background='#632424')
 OutputDirectoryFrame.pack(anchor="w", padx=10)
-outputDirButton = Button(OutputDirectoryFrame, text='Choose Output Folder', command= lambda: Helper.DirectoryChoice("Choose an output folder", outDirEntry))
+outputDirButton = Button(OutputDirectoryFrame, width = 20, text='Choose Output Folder', command= lambda: Helper.DirectoryChoice("Choose an output folder", outDirEntry))
 outputDirButton.pack(side="left", padx=2, pady=2)
 outDirEntry = Entry(OutputDirectoryFrame, width=500)
 outDirEntry.pack(side="left", padx=2)
