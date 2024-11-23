@@ -376,11 +376,11 @@ def SummonsLevelAdjustment(): # We want the summoned enemies to be the same leve
         for i in range(0, len(OriginalSummonedFirstIDs)):
             for row in data["rows"]:
                 if (row["$id"] == OriginalSummonedFirstIDs[i]) and (MinLevels[i] != 255):
-                    row["Lv"] = MinLevels(i)
+                    row["Lv"] = MinLevels[i]
                 if (row["$id"] == OriginalSummonedSecondIDs[i]) and (MinLevels[i] != 255):
-                    row["Lv"] = MinLevels(i)
+                    row["Lv"] = MinLevels[i]
                 if (row["$id"] == OriginalSummonedThirdIDs[i]) and (MinLevels[i] != 255):
-                    row["Lv"] = MinLevels(i)
+                    row["Lv"] = MinLevels[i]
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)

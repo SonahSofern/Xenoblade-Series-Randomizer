@@ -19,18 +19,9 @@ ValidCrystalListIDs = Helper.inclRange(45002,45010) + [45016] + Helper.inclRange
 
 FieldSkillAchievementIDs = [12, 13, 14, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84, 92, 93, 94, 102, 103, 104, 112, 113, 114, 122, 123, 124, 132, 133, 134, 142, 143, 144, 152, 153, 154, 162, 163, 164, 172, 173, 174, 182, 183, 184, 192, 193, 194, 202, 203, 204, 212, 213, 214, 222, 223, 224, 232, 233, 234, 242, 243, 244, 252, 253, 254, 262, 263, 264, 272, 273, 274, 282, 283, 284, 292, 293, 294, 302, 303, 304, 312, 313, 314, 322, 323, 324, 332, 333, 334, 342, 343, 344, 352, 353, 354, 362, 363, 364, 372, 373, 374, 382, 383, 384, 392, 393, 394, 402, 403, 404, 412, 413, 414, 422, 423, 424, 432, 433, 434, 442, 443, 444, 452, 453, 454, 462, 463, 464, 1645, 1646, 1647, 1655, 1656, 1657, 1665, 1666, 1667, 1675, 1676, 1677, 1746, 1747, 1748, 1756, 1757, 1758, 1766, 1767, 1768]
 
-def AllRareBlades():
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Condition"] , 0)
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Prob1"] , 1)
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Assure1"] , 0)
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Prob2"] , 1)
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Assure2"] , 0)
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Prob3"] , 1)
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Assure3"] , 0)
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Prob4"] , 1)
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Assure4"] , 0)
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Prob5"] , 1)
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Assure5"] , 0)
+def AllRareBlades(): # makes it so all blades are equally likely to be pulled
+    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Condition", "Assure1", "Assure2", "Assure3", "Assure4", "Assure5"] , 0)
+    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Prob1", "Prob2", "Prob3", "Prob4", "Prob5"] , 1)
 
 def FieldSkillLevelAdjustment(CheckboxList, CheckboxStates):
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_FieldSkillList.json", ["MaxLevel"] , 1)
@@ -58,18 +49,8 @@ def FieldSkillLevelAdjustment(CheckboxList, CheckboxStates):
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)
-        #BladeAdjustmentFile = "./_internal/JsonOutputs/common/CHR_Bl.json"
-        """ with open(BladeAdjustmentFile, 'r+', encoding='utf-8') as file:
-            data = json.load(file)
-            for row in data["rows"]:
-                row["FskillAchivement1"] = 1404
-                row["FskillAchivement2"] = 1404
-                row["FskillAchivement3"] = 1404
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2) """
 
-def FieldSkillChecksAdjustment(CheckboxList, CheckboxStates):
+def FieldSkillChecksAdjustment(CheckboxList, CheckboxStates): # unused now
     for j in range(0, len(CheckboxList)):
         if CheckboxList[j] == "Field Skill QOL Box":
             FieldSkillBox = j
@@ -95,10 +76,7 @@ def AdjustingCrystalList(CheckboxList, CheckboxStates):
         if CheckboxList[j] == "Core Crystal Changes Box":
             CoreCrystalChangesBox = j
     if CheckboxStates[CoreCrystalChangesBox].get() == True:
-        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["BladeID"], 0)
-        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["CommonID"], 0)
-        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["CommonWPN"], 0)
-        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["CommonAtr"], 0)
+        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["BladeID", "CommonID", "CommonWPN", "CommonAtr"], 0)
         ITMCrystalFile = "./_internal/JsonOutputs/common/ITM_CrystalList.json"
         with open(ITMCrystalFile, 'r+', encoding='utf-8') as file:
             data = json.load(file)
@@ -117,45 +95,13 @@ def AdjustingCrystalList(CheckboxList, CheckboxStates):
                     if row["$id"] == i:
                         row["RareTableProb"] = 0
                         row["RareBladeRev"] = 0
-                        row["CommonPow"] = 0
                         row["AssureP"] = 0
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)        
 
-def ChangeChestContents(CheckboxList, CheckboxStates):
-    for j in range(0, len(CheckboxList)):
-        if CheckboxList[j] == "Core Crystal Changes Box":
-            CoreCrystalChangesBox = j
-    if CheckboxStates[CoreCrystalChangesBox].get() == True:
-        ChestFile = "./_internal/JsonOutputs/common_gmk/ma21a_FLD_TboxPop.json"
-        with open(ChestFile, 'r+', encoding='utf-8') as file:
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] == 2116:
-                    row["itm1ID"] = 45020
-                    row["itm2ID"] = 45021
-                    row["itm3ID"] = 45022
-                    row["itm4ID"] = 45023
-                    row["itm5ID"] = 45024
-                    row["itm6ID"] = 45025
-                    row["itm7ID"] = 45026
-                    row["itm8ID"] = 45027                    
-                    row["itm2Num"] = 1
-                    row["itm3Num"] = 1
-                    row["itm4Num"] = 1
-                    row["itm5Num"] = 1
-                    row["itm6Num"] = 1
-                    row["itm7Num"] = 1
-                    row["itm8Num"] = 1                    
-                    break
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2)
-
 def CoreCrystalChanges(CheckboxList, CheckboxStates):
     AllRareBlades()
     #FieldSkillChecksAdjustment(CheckboxList, CheckboxStates)
     FieldSkillLevelAdjustment(CheckboxList, CheckboxStates)
-    #AdjustingCrystalList(CheckboxList, CheckboxStates)
-    # ChangeChestContents(CheckboxList, CheckboxStates)
+    AdjustingCrystalList(CheckboxList, CheckboxStates)

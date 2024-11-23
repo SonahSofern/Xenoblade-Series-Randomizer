@@ -67,14 +67,5 @@ def Beta(CheckboxList, CheckboxStates):
             file.truncate()
             json.dump(data, file, indent=2) """
 
-        with open("./_internal/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: #adjusting level based exp gains to make it less grindy
-            data = json.load(file)
-            for row in data["rows"]:
-                row["ExpRevHigh"] = 210 + 20 * row["$id"]
-                row["ExpRevLow"] = 100
-                if row["$id"] >= 10:
-                    row["DamageRevHigh"] = 200
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2)
+
 
