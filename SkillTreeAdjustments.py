@@ -1,6 +1,4 @@
-import Helper
-import random
-import json
+import Helper, random, json
 
 DriverSkillTreeIDs = Helper.inclRange(1,270)
 
