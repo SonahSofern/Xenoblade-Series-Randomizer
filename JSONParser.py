@@ -3,8 +3,7 @@ import random
 import os
 
 def ChangeJSON(cmdDescription, Filename, keyWords, rangeofValuesToReplace, sliderOdds, rangeValidReplacements, InvalidTargetIDs): # make this a function to reuse, check the settings ot see if we even do this
-    if (sliderOdds == 0):
-        #print(cmdDescription + " Slider at zero") 
+    if (sliderOdds == 0 or ((random.randint(0,100) >= sliderOdds))):
         return
     if (cmdDescription != ""):
         print("Randomizing " + cmdDescription)   
@@ -19,7 +18,7 @@ def ChangeJSON(cmdDescription, Filename, keyWords, rangeofValuesToReplace, slide
                 if not item["$id"] in InvalidTargetIDs:
                     for key, value in item.items():
                         if any((key == keyWord) for keyWord in keyWords):
-                            if ((random.randint(0,100) <= sliderOdds) and ((item[key] in rangeofValuesToReplace))):
+                            if (item[key] in rangeofValuesToReplace):
                                 item[key] = random.choice(rangeValidReplacements)
             file.seek(0)
             file.truncate()
