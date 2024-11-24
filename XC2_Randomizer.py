@@ -16,7 +16,7 @@ CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
 CheckboxStates = []
 CheckboxList = []
-OptionsRunList = []
+OptionsRunDict = {}
 OptionInputs = []
 rowIncrement = 0
 CheckBoxFunctions = []
@@ -88,9 +88,9 @@ MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 
-def GenOption(optionName, parentTab, desc, optionType, commandList, subOptionName = [], subCommandList = []):   
+def GenOption(optionName, parentTab, description, optionType, commandList = [], subOptionName = [], subCommandList = []):   
     global rowIncrement
-    global OptionsRunList
+    global OptionsRunDict
     global OptionInputs
 
     # Create Option Color
@@ -110,13 +110,13 @@ def GenOption(optionName, parentTab, desc, optionType, commandList, subOptionNam
     if (optionType == Scale):
         optionTypeObj = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
         OptionInputs.append(optionTypeObj)
-        optionDesc = Label(optionPanel, text=desc, background=OptionColor, anchor='w')
+        optionDesc = Label(optionPanel, text=description, background=OptionColor, anchor='w')
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
         optionType = var
     elif (optionType == Checkbutton):
         var = BooleanVar()
-        optionTypeObj = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=desc)
+        optionTypeObj = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=description)
         CheckboxStates.append(var)
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionType = var
@@ -140,7 +140,14 @@ def GenOption(optionName, parentTab, desc, optionType, commandList, subOptionNam
     #     CheckboxList.append(subOptionList[2*i] + " Box")
     #     box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
     rowIncrement += 1
-    OptionsRunList.append([optionName, commandList, optionType])
+    OptionsRunDict[optionName]={
+        "name": optionName,
+        "optionType": optionType,
+        "commandList": commandList
+
+
+    }
+    # }  append([optionName, commandList, optionType])
 
 def Options():
     # General
@@ -211,15 +218,15 @@ def Options():
     GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPandoria], [], PandoriaCosmetics, optionType=[Checkbutton])
     
     # Logic
-    OptionsRunList.append(lambda: EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates))
-    OptionsRunList.append(lambda: SkillTreeAdjustments.BalancingSkillTreeRando(CheckboxList, CheckboxStates))
-    OptionsRunList.append(lambda: CoreCrystalAdjustments.CoreCrystalChanges(CheckboxList, CheckboxStates))
-    OptionsRunList.append(lambda: TestingStuff.Beta(CheckboxList, CheckboxStates))
-    OptionsRunList.append(lambda: TutorialShortening.ShortenedTutorial(CheckboxList, CheckboxStates))
+    OptionsRunDict.append(lambda: EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates))
+    OptionsRunDict.append(lambda: SkillTreeAdjustments.BalancingSkillTreeRando(CheckboxList, CheckboxStates))
+    OptionsRunDict.append(lambda: CoreCrystalAdjustments.CoreCrystalChanges(CheckboxList, CheckboxStates))
+    OptionsRunDict.append(lambda: TestingStuff.Beta(CheckboxList, CheckboxStates))
+    OptionsRunDict.append(lambda: TutorialShortening.ShortenedTutorial(CheckboxList, CheckboxStates))
 
 def Randomize():
     def ThreadedRandomize():
-        global OptionsRunList
+        global OptionsRunDict
         RandomizeButton.config(state=DISABLED)
 
         random.seed(randoSeedEntry.get())
@@ -229,10 +236,10 @@ def Randomize():
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty")
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
 
-        for optionList in OptionsRunList:
-            if (optionList[2].get() == True):
-                for command in optionList[1]:
-                    print("Randomizing " + optionList[0])
+        for name, option in OptionsRunDict.items():
+            if option["optionType"] and option["optionType"].get():
+                for command in option["commandList"]:
+                    print(f"Randomizing {name}")
                     command()
 
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
