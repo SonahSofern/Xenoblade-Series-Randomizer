@@ -29,7 +29,7 @@ def FindValues(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue)
                 if key in keyWordList and value in keywordBadValueList:
                     bad_values_found.append(row[returnedKeyWordValue]) 
     
-    print(bad_values_found)
+    # print("FindValues: " + bad_values_found)
     return(bad_values_found)
 
 def AdjustedFindBadValuesList(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue):
@@ -65,10 +65,10 @@ def DirectoryChoice(FileDescription, EntryField):
     EntryField.insert(0, Directory)
 
 def OptionCarveouts(ValidValuesList, ToggleableIndexValues, stateOfButton = None):
-    print("Updated Valid Values: " + str(stateOfButton))
+    # print("Updated Valid Values: " + str(stateOfButton))
     if stateOfButton.get() == True:
         ValidValuesList += ToggleableIndexValues
     else:
         ValidValuesList[:] = [x for x in ValidValuesList if x not in ToggleableIndexValues]
-    print(ValidValuesList, end='\n\n')
+    # print(ValidValuesList, end='\n\n')
     

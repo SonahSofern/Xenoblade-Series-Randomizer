@@ -130,7 +130,7 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
 
     # I hate this but the parent wont fill "sticky="ew" doesnt work. Its probably due to so many nested parents but I dont wanna go fix all of them
     spaceFill = Label(optionPanel, text="", background=OptionColor, width=MaxWidth, anchor='w')
-    spaceFill.grid(row=rowIncrement, column=10, sticky="sw")
+    spaceFill.grid(row=rowIncrement, column=100, sticky="sw")
 
 
 
