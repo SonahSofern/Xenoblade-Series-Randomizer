@@ -88,7 +88,7 @@ MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 
-def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValuesToReplace=[], rangeOfValidReplacements=[],  OptionNameANDIndexValue = [], InvalidTargetIDs =[], OptionType = Scale):
+def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValuesToReplace=[], rangeOfValidReplacements=[],  OptionNameANDIndexValue = [], InvalidTargetIDs =[], OptionType = [Scale]):
     global rowIncrement
     global OptionsRunList
     global OptionInputs
@@ -107,20 +107,30 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
     option.grid(row=rowIncrement, column=0, sticky="sw")
 
     # Option Interactable
-    if (OptionType == Scale):
-        optionType = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
-        OptionInputs.append(optionType)
-        optionDesc = Label(optionPanel, text=desc, background=OptionColor, anchor='w')
-        optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
-    elif (OptionType == Checkbutton):
-        var = BooleanVar()
-        optionType = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=desc)
-        CheckboxStates.append(var)
-    optionType.grid(row=rowIncrement, column=1, sticky="e")
+    for item in OptionType:
+        if (item == Scale):
+            optionType = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
+            OptionInputs.append(optionType)
+            optionDesc = Label(optionPanel, text=desc, background=OptionColor, anchor='w')
+            optionType.grid(row=rowIncrement, column=1, sticky="e")
+            optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
+        elif (item == Checkbutton):
+            var = BooleanVar()
+            optionType = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=desc)
+            CheckboxStates.append(var)
+            optionType.grid(row=rowIncrement, column=1, sticky="e")
+        elif (item == Entry):
+            optionTypeMin = Entry(optionPanel, background=OptionColor, highlightthickness=0, width=5)
+            optionTypeMax = Entry(optionPanel, background=OptionColor, highlightthickness=0, width=5)
+            optionDesc = Label(optionPanel, text="| Range", background=OptionColor, anchor='w')
+            optionDesc.grid(row=rowIncrement, column=4)
+            optionTypeMin.grid(row=rowIncrement, column=5)
+            optionTypeMax.grid(row=rowIncrement, column=6, padx=5)
+
 
     # I hate this but the parent wont fill "sticky="ew" doesnt work. Its probably due to so many nested parents but I dont wanna go fix all of them
     spaceFill = Label(optionPanel, text="", background=OptionColor, width=MaxWidth, anchor='w')
-    spaceFill.grid(row=rowIncrement, column=3, sticky="sw")
+    spaceFill.grid(row=rowIncrement, column=10, sticky="sw")
 
 
 
@@ -179,8 +189,8 @@ def Options():
     # Enemies
     GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", ["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips)
     GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", ["common/CHR_EnArrange.json"], ["Scale"], Helper.inclRange(0, 1000), Helper.inclRange(1, 200) + Helper.inclRange(990,1000))
-    GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies, ["Story Bosses", [1998], "Quest Enemies", [1999], "Unique Monsters", [2000], "Superbosses", [2001], "Normal Enemies", [2002], "Mix Enemies Between Types", [2003], "Keep All Enemy Levels", [2004], "Keep Quest Enemy Levels", [2005], "Keep Story Boss Levels", [2006], "Core Crystal Changes", [2007], "Arts Cancel on Tier 1", [2008], "Balanced Random Skill Trees", [2009], "Shorter Tutorial", [2010], "Beta Stuff", [2011]], OptionType=Checkbutton)
-    GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", ["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.inclRange(0,100), Helper.inclRange(0,100) + Helper.inclRange(250,255))
+    GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies, ["Story Bosses", [1998], "Quest Enemies", [1999], "Unique Monsters", [2000], "Superbosses", [2001], "Normal Enemies", [2002], "Mix Enemies Between Types", [2003], "Keep All Enemy Levels", [2004], "Keep Quest Enemy Levels", [2005], "Keep Story Boss Levels", [2006], "Core Crystal Changes", [2007], "Arts Cancel on Tier 1", [2008], "Balanced Random Skill Trees", [2009], "Shorter Tutorial", [2010], "Beta Stuff", [2011]], OptionType=[Checkbutton])
+    GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", ["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.inclRange(0,100), Helper.inclRange(0,100) + Helper.inclRange(250,255), OptionType=[Checkbutton,Entry])
     #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30))
     
     # Misc
@@ -195,22 +205,22 @@ def Options():
     # EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_ResMotion.json", ["file"], "sample") 
     
     # QOL
-    GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in the game", OptionType=Checkbutton) #common_ms/menu_ms
-    GenOption("Running Speed", TabQOL, "Max out your starting Run Speed", OptionType=Checkbutton)
+    GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in the game", OptionType=[Checkbutton]) #common_ms/menu_ms
+    GenOption("Running Speed", TabQOL, "Max out your starting Run Speed", OptionType=[Checkbutton])
     #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
     
     # Cosmetics
-    GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultRex], [], RexCosmetics, OptionType=Checkbutton)
-    GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPyra], [], PyraCosmetics, OptionType=Checkbutton)
-    GenOption("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultMythra], [], MythraCosmetics, OptionType=Checkbutton)
-    GenOption("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultDriverNia], [], NiaDriverCosmetics, OptionType=Checkbutton)
-    GenOption("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBladeNia], [], NiaBladeCosmetics, OptionType=Checkbutton)
-    GenOption("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultDromarch], [], DromarchCosmetics, OptionType=Checkbutton)
-    GenOption("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultTora], [], ToraCosmetics, OptionType=Checkbutton)
-    GenOption("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultMorag], [], MoragCosmetics, OptionType=Checkbutton)
-    GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBrighid], [], BrighidCosmetics, OptionType=Checkbutton)
-    GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultZeke], [], ZekeCosmetics, OptionType=Checkbutton)
-    GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPandoria], [], PandoriaCosmetics, OptionType=Checkbutton)
+    GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultRex], [], RexCosmetics, OptionType=[Checkbutton])
+    GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPyra], [], PyraCosmetics, OptionType=[Checkbutton])
+    GenOption("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultMythra], [], MythraCosmetics, OptionType=[Checkbutton])
+    GenOption("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultDriverNia], [], NiaDriverCosmetics, OptionType=[Checkbutton])
+    GenOption("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBladeNia], [], NiaBladeCosmetics, OptionType=[Checkbutton])
+    GenOption("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultDromarch], [], DromarchCosmetics, OptionType=[Checkbutton])
+    GenOption("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultTora], [], ToraCosmetics, OptionType=[Checkbutton])
+    GenOption("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultMorag], [], MoragCosmetics, OptionType=[Checkbutton])
+    GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBrighid], [], BrighidCosmetics, OptionType=[Checkbutton])
+    GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultZeke], [], ZekeCosmetics, OptionType=[Checkbutton])
+    GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPandoria], [], PandoriaCosmetics, OptionType=[Checkbutton])
     
     # Logic
     OptionsRunList.append(lambda: EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates))
