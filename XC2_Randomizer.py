@@ -22,6 +22,7 @@ rowIncrement = 0
 CheckBoxFunctions = []
 White = "#ffffff"
 Gray = "#D5D5D5"
+MaxWidth = 1000
 
 # The Notebook
 MainWindow = ttk.Notebook(root, height=2)
@@ -86,7 +87,6 @@ MainWindow.add(TabQOLOuter, text = 'Quality of Life')
 MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
-
 def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValuesToReplace=[], rangeOfValidReplacements=[],  OptionNameANDIndexValue = [], InvalidTargetIDs =[], OptionType = Scale):
     global rowIncrement
     global OptionsRunList
@@ -97,12 +97,14 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
         OptionColor = White
     else:
         OptionColor = Gray
-    
+
+    parentTab.grid_columnconfigure(0, weight=1)
     optionPanel = Frame(parentTab, padx=10, pady=10, background=OptionColor)
-    optionPanel.grid(row = rowIncrement, column= 0, sticky="sw")
+    optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
+
+
 
     # Option Name
-    optionPanel.config(background=OptionColor)
     option = Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w", wraplength=150)
     option.grid(row=rowIncrement, column=0, sticky="sw")
 
@@ -110,14 +112,17 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
     if (OptionType == Scale):
         optionType = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
         OptionInputs.append(optionType)
-        optionDesc = Label(optionPanel, text=desc, background=OptionColor, width=900, anchor='w')
+        optionDesc = Label(optionPanel, text=desc, background=OptionColor, anchor='w')
         optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
     elif (OptionType == Checkbutton):
         var = BooleanVar()
         optionType = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=desc)
         CheckboxStates.append(var)
-    optionType.grid(row=rowIncrement, column=1, sticky='n')
+    optionType.grid(row=rowIncrement, column=1, sticky="e")
 
+    # I hate this but the parent wont fill "sticky="ew"" doesnt work.
+    spaceFill = Label(optionPanel, text="", background=OptionColor, width=MaxWidth, anchor='w')
+    spaceFill.grid(row=rowIncrement, column=3, sticky="sw")
 
 
 
@@ -253,13 +258,13 @@ bdatcommonFrame = Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
 bdatButton = Button(bdatcommonFrame, width=20, text="Choose Input Folder", command= lambda: Helper.DirectoryChoice("Choose your folder containing common.bdat, common_ms.bdat and common_gmk.bdat", bdatFilePathEntry))
 bdatButton.pack(side="left", padx=2, pady=2)
-bdatFilePathEntry = Entry(bdatcommonFrame, width=500)
+bdatFilePathEntry = Entry(bdatcommonFrame, width=MaxWidth)
 bdatFilePathEntry.pack(side="left", padx=2)
 OutputDirectoryFrame = Frame(root, background='#632424')
 OutputDirectoryFrame.pack(anchor="w", padx=10)
 outputDirButton = Button(OutputDirectoryFrame, width = 20, text='Choose Output Folder', command= lambda: Helper.DirectoryChoice("Choose an output folder", outDirEntry))
 outputDirButton.pack(side="left", padx=2, pady=2)
-outDirEntry = Entry(OutputDirectoryFrame, width=500)
+outDirEntry = Entry(OutputDirectoryFrame, width=MaxWidth)
 outDirEntry.pack(side="left", padx=2)
 SeedFrame = Frame(root, background='#632424')
 SeedFrame.pack(anchor="w", padx=10)
