@@ -18,7 +18,7 @@ def ChangeJSON(cmdDescription, Filename, keyWords, rangeofValuesToReplace, slide
             for item in data['rows']:
                 if not item["$id"] in InvalidTargetIDs:
                     for key, value in item.items():
-                        if any((key == k) for k in keyWords):
+                        if any((key == keyWord) for keyWord in keyWords):
                             if ((random.randint(0,100) <= sliderOdds) and ((item[key] in rangeofValuesToReplace))):
                                 item[key] = random.choice(rangeValidReplacements)
             file.seek(0)

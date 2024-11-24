@@ -87,28 +87,36 @@ MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 
-def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValuesToReplace=[], rangeOfValidReplacements=[],  OptionNameANDIndexValue = [], InvalidTargetIDs =[]):
+def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValuesToReplace=[], rangeOfValidReplacements=[],  OptionNameANDIndexValue = [], InvalidTargetIDs =[], OptionType = Scale):
     global rowIncrement
     global OptionsRunList
     global OptionInputs
 
-    optionPanel = Frame(parentTab, padx=10, pady=10)
-    optionPanel.grid(row = rowIncrement, column= 0, sticky="sw")
-
+    # Option Color
     if (rowIncrement %2 == 0):
         OptionColor = White
     else:
         OptionColor = Gray
     
+    optionPanel = Frame(parentTab, padx=10, pady=10, background=OptionColor)
+    optionPanel.grid(row = rowIncrement, column= 0, sticky="sw")
+
+    # Option Name
     optionPanel.config(background=OptionColor)
-    option = Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w")
+    option = Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w", wraplength=150)
     option.grid(row=rowIncrement, column=0, sticky="sw")
 
-    # Make here a option based on what user wants for their option (they can have multiple EX. A frequency slider AND a checkbox for yes no)
-    optionSlider = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
-    OptionInputs.append(optionSlider)
-    optionSlider.grid(row=rowIncrement, column=1, sticky='n')
+    # Option Interactable
+    if (OptionType == Scale):
+        optionType = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
+        OptionInputs.append(optionType)
+    elif (OptionType == Checkbutton):
+        var = BooleanVar()
+        optionType = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var)
+        CheckboxStates.append(var)
+    optionType.grid(row=rowIncrement, column=1, sticky='n')
 
+    # Option Description
     optionDesc = Label(optionPanel, text=desc, background=OptionColor, width=900, anchor='w')
     optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
 
@@ -131,7 +139,7 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
     rowIncrement += 1
 
     if optionName != "Enemies": # make this pass an anonymous function so the genoption calls have the decision of what funciton to run
-        OptionsRunList.append(lambda: JSONParser.ChangeJSON(optionName, Filename, keyWords, rangeOfValuesToReplace, optionSlider.get(), rangeOfValidReplacements, InvalidTargetIDs))
+        OptionsRunList.append(lambda: JSONParser.ChangeJSON(optionName, Filename, keyWords, rangeOfValuesToReplace, optionType.get(), rangeOfValidReplacements, InvalidTargetIDs))
 
 
 GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", ["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)
@@ -180,8 +188,8 @@ GenOption("Menu Colors", TabMisc, "Randomizes Colors in the UI", ["common/MNU_Co
 # GenOption("Text Effects", TabMisc, "Randomizes text movement", ["common/MNU_ResMotion.json"], ["$id"], Helper.inclRange(1,39), Helper.inclRange(1,39))
 # EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_ResMotion.json", ["file"], "sample") 
 
-GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in the game") #common_ms/menu_ms
-GenOption("Running Speed", TabQOL, "Set your starting run speed bonus")
+GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in the game", OptionType=Checkbutton) #common_ms/menu_ms
+GenOption("Running Speed", TabQOL, "Set your starting run speed bonus", OptionType=Checkbutton)
 #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
 
 GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultRex], [], RexCosmetics)
