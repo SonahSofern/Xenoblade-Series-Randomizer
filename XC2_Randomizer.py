@@ -88,7 +88,7 @@ MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 
-def GenOption(optionName, parentTab, desc, optionType, commandList, subOptionName_AND_subCommandList = []):   
+def GenOption(optionName, parentTab, desc, optionType, commandList, subOptionName = [], subCommandList = []):   
     global rowIncrement
     global OptionsRunList
     global OptionInputs
@@ -120,14 +120,14 @@ def GenOption(optionName, parentTab, desc, optionType, commandList, subOptionNam
         CheckboxStates.append(var)
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionType = var
-    elif (optionType == Entry):
-        optionTypeMin = Entry(optionPanel, background=OptionColor, highlightthickness=0, width=5)
-        optionTypeMax = Entry(optionPanel, background=OptionColor, highlightthickness=0, width=5)
-        optionDesc = Label(optionPanel, text="| Range", background=OptionColor, anchor='w')
-        optionDesc.grid(row=rowIncrement, column=4)
-        optionTypeMin.grid(row=rowIncrement, column=5)
-        optionTypeMax.grid(row=rowIncrement, column=6, padx=5)
-        optionType = [optionTypeMin, optionTypeMax]
+    # elif (optionType == Entry):
+    #     optionTypeMin = Entry(optionPanel, background=OptionColor, highlightthickness=0, width=5)
+    #     optionTypeMax = Entry(optionPanel, background=OptionColor, highlightthickness=0, width=5)
+    #     optionDesc = Label(optionPanel, text="| Range", background=OptionColor, anchor='w')
+    #     optionDesc.grid(row=rowIncrement, column=4)
+    #     optionTypeMin.grid(row=rowIncrement, column=5)
+    #     optionTypeMax.grid(row=rowIncrement, column=6, padx=5)
+    #     optionType = [optionTypeMin, optionTypeMax]
 
     # I hate this but the parent wont fill "sticky="ew" doesnt work. Its probably due to so many nested parents but I dont wanna go fix all of them
     spaceFill = Label(optionPanel, text="", background=OptionColor, width=MaxWidth, anchor='w')
