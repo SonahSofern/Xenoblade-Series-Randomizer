@@ -27,7 +27,7 @@ MaxWidth = 1000
 # The Notebook
 MainWindow = ttk.Notebook(root, height=2)
 
-#Frames in the notebook
+# Frames in the notebook
 TabGeneralOuter = Frame(MainWindow) 
 TabDriversOuter = Frame(MainWindow) 
 TabBladesOuter = Frame(MainWindow) 
@@ -54,6 +54,15 @@ TabMisc = Frame(TabMiscCanvas)
 TabQOL = Frame(TabQOLCanvas)
 TabCosmetics = Frame(TabCosmeticsCanvas)
 
+# Tabs
+MainWindow.add(TabGeneralOuter, text ='General') 
+MainWindow.add(TabDriversOuter, text ='Drivers') 
+MainWindow.add(TabBladesOuter, text ='Blades') 
+MainWindow.add(TabEnemiesOuter, text ='Enemies') 
+MainWindow.add(TabMiscOuter, text ='Misc.') 
+MainWindow.add(TabQOLOuter, text = 'Quality of Life')
+MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
+MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
@@ -76,16 +85,6 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touc
         OuterFrames[i].pack(expand=True, fill="both")
 
 CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics])
-
-
-MainWindow.add(TabGeneralOuter, text ='General') 
-MainWindow.add(TabDriversOuter, text ='Drivers') 
-MainWindow.add(TabBladesOuter, text ='Blades') 
-MainWindow.add(TabEnemiesOuter, text ='Enemies') 
-MainWindow.add(TabMiscOuter, text ='Misc.') 
-MainWindow.add(TabQOLOuter, text = 'Quality of Life')
-MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
-MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValuesToReplace=[], rangeOfValidReplacements=[],  OptionNameANDIndexValue = [], InvalidTargetIDs =[], OptionType = Scale):
     global rowIncrement
@@ -178,7 +177,7 @@ def Options():
     # Enemies
     GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", ["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips)
     GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", ["common/CHR_EnArrange.json"], ["Scale"], Helper.inclRange(0, 1000), Helper.inclRange(1, 200) + Helper.inclRange(990,1000))
-    GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies, ["Story Bosses", [1998], "Quest Enemies", [1999], "Unique Monsters", [2000], "Superbosses", [2001], "Normal Enemies", [2002], "Mix Enemies Between Types", [2003], "Keep All Enemy Levels", [2004], "Keep Quest Enemy Levels", [2005], "Keep Story Boss Levels", [2006], "Core Crystal Changes", [2007], "Arts Cancel on Tier 1", [2008], "Balanced Random Skill Trees", [2009], "Shorter Tutorial", [2010], "Beta Stuff", [2011]])
+    GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies, ["Story Bosses", [1998], "Quest Enemies", [1999], "Unique Monsters", [2000], "Superbosses", [2001], "Normal Enemies", [2002], "Mix Enemies Between Types", [2003], "Keep All Enemy Levels", [2004], "Keep Quest Enemy Levels", [2005], "Keep Story Boss Levels", [2006], "Core Crystal Changes", [2007], "Arts Cancel on Tier 1", [2008], "Balanced Random Skill Trees", [2009], "Shorter Tutorial", [2010], "Beta Stuff", [2011]], OptionType=Checkbutton)
     GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", ["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.inclRange(0,100), Helper.inclRange(0,100) + Helper.inclRange(250,255))
     #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30))
     
@@ -217,7 +216,6 @@ def Options():
     OptionsRunList.append(lambda: CoreCrystalAdjustments.CoreCrystalChanges(CheckboxList, CheckboxStates))
     OptionsRunList.append(lambda: TestingStuff.Beta(CheckboxList, CheckboxStates))
     OptionsRunList.append(lambda: TutorialShortening.ShortenedTutorial(CheckboxList, CheckboxStates))
-Options()
 
 def Randomize():
     def ThreadedRandomize():
@@ -257,6 +255,7 @@ def GenRandomSeed():
     randoSeedEntry.delete(0, END)
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
+Options()
 
 bdatcommonFrame = Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
@@ -279,12 +278,12 @@ randoSeedEntry.pack(side='left', padx=2)
 RandomizeButton = Button(text='Randomize', command=Randomize)
 RandomizeButton.pack(pady=10) 
 
-EveryObjectSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + CheckboxStates + OptionInputs)
-SavedOptions.loadData(EveryObjectSave)
+EveryObjectToSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + CheckboxStates + OptionInputs)
+SavedOptions.loadData(EveryObjectToSave)
 
-#HACKY want to fix 
+#HACKY want to fix runs functions after saved options to get correct states
 for boxFunction in CheckBoxFunctions:
     boxFunction()
 
-root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectSave), root.destroy()))
+root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSave), root.destroy()))
 root.mainloop()
