@@ -1,4 +1,3 @@
-import json
 import tkinter as tk
 
 def saveData(DataList):

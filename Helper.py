@@ -1,5 +1,4 @@
 import json
-import os
 from tkinter import filedialog
 import tkinter as tk
 
