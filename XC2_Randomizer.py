@@ -88,12 +88,14 @@ MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 
-def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValuesToReplace=[], rangeOfValidReplacements=[],  OptionNameANDIndexValue = [], InvalidTargetIDs =[], OptionType = [Scale]):
+def GenOption(optionName_AND_commandList_AND_optionType, parentTab, desc, subOptionName_AND_subCommandList = []):   
     global rowIncrement
     global OptionsRunList
     global OptionInputs
 
-    # Option Color
+    # Example: ("Randomizing X", [command1,command2,command3])
+
+    # Create Option Color
     if (rowIncrement %2 == 0):
         OptionColor = White
     else:
@@ -102,23 +104,25 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
     optionPanel = Frame(parentTab, padx=10, pady=10, background=OptionColor)
     optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
 
-    # Option Name
-    option = Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w", wraplength=150)
+    # Create Option Name
+    option = Label(optionPanel, text=optionName_AND_commandList_AND_optionType[0], background=OptionColor, width=30, anchor="w", wraplength=150)
     option.grid(row=rowIncrement, column=0, sticky="sw")
 
-    # Option Interactable
-    for item in OptionType:
+    # Create Option Interactable
+    for item in optionName_AND_commandList_AND_optionType:
         if (item == Scale):
-            optionType = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
-            OptionInputs.append(optionType)
+            optionTypeObj = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
+            OptionInputs.append(optionTypeObj)
             optionDesc = Label(optionPanel, text=desc, background=OptionColor, anchor='w')
-            optionType.grid(row=rowIncrement, column=1, sticky="e")
+            optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
             optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
+            optionName_AND_commandList_AND_optionType[2] = var
         elif (item == Checkbutton):
             var = BooleanVar()
-            optionType = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=desc)
+            optionTypeObj = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=desc)
             CheckboxStates.append(var)
-            optionType.grid(row=rowIncrement, column=1, sticky="e")
+            optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
+            optionName_AND_commandList_AND_optionType[2] = var
         elif (item == Entry):
             optionTypeMin = Entry(optionPanel, background=OptionColor, highlightthickness=0, width=5)
             optionTypeMax = Entry(optionPanel, background=OptionColor, highlightthickness=0, width=5)
@@ -126,33 +130,21 @@ def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValu
             optionDesc.grid(row=rowIncrement, column=4)
             optionTypeMin.grid(row=rowIncrement, column=5)
             optionTypeMax.grid(row=rowIncrement, column=6, padx=5)
-
+            item = [optionTypeMin, optionTypeMax]
 
     # I hate this but the parent wont fill "sticky="ew" doesnt work. Its probably due to so many nested parents but I dont wanna go fix all of them
     spaceFill = Label(optionPanel, text="", background=OptionColor, width=MaxWidth, anchor='w')
     spaceFill.grid(row=rowIncrement, column=100, sticky="sw")
 
-
-
-    for i in range((len(OptionNameANDIndexValue))//2):
-        var = BooleanVar()
-
-        checkFunction = lambda i=i, var=var: Helper.OptionCarveouts(rangeOfValidReplacements, OptionNameANDIndexValue[2*i+1], var)
-
-        box = Checkbutton(optionPanel, background=OptionColor, text=OptionNameANDIndexValue[2*i], variable=var, command = checkFunction, highlightthickness=0)
-        
-        #HACKY want to fix
-        CheckBoxFunctions.append(checkFunction)
-
-
-        CheckboxStates.append(var)
-        CheckboxList.append(OptionNameANDIndexValue[2*i] + " Box")
-        box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
-        Helper.OptionCarveouts(rangeOfValidReplacements, OptionNameANDIndexValue[2*i+1], var)
+    # for i in range((len(subOptionList))//2):
+    #     var = BooleanVar()
+    #     box = Checkbutton(optionPanel, background=OptionColor, text=subOptionList[2*i], variable=var, highlightthickness=0)
+    #     CheckboxStates.append(var)
+    #     CheckboxList.append(subOptionList[2*i] + " Box")
+    #     box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
     rowIncrement += 1
-
-    if optionName != "Enemies": # make this pass an anonymous function so the genoption calls have the decision of what funciton to run
-        OptionsRunList.append(lambda: JSONParser.ChangeJSON(optionName, Filename, keyWords, rangeOfValuesToReplace, optionType.get(), rangeOfValidReplacements, InvalidTargetIDs))
+    print([optionName_AND_commandList_AND_optionType] + [subOptionName_AND_subCommandList])
+    OptionsRunList.append([optionName_AND_commandList_AND_optionType + subOptionName_AND_subCommandList])
 
 def Options():
     # General
@@ -189,8 +181,8 @@ def Options():
     # Enemies
     GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", ["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips)
     GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", ["common/CHR_EnArrange.json"], ["Scale"], Helper.inclRange(0, 1000), Helper.inclRange(1, 200) + Helper.inclRange(990,1000))
-    GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies, ["Story Bosses", [1998], "Quest Enemies", [1999], "Unique Monsters", [2000], "Superbosses", [2001], "Normal Enemies", [2002], "Mix Enemies Between Types", [2003], "Keep All Enemy Levels", [2004], "Keep Quest Enemy Levels", [2005], "Keep Story Boss Levels", [2006], "Core Crystal Changes", [2007], "Arts Cancel on Tier 1", [2008], "Balanced Random Skill Trees", [2009], "Shorter Tutorial", [2010], "Beta Stuff", [2011]], OptionType=[Checkbutton])
-    GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", ["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.inclRange(0,100), Helper.inclRange(0,100) + Helper.inclRange(250,255), OptionType=[Checkbutton])
+    GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies, ["Story Bosses", [1998], "Quest Enemies", [1999], "Unique Monsters", [2000], "Superbosses", [2001], "Normal Enemies", [2002], "Mix Enemies Between Types", [2003], "Keep All Enemy Levels", [2004], "Keep Quest Enemy Levels", [2005], "Keep Story Boss Levels", [2006], "Core Crystal Changes", [2007], "Arts Cancel on Tier 1", [2008], "Balanced Random Skill Trees", [2009], "Shorter Tutorial", [2010], "Beta Stuff", [2011]], optionType=[Checkbutton])
+    GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", ["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.inclRange(0,100), Helper.inclRange(0,100) + Helper.inclRange(250,255), optionType=[Checkbutton])
     #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30))
     
     # Misc
@@ -205,22 +197,22 @@ def Options():
     # EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_ResMotion.json", ["file"], "sample") 
     
     # QOL
-    GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in the game", OptionType=[Checkbutton]) #common_ms/menu_ms
-    GenOption("Running Speed", TabQOL, "Max out your starting Run Speed", OptionType=[Checkbutton])
+    GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in the game", optionType=[Checkbutton]) #common_ms/menu_ms
+    GenOption("Running Speed", TabQOL, "Max out your starting Run Speed", optionType=[Checkbutton])
     #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
     
     # Cosmetics
-    GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultRex], [], RexCosmetics, OptionType=[Checkbutton])
-    GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPyra], [], PyraCosmetics, OptionType=[Checkbutton])
-    GenOption("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultMythra], [], MythraCosmetics, OptionType=[Checkbutton])
-    GenOption("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultDriverNia], [], NiaDriverCosmetics, OptionType=[Checkbutton])
-    GenOption("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBladeNia], [], NiaBladeCosmetics, OptionType=[Checkbutton])
-    GenOption("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultDromarch], [], DromarchCosmetics, OptionType=[Checkbutton])
-    GenOption("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultTora], [], ToraCosmetics, OptionType=[Checkbutton])
-    GenOption("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultMorag], [], MoragCosmetics, OptionType=[Checkbutton])
-    GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBrighid], [], BrighidCosmetics, OptionType=[Checkbutton])
-    GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultZeke], [], ZekeCosmetics, OptionType=[Checkbutton])
-    GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPandoria], [], PandoriaCosmetics, OptionType=[Checkbutton])
+    GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultRex], [], RexCosmetics, optionType=[Checkbutton])
+    GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPyra], [], PyraCosmetics, optionType=[Checkbutton])
+    GenOption("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultMythra], [], MythraCosmetics, optionType=[Checkbutton])
+    GenOption("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultDriverNia], [], NiaDriverCosmetics, optionType=[Checkbutton])
+    GenOption("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBladeNia], [], NiaBladeCosmetics, optionType=[Checkbutton])
+    GenOption("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultDromarch], [], DromarchCosmetics, optionType=[Checkbutton])
+    GenOption("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultTora], [], ToraCosmetics, optionType=[Checkbutton])
+    GenOption("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultMorag], [], MoragCosmetics, optionType=[Checkbutton])
+    GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBrighid], [], BrighidCosmetics, optionType=[Checkbutton])
+    GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultZeke], [], ZekeCosmetics, optionType=[Checkbutton])
+    GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPandoria], [], PandoriaCosmetics, optionType=[Checkbutton])
     
     # Logic
     OptionsRunList.append(lambda: EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates))
@@ -241,8 +233,12 @@ def Randomize():
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty")
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
 
-        for OptionRun in OptionsRunList:
-            OptionRun()
+        for optionList in OptionsRunList:
+            for item in optionList:
+                if (item[2].get() == True):
+                    for command in item[1]:
+                        print("Randomizing " + item[0])
+                        command()
 
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
         os.makedirs(f"{outDirEntry.get()}/gb", exist_ok=True)
@@ -256,18 +252,12 @@ def Randomize():
     
 def GenRandomSeed():
     print(Helper.InsertHelper(3,1,8,"itmID", ""))
-    #print(Helper.StartsWithHelper("BSkill", 1, 3))
-    #Helper.FindBadValuesList("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["Name"], [0], "$id")
-    # Helper.FindBadValuesList("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["ParamID"], [1,307,308,285,1261,314,339,1143,350,892,1041,303,942,1153,1015,1016,941,891,317,1258,1250,352,331,281,343, 3, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21,1116,1118,1172, 1178,1179,1134,1135,1136,1154,1194,1195,1196,1197,1199,1200,332, 0, 22, 23, 24, 25, 26, 27, 28, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 140, 0, 141, 142, 143, 144, 145, 146, 147, 149, 150, 151, 152, 153, 154, 155, 156, 0, 157, 158, 159, 160, 161, 0, 163, 164, 166, 165, 348, 167, 168, 169, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 220, 221, 222, 286, 348, 126, 286, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 196, 197, 198, 199, 205, 207, 208, 209, 1052, 1053, 1052, 1055, 1056, 1057, 1058, 1062, 1068, 1070, 1072, 1073, 1077, 1078, 1083, 1084, 1086, 1087, 1089, 1090, 1091, 1092, 1093, 1094, 1096, 1099, 1100, 1109, 1110, 1111, 1113, 1114, 1117, 1119, 1120, 1122, 1124, 1126, 1127, 1133, 1137, 1138, 1144, 1156, 1158, 1164, 1166, 1168, 1175, 1176, 1177, 1181, 1183, 1185, 1187, 1189, 1191, 1198, 1205, 1208, 1209, 1216, 1221, 1223, 1225, 1227, 1228, 1229, 1234, 1236, 1238, 1240, 1242, 1255, 1263, 1265, 1267, 1270, 1272, 1274, 1276, 1278, 1280, 1282, 1283, 1284, 1285, 1286, 1287, 1293, 1295, 1297, 1299, 1301, 1310, 1312, 1330, 1331, 1336, 1338, 1340, 1341, 1342, 1343, 1345, 1346, 1348, 1350, 1351, 1352, 1353, 1355, 1361, 1362, 1370, 1371, 386, 195, 354, 387, 388, 356, 189, 190, 370, 371, 372, 373, 459, 461, 463, 498, 560, 562, 564, 566, 568, 574, 579, 581, 644, 647, 649, 651, 659, 662, 683, 685, 687, 689, 718, 782, 785, 865, 867, 869, 895, 898, 1020, 1022, 1026, 1037, 1038, 1043, 346, 272, 272, 273, 273, 274, 275, 276, 277, 278, 279, 279, 280, 281, 193, 162, 325, 162, 264, 228, 229, 230, 231, 232, 233, 282, 283, 284, 1375, 1377, 210, 212, 213, 214, 215, 217, 218, 219, 272, 279, 281, 392, 1383, 1385, 1387, 1394, 1396, 1399, 1401,1067,1083,1084,181,184,300,1492,457,1173,1184,1190,1182,1188,1180,1186,579, 0, 0, 1413, 1437, 1438, 1439, 0, 0, 0, 0, 0, 0, 0, 1486, 1487, 1488, 1491, 1496, 1499, 1502, 1505, 1506, 1507, 1521, 0, 0, 0, 0, 0, 0, 0, 1584, 1589, 1624, 1639, 1640, 1642, 0, 0, 1660, 0], "$id")
-    # FindBadValuesList("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EnemyPop.json", ["ene1ID"], inclRange(0,100000), "ene1ID")
-    #print(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"))
-    # Helper.FindSubOptionValuesList("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "AlwaysAttack", 1, "$id") 
-    #EnemyRandoLogic.FindMatchingInfo
-    #Helper.FindValues("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["$id"], Helper.inclRange(1,37), "Blade")
     randoSeedEntry.delete(0, END)
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
-Options()
+# Options()
+GenOption(["Pouch Item Shops",[lambda: JSONParser.ChangeJSON(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)], Checkbutton], TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops")
+
 
 bdatcommonFrame = Frame(root, background='#632424')
 bdatcommonFrame.pack(anchor="w", padx=10)
@@ -292,10 +282,6 @@ RandomizeButton.pack(pady=10)
 
 EveryObjectToSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + CheckboxStates + OptionInputs)
 SavedOptions.loadData(EveryObjectToSave)
-
-#HACKY want to fix; runs functions after saved options to get correct states
-for boxFunction in CheckBoxFunctions:
-    boxFunction()
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSave), root.destroy()))
 root.mainloop()
