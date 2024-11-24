@@ -144,10 +144,7 @@ def GenOption(optionName, parentTab, description, optionType, commandList = [], 
         "name": optionName,
         "optionType": optionType,
         "commandList": commandList
-
-
     }
-    # }  append([optionName, commandList, optionType])
 
 def Options():
     # General
@@ -237,7 +234,7 @@ def Randomize():
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
 
         for name, option in OptionsRunDict.items():
-            if option["optionType"] and option["optionType"].get():
+            if (option["optionType"] and option["optionType"].get()):
                 for command in option["commandList"]:
                     print(f"Randomizing {name}")
                     command()
