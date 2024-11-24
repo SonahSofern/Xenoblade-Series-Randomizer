@@ -3,7 +3,7 @@ import os
 from tkinter import filedialog
 import tkinter as tk
 
-def inclRange(start, end):
+def InclRange(start, end):
      return list(range(start, end+1))
 
 def StartsWith(startingWord, lowNum, highNum):

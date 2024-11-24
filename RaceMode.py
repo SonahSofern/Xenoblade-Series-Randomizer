@@ -5,21 +5,32 @@ import random
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
+# Default Level-Based Modifiers for EXP, Damage Taken/Given, Accuracy, and Odds of getting a reaction (on an enemy?) (break/topple/launch/smash)
+ExpRevHigh = [105, 110, 117, 124, 134, 145, 157, 170, 184, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200]
+ExpRevLow = [95, 86, 77, 69, 62, 56, 50, 45, 41, 37, 33, 30, 27, 24, 22, 20, 18, 16, 14, 13]
+ExpRevLow2 = [100, 95, 88, 81, 75, 69, 64, 56, 49, 43, 38, 33, 29, 25, 22, 20, 18, 16, 14, 13]
+DamageRevHigh = [100, 100, 100, 105, 110, 125, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400]
+DamageRevLow = [100, 100, 100, 98, 96, 94, 92, 90, 88, 86, 84, 82, 80, 78, 76, 74, 72, 70, 68, 66]
+HitRevLow = [110, 115, 122, 129, 138, 147, 158, 169, 182, 195, 210, 225, 242, 259, 278, 297, 318, 339, 362, 385]
+ReactRevHigh = [0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 40, 60, 80, 100, 100, 100, 100, 100, 100, 100]
+
+
 def RaceModeChanging(CheckboxList, CheckboxStates): 
     for j in range(0, len(CheckboxList)):
         if CheckboxList[j] == "Race Mode Box":
             RaceModeBox = j
             break
-    if CheckboxStates[RaceModeBox].get() == True:    
+    if CheckboxStates[RaceModeBox].get() == True:
+        print("Setting Up Race Mode")    
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
         
-        AreaList1 = [41, 68]
-        AreaList2 = [90, 152]
-        AreaList3 = [125, 133, 168]
+        AreaList1 = [41] #68
+        AreaList2 = [99] # 152 
+        AreaList3 = [133] #125, 168
         AreaList4 = [175, 187]
 
-        AreaList = [41, 68, 90, 152, 125, 133, 168, 175, 187]
+        AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
 
         MSGIDList = [63, 141, 205, 367, 299, 314, 396, 413, 445] #list of MSGIDs for each of the landmarks in Area List (276 for Temperantia) (427 for Land of Morytha) 
 
@@ -29,17 +40,6 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
         RaceModeDungeons.append(random.choice(AreaList3))
         RaceModeDungeons.append(random.choice(AreaList4))
         RaceModeDungeons.append(200)
-
-        # Default Level-Based Modifiers for EXP, Damage Taken/Given, Accuracy, and Odds of getting a reaction (on an enemy?) (break/topple/launch/smash)
-        ExpRevHigh = [105, 110, 117, 124, 134, 145, 157, 170, 184, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200]
-        ExpRevLow = [95, 86, 77, 69, 62, 56, 50, 45, 41, 37, 33, 30, 27, 24, 22, 20, 18, 16, 14, 13]
-        ExpRevLow2 = [100, 95, 88, 81, 75, 69, 64, 56, 49, 43, 38, 33, 29, 25, 22, 20, 18, 16, 14, 13]
-        DamageRevHigh = [100, 100, 100, 105, 110, 125, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400]
-        DamageRevLow = [100, 100, 100, 98, 96, 94, 92, 90, 88, 86, 84, 82, 80, 78, 76, 74, 72, 70, 68, 66]
-        HitRevLow = [110, 115, 122, 129, 138, 147, 158, 169, 182, 195, 210, 225, 242, 259, 278, 297, 318, 339, 362, 385]
-        ReactRevHigh = [0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 40, 60, 80, 100, 100, 100, 100, 100, 100, 100]
-        
-
 
         # common/FLD_QuestList
         # [Gormott, Uraya, Mor Ardain, Leftherian Archipelago, Temperantia + Indoline Praetorium, Tantal, Spirit Crucible Elpys, Cliffs of Morytha + Land of Morytha, World Tree, Final Stretch]
@@ -58,7 +58,7 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
 
         ChosenIndices = []
 
-        RaceModeMapJumpIDs = [41, 68, 90, 152, 125, 133, 168, 175, 187, 200]
+        RaceModeMapJumpIDs = [41, 68, 99, 152, 125, 133, 168, 175, 187, 200]
 
         for i in range(0, len(RaceModeDungeons)): # Defines the chosen indices that we're using from the list of race-mode locations
             for j in range(0, len(RaceModeMapJumpIDs)):
@@ -92,7 +92,7 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
             if ExpDiff[i] > 65535:
                 ExpDiff[i] = 65535
 
-        MapSpecificIDs = [501, 701, 801, 1501, 1101, 1301, 1601, 1701, 2001, 2103]
+        MapSpecificIDs = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 2001, 2103]
         FileStart = "./_internal/JsonOutputs/common_gmk/"
         FileEnd = "_FLD_LandmarkPop.json"
         LandmarkFilestoTarget = [] 
@@ -130,7 +130,7 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
                     row["PRTQuestID"] = 6
                 if row["$id"] == 15: # Talking to Spraine
                     row["NextQuestA"] = NextQuestAList[ChosenIndices[0]]
-            for i in range(1, len(ChosenIndices) - 1):
+            for i in range(0, len(ChosenIndices) - 1):
                 for row in data["rows"]:
                     if row["$id"] == LastQuestAList[ChosenIndices[i]]:
                         row["NextQuestA"] = NextQuestAList[ChosenIndices[i+1]]
@@ -148,14 +148,15 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
                         row["nextID"] = 10035
                         row["scenarioFlag"] = 2002
                         row["nextIDtheater"] = 10035
-                        break
                     if ChosenIndices[0] == 1:
                         # Uraya
                         row["nextID"] = 10088
                         row["scenarioFlag"] = 3005
                         row["nextIDtheater"] = 10088
-                        break
-            for i in range(1, len(ChosenIndices) - 1):
+                if row["$id"] == 10189:
+                    row["linkID"] = 0
+                    row["envSeam"] = 0
+            for i in range(0, len(ChosenIndices) - 1):
                 for row in data["rows"]:
                     if row["$id"] == FinalContinentCutscenes[ChosenIndices[i]]:
                         row["nextID"] = ContinentWarpCutscenes[ChosenIndices[i+1]]
@@ -176,19 +177,19 @@ def LessGrinding(): #adjusting level based exp gains, and debuffs while underlev
             row["ExpRevHigh"] = 210 + 20 * row["$id"]
             row["ExpRevLow"] = 100
             if row["$id"] >= 10:
-                row["DamageRevHigh"] = 200
+                row["DamageRevHigh"] = 250
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
 
 def RaceModeLootChanges(ChosenIndices):
-    LootIDstoShuffle = Helper.inclRange(45002, 45010) + Helper.inclRange(45016, 45043) + [45056, 45057] + [25305, 25305, 25305, 25305] + [61004, 61004, 61004, 61004, 61004, 61004, 61004, 61004, 61004, 61004] + Helper.inclRange(57001, 57008) + Helper.inclRange(56031, 56036) + [584,581,563,503,569,515,542,512,500,518,575,554,557,509,536,578,118] + [25450,25450,25450,25450,25450,25450] + Helper.inclRange(17350,17406) + [40314, 40314, 40314, 40314, 40314, 40314, 40314, 40314, 40314, 40314] + [25408, 25408, 25408, 25408, 25408, 25408, 25408, 25408, 25408] + Helper.inclRange(25218, 25222) + Helper.inclRange(25249, 25300)
+    LootIDstoShuffle = Helper.InclRange(45002, 45010) + Helper.InclRange(45016, 45043) + [45056, 45057] + [25305, 25305, 25305, 25305] + [584,581,563,503,569,515,542,512,500,518,575,554,557,509,536,578,118] + [25450,25450,25450,25450,25450,25450] + Helper.InclRange(17350,17406) + [25408, 25408, 25408, 25408, 25408, 25408, 25408, 25408, 25408] + Helper.InclRange(25218, 25222) + Helper.InclRange(25249, 25300)
     random.shuffle(LootIDstoShuffle)
     TBoxFiles = []
     FileStart = "./_internal/JsonOutputs/common_gmk/"
     FileEnd = "_FLD_TboxPop.json"
-    StartingPreciousIDs = Helper.inclRange(25001, 25499)
-    ExcludePreciousIDs = Helper.inclRange(25218, 25222) + [25305] + [25408] + [25450] + [25405] + [25406] + [25407] + Helper.inclRange(25249, 25300) # We are ok with replacing these, since they're in the pool of items to pull from anyways
+    StartingPreciousIDs = Helper.InclRange(25001, 25499)
+    ExcludePreciousIDs = Helper.InclRange(25218, 25222) + [25305] + [25408] + [25450] + [25405] + [25406] + [25407] + Helper.InclRange(25249, 25300) # We are ok with replacing these, since they're in the pool of items to pull from anyways
     FinalPreciousIDs = [x for x in StartingPreciousIDs if x not in ExcludePreciousIDs] # We do not want to replace these, these are quest/key items
     for i in range(0, len(ChosenIndices)): # Defines what files we want to target and what map ids in that file we want to target  
         TBoxFiles.append(FileStart + AllMapIDs[ChosenIndices[i]][1] + FileEnd)
