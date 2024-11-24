@@ -25,7 +25,7 @@ Gray = "#D5D5D5"
 MaxWidth = 1000
 
 # The Notebook
-MainWindow = ttk.Notebook(root, height=2)
+MainWindow = ttk.Notebook(root, height=5)
 
 # Frames in the notebook
 TabGeneralOuter = Frame(MainWindow) 
@@ -54,15 +54,6 @@ TabMisc = Frame(TabMiscCanvas)
 TabQOL = Frame(TabQOLCanvas)
 TabCosmetics = Frame(TabCosmeticsCanvas)
 
-# Tabs
-MainWindow.add(TabGeneralOuter, text ='General') 
-MainWindow.add(TabDriversOuter, text ='Drivers') 
-MainWindow.add(TabBladesOuter, text ='Blades') 
-MainWindow.add(TabEnemiesOuter, text ='Enemies') 
-MainWindow.add(TabMiscOuter, text ='Misc.') 
-MainWindow.add(TabQOLOuter, text = 'Quality of Life')
-MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
-MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
@@ -85,6 +76,17 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touc
         OuterFrames[i].pack(expand=True, fill="both")
 
 CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics])
+
+# Tabs
+MainWindow.add(TabGeneralOuter, text ='General') 
+MainWindow.add(TabDriversOuter, text ='Drivers') 
+MainWindow.add(TabBladesOuter, text ='Blades') 
+MainWindow.add(TabEnemiesOuter, text ='Enemies') 
+MainWindow.add(TabMiscOuter, text ='Misc.') 
+MainWindow.add(TabQOLOuter, text = 'Quality of Life')
+MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
+MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
+
 
 def GenOption(optionName, parentTab, desc, Filename=[], keyWords=[], rangeOfValuesToReplace=[], rangeOfValidReplacements=[],  OptionNameANDIndexValue = [], InvalidTargetIDs =[], OptionType = Scale):
     global rowIncrement
@@ -161,7 +163,7 @@ def Options():
     # Blades
     GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", ["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)
     GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", ["common/BTL_Arts_Bl.json"], ["ArtsType"], [1, 2], [1,2])
-    GenOption("Blade Special Button Challenges", TabBlades, "Randomizes what button a special uses for its button challenge", ["common/MNU_BtnChallenge2.json"], Helper.StartsWith("BtnType", 1, 3), ButtonCombos, ButtonCombos)
+    GenOption("Blade Special Buttons", TabBlades, "Randomizes what button a special uses for its button challenge", ["common/MNU_BtnChallenge2.json"], Helper.StartsWith("BtnType", 1, 3), ButtonCombos, ButtonCombos)
     GenOption("Blade Elements", TabBlades, "Randomizes what element a blade is", ["common/CHR_Bl.json"],["Atr"], Helper.inclRange(1,8), Helper.inclRange(1,8))
     GenOption("Blade Battle Skills", TabBlades, "Randomizes blades battle (yellow) skill tree", ["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), BladeBattleSkills, BladeBattleSkills)
     GenOption("Blade Green Skills", TabBlades, "Randomizes blades field (green) skill tree", ["common/CHR_Bl.json"], Helper.StartsWith("FSkill", 1, 3), BladeFieldSkills, BladeFieldSkills, ["Field Skill QOL", [1135]], InvalidTargetIDs=[1135])
@@ -281,7 +283,7 @@ RandomizeButton.pack(pady=10)
 EveryObjectToSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + CheckboxStates + OptionInputs)
 SavedOptions.loadData(EveryObjectToSave)
 
-#HACKY want to fix runs functions after saved options to get correct states
+#HACKY want to fix; runs functions after saved options to get correct states
 for boxFunction in CheckBoxFunctions:
     boxFunction()
 

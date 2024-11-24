@@ -2,8 +2,8 @@ import json
 import random
 import os
 
-def ChangeJSON(cmdDescription, Filename, keyWords, rangeofValuesToReplace, sliderOdds, rangeValidReplacements, InvalidTargetIDs): # make this a function to reuse, check the settings ot see if we even do this
-    if (sliderOdds == 0 or ((random.randint(0,100) >= sliderOdds))):
+def ChangeJSON(cmdDescription, Filename, keyWords, rangeofValuesToReplace, inputTypeOdds, rangeValidReplacements, InvalidTargetIDs): # make this a function to reuse, check the settings ot see if we even do this
+    if (inputTypeOdds == 0 or ((random.randint(0,100) >= inputTypeOdds))):
         return
     if (cmdDescription != ""):
         print("Randomizing " + cmdDescription)   
