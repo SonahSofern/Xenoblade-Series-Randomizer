@@ -88,12 +88,10 @@ MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 
-def GenOption(optionName_AND_commandList_AND_optionType, parentTab, desc, subOptionName_AND_subCommandList = []):   
+def GenOption(optionName, parentTab, desc, optionType, commandList, subOptionName_AND_subCommandList = []):   
     global rowIncrement
     global OptionsRunList
     global OptionInputs
-
-    # Example: ("Randomizing X", [command1,command2,command3])
 
     # Create Option Color
     if (rowIncrement %2 == 0):
@@ -105,32 +103,31 @@ def GenOption(optionName_AND_commandList_AND_optionType, parentTab, desc, subOpt
     optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
 
     # Create Option Name
-    option = Label(optionPanel, text=optionName_AND_commandList_AND_optionType[0], background=OptionColor, width=30, anchor="w", wraplength=150)
+    option = Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w", wraplength=150)
     option.grid(row=rowIncrement, column=0, sticky="sw")
 
     # Create Option Interactable
-    for item in optionName_AND_commandList_AND_optionType:
-        if (item == Scale):
-            optionTypeObj = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
-            OptionInputs.append(optionTypeObj)
-            optionDesc = Label(optionPanel, text=desc, background=OptionColor, anchor='w')
-            optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
-            optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
-            optionName_AND_commandList_AND_optionType[2] = var
-        elif (item == Checkbutton):
-            var = BooleanVar()
-            optionTypeObj = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=desc)
-            CheckboxStates.append(var)
-            optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
-            optionName_AND_commandList_AND_optionType[2] = var
-        elif (item == Entry):
-            optionTypeMin = Entry(optionPanel, background=OptionColor, highlightthickness=0, width=5)
-            optionTypeMax = Entry(optionPanel, background=OptionColor, highlightthickness=0, width=5)
-            optionDesc = Label(optionPanel, text="| Range", background=OptionColor, anchor='w')
-            optionDesc.grid(row=rowIncrement, column=4)
-            optionTypeMin.grid(row=rowIncrement, column=5)
-            optionTypeMax.grid(row=rowIncrement, column=6, padx=5)
-            item = [optionTypeMin, optionTypeMax]
+    if (optionType == Scale):
+        optionTypeObj = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, background=OptionColor, highlightthickness=0)
+        OptionInputs.append(optionTypeObj)
+        optionDesc = Label(optionPanel, text=desc, background=OptionColor, anchor='w')
+        optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
+        optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
+        optionType = var
+    elif (optionType == Checkbutton):
+        var = BooleanVar()
+        optionTypeObj = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=desc)
+        CheckboxStates.append(var)
+        optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
+        optionType = var
+    elif (optionType == Entry):
+        optionTypeMin = Entry(optionPanel, background=OptionColor, highlightthickness=0, width=5)
+        optionTypeMax = Entry(optionPanel, background=OptionColor, highlightthickness=0, width=5)
+        optionDesc = Label(optionPanel, text="| Range", background=OptionColor, anchor='w')
+        optionDesc.grid(row=rowIncrement, column=4)
+        optionTypeMin.grid(row=rowIncrement, column=5)
+        optionTypeMax.grid(row=rowIncrement, column=6, padx=5)
+        optionType = [optionTypeMin, optionTypeMax]
 
     # I hate this but the parent wont fill "sticky="ew" doesnt work. Its probably due to so many nested parents but I dont wanna go fix all of them
     spaceFill = Label(optionPanel, text="", background=OptionColor, width=MaxWidth, anchor='w')
@@ -143,8 +140,7 @@ def GenOption(optionName_AND_commandList_AND_optionType, parentTab, desc, subOpt
     #     CheckboxList.append(subOptionList[2*i] + " Box")
     #     box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
     rowIncrement += 1
-    print([optionName_AND_commandList_AND_optionType] + [subOptionName_AND_subCommandList])
-    OptionsRunList.append([optionName_AND_commandList_AND_optionType + subOptionName_AND_subCommandList])
+    OptionsRunList.append([optionName, commandList, optionType])
 
 def Options():
     # General
@@ -234,11 +230,10 @@ def Randomize():
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
 
         for optionList in OptionsRunList:
-            for item in optionList:
-                if (item[2].get() == True):
-                    for command in item[1]:
-                        print("Randomizing " + item[0])
-                        command()
+            if (optionList[2].get() == True):
+                for command in optionList[1]:
+                    print("Randomizing " + optionList[0])
+                    command()
 
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
         os.makedirs(f"{outDirEntry.get()}/gb", exist_ok=True)
@@ -256,7 +251,7 @@ def GenRandomSeed():
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
 # Options()
-GenOption(["Pouch Item Shops",[lambda: JSONParser.ChangeJSON(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)], Checkbutton], TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops")
+GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", Checkbutton, [lambda: JSONParser.ChangeJSON(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)])
 
 
 bdatcommonFrame = Frame(root, background='#632424')
