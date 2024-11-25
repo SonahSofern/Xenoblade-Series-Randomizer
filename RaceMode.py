@@ -2,6 +2,7 @@ import Helper
 import json
 import EnemyRandoLogic
 import random
+from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs 
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
@@ -166,9 +167,15 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)
-            RaceModeLootChanges(ChosenIndices)
+            NGPlusBladeIDs = DetermineNGPlusBladeCrystalIDs(CheckboxList, CheckboxStates)
+            #RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs)
             LessGrinding()
             ShyniniSaveUs()
+            ShopRemovals()
+            MovespeedDeedChanges()
+            DLCItemChanges()
+            DifficultyChanges()
+            MenuChanges()
 
 def LessGrinding(): #adjusting level based exp gains, and debuffs while underleveled to make it less grindy
     with open("./_internal/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: 
@@ -182,9 +189,59 @@ def LessGrinding(): #adjusting level based exp gains, and debuffs while underlev
         file.truncate()
         json.dump(data, file, indent=2)
 
-def RaceModeLootChanges(ChosenIndices):
-    LootIDstoShuffle = Helper.InclRange(45002, 45010) + Helper.InclRange(45016, 45043) + [45056, 45057] + [25305, 25305, 25305, 25305] + [584,581,563,503,569,515,542,512,500,518,575,554,557,509,536,578,118] + [25450,25450,25450,25450,25450,25450] + Helper.InclRange(17350,17406) + [25408, 25408, 25408, 25408, 25408, 25408, 25408, 25408, 25408] + Helper.InclRange(25218, 25222) + Helper.InclRange(25249, 25300)
-    random.shuffle(LootIDstoShuffle)
+def DetermineNGPlusBladeCrystalIDs(CheckboxList, CheckboxStates):
+    NGPlusBladeIDs = [1043, 1044, 1046, 1047, 1048, 1049]
+    NGPlusBladeCrystalIDs = []
+    for j in range(0, len(CheckboxList)):
+        if CheckboxList[j] == "Core Crystal Changes Box":
+            CoreCrystalBox = j
+            break
+    if CheckboxStates[CoreCrystalBox].get() == True:
+        with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
+            data = json.load(file)
+            for i in range(0, len(NGPlusBladeIDs)):
+                for row in data["rows"]:
+                    if row["BladeID"] == NGPlusBladeIDs[i]:
+                        NGPlusBladeCrystalIDs.append(row["$id"])
+                        break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2)
+        return NGPlusBladeCrystalIDs
+
+def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs):
+    NonNGPlusCoreCrystalIDs = set(Helper.InclRange(45002, 45010) + Helper.InclRange(45016, 45043) + [45056, 45057])
+    NonNGPlusCoreCrystalIDs -= set(NGPlusBladeIDs)
+    NonNGPlusCoreCrystalIDs = list(NonNGPlusCoreCrystalIDs)
+    A1Num = random.randint(1,3) - 1
+    A2Num = random.randint(4,6) - 1
+    A3Num = random.randint(7,9) - 1
+    A4Num = random.randint(10,12) - 1
+    A1Equip = []
+    A2Equip = []
+    A3Equip = []
+    A4Equip = []
+    for i in range(0, len(AllRaceModeItemTypeIDs)):
+        A1Equip.append(AllRaceModeItemTypeIDs[i][A1Num]) 
+        A2Equip.append(AllRaceModeItemTypeIDs[i][A2Num])
+        A3Equip.append(AllRaceModeItemTypeIDs[i][A3Num])
+        A4Equip.append(AllRaceModeItemTypeIDs[i][A4Num])
+    for i in range(0, len(RaceModeAuxCoreIDs)):
+        A1Equip.append(RaceModeAuxCoreIDs[i][A1Num]) 
+        A2Equip.append(RaceModeAuxCoreIDs[i][A2Num])
+        A3Equip.append(RaceModeAuxCoreIDs[i][A3Num])
+        A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
+    Area1LootIDs = NonNGPlusCoreCrystalIDs[:11] + [25305] * 3 + Helper.InclRange(25249, 25264) + [25450] * 3 + A1Equip + [25408] * 5 + [25218, 25219]
+    del NonNGPlusCoreCrystalIDs[:11]
+    Area2LootIDs = NonNGPlusCoreCrystalIDs[:11] + [25305] * 3 + Helper.InclRange(25265, 25280) + [25450] * 3 + A2Equip + [25408] * 5 + [25220]
+    del NonNGPlusCoreCrystalIDs[:11]
+    Area3LootIDs = NonNGPlusCoreCrystalIDs + [25305] * 3 + Helper.InclRange(25281, 25291) + [25450] * 3 + A3Equip + [25408] * 5 + [25221]
+    Area4LootIDs = NGPlusBladeIDs + [25305] * 3 + Helper.InclRange(25292, 25300) + [25450] * 3 + A4Equip + [25408] * 5 + [25222]
+    random.shuffle(Area1LootIDs)
+    random.shuffle(Area2LootIDs)
+    random.shuffle(Area3LootIDs)
+    random.shuffle(Area4LootIDs)
+    AllAreaLootIDs = [Area1LootIDs, Area2LootIDs, Area3LootIDs, Area4LootIDs]
     TBoxFiles = []
     FileStart = "./_internal/JsonOutputs/common_gmk/"
     FileEnd = "_FLD_TboxPop.json"
@@ -205,24 +262,23 @@ def RaceModeLootChanges(ChosenIndices):
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)
-    SumofTBoxes = sum(BoxestoRandomizePerMap)
-    ItemsPerBox = len(LootIDstoShuffle)//SumofTBoxes
-    if ItemsPerBox > 8:
-        ItemsPerBox = 8
-    if ItemsPerBox < 1:
-        ItemsPerBox = 1
-        ItemtoChestDifference = SumofTBoxes - len(LootIDstoShuffle)
-        for i in range(0, ItemtoChestDifference):
-            LootIDstoShuffle.append(random.choice([25405, 25405, 25405, 25405, 25406, 25406, 25407])) # fill the rest with WP 
-        random.shuffle(LootIDstoShuffle)
+    ItemsPerBox = []
+    for i in range(0, len(AllAreaLootIDs)):
+        ItemsPerBox.append(len(AllAreaLootIDs[i])//BoxestoRandomizePerMap[i])
+        if ItemsPerBox > 8:
+            ItemsPerBox = 8
+        if ItemsPerBox < 3:
+            ItemsPerBox = 3
+            ItemtoChestDifference = BoxestoRandomizePerMap[i] - len(AllAreaLootIDs[i])
+            for j in range(0, ItemtoChestDifference):
+                AllAreaLootIDs[i].append(random.choice([25405, 25405, 25405, 25406, 25406, 25407])) # fill the rest with WP 
+            random.shuffle(AllAreaLootIDs[i])
     k = 0
     for i in range(0, len(TBoxFiles)):
-        if k > len(LootIDstoShuffle): # this condition should never trigger I think, but just to be safe
-            break
         with open(TBoxFiles[i], 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data["rows"]:
-                if k > len(LootIDstoShuffle): #If k ever exceeds the size of the loot ids we're shuffling, then we can stop going through the files
+                if k > len(AllAreaLootIDs[i]): #If k ever exceeds the size of the loot ids we're shuffling, then we can stop going through the files
                     file.seek(0)
                     file.truncate()
                     json.dump(data, file, indent=2) 
@@ -238,14 +294,14 @@ def RaceModeLootChanges(ChosenIndices):
                             row[f"itm{j+1}Per"] = 0 # don't know if this is used at all, but better safe than sorry
                     for j in range(0, ItemsPerBox):
                         if row[f"itm{j+1}ID"] not in FinalPreciousIDs:
-                            row[f"itm{j+1}ID"] = LootIDstoShuffle[k]
+                            row[f"itm{j+1}ID"] = AllAreaLootIDs[i][k]
                             row[f"itm{j+1}Num"] = 1
                             k = k + 1
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2) 
 
-def ShyniniSaveUs(): # Just in case we don't get good blade field skills, we can rely on Shynini to always sell core crystals :D
+def ShyniniSaveUs(): # Just in case we don't get good blade field skills, we can rely on Shynini to always sell core crystals :D This does not work currently
     with open("./_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
@@ -253,4 +309,93 @@ def ShyniniSaveUs(): # Just in case we don't get good blade field skills, we can
                 row["DefItem7"] = 45011
                 row["DefItem8"] = 45012
                 row["DefItem9"] = 45013
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
 
+def ShopRemovals(): # Removes the Expensive Core Crystal from the shop, as well as the shop deeds
+    ShopDeedIDs = Helper.InclRange(25249, 25300)
+    with open("./_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["PrivilegeItem"] in ShopDeedIDs:
+                row["PrivilegeItem"] = 0
+            if row["$id"] == 33:
+                row["Addtem2"] = 0
+                row["AddCondition2"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+
+def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, makes the max movespeed bonus 250% instead of 25%
+    DeedTypeIDValues = Helper.InclRange(1, 52)
+    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes caption and name
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["Type"] in DeedTypeIDValues:
+                row["Caption"] = 603 # Increases running speed by 5%
+                row["Name"] = 511 # Sprintsy Deeds (hehe)
+    with open("./_internal/JsonOutputs/common/FLD_OwnerBonus.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in DeedTypeIDValues:
+                row["Value"] = 5
+                row["Type"] = 1
+            if row["$id"] > 52:
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+    with open("./_internal/JsonOutputs/common/FLD_OwnerBonusParam.json", 'r+', encoding='utf-8') as file: # Changes max movespeed bonus to 250%
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 1:
+                row["Max"] = 150
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)    
+
+def DLCItemChanges(): # Changes all DLC gifts to 1 gold
+    DLCIDRowsWithItems = Helper.InclRange(1,10) + Helper.InclRange(16, 24) + [30] + [36, 37] + Helper.InclRange(43, 55)
+    with open("./_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in DLCIDRowsWithItems:
+                row["item_id"] = 0
+                row["category"] = 2
+                row["value"] = 1
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+
+def DifficultyChanges(): # Makes Easy difficulty the same as Normal
+    with open("./_internal/JsonOutputs/common/BTL_DifSetting.json", 'r+', encoding='utf-8') as file: #edits DLC items
+        data = json.load(file)
+        for row in data["rows"]:
+            row["Easy"] = row["Normal"]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+
+def MenuChanges(): # Adjusts the menu text
+    fixlater = "Add Seed Hash Here"
+    with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r+', encoding='utf-8') as file: #edits DLC items
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 128:
+                row["name"] = f"Seed Hash: {fixlater}"
+                row["style"] = 166
+            if row["$id"] == 129:
+                row["name"] = "Race Mode Start"
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+    """ with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r', encoding='utf-8') as file: #edits DLC items
+        lines = file.readlines()
+
+    with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'w', encoding='utf-8') as file: #edits DLC items
+        DelNGButton = Helper.InclRange(648, 652)
+        for i, line in enumerate(lines):
+            if i in DelNGButton:
+                file.write(line) """

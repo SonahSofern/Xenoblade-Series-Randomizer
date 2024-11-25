@@ -131,4 +131,4 @@ def CoreCrystalChanges(CheckboxList, CheckboxStates):
     #FieldSkillChecksAdjustment(CheckboxList, CheckboxStates)
     FieldSkillLevelAdjustment(CheckboxList, CheckboxStates)
     AdjustingCrystalList(CheckboxList, CheckboxStates)
-    ChangeRankCondition()
+    #ChangeRankCondition()
