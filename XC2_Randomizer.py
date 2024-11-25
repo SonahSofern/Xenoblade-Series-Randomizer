@@ -246,13 +246,13 @@ def Randomize():
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
 
         for name, option in OptionsRunDict.items():
-            print(name)
+            randoDisplay.pack()
             if (option["optionType"].get()):
                 randoDisplay.config(text=f"Randomizing {name}")
                 for command in option["commandList"]:
                     command()
 
-        randoDisplay.config(text="")
+        randoDisplay.pack_forget()
 
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
         os.makedirs(f"{outDirEntry.get()}/gb", exist_ok=True)
@@ -295,9 +295,7 @@ RandomizeParent = Frame(root, background=Red)
 RandomizeParent.pack()
 RandomizeButton = Button(RandomizeParent,text='Randomize', command=Randomize)
 RandomizeButton.pack(pady=10, side='left') 
-randoDisplay = Label(RandomizeParent, text="", background=Red, anchor="e", foreground=White)
-randoDisplay.pack(side='right')
- 
+randoDisplay = Label(text="", background=Red, anchor="e", foreground=White)
 
 EveryObjectToSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + CheckboxStates + OptionInputs)
 SavedOptions.loadData(EveryObjectToSave)
