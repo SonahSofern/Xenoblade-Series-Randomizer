@@ -88,7 +88,7 @@ MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 
-def GenOption(optionName, parentTab, description, optionType, commandList = [], subOptionName = [], subCommandList = []):   
+def GenOption(optionName, parentTab, description, optionType, commandList = [], subOptionName_subCommandList = []):   
     global rowIncrement
     global OptionsRunDict
     global OptionInputs
@@ -133,22 +133,30 @@ def GenOption(optionName, parentTab, description, optionType, commandList = [], 
     spaceFill = Label(optionPanel, text="", background=OptionColor, width=MaxWidth, anchor='w')
     spaceFill.grid(row=rowIncrement, column=100, sticky="sw")
 
-    # for i in range((len(subOptionList))//2):
-    #     var = BooleanVar()
-    #     box = Checkbutton(optionPanel, background=OptionColor, text=subOptionList[2*i], variable=var, highlightthickness=0)
-    #     CheckboxStates.append(var)
-    #     CheckboxList.append(subOptionList[2*i] + " Box")
-    #     box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
-    rowIncrement += 1
+    for i in range((len(subOptionName_subCommandList))//2):
+        var = BooleanVar()
+        box = Checkbutton(optionPanel, background=OptionColor, text=subOptionName_subCommandList[2*i], variable=var, highlightthickness=0)
+        box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
+        print(len(subOptionName_subCommandList[2*i]))
+        OptionsRunDict[subOptionName_subCommandList[2*i]]={
+        "name": subOptionName_subCommandList[2*i],
+        "optionType": var,
+        "commandList": subOptionName_subCommandList[2*i+1]  
+        }        
+
     OptionsRunDict[optionName]={
         "name": optionName,
         "optionType": optionType,
-        "commandList": commandList
+        "commandList": commandList    
     }
+
+
+    rowIncrement += 1
+    
 
 def Options():
     # General
-    GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", ["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)
+    GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", Checkbutton, [lambda: JSONParser.ChangeJSON(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)])
     GenOption("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", ["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(Accessories)-set([1])), Accessories + Helper.inclRange(448,455))
     GenOption("Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Weapon Chip Shops", ["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)
     GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[], ["Accessories", Accessories,"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials])
@@ -221,7 +229,10 @@ def Options():
     OptionsRunDict.append(lambda: TestingStuff.Beta(CheckboxList, CheckboxStates))
     OptionsRunDict.append(lambda: TutorialShortening.ShortenedTutorial(CheckboxList, CheckboxStates))
 
+GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", Checkbutton, [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[])], ["Accessories", Accessories,"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials]) 
+
 def Randomize():
+    print(OptionsRunDict["Pouch Item Shops"]["name"])
     def ThreadedRandomize():
         global OptionsRunDict
         RandomizeButton.config(state=DISABLED)
@@ -234,9 +245,9 @@ def Randomize():
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
 
         for name, option in OptionsRunDict.items():
-            if (option["optionType"] and option["optionType"].get()):
+            if (option["optionType"].get()):
+                print(f"Randomizing {name}")
                 for command in option["commandList"]:
-                    print(f"Randomizing {name}")
                     command()
 
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
@@ -255,7 +266,6 @@ def GenRandomSeed():
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
 # Options()
-GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", Checkbutton, [lambda: JSONParser.ChangeJSON(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)])
 
 
 bdatcommonFrame = Frame(root, background='#632424')
