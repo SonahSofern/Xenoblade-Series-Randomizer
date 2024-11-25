@@ -4,10 +4,11 @@ from tkinter import *
 import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, TutorialShortening
 from IDs import *
 from Cosmetics import *
+from UI_Colors import *
 
 root = Tk()
 root.title("Xenoblade Chronicles 2 Randomizer 0.1.0")
-root.configure(background='#632424')
+root.configure(background=Red)
 root.geometry('900x800')
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
@@ -20,8 +21,7 @@ OptionsRunDict = {}
 OptionInputs = []
 rowIncrement = 0
 CheckBoxFunctions = []
-White = "#ffffff"
-Gray = "#D5D5D5"
+
 MaxWidth = 1000
 
 # The Notebook
@@ -133,6 +133,7 @@ def GenOption(optionName, parentTab, description, optionType, commandList = [], 
     spaceFill = Label(optionPanel, text="", background=OptionColor, width=MaxWidth, anchor='w')
     spaceFill.grid(row=rowIncrement, column=100, sticky="sw")
 
+    # Create Suboptions
     for i in range((len(subOptionName_subCommandList))//2):
         var = BooleanVar()
         box = Checkbutton(optionPanel, background=OptionColor, text=subOptionName_subCommandList[2*i], variable=var, highlightthickness=0)
@@ -141,7 +142,7 @@ def GenOption(optionName, parentTab, description, optionType, commandList = [], 
         OptionsRunDict[subOptionName_subCommandList[2*i]]={
         "name": subOptionName_subCommandList[2*i],
         "optionType": var,
-        "commandList": subOptionName_subCommandList[2*i+1]  
+        "commandList": subOptionName_subCommandList[2*i+1],
         }        
 
     OptionsRunDict[optionName]={
@@ -232,7 +233,6 @@ def Options():
 GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", Checkbutton, [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[])], ["Accessories", Accessories,"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials]) 
 
 def Randomize():
-    print(OptionsRunDict["Pouch Item Shops"]["name"])
     def ThreadedRandomize():
         global OptionsRunDict
         RandomizeButton.config(state=DISABLED)
@@ -246,9 +246,11 @@ def Randomize():
 
         for name, option in OptionsRunDict.items():
             if (option["optionType"].get()):
-                print(f"Randomizing {name}")
+                randoDisplay.config(text=f"Randomizing {name}")
                 for command in option["commandList"]:
                     command()
+
+        randoDisplay.config(text="")
 
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
         os.makedirs(f"{outDirEntry.get()}/gb", exist_ok=True)
@@ -268,26 +270,32 @@ def GenRandomSeed():
 # Options()
 
 
-bdatcommonFrame = Frame(root, background='#632424')
+bdatcommonFrame = Frame(root, background=Red)
 bdatcommonFrame.pack(anchor="w", padx=10)
 bdatButton = Button(bdatcommonFrame, width=20, text="Choose Input Folder", command= lambda: Helper.DirectoryChoice("Choose your folder containing common.bdat, common_ms.bdat and common_gmk.bdat", bdatFilePathEntry))
 bdatButton.pack(side="left", padx=2, pady=2)
 bdatFilePathEntry = Entry(bdatcommonFrame, width=MaxWidth)
 bdatFilePathEntry.pack(side="left", padx=2)
-OutputDirectoryFrame = Frame(root, background='#632424')
+OutputDirectoryFrame = Frame(root, background=Red)
 OutputDirectoryFrame.pack(anchor="w", padx=10)
 outputDirButton = Button(OutputDirectoryFrame, width = 20, text='Choose Output Folder', command= lambda: Helper.DirectoryChoice("Choose an output folder", outDirEntry))
 outputDirButton.pack(side="left", padx=2, pady=2)
 outDirEntry = Entry(OutputDirectoryFrame, width=MaxWidth)
 outDirEntry.pack(side="left", padx=2)
-SeedFrame = Frame(root, background='#632424')
+SeedFrame = Frame(root, background=Red)
 SeedFrame.pack(anchor="w", padx=10)
 seedDesc = Button(SeedFrame, text="Seed", command=GenRandomSeed)
 seedDesc.pack(side='left', padx=2, pady=2)
 randoSeedEntry = Entry(SeedFrame, width=25)
 randoSeedEntry.pack(side='left', padx=2)
-RandomizeButton = Button(text='Randomize', command=Randomize)
-RandomizeButton.pack(pady=10) 
+
+RandomizeParent = Frame(root, background=Red)
+RandomizeParent.pack()
+RandomizeButton = Button(RandomizeParent,text='Randomize', command=Randomize)
+RandomizeButton.pack(pady=10, side='left') 
+randoDisplay = Label(RandomizeParent, text="", background=Red, anchor="e", foreground=White)
+randoDisplay.pack(side='right')
+ 
 
 EveryObjectToSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + CheckboxStates + OptionInputs)
 SavedOptions.loadData(EveryObjectToSave)
