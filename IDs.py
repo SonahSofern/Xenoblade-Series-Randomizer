@@ -1,8 +1,7 @@
 import Helper
 
 #HELPFUL VARIABLES
-AuxCores = Helper.inclRange(17001, 17424)# These are all aux cores in ITM_OrbEquip
-# AuxCores = Helper.inclRange(15001, 15406) These are all aux cores in ITM_Orb but missing some from ITM_OrbEquip so probably want to use these
+AuxCores = Helper.inclRange(17001, 17424),Helper.inclRange(15001, 15406) # These are all aux cores in ITM_OrbEquip
 WeaponChips = Helper.inclRange(10001, 10060)
 CoreCrystals = Helper.inclRange(45001,45057)
 Accessories = Helper.inclRange(1,687)
