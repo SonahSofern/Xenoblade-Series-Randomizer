@@ -243,64 +243,74 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs):
     random.shuffle(Area3LootIDs)
     random.shuffle(Area4LootIDs)
     AllAreaLootIDs = [Area1LootIDs, Area2LootIDs, Area3LootIDs, Area4LootIDs]
-    TBoxFiles = []
+    TBoxFiles = [[0,0], [0,0], [0,0], [0,0]] # this needs to be changed to a for loop if i change the number of race mode dungeons (append [0,0])
     FileStart = "./_internal/JsonOutputs/common_gmk/"
     FileEnd = "_FLD_TboxPop.json"
     StartingPreciousIDs = Helper.InclRange(25001, 25499)
     ExcludePreciousIDs = Helper.InclRange(25218, 25222) + [25305] + [25408] + [25450] + [25405] + [25406] + [25407] + Helper.InclRange(25249, 25300) # We are ok with replacing these, since they're in the pool of items to pull from anyways
     FinalPreciousIDs = [x for x in StartingPreciousIDs if x not in ExcludePreciousIDs] # We do not want to replace these, these are quest/key items
-    for i in range(0, len(ChosenIndices)): # Defines what files we want to target and what map ids in that file we want to target  
-        TBoxFiles.append(FileStart + AllMapIDs[ChosenIndices[i]][1] + FileEnd)
-    BoxestoRandomizePerMap = [0] * len(ChosenIndices)
+    for i in range(0, len(ChosenIndices) - 1): # Defines what files we want to target and what map ids in that file we want to target  
+        if (ChosenIndices[i] != 4) & (ChosenIndices[i] != 7):
+            TBoxFiles[i][0] = FileStart + AllMapIDs[ChosenIndices[i]][1] + FileEnd
+    BoxestoRandomizePerMap = [0] * (len(ChosenIndices) - 1)
     TBoxName = ""
+    for i in range(0, len(ChosenIndices)):
+        if ChosenIndices[i] == 4:
+            TBoxFiles[i][0] = "./_internal/JsonOutputs/common_gmk/ma10a_FLD_TboxPop.json"
+            TBoxFiles[i][1] = "./_internal/JsonOutputs/common_gmk/ma11a_FLD_TboxPop.json"
+        if ChosenIndices[i] == 7:
+            TBoxFiles[i][0] = "./_internal/JsonOutputs/common_gmk/ma17a_FLD_TboxPop.json"
+            TBoxFiles[i][1] = "./_internal/JsonOutputs/common_gmk/ma18a_FLD_TboxPop.json"
     for i in range(0, len(TBoxFiles)):
-        with open(TBoxFiles[i], 'r+', encoding='utf-8') as file:
-            data = json.load(file)
-            for row in data["rows"]:
-                TBoxName = row["name"]
-                if TBoxName[6] != "q": # We want to not randomize the quest related loot boxes
-                    BoxestoRandomizePerMap[i] = BoxestoRandomizePerMap[i] + 1
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2)
+        for l in range(0, len(TBoxFiles[i])):
+            if TBoxFiles[i][l] != 0:
+                with open(TBoxFiles[i][l], 'r+', encoding='utf-8') as file:
+                    data = json.load(file)
+                    for row in data["rows"]:
+                        TBoxName = row["name"]
+                        if TBoxName[5] != "q": # We want to not randomize the quest related loot boxes
+                            BoxestoRandomizePerMap[i] = BoxestoRandomizePerMap[i] + 1
+                    file.seek(0)
+                    file.truncate()
+                    json.dump(data, file, indent=2)
     ItemsPerBox = []
     for i in range(0, len(AllAreaLootIDs)):
         ItemsPerBox.append(len(AllAreaLootIDs[i])//BoxestoRandomizePerMap[i])
-        if ItemsPerBox > 8:
-            ItemsPerBox = 8
-        if ItemsPerBox < 3:
-            ItemsPerBox = 3
-            ItemtoChestDifference = BoxestoRandomizePerMap[i] - len(AllAreaLootIDs[i])
+        if ItemsPerBox[i] > 8:
+            ItemsPerBox[i] = 8
+        if ItemsPerBox[i] < 3:
+            ItemsPerBox[i] = 3
+            ItemtoChestDifference = 3 * BoxestoRandomizePerMap[i] - len(AllAreaLootIDs[i])
             for j in range(0, ItemtoChestDifference):
                 AllAreaLootIDs[i].append(random.choice([25405, 25405, 25405, 25406, 25406, 25407])) # fill the rest with WP 
             random.shuffle(AllAreaLootIDs[i])
     k = 0
     for i in range(0, len(TBoxFiles)):
-        with open(TBoxFiles[i], 'r+', encoding='utf-8') as file:
-            data = json.load(file)
-            for row in data["rows"]:
-                if k > len(AllAreaLootIDs[i]): #If k ever exceeds the size of the loot ids we're shuffling, then we can stop going through the files
+        for l in range(0, len(TBoxFiles[i])):
+            if TBoxFiles[i][l] != 0:
+                with open(TBoxFiles[i][l], 'r+', encoding='utf-8') as file:
+                    data = json.load(file)
+                    for row in data["rows"]:
+                        if k > len(AllAreaLootIDs[i]): #If k ever exceeds the size of the loot ids we're shuffling, then we can stop going through the files
+                            file.seek(0)
+                            file.truncate()
+                            json.dump(data, file, indent=2) 
+                            break
+                        TBoxName = row["name"]
+                        if TBoxName[5] != "q": # We want to not randomize the quest related loot boxes
+                            for j in range(0, 8):
+                                if row[f"itm{j+1}ID"] not in FinalPreciousIDs:
+                                    row[f"itm{j+1}ID"] = 0
+                                    row[f"itm{j+1}Num"] = 0
+                                    row[f"itm{j+1}Per"] = 0 # don't know if this is used at all, but better safe than sorry
+                            for h in range(0, ItemsPerBox[i]):
+                                if row[f"itm{h+1}ID"] not in FinalPreciousIDs:
+                                    row[f"itm{h+1}ID"] = AllAreaLootIDs[i][k]
+                                    row[f"itm{h+1}Num"] = 1
+                                    k = k + 1
                     file.seek(0)
                     file.truncate()
                     json.dump(data, file, indent=2) 
-                    break
-                TBoxName = row["name"]
-                if TBoxName[6] != "q": # We want to not randomize the quest related loot boxes
-                    for j in range(0, 8):
-                        if row[f"itm{j+1}ID"] == 0:
-                            break
-                        if row[f"itm{j+1}ID"] not in FinalPreciousIDs:
-                            row[f"itm{j+1}ID"] = 0
-                            row[f"itm{j+1}Num"] = 0
-                            row[f"itm{j+1}Per"] = 0 # don't know if this is used at all, but better safe than sorry
-                    for j in range(0, ItemsPerBox):
-                        if row[f"itm{j+1}ID"] not in FinalPreciousIDs:
-                            row[f"itm{j+1}ID"] = AllAreaLootIDs[i][k]
-                            row[f"itm{j+1}Num"] = 1
-                            k = k + 1
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2) 
 
 def ShyniniSaveUs(): # Just in case we don't get good blade field skills, we can rely on Shynini to always sell core crystals :D This does not work currently
     with open("./_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as file: 
