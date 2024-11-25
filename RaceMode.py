@@ -168,7 +168,7 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
             file.truncate()
             json.dump(data, file, indent=2)
             NGPlusBladeIDs = DetermineNGPlusBladeCrystalIDs(CheckboxList, CheckboxStates)
-            #RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs)
+            RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs)
             LessGrinding()
             ShyniniSaveUs()
             ShopRemovals()
