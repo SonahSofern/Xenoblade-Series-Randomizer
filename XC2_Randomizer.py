@@ -229,7 +229,7 @@ def Options():
     OptionsRunDict.append(lambda: TestingStuff.Beta(CheckboxList, CheckboxStates))
     OptionsRunDict.append(lambda: TutorialShortening.ShortenedTutorial(CheckboxList, CheckboxStates))
 
-GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", Checkbutton, [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[])], ["Accessories", Accessories,"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials]) 
+GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", Checkbutton, [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[0])], ["Accessories", Accessories,"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials]) 
 for name, option in OptionsRunDict.items():
             print(name)
 

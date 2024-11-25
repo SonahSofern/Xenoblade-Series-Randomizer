@@ -1,4 +1,4 @@
-import json, random, Helper, os
+import json, random, os
 
 def ChangeJSON(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacements, InvalidTargetIDs = []): # make this a function to reuse, check the settings ot see if we even do this
     for name in Filename:
