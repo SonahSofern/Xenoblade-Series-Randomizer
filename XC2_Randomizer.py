@@ -21,7 +21,6 @@ OptionsRunDict = {}
 OptionInputs = []
 rowIncrement = 0
 CheckBoxFunctions = []
-
 MaxWidth = 1000
 
 # The Notebook
@@ -140,7 +139,7 @@ def GenOption(optionName, parentTab, description, optionType, commandList = [], 
         box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
         print(len(subOptionName_subCommandList[2*i]))
         OptionsRunDict[subOptionName_subCommandList[2*i]]={
-        "name": subOptionName_subCommandList[2*i],
+        "name": optionName,
         "optionType": var,
         "commandList": subOptionName_subCommandList[2*i+1],
         }        
@@ -231,6 +230,8 @@ def Options():
     OptionsRunDict.append(lambda: TutorialShortening.ShortenedTutorial(CheckboxList, CheckboxStates))
 
 GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", Checkbutton, [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[])], ["Accessories", Accessories,"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials]) 
+for name, option in OptionsRunDict.items():
+            print(name)
 
 def Randomize():
     def ThreadedRandomize():
@@ -245,6 +246,7 @@ def Randomize():
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
 
         for name, option in OptionsRunDict.items():
+            print(name)
             if (option["optionType"].get()):
                 randoDisplay.config(text=f"Randomizing {name}")
                 for command in option["commandList"]:
