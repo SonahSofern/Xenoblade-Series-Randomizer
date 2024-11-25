@@ -26,9 +26,9 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
         
-        AreaList1 = [41] #68
-        AreaList2 = [99] # 152 
-        AreaList3 = [133] #125, 168
+        AreaList1 = [68] # 41
+        AreaList2 = [152] #99
+        AreaList3 = [125] #133, 168
         AreaList4 = [175, 187]
 
         AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
@@ -176,6 +176,7 @@ def RaceModeChanging(CheckboxList, CheckboxStates):
             DLCItemChanges()
             DifficultyChanges()
             MenuChanges()
+            ReduceBladeReqTrustVals()
 
 def LessGrinding(): #adjusting level based exp gains, and debuffs while underleveled to make it less grindy
     with open("./_internal/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: 
@@ -378,7 +379,7 @@ def DifficultyChanges(): # Makes Easy difficulty the same as Normal
         file.truncate()
         json.dump(data, file, indent=2)
 
-def MenuChanges(): # Adjusts the menu text
+def MenuChanges(): # Adjusts the menu text # Ben still needs to push fix
     fixlater = "Add Seed Hash Here"
     with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r+', encoding='utf-8') as file: #edits DLC items
         data = json.load(file)
@@ -391,6 +392,7 @@ def MenuChanges(): # Adjusts the menu text
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
+    
     """ with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r', encoding='utf-8') as file: #edits DLC items
         lines = file.readlines()
 
@@ -399,3 +401,12 @@ def MenuChanges(): # Adjusts the menu text
         for i, line in enumerate(lines):
             if i in DelNGButton:
                 file.write(line) """
+    
+def ReduceBladeReqTrustVals(): # Sets required Trust Values to 0.5x the vanilla values
+    with open("./_internal/JsonOutputs/common/FLD_ConditionIdea.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            row["TrustPoint"] = int(0.5 * row["TrustPoint"])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
