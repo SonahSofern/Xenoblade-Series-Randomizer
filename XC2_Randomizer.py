@@ -177,70 +177,69 @@ def Options():
     GenOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, ArtDebuffs + ArtBuffs, InvalidTargetIDs=AutoAttacks)], ["Doom", [21]])
     # GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", ["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20)) Nothing wrong with this just kinda niche/silly
     GenOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", [lambda: JSONParser.ChangeJSON(["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees)])
-    GenOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactions)], InvalidTargetIDs=AutoAttacks) # we want id numbers no edit the 1/6 react stuff
-    GenOption("Driver Animation Speed", TabDrivers, "Randomizes animation speeds", ["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.inclRange(0,255), Helper.inclRange(50,255), InvalidTargetIDs=AutoAttacks)
+    GenOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactions, InvalidTargetIDs=AutoAttacks)]) # we want id numbers no edit the 1/6 react stuff
+    GenOption("Driver Animation Speed", TabDrivers, "Randomizes animation speeds", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.inclRange(0,255), Helper.inclRange(50,255), InvalidTargetIDs=AutoAttacks)])
     #GenOption("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with",["common/CHR_Dr.json"], ["DefAcce"], AllValues, Accessories, ["Remove All Starting Accessories", Accessories] ) only problem is the button on of off changin the values we want
     
     # Blades
-    GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", ["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)
-    GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", ["common/BTL_Arts_Bl.json"], ["ArtsType"], [1, 2], [1,2])
-    GenOption("Blade Special Buttons", TabBlades, "Randomizes what button a special uses for its button challenge", ["common/MNU_BtnChallenge2.json"], Helper.StartsWith("BtnType", 1, 3), ButtonCombos, ButtonCombos)
-    GenOption("Blade Elements", TabBlades, "Randomizes what element a blade is", ["common/CHR_Bl.json"],["Atr"], Helper.inclRange(1,8), Helper.inclRange(1,8))
-    GenOption("Blade Battle Skills", TabBlades, "Randomizes blades battle (yellow) skill tree", ["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), BladeBattleSkills, BladeBattleSkills)
-    GenOption("Blade Green Skills", TabBlades, "Randomizes blades field (green) skill tree", ["common/CHR_Bl.json"], Helper.StartsWith("FSkill", 1, 3), BladeFieldSkills, BladeFieldSkills, ["Field Skill QOL", [1135]], InvalidTargetIDs=[1135])
-    # GenOption("Blade Specials", TabBlades, "Randomizes blades special (red) skill tree", ["common/CHR_Bl.json"], Helper.StartsWith("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials, BladeSpecials) Commenting out for initial launch I think this setting will put people off it sounds fun but animations no longer connect well on specials
-    GenOption("Blade Cooldowns", TabBlades, "Randomizes a blades cooldown", ["common/CHR_Bl.json"], ["CoolTime"], Helper.inclRange(1,1000), Helper.inclRange(1,1000))
-    GenOption("Blade Arts", TabBlades, "Randomizes your blade's arts", ["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), ArtBuffs, ArtBuffs)
-    GenOption("Blade Aux Core Slots", TabBlades, "Randomizes how many Aux Core slots a Blade gets", ["common/CHR_Bl.json"],["OrbNum"], Helper.inclRange(0,3), Helper.inclRange(0,3))
-    GenOption("Blade Names", TabBlades, "Randomizes the names of blades",["common/CHR_Bl.json"], ["Name"], Helper.inclRange(0,1000), BladeNames)
-    GenOption("Blade Defenses", TabBlades, "Randomizes Blade Physical and Ether Defense", ["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.inclRange(0,100), BladeDefenseDistribution)
-    GenOption("Blade Mods", TabBlades, "Randomizes Blade Stat Modifiers", ["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.inclRange(0,100), BladeModDistribution)
-    GenOption("Blade Scale", TabBlades, "Randomizes the size of Blades", ["common/CHR_Bl.json"], ["Scale", "WpnScale"], AllValues, Helper.inclRange(1,250) + [1000,16000]) # Make sure these work for common blades
+    GenOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)])
+    GenOption("Blade Special Damage Types", TabBlades, "Randomizes whether a blade's special deals Physical Damage or Ether Damage", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Bl.json"], ["ArtsType"], [1, 2], [1,2])])
+    GenOption("Blade Special Buttons", TabBlades, "Randomizes what button a special uses for its button challenge", [lambda: JSONParser.ChangeJSON(["common/MNU_BtnChallenge2.json"], Helper.StartsWith("BtnType", 1, 3), ButtonCombos, ButtonCombos)])
+    GenOption("Blade Elements", TabBlades, "Randomizes what element a blade is", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"],["Atr"], Helper.inclRange(1,8), Helper.inclRange(1,8))])
+    GenOption("Blade Battle Skills", TabBlades, "Randomizes blades battle (yellow) skill tree", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), BladeBattleSkills, BladeBattleSkills)])
+    GenOption("Blade Green Skills", TabBlades, "Randomizes blades field (green) skill tree", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], Helper.StartsWith("FSkill", 1, 3), BladeFieldSkills, BladeFieldSkills, ["Field Skill QOL", [1135]], InvalidTargetIDs=[1135])])
+    # GenOption("Blade Specials", TabBlades, "Randomizes blades special (red) skill tree", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], Helper.StartsWith("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials, BladeSpecials)]) Commenting out for initial launch I think this setting will put people off it sounds fun but animations no longer connect well on specials
+    GenOption("Blade Cooldowns", TabBlades, "Randomizes a blades cooldown", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["CoolTime"], Helper.inclRange(1,1000), Helper.inclRange(1,1000))])
+    GenOption("Blade Arts", TabBlades, "Randomizes your blade's arts", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), ArtBuffs, ArtBuffs)])
+    GenOption("Blade Aux Core Slots", TabBlades, "Randomizes how many Aux Core slots a Blade gets", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"],["OrbNum"], Helper.inclRange(0,3), Helper.inclRange(0,3))])
+    GenOption("Blade Names", TabBlades, "Randomizes the names of blades", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["Name"], Helper.inclRange(0,1000), BladeNames)])
+    GenOption("Blade Defenses", TabBlades, "Randomizes Blade Physical and Ether Defense", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.inclRange(0,100), BladeDefenseDistribution)])
+    GenOption("Blade Mods", TabBlades, "Randomizes Blade Stat Modifiers", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.inclRange(0,100), BladeModDistribution)])
+    GenOption("Blade Scale", TabBlades, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["Scale", "WpnScale"], AllValues, Helper.inclRange(1,250) + [1000,16000])]) # Make sure these work for common blades
     
     # Enemies
-    GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", ["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips)
-    GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", ["common/CHR_EnArrange.json"], ["Scale"], Helper.inclRange(0, 1000), Helper.inclRange(1, 200) + Helper.inclRange(990,1000))
-    GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies, ["Story Bosses", [1998], "Quest Enemies", [1999], "Unique Monsters", [2000], "Superbosses", [2001], "Normal Enemies", [2002], "Mix Enemies Between Types", [2003], "Keep All Enemy Levels", [2004], "Keep Quest Enemy Levels", [2005], "Keep Story Boss Levels", [2006], "Core Crystal Changes", [2007], "Arts Cancel on Tier 1", [2008], "Balanced Random Skill Trees", [2009], "Shorter Tutorial", [2010], "Beta Stuff", [2011]], optionType=[Checkbutton])
-    GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", ["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.inclRange(0,100), Helper.inclRange(0,100) + Helper.inclRange(250,255), optionType=[Checkbutton])
+    GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", [lambda: JSONParser.ChangeJSON(["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips)])
+    GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSON(["common/CHR_EnArrange.json"], ["Scale"], Helper.inclRange(0, 1000), Helper.inclRange(1, 200) + Helper.inclRange(990,1000))])
+    # GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies, ["Story Bosses", [1998], "Quest Enemies", [1999], "Unique Monsters", [2000], "Superbosses", [2001], "Normal Enemies", [2002], "Mix Enemies Between Types", [2003], "Keep All Enemy Levels", [2004], "Keep Quest Enemy Levels", [2005], "Keep Story Boss Levels", [2006], "Core Crystal Changes", [2007], "Arts Cancel on Tier 1", [2008], "Balanced Random Skill Trees", [2009], "Shorter Tutorial", [2010], "Beta Stuff", [2011]], optionType=[Checkbutton])
+    GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", [lambda: JSONParser.ChangeJSON(["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.inclRange(0,100), Helper.inclRange(0,100) + Helper.inclRange(250,255))])
     #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30))
     
     # Misc
-    GenOption("Music", TabMisc, "Randomizes what music plays where", ["common/RSC_BgmCondition.json"], ["BgmIDA", "BgmIDB", "BgmIDC", "BgmIDD"], BackgroundMusic, BackgroundMusic) # need to change title screen music
-    GenOption("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.inclRange(0,3721), Helper.inclRange(2001,3721))
-    GenOption("NPCs Size", TabMisc, "Randomizes the size of NPCs", ["common/RSC_NpcList.json"], ["Scale"], Helper.inclRange(1,100), Helper.inclRange(1,250))
+    GenOption("Music", TabMisc, "Randomizes what music plays where", [lambda: JSONParser.ChangeJSON(["common/RSC_BgmCondition.json"], ["BgmIDA", "BgmIDB", "BgmIDC", "BgmIDD"], BackgroundMusic, BackgroundMusic)]) # need to change title screen music
+    GenOption("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.inclRange(0,3721), Helper.inclRange(2001,3721))])
+    GenOption("NPCs Size", TabMisc, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSON(["common/RSC_NpcList.json"], ["Scale"], Helper.inclRange(1,100), Helper.inclRange(1,250))])
     #GenOption("Core Crystal Changes", TabMisc, "Removes Gacha System", ["common/ITM_CrystalList.json"], ["BladeID"],)
     #GenOption("Funny Faces", TabMisc, "Randomizes Facial Expressions", ["common/EVT_eyetype.json"], ["$id"], Helper.inclRange(0,15), Helper.inclRange(0,15)) # doesnt work yet
-    GenOption("Menu Colors", TabMisc, "Randomizes Colors in the UI", ["common/MNU_ColorList.json"], ["col_r", "col_g", "col_b"], Helper.inclRange(0,255), Helper.inclRange(0,0))
+    GenOption("Menu Colors", TabMisc, "Randomizes Colors in the UI", [lambda: JSONParser.ChangeJSON(["common/MNU_ColorList.json"], ["col_r", "col_g", "col_b"], Helper.inclRange(0,255), Helper.inclRange(0,0))])
     # this changed animations on text but not in a good way:
     # GenOption("Text Effects", TabMisc, "Randomizes text movement", ["common/MNU_ResMotion.json"], ["$id"], Helper.inclRange(1,39), Helper.inclRange(1,39))
     # EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_ResMotion.json", ["file"], "sample") 
     
     # QOL
-    GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in the game", optionType=[Checkbutton]) #common_ms/menu_ms
-    GenOption("Running Speed", TabQOL, "Max out your starting Run Speed", optionType=[Checkbutton])
+    GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in the game") #common_ms/menu_ms
+    GenOption("Running Speed", TabQOL, "Max out your starting Run Speed")
     #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
     
     # Cosmetics
-    GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultRex], [], RexCosmetics, optionType=[Checkbutton])
-    GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPyra], [], PyraCosmetics, optionType=[Checkbutton])
-    GenOption("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultMythra], [], MythraCosmetics, optionType=[Checkbutton])
-    GenOption("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultDriverNia], [], NiaDriverCosmetics, optionType=[Checkbutton])
-    GenOption("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBladeNia], [], NiaBladeCosmetics, optionType=[Checkbutton])
-    GenOption("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultDromarch], [], DromarchCosmetics, optionType=[Checkbutton])
-    GenOption("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultTora], [], ToraCosmetics, optionType=[Checkbutton])
-    GenOption("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultMorag], [], MoragCosmetics, optionType=[Checkbutton])
-    GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBrighid], [], BrighidCosmetics, optionType=[Checkbutton])
-    GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultZeke], [], ZekeCosmetics, optionType=[Checkbutton])
-    GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPandoria], [], PandoriaCosmetics, optionType=[Checkbutton])
+    # GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultRex], [], RexCosmetics, optionType=[Checkbutton])
+    # GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPyra], [], PyraCosmetics, optionType=[Checkbutton])
+    # GenOption("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultMythra], [], MythraCosmetics, optionType=[Checkbutton])
+    # GenOption("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultDriverNia], [], NiaDriverCosmetics, optionType=[Checkbutton])
+    # GenOption("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBladeNia], [], NiaBladeCosmetics, optionType=[Checkbutton])
+    # GenOption("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultDromarch], [], DromarchCosmetics, optionType=[Checkbutton])
+    # GenOption("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultTora], [], ToraCosmetics, optionType=[Checkbutton])
+    # GenOption("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultMorag], [], MoragCosmetics, optionType=[Checkbutton])
+    # GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBrighid], [], BrighidCosmetics, optionType=[Checkbutton])
+    # GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultZeke], [], ZekeCosmetics, optionType=[Checkbutton])
+    # GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPandoria], [], PandoriaCosmetics, optionType=[Checkbutton])
     
     # Logic
-    OptionsRunDict.append(lambda: EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates))
-    OptionsRunDict.append(lambda: SkillTreeAdjustments.BalancingSkillTreeRando(CheckboxList, CheckboxStates))
-    OptionsRunDict.append(lambda: CoreCrystalAdjustments.CoreCrystalChanges(CheckboxList, CheckboxStates))
-    OptionsRunDict.append(lambda: TestingStuff.Beta(CheckboxList, CheckboxStates))
-    OptionsRunDict.append(lambda: TutorialShortening.ShortenedTutorial(CheckboxList, CheckboxStates))
+    # OptionsRunDict.append(lambda: EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates))
+    # OptionsRunDict.append(lambda: SkillTreeAdjustments.BalancingSkillTreeRando(CheckboxList, CheckboxStates))
+    # OptionsRunDict.append(lambda: CoreCrystalAdjustments.CoreCrystalChanges(CheckboxList, CheckboxStates))
+    # OptionsRunDict.append(lambda: TestingStuff.Beta(CheckboxList, CheckboxStates))
+    # OptionsRunDict.append(lambda: TutorialShortening.ShortenedTutorial(CheckboxList, CheckboxStates))
 
-GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[0])], ["Accessories", Accessories ,"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials])
 
 def Randomize():
     def ThreadedRandomize():
@@ -295,7 +294,7 @@ def GenRandomSeed():
     randoSeedEntry.delete(0, END)
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
-# Options()
+Options()
 
 
 bdatcommonFrame = Frame(root, background=Red)
