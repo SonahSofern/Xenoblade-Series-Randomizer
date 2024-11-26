@@ -311,7 +311,16 @@ RandomizeButton = Button(text='Randomize', command=Randomize)
 RandomizeButton.pack(pady=10) 
 randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=White)
 
-EveryObjectToSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + CheckboxStates + OptionInputs)
+# Creates Save Object for saveData function
+def optionsToSave():
+    optionList = []
+    for option in OptionsRunDict.values():
+        optionList.append(option["optionTypeVal"])
+        for subOption in option["subOptionObjects"]:
+            optionList.append(subOption["subOptionTypeVal"])
+    return optionList
+
+EveryObjectToSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + optionsToSave())
 SavedOptions.loadData(EveryObjectToSave)
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSave), root.destroy()))
