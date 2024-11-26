@@ -229,7 +229,8 @@ def Options():
     OptionsRunDict.append(lambda: TestingStuff.Beta(CheckboxList, CheckboxStates))
     OptionsRunDict.append(lambda: TutorialShortening.ShortenedTutorial(CheckboxList, CheckboxStates))
 
-GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", Checkbutton, [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[0])], ["Accessories", Accessories,"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials]) 
+GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", Checkbutton, [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[])], ["Accessories", [lambda: JSONParser.ValidReplacements.extend(Accessories)],"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials]) 
+
 for name, option in OptionsRunDict.items():
             print(name)
 
@@ -238,6 +239,9 @@ def Randomize():
         global OptionsRunDict
         RandomizeButton.config(state=DISABLED)
 
+        randoProgressDisplay.pack()
+        randoProgressDisplay.config(text="Unpacking BDATs")
+
         random.seed(randoSeedEntry.get())
         print("Seed: " + randoSeedEntry.get())
 
@@ -245,18 +249,24 @@ def Randomize():
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty")
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
 
+        # Runs all randomization
         for name, option in OptionsRunDict.items():
-            randoProgressDisplay.pack()
             if (option["optionType"].get()):
                 randoProgressDisplay.config(text=f"Randomizing {name}")
                 for command in option["commandList"]:
                     command()
 
-        randoProgressDisplay.pack_forget()
+
+        randoProgressDisplay.config(text="Packing BDATs")
 
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
+
+        # Outputs common_ms in the correct file structure
         os.makedirs(f"{outDirEntry.get()}/gb", exist_ok=True)
         shutil.move(f"{outDirEntry.get()}/common_ms.bdat", f"{outDirEntry.get()}/gb/common_ms.bdat")
+
+        randoProgressDisplay.config(text="")
+        randoProgressDisplay.pack_forget()
 
 
         RandomizeButton.config(state=NORMAL)
@@ -265,7 +275,6 @@ def Randomize():
     threading.Thread(target=ThreadedRandomize).start()
     
 def GenRandomSeed():
-    print(Helper.InsertHelper(3,1,8,"itmID", ""))
     randoSeedEntry.delete(0, END)
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
@@ -291,10 +300,9 @@ seedDesc.pack(side='left', padx=2, pady=2)
 randoSeedEntry = Entry(SeedFrame, width=25)
 randoSeedEntry.pack(side='left', padx=2)
 
-RandomizeParent = Frame(root, background=Red)
-RandomizeParent.pack()
-RandomizeButton = Button(RandomizeParent,text='Randomize', command=Randomize)
-RandomizeButton.pack(pady=10, side='left') 
+
+RandomizeButton = Button(text='Randomize', command=Randomize)
+RandomizeButton.pack(pady=10) 
 randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=White)
 
 EveryObjectToSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + CheckboxStates + OptionInputs)

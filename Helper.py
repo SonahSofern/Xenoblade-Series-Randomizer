@@ -65,8 +65,9 @@ def FindSubOptionValuesList(filePath, dictName, subDictName, subDictValue, retur
 
 def DirectoryChoice(FileDescription, EntryField):
     Directory = filedialog.askdirectory(title=FileDescription)
-    EntryField.delete(0, tk.END)
-    EntryField.insert(0, Directory)
+    if (Directory != ""):
+        EntryField.delete(0, tk.END)
+        EntryField.insert(0, Directory)
 
 def OptionCarveouts(ValidValuesList, ToggleableIndexValues, stateOfButton = None):
     # print("Updated Valid Values: " + str(stateOfButton))
