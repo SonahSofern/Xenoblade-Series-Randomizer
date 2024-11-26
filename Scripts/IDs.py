@@ -1,4 +1,4 @@
-import Scripts.Helper as Helper
+import scripts.Helper as Helper
 
 #HELPFUL VARIABLES
 AuxCores = Helper.InclRange(17001, 17424) + Helper.InclRange(15001, 15406) # These are all aux cores in ITM_OrbEquip and ITM_Orb

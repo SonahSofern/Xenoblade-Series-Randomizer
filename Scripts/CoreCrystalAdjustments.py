@@ -1,7 +1,7 @@
-import Scripts.EnemyRandoLogic as EnemyRandoLogic
+import scripts.EnemyRandoLogic as EnemyRandoLogic
 import json
 import math
-import Scripts.Helper as Helper
+import scripts.Helper as Helper
 import random
 
 FLDSkillMaxLv = [3, 5, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 3, 5, 3, 3, 3, 5, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 5, 3, 3, 5, 3, 5, 3, 3, 5, 5, 5, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 5, 5]

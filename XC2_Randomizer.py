@@ -1,10 +1,10 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, types
 from tkinter import *
-import Scripts.EnemyRandoLogic as EnemyRandoLogic, Scripts.SavedOptions as SavedOptions, Scripts.SeedNames as SeedNames, Scripts.Helper as Helper, Scripts.JSONParser as JSONParser, Scripts.SkillTreeAdjustments as SkillTreeAdjustments, Scripts.CoreCrystalAdjustments as CoreCrystalAdjustments, Scripts.TestingStuff as TestingStuff, Scripts.TutorialShortening as TutorialShortening, Scripts.RaceMode as RaceMode
-from Scripts.IDs import *
-from Scripts.Cosmetics import *
-from Scripts.UI_Colors import *
+import scripts.EnemyRandoLogic as EnemyRandoLogic, scripts.SavedOptions as SavedOptions, scripts.SeedNames as SeedNames, scripts.Helper as Helper, scripts.JSONParser as JSONParser, scripts.SkillTreeAdjustments as SkillTreeAdjustments, scripts.CoreCrystalAdjustments as CoreCrystalAdjustments, scripts.TestingStuff as TestingStuff, scripts.TutorialShortening as TutorialShortening, scripts.RaceMode as RaceMode
+from scripts.IDs import *
+from scripts.Cosmetics import *
+from scripts.UI_Colors import *
 
 
 root = Tk()
