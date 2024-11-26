@@ -86,7 +86,9 @@ MainWindow.add(TabQOLOuter, text = 'Quality of Life')
 MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
-
+def EnableWholeOption():
+    # Add or remove 
+    return
 def GenOption(optionName, parentTab, description, optionType, commandList = [], subOptionName_subCommandList = []):   
     global rowIncrement
     global OptionsRunDict
@@ -115,7 +117,7 @@ def GenOption(optionName, parentTab, description, optionType, commandList = [], 
         optionType = var
     elif (optionType == Checkbutton):
         var = BooleanVar()
-        optionTypeObj = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=description)
+        optionTypeObj = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=description, command= EnableWholeOption())
         CheckboxStates.append(var)
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionType = var
@@ -132,23 +134,24 @@ def GenOption(optionName, parentTab, description, optionType, commandList = [], 
     spaceFill = Label(optionPanel, text="", background=OptionColor, width=MaxWidth, anchor='w')
     spaceFill.grid(row=rowIncrement, column=100, sticky="sw")
 
+    # Create Main Option
+    OptionsRunDict[optionName]={
+        "name": optionName,
+        "optionTypeVal": optionType,
+        "commandList": commandList,
+        "subOptionObjects": [],
+    }    
     # Create Suboptions
     for i in range((len(subOptionName_subCommandList))//2):
         var = BooleanVar()
-        box = Checkbutton(optionPanel, background=OptionColor, text=subOptionName_subCommandList[2*i], variable=var, highlightthickness=0)
-        box.grid(row=rowIncrement+i+1, column=0, sticky="sw")
+        checkBox = Checkbutton(optionPanel, background=OptionColor, text=subOptionName_subCommandList[2*i], variable=var, highlightthickness=0)
+        checkBox.grid(row=rowIncrement+i+1, column=0, sticky="sw")
         print(len(subOptionName_subCommandList[2*i]))
-        OptionsRunDict[subOptionName_subCommandList[2*i]]={
-        "name": optionName,
-        "optionType": var,
-        "commandList": subOptionName_subCommandList[2*i+1],
-        }        
-
-    OptionsRunDict[optionName]={
-        "name": optionName,
-        "optionType": optionType,
-        "commandList": commandList    
-    }
+        OptionsRunDict[optionName]["subOptionObjects"].append({
+        "subName": optionName,
+        "subOptionTypeVal": var,
+        "subCommandList": subOptionName_subCommandList[2*i+1],
+        })
 
 
     rowIncrement += 1
@@ -229,10 +232,7 @@ def Options():
     OptionsRunDict.append(lambda: TestingStuff.Beta(CheckboxList, CheckboxStates))
     OptionsRunDict.append(lambda: TutorialShortening.ShortenedTutorial(CheckboxList, CheckboxStates))
 
-GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", Checkbutton, [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[])], ["Accessories", [lambda: JSONParser.ValidReplacements.extend(Accessories)],"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials]) 
-
-for name, option in OptionsRunDict.items():
-            print(name)
+GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", Checkbutton, [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[0])], ["Accessories", [lambda: JSONParser.ValidReplacements.extend(Accessories)],"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials])
 
 def Randomize():
     def ThreadedRandomize():
@@ -250,9 +250,15 @@ def Randomize():
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
 
         # Runs all randomization
-        for name, option in OptionsRunDict.items():
-            if (option["optionType"].get()):
-                randoProgressDisplay.config(text=f"Randomizing {name}")
+        for option in OptionsRunDict.values():
+            if (option["optionTypeVal"].get()): # checks main option input
+                for subOption in option["subOptionObjects"]:
+                    if (subOption["subOptionTypeVal"].get()): # checks subOption input
+                        for subCommand in subOption["subCommandList"]:
+                            print(subCommand)
+                            subCommand()
+
+                randoProgressDisplay.config(text=f"Randomizing {option['name']}")
                 for command in option["commandList"]:
                     command()
 

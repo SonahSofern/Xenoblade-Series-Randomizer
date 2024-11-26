@@ -18,7 +18,7 @@ def ChangeJSON(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacement
             data = json.load(file)
             for item in data['rows']:
                 if not item["$id"] in InvalidTargetIDs:
-                    for key in item.items():
+                    for key in item:
                         if any((key == keyWord) for keyWord in keyWords):
                             if (item[key] in rangeofValuesToReplace):
                                 item[key] = random.choice(rangeValidReplacements)
