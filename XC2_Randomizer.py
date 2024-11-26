@@ -1,5 +1,5 @@
 from tkinter import PhotoImage, ttk
-import random, subprocess, shutil, os, threading
+import random, subprocess, shutil, os, threading, types
 from tkinter import *
 import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, TutorialShortening
 from IDs import *
@@ -144,10 +144,18 @@ def GenOption(optionName, parentTab, description, optionType, commandList = [], 
         checkBox = Checkbutton(optionPanel, background=OptionColor, text=subOptionName_subCommandList[2*i], variable=var, highlightthickness=0)
         checkBox.grid(row=rowIncrement+i+1, column=0, sticky="sw")
         print(len(subOptionName_subCommandList[2*i]))
+
+        # Default Command if you dont provide a lambda command for a suboption (made so i dont have to write a million lambda statements)
+        if not isinstance(subOptionName_subCommandList[2*i+1][0], types.LambdaType):
+            autoCommand = [lambda: JSONParser.ValidReplacements.extend(subOptionName_subCommandList[2*i+1])]
+        else:
+            autoCommand = subOptionName_subCommandList[2*i+1]
+
+
         OptionsRunDict[optionName]["subOptionObjects"].append({
         "subName": optionName,
         "subOptionTypeVal": var,
-        "subCommandList": subOptionName_subCommandList[2*i+1],
+        "subCommandList": autoCommand,
         })
 
 
@@ -229,7 +237,7 @@ def Options():
     OptionsRunDict.append(lambda: TestingStuff.Beta(CheckboxList, CheckboxStates))
     OptionsRunDict.append(lambda: TutorialShortening.ShortenedTutorial(CheckboxList, CheckboxStates))
 
-GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", Checkbutton, [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[0])], ["Accessories", [lambda: JSONParser.ValidReplacements.extend(Accessories)],"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials])
+GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", Checkbutton, [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[0])], ["Accessories", Accessories ,"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials])
 
 def Randomize():
     def ThreadedRandomize():
