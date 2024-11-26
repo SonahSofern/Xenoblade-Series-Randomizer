@@ -86,9 +86,6 @@ MainWindow.add(TabQOLOuter, text = 'Quality of Life')
 MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
-def EnableWholeOption():
-    # Add or remove 
-    return
 def GenOption(optionName, parentTab, description, optionType, commandList = [], subOptionName_subCommandList = []):   
     global rowIncrement
     global OptionsRunDict
@@ -117,7 +114,7 @@ def GenOption(optionName, parentTab, description, optionType, commandList = [], 
         optionType = var
     elif (optionType == Checkbutton):
         var = BooleanVar()
-        optionTypeObj = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=description, command= EnableWholeOption())
+        optionTypeObj = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=description)
         CheckboxStates.append(var)
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionType = var
@@ -250,17 +247,7 @@ def Randomize():
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
 
         # Runs all randomization
-        for option in OptionsRunDict.values():
-            if (option["optionTypeVal"].get()): # checks main option input
-                for subOption in option["subOptionObjects"]:
-                    if (subOption["subOptionTypeVal"].get()): # checks subOption input
-                        for subCommand in subOption["subCommandList"]:
-                            print(subCommand)
-                            subCommand()
-
-                randoProgressDisplay.config(text=f"Randomizing {option['name']}")
-                for command in option["commandList"]:
-                    command()
+        RunOptions()
 
 
         randoProgressDisplay.config(text="Packing BDATs")
@@ -279,7 +266,20 @@ def Randomize():
         print("Done")
 
     threading.Thread(target=ThreadedRandomize).start()
-    
+
+def RunOptions():
+        for option in OptionsRunDict.values():
+            if (option["optionTypeVal"].get()): # checks main option input
+                for subOption in option["subOptionObjects"]:
+                    if (subOption["subOptionTypeVal"].get()): # checks subOption input
+                        for subCommand in subOption["subCommandList"]:
+                            print(subCommand)
+                            subCommand()
+
+                randoProgressDisplay.config(text=f"Randomizing {option['name']}")
+                for command in option["commandList"]:
+                    command()
+ 
 def GenRandomSeed():
     randoSeedEntry.delete(0, END)
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
@@ -306,21 +306,11 @@ seedDesc.pack(side='left', padx=2, pady=2)
 randoSeedEntry = Entry(SeedFrame, width=25)
 randoSeedEntry.pack(side='left', padx=2)
 
-
 RandomizeButton = Button(text='Randomize', command=Randomize)
 RandomizeButton.pack(pady=10) 
 randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=White)
 
-# Creates Save Object for saveData function
-def optionsToSave():
-    optionList = []
-    for option in OptionsRunDict.values():
-        optionList.append(option["optionTypeVal"])
-        for subOption in option["subOptionObjects"]:
-            optionList.append(subOption["subOptionTypeVal"])
-    return optionList
-
-EveryObjectToSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + optionsToSave())
+EveryObjectToSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] +  [option["optionTypeVal"] for option in OptionsRunDict.values()] + [subOption["subOptionTypeVal"] for option in OptionsRunDict.values() for subOption in option["subOptionObjects"]])
 SavedOptions.loadData(EveryObjectToSave)
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSave), root.destroy()))
