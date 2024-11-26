@@ -1,4 +1,4 @@
-import Helper, random, json
+import Scripts.Helper as Helper, random, json
 
 DriverSkillTreeIDs = Helper.InclRange(1,270)
 

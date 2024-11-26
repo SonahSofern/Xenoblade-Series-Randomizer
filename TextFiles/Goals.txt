@@ -1,0 +1,9 @@
+ Make option sliders in my UI for the in game option sliders
+
+Clean up code make readable and fast
+
+ Fix cosmetics
+
+ Make Readme
+
+ 

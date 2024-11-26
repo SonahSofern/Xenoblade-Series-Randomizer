@@ -1,5 +1,5 @@
 import JSONParser
-import Helper
+import Scripts.Helper as Helper
 
 DriverSkillTrees = Helper.InclRange(1,270)
 

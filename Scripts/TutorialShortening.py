@@ -1,5 +1,5 @@
 import json
-import EnemyRandoLogic
+import Scripts.EnemyRandoLogic as EnemyRandoLogic
 
 def ShortenedTutorial(CheckboxList, CheckboxStates):
     for j in range(0, len(CheckboxList)):
