@@ -1,10 +1,11 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, types
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, TutorialShortening
+import EnemyRandoLogic, SavedOptions, SeedNames, Helper, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, TutorialShortening, RaceMode
 from IDs import *
 from Cosmetics import *
 from UI_Colors import *
+
 
 root = Tk()
 root.title("Xenoblade Chronicles 2 Randomizer 0.1.0")
@@ -312,7 +313,6 @@ seedDesc = Button(SeedFrame, text="Seed", command=GenRandomSeed)
 seedDesc.pack(side='left', padx=2, pady=2)
 randoSeedEntry = Entry(SeedFrame, width=25)
 randoSeedEntry.pack(side='left', padx=2)
-
 RandomizeButton = Button(text='Randomize', command=Randomize)
 RandomizeButton.pack(pady=10) 
 randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=White)

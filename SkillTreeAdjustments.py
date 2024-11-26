@@ -1,6 +1,6 @@
 import Helper, random, json
 
-DriverSkillTreeIDs = Helper.inclRange(1,270)
+DriverSkillTreeIDs = Helper.InclRange(1,270)
 
 ArtsCancelIDsDLC = [194, 224, 253]
 ArtsCancelIDsBaseGame = [14, 43, 74, 102, 131, 165]
