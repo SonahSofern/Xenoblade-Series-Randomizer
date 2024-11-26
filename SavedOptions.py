@@ -19,4 +19,4 @@ def loadData(DataList):
                 else:
                     DataList[i].set(savedLines[i].strip())
     except:
-        print("Error Loading Save Data (Likely an option changed or was added)")
+        print("Error Loading Save Data (Likely an option was added or removed)")
