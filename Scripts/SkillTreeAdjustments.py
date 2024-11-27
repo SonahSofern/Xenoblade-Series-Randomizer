@@ -1,4 +1,4 @@
-import scripts.Helper as Helper, random, json
+import Helper, random, json
 
 DriverSkillTreeIDs = Helper.InclRange(1,270)
 
@@ -18,40 +18,40 @@ for i in range(0, 9):
 
 FilePaths = ["./_internal/JsonOutputs/common/BTL_Skill_Dr_Table01.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table02.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table03.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table04.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table05.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table06.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table19.json"]
 
-def BalancingSkillTreeRando(CheckboxList, CheckboxStates):
-    for j in range(0, len(CheckboxList)):
-        if CheckboxList[j] == "Balanced Random Skill Trees Box":
-            BalancedBox = j
-        if CheckboxList[j] == "Arts Cancel on Tier 1 Box":
-            ArtsCancelBox = j   
-    if CheckboxStates[BalancedBox].get() == True:
-        RandomOtherIDs = OtherIDs.copy()
-        random.shuffle(RandomOtherIDs)
-        for i in range(0, 9):
-            CurrList = []
-            for k in range(1, 26):
-                RandIndex = k + k * i
-                CurrList.append(RandomOtherIDs[RandIndex])
-                pass
-            CurrList += BaseSkillTreeLists[i]
+def BalancingSkillTreeRando(OptionsRunDict):
+    print("Making random and balanced Driver Skill Trees")
+    RandomOtherIDs = OtherIDs.copy()
+    random.shuffle(RandomOtherIDs)
+    for i in range(0, 9):
+        CurrList = []
+        for k in range(1, 26):
+            RandIndex = k + k * i
+            CurrList.append(RandomOtherIDs[RandIndex])
+            pass
+        CurrList += BaseSkillTreeLists[i]
+        random.shuffle(CurrList)
+        if i < 6:
+            CurrList.insert(0, ArtsCancelIDsBaseGame[i])
+        if i >= 6:
+            CurrList.insert(0, ArtsCancelIDsDLC[i-6])
+        if not OptionsRunDict["Arts Cancel on Tier 1"]["optionTypeVal"].get():
+            print("Shuffling in Arts Cancel")
             random.shuffle(CurrList)
-            if i < 6:
-                CurrList.insert(0, ArtsCancelIDsBaseGame[i])
-            if i >= 6:
-                CurrList.insert(0, ArtsCancelIDsDLC[i-6])
-            if CheckboxStates[ArtsCancelBox].get() == False:
-                random.shuffle(CurrList)
-            CurrFile = FilePaths[i]
-            with open(CurrFile, 'r+', encoding='utf-8') as file:
-                data = json.load(file)
-                for row in data["rows"]:
-                    row["SkillID"] = CurrList[row["$id"] - 1]
-                    if row["$id"] == 1 and CheckboxStates[ArtsCancelBox].get() == True:
-                        row["NeedSp"] = 0
-                file.seek(0)
-                file.truncate()
-                json.dump(data, file, indent=2, ensure_ascii=False)
-    if (CheckboxStates[BalancedBox].get() == False) and (CheckboxStates[ArtsCancelBox].get() == True): 
+        CurrFile = FilePaths[i]
+        with open(CurrFile, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for row in data["rows"]:
+                row["SkillID"] = CurrList[row["$id"] - 1]
+                if row["$id"] == 1 and OptionsRunDict["Arts Cancel on Tier 1"]["optionTypeVal"].get():
+                    print("Arts Cancel is Tier 1, and the trees are random.")
+                    row["NeedSp"] = 0
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
+def Tier1ArtsCancel(OptionsRunDict):
+    if not OptionsRunDict["Balanced Skill Trees"]["optionTypeVal"].get():
+        print("Putting Arts Cancel into Tier 1 (no random trees).")
         for i in range(0, 9):
             CurrFile = FilePaths[i]
             if i < 6:

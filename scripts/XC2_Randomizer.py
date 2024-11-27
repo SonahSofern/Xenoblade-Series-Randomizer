@@ -1,11 +1,10 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, types
 from tkinter import *
-import scripts.EnemyRandoLogic as EnemyRandoLogic, scripts.SavedOptions as SavedOptions, scripts.SeedNames as SeedNames, scripts.Helper as Helper, scripts.JSONParser as JSONParser, scripts.SkillTreeAdjustments as SkillTreeAdjustments, scripts.CoreCrystalAdjustments as CoreCrystalAdjustments, scripts.TestingStuff as TestingStuff, scripts.TutorialShortening as TutorialShortening, scripts.RaceMode as RaceMode
-from scripts.IDs import *
-from scripts.Cosmetics import *
-from scripts.UI_Colors import *
-
+import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, RaceMode, TutorialShortening
+from IDs import *
+from Cosmetics import *
+from UI_Colors import *
 
 root = Tk()
 root.title("Xenoblade Chronicles 2 Randomizer 0.1.0")
@@ -31,6 +30,7 @@ TabEnemiesOuter = Frame(MainWindow)
 TabMiscOuter = Frame(MainWindow) 
 TabQOLOuter = Frame(MainWindow)
 TabCosmeticsOuter = Frame(MainWindow)
+TabRaceModeOuter = Frame(MainWindow)
 
 # Canvas 
 TabGeneralCanvas = Canvas(TabGeneralOuter) 
@@ -40,6 +40,7 @@ TabEnemiesCanvas = Canvas(TabEnemiesOuter)
 TabMiscCanvas = Canvas(TabMiscOuter)
 TabQOLCanvas = Canvas(TabQOLOuter)
 TabCosmeticsCanvas = Canvas(TabCosmeticsOuter)
+TabRaceModeCanvas = Canvas(TabRaceModeOuter)
 
 # Actual Scrollable Content
 TabGeneral = Frame(TabGeneralCanvas) 
@@ -49,7 +50,7 @@ TabEnemies = Frame(TabEnemiesCanvas)
 TabMisc = Frame(TabMiscCanvas)
 TabQOL = Frame(TabQOLCanvas)
 TabCosmetics = Frame(TabCosmeticsCanvas)
-
+TabRaceMode = Frame(TabRaceModeCanvas)
 
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
@@ -71,7 +72,7 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touc
         Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
         OuterFrames[i].pack(expand=True, fill="both")
 
-CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics])
+CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabRaceModeOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabRaceModeCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabRaceMode])
 
 # Tabs
 MainWindow.add(TabGeneralOuter, text ='General') 
@@ -81,6 +82,7 @@ MainWindow.add(TabEnemiesOuter, text ='Enemies')
 MainWindow.add(TabMiscOuter, text ='Misc.') 
 MainWindow.add(TabQOLOuter, text = 'Quality of Life')
 MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
+MainWindow.add(TabRaceModeOuter, text='Race Mode')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 def GenOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
@@ -129,7 +131,7 @@ def GenOption(optionName, parentTab, description, commandList = [], subOptionNam
         "name": optionName,
         "optionTypeVal": optionType,
         "commandList": commandList,
-        "subOptionObjects": [],
+        "subOptionObjects": {},
     }    
     # Create Suboptions
     for i in range((len(subOptionName_subCommandList))//2):
@@ -139,34 +141,40 @@ def GenOption(optionName, parentTab, description, commandList = [], subOptionNam
         # print(len(subOptionName_subCommandList[2*i]))
 
         # Default Command if you dont provide a lambda command for a suboption (made so i dont have to write a million lambda statements)
-        if not isinstance(subOptionName_subCommandList[2*i+1][0], types.LambdaType):
-            autoCommand = [lambda: JSONParser.ValidReplacements.extend(subOptionName_subCommandList[2*i+1])]
-        else:
+        if subOptionName_subCommandList[2*i+1] == []:
+            continue
+        elif isinstance(subOptionName_subCommandList[2*i+1][0], types.LambdaType):
             autoCommand = subOptionName_subCommandList[2*i+1]
+        else:
+            autoCommand = [lambda: JSONParser.ValidReplacements.extend(subOptionName_subCommandList[2*i+1])]
 
 
-        OptionsRunDict[optionName]["subOptionObjects"].append({
+        OptionsRunDict[optionName]["subOptionObjects"][subOptionName_subCommandList[2*i]] = {
         "subName": optionName,
         "subOptionTypeVal": var,
         "subCommandList": autoCommand,
-        })
+        }
 
 
     rowIncrement += 1
     
 
 def Options():
+
     # General
     GenOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", [lambda: JSONParser.ChangeJSON(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)])
     GenOption("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", [lambda: JSONParser.ChangeJSON(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(Accessories)-set([1])), Accessories + Helper.InclRange(448,455))])
     GenOption("Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Weapon Chip Shops", [lambda: JSONParser.ChangeJSON(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)])
     GenOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[])], ["Accessories", Accessories ,"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials])
     GenOption("Collection Points", TabGeneral, "Randomizes the contents of Collection Points", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID"], list(set(CollectionPointMaterials) - set([30019])), [])], ["Accessories", Accessories,"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials])
-    
+    GenOption("Core Crystal Changes", TabGeneral, "Removes the Gacha system in favor of custom Core Crystals", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()])
+
     # Drivers
     GenOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, ArtDebuffs + ArtBuffs, InvalidTargetIDs=AutoAttacks)], ["Doom", [21]])
     # GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", ["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20)) Nothing wrong with this just kinda niche/silly
     GenOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", [lambda: JSONParser.ChangeJSON(["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees)])
+    GenOption("Balanced Skill Trees", TabDrivers, "Balances and randomizes the driver skill trees", [lambda: SkillTreeAdjustments.BalancingSkillTreeRando(OptionsRunDict)])
+    GenOption("Arts Cancel on Tier 1", TabDrivers, "Puts the Driver Skill that allows you to cancel Driver Arts into each other on the left-most Tier 1 Driver Skill Tree slot.", [lambda: SkillTreeAdjustments.Tier1ArtsCancel(OptionsRunDict)])
     GenOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactions, InvalidTargetIDs=AutoAttacks)]) # we want id numbers no edit the 1/6 react stuff
     GenOption("Driver Animation Speed", TabDrivers, "Randomizes animation speeds", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)])
     #GenOption("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with",["common/CHR_Dr.json"], ["DefAcce"], AllValues, Accessories, ["Remove All Starting Accessories", Accessories] ) only problem is the button on of off changin the values we want
@@ -177,7 +185,7 @@ def Options():
     GenOption("Blade Special Buttons", TabBlades, "Randomizes what button a special uses for its button challenge", [lambda: JSONParser.ChangeJSON(["common/MNU_BtnChallenge2.json"], Helper.StartsWith("BtnType", 1, 3), ButtonCombos, ButtonCombos)])
     GenOption("Blade Elements", TabBlades, "Randomizes what element a blade is", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"],["Atr"], Helper.InclRange(1,8), Helper.InclRange(1,8))])
     GenOption("Blade Battle Skills", TabBlades, "Randomizes blades battle (yellow) skill tree", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), BladeBattleSkills, BladeBattleSkills)])
-    GenOption("Blade Green Skills", TabBlades, "Randomizes blades field (green) skill tree", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], Helper.StartsWith("FSkill", 1, 3), BladeFieldSkills, BladeFieldSkills, InvalidTargetIDs=[1135])],["Field Skill QOL", [1135]])
+    GenOption("Blade Green Skills", TabBlades, "Randomizes blades field (green) skill tree", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], Helper.StartsWith("FSkill", 1, 3), BladeFieldSkills, BladeFieldSkills, InvalidTargetIDs=[1135])])
     # GenOption("Blade Specials", TabBlades, "Randomizes blades special (red) skill tree", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], Helper.StartsWith("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials, BladeSpecials)]) Commenting out for initial launch I think this setting will put people off it sounds fun but animations no longer connect well on specials
     GenOption("Blade Cooldowns", TabBlades, "Randomizes a blades cooldown", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["CoolTime"], Helper.InclRange(1,1000), Helper.InclRange(1,1000))])
     GenOption("Blade Arts", TabBlades, "Randomizes your blade's arts", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), ArtBuffs, ArtBuffs)])
@@ -190,7 +198,7 @@ def Options():
     # Enemies
     GenOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", [lambda: JSONParser.ChangeJSON(["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips)])
     GenOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSON(["common/CHR_EnArrange.json"], ["Scale"], Helper.InclRange(0, 1000), Helper.InclRange(1, 200) + Helper.InclRange(990,1000))])
-    # GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mac_FLD_EnemyPop.json", "common_gmk/") + Helper.InsertHelper(2, 1,90,"mab_FLD_EnemyPop.json", "common_gmk/"), ["ene1ID", "ene2ID", "ene3ID", "ene4ID"], Helper.inclRange(0,1888), ValidEnemies, ["Story Bosses", [1998], "Quest Enemies", [1999], "Unique Monsters", [2000], "Superbosses", [2001], "Normal Enemies", [2002], "Mix Enemies Between Types", [2003], "Keep All Enemy Levels", [2004], "Keep Quest Enemy Levels", [2005], "Keep Story Boss Levels", [2006], "Core Crystal Changes", [2007], "Arts Cancel on Tier 1", [2008], "Balanced Random Skill Trees", [2009], "Shorter Tutorial", [2010], "Beta Stuff", [2011]], optionType=[Checkbutton])
+    GenOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", [lambda: EnemyRandoLogic.EnemyLogic(OptionsRunDict)],["Story Bosses", [], "Quest Enemies", [], "Unique Monsters", [], "Superbosses", [], "Normal Enemies", [], "Mix Enemies Between Types", [], "Keep All Enemy Levels", [], "Keep Quest Enemy Levels", [], "Keep Story Boss Levels", []])
     GenOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", [lambda: JSONParser.ChangeJSON(["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.InclRange(0,100), Helper.InclRange(0,100) + Helper.InclRange(250,255))])
     #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30))
     
@@ -204,10 +212,14 @@ def Options():
     # this changed animations on text but not in a good way:
     # GenOption("Text Effects", TabMisc, "Randomizes text movement", ["common/MNU_ResMotion.json"], ["$id"], Helper.inclRange(1,39), Helper.inclRange(1,39))
     # EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_ResMotion.json", ["file"], "sample") 
-    
+    GenOption("Beta Stuff", TabMisc, "Stuff still in testing", [lambda: TestingStuff.Beta()])
+
     # QOL
     GenOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in the game") #common_ms/menu_ms
     GenOption("Running Speed", TabQOL, "Max out your starting Run Speed")
+    GenOption("Shortened Tutorial", TabQOL, "Shortens/removes all tutorials", [lambda: TutorialShortening.ShortenedTutorial(OptionsRunDict)])
+    GenOption("Blade Skill Tree Changes", TabQOL, "Makes all blades' field skills maxed by default", [lambda: CoreCrystalAdjustments.FieldSkillLevelAdjustment()])
+
     #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
     
     # Cosmetics
@@ -223,6 +235,11 @@ def Options():
     # GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultZeke], [], ZekeCosmetics, optionType=[Checkbutton])
     # GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPandoria], [], PandoriaCosmetics, optionType=[Checkbutton])
     
+
+    # Race Mode
+    GenOption("Race Mode", TabRaceMode, "Enables Race Mode", [lambda: RaceMode.RaceModeChanging(OptionsRunDict)], ["Mysterious Part Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", []])
+
+
     # Logic
     # OptionsRunDict.append(lambda: EnemyRandoLogic.EnemyLogic(CheckboxList, CheckboxStates))
     # OptionsRunDict.append(lambda: SkillTreeAdjustments.BalancingSkillTreeRando(CheckboxList, CheckboxStates))
@@ -270,15 +287,21 @@ def Randomize():
 def RunOptions():
         for option in OptionsRunDict.values():
             if (option["optionTypeVal"].get()): # checks main option input
-                for subOption in option["subOptionObjects"]:
-                    if (subOption["subOptionTypeVal"].get()): # checks subOption input
+                for subOption in option["subOptionObjects"].values():
+                    if (subOption[option]["subOptionTypeVal"].get()): # checks subOption input
                         for subCommand in subOption["subCommandList"]:
-                            print(subCommand)
-                            subCommand()
+                            try:
+                                print(subCommand)
+                                subCommand()
+                            except:
+                                pass
 
                 randoProgressDisplay.config(text=f"Randomizing {option['name']}")
                 for command in option["commandList"]:
-                    command()
+                    try:
+                        command()
+                    except:
+                        pass
  
 def GenRandomSeed():
     randoSeedEntry.delete(0, END)
@@ -309,7 +332,8 @@ RandomizeButton = Button(text='Randomize', command=Randomize)
 RandomizeButton.pack(pady=10) 
 randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=White)
 
-EveryObjectToSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] +  [option["optionTypeVal"] for option in OptionsRunDict.values()] + [subOption["subOptionTypeVal"] for option in OptionsRunDict.values() for subOption in option["subOptionObjects"]])
+# [option["optionTypeVal"] for option in OptionsRunDict.values()] + [option["subOptionObjects"]["subOptionTypeVal"] for option in OptionsRunDict.values()]
+EveryObjectToSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry])
 SavedOptions.loadData(EveryObjectToSave)
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSave), root.destroy()))

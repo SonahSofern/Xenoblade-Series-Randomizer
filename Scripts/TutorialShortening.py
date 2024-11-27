@@ -1,13 +1,11 @@
 import json
-import scripts.EnemyRandoLogic as EnemyRandoLogic
+import EnemyRandoLogic
 
-def ShortenedTutorial(CheckboxList, CheckboxStates):
-    for j in range(0, len(CheckboxList)):
-        if CheckboxList[j] == "Shorter Tutorial Box":
-            ShortTutorialBox = j
-        if CheckboxList[j] == "Race Mode Box":
-            RaceModeBox = j
-    if CheckboxStates[ShortTutorialBox].get() == True:
+def ShortenedTutorial(OptionsRunDict):
+    ShortTutorialBox = OptionsRunDict["Shortened Tutorial"]["optionTypeVal"].get()
+    RaceModeBox = OptionsRunDict["Race Mode"]["optionTypeVal"].get()
+    if ShortTutorialBox:
+        print("Shortening Tutorials")
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Condition.json", ["cond"], 1)
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_Tutorial.json", ["ScenarioFlagMin", "QuestFlag", "QuestFlagMin", "QuestFlagMax", "SysMultiFlag"], 0)
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common_gmk/RSC_GmkSetList.json", ["tutorial", "tutorial_bdat"], "")
@@ -42,7 +40,7 @@ def ShortenedTutorial(CheckboxList, CheckboxStates):
                 if row["$id"] == 13: # if we rest at lemour inn (this seems to make the flags go away that were keeping you from shopping and going further upstairs in argentum)
                     row["NextQuestA"] = 15 # then talk to spraine
                 if row["$id"] == 15: #talk to spraine
-                    if CheckboxStates[RaceModeBox].get() == False:
+                    if not RaceModeBox:
                         row["NextQuestA"] = 17 #sets next quest to be to go to the top of the Maelstrom
                         break
                     break

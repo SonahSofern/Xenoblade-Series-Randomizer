@@ -1,8 +1,8 @@
 import json
 import random
 import time
-import scripts.Helper as Helper
-from scripts.IDs import ValidEnemies, InvalidEnemies
+import Helper as Helper
+from IDs import ValidEnemies, InvalidEnemies
 
 AllEnemyDefaultLevels = [1, 2, 4, 5, 6, 8, 6, 10, 11, 12, 13, 15, 22, 25, 24, 26, 20, 18, 19, 21, 22, 24, 23, 24, 26, 29, 31, 27, 29, 31, 32, 33, 34, 32, 35, 40, 38, 38, 38, 39, 42, 42, 43, 42, 44, 46, 44, 52, 54, 56, 99, 52, 50, 60, 60, 57, 66, 68, 60, 60, 60, 60, 13, 24, 26, 32, 33, 34, 60, 5, 14, 22, 18, 19, 21, 12, 31, 29, 33, 35, 40, 41, 56, 56, 58, 25, 47, 2, 25, 26, 10, 12, 9, 91, 36, 41, 57, 57, 38, 54, 25, 26, 28, 30, 32, 25, 26, 49, 44, 41, 27, 29, 22, 28, 29, 31, 33, 30, 31, 32, 60, 61, 58, 60, 62, 63, 62, 63, 64, 36, 36, 34, 61, 42, 41, 69, 66, 67, 70, 50, 40, 40, 42, 42, 42, 44, 46, 51, 50, 53, 26, 26, 26, 30, 46, 55, 54, 52, 33, 34, 33, 38, 38, 38, 38, 40, 33, 33, 35, 35, 45, 46, 43, 53, 51, 48, 51, 45, 45, 46, 46, 47, 47, 48, 48, 48, 49, 50, 48, 51, 53, 52, 33, 33, 34, 35, 36, 39, 42, 42, 42, 44, 45, 44, 43, 47, 56, 57, 50, 64, 43, 42, 45, 58, 55, 55, 57, 58, 60, 61, 56, 58, 60, 43, 19, 19, 36, 36, 37, 42, 44, 44, 58, 58, 56, 61, 59, 9, 20, 40, 60, 80, 99, 99, 39, 3, 2, 2, 2, 3, 6, 15, 5, 69, 6, 2, 7, 3, 6, 2, 8, 6, 3, 8, 11, 14, 9, 10, 5, 7, 8, 42, 22, 4, 90, 74, 33, 34, 25, 5, 71, 73, 5, 12, 16, 13, 13, 24, 23, 4, 5, 39, 39, 72, 10, 13, 15, 40, 14, 39, 14, 38, 11, 22, 5, 19, 38, 40, 37, 70, 21, 24, 35, 12, 15, 16, 12, 8, 81, 90, 25, 45, 18, 75, 20, 104, 28, 4, 4, 4, 6, 16, 34, 36, 40, 7, 7, 13, 9, 9, 9, 11, 27, 14, 17, 18, 20, 9, 18, 19, 17, 18, 19, 19, 74, 22, 23, 20, 21, 17, 23, 24, 32, 61, 20, 18, 35, 63, 21, 47, 22, 17, 20, 37, 20, 20, 39, 21, 18, 18, 20, 72, 34, 20, 21, 20, 19, 19, 18, 22, 75, 74, 76, 74, 75, 77, 78, 23, 21, 62, 38, 75, 35, 95, 97, 96, 23, 22, 23, 65, 24, 80, 23, 78, 41, 48, 99, 26, 25, 27, 27, 25, 19, 26, 27, 29, 81, 27, 26, 83, 83, 28, 27, 28, 80, 28, 33, 28, 29, 28, 32, 29, 28, 85, 80, 32, 31, 33, 31, 31, 32, 33, 34, 35, 34, 28, 29, 26, 29, 31, 61, 60, 61, 62, 63, 60, 33, 33, 33, 33, 43, 43, 59, 60, 25, 25, 26, 25, 26, 30, 31, 30, 30, 32, 31, 62, 33, 33, 33, 86, 40, 24, 25, 26, 28, 32, 34, 36, 29, 28, 29, 28, 28, 29, 29, 27, 27, 27, 32, 33, 96, 97, 98, 99, 120, 99, 44, 44, 43, 45, 45, 46, 45, 43, 44, 43, 44, 45, 45, 44, 44, 45, 44, 46, 43, 45, 45, 46, 45, 46, 47, 48, 50, 51, 49, 50, 51, 54, 56, 34, 34, 35, 39, 35, 38, 39, 40, 41, 88, 44, 42, 39, 90, 48, 93, 50, 49, 40, 43, 34, 35, 46, 46, 45, 35, 49, 44, 45, 47, 60, 45, 42, 50, 50, 51, 50, 50, 50, 53, 49, 52, 51, 44, 51, 41, 44, 49, 50, 49, 56, 130, 95, 55, 130, 58, 62, 94, 109, 32, 33, 42, 43, 46, 48, 51, 38, 39, 39, 36, 38, 35, 39, 41, 38, 39, 42, 40, 41, 39, 39, 38, 38, 40, 80, 41, 40, 80, 78, 39, 40, 40, 79, 40, 84, 86, 40, 38, 79, 82, 84, 87, 38, 81, 88, 42, 42, 42, 42, 42, 40, 43, 39, 41, 41, 40, 41, 41, 42, 41, 53, 53, 54, 53, 84, 84, 84, 84, 85, 83, 39, 39, 41, 42, 42, 46, 44, 43, 110, 51, 42, 60, 54, 46, 46, 48, 51, 49, 47, 49, 47, 47, 60, 49, 47, 47, 50, 53, 54, 58, 100, 117, 44, 45, 46, 47, 48, 50, 52, 52, 52, 52, 52, 52, 53, 53, 54, 55, 53, 56, 57, 58, 58, 57, 60, 55, 55, 55, 55, 58, 58, 58, 60, 55, 55, 55, 58, 60, 60, 58, 97, 97, 58, 62, 60, 58, 64, 66, 65, 66, 66, 114, 52, 55, 56, 57, 59, 61, 31, 32, 44, 31, 31, 32, 33, 32, 42, 44, 32, 31, 43, 42, 32, 47, 44, 43, 42, 43, 38, 32, 31, 32, 43, 43, 43, 34, 32, 32, 44, 31, 42, 31, 31, 43, 43, 44, 31, 34, 33, 33, 33, 33, 33, 34, 32, 43, 43, 42, 44, 43, 43, 42, 42, 43, 34, 38, 38, 39, 47, 49, 48, 48, 45, 32, 32, 32, 32, 38, 40, 42, 44, 2, 4, 2, 23, 24, 67, 65, 36, 36, 38, 4, 5, 8, 10, 9, 12, 6, 43, 36, 58, 43, 42, 41, 80, 9, 7, 65, 68, 66, 62, 38, 40, 43, 45, 54, 58, 60, 70, 70, 70, 70, 60, 58, 63, 61, 60, 84, 78, 81, 92, 88, 95, 125, 96, 96, 62, 2, 2, 8, 10, 10, 14, 10, 11, 20, 16, 17, 18, 29, 29, 40, 38, 48, 53, 3, 31, 30, 32, 35, 38, 39, 39, 35, 37, 36, 42, 38, 46, 35, 40, 37, 39, 41, 9, 10, 52, 52, 54, 41, 20, 18, 19, 24, 50, 37, 39, 10, 16, 43, 38, 40, 12, 14, 16, 10, 12, 8, 11, 6, 35, 15, 33, 11, 41, 32, 15, 12, 26, 34, 14, 11, 15, 36, 12, 12, 30, 13, 32, 38, 37, 37, 38, 38, 36, 35, 38, 36, 33, 9, 39, 40, 75, 100, 85, 65, 50, 45, 10, 25, 18, 4, 3, 32, 21, 18, 20, 18, 26, 4, 40, 6, 40, 4, 32, 43, 23, 30, 3, 9, 43, 19, 13, 38, 36, 5, 6, 3, 38, 43, 45, 23, 44, 5, 28, 20, 21, 4, 33, 32, 48, 40, 20, 23, 30, 10, 42, 3, 38, 36, 25, 51, 21, 20, 19, 19, 21, 43, 20, 32, 32, 38, 33, 20, 11, 23, 2, 4, 30, 22, 40, 27, 39, 39, 39, 39, 21, 25, 28, 28, 38, 30, 34, 48, 44, 50, 40, 38, 33, 23, 48, 36, 55, 25, 62, 63, 61, 65, 64, 62, 61, 33, 62, 68, 66, 59, 60, 61, 60, 59, 66, 25, 26, 27, 26, 28, 29, 27, 30, 30, 32, 28, 30, 36, 27, 29, 26, 33, 32, 35, 30, 33, 26, 28, 35, 58, 60, 62, 66, 68, 70, 100, 80, 70, 60, 60, 63, 58, 60, 63, 66, 50, 50, 53, 55, 56, 58, 60, 62, 60, 58, 64, 62, 64, 64, 110, 96, 104, 100, 90, 98, 94, 100, 96, 102, 104, 100, 101, 105, 104, 106, 103, 108, 99, 106, 108, 110, 113, 115, 90, 90, 90, 120, 110, 100, 140, 99, 99, 102, 110, 115, 150, 95, 96, 95, 96, 200, 98, 110, 106, 120, 100, 100, 99, 112, 130, 108, 104, 58, 56, 55, 62, 60, 61, 56, 62, 66, 68, 60, 46, 48, 44, 53, 55, 52, 51, 51, 58, 57, 54, 56, 55, 59, 58, 57, 56, 55, 60, 62, 60, 60, 60, 64, 60, 61, 62, 63, 61, 63, 62, 61, 64, 54, 53, 51, 55, 50, 56, 64, 62, 61, 58, 60, 60, 63, 59, 57, 61, 65, 64, 66, 63, 70, 99, 60, 65, 66, 62]
 #Helper.FindValues("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["$id"], ValidEnemies, "Lv")
@@ -464,112 +464,112 @@ def LevelReversion(FullDefaultIDs, FullRandomizedIDs, SpecificDefaultIDs, Specif
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)                        
-                     
-def EnemyLogic(CheckboxList, CheckboxStates):
+       
+def EnemyLogic(OptionsRunDict):
     EnemyRandoOn = False
     EnemiestoPass = []
     LevelstoPass = []
-    for j in range(0, len(CheckboxList)):
-        if CheckboxList[j] == "Story Bosses Box":
-            StoryBossesBox = j
-            continue
-        if CheckboxList[j] == "Keep Story Boss Levels Box":
-            KeepStoryBossesLevelsBox = j
-            continue
-        if CheckboxList[j] == "Quest Enemies Box":
-            QuestEnemyBox = j
-            continue
-        if CheckboxList[j] == "Keep Quest Enemy Levels Box":
-            KeepQuestEnemyLevelsBox = j
-            continue
-        if CheckboxList[j] == "Unique Monsters Box":
-            UniqueMonstersBox = j
-            continue
-        if CheckboxList[j] == "Superbosses Box":
-            SuperbossesBox = j
-            continue
-        if CheckboxList[j] == "Normal Enemies Box":
-            NormalEnemiesBox = j
-            continue
-        if CheckboxList[j] == "Keep All Enemy Levels Box":
-            KeepAllEnemyLevelsBox = j
-            continue           
-    for k in range(0, len(CheckboxList)):
-        if CheckboxList[k] == "Story Bosses Box":
-            if (CheckboxStates[k].get() == True) or (CheckboxStates[k+1].get() == True) or (CheckboxStates[k+2].get() == True) or (CheckboxStates[k+3].get() == True) or (CheckboxStates[k+4].get() == True):
-                EnemyRandoOn = True
-                break
+    CheckboxList = [] #I'm lazy, so i'm just going to pass the names and true/false states to two arrays
+    CheckboxStates = []
+    StoryBossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Story Bosses"]["subOptionTypeVal"].get()
+    KeepStoryBossesLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Keep Story Boss Levels"]["subOptionTypeVal"].get()
+    QuestEnemyBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Quest Enemies"]["subOptionTypeVal"].get()
+    KeepQuestEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Keep Quest Enemy Levels"]["subOptionTypeVal"].get()
+    UniqueMonstersBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Unique Monsters"]["subOptionTypeVal"].get()
+    SuperbossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Superbosses"]["subOptionTypeVal"].get()
+    NormalEnemiesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Normal Enemies"]["subOptionTypeVal"].get()
+    KeepAllEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Keep All Enemy Levels"]["subOptionTypeVal"].get()
+    MixEnemiesBetweenTypesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Mix Enemies Between Types"]["subOptionTypeVal"].get()       
+    if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox:
+        EnemyRandoOn = True
+        CheckboxList = ["Story Bosses", "Quest Enemies", "Unique Monsters", "Superbosses", "Normal Enemies", "Mix Enemies Between Types", "Keep All Enemy Levels", "Keep Quest Enemy Levels", "Keep Story Boss Levels"]
+        CheckboxStates = [StoryBossesBox, QuestEnemyBox, UniqueMonstersBox, SuperbossesBox, NormalEnemiesBox, MixEnemiesBetweenTypesBox, KeepAllEnemyLevelsBox, KeepQuestEnemyLevelsBox, KeepStoryBossesLevelsBox]
     if EnemyRandoOn == True:
         print("Randomizing Enemies")
         TotalDefaultEnemyIDs = []
         TotalRandomizedEnemyIDs = []
-        for n in range(0, len(CheckboxList)):
-            if CheckboxList[n] == "Mix Enemies Between Types Box" and CheckboxStates[n].get() == True:
-                if CheckboxStates[StoryBossesBox].get() == True:
-                    EnemiestoPass += AllBossDefaultIDs
-                    LevelstoPass += AllBossDefaultLevels
-                if CheckboxStates[QuestEnemyBox].get() == True:
-                    EnemiestoPass += AllQuestDefaultEnemyIDs
-                    LevelstoPass += AllQuestEnemyDefaultLevels
-                if CheckboxStates[UniqueMonstersBox].get() == True:
-                    EnemiestoPass += AllUniqueMonsterDefaultIDs
-                    LevelstoPass += AllUniqueMonsterDefaultLevels
-                if CheckboxStates[SuperbossesBox].get() == True:
-                    EnemiestoPass += AllSuperbossDefaultIDs
-                    LevelstoPass += AllSuperbossDefaultLevels             
-                if CheckboxStates[NormalEnemiesBox].get() == True:
-                    EnemiestoPass += AllNormalEnemyDefaultIDs
-                    LevelstoPass += AllNormalEnemyDefaultLevels              
-                DefaultEnemyIDs = EnemiestoPass.copy()
-                RandomizedEnemyIDs = DefaultEnemyIDs.copy()
-                random.shuffle(RandomizedEnemyIDs)
-                TotalDefaultEnemyIDs = DefaultEnemyIDs
-                TotalRandomizedEnemyIDs = RandomizedEnemyIDs
-                ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
-                if EnemiestoPass:
-                    if CheckboxStates[KeepAllEnemyLevelsBox].get() == True:
+        if CheckboxStates[MixEnemiesBetweenTypesBox]:
+            if CheckboxStates[StoryBossesBox]:
+                EnemiestoPass += AllBossDefaultIDs
+                LevelstoPass += AllBossDefaultLevels
+                print("Bosses Added to Shuffle List")
+            if CheckboxStates[QuestEnemyBox]:
+                EnemiestoPass += AllQuestDefaultEnemyIDs
+                LevelstoPass += AllQuestEnemyDefaultLevels
+                print("Quest Enemies Added to Shuffle List")
+            if CheckboxStates[UniqueMonstersBox]:
+                EnemiestoPass += AllUniqueMonsterDefaultIDs
+                LevelstoPass += AllUniqueMonsterDefaultLevels
+                print("Unique Monsters Added to Shuffle List")
+            if CheckboxStates[SuperbossesBox]:
+                EnemiestoPass += AllSuperbossDefaultIDs
+                LevelstoPass += AllSuperbossDefaultLevels
+                print("Superbosses Added to Shuffle List")             
+            if CheckboxStates[NormalEnemiesBox]:
+                EnemiestoPass += AllNormalEnemyDefaultIDs
+                LevelstoPass += AllNormalEnemyDefaultLevels 
+                print("Normal Enemies Added to Shuffle List")             
+            DefaultEnemyIDs = EnemiestoPass.copy()
+            RandomizedEnemyIDs = DefaultEnemyIDs.copy()
+            random.shuffle(RandomizedEnemyIDs)
+            TotalDefaultEnemyIDs = DefaultEnemyIDs
+            TotalRandomizedEnemyIDs = RandomizedEnemyIDs
+            ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
+            if EnemiestoPass:
+                if CheckboxStates[KeepAllEnemyLevelsBox]:
+                    LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, LevelstoPass)
+                    print("Reverting all enemy levels")
+                if CheckboxStates[QuestEnemyBox]:
+                    if CheckboxStates[KeepQuestEnemyLevelsBox]:
+                        LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
+                        print("Reverting Quest Enemy levels")
+                if CheckboxStates[StoryBossesBox]:
+                    if CheckboxStates[KeepStoryBossesLevelsBox]:
+                        LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
+                        print("Reverting Story Boss Levels")
+        if not CheckboxStates[MixEnemiesBetweenTypesBox]:
+            print("Enemies not shuffled")
+            for o in range(0, len(CheckboxList)):
+                EnemiestoPass = []
+                LevelstoPass = []
+                if CheckboxList[o] == "Story Bosses" and CheckboxStates[o] == True:
+                    EnemiestoPass = AllBossDefaultIDs
+                    LevelstoPass = AllBossDefaultLevels
+                    print("Swapping Bosses")
+                if CheckboxList[o] == "Quest Enemies" and CheckboxStates[o] == True:
+                    EnemiestoPass = AllQuestDefaultEnemyIDs
+                    LevelstoPass = AllQuestEnemyDefaultLevels
+                    print("Swapping Quest Enemies")                      
+                if CheckboxList[o] == "Unique Monsters" and CheckboxStates[o] == True:
+                    EnemiestoPass = AllUniqueMonsterDefaultIDs
+                    LevelstoPass = AllUniqueMonsterDefaultLevels
+                    print("Swapping Unique Monsters")
+                if CheckboxList[o] == "Superbosses" and CheckboxStates[o] == True:
+                    EnemiestoPass = AllSuperbossDefaultIDs
+                    LevelstoPass = AllSuperbossDefaultLevels
+                    print("Swapping Superbosses")
+                if CheckboxList[o] == "Normal Enemies" and CheckboxStates[o] == True:
+                    EnemiestoPass = AllNormalEnemyDefaultIDs
+                    LevelstoPass = AllNormalEnemyDefaultLevels
+                    print("Swapping Normal Enemies")
+                if EnemiestoPass: #if the list of enemies to pass is not empty
+                    DefaultEnemyIDs = EnemiestoPass.copy()
+                    RandomizedEnemyIDs = DefaultEnemyIDs.copy()
+                    TotalDefaultEnemyIDs.append(DefaultEnemyIDs)
+                    random.shuffle(RandomizedEnemyIDs)
+                    TotalRandomizedEnemyIDs.append(RandomizedEnemyIDs)
+                    ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
+                    if CheckboxStates[KeepAllEnemyLevelsBox]:
                         LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, LevelstoPass)
-                        break
-                    if CheckboxStates[QuestEnemyBox].get() == True:
+                        print("Reverting all enemy levels")
+                    if CheckboxList[o] == "Quest Enemies" and CheckboxStates[o].get() == True:
                         if CheckboxStates[KeepQuestEnemyLevelsBox].get() == True:
                             LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
-                    if CheckboxStates[StoryBossesBox].get() == True:
+                            print("Reverting Quest Enemy levels")
+                    if CheckboxList[o] == "Story Bosses" and CheckboxStates[o].get() == True:
                         if CheckboxStates[KeepStoryBossesLevelsBox].get() == True:
                             LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
-            if CheckboxList[n] == "Mix Enemies Between Types Box" and CheckboxStates[n].get() == False:
-                for o in range(0, len(CheckboxList)):
-                    EnemiestoPass = []
-                    LevelstoPass = []
-                    if CheckboxList[o] == "Story Bosses Box" and CheckboxStates[o].get() == True:
-                        EnemiestoPass = AllBossDefaultIDs
-                        LevelstoPass = AllBossDefaultLevels
-                    if CheckboxList[o] == "Quest Enemies Box" and CheckboxStates[o].get() == True:
-                        EnemiestoPass = AllQuestDefaultEnemyIDs
-                        LevelstoPass = AllQuestEnemyDefaultLevels                      
-                    if CheckboxList[o] == "Unique Monsters Box" and CheckboxStates[o].get() == True:
-                        EnemiestoPass = AllUniqueMonsterDefaultIDs
-                        LevelstoPass = AllUniqueMonsterDefaultLevels
-                    if CheckboxList[o] == "Superbosses Box" and CheckboxStates[o].get() == True:
-                        EnemiestoPass = AllSuperbossDefaultIDs
-                        LevelstoPass = AllSuperbossDefaultLevels
-                    if CheckboxList[o] == "Normal Enemies Box" and CheckboxStates[o].get() == True:
-                        EnemiestoPass = AllNormalEnemyDefaultIDs
-                        LevelstoPass = AllNormalEnemyDefaultLevels
-                    if EnemiestoPass: #if the list of enemies to pass is not empty
-                        DefaultEnemyIDs = EnemiestoPass.copy()
-                        RandomizedEnemyIDs = DefaultEnemyIDs.copy()
-                        TotalDefaultEnemyIDs.append(DefaultEnemyIDs)
-                        random.shuffle(RandomizedEnemyIDs)
-                        TotalRandomizedEnemyIDs.append(RandomizedEnemyIDs)
-                        ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
-                        if CheckboxStates[KeepAllEnemyLevelsBox].get() == True:
-                            LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, LevelstoPass)
-                        if CheckboxList[o] == "Quest Enemies Box" and CheckboxStates[o].get() == True:
-                            if CheckboxStates[KeepQuestEnemyLevelsBox].get() == True:
-                                LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
-                        if CheckboxList[o] == "Story Bosses Box" and CheckboxStates[o].get() == True:
-                            if CheckboxStates[KeepStoryBossesLevelsBox].get() == True: # need to change this to check specific index instead of using == to value of checkboxlist, probably in initial loop find index corresponding to this box then use this
-                                LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
+                            print("Reverting Story Boss Levels")
         SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "AlwaysAttack", 0)
         ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["SearchRange", "SearchRadius", "SearchAngle", "Detects"], 0)
         ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["BatInterval", "BatArea"], 50)

@@ -1,7 +1,7 @@
-import scripts.EnemyRandoLogic as EnemyRandoLogic
+import EnemyRandoLogic as EnemyRandoLogic
 import json
 import math
-import scripts.Helper as Helper
+import Helper as Helper
 import random
 
 FLDSkillMaxLv = [3, 5, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 3, 5, 3, 3, 3, 5, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 5, 3, 3, 5, 3, 5, 3, 3, 5, 5, 5, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 5, 5]
@@ -23,32 +23,28 @@ def AllRareBlades(): # makes it so all blades are equally likely to be pulled
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Condition", "Assure1", "Assure2", "Assure3", "Assure4", "Assure5"] , 0)
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Prob1", "Prob2", "Prob3", "Prob4", "Prob5"] , 1)
 
-def FieldSkillLevelAdjustment(CheckboxList, CheckboxStates):
+def FieldSkillLevelAdjustment():
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_FieldSkillList.json", ["MaxLevel"] , 1)
-    for j in range(0, len(CheckboxList)):
-        if CheckboxList[j] == "Field Skill QOL Box":
-            FieldSkillBox = j
-    if CheckboxStates[FieldSkillBox].get() == True:
-        FieldAchievementSetFile = "./_internal/JsonOutputs/common/FLD_AchievementSet.json"
-        with open(FieldAchievementSetFile, 'r+', encoding='utf-8') as file:
-            data = json.load(file)
-            for row in data["rows"]:
-                for i in range(0, len(FieldSkillAchievementIDs)):
-                    if row["$id"] == FieldSkillAchievementIDs[i]:
-                        if row["AchievementID1"] != 0:
-                            row["AchievementID1"] = 40
-                        if row["AchievementID2"] != 0:
-                            row["AchievementID2"] = 40
-                        if row["AchievementID3"] != 0:
-                            row["AchievementID3"] = 40
-                        if row["AchievementID4"] != 0:
-                            row["AchievementID4"] = 40
-                        if row["AchievementID5"] != 0:
-                            row["AchievementID5"] = 40
-                        break
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2)
+    FieldAchievementSetFile = "./_internal/JsonOutputs/common/FLD_AchievementSet.json"
+    with open(FieldAchievementSetFile, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            for i in range(0, len(FieldSkillAchievementIDs)):
+                if row["$id"] == FieldSkillAchievementIDs[i]:
+                    if row["AchievementID1"] != 0:
+                        row["AchievementID1"] = 40
+                    if row["AchievementID2"] != 0:
+                        row["AchievementID2"] = 40
+                    if row["AchievementID3"] != 0:
+                        row["AchievementID3"] = 40
+                    if row["AchievementID4"] != 0:
+                        row["AchievementID4"] = 40
+                    if row["AchievementID5"] != 0:
+                        row["AchievementID5"] = 40
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
 
 def ChangeRankCondition(): # This breaks the blades currently, not letting you unlock them at all
     # Changes the requirement to unlock trust level of blade from some weird ones like money to trust values instead (Boreas, etc)
@@ -76,59 +72,32 @@ def ChangeRankCondition(): # This breaks the blades currently, not letting you u
         file.truncate()
         json.dump(data, file, indent=2)
 
-def FieldSkillChecksAdjustment(CheckboxList, CheckboxStates): # unused now
-    for j in range(0, len(CheckboxList)):
-        if CheckboxList[j] == "Field Skill QOL Box":
-            FieldSkillBox = j
-    if CheckboxStates[FieldSkillBox].get() == True:
-        SkillSettingFile = "./_internal/JsonOutputs/common/FLD_FieldSkillSetting.json"
-        with open(SkillSettingFile, 'r+', encoding='utf-8') as file:
-            data = json.load(file)
+def AdjustingCrystalList():
+    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["Condition", "BladeID", "CommonID", "CommonWPN", "CommonAtr"], 0)
+    ITMCrystalFile = "./_internal/JsonOutputs/common/ITM_CrystalList.json"
+    with open(ITMCrystalFile, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        RandomBlades = BladeIDs.copy()
+        random.shuffle(RandomBlades)
+        for k in range(0, len(ValidCrystalListIDs)):
             for row in data["rows"]:
-                if row["FieldSkillID1"]:
-                    for i in range(0, len(BladeFieldSkills)):
-                        if row["FieldSkillID1"] == BladeFieldSkills[i]:
-                            row["FieldSkillLevel1"] = math.ceil(row["FieldSkillLevel1"]/FLDSkillMaxLv[i])
-                if row["FieldSkillID2"]:    
-                    for i in range(0, len(BladeFieldSkills)):
-                        if row["FieldSkillID2"] == BladeFieldSkills[i]:
-                            row["FieldSkillLevel2"] = math.ceil(row["FieldSkillLevel2"]/FLDSkillMaxLv[i])
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
+                if row["$id"] == ValidCrystalListIDs[k]:
+                    row["NoMultiple"] = k + 1
+                    row["ValueMax"] = 1
+                    row["BladeID"] = RandomBlades[k]
+                    row["Name"] = 12
+                    break
+        for row in data["rows"]:
+            for i in range(45011,45014):
+                if row["$id"] == i:
+                    row["RareTableProb"] = 0
+                    row["RareBladeRev"] = 0
+                    row["AssureP"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)        
 
-def AdjustingCrystalList(CheckboxList, CheckboxStates):
-    for j in range(0, len(CheckboxList)):
-        if CheckboxList[j] == "Core Crystal Changes Box":
-            CoreCrystalChangesBox = j
-    if CheckboxStates[CoreCrystalChangesBox].get() == True:
-        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["Condition", "BladeID", "CommonID", "CommonWPN", "CommonAtr"], 0)
-        ITMCrystalFile = "./_internal/JsonOutputs/common/ITM_CrystalList.json"
-        with open(ITMCrystalFile, 'r+', encoding='utf-8') as file:
-            data = json.load(file)
-            RandomBlades = BladeIDs.copy()
-            random.shuffle(RandomBlades)
-            for k in range(0, len(ValidCrystalListIDs)):
-                for row in data["rows"]:
-                    if row["$id"] == ValidCrystalListIDs[k]:
-                        row["NoMultiple"] = k + 1
-                        row["ValueMax"] = 1
-                        row["BladeID"] = RandomBlades[k]
-                        row["Name"] = 12
-                        break
-            for row in data["rows"]:
-                for i in range(45011,45014):
-                    if row["$id"] == i:
-                        row["RareTableProb"] = 0
-                        row["RareBladeRev"] = 0
-                        row["AssureP"] = 0
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)        
-
-def CoreCrystalChanges(CheckboxList, CheckboxStates):
+def CoreCrystalChanges():
     AllRareBlades()
-    #FieldSkillChecksAdjustment(CheckboxList, CheckboxStates)
-    FieldSkillLevelAdjustment(CheckboxList, CheckboxStates)
-    AdjustingCrystalList(CheckboxList, CheckboxStates)
+    AdjustingCrystalList()
     #ChangeRankCondition()
