@@ -142,7 +142,7 @@ def GenOption(optionName, parentTab, description, commandList = [], subOptionNam
 
         # Default Command if you dont provide a lambda command for a suboption (made so i dont have to write a million lambda statements)
         if subOptionName_subCommandList[2*i+1] == []:
-            continue
+            autoCommand = []
         elif isinstance(subOptionName_subCommandList[2*i+1][0], types.LambdaType):
             autoCommand = subOptionName_subCommandList[2*i+1]
         else:
@@ -150,7 +150,7 @@ def GenOption(optionName, parentTab, description, commandList = [], subOptionNam
 
 
         OptionsRunDict[optionName]["subOptionObjects"][subOptionName_subCommandList[2*i]] = {
-        "subName": optionName,
+        "subName": subOptionName_subCommandList[2*i],
         "subOptionTypeVal": var,
         "subCommandList": autoCommand,
         }
@@ -288,10 +288,9 @@ def RunOptions():
         for option in OptionsRunDict.values():
             if (option["optionTypeVal"].get()): # checks main option input
                 for subOption in option["subOptionObjects"].values():
-                    if (subOption[option]["subOptionTypeVal"].get()): # checks subOption input
+                    if (subOption["subOptionTypeVal"].get()): # checks subOption input
                         for subCommand in subOption["subCommandList"]:
                             try:
-                                print(subCommand)
                                 subCommand()
                             except:
                                 pass
@@ -333,8 +332,8 @@ RandomizeButton.pack(pady=10)
 randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=White)
 
 # [option["optionTypeVal"] for option in OptionsRunDict.values()] + [option["subOptionObjects"]["subOptionTypeVal"] for option in OptionsRunDict.values()]
-EveryObjectToSave = ([bdatFilePathEntry, outDirEntry, randoSeedEntry])
-SavedOptions.loadData(EveryObjectToSave)
+EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionsRunDict.values()] + [subOption["subOptionTypeVal"] for option in OptionsRunDict.values() for subOption in option["subOptionObjects"].values()])
+SavedOptions.loadData(EveryObjectToSaveAndLoad)
 
-root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSave), root.destroy()))
+root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSaveAndLoad), root.destroy()))
 root.mainloop()
