@@ -22,6 +22,21 @@ MaxWidth = 1000
 # The Notebook
 MainWindow = ttk.Notebook(root, height=5)
 
+def NotebookFocusStyleFix():
+    style = ttk.Style()
+
+    style.layout("Tab",
+    [('Notebook.tab', {'sticky': 'nswe', 'children':
+        [('Notebook.padding', {'side': 'top', 'sticky': 'nswe', 'children':
+            #[('Notebook.focus', {'side': 'top', 'sticky': 'nswe', 'children':
+                [('Notebook.label', {'side': 'top', 'sticky': ''})],
+            #})],
+        })],
+    })]
+    )
+
+NotebookFocusStyleFix()
+
 # Frames in the notebook
 TabGeneralOuter = Frame(MainWindow) 
 TabDriversOuter = Frame(MainWindow) 
@@ -275,6 +290,9 @@ def Randomize():
         os.makedirs(f"{outDirEntry.get()}/gb", exist_ok=True)
         shutil.move(f"{outDirEntry.get()}/common_ms.bdat", f"{outDirEntry.get()}/gb/common_ms.bdat")
 
+        import time
+        randoProgressDisplay.config(text="Done")
+        time.sleep(1)
         randoProgressDisplay.config(text="")
         randoProgressDisplay.pack_forget()
 
