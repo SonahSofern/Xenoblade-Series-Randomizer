@@ -331,7 +331,6 @@ RandomizeButton = Button(text='Randomize', command=Randomize)
 RandomizeButton.pack(pady=10) 
 randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=White)
 
-# [option["optionTypeVal"] for option in OptionsRunDict.values()] + [option["subOptionObjects"]["subOptionTypeVal"] for option in OptionsRunDict.values()]
 EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionsRunDict.values()] + [subOption["subOptionTypeVal"] for option in OptionsRunDict.values() for subOption in option["subOptionObjects"].values()])
 SavedOptions.loadData(EveryObjectToSaveAndLoad)
 
