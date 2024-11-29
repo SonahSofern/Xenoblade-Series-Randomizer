@@ -134,7 +134,7 @@ def GenDictionary(optionName, parentTab, description, commandList = [], subOptio
         optionType = var    
     elif (optionType == Scale):
         var = IntVar()
-        optionTypeObj = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10,variable=var, background=OptionColor, highlightthickness=0)
+        optionTypeObj = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, variable=var, background=OptionColor, highlightthickness=0)
         optionDesc = Label(optionPanel, text=description, background=OptionColor, anchor='w')
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
@@ -228,7 +228,7 @@ def Options():
     GenDictionary("Shortened Tutorial", TabQOL, "Shortens/removes all tutorials", [lambda: TutorialShortening.ShortenedTutorial(OptionDictionary)])
     GenDictionary("Blade Skill Tree Changes", TabQOL, "Makes all blades' field skills maxed by default", [lambda: CoreCrystalAdjustments.FieldSkillLevelAdjustment()])
     GenDictionary("Core Crystal Changes", TabQOL, "Removes the Gacha system in favor of custom Core Crystals", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()])
-    GenDictionary("Early Arts Cancel", TabQOL, "Puts Driver arts cancel skills into the first Driver Skill Tree slot", [lambda: SkillTreeAdjustments.Tier1ArtsCancel(OptionDictionary)])
+    GenDictionary("Arts Cancel on Tier 1", TabQOL, "Puts the Driver Skill that allows you to cancel Driver Arts into each other on the left-most Tier 1 Driver Skill Tree slot.", [lambda: SkillTreeAdjustments.Tier1ArtsCancel(OptionDictionary)])
     #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
     
     # Cosmetics
