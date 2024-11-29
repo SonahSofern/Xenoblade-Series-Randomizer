@@ -2,7 +2,7 @@ import Helper as Helper
 import json
 import EnemyRandoLogic as EnemyRandoLogic
 import random
-from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs 
+from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun 
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
@@ -402,27 +402,18 @@ def DifficultyChanges(): # Makes Easy difficulty the same as Normal
         json.dump(data, file, indent=2)
 
 def MenuChanges(): # Adjusts the menu text # Ben still needs to push fix
-    fixlater = "Add Seed Hash Here"
+    seedhashcomplete = random.choice(SeedHashNoun) + " " + random.choice(SeedHashAdj)
     with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r+', encoding='utf-8') as file: #edits DLC items
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 128:
-                row["name"] = f"Seed Hash: {fixlater}"
+                row["name"] = f"Seed Hash: {seedhashcomplete}"
                 row["style"] = 166
             if row["$id"] == 129:
                 row["name"] = "Race Mode Start"
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
-    
-    """ with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r', encoding='utf-8') as file: #edits DLC items
-        lines = file.readlines()
-
-    with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'w', encoding='utf-8') as file: #edits DLC items
-        DelNGButton = Helper.InclRange(648, 652)
-        for i, line in enumerate(lines):
-            if i in DelNGButton:
-                file.write(line) """
     
 def ReduceBladeReqTrustVals(): # Sets required Trust Values to 0.5x the vanilla values
     with open("./_internal/JsonOutputs/common/FLD_ConditionIdea.json", 'r+', encoding='utf-8') as file:
