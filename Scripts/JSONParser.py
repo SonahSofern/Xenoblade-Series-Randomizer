@@ -1,13 +1,10 @@
-import json, random, os
+import json, random, os, IDs
 
-ValidReplacements = []
 
 def ChangeJSON(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacements = [], InvalidTargetIDs = []): # make this a function to reuse, check the settings ot see if we even do this
 
-    # Setup replacement exclusions
-    global ValidReplacements
     # print(f"Valid Replacements: {Replacements}")
-    rangeValidReplacements.extend(ValidReplacements)
+    rangeValidReplacements.extend(IDs.ValidReplacements)
 
     for name in Filename:
         filePath = "./_internal/JsonOutputs/" + name
@@ -20,9 +17,11 @@ def ChangeJSON(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacement
                 if not item["$id"] in InvalidTargetIDs:
                     for key in item:
                         if any((key == keyWord) for keyWord in keyWords):
-                            if (item[key] in rangeofValuesToReplace):
+                            if ((item[key] in rangeofValuesToReplace) and (IDs.CurrentSliderOdds != None) and (IDs.CurrentSliderOdds > random.randint(1,100))):
                                 item[key] = random.choice(rangeValidReplacements)
+
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-    ValidReplacements.clear()
+    IDs.ValidReplacements.clear()
+    IDs.CurrentSliderOdds = None

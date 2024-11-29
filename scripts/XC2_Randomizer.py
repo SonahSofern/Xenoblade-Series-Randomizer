@@ -1,7 +1,7 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, types
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, RaceMode, TutorialShortening
+import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, RaceMode, TutorialShortening, IDs
 from IDs import *
 from Cosmetics import *
 from UI_Colors import *
@@ -161,7 +161,7 @@ def GenDictionary(optionName, parentTab, description, commandList = [], subOptio
         elif isinstance(subOptionName_subCommandList[2*i+1][0], types.LambdaType):
             autoCommand = subOptionName_subCommandList[2*i+1]
         else:
-            autoCommand = [lambda: JSONParser.ValidReplacements.extend(subOptionName_subCommandList[2*i+1])]
+            autoCommand = [lambda: IDs.ValidReplacements.extend(subOptionName_subCommandList[2*i+1])]
 
 
         OptionDictionary[optionName]["subOptionObjects"][subOptionName_subCommandList[2*i]] = {
@@ -288,7 +288,9 @@ def Randomize():
 
 def RunOptions():
     for option in OptionDictionary.values():
-        if (option["optionTypeVal"].get()): # checks main option input
+        if ((option["optionTypeVal"].get() == True) or (option["optionTypeVal"].get() > 0)): # checks main option input
+            if (option["optionTypeVal"].get() > 0):
+                IDs.CurrentSliderOdds = option["optionTypeVal"].get()
             for subOption in option["subOptionObjects"].values():
                 if (subOption["subOptionTypeVal"].get()): # checks subOption input
                     for subCommand in subOption["subCommandList"]:

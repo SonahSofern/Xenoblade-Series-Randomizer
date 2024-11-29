@@ -1,5 +1,9 @@
 import Helper as Helper
 
+
+ValidReplacements = [] # Global Variable Referenced for JsonParser
+CurrentSliderOdds = None # Global Variable Referenced for JsonParser
+
 #HELPFUL VARIABLES
 AuxCores = Helper.InclRange(17001, 17424) + Helper.InclRange(15001, 15406) # These are all aux cores in ITM_OrbEquip and ITM_Orb
 WeaponChips = Helper.InclRange(10001, 10060)
