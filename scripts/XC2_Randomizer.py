@@ -45,6 +45,7 @@ TabMiscOuter = Frame(MainWindow)
 TabQOLOuter = Frame(MainWindow)
 TabCosmeticsOuter = Frame(MainWindow)
 TabRaceModeOuter = Frame(MainWindow)
+TabSettingsOuter = Frame(MainWindow)
 
 # Canvas 
 TabGeneralCanvas = Canvas(TabGeneralOuter) 
@@ -55,6 +56,7 @@ TabMiscCanvas = Canvas(TabMiscOuter)
 TabQOLCanvas = Canvas(TabQOLOuter)
 TabCosmeticsCanvas = Canvas(TabCosmeticsOuter)
 TabRaceModeCanvas = Canvas(TabRaceModeOuter)
+TabSettingsCanvas = Canvas(TabSettingsOuter)
 
 # Actual Scrollable Content
 TabGeneral = Frame(TabGeneralCanvas) 
@@ -65,6 +67,7 @@ TabMisc = Frame(TabMiscCanvas)
 TabQOL = Frame(TabQOLCanvas)
 TabCosmetics = Frame(TabCosmeticsCanvas)
 TabRaceMode = Frame(TabRaceModeCanvas)
+TabSettings = Frame(TabSettingsOuter)
 
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
@@ -86,7 +89,7 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touc
         Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
         OuterFrames[i].pack(expand=True, fill="both")
 
-CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabRaceModeOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabRaceModeCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabRaceMode])
+CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabRaceModeOuter, TabSettingsOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabRaceModeCanvas, TabSettingsCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabRaceMode, TabSettings])
 
 # Tabs
 MainWindow.add(TabGeneralOuter, text ='General') 
@@ -97,6 +100,7 @@ MainWindow.add(TabMiscOuter, text ='Misc.')
 MainWindow.add(TabQOLOuter, text = 'Quality of Life')
 MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.add(TabRaceModeOuter, text='Race Mode')
+MainWindow.add(TabSettingsOuter, text = 'Game Settings')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 def GenDictionary(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
@@ -288,9 +292,13 @@ def Randomize():
 
 def RunOptions():
     for option in OptionDictionary.values():
-        if ((option["optionTypeVal"].get() == True) or (option["optionTypeVal"].get() > 0)): # checks main option input
-            if (option["optionTypeVal"].get() > 0):
-                IDs.CurrentSliderOdds = option["optionTypeVal"].get()
+
+        if (type(option["optionTypeVal"].get()) == int):
+            IDs.CurrentSliderOdds = option["optionTypeVal"].get()
+        else:
+            IDs.CurrentSliderOdds = 0
+
+        if (option["optionTypeVal"].get() != 0): # checks main option input
             for subOption in option["subOptionObjects"].values():
                 if (subOption["subOptionTypeVal"].get()): # checks subOption input
                     for subCommand in subOption["subCommandList"]:
@@ -328,7 +336,7 @@ SeedFrame = Frame(root, background=Red)
 SeedFrame.pack(anchor="w", padx=10)
 seedDesc = Button(SeedFrame, text="Seed", command=GenRandomSeed)
 seedDesc.pack(side='left', padx=2, pady=2)
-randoSeedEntry = Entry(SeedFrame, width=25)
+randoSeedEntry = Entry(SeedFrame, width=30)
 randoSeedEntry.pack(side='left', padx=2)
 RandomizeButton = Button(text='Randomize', command=Randomize)
 RandomizeButton.pack(pady=10) 
