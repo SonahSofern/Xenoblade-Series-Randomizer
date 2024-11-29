@@ -1,3 +1,6 @@
+import json, random, IDs
+
+
 #Blades
 JadeOrchidBrighid = "bl/bl121001"
 WaterLilyBrighid = "bl/bl111001"
@@ -54,21 +57,108 @@ CandyStripeNia = "pc/pc100201"
 BloodWitchNia = "pc/pc120201"
 DefaultDriverNia  = "pc/pc000201"
 
-#Drivers
-RexCosmetics = ["Default Rex", [DefaultRex], "Master Driver Rex", [MasterDriverRex], "Cloud Sea King Rex", [CloudSeaKingRex], "Cloud Sea Shark Rex", [CloudSeaSharkRex], "Prototype Suit Rex", [PrototypeSuitRex], "Helmeted Rex", [HelmetedRex]]
-NiaDriverCosmetics = ["Blood Witch Nia", [BloodWitchNia], "Candy Stripe Nia", [CandyStripeNia], "Fancy Sundress Nia", [FancySundressNia]]
-ToraCosmetics = ["Buster Mode Tora", [BusterModeTora], "Skullface Punk Tora", [SkullfacePunkTora], "Best Girlfan Tora", [BestGirlFanTora]]
-MoragCosmetics = ["Dress Uniform Morag", [DressUniformMorag], "Scarlet Inquisitor Morag", [ScarletInquisitorMorag], "Obligatory Leave Morag", [ObligatoryLeaveMorag]]
-ZekeCosmetics = ["Shining Justice Zeke", [ShiningJusticeZeke], "Embercake Zeke", [EmbercakeZeke], "Surfinator Zeke", [SurfinatorZeke]]
+# Character Numbers
+Rex = 1
+NiaDriver = 2
+Tora = 4
+Morag = 6
+Zeke = 3
+Pyra = 1001
+Mythra = 1002
+Dromarch = 1004
+Brighid = 1009
+Pandoria = 1010
+NiaBlade = 1011
 
-#Blades
-PyraCosmetics = ["Default Pyra", [DefaultPyra], "Blue Sky Pyra", [BlueSkyPyra], "Disguised Pyra", [DisguisedPyra], "Mythra-Style-Pyra", [MythraStylePyra], "Pro Swimmer Pyra", [ProSwimmerPyra]]
-MythraCosmetics = ["Carbon Mythra", [CarbonMythra], "Pyra-Style-Mythra", [PyraStyleMythra], "Radiant Beach Mythra", [RadiantBeachMythra]]
-DromarchCosmetics = ["Obsidian Dromarch", [ObsidianDromarch], "Savage Dromarch", [SavageDromarch]]
-BrighidCosmetics = ["Jade Orchid Brighid", [JadeOrchidBrighid], "Crimson Orchid Brighid", [CrimsonOrchidBrighid], "Water Lily Brighid", [WaterLilyBrighid]]
-PandoriaCosmetics = ["Magical Pink Pandoria", [MagicalPinkPandoria], "Mermaid Blue Pandoria", [MermaidBluePandoria], "Beach Date Pandoria", [BeachDatePandoria]]
-NiaBladeCosmetics = ["Devoted Marigold Nia", [DevotedMarigoldNia], "Sincere Primrose Nia", [SincerePrimroseNia], "Loyal Bellflower Nia", [LoyalBellflowerNia]]
+# Drivers
+RexCosmetics = [
+    "Master Driver Rex", [lambda: IDs.ValidDriverCosmetics.append([MasterDriverRex, Rex])],
+    "Cloud Sea King Rex", [lambda: IDs.ValidDriverCosmetics.append([CloudSeaKingRex, Rex])],
+    "Cloud Sea Shark Rex", [lambda: IDs.ValidDriverCosmetics.append([CloudSeaSharkRex, Rex])],
+    "Prototype Suit Rex", [lambda: IDs.ValidDriverCosmetics.append([PrototypeSuitRex, Rex])],
+    "Helmeted Rex", [lambda: IDs.ValidDriverCosmetics.append([HelmetedRex, Rex])],
+]
 
+NiaDriverCosmetics = [
+    "Blood Witch Nia", [lambda: IDs.ValidDriverCosmetics.append([BloodWitchNia, NiaDriver])],
+    "Candy Stripe Nia", [lambda: IDs.ValidDriverCosmetics.append([CandyStripeNia, NiaDriver])],
+    "Fancy Sundress Nia", [lambda: IDs.ValidDriverCosmetics.append([FancySundressNia, NiaDriver])],
+]
+
+ToraCosmetics = [
+    "Buster Mode Tora", [lambda: IDs.ValidDriverCosmetics.append([BusterModeTora, Tora])],
+    "Skullface Punk Tora", [lambda: IDs.ValidDriverCosmetics.append([SkullfacePunkTora, Tora])],
+    "Best Girlfan Tora", [lambda: IDs.ValidDriverCosmetics.append([BestGirlFanTora, Tora])],
+]
+
+MoragCosmetics = [
+    "Dress Uniform Morag", [lambda: IDs.ValidDriverCosmetics.append([DressUniformMorag, Morag])],
+    "Scarlet Inquisitor Morag", [lambda: IDs.ValidDriverCosmetics.append([ScarletInquisitorMorag, Morag])],
+    "Obligatory Leave Morag", [lambda: IDs.ValidDriverCosmetics.append([ObligatoryLeaveMorag, Morag])],
+]
+
+ZekeCosmetics = [
+    "Shining Justice Zeke", [lambda: IDs.ValidDriverCosmetics.append([ShiningJusticeZeke, Zeke])],
+    "Embercake Zeke", [lambda: IDs.ValidDriverCosmetics.append([EmbercakeZeke, Zeke])],
+    "Surfinator Zeke", [lambda: IDs.ValidDriverCosmetics.append([SurfinatorZeke, Zeke])],
+]
+
+# Blades
+PyraCosmetics = [
+    "Blue Sky Pyra", [lambda: IDs.ValidBladeCosmetics.append([BlueSkyPyra, Pyra])],
+    "Disguised Pyra", [lambda: IDs.ValidBladeCosmetics.append([DisguisedPyra, Pyra])],
+    "Mythra-Style-Pyra", [lambda: IDs.ValidBladeCosmetics.append([MythraStylePyra, Pyra])],
+    "Pro Swimmer Pyra", [lambda: IDs.ValidBladeCosmetics.append([ProSwimmerPyra, Pyra])],
+]
+
+MythraCosmetics = [
+    "Carbon Mythra", [lambda: IDs.ValidBladeCosmetics.append([CarbonMythra, Mythra])],
+    "Pyra-Style-Mythra", [lambda: IDs.ValidBladeCosmetics.append([PyraStyleMythra, Mythra])],
+    "Radiant Beach Mythra", [lambda: IDs.ValidBladeCosmetics.append([RadiantBeachMythra, Mythra])],
+]
+
+DromarchCosmetics = [
+    "Obsidian Dromarch", [lambda: IDs.ValidBladeCosmetics.append([ObsidianDromarch, Dromarch])],
+    "Savage Dromarch", [lambda: IDs.ValidBladeCosmetics.append([SavageDromarch, Dromarch])],
+]
+
+BrighidCosmetics = [
+    "Jade Orchid Brighid", [lambda: IDs.ValidBladeCosmetics.append([JadeOrchidBrighid, Brighid])],
+    "Crimson Orchid Brighid", [lambda: IDs.ValidBladeCosmetics.append([CrimsonOrchidBrighid, Brighid])],
+    "Water Lily Brighid", [lambda: IDs.ValidBladeCosmetics.append([WaterLilyBrighid, Brighid])],
+]
+
+PandoriaCosmetics = [
+    "Magical Pink Pandoria", [lambda: IDs.ValidBladeCosmetics.append([MagicalPinkPandoria, Pandoria])],
+    "Mermaid Blue Pandoria", [lambda: IDs.ValidBladeCosmetics.append([MermaidBluePandoria, Pandoria])],
+    "Beach Date Pandoria", [lambda: IDs.ValidBladeCosmetics.append([BeachDatePandoria, Pandoria])],
+]
+
+NiaBladeCosmetics = [
+    "Devoted Marigold Nia", [lambda: IDs.ValidBladeCosmetics.append([DevotedMarigoldNia, NiaBlade])],
+    "Sincere Primrose Nia", [lambda: IDs.ValidBladeCosmetics.append([SincerePrimroseNia, NiaBlade])],
+    "Loyal Bellflower Nia", [lambda: IDs.ValidBladeCosmetics.append([LoyalBellflowerNia, NiaBlade])],
+]
 
 def Cosmetics():
-    return
+    #Drivers
+    with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data['rows']:
+            choice = random.choice(IDs.ValidDriverCosmetics)
+            row["Model"] = choice[0]
+            row["Driver"] = choice[1]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    #Blades
+    with open("./_internal/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data['rows']:
+            choice = random.choice(IDs.ValidBladeCosmetics)
+            row["Model"] = choice[0]
+            row["Blade"] = choice[1]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    IDs.ValidDriverCosmetics.clear()

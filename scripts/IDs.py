@@ -4,6 +4,8 @@ import Helper as Helper
 ValidReplacements = [] # Global Variable Referenced for JsonParser
 InvalidReplacements = [] # Global Variable Referenced for JsonParser
 CurrentSliderOdds = 100 # Global Variable Referenced for JsonParser
+ValidDriverCosmetics = [] # Global Variable Referenced for Cosmetics
+ValidBladeCosmetics = [] # Global Variable Referenced for Cosmeticss
 
 #HELPFUL VARIABLES
 AuxCores = Helper.InclRange(17001, 17424) + Helper.InclRange(15001, 15406) # These are all aux cores in ITM_OrbEquip and ITM_Orb

@@ -1,9 +1,10 @@
 import json, random, os, IDs
 
 
-def ChangeJSON(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacements = [], InvalidTargetIDs = [], SliderOdds = IDs.CurrentSliderOdds): # make this a function to reuse, check the settings ot see if we even do this
+def ChangeJSON(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacements = [], InvalidTargetIDs = [], SliderOdds = 100): # make this a function to reuse, check the settings ot see if we even do this
 
     # print(f"Valid Replacements: {Replacements}")
+    SliderOdds = IDs.CurrentSliderOdds
     rangeValidReplacements.extend(IDs.ValidReplacements)
     rangeValidReplacements = list(set(rangeValidReplacements) - set(IDs.InvalidReplacements))
 
@@ -24,4 +25,5 @@ def ChangeJSON(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacement
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
     IDs.ValidReplacements.clear()
+    IDs.InvalidReplacements.clear()
     IDs.CurrentSliderOdds = 100
