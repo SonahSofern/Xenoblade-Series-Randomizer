@@ -5,6 +5,7 @@ def ChangeJSON(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacement
 
     # print(f"Valid Replacements: {Replacements}")
     rangeValidReplacements.extend(IDs.ValidReplacements)
+    rangeValidReplacements = list(set(rangeValidReplacements) - set(IDs.InvalidReplacements))
 
     for name in Filename:
         filePath = "./_internal/JsonOutputs/" + name

@@ -164,21 +164,11 @@ def GenDictionary(optionName, parentTab, description, commandList = [], subOptio
         var = BooleanVar()
         checkBox = Checkbutton(optionPanel, background=OptionColor, text=subOptionName_subCommandList[2*i], variable=var, highlightthickness=0)
         checkBox.grid(row=rowIncrement+i+1, column=0, sticky="sw")
-        # print(len(subOptionName_subCommandList[2*i]))
-
-        # Default Command if you dont provide a lambda command for a suboption (made so i dont have to write a million lambda statements)
-        if subOptionName_subCommandList[2*i+1] == []:
-            autoCommand = []
-        elif isinstance(subOptionName_subCommandList[2*i+1][0], types.LambdaType):
-            autoCommand = subOptionName_subCommandList[2*i+1]
-        else:
-            autoCommand = [lambda: IDs.ValidReplacements.extend(subOptionName_subCommandList[2*i+1])]
-
 
         OptionDictionary[optionName]["subOptionObjects"][subOptionName_subCommandList[2*i]] = {
         "subName": subOptionName_subCommandList[2*i],
         "subOptionTypeVal": var,
-        "subCommandList": autoCommand,
+        "subCommandList": subOptionName_subCommandList[2*i+1],
         }
 
 
@@ -189,17 +179,17 @@ def Options():
     GenDictionary("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", [lambda: JSONParser.ChangeJSON(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)])
     GenDictionary("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", [lambda: JSONParser.ChangeJSON(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(Accessories)-set([1])), Accessories + Helper.InclRange(448,455))])
     GenDictionary("Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Weapon Chip Shops", [lambda: JSONParser.ChangeJSON(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)])
-    GenDictionary("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[])], ["Accessories", Accessories ,"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials])
-    GenDictionary("Collection Points", TabGeneral, "Randomizes the contents of Collection Points", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID"], list(set(CollectionPointMaterials) - set([30019])), [])], ["Accessories", Accessories,"Weapon Chips", WeaponChips, "Aux Cores", AuxCores, "Core Crystals", CoreCrystals, "Deeds", Deeds, "Collection Point Materials", CollectionPointMaterials])
+    GenDictionary("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals,[])], ["Accessories", [lambda: IDs.ValidReplacements.extend(Accessories)] ,"Weapon Chips", [lambda: IDs.ValidReplacements.extend(WeaponChips)], "Aux Cores", [lambda: IDs.ValidReplacements.extend(AuxCores)], "Core Crystals", [lambda: IDs.ValidReplacements.extend(CoreCrystals)], "Deeds", [lambda: IDs.ValidReplacements.extend(Deeds)], "Collection Point Materials", [lambda: IDs.ValidReplacements.extend(CollectionPointMaterials)]])
+    GenDictionary("Collection Points", TabGeneral, "Randomizes the contents of Collection Points", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID"], list(set(CollectionPointMaterials) - set([30019])), [])], ["Accessories", [lambda: IDs.ValidReplacements.extend(Accessories)] ,"Weapon Chips", [lambda: IDs.ValidReplacements.extend(WeaponChips)], "Aux Cores", [lambda: IDs.ValidReplacements.extend(AuxCores)], "Core Crystals", [lambda: IDs.ValidReplacements.extend(CoreCrystals)], "Deeds", [lambda: IDs.ValidReplacements.extend(Deeds)], "Collection Point Materials", [lambda: IDs.ValidReplacements.extend(CollectionPointMaterials)]])
 
     # Drivers
-    GenDictionary("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, ArtDebuffs + ArtBuffs, InvalidTargetIDs=AutoAttacks)], ["Doom", [21]], Scale)
+    GenDictionary("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, ArtDebuffs + ArtBuffs, InvalidTargetIDs=AutoAttacks)], ["Doom", [lambda: IDs.ValidReplacements.extend(21)]], Scale)
     # GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", ["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20)) Nothing wrong with this just kinda niche/silly
     GenDictionary("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", [lambda: JSONParser.ChangeJSON(["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees)])
     GenDictionary("Balanced Skill Trees", TabDrivers, "Balances and randomizes the driver skill trees", [lambda: SkillTreeAdjustments.BalancingSkillTreeRando(OptionDictionary)])
     GenDictionary("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactions, InvalidTargetIDs=AutoAttacks)], optionType=Scale) # we want id numbers no edit the 1/6 react stuff
     GenDictionary("Driver Animation Speed", TabDrivers, "Randomizes animation speeds", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)])
-    # GenDictionary("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with", [lambda: JSONParser.ChangeJSON(["common/CHR_Dr.json"], ["DefAcce"], AllValues, Accessories)], ["Remove All Starting Accessories", Accessories])
+    GenDictionary("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with", [lambda: JSONParser.ChangeJSON(["common/CHR_Dr.json"], ["DefAcce"], Accessories + [0], Accessories + [0])], ["Remove All Starting Accessories", [lambda: IDs.InvalidReplacements.extend(Accessories)]])
     
     # Blades
     GenDictionary("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)], optionType=Scale)
@@ -225,7 +215,7 @@ def Options():
     #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30)) Defunct with alex's enemy rando
     
     # Misc
-    GenDictionary("Music", TabMisc, "Randomizes what music plays where", [lambda: JSONParser.ChangeJSON(["common/RSC_BgmCondition.json"], ["BgmIDA", "BgmIDB", "BgmIDC", "BgmIDD"], BackgroundMusic, BackgroundMusic)]) # need to change title screen music
+    GenDictionary("Music", TabMisc, "Randomizes what music plays where", [lambda: JSONParser.ChangeJSON(["common/RSC_BgmList.json"], ["filename"], ValidMusicFileNames, ValidMusicFileNames)]) # need to change title screen music
     # GenDictionary("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.InclRange(0,3721), Helper.InclRange(2001,3721))])
     GenDictionary("NPCs Size", TabMisc, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSON(["common/RSC_NpcList.json"], ["Scale"], Helper.InclRange(1,100), Helper.InclRange(1,250))])
     #GenOption("Funny Faces", TabMisc, "Randomizes Facial Expressions", ["common/EVT_eyetype.json"], ["$id"], Helper.inclRange(0,15), Helper.inclRange(0,15)) # doesnt work yet
@@ -242,17 +232,17 @@ def Options():
     #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
     
     # Cosmetics
-    # GenOption("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultRex], [], RexCosmetics, optionType=[Checkbutton])
-    # GenOption("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPyra], [], PyraCosmetics, optionType=[Checkbutton])
-    # GenOption("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultMythra], [], MythraCosmetics, optionType=[Checkbutton])
-    # GenOption("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultDriverNia], [], NiaDriverCosmetics, optionType=[Checkbutton])
-    # GenOption("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBladeNia], [], NiaBladeCosmetics, optionType=[Checkbutton])
-    # GenOption("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultDromarch], [], DromarchCosmetics, optionType=[Checkbutton])
-    # GenOption("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultTora], [], ToraCosmetics, optionType=[Checkbutton])
-    # GenOption("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultMorag], [], MoragCosmetics, optionType=[Checkbutton])
-    # GenOption("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultBrighid], [], BrighidCosmetics, optionType=[Checkbutton])
-    # GenOption("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits", ["common/CHR_Dr.json"], ["Model"], [DefaultZeke], [], ZekeCosmetics, optionType=[Checkbutton])
-    # GenOption("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits", ["common/CHR_Bl.json"], ["Model"], [DefaultPandoria], [], PandoriaCosmetics, optionType=[Checkbutton])
+    GenDictionary("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultRex], [], RexCosmetics, optionType=[Checkbutton])
+    GenDictionary("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultPyra], [], PyraCosmetics, optionType=[Checkbutton])
+    GenDictionary("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultMythra], [], MythraCosmetics, optionType=[Checkbutton])
+    GenDictionary("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultDriverNia], [], NiaDriverCosmetics, optionType=[Checkbutton])
+    GenDictionary("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultBladeNia], [], NiaBladeCosmetics, optionType=[Checkbutton])
+    GenDictionary("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultDromarch], [], DromarchCosmetics, optionType=[Checkbutton])
+    GenDictionary("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultTora], [], ToraCosmetics, optionType=[Checkbutton])
+    GenDictionary("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultMorag], [], MoragCosmetics, optionType=[Checkbutton])
+    GenDictionary("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultBrighid], [], BrighidCosmetics, optionType=[Checkbutton])
+    GenDictionary("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultZeke], [], ZekeCosmetics, optionType=[Checkbutton])
+    GenDictionary("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultPandoria], [], PandoriaCosmetics, optionType=[Checkbutton])
     
     # Race Mode
     GenDictionary("Race Mode", TabRaceMode, "Enables Race Mode", [lambda: RaceMode.RaceModeChanging(OptionDictionary)], ["Mysterious Part Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", []])

@@ -68,3 +68,7 @@ DromarchCosmetics = ["Obsidian Dromarch", [ObsidianDromarch], "Savage Dromarch",
 BrighidCosmetics = ["Jade Orchid Brighid", [JadeOrchidBrighid], "Crimson Orchid Brighid", [CrimsonOrchidBrighid], "Water Lily Brighid", [WaterLilyBrighid]]
 PandoriaCosmetics = ["Magical Pink Pandoria", [MagicalPinkPandoria], "Mermaid Blue Pandoria", [MermaidBluePandoria], "Beach Date Pandoria", [BeachDatePandoria]]
 NiaBladeCosmetics = ["Devoted Marigold Nia", [DevotedMarigoldNia], "Sincere Primrose Nia", [SincerePrimroseNia], "Loyal Bellflower Nia", [LoyalBellflowerNia]]
+
+
+def Cosmetics():
+    return

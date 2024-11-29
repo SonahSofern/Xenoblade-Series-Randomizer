@@ -12,9 +12,5 @@ Scroll bars generates with loops not manually
 
 Figure out conflict between Alex wanted to load a save and settings defaults that the save will then overwrite
 
-Starting Accessories (Probably just make this remove starting accesories who cares what you get initially)
-
 NPC Rando (Eventually want npcs to actually exist there not just the model (actor swap))
-
-Menu Colors (Get working in a not ugly way)
 
