@@ -293,10 +293,9 @@ def Randomize():
 def RunOptions():
     for option in OptionDictionary.values():
 
+        # For Sliders
         if (type(option["optionTypeVal"].get()) == int):
             IDs.CurrentSliderOdds = option["optionTypeVal"].get()
-        else:
-            IDs.CurrentSliderOdds = 0
 
         if (option["optionTypeVal"].get() != 0): # checks main option input
             for subOption in option["subOptionObjects"].values():
