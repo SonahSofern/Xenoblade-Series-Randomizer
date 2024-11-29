@@ -318,7 +318,9 @@ def Randomize():
 def RunOptions():
     ShowTitleScreenText()
     for option in OptionDictionary.values():
-
+        if option["name"] == "Driver Art Reactions":
+            if option["optionTypeVal"].get() > 0:
+                EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", [Helper.StartsWith("ReAct", 1,16)], 0)
         # For Sliders
         if (type(option["optionTypeVal"].get()) == int):
             IDs.CurrentSliderOdds = option["optionTypeVal"].get()
