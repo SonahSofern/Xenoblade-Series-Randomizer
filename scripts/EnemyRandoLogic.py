@@ -488,24 +488,24 @@ def EnemyLogic(OptionsRunDict):
         print("Randomizing Enemies")
         TotalDefaultEnemyIDs = []
         TotalRandomizedEnemyIDs = []
-        if CheckboxStates[MixEnemiesBetweenTypesBox]:
-            if CheckboxStates[StoryBossesBox]:
+        if MixEnemiesBetweenTypesBox:
+            if StoryBossesBox:
                 EnemiestoPass += AllBossDefaultIDs
                 LevelstoPass += AllBossDefaultLevels
                 print("Bosses Added to Shuffle List")
-            if CheckboxStates[QuestEnemyBox]:
+            if QuestEnemyBox:
                 EnemiestoPass += AllQuestDefaultEnemyIDs
                 LevelstoPass += AllQuestEnemyDefaultLevels
                 print("Quest Enemies Added to Shuffle List")
-            if CheckboxStates[UniqueMonstersBox]:
+            if UniqueMonstersBox:
                 EnemiestoPass += AllUniqueMonsterDefaultIDs
                 LevelstoPass += AllUniqueMonsterDefaultLevels
                 print("Unique Monsters Added to Shuffle List")
-            if CheckboxStates[SuperbossesBox]:
+            if SuperbossesBox:
                 EnemiestoPass += AllSuperbossDefaultIDs
                 LevelstoPass += AllSuperbossDefaultLevels
                 print("Superbosses Added to Shuffle List")             
-            if CheckboxStates[NormalEnemiesBox]:
+            if NormalEnemiesBox:
                 EnemiestoPass += AllNormalEnemyDefaultIDs
                 LevelstoPass += AllNormalEnemyDefaultLevels 
                 print("Normal Enemies Added to Shuffle List")             
@@ -516,18 +516,18 @@ def EnemyLogic(OptionsRunDict):
             TotalRandomizedEnemyIDs = RandomizedEnemyIDs
             ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
             if EnemiestoPass:
-                if CheckboxStates[KeepAllEnemyLevelsBox]:
+                if KeepAllEnemyLevelsBox:
                     LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, LevelstoPass)
                     print("Reverting all enemy levels")
-                if CheckboxStates[QuestEnemyBox]:
-                    if CheckboxStates[KeepQuestEnemyLevelsBox]:
+                if QuestEnemyBox:
+                    if KeepQuestEnemyLevelsBox:
                         LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
                         print("Reverting Quest Enemy levels")
-                if CheckboxStates[StoryBossesBox]:
-                    if CheckboxStates[KeepStoryBossesLevelsBox]:
+                if StoryBossesBox:
+                    if KeepStoryBossesLevelsBox:
                         LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
                         print("Reverting Story Boss Levels")
-        if not CheckboxStates[MixEnemiesBetweenTypesBox]:
+        if not MixEnemiesBetweenTypesBox:
             print("Enemies not shuffled")
             for o in range(0, len(CheckboxList)):
                 EnemiestoPass = []
@@ -559,15 +559,15 @@ def EnemyLogic(OptionsRunDict):
                     random.shuffle(RandomizedEnemyIDs)
                     TotalRandomizedEnemyIDs.append(RandomizedEnemyIDs)
                     ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
-                    if CheckboxStates[KeepAllEnemyLevelsBox]:
+                    if KeepAllEnemyLevelsBox:
                         LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, LevelstoPass)
                         print("Reverting all enemy levels")
                     if CheckboxList[o] == "Quest Enemies" and CheckboxStates[o].get() == True:
-                        if CheckboxStates[KeepQuestEnemyLevelsBox].get() == True:
+                        if KeepQuestEnemyLevelsBox == True:
                             LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
                             print("Reverting Quest Enemy levels")
                     if CheckboxList[o] == "Story Bosses" and CheckboxStates[o].get() == True:
-                        if CheckboxStates[KeepStoryBossesLevelsBox].get() == True:
+                        if KeepStoryBossesLevelsBox == True:
                             LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
                             print("Reverting Story Boss Levels")
         SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "AlwaysAttack", 0)
