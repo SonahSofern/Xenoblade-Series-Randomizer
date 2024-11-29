@@ -6,18 +6,19 @@ from IDs import *
 from Cosmetics import *
 from UI_Colors import *
 
-root = Tk()
-root.title("Xenoblade Chronicles 2 Randomizer 0.1.0")
-root.configure(background=Red)
-root.geometry('900x800')
-icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
-root.iconphoto(True, icon)
-
+Version = "0.1.0"
 CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
 OptionDictionary = {}
 rowIncrement = 0
 MaxWidth = 1000
+
+root = Tk()
+root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
+root.configure(background=Red)
+root.geometry('900x800')
+icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
+root.iconphoto(True, icon)
 
 # The Notebook
 MainWindow = ttk.Notebook(root, height=5)
@@ -67,7 +68,7 @@ TabMisc = Frame(TabMiscCanvas)
 TabQOL = Frame(TabQOLCanvas)
 TabCosmetics = Frame(TabCosmeticsCanvas)
 TabRaceMode = Frame(TabRaceModeCanvas)
-TabSettings = Frame(TabSettingsOuter)
+TabSettings = Frame(TabSettingsCanvas)
 
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
@@ -100,8 +101,14 @@ MainWindow.add(TabMiscOuter, text ='Misc.')
 MainWindow.add(TabQOLOuter, text = 'Quality of Life')
 MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.add(TabRaceModeOuter, text='Race Mode')
-MainWindow.add(TabSettingsOuter, text = 'Game Settings')
+MainWindow.add(TabSettingsOuter, text = 'In-Game Settings')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
+
+
+def ShowTitleScreenText():
+    JSONParser.ChangeJSON(["common_ms/menu_ms.json"], ["name"], ["© 2017 Nintendo / MONOLITHSOFT"], [f"Randomizer v{Version}"]) # Change Title Version to Randomizer v0.1.0
+
+
 
 def GenDictionary(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
     global OptionDictionary
@@ -116,7 +123,7 @@ def GenDictionary(optionName, parentTab, description, commandList = [], subOptio
     optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
 
     # Create Option Name
-    option = Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w", wraplength=150)
+    option = Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w", wraplength=250)
     option.grid(row=rowIncrement, column=0, sticky="sw")
 
     # Create Option Interactable
@@ -178,7 +185,6 @@ def GenDictionary(optionName, parentTab, description, commandList = [], subOptio
     rowIncrement += 1
     
 def Options():
-
     # General
     GenDictionary("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", [lambda: JSONParser.ChangeJSON(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)])
     GenDictionary("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", [lambda: JSONParser.ChangeJSON(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(Accessories)-set([1])), Accessories + Helper.InclRange(448,455))])
@@ -251,6 +257,40 @@ def Options():
     # Race Mode
     GenDictionary("Race Mode", TabRaceMode, "Enables Race Mode", [lambda: RaceMode.RaceModeChanging(OptionDictionary)], ["Mysterious Part Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", []])
 
+
+    # In-Game Settings
+
+    # Camera Settings
+    GenDictionary("Invert up/down", TabSettings, "Toggle inversion of up/down for camera controls", [],[])
+    GenDictionary("Invert left/right", TabSettings, "Toggle inversion of left/right for camera controls", [],[])
+    GenDictionary("Auto camera response speed", TabSettings, "Adjust the response times for the automatically controlled camera", [],[],Scale)
+    GenDictionary("Camera reset response speed", TabSettings, "Adjust the length of time it takes to reset the camera's position", [],[],Scale)
+    GenDictionary("Turn speed", TabSettings, "Adjust the turning speed of the manual camera", [],[],Scale)
+    GenDictionary("Zoom speed", TabSettings, "Adjust the speed of the camera's zoom", [],[],Scale)
+    GenDictionary("Gradient Correction", TabSettings, "Adjust the automatic behavior of the camera when traversing gradients", [],[])
+
+    # Sound Settings
+    GenDictionary("Subtitles", TabSettings, "Toggle subtitles on or off", [],[])
+    GenDictionary("Cutscene voice volume", TabSettings, "Adjust voice volume during cutscenes", [],[], Scale)
+    GenDictionary("Game BGM volume", TabSettings, "Adjust background music volume during the game", [],[], Scale)
+    GenDictionary("Game SE volume", TabSettings, "Adjust volume of sound effects heard during the game", [],[], Scale)
+    GenDictionary("Game voice volume", TabSettings, "Adjust volume of voices heard during the game", [],[], Scale)
+    GenDictionary("Battle Narrator volume", TabSettings, "Adjust volume of the battle Narrator (not character battle voices)", [],[], Scale)
+    GenDictionary("Environment volume", TabSettings, "Adjust volume of environmental sounds (such as rain) heard during the game", [],[], Scale)
+    GenDictionary("System volume", TabSettings, "Adjust volume of system sounds heard during the game", [],[], Scale)
+
+    # Display Settings
+    GenDictionary("Screen brightness", TabSettings, "Adjust screen brightness", [],[], Scale)
+
+    # Game Settings
+    GenDictionary("Difficulty level", TabSettings, "Default Difficulty", [],["Easy",[],"Normal",[],"Bringer of Chaos",[], "Custom",[]])
+    GenDictionary("Auto-battle", TabSettings, "Toggle auto-battle", [],[])
+    GenDictionary("Automate Special Button Challenges", TabSettings, "Toggle automatic success for button challenge inputs during Specials", [],[])
+    GenDictionary("Enemy Aggression", TabSettings, "Toggle whether foes pick a fight (exc.salvage, unique, boss, and quest foes)", [],[])
+    GenDictionary("Special BGM", TabSettings, "When enabled, special battle music will play with certain Blades in the party", [],[])
+    
+
+
 def Randomize():
     def ThreadedRandomize():
         global OptionDictionary
@@ -268,7 +308,6 @@ def Randomize():
 
         # Runs all randomization
         RunOptions()
-
 
         randoProgressDisplay.config(text="Packing BDATs")
 
@@ -291,6 +330,7 @@ def Randomize():
     threading.Thread(target=ThreadedRandomize).start()
 
 def RunOptions():
+    ShowTitleScreenText()
     for option in OptionDictionary.values():
 
         # For Sliders

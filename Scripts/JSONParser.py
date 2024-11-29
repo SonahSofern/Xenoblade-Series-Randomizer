@@ -17,11 +17,10 @@ def ChangeJSON(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacement
                 if not item["$id"] in InvalidTargetIDs:
                     for key in item:
                         if any((key == keyWord) for keyWord in keyWords):
-                            if ((item[key] in rangeofValuesToReplace) and (SliderOdds > random.randint(1,100))):
+                            if ((item[key] in rangeofValuesToReplace) and (SliderOdds >= random.randint(1,100))):
                                 item[key] = random.choice(rangeValidReplacements)
-
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
     IDs.ValidReplacements.clear()
-    SliderOdds = 0
+    IDs.CurrentSliderOdds = 100
