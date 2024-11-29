@@ -1,16 +1,21 @@
-Make option sliders in my UI for the in game option sliders
+NOW
 
-Clean up code make readable and fast
+Make option sliders in my UI for the in game option sliders
 
 Fix cosmetics
 
-Make Readme
-
 Mutually Exclusive Widgets (Fixes Skill Tree Options Alex+Mine)
   
-Scroll bars generates with loops not manually
-
 Figure out conflict between Alex wanted to load a save and settings defaults that the save will then overwrite
+
+
+
+FUTURE
 
 NPC Rando (Eventually want npcs to actually exist there not just the model (actor swap))
 
+Scroll bars generates with loops not manually
+
+Clean up code make readable and fast
+
+Make Readme

@@ -205,11 +205,11 @@ def Options():
     GenDictionary("Blade Names", TabBlades, "Randomizes the names of blades", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
     GenDictionary("Blade Defenses", TabBlades, "Randomizes Blade Physical and Ether Defense", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.InclRange(0,100), BladeDefenseDistribution)])
     GenDictionary("Blade Mods", TabBlades, "Randomizes Blade Stat Modifiers", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.InclRange(0,100), BladeModDistribution)])
-    GenDictionary("Blade Scale", TabBlades, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["Scale", "WpnScale"], AllValues, Helper.InclRange(1,250) + [1000,16000])]) # Make sure these work for common blades
+    GenDictionary("Blade Size", TabBlades, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["Scale", "WpnScale"], AllValues, Helper.InclRange(1,250) + [1000,16000])], optionType= Scale) # Make sure these work for common blades
     
     # Enemies
     GenDictionary("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", [lambda: JSONParser.ChangeJSON(["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips)])
-    GenDictionary("Enemy Size", TabEnemies, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSON(["common/CHR_EnArrange.json"], ["Scale"], Helper.InclRange(0, 1000), Helper.InclRange(1, 200) + Helper.InclRange(990,1000))])
+    GenDictionary("Enemy Size", TabEnemies, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSON(["common/CHR_EnArrange.json"], ["Scale"], Helper.InclRange(0, 1000), Helper.InclRange(1, 200) + Helper.InclRange(990,1000))], optionType=Scale)
     GenDictionary("Enemies", TabEnemies, "Randomizes what enemies appear in the world", [lambda: EnemyRandoLogic.EnemyLogic(OptionDictionary)],["Story Bosses", [], "Quest Enemies", [], "Unique Monsters", [], "Superbosses", [], "Normal Enemies", [], "Mix Enemies Between Types", [], "Keep All Enemy Levels", [], "Keep Quest Enemy Levels", [], "Keep Story Boss Levels", []])
     GenDictionary("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", [lambda: JSONParser.ChangeJSON(["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.InclRange(0,100), Helper.InclRange(0,100) + Helper.InclRange(250,255))])
     #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30)) Defunct with alex's enemy rando
@@ -217,8 +217,8 @@ def Options():
     # Misc
     GenDictionary("Music", TabMisc, "Randomizes what music plays where", [lambda: JSONParser.ChangeJSON(["common/RSC_BgmList.json"], ["filename"], ValidMusicFileNames, ValidMusicFileNames)]) # need to change title screen music
     # GenDictionary("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.InclRange(0,3721), Helper.InclRange(2001,3721))])
-    GenDictionary("NPCs Size", TabMisc, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSON(["common/RSC_NpcList.json"], ["Scale"], Helper.InclRange(1,100), Helper.InclRange(1,250))])
-    #GenOption("Funny Faces", TabMisc, "Randomizes Facial Expressions", ["common/EVT_eyetype.json"], ["$id"], Helper.inclRange(0,15), Helper.inclRange(0,15)) # doesnt work yet
+    GenDictionary("NPCs Size", TabMisc, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSON(["common/RSC_NpcList.json"], ["Scale"], Helper.InclRange(1,100), Helper.InclRange(1,250))], optionType=Scale)
+    # GenOption("Funny Faces", TabMisc, "Randomizes Facial Expressions", ["common/EVT_eyetype.json"], ["$id"], Helper.inclRange(0,15), Helper.inclRange(0,15)) # doesnt work yet
     # GenDictionary("Menu Colors", TabMisc, "Randomizes Colors in the UI", [lambda: JSONParser.ChangeJSON(["common/MNU_ColorList.json"], ["col_r", "col_g", "col_b"], Helper.InclRange(0,255), Helper.InclRange(0,0))])
     # GenDictionary("Beta Stuff", TabMisc, "Stuff still in testing", [lambda: TestingStuff.Beta()])
 
@@ -232,47 +232,48 @@ def Options():
     #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
     
     # Cosmetics
-    GenDictionary("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultRex], [], RexCosmetics, optionType=[Checkbutton])
-    GenDictionary("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultPyra], [], PyraCosmetics, optionType=[Checkbutton])
-    GenDictionary("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultMythra], [], MythraCosmetics, optionType=[Checkbutton])
-    GenDictionary("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultDriverNia], [], NiaDriverCosmetics, optionType=[Checkbutton])
-    GenDictionary("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultBladeNia], [], NiaBladeCosmetics, optionType=[Checkbutton])
-    GenDictionary("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultDromarch], [], DromarchCosmetics, optionType=[Checkbutton])
-    GenDictionary("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultTora], [], ToraCosmetics, optionType=[Checkbutton])
-    GenDictionary("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultMorag], [], MoragCosmetics, optionType=[Checkbutton])
-    GenDictionary("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultBrighid], [], BrighidCosmetics, optionType=[Checkbutton])
-    GenDictionary("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultZeke], [], ZekeCosmetics, optionType=[Checkbutton])
-    GenDictionary("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultPandoria], [], PandoriaCosmetics, optionType=[Checkbutton])
+    # GenDictionary("Cosmetics", TabCosmetics, "Enables Cosmetic Randomization", [Cosmetics()])
+    # GenDictionary("Rex's Cosmetics", TabCosmetics, "Randomizes Rex's Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultRex], [], RexCosmetics)
+    # GenDictionary("Pyra's Cosmetics", TabCosmetics, "Randomizes Pyra's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultPyra], [], PyraCosmetics)
+    # GenDictionary("Mythra's Cosmetics", TabCosmetics, "Randomizes Mythra's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultMythra], [], MythraCosmetics)
+    # GenDictionary("Nia's Cosmetics (Driver)", TabCosmetics, "Randomizes Nia's Driver Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultDriverNia], [], NiaDriverCosmetics)
+    # GenDictionary("Nia's Cosmetics (Blade)", TabCosmetics, "Randomizes Nia's Blade Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultBladeNia], [], NiaBladeCosmetics)
+    # GenDictionary("Dromarch's Cosmetics", TabCosmetics, "Randomizes Dromarch's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultDromarch], [], DromarchCosmetics)
+    # GenDictionary("Tora's Cosmetics", TabCosmetics, "Randomizes Tora's Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultTora], [], ToraCosmetics)
+    # GenDictionary("Morag's Cosmetics", TabCosmetics, "Randomizes Morag's Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultMorag], [], MoragCosmetics)
+    # GenDictionary("Brighid's Cosmetics", TabCosmetics, "Randomizes Brighid's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultBrighid], [], BrighidCosmetics)
+    # GenDictionary("Zeke's Cosmetics", TabCosmetics, "Randomizes Zeke's Outfits onto Accessories", ["common/ITM_PcEquip.json"], ["Model"], [DefaultZeke], [], ZekeCosmetics)
+    # GenDictionary("Pandoria's Cosmetics", TabCosmetics, "Randomizes Pandoria's Outfits onto Accessories", ["common/ITM_OrbEquip.json"], ["Model"], [DefaultPandoria], [], PandoriaCosmetics)
     
     # Race Mode
     GenDictionary("Race Mode", TabRaceMode, "Enables Race Mode", [lambda: RaceMode.RaceModeChanging(OptionDictionary)], ["Mysterious Part Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", []])
 
-    # In-Game Settings
-        # Camera Settings
-    GenDictionary("Invert up/down", TabSettings, "Toggle inversion of up/down for camera controls", [],[])
-    GenDictionary("Invert left/right", TabSettings, "Toggle inversion of left/right for camera controls", [],[])
-    GenDictionary("Auto camera response speed", TabSettings, "Adjust the response times for the automatically controlled camera", [],[],Scale)
-    GenDictionary("Camera reset response speed", TabSettings, "Adjust the length of time it takes to reset the camera's position", [],[],Scale)
-    GenDictionary("Turn speed", TabSettings, "Adjust the turning speed of the manual camera", [],[],Scale)
-    GenDictionary("Zoom speed", TabSettings, "Adjust the speed of the camera's zoom", [],[],Scale)
-    GenDictionary("Gradient Correction", TabSettings, "Adjust the automatic behavior of the camera when traversing gradients", [],[])
-        # Sound Settings
-    GenDictionary("Subtitles", TabSettings, "Toggle subtitles on or off", [],[])
-    GenDictionary("Cutscene voice volume", TabSettings, "Adjust voice volume during cutscenes", [],[], Scale)
-    GenDictionary("Game BGM volume", TabSettings, "Adjust background music volume during the game", [],[], Scale)
-    GenDictionary("Game SE volume", TabSettings, "Adjust volume of sound effects heard during the game", [],[], Scale)
-    GenDictionary("Game voice volume", TabSettings, "Adjust volume of voices heard during the game", [],[], Scale)
-    GenDictionary("Battle Narrator volume", TabSettings, "Adjust volume of the battle Narrator (not character battle voices)", [],[], Scale)
-    GenDictionary("Environment volume", TabSettings, "Adjust volume of environmental sounds (such as rain) heard during the game", [],[], Scale)
-    GenDictionary("System volume", TabSettings, "Adjust volume of system sounds heard during the game", [],[], Scale)
-        # Display Settings
-    GenDictionary("Screen brightness", TabSettings, "Adjust screen brightness", [],[], Scale)
-        # Game Settings
-    GenDictionary("Difficulty level", TabSettings, "Default Difficulty", [],["Easy",[],"Normal",[],"Bringer of Chaos",[], "Custom",[]])
-    GenDictionary("Auto-battle", TabSettings, "Toggle auto-battle", [],[])
-    GenDictionary("Automate Special Button Challenges", TabSettings, "Toggle automatic success for button challenge inputs during Specials", [],[])
-    GenDictionary("Enemy Aggression", TabSettings, "Toggle whether foes pick a fight (exc.salvage, unique, boss, and quest foes)", [],[])
-    GenDictionary("Special BGM", TabSettings, "When enabled, special battle music will play with certain Blades in the party", [],[])
+    # # In-Game Settings
+    #     # Camera Settings
+    # GenDictionary("Invert up/down", TabSettings, "Toggle inversion of up/down for camera controls", [],[])
+    # GenDictionary("Invert left/right", TabSettings, "Toggle inversion of left/right for camera controls", [],[])
+    # GenDictionary("Auto camera response speed", TabSettings, "Adjust the response times for the automatically controlled camera", [],[],Scale)
+    # GenDictionary("Camera reset response speed", TabSettings, "Adjust the length of time it takes to reset the camera's position", [],[],Scale)
+    # GenDictionary("Turn speed", TabSettings, "Adjust the turning speed of the manual camera", [],[],Scale)
+    # GenDictionary("Zoom speed", TabSettings, "Adjust the speed of the camera's zoom", [],[],Scale)
+    # GenDictionary("Gradient Correction", TabSettings, "Adjust the automatic behavior of the camera when traversing gradients", [],[])
+    #     # Sound Settings
+    # GenDictionary("Subtitles", TabSettings, "Toggle subtitles on or off", [],[])
+    # GenDictionary("Cutscene voice volume", TabSettings, "Adjust voice volume during cutscenes", [],[], Scale)
+    # GenDictionary("Game BGM volume", TabSettings, "Adjust background music volume during the game", [],[], Scale)
+    # GenDictionary("Game SE volume", TabSettings, "Adjust volume of sound effects heard during the game", [],[], Scale)
+    # GenDictionary("Game voice volume", TabSettings, "Adjust volume of voices heard during the game", [],[], Scale)
+    # GenDictionary("Battle Narrator volume", TabSettings, "Adjust volume of the battle Narrator (not character battle voices)", [],[], Scale)
+    # GenDictionary("Environment volume", TabSettings, "Adjust volume of environmental sounds (such as rain) heard during the game", [],[], Scale)
+    # GenDictionary("System volume", TabSettings, "Adjust volume of system sounds heard during the game", [],[], Scale)
+    #     # Display Settings
+    # GenDictionary("Screen brightness", TabSettings, "Adjust screen brightness", [],[], Scale)
+    #     # Game Settings
+    # GenDictionary("Difficulty level", TabSettings, "Default Difficulty", [],["Easy",[],"Normal",[],"Bringer of Chaos",[], "Custom",[]])
+    # GenDictionary("Auto-battle", TabSettings, "Toggle auto-battle", [],[])
+    # GenDictionary("Automate Special Button Challenges", TabSettings, "Toggle automatic success for button challenge inputs during Specials", [],[])
+    # GenDictionary("Enemy Aggression", TabSettings, "Toggle whether foes pick a fight (exc.salvage, unique, boss, and quest foes)", [],[])
+    # GenDictionary("Special BGM", TabSettings, "When enabled, special battle music will play with certain Blades in the party", [],[])
     
 
 
