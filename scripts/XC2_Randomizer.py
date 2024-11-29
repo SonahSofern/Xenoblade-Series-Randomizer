@@ -296,7 +296,6 @@ def RunOptions():
         # For Sliders
         if (type(option["optionTypeVal"].get()) == int):
             IDs.CurrentSliderOdds = option["optionTypeVal"].get()
-
         if (option["optionTypeVal"].get() != 0): # checks main option input
             for subOption in option["subOptionObjects"].values():
                 if (subOption["subOptionTypeVal"].get()): # checks subOption input
