@@ -162,3 +162,4 @@ def Cosmetics():
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     IDs.ValidDriverCosmetics.clear()
+    IDs.ValidBladeCosmetics.clear()

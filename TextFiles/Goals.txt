@@ -2,8 +2,6 @@ NOW
 
 Make option sliders in my UI for the in game option sliders
 
-Fix cosmetics
-
 Mutually Exclusive Widgets (Fixes Skill Tree Options Alex+Mine)
   
 Figure out conflict between Alex wanted to load a save and settings defaults that the save will then overwrite
@@ -16,6 +14,6 @@ NPC Rando (Eventually want npcs to actually exist there not just the model (acto
 
 Scroll bars generates with loops not manually
 
-Clean up code make readable and fast
+Clean up code make readable and fast (I dont like these global variables clearing and maintaining them its bad programming idk how to fix yet)
 
 Make Readme
