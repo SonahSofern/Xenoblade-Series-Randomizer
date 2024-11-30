@@ -386,7 +386,8 @@ def LoadFontByName(name):
     defaultFont.config(family=name)
 
 def LoadFontSize(size):
-    defaultFont.config(size=int(size))
+    if (size != ""):
+        defaultFont.config(size=int(size))
 
 def NextFont(event= None):
     global defaultFont
