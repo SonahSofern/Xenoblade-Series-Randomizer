@@ -29,8 +29,12 @@ BlueSkyPyra = "bl/bl120101"
 ProSwimmerPyra = "bl/bl110101"
 DefaultPyra = "bl/bl000101"
 DefaultPoppiα = "bl/bl000601"
+CornflowerPoppiα = "bl/bl120601"
+SwimLessonPoppiα = "bl/bl110601"
 DefaultPoppiQT = "bl/bl000701"
-DefaultPoppiQTPi = "bl/bl000801"
+AntiquePrincessPoppiQT = "bl/bl120701"
+DefaultPoppiQTπ = "bl/bl000801"
+NanoOrangeQTπ = "bl/bl120801"
 
 #Drivers
 CloudSeaKingRex = "pc/pc120101"
@@ -66,9 +70,13 @@ Zeke = 3
 Pyra = 1001
 Mythra = 1002
 Dromarch = 1004
+Poppiα = 1005
+PoppiQT = 1006
+PoppiQTπ = 1007
 Brighid = 1009
 Pandoria = 1010
 NiaBlade = 1011
+
 
 # Drivers
 RexCosmetics = [
@@ -140,6 +148,19 @@ NiaBladeCosmetics = [
     "Loyal Bellflower Nia", [lambda: IDs.ValidBladeCosmetics.append([LoyalBellflowerNia, NiaBlade])],
 ]
 
+PoppiαCosmetics = [
+    "Cornflower Poppi α", [lambda: IDs.ValidArtificialBladeCosmetics.append([CornflowerPoppiα, Poppiα])],
+    "Swim Lesson Poppi α", [lambda: IDs.ValidArtificialBladeCosmetics.append([SwimLessonPoppiα, Poppiα])],
+]
+
+PoppiQTCosmetics = [
+    "Antique Princess QT", [lambda: IDs.ValidArtificialBladeCosmetics.append([AntiquePrincessPoppiQT, PoppiQT])],
+]
+
+PoppiQTπCosmetics = [
+    "Nano Orange QTπ", [lambda: IDs.ValidArtificialBladeCosmetics.append([NanoOrangeQTπ, PoppiQTπ])],
+]
+
 def Cosmetics():
     #Drivers
     with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file:
@@ -161,5 +182,16 @@ def Cosmetics():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+    #ArtificialBlades
+    with open("./_internal/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data['rows']:
+            choice = random.choice(IDs.ValidArtificialBladeCosmetics)
+            row["Model"] = choice[0]
+            row["Blade"] = choice[1]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
     IDs.ValidDriverCosmetics.clear()
     IDs.ValidBladeCosmetics.clear()
+    IDs.ValidArtificialBladeCosmetics.clear()

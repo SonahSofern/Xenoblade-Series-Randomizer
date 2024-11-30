@@ -5,7 +5,8 @@ ValidReplacements = [] # Global Variable Referenced for JsonParser
 InvalidReplacements = [] # Global Variable Referenced for JsonParser
 CurrentSliderOdds = 100 # Global Variable Referenced for JsonParser
 ValidDriverCosmetics = [] # Global Variable Referenced for Cosmetics
-ValidBladeCosmetics = [] # Global Variable Referenced for Cosmeticss
+ValidBladeCosmetics = [] # Global Variable Referenced for Cosmetics
+ValidArtificialBladeCosmetics = [] #Global Variable Referenced for Cosmetics
 
 #HELPFUL VARIABLES
 AuxCores = Helper.InclRange(17001, 17424) + Helper.InclRange(15001, 15406) # These are all aux cores in ITM_OrbEquip and ITM_Orb
@@ -19,6 +20,7 @@ ArtDebuffs = [0,1,2,3,4,5,6,7,8,9,16,17,21]
 ArtBuffs = [0,11,12,13,14,15,21,23,24,25,30,35]
 DriverSkillTrees = Helper.InclRange(1,270)
 HitReactions = Helper.InclRange(0,14)
+HitReactionDistribution = [0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,5,6,7,8,9,10,11,12,13,14]
 ButtonCombos = Helper.InclRange(1,5)
 BladeBattleSkills = Helper.InclRange(1,270)
 BladeFieldSkills = Helper.InclRange(1,74)

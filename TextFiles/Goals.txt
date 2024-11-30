@@ -6,7 +6,7 @@ Mutually Exclusive Widgets (Fixes Skill Tree Options Alex+Mine)
   
 Figure out conflict between Alex wanted to load a save and settings defaults that the save will then overwrite
 
-
+Fix foucs method of checkboxes
 
 FUTURE
 
