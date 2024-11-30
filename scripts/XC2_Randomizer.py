@@ -1,10 +1,12 @@
 from tkinter import PhotoImage, ttk
-import random, subprocess, shutil, os, threading, types
+import random, subprocess, shutil, os, threading
 from tkinter import *
 import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, RaceMode, TutorialShortening, IDs
 from IDs import *
 from Cosmetics import *
 from UI_Colors import *
+from tkinter.font import Font
+from tkinter import font
 
 Version = "0.1.0"
 CommonBdatInput = ""
@@ -13,10 +15,14 @@ OptionDictionary = {}
 rowIncrement = 0
 MaxWidth = 1000
 
+
+
 root = Tk()
+defaultFont = Font(family="Forte", size=12)
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
+root.option_add("*Font", defaultFont)
 root.configure(background=Red)
-root.geometry('900x800')
+root.geometry('1000x800')
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
 
@@ -25,7 +31,7 @@ MainWindow = ttk.Notebook(root, height=5)
 
 def NotebookFocusStyleFix():
     style = ttk.Style()
-
+    style.configure("TNotebook.Tab", font=(defaultFont))  # Change tab font
     style.layout("Tab",
     [('Notebook.tab', {'sticky': 'nswe', 'children':
         [('Notebook.padding', {'side': 'top', 'sticky': 'nswe', 'children':
@@ -109,6 +115,13 @@ def ShowTitleScreenText():
     JSONParser.ChangeJSON(["common_ms/menu_ms.json"], ["name"], ["© 2017 Nintendo / MONOLITHSOFT"], [f"Randomizer v{Version}"]) # Change Title Version to Randomizer v0.1.0
 
 
+def GenHeader(headerName, parentTab, backgroundColor):
+    global rowIncrement
+    
+    Header = Label(parentTab, text=headerName, padx=10, pady=10, background=backgroundColor, font=(defaultFont), width=MaxWidth, anchor="w")
+    Header.grid(row=rowIncrement, column=0, sticky="w")
+
+    rowIncrement += 1
 
 def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
     global OptionDictionary
@@ -123,7 +136,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
 
     # Create Option Name
-    option = Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w", wraplength=250)
+    option = Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w", wraplength=350)
     option.grid(row=rowIncrement, column=0, sticky="sw")
 
     # Create Option Interactable
@@ -238,7 +251,7 @@ def Options():
     GenStandardOption("Race Mode", TabRaceMode, "Enables Race Mode", [lambda: RaceMode.RaceModeChanging(OptionDictionary)], ["Mysterious Part Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", []])
 
     # In-Game Settings
-        # Camera Settings
+    GenHeader("Camera Settings",TabSettings, None)
     GenStandardOption("Invert up/down", TabSettings, "Toggle inversion of up/down for camera controls", [],[])
     GenStandardOption("Invert left/right", TabSettings, "Toggle inversion of left/right for camera controls", [],[])
     GenStandardOption("Auto camera response speed", TabSettings, "Adjust the response times for the automatically controlled camera", [],[],Scale)
@@ -246,7 +259,8 @@ def Options():
     GenStandardOption("Turn speed", TabSettings, "Adjust the turning speed of the manual camera", [],[],Scale)
     GenStandardOption("Zoom speed", TabSettings, "Adjust the speed of the camera's zoom", [],[],Scale)
     GenStandardOption("Gradient Correction", TabSettings, "Adjust the automatic behavior of the camera when traversing gradients", [],[])
-        # Sound Settings
+
+    GenHeader("Sound Settings",TabSettings, None)    
     GenStandardOption("Subtitles", TabSettings, "Toggle subtitles on or off", [],[])
     GenStandardOption("Cutscene voice volume", TabSettings, "Adjust voice volume during cutscenes", [],[], Scale)
     GenStandardOption("Game BGM volume", TabSettings, "Adjust background music volume during the game", [],[], Scale)
@@ -255,9 +269,11 @@ def Options():
     GenStandardOption("Battle Narrator volume", TabSettings, "Adjust volume of the battle Narrator (not character battle voices)", [],[], Scale)
     GenStandardOption("Environment volume", TabSettings, "Adjust volume of environmental sounds (such as rain) heard during the game", [],[], Scale)
     GenStandardOption("System volume", TabSettings, "Adjust volume of system sounds heard during the game", [],[], Scale)
-        # Display Settings
+
+    GenHeader("Screen Settings",TabSettings, None)        
     GenStandardOption("Screen brightness", TabSettings, "Adjust screen brightness", [],[], Scale)
-        # Game Settings
+
+    GenHeader("Game Settings",TabSettings, None)
     GenStandardOption("Difficulty level", TabSettings, "Default Difficulty", [],["Easy",[],"Normal",[],"Bringer of Chaos",[], "Custom",[]])
     GenStandardOption("Auto-battle", TabSettings, "Toggle auto-battle", [],[])
     GenStandardOption("Automate Special Button Challenges", TabSettings, "Toggle automatic success for button challenge inputs during Specials", [],[])
@@ -351,6 +367,65 @@ SeedFrame = Frame(root, background=Red)
 SeedFrame.pack(anchor="w", padx=10)
 seedDesc = Button(SeedFrame, text="Seed", command=GenRandomSeed)
 seedDesc.pack(side='left', padx=2, pady=2)
+
+
+
+
+allFonts = font.families()
+iter = 0
+
+def NextFont(event= None):
+    global defaultFont
+    global iter
+    global randoSeedEntry
+    iter += 1
+    fontName.delete(0, END)
+    fontName.insert(0,allFonts[iter])
+    defaultFont.config(family=allFonts[iter])
+
+def PreviousFont(event = None):
+    global defaultFont
+    global iter
+    global randoSeedEntry
+    iter -= 1
+    fontName.delete(0, END)
+    fontName.insert(0,allFonts[iter])
+    defaultFont.config(family=allFonts[iter])
+
+GoodFonts = []
+
+def GoodFont(event = None):
+    global iter
+    global GoodFonts
+    GoodFonts.append(allFonts[iter])
+    print(GoodFonts)
+
+def IncreaseFontSize(event = None):
+    newSize = defaultFont.cget("size") + 1
+    defaultFont.config(size=newSize)
+def DecreaseFontSize(event = None):
+    newSize = defaultFont.cget("size") - 1
+    defaultFont.config(size=newSize)
+
+
+
+root.bind("<Right>", NextFont)
+root.bind("<Left>", PreviousFont) 
+root.bind("<Return>", GoodFont)
+root.bind("<Up>", IncreaseFontSize)
+root.bind("<Down>", DecreaseFontSize) 
+
+fontTestBack = Button( text="Previous Font", command=PreviousFont, font=("Arial", 12))
+fontTestBack.pack(side='left', padx=5, pady=2)
+fontTestNext = Button( text="Next Font", command=NextFont, font=("Arial", 12))
+fontTestNext.pack(side='left', padx=5, pady=2)
+fontName = Entry( width=30, font=("Arial", 12))
+fontName.pack(side='left', padx=2)
+fontGood = Button( text="Save Font", command=GoodFont, font=("Arial", 12))
+fontGood.pack(side='left', padx=5, pady=2)
+
+
+
 randoSeedEntry = Entry(SeedFrame, width=30)
 randoSeedEntry.pack(side='left', padx=2)
 RandomizeButton = Button(text='Randomize', command=Randomize)

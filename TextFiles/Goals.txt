@@ -8,6 +8,8 @@ Figure out conflict between Alex wanted to load a save and settings defaults tha
 
 Fix foucs method of checkboxes
 
+Freely engage all Blades
+
 FUTURE
 
 NPC Rando (Eventually want npcs to actually exist there not just the model (actor swap))

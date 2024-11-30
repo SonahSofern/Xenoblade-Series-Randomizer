@@ -34,7 +34,7 @@ def BalancingSkillTreeRando(OptionsRunDict):
             CurrList.insert(0, ArtsCancelIDsBaseGame[i])
         if i >= 6:
             CurrList.insert(0, ArtsCancelIDsDLC[i-6])
-        if not OptionsRunDict["Arts Cancel on Tier 1"]["optionTypeVal"].get():
+        if not OptionsRunDict["Early Arts Cancel"]["optionTypeVal"].get():
             print("Shuffling in Arts Cancel")
             random.shuffle(CurrList)
         CurrFile = FilePaths[i]
@@ -42,7 +42,7 @@ def BalancingSkillTreeRando(OptionsRunDict):
             data = json.load(file)
             for row in data["rows"]:
                 row["SkillID"] = CurrList[row["$id"] - 1]
-                if row["$id"] == 1 and OptionsRunDict["Arts Cancel on Tier 1"]["optionTypeVal"].get():
+                if row["$id"] == 1 and OptionsRunDict["Early Arts Cancel"]["optionTypeVal"].get():
                     print("Arts Cancel is Tier 1, and the trees are random.")
                     row["NeedSp"] = 0
             file.seek(0)
