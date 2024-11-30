@@ -368,8 +368,14 @@ SeedFrame.pack(anchor="w", padx=10)
 seedDesc = Button(SeedFrame, text="Seed", command=GenRandomSeed)
 seedDesc.pack(side='left', padx=2, pady=2)
 
+randoSeedEntry = Entry(SeedFrame, width=30)
+randoSeedEntry.pack(side='left', padx=2)
+RandomizeButton = Button(text='Randomize', command=Randomize)
+RandomizeButton.pack(pady=10) 
+randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=White)
 
-
+EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()])
+SavedOptions.loadData(EveryObjectToSaveAndLoad)
 
 allFonts = font.families()
 iter = 0
@@ -381,6 +387,7 @@ def NextFont(event= None):
     iter += 1
     fontName.delete(0, END)
     fontName.insert(0,allFonts[iter])
+    fontName.config(text=allFonts[iter])
     defaultFont.config(family=allFonts[iter])
 
 def PreviousFont(event = None):
@@ -397,16 +404,20 @@ GoodFonts = []
 def GoodFont(event = None):
     global iter
     global GoodFonts
-    GoodFonts.append(allFonts[iter])
-    print(GoodFonts)
+    if allFonts[iter] not in GoodFonts:
+        GoodFonts.append(allFonts[iter])
+        print(GoodFonts)
 
 def IncreaseFontSize(event = None):
     newSize = defaultFont.cget("size") + 1
     defaultFont.config(size=newSize)
+    fontSize.delete(0, END)
+    fontSize.insert(0,newSize)
 def DecreaseFontSize(event = None):
     newSize = defaultFont.cget("size") - 1
     defaultFont.config(size=newSize)
-
+    fontSize.delete(0, END)
+    fontSize.insert(0,newSize)
 
 
 root.bind("<Right>", NextFont)
@@ -415,25 +426,20 @@ root.bind("<Return>", GoodFont)
 root.bind("<Up>", IncreaseFontSize)
 root.bind("<Down>", DecreaseFontSize) 
 
+
+
+fontName = Entry( width=20, font=("Arial", 12))
+fontName.pack(side='left', padx=2)
+fontSize = Entry( width=3, font=("Arial", 12))
+fontSize.pack(side='left', padx=2)
+saveFont = Button( text="Save Font", command=GoodFont, font=("Arial", 12))
+saveFont.pack(side='left', padx=5, pady=2)
 fontTestBack = Button( text="Previous Font", command=PreviousFont, font=("Arial", 12))
 fontTestBack.pack(side='left', padx=5, pady=2)
 fontTestNext = Button( text="Next Font", command=NextFont, font=("Arial", 12))
 fontTestNext.pack(side='left', padx=5, pady=2)
-fontName = Entry( width=30, font=("Arial", 12))
-fontName.pack(side='left', padx=2)
-fontGood = Button( text="Save Font", command=GoodFont, font=("Arial", 12))
-fontGood.pack(side='left', padx=5, pady=2)
 
 
-
-randoSeedEntry = Entry(SeedFrame, width=30)
-randoSeedEntry.pack(side='left', padx=2)
-RandomizeButton = Button(text='Randomize', command=Randomize)
-RandomizeButton.pack(pady=10) 
-randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=White)
-
-EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()])
-SavedOptions.loadData(EveryObjectToSaveAndLoad)
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSaveAndLoad), root.destroy()))
 root.mainloop()

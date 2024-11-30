@@ -19,3 +19,6 @@ Scroll bars generates with loops not manually
 Clean up code make readable and fast (I dont like these global variables clearing and maintaining them its bad programming idk how to fix yet)
 
 Make Readme
+
+GOATED FONTS
+Segoe UI Historic
