@@ -379,6 +379,14 @@ SavedOptions.loadData(EveryObjectToSaveAndLoad)
 
 allFonts = font.families()
 iter = 0
+fontNameVar = StringVar()
+fontSizeVar = StringVar()
+
+def LoadFontByName(name):
+    defaultFont.config(family=name)
+
+def LoadFontSize(size):
+    defaultFont.config(size=int(size))
 
 def NextFont(event= None):
     global defaultFont
@@ -419,18 +427,20 @@ def DecreaseFontSize(event = None):
     fontSize.delete(0, END)
     fontSize.insert(0,newSize)
 
-
 root.bind("<Right>", NextFont)
 root.bind("<Left>", PreviousFont) 
 root.bind("<Return>", GoodFont)
 root.bind("<Up>", IncreaseFontSize)
 root.bind("<Down>", DecreaseFontSize) 
 
+# Still dont get these two lines but oh well
+fontNameVar.trace_add("write", lambda name, index, mode: LoadFontByName(fontNameVar.get()))
+fontSizeVar.trace_add("write", lambda name, index, mode: LoadFontSize(fontSizeVar.get()))
 
 
-fontName = Entry( width=20, font=("Arial", 12))
+fontName = Entry( width=20, font=("Arial", 12), textvariable=fontNameVar)
 fontName.pack(side='left', padx=2)
-fontSize = Entry( width=3, font=("Arial", 12))
+fontSize = Entry( width=3, font=("Arial", 12), textvariable=fontSizeVar)
 fontSize.pack(side='left', padx=2)
 saveFont = Button( text="Save Font", command=GoodFont, font=("Arial", 12))
 saveFont.pack(side='left', padx=5, pady=2)
