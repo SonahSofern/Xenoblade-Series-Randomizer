@@ -134,7 +134,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         optionType = var    
     elif (optionType == Scale):
         var = IntVar()
-        optionTypeObj = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10,variable=var, background=OptionColor, highlightthickness=0)
+        optionTypeObj = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, variable=var, background=OptionColor, highlightthickness=0)
         optionDesc = Label(optionPanel, text=description, background=OptionColor, anchor='w')
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
@@ -307,7 +307,9 @@ def Randomize():
 def RunOptions():
     ShowTitleScreenText()
     for option in OptionDictionary.values():
-
+        if option["name"] == "Driver Art Reactions":
+            if option["optionTypeVal"].get() > 0:
+                EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", [Helper.StartsWith("ReAct", 1,16)], 0)
         # For Sliders
         if (type(option["optionTypeVal"].get()) == int):
             IDs.CurrentSliderOdds = option["optionTypeVal"].get()
