@@ -3,6 +3,7 @@ import json
 import EnemyRandoLogic as EnemyRandoLogic
 import random
 from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun 
+import time
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
@@ -220,20 +221,24 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
     NonNGPlusCoreCrystalIDs = set(Helper.InclRange(45002, 45010) + Helper.InclRange(45016, 45043) + [45056, 45057])
     NonNGPlusCoreCrystalIDs -= set(NGPlusBladeIDs)
     NonNGPlusCoreCrystalIDs = list(NonNGPlusCoreCrystalIDs)
-    A1Num = random.randint(1,3) - 1
-    A2Num = random.randint(4,6) - 1
-    A3Num = random.randint(7,9) - 1
-    A4Num = random.randint(10,12) - 1
     A1Equip = []
     A2Equip = []
     A3Equip = []
     A4Equip = []
     for i in range(0, len(AllRaceModeItemTypeIDs)):
+        A1Num = random.randint(1,3) - 1
+        A2Num = random.randint(4,6) - 1
+        A3Num = random.randint(7,9) - 1
+        A4Num = random.randint(10,12) - 1
         A1Equip.append(AllRaceModeItemTypeIDs[i][A1Num]) 
         A2Equip.append(AllRaceModeItemTypeIDs[i][A2Num])
         A3Equip.append(AllRaceModeItemTypeIDs[i][A3Num])
         A4Equip.append(AllRaceModeItemTypeIDs[i][A4Num])
     for i in range(0, len(RaceModeAuxCoreIDs)):
+        A1Num = random.randint(1,3) - 1
+        A2Num = random.randint(4,6) - 1
+        A3Num = random.randint(7,9) - 1
+        A4Num = random.randint(10,12) - 1
         A1Equip.append(RaceModeAuxCoreIDs[i][A1Num]) 
         A2Equip.append(RaceModeAuxCoreIDs[i][A2Num])
         A3Equip.append(RaceModeAuxCoreIDs[i][A3Num])

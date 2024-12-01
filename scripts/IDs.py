@@ -75,7 +75,7 @@ BladeCDs = [147, 147, 147, 147, 291, 291, 291, 291, 435, 435, 435, 435]
 AllRaceModeItemTypeIDs = [HPUp, StrUp, EthUp, DexUp, AgiUp, LucUp, AutoHeal, CritHeal, CritDmg, AtkTwice, DmgHigherLv, BrkLen, TopLen, LauLen, AutoDmg, AggroDwn, AggroUp, AggroStart, HealArtEff, CancelHeal, SpecCDs, CancelDmg, PartyGge, HPPotEff, BrkResRed, RiskyDmg, NoRecoil, BladeCDs]
 
 # The following are Aux Cores to be equipped in Race Mode, increasing in power level, the further along the list they are:
-# This is genuinely fucked up btw, there's no fast way to get these
+# This is genuinely messed up btw, there's no fast way to get these
 AuxCrit = [17001, 17001, 17002, 17002, 17003, 17003, 17004, 17004, 17005, 17005, 17352, 17352]
 PhysDef = [x + 5 for x in AuxCrit[:10]] + [x + 1 for x in AuxCrit[-2:]]
 EthDef = [x + 5 for x in PhysDef[:10]] + [x + 1 for x in PhysDef[-2:]]
