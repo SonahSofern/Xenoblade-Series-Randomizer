@@ -20,10 +20,10 @@ def RaceModeChanging(OptionsRunDict):
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
     
-    AreaList1 = [41, 68] # 41
-    AreaList2 = [99, 152] #99
-    AreaList3 = [125, 133, 168] #133, 168
-    AreaList4 = [175, 187]
+    AreaList1 = [41, 68] 
+    AreaList2 = [99, 152] 
+    AreaList3 = [125, 133, 168] 
+    AreaList4 = [175, 187] 
 
     AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
 
@@ -39,10 +39,10 @@ def RaceModeChanging(OptionsRunDict):
     # common/FLD_QuestList
     # [Gormott, Uraya, Mor Ardain, Leftherian Archipelago, Temperantia + Indoline Praetorium, Tantal, Spirit Crucible Elpys, Cliffs of Morytha + Land of Morytha, World Tree, Final Stretch]
 
-    ContinentWarpCutscenes = [10034, 10088, 10156, 10197, 10213, 10270, 10325, 10350, 10399, 10476] # We want to call these after the boss fight cutscenes
+    ContinentWarpCutscenes = [10034, 10088, 10156, 10197, 10213, 10270, 10325, 10350, 10392, 10476] # We want to call these after the boss fight cutscenes
     FinalContinentCutscenes = [10079, 10130, 10189, 10212, 10266, 10304, 10345, 10392, 10451, 30000]
-    ScenarioFlagLists = [2001, 3005, 4025, 5005, 5021, 6028, 7018, 7043, 8031, 10026]
-    NextQuestAList = [27, 56, 100, 128, 136, 163, 184, 194, 214, 238]
+    ScenarioFlagLists = [2001, 3005, 4025, 5005, 5021, 6028, 7018, 7043, 8024, 10026]
+    NextQuestAList = [27, 56, 100, 128, 136, 163, 184, 194, 212, 238]
     LastQuestAList = [50, 81, 125, 135, 161, 177, 191, 211, 227, 270]
     LevelAtStartofArea = [5, 20, 29, 35, 38, 42, 46, 51, 59, 68] #Level going to: # Level(ish) of the first boss of the current area (so you want to be around this level after warping)
     LevelAtEndofArea = [15, 26, 34, 35, 42, 46, 46, 59, 68, 70]  #Level going from: # Level the last boss of the previous area was (so you should be around the same level before warping to new area)
@@ -150,6 +150,8 @@ def RaceModeChanging(OptionsRunDict):
             if row["$id"] == 10189:
                 row["linkID"] = 0
                 row["envSeam"] = 0
+            if row["$id"] == 10304:
+                row["linkID"] = 0
         for i in range(0, len(ChosenIndices) - 1):
             for row in data["rows"]:
                 if row["$id"] == FinalContinentCutscenes[ChosenIndices[i]]:
@@ -402,7 +404,7 @@ def DifficultyChanges(): # Makes Easy difficulty the same as Normal
         json.dump(data, file, indent=2)
 
 def MenuChanges(): # Adjusts the menu text # Ben still needs to push fix
-    seedhashcomplete = random.choice(SeedHashNoun) + " " + random.choice(SeedHashAdj)
+    seedhashcomplete = random.choice(SeedHashAdj) + " " + random.choice(SeedHashNoun) 
     with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r+', encoding='utf-8') as file: #edits DLC items
         data = json.load(file)
         for row in data["rows"]:
