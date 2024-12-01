@@ -70,8 +70,9 @@ HPPotEff = [141, 285, 429, 142, 286, 430, 143, 287, 431, 431, 431, 431]
 BrkResRed = [144, 144, 288, 288, 432, 432, 582, 582, 583, 583, 584, 584]
 RiskyDmg = [486, 486, 487, 487, 488, 488, 489, 489, 490, 490, 491, 491]
 NoRecoil = [118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118]
+BladeCDs = [147, 147, 147, 147, 291, 291, 291, 291, 435, 435, 435, 435]
 
-AllRaceModeItemTypeIDs = [HPUp, StrUp, EthUp, DexUp, AgiUp, LucUp, AutoHeal, CritHeal, CritDmg, AtkTwice, DmgHigherLv, BrkLen, TopLen, LauLen, AutoDmg, AggroDwn, AggroUp, AggroStart, HealArtEff, CancelHeal, SpecCDs, CancelDmg, PartyGge, HPPotEff, BrkResRed, RiskyDmg, NoRecoil]
+AllRaceModeItemTypeIDs = [HPUp, StrUp, EthUp, DexUp, AgiUp, LucUp, AutoHeal, CritHeal, CritDmg, AtkTwice, DmgHigherLv, BrkLen, TopLen, LauLen, AutoDmg, AggroDwn, AggroUp, AggroStart, HealArtEff, CancelHeal, SpecCDs, CancelDmg, PartyGge, HPPotEff, BrkResRed, RiskyDmg, NoRecoil, BladeCDs]
 
 # The following are Aux Cores to be equipped in Race Mode, increasing in power level, the further along the list they are:
 # This is genuinely fucked up btw, there's no fast way to get these
@@ -139,6 +140,7 @@ Lv3SpecUp = [x + 5 for x in Lv2SpecUp[:10]] + [x + 1 for x in Lv2SpecUp[-2:]]
 Lv4SpecUp = [x + 5 for x in Lv3SpecUp[:10]] + [x + 1 for x in Lv3SpecUp[-2:]]
 AffMaxAcc = [x + 5 for x in Lv4SpecUp[:10]] + [x + 1 for x in Lv4SpecUp[-2:]]
 Jamming = [x + 5 for x in AffMaxAcc[:10]] + [x + 1 for x in AffMaxAcc[-2:]]
+
 
 RaceModeAuxCoreIDs = [AuxCrit, PhysDef, EthDef, BlockRate, BeastHnt, InsHnt, AirHnt, AquaHnt, HumHnt, MacHnt, TitHnt, BldCmbBst, FusCmbBst, AggAtkUp, IndAtkUp, OutAtkUp, FirDef, WatDef, EarDef, WindDef, ElecDef, IceDef, DarkDef, LigDef, EvaFoc, SwiEva, EmgGuard, Endure, HPAtkUp, SpkDef, BrkRes, TopRes, LauRes, SmaRes, BlowRes, KBRes, AnnulRes, BldShqRes, AASneak, AggBoost, ArtSneak, ArtAggUp, ArtHeal, MoveHeal, DamHeal, AMSee, PMSee, ReflDmg, RngUp, OpeArt, Telepathy, HelpHand, AffMaxShld, AffMaxAtk, AffMaxEvd, HntChem, StS, FstBldSwp, Lv1SpecUp, Lv2SpecUp, Lv3SpecUp, Lv4SpecUp, AffMaxAcc, Jamming]
 
