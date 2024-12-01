@@ -385,7 +385,27 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
                 break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)    
+        json.dump(data, file, indent=2)
+    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes max movespeed bonus to 250%
+        data = json.load(file)
+        for row in data["rows"]:
+            if (row["$id"] >= 25249) & (row["$id"] <= 25300):
+                row["Caption"] = 603
+            if row["$id"] > 25300:
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+    with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes max movespeed bonus to 250%
+        data = json.load(file)
+        for row in data["rows"]:
+            if (row["$id"] >= 491) & (row["$id"] <= 542):
+                row["name"] = "Movespeed Deed"
+            if row["$id"] > 542:
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
 
 def DLCItemChanges(): # Changes all DLC gifts to 1 gold
     DLCIDRowsWithItems = Helper.InclRange(1,10) + Helper.InclRange(16, 24) + [30] + [36, 37] + Helper.InclRange(43, 55)
