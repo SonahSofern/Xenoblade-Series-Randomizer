@@ -1,7 +1,7 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, types
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, RaceMode, TutorialShortening, IDs
+import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, RaceMode, TutorialShortening, IDs, MusicShuffling
 from IDs import *
 from Cosmetics import *
 from UI_Colors import *
@@ -215,7 +215,7 @@ def Options():
     #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30)) Defunct with alex's enemy rando
     
     # Misc
-    GenStandardOption("Music", TabMisc, "Randomizes what music plays where", [lambda: JSONParser.ChangeJSON(["common/RSC_BgmList.json"], ["filename"], ValidMusicFileNames, ValidMusicFileNames)]) # need to change title screen music
+    GenStandardOption("Music", TabMisc, "Randomizes what music plays where", [lambda: JSONParser.ChangeJSON(["common/RSC_BgmList.json"], ["filename"], ValidMusicFileNames, ValidMusicFileNames)], ["Shuffle Battle Themes and Background Music Separately", [lambda: MusicShuffling.SeparateBGMandBattle()]]) # need to change title screen music
     # GenDictionary("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.InclRange(0,3721), Helper.InclRange(2001,3721))])
     GenStandardOption("NPCs Size", TabMisc, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSON(["common/RSC_NpcList.json"], ["Scale"], Helper.InclRange(1,100), Helper.InclRange(1,250))], optionType=Scale)
     # GenOption("Funny Faces", TabMisc, "Randomizes Facial Expressions", ["common/EVT_eyetype.json"], ["$id"], Helper.inclRange(0,15), Helper.inclRange(0,15)) # doesnt work yet
