@@ -1,6 +1,6 @@
 import Helper, random, json
 
-DriverSkillTreeIDs = Helper.InclRange(1,270)
+DriverSkillTreeIDs = Helper.InclRange(1,177) + Helper.InclRange(179, 270) # Excluding Zeke's Eye of Shining Justice 
 
 ArtsCancelIDsDLC = [194, 224, 253]
 ArtsCancelIDsBaseGame = [14, 43, 74, 102, 131, 165]
@@ -14,7 +14,10 @@ OtherIDs = list(set(DriverSkillTreeIDs) - set(ArtsCancelIDsDLC) - set(ArtsCancel
 BaseSkillTreeLists = {}
 
 for i in range(0, 9):
-    BaseSkillTreeLists[i] = [StartWithBIDs[i], StartWithXIDs[i], StartWithYIDs[i], Surviveon1IDs[i]]
+    if i != 2:
+        BaseSkillTreeLists[i] = [StartWithBIDs[i], StartWithXIDs[i], StartWithYIDs[i], Surviveon1IDs[i]]
+    else:
+        BaseSkillTreeLists[i] = [StartWithBIDs[i], StartWithXIDs[i], StartWithYIDs[i], Surviveon1IDs[i], 178] # Give back eye of shining justice to Zeke
 
 FilePaths = ["./_internal/JsonOutputs/common/BTL_Skill_Dr_Table01.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table02.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table03.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table04.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table05.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table06.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table19.json"]
 
@@ -24,10 +27,14 @@ def BalancingSkillTreeRando(OptionsRunDict):
     random.shuffle(RandomOtherIDs)
     for i in range(0, 9):
         CurrList = []
-        for k in range(1, 26):
-            RandIndex = k + k * i
-            CurrList.append(RandomOtherIDs[RandIndex])
-            pass
+        if i == 2:
+            for k in range(1, 25):
+                RandIndex = k + k * i
+                CurrList.append(RandomOtherIDs[RandIndex])
+        else:
+            for k in range(1, 26):
+                RandIndex = k + k * i
+                CurrList.append(RandomOtherIDs[RandIndex])
         CurrList += BaseSkillTreeLists[i]
         random.shuffle(CurrList)
         if i < 6:
