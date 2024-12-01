@@ -38,6 +38,7 @@ TabQOLOuter = Frame(MainWindow)
 TabCosmeticsOuter = Frame(MainWindow)
 TabRaceModeOuter = Frame(MainWindow)
 TabSettingsOuter = Frame(MainWindow)
+TabFunnyOuter = Frame(MainWindow)
 
 # Canvas 
 TabGeneralCanvas = Canvas(TabGeneralOuter) 
@@ -49,6 +50,7 @@ TabQOLCanvas = Canvas(TabQOLOuter)
 TabCosmeticsCanvas = Canvas(TabCosmeticsOuter)
 TabRaceModeCanvas = Canvas(TabRaceModeOuter)
 TabSettingsCanvas = Canvas(TabSettingsOuter)
+TabFunnyCanvas = Canvas(TabFunnyOuter)
 
 # Actual Scrollable Content
 TabGeneral = Frame(TabGeneralCanvas) 
@@ -60,6 +62,8 @@ TabQOL = Frame(TabQOLCanvas)
 TabCosmetics = Frame(TabCosmeticsCanvas)
 TabRaceMode = Frame(TabRaceModeCanvas)
 TabSettings = Frame(TabSettingsCanvas)
+TabFunny = Frame(TabFunnyCanvas)
+
 
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
@@ -81,18 +85,19 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touc
         Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
         OuterFrames[i].pack(expand=True, fill="both")
 
-CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabRaceModeOuter, TabSettingsOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabRaceModeCanvas, TabSettingsCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabRaceMode, TabSettings])
+CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabRaceModeOuter, TabSettingsOuter, TabFunnyOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabRaceModeCanvas, TabSettingsCanvas, TabFunnyCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabRaceMode, TabSettings, TabFunny])
 
 # Tabs
-MainWindow.add(TabGeneralOuter, text ='General') 
-MainWindow.add(TabDriversOuter, text ='Drivers') 
-MainWindow.add(TabBladesOuter, text ='Blades') 
-MainWindow.add(TabEnemiesOuter, text ='Enemies') 
-MainWindow.add(TabMiscOuter, text ='Misc.') 
-MainWindow.add(TabQOLOuter, text = 'Quality of Life')
-MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
-MainWindow.add(TabRaceModeOuter, text='Race Mode')
-MainWindow.add(TabSettingsOuter, text = 'In-Game Settings')
+MainWindow.add(TabGeneralOuter, text =' General ') 
+MainWindow.add(TabDriversOuter, text =' Drivers ') 
+MainWindow.add(TabBladesOuter, text =' Blades ') 
+MainWindow.add(TabEnemiesOuter, text =' Enemies ') 
+MainWindow.add(TabMiscOuter, text =' Misc. ') 
+MainWindow.add(TabQOLOuter, text = ' Quality of Life ')
+MainWindow.add(TabCosmeticsOuter, text=' Cosmetics ')
+MainWindow.add(TabRaceModeOuter, text=' Race Mode ')
+MainWindow.add(TabSettingsOuter, text = ' In-Game Settings ')
+MainWindow.add(TabFunnyOuter, text=' Funny ')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 
@@ -228,9 +233,9 @@ def Options():
     GenStandardOption("Core Crystal Changes", TabQOL, "Removes the Gacha system in favor of custom Core Crystals", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()])
     GenStandardOption("Early Arts Cancel", TabQOL, "Puts Driver arts cancel skills into the first Driver Skill Tree slot", [lambda: SkillTreeAdjustments.Tier1ArtsCancel(OptionDictionary)])
     #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
-    GenStandardOption("See Treasure from further away", TabQOL, "Increases the range you can see treasure boxes from", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["msgVisible", "msgdigVisible"], Helper.InclRange(0,200), [255])])
+    GenStandardOption("Treasure Chest Visibility", TabQOL, "Increases the range you can see treasure chests from", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["msgVisible", "msgdigVisible"], Helper.InclRange(0,200), [255])])
 
-
+    GenStandardOption("Projectile Treasure Chests", TabFunny, "Launches your items from chests", [lambda: JSONParser.ChangeJSON(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [12])])
 
     # Cosmetics
     GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics()], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics)
