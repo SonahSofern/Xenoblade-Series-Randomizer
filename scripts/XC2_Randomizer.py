@@ -2,11 +2,12 @@ from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading
 from tkinter import *
 import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, RaceMode, TutorialShortening, IDs
+import GUISettings
 from IDs import *
 from Cosmetics import *
 from UI_Colors import *
 from tkinter.font import Font
-from tkinter import font
+
 
 Version = "0.1.0"
 CommonBdatInput = ""
@@ -15,10 +16,8 @@ OptionDictionary = {}
 rowIncrement = 0
 MaxWidth = 1000
 
-
-
 root = Tk()
-defaultFont = Font(family="Forte", size=12)
+defaultFont = Font(family="@Yu Gothic UI Semilight", size=13)
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
 root.configure(background=Red)
@@ -29,20 +28,6 @@ root.iconphoto(True, icon)
 # The Notebook
 MainWindow = ttk.Notebook(root, height=5)
 
-def NotebookFocusStyleFix():
-    style = ttk.Style()
-    style.configure("TNotebook.Tab", font=(defaultFont))  # Change tab font
-    style.layout("Tab",
-    [('Notebook.tab', {'sticky': 'nswe', 'children':
-        [('Notebook.padding', {'side': 'top', 'sticky': 'nswe', 'children':
-            #[('Notebook.focus', {'side': 'top', 'sticky': 'nswe', 'children':
-                [('Notebook.label', {'side': 'top', 'sticky': ''})],
-            #})],
-        })],
-    })]
-    )
-
-NotebookFocusStyleFix()
 # Frames in the notebook
 TabGeneralOuter = Frame(MainWindow) 
 TabDriversOuter = Frame(MainWindow) 
@@ -238,12 +223,15 @@ def Options():
     # QOL
     GenStandardOption("Fix Bad Descriptions", TabQOL, "Fixes some of the bad descriptions in the game") #common_ms/menu_ms
     GenStandardOption("Running Speed", TabQOL, "Max out your starting Run Speed")
-    GenStandardOption("Shortened Tutorial", TabQOL, "Shortens/removes all tutorials", [lambda: TutorialShortening.ShortenedTutorial(OptionDictionary)])
+    GenStandardOption("Shortened Tutorial", TabQOL, "Shortens/removes tutorials", [lambda: TutorialShortening.ShortenedTutorial(OptionDictionary)])
     GenStandardOption("Blade Skill Tree Changes", TabQOL, "Makes all blades' field skills maxed by default", [lambda: CoreCrystalAdjustments.FieldSkillLevelAdjustment()])
     GenStandardOption("Core Crystal Changes", TabQOL, "Removes the Gacha system in favor of custom Core Crystals", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()])
     GenStandardOption("Early Arts Cancel", TabQOL, "Puts Driver arts cancel skills into the first Driver Skill Tree slot", [lambda: SkillTreeAdjustments.Tier1ArtsCancel(OptionDictionary)])
     #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
-    
+    GenStandardOption("See Treasure from further away", TabQOL, "Increases the range you can see treasure boxes from", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["msgVisible", "msgdigVisible"], Helper.InclRange(0,200), [255])])
+
+
+
     # Cosmetics
     GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics()], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics)
     
@@ -287,7 +275,7 @@ def Randomize():
         global OptionDictionary
         RandomizeButton.config(state=DISABLED)
 
-        randoProgressDisplay.pack()
+        randoProgressDisplay.pack(side='left', anchor='w', pady=10, padx=10)
         randoProgressDisplay.config(text="Unpacking BDATs")
 
         random.seed(randoSeedEntry.get())
@@ -349,7 +337,8 @@ def GenRandomSeed():
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
 Options()
-
+GUISettings.NotebookFocusStyleFix(defaultFont)
+GUISettings.CheckbuttonFocusStyleFix()
 
 bdatcommonFrame = Frame(root, background=Red)
 bdatcommonFrame.pack(anchor="w", padx=10)
@@ -371,84 +360,16 @@ seedDesc.pack(side='left', padx=2, pady=2)
 randoSeedEntry = Entry(SeedFrame, width=30)
 randoSeedEntry.pack(side='left', padx=2)
 RandomizeButton = Button(text='Randomize', command=Randomize)
-RandomizeButton.pack(pady=10) 
+RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
+
+Cog = PhotoImage(file="./_internal/Images/SmallSettingsCog.png")
+SettingsButton = Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont))
+SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
+
 randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=White)
 
 EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()])
 SavedOptions.loadData(EveryObjectToSaveAndLoad)
-
-allFonts = font.families()
-iter = 0
-fontNameVar = StringVar()
-fontSizeVar = StringVar()
-
-def LoadFontByName(name):
-    defaultFont.config(family=name)
-
-def LoadFontSize(size):
-    if (size != ""):
-        defaultFont.config(size=int(size))
-
-def NextFont(event= None):
-    global defaultFont
-    global iter
-    global randoSeedEntry
-    iter += 1
-    fontName.delete(0, END)
-    fontName.insert(0,allFonts[iter])
-    fontName.config(text=allFonts[iter])
-    defaultFont.config(family=allFonts[iter])
-
-def PreviousFont(event = None):
-    global defaultFont
-    global iter
-    global randoSeedEntry
-    iter -= 1
-    fontName.delete(0, END)
-    fontName.insert(0,allFonts[iter])
-    defaultFont.config(family=allFonts[iter])
-
-GoodFonts = []
-
-def GoodFont(event = None):
-    global iter
-    global GoodFonts
-    if allFonts[iter] not in GoodFonts:
-        GoodFonts.append(allFonts[iter])
-        print(GoodFonts)
-
-def IncreaseFontSize(event = None):
-    newSize = defaultFont.cget("size") + 1
-    defaultFont.config(size=newSize)
-    fontSize.delete(0, END)
-    fontSize.insert(0,newSize)
-def DecreaseFontSize(event = None):
-    newSize = defaultFont.cget("size") - 1
-    defaultFont.config(size=newSize)
-    fontSize.delete(0, END)
-    fontSize.insert(0,newSize)
-
-root.bind("<Right>", NextFont)
-root.bind("<Left>", PreviousFont) 
-root.bind("<Return>", GoodFont)
-root.bind("<Up>", IncreaseFontSize)
-root.bind("<Down>", DecreaseFontSize) 
-
-# Still dont get these two lines but oh well
-fontNameVar.trace_add("write", lambda name, index, mode: LoadFontByName(fontNameVar.get()))
-fontSizeVar.trace_add("write", lambda name, index, mode: LoadFontSize(fontSizeVar.get()))
-
-
-fontName = Entry( width=20, font=("Arial", 12), textvariable=fontNameVar)
-fontName.pack(side='left', padx=2)
-fontSize = Entry( width=3, font=("Arial", 12), textvariable=fontSizeVar)
-fontSize.pack(side='left', padx=2)
-saveFont = Button( text="Save Font", command=GoodFont, font=("Arial", 12))
-saveFont.pack(side='left', padx=5, pady=2)
-fontTestBack = Button( text="Previous Font", command=PreviousFont, font=("Arial", 12))
-fontTestBack.pack(side='left', padx=5, pady=2)
-fontTestNext = Button( text="Next Font", command=NextFont, font=("Arial", 12))
-fontTestNext.pack(side='left', padx=5, pady=2)
 
 
 
