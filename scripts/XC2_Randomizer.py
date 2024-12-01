@@ -1,7 +1,7 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, types
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, RaceMode, TutorialShortening, IDs, MusicShuffling
+import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, RaceMode, TutorialShortening, IDs, MusicShuffling, DriverArtDoomAdjustment
 from IDs import *
 from Cosmetics import *
 from UI_Colors import *
@@ -104,11 +104,8 @@ MainWindow.add(TabRaceModeOuter, text='Race Mode')
 MainWindow.add(TabSettingsOuter, text = 'In-Game Settings')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
-
 def ShowTitleScreenText():
     JSONParser.ChangeJSON(["common_ms/menu_ms.json"], ["name"], ["© 2017 Nintendo / MONOLITHSOFT"], [f"Randomizer v{Version}"]) # Change Title Version to Randomizer v0.1.0
-
-
 
 def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
     global OptionDictionary
@@ -183,7 +180,7 @@ def Options():
     GenStandardOption("Collection Points", TabGeneral, "Randomizes the contents of Collection Points", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID"], list(set(CollectionPointMaterials) - set([30019])), [])], ["Accessories", [lambda: IDs.ValidReplacements.extend(Accessories)] ,"Weapon Chips", [lambda: IDs.ValidReplacements.extend(WeaponChips)], "Aux Cores", [lambda: IDs.ValidReplacements.extend(AuxCores)], "Core Crystals", [lambda: IDs.ValidReplacements.extend(CoreCrystals)], "Deeds", [lambda: IDs.ValidReplacements.extend(Deeds)], "Collection Point Materials", [lambda: IDs.ValidReplacements.extend(CollectionPointMaterials)]])
 
     # Drivers
-    GenStandardOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSON(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, list(set(ArtDebuffs) - set([21])) + ArtBuffs, InvalidTargetIDs=AutoAttacks)], ["Doom", [lambda: IDs.ValidReplacements.extend(21)]], Scale)
+    GenStandardOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: DriverArtDoomAdjustment.DriverArtRando(OptionDictionary)], ["Include Doom", []], Scale)
     # GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", ["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20)) Nothing wrong with this just kinda niche/silly
     GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", [lambda: JSONParser.ChangeJSON(["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees)])
     GenStandardOption("Balanced Skill Trees", TabDrivers, "Balances and randomizes the driver skill trees", [lambda: SkillTreeAdjustments.BalancingSkillTreeRando(OptionDictionary)])
@@ -263,7 +260,6 @@ def Options():
     GenStandardOption("Automate Special Button Challenges", TabSettings, "Toggle automatic success for button challenge inputs during Specials", [],[])
     GenStandardOption("Enemy Aggression", TabSettings, "Toggle whether foes pick a fight (exc.salvage, unique, boss, and quest foes)", [],[])
     GenStandardOption("Special BGM", TabSettings, "When enabled, special battle music will play with certain Blades in the party", [],[])
-    
 
 
 def Randomize():
@@ -297,7 +293,6 @@ def Randomize():
         time.sleep(1)
         randoProgressDisplay.config(text="")
         randoProgressDisplay.pack_forget()
-
 
         RandomizeButton.config(state=NORMAL)
         print("Done")
