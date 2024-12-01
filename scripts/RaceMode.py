@@ -166,6 +166,7 @@ def RaceModeChanging(OptionsRunDict):
     NGPlusBladeIDs = DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
     DifficultyChanges()
     MenuChanges()
+    DriverLvandSPFix()
     print(OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get())
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get():
         print("Filling Chests with Custom Loot")
@@ -570,4 +571,20 @@ def MysteriousPartHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Expe
                     row["TaskLog2"] = 195
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2) 
+        json.dump(data, file, indent=2)
+
+def DriverLvandSPFix():
+    with open("./_internal/JsonOutputs/common/CHR_Dr.json", 'r+', encoding='utf-8') as file: # Maybe fixing XP dupe
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] <= 6:
+                row["DefLv"] = 1
+                row["DefLvType"] = 1
+                row["DefWPType"] = 1
+                row["DefWP"] = 0
+                row["DefSPType"] = 0
+                row["DefSP"] = 0
+                row["DefAcce"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
