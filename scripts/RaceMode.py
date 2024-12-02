@@ -171,6 +171,8 @@ def RaceModeChanging(OptionsRunDict):
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get():
         print("Filling Chests with Custom Loot")
         RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict)
+        StackableCoreCrystalsandKeyItems()
+        RenameCoreCrystals(OptionsRunDict)
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Less Grinding"]["subOptionTypeVal"].get():
         print("Reducing amount of grinding")
         LessGrinding()
@@ -201,11 +203,10 @@ def LessGrinding(): #adjusting level based exp gains, and debuffs while underlev
         json.dump(data, file, indent=2)
 
 def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
-    NGPlusBladeIDs = [1043, 1044, 1046, 1047, 1048, 1049]
+    NGPlusBladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
     NGPlusBladeCrystalIDs = []
     print(OptionsRunDict["Core Crystal Changes"]["optionTypeVal"].get())
     if OptionsRunDict["Core Crystal Changes"]["optionTypeVal"].get():
-        print("Figuring out NG+ Blade IDs")
         with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
             for i in range(0, len(NGPlusBladeIDs)):
@@ -218,8 +219,65 @@ def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
             json.dump(data, file, indent=2)
         return NGPlusBladeCrystalIDs
 
+# Race Mode Core Crystal Changes
+
+def RenameCoreCrystals(OptionsRunDict):
+    if OptionsRunDict["Core Crystal Changes"]["optionTypeVal"].get():
+        DefaultBladeIDs = [1008, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1050, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1104, 1108, 1109, 1105, 1106, 1107, 1111]
+        BladeClassNames = ["Attacker", "Tank", "Healer"] # 0 1 2 for each one
+        BladeElementNames = ["Fire", "Water", "Wind", "Earth", "Electric", "Ice", "Light", "Dark"]
+        BladeClassesandElementNames = BladeClassNames + BladeElementNames
+        DefaultBladeClasses = [0, 1, 1, 0, 1, 0, 0, 0, 2, 0, 1, 0, 1, 0, 2, 0, 2, 1, 2, 0, 2, 2, 1, 0, 1, 2, 0, 0, 2, 2, 0, 1, 0, 0, 1, 1, 0, 1, 2, 1, 0, 2, 0]
+        DefaultBladeElements = Helper.FindValues("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], DefaultBladeIDs, "Atr")
+        ValidCrystalListIDs = Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057]
+        RandomizedBladeIDs = Helper.FindValues("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["$id"], ValidCrystalListIDs, "BladeID")
+        RandomizedBladeClasses = DetermineRandomizedBladeClasses(DefaultBladeClasses, DefaultBladeIDs, RandomizedBladeIDs)
+        RandomizedBladeElements = DetermineRandomizedBladeElements(DefaultBladeElements, DefaultBladeIDs, RandomizedBladeIDs)
+        ChangeITMCrystalTxt(BladeClassesandElementNames)
+        with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
+            data = json.load(file)
+            for i in range(0, len(RandomizedBladeIDs)):
+                for row in data["rows"]:
+                    if row["BladeID"] == RandomizedBladeIDs[i]:
+                        row["Name"] = random.choice([6 + RandomizedBladeElements[i], 4 + RandomizedBladeClasses[i]])
+                        break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2)
+        pass
+
+def DetermineRandomizedBladeClasses(DefaultBladeClasses, DefaultBladeIDs, RandomizedBladeIDs):
+    RandomizedBladeClasses = []
+    for i in range(0, len(RandomizedBladeIDs)):
+        for j in range(0, len(DefaultBladeIDs)):
+            if RandomizedBladeIDs[i] == DefaultBladeIDs[j]:
+                RandomizedBladeClasses.append(DefaultBladeClasses[j])
+                break
+    return RandomizedBladeClasses
+
+def DetermineRandomizedBladeElements(DefaultBladeElements, DefaultBladeIDs, RandomizedBladeIDs):
+    RandomizedBladeElements = []
+    for i in range(0, len(RandomizedBladeIDs)):
+        for j in range(0, len(DefaultBladeIDs)):
+            if RandomizedBladeIDs[i] == DefaultBladeIDs[j]:
+                RandomizedBladeElements.append(DefaultBladeElements[j])
+                break
+    return RandomizedBladeElements
+
+def ChangeITMCrystalTxt(BladeClassesandElementNames):
+    with open("./_internal/JsonOutputs/common_ms/itm_crystal.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for i in range(4, 15):
+            for row in data["rows"]:
+                if row["$id"] == i:
+                    row["name"] = BladeClassesandElementNames[i - 4] + " " + "Core Crystal"
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+
 def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
-    NonNGPlusCoreCrystalIDs = set(Helper.InclRange(45002, 45010) + Helper.InclRange(45016, 45043) + [45056, 45057])
+    NonNGPlusCoreCrystalIDs = set(Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057])
     NonNGPlusCoreCrystalIDs -= set(NGPlusBladeIDs)
     NonNGPlusCoreCrystalIDs = list(NonNGPlusCoreCrystalIDs)
     A1Equip = []
@@ -244,12 +302,12 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
         A2Equip.append(RaceModeAuxCoreIDs[i][A2Num])
         A3Equip.append(RaceModeAuxCoreIDs[i][A3Num])
         A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
-    Area1LootIDs = NonNGPlusCoreCrystalIDs[:11] + [25305] * 3 + Helper.InclRange(25249, 25264) + [25450] * 3 + A1Equip + [25408] * 5 + [25218, 25219] + A1RaceModeCoreChipIDs
-    del NonNGPlusCoreCrystalIDs[:11]
-    Area2LootIDs = NonNGPlusCoreCrystalIDs[:11] + [25305] * 3 + Helper.InclRange(25265, 25280) + [25450] * 3 + A2Equip + [25408] * 5 + [25220] + A2RaceModeCoreChipIDs
-    del NonNGPlusCoreCrystalIDs[:11]
-    Area3LootIDs = NonNGPlusCoreCrystalIDs + [25305] * 3 + Helper.InclRange(25281, 25291) + [25450] * 3 + A3Equip + [25408] * 5 + [25221] + A3RaceModeCoreChipIDs
-    Area4LootIDs = NGPlusBladeIDs + [25305] * 3 + Helper.InclRange(25292, 25300) + [25450] * 3 + A4Equip + [25408] * 5 + [25222] + A4RaceModeCoreChipIDs
+    Area1LootIDs = NonNGPlusCoreCrystalIDs[:12] * 3 + [25305] * 3 + Helper.InclRange(25249, 25264) + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219]
+    del NonNGPlusCoreCrystalIDs[:12]
+    Area2LootIDs = NonNGPlusCoreCrystalIDs[:12] * 3 + NonNGPlusCoreCrystalIDs[:12] + NonNGPlusCoreCrystalIDs[:12] + [25305] * 3 + Helper.InclRange(25265, 25280) + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220]
+    del NonNGPlusCoreCrystalIDs[:12]
+    Area3LootIDs = NonNGPlusCoreCrystalIDs * 3 + [25305] * 3 + Helper.InclRange(25281, 25291) + [25450] * 3 + A3Equip * 2 + [25408] * 5 + [25221, 25221, 25221]
+    Area4LootIDs = NGPlusBladeIDs * 2 + [25305] * 3 + Helper.InclRange(25292, 25300) + [25450] * 3 + A4Equip * 2 + [25408] * 5 + [25222, 25222, 25222]
     random.shuffle(Area1LootIDs)
     random.shuffle(Area2LootIDs)
     random.shuffle(Area3LootIDs)
@@ -608,3 +666,15 @@ def DriverLvandSPFix():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
+
+def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy of a key item or core crystal into the pool
+    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Maybe fixing XP dupe
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in Helper.InclRange(25218, 25222):
+                row["ValueMax"] = 3
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["NoMultiple"], 0)
+    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["ValueMax"], 99)       

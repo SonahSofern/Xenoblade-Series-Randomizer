@@ -277,6 +277,8 @@ def Randomize():
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty")
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
 
+        ShowTitleScreenText()
+
         # Runs all randomization
         RunOptions()
 
@@ -300,7 +302,6 @@ def Randomize():
     threading.Thread(target=ThreadedRandomize).start()
 
 def RunOptions():
-    ShowTitleScreenText()
     for option in OptionDictionary.values():
         if option["name"] == "Driver Art Reactions":
             if option["optionTypeVal"].get() > 0:
@@ -328,7 +329,6 @@ def GenRandomSeed():
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
 Options()
-
 
 bdatcommonFrame = Frame(root, background=Red)
 bdatcommonFrame.pack(anchor="w", padx=10)
