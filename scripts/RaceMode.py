@@ -21,10 +21,10 @@ def RaceModeChanging(OptionsRunDict):
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
     
-    AreaList1 = [41, 68] 
-    AreaList2 = [99, 152] 
-    AreaList3 = [125, 133, 168] 
-    AreaList4 = [175, 187] 
+    AreaList1 = [41, 68] #68,
+    AreaList2 = [99, 152] #99,
+    AreaList3 = [125, 133, 168] #, 125, 133,
+    AreaList4 = [175, 187] #, 187
 
     AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
 
@@ -407,8 +407,8 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
         file.truncate()
         json.dump(data, file, indent=2)
 
-def DLCItemChanges(): # Changes all DLC gifts to 1 gold
-    DLCIDRowsWithItems = Helper.InclRange(1,10) + Helper.InclRange(16, 24) + [30] + [36, 37] + Helper.InclRange(43, 55)
+def DLCItemChanges(): # Changes all DLC gifts to 1 gold except for poppy crystals
+    DLCIDRowsWithItems = Helper.InclRange(1,7) + [9, 10] + Helper.InclRange(16, 21) + [23,24] + [30] + [36, 37] + Helper.InclRange(43, 55)
     with open("./_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
         data = json.load(file)
         for row in data["rows"]:
