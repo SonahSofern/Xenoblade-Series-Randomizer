@@ -176,6 +176,7 @@ def RaceModeChanging(OptionsRunDict):
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Less Grinding"]["subOptionTypeVal"].get():
         print("Reducing amount of grinding")
         LessGrinding()
+        ChangeBladeLevelUnlockReqs(ChosenIndices)
         ReduceBladeReqTrustVals()
         SecondSkillTreeCostReduc()
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get():    
@@ -219,6 +220,32 @@ def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
             json.dump(data, file, indent=2)
         return NGPlusBladeCrystalIDs
 
+def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requirements to the same condition as the final quest in a race-mode continent
+    FieldSkillAchievementIDs = [12, 13, 14, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84, 92, 93, 94, 102, 103, 104, 112, 113, 114, 122, 123, 124, 132, 133, 134, 142, 143, 144, 152, 153, 154, 162, 163, 164, 172, 173, 174, 182, 183, 184, 192, 193, 194, 202, 203, 204, 212, 213, 214, 222, 223, 224, 232, 233, 234, 242, 243, 244, 252, 253, 254, 262, 263, 264, 272, 273, 274, 282, 283, 284, 292, 293, 294, 302, 303, 304, 312, 313, 314, 322, 323, 324, 332, 333, 334, 342, 343, 344, 352, 353, 354, 362, 363, 364, 372, 373, 374, 382, 383, 384, 392, 393, 394, 402, 403, 404, 412, 413, 414, 422, 423, 424, 432, 433, 434, 442, 443, 444, 452, 453, 454, 462, 463, 464, 1645, 1646, 1647, 1655, 1656, 1657, 1665, 1666, 1667, 1675, 1676, 1677, 1746, 1747, 1748, 1756, 1757, 1758, 1766, 1767, 1768]
+    RelevantChosenIndices = [x for x in ChosenIndices if x != 9]
+    UnlockAchievementIDs = [411, 412, 413, 414, 415]
+    QuestListAchievementIDs = [7622, 7624, 7626, 7628]
+    RelevantLastQuestPurposeIDList = [48, 78, 121, 130, 155, 171, 184, 203, 218]
+    with open("./_internal/JsonOutputs/common/FLD_AchievementSet.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            for i in range(1,6):
+                if (row[f"AchievementID{i}"] != 0) and (row["$id"] not in FieldSkillAchievementIDs):
+                    row[f"AchievementID{i}"] = UnlockAchievementIDs[i-1]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)            
+    with open("./_internal/JsonOutputs/common/FLD_QuestListAchievement.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for i in range(0, 4):
+            for row in data["rows"]:
+                if row["$id"] == QuestListAchievementIDs[i]:
+                    row["PurposeID"] = RelevantLastQuestPurposeIDList[ChosenIndices[i]]
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+        
 # Race Mode Core Crystal Changes
 
 def RenameCoreCrystals(OptionsRunDict):

@@ -128,7 +128,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         var = BooleanVar()
         optionTypeObj = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=description)
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
-        optionType = var    
+        optionType = var
     elif (optionType == Scale):
         var = IntVar()
         optionTypeObj = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, variable=var, background=OptionColor, highlightthickness=0)

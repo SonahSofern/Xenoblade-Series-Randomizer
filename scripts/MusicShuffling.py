@@ -18,9 +18,9 @@ def SeparateBGMandBattle(OptionsRunDict):
             data = json.load(file)
             for row in data['rows']:
                 if row["$id"] in NonBattleMusicIDs:
-                    row["filename"] = random.choice([x for x in NonBattleMusicMOVs if x not in 'event/m14_loop.wav'])
+                    row["filename"] = random.choice([x for x in NonBattleMusicMOVs if x not in ['event/m14_loop.wav', '']])
                 if row["$id"] in EnemyBattleMusicIDs:
-                    row["filename"] = random.choice(EnemyBattleMusicMOVs)
+                    row["filename"] = random.choice([x for x in EnemyBattleMusicMOVs if x not in ['']])
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)  
@@ -29,5 +29,4 @@ def SeparateBGMandBattle(OptionsRunDict):
         JSONParser.ChangeJSON(["common/RSC_BgmList.json"], ["filename"], NonBattleMusicMOVs + EnemyBattleMusicMOVs, NonBattleMusicMOVs + EnemyBattleMusicMOVs)
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/RSC_BgmCondition.json", ["Priority"], 0)
         pass
-    
-'m02.wav'
+
