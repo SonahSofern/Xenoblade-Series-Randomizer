@@ -86,6 +86,7 @@ def AdjustingCrystalList():
                     row["ValueMax"] = 1
                     row["BladeID"] = RandomBlades[k]
                     row["Name"] = 12
+                    row["Condition"] = 0
                     break
         for row in data["rows"]:
             for i in range(45011,45014):
