@@ -302,12 +302,12 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
         A2Equip.append(RaceModeAuxCoreIDs[i][A2Num])
         A3Equip.append(RaceModeAuxCoreIDs[i][A3Num])
         A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
-    Area1LootIDs = NonNGPlusCoreCrystalIDs[:12] * 3 + [25305] * 3 + Helper.InclRange(25249, 25264) + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219]
+    Area1LootIDs = NonNGPlusCoreCrystalIDs[:12] * 3 + [25305] * 3 + Helper.InclRange(25249, 25264) + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2
     del NonNGPlusCoreCrystalIDs[:12]
-    Area2LootIDs = NonNGPlusCoreCrystalIDs[:12] * 3 + NonNGPlusCoreCrystalIDs[:12] + NonNGPlusCoreCrystalIDs[:12] + [25305] * 3 + Helper.InclRange(25265, 25280) + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220]
+    Area2LootIDs = NonNGPlusCoreCrystalIDs[:12] * 3 + NonNGPlusCoreCrystalIDs[:12] + NonNGPlusCoreCrystalIDs[:12] + [25305] * 3 + Helper.InclRange(25265, 25280) + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2
     del NonNGPlusCoreCrystalIDs[:12]
-    Area3LootIDs = NonNGPlusCoreCrystalIDs * 3 + [25305] * 3 + Helper.InclRange(25281, 25291) + [25450] * 3 + A3Equip * 2 + [25408] * 5 + [25221, 25221, 25221]
-    Area4LootIDs = NGPlusBladeIDs * 2 + [25305] * 3 + Helper.InclRange(25292, 25300) + [25450] * 3 + A4Equip * 2 + [25408] * 5 + [25222, 25222, 25222]
+    Area3LootIDs = NonNGPlusCoreCrystalIDs * 3 + [25305] * 3 + Helper.InclRange(25281, 25291) + [25450] * 3 + A3Equip * 2 + [25408] * 5 + [25221, 25221, 25221] + A3RaceModeCoreChipIDs * 2
+    Area4LootIDs = NGPlusBladeIDs * 2 + [25305] * 3 + Helper.InclRange(25292, 25300) + [25450] * 3 + A4Equip * 2 + [25408] * 5 + [25222, 25222, 25222] + A4RaceModeCoreChipIDs * 2
     random.shuffle(Area1LootIDs)
     random.shuffle(Area2LootIDs)
     random.shuffle(Area3LootIDs)
