@@ -245,16 +245,16 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requir
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
-        
+
 # Race Mode Core Crystal Changes
 
 def RenameCoreCrystals(OptionsRunDict):
     if OptionsRunDict["Core Crystal Changes"]["optionTypeVal"].get():
-        DefaultBladeIDs = [1008, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1050, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1104, 1108, 1109, 1105, 1106, 1107, 1111]
+        DefaultBladeIDs = [1008, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050, 1104, 1108, 1109, 1105, 1106, 1107, 1111]
         BladeClassNames = ["Attacker", "Tank", "Healer"] # 0 1 2 for each one
         BladeElementNames = ["Fire", "Water", "Wind", "Earth", "Electric", "Ice", "Light", "Dark"]
         BladeClassesandElementNames = BladeClassNames + BladeElementNames
-        DefaultBladeClasses = [0, 1, 1, 0, 1, 0, 0, 0, 2, 0, 1, 0, 1, 0, 2, 0, 2, 1, 2, 0, 2, 2, 1, 0, 1, 2, 0, 0, 2, 2, 0, 1, 0, 0, 1, 1, 0, 1, 2, 1, 0, 2, 0]
+        DefaultBladeClasses = [0, 1, 1, 0, 1, 0, 0, 0, 2, 1, 0, 1, 0, 2, 0, 2, 1, 2, 0, 2, 2, 1, 0, 1, 2, 0, 0, 2, 2, 0, 1, 0, 0, 1, 1, 0, 0, 1, 2, 1, 0, 2, 0]
         DefaultBladeElements = Helper.FindValues("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], DefaultBladeIDs, "Atr")
         ValidCrystalListIDs = Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057]
         RandomizedBladeIDs = Helper.FindValues("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["$id"], ValidCrystalListIDs, "BladeID")
@@ -271,7 +271,6 @@ def RenameCoreCrystals(OptionsRunDict):
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)
-        pass
 
 def DetermineRandomizedBladeClasses(DefaultBladeClasses, DefaultBladeIDs, RandomizedBladeIDs):
     RandomizedBladeClasses = []

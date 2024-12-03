@@ -84,6 +84,8 @@ def AdjustingCrystalList():
                 if row["$id"] == ValidCrystalListIDs[k]:
                     row["BladeID"] = RandomBlades[k]
                     row["Condition"] = 0
+                    row["ValueMax"] = 1
+                    row["NoMultiple"] = k + 1
                     break
         for row in data["rows"]:
             for i in range(45011,45014):

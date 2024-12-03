@@ -105,7 +105,7 @@ MainWindow.add(TabSettingsOuter, text = 'In-Game Settings')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 def ShowTitleScreenText():
-    JSONParser.ChangeJSON(["common_ms/menu_ms.json"], ["name"], ["© 2017 Nintendo / MONOLITHSOFT"], [f"Randomizer v{Version}"]) # Change Title Version to Randomizer v0.1.0
+    JSONParser.ChangeJSON(["common_ms/menu_ms.json"], ["name"], ["© 2017 Nintendo / MONOLITHSOFT", f"Randomizer v{Version}"], [f"Randomizer v{Version}"]) # Change Title Version to Randomizer v0.1.0
 
 def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
     global OptionDictionary
