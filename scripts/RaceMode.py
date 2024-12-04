@@ -21,10 +21,10 @@ def RaceModeChanging(OptionsRunDict):
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
     
-    AreaList1 = [41, 68] #68,
-    AreaList2 = [99, 152] #99,
-    AreaList3 = [125, 133, 168] #, 125, 133,
-    AreaList4 = [175, 187] #, 187
+    AreaList1 = [41] #68,
+    AreaList2 = [152] #99,
+    AreaList3 = [168] #, 125, 133,
+    AreaList4 = [175] #, 187
 
     AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
 
@@ -172,7 +172,8 @@ def RaceModeChanging(OptionsRunDict):
         print("Filling Chests with Custom Loot")
         RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict)
         StackableCoreCrystalsandKeyItems()
-        RenameCoreCrystals(OptionsRunDict)
+        #RenameCoreCrystals(OptionsRunDict)
+        FindtheBladeNames(OptionsRunDict)
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Less Grinding"]["subOptionTypeVal"].get():
         print("Reducing amount of grinding")
         LessGrinding()
@@ -206,7 +207,6 @@ def LessGrinding(): #adjusting level based exp gains, and debuffs while underlev
 def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
     NGPlusBladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
     NGPlusBladeCrystalIDs = []
-    print(OptionsRunDict["Core Crystal Changes"]["optionTypeVal"].get())
     if OptionsRunDict["Core Crystal Changes"]["optionTypeVal"].get():
         with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
@@ -222,30 +222,108 @@ def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
 
 def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requirements to the same condition as the final quest in a race-mode continent
     FieldSkillAchievementIDs = [12, 13, 14, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84, 92, 93, 94, 102, 103, 104, 112, 113, 114, 122, 123, 124, 132, 133, 134, 142, 143, 144, 152, 153, 154, 162, 163, 164, 172, 173, 174, 182, 183, 184, 192, 193, 194, 202, 203, 204, 212, 213, 214, 222, 223, 224, 232, 233, 234, 242, 243, 244, 252, 253, 254, 262, 263, 264, 272, 273, 274, 282, 283, 284, 292, 293, 294, 302, 303, 304, 312, 313, 314, 322, 323, 324, 332, 333, 334, 342, 343, 344, 352, 353, 354, 362, 363, 364, 372, 373, 374, 382, 383, 384, 392, 393, 394, 402, 403, 404, 412, 413, 414, 422, 423, 424, 432, 433, 434, 442, 443, 444, 452, 453, 454, 462, 463, 464, 1645, 1646, 1647, 1655, 1656, 1657, 1665, 1666, 1667, 1675, 1676, 1677, 1746, 1747, 1748, 1756, 1757, 1758, 1766, 1767, 1768]
+    KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]
+    KeyAchievementIDs = list(set([x for x in KeyAchievementIDs if x != 0]))
     RelevantChosenIndices = [x for x in ChosenIndices if x != 9]
-    UnlockAchievementIDs = [411, 412, 413, 414, 415]
-    QuestListAchievementIDs = [7622, 7624, 7626, 7628]
-    RelevantLastQuestPurposeIDList = [48, 78, 121, 130, 155, 171, 184, 203, 218]
-    with open("./_internal/JsonOutputs/common/FLD_AchievementSet.json", 'r+', encoding='utf-8') as file: 
-        data = json.load(file)
-        for row in data["rows"]:
-            for i in range(1,6):
-                if (row[f"AchievementID{i}"] != 0) and (row["$id"] not in FieldSkillAchievementIDs):
-                    row[f"AchievementID{i}"] = UnlockAchievementIDs[i-1]
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)            
-    with open("./_internal/JsonOutputs/common/FLD_QuestListAchievement.json", 'r+', encoding='utf-8') as file: 
+    UnlockAchievementIDs = [10, 11, 12, 13, 14]
+    PurposeIDs = [7001, 7002, 7003, 7004]
+    RelevantLocation = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 2001]
+    MapIDs = [6, 9, 10, 14, 12, 13, 15, 16, 20]
+    TaskIDs = [143, 309, 147, 285]
+    TaskLogIDs = [659, 660, 661, 662]
+    LocationNames = ["Gormott", "Uraya", "Mor Ardain", "Leftheria", "Indol", "Tantal", "Spirit Crucible Elpys", "the Cliffs of Morytha", "the World Tree"]
+
+    # for non-trust levels
+    WalkPurposeIDs = [7005, 7006, 7007, 7008]
+    NonTrustAchievementIDs = [15, 16, 17, 18, 19]
+    NonTrustTaskIDs = [14, 15, 16, 17]
+    NonTrustTaskLogIDs = [663, 664, 665, 666]
+    with open("./_internal/JsonOutputs/common/FLD_Achievement.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for i in range(0, 4):
             for row in data["rows"]:
-                if row["$id"] == QuestListAchievementIDs[i]:
-                    row["PurposeID"] = RelevantLastQuestPurposeIDList[ChosenIndices[i]]
+                if row["$id"] == NonTrustTaskIDs[i]:
+                    row["StatsID"] = 60
+                    row["Count"] = 1
+                    row["DebugName"] = "WALK_TOTAL"
                     break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
-
+    with open("./_internal/JsonOutputs/common/FLD_AchievementSet.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            for i in range(1,6):
+                if row["$id"] in KeyAchievementIDs:
+                    row[f"AchievementID{i}"] = UnlockAchievementIDs[i-1]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)   
+    with open("./_internal/JsonOutputs/common/FLD_AchievementSet.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            for i in range(1,6):
+                if (row[f"AchievementID{i}"] != 0) and (row["$id"] not in FieldSkillAchievementIDs) and (row["$id"] not in KeyAchievementIDs):
+                    row[f"AchievementID{i}"] = NonTrustAchievementIDs[i-1]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+    with open("./_internal/JsonOutputs/common/FLD_AchievementList.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] < 2064: # we want to have all level 1s unlocked by default
+                if row["Task"] > 12000:
+                    row["Task"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+    with open("./_internal/JsonOutputs/common/FLD_QuestTaskAchievement.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for i in range(0, 4):
+            for row in data["rows"]:
+                if row["$id"] == PurposeIDs[i]:
+                    row["TaskType1"] = 5
+                    row["TaskID1"] = TaskIDs[i]
+                    row["TaskCondition1"] = 0
+                    break
+        for i in range(0, 4):
+            for row in data["rows"]:
+                if row["$id"] == WalkPurposeIDs[i]:
+                    row["TaskType1"] = 12
+                    row["TaskID1"] = NonTrustTaskIDs[i]
+                    row["TaskCondition1"] = 0
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+    with open("./_internal/JsonOutputs/common/FLD_QuestReach.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for i in range(0, 4):
+            for row in data["rows"]:
+                if row["$id"] == TaskIDs[i]:
+                    row["Category"] = 2
+                    row["MapID"] = MapIDs[RelevantChosenIndices[i]]
+                    row["PlaceID"] = RelevantLocation[RelevantChosenIndices[i]]
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+    with open("./_internal/JsonOutputs/common_ms/fld_quest_achievement.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for i in range(0, 4):
+            for row in data["rows"]:
+                if row["$id"] == TaskLogIDs[i]:
+                    row["name"] = f"Reach {LocationNames[RelevantChosenIndices[i]]}"
+                    break
+        for i in range(0, 4):
+            for row in data["rows"]:
+                if row["$id"] == NonTrustTaskLogIDs[i]:
+                    row["name"] = f"Reach {LocationNames[RelevantChosenIndices[i]]}"
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+    pass
 # Race Mode Core Crystal Changes
 
 def RenameCoreCrystals(OptionsRunDict):
@@ -306,6 +384,12 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
     NonNGPlusCoreCrystalIDs = set(Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057])
     NonNGPlusCoreCrystalIDs -= set(NGPlusBladeIDs)
     NonNGPlusCoreCrystalIDs = list(NonNGPlusCoreCrystalIDs)
+    A1CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12]) * 2
+    del NonNGPlusCoreCrystalIDs[:12]
+    A2CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12]) * 2
+    del NonNGPlusCoreCrystalIDs[:12]
+    A3CoreCrystalIDs = (NonNGPlusCoreCrystalIDs) * 2
+    A4CoreCrystalIDs = NGPlusBladeIDs * 2
     A1Equip = []
     A2Equip = []
     A3Equip = []
@@ -328,12 +412,10 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
         A2Equip.append(RaceModeAuxCoreIDs[i][A2Num])
         A3Equip.append(RaceModeAuxCoreIDs[i][A3Num])
         A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
-    Area1LootIDs = NonNGPlusCoreCrystalIDs[:12] * 3 + [25305] * 3 + Helper.InclRange(25249, 25264) + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2
-    del NonNGPlusCoreCrystalIDs[:12]
-    Area2LootIDs = NonNGPlusCoreCrystalIDs[:12] * 3 + NonNGPlusCoreCrystalIDs[:12] + NonNGPlusCoreCrystalIDs[:12] + [25305] * 3 + Helper.InclRange(25265, 25280) + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2
-    del NonNGPlusCoreCrystalIDs[:12]
-    Area3LootIDs = NonNGPlusCoreCrystalIDs * 3 + [25305] * 3 + Helper.InclRange(25281, 25291) + [25450] * 3 + A3Equip * 2 + [25408] * 5 + [25221, 25221, 25221] + A3RaceModeCoreChipIDs * 2
-    Area4LootIDs = NGPlusBladeIDs * 2 + [25305] * 3 + Helper.InclRange(25292, 25300) + [25450] * 3 + A4Equip * 2 + [25408] * 5 + [25222, 25222, 25222] + A4RaceModeCoreChipIDs * 2
+    Area1LootIDs = [25305] * 3 + Helper.InclRange(25249, 25264) + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2
+    Area2LootIDs = [25305] * 3 + Helper.InclRange(25265, 25280) + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2
+    Area3LootIDs = [25305] * 3 + Helper.InclRange(25281, 25291) + [25450] * 3 + A3Equip * 2 + [25408] * 5 + [25221, 25221, 25221] + A3RaceModeCoreChipIDs * 2
+    Area4LootIDs = [25305] * 3 + Helper.InclRange(25292, 25300) + [25450] * 3 + A4Equip * 2 + [25408] * 5 + [25222, 25222, 25222] + A4RaceModeCoreChipIDs * 2
     random.shuffle(Area1LootIDs)
     random.shuffle(Area2LootIDs)
     random.shuffle(Area3LootIDs)
@@ -372,17 +454,24 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
     ItemsPerBox = []
     for i in range(0, len(AllAreaLootIDs)):
         ItemsPerBox.append(len(AllAreaLootIDs[i])//BoxestoRandomizePerMap[i])
-        if ItemsPerBox[i] > 7:
-            ItemsPerBox[i] = 7
+        if ItemsPerBox[i] > 6:
+            ItemsPerBox[i] = 6
         if ItemsPerBox[i] < 3:
             ItemsPerBox[i] = 3
             ItemtoChestDifference = 3 * BoxestoRandomizePerMap[i] - len(AllAreaLootIDs[i])
             for j in range(0, ItemtoChestDifference):
                 AllAreaLootIDs[i].append(random.choice([25405, 25405, 25405, 25406, 25406, 25407])) # fill the rest with WP 
             random.shuffle(AllAreaLootIDs[i])
+    AllCoreCrystalIDs = [A1CoreCrystalIDs, A2CoreCrystalIDs, A3CoreCrystalIDs, A4CoreCrystalIDs]
+    for i in range(0, len(BoxestoRandomizePerMap)):
+        while (BoxestoRandomizePerMap[i] - len(AllCoreCrystalIDs[i])) > 0:
+            AllCoreCrystalIDs[i].append(0)
+        random.shuffle(AllCoreCrystalIDs[i])
     k = 0
+    m = 0
     for i in range(0, len(TBoxFiles)):
         k = 0
+        m = 0
         for l in range(0, len(TBoxFiles[i])):
             if TBoxFiles[i][l] != 0:
                 with open(TBoxFiles[i][l], 'r+', encoding='utf-8') as file:
@@ -408,14 +497,17 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
                                     row[f"itm{h+1}ID"] = AllAreaLootIDs[i][k]
                                     row[f"itm{h+1}Num"] = 1
                                     k = k + 1
+                            row["itm7ID"] = AllCoreCrystalIDs[i][m] #need to shuffle core crystals in separately since multiple core crystals from 1 chest causes issues with the "no multiple" parameter on, but I need it on to keep people from pulling the same core crystal twice
+                            if row["itm7ID"] != 0:
+                                row["itm7Num"] = 1
+                            m = m + 1
                     file.seek(0)
                     file.truncate()
                     json.dump(data, file, indent=2)
-    print(OptionsRunDict["Race Mode"]["subOptionObjects"]["Mysterious Part Hunt"]["subOptionTypeVal"].get())
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Mysterious Part Hunt"]["subOptionTypeVal"].get(): 
         print("Shuffling in Mysterious Parts")
         MysteriousPartHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices)
-
+        
 def ShyniniSaveUs(): # Just in case we don't get good blade field skills, we can rely on Shynini to always sell core crystals :D
     with open("./_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
@@ -702,5 +794,32 @@ def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy 
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["NoMultiple"], 0)
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["ValueMax"], 99)       
+
+def FindtheBladeNames(OptionsRunDict):
+    if OptionsRunDict["Core Crystal Changes"]["optionTypeVal"].get():
+        ValidCrystalListIDs = Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057]
+        CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
+        CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
+        CorrespondingBladeNames = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_ms/chr_bl_ms.json", ["$id"], CorrespondingBladeNameIDs, "name")
+        ITMCrystalAdditions(CorrespondingBladeNames, CorrespondingBladeIDs)
+
+def ITMCrystalAdditions(BladeNames, CorrespondingBladeIDs):
+    with open("./_internal/JsonOutputs/common_ms/itm_crystal.json", "r+", encoding='utf-8') as file:     
+        IDNumbers = Helper.InclRange(16, 58)
+        data = json.load(file)
+        for i in range(0, len(IDNumbers)):
+            data["rows"].append({"$id": IDNumbers[i], "style": 36, "name": f"{BladeNames[i]}\'s Core Crystal"})
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            for i in range(0, len(CorrespondingBladeIDs)):
+                if row["BladeID"] == CorrespondingBladeIDs[i]:
+                    row["Name"] = IDNumbers[i]
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+        pass
