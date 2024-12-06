@@ -21,7 +21,7 @@ def RaceModeChanging(OptionsRunDict):
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
     
-    AreaList1 = [41] #68,
+    AreaList1 = [68] #41,
     AreaList2 = [152] #99,
     AreaList3 = [168] #, 125, 133,
     AreaList4 = [175] #, 187
@@ -221,28 +221,78 @@ def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
         return NGPlusBladeCrystalIDs
 
 def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requirements to the same condition as the final quest in a race-mode continent
-    FieldSkillAchievementIDs = [12, 13, 14, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84, 92, 93, 94, 102, 103, 104, 112, 113, 114, 122, 123, 124, 132, 133, 134, 142, 143, 144, 152, 153, 154, 162, 163, 164, 172, 173, 174, 182, 183, 184, 192, 193, 194, 202, 203, 204, 212, 213, 214, 222, 223, 224, 232, 233, 234, 242, 243, 244, 252, 253, 254, 262, 263, 264, 272, 273, 274, 282, 283, 284, 292, 293, 294, 302, 303, 304, 312, 313, 314, 322, 323, 324, 332, 333, 334, 342, 343, 344, 352, 353, 354, 362, 363, 364, 372, 373, 374, 382, 383, 384, 392, 393, 394, 402, 403, 404, 412, 413, 414, 422, 423, 424, 432, 433, 434, 442, 443, 444, 452, 453, 454, 462, 463, 464, 1645, 1646, 1647, 1655, 1656, 1657, 1665, 1666, 1667, 1675, 1676, 1677, 1746, 1747, 1748, 1756, 1757, 1758, 1766, 1767, 1768]
     KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]
     KeyAchievementIDs = list(set([x for x in KeyAchievementIDs if x != 0]))
     RelevantChosenIndices = [x for x in ChosenIndices if x != 9]
-    UnlockAchievementIDs = [10, 11, 12, 13, 14]
-    PurposeIDs = [7001, 7002, 7003, 7004]
     RelevantLocation = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 2001]
     MapIDs = [6, 9, 10, 14, 12, 13, 15, 16, 20]
     TaskIDs = [143, 309, 147, 285]
     TaskLogIDs = [659, 660, 661, 662]
     LocationNames = ["Gormott", "Uraya", "Mor Ardain", "Leftheria", "Indol", "Tantal", "Spirit Crucible Elpys", "the Cliffs of Morytha", "the World Tree"]
 
-    # for non-trust levels
-    WalkPurposeIDs = [7005, 7006, 7007, 7008]
-    NonTrustAchievementIDs = [15, 16, 17, 18, 19]
-    NonTrustTaskIDs = [14, 15, 16, 17]
-    NonTrustTaskLogIDs = [663, 664, 665, 666]
-    with open("./_internal/JsonOutputs/common/FLD_Achievement.json", 'r+', encoding='utf-8') as file: 
+    #AllSkillSetAppearances = [16, 16, 16, 16, 16]
+
+    StarterBladeTrustSetAppearance = [10, 11, 12, 13, 14]
+    A1TrustSetAppearance = [10, 10, 12, 13, 14]
+    A2TrustSetAppearance = [10, 10, 10, 13, 14]
+    A3TrustSetAppearance = [10, 10, 10, 10, 14]
+    A4TrustSetAppearance = [10, 10, 10, 10, 10]
+
+    AllTrustSetAppearances = [StarterBladeTrustSetAppearance, A1TrustSetAppearance, A2TrustSetAppearance, A3TrustSetAppearance, A4TrustSetAppearance]
+
+    StarterBladeIDs = [1001, 1002, 1004, 1005, 1009, 1010]
+    A1BladeIDs = []
+    A2BladeIDs = [1006]
+    A3BladeIDs = [1011]
+    A4BladeIDs = []
+
+    ValidCrystalListIDs = Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057]
+    CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
+    
+    for i in range(0, len(ValidCrystalListIDs)):
+        if i <= 11:
+            A1BladeIDs.append(CorrespondingBladeIDs[i])
+        if (i > 11) & (i <= 23):
+            A2BladeIDs.append(CorrespondingBladeIDs[i])
+        if (i > 23) & (i <= 35):
+            A3BladeIDs.append(CorrespondingBladeIDs[i])
+        if i > 35:
+            A4BladeIDs.append(CorrespondingBladeIDs[i])
+
+    AllBladeIDs = [StarterBladeIDs, A1BladeIDs, A2BladeIDs, A3BladeIDs, A4BladeIDs]
+
+    ArtandSkillCols = ["ArtsAchievement1", "ArtsAchievement2", "ArtsAchievement3", "SkillAchievement1", "SkillAchievement2", "SkillAchievement3"]
+    TrustCol = "KeyAchievement"
+
+    ArtandSkillIDs = [[0], [0], [0], [0], [0]]
+    TrustIDs = [[0], [0], [0], [0], [0]]
+
+    for g in range(0, 5): # need to find the area each id belongs to
+        for i in range(0, len(ArtandSkillCols)):
+            ArtandSkillIDs[g] = ArtandSkillIDs[g] + Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], AllBladeIDs[g], ArtandSkillCols[i])
+            ArtandSkillIDs[g] = list(set(ArtandSkillIDs[g])- set([0]))
+        TrustIDs[g] = TrustIDs[g] + Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], AllBladeIDs[g], TrustCol)
+        TrustIDs[g] = list(set(TrustIDs[g]) - set([0]))
+
+    with open("./_internal/JsonOutputs/common/FLD_AchievementSet.json", 'r+', encoding='utf-8') as file: # now we need to modify corresponding set ids
         data = json.load(file)
-        for i in range(0, 4):
+        for i in range(0, len(ArtandSkillIDs)):
             for row in data["rows"]:
-                if row["$id"] == NonTrustTaskIDs[i]:
+                if row["$id"] in ArtandSkillIDs[i]:
+                    for j in range(1, 6):
+                        if (row[f"AchievementID{j}"] != 0):
+                            row[f"AchievementID{j}"] = 16
+                if row["$id"] in TrustIDs[i]: 
+                    for j in range(1,6):
+                        row[f"AchievementID{j}"] = AllTrustSetAppearances[i][j-1]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2)
+
+    with open("./_internal/JsonOutputs/common/FLD_Achievement.json", 'r+', encoding='utf-8') as file: #we need to change FLD_Achievement ID 1 to walk 1 step total
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 1:
                     row["StatsID"] = 60
                     row["Count"] = 1
                     row["DebugName"] = "WALK_TOTAL"
@@ -250,53 +300,25 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requir
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
-    with open("./_internal/JsonOutputs/common/FLD_AchievementSet.json", 'r+', encoding='utf-8') as file: 
-        data = json.load(file)
-        for row in data["rows"]:
-            for i in range(1,6):
-                if row["$id"] in KeyAchievementIDs:
-                    row[f"AchievementID{i}"] = UnlockAchievementIDs[i-1]
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)   
-    with open("./_internal/JsonOutputs/common/FLD_AchievementSet.json", 'r+', encoding='utf-8') as file: 
-        data = json.load(file)
-        for row in data["rows"]:
-            for i in range(1,6):
-                if (row[f"AchievementID{i}"] != 0) and (row["$id"] not in FieldSkillAchievementIDs) and (row["$id"] not in KeyAchievementIDs):
-                    row[f"AchievementID{i}"] = NonTrustAchievementIDs[i-1]
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
-    with open("./_internal/JsonOutputs/common/FLD_AchievementList.json", 'r+', encoding='utf-8') as file: 
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] < 2064: # we want to have all level 1s unlocked by default
-                if row["Task"] > 12000:
-                    row["Task"] = 0
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
-    with open("./_internal/JsonOutputs/common/FLD_QuestTaskAchievement.json", 'r+', encoding='utf-8') as file: 
+
+    with open("./_internal/JsonOutputs/common/FLD_QuestTaskAchievement.json", 'r+', encoding='utf-8') as file: #now we need to modify the FLD_QuestTaskAchievement
         data = json.load(file)
         for i in range(0, 4):
             for row in data["rows"]:
-                if row["$id"] == PurposeIDs[i]:
+                if row["$id"] <= 7004:
                     row["TaskType1"] = 5
-                    row["TaskID1"] = TaskIDs[i]
+                    row["TaskID1"] = TaskIDs[row["$id"]-7001]
                     row["TaskCondition1"] = 0
-                    break
-        for i in range(0, 4):
-            for row in data["rows"]:
-                if row["$id"] == WalkPurposeIDs[i]:
+                if row["$id"] == 7005:
                     row["TaskType1"] = 12
-                    row["TaskID1"] = NonTrustTaskIDs[i]
+                    row["TaskID1"] = 1
                     row["TaskCondition1"] = 0
                     break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
-    with open("./_internal/JsonOutputs/common/FLD_QuestReach.json", 'r+', encoding='utf-8') as file: 
+
+    with open("./_internal/JsonOutputs/common/FLD_QuestReach.json", 'r+', encoding='utf-8') as file:  #modifying the tasks where you need to reach a certain location
         data = json.load(file)
         for i in range(0, 4):
             for row in data["rows"]:
@@ -308,22 +330,22 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requir
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
-    with open("./_internal/JsonOutputs/common_ms/fld_quest_achievement.json", 'r+', encoding='utf-8') as file: 
+
+    with open("./_internal/JsonOutputs/common_ms/fld_quest_achievement.json", 'r+', encoding='utf-8') as file: #modifying the text files that describe what you need to do to unlock the node
         data = json.load(file)
         for i in range(0, 4):
             for row in data["rows"]:
                 if row["$id"] == TaskLogIDs[i]:
                     row["name"] = f"Reach {LocationNames[RelevantChosenIndices[i]]}"
                     break
-        for i in range(0, 4):
             for row in data["rows"]:
-                if row["$id"] == NonTrustTaskLogIDs[i]:
-                    row["name"] = f"Reach {LocationNames[RelevantChosenIndices[i]]}"
+                if row["$id"] == 663:
+                    row["name"] = "Unlocked once you unlock the corresponding Trust Level."
                     break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
-    pass
+
 # Race Mode Core Crystal Changes
 
 def RenameCoreCrystals(OptionsRunDict):

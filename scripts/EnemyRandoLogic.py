@@ -337,11 +337,12 @@ def BossQuestAggroAdjustments(DefaultIDs, RandomizedIDs): # Required to allow bo
                     if row["$id"] == RandomizedIDs[i]: # If the row's ID corresponds to the randomized ID with index i
                         row["Flag"]["AlwaysAttack"] = 0
                         row["Detects"] = 1
-                        row["SearchRange"] = 5
+                        row["SearchRange"] = 1
                         row["SearchAngle"] = 100
-                        row["SearchRadius"] = 5
-                        row["BatInterval"] = 100
-                        row["BatArea"] = 100
+                        row["SearchRadius"] = 1
+                        row["BatInterval"] = 50
+                        row["BatArea"] = 50
+                        row["Flag"]["mBoss"] = 1
                         break
             if DefaultIDs[i] in AllBossDefaultIDs: # if the default ID is in the list of default boss IDs
                 for row in data["rows"]: # for each row in CHR_EnArrange
@@ -353,16 +354,18 @@ def BossQuestAggroAdjustments(DefaultIDs, RandomizedIDs): # Required to allow bo
                         row["SearchRadius"] = 5
                         row["BatInterval"] = 200
                         row["BatArea"] = 200
+                        row["Flag"]["mBoss"] = 1
                         break   
         for row in data["rows"]: # now for non-randomized enemies
             if (row["$id"] in list(set(QuestDefaultEnemyIDs + EnemyGroupDefaultID1s + EnemyGroupDefaultID2s + EnemyGroupDefaultID3s + EnemyGroupDefaultID4s + EnemyGroupDefaultID5s + EnemyGroupDefaultID6s + EnemyGroupDefaultID7s + EnemyGroupDefaultID8s + EnemyGroupDefaultID9s + EnemyGroupDefaultID10s + EnemyGroupDefaultID11s + EnemyGroupDefaultID12s))) & (row["$id"] in InvalidEnemies):
                     row["Flag"]["AlwaysAttack"] = 0
                     row["Detects"] = 1
                     row["SearchRange"] = 10
-                    row["SearchAngle"] = 360
-                    row["SearchRadius"] = 5
+                    row["SearchAngle"] = 100
+                    row["SearchRadius"] = 1
                     row["BatInterval"] = 50
                     row["BatArea"] = 50
+                    row["Flag"]["mBoss"] = 1
             if (row["$id"] in list(set(BossDefaultEnem1IDs + BossDefaultEnem2IDs + BossDefaultEnem3IDs + BossDefaultEnem4IDs))) & (row["$id"] in InvalidEnemies):
                     row["Flag"]["AlwaysAttack"] = 1
                     row["Detects"] = 3
@@ -371,6 +374,7 @@ def BossQuestAggroAdjustments(DefaultIDs, RandomizedIDs): # Required to allow bo
                     row["SearchRadius"] = 5
                     row["BatInterval"] = 200
                     row["BatArea"] = 200
+                    row["Flag"]["mBoss"] = 1
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
@@ -569,6 +573,7 @@ def EnemyLogic(OptionsRunDict):
         SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "AlwaysAttack", 0)
         ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["SearchRange", "SearchRadius", "SearchAngle", "Detects"], 0)
         ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["BatInterval", "BatArea"], 50)
+        SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "mBoss", 0)
         BossQuestAggroAdjustments(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
         ReducePCHPBattle1()
 
