@@ -165,7 +165,6 @@ def RaceModeChanging(OptionsRunDict):
         json.dump(data, file, indent=2)
     NGPlusBladeIDs = DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
     DifficultyChanges()
-    MenuChanges()
     DriverLvandSPFix()
     print(OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get())
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get():
@@ -191,6 +190,7 @@ def RaceModeChanging(OptionsRunDict):
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["DLC Item Removal"]["subOptionTypeVal"].get():
         print("Nerfing Corvin and Crossette")
         DLCItemChanges()
+    MenuChanges()
 
 def LessGrinding(): #adjusting level based exp gains, and debuffs while underleveled to make it less grindy
     with open("./_internal/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: 
