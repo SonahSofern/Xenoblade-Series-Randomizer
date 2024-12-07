@@ -20,7 +20,7 @@ def SeparateBGMandBattle(OptionsRunDict):
                 if row["$id"] in NonBattleMusicIDs:
                     row["filename"] = random.choice([x for x in NonBattleMusicMOVs if x not in ['event/m14_loop.wav', '']])
                 if row["$id"] in EnemyBattleMusicIDs:
-                    row["filename"] = random.choice([x for x in EnemyBattleMusicMOVs if x not in ['']])
+                    row["filename"] = random.choice([x for x in EnemyBattleMusicMOVs if x != ''])
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)  

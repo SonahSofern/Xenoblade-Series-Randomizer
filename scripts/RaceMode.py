@@ -40,11 +40,11 @@ def RaceModeChanging(OptionsRunDict):
     # common/FLD_QuestList
     # [Gormott, Uraya, Mor Ardain, Leftherian Archipelago, Temperantia + Indoline Praetorium, Tantal, Spirit Crucible Elpys, Cliffs of Morytha + Land of Morytha, World Tree, Final Stretch]
 
-    ContinentWarpCutscenes = [10034, 10088, 10156, 10197, 10213, 10270, 10325, 10350, 10392, 10476] # We want to call these after the boss fight cutscenes
-    FinalContinentCutscenes = [10079, 10130, 10189, 10212, 10266, 10304, 10345, 10392, 10451, 30000]
-    ScenarioFlagLists = [2001, 3005, 4025, 5005, 5021, 6028, 7018, 7043, 8024, 10026]
-    NextQuestAList = [27, 56, 100, 128, 136, 163, 184, 194, 212, 238]
-    LastQuestAList = [50, 81, 125, 135, 161, 177, 191, 211, 227, 270]
+    ContinentWarpCutscenes = [10034, 10088, 10156, 10197, 10215, 10270, 10325, 10350, 10392, 10476] # We want to call these after the boss fight cutscenes
+    FinalContinentCutscenes = [10079, 10130, 10189, 10214, 10266, 10304, 10345, 10392, 10451, 30000]
+    ScenarioFlagLists = [2001, 3005, 4025, 5005, 5023, 6028, 7018, 7043, 8024, 10026]
+    NextQuestAList = [27, 56, 100, 128, 137, 163, 184, 194, 212, 238]
+    LastQuestAList = [50, 81, 125, 136, 161, 177, 191, 211, 227, 270]
     LevelAtStartofArea = [5, 20, 29, 35, 38, 42, 46, 51, 59, 68] #Level going to: # Level(ish) of the first boss of the current area (so you want to be around this level after warping)
     LevelAtEndofArea = [15, 26, 34, 35, 42, 46, 46, 59, 68, 70]  #Level going from: # Level the last boss of the previous area was (so you should be around the same level before warping to new area)
 
@@ -101,6 +101,23 @@ def RaceModeChanging(OptionsRunDict):
         LandmarkFilestoTarget[0] = "./_internal/JsonOutputs/common_gmk/ma02a_FLD_LandmarkPop.json"
         LandmarkMapSpecificIDstoTarget[0] = 210
 
+    # Because upon beating the fight in leftheria, morag doesn't rejoin the party, we need to get her back by going to the first bit in indol
+    if (ChosenIndices[2] != 4) & (ChosenIndices[1] == 3):
+        with open("./_internal/JsonOutputs/common_gmk/ma11a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] == 1102:
+                    row["MAPJUMPID"] = RaceModeMapJumpIDs[ChosenIndices[2]]
+                    row["menuPriority"] = 1
+                    if ChosenIndices[2] == 5:
+                        row["MSGID"] = 314
+                    if ChosenIndices[2] == 6:
+                        row["MSGID"] = 396
+                    break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2)
+
     for i in range(0, len(LandmarkFilestoTarget)):  # Adjusts the EXP gained from the first landmark in each race-mode location
         with open(LandmarkFilestoTarget[i], 'r+', encoding='utf-8') as file:
             data = json.load(file)
@@ -113,7 +130,6 @@ def RaceModeChanging(OptionsRunDict):
                         row["MAPJUMPID"] = 41
                         row["menuPriority"] = 1
                         row["MSGID"] = 63
-                    break
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2)
@@ -231,11 +247,11 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requir
 
     #AllSkillSetAppearances = [16, 16, 16, 16, 16]
 
-    StarterBladeTrustSetAppearance = [10, 11, 12, 13, 14]
-    A1TrustSetAppearance = [10, 10, 12, 13, 14]
-    A2TrustSetAppearance = [10, 10, 10, 13, 14]
-    A3TrustSetAppearance = [10, 10, 10, 10, 14]
-    A4TrustSetAppearance = [10, 10, 10, 10, 10]
+    StarterBladeTrustSetAppearance = [16, 11, 12, 13, 14]
+    A1TrustSetAppearance = [16, 16, 12, 13, 14]
+    A2TrustSetAppearance = [16, 16, 16, 13, 14]
+    A3TrustSetAppearance = [16, 16, 16, 16, 14]
+    A4TrustSetAppearance = [16, 16, 16, 16, 16]
 
     AllTrustSetAppearances = [StarterBladeTrustSetAppearance, A1TrustSetAppearance, A2TrustSetAppearance, A3TrustSetAppearance, A4TrustSetAppearance]
 

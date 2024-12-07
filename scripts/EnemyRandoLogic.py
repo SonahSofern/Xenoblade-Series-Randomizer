@@ -342,7 +342,6 @@ def BossQuestAggroAdjustments(DefaultIDs, RandomizedIDs): # Required to allow bo
                         row["SearchRadius"] = 1
                         row["BatInterval"] = 50
                         row["BatArea"] = 50
-                        row["Flag"]["mBoss"] = 1
                         break
             if DefaultIDs[i] in AllBossDefaultIDs: # if the default ID is in the list of default boss IDs
                 for row in data["rows"]: # for each row in CHR_EnArrange
@@ -365,7 +364,6 @@ def BossQuestAggroAdjustments(DefaultIDs, RandomizedIDs): # Required to allow bo
                     row["SearchRadius"] = 1
                     row["BatInterval"] = 50
                     row["BatArea"] = 50
-                    row["Flag"]["mBoss"] = 1
             if (row["$id"] in list(set(BossDefaultEnem1IDs + BossDefaultEnem2IDs + BossDefaultEnem3IDs + BossDefaultEnem4IDs))) & (row["$id"] in InvalidEnemies):
                     row["Flag"]["AlwaysAttack"] = 1
                     row["Detects"] = 3
