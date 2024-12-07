@@ -23,8 +23,9 @@ def SeparateBGMandBattle(OptionsRunDict):
                     row["filename"] = random.choice([x for x in EnemyBattleMusicMOVs if x not in ['']])
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)  
+            json.dump(data, file, indent=2, ensure_ascii=False)  
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/RSC_BgmCondition.json", ["Priority"], 0)
+        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listBf.json", ["edBgm"], 0)
     else:
         JSONParser.ChangeJSON(["common/RSC_BgmList.json"], ["filename"], NonBattleMusicMOVs + EnemyBattleMusicMOVs, NonBattleMusicMOVs + EnemyBattleMusicMOVs)
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/RSC_BgmCondition.json", ["Priority"], 0)

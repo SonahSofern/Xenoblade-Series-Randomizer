@@ -281,7 +281,7 @@ def Randomize():
 
         # Runs all randomization
         RunOptions()
-
+        RaceMode.MenuChanges()
         randoProgressDisplay.config(text="Packing BDATs")
 
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")

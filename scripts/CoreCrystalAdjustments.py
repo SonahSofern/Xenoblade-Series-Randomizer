@@ -85,7 +85,7 @@ def AdjustingCrystalList():
                     row["BladeID"] = RandomBlades[k]
                     row["Condition"] = 0
                     row["ValueMax"] = 1
-                    row["NoMultiple"] = k + 1
+                    row["NoMultiple"] = k + 11
                     break
         for row in data["rows"]:
             for i in range(45011,45014):
@@ -95,8 +95,8 @@ def AdjustingCrystalList():
                     row["AssureP"] = 0
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)        
-    
+        json.dump(data, file, indent=2, ensure_ascii=False)
+         
 def LandofChallengeRelease(): #frees shulk, elma, fiora from land of challenge restriction
     EnemyRandoLogic.SubColumnAdjust("./_internal/JsonOutputs/common/CHR_Bl.json", "Flag", "OnlyChBtl", 0)
 

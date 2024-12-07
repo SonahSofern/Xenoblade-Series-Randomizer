@@ -315,7 +315,7 @@ def ReducePCHPBattle1():
                 break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
     with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
@@ -377,7 +377,7 @@ def BossQuestAggroAdjustments(DefaultIDs, RandomizedIDs): # Required to allow bo
                     row["Flag"]["mBoss"] = 1
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def SummonsLevelAdjustment(): # We want the summoned enemies to be the same level as the enemy that summoned them
     OriginalSummonedFirstIDs = [1, 1, 724, 122, 66, 1369, 1304, 1385, 1372, 1308, 242, 1376, 1378, 1379, 1807, 150, 1373, 1377, 1380, 1806, 1285, 1285, 1381, 725, 725, 1358, 1362, 1700, 1521, 728, 846, 1420, 1347, 1370, 1354, 1354, 1352, 1367, 1371, 1368, 1356, 1357, 1365, 1384, 1593, 1599, 1353, 1349, 1355, 1361, 1382, 1364, 1350, 1724, 1724, 1724, 1724, 1731, 1787, 1788, 1789, 1805, 1881, 1883, 1885, 1641, 1533, 1568, 1569, 1569]
@@ -414,7 +414,7 @@ def SummonsLevelAdjustment(): # We want the summoned enemies to be the same leve
                         row["Lv"] = MinLevels[i]
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def KeyItemsReAdd(): 
     ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["PreciousID"], 0)

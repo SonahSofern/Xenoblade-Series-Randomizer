@@ -190,7 +190,6 @@ def RaceModeChanging(OptionsRunDict):
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["DLC Item Removal"]["subOptionTypeVal"].get():
         print("Nerfing Corvin and Crossette")
         DLCItemChanges()
-    MenuChanges()
 
 def LessGrinding(): #adjusting level based exp gains, and debuffs while underleveled to make it less grindy
     with open("./_internal/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: 
@@ -340,7 +339,7 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requir
                     break
             for row in data["rows"]:
                 if row["$id"] == 663:
-                    row["name"] = "Unlocked once you unlock the corresponding Trust Level."
+                    row["name"] = "Unlocked once you unlock the \n corresponding Trust Level."
                     break
         file.seek(0)
         file.truncate()
@@ -834,14 +833,15 @@ def ITMCrystalAdditions(BladeNames, CorrespondingBladeIDs):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
     with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             for i in range(0, len(CorrespondingBladeIDs)):
                 if row["BladeID"] == CorrespondingBladeIDs[i]:
                     row["Name"] = IDNumbers[i]
+                    #row["Condition"] = 3903 + i
                     break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-        pass
