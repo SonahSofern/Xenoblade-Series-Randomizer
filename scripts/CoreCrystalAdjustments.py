@@ -44,7 +44,7 @@ def FieldSkillLevelAdjustment():
                     break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def ChangeRankCondition(): # This breaks the blades currently, not letting you unlock them at all
     # Changes the requirement to unlock trust level of blade from some weird ones like money to trust values instead (Boreas, etc)
@@ -62,7 +62,7 @@ def ChangeRankCondition(): # This breaks the blades currently, not letting you u
                     break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
     with open("./_internal/JsonOutputs/common/FLD_AchievementList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
@@ -70,7 +70,7 @@ def ChangeRankCondition(): # This breaks the blades currently, not letting you u
                 row["Task"] = 0
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def AdjustingCrystalList():
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["Condition", "BladeID", "CommonID", "CommonWPN", "CommonAtr"], 0)

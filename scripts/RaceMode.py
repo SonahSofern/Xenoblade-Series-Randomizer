@@ -117,7 +117,7 @@ def RaceModeChanging(OptionsRunDict):
                     break
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
 
     for i in range(0, len(LandmarkFilestoTarget)):  # Adjusts the EXP gained from the first landmark in each race-mode location
         with open(LandmarkFilestoTarget[i], 'r+', encoding='utf-8') as file:
@@ -133,7 +133,7 @@ def RaceModeChanging(OptionsRunDict):
                         row["MSGID"] = 63
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
     
     with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: #race mode implementation #these just adjust the quest markers as far as I can tell
         data = json.load(file)
@@ -149,7 +149,7 @@ def RaceModeChanging(OptionsRunDict):
                     break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
     with open("./_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: #race mode implementation #these just adjust the quest markers as far as I can tell
         data = json.load(file)
@@ -179,7 +179,7 @@ def RaceModeChanging(OptionsRunDict):
                     break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
     NGPlusBladeIDs = DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
     DifficultyChanges()
     DriverLvandSPFix()
@@ -218,7 +218,7 @@ def LessGrinding(): #adjusting level based exp gains, and debuffs while underlev
                 row["DamageRevHigh"] = 250
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
     NGPlusBladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
@@ -233,7 +233,7 @@ def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
                         break
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
         return NGPlusBladeCrystalIDs
 
 def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requirements to the same condition as the final quest in a race-mode continent
@@ -301,7 +301,7 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requir
                         row[f"AchievementID{j}"] = AllTrustSetAppearances[i][j-1]
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
     with open("./_internal/JsonOutputs/common/FLD_Achievement.json", 'r+', encoding='utf-8') as file: #we need to change FLD_Achievement ID 1 to walk 1 step total
         data = json.load(file)
@@ -313,7 +313,7 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requir
                     break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
     with open("./_internal/JsonOutputs/common/FLD_QuestTaskAchievement.json", 'r+', encoding='utf-8') as file: #now we need to modify the FLD_QuestTaskAchievement
         data = json.load(file)
@@ -330,7 +330,7 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requir
                     break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
     with open("./_internal/JsonOutputs/common/FLD_QuestReach.json", 'r+', encoding='utf-8') as file:  #modifying the tasks where you need to reach a certain location
         data = json.load(file)
@@ -343,7 +343,7 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requir
                     break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
     with open("./_internal/JsonOutputs/common_ms/fld_quest_achievement.json", 'r+', encoding='utf-8') as file: #modifying the text files that describe what you need to do to unlock the node
         data = json.load(file)
@@ -358,7 +358,7 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requir
                     break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 # Race Mode Core Crystal Changes
 
@@ -384,7 +384,7 @@ def RenameCoreCrystals(OptionsRunDict):
                         break
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
 
 def DetermineRandomizedBladeClasses(DefaultBladeClasses, DefaultBladeIDs, RandomizedBladeIDs):
     RandomizedBladeClasses = []
@@ -414,7 +414,7 @@ def ChangeITMCrystalTxt(BladeClassesandElementNames):
                     break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
     NonNGPlusCoreCrystalIDs = set(Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057])
@@ -494,7 +494,7 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
                             BoxestoRandomizePerMap[i] = BoxestoRandomizePerMap[i] + 1
                     file.seek(0)
                     file.truncate()
-                    json.dump(data, file, indent=2)
+                    json.dump(data, file, indent=2, ensure_ascii=False)
     ItemsPerBox = []
     for i in range(0, len(AllAreaLootIDs)):
         ItemsPerBox.append(len(AllAreaLootIDs[i])//BoxestoRandomizePerMap[i])
@@ -527,7 +527,7 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
                         if k > len(AllAreaLootIDs[i]): #If k ever exceeds the size of the loot ids we're shuffling, then we can stop going through the files
                             file.seek(0)
                             file.truncate()
-                            json.dump(data, file, indent=2) 
+                            json.dump(data, file, indent=2, ensure_ascii=False)
                             break
                         TBoxName = row["name"]
                         if (TBoxName[5] != "q") & (TBoxName != "tbox_ma08a_f018"): # We want to not randomize the quest related loot boxes and a box on Mor Ardain stuck in collision
@@ -547,9 +547,9 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
                             #m = m + 1
                     file.seek(0)
                     file.truncate()
-                    json.dump(data, file, indent=2)
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Mysterious Part Hunt"]["subOptionTypeVal"].get(): 
-        print("Shuffling in Mysterious Parts")
+                    json.dump(data, file, indent=2, ensure_ascii=False)
+    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Xohar Fragment Hunt"]["subOptionTypeVal"].get(): 
+        print("Shuffling in Xohar Fragments")
         XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices)
         
 def ShyniniSaveUs(): # Just in case we don't get good blade field skills, we can rely on Shynini to always sell core crystals :D
@@ -562,7 +562,7 @@ def ShyniniSaveUs(): # Just in case we don't get good blade field skills, we can
                 row["DefItem9"] = 45013
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def ShopRemovals(): # Removes the Expensive Core Crystal from the shop, as well as the shop deeds
     ShopDeedIDs = Helper.InclRange(25249, 25300)
@@ -576,7 +576,7 @@ def ShopRemovals(): # Removes the Expensive Core Crystal from the shop, as well 
                 row["AddCondition2"] = 0
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, makes the max movespeed bonus 250% instead of 25%
     DeedTypeIDValues = Helper.InclRange(1, 52)
@@ -596,7 +596,7 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
                 break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
     with open("./_internal/JsonOutputs/common/FLD_OwnerBonusParam.json", 'r+', encoding='utf-8') as file: # Changes max movespeed bonus to 250%
         data = json.load(file)
         for row in data["rows"]:
@@ -605,7 +605,7 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
                 break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
     with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes max movespeed bonus to 250%
         data = json.load(file)
         for row in data["rows"]:
@@ -615,7 +615,7 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
                 break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
     with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes max movespeed bonus to 250%
         data = json.load(file)
         for row in data["rows"]:
@@ -625,7 +625,7 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
                 break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def DLCItemChanges(): # Changes all DLC gifts to 1 gold except for poppy crystals
     DLCIDRowsWithItems = Helper.InclRange(1,7) + [9, 10] + Helper.InclRange(16, 21) + [23,24] + [30] + [36, 37] + Helper.InclRange(43, 55)
@@ -638,7 +638,7 @@ def DLCItemChanges(): # Changes all DLC gifts to 1 gold except for poppy crystal
                 row["value"] = 1
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def DifficultyChanges(): # Makes Easy difficulty the same as Normal
     with open("./_internal/JsonOutputs/common/BTL_DifSetting.json", 'r+', encoding='utf-8') as file: #edits DLC items
@@ -647,9 +647,9 @@ def DifficultyChanges(): # Makes Easy difficulty the same as Normal
             row["Easy"] = row["Normal"]
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
-def MenuChanges(): # Adjusts the menu text # Ben still needs to push fix
+def MenuChanges():
     seedhashcomplete = random.choice(SeedHashAdj) + " " + random.choice(SeedHashNoun) 
     with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r+', encoding='utf-8') as file: #edits DLC items
         data = json.load(file)
@@ -661,7 +661,7 @@ def MenuChanges(): # Adjusts the menu text # Ben still needs to push fix
                 row["name"] = "Race Mode Start"
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
     
 def ReduceBladeReqTrustVals(): # Sets required Trust Values to 0.5x the vanilla values
     with open("./_internal/JsonOutputs/common/FLD_ConditionIdea.json", 'r+', encoding='utf-8') as file:
@@ -670,7 +670,7 @@ def ReduceBladeReqTrustVals(): # Sets required Trust Values to 0.5x the vanilla 
             row["TrustPoint"] = int(0.5 * row["TrustPoint"])
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def SecondSkillTreeCostReduc(): # Reduces the cost of the hidden driver skill tree by 80% for race mode
     FilePaths = ["./_internal/JsonOutputs/common/BTL_Skill_Dr_Table01.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table02.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table03.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table04.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table05.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table06.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./_internal/JsonOutputs/common/BTL_Skill_Dr_Table19.json"]
@@ -682,7 +682,7 @@ def SecondSkillTreeCostReduc(): # Reduces the cost of the hidden driver skill tr
                     row["NeedSp"] = int(row["NeedSp"] / 5)
             file.seek(0)
             file.truncate()
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=2, ensure_ascii=False)
 
 def EnemyDropRemoval(): # Removes all enemy drops, to avoid getting powerful equipment out of logic.
     for i in range(1, 9):
@@ -704,7 +704,7 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Exper
                     break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
     NameTexts = ["Xohar Fragment A", "Xohar Fragment B", "Xohar Fragment C", "Xohar Fragment D"]
     with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # makes them stackable
         data = json.load(file)
@@ -720,7 +720,7 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Exper
                     break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
     BlankstoShuffle = [0] * (len(ChosenIndices) - 1)
     PartstoShuffle = [0] * (len(ChosenIndices) - 1)
     for i in range(0, len(PartstoShuffle)):
@@ -754,7 +754,7 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Exper
                             ACurBox = ACurBox + 1
                     file.seek(0)
                     file.truncate()
-                    json.dump(data, file, indent=2)
+                    json.dump(data, file, indent=2, ensure_ascii=False)
     QuestCollectIDs = [27, 50, 68, 69]
     with open("./_internal/JsonOutputs/common/FLD_QuestCollect.json", 'r+', encoding='utf-8') as file: # Making Quest Collect Entries for each of them
         data = json.load(file)
@@ -768,8 +768,9 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Exper
                     break
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)    
+        json.dump(data, file, indent=2, ensure_ascii=False)   
     LastQuestPurposeIDs = [48, 78, 121, 130, 155, 171, 184, 203, 218]
+    IDNumbers = Helper.InclRange(278, 281)
     with open("./_internal/JsonOutputs/common/FLD_QuestTask.json", 'r+', encoding='utf-8') as file: # Adding the Quest Requirement to the final quest of the area
         data = json.load(file)
         for i in range(0, len(ChosenIndices) - 1):
@@ -777,10 +778,18 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Exper
                 if row["$id"] == LastQuestPurposeIDs[ChosenIndices[i]]:
                     row["TaskType2"] = 3
                     row["TaskID2"] = QuestCollectIDs[i]
-                    row["TaskLog2"] = 195
+                    row["TaskLog2"] = IDNumbers[i]
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_ms/fld_quest.json", "r+", encoding='utf-8') as file:     
+        AreaLetters = ["A", "B", "C", "D"]
+        data = json.load(file)
+        for i in range(0, len(IDNumbers)):
+            data["rows"].append({"$id": IDNumbers[i], "style": 62, "name": f"Find 3 Xohar Fragment {AreaLetters[i]}."})
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def DriverLvandSPFix():
     with open("./_internal/JsonOutputs/common/CHR_Dr.json", 'r+', encoding='utf-8') as file: # Maybe fixing XP dupe
@@ -796,7 +805,7 @@ def DriverLvandSPFix():
                 row["DefAcce"] = 0
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy of a key item or core crystal into the pool
     with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file:
@@ -806,7 +815,7 @@ def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy 
                 row["ValueMax"] = 3
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2)
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def FindtheBladeNames(OptionsRunDict):
     if OptionsRunDict["Core Crystal Changes"]["optionTypeVal"].get():

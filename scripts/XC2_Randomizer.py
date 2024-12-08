@@ -105,7 +105,14 @@ MainWindow.add(TabSettingsOuter, text = 'In-Game Settings')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 def ShowTitleScreenText():
-    JSONParser.ChangeJSON(["common_ms/menu_ms.json"], ["name"], ["© 2017 Nintendo / MONOLITHSOFT", f"Randomizer v{Version}"], [f"Randomizer v{Version}"]) # Change Title Version to Randomizer v0.1.0
+    with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r+', encoding='utf-8') as file: #edits DLC items
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 132:
+                row["name"] = f"Randomizer v{Version}"
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
     global OptionDictionary
@@ -232,7 +239,7 @@ def Options():
     GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics()], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics)
     
     # Race Mode
-    GenStandardOption("Race Mode", TabRaceMode, "Enables Race Mode", [lambda: RaceMode.RaceModeChanging(OptionDictionary)], ["Mysterious Part Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", []])
+    GenStandardOption("Race Mode", TabRaceMode, "Enables Race Mode", [lambda: RaceMode.RaceModeChanging(OptionDictionary)], ["Xohar Fragment Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", []])
 
     # In-Game Settings
         # Camera Settings
