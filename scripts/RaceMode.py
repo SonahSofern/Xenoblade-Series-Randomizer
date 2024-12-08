@@ -2,8 +2,9 @@ import Helper as Helper
 import json
 import EnemyRandoLogic as EnemyRandoLogic
 import random
-from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun 
+from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, Accessories, WeaponChips, AuxCores, CoreCrystals, ValidTboxMapNames
 import time
+import JSONParser
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
@@ -245,8 +246,6 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requir
     TaskLogIDs = [659, 660, 661, 662]
     LocationNames = ["Gormott", "Uraya", "Mor Ardain", "Leftheria", "Indol", "Tantal", "Spirit Crucible Elpys", "the Cliffs of Morytha", "the World Tree"]
 
-    #AllSkillSetAppearances = [16, 16, 16, 16, 16]
-
     StarterBladeTrustSetAppearance = [16, 11, 12, 13, 14]
     A1TrustSetAppearance = [16, 16, 12, 13, 14]
     A2TrustSetAppearance = [16, 16, 16, 13, 14]
@@ -449,10 +448,10 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
         A2Equip.append(RaceModeAuxCoreIDs[i][A2Num])
         A3Equip.append(RaceModeAuxCoreIDs[i][A3Num])
         A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
-    Area1LootIDs = [25305] * 3 + Helper.InclRange(25249, 25264) + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2
-    Area2LootIDs = [25305] * 3 + Helper.InclRange(25265, 25280) + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2
-    Area3LootIDs = [25305] * 3 + Helper.InclRange(25281, 25291) + [25450] * 3 + A3Equip * 2 + [25408] * 5 + [25221, 25221, 25221] + A3RaceModeCoreChipIDs * 2
-    Area4LootIDs = [25305] * 3 + Helper.InclRange(25292, 25300) + [25450] * 3 + A4Equip * 2 + [25408] * 5 + [25222, 25222, 25222] + A4RaceModeCoreChipIDs * 2
+    Area1LootIDs = A1CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25249, 25264) + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2
+    Area2LootIDs = A2CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25265, 25280) + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2
+    Area3LootIDs = A3CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25281, 25291) + [25450] * 3 + A3Equip * 2 + [25408] * 5 + [25221, 25221, 25221] + A3RaceModeCoreChipIDs * 2
+    Area4LootIDs = A4CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25292, 25300) + [25450] * 3 + A4Equip * 2 + [25408] * 5 + [25222, 25222, 25222] + A4RaceModeCoreChipIDs * 2
     random.shuffle(Area1LootIDs)
     random.shuffle(Area2LootIDs)
     random.shuffle(Area3LootIDs)
@@ -476,6 +475,14 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
         if ChosenIndices[i] == 7:
             TBoxFiles[i][0] = "./_internal/JsonOutputs/common_gmk/ma17a_FLD_TboxPop.json"
             TBoxFiles[i][1] = "./_internal/JsonOutputs/common_gmk/ma18a_FLD_TboxPop.json"
+    ListTboxFiles = []
+    for i in range(0, 4):
+        for j in range(0, 2):
+            if TBoxFiles[i][j] != 0:
+                ListTboxFiles.append(TBoxFiles[i][j])
+    AllOtherMapIDs = [x for x in ValidTboxMapNames if x not in ListTboxFiles]
+    for i in range(0, len(AllOtherMapIDs)):
+        EnemyRandoLogic.ColumnAdjust(AllOtherMapIDs[i], ["itm1Num", "itm2Num", "itm3Num", "itm4Num", "itm5Num", "itm6Num", "itm7Num", "itm8Num", "itm1ID", "itm2ID", "itm3ID", "itm4ID", "itm5ID", "itm6ID", "itm7ID", "itm8ID"], 0)
     for i in range(0, len(TBoxFiles)):
         for l in range(0, len(TBoxFiles[i])):
             if TBoxFiles[i][l] != 0:
@@ -491,24 +498,24 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
     ItemsPerBox = []
     for i in range(0, len(AllAreaLootIDs)):
         ItemsPerBox.append(len(AllAreaLootIDs[i])//BoxestoRandomizePerMap[i])
-        if ItemsPerBox[i] > 6:
-            ItemsPerBox[i] = 6
+        if ItemsPerBox[i] > 7:
+            ItemsPerBox[i] = 7
         if ItemsPerBox[i] < 3:
             ItemsPerBox[i] = 3
             ItemtoChestDifference = 3 * BoxestoRandomizePerMap[i] - len(AllAreaLootIDs[i])
             for j in range(0, ItemtoChestDifference):
                 AllAreaLootIDs[i].append(random.choice([25405, 25405, 25405, 25406, 25406, 25407])) # fill the rest with WP 
             random.shuffle(AllAreaLootIDs[i])
-    AllCoreCrystalIDs = [A1CoreCrystalIDs, A2CoreCrystalIDs, A3CoreCrystalIDs, A4CoreCrystalIDs]
-    for i in range(0, len(BoxestoRandomizePerMap)):
-        while (BoxestoRandomizePerMap[i] - len(AllCoreCrystalIDs[i])) > 0:
-            AllCoreCrystalIDs[i].append(0)
-        random.shuffle(AllCoreCrystalIDs[i])
+    ##AllCoreCrystalIDs = [A1CoreCrystalIDs, A2CoreCrystalIDs, A3CoreCrystalIDs, A4CoreCrystalIDs]
+    #for i in range(0, len(BoxestoRandomizePerMap)):
+    #    while (BoxestoRandomizePerMap[i] - len(AllCoreCrystalIDs[i])) > 0:
+    #        AllCoreCrystalIDs[i].append(0)
+    #    random.shuffle(AllCoreCrystalIDs[i])
     k = 0
-    m = 0
+    #m = 0
     for i in range(0, len(TBoxFiles)):
         k = 0
-        m = 0
+        #m = 0
         for l in range(0, len(TBoxFiles[i])):
             if TBoxFiles[i][l] != 0:
                 with open(TBoxFiles[i][l], 'r+', encoding='utf-8') as file:
@@ -534,16 +541,16 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
                                     row[f"itm{h+1}ID"] = AllAreaLootIDs[i][k]
                                     row[f"itm{h+1}Num"] = 1
                                     k = k + 1
-                            row["itm7ID"] = AllCoreCrystalIDs[i][m] #need to shuffle core crystals in separately since multiple core crystals from 1 chest causes issues with the "no multiple" parameter on, but I need it on to keep people from pulling the same core crystal twice
-                            if row["itm7ID"] != 0:
-                                row["itm7Num"] = 1
-                            m = m + 1
+                            #row["itm7ID"] = AllCoreCrystalIDs[i][m] #need to shuffle core crystals in separately since multiple core crystals from 1 chest causes issues with the "no multiple" parameter on, but I need it on to keep people from pulling the same core crystal twice
+                            #if row["itm7ID"] != 0:
+                            #    row["itm7Num"] = 1
+                            #m = m + 1
                     file.seek(0)
                     file.truncate()
                     json.dump(data, file, indent=2)
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Mysterious Part Hunt"]["subOptionTypeVal"].get(): 
         print("Shuffling in Mysterious Parts")
-        MysteriousPartHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices)
+        XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices)
         
 def ShyniniSaveUs(): # Just in case we don't get good blade field skills, we can rely on Shynini to always sell core crystals :D
     with open("./_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as file: 
@@ -681,88 +688,57 @@ def EnemyDropRemoval(): # Removes all enemy drops, to avoid getting powerful equ
     for i in range(1, 9):
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BTL_EnDropItem.json", [f"ItemID{i}", f"DropProb{i}", f"NoGetByEnh{i}", f"FirstNamed{i}"] , 0)
 
-def MysteriousPartHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Experimental Mode to make players go out and find chests. This does break the mysterious part quest, but with race mode, it was unlikely to work anyways lmao
+def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Experimental Mode to make players go out and find chests.
+    XoharFragPreciousIDs = [25135, 25136, 25137, 25138] # for now fixed at 4, but if we change # of race mode dungeons or give the player that option, will need to change this
+    FragmentNameIDs = [191, 192, 193, 194]
+    CaptionIDs = [197, 199, 201, 206]
     with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # makes them stackable
         data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] in Helper.InclRange(25034, 25038):
-                row["ValueMax"] = 10
-                row["ClearNewGame"] = 0
+        for i in range(0, len(XoharFragPreciousIDs)):
+            for row in data["rows"]:
+                if row["$id"] == XoharFragPreciousIDs[i]:
+                    row["ValueMax"] = 99
+                    row["ClearNewGame"] = 0
+                    row["Name"] = FragmentNameIDs[i]
+                    row["Caption"] = CaptionIDs[i]
+                    break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
-    with open("./_internal/JsonOutputs/common_gmk/ma05a_FLD_TboxPop.json", 'r+', encoding='utf-8') as file: # removing them from chests
+    NameTexts = ["Xohar Fragment A", "Xohar Fragment B", "Xohar Fragment C", "Xohar Fragment D"]
+    with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # makes them stackable
         data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 538:
-                row["itm1ID"] = 0
-                row["itm1Num"] = 0
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
-    with open("./_internal/JsonOutputs/common_gmk/ma08a_FLD_TboxPop.json", 'r+', encoding='utf-8') as file: # removing them from chests
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 802:
-                row["itm1ID"] = 0
-                row["itm1Num"] = 0
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
-    with open("./_internal/JsonOutputs/common_gmk/ma13a_FLD_TboxPop.json", 'r+', encoding='utf-8') as file: # removing them from chests
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 1305:
-                row["itm1ID"] = 0
-                row["itm1Num"] = 0
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
-    with open("./_internal/JsonOutputs/common_gmk/ma15a_FLD_TboxPop.json", 'r+', encoding='utf-8') as file: # removing them from chests
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 1502:
-                row["itm1ID"] = 0
-                row["itm1Num"] = 0
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2)
-    with open("./_internal/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file: # removing them from shops
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 345:
-                row["SetItem1"] = 25038
-                row["SetItem2"] = 0
-                row["SetNumber2"] = 0
-                row["SetItem3"] = 0
-                row["SetNumber3"] = 0
-            if row["$id"] == 346:
-                row["SetItem1"] = 25084
-                row["SetItem2"] = 0
-                row["SetNumber2"] = 0
-                row["SetItem3"] = 0
-                row["SetNumber3"] = 0
+        for i in range(0, len(XoharFragPreciousIDs)):
+            for row in data["rows"]:
+                if row["$id"] == FragmentNameIDs[i]:
+                    row["name"] = NameTexts[i]
+                    break
+        for i in range(0, len(XoharFragPreciousIDs)):
+            for row in data["rows"]:
+                if row["$id"] == FragmentNameIDs[i]:
+                    row["name"] = "3 of these are needed to\nprogress to the next area."
+                    break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2)
     BlankstoShuffle = [0] * (len(ChosenIndices) - 1)
     PartstoShuffle = [0] * (len(ChosenIndices) - 1)
     for i in range(0, len(PartstoShuffle)):
-        PartstoShuffle[i] = int(BoxestoRandomizePerMap[i] // 3)
+        PartstoShuffle[i] = int(BoxestoRandomizePerMap[i] // 3) # 1/3rd of all chests have a Xohar Fragment
         if PartstoShuffle[i] < 5:
             PartstoShuffle[i] = 5
         BlankstoShuffle[i] = BoxestoRandomizePerMap[i] - PartstoShuffle[i]
-    Area1MysteriousPartLocations = [0] * BlankstoShuffle[0] + [25034] * PartstoShuffle[0]
-    random.shuffle(Area1MysteriousPartLocations)
-    Area2MysteriousPartLocations = [0] * BlankstoShuffle[1] + [25035] * PartstoShuffle[1]
-    random.shuffle(Area2MysteriousPartLocations)
-    Area3MysteriousPartLocations = [0] * BlankstoShuffle[2] + [25036] * PartstoShuffle[2]
-    random.shuffle(Area3MysteriousPartLocations)
-    Area4MysteriousPartLocations = [0] * BlankstoShuffle[3] + [25037] * PartstoShuffle[3]
-    random.shuffle(Area4MysteriousPartLocations)
-    AllMysteriousPartLocations = [Area1MysteriousPartLocations, Area2MysteriousPartLocations, Area3MysteriousPartLocations, Area4MysteriousPartLocations]
+    Area1XoharLocations = [0] * BlankstoShuffle[0] + [25135] * PartstoShuffle[0]
+    random.shuffle(Area1XoharLocations)
+    Area2XoharLocations = [0] * BlankstoShuffle[1] + [25136] * PartstoShuffle[1]
+    random.shuffle(Area2XoharLocations)
+    Area3XoharLocations = [0] * BlankstoShuffle[2] + [25137] * PartstoShuffle[2]
+    random.shuffle(Area3XoharLocations)
+    Area4XoharLocations = [0] * BlankstoShuffle[3] + [25138] * PartstoShuffle[3]
+    random.shuffle(Area4XoharLocations)
+    AllXoharLocations = [Area1XoharLocations, Area2XoharLocations, Area3XoharLocations, Area4XoharLocations]
     ACurBox = 0
-    for i in range(0, len(TBoxFiles)): # Shuffling the mysterious parts into the treasure chests
+    for i in range(0, len(TBoxFiles)): # Shuffling the xohar fragments into the treasure chests
         ACurBox = 0
         for l in range(0, len(TBoxFiles[i])):
             if TBoxFiles[i][l] != 0:
@@ -771,8 +747,8 @@ def MysteriousPartHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Expe
                     for row in data["rows"]:
                         TBoxName = row["name"]
                         if (TBoxName[5] != "q") & (TBoxName != "tbox_ma08a_f018"):
-                            if AllMysteriousPartLocations[i][ACurBox] != 0:
-                                row["itm8ID"] = AllMysteriousPartLocations[i][ACurBox]
+                            if AllXoharLocations[i][ACurBox] != 0:
+                                row["itm8ID"] = AllXoharLocations[i][ACurBox]
                                 row["itm8Num"] = 1
                                 #print(row["name"])
                             ACurBox = ACurBox + 1
@@ -788,7 +764,7 @@ def MysteriousPartHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Expe
                     row["Refer"] = 4
                     row["Count"] = 3
                     row["Deduct"] = 0
-                    row["ItemID"] = 25034 + i
+                    row["ItemID"] = 25135 + i
                     break
         file.seek(0)
         file.truncate()
@@ -823,7 +799,7 @@ def DriverLvandSPFix():
         json.dump(data, file, indent=2)
 
 def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy of a key item or core crystal into the pool
-    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Maybe fixing XP dupe
+    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in Helper.InclRange(25218, 25222):
@@ -849,7 +825,6 @@ def ITMCrystalAdditions(BladeNames, CorrespondingBladeIDs):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-
     with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
