@@ -41,11 +41,11 @@ def RaceModeChanging(OptionsRunDict):
     # common/FLD_QuestList
     # [Gormott, Uraya, Mor Ardain, Leftherian Archipelago, Temperantia + Indoline Praetorium, Tantal, Spirit Crucible Elpys, Cliffs of Morytha + Land of Morytha, World Tree, Final Stretch]
 
-    ContinentWarpCutscenes = [10034, 10088, 10156, 10197, 10215, 10270, 10325, 10350, 10392, 10476] # We want to call these after the boss fight cutscenes
-    FinalContinentCutscenes = [10079, 10130, 10189, 10214, 10266, 10304, 10345, 10392, 10451, 30000]
-    ScenarioFlagLists = [2001, 3005, 4025, 5005, 5023, 6028, 7018, 7043, 8024, 10026]
-    NextQuestAList = [27, 56, 100, 128, 137, 163, 184, 194, 212, 238]
-    LastQuestAList = [50, 81, 125, 136, 161, 177, 191, 211, 227, 270]
+    ContinentWarpCutscenes = [10034, 10088, 10156, 10197, 10213, 10270, 10325, 10350, 10392, 10476] # We want to call these after the boss fight cutscenes
+    FinalContinentCutscenes = [10079, 10130, 10189, 10212, 10266, 10304, 10345, 10392, 10451, 30000]
+    ScenarioFlagLists = [2001, 3005, 4025, 5005, 5021, 6028, 7018, 7043, 8024, 10026]
+    NextQuestAList = [27, 56, 100, 128, 136, 163, 184, 194, 212, 238]
+    LastQuestAList = [50, 81, 125, 135, 161, 177, 191, 211, 227, 270]
     LevelAtStartofArea = [5, 20, 29, 35, 38, 42, 46, 51, 59, 68] #Level going to: # Level(ish) of the first boss of the current area (so you want to be around this level after warping)
     LevelAtEndofArea = [15, 26, 34, 35, 42, 46, 46, 59, 68, 70]  #Level going from: # Level the last boss of the previous area was (so you should be around the same level before warping to new area)
 
@@ -146,7 +146,7 @@ def RaceModeChanging(OptionsRunDict):
             for row in data["rows"]:
                 if row["$id"] == LastQuestAList[ChosenIndices[i]]:
                     row["NextQuestA"] = NextQuestAList[ChosenIndices[i+1]]
-                    break
+                    break      
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -168,6 +168,21 @@ def RaceModeChanging(OptionsRunDict):
             if row["$id"] == 10189:
                 row["linkID"] = 0
                 row["envSeam"] = 0
+            if row["$id"] == 10094: # script that causes Vandham to join is name chapt03 startid 5
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10096:
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10107: # script for the second time Vandham joins
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10211: # script that removes morag
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10213: # script that readds morag
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
             if row["$id"] == 10304:
                 row["linkID"] = 0
         for i in range(0, len(ChosenIndices) - 1):
@@ -180,20 +195,20 @@ def RaceModeChanging(OptionsRunDict):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    NGPlusBladeIDs = DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
+    NGPlusBladeCrystalIDs = DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
     DifficultyChanges()
     DriverLvandSPFix()
     print(OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get())
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get():
         print("Filling Chests with Custom Loot")
-        RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict)
+        RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict)
         StackableCoreCrystalsandKeyItems()
         #RenameCoreCrystals(OptionsRunDict)
         FindtheBladeNames(OptionsRunDict)
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Less Grinding"]["subOptionTypeVal"].get():
         print("Reducing amount of grinding")
         LessGrinding()
-        ChangeBladeLevelUnlockReqs(ChosenIndices)
+        ChangeBladeLevelUnlockReqs(ChosenIndices, NGPlusBladeCrystalIDs)
         ReduceBladeReqTrustVals()
         SecondSkillTreeCostReduc()
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get():    
@@ -236,7 +251,7 @@ def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
             json.dump(data, file, indent=2, ensure_ascii=False)
         return NGPlusBladeCrystalIDs
 
-def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requirements to the same condition as the final quest in a race-mode continent
+def ChangeBladeLevelUnlockReqs(ChosenIndices, NGPlusBladeCrystalIDs): # changes the blade unlock requirements to the same condition as the final quest in a race-mode continent
     KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]
     KeyAchievementIDs = list(set([x for x in KeyAchievementIDs if x != 0]))
     RelevantChosenIndices = [x for x in ChosenIndices if x != 9]
@@ -258,9 +273,11 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requir
     A1BladeIDs = []
     A2BladeIDs = [1006]
     A3BladeIDs = [1011]
-    A4BladeIDs = []
+    A4BladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
 
-    ValidCrystalListIDs = Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057]
+    ValidCrystalListIDs = set(Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057])
+    ValidCrystalListIDs -= set(NGPlusBladeCrystalIDs)
+    ValidCrystalListIDs = list(ValidCrystalListIDs)
     CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
     
     for i in range(0, len(ValidCrystalListIDs)):
@@ -268,10 +285,8 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requir
             A1BladeIDs.append(CorrespondingBladeIDs[i])
         if (i > 11) & (i <= 23):
             A2BladeIDs.append(CorrespondingBladeIDs[i])
-        if (i > 23) & (i <= 35):
+        if (i > 22):
             A3BladeIDs.append(CorrespondingBladeIDs[i])
-        if i > 35:
-            A4BladeIDs.append(CorrespondingBladeIDs[i])
 
     AllBladeIDs = [StarterBladeIDs, A1BladeIDs, A2BladeIDs, A3BladeIDs, A4BladeIDs]
 
@@ -360,72 +375,16 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices): # changes the blade unlock requir
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-# Race Mode Core Crystal Changes
-
-def RenameCoreCrystals(OptionsRunDict):
-    if OptionsRunDict["Core Crystal Changes"]["optionTypeVal"].get():
-        DefaultBladeIDs = [1008, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050, 1104, 1108, 1109, 1105, 1106, 1107, 1111]
-        BladeClassNames = ["Attacker", "Tank", "Healer"] # 0 1 2 for each one
-        BladeElementNames = ["Fire", "Water", "Wind", "Earth", "Electric", "Ice", "Light", "Dark"]
-        BladeClassesandElementNames = BladeClassNames + BladeElementNames
-        DefaultBladeClasses = [0, 1, 1, 0, 1, 0, 0, 0, 2, 1, 0, 1, 0, 2, 0, 2, 1, 2, 0, 2, 2, 1, 0, 1, 2, 0, 0, 2, 2, 0, 1, 0, 0, 1, 1, 0, 0, 1, 2, 1, 0, 2, 0]
-        DefaultBladeElements = Helper.FindValues("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], DefaultBladeIDs, "Atr")
-        ValidCrystalListIDs = Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057]
-        RandomizedBladeIDs = Helper.FindValues("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["$id"], ValidCrystalListIDs, "BladeID")
-        RandomizedBladeClasses = DetermineRandomizedBladeClasses(DefaultBladeClasses, DefaultBladeIDs, RandomizedBladeIDs)
-        RandomizedBladeElements = DetermineRandomizedBladeElements(DefaultBladeElements, DefaultBladeIDs, RandomizedBladeIDs)
-        ChangeITMCrystalTxt(BladeClassesandElementNames)
-        with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
-            data = json.load(file)
-            for i in range(0, len(RandomizedBladeIDs)):
-                for row in data["rows"]:
-                    if row["BladeID"] == RandomizedBladeIDs[i]:
-                        row["Name"] = random.choice([6 + RandomizedBladeElements[i], 4 + RandomizedBladeClasses[i]])
-                        break
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
-
-def DetermineRandomizedBladeClasses(DefaultBladeClasses, DefaultBladeIDs, RandomizedBladeIDs):
-    RandomizedBladeClasses = []
-    for i in range(0, len(RandomizedBladeIDs)):
-        for j in range(0, len(DefaultBladeIDs)):
-            if RandomizedBladeIDs[i] == DefaultBladeIDs[j]:
-                RandomizedBladeClasses.append(DefaultBladeClasses[j])
-                break
-    return RandomizedBladeClasses
-
-def DetermineRandomizedBladeElements(DefaultBladeElements, DefaultBladeIDs, RandomizedBladeIDs):
-    RandomizedBladeElements = []
-    for i in range(0, len(RandomizedBladeIDs)):
-        for j in range(0, len(DefaultBladeIDs)):
-            if RandomizedBladeIDs[i] == DefaultBladeIDs[j]:
-                RandomizedBladeElements.append(DefaultBladeElements[j])
-                break
-    return RandomizedBladeElements
-
-def ChangeITMCrystalTxt(BladeClassesandElementNames):
-    with open("./_internal/JsonOutputs/common_ms/itm_crystal.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for i in range(4, 15):
-            for row in data["rows"]:
-                if row["$id"] == i:
-                    row["name"] = BladeClassesandElementNames[i - 4] + " " + "Core Crystal"
-                    break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-
-def RaceModeLootChanges(ChosenIndices, NGPlusBladeIDs, OptionsRunDict):
+def RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict):
     NonNGPlusCoreCrystalIDs = set(Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057])
-    NonNGPlusCoreCrystalIDs -= set(NGPlusBladeIDs)
+    NonNGPlusCoreCrystalIDs -= set(NGPlusBladeCrystalIDs)
     NonNGPlusCoreCrystalIDs = list(NonNGPlusCoreCrystalIDs)
     A1CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12]) * 2
     del NonNGPlusCoreCrystalIDs[:12]
     A2CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12]) * 2
     del NonNGPlusCoreCrystalIDs[:12]
     A3CoreCrystalIDs = (NonNGPlusCoreCrystalIDs) * 2
-    A4CoreCrystalIDs = NGPlusBladeIDs * 2
+    A4CoreCrystalIDs = NGPlusBladeCrystalIDs * 2
     A1Equip = []
     A2Equip = []
     A3Equip = []
@@ -715,7 +674,7 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Exper
                     break
         for i in range(0, len(XoharFragPreciousIDs)):
             for row in data["rows"]:
-                if row["$id"] == FragmentNameIDs[i]:
+                if row["$id"] == CaptionIDs[i]:
                     row["name"] = "3 of these are needed to\nprogress to the next area."
                     break
         file.seek(0)

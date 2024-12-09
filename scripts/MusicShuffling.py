@@ -1,4 +1,4 @@
-from IDs import EnemyBattleMusicMOVs, NonBattleMusicMOVs, NonBattleMusicIDs, EnemyBattleMusicIDs
+from IDs import EnemyBattleMusicMOVs, NonBattleMusicMOVs, NonBattleMusicIDs, EnemyBattleMusicIDs, ReplacementNonBattleMusicMOVs, ReplacementEnemyBattleMusicMOVs
 import JSONParser
 import EnemyRandoLogic
 import json
@@ -18,16 +18,15 @@ def SeparateBGMandBattle(OptionsRunDict):
             data = json.load(file)
             for row in data['rows']:
                 if row["$id"] in NonBattleMusicIDs:
-                    row["filename"] = random.choice([x for x in NonBattleMusicMOVs if x not in ['event/m14_loop.wav', '']])
+                    row["filename"] = random.choice(ReplacementNonBattleMusicMOVs)
                 if row["$id"] in EnemyBattleMusicIDs:
-                    row["filename"] = random.choice([x for x in EnemyBattleMusicMOVs if x != ''])
+                    row["filename"] = random.choice(ReplacementEnemyBattleMusicMOVs)
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)  
-        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/RSC_BgmCondition.json", ["Priority"], 0)
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listBf.json", ["edBgm"], 0)
     else:
         JSONParser.ChangeJSON(["common/RSC_BgmList.json"], ["filename"], NonBattleMusicMOVs + EnemyBattleMusicMOVs, NonBattleMusicMOVs + EnemyBattleMusicMOVs)
-        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/RSC_BgmCondition.json", ["Priority"], 0)
+        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listBf.json", ["edBgm"], 0)
         pass
 
