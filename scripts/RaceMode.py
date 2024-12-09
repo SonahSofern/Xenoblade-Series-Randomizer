@@ -44,14 +44,15 @@ def RaceModeChanging(OptionsRunDict):
     ContinentWarpCutscenes = [10034, 10088, 10156, 10197, 10213, 10270, 10325, 10350, 10392, 10476] # We want to call these after the boss fight cutscenes
     FinalContinentCutscenes = [10079, 10130, 10189, 10212, 10266, 10304, 10345, 10392, 10451, 30000]
     ScenarioFlagLists = [2001, 3005, 4025, 5005, 5021, 6028, 7018, 7043, 8024, 10026]
-    NextQuestAList = [27, 56, 100, 128, 136, 163, 184, 194, 212, 238]
+    NextQuestAList = [27, 56, 100, 128, 136, 163, 184, 195, 212, 238]
     LastQuestAList = [50, 81, 125, 135, 161, 177, 191, 211, 227, 270]
     LevelAtStartofArea = [5, 20, 29, 35, 38, 42, 46, 51, 59, 68] #Level going to: # Level(ish) of the first boss of the current area (so you want to be around this level after warping)
     LevelAtEndofArea = [15, 26, 34, 35, 42, 46, 46, 59, 68, 70]  #Level going from: # Level the last boss of the previous area was (so you should be around the same level before warping to new area)
 
     # The Save File is set up in a way that it has 56 bonus exp already, and is at level 2, so that value (totals to 76 xp gained) gets subtracted from the total xp needed
-    # XP needed to reach a given level, formatted in [Given Level, Total XP Needed] 
-    XPNeededToReachLv = [[5, 360], [15, 9060], [20, 21360], [26, 44520], [29, 59820], [34, 91320], [35, 98580], [38, 122520], [42, 160080], [46, 205140], [51, 274640], [59, 428120], [68, 682040], [70, 789920]]
+    # XP needed to reach a given level, formatted in [Given Level, Total XP Needed]
+    # Tora ends up like 35 xp off level 20 with the actual xp needed to reach lv 5 at 360, so I give some more exp to compensate. It doesn't push anyone else over.
+    XPNeededToReachLv = [[5, 325], [15, 9060], [20, 21360], [26, 44520], [29, 59820], [34, 91320], [35, 98580], [38, 122520], [42, 160080], [46, 205140], [51, 274640], [59, 428120], [68, 682040], [70, 789920]]
 
     ChosenIndices = []
 
@@ -103,21 +104,21 @@ def RaceModeChanging(OptionsRunDict):
         LandmarkMapSpecificIDstoTarget[0] = 210
 
     # Because upon beating the fight in leftheria, morag doesn't rejoin the party, we need to get her back by going to the first bit in indol
-    if (ChosenIndices[2] != 4) & (ChosenIndices[1] == 3):
-        with open("./_internal/JsonOutputs/common_gmk/ma11a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file:
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] == 1102:
-                    row["MAPJUMPID"] = RaceModeMapJumpIDs[ChosenIndices[2]]
-                    row["menuPriority"] = 1
-                    if ChosenIndices[2] == 5:
-                        row["MSGID"] = 314
-                    if ChosenIndices[2] == 6:
-                        row["MSGID"] = 396
-                    break
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
+    #if (ChosenIndices[2] != 4) & (ChosenIndices[1] == 3):
+    #    with open("./_internal/JsonOutputs/common_gmk/ma11a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file:
+    #        data = json.load(file)
+    #        for row in data["rows"]:
+    #            if row["$id"] == 1102:
+    #                row["MAPJUMPID"] = RaceModeMapJumpIDs[ChosenIndices[2]]
+    #                row["menuPriority"] = 1
+    #                if ChosenIndices[2] == 5:
+    #                    row["MSGID"] = 314
+    #                if ChosenIndices[2] == 6:
+    #                    row["MSGID"] = 396
+    #                break
+    #        file.seek(0)
+    #        file.truncate()
+    #        json.dump(data, file, indent=2, ensure_ascii=False)
 
     for i in range(0, len(LandmarkFilestoTarget)):  # Adjusts the EXP gained from the first landmark in each race-mode location
         with open(LandmarkFilestoTarget[i], 'r+', encoding='utf-8') as file:
@@ -459,11 +460,11 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict):
         ItemsPerBox.append(len(AllAreaLootIDs[i])//BoxestoRandomizePerMap[i])
         if ItemsPerBox[i] > 7:
             ItemsPerBox[i] = 7
-        if ItemsPerBox[i] < 3:
-            ItemsPerBox[i] = 3
-            ItemtoChestDifference = 3 * BoxestoRandomizePerMap[i] - len(AllAreaLootIDs[i])
+        if ItemsPerBox[i] < 4:
+            ItemsPerBox[i] = 4
+            ItemtoChestDifference = 4 * BoxestoRandomizePerMap[i] - len(AllAreaLootIDs[i])
             for j in range(0, ItemtoChestDifference):
-                AllAreaLootIDs[i].append(random.choice([25405, 25405, 25405, 25406, 25406, 25407])) # fill the rest with WP 
+                AllAreaLootIDs[i].append(random.choice([25405, 25405, 25405, 25405, 25405, 25406, 25406, 25406, 25406, 25407])) # fill the rest with WP 
             random.shuffle(AllAreaLootIDs[i])
     ##AllCoreCrystalIDs = [A1CoreCrystalIDs, A2CoreCrystalIDs, A3CoreCrystalIDs, A4CoreCrystalIDs]
     #for i in range(0, len(BoxestoRandomizePerMap)):
