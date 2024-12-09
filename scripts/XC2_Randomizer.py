@@ -110,6 +110,7 @@ def ShowTitleScreenText():
         for row in data["rows"]:
             if row["$id"] == 132:
                 row["name"] = f"Randomizer v{Version}"
+                break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -174,7 +175,6 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         "subOptionTypeVal": var,
         "subCommandList": subOptionName_subCommandList[2*i+1],
         }
-
 
     rowIncrement += 1
     
@@ -288,7 +288,7 @@ def Randomize():
 
         # Runs all randomization
         RunOptions()
-        RaceMode.MenuChanges()
+        RaceMode.SeedHash()
         randoProgressDisplay.config(text="Packing BDATs")
 
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
