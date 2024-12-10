@@ -173,7 +173,6 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         "subCommandList": subOptionName_subCommandList[2*i+1],
         }
 
-
     rowIncrement += 1
     
 def Options():
@@ -294,7 +293,7 @@ def Randomize():
 
         # Runs all randomization
         RunOptions()
-        RaceMode.MenuChanges()
+        RaceMode.SeedHash()
         randoProgressDisplay.config(text="Packing BDATs")
 
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")

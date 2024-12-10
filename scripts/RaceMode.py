@@ -609,7 +609,7 @@ def DifficultyChanges(): # Makes Easy difficulty the same as Normal
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def MenuChanges():
+def SeedHash():
     seedhashcomplete = random.choice(SeedHashAdj) + " " + random.choice(SeedHashNoun) 
     with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r+', encoding='utf-8') as file: #edits DLC items
         data = json.load(file)
