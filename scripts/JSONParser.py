@@ -6,7 +6,10 @@ def ChangeJSON(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacement
     # print(f"Valid Replacements: {Replacements}")
     SliderOdds = IDs.CurrentSliderOdds
     rangeValidReplacements.extend(IDs.ValidReplacements)
-    rangeValidReplacements = list(set(rangeValidReplacements) - set(IDs.InvalidReplacements))
+    if (keyWords[0] == "ReAct1") & (Filename == "common/BTL_Arts_Bl.json"): #bandaid to allow the validreplacements to be used as weights to give the outputs
+        pass
+    else:
+        rangeValidReplacements = list(set(rangeValidReplacements) - set(IDs.InvalidReplacements))
     for name in Filename:
         filePath = "./_internal/JsonOutputs/" + name
         if not os.path.exists(filePath):
