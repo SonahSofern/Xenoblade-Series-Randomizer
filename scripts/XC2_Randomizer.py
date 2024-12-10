@@ -21,7 +21,7 @@ defaultFont = Font(family="@Yu Gothic UI Semilight", size=13)
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
 root.configure(background=Red)
-root.geometry('1000x800')
+root.geometry('1000x900')
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
 
@@ -208,11 +208,9 @@ def Options():
     GenStandardOption("Blade Names", TabBlades, "Randomizes the names of blades", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
     GenStandardOption("Blade Defenses", TabBlades, "Randomizes Blade Physical and Ether Defense", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.InclRange(0,100), BladeDefenseDistribution)])
     GenStandardOption("Blade Mods", TabBlades, "Randomizes Blade Stat Modifiers", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.InclRange(0,100), BladeModDistribution)])
-    GenStandardOption("Blade Size", TabBlades, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["Scale", "WpnScale"], AllValues, Helper.InclRange(1,250) + [1000,16000])], optionType= Scale) # Make sure these work for common blades
     
     # Enemies
     GenStandardOption("Enemy Drops", TabEnemies, "Randomizes enemy drop tables", [lambda: JSONParser.ChangeJSON(["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores + Accessories + WeaponChips, AuxCores + Accessories + WeaponChips)])
-    GenStandardOption("Enemy Size", TabEnemies, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSON(["common/CHR_EnArrange.json"], ["Scale"], Helper.InclRange(0, 1000), Helper.InclRange(1, 200) + Helper.InclRange(990,1000))], optionType=Scale)
     GenStandardOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", [lambda: EnemyRandoLogic.EnemyLogic(OptionDictionary)],["Story Bosses", [], "Quest Enemies", [], "Unique Monsters", [], "Superbosses", [], "Normal Enemies", [], "Mix Enemies Between Types", [], "Keep All Enemy Levels", [], "Keep Quest Enemy Levels", [], "Keep Story Boss Levels", []])
     GenStandardOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", [lambda: JSONParser.ChangeJSON(["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.InclRange(0,100), Helper.InclRange(0,100) + Helper.InclRange(250,255))])
     #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30)) Defunct with alex's enemy rando
@@ -220,7 +218,6 @@ def Options():
     # Misc
     GenStandardOption("Music", TabMisc, "Randomizes what music plays where", [lambda: JSONParser.ChangeJSON(["common/RSC_BgmList.json"], ["filename"], ValidMusicFileNames, ValidMusicFileNames)]) # need to change title screen music
     # GenDictionary("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.InclRange(0,3721), Helper.InclRange(2001,3721))])
-    GenStandardOption("NPCs Size", TabMisc, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSON(["common/RSC_NpcList.json"], ["Scale"], Helper.InclRange(1,100), Helper.InclRange(1,250))], optionType=Scale)
     # GenOption("Funny Faces", TabMisc, "Randomizes Facial Expressions", ["common/EVT_eyetype.json"], ["$id"], Helper.inclRange(0,15), Helper.inclRange(0,15)) # doesnt work yet
     # GenDictionary("Menu Colors", TabMisc, "Randomizes Colors in the UI", [lambda: JSONParser.ChangeJSON(["common/MNU_ColorList.json"], ["col_r", "col_g", "col_b"], Helper.InclRange(0,255), Helper.InclRange(0,0))])
     # GenDictionary("Beta Stuff", TabMisc, "Stuff still in testing", [lambda: TestingStuff.Beta()])
@@ -236,6 +233,10 @@ def Options():
     GenStandardOption("Treasure Chest Visibility", TabQOL, "Increases the range you can see treasure chests from", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["msgVisible", "msgdigVisible"], Helper.InclRange(0,200), [255])])
 
     GenStandardOption("Projectile Treasure Chests", TabFunny, "Launches your items from chests", [lambda: JSONParser.ChangeJSON(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [12])])
+    GenStandardOption("Blade Size", TabFunny, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["Scale", "WpnScale"], AllValues, Helper.InclRange(1,250) + [1000,16000])], optionType= Scale) # Make sure these work for common blades
+    GenStandardOption("NPCs Size", TabFunny, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSON(["common/RSC_NpcList.json"], ["Scale"], Helper.InclRange(1,100), Helper.InclRange(1,250))], optionType=Scale)
+    GenStandardOption("Enemy Size", TabFunny, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSON(["common/CHR_EnArrange.json"], ["Scale"], Helper.InclRange(0, 1000), Helper.InclRange(1, 200) + Helper.InclRange(990,1000))], optionType=Scale)
+
 
     # Cosmetics
     GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics()], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics)
@@ -262,6 +263,7 @@ def Options():
     GenStandardOption("Battle Narrator volume", TabSettings, "Adjust volume of the battle Narrator (not character battle voices)", [],[], Scale)
     GenStandardOption("Environment volume", TabSettings, "Adjust volume of environmental sounds (such as rain) heard during the game", [],[], Scale)
     GenStandardOption("System volume", TabSettings, "Adjust volume of system sounds heard during the game", [],[], Scale)
+
 
     GenHeader("Screen Settings",TabSettings, None)        
     GenStandardOption("Screen brightness", TabSettings, "Adjust screen brightness", [],[], Scale)
@@ -316,9 +318,6 @@ def Randomize():
 def RunOptions():
     ShowTitleScreenText()
     for option in OptionDictionary.values():
-        if option["name"] == "Driver Art Reactions":
-            if option["optionTypeVal"].get() > 0:
-                EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", [Helper.StartsWith("ReAct", 1,16)], 0)
         # For Sliders
         if (type(option["optionTypeVal"].get()) == int):
             IDs.CurrentSliderOdds = option["optionTypeVal"].get()
@@ -338,6 +337,7 @@ def RunOptions():
                     pass
  
 def GenRandomSeed():
+    print(Helper.StartsWith("ReAct", 1, 16))
     randoSeedEntry.delete(0, END)
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
@@ -373,7 +373,7 @@ SettingsButton.pack(pady=10, padx=10, side='right', anchor='e')
 
 randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=White)
 
-EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()])
+EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()] + [defaultFont])
 SavedOptions.loadData(EveryObjectToSaveAndLoad)
 
 

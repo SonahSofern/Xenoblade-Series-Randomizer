@@ -20,5 +20,4 @@ Clean up code make readable and fast (I dont like these global variables clearin
 
 Make Readme
 
-GOATED FONTS
-Segoe UI Historic
+Make the slider/button/input field object in the dictionary so we can let players set a number

@@ -18,7 +18,7 @@ def InsertHelper(insertIndex,  lowNum, highNum, mainString = str, pathTo = str):
     #print(listOfFiles)
     return listOfFiles
 
-def FindValues(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue): # used for me to find a list of values from a file with certain characteristsics that i want to remove
+def FindValues(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue): # used to find a list of values from a file with certain characteristsics that i want to remove
     bad_values_found = []
     
     with open(filePath, 'r+', encoding='utf-8') as file:
@@ -31,10 +31,6 @@ def FindValues(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue)
     
     # print("FindValues: " + bad_values_found)
     return(bad_values_found)
-
-def RunHandler():
-    return True
-    # Reusable for each function to check the state of input whether the commands associated with this should be run
 
 def AdjustedFindBadValuesList(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue):
     bad_values_found = []

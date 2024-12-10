@@ -31,10 +31,8 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     iter = 0
     fontNameVar = StringVar()
     fontSizeVar = StringVar()
-    GoodFonts = []
     newWindow.title("GUI Settings")
-    newWindow.geometry("600x400")
-    Label(newWindow).pack()
+    newWindow.geometry("800x100")
     allFonts = font.families()
     
     def LoadFontByName(name):
@@ -59,17 +57,15 @@ def OpenSettingsWindow(rootWindow, defaultFont):
         fontName.insert(0,allFonts[iter])
         defaultFont.config(family=allFonts[iter])
 
-    def GoodFont(event = None):
-        nonlocal iter
-        if allFonts[iter] not in GoodFonts:
-            GoodFonts.append(allFonts[iter])
-            print(GoodFonts)
+    def SaveFont(event = None):
+        pass
 
     def IncreaseFontSize(event = None):
         newSize = defaultFont.cget("size") + 1
         LoadFontSize(newSize)
         fontSize.delete(0, END)
         fontSize.insert(0,newSize)
+        
     def DecreaseFontSize(event = None):
         newSize = defaultFont.cget("size") - 1
         LoadFontSize(newSize)
@@ -78,21 +74,26 @@ def OpenSettingsWindow(rootWindow, defaultFont):
 
     newWindow.bind("<Right>", NextFont)
     newWindow.bind("<Left>", PreviousFont) 
-    newWindow.bind("<Return>", GoodFont)
+    newWindow.bind("<Return>", SaveFont)
     newWindow.bind("<Up>", IncreaseFontSize)
     newWindow.bind("<Down>", DecreaseFontSize) 
 
+    newWindow.config(padx=10, pady=10)
     # Still dont get these two lines but oh well
     fontNameVar.trace_add("write", lambda name, index, mode: LoadFontByName(fontNameVar.get()))
     fontSizeVar.trace_add("write", lambda name, index, mode: LoadFontSize(fontSizeVar.get()))
     
-    fontName = Entry(newWindow, width=20, font=("Arial", 12), textvariable=fontNameVar)
-    fontName.pack(side='left', padx=2)
-    fontSize = Entry(newWindow, width=3, font=("Arial", 12), textvariable=fontSizeVar)
-    fontSize.pack(side='left', padx=2)
-    saveFont = Button(newWindow, text="Save Font", command=GoodFont, font=("Arial", 12))
-    saveFont.pack(side='left', padx=5, pady=2)
-    fontTestBack = Button(newWindow, text="Previous Font", command=PreviousFont, font=("Arial", 12))
-    fontTestBack.pack(side='left', padx=5, pady=2)
-    fontTestNext = Button(newWindow, text="Next Font", command=NextFont, font=("Arial", 12))
-    fontTestNext.pack(side='left', padx=5, pady=2)
+    fontTestBack = Button(newWindow, text="Previous", command=PreviousFont, font=("Arial", 16))
+    fontName = Entry(newWindow, width=20, font=("Arial", 16), textvariable=fontNameVar)
+    fontTestNext = Button(newWindow, text="Next", command=NextFont, font=("Arial", 16))
+    saveFont = Button(newWindow, text="Save", command=SaveFont, font=("Arial", 16))
+    fontSize = Entry(newWindow, width=3, font=("Arial", 16), textvariable=fontSizeVar)
+    fontSize.delete(0, END)
+    fontSize.insert(0,defaultFont.cget("size"))
+    fontName.delete(0, END)
+    fontName.insert(0,defaultFont.cget("family"))
+    fontName.pack(padx=2, pady=2, side='left', anchor="nw")
+    fontSize.pack(padx=2, pady=2, side='left', anchor="nw")
+    fontTestBack.pack(padx=5, pady=2, side='left', anchor="nw")
+    fontTestNext.pack( padx=5, pady=2, side='left', anchor="nw")
+    saveFont.pack( padx=5, pady=2, side='left', anchor="nw")

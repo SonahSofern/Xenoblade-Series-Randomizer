@@ -3,8 +3,10 @@ import tkinter as tk
 def saveData(DataList):
     with open('SavedOptions.txt', 'w') as file:
         for saveData in DataList:
-            file.write(f"{saveData.get()}" + '\n')
-
+            try:
+                file.write(f"{saveData.get()}" + '\n')
+            except:
+                file.write(f"{saveData}" + '\n')
 
 
 def loadData(DataList):
