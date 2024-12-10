@@ -147,7 +147,12 @@ def RaceModeChanging(OptionsRunDict):
             for row in data["rows"]:
                 if row["$id"] == LastQuestAList[ChosenIndices[i]]:
                     row["NextQuestA"] = NextQuestAList[ChosenIndices[i+1]]
-                    break      
+                    break
+        for row in data["rows"]: # because cliffs and land are together, the chapter cutscene sets the current quest cleared id to something that is not 6, causing issues with the way I did things.
+            if row["$id"] == 200:
+                row["NextQuestA"] = 202
+            if row["$id"] == 261: # same thing for indol and temperantia
+                row["NextQuestA"] = 150
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -184,8 +189,16 @@ def RaceModeChanging(OptionsRunDict):
             if row["$id"] == 10213: # script that readds morag
                 row["scriptName"] = ""
                 row["scriptStartId"] = 0
+            if row["$id"] == 10239: # need to hard code the leap between cliffs and land of morytha because I break some stuff to make warping between continents work.
+                row["scenarioFlag"] = 6001
+                row["nextID"] = 10244
+                row["nextIDtheater"] = 10244
             if row["$id"] == 10304:
                 row["linkID"] = 0
+            if row["$id"] == 10366: # need to hard code the leap between cliffs and land of morytha because I break some stuff to make warping between continents work.
+                row["scenarioFlag"] = 8001
+                row["nextID"] = 10369
+                row["nextIDtheater"] = 10369
         for i in range(0, len(ChosenIndices) - 1):
             for row in data["rows"]:
                 if row["$id"] == FinalContinentCutscenes[ChosenIndices[i]]:
