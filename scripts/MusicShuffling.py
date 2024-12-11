@@ -13,7 +13,7 @@ import random
 # I don't know what causes the cave music and gormott lower music to play over other themes tbh.
 
 def SeparateBGMandBattle(OptionsRunDict):
-    if OptionsRunDict["Music"]["subOptionObjects"]["Shuffle Battle Themes and Background Music Separately"]["subOptionTypeVal"].get():
+    if OptionsRunDict["Music"]["subOptionObjects"]["Seperate Battle and Environment Themes"]["subOptionTypeVal"].get():
         with open("./_internal/JsonOutputs/common/RSC_BgmList.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data['rows']:
@@ -26,7 +26,7 @@ def SeparateBGMandBattle(OptionsRunDict):
             json.dump(data, file, indent=2, ensure_ascii=False)  
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listBf.json", ["edBgm"], 0)
     else:
-        JSONParser.ChangeJSON(["common/RSC_BgmList.json"], ["filename"], NonBattleMusicMOVs + EnemyBattleMusicMOVs, NonBattleMusicMOVs + EnemyBattleMusicMOVs)
+        JSONParser.ChangeJSONFile(["common/RSC_BgmList.json"], ["filename"], NonBattleMusicMOVs + EnemyBattleMusicMOVs, NonBattleMusicMOVs + EnemyBattleMusicMOVs)
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listBf.json", ["edBgm"], 0)
         pass
 

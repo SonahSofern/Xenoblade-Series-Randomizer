@@ -161,14 +161,16 @@ PoppiQTπCosmetics = [
     "Nano Orange QTπ", [lambda: IDs.ValidArtificialBladeCosmetics.append([NanoOrangeQTπ, PoppiQTπ])],
 ]
 
-def Cosmetics():
+def Cosmetics(optionDict):
     #Drivers
+    odds = optionDict["Cosmetics"]["optionTypeVal"].get()
     with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data['rows']:
-            choice = random.choice(IDs.ValidDriverCosmetics)
-            row["Model"] = choice[0]
-            row["Driver"] = choice[1]
+            if (odds > random.randrange(0,100)):
+                choice = random.choice(IDs.ValidDriverCosmetics + [["",0]])
+                row["Model"] = choice[0]
+                row["Driver"] = choice[1]
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -176,9 +178,10 @@ def Cosmetics():
     with open("./_internal/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data['rows']:
-            choice = random.choice(IDs.ValidBladeCosmetics)
-            row["Model"] = choice[0]
-            row["Blade"] = choice[1]
+            if (odds > random.randrange(0,100)):
+                choice = random.choice(IDs.ValidBladeCosmetics + [["",0]])
+                row["Model"] = choice[0]
+                row["Blade"] = choice[1]
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -186,9 +189,10 @@ def Cosmetics():
     with open("./_internal/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data['rows']:
-            choice = random.choice(IDs.ValidArtificialBladeCosmetics)
-            row["Model"] = choice[0]
-            row["Blade"] = choice[1]
+            if (odds > random.randrange(0,100)):
+                choice = random.choice(IDs.ValidArtificialBladeCosmetics + [["",0]])
+                row["Model"] = choice[0]
+                row["Blade"] = choice[1]
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)

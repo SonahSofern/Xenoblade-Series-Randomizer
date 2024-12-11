@@ -42,7 +42,7 @@ def BalancingSkillTreeRando(OptionsRunDict):
         if i >= 6:
             CurrList.insert(0, ArtsCancelIDsDLC[i-6])
         if not OptionsRunDict["Early Arts Cancel"]["optionTypeVal"].get():
-            print("Shuffling in Arts Cancel")
+            # print("Shuffling in Arts Cancel")
             random.shuffle(CurrList)
         CurrFile = FilePaths[i]
         with open(CurrFile, 'r+', encoding='utf-8') as file:

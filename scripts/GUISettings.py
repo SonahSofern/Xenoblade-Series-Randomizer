@@ -97,3 +97,6 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     fontTestBack.pack(padx=5, pady=2, side='left', anchor="nw")
     fontTestNext.pack( padx=5, pady=2, side='left', anchor="nw")
     saveFont.pack( padx=5, pady=2, side='left', anchor="nw")
+
+
+    # Make setting that turns off or on all inputs

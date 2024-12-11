@@ -1,15 +1,12 @@
 import json, random, os, IDs
 
 
-def ChangeJSON(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacements = [], InvalidTargetIDs = [], SliderOdds = 100): # make this a function to reuse, check the settings ot see if we even do this
+def ChangeJSONFile(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacements = [], InvalidTargetIDs = [], SliderOdds = 100): # make this a function to reuse, check the settings ot see if we even do this
 
     # print(f"Valid Replacements: {Replacements}")
     SliderOdds = IDs.CurrentSliderOdds
     rangeValidReplacements.extend(IDs.ValidReplacements)
-    if (keyWords[0] == "ReAct1") & (Filename == "common/BTL_Arts_Bl.json"): #bandaid to allow the validreplacements to be used as weights to give the outputs
-        pass
-    else:
-        rangeValidReplacements = list(set(rangeValidReplacements) - set(IDs.InvalidReplacements))
+    rangeValidReplacements = [x for x in rangeValidReplacements if x not in IDs.InvalidReplacements]
     for name in Filename:
         filePath = "./_internal/JsonOutputs/" + name
         if not os.path.exists(filePath):
@@ -20,7 +17,7 @@ def ChangeJSON(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacement
             for item in data['rows']:
                 if not item["$id"] in InvalidTargetIDs:
                     for key in item:
-                        if any((key == keyWord) for keyWord in keyWords):
+                        if key in keyWords:
                             if ((item[key] in rangeofValuesToReplace) and (SliderOdds >= random.randint(1,100))):
                                 item[key] = random.choice(rangeValidReplacements)
             file.seek(0)
@@ -29,3 +26,20 @@ def ChangeJSON(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacement
     IDs.ValidReplacements.clear()
     IDs.InvalidReplacements.clear()
     IDs.CurrentSliderOdds = 100
+
+
+def ChangeJSONLine(filenames, ids, keys, replacement):
+    for name in filenames:
+        filePath = "./_internal/JsonOutputs/" + name
+        if not os.path.exists(filePath):
+          #print(filePath + " filepath does not exist.")
+          continue
+        with open(filePath, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for item in data['rows']:
+                if item["$id"] in ids:
+                   for key in keys:
+                    item[key] = replacement
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)

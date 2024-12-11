@@ -1,7 +1,5 @@
 NOW
 
-Make option sliders in my UI for the in game option sliders
-
 Mutually Exclusive Widgets (Fixes Skill Tree Options Alex+Mine)
   
 Figure out conflict between Alex wanted to load a save and settings defaults that the save will then overwrite

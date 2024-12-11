@@ -10,6 +10,6 @@ from IDs import ArtDebuffs, ArtBuffs, AutoAttacks
 
 def DriverArtRando(OptionsRunDict):     
     if OptionsRunDict["Driver Art Debuffs"]["subOptionObjects"]["Include Doom"]["subOptionTypeVal"].get():
-        JSONParser.ChangeJSON(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, list(set(ArtDebuffs + ArtBuffs)), InvalidTargetIDs=AutoAttacks)
+        JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, list(set(ArtDebuffs + ArtBuffs)), InvalidTargetIDs=AutoAttacks)
     else:
-        JSONParser.ChangeJSON(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, [x for x in (list(set(ArtDebuffs + ArtBuffs))) if x not in [21]], InvalidTargetIDs=AutoAttacks)
+        JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, [x for x in (list(set(ArtDebuffs + ArtBuffs))) if x not in [21]], InvalidTargetIDs=AutoAttacks)
