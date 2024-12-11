@@ -283,28 +283,6 @@ def ReworkedEnemyRando (DefaultEnemyIDs, RandomizedEnemyIDs):
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def ColumnAdjust(filename, clearedCols, desiredValue):
-    with open(filename, 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for k in range(0, len(clearedCols)):
-            for row in data["rows"]:
-                for key, value in row.items():
-                    if key != clearedCols[k]:
-                        continue
-                    row[clearedCols[k]] = desiredValue
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-
-def SubColumnAdjust(filename, colName, adjustedSubColName, desiredValue): #when your column you want to adjust is nested inside a dict
-    with open(filename, 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            row[colName][adjustedSubColName] = desiredValue
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-
 def ReducePCHPBattle1():
     filename = "./_internal/JsonOutputs/common/FLD_QuestBattle.json"
     with open(filename, 'r+', encoding='utf-8') as file:
@@ -415,7 +393,7 @@ def SummonsLevelAdjustment(): # We want the summoned enemies to be the same leve
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def KeyItemsReAdd(): 
-    ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["PreciousID"], 0)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["PreciousID"], 0)
     #The following are all the replacement enemy IDs that replaced the original ID in the FLD_EnemyPop file. The variable name is the name of the original enemy that was replaced
     SargeantID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EnemyPop.json", ["$id"], [5502] , "ene1ID")
     DughallID = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EnemyPop.json", ["$id"], [5504] , "ene2ID")
@@ -568,15 +546,15 @@ def EnemyLogic(OptionsRunDict):
                         if KeepStoryBossesLevelsBox == True:
                             LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
                             print("Reverting Story Boss Levels")
-        SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "AlwaysAttack", 0)
-        ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["SearchRange", "SearchRadius", "SearchAngle", "Detects"], 0)
-        ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["BatInterval", "BatArea"], 50)
-        SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "mBoss", 0)
+        Helper.SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "AlwaysAttack", 0)
+        Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["SearchRange", "SearchRadius", "SearchAngle", "Detects"], 0)
+        Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["BatInterval", "BatArea"], 50)
+        Helper.SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "mBoss", 0)
         BossQuestAggroAdjustments(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
         ReducePCHPBattle1()
 
-        ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["LvRand"], 0)
-        ColumnAdjust("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], 0)
+        Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["LvRand"], 0)
+        Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], 0)
         KeyItemsReAdd()
         SummonsLevelAdjustment()
 

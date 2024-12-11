@@ -107,32 +107,33 @@ def GenHeader(headerName, parentTab, backgroundColor):
 
     rowIncrement += 1
 
-def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
+def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton, optionColor = ""):   
     global OptionDictionary
     global rowIncrement
     # Create Option Color
-    if (rowIncrement %2 == 0):
-        OptionColor = White
-    else:
-        OptionColor = Gray
+    if (optionColor == ""):
+        if (rowIncrement %2 == 0):
+            optionColor = White
+        else:
+            optionColor = Gray
 
-    optionPanel = Frame(parentTab, padx=10, pady=10, background=OptionColor)
+    optionPanel = Frame(parentTab, padx=10, pady=10, background=optionColor)
     optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
 
     # Create Option Name
-    option = Label(optionPanel, text=optionName, background=OptionColor, width=30, anchor="w", wraplength=350)
+    option = Label(optionPanel, text=optionName, background=optionColor, width=30, anchor="w", wraplength=350)
     option.grid(row=rowIncrement, column=0, sticky="sw")
 
     # Create Option Interactable
     if (optionType == Checkbutton):
         var = BooleanVar()
-        optionTypeObj = Checkbutton(optionPanel, background=OptionColor, highlightthickness=0, variable= var, text=description)
+        optionTypeObj = Checkbutton(optionPanel, background=optionColor, highlightthickness=0, variable= var, text=description)
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionType = var
     elif (optionType == Scale):
         var = IntVar()
-        optionTypeObj = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, variable=var, background=OptionColor, highlightthickness=0)
-        optionDesc = Label(optionPanel, text=description, background=OptionColor, anchor='w')
+        optionTypeObj = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, variable=var, background=optionColor, highlightthickness=0)
+        optionDesc = Label(optionPanel, text=description, background=optionColor, anchor='w')
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
         optionType = var
@@ -146,7 +147,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     #     optionType = [optionTypeMin, optionTypeMax]
 
     # I hate this but the parent wont fill "sticky="ew" doesnt work. Its probably due to so many nested parents but I dont wanna go fix all of them
-    spaceFill = Label(optionPanel, text="", background=OptionColor, width=MaxWidth, anchor='w')
+    spaceFill = Label(optionPanel, text="", background=optionColor, width=MaxWidth, anchor='w')
     spaceFill.grid(row=rowIncrement, column=100, sticky="sw")
 
     # Create Main Option Dictionary Entry
@@ -159,7 +160,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     # Create Suboptions Dictionary Entry
     for i in range((len(subOptionName_subCommandList))//2):
         var = BooleanVar()
-        checkBox = Checkbutton(optionPanel, background=OptionColor, text=subOptionName_subCommandList[2*i], variable=var, highlightthickness=0)
+        checkBox = Checkbutton(optionPanel, background=optionColor, text=subOptionName_subCommandList[2*i], variable=var, highlightthickness=0)
         checkBox.grid(row=rowIncrement+i+1, column=0, sticky="sw")
 
         OptionDictionary[optionName]["subOptionObjects"][subOptionName_subCommandList[2*i]] = {
@@ -224,6 +225,8 @@ def Options():
     GenStandardOption("Early Arts Cancel", TabQOL, "Puts Driver arts cancel skills into the first Driver Skill Tree slot", [lambda: SkillTreeAdjustments.Tier1ArtsCancel(OptionDictionary)])
     #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
     GenStandardOption("Treasure Chest Visibility", TabQOL, "Increases the range you can see treasure chests from", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["msgVisible", "msgdigVisible"], Helper.InclRange(0,200), [255])])
+    GenStandardOption("Freely Engage Blades", TabQOL, "Allows blades to be freely engaged by all valid drivers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["FreeEngage"], [0], [1], [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1075, 1076, 1103])])
+
 
     GenStandardOption("Projectile Treasure Chests", TabFunny, "Launches your items from chests", [lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [12])])
     GenStandardOption("Blade Size", TabFunny, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Scale", "WpnScale"], AllValues, Helper.InclRange(1,250) + [1000,16000])], optionType= Scale) # Make sure these work for common blades
@@ -232,7 +235,7 @@ def Options():
 
 
     # Cosmetics
-    GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics(OptionDictionary)], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics, Scale)
+    GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics(OptionDictionary)], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics, Scale, White)
     
     # Race Mode
     GenStandardOption("Race Mode", TabRaceMode, "Enables Race Mode", [lambda: RaceMode.RaceModeChanging(OptionDictionary)], ["Xohar Fragment Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", []])

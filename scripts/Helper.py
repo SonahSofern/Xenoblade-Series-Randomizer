@@ -72,3 +72,26 @@ def OptionCarveouts(ValidValuesList, ToggleableIndexValues, stateOfButton = None
     else:
         ValidValuesList[:] = [x for x in ValidValuesList if x not in ToggleableIndexValues]
     # print(ValidValuesList, end='\n\n')
+
+
+def SubColumnAdjust(filename, colName, adjustedSubColName, desiredValue): #when your column you want to adjust is nested inside a dict
+    with open(filename, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            row[colName][adjustedSubColName] = desiredValue
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def ColumnAdjust(filename, clearedCols, desiredValue):
+    with open(filename, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for k in range(0, len(clearedCols)):
+            for row in data["rows"]:
+                for key, value in row.items():
+                    if key != clearedCols[k]:
+                        continue
+                    row[clearedCols[k]] = desiredValue
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)

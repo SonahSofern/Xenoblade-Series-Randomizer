@@ -16,10 +16,15 @@ def ChangeJSONFile(Filename, keyWords, rangeofValuesToReplace, rangeValidReplace
             data = json.load(file)
             for item in data['rows']:
                 if not item["$id"] in InvalidTargetIDs:
-                    for key in item:
+                    for key in item:  
                         if key in keyWords:
                             if ((item[key] in rangeofValuesToReplace) and (SliderOdds >= random.randint(1,100))):
                                 item[key] = random.choice(rangeValidReplacements)
+                        elif key == "Flag":
+                            for flag, flagVal in item[key].items():
+                                if flag in keyWords:
+                                    if ((flagVal in rangeofValuesToReplace) and (SliderOdds >= random.randint(1,100))):
+                                        item[key][flag] = random.choice(rangeValidReplacements)                                
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
@@ -40,6 +45,7 @@ def ChangeJSONLine(filenames, ids, keys, replacement):
                 if item["$id"] in ids:
                    for key in keys:
                     item[key] = replacement
+
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
