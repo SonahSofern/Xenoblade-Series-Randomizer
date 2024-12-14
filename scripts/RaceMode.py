@@ -22,10 +22,10 @@ def RaceModeChanging(OptionsRunDict):
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
     
-    AreaList1 = [68] #41,
-    AreaList2 = [152] #99,
-    AreaList3 = [168] #, 125, 133,
-    AreaList4 = [175] #, 187
+    AreaList1 = [41,68] #41,
+    AreaList2 = [99,152] #99,
+    AreaList3 = [125,133,168] #, 125, 133,
+    AreaList4 = [175,187] #187
 
     AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
 
@@ -126,7 +126,7 @@ def RaceModeChanging(OptionsRunDict):
             for row in data["rows"]:
                 if row["$id"] == LandmarkMapSpecificIDstoTarget[i]:
                     row["getEXP"] = ExpDiff[i]
-                    row["getSP"] = 5000 * ChosenIndices[i]
+                    row["getSP"] = 4500 * ChosenIndices[i]
                     if row["$id"] == 210: # because the Gormott warp is currently broken, we need a skip travel point there in case the player dies before getting a landmark.
                         row["category"] = 0
                         row["MAPJUMPID"] = 41
