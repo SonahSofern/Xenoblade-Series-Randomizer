@@ -289,7 +289,7 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices, NGPlusBladeCrystalIDs): # changes 
     A3BladeIDs = [1011]
     A4BladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
 
-    ValidCrystalListIDs = set(Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057])
+    ValidCrystalListIDs = set(Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45010) + [45016] + Helper.InclRange(45017,45048) + [45056, 45057])
     ValidCrystalListIDs -= set(NGPlusBladeCrystalIDs)
     ValidCrystalListIDs = list(ValidCrystalListIDs)
     CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
@@ -390,7 +390,7 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices, NGPlusBladeCrystalIDs): # changes 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict):
-    NonNGPlusCoreCrystalIDs = set(Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057])
+    NonNGPlusCoreCrystalIDs = set(Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45010) + [45016] + Helper.InclRange(45017,45048) + [45056, 45057])
     NonNGPlusCoreCrystalIDs -= set(NGPlusBladeCrystalIDs)
     NonNGPlusCoreCrystalIDs = list(NonNGPlusCoreCrystalIDs)
     A1CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12]) * 2
@@ -774,7 +774,7 @@ def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy 
 
 def FindtheBladeNames(OptionsRunDict):
     if OptionsRunDict["Core Crystal Changes"]["optionTypeVal"].get():
-        ValidCrystalListIDs = Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057]
+        ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45010) + [45016] + Helper.InclRange(45017,45048) + [45056, 45057]
         CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
         CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
         CorrespondingBladeNames = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_ms/chr_bl_ms.json", ["$id"], CorrespondingBladeNameIDs, "name")
