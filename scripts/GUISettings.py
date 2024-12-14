@@ -1,6 +1,7 @@
 from tkinter import *
 from UI_Colors import *
 from tkinter import font, ttk
+import UI_Colors
 
 def NotebookFocusStyleFix(defaultFont):
     style = ttk.Style()
@@ -57,8 +58,9 @@ def OpenSettingsWindow(rootWindow, defaultFont):
         fontName.insert(0,allFonts[iter])
         defaultFont.config(family=allFonts[iter])
 
-    def SaveFont(event = None):
-        pass
+    def SaveUIChanges(event = None):
+        import SavedOptions
+        SavedOptions.saveData([defaultFont.cget("family")], "GUISavedOptions.txt")
 
     def IncreaseFontSize(event = None):
         newSize = defaultFont.cget("size") + 1
@@ -74,7 +76,7 @@ def OpenSettingsWindow(rootWindow, defaultFont):
 
     newWindow.bind("<Right>", NextFont)
     newWindow.bind("<Left>", PreviousFont) 
-    newWindow.bind("<Return>", SaveFont)
+    newWindow.bind("<Return>", SaveUIChanges)
     newWindow.bind("<Up>", IncreaseFontSize)
     newWindow.bind("<Down>", DecreaseFontSize) 
 
@@ -86,7 +88,7 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     fontTestBack = Button(newWindow, text="Previous", command=PreviousFont, font=("Arial", 16))
     fontName = Entry(newWindow, width=20, font=("Arial", 16), textvariable=fontNameVar)
     fontTestNext = Button(newWindow, text="Next", command=NextFont, font=("Arial", 16))
-    saveFont = Button(newWindow, text="Save", command=SaveFont, font=("Arial", 16))
+    saveFont = Button(newWindow, text="Save", command=SaveUIChanges, font=("Arial", 16))
     fontSize = Entry(newWindow, width=3, font=("Arial", 16), textvariable=fontSizeVar)
     fontSize.delete(0, END)
     fontSize.insert(0,defaultFont.cget("size"))
@@ -96,7 +98,13 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     fontSize.pack(padx=2, pady=2, side='left', anchor="nw")
     fontTestBack.pack(padx=5, pady=2, side='left', anchor="nw")
     fontTestNext.pack( padx=5, pady=2, side='left', anchor="nw")
-    saveFont.pack( padx=5, pady=2, side='left', anchor="nw")
+    saveFont.pack( padx=5, pady=2, anchor="nw")
 
-
-    # Make setting that turns off or on all inputs
+    def ToggleLightDarkMode(button, root):
+        if button.cget("text") == "Enable Dark Mode":
+            button.config(text="Enable Light Mode")
+        else:
+            button.config(text="Enable Dark Mode")  
+    darkMode = Button(newWindow, text="Enable Dark Mode", command=lambda: ToggleLightDarkMode(darkMode, rootWindow), font=("Arial", 16))
+    darkMode.pack(padx=2, pady=2, side="left")
+    # Make setting that turns off or on all inputs boxes/sliders etc.

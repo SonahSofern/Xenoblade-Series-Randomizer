@@ -6,6 +6,10 @@ Figure out conflict between Alex wanted to load a save and settings defaults tha
 
 Fix foucs method of checkboxes
 
+Dark Mode
+
+
+
 FUTURE
 
 NPC Rando (Eventually want npcs to actually exist there not just the model (actor swap))

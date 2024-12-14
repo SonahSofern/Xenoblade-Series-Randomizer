@@ -1,7 +1,7 @@
 import tkinter as tk
 
-def saveData(DataList):
-    with open('SavedOptions.txt', 'w') as file:
+def saveData(DataList, Filename):
+    with open(Filename, 'w') as file:
         for saveData in DataList:
             try:
                 file.write(f"{saveData.get()}" + '\n')
@@ -9,16 +9,19 @@ def saveData(DataList):
                 file.write(f"{saveData}" + '\n')
 
 
-def loadData(DataList):
+def loadData(DataList, Filename):
     try:
-        with open('SavedOptions.txt', 'a+') as file:
+        with open(Filename, 'a+') as file:
             file.seek(0)
             savedLines = file.readlines()
             for i in range(len(savedLines)):
                 if isinstance(DataList[i], tk.Entry):
                     DataList[i].delete(0,tk.END)
                     DataList[i].insert(0, savedLines[i].strip())
-                else:
+                elif ((isinstance(DataList[i], tk.BooleanVar)) or (isinstance(DataList[i], tk.IntVar))):
                     DataList[i].set(savedLines[i].strip())
+                else:
+                    DataList[i]= savedLines[i].strip()
+                    print(DataList[i])
     except:
-        print("Error Loading Save Data (Likely an option was added or removed)")
+        print("Error Loading Settings Saved Values (Likely an option was added or removed)")
