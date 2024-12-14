@@ -230,6 +230,7 @@ def RaceModeChanging(OptionsRunDict):
         ShyniniSaveUs()
         ShopRemovals()
         MovespeedDeedChanges()
+        PouchItemCarryCapacityIncrease()
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Enemy Drop Changes"]["subOptionTypeVal"].get():
         print("Removing enemy drops")
         EnemyDropRemoval()
@@ -795,8 +796,10 @@ def ITMCrystalAdditions(BladeNames, CorrespondingBladeIDs):
             for i in range(0, len(CorrespondingBladeIDs)):
                 if row["BladeID"] == CorrespondingBladeIDs[i]:
                     row["Name"] = IDNumbers[i]
-                    #row["Condition"] = 3903 + i
                     break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def PouchItemCarryCapacityIncrease(): # Set the max carry capacity of pouch items to 10 for all items
+    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_FavoriteList.json", ["ValueMax"], 10)
