@@ -19,8 +19,8 @@ ReactRevHigh = [0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 40, 60, 80, 100, 100, 100, 100, 1
 
 def RaceModeChanging(OptionsRunDict): 
     print("Setting Up Race Mode")    
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
     
     AreaList1 = [68] #41,
     AreaList2 = [152] #99,
@@ -442,7 +442,7 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict):
                 ListTboxFiles.append(TBoxFiles[i][j])
     AllOtherMapIDs = [x for x in ValidTboxMapNames if x not in ListTboxFiles]
     for i in range(0, len(AllOtherMapIDs)):
-        EnemyRandoLogic.ColumnAdjust(AllOtherMapIDs[i], ["itm1Num", "itm2Num", "itm3Num", "itm4Num", "itm5Num", "itm6Num", "itm7Num", "itm8Num", "itm1ID", "itm2ID", "itm3ID", "itm4ID", "itm5ID", "itm6ID", "itm7ID", "itm8ID"], 0)
+        Helper.ColumnAdjust(AllOtherMapIDs[i], ["itm1Num", "itm2Num", "itm3Num", "itm4Num", "itm5Num", "itm6Num", "itm7Num", "itm8Num", "itm1ID", "itm2ID", "itm3ID", "itm4ID", "itm5ID", "itm6ID", "itm7ID", "itm8ID"], 0)
     for i in range(0, len(TBoxFiles)):
         for l in range(0, len(TBoxFiles[i])):
             if TBoxFiles[i][l] != 0:
@@ -646,7 +646,7 @@ def SecondSkillTreeCostReduc(): # Reduces the cost of the hidden driver skill tr
 
 def EnemyDropRemoval(): # Removes all enemy drops, to avoid getting powerful equipment out of logic.
     for i in range(1, 9):
-        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BTL_EnDropItem.json", [f"ItemID{i}", f"DropProb{i}", f"NoGetByEnh{i}", f"FirstNamed{i}"] , 0)
+        Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_EnDropItem.json", [f"ItemID{i}", f"DropProb{i}", f"NoGetByEnh{i}", f"FirstNamed{i}"] , 0)
 
 def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Experimental Mode to make players go out and find chests.
     XoharFragPreciousIDs = [25135, 25136, 25137, 25138] # for now fixed at 4, but if we change # of race mode dungeons or give the player that option, will need to change this

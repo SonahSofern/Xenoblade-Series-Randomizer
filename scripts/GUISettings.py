@@ -1,11 +1,10 @@
 from tkinter import *
 from UI_Colors import *
 from tkinter import font, ttk
-import UI_Colors
 
 def NotebookFocusStyleFix(defaultFont):
     style = ttk.Style()
-    style.configure("TNotebook.Tab", font=(defaultFont))  # Change tab font
+    style.configure("TNotebook.Tab", font=(defaultFont), padding=10)  # Change tab font
     style.layout("Tab",
     [('Notebook.tab', {'sticky': 'nswe', 'children':
         [('Notebook.padding', {'side': 'top', 'sticky': 'nswe', 'children':
@@ -21,9 +20,9 @@ def CheckbuttonFocusStyleFix():
     # Modify the layout of the Checkbutton to include focus styling
     style.layout("TCheckbutton",
                  [('Checkbutton.padding', {'side': 'top', 'sticky': 'nswe', 'children':
-                     [('Checkbutton.focus', {'side': 'top', 'sticky': 'nswe', 'children':
+                    # [('Checkbutton.focus', {'side': 'top', 'sticky': 'nswe', 'children':
                         [('Checkbutton.label', {'side': 'top', 'sticky': 'nswe'})],
-                    })],
+                    #})],
                  })]
     )
 
@@ -35,6 +34,7 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     newWindow.title("GUI Settings")
     newWindow.geometry("800x100")
     allFonts = font.families()
+
     
     def LoadFontByName(name):
         defaultFont.config(family=name)
@@ -60,7 +60,7 @@ def OpenSettingsWindow(rootWindow, defaultFont):
 
     def SaveUIChanges(event = None):
         import SavedOptions
-        SavedOptions.saveData([defaultFont.cget("family"), defaultFont.cget("size")], "GUISavedOptions.txt")
+        SavedOptions.saveData([defaultFont.cget("family"), defaultFont.cget("size"), darkMode.cget("text")], "GUISavedOptions.txt")
 
     def IncreaseFontSize(event = None):
         newSize = defaultFont.cget("size") + 1
@@ -100,11 +100,77 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     fontTestNext.pack( padx=5, pady=2, side='left', anchor="nw")
     saveFont.pack( padx=5, pady=2, anchor="nw")
 
-    def ToggleLightDarkMode(button, root):
-        if button.cget("text") == "Enable Dark Mode":
-            button.config(text="Enable Light Mode")
+    def ToggleLightDarkMode(togButton, root):
+        style = ttk.Style()
+        if togButton.cget("text") == "Dark Mode":
+            togButton.config(text="Light Mode")
+            style.theme_use('Dark')
+            NotebookFocusStyleFix(defaultFont)
         else:
-            button.config(text="Enable Dark Mode")  
-    darkMode = Button(newWindow, text="Enable Dark Mode", command=lambda: ToggleLightDarkMode(darkMode, rootWindow), font=("Arial", 16))
-    darkMode.pack(padx=2, pady=2, side="left")
+            togButton.config(text="Dark Mode")
+            style.theme_use('Light')
+            NotebookFocusStyleFix(defaultFont)
+            
+    darkMode = Button(newWindow, text="Dark Mode", command=lambda: ToggleLightDarkMode(darkMode, rootWindow), font=("Arial", 16))
+    darkMode.pack(padx=2, pady=2, anchor="w")
     # Make setting that turns off or on all inputs boxes/sliders etc.
+
+    style=ttk.Style()
+    backgroundColor = Black
+    fontColor = White
+    style.theme_create('Dark', settings={
+                # ".": {
+                #     "configure": {
+                #         "background": backgroundColor, # All except tabs
+                #         "foreground": fontColor
+                #     }
+                # },
+                "TNotebook": {
+                    "configure": {
+                        "background":backgroundColor, # Your margin color
+                    }
+                },
+                "TNotebook.Tab": {
+                    "configure": {
+                        "background": backgroundColor, # tab color when not selected
+                        "font":fontColor,
+                        "padding": 10,
+                        "font": defaultFont,
+                        "foreground": fontColor,
+                        "bordercolor": backgroundColor
+                    },
+                    "map": {
+                        "background": [("selected", Gray)], # Tab color when selected
+                        "foreground": [("selected", Black)], # Tab color when selected
+                    }
+                }
+                })
+    backgroundColor = White
+    fontColor = Black
+    style.theme_create('Light', settings={
+                # ".": {
+                #     "configure": {
+                #         "background": backgroundColor, # All except tabs
+                #         "foreground": fontColor
+                #     }
+                # },
+                "TNotebook": {
+                    "configure": {
+                        "background":backgroundColor, # Your margin color
+                    }
+                },
+                "TNotebook.Tab": {
+                    "configure": {
+                        "background": backgroundColor, # tab color when not selected
+                        "font":fontColor,
+                        "padding": 10,
+                        "font": defaultFont,
+                        "foreground": fontColor,
+                        "bordercolor": backgroundColor
+                    },
+                    "map": {
+                        "background": [("selected", Gray)], # Tab color when selected
+                        "foreground": [("selected", Black)], # Tab color when selected
+                    }
+                }
+                })

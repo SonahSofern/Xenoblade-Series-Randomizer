@@ -1,16 +1,15 @@
 NOW
 
 Mutually Exclusive Widgets (Fixes Skill Tree Options Alex+Mine)
-  
-Figure out conflict between Alex wanted to load a save and settings defaults that the save will then overwrite
 
 Fix foucs method of checkboxes
 
 Dark Mode
 
 
-
 FUTURE
+
+Make all the weighted options variables (blade sizes for example)
 
 NPC Rando (Eventually want npcs to actually exist there not just the model (actor swap))
 

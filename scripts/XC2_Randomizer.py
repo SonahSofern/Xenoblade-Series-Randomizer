@@ -17,6 +17,9 @@ rowIncrement = 0
 MaxWidth = 1000
 
 
+OptionColorLight = White
+OptionColorDark = Gray
+
 root = Tk()
 fontNameSizeDefault = ["", 12]
 SavedOptions.loadData(fontNameSizeDefault, "GUISavedOptions.txt")
@@ -89,15 +92,15 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touc
 CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabRaceModeOuter, TabFunnyOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabRaceModeCanvas, TabFunnyCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabRaceMode, TabFunny])
 
 # Tabs
-MainWindow.add(TabGeneralOuter, text =' General ') 
-MainWindow.add(TabDriversOuter, text =' Drivers ') 
-MainWindow.add(TabBladesOuter, text =' Blades ') 
-MainWindow.add(TabEnemiesOuter, text =' Enemies ') 
-MainWindow.add(TabMiscOuter, text =' Misc. ') 
-MainWindow.add(TabQOLOuter, text = ' Quality of Life ')
-MainWindow.add(TabCosmeticsOuter, text=' Cosmetics ')
-MainWindow.add(TabRaceModeOuter, text=' Race Mode ')
-MainWindow.add(TabFunnyOuter, text=' Funny ')
+MainWindow.add(TabGeneralOuter, text ='General') 
+MainWindow.add(TabDriversOuter, text ='Drivers') 
+MainWindow.add(TabBladesOuter, text ='Blades') 
+MainWindow.add(TabEnemiesOuter, text ='Enemies') 
+MainWindow.add(TabMiscOuter, text ='Misc.') 
+MainWindow.add(TabQOLOuter, text = 'Quality of Life')
+MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
+MainWindow.add(TabRaceModeOuter, text='Race Mode')
+MainWindow.add(TabFunnyOuter, text='Funny')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 def ShowTitleScreenText():
@@ -117,9 +120,9 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     # Create Option Color
     if (optionColor == ""):
         if (rowIncrement %2 == 0):
-            optionColor = White
+            optionColor = OptionColorLight
         else:
-            optionColor = Gray
+            optionColor = OptionColorDark
 
     optionPanel = Frame(parentTab, padx=10, pady=10, background=optionColor)
     optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
@@ -202,7 +205,7 @@ def Options():
     # GenOption("Blade Specials", TabBlades, "Randomizes blades special (red) skill tree", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], Helper.StartsWith("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials, BladeSpecials)]) Commenting out for initial launch I think this setting will put people off it sounds fun but animations no longer connect well on specials
     GenStandardOption("Blade Cooldowns", TabBlades, "Randomizes a blades cooldown", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["CoolTime"], Helper.InclRange(1,1000), Helper.InclRange(1,1000))])
     GenStandardOption("Blade Arts", TabBlades, "Randomizes your blade's arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), ArtBuffs, ArtBuffs)])
-    GenStandardOption("Blade Aux Core Slots", TabBlades, "Randomizes how many Aux Core slots a Blade gets", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), Helper.InclRange(0,3))])
+    GenStandardOption("Blade Aux Core Slots", TabBlades, "Randomizes how many Aux Core slots a Blade gets", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), IDs.BladeAuxCoreSlotDistribution)])
     GenStandardOption("Blade Names", TabBlades, "Randomizes the names of blades", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
     GenStandardOption("Blade Defenses", TabBlades, "Randomizes Blade Physical and Ether Defense", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.InclRange(0,100), BladeDefenseDistribution)])
     GenStandardOption("Blade Mods", TabBlades, "Randomizes Blade Stat Modifiers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.InclRange(0,100), BladeModDistribution)])
@@ -237,7 +240,7 @@ def Options():
 
 
     # Cosmetics
-    GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics(OptionDictionary)], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics, Scale, White)
+    GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics(OptionDictionary)], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics, Scale, OptionColorLight)
     
     # Race Mode
     GenStandardOption("Race Mode", TabRaceMode, "Enables Race Mode", [lambda: RaceMode.RaceModeChanging(OptionDictionary)], ["Xohar Fragment Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", [], "Easy Field Skill Trees", [lambda: CoreCrystalAdjustments.FieldSkillLevelAdjustment()]])
@@ -300,7 +303,7 @@ def Randomize():
 
         import time
         randoProgressDisplay.config(text="Done")
-        time.sleep(1)
+        time.sleep(0.5)
         randoProgressDisplay.config(text="")
         randoProgressDisplay.pack_forget()
 
@@ -365,7 +368,7 @@ Cog = PhotoImage(file="./_internal/Images/SmallSettingsCog.png")
 SettingsButton = Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
-randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=White)
+randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=OptionColorLight)
 
 EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()])
 SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")

@@ -1,4 +1,4 @@
-Black = "000000"
+Black = "#000000"
 White = "#ffffff"
 Gray = "#D5D5D5"
 Red = "#632424"

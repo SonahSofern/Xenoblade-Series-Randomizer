@@ -1,6 +1,6 @@
 from IDs import EnemyBattleMusicMOVs, NonBattleMusicMOVs, NonBattleMusicIDs, EnemyBattleMusicIDs, ReplacementNonBattleMusicMOVs, ReplacementEnemyBattleMusicMOVs
 import JSONParser
-import EnemyRandoLogic
+import Helper
 import json
 import random
 
@@ -24,9 +24,9 @@ def SeparateBGMandBattle(OptionsRunDict):
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)  
-        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listBf.json", ["edBgm"], 0)
+        Helper.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listBf.json", ["edBgm"], 0)
     else:
         JSONParser.ChangeJSONFile(["common/RSC_BgmList.json"], ["filename"], NonBattleMusicMOVs + EnemyBattleMusicMOVs, NonBattleMusicMOVs + EnemyBattleMusicMOVs)
-        EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listBf.json", ["edBgm"], 0)
+        Helper.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listBf.json", ["edBgm"], 0)
         pass
 
