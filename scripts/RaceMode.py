@@ -607,7 +607,7 @@ def SeedHash():
             if row["$id"] == 129:
                 row["name"] = "Race Mode Start"
             if row["$id"] == 1644:
-                row["name"] = f"Seed Hash: {seedhashcomplete}"
+                row["name"] = f"{seedhashcomplete}"
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -798,7 +798,7 @@ def PouchItemCarryCapacityIncrease(): # Set the max carry capacity of pouch item
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_FavoriteList.json", ["ValueMax"], 10)
 
 def DriverArtUpgradeCostChange(): # to reduce the amount of time spent menuing, a single manual (5000 WP) should be enough to upgrade an art to level 5
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_FavoriteList.json", ["NeedWP2", "NeedWP3", "NeedWP4", "NeedWP5"], 1000)
+    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP2", "NeedWP3", "NeedWP4", "NeedWP5"], 1000)
 
 def BladeTreeMaxRewardChange(): # When a blade skill tree completes, rewards that I already add to the item pool get given to the player, so I just replace the rewards with nothing.
     with open("./_internal/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file: 

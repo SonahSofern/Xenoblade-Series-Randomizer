@@ -334,7 +334,6 @@ def RunOptions():
                     pass
  
 def GenRandomSeed():
-    print(Helper.StartsWith("ReAct", 1, 16))
     randoSeedEntry.delete(0, END)
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
