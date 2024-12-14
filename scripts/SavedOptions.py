@@ -22,6 +22,5 @@ def loadData(DataList, Filename):
                     DataList[i].set(savedLines[i].strip())
                 else:
                     DataList[i]= savedLines[i].strip()
-                    print(DataList[i])
     except:
         print("Error Loading Settings Saved Values (Likely an option was added or removed)")

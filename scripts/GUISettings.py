@@ -60,7 +60,7 @@ def OpenSettingsWindow(rootWindow, defaultFont):
 
     def SaveUIChanges(event = None):
         import SavedOptions
-        SavedOptions.saveData([defaultFont.cget("family")], "GUISavedOptions.txt")
+        SavedOptions.saveData([defaultFont.cget("family"), defaultFont.cget("size")], "GUISavedOptions.txt")
 
     def IncreaseFontSize(event = None):
         newSize = defaultFont.cget("size") + 1

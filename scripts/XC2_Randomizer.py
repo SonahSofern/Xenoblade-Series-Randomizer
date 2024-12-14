@@ -18,9 +18,9 @@ MaxWidth = 1000
 
 
 root = Tk()
-fontName = [""]
-SavedOptions.loadData(fontName, "GUISavedOptions.txt")
-defaultFont = Font(family=fontName[0], size=13)
+fontNameSizeDefault = ["", 12]
+SavedOptions.loadData(fontNameSizeDefault, "GUISavedOptions.txt")
+defaultFont = Font(family=fontNameSizeDefault[0], size=fontNameSizeDefault[1])
 
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
