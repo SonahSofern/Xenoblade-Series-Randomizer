@@ -19,13 +19,13 @@ ReactRevHigh = [0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 40, 60, 80, 100, 100, 100, 100, 1
 
 def RaceModeChanging(OptionsRunDict): 
     print("Setting Up Race Mode")    
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
+    #EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
+    #EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
     
-    AreaList1 = [41,68] #41,
+    AreaList1 = [68] #41,
     AreaList2 = [99,152] #99,
     AreaList3 = [125,133,168] #, 125, 133,
-    AreaList4 = [175,187] #187
+    AreaList4 = [175] #187
 
     AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
 
@@ -103,23 +103,6 @@ def RaceModeChanging(OptionsRunDict):
         LandmarkFilestoTarget[0] = "./_internal/JsonOutputs/common_gmk/ma02a_FLD_LandmarkPop.json"
         LandmarkMapSpecificIDstoTarget[0] = 210
 
-    # Because upon beating the fight in leftheria, morag doesn't rejoin the party, we need to get her back by going to the first bit in indol
-    #if (ChosenIndices[2] != 4) & (ChosenIndices[1] == 3):
-    #    with open("./_internal/JsonOutputs/common_gmk/ma11a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file:
-    #        data = json.load(file)
-    #        for row in data["rows"]:
-    #            if row["$id"] == 1102:
-    #                row["MAPJUMPID"] = RaceModeMapJumpIDs[ChosenIndices[2]]
-    #                row["menuPriority"] = 1
-    #                if ChosenIndices[2] == 5:
-    #                    row["MSGID"] = 314
-    #                if ChosenIndices[2] == 6:
-    #                    row["MSGID"] = 396
-    #                break
-    #        file.seek(0)
-    #        file.truncate()
-    #        json.dump(data, file, indent=2, ensure_ascii=False)
-
     for i in range(0, len(LandmarkFilestoTarget)):  # Adjusts the EXP gained from the first landmark in each race-mode location
         with open(LandmarkFilestoTarget[i], 'r+', encoding='utf-8') as file:
             data = json.load(file)
@@ -177,7 +160,7 @@ def RaceModeChanging(OptionsRunDict):
             if row["$id"] == 10094: # script that causes Vandham to join is name chapt03 startid 5
                 row["scriptName"] = ""
                 row["scriptStartId"] = 0
-            if row["$id"] == 10096:
+            if row["$id"] == 10096: #
                 row["scriptName"] = ""
                 row["scriptStartId"] = 0
             if row["$id"] == 10107: # script for the second time Vandham joins
@@ -189,7 +172,7 @@ def RaceModeChanging(OptionsRunDict):
             if row["$id"] == 10213: # script that readds morag
                 row["scriptName"] = ""
                 row["scriptStartId"] = 0
-            if row["$id"] == 10239: # need to hard code the leap between cliffs and land of morytha because I break some stuff to make warping between continents work.
+            if row["$id"] == 10239: # need to hard code the chapter transition for indol and temperantia section because I break some stuff to make warping between continents work.
                 row["scenarioFlag"] = 6001
                 row["nextID"] = 10244
                 row["nextIDtheater"] = 10244
@@ -199,6 +182,12 @@ def RaceModeChanging(OptionsRunDict):
                 row["scenarioFlag"] = 8001
                 row["nextID"] = 10369
                 row["nextIDtheater"] = 10369
+            if row["$id"] == 10369: # script that removes all party members except rex
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10369: # script that adds Jin to the party (there would be 6 chars, breaking the menus, also possibly causing SP dupe bug)
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
         for i in range(0, len(ChosenIndices) - 1):
             for row in data["rows"]:
                 if row["$id"] == FinalContinentCutscenes[ChosenIndices[i]]:
@@ -225,6 +214,8 @@ def RaceModeChanging(OptionsRunDict):
         ChangeBladeLevelUnlockReqs(ChosenIndices, NGPlusBladeCrystalIDs)
         ReduceBladeReqTrustVals()
         SecondSkillTreeCostReduc()
+        DriverArtUpgradeCostChange()
+        BladeTreeMaxRewardChange()
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get():    
         print("Changing Shops")
         ShyniniSaveUs()
@@ -607,7 +598,7 @@ def DifficultyChanges(): # Makes Easy difficulty the same as Normal
 
 def SeedHash():
     seedhashcomplete = random.choice(SeedHashAdj) + " " + random.choice(SeedHashNoun) 
-    with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r+', encoding='utf-8') as file: #edits DLC items
+    with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r+', encoding='utf-8') as file: #puts the seed hash text on the main menu and on the save game screen
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 128:
@@ -615,6 +606,8 @@ def SeedHash():
                 row["style"] = 166
             if row["$id"] == 129:
                 row["name"] = "Race Mode Start"
+            if row["$id"] == 1644:
+                row["name"] = f"Seed Hash: {seedhashcomplete}"
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -803,3 +796,19 @@ def ITMCrystalAdditions(BladeNames, CorrespondingBladeIDs):
 
 def PouchItemCarryCapacityIncrease(): # Set the max carry capacity of pouch items to 10 for all items
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_FavoriteList.json", ["ValueMax"], 10)
+
+def DriverArtUpgradeCostChange(): # to reduce the amount of time spent menuing, a single manual (5000 WP) should be enough to upgrade an art to level 5
+    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_FavoriteList.json", ["NeedWP2", "NeedWP3", "NeedWP4", "NeedWP5"], 1000)
+
+def BladeTreeMaxRewardChange(): # When a blade skill tree completes, rewards that I already add to the item pool get given to the player, so I just replace the rewards with nothing.
+    with open("./_internal/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in [927, 928, 929, 930]:
+                row["ItemID1"] = 0
+                row["ItemNumber1"] = 0
+                row["ItemID2"] = 0
+                row["ItemNumber2"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
