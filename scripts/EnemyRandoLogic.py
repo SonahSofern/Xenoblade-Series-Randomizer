@@ -410,6 +410,10 @@ def SummonsLevelAdjustment(): # We want the summoned enemies to be the same leve
                 if (row["$id"] == OriginalSummonedThirdIDs[i]) and (MinLevels[i] != 255):
                     if row["Lv"] > MinLevels[i]:
                         row["Lv"] = MinLevels[i]
+        for row in data["rows"]:
+            if row["$id"] == 1285:
+                row["Lv"] = 69
+                break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -560,14 +564,17 @@ def EnemyLogic(OptionsRunDict):
                     if KeepAllEnemyLevelsBox:
                         LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, LevelstoPass)
                         print("Reverting all enemy levels")
-                    if CheckboxList[o] == "Quest Enemies" and CheckboxStates[o].get() == True:
+                        continue
+                    if (CheckboxList[o] == "Quest Enemies") & (CheckboxStates[o] == True):
                         if KeepQuestEnemyLevelsBox == True:
                             LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
                             print("Reverting Quest Enemy levels")
-                    if CheckboxList[o] == "Story Bosses" and CheckboxStates[o].get() == True:
+                            continue
+                    if (CheckboxList[o] == "Story Bosses") & (CheckboxStates[o] == True):
                         if KeepStoryBossesLevelsBox == True:
                             LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
                             print("Reverting Story Boss Levels")
+                            continue
         SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "AlwaysAttack", 0)
         ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["SearchRange", "SearchRadius", "SearchAngle", "Detects"], 0)
         ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["BatInterval", "BatArea"], 50)
