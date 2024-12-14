@@ -421,10 +421,10 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict):
         A2Equip.append(RaceModeAuxCoreIDs[i][A2Num])
         A3Equip.append(RaceModeAuxCoreIDs[i][A3Num])
         A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
-    Area1LootIDs = A1CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25249, 25264) + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2
-    Area2LootIDs = A2CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25265, 25280) + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2
-    Area3LootIDs = A3CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25281, 25291) + [25450] * 3 + A3Equip * 2 + [25408] * 5 + [25221, 25221, 25221] + A3RaceModeCoreChipIDs * 2
-    Area4LootIDs = A4CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25292, 25300) + [25450] * 3 + A4Equip * 2 + [25408] * 5 + [25222, 25222, 25222] + A4RaceModeCoreChipIDs * 2
+    Area1LootIDs = A1CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25249, 25264) + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2 + [25407] * 10
+    Area2LootIDs = A2CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25265, 25280) + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2 + [25407] * 10
+    Area3LootIDs = A3CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25281, 25291) + [25450] * 3 + A3Equip * 2 + [25408] * 5 + [25221, 25221, 25221] + A3RaceModeCoreChipIDs * 2 + [25407] * 10
+    Area4LootIDs = A4CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25292, 25300) + [25450] * 3 + A4Equip * 2 + [25408] * 5 + [25222, 25222, 25222] + A4RaceModeCoreChipIDs * 2 + [25407] * 10
     random.shuffle(Area1LootIDs)
     random.shuffle(Area2LootIDs)
     random.shuffle(Area3LootIDs)
@@ -455,7 +455,7 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict):
                 ListTboxFiles.append(TBoxFiles[i][j])
     AllOtherMapIDs = [x for x in ValidTboxMapNames if x not in ListTboxFiles]
     for i in range(0, len(AllOtherMapIDs)):
-        EnemyRandoLogic.ColumnAdjust(AllOtherMapIDs[i], ["itm1Num", "itm2Num", "itm3Num", "itm4Num", "itm5Num", "itm6Num", "itm7Num", "itm8Num", "itm1ID", "itm2ID", "itm3ID", "itm4ID", "itm5ID", "itm6ID", "itm7ID", "itm8ID"], 0)
+        EnemyRandoLogic.ColumnAdjust(AllOtherMapIDs[i], ["Condition","itm1Num", "itm2Num", "itm3Num", "itm4Num", "itm5Num", "itm6Num", "itm7Num", "itm8Num", "itm1ID", "itm2ID", "itm3ID", "itm4ID", "itm5ID", "itm6ID", "itm7ID", "itm8ID"], 0)
     for i in range(0, len(TBoxFiles)):
         for l in range(0, len(TBoxFiles[i])):
             if TBoxFiles[i][l] != 0:
@@ -463,7 +463,7 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict):
                     data = json.load(file)
                     for row in data["rows"]:
                         TBoxName = row["name"]
-                        if (TBoxName[5] != "q") & (TBoxName != "tbox_ma08a_f018"): # We want to not randomize the quest related loot boxes and a broken one inside collision on Mor Ardain
+                        if (TBoxName != "tbox_ma08a_f018") & (TBoxName != "tbox_qst1018_001"): # We want to not randomize a broken one inside collision on Mor Ardain, and one in uraya that has a debug item
                             BoxestoRandomizePerMap[i] = BoxestoRandomizePerMap[i] + 1
                     file.seek(0)
                     file.truncate()
@@ -473,22 +473,9 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict):
         ItemsPerBox.append(len(AllAreaLootIDs[i])//BoxestoRandomizePerMap[i])
         if ItemsPerBox[i] > 7:
             ItemsPerBox[i] = 7
-        if ItemsPerBox[i] < 4:
-            ItemsPerBox[i] = 4
-            ItemtoChestDifference = 4 * BoxestoRandomizePerMap[i] - len(AllAreaLootIDs[i])
-            for j in range(0, ItemtoChestDifference):
-                AllAreaLootIDs[i].append(random.choice([25405, 25405, 25405, 25405, 25405, 25406, 25406, 25406, 25406, 25407])) # fill the rest with WP 
-            random.shuffle(AllAreaLootIDs[i])
-    ##AllCoreCrystalIDs = [A1CoreCrystalIDs, A2CoreCrystalIDs, A3CoreCrystalIDs, A4CoreCrystalIDs]
-    #for i in range(0, len(BoxestoRandomizePerMap)):
-    #    while (BoxestoRandomizePerMap[i] - len(AllCoreCrystalIDs[i])) > 0:
-    #        AllCoreCrystalIDs[i].append(0)
-    #    random.shuffle(AllCoreCrystalIDs[i])
     k = 0
-    #m = 0
     for i in range(0, len(TBoxFiles)):
         k = 0
-        #m = 0
         for l in range(0, len(TBoxFiles[i])):
             if TBoxFiles[i][l] != 0:
                 with open(TBoxFiles[i][l], 'r+', encoding='utf-8') as file:
@@ -503,7 +490,7 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict):
                             json.dump(data, file, indent=2, ensure_ascii=False)
                             break
                         TBoxName = row["name"]
-                        if (TBoxName[5] != "q") & (TBoxName != "tbox_ma08a_f018"): # We want to not randomize the quest related loot boxes and a box on Mor Ardain stuck in collision
+                        if (TBoxName != "tbox_ma08a_f018") & (TBoxName != "tbox_qst1018_001"): # We want to not randomize a box on Mor Ardain stuck in collision
                             for j in range(0, 8):
                                 if row[f"itm{j+1}ID"] not in FinalPreciousIDs:
                                     row[f"itm{j+1}ID"] = 0
@@ -514,10 +501,6 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict):
                                     row[f"itm{h+1}ID"] = AllAreaLootIDs[i][k]
                                     row[f"itm{h+1}Num"] = 1
                                     k = k + 1
-                            #row["itm7ID"] = AllCoreCrystalIDs[i][m] #need to shuffle core crystals in separately since multiple core crystals from 1 chest causes issues with the "no multiple" parameter on, but I need it on to keep people from pulling the same core crystal twice
-                            #if row["itm7ID"] != 0:
-                            #    row["itm7Num"] = 1
-                            #m = m + 1
                     file.seek(0)
                     file.truncate()
                     json.dump(data, file, indent=2, ensure_ascii=False)
@@ -558,7 +541,6 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
         for row in data["rows"]:
             if row["Type"] in DeedTypeIDValues:
                 row["Caption"] = 603 # Increases running speed by 5%
-                row["Name"] = 511 # Sprintsy Deeds (hehe)
     with open("./_internal/JsonOutputs/common/FLD_OwnerBonus.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
@@ -579,7 +561,7 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes max movespeed bonus to 250%
+    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes name of deed
         data = json.load(file)
         for row in data["rows"]:
             if (row["$id"] >= 25249) & (row["$id"] <= 25300):
@@ -589,7 +571,7 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes max movespeed bonus to 250%
+    with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
         data = json.load(file)
         for row in data["rows"]:
             if (row["$id"] >= 491) & (row["$id"] <= 542):
@@ -754,7 +736,7 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Exper
                     data = json.load(file)
                     for row in data["rows"]:
                         TBoxName = row["name"]
-                        if (TBoxName[5] != "q") & (TBoxName != "tbox_ma08a_f018"):
+                        if (TBoxName != "tbox_ma08a_f018") & (TBoxName != "tbox_qst1018_001"):
                             if AllXoharLocations[i][ACurBox] != 0:
                                 row["itm8ID"] = AllXoharLocations[i][ACurBox]
                                 row["itm8Num"] = 1
