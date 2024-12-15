@@ -5,6 +5,7 @@ import random
 from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, Accessories, WeaponChips, AuxCores, CoreCrystals, ValidTboxMapNames
 import time
 import JSONParser
+import DebugLog
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
@@ -596,7 +597,7 @@ def DifficultyChanges(): # Makes Easy difficulty the same as Normal
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def SeedHash():
+def SeedHash(DebugFile):
     seedhashcomplete = random.choice(SeedHashAdj) + " " + random.choice(SeedHashNoun) 
     with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r+', encoding='utf-8') as file: #puts the seed hash text on the main menu and on the save game screen
         data = json.load(file)
@@ -611,6 +612,7 @@ def SeedHash():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+    DebugLog.AppendSeedHash(seedhashcomplete, DebugFile)
     
 def ReduceBladeReqTrustVals(): # Sets required Trust Values to 0.5x the vanilla values
     with open("./_internal/JsonOutputs/common/FLD_ConditionIdea.json", 'r+', encoding='utf-8') as file:

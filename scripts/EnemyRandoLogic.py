@@ -452,18 +452,21 @@ def LevelReversion(FullDefaultIDs, FullRandomizedIDs, SpecificDefaultIDs, Specif
     filename = "./_internal/JsonOutputs/common/CHR_EnArrange.json"
     with open(filename, 'r+', encoding='utf-8') as file:
         data = json.load(file)
-        for i in range(0, len(FullDefaultIDs)): # for each row in the default ID matrix
-            changed = 0
-            if FullDefaultIDs[i] in SpecificDefaultIDs: # if the default ID is in the list of default specific IDs
-                for j in range(0, len(SpecificDefaultIDs)): # for each row in the default specific IDs
-                    if changed == 1:
-                        break
-                    if FullDefaultIDs[i] == SpecificDefaultIDs[j]: # if the jth element of the default specific ID list is equal to the ith element of the full default ID list
-                        for row in data["rows"]:
-                            if row["$id"] == FullRandomizedIDs[i]:
-                                row["Lv"] = SpecificDefaultLevels[j]
-                                changed = 1
-                                break
+        try: # sometimes this breaks, and I don't know why :D
+            for i in range(0, len(FullDefaultIDs)): # for each row in the default ID matrix
+                changed = 0
+                if FullDefaultIDs[i] in SpecificDefaultIDs: # if the default ID is in the list of default specific IDs
+                    for j in range(0, len(SpecificDefaultIDs)): # for each row in the default specific IDs
+                        if changed == 1:
+                            break
+                        if FullDefaultIDs[i] == SpecificDefaultIDs[j]: # if the jth element of the default specific ID list is equal to the ith element of the full default ID list
+                            for row in data["rows"]:
+                                if row["$id"] == FullRandomizedIDs[i]:
+                                    row["Lv"] = SpecificDefaultLevels[j]
+                                    changed = 1
+                                    break
+        except:
+            pass
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)                        

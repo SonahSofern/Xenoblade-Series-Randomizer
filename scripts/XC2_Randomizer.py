@@ -237,7 +237,6 @@ def Options():
     GenStandardOption("NPCs Size", TabFunny, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSON(["common/RSC_NpcList.json"], ["Scale"], Helper.InclRange(1,100), Helper.InclRange(1,250))], optionType=Scale)
     GenStandardOption("Enemy Size", TabFunny, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSON(["common/CHR_EnArrange.json"], ["Scale"], Helper.InclRange(0, 1000), Helper.InclRange(1, 200) + Helper.InclRange(990,1000))], optionType=Scale)
 
-
     # Cosmetics
     GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics()], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics)
     
@@ -245,35 +244,35 @@ def Options():
     GenStandardOption("Race Mode", TabRaceMode, "Enables Race Mode", [lambda: RaceMode.RaceModeChanging(OptionDictionary)], ["Xohar Fragment Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", []])
 
     # In-Game Settings
-    GenHeader("Camera Settings",TabSettings, None)
-    GenStandardOption("Invert up/down", TabSettings, "Toggle inversion of up/down for camera controls", [],[])
-    GenStandardOption("Invert left/right", TabSettings, "Toggle inversion of left/right for camera controls", [],[])
-    GenStandardOption("Auto camera response speed", TabSettings, "Adjust the response times for the automatically controlled camera", [],[],Scale)
-    GenStandardOption("Camera reset response speed", TabSettings, "Adjust the length of time it takes to reset the camera's position", [],[],Scale)
-    GenStandardOption("Turn speed", TabSettings, "Adjust the turning speed of the manual camera", [],[],Scale)
-    GenStandardOption("Zoom speed", TabSettings, "Adjust the speed of the camera's zoom", [],[],Scale)
-    GenStandardOption("Gradient Correction", TabSettings, "Adjust the automatic behavior of the camera when traversing gradients", [],[])
+    #GenHeader("Camera Settings",TabSettings, None)
+    #GenStandardOption("Invert up/down", TabSettings, "Toggle inversion of up/down for camera controls", [],[])
+    #GenStandardOption("Invert left/right", TabSettings, "Toggle inversion of left/right for camera controls", [],[])
+    #GenStandardOption("Auto camera response speed", TabSettings, "Adjust the response times for the automatically controlled camera", [],[],Scale)
+    #GenStandardOption("Camera reset response speed", TabSettings, "Adjust the length of time it takes to reset the camera's position", [],[],Scale)
+    #GenStandardOption("Turn speed", TabSettings, "Adjust the turning speed of the manual camera", [],[],Scale)
+    #GenStandardOption("Zoom speed", TabSettings, "Adjust the speed of the camera's zoom", [],[],Scale)
+    #GenStandardOption("Gradient Correction", TabSettings, "Adjust the automatic behavior of the camera when traversing gradients", [],[])
 
-    GenHeader("Sound Settings",TabSettings, None)    
-    GenStandardOption("Subtitles", TabSettings, "Toggle subtitles on or off", [],[])
-    GenStandardOption("Cutscene voice volume", TabSettings, "Adjust voice volume during cutscenes", [],[], Scale)
-    GenStandardOption("Game BGM volume", TabSettings, "Adjust background music volume during the game", [],[], Scale)
-    GenStandardOption("Game SE volume", TabSettings, "Adjust volume of sound effects heard during the game", [],[], Scale)
-    GenStandardOption("Game voice volume", TabSettings, "Adjust volume of voices heard during the game", [],[], Scale)
-    GenStandardOption("Battle Narrator volume", TabSettings, "Adjust volume of the battle Narrator (not character battle voices)", [],[], Scale)
-    GenStandardOption("Environment volume", TabSettings, "Adjust volume of environmental sounds (such as rain) heard during the game", [],[], Scale)
-    GenStandardOption("System volume", TabSettings, "Adjust volume of system sounds heard during the game", [],[], Scale)
+    #GenHeader("Sound Settings",TabSettings, None)    
+    #GenStandardOption("Subtitles", TabSettings, "Toggle subtitles on or off", [],[])
+    #GenStandardOption("Cutscene voice volume", TabSettings, "Adjust voice volume during cutscenes", [],[], Scale)
+    #GenStandardOption("Game BGM volume", TabSettings, "Adjust background music volume during the game", [],[], Scale)
+    #GenStandardOption("Game SE volume", TabSettings, "Adjust volume of sound effects heard during the game", [],[], Scale)
+    #GenStandardOption("Game voice volume", TabSettings, "Adjust volume of voices heard during the game", [],[], Scale)
+    #GenStandardOption("Battle Narrator volume", TabSettings, "Adjust volume of the battle Narrator (not character battle voices)", [],[], Scale)
+    #GenStandardOption("Environment volume", TabSettings, "Adjust volume of environmental sounds (such as rain) heard during the game", [],[], Scale)
+    #GenStandardOption("System volume", TabSettings, "Adjust volume of system sounds heard during the game", [],[], Scale)
 
 
-    GenHeader("Screen Settings",TabSettings, None)        
-    GenStandardOption("Screen brightness", TabSettings, "Adjust screen brightness", [],[], Scale)
+    #GenHeader("Screen Settings",TabSettings, None)        
+    #GenStandardOption("Screen brightness", TabSettings, "Adjust screen brightness", [],[], Scale)
 
-    GenHeader("Game Settings",TabSettings, None)
-    GenStandardOption("Difficulty level", TabSettings, "Default Difficulty", [],["Easy",[],"Normal",[],"Bringer of Chaos",[], "Custom",[]])
-    GenStandardOption("Auto-battle", TabSettings, "Toggle auto-battle", [],[])
-    GenStandardOption("Automate Special Button Challenges", TabSettings, "Toggle automatic success for button challenge inputs during Specials", [],[])
-    GenStandardOption("Enemy Aggression", TabSettings, "Toggle whether foes pick a fight (exc.salvage, unique, boss, and quest foes)", [],[])
-    GenStandardOption("Special BGM", TabSettings, "When enabled, special battle music will play with certain Blades in the party", [],[])
+    #GenHeader("Game Settings",TabSettings, None)
+    #GenStandardOption("Difficulty level", TabSettings, "Default Difficulty", [],["Easy",[],"Normal",[],"Bringer of Chaos",[], "Custom",[]])
+    #GenStandardOption("Auto-battle", TabSettings, "Toggle auto-battle", [],[])
+    #GenStandardOption("Automate Special Button Challenges", TabSettings, "Toggle automatic success for button challenge inputs during Specials", [],[])
+    #GenStandardOption("Enemy Aggression", TabSettings, "Toggle whether foes pick a fight (exc.salvage, unique, boss, and quest foes)", [],[])
+    #GenStandardOption("Special BGM", TabSettings, "When enabled, special battle music will play with certain Blades in the party", [],[])
 
 def Randomize():
     def ThreadedRandomize():
@@ -293,9 +292,9 @@ def Randomize():
         ShowTitleScreenText()
 
         # Runs all randomization
-        DebugLog.CreateDebugLog(OptionDictionary)
+        DebugFile = DebugLog.CreateDebugLog(OptionDictionary, Version, randoSeedEntry.get())
         RunOptions()
-        RaceMode.SeedHash()
+        RaceMode.SeedHash(DebugFile)
         randoProgressDisplay.config(text="Packing BDATs")
 
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
@@ -376,8 +375,6 @@ randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=Whi
 
 EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()] + [defaultFont])
 SavedOptions.loadData(EveryObjectToSaveAndLoad)
-
-
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSaveAndLoad), root.destroy()))
 root.mainloop()
