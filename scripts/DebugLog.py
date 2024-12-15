@@ -8,43 +8,57 @@ def CreateDebugLog(OptionsRunDict, Version, randoSeedEntry):
         tbd = "To Be Added"
         for i in range(0, rngmuddling1): # this ensures that if this option is on, the seed hash will be different
             rngmuddling2 = random.choice(Range2)
+        global debugfilename
         debugfilename = f"D:/XC2 Rando Debug Logs/{randoSeedEntry}.txt"
         debugfile = open(debugfilename, "w", encoding= "utf-8")
         debugfile.write(f"Xenoblade 2 Randomizer Version {Version}\n")
         debugfile.write(f"Permalink {tbd}\n\n")
         debugfile.write(f"Seed Name: {randoSeedEntry}\n")
         debugfile.write("Options Selected:\n")
-        for option in OptionsRunDict.values():
-            CurOptionName = option["name"]
-            CurOptionVal = option["optionTypeVal"].get()
-            OptionOn = 0
-            if type(CurOptionVal) != int:
-                if CurOptionVal == True:
-                    debugfile.write(f"{CurOptionName}; ")
-                    OptionOn = 1
-            if type(CurOptionVal) == int:
-                if CurOptionVal != 0:
-                    debugfile.write(f"{CurOptionName}: {CurOptionVal}; ")
-                    OptionOn = 1
-            if OptionOn == 1:    
-                for subOption in option["subOptionObjects"].values():
-                    CurSubOptionName = subOption["subName"]
-                    CurSubOptionVal = subOption["subOptionTypeVal"].get()
-                    if type(CurSubOptionVal) != int:
-                        if CurSubOptionVal == True:
-                            debugfile.write(f"{CurSubOptionName}, ")
-                    if type(CurSubOptionVal) == int:
-                        if CurSubOptionVal != 0:
-                            debugfile.write(f"{CurSubOptionName}: {CurSubOptionVal}, ")
-                debugfile.write("; ")
+        OptionName = []
+        OptionVal = []
+        SubOptionObjects = []
+        for option in OptionsRunDict.values(): # for each option
+            OptionName = option["name"]    
+            OptionVal = option["optionTypeVal"].get()
+            if (type(OptionVal) != int) & (OptionVal == True): # if the option is a checkbox and checked
+                debugfile.write(f" {OptionName};")
+            if (type(OptionVal) == int) & (OptionVal != 0): # slider and not 0
+                debugfile.write(f" {OptionName}: {OptionVal};")
         debugfile.write("\n")
+        debugfile.write("Suboptions Selected:\n")
+        for option in OptionsRunDict.values():
+            optionName = option["name"]
+            for subOption in option["subOptionObjects"].values(): # looping through all suboptions
+                SubOptionName = subOption["subName"]
+                SubOptionVal = subOption["subOptionTypeVal"].get()
+                if (type(SubOptionVal) != int) & (SubOptionVal == True): # if the suboption is a checkbox and checked
+                    debugfile.write(f" {optionName}: {SubOptionName};")
+                if (type(SubOptionVal) == int) & (SubOptionVal != 0): # if the suboption is a slider and not 0
+                    debugfile.write(f" {optionName}: {SubOptionName}: {SubOptionVal};")
+        debugfile.write("\n")   
         debugfile.close()
+        debugfileread = open(debugfilename, "r", encoding= "utf-8")
+        alllines = debugfileread.readlines()
+        alllines[5] = alllines[5][1:]
+        alllines[5] = alllines[5][:-2]
+        alllines[5] += "\n"
+        alllines[7] = alllines[7][1:]
+        alllines[7] = alllines[7][:-2]
+        alllines[7] += "\n"
+        debugfilewritten = open(debugfilename, "w", encoding= "utf-8")
+        debugfilewritten.writelines(alllines)
+        debugfilewritten.close()
     return debugfilename
             
-def AppendSeedHash(SeedHash, DebugFile):
-    debugfileread = open(DebugFile, "r", encoding= "utf-8")
+def AppendSeedHash():
+    debugfileread = open(debugfilename, "r", encoding= "utf-8")
     alllines = debugfileread.readlines()
-    alllines[2] = f"Seed Hash: {SeedHash}\n"
-    debugfilewritten = open(DebugFile, "w", encoding= "utf-8")
+    alllines[2] = f"Seed Hash: {debugfilename}\n"
+    debugfilewritten = open(debugfilename, "w", encoding= "utf-8")
     debugfilewritten.writelines(alllines)
     debugfilewritten.close()
+
+def DebugCoreCrystalAddition(ValidCrystalListIDs, CorrespondingBladeNames):
+    debugfileread = open(debugfilename, "r", encoding= "utf-8")
+    alllines = debugfileread.readlines()

@@ -597,7 +597,7 @@ def DifficultyChanges(): # Makes Easy difficulty the same as Normal
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def SeedHash(DebugFile):
+def SeedHash():
     seedhashcomplete = random.choice(SeedHashAdj) + " " + random.choice(SeedHashNoun) 
     with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r+', encoding='utf-8') as file: #puts the seed hash text on the main menu and on the save game screen
         data = json.load(file)
@@ -612,7 +612,7 @@ def SeedHash(DebugFile):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    DebugLog.AppendSeedHash(seedhashcomplete, DebugFile)
+    DebugLog.AppendSeedHash()
     
 def ReduceBladeReqTrustVals(): # Sets required Trust Values to 0.5x the vanilla values
     with open("./_internal/JsonOutputs/common/FLD_ConditionIdea.json", 'r+', encoding='utf-8') as file:
@@ -774,6 +774,7 @@ def FindtheBladeNames(OptionsRunDict):
         CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
         CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
         CorrespondingBladeNames = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_ms/chr_bl_ms.json", ["$id"], CorrespondingBladeNameIDs, "name")
+        DebugLog.DebugCoreCrystalAddition(ValidCrystalListIDs, CorrespondingBladeNames)
         ITMCrystalAdditions(CorrespondingBladeNames, CorrespondingBladeIDs)
 
 def ITMCrystalAdditions(BladeNames, CorrespondingBladeIDs):

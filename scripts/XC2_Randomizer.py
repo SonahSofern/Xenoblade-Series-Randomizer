@@ -294,7 +294,7 @@ def Randomize():
         # Runs all randomization
         DebugFile = DebugLog.CreateDebugLog(OptionDictionary, Version, randoSeedEntry.get())
         RunOptions()
-        RaceMode.SeedHash(DebugFile)
+        RaceMode.SeedHash()
         randoProgressDisplay.config(text="Packing BDATs")
 
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
