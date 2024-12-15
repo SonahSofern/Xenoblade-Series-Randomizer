@@ -273,7 +273,6 @@ def Options():
     GenStandardOption("Enemy Aggression", TabSettings, "Toggle whether foes pick a fight (exc.salvage, unique, boss, and quest foes)", [],[])
     GenStandardOption("Special BGM", TabSettings, "When enabled, special battle music will play with certain Blades in the party", [],[])
 
-
 def Randomize():
     def ThreadedRandomize():
         global OptionDictionary
