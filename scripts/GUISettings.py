@@ -15,17 +15,6 @@ def NotebookFocusStyleFix(defaultFont):
     })]
     )
 
-def CheckbuttonFocusStyleFix():
-    style = ttk.Style()
-    # Modify the layout of the Checkbutton to include focus styling
-    style.layout("TCheckbutton",
-                 [('Checkbutton.padding', {'side': 'top', 'sticky': 'nswe', 'children':
-                    # [('Checkbutton.focus', {'side': 'top', 'sticky': 'nswe', 'children':
-                        [('Checkbutton.label', {'side': 'top', 'sticky': 'nswe'})],
-                    #})],
-                 })]
-    )
-
 def OpenSettingsWindow(rootWindow, defaultFont):
     newWindow = Toplevel(rootWindow)
     iter = 0
@@ -114,63 +103,111 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     darkMode = Button(newWindow, text="Dark Mode", command=lambda: ToggleLightDarkMode(darkMode, rootWindow), font=("Arial", 16))
     darkMode.pack(padx=2, pady=2, anchor="w")
     # Make setting that turns off or on all inputs boxes/sliders etc.
-
-    style=ttk.Style()
-    backgroundColor = Black
-    fontColor = White
-    style.theme_create('Dark', settings={
-                # ".": {
-                #     "configure": {
-                #         "background": backgroundColor, # All except tabs
-                #         "foreground": fontColor
-                #     }
-                # },
-                "TNotebook": {
-                    "configure": {
-                        "background":backgroundColor, # Your margin color
-                    }
-                },
-                "TNotebook.Tab": {
-                    "configure": {
-                        "background": backgroundColor, # tab color when not selected
-                        "font":fontColor,
-                        "padding": 10,
-                        "font": defaultFont,
-                        "foreground": fontColor,
-                        "bordercolor": backgroundColor
+    try:
+        style=ttk.Style()
+        backgroundColor = Black
+        fontColor = White
+        style.theme_create('Dark', settings={
+                    # ".": {
+                    #     "configure": {
+                    #         "background": backgroundColor, # All except tabs
+                    #         "foreground": fontColor
+                    #     }
+                    # },
+                    "TNotebook": {
+                        "configure": {
+                            "background":backgroundColor, # Your margin color
+                                            "borderwidth": 0,                # Border width
+                "relief": "flat",                # Flat style for the button (without borders)
+                        }
+                        
                     },
-                    "map": {
-                        "background": [("selected", Gray)], # Tab color when selected
-                        "foreground": [("selected", Black)], # Tab color when selected
-                    }
-                }
-                })
-    backgroundColor = White
-    fontColor = Black
-    style.theme_create('Light', settings={
-                # ".": {
-                #     "configure": {
-                #         "background": backgroundColor, # All except tabs
-                #         "foreground": fontColor
-                #     }
-                # },
-                "TNotebook": {
-                    "configure": {
-                        "background":backgroundColor, # Your margin color
-                    }
-                },
-                "TNotebook.Tab": {
-                    "configure": {
-                        "background": backgroundColor, # tab color when not selected
-                        "font":fontColor,
-                        "padding": 10,
-                        "font": defaultFont,
-                        "foreground": fontColor,
-                        "bordercolor": backgroundColor
+                    "TNotebook.Tab": {
+                        "configure": {
+                            "background": backgroundColor, # tab color when not selected
+                            "padding": 10,
+                            "font": defaultFont,
+                            "foreground": fontColor,
+                            "bordercolor": backgroundColor
+                        },
+                        "map": {
+                            "background": [("selected", Gray)], # Tab color when selected
+                            "foreground": [("selected", Black)], # Tab color when selected
+                        }
                     },
-                    "map": {
-                        "background": [("selected", Gray)], # Tab color when selected
-                        "foreground": [("selected", Black)], # Tab color when selected
+                    "TButton": {
+            "configure": {
+                "background": backgroundColor,  # Button background color
+                "foreground": fontColor,        # Button text color
+                "font": defaultFont,            # Button font
+                "borderwidth": 1,               # Button border width
+                "relief": "flat",               # Button style (flat, raised, sunken, etc.)
+            },
+            "map": {
+                "background": [("active", Gray)],  # Button background when active (pressed)
+                "foreground": [("active", Black)],  # Button text color when active (pressed)
+            }
+        },
+                        "TCheckbutton": {
+            "configure": {
+                "background": backgroundColor,  # Your background color
+                "foreground": fontColor,         # Text color
+                "font": defaultFont,             # Font for text
+                "borderwidth": 0,                # Border width
+                "relief": "flat",                # Flat style for the button (without borders)
+            },
+            "map": {
+                "background": [("active", Gray)],  # Background when active (checked or pressed)
+                "foreground": [("active", Black)],  # Text color when active
+            }
+        },
+                            "TEntry": {
+            "configure": {
+                "foreground": fontColor,         # Text color
+                "font": defaultFont,             # Font for text
+                "fieldbackground": backgroundColor,
+                                "borderwidth": 0,                # Border width
+                "relief": "flat",                # Flat style for the button (without borders)
+            }
+        },
+                                                        "TScrollbar": {
+            "configure": {
+                "foreground": fontColor,         # Text color
+                "background": backgroundColor,
+                "troughcolor": backgroundColor,
+                                "borderwidth": 0,                # Border width
+                "relief": "flat",                # Flat style for the button (without borders)
+            }
+        }
+                    })
+        backgroundColor = White
+        fontColor = Black
+        style.theme_create('Light', settings={
+                    # ".": {
+                    #     "configure": {
+                    #         "background": backgroundColor, # All except tabs
+                    #         "foreground": fontColor
+                    #     }
+                    # },
+                    "TNotebook": {
+                        "configure": {
+                            "background":backgroundColor, # Your margin color
+                        }
+                    },
+                    "TNotebook.Tab": {
+                        "configure": {
+                            "background": backgroundColor, # tab color when not selected
+                            "font":fontColor,
+                            "padding": 10,
+                            "font": defaultFont,
+                            "foreground": fontColor,
+                            "bordercolor": backgroundColor
+                        },
+                        "map": {
+                            "background": [("selected", Gray)], # Tab color when selected
+                            "foreground": [("selected", Black)], # Tab color when selected
+                        }
                     }
-                }
-                })
+                    })
+    except:
+        pass
