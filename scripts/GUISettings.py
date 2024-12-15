@@ -2,9 +2,8 @@ from tkinter import *
 from UI_Colors import *
 from tkinter import font, ttk
 
-def NotebookFocusStyleFix(defaultFont):
+def NotebookFocusStyleFix():
     style = ttk.Style()
-    style.configure("TNotebook.Tab", font=(defaultFont), padding=10)  # Change tab font
     style.layout("Tab",
     [('Notebook.tab', {'sticky': 'nswe', 'children':
         [('Notebook.padding', {'side': 'top', 'sticky': 'nswe', 'children':
@@ -88,126 +87,134 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     fontTestBack.pack(padx=5, pady=2, side='left', anchor="nw")
     fontTestNext.pack( padx=5, pady=2, side='left', anchor="nw")
     saveFont.pack( padx=5, pady=2, anchor="nw")
-
-    def ToggleLightDarkMode(togButton, root):
-        style = ttk.Style()
-        if togButton.cget("text") == "Dark Mode":
-            togButton.config(text="Light Mode")
-            style.theme_use('Dark')
-            NotebookFocusStyleFix(defaultFont)
-        else:
-            togButton.config(text="Dark Mode")
-            style.theme_use('Light')
-            NotebookFocusStyleFix(defaultFont)
-            
-    darkMode = Button(newWindow, text="Dark Mode", command=lambda: ToggleLightDarkMode(darkMode, rootWindow), font=("Arial", 16))
+    darkMode = Button(newWindow, text="Light Mode", command=lambda: ToggleLightDarkMode(darkMode, rootWindow), font=("Arial", 16))
     darkMode.pack(padx=2, pady=2, anchor="w")
-    # Make setting that turns off or on all inputs boxes/sliders etc.
+    
+def ToggleLightDarkMode(togButton, root):
+    if togButton.cget("text") == "Dark Mode":
+        colors = {}
+        togButton.config(text="Light Mode")
+    else:
+        colors = {}
+        togButton.config(text="Dark Mode")
+    LoadTheme(colors, root)
+
+def LoadTheme(colors, defaultFont):
     try:
-        style=ttk.Style()
-        backgroundColor = Black
-        fontColor = White
-        style.theme_create('Dark', settings={
-                    # ".": {
-                    #     "configure": {
-                    #         "background": backgroundColor, # All except tabs
-                    #         "foreground": fontColor
-                    #     }
-                    # },
-                    "TNotebook": {
-                        "configure": {
-                            "background":backgroundColor, # Your margin color
-                                            "borderwidth": 0,                # Border width
-                "relief": "flat",                # Flat style for the button (without borders)
-                        }
-                        
-                    },
-                    "TNotebook.Tab": {
-                        "configure": {
-                            "background": backgroundColor, # tab color when not selected
-                            "padding": 10,
-                            "font": defaultFont,
-                            "foreground": fontColor,
-                            "bordercolor": backgroundColor
-                        },
-                        "map": {
-                            "background": [("selected", Gray)], # Tab color when selected
-                            "foreground": [("selected", Black)], # Tab color when selected
-                        }
-                    },
-                    "TButton": {
-            "configure": {
-                "background": backgroundColor,  # Button background color
-                "foreground": fontColor,        # Button text color
-                "font": defaultFont,            # Button font
-                "borderwidth": 1,               # Button border width
-                "relief": "flat",               # Button style (flat, raised, sunken, etc.)
-            },
-            "map": {
-                "background": [("active", Gray)],  # Button background when active (pressed)
-                "foreground": [("active", Black)],  # Button text color when active (pressed)
-            }
-        },
-                        "TCheckbutton": {
-            "configure": {
-                "background": backgroundColor,  # Your background color
-                "foreground": fontColor,         # Text color
-                "font": defaultFont,             # Font for text
-                "borderwidth": 0,                # Border width
-                "relief": "flat",                # Flat style for the button (without borders)
-            },
-            "map": {
-                "background": [("active", Gray)],  # Background when active (checked or pressed)
-                "foreground": [("active", Black)],  # Text color when active
-            }
-        },
-                            "TEntry": {
-            "configure": {
-                "foreground": fontColor,         # Text color
-                "font": defaultFont,             # Font for text
-                "fieldbackground": backgroundColor,
-                                "borderwidth": 0,                # Border width
-                "relief": "flat",                # Flat style for the button (without borders)
-            }
-        },
-                                                        "TScrollbar": {
-            "configure": {
-                "foreground": fontColor,         # Text color
-                "background": backgroundColor,
-                "troughcolor": backgroundColor,
-                                "borderwidth": 0,                # Border width
-                "relief": "flat",                # Flat style for the button (without borders)
-            }
-        }
-                    })
-        backgroundColor = White
-        fontColor = Black
-        style.theme_create('Light', settings={
-                    # ".": {
-                    #     "configure": {
-                    #         "background": backgroundColor, # All except tabs
-                    #         "foreground": fontColor
-                    #     }
-                    # },
-                    "TNotebook": {
-                        "configure": {
-                            "background":backgroundColor, # Your margin color
-                        }
-                    },
-                    "TNotebook.Tab": {
-                        "configure": {
-                            "background": backgroundColor, # tab color when not selected
-                            "font":fontColor,
-                            "padding": 10,
-                            "font": defaultFont,
-                            "foreground": fontColor,
-                            "bordercolor": backgroundColor
-                        },
-                        "map": {
-                            "background": [("selected", Gray)], # Tab color when selected
-                            "foreground": [("selected", Black)], # Tab color when selected
-                        }
-                    }
-                    })
+        CreateTheme(defaultFont)
     except:
         pass
+
+
+def LoadDarkTheme(root):
+    style = ttk.Style()
+    style.theme_use('Dark')
+    NotebookFocusStyleFix()
+    root.configure(background=DarkerPurple) # Root Background
+    # Cog
+    # Top Bar
+    # Center Screen Stuff
+    # Run this at launch find a better condition to check
+
+
+def LoadLightTheme(root):
+    style = ttk.Style()
+    style.theme_use('Light')
+    NotebookFocusStyleFix()
+
+def CreateTheme(defaultFont):
+    style=ttk.Style()
+    darkColor = Black
+    lightColor = White
+    backgroundColor = DarkerPurple
+    midColor = DarkGray
+    style.theme_create('Dark', settings={
+                # ".": {
+                #     "configure": {
+                #         "background": backgroundColor, # All except tabs
+                #         "foreground": fontColor
+                #     }
+                # },
+                "TNotebook": {
+                    "configure": {
+                        "font": defaultFont,
+                        "background":backgroundColor, # Your margin color
+                                        "borderwidth": 0,                # Border width
+            "relief": "flat",                # Flat style for the button (without borders)
+                    }
+                    
+                },
+                "TNotebook.Tab": {
+                    "configure": {
+                        "background": darkColor, # tab color when not selected
+                        "padding": 10,
+                        "font": defaultFont,
+                        "foreground": lightColor,
+                        "bordercolor": darkColor
+                    },
+                    "map": {
+                        "background": [("selected", midColor)], # Tab color when selected
+                    }
+                },
+                "TButton": {
+        "configure": {
+            "background": darkColor,  # Button background color
+            "foreground": lightColor,        # Button text color
+            "font": defaultFont,            # Button font
+            "borderwidth": 1,               # Button border width
+            "relief": "flat",               # Button style (flat, raised, sunken, etc.)
+            "padding": 3,
+        },
+        "map": {
+            "background": [("active", midColor)],  # Button background when active (pressed)
+        }
+    },
+                    "TCheckbutton": {
+        "configure": {
+            "background": darkColor,  # Your background color
+            "foreground": darkColor,         # Text color
+        # "font": defaultFont,             # Font for text
+                    }},
+                        "TEntry": {
+        "configure": {
+            "foreground": lightColor,         # Text color
+            "font": defaultFont,             # Font for text
+            "fieldbackground": darkColor,
+            "padding": 5,
+                            "borderwidth": 0,                # Border width
+            "relief": "flat",                # Flat style for the button (without borders)
+        }
+    },
+                                                    "TScrollbar": {
+        "configure": {
+            "foreground": darkColor,         # Text color
+            "troughcolor": midColor,
+            "background": darkColor,
+            "borderwidth": 0,                # Border width
+            "relief": "flat",                # Flat style for the button (without borders)
+        }
+    },
+                                                                                                            "TLabel": {
+        "configure": {
+            "foreground": lightColor,         # Text color
+            "background": darkColor,
+            "troughcolor": darkColor,
+                            "borderwidth": 0,                # Border width
+            "relief": "flat",                # Flat style for the button (without borders)
+        }},
+                  "TFrame": {
+        "configure": {
+            "background": backgroundColor,
+            "foreground": backgroundColor,
+        }}
+                })
+
+    style.theme_create('Light', settings={
+                   
+                    })    
+    style.theme_use('Dark')
+    
+    
+    
+    
+# Make setting that turns off or on all inputs boxes/sliders etc.

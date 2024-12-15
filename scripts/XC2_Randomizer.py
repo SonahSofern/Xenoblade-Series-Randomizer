@@ -22,12 +22,10 @@ OptionColorDark = Gray
 
 root = Tk()
 fontNameSizeDefault = ["", 12]
-SavedOptions.loadData(fontNameSizeDefault, "GUISavedOptions.txt")
+SavedOptions.loadData(fontNameSizeDefault, "GUISavedOptions.txt") # Might be able to do this with theme updating them,e instead of this
 defaultFont = Font(family=fontNameSizeDefault[0], size=fontNameSizeDefault[1])
-
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
-root.configure(background=Red)
 root.geometry('1000x900')
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
@@ -124,22 +122,22 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         else:
             optionColor = OptionColorDark
 
-    optionPanel = Frame(parentTab, padx=10, pady=10, background=optionColor)
+    optionPanel = Frame(parentTab, padx=10, pady=10)
     optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
 
     # Create Option Name
-    option = Label(optionPanel, text=optionName, background=optionColor, width=30, anchor="w", wraplength=350)
+    option = Label(optionPanel, text=optionName, width=30, anchor="w", wraplength=350)
     option.grid(row=rowIncrement, column=0, sticky="sw")
 
     # Create Option Interactable
     if (optionType == Checkbutton):
         var = BooleanVar()
-        optionTypeObj = Checkbutton(optionPanel, background=optionColor, highlightthickness=0, variable= var, text=description)
+        optionTypeObj = Checkbutton(optionPanel, highlightthickness=0, variable= var, text=description)
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionType = var
     elif (optionType == Scale):
         var = IntVar()
-        optionTypeObj = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, variable=var, background=optionColor, highlightthickness=0)
+        optionTypeObj = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, variable=var, highlightthickness=0)
         optionDesc = Label(optionPanel, text=description, background=optionColor, anchor='w')
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
@@ -339,21 +337,21 @@ def GenRandomSeed():
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
 Options()
-GUISettings.NotebookFocusStyleFix(defaultFont)
+GUISettings.NotebookFocusStyleFix()
 
-bdatcommonFrame = Frame(root, background=Red)
+bdatcommonFrame = ttk.Frame(root)
 bdatcommonFrame.pack(anchor="w", padx=10)
 bdatButton = ttk.Button(bdatcommonFrame, width=20, text="Choose Input Folder", command= lambda: Helper.DirectoryChoice("Choose your folder containing common.bdat, common_ms.bdat and common_gmk.bdat", bdatFilePathEntry))
 bdatButton.pack(side="left", padx=2, pady=2)
 bdatFilePathEntry = ttk.Entry(bdatcommonFrame, width=MaxWidth)
 bdatFilePathEntry.pack(side="left", padx=2)
-OutputDirectoryFrame = Frame(root, background=Red)
+OutputDirectoryFrame = ttk.Frame(root)
 OutputDirectoryFrame.pack(anchor="w", padx=10)
 outputDirButton = ttk.Button(OutputDirectoryFrame, width = 20, text='Choose Output Folder', command= lambda: Helper.DirectoryChoice("Choose an output folder", outDirEntry))
 outputDirButton.pack(side="left", padx=2, pady=2)
 outDirEntry = ttk.Entry(OutputDirectoryFrame, width=MaxWidth)
 outDirEntry.pack(side="left", padx=2)
-SeedFrame = Frame(root, background=Red)
+SeedFrame = ttk.Frame(root)
 SeedFrame.pack(anchor="w", padx=10)
 seedDesc = ttk.Button(SeedFrame, text="Seed", command=GenRandomSeed)
 seedDesc.pack(side='left', padx=2, pady=2)
@@ -362,6 +360,7 @@ randoSeedEntry = ttk.Entry(SeedFrame, width=30)
 randoSeedEntry.pack(side='left', padx=2)
 RandomizeButton = ttk.Button(text='Randomize', command=Randomize)
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
+RandomizeButton.config(padding=5)
 
 Cog = PhotoImage(file="./_internal/Images/SmallSettingsCog.png")
 SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont))
@@ -371,8 +370,6 @@ randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=Opt
 
 EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()])
 SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
-
-
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSaveAndLoad, "SavedOptions.txt"), root.destroy()))
 root.mainloop()
