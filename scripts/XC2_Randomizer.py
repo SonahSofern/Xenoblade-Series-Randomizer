@@ -1,7 +1,7 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, RaceMode, TutorialShortening, IDs, MusicShuffling, DriverArtDoomAdjustment
+import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, RaceMode, TutorialShortening, IDs, MusicShuffling, DriverArtDoomAdjustment, DebugLog
 import GUISettings
 from IDs import *
 from Cosmetics import *
@@ -229,7 +229,9 @@ def Options():
     GenStandardOption("Arts Cancel on Tier 1", TabQOL, "Puts Driver arts cancel skills into the first Driver Skill Tree slot", [lambda: SkillTreeAdjustments.Tier1ArtsCancel(OptionDictionary)])
     #GenOption("Freely Engage All Blades", TabQOL, "Allows all blades to be freely engaged", ["common/CHR_Bl.json"], []) # common/CHR_Bl Set Free Engage to true NEED TO FIGURE OUT ACCESS TO FLAGS
     GenStandardOption("Treasure Chest Visibility", TabQOL, "Increases the range you can see treasure chests from", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["msgVisible", "msgdigVisible"], Helper.InclRange(0,200), [255])])
+    GenStandardOption("Create Debug Log", TabQOL, "Creates a spoiler log containing locations of items, etc", [])
 
+    # Funny
     GenStandardOption("Projectile Treasure Chests", TabFunny, "Launches your items from chests", [lambda: JSONParser.ChangeJSON(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [12])])
     GenStandardOption("Blade Size", TabFunny, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], ["Scale", "WpnScale"], AllValues, Helper.InclRange(1,250) + [1000,16000])], optionType= Scale) # Make sure these work for common blades
     GenStandardOption("NPCs Size", TabFunny, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSON(["common/RSC_NpcList.json"], ["Scale"], Helper.InclRange(1,100), Helper.InclRange(1,250))], optionType=Scale)
@@ -291,6 +293,7 @@ def Randomize():
         ShowTitleScreenText()
 
         # Runs all randomization
+        DebugLog.CreateDebugLog(OptionDictionary)
         RunOptions()
         RaceMode.SeedHash()
         randoProgressDisplay.config(text="Packing BDATs")
@@ -324,13 +327,16 @@ def RunOptions():
                         try:
                             subCommand()
                         except:
-                            pass
+                            debugsuboption = subOption["subName"]
+                            debugoption = option["name"]
+                            print(f"The {debugsuboption} suboption (in {debugoption}) failed to complete randomization.")
             randoProgressDisplay.config(text=f"Randomizing {option['name']}")
             for command in option["commandList"]:
                 try:
                     command()
                 except:
-                    pass
+                    debugoption = option["name"]
+                    print(f"The {debugoption} failed to complete randomization.")
  
 def GenRandomSeed():
     randoSeedEntry.delete(0, END)
