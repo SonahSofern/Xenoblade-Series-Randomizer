@@ -87,24 +87,14 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     fontTestBack.pack(padx=5, pady=2, side='left', anchor="nw")
     fontTestNext.pack( padx=5, pady=2, side='left', anchor="nw")
     saveFont.pack( padx=5, pady=2, anchor="nw")
-    darkMode = Button(newWindow, text="Light Mode", command=lambda: ToggleLightDarkMode(darkMode, rootWindow), font=("Arial", 16))
+    darkMode = Button(newWindow, text="Light Mode", command=lambda: ToggleLightDarkMode(darkMode), font=("Arial", 16))
     darkMode.pack(padx=2, pady=2, anchor="w")
     
-def ToggleLightDarkMode(togButton, root):
+def ToggleLightDarkMode(togButton):
     if togButton.cget("text") == "Dark Mode":
-        colors = {}
         togButton.config(text="Light Mode")
     else:
-        colors = {}
         togButton.config(text="Dark Mode")
-    LoadTheme(colors, root)
-
-def LoadTheme(colors, defaultFont):
-    try:
-        CreateTheme(defaultFont)
-    except:
-        pass
-
 
 def LoadDarkTheme(root):
     style = ttk.Style()
@@ -122,97 +112,125 @@ def LoadLightTheme(root):
     style.theme_use('Light')
     NotebookFocusStyleFix()
 
-def CreateTheme(defaultFont):
+def LoadTheme(defaultFont):
+    
     style=ttk.Style()
+    
     darkColor = Black
     lightColor = White
     backgroundColor = DarkerPurple
     midColor = DarkGray
-    style.theme_create('Dark', settings={
-                # ".": {
-                #     "configure": {
-                #         "background": backgroundColor, # All except tabs
-                #         "foreground": fontColor
-                #     }
-                # },
-                "TNotebook": {
-                    "configure": {
-                        "font": defaultFont,
-                        "background":backgroundColor, # Your margin color
-                                        "borderwidth": 0,                # Border width
-            "relief": "flat",                # Flat style for the button (without borders)
-                    }
-                    
-                },
-                "TNotebook.Tab": {
-                    "configure": {
-                        "background": darkColor, # tab color when not selected
-                        "padding": 10,
-                        "font": defaultFont,
-                        "foreground": lightColor,
-                        "bordercolor": darkColor
-                    },
-                    "map": {
-                        "background": [("selected", midColor)], # Tab color when selected
-                    }
-                },
-                "TButton": {
-        "configure": {
-            "background": darkColor,  # Button background color
-            "foreground": lightColor,        # Button text color
-            "font": defaultFont,            # Button font
-            "borderwidth": 1,               # Button border width
-            "relief": "flat",               # Button style (flat, raised, sunken, etc.)
-            "padding": 3,
+    style.theme_create('Main', settings={
+        ".": {
+            "configure": {
+                "background": backgroundColor,
+            }
         },
-        "map": {
-            "background": [("active", midColor)],  # Button background when active (pressed)
+        "TNotebook": {
+            "configure": {
+                "font": defaultFont,
+                "background": backgroundColor,
+                "borderwidth": 0,
+                "relief": "flat",
+            }
+        },
+        "TNotebook.Tab": {
+            "configure": {
+                "background": darkColor,
+                "padding": 10,
+                "font": defaultFont,
+                "foreground": lightColor,
+                "bordercolor": darkColor,
+                "borderwidth":0,
+            },
+            "map": {
+                "background": [("selected", midColor), ("active", midColor)]
+            }
+        },
+        "TButton": {
+            "configure": {
+                "background": darkColor,
+                "foreground": lightColor,
+                "font": defaultFont,
+                "borderwidth": 1,
+                "padding": (5,3,5,3),
+            },
+            "map": {
+                "background": [("active", midColor)],
+            }
+        },
+        "TCheckbutton": {
+            "configure": {
+                "background": darkColor,
+                "foreground": lightColor,
+                "padding": (40,3,50,3),
+                "indicatorcolor": darkColor,
+                "indicatorbackground": darkColor,
+                "font": defaultFont,
+                "indicatorrelief": "flat",
+            },
+            "map": {
+                "indicatorcolor": [("selected", lightColor),("active", midColor)],
+                "background": [("active", midColor)],
+                "indicatorbackground": [("active", midColor)],
+            }
+        },
+        "TEntry": {
+            "configure": {
+                "foreground": lightColor,
+                "font": defaultFont,
+                "fieldbackground": darkColor,
+                "padding": 5,
+                "borderwidth": 0,
+                "relief": "flat",
+                "selectbackground": lightColor,
+                "selectforeground": darkColor,
+                "insertcolor": lightColor,
+            }
+        },
+        "TScrollbar": {
+            "configure": {
+                "foreground": darkColor,
+                "troughcolor": midColor,
+                "background": darkColor,
+                "borderwidth": 0,
+                "relief": "flat",
+                "arrowcolor": midColor,
+            }
+        },
+        "TLabel": {
+            "configure": {
+                "foreground": lightColor,
+                "background": darkColor,
+                "troughcolor": darkColor,
+                "borderwidth": 0,
+                "relief": "flat",
+                "padding": (20, 10),
+            }
+        },
+        "TFrame": {
+            "configure": {
+                "background": darkColor,
+                "foreground": backgroundColor,
+            }
+        },
+        "TScale": {
+            "configure": {
+                "background": darkColor,
+                "foreground": lightColor,
+                "troughrelief": "flat",
+                "groovewidth": 0,
+                "troughcolor": midColor,
+                "darkcolor": darkColor,
+                "lightcolor": darkColor,
+                "borderwidth": 1,
+                "sliderwidth": 100,
+            }
         }
-    },
-                    "TCheckbutton": {
-        "configure": {
-            "background": darkColor,  # Your background color
-            "foreground": darkColor,         # Text color
-        # "font": defaultFont,             # Font for text
-                    }},
-                        "TEntry": {
-        "configure": {
-            "foreground": lightColor,         # Text color
-            "font": defaultFont,             # Font for text
-            "fieldbackground": darkColor,
-            "padding": 5,
-                            "borderwidth": 0,                # Border width
-            "relief": "flat",                # Flat style for the button (without borders)
-        }
-    },
-                                                    "TScrollbar": {
-        "configure": {
-            "foreground": darkColor,         # Text color
-            "troughcolor": midColor,
-            "background": darkColor,
-            "borderwidth": 0,                # Border width
-            "relief": "flat",                # Flat style for the button (without borders)
-        }
-    },
-                                                                                                            "TLabel": {
-        "configure": {
-            "foreground": lightColor,         # Text color
-            "background": darkColor,
-            "troughcolor": darkColor,
-                            "borderwidth": 0,                # Border width
-            "relief": "flat",                # Flat style for the button (without borders)
-        }},
-                  "TFrame": {
-        "configure": {
-            "background": backgroundColor,
-            "foreground": backgroundColor,
-        }}
-                })
-
-    style.theme_create('Light', settings={
-                   
-                    })    
-    style.theme_use('Dark')
+    })
+  
+    style.theme_use('Main')
+    
     
     
     

@@ -19,13 +19,14 @@ MaxWidth = 1000
 
 OptionColorLight = White
 OptionColorDark = Gray
-
 root = Tk()
 fontNameSizeDefault = ["", 12]
 SavedOptions.loadData(fontNameSizeDefault, "GUISavedOptions.txt") # Might be able to do this with theme updating them,e instead of this
 defaultFont = Font(family=fontNameSizeDefault[0], size=fontNameSizeDefault[1])
+GUISettings.LoadTheme(defaultFont)
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
+root.config(background=DarkerPurple)
 root.geometry('1000x900')
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
@@ -34,7 +35,7 @@ root.iconphoto(True, icon)
 MainWindow = ttk.Notebook(root, height=5)
 
 # Frames in the notebook
-TabGeneralOuter = Frame(MainWindow) 
+TabGeneralOuter = ttk.Frame(MainWindow) 
 TabDriversOuter = Frame(MainWindow) 
 TabBladesOuter = Frame(MainWindow) 
 TabEnemiesOuter = Frame(MainWindow) 
@@ -56,7 +57,7 @@ TabRaceModeCanvas = Canvas(TabRaceModeOuter)
 TabFunnyCanvas = Canvas(TabFunnyOuter)
 
 # Actual Scrollable Content
-TabGeneral = Frame(TabGeneralCanvas) 
+TabGeneral = ttk.Frame(TabGeneralCanvas) 
 TabDrivers = Frame(TabDriversCanvas) 
 TabBlades = Frame(TabBladesCanvas)
 TabEnemies = Frame(TabEnemiesCanvas) 
@@ -70,9 +71,7 @@ TabFunny = Frame(TabFunnyCanvas)
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
         scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
-        Canvases[i].config(yscrollcommand=scrollbar.set, highlightthickness=0)
-        OuterFrames[i].config(highlightthickness=0)
-        InnerFrames[i].config(highlightthickness=0)
+        Canvases[i].config(yscrollcommand=scrollbar.set, background=DarkerPurple, borderwidth=0, relief="flat")
         InnerFrames[i].bind("<Configure>", lambda e, canvas=Canvases[i]: canvas.configure(scrollregion=canvas.bbox("all")))
   
         OuterFrames[i].pack_propagate(False)
@@ -107,7 +106,7 @@ def ShowTitleScreenText():
 def GenHeader(headerName, parentTab, backgroundColor):
     global rowIncrement
     
-    Header = Label(parentTab, text=headerName, padx=10, pady=10, background=backgroundColor, font=(defaultFont), width=MaxWidth, anchor="w")
+    Header = ttk.Label(parentTab, text=headerName, padx=10, pady=10, background=backgroundColor, font=(defaultFont), width=MaxWidth, anchor="w")
     Header.grid(row=rowIncrement, column=0, sticky="w")
 
     rowIncrement += 1
@@ -122,23 +121,23 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         else:
             optionColor = OptionColorDark
 
-    optionPanel = Frame(parentTab, padx=10, pady=10)
+    optionPanel = ttk.Frame(parentTab)
     optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
 
     # Create Option Name
-    option = Label(optionPanel, text=optionName, width=30, anchor="w", wraplength=350)
+    option = ttk.Label(optionPanel, text=optionName, width=30, anchor="w", wraplength=350)
     option.grid(row=rowIncrement, column=0, sticky="sw")
 
     # Create Option Interactable
     if (optionType == Checkbutton):
         var = BooleanVar()
-        optionTypeObj = Checkbutton(optionPanel, highlightthickness=0, variable= var, text=description)
+        optionTypeObj = ttk.Checkbutton(optionPanel, variable= var, text=description)
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionType = var
     elif (optionType == Scale):
         var = IntVar()
-        optionTypeObj = Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, sliderlength=10, variable=var, highlightthickness=0)
-        optionDesc = Label(optionPanel, text=description, background=optionColor, anchor='w')
+        optionTypeObj = ttk.Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, variable=var)
+        optionDesc = ttk.Label(optionPanel, text=description, anchor='w')
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
         optionType = var
@@ -152,7 +151,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     #     optionType = [optionTypeMin, optionTypeMax]
 
     # I hate this but the parent wont fill "sticky="ew" doesnt work. Its probably due to so many nested parents but I dont wanna go fix all of them
-    spaceFill = Label(optionPanel, text="", background=optionColor, width=MaxWidth, anchor='w')
+    spaceFill = ttk.Label(optionPanel, text="", width=MaxWidth, anchor='w')
     spaceFill.grid(row=rowIncrement, column=100, sticky="sw")
 
     # Create Main Option Dictionary Entry
@@ -165,7 +164,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     # Create Suboptions Dictionary Entry
     for i in range((len(subOptionName_subCommandList))//2):
         var = BooleanVar()
-        checkBox = Checkbutton(optionPanel, background=optionColor, text=subOptionName_subCommandList[2*i], variable=var, highlightthickness=0)
+        checkBox = ttk.Checkbutton(optionPanel, text=subOptionName_subCommandList[2*i], variable=var)
         checkBox.grid(row=rowIncrement+i+1, column=0, sticky="sw")
 
         OptionDictionary[optionName]["subOptionObjects"][subOptionName_subCommandList[2*i]] = {
@@ -330,7 +329,7 @@ def RunOptions():
                 except Exception as error:
                     print(f"ERROR: {option['name']} | {error}")
                     import traceback
-                    print(f"{traceback.format_exc()}")
+                    # print(f"{traceback.format_exc()}") # shows the full error
  
 def GenRandomSeed():
     randoSeedEntry.delete(0, END)
@@ -366,7 +365,7 @@ Cog = PhotoImage(file="./_internal/Images/SmallSettingsCog.png")
 SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
-randoProgressDisplay = Label(text="", background=Red, anchor="e", foreground=OptionColorLight)
+randoProgressDisplay = ttk.Label(text="", anchor="e", foreground=OptionColorLight)
 
 EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()])
 SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")

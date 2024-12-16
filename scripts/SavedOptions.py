@@ -1,3 +1,4 @@
+from tkinter import ttk
 import tkinter as tk
 
 def saveData(DataList, Filename):
@@ -15,7 +16,7 @@ def loadData(DataList, Filename):
             file.seek(0)
             savedLines = file.readlines()
             for i in range(len(savedLines)):
-                if isinstance(DataList[i], tk.Entry):
+                if isinstance(DataList[i], ttk.Entry):
                     DataList[i].delete(0,tk.END)
                     DataList[i].insert(0, savedLines[i].strip())
                 elif ((isinstance(DataList[i], tk.BooleanVar)) or (isinstance(DataList[i], tk.IntVar))):
