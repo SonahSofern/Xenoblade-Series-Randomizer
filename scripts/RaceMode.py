@@ -54,7 +54,7 @@ def RaceModeChanging(OptionsRunDict):
     # XP needed to reach a given level, formatted in [Given Level, Total XP Needed]
     # Tora ends up like 35 xp off level 20 with the actual xp needed to reach lv 5 at 360, so I give some more exp to compensate. It doesn't push anyone else over.
     XPNeededToReachLv = [[5, 325], [15, 9060], [20, 21360], [26, 44520], [29, 59820], [34, 91320], [35, 98580], [38, 122520], [42, 160080], [46, 205140], [51, 274640], [59, 428120], [68, 682040], [70, 789920]]
-
+    global ChosenIndices
     ChosenIndices = []
 
     RaceModeMapJumpIDs = [41, 68, 99, 152, 125, 133, 168, 175, 187, 200]
@@ -205,14 +205,14 @@ def RaceModeChanging(OptionsRunDict):
     print(OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get())
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get():
         print("Filling Chests with Custom Loot")
-        RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict)
+        RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict)
         StackableCoreCrystalsandKeyItems()
         #RenameCoreCrystals(OptionsRunDict)
         FindtheBladeNames(OptionsRunDict)
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Less Grinding"]["subOptionTypeVal"].get():
         print("Reducing amount of grinding")
         LessGrinding()
-        ChangeBladeLevelUnlockReqs(ChosenIndices, NGPlusBladeCrystalIDs)
+        ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs)
         ReduceBladeReqTrustVals()
         SecondSkillTreeCostReduc()
         DriverArtUpgradeCostChange()
@@ -258,7 +258,7 @@ def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
             json.dump(data, file, indent=2, ensure_ascii=False)
         return NGPlusBladeCrystalIDs
 
-def ChangeBladeLevelUnlockReqs(ChosenIndices, NGPlusBladeCrystalIDs): # changes the blade unlock requirements to the same condition as the final quest in a race-mode continent
+def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unlock requirements to the same condition as the final quest in a race-mode continent
     KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]
     KeyAchievementIDs = list(set([x for x in KeyAchievementIDs if x != 0]))
     RelevantChosenIndices = [x for x in ChosenIndices if x != 9]
@@ -382,16 +382,16 @@ def ChangeBladeLevelUnlockReqs(ChosenIndices, NGPlusBladeCrystalIDs): # changes 
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict):
+def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
     NonNGPlusCoreCrystalIDs = set(Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45010) + [45016] + Helper.InclRange(45017,45048) + [45056, 45057])
     NonNGPlusCoreCrystalIDs -= set(NGPlusBladeCrystalIDs)
     NonNGPlusCoreCrystalIDs = list(NonNGPlusCoreCrystalIDs)
-    A1CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12]) * 2
+    A1CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12])
     del NonNGPlusCoreCrystalIDs[:12]
-    A2CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12]) * 2
+    A2CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12])
     del NonNGPlusCoreCrystalIDs[:12]
-    A3CoreCrystalIDs = (NonNGPlusCoreCrystalIDs) * 2
-    A4CoreCrystalIDs = NGPlusBladeCrystalIDs * 2
+    A3CoreCrystalIDs = (NonNGPlusCoreCrystalIDs)
+    A4CoreCrystalIDs = NGPlusBladeCrystalIDs
     A1Equip = []
     A2Equip = []
     A3Equip = []
@@ -414,15 +414,20 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict):
         A2Equip.append(RaceModeAuxCoreIDs[i][A2Num])
         A3Equip.append(RaceModeAuxCoreIDs[i][A3Num])
         A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
-    Area1LootIDs = A1CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25249, 25264) * 2 + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2 + [25407] * 10
-    Area2LootIDs = A2CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25265, 25280) * 2 + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2 + [25407] * 10
-    Area3LootIDs = A3CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25281, 25291) * 2 + [25450] * 3 + A3Equip * 2 + [25408] * 5 + [25221, 25221, 25221] + A3RaceModeCoreChipIDs * 2 + [25407] * 10
-    Area4LootIDs = A4CoreCrystalIDs + [25305] * 3 + Helper.InclRange(25292, 25300) * 2 + [25450] * 3 + A4Equip * 2 + [25408] * 5 + [25222, 25222, 25222] + A4RaceModeCoreChipIDs * 2 + [25407] * 10
+    Area1LootIDs = A1CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25249, 25264) * 2 + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2 + [25407] * 10
+    Area2LootIDs = A2CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25265, 25280) * 2 + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2 + [25407] * 10
+    # adjusting the loot pool depending on dungeon size
+    if ChosenIndices[2] == 5: # tantal (52 chests)
+        Area3LootIDs = A3CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25281, 25291) * 2 + [25450] * 3 + A3Equip * 2 + [25408] * 5 + [25221, 25221, 25221] + A3RaceModeCoreChipIDs * 2 + [25407] * 10    
+    else: # (25 chests for these locations more or less)
+        Area3LootIDs = A3CoreCrystalIDs + [25305] * 2 + Helper.InclRange(25281, 25291) + [25450] * 2 + A3Equip + [25408] * 3 + [25221, 25221] + A3RaceModeCoreChipIDs + [25407] * 5
+    Area4LootIDs = A4CoreCrystalIDs + [25305] * 2 + Helper.InclRange(25292, 25300) + [25450] * 2 + A4Equip + [25408] * 3 + [25222, 25222] + A4RaceModeCoreChipIDs + [25407] * 5
     random.shuffle(Area1LootIDs)
     random.shuffle(Area2LootIDs)
     random.shuffle(Area3LootIDs)
     random.shuffle(Area4LootIDs)
     AllAreaLootIDs = [Area1LootIDs, Area2LootIDs, Area3LootIDs, Area4LootIDs]
+    print(AllAreaLootIDs)
     TBoxFiles = [[0,0], [0,0], [0,0], [0,0]] # this needs to be changed to a for loop if i change the number of race mode dungeons (append [0,0])
     FileStart = "./_internal/JsonOutputs/common_gmk/"
     FileEnd = "_FLD_TboxPop.json"
@@ -448,7 +453,7 @@ def RaceModeLootChanges(ChosenIndices, NGPlusBladeCrystalIDs, OptionsRunDict):
                 ListTboxFiles.append(TBoxFiles[i][j])
     AllOtherMapIDs = [x for x in ValidTboxMapNames if x not in ListTboxFiles]
     for i in range(0, len(AllOtherMapIDs)):
-        EnemyRandoLogic.ColumnAdjust(AllOtherMapIDs[i], ["Condition","itm1Num", "itm2Num", "itm3Num", "itm4Num", "itm5Num", "itm6Num", "itm7Num", "itm8Num", "itm1ID", "itm2ID", "itm3ID", "itm4ID", "itm5ID", "itm6ID", "itm7ID", "itm8ID"], 0)
+        EnemyRandoLogic.ColumnAdjust(AllOtherMapIDs[i], ["Condition", "itm1Num", "itm2Num", "itm3Num", "itm4Num", "itm5Num", "itm6Num", "itm7Num", "itm8Num", "itm1ID", "itm2ID", "itm3ID", "itm4ID", "itm5ID", "itm6ID", "itm7ID", "itm8ID"], 0)
     for i in range(0, len(TBoxFiles)):
         for l in range(0, len(TBoxFiles[i])):
             if TBoxFiles[i][l] != 0:
@@ -612,7 +617,7 @@ def SeedHash():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    DebugLog.AppendSeedHash()
+    DebugLog.AppendSeedHash(seedhashcomplete)
     
 def ReduceBladeReqTrustVals(): # Sets required Trust Values to 0.5x the vanilla values
     with open("./_internal/JsonOutputs/common/FLD_ConditionIdea.json", 'r+', encoding='utf-8') as file:
@@ -741,6 +746,7 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Exper
                     file.seek(0)
                     file.truncate()
                     json.dump(data, file, indent=2, ensure_ascii=False)
+    pass
 
 def DriverLvandSPFix():
     with open("./_internal/JsonOutputs/common/CHR_Dr.json", 'r+', encoding='utf-8') as file: # Maybe fixing XP dupe

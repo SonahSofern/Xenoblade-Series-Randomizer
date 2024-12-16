@@ -1,5 +1,5 @@
 from tkinter import PhotoImage, ttk
-import random, subprocess, shutil, os, threading
+import random, subprocess, shutil, os, threading, traceback
 from tkinter import *
 import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, TestingStuff, RaceMode, TutorialShortening, IDs, MusicShuffling, DriverArtDoomAdjustment, DebugLog
 import GUISettings
@@ -292,7 +292,7 @@ def Randomize():
         ShowTitleScreenText()
 
         # Runs all randomization
-        DebugFile = DebugLog.CreateDebugLog(OptionDictionary, Version, randoSeedEntry.get())
+        DebugLog.CreateDebugLog(OptionDictionary, Version, randoSeedEntry.get())
         RunOptions()
         RaceMode.SeedHash()
         randoProgressDisplay.config(text="Packing BDATs")
@@ -325,18 +325,23 @@ def RunOptions():
                     for subCommand in subOption["subCommandList"]:
                         try:
                             subCommand()
-                        except:
+                        except Exception as e:
+                            stack_trace = traceback.format_exc()
                             debugsuboption = subOption["subName"]
                             debugoption = option["name"]
                             print(f"The {debugsuboption} suboption (in {debugoption}) failed to complete randomization.")
+                            print(e)
+                            print(stack_trace)
             randoProgressDisplay.config(text=f"Randomizing {option['name']}")
             for command in option["commandList"]:
                 try:
                     command()
-                except:
+                except Exception as e:
+                    stack_trace = traceback.format_exc()
                     debugoption = option["name"]
                     print(f"The {debugoption} failed to complete randomization.")
- 
+                    print(e)
+                    print(stack_trace)
 def GenRandomSeed():
     randoSeedEntry.delete(0, END)
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())

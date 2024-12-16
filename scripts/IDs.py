@@ -1,6 +1,5 @@
 import Helper as Helper
 
-
 ValidReplacements = [] # Global Variable Referenced for JsonParser
 InvalidReplacements = [] # Global Variable Referenced for JsonParser
 CurrentSliderOdds = 100 # Global Variable Referenced for JsonParser

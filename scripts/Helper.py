@@ -20,10 +20,8 @@ def InsertHelper(insertIndex,  lowNum, highNum, mainString = str, pathTo = str):
 
 def FindValues(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue): # used to find a list of values from a file with certain characteristsics that i want to remove
     bad_values_found = []
-    
     with open(filePath, 'r+', encoding='utf-8') as file:
         data = json.load(file)
-        
         for row in data['rows']:
             for key, value in row.items():
                 if key in keyWordList and value in keywordBadValueList:
@@ -34,7 +32,6 @@ def FindValues(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue)
 
 def AdjustedFindBadValuesList(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue):
     bad_values_found = []
-    
     with open(filePath, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for j in range(0, len(keyWordList)):
@@ -42,8 +39,7 @@ def AdjustedFindBadValuesList(filePath, keyWordList, keywordBadValueList, return
                 for row in data['rows']:
                     if row[keyWordList[j]] == keywordBadValueList[i]:
                         bad_values_found.append(row[returnedKeyWordValue])
-                        break 
-    
+                        break
     #print(bad_values_found)
     return(bad_values_found)
 
@@ -54,7 +50,6 @@ def FindSubOptionValuesList(filePath, dictName, subDictName, subDictValue, retur
         for row in data["rows"]:
             if row[dictName][subDictName] == subDictValue:
                 bad_values.append(row[returndictValue])
-    
     print(bad_values)
     return(bad_values)
 
