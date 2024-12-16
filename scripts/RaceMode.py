@@ -23,10 +23,10 @@ def RaceModeChanging(OptionsRunDict):
     print("Setting Up Race Mode")    
     #EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
     #EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
-    
-    AreaList1 = [68] #41,
-    AreaList2 = [152] #99,
-    AreaList3 = [125,133,168] #, 125, 133,
+
+    AreaList1 = [41] #41, 68
+    AreaList2 = [99] #99, 152
+    AreaList3 = [125] #125, 133, 168
     AreaList4 = [175] #187
 
     AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
@@ -117,6 +117,7 @@ def RaceModeChanging(OptionsRunDict):
                         row["MAPJUMPID"] = 41
                         row["menuPriority"] = 1
                         row["MSGID"] = 63
+                        row["stoff_cndID"] = 2198
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
@@ -259,7 +260,7 @@ def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
             json.dump(data, file, indent=2, ensure_ascii=False)
         return NGPlusBladeCrystalIDs
 
-def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unlock requirements to the same condition as the final quest in a race-mode continent
+def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unlock requirements to the same condition as reaching the new race-mode continent
     KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]
     KeyAchievementIDs = list(set([x for x in KeyAchievementIDs if x != 0]))
     RelevantChosenIndices = [x for x in ChosenIndices if x != 9]
@@ -283,19 +284,14 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
     A3BladeIDs = [1011]
     A4BladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
 
-    ValidCrystalListIDs = set(Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45010) + [45016] + Helper.InclRange(45017,45048) + [45056, 45057])
-    ValidCrystalListIDs -= set(NGPlusBladeCrystalIDs)
-    ValidCrystalListIDs = list(ValidCrystalListIDs)
+    ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
+    ValidCrystalListIDs = [x for x in ValidCrystalListIDs if x not in NGPlusBladeCrystalIDs]
     CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
-    
-    for i in range(0, len(ValidCrystalListIDs)):
-        if i <= 11:
-            A1BladeIDs.append(CorrespondingBladeIDs[i])
-        if (i > 11) & (i <= 23):
-            A2BladeIDs.append(CorrespondingBladeIDs[i])
-        if (i > 22):
-            A3BladeIDs.append(CorrespondingBladeIDs[i])
-
+    A1BladeIDs = CorrespondingBladeIDs[:12]
+    del CorrespondingBladeIDs[:12]
+    A2BladeIDs = CorrespondingBladeIDs[:12]
+    del CorrespondingBladeIDs[:12]
+    A3BladeIDs = CorrespondingBladeIDs
     AllBladeIDs = [StarterBladeIDs, A1BladeIDs, A2BladeIDs, A3BladeIDs, A4BladeIDs]
 
     ArtandSkillCols = ["ArtsAchievement1", "ArtsAchievement2", "ArtsAchievement3", "SkillAchievement1", "SkillAchievement2", "SkillAchievement3"]
@@ -384,9 +380,9 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
-    NonNGPlusCoreCrystalIDs = set(Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45010) + [45016] + Helper.InclRange(45017,45048) + [45056, 45057])
-    NonNGPlusCoreCrystalIDs -= set(NGPlusBladeCrystalIDs)
-    NonNGPlusCoreCrystalIDs = list(NonNGPlusCoreCrystalIDs)
+    NonNGPlusCoreCrystalIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
+    NonNGPlusCoreCrystalIDs = [x for x in NonNGPlusCoreCrystalIDs if x not in NGPlusBladeCrystalIDs]
+    NonNGPlusCoreCrystalIDs.sort()
     A1CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12])
     del NonNGPlusCoreCrystalIDs[:12]
     A2CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12])
@@ -458,6 +454,8 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
     AllOtherMapIDs = [x for x in ValidTboxMapNames if x not in ListTboxFiles]
     for i in range(0, len(AllOtherMapIDs)):
         EnemyRandoLogic.ColumnAdjust(AllOtherMapIDs[i], ["Condition", "itm1Num", "itm2Num", "itm3Num", "itm4Num", "itm5Num", "itm6Num", "itm7Num", "itm8Num", "itm1ID", "itm2ID", "itm3ID", "itm4ID", "itm5ID", "itm6ID", "itm7ID", "itm8ID"], 0)
+    for i in range(0, len(ListTboxFiles)):
+        EnemyRandoLogic.ColumnAdjust(ListTboxFiles[i], ["Condition"], 0)
     for i in range(0, len(TBoxFiles)):
         for l in range(0, len(TBoxFiles[i])):
             if TBoxFiles[i][l] != 0:
@@ -742,6 +740,7 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
     random.shuffle(Area4XoharLocations)
     AllXoharLocations = [Area1XoharLocations, Area2XoharLocations, Area3XoharLocations, Area4XoharLocations]
     ACurBox = 0
+    XoharChestIDs = []
     for i in range(0, len(TBoxFiles)): # Shuffling the xohar fragments into the treasure chests
         ACurBox = 0
         for l in range(0, len(TBoxFiles[i])):
@@ -754,11 +753,13 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
                             if AllXoharLocations[i][ACurBox] != 0:
                                 row["itm8ID"] = AllXoharLocations[i][ACurBox]
                                 row["itm8Num"] = 1
+                                XoharChestIDs.append(row["$id"])
                                 #print(row["name"])
                             ACurBox = ACurBox + 1
                     file.seek(0)
                     file.truncate()
                     json.dump(data, file, indent=2, ensure_ascii=False)
+    DebugLog.DebugXoharLocations(XoharChestIDs)
     pass
 
 def DriverLvandSPFix():
@@ -789,7 +790,7 @@ def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy 
 
 def FindtheBladeNames(OptionsRunDict):
     if OptionsRunDict["Core Crystal Changes"]["optionTypeVal"].get():
-        ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45010) + [45016] + Helper.InclRange(45017,45048) + [45056, 45057]
+        ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
         CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
         CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
         CorrespondingBladeNames = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_ms/chr_bl_ms.json", ["$id"], CorrespondingBladeNameIDs, "name")
@@ -820,7 +821,7 @@ def PouchItemCarryCapacityIncrease(): # Set the max carry capacity of pouch item
     EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_FavoriteList.json", ["ValueMax"], 10)
 
 def DriverArtUpgradeCostChange(): # to reduce the amount of time spent menuing, a single manual (5000 WP) should be enough to upgrade an art to level 5
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP2", "NeedWP3", "NeedWP4", "NeedWP5"], 1000)
+    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP2", "NeedWP3", "NeedWP4", "NeedWP5"], 1250)
 
 def BladeTreeMaxRewardChange(): # When a blade skill tree completes, rewards that I already add to the item pool get given to the player, so I just replace the rewards with nothing.
     with open("./_internal/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file: 
