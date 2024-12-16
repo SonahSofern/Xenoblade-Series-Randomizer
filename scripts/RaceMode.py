@@ -6,6 +6,7 @@ from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipID
 import time
 import JSONParser
 import DebugLog
+import math
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
@@ -24,7 +25,7 @@ def RaceModeChanging(OptionsRunDict):
     #EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
     
     AreaList1 = [68] #41,
-    AreaList2 = [99,152] #99,
+    AreaList2 = [152] #99,
     AreaList3 = [125,133,168] #, 125, 133,
     AreaList4 = [175] #187
 
@@ -414,8 +415,12 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
         A2Equip.append(RaceModeAuxCoreIDs[i][A2Num])
         A3Equip.append(RaceModeAuxCoreIDs[i][A3Num])
         A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
+    AllEquipIDs = [A1Equip, A2Equip, A3Equip, A4Equip]
     Area1LootIDs = A1CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25249, 25264) * 2 + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2 + [25407] * 10
-    Area2LootIDs = A2CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25265, 25280) * 2 + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2 + [25407] * 10
+    if ChosenIndices[1] == 3: # Leftherian Archipelago (30ish chests)
+        Area2LootIDs = A2CoreCrystalIDs + [25305] * 2 + Helper.InclRange(25265, 25280) + [25450] * 2 + A2Equip + [25408] * 3 + [25220, 25220] + A2RaceModeCoreChipIDs + [25407] * 5
+    else: # Mor Ardain (70 ish chests)
+        Area2LootIDs = A2CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25265, 25280) * 2 + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2 + [25407] * 10
     # adjusting the loot pool depending on dungeon size
     if ChosenIndices[2] == 5: # tantal (52 chests)
         Area3LootIDs = A3CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25281, 25291) * 2 + [25450] * 3 + A3Equip * 2 + [25408] * 5 + [25221, 25221, 25221] + A3RaceModeCoreChipIDs * 2 + [25407] * 10    
@@ -427,7 +432,6 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
     random.shuffle(Area3LootIDs)
     random.shuffle(Area4LootIDs)
     AllAreaLootIDs = [Area1LootIDs, Area2LootIDs, Area3LootIDs, Area4LootIDs]
-    print(AllAreaLootIDs)
     TBoxFiles = [[0,0], [0,0], [0,0], [0,0]] # this needs to be changed to a for loop if i change the number of race mode dungeons (append [0,0])
     FileStart = "./_internal/JsonOutputs/common_gmk/"
     FileEnd = "_FLD_TboxPop.json"
@@ -468,9 +472,14 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
                     json.dump(data, file, indent=2, ensure_ascii=False)
     ItemsPerBox = []
     for i in range(0, len(AllAreaLootIDs)):
-        ItemsPerBox.append(len(AllAreaLootIDs[i])//BoxestoRandomizePerMap[i])
+        ItemsPerBox.append(int(math.ceil(len(AllAreaLootIDs[i])/BoxestoRandomizePerMap[i])))
         if ItemsPerBox[i] > 7:
             ItemsPerBox[i] = 7
+        else:
+            ItemtoChestDifference = int(math.ceil(len(AllAreaLootIDs[i])/BoxestoRandomizePerMap[i])) * BoxestoRandomizePerMap[i] - len(AllAreaLootIDs[i])
+            for j in range(0, ItemtoChestDifference):
+                AllAreaLootIDs[i].append(random.choice(AllEquipIDs[i])) # fill the rest with a random loot item from the relevant equipment pool
+            random.shuffle(AllAreaLootIDs[i])
     k = 0
     for i in range(0, len(TBoxFiles)):
         k = 0
@@ -499,12 +508,16 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
                                     row[f"itm{h+1}ID"] = AllAreaLootIDs[i][k]
                                     row[f"itm{h+1}Num"] = 1
                                     k = k + 1
+                                elif ItemsPerBox[i] < 7: # should help ensure items get placed if there's extra room
+                                        row["itm7ID"] = AllAreaLootIDs[i][k]
+                                        row["itm7Num"] = 1
+                                        k = k + 1
                     file.seek(0)
                     file.truncate()
                     json.dump(data, file, indent=2, ensure_ascii=False)
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Xohar Fragment Hunt"]["subOptionTypeVal"].get(): 
         print("Shuffling in Xohar Fragments")
-        XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices)
+        XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap)
         
 def ShyniniSaveUs(): # Just in case we don't get good blade field skills, we can rely on Shynini to always sell core crystals :D
     with open("./_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as file: 
@@ -644,7 +657,7 @@ def EnemyDropRemoval(): # Removes all enemy drops, to avoid getting powerful equ
     for i in range(1, 9):
         EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BTL_EnDropItem.json", [f"ItemID{i}", f"DropProb{i}", f"NoGetByEnh{i}", f"FirstNamed{i}"] , 0)
 
-def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap, ChosenIndices): # Experimental Mode to make players go out and find chests.
+def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to make players go out and find chests.
     XoharFragPreciousIDs = [25135, 25136, 25137, 25138] # for now fixed at 4, but if we change # of race mode dungeons or give the player that option, will need to change this
     FragmentNameIDs = [191, 192, 193, 194]
     CaptionIDs = [197, 199, 201, 206]

@@ -30,7 +30,7 @@ def FindValues(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue)
     # print("FindValues: " + bad_values_found)
     return(bad_values_found)
 
-def AdjustedFindBadValuesList(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue):
+def AdjustedFindBadValuesList(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue): # if one keywordBadValueList has 2 matches, it won't return the second one. 
     bad_values_found = []
     with open(filePath, 'r+', encoding='utf-8') as file:
         data = json.load(file)

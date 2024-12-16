@@ -67,7 +67,7 @@ def DebugCoreCrystalAddition(ValidCrystalListIDs, CorrespondingBladeNames):
         ChestFound = []
         for j in range(0, len(TreasureBoxestoCheck)):
             for k in range(1, 9):
-                ChestFound.extend((Helper.AdjustedFindBadValuesList(TreasureBoxestoCheck[j], [f"itm{k}ID"], [ValidCrystalListIDs[i]],"$id")))
+                ChestFound.extend((Helper.FindValues(TreasureBoxestoCheck[j], [f"itm{k}ID"], [ValidCrystalListIDs[i]],"$id")))
         ChestFound.sort()
         alllines.append(f"Crystal ID: {ValidCrystalListIDs[i]}; Name: {CorrespondingBladeNames[i]}; Chests: {', '.join(str(ChestID) for ChestID in ChestFound)}\n")
     alllines.append("\n")
