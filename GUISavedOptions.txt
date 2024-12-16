@@ -1,2 +1,3 @@
-Calibri
-14
+Cambria
+15
+Light Mode

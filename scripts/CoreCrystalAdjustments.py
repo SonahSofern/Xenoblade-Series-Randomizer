@@ -98,7 +98,7 @@ def AdjustingCrystalList():
         json.dump(data, file, indent=2, ensure_ascii=False)
          
 def LandofChallengeRelease(): #frees shulk, elma, fiora from land of challenge restriction
-    EnemyRandoLogic.SubColumnAdjust("./_internal/JsonOutputs/common/CHR_Bl.json", "Flag", "OnlyChBtl", 0)
+    Helper.SubColumnAdjust("./_internal/JsonOutputs/common/CHR_Bl.json", "Flag", "OnlyChBtl", 0)
 
 def CoreCrystalChanges():
     AllRareBlades()

@@ -15,6 +15,8 @@ JsonOutput = "./_internal/JsonOutputs"
 OptionDictionary = {}
 rowIncrement = 0
 MaxWidth = 1000
+windowWidth = "1000"
+windowHeight = "800"
 
 
 OptionColorLight = White
@@ -27,9 +29,10 @@ GUISettings.LoadTheme(defaultFont)
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
 root.config(background=DarkerPurple)
-root.geometry('1000x900')
+root.geometry(f'{windowWidth}x{windowHeight}')
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
+root.overrideredirect(True)
 
 # The Notebook
 MainWindow = ttk.Notebook(root, height=5)
@@ -71,7 +74,8 @@ TabFunny = Frame(TabFunnyCanvas)
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
         scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
-        Canvases[i].config(yscrollcommand=scrollbar.set, background=DarkerPurple, borderwidth=0, relief="flat")
+        Canvases[i].config(yscrollcommand=scrollbar.set, background=DarkerPurple, borderwidth=0, relief="flat", highlightthickness=0)
+        # OuterFrames[i].config(borderwidth=0, relief="flat")
         InnerFrames[i].bind("<Configure>", lambda e, canvas=Canvases[i]: canvas.configure(scrollregion=canvas.bbox("all")))
   
         OuterFrames[i].pack_propagate(False)

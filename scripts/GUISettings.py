@@ -190,12 +190,11 @@ def LoadTheme(defaultFont):
         },
         "TScrollbar": {
             "configure": {
-                "foreground": darkColor,
                 "troughcolor": midColor,
                 "background": darkColor,
                 "borderwidth": 0,
                 "relief": "flat",
-                "arrowcolor": midColor,
+                "arrowcolor": lightColor,
             }
         },
         "TLabel": {
