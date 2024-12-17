@@ -29,7 +29,6 @@ BladeTreeUnlockConditions = Helper.InclRange(1,1768)
 BladeNames = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 52, 53, 54, 55, 78, 79, 56, 58, 57, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 59, 75, 76, 77, 45, 46, 47, 48, 49, 50, 51, 45, 57, 45, 49, 50, 51, 76, 102, 103, 104, 105, 106, 107, 108]
 Jingles = Helper.InclRange(101,116)
 CollectionPointMaterials = [x for x in Helper.InclRange(30001,30445) if x not in [30232, 30233, 30237, 30236, 30243, 30244, 30245, 30246]]
-AllValues = Helper.InclRange(0,1000000)
 Deeds = Helper.InclRange(25249,25300)
 AllMusicIDs = Helper.InclRange(1,180)
 EnemyBattleMusicIDs = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 41, 43, 44, 49, 62, 63, 67, 68, 69, 71, 74, 75, 76, 84]

@@ -1,7 +1,7 @@
 import json, random, os, IDs
 
 
-def ChangeJSONFile(Filename, keyWords, rangeofValuesToReplace, rangeValidReplacements = [], InvalidTargetIDs = [], SliderOdds = 100): # make this a function to reuse, check the settings ot see if we even do this
+def ChangeJSONFile(Filename, keyWords, rangeofValuesToReplace = [], rangeValidReplacements = [], InvalidTargetIDs = [], SliderOdds = 100): # make this a function to reuse, check the settings ot see if we even do this
 
     # print(f"Valid Replacements: {Replacements}")
     SliderOdds = IDs.CurrentSliderOdds
@@ -18,7 +18,7 @@ def ChangeJSONFile(Filename, keyWords, rangeofValuesToReplace, rangeValidReplace
                 if not item["$id"] in InvalidTargetIDs:
                     for key in item:  
                         if key in keyWords:
-                            if ((item[key] in rangeofValuesToReplace) and (SliderOdds >= random.randint(1,100))):
+                            if (((rangeofValuesToReplace == []) or (item[key] in rangeofValuesToReplace)) and (SliderOdds >= random.randint(1,100))):
                                 item[key] = random.choice(rangeValidReplacements)
                         elif key == "Flag":
                             for flag, flagVal in item[key].items():

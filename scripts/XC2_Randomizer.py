@@ -25,28 +25,27 @@ root = Tk()
 fontNameSizeDefault = ["", 12]
 SavedOptions.loadData(fontNameSizeDefault, "GUISavedOptions.txt") # Might be able to do this with theme updating them,e instead of this
 defaultFont = Font(family=fontNameSizeDefault[0], size=fontNameSizeDefault[1])
-GUISettings.LoadTheme(defaultFont)
+GUISettings.LoadTheme(defaultFont, root)
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
-root.config(background=DarkerPurple)
 root.geometry(f'{windowWidth}x{windowHeight}')
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
-root.overrideredirect(True)
+# root.overrideredirect(True) # removes window top bar
 
 # The Notebook
 MainWindow = ttk.Notebook(root, height=5)
 
 # Frames in the notebook
 TabGeneralOuter = ttk.Frame(MainWindow) 
-TabDriversOuter = Frame(MainWindow) 
-TabBladesOuter = Frame(MainWindow) 
-TabEnemiesOuter = Frame(MainWindow) 
-TabMiscOuter = Frame(MainWindow) 
-TabQOLOuter = Frame(MainWindow)
-TabCosmeticsOuter = Frame(MainWindow)
-TabRaceModeOuter = Frame(MainWindow)
-TabFunnyOuter = Frame(MainWindow)
+TabDriversOuter = ttk.Frame(MainWindow) 
+TabBladesOuter = ttk.Frame(MainWindow) 
+TabEnemiesOuter = ttk.Frame(MainWindow) 
+TabMiscOuter = ttk.Frame(MainWindow) 
+TabQOLOuter = ttk.Frame(MainWindow)
+TabCosmeticsOuter = ttk.Frame(MainWindow)
+TabRaceModeOuter = ttk.Frame(MainWindow)
+TabFunnyOuter = ttk.Frame(MainWindow)
 
 # Canvas 
 TabGeneralCanvas = Canvas(TabGeneralOuter) 
@@ -61,14 +60,14 @@ TabFunnyCanvas = Canvas(TabFunnyOuter)
 
 # Actual Scrollable Content
 TabGeneral = ttk.Frame(TabGeneralCanvas) 
-TabDrivers = Frame(TabDriversCanvas) 
-TabBlades = Frame(TabBladesCanvas)
-TabEnemies = Frame(TabEnemiesCanvas) 
-TabMisc = Frame(TabMiscCanvas)
-TabQOL = Frame(TabQOLCanvas)
-TabCosmetics = Frame(TabCosmeticsCanvas)
-TabRaceMode = Frame(TabRaceModeCanvas)
-TabFunny = Frame(TabFunnyCanvas)
+TabDrivers = ttk.Frame(TabDriversCanvas) 
+TabBlades = ttk.Frame(TabBladesCanvas)
+TabEnemies = ttk.Frame(TabEnemiesCanvas) 
+TabMisc = ttk.Frame(TabMiscCanvas)
+TabQOL = ttk.Frame(TabQOLCanvas)
+TabCosmetics = ttk.Frame(TabCosmeticsCanvas)
+TabRaceMode = ttk.Frame(TabRaceModeCanvas)
+TabFunny = ttk.Frame(TabFunnyCanvas)
 
 
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
@@ -140,7 +139,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         optionType = var
     elif (optionType == Scale):
         var = IntVar()
-        optionTypeObj = ttk.Scale(optionPanel, from_=0, to=100, orient= HORIZONTAL, variable=var)
+        optionTypeObj = ttk.Spinbox(optionPanel, from_=0, to=100, textvariable=var, wrap=True, width=3, increment=10)
         optionDesc = ttk.Label(optionPanel, text=description, anchor='w')
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
@@ -235,7 +234,7 @@ def Options():
 
 
     GenStandardOption("Projectile Treasure Chests", TabFunny, "Launches your items from chests", [lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [12])])
-    GenStandardOption("Blade Size", TabFunny, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Scale", "WpnScale"], AllValues, Helper.InclRange(1,250) + [1000,16000])], optionType= Scale) # Make sure these work for common blades
+    GenStandardOption("Blade Size", TabFunny, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Scale", "WpnScale"], [], Helper.InclRange(1,250) + [1000,16000])], optionType= Scale) # Make sure these work for common blades
     GenStandardOption("NPCs Size", TabFunny, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSONFile(["common/RSC_NpcList.json"], ["Scale"], Helper.InclRange(1,100), Helper.InclRange(1,250))], optionType=Scale)
     GenStandardOption("Enemy Size", TabFunny, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"], ["Scale"], Helper.InclRange(0, 1000), Helper.InclRange(1, 200) + Helper.InclRange(990,1000))], optionType=Scale)
 
@@ -340,7 +339,6 @@ def GenRandomSeed():
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
 Options()
-GUISettings.NotebookFocusStyleFix()
 
 bdatcommonFrame = ttk.Frame(root)
 bdatcommonFrame.pack(anchor="w", padx=10)
@@ -369,7 +367,7 @@ Cog = PhotoImage(file="./_internal/Images/SmallSettingsCog.png")
 SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
-randoProgressDisplay = ttk.Label(text="", anchor="e", foreground=OptionColorLight)
+randoProgressDisplay = ttk.Label(text="", anchor="e", foreground=OptionColorLight, background=DarkerPurple, padding=2)
 
 EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()])
 SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")

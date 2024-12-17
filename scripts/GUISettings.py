@@ -2,18 +2,6 @@ from tkinter import *
 from UI_Colors import *
 from tkinter import font, ttk
 
-def NotebookFocusStyleFix():
-    style = ttk.Style()
-    style.layout("Tab",
-    [('Notebook.tab', {'sticky': 'nswe', 'children':
-        [('Notebook.padding', {'side': 'top', 'sticky': 'nswe', 'children':
-            #[('Notebook.focus', {'side': 'top', 'sticky': 'nswe', 'children':
-                [('Notebook.label', {'side': 'top', 'sticky': ''})],
-            #})],
-        })],
-    })]
-    )
-
 def OpenSettingsWindow(rootWindow, defaultFont):
     newWindow = Toplevel(rootWindow)
     iter = 0
@@ -96,30 +84,15 @@ def ToggleLightDarkMode(togButton):
     else:
         togButton.config(text="Dark Mode")
 
-def LoadDarkTheme(root):
-    style = ttk.Style()
-    style.theme_use('Dark')
-    NotebookFocusStyleFix()
-    root.configure(background=DarkerPurple) # Root Background
-    # Cog
-    # Top Bar
-    # Center Screen Stuff
-    # Run this at launch find a better condition to check
-
-
-def LoadLightTheme(root):
-    style = ttk.Style()
-    style.theme_use('Light')
-    NotebookFocusStyleFix()
-
-def LoadTheme(defaultFont):
+def LoadTheme(defaultFont, root):
     
     style=ttk.Style()
     
-    darkColor = Black
+    darkColor = LightBlack
     lightColor = White
     backgroundColor = DarkerPurple
     midColor = DarkGray
+    root.config(background=DarkerPurple)
     style.theme_create('Main', settings={
         ".": {
             "configure": {
@@ -130,8 +103,8 @@ def LoadTheme(defaultFont):
             "configure": {
                 "font": defaultFont,
                 "background": backgroundColor,
-                "borderwidth": 0,
-                "relief": "flat",
+                "borderwidth": 4,
+                "relief": "ridge",
             }
         },
         "TNotebook.Tab": {
@@ -141,7 +114,8 @@ def LoadTheme(defaultFont):
                 "font": defaultFont,
                 "foreground": lightColor,
                 "bordercolor": darkColor,
-                "borderwidth":0,
+                "borderwidth": 2,
+                "focuscolor":"",# Checkbutton focus border
             },
             "map": {
                 "background": [("selected", midColor), ("active", midColor)]
@@ -152,8 +126,11 @@ def LoadTheme(defaultFont):
                 "background": darkColor,
                 "foreground": lightColor,
                 "font": defaultFont,
-                "borderwidth": 1,
+                "reliefcolor": lightColor,
                 "padding": (5,3,5,3),
+                "focuscolor":"",
+                "relief": "ridge",
+                
             },
             "map": {
                 "background": [("active", midColor)],
@@ -168,6 +145,7 @@ def LoadTheme(defaultFont):
                 "indicatorbackground": darkColor,
                 "font": defaultFont,
                 "indicatorrelief": "flat",
+                "focuscolor":"",
             },
             "map": {
                 "indicatorcolor": [("selected", lightColor),("active", midColor)],
@@ -180,11 +158,11 @@ def LoadTheme(defaultFont):
                 "foreground": lightColor,
                 "font": defaultFont,
                 "fieldbackground": darkColor,
-                "padding": 5,
-                "borderwidth": 0,
-                "relief": "flat",
+                "padding": (5,3,5,3),
                 "selectbackground": lightColor,
                 "selectforeground": darkColor,
+                "selectborderwidth": 0,
+                "relief":"ridge",
                 "insertcolor": lightColor,
             }
         },
@@ -192,8 +170,8 @@ def LoadTheme(defaultFont):
             "configure": {
                 "troughcolor": midColor,
                 "background": darkColor,
-                "borderwidth": 0,
-                "relief": "flat",
+                "borderwidth": 3,
+                "relief": "ridge",
                 "arrowcolor": lightColor,
             }
         },
@@ -203,14 +181,13 @@ def LoadTheme(defaultFont):
                 "background": darkColor,
                 "troughcolor": darkColor,
                 "borderwidth": 0,
-                "relief": "flat",
                 "padding": (20, 10),
             }
         },
         "TFrame": {
             "configure": {
                 "background": darkColor,
-                "foreground": backgroundColor,
+                "relief": "flat",
             }
         },
         "TScale": {
@@ -225,6 +202,19 @@ def LoadTheme(defaultFont):
                 "borderwidth": 1,
                 "sliderwidth": 100,
             }
+        },
+        "TSpinbox": {
+            "configure": {
+                "background": darkColor,
+                "foreground": lightColor,
+                "fieldbackground": midColor,
+                "darkcolor": darkColor,
+                "lightcolor": darkColor,
+                "selectbackground": midColor,
+                "insertcolor": midColor,
+                "relief": "ridge"
+                
+            }
         }
     })
   
@@ -233,5 +223,11 @@ def LoadTheme(defaultFont):
     
     
     
-    
+# Light mode
+# Toggle Light/Dark Button
+# Load theme at start
+# Make custom topbar
+# Alternating colors or Seperator
+
+
 # Make setting that turns off or on all inputs boxes/sliders etc.

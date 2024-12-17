@@ -50,7 +50,7 @@ def BalancingSkillTreeRando(OptionsRunDict):
             for row in data["rows"]:
                 row["SkillID"] = CurrList[row["$id"] - 1]
                 if row["$id"] == 1 and OptionsRunDict["Early Arts Cancel"]["optionTypeVal"].get():
-                    print("Arts Cancel is Tier 1, and the trees are random.")
+                    # print("Arts Cancel is Tier 1, and the trees are random.")
                     row["NeedSp"] = 0
             file.seek(0)
             file.truncate()

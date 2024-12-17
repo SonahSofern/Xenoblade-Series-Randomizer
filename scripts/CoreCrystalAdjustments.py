@@ -1,8 +1,9 @@
 import EnemyRandoLogic as EnemyRandoLogic
 import json
-import math
 import Helper as Helper
 import random
+import JSONParser
+
 
 FLDSkillMaxLv = [3, 5, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 3, 5, 3, 3, 3, 5, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 5, 3, 3, 5, 3, 5, 3, 3, 5, 5, 5, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 5, 5]
 # Helper.FindValues("./_internal/JsonOutputs/common/FLD_FieldSkillList.json", ["$id"], Helper.inclRange(2, 7) + Helper.inclRange(9,74), "MaxLevel")
@@ -17,9 +18,10 @@ BladeIDs = [1008, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1050, 1023, 10
 
 ValidCrystalListIDs = Helper.InclRange(45002,45010) + [45016] + Helper.InclRange(45017,45047) + [45056, 45057]
 
-FieldSkillAchievementIDs = [12, 13, 14, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84, 92, 93, 94, 102, 103, 104, 112, 113, 114, 122, 123, 124, 132, 133, 134, 142, 143, 144, 152, 153, 154, 162, 163, 164, 172, 173, 174, 182, 183, 184, 192, 193, 194, 202, 203, 204, 212, 213, 214, 222, 223, 224, 232, 233, 234, 242, 243, 244, 252, 253, 254, 262, 263, 264, 272, 273, 274, 282, 283, 284, 292, 293, 294, 302, 303, 304, 312, 313, 314, 322, 323, 324, 332, 333, 334, 342, 343, 344, 352, 353, 354, 362, 363, 364, 372, 373, 374, 382, 383, 384, 392, 393, 394, 402, 403, 404, 412, 413, 414, 422, 423, 424, 432, 433, 434, 442, 443, 444, 452, 453, 454, 462, 463, 464, 1645, 1646, 1647, 1655, 1656, 1657, 1665, 1666, 1667, 1675, 1676, 1677, 1746, 1747, 1748, 1756, 1757, 1758, 1766, 1767, 1768]
+FieldSkillAchievementIDs = Helper.InclRange(1,3824)
+ChangeableFieldSkillAchievementIDs = [12, 13, 14, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84, 92, 93, 94, 102, 103, 104, 112, 113, 114, 122, 123, 124, 132, 133, 134, 142, 143, 144, 152, 153, 154, 162, 163, 164, 172, 173, 174, 182, 183, 184, 192, 193, 194, 202, 203, 204, 212, 213, 214, 222, 223, 224, 232, 233, 234, 242, 243, 244, 252, 253, 254, 262, 263, 264, 272, 273, 274, 282, 283, 284, 292, 293, 294, 302, 303, 304, 312, 313, 314, 322, 323, 324, 332, 333, 334, 342, 343, 344, 352, 353, 354, 362, 363, 364, 372, 373, 374, 382, 383, 384, 392, 393, 394, 402, 403, 404, 412, 413, 414, 422, 423, 424, 432, 433, 434, 442, 443, 444, 452, 453, 454, 462, 463, 464, 1645, 1646, 1647, 1655, 1656, 1657, 1665, 1666, 1667, 1675, 1676, 1677, 1746, 1747, 1748, 1756, 1757, 1758, 1766, 1767, 1768]
 
-def AllRareBlades(): # makes it so all blades are equally likely to be pulled
+def RareBladeProbabilityEqualizer(): # makes it so all blades are equally likely to be pulled
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Condition", "Assure1", "Assure2", "Assure3", "Assure4", "Assure5"] , 0)
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Prob1", "Prob2", "Prob3", "Prob4", "Prob5"] , 1)
 
@@ -45,7 +47,7 @@ def FieldSkillLevelAdjustment():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-
+    # JSONParser.ChangeJSONFile("common/FLD_AchievementSet.json",Helper.StartsWith("AchievementID",1,5), Helper.InclRange(1,3824), [40], (x for x in FieldSkillAchievementIDs if x in ChangeableFieldSkillAchievementIDs) )
 def ChangeRankCondition(): # This breaks the blades currently, not letting you unlock them at all
     # Changes the requirement to unlock trust level of blade from some weird ones like money to trust values instead (Boreas, etc)
     KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]
@@ -101,7 +103,7 @@ def LandofChallengeRelease(): #frees shulk, elma, fiora from land of challenge r
     Helper.SubColumnAdjust("./_internal/JsonOutputs/common/CHR_Bl.json", "Flag", "OnlyChBtl", 0)
 
 def CoreCrystalChanges():
-    AllRareBlades()
+    RareBladeProbabilityEqualizer()
     AdjustingCrystalList()
     LandofChallengeRelease()
     #ChangeRankCondition()
