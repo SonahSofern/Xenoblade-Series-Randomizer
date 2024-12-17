@@ -92,13 +92,11 @@ def LoadTheme(defaultFont, root):
     lightColor = White
     backgroundColor = DarkerPurple
     midColor = DarkGray
-    root.config(background=DarkerPurple)
+    root.config(background=backgroundColor)
+    
+
+    
     style.theme_create('Main', settings={
-        ".": {
-            "configure": {
-                "background": backgroundColor,
-            }
-        },
         "TNotebook": {
             "configure": {
                 "font": defaultFont,
@@ -141,11 +139,12 @@ def LoadTheme(defaultFont, root):
                 "background": darkColor,
                 "foreground": lightColor,
                 "padding": (40,3,50,3),
-                "indicatorcolor": darkColor,
-                "indicatorbackground": darkColor,
+                "indicatorcolor": midColor,
+                "indicatorbackground": midColor,
                 "font": defaultFont,
                 "indicatorrelief": "flat",
                 "focuscolor":"",
+                "indicatormargin": (0,0,20,0),
             },
             "map": {
                 "indicatorcolor": [("selected", lightColor),("active", midColor)],
