@@ -8,7 +8,6 @@ from Cosmetics import *
 from UI_Colors import *
 from tkinter.font import Font
 
-
 Version = "0.1.0"
 CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
@@ -17,12 +16,8 @@ rowIncrement = 0
 MaxWidth = 1000
 windowWidth = "1000"
 windowHeight = "800"
-
-
 OptionColorLight = White
 OptionColorDark = Gray
-
-
 
 root = Tk()
 
@@ -33,6 +28,7 @@ GUISettings.LoadTheme(defaultFont, root)
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
 root.geometry(f'{windowWidth}x{windowHeight}')
+root.config(background=DarkerPurple)
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
 # root.overrideredirect(True) # removes window top bar
@@ -129,7 +125,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     var = BooleanVar()
     style = ttk.Style()
     style.configure("midColor.TCheckbutton", padding=(20, 10))
-    optionTypeObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=45,style="midColor.TCheckbutton")
+    optionTypeObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=40,style="midColor.TCheckbutton")
     optionTypeObj.grid(row=rowIncrement, column=0, sticky="e")
     optionType = var
     
@@ -156,7 +152,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     # Create Suboptions Dictionary Entry
     for i in range((len(subOptionName_subCommandList))//2):
         var = BooleanVar()
-        checkBox = ttk.Checkbutton(optionPanel, text=subOptionName_subCommandList[2*i], variable=var)
+        checkBox = ttk.Checkbutton(optionPanel, text=subOptionName_subCommandList[2*i], variable=var, width=35)
         checkBox.grid(row=rowIncrement+i+1, column=0, sticky="sw")
 
         OptionDictionary[optionName]["subOptionObjects"][subOptionName_subCommandList[2*i]] = {
@@ -207,7 +203,6 @@ def Options():
     
     # Misc
     GenStandardOption("Music", TabMisc, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle(OptionDictionary)], ["Seperate Battle and Environment Themes", []]) # need to change title screen music
-
     # GenDictionary("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.InclRange(0,3721), Helper.InclRange(2001,3721))])
     # GenOption("Funny Faces", TabMisc, "Randomizes Facial Expressions", ["common/EVT_eyetype.json"], ["$id"], Helper.inclRange(0,15), Helper.inclRange(0,15)) # doesnt work yet
     # GenDictionary("Menu Colors", TabMisc, "Randomizes Colors in the UI", [lambda: JSONParser.ChangeJSON(["common/MNU_ColorList.json"], ["col_r", "col_g", "col_b"], Helper.InclRange(0,255), Helper.InclRange(0,0))])
@@ -222,12 +217,11 @@ def Options():
     GenStandardOption("Treasure Chest Visibility", TabQOL, "Increases the range you can see treasure chests from", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["msgVisible", "msgdigVisible"], Helper.InclRange(0,200), [255])])
     GenStandardOption("Freely Engage Blades", TabQOL, "Allows blades to be freely engaged by all valid drivers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["FreeEngage"], [0], [1], [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1075, 1076, 1103])])
 
-
+    # Funny
     GenStandardOption("Projectile Treasure Chests", TabFunny, "Launches your items from chests", [lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [12])])
     GenStandardOption("Blade Size", TabFunny, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Scale", "WpnScale"], [], Helper.InclRange(1,250) + [1000,16000])], optionType= Scale) # Make sure these work for common blades
     GenStandardOption("NPCs Size", TabFunny, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSONFile(["common/RSC_NpcList.json"], ["Scale"], Helper.InclRange(1,100), Helper.InclRange(1,250))], optionType=Scale)
     GenStandardOption("Enemy Size", TabFunny, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"], ["Scale"], Helper.InclRange(0, 1000), Helper.InclRange(1, 200) + Helper.InclRange(990,1000))], optionType=Scale)
-
 
     # Cosmetics
     GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics(OptionDictionary)], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics, Scale, OptionColorLight)

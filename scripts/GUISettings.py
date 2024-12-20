@@ -10,7 +10,7 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     newWindow.title("GUI Settings")
     newWindow.geometry("800x100")
     allFonts = font.families()
-
+    newWindow.config(background=DarkerPurple)
     
     def LoadFontByName(name):
         defaultFont.config(family=name)
@@ -61,11 +61,11 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     fontNameVar.trace_add("write", lambda name, index, mode: LoadFontByName(fontNameVar.get()))
     fontSizeVar.trace_add("write", lambda name, index, mode: LoadFontSize(fontSizeVar.get()))
     
-    fontTestBack = Button(newWindow, text="Previous", command=PreviousFont, font=("Arial", 16))
-    fontName = Entry(newWindow, width=20, font=("Arial", 16), textvariable=fontNameVar)
-    fontTestNext = Button(newWindow, text="Next", command=NextFont, font=("Arial", 16))
-    saveFont = Button(newWindow, text="Save", command=SaveUIChanges, font=("Arial", 16))
-    fontSize = Entry(newWindow, width=3, font=("Arial", 16), textvariable=fontSizeVar)
+    fontTestBack = ttk.Button(newWindow, text="Previous", command=PreviousFont)
+    fontName = ttk.Entry(newWindow, width=20, textvariable=fontNameVar)
+    fontTestNext = ttk.Button(newWindow, text="Next", command=NextFont)
+    saveFont = ttk.Button(newWindow, text="Save", command=SaveUIChanges)
+    fontSize = ttk.Entry(newWindow, textvariable=fontSizeVar)
     fontSize.delete(0, END)
     fontSize.insert(0,defaultFont.cget("size"))
     fontName.delete(0, END)
@@ -75,7 +75,7 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     fontTestBack.pack(padx=5, pady=2, side='left', anchor="nw")
     fontTestNext.pack( padx=5, pady=2, side='left', anchor="nw")
     saveFont.pack( padx=5, pady=2, anchor="nw")
-    darkMode = Button(newWindow, text="Light Mode", command=lambda: ToggleLightDarkMode(darkMode), font=("Arial", 16))
+    darkMode = ttk.Button(newWindow, text="Light Mode", command=lambda: ToggleLightDarkMode(darkMode))
     darkMode.pack(padx=2, pady=2, anchor="w")
     
 def ToggleLightDarkMode(togButton):
@@ -88,14 +88,11 @@ darkColor = LightBlack
 lightColor = White
 backgroundColor = DarkerPurple
 midColor = DarkGray
+midGray = MediumGray
 
 def LoadTheme(defaultFont, root):
     
     style=ttk.Style()
-
-    root.config(background=backgroundColor)
-    
-
     
     style.theme_create('Main', settings={
         "TNotebook": {
@@ -138,7 +135,7 @@ def LoadTheme(defaultFont, root):
         "TCheckbutton": {
             "configure": {
                 "background": darkColor,
-                "foreground": midColor,
+                "foreground": midGray,
                 "padding": (40,3,50,3),
                 "indicatorcolor": midColor,
                 "indicatorbackground": midColor,
@@ -178,7 +175,7 @@ def LoadTheme(defaultFont, root):
         },
         "TLabel": {
             "configure": {
-                "foreground": lightColor,
+                "foreground": midGray,
                 "background": darkColor,
                 "troughcolor": darkColor,
                 "borderwidth": 0,
