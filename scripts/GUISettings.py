@@ -83,15 +83,16 @@ def ToggleLightDarkMode(togButton):
         togButton.config(text="Light Mode")
     else:
         togButton.config(text="Dark Mode")
+    
+darkColor = LightBlack
+lightColor = White
+backgroundColor = DarkerPurple
+midColor = DarkGray
 
 def LoadTheme(defaultFont, root):
     
     style=ttk.Style()
-    
-    darkColor = LightBlack
-    lightColor = White
-    backgroundColor = DarkerPurple
-    midColor = DarkGray
+
     root.config(background=backgroundColor)
     
 
@@ -137,18 +138,19 @@ def LoadTheme(defaultFont, root):
         "TCheckbutton": {
             "configure": {
                 "background": darkColor,
-                "foreground": lightColor,
+                "foreground": midColor,
                 "padding": (40,3,50,3),
                 "indicatorcolor": midColor,
                 "indicatorbackground": midColor,
                 "font": defaultFont,
                 "indicatorrelief": "flat",
                 "focuscolor":"",
-                "indicatormargin": (0,0,20,0),
+                "indicatormargin": (0,0,10,0),
             },
             "map": {
                 "indicatorcolor": [("selected", lightColor),("active", midColor)],
                 "background": [("active", midColor)],
+                "foreground": [("active", lightColor),("selected", lightColor)],
                 "indicatorbackground": [("active", midColor)],
             }
         },
@@ -187,6 +189,10 @@ def LoadTheme(defaultFont, root):
             "configure": {
                 "background": darkColor,
                 "relief": "flat",
+            },
+                        "map": {
+                "background": [("active", midColor)],
+                "foreground": [("active", lightColor),("selected", lightColor)],
             }
         },
         "TScale": {
@@ -216,7 +222,8 @@ def LoadTheme(defaultFont, root):
             }
         }
     })
-  
+    style.configure("midColor.TCheckbutton", background=lightColor)
+    style.configure("darkColor.TCheckbutton", background=darkColor)
     style.theme_use('Main')
     
     
@@ -227,6 +234,5 @@ def LoadTheme(defaultFont, root):
 # Load theme at start
 # Make custom topbar
 # Alternating colors or Seperator
-
 
 # Make setting that turns off or on all inputs boxes/sliders etc.

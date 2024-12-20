@@ -12,7 +12,7 @@ import random
 # priority column, value 0 is highest priority, will always play if given a choice of multiple songs. prio goes down as prio # goes up
 # I don't know what causes the cave music and gormott lower music to play over other themes tbh.
 
-def SeparateBGMandBattle(OptionsRunDict):
+def MusicShuffle(OptionsRunDict):
     if OptionsRunDict["Music"]["subOptionObjects"]["Seperate Battle and Environment Themes"]["subOptionTypeVal"].get():
         with open("./_internal/JsonOutputs/common/RSC_BgmList.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
@@ -24,9 +24,7 @@ def SeparateBGMandBattle(OptionsRunDict):
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)  
-        Helper.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listBf.json", ["edBgm"], 0)
     else:
         JSONParser.ChangeJSONFile(["common/RSC_BgmList.json"], ["filename"], NonBattleMusicMOVs + EnemyBattleMusicMOVs, NonBattleMusicMOVs + EnemyBattleMusicMOVs)
-        Helper.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listBf.json", ["edBgm"], 0)
-        pass
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listBf.json", ["edBgm"], 0)
 

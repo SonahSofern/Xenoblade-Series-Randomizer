@@ -21,7 +21,11 @@ windowHeight = "800"
 
 OptionColorLight = White
 OptionColorDark = Gray
+
+
+
 root = Tk()
+
 fontNameSizeDefault = ["", 12]
 SavedOptions.loadData(fontNameSizeDefault, "GUISavedOptions.txt") # Might be able to do this with theme updating them,e instead of this
 defaultFont = Font(family=fontNameSizeDefault[0], size=fontNameSizeDefault[1])
@@ -96,11 +100,11 @@ MainWindow.add(TabGeneralOuter, text ='General')
 MainWindow.add(TabDriversOuter, text ='Drivers') 
 MainWindow.add(TabBladesOuter, text ='Blades') 
 MainWindow.add(TabEnemiesOuter, text ='Enemies') 
-MainWindow.add(TabMiscOuter, text ='Misc.') 
-MainWindow.add(TabQOLOuter, text = 'Quality of Life')
 MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
+MainWindow.add(TabQOLOuter, text = 'Quality of Life')
 MainWindow.add(TabRaceModeOuter, text='Race Mode')
 MainWindow.add(TabFunnyOuter, text='Funny')
+MainWindow.add(TabMiscOuter, text ='Misc.') 
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 def ShowTitleScreenText():
@@ -118,56 +122,29 @@ def GenHeader(headerName, parentTab, backgroundColor):
 def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton, optionColor = ""):   
     global OptionDictionary
     global rowIncrement 
-    # Create Option Color
-    try:
-        style = ttk.Style()
-        style.theme_create('LightOption', settings={
-            "TLabel": {
-                "configure": {
-                    "foreground": White,
-                    "background": White,
-                    "borderwidth": 0,
-                    "padding": (20, 10),
-                }
-            },
-            
-        })
-    except:
-        pass
-    if (optionColor == ""):
-        if (rowIncrement %2 == 0):
-            optionColor = 'LightOption.TLabel'
-        else:
-            optionColor = 'LightOption.TLabel'
-
+    
     optionPanel = ttk.Frame(parentTab)
     optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
 
-    # Create Option Name
-    option = ttk.Label(optionPanel, text=optionName, width=30, anchor="w", wraplength=350)
-    option.grid(row=rowIncrement, column=0, sticky="sw")
+    var = BooleanVar()
+    style = ttk.Style()
+    style.configure("midColor.TCheckbutton", padding=(20, 10))
+    optionTypeObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=45,style="midColor.TCheckbutton")
+    optionTypeObj.grid(row=rowIncrement, column=0, sticky="e")
+    optionType = var
+    
+    optionDesc = ttk.Label(optionPanel, text=f"{description}", anchor="w")
+    optionDesc.grid(row=rowIncrement, column=1, sticky="sw", padx=0)
+    
 
-    # Create Option Interactable
-    if (optionType == Checkbutton):
-        var = BooleanVar()
-        optionTypeObj = ttk.Checkbutton(optionPanel, variable= var, text=description)
-        optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
-        optionType = var
-    elif (optionType == Scale):
+    if (optionType == Scale):
         var = IntVar()
         optionTypeObj = ttk.Spinbox(optionPanel, from_=0, to=100, textvariable=var, wrap=True, width=3, increment=10)
-        optionDesc = ttk.Label(optionPanel, text=description, anchor='w')
+        optionDesc = ttk.Label(optionPanel, anchor='w')
         optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
         optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
         optionType = var
-    # elif (optionType == Entry):
-    #     optionTypeMin = Entry(optionPanel, background=OptionColor, highlightthickness=0, width=5)
-    #     optionTypeMax = Entry(optionPanel, background=OptionColor, highlightthickness=0, width=5)
-    #     optionDesc = Label(optionPanel, text="| Range", background=OptionColor, anchor='w')
-    #     optionDesc.grid(row=rowIncrement, column=4)
-    #     optionTypeMin.grid(row=rowIncrement, column=5)
-    #     optionTypeMax.grid(row=rowIncrement, column=6, padx=5)
-    #     optionType = [optionTypeMin, optionTypeMax]
+
 
     # Create Main Option Dictionary Entry
     OptionDictionary[optionName]={
@@ -204,23 +181,23 @@ def Options():
     GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees)])
     GenStandardOption("Balanced Skill Trees", TabDrivers, "Balances and randomizes the driver skill trees", [lambda: SkillTreeAdjustments.BalancingSkillTreeRando(OptionDictionary)])
     GenStandardOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)], optionType=Scale) # we want id numbers no edit the 1/6 react stuff
-    GenStandardOption("Driver Animation Speed", TabDrivers, "Randomizes animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)])
+    GenStandardOption("Driver Art Animation Speeds", TabDrivers, "Randomizes driver art animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)], optionType=Scale)
     # GenStandardOption("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Dr.json"], ["DefAcce"], Accessories + [0], Accessories + [0])], ["Remove All Starting Accessories", [lambda: IDs.InvalidReplacements.extend(Accessories)]])
     
     # Blades
     GenStandardOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)], optionType=Scale)
-    GenStandardOption("Blade Special Damage Types", TabBlades, "Randomizes whether a Blade's special deals Physical Damage or Ether Damage", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Bl.json"], ["ArtsType"], [1, 2], [1,2])])
+    # GenStandardOption("Blade Special Damage Types", TabBlades, "Randomizes whether a Blade's special deals Physical Damage or Ether Damage", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Bl.json"], ["ArtsType"], [1, 2], [1,2])])
     GenStandardOption("Blade Special Buttons", TabBlades, "Randomizes what button a special uses for its button challenge", [lambda: JSONParser.ChangeJSONFile(["common/MNU_BtnChallenge2.json"], Helper.StartsWith("BtnType", 1, 3), ButtonCombos, ButtonCombos)])
-    GenStandardOption("Blade Elements", TabBlades, "Randomizes Blade's element", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["Atr"], Helper.InclRange(1,8), Helper.InclRange(1,8))])
-    GenStandardOption("Blade Battle Skills", TabBlades, "Randomizes Blade's battle (yellow) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), BladeBattleSkills, BladeBattleSkills)])
-    GenStandardOption("Blade Green Skills", TabBlades, "Randomizes Blade's field (green) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("FSkill", 1, 3), BladeFieldSkills, BladeFieldSkills, InvalidTargetIDs=[1135])])
+    GenStandardOption("Blade Elements", TabBlades, "Randomizes a Blade's element", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["Atr"], Helper.InclRange(1,8), Helper.InclRange(1,8))])
+    GenStandardOption("Blade Battle Skills", TabBlades, "Randomizes a Blade's battle (yellow) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), BladeBattleSkills, BladeBattleSkills)])
+    GenStandardOption("Blade Field Skills", TabBlades, "Randomizes a Blade's field (green) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("FSkill", 1, 3), BladeFieldSkills, BladeFieldSkills, InvalidTargetIDs=[1135])])
     # GenOption("Blade Specials", TabBlades, "Randomizes blades special (red) skill tree", [lambda: JSONParser.ChangeJSON(["common/CHR_Bl.json"], Helper.StartsWith("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials, BladeSpecials)]) Commenting out for initial launch I think this setting will put people off it sounds fun but animations no longer connect well on specials
     GenStandardOption("Blade Cooldowns", TabBlades, "Randomizes a Blade's swap cooldown", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["CoolTime"], Helper.InclRange(1,1000), Helper.InclRange(1,1000))])
-    GenStandardOption("Blade Arts", TabBlades, "Randomizes your Blade's arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), ArtBuffs, ArtBuffs)])
-    GenStandardOption("Blade Aux Core Slots", TabBlades, "Randomizes the amount of Aux Core slots on a blade", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), IDs.BladeAuxCoreSlotDistribution)])
-    GenStandardOption("Blade Names", TabBlades, "Randomizes the names of blades", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
-    GenStandardOption("Blade Defenses", TabBlades, "Randomizes Blade's Physical and Ether Defense", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.InclRange(0,100), BladeDefenseDistribution)])
-    GenStandardOption("Blade Mods", TabBlades, "Randomizes Blade Stat Modifiers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.InclRange(0,100), BladeModDistribution)])
+    GenStandardOption("Blade Arts", TabBlades, "Randomizes a Blade's arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), ArtBuffs, ArtBuffs)])
+    GenStandardOption("Blade Aux Core Slots", TabBlades, "Randomizes a Blade's maximum Aux Core Slots", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), IDs.BladeAuxCoreSlotDistribution)])
+    GenStandardOption("Blade Names", TabBlades, "Randomizes a Blade's name", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
+    GenStandardOption("Blade Defenses", TabBlades, "Randomizes a Blade's Physical and Ether Defense", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.InclRange(0,100), BladeDefenseDistribution)])
+    GenStandardOption("Blade Mods", TabBlades, "Randomizes a Blade Stat Modifiers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.InclRange(0,100), BladeModDistribution)])
     
     # Enemies
     GenStandardOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", [lambda: EnemyRandoLogic.EnemyLogic(OptionDictionary)],["Story Bosses", [], "Quest Enemies", [], "Unique Monsters", [], "Superbosses", [], "Normal Enemies", [], "Mix Enemies Between Types", [], "Keep Enemy Levels", []])
@@ -229,7 +206,8 @@ def Options():
     #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30)) Defunct with alex's enemy rando
     
     # Misc
-    GenStandardOption("Music", TabMisc, "Randomizes Music", [lambda: MusicShuffling.SeparateBGMandBattle(OptionDictionary)], ["Seperate Battle and Environment Themes", []]) # need to change title screen music
+    GenStandardOption("Music", TabMisc, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle(OptionDictionary)], ["Seperate Battle and Environment Themes", []]) # need to change title screen music
+
     # GenDictionary("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.InclRange(0,3721), Helper.InclRange(2001,3721))])
     # GenOption("Funny Faces", TabMisc, "Randomizes Facial Expressions", ["common/EVT_eyetype.json"], ["$id"], Helper.inclRange(0,15), Helper.inclRange(0,15)) # doesnt work yet
     # GenDictionary("Menu Colors", TabMisc, "Randomizes Colors in the UI", [lambda: JSONParser.ChangeJSON(["common/MNU_ColorList.json"], ["col_r", "col_g", "col_b"], Helper.InclRange(0,255), Helper.InclRange(0,0))])
@@ -385,4 +363,5 @@ EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [
 SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSaveAndLoad, "SavedOptions.txt"), root.destroy()))
+
 root.mainloop()
