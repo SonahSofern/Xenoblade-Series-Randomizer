@@ -18,12 +18,12 @@ def ChangeJSONFile(Filename, keyWords, rangeofValuesToReplace = [], rangeValidRe
                 if not item["$id"] in InvalidTargetIDs:
                     for key in item:  
                         if key in keyWords:
-                            if (((rangeofValuesToReplace == []) or (item[key] in rangeofValuesToReplace)) and (SliderOdds >= random.randint(1,100))):
+                            if (((rangeofValuesToReplace == []) or (item[key] in rangeofValuesToReplace)) and (SliderOdds > random.randint(0,100))):
                                 item[key] = random.choice(rangeValidReplacements)
                         elif key == "Flag":
                             for flag, flagVal in item[key].items():
                                 if flag in keyWords:
-                                    if ((flagVal in rangeofValuesToReplace) and (SliderOdds >= random.randint(1,100))):
+                                    if ((flagVal in rangeofValuesToReplace) and (SliderOdds > random.randint(0,100))):
                                         item[key][flag] = random.choice(rangeValidReplacements)                                
             file.seek(0)
             file.truncate()

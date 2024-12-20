@@ -114,13 +114,31 @@ def GenHeader(headerName, parentTab, backgroundColor):
     rowIncrement += 1
 
 
-def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton, optionColor = ""):   
+def ColorOnClick(button, textList):
+    if button.get():
+        for text in textList:
+            try:      
+                text.configure(style="on.TLabel")
+            except:
+                pass
+    else:
+        for text in textList:      
+            try:      
+                text.configure(style="off.TLabel")
+            except:
+                pass
+
+def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
     # Variables
     global OptionDictionary
     global rowIncrement
     spinBoxVar = None
     var = BooleanVar()
     style = ttk.Style()
+    spinDesc = None
+    
+    style.configure("on.TLabel", foreground=GUISettings.lightColor)
+    style.configure("off.TLabel", foreground=GUISettings.midGray)
     
     # Parent Frame
     optionPanel = ttk.Frame(parentTab)
@@ -128,7 +146,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     
     # Major Option Checkbox
     style.configure("midColor.TCheckbutton", padding=(20, 10))
-    optionTypeObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=40,style="midColor.TCheckbutton")
+    optionTypeObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=40, style="midColor.TCheckbutton", command=lambda: ColorOnClick(checkButtonVar, [optionDesc, spinDesc]))
     optionTypeObj.grid(row=rowIncrement, column=0, sticky="e")
     checkButtonVar = var
     
@@ -231,7 +249,7 @@ def Options():
     GenStandardOption("Enemy Size", TabFunny, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"], ["Scale"], Helper.InclRange(0, 1000), Helper.InclRange(1, 200) + Helper.InclRange(990,1000))], optionType=Spinbox)
 
     # Cosmetics
-    GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics(OptionDictionary)], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics, Spinbox, OptionColorLight)
+    GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics(OptionDictionary)], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics, Spinbox)
     
     # Race Mode
     GenStandardOption("Race Mode", TabRaceMode, "Enables Race Mode", [lambda: RaceMode.RaceModeChanging(OptionDictionary)], ["Xohar Fragment Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", [], "Easy Field Skill Trees", [lambda: CoreCrystalAdjustments.FieldSkillLevelAdjustment()]])
@@ -263,42 +281,52 @@ def Options():
     # GenStandardOption("Enemy Aggression", TabSettings, "Toggle whether foes pick a fight (exc.salvage, unique, boss, and quest foes)", [],[])
     # GenStandardOption("Special BGM", TabSettings, "When enabled, special battle music will play with certain Blades in the party", [],[])
 
+    # Nonstandard Functions
+    ShowTitleScreenText()
 
 def Randomize():
     def ThreadedRandomize():
+        # Variables
         global OptionDictionary
+        
+        # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
 
+        # Showing Progress Diplay 
         randoProgressDisplay.pack(side='left', anchor='w', pady=10, padx=10)
         randoProgressDisplay.config(text="Unpacking BDATs")
 
+        # Seed Setting
         random.seed(randoSeedEntry.get())
         print("Seed: " + randoSeedEntry.get())
 
+        # Unpacks BDATs
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common.bdat -o {JsonOutput} -f json --pretty")
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty")
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
-
-        ShowTitleScreenText()
 
         # Runs all randomization
         RunOptions()
         RaceMode.SeedHash()
         randoProgressDisplay.config(text="Packing BDATs")
 
+        # Packs BDATs
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
         # Outputs common_ms in the correct file structure
         os.makedirs(f"{outDirEntry.get()}/gb", exist_ok=True)
         shutil.move(f"{outDirEntry.get()}/common_ms.bdat", f"{outDirEntry.get()}/gb/common_ms.bdat")
 
+        # Displays Done and Clears Text
         import time
         randoProgressDisplay.config(text="Done")
         time.sleep(0.5)
         randoProgressDisplay.config(text="")
         randoProgressDisplay.pack_forget()
 
+        # ReEnables Randomize Button
         RandomizeButton.config(state=NORMAL)
+        
         print("Done")
 
     threading.Thread(target=ThreadedRandomize).start()
