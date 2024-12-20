@@ -31,7 +31,6 @@ root.geometry(f'{windowWidth}x{windowHeight}')
 root.config(background=DarkerPurple)
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
-# root.overrideredirect(True) # removes window top bar
 
 # The Notebook
 MainWindow = ttk.Notebook(root, height=5)
@@ -116,36 +115,44 @@ def GenHeader(headerName, parentTab, backgroundColor):
 
 
 def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton, optionColor = ""):   
+    # Variables
     global OptionDictionary
-    global rowIncrement 
-    
-    optionPanel = ttk.Frame(parentTab)
-    optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
-
+    global rowIncrement
+    spinBoxVar = None
     var = BooleanVar()
     style = ttk.Style()
+    
+    # Parent Frame
+    optionPanel = ttk.Frame(parentTab)
+    optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
+    
+    # Major Option Checkbox
     style.configure("midColor.TCheckbutton", padding=(20, 10))
     optionTypeObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=40,style="midColor.TCheckbutton")
     optionTypeObj.grid(row=rowIncrement, column=0, sticky="e")
-    optionType = var
+    checkButtonVar = var
     
-    optionDesc = ttk.Label(optionPanel, text=f"{description}", anchor="w")
+    # Description Label
+    optionDesc = ttk.Label(optionPanel, text=description, anchor="w")
     optionDesc.grid(row=rowIncrement, column=1, sticky="sw", padx=0)
     
-
-    if (optionType == Scale):
+    # % Boxes
+    if (optionType == Spinbox):
         var = IntVar()
         optionTypeObj = ttk.Spinbox(optionPanel, from_=0, to=100, textvariable=var, wrap=True, width=3, increment=10)
-        optionDesc = ttk.Label(optionPanel, anchor='w')
-        optionTypeObj.grid(row=rowIncrement, column=1, sticky="e")
-        optionDesc.grid(row=rowIncrement, column=2, sticky="sw")
-        optionType = var
+        optionTypeObj.delete(0, END)
+        optionTypeObj.insert(0,"0")
+        optionTypeObj.grid(row=rowIncrement, column=2, padx=(15,0))
+        spinDesc = ttk.Label(optionPanel, text="% to randomize", anchor="w")
+        spinDesc.grid(row=rowIncrement, column=3, sticky="sw", padx=0)
+        spinBoxVar = var
 
 
     # Create Main Option Dictionary Entry
     OptionDictionary[optionName]={
         "name": optionName,
-        "optionTypeVal": optionType,
+        "optionTypeVal": checkButtonVar,
+        "spinBoxVal": spinBoxVar,
         "commandList": commandList,
         "subOptionObjects": {},
     }    
@@ -172,16 +179,16 @@ def Options():
     GenStandardOption("Collection Points", TabGeneral, "Randomizes the contents of Collection Points", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID"], list(set(CollectionPointMaterials) - set([30019])), [])], ["Accessories", [lambda: IDs.ValidReplacements.extend(Accessories)] ,"Weapon Chips", [lambda: IDs.ValidReplacements.extend(WeaponChips)], "Aux Cores", [lambda: IDs.ValidReplacements.extend(AuxCores)], "Core Crystals", [lambda: IDs.ValidReplacements.extend(CoreCrystals)], "Deeds", [lambda: IDs.ValidReplacements.extend(Deeds)], "Collection Point Materials", [lambda: IDs.ValidReplacements.extend(CollectionPointMaterials)]])
 
     # Drivers
-    GenStandardOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, [], InvalidTargetIDs=AutoAttacks)],["Debuffs", [lambda: IDs.ValidReplacements.extend(ArtDebuffs)],"Buffs",[lambda: IDs.ValidReplacements.extend(ArtBuffs)], "Doom", [lambda: IDs.ValidReplacements.extend([21])]], Scale)
+    GenStandardOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, [], InvalidTargetIDs=AutoAttacks)],["Debuffs", [lambda: IDs.ValidReplacements.extend(ArtDebuffs)],"Buffs",[lambda: IDs.ValidReplacements.extend(ArtBuffs)], "Doom", [lambda: IDs.ValidReplacements.extend([21])]], Spinbox)
     # GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", ["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20)) Nothing wrong with this just kinda niche/silly
     GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees)])
     GenStandardOption("Balanced Skill Trees", TabDrivers, "Balances and randomizes the driver skill trees", [lambda: SkillTreeAdjustments.BalancingSkillTreeRando(OptionDictionary)])
-    GenStandardOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)], optionType=Scale) # we want id numbers no edit the 1/6 react stuff
-    GenStandardOption("Driver Art Animation Speeds", TabDrivers, "Randomizes driver art animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)], optionType=Scale)
+    GenStandardOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)], optionType=Spinbox) # we want id numbers no edit the 1/6 react stuff
+    GenStandardOption("Driver Art Animation Speeds", TabDrivers, "Randomizes driver art animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)], optionType=Spinbox)
     # GenStandardOption("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Dr.json"], ["DefAcce"], Accessories + [0], Accessories + [0])], ["Remove All Starting Accessories", [lambda: IDs.InvalidReplacements.extend(Accessories)]])
     
     # Blades
-    GenStandardOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)], optionType=Scale)
+    GenStandardOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)], optionType=Spinbox)
     # GenStandardOption("Blade Special Damage Types", TabBlades, "Randomizes whether a Blade's special deals Physical Damage or Ether Damage", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Bl.json"], ["ArtsType"], [1, 2], [1,2])])
     GenStandardOption("Blade Special Buttons", TabBlades, "Randomizes what button a special uses for its button challenge", [lambda: JSONParser.ChangeJSONFile(["common/MNU_BtnChallenge2.json"], Helper.StartsWith("BtnType", 1, 3), ButtonCombos, ButtonCombos)])
     GenStandardOption("Blade Elements", TabBlades, "Randomizes a Blade's element", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["Atr"], Helper.InclRange(1,8), Helper.InclRange(1,8))])
@@ -219,12 +226,12 @@ def Options():
 
     # Funny
     GenStandardOption("Projectile Treasure Chests", TabFunny, "Launches your items from chests", [lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [12])])
-    GenStandardOption("Blade Size", TabFunny, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Scale", "WpnScale"], [], Helper.InclRange(1,250) + [1000,16000])], optionType= Scale) # Make sure these work for common blades
-    GenStandardOption("NPCs Size", TabFunny, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSONFile(["common/RSC_NpcList.json"], ["Scale"], Helper.InclRange(1,100), Helper.InclRange(1,250))], optionType=Scale)
-    GenStandardOption("Enemy Size", TabFunny, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"], ["Scale"], Helper.InclRange(0, 1000), Helper.InclRange(1, 200) + Helper.InclRange(990,1000))], optionType=Scale)
+    GenStandardOption("Blade Size", TabFunny, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Scale", "WpnScale"], [], Helper.InclRange(1,250) + [1000,16000])], optionType= Spinbox) # Make sure these work for common blades
+    GenStandardOption("NPCs Size", TabFunny, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSONFile(["common/RSC_NpcList.json"], ["Scale"], Helper.InclRange(1,100), Helper.InclRange(1,250))], optionType=Spinbox)
+    GenStandardOption("Enemy Size", TabFunny, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"], ["Scale"], Helper.InclRange(0, 1000), Helper.InclRange(1, 200) + Helper.InclRange(990,1000))], optionType=Spinbox)
 
     # Cosmetics
-    GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics(OptionDictionary)], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics, Scale, OptionColorLight)
+    GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics(OptionDictionary)], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics, Spinbox, OptionColorLight)
     
     # Race Mode
     GenStandardOption("Race Mode", TabRaceMode, "Enables Race Mode", [lambda: RaceMode.RaceModeChanging(OptionDictionary)], ["Xohar Fragment Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", [], "Easy Field Skill Trees", [lambda: CoreCrystalAdjustments.FieldSkillLevelAdjustment()]])
@@ -233,22 +240,22 @@ def Options():
     # GenHeader("Camera Settings",TabSettings, None)
     # GenStandardOption("Invert up/down", TabSettings, "Toggle inversion of up/down for camera controls", [],[])
     # GenStandardOption("Invert left/right", TabSettings, "Toggle inversion of left/right for camera controls", [],[])
-    # GenStandardOption("Auto camera response speed", TabSettings, "Adjust the response times for the automatically controlled camera", [],[],Scale)
-    # GenStandardOption("Camera reset response speed", TabSettings, "Adjust the length of time it takes to reset the camera's position", [],[],Scale)
-    # GenStandardOption("Turn speed", TabSettings, "Adjust the turning speed of the manual camera", [],[],Scale)
-    # GenStandardOption("Zoom speed", TabSettings, "Adjust the speed of the camera's zoom", [],[],Scale)
+    # GenStandardOption("Auto camera response speed", TabSettings, "Adjust the response times for the automatically controlled camera", [],[],Spinbox)
+    # GenStandardOption("Camera reset response speed", TabSettings, "Adjust the length of time it takes to reset the camera's position", [],[],Spinbox)
+    # GenStandardOption("Turn speed", TabSettings, "Adjust the turning speed of the manual camera", [],[],Spinbox)
+    # GenStandardOption("Zoom speed", TabSettings, "Adjust the speed of the camera's zoom", [],[],Spinbox)
     # GenStandardOption("Gradient Correction", TabSettings, "Adjust the automatic behavior of the camera when traversing gradients", [],[])
     # GenHeader("Sound Settings",TabSettings, None)    
     # GenStandardOption("Subtitles", TabSettings, "Toggle subtitles on or off", [],[])
-    # GenStandardOption("Cutscene voice volume", TabSettings, "Adjust voice volume during cutscenes", [],[], Scale)
-    # GenStandardOption("Game BGM volume", TabSettings, "Adjust background music volume during the game", [],[], Scale)
-    # GenStandardOption("Game SE volume", TabSettings, "Adjust volume of sound effects heard during the game", [],[], Scale)
-    # GenStandardOption("Game voice volume", TabSettings, "Adjust volume of voices heard during the game", [],[], Scale)
-    # GenStandardOption("Battle Narrator volume", TabSettings, "Adjust volume of the battle Narrator (not character battle voices)", [],[], Scale)
-    # GenStandardOption("Environment volume", TabSettings, "Adjust volume of environmental sounds (such as rain) heard during the game", [],[], Scale)
-    # GenStandardOption("System volume", TabSettings, "Adjust volume of system sounds heard during the game", [],[], Scale)
+    # GenStandardOption("Cutscene voice volume", TabSettings, "Adjust voice volume during cutscenes", [],[], Spinbox)
+    # GenStandardOption("Game BGM volume", TabSettings, "Adjust background music volume during the game", [],[], Spinbox)
+    # GenStandardOption("Game SE volume", TabSettings, "Adjust volume of sound effects heard during the game", [],[], Spinbox)
+    # GenStandardOption("Game voice volume", TabSettings, "Adjust volume of voices heard during the game", [],[], Spinbox)
+    # GenStandardOption("Battle Narrator volume", TabSettings, "Adjust volume of the battle Narrator (not character battle voices)", [],[], Spinbox)
+    # GenStandardOption("Environment volume", TabSettings, "Adjust volume of environmental sounds (such as rain) heard during the game", [],[], Spinbox)
+    # GenStandardOption("System volume", TabSettings, "Adjust volume of system sounds heard during the game", [],[], Spinbox)
     # GenHeader("Screen Settings",TabSettings, None)        
-    # GenStandardOption("Screen brightness", TabSettings, "Adjust screen brightness", [],[], Scale)
+    # GenStandardOption("Screen brightness", TabSettings, "Adjust screen brightness", [],[], Spinbox)
     # GenHeader("Game Settings",TabSettings, None)
     # GenStandardOption("Difficulty level", TabSettings, "Default Difficulty", [],["Easy",[],"Normal",[],"Bringer of Chaos",[], "Custom",[]])
     # GenStandardOption("Auto-battle", TabSettings, "Toggle auto-battle", [],[])
@@ -300,7 +307,7 @@ def RunOptions():
     for option in OptionDictionary.values():
         # For Sliders
         if (type(option["optionTypeVal"].get()) == int):
-            IDs.CurrentSliderOdds = option["optionTypeVal"].get()
+            IDs.CurrentSliderOdds = option["spinBoxVal"].get()
         if (option["optionTypeVal"].get() != 0): # checks main option input
             for subOption in option["subOptionObjects"].values():
                 if (subOption["subOptionTypeVal"].get()): # checks subOption input
@@ -353,7 +360,7 @@ SettingsButton.pack(pady=10, padx=10, side='right', anchor='e')
 
 randoProgressDisplay = ttk.Label(text="", anchor="e", foreground=OptionColorLight, background=DarkerPurple, padding=2)
 
-EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()])
+EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()] + [option["spinBoxVal"] for option in OptionDictionary.values()])
 SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSaveAndLoad, "SavedOptions.txt"), root.destroy()))

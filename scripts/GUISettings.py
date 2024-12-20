@@ -214,7 +214,7 @@ def LoadTheme(defaultFont, root):
                 "lightcolor": darkColor,
                 "selectbackground": midColor,
                 "insertcolor": midColor,
-                "relief": "ridge"
+                "relief": "ridge",
                 
             }
         }
