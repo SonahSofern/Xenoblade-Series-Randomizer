@@ -114,17 +114,19 @@ def GenHeader(headerName, parentTab, backgroundColor):
     rowIncrement += 1
 
 
-def ColorOnClick(button, textList):
+def ColorOnClick(button, textList, spinBox):
     if button.get():
         for text in textList:
             try:      
                 text.configure(style="on.TLabel")
+                spinBox.configure(style="on.TSpinbox")
             except:
                 pass
     else:
         for text in textList:      
             try:      
                 text.configure(style="off.TLabel")
+                spinBox.configure(style="off.TSpinbox")
             except:
                 pass
 
@@ -136,9 +138,14 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     var = BooleanVar()
     style = ttk.Style()
     spinDesc = None
+    spinBoxObj = None
     
+    # Setup for Styles
     style.configure("on.TLabel", foreground=GUISettings.lightColor)
     style.configure("off.TLabel", foreground=GUISettings.midGray)
+    style.configure("on.TSpinbox", foreground=GUISettings.lightColor)
+    style.configure("off.TSpinbox", foreground=GUISettings.midColor)
+
     
     # Parent Frame
     optionPanel = ttk.Frame(parentTab)
@@ -146,8 +153,8 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     
     # Major Option Checkbox
     style.configure("midColor.TCheckbutton", padding=(20, 10))
-    optionTypeObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=40, style="midColor.TCheckbutton", command=lambda: ColorOnClick(checkButtonVar, [optionDesc, spinDesc]))
-    optionTypeObj.grid(row=rowIncrement, column=0, sticky="e")
+    checkButtonObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=40, style="midColor.TCheckbutton", command=lambda: ColorOnClick(checkButtonVar, [optionDesc, spinDesc],spinBoxObj))
+    checkButtonObj.grid(row=rowIncrement, column=0, sticky="e")
     checkButtonVar = var
     
     # Description Label
@@ -157,10 +164,10 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     # % Boxes
     if (optionType == Spinbox):
         var = IntVar()
-        optionTypeObj = ttk.Spinbox(optionPanel, from_=0, to=100, textvariable=var, wrap=True, width=3, increment=10)
-        optionTypeObj.delete(0, END)
-        optionTypeObj.insert(0,"0")
-        optionTypeObj.grid(row=rowIncrement, column=2, padx=(15,0))
+        spinBoxObj = ttk.Spinbox(optionPanel, from_=0, to=100, textvariable=var, wrap=True, width=3, increment=10)
+        spinBoxObj.delete(0, END)
+        spinBoxObj.insert(0,"0")
+        spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
         spinDesc = ttk.Label(optionPanel, text="% to randomize", anchor="w")
         spinDesc.grid(row=rowIncrement, column=3, sticky="sw", padx=0)
         spinBoxVar = var
@@ -376,21 +383,26 @@ SeedFrame.pack(anchor="w", padx=10)
 seedDesc = ttk.Button(SeedFrame, text="Seed", command=GenRandomSeed)
 seedDesc.pack(side='left', padx=2, pady=2)
 
+# Seed entry box
 randoSeedEntry = ttk.Entry(SeedFrame, width=30)
 randoSeedEntry.pack(side='left', padx=2)
+
+# Randomize Button
 RandomizeButton = ttk.Button(text='Randomize', command=Randomize)
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
 RandomizeButton.config(padding=5)
 
+# Options Cog
 Cog = PhotoImage(file="./_internal/Images/SmallSettingsCog.png")
 SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
+# Bottom Left Progress Display Text
 randoProgressDisplay = ttk.Label(text="", anchor="e", foreground=OptionColorLight, background=DarkerPurple, padding=2)
 
+# Save and Load Last Options
 EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()] + [option["spinBoxVal"] for option in OptionDictionary.values()])
 SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
-
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSaveAndLoad, "SavedOptions.txt"), root.destroy()))
 
 root.mainloop()
