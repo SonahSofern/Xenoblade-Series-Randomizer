@@ -112,42 +112,26 @@ def GenHeader(headerName, parentTab, backgroundColor):
     Header.grid(row=rowIncrement, column=0, sticky="w")
 
     rowIncrement += 1
-
+    
 
 def ColorOnClick(button, textList):
     if button.get():
         for item in textList:
-            if isinstance(item, ttk.Checkbutton):
-                if item.state():      
-                    item.state(["!disabled"])
-            elif isinstance(item, ttk.Spinbox):
-                item.configure(style="on.TSpinbox")   
-            elif isinstance(item, ttk.Label):
-                item.configure(style="on.TLabel")              
+            item.state(["!disabled"])       
     else:
         for item in textList:
-            if isinstance(item, ttk.Checkbutton):
-                item.state(["disabled"])
-            elif isinstance(item, ttk.Spinbox):
-                item.configure(style="off.TSpinbox")   
-            elif isinstance(item, ttk.Label):
-                item.configure(style="off.TLabel")      
+            item.state(["disabled"])
+
 
 def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
     # Variables
     global OptionDictionary
     global rowIncrement
-    spinBoxVar = None
+    spinBoxVar = IntVar()
     var = BooleanVar()
     style = ttk.Style()
-    spinDesc = None
-    spinBoxObj = None
-    
-    # Setup for Styles
-    style.configure("on.TLabel", foreground=GUISettings.lightColor, selectforeground=GUISettings.lightColor)
-    style.configure("off.TLabel", foreground=GUISettings.midGray, selectforeground=GUISettings.midGray)
-    style.configure("on.TSpinbox", foreground=GUISettings.lightColor, selectforeground=GUISettings.lightColor)
-    style.configure("off.TSpinbox", foreground=GUISettings.midGray, selectforeground=GUISettings.midGray)
+    spinDesc = ttk.Label()
+    spinBoxObj = ttk.Spinbox()
     
     # Parent Frame
     optionPanel = ttk.Frame(parentTab)
