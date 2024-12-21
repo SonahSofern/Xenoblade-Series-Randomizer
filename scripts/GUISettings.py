@@ -61,7 +61,7 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     fontNameVar.trace_add("write", lambda name, index, mode: LoadFontByName(fontNameVar.get()))
     fontSizeVar.trace_add("write", lambda name, index, mode: LoadFontSize(fontSizeVar.get()))
     
-    fontTestBack = ttk.Button(newWindow, text="Previous", command=PreviousFont)
+    fontTestBack = ttk.Button(newWindow, text="Previous", command=PreviousFont, width=10)
     fontName = ttk.Entry(newWindow, width=20, textvariable=fontNameVar)
     fontTestNext = ttk.Button(newWindow, text="Next", command=NextFont)
     saveFont = ttk.Button(newWindow, text="Save", command=SaveUIChanges)
@@ -108,13 +108,14 @@ def LoadTheme(defaultFont, root):
                 "background": darkColor,
                 "padding": 10,
                 "font": defaultFont,
-                "foreground": lightColor,
+                "foreground": midGray,
                 "bordercolor": darkColor,
                 "borderwidth": 2,
                 "focuscolor":"",# Checkbutton focus border
             },
             "map": {
-                "background": [("selected", midColor), ("active", midColor)]
+                "foreground": [("selected", lightColor), ("active", lightColor)],
+                "background": [("selected", midColor), ("active", midColor)]                
             }
         },
         "TButton": {
@@ -208,14 +209,16 @@ def LoadTheme(defaultFont, root):
         "TSpinbox": {
             "configure": {
                 "background": darkColor,
-                "foreground": lightColor,
+                "foreground": midGray,
                 "fieldbackground": midColor,
                 "darkcolor": darkColor,
                 "lightcolor": darkColor,
-                "selectbackground": midColor,
                 "insertcolor": midColor,
                 "relief": "ridge",
-                
+                "padding": (1,0,0,0),
+                "focuscolor":"",
+                "selectforeground": midGray,
+                "selectbackground": midColor,
             }
         }
     })
