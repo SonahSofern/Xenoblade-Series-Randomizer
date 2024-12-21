@@ -114,27 +114,24 @@ def GenHeader(headerName, parentTab, backgroundColor):
     rowIncrement += 1
 
 
-def ColorOnClick(button, textList, spinBox):
+def ColorOnClick(button, textList):
     if button.get():
-        try:
-            spinBox.configure(style="on.TSpinbox")
-        except:
-            pass
-        for text in textList:
-            try:      
-                text.configure(style="on.TLabel")
-            except:
-                pass
+        for item in textList:
+            if isinstance(item, ttk.Checkbutton):
+                if item.state():      
+                    item.state(["!disabled"])
+            elif isinstance(item, ttk.Spinbox):
+                item.configure(style="on.TSpinbox")   
+            elif isinstance(item, ttk.Label):
+                item.configure(style="on.TLabel")              
     else:
-        try:
-            spinBox.configure(style="off.TSpinbox")
-        except:
-            pass
-        for text in textList:      
-            try:      
-                text.configure(style="off.TLabel")
-            except:
-                pass
+        for item in textList:
+            if isinstance(item, ttk.Checkbutton):
+                item.state(["disabled"])
+            elif isinstance(item, ttk.Spinbox):
+                item.configure(style="off.TSpinbox")   
+            elif isinstance(item, ttk.Label):
+                item.configure(style="off.TLabel")      
 
 def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
     # Variables
@@ -151,7 +148,6 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     style.configure("off.TLabel", foreground=GUISettings.midGray, selectforeground=GUISettings.midGray)
     style.configure("on.TSpinbox", foreground=GUISettings.lightColor, selectforeground=GUISettings.lightColor)
     style.configure("off.TSpinbox", foreground=GUISettings.midGray, selectforeground=GUISettings.midGray)
-
     
     # Parent Frame
     optionPanel = ttk.Frame(parentTab)
@@ -159,12 +155,12 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     
     # Major Option Checkbox
     style.configure("midColor.TCheckbutton", padding=(20, 10))
-    checkButtonObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=40, style="midColor.TCheckbutton",command= lambda:ColorOnClick(checkButtonVar, [optionDesc, spinDesc],spinBoxObj))
+    checkButtonObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=40, style="midColor.TCheckbutton",command= lambda:ColorOnClick(checkButtonVar, [optionDesc, spinDesc, spinBoxObj] + checkBoxList))
     checkButtonObj.grid(row=rowIncrement, column=0, sticky="e")
     checkButtonVar = var
     
     # Description Label
-    optionDesc = ttk.Label(optionPanel, text=description, anchor="w", width=60, wraplength=500)
+    optionDesc = ttk.Label(optionPanel, text=description, anchor="w", width=50, wraplength=500)
     optionDesc.grid(row=rowIncrement, column=1, sticky="w", padx=0)
     
     # % Boxes
@@ -186,13 +182,14 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         "spinBoxVal": spinBoxVar,
         "commandList": commandList,
         "subOptionObjects": {},
-    }    
+    }
+    checkBoxList = []
     # Create Suboptions Dictionary Entry
     for i in range((len(subOptionName_subCommandList))//2):
         var = BooleanVar()
         checkBox = ttk.Checkbutton(optionPanel, text=subOptionName_subCommandList[2*i], variable=var, width=35)
         checkBox.grid(row=rowIncrement+i+1, column=0, sticky="sw")
-
+        checkBoxList.append(checkBox)
         OptionDictionary[optionName]["subOptionObjects"][subOptionName_subCommandList[2*i]] = {
         "subName": subOptionName_subCommandList[2*i],
         "subOptionTypeVal": var,

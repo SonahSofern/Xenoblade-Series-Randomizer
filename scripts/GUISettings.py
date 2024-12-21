@@ -146,10 +146,10 @@ def LoadTheme(defaultFont, root):
                 "indicatormargin": (0,0,10,0),
             },
             "map": {
-                "indicatorcolor": [("selected", lightColor),("active", midColor)],
-                "background": [("active", midColor)],
-                "foreground": [("active", lightColor),("selected", lightColor)],
-                "indicatorbackground": [("active", midColor)],
+                "indicatorcolor": [  ("disabled", midColor),("selected", lightColor),("active", midColor)],
+                "background": [("disabled", darkColor),("active", midColor)],
+                "foreground": [("disabled", midGray),("active", lightColor),("selected", lightColor)],
+                "indicatorbackground": [ ("disabled", midColor),("active", midColor)],
             }
         },
         "TEntry": {
