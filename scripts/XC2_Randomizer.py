@@ -18,13 +18,14 @@ windowWidth = "1000"
 windowHeight = "800"
 OptionColorLight = White
 OptionColorDark = Gray
+backgroundCanvasList = []
 
 root = Tk()
 
 fontNameSizeDefault = ["", 12]
 SavedOptions.loadData(fontNameSizeDefault, "GUISavedOptions.txt")
 defaultFont = Font(family=fontNameSizeDefault[0], size=fontNameSizeDefault[1])
-GUISettings.LoadTheme(defaultFont, GUISettings.darkThemeColors, "Dark", root)
+GUISettings.LoadTheme(defaultFont, GUISettings.darkThemeColors, "Dark", root, backgroundCanvasList)
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
 root.geometry(f'{windowWidth}x{windowHeight}')
@@ -71,7 +72,8 @@ TabFunny = ttk.Frame(TabFunnyCanvas)
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
         scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
-        Canvases[i].config(yscrollcommand=scrollbar.set, background=LightBlack, borderwidth=0, relief="flat", highlightthickness=0)
+        Canvases[i].config(yscrollcommand=scrollbar.set, borderwidth=0, relief="flat", highlightthickness=0)
+        backgroundCanvasList.append(Canvases[i])
         # OuterFrames[i].config(borderwidth=0, relief="flat")
         InnerFrames[i].bind("<Configure>", lambda e, canvas=Canvases[i]: canvas.configure(scrollregion=canvas.bbox("all")))
   
@@ -391,7 +393,7 @@ RandomizeButton.config(padding=5)
 
 # Options Cog
 Cog = PhotoImage(file="./_internal/Images/SmallSettingsCog.png")
-SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont))
+SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, backgroundCanvasList))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
 # Bottom Left Progress Display Text

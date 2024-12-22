@@ -3,8 +3,9 @@ from UI_Colors import *
 from tkinter import font, ttk
 
 
+# I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
 
-def OpenSettingsWindow(rootWindow, defaultFont):
+def OpenSettingsWindow(rootWindow, defaultFont, backgroundCanvasList):
     newWindow = Toplevel(rootWindow)
     iter = 0
     fontNameVar = StringVar()
@@ -61,12 +62,9 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     # Still dont get these two lines but oh well
     fontNameVar.trace_add("write", lambda name, index, mode: LoadFontByName(fontNameVar.get()))
     fontSizeVar.trace_add("write", lambda name, index, mode: LoadFontSize(fontSizeVar.get()))
-    
     # Font Option Controls
     from tkinter.font import Font
     staticFont = Font(family="Arial", size=16)
-    style= ttk.Style()
-    style.configure("STATIC.TButton", font=staticFont)
     fontTestBack = ttk.Button(newWindow, text="Previous", command=PreviousFont, width=10, style="STATIC.TButton")
     fontName = ttk.Entry(newWindow, width=20, textvariable=fontNameVar)
     fontTestNext = ttk.Button(newWindow, text="Next", command=NextFont, style="STATIC.TButton")
@@ -84,25 +82,25 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     fontName.configure(font=staticFont)
     fontSize.configure(font=staticFont) # Have to config them like this for entry it doesnt accept style= whn you make the thing
     # Dark Mode Controls
-    darkMode = ttk.Button(newWindow, text="Light Mode", command=lambda: ToggleLightDarkMode(darkMode, defaultFont, rootWindow), style="STATIC.TButton")
+    darkMode = ttk.Button(newWindow, text="Light Mode", command=lambda: ToggleLightDarkMode(darkMode, defaultFont, rootWindow, backgroundCanvasList), style="STATIC.TButton")
     darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
     
-def ToggleLightDarkMode(togButton, defaultFont, root):
+def ToggleLightDarkMode(togButton, defaultFont, root, backgroundCanvasList):
     global currentTheme
     if togButton.cget("text") == "Dark Mode":
         togButton.config(text="Light Mode")
-        LoadTheme(defaultFont, darkThemeColors, "Dark", root)
+        LoadTheme(defaultFont, darkThemeColors, "Dark", root, backgroundCanvasList)
     else:
         togButton.config(text="Dark Mode")
-        LoadTheme(defaultFont, lightThemeColors, "Light", root)
+        LoadTheme(defaultFont, lightThemeColors, "Light", root, backgroundCanvasList)
         
 
 
 # Initial colors for the themes
 lightThemeColors = {
     "backgroundColor": Red,
-    "darkColor": White,
-    "midColor": "lightgray",
+    "darkColor": "lightgray",
+    "midColor": DarkGray,
     "midGray": "darkgray",
     "lightColor": "black",
 }
@@ -115,7 +113,7 @@ darkThemeColors = {
     "lightColor": White,
 }
 
-def LoadTheme(defaultFont, currentTheme, themeName, root):
+def LoadTheme(defaultFont, currentTheme, themeName, root, backgroundCanvasList):
     style= ttk.Style()
     try:
         style.theme_create(themeName, settings={
@@ -255,6 +253,10 @@ def LoadTheme(defaultFont, currentTheme, themeName, root):
     except:
         pass
     style.theme_use(themeName)
+    from tkinter.font import Font
+    staticFont = Font(family="Arial", size=16)
     style.configure("midColor.TCheckbutton", padding=(20, 10))
+    style.configure("STATIC.TButton", font=staticFont)
     root.config(background=currentTheme["backgroundColor"])
-
+    for canvas in backgroundCanvasList:
+        canvas.config(background=currentTheme["darkColor"])
