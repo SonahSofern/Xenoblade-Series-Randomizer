@@ -25,7 +25,7 @@ def GenerateCompressedPermalink(SeedName, OptionsList, Version):
     Permalink += b"\0"
 
     bitswriter = PackedBits.PackedBitsWriter()
-    for i in range(2, len(OptionsList)-1):
+    for i in range(2, len(OptionsList)):
         optionvalue = OptionsList[i].get()
         if isinstance(optionvalue, bool):
             bitswriter.write(int(optionvalue), 1)
@@ -52,13 +52,13 @@ def GenerateSettingsFromPermalink(base64_encoded_permalink, OptionsList):
     option_bytes = struct.unpack(">" + "B"*len(options_bytes), options_bytes)
 
     bitsreader = PackedBits.PackedBitsReader(option_bytes)
-    for i in range(2, len(OptionsList)-1):
+    for i in range(2, len(OptionsList)):
         optionvalue = OptionsList[i].get()
         if isinstance(optionvalue, bool):
             boolean_value = bool(bitsreader.read(1))
             OptionsList[i].set(boolean_value)
         elif isinstance(optionvalue, int):
             intvalue = bitsreader.read(8)
-            OptionsList[i].set(intvalue)
+            OptionsList[i].set(intvalue)    
 
     return(seed, OptionsList)
