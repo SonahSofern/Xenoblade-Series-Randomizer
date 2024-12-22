@@ -135,7 +135,6 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     global rowIncrement
     spinBoxVar = IntVar()
     var = BooleanVar()
-    style = ttk.Style()
     spinDesc = ttk.Label()
     spinBoxObj = ttk.Spinbox()
     StateSet = lambda: StateUpdate(checkButtonVar, [optionDesc, spinDesc, spinBoxObj] + checkBoxList)
@@ -188,6 +187,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         }
     rowIncrement += 1
     
+    # Variable to help set initial states of interactables
     stateSetList.append(StateSet)
     
 def Options():
@@ -335,10 +335,12 @@ def Randomize():
 
 def RunOptions():
     for option in OptionDictionary.values():
-        # For Sliders
-        if (type(option["optionTypeVal"].get()) == int):
-            IDs.CurrentSliderOdds = option["spinBoxVal"].get()
         if (option["optionTypeVal"].get() != 0): # checks main option input
+            try:
+                IDs.CurrentSliderOdds = option["spinBoxVal"].get()
+                print("gotone")
+            except:
+                pass
             for subOption in option["subOptionObjects"].values():
                 if (subOption["subOptionTypeVal"].get()): # checks subOption input
                     for subCommand in subOption["subCommandList"]:

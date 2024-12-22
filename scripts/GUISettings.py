@@ -95,12 +95,13 @@ def ToggleLightDarkMode(togButton, defaultFont, root):
     else:
         togButton.config(text="Dark Mode")
         LoadTheme(defaultFont, lightThemeColors, "Light", root)
+        
 
 
 # Initial colors for the themes
 lightThemeColors = {
-    "backgroundColor": "white",
-    "darkColor": "gray",
+    "backgroundColor": Red,
+    "darkColor": White,
     "midColor": "lightgray",
     "midGray": "darkgray",
     "lightColor": "black",
