@@ -11,16 +11,19 @@ import random
 # condition of 1 is debug area, only one this is tied to is gormott area theme
 # priority column, value 0 is highest priority, will always play if given a choice of multiple songs. prio goes down as prio # goes up
 # I don't know what causes the cave music and gormott lower music to play over other themes tbh.
+# Torna fight themes overlap with base game file names ("m0x.wav"->"m2x.wav"), so you can't use them as enemy battle themes in the base game because those point to other themes used in cutscenes in the game.
 
 def MusicShuffle(OptionsRunDict):
     if OptionsRunDict["Music"]["subOptionObjects"]["Seperate Battle and Environment Themes"]["subOptionTypeVal"].get():
         with open("./_internal/JsonOutputs/common/RSC_BgmList.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data['rows']:
-                if row["$id"] in NonBattleMusicIDs:
-                    row["filename"] = random.choice(ReplacementNonBattleMusicMOVs)
                 if row["$id"] in EnemyBattleMusicIDs:
                     row["filename"] = random.choice(ReplacementEnemyBattleMusicMOVs)
+                    continue
+                if row["$id"] in NonBattleMusicIDs:
+                    row["filename"] = random.choice(ReplacementNonBattleMusicMOVs)
+                    continue
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)  

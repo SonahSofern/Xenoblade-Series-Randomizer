@@ -1,7 +1,7 @@
 from tkinter import PhotoImage, ttk
-import random, subprocess, shutil, os, threading
+import random, subprocess, shutil, os, threading, traceback
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling
+import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, PermalinkManagement
 import GUISettings
 from IDs import *
 from Cosmetics import *
@@ -298,9 +298,9 @@ def Randomize():
         randoProgressDisplay.pack(side='left', anchor='w', pady=10, padx=10)
         randoProgressDisplay.config(text="Unpacking BDATs")
 
-        # Seed Setting
-        random.seed(randoSeedEntry.get())
+        random.seed(CompressedPermalink)
         print("Seed: " + randoSeedEntry.get())
+        print("Permalink: "+  CompressedPermalink)
 
         # Unpacks BDATs
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common.bdat -o {JsonOutput} -f json --pretty")
@@ -308,6 +308,7 @@ def Randomize():
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
 
         # Runs all randomization
+        DebugLog.CreateDebugLog(OptionDictionary, Version, randoSeedEntry.get())
         RunOptions()
         RaceMode.SeedHash()
         randoProgressDisplay.config(text="Packing BDATs")
@@ -346,15 +347,16 @@ def RunOptions():
                     for subCommand in subOption["subCommandList"]:
                         try:
                             subCommand()
-                        except:
-                            pass
+                        except Exception as error:
+                            print(f"ERROR: {command['name']}: {subCommand['subName']} | {error}")
+
+                            # print(f"{traceback.format_exc()}") # shows the full error
             randoProgressDisplay.config(text=f"Randomizing {option['name']}")
             for command in option["commandList"]:
                 try:
                     command()
                 except Exception as error:
                     print(f"ERROR: {option['name']} | {error}")
-                    import traceback
                     # print(f"{traceback.format_exc()}") # shows the full error
  
 def GenRandomSeed():
@@ -402,6 +404,12 @@ EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [
 SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
 InteractableStateSet()
 
+# Permalink Variables
+CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
+SeedName, SettingsValues = PermalinkManagement.GenerateSettingsFromPermalink(CompressedPermalink, EveryObjectToSaveAndLoad)
+
+
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSaveAndLoad, "SavedOptions.txt"), root.destroy()))
 GUISettings.LoadTheme(defaultFont, GUIDefaults[2], root, backgroundCanvasList)
 root.mainloop()
+

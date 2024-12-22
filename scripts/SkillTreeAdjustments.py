@@ -29,11 +29,11 @@ def BalancingSkillTreeRando(OptionsRunDict):
         CurrList = []
         if i == 2:
             for k in range(1, 25):
-                RandIndex = k + k * i
+                RandIndex = (k - 1) + k * i
                 CurrList.append(RandomOtherIDs[RandIndex])
         else:
             for k in range(1, 26):
-                RandIndex = k + k * i
+                RandIndex = (k - 1) + k * i
                 CurrList.append(RandomOtherIDs[RandIndex])
         CurrList += BaseSkillTreeLists[i]
         random.shuffle(CurrList)
