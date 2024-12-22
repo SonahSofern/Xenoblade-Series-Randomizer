@@ -112,9 +112,11 @@ def GenHeader(headerName, parentTab, backgroundColor):
     Header.grid(row=rowIncrement, column=0, sticky="w")
 
     rowIncrement += 1
-    
 
-def ColorOnClick(button, textList):
+
+stateSetList = []    
+
+def StateUpdate(button, textList):
     if button.get():
         for item in textList:
             item.state(["!disabled"])       
@@ -123,6 +125,11 @@ def ColorOnClick(button, textList):
             item.state(["disabled"])
 
 
+def InteractableStateSet():
+    for item in stateSetList:
+        item()
+        
+        
 def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
     # Variables
     global OptionDictionary
@@ -132,6 +139,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     style = ttk.Style()
     spinDesc = ttk.Label()
     spinBoxObj = ttk.Spinbox()
+    StateSet = lambda: StateUpdate(checkButtonVar, [optionDesc, spinDesc, spinBoxObj] + checkBoxList)
     
     # Parent Frame
     optionPanel = ttk.Frame(parentTab)
@@ -139,7 +147,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     
     # Major Option Checkbox
     style.configure("midColor.TCheckbutton", padding=(20, 10))
-    checkButtonObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=40, style="midColor.TCheckbutton",command= lambda:ColorOnClick(checkButtonVar, [optionDesc, spinDesc, spinBoxObj] + checkBoxList))
+    checkButtonObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=40, style="midColor.TCheckbutton",command= StateSet)
     checkButtonObj.grid(row=rowIncrement, column=0, sticky="e")
     checkButtonVar = var
     
@@ -180,6 +188,8 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         "subCommandList": subOptionName_subCommandList[2*i+1],
         }
     rowIncrement += 1
+    
+    stateSetList.append(StateSet)
     
 def Options():
     # General
@@ -389,6 +399,8 @@ randoProgressDisplay = ttk.Label(text="", anchor="e", foreground=OptionColorLigh
 # Save and Load Last Options
 EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()] + [option["spinBoxVal"] for option in OptionDictionary.values()])
 SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
+InteractableStateSet()
+
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSaveAndLoad, "SavedOptions.txt"), root.destroy()))
 
 root.mainloop()

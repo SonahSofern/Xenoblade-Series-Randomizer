@@ -2,15 +2,20 @@ NOW
 
 Mutually Exclusive Widgets (Fixes Skill Tree Options Alex+Mine)
 
-Dark Mode
+Dark Mode:
+Set Initial States
+Finalize Colors
+Dark Mode Button Changes Scheme
+
+Figure out Switch compatability (LayeredFS or Atmosphere or whatever)
+
+Permalink
 
 Spellcheck (consistent phrasing too)
 
-Write Guide/ Readme info
+Test Download Process on Alex Laptop to Write Guide/ Readme info
 
 FUTURE
-
-Have Checkboxes and Probability Sliders after the description in column 4 or whatever
 
 Move away from Dictionary and do Classes might solve some issues
 

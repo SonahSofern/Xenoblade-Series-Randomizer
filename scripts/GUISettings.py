@@ -10,7 +10,7 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     fontNameVar = StringVar()
     fontSizeVar = StringVar()
     newWindow.title("GUI Settings")
-    newWindow.geometry("800x100")
+    newWindow.geometry("1000x300")
     allFonts = font.families()
     newWindow.config(background=DarkerPurple)
     
@@ -76,16 +76,16 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     fontSize.insert(0,defaultFont.cget("size"))
     fontName.delete(0, END)
     fontName.insert(0,defaultFont.cget("family"))
-    fontName.pack(padx=2, pady=2, side='left', anchor="nw")
-    fontSize.pack(padx=2, pady=2, side='left', anchor="nw")
-    fontTestBack.pack(padx=5, pady=2, side='left', anchor="nw")
-    fontTestNext.pack( padx=5, pady=2, side='left', anchor="nw")
-    saveFont.pack( padx=5, pady=2, anchor="nw")
+    fontName.grid(row=0, column=0, padx=5, pady=5)
+    fontSize.grid(row=0, column=1, padx=5, pady=5)
+    fontTestBack.grid(row=0, column=2, padx=5, pady=5)
+    fontTestNext.grid(row=0, column =3, padx=5, pady=5)
+    saveFont.grid(row=0, column=4, padx=5, pady=5)
     fontName.configure(font=staticFont)
     fontSize.configure(font=staticFont) # Have to config them like this for entry it doesnt accept style= whn you make the thing
     # Dark Mode Controls
     darkMode = ttk.Button(newWindow, text="Light Mode", command=lambda: ToggleLightDarkMode(darkMode), style="STATIC.TButton")
-    darkMode.pack(padx=2, pady=2, anchor="w")
+    darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
     
 def ToggleLightDarkMode(togButton):
     if togButton.cget("text") == "Dark Mode":
