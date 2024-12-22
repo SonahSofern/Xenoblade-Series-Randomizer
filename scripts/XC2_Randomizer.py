@@ -22,13 +22,12 @@ OptionColorDark = Gray
 root = Tk()
 
 fontNameSizeDefault = ["", 12]
-SavedOptions.loadData(fontNameSizeDefault, "GUISavedOptions.txt") # Might be able to do this with theme updating them,e instead of this
+SavedOptions.loadData(fontNameSizeDefault, "GUISavedOptions.txt")
 defaultFont = Font(family=fontNameSizeDefault[0], size=fontNameSizeDefault[1])
-GUISettings.LoadTheme(defaultFont, root)
+GUISettings.LoadTheme(defaultFont, GUISettings.darkThemeColors, "Dark", root)
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
 root.geometry(f'{windowWidth}x{windowHeight}')
-root.config(background=DarkerPurple)
 icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
 root.iconphoto(True, icon)
 
@@ -146,7 +145,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
     
     # Major Option Checkbox
-    style.configure("midColor.TCheckbutton", padding=(20, 10))
+
     checkButtonObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=40, style="midColor.TCheckbutton",command= StateSet)
     checkButtonObj.grid(row=rowIncrement, column=0, sticky="e")
     checkButtonVar = var

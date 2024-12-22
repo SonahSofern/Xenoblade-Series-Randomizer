@@ -3,9 +3,9 @@ NOW
 Mutually Exclusive Widgets (Fixes Skill Tree Options Alex+Mine)
 
 Dark Mode:
-Set Initial States
 Finalize Colors
 Dark Mode Button Changes Scheme
+Make setting that turns off or on all inputs boxes/sliders etc.
 
 Figure out Switch compatability (LayeredFS or Atmosphere or whatever)
 

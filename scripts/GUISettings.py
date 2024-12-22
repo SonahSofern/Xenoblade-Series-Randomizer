@@ -84,169 +84,176 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     fontName.configure(font=staticFont)
     fontSize.configure(font=staticFont) # Have to config them like this for entry it doesnt accept style= whn you make the thing
     # Dark Mode Controls
-    darkMode = ttk.Button(newWindow, text="Light Mode", command=lambda: ToggleLightDarkMode(darkMode), style="STATIC.TButton")
+    darkMode = ttk.Button(newWindow, text="Light Mode", command=lambda: ToggleLightDarkMode(darkMode, defaultFont, rootWindow), style="STATIC.TButton")
     darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
     
-def ToggleLightDarkMode(togButton):
+def ToggleLightDarkMode(togButton, defaultFont, root):
+    global currentTheme
     if togButton.cget("text") == "Dark Mode":
         togButton.config(text="Light Mode")
+        LoadTheme(defaultFont, darkThemeColors, "Dark", root)
     else:
         togButton.config(text="Dark Mode")
-    
-darkColor = LightBlack
-lightColor = White
-backgroundColor = DarkerPurple
-midColor = DarkGray
-midGray = MediumGray
+        LoadTheme(defaultFont, lightThemeColors, "Light", root)
 
-def LoadTheme(defaultFont, root):
-    style= ttk.Style()
-    style.theme_create('Main', settings={
-        "TNotebook": {
-            "configure": {
-                "font": defaultFont,
-                "background": backgroundColor,
-                "borderwidth": 4,
-                "relief": "ridge",
-            }
-        },
-        "TNotebook.Tab": {
-            "configure": {
-                "background": darkColor,
-                "padding": 10,
-                "font": defaultFont,
-                "foreground": midGray,
-                "bordercolor": darkColor,
-                "borderwidth": 2,
-                "focuscolor":"",# Checkbutton focus border
-            },
-            "map": {
-                "foreground": [("selected", lightColor), ("active", lightColor)],
-                "background": [("selected", midColor), ("active", midColor)]                
-            }
-        },
-        "TButton": {
-            "configure": {
-                "background": darkColor,
-                "foreground": lightColor,
-                "font": defaultFont,
-                "reliefcolor": lightColor,
-                "padding": (5,3,5,3),
-                "focuscolor":"",
-                "relief": "ridge",
-                
-            },
-            "map": {
-                "background": [("active", midColor)],
-            }
-        },
-        "TCheckbutton": {
-            "configure": {
-                "background": darkColor,
-                "foreground": midGray,
-                "padding": (40,3,50,3),
-                "indicatorcolor": midColor,
-                "indicatorbackground": midColor,
-                "font": defaultFont,
-                "indicatorrelief": "flat",
-                "focuscolor":"",
-                "indicatormargin": (0,0,10,0),
-            },
-            "map": {
-                "indicatorcolor": [  ("disabled", midColor),("selected", lightColor),("active", midColor)],
-                "background": [("disabled", darkColor),("active", midColor)],
-                "foreground": [("disabled", midGray),("active", lightColor),("selected", lightColor)],
-                "indicatorbackground": [ ("disabled", midColor),("active", midColor)],
-            }
-        },
-        "TEntry": {
-            "configure": {
-                "foreground": lightColor,
-                "font": defaultFont,
-                "fieldbackground": darkColor,
-                "padding": (5,3,5,3),
-                "selectbackground": lightColor,
-                "selectforeground": darkColor,
-                "selectborderwidth": 0,
-                "relief":"ridge",
-                "insertcolor": lightColor,
-            }
-        },
-        "TScrollbar": {
-            "configure": {
-                "troughcolor": midColor,
-                "background": darkColor,
-                "borderwidth": 3,
-                "relief": "ridge",
-                "arrowcolor": lightColor,
-            }
-        },
-        "TLabel": {
-            "configure": {
-                "foreground": lightColor,
-                "background": darkColor,
-                "troughcolor": darkColor,
-                "borderwidth": 0,
-                "padding": (20, 10),
-            },
-            "map": {
-                "foreground": [("disabled", midGray)],
-            }
-        },
-        "TFrame": {
-            "configure": {
-                "background": darkColor,
-                "relief": "flat",
-            },
-            "map": {
-                "background": [("active", midColor)],
-                "foreground": [("active", lightColor),("selected", lightColor)],
-            }
-        },
-        "TScale": {
-            "configure": {
-                "background": darkColor,
-                "foreground": lightColor,
-                "troughrelief": "flat",
-                "groovewidth": 0,
-                "troughcolor": midColor,
-                "darkcolor": darkColor,
-                "lightcolor": darkColor,
-                "borderwidth": 1,
-                "sliderwidth": 100,
-            }
-        },
-        "TSpinbox": {
-            "configure": {
-                "background": darkColor,
-                "foreground": lightColor,
-                "fieldbackground": midColor,
-                "darkcolor": darkColor,
-                "lightcolor": darkColor,
-                "insertcolor": midColor,
-                "relief": "ridge",
-                "padding": (1,0,0,0),
-                "focuscolor":"",
-                "selectforeground": lightColor,
-                "selectbackground": midColor,
-            },
-            "map": {
-                "foreground": [("disabled", midGray)],
-            }
-        }
-    })
-    style= ttk.Style()
-    style.configure("midColor.TCheckbutton", background=lightColor)
-    style.configure("darkColor.TCheckbutton", background=darkColor)
-    style.theme_use('Main')
-    
-    
-    
-    
-# Light mode
-# Toggle Light/Dark Button
-# Load theme at start
-# Make custom topbar
-# Alternating colors or Seperator
 
-# Make setting that turns off or on all inputs boxes/sliders etc.
+# Initial colors for the themes
+lightThemeColors = {
+    "backgroundColor": "white",
+    "darkColor": "gray",
+    "midColor": "lightgray",
+    "midGray": "darkgray",
+    "lightColor": "black",
+}
+
+darkThemeColors = {
+    "backgroundColor": DarkerPurple,
+    "darkColor": LightBlack,
+    "midColor": DarkGray,
+    "midGray": MediumGray,
+    "lightColor": White,
+}
+
+def LoadTheme(defaultFont, currentTheme, themeName, root):
+    style= ttk.Style()
+    try:
+        style.theme_create(themeName, settings={
+            "TNotebook": {
+                "configure": {
+                    "font": defaultFont,
+                    "background": currentTheme["backgroundColor"],
+                    "borderwidth": 4,
+                    "relief": "ridge",
+                }
+            },
+            "TNotebook.Tab": {
+                "configure": {
+                    "background": currentTheme["darkColor"],
+                    "padding": 10,
+                    "font": defaultFont,
+                    "foreground": currentTheme["midGray"],
+                    "bordercolor": currentTheme["darkColor"],
+                    "borderwidth": 2,
+                    "focuscolor":"",# Checkbutton focus border
+                },
+                "map": {
+                    "foreground": [("selected", currentTheme["lightColor"]), ("active", currentTheme["lightColor"])],
+                    "background": [("selected", currentTheme["midColor"]), ("active", currentTheme["midColor"])]                
+                }
+            },
+            "TButton": {
+                "configure": {
+                    "background": currentTheme["darkColor"],
+                    "foreground": currentTheme["lightColor"],
+                    "font": defaultFont,
+                    "reliefcolor": currentTheme["lightColor"],
+                    "padding": (5,3,5,3),
+                    "focuscolor":"",
+                    "relief": "ridge",
+                    
+                },
+                "map": {
+                    "background": [("active", currentTheme["midColor"])],
+                }
+            },
+            "TCheckbutton": {
+                "configure": {
+                    "background": currentTheme["darkColor"],
+                    "foreground": currentTheme["midGray"],
+                    "padding": (40,3,50,3),
+                    "indicatorcolor": currentTheme["midColor"],
+                    "indicatorbackground": currentTheme["midColor"],
+                    "font": defaultFont,
+                    "indicatorrelief": "flat",
+                    "focuscolor":"",
+                    "indicatormargin": (0,0,10,0),
+                },
+                "map": {
+                    "indicatorcolor": [  ("disabled", currentTheme["midColor"]),("selected", currentTheme["lightColor"]),("active", currentTheme["midColor"])],
+                    "background": [("disabled", currentTheme["darkColor"]),("active", currentTheme["midColor"])],
+                    "foreground": [("disabled", currentTheme["midGray"]),("active", currentTheme["lightColor"]),("selected", currentTheme["lightColor"])],
+                    "indicatorbackground": [ ("disabled", currentTheme["midColor"]),("active", currentTheme["midColor"])],
+                }
+            },
+            "TEntry": {
+                "configure": {
+                    "foreground": currentTheme["lightColor"],
+                    "font": defaultFont,
+                    "fieldbackground": currentTheme["darkColor"],
+                    "padding": (5,3,5,3),
+                    "selectbackground": currentTheme["lightColor"],
+                    "selectforeground": currentTheme["darkColor"],
+                    "selectborderwidth": 0,
+                    "relief":"ridge",
+                    "insertcolor": currentTheme["lightColor"],
+                }
+            },
+            "TScrollbar": {
+                "configure": {
+                    "troughcolor": currentTheme["midColor"],
+                    "background": currentTheme["darkColor"],
+                    "borderwidth": 3,
+                    "relief": "ridge",
+                    "arrowcolor": currentTheme["lightColor"],
+                }
+            },
+            "TLabel": {
+                "configure": {
+                    "foreground": currentTheme["lightColor"],
+                    "background": currentTheme["darkColor"],
+                    "troughcolor": currentTheme["darkColor"],
+                    "borderwidth": 0,
+                    "padding": (20, 10),
+                },
+                "map": {
+                    "foreground": [("disabled", currentTheme["midGray"])],
+                }
+            },
+            "TFrame": {
+                "configure": {
+                    "background": currentTheme["darkColor"],
+                    "relief": "flat",
+                },
+                "map": {
+                    "background": [("active", currentTheme["midColor"])],
+                    "foreground": [("active", currentTheme["lightColor"]),("selected", currentTheme["lightColor"])],
+                }
+            },
+            "TScale": {
+                "configure": {
+                    "background": currentTheme["darkColor"],
+                    "foreground": currentTheme["lightColor"],
+                    "troughrelief": "flat",
+                    "groovewidth": 0,
+                    "troughcolor": currentTheme["midColor"],
+                    "darkcolor": currentTheme["darkColor"],
+                    "lightcolor": currentTheme["darkColor"],
+                    "borderwidth": 1,
+                    "sliderwidth": 100,
+                }
+            },
+            "TSpinbox": {
+                "configure": {
+                    "background": currentTheme["darkColor"],
+                    "foreground": currentTheme["lightColor"],
+                    "fieldbackground": currentTheme["midColor"],
+                    "darkcolor": currentTheme["darkColor"],
+                    "lightcolor": currentTheme["darkColor"],
+                    "insertcolor": currentTheme["midColor"],
+                    "relief": "ridge",
+                    "padding": (1,0,0,0),
+                    "focuscolor":"",
+                    "selectforeground": currentTheme["lightColor"],
+                    "selectbackground": currentTheme["midColor"],
+                },
+                "map": {
+                    "foreground": [("disabled", currentTheme["midGray"])],
+                }
+            }
+        })
+    except:
+        pass
+    style.theme_use(themeName)
+    style.configure("midColor.TCheckbutton", padding=(20, 10))
+    root.config(background=currentTheme["backgroundColor"])
+
