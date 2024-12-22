@@ -2,11 +2,11 @@
 
 
 a = Analysis(
-    ['XC2_Randomizer.py'],
+    ['scripts/XC2_Randomizer.py'],
     pathex=[],
     binaries=[],
-    datas=[('_internal/Images', 'Images'), ('_internal/Toolset/bdat-toolset-win64.exe', 'Toolset'), ('__pycache__', '__pycache__'), ('_internal/JsonOutputs', 'JsonOutputs')],
-    hiddenimports=['Helper.py'],
+    datas=[('_internal/Images', 'Images'), ('_internal/Toolset/bdat-toolset-win64.exe', 'Toolset'), ('__pycache__', '__pycache__')],
+    hiddenimports=[],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

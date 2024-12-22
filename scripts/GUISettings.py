@@ -1,7 +1,7 @@
 from tkinter import *
 from UI_Colors import *
 from tkinter import font, ttk
-
+from IDs import GUIDefaults
 
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
 
@@ -14,7 +14,6 @@ def OpenSettingsWindow(rootWindow, defaultFont, backgroundCanvasList):
     newWindow.geometry("1000x300")
     allFonts = font.families()
     newWindow.config(background=DarkerPurple)
-    
     def LoadFontByName(name):
         defaultFont.config(family=name)
 
@@ -82,39 +81,42 @@ def OpenSettingsWindow(rootWindow, defaultFont, backgroundCanvasList):
     fontName.configure(font=staticFont)
     fontSize.configure(font=staticFont) # Have to config them like this for entry it doesnt accept style= whn you make the thing
     # Dark Mode Controls
-    darkMode = ttk.Button(newWindow, text="Light Mode", command=lambda: ToggleLightDarkMode(darkMode, defaultFont, rootWindow, backgroundCanvasList), style="STATIC.TButton")
+    darkMode = ttk.Button(newWindow, text=GUIDefaults[2], command=lambda: ToggleLightDarkMode(darkMode, defaultFont, rootWindow, backgroundCanvasList), style="STATIC.TButton")
     darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
     
 def ToggleLightDarkMode(togButton, defaultFont, root, backgroundCanvasList):
     global currentTheme
     if togButton.cget("text") == "Dark Mode":
         togButton.config(text="Light Mode")
-        LoadTheme(defaultFont, darkThemeColors, "Dark", root, backgroundCanvasList)
+        LoadTheme(defaultFont, "Light Mode", root, backgroundCanvasList)
     else:
         togButton.config(text="Dark Mode")
-        LoadTheme(defaultFont, lightThemeColors, "Light", root, backgroundCanvasList)
+        LoadTheme(defaultFont, "Dark Mode", root, backgroundCanvasList)
         
 
 
-# Initial colors for the themes
-lightThemeColors = {
+def LoadTheme(defaultFont, themeName, root, backgroundCanvasList):
+    style= ttk.Style()
+    # Initial colors for the themes
+    lightThemeColors = {
     "backgroundColor": Red,
-    "darkColor": "lightgray",
-    "midColor": DarkGray,
-    "midGray": "darkgray",
-    "lightColor": "black",
-}
+    "darkColor": LightGray,
+    "midColor": White,
+    "midGray": MiddleLightGray,
+    "lightColor": LightBlack,
+    }
 
-darkThemeColors = {
+    darkThemeColors = {
     "backgroundColor": DarkerPurple,
     "darkColor": LightBlack,
     "midColor": DarkGray,
     "midGray": MediumGray,
     "lightColor": White,
-}
-
-def LoadTheme(defaultFont, currentTheme, themeName, root, backgroundCanvasList):
-    style= ttk.Style()
+    }
+    if themeName == "Dark Mode":
+        currentTheme = darkThemeColors
+    else:
+        currentTheme = lightThemeColors
     try:
         style.theme_create(themeName, settings={
             "TNotebook": {
@@ -122,7 +124,7 @@ def LoadTheme(defaultFont, currentTheme, themeName, root, backgroundCanvasList):
                     "font": defaultFont,
                     "background": currentTheme["backgroundColor"],
                     "borderwidth": 4,
-                    "relief": "ridge",
+                    "relief": "flat",
                 }
             },
             "TNotebook.Tab": {
@@ -130,10 +132,11 @@ def LoadTheme(defaultFont, currentTheme, themeName, root, backgroundCanvasList):
                     "background": currentTheme["darkColor"],
                     "padding": 10,
                     "font": defaultFont,
-                    "foreground": currentTheme["midGray"],
+                    "foreground": currentTheme["lightColor"],
                     "bordercolor": currentTheme["darkColor"],
                     "borderwidth": 2,
                     "focuscolor":"",# Checkbutton focus border
+                    "relief": "flat",
                 },
                 "map": {
                     "foreground": [("selected", currentTheme["lightColor"]), ("active", currentTheme["lightColor"])],
@@ -160,18 +163,18 @@ def LoadTheme(defaultFont, currentTheme, themeName, root, backgroundCanvasList):
                     "background": currentTheme["darkColor"],
                     "foreground": currentTheme["midGray"],
                     "padding": (40,3,50,3),
-                    "indicatorcolor": currentTheme["midColor"],
-                    "indicatorbackground": currentTheme["midColor"],
+                    "indicatorcolor": currentTheme["darkColor"],
+                    "indicatorbackground": currentTheme["darkColor"],
                     "font": defaultFont,
                     "indicatorrelief": "flat",
                     "focuscolor":"",
                     "indicatormargin": (0,0,10,0),
                 },
                 "map": {
-                    "indicatorcolor": [  ("disabled", currentTheme["midColor"]),("selected", currentTheme["lightColor"]),("active", currentTheme["midColor"])],
+                    "indicatorcolor": [("disabled", currentTheme["darkColor"]),("selected", currentTheme["lightColor"]),("active", currentTheme["midColor"])],
                     "background": [("disabled", currentTheme["darkColor"]),("active", currentTheme["midColor"])],
                     "foreground": [("disabled", currentTheme["midGray"]),("active", currentTheme["lightColor"]),("selected", currentTheme["lightColor"])],
-                    "indicatorbackground": [ ("disabled", currentTheme["midColor"]),("active", currentTheme["midColor"])],
+                    "indicatorbackground": [ ("disabled", currentTheme["darkColor"]),("active", currentTheme["midGray"])],
                 }
             },
             "TEntry": {
@@ -259,4 +262,4 @@ def LoadTheme(defaultFont, currentTheme, themeName, root, backgroundCanvasList):
     style.configure("STATIC.TButton", font=staticFont)
     root.config(background=currentTheme["backgroundColor"])
     for canvas in backgroundCanvasList:
-        canvas.config(background=currentTheme["darkColor"])
+        canvas.config(background=currentTheme["darkColor"], border=0)

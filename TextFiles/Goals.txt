@@ -5,7 +5,7 @@ Mutually Exclusive Widgets (Fixes Skill Tree Options Alex+Mine)
 Dark Mode:
 Finalize Colors
 Dark Mode Button Changes Scheme
-Make setting that turns off or on all inputs boxes/sliders etc.
+
 
 Figure out Switch compatability (LayeredFS or Atmosphere or whatever)
 
@@ -16,6 +16,8 @@ Spellcheck (consistent phrasing too)
 Test Download Process on Alex Laptop to Write Guide/ Readme info
 
 FUTURE
+
+Make setting that turns off or on all inputs boxes/sliders etc.
 
 Move away from Dictionary and do Classes might solve some issues
 

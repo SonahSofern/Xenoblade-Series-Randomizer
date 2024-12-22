@@ -22,10 +22,8 @@ backgroundCanvasList = []
 
 root = Tk()
 
-fontNameSizeDefault = ["", 12]
-SavedOptions.loadData(fontNameSizeDefault, "GUISavedOptions.txt")
-defaultFont = Font(family=fontNameSizeDefault[0], size=fontNameSizeDefault[1])
-GUISettings.LoadTheme(defaultFont, GUISettings.darkThemeColors, "Dark", root, backgroundCanvasList)
+defaultFont = Font(family=GUIDefaults[0], size=GUIDefaults[1])
+
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
 root.geometry(f'{windowWidth}x{windowHeight}')
@@ -152,7 +150,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     checkButtonVar = var
     
     # Description Label
-    optionDesc = ttk.Label(optionPanel, text=description, anchor="w", width=50, wraplength=500)
+    optionDesc = ttk.Label(optionPanel, text=description, anchor="w", width=55, wraplength=500)
     optionDesc.grid(row=rowIncrement, column=1, sticky="w", padx=0)
     
     # % Boxes
@@ -162,7 +160,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         spinBoxObj.delete(0, END)
         spinBoxObj.insert(0,"0")
         spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
-        spinDesc = ttk.Label(optionPanel, text="% to randomize", anchor="w")
+        spinDesc = ttk.Label(optionPanel, text="% randomized", anchor="w")
         spinDesc.grid(row=rowIncrement, column=3, sticky="w", padx=0)
         spinBoxVar = var
 
@@ -231,7 +229,7 @@ def Options():
     #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30)) Defunct with alex's enemy rando
     
     # Misc
-    GenStandardOption("Music", TabMisc, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle(OptionDictionary)], ["Seperate Battle and Environment Themes", []]) # need to change title screen music
+    GenStandardOption("Music", TabMisc, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle(OptionDictionary)], ["Seperate Battle and \nEnvironment Themes", []]) # need to change title screen music
     # GenDictionary("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.InclRange(0,3721), Helper.InclRange(2001,3721))])
     # GenOption("Funny Faces", TabMisc, "Randomizes Facial Expressions", ["common/EVT_eyetype.json"], ["$id"], Helper.inclRange(0,15), Helper.inclRange(0,15)) # doesnt work yet
     # GenDictionary("Menu Colors", TabMisc, "Randomizes Colors in the UI", [lambda: JSONParser.ChangeJSON(["common/MNU_ColorList.json"], ["col_r", "col_g", "col_b"], Helper.InclRange(0,255), Helper.InclRange(0,0))])
@@ -405,5 +403,5 @@ SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
 InteractableStateSet()
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSaveAndLoad, "SavedOptions.txt"), root.destroy()))
-
+GUISettings.LoadTheme(defaultFont, GUIDefaults[2], root, backgroundCanvasList)
 root.mainloop()
