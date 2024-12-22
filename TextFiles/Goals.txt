@@ -2,18 +2,13 @@ NOW
 
 Mutually Exclusive Widgets (Fixes Skill Tree Options Alex+Mine)
 
-Dark Mode:
-Finalize Colors
-Dark Mode Button Changes Scheme
-
-
-Figure out Switch compatability (LayeredFS or Atmosphere or whatever)
-
 Permalink
 
 Spellcheck (consistent phrasing too)
 
 Test Download Process on Alex Laptop to Write Guide/ Readme info
+
+Figure out Switch compatability (LayeredFS or Atmosphere or whatever)
 
 FUTURE
 
