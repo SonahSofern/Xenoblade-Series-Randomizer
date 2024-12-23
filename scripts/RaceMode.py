@@ -54,7 +54,7 @@ def RaceModeChanging(OptionsRunDict):
     # The Save File is set up in a way that it has 56 bonus exp already, and is at level 2, so that value (totals to 76 xp gained) gets subtracted from the total xp needed
     # XP needed to reach a given level, formatted in [Given Level, Total XP Needed]
     # Tora ends up like 35 xp off level 20 with the actual xp needed to reach lv 5 at 360, so I give some more exp to compensate. It doesn't push anyone else over.
-    XPNeededToReachLv = [[5, 325], [15, 9060], [20, 21360], [26, 44520], [29, 59820], [34, 91320], [35, 98580], [38, 122520], [42, 160080], [46, 205140], [51, 274640], [59, 428120], [68, 682040], [70, 789920]]
+    XPNeededToReachLv = [[5, 385], [15, 9100], [20, 21360], [26, 44520], [29, 59820], [34, 91320], [35, 98580], [38, 122520], [42, 160080], [46, 205140], [51, 274640], [59, 428120], [68, 682040], [70, 789920]]
     global ChosenIndices
     ChosenIndices = []
 
