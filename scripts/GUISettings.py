@@ -1,20 +1,21 @@
 from tkinter import *
 from UI_Colors import *
 from tkinter import font, ttk
-from IDs import GUIDefaults
+from IDs import GUIDefaults, CanvasesForStyling, RootsForStyling
 
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
+# Dont like the way im saving and loading data its convoluted
 
-def OpenSettingsWindow(rootWindow, defaultFont, backgroundCanvasList):
+def OpenSettingsWindow(rootWindow, defaultFont):
     newWindow = Toplevel(rootWindow)
     iter = 0
     fontNameVar = StringVar()
     fontSizeVar = StringVar()
     newWindow.title("GUI Settings")
     newWindow.geometry("1000x300")
-    
+    RootsForStyling.append(newWindow)
+    LoadTheme(defaultFont, GUIDefaults[2])
     allFonts = font.families()
-    newWindow.config(background=DarkerPurple)
     def LoadFontByName(name):
         defaultFont.config(family=name)
 
@@ -82,23 +83,23 @@ def OpenSettingsWindow(rootWindow, defaultFont, backgroundCanvasList):
     fontName.configure(font=staticFont)
     fontSize.configure(font=staticFont) # Have to config them like this for entry it doesnt accept style= whn you make the thing
     # Dark Mode Controls
-    darkMode = ttk.Button(newWindow, text=GUIDefaults[2], command=lambda: ToggleLightDarkMode(darkMode, defaultFont, rootWindow, backgroundCanvasList), style="STATIC.TButton")
+    darkMode = ttk.Button(newWindow, text=GUIDefaults[2], command=lambda: ToggleLightDarkMode(darkMode, defaultFont), style="STATIC.TButton")
     darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
 
-def ToggleLightDarkMode(togButton, defaultFont, root, backgroundCanvasList):
+def ToggleLightDarkMode(togButton, defaultFont):
     global currentTheme
     if togButton.cget("text") == "Dark Mode":
         togButton.config(text="Light Mode")
         GUIDefaults[2] = "Light Mode"
-        LoadTheme(defaultFont, "Light Mode", root, backgroundCanvasList)
+        LoadTheme(defaultFont, "Light Mode")
     else:
         togButton.config(text="Dark Mode")
         GUIDefaults[2] = "Dark Mode"
-        LoadTheme(defaultFont, "Dark Mode", root, backgroundCanvasList)
+        LoadTheme(defaultFont, "Dark Mode")
         
 
 
-def LoadTheme(defaultFont, themeName, root, backgroundCanvasList):
+def LoadTheme(defaultFont, themeName):
     style= ttk.Style()
     # Initial colors for the themes
     lightThemeColors = {
@@ -263,6 +264,9 @@ def LoadTheme(defaultFont, themeName, root, backgroundCanvasList):
     staticFont = Font(family="Arial", size=16)
     style.configure("midColor.TCheckbutton", padding=(20, 10))
     style.configure("STATIC.TButton", font=staticFont)
-    root.config(background=currentTheme["backgroundColor"])
-    for canvas in backgroundCanvasList:
+    style.configure("BorderlessLabel.TLabel", background=currentTheme["backgroundColor"], foreground=White)
+    # Since Canvas and Roots arrent affected by normal styling
+    for canvas in CanvasesForStyling:
         canvas.config(background=currentTheme["darkColor"], border=0)
+    for root in RootsForStyling:
+        root.config(background=currentTheme["backgroundColor"])

@@ -8,7 +8,8 @@ ValidDriverCosmetics = [] # Global Variable Referenced for Cosmetics
 ValidBladeCosmetics = [] # Global Variable Referenced for Cosmetics
 ValidArtificialBladeCosmetics = [] # Global Variable Referenced for Cosmetics
 
-
+CanvasesForStyling = []
+RootsForStyling = []
 GUIDefaults = ["", 12, "Dark"]
 loadData(GUIDefaults, "GUISavedOptions.txt")
 

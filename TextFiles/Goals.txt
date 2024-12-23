@@ -1,6 +1,6 @@
 NOW
 
-Mutually Exclusive Widgets (Fixes Skill Tree Options Alex+Mine)
+
 
 Permalink
 
@@ -10,9 +10,13 @@ Test Download Process on Alex Laptop to Write Guide/ Readme info
 
 Figure out Switch compatability (LayeredFS or Atmosphere or whatever)
 
-save last window size
+
 
 FUTURE
+
+save last window size
+
+Mutually Exclusive Widgets (Fixes Skill Tree Options Alex+Mine)
 
 Make setting that turns off or on all inputs boxes/sliders etc.
 
