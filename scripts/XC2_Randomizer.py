@@ -345,7 +345,6 @@ def RunOptions():
                             subCommand()
                         except Exception as error:
                             print(f"ERROR: {command['name']}: {subCommand['subName']} | {error}")
-
                             print(f"{traceback.format_exc()}") # shows the full error
             randoProgressDisplay.config(text=f"Randomizing {option['name']}")
             for command in option["commandList"]:
