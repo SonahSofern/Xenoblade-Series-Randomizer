@@ -544,9 +544,9 @@ def EnemyLogic(OptionsRunDict):
                 if EnemiestoPass: #if the list of enemies to pass is not empty
                     DefaultEnemyIDs = EnemiestoPass.copy()
                     RandomizedEnemyIDs = DefaultEnemyIDs.copy()
-                    TotalDefaultEnemyIDs.append(DefaultEnemyIDs)
+                    TotalDefaultEnemyIDs.extend(DefaultEnemyIDs)
                     random.shuffle(RandomizedEnemyIDs)
-                    TotalRandomizedEnemyIDs.append(RandomizedEnemyIDs)
+                    TotalRandomizedEnemyIDs.extend(RandomizedEnemyIDs)
                     ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
                     if KeepAllEnemyLevelsBox:
                         LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, LevelstoPass)

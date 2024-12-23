@@ -132,12 +132,12 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     # Variables
     global OptionDictionary
     global rowIncrement
-    spinBoxVar = IntVar()
+    spinBoxVar = IntVar(value=100)
     var = BooleanVar()
     spinDesc = ttk.Label()
     spinBoxObj = ttk.Spinbox()
     StateSet = lambda: StateUpdate(checkButtonVar, [optionDesc, spinDesc, spinBoxObj] + checkBoxList)
-    
+
     # Parent Frame
     optionPanel = ttk.Frame(parentTab)
     optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
@@ -154,14 +154,13 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     
     # % Boxes
     if (optionType == Spinbox):
-        var = IntVar()
-        spinBoxObj = ttk.Spinbox(optionPanel, from_=0, to=100, textvariable=var, wrap=True, width=3, increment=10)
+        spinBoxObj = ttk.Spinbox(optionPanel, from_=0, to=100, textvariable=spinBoxVar, wrap=True, width=3, increment=10)
         spinBoxObj.delete(0, END)
         spinBoxObj.insert(0,"0")
         spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
         spinDesc = ttk.Label(optionPanel, text="% randomized", anchor="w")
         spinDesc.grid(row=rowIncrement, column=3, sticky="w", padx=0)
-        spinBoxVar = var
+        print(spinBoxObj.get())
 
 
     # Create Main Option Dictionary Entry
@@ -185,7 +184,6 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         "subCommandList": subOptionName_subCommandList[2*i+1],
         }
     rowIncrement += 1
-    
     # Variable to help set initial states of interactables
     stateSetList.append(StateSet)
     
@@ -286,6 +284,7 @@ def Options():
 
     # Nonstandard Functions
     ShowTitleScreenText()
+    RaceMode.SeedHash()
 
 def Randomize():
     def ThreadedRandomize():
@@ -310,7 +309,7 @@ def Randomize():
 
         # Runs all randomization
         RunOptions()
-        RaceMode.SeedHash()
+
         randoProgressDisplay.config(text="Packing BDATs")
 
         # Packs BDATs
@@ -336,11 +335,9 @@ def Randomize():
 
 def RunOptions():
     for option in OptionDictionary.values():
-        if (option["optionTypeVal"].get() != 0): # checks main option input
-            try:
-                IDs.CurrentSliderOdds = option["spinBoxVal"].get()
-            except:
-                pass
+        if (option["optionTypeVal"].get()): # checks main option input
+            print(option["spinBoxVal"].get())
+            IDs.CurrentSliderOdds = option["spinBoxVal"].get()
             for subOption in option["subOptionObjects"].values():
                 if (subOption["subOptionTypeVal"].get()): # checks subOption input
                     for subCommand in subOption["subCommandList"]:
@@ -398,7 +395,7 @@ InteractableStateSet()
 # Permalink Options/Variables
 permalinkVar = StringVar()
 CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
-SeedName, SettingsValues = PermalinkManagement.GenerateSettingsFromPermalink(CompressedPermalink, EveryObjectToSaveAndLoad)
+# SeedName, SettingsValues = PermalinkManagement.GenerateSettingsFromPermalink(CompressedPermalink, EveryObjectToSaveAndLoad)
 permalinkFrame = ttk.Frame(root)
 permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth, textvariable=permalinkVar)
 permalinkButton = ttk.Button(permalinkFrame, text="Copy Permalink")
