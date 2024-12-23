@@ -395,14 +395,20 @@ InteractableStateSet()
 
 
 # Permalink Options/Variables
+permalinkVar = StringVar()
 CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
 SeedName, SettingsValues = PermalinkManagement.GenerateSettingsFromPermalink(CompressedPermalink, EveryObjectToSaveAndLoad)
 permalinkFrame = ttk.Frame(root)
-permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth)
+permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth, textvariable=permalinkVar)
 permalinkButton = ttk.Button(permalinkFrame, text="Copy Permalink")
 permalinkFrame.pack(padx=10, pady=(0,30), anchor="w")
 permalinkButton.pack(side="left", padx=2)
 permalinkEntry.pack(side='left', padx=2)
+
+def LoadByPermalink(objects, permaLinkObjects):
+    
+    pass
+permalinkVar.trace_add("write", LoadByPermalink(EveryObjectToSaveAndLoad, PermalinkManagement.GenerateSettingsFromPermalink()))
 
 
 # Bottom Left Progress Display Text
