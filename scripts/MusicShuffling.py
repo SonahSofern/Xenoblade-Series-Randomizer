@@ -14,7 +14,7 @@ import random
 # Torna fight themes overlap with base game file names ("m0x.wav"->"m2x.wav"), so you can't use them as enemy battle themes in the base game because those point to other themes used in cutscenes in the game.
 
 def MusicShuffle(OptionsRunDict):
-    if OptionsRunDict["Music"]["subOptionObjects"]["Seperate Battle and Environment Themes"]["subOptionTypeVal"].get():
+    if OptionsRunDict["Music"]["subOptionObjects"]["Seperate Battle and \nEnvironment Themes"]["subOptionTypeVal"].get():
         with open("./_internal/JsonOutputs/common/RSC_BgmList.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data['rows']:

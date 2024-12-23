@@ -21,13 +21,13 @@ ReactRevHigh = [0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 40, 60, 80, 100, 100, 100, 100, 1
 
 def RaceModeChanging(OptionsRunDict): 
     print("Setting Up Race Mode")    
-    #EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
-    #EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
+    #Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
+    #Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
 
     AreaList1 = [41, 68] #41, 68
     AreaList2 = [99, 152] #99, 152
-    AreaList3 = [125, 133, 168] #125, 133, 168
-    AreaList4 = [175, 187] #175, 187
+    AreaList3 = [125] #125, 133, 168
+    AreaList4 = [187] #175, 187
 
     AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
 
@@ -247,7 +247,7 @@ def LessGrinding(): #adjusting level based exp gains, and debuffs while underlev
 def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
     NGPlusBladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
     NGPlusBladeCrystalIDs = []
-    if OptionsRunDict["Core Crystal Changes"]["optionTypeVal"].get():
+    if OptionsRunDict["Guaranteed Rare Blades"]["optionTypeVal"].get():
         with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
             for i in range(0, len(NGPlusBladeIDs)):
@@ -628,7 +628,7 @@ def SeedHash():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    DebugLog.AppendSeedHash(seedhashcomplete)
+    # DebugLog.AppendSeedHash(seedhashcomplete)
     
 def ReduceBladeReqTrustVals(): # Sets required Trust Values to 0.5x the vanilla values
     with open("./_internal/JsonOutputs/common/FLD_ConditionIdea.json", 'r+', encoding='utf-8') as file:
@@ -759,8 +759,7 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
                     file.seek(0)
                     file.truncate()
                     json.dump(data, file, indent=2, ensure_ascii=False)
-    DebugLog.DebugXoharLocations(XoharChestIDs)
-    pass
+    # DebugLog.DebugXoharLocations(XoharChestIDs)
 
 def DriverLvandSPFix():
     with open("./_internal/JsonOutputs/common/CHR_Dr.json", 'r+', encoding='utf-8') as file: # Maybe fixing XP dupe
@@ -789,12 +788,12 @@ def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def FindtheBladeNames(OptionsRunDict):
-    if OptionsRunDict["Core Crystal Changes"]["optionTypeVal"].get():
+    if OptionsRunDict["Guaranteed Rare Blades"]["optionTypeVal"].get():
         ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
         CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
         CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
         CorrespondingBladeNames = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common_ms/chr_bl_ms.json", ["$id"], CorrespondingBladeNameIDs, "name")
-        DebugLog.DebugCoreCrystalAddition(ValidCrystalListIDs, CorrespondingBladeNames)
+        # DebugLog.DebugCoreCrystalAddition(ValidCrystalListIDs, CorrespondingBladeNames)
         ITMCrystalAdditions(CorrespondingBladeNames, CorrespondingBladeIDs)
 
 def ITMCrystalAdditions(BladeNames, CorrespondingBladeIDs):
@@ -818,10 +817,10 @@ def ITMCrystalAdditions(BladeNames, CorrespondingBladeIDs):
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def PouchItemCarryCapacityIncrease(): # Set the max carry capacity of pouch items to 10 for all items
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/ITM_FavoriteList.json", ["ValueMax"], 10)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/ITM_FavoriteList.json", ["ValueMax"], 10)
 
 def DriverArtUpgradeCostChange(): # to reduce the amount of time spent menuing, a single manual (5000 WP) should be enough to upgrade an art to level 5
-    EnemyRandoLogic.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP2", "NeedWP3", "NeedWP4", "NeedWP5"], 1250)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP2", "NeedWP3", "NeedWP4", "NeedWP5"], 1250)
 
 def BladeTreeMaxRewardChange(): # When a blade skill tree completes, rewards that I already add to the item pool get given to the player, so I just replace the rewards with nothing.
     with open("./_internal/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file: 
