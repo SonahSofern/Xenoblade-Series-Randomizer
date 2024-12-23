@@ -181,9 +181,11 @@ def RaceModeChanging(OptionsRunDict):
                 row["nextIDtheater"] = 10244
                 row["linkID"] = 0
             if row["$id"] == 10260: #removing script that removes morag
-                row["scriptName"] = 0
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
             if row["$id"] == 10269: #removing script that removes morag
-                row["scriptName"] = 0
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
             if row["$id"] == 10304:
                 row["linkID"] = 0
             if row["$id"] == 10366: # need to hard code the leap between cliffs and land of morytha because I break some stuff to make warping between continents work.
@@ -828,7 +830,7 @@ def BladeTreeMaxRewardChange(): # When a blade skill tree completes, rewards tha
     with open("./_internal/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
-            if row["$id"] in [927, 928, 929, 930]:
+            if row["$id"] in Helper.InclRange(911, 931):
                 row["ItemID1"] = 0
                 row["ItemNumber1"] = 0
                 row["ItemID2"] = 0
