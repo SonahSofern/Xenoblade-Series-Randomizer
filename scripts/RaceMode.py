@@ -180,15 +180,16 @@ def RaceModeChanging(OptionsRunDict):
                 row["nextID"] = 10244
                 row["nextIDtheater"] = 10244
                 row["linkID"] = 0
+            if row["$id"] == 10260: #removing script that removes morag
+                row["scriptName"] = 0
+            if row["$id"] == 10269: #removing script that removes morag
+                row["scriptName"] = 0
             if row["$id"] == 10304:
                 row["linkID"] = 0
             if row["$id"] == 10366: # need to hard code the leap between cliffs and land of morytha because I break some stuff to make warping between continents work.
                 row["scenarioFlag"] = 8001
                 row["nextID"] = 10369
                 row["nextIDtheater"] = 10369
-            if row["$id"] == 10369: # script that removes all party members except rex
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
             if row["$id"] == 10369: # script that adds Jin to the party (there would be 6 chars, breaking the menus, also possibly causing SP dupe bug)
                 row["scriptName"] = ""
                 row["scriptStartId"] = 0
