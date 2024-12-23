@@ -175,10 +175,11 @@ def RaceModeChanging(OptionsRunDict):
             if row["$id"] == 10213: # script that readds morag
                 row["scriptName"] = ""
                 row["scriptStartId"] = 0
-            if row["$id"] == 10239: # need to hard code the chapter transition for indol and temperantia section because I break some stuff to make warping between continents work.
+            if row["$id"] == 10240: # need to hard code the chapter transition for indol and temperantia section because I break some stuff to make warping between continents work.
                 row["scenarioFlag"] = 6001
                 row["nextID"] = 10244
                 row["nextIDtheater"] = 10244
+                row["linkID"] = 0
             if row["$id"] == 10304:
                 row["linkID"] = 0
             if row["$id"] == 10366: # need to hard code the leap between cliffs and land of morytha because I break some stuff to make warping between continents work.

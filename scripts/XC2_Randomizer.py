@@ -336,7 +336,6 @@ def Randomize():
 def RunOptions():
     for option in OptionDictionary.values():
         if (option["optionTypeVal"].get()): # checks main option input
-            print(option["spinBoxVal"].get())
             IDs.CurrentSliderOdds = option["spinBoxVal"].get()
             for subOption in option["subOptionObjects"].values():
                 if (subOption["subOptionTypeVal"].get()): # checks subOption input
