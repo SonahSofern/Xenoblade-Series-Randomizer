@@ -251,9 +251,11 @@ def LoadTheme(defaultFont, themeName):
                     "focuscolor":"",
                     "selectforeground": currentTheme["lightColor"],
                     "selectbackground": currentTheme["midColor"],
+                    "arrowcolor": currentTheme["lightColor"],
                 },
                 "map": {
                     "foreground": [("disabled", currentTheme["midGray"])],
+                    "arrowcolor": [("disabled", currentTheme["midGray"])],
                 }
             }
         })
