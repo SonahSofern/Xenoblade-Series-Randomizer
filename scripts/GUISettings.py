@@ -12,6 +12,7 @@ def OpenSettingsWindow(rootWindow, defaultFont, backgroundCanvasList):
     fontSizeVar = StringVar()
     newWindow.title("GUI Settings")
     newWindow.geometry("1000x300")
+    
     allFonts = font.families()
     newWindow.config(background=DarkerPurple)
     def LoadFontByName(name):
@@ -67,7 +68,7 @@ def OpenSettingsWindow(rootWindow, defaultFont, backgroundCanvasList):
     fontTestBack = ttk.Button(newWindow, text="Previous", command=PreviousFont, width=10, style="STATIC.TButton")
     fontName = ttk.Entry(newWindow, width=20, textvariable=fontNameVar)
     fontTestNext = ttk.Button(newWindow, text="Next", command=NextFont, style="STATIC.TButton")
-    saveFont = ttk.Button(newWindow, text="Save", command=SaveUIChanges, style="STATIC.TButton")
+    saveGUI = ttk.Button(newWindow, text="Save Changes", command=SaveUIChanges, style="STATIC.TButton")
     fontSize = ttk.Entry(newWindow, textvariable=fontSizeVar)
     fontSize.delete(0, END)
     fontSize.insert(0,defaultFont.cget("size"))
@@ -77,20 +78,22 @@ def OpenSettingsWindow(rootWindow, defaultFont, backgroundCanvasList):
     fontSize.grid(row=0, column=1, padx=5, pady=5)
     fontTestBack.grid(row=0, column=2, padx=5, pady=5)
     fontTestNext.grid(row=0, column =3, padx=5, pady=5)
-    saveFont.grid(row=0, column=4, padx=5, pady=5)
+    saveGUI.grid(row=2, column=1, padx=5, pady=5)
     fontName.configure(font=staticFont)
     fontSize.configure(font=staticFont) # Have to config them like this for entry it doesnt accept style= whn you make the thing
     # Dark Mode Controls
     darkMode = ttk.Button(newWindow, text=GUIDefaults[2], command=lambda: ToggleLightDarkMode(darkMode, defaultFont, rootWindow, backgroundCanvasList), style="STATIC.TButton")
     darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
-    
+
 def ToggleLightDarkMode(togButton, defaultFont, root, backgroundCanvasList):
     global currentTheme
     if togButton.cget("text") == "Dark Mode":
         togButton.config(text="Light Mode")
+        GUIDefaults[2] = "Light Mode"
         LoadTheme(defaultFont, "Light Mode", root, backgroundCanvasList)
     else:
         togButton.config(text="Dark Mode")
+        GUIDefaults[2] = "Dark Mode"
         LoadTheme(defaultFont, "Dark Mode", root, backgroundCanvasList)
         
 

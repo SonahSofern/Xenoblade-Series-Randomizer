@@ -14,7 +14,7 @@ JsonOutput = "./_internal/JsonOutputs"
 OptionDictionary = {}
 rowIncrement = 0
 MaxWidth = 1000
-windowWidth = "1000"
+windowWidth = "1200"
 windowHeight = "800"
 OptionColorLight = White
 OptionColorDark = Gray
@@ -386,6 +386,30 @@ seedDesc.pack(side='left', padx=2, pady=2)
 randoSeedEntry = ttk.Entry(SeedFrame, width=30)
 randoSeedEntry.pack(side='left', padx=2)
 
+
+
+
+
+# Save and Load Last Options
+EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()] + [option["spinBoxVal"] for option in OptionDictionary.values()])
+SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
+InteractableStateSet()
+
+
+# Permalink Options/Variables
+CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
+SeedName, SettingsValues = PermalinkManagement.GenerateSettingsFromPermalink(CompressedPermalink, EveryObjectToSaveAndLoad)
+permalinkFrame = ttk.Frame(root)
+permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth)
+permalinkButton = ttk.Button(permalinkFrame, text="Copy Permalink")
+permalinkFrame.pack(padx=10, pady=(0,30), anchor="w")
+permalinkButton.pack(side="left", padx=2)
+permalinkEntry.pack(side='left', padx=2)
+
+
+# Bottom Left Progress Display Text
+randoProgressDisplay = ttk.Label(text="", anchor="e", padding=2)
+
 # Randomize Button
 RandomizeButton = ttk.Button(text='Randomize', command=Randomize)
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
@@ -396,17 +420,6 @@ Cog = PhotoImage(file="./_internal/Images/SmallSettingsCog.png")
 SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, backgroundCanvasList))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
-# Bottom Left Progress Display Text
-randoProgressDisplay = ttk.Label(text="", anchor="e", foreground=OptionColorLight, background=DarkerPurple, padding=2)
-
-# Save and Load Last Options
-EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()] + [option["spinBoxVal"] for option in OptionDictionary.values()])
-SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
-InteractableStateSet()
-
-# Permalink Variables
-CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
-SeedName, SettingsValues = PermalinkManagement.GenerateSettingsFromPermalink(CompressedPermalink, EveryObjectToSaveAndLoad)
 
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSaveAndLoad, "SavedOptions.txt"), root.destroy()))

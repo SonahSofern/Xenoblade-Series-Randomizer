@@ -10,6 +10,8 @@ Test Download Process on Alex Laptop to Write Guide/ Readme info
 
 Figure out Switch compatability (LayeredFS or Atmosphere or whatever)
 
+save last window size
+
 FUTURE
 
 Make setting that turns off or on all inputs boxes/sliders etc.
