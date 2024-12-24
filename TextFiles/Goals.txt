@@ -1,16 +1,16 @@
 NOW
 
-
-
 Permalink
-
-Title Screen
 
 Test Download Process on Alex Laptop to Write Guide/ Readme info
 
 Figure out Switch compatability (LayeredFS or Atmosphere or whatever)
 
 Guaranteed rare blades wont work unless race mode is on
+
+Doom on arts is applied when i dont want it
+
+Randomizing Race Mode message
 
 FUTURE
 
@@ -33,3 +33,11 @@ NPC Rando (Eventually want npcs to actually exist there not just the model (acto
 Scroll bars generates with loops not manually
 
 Clean up code make readable and fast (I dont like these global variables clearing and maintaining them its bad programming idk how to fix yet)
+
+enemy strength sort for enemy rando
+
+Enemy Aggro Option
+
+Skip driver skilol tree unlock animation by having it already unlcked
+
+Hide all the affinity pop ups
