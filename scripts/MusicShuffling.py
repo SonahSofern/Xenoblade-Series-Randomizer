@@ -12,7 +12,6 @@ import random
 # priority column, value 0 is highest priority, will always play if given a choice of multiple songs. prio goes down as prio # goes up
 # I don't know what causes the cave music and gormott lower music to play over other themes tbh.
 # Torna fight themes overlap with base game file names ("m0x.wav"->"m2x.wav"), so you can't use them as enemy battle themes in the base game because those point to other themes used in cutscenes in the game.
-# Randomizing RSC_BgmList causes major issues, so we instead target the other two files.
 
 # Adding new IDs doesn't seem to work
 # Reusing other IDs also doesn't seem to work

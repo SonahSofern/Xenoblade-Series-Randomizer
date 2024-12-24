@@ -218,8 +218,9 @@ def RaceModeChanging(OptionsRunDict):
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Less Grinding"]["subOptionTypeVal"].get():
         print("Reducing amount of grinding")
         LessGrinding()
-        ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs)
-        ReduceBladeReqTrustVals()
+        if NGPlusBladeCrystalIDs != None:
+            ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs)
+            ReduceBladeReqTrustVals()
         SecondSkillTreeCostReduc()
         DriverArtUpgradeCostChange()
         BladeTreeMaxRewardChange()
@@ -384,15 +385,21 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
-    NonNGPlusCoreCrystalIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
-    NonNGPlusCoreCrystalIDs = [x for x in NonNGPlusCoreCrystalIDs if x not in NGPlusBladeCrystalIDs]
-    NonNGPlusCoreCrystalIDs.sort()
-    A1CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12])
-    del NonNGPlusCoreCrystalIDs[:12]
-    A2CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12])
-    del NonNGPlusCoreCrystalIDs[:12]
-    A3CoreCrystalIDs = (NonNGPlusCoreCrystalIDs)
-    A4CoreCrystalIDs = NGPlusBladeCrystalIDs
+    if NGPlusBladeCrystalIDs == None:
+        A1CoreCrystalIDs = []
+        A2CoreCrystalIDs = []
+        A3CoreCrystalIDs = []
+        A4CoreCrystalIDs = []
+    if NGPlusBladeCrystalIDs != None:
+        NonNGPlusCoreCrystalIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
+        NonNGPlusCoreCrystalIDs = [x for x in NonNGPlusCoreCrystalIDs if x not in NGPlusBladeCrystalIDs]
+        NonNGPlusCoreCrystalIDs.sort()
+        A1CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12])
+        del NonNGPlusCoreCrystalIDs[:12]
+        A2CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12])
+        del NonNGPlusCoreCrystalIDs[:12]
+        A3CoreCrystalIDs = (NonNGPlusCoreCrystalIDs)
+        A4CoreCrystalIDs = NGPlusBladeCrystalIDs
     A1Equip = []
     A2Equip = []
     A3Equip = []
@@ -663,9 +670,16 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
     XoharFragPreciousIDs = [25135, 25136, 25137, 25138] # for now fixed at 4, but if we change # of race mode dungeons or give the player that option, will need to change this
     FragmentNameIDs = [191, 192, 193, 194]
     CaptionIDs = [197, 199, 201, 206]
+    NumberofFragsPerArea = [0] * len(TBoxFiles)
+    for i in range(0, len(TBoxFiles)): #variable number of fragments per map, depending on the number of chests available in the area
+        NumberofFragsPerArea[i] = int(BoxestoRandomizePerMap[i] // 10)
+        if NumberofFragsPerArea[i] < 3:
+            NumberofFragsPerArea[i] = 3
+        if NumberofFragsPerArea[i] > 6:
+            NumberofFragsPerArea[i] = 6
     with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # makes them stackable
         data = json.load(file)
-        for i in range(0, len(XoharFragPreciousIDs)):
+        for i in range(0, len(TBoxFiles)):
             for row in data["rows"]:
                 if row["$id"] == XoharFragPreciousIDs[i]:
                     row["ValueMax"] = 99
@@ -679,15 +693,15 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
     NameTexts = ["Xohar Fragment A", "Xohar Fragment B", "Xohar Fragment C", "Xohar Fragment D"]
     with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # renaming the fragments in menus
         data = json.load(file)
-        for i in range(0, len(XoharFragPreciousIDs)):
+        for i in range(0, len(TBoxFiles)):
             for row in data["rows"]:
                 if row["$id"] == FragmentNameIDs[i]:
                     row["name"] = NameTexts[i]
                     break
-        for i in range(0, len(XoharFragPreciousIDs)):
+        for i in range(0, len(TBoxFiles)):
             for row in data["rows"]:
                 if row["$id"] == CaptionIDs[i]:
-                    row["name"] = "3 of these are needed to\nprogress to the next area."
+                    row["name"] = f"{NumberofFragsPerArea[i]} of these are needed to\nprogress to the next area."
                     break
         file.seek(0)
         file.truncate()
@@ -695,11 +709,11 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
     QuestCollectIDs = [27, 50, 68, 69]
     with open("./_internal/JsonOutputs/common/FLD_QuestCollect.json", 'r+', encoding='utf-8') as file: # Making Quest Collect Entries for each of them
         data = json.load(file)
-        for i in range(0, len(QuestCollectIDs)):
+        for i in range(0, len(TBoxFiles)):
             for row in data["rows"]:
                 if row["$id"] == QuestCollectIDs[i]:
                     row["Refer"] = 4
-                    row["Count"] = 3
+                    row["Count"] = NumberofFragsPerArea[i]
                     row["Deduct"] = 0
                     row["ItemID"] = 25135 + i
                     break
@@ -723,7 +737,7 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
         AreaLetters = ["A", "B", "C", "D"]
         data = json.load(file)
         for i in range(0, len(IDNumbers)):
-            data["rows"].append({"$id": IDNumbers[i], "style": 62, "name": f"Find 3 Xohar Fragment {AreaLetters[i]}."})
+            data["rows"].append({"$id": IDNumbers[i], "style": 62, "name": f"Find {NumberofFragsPerArea[i]} Xohar Fragment {AreaLetters[i]}."})
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -758,7 +772,6 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
                                 row["itm8ID"] = AllXoharLocations[i][ACurBox]
                                 row["itm8Num"] = 1
                                 XoharChestIDs.append(row["$id"])
-                                #print(row["name"])
                             ACurBox = ACurBox + 1
                     file.seek(0)
                     file.truncate()

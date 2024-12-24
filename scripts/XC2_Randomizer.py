@@ -127,7 +127,7 @@ def InteractableStateSet():
     for item in stateSetList:
         item()
         
-        
+
 def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
     # Variables
     global OptionDictionary
