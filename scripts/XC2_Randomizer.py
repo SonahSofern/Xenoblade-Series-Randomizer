@@ -160,7 +160,6 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
         spinDesc = ttk.Label(optionPanel, text="% randomized", anchor="w")
         spinDesc.grid(row=rowIncrement, column=3, sticky="w", padx=0)
-        print(spinBoxObj.get())
 
 
     # Create Main Option Dictionary Entry
@@ -201,7 +200,7 @@ def Options():
     # GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", ["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20)) Nothing wrong with this just kinda niche/silly
     # GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees)]) Commenting out for first release dont want to bother making mutually exclusive widgets
     GenStandardOption("Balanced Skill Trees", TabDrivers, "Balances and randomizes the driver skill trees", [lambda: SkillTreeAdjustments.BalancingSkillTreeRando(OptionDictionary)])
-    GenStandardOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)], optionType=Spinbox) # we want id numbers no edit the 1/6 react stuff
+    GenStandardOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a reaction", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)],["Clear Default Reactions", [Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", [Helper.StartsWith("ReAct", 1,16)], 0)]], optionType=Spinbox) # we want id numbers no edit the 1/6 react stuff
     GenStandardOption("Driver Art Animation Speeds", TabDrivers, "Randomizes a Driver's art animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)], optionType=Spinbox)
     # GenStandardOption("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Dr.json"], ["DefAcce"], Accessories + [0], Accessories + [0])], ["Remove All Starting Accessories", [lambda: IDs.InvalidReplacements.extend(Accessories)]])
     
@@ -331,7 +330,6 @@ def Randomize():
 def RunOptions():
     for option in OptionDictionary.values():
         if (option["optionTypeVal"].get()): # checks main option input
-            print(option["spinBoxVal"].get())
             IDs.CurrentSliderOdds = option["spinBoxVal"].get()
             for subOption in option["subOptionObjects"].values():
                 if (subOption["subOptionTypeVal"].get()): # checks subOption input
