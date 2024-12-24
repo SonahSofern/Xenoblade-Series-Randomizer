@@ -160,7 +160,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
         spinDesc = ttk.Label(optionPanel, text="% randomized", anchor="w")
         spinDesc.grid(row=rowIncrement, column=3, sticky="w", padx=0)
-        print(spinBoxObj.get())
+        #print(spinBoxObj.get())
 
 
     # Create Main Option Dictionary Entry
@@ -283,8 +283,7 @@ def Options():
     # GenStandardOption("Special BGM", TabSettings, "When enabled, special battle music will play with certain Blades in the party", [],[])
 
     # Nonstandard Functions
-    ShowTitleScreenText()
-    RaceMode.SeedHash()
+
 
 def Randomize():
     def ThreadedRandomize():
@@ -309,7 +308,8 @@ def Randomize():
 
         # Runs all randomization
         RunOptions()
-
+        ShowTitleScreenText()
+        RaceMode.SeedHash()
         randoProgressDisplay.config(text="Packing BDATs")
 
         # Packs BDATs
