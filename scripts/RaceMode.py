@@ -247,7 +247,7 @@ def LessGrinding(): #adjusting level based exp gains, and debuffs while underlev
 def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
     NGPlusBladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
     NGPlusBladeCrystalIDs = []
-    if OptionsRunDict["Guaranteed Rare Blades"]["optionTypeVal"].get():
+    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Guaranteed Rare Blades"]["subOptionTypeVal"].get():
         with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
             for i in range(0, len(NGPlusBladeIDs)):
@@ -788,7 +788,7 @@ def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def FindtheBladeNames(OptionsRunDict):
-    if OptionsRunDict["Guaranteed Rare Blades"]["optionTypeVal"].get():
+    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Guaranteed Rare Blades"]["subOptionTypeVal"].get():
         ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
         CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
         CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")

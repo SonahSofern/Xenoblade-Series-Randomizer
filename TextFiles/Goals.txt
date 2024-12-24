@@ -4,13 +4,7 @@ Permalink
 
 Test Download Process on Alex Laptop to Write Guide/ Readme info
 
-Figure out Switch compatability (LayeredFS or Atmosphere or whatever)
-
-Guaranteed rare blades wont work unless race mode is on
-
-Doom on arts is applied when i dont want it
-
-Randomizing Race Mode message
+Regular download and use guide
 
 FUTURE
 
