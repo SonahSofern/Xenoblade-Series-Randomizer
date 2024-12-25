@@ -1,4 +1,4 @@
-If you have any questions, please feel free to join the Discord here:
+If you have any questions, please feel free to join the Discord here: https://discord.gg/h93yqZHG8z
 
 Explanation of Race Mode:
 
