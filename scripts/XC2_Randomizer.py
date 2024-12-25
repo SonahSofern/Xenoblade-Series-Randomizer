@@ -14,8 +14,8 @@ JsonOutput = "./_internal/JsonOutputs"
 OptionDictionary = {}
 rowIncrement = 0
 MaxWidth = 1000
-windowWidth = "1200"
-windowHeight = "800"
+windowWidth = "1150"
+windowHeight = "900"
 OptionColorLight = White
 OptionColorDark = Gray
 
