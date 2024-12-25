@@ -258,6 +258,7 @@ def RaceModeChanging(OptionsRunDict):
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Enemy Drop Changes"]["subOptionTypeVal"].get():
         print("Removing enemy drops")
         EnemyDropRemoval()
+        EnemyRandoLogic.KeyItemsReAdd()
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["DLC Item Removal"]["subOptionTypeVal"].get():
         print("Nerfing Corvin and Crossette")
         DLCItemChanges()

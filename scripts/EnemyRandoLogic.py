@@ -568,8 +568,7 @@ def EnemyLogic(OptionsRunDict):
         Helper.SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "mBoss", 0)
         BossQuestAggroAdjustments(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
         ReducePCHPBattle1()
-
+        KeyItemsReAdd()
         Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["LvRand"], 0)
         Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], 0)
-        KeyItemsReAdd()
         SummonsLevelAdjustment()
