@@ -48,6 +48,7 @@ def FieldSkillLevelAdjustment():
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     # JSONParser.ChangeJSONFile("common/FLD_AchievementSet.json",Helper.StartsWith("AchievementID",1,5), Helper.InclRange(1,3824), [40], (x for x in FieldSkillAchievementIDs if x in ChangeableFieldSkillAchievementIDs) )
+
 def ChangeRankCondition(): # This breaks the blades currently, not letting you unlock them at all
     # Changes the requirement to unlock trust level of blade from some weird ones like money to trust values instead (Boreas, etc)
     KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]

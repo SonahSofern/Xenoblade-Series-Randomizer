@@ -3,6 +3,10 @@ NOW
 
 FUTURE
 
+Save Editor hook into
+
+GUI to choose Race mode areas
+
 Aux Cores Pre Refined
 
 Take a break for UI, too much UI design makes ben a sad boy

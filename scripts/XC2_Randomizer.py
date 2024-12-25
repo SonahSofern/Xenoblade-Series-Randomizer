@@ -8,7 +8,7 @@ from Cosmetics import *
 from UI_Colors import *
 from tkinter.font import Font
 
-Version = "0.1.0"
+Version = "1.0"
 CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
 OptionDictionary = {}
@@ -21,7 +21,7 @@ OptionColorDark = Gray
 
 root = Tk()
 defFontVar = tk.StringVar(value="")
-defFontSizeVar = tk.IntVar(value=12)
+defFontSizeVar = tk.IntVar(value=16)
 defGUIThemeVar = tk.StringVar(value="Dark")
 loadData([defFontVar, defFontSizeVar, defGUIThemeVar], "GUISavedOptions.txt")
 
@@ -204,7 +204,7 @@ def Options():
     # GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", ["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20)) Nothing wrong with this just kinda niche/silly
     # GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees)]) Commenting out for first release dont want to bother making mutually exclusive widgets
     GenStandardOption("Balanced Skill Trees", TabDrivers, "Balances and randomizes the driver skill trees", [lambda: SkillTreeAdjustments.BalancingSkillTreeRando(OptionDictionary)])
-    GenStandardOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a reaction", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)],["Clear Default Reactions", [Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", [Helper.StartsWith("ReAct", 1,16)], 0)]], optionType=Spinbox) # we want id numbers no edit the 1/6 react stuff
+    GenStandardOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a reaction", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)],["Clear Default Reactions", [lambda: Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", [Helper.StartsWith("ReAct", 1,16)], 0)]], optionType=Spinbox) # we want id numbers no edit the 1/6 react stuff
     GenStandardOption("Driver Art Animation Speeds", TabDrivers, "Randomizes a Driver's art animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)], optionType=Spinbox)
     # GenStandardOption("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Dr.json"], ["DefAcce"], Accessories + [0], Accessories + [0])], ["Remove All Starting Accessories", [lambda: IDs.InvalidReplacements.extend(Accessories)]])
     
@@ -286,7 +286,7 @@ def Options():
     # GenStandardOption("Special BGM", TabSettings, "When enabled, special battle music will play with certain Blades in the party", [],[])
 
     # Nonstandard Functions
-
+Options()
 
 def Randomize():
     def ThreadedRandomize():
@@ -344,7 +344,7 @@ def RunOptions():
                         try:
                             subCommand()
                         except Exception as error:
-                            print(f"ERROR: {command['name']}: {subCommand['subName']} | {error}")
+                            print(f"ERROR: {option['name']}: {subOption['subName']} | {error}")
                             print(f"{traceback.format_exc()}") # shows the full error
             randoProgressDisplay.config(text=f"Randomizing {option['name']}")
             for command in option["commandList"]:
@@ -390,9 +390,11 @@ permalinkVar = StringVar()
 
 # Save and Load Last Options
 EveryObjectToSaveAndLoad = ([fileEntryVar, outputDirVar, permalinkVar, seedEntryVar,] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()] + [option["spinBoxVal"] for option in OptionDictionary.values()])
+
 SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
+
 InteractableStateSet()
-Options()
+
 
 
 # Permalink Options/Variables
