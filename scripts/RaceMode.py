@@ -26,8 +26,8 @@ def RaceModeChanging(OptionsRunDict):
 
     AreaList1 = [41, 68] #41, 68
     AreaList2 = [99, 152] #99, 152
-    AreaList3 = [125] #125, 133, 168
-    AreaList4 = [187] #175, 187
+    AreaList3 = [125, 133, 168] #125, 133, 168
+    AreaList4 = [175, 187] #175, 187
 
     AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
 
