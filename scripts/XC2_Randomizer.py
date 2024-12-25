@@ -392,6 +392,8 @@ permalinkVar = StringVar()
 EveryObjectToSaveAndLoad = ([fileEntryVar, outputDirVar, permalinkVar, seedEntryVar,] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()] + [option["spinBoxVal"] for option in OptionDictionary.values()])
 SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
 InteractableStateSet()
+Options()
+
 
 # Permalink Options/Variables
 permalinkFrame = ttk.Frame(root)
