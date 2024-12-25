@@ -281,6 +281,8 @@ def Options():
     # GenStandardOption("Enemy Aggression", TabSettings, "Toggle whether foes pick a fight (exc.salvage, unique, boss, and quest foes)", [],[])
     # GenStandardOption("Special BGM", TabSettings, "When enabled, special battle music will play with certain Blades in the party", [],[])
 
+Options()
+
 def Randomize():
     def ThreadedRandomize():
         # Variables
@@ -320,7 +322,7 @@ def Randomize():
         randoProgressDisplay.config(text="")
         randoProgressDisplay.pack_forget()
 
-        # ReEnables Randomize Button
+        # Re-Enables Randomize Button
         RandomizeButton.config(state=NORMAL)
         
         print("Done")
@@ -355,7 +357,6 @@ def GenRandomSeed():
     randoSeedEntry.delete(0, END)
     randoSeedEntry.insert(0,SeedNames.RandomSeedName())
 
-Options()
 
 bdatcommonFrame = ttk.Frame(root)
 bdatcommonFrame.pack(anchor="w", padx=10)
@@ -378,31 +379,52 @@ seedDesc.pack(side='left', padx=2, pady=2)
 randoSeedEntry = ttk.Entry(SeedFrame, width=30)
 randoSeedEntry.pack(side='left', padx=2)
 
-
-
-
-
 # Save and Load Last Options
 EveryObjectToSaveAndLoad = ([bdatFilePathEntry, outDirEntry, randoSeedEntry] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()] + [option["spinBoxVal"] for option in OptionDictionary.values()])
 SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
 InteractableStateSet()
 
 
+def AddPermalinkTrace():
+    for item in EveryObjectToSaveAndLoad:
+        try:
+            item.trace_add("write", lambda e,x,l: PermalinkEntryUpdate(permalinkEntry))
+        except:
+            pass
+        
+AddPermalinkTrace()
+        
+def PermalinkEntryUpdate(permaLinkEntry):
+    compressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
+    permaLinkEntry.delete(0,END)
+    permalinkEntry.insert(0, compressedPermalink)
+
+
+def PermalinkFromEntry(seedEntry):
+    try:
+        seedName, options = PermalinkManagement.GenerateSettingsFromPermalink(permalinkVar.get(), EveryObjectToSaveAndLoad)
+        seedEntry.delete(0, END)
+        seedEntry.insert(0, seedName)
+        InteractableStateSet()
+    except:
+        print("Invalid Permalink")
+
 # Permalink Options/Variables
 permalinkVar = StringVar()
-CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
-# SeedName, SettingsValues = PermalinkManagement.GenerateSettingsFromPermalink(CompressedPermalink, EveryObjectToSaveAndLoad)
 permalinkFrame = ttk.Frame(root)
 permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth, textvariable=permalinkVar)
-permalinkButton = ttk.Button(permalinkFrame, text="Copy Permalink")
+CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
+permalinkEntry.delete(0, END)
+permalinkEntry.insert(0, CompressedPermalink)
+# SeedName, SettingsValues = PermalinkManagement.GenerateSettingsFromPermalink(CompressedPermalink, EveryObjectToSaveAndLoad)
+
+print(permalinkVar.get())
+permalinkVar.trace_add("write", lambda name, index, op: PermalinkFromEntry(randoSeedEntry))
+
+permalinkButton = ttk.Button(permalinkFrame, text="Permalink")
 permalinkFrame.pack(padx=10, pady=(0,30), anchor="w")
 permalinkButton.pack(side="left", padx=2)
 permalinkEntry.pack(side='left', padx=2)
-
-def LoadByPermalink(objects, permaLinkObjects):
-    
-    pass
-# permalinkVar.trace_add("write", LoadByPermalink(EveryObjectToSaveAndLoad, PermalinkManagement.GenerateSettingsFromPermalink()))
 
 
 # Bottom Left Progress Display Text

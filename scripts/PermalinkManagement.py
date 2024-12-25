@@ -48,9 +48,7 @@ def GenerateSettingsFromPermalink(base64_encoded_permalink, OptionsList):
     given_version_num, seed, options_bytes = permalink.split(b"\0", 2)
     given_version_num = given_version_num.decode("ascii")
     seed = seed.decode("ascii")
-
     option_bytes = struct.unpack(">" + "B"*len(options_bytes), options_bytes)
-
     bitsreader = PackedBits.PackedBitsReader(option_bytes)
     for i in range(2, len(OptionsList)):
         optionvalue = OptionsList[i].get()
@@ -60,5 +58,4 @@ def GenerateSettingsFromPermalink(base64_encoded_permalink, OptionsList):
         elif isinstance(optionvalue, int):
             intvalue = bitsreader.read(8)
             OptionsList[i].set(intvalue)    
-
     return(seed, OptionsList)
