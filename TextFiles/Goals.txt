@@ -3,6 +3,8 @@ NOW
 
 FUTURE
 
+Move all Global variables to the top dummy ben
+
 Save Editor hook into
 
 GUI to choose Race mode areas
