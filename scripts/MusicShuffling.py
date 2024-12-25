@@ -35,8 +35,5 @@ def MusicShuffle(OptionsRunDict):
     else:
         JSONParser.ChangeJSONFile(["common/RSC_BgmList.json"], ["filename"], NonBattleMusicMOVs + EnemyBattleMusicMOVs, NonBattleMusicMOVs + EnemyBattleMusicMOVs)
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listBf.json", ["opBgm","edBgm"], 0)
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listFev01.json", ["opBgm","edBgm"], 0)
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listQst01.json", ["opBgm","edBgm"], 0)
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listTlk01.json", ["opBgm","edBgm"], 0)
 
 

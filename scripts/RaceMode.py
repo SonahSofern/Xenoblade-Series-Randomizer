@@ -43,10 +43,10 @@ def RaceModeChanging(OptionsRunDict):
     # common/FLD_QuestList
     # [Gormott, Uraya, Mor Ardain, Leftherian Archipelago, Temperantia + Indoline Praetorium, Tantal, Spirit Crucible Elpys, Cliffs of Morytha + Land of Morytha, World Tree, Final Stretch]
 
-    ContinentWarpCutscenes = [10035, 10088, 10156, 10197, 10213, 10270, 10325, 10350, 10392, 10476] # We want to call these after the boss fight cutscenes
+    ContinentWarpCutscenes = [10035, 10088, 10156, 10197, 10213, 10270, 10325, 10350, 10399, 10476] # We want to call these after the boss fight cutscenes
     FinalContinentCutscenes = [10079, 10130, 10189, 10212, 10266, 10304, 10345, 10392, 10451, 30000]
-    ScenarioFlagLists = [2001, 3005, 4025, 5005, 5021, 6028, 7018, 7043, 8024, 10026]
-    NextQuestAList = [27, 56, 100, 128, 136, 163, 184, 195, 212, 238]
+    ScenarioFlagLists = [2001, 3005, 4025, 5005, 5021, 6028, 7018, 7043, 8031, 10026]
+    NextQuestAList = [27, 56, 100, 128, 136, 163, 184, 195, 215, 238]
     LastQuestAList = [50, 81, 125, 135, 161, 177, 191, 211, 227, 270]
     LevelAtStartofArea = [5, 20, 29, 35, 38, 42, 46, 51, 59, 68] #Level going to: # Level(ish) of the first boss of the current area (so you want to be around this level after warping)
     LevelAtEndofArea = [15, 26, 34, 35, 42, 46, 46, 59, 68, 70]  #Level going from: # Level the last boss of the previous area was (so you should be around the same level before warping to new area)
@@ -91,7 +91,7 @@ def RaceModeChanging(OptionsRunDict):
         if ExpDiff[i] > 65535:
             ExpDiff[i] = 65535
 
-    MapSpecificIDs = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 2001, 2103]
+    MapSpecificIDs = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 2012, 2103]
     FileStart = "./_internal/JsonOutputs/common_gmk/"
     FileEnd = "_FLD_LandmarkPop.json"
     LandmarkFilestoTarget = [] 
@@ -142,6 +142,20 @@ def RaceModeChanging(OptionsRunDict):
                 if row["$id"] == 1609:
                     row["category"] = 0
                     row["MAPJUMPID"] = 168
+                    row["menuPriority"] = 20
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
+    if ChosenIndices[3] == 8:
+        with open("./_internal/JsonOutputs/common_gmk/ma16a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: # Turning Canyon of Husks into a second Landmark that warps you to Spirit Crucible Entrance
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] == 2001:
+                    row["menuPriority"] = 10
+                if row["$id"] == 2012:
+                    row["category"] = 0
+                    row["MAPJUMPID"] = 187
                     row["menuPriority"] = 20
             file.seek(0)
             file.truncate()
@@ -280,7 +294,7 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
     KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]
     KeyAchievementIDs = list(set([x for x in KeyAchievementIDs if x != 0]))
     RelevantChosenIndices = [x for x in ChosenIndices if x != 9]
-    RelevantLocation = [501, 701, 832, 1501, 1101, 1301, 1609, 1701, 2001]
+    RelevantLocation = [501, 701, 832, 1501, 1101, 1301, 1609, 1701, 2012]
     MapIDs = [6, 9, 10, 14, 12, 13, 15, 16, 20]
     TaskIDs = [143, 309, 147, 285]
     TaskLogIDs = [659, 660, 661, 662]
