@@ -26,8 +26,8 @@ def RaceModeChanging(OptionsRunDict):
 
     AreaList1 = [41, 68] #41, 68
     AreaList2 = [99, 152] #99, 152
-    AreaList3 = [125] #125, 133, 168
-    AreaList4 = [187] #175, 187
+    AreaList3 = [125, 133, 168] #125, 133, 168
+    AreaList4 = [175, 187] #175, 187
 
     AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
 
@@ -43,10 +43,10 @@ def RaceModeChanging(OptionsRunDict):
     # common/FLD_QuestList
     # [Gormott, Uraya, Mor Ardain, Leftherian Archipelago, Temperantia + Indoline Praetorium, Tantal, Spirit Crucible Elpys, Cliffs of Morytha + Land of Morytha, World Tree, Final Stretch]
 
-    ContinentWarpCutscenes = [10034, 10088, 10156, 10197, 10213, 10270, 10325, 10350, 10392, 10476] # We want to call these after the boss fight cutscenes
+    ContinentWarpCutscenes = [10035, 10088, 10156, 10197, 10213, 10270, 10325, 10350, 10399, 10476] # We want to call these after the boss fight cutscenes
     FinalContinentCutscenes = [10079, 10130, 10189, 10212, 10266, 10304, 10345, 10392, 10451, 30000]
-    ScenarioFlagLists = [2001, 3005, 4025, 5005, 5021, 6028, 7018, 7043, 8024, 10026]
-    NextQuestAList = [27, 56, 100, 128, 136, 163, 184, 195, 212, 238]
+    ScenarioFlagLists = [2001, 3005, 4025, 5005, 5021, 6028, 7018, 7043, 8031, 10026]
+    NextQuestAList = [27, 56, 100, 128, 136, 163, 184, 195, 215, 238]
     LastQuestAList = [50, 81, 125, 135, 161, 177, 191, 211, 227, 270]
     LevelAtStartofArea = [5, 20, 29, 35, 38, 42, 46, 51, 59, 68] #Level going to: # Level(ish) of the first boss of the current area (so you want to be around this level after warping)
     LevelAtEndofArea = [15, 26, 34, 35, 42, 46, 46, 59, 68, 70]  #Level going from: # Level the last boss of the previous area was (so you should be around the same level before warping to new area)
@@ -54,7 +54,7 @@ def RaceModeChanging(OptionsRunDict):
     # The Save File is set up in a way that it has 56 bonus exp already, and is at level 2, so that value (totals to 76 xp gained) gets subtracted from the total xp needed
     # XP needed to reach a given level, formatted in [Given Level, Total XP Needed]
     # Tora ends up like 35 xp off level 20 with the actual xp needed to reach lv 5 at 360, so I give some more exp to compensate. It doesn't push anyone else over.
-    XPNeededToReachLv = [[5, 325], [15, 9060], [20, 21360], [26, 44520], [29, 59820], [34, 91320], [35, 98580], [38, 122520], [42, 160080], [46, 205140], [51, 274640], [59, 428120], [68, 682040], [70, 789920]]
+    XPNeededToReachLv = [[5, 385], [15, 9100], [20, 21360], [26, 44520], [29, 59820], [34, 91320], [35, 98580], [38, 122520], [42, 160080], [46, 205140], [51, 274640], [59, 428120], [68, 682040], [70, 789920]]
     global ChosenIndices
     ChosenIndices = []
 
@@ -91,7 +91,7 @@ def RaceModeChanging(OptionsRunDict):
         if ExpDiff[i] > 65535:
             ExpDiff[i] = 65535
 
-    MapSpecificIDs = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 2001, 2103]
+    MapSpecificIDs = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 2012, 2103]
     FileStart = "./_internal/JsonOutputs/common_gmk/"
     FileEnd = "_FLD_LandmarkPop.json"
     LandmarkFilestoTarget = [] 
@@ -100,10 +100,6 @@ def RaceModeChanging(OptionsRunDict):
     for i in range(0, len(ChosenIndices)): # Defines what files we want to target and what map ids in that file we want to target  
         LandmarkFilestoTarget.append(FileStart + AllMapIDs[ChosenIndices[i]][1] + FileEnd)
         LandmarkMapSpecificIDstoTarget.append(MapSpecificIDs[ChosenIndices[i]])
-    
-    if ChosenIndices[0] == 0: # Because Gormott warp is broken currently, we 
-        LandmarkFilestoTarget[0] = "./_internal/JsonOutputs/common_gmk/ma02a_FLD_LandmarkPop.json"
-        LandmarkMapSpecificIDstoTarget[0] = 210
 
     for i in range(0, len(LandmarkFilestoTarget)):  # Adjusts the EXP gained from the first landmark in each race-mode location
         with open(LandmarkFilestoTarget[i], 'r+', encoding='utf-8') as file:
@@ -112,12 +108,6 @@ def RaceModeChanging(OptionsRunDict):
                 if row["$id"] == LandmarkMapSpecificIDstoTarget[i]:
                     row["getEXP"] = ExpDiff[i]
                     row["getSP"] = 4500 * ChosenIndices[i]
-                    if row["$id"] == 210: # because the Gormott warp is currently broken, we need a skip travel point there in case the player dies before getting a landmark.
-                        row["category"] = 0
-                        row["MAPJUMPID"] = 41
-                        row["menuPriority"] = 1
-                        row["MSGID"] = 63
-                        row["stoff_cndID"] = 2198
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
@@ -142,6 +132,34 @@ def RaceModeChanging(OptionsRunDict):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+    
+    if ChosenIndices[2] == 6:
+        with open("./_internal/JsonOutputs/common_gmk/ma16a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: # Turning Canyon of Husks into a second Landmark that warps you to Spirit Crucible Entrance
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] == 1601:
+                    row["menuPriority"] = 10
+                if row["$id"] == 1609:
+                    row["category"] = 0
+                    row["MAPJUMPID"] = 168
+                    row["menuPriority"] = 20
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
+    if ChosenIndices[3] == 8:
+        with open("./_internal/JsonOutputs/common_gmk/ma16a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: # Turning Canyon of Husks into a second Landmark that warps you to Spirit Crucible Entrance
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] == 2001:
+                    row["menuPriority"] = 10
+                if row["$id"] == 2012:
+                    row["category"] = 0
+                    row["MAPJUMPID"] = 187
+                    row["menuPriority"] = 20
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
 
     with open("./_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: #race mode implementation #these just adjust the quest markers as far as I can tell
         data = json.load(file)
@@ -157,6 +175,13 @@ def RaceModeChanging(OptionsRunDict):
                     row["nextID"] = 10088
                     row["scenarioFlag"] = 3005
                     row["nextIDtheater"] = 10088
+            if row["$id"] == 10034: # this lets us start at the start of gormott but not have the broken objective pointer
+                row["chgEdID"] = 0
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10036: # this lets us start at the start of gormott but not have the broken objective pointer
+                row["nextID"] = 10034
+                row["nextIDtheater"] = 10034
             if row["$id"] == 10189:
                 row["linkID"] = 0
                 row["envSeam"] = 0
@@ -175,19 +200,23 @@ def RaceModeChanging(OptionsRunDict):
             if row["$id"] == 10213: # script that readds morag
                 row["scriptName"] = ""
                 row["scriptStartId"] = 0
-            if row["$id"] == 10239: # need to hard code the chapter transition for indol and temperantia section because I break some stuff to make warping between continents work.
+            if row["$id"] == 10240: # need to hard code the chapter transition for indol and temperantia section because I break some stuff to make warping between continents work.
                 row["scenarioFlag"] = 6001
                 row["nextID"] = 10244
                 row["nextIDtheater"] = 10244
+                row["linkID"] = 0
+            if row["$id"] == 10260: #removing script that removes morag
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10269: #removing script that removes morag
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
             if row["$id"] == 10304:
                 row["linkID"] = 0
             if row["$id"] == 10366: # need to hard code the leap between cliffs and land of morytha because I break some stuff to make warping between continents work.
                 row["scenarioFlag"] = 8001
                 row["nextID"] = 10369
                 row["nextIDtheater"] = 10369
-            if row["$id"] == 10369: # script that removes all party members except rex
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
             if row["$id"] == 10369: # script that adds Jin to the party (there would be 6 chars, breaking the menus, also possibly causing SP dupe bug)
                 row["scriptName"] = ""
                 row["scriptStartId"] = 0
@@ -214,8 +243,9 @@ def RaceModeChanging(OptionsRunDict):
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Less Grinding"]["subOptionTypeVal"].get():
         print("Reducing amount of grinding")
         LessGrinding()
-        ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs)
-        ReduceBladeReqTrustVals()
+        if NGPlusBladeCrystalIDs != None:
+            ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs)
+            ReduceBladeReqTrustVals()
         SecondSkillTreeCostReduc()
         DriverArtUpgradeCostChange()
         BladeTreeMaxRewardChange()
@@ -264,7 +294,7 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
     KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]
     KeyAchievementIDs = list(set([x for x in KeyAchievementIDs if x != 0]))
     RelevantChosenIndices = [x for x in ChosenIndices if x != 9]
-    RelevantLocation = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 2001]
+    RelevantLocation = [501, 701, 832, 1501, 1101, 1301, 1609, 1701, 2012]
     MapIDs = [6, 9, 10, 14, 12, 13, 15, 16, 20]
     TaskIDs = [143, 309, 147, 285]
     TaskLogIDs = [659, 660, 661, 662]
@@ -380,15 +410,21 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
-    NonNGPlusCoreCrystalIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
-    NonNGPlusCoreCrystalIDs = [x for x in NonNGPlusCoreCrystalIDs if x not in NGPlusBladeCrystalIDs]
-    NonNGPlusCoreCrystalIDs.sort()
-    A1CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12])
-    del NonNGPlusCoreCrystalIDs[:12]
-    A2CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12])
-    del NonNGPlusCoreCrystalIDs[:12]
-    A3CoreCrystalIDs = (NonNGPlusCoreCrystalIDs)
-    A4CoreCrystalIDs = NGPlusBladeCrystalIDs
+    if NGPlusBladeCrystalIDs == None:
+        A1CoreCrystalIDs = []
+        A2CoreCrystalIDs = []
+        A3CoreCrystalIDs = []
+        A4CoreCrystalIDs = []
+    if NGPlusBladeCrystalIDs != None:
+        NonNGPlusCoreCrystalIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
+        NonNGPlusCoreCrystalIDs = [x for x in NonNGPlusCoreCrystalIDs if x not in NGPlusBladeCrystalIDs]
+        NonNGPlusCoreCrystalIDs.sort()
+        A1CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12])
+        del NonNGPlusCoreCrystalIDs[:12]
+        A2CoreCrystalIDs = (NonNGPlusCoreCrystalIDs[:12])
+        del NonNGPlusCoreCrystalIDs[:12]
+        A3CoreCrystalIDs = (NonNGPlusCoreCrystalIDs)
+        A4CoreCrystalIDs = NGPlusBladeCrystalIDs
     A1Equip = []
     A2Equip = []
     A3Equip = []
@@ -659,9 +695,16 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
     XoharFragPreciousIDs = [25135, 25136, 25137, 25138] # for now fixed at 4, but if we change # of race mode dungeons or give the player that option, will need to change this
     FragmentNameIDs = [191, 192, 193, 194]
     CaptionIDs = [197, 199, 201, 206]
+    NumberofFragsPerArea = [0] * len(TBoxFiles)
+    for i in range(0, len(TBoxFiles)): #variable number of fragments per map, depending on the number of chests available in the area
+        NumberofFragsPerArea[i] = int(BoxestoRandomizePerMap[i] // 10)
+        if NumberofFragsPerArea[i] < 3:
+            NumberofFragsPerArea[i] = 3
+        if NumberofFragsPerArea[i] > 6:
+            NumberofFragsPerArea[i] = 6
     with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # makes them stackable
         data = json.load(file)
-        for i in range(0, len(XoharFragPreciousIDs)):
+        for i in range(0, len(TBoxFiles)):
             for row in data["rows"]:
                 if row["$id"] == XoharFragPreciousIDs[i]:
                     row["ValueMax"] = 99
@@ -675,15 +718,15 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
     NameTexts = ["Xohar Fragment A", "Xohar Fragment B", "Xohar Fragment C", "Xohar Fragment D"]
     with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # renaming the fragments in menus
         data = json.load(file)
-        for i in range(0, len(XoharFragPreciousIDs)):
+        for i in range(0, len(TBoxFiles)):
             for row in data["rows"]:
                 if row["$id"] == FragmentNameIDs[i]:
                     row["name"] = NameTexts[i]
                     break
-        for i in range(0, len(XoharFragPreciousIDs)):
+        for i in range(0, len(TBoxFiles)):
             for row in data["rows"]:
                 if row["$id"] == CaptionIDs[i]:
-                    row["name"] = "3 of these are needed to\nprogress to the next area."
+                    row["name"] = f"{NumberofFragsPerArea[i]} of these are needed to\nprogress to the next area."
                     break
         file.seek(0)
         file.truncate()
@@ -691,11 +734,11 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
     QuestCollectIDs = [27, 50, 68, 69]
     with open("./_internal/JsonOutputs/common/FLD_QuestCollect.json", 'r+', encoding='utf-8') as file: # Making Quest Collect Entries for each of them
         data = json.load(file)
-        for i in range(0, len(QuestCollectIDs)):
+        for i in range(0, len(TBoxFiles)):
             for row in data["rows"]:
                 if row["$id"] == QuestCollectIDs[i]:
                     row["Refer"] = 4
-                    row["Count"] = 3
+                    row["Count"] = NumberofFragsPerArea[i]
                     row["Deduct"] = 0
                     row["ItemID"] = 25135 + i
                     break
@@ -719,7 +762,7 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
         AreaLetters = ["A", "B", "C", "D"]
         data = json.load(file)
         for i in range(0, len(IDNumbers)):
-            data["rows"].append({"$id": IDNumbers[i], "style": 62, "name": f"Find 3 Xohar Fragment {AreaLetters[i]}."})
+            data["rows"].append({"$id": IDNumbers[i], "style": 62, "name": f"Find {NumberofFragsPerArea[i]} Xohar Fragment {AreaLetters[i]}."})
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -754,7 +797,6 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
                                 row["itm8ID"] = AllXoharLocations[i][ACurBox]
                                 row["itm8Num"] = 1
                                 XoharChestIDs.append(row["$id"])
-                                #print(row["name"])
                             ACurBox = ACurBox + 1
                     file.seek(0)
                     file.truncate()
@@ -826,7 +868,7 @@ def BladeTreeMaxRewardChange(): # When a blade skill tree completes, rewards tha
     with open("./_internal/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
-            if row["$id"] in [927, 928, 929, 930]:
+            if row["$id"] in Helper.InclRange(911, 931):
                 row["ItemID1"] = 0
                 row["ItemNumber1"] = 0
                 row["ItemID2"] = 0

@@ -133,7 +133,7 @@ def InteractableStateSet():
     for item in stateSetList:
         item()
         
-        
+
 def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
     # Variables
     global OptionDictionary
@@ -285,7 +285,8 @@ def Options():
     # GenStandardOption("Enemy Aggression", TabSettings, "Toggle whether foes pick a fight (exc.salvage, unique, boss, and quest foes)", [],[])
     # GenStandardOption("Special BGM", TabSettings, "When enabled, special battle music will play with certain Blades in the party", [],[])
 
-Options()
+    # Nonstandard Functions
+
 
 def Randomize():
     def ThreadedRandomize():
