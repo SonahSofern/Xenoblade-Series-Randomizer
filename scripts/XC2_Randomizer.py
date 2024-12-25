@@ -155,8 +155,6 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     # % Boxes
     if (optionType == Spinbox):
         spinBoxObj = ttk.Spinbox(optionPanel, from_=0, to=100, textvariable=spinBoxVar, wrap=True, width=3, increment=10)
-        spinBoxObj.delete(0, END)
-        spinBoxObj.insert(0,"0")
         spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
         spinDesc = ttk.Label(optionPanel, text="% randomized", anchor="w")
         spinDesc.grid(row=rowIncrement, column=3, sticky="w", padx=0)
@@ -353,9 +351,8 @@ def RunOptions():
     ShowTitleScreenText()
     RaceMode.SeedHash()
  
-def GenRandomSeed():
-    randoSeedEntry.delete(0, END)
-    randoSeedEntry.insert(0,SeedNames.RandomSeedName())
+def GenRandomSeed(randoSeedEntryVar):
+    randoSeedEntryVar.set(SeedNames.RandomSeedName())
 
 
 bdatcommonFrame = ttk.Frame(root)
@@ -374,7 +371,7 @@ outDirEntry = ttk.Entry(OutputDirectoryFrame, width=MaxWidth, textvariable=outpu
 outDirEntry.pack(side="left", padx=2)
 SeedFrame = ttk.Frame(root)
 SeedFrame.pack(anchor="w", padx=10)
-seedDesc = ttk.Button(SeedFrame, text="Seed", command=GenRandomSeed)
+seedDesc = ttk.Button(SeedFrame, text="Seed", command=lambda: GenRandomSeed(seedEntryVar))
 seedDesc.pack(side='left', padx=2, pady=2)
 
 # Seed entry box
@@ -382,52 +379,24 @@ seedEntryVar = StringVar()
 randoSeedEntry = ttk.Entry(SeedFrame, width=30, textvariable=seedEntryVar)
 randoSeedEntry.pack(side='left', padx=2)
 
+permalinkVar = StringVar()
+
 # Save and Load Last Options
-EveryObjectToSaveAndLoad = ([fileEntryVar, outputDirVar, seedEntryVar] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()] + [option["spinBoxVal"] for option in OptionDictionary.values()])
+EveryObjectToSaveAndLoad = ([fileEntryVar, outputDirVar, permalinkVar, seedEntryVar,] + [option["optionTypeVal"] for option in OptionDictionary.values()] + [subOption["subOptionTypeVal"] for option in OptionDictionary.values() for subOption in option["subOptionObjects"].values()] + [option["spinBoxVal"] for option in OptionDictionary.values()])
 SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
 InteractableStateSet()
 
-
-def AddPermalinkTrace():
-    for item in EveryObjectToSaveAndLoad:
-        try:
-            item.trace_add("write", lambda e,x,l: PermalinkEntryUpdate(permalinkEntry))
-        except:
-            pass
-        
-AddPermalinkTrace()
-        
-def PermalinkEntryUpdate(permaLinkEntry):
-    compressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
-    permaLinkEntry.delete(0,END)
-    permalinkEntry.insert(0, compressedPermalink)
-
-
-def PermalinkFromEntry(seedEntry):
-    try:
-        seedName, options = PermalinkManagement.GenerateSettingsFromPermalink(permalinkVar.get(), EveryObjectToSaveAndLoad)
-        seedEntry.delete(0, END)
-        seedEntry.insert(0, seedName)
-        InteractableStateSet()
-    except:
-        print("Invalid Permalink")
-
 # Permalink Options/Variables
-permalinkVar = StringVar()
+
 permalinkFrame = ttk.Frame(root)
 permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth, textvariable=permalinkVar)
 CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
-permalinkEntry.delete(0, END)
-permalinkEntry.insert(0, CompressedPermalink)
-# SeedName, SettingsValues = PermalinkManagement.GenerateSettingsFromPermalink(CompressedPermalink, EveryObjectToSaveAndLoad)
-
-print(permalinkVar.get())
-permalinkVar.trace_add("write", lambda name, index, op: PermalinkFromEntry(randoSeedEntry))
-
+permalinkVar.set(CompressedPermalink)
 permalinkButton = ttk.Button(permalinkFrame, text="Permalink")
 permalinkFrame.pack(padx=10, pady=(0,30), anchor="w")
 permalinkButton.pack(side="left", padx=2)
-permalinkEntry.pack(side='left', padx=2)
+permalinkEntry.pack(side='left', padx=2) 
+PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:InteractableStateSet)
 
 
 # Bottom Left Progress Display Text

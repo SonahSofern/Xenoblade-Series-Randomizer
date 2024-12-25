@@ -33,3 +33,6 @@ Enemy Aggro Option
 Skip driver skilol tree unlock animation by having it already unlcked
 
 Hide all the affinity pop ups
+
+Remove Field Tutorials (RSC_GmkSetList might help)
+ 

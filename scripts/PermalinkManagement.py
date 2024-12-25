@@ -4,6 +4,7 @@ import PackedBits
 import base64
 import struct
 
+
 # most of this is from github.com/LagoLunatic/wwrando
 
 def SanitizeUserSeed(SeedName):
@@ -59,3 +60,29 @@ def GenerateSettingsFromPermalink(base64_encoded_permalink, OptionsList):
             intvalue = bitsreader.read(8)
             OptionsList[i].set(intvalue)    
     return(seed, OptionsList)
+
+
+def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version, stateUpdate):
+    
+    def PermalinkFromEntry():
+        try:
+            seedName, options = GenerateSettingsFromPermalink(permaLinkVar.get(), traceObjects)
+            seedEntryVar.set(seedName)
+            stateUpdate()
+        except:
+            print("Invalid Permalink")
+    
+    def PermalinkEntryUpdate():
+        compressedPermalink = GenerateCompressedPermalink(seedEntryVar.get(), traceObjects, version)
+        permaLinkVar.set(compressedPermalink)
+        
+    permaLinkVar.trace_add("write", lambda i,x,o: PermalinkFromEntry())
+    for interactAble in traceObjects:
+        try:
+            interactAble.trace_add("write", lambda i,x,o: PermalinkEntryUpdate())
+        except:
+            pass
+        
+# dont include input folder and output folder entry in interactable
+# dont calculate until no input for 1 second to stop lag typing
+# it prints invalid permalink because when it deleted the link with seedEntry.delete
