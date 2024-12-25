@@ -62,13 +62,13 @@ def GenerateSettingsFromPermalink(base64_encoded_permalink, OptionsList):
     return(seed, OptionsList)
 
 
-def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version, stateUpdate):
+def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version, buttonStateUpdates):
     
     def PermalinkFromEntry():
         try:
             seedName, options = GenerateSettingsFromPermalink(permaLinkVar.get(), traceObjects)
             seedEntryVar.set(seedName)
-            stateUpdate()
+            buttonStateUpdates()
         except:
             print("Invalid Permalink")
     
@@ -77,7 +77,7 @@ def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version, stateUp
         permaLinkVar.set(compressedPermalink)
         
     permaLinkVar.trace_add("write", lambda i,x,o: PermalinkFromEntry())
-    for interactAble in traceObjects:
+    for interactAble in traceObjects[3:]:
         try:
             interactAble.trace_add("write", lambda i,x,o: PermalinkEntryUpdate())
         except:

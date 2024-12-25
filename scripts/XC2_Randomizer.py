@@ -387,7 +387,6 @@ SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
 InteractableStateSet()
 
 # Permalink Options/Variables
-
 permalinkFrame = ttk.Frame(root)
 permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth, textvariable=permalinkVar)
 CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
@@ -396,7 +395,7 @@ permalinkButton = ttk.Button(permalinkFrame, text="Permalink")
 permalinkFrame.pack(padx=10, pady=(0,30), anchor="w")
 permalinkButton.pack(side="left", padx=2)
 permalinkEntry.pack(side='left', padx=2) 
-PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:InteractableStateSet)
+PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:InteractableStateSet())
 
 
 # Bottom Left Progress Display Text
