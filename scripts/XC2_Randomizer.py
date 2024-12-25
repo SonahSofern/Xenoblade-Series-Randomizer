@@ -20,8 +20,14 @@ OptionColorLight = White
 OptionColorDark = Gray
 
 root = Tk()
+defFontVar = tk.StringVar(value="")
+defFontSizeVar = tk.IntVar(value=12)
+defGUIThemeVar = tk.StringVar(value="Dark")
+loadData([defFontVar, defFontSizeVar, defGUIThemeVar], "GUISavedOptions.txt")
+
+
 RootsForStyling.append(root)
-defaultFont = Font(family=GUIDefaults[0], size=GUIDefaults[1])
+defaultFont = Font(family=defFontVar.get(), size=defFontSizeVar.get())
 
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
@@ -408,12 +414,12 @@ RandomizeButton.config(padding=5)
 
 # Options Cog
 Cog = PhotoImage(file="./_internal/Images/SmallSettingsCog.png")
-SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont))
+SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, defGUIThemeVar.get()))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
 
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSaveAndLoad, "SavedOptions.txt"), root.destroy()))
-GUISettings.LoadTheme(defaultFont, GUIDefaults[2])
+GUISettings.LoadTheme(defaultFont, defGUIThemeVar.get())
 root.mainloop()
 

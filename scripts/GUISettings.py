@@ -1,12 +1,12 @@
 from tkinter import *
 from UI_Colors import *
 from tkinter import font, ttk
-from IDs import GUIDefaults, CanvasesForStyling, RootsForStyling
+from IDs import CanvasesForStyling, RootsForStyling
 
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
 # Dont like the way im saving and loading data its convoluted
 
-def OpenSettingsWindow(rootWindow, defaultFont):
+def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
     newWindow = Toplevel(rootWindow)
     iter = 0
     fontNameVar = StringVar()
@@ -14,7 +14,7 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     newWindow.title("GUI Settings")
     newWindow.geometry("1000x300")
     RootsForStyling.append(newWindow)
-    LoadTheme(defaultFont, GUIDefaults[2])
+    LoadTheme(defaultFont, defaultTheme)
     allFonts = font.families()
     def LoadFontByName(name):
         defaultFont.config(family=name)
@@ -83,18 +83,18 @@ def OpenSettingsWindow(rootWindow, defaultFont):
     fontName.configure(font=staticFont)
     fontSize.configure(font=staticFont) # Have to config them like this for entry it doesnt accept style= whn you make the thing
     # Dark Mode Controls
-    darkMode = ttk.Button(newWindow, text=GUIDefaults[2], command=lambda: ToggleLightDarkMode(darkMode, defaultFont), style="STATIC.TButton")
+    darkMode = ttk.Button(newWindow, text=defaultTheme, command=lambda: ToggleLightDarkMode(darkMode, defaultFont, defaultTheme), style="STATIC.TButton")
     darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
 
-def ToggleLightDarkMode(togButton, defaultFont):
+def ToggleLightDarkMode(togButton, defaultFont, defaultTheme):
     global currentTheme
     if togButton.cget("text") == "Dark Mode":
         togButton.config(text="Light Mode")
-        GUIDefaults[2] = "Light Mode"
+        defaultTheme = "Light Mode"
         LoadTheme(defaultFont, "Light Mode")
     else:
         togButton.config(text="Dark Mode")
-        GUIDefaults[2] = "Dark Mode"
+        defaultTheme = "Dark Mode"
         LoadTheme(defaultFont, "Dark Mode")
         
 

@@ -1,5 +1,6 @@
 import Helper as Helper
 from SavedOptions import loadData
+import tkinter as tk
 
 ValidReplacements = [] # Global Variable Referenced for JsonParser
 InvalidReplacements = [] # Global Variable Referenced for JsonParser
@@ -10,8 +11,6 @@ ValidArtificialBladeCosmetics = [] # Global Variable Referenced for Cosmetics
 
 CanvasesForStyling = []
 RootsForStyling = []
-GUIDefaults = ["", 12, "Dark"]
-loadData(GUIDefaults, "GUISavedOptions.txt")
 
 #HELPFUL VARIABLES
 AuxCores = Helper.InclRange(17001, 17424) + Helper.InclRange(15001, 15406) # These are all aux cores in ITM_OrbEquip and ITM_Orb
