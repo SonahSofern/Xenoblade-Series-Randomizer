@@ -361,25 +361,26 @@ def RunOptions():
 def GenRandomSeed(randoSeedEntryVar):
     randoSeedEntryVar.set(SeedNames.RandomSeedName())
 
-
-bdatcommonFrame = ttk.Frame(root)
+bdatcommonFrame = ttk.Frame(root, style="NoBackground.TFrame")
 bdatcommonFrame.pack(anchor="w", padx=10)
 bdatButton = ttk.Button(bdatcommonFrame, width=20, text="Choose Input Folder", command= lambda: Helper.DirectoryChoice("Choose your folder containing common.bdat, common_ms.bdat and common_gmk.bdat", bdatFilePathEntry))
 bdatButton.pack(side="left", padx=2, pady=2)
 fileEntryVar = StringVar()
 bdatFilePathEntry = ttk.Entry(bdatcommonFrame, width=MaxWidth, textvariable=fileEntryVar)
 bdatFilePathEntry.pack(side="left", padx=2)
-OutputDirectoryFrame = ttk.Frame(root)
+OutputDirectoryFrame = ttk.Frame(root, style="NoBackground.TFrame")
 OutputDirectoryFrame.pack(anchor="w", padx=10)
 outputDirButton = ttk.Button(OutputDirectoryFrame, width = 20, text='Choose Output Folder', command= lambda: Helper.DirectoryChoice("Choose an output folder", outDirEntry))
 outputDirButton.pack(side="left", padx=2, pady=2)
 outputDirVar = StringVar()
 outDirEntry = ttk.Entry(OutputDirectoryFrame, width=MaxWidth, textvariable=outputDirVar)
 outDirEntry.pack(side="left", padx=2)
-SeedFrame = ttk.Frame(root)
+SeedFrame = ttk.Frame(root, style="NoBackground.TFrame")
 SeedFrame.pack(anchor="w", padx=10)
 seedDesc = ttk.Button(SeedFrame, text="Seed", command=lambda: GenRandomSeed(seedEntryVar))
 seedDesc.pack(side='left', padx=2, pady=2)
+
+RootsForStyling.append(bdatcommonFrame)
 
 # Seed entry box
 seedEntryVar = StringVar()
@@ -396,13 +397,13 @@ SavedOptions.loadData(EveryObjectToSaveAndLoad, "SavedOptions.txt")
 InteractableStateSet()
 
 # Permalink Options/Variables
-permalinkFrame = ttk.Frame(root)
+permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame" )
 permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth, textvariable=permalinkVar)
 CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
 permalinkVar.set(CompressedPermalink)
 permalinkButton = ttk.Button(permalinkFrame, text="Settings")
 permalinkButton.state(["disabled"])
-permalinkFrame.pack(padx=10, pady=(2,30), anchor="w")
+permalinkFrame.pack(padx=10, pady=2, anchor="w")
 permalinkButton.pack(side="left", padx=2)
 permalinkEntry.pack(side='left', padx=2) 
 PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:InteractableStateSet())
