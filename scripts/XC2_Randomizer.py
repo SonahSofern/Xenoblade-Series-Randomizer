@@ -22,7 +22,7 @@ OptionColorDark = Gray
 root = Tk()
 defFontVar = tk.StringVar(value="")
 defFontSizeVar = tk.IntVar(value=16)
-defGUIThemeVar = tk.StringVar(value="Dark")
+defGUIThemeVar = tk.StringVar(value="Light Mode")
 loadData([defFontVar, defFontSizeVar, defGUIThemeVar], "GUISavedOptions.txt")
 
 
@@ -418,7 +418,7 @@ RandomizeButton.config(padding=5)
 
 # Options Cog
 Cog = PhotoImage(file="./_internal/Images/SmallSettingsCog.png")
-SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, defGUIThemeVar.get()))
+SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, defGUIThemeVar))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
 

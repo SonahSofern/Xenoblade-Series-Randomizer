@@ -5,8 +5,11 @@ from IDs import CanvasesForStyling, RootsForStyling
 
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
 # Dont like the way im saving and loading data its convoluted
-newWindow = None
+
+GUIWindow = None
+
 def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
+    
     def LoadFontByName(name):
         defaultFont.config(family=name)
 
@@ -43,21 +46,20 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
         LoadFontSize(newSize)
         fontSize.delete(0, END)
         fontSize.insert(0,newSize)
-
     
-    global newWindow
-    if newWindow != None:
-        newWindow.focus()
-    else:       
+    global GUIWindow
+    if GUIWindow == None or (not GUIWindow.winfo_exists()):      
         newWindow = Toplevel(rootWindow)
+        GUIWindow = newWindow
+        newWindow.protocol("WM_DELETE_WINDOW", lambda: (RootsForStyling.remove(newWindow), newWindow.destroy()))
         iter = 0
         fontNameVar = StringVar()
         fontSizeVar = StringVar()
         newWindow.title("GUI Settings")
         newWindow.geometry("1000x300")
         RootsForStyling.append(newWindow)
-        LoadTheme(defaultFont, defaultTheme)
         allFonts = font.families()
+        # Font Option Controls
         newWindow.bind("<Right>", NextFont)
         newWindow.bind("<Left>", PreviousFont) 
         newWindow.bind("<Return>", SaveUIChanges)
@@ -67,7 +69,6 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
         # Still dont get these two lines but oh well
         fontNameVar.trace_add("write", lambda name, index, mode: LoadFontByName(fontNameVar.get()))
         fontSizeVar.trace_add("write", lambda name, index, mode: LoadFontSize(fontSizeVar.get()))
-        # Font Option Controls
         from tkinter.font import Font
         staticFont = Font(family="Arial", size=16)
         fontTestBack = ttk.Button(newWindow, text="Previous", command=PreviousFont, width=10, style="STATIC.TButton")
@@ -86,19 +87,22 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
         saveGUI.grid(row=2, column=1, padx=5, pady=5)
         fontName.configure(font=staticFont)
         fontSize.configure(font=staticFont) # Have to config them like this for entry it doesnt accept style= whn you make the thing
+        LoadTheme(defaultFont, defaultTheme.get())
+        
         # Dark Mode Controls
-        darkMode = ttk.Button(newWindow, text=defaultTheme, command=lambda: ToggleLightDarkMode(darkMode, defaultFont, defaultTheme), style="STATIC.TButton")
+        darkMode = ttk.Button(newWindow, text=defaultTheme.get(), command=lambda: ToggleLightDarkMode(darkMode, defaultFont, defaultTheme), style="STATIC.TButton")
         darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
-
+    else:
+        GUIWindow.focus()
+    
 def ToggleLightDarkMode(togButton, defaultFont, defaultTheme):
-    global currentTheme
     if togButton.cget("text") == "Dark Mode":
         togButton.config(text="Light Mode")
-        defaultTheme = "Light Mode"
+        defaultTheme.set("Light Mode")
         LoadTheme(defaultFont, "Light Mode")
     else:
         togButton.config(text="Dark Mode")
-        defaultTheme = "Dark Mode"
+        defaultTheme.set("Dark Mode")
         LoadTheme(defaultFont, "Dark Mode")
         
 
@@ -265,14 +269,23 @@ def LoadTheme(defaultFont, themeName):
         })
     except:
         pass
+    
     style.theme_use(themeName)
     from tkinter.font import Font
     staticFont = Font(family="Arial", size=16)
     style.configure("midColor.TCheckbutton", padding=(20, 10))
     style.configure("STATIC.TButton", font=staticFont)
     style.configure("BorderlessLabel.TLabel", background=currentTheme["backgroundColor"], foreground=White)
+    
     # Since Canvas and Roots arrent affected by normal styling
     for canvas in CanvasesForStyling:
-        canvas.config(background=currentTheme["darkColor"], border=0)
+        try:
+            canvas.config(background=currentTheme["darkColor"], border=0)
+        except:
+            pass
+        
     for root in RootsForStyling:
-        root.config(background=currentTheme["backgroundColor"])
+        try:
+            root.config(background=currentTheme["backgroundColor"])
+        except:
+            pass
