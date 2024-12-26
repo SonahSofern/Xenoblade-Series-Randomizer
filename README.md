@@ -2,7 +2,7 @@
 A randomizer project for Xenoblade 2
 
 # Requirements
-[Python v3.11.0](https://www.python.org/downloads/release/python-3110/))]
+[Python v3.11.0](https://www.python.org/downloads/release/python-3110/)
 Legal Dump of Xenoblade 2 Switch v2.1.0 + All DLC\
 Homebrewed Switch or Emulator\
 NXDumpTool\ (Link)
