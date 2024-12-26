@@ -32,6 +32,23 @@ def MusicShuffle(OptionsRunDict):
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
+        with open("./_internal/JsonOutputs/common/RSC_BgmCondition.json", 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for row in data['rows']:
+                if row["$id"] == 34: # Spirit Crucible BGM Calls track m72.wav, which overlaps with a battle theme also called m72.wav, this causes issues when randomized, my code thought it was battle theme, and it is a battle theme for 
+                    row["BgmIDB"] = random.choice(NonBattleMusicIDs)
+                    row["BgmIDC"] = random.choice(NonBattleMusicIDs)
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+        with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for row in data['rows']: # same issue with track m72.wav, which plays for the teammate fights before the architect (it's mid too), so we replace it with zeke's theme :D (top tier)
+                if row["BGMID"] == 49:
+                    row["BGMID"] = 16
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
     else:
         JSONParser.ChangeJSONFile(["common/RSC_BgmList.json"], ["filename"], NonBattleMusicMOVs + EnemyBattleMusicMOVs, NonBattleMusicMOVs + EnemyBattleMusicMOVs)
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/EVT_listBf.json", ["opBgm","edBgm"], 0)

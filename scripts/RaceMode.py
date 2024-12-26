@@ -24,10 +24,10 @@ def RaceModeChanging(OptionsRunDict):
     #Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
     #Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
 
-    AreaList1 = [41] #41, 68
+    AreaList1 = [41, 68] #41, 68
     AreaList2 = [99, 152] #99, 152
-    AreaList3 = [168] #125, 133, 168
-    AreaList4 = [187] #175, 187
+    AreaList3 = [125, 133, 168] #125, 133, 168
+    AreaList4 = [175, 187] #175, 187
 
     AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
 
@@ -91,7 +91,7 @@ def RaceModeChanging(OptionsRunDict):
         if ExpDiff[i] > 65535:
             ExpDiff[i] = 65535
 
-    MapSpecificIDs = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 2012, 2103]
+    MapSpecificIDs = [501, 701, 832, 1501, 1101, 1301, 1609, 1701, 2012, 2103]
     FileStart = "./_internal/JsonOutputs/common_gmk/"
     FileEnd = "_FLD_LandmarkPop.json"
     LandmarkFilestoTarget = [] 
@@ -150,7 +150,7 @@ def RaceModeChanging(OptionsRunDict):
             json.dump(data, file, indent=2, ensure_ascii=False)
 
     if ChosenIndices[3] == 8:
-        with open("./_internal/JsonOutputs/common_gmk/ma16a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: # Turning Canyon of Husks into a second Landmark that warps you to Spirit Crucible Entrance
+        with open("./_internal/JsonOutputs/common_gmk/ma20a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: # Turning Canyon of Husks into a second Landmark that warps you to Spirit Crucible Entrance
             data = json.load(file)
             for row in data["rows"]:
                 if row["$id"] == 2001:
@@ -227,6 +227,8 @@ def RaceModeChanging(OptionsRunDict):
                 row["nextIDtheater"] = 10427
                 row["linkID"] = 0
                 row["scenarioFlag"] = 9008
+            if row["$id"] == 10451: # end of world tree
+                row["linkID"] = 0
         for i in range(0, len(ChosenIndices) - 1):
             for row in data["rows"]:
                 if row["$id"] == FinalContinentCutscenes[ChosenIndices[i]]:

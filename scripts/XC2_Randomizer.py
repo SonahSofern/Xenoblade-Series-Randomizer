@@ -1,7 +1,7 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, traceback
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, PermalinkManagement
+import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, PermalinkManagement, Helper
 import GUISettings
 from IDs import *
 from Cosmetics import *
