@@ -1,5 +1,10 @@
 NOW
 
+Double check key items arent shuffled (puzzletree wood) Bion connectors Tutorial Shops
+
+Write download guide
+
+Fix opneing multiple GUI settings windows
 
 FUTURE
 

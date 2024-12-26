@@ -5,4 +5,13 @@ Verb = ["Eats", "Destroys", "Disrupts", "Rolls", "Breaks", "Topples", "Launches"
 
 def RandomSeedName():
     seedName = Noun[random.randrange(0,len(Noun))] + Verb[random.randrange(0,len(Verb))] + Noun[random.randrange(0,len(Noun))]
+    firstNoun = random.choice(Noun)
+    firstVerb = random.choice(Verb)
+    secondNoun = random.choice(Noun)
+    
+    # Prevent Repeat Nouns
+    while (firstNoun == secondNoun):
+        secondNoun = random.choice(Noun)
+        
+    seedName = firstNoun + firstVerb + secondNoun
     return seedName
