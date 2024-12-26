@@ -27,12 +27,17 @@ https://xenobladedata.github.io/
 
 Need:
 Xenoblade 2 Version 2.1.0 with all DLC
+
 NXDumpTool
+
 Xenoblade2Set
+
 Python 3.11
 
 Console Also Needs:
+
 microSD card (A 16GB minimum exFAT-formatted microSD card is recommended; FAT32 seems to mess stuff up.)
+
 Modded Nintendo Switch with Atmosphere
 
 
