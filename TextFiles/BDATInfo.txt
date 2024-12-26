@@ -1,1 +1,0 @@
-RSC_TboxList box_distance (shoots out items with more velocity the higher the distance)
