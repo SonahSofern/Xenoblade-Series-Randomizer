@@ -1,12 +1,7 @@
 # XC2_Randomizer
 A randomizer project for Xenoblade 2
 
-# Requirements
-[Python v3.11.0](https://www.python.org/downloads/release/python-3110/)\
-Legal Dump of Xenoblade 2 Switch v2.1.0 + All DLC\
-Homebrewed Switch or Emulator\
-[NXDumpTool](https://github.com/DarkMatterCore/nxdumptool)\
-[Xenoblade 2 Set](https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/)
+
 
 # General Description
 This program randomizes the BDAT files in Xenoblade Chronicles 2. Tested on the main story of the English Version 2.1.0 + DLC only. The project is still a work in progress, please report bugs or suggestions to our discord so we can make this better!
@@ -26,13 +21,14 @@ https://gitlab.com/damysteryman/XC2SaveNETThingy/-/tags/r6.1
 
 # Setup
 
-### Need:
-Xenoblade 2 Version 2.1.0 with all DLC\
-NXDumpTool\
-Xenoblade2Set\
-Python 3.11
+### Requirements:
+[Python v3.11.0](https://www.python.org/downloads/release/python-3110/)\
+Legal Dump of Xenoblade 2 Switch v2.1.0 + All DLC\
+Homebrewed Switch or Emulator\
+[NXDumpTool](https://github.com/DarkMatterCore/nxdumptool)\
+[Xenoblade 2 Set](https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/)
 
-### Console Also Needs:
+### Console Also Requires:
 microSD card (A 16GB minimum exFAT-formatted microSD card is recommended; FAT32 seems to mess stuff up.)\
 Modded Nintendo Switch with Atmosphere
 
