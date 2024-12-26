@@ -5,17 +5,8 @@ from IDs import CanvasesForStyling, RootsForStyling
 
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
 # Dont like the way im saving and loading data its convoluted
-
+newWindow = None
 def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
-    newWindow = Toplevel(rootWindow)
-    iter = 0
-    fontNameVar = StringVar()
-    fontSizeVar = StringVar()
-    newWindow.title("GUI Settings")
-    newWindow.geometry("1000x300")
-    RootsForStyling.append(newWindow)
-    LoadTheme(defaultFont, defaultTheme)
-    allFonts = font.families()
     def LoadFontByName(name):
         defaultFont.config(family=name)
 
@@ -53,38 +44,51 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
         fontSize.delete(0, END)
         fontSize.insert(0,newSize)
 
-    newWindow.bind("<Right>", NextFont)
-    newWindow.bind("<Left>", PreviousFont) 
-    newWindow.bind("<Return>", SaveUIChanges)
-    newWindow.bind("<Up>", IncreaseFontSize)
-    newWindow.bind("<Down>", DecreaseFontSize) 
-
-    newWindow.config(padx=10, pady=10)
-    # Still dont get these two lines but oh well
-    fontNameVar.trace_add("write", lambda name, index, mode: LoadFontByName(fontNameVar.get()))
-    fontSizeVar.trace_add("write", lambda name, index, mode: LoadFontSize(fontSizeVar.get()))
-    # Font Option Controls
-    from tkinter.font import Font
-    staticFont = Font(family="Arial", size=16)
-    fontTestBack = ttk.Button(newWindow, text="Previous", command=PreviousFont, width=10, style="STATIC.TButton")
-    fontName = ttk.Entry(newWindow, width=20, textvariable=fontNameVar)
-    fontTestNext = ttk.Button(newWindow, text="Next", command=NextFont, style="STATIC.TButton")
-    saveGUI = ttk.Button(newWindow, text="Save Changes", command=SaveUIChanges, style="STATIC.TButton")
-    fontSize = ttk.Entry(newWindow, textvariable=fontSizeVar)
-    fontSize.delete(0, END)
-    fontSize.insert(0,defaultFont.cget("size"))
-    fontName.delete(0, END)
-    fontName.insert(0,defaultFont.cget("family"))
-    fontName.grid(row=0, column=0, padx=5, pady=5)
-    fontSize.grid(row=0, column=1, padx=5, pady=5)
-    fontTestBack.grid(row=0, column=2, padx=5, pady=5)
-    fontTestNext.grid(row=0, column =3, padx=5, pady=5)
-    saveGUI.grid(row=2, column=1, padx=5, pady=5)
-    fontName.configure(font=staticFont)
-    fontSize.configure(font=staticFont) # Have to config them like this for entry it doesnt accept style= whn you make the thing
-    # Dark Mode Controls
-    darkMode = ttk.Button(newWindow, text=defaultTheme, command=lambda: ToggleLightDarkMode(darkMode, defaultFont, defaultTheme), style="STATIC.TButton")
-    darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
+    
+    global newWindow
+    if newWindow != None:
+        newWindow.focus()
+    else:       
+        newWindow = Toplevel(rootWindow)
+        iter = 0
+        fontNameVar = StringVar()
+        fontSizeVar = StringVar()
+        newWindow.title("GUI Settings")
+        newWindow.geometry("1000x300")
+        RootsForStyling.append(newWindow)
+        LoadTheme(defaultFont, defaultTheme)
+        allFonts = font.families()
+        newWindow.bind("<Right>", NextFont)
+        newWindow.bind("<Left>", PreviousFont) 
+        newWindow.bind("<Return>", SaveUIChanges)
+        newWindow.bind("<Up>", IncreaseFontSize)
+        newWindow.bind("<Down>", DecreaseFontSize) 
+        newWindow.config(padx=10, pady=10)
+        # Still dont get these two lines but oh well
+        fontNameVar.trace_add("write", lambda name, index, mode: LoadFontByName(fontNameVar.get()))
+        fontSizeVar.trace_add("write", lambda name, index, mode: LoadFontSize(fontSizeVar.get()))
+        # Font Option Controls
+        from tkinter.font import Font
+        staticFont = Font(family="Arial", size=16)
+        fontTestBack = ttk.Button(newWindow, text="Previous", command=PreviousFont, width=10, style="STATIC.TButton")
+        fontName = ttk.Entry(newWindow, width=20, textvariable=fontNameVar)
+        fontTestNext = ttk.Button(newWindow, text="Next", command=NextFont, style="STATIC.TButton")
+        saveGUI = ttk.Button(newWindow, text="Save Changes", command=SaveUIChanges, style="STATIC.TButton")
+        fontSize = ttk.Entry(newWindow, textvariable=fontSizeVar)
+        fontSize.delete(0, END)
+        fontSize.insert(0,defaultFont.cget("size"))
+        fontName.delete(0, END)
+        fontName.insert(0,defaultFont.cget("family"))
+        fontName.grid(row=0, column=0, padx=5, pady=5)
+        fontSize.grid(row=0, column=1, padx=5, pady=5)
+        fontTestBack.grid(row=0, column=2, padx=5, pady=5)
+        fontTestNext.grid(row=0, column =3, padx=5, pady=5)
+        saveGUI.grid(row=2, column=1, padx=5, pady=5)
+        fontName.configure(font=staticFont)
+        fontSize.configure(font=staticFont) # Have to config them like this for entry it doesnt accept style= whn you make the thing
+        # Dark Mode Controls
+        darkMode = ttk.Button(newWindow, text=defaultTheme, command=lambda: ToggleLightDarkMode(darkMode, defaultFont, defaultTheme), style="STATIC.TButton")
+        darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
 
 def ToggleLightDarkMode(togButton, defaultFont, defaultTheme):
     global currentTheme

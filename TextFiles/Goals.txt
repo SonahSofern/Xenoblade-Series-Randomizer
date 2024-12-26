@@ -6,7 +6,17 @@ Write download guide
 
 Fix opneing multiple GUI settings windows
 
+Make sure field skills can be randomized and not softlock
+
+Check all github files are good to be public (proper gitignore)
+
 FUTURE
+
+Only include valid blade arts and blade yellow skills
+
+Start tora with all poppi forms
+
+Infinite lasting pouch items
 
 Move all Global variables to the top dummy ben
 
