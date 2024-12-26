@@ -27,7 +27,7 @@ def RaceModeChanging(OptionsRunDict):
     AreaList1 = [41] #41, 68
     AreaList2 = [99, 152] #99, 152
     AreaList3 = [168] #125, 133, 168
-    AreaList4 = [187, 175] #175, 187
+    AreaList4 = [187] #175, 187
 
     AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
 
@@ -129,6 +129,8 @@ def RaceModeChanging(OptionsRunDict):
                 row["NextQuestA"] = 202
             if row["$id"] == 261: # same thing for indol and temperantia
                 row["NextQuestA"] = 150
+            if row["$id"] == 220: # world tree chapter transition fix
+                row["NextQuestA"] = 222
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -220,6 +222,11 @@ def RaceModeChanging(OptionsRunDict):
             if row["$id"] == 10369: # script that adds Jin to the party (there would be 6 chars, breaking the menus, also possibly causing SP dupe bug)
                 row["scriptName"] = ""
                 row["scriptStartId"] = 0
+            if row["$id"] == 10411: # fix for world tree chapter 9 transition
+                row["nextID"] = 10427
+                row["nextIDtheater"] = 10427
+                row["linkID"] = 0
+                row["scenarioFlag"] = 9008
         for i in range(0, len(ChosenIndices) - 1):
             for row in data["rows"]:
                 if row["$id"] == FinalContinentCutscenes[ChosenIndices[i]]:
