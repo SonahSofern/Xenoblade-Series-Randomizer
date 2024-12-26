@@ -25,25 +25,24 @@ https://xenobladedata.github.io/
 
 # Setup
 
-Need:\
+## Need:
 Xenoblade 2 Version 2.1.0 with all DLC\
 NXDumpTool\
 Xenoblade2Set\
-Python 3.11\
+Python 3.11
 
-Console Also Needs:\
+## Console Also Needs:
 microSD card (A 16GB minimum exFAT-formatted microSD card is recommended; FAT32 seems to mess stuff up.)\
-Modded Nintendo Switch with Atmosphere\
+Modded Nintendo Switch with Atmosphere
 
 Adapted from: https://gamebanana.com/tuts/13815\
-
-Process:\
+## Process:
 1. Use NXDumpTool to dump XC2's RomFS.
 2. Put your microSD card into your computer, and locate "bf2.ard" and "bf2.arh"; those are the only two important files. Everything else in the dump can be safely deleted.
 3. Download Xenoblade2Set from (https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/), and extract its contents.
 4. Copy bf2.ard and bf2.arh to the Xenoblade2Set folder, and run "quickbms_4gb_files.exe".
 5. It will ask for a "bms script"; select Xenoblade2ard.bms. It will then ask for "archives/files"; select bf2.arh. For "output folder", go into the empty "modified" folder and press "Save". The files should extract, it may take a bit.
-7. CONSOLE: There should now be a new "bdat" folder inside "modified"; This is the folder that the randomizer program targets as the input folder. The output folder should be /atmosphere/contents/0100E95004039001/romfs/bdat on your microSD card.
-7. EMULATOR: There should now be a new "bdat" folder inside "modified"; This is the folder that the randomizer program targets as the input folder. The output folder should be the emulator's name then /load/0100E95004039001/Randomizer/romfs/bdat .
+6. CONSOLE ONLY: There should now be a new "bdat" folder inside "modified"; This is the folder that the randomizer program targets as the input folder. The output folder should be /atmosphere/contents/0100E95004039001/romfs/bdat on your microSD card.
+7. EMULATOR ONLY: There should now be a new "bdat" folder inside "modified"; This is the folder that the randomizer program targets as the input folder. The output folder should be the emulator's name then /load/0100E95004039001/Randomizer/romfs/bdat .
 8. Choose your preferred settings, then use the randomizer program to randomize the contents of the game.
-9. CONSOLE: Put your microSD card back into your Switch, use Atmosphere and Homebrew to launch the game. Pressing L bypasses the active patches, so if you wish to play the vanilla game again, you can do so in this way.
+9. CONSOLE ONLY: Put your microSD card back into your Switch, use Atmosphere and Homebrew to launch the game. Pressing L bypasses the active patches, so if you wish to play the vanilla game again, you can do so in this way.
