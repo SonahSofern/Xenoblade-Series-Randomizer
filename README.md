@@ -6,24 +6,46 @@ A randomizer project for Xenoblade 2
 Legal Dump of Xenoblade 2 Switch v2.1.0 + All DLC\
 Homebrewed Switch or Emulator\
 [NXDumpTool](https://github.com/DarkMatterCore/nxdumptool)\
-[Xenoblade 2 Set](https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/)\
+[Xenoblade 2 Set](https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/)
 
 # General Description
-This program randomizes the BDAT files in Xenoblade Chronicles 2. Tested on the main story of the English Version 2.1.0 + DLC only. Torna has not been tested yet. The project is still a work in progress, please report bugs or suggestions to our discord so we can make this better!
+This program randomizes the BDAT files in Xenoblade Chronicles 2. Tested on the main story of the English Version 2.1.0 + DLC only. The project is still a work in progress, please report bugs or suggestions to our discord so we can make this better!
 
 # Contact Us
 Discord: https://discord.gg/h93yqZHG8z
 
 # Known Issues
-Race Mode will overwrite some settings (for example Treasure Chest Contents will be overwritten if race mode is on)
-
-# FAQ
-Q: What about randomizing the other Xenoblade games?\
-A: Yes thats on the list. However, probably not the older versions like Xenoblade on Wii or 3ds. All the switch games are the priority.
-
-Q: Where do i get the files\
-A: Dump your game
+Race Mode will overwrite some settings. (for example Treasure Chest Contents will be overwritten if race mode is on)\
+Torna has not been tested at all, it may or may not work.\
 
 # Credits
+https://github.com/roccodev/bdat-rs
+https://frontiernav.net/wiki/xenoblade-chronicles-2
+https://xenobladedata.github.io/
 
 # Setup
+
+Need:
+Xenoblade 2 Version 2.1.0 with all DLC
+NXDumpTool
+Xenoblade2Set
+Python 3.11
+
+Console Also Needs:
+microSD card (A 16GB minimum exFAT-formatted microSD card is recommended; FAT32 seems to mess stuff up.)
+Modded Nintendo Switch with Atmosphere
+
+
+Adapted from: https://gamebanana.com/tuts/13815
+
+Process:
+
+1. Use NXDumpTool to dump XC2's RomFS.
+2. Put your microSD card into your computer, and locate "bf2.ard" and "bf2.arh"; those are the only two important files. Everything else in the dump can be safely deleted.
+3. Download Xenoblade2Set from (https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/), and extract its contents.
+4. Copy bf2.ard and bf2.arh to the Xenoblade2Set folder, and run "quickbms_4gb_files.exe".
+5. It will ask for a "bms script"; select Xenoblade2ard.bms. It will then ask for "archives/files"; select bf2.arh. For "output folder", go into the empty "modified" folder and press "Save". The files should extract, it may take a bit.
+7. CONSOLE: There should now be a new "bdat" folder inside "modified"; This is the folder that the randomizer program targets as the input folder. The output folder should be /atmosphere/contents/0100E95004039001/romfs/bdat on your microSD card.
+7. EMULATOR: There should now be a new "bdat" folder inside "modified"; This is the folder that the randomizer program targets as the input folder. The output folder should be the emulator's name then /load/0100E95004039001/Randomizer/romfs/bdat .
+8. Choose your preferred settings, then use the randomizer program to randomize the contents of the game.
+9. CONSOLE: Put your microSD card back into your Switch, use Atmosphere and Homebrew to launch the game. Pressing L bypasses the active patches, so if you wish to play the vanilla game again, you can do so in this way.
