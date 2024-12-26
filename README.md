@@ -14,10 +14,10 @@ Discord:
 Race Mode will overwrite some settings (for example Treasure Chest Contents will be overwritten if race mode is on)
 
 # FAQ
-Q: What about randomizing the other Xenoblade games?
+Q: What about randomizing the other Xenoblade games?\
 A: Yes thats on the list. However, probably not the older versions like Xenoblade on Wii or 3ds. All the switch games are the priority.
 
-Q: Where do i get the files
+Q: Where do i get the files\
 A: Dump your game
 
 # Credits
