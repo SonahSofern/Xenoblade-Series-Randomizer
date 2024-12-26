@@ -3,6 +3,7 @@ A randomizer project for Xenoblade 2
 
 # Requirements
 Python v3.11.0
+Legal Dump of Xenoblade 2 Switch v2.1.0 + All DLC 
 
 # General Description
 This is the first version of the Xenoblade Chronicles 2 Randomizer.
@@ -22,3 +23,4 @@ A: Dump your game
 
 # Credits
 
+# Setup
