@@ -14,9 +14,9 @@ Race Mode will overwrite some settings. (for example Treasure Chest Contents wil
 Torna has not been tested at all, it may or may not work.\
 
 # Credits
-https://github.com/roccodev/bdat-rs 
-https://frontiernav.net/wiki/xenoblade-chronicles-2 
-https://xenobladedata.github.io/ 
+https://github.com/roccodev/bdat-rs \
+https://frontiernav.net/wiki/xenoblade-chronicles-2 \
+https://xenobladedata.github.io/ \
 https://gitlab.com/damysteryman/XC2SaveNETThingy/-/tags/r6.1 
 
 # Setup
