@@ -2,11 +2,11 @@
 A randomizer project for Xenoblade 2
 
 # Requirements
-Python v3.11.0\ ([Link](https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/))
+[Python v3.11.0](https://www.python.org/downloads/release/python-3110/))]
 Legal Dump of Xenoblade 2 Switch v2.1.0 + All DLC\
 Homebrewed Switch or Emulator\
 NXDumpTool\ (Link)
-Xenoblade2Set\ (Link)
+[Xenoblade 2 Set](https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/)\
 
 # General Description
 This program randomizes the BDAT files in Xenoblade 2
