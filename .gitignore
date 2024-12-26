@@ -11,3 +11,5 @@ bdat/
 SavedOptions.txt
 GUISavedOptions.txt
 TextFiles/
+__pycache__/
+/scripts/__pycache__
