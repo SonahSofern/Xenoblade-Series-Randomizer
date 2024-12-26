@@ -300,9 +300,9 @@ def Randomize():
         randoProgressDisplay.pack(side='left', anchor='w', pady=10, padx=10)
         randoProgressDisplay.config(text="Unpacking BDATs")
 
-        random.seed(CompressedPermalink)
+        random.seed(permalinkVar.get())
         print("Seed: " + randoSeedEntry.get())
-        print("Permalink: "+  CompressedPermalink)
+        print("Permalink: "+  permalinkVar.get())
 
         # Unpacks BDATs
         subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common.bdat -o {JsonOutput} -f json --pretty")

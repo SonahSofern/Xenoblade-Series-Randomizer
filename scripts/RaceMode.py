@@ -24,9 +24,9 @@ def RaceModeChanging(OptionsRunDict):
     #Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
     #Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
 
-    AreaList1 = [41, 68] #41, 68
+    AreaList1 = [41] #41, 68
     AreaList2 = [99, 152] #99, 152
-    AreaList3 = [125, 133, 168] #125, 133, 168
+    AreaList3 = [168] #125, 133, 168
     AreaList4 = [187, 175] #175, 187
 
     AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
