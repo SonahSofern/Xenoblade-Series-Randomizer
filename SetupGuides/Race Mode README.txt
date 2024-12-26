@@ -1,26 +1,44 @@
 If you have any questions, please feel free to join the Discord here: https://discord.gg/h93yqZHG8z
 
+------------------------------------------------------------
+
+Setup:
+
+Race Mode uses a custom starting save file, for the time being.
+
+This save file can be found in the Randomizer download, in the folder titled "RaceModeSave". 
+
+Note that this save file is worthless without a legitimate copy of the game dumped from your own Nintendo Switch, which will not be provided by the Randomizer.
+
+See the setup guide for direction on how to dump the ROM from your own copy.
+
+CONSOLE: Use a homebrew save file manager and place the save file in the correct spot on your SD card.
+
+EMULATOR: To use this custom starting save file, place it in the emulator file path \nand\user\save\0000000000000000\BF50755B382CCC6AC0A69D441CBBF62C\0100E95004038000 .
+
+------------------------------------------------------------
+
 Explanation of Race Mode:
 
 The intent of Race Mode is to allow for the player to experience the joys of the normal game, in a shorter single playsession, aiming for 3-4 hours for experienced individuals. This is accomplished by reducing the amount of grinding and reducing the portion of the story that you play through (to smaller chunks called Storylines). Most of your character's power in Race Mode will come from the custom loot tables given to the Treasure Chests on the Continents with the Storylines you are required to complete. You could even have a friendly race between people on the same seed, and compete to see who finishes the game first!
 
 A suggested Settings String for players who wish to do Race Mode for the first time is: MTAAQQDhBxDfpYD8AgYAAAAA/snIyMjIKMg8FBTIyMjIyMjIyMjIyMjIyMjIyMjIyBQUFCjIAA==
 
-Race Mode uses a custom starting save file, for the time being. This save file can be found in the Randomizer download, in the folder titled "RaceModeSave". Note that this save file is worthless without a legitimate copy of the game dumped from your own Nintendo Switch, which will not be provided by the Randomizer. See the setup guide for direction on how to dump the ROM from your own copy.
+To import those settings, copy the settings string into the field next to the "Settings" label at the bottom of the randomizer.
 
 To begin Race Mode when in game, click the "Race Mode Start" option on the main menu.
 
 The save file starts in NG+, so you have access to your Hidden Skill Trees and Pneuma from the start of the game.
 
-The difficulty level of the game is set to and stuck at a minimum of Normal.
+The difficulty level of the game is set to and stuck at a minimum of Normal. (The values for Easy have been changed to match Normal.)
 
 ------------------------------------------------------------
 
 Storylines:
 
-You have to complete 4 Storylines to unlock access to the end of the game.
+You have to complete 4 Storylines to unlock access to the end of the game, where you win by defeating Artifice Aion.
 
-To start the first Storyline, talk to Spraine, near the Maelstrom.
+To start the first Storyline, talk to the NPC called Spraine, located near the Maelstrom.
 
 Completing one Storyline will automatically warp you via cutscene to the new continent containing the next required Storyline.
 
@@ -30,6 +48,10 @@ The 4 Storylines are selected from the following:
 1 of either Mor Ardain (Defeat Patroka and Mikhail) or Leftherian Archipelago (Defeat Zeke)
 1 of either Indoline Praetorium + Temperantia (Defeat Giga Rosa) or Tantal (Defeat Jin) or Spirit Crucible Elpys (Defeat Phantasms)
 1 of either Cliffs of Morytha + Land of Morytha (Defeat Infernal Guldo) or World Tree (Defeat Amalthus)
+
+------------------------------------------------------------
+
+The following sections describe each of the Race Mode suboptions, which are all recommended to be enabled to get the full Race Mode experience. Other settings in other tabs can be turned on or off as you desire.
 
 ------------------------------------------------------------
 
