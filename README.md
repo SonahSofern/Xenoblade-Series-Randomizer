@@ -34,7 +34,7 @@ Modded Nintendo Switch with Atmosphere
 
 
 ### Process:
-Guide adapted from: https://gamebanana.com/tuts/13815 \
+Guide adapted from: https://gamebanana.com/tuts/13815 
 
 1. Use NXDumpTool to dump XC2's RomFS.
 2. Put your microSD card into your computer, and locate "bf2.ard" and "bf2.arh"; those are the only two important files. Everything else in the dump can be safely deleted.
