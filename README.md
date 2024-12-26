@@ -25,26 +25,19 @@ https://xenobladedata.github.io/
 
 # Setup
 
-Need:
-Xenoblade 2 Version 2.1.0 with all DLC
+Need:\
+Xenoblade 2 Version 2.1.0 with all DLC\
+NXDumpTool\
+Xenoblade2Set\
+Python 3.11\
 
-NXDumpTool
+Console Also Needs:\
+microSD card (A 16GB minimum exFAT-formatted microSD card is recommended; FAT32 seems to mess stuff up.)\
+Modded Nintendo Switch with Atmosphere\
 
-Xenoblade2Set
+Adapted from: https://gamebanana.com/tuts/13815\
 
-Python 3.11
-
-Console Also Needs:
-
-microSD card (A 16GB minimum exFAT-formatted microSD card is recommended; FAT32 seems to mess stuff up.)
-
-Modded Nintendo Switch with Atmosphere
-
-
-Adapted from: https://gamebanana.com/tuts/13815
-
-Process:
-
+Process:\
 1. Use NXDumpTool to dump XC2's RomFS.
 2. Put your microSD card into your computer, and locate "bf2.ard" and "bf2.arh"; those are the only two important files. Everything else in the dump can be safely deleted.
 3. Download Xenoblade2Set from (https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/), and extract its contents.
