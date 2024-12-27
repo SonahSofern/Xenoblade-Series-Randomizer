@@ -12,6 +12,7 @@ Discord: https://discord.gg/h93yqZHG8z
 # Known Issues
 Race Mode will overwrite some settings. (for example Treasure Chest Contents will be overwritten if race mode is on)\
 Torna has not been tested at all, it may or may not work.\
+Note: If you do get stuck you can remove the files from the directory and it will load the base game for you to continue. This shouldn't happen but if it does let us know what the issue was.
 
 # Credits
 https://github.com/roccodev/bdat-rs \
