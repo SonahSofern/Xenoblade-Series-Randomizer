@@ -1,5 +1,5 @@
 from tkinter import PhotoImage, ttk
-import random, subprocess, shutil, os, threading, traceback
+import random, subprocess, shutil, os, threading, traceback, time
 from tkinter import *
 import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, PermalinkManagement, Helper
 import GUISettings
@@ -304,33 +304,45 @@ def Randomize():
         print("Seed: " + randoSeedEntry.get())
         print("Permalink: "+  permalinkVar.get())
 
+        try:
         # Unpacks BDATs
-        subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common.bdat -o {JsonOutput} -f json --pretty")
-        subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty")
-        subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {bdatFilePathEntry.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty")
-
+            subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {fileEntryVar.get()}/common.bdat -o {JsonOutput} -f json --pretty", check=True)
+            subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {fileEntryVar.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty", check= True)
+            subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {fileEntryVar.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty", check=True)
+        except:
+            randoProgressDisplay.config(text="Invalid Input Directory")
+            time.sleep(3)
+            randoProgressDisplay.config(text="")
+            RandomizeButton.config(state=NORMAL)
+            return
+        
+        
         # Runs all randomization
         RunOptions()
         randoProgressDisplay.config(text="Packing BDATs")
 
-        # Packs BDATs
-        subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outDirEntry.get()} -f json")
 
-        # Outputs common_ms in the correct file structure
-        os.makedirs(f"{outDirEntry.get()}/gb", exist_ok=True)
-        shutil.move(f"{outDirEntry.get()}/common_ms.bdat", f"{outDirEntry.get()}/gb/common_ms.bdat")
+        try:
+            # Packs BDATs
+            subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outputDirVar.get()} -f json", check=True)
 
-        # Displays Done and Clears Text
-        import time
-        randoProgressDisplay.config(text="Done")
-        time.sleep(1.5)
-        randoProgressDisplay.config(text="")
-        randoProgressDisplay.pack_forget()
+            # Outputs common_ms in the correct file structure
+            os.makedirs(f"{outputDirVar.get()}/gb", exist_ok=True)
+            shutil.move(f"{outputDirVar.get()}/common_ms.bdat", f"{outputDirVar.get()}/gb/common_ms.bdat")
 
+            # Displays Done and Clears Text
+            randoProgressDisplay.config(text="Done")
+            time.sleep(1.5)
+            randoProgressDisplay.config(text="")
+            randoProgressDisplay.pack_forget()
+            
+            print("Done")
+        except:
+            randoProgressDisplay.config(text="Invalid Output Directory")
+
+        
         # Re-Enables Randomize Button
         RandomizeButton.config(state=NORMAL)
-        
-        print("Done")
 
     threading.Thread(target=ThreadedRandomize).start()
 
