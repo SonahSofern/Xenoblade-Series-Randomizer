@@ -37,12 +37,13 @@ Modded Nintendo Switch with Atmosphere
 ### Process:
 Guide adapted from: https://gamebanana.com/tuts/13815 
 
-1. Use NXDumpTool to dump XC2's RomFS.
-2. Put your microSD card into your computer, and locate "bf2.ard" and "bf2.arh"; those are the only two important files. Everything else in the dump can be safely deleted.
-3. Download Xenoblade2Set from (https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/), and extract its contents.
-4. Copy bf2.ard and bf2.arh to the Xenoblade2Set folder, and run "quickbms_4gb_files.exe".
-5. It will ask for a "bms script"; select Xenoblade2ard.bms. It will then ask for "archives/files"; select bf2.arh. For "output folder", go into the empty "modified" folder and press "Save". The files should extract, it may take a bit.
-6. CONSOLE ONLY: There should now be a new "bdat" folder inside "modified"; This is the folder that the randomizer program targets as the input folder. The output folder should be /atmosphere/contents/0100E95004039001/romfs/bdat on your microSD card.
-7. EMULATOR ONLY: There should now be a new "bdat" folder inside "modified"; This is the folder that the randomizer program targets as the input folder. The output folder should be the emulator's name then /load/0100E95004039001/Randomizer/romfs/bdat .
-8. Choose your preferred settings, then use the randomizer program to randomize the contents of the game.
-9. CONSOLE ONLY: Put your microSD card back into your Switch, use Atmosphere and Homebrew to launch the game. Pressing L bypasses the active patches, so if you wish to play the vanilla game again, you can do so in this way.
+1. CONSOLE ONLY: Use NXDumpTool to dump XC2's RomFS.
+2. EMULATOR ONLY: Use your emulator's built-in tool to dump XC2's RomFS.
+3. Put your microSD card into your computer, and locate "bf2.ard" and "bf2.arh"; those are the only two important files. Everything else in the dump can be safely deleted.
+4. Download Xenoblade2Set from (https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/), and extract its contents.
+5. Copy bf2.ard and bf2.arh to the Xenoblade2Set folder, and run "quickbms_4gb_files.exe".
+6. It will ask for a "bms script"; select Xenoblade2ard.bms. It will then ask for "archives/files"; select bf2.arh. For "output folder", go into the empty "modified" folder and press "Save". The files should extract, it may take a bit.
+7. CONSOLE ONLY: There should now be a new "bdat" folder inside "modified"; This is the folder that the randomizer program targets as the input folder. The output folder should be /atmosphere/contents/0100E95004039001/romfs/bdat on your microSD card.
+8. EMULATOR ONLY: There should now be a new "bdat" folder inside "modified"; This is the folder that the randomizer program targets as the input folder. The output folder should be the emulator's name then /load/0100E95004039001/Randomizer/romfs/bdat .
+9. Choose your preferred settings, then use the randomizer program to randomize the contents of the game.
+10. CONSOLE ONLY: Put your microSD card back into your Switch, use Atmosphere and Homebrew to launch the game. Pressing L bypasses the active patches, so if you wish to play the vanilla game again, you can do so in this way.
