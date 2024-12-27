@@ -34,6 +34,13 @@ root.option_add("*Font", defaultFont)
 root.geometry(f'{windowWidth}x{windowHeight}')
 
 if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
+    bdat_path = os.path.join(sys._MEIPASS, 'Toolset', 'bdat-toolset-win64.exe')
+else:  # If running as a script (not bundled)
+    bdat_path = "./_internal/Toolset/bdat-toolset-win64.exe"
+
+
+
+if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
     icon_path = os.path.join(sys._MEIPASS, 'Images', 'XC2Icon.png')
 else:  # If running as a script (not bundled)
     icon_path = "./_internal/Images/XC2Icon.png"
@@ -311,9 +318,9 @@ def Randomize():
 
         try:
         # Unpacks BDATs
-            subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {fileEntryVar.get()}/common.bdat -o {JsonOutput} -f json --pretty", check=True)
-            subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {fileEntryVar.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty", check= True)
-            subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe extract {fileEntryVar.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty", check=True)
+            subprocess.run(f"{bdat_path} extract {fileEntryVar.get()}/common.bdat -o {JsonOutput} -f json --pretty", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            subprocess.run(f"{bdat_path} extract {fileEntryVar.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty", check= True, creationflags=subprocess.CREATE_NO_WINDOW)
+            subprocess.run(f"{bdat_path} extract {fileEntryVar.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
         except:
             randoProgressDisplay.config(text="Invalid Input Directory")
             time.sleep(3)
@@ -329,7 +336,7 @@ def Randomize():
 
         try:
             # Packs BDATs
-            subprocess.run(f"./_internal/Toolset/bdat-toolset-win64.exe pack {JsonOutput} -o {outputDirVar.get()} -f json", check=True)
+            subprocess.run(f"{bdat_path} pack {JsonOutput} -o {outputDirVar.get()} -f json", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
             # Outputs common_ms in the correct file structure
             os.makedirs(f"{outputDirVar.get()}/gb", exist_ok=True)
