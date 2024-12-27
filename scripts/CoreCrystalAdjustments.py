@@ -31,8 +31,8 @@ def FieldSkillLevelAdjustment():
     with open(FieldAchievementSetFile, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
-            for i in range(0, len(FieldSkillAchievementIDs)):
-                if row["$id"] == FieldSkillAchievementIDs[i]:
+            for i in range(0, len(ChangeableFieldSkillAchievementIDs)):
+                if row["$id"] == ChangeableFieldSkillAchievementIDs[i]:
                     if row["AchievementID1"] != 0:
                         row["AchievementID1"] = 40
                     if row["AchievementID2"] != 0:
