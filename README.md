@@ -12,7 +12,7 @@ Discord: https://discord.gg/h93yqZHG8z
 # Known Issues
 Race Mode will overwrite some settings. (for example Treasure Chest Contents will be overwritten if race mode is on)\
 Torna has not been tested at all, it may or may not work.\
-Note: If you do get stuck you can remove the files from the directory and it will load the base game for you to continue. This shouldn't happen but if it does let us know what you were stuck on.
+Note: If you do get stuck, you can remove the files from the directory and it will load the base game for you to continue. This shouldn't happen but if it does let us know what you were stuck on.
 
 # Credits
 https://github.com/roccodev/bdat-rs \
@@ -30,7 +30,7 @@ Homebrewed Switch or Emulator\
 [Xenoblade 2 Set](https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/)
 
 ### Console Also Requires:
-microSD card (A 16GB minimum exFAT-formatted microSD card is recommended; FAT32 seems to mess stuff up.)\
+microSD card (A 32GB minimum exFAT-formatted microSD card is recommended; FAT32 seems to mess stuff up.)\
 Modded Nintendo Switch with Atmosphere
 
 
