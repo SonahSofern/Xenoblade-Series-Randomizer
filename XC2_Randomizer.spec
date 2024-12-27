@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['scripts/XC2_Randomizer.py'],
+    ['scripts\\XC2_Randomizer.py'],
     pathex=[],
     binaries=[],
     datas=[('_internal/Images', 'Images'), ('_internal/Toolset/bdat-toolset-win64.exe', 'Toolset')],
@@ -19,28 +19,21 @@ pyz = PYZ(a.pure)
 exe = EXE(
     pyz,
     a.scripts,
+    a.binaries,
+    a.datas,
     [],
-    exclude_binaries=True,
     name='XC2_Randomizer',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
+    upx_exclude=[],
+    runtime_tmpdir=None,
     console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='_internal/Images/XC2Icon.ico'
-)
-coll = COLLECT(
-    exe,
-    a.binaries,
-    a.datas,
-    strip=False,
-    upx=True,
-    upx_exclude=[],
-    name='XC2_Randomizer',
-    distpath='./dist',
+    icon=['_internal\\Images\\XC2Icon.ico'],
 )

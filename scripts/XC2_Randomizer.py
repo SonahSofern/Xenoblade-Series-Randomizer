@@ -1,5 +1,5 @@
 from tkinter import PhotoImage, ttk
-import random, subprocess, shutil, os, threading, traceback, time
+import random, subprocess, shutil, os, threading, traceback, time, sys
 from tkinter import *
 import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, PermalinkManagement, Helper
 import GUISettings
@@ -32,7 +32,12 @@ defaultFont = Font(family=defFontVar.get(), size=defFontSizeVar.get())
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
 root.geometry(f'{windowWidth}x{windowHeight}')
-icon = PhotoImage(file="./_internal/Images/XC2Icon.png")
+
+if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
+    icon_path = os.path.join(sys._MEIPASS, 'Images', 'XC2Icon.png')
+else:  # If running as a script (not bundled)
+    icon_path = "./_internal/Images/XC2Icon.png"
+icon = PhotoImage(file=icon_path)
 root.iconphoto(True, icon)
 
 # The Notebook
@@ -429,7 +434,12 @@ RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
 RandomizeButton.config(padding=5)
 
 # Options Cog
-Cog = PhotoImage(file="./_internal/Images/SmallSettingsCog.png")
+
+if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
+    icon_path = os.path.join(sys._MEIPASS, 'Images', 'SmallSettingsCog.png')
+else:  # If running as a script (not bundled)
+    icon_path = "./_internal/Images/SmallSettingsCog.png"
+Cog = PhotoImage(file=icon_path)
 SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, defGUIThemeVar))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
@@ -437,5 +447,6 @@ SettingsButton.pack(pady=10, padx=10, side='right', anchor='e')
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSaveAndLoad, "SavedOptions.txt"), root.destroy()))
 GUISettings.LoadTheme(defaultFont, defGUIThemeVar.get())
+
 root.mainloop()
 
