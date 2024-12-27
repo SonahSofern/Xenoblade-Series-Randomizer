@@ -37,9 +37,9 @@ Modded Nintendo Switch with Atmosphere
 ### Process:
 Guide adapted from: https://gamebanana.com/tuts/13815 
 
-1. CONSOLE ONLY: Use NXDumpTool to dump XC2's RomFS.
-2. EMULATOR ONLY: Use your emulator's built-in tool to dump XC2's RomFS.
-3. Put your microSD card into your computer, and locate "bf2.ard" and "bf2.arh"; those are the only two important files. Everything else in the dump can be safely deleted.
+1. CONSOLE ONLY: Use NXDumpTool to perform a full dump of XC2's RomFS to your microSD card, and put it into your computer.
+2. EMULATOR ONLY: Use your emulator's built-in tool to perform a full dump of XC2's RomFS. If given the option, select 0100E95004038000.
+3. Locate "bf2.ard" and "bf2.arh"; those are the only two important files.
 4. Download Xenoblade2Set from (https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/), and extract its contents.
 5. Copy bf2.ard and bf2.arh to the Xenoblade2Set folder, and run "quickbms_4gb_files.exe".
 6. It will ask for a "bms script"; select Xenoblade2ard.bms. It will then ask for "archives/files"; select bf2.arh. For "output folder", go into the empty "modified" folder and press "Save". The files should extract, it may take a bit.
