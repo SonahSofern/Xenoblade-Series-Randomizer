@@ -107,7 +107,7 @@ def RaceModeChanging(OptionsRunDict):
             for row in data["rows"]:
                 if row["$id"] == LandmarkMapSpecificIDstoTarget[i]:
                     row["getEXP"] = ExpDiff[i]
-                    row["getSP"] = 4500 * ChosenIndices[i]
+                    row["getSP"] = 3500 * ChosenIndices[i]
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)

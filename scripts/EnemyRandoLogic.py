@@ -447,7 +447,22 @@ def LevelReversion(FullDefaultIDs, FullRandomizedIDs, SpecificDefaultIDs, Specif
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)                        
-       
+
+def FightBalancing(filenames, TargetIDs, LevelChange): #Changes the level scaling of any desired fights
+    for i in range(0, len(LevelChange)):
+        with open(filenames[i], 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] == TargetIDs:
+                    for j in range(1, 5):
+                        if row[f"ene{j}ID"] != 0:
+                            row[f"ene{j}Lv"] = LevelChange[i]
+                        else:
+                            break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)                            
+
 def EnemyLogic(OptionsRunDict):
     EnemyRandoOn = False
     EnemiestoPass = []
@@ -571,3 +586,5 @@ def EnemyLogic(OptionsRunDict):
         Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["LvRand"], 0)
         Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], 0)
         SummonsLevelAdjustment()
+        FightBalancing(["./_internal/JsonOutputs/common_gmk/ma16a_FLD_EnemyPop.json"], [16149], [-5])
+
