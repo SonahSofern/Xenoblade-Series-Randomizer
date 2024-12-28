@@ -463,6 +463,29 @@ def FightBalancing(filenames, TargetIDs, LevelChange): #Changes the level scalin
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)                            
 
+def BigEnemyCollisionFix(): # Fixes ophion/other large enemies going outside the spawn circle and flying out of range in a boss fight
+    with open("./_internal/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as file: 
+        BigEnemies = [64,65,70,154,245,249,252]
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in BigEnemies:
+                row["CharColli"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+        
+def FishFix(): # changes all fish to flying type enemies so that when they spawn in, they don't instantly die and bug out. Doesn't fix enemies dying instantly in water
+    with open("./_internal/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as file: 
+        FishIDs = [133, 135, 136, 137, 475, 476, 477, 478]
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in FishIDs:
+                row["ActType"] = 3
+                row["FlyHeight"] = 1
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
 def EnemyLogic(OptionsRunDict):
     EnemyRandoOn = False
     EnemiestoPass = []
@@ -587,4 +610,6 @@ def EnemyLogic(OptionsRunDict):
         Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], 0)
         SummonsLevelAdjustment()
         FightBalancing(["./_internal/JsonOutputs/common_gmk/ma16a_FLD_EnemyPop.json"], [16149], [-5])
+        FishFix()
+        BigEnemyCollisionFix()
 

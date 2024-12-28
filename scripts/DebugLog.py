@@ -75,13 +75,13 @@ def DebugCoreCrystalAddition(ValidCrystalListIDs, CorrespondingBladeNames):
     debugfilewrite.writelines(alllines)
     debugfilewrite.close()
 
-def DebugXoharLocations(XoharChestIDs):
+def DebugZoharLocations(ZoharChestIDs):
     debugfileread = open(debugfilename, "r", encoding= "utf-8")
     alllines = debugfileread.readlines()
     alllines.append("\n")
-    alllines.append("Xohar Chest IDs:\n")
-    for i in range(0, len(XoharChestIDs)):
-        alllines.append(f"{XoharChestIDs[i]}\n")
+    alllines.append("Zohar Chest IDs:\n")
+    for i in range(0, len(ZoharChestIDs)):
+        alllines.append(f"{ZoharChestIDs[i]}\n")
     debugfilewrite = open(debugfilename, "w", encoding= "utf-8")
     debugfilewrite.writelines(alllines)
     debugfilewrite.close()
