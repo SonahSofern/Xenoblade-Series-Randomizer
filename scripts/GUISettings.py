@@ -94,6 +94,7 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
         darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
     else:
         GUIWindow.focus()
+        GUIWindow.deiconify() # unminimizes
     
 def ToggleLightDarkMode(togButton, defaultFont, defaultTheme):
     if togButton.cget("text") == "Dark Mode":

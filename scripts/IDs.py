@@ -13,7 +13,8 @@ CanvasesForStyling = []
 RootsForStyling = []
 
 #HELPFUL VARIABLES
-AuxCores = Helper.InclRange(17001, 17424) + Helper.InclRange(15001, 15406) # These are all aux cores in ITM_OrbEquip and ITM_Orb
+AuxCores = Helper.InclRange(15001, 15406)
+RefinedAuxCores = Helper.InclRange(17001, 17424)
 WeaponChips = Helper.InclRange(10001, 10060)
 CoreCrystals = Helper.InclRange(45001,45057)
 Accessories = Helper.InclRange(1,687)
