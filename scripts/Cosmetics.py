@@ -140,6 +140,7 @@ PandoriaCosmetics = [
     "Magical Pink Pandoria", [lambda: IDs.ValidBladeCosmetics.append([MagicalPinkPandoria, Pandoria])],
     "Mermaid Blue Pandoria", [lambda: IDs.ValidBladeCosmetics.append([MermaidBluePandoria, Pandoria])],
     "Beach Date Pandoria", [lambda: IDs.ValidBladeCosmetics.append([BeachDatePandoria, Pandoria])],
+    "Clear Glasses Pandoria", [lambda: IDs.ValidBladeCosmetics.append([ClearGlassesPandoria, Pandoria])],
 ]
 
 NiaBladeCosmetics = [
