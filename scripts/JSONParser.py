@@ -50,3 +50,12 @@ def ChangeJSONLine(filenames, ids, keys, replacement):
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
+            
+def ExtendJSONFile(filePath, additionsList = []):
+    with open("./_internal/JsonOutputs/" + filePath, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for item in additionsList:
+            data["rows"].extend(item)
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
