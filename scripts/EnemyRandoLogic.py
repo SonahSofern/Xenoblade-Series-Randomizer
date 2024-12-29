@@ -470,6 +470,8 @@ def BigEnemyCollisionFix(): # Fixes ophion/other large enemies going outside the
         for row in data["rows"]:
             if row["$id"] in BigEnemies:
                 row["CharColli"] = 0
+                row["EnRadius"] = 255
+                row["EnRadius2"] = 255
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -546,7 +548,7 @@ def AeshmaCoreHPNerf(): #this fight sucks
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 318:
-                row["HpMaxRev"] = 1000
+                row["HpMaxRev"] = 1000 # nerfed hp by 7/8ths
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)        
