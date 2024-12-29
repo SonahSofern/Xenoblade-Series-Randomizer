@@ -107,7 +107,7 @@ def RaceModeChanging(OptionsRunDict):
             for row in data["rows"]:
                 if row["$id"] == LandmarkMapSpecificIDstoTarget[i]:
                     row["getEXP"] = ExpDiff[i]
-                    row["getSP"] = 4500 * ChosenIndices[i]
+                    row["getSP"] = 3500 * ChosenIndices[i]
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
@@ -559,9 +559,9 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
                     file.seek(0)
                     file.truncate()
                     json.dump(data, file, indent=2, ensure_ascii=False)
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Xohar Fragment Hunt"]["subOptionTypeVal"].get(): 
-        print("Shuffling in Xohar Fragments")
-        XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap)
+    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Zohar Fragment Hunt"]["subOptionTypeVal"].get(): 
+        print("Shuffling in Zohar Fragments")
+        ZoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap)
         
 def ShyniniSaveUs(): # Just in case we don't get good blade field skills, we can rely on Shynini to always sell core crystals :D
     with open("./_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as file: 
@@ -701,8 +701,8 @@ def EnemyDropRemoval(): # Removes all enemy drops, to avoid getting powerful equ
     for i in range(1, 9):
         Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_EnDropItem.json", [f"ItemID{i}", f"DropProb{i}", f"NoGetByEnh{i}", f"FirstNamed{i}"] , 0)
 
-def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to make players go out and find chests.
-    XoharFragPreciousIDs = [25135, 25136, 25137, 25138] # for now fixed at 4, but if we change # of race mode dungeons or give the player that option, will need to change this
+def ZoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to make players go out and find chests.
+    ZoharFragPreciousIDs = [25135, 25136, 25137, 25138] # for now fixed at 4, but if we change # of race mode dungeons or give the player that option, will need to change this
     FragmentNameIDs = [191, 192, 193, 194]
     CaptionIDs = [197, 199, 201, 206]
     NumberofFragsPerArea = [0] * len(TBoxFiles)
@@ -716,7 +716,7 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
         data = json.load(file)
         for i in range(0, len(TBoxFiles)):
             for row in data["rows"]:
-                if row["$id"] == XoharFragPreciousIDs[i]:
+                if row["$id"] == ZoharFragPreciousIDs[i]:
                     row["ValueMax"] = 99
                     row["ClearNewGame"] = 0
                     row["Name"] = FragmentNameIDs[i]
@@ -725,7 +725,7 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    NameTexts = ["Xohar Fragment A", "Xohar Fragment B", "Xohar Fragment C", "Xohar Fragment D"]
+    NameTexts = ["Zohar Fragment A", "Zohar Fragment B", "Zohar Fragment C", "Zohar Fragment D"]
     with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # renaming the fragments in menus
         data = json.load(file)
         for i in range(0, len(TBoxFiles)):
@@ -772,29 +772,29 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
         AreaLetters = ["A", "B", "C", "D"]
         data = json.load(file)
         for i in range(0, len(IDNumbers)):
-            data["rows"].append({"$id": IDNumbers[i], "style": 62, "name": f"Find {NumberofFragsPerArea[i]} Xohar Fragment {AreaLetters[i]}."})
+            data["rows"].append({"$id": IDNumbers[i], "style": 62, "name": f"Find {NumberofFragsPerArea[i]} Zohar Fragment {AreaLetters[i]}."})
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     BlankstoShuffle = [0] * (len(ChosenIndices) - 1)
     PartstoShuffle = [0] * (len(ChosenIndices) - 1)
     for i in range(0, len(PartstoShuffle)):
-        PartstoShuffle[i] = int(BoxestoRandomizePerMap[i] // 3) # 1/3rd of all chests have a Xohar Fragment
+        PartstoShuffle[i] = int(BoxestoRandomizePerMap[i] // 3) # 1/3rd of all chests have a Zohar Fragment
         if PartstoShuffle[i] < 5:
             PartstoShuffle[i] = 5
         BlankstoShuffle[i] = BoxestoRandomizePerMap[i] - PartstoShuffle[i]
-    Area1XoharLocations = [0] * BlankstoShuffle[0] + [25135] * PartstoShuffle[0]
-    random.shuffle(Area1XoharLocations)
-    Area2XoharLocations = [0] * BlankstoShuffle[1] + [25136] * PartstoShuffle[1]
-    random.shuffle(Area2XoharLocations)
-    Area3XoharLocations = [0] * BlankstoShuffle[2] + [25137] * PartstoShuffle[2]
-    random.shuffle(Area3XoharLocations)
-    Area4XoharLocations = [0] * BlankstoShuffle[3] + [25138] * PartstoShuffle[3]
-    random.shuffle(Area4XoharLocations)
-    AllXoharLocations = [Area1XoharLocations, Area2XoharLocations, Area3XoharLocations, Area4XoharLocations]
+    Area1ZoharLocations = [0] * BlankstoShuffle[0] + [25135] * PartstoShuffle[0]
+    random.shuffle(Area1ZoharLocations)
+    Area2ZoharLocations = [0] * BlankstoShuffle[1] + [25136] * PartstoShuffle[1]
+    random.shuffle(Area2ZoharLocations)
+    Area3ZoharLocations = [0] * BlankstoShuffle[2] + [25137] * PartstoShuffle[2]
+    random.shuffle(Area3ZoharLocations)
+    Area4ZoharLocations = [0] * BlankstoShuffle[3] + [25138] * PartstoShuffle[3]
+    random.shuffle(Area4ZoharLocations)
+    AllZoharLocations = [Area1ZoharLocations, Area2ZoharLocations, Area3ZoharLocations, Area4ZoharLocations]
     ACurBox = 0
-    XoharChestIDs = []
-    for i in range(0, len(TBoxFiles)): # Shuffling the xohar fragments into the treasure chests
+    ZoharChestIDs = []
+    for i in range(0, len(TBoxFiles)): # Shuffling the Zohar fragments into the treasure chests
         ACurBox = 0
         for l in range(0, len(TBoxFiles[i])):
             if TBoxFiles[i][l] != 0:
@@ -803,15 +803,15 @@ def XoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
                     for row in data["rows"]:
                         TBoxName = row["name"]
                         if (TBoxName != "tbox_ma08a_f018") & (TBoxName != "tbox_qst1018_001"):
-                            if AllXoharLocations[i][ACurBox] != 0:
-                                row["itm8ID"] = AllXoharLocations[i][ACurBox]
+                            if AllZoharLocations[i][ACurBox] != 0:
+                                row["itm8ID"] = AllZoharLocations[i][ACurBox]
                                 row["itm8Num"] = 1
-                                XoharChestIDs.append(row["$id"])
+                                ZoharChestIDs.append(row["$id"])
                             ACurBox = ACurBox + 1
                     file.seek(0)
                     file.truncate()
                     json.dump(data, file, indent=2, ensure_ascii=False)
-    # DebugLog.DebugXoharLocations(XoharChestIDs)
+    # DebugLog.DebugZoharLocations(ZoharChestIDs)
 
 def DriverLvandSPFix():
     with open("./_internal/JsonOutputs/common/CHR_Dr.json", 'r+', encoding='utf-8') as file: # Maybe fixing XP dupe

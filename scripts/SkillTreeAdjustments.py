@@ -80,7 +80,6 @@ def Tier1ArtsCancel(OptionsRunDict):
                     try:
                         if (row["RowNum"] == ReplRow) and (row["ColumnNum"] == ReplCol) and (row["Round"] == ReplRound):
                             row["SkillID"] = OrigID
-                            #break
                     except:
                         pass
                 file.seek(0)

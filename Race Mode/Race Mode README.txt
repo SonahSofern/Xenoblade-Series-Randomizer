@@ -55,7 +55,7 @@ The following sections describe each of the Race Mode suboptions, which are all 
 
 ------------------------------------------------------------
 
-Xohar Fragment Hunt:
+Zohar Fragment Hunt:
 
 In order to complete a Storyline, you also must find 3-6 Mysterious Parts (depending on the total number of chests in that area) from that Storyline section. These can be found in treasure chests throughout the continents the given Storyline takes place on. You will not be able to progress past the final quest in a Storyline without finding these items. Roughly 1/3rd of the chests on the Storyline area contain a Mysterious Part for that area.
 
@@ -79,7 +79,7 @@ Shop Changes:
 
 If this setting is on, Shynini (of the Argentum Trade Guild, F1) will sell Common, Rare, and Legendary Core Crystals.
 
-Additionally, the Shop Deeds you get for buying all items in a shop are removed, as they are intended to be shuffled into the pool of treasure chests with the Xohar Fragment Hunt setting.
+Additionally, the Shop Deeds you get for buying all items in a shop are removed, as they are intended to be shuffled into the pool of treasure chests with the Zohar Fragment Hunt setting.
 
 All Shop Deeds now give a 5% movement speed buff.
 
