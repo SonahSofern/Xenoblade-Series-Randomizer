@@ -541,6 +541,16 @@ def PostRandomizationNonBossandQuestAggroAdjustments(TotalDefaultEnemyIDs, Total
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+def AeshmaCoreHPNerf(): #this fight sucks
+    with open("./_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 318:
+                row["HpMaxRev"] = 1000
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)        
+
 def EnemyLogic(OptionsRunDict):
     EnemyRandoOn = False
     EnemiestoPass = []
@@ -665,6 +675,7 @@ def EnemyLogic(OptionsRunDict):
         FishFix()
         BigEnemyCollisionFix()
         PostRandomizationNonBossandQuestAggroAdjustments(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs, OptionsRunDict)
+        AeshmaCoreHPNerf()
 
         
 
