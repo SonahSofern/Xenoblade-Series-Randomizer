@@ -8,7 +8,7 @@ from Cosmetics import *
 from UI_Colors import *
 from tkinter.font import Font
 
-Version = "1.0"
+Version = "1.0.1"
 CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
 OptionDictionary = {}
@@ -18,6 +18,9 @@ windowWidth = "1550"
 windowHeight = "900"
 OptionColorLight = White
 OptionColorDark = Gray
+isOnefile = False
+if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
+    isOnefile = True
 
 root = Tk()
 defFontVar = tk.StringVar(value="Arial")
@@ -33,14 +36,14 @@ root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
 root.geometry(f'{windowWidth}x{windowHeight}')
 
-if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
+if isOnefile:  # If the app is running as a bundled executable
     bdat_path = os.path.join(sys._MEIPASS, 'Toolset', 'bdat-toolset-win64.exe')
 else:  # If running as a script (not bundled)
     bdat_path = "./_internal/Toolset/bdat-toolset-win64.exe"
 
 
 
-if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
+if isOnefile:  # If the app is running as a bundled executable
     icon_path = os.path.join(sys._MEIPASS, 'Images', 'XC2Icon.png')
 else:  # If running as a script (not bundled)
     icon_path = "./_internal/Images/XC2Icon.png"
@@ -205,7 +208,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
 def Options():
     # DebugLog.CreateDebugLog(OptionDictionary, Version, randoSeedEntry.get())
     # General
-    GenStandardOption("Testing Enhancements", TabGeneral, "Enhancements", [lambda: Enhancements.StandardEnhanceRun()])
+    # GenStandardOption("Testing Enhancements", TabGeneral, "Enhancements", [lambda: Enhancements.StandardEnhanceRun()])
     GenStandardOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)])
     GenStandardOption("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(Accessories)-set([1])), Accessories + Helper.InclRange(448,455))])
     GenStandardOption("Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Weapon Chip Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)])
@@ -220,7 +223,7 @@ def Options():
     GenStandardOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a reaction", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)],["Clear Vanilla Reactions", [lambda: Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)]], optionType=Spinbox) # we want id numbers no edit the 1/6 react stuff
     GenStandardOption("Driver Art Animation Speeds", TabDrivers, "Randomizes a Driver's art animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)], optionType=Spinbox)
     # GenStandardOption("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Dr.json"], ["DefAcce"], Accessories + [0], Accessories + [0])], ["Remove All Starting Accessories", [lambda: IDs.InvalidReplacements.extend(Accessories)]])
-    GenStandardOption("Accessory Enhancements", TabDrivers, "Randomizes enhancements of Accessories", [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcEquip.json"],["Enhance1"], AllVanillaEnhancements, ValidDriverEnhancements)],["Custom Enhancements", []] , optionType=Spinbox)
+    # GenStandardOption("Accessory Enhancements", TabDrivers, "Randomizes enhancements of Accessories", [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcEquip.json"],["Enhance1"], AllVanillaEnhancements, ValidDriverEnhancements)],["Custom Enhancements", []] , optionType=Spinbox)
     
     # Blades
     GenStandardOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)], optionType=Spinbox)
@@ -266,13 +269,13 @@ def Options():
     GenStandardOption("Condense Gold Loot", TabQOL, "Condenses gold in chests so you can see other items", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"),["goldPopMin", "goldPopMax"], Helper.InclRange(0,100000), [1])])
     GenStandardOption("Mute Popups", TabQOL, "Stops blade skill and pouch item refill popups", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[89], ["sheet06"], [""])])
     GenStandardOption("Less UI", TabQOL, "Removes some of the unneccessary on screen UI (Blade Swap and Current Objective)", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[88], ["sheet05", "sheet03"], [""])])
+    GenStandardOption("Screenshot Mode", TabQOL, "Removes most UI for screenshots", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[88], ["sheet05", "sheet03", "sheet04"], ""), lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[86], ["sheet02", "sheet03"], "")])
+    
     # Funny
     GenStandardOption("Projectile Treasure Chests", TabFunny, "Launches your items from chests", [lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [12])])
     GenStandardOption("Blade Size", TabFunny, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Scale", "WpnScale"], [], Helper.InclRange(1,250) + [1000,16000])], optionType= Spinbox) # Make sure these work for common blades
     GenStandardOption("NPCs Size", TabFunny, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSONFile(["common/RSC_NpcList.json"], ["Scale"], Helper.InclRange(1,100), Helper.InclRange(1,250))], optionType=Spinbox)
     GenStandardOption("Enemy Size", TabFunny, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"], ["Scale"], Helper.InclRange(0, 1000), Helper.InclRange(1, 200) + Helper.InclRange(990,1000))], optionType=Spinbox)
-    # GenStandardOption("NPCs Size", TabFunny, "messingWithSystemBalance", [lambda: JSONParser.ChangeJSONFile(["common/BTL_BallBreak.json"], ["FBBonus2", "DamageRate2", "FBGauge2"], Helper.InclRange(1,1000), [1])])
-
 
     
     # Cosmetics
@@ -457,7 +460,7 @@ RandomizeButton.config(padding=5)
 
 # Options Cog
 
-if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
+if isOnefile:  # If the app is running as a bundled executable
     icon_path = os.path.join(sys._MEIPASS, 'Images', 'SmallSettingsCog.png')
 else:  # If running as a script (not bundled)
     icon_path = "./_internal/Images/SmallSettingsCog.png"
