@@ -528,6 +528,10 @@ def PostRandomizationNonBossandQuestAggroAdjustments(TotalDefaultEnemyIDs, Total
         for i in range(0, len(TotalDefaultEnemyIDs)):
             if (TotalDefaultEnemyIDs[i] in AllBossDefaultIDs) or (TotalDefaultEnemyIDs[i] in AllQuestDefaultEnemyIDs):
                 NewBossandQuestIDs.append(TotalRandomizedEnemyIDs[i])
+        if OptionsRunDict["Enemies"]["subOptionObjects"]["Story Bosses"]["subOptionTypeVal"].get() == False: # need to include bosses in enemies not to clear if they aren't randomized
+            NewBossandQuestIDs += list(set(BossDefaultEnem1IDs + BossDefaultEnem2IDs + BossDefaultEnem3IDs + BossDefaultEnem4IDs))
+        if OptionsRunDict["Enemies"]["subOptionObjects"]["Quest Enemies"]["subOptionTypeVal"].get() == False: # need to include quest enemies in enemies not to clear if they aren't randomized
+            NewBossandQuestIDs += list(set(QuestDefaultEnemyIDs + EnemyGroupDefaultID1s + EnemyGroupDefaultID2s + EnemyGroupDefaultID3s + EnemyGroupDefaultID4s + EnemyGroupDefaultID5s + EnemyGroupDefaultID6s + EnemyGroupDefaultID7s + EnemyGroupDefaultID8s + EnemyGroupDefaultID9s + EnemyGroupDefaultID10s + EnemyGroupDefaultID11s + EnemyGroupDefaultID12s))
         for row in data["rows"]:
             if (row["$id"] not in NewBossandQuestIDs) & (random.randint(0,100) >= EnemyAggroSliderOdds) & (row["$id"] in ValidEnemies):
                 row["Flag"]["AlwaysAttack"] = 0
