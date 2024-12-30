@@ -27,7 +27,7 @@ ArtDebuffs = [0,11,12,13,14,15,21,23,24,25,30,35]
 AllVanillaEnhancements = Helper.InclRange(1,3895)
 ValidDriverEnhancements = [3896] # BTL_Enhance
 ValidEnemyEnhancements = []
-CustomEnhancements = Helper.InclRange(4000,4100)
+CustomEnhancements = None
 
 DriverSkillTrees = Helper.InclRange(1,270)
 HitReactions = Helper.InclRange(0,14)

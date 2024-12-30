@@ -1,5 +1,13 @@
-import JSONParser, Helper, random
+import JSONParser, Helper, random, IDs
 
+Baby = [1,5]
+Mini = [1,20]
+Small = [10,50]
+Medium = [20,100]
+Large  = [30,300]
+Mega = [60,600]
+Massive = [300,1500]
+Giga = [1000, 3000]
 EnhanceEffectsList = []
 ID = 4000
 class EnhanceEff:
@@ -10,15 +18,19 @@ class EnhanceEff:
             Param1Val = 0
         elif len(Param1) == 1:
             Param1Val = Param1[0]
-        else:
+        elif Param1 == Baby:
             Param1Val = random.randrange(Param1[0],Param1[1])
+        else:
+            Param1Val = random.randrange(Param1[0],Param1[1],5)
             
         if Param2 == []:
             Param2Val = 0   
         elif len(Param2) == 1:
             Param2Val = Param2[0]
+        elif Param2 == Baby:
+            Param2Val = random.randrange(Param2[0],Param2[1])
         else:
-            Param2Val = random.randrange(Param2[0], Param2[1])    
+            Param2Val = random.randrange(Param2[0], Param2[1],5)    
         
         EnhanceEffectsDict = {
             "$id": ID,
@@ -38,15 +50,6 @@ def IncreaseEffectCaps(NewCap):
     
 
 def CreateEnhanceObjects():     # update the ids when i make more they only go to 4000
-    Baby = [1,5]
-    Mini = [1,20]
-    Small = [10,50]
-    Medium = [20,100]
-    Large  = [30,300]
-    Mega = [60,600]
-    Massive = [300,1500]
-    Giga = [1000, 3000]
-    
     HPBoost =       EnhanceEff(1,1, Small)
     StrengthBoost = EnhanceEff(2,2, Small)
     EtherBoost = EnhanceEff(3,3, Small)
@@ -169,7 +172,97 @@ def CreateEnhanceObjects():     # update the ids when i make more they only go t
     PreventAffinityLossOnDeath = EnhanceEff(121, 131)
     AffinityUpButtonChallenge = EnhanceEff(122, 132, Medium)
     MissAffinityUp = EnhanceEff(123, 133, Small)
-    DamageTakenAffinityUp = EnhanceEff()
+    DamageTakenAffinityUp = EnhanceEff(124,134, Small)
+    BladeArtsTriggerUp = EnhanceEff(125, 135, Large)
+    BladeArtDuration = EnhanceEff(126, 136, Medium)
+    AffinityMaxBarrier = EnhanceEff(127, 137, Small)
+    AffinityMaxAttack = EnhanceEff(128, 138, Medium)
+    AffinityMaxEvade = EnhanceEff(129, 139, Small)
+    HunterChem = EnhanceEff(130, 140, Mega)
+    ShoulderToShoulder = EnhanceEff(131, 141, Mega)
+    BladeCooldownReduc = EnhanceEff(132, 142, Medium)
+    PartyHealBladeSwitch = EnhanceEff(133, 143, Small)
+    AffinityRange = EnhanceEff(134, 144, Mega)
+    LV1Damage = EnhanceEff(135, 145,1, Large)
+    LV2Damage = EnhanceEff(135, 145,2, Large)
+    LV3Damage = EnhanceEff(135, 145,3, Large)
+    LV4Damage = EnhanceEff(135, 145,4, Large)
+    SmallHpPotCreate = EnhanceEff(136, 146, Small)
+    PotionEffectUp = EnhanceEff(137, 147, Medium)
+    PurifyingFlames = EnhanceEff(138, 148, Small, Mini)
+    ForeSight = EnhanceEff(139, 149, Small)
+    DreamOfTheFuture = EnhanceEff(140, 150)
+    ReduceEnemyBladeComboDamage = EnhanceEff(142, 151, Medium)
+    DamagePerEvadeUp = EnhanceEff(143, 152, Mini)
+    ArtsRechargeMaxAffinity = EnhanceEff(144, 154, Small)
+    ReduceAggroFromAttacks = EnhanceEff(145, 155, Small)
+    PhyAndEthDefenseUp = EnhanceEff(146, 156, Small)
+    ChanceToPerfectHitAndEvade = EnhanceEff(147, 157, Small)
+    Reflection = EnhanceEff(148, 158, Small)
+    MaxAffinityEvadeXAttacks = EnhanceEff(149, 159, Mini)
+    ToppleANDLaunchDamageUp = EnhanceEff(150, 160, Large)
+    InstaKill = EnhanceEff(151,161, Baby)
+    PartyDamageReducMAxAffinity = EnhanceEff(152, 162, Mini)
+    KaiserZone = EnhanceEff(153, 163, Medium)
+    TastySnack = EnhanceEff(154, 164, Medium)
+    HealingUpMaxAffinity =  EnhanceEff(155, 165, Small)
+    AggroPerSecondANDAggroUp  = EnhanceEff(156, 166, Small, Small)
+    MoreDamTakeLessAllyLowOrDown = EnhanceEff(157, 167, Large, Small)
+    StopThinking = EnhanceEff(158, 168, Medium, Baby)
+    LowHPSpecialUp = EnhanceEff(159, 169, [1.5]) #Uses decimals weird one not sure how it scales
+    TranquilGuard = EnhanceEff(160, 171, Small)
+    HPRestoreFusionCombo = EnhanceEff(161, 172, Baby)
+    AttackUpGoldUp = EnhanceEff(162, 173, Baby, Mega)
+    EnemyDropGoldOnHit = EnhanceEff(163, 174, Medium)
+    ReduceEnemyChargeMaxAffinity = EnhanceEff(164, 175, Small)
+    VersusBossUniqueEnemyDamageUp = EnhanceEff(165, 176, Medium)
+    DidIDoThat = EnhanceEff(166, 177, Mini)
+    AnnulEnemyDefAndSPecialDamageUp = EnhanceEff(167, 178, Small)
+    GlassCannon = EnhanceEff(168, 179, Large, Small)
+    AnnulDef = EnhanceEff(169, 180, Medium)
+    Transmigration = EnhanceEff(170, 181, Medium)
+    ElementalWeaknessDamageUP = EnhanceEff(171, 182, Large) #Show
+    GravityPinwheel = EnhanceEff(172, 183, Small, Baby)
+    AutoAttackSpeed= EnhanceEff(173, 184, Large)
+    DoubleHitExtraAutoDamage = EnhanceEff(174, 185, Large)
+    ToppleDamageANDDurationUp = EnhanceEff(175, 186, Medium, Mini)
+    EvadeDrainHp = EnhanceEff(176, 187, Mini)
+    AggroReducOnLandingHit = EnhanceEff(177, 188, Medium)
+    RecoverRechargeCrit = EnhanceEff(178, 189, Medium)
+    SpecialAffinityUp = EnhanceEff(179,191, Medium)
+    BreakResDown = EnhanceEff(180, 192, Small)
+    RepeatSpecialDamage = EnhanceEff(182, 193, Small)
+    Twang = EnhanceEff(183, 194, Small, Baby)
+    MaxAffinityAccuracy = EnhanceEff(184, 195, Large)
+    PotionStayLonger = EnhanceEff(185, 196, Small)
+    FemaleDamageUp = EnhanceEff(186, 197, Mini)
+    DealMoreTakeLessMaxAffinity = EnhanceEff(187, 198, Mini, Small)
+    CritUpChainAttackSelected =EnhanceEff(188,199,Medium)
+    DealDamageWhenSwappedIn = EnhanceEff(189, 200, Mini)
+    CancelWindowUp = EnhanceEff(191, 201, Medium)
+    RestoreHitDamageToParty = EnhanceEff(192, 202, Baby)
+    AddBufferTimeSwitchingToComboBlade = EnhanceEff(193, 203, Medium)
+    PartyDamageMaxAffinity = EnhanceEff(194, 204, Mini)
+    AegisDriver = EnhanceEff(195, 205, Medium, Small)
+    AegisParty = EnhanceEff(196, 206)
+    ReduceFireDamage = EnhanceEff(58, 207, [1], Medium)
+    ReduceWaterDamage = EnhanceEff(58, 208, [2], Medium)
+    ReduceWindDamage = EnhanceEff(58, 209, [3], Medium)
+    ReduceEarthDamage = EnhanceEff(58, 210, [4], Medium)
+    ReduceElectricDamage = EnhanceEff(58, 211, [5], Medium)
+    ReduceIceDamage = EnhanceEff(58, 212, [6], Medium)
+    ReduceLightDamage = EnhanceEff(58, 213, [7], Medium)
+    ReduceDarkDamage = EnhanceEff(58, 214, [8], Medium)
+  
+    
+    
+    
+    
+    
+    
+    
+    
+        
     
     
     Baby = [1,5]
@@ -189,6 +282,7 @@ def StandardEnhanceRun():
         CreateEnhanceObjects()
         CreateEnhanceObjects()
         CreateEnhanceObjects()
+    IDs.CustomEnhancements = Helper.InclRange(4000, ID)
     JSONParser.ExtendJSONFile("common/BTL_Enhance.json",  EnhanceEffectsList)
     
     
