@@ -331,11 +331,13 @@ def CreateEnhanceObjects():     # update the ids when i make more they only go t
     DoomRes = EnhanceEff(253, 311, Medium)
     PartyDrainRes = EnhanceEff(254, 312, Medium)
     DealTakeMore = EnhanceEff(255, 313, Medium, Medium)
-    #There are some torna effects not including them recoverable hp.
     AllDebuffRes = EnhanceEff(258, 316, Small)
     DamageUpOnCancel = EnhanceEff(259, 317, Mini)
     PurgeRage = EnhanceEff(261, 318, Medium)
-    
+    DamageAndCritUpMaxAffinity = EnhanceEff(263, 320, Medium, Medium)
+    ReducesTerrainDamage = EnhanceEff(264, 334, Medium)
+    SpecialRecievesAfterImage = EnhanceEff(213, 335, Baby)
+    #There are some torna effects not including them recoverable hp.
     
     
     Baby = [1,5]
