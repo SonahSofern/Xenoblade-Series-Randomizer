@@ -46,6 +46,8 @@ class EnhanceEff:
 def IncreaseEffectCaps(NewCap):
     JSONParser.ChangeJSONFile(["common/BTL_EnhanceEff.json"],["Param"], [Helper.InclRange(1,1000)], [NewCap])
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randrange(1,50)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randrange(30,70)) # Healing with low HP
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randrange(10,60)) # Healing with low HP
 
     
 
@@ -253,16 +255,87 @@ def CreateEnhanceObjects():     # update the ids when i make more they only go t
     ReduceIceDamage = EnhanceEff(58, 212, [6], Medium)
     ReduceLightDamage = EnhanceEff(58, 213, [7], Medium)
     ReduceDarkDamage = EnhanceEff(58, 214, [8], Medium)
-  
+    ChainAttackPower = EnhanceEff(106, 215, [0,2]) # Show
+    LowHPHeal = EnhanceEff(181, 230, Baby)
+    ArtUseHeal = EnhanceEff(86, 231, Baby)
+    AutoDriverArtCancelHeal = EnhanceEff(91, 233, Baby)
+    TakeDamageHeal = EnhanceEff(90, 235, Mini)
+    HealMoving = EnhanceEff(87, 236, Mini)
+    MaxAffinityHeal = EnhanceEff(141,237,Mini)
+    AbsorbFireBlock = EnhanceEff(60, 238, [1])
+    AbsorbWaterBlock = EnhanceEff(60, 239, [2])
+    AbsorbWindBlock = EnhanceEff(60, 240, [3])
+    AbsorbEarthBlock = EnhanceEff(60, 241, [4])
+    AbsorbElectricBlock = EnhanceEff(60, 242, [5])
+    AbsorbIceBlock = EnhanceEff(60, 243, [6])
+    AbsorbLightBlock = EnhanceEff(60, 244, [7])
+    AbsorbDarkBlock = EnhanceEff(60, 245, [8])
+    ReflectFireBlock = EnhanceEff(61, 246, [1])
+    ReflectWaterBlock = EnhanceEff(61, 247, [2])
+    ReflectWindBlock = EnhanceEff(61, 248, [3])
+    ReflectEarthBlock = EnhanceEff(61, 249, [4])
+    ReflectElectricBlock = EnhanceEff(61, 250, [5])
+    ReflectIceBlock = EnhanceEff(61, 251, [6])
+    ReflectLightBlock = EnhanceEff(61, 252, [7])
+    ReflectDarkBlock = EnhanceEff(61, 253, [8])
+    AegisPowerUp = EnhanceEff(119, 254, [1], Small)
+    CatScimPowerUp = EnhanceEff(119, 255, [2], Small)
+    TwinRingPowerUp = EnhanceEff(119, 256, [3], Small)
+    DrillShieldPowerUp = EnhanceEff(119, 257, [4], Small)
+    MechArmsPowerUp = EnhanceEff(119, 258, [5], Small)
+    VarSaberPowerUp = EnhanceEff(119, 259, [6], Small)
+    WhipswordPowerUp = EnhanceEff(119, 260, [7], Small)
+    BigBangPowerUp = EnhanceEff(119, 261, [8], Small)
+    DualScythesPowerUp = EnhanceEff(119, 262, [9], Small)
+    GreataxePowerUp = EnhanceEff(119, 263, [10], Small)
+    MegalancePowerUp = EnhanceEff(119, 264, [11], Small)
+    EtherCannonPowerUp = EnhanceEff(119, 265, [12], Small)
+    ShieldHammerPowerUp = EnhanceEff(119, 266, [13], Small)
+    ChromaKatanaPowerUp = EnhanceEff(119, 267, [14], Small)
+    BitballPowerUp = EnhanceEff(119, 268, [15], Small)
+    KnuckleClawsPowerUp = EnhanceEff(119, 269, [16], Small)
+    HPGuardArtRechargeAttacked = EnhanceEff(197,270, Mini)
+    Jamming = EnhanceEff(198, 271, Medium)
+    XStartBattle = EnhanceEff(113, 272, [0])
+    YStartBattle = EnhanceEff(113, 274, [1])
+    BStartBattle = EnhanceEff(113, 276, [2])
+    ArtCancel = EnhanceEff(190, 278)
+    BladeSwitchCooldownWithArts = EnhanceEff(200, 279, Small)
+    TauntRes = EnhanceEff(217, 280, Medium)
+    DriverShackRes = EnhanceEff(218, 281, Medium)
+    BladeShackRes = EnhanceEff(219, 282, Medium)
+    BurstDestroyAnotherOrb = EnhanceEff(226, 283)
+    HpPotChanceFor2 = EnhanceEff(227, 284, Medium)
+    DestroyOrbOpposingElement = EnhanceEff(228, 285)
+    TargetNearbyOrbsChainAttack = EnhanceEff(229, 286, Medium)
+    TargetDamagedNonOpposingElement = EnhanceEff(230, 287)
+    StenchRes = EnhanceEff(231, 288, Medium)
+    HPPotOnHitAgain = EnhanceEff(227, 289)
+    BladeComboOrbAdder = EnhanceEff(234,290, Medium)
+    EvadeDriverArt = EnhanceEff(32, 292)
+    RetainAggro = EnhanceEff(235, 293, Medium)
+    DamageUpOnDeath = EnhanceEff(238, 295, Large)
+    AutoSpeedArtsSpeed= EnhanceEff(240, 296, Small, Small)
+    LV4EachUseDmageUp = EnhanceEff(241, 297, Large)
+    Vision = EnhanceEff(242, 298, Medium)
+    AwakenPurge = EnhanceEff(243, 299, Medium)
+    PartyCritMaxAffinity = EnhanceEff(244, 300, Small)
+    DamageUpPerCrit = EnhanceEff(245, 301, Mini)
+    RechargeOnEvade = EnhanceEff(248, 304, random.randrange(0.5,3,0.5))
+    DamageAndEvadeAffinityMax = EnhanceEff(269, 305, Medium, Mini)
+    PartyLaunchDamageUp = EnhanceEff(249, 306, Mega)
+    PotionPickupDamageUp = EnhanceEff(250, 307, Small)
+    ItemCollectionRange = EnhanceEff(251, 308, Mega)
+    CombatSpeed = EnhanceEff(211, 309, Mega)
+    NullHealRes = EnhanceEff(252, 310, Medium)
+    DoomRes = EnhanceEff(253, 311, Medium)
+    PartyDrainRes = EnhanceEff(254, 312, Medium)
+    DealTakeMore = EnhanceEff(255, 313, Medium, Medium)
+    #There are some torna effects not including them recoverable hp.
+    AllDebuffRes = EnhanceEff(258, 316, Small)
+    DamageUpOnCancel = EnhanceEff(259, 317, Mini)
+    PurgeRage = EnhanceEff(261, 318, Medium)
     
-    
-    
-    
-    
-    
-    
-    
-        
     
     
     Baby = [1,5]
