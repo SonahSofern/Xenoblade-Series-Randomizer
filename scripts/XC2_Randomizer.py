@@ -208,7 +208,6 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
 def Options():
     # DebugLog.CreateDebugLog(OptionDictionary, Version, randoSeedEntry.get())
     # General
-    GenStandardOption("Testing Enhancements", TabGeneral, "Enhancements", [lambda: Enhancements.StandardEnhanceRun()])
     GenStandardOption("Pouch Item Shops", TabGeneral, "Randomizes what Pouch Items appear in Pouch Item Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)])
     GenStandardOption("Accessory Shops", TabGeneral, "Randomizes what Accessories appear in Accessory Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(Accessories)-set([1])), Accessories + Helper.InclRange(448,455))])
     GenStandardOption("Weapon Chip Shops", TabGeneral, "Randomizes what Weapon Chips appear in Weapon Chip Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)])
@@ -223,7 +222,7 @@ def Options():
     GenStandardOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a reaction", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)],["Clear Vanilla Reactions", [lambda: Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)]], optionType=Spinbox) # we want id numbers no edit the 1/6 react stuff
     GenStandardOption("Driver Art Animation Speeds", TabDrivers, "Randomizes a Driver's art animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)], optionType=Spinbox)
     # GenStandardOption("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Dr.json"], ["DefAcce"], Accessories + [0], Accessories + [0])], ["Remove All Starting Accessories", [lambda: IDs.InvalidReplacements.extend(Accessories)]])
-    GenStandardOption("Accessory Enhancements", TabDrivers, "Randomizes enhancements of Accessories", [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcEquip.json"],["Enhance1"], AllVanillaEnhancements, CustomEnhancements)],["Custom Enhancements", []] , optionType=Spinbox)
+    GenStandardOption("Accessories", TabDrivers, "Randomizes Properties of Accessories", [],["Enhancements", [lambda: Enhancements.EnhancementsRando(), lambda: IDs.ValidReplacements.extend(ValidCustomEnhancements), lambda: JSONParser.ChangeJSONFile(["common/ITM_PcEquip.json"],["Enhance1"], VanillaEnhancements, [])]] , optionType=Spinbox)
     
     # Blades
     GenStandardOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)], optionType=Spinbox)

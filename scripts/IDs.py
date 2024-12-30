@@ -24,10 +24,8 @@ AutoAttacks = [1, 2, 3, 8, 9, 10, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26
 ArtBuffs = [0,1,2,3,4,5,6,7,8,9,16,17]
 BladeArts = [0,1,2,3,4,5,6,7,8,9]
 ArtDebuffs = [0,11,12,13,14,15,21,23,24,25,30,35]
-AllVanillaEnhancements = Helper.InclRange(1,3895)
-ValidDriverEnhancements = [3896] # BTL_Enhance
-ValidEnemyEnhancements = []
-CustomEnhancements = None
+VanillaEnhancements = Helper.InclRange(1,3895)
+ValidCustomEnhancements = []
 
 DriverSkillTrees = Helper.InclRange(1,270)
 HitReactions = Helper.InclRange(0,14)
