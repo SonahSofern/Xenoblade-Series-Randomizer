@@ -496,17 +496,17 @@ def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDi
                 row["Flag"]["AlwaysAttack"] = 1
                 row["Detects"] = 1
                 if row["SearchRange"] == 0:
-                    row["SearchRange"] = random.randint(5, 25) # some enemies might naturally be passive, we need to turn them aggressive
+                    row["SearchRange"] = random.randint(10, 25) # some enemies might naturally be passive, we need to turn them aggressive
                 if row["SearchAngle"] == 0:
-                    row["SearchAngle"] = random.randint(45, 135)
+                    row["SearchAngle"] = random.randint(90, 180)
                 if row["SearchRadius"] == 0:
-                    row["SearchRadius"] = random.randint(1, 10)
+                    row["SearchRadius"] = random.randint(5, 10)
                 row["BatInterval"] = 50
                 row["BatArea"] = 50
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-
+          
 def AeshmaCoreHPNerf(): #this fight sucks
     with open("./_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
