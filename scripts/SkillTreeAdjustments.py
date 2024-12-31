@@ -55,7 +55,7 @@ def BalancingSkillTreeRando(OptionsRunDict):
             json.dump(data, file, indent=2, ensure_ascii=False)
 
 def Tier1ArtsCancel(OptionsRunDict):
-    if not OptionsRunDict["Balanced Skill Trees"]["optionTypeVal"].get():
+    if not OptionsRunDict["Driver Skill Trees"]["optionTypeVal"].get():
         print("Putting Arts Cancel into Tier 1 (no random trees).")
         for i in range(0, 9):
             CurrFile = FilePaths[i]

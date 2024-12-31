@@ -9,7 +9,7 @@ def saveData(DataList, Filename):
             except:
                 file.write(f"{saveData}" + '\n')
 
-
+            
 def loadData(DataList, Filename):
     try:
         with open(Filename, 'a+') as file:
