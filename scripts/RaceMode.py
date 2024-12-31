@@ -19,14 +19,12 @@ DamageRevLow = [100, 100, 100, 98, 96, 94, 92, 90, 88, 86, 84, 82, 80, 78, 76, 7
 HitRevLow = [110, 115, 122, 129, 138, 147, 158, 169, 182, 195, 210, 225, 242, 259, 278, 297, 318, 339, 362, 385]
 ReactRevHigh = [0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 40, 60, 80, 100, 100, 100, 100, 100, 100, 100]
 
-
-
 def RaceModeChanging(OptionsRunDict): 
     print("Setting Up Race Mode")    
     #Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
     #Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
 
-    AreaList1 = [41, 68] #41, 68
+    AreaList1 = [41] #41, 68
     AreaList2 = [99, 152] #99, 152
     AreaList3 = [125, 133, 168] #125, 133, 168
     AreaList4 = [175, 187] #175, 187

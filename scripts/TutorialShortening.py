@@ -1,33 +1,41 @@
 import json
 import Helper
+import EnemyRandoLogic
 
 def ShortenedTutorial(OptionsRunDict):
     ShortTutorialBox = OptionsRunDict["Shortened Tutorial"]["optionTypeVal"].get()
     RaceModeBox = OptionsRunDict["Race Mode"]["optionTypeVal"].get()
     if ShortTutorialBox:
-        print("Shortening Tutorials")
-        Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Condition.json", ["cond"], 1)
-        with open("./_internal/JsonOutputs/common_gmk/FLD_Tutorial.json", 'r+', encoding='utf-8') as file: # part of core crystal tutorial
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] not in [65, 67, 70]:
-                    row["ScenarioFlagMin"] = 10048
-                    row["QuestFlag"] = 0
-                    row["QuestFlagMin"] = 0
-                    row["QuestFlagMax"] = 0
-                    row["SysMultiFlag"] = 0
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
-        with open("./_internal/JsonOutputs/common_gmk/RSC_GmkSetList.json", 'r+', encoding='utf-8') as file: # part of core crystal tutorial
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["tutorial"] != "ma05a_tutorial":
-                    row["tutorial"] = ""
-                    row["tutorial_bdat"] = ""
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
+        if not RaceModeBox:
+            print("Shortening Tutorials")
+            Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Condition.json", ["cond"], 1)
+            with open("./_internal/JsonOutputs/common_gmk/FLD_Tutorial.json", 'r+', encoding='utf-8') as file: # part of core crystal tutorial
+                data = json.load(file)
+                for row in data["rows"]:
+                    if row["$id"] not in [65, 67, 70]:
+                        row["ScenarioFlagMin"] = 10048
+                        row["QuestFlag"] = 0
+                        row["QuestFlagMin"] = 0
+                        row["QuestFlagMax"] = 0
+                        row["SysMultiFlag"] = 0
+                file.seek(0)
+                file.truncate()
+                json.dump(data, file, indent=2, ensure_ascii=False)
+            with open("./_internal/JsonOutputs/common_gmk/RSC_GmkSetList.json", 'r+', encoding='utf-8') as file: # part of core crystal tutorial
+                data = json.load(file)
+                for row in data["rows"]:
+                    if row["tutorial"] != "ma05a_tutorial":
+                        row["tutorial"] = ""
+                        row["tutorial_bdat"] = ""
+                file.seek(0)
+                file.truncate()
+                json.dump(data, file, indent=2, ensure_ascii=False)
+            EnemyRandoLogic.KeyItemsReAdd()
+        else:
+            print("Shortening Tutorials")
+            Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Condition.json", ["cond"], 1)
+            Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_Tutorial.json", ["ScenarioFlagMin", "QuestFlag", "QuestFlagMin", "QuestFlagMax", "SysMultiFlag"], 0)
+            Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/RSC_GmkSetList.json", ["tutorial", "tutorial_bdat"], "")
         with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: #allows waypoints to work, and us to skip Melolo
             data = json.load(file)
             for row in data["rows"]:
