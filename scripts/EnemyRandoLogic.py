@@ -517,6 +517,16 @@ def AeshmaCoreHPNerf(): #this fight sucks
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)        
 
+def GortOgreUppercutRemoval(): # Gort 2's Ogre Uppercut seems to be buggy, reported to crash game in certain situations, so it's being removed for the time being.
+    with open("./_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 1434:
+                row["ArtsNum4"] = 963 # replaced Ogre Uppercut with a second instance of Ogre Flame
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
 def EnemyLogic(OptionsRunDict):
     EnemyRandoOn = False
     EnemiestoPass = []
@@ -643,6 +653,7 @@ def EnemyLogic(OptionsRunDict):
         BigEnemyCollisionFix()
         PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict)
         AeshmaCoreHPNerf()
+        GortOgreUppercutRemoval()
 
         
 
