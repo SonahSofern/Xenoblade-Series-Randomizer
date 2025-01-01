@@ -1,8 +1,10 @@
-import Enhancements
+import Enhancements, IDs, JSONParser
 
 # Icons
 Jewelry = 8
-
+IDStart = 17500
+CustomAccessoriesDictList = []
+NameDictList = []
 
 class CustomAcc:
     id = 0
@@ -37,9 +39,9 @@ class CustomAcc:
     Bns_Agility = 0
     Bns_Luck = 0
     Enhance2 = 0
-    Icon = 6
-    Zone = 0
-    Zone2 = 0
+    Icon = 0
+    Zone = 6
+    Zone2 = 6
     IraZone = 0
     IraZone2 = 0
     sortJP = 181800
@@ -52,11 +54,15 @@ class CustomAcc:
     sortTW = 68900
     Driver = 0
     Model = ""
-    def __init__(self, Name, Enhance1, Price, Rarity, Icon, PArmor = 0, EArmor = 0, HP = 0, Str = 0, Eth = 0, Dex = 0, Agi = 0, Lck = 0):
+    def __init__(self, Name, Enhancement, Price, Icon, PArmor = 0, EArmor = 0, HP = 0, Str = 0, Eth = 0, Dex = 0, Agi = 0, Lck = 0):
+        global IDStart
+        global CustomAccessoriesDictList
+        IDStart += 1
+        IDs.CustomAccessoriesIds.append(IDStart)
         self.Name = Name
-        self.Enhance1 = Enhance1
+        self.Enhance1 = Enhancement.id
         self.Price = Price
-        self.Rarity = Rarity
+        self.Rarity = Enhancement.Rarity
         self.PArmor = PArmor
         self.EArmor = EArmor
         self.Bns_HpMax = HP
@@ -66,6 +72,58 @@ class CustomAcc:
         self.Bns_Agility = Agi
         self.Bns_Luck = Lck
         self.Icon = Icon
-    
+        self.id = IDStart
+
+        myNameDict = {          
+            "$id": self.id,
+            "style": 36,
+            "name": self.Name
+            } 
+
+        
+        
+        CustomAccessoryDict = {
+        "$id": self.id,
+        "Name": self.id,
+        "DebugName": self.DebugName,
+        "ArmorType": self.ArmorType,
+        "Enhance1": self.Enhance1,
+        "AddAtr": self.AddAtr,
+        "Price": self.Price,
+        "Rarity": self.Rarity,
+        "Flag": self.Flag,
+        "PArmor": self.PArmor,
+        "EArmor": self.EArmor,
+        "Bns_HpMax": self.Bns_HpMax,
+        "Bns_Strength": self.Bns_Strength,
+        "Bns_PowEther": self.Bns_PowEther,
+        "Bns_Dex": self.Bns_Dex,
+        "Bns_Agility": self.Bns_Agility,
+        "Bns_Luck": self.Bns_Luck,
+        "Enhance2": self.Enhance2,
+        "Icon": self.Icon,
+        "Zone": self.Zone,
+        "Zone2": self.Zone2,
+        "IraZone": self.IraZone,
+        "IraZone2": self.IraZone2,
+        "sortJP": self.sortJP,
+        "sortGE": self.sortGE,
+        "sortFR": self.sortFR,
+        "sortSP": self.sortSP,
+        "sortIT": self.sortIT,
+        "sortGB": self.sortGB,
+        "sortCN": self.sortCN,
+        "sortTW": self.sortTW,
+        "Driver": self.Driver,
+        "Model": self.Model
+        }
+        
+        CustomAccessoriesDictList.append([CustomAccessoryDict])
+        NameDictList.append([myNameDict])
+        
+        
 def CreateCustomAccessories():
-    MonadoHairpin = CustomAcc("Monado Hairpin", Enhancements.Vision.id, 5000, Enhancements.Vision.Rarity, Jewelry)
+    Enhancements.RunCustomEnhancements(9999)
+    MonadoHairpin = CustomAcc("Monado Hairpin", Enhancements.Vision, 5000, Jewelry)
+    JSONParser.ExtendJSONFile("common/ITM_PcEquip.json", CustomAccessoriesDictList)
+    JSONParser.ExtendJSONFile("common_ms/itm_pcequip.json", NameDictList)

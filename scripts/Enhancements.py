@@ -10,6 +10,15 @@ Mega = [60,200,400,600]
 Massive = [300,600,1000,1500]
 Giga = [1000,1700,2500,3000]
 
+Common = 0
+Rare = 1
+Legendary = 2
+
+def Reverse(listToReverse):
+    listCopy = listToReverse
+    listCopy.reverse()
+    return listCopy
+
 
 EnhanceEffectsList = []
 ID = 10000
@@ -21,24 +30,31 @@ class Enhance:
     Caption = 0
     Caption2 = 0
     Rarity = ""
-    def __init__(self, Enhancement, Caption = 0,  Param1 = [], Param2 = []):
+    def __init__(self, Enhancement, Caption = 0,  Param1 = [0,0,0,0], Param2 = [0,0,0,0]):
         global ID
-        self.Rarity = random.choice(["Common", "Rare", "Legendary"])
-        P1step = 5
-        P2step = 5
-        if Param1 == Baby:
-            P1step = 1
-        if Param2 == Baby:
-            P2step = 1
-        if self.Rarity == "Common":
-            self.Param1 = random.randrange(Param1[0],Param1[1]+1,P1step)
-            self.Param2 = random.randrange(Param2[0],Param2[1]+1,P2step)
-        elif self.Rarity == "Rare":
-            self.Param1 = random.randrange(Param1[1],Param1[2]+1,P1step)
-            self.Param2 = random.randrange(Param2[1],Param2[2]+1,P2step)
-        elif self.Rarity == "Legendary":
-            self.Param1 = random.randrange(Param1[2],Param1[3]+1,P1step)
-            self.Param2 = random.randrange(Param2[2],Param2[3]+1,P2step)
+        self.Rarity = random.choice([Common, Rare, Legendary])
+        
+        def SetParams(ParameterChoices):
+            if ParameterChoices == Baby:
+                Pstep = 1
+            else:
+                Pstep = 5
+            if len(ParameterChoices) == 1:
+                Parameter = ParameterChoices[0]
+            else:
+                try:
+                    if self.Rarity == Common:
+                        Parameter = random.randrange(ParameterChoices[0],ParameterChoices[1]+1,Pstep)
+                    elif self.Rarity == Rare:
+                        Parameter = random.randrange(ParameterChoices[1],ParameterChoices[2]+1,Pstep)
+                    elif self.Rarity == Legendary:
+                        Parameter = random.randrange(ParameterChoices[2],ParameterChoices[3]+1,Pstep)
+                except:
+                    Parameter = 0
+            return Parameter
+
+        self.Param1 = SetParams(Param1)
+        self.Param2 = SetParams(Param2)
         
         EnhanceEffectsDict = {
             "$id": ID,
@@ -52,16 +68,14 @@ class Enhance:
         IDs.ValidCustomEnhancements.append(ID)
         ID += 1
 
-def IncreaseEffectCaps(NewCap):
+def RunCustomEnhancements(NewCap):
     JSONParser.ChangeJSONFile(["common/BTL_EnhanceEff.json"],["Param"], [Helper.InclRange(1,1000)], [NewCap])
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randrange(1,51)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randrange(30,71)) # Healing with low HP
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randrange(10,61)) # Healing with low HP
+    JSONParser.ExtendJSONFile("common/BTL_Enhance.json",  EnhanceEffectsList)
 
     
-
-
-
 HPBoost =       Enhance(1,1, Small)
 StrengthBoost = Enhance(2,2, Small)
 EtherBoost = Enhance(3,3, Small)
@@ -137,7 +151,7 @@ EvasionWhileMoving = Enhance(63, 61, Medium)
 HPLowBlockRate = Enhance(64, 62, Small, Medium)
 ReduceDamageFromNearbyEnemies = Enhance(65, 63, Small)
 ReduceDamageOnLowHP = Enhance(66,64, Small, Small)
-HighHPDamageUp = Enhance(67,65, [70,90],Large )
+HighHPDamageUp = Enhance(67,65, Reverse(Medium),Large )
 ReduceSpikeDamage =Enhance(68,66, Medium)
 BreakResistUp = Enhance(69, 67, Medium)
 ToppleResistUp = Enhance(70, 68, Medium)
@@ -221,7 +235,7 @@ HealingUpMaxAffinity =  Enhance(155, 165, Small)
 AggroPerSecondANDAggroUp  = Enhance(156, 166, Small, Small)
 MoreDamTakeLessAllyLowOrDown = Enhance(157, 167, Large, Small)
 StopThinking = Enhance(158, 168, Medium, Baby)
-LowHPSpecialUp = Enhance(159, 169, [1.5]) #Uses decimals weird one not sure how it scales
+LowHPSpecialUp = Enhance(159, 169, Baby) #Uses decimals weird one not sure how it scales
 TranquilGuard = Enhance(160, 171, Small)
 HPRestoreFusionCombo = Enhance(161, 172, Baby)
 AttackUpGoldUp = Enhance(162, 173, Baby, Mega)
@@ -265,7 +279,7 @@ ReduceElectricDamage = Enhance(58, 211, [5], Medium)
 ReduceIceDamage = Enhance(58, 212, [6], Medium)
 ReduceLightDamage = Enhance(58, 213, [7], Medium)
 ReduceDarkDamage = Enhance(58, 214, [8], Medium)
-ChainAttackPower = Enhance(106, 215, [0,2]) # Show
+ChainAttackPower = Enhance(106, 215, Baby) # Show
 LowHPHeal = Enhance(181, 230, Baby)
 ArtUseHeal = Enhance(86, 231, Baby)
 AutoDriverArtCancelHeal = Enhance(91, 233, Baby)
@@ -327,7 +341,7 @@ RetainAggro = Enhance(235, 293, Medium)
 DamageUpOnDeath = Enhance(238, 295, Large)
 AutoSpeedArtsSpeed= Enhance(240, 296, Small, Small)
 LV4EachUseDmageUp = Enhance(241, 297, Large)
-Vision = Enhance(242, 298, Medium.reverse())
+Vision = Enhance(242, 298, Reverse(Medium))
 AwakenPurge = Enhance(243, 299, Medium)
 PartyCritMaxAffinity = Enhance(244, 300, Small)
 DamageUpPerCrit = Enhance(245, 301, Mini)
@@ -350,8 +364,3 @@ SpecialRecievesAfterImage = Enhance(213, 335, Baby)
 #There are some torna effects not including them recoverable hp.
 
 
-def EnhancementsRando():
-    IncreaseEffectCaps(9999)
-    JSONParser.ExtendJSONFile("common/BTL_Enhance.json",  EnhanceEffectsList)
-
-    
