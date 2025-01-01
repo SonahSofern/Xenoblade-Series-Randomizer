@@ -2,7 +2,8 @@ import Enhancements, IDs, JSONParser
 
 # Icons
 Jewelry = 8
-IDStart = 1
+Necklace = 3
+IDStart = 0
 CustomAccessoriesDictList = []
 NameDictList = []
 
@@ -58,6 +59,7 @@ class CustomAcc:
         global IDStart
         global CustomAccessoriesDictList
         IDStart += 1
+        print(Enhancement.id)
         IDs.CustomAccessoriesIds.append(IDStart)
         self.Name = Name
         self.Enhance1 = Enhancement.id
@@ -124,8 +126,7 @@ class CustomAcc:
         
 def CreateCustomAccessories():
     Enhancements.RunCustomEnhancements(9999)
-    
     MonadoHairpin = CustomAcc("Monado Hairpin", Enhancements.Vision, 5000, Jewelry)
-    # JSONParser.ExtendJSONFile("common/ITM_PcEquip.json", CustomAccessoriesDictList)
+    Purging = CustomAcc("Awaken Stone", Enhancements.PurgeRage, 5000, Necklace)
     JSONParser.ReplaceJSONFile("common/ITM_PcEquip.json", CustomAccessoriesDictList)
     JSONParser.ReplaceJSONFile("common_ms/itm_pcequip.json", NameDictList)

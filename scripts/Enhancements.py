@@ -21,19 +21,20 @@ def Reverse(listToReverse):
 
 
 EnhanceEffectsList = []
-ID = 3895
+ID = 3896
 class Enhance:
-    id = ID
-    EnhanceEffect =0
+    id = 0
+    EnhanceEffect = 0
     Param1 =   0
     Param2 =  0
     Caption = 0
     Caption2 = 0
-    Rarity = ""
+    Rarity = 0
     def __init__(self, Enhancement, Caption = 0,  Param1 = [0,0,0,0], Param2 = [0,0,0,0]):
         global ID
         self.Rarity = random.choice([Common, Rare, Legendary])
-        
+        self.id = ID
+        IDs.ValidCustomEnhancements.append(ID)
         def SetParams(ParameterChoices):
             if ParameterChoices == Baby:
                 Pstep = 1
@@ -57,7 +58,7 @@ class Enhance:
         self.Param2 = SetParams(Param2)
         
         EnhanceEffectsDict = {
-            "$id": ID,
+            "$id": self.id,
             "EnhanceEffect": Enhancement,
             "Param1": self.Param1,
             "Param2": self.Param2,
@@ -65,8 +66,6 @@ class Enhance:
             "Caption2": Caption
         }
         EnhanceEffectsList.append([EnhanceEffectsDict])
-        IDs.ValidCustomEnhancements.append(ID)
-        self.id = ID
         ID += 1
         
 def RunCustomEnhancements(NewCap):
