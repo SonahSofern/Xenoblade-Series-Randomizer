@@ -144,9 +144,17 @@ def CreateCustomAccessories():
     # AgiShoes = CustomAcc("Agility Boots", Enhancements.AgiBoost, 1000, Boots)
     # DexGloves = CustomAcc("Dexterity Gloves", Enhancements.DexBoost, 500, Gloves)
     # Luck = CustomAcc("Lucky Choker", Enhancements.LuckBoost, 100, Medal)
-    HPFlat = CustomAcc("Healthy Vest", Enhancements.FlatHPBoost, 500, Vest)
-    StrengthFlat = CustomAcc("Strength Gloves", Enhancements.FlatStrengthBoost, 1000, Gloves)
-    FlatEth = CustomAcc("Ether Glasses", Enhancements.FlatEtherBoost, 1500, Helmet)
+    # HPFlat = CustomAcc("Healthy Vest", Enhancements.FlatHPBoost, 500, Vest)
+    # StrengthFlat = CustomAcc("Strength Gloves", Enhancements.FlatStrengthBoost, 1000, Gloves)
+    # FlatEth = CustomAcc("Ether Glasses", Enhancements.FlatEtherBoost, 1500, Helmet)
+    # FlatDexBoost = CustomAcc("Dexterity Gloves", Enhancements.FlatDexBoost, 250, Gloves)
+    # FlatAgiBoost = CustomAcc("Agility Boots", Enhancements.FlatAgiBoost, 5000, Boots)
+    # FlatLuckBoost = CustomAcc("Lucky Choker", Enhancements.FlatLuckBoost, 100, Necklace)
+    # TitanDamage = CustomAcc("Titan Slayers Band", Enhancements.TitanDamageUp, 100, Jewelry)
+    MachineDamage = CustomAcc("Circuit Slayers Helm", Enhancements.MachineDamageUp, 5000, Helmet)
+    
+    
+    
     
     JSONParser.ReplaceJSONFile("common/ITM_PcEquip.json", CustomAccessoriesDictList)
     JSONParser.ReplaceJSONFile("common_ms/itm_pcequip.json", NameDictList)
