@@ -1,8 +1,19 @@
 import Enhancements, IDs, JSONParser
 
 # Icons
-Jewelry = 8
+
+Boots = 0
+Helmet = 1
+Vest = 2
 Necklace = 3
+Belt = 4
+Backpack= 5
+Gloves = 6
+Dice = 7
+Jewelry = 8
+Medal = 9
+
+
 IDStart = 0
 CustomAccessoriesDictList = []
 NameDictList = []
@@ -59,7 +70,6 @@ class CustomAcc:
         global IDStart
         global CustomAccessoriesDictList
         IDStart += 1
-        print(Enhancement.id)
         IDs.CustomAccessoriesIds.append(IDStart)
         self.Name = Name
         self.Enhance1 = Enhancement.id
@@ -91,7 +101,7 @@ class CustomAcc:
         "ArmorType": self.ArmorType,
         "Enhance1": self.Enhance1,
         "AddAtr": self.AddAtr,
-        "Price": self.Price,
+        "Price": self.Price * (self.Rarity + 1),
         "Rarity": self.Rarity,
         "Flag": self.Flag,
         "PArmor": self.PArmor,
@@ -126,7 +136,17 @@ class CustomAcc:
         
 def CreateCustomAccessories():
     Enhancements.RunCustomEnhancements(9999)
-    MonadoHairpin = CustomAcc("Monado Hairpin", Enhancements.Vision, 5000, Jewelry)
-    Purging = CustomAcc("Awaken Stone", Enhancements.PurgeRage, 5000, Necklace)
+    # MonadoHairpin = CustomAcc("Monado Hairpin", Enhancements.Vision, 5000, Jewelry)
+    # PurgingAwaken = CustomAcc("Awaken Stone", Enhancements.PurgeRage, 5000, Necklace)
+    # HPVest = CustomAcc("Healthy Vest", Enhancements.HPBoost, 5000, Vest)
+    # StrBelt = CustomAcc("Strength Gloves", Enhancements.StrengthBoost, 5000, Belt)
+    # EthGlasses = CustomAcc("Ether Glasses", Enhancements.EtherBoost, 2000,Helmet)
+    # AgiShoes = CustomAcc("Agility Boots", Enhancements.AgiBoost, 1000, Boots)
+    # DexGloves = CustomAcc("Dexterity Gloves", Enhancements.DexBoost, 500, Gloves)
+    # Luck = CustomAcc("Lucky Choker", Enhancements.LuckBoost, 100, Medal)
+    HPFlat = CustomAcc("Healthy Vest", Enhancements.FlatHPBoost, 500, Vest)
+    StrengthFlat = CustomAcc("Strength Gloves", Enhancements.FlatStrengthBoost, 1000, Gloves)
+    FlatEth = CustomAcc("Ether Glasses", Enhancements.FlatEtherBoost, 1500, Helmet)
+    
     JSONParser.ReplaceJSONFile("common/ITM_PcEquip.json", CustomAccessoriesDictList)
     JSONParser.ReplaceJSONFile("common_ms/itm_pcequip.json", NameDictList)
