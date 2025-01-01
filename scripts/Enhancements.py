@@ -21,7 +21,7 @@ def Reverse(listToReverse):
 
 
 EnhanceEffectsList = []
-ID = 10000
+ID = 3895
 class Enhance:
     id = ID
     EnhanceEffect =0
@@ -66,8 +66,9 @@ class Enhance:
         }
         EnhanceEffectsList.append([EnhanceEffectsDict])
         IDs.ValidCustomEnhancements.append(ID)
+        self.id = ID
         ID += 1
-
+        
 def RunCustomEnhancements(NewCap):
     JSONParser.ChangeJSONFile(["common/BTL_EnhanceEff.json"],["Param"], [Helper.InclRange(1,1000)], [NewCap])
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randrange(1,51)) # Battle damage up after a certain time uses nonstandard parameter this fixes it

@@ -2,7 +2,7 @@ import Enhancements, IDs, JSONParser
 
 # Icons
 Jewelry = 8
-IDStart = 17500
+IDStart = 1
 CustomAccessoriesDictList = []
 NameDictList = []
 
@@ -118,12 +118,14 @@ class CustomAcc:
         "Model": self.Model
         }
         
-        CustomAccessoriesDictList.append([CustomAccessoryDict])
-        NameDictList.append([myNameDict])
+        CustomAccessoriesDictList.append(CustomAccessoryDict)
+        NameDictList.append(myNameDict)
         
         
 def CreateCustomAccessories():
     Enhancements.RunCustomEnhancements(9999)
+    
     MonadoHairpin = CustomAcc("Monado Hairpin", Enhancements.Vision, 5000, Jewelry)
-    JSONParser.ExtendJSONFile("common/ITM_PcEquip.json", CustomAccessoriesDictList)
-    JSONParser.ExtendJSONFile("common_ms/itm_pcequip.json", NameDictList)
+    # JSONParser.ExtendJSONFile("common/ITM_PcEquip.json", CustomAccessoriesDictList)
+    JSONParser.ReplaceJSONFile("common/ITM_PcEquip.json", CustomAccessoriesDictList)
+    JSONParser.ReplaceJSONFile("common_ms/itm_pcequip.json", NameDictList)
