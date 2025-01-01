@@ -21,7 +21,9 @@ def Reverse(listToReverse):
 
 
 EnhanceEffectsList = []
+DescriptionList = []
 ID = 3896
+
 class Enhance:
     id = 0
     EnhanceEffect = 0
@@ -30,7 +32,7 @@ class Enhance:
     Caption = 0
     Caption2 = 0
     Rarity = 0
-    def __init__(self, Enhancement, Caption = 0,  Param1 = [0,0,0,0], Param2 = [0,0,0,0]):
+    def __init__(self, Enhancement, Caption = 0,  Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = None, DescriptionID = 0):
         global ID
         self.Rarity = random.choice([Common, Rare, Legendary])
         self.id = ID
@@ -54,6 +56,17 @@ class Enhance:
                     Parameter = 0
             return Parameter
 
+
+        if Description != None:
+            DescriptionDict = {   
+            "$id": DescriptionID,
+            "style": 41,
+            "name": Description        
+            }
+            DescriptionList.append([DescriptionDict])
+
+            
+            
         self.Param1 = SetParams(Param1)
         self.Param2 = SetParams(Param2)
         
@@ -74,6 +87,7 @@ def RunCustomEnhancements(NewCap):
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randrange(30,71)) # Healing with low HP
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randrange(10,61)) # Healing with low HP
     JSONParser.ExtendJSONFile("common/BTL_Enhance.json",  EnhanceEffectsList)
+    JSONParser.ExtendJSONFile("common_ms/btl_enhance_cap.json", DescriptionList)
 
     
 HPBoost =       Enhance(1,1, Small)
@@ -112,10 +126,11 @@ InsectExecute = Enhance(22, 224, [1], Baby)
 BeastExecute = Enhance(22, 223, [0], Baby)
 BladeComboDamUp = Enhance(23,21, Large)
 FusionComboDamUp = Enhance(24,22, Large)
-EtherCounter = Enhance(25,23, Massive)
-PhysCounter = Enhance(26,24, Massive) # This is interesting because jins stuned swallow uses this and inflicts blowdown from this effect want to figure out how
+EtherCounter = Enhance(25,23, Giga)
+PhysCounter = Enhance(26,24, Giga)
 AutoAttackHeal = Enhance(27,26, Mini)
-SpecialHeal = Enhance(28,27, Baby) # This also is used for driver art healing (according to the caption which might be wrong) want to figure this out too
+SpecialANDArtHeal = Enhance(28,27, Baby, Description="Restores [ML:Enhance kind=Param1 ]% HP of damage dealt when\n a Special or Art connects.", DescriptionID=340)
+ArtDamageHeal = Enhance(28, 28, Small) # This goes on arts only or else it will heal from special and arts
 EnemyKillHeal = Enhance(29,30, Medium)
 CritHeal = Enhance(30,31, Small)
 CritDamageUp = Enhance(31,32, Medium)
@@ -126,7 +141,7 @@ BackDamageUp = Enhance(35,36, Large)
 SurpriseAttackUp = Enhance(36,37, Giga)
 ToppleDamageUp = Enhance(37,38, Large)
 LaunchDamageUp = Enhance(38,39, Large)
-SmashDamageUp = Enhance(39,40, Large)
+SmashDamageUp = Enhance(39,40, Mega)
 HigherLVEnemyDamageUp = Enhance(40,41, Large)
 AllyDownDamageUp = Enhance(41,42, Mega)
 GuardAnnulAttack = Enhance(42,43, Medium)
