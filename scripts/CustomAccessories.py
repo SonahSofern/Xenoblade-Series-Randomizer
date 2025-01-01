@@ -1,18 +1,5 @@
 import Enhancements, IDs, JSONParser
 
-# Icons
-
-Boots = 0
-Helm = 1
-Vest = 2
-Necklace = 3
-Belt = 4
-Backpack= 5
-Gloves = 6
-Dice = 7
-Jewelry = 8
-Medal = 9
-
 
 IDStart = 0
 CustomAccessoriesDictList = []
@@ -66,7 +53,7 @@ class CustomAcc:
     sortTW = 68900
     Driver = 0
     Model = ""
-    def __init__(self, Name, RENAMELATER, Price = 5000, Icon = Dice, PArmor = 0, EArmor = 0, HP = 0, Str = 0, Eth = 0, Dex = 0, Agi = 0, Lck = 0):
+    def __init__(self, Name, RENAMELATER, Price = 5000, Icon = 0, PArmor = 0, EArmor = 0, HP = 0, Str = 0, Eth = 0, Dex = 0, Agi = 0, Lck = 0):
         global IDStart
         global CustomAccessoriesDictList
         IDStart += 1
@@ -137,67 +124,109 @@ class CustomAcc:
 def CreateCustomAccessories():
     Enhancements.RunCustomEnhancements(9999)
     
+    # Icons
+    Boots = 0
+    Helm = 1
+    Vest = 2
+    Necklace = 3
+    Belt = 4
+    Backpack= 5
+    Gloves = 6
+    Dice = 7
+    Ring = 8
+    Medal = 9
+    
+    # Prices
+    Free = 0
+    Cheap = 100
+    Average = 1000
+    Expensive = 2000
+    Luxury = 5000
+    Fortune = 10000
+    
     while IDStart < 687:
-        # MonadoHairpin = CustomAcc("Monado Hairpin", Enhancements.Vision, 5000, Jewelry)
-        # PurgingAwaken = CustomAcc("Awaken Stone", Enhancements.PurgeRage, 5000, Necklace)
-        # HPVest = CustomAcc("Healthy Vest", Enhancements.HPBoost, 5000, Vest)
-        # StrBelt = CustomAcc("Strength Gloves", Enhancements.StrengthBoost, 5000, Belt)
-        # EthGlasses = CustomAcc("Ether Glasses", Enhancements.EtherBoost, 2000,Helmet)
-        # AgiShoes = CustomAcc("Agility Boots", Enhancements.AgiBoost, 1000, Boots)
-        # DexGloves = CustomAcc("Dexterity Gloves", Enhancements.DexBoost, 500, Gloves)
-        # Luck = CustomAcc("Lucky Choker", Enhancements.LuckBoost, 100, Medal)
-        # HPFlat = CustomAcc("Healthy Vest", Enhancements.FlatHPBoost, 500, Vest)
-        # StrengthFlat = CustomAcc("Strength Gloves", Enhancements.FlatStrengthBoost, 1000, Gloves)
-        # FlatEth = CustomAcc("Ether Glasses", Enhancements.FlatEtherBoost, 1500, Helmet)
-        # FlatDexBoost = CustomAcc("Dexterity Gloves", Enhancements.FlatDexBoost, 250, Gloves)
-        # FlatAgiBoost = CustomAcc("Agility Boots", Enhancements.FlatAgiBoost, 5000, Boots)
-        # FlatLuckBoost = CustomAcc("Lucky Choker", Enhancements.FlatLuckBoost, 100, Necklace)
-        # TitanDamage = CustomAcc("Titan Slayers Band", Enhancements.TitanDamageUp, 100, Jewelry)
-        # MachineDamage = CustomAcc("Circuit Slayers Helm", Enhancements.MachineDamageUp, 5000, Helmet)
-        # HumanoidDamage = CustomAcc("Humanoid Hunters Belt", Enhancements.HumanoidDamageUp, 10000, Belt)
-        # AquaticDamage = CustomAcc("Fishhook", Enhancements.AquaticDamageUp, 100, Dice)
-        # AerialDamage = CustomAcc("Anti-Air Boots", Enhancements.AerialDamageUp, 400, Boots)
-        # InsectDamage = CustomAcc("Newspaper", Enhancements.InsectDamageUp, 600, Dice)
-        # BeastDamage = CustomAcc("Hunter's Cloak", Enhancements.BeastDamageUp, 2000, Vest)
-        # TitanExecute = CustomAcc("Titan Smite", Enhancements.TitanExecute, 5000, Dice)
-        # MachineExecute = CustomAcc("Shortcircuit", Enhancements.MachineExecute, 10000, Dice)
-        # HumanoidExecute = CustomAcc("Hom's Bane", Enhancements.HumanoidExecute, 25000, Dice)
-        # AquaticExecute = CustomAcc("Poison Bait", Enhancements.AquaticExecute, 9000, Dice)
-        # AerialExecute = CustomAcc("Seeds", Enhancements.AerialExecute, 13000, Dice)
-        # InsectExecute = CustomAcc("Insecticide", Enhancements.InsectExecute, 16000, Dice)
-        # BeastExecute = CustomAcc("Wild Rifle", Enhancements.BeastExecute, 25000, Dice)
-        # FusionDam = CustomAcc("Fusion Burst", Enhancements.FusionComboDamUp)
-        # EtherCounter = CustomAcc("Tesla Coil", Enhancements.EtherCounter, 7000)
-        # BladeComboDamageUp = CustomAcc("Blade Comboifyer", Enhancements.BladeComboDamUp, 10000, Medal)
-        # PhysCounter = CustomAcc("Spike Vest", Enhancements.PhysCounter, 10000, Vest)
-        # AutoAttackHeal = CustomAcc("Vampire Gloves", Enhancements.AutoAttackHeal, 10000, Gloves)
-        # SpecialArtHeal = CustomAcc("Vampire Choker", Enhancements.SpecialANDArtHeal, 40000, Necklace)  
-        # EnemyKillHeal = CustomAcc("Vulture Gloves", Enhancements.EnemyKillHeal, 200, Gloves)
-        # CritHeal = CustomAcc("Modern Medal", Enhancements.CritHeal, 20000, Medal)
-        # CritDamageUp = CustomAcc("Critical Headband", Enhancements.CritDamageUp, 10000, Helm)
-        # DoubleAuto = CustomAcc("Reverb", Enhancements.PercentDoubleAuto, 2000, Gloves)
-        # FrontDamage = CustomAcc("Clash", Enhancements.FrontDamageUp, 10000, Medal)
-        # SideDamage = CustomAcc("Peripheral", Enhancements.SideDamageUp, 15000, Medal)
-        # BackDamage = CustomAcc("Backstabber", Enhancements.BackDamageUp, 15000, Gloves)
-        # Suprise = CustomAcc("Suprise!", Enhancements.SurpriseAttackUp, 1000, Necklace)
-        # ToppleDamage = CustomAcc("Beatdown", Enhancements.ToppleDamageUp, 2000, Gloves)
-        # LaunchDamage = CustomAcc("Air Combo", Enhancements.LaunchDamageUp, 6000, Medal)
-        # SmashDamage = CustomAcc("Spike Gloves", Enhancements.SmashDamageUp, 1000, Gloves)
-        # HigherLevelDamage = CustomAcc("Underdog", Enhancements.HigherLVEnemyDamageUp, 15000, Boots)
+        MonadoHairpin = CustomAcc("Monado Hairpin", Enhancements.Vision, Luxury, Ring)
+        PurgingAwaken = CustomAcc("Awaken Stone", Enhancements.PurgeRage, Luxury, Necklace)
+        HPVest = CustomAcc("Healthy Vest", Enhancements.HPBoost, Luxury, Vest)
+        StrBelt = CustomAcc("Strength Gloves", Enhancements.StrengthBoost, Luxury, Belt)
+        EthGlasses = CustomAcc("Ether Glasses", Enhancements.EtherBoost, Expensive,Helm)
+        AgiShoes = CustomAcc("Agility Boots", Enhancements.AgiBoost, Expensive, Boots)
+        DexGloves = CustomAcc("Dexterity Gloves", Enhancements.DexBoost, 500, Gloves)
+        Luck = CustomAcc("Lucky Choker", Enhancements.LuckBoost, 100, Medal)
+        HPFlat = CustomAcc("Healthy Vest", Enhancements.FlatHPBoost, 500, Vest)
+        StrengthFlat = CustomAcc("Strength Gloves", Enhancements.FlatStrengthBoost, 1000, Gloves)
+        FlatEth = CustomAcc("Ether Glasses", Enhancements.FlatEtherBoost, 1500, Helm)
+        FlatDexBoost = CustomAcc("Dexterity Gloves", Enhancements.FlatDexBoost, 250, Gloves)
+        FlatAgiBoost = CustomAcc("Agility Boots", Enhancements.FlatAgiBoost, 5000, Boots)
+        FlatLuckBoost = CustomAcc("Lucky Choker", Enhancements.FlatLuckBoost, 100, Necklace)
+        TitanDamage = CustomAcc("Titan Slayers Band", Enhancements.TitanDamageUp, 100, Ring)
+        MachineDamage = CustomAcc("Circuit Slayers Helm", Enhancements.MachineDamageUp, 5000, Helm)
+        HumanoidDamage = CustomAcc("Humanoid Hunters Belt", Enhancements.HumanoidDamageUp, 10000, Belt)
+        AquaticDamage = CustomAcc("Fishhook", Enhancements.AquaticDamageUp, 100, Dice)
+        AerialDamage = CustomAcc("Anti-Air Boots", Enhancements.AerialDamageUp, 400, Boots)
+        InsectDamage = CustomAcc("Newspaper", Enhancements.InsectDamageUp, 600, Dice)
+        BeastDamage = CustomAcc("Hunter's Cloak", Enhancements.BeastDamageUp, 2000, Vest)
+        TitanExecute = CustomAcc("Titan Smite", Enhancements.TitanExecute, 5000, Dice)
+        MachineExecute = CustomAcc("Shortcircuit", Enhancements.MachineExecute, 10000, Dice)
+        HumanoidExecute = CustomAcc("Hom's Bane", Enhancements.HumanoidExecute, 25000, Dice)
+        AquaticExecute = CustomAcc("Poison Bait", Enhancements.AquaticExecute, 9000, Dice)
+        AerialExecute = CustomAcc("Seeds", Enhancements.AerialExecute, 13000, Dice)
+        InsectExecute = CustomAcc("Insecticide", Enhancements.InsectExecute, 16000, Dice)
+        BeastExecute = CustomAcc("Wild Rifle", Enhancements.BeastExecute, 25000, Dice)
+        FusionDam = CustomAcc("Fusion Burst", Enhancements.FusionComboDamUp)
+        EtherCounter = CustomAcc("Tesla Coil", Enhancements.EtherCounter, 7000)
+        BladeComboDamageUp = CustomAcc("Blade Comboifyer", Enhancements.BladeComboDamUp, 10000, Medal)
+        PhysCounter = CustomAcc("Spike Vest", Enhancements.PhysCounter, 10000, Vest)
+        AutoAttackHeal = CustomAcc("Vampire Gloves", Enhancements.AutoAttackHeal, 10000, Gloves)
+        SpecialArtHeal = CustomAcc("Vampire Choker", Enhancements.SpecialANDArtHeal, 40000, Necklace)  
+        EnemyKillHeal = CustomAcc("Vulture Gloves", Enhancements.EnemyKillHeal, 200, Gloves)
+        CritHeal = CustomAcc("Modern Medal", Enhancements.CritHeal, 20000, Medal)
+        CritDamageUp = CustomAcc("Critical Headband", Enhancements.CritDamageUp, 10000, Helm)
+        DoubleAuto = CustomAcc("Reverb", Enhancements.PercentDoubleAuto, 2000, Gloves)
+        FrontDamage = CustomAcc("Clash", Enhancements.FrontDamageUp, 10000, Medal)
+        SideDamage = CustomAcc("Peripheral", Enhancements.SideDamageUp, 15000, Medal)
+        BackDamage = CustomAcc("Backstabber", Enhancements.BackDamageUp, 15000, Gloves)
+        Suprise = CustomAcc("Suprise!", Enhancements.SurpriseAttackUp, 1000, Necklace)
+        ToppleDamage = CustomAcc("Beatdown", Enhancements.ToppleDamageUp, 2000, Gloves)
+        LaunchDamage = CustomAcc("Air Combo", Enhancements.LaunchDamageUp, 6000, Medal)
+        SmashDamage = CustomAcc("Spike Gloves", Enhancements.SmashDamageUp, 1000, Gloves)
+        HigherLevelDamage = CustomAcc("Underdog", Enhancements.HigherLVEnemyDamageUp, 15000, Boots)
         AllyDownDamage = CustomAcc("Last Stand", Enhancements.AllyDownDamageUp, 1000, Medal)
         AnnulGuard= CustomAcc("Phaser", Enhancements.GuardAnnulAttack, 5000, Medal)
+        AnnulReflect = CustomAcc("Shatter", Enhancements.AnnulReflect, 10, Helm)
+        DamageUpHpDown = CustomAcc("Lash Out", Enhancements.DamageUpWhenHpDown, 500, Medal)
+        BattleDurationDamage = CustomAcc("Slow Start", Enhancements.BattleDurationDamageUp, 7000, Medal)
+        EnemyKillDamage = CustomAcc("Steamroller Boots", Enhancements.DamageUpOnEnemyKill, 3000, Gloves)
+        BreakDura = CustomAcc("Permabreak Gloves", Enhancements.BreakDurationUp, 300, Gloves)
+        ToppleDura = CustomAcc("Permatopple Gloves", Enhancements.ToppleDurationUp, 4000, Gloves)
+        LaunchDura = CustomAcc("Permalaunch Gloves", Enhancements.LaunchDurationUp, 6000, Gloves)
+        AutoattackDam = CustomAcc("Basic Boots", Enhancements.AutoAttackDamageUp, 2000, Boots)
+        AggroedEnDam = CustomAcc("Self Defense Medal", Enhancements.AggroedEnemyDamageUp, 4000, Medal)
+        IndoorsDam = CustomAcc("Indoorsman Medal", Enhancements.IndoorsDamageUp, 1000, Medal)
+        OutdoorDam = CustomAcc("Outdoorsman Medal", Enhancements.OutdoorsDamageUp, 10000, Medal)
+        BladeSwitchDam = CustomAcc("Indecisive Vest", Enhancements.BladeSwitchDamageUp, 20000, Vest)
+        OppositeGenderDam = CustomAcc("Loincloth Swimsuit", Enhancements.OppositeGenderBladeDamageUp, 10000, Vest)
+        ReduceEnemyToppleRes = CustomAcc("Unbalancing Ring", Enhancements.ReduceEnemyToppleResist, 100, Ring)
+        ReducEnemyLaunchRes = CustomAcc("Launch Ring", Enhancements.ReduceEnemyLaunchResist, 100, Ring)
+        NullBlock = CustomAcc("Solid Guard Vest", Enhancements.OnBlockNullDamage, 40000, Vest)
+        HpLowEvasion = CustomAcc("Sway", Enhancements.HPLowEvasion, 3000, Dice)
+        MovingEvasion = CustomAcc("Dart Boots", Enhancements.EvasionWhileMoving, 1000, Boots)
+        HPLowBlock = CustomAcc("Shielding Ring", Enhancements.HPLowBlockRate, 1000, Ring)
+        NearbyDamageDown = CustomAcc("Shielding Belt", Enhancements.ReduceDamageFromNearbyEnemies, 10000, Belt)
+        ArmorUpLowHP = CustomAcc("Roach Vest", Enhancements.ReduceDamageOnLowHP, 8000, Vest)
+        HighHPDam = CustomAcc("Golden Helm", Enhancements.HighHPDamageUp, 20000, )
         
         
-        Boots = 0
-        Helm = 1
-        Vest = 2
-        Necklace = 3
-        Belt = 4
-        Backpack= 5
-        Gloves = 6
-        Dice = 7
-        Jewelry = 8
-        Medal = 9
+        # Boots = 0
+        # Helm = 1
+        # Vest = 2
+        # Necklace = 3
+        # Belt = 4
+        # Backpack= 5
+        # Gloves = 6
+        # Dice = 7
+        # Ring = 8
+        # Medal = 9
 
     JSONParser.ReplaceJSONFile("common/ITM_PcEquip.json", CustomAccessoriesDictList)
     JSONParser.ReplaceJSONFile("common_ms/itm_pcequip.json", NameDictList)
