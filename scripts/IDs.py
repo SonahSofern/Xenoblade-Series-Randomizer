@@ -17,17 +17,15 @@ AuxCores = Helper.InclRange(15001, 15406)
 RefinedAuxCores = Helper.InclRange(17001, 17424)
 WeaponChips = Helper.InclRange(10001, 10060)
 CoreCrystals = Helper.InclRange(45001,45057)
-Accessories = Helper.InclRange(1,687)
+Accessories = [x for x in Helper.InclRange(1,687) if x not in Helper.InclRange(448,455)]
 PreciousItems = Helper.InclRange(25001, 25499)
 PouchItems =  [x for x in Helper.InclRange(40001,40428) if x not in ([40106, 40107, 40280, 40282, 40284, 40285, 40300, 40387] + Helper.InclRange(40350, 40363) + Helper.InclRange(40389, 40402))]   
 AutoAttacks = [1, 2, 3, 8, 9, 10, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 43, 44, 45, 50, 51, 52, 57, 58, 59, 64, 65, 66, 67, 68, 69, 78, 79, 80, 81, 82, 83, 92, 93, 94, 95, 96, 97, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 302, 303, 304, 309, 310, 311, 316, 317, 318, 323, 324, 325, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395, 396, 397, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 480, 481, 498, 499, 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 526, 527, 528, 529, 530, 531, 532, 533, 534, 535, 536, 537, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564, 565, 582, 583, 584, 592, 593, 594, 602, 603, 604, 612, 613, 614, 622, 623, 624, 632, 633, 634, 642, 643, 644, 652, 653, 654, 662, 663, 664, 672, 673, 674, 687, 688, 689, 690, 691, 692, 693, 694, 695, 696, 697, 698, 715, 716, 717, 718, 719, 720, 721, 722, 723, 724, 725, 726]
 ArtBuffs = [0,1,2,3,4,5,6,7,8,9,16,17]
 BladeArts = [0,1,2,3,4,5,6,7,8,9]
 ArtDebuffs = [0,11,12,13,14,15,21,23,24,25,30,35]
-AllVanillaEnhancements = Helper.InclRange(1,3895)
-ValidDriverEnhancements = [3896] # BTL_Enhance
-ValidEnemyEnhancements = []
-CustomEnhancements = Helper.InclRange(3896,4000)
+VanillaEnhancements = Helper.InclRange(1,3895)
+
 
 DriverSkillTrees = Helper.InclRange(1,270)
 HitReactions = Helper.InclRange(0,14)
@@ -50,6 +48,7 @@ ReplacementNonBattleMusicMOVs = ['m47.wav', 'm02.wav', 'm45.wav', 'm50.wav', 'm5
 ValidEnemyMusicIDs = [3,4,5,6,7,8,9,10,11,12,13,14,15,16,49,132,133,157,158,159,160,161,162,163,164,166,167,168,169,177,179,180]
 ValidEnemyMusicWAVs = ["m75.wav", "m76.wav", "m77.wav", "m78.wav", "m79.wav", "m80.wav", "m81.wav", "m82.wav", "m83.wav", "m84.wav", "m85.wav", "m86.wav", "m87.wav", "m88.wav", "m202.wav", "m203.wav", "m281.wav", "m282.wav", "m301.wav", "m303.wav", "m304.wav"]
 ValidTboxMapNames = ["./_internal/JsonOutputs/common_gmk/ma02a_FLD_TboxPop.json","./_internal/JsonOutputs/common_gmk/ma03a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma04a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma05a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma07a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma08a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma10a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma11a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma13a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma15a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma16a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma17a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma18a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma21a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma41a_FLD_TboxPop.json", "./_internal/JsonOutputs/common_gmk/ma90a_FLD_TboxPop.json"]
+ValidEnemyPopFileNames = ["ma01a_FLD_EnemyPop.json", "ma02a_FLD_EnemyPop.json", "ma04a_FLD_EnemyPop.json", "ma05a_FLD_EnemyPop.json", "ma05c_FLD_EnemyPop.json", "ma07a_FLD_EnemyPop.json", "ma07c_FLD_EnemyPop.json", "ma08a_FLD_EnemyPop.json", "ma08c_FLD_EnemyPop.json", "ma10a_FLD_EnemyPop.json", "ma10c_FLD_EnemyPop.json", "ma11a_FLD_EnemyPop.json", "ma13a_FLD_EnemyPop.json", "ma13c_FLD_EnemyPop.json", "ma15a_FLD_EnemyPop.json", "ma15c_FLD_EnemyPop.json", "ma16a_FLD_EnemyPop.json", "ma17a_FLD_EnemyPop.json", "ma17c_FLD_EnemyPop.json", "ma18a_FLD_EnemyPop.json", "ma18c_FLD_EnemyPop.json", "ma20a_FLD_EnemyPop.json", "ma20c_FLD_EnemyPop.json", "ma21a_FLD_EnemyPop.json", "ma40a_FLD_EnemyPop.json", "ma41a_FLD_EnemyPop.json", "ma42a_FLD_EnemyPop.json"]
 
 BladeDefenseDistribution = [0,0,0,0,5,5,5,5,5,5,5,10,10,10,10,10,15,15,15,15,15,15,15,15,20,20,20,20,20,20,20,20,25,25,25,30,30,35,35,40,40,45,50,55,60,65,70,75,80]
 BladeModDistribution = [0,0,0,5,5,5,10,10,10,10,10,15,15,15,20,20,20,25,25,25,25,25,30,30,30,30,35,35,40,40,45,45,50,70,100]

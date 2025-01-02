@@ -2,9 +2,9 @@ import json
 import random
 import time
 import Helper
-from IDs import ValidEnemies, InvalidEnemies
+from IDs import ValidEnemies, ValidEnemyPopFileNames
 
-AllEnemyDefaultLevels = [1, 2, 4, 5, 6, 8, 6, 10, 11, 12, 13, 15, 22, 25, 24, 26, 20, 18, 19, 21, 22, 24, 23, 24, 26, 29, 31, 27, 29, 31, 32, 33, 34, 32, 35, 40, 38, 38, 39, 42, 42, 43, 42, 44, 46, 44, 52, 54, 56, 99, 52, 50, 60, 60, 57, 66, 68, 60, 60, 60, 60, 13, 24, 26, 32, 33, 34, 60, 5, 14, 22, 18, 19, 21, 12, 31, 29, 33, 35, 40, 41, 56, 56, 58, 25, 47, 2, 25, 26, 10, 12, 9, 91, 36, 41, 57, 57, 38, 54, 25, 26, 28, 30, 32, 25, 26, 49, 44, 41, 27, 29, 22, 28, 29, 31, 33, 30, 31, 32, 60, 61, 58, 60, 62, 63, 62, 63, 64, 36, 36, 34, 61, 42, 41, 69, 66, 67, 70, 50, 40, 40, 42, 42, 42, 44, 46, 51, 50, 53, 26, 26, 26, 30, 46, 55, 54, 52, 33, 34, 33, 38, 38, 38, 38, 40, 33, 33, 35, 35, 45, 46, 43, 53, 51, 48, 51, 45, 45, 46, 46, 47, 47, 48, 48, 48, 49, 50, 48, 51, 53, 52, 33, 33, 34, 35, 36, 39, 42, 42, 42, 44, 45, 44, 43, 47, 56, 57, 50, 64, 43, 42, 45, 58, 55, 55, 57, 58, 60, 61, 56, 58, 60, 43, 19, 19, 36, 36, 37, 42, 44, 44, 58, 58, 56, 61, 59, 9, 20, 40, 60, 80, 99, 99, 39, 3, 2, 2, 2, 3, 6, 15, 5, 69, 6, 2, 7, 3, 6, 2, 8, 6, 3, 8, 11, 14, 9, 10, 5, 7, 8, 42, 22, 4, 90, 74, 33, 34, 25, 5, 71, 73, 5, 12, 16, 13, 13, 24, 23, 4, 5, 39, 39, 72, 10, 13, 15, 40, 14, 39, 14, 38, 11, 22, 5, 19, 38, 40, 37, 70, 21, 24, 35, 12, 15, 16, 12, 8, 81, 90, 25, 45, 18, 75, 20, 104, 28, 4, 4, 4, 6, 16, 34, 36, 40, 7, 7, 13, 9, 9, 9, 11, 27, 14, 17, 18, 20, 9, 18, 19, 17, 18, 19, 19, 74, 22, 23, 20, 21, 17, 23, 24, 32, 61, 20, 18, 35, 63, 21, 47, 22, 17, 20, 37, 20, 20, 39, 21, 18, 18, 20, 72, 34, 20, 21, 20, 19, 19, 18, 22, 75, 74, 76, 74, 75, 77, 78, 23, 21, 62, 38, 75, 35, 95, 97, 96, 23, 22, 23, 65, 24, 80, 23, 78, 41, 48, 99, 26, 25, 27, 27, 25, 19, 26, 27, 29, 81, 27, 26, 83, 83, 28, 27, 28, 80, 28, 33, 28, 29, 28, 32, 29, 28, 85, 80, 32, 31, 33, 31, 31, 32, 33, 34, 35, 34, 28, 29, 26, 29, 31, 61, 60, 61, 62, 63, 60, 33, 33, 33, 33, 43, 43, 59, 60, 25, 25, 26, 25, 26, 30, 31, 30, 30, 32, 31, 62, 33, 33, 33, 86, 40, 24, 25, 26, 28, 32, 34, 36, 29, 28, 29, 28, 28, 29, 29, 27, 27, 27, 32, 33, 96, 97, 98, 99, 120, 99, 44, 44, 43, 45, 45, 46, 45, 43, 44, 43, 44, 45, 45, 44, 44, 45, 44, 46, 43, 45, 45, 46, 45, 46, 47, 48, 50, 51, 49, 50, 51, 54, 56, 34, 34, 35, 39, 35, 38, 39, 40, 41, 88, 44, 42, 39, 90, 48, 93, 50, 49, 40, 43, 34, 35, 46, 46, 45, 35, 49, 44, 45, 47, 60, 45, 42, 50, 50, 51, 50, 50, 50, 53, 49, 52, 51, 44, 51, 41, 44, 49, 50, 49, 56, 95, 55, 130, 58, 62, 94, 109, 32, 33, 42, 43, 46, 48, 51, 38, 39, 39, 36, 38, 35, 39, 41, 38, 39, 42, 40, 41, 39, 39, 38, 38, 40, 80, 41, 40, 80, 78, 39, 40, 40, 79, 40, 84, 86, 40, 38, 79, 82, 84, 87, 38, 81, 88, 42, 42, 42, 42, 42, 40, 43, 39, 41, 41, 40, 41, 41, 42, 41, 53, 53, 54, 53, 84, 84, 84, 84, 85, 83, 39, 39, 41, 42, 42, 46, 44, 43, 110, 51, 42, 60, 54, 46, 46, 48, 51, 49, 47, 49, 47, 47, 60, 49, 47, 47, 50, 53, 54, 58, 100, 117, 44, 45, 46, 47, 48, 50, 52, 52, 52, 52, 52, 52, 53, 53, 54, 55, 53, 56, 57, 58, 58, 57, 60, 55, 55, 55, 55, 58, 58, 58, 60, 55, 55, 55, 58, 60, 60, 58, 97, 97, 58, 62, 60, 58, 64, 66, 65, 66, 66, 114, 52, 55, 56, 57, 59, 61, 31, 32, 44, 31, 31, 32, 33, 32, 42, 44, 32, 31, 43, 42, 32, 47, 44, 43, 42, 43, 38, 32, 31, 32, 43, 43, 43, 34, 32, 32, 44, 31, 42, 31, 31, 43, 43, 44, 31, 34, 33, 33, 33, 33, 33, 34, 32, 43, 43, 42, 44, 43, 43, 42, 42, 43, 34, 38, 38, 39, 47, 49, 48, 48, 45, 32, 32, 32, 32, 38, 40, 42, 44, 2, 4, 2, 23, 24, 67, 65, 36, 36, 38, 5, 8, 10, 9, 12, 6, 36, 58, 43, 42, 41, 80, 9, 7, 65, 68, 66, 62, 38, 40, 43, 45, 54, 58, 60, 70, 70, 70, 70, 60, 58, 63, 61, 60, 84, 78, 81, 92, 88, 95, 125, 96, 96, 62, 2, 2, 8, 10, 10, 14, 10, 11, 20, 16, 17, 18, 29, 29, 40, 38, 48, 53, 3, 31, 30, 32, 35, 38, 39, 39, 35, 37, 36, 42, 38, 46, 35, 40, 37, 39, 41, 9, 10, 52, 52, 54, 41, 20, 18, 19, 24, 50, 37, 39, 10, 16, 43, 38, 40, 12, 14, 16, 10, 12, 8, 11, 6, 35, 15, 33, 11, 41, 32, 15, 12, 26, 34, 14, 11, 15, 36, 12, 12, 30, 13, 32, 38, 37, 37, 38, 38, 36, 35, 38, 36, 33, 9, 39, 40, 75, 100, 85, 65, 50, 45, 10, 25, 18, 4, 3, 32, 21, 18, 20, 18, 26, 4, 40, 6, 40, 4, 32, 43, 23, 30, 3, 9, 43, 19, 13, 38, 36, 5, 6, 3, 38, 43, 45, 23, 44, 5, 28, 20, 21, 4, 33, 32, 48, 40, 20, 23, 30, 10, 42, 3, 38, 36, 25, 51, 21, 20, 19, 19, 21, 43, 20, 32, 38, 33, 20, 11, 23, 2, 4, 30, 22, 40, 27, 39, 39, 39, 39, 21, 25, 28, 28, 38, 30, 34, 48, 44, 50, 40, 38, 33, 23, 48, 36, 55, 25, 62, 63, 61, 65, 64, 62, 61, 33, 62, 68, 66, 59, 60, 61, 60, 59, 66, 25, 26, 27, 26, 28, 29, 27, 30, 30, 32, 28, 30, 36, 27, 29, 26, 33, 32, 35, 30, 33, 26, 28, 35, 58, 60, 62, 66, 68, 70, 100, 80, 70, 60, 60, 63, 58, 60, 63, 66, 50, 50, 53, 55, 56, 58, 60, 62, 60, 58, 64, 62, 64, 64, 110, 96, 104, 100, 90, 98, 94, 100, 96, 102, 104, 100, 101, 105, 104, 106, 103, 108, 99, 106, 108, 110, 113, 115, 90, 90, 90, 120, 110, 100, 140, 99, 99, 102, 110, 115, 150, 95, 96, 95, 96, 200, 98, 110, 106, 120, 100, 100, 99, 112, 130, 108, 104, 58, 56, 55, 62, 60, 61, 56, 62, 66, 68, 60, 46, 48, 44, 53, 55, 52, 51, 51, 58, 57, 54, 56, 55, 59, 58, 57, 56, 55, 60, 62, 60, 60, 60, 64, 60, 61, 62, 63, 61, 63, 62, 61, 64, 54, 53, 51, 55, 50, 56, 64, 62, 61, 58, 60, 60, 63, 59, 57, 61, 65, 64, 66, 63, 70, 99, 60, 65, 66, 62]
+AllEnemyDefaultLevels = [1, 2, 4, 5, 6, 8, 6, 10, 11, 12, 13, 15, 22, 25, 24, 26, 20, 18, 19, 21, 22, 24, 23, 23, 24, 26, 29, 31, 27, 29, 31, 32, 33, 34, 32, 35, 40, 38, 38, 39, 42, 42, 43, 42, 44, 46, 44, 52, 54, 56, 99, 52, 50, 60, 60, 57, 66, 68, 60, 60, 60, 60, 13, 24, 26, 32, 33, 34, 60, 5, 14, 22, 18, 19, 21, 12, 31, 29, 33, 35, 40, 41, 56, 56, 58, 25, 47, 2, 25, 26, 10, 12, 9, 91, 36, 41, 57, 57, 38, 54, 25, 26, 28, 30, 32, 25, 26, 49, 44, 41, 27, 29, 22, 28, 29, 31, 33, 30, 31, 32, 60, 61, 58, 60, 62, 63, 62, 63, 64, 36, 36, 34, 61, 42, 41, 69, 66, 67, 70, 50, 40, 40, 42, 42, 42, 44, 46, 51, 50, 53, 26, 26, 26, 30, 46, 55, 54, 52, 33, 34, 33, 38, 38, 38, 38, 40, 33, 33, 35, 35, 45, 46, 43, 53, 51, 48, 51, 45, 45, 46, 46, 47, 47, 48, 48, 48, 49, 50, 48, 51, 53, 52, 33, 33, 34, 35, 36, 39, 42, 42, 42, 44, 45, 44, 43, 47, 56, 57, 50, 64, 43, 42, 45, 58, 55, 55, 57, 58, 60, 61, 56, 58, 60, 43, 19, 19, 36, 36, 37, 42, 44, 44, 58, 58, 56, 61, 59, 9, 20, 40, 60, 80, 99, 99, 39, 3, 2, 2, 2, 3, 6, 15, 5, 69, 6, 2, 7, 3, 6, 2, 8, 6, 3, 8, 11, 14, 9, 10, 5, 7, 8, 42, 22, 4, 90, 74, 33, 34, 25, 5, 71, 73, 5, 12, 16, 13, 13, 24, 23, 4, 5, 39, 39, 72, 10, 13, 15, 40, 14, 39, 14, 38, 11, 22, 5, 19, 38, 40, 37, 70, 21, 24, 35, 12, 15, 16, 12, 8, 81, 90, 25, 45, 18, 75, 20, 104, 28, 4, 4, 4, 6, 16, 34, 36, 40, 7, 7, 13, 9, 9, 9, 11, 27, 14, 17, 18, 20, 9, 18, 19, 17, 18, 19, 19, 74, 22, 23, 20, 21, 17, 23, 24, 32, 61, 20, 18, 35, 63, 21, 47, 22, 17, 20, 37, 20, 20, 39, 21, 18, 18, 20, 72, 34, 20, 21, 20, 19, 19, 18, 22, 75, 74, 76, 74, 75, 77, 78, 23, 21, 62, 38, 75, 35, 95, 97, 96, 23, 22, 23, 65, 24, 80, 23, 78, 41, 48, 99, 26, 25, 27, 27, 25, 19, 26, 27, 29, 81, 27, 26, 83, 83, 28, 27, 28, 80, 28, 33, 28, 29, 28, 32, 29, 28, 85, 80, 32, 31, 33, 31, 31, 32, 33, 34, 35, 34, 28, 29, 26, 29, 31, 61, 60, 61, 62, 63, 60, 33, 33, 33, 33, 43, 43, 59, 60, 25, 25, 26, 25, 26, 30, 31, 30, 30, 32, 31, 62, 33, 33, 33, 86, 40, 24, 25, 26, 28, 32, 34, 36, 29, 28, 29, 28, 28, 29, 29, 27, 27, 27, 32, 33, 96, 97, 98, 99, 120, 99, 44, 44, 43, 45, 45, 46, 45, 43, 44, 43, 44, 45, 45, 44, 44, 45, 44, 46, 43, 45, 45, 46, 45, 46, 47, 48, 50, 51, 49, 50, 51, 54, 56, 34, 34, 35, 39, 35, 38, 39, 40, 41, 88, 44, 42, 39, 90, 48, 93, 50, 49, 40, 43, 34, 35, 46, 46, 45, 35, 49, 44, 45, 47, 60, 45, 42, 50, 50, 51, 50, 50, 50, 53, 49, 52, 51, 44, 51, 41, 44, 49, 50, 49, 56, 95, 55, 130, 58, 62, 94, 109, 32, 33, 42, 43, 46, 48, 51, 38, 39, 39, 36, 38, 35, 39, 41, 38, 39, 42, 40, 41, 39, 39, 38, 38, 40, 80, 41, 40, 80, 78, 39, 40, 40, 79, 40, 84, 86, 40, 38, 79, 82, 84, 87, 38, 81, 88, 42, 42, 42, 42, 42, 40, 43, 39, 41, 41, 40, 41, 41, 42, 41, 53, 53, 54, 53, 84, 84, 84, 84, 85, 83, 39, 39, 41, 42, 42, 46, 44, 43, 110, 51, 42, 60, 54, 46, 46, 48, 51, 49, 47, 49, 47, 47, 60, 49, 47, 47, 50, 53, 54, 58, 100, 117, 44, 45, 46, 47, 48, 50, 52, 52, 52, 52, 52, 52, 53, 53, 54, 55, 53, 56, 57, 58, 58, 57, 60, 55, 55, 55, 55, 58, 58, 58, 60, 55, 55, 55, 58, 60, 60, 58, 97, 97, 58, 62, 60, 58, 64, 66, 65, 66, 66, 114, 52, 55, 56, 57, 59, 61, 31, 32, 44, 31, 31, 32, 33, 32, 42, 44, 32, 31, 43, 42, 32, 47, 44, 43, 42, 43, 38, 32, 31, 32, 43, 43, 43, 34, 32, 32, 44, 31, 42, 31, 31, 43, 43, 44, 31, 34, 33, 33, 33, 33, 33, 34, 32, 43, 43, 42, 44, 43, 43, 42, 42, 43, 34, 38, 38, 39, 47, 49, 48, 48, 45, 32, 32, 32, 32, 38, 40, 42, 44, 2, 4, 2, 23, 24, 67, 65, 36, 36, 38, 5, 8, 10, 9, 12, 6, 36, 58, 43, 42, 41, 80, 9, 7, 65, 68, 66, 62, 38, 40, 43, 45, 54, 58, 60, 70, 70, 70, 70, 60, 58, 63, 61, 60, 84, 78, 81, 92, 88, 95, 125, 96, 96, 62, 2, 2, 8, 10, 10, 14, 10, 11, 20, 16, 17, 18, 29, 29, 40, 38, 48, 53, 3, 31, 30, 32, 35, 38, 39, 39, 35, 37, 36, 42, 38, 46, 35, 40, 37, 39, 41, 9, 10, 52, 52, 54, 41, 20, 18, 19, 24, 50, 37, 39, 10, 16, 43, 38, 40, 12, 14, 16, 10, 12, 8, 11, 6, 35, 15, 33, 11, 41, 32, 15, 12, 26, 34, 14, 11, 15, 36, 12, 12, 30, 13, 32, 38, 37, 37, 38, 38, 36, 35, 38, 36, 33, 9, 39, 40, 75, 100, 85, 65, 50, 45, 10, 25, 18, 4, 3, 32, 21, 18, 20, 18, 26, 4, 40, 6, 40, 4, 32, 43, 23, 30, 3, 9, 43, 19, 13, 38, 36, 5, 6, 3, 38, 43, 45, 23, 44, 5, 28, 20, 21, 4, 33, 32, 48, 40, 20, 23, 30, 10, 42, 3, 38, 36, 25, 51, 21, 20, 19, 19, 21, 43, 20, 32, 38, 33, 20, 11, 23, 2, 4, 30, 22, 40, 27, 39, 39, 39, 39, 21, 25, 28, 28, 38, 30, 34, 48, 44, 50, 40, 38, 33, 23, 48, 36, 55, 25, 62, 63, 61, 65, 64, 62, 61, 33, 62, 68, 66, 59, 60, 61, 60, 59, 66, 25, 26, 27, 26, 28, 29, 27, 30, 30, 32, 28, 30, 36, 27, 29, 26, 33, 32, 35, 30, 33, 26, 28, 35, 58, 60, 62, 66, 68, 70, 100, 80, 70, 60, 60, 63, 58, 60, 63, 66, 50, 50, 53, 55, 56, 58, 60, 62, 60, 58, 64, 62, 64, 64, 110, 96, 104, 100, 90, 98, 94, 100, 96, 102, 104, 100, 101, 105, 104, 106, 103, 108, 99, 106, 108, 110, 113, 115, 90, 90, 90, 120, 110, 100, 140, 99, 99, 102, 110, 115, 150, 95, 96, 95, 96, 200, 98, 110, 106, 120, 100, 100, 99, 112, 130, 108, 104, 58, 56, 55, 62, 60, 61, 56, 62, 66, 68, 60, 46, 48, 44, 53, 55, 52, 51, 51, 58, 57, 54, 56, 55, 59, 58, 57, 56, 55, 60, 62, 60, 60, 60, 64, 60, 61, 62, 63, 61, 63, 62, 61, 64, 54, 53, 51, 55, 50, 56, 64, 62, 61, 58, 60, 60, 63, 59, 57, 61, 65, 64, 66, 63, 70, 99, 60, 65, 66, 62]
 #print(Helper.FindValues("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["$id"], ValidEnemies, "Lv"))
 
 BossDefaultEnem1Levels = [1, 2, 4, 5, 4, 6, 8, 10, 12, 13, 13, 15, 22, 26, 60, 20, 21, 22, 24, 23, 23, 24, 24, 29, 31, 32, 29, 31, 32, 32, 34, 33, 39, 42, 42, 43, 46, 35, 44, 52, 56, 54, 60, 60, 52, 50, 60, 60, 60, 57, 66, 68, 60, 60, 60, 60, 70, 70, 8, 10, 29, 29, 40, 38, 50, 50, 50, 50, 1, 1, 1, 2, 2, 3, 32, 32, 32, 32, 14, 20, 53]
@@ -82,131 +82,54 @@ AllNormalEnemyDefaultIDs.sort()
 AllNormalEnemyDefaultLevels = [99, 31, 29, 2, 57, 36, 46, 54, 48, 49, 47, 58, 99, 3, 2, 2, 2, 3, 5, 69, 6, 8, 6, 3, 8, 9, 10, 5, 7, 8, 42, 22, 4, 90, 74, 34, 5, 71, 73, 12, 13, 24, 4, 5, 39, 72, 10, 13, 15, 40, 14, 39, 14, 38, 11, 22, 5, 38, 40, 37, 70, 21, 24, 12, 15, 16, 4, 4, 4, 6, 16, 34, 36, 40, 7, 7, 13, 9, 9, 9, 11, 17, 74, 17, 24, 32, 61, 63, 21, 47, 17, 20, 20, 39, 21, 18, 18, 72, 34, 21, 62, 38, 75, 95, 97, 96, 23, 22, 19, 27, 28, 32, 29, 28, 85, 32, 31, 33, 31, 31, 32, 33, 34, 35, 34, 28, 29, 26, 29, 31, 61, 60, 61, 62, 63, 60, 33, 33, 33, 33, 43, 43, 59, 60, 25, 25, 26, 25, 26, 30, 31, 30, 24, 25, 26, 28, 32, 34, 36, 29, 28, 29, 28, 28, 29, 29, 27, 27, 27, 32, 33, 96, 97, 98, 44, 45, 43, 44, 45, 45, 45, 45, 46, 45, 49, 50, 51, 54, 56, 35, 38, 40, 41, 88, 44, 39, 90, 48, 93, 50, 49, 40, 43, 46, 46, 45, 35, 49, 44, 45, 47, 60, 45, 50, 50, 51, 50, 50, 50, 53, 49, 52, 51, 44, 51, 41, 44, 49, 50, 49, 56, 32, 33, 42, 43, 46, 48, 51, 39, 42, 38, 38, 80, 78, 40, 79, 40, 84, 86, 79, 82, 84, 87, 81, 88, 40, 43, 39, 41, 41, 40, 41, 41, 42, 41, 53, 53, 54, 53, 83, 39, 39, 47, 44, 45, 46, 47, 48, 50, 52, 55, 55, 97, 97, 58, 52, 55, 56, 57, 59, 61, 44, 43, 42, 43, 42, 32, 43, 43, 43, 42, 43, 44, 34, 34, 43, 43, 43, 34, 32, 32, 32, 32, 38, 40, 42, 44, 2, 4, 2, 23, 24, 67, 65, 36, 36, 38, 5, 6, 80, 40, 54, 58, 60, 95, 96, 96, 31, 30, 38, 39, 39, 35, 37, 36, 38, 9, 10, 52, 52, 54, 41, 18, 37, 39, 38, 12, 16, 10, 8, 11, 6, 35, 33, 11, 12, 11, 15, 36, 12, 30, 13, 38, 37, 38, 38, 36, 35, 36, 39, 4, 3, 32, 21, 18, 26, 4, 6, 4, 32, 43, 30, 3, 9, 19, 13, 5, 3, 43, 45, 44, 20, 4, 33, 48, 40, 20, 10, 36, 25, 51, 21, 20, 19, 21, 43, 20, 33, 20, 11, 23, 2, 4, 30, 22, 27, 39, 39, 39, 21, 28, 30, 66, 25, 26, 27, 26, 28, 29, 27, 30, 30, 32, 28, 30, 36, 27, 29, 26, 33, 32, 35, 30, 33, 26, 28, 35, 58, 60, 62, 66, 68, 70, 80, 70, 60, 60, 63, 58, 60, 63, 66, 50, 50, 53, 55, 56, 58, 60, 62, 60, 58, 64, 62, 64, 64, 96, 90, 98, 94, 96, 99, 90, 90, 90, 99, 99, 95, 96, 95, 96, 98, 99, 58, 56, 55, 62, 60, 61, 56, 62, 66, 68, 60, 46, 48, 44, 53, 55, 52, 51, 51, 58, 57, 54, 56, 55, 59, 58, 57, 56, 55, 60, 62, 60, 60, 60, 64, 60, 61, 62, 63, 61, 63, 62, 61, 64, 54, 53, 51, 55, 50, 56, 64, 62, 61, 58, 60, 60, 63, 59, 57, 61, 65, 64, 66, 63, 70, 99, 60, 65, 66, 62]
 #print(Helper.FindValues("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["$id"], AllNormalEnemyDefaultIDs, "Lv"))
 
-def FindMatchingInfo(file1path, file2path, keyword0, keyword1, keyword2, keyword3): # file 1 path, file 2 path, file 1 header to search through, file 1 header to return data from, file 2 header to search through (same values as keyword1, maybe different header name), file 2 header to return data from
-    namemat = []
-    IDMat = [] 
-    LevelMat = []
-    mapspecID = []
-    if file1path == "":
-        mapname = ""
-        i = 1
-        j = 1
-        for i in range(1,90):
-            if i >= 10:
-                mapnum = str(i)
-            if i < 10:
-                mapnum = "0" + str(i)
-            for j in range(1,3):
-                if j == 1:
-                    mapname = "a"
-                if j == 2:
-                    mapname = "b"
-                if j == 3:
-                    mapname = "c"
-                combinedmapname = "./_internal/JsonOutputs/common_gmk/ma" + mapnum + mapname + "_FLD_EnemyPop.json"
-                file1path = combinedmapname
-                try:
-                    with open(combinedmapname, 'r+', encoding='utf-8') as file:
-                        data = json.load(file)
-                        for row in data['rows']:
-                            if "boss" in row.get(keyword0):
-                                if row.get(keyword1) != 0 and row.get(keyword1) != "":
-                                    namemat.append(row[keyword1])
-                                    mapspecID.append(row["$id"]) 
-                except:
-                    pass
-    else:
-        with open(file1path, 'r+', encoding='utf-8') as file:
-            data = json.load(file)
-            for row in data['rows']:
-                if "boss" in row.get(keyword0):
-                    if row.get(keyword1) != 0 and row.get(keyword1) != "":
-                        namemat.append(row[keyword1])
-                        mapspecID.append(row["$id"])   
-    if file2path == "":
-        chrenname = "./_internal/JsonOutputs/common/CHR_EnArrange.json"
-        file2path = chrenname
-    with open(chrenname, 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for k in range(0, len(namemat)):
-            idsearch = namemat[k]
-            for row in data["rows"]:
-                for key, value in row.items():
-                    if key in keyword2 and value == idsearch: 
-                            IDMat.append(row[keyword2])
-                            LevelMat.append(row[keyword3])
-
-def ReadPostRandomizationChanges(filepath, keyword1): # file to read after randomization, keyword1 column header
-    retIDmatrix = []
-    retkey1matrix = []
-    with open(filepath, 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            for key in row.items():
-                if key == keyword1:
-                    retIDmatrix.append(row["$id"])
-                    retkey1matrix.append(row[keyword1])
-    return retIDmatrix, retkey1matrix
-
 def ReworkedEnemyRando (DefaultEnemyIDs, RandomizedEnemyIDs):
-    for i in range(1,51):
-        if i >= 10:
-            mapnum = str(i)
-        if i < 10:
-            mapnum = "0" + str(i)
-        for j in range(1,3):
-            if j == 1:
-                mapname = "a"
-            if j == 2:
-                mapname = "b"
-            if j == 3:
-                mapname = "c"
-            enemypopfile = "./_internal/JsonOutputs/common_gmk/ma" + mapnum + mapname + "_FLD_EnemyPop.json"
-            try:
-                with open(enemypopfile, 'r+', encoding='utf-8') as file:
-                    data = json.load(file)
-                    for row in data['rows']: #for each row in the Enemy Pop file
-                        if row["ene1ID"] == 0:
+    for i in range(0,len(ValidEnemyPopFileNames)):
+        enemypopfile = "./_internal/JsonOutputs/common_gmk/" + ValidEnemyPopFileNames[i]
+        try:
+            with open(enemypopfile, 'r+', encoding='utf-8') as file:
+                data = json.load(file)
+                for row in data['rows']: 
+                    if row["ene1ID"] == 0:
+                        continue
+                    ene1changed = 0
+                    ene2changed = 0
+                    ene3changed = 0
+                    ene4changed = 0
+                    for key, value in row.items():
+                        if row["ene2ID"] == 0:
+                            ene2changed = 1
+                        if row["ene3ID"] == 0:
+                            ene3changed = 1
+                        if row["ene4ID"] == 0:
+                            ene4changed = 1
+                        if ene1changed + ene2changed + ene3changed + ene4changed == 4:
+                            break
+                        if key not in ("ene1ID", "ene2ID", "ene3ID", "ene4ID"):
                             continue
-                        ene1changed = 0
-                        ene2changed = 0
-                        ene3changed = 0
-                        ene4changed = 0
-                        for key, value in row.items():
-                            if row["ene2ID"] == 0:
-                                ene2changed = 1
-                            if row["ene3ID"] == 0:
-                                ene3changed = 1
-                            if row["ene4ID"] == 0:
-                                ene4changed = 1
+                        for k in range(0, len(DefaultEnemyIDs)):
+                            if ene1changed == 0:
+                                if row["ene1ID"] == DefaultEnemyIDs[k]: 
+                                    row["ene1ID"] = RandomizedEnemyIDs[k]
+                                    ene1changed = 1
+                            if ene2changed == 0:
+                                if row["ene2ID"] == DefaultEnemyIDs[k]: 
+                                    row["ene2ID"] = RandomizedEnemyIDs[k]
+                                    ene2changed = 1
+                            if ene3changed == 0:
+                                if row["ene3ID"] == DefaultEnemyIDs[k]: 
+                                    row["ene3ID"] = RandomizedEnemyIDs[k]
+                                    ene3changed = 1      
+                            if ene4changed == 0:
+                                if row["ene4ID"] == DefaultEnemyIDs[k]: 
+                                    row["ene4ID"] = RandomizedEnemyIDs[k]
+                                    ene4changed = 1
                             if ene1changed + ene2changed + ene3changed + ene4changed == 4:
                                 break
-                            if key not in ("ene1ID", "ene2ID", "ene3ID", "ene4ID"):
-                                continue
-                            for k in range(0, len(DefaultEnemyIDs)):
-                                if ene1changed == 0:
-                                    if row["ene1ID"] == DefaultEnemyIDs[k]: 
-                                        row["ene1ID"] = RandomizedEnemyIDs[k]
-                                        ene1changed = 1
-                                if ene2changed == 0:
-                                    if row["ene2ID"] == DefaultEnemyIDs[k]: 
-                                        row["ene2ID"] = RandomizedEnemyIDs[k]
-                                        ene2changed = 1
-                                if ene3changed == 0:
-                                    if row["ene3ID"] == DefaultEnemyIDs[k]: 
-                                        row["ene3ID"] = RandomizedEnemyIDs[k]
-                                        ene3changed = 1      
-                                if ene4changed == 0:
-                                    if row["ene4ID"] == DefaultEnemyIDs[k]: 
-                                        row["ene4ID"] = RandomizedEnemyIDs[k]
-                                        ene4changed = 1
-                                if ene1changed + ene2changed + ene3changed + ene4changed == 4:
-                                    break
-                    file.seek(0)
-                    file.truncate()
-                    json.dump(data, file, indent=2, ensure_ascii=False)
-            except:
-                pass     
+                file.seek(0)
+                file.truncate()
+                json.dump(data, file, indent=2, ensure_ascii=False)
+        except:
+            pass     
     with open("./_internal/JsonOutputs/common/FLD_QuestBattle.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
@@ -223,7 +146,6 @@ def ReworkedEnemyRando (DefaultEnemyIDs, RandomizedEnemyIDs):
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     with open("./_internal/JsonOutputs/common/FLD_EnemyGroup.json", 'r+', encoding='utf-8') as file:
-        start_time = time.time()
         data = json.load(file)
         for row in data["rows"]:
             for l in range (1,13):
@@ -305,56 +227,6 @@ def ReducePCHPBattle1():
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii= False)
 
-def BossQuestAggroAdjustments(DefaultIDs, RandomizedIDs): # Required to allow bosses/quest enemies to aggro (including ones we don't randomize!)
-    filename = "./_internal/JsonOutputs/common/CHR_EnArrange.json"
-    with open(filename, 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for i in range(0, len(DefaultIDs)): # for each row in the default ID matrix
-            if DefaultIDs[i] in AllQuestDefaultEnemyIDs: # if the default ID is in the list of default quest IDs
-                for row in data["rows"]: # for each row in CHR_EnArrange
-                    if row["$id"] == RandomizedIDs[i]: # If the row's ID corresponds to the randomized ID with index i
-                        row["Flag"]["AlwaysAttack"] = 0
-                        row["Detects"] = 1
-                        row["SearchRange"] = 1
-                        row["SearchAngle"] = 100
-                        row["SearchRadius"] = 1
-                        row["BatInterval"] = 50
-                        row["BatArea"] = 50
-                        break
-            if DefaultIDs[i] in AllBossDefaultIDs: # if the default ID is in the list of default boss IDs
-                for row in data["rows"]: # for each row in CHR_EnArrange
-                    if row["$id"] == RandomizedIDs[i]: # If the row's ID corresponds to the randomized ID with index i
-                        row["Flag"]["AlwaysAttack"] = 1
-                        row["Detects"] = 3
-                        row["SearchRange"] = 10
-                        row["SearchAngle"] = 360
-                        row["SearchRadius"] = 5
-                        row["BatInterval"] = 200
-                        row["BatArea"] = 200
-                        row["Flag"]["mBoss"] = 1
-                        break   
-        for row in data["rows"]: # now for non-randomized enemies
-            if (row["$id"] in list(set(QuestDefaultEnemyIDs + EnemyGroupDefaultID1s + EnemyGroupDefaultID2s + EnemyGroupDefaultID3s + EnemyGroupDefaultID4s + EnemyGroupDefaultID5s + EnemyGroupDefaultID6s + EnemyGroupDefaultID7s + EnemyGroupDefaultID8s + EnemyGroupDefaultID9s + EnemyGroupDefaultID10s + EnemyGroupDefaultID11s + EnemyGroupDefaultID12s))) & (row["$id"] in InvalidEnemies):
-                    row["Flag"]["AlwaysAttack"] = 0
-                    row["Detects"] = 1
-                    row["SearchRange"] = 10
-                    row["SearchAngle"] = 100
-                    row["SearchRadius"] = 1
-                    row["BatInterval"] = 50
-                    row["BatArea"] = 50
-            if (row["$id"] in list(set(BossDefaultEnem1IDs + BossDefaultEnem2IDs + BossDefaultEnem3IDs + BossDefaultEnem4IDs))) & (row["$id"] in InvalidEnemies):
-                    row["Flag"]["AlwaysAttack"] = 1
-                    row["Detects"] = 3
-                    row["SearchRange"] = 10
-                    row["SearchAngle"] = 360
-                    row["SearchRadius"] = 5
-                    row["BatInterval"] = 200
-                    row["BatArea"] = 200
-                    row["Flag"]["mBoss"] = 1
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-
 def SummonsLevelAdjustment(): # We want the summoned enemies to be the same level as the enemy that summoned them
     OriginalSummonedFirstIDs = [1, 1, 724, 122, 66, 1369, 1304, 1385, 1372, 1308, 242, 1376, 1378, 1379, 1807, 150, 1373, 1377, 1380, 1806, 1285, 1285, 1381, 725, 725, 1358, 1362, 1700, 1521, 728, 846, 1420, 1347, 1370, 1354, 1354, 1352, 1367, 1371, 1368, 1356, 1357, 1365, 1384, 1593, 1599, 1353, 1349, 1355, 1361, 1382, 1364, 1350, 1724, 1724, 1724, 1724, 1731, 1787, 1788, 1789, 1805, 1881, 1883, 1885, 1641, 1533, 1568, 1569, 1569]
     OriginalSummonedSecondIDs = [0, 0, 0, 0, 67, 0, 0, 0, 0, 0, 0, 1376, 1378, 1379, 1807, 152, 1374, 0, 0, 0, 0, 0, 1381, 726, 727, 1359, 1362, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1382, 0, 1350, 1725, 1725, 1725, 1726, 0, 0, 0, 0, 1805, 0, 1883, 1885, 0, 0, 0, 0, 0]
@@ -388,7 +260,7 @@ def SummonsLevelAdjustment(): # We want the summoned enemies to be the same leve
                 if (row["$id"] == OriginalSummonedThirdIDs[i]) and (MinLevels[i] != 255):
                     if row["Lv"] > MinLevels[i]:
                         row["Lv"] = MinLevels[i]
-        for row in data["rows"]:
+        for row in data["rows"]: # artifice aion core summons these
             if row["$id"] == 1285:
                 row["Lv"] = 69
                 break
@@ -453,7 +325,7 @@ def FightBalancing(filenames, TargetIDs, LevelChange): #Changes the level scalin
         with open(filenames[i], 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data["rows"]:
-                if row["$id"] == TargetIDs:
+                if row["$id"] == TargetIDs[i]:
                     for j in range(1, 5):
                         if row[f"ene{j}ID"] != 0:
                             row[f"ene{j}Lv"] = LevelChange[i]
@@ -469,7 +341,9 @@ def BigEnemyCollisionFix(): # Fixes ophion/other large enemies going outside the
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in BigEnemies:
-                row["CharColli"] = 0
+                row["CharColli"] = 0 #removes enemy collision
+                row["EnRadius"] = 255 #sets radius you can hit them
+                row["EnRadius2"] = 255 # sets radius they can hit you
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -482,6 +356,173 @@ def FishFix(): # changes all fish to flying type enemies so that when they spawn
             if row["$id"] in FishIDs:
                 row["ActType"] = 3
                 row["FlyHeight"] = 1
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def NewNonBossandQuestIDs(): # don't trust my old method of getting quest and boss ids post randomization, here's a better approach
+    BossIDsPostRandomization = []
+    QuestIDsPostRandomization = []
+    NonBossandQuestIDsPostRandomization = []
+    for i in range(0, len(ValidEnemyPopFileNames)):
+        enemypopfile = "./_internal/JsonOutputs/common_gmk/" + ValidEnemyPopFileNames[i]
+        with open(enemypopfile, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for row in data['rows']:
+                if row["name"][:3] == "bos":
+                    for j in range(1, 5):
+                        if row[f"ene{j}ID"] != 0:
+                            BossIDsPostRandomization.append(row[f"ene{j}ID"])
+                        else:
+                            break
+                elif row["name"][:3] == "qst":
+                    for j in range(1, 5):
+                        if row[f"ene{j}ID"] != 0:
+                            QuestIDsPostRandomization.append(row[f"ene{j}ID"])
+                        else:
+                            break
+                else:
+                    for j in range(1, 5):
+                        if row[f"ene{j}ID"] != 0:
+                            NonBossandQuestIDsPostRandomization.append(row[f"ene{j}ID"])
+                        else:
+                            break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+    return list(set(BossIDsPostRandomization)), list(set(QuestIDsPostRandomization)), list(set(NonBossandQuestIDsPostRandomization))       
+
+def BossQuestAggroAdjustments(NewBossIDs, NewQuestIDs): # Required to allow bosses/quest enemies to aggro (including ones we don't randomize!)
+    filename = "./_internal/JsonOutputs/common/CHR_EnArrange.json"
+    with open(filename, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in NewBossIDs:
+                row["Flag"]["AlwaysAttack"] = 1
+                row["Detects"] = 3
+                row["SearchRange"] = 10
+                row["SearchAngle"] = 360
+                row["SearchRadius"] = 5
+                row["BatInterval"] = 200
+                row["BatArea"] = 200
+                row["Flag"]["mBoss"] = 1
+                continue
+            elif row["$id"] in NewQuestIDs:
+                row["Flag"]["AlwaysAttack"] = 0
+                row["Detects"] = 1
+                row["SearchRange"] = 10
+                row["SearchAngle"] = 100
+                row["SearchRadius"] = 1
+                row["BatInterval"] = 50
+                row["BatArea"] = 50
+                continue
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def EnemyAggroProportion(OptionsRunDict):
+    EnemyRandoOnBox = OptionsRunDict["Enemies"]["optionTypeVal"].get()
+    StoryBossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Story Bosses"]["subOptionTypeVal"].get()
+    QuestEnemyBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Quest Enemies"]["subOptionTypeVal"].get()
+    UniqueMonstersBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Unique Monsters"]["subOptionTypeVal"].get()
+    SuperbossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Superbosses"]["subOptionTypeVal"].get()
+    NormalEnemiesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Normal Enemies"]["subOptionTypeVal"].get()
+    if EnemyRandoOnBox:
+        if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox: # do nothing, got handled after enemy randomization
+            pass
+    EnemyAggroSliderOdds = OptionsRunDict["Aggressive Enemies"]["spinBoxVal"].get()
+    NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
+    if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive
+        with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
+            data = json.load(file)
+            for row in data["rows"]:
+                if (row["$id"] in ValidEnemies) & (row["$id"] in OtherEnemyIDs):
+                    row["Flag"]["AlwaysAttack"] = 0
+                    row["Flag"]["mBoss"] = 0
+                    row["SearchRange"] = 0
+                    row["SearchRadius"] = 0
+                    row["SearchAngle"] = 0
+                    row["Detects"] = 0
+                    row["BatInterval"] = 50
+                    row["BatArea"] = 50
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+    else: # run aggro adjustments on non-randomized enemies, not touching boss or quest enemy ids
+        with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
+            data = json.load(file)
+            for row in data["rows"]:
+                if (EnemyAggroSliderOdds != 100) & (row["$id"] in OtherEnemyIDs) & (random.randint(0,100) >= EnemyAggroSliderOdds) & (row["$id"] in ValidEnemies):
+                    row["Flag"]["AlwaysAttack"] = 0
+                    row["Flag"]["mBoss"] = 0
+                    row["SearchRange"] = 0
+                    row["SearchRadius"] = 0
+                    row["SearchAngle"] = 0
+                    row["Detects"] = 0
+                    row["BatInterval"] = 50
+                    row["BatArea"] = 50
+                elif (row["$id"] in OtherEnemyIDs) & (row["$id"] in ValidEnemies):
+                    row["Flag"]["mBoss"] = 0
+                    row["Flag"]["AlwaysAttack"] = 1
+                    row["Detects"] = 1
+                    if row["SearchRange"] == 0:
+                        row["SearchRange"] = random.randint(5, 25)
+                    if row["SearchAngle"] == 0:
+                        row["SearchAngle"] = random.randint(45, 135)
+                    if row["SearchRadius"] == 0:
+                        row["SearchRadius"] = random.randint(1, 10)
+                    row["BatInterval"] = 50
+                    row["BatArea"] = 50
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
+def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict): #when enemy rando is on and aggro rando is on
+    EnemyAggroSliderOdds = OptionsRunDict["Aggressive Enemies"]["spinBoxVal"].get()
+    with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if (EnemyAggroSliderOdds != 100) & (row["$id"] in OtherEnemyIDs) & (random.randint(0,100) >= EnemyAggroSliderOdds) & (row["$id"] in ValidEnemies):
+                row["Flag"]["AlwaysAttack"] = 0
+                row["Flag"]["mBoss"] = 0
+                row["SearchRange"] = 0
+                row["SearchRadius"] = 0
+                row["SearchAngle"] = 0
+                row["Detects"] = 0
+                row["BatInterval"] = 50
+                row["BatArea"] = 50
+            elif (row["$id"] in OtherEnemyIDs) & (row["$id"] in ValidEnemies):
+                row["Flag"]["mBoss"] = 0
+                row["Flag"]["AlwaysAttack"] = 1
+                row["Detects"] = 1
+                if row["SearchRange"] == 0:
+                    row["SearchRange"] = random.randint(10, 25) # some enemies might naturally be passive, we need to turn them aggressive
+                if row["SearchAngle"] == 0:
+                    row["SearchAngle"] = random.randint(90, 180)
+                if row["SearchRadius"] == 0:
+                    row["SearchRadius"] = random.randint(5, 10)
+                row["BatInterval"] = 50
+                row["BatArea"] = 50
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+          
+def AeshmaCoreHPNerf(): #this fight sucks
+    with open("./_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 318:
+                row["HpMaxRev"] = 1000 # nerfed hp by 7/8ths
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)        
+
+def GortOgreUppercutRemoval(): # Gort 2's Ogre Uppercut seems to be buggy, reported to crash game in certain situations, so it's being removed for the time being.
+    with open("./_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 1434:
+                row["ArtsNum4"] = 963 # replaced Ogre Uppercut with a second instance of Ogre Flame
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -545,14 +586,15 @@ def EnemyLogic(OptionsRunDict):
                 if KeepAllEnemyLevelsBox:
                     LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, LevelstoPass)
                     print("Reverting all enemy levels")
-                if QuestEnemyBox:
-                    if KeepQuestEnemyLevelsBox:
-                        LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
-                        print("Reverting Quest Enemy levels")
-                if StoryBossesBox:
-                    if KeepStoryBossesLevelsBox:
-                        LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
-                        print("Reverting Story Boss Levels")
+                else:
+                    if QuestEnemyBox:
+                        if KeepQuestEnemyLevelsBox:
+                            LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
+                            print("Reverting Quest Enemy levels")
+                    if StoryBossesBox:
+                        if KeepStoryBossesLevelsBox:
+                            LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
+                            print("Reverting Story Boss Levels")
         if not MixEnemiesBetweenTypesBox:
             print("Enemies not shuffled")
             for o in range(0, len(CheckboxList)):
@@ -599,17 +641,20 @@ def EnemyLogic(OptionsRunDict):
                             LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
                             print("Reverting Story Boss Levels")
                             continue
-        Helper.SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "AlwaysAttack", 0)
-        Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["SearchRange", "SearchRadius", "SearchAngle", "Detects"], 0)
-        Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["BatInterval", "BatArea"], 50)
-        Helper.SubColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", "Flag", "mBoss", 0)
-        BossQuestAggroAdjustments(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
+        NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
+        BossQuestAggroAdjustments(NewBossIDs, NewQuestIDs)
         ReducePCHPBattle1()
         KeyItemsReAdd()
-        Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["LvRand"], 0)
+        Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["LvRand", "DriverLev"], 0)
         Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], 0)
         SummonsLevelAdjustment()
-        FightBalancing(["./_internal/JsonOutputs/common_gmk/ma16a_FLD_EnemyPop.json"], [16149], [-5])
+        FightBalancing(["./_internal/JsonOutputs/common_gmk/ma13a_FLD_EnemyPop.json", "./_internal/JsonOutputs/common_gmk/ma16a_FLD_EnemyPop.json"], [13001, 16149], [-5, -5])
         FishFix()
         BigEnemyCollisionFix()
+        PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict)
+        AeshmaCoreHPNerf()
+        GortOgreUppercutRemoval()
+
+
+        
 

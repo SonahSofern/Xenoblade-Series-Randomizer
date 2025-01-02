@@ -71,6 +71,7 @@ def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version, buttonS
             buttonStateUpdates()
         except:
             print("Invalid Permalink")
+            permaLinkVar.set("")
     
     def PermalinkEntryUpdate():
         compressedPermalink = GenerateCompressedPermalink(seedEntryVar.get(), traceObjects, version)
