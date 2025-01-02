@@ -1,10 +1,10 @@
 import json, random
 from Enhancements import *
 
-InvalidSkillEnhancements = [EyeOfJustice]
+
 
 def RandomizeWeaponEnhancements():
-    RunCustomEnhancements()
+    InvalidSkillEnhancements = [EyeOfJustice]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
     
     with open("./_internal/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file:

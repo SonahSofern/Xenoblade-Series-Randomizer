@@ -1,10 +1,11 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, PermalinkManagement, Helper, CustomAccessories, SkillTrees
+import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, PermalinkManagement, Helper, Accessories, SkillTrees, Enhancements
 import GUISettings
 import WeaponChips as WPChips
 import AuxCores as AuxCr
+import Accessories as Accs
 from IDs import *
 from Cosmetics import *
 from UI_Colors import *
@@ -223,6 +224,7 @@ def Options():
     GenStandardOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, [], InvalidTargetIDs=AutoAttacks)],["Debuffs", [lambda: IDs.ValidReplacements.extend(list(set(ArtDebuffs)-set([21])))],"Buffs",[lambda: IDs.ValidReplacements.extend(ArtBuffs)], "Doom", [lambda: IDs.ValidReplacements.extend([21])]], Spinbox)
     # GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", ["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20)) Nothing wrong with this just kinda niche/silly
     GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees", [lambda: SkillTrees.RandomizeSkillEnhancements()])
+    GenStandardOption("Driver Accessories", TabDrivers, "Randomizes effects of Accessories", [lambda: Accs.RandomizeAccessoryEnhancements()])
     GenStandardOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a reaction", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)],["Clear Vanilla Reactions", [lambda: Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)]], optionType=Spinbox) # we want id numbers no edit the 1/6 react stuff
     GenStandardOption("Driver Art Animation Speeds", TabDrivers, "Randomizes a Driver's art animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)], optionType=Spinbox)
     # GenStandardOption("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Dr.json"], ["DefAcce"], Accessories + [0], Accessories + [0])], ["Remove All Starting Accessories", [lambda: IDs.InvalidReplacements.extend(Accessories)]])
@@ -384,6 +386,7 @@ def Randomize():
     threading.Thread(target=ThreadedRandomize).start()
 
 def RunOptions():
+    Enhancements.RunCustomEnhancements() # Figure out how to not run this here just dont have time rn
     for option in OptionDictionary.values():
         if (option["optionTypeVal"].get()): # checks main option input
             IDs.CurrentSliderOdds = option["spinBoxVal"].get()

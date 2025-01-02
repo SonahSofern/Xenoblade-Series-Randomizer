@@ -25,8 +25,6 @@ ArtBuffs = [0,1,2,3,4,5,6,7,8,9,16,17]
 BladeArts = [0,1,2,3,4,5,6,7,8,9]
 ArtDebuffs = [0,11,12,13,14,15,21,23,24,25,30,35]
 VanillaEnhancements = Helper.InclRange(1,3895)
-ValidCustomEnhancements = []
-CustomAccessoriesIds = []
 
 
 DriverSkillTrees = Helper.InclRange(1,270)

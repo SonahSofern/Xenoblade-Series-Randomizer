@@ -1,10 +1,10 @@
 import json, random
 from Enhancements import *
 
-InvalidSkillEnhancements = [EyeOfJustice]
 
 def RandomizeAuxCoreEnhancements():
-    RunCustomEnhancements()
+    InvalidSkillEnhancements = [EyeOfJustice]
+
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
 
     with open("./_internal/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as file:
@@ -19,7 +19,7 @@ def RandomizeAuxCoreEnhancements():
                 for Aux in enhanceFile["rows"]:
                     skillNameID = Aux["Name"]
                     enhancement = random.choice(ValidSkills)
-                    # ValidSkills.remove(skill) # Need full pool
+                    ValidSkills.remove(enhancement) # Need full pool
                     for skillName in auxNameFile["rows"]:  
                         if skillName["$id"] == skillNameID:    
                             skillName["name"] = f"{enhancement.name} Core"
