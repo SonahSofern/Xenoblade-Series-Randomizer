@@ -26,12 +26,12 @@ def RandomizeAuxCoreEnhancements():
                     Aux["Enhance"] = enhancement.id
                     
                     
-            poppiAuxEnhancements.seek(0)
-            poppiAuxEnhancements.truncate()
-            json.dump(poppiAux, poppiAuxEnhancements, indent=2, ensure_ascii=False)
-        auxNames.seek(0)
-        auxNames.truncate()
-        json.dump(auxNameFile, auxNames, indent=2, ensure_ascii=False)
-    file.seek(0)
-    file.truncate()
-    json.dump(enhanceFile, file, indent=2, ensure_ascii=False)
+                poppiAuxEnhancements.seek(0)
+                poppiAuxEnhancements.truncate()
+                json.dump(poppiAux, poppiAuxEnhancements, indent=2, ensure_ascii=False)
+            auxNames.seek(0)
+            auxNames.truncate()
+            json.dump(auxNameFile, auxNames, indent=2, ensure_ascii=False)
+        file.seek(0)
+        file.truncate()
+        json.dump(enhanceFile, file, indent=2, ensure_ascii=False)

@@ -1,6 +1,6 @@
 C:/Users/benja/Desktop/XC2_Randomizer/bdat
 C:/Users/benja/AppData/Roaming/yuzu/load/0100E95004039001/Randomizer/romfs/bdat
-MTAxAFBuZXVtYUJyZWFrc05pYQAAABAAAAAAAAAAAAAAAAAAMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjI=
+MTAxAFBuZXVtYUJyZWFrc05pYQBAABgAAAAAQAAAAAAAAAAAMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjI=
 PneumaBreaksNia
 False
 False
@@ -8,6 +8,7 @@ False
 False
 False
 False
+True
 False
 False
 False
@@ -20,8 +21,7 @@ False
 False
 False
 False
-False
-False
+True
 True
 False
 False
@@ -64,7 +64,7 @@ False
 False
 False
 False
-False
+True
 False
 False
 False
