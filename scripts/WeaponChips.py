@@ -4,7 +4,7 @@ from Enhancements import *
 
 
 def RandomizeWeaponEnhancements():
-    InvalidSkillEnhancements = [EyeOfJustice]
+    InvalidSkillEnhancements = [EyeOfJustice, BladeSwapDamage]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
     
     with open("./_internal/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file:

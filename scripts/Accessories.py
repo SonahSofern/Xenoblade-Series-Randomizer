@@ -3,7 +3,7 @@ from Enhancements import *
 
 
 def RandomizeAccessoryEnhancements():
-    InvalidSkillEnhancements = [EyeOfJustice]
+    InvalidSkillEnhancements = [EyeOfJustice, BladeSwitchDamageUp]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
     
     with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as EnhanceFile:
@@ -19,7 +19,6 @@ def RandomizeAccessoryEnhancements():
                         oldName = skillName["name"]
                         oldNameList = oldName.split()
                         lastWord = oldNameList[-1]
-                        print(f"{enhancement.name} {lastWord}")
                         skillName["name"] = f"{enhancement.name} {lastWord}"
                 Acc["Enhance1"] = enhancement.id
                 Acc["Price"] = (enhancement.Rarity+1) * 5000
