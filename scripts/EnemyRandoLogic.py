@@ -527,6 +527,21 @@ def GortOgreUppercutRemoval(): # Gort 2's Ogre Uppercut seems to be buggy, repor
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy happens to show up early. Nerfed by 3/4ths.
+    with open("./_internal/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 218:
+                row["DmgMgn1"] = 500
+                row["DmgMgn2"] = 500
+                row["DmgMgn3"] = 500
+                row["DmgMgn4"] = 500
+                row["DmgMgn5"] = 500
+                row["DmgMgn6"] = 500
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
 def EnemyLogic(OptionsRunDict):
     EnemyRandoOn = False
     EnemiestoPass = []
@@ -654,6 +669,8 @@ def EnemyLogic(OptionsRunDict):
         PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict)
         AeshmaCoreHPNerf()
         GortOgreUppercutRemoval()
+        EarthBreathNerf()
+
 
 
         
