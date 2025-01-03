@@ -430,7 +430,7 @@ def EnemyAggroProportion(OptionsRunDict):
     if EnemyRandoOnBox:
         if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox: # do nothing, got handled after enemy randomization
             pass
-    EnemyAggroSliderOdds = OptionsRunDict["Aggressive Enemies"]["spinBoxVal"].get()
+    EnemyAggroSliderOdds = OptionsRunDict["Enemy Aggro"]["spinBoxVal"].get()
     NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
     if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive
         with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
@@ -478,7 +478,7 @@ def EnemyAggroProportion(OptionsRunDict):
             json.dump(data, file, indent=2, ensure_ascii=False)
 
 def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict): #when enemy rando is on and aggro rando is on
-    EnemyAggroSliderOdds = OptionsRunDict["Aggressive Enemies"]["spinBoxVal"].get()
+    EnemyAggroSliderOdds = OptionsRunDict["Enemy Aggro"]["spinBoxVal"].get()
     with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:

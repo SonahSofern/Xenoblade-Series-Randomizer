@@ -19,7 +19,7 @@ def RandomizeAuxCoreEnhancements():
                 for Aux in enhanceFile["rows"]:
                     skillNameID = Aux["Name"]
                     enhancement = random.choice(ValidSkills)
-                    ValidSkills.remove(enhancement) # Need full pool
+                    # ValidSkills.remove(enhancement) # Need full pool
                     for skillName in auxNameFile["rows"]:  
                         if skillName["$id"] == skillNameID:    
                             skillName["name"] = f"{enhancement.name} Core"
