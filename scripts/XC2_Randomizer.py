@@ -1,8 +1,11 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, PermalinkManagement, Helper, CustomAccessories
+import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, PermalinkManagement, Helper, Accessories, SkillTrees, Enhancements
 import GUISettings
+import WeaponChips as WPChips
+import AuxCores as AuxCr
+import Accessories as Accs
 from IDs import *
 from Cosmetics import *
 from UI_Colors import *
@@ -211,27 +214,22 @@ def Options():
     
     # General
     GenStandardOption("Pouch Item Shops", TabGeneral, "Randomizes Pouch Items in Pouch Item Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), PouchItems)])
-    GenStandardOption("Accessory Shops", TabGeneral, "Randomizes Accessories in Accessory Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(Accessories)-set([1])),[])], ["Custom Accessories",[lambda: CustomAccessories.CreateCustomAccessories(), lambda: IDs.ValidReplacements.extend(IDs.CustomAccessoriesIds)]])
-    GenStandardOption("Weapon Chip Shops", TabGeneral, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)], ["Custom Chips",[]])
+    GenStandardOption("Accessory Shops", TabGeneral, "Randomizes Accessories in Accessory Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(Accessories)-set([1])),[Accessories])])
+    GenStandardOption("Weapon Chip Shops", TabGeneral, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)])
     GenStandardOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + WeaponChips + AuxCores + CoreCrystals + RefinedAuxCores,[])], ["Accessories", [lambda: IDs.ValidReplacements.extend(Accessories)] ,"Weapon Chips", [lambda: IDs.ValidReplacements.extend(WeaponChips)], "Aux Cores", [lambda: IDs.ValidReplacements.extend(AuxCores)], "Refined Aux Cores", [lambda: IDs.ValidReplacements.extend(RefinedAuxCores)], "Core Crystals", [lambda: IDs.ValidReplacements.extend(CoreCrystals)], "Deeds", [lambda: IDs.ValidReplacements.extend(Deeds)], "Collection Point Materials", [lambda: IDs.ValidReplacements.extend(CollectionPointMaterials)]])
     GenStandardOption("Collection Points", TabGeneral, "Randomizes the contents of Collection Points", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID"], list(set(CollectionPointMaterials) - set([30019])), [])], ["Accessories", [lambda: IDs.ValidReplacements.extend(Accessories)] ,"Weapon Chips", [lambda: IDs.ValidReplacements.extend(WeaponChips)], "Aux Cores", [lambda: IDs.ValidReplacements.extend(AuxCores)],"Refined Aux Cores", [lambda: IDs.ValidReplacements.extend(RefinedAuxCores)], "Core Crystals", [lambda: IDs.ValidReplacements.extend(CoreCrystals)], "Deeds", [lambda: IDs.ValidReplacements.extend(Deeds)], "Collection Point Materials", [lambda: IDs.ValidReplacements.extend(CollectionPointMaterials)]])
 
     # Drivers
     GenStandardOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, [], InvalidTargetIDs=AutoAttacks)],["Debuffs", [lambda: IDs.ValidReplacements.extend(list(set(ArtDebuffs)-set([21])))],"Buffs",[lambda: IDs.ValidReplacements.extend(ArtBuffs)], "Doom", [lambda: IDs.ValidReplacements.extend([21])]], Spinbox)
-    # GenOption("Driver Art Distances", TabDrivers, "Randomizes how far away you can cast an art", ["common/BTL_Arts_Dr.json"], ["Distance"], Helper.inclRange(0, 20), Helper.inclRange(1,20)) Nothing wrong with this just kinda niche/silly
-    # GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes all driver's skill trees", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Skill_Dr_Table01.json", "common/BTL_Skill_Dr_Table02.json", "common/BTL_Skill_Dr_Table03.json", "common/BTL_Skill_Dr_Table04.json", "common/BTL_Skill_Dr_Table05.json", "common/BTL_Skill_Dr_Table06.json"], ["SkillID"], DriverSkillTrees, DriverSkillTrees)]) Commenting out for first release dont want to bother making mutually exclusive widgets
-    GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees", [lambda: SkillTreeAdjustments.BalancingSkillTreeRando(OptionDictionary)], ["Custom Skills", []])
+    GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees", [lambda: SkillTrees.RandomizeSkillEnhancements()])
+    GenStandardOption("Driver Accessories", TabDrivers, "Randomizes effects of Accessories", [lambda: Accs.RandomizeAccessoryEnhancements()])
     GenStandardOption("Driver Art Reactions", TabDrivers, "Randomizes each hit of an art to have a reaction", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)],["Clear Vanilla Reactions", [lambda: Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)]], optionType=Spinbox) # we want id numbers no edit the 1/6 react stuff
-    GenStandardOption("Driver Art Animation Speeds", TabDrivers, "Randomizes a Driver's art animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)], optionType=Spinbox)
-    # GenStandardOption("Driver Starting Accessory", TabDrivers, "Randomizes what accessory your drivers begin the game with", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Dr.json"], ["DefAcce"], Accessories + [0], Accessories + [0])], ["Remove All Starting Accessories", [lambda: IDs.InvalidReplacements.extend(Accessories)]])
-    
-
+    GenStandardOption("Driver Art Animation Speeds", TabDrivers, "Randomizes a Driver's art animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)], optionType=Spinbox)    
     
     # Blades
+    GenStandardOption("Blade Aux Cores", TabBlades, "Randomizes a Blade's Aux Core enhancement", [lambda: AuxCr.RandomizeAuxCoreEnhancements()])
     GenStandardOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)], optionType=Spinbox)
-    # GenStandardOption("Blade Special Damage Types", TabBlades, "Randomizes whether a Blade's special deals Physical Damage or Ether Damage", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Bl.json"], ["ArtsType"], [1, 2], [1,2])])
     GenStandardOption("Blade Special Buttons", TabBlades, "Randomizes what button a special uses for its button challenge", [lambda: JSONParser.ChangeJSONFile(["common/MNU_BtnChallenge2.json"], Helper.StartsWith("BtnType", 1, 3), ButtonCombos, ButtonCombos)])
-    GenStandardOption("Blade Elements", TabBlades, "Randomizes a Blade's element", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["Atr"], Helper.InclRange(1,8), Helper.InclRange(1,8))],optionType=Spinbox)
     GenStandardOption("Blade Battle Skills", TabBlades, "Randomizes a Blade's battle (yellow) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), list(set(BladeBattleSkills) - set([268, 8, 9])), list(set(BladeBattleSkills) - set([268, 267,266,265,144,143,143, 8, 9])) )])
     GenStandardOption("Blade Field Skills", TabBlades, "Randomizes a Blade's field (green) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("FSkill", 1, 3), BladeFieldSkills, list(set(BladeFieldSkills) - set([1,6])), IgnoreID_AND_Key=[[1001, "FSkill1"],[1001, "FSkill3"],[1005, "FSkill3"], [1008, "FSkill2"]]) ])
     # GenStandardOption("Blade Specials", TabBlades, "Randomizes blades special (red) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials,  list(set(BladeSpecials) - set([215])))]) works okay, but animations dont connect feels mid
@@ -240,15 +238,16 @@ def Options():
     GenStandardOption("Blade Aux Core Slots", TabBlades, "Randomizes a Blade's maximum Aux Core Slots", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), IDs.BladeAuxCoreSlotDistribution)])
     GenStandardOption("Blade Defenses", TabBlades, "Randomizes a Blade's Physical and Ether Defense", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.InclRange(0,100), BladeDefenseDistribution)],optionType=Spinbox)
     GenStandardOption("Blade Mods", TabBlades, "Randomizes a Blade's Stat Modifiers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.InclRange(1,100), BladeModDistribution)])
+    GenStandardOption("Blade Weapons", TabBlades, "Randomizes a Blade's Weapons stats from chips", [],["Auto Attack",[lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["Damage"],Helper.InclRange(0,1298), Helper.InclRange(1,900) + Helper.InclRange(1000,1100) + Helper.InclRange(1250,1300))],"Crit Rate",[lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["CriRate"],Helper.InclRange(0,100), Helper.InclRange(1,50))],"Guard Rate",[lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["GuardRate"],Helper.InclRange(0,100), Helper.InclRange(1,60))],"Enhancements",[lambda: WPChips.RandomizeWeaponEnhancements()]])
+    GenStandardOption("Blade Elements", TabBlades, "Randomizes a Blade's element", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["Atr"], Helper.InclRange(1,8), Helper.InclRange(1,8))],optionType=Spinbox)
 
     
     
     # Enemies
     GenStandardOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", [lambda: EnemyRandoLogic.EnemyLogic(OptionDictionary)],["Story Bosses", [], "Quest Enemies", [], "Unique Monsters", [], "Superbosses", [], "Normal Enemies", [], "Mix Enemies Between Types", [], "Keep All Enemy Levels", [], "Keep Story Boss Levels", [], "Keep Quest Enemy Levels", []])
     GenStandardOption("Enemy Drops", TabEnemies, "Randomizes enemy drops", [lambda: JSONParser.ChangeJSONFile(["common/BTL_EnDropItem.json"], Helper.StartsWith("ItemID", 1, 8), AuxCores+ RefinedAuxCores + Accessories + WeaponChips, [])], ["Accessories", [lambda: IDs.ValidReplacements.extend(Accessories)] ,"Weapon Chips", [lambda: IDs.ValidReplacements.extend(WeaponChips)], "Aux Cores", [lambda: IDs.ValidReplacements.extend(AuxCores)],"Refined Aux Cores", [lambda: IDs.ValidReplacements.extend(RefinedAuxCores)], "Core Crystals", [lambda: IDs.ValidReplacements.extend(CoreCrystals)], "Deeds", [lambda: IDs.ValidReplacements.extend(Deeds)], "Collection Point Materials", [lambda: IDs.ValidReplacements.extend(CollectionPointMaterials)]], optionType=Spinbox)
-    GenStandardOption("Aggressive Enemies", TabEnemies, "The percentage of all non-boss and non-quest enemies that will aggro the player", [lambda: EnemyRandoLogic.EnemyAggroProportion(OptionDictionary)],optionType=Spinbox)
+    GenStandardOption("Enemy Aggro", TabEnemies, "The percentage of all non-boss and non-quest enemies that will aggro the player", [lambda: EnemyRandoLogic.EnemyAggroProportion(OptionDictionary)],optionType=Spinbox)
     GenStandardOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", [lambda: JSONParser.ChangeJSONFile(["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.InclRange(0,100), Helper.InclRange(0,100) + Helper.InclRange(250,255))],optionType=Spinbox)
-    #GenOption("Enemy Level Ranges", TabEnemies, "Randomizes enemy level ranges", Helper.InsertHelper(2, 1,90,"maa_FLD_EnemyPop.json", "common_gmk/"), ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], Helper.inclRange(-100,100), Helper.inclRange(-30,30)) Defunct with alex's enemy rando
     # GenStandardOption("Enemy Rage", TabEnemies, "Randomizes the effects of enemy enraged states", ["common/BTL_Aura"])
 
 
@@ -261,12 +260,8 @@ def Options():
     #GenStandardOption("Beta Stuff", TabMisc, "Stuff still in testing", [lambda: TestingStuff.Beta(OptionDictionary)])
 
     # QOL
-    # GenStandardOption("Deed Max Values", TabQOL, "Increases the maximum value of deed effects")
     GenStandardOption("Shortened Tutorial", TabQOL, "Shortens/removes tutorials", [lambda: TutorialShortening.ShortenedTutorial(OptionDictionary)])
     # GenStandardOption("Fast Skill Trees", TabQOL, "Makes Blade Skill Trees easy to complete", [lambda: CoreCrystalAdjustments.FieldSkillLevelAdjustment()])
-    # GenStandardOption("Guaranteed Rare Blades", TabQOL, "Puts Rare Blades in chests instead of the Gacha system", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()])
-    GenStandardOption("Early Arts Cancel", TabQOL, "Puts Arts Cancel skills into the first Driver Skill Tree slot", [lambda: SkillTreeAdjustments.Tier1ArtsCancel(OptionDictionary)])
-    GenStandardOption("Treasure Chest Visibility", TabQOL, "Increases the range you can see treasure chests from", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["msgVisible", "msgdigVisible"], Helper.InclRange(0,200), [255])])
     GenStandardOption("Freely Engage Blades", TabQOL, "Allows blades to be freely engaged by all valid drivers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["FreeEngage"], [0], [1], [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1075, 1076, 1103])])
     GenStandardOption("Easy Field Skill Trees", TabQOL, "Maxes out all Blade field skills",  [lambda: CoreCrystalAdjustments.FieldSkillLevelAdjustment()])
     GenStandardOption("Everlasting Pouch Items", TabQOL, "Makes Pouch Items last forever", [lambda: JSONParser.ChangeJSONFile(["common/ITM_FavoriteList.json"],["Time"], Helper.InclRange(0,255), [6099])])
@@ -289,37 +284,8 @@ def Options():
     GenStandardOption("Race Mode", TabRaceMode, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(OptionDictionary), RaceMode.SeedHash], ["Zohar Fragment Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", [], "Guaranteed Rare Blades", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()]])
 
     # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
-    GenStandardOption("Blade Names", TabBlades, "Randomizes a Blade's name", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
-
-
-    # # In-Game Settings
-    # GenHeader("Camera Settings",TabSettings, None)
-    # GenStandardOption("Invert up/down", TabSettings, "Toggle inversion of up/down for camera controls", [],[])
-    # GenStandardOption("Invert left/right", TabSettings, "Toggle inversion of left/right for camera controls", [],[])
-    # GenStandardOption("Auto camera response speed", TabSettings, "Adjust the response times for the automatically controlled camera", [],[],Spinbox)
-    # GenStandardOption("Camera reset response speed", TabSettings, "Adjust the length of time it takes to reset the camera's position", [],[],Spinbox)
-    # GenStandardOption("Turn speed", TabSettings, "Adjust the turning speed of the manual camera", [],[],Spinbox)
-    # GenStandardOption("Zoom speed", TabSettings, "Adjust the speed of the camera's zoom", [],[],Spinbox)
-    # GenStandardOption("Gradient Correction", TabSettings, "Adjust the automatic behavior of the camera when traversing gradients", [],[])
-    # GenHeader("Sound Settings",TabSettings, None)    
-    # GenStandardOption("Subtitles", TabSettings, "Toggle subtitles on or off", [],[])
-    # GenStandardOption("Cutscene voice volume", TabSettings, "Adjust voice volume during cutscenes", [],[], Spinbox)
-    # GenStandardOption("Game BGM volume", TabSettings, "Adjust background music volume during the game", [],[], Spinbox)
-    # GenStandardOption("Game SE volume", TabSettings, "Adjust volume of sound effects heard during the game", [],[], Spinbox)
-    # GenStandardOption("Game voice volume", TabSettings, "Adjust volume of voices heard during the game", [],[], Spinbox)
-    # GenStandardOption("Battle Narrator volume", TabSettings, "Adjust volume of the battle Narrator (not character battle voices)", [],[], Spinbox)
-    # GenStandardOption("Environment volume", TabSettings, "Adjust volume of environmental sounds (such as rain) heard during the game", [],[], Spinbox)
-    # GenStandardOption("System volume", TabSettings, "Adjust volume of system sounds heard during the game", [],[], Spinbox)
-    # GenHeader("Screen Settings",TabSettings, None)        
-    # GenStandardOption("Screen brightness", TabSettings, "Adjust screen brightness", [],[], Spinbox)
-    # GenHeader("Game Settings",TabSettings, None)
-    # GenStandardOption("Difficulty level", TabSettings, "Default Difficulty", [],["Easy",[],"Normal",[],"Bringer of Chaos",[], "Custom",[]])
-    # GenStandardOption("Auto-battle", TabSettings, "Toggle auto-battle", [],[])
-    # GenStandardOption("Automate Special Button Challenges", TabSettings, "Toggle automatic success for button challenge inputs during Specials", [],[])
-    # GenStandardOption("Enemy Aggression", TabSettings, "Toggle whether foes pick a fight (exc.salvage, unique, boss, and quest foes)", [],[])
-    # GenStandardOption("Special BGM", TabSettings, "When enabled, special battle music will play with certain Blades in the party", [],[])
-
-    # Nonstandard Functions
+    # GenStandardOption("Blade Names", TabBlades, "Randomizes a Blade's name", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
+    
 Options()
 
 def Randomize():
@@ -382,6 +348,7 @@ def Randomize():
     threading.Thread(target=ThreadedRandomize).start()
 
 def RunOptions():
+    Enhancements.RunCustomEnhancements() # Figure out how to not run this here just dont have time rn
     for option in OptionDictionary.values():
         if (option["optionTypeVal"].get()): # checks main option input
             IDs.CurrentSliderOdds = option["spinBoxVal"].get()

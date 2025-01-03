@@ -53,9 +53,9 @@ def ShortenedTutorial(OptionsRunDict):
                 row["ScenarioFlagMax"] = 1012
                 break
             break
-    file.seek(0)
-    file.truncate()
-    json.dump(data, file, indent=2, ensure_ascii=False)
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
     with open("./_internal/JsonOutputs/common/FLD_QuestListNormal.json", 'r+', encoding='utf-8') as file: #shortens tutorials
         data = json.load(file)
         for row in data["rows"]:
