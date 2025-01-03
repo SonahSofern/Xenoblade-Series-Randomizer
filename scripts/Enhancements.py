@@ -33,6 +33,7 @@ class Enhancement:
         self.name = Name
         self.EnhanceEffect = Enhancement
         self.Caption = Caption
+        self.Caption2 = Caption
         self.Param1 = Param1
         self.Param2 = Param2
         self.Description = Description
