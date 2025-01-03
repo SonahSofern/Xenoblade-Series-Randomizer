@@ -52,7 +52,23 @@ def ShortenedTutorial(OptionsRunDict):
                 row["ScenarioFlagMin"] = 1008
                 row["ScenarioFlagMax"] = 1012
                 break
-            break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: # shortens opening section
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 7: #if we go to argentum
+                row["NextQuestA"] = 9 # then go explore argentum
+            if row["$id"] == 10: #if we go to bana's room
+                row["NextQuestA"] = 12 # then complete the big prep quest
+            if row["$id"] == 13: # if we rest at lemour inn (this seems to make the flags go away that were keeping you from shopping and going further upstairs in argentum)
+                row["NextQuestA"] = 15 # then talk to spraine
+            if row["$id"] == 15: #talk to spraine
+                if not RaceModeBox:
+                    row["NextQuestA"] = 17 #sets next quest to be to go to the top of the Maelstrom
+                    break
+                break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
