@@ -1,14 +1,14 @@
 C:/Users/benja/Desktop/XC2_Randomizer/bdat
 C:/Users/benja/AppData/Roaming/yuzu/load/0100E95004039001/Randomizer/romfs/bdat
-MTAxAFNldmVyQmVmcmllbmRzTWlsdG9uAAAAAAAAAAAAAAAAAAAAAAAyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMg==
-SeverBefriendsMilton
+MTAxAFJhcXVyYVN0cmlrZXNBa2hvcwBAAAAAAAAAAAAAAAAAAAAAMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjI=
+RaquraStrikesAkhos
 False
 False
 False
 False
 False
 False
-False
+True
 False
 False
 False

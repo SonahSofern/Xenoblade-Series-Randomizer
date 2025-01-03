@@ -14,7 +14,7 @@ def RandomizeWeaponEnhancements():
             for Wep in enhanceFile["rows"]:
                 skillNameID = Wep["Name"]
                 enhancement = random.choice(ValidSkills)
-                # ValidSkills.remove(skill) # Need full pool
+                ValidSkills.remove(enhancement) # Need full pool
                 for skillName in skillNameFile["rows"]:  
                     if skillName["$id"] == skillNameID:    
                         oldName = skillName["name"]

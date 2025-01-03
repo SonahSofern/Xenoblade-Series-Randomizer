@@ -27,17 +27,16 @@ class Enhancement:
     Caption = 0
     Caption2 = 0
     Description = ""
-    Rarity = 0
+    Rarity = Common
     ReverseOdds = False
     def __init__(self,Name, Enhancement, Caption = 0,  Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReverseOdds = False):
-        self.Rarity = Common
-        self.EnhanceEffect = Enhancement
         self.name = Name
-        self.ReverseOdds = ReverseOdds
+        self.EnhanceEffect = Enhancement
         self.Caption = Caption
         self.Param1 = Param1
         self.Param2 = Param2
         self.Description = Description
+        self.ReverseOdds = ReverseOdds
         EnhanceClassList.append(self)
     def RollEnhancement(self,ID):
         self.Rarity = random.choice([Common, Rare, Legendary])
