@@ -3,7 +3,7 @@ from Enhancements import *
 
 
 def RandomizeAuxCoreEnhancements():
-    InvalidSkillEnhancements = [EyeOfJustice]
+    InvalidSkillEnhancements = [ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, EvadeDrainHp, EvadeDriverArt,ArtDamageHeal]
 
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
 

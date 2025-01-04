@@ -29,7 +29,7 @@ class Enhancement:
     Description = ""
     Rarity = Common
     ReverseOdds = False
-    def __init__(self,Name, Enhancement, Caption = 0,  Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReverseOdds = False):
+    def __init__(self,Name, Enhancement, Caption,  Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReverseOdds = False):
         self.name = Name
         self.EnhanceEffect = Enhancement
         self.Caption = Caption
@@ -47,7 +47,9 @@ class Enhancement:
                 Pstep = 1
             else:
                 Pstep = 5
-            if len(ParameterChoices) == 1:
+            if ParameterChoices == [0,0,0,0]:
+                Parameter = 0
+            elif len(ParameterChoices) == 1:
                 Parameter = ParameterChoices[0]
             else:
                 try:
@@ -71,16 +73,18 @@ class Enhancement:
 
 
         if self.Description != "":
-            JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"],[self.name], ["name"], self.Description)
+            JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"],[self.Caption], ["name"], self.Description)
 
         EnhanceEffectsDict = {
             "$id": ID,
             "EnhanceEffect": self.EnhanceEffect,
-            "Param1": SetParams(self.Param1),
-            "Param2": SetParams(self.Param2),
+            "Param1": float(f"{SetParams(self.Param1)}.0"),
+            "Param2": float(f"{SetParams(self.Param2)}.0"),
             "Caption": self.Caption,
             "Caption2": self.Caption
         }
+        if self.name == "Katana":
+            print("Got One")
         EnhanceEffectsList.append([EnhanceEffectsDict])
         
 def RunCustomEnhancements():
@@ -88,7 +92,7 @@ def RunCustomEnhancements():
     for enhancement in EnhanceClassList:
         enhancement.RollEnhancement(ID)
         ID +=1
-    JSONParser.ChangeJSONFile(["common/BTL_EnhanceEff.json"],["Param"], Helper.InclRange(1,1000), [9999])
+    JSONParser.ChangeJSONFile(["common/BTL_EnhanceEff.json"],["Param"], Helper.InclRange(1,1000), [1000], [241, 250, 245,54,143,257,259])
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randrange(1,51)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randrange(30,71)) # Healing with low HP
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randrange(10,61)) # Healing with low HP
@@ -289,7 +293,7 @@ CancelWindowUp = Enhancement("Canceller",191, 201, Medium)
 RestoreHitDamageToParty = Enhancement("Omnipotent Vamp",192, 202, Baby)
 AddBufferTimeSwitchingToComboBlade = Enhancement("Buffer",193, 203, Medium)
 PartyDamageMaxAffinity = Enhancement("Partygoer",194, 204, Mini)
-AegisDriver = Enhancement("Dream",195, 205, Medium, Small)
+AegisDriver = Enhancement("Dream",195, 205)
 AegisParty = Enhancement("Dream",196, 206)
 ReduceFireDamage = Enhancement("Fire Res",58, 207, [1], Medium)
 ReduceWaterDamage = Enhancement("Water Res",58, 208, [2], Medium)
@@ -338,7 +342,7 @@ ShieldHammerPowerUp = Enhancement("Shield",119, 266, [13], Small)
 ChromaKatanaPowerUp = Enhancement("Katana",119, 267, [14], Small)
 BitballPowerUp = Enhancement("Bitball",119, 268, [15], Small)
 KnuckleClawsPowerUp = Enhancement("Claws",119, 269, [16], Small)
-HPGuardArtRechargeAttacked = Enhancement("Kinetic Reversal",197,270, Mini)
+HPGuardArtRechargeAttacked = Enhancement("Reversal",197,270, Mini)
 Jamming = Enhancement("Jamming",198, 271, Medium)
 XStartBattle = Enhancement("X Start",113, 272, [0])
 YStartBattle = Enhancement("Y Start",113, 274, [1])
@@ -350,10 +354,11 @@ DriverShackRes = Enhancement("Free",218, 281, Medium)
 BladeShackRes = Enhancement("Free",219, 282, Medium)
 BurstDestroyAnotherOrb = Enhancement("Splash",226, 283)
 HpPotChanceFor2 = Enhancement("Potted",227, 284, Medium)
-DestroyOrbOpposingElement = Enhancement("ElementX",228, 285)
+DestroyOrbOpposingElement = Enhancement("Element X",228, 285)
 TargetNearbyOrbsChainAttack = Enhancement("Splash",229, 286, Medium)
 TargetDamagedNonOpposingElement = Enhancement("Splash",230, 287)
 StenchRes = Enhancement("Anosmic",231, 288, Medium)
+DamageAndEvadeAffinityMax = Enhancement("Counterattack",269, 305, Medium, Mini)
 HPPotOnHitAgain = Enhancement("Potter",227, 289)
 BladeComboOrbAdder = Enhancement("Orbs",234,290, Medium)
 EvadeDriverArt = Enhancement("Evader",32, 292)
@@ -364,9 +369,8 @@ LV4EachUseDmageUp = Enhancement("Glow",241, 297, Large)
 Vision = Enhancement("Monado",242, 298, Medium, ReverseOdds=True)
 AwakenPurge = Enhancement("Sleepy",243, 299, Medium)
 PartyCritMaxAffinity = Enhancement("Critical",244, 300, Small)
-DamageUpPerCrit = Enhancement("Exploit",245, 301, Mini)
+DamageUpPerCrit = Enhancement("Exploit",245, 301, Baby, Baby)
 RechargeOnEvade = Enhancement("Flicker",248, 304, Baby)
-DamageAndEvadeAffinityMax = Enhancement("Counterattack",269, 305, Medium, Mini)
 PartyLaunchDamageUp = Enhancement("Sky High",249, 306, Mega)
 PotionPickupDamageUp = Enhancement("Drunkard",250, 307, Small)
 ItemCollectionRange = Enhancement("Collector",251, 308, Mega)
