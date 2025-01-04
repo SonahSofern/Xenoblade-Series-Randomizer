@@ -210,8 +210,6 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     stateSetList.append(StateSet)
     
     
-    
-    
 def Options():
     # DebugLog.CreateDebugLog(OptionDictionary, Version, randoSeedEntry.get())
     

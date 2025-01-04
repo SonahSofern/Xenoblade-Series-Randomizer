@@ -67,7 +67,6 @@ def ShortenedTutorial(OptionsRunDict):
             if row["$id"] == 15: #talk to spraine
                 if not RaceModeBox:
                     row["NextQuestA"] = 17 #sets next quest to be to go to the top of the Maelstrom
-                    break
                 break
         file.seek(0)
         file.truncate()

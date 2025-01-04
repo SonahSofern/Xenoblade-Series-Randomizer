@@ -204,7 +204,10 @@ def RaceModeChanging(OptionsRunDict):
                 row["scenarioFlag"] = 8001
                 row["nextID"] = 10369
                 row["nextIDtheater"] = 10369
-            if row["$id"] == 10369: # script that adds Jin to the party (there would be 6 chars, breaking the menus, also possibly causing SP dupe bug)
+            if row["$id"] == 10370:
+                row["scriptName"] = "chapt08"
+                row["scriptStartId"] = 6
+            if row["$id"] == 10371:
                 row["scriptName"] = ""
                 row["scriptStartId"] = 0
             if row["$id"] == 10411: # fix for world tree chapter 9 transition
