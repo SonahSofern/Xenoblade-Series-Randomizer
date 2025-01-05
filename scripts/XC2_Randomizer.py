@@ -224,7 +224,7 @@ def Options():
 
     # Drivers
     GenStandardOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, [], InvalidTargetIDs=AutoAttacks)],["Debuffs", [lambda: IDs.ValidReplacements.extend(list(set(ArtDebuffs)-set([21])))],"Buffs",[lambda: IDs.ValidReplacements.extend(ArtBuffs)], "Doom", [lambda: IDs.ValidReplacements.extend([21])]], Spinbox)
-    GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees", [lambda: SkillTrees.RandomizeSkillEnhancements()])
+    GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees", [lambda: SkillTrees.RandomizeSkillEnhancements(), lambda: SkillTrees.ArtsCancelCost()])
     GenStandardOption("Driver Accessories", TabDrivers, "Randomizes effects of Accessories", [lambda: Accs.RandomizeAccessoryEnhancements()])
     GenStandardOption("Driver Art Reaction", TabDrivers, "Randomizes art reactions (break, blowdown etc.)", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ReAct1"], HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)],["Clear Vanilla Reactions", [lambda: Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)],"Multiple Reactions",[lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)]], optionType=Spinbox)
     GenStandardOption("Driver Art Animation Speeds", TabDrivers, "Randomizes a Driver's art animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)], optionType=Spinbox)    
@@ -310,9 +310,9 @@ def Randomize():
 
         try:
         # Unpacks BDATs
-            subprocess.run(f"{bdat_path} extract {fileEntryVar.get()}/common.bdat -o {JsonOutput} -f json --pretty", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-            subprocess.run(f"{bdat_path} extract {fileEntryVar.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty", check= True, creationflags=subprocess.CREATE_NO_WINDOW)
-            subprocess.run(f"{bdat_path} extract {fileEntryVar.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            subprocess.run(f"{bdat_path} extract {fileEntryVar.get().strip()}/common.bdat -o {JsonOutput} -f json --pretty", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            subprocess.run(f"{bdat_path} extract {fileEntryVar.get().strip()}/common_gmk.bdat -o {JsonOutput} -f json --pretty", check= True, creationflags=subprocess.CREATE_NO_WINDOW)
+            subprocess.run(f"{bdat_path} extract {fileEntryVar.get().strip()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
         except:
             print(f"{traceback.format_exc()}") # shows the full error
             randoProgressDisplay.config(text="Invalid Input Directory")
@@ -327,11 +327,11 @@ def Randomize():
 
         try:
             # Packs BDATs
-            subprocess.run(f"{bdat_path} pack {JsonOutput} -o {outputDirVar.get()} -f json", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            subprocess.run(f"{bdat_path} pack {JsonOutput} -o {outputDirVar.get().strip()} -f json", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
             # Outputs common_ms in the correct file structure
-            os.makedirs(f"{outputDirVar.get()}/gb", exist_ok=True)
-            shutil.move(f"{outputDirVar.get()}/common_ms.bdat", f"{outputDirVar.get()}/gb/common_ms.bdat")
+            os.makedirs(f"{outputDirVar.get().strip()}/gb", exist_ok=True)
+            shutil.move(f"{outputDirVar.get().strip()}/common_ms.bdat", f"{outputDirVar.get().strip()}/gb/common_ms.bdat")
 
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
@@ -414,7 +414,7 @@ SavedOptions.loadData(EveryObjectToSaveAndLoad, SavedOptionsFileName)
 InteractableStateSet()
 
 # Permalink Options/Variables
-permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame" )
+permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame")
 permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth, textvariable=permalinkVar)
 CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
 permalinkVar.set(CompressedPermalink)
