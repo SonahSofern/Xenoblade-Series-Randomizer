@@ -3,7 +3,7 @@ from Enhancements import *
 
 
 def RandomizeAuxCoreEnhancements():
-    InvalidSkillEnhancements = [EyeOfJustice]
+    InvalidSkillEnhancements = [ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, EvadeDrainHp, EvadeDriverArt,ArtDamageHeal]
 
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
 
@@ -19,11 +19,14 @@ def RandomizeAuxCoreEnhancements():
                 for Aux in enhanceFile["rows"]:
                     skillNameID = Aux["Name"]
                     enhancement = random.choice(ValidSkills)
+                    enhancement.RollEnhancement()
                     # ValidSkills.remove(enhancement) # Need full pool
                     for skillName in auxNameFile["rows"]:  
                         if skillName["$id"] == skillNameID:    
                             skillName["name"] = f"{enhancement.name} Core"
+                            break
                     Aux["Enhance"] = enhancement.id
+                    Aux["Rarity"] = enhancement.Rarity
                     
                     
                 poppiAuxEnhancements.seek(0)

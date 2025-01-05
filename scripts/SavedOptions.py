@@ -1,4 +1,5 @@
 saveFolderName = "SaveData"
+import os
 
 def saveData(DataList, Filename):
     with open(f"{saveFolderName}/{Filename}", 'w') as file:
@@ -11,6 +12,7 @@ def saveData(DataList, Filename):
             
 def loadData(DataList, Filename):
     try:
+        os.makedirs(saveFolderName, exist_ok=True)
         with open(f"{saveFolderName}/{Filename}", 'a+') as file:
             file.seek(0)
             savedLines = file.readlines()

@@ -17,7 +17,8 @@ RootsForStyling = []
 AuxCores = Helper.InclRange(15001, 15406)
 RefinedAuxCores = Helper.InclRange(17001, 17424)
 WeaponChips = Helper.InclRange(10001, 10060)
-CoreCrystals = Helper.InclRange(45001,45057)
+AllCoreCrystals = Helper.InclRange(45001,45057)
+CoreCrystals = [45001, 45002,45003,45004, 45005,45006,45007,45008,45009,45011,45012,45013,45016,45056,45057]
 Accessories = [x for x in Helper.InclRange(1,687) if x not in Helper.InclRange(448,455)]
 PreciousItems = Helper.InclRange(25001, 25499)
 PouchItems =  [x for x in Helper.InclRange(40001,40428) if x not in ([40106, 40107, 40280, 40282, 40284, 40285, 40300, 40387] + Helper.InclRange(40350, 40363) + Helper.InclRange(40389, 40402))]   
@@ -25,7 +26,7 @@ AutoAttacks = [1, 2, 3, 8, 9, 10, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26
 ArtBuffs = [0,1,2,3,4,5,6,7,8,9,16,17]
 BladeArts = [0,1,2,3,4,5,6,7,8,9]
 ArtDebuffs = [0,11,12,13,14,15,21,23,24,25,30,35]
-VanillaEnhancements = Helper.InclRange(1,3895)
+VanillaEnhancements = Helper.InclRange(1,3894)
 
 
 DriverSkillTrees = Helper.InclRange(1,270)

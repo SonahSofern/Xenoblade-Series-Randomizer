@@ -174,7 +174,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     checkButtonVar = var
     
     # Description Label
-    optionDesc = ttk.Label(optionPanel, text=description, anchor="w", width=55, wraplength=500)
+    optionDesc = ttk.Label(optionPanel, text=description, anchor="w", width=60, wraplength=650)
     optionDesc.grid(row=rowIncrement, column=1, sticky="w", padx=0)
     
     # % Boxes
@@ -222,9 +222,9 @@ def Options():
 
     # Drivers
     GenStandardOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, [], InvalidTargetIDs=AutoAttacks)],["Debuffs", [lambda: IDs.ValidReplacements.extend(list(set(ArtDebuffs)-set([21])))],"Buffs",[lambda: IDs.ValidReplacements.extend(ArtBuffs)], "Doom", [lambda: IDs.ValidReplacements.extend([21])]], Spinbox)
-    GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees", [lambda: SkillTrees.RandomizeSkillEnhancements()])
+    GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees", [lambda: SkillTrees.RandomizeSkillEnhancements(), lambda: SkillTrees.ArtsCancelCost()])
     GenStandardOption("Driver Accessories", TabDrivers, "Randomizes effects of Accessories", [lambda: Accs.RandomizeAccessoryEnhancements()])
-    GenStandardOption("Driver Art Reaction", TabDrivers, "Randomizes art reactions (break, topple, blowdown etc.)", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ReAct1"], HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)],["Clear Vanilla Reactions", [lambda: Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)],"Multiple Reactions",[lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)]], optionType=Spinbox)
+    GenStandardOption("Driver Art Reaction", TabDrivers, "Randomizes art reactions (break, blowdown etc.)", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ReAct1"], HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)],["Clear Vanilla Reactions", [lambda: Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)],"Multiple Reactions",[lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)]], optionType=Spinbox)
     GenStandardOption("Driver Art Animation Speeds", TabDrivers, "Randomizes a Driver's art animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)], optionType=Spinbox)    
     GenStandardOption("Driver Art Cooldowns", TabDrivers, "Randomizes the cooldown of each driver art", [lambda: CustomArts.RandomArtCooldowns()])
     GenStandardOption("Driver Art Damage Ratios", TabDrivers, "Randomizes the damage ratio of each driver art", [lambda: CustomArts.RandomArtDamageRatios()])
@@ -234,7 +234,7 @@ def Options():
     GenStandardOption("Blade Aux Cores", TabBlades, "Randomizes a Blade's Aux Core enhancement", [lambda: AuxCr.RandomizeAuxCoreEnhancements()])
     GenStandardOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)], optionType=Spinbox)
     GenStandardOption("Blade Special Buttons", TabBlades, "Randomizes what button a special uses for its button challenge", [lambda: JSONParser.ChangeJSONFile(["common/MNU_BtnChallenge2.json"], Helper.StartsWith("BtnType", 1, 3), ButtonCombos, ButtonCombos)])
-    GenStandardOption("Blade Battle Skills", TabBlades, "Randomizes a Blade's battle (yellow) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), list(set(BladeBattleSkills) - set([268, 8, 9])), list(set(BladeBattleSkills) - set([268, 267,266,265,144,143,143, 8, 9])) )])
+    GenStandardOption("Blade Battle Skills", TabBlades, "Randomizes a Blade's battle (yellow) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), list(set(BladeBattleSkills) - set([268, 8, 9])), list(set(BladeBattleSkills) - set([268, 267,266,265,144,142,143, 8, 9])) )])
     GenStandardOption("Blade Field Skills", TabBlades, "Randomizes a Blade's field (green) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("FSkill", 1, 3), BladeFieldSkills, list(set(BladeFieldSkills) - set([1,6])), IgnoreID_AND_Key=[[1001, "FSkill1"],[1001, "FSkill3"],[1005, "FSkill3"], [1008, "FSkill2"]]) ])
     # GenStandardOption("Blade Specials", TabBlades, "Randomizes blades special (red) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials,  list(set(BladeSpecials) - set([215])))]) works okay, but animations dont connect feels mid
     GenStandardOption("Blade Weapon Class", TabBlades, "Randomizes which role a weapon type counts as (ATK, TNK, HLR)", [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpnType.json"], ["Role"], Helper.InclRange(1,3), WeaponTypeRoles)])
@@ -274,7 +274,7 @@ def Options():
     GenStandardOption("Screenshot Mode", TabQOL, "Removes most UI for screenshots", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[88], ["sheet05", "sheet03", "sheet04"], ""), lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[86], ["sheet02", "sheet03"], "")])
     
     # Funny
-    GenStandardOption("Projectile Treasure Chests", TabFunny, "Launches your items from chests", [lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [12])])
+    GenStandardOption("Projectile Treasure Chests", TabFunny, "Launches your items from chests", [lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [15])])
     GenStandardOption("Blade Size", TabFunny, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Scale", "WpnScale"], [], Helper.InclRange(1,250) + [1000,16000])], optionType= Spinbox) # Make sure these work for common blades
     GenStandardOption("NPCs Size", TabFunny, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSONFile(["common/RSC_NpcList.json"], ["Scale"], Helper.InclRange(1,100), Helper.InclRange(30,250))], optionType=Spinbox)
     GenStandardOption("Enemy Size", TabFunny, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"], ["Scale"], Helper.InclRange(0, 1000), Helper.InclRange(1, 200) + Helper.InclRange(990,1000))], optionType=Spinbox)
@@ -308,9 +308,9 @@ def Randomize():
 
         try:
         # Unpacks BDATs
-            subprocess.run(f"{bdat_path} extract {fileEntryVar.get()}/common.bdat -o {JsonOutput} -f json --pretty", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-            subprocess.run(f"{bdat_path} extract {fileEntryVar.get()}/common_gmk.bdat -o {JsonOutput} -f json --pretty", check= True, creationflags=subprocess.CREATE_NO_WINDOW)
-            subprocess.run(f"{bdat_path} extract {fileEntryVar.get()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            subprocess.run(f"{bdat_path} extract {fileEntryVar.get().strip()}/common.bdat -o {JsonOutput} -f json --pretty", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            subprocess.run(f"{bdat_path} extract {fileEntryVar.get().strip()}/common_gmk.bdat -o {JsonOutput} -f json --pretty", check= True, creationflags=subprocess.CREATE_NO_WINDOW)
+            subprocess.run(f"{bdat_path} extract {fileEntryVar.get().strip()}/gb/common_ms.bdat -o {JsonOutput} -f json --pretty", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
         except:
             print(f"{traceback.format_exc()}") # shows the full error
             randoProgressDisplay.config(text="Invalid Input Directory")
@@ -325,11 +325,11 @@ def Randomize():
 
         try:
             # Packs BDATs
-            subprocess.run(f"{bdat_path} pack {JsonOutput} -o {outputDirVar.get()} -f json", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            subprocess.run(f"{bdat_path} pack {JsonOutput} -o {outputDirVar.get().strip()} -f json", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
             # Outputs common_ms in the correct file structure
-            os.makedirs(f"{outputDirVar.get()}/gb", exist_ok=True)
-            shutil.move(f"{outputDirVar.get()}/common_ms.bdat", f"{outputDirVar.get()}/gb/common_ms.bdat")
+            os.makedirs(f"{outputDirVar.get().strip()}/gb", exist_ok=True)
+            shutil.move(f"{outputDirVar.get().strip()}/common_ms.bdat", f"{outputDirVar.get().strip()}/gb/common_ms.bdat")
 
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
@@ -349,7 +349,6 @@ def Randomize():
     threading.Thread(target=ThreadedRandomize).start()
 
 def RunOptions():
-    Enhancements.RunCustomEnhancements() # Figure out how to not run this here just dont have time rn
     for option in OptionDictionary.values():
         if (option["optionTypeVal"].get()): # checks main option input
             IDs.CurrentSliderOdds = option["spinBoxVal"].get()
@@ -371,6 +370,8 @@ def RunOptions():
     
     # Nonstandard Options
     ShowTitleScreenText()
+    Enhancements.AddCustomEnhancements() # Figure out how to not run this here just dont have time rn
+
  
 def GenRandomSeed(randoSeedEntryVar):
     randoSeedEntryVar.set(SeedNames.RandomSeedName())
@@ -411,7 +412,7 @@ SavedOptions.loadData(EveryObjectToSaveAndLoad, SavedOptionsFileName)
 InteractableStateSet()
 
 # Permalink Options/Variables
-permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame" )
+permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame")
 permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth, textvariable=permalinkVar)
 CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
 permalinkVar.set(CompressedPermalink)
