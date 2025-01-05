@@ -4,7 +4,7 @@ from Enhancements import *
 
 
 def RandomizeWeaponEnhancements():
-    InvalidSkillEnhancements = [ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, BladeSwapDamage, EvadeDrainHp, EvadeDriverArt, EtherCannonRange,ArtDamageHeal]
+    InvalidSkillEnhancements = [ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, BladeSwapDamage, EvadeDrainHp, EvadeDriverArt, EtherCannonRange,ArtDamageHeal, DreamOfTheFuture]
     
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
     InvalidNames = ["Monado", "Well-Used Blades", "Archetype Ralzes", "Halteclere", "Masamune"]
