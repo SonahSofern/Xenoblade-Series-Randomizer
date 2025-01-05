@@ -18,6 +18,7 @@ def RandomizeWeaponEnhancements():
                 if Wep["Enhance1"] != 0: # Only replaces already enhanced weps
                     skillNameID = Wep["Name"]
                     enhancement = random.choice(ValidSkills)
+                    enhancement.RollEnhancement()
                     while enhancement.Caption > 255: # This is needed because the chips descriptions will not load properly they overflow if a caption is above 256. Super annoying the effects work the caption doesnt.
                         enhancement = random.choice(ValidSkills)
                     # ValidSkills.remove(enhancement) # Need full pool

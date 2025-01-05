@@ -351,7 +351,6 @@ def Randomize():
     threading.Thread(target=ThreadedRandomize).start()
 
 def RunOptions():
-    Enhancements.RunCustomEnhancements() # Figure out how to not run this here just dont have time rn
     for option in OptionDictionary.values():
         if (option["optionTypeVal"].get()): # checks main option input
             IDs.CurrentSliderOdds = option["spinBoxVal"].get()
@@ -373,6 +372,8 @@ def RunOptions():
     
     # Nonstandard Options
     ShowTitleScreenText()
+    Enhancements.RunCustomEnhancements() # Figure out how to not run this here just dont have time rn
+
  
 def GenRandomSeed(randoSeedEntryVar):
     randoSeedEntryVar.set(SeedNames.RandomSeedName())

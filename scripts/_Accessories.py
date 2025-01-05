@@ -15,6 +15,7 @@ def RandomizeAccessoryEnhancements():
             NameFile = json.load(NamesFile)
             for Acc in enhanceFile["rows"]:
                 enhancement = random.choice(ValidSkills)
+                enhancement.RollEnhancement()
                 # ValidSkills.remove(enhancement) # dont have enough for removing it might make a rare common and legendary version of each enhancement to the pool
                 for skillName in NameFile["rows"]:  
                     if skillName["$id"] == Acc["Name"]:    
@@ -23,10 +24,6 @@ def RandomizeAccessoryEnhancements():
                         lastWord = oldNameList[-1]
                         skillName["name"] = f"{enhancement.name} {lastWord}" # Solution to naming problem make 
                         break
-                if enhancement.name == "Crit Vamp":
-                    print("")
-                    print(Acc["Rarity"])
-                    print(enhancement.Rarity)
                 Acc["Enhance1"] = enhancement.id
                 Acc["Price"] = (enhancement.Rarity+1) * 5000
                 Acc["Rarity"] = enhancement.Rarity

@@ -8,7 +8,7 @@ def RandomizeSkillEnhancements():
     X_Slots= [1,51,61,91,121,162]
     Y_Slots= [11,31,71,101,141,171]
     B_Slots= [21,52,62,92,122,151] 
-    InvalidSkillEnhancements = [ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, AegisPowerUp, BigBangPowerUp, CatScimPowerUp, VarSaberPowerUp, MechArmsPowerUp, WhipswordPowerUp, DrillShieldPowerUp, DualScythesPowerUp, EvadeDrainHp, EvadeDriverArt, KnuckleClawsPowerUp, BitballPowerUp, GreataxePowerUp, TwinRingPowerUp, MegalancePowerUp,ShieldHammerPowerUp, ChromaKatanaPowerUp, EtherCannonPowerUp]
+    InvalidSkillEnhancements = [ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, AegisPowerUp, BigBangPowerUp, CatScimPowerUp, VarSaberPowerUp, MechArmsPowerUp, WhipswordPowerUp, DrillShieldPowerUp, DualScythesPowerUp, EvadeDrainHp, EvadeDriverArt, KnuckleClawsPowerUp, BitballPowerUp, GreataxePowerUp, TwinRingPowerUp, MegalancePowerUp,ShieldHammerPowerUp, ChromaKatanaPowerUp, EtherCannonPowerUp, ArtDamageHeal]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
     ForcedSkills = []
     with open("./_internal/JsonOutputs/common/BTL_Skill_Dr.json", 'r+', encoding='utf-8') as enhancementFile:
@@ -31,6 +31,7 @@ def RandomizeSkillEnhancements():
                 else:
                     skill = random.choice(ValidSkills)
                     ValidSkills.remove(skill)
+                skill.RollEnhancement()
                 skillNameFile["rows"][i]["name"] = skill.name
                 enhanceFile["rows"][i]["Enhance"] = skill.id
             ArtsCancelCost()

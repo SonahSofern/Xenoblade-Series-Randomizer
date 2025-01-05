@@ -14,7 +14,7 @@ Giga = [1000,1700,2500,3000]
 
 EnhanceEffectsList = []
 EnhanceClassList = []
-
+EnhanceID = 3896
 
 class Enhancement: 
     id = 0
@@ -37,8 +37,10 @@ class Enhancement:
         self.Description = Description
         self.ReverseOdds = ReverseOdds
         EnhanceClassList.append(self)
-    def RollEnhancement(self,ID):
-        self.id = ID
+    def RollEnhancement(self):
+        global EnhanceID
+        self.id = EnhanceID
+        EnhanceID += 1
         if self.ReverseOdds:
             Common = 2
             Rare = 1
@@ -72,7 +74,7 @@ class Enhancement:
             JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"],[self.Caption], ["name"], self.Description)
 
         EnhanceEffectsDict = {
-            "$id": ID,
+            "$id": EnhanceID,
             "EnhanceEffect": self.EnhanceEffect,
             # "Param1": float(f"{SetParams(self.Param1)}.0"), If we need floating 0 doesnt look like it
             # "Param2": float(f"{SetParams(self.Param2)}.0"),
@@ -84,10 +86,6 @@ class Enhancement:
         EnhanceEffectsList.append([EnhanceEffectsDict])
         
 def RunCustomEnhancements():
-    ID = 3896 # Starting ID for custom enhancements
-    for enhancement in EnhanceClassList:
-        enhancement.RollEnhancement(ID)
-        ID +=1
     JSONParser.ChangeJSONFile(["common/BTL_EnhanceEff.json"],["Param"], Helper.InclRange(1,1000), [1000], [241, 250, 245,54,143,257,259])
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randrange(20,51)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randrange(30,71)) # Healing with low HP
@@ -137,7 +135,7 @@ AutoAttackHeal = Enhancement("Auto Vamp",27,26, Mini)
 SpecialANDArtHeal = Enhancement("Omnivamp",28,27, Baby, Description="Restores [ML:Enhance kind=Param1 ]% HP of damage dealt when\n a Special or Art connects.")
 ArtDamageHeal = Enhancement("Omnivamp",28, 28, Small) # This goes on arts only or else it will heal from special and arts
 EnemyKillHeal = Enhancement("Scavenger",29,30, Medium)
-CritHeal = Enhancement("Crit Vamp",30,31, Small)
+CritHeal = Enhancement("Crit Vamp",30,31, Mini)
 CritDamageUp = Enhancement("Crit Damage",31,32, Medium)
 PercentDoubleAuto = Enhancement("Doublestrike",32,33, Medium)
 FrontDamageUp = Enhancement("Front",33,34, Medium)
@@ -299,7 +297,7 @@ ReduceElectricDamage = Enhancement("Electric Res",58, 211, [5], Medium)
 ReduceIceDamage = Enhancement("Ice Res",58, 212, [6], Medium)
 ReduceLightDamage = Enhancement("Light Res",58, 213, [7], Medium)
 ReduceDarkDamage = Enhancement("Dark Res",58, 214, [8], Medium)
-ChainAttackPower = Enhancement("Superchain",106, 215, Baby, Description="Increases attack power ratio\nat the start of a Chain Attack by [ML:Enhance kind=Param1 ]%")
+ChainAttackPower = Enhancement("Superchain",106, 215, Baby, Description="Increases attack power ratio\nat the start of a Chain Attack by [ML:Enhance kind=Param1 ]00%")
 LowHPHeal = Enhancement("Regenerate",181, 230, Baby)
 ArtUseHeal = Enhancement("Art Heal",86, 231, Baby)
 AutoDriverArtCancelHeal = Enhancement("Heal",91, 233, Baby)
