@@ -5,6 +5,7 @@ from Enhancements import *
 
 def RandomizeWeaponEnhancements():
     InvalidSkillEnhancements = [ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, BladeSwapDamage, EvadeDrainHp, EvadeDriverArt, EtherCannonRange,ArtDamageHeal]
+    
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
     InvalidNames = ["Monado", "Well-Used Blades", "Archetype Ralzes", "Halteclere", "Masamune"]
     with open("./_internal/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file:
@@ -16,6 +17,8 @@ def RandomizeWeaponEnhancements():
             for Wep in enhanceFile["rows"]:
                 skillNameID = Wep["Name"]
                 enhancement = random.choice(ValidSkills)
+                while enhancement.Caption > 255: # This is needed because the chips descriptions will not load properly they overflow if a caption is above 256. Super annoying the effects work the caption doesnt.
+                    enhancement = random.choice(ValidSkills)
                 # ValidSkills.remove(enhancement) # Need full pool
                 for skillName in skillNameFile["rows"]:  
                     if skillName["$id"] == skillNameID:
@@ -25,12 +28,7 @@ def RandomizeWeaponEnhancements():
                             oldNameList = oldName.split()
                             lastWord = oldNameList[-1]
                             skillName["name"] = f"{enhancement.name} {lastWord}"
-                            if skillName["name"] == "Counterattack Scythes":
-                                print(f"{enhancement.name}: {enhancement.id}")
-                                print("Got one")
-                            break
-                        else:
-                            break
+                        break
                 Wep["Enhance1"] = enhancement.id
                 
                 

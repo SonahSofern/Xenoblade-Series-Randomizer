@@ -10,9 +10,6 @@ Mega = [60,200,400,600]
 Massive = [300,600,1000,1500]
 Giga = [1000,1700,2500,3000]
 
-Common = 0
-Rare = 1
-Legendary = 2
 
 EnhanceEffectsList = []
 EnhanceClassList = []
@@ -27,7 +24,7 @@ class Enhancement:
     Caption = 0
     Caption2 = 0
     Description = ""
-    Rarity = Common
+    Rarity = 0
     ReverseOdds = False
     def __init__(self,Name, Enhancement, Caption,  Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReverseOdds = False):
         self.name = Name
@@ -40,9 +37,17 @@ class Enhancement:
         self.ReverseOdds = ReverseOdds
         EnhanceClassList.append(self)
     def RollEnhancement(self,ID):
-        self.Rarity = random.choice([Common, Rare, Legendary])
         self.id = ID
         def SetParams(ParameterChoices):
+            if self.ReverseOdds:
+                Common = 2
+                Rare = 1
+                Legendary = 0
+            else:
+                Common = 0
+                Rare = 1
+                Legendary = 2
+            self.Rarity = random.choice([Common,Common,Common, Rare,Rare, Legendary])
             if ParameterChoices == Baby:
                 Pstep = 1
             else:
@@ -78,13 +83,13 @@ class Enhancement:
         EnhanceEffectsDict = {
             "$id": ID,
             "EnhanceEffect": self.EnhanceEffect,
-            "Param1": float(f"{SetParams(self.Param1)}.0"),
-            "Param2": float(f"{SetParams(self.Param2)}.0"),
+            # "Param1": float(f"{SetParams(self.Param1)}.0"), If we need floating 0 doesnt look like it
+            # "Param2": float(f"{SetParams(self.Param2)}.0"),
+            "Param1": SetParams(self.Param1),
+            "Param2": SetParams(self.Param2),
             "Caption": self.Caption,
             "Caption2": self.Caption
         }
-        if self.name == "Katana":
-            print("Got One")
         EnhanceEffectsList.append([EnhanceEffectsDict])
         
 def RunCustomEnhancements():
@@ -144,9 +149,9 @@ EnemyKillHeal = Enhancement("Scavenger",29,30, Medium)
 CritHeal = Enhancement("Crit Vamp",30,31, Small)
 CritDamageUp = Enhancement("Crit Damage",31,32, Medium)
 PercentDoubleAuto = Enhancement("Doublestrike",32,33, Medium)
-FrontDamageUp = Enhancement("Front",33,34, Large)
-SideDamageUp = Enhancement("Side",34,35, Large)
-BackDamageUp = Enhancement("Back",35,36, Large)
+FrontDamageUp = Enhancement("Front",33,34, Medium)
+SideDamageUp = Enhancement("Side",34,35, Medium)
+BackDamageUp = Enhancement("Back",35,36, Medium)
 SurpriseAttackUp = Enhancement("Suprise",36,37, Giga)
 ToppleDamageUp = Enhancement("Topple",37,38, Large)
 LaunchDamageUp = Enhancement("Launch",38,39, Large)
@@ -247,7 +252,7 @@ DamagePerEvadeUp = Enhancement("Counterattack",143, 152, Mini)
 ArtsRechargeMaxAffinity = Enhancement("Arts Charging",144, 154, Small)
 ReduceAggroFromAttacks = Enhancement("Aggro Down",145, 155, Small)
 PhyAndEthDefenseUp = Enhancement("Full Guard",146, 156, Small)
-ChanceToPerfectHitAndEvade = Enhancement("Parry",147, 157, Small)
+ChanceToPerfectHitAndEvade = Enhancement("Parry",147, 157, Mini)
 Reflection = Enhancement("Reflection",148, 158, Small)
 MaxAffinityEvadeXAttacks = Enhancement("Harmony",149, 159, Mini)
 ToppleANDLaunchDamageUp = Enhancement("Top Launch",150, 160, Large)

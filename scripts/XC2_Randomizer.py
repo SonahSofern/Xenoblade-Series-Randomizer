@@ -174,7 +174,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     checkButtonVar = var
     
     # Description Label
-    optionDesc = ttk.Label(optionPanel, text=description, anchor="w", width=55, wraplength=500)
+    optionDesc = ttk.Label(optionPanel, text=description, anchor="w", width=60, wraplength=650)
     optionDesc.grid(row=rowIncrement, column=1, sticky="w", padx=0)
     
     # % Boxes
@@ -226,7 +226,7 @@ def Options():
     GenStandardOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, [], InvalidTargetIDs=AutoAttacks)],["Debuffs", [lambda: IDs.ValidReplacements.extend(list(set(ArtDebuffs)-set([21])))],"Buffs",[lambda: IDs.ValidReplacements.extend(ArtBuffs)], "Doom", [lambda: IDs.ValidReplacements.extend([21])]], Spinbox)
     GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees", [lambda: SkillTrees.RandomizeSkillEnhancements()])
     GenStandardOption("Driver Accessories", TabDrivers, "Randomizes effects of Accessories", [lambda: Accs.RandomizeAccessoryEnhancements()])
-    GenStandardOption("Driver Art Reaction", TabDrivers, "Randomizes art reactions (break, topple, blowdown etc.)", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ReAct1"], HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)],["Clear Vanilla Reactions", [lambda: Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)],"Multiple Reactions",[lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)]], optionType=Spinbox)
+    GenStandardOption("Driver Art Reaction", TabDrivers, "Randomizes art reactions (break, blowdown etc.)", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ReAct1"], HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)],["Clear Vanilla Reactions", [lambda: Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)],"Multiple Reactions",[lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, InvalidTargetIDs=AutoAttacks)]], optionType=Spinbox)
     GenStandardOption("Driver Art Animation Speeds", TabDrivers, "Randomizes a Driver's art animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)], optionType=Spinbox)    
     GenStandardOption("Driver Art Cooldowns", TabDrivers, "Randomizes the cooldown of each driver art", [lambda: CustomArts.RandomArtCooldowns()])
     GenStandardOption("Driver Art Damage Ratios", TabDrivers, "Randomizes the damage ratio of each driver art", [lambda: CustomArts.RandomArtDamageRatios()])

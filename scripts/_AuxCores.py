@@ -23,6 +23,7 @@ def RandomizeAuxCoreEnhancements():
                     for skillName in auxNameFile["rows"]:  
                         if skillName["$id"] == skillNameID:    
                             skillName["name"] = f"{enhancement.name} Core"
+                            break
                     Aux["Enhance"] = enhancement.id
                     
                     
