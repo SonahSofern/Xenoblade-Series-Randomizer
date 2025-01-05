@@ -58,14 +58,6 @@ class Enhancement:
                 Parameter = ParameterChoices[0]
             else:
                 try:
-                    if self.ReverseOdds:
-                        Common = 2
-                        Rare = 1
-                        Legendary = 0
-                    else:
-                        Common = 0
-                        Rare = 1
-                        Legendary = 2
                     if self.Rarity == Common:
                         Parameter = random.randrange(ParameterChoices[0],ParameterChoices[1]+1,Pstep)
                     elif self.Rarity == Rare:

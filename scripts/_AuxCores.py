@@ -25,6 +25,7 @@ def RandomizeAuxCoreEnhancements():
                             skillName["name"] = f"{enhancement.name} Core"
                             break
                     Aux["Enhance"] = enhancement.id
+                    Aux["Rarity"] = enhancement.Rarity
                     
                     
                 poppiAuxEnhancements.seek(0)
