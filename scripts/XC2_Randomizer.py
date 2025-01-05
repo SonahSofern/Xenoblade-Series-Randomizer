@@ -372,7 +372,7 @@ def RunOptions():
     
     # Nonstandard Options
     ShowTitleScreenText()
-    Enhancements.RunCustomEnhancements() # Figure out how to not run this here just dont have time rn
+    Enhancements.AddCustomEnhancements() # Figure out how to not run this here just dont have time rn
 
  
 def GenRandomSeed(randoSeedEntryVar):

@@ -85,12 +85,16 @@ class Enhancement:
         }
         EnhanceEffectsList.append([EnhanceEffectsDict])
         
-def RunCustomEnhancements():
+def AddCustomEnhancements():
+    global EnhanceID
     JSONParser.ChangeJSONFile(["common/BTL_EnhanceEff.json"],["Param"], Helper.InclRange(1,1000), [1000], [241, 250, 245,54,143,257,259])
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randrange(20,51)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randrange(30,71)) # Healing with low HP
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randrange(10,61)) # Healing with low HP
     JSONParser.ExtendJSONFile("common/BTL_Enhance.json",  EnhanceEffectsList)
+    EnhanceID = 3896
+    EnhanceEffectsList.clear()
+
 
 
 HPBoost =       Enhancement("Health",1,1, Small)
@@ -337,7 +341,7 @@ ChromaKatanaPowerUp = Enhancement("Katana",119, 267, [14], Small)
 BitballPowerUp = Enhancement("Bitball",119, 268, [15], Small)
 KnuckleClawsPowerUp = Enhancement("Claws",119, 269, [16], Small)
 HPGuardArtRechargeAttacked = Enhancement("Reversal",197,270, Mini)
-Jamming = Enhancement("Jamming",198, 271, Medium)
+Jamming = Enhancement("Jamming",198, 271, Small)
 XStartBattle = Enhancement("X Start",113, 272, [0])
 YStartBattle = Enhancement("Y Start",113, 274, [1])
 BStartBattle = Enhancement("B Start",113, 276, [2])
