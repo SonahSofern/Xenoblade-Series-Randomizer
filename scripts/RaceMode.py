@@ -236,7 +236,6 @@ def RaceModeChanging(OptionsRunDict):
         print("Filling Chests with Custom Loot")
         RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict)
         StackableCoreCrystalsandKeyItems()
-        #RenameCoreCrystals(OptionsRunDict)
         FindtheBladeNames(OptionsRunDict)
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Less Grinding"]["subOptionTypeVal"].get():
         print("Reducing amount of grinding")
