@@ -485,45 +485,27 @@ def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def PadraigFightFix(): # padraig fight fails to spawn unique monster if it replaces him, after you kill him in phase 1.
-    UniqueIDtoDupe = []
-    rowtodupe = {}
+    EnemyIDtoChange = []
     with open("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EnemyPop.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 5500:
                 if row["ene1ID"] in AllUniqueMonsterDefaultIDs:
-                    UniqueIDtoDupe = row["ene1ID"]
-                    with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
-                        data = json.load(file)
-                        for row in data["rows"]:
-                            if row["$id"] == UniqueIDtoDupe:
-                                rowtodupe = row
-                                rowtodupe["$id"] = 1889
-                                break
-                        data["rows"].append(rowtodupe)
-                        file.seek(0)
-                        file.truncate()
-                        json.dump(data, file, indent=2, ensure_ascii=False)
-                    with open("./_internal/JsonOutputs/common/FLD_EnemyGroup.json", 'r+', encoding='utf-8') as file:
-                        data = json.load(file)
-                        for row in data["rows"]:
-                            if row["$id"] == 76:
-                                row["EnemyID2"] = 1889
-                                break
-                        file.seek(0)
-                        file.truncate()
-                        json.dump(data, file, indent=2, ensure_ascii=False)
-                break
-    with open("./_internal/JsonOutputs/common_gmk/ma05a_FLD_EnemyPop.json", 'r+', encoding='utf-8') as file:
+                    EnemyIDtoChange = row["ene1ID"]
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
-            if row["$id"] == 5501:
-                row["ene2ID"] = 1889
+            if row["$id"] == EnemyIDtoChange:
+                row["Flag"]["Named"] = 0
                 break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    
+
 def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/fights
     ReducePCHPBattle1()
     SummonsLevelAdjustment()
