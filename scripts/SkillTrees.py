@@ -33,9 +33,21 @@ def RandomizeSkillEnhancements():
                     ValidSkills.remove(skill)
                 skillNameFile["rows"][i]["name"] = skill.name
                 enhanceFile["rows"][i]["Enhance"] = skill.id
+            ArtsCancelCost()
             nameFile.seek(0)
             nameFile.truncate()
             json.dump(skillNameFile, nameFile, indent=2, ensure_ascii=False)
         enhancementFile.seek(0)
         enhancementFile.truncate()
         json.dump(enhanceFile, enhancementFile, indent=2, ensure_ascii=False)
+        
+def ArtsCancelCost():
+    for i in range(1,7):
+        with open(f"./_internal/JsonOutputs/common/BTL_Skill_Dr_Table0{i}.json", 'r+', encoding='utf-8') as driverFiles:
+            dFile = json.load(driverFiles)
+            for item in dFile["rows"]:
+                if item["SkillID"] == ArtCancel.id:
+                    item["NeedSp"] = 0
+            driverFiles.seek(0)
+            driverFiles.truncate()
+            json.dump(dFile, driverFiles, indent=2, ensure_ascii=False)

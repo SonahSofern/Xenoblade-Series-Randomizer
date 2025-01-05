@@ -274,7 +274,7 @@ def LoadTheme(defaultFont, themeName):
     style.theme_use(themeName)
     from tkinter.font import Font
     staticFont = Font(family="Arial", size=16)
-    style.configure("midColor.TCheckbutton", padding=(20, 10), font= defaultFont)
+    style.configure("midColor.TCheckbutton", padding=(20, 10))
     style.configure("STATIC.TButton", font=staticFont)
     style.configure("BorderlessLabel.TLabel", background=currentTheme["backgroundColor"], foreground=White)
     style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
