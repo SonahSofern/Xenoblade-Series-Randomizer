@@ -311,6 +311,7 @@ def NewNonBossandQuestIDs(): # don't trust my old method of getting quest and bo
         with open(enemypopfile, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data['rows']:
+                RedRingClear(row)
                 if row["name"][:3] == "bos":
                     for j in range(1, 5):
                         if row[f"ene{j}ID"] != 0:
@@ -469,6 +470,12 @@ def GortOgreUppercutRemoval(): # Gort 2's Ogre Uppercut seems to be buggy, repor
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+def RedRingClear(item):
+    try:
+        item["battlelockname"] = 0
+    except:
+        pass
+    
 def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy happens to show up early. Nerfed by 3/4ths.
     with open("./_internal/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
