@@ -420,35 +420,37 @@ def EnemyAggroProportion(OptionsRunDict):
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
-def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict): #when enemy rando is on and aggro rando is on
+def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict): #when enemy rando is on
+    EnemyAggroOnBox = OptionsRunDict["Enemy Aggro"]["optionTypeVal"].get()
     EnemyAggroSliderOdds = OptionsRunDict["Enemy Aggro"]["spinBoxVal"].get()
-    with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
-        data = json.load(file)
-        for row in data["rows"]:
-            if (EnemyAggroSliderOdds != 100) & (row["$id"] in OtherEnemyIDs) & (random.randint(0,100) >= EnemyAggroSliderOdds) & (row["$id"] in ValidEnemies):
-                row["Flag"]["AlwaysAttack"] = 0
-                row["Flag"]["mBoss"] = 0
-                row["SearchRange"] = 0
-                row["SearchRadius"] = 0
-                row["SearchAngle"] = 0
-                row["Detects"] = 0
-                row["BatInterval"] = 50
-                row["BatArea"] = 50
-            elif (row["$id"] in OtherEnemyIDs) & (row["$id"] in ValidEnemies):
-                row["Flag"]["mBoss"] = 0
-                row["Flag"]["AlwaysAttack"] = 1
-                row["Detects"] = 1
-                if row["SearchRange"] == 0:
-                    row["SearchRange"] = random.randint(10, 25) # some enemies might naturally be passive, we need to turn them aggressive
-                if row["SearchAngle"] == 0:
-                    row["SearchAngle"] = random.randint(90, 180)
-                if row["SearchRadius"] == 0:
-                    row["SearchRadius"] = random.randint(5, 10)
-                row["BatInterval"] = 50
-                row["BatArea"] = 50
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+    if EnemyAggroOnBox: # if enemy aggro is randomized
+        with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
+            data = json.load(file)
+            for row in data["rows"]:
+                if (EnemyAggroSliderOdds != 100) & (row["$id"] in OtherEnemyIDs) & (random.randint(0,100) >= EnemyAggroSliderOdds) & (row["$id"] in ValidEnemies):
+                    row["Flag"]["AlwaysAttack"] = 0
+                    row["Flag"]["mBoss"] = 0
+                    row["SearchRange"] = 0
+                    row["SearchRadius"] = 0
+                    row["SearchAngle"] = 0
+                    row["Detects"] = 0
+                    row["BatInterval"] = 50
+                    row["BatArea"] = 50
+                elif (row["$id"] in OtherEnemyIDs) & (row["$id"] in ValidEnemies):
+                    row["Flag"]["mBoss"] = 0
+                    row["Flag"]["AlwaysAttack"] = 1
+                    row["Detects"] = 1
+                    if row["SearchRange"] == 0:
+                        row["SearchRange"] = random.randint(10, 25) # some enemies might naturally be passive, we need to turn them aggressive
+                    if row["SearchAngle"] == 0:
+                        row["SearchAngle"] = random.randint(90, 180)
+                    if row["SearchRadius"] == 0:
+                        row["SearchRadius"] = random.randint(5, 10)
+                    row["BatInterval"] = 50
+                    row["BatArea"] = 50
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
           
 def AeshmaCoreHPNerf(): #this fight sucks
     with open("./_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
