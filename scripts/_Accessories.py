@@ -3,7 +3,7 @@ from Enhancements import *
 
 
 def RandomizeAccessoryEnhancements():
-    InvalidSkillEnhancements = [EyeOfJustice, BladeSwitchDamageUp, ArtCancel, XStartBattle, YStartBattle, BStartBattle, EvadeDriverArt, EvadeDrainHp,ArtDamageHeal, BladeSwapDamage, DreamOfTheFuture]
+    InvalidSkillEnhancements = [EyeOfJustice, BladeSwitchDamageUp, ArtCancel, XStartBattle, YStartBattle, BStartBattle, EvadeDriverArt, EvadeDrainHp,ArtDamageHeal, BladeSwapDamage, DreamOfTheFuture, FlatAgiBoost,FlatDefBoost,FlatDexBoost, FlatEtherBoost, FlatHPBoost, FlatStrengthBoost, FlatLuckBoost]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
     
     with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as EnhanceFile:
@@ -16,7 +16,6 @@ def RandomizeAccessoryEnhancements():
             for Acc in enhanceFile["rows"]:
                 enhancement = random.choice(ValidSkills)
                 enhancement.RollEnhancement()
-                # ValidSkills.remove(enhancement) # dont have enough for removing it might make a rare common and legendary version of each enhancement to the pool
                 for skillName in NameFile["rows"]:  
                     if skillName["$id"] == Acc["Name"]:    
                         oldName = skillName["name"]
