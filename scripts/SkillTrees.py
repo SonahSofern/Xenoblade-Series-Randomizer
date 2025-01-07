@@ -1,13 +1,14 @@
 import json, random
 from Enhancements import *
 
+ArtsCancelSlots = [12,55,82,102,131,161]
+ZekeEye = [152]
+X_Slots= [1,51,61,91,121,162]
+Y_Slots= [11,31,71,101,141,171]
+B_Slots= [21,52,62,92,122,151] 
 
 def RandomizeSkillEnhancements():
-    ArtsCancelSlots = [12,55,82,102,131,161]
-    ZekeEye = [152]
-    X_Slots= [1,51,61,91,121,162]
-    Y_Slots= [11,31,71,101,141,171]
-    B_Slots= [21,52,62,92,122,151] 
+    
     InvalidSkillEnhancements = [ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, AegisPowerUp, BigBangPowerUp, CatScimPowerUp, VarSaberPowerUp, MechArmsPowerUp, WhipswordPowerUp, DrillShieldPowerUp, DualScythesPowerUp, EvadeDrainHp, EvadeDriverArt, KnuckleClawsPowerUp, BitballPowerUp, GreataxePowerUp, TwinRingPowerUp, MegalancePowerUp,ShieldHammerPowerUp, ChromaKatanaPowerUp, EtherCannonPowerUp, ArtDamageHeal, AegisParty, AegisDriver]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
     ForcedSkills = []
@@ -50,3 +51,43 @@ def ArtsCancelCost():
             driverFiles.seek(0)
             driverFiles.truncate()
             json.dump(dFile, driverFiles, indent=2, ensure_ascii=False)
+            
+            
+def SkillShuffle():
+    ArtCancelEnhanceIDs = []
+    X_StartIDs = []
+    Y_StartIDs = []
+    B_StartIDs = []
+    AlreadySwapped = []
+    
+    with open(f"./_internal/JsonOutputs/common/BTL_Skill_Dr.json", 'r+', encoding='utf-8') as driverFiles:
+        dFile = json.load(driverFiles)
+        for skill in dFile["rows"]:
+            skillList = []
+            skillList.append(skill["Enhance"])
+            
+        random.shuffle(skillList)
+        
+        for skill in dFile["rows"]:
+            _skill = random.choice(skillList)
+            skill["Enhance"] = _skill
+            skillList.remove(_skill)
+            
+        for skill in dFile["rows"]:
+            if skill["Enhance"] in ArtCancelEnhanceIDs and skill["$id"] not in ArtsCancelSlots:
+                aslot = random.choice(ArtsCancelSlots) # Choose a arts cancel slot
+                while aslot in AlreadySwapped: # Make sure its not already swapped
+                    aslot = random.choice(ArtsCancelSlots)
+                AlreadySwapped.append(aslot) # Add it to already swapped list
+                oldSkillID = skill["$id"] # Set oldskill id to 
+                skill["$id"] = aslot
+                # for __skill in dFile["rows"]:
+                #     if __skill["$id"] == oldSkillID:
+                #         skill[]
+                        
+                        
+                
+        driverFiles.seek(0)
+        driverFiles.truncate()
+        json.dump(dFile, driverFiles, indent=2, ensure_ascii=False)
+

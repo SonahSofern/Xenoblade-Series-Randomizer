@@ -5,19 +5,21 @@ import json, random
 
 class Attribute:
     name = ""
+    max = 0
     mult = 0
     nameColor = ""
     enPar = ""
     enArr = ""
     upgradable = True
     ignoreOriginal = False
-    def __init__(self,_name, _baseMult ,_enPar = "", _nameColor = "tutorial", isUp = True, ignoreOriginal = False):
+    def __init__(self,_name, _baseMult ,_enPar = "", _nameColor = "tutorial", isUp = True, ignoreOriginal = False, _maxVal = 65000):
         self.name = _name
         self.mult = _baseMult
         self.nameColor = _nameColor
         self.enPar = _enPar
         self.isUp = isUp
         self.ignoreOriginal = ignoreOriginal
+        self.max = _maxVal
         AttributesList.append(self)
     def RollRank(self):
         rank = random.randrange(1,4)
@@ -26,19 +28,19 @@ class Attribute:
 AttributesList = []
 # working colors green, red, tutorial(yellow), link(blue)
 
-Speedy = Attribute("Speed", 0.9, "BtlSpeed")
-Health = Attribute("Health", 0.4, "HpMaxRev")
-Strength = Attribute("Strength", 0.25, "StrengthRev")
-Ether = Attribute("Ether", 0.3, "PowEtherRev")
-Dex = Attribute("Dex", 0.5, "DexRev")
-Agility = Attribute("Agility", 0.3, "AgilityRev")
-Luck = Attribute("Luck", 0.5, "LuckRev")
-PArmor = Attribute("Defense", 0.2, "RstPower")
-EArmor =Attribute("E. Defense", 0.3, "RstEther")
-RstFire = Attribute("Fireproof", 0.3, "RstFire")
-Crit = Attribute("Critical", 0.3, "CriticalRate")
-GuardRate = Attribute("Guard", 0.3, "GuardRate")
-Unpottable = Attribute("Potion", 0, "HealPotDrop")
+# Speedy = Attribute("Speed", 4, "BtlSpeed", _maxVal = 255)
+# Health = Attribute("Health", 0.8, "HpMaxRev")
+# Strength = Attribute("Strength", 0.8, "StrengthRev")
+# Ether = Attribute("Ether", 0.4, "PowEtherRev")
+# Dex = Attribute("Dex", 0.5, "DexRev")
+# Agility = Attribute("Agility", 2, "AgilityRev")
+# Luck = Attribute("Luck", 0.6, "LuckRev")
+# PArmor = Attribute("Defense", 40, "RstPower", _maxVal=100)
+# EArmor =Attribute("E. Defense", 40, "RstEther", _maxVal=100)
+RstFire = Attribute("Fireproof", 100, "RstFire", _maxVal=100)
+# Crit = Attribute("Critical", 45, "CriticalRate", _maxVal=100)
+# GuardRate = Attribute("Guard", 40, "GuardRate", _maxVal=100) # Only works for enemies with blades so i dont really need this
+# Unpottable = Attribute("Potion", 0, "HealPotDrop", _maxVal=0, isUp=False) # Setting to 0 doesnt seem to do anything to potions
 
 
 
@@ -52,22 +54,34 @@ def EnemyStats(spinBox):
                 for Enemy in EnArr["rows"]:
                     if spinBox >= random.randrange(0,101):
                         Att = random.choice(AttributesList)
-                        rank = Att.RollRank()
-                    
+                        
+                        if Att.isUp:
+                            rank = Att.RollRank()
+                        else:
+                            rank = 1
                         
                         if Att.enPar != "":
                             for par in EnPar["rows"]: # Changes EnParamFile
                                 if par["$id"] == Enemy["ParamID"]:
-                                    if par[Att.enPar] == 0: # For things like RstElement
-                                       par[Att.enPar] += (Att.mult * rank)
+                                    if Att.max <= 100:
+                                       par[Att.enPar] += int((Att.mult * rank))
                                     else:         
-                                        par[Att.enPar] *= (Att.mult + rank)
-                                        break
+                                        newVal = par[Att.enPar] * ((1+ Att.mult) * rank)
+                                        par[Att.enPar] = int(newVal)
+                                        
+                                    if par[Att.enPar] > Att.max: # sets max if above
+                                        par[Att.enPar] = Att.max
+                                        
+                                    break
                                 
                         for name in Names["rows"]: # Changes Names
                             if name["$id"] == Enemy["Name"]:
                                 oldName = name["name"]
-                                name["name"] = f"[System:Color name={Att.nameColor}]{Att.name +  ('+'*rank)}[/System:Color] {oldName}"
+                                enhanceName = Att.name +  ('+'*(rank-1))
+                                if len(enhanceName + oldName) > 20:
+                                    oldnameList = oldName.split()
+                                    oldName = oldnameList[-1]           
+                                name["name"] = f"[System:Color name={Att.nameColor}]{enhanceName}[/System:Color] {oldName}"
                                 break
 
                 
