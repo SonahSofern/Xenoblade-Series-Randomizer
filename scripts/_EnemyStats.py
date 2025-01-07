@@ -28,17 +28,20 @@ class Attribute:
 AttributesList = []
 # working colors green, red, tutorial(yellow), link(blue)
 
-# Speedy = Attribute("Speed", 4, "BtlSpeed", _maxVal = 255)
-# Health = Attribute("Health", 0.8, "HpMaxRev")
-# Strength = Attribute("Strength", 0.8, "StrengthRev")
-# Ether = Attribute("Ether", 0.4, "PowEtherRev")
-# Dex = Attribute("Dex", 0.5, "DexRev")
-# Agility = Attribute("Agility", 2, "AgilityRev")
-# Luck = Attribute("Luck", 0.6, "LuckRev")
-# PArmor = Attribute("Defense", 40, "RstPower", _maxVal=100)
-# EArmor =Attribute("E. Defense", 40, "RstEther", _maxVal=100)
-RstFire = Attribute("Fireproof", 100, "RstFire", _maxVal=100)
-# Crit = Attribute("Critical", 45, "CriticalRate", _maxVal=100)
+Speedy = Attribute("Speed", 4, "BtlSpeed", _maxVal = 255)
+Health = Attribute("Health", 0.8, "HpMaxRev")
+Strength = Attribute("Strength", 0.8, "StrengthRev")
+Ether = Attribute("Ether", 0.4, "PowEtherRev")
+Dex = Attribute("Dex", 0.5, "DexRev")
+Agility = Attribute("Agility", 2, "AgilityRev")
+Luck = Attribute("Luck", 0.6, "LuckRev")
+PArmor = Attribute("Defense", 40, "RstPower", _maxVal=100)
+EArmor =Attribute("E. Defense", 40, "RstEther", _maxVal=100)
+Crit = Attribute("Critical", 45, "CriticalRate", _maxVal=100)
+
+# Use Enrage states, Arts and Enhance123 to make more enemy types
+# RstFire = Attribute("Fireproof", 100, "RstFire", _maxVal=100) # Doesnt work even if i give pyra nova fire attribute
+
 # GuardRate = Attribute("Guard", 40, "GuardRate", _maxVal=100) # Only works for enemies with blades so i dont really need this
 # Unpottable = Attribute("Potion", 0, "HealPotDrop", _maxVal=0, isUp=False) # Setting to 0 doesnt seem to do anything to potions
 
