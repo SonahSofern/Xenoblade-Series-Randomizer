@@ -152,9 +152,8 @@ def ReducePCHPBattle1():
     with open(filename, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
-            if row["$id"] == 3: #battle on gramps at start of game
+            if row["$id"] == 3 or row["$id"] == 6: #battle on gramps at start of game
                 row["ReducePCHP"] = 1
-                break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)

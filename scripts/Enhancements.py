@@ -26,8 +26,9 @@ class Enhancement:
     Caption2 = 0
     Description = ""
     Rarity = 0
-    ReverseOdds = False
-    def __init__(self,Name, Enhancement, Caption,  Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReverseOdds = False):
+    ReversePar1 = False
+    ReversePar2 = False
+    def __init__(self,Name, Enhancement, Caption,  Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReversePar1 = False, ReversePar2  = False):
         self.name = Name
         self.EnhanceEffect = Enhancement
         self.Caption = Caption
@@ -35,22 +36,26 @@ class Enhancement:
         self.Param1 = Param1
         self.Param2 = Param2
         self.Description = Description
-        self.ReverseOdds = ReverseOdds
+        self.ReversePar1 = ReversePar1
+        self.ReversePar2 = ReversePar2
         EnhanceClassList.append(self)
     def RollEnhancement(self):
         global EnhanceID
         self.id = EnhanceID
         EnhanceID += 1
-        if self.ReverseOdds:
-            Common = 2
-            Rare = 1
-            Legendary = 0
-        else:
-            Common = 0
-            Rare = 1
-            Legendary = 2
+        Common = 0
+        Rare = 1
+        Legendary = 2
         self.Rarity = random.choice([Common,Common,Common, Rare,Rare, Legendary])
-        def SetParams(ParameterChoices):
+        def SetParams(ParameterChoices, isReverse):
+            if isReverse:
+                Common = 2
+                Rare = 1
+                Legendary = 0
+            else:
+                Common = 0
+                Rare = 1
+                Legendary = 2
             if ParameterChoices == Baby:
                 Pstep = 1
             else:
@@ -173,7 +178,7 @@ EvasionWhileMoving = Enhancement("Agile",63, 61, Medium)
 HPLowBlockRate = Enhancement("Block",64, 62, Small, Medium)
 ReduceDamageFromNearbyEnemies = Enhancement("Aura",65, 63, Small)
 ReduceDamageOnLowHP = Enhancement("Everlasting",66,64, Small, Small)
-HighHPDamageUp = Enhancement("Confidence",67,65, Medium,Large, ReverseOdds=True )
+HighHPDamageUp = Enhancement("Confidence",67,65, Medium,Large, ReversePar1=True )
 ReduceSpikeDamage =Enhancement("Spike Breaker",68,66, Medium)
 BreakResistUp = Enhancement("Fluid",69, 67, Medium)
 ToppleResistUp = Enhancement("Lithe",70, 68, Medium)
@@ -202,8 +207,8 @@ DayAccuracy = Enhancement("Diurnal",96, 104, Large)
 ExpEnemiesBoost = Enhancement("Wisdom",97, 105, Medium)
 WPEnemiesBoost = Enhancement("Expert",98, 106, Large)
 PartyGaugeExcellentFill = Enhancement("Party",101, 109, Small, Description="Fills the Party Gauge when an\n\"Excellent\" is scored during a Special by [ML:Enhance kind=Param1 ].")
-PartyGaugeCritFill = Enhancement("Party",102, 112, Mini, Description="Fills the Party Gauge for\neach critical hit delivered by [ML:Enhance kind=Param1 ].")
-PartyGaugeDriverArtFill = Enhancement("Party",103, 115, Baby)
+PartyGaugeCritFill = Enhancement("Party",102, 112, Mini, Description="Fills the Party Gauge for\neach critical hit delivered by [ML:Enhance kind=Param1].")
+PartyGaugeDriverArtFill = Enhancement("Party",103, 115, Baby, Description="Fills the Party Gauge\nfor each Driver Art used by [ML:Enhance kind=Param1].")
 DamageUpEnemyNumber = Enhancement("Underdog",104, 116, Medium)
 ReflectDamageUp = Enhancement("Reflection",105, 117, Large)
 CritDuringChain = Enhancement("Critical",107, 118, Medium)
@@ -260,7 +265,7 @@ StopThinking = Enhancement("Enthrall",158, 168, Medium, Baby)
 LowHPSpecialUp = Enhancement("Specialist",159, 169, Baby) #Uses decimals weird one not sure how it scales
 TranquilGuard = Enhancement("Stance",160, 171, Small)
 HPRestoreFusionCombo = Enhancement("Fusion",161, 172, Baby)
-AttackUpGoldUp = Enhancement("Mercenary",162, 173, Baby, Mega, Description="Increases attack power by [ML:Enhance kind=Param1 ]%% as gold is\ncollected during battle (max: [ML:Enhance kind=Param2 ]%).")
+AttackUpGoldUp = Enhancement("Mercenary",162, 173, Baby, Mega, Description="Increases attack power by [ML:Enhance kind=Param1 ]% as gold is\ncollected during battle (max: [ML:Enhance kind=Param2 ]%).")
 EnemyDropGoldOnHit = Enhancement("Pickpocket",163, 174, Medium)
 ReduceEnemyChargeMaxAffinity = Enhancement("Syrup",164, 175, Small)
 VersusBossUniqueEnemyDamageUp = Enhancement("Challenger",165, 176, Medium)
@@ -364,7 +369,7 @@ RetainAggro = Enhancement("Grudge",235, 293, Medium)
 DamageUpOnDeath = Enhancement("Martyr",238, 295, Large)
 AutoSpeedArtsSpeed= Enhancement("Lightning",240, 296, Small, Small)
 LV4EachUseDmageUp = Enhancement("Glow",241, 297, Large)
-Vision = Enhancement("Monado",242, 298, Medium, ReverseOdds=True)
+Vision = Enhancement("Monado",242, 298, Medium, ReversePar1=True)
 AwakenPurge = Enhancement("Sleepy",243, 299, Medium)
 PartyCritMaxAffinity = Enhancement("Critical",244, 300, Small)
 DamageUpPerCrit = Enhancement("Exploit",245, 301, Baby, Baby)

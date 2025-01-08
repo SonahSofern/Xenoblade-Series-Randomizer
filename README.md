@@ -12,7 +12,7 @@ Discord: https://discord.gg/h93yqZHG8z
 # Known Issues
 Race Mode will overwrite some settings. (for example Treasure Chest Contents will be overwritten if race mode is on)\
 Torna has not been tested at all, it may or may not work.\
-Note: If you do get stuck, you can remove the files from the directory and it will load the base game for you to continue. This shouldn't happen, but if it does let us know what you were stuck on.
+
 
 # Credits
 https://github.com/roccodev/bdat-rs \
@@ -47,3 +47,4 @@ Guide adapted from: https://gamebanana.com/tuts/13815
 8. EMULATOR ONLY: There should now be a new "bdat" folder inside "modified"; This is the folder that the randomizer program targets as the input folder. The output folder should be the emulator's name then /load/0100E95004039001/Randomizer/romfs/bdat. NOTE: You will have to create the 0100E95004039001 folder.
 9. Choose your preferred settings, then use the randomizer program to randomize the contents of the game.
 10. CONSOLE ONLY: Put your microSD card back into your Switch, use Atmosphere and Homebrew to launch the game. Pressing L bypasses the active patches, so if you wish to play the vanilla game again, you can do so in this way.
+11. You should be ready to start playing! Note: If you do get stuck, you can remove the files from the directory and it will load the base game for you to continue. This shouldn't happen, but if it does let us know what you were stuck on.

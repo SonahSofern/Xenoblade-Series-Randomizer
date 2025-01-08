@@ -22,7 +22,7 @@ class Attribute:
         self.max = _maxVal
         AttributesList.append(self)
     def RollRank(self):
-        rank = random.randrange(1,4)
+        rank = random.choice(1,1,1,1,2,2,3)
         return rank
 
 AttributesList = []
@@ -34,7 +34,7 @@ Strength = Attribute("Strength", 0.8, "StrengthRev")
 Ether = Attribute("Ether", 0.4, "PowEtherRev")
 Dex = Attribute("Dex", 0.5, "DexRev")
 Agility = Attribute("Agility", 2, "AgilityRev")
-Luck = Attribute("Luck", 0.6, "LuckRev")
+Luck = Attribute("Luck", 3, "LuckRev")
 PArmor = Attribute("Defense", 40, "RstPower", _maxVal=100)
 EArmor =Attribute("E. Defense", 40, "RstEther", _maxVal=100)
 Crit = Attribute("Critical", 45, "CriticalRate", _maxVal=100)
