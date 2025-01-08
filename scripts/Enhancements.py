@@ -13,8 +13,11 @@ Giga = [1000,1700,2500,3000]
 
 
 EnhanceEffectsList = []
+DisplayTagList = []
 EnhanceClassList = []
 EnhanceID = 3896
+DisplayTagID = 65
+
 
 class Enhancement: 
     id = 0
@@ -28,7 +31,9 @@ class Enhancement:
     Rarity = 0
     ReversePar1 = False
     ReversePar2 = False
-    def __init__(self,Name, Enhancement, Caption,  Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReversePar1 = False, ReversePar2  = False):
+    addToList = True
+    DisTag = ""
+    def __init__(self,Name, Enhancement, Caption,  Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReversePar1 = False, ReversePar2  = False, addToList = True, DisTag = ""):
         self.name = Name
         self.EnhanceEffect = Enhancement
         self.Caption = Caption
@@ -38,7 +43,10 @@ class Enhancement:
         self.Description = Description
         self.ReversePar1 = ReversePar1
         self.ReversePar2 = ReversePar2
-        EnhanceClassList.append(self)
+        self.addToList = addToList
+        self.DisTag = DisTag
+        if self.addToList:
+            EnhanceClassList.append(self)
     def RollEnhancement(self):
         global EnhanceID
         self.id = EnhanceID
@@ -78,27 +86,41 @@ class Enhancement:
         if self.Description != "":
             JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"],[self.Caption], ["name"], self.Description)
 
+        if self.DisTag != "":
+            global DisplayTagID
+            DisplayTagDict = {
+            "$id": DisplayTagID,
+            "style": 36,
+            "name": self.DisTag
+            }
+            DisplayTagID += 1
+            DisplayTagList.append([DisplayTagDict])
+            JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"], [self.EnhanceEffect], ["Name"], DisplayTagID)
+
         EnhanceEffectsDict = {
             "$id": EnhanceID,
             "EnhanceEffect": self.EnhanceEffect,
             # "Param1": float(f"{SetParams(self.Param1)}.0"), If we need floating 0 doesnt look like it
             # "Param2": float(f"{SetParams(self.Param2)}.0"),
-            "Param1": SetParams(self.Param1),
-            "Param2": SetParams(self.Param2),
+            "Param1": SetParams(self.Param1, self.ReversePar1),
+            "Param2": SetParams(self.Param2, self.ReversePar2),
             "Caption": self.Caption,
             "Caption2": self.Caption
         }
         EnhanceEffectsList.append([EnhanceEffectsDict])
         
 def AddCustomEnhancements():
-    global EnhanceID
+    global EnhanceID, DisplayTagID
     JSONParser.ChangeJSONFile(["common/BTL_EnhanceEff.json"],["Param"], Helper.InclRange(1,1000), [1000], [241, 250, 245,54,143,257,259])
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randrange(20,51)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randrange(30,71)) # Healing with low HP
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randrange(10,61)) # Healing with low HP
     JSONParser.ExtendJSONFile("common/BTL_Enhance.json",  EnhanceEffectsList)
+    JSONParser.ExtendJSONFile("common_ms/btl_buff_ms.json", DisplayTagList)
     EnhanceID = 3896
+    DisplayTagID = 65
     EnhanceEffectsList.clear()
+    DisplayTagList.clear()
 
 
 
@@ -389,4 +411,5 @@ DamageAndCritUpMaxAffinity = Enhancement("Lucky",263, 320, Medium, Medium)
 ReducesTerrainDamage = Enhancement("Weathered",264, 334, Medium)
 SpecialRecievesAfterImage = Enhancement("Afterimage",213, 335, Baby)
 EyeOfJustice = Enhancement("Eye of Shining Justice",236,294)
+ChainAttackSeal = Enhancement("Chain Seal", 260, 0, addToList=False)
 #There are some torna effects not including them recoverable hp.
