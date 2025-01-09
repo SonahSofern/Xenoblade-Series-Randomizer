@@ -95,7 +95,7 @@ def RandomizeSkillEnhancements(optDict):
         enhancementFile.truncate()
         json.dump(enhanceFile, enhancementFile, indent=2, ensure_ascii=False)
         
-def ArtsCancelCost():
+def FirstSlotCost(): # Used since art cancel gets put here
     for i in range(1,7):
         with open(f"./_internal/JsonOutputs/common/BTL_Skill_Dr_Table0{i}.json", 'r+', encoding='utf-8') as driverFiles:
             dFile = json.load(driverFiles)
@@ -106,3 +106,5 @@ def ArtsCancelCost():
             driverFiles.truncate()
             json.dump(dFile, driverFiles, indent=2, ensure_ascii=False)
             
+def EarlyArtsCancel():
+    pass
