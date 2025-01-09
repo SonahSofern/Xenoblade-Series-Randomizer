@@ -55,7 +55,7 @@ class Enhancement:
         Rare = 1
         Legendary = 2
         self.Rarity = random.choice([Common,Common,Common, Rare,Rare, Legendary])
-        def SetParams(ParameterChoices, isReverse):
+        def SetParams(ParameterChoices, isReverse): # Restrict this to only run until all rarities are rolled then it picks an already rolled one
             if isReverse:
                 Common = 2
                 Rare = 1
@@ -88,6 +88,7 @@ class Enhancement:
 
         if self.DisTag != "":
             global DisplayTagID
+            print(self.DisTag)
             DisplayTagDict = {
             "$id": DisplayTagID,
             "style": 36,
