@@ -64,7 +64,7 @@ def RandomizeSkillEnhancements(optDict):
                     skillSlot["Enhance"] = newOne[1]
             
             else:
-                InvalidSkillEnhancements = [ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, AegisPowerUp, BigBangPowerUp, CatScimPowerUp, VarSaberPowerUp, MechArmsPowerUp, WhipswordPowerUp, DrillShieldPowerUp, DualScythesPowerUp, EvadeDrainHp, EvadeDriverArt, KnuckleClawsPowerUp, BitballPowerUp, GreataxePowerUp, TwinRingPowerUp, MegalancePowerUp,ShieldHammerPowerUp, ChromaKatanaPowerUp, EtherCannonPowerUp, ArtDamageHeal, AegisParty, AegisDriver]
+                InvalidSkillEnhancements = [ForcedHPPotionOnHit,ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, AegisPowerUp, BigBangPowerUp, CatScimPowerUp, VarSaberPowerUp, MechArmsPowerUp, WhipswordPowerUp, DrillShieldPowerUp, DualScythesPowerUp, EvadeDrainHp, EvadeDriverArt, KnuckleClawsPowerUp, BitballPowerUp, GreataxePowerUp, TwinRingPowerUp, MegalancePowerUp,ShieldHammerPowerUp, ChromaKatanaPowerUp, EtherCannonPowerUp, ArtDamageHeal, AegisParty, AegisDriver]
                 ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
                 ForcedSkills = []
                 for skillSlot in enhanceFile['rows']:
@@ -82,6 +82,7 @@ def RandomizeSkillEnhancements(optDict):
                         skill = BStartBattle
                     else:
                         skill = random.choice(ValidSkills)
+                        ValidSkills.remove(skill)
                     skill.RollEnhancement()
                     skillNameFile["rows"][skillSlot["$id"]-1]["name"] = skill.name
                     enhanceFile["rows"][skillSlot["$id"]-1]["Enhance"] = skill.id

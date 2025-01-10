@@ -3,7 +3,7 @@ from Enhancements import *
 
 
 def RandomizeAccessoryEnhancements():
-    InvalidSkillEnhancements = [EyeOfJustice, BladeSwitchDamageUp, ArtCancel, XStartBattle, YStartBattle, BStartBattle, EvadeDriverArt, EvadeDrainHp,ArtDamageHeal, BladeSwapDamage, DreamOfTheFuture, FlatAgiBoost,FlatDefBoost,FlatDexBoost, FlatEtherBoost, FlatHPBoost, FlatStrengthBoost, FlatLuckBoost]
+    InvalidSkillEnhancements = [ForcedHPPotionOnHit,EyeOfJustice, BladeSwitchDamageUp, ArtCancel, XStartBattle, YStartBattle, BStartBattle, EvadeDriverArt, EvadeDrainHp,ArtDamageHeal, BladeSwapDamage, DreamOfTheFuture, FlatAgiBoost,FlatDefBoost,FlatDexBoost, FlatEtherBoost, FlatHPBoost, FlatStrengthBoost, FlatLuckBoost, BladeComboOrbAdder, HPpo]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
     
     with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as EnhanceFile:

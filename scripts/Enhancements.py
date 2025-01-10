@@ -1,4 +1,4 @@
-import JSONParser, Helper, random
+import JSONParser, Helper, random, json
 
 
 Baby = [1,2,4,5]
@@ -32,6 +32,7 @@ class Enhancement:
     ReversePar1 = False
     ReversePar2 = False
     addToList = True
+    
     DisTag = ""
     def __init__(self,Name, Enhancement, Caption,  Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReversePar1 = False, ReversePar2  = False, addToList = True, DisTag = ""):
         self.name = Name
@@ -88,21 +89,18 @@ class Enhancement:
 
         if self.DisTag != "":
             global DisplayTagID
-            print(self.DisTag)
             DisplayTagDict = {
             "$id": DisplayTagID,
             "style": 36,
-            "name": self.DisTag
+            "name": self.DisTag,
+            "enhanceEff": self.EnhanceEffect
             }
             DisplayTagID += 1
-            DisplayTagList.append([DisplayTagDict])
-            JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"], [self.EnhanceEffect], ["Name"], DisplayTagID)
+            DisplayTagList.append(DisplayTagDict)
 
         EnhanceEffectsDict = {
             "$id": EnhanceID,
             "EnhanceEffect": self.EnhanceEffect,
-            # "Param1": float(f"{SetParams(self.Param1)}.0"), If we need floating 0 doesnt look like it
-            # "Param2": float(f"{SetParams(self.Param2)}.0"),
             "Param1": SetParams(self.Param1, self.ReversePar1),
             "Param2": SetParams(self.Param2, self.ReversePar2),
             "Caption": self.Caption,
@@ -116,14 +114,40 @@ def AddCustomEnhancements():
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randrange(20,51)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randrange(30,71)) # Healing with low HP
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randrange(10,61)) # Healing with low HP
-    JSONParser.ExtendJSONFile("common/BTL_Enhance.json",  EnhanceEffectsList)
-    JSONParser.ExtendJSONFile("common_ms/btl_buff_ms.json", DisplayTagList)
+    JSONParser.ExtendJSONFile("common/BTL_Enhance.json", EnhanceEffectsList)
+    SearchAndSetDisplayIDs(DisplayTagList)
     EnhanceID = 3896
     DisplayTagID = 65
     EnhanceEffectsList.clear()
     DisplayTagList.clear()
 
 
+def SearchAndSetDisplayIDs(disList):
+    with open("./_internal/JsonOutputs/common/BTL_EnhanceEff.json", 'r+', encoding='utf-8') as EnEffFile:
+        with open("./_internal/JsonOutputs/common_ms/btl_buff_ms.json", 'r+', encoding='utf-8') as btlBuffFile:
+            EnEff = json.load(EnEffFile)
+            btlBuff = json.load(btlBuffFile)
+            
+            for eff in EnEff["rows"]:   # sets names in EnhanceEff File
+                for enhancement in disList:        
+                    if enhancement["enhanceEff"] == eff["$id"]:
+                        eff["Name"] = enhancement["$id"]
+                        break
+
+            for item in disList: # adds name to ms file
+                btlBuff["rows"].append({
+                    "$id": item["$id"],
+                    "style": 36,
+                    "name": item["name"],   
+                })
+        
+            btlBuffFile.seek(0)
+            btlBuffFile.truncate()
+            json.dump(btlBuff, btlBuffFile, indent=2, ensure_ascii=False)       
+        EnEffFile.seek(0)
+        EnEffFile.truncate()
+        json.dump(EnEff,  EnEffFile, indent=2, ensure_ascii=False)    
+    
 
 HPBoost =       Enhancement("Health",1,1, Small)
 StrengthBoost = Enhancement("Strength", 2,2, Small)
@@ -216,7 +240,7 @@ SpecialAndArtsAggroDown = Enhancement("Aggro Down",79, 77, Medium)
 SpecialAggroDown = Enhancement("Aggro Down",79, 79, Medium) # For Specials only 
 SpecialAndArtsAggroUp = Enhancement("Aggro Up",80, 81, Medium)
 AggroReductionUp = Enhancement("Friendly",81, 85, Small)
-AggroEverySecond = Enhancement("Provocative",82, 86, Small, Description="Increases aggro every second by [ML:Enhance kind=Param1 ]")
+AggroEverySecond = Enhancement("Provocative",82, 86, Small, Description="Increases aggro every second by [ML:Enhance kind=Param1 ].")
 StartBattleAggro = Enhancement("Irksome",83, 92, Giga)
 RevivalHP = Enhancement("Revival",84, 96, Large)
 RevivalHPTeammate = Enhancement("Revival",85, 97, Large)
@@ -229,7 +253,7 @@ NightAccuracy = Enhancement("Nocturnal",95, 103, Large)
 DayAccuracy = Enhancement("Diurnal",96, 104, Large)
 ExpEnemiesBoost = Enhancement("Wisdom",97, 105, Medium)
 WPEnemiesBoost = Enhancement("Expert",98, 106, Large)
-PartyGaugeExcellentFill = Enhancement("Party",101, 109, Small, Description="Fills the Party Gauge when an\n\"Excellent\" is scored during a Special by [ML:Enhance kind=Param1 ].")
+PartyGaugeExcellentFill = Enhancement("Party",101, 109, Small, Description="Fills the Party Gauge on an\n\"Excellent\" Special by [ML:Enhance kind=Param1 ].")
 PartyGaugeCritFill = Enhancement("Party",102, 112, Mini, Description="Fills the Party Gauge for\neach critical hit delivered by [ML:Enhance kind=Param1].")
 PartyGaugeDriverArtFill = Enhancement("Party",103, 115, Baby, Description="Fills the Party Gauge\nfor each Driver Art used by [ML:Enhance kind=Param1].")
 DamageUpEnemyNumber = Enhancement("Underdog",104, 116, Medium)
@@ -329,7 +353,7 @@ ReduceElectricDamage = Enhancement("Electric Res",58, 211, [5], Medium)
 ReduceIceDamage = Enhancement("Ice Res",58, 212, [6], Medium)
 ReduceLightDamage = Enhancement("Light Res",58, 213, [7], Medium)
 ReduceDarkDamage = Enhancement("Dark Res",58, 214, [8], Medium)
-ChainAttackPower = Enhancement("Superchain",106, 215, Baby, Description="Increases attack power ratio\nat the start of a Chain Attack by [ML:Enhance kind=Param1 ]00%")
+ChainAttackPower = Enhancement("Superchain",106, 215, Baby, Description="Increases attack power ratio\nat the start of a Chain Attack by [ML:Enhance kind=Param1 ]00%.")
 LowHPHeal = Enhancement("Regenerate",181, 230, Baby)
 ArtUseHeal = Enhancement("Art Heal",86, 231, Baby)
 AutoDriverArtCancelHeal = Enhancement("Heal",91, 233, Baby)
@@ -385,7 +409,7 @@ TargetNearbyOrbsChainAttack = Enhancement("Splash",229, 286, Medium)
 TargetDamagedNonOpposingElement = Enhancement("Splash",230, 287)
 StenchRes = Enhancement("Anosmic",231, 288, Medium)
 DamageAndEvadeAffinityMax = Enhancement("Counterattack",269, 305, Medium, Mini)
-HPPotOnHitAgain = Enhancement("Potter",227, 289)
+ForcedHPPotionOnHit = Enhancement("Potter",227, 289)
 BladeComboOrbAdder = Enhancement("Orbs",234,290, Medium)
 EvadeDriverArt = Enhancement("Evader",32, 292)
 RetainAggro = Enhancement("Grudge",235, 293, Medium)
