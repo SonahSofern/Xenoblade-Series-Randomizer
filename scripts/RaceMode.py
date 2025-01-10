@@ -306,7 +306,7 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
 
     AllTrustSetAppearances = [StarterBladeTrustSetAppearance, A1TrustSetAppearance, A2TrustSetAppearance, A3TrustSetAppearance, A4TrustSetAppearance]
 
-    StarterBladeIDs = [1001, 1002, 1004, 1005, 1009, 1010]
+    StarterBladeIDs = [1001, 1002, 1004, 1005, 1007, 1009, 1010]
     A1BladeIDs = []
     A2BladeIDs = [1006]
     A3BladeIDs = [1011]
