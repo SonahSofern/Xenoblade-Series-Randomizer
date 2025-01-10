@@ -1,17 +1,25 @@
 import json, random
 from Enhancements import *
 
+class EnemyEnhancement:
+    pass
+
 
 Spike = Enhancement("Spiky", EtherCounter.EnhanceEffect, 0, [10,20,30,40], addToList=False)
 Pursuer = Enhancement("Pursuer", CombatSpeed.EnhanceEffect, 0, [100,200,300,400], addToList=False, DisTag="Pursue")
-AllReactionNull = Enhancement("Stable", TranquilGuard.EnhanceEffect, 0,[20,40,60,80], addToList=False)
-BlowdownSpike = Enhancement("Bouncy", GravityPinwheel.EnhanceEffect, 0, [5,10,15,20], [1,2,3,5], addToList=False)
+AllReactionNull = Enhancement("Stable", TranquilGuard.EnhanceEffect, 0,[20,40,60,80], addToList=False, DisTag="Null React")
+BlowdownSpike = Enhancement("Bouncy", GravityPinwheel.EnhanceEffect, 0, [5,10,15,20], [1,2,3,5], addToList=False,DisTag="Bounce")
 TasSnack = Enhancement("Devourer", TastySnack.EnhanceEffect, 0, [10,20,30,50], addToList=False, DisTag="Devourer")
+BladeComboResist = Enhancement("Combo Resist", ReduceEnemyBladeComboDamage.EnhanceEffect,0, [30,50,70,100], addToList=False, DisTag="Blade Combo Resist")
+Desperate = Enhancement("Desperate", DamageUpWhenHpDown.EnhanceEffect,0,[10,15,20,25],[300,400,500,600], addToList=False, DisTag="Desperation Attack" )
+Wish = Enhancement("Wish", WhenDiesHealAllies.EnhanceEffect, 0,[20,40,60,80], addToList=False, DisTag="Heal Allies")
+FirstStrike = Enhancement("Suprise", FirstArtDamage.EnhanceEffect,0,[300,500,600,700], addToList=False, DisTag="Suprise Strike")
 
-ValidSkills = [Spike, Twang, Transmigration, ReduceEnemyBladeComboDamage,AnnulDef,BlowdownSpike,AllReactionNull, Pursuer] # Phy counter not working weird ill make my own special enhancements for enemies
-Testing = [TasSnack]
 
-Nope = [MaxAffinityHeal]
+ValidSkills = [Spike,TasSnack,Desperate,Twang,BladeComboResist,Transmigration, ReduceEnemyBladeComboDamage,AnnulDef,BlowdownSpike,AllReactionNull, Pursuer,Wish] # Phy counter not working weird ill make my own special enhancements for enemies
+Testing = [FirstStrike]
+
+Nope = [MaxAffinityHeal,ReduceDamageFromNearbyEnemies] # These have been tried and dont work as far as I can tell
 
 def EnemyStats(spinBox):
     with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as EnArrangeFile:
@@ -20,6 +28,8 @@ def EnemyStats(spinBox):
                 EnArr = json.load(EnArrangeFile)
                 EnPar = json.load(EnParamFile)
                 Names = json.load(NamesFile)
+                
+                
                 for Enemy in EnArr["rows"]:
                     if spinBox >= random.randrange(0,101):
                         enh = random.choice(Testing)
