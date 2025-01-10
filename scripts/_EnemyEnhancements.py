@@ -2,13 +2,14 @@ import json, random
 from Enhancements import *
 
 
-Spike = Enhancement("Spiky", EtherCounter.EnhanceEffect, 0, [10,20,30,40], addToList=False, DisTag="Spike")
-Pursuer = Enhancement("Pursuer", CombatSpeed.EnhanceEffect, 0, [100,200,300,400], addToList=False)
+Spike = Enhancement("Spiky", EtherCounter.EnhanceEffect, 0, [10,20,30,40], addToList=False)
+Pursuer = Enhancement("Pursuer", CombatSpeed.EnhanceEffect, 0, [100,200,300,400], addToList=False, DisTag="Pursue")
 AllReactionNull = Enhancement("Stable", TranquilGuard.EnhanceEffect, 0,[20,40,60,80], addToList=False)
 BlowdownSpike = Enhancement("Bouncy", GravityPinwheel.EnhanceEffect, 0, [5,10,15,20], [1,2,3,5], addToList=False)
+TasSnack = Enhancement("Devourer", TastySnack.EnhanceEffect, 0, [10,20,30,50], addToList=False, DisTag="Devourer")
 
-ValidSkills = [Spike, Twang, TastySnack, Transmigration, ReduceEnemyBladeComboDamage,AnnulDef,BlowdownSpike,AllReactionNull, Pursuer] # Phy counter not working weird ill make my own special enhancements for enemies
-Testing = [Spike]
+ValidSkills = [Spike, Twang, Transmigration, ReduceEnemyBladeComboDamage,AnnulDef,BlowdownSpike,AllReactionNull, Pursuer] # Phy counter not working weird ill make my own special enhancements for enemies
+Testing = [TasSnack]
 
 Nope = [MaxAffinityHeal]
 

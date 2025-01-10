@@ -32,7 +32,7 @@ class Enhancement:
     ReversePar1 = False
     ReversePar2 = False
     addToList = True
-    
+    firstTime = True
     DisTag = ""
     def __init__(self,Name, Enhancement, Caption,  Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReversePar1 = False, ReversePar2  = False, addToList = True, DisTag = ""):
         self.name = Name
@@ -83,21 +83,22 @@ class Enhancement:
 
             return Parameter
 
+        if self.firstTime:
+            if self.Description != "":
+                JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"],[self.Caption], ["name"], self.Description)
 
-        if self.Description != "":
-            JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"],[self.Caption], ["name"], self.Description)
-
-        if self.DisTag != "":
-            global DisplayTagID
-            DisplayTagDict = {
-            "$id": DisplayTagID,
-            "style": 36,
-            "name": self.DisTag,
-            "enhanceEff": self.EnhanceEffect
-            }
-            DisplayTagID += 1
-            DisplayTagList.append(DisplayTagDict)
-
+            if self.DisTag != "":
+                global DisplayTagID
+                DisplayTagDict = {
+                "$id": DisplayTagID,
+                "style": 36,
+                "name": self.DisTag,
+                "enhanceEff": self.EnhanceEffect
+                }
+                DisplayTagID += 1
+                DisplayTagList.append(DisplayTagDict)
+            self.firstTime = False
+            
         EnhanceEffectsDict = {
             "$id": EnhanceID,
             "EnhanceEffect": self.EnhanceEffect,
