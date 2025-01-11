@@ -65,21 +65,23 @@ class Enhancement:
                 Common = 0
                 Rare = 1
                 Legendary = 2
+                
             if ParameterChoices == Baby:
                 Pstep = 1
             else:
                 Pstep = 5
+                
             if ParameterChoices == [0,0,0,0]:
                 Parameter = 0
             elif len(ParameterChoices) == 1:
                 Parameter = ParameterChoices[0]
             else:
                 if self.Rarity == Common:
-                    Parameter = random.randrange(ParameterChoices[0],ParameterChoices[1]+1,Pstep)
+                    Parameter = random.randint(ParameterChoices[0],ParameterChoices[1],Pstep)
                 elif self.Rarity == Rare:
-                    Parameter = random.randrange(ParameterChoices[1],ParameterChoices[2]+1,Pstep)
+                    Parameter = random.randint(ParameterChoices[1],ParameterChoices[2],Pstep)
                 elif self.Rarity == Legendary:
-                    Parameter = random.randrange(ParameterChoices[2],ParameterChoices[3]+1,Pstep)
+                    Parameter = random.randint(ParameterChoices[2],ParameterChoices[3],Pstep)
 
             return Parameter
 
@@ -112,9 +114,9 @@ class Enhancement:
 def AddCustomEnhancements():
     global EnhanceID, DisplayTagID
     JSONParser.ChangeJSONFile(["common/BTL_EnhanceEff.json"],["Param"], Helper.InclRange(1,1000), [1000], [241, 250, 245,54,143,257,259])
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randrange(20,51)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randrange(30,71)) # Healing with low HP
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randrange(10,61)) # Healing with low HP
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randint(20,50)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randint(30,70)) # Healing with low HP
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randint(10,60)) # Healing with low HP
     JSONParser.ExtendJSONFile("common/BTL_Enhance.json", EnhanceEffectsList)
     SearchAndSetDisplayIDs(DisplayTagList)
     EnhanceID = 3896

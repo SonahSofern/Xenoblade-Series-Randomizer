@@ -19,7 +19,7 @@ def EnemyStats(spinBox):
                 
                 
                 for Enemy in EnArr["rows"]:
-                    if spinBox >= random.randrange(0,101):
+                    if spinBox >= random.randint(0,100):
                            
                         enh = random.choice(ValidSkills)
                         prevNames.append({"myName" :Enemy["Name"], "myEnhance": enh})

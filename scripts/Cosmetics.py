@@ -168,7 +168,7 @@ def Cosmetics(optionDict):
     with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data['rows']:
-            if (odds > random.randrange(0,100)):
+            if (odds > random.randint(0,100)):
                 choice = random.choice(IDs.ValidDriverCosmetics + [["",0]])
                 row["Model"] = choice[0]
                 row["Driver"] = choice[1]
@@ -179,7 +179,7 @@ def Cosmetics(optionDict):
     with open("./_internal/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data['rows']:
-            if (odds > random.randrange(0,100)):
+            if (odds > random.randint(0,100)):
                 choice = random.choice(IDs.ValidBladeCosmetics + [["",0]])
                 row["Model"] = choice[0]
                 row["Blade"] = choice[1]
@@ -190,7 +190,7 @@ def Cosmetics(optionDict):
     with open("./_internal/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data['rows']:
-            if (odds > random.randrange(0,100)):
+            if (odds > random.randint(0,100)):
                 choice = random.choice(IDs.ValidArtificialBladeCosmetics + [["",0]])
                 row["Model"] = choice[0]
                 row["Blade"] = choice[1]

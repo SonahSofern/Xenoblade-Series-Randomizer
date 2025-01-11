@@ -15,10 +15,10 @@ def RandomizeWeaponEnhancements(slider):
             enhanceFile = json.load(file)
             skillNameFile = json.load(wepNames)
             for Wep in enhanceFile["rows"]:
-                if slider.get() > random.randrange(1,101):
+                if slider.get() > random.randint(0,100):
                     skillNameID = Wep["Name"]
                     enhancement = random.choice(ValidSkills)
-                    while enhancement.Caption > 255: # This is needed because the chips descriptions will not load properly they overflow if a caption is above 256. Super annoying the effects work the caption doesnt.
+                    while enhancement.Caption > 256: # This is needed because the chips descriptions will not load properly they overflow if a caption is above 256. Super annoying the effects work the caption doesnt.
                         enhancement = random.choice(ValidSkills)
                     enhancement.RollEnhancement()
                     for skillName in skillNameFile["rows"]:  
@@ -27,6 +27,7 @@ def RandomizeWeaponEnhancements(slider):
                                 oldName = skillName["name"]
                                 oldName = skillName["name"]
                                 oldNameList = oldName.split()
+                                
                                 for item in oldNameList:
                                     if item in ValidWeaponNames:
                                         lastWord = item
@@ -34,6 +35,7 @@ def RandomizeWeaponEnhancements(slider):
                                         lastWord = oldNameList[-1]
                                 skillName["name"] = f"{enhancement.name} {lastWord}"
                             break
+                        
                     Wep["Enhance1"] = enhancement.id
                 
                 
