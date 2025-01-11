@@ -3,7 +3,7 @@ from Enhancements import *
 
 
 
-def RandomizeWeaponEnhancements():
+def RandomizeWeaponEnhancements(slider):
     InvalidSkillEnhancements = [ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, BladeSwapDamage, EvadeDrainHp, EvadeDriverArt, EtherCannonRange,ArtDamageHeal, DreamOfTheFuture]
     ValidWeaponNames = ["Rings", "Ball", "Cannon", "Sword", "Slayer", "Edge", "Brand", "Scimitar", "Cleaver", "Shield", "Destroyer", "Plate", "Pavise", "Gauntlets", "Arms", "Saber", "Slicer", "Whips", "Claw", "Scythes", "Sickles", "Gutters", "Hatchet", "Axe", "Greataxe", "Lance", "Mecha-Spear", "Hammer", "Smasher", "Tachi", "Katana", "Knuckles", "Fists", "Nodachi", "Crosier", "Gunknives"]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
@@ -15,7 +15,7 @@ def RandomizeWeaponEnhancements():
             enhanceFile = json.load(file)
             skillNameFile = json.load(wepNames)
             for Wep in enhanceFile["rows"]:
-                if Wep["Enhance1"] != 0: # Only replaces already enhanced weps
+                if slider.get() > random.randrange(1,101):
                     skillNameID = Wep["Name"]
                     enhancement = random.choice(ValidSkills)
                     while enhancement.Caption > 255: # This is needed because the chips descriptions will not load properly they overflow if a caption is above 256. Super annoying the effects work the caption doesnt.
