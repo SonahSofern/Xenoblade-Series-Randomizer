@@ -174,9 +174,9 @@ def CustomArtDescriptionGenerator(): # With all the changes to arts, we want cus
                 elif RandomizedArtEnhancements[row["$id"] - 1] == 2705:
                     CurrentArtDescription[2] += "Aquatic↑"
                 elif RandomizedArtEnhancements[row["$id"] - 1] in [2760, 2755]:
-                    CurrentArtDescription[2] += "Back atk↑"
+                    CurrentArtDescription[2] += "Back↑"
                 elif RandomizedArtEnhancements[row["$id"] - 1] == 2810:
-                    CurrentArtDescription[2] += "Cancel atk↑"
+                    CurrentArtDescription[2] += "Cancel Atk↑"
                 elif RandomizedArtEnhancements[row["$id"] - 1] == 2975:
                     CurrentArtDescription[2] += "Crit↑"  
                 elif RandomizedArtEnhancements[row["$id"] - 1] == 2840:
@@ -186,7 +186,7 @@ def CustomArtDescriptionGenerator(): # With all the changes to arts, we want cus
                 elif RandomizedArtEnhancements[row["$id"] - 1] == 2700:
                     CurrentArtDescription[2] += "Flying↑"
                 elif RandomizedArtEnhancements[row["$id"] - 1] == 2740:
-                    CurrentArtDescription[2] += "Front atk↑"
+                    CurrentArtDescription[2] += "Front↑"
                 elif RandomizedArtEnhancements[row["$id"] - 1] in [2735, 2878]:
                     CurrentArtDescription[2] += "Atk, Heal"
                 elif RandomizedArtEnhancements[row["$id"] - 1] == 2845:
@@ -208,7 +208,7 @@ def CustomArtDescriptionGenerator(): # With all the changes to arts, we want cus
                 elif RandomizedArtEnhancements[row["$id"] - 1] == 2861:
                     CurrentArtDescription[2] += "Pierce"
                 elif RandomizedArtEnhancements[row["$id"] - 1] in [2746, 2745, 2750]:
-                    CurrentArtDescription[2] += "Side atk↑"
+                    CurrentArtDescription[2] += "Side↑"
                 elif RandomizedArtEnhancements[row["$id"] - 1] in [2770, 2765]:
                     CurrentArtDescription[2] += "Toppled↑"
                 elif RandomizedArtEnhancements[row["$id"] - 1] == 2680:
