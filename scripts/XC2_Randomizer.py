@@ -228,7 +228,7 @@ def Options():
     GenStandardOption("Driver Art Damage Ratio", TabDrivers, "Randomizes the damage ratio of each driver art", [lambda: CustomArts.DriverArtRando(OptionDictionary)])
     GenStandardOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: CustomArts.DriverArtRando(OptionDictionary)], ["Debuffs", [], "Buffs", [], "Doom", []], optionType=Spinbox)
     GenStandardOption("Driver Art Enhancements", TabDrivers, "Randomizes the driver art modifiers", [lambda: CustomArts.DriverArtRando(OptionDictionary)])
-    GenStandardOption("Driver Art Reaction", TabDrivers, "Randomizes art reactions (break, blowdown etc.)",[lambda: CustomArts.DriverArtRando(OptionDictionary)], ["Clear Vanilla Reactions",[],"Multiple Reactions",[]], optionType=Spinbox)
+    GenStandardOption("Driver Art Reaction", TabDrivers, "Randomizes art reactions (break, blowdown etc.)",[lambda: CustomArts.DriverArtRando(OptionDictionary)], ["Clear Vanilla Reactions", [],"Multiple Reactions", []], optionType=Spinbox)
                 
     # Blades
     GenStandardOption("Blade Aux Cores", TabBlades, "Randomizes a Blade's Aux Core enhancement", [lambda: AuxCr.RandomizeAuxCoreEnhancements()])
@@ -323,6 +323,7 @@ def Randomize():
 
         # Runs all randomization
         RunOptions()
+        IDs.ArtRandoCompleteness = 0
         randoProgressDisplay.config(text="Packing BDATs")
 
         try:
