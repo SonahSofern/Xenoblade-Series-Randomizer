@@ -21,6 +21,7 @@ def DriverArtRando(OptionsRunDict): # We want custom descriptions for the driver
         ReplaceWithBuffs = OptionsRunDict["Driver Art Debuffs"]["subOptionObjects"]["Buffs"]["subOptionTypeVal"].get()
         ReplaceWithDoom = OptionsRunDict["Driver Art Debuffs"]["subOptionObjects"]["Doom"]["subOptionTypeVal"].get()
         ClearVanillaReactions = OptionsRunDict["Driver Art Reaction"]["subOptionObjects"]["Clear Vanilla Reactions"]["subOptionTypeVal"].get()
+        MultipleReactions = OptionsRunDict["Driver Art Reaction"]["subOptionObjects"]["Multiple Reactions"]["subOptionTypeVal"].get()
 
         if DebuffRando:
             ValidDebuffReplacements = []
@@ -36,6 +37,8 @@ def DriverArtRando(OptionsRunDict): # We want custom descriptions for the driver
             if ClearVanillaReactions:
                 Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)    
             ChangeJSONFileArtsRando(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, AutoAttacks, ReactionSliderOdds)
+            if not MultipleReactions:
+                JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], ValidArtIDs, RemoveReactionsFromNonLastHit)
         if CooldownRando:
             RandomArtCooldowns()
         if DamageRatioRando:
@@ -330,3 +333,19 @@ def CustomArtDescriptionGenerator(): # With all the changes to arts, we want cus
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def RemoveReactionsFromNonLastHit(art):
+    last_hit = -1
+    last_react = -1
+    for i in range(16, 0, -1):
+        if art['HitFrm' + str(i)] != 0 and last_hit == -1: # The final hit
+            last_hit = i
+            if art['ReAct' + str(i)] != 0: # if the final hit contains the final reaction
+                last_react = i
+        elif (i < last_hit) & (last_react == -1): # Before the final hit, when the last reaction is not yet found
+            if art['ReAct' + str(i)] != 0:
+                last_react = i
+        elif i < last_hit: # Before the final hit, when the last reaction has been found    
+            art['ReAct' + str(i)] = 0
+        else: # Reactions which come after the final hit (unused, but let's keep the table clean for debugging purposes)
+            art['ReAct' + str(i)] = 0
