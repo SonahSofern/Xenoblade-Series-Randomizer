@@ -50,6 +50,22 @@ def ChangeJSONLine(filenames, ids, keys, replacement):
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
+
+def ChangeJSONLineWithCallback(filenames, ids, callback):
+    for name in filenames:
+        filePath = "./_internal/JsonOutputs/" + name
+        if not os.path.exists(filePath):
+          #print(filePath + " filepath does not exist.")
+          continue
+        with open(filePath, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for item in data['rows']:
+                if item["$id"] in ids:
+                    callback(item)
+
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
             
 def ExtendJSONFile(filePath, additionsList = []):
     with open("./_internal/JsonOutputs/" + filePath, 'r+', encoding='utf-8') as file:

@@ -246,6 +246,7 @@ def RaceModeChanging(OptionsRunDict):
         SecondSkillTreeCostReduc()
         DriverArtUpgradeCostChange()
         BladeTreeMaxRewardChange()
+        PoppiswapCostReductions()
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get():    
         print("Changing Shops")
         ShyniniSaveUs()
@@ -259,6 +260,57 @@ def RaceModeChanging(OptionsRunDict):
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["DLC Item Removal"]["subOptionTypeVal"].get():
         print("Nerfing Corvin and Crossette")
         DLCItemChanges()
+
+def PoppiswapCostReductions(): # reduces cost of poppiswap stuff
+    with open("./_internal/JsonOutputs/common/BTL_HanaPower.json", 'r+', encoding='utf-8') as file: # upgrade costs halved
+        data = json.load(file)
+        for row in data["rows"]:
+            row["EtherNum1"] = row["EtherNum1"] // 2
+            row["EtherNum2"] = row["EtherNum2"] // 2
+            row["EtherNum3"] = row["EtherNum3"] // 2
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/ITM_HanaArtsEnh.json", 'r+', encoding='utf-8') as file: # half cost to make art enhancements
+        data = json.load(file)
+        for row in data["rows"]:
+            row["NeedEther"] = row["NeedEther"] // 2
+            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as file: # half cost to make aux cores
+        data = json.load(file)
+        for row in data["rows"]:
+            row["NeedEther"] = row["NeedEther"] // 2
+            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/ITM_HanaAtr.json", 'r+', encoding='utf-8') as file: # half cost to make element cores
+        data = json.load(file)
+        for row in data["rows"]:
+            row["NeedEther"] = row["NeedEther"] // 2
+            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)    
+    with open("./_internal/JsonOutputs/common/ITM_HanaAtr.json", 'r+', encoding='utf-8') as file: # half cost to make blade arts
+        data = json.load(file)
+        for row in data["rows"]:
+            row["NeedEther"] = row["NeedEther"] // 2
+            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/ITM_HanaRole.json", 'r+', encoding='utf-8') as file: # half cost to make role cores
+        data = json.load(file)
+        for row in data["rows"]:
+            row["NeedEther"] = row["NeedEther"] // 2
+            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)      
 
 def LessGrinding(): #adjusting level based exp gains, and debuffs while underleveled to make it less grindy
     with open("./_internal/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: 
@@ -306,7 +358,7 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
 
     AllTrustSetAppearances = [StarterBladeTrustSetAppearance, A1TrustSetAppearance, A2TrustSetAppearance, A3TrustSetAppearance, A4TrustSetAppearance]
 
-    StarterBladeIDs = [1001, 1002, 1004, 1005, 1009, 1010]
+    StarterBladeIDs = [1001, 1002, 1004, 1005, 1007, 1009, 1010]
     A1BladeIDs = []
     A2BladeIDs = [1006]
     A3BladeIDs = [1011]
