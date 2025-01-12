@@ -79,5 +79,10 @@ Repeat =Enhancement("Repeat", DidIDoThat.EnhanceEffect, 0,[30,50,70,90], addToLi
 # Steamroll = Enhancement("Moxie", DamageUpOnEnemyKill.EnhanceEffect, 0, [50,100,150,200], addToList=False, DisTag="Strength Boost")
 Enraged = Enhancement("Friendship", AllyDownDamageUp.EnhanceEffect, 0, [50,100,150,200], addToList=False)
 
-ValidSkills = [Healthy, Strong, Etheras, Dextrous, Agility, Luck, EtherBlock, PhyBlock, Spike,Enraged,Repeat,Lightning,FirstStrike,TasSnack,Desperate,Twang,BladeComboResist,Transmigration, ReduceEnemyBladeComboDamage,AnnulDef,BlowdownSpike,AllReactionNull, Pursuer,Wish] # Phy counter not working weird ill make my own special enhancements for enemies
+
+
+
+
+
+ValidSkills = [Healthy, Strong, Etheras, Dextrous, Agility, Luck, EtherBlock, PhyBlock, Spike,Enraged,Repeat,Lightning,FirstStrike,TasSnack,Desperate,Twang,BladeComboResist,Transmigration,AnnulDef,BlowdownSpike,AllReactionNull, Pursuer,Wish] # Phy counter not working weird ill make my own special enhancements for enemies
 Testing = []

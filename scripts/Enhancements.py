@@ -77,11 +77,11 @@ class Enhancement:
                 Parameter = ParameterChoices[0]
             else:
                 if self.Rarity == Common:
-                    Parameter = random.randint(ParameterChoices[0],ParameterChoices[1],Pstep)
+                    Parameter = random.randrange(ParameterChoices[0],ParameterChoices[1]+1,Pstep)
                 elif self.Rarity == Rare:
-                    Parameter = random.randint(ParameterChoices[1],ParameterChoices[2],Pstep)
+                    Parameter = random.randrange(ParameterChoices[1],ParameterChoices[2]+1,Pstep)
                 elif self.Rarity == Legendary:
-                    Parameter = random.randint(ParameterChoices[2],ParameterChoices[3],Pstep)
+                    Parameter = random.randrange(ParameterChoices[2],ParameterChoices[3]+1,Pstep)
 
             return Parameter
 

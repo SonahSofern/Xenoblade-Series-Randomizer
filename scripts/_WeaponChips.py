@@ -28,11 +28,11 @@ def RandomizeWeaponEnhancements(slider):
                                 oldName = skillName["name"]
                                 oldNameList = oldName.split()
                                 
+                                lastWord = oldNameList[-1]
                                 for item in oldNameList:
                                     if item in ValidWeaponNames:
-                                        lastWord = item
-                                    else:            
-                                        lastWord = oldNameList[-1]
+                                        lastWord = item    
+
                                 skillName["name"] = f"{enhancement.name} {lastWord}"
                             break
                         
