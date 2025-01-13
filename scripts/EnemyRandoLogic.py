@@ -456,7 +456,7 @@ def AeshmaCoreHPNerf(): #this fight sucks
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 318:
-                row["HpMaxRev"] = 1000 # nerfed hp by 7/8ths
+                row["HpMaxRev"] = 1500 # nerfed hp by 5/6ths
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)        
