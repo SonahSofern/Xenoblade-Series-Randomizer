@@ -311,6 +311,16 @@ def PoppiswapCostReductions(): # reduces cost of poppiswap stuff
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)      
+    with open("./_internal/JsonOutputs/common/BTL_HanaBase.json", 'r+', encoding='utf-8') as file: # upgrade costs halved
+        data = json.load(file)
+        for row in data["rows"]:
+            row["Circuit4Num"] = row["Circuit4Num"] // 5
+            row["Circuit5Num"] = row["Circuit5Num"] // 5
+            row["Circuit6Num"] = row["Circuit6Num"] // 5
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
 
 def LessGrinding(): #adjusting level based exp gains, and debuffs while underleveled to make it less grindy
     with open("./_internal/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: 
@@ -350,7 +360,7 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
     TaskLogIDs = [659, 660, 661, 662]
     LocationNames = ["Gormott", "Uraya", "Mor Ardain", "Leftheria", "Indol", "Tantal", "Spirit Crucible Elpys", "the Cliffs of Morytha", "the World Tree"]
 
-    StarterBladeTrustSetAppearance = [16, 11, 12, 13, 14]
+    StarterBladeTrustSetAppearance = [16, 16, 12, 13, 14]
     A1TrustSetAppearance = [16, 16, 12, 13, 14]
     A2TrustSetAppearance = [16, 16, 16, 13, 14]
     A3TrustSetAppearance = [16, 16, 16, 16, 14]
@@ -358,10 +368,10 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
 
     AllTrustSetAppearances = [StarterBladeTrustSetAppearance, A1TrustSetAppearance, A2TrustSetAppearance, A3TrustSetAppearance, A4TrustSetAppearance]
 
-    StarterBladeIDs = [1001, 1002, 1004, 1005, 1007, 1009, 1010]
+    StarterBladeIDs = [1001, 1002, 1004, 1005, 1006, 1007, 1009, 1010, 1011]
     A1BladeIDs = []
-    A2BladeIDs = [1006]
-    A3BladeIDs = [1011]
+    A2BladeIDs = []
+    A3BladeIDs = []
     A4BladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
 
     ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
