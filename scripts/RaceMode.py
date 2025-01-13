@@ -227,6 +227,15 @@ def RaceModeChanging(OptionsRunDict):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in [30034, 30036]: # Removing more scripts that remove morag from party
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)       
     NGPlusBladeCrystalIDs = DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
     DifficultyChanges()
     DriverLvandSPFix()
