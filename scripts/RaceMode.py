@@ -966,11 +966,11 @@ def WeaponChipShopPowerLevelIncrease(): # Common issue at start of run is first 
             for row in data["rows"]:
                 if row["$id"] == 7:
                     if ChosenIndices[0] == 0: # Gormott
-                        row["DefItem2"] == 10003
-                        row["DefItem3"] == 10011
+                        row["DefItem2"] = 10003
+                        row["DefItem3"] = 10011
                     else: # Uraya
-                        row["DefItem2"] == 10014
-                        row["DefItem3"] == 10015
+                        row["DefItem2"] = 10014
+                        row["DefItem3"] = 10015
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
