@@ -251,6 +251,7 @@ def RaceModeChanging(OptionsRunDict):
         print("Changing Shops")
         ShyniniSaveUs()
         ShopRemovals()
+        WeaponChipShopPowerLevelIncrease()
         MovespeedDeedChanges()
         PouchItemCarryCapacityIncrease()
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Enemy Drop Changes"]["subOptionTypeVal"].get():
@@ -985,3 +986,17 @@ def LandmarkConditions(): # Makes Cliffs of Morytha and Spirit Crucible Elpys av
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
+def WeaponChipShopPowerLevelIncrease(): # Common issue at start of run is first boss is a slog to fight if they're high level, so we want to give some chips around the average power level of the first area we're going to.
+        with open("./_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as file: 
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] == 7:
+                    if ChosenIndices[0] == 0: # Gormott
+                        row["DefItem2"] == 10003
+                        row["DefItem3"] == 10011
+                    else: # Uraya
+                        row["DefItem2"] == 10014
+                        row["DefItem3"] == 10015
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
