@@ -29,10 +29,6 @@ def RaceModeChanging(OptionsRunDict):
     AreaList3 = [125, 133, 168] #125, 133, 168
     AreaList4 = [175, 187] #175, 187
 
-    AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
-
-    MSGIDList = [63, 141, 205, 367, 299, 314, 396, 413, 445] #list of MSGIDs for each of the landmarks in Area List (276 for Temperantia) (427 for Land of Morytha) 
-
     RaceModeDungeons = []
     RaceModeDungeons.append(random.choice(AreaList1))
     RaceModeDungeons.append(random.choice(AreaList2))
@@ -148,7 +144,7 @@ def RaceModeChanging(OptionsRunDict):
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
-    with open("./_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: #race mode implementation #these just adjust the quest markers as far as I can tell
+    with open("./_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # adjust story events, changing scenario flag
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 10013:
@@ -235,7 +231,8 @@ def RaceModeChanging(OptionsRunDict):
                 row["scriptStartId"] = 0
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)       
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
     NGPlusBladeCrystalIDs = DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
     DifficultyChanges()
     DriverLvandSPFix()
@@ -272,65 +269,9 @@ def RaceModeChanging(OptionsRunDict):
         DLCItemChanges()
 
 def PoppiswapCostReductions(): # reduces cost of poppiswap stuff
-    with open("./_internal/JsonOutputs/common/BTL_HanaPower.json", 'r+', encoding='utf-8') as file: # upgrade costs halved
-        data = json.load(file)
-        for row in data["rows"]:
-            row["EtherNum1"] = row["EtherNum1"] // 2
-            row["EtherNum2"] = row["EtherNum2"] // 2
-            row["EtherNum3"] = row["EtherNum3"] // 2
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/ITM_HanaArtsEnh.json", 'r+', encoding='utf-8') as file: # half cost to make art enhancements
-        data = json.load(file)
-        for row in data["rows"]:
-            row["NeedEther"] = row["NeedEther"] // 2
-            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as file: # half cost to make aux cores
-        data = json.load(file)
-        for row in data["rows"]:
-            row["NeedEther"] = row["NeedEther"] // 2
-            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/ITM_HanaAtr.json", 'r+', encoding='utf-8') as file: # half cost to make element cores
-        data = json.load(file)
-        for row in data["rows"]:
-            row["NeedEther"] = row["NeedEther"] // 2
-            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)    
-    with open("./_internal/JsonOutputs/common/ITM_HanaAtr.json", 'r+', encoding='utf-8') as file: # half cost to make blade arts
-        data = json.load(file)
-        for row in data["rows"]:
-            row["NeedEther"] = row["NeedEther"] // 2
-            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/ITM_HanaRole.json", 'r+', encoding='utf-8') as file: # half cost to make role cores
-        data = json.load(file)
-        for row in data["rows"]:
-            row["NeedEther"] = row["NeedEther"] // 2
-            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)      
-    with open("./_internal/JsonOutputs/common/BTL_HanaBase.json", 'r+', encoding='utf-8') as file: # upgrade costs halved
-        data = json.load(file)
-        for row in data["rows"]:
-            row["Circuit4Num"] = row["Circuit4Num"] // 5
-            row["Circuit5Num"] = row["Circuit5Num"] // 5
-            row["Circuit6Num"] = row["Circuit6Num"] // 5
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-
+    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/ITM_HanaArtsEnh.json","./_internal/JsonOutputs/common/ITM_HanaAssist.json", "./_internal/JsonOutputs/common/ITM_HanaAtr.json", "./_internal/JsonOutputs/common/ITM_HanaNArtsSet.json", "./_internal/JsonOutputs/common/ITM_HanaRole.json"], ["NeedEther", "DustEther"], ['row[key] // 2'])
+    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_HanaPower.json"], ["EtherNum1", "EtherNum2", "EtherNum3"], ['row[key] // 2'])
+    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_HanaBase.json"], ["Circuit4Num", "Circuit5Num", "Circuit6Num"], ['row[key] // 5'])
 
 def LessGrinding(): #adjusting level based exp gains, and debuffs while underleveled to make it less grindy
     with open("./_internal/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: 
@@ -481,10 +422,7 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
 
 def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
     if NGPlusBladeCrystalIDs == None:
-        A1CoreCrystalIDs = []
-        A2CoreCrystalIDs = []
-        A3CoreCrystalIDs = []
-        A4CoreCrystalIDs = []
+        A1CoreCrystalIDs, A2CoreCrystalIDs, A3CoreCrystalIDs, A4CoreCrystalIDs = [], [], [], []
     if NGPlusBladeCrystalIDs != None:
         NonNGPlusCoreCrystalIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
         NonNGPlusCoreCrystalIDs = [x for x in NonNGPlusCoreCrystalIDs if x not in NGPlusBladeCrystalIDs]
@@ -495,28 +433,45 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
         del NonNGPlusCoreCrystalIDs[:12]
         A3CoreCrystalIDs = (NonNGPlusCoreCrystalIDs)
         A4CoreCrystalIDs = NGPlusBladeCrystalIDs
-    A1Equip = []
-    A2Equip = []
-    A3Equip = []
-    A4Equip = []
-    for i in range(0, len(AllRaceModeItemTypeIDs)):
-        A1Num = random.randint(1,3) - 1
-        A2Num = random.randint(4,6) - 1
-        A3Num = random.randint(7,9) - 1
-        A4Num = random.randint(10,12) - 1
-        A1Equip.append(AllRaceModeItemTypeIDs[i][A1Num]) 
-        A2Equip.append(AllRaceModeItemTypeIDs[i][A2Num])
-        A3Equip.append(AllRaceModeItemTypeIDs[i][A3Num])
-        A4Equip.append(AllRaceModeItemTypeIDs[i][A4Num])
-    for i in range(0, len(RaceModeAuxCoreIDs)):
-        A1Num = random.randint(1,3) - 1
-        A2Num = random.randint(4,6) - 1
-        A3Num = random.randint(7,9) - 1
-        A4Num = random.randint(10,12) - 1
-        A1Equip.append(RaceModeAuxCoreIDs[i][A1Num]) 
-        A2Equip.append(RaceModeAuxCoreIDs[i][A2Num])
-        A3Equip.append(RaceModeAuxCoreIDs[i][A3Num])
-        A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
+    A1Equip, A2Equip, A3Equip, A4Equip = [], [], [], []
+    DriverAccesEnh = OptionsRunDict["Driver Accessories"]["optionTypeVal"].get()
+    AuxCoreEnh = OptionsRunDict["Blade Aux Cores"]["optionTypeVal"].get()
+    if DriverAccesEnh: # If we have the wacky enhancements:
+        CommonDAcc, RareDAcc, LegDAcc = Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [0], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [1], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [2], "$id")
+        for i in range(0, len(CommonDAcc) // 2):
+            A1Equip.append(CommonDAcc[i])
+        for i in range(len(CommonDAcc) // 2, len(CommonDAcc)):
+            A2Equip.append(CommonDAcc[i])
+        A3Equip.extend(RareDAcc)
+        A4Equip.extend(LegDAcc)
+    else:
+        for i in range(0, len(AllRaceModeItemTypeIDs)):
+            A1Num = random.randint(1,3) - 1
+            A2Num = random.randint(4,6) - 1
+            A3Num = random.randint(7,9) - 1
+            A4Num = random.randint(10,12) - 1
+            A1Equip.append(AllRaceModeItemTypeIDs[i][A1Num]) 
+            A2Equip.append(AllRaceModeItemTypeIDs[i][A2Num])
+            A3Equip.append(AllRaceModeItemTypeIDs[i][A3Num])
+            A4Equip.append(AllRaceModeItemTypeIDs[i][A4Num])
+    if AuxCoreEnh: # with wacky aux cores
+        CommonAux, RareAux, LegAux = Helper.FindValues("./_internal/JsonOutputs/common/ITM_OrbEquip.json", ["Rarity"], [0], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_OrbEquip.json", ["Rarity"], [1], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_OrbEquip.json", ["Rarity"], [2], "$id")
+        for i in range(0, len(CommonAux) // 2):
+            A1Equip.append(CommonAux[i])
+        for i in range(len(CommonAux) // 2, len(CommonAux)):
+            A2Equip.append(CommonAux[i])
+        A3Equip.extend(RareAux)
+        A4Equip.extend(LegAux)
+    else:
+        for i in range(0, len(RaceModeAuxCoreIDs)):
+            A1Num = random.randint(1,3) - 1
+            A2Num = random.randint(4,6) - 1
+            A3Num = random.randint(7,9) - 1
+            A4Num = random.randint(10,12) - 1
+            A1Equip.append(RaceModeAuxCoreIDs[i][A1Num]) 
+            A2Equip.append(RaceModeAuxCoreIDs[i][A2Num])
+            A3Equip.append(RaceModeAuxCoreIDs[i][A3Num])
+            A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
     AllEquipIDs = [A1Equip, A2Equip, A3Equip, A4Equip]
     Area1LootIDs = A1CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25249, 25264) * 2 + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2 + [25407] * 10
     if ChosenIndices[1] == 3: # Leftherian Archipelago (30ish chests)
