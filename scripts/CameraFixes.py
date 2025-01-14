@@ -19,3 +19,4 @@ def BladeArtCameraFixes():
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
+
