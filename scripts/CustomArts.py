@@ -20,17 +20,23 @@ def DriverArtRando(OptionsRunDict): # We want custom descriptions for the driver
         ReplaceWithDebuffs = OptionsRunDict["Driver Art Debuffs"]["subOptionObjects"]["Debuffs"]["subOptionTypeVal"].get()
         ReplaceWithBuffs = OptionsRunDict["Driver Art Debuffs"]["subOptionObjects"]["Buffs"]["subOptionTypeVal"].get()
         ReplaceWithDoom = OptionsRunDict["Driver Art Debuffs"]["subOptionObjects"]["Doom"]["subOptionTypeVal"].get()
+        ReplaceWithMonadoArmor = OptionsRunDict["Driver Art Debuffs"]["subOptionObjects"]["Monado Armor"]["subOptionTypeVal"].get()
+        ReplaceWithSuperstrength = OptionsRunDict["Driver Art Debuffs"]["subOptionObjects"]["Superstrength"]["subOptionTypeVal"].get()
         ClearVanillaReactions = OptionsRunDict["Driver Art Reaction"]["subOptionObjects"]["Clear Vanilla Reactions"]["subOptionTypeVal"].get()
         MultipleReactions = OptionsRunDict["Driver Art Reaction"]["subOptionObjects"]["Multiple Reactions"]["subOptionTypeVal"].get()
 
         if DebuffRando:
             ValidDebuffReplacements = []
             if ReplaceWithDebuffs:
-                ValidDebuffReplacements.extend(list(set(ArtDebuffs)-set([21,35])))
+                ValidDebuffReplacements.extend(list(set(ArtDebuffs)-set([16,17,21,35])))
             if ReplaceWithBuffs:
                 ValidDebuffReplacements.extend(ArtBuffs)
             if ReplaceWithDoom:
                 ValidDebuffReplacements.extend([21])
+            if ReplaceWithMonadoArmor:
+                ValidDebuffReplacements.extend([16])
+            if ReplaceWithSuperstrength:
+                ValidDebuffReplacements.extend([17])     
             ValidDebuffReplacements = list(set(ValidDebuffReplacements))
             ChangeJSONFileArtsRando(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, ValidDebuffReplacements, AutoAttacks, DebuffSliderOdds)
         if ReactionRando:

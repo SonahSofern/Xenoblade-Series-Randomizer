@@ -226,7 +226,7 @@ def Options():
     GenStandardOption("Driver Art Animation Speeds", TabDrivers, "Randomizes a Driver's art animation speeds", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)], optionType=Spinbox)    
     GenStandardOption("Driver Art Cooldowns", TabDrivers, "Randomizes the cooldown of each driver art", [lambda: CustomArts.DriverArtRando(OptionDictionary)])
     GenStandardOption("Driver Art Damage Ratio", TabDrivers, "Randomizes the damage ratio of each driver art", [lambda: CustomArts.DriverArtRando(OptionDictionary)])
-    GenStandardOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: CustomArts.DriverArtRando(OptionDictionary)], ["Debuffs", [], "Buffs", [], "Doom", []], optionType=Spinbox)
+    GenStandardOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: CustomArts.DriverArtRando(OptionDictionary)], ["Debuffs", [], "Buffs", [], "Doom", [], "Monado Armor", [], "Superstrength", []], optionType=Spinbox)
     GenStandardOption("Driver Art Enhancements", TabDrivers, "Randomizes the driver art modifiers", [lambda: CustomArts.DriverArtRando(OptionDictionary)])
     GenStandardOption("Driver Art Reaction", TabDrivers, "Randomizes art reactions (break, blowdown etc.)",[lambda: CustomArts.DriverArtRando(OptionDictionary)], ["Clear Vanilla Reactions", [],"Multiple Reactions", []], optionType=Spinbox)
                 
