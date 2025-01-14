@@ -24,10 +24,10 @@ def RaceModeChanging(OptionsRunDict):
     #Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
     #Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
 
-    AreaList1 = [41, 68] #41, 68
-    AreaList2 = [99, 152] #99, 152
-    AreaList3 = [125, 133, 168] #125, 133, 168
-    AreaList4 = [175, 187] #175, 187
+    AreaList1 = [41] #41, 68
+    AreaList2 = [152] #99, 152
+    AreaList3 = [125] #125, 133, 168
+    AreaList4 = [175] #175, 187
 
     RaceModeDungeons = []
     RaceModeDungeons.append(random.choice(AreaList1))
@@ -448,12 +448,17 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
     AuxCoreEnh = OptionsRunDict["Blade Aux Cores"]["optionTypeVal"].get()
     if DriverAccesEnh: # If we have the wacky enhancements:
         CommonDAcc, RareDAcc, LegDAcc = Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [0], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [1], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [2], "$id")
+        random.shuffle(CommonDAcc)
+        random.shuffle(RareDAcc)
+        random.shuffle(LegDAcc)
         for i in range(0, len(CommonDAcc) // 2):
             A1Equip.append(CommonDAcc[i])
-        for i in range(len(CommonDAcc) // 2, len(CommonDAcc)):
+        for i in range(len(CommonDAcc) // 2, (len(CommonDAcc) * 3) // 4):
             A2Equip.append(CommonDAcc[i])
-        A3Equip.extend(RareDAcc)
-        A4Equip.extend(LegDAcc)
+        for i in range(0, len(RareDAcc) // 2):
+            A3Equip.append(RareDAcc[i])
+        for i in range(0, len(LegDAcc) // 2):
+            A4Equip.append(LegDAcc[i])
     else:
         for i in range(0, len(AllRaceModeItemTypeIDs)):
             A1Num = random.randint(1,3) - 1
@@ -466,12 +471,17 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
             A4Equip.append(AllRaceModeItemTypeIDs[i][A4Num])
     if AuxCoreEnh: # with wacky aux cores
         CommonAux, RareAux, LegAux = Helper.FindValues("./_internal/JsonOutputs/common/ITM_OrbEquip.json", ["Rarity"], [0], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_OrbEquip.json", ["Rarity"], [1], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_OrbEquip.json", ["Rarity"], [2], "$id")
+        random.shuffle(CommonAux)
+        random.shuffle(RareAux)
+        random.shuffle(LegAux)
         for i in range(0, len(CommonAux) // 2):
             A1Equip.append(CommonAux[i])
-        for i in range(len(CommonAux) // 2, len(CommonAux)):
+        for i in range(len(CommonAux) // 2, (len(CommonAux) * 3) // 4):
             A2Equip.append(CommonAux[i])
-        A3Equip.extend(RareAux)
-        A4Equip.extend(LegAux)
+        for i in range(0, len(RareAux) // 2):
+            A3Equip.append(RareAux[i])
+        for i in range(0, len(LegAux) // 2):
+            A4Equip.append(LegAux[i])
     else:
         for i in range(0, len(RaceModeAuxCoreIDs)):
             A1Num = random.randint(1,3) - 1
@@ -483,14 +493,14 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
             A3Equip.append(RaceModeAuxCoreIDs[i][A3Num])
             A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
     AllEquipIDs = [A1Equip, A2Equip, A3Equip, A4Equip]
-    Area1LootIDs = A1CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25249, 25264) * 2 + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2 + [25407] * 10
+    Area1LootIDs = A1CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25249, 25264) * 2 + [25450] * 3 + A1Equip + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2 + [25407] * 10
     if ChosenIndices[1] == 3: # Leftherian Archipelago (30ish chests)
         Area2LootIDs = A2CoreCrystalIDs + [25305] * 2 + Helper.InclRange(25265, 25280) + [25450] * 2 + A2Equip + [25408] * 3 + [25220, 25220] + A2RaceModeCoreChipIDs + [25407] * 5
     else: # Mor Ardain (70 ish chests)
-        Area2LootIDs = A2CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25265, 25280) * 2 + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2 + [25407] * 10
+        Area2LootIDs = A2CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25265, 25280) * 2 + [25450] * 3 + A2Equip + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2 + [25407] * 10
     # adjusting the loot pool depending on dungeon size
     if ChosenIndices[2] == 5: # tantal (52 chests)
-        Area3LootIDs = A3CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25281, 25291) * 2 + [25450] * 3 + A3Equip * 2 + [25408] * 5 + [25221, 25221, 25221] + A3RaceModeCoreChipIDs * 2 + [25407] * 10    
+        Area3LootIDs = A3CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25281, 25291) * 2 + [25450] * 3 + A3Equip + [25408] * 5 + [25221, 25221, 25221] + A3RaceModeCoreChipIDs * 2 + [25407] * 10    
     else: # (25 chests for these locations more or less)
         Area3LootIDs = A3CoreCrystalIDs + [25305] * 2 + Helper.InclRange(25281, 25291) + [25450] * 2 + A3Equip + [25408] * 3 + [25221, 25221] + A3RaceModeCoreChipIDs + [25407] * 5
     Area4LootIDs = A4CoreCrystalIDs + [25305] * 2 + Helper.InclRange(25292, 25300) + [25450] * 2 + A4Equip + [25408] * 3 + [25222, 25222] + A4RaceModeCoreChipIDs + [25407] * 5
@@ -503,7 +513,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
     FileStart = "./_internal/JsonOutputs/common_gmk/"
     FileEnd = "_FLD_TboxPop.json"
     StartingPreciousIDs = Helper.InclRange(25001, 25499)
-    ExcludePreciousIDs = Helper.InclRange(25218, 25222) + [25305] + [25408] + [25450] + [25405] + [25406] + [25407] + Helper.InclRange(25249, 25300) # We are ok with replacing these, since they're in the pool of items to pull from anyways
+    ExcludePreciousIDs = Helper.InclRange(25218, 25222) + [25305] + [25408] + [25450] + [25405] + [25406] + [25407] + Helper.InclRange(25249, 25300) + [25067, 25160] # We are ok with replacing these, since they're in the pool of items to pull from anyways or a debug item
     FinalPreciousIDs = [x for x in StartingPreciousIDs if x not in ExcludePreciousIDs] # We do not want to replace these, these are quest/key items
     for i in range(0, len(ChosenIndices) - 1): # Defines what files we want to target and what map ids in that file we want to target  
         if (ChosenIndices[i] != 4) & (ChosenIndices[i] != 7):
