@@ -2,7 +2,7 @@ import Helper as Helper
 import json
 import EnemyRandoLogic as EnemyRandoLogic
 import random
-from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals
+from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, Accessories, WeaponChips, AuxCores, RefinedAuxCores, CollectionPointMaterials, Deeds
 import time
 import JSONParser
 import DebugLog
@@ -298,7 +298,7 @@ def LessGrinding(): #adjusting level based exp gains, and debuffs while underlev
 def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
     NGPlusBladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
     NGPlusBladeCrystalIDs = []
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Guaranteed Rare Blades"]["subOptionTypeVal"].get():
+    if OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get():
         with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
             for i in range(0, len(NGPlusBladeIDs)):
@@ -547,8 +547,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
                 with open(TBoxFiles[i][l], 'r+', encoding='utf-8') as file:
                     data = json.load(file)
                     for row in data["rows"]:
-                        TBoxName = row["name"]
-                        if (TBoxName != "tbox_ma08a_f018") & (TBoxName != "tbox_qst1018_001"): # We want to not randomize a broken one inside collision on Mor Ardain, and one in uraya that has a debug item
+                        if row["$id"] not in InvalidTreasureBoxIDs: 
                             BoxestoRandomizePerMap[i] = BoxestoRandomizePerMap[i] + 1
                     file.seek(0)
                     file.truncate()
@@ -579,8 +578,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
                             file.truncate()
                             json.dump(data, file, indent=2, ensure_ascii=False)
                             break
-                        TBoxName = row["name"]
-                        if (TBoxName != "tbox_ma08a_f018") & (TBoxName != "tbox_qst1018_001"): # We want to not randomize a box on Mor Ardain stuck in collision
+                        if row["$id"] not in InvalidTreasureBoxIDs:
                             for j in range(0, 8):
                                 if row[f"itm{j+1}ID"] not in FinalPreciousIDs:
                                     row[f"itm{j+1}ID"] = 0
@@ -879,7 +877,7 @@ def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def FindtheBladeNames(OptionsRunDict):
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Guaranteed Rare Blades"]["subOptionTypeVal"].get():
+    if OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get():
         ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
         CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
         CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
@@ -1069,19 +1067,64 @@ def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-        with open("./_internal/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as file:
+    else:
+        ChestTierListIDs = [3,5,2,1,4,11]
+        ChestTierListItemNames = ["Key Item/Quest Item", "Core Crystal", "Shop Deed", "Equipment", "Collection Materials", "Gold"]
+        for i in range(0, len(ValidTboxMapNames)):
+            with open(ValidTboxMapNames[i], 'r+', encoding='utf-8') as file: 
+                data = json.load(file)
+                for row in data["rows"]:
+                    rowcatfound = False
+                    for j in range(1, 9):
+                        if (row[f"itm{j}ID"] in PreciousItems) and not (row[f"itm{j}ID"] in MovespeedDeedIDs):
+                            row["RSC_ID"] = ChestTierListIDs[0]
+                            rowcatfound = True
+                            break
+                    if not rowcatfound:
+                        for j in range(1, 9):
+                            if row[f"itm{j}ID"] in CoreCrystalIDs:
+                                row["RSC_ID"] = ChestTierListIDs[1]
+                                rowcatfound = True
+                                break
+                    if not rowcatfound:
+                        for j in range(1, 9):
+                            if row[f"itm{j}ID"] in MovespeedDeedIDs:
+                                row["RSC_ID"] = ChestTierListIDs[2]
+                                rowcatfound = True
+                                break
+                    if not rowcatfound:
+                        for j in range(1, 9):
+                            if row[f"itm{j}ID"] in Accessories + WeaponChips + AuxCores + RefinedAuxCores:
+                                row["RSC_ID"] = ChestTierListIDs[3]
+                                rowcatfound = True
+                                break
+                    if not rowcatfound:
+                        for j in range(1, 9):
+                            if row[f"itm{j}ID"] in CollectionPointMaterials:
+                                row["RSC_ID"] = ChestTierListIDs[4]
+                                rowcatfound = True
+                                break
+                        if not rowcatfound:
+                            row["RSC_ID"] = ChestTierListIDs[5]
+                            rowcatfound = True
+                file.seek(0)
+                file.truncate()
+                json.dump(data, file, indent=2, ensure_ascii=False)
+        with open("./_internal/JsonOutputs/common_ms/fld_gmkname.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
-            for row in data["rows"]:
-                for i in range(0, len(ChestTierListItemNames)):
-                    if row["$id"] == ChestTierListIDs[i]:
-                        row["MSG_ID"] = newgmkIDs[i]
+            newgmkIDs = [154, 155, 156, 157, 158, 159]
+            for i in range(0, len(newgmkIDs)):
+                data["rows"].append({"$id": newgmkIDs[i], "style": 36, "name": ChestTierListItemNames[i]})
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-        with open("./_internal/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as file: # cuts opening chest animation down to 0.1 sec
-            data = json.load(file)
-            for row in data["rows"]:
-                row["initWaitTimeRand"] = 0.1                 
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            for i in range(0, len(ChestTierListItemNames)):
+                if row["$id"] == ChestTierListIDs[i]:
+                    row["MSG_ID"] = newgmkIDs[i]
+            row["initWaitTimeRand"] = 0.1 # reduces wait time for chest down to 0.1 sec
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)

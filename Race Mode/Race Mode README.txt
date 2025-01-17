@@ -103,11 +103,11 @@ Custom Loot:
 
 This option replaces all chest loot on Race Mode continents with custom loot tables containing accessories, weapon manuals, pre-completed aux cores, weapon chips, and more. "Movespeed Deeds" are also added to the pool, each granting a 5% increase to your movement speed. When this option is on, note that enemies will only drop gold, so seeking out these chests is your main method of increasing your character power level!
 
-If the option "Guaranteed Rare Blades" is on, then custom Core Crystals containing specific Rare Blades will also be shuffled into the pool. 
+If the option "Custom Core Crystals" is on, then custom Core Crystals containing specific Rare Blades will also be shuffled into the pool. 
 
 ------------------------------------------------------------
 
-Guaranteed Rare Blades:
+Guaranteed Rare Blades (no longer a Race Mode exclusive feature, still included for clarity, as it does have effects on Race Mode if enabled):
 
 If this option is on, and "Custom Loot" is on, the gacha system is disabled, and Rare Blades are instead obtained by opening custom Core Crystals, found in the loot pool.
 
