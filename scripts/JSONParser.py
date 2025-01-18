@@ -34,7 +34,7 @@ def ChangeJSONFile(Filename, keyWords, rangeofValuesToReplace = [], rangeValidRe
     IDs.CurrentSliderOdds = 100
 
 
-def ChangeJSONLine(filenames, ids, keys, replacement):
+def ChangeJSONLine(filenames, ids, keys, replacement, replaceAll = False):
     for name in filenames:
         filePath = "./_internal/JsonOutputs/" + name
         if not os.path.exists(filePath):
@@ -43,7 +43,7 @@ def ChangeJSONLine(filenames, ids, keys, replacement):
         with open(filePath, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for item in data['rows']:
-                if item["$id"] in ids:
+                if replaceAll or item["$id"] in ids:
                    for key in keys:
                     item[key] = replacement
             file.seek(0)

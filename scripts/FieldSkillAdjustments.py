@@ -1,10 +1,14 @@
-import JSONParser, Helper
+import JSONParser
 
     
-def DisableRequiredFieldSkills(Options):
-    onlyStory  = Options["Disable Story Field Skill Checks"]["subOptionObjects"]["Disable All Field Skill Checks"]["subOptionTypeVal"].get()
+def RemoveFieldSkills(Options):
+    isAllChecks  = Options["Remove Story Field Skills"]["subOptionObjects"]["Remove All Field Skills"]["subOptionTypeVal"].get()
     
-    if onlyStory:
+    if isAllChecks:
+        mapGimmickIds = range(1,186)
+        npcPopIds = range(1,50000)     
+        jumpGimiickIds = range(1,45)
+    else:
         mapGimmickIds = [
             4, 5,           # Trees in early Gormott
             10,11,          # Vent/Valve in Gormott Titan Battleship
@@ -19,20 +23,15 @@ def DisableRequiredFieldSkills(Options):
         npcPopIds = [
             8006,           # Green Barrel
             5268            # Pyra's Cooking
-        ]     
+        ]    
         jumpGimiickIds = [
             34, 33,38,      # Cliffs of Morytha
             39,42           # Temperantia wind jump
-        ]
-    else:
-        mapGimmickIds = range(1,186)
-        npcPopIds = []     
-        jumpGimiickIds = []
+        ]        
 
     
     JSONParser.ChangeJSONLine(["common_gmk/FLD_MapGimmick.json"], mapGimmickIds, ["FSID"], 0)
     JSONParser.ChangeJSONLine(["common_gmk/FLD_JumpGimmick.json"], jumpGimiickIds, ["FSID"], 0)
-    for item in npcPopIds:
-        try:
-        JSONParser.ChangeJSONLine([f"common_gmk/ma0{item[0]}"], mapGimmickIds, ["FSID"], 0)
+    for i in range(51):
+        JSONParser.ChangeJSONLine([f"common_gmk/ma0{i}a_FLD_NpcPop.json"], npcPopIds, ["FSID1", "FSID2", "FSID3"], 0)
 
