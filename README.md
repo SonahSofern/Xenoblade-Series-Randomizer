@@ -42,7 +42,7 @@ Guide adapted from: https://gamebanana.com/tuts/13815
 3. Locate "bf2.ard" and "bf2.arh"; those are the only two important files.
 4. Download Xenoblade2Set from (https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/), and extract its contents.
 5. Copy bf2.ard and bf2.arh to the Xenoblade2Set folder, and run "quickbms_4gb_files.exe".
-6. It will ask for a "bms script"; select Xenoblade2ard.bms. It will then ask for "archives/files"; select bf2.arh. For "output folder", go into the empty "modified" folder and press "Save". The files should extract, it may take a bit.
+6. It will ask for a "bms script"; select Xenoblade2ard.bms. It will then ask for "archives/files"; select bf2.arh. For "output folder", go into the empty "modified" folder and press "Save". The files should extract, it may take a bit. NOTE: You can stop the program once all the GB files are finished. The rest is just for the other languages.
 7. CONSOLE ONLY: There should now be a new "bdat" folder inside "modified"; This is the folder that the randomizer program targets as the input folder. The output folder should be /atmosphere/contents/0100E95004039001/romfs/bdat on your microSD card. NOTE: You will have to create the 0100E95004039001 folder.
 8. EMULATOR ONLY: There should now be a new "bdat" folder inside "modified"; This is the folder that the randomizer program targets as the input folder. The output folder should be the emulator's name then /load/0100E95004039001/Randomizer/romfs/bdat. NOTE: You will have to create the 0100E95004039001 folder.
 9. Choose your preferred settings, then use the randomizer program to randomize the contents of the game.

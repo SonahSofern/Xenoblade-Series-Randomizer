@@ -77,7 +77,7 @@ Lightning  = Enhancement("Lightning", AutoSpeedArtsSpeed.EnhanceEffect, 0,[300,4
 # Regen = Enhancement("Regenerate",TakeDamageHeal.EnhanceEffect,0,[1,2,3,4], addToList=False, DisTag="Regen" )
 Repeat =Enhancement("Repeat", DidIDoThat.EnhanceEffect, 0,[30,50,70,90], addToList=False) # might use doesnt ring a bell
 # Steamroll = Enhancement("Moxie", DamageUpOnEnemyKill.EnhanceEffect, 0, [50,100,150,200], addToList=False, DisTag="Strength Boost")
-Enraged = Enhancement("Friendship", AllyDownDamageUp.EnhanceEffect, 0, [50,100,150,200], addToList=False)
+Enraged = Enhancement("Friendship", AllyDownDamageUp.EnhanceEffect, 0, [30,60,90,120], addToList=False)
 
 
 

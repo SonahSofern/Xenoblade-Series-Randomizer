@@ -1,26 +1,38 @@
-import JSONParser
+import JSONParser, Helper
 
-def DisableFieldSkillChecks(OptionsRunDict):
-
-    if OptionsRunDict["Disable Story Field Skill Checks"]["subOptionObjects"]["Disable All Field Skill Checks"]["subOptionTypeVal"].get():
-        print("Disabling All Field Skill Checks")
-        ids = range(1001, 1595)
-    else:
-        print("Disabling Story Field Skill Checks")
-        ids = [
-            1106, 1107,         # Trees in early Gormott
-            1077,               # Pyra's Cooking,
-            1116, 1117,         # Vent/Valve in Gormott Titan Battleship
-            1399,               # Tardy Gate flood blockade
-            1109,               # Ether Miasma
-            1294,               # Green Barrel
-            1226, 1447,         # Old Factory ventilation fans
-            1443,               # Temperantia wind jump
-            1302,               # Spider Web
-            1304,               # Stele of Judgement
-            1312, 1313, 1442,   # Cliffs of Morytha
-            1324,               # World Tree Skyport
-            1327,               # The Door
+    
+def DisableRequiredFieldSkills(Options):
+    onlyStory  = Options["Disable Story Field Skill Checks"]["subOptionObjects"]["Disable All Field Skill Checks"]["subOptionTypeVal"].get()
+    
+    if onlyStory:
+        mapGimmickIds = [
+            4, 5,           # Trees in early Gormott
+            10,11,          # Vent/Valve in Gormott Titan Battleship
+            36,             # Tardy Gate flood blockade
+            7,              # Ether Miasma
+            55, 57,         # Old Factory ventilation fans
+            111,            # Spider Web
+            113,            # Stele of Judgement
+            37,             # World Tree Skyport
+            129             # The Door
         ]
+        npcPopIds = [
+            8006,           # Green Barrel
+            5268            # Pyra's Cooking
+        ]     
+        jumpGimiickIds = [
+            34, 33,38,      # Cliffs of Morytha
+            39,42           # Temperantia wind jump
+        ]
+    else:
+        mapGimmickIds = range(1,186)
+        npcPopIds = []     
+        jumpGimiickIds = []
 
-    JSONParser.ChangeJSONLine(["common/FLD_FieldSkillSetting.json"], ids, ["FieldSkillLevel1", "FieldSkillLevel2"],0)
+    
+    JSONParser.ChangeJSONLine(["common_gmk/FLD_MapGimmick.json"], mapGimmickIds, ["FSID"], 0)
+    JSONParser.ChangeJSONLine(["common_gmk/FLD_JumpGimmick.json"], jumpGimiickIds, ["FSID"], 0)
+    for item in npcPopIds:
+        try:
+        JSONParser.ChangeJSONLine([f"common_gmk/ma0{item[0]}"], mapGimmickIds, ["FSID"], 0)
+

@@ -118,3 +118,4 @@ def ShortenedTutorial(OptionsRunDict):
     # JSONParser.ChangeJSONFile(["common/MNU_Tutorial.json"],["param1"], Helper.InclRange(0, 300), [0] )
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Tutorial.json", ["script_file"], "aoc_challenge_tutorial")
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Tutorial.json", ["start_id"], 0)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_Tutorial.json", ["name"], "aoc_challenge_tutorial")

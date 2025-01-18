@@ -31,6 +31,7 @@ def RandomizeSkillEnhancements(optDict):
                 AllSpecialEnhances = ArtCancelEnhanceIDs + X_StartIDs + Y_StartIDs + B_StartIDs + ZekeEyeIDs
                 skillList = []
                 specialSkillList = []
+                
                 for skillSlot in enhanceFile['rows']: # Make a list of ids
                     if skillSlot["Enhance"] in AllSpecialEnhances:
                         specialSkillList.append([skillSlot["Name"],skillSlot["Enhance"]])
@@ -64,7 +65,8 @@ def RandomizeSkillEnhancements(optDict):
                     skillSlot["Enhance"] = newOne[1]
             
             else:
-                InvalidSkillEnhancements = [ForcedHPPotionOnHit,ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, AegisPowerUp, BigBangPowerUp, CatScimPowerUp, VarSaberPowerUp, MechArmsPowerUp, WhipswordPowerUp, DrillShieldPowerUp, DualScythesPowerUp, EvadeDrainHp, EvadeDriverArt, KnuckleClawsPowerUp, BitballPowerUp, GreataxePowerUp, TwinRingPowerUp, MegalancePowerUp,ShieldHammerPowerUp, ChromaKatanaPowerUp, EtherCannonPowerUp, ArtDamageHeal, AegisParty, AegisDriver]
+                
+                InvalidSkillEnhancements = [CritBoost, FlatCritBoost, PartyCritMaxAffinity, DamageAndCritUpMaxAffinity,ForcedHPPotionOnHit,HpPotChanceFor2,ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, AegisPowerUp, BigBangPowerUp, CatScimPowerUp, VarSaberPowerUp, MechArmsPowerUp, WhipswordPowerUp, DrillShieldPowerUp, DualScythesPowerUp, EvadeDrainHp, EvadeDriverArt, KnuckleClawsPowerUp, BitballPowerUp, GreataxePowerUp, TwinRingPowerUp, MegalancePowerUp,ShieldHammerPowerUp, ChromaKatanaPowerUp, EtherCannonPowerUp, ArtDamageHeal, AegisParty, AegisDriver]
                 ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
                 ForcedSkills = []
                 for skillSlot in enhanceFile['rows']:
@@ -100,9 +102,11 @@ def FirstSlotCost(): # Used since art cancel gets put here
     for i in range(1,7):
         with open(f"./_internal/JsonOutputs/common/BTL_Skill_Dr_Table0{i}.json", 'r+', encoding='utf-8') as driverFiles:
             dFile = json.load(driverFiles)
+            
             for item in dFile["rows"]:
                 if item["Round"] == 1 and item["ColumnNum"] == 1 and item["RowNum"] == 1: 
                     item["NeedSp"] = 0
+                    
             driverFiles.seek(0)
             driverFiles.truncate()
             json.dump(dFile, driverFiles, indent=2, ensure_ascii=False)
