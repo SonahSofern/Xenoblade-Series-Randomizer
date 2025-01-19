@@ -77,7 +77,7 @@ def SubColumnAdjust(filename, colName, adjustedSubColName, desiredValue): #when 
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def ColumnAdjust(filename, clearedCols, desiredValue):
+def ColumnAdjust(filename: str, clearedCols: list, desiredValue):
     with open(filename, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for k in range(0, len(clearedCols)):
