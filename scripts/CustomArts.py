@@ -140,6 +140,8 @@ def GenCustomArtDescriptions():
             descData = json.load(DescFile)
             
             for art in artsData["rows"]:
+                if art["Caption"] == 0: # Only change things that have captions
+                    continue
                 targetCaptionID = art["Caption"]
                 rangeCaption = ""
                 
@@ -174,12 +176,15 @@ def GenCustomArtDescriptions():
                 for key,values in Debuffs.items():
                     if art["ArtsDeBuff"] in values:
                         debuffCaption = f"{key}"
+                        break
                   
                 # Update Descriptions  
                 for desc in descData["rows"]:            
                     if desc["$id"] == targetCaptionID:
                         desc["name"] = f"{rangeCaption}{reactionCaption}{enhancementCaption}{debuffCaption}"  
                         print(desc["name"])
+                        art
+                        break
             DescFile.seek(0)
             DescFile.truncate()
             json.dump(descData, DescFile, indent=2, ensure_ascii=False)             
