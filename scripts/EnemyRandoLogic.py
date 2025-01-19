@@ -523,7 +523,7 @@ def EnemyDupeBossCondition(NewBossIDs): # If a phantasm or elma (which summon co
         data = json.load(file)
         for row in data['rows']:
             for i in range(1, 13):
-                if (row[f"EnemyID{i}"] in DupingEnemyIDs) & (row[f"EnemyID{i}" in NewBossIDs]):
+                if (row[f"EnemyID{i}"] in DupingEnemyIDs) & (row[f"EnemyID{i}"] in NewBossIDs):
                     EnemyGroupsWithDupingEnemies.append(row["$id"])
                     break
         file.seek(0)
