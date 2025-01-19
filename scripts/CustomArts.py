@@ -47,7 +47,12 @@ def DriverArtRando(OptionsRunDict): # We want custom descriptions for the driver
             RandomArtEnhancements()
         CustomArtDescriptionGenerator()
         IDs.ArtRandoCompleteness = 1
-    
+
+def RandomArtReactions():
+    pass
+
+def RandomArtDebuffs():
+    pass
 
 def RandomArtCooldowns(): # randomizes art cooldowns
     with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
@@ -112,6 +117,93 @@ def ChangeJSONFileArtsRando(Filename, keyWords, rangeofValuesToReplace = [], ran
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
+
+    
+RangeType = {
+    "AOE" : [3,5]
+}
+
+Reactions = {
+    "B" : [1],
+    "T" : [2],
+    "L" : [3],
+    "S" : [4],
+    "Kb": [5,6,7,8,9],
+    "Bd": [10,11,12,13,14]
+}
+
+Enhancements = {
+    "Aggro↓" : [2830,2835],
+    "Aggro↑" : [2850,2873],
+    "Aggroed↑": [2795],
+    "Aquatic↑": [2705],
+    "Back↑": [2760,2755],
+    
+}
+
+Debuffs = {
+    "Foe Crit↑": [1]
+    
+    
+}
+
+
+
+def GenCustomArtDescriptions():
+    with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", "r+", encoding='utf-8') as ArtsFile:     
+        with open("./_internal/JsonOutputs/common_ms/btl_arts_dr_cap.json", "r+", encoding='utf-8') as DescFile:     
+            artsData = json.load(ArtsFile)
+            descData = json.load(DescFile)
+            
+            for art in artsData["rows"]:
+                targetCaptionID = art["Caption"]
+                rangeCaption = ""
+                
+                
+                for key,values in RangeType.items():    # AOE
+                    if art["RangeType"] in values:
+                        rangeCaption += key
+                        break
+                
+                
+                reactionCaption = ""
+                for i in range(1,17):                   # Reactions
+                    if art[f"HitFrm{i}"] != 0:
+                        for key,values in Reactions.items():
+                            if art[f"ReAct{i}"] in values:
+                                reactionCaption += f"{key}/"
+                    else:
+                        break
+                reactionCaption = reactionCaption[:-1]  # Remove the last /
+
+                    
+                    
+                enhancementCaption = ""
+                for key,values in Enhancements.items():   # Enhancements
+                    if art["Enhance1"] in values:
+                        enhancementCaption += key
+                        break
+                    
+                debuffCaption = ""
+                for key,values in Debuffs.items():
+                    if art["ArtsDeBuff"] in values:
+                        debuffCaption = key
+                    
+                newCaption = f"{rangeCaption} {reactionCaption} {enhancementCaption} {debuffCaption}"
+                print(newCaption)
+
+                for desc in descData["rows"]:               # Update Descriptions
+                    if desc["$id"] == targetCaptionID:
+                        desc["name"] = newCaption
+                            
+            DescFile.seek(0)
+            DescFile.truncate()
+            json.dump(descData, DescFile, indent=2, ensure_ascii=False)             
+        ArtsFile.seek(0)
+        ArtsFile.truncate()
+        json.dump(artsData, ArtsFile, indent=2, ensure_ascii=False)
+    
+                    
 def CustomArtDescriptionGenerator(): # With all the changes to arts, we want custom descriptions for them
     RandomizedArtType = []
     RandomizedArtBuffs = []
@@ -288,9 +380,9 @@ def CustomArtDescriptionGenerator(): # With all the changes to arts, we want cus
                 elif RandomizedArtDebuffs[row["$id"] - 1] == 12:
                     CurrentArtDescription[4] += "Stench"
                 elif RandomizedArtDebuffs[row["$id"] - 1] == 13:
-                    CurrentArtDescription[4] += "Lock Driver"
+                    CurrentArtDescription[4] += "Shackle Dr"
                 elif RandomizedArtDebuffs[row["$id"] - 1] == 14:
-                    CurrentArtDescription[4] += "Lock Blade"
+                    CurrentArtDescription[4] += "Shackle Bl"
                 elif RandomizedArtDebuffs[row["$id"] - 1] == 15:
                     CurrentArtDescription[4] += "Null Heal"
                 elif RandomizedArtDebuffs[row["$id"] - 1] == 21:
