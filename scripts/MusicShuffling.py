@@ -35,17 +35,23 @@ def MusicShuffle(OptionsRunDict):
         with open("./_internal/JsonOutputs/common/RSC_BgmCondition.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data['rows']:
-                if row["$id"] == 34: # Spirit Crucible BGM Calls track m72.wav, which overlaps with a battle theme also called m72.wav, this causes issues when randomized, my code thought it was battle theme, and it is a battle theme for 
+                if row["$id"] == 30: # Uraya dungeon theme
+                    row["BgmIDB"] = random.choice(NonBattleMusicIDs)
+                elif row["$id"] == 31: # Mor Ardain Dungeon theme
                     row["BgmIDB"] = random.choice(NonBattleMusicIDs)
                     row["BgmIDC"] = random.choice(NonBattleMusicIDs)
+                elif row["$id"] == 34: # Spirit Crucible BGM Calls track m72.wav, which overlaps with a battle theme also called m72.wav, this causes issues when randomized. Same with some other tracks 
+                    row["BgmIDB"] = random.choice(NonBattleMusicIDs)
+                    row["BgmIDC"] = random.choice(NonBattleMusicIDs)
+                    break
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
         with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
-            for row in data['rows']: # same issue with track m72.wav, which plays for the teammate fights before the architect (it's mid too), so we replace it with zeke's theme :D (top tier)
-                if row["BGMID"] == 49:
-                    row["BGMID"] = 16
+            for row in data['rows']: # same issue with track m72.wav, which plays for the teammate fights before the architect (it's mid too). Other tracks have same overlap issue
+                if row["BGMID"] in [41, 43, 44, 49]:
+                    row["BGMID"] = random.choice([11, 12, 13, 14, 15, 16])
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)

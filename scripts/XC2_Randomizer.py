@@ -1,7 +1,7 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, FieldSkillAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, CustomArts, PermalinkManagement, Helper, SkillTrees, Enhancements, BigItems, _EnemyEnhancements
+import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, FieldSkillAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, CustomArts, PermalinkManagement, Helper, SkillTrees, Enhancements, BigItems, _EnemyEnhancements, CameraFixes, UniqueMonsterHunt
 import GUISettings, TrustBeam
 import _WeaponChips as WPChips
 import _AuxCores as AuxCr
@@ -221,26 +221,25 @@ def Options():
     GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees",[lambda: SkillTrees.RandomizeSkillEnhancements(OptionDictionary),lambda: SkillTrees.FirstSlotCost()],["Nonstandard Skills", []])
     GenStandardOption("Driver Accessories", TabDrivers, "Randomizes effects of Accessories", [lambda: Accs.RandomizeAccessoryEnhancements()])
     GenStandardOption("Art Reactions", TabDrivers, "Randomizes art reactions (break, blowdown etc.)",[lambda: CustomArts.RandomArtReactions(OptionDictionary)], ["Clear Vanilla Reactions", [lambda: Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)],"Multiple Reactions", []], optionType=Spinbox)
-    GenStandardOption("Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, [], InvalidTargetIDs=AutoAttacks)],["Debuffs", [lambda: IDs.ValidReplacements.extend(list(set(ArtDebuffs)-set([21,35])))],"Buffs",[lambda: IDs.ValidReplacements.extend(ArtBuffs)], "Doom", [lambda: IDs.ValidReplacements.extend([21])]], Spinbox)
+    GenStandardOption("Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, [], InvalidTargetIDs=AutoAttacks)],["Debuffs", [lambda: IDs.ValidReplacements.extend(list(set(ArtDebuffs)-set([21,35])))],"Buffs",[lambda: IDs.ValidReplacements.extend(ArtBuffs)], "Doom", [lambda: IDs.ValidReplacements.extend([21])], "Monado Armor", [], "Superstrength", []], Spinbox)
     GenStandardOption("Driver Arts", TabDrivers, "Randomizes effects of all driver arts", [lambda: CustomArts.GenCustomArtDescriptions()], ["Cooldown", [lambda: CustomArts.RandomArtCooldowns()], "Damage", [lambda: CustomArts.RandomArtDamageRatios()], "Enhancements", [lambda: CustomArts.RandomArtEnhancements()], "Animation Speed", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)]], optionType = Spinbox)
-
-              
+       
     # Blades
     GenStandardOption("Blade Aux Cores", TabBlades, "Randomizes a Blade's Aux Core enhancement", [lambda: AuxCr.RandomizeAuxCoreEnhancements()])
-    GenStandardOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)], optionType=Spinbox)
-    GenStandardOption("Blade Special Buttons", TabBlades, "Randomizes what button a special uses for its button challenge", [lambda: JSONParser.ChangeJSONFile(["common/MNU_BtnChallenge2.json"], Helper.StartsWith("BtnType", 1, 3), ButtonCombos, ButtonCombos)])
+    GenStandardOption("Blade Aux Core Slots", TabBlades, "Randomizes a Blade's maximum Aux Core Slots", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), IDs.BladeAuxCoreSlotDistribution)])
+    GenStandardOption("Blade Arts", TabBlades, "Randomizes a Blade's arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])
     GenStandardOption("Blade Battle Skills", TabBlades, "Randomizes a Blade's battle (yellow) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), list(set(BladeBattleSkills) - set([268, 8, 9])), list(set(BladeBattleSkills) - set([268, 267,266,265,144,142,143, 8, 9])) )])
+    GenStandardOption("Blade Cooldowns", TabBlades, "Randomizes a Blade's swap cooldown", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["CoolTime"], Helper.InclRange(1,1000), Helper.InclRange(1,1000))])
+    GenStandardOption("Blade Defenses", TabBlades, "Randomizes a Blade's Physical and Ether Defense", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.InclRange(0,100), BladeDefenseDistribution)],optionType=Spinbox)
+    GenStandardOption("Blade Elements", TabBlades, "Randomizes a Blade's element", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["Atr"], Helper.InclRange(1,8), Helper.InclRange(1,8))],optionType=Spinbox)
     GenStandardOption("Blade Field Skills", TabBlades, "Randomizes a Blade's field (green) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("FSkill", 1, 3), BladeFieldSkills, list(set(BladeFieldSkills) - set([1,6])),[1001], IgnoreID_AND_Key=[[1005, "FSkill3"], [1008, "FSkill2"]]) ])
+    GenStandardOption("Blade Mods", TabBlades, "Randomizes a Blade's Stat Modifiers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.InclRange(1,100), BladeModDistribution)])
+    GenStandardOption("Blade Special Buttons", TabBlades, "Randomizes what button a special uses for its button challenge", [lambda: JSONParser.ChangeJSONFile(["common/MNU_BtnChallenge2.json"], Helper.StartsWith("BtnType", 1, 3), ButtonCombos, ButtonCombos)])
+    GenStandardOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)], optionType=Spinbox)
     # GenStandardOption("Blade Specials", TabBlades, "Randomizes blades special (red) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials,  list(set(BladeSpecials) - set([215])))]) works okay, but animations dont connect feels mid
     GenStandardOption("Blade Weapon Class", TabBlades, "Randomizes which role a weapon type counts as (ATK, TNK, HLR)", [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpnType.json"], ["Role"], Helper.InclRange(1,3), WeaponTypeRoles)])
-    GenStandardOption("Blade Cooldowns", TabBlades, "Randomizes a Blade's swap cooldown", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["CoolTime"], Helper.InclRange(1,1000), Helper.InclRange(1,1000))])
-    GenStandardOption("Blade Arts", TabBlades, "Randomizes a Blade's arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])
-    GenStandardOption("Blade Aux Core Slots", TabBlades, "Randomizes a Blade's maximum Aux Core Slots", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), IDs.BladeAuxCoreSlotDistribution)])
-    GenStandardOption("Blade Defenses", TabBlades, "Randomizes a Blade's Physical and Ether Defense", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.InclRange(0,100), BladeDefenseDistribution)],optionType=Spinbox)
-    GenStandardOption("Blade Mods", TabBlades, "Randomizes a Blade's Stat Modifiers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.InclRange(1,100), BladeModDistribution)])
     GenStandardOption("Blade Weapons", TabBlades, "Randomizes a Blade's Weapons stats from chips", [],["Auto Attack",[lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["Damage"],Helper.InclRange(0,1298), Helper.InclRange(1,900) + Helper.InclRange(1000,1100) + Helper.InclRange(1250,1300))],"Crit Rate",[lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["CriRate"],Helper.InclRange(0,100), Helper.InclRange(1,50))],"Guard Rate",[lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["GuardRate"],Helper.InclRange(0,100), Helper.InclRange(1,60))],"Enhancements",[lambda: WPChips.RandomizeWeaponEnhancements(OptionDictionary["Blade Weapons"]["spinBoxVal"])]], optionType= Spinbox)
-    GenStandardOption("Blade Elements", TabBlades, "Randomizes a Blade's element", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["Atr"], Helper.InclRange(1,8), Helper.InclRange(1,8))],optionType=Spinbox)
-    
+        
     # Enemies
     GenStandardOption("Enemies", TabEnemies, "Randomizes what enemies appear in the world", [lambda: EnemyRandoLogic.EnemyLogic(OptionDictionary)],["Story Bosses", [], "Quest Enemies", [], "Unique Monsters", [], "Superbosses", [], "Normal Enemies", [], "Mix Enemies Between Types", [], "Keep All Enemy Levels", [], "Keep Story Boss Levels", [], "Keep Quest Enemy Levels", []])
     GenStandardOption("Enemy Enhancements", TabEnemies, "Gives enemies a random enhancement; displayed by their name", [lambda: _EnemyEnhancements.EnemyStats(OptionDictionary["Enemy Enhancements"]["spinBoxVal"].get())],optionType=Spinbox)
@@ -252,7 +251,8 @@ def Options():
     # Misc
     GenStandardOption("Music", TabMisc, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle(OptionDictionary)], ["Seperate Battle and \nEnvironment Themes", []]) # need to change title screen music
     GenStandardOption("Trust Lines", TabMisc, "Randomizes blade trust lines in battle (colors, power, etc.)", [lambda: TrustBeam.BeamRandomizer()])
-    
+    GenStandardOption("Custom Core Crystals", TabMisc, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests.", [lambda: CoreCrystalAdjustments.CoreCrystalChanges(OptionDictionary)], optionType=Spinbox) # The slider shouldnt do anything tbh the other things have sliders like enemy drop rando, chest rando etc. All this should do is add custom crystals to the crystal file. 
+
     
     
     # GenDictionary("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.InclRange(0,3721), Helper.InclRange(2001,3721))])
@@ -287,7 +287,10 @@ def Options():
     GenStandardOption("Cosmetics", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics(OptionDictionary)], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics, Spinbox)
     
     # Race Mode
-    GenStandardOption("Race Mode", TabRaceMode, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(OptionDictionary), RaceMode.SeedHash], ["Zohar Fragment Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", [], "Guaranteed Rare Blades", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()]])
+    GenStandardOption("Race Mode", TabRaceMode, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(OptionDictionary), RaceMode.SeedHash], ["Zohar Fragment Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", []])
+    GenStandardOption("Chest Type Matches Contents", TabQOL, "Chest model and label changes depending on tier of loot", [lambda: RaceMode.ChestTypeMatching(OptionDictionary)])
+    
+    GenStandardOption("Unique Monster Hunt", TabRaceMode, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt()], optionType=Spinbox)
 
     # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
     GenStandardOption("Blade Names", TabBlades, "Randomizes a Blade's name", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
@@ -326,7 +329,7 @@ def Randomize():
         # Runs all randomization
         RunOptions()
         randoProgressDisplay.config(text="Packing BDATs")
-
+        
         try:
             # Packs BDATs
             subprocess.run(f"{bdat_path} pack {JsonOutput} -o {outputDirVar.get().strip()} -f json", check=True, creationflags=subprocess.CREATE_NO_WINDOW)

@@ -2,7 +2,7 @@ import Helper as Helper
 import json
 import EnemyRandoLogic as EnemyRandoLogic
 import random
-from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, Accessories, WeaponChips, AuxCores, CoreCrystals, ValidTboxMapNames
+from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, Accessories, WeaponChips, AuxCores, RefinedAuxCores, CollectionPointMaterials, Deeds
 import time
 import JSONParser
 import DebugLog
@@ -28,10 +28,6 @@ def RaceModeChanging(OptionsRunDict):
     AreaList2 = [99, 152] #99, 152
     AreaList3 = [125, 133, 168] #125, 133, 168
     AreaList4 = [175, 187] #175, 187
-
-    AreaList = [41, 68, 99, 152, 125, 133, 168, 175, 187]
-
-    MSGIDList = [63, 141, 205, 367, 299, 314, 396, 413, 445] #list of MSGIDs for each of the landmarks in Area List (276 for Temperantia) (427 for Land of Morytha) 
 
     RaceModeDungeons = []
     RaceModeDungeons.append(random.choice(AreaList1))
@@ -148,7 +144,7 @@ def RaceModeChanging(OptionsRunDict):
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
-    with open("./_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: #race mode implementation #these just adjust the quest markers as far as I can tell
+    with open("./_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # adjust story events, changing scenario flag
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 10013:
@@ -227,6 +223,26 @@ def RaceModeChanging(OptionsRunDict):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in [30034, 30036]: # Removing more scripts that remove morag from party
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_gmk/FLD_ElevatorGimmick.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 17: # Think this patches skipping zohar fragments by just walking to end of game lol
+                row["tgt_liftswitchMSG_ID"] = 0
+                row["liftnameRadius"] = 0
+                row["lift_offsetID"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
     NGPlusBladeCrystalIDs = DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
     DifficultyChanges()
     DriverLvandSPFix()
@@ -251,6 +267,7 @@ def RaceModeChanging(OptionsRunDict):
         print("Changing Shops")
         ShyniniSaveUs()
         ShopRemovals()
+        WeaponChipShopPowerLevelIncrease()
         MovespeedDeedChanges()
         PouchItemCarryCapacityIncrease()
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Enemy Drop Changes"]["subOptionTypeVal"].get():
@@ -262,55 +279,9 @@ def RaceModeChanging(OptionsRunDict):
         DLCItemChanges()
 
 def PoppiswapCostReductions(): # reduces cost of poppiswap stuff
-    with open("./_internal/JsonOutputs/common/BTL_HanaPower.json", 'r+', encoding='utf-8') as file: # upgrade costs halved
-        data = json.load(file)
-        for row in data["rows"]:
-            row["EtherNum1"] = row["EtherNum1"] // 2
-            row["EtherNum2"] = row["EtherNum2"] // 2
-            row["EtherNum3"] = row["EtherNum3"] // 2
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/ITM_HanaArtsEnh.json", 'r+', encoding='utf-8') as file: # half cost to make art enhancements
-        data = json.load(file)
-        for row in data["rows"]:
-            row["NeedEther"] = row["NeedEther"] // 2
-            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as file: # half cost to make aux cores
-        data = json.load(file)
-        for row in data["rows"]:
-            row["NeedEther"] = row["NeedEther"] // 2
-            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/ITM_HanaAtr.json", 'r+', encoding='utf-8') as file: # half cost to make element cores
-        data = json.load(file)
-        for row in data["rows"]:
-            row["NeedEther"] = row["NeedEther"] // 2
-            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)    
-    with open("./_internal/JsonOutputs/common/ITM_HanaAtr.json", 'r+', encoding='utf-8') as file: # half cost to make blade arts
-        data = json.load(file)
-        for row in data["rows"]:
-            row["NeedEther"] = row["NeedEther"] // 2
-            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/ITM_HanaRole.json", 'r+', encoding='utf-8') as file: # half cost to make role cores
-        data = json.load(file)
-        for row in data["rows"]:
-            row["NeedEther"] = row["NeedEther"] // 2
-            row["DustEther"] = row["DustEther"] // 2 # no infinite ether glitch :)
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)      
+    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/ITM_HanaArtsEnh.json","./_internal/JsonOutputs/common/ITM_HanaAssist.json", "./_internal/JsonOutputs/common/ITM_HanaAtr.json", "./_internal/JsonOutputs/common/ITM_HanaNArtsSet.json", "./_internal/JsonOutputs/common/ITM_HanaRole.json"], ["NeedEther", "DustEther"], ['row[key] // 2'])
+    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_HanaPower.json"], ["EtherNum1", "EtherNum2", "EtherNum3"], ['row[key] // 2'])
+    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_HanaBase.json"], ["Circuit4Num", "Circuit5Num", "Circuit6Num"], ['row[key] // 5'])
 
 def LessGrinding(): #adjusting level based exp gains, and debuffs while underleveled to make it less grindy
     with open("./_internal/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: 
@@ -327,7 +298,7 @@ def LessGrinding(): #adjusting level based exp gains, and debuffs while underlev
 def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
     NGPlusBladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
     NGPlusBladeCrystalIDs = []
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Guaranteed Rare Blades"]["subOptionTypeVal"].get():
+    if OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get():
         with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
             for i in range(0, len(NGPlusBladeIDs)):
@@ -350,7 +321,7 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
     TaskLogIDs = [659, 660, 661, 662]
     LocationNames = ["Gormott", "Uraya", "Mor Ardain", "Leftheria", "Indol", "Tantal", "Spirit Crucible Elpys", "the Cliffs of Morytha", "the World Tree"]
 
-    StarterBladeTrustSetAppearance = [16, 11, 12, 13, 14]
+    StarterBladeTrustSetAppearance = [16, 16, 12, 13, 14]
     A1TrustSetAppearance = [16, 16, 12, 13, 14]
     A2TrustSetAppearance = [16, 16, 16, 13, 14]
     A3TrustSetAppearance = [16, 16, 16, 16, 14]
@@ -358,10 +329,10 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
 
     AllTrustSetAppearances = [StarterBladeTrustSetAppearance, A1TrustSetAppearance, A2TrustSetAppearance, A3TrustSetAppearance, A4TrustSetAppearance]
 
-    StarterBladeIDs = [1001, 1002, 1004, 1005, 1007, 1009, 1010]
+    StarterBladeIDs = [1001, 1002, 1004, 1005, 1006, 1007, 1009, 1010, 1011]
     A1BladeIDs = []
-    A2BladeIDs = [1006]
-    A3BladeIDs = [1011]
+    A2BladeIDs = []
+    A3BladeIDs = []
     A4BladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
 
     ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
@@ -461,10 +432,7 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
 
 def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
     if NGPlusBladeCrystalIDs == None:
-        A1CoreCrystalIDs = []
-        A2CoreCrystalIDs = []
-        A3CoreCrystalIDs = []
-        A4CoreCrystalIDs = []
+        A1CoreCrystalIDs, A2CoreCrystalIDs, A3CoreCrystalIDs, A4CoreCrystalIDs = [], [], [], []
     if NGPlusBladeCrystalIDs != None:
         NonNGPlusCoreCrystalIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
         NonNGPlusCoreCrystalIDs = [x for x in NonNGPlusCoreCrystalIDs if x not in NGPlusBladeCrystalIDs]
@@ -475,40 +443,70 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
         del NonNGPlusCoreCrystalIDs[:12]
         A3CoreCrystalIDs = (NonNGPlusCoreCrystalIDs)
         A4CoreCrystalIDs = NGPlusBladeCrystalIDs
-    A1Equip = []
-    A2Equip = []
-    A3Equip = []
-    A4Equip = []
-    for i in range(0, len(AllRaceModeItemTypeIDs)):
-        A1Num = random.randint(1,3) - 1
-        A2Num = random.randint(4,6) - 1
-        A3Num = random.randint(7,9) - 1
-        A4Num = random.randint(10,12) - 1
-        A1Equip.append(AllRaceModeItemTypeIDs[i][A1Num]) 
-        A2Equip.append(AllRaceModeItemTypeIDs[i][A2Num])
-        A3Equip.append(AllRaceModeItemTypeIDs[i][A3Num])
-        A4Equip.append(AllRaceModeItemTypeIDs[i][A4Num])
-    for i in range(0, len(RaceModeAuxCoreIDs)):
-        A1Num = random.randint(1,3) - 1
-        A2Num = random.randint(4,6) - 1
-        A3Num = random.randint(7,9) - 1
-        A4Num = random.randint(10,12) - 1
-        A1Equip.append(RaceModeAuxCoreIDs[i][A1Num]) 
-        A2Equip.append(RaceModeAuxCoreIDs[i][A2Num])
-        A3Equip.append(RaceModeAuxCoreIDs[i][A3Num])
-        A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
+    A1Equip, A2Equip, A3Equip, A4Equip = [], [], [], []
+    DriverAccesEnh = OptionsRunDict["Driver Accessories"]["optionTypeVal"].get()
+    AuxCoreEnh = OptionsRunDict["Blade Aux Cores"]["optionTypeVal"].get()
+    if DriverAccesEnh: # If we have the wacky enhancements:
+        CommonDAcc, RareDAcc, LegDAcc = Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [0], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [1], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [2], "$id")
+        random.shuffle(CommonDAcc)
+        random.shuffle(RareDAcc)
+        random.shuffle(LegDAcc)
+        for i in range(0, len(CommonDAcc) // 2):
+            A1Equip.append(CommonDAcc[i])
+        for i in range(len(CommonDAcc) // 2, (len(CommonDAcc) * 3) // 4):
+            A2Equip.append(CommonDAcc[i])
+        for i in range(0, len(RareDAcc) // 2):
+            A3Equip.append(RareDAcc[i])
+        for i in range(0, len(LegDAcc) // 2):
+            A4Equip.append(LegDAcc[i])
+    else:
+        for i in range(0, len(AllRaceModeItemTypeIDs)):
+            A1Num = random.randint(1,3) - 1
+            A2Num = random.randint(4,6) - 1
+            A3Num = random.randint(7,9) - 1
+            A4Num = random.randint(10,12) - 1
+            A1Equip.append(AllRaceModeItemTypeIDs[i][A1Num]) 
+            A2Equip.append(AllRaceModeItemTypeIDs[i][A2Num])
+            A3Equip.append(AllRaceModeItemTypeIDs[i][A3Num])
+            A4Equip.append(AllRaceModeItemTypeIDs[i][A4Num])
+    if AuxCoreEnh: # with wacky aux cores
+        CommonAux, RareAux, LegAux = Helper.FindValues("./_internal/JsonOutputs/common/ITM_OrbEquip.json", ["Rarity"], [0], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_OrbEquip.json", ["Rarity"], [1], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_OrbEquip.json", ["Rarity"], [2], "$id")
+        random.shuffle(CommonAux)
+        random.shuffle(RareAux)
+        random.shuffle(LegAux)
+        for i in range(0, len(CommonAux) // 2):
+            A1Equip.append(CommonAux[i])
+        for i in range(len(CommonAux) // 2, (len(CommonAux) * 3) // 4):
+            A2Equip.append(CommonAux[i])
+        for i in range(0, len(RareAux) // 2):
+            A3Equip.append(RareAux[i])
+        for i in range(0, len(LegAux) // 2):
+            A4Equip.append(LegAux[i])
+    else:
+        for i in range(0, len(RaceModeAuxCoreIDs)):
+            A1Num = random.randint(1,3) - 1
+            A2Num = random.randint(4,6) - 1
+            A3Num = random.randint(7,9) - 1
+            A4Num = random.randint(10,12) - 1
+            A1Equip.append(RaceModeAuxCoreIDs[i][A1Num]) 
+            A2Equip.append(RaceModeAuxCoreIDs[i][A2Num])
+            A3Equip.append(RaceModeAuxCoreIDs[i][A3Num])
+            A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
     AllEquipIDs = [A1Equip, A2Equip, A3Equip, A4Equip]
-    Area1LootIDs = A1CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25249, 25264) * 2 + [25450] * 3 + A1Equip * 2 + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2 + [25407] * 10
+    Area1ShopDeedIDs, Area2ShopDeedIDs, Area3ShopDeedIDs, Area4ShopDeedIDs = [], [], [], []
+    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get():
+        Area1ShopDeedIDs, Area2ShopDeedIDs, Area3ShopDeedIDs, Area4ShopDeedIDs = Helper.InclRange(25249, 25264), Helper.InclRange(25265, 25280), Helper.InclRange(25281, 25291), Helper.InclRange(25292, 25300)
+    Area1LootIDs = A1CoreCrystalIDs * 2 + [25305] * 3 + Area1ShopDeedIDs * 2 + [25450] * 3 + A1Equip + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2 + [25407] * 10
     if ChosenIndices[1] == 3: # Leftherian Archipelago (30ish chests)
-        Area2LootIDs = A2CoreCrystalIDs + [25305] * 2 + Helper.InclRange(25265, 25280) + [25450] * 2 + A2Equip + [25408] * 3 + [25220, 25220] + A2RaceModeCoreChipIDs + [25407] * 5
+        Area2LootIDs = A2CoreCrystalIDs + [25305] * 2 + Area2ShopDeedIDs + [25450] * 2 + A2Equip + [25408] * 3 + [25220, 25220] + A2RaceModeCoreChipIDs + [25407] * 5
     else: # Mor Ardain (70 ish chests)
-        Area2LootIDs = A2CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25265, 25280) * 2 + [25450] * 3 + A2Equip * 2 + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2 + [25407] * 10
+        Area2LootIDs = A2CoreCrystalIDs * 2 + [25305] * 3 + Area2ShopDeedIDs * 2 + [25450] * 3 + A2Equip + [25408] * 5 + [25220, 25220, 25220] + A2RaceModeCoreChipIDs * 2 + [25407] * 10
     # adjusting the loot pool depending on dungeon size
     if ChosenIndices[2] == 5: # tantal (52 chests)
-        Area3LootIDs = A3CoreCrystalIDs * 2 + [25305] * 3 + Helper.InclRange(25281, 25291) * 2 + [25450] * 3 + A3Equip * 2 + [25408] * 5 + [25221, 25221, 25221] + A3RaceModeCoreChipIDs * 2 + [25407] * 10    
+        Area3LootIDs = A3CoreCrystalIDs * 2 + [25305] * 3 + Area3ShopDeedIDs * 2 + [25450] * 3 + A3Equip + [25408] * 5 + [25221, 25221, 25221] + A3RaceModeCoreChipIDs * 2 + [25407] * 10    
     else: # (25 chests for these locations more or less)
-        Area3LootIDs = A3CoreCrystalIDs + [25305] * 2 + Helper.InclRange(25281, 25291) + [25450] * 2 + A3Equip + [25408] * 3 + [25221, 25221] + A3RaceModeCoreChipIDs + [25407] * 5
-    Area4LootIDs = A4CoreCrystalIDs + [25305] * 2 + Helper.InclRange(25292, 25300) + [25450] * 2 + A4Equip + [25408] * 3 + [25222, 25222] + A4RaceModeCoreChipIDs + [25407] * 5
+        Area3LootIDs = A3CoreCrystalIDs + [25305] * 2 + Area3ShopDeedIDs + [25450] * 2 + A3Equip + [25408] * 3 + [25221, 25221] + A3RaceModeCoreChipIDs + [25407] * 5
+    Area4LootIDs = A4CoreCrystalIDs + [25305] * 2 + Area4ShopDeedIDs + [25450] * 2 + A4Equip + [25408] * 3 + [25222, 25222] + A4RaceModeCoreChipIDs + [25407] * 5
     random.shuffle(Area1LootIDs)
     random.shuffle(Area2LootIDs)
     random.shuffle(Area3LootIDs)
@@ -518,7 +516,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
     FileStart = "./_internal/JsonOutputs/common_gmk/"
     FileEnd = "_FLD_TboxPop.json"
     StartingPreciousIDs = Helper.InclRange(25001, 25499)
-    ExcludePreciousIDs = Helper.InclRange(25218, 25222) + [25305] + [25408] + [25450] + [25405] + [25406] + [25407] + Helper.InclRange(25249, 25300) # We are ok with replacing these, since they're in the pool of items to pull from anyways
+    ExcludePreciousIDs = Helper.InclRange(25218, 25222) + [25305] + [25408] + [25450] + [25405] + [25406] + [25407] + Helper.InclRange(25249, 25300) + [25067, 25160] # We are ok with replacing these, since they're in the pool of items to pull from anyways or a debug item
     FinalPreciousIDs = [x for x in StartingPreciousIDs if x not in ExcludePreciousIDs] # We do not want to replace these, these are quest/key items
     for i in range(0, len(ChosenIndices) - 1): # Defines what files we want to target and what map ids in that file we want to target  
         if (ChosenIndices[i] != 4) & (ChosenIndices[i] != 7):
@@ -532,6 +530,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
         if ChosenIndices[i] == 7:
             TBoxFiles[i][0] = "./_internal/JsonOutputs/common_gmk/ma17a_FLD_TboxPop.json"
             TBoxFiles[i][1] = "./_internal/JsonOutputs/common_gmk/ma18a_FLD_TboxPop.json"
+    global ListTboxFiles
     ListTboxFiles = []
     for i in range(0, 4):
         for j in range(0, 2):
@@ -548,8 +547,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
                 with open(TBoxFiles[i][l], 'r+', encoding='utf-8') as file:
                     data = json.load(file)
                     for row in data["rows"]:
-                        TBoxName = row["name"]
-                        if (TBoxName != "tbox_ma08a_f018") & (TBoxName != "tbox_qst1018_001"): # We want to not randomize a broken one inside collision on Mor Ardain, and one in uraya that has a debug item
+                        if row["$id"] not in InvalidTreasureBoxIDs: 
                             BoxestoRandomizePerMap[i] = BoxestoRandomizePerMap[i] + 1
                     file.seek(0)
                     file.truncate()
@@ -580,8 +578,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
                             file.truncate()
                             json.dump(data, file, indent=2, ensure_ascii=False)
                             break
-                        TBoxName = row["name"]
-                        if (TBoxName != "tbox_ma08a_f018") & (TBoxName != "tbox_qst1018_001"): # We want to not randomize a box on Mor Ardain stuck in collision
+                        if row["$id"] not in InvalidTreasureBoxIDs:
                             for j in range(0, 8):
                                 if row[f"itm{j+1}ID"] not in FinalPreciousIDs:
                                     row[f"itm{j+1}ID"] = 0
@@ -880,7 +877,7 @@ def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def FindtheBladeNames(OptionsRunDict):
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Guaranteed Rare Blades"]["subOptionTypeVal"].get():
+    if OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get():
         ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
         CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
         CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
@@ -975,3 +972,159 @@ def LandmarkConditions(): # Makes Cliffs of Morytha and Spirit Crucible Elpys av
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
+def WeaponChipShopPowerLevelIncrease(): # Common issue at start of run is first boss is a slog to fight if they're high level, so we want to give some chips around the average power level of the first area we're going to.
+    with open("./_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 7:
+                if ChosenIndices[0] == 0: # Gormott
+                    row["DefItem2"] = 10003
+                    row["DefItem3"] = 10011
+                else: # Uraya
+                    row["DefItem2"] = 10014
+                    row["DefItem3"] = 10015
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
+    RaceModeOn = OptionsRunDict["Race Mode"]["optionTypeVal"].get()
+    ZoharFragOn = OptionsRunDict["Race Mode"]["subOptionObjects"]["Zohar Fragment Hunt"]["subOptionTypeVal"].get()
+    ShopChangeOn = OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get()
+    CustomLootOn = OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get()
+    ZoharFragItemIDs = [25135, 25136, 25137, 25138]
+    CoreCrystalIDs = AllCoreCrystals
+    MovespeedDeedIDs = Helper.InclRange(25249, 25300)
+    RareItemIDs = [25305, 25450, 25408, 25218, 25219, 25220, 25221, 25222, 25407]
+    ChestTierListIDs = [0, 0, 0, 0, 0]
+    ChestTierListItemNames = ["","","","",""]
+    if RaceModeOn:
+        if ZoharFragOn:
+            ChestTierListIDs[0] = 3
+            ChestTierListItemNames[0] = "Zohar Fragment"
+        if ShopChangeOn:
+            ChestTierListIDs[1] = 5
+            ChestTierListItemNames[1] = "Core Crystal"
+        if CustomLootOn:
+            ChestTierListIDs[2] = 2
+            ChestTierListIDs[3] = 1
+            ChestTierListIDs[4] = 4
+            ChestTierListItemNames[2] = "Movespeed Deed"
+            ChestTierListItemNames[3] = "Rare Item"
+            ChestTierListItemNames[4] = "Equipment/Gold"        
+        for i in range(0, len(ListTboxFiles)):
+            with open(ListTboxFiles[i], 'r+', encoding='utf-8') as file: 
+                data = json.load(file)
+                for row in data["rows"]:
+                    rowcatfound = False
+                    for j in range(1, 9):
+                        if ZoharFragOn:
+                            if row[f"itm{j}ID"] in ZoharFragItemIDs:
+                                row["RSC_ID"] = ChestTierListIDs[0]
+                                rowcatfound = True
+                                break
+                    if not rowcatfound:
+                        if ShopChangeOn:
+                            for j in range(1, 9):
+                                if row[f"itm{j}ID"] in CoreCrystalIDs:
+                                    row["RSC_ID"] = ChestTierListIDs[1]
+                                    rowcatfound = True
+                                    break
+                    if CustomLootOn:
+                        if not rowcatfound:
+                            for j in range(1, 9):
+                                if row[f"itm{j}ID"] in MovespeedDeedIDs:
+                                    row["RSC_ID"] = ChestTierListIDs[2]
+                                    rowcatfound = True
+                                    break
+                        if not rowcatfound:
+                            for j in range(1, 9):
+                                if row[f"itm{j}ID"] in RareItemIDs:
+                                    row["RSC_ID"] = ChestTierListIDs[3]
+                                    rowcatfound = True
+                                    break
+                        if not rowcatfound:
+                            row["RSC_ID"] = ChestTierListIDs[4]
+                            rowcatfound = True
+                file.seek(0)
+                file.truncate()
+                json.dump(data, file, indent=2, ensure_ascii=False)
+        for i in range(0, len(ValidTboxMapNames)):
+            if ValidTboxMapNames[i] not in ListTboxFiles:
+                with open(ValidTboxMapNames[i], 'r+', encoding='utf-8') as file: 
+                    data = json.load(file)
+                    for row in data["rows"]:
+                        if row["RSC_ID"] in [1,2,3,4,5,6,8,9,11,12,13,14]:
+                            row["RSC_ID"] = 11
+                    file.seek(0)
+                    file.truncate()
+                    json.dump(data, file, indent=2, ensure_ascii=False)
+        with open("./_internal/JsonOutputs/common_ms/fld_gmkname.json", 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            newgmkIDs = [154, 155, 156, 157, 158]
+            for i in range(0, 5):
+                data["rows"].append({"$id": newgmkIDs[i], "style": 36, "name": ChestTierListItemNames[i]})
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+    else:
+        ChestTierListIDs = [3,5,2,1,4,11]
+        ChestTierListItemNames = ["Key Item/Quest Item", "Core Crystal", "Shop Deed", "Equipment", "Collection Materials", "Gold"]
+        for i in range(0, len(ValidTboxMapNames)):
+            with open(ValidTboxMapNames[i], 'r+', encoding='utf-8') as file: 
+                data = json.load(file)
+                for row in data["rows"]:
+                    rowcatfound = False
+                    for j in range(1, 9):
+                        if (row[f"itm{j}ID"] in PreciousItems) and not (row[f"itm{j}ID"] in MovespeedDeedIDs):
+                            row["RSC_ID"] = ChestTierListIDs[0]
+                            rowcatfound = True
+                            break
+                    if not rowcatfound:
+                        for j in range(1, 9):
+                            if row[f"itm{j}ID"] in CoreCrystalIDs:
+                                row["RSC_ID"] = ChestTierListIDs[1]
+                                rowcatfound = True
+                                break
+                    if not rowcatfound:
+                        for j in range(1, 9):
+                            if row[f"itm{j}ID"] in MovespeedDeedIDs:
+                                row["RSC_ID"] = ChestTierListIDs[2]
+                                rowcatfound = True
+                                break
+                    if not rowcatfound:
+                        for j in range(1, 9):
+                            if row[f"itm{j}ID"] in Accessories + WeaponChips + AuxCores + RefinedAuxCores:
+                                row["RSC_ID"] = ChestTierListIDs[3]
+                                rowcatfound = True
+                                break
+                    if not rowcatfound:
+                        for j in range(1, 9):
+                            if row[f"itm{j}ID"] in CollectionPointMaterials:
+                                row["RSC_ID"] = ChestTierListIDs[4]
+                                rowcatfound = True
+                                break
+                        if not rowcatfound:
+                            row["RSC_ID"] = ChestTierListIDs[5]
+                            rowcatfound = True
+                file.seek(0)
+                file.truncate()
+                json.dump(data, file, indent=2, ensure_ascii=False)
+        with open("./_internal/JsonOutputs/common_ms/fld_gmkname.json", 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            newgmkIDs = [154, 155, 156, 157, 158, 159]
+            for i in range(0, len(newgmkIDs)):
+                data["rows"].append({"$id": newgmkIDs[i], "style": 36, "name": ChestTierListItemNames[i]})
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            for i in range(0, len(ChestTierListItemNames)):
+                if row["$id"] == ChestTierListIDs[i]:
+                    row["MSG_ID"] = newgmkIDs[i]
+            row["initWaitTimeRand"] = 0.1 # reduces wait time for chest down to 0.1 sec
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)

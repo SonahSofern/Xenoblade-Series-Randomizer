@@ -169,10 +169,10 @@ def ReducePCHPBattle1():
         json.dump(data, file, indent=2, ensure_ascii= False)
 
 def SummonsLevelAdjustment(): # We want the summoned enemies to be the same level as the enemy that summoned them
-    OriginalSummonedFirstIDs = [1, 1, 724, 122, 66, 1369, 1304, 1385, 1372, 1308, 242, 1376, 1378, 1379, 1807, 150, 1373, 1377, 1380, 1806, 1285, 1285, 1381, 725, 725, 1358, 1362, 1700, 1521, 728, 846, 1420, 1347, 1370, 1354, 1354, 1352, 1367, 1371, 1368, 1356, 1357, 1365, 1384, 1593, 1599, 1353, 1349, 1355, 1361, 1382, 1364, 1350, 1724, 1724, 1724, 1724, 1731, 1787, 1788, 1789, 1805, 1881, 1883, 1885, 1641, 1533, 1568, 1569, 1569]
-    OriginalSummonedSecondIDs = [0, 0, 0, 0, 67, 0, 0, 0, 0, 0, 0, 1376, 1378, 1379, 1807, 152, 1374, 0, 0, 0, 0, 0, 1381, 726, 727, 1359, 1362, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1382, 0, 1350, 1725, 1725, 1725, 1726, 0, 0, 0, 0, 1805, 0, 1883, 1885, 0, 0, 0, 0, 0]
-    OriginalSummonedThirdIDs = [6, 6, 0, 0, 135, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 154, 1375, 0, 0, 0, 0, 0, 1381, 727, 0, 1360, 1363, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1383, 0, 1351, 0, 1726, 1727, 1727, 0, 0, 0, 0, 1805, 0, 1883, 1885, 0, 0, 0, 0, 0]
-    EnemyIDThatSummonedThem = [[0], [0], [184], [0], [0], [957], [222, 269], [236], [250, 274, 351], [239], [242], [1168, 1177, 326], [1188], [1380], [1803], [0], [1165, 1184, 558], [1184], [1189], [1802], [0], [265, 275], [0], [655], [0], [1046], [1109], [1699], [1516], [711], [862], [0], [688], [1128], [860], [0], [794], [951], [1154], [950], [1009], [1010], [1081], [1212], [1635], [1630], [795], [710], [892], [772, 1065, 1066, 1115, 1225, 1613, 1717], [1260], [1114], [714], [1723], [1723], [1723], [1723], [1733], [1786], [1786], [1786], [1804], [1864], [1882, 1883, 1885], [1884], [1629], [1547], [1562], [1560], [1560]]  
+    OriginalSummonedFirstIDs = [724, 1369, 1304, 1385, 1372, 1308, 242, 1376, 1378, 1379, 1807, 1373, 1377, 1380, 1806, 1285, 725, 1358, 1362, 1700, 1521, 728, 846, 1347, 1370, 1354, 1352, 1367, 1371, 1368, 1356, 1357, 1365, 1384, 1593, 1599, 1353, 1349, 1355, 1361, 1382, 1364, 1350, 1724, 1724, 1724, 1724, 1731, 1787, 1788, 1789, 1805, 1881, 1883, 1885, 1641, 1533, 1568, 1569, 1569]
+    OriginalSummonedSecondIDs = [0, 0, 0, 0, 0, 0, 0, 1376, 1378, 1379, 1807, 1374, 0, 0, 0, 0, 726, 1359, 1362, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1382, 0, 1350, 1725, 1725, 1725, 1726, 0, 0, 0, 0, 1805, 0, 1883, 1885, 0, 0, 0, 0, 0]
+    OriginalSummonedThirdIDs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1375, 0, 0, 0, 0, 727, 1360, 1363, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1383, 0, 1351, 0, 1726, 1727, 1727, 0, 0, 0, 0, 1805, 0, 1883, 1885, 0, 0, 0, 0, 0]
+    EnemyIDThatSummonedThem = [[184], [957], [222, 269], [236], [250, 274, 351], [239], [242], [1168, 1177, 326], [1188], [1380], [1803], [1165, 1184, 558], [1184], [1189], [1802], [265, 275], [655], [1046], [1109], [1699], [1516], [711], [862], [688], [1128], [860], [794], [951], [1154], [950], [1009], [1010], [1081], [1212], [1635], [1630], [795], [710], [892], [772, 1065, 1066, 1115, 1225, 1613, 1717], [1260], [1114], [714], [1723], [1723], [1723], [1723], [1733], [1786], [1786], [1786], [1804], [1864], [1882, 1883, 1885], [1884], [1629], [1547], [1562], [1560], [1560]]
     MinLevels = []
     MinLevel = 255
     filename = "./_internal/JsonOutputs/common/CHR_EnArrange.json"
@@ -456,7 +456,7 @@ def AeshmaCoreHPNerf(): #this fight sucks
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 318:
-                row["HpMaxRev"] = 1000 # nerfed hp by 7/8ths
+                row["HpMaxRev"] = 1500 # nerfed hp by 5/6ths
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)        
@@ -512,6 +512,28 @@ def PadraigFightFix(): # padraig fight fails to spawn unique monster if it repla
             if row["$id"] == EnemyIDtoChange:
                 row["Flag"]["Named"] = 0
                 break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def EnemyDupeBossCondition(NewBossIDs): # If a phantasm or elma (which summon copies of themselves) end up as a boss enemy, the boss fight should require all copies to be dead for you to win.
+    DupingEnemyIDs = [242, 281, 1882, 1884]
+    EnemyGroupsWithDupingEnemies = []
+    with open("./_internal/JsonOutputs/common/FLD_EnemyGroup.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data['rows']:
+            for i in range(1, 13):
+                if (row[f"EnemyID{i}"] in DupingEnemyIDs) & (row[f"EnemyID{i}" in NewBossIDs]):
+                    EnemyGroupsWithDupingEnemies.append(row["$id"])
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/FLD_QuestBattle.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data['rows']:
+            if ((row["EnemyID"] in DupingEnemyIDs) & (row["EnemyID"] in NewBossIDs)) or (row["EnemyGroupID"] in EnemyGroupsWithDupingEnemies):
+                row["DeadAll"] = 1
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -648,6 +670,7 @@ def EnemyLogic(OptionsRunDict):
         Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], 0)
         PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict)
         BalanceFixes()
+        EnemyDupeBossCondition(NewBossIDs)
 
 
 
