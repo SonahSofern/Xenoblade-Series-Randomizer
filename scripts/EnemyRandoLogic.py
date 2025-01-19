@@ -471,9 +471,11 @@ def GortOgreUppercutRemoval(): # Gort 2's Ogre Uppercut seems to be buggy, repor
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def RedRingClear(item):
+def RedRingClear(row):
+    KeepRingIDs = [7007,7008,7001,7005 ]
     try:
-        item["battlelockname"] = 0
+        if row["$id"] not in KeepRingIDs:
+            row["battlelockname"] = 0
     except:
         pass
     

@@ -1,12 +1,9 @@
 import json, random
 from Enhancements import *
 
-class EnemyEnhancement:
-    pass
-
-
 
 Nope = [MaxAffinityHeal,ReduceDamageFromNearbyEnemies, DamageUpOnEnemyKill] # Retry these used on armu enemy with dupe
+
 
 def EnemyStats(spinBox):
     prevNames = []
@@ -55,34 +52,40 @@ def EnemyStats(spinBox):
         EnArrangeFile.truncate()
         json.dump(EnArr, EnArrangeFile, indent=2, ensure_ascii=False)
         
-        
-Healthy = Enhancement("Health", HPBoost.EnhanceEffect, 0, [50,100,150,200], addToList=False)
-Strong = Enhancement("Strength", StrengthBoost.EnhanceEffect, 0, [50,100,150,200], addToList=False)
-Etheras = Enhancement("Ether", EtherBoost.EnhanceEffect, 0,[50,100,150,200], addToList=False)
-Dextrous = Enhancement("Dex", DexBoost.EnhanceEffect, 0, [75,150,200,300], addToList=False)
-Agility = Enhancement("Agility", AgiBoost.EnhanceEffect, 0, [200,400,600,800], addToList=False)
-Luck = Enhancement("Luck", LuckBoost.EnhanceEffect, 0 , [100,200,300,400], addToList=False)
-EtherBlock = Enhancement("E Def", FlatEthDefBoost.EnhanceEffect, 0, [30,60,90,100], addToList=False)
-PhyBlock = Enhancement("P Def", FlatDefBoost.EnhanceEffect, 0, [30,60,90,100], addToList=False)
-Spike = Enhancement("Spiky", EtherCounter.EnhanceEffect, 0, [10,20,30,40], addToList=False)
-Pursuer = Enhancement("Pursuer", CombatSpeed.EnhanceEffect, 0, [100,200,300,400], addToList=False)
-AllReactionNull = Enhancement("Stable", TranquilGuard.EnhanceEffect, 0,[20,40,60,80], addToList=False)
-BlowdownSpike = Enhancement("Bouncy", GravityPinwheel.EnhanceEffect, 0, [5,10,15,20], [1,2,3,5], addToList=False)
-TasSnack = Enhancement("Devourer", TastySnack.EnhanceEffect, 0, [10,20,30,50], addToList=False)
-BladeComboResist = Enhancement("Combo Resist", ReduceEnemyBladeComboDamage.EnhanceEffect,0, [30,50,70,100], addToList=False)
-Desperate = Enhancement("Desperate", DamageUpWhenHpDown.EnhanceEffect,0,[10,15,20,25],[300,400,500,600], addToList=False)
-Wish = Enhancement("Wish", WhenDiesHealAllies.EnhanceEffect, 0,[20,40,60,80], addToList=False)
-FirstStrike = Enhancement("Suprise", FirstArtDamage.EnhanceEffect,0,[300,500,600,700], addToList=False)
-Lightning  = Enhancement("Lightning", AutoSpeedArtsSpeed.EnhanceEffect, 0,[300,400,500,600],[200,300,400,500], addToList=False)
-# Regen = Enhancement("Regenerate",TakeDamageHeal.EnhanceEffect,0,[1,2,3,4], addToList=False, DisTag="Regen" )
-Repeat =Enhancement("Repeat", DidIDoThat.EnhanceEffect, 0,[30,50,70,90], addToList=False) # might use doesnt ring a bell
-# Steamroll = Enhancement("Moxie", DamageUpOnEnemyKill.EnhanceEffect, 0, [50,100,150,200], addToList=False, DisTag="Strength Boost")
-Enraged = Enhancement("Friendship", AllyDownDamageUp.EnhanceEffect, 0, [30,60,90,120], addToList=False)
+class EnemyEnhancement(Enhancement):
+    def __init__(self, name, enhancement, para1 = [0,0,0,0],para2 = [0,0,0,0]):
+        self.name = name
+        self.EnhanceEffect = enhancement.EnhanceEffect
+        self.Caption = 0
+        self.addToList = False
+        self.Param1 = para1
+        self.Param2 = para2
+        ValidSkills.append(self)
+      
+Healthy = EnemyEnhancement("Health", HPBoost, [50,100,150,200])
+Strong = EnemyEnhancement("Strength", StrengthBoost, [50,100,150,200])
+Etheras = EnemyEnhancement("Ether", EtherBoost, [50,100,150,200])
+Dextrous = EnemyEnhancement("Dex", DexBoost, [75,150,200,300])
+Agility = EnemyEnhancement("Agility", AgiBoost, [200,400,600,800])
+Luck = EnemyEnhancement("Luck", LuckBoost, [100,200,300,400])
+EtherBlock = EnemyEnhancement("E Def", FlatEthDefBoost, [30,60,90,100])
+PhyBlock = EnemyEnhancement("P Def", FlatDefBoost, [30,60,90,100])
+Spike = EnemyEnhancement("Spiky", EtherCounter, [10,20,30,40])
+Pursuer = EnemyEnhancement("Pursuer", CombatSpeed, [100,200,300,400])
+AllReactionNull = EnemyEnhancement("Stable", TranquilGuard,[20,40,60,80])
+BlowdownSpike = EnemyEnhancement("Bouncy", GravityPinwheel, [10,20,30,40], [1,2,3,5])
+TasSnack = EnemyEnhancement("Devourer", TastySnack, [10,20,30,50])
+BladeComboResist = EnemyEnhancement("Combo Resist", ReduceEnemyBladeComboDamage, [30,50,70,100])
+Desperate = EnemyEnhancement("Desperate", DamageUpWhenHpDown,[10,15,20,25],[300,400,500,600])
+Wish = EnemyEnhancement("Wish", WhenDiesHealAllies,[20,40,60,80])
+FirstStrike = EnemyEnhancement("Suprise", FirstArtDamage,[300,500,600,700])
+Lightning  = EnemyEnhancement("Lightning", AutoSpeedArtsSpeed,[300,400,500,600],[200,300,400,500])
+Repeat = EnemyEnhancement("Repeat", DidIDoThat,[30,50,70,90])
+Enraged = EnemyEnhancement("Friendship", AllyDownDamageUp,[30,60,90,120])
+
+ValidSkills = []
 
 
 
 
 
-
-ValidSkills = [Healthy, Strong, Etheras, Dextrous, Agility, Luck, EtherBlock, PhyBlock, Spike,Enraged,Repeat,Lightning,FirstStrike,TasSnack,Desperate,Twang,BladeComboResist,Transmigration,AnnulDef,BlowdownSpike,AllReactionNull, Pursuer,Wish] # Phy counter not working weird ill make my own special enhancements for enemies
-Testing = []

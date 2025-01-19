@@ -32,7 +32,6 @@ class Enhancement:
     ReversePar1 = False
     ReversePar2 = False
     addToList = True
-    firstTime = True
     DisTag = ""
     def __init__(self,Name, Enhancement, Caption,  Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReversePar1 = False, ReversePar2  = False, addToList = True, DisTag = ""):
         self.name = Name
@@ -48,6 +47,22 @@ class Enhancement:
         self.DisTag = DisTag
         if self.addToList:
             EnhanceClassList.append(self)
+            
+
+        if self.Description != "":
+            JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"],[self.Caption], ["name"], self.Description)
+
+        if self.DisTag != "":
+            global DisplayTagID
+            DisplayTagDict = {
+            "$id": DisplayTagID,
+            "style": 36,
+            "name": self.DisTag,
+            "enhanceEff": self.EnhanceEffect
+            }
+            DisplayTagID += 1
+            DisplayTagList.append(DisplayTagDict)
+
     def RollEnhancement(self):
         global EnhanceID
         self.id = EnhanceID
@@ -84,22 +99,6 @@ class Enhancement:
                     Parameter = random.randrange(ParameterChoices[2],ParameterChoices[3]+1,Pstep)
 
             return Parameter
-
-        if self.firstTime:
-            if self.Description != "":
-                JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"],[self.Caption], ["name"], self.Description)
-
-            if self.DisTag != "":
-                global DisplayTagID
-                DisplayTagDict = {
-                "$id": DisplayTagID,
-                "style": 36,
-                "name": self.DisTag,
-                "enhanceEff": self.EnhanceEffect
-                }
-                DisplayTagID += 1
-                DisplayTagList.append(DisplayTagDict)
-            self.firstTime = False
             
         EnhanceEffectsDict = {
             "$id": EnhanceID,
@@ -112,24 +111,24 @@ class Enhancement:
         EnhanceEffectsList.append([EnhanceEffectsDict])
         
 def AddCustomEnhancements():
-    global EnhanceID, DisplayTagID
+    global EnhanceID
     JSONParser.ChangeJSONFile(["common/BTL_EnhanceEff.json"],["Param"], Helper.InclRange(1,1000), [1000], [241, 250, 245,54,143,257,259])
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randint(20,50)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randint(30,70)) # Healing with low HP
     JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randint(10,60)) # Healing with low HP
     JSONParser.ExtendJSONFile("common/BTL_Enhance.json", EnhanceEffectsList)
-    SearchAndSetDisplayIDs(DisplayTagList)
     EnhanceID = 3896
-    DisplayTagID = 65
     EnhanceEffectsList.clear()
-    DisplayTagList.clear()
 
 
-def SearchAndSetDisplayIDs(disList):
+def SearchAndSetDisplayIDs():
+    global DisplayTagID
     with open("./_internal/JsonOutputs/common/BTL_EnhanceEff.json", 'r+', encoding='utf-8') as EnEffFile:
         with open("./_internal/JsonOutputs/common_ms/btl_buff_ms.json", 'r+', encoding='utf-8') as btlBuffFile:
             EnEff = json.load(EnEffFile)
             btlBuff = json.load(btlBuffFile)
+            disList = DisplayTagList
+
             
             for eff in EnEff["rows"]:   # sets names in EnhanceEff File
                 for enhancement in disList:        
@@ -150,7 +149,8 @@ def SearchAndSetDisplayIDs(disList):
         EnEffFile.seek(0)
         EnEffFile.truncate()
         json.dump(EnEff,  EnEffFile, indent=2, ensure_ascii=False)    
-    
+
+
 
 HPBoost =       Enhancement("Health",1,1, Small)
 StrengthBoost = Enhancement("Strength", 2,2, Small)
@@ -193,7 +193,7 @@ PhysCounter = Enhancement("Phys Counter",26,24, Giga)
 AutoAttackHeal = Enhancement("Auto Vamp",27,26, Mini)
 SpecialANDArtHeal = Enhancement("Omnivamp",28,27, Baby, Description="Restores [ML:Enhance kind=Param1 ]% HP of damage dealt when\n a Special or Art connects.")
 ArtDamageHeal = Enhancement("Omnivamp",28, 28, Small) # This goes on arts only or else it will heal from special and arts
-EnemyKillHeal = Enhancement("Scavenger",29,30, Medium, DisTag="Scavenge Heal")
+EnemyKillHeal = Enhancement("Scavenger",29,30, Medium)
 CritHeal = Enhancement("Crit Vamp",30,31, Mini)
 CritDamageUp = Enhancement("Crit Damage",31,32, Medium)
 PercentDoubleAuto = Enhancement("Doublestrike",32,33, Medium, DisTag="Doublestrike")
@@ -356,7 +356,7 @@ ReduceElectricDamage = Enhancement("Electric ↓",58, 211, [5], Medium)
 ReduceIceDamage = Enhancement("Ice ↓",58, 212, [6], Medium)
 ReduceLightDamage = Enhancement("Light ↓",58, 213, [7], Medium)
 ReduceDarkDamage = Enhancement("Dark ↓",58, 214, [8], Medium)
-ChainAttackPower = Enhancement("Superchain",106, 215, Baby, Description="Increases attack power ratio\nat the start of a Chain Attack by [ML:Enhance kind=Param1 ]00%.")
+ChainAttackPower = Enhancement("Superchain",106, 215, Baby, Description="Increases attack power ratio\nat the start of a Chain Attack by [ML:Enhance kind=Param1 ].")
 LowHPHeal = Enhancement("Regenerate",181, 230, Baby)
 ArtUseHeal = Enhancement("Art Heal",86, 231, Baby)
 AutoDriverArtCancelHeal = Enhancement("Heal",91, 233, Baby)

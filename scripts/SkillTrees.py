@@ -9,7 +9,6 @@ def RandomizeSkillEnhancements(optDict):
     X_Slots= [1,51,61,91,121,162]
     Y_Slots= [11,31,71,101,141,171]
     B_Slots= [21,52,62,92,122,151]
-    AllSpecialSlots = ArtsCancelSlots + ZekeEyeSlot + X_Slots + Y_Slots + B_Slots
     isVanilla = not optDict["Driver Skill Trees"]["subOptionObjects"]["Nonstandard Skills"]["subOptionTypeVal"].get()
     with open("./_internal/JsonOutputs/common/BTL_Skill_Dr.json", 'r+', encoding='utf-8') as enhancementFile:
         with open("./_internal/JsonOutputs/common_ms/btl_skill_dr_name.json", 'r+', encoding='utf-8') as nameFile:
