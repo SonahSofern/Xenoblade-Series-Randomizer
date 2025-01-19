@@ -220,11 +220,9 @@ def Options():
     # Drivers
     GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees",[lambda: SkillTrees.RandomizeSkillEnhancements(OptionDictionary),lambda: SkillTrees.FirstSlotCost()],["Nonstandard Skills", []])
     GenStandardOption("Driver Accessories", TabDrivers, "Randomizes effects of Accessories", [lambda: Accs.RandomizeAccessoryEnhancements()])
+    GenStandardOption("Art Reactions", TabDrivers, "Randomizes art reactions (break, blowdown etc.)",[lambda: CustomArts.RandomArtReactions(OptionDictionary)], ["Clear Vanilla Reactions", [lambda: Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)],"Multiple Reactions", []], optionType=Spinbox)
+    GenStandardOption("Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, [], InvalidTargetIDs=AutoAttacks)],["Debuffs", [lambda: IDs.ValidReplacements.extend(list(set(ArtDebuffs)-set([21,35])))],"Buffs",[lambda: IDs.ValidReplacements.extend(ArtBuffs)], "Doom", [lambda: IDs.ValidReplacements.extend([21])]], Spinbox)
     GenStandardOption("Driver Arts", TabDrivers, "Randomizes effects of all driver arts", [lambda: CustomArts.GenCustomArtDescriptions()], ["Cooldown", [lambda: CustomArts.RandomArtCooldowns()], "Damage", [lambda: CustomArts.RandomArtDamageRatios()], "Enhancements", [lambda: CustomArts.RandomArtEnhancements()], "Animation Speed", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)]], optionType = Spinbox)
-    # GenStandardOption("Driver Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: CustomArts.DriverArtRando(OptionDictionary)], ["Debuffs", [], "Buffs", [], "Doom", []], optionType=Spinbox)
-    # GenStandardOption("Driver Art Reaction", TabDrivers, "Randomizes art reactions (break, blowdown etc.)",[lambda: CustomArts.DriverArtRando(OptionDictionary)], ["Clear Vanilla Reactions", [],"Multiple Reactions", []], optionType=Spinbox)
-    GenStandardOption("Art Reactions", TabDrivers, "Randomizes art reactions (break, blowdown etc.)", [lambda: CustomArts.RandomArtReactions()], optionType=Spinbox)
-    GenStandardOption("Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: CustomArts.RandomArtDebuffs()], optionType=Spinbox)
 
               
     # Blades
@@ -327,7 +325,6 @@ def Randomize():
 
         # Runs all randomization
         RunOptions()
-        IDs.ArtRandoCompleteness = 0
         randoProgressDisplay.config(text="Packing BDATs")
 
         try:

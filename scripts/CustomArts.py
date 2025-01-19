@@ -1,58 +1,29 @@
-import json
+import json, JSONParser
 import random
-from IDs import Lv1ArtCDs, Lv1DamageRatios, EnhancementSets, ValidArtIDs, EvasionEnhancementIDs, SpecialEffectArtIDs, ArtDebuffs, AutoAttacks, ArtBuffs, HitReactions, HitReactionDistribution, OriginalAOECaptionIDs
-import JSONParser
-import Helper
-import IDs
+from IDs import Lv1ArtCDs, EnhancementSets, ValidArtIDs, EvasionEnhancementIDs, SpecialEffectArtIDs, AutoAttacks
 
-# def DriverArtRando(OptionsRunDict): # We want custom descriptions for the driver arts, so we need to check the status of all options that affect it before randomizing. The last option that messes with the descriptions should also make the custom descriptions as well.
-#     ArtsRandoDone = IDs.ArtRandoCompleteness
-#     if ArtsRandoDone == 0:
-#         DebuffRando = OptionsRunDict["Driver Art Debuffs"]["optionTypeVal"].get()
-#         ReactionRando = OptionsRunDict["Driver Art Reaction"]["optionTypeVal"].get()
-#         CooldownRando = OptionsRunDict["Driver Art Cooldowns"]["optionTypeVal"].get()
-#         DamageRatioRando = OptionsRunDict["Driver Art Damage Ratio"]["optionTypeVal"].get()
-#         EnhancementRando = OptionsRunDict["Driver Art Enhancements"]["optionTypeVal"].get()
-
-#         DebuffSliderOdds = OptionsRunDict["Driver Art Debuffs"]["spinBoxVal"].get()
-#         ReactionSliderOdds = OptionsRunDict["Driver Art Reaction"]["spinBoxVal"].get()
-
-#         ReplaceWithDebuffs = OptionsRunDict["Driver Art Debuffs"]["subOptionObjects"]["Debuffs"]["subOptionTypeVal"].get()
-#         ReplaceWithBuffs = OptionsRunDict["Driver Art Debuffs"]["subOptionObjects"]["Buffs"]["subOptionTypeVal"].get()
-#         ReplaceWithDoom = OptionsRunDict["Driver Art Debuffs"]["subOptionObjects"]["Doom"]["subOptionTypeVal"].get()
-#         ClearVanillaReactions = OptionsRunDict["Driver Art Reaction"]["subOptionObjects"]["Clear Vanilla Reactions"]["subOptionTypeVal"].get()
-#         MultipleReactions = OptionsRunDict["Driver Art Reaction"]["subOptionObjects"]["Multiple Reactions"]["subOptionTypeVal"].get()
-
-#         if DebuffRando:
-#             ValidDebuffReplacements = []
-#             if ReplaceWithDebuffs:
-#                 ValidDebuffReplacements.extend(list(set(ArtDebuffs)-set([21,35])))
-#             if ReplaceWithBuffs:
-#                 ValidDebuffReplacements.extend(ArtBuffs)
-#             if ReplaceWithDoom:
-#                 ValidDebuffReplacements.extend([21])
-#             ValidDebuffReplacements = list(set(ValidDebuffReplacements))
-#             ChangeJSONFileArtsRando(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, ValidDebuffReplacements, AutoAttacks, DebuffSliderOdds)
-#         if ReactionRando:
-#             if ClearVanillaReactions:
-#                 Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)    
-#             ChangeJSONFileArtsRando(["common/BTL_Arts_Dr.json"], Helper.StartsWith("ReAct", 1,16), HitReactions, HitReactionDistribution, AutoAttacks, ReactionSliderOdds)
-#             if not MultipleReactions:
-#                 JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], ValidArtIDs, RemoveReactionsFromNonLastHit)
-#         if CooldownRando:
-#             RandomArtCooldowns()
-#         if DamageRatioRando:
-#             RandomArtDamageRatios()
-#         if EnhancementRando:
-#             RandomArtEnhancements()
-#         CustomArtDescriptionGenerator()
-#         IDs.ArtRandoCompleteness = 1
-
-def RandomArtReactions():
-    pass
-
-def RandomArtDebuffs():
-    pass
+def RandomArtReactions(OptionsRunDict):
+    HitReactionDistribution = [1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,5,6,7,8,9,10,11,12,13,14]
+    MultipleReactions = OptionsRunDict["Art Reactions"]["subOptionObjects"]["Multiple Reactions"]["subOptionTypeVal"].get()
+    sliderOdds = OptionsRunDict["Art Reactions"]["spinBoxVal"].get()
+    
+    with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in AutoAttacks: # Ignore autoes
+                continue
+            if sliderOdds > random.randrange(0,100): # Check slider
+                for i in range(1,17):
+                    if row[f"HitFrm{i}"] == 0: # Check if there is actually a hit
+                        break
+                    else:
+                        row[f"ReAct{i}"] =  random.choice(HitReactionDistribution) # Apply a random reaction
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+                
+    if not MultipleReactions:
+        JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], ValidArtIDs, RemoveReactionsFromNonLastHit)
 
 def RandomArtCooldowns(): # randomizes art cooldowns
     with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
@@ -69,6 +40,7 @@ def RandomArtCooldowns(): # randomizes art cooldowns
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def RandomArtDamageRatios(): # randomizes damage ratios
+    Lv1DamageRatios = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 125, 125, 130, 130, 130, 130, 130, 130, 140, 140, 140, 140, 144, 144, 144, 144, 144, 144, 144, 150, 150, 150, 150, 150, 150, 150, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 168, 168, 168, 168, 168, 168, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 210, 210, 210, 210, 210, 210, 210, 210, 210, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 230, 231, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 250, 250, 250, 250, 255, 255, 255, 260, 260, 260, 260, 260, 260, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 285, 285, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 315, 315, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 345, 345, 345, 345, 360, 360, 360, 360, 360, 360, 360, 360, 360, 375, 375, 375, 375, 390, 390, 390, 420, 420, 420]
     with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
@@ -174,38 +146,40 @@ def GenCustomArtDescriptions():
                 # AOE
                 for key,values in RangeType.items():    
                     if art["RangeType"] in values:
-                        rangeCaption += key
+                        rangeCaption += f"{key} / "
                         break
                     
                 # Reactions 
                 reactionCaption = ""
                 for i in range(1,17):              
-                    if art[f"HitFrm{i}"] != 0:
+                    if art[f"HitDirID{i}"] == 0:
+                        break
+                    else:
                         for key,values in Reactions.items():
                             if art[f"ReAct{i}"] in values:
                                 reactionCaption += f"{key}/"
-                    else:
-                        break
-                reactionCaption = reactionCaption[:-1] 
+                                break
+                reactionCaption = reactionCaption[:-1]
+                reactionCaption += " / "
                     
                 # Enhancements
                 enhancementCaption = ""
                 for key,values in Enhancements.items():
                     if art["Enhance1"] in values:
-                        enhancementCaption += key
+                        enhancementCaption += f"{key} / "
                         break
                     
                 # Debuffs  
                 debuffCaption = ""                      
                 for key,values in Debuffs.items():
                     if art["ArtsDeBuff"] in values:
-                        debuffCaption = key
+                        debuffCaption = f"{key}"
                   
                 # Update Descriptions  
                 for desc in descData["rows"]:            
                     if desc["$id"] == targetCaptionID:
-                        desc["name"] = f"{rangeCaption} {reactionCaption} {enhancementCaption} {debuffCaption}"  
-                            
+                        desc["name"] = f"{rangeCaption}{reactionCaption}{enhancementCaption}{debuffCaption}"  
+                        print(desc["name"])
             DescFile.seek(0)
             DescFile.truncate()
             json.dump(descData, DescFile, indent=2, ensure_ascii=False)             
