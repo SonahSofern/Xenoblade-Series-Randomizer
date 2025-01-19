@@ -3,6 +3,7 @@ from Enhancements import *
 
 
 Nope = [MaxAffinityHeal,ReduceDamageFromNearbyEnemies, DamageUpOnEnemyKill] # Retry these used on armu enemy with dupe
+ValidSkills = []   
 
 
 def EnemyStats(spinBox):
@@ -61,7 +62,7 @@ class EnemyEnhancement(Enhancement):
         self.Param1 = para1
         self.Param2 = para2
         ValidSkills.append(self)
-      
+   
 Healthy = EnemyEnhancement("Health", HPBoost, [50,100,150,200])
 Strong = EnemyEnhancement("Strength", StrengthBoost, [50,100,150,200])
 Etheras = EnemyEnhancement("Ether", EtherBoost, [50,100,150,200])
@@ -83,7 +84,9 @@ Lightning  = EnemyEnhancement("Lightning", AutoSpeedArtsSpeed,[300,400,500,600],
 Repeat = EnemyEnhancement("Repeat", DidIDoThat,[30,50,70,90])
 Enraged = EnemyEnhancement("Friendship", AllyDownDamageUp,[30,60,90,120])
 
-ValidSkills = []
+
+
+
 
 
 

@@ -21,11 +21,12 @@ windowWidth = "1550"
 windowHeight = "900"
 OptionColorLight = White
 OptionColorDark = Gray
-isOnefile = False
 SavedOptionsFileName = f"SavedOptionsv{Version}.txt"
 if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
     isOnefile = True
-
+else:
+    isOnefile = False
+    
 root = Tk()
 defFontVar = tk.StringVar(value="Arial")
 defFontSizeVar = tk.IntVar(value=16)
@@ -45,8 +46,6 @@ if isOnefile:
 else:
     bdat_path = "./_internal/Toolset/bdat-toolset-win64.exe"
 
-
-
 if isOnefile: 
     icon_path = os.path.join(sys._MEIPASS, 'Images', 'XC2Icon.png')
 else:
@@ -54,9 +53,9 @@ else:
 icon = PhotoImage(file=icon_path)
 root.iconphoto(True, icon)
 
+
 # The Notebook
 MainWindow = ttk.Notebook(root, height=5)
-
 # Frames in the notebook
 TabGeneralOuter = ttk.Frame(MainWindow) 
 TabDriversOuter = ttk.Frame(MainWindow) 
