@@ -11,16 +11,11 @@ TotalAreaPool = ["Gormott", "Uraya", "Mor Ardain", "Leftheria", "Temperantia", "
 PartyMembersAddScripts = {"Tora": ["chapt02", 7], "Nia": ["chapt02", 9], "Morag": ["chapt05", 7], "Zeke": ["chapt06", 5]}
 
 # TO DO
-# How to handle flying enemies? If they're near a cliff, they'll keep falling into the void.
-# Need to remove the flags for unlocked land of morytha st point and all argentum landmarks/st points.
-# Need to remove all quest rewards
-# Need to remove all collection point drops
-# Need to remove all chest drops
-# need to block off spirit crucible exit?
+# How to handle flying enemies? If they're near a cliff, they'll keep falling into the void. Enemies that spawn in the poison will take poison damage, making them super easy to kill as well.
 # all blades unlock skill tree levels by purchasing items in shops?
 # need to add custom shops with deeds/other stuff for purchase in each area
-# with open FLD_ConditionScenario and FLD_maplist combined, remove argentum st points, I can just start with all continents having 1 landmark on them, and then just allow the mapON condition to be dependent on the order.
-# change font of "Current Objective", and change it to something like "bounties remaining"
+# I can just start with all continents having 1 landmark on them, and then just allow the mapON condition to be dependent on the order.
+# change font color of "Current Objective", and change it to something like "bounties remaining"
 
 def UMHunt():
     if IDs.CurrentSliderOdds != 0:
@@ -39,7 +34,10 @@ def UMHunt():
         FieldQuestBattleSetup(SetCount, ChosenAreaOrder, EnemySets)
         FieldQuestTaskLogSetup(SetCount, ChosenAreaOrder, EnemySets)
         CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder)
-        LandmarkXPRemoval(ChosenAreaOrder)
+        AddQuestConditions(SetCount, ChosenAreaOrder)
+        LandmarkAdjustments(ChosenAreaOrder)
+        NoUnintendedRewards()
+        SpiritCrucibleEntranceRemoval()
         Cleanup()
 
 def Cleanup():
@@ -263,7 +261,7 @@ def CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder): # adj
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def LandmarkXPRemoval(ChosenAreaOrder): # removes xp and sp gains from landmarks, except for the first one
+def LandmarkAdjustments(ChosenAreaOrder): # removes xp and sp gains from landmarks, except for the first one
     for i in range(0, len(ChosenAreaOrder)):
         landmarkpopfile = "./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_LandmarkPop.json"
         with open(landmarkpopfile, 'r+', encoding='utf-8') as file:
@@ -275,3 +273,53 @@ def LandmarkXPRemoval(ChosenAreaOrder): # removes xp and sp gains from landmarks
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
+
+def AddQuestConditions(SetCount, ChosenAreaOrder): # Adding conditions for each area's warp to be unlocked + 1 to allow me to disable all other stuff (salvage points are the big one atm)
+    # Condition 3903 Disables Stuff when applied to it.
+    with open("./_internal/JsonOutputs/common/FLD_ConditionScenario.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        data["rows"].append({"$id": 322, "ScenarioMin": 0, "ScenarioMax": 10000, "NotScenarioMin": 0, "NotScenarioMax": 0})
+        for i in range(0, SetCount): # first area can warp around when the flag is 10049 or above, second is 10050 or above, etc.
+            data["rows"].append({"$id": 323 + i, "ScenarioMin": 10049 + i, "ScenarioMax": 11130, "NotScenarioMin": 0, "NotScenarioMax": 0})
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        data["rows"].append({"$id": 3903, "Premise": 0, "ConditionType1": 1, "Condition1": 322, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
+        for i in range(0, SetCount): # first area can warp around when the flag is 10049 or above, second is 10050 or above, etc.
+            data["rows"].append({"$id": 3904 + i, "Premise": 0, "ConditionType1": 1, "Condition1": 323 + i, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/FLD_maplist.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            for i in range(0, len(ChosenAreaOrder)):
+                if row["select"] == ContinentInfo[ChosenAreaOrder[i]][2]:
+                    row["mapON_cndID"] = 3904 + i
+                    row["st_allOFF_cndID"] = 0
+                    break
+                else:
+                    row["mapON_cndID"] = 3903
+                    row["st_allOFF_cndID"] = 1848
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)  
+
+def NoUnintendedRewards(): # Removes any cheese you can do by doing sidequests, selling Collection Point items
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_QuestReward.json", ["Gold", "Exp", "Sp", "Coin", "DevelopZone", "DevelopPoint", "TrustPoint", "MercenariesPoint", "IdeaCategory", "IdeaValue", "ItemID1", "ItemNumber1", "ItemID2", "ItemNumber2", "ItemID3", "ItemNumber3", "ItemID4", "ItemNumber4"], 0)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CollectionList.json", ["Price"], 0)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_SalvagePointList.json", ["Condition"], 3903)
+
+def SpiritCrucibleEntranceRemoval(): # Exiting or Entering Spirit Crucible has problems with resetting the quest condition. So we remove that by warping the player back to the original landmark in that area.
+    with open("./_internal/JsonOutputs/common_gmk/FLD_MapJump.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 3: # Leftherian Entrance to Spirit Crucible
+                row["MapJumpId"] = 166 # get pranked lmao
+            if row["$id"] == 4: # Spirit Crucible Entrance to Leftheria
+                row["MapJumpId"] = 167 # get pranked lmao    
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)

@@ -54,7 +54,6 @@ def DriverArtRando(OptionsRunDict): # We want custom descriptions for the driver
         CustomArtDescriptionGenerator()
         IDs.ArtRandoCompleteness = 1
     
-
 def RandomArtCooldowns(): # randomizes art cooldowns
     with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
