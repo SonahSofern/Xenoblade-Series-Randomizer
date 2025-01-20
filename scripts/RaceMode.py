@@ -838,7 +838,6 @@ def ZoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
                 with open(TBoxFiles[i][l], 'r+', encoding='utf-8') as file:
                     data = json.load(file)
                     for row in data["rows"]:
-                        TBoxName = row["name"]
                         if row["$id"] not in InvalidTreasureBoxIDs:
                             if AllZoharLocations[i][ACurBox] != 0:
                                 row["itm8ID"] = AllZoharLocations[i][ACurBox]
@@ -978,11 +977,11 @@ def WeaponChipShopPowerLevelIncrease(): # Common issue at start of run is first 
         for row in data["rows"]:
             if row["$id"] == 7:
                 if ChosenIndices[0] == 0: # Gormott
-                    row["DefItem2"] = 10003
-                    row["DefItem3"] = 10011
+                    row["DefItem1"] = 10003
+                    row["DefItem2"] = 10011
                 else: # Uraya
-                    row["DefItem2"] = 10014
-                    row["DefItem3"] = 10015
+                    row["DefItem1"] = 10017
+                    row["DefItem2"] = 10018
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
