@@ -839,7 +839,7 @@ def ZoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
                     data = json.load(file)
                     for row in data["rows"]:
                         TBoxName = row["name"]
-                        if (TBoxName != "tbox_ma08a_f018") & (TBoxName != "tbox_qst1018_001"):
+                        if row["$id"] not in InvalidTreasureBoxIDs:
                             if AllZoharLocations[i][ACurBox] != 0:
                                 row["itm8ID"] = AllZoharLocations[i][ACurBox]
                                 row["itm8Num"] = 1
