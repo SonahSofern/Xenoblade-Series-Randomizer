@@ -47,9 +47,8 @@ def RaceModeChanging(OptionsRunDict):
     LevelAtStartofArea = [5, 20, 29, 35, 38, 42, 46, 51, 59, 68] #Level going to: # Level(ish) of the first boss of the current area (so you want to be around this level after warping)
     LevelAtEndofArea = [15, 26, 34, 35, 42, 46, 46, 59, 68, 70]  #Level going from: # Level the last boss of the previous area was (so you should be around the same level before warping to new area)
 
-    # The Save File is set up in a way that it has 56 bonus exp already, and is at level 2, so that value (totals to 76 xp gained) gets subtracted from the total xp needed
+    # The Save File is set up in a way that it is level 5 already to start with.
     # XP needed to reach a given level, formatted in [Given Level, Total XP Needed]
-    # Tora ends up like 35 xp off level 20 with the actual xp needed to reach lv 5 at 360, so I give some more exp to compensate. It doesn't push anyone else over.
     XPNeededToReachLv = [[5, 385], [15, 9100], [20, 21360], [26, 44520], [29, 59820], [34, 91320], [35, 98580], [38, 122520], [42, 160080], [46, 205140], [51, 274640], [59, 428120], [68, 682040], [70, 789920]]
     global ChosenIndices
     ChosenIndices = []
@@ -67,7 +66,7 @@ def RaceModeChanging(OptionsRunDict):
     for i in range(0, len(ChosenIndices)): # Defines the EXP difference we need to give to the first landmark in a race-mode location    
         for j in range(0, len(XPNeededToReachLv)):
             if i == 0:
-                ExpBefore[i] = 76
+                ExpBefore[i] = 385
                 if LevelAtStartofArea[ChosenIndices[i]] == XPNeededToReachLv[j][0]:    
                     ExpAfter[i] = XPNeededToReachLv[j][1]
                     break
@@ -96,16 +95,17 @@ def RaceModeChanging(OptionsRunDict):
         LandmarkFilestoTarget.append(FileStart + AllMapIDs[ChosenIndices[i]][1] + FileEnd)
         LandmarkMapSpecificIDstoTarget.append(MapSpecificIDs[ChosenIndices[i]])
 
-    for i in range(0, len(LandmarkFilestoTarget)):  # Adjusts the EXP gained from the first landmark in each race-mode location
-        with open(LandmarkFilestoTarget[i], 'r+', encoding='utf-8') as file:
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] == LandmarkMapSpecificIDstoTarget[i]:
-                    row["getEXP"] = ExpDiff[i]
-                    row["getSP"] = 3500 * ChosenIndices[i]
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
+    for i in range(0, len(LandmarkFilestoTarget)):  # Adjusts the EXP gained from the first landmark in every other race-mode location      
+            with open(LandmarkFilestoTarget[i], 'r+', encoding='utf-8') as file:
+                data = json.load(file)
+                for row in data["rows"]:
+                    if row["$id"] == LandmarkMapSpecificIDstoTarget[i]:
+                        row["getEXP"] = ExpDiff[i]
+                        if (i+2) % 2 == 0: 
+                            row["getSP"] = 6000 * ChosenIndices[i]
+                file.seek(0)
+                file.truncate()
+                json.dump(data, file, indent=2, ensure_ascii=False)
     
     with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: #race mode implementation #these just adjust the quest markers as far as I can tell
         data = json.load(file)
@@ -311,7 +311,7 @@ def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
             json.dump(data, file, indent=2, ensure_ascii=False)
         return NGPlusBladeCrystalIDs
 
-def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unlock requirements to the same condition as reaching the new race-mode continent
+def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade trust/skill unlock requirements to the same condition as reaching the 2nd and 4th race mode areas
     KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]
     KeyAchievementIDs = list(set([x for x in KeyAchievementIDs if x != 0]))
     RelevantChosenIndices = [x for x in ChosenIndices if x != 9]
@@ -321,11 +321,11 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
     TaskLogIDs = [659, 660, 661, 662]
     LocationNames = ["Gormott", "Uraya", "Mor Ardain", "Leftheria", "Indol", "Tantal", "Spirit Crucible Elpys", "the Cliffs of Morytha", "the World Tree"]
 
-    StarterBladeTrustSetAppearance = [16, 16, 12, 13, 14]
-    A1TrustSetAppearance = [16, 16, 12, 13, 14]
-    A2TrustSetAppearance = [16, 16, 16, 13, 14]
-    A3TrustSetAppearance = [16, 16, 16, 16, 14]
-    A4TrustSetAppearance = [16, 16, 16, 16, 16]
+    StarterBladeTrustSetAppearance = [16, 12, 16, 14, 16] #rank 1
+    A1TrustSetAppearance = [16, 12, 16, 14, 16] # rank 1
+    A2TrustSetAppearance = [16, 16, 16, 14, 16] # rank 3
+    A3TrustSetAppearance = [16, 16, 16, 14, 16] # rank 3
+    A4TrustSetAppearance = [16, 16, 16, 16, 16] # rank 5
 
     AllTrustSetAppearances = [StarterBladeTrustSetAppearance, A1TrustSetAppearance, A2TrustSetAppearance, A3TrustSetAppearance, A4TrustSetAppearance]
 
