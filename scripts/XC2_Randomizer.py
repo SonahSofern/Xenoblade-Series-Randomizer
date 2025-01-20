@@ -427,7 +427,7 @@ permalinkButton = ttk.Button(permalinkFrame, text="Settings")
 permalinkButton.state(["disabled"])
 permalinkFrame.pack(padx=10, pady=2, anchor="w")
 permalinkButton.pack(side="left", padx=2)
-permalinkEntry.pack(side='left', padx=2) 
+permalinkEntry.pack(side='left', padx=2)
 PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:InteractableStateSet())
 
 

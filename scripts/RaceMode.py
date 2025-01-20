@@ -244,6 +244,7 @@ def RaceModeChanging(OptionsRunDict):
         json.dump(data, file, indent=2, ensure_ascii=False)
 
     NGPlusBladeCrystalIDs = DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
+    PickupRadiusDeedStart()
     DifficultyChanges()
     DriverLvandSPFix()
     LandmarkConditions()
@@ -496,7 +497,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
     AllEquipIDs = [A1Equip, A2Equip, A3Equip, A4Equip]
     Area1ShopDeedIDs, Area2ShopDeedIDs, Area3ShopDeedIDs, Area4ShopDeedIDs = [], [], [], []
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get():
-        Area1ShopDeedIDs, Area2ShopDeedIDs, Area3ShopDeedIDs, Area4ShopDeedIDs = Helper.InclRange(25249, 25264), Helper.InclRange(25265, 25280), Helper.InclRange(25281, 25291), Helper.InclRange(25292, 25300)
+        Area1ShopDeedIDs, Area2ShopDeedIDs, Area3ShopDeedIDs, Area4ShopDeedIDs = Helper.InclRange(25249, 25264), Helper.InclRange(25265, 25280), Helper.InclRange(25281, 25291), Helper.InclRange(25292, 25299)
     Area1LootIDs = A1CoreCrystalIDs * 2 + [25305] * 3 + Area1ShopDeedIDs * 2 + [25450] * 3 + A1Equip + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2 + [25407] * 10
     if ChosenIndices[1] == 3: # Leftherian Archipelago (30ish chests)
         Area2LootIDs = A2CoreCrystalIDs + [25305] * 2 + Area2ShopDeedIDs + [25450] * 2 + A2Equip + [25408] * 3 + [25220, 25220] + A2RaceModeCoreChipIDs + [25407] * 5
@@ -628,7 +629,7 @@ def ShopRemovals(): # Removes the Expensive Core Crystal from the shop, as well 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, makes the max movespeed bonus 250% instead of 25%
-    DeedTypeIDValues = Helper.InclRange(1, 52)
+    DeedTypeIDValues = Helper.InclRange(1, 51)
     with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes caption and name
         data = json.load(file)
         for row in data["rows"]:
@@ -640,7 +641,6 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
             if row["$id"] in DeedTypeIDValues:
                 row["Value"] = 5
                 row["Type"] = 1
-            if row["$id"] > 52:
                 break
         file.seek(0)
         file.truncate()
@@ -657,9 +657,9 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
     with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes name of deed
         data = json.load(file)
         for row in data["rows"]:
-            if (row["$id"] >= 25249) & (row["$id"] <= 25300):
+            if (row["$id"] >= 25249) & (row["$id"] <= 25299):
                 row["Caption"] = 603
-            if row["$id"] > 25300:
+            if row["$id"] > 25299:
                 break
         file.seek(0)
         file.truncate()
@@ -667,13 +667,50 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
     with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
         data = json.load(file)
         for row in data["rows"]:
-            if (row["$id"] >= 491) & (row["$id"] <= 542):
+            if (row["$id"] >= 491) & (row["$id"] < 542):
                 row["name"] = "Movespeed Deed"
-            if row["$id"] > 542:
+            if row["$id"] == 542:
                 break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def PickupRadiusDeedStart(): # Start with a Pickup Radius Up Deed, to account for items falling in gaps between chests and walls and despawning.
+    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes caption and name
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["Type"] == 52: # Adding 1 Custom Deed to increase pickup range, due to some issues where loot would drop from a chest that ended up stuck behind it with no way to pick it up before the loot despawned.
+                row["Caption"] = 612 # Increases item drop collection range by 150cm
+    with open("./_internal/JsonOutputs/common/FLD_OwnerBonus.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 52:
+                row["Value"] = 150
+                row["Type"] = 10
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes name of deed
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 25300:
+                row["Caption"] = 612
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 542:
+                row["name"] = "Pickup Radius Deed"
+            if row["$id"] == 612:
+                row["name"] = "Increases item drop collection\nrange by 150cm."
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)        
 
 def DLCItemChanges(): # Changes all DLC gifts to 1 gold except for poppy crystals
     DLCIDRowsWithItems = Helper.InclRange(1,7) + [9, 10] + Helper.InclRange(16, 21) + [23,24] + [30] + [36, 37] + Helper.InclRange(43, 55)
