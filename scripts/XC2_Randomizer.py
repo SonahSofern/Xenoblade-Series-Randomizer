@@ -1,7 +1,7 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, FieldSkillAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, CustomArts, PermalinkManagement, Helper, SkillTrees, Enhancements, BigItems, _EnemyEnhancements
+import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, FieldSkillAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, CustomArts, PermalinkManagement, Helper, SkillTrees, Enhancements, BigItems, _EnemyEnhancements, BladeRandomization
 import GUISettings
 import _WeaponChips as WPChips
 import _AuxCores as AuxCr
@@ -231,6 +231,7 @@ def Options():
     GenStandardOption("Driver Art Reaction", TabDrivers, "Randomizes art reactions (break, blowdown etc.)",[lambda: CustomArts.DriverArtRando(OptionDictionary)], ["Clear Vanilla Reactions", [],"Multiple Reactions", []], optionType=Spinbox)
                 
     # Blades
+    GenStandardOption("Randomize Blades", TabBlades, "Randomizes when blades appear", [lambda: BladeRandomization.DefaultBladeRandomization(OptionDictionary)], ["Default Blades", [], "Poppi", [], "Gacha Blades", [], "Non-Gacha Blades", [], "NG+ Blades", []], optionType=Spinbox)
     GenStandardOption("Blade Aux Cores", TabBlades, "Randomizes a Blade's Aux Core enhancement", [lambda: AuxCr.RandomizeAuxCoreEnhancements()])
     GenStandardOption("Blade Special Reactions", TabBlades, "Randomizes each hit of a blade special to have a random effect such as break, knockback etc.", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Bl.json"], Helper.StartsWith("ReAct", 1, 16), HitReactions, HitReactions)], optionType=Spinbox)
     GenStandardOption("Blade Special Buttons", TabBlades, "Randomizes what button a special uses for its button challenge", [lambda: JSONParser.ChangeJSONFile(["common/MNU_BtnChallenge2.json"], Helper.StartsWith("BtnType", 1, 3), ButtonCombos, ButtonCombos)])
