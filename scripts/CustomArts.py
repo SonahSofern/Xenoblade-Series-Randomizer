@@ -140,8 +140,10 @@ def GenCustomArtDescriptions():
             descData = json.load(DescFile)
             
             for art in artsData["rows"]:
+                
                 if art["Caption"] == 0: # Only change things that have captions
                     continue
+                
                 targetCaptionID = art["Caption"]
                 rangeCaption = ""
                 

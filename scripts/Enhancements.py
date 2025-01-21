@@ -48,10 +48,6 @@ class Enhancement:
         if self.addToList:
             EnhanceClassList.append(self)
             
-
-        if self.Description != "":
-            JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"],[self.Caption], ["name"], self.Description)
-
         if self.DisTag != "":
             global DisplayTagID
             DisplayTagDict = {
@@ -71,20 +67,9 @@ class Enhancement:
         Rare = 1
         Legendary = 2
         self.Rarity = random.choice([Common,Common,Common, Rare,Rare, Legendary])
-        def SetParams(ParameterChoices, isReverse): # Restrict this to only run until all rarities are rolled then it picks an already rolled one
-            if isReverse:
-                Common = 2
-                Rare = 1
-                Legendary = 0
-            else:
-                Common = 0
-                Rare = 1
-                Legendary = 2
-                
-            if ParameterChoices == Baby:
-                Pstep = 1
-            else:
-                Pstep = 5
+        def SetParams(ParameterChoices, isReverse):
+            Common, Rare, Legendary = (2, 1, 0) if isReverse else (0, 1, 2)
+            Pstep = 1 if ParameterChoices == Baby else 5
                 
             if ParameterChoices == [0,0,0,0]:
                 Parameter = 0
@@ -99,6 +84,9 @@ class Enhancement:
                     Parameter = random.randrange(ParameterChoices[2],ParameterChoices[3]+1,Pstep)
 
             return Parameter
+            
+        if self.Description != "":
+            JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"],[self.Caption], ["name"], self.Description)
             
         EnhanceEffectsDict = {
             "$id": EnhanceID,
@@ -243,7 +231,7 @@ SpecialAndArtsAggroDown = Enhancement("Aggro ↓",79, 77, Medium)
 SpecialAggroDown = Enhancement("Aggro ↓",79, 79, Medium) # For Specials only 
 SpecialAndArtsAggroUp = Enhancement("Aggro ↑",80, 81, Medium)
 AggroReductionUp = Enhancement("Friendly",81, 85, Small)
-AggroEverySecond = Enhancement("Provocative",82, 86, Small, Description="Increases aggro every second by [ML:Enhance kind=Param1 ].")
+AggroEverySecond = Enhancement("Provocative",82, 86, Small, Description="Increases aggro every second by [ML:Enhance kind=Param1 ].") # didnt work??
 StartBattleAggro = Enhancement("Irksome",83, 92, Giga) # distag didnt work
 RevivalHP = Enhancement("Revival",84, 96, Large)
 RevivalHPTeammate = Enhancement("Revival",85, 97, Large)

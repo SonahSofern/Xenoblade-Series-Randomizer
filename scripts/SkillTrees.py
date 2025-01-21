@@ -65,7 +65,7 @@ def RandomizeSkillEnhancements(optDict):
             
             else:
                 
-                InvalidSkillEnhancements = [CritBoost, FlatCritBoost, PartyCritMaxAffinity, DamageAndCritUpMaxAffinity,ForcedHPPotionOnHit,HpPotChanceFor2,ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, AegisPowerUp, BigBangPowerUp, CatScimPowerUp, VarSaberPowerUp, MechArmsPowerUp, WhipswordPowerUp, DrillShieldPowerUp, DualScythesPowerUp, EvadeDrainHp, EvadeDriverArt, KnuckleClawsPowerUp, BitballPowerUp, GreataxePowerUp, TwinRingPowerUp, MegalancePowerUp,ShieldHammerPowerUp, ChromaKatanaPowerUp, EtherCannonPowerUp, ArtDamageHeal, AegisParty, AegisDriver]
+                InvalidSkillEnhancements = [CritBoost, FlatCritBoost,BlockBoost,FlatBlockBoost, PartyCritMaxAffinity, DamageAndCritUpMaxAffinity,ForcedHPPotionOnHit,HpPotChanceFor2,ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, AegisPowerUp, BigBangPowerUp, CatScimPowerUp, VarSaberPowerUp, MechArmsPowerUp, WhipswordPowerUp, DrillShieldPowerUp, DualScythesPowerUp, EvadeDrainHp, EvadeDriverArt, KnuckleClawsPowerUp, BitballPowerUp, GreataxePowerUp, TwinRingPowerUp, MegalancePowerUp,ShieldHammerPowerUp, ChromaKatanaPowerUp, EtherCannonPowerUp, ArtDamageHeal, AegisParty, AegisDriver]
                 ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
                 ForcedSkills = []
                 for skillSlot in enhanceFile['rows']:
