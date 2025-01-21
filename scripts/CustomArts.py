@@ -157,90 +157,87 @@ def GenCustomArtDescriptions():
         with open("./_internal/JsonOutputs/common_ms/btl_arts_dr_cap.json", "r+", encoding='utf-8') as DescFile:     
             artsData = json.load(ArtsFile)
             descData = json.load(DescFile)
-            
+            AnchorShotDesc = 0
             for art in artsData["rows"]:
-                if art["Caption"] == 0: # Only change things that have captions
-                    continue
-                targetCaptionID = art["Caption"]
-                CombinedCaption = ["","","","",""]
+                if art["$id"] in ValidArtIDs:
+                    CurrDesc = art["Caption"]
+                    CombinedCaption = ["","","","",""]
 
-                # AOE
-                for key,values in RangeType.items():    
-                    if art["RangeType"] in values:
-                        CombinedCaption[0] += f"{key}"
-                        break
-
-                # Type of Art
-                for key,values in MoveType.items():
-                    if art["ArtsType"] in values:
-                        CombinedCaption[1] += f"{key}"
-                        break
-
-                # Reactions 
-                ReactCaption = ""
-                TypeReactions = []
-                for i in range(1,17):              
-                    if art[f"HitDirID{i}"] != 0:
-                        for key,values in Reactions.items():
-                            if art[f"ReAct{i}"] in values:
-                                ReactCaption += f"{key}->"
-                                TypeReactions.append(art[f"ReAct{i}"])
-                                break
-                ReactCaption = ReactCaption[:-2]
-                if len(ReactCaption) > 15: # If the length is too long, shorten it to "Driver Combo"
-                    ReactCaption = "Driver Combo"
-                elif len(TypeReactions) == 1: # If the length is 1, spell out the reaction
-                    for key,values in FullReactions.items():
-                        if TypeReactions[0] in values:
-                            ReactCaption = f"{key}"
+                    # AOE
+                    for key,values in RangeType.items():    
+                        if art["RangeType"] in values:
+                            CombinedCaption[0] += f"{key}"
                             break
-                CombinedCaption[2] = ReactCaption
-                    
-                # Enhancements
-                EnhanceCaption = ""
-                for key,values in Enhancements.items():
-                    if art["Enhance1"] in values:
-                        CombinedCaption[3] += f"{key}"
-                        break
-                    
-                # Debuffs  
-                DebuffCaption = ""                      
-                for key,values in Debuffs.items():
-                    if art["ArtsDeBuff"] in values:
-                        CombinedCaption[4] = f"{key}"
-                        break
 
-                # Putting it all together
-                TotalArtDescription = ""    
-                for i in range(0, len(CombinedCaption)):
-                    if CombinedCaption[i] != "":
-                        FirstDescriptionMod = i
-                        break
-                for i in range(len(CombinedCaption) - 1, 0, -1):
-                    if CombinedCaption[i] != "":
-                        LastDescriptionMod = i
-                        break
-                TotalArtDescription += CombinedCaption[FirstDescriptionMod]
-                if FirstDescriptionMod != LastDescriptionMod:
-                    for i in range(FirstDescriptionMod + 1, LastDescriptionMod + 1):
+                    # Type of Art
+                    for key,values in MoveType.items():
+                        if art["ArtsType"] in values:
+                            CombinedCaption[1] += f"{key}"
+                            break
+
+                    # Reactions 
+                    ReactCaption = ""
+                    TypeReactions = []
+                    for i in range(1,17):              
+                        if art[f"HitDirID{i}"] != 0:
+                            for key,values in Reactions.items():
+                                if art[f"ReAct{i}"] in values:
+                                    ReactCaption += f"{key}->"
+                                    TypeReactions.append(art[f"ReAct{i}"])
+                                    break
+                    ReactCaption = ReactCaption[:-2]
+                    if len(ReactCaption) > 15: # If the length is too long, shorten it to "Driver Combo"
+                        ReactCaption = "Driver Combo"
+                    elif len(TypeReactions) == 1: # If the length is 1, spell out the reaction
+                        for key,values in FullReactions.items():
+                            if TypeReactions[0] in values:
+                                ReactCaption = f"{key}"
+                                break
+                    CombinedCaption[2] = ReactCaption
+                        
+                    # Enhancements
+                    for key,values in Enhancements.items():
+                        if art["Enhance1"] in values:
+                            CombinedCaption[3] += f"{key}"
+                            break
+                        
+                    # Debuffs                       
+                    for key,values in Debuffs.items():
+                        if art["ArtsDeBuff"] in values:
+                            CombinedCaption[4] = f"{key}"
+                            break
+
+                    # Putting it all together
+                    TotalArtDescription = ""    
+                    for i in range(0, len(CombinedCaption)):
                         if CombinedCaption[i] != "":
-                            TotalArtDescription += " / "
-                            TotalArtDescription += CombinedCaption[i]
+                            FirstDescriptionMod = i
+                            break
+                    for i in range(len(CombinedCaption) - 1, 0, -1):
+                        if CombinedCaption[i] != "":
+                            LastDescriptionMod = i
+                            break
+                    TotalArtDescription += CombinedCaption[FirstDescriptionMod]
+                    if FirstDescriptionMod != LastDescriptionMod:
+                        for i in range(FirstDescriptionMod + 1, LastDescriptionMod + 1):
+                            if CombinedCaption[i] != "":
+                                TotalArtDescription += " / "
+                                TotalArtDescription += CombinedCaption[i]
 
-                # Update Descriptions  
-                for desc in descData["rows"]:            
-                    if desc["$id"] == targetCaptionID:
-                        desc["name"] = TotalArtDescription 
-                        break
+                    # Update Descriptions
+                    for desc in descData["rows"]:
+                        if desc["$id"] == CurrDesc:
+                            desc["name"] = TotalArtDescription
+                            break
 
-            # Fix for Anchor Shot updating description number past Urayan story flags        
-            for row in descData["rows"]:
-                if row["$id"] == 4:
-                    RexAnchorShotCaption = row["name"]
-                if row["$id"] == 5:
-                    row["name"] = RexAnchorShotCaption
+            for desc in descData["rows"]:
+                if desc["$id"] == 4:
+                    AnchorShotDesc = desc["name"]
                     break
-
+            for desc in descData["rows"]:
+                if desc["$id"] == 5:
+                    desc["name"] = AnchorShotDesc
+                    break
             DescFile.seek(0)
             DescFile.truncate()
             json.dump(descData, DescFile, indent=2, ensure_ascii=False)             
