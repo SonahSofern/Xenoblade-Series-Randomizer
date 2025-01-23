@@ -26,7 +26,7 @@ def RandomArtReactions(OptionsRunDict):
         JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], ValidArtIDs, RemoveReactionsFromNonLastHit)
 
 def RandomArtCooldowns(OptionsRunDict): # randomizes art cooldowns
-    sliderOdds = OptionsRunDict["Art Reactions"]["spinBoxVal"].get()
+    sliderOdds = OptionsRunDict["Driver Arts"]["spinBoxVal"].get()
     with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
@@ -42,7 +42,7 @@ def RandomArtCooldowns(OptionsRunDict): # randomizes art cooldowns
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def RandomArtDamageRatios(OptionsRunDict): # randomizes damage ratios
-    sliderOdds = OptionsRunDict["Art Reactions"]["spinBoxVal"].get()
+    sliderOdds = OptionsRunDict["Driver Arts"]["spinBoxVal"].get()
     Lv1DamageRatios = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 125, 125, 130, 130, 130, 130, 130, 130, 140, 140, 140, 140, 144, 144, 144, 144, 144, 144, 144, 150, 150, 150, 150, 150, 150, 150, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 168, 168, 168, 168, 168, 168, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 210, 210, 210, 210, 210, 210, 210, 210, 210, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 230, 231, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 250, 250, 250, 250, 255, 255, 255, 260, 260, 260, 260, 260, 260, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 285, 285, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 315, 315, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 345, 345, 345, 345, 360, 360, 360, 360, 360, 360, 360, 360, 360, 375, 375, 375, 375, 390, 390, 390, 420, 420, 420]
     with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
@@ -57,7 +57,7 @@ def RandomArtDamageRatios(OptionsRunDict): # randomizes damage ratios
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def RandomArtEnhancements(OptionsRunDict): # randomizes art enhancements
-    sliderOdds = OptionsRunDict["Art Reactions"]["spinBoxVal"].get()
+    sliderOdds = OptionsRunDict["Driver Arts"]["spinBoxVal"].get()
     with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
@@ -162,7 +162,8 @@ def GenCustomArtDescriptions():
                 if art["$id"] in ValidArtIDs:
                     CurrDesc = art["Caption"]
                     CombinedCaption = ["","","","",""]
-
+                    FirstDescriptionMod = 0
+                    LastDescriptionMod = 0
                     # AOE
                     for key,values in RangeType.items():    
                         if art["RangeType"] in values:
@@ -223,7 +224,6 @@ def GenCustomArtDescriptions():
                             if CombinedCaption[i] != "":
                                 TotalArtDescription += " / "
                                 TotalArtDescription += CombinedCaption[i]
-
                     # Update Descriptions
                     for desc in descData["rows"]:
                         if desc["$id"] == CurrDesc:

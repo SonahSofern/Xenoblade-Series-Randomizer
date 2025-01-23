@@ -2,13 +2,28 @@ import json, random
 from Enhancements import *
 
 def RandomizeSkillEnhancements(optDict):
+    DefaultArtsCancelSlots, DefaultXSlots, DefaultYSlots, DefaultBSlots  = [12,55,82,102,131,161], [1,51,61,91,121,162], [11,31,71,101,141,171], [21,52,62,92,122,151]
     ArtsCancelSlots, X_Slots, Y_Slots, B_Slots = [], [], [], []
     Rex, Nia, Tora, Vandham, Morag, Zeke = Helper.InclRange(1, 30), Helper.InclRange(31, 60), Helper.InclRange(61, 90), Helper.InclRange(91, 120), Helper.InclRange (121, 150), Helper.InclRange(151, 180)
     DriverList = [Rex, Nia, Tora, Vandham, Morag, Zeke]
     for Driver in DriverList:
         RemainingUnusedDriverIDs = Driver.copy()
-        if not optDict["Driver Skill Trees"]["subOptionObjects"]["Tier 1: Arts Cancel"]["subOptionTypeVal"].get():
-            ChosenID = 0
+        if optDict["Driver Skill Trees"]["subOptionObjects"]["Tier 1: Arts Cancel"]["subOptionTypeVal"].get(): # remove defaults first
+            ArtsCancelSlots.append(DefaultArtsCancelSlots[DriverList.index(Driver)])
+            RemainingUnusedDriverIDs.remove(DefaultArtsCancelSlots[DriverList.index(Driver)])
+            FirstSlotCost()
+        if optDict["Driver Skill Trees"]["subOptionObjects"]["Tier 1: Start With Attack"]["subOptionTypeVal"].get():
+            X_Slots.append(DefaultXSlots[DriverList.index(Driver)])
+            RemainingUnusedDriverIDs.remove(DefaultXSlots[DriverList.index(Driver)])
+            Y_Slots.append(DefaultYSlots[DriverList.index(Driver)])
+            RemainingUnusedDriverIDs.remove(DefaultYSlots[DriverList.index(Driver)])
+            B_Slots.append(DefaultBSlots[DriverList.index(Driver)])
+            RemainingUnusedDriverIDs.remove(DefaultBSlots[DriverList.index(Driver)])
+        if Driver == Zeke:
+            ChosenID = random.choice(RemainingUnusedDriverIDs)
+            ZekeEyeSlot = [ChosenID]
+            RemainingUnusedDriverIDs.remove(ChosenID)
+        if not optDict["Driver Skill Trees"]["subOptionObjects"]["Tier 1: Arts Cancel"]["subOptionTypeVal"].get(): # have to separate out the if nots to avoid overwriting an arts cancel slot
             ChosenID = random.choice(RemainingUnusedDriverIDs)
             ArtsCancelSlots.append(ChosenID)
             RemainingUnusedDriverIDs.remove(ChosenID)
@@ -20,16 +35,6 @@ def RandomizeSkillEnhancements(optDict):
             RemainingUnusedDriverIDs.remove(ChosenIDs[1])
             B_Slots.append(ChosenIDs[2])
             RemainingUnusedDriverIDs.remove(ChosenIDs[2])
-        if Driver == Zeke:
-            ChosenID = 0
-            ZekeEyeSlot = [random.choice(RemainingUnusedDriverIDs)]
-    if not ArtsCancelSlots:
-        ArtsCancelSlots = [12,55,82,102,131,161]
-        FirstSlotCost()
-    if not X_Slots:
-        X_Slots = [1,51,61,91,121,162]
-        Y_Slots = [11,31,71,101,141,171]
-        B_Slots = [21,52,62,92,122,151]
 
     isVanilla = not optDict["Driver Skill Trees"]["subOptionObjects"]["Nonstandard Skills"]["subOptionTypeVal"].get()
     with open("./_internal/JsonOutputs/common/BTL_Skill_Dr.json", 'r+', encoding='utf-8') as enhancementFile:

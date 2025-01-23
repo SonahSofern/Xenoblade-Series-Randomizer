@@ -66,7 +66,7 @@ def RaceModeChanging(OptionsRunDict):
     for i in range(0, len(ChosenIndices)): # Defines the EXP difference we need to give to the first landmark in a race-mode location    
         for j in range(0, len(XPNeededToReachLv)):
             if i == 0:
-                ExpBefore[i] = 385
+                ExpBefore[i] = 353
                 if LevelAtStartofArea[ChosenIndices[i]] == XPNeededToReachLv[j][0]:    
                     ExpAfter[i] = XPNeededToReachLv[j][1]
                     break
