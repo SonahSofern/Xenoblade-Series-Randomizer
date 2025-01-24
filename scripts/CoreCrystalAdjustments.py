@@ -4,6 +4,7 @@ import Helper as Helper
 import random
 import JSONParser
 import IDs
+import RaceMode
 
 FLDSkillMaxLv = [3, 5, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 3, 5, 3, 3, 3, 5, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 5, 3, 3, 5, 3, 5, 3, 3, 5, 5, 5, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 5, 5]
 # Helper.FindValues("./_internal/JsonOutputs/common/FLD_FieldSkillList.json", ["$id"], Helper.inclRange(2, 7) + Helper.inclRange(9,74), "MaxLevel")
@@ -158,3 +159,4 @@ def CoreCrystalChanges(OptionsRunDict):
     #ChangeRankCondition()
     if not OptionsRunDict["Race Mode"]["optionTypeVal"].get():
         RegularLootDistribution()
+        RaceMode.FindtheBladeNames(OptionsRunDict)
