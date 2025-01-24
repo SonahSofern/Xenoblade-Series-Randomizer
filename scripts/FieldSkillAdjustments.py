@@ -8,6 +8,8 @@ def RemoveFieldSkills(Options):
         mapGimmickIds = range(1,186)
         npcPopIds = range(1,50000)     
         jumpGimiickIds = range(1,45)
+        tBoxIds = range(1,4000)
+        diveIds = range(1,12)
     else:
         mapGimmickIds = [
             4, 5,           # Trees in early Gormott
@@ -28,10 +30,15 @@ def RemoveFieldSkills(Options):
             34, 33,38,      # Cliffs of Morytha
             39,42           # Temperantia wind jump
         ]        
-
+        
+        tBoxIds = [] # No required treasure chests
+        
+        diveIds = [] # No required dive spots
     
     JSONParser.ChangeJSONLine(["common_gmk/FLD_MapGimmick.json"], mapGimmickIds, ["FSID"], 0)
     JSONParser.ChangeJSONLine(["common_gmk/FLD_JumpGimmick.json"], jumpGimiickIds, ["FSID"], 0)
-    for i in range(51): # Fix 0i its going to be 025 for example at 2 digits
-        JSONParser.ChangeJSONLine([f"common_gmk/ma0{i}a_FLD_NpcPop.json"], npcPopIds, ["FSID1", "FSID2", "FSID3"], 0)
+    JSONParser.ChangeJSONLine(["common_gmk/FLD_WarpGimmick.json"], diveIds, ["FSID"], 0)
+    for i in range(51):
+        JSONParser.ChangeJSONLine([f"common_gmk/ma{i:02}a_FLD_NpcPop.json"], npcPopIds, ["FSID1", "FSID2", "FSID3"], 0)
+        JSONParser.ChangeJSONLine([f"common_gmk/ma{i:02}a_FLD_TboxPop.json"], tBoxIds, ["FSID1", "FSID2"], 0)
 
