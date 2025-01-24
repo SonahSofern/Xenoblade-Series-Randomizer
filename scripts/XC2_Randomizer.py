@@ -218,11 +218,11 @@ def Options():
     GenStandardOption("Collection Points", TabGeneral, "Randomizes the contents of Collection Points", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID"], list(set(CollectionPointMaterials) - set([30019])), [])], ["Accessories", [lambda: IDs.ValidReplacements.extend(IDs.Accessories)] ,"Weapon Chips", [lambda: IDs.ValidReplacements.extend(WeaponChips)], "Aux Cores", [lambda: IDs.ValidReplacements.extend(AuxCores)],"Refined Aux Cores", [lambda: IDs.ValidReplacements.extend(RefinedAuxCores)], "Core Crystals", [lambda: IDs.ValidReplacements.extend(CoreCrystals)], "Deeds", [lambda: IDs.ValidReplacements.extend(Deeds)], "Collection Point Materials", [lambda: IDs.ValidReplacements.extend(CollectionPointMaterials)]])
 
     # Drivers
-    GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees",[lambda: SkillTrees.RandomizeSkillEnhancements(OptionDictionary),lambda: SkillTrees.FirstSlotCost()],["Nonstandard Skills", []])
+    GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees",[lambda: SkillTrees.RandomizeSkillEnhancements(OptionDictionary)],["Nonstandard Skills", [], "Tier 1: Arts Cancel", [], "Tier 1: Start With Attack", []])
     GenStandardOption("Driver Accessories", TabDrivers, "Randomizes effects of Accessories", [lambda: Accs.RandomizeAccessoryEnhancements()])
     GenStandardOption("Art Reactions", TabDrivers, "Randomizes art reactions (break, blowdown etc.)",[lambda: CustomArts.RandomArtReactions(OptionDictionary)], ["Clear Vanilla Reactions", [lambda: Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)],"Multiple Reactions", []], optionType=Spinbox)
     GenStandardOption("Art Debuffs", TabDrivers, "Randomizes a Driver's Art debuff effect", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ArtsDeBuff"], ArtDebuffs, [], InvalidTargetIDs=AutoAttacks)],["Debuffs", [lambda: IDs.ValidReplacements.extend(list(set(ArtDebuffs)-set([21,35,16,17])))],"Buffs",[lambda: IDs.ValidReplacements.extend(ArtBuffs)], "Doom", [lambda: IDs.ValidReplacements.extend([21])], "Monado Armor", [lambda: IDs.ValidReplacements.extend([16])], "Superstrength", [lambda: IDs.ValidReplacements.extend([17])]], Spinbox)
-    GenStandardOption("Driver Arts", TabDrivers, "Randomizes effects of all driver arts", [lambda: CustomArts.GenCustomArtDescriptions()], ["Cooldown", [lambda: CustomArts.RandomArtCooldowns()], "Damage", [lambda: CustomArts.RandomArtDamageRatios()], "Enhancements", [lambda: CustomArts.RandomArtEnhancements()], "Animation Speed", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)]], optionType = Spinbox)
+    GenStandardOption("Driver Arts", TabDrivers, "Randomizes effects of all driver arts", [lambda: CustomArts.GenCustomArtDescriptions()], ["Cooldown", [lambda: CustomArts.RandomArtCooldowns(OptionDictionary)], "Damage", [lambda: CustomArts.RandomArtDamageRatios(OptionDictionary)], "Enhancements", [lambda: CustomArts.RandomArtEnhancements(OptionDictionary)], "Animation Speed", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)]], optionType = Spinbox)
        
     # Blades
     GenStandardOption("Blade Aux Cores", TabBlades, "Randomizes a Blade's Aux Core enhancement", [lambda: AuxCr.RandomizeAuxCoreEnhancements()])
@@ -427,7 +427,7 @@ permalinkButton = ttk.Button(permalinkFrame, text="Settings")
 permalinkButton.state(["disabled"])
 permalinkFrame.pack(padx=10, pady=2, anchor="w")
 permalinkButton.pack(side="left", padx=2)
-permalinkEntry.pack(side='left', padx=2) 
+permalinkEntry.pack(side='left', padx=2)
 PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:InteractableStateSet())
 
 

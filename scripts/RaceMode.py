@@ -2,7 +2,7 @@ import Helper as Helper
 import json
 import EnemyRandoLogic as EnemyRandoLogic
 import random
-from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, Accessories, WeaponChips, AuxCores, RefinedAuxCores, CollectionPointMaterials, Deeds
+from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, Accessories, WeaponChips, AuxCores, RefinedAuxCores, CollectionPointMaterials, TornaOnlyAccessories
 import time
 import JSONParser
 import DebugLog
@@ -47,9 +47,8 @@ def RaceModeChanging(OptionsRunDict):
     LevelAtStartofArea = [5, 20, 29, 35, 38, 42, 46, 51, 59, 68] #Level going to: # Level(ish) of the first boss of the current area (so you want to be around this level after warping)
     LevelAtEndofArea = [15, 26, 34, 35, 42, 46, 46, 59, 68, 70]  #Level going from: # Level the last boss of the previous area was (so you should be around the same level before warping to new area)
 
-    # The Save File is set up in a way that it has 56 bonus exp already, and is at level 2, so that value (totals to 76 xp gained) gets subtracted from the total xp needed
+    # The Save File is set up in a way that it is level 5 already to start with.
     # XP needed to reach a given level, formatted in [Given Level, Total XP Needed]
-    # Tora ends up like 35 xp off level 20 with the actual xp needed to reach lv 5 at 360, so I give some more exp to compensate. It doesn't push anyone else over.
     XPNeededToReachLv = [[5, 385], [15, 9100], [20, 21360], [26, 44520], [29, 59820], [34, 91320], [35, 98580], [38, 122520], [42, 160080], [46, 205140], [51, 274640], [59, 428120], [68, 682040], [70, 789920]]
     global ChosenIndices
     ChosenIndices = []
@@ -67,7 +66,7 @@ def RaceModeChanging(OptionsRunDict):
     for i in range(0, len(ChosenIndices)): # Defines the EXP difference we need to give to the first landmark in a race-mode location    
         for j in range(0, len(XPNeededToReachLv)):
             if i == 0:
-                ExpBefore[i] = 76
+                ExpBefore[i] = 353
                 if LevelAtStartofArea[ChosenIndices[i]] == XPNeededToReachLv[j][0]:    
                     ExpAfter[i] = XPNeededToReachLv[j][1]
                     break
@@ -96,16 +95,17 @@ def RaceModeChanging(OptionsRunDict):
         LandmarkFilestoTarget.append(FileStart + AllMapIDs[ChosenIndices[i]][1] + FileEnd)
         LandmarkMapSpecificIDstoTarget.append(MapSpecificIDs[ChosenIndices[i]])
 
-    for i in range(0, len(LandmarkFilestoTarget)):  # Adjusts the EXP gained from the first landmark in each race-mode location
-        with open(LandmarkFilestoTarget[i], 'r+', encoding='utf-8') as file:
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] == LandmarkMapSpecificIDstoTarget[i]:
-                    row["getEXP"] = ExpDiff[i]
-                    row["getSP"] = 3500 * ChosenIndices[i]
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
+    for i in range(0, len(LandmarkFilestoTarget)):  # Adjusts the EXP gained from the first landmark in every other race-mode location      
+            with open(LandmarkFilestoTarget[i], 'r+', encoding='utf-8') as file:
+                data = json.load(file)
+                for row in data["rows"]:
+                    if row["$id"] == LandmarkMapSpecificIDstoTarget[i]:
+                        row["getEXP"] = ExpDiff[i]
+                        if (i+2) % 2 == 0: 
+                            row["getSP"] = 6000 * ChosenIndices[i]
+                file.seek(0)
+                file.truncate()
+                json.dump(data, file, indent=2, ensure_ascii=False)
     
     with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: #race mode implementation #these just adjust the quest markers as far as I can tell
         data = json.load(file)
@@ -244,6 +244,7 @@ def RaceModeChanging(OptionsRunDict):
         json.dump(data, file, indent=2, ensure_ascii=False)
 
     NGPlusBladeCrystalIDs = DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
+    PickupRadiusDeedStart()
     DifficultyChanges()
     DriverLvandSPFix()
     LandmarkConditions()
@@ -311,7 +312,7 @@ def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
             json.dump(data, file, indent=2, ensure_ascii=False)
         return NGPlusBladeCrystalIDs
 
-def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unlock requirements to the same condition as reaching the new race-mode continent
+def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade trust/skill unlock requirements to the same condition as reaching the 2nd and 4th race mode areas
     KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]
     KeyAchievementIDs = list(set([x for x in KeyAchievementIDs if x != 0]))
     RelevantChosenIndices = [x for x in ChosenIndices if x != 9]
@@ -321,11 +322,11 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade unloc
     TaskLogIDs = [659, 660, 661, 662]
     LocationNames = ["Gormott", "Uraya", "Mor Ardain", "Leftheria", "Indol", "Tantal", "Spirit Crucible Elpys", "the Cliffs of Morytha", "the World Tree"]
 
-    StarterBladeTrustSetAppearance = [16, 16, 12, 13, 14]
-    A1TrustSetAppearance = [16, 16, 12, 13, 14]
-    A2TrustSetAppearance = [16, 16, 16, 13, 14]
-    A3TrustSetAppearance = [16, 16, 16, 16, 14]
-    A4TrustSetAppearance = [16, 16, 16, 16, 16]
+    StarterBladeTrustSetAppearance = [16, 12, 16, 14, 16] #rank 1
+    A1TrustSetAppearance = [16, 12, 16, 14, 16] # rank 1
+    A2TrustSetAppearance = [16, 16, 16, 14, 16] # rank 3
+    A3TrustSetAppearance = [16, 16, 16, 14, 16] # rank 3
+    A4TrustSetAppearance = [16, 16, 16, 16, 16] # rank 5
 
     AllTrustSetAppearances = [StarterBladeTrustSetAppearance, A1TrustSetAppearance, A2TrustSetAppearance, A3TrustSetAppearance, A4TrustSetAppearance]
 
@@ -448,6 +449,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
     AuxCoreEnh = OptionsRunDict["Blade Aux Cores"]["optionTypeVal"].get()
     if DriverAccesEnh: # If we have the wacky enhancements:
         CommonDAcc, RareDAcc, LegDAcc = Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [0], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [1], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [2], "$id")
+        CommonDAcc, RareDAcc, LegDAcc = [x for x in CommonDAcc if x not in TornaOnlyAccessories], [x for x in RareDAcc if x not in TornaOnlyAccessories], [x for x in LegDAcc if x not in TornaOnlyAccessories]
         random.shuffle(CommonDAcc)
         random.shuffle(RareDAcc)
         random.shuffle(LegDAcc)
@@ -495,7 +497,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
     AllEquipIDs = [A1Equip, A2Equip, A3Equip, A4Equip]
     Area1ShopDeedIDs, Area2ShopDeedIDs, Area3ShopDeedIDs, Area4ShopDeedIDs = [], [], [], []
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get():
-        Area1ShopDeedIDs, Area2ShopDeedIDs, Area3ShopDeedIDs, Area4ShopDeedIDs = Helper.InclRange(25249, 25264), Helper.InclRange(25265, 25280), Helper.InclRange(25281, 25291), Helper.InclRange(25292, 25300)
+        Area1ShopDeedIDs, Area2ShopDeedIDs, Area3ShopDeedIDs, Area4ShopDeedIDs = Helper.InclRange(25249, 25264), Helper.InclRange(25265, 25280), Helper.InclRange(25281, 25291), Helper.InclRange(25292, 25299)
     Area1LootIDs = A1CoreCrystalIDs * 2 + [25305] * 3 + Area1ShopDeedIDs * 2 + [25450] * 3 + A1Equip + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2 + [25407] * 10
     if ChosenIndices[1] == 3: # Leftherian Archipelago (30ish chests)
         Area2LootIDs = A2CoreCrystalIDs + [25305] * 2 + Area2ShopDeedIDs + [25450] * 2 + A2Equip + [25408] * 3 + [25220, 25220] + A2RaceModeCoreChipIDs + [25407] * 5
@@ -627,7 +629,7 @@ def ShopRemovals(): # Removes the Expensive Core Crystal from the shop, as well 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, makes the max movespeed bonus 250% instead of 25%
-    DeedTypeIDValues = Helper.InclRange(1, 52)
+    DeedTypeIDValues = Helper.InclRange(1, 51)
     with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes caption and name
         data = json.load(file)
         for row in data["rows"]:
@@ -639,7 +641,6 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
             if row["$id"] in DeedTypeIDValues:
                 row["Value"] = 5
                 row["Type"] = 1
-            if row["$id"] > 52:
                 break
         file.seek(0)
         file.truncate()
@@ -656,9 +657,9 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
     with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes name of deed
         data = json.load(file)
         for row in data["rows"]:
-            if (row["$id"] >= 25249) & (row["$id"] <= 25300):
+            if (row["$id"] >= 25249) & (row["$id"] <= 25299):
                 row["Caption"] = 603
-            if row["$id"] > 25300:
+            if row["$id"] > 25299:
                 break
         file.seek(0)
         file.truncate()
@@ -666,13 +667,50 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
     with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
         data = json.load(file)
         for row in data["rows"]:
-            if (row["$id"] >= 491) & (row["$id"] <= 542):
+            if (row["$id"] >= 491) & (row["$id"] < 542):
                 row["name"] = "Movespeed Deed"
-            if row["$id"] > 542:
+            if row["$id"] == 542:
                 break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def PickupRadiusDeedStart(): # Start with a Pickup Radius Up Deed, to account for items falling in gaps between chests and walls and despawning.
+    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes caption and name
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["Type"] == 52: # Adding 1 Custom Deed to increase pickup range, due to some issues where loot would drop from a chest that ended up stuck behind it with no way to pick it up before the loot despawned.
+                row["Caption"] = 612 # Increases item drop collection range by 150cm
+    with open("./_internal/JsonOutputs/common/FLD_OwnerBonus.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 52:
+                row["Value"] = 150
+                row["Type"] = 10
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes name of deed
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 25300:
+                row["Caption"] = 612
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 542:
+                row["name"] = "Pickup Radius Deed"
+            if row["$id"] == 612:
+                row["name"] = "Increases item drop collection\nrange by 150cm."
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)        
 
 def DLCItemChanges(): # Changes all DLC gifts to 1 gold except for poppy crystals
     DLCIDRowsWithItems = Helper.InclRange(1,7) + [9, 10] + Helper.InclRange(16, 21) + [23,24] + [30] + [36, 37] + Helper.InclRange(43, 55)
@@ -838,7 +876,6 @@ def ZoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
                 with open(TBoxFiles[i][l], 'r+', encoding='utf-8') as file:
                     data = json.load(file)
                     for row in data["rows"]:
-                        TBoxName = row["name"]
                         if row["$id"] not in InvalidTreasureBoxIDs:
                             if AllZoharLocations[i][ACurBox] != 0:
                                 row["itm8ID"] = AllZoharLocations[i][ACurBox]
@@ -978,11 +1015,11 @@ def WeaponChipShopPowerLevelIncrease(): # Common issue at start of run is first 
         for row in data["rows"]:
             if row["$id"] == 7:
                 if ChosenIndices[0] == 0: # Gormott
-                    row["DefItem2"] = 10003
-                    row["DefItem3"] = 10011
+                    row["DefItem1"] = 10003
+                    row["DefItem2"] = 10011
                 else: # Uraya
-                    row["DefItem2"] = 10014
-                    row["DefItem3"] = 10015
+                    row["DefItem1"] = 10017
+                    row["DefItem2"] = 10018
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
