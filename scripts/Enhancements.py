@@ -177,7 +177,7 @@ BeastExecute = Enhancement("Beast",22, 223, [0], Baby)
 BladeComboDamUp = Enhancement("Combo",23,21, Large)
 FusionComboDamUp = Enhancement("Combo",24,22, Large)
 EtherCounter = Enhancement("Eth Counter",25,23, Giga)
-PhysCounter = Enhancement("Phys Counter",26,24, Giga)
+PhysCounter = Enhancement("Phys Counter",26,24, Giga, addToList=False)
 AutoAttackHeal = Enhancement("Auto Vamp",27,26, Mini)
 SpecialANDArtHeal = Enhancement("Omnivamp",28,27, Baby, Description="Restores [ML:Enhance kind=Param1 ]% HP of damage dealt when\n a Special or Art connects.")
 ArtDamageHeal = Enhancement("Omnivamp",28, 28, Small) # This goes on arts only or else it will heal from special and arts

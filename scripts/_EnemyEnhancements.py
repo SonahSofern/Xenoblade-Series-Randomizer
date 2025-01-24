@@ -63,25 +63,27 @@ class EnemyEnhancement(Enhancement):
         self.Param2 = para2
         ValidSkills.append(self)
    
-Healthy = EnemyEnhancement("Health", HPBoost, [100,150,200,300])
-Strong = EnemyEnhancement("Strength", StrengthBoost, [50,100,150,200])
-Etheras = EnemyEnhancement("Ether", EtherBoost, [50,100,150,200])
-Agility = EnemyEnhancement("Agility", AgiBoost, [200,400,600,800])
+Healthy = EnemyEnhancement("Healthy", HPBoost, [100,150,200,300])
+Strong = EnemyEnhancement("Strong", StrengthBoost, [50,100,150,200])
+Etheras = EnemyEnhancement("Etherite", EtherBoost, [50,100,150,200])
+Agility = EnemyEnhancement("Agile", AgiBoost, [200,400,600,800])
 EtherBlock = EnemyEnhancement("E Def", FlatEthDefBoost, [60,70,80,100])
 PhyBlock = EnemyEnhancement("P Def", FlatDefBoost, [60,70,80,100])
-Spike = EnemyEnhancement("Spiky", EtherCounter, [10,20,30,40])
+Spike = EnemyEnhancement("Spiky", EtherCounter, [30,40,50,60])
 Pursuer = EnemyEnhancement("Pursuer", CombatSpeed, [100,200,300,400])
 AllReactionNull = EnemyEnhancement("Stable", TranquilGuard,[40,60,80,100])
 BlowdownSpike = EnemyEnhancement("Bouncy", GravityPinwheel, [10,15,20,25], [1,2,3,5])
 TasSnack = EnemyEnhancement("Devourer", TastySnack, [30,50,70,100])
-BladeComboResist = EnemyEnhancement("Combo Resist", ReduceEnemyBladeComboDamage, [60,70,90,100])
 Desperate = EnemyEnhancement("Desperate", DamageUpWhenHpDown,[10,15,20,25],[100,200,300,400])
-Wish = EnemyEnhancement("Wish", WhenDiesHealAllies,[50,70,80,100])
-FirstStrike = EnemyEnhancement("Suprise", FirstArtDamage,[300,500,600,700])
+Wish = EnemyEnhancement("Sacrificial", WhenDiesHealAllies,[50,70,80,100])
+FirstStrike = EnemyEnhancement("Supriser", FirstArtDamage,[300,500,600,700])
 Lightning  = EnemyEnhancement("Lightning", AutoSpeedArtsSpeed,[300,400,500,600],[200,300,400,500])
-Repeat = EnemyEnhancement("Repeat", DidIDoThat,[30,50,70,90])
-Enraged = EnemyEnhancement("Friendship", AllyDownDamageUp,[30,60,90,120])
+Repeat = EnemyEnhancement("Repeat", DidIDoThat,[20,40,60,80])
+Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
 
+
+# Not including
+# BladeComboResist = EnemyEnhancement("Combo Resist", ReduceEnemyBladeComboDamage, [60,70,90,100])
 
 
 

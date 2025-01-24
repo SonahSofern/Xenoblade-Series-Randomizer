@@ -32,6 +32,6 @@ def RemoveFieldSkills(Options):
     
     JSONParser.ChangeJSONLine(["common_gmk/FLD_MapGimmick.json"], mapGimmickIds, ["FSID"], 0)
     JSONParser.ChangeJSONLine(["common_gmk/FLD_JumpGimmick.json"], jumpGimiickIds, ["FSID"], 0)
-    for i in range(51):
+    for i in range(51): # Fix 0i its going to be 025 for example at 2 digits
         JSONParser.ChangeJSONLine([f"common_gmk/ma0{i}a_FLD_NpcPop.json"], npcPopIds, ["FSID1", "FSID2", "FSID3"], 0)
 
