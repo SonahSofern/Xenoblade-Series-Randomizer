@@ -1,6 +1,5 @@
 # XC2_Randomizer
-A randomizer project for Xenoblade 2
-
+A randomizer project for Xenoblade 2 capable of randomizing: Enemies, Accessories, Blades, Drivers, Loot and much more!
 
 
 # General Description
@@ -11,7 +10,7 @@ Discord: https://discord.gg/h93yqZHG8z
 
 # Known Issues
 Race Mode will overwrite some settings. (for example Treasure Chest Contents will be overwritten if race mode is on)\
-Torna has not been tested at all, it may or may not work.\
+Torna has not been tested at all, it may or may not work.
 
 
 # Credits
