@@ -8,11 +8,11 @@ def RandomizeSkillEnhancements(optDict):
     DriverList = [Rex, Nia, Tora, Vandham, Morag, Zeke]
     for Driver in DriverList:
         RemainingUnusedDriverIDs = Driver.copy()
-        if optDict["Driver Skill Trees"]["subOptionObjects"]["Tier 1: Arts Cancel"]["subOptionTypeVal"].get(): # remove defaults first
+        if optDict["Driver Skill Trees"]["subOptionObjects"]["Early Arts Cancel"]["subOptionTypeVal"].get(): # remove defaults first
             ArtsCancelSlots.append(DefaultArtsCancelSlots[DriverList.index(Driver)])
             RemainingUnusedDriverIDs.remove(DefaultArtsCancelSlots[DriverList.index(Driver)])
             FirstSlotCost()
-        if optDict["Driver Skill Trees"]["subOptionObjects"]["Tier 1: Start With Attack"]["subOptionTypeVal"].get():
+        if optDict["Driver Skill Trees"]["subOptionObjects"]["Early XYB Attack"]["subOptionTypeVal"].get():
             X_Slots.append(DefaultXSlots[DriverList.index(Driver)])
             RemainingUnusedDriverIDs.remove(DefaultXSlots[DriverList.index(Driver)])
             Y_Slots.append(DefaultYSlots[DriverList.index(Driver)])
@@ -23,11 +23,11 @@ def RandomizeSkillEnhancements(optDict):
             ChosenID = random.choice(RemainingUnusedDriverIDs)
             ZekeEyeSlot = [ChosenID]
             RemainingUnusedDriverIDs.remove(ChosenID)
-        if not optDict["Driver Skill Trees"]["subOptionObjects"]["Tier 1: Arts Cancel"]["subOptionTypeVal"].get(): # have to separate out the if nots to avoid overwriting an arts cancel slot
+        if not optDict["Driver Skill Trees"]["subOptionObjects"]["Early Arts Cancel"]["subOptionTypeVal"].get(): # have to separate out the if nots to avoid overwriting an arts cancel slot
             ChosenID = random.choice(RemainingUnusedDriverIDs)
             ArtsCancelSlots.append(ChosenID)
             RemainingUnusedDriverIDs.remove(ChosenID)
-        if not optDict["Driver Skill Trees"]["subOptionObjects"]["Tier 1: Start With Attack"]["subOptionTypeVal"].get():
+        if not optDict["Driver Skill Trees"]["subOptionObjects"]["Early XYB Attack"]["subOptionTypeVal"].get():
             ChosenIDs = random.sample(RemainingUnusedDriverIDs, 3)
             X_Slots.append(ChosenIDs[0])
             RemainingUnusedDriverIDs.remove(ChosenIDs[0])

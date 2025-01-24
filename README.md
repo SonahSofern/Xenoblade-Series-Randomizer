@@ -38,7 +38,7 @@ Guide adapted from: https://gamebanana.com/tuts/13815
 
 1. CONSOLE ONLY: Use NXDumpTool to perform a full dump of XC2's RomFS to your microSD card, and put it into your computer.
 2. EMULATOR ONLY: Use your emulator's built-in tool to perform a full dump of XC2's RomFS. If given the option, select 0100E95004038000.
-3. Locate "bf2.ard" and "bf2.arh"; those are the only two important files.\
+3. Locate "bf2.ard" and "bf2.arh"; those are the only two important files.
 > **IMPORTANT:** if your sdcard is formatted as fat32, bf2.ard might be split into a folder with multiple files inside. In this case you will have to combine them.\
 > Open a command prompt and navigate to your bf2.ard folder\
 > Depending on your OS run the following command:\
