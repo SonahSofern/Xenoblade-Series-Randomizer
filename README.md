@@ -38,7 +38,10 @@ Guide adapted from: https://gamebanana.com/tuts/13815
 
 1. CONSOLE ONLY: Use NXDumpTool to perform a full dump of XC2's RomFS to your microSD card, and put it into your computer.
 2. EMULATOR ONLY: Use your emulator's built-in tool to perform a full dump of XC2's RomFS. If given the option, select 0100E95004038000.
-3. Locate "bf2.ard" and "bf2.arh"; those are the only two important files.
+3. Locate "bf2.ard" and "bf2.arh"; those are the only two important files.\
+IMPORTANT: if your sdcard is formatted as fat32, bf2.ard might be split into a folder with multiple files inside. In this case you will have to combine them. There are a few ways to do this, one is in a command prompt. Navigate to your bf2.ard folder then depending on your OS run:\
+Windows: copy /b file1name + file2name + file3name bf2.ard\
+Mac/Linux: cat file1name file2name file3name > bf2.ard
 4. Download Xenoblade2Set from (https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/), and extract its contents.
 5. Copy bf2.ard and bf2.arh to the Xenoblade2Set folder, and run "quickbms_4gb_files.exe".
 6. It will ask for a "bms script"; select Xenoblade2ard.bms. It will then ask for "archives/files"; select bf2.arh. For "output folder", go into the empty "modified" folder and press "Save". The files should extract, it may take a bit. NOTE: You can stop the program once all the GB files are finished. The rest is just for the other languages.
