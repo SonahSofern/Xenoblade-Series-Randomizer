@@ -42,8 +42,8 @@ Guide adapted from: https://gamebanana.com/tuts/13815
 > **IMPORTANT:** if your sdcard is formatted as fat32, bf2.ard might be split into a folder with multiple files inside. In this case you will have to combine them.\
 > Open a command prompt and navigate to your bf2.ard folder\
 > Depending on your OS run the following command:\
-> **Windows: 'copy /b' file1name '+' file2name '+' file3name 'bf2.ard'\
-> **Mac/Linux: `cat` file1name file2name file3name '> bf2.ard'\
+> **Windows: `copy /b` file1name `+` file2name `+` file3name `bf2.ard`\
+> **Mac/Linux: `cat` file1name file2name file3name `> bf2.ard`\
 > You should have the combined file now!
 4. Download Xenoblade2Set from (https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/), and extract its contents.
 5. Copy bf2.ard and bf2.arh to the Xenoblade2Set folder, and run "quickbms_4gb_files.exe".
