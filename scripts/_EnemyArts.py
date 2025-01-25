@@ -73,22 +73,20 @@ def FindValidChanges(art, rarity):
 
 def Reaction(art):
     FullReactions = {
-        "Break" : [1],
-        "Topple" : [2],
-        "Launch" : [3],
-        "Smash" : [4],
+        # "Break" : [1],
+        # "Topple" : [2],
+        # "Launch" : [3],
+        # "Smash" : [4],
         "KB": [5,6,7,8,9],
         "BD": [10,11,12,13,14]
     }
     name,values = random.choice(list(FullReactions.items()))
     for i in range(1,17):
-        curArt = art[f"ReAct{i}"]
-        curHit = art[f"HitFrm{i}"]
-        if curHit == 0: # Make sure there is a hit
+        if art[f"HitFrm{i}"] == 0: # Make sure there is a hit
             break
-        if curArt != 0: # Make sure it doesnt already have a reaction 
+        if art[f"ReAct{i}"] != 0: # Make sure it doesnt already have a reaction 
             continue
-        curArt = random.choice(values)
+        art[f"ReAct{i}"] = random.choice(values)
     return name
 
 def Debuff(art):
