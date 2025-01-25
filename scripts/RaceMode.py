@@ -1172,6 +1172,9 @@ def ScriptAdjustments(): # For individual script changes
             if row["$id"] == 10107: # script for the second time Vandham joins
                 row["scriptName"] = ""
                 row["scriptStartId"] = 0
+            if row["$id"] == 10129: # script for when Vandham dies (fixes bug where Roc on Rex gets deleted when Vandham dies)
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
             if row["$id"] == 10211: # script that removes morag
                 row["scriptName"] = ""
                 row["scriptStartId"] = 0
