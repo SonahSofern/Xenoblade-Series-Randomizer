@@ -269,11 +269,11 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade trust
 
     AllTrustSetAppearances = [StarterBladeTrustSetAppearance, A1TrustSetAppearance, A2TrustSetAppearance, A3TrustSetAppearance, A4TrustSetAppearance]
 
-    StarterBladeIDs = [1001, 1002, 1004, 1005, 1006, 1007, 1009, 1010, 1011]
+    StarterBladeIDs = [1001, 1002, 1004, 1005, 1006, 1007, 1009, 1010]
     A1BladeIDs = []
     A2BladeIDs = []
     A3BladeIDs = []
-    A4BladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
+    A4BladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049, 1011]
 
     ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
     ValidCrystalListIDs = [x for x in ValidCrystalListIDs if x not in NGPlusBladeCrystalIDs]

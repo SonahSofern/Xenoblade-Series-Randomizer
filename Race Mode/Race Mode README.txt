@@ -22,8 +22,6 @@ Explanation of Race Mode:
 
 The intent of Race Mode is to allow for the player to experience the joys of the normal game, in a shorter single playsession, aiming for 3-4 hours for experienced individuals. This is accomplished by reducing the amount of grinding and reducing the portion of the story that you play through (to smaller chunks called Storylines). Most of your character's power in Race Mode will come from the custom loot tables given to the Treasure Chests on the Continents with the Storylines you are required to complete. You could even have a friendly race between people on the same seed, and compete to see who finishes the game first!
 
-A suggested Settings String for players who wish to do Race Mode for the first time is: MTAAQQDhBxDfpYD8AgYAAAAA/snIyMjIKMg8FBTIyMjIyMjIyMjIyMjIyMjIyMjIyBQUFCjIAA==
-
 To import those settings, copy the settings string into the field next to the "Settings" label at the bottom of the randomizer.
 
 To begin Race Mode when in game, click the "Race Mode Start" option on the main menu.
@@ -63,13 +61,17 @@ In order to complete a Storyline, you also must find 3-6 Mysterious Parts (depen
 
 Less Grinding:
 
-Regardless of whether or not this option is on, when you warp to a new Continent, the landmark that you appear near when you spawn in will give massively increased XP and Driver Skill Points, in an attempt to bridge the power level gap between the two continents. You can only use this XP by resting at an Inn and leveling up that way, so it is a good idea to go to a previous inn and level up immediately.
+Regardless of whether or not this option is on, when you warp to a new Continent, the landmark that you appear near when you spawn in will give massively increased XP, in an attempt to bridge the power level gap between the two continents. You can only use this XP by resting at an Inn and leveling up that way, so it is a good idea to go to a previous inn and level up immediately. 
+
+!! For Spirit Crucible Elpys in particular, once you get there, warp first to the Canyon of Husks landmark (which warps you to the Spirit Crucible Elpys landmark), then you can go to the inn and level up as needed. The Spirit Crucible Entrance landmark is required in order to receive your bonus xp and SP for this area. This is a known issue that currently has no workaround !!
+
+You also get a large amount of SP for the Driver Skill Tree at the First and Third Storyline sections of the game.
 
 If this option is turned on, several things happen, listed below.
 
 The XP gained from fighting higher level enemies is increased. The damage taken modifier when fighting higher level enemies is capped at 200%.
 
-If the "Guaranteed Rare Blades" option is on, Rare Blades will unlock their Blade Skill Tree ranks by reaching the first landmark of a Storyline section. So when you reach the Forgotten Waste landmark in Gormott, all Rare Blades unlock the second level of their skill trees. 
+If the "Guaranteed Rare Blades" option is on, Rare Blades will unlock their Blade Skill Tree ranks by reaching the first landmark of the Second and Fourth Storyline sections. So when you reach the Anangham #2 Dock landmark in Mor Ardain, all Rare Blades unlock the second and third levels of their skill trees. 
 
 The SP Cost of your all skills on your Hidden Skill trees are reduced by 80%.
 
@@ -119,7 +121,7 @@ DLC-exclusive blades are released from the Land of Challenge restriction, allowi
 
 Starting Items:
 
-You start with all 5 drivers with their associated blades (Pyra/Mythra, Dromarch, Poppy α, Pandoria, Brighid).
+You start with all 5 drivers with their associated blades (Pyra/Mythra, Dromarch, Poppy α, PoppyQT, PoppyQTπ, Pandoria, Brighid).
 
-You start with ~100000g.
+You start with 100000g.
 
