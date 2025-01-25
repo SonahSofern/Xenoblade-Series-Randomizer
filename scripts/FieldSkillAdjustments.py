@@ -40,5 +40,5 @@ def RemoveFieldSkills(Options):
     JSONParser.ChangeJSONLine(["common_gmk/FLD_WarpGimmick.json"], diveIds, ["FSID"], 0)
     for i in range(51):
         JSONParser.ChangeJSONLine([f"common_gmk/ma{i:02}a_FLD_NpcPop.json"], npcPopIds, ["FSID1", "FSID2", "FSID3"], 0)
-        JSONParser.ChangeJSONLine([f"common_gmk/ma{i:02}a_FLD_TboxPop.json"], tBoxIds, ["FSID1", "FSID2"], 0)
+        JSONParser.ChangeJSONLine([f"common_gmk/ma{i:02}a_FLD_TboxPop.json"], tBoxIds, ["FSID", "FSID2"], 0)
 
