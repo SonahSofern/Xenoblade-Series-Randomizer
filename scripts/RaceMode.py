@@ -966,26 +966,33 @@ def WeaponChipShopPowerLevelIncrease(): # Common issue at start of run is first 
 def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
     RaceModeOn = OptionsRunDict["Race Mode"]["optionTypeVal"].get()
     ZoharFragOn = OptionsRunDict["Race Mode"]["subOptionObjects"]["Zohar Fragment Hunt"]["subOptionTypeVal"].get()
-    ShopChangeOn = OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get()
+    CoreCrystalRandoOn = OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get()
     CustomLootOn = OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get()
+    ShopChangesOn = OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get()
     ZoharFragItemIDs = [25135, 25136, 25137, 25138]
     CoreCrystalIDs = AllCoreCrystals
     MovespeedDeedIDs = Helper.InclRange(25249, 25300)
     RareItemIDs = [25305, 25450, 25408, 25218, 25219, 25220, 25221, 25222, 25407]
     ChestTierListIDs = [0, 0, 0, 0, 0]
     ChestTierListItemNames = ["","","","",""]
+    ZoharFragChests = []
+    CoreCrystalChests = []
+    MovespeedDeedChests = []
+    RareItemChests = []
+    EquipmentGoldChests = []
     if RaceModeOn:
         if ZoharFragOn:
             ChestTierListIDs[0] = 3
             ChestTierListItemNames[0] = "Zohar Fragment"
-        if ShopChangeOn:
+        if CoreCrystalRandoOn:
             ChestTierListIDs[1] = 5
             ChestTierListItemNames[1] = "Core Crystal"
-        if CustomLootOn:
+        if ShopChangesOn:
             ChestTierListIDs[2] = 2
+            ChestTierListItemNames[2] = "Movespeed Deed"
+        if CustomLootOn:
             ChestTierListIDs[3] = 1
             ChestTierListIDs[4] = 4
-            ChestTierListItemNames[2] = "Movespeed Deed"
             ChestTierListItemNames[3] = "Rare Item"
             ChestTierListItemNames[4] = "Equipment/Gold"        
         for i in range(0, len(ListTboxFiles)):
@@ -993,35 +1000,41 @@ def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
                 data = json.load(file)
                 for row in data["rows"]:
                     rowcatfound = False
-                    for j in range(1, 9):
-                        if ZoharFragOn:
+                    if ZoharFragOn:
+                        for j in range(1, 9):
                             if row[f"itm{j}ID"] in ZoharFragItemIDs:
                                 row["RSC_ID"] = ChestTierListIDs[0]
                                 rowcatfound = True
+                                ZoharFragChests.append(row["$id"])
                                 break
-                    if not rowcatfound:
-                        if ShopChangeOn:
+                    if CoreCrystalRandoOn:
+                        if not rowcatfound:
                             for j in range(1, 9):
                                 if row[f"itm{j}ID"] in CoreCrystalIDs:
                                     row["RSC_ID"] = ChestTierListIDs[1]
                                     rowcatfound = True
+                                    CoreCrystalChests.append(row["$id"])
                                     break
-                    if CustomLootOn:
+                    if ShopChangesOn:
                         if not rowcatfound:
                             for j in range(1, 9):
                                 if row[f"itm{j}ID"] in MovespeedDeedIDs:
                                     row["RSC_ID"] = ChestTierListIDs[2]
                                     rowcatfound = True
+                                    MovespeedDeedChests.append(row["$id"])
                                     break
+                    if CustomLootOn:
                         if not rowcatfound:
                             for j in range(1, 9):
                                 if row[f"itm{j}ID"] in RareItemIDs:
                                     row["RSC_ID"] = ChestTierListIDs[3]
                                     rowcatfound = True
+                                    RareItemChests.append(row["$id"])
                                     break
                         if not rowcatfound:
                             row["RSC_ID"] = ChestTierListIDs[4]
                             rowcatfound = True
+                            EquipmentGoldChests.append(row["$id"])
                 file.seek(0)
                 file.truncate()
                 json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1106,7 +1119,6 @@ def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def HideMapAreas(ScenarioFlagLists): # Adding conditions for each area's map to be unlocked
-    AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
     MapIDsforRaceModeAreas = [[4],[5],[6],[10],[7,8],[9],[11],[12,13],[14],[15]]
     with open("./_internal/JsonOutputs/common/FLD_ConditionScenario.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
