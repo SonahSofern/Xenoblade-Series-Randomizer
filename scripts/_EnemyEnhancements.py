@@ -81,6 +81,9 @@ Lightning  = EnemyEnhancement("Lightning", AutoSpeedArtsSpeed,[300,400,500,600],
 Repeat = EnemyEnhancement("Repeat", DidIDoThat,[20,40,60,80])
 Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
 
+#New testing
+# Regen = EnemyEnhancement("Regenerative", LowHPRegen, [4,8,12,16])
+# ChainHeal = EnemyEnhancement("Chain Heal", ChainAttackHeal, [50,60,70,80])
 
 # Not including
 # BladeComboResist = EnemyEnhancement("Combo Resist", ReduceEnemyBladeComboDamage, [60,70,90,100])
