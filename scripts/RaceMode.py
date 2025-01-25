@@ -158,61 +158,6 @@ def RaceModeChanging(OptionsRunDict):
                     row["nextID"] = 10088
                     row["scenarioFlag"] = 3005
                     row["nextIDtheater"] = 10088
-            if row["$id"] == 10034: # this lets us start at the start of gormott but not have the broken objective pointer
-                row["chgEdID"] = 0
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10036: # this lets us start at the start of gormott but not have the broken objective pointer
-                row["nextID"] = 10034
-                row["nextIDtheater"] = 10034
-            if row["$id"] == 10189:
-                row["linkID"] = 0
-                row["envSeam"] = 0
-            if row["$id"] == 10094: # script that causes Vandham to join is name chapt03 startid 5
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10096: #
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10107: # script for the second time Vandham joins
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10211: # script that removes morag
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10213: # script that readds morag
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10240: # need to hard code the chapter transition for indol and temperantia section because I break some stuff to make warping between continents work.
-                row["scenarioFlag"] = 6001
-                row["nextID"] = 10244
-                row["nextIDtheater"] = 10244
-                row["linkID"] = 0
-            if row["$id"] == 10260: #removing script that removes morag
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10269: #removing script that removes morag
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10304:
-                row["linkID"] = 0
-            if row["$id"] == 10366: # need to hard code the leap between cliffs and land of morytha because I break some stuff to make warping between continents work.
-                row["scenarioFlag"] = 8001
-                row["nextID"] = 10369
-                row["nextIDtheater"] = 10369
-            if row["$id"] == 10370:
-                row["scriptName"] = "chapt08"
-                row["scriptStartId"] = 6
-            if row["$id"] == 10371:
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10411: # fix for world tree chapter 9 transition
-                row["nextID"] = 10427
-                row["nextIDtheater"] = 10427
-                row["linkID"] = 0
-                row["scenarioFlag"] = 9008
-            if row["$id"] == 10451: # end of world tree
-                row["linkID"] = 0
         for i in range(0, len(ChosenIndices) - 1):
             for row in data["rows"]:
                 if row["$id"] == FinalContinentCutscenes[ChosenIndices[i]]:
@@ -223,15 +168,7 @@ def RaceModeChanging(OptionsRunDict):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] in [30034, 30036]: # Removing more scripts that remove morag from party
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+
     with open("./_internal/JsonOutputs/common_gmk/FLD_ElevatorGimmick.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
@@ -242,7 +179,8 @@ def RaceModeChanging(OptionsRunDict):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-
+    
+    ScriptAdjustments()
     NGPlusBladeCrystalIDs = DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
     PickupRadiusDeedStart()
     DifficultyChanges()
@@ -454,13 +392,13 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
         random.shuffle(CommonDAcc)
         random.shuffle(RareDAcc)
         random.shuffle(LegDAcc)
-        for i in range(0, len(CommonDAcc) // 2):
+        for i in range(0, len(CommonDAcc) // 4):
             A1Equip.append(CommonDAcc[i])
-        for i in range(len(CommonDAcc) // 2, (len(CommonDAcc) * 3) // 4):
+        for i in range(len(CommonDAcc) // 4, len(CommonDAcc) // 2):
             A2Equip.append(CommonDAcc[i])
-        for i in range(0, len(RareDAcc) // 2):
+        for i in range(0, len(RareDAcc) // 3):
             A3Equip.append(RareDAcc[i])
-        for i in range(0, len(LegDAcc) // 2):
+        for i in range(0, len(LegDAcc) // 3):
             A4Equip.append(LegDAcc[i])
     else:
         for i in range(0, len(AllRaceModeItemTypeIDs)):
@@ -1197,4 +1135,76 @@ def HideMapAreas(ScenarioFlagLists): # Adding conditions for each area's map to 
                     row["cond1"] = 3472   
         file.seek(0)
         file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False) 
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def ScriptAdjustments(): # For individual script changes
+    with open("./_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # adjust story events, changing scenario flag
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 10034: # this lets us start at the start of gormott but not have the broken objective pointer
+                row["chgEdID"] = 0
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10036: # this lets us start at the start of gormott but not have the broken objective pointer
+                row["nextID"] = 10034
+                row["nextIDtheater"] = 10034
+            if row["$id"] == 10189:
+                row["linkID"] = 0
+                row["envSeam"] = 0
+            if row["$id"] == 10094: # script that causes Vandham to join is name chapt03 startid 5
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10096: #
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10107: # script for the second time Vandham joins
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10211: # script that removes morag
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10213: # script that readds morag
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10240: # need to hard code the chapter transition for indol and temperantia section because I break some stuff to make warping between continents work.
+                row["scenarioFlag"] = 6001
+                row["nextID"] = 10244
+                row["nextIDtheater"] = 10244
+                row["linkID"] = 0
+            if row["$id"] == 10260: #removing script that removes morag
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10269: #removing script that removes morag
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10304:
+                row["linkID"] = 0
+            if row["$id"] == 10366: # need to hard code the leap between cliffs and land of morytha because I break some stuff to make warping between continents work.
+                row["scenarioFlag"] = 8001
+                row["nextID"] = 10369
+                row["nextIDtheater"] = 10369
+            if row["$id"] == 10370:
+                row["scriptName"] = "chapt08"
+                row["scriptStartId"] = 6
+            if row["$id"] == 10371:
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+            if row["$id"] == 10411: # fix for world tree chapter 9 transition
+                row["nextID"] = 10427
+                row["nextIDtheater"] = 10427
+                row["linkID"] = 0
+                row["scenarioFlag"] = 9008
+            if row["$id"] == 10451: # end of world tree
+                row["linkID"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in [30034, 30036]: # Removing more scripts that remove morag from party
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
