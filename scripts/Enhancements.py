@@ -101,9 +101,9 @@ class Enhancement:
 def AddCustomEnhancements():
     global EnhanceID
     JSONParser.ChangeJSONFile(["common/BTL_EnhanceEff.json"],["Param"], Helper.InclRange(1,1000), [1000], [241, 250, 245,54,143,257,259])
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randint(20,50)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randint(30,70)) # Healing with low HP
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randint(10,60)) # Healing with low HP
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randrange(20,51, 5)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randrange(30,71, 5)) # Healing with low HP
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randrange(10,61,5)) # Healing with low HP
     JSONParser.ExtendJSONFile("common/BTL_Enhance.json", EnhanceEffectsList)
     EnhanceID = 3896
     EnhanceEffectsList.clear()
