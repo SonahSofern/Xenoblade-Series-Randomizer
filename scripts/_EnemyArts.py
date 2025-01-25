@@ -40,14 +40,8 @@ def EnemyArtAttributes(spinBox):
                 art["Name"] =  newNameID # Set new name id to the art
                 nameData["rows"].append(newName) # add newname
                 
-
-
-                # AOE
                 # Buff
-                # Damage Type
-                # Reaction
                 # Enhancement
-                # Name (Make new name id)
 
             
             NamesFile.seek(0)
@@ -59,10 +53,10 @@ def EnemyArtAttributes(spinBox):
         
 def FindValidChanges(art, rarity):
     ValidChanges = []
-    # if art["Recast"] not in [0]:    # Art has a Cooldown
-    #     ValidChanges.append(lambda: Cooldown(art, rarity)) # Cooldown
-    # if art["ArtsDeBuff"] in [0]: # Only change arts with no debuff
-    #     ValidChanges.append(lambda: Debuff(art))                # Debuff
+    if art["Recast"] not in [0]:    # Art has a Cooldown
+        ValidChanges.append(lambda: Cooldown(art, rarity)) # Cooldown
+    if art["ArtsDeBuff"] in [0]: # Only change arts with no debuff
+        ValidChanges.append(lambda: Debuff(art))                # Debuff
     if art["Target"] in [0]: # Only change art reactions that target enemies
         for i in range(1,17): # Check that the art has at least one an empty hit to place a combo into
             if art[f"ReAct{i}"] == 0 and art[f"HitFrm{i}"] != 0:
@@ -70,13 +64,17 @@ def FindValidChanges(art, rarity):
                 break
     return ValidChanges
 
+def AOE(art, rarity):
+    HitTypes = {
+        "Single": [0],
+        "Circle": [1],
+        "Cone": [2]
+        
+    }
 
 def Reaction(art):
     FullReactions = {
-        # "Break" : [1],
-        # "Topple" : [2],
-        # "Launch" : [3],
-        # "Smash" : [4],
+        "Combo" : [1,2,3,4],
         "KB": [5,6,7,8,9],
         "BD": [10,11,12,13,14]
     }
