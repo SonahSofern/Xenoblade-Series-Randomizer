@@ -16,10 +16,13 @@ def EnemyArtAttributes(spinBox):
                     continue
                 if art["Name"] == 0: # Avoid changing autoattacks and things with no name
                     continue
-                
-                newNameID += 1
                 rarity = random.choice([common,common,common,rare,rare,legendary]) # choose rarity
                 validChanges = FindValidChanges(art, rarity)  # i dont want to overwrite previous behaviour so check what i can change on an art
+                if not validChanges: # Make sure theres at least one valid change to make
+                    continue
+                newNameID += 1
+
+                
                 myChange = random.choice(validChanges) # choose a change to apply
                 newNamePrefix = myChange()
                 
@@ -56,17 +59,37 @@ def EnemyArtAttributes(spinBox):
         
 def FindValidChanges(art, rarity):
     ValidChanges = []
-    if art["Recast"] not in [0]:    # Art has a Cooldown
-        ValidChanges.append(lambda: Cooldown(art, rarity)) # Cooldown
-    if art["ArtsDeBuff"] in [0]: # Only change arts with no debuff
-        ValidChanges.append(lambda: Debuff(art))                # Debuff
-    if art["Target"] in [0] # Only change art reactions that target enemies:
-        ValidChanges.append(lambda: Reaction(art))
+    # if art["Recast"] not in [0]:    # Art has a Cooldown
+    #     ValidChanges.append(lambda: Cooldown(art, rarity)) # Cooldown
+    # if art["ArtsDeBuff"] in [0]: # Only change arts with no debuff
+    #     ValidChanges.append(lambda: Debuff(art))                # Debuff
+    if art["Target"] in [0]: # Only change art reactions that target enemies
+        for i in range(1,17): # Check that the art has at least one an empty hit to place a combo into
+            if art[f"ReAct{i}"] == 0 and art[f"HitFrm{i}"] != 0:
+                ValidChanges.append(lambda: Reaction(art))
+                break
     return ValidChanges
 
 
 def Reaction(art):
-    pass
+    FullReactions = {
+        "Break" : [1],
+        "Topple" : [2],
+        "Launch" : [3],
+        "Smash" : [4],
+        "KB": [5,6,7,8,9],
+        "BD": [10,11,12,13,14]
+    }
+    name,values = random.choice(list(FullReactions.items()))
+    for i in range(1,17):
+        curArt = art[f"ReAct{i}"]
+        curHit = art[f"HitFrm{i}"]
+        if curHit == 0: # Make sure there is a hit
+            break
+        if curArt != 0: # Make sure it doesnt already have a reaction 
+            continue
+        curArt = random.choice(values)
+    return name
 
 def Debuff(art):
     Debuffs = {
