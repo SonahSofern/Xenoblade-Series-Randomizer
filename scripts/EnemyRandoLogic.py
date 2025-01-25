@@ -556,13 +556,13 @@ def EnemyLogic(OptionsRunDict):
     CheckboxList = [] #I'm lazy, so i'm just going to pass the names and true/false states to two arrays
     CheckboxStates = []
     StoryBossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Story Bosses"]["subOptionTypeVal"].get()
-    KeepStoryBossesLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Keep Story Boss Levels"]["subOptionTypeVal"].get()
+    KeepStoryBossesLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Original Boss Encounter Levels"]["subOptionTypeVal"].get()
     QuestEnemyBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Quest Enemies"]["subOptionTypeVal"].get()
-    KeepQuestEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Keep Quest Enemy Levels"]["subOptionTypeVal"].get()
+    KeepQuestEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Original Quest Encounter Levels"]["subOptionTypeVal"].get()
     UniqueMonstersBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Unique Monsters"]["subOptionTypeVal"].get()
     SuperbossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Superbosses"]["subOptionTypeVal"].get()
     NormalEnemiesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Normal Enemies"]["subOptionTypeVal"].get()
-    KeepAllEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Old Enemy's Levels"]["subOptionTypeVal"].get()
+    KeepAllEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use All Original Encounter Levels"]["subOptionTypeVal"].get()
     MixEnemiesBetweenTypesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Mix Enemies Between Types"]["subOptionTypeVal"].get()
     AllBossDefaultIDstoUse = AllBossDefaultIDs
     AllBossDefaultLevelstoUse = AllBossDefaultLevels
@@ -571,7 +571,7 @@ def EnemyLogic(OptionsRunDict):
         del AllBossDefaultLevelstoUse[83]
     if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox:
         EnemyRandoOn = True
-        CheckboxList = ["Story Bosses", "Quest Enemies", "Unique Monsters", "Superbosses", "Normal Enemies", "Mix Enemies Between Types", "Use Old Enemy's Levels", "Keep Quest Enemy Levels", "Keep Story Boss Levels"]
+        CheckboxList = ["Story Bosses", "Quest Enemies", "Unique Monsters", "Superbosses", "Normal Enemies", "Mix Enemies Between Types", "Use All Original Encounter Levels", "Use Original Quest Encounter Levels", "Use Original Boss Encounter Levels"]
         CheckboxStates = [StoryBossesBox, QuestEnemyBox, UniqueMonstersBox, SuperbossesBox, NormalEnemiesBox, MixEnemiesBetweenTypesBox, KeepAllEnemyLevelsBox, KeepQuestEnemyLevelsBox, KeepStoryBossesLevelsBox]
     if EnemyRandoOn == True:
         print("Randomizing Enemies")
