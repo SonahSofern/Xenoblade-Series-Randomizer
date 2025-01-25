@@ -248,6 +248,7 @@ def RaceModeChanging(OptionsRunDict):
     DifficultyChanges()
     DriverLvandSPFix()
     LandmarkConditions()
+    HideMapAreas(ScenarioFlagLists)
     print(OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get())
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get():
         print("Filling Chests with Custom Loot")
@@ -1165,3 +1166,35 @@ def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def HideMapAreas(ScenarioFlagLists): # Adding conditions for each area's map to be unlocked
+    AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
+    MapIDsforRaceModeAreas = [[4],[5],[6],[10],[7,8],[9],[11],[12,13],[14],[15]]
+    with open("./_internal/JsonOutputs/common/FLD_ConditionScenario.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for i in range(0, len(ChosenIndices)):
+            data["rows"].append({"$id": 324 + i, "ScenarioMin": ScenarioFlagLists[ChosenIndices[i]], "ScenarioMax": 10048, "NotScenarioMin": 0, "NotScenarioMax": 0})
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for i in range(0, len(ChosenIndices)):
+            data["rows"].append({"$id": 3905 + i, "Premise": 0, "ConditionType1": 1, "Condition1": 324 + i, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] >= 4:
+                for i in range(0, len(ChosenIndices)):
+                    for j in range(0, len(MapIDsforRaceModeAreas[ChosenIndices[i]])):
+                        if row["$id"] == MapIDsforRaceModeAreas[ChosenIndices[i]][j]:
+                            row["cond1"] = 3905 + i
+                            break
+                if row["cond1"] <= 3000:
+                    row["cond1"] = 3472   
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False) 
