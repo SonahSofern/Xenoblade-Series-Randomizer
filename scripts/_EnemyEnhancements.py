@@ -9,46 +9,41 @@ ValidSkills = []
 def EnemyStats(spinBox):
     prevNames = []
     with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as EnArrangeFile:
-        with open("./_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as EnParamFile:
-            with open("./_internal/JsonOutputs/common_ms/fld_enemyname.json", 'r+', encoding='utf-8') as NamesFile:      
-                EnArr = json.load(EnArrangeFile)
-                EnPar = json.load(EnParamFile)
-                Names = json.load(NamesFile)
-                
-                
-                for Enemy in EnArr["rows"]:
-                    if spinBox > random.randrange(0,100):
-                           
-                        enh = random.choice(ValidSkills)
-                        prevNames.append({"myName" :Enemy["Name"], "myEnhance": enh})
+        with open("./_internal/JsonOutputs/common_ms/fld_enemyname.json", 'r+', encoding='utf-8') as NamesFile:      
+            EnArr = json.load(EnArrangeFile)
+            Names = json.load(NamesFile)
+            
+            
+            for Enemy in EnArr["rows"]:
+                if spinBox > random.randrange(0,100):
                         
-                        for pair in prevNames: # Ensures the same name has the same enhancement
-                            if pair["myName"] == Enemy["Name"]:
-                                enh = pair["myEnhance"]
-                                break
-                            
-                            
-
-                        enh.RollEnhancement()                        
-                        Enemy["EnhanceID3"] = enh.id
+                    enh = random.choice(ValidSkills)
+                    prevNames.append({"myName" :Enemy["Name"], "myEnhance": enh})
+                    
+                    for pair in prevNames: # Ensures the same name has the same enhancement
+                        if pair["myName"] == Enemy["Name"]:
+                            enh = pair["myEnhance"]
+                            break
                         
-                        for name in Names["rows"]: # Changes Names
-                            if name["$id"] == Enemy["Name"]:
-                                oldName = name["name"]
-                                enhanceName = enh.name +  ('+'*(enh.Rarity))
-                                if len(enhanceName + oldName) > 20:
-                                    oldnameList = oldName.split()
-                                    oldName = oldnameList[-1]           
-                                name["name"] = f"[System:Color name=tutorial]{enhanceName}[/System:Color] {oldName}"
-                                break
+                        
 
-                
-                NamesFile.seek(0)
-                NamesFile.truncate()
-                json.dump(Names, NamesFile, indent=2, ensure_ascii=False)
-            EnParamFile.seek(0)
-            EnParamFile.truncate()
-            json.dump(EnPar, EnParamFile, indent=2, ensure_ascii=False)
+                    enh.RollEnhancement()                        
+                    Enemy["EnhanceID3"] = enh.id
+                    
+                    for name in Names["rows"]: # Changes Names
+                        if name["$id"] == Enemy["Name"]:
+                            oldName = name["name"]
+                            enhanceName = enh.name +  ('+'*(enh.Rarity))
+                            if len(enhanceName + oldName) > 20:
+                                oldnameList = oldName.split()
+                                oldName = oldnameList[-1]           
+                            name["name"] = f"[System:Color name=tutorial]{enhanceName}[/System:Color] {oldName}"
+                            break
+
+            
+            NamesFile.seek(0)
+            NamesFile.truncate()
+            json.dump(Names, NamesFile, indent=2, ensure_ascii=False)
         EnArrangeFile.seek(0)
         EnArrangeFile.truncate()
         json.dump(EnArr, EnArrangeFile, indent=2, ensure_ascii=False)
@@ -67,8 +62,8 @@ Healthy = EnemyEnhancement("Healthy", HPBoost, [100,150,200,300])
 Strong = EnemyEnhancement("Strong", StrengthBoost, [50,100,150,200])
 Etheras = EnemyEnhancement("Etherite", EtherBoost, [50,100,150,200])
 Agility = EnemyEnhancement("Agile", AgiBoost, [200,400,600,800])
-EtherBlock = EnemyEnhancement("E Def", FlatEthDefBoost, [60,70,80,100])
-PhyBlock = EnemyEnhancement("P Def", FlatDefBoost, [60,70,80,100])
+EtherBlock = EnemyEnhancement("Eth Def", FlatEthDefBoost, [60,70,80,100])
+PhyBlock = EnemyEnhancement("Phys Def", FlatDefBoost, [60,70,80,100])
 Spike = EnemyEnhancement("Spiky", EtherCounter, [30,40,50,60])
 Pursuer = EnemyEnhancement("Pursuer", CombatSpeed, [100,200,300,400])
 AllReactionNull = EnemyEnhancement("Stable", TranquilGuard,[40,60,80,100])
@@ -82,8 +77,10 @@ Repeat = EnemyEnhancement("Repeat", DidIDoThat,[20,40,60,80])
 Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
 
 #New testing
-# Regen = EnemyEnhancement("Regenerative", LowHPRegen, [4,8,12,16])
-# ChainHeal = EnemyEnhancement("Chain Heal", ChainAttackHeal, [50,60,70,80])
+Regen = EnemyEnhancement("Regenerative", LowHPRegen, [4,8,12,16])
+ChainHeal = EnemyEnhancement("Chain Heal", ChainAttackHeal, [50,60,70,80])
+CloseArmor = EnemyEnhancement("Close Guard", ReduceDamageFromNearbyEnemies, [70,80,90,100])
+
 
 # Not including
 # BladeComboResist = EnemyEnhancement("Combo Resist", ReduceEnemyBladeComboDamage, [60,70,90,100])
