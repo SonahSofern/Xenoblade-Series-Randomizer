@@ -33,7 +33,7 @@ def EnemyStats(spinBox):
                     for name in Names["rows"]: # Changes Names
                         if name["$id"] == Enemy["Name"]:
                             oldName = name["name"]
-                            enhanceName = enh.name +  ('↑'*(enh.Rarity))
+                            enhanceName = enh.name +  ('+'*(enh.Rarity))
                             if len(enhanceName + oldName) > 20:
                                 oldnameList = oldName.split()
                                 oldName = oldnameList[-1]           

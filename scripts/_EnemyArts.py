@@ -5,7 +5,7 @@ common = 0
 rare = 1
 legendary = 2
 
-def EnemyStats(spinBox):
+def EnemyArtAttributes(spinBox):
     with open("./_internal/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as EnArtsFile:
         with open("./_internal/JsonOutputs/common_ms/btl_arts_en_ms.json", 'r+', encoding='utf-8') as NamesFile:      
             enArtsData = json.load(EnArtsFile)
@@ -18,48 +18,33 @@ def EnemyStats(spinBox):
                     continue
                 
                 newNameID += 1
-                rarity = random.choice(common,common,common,rare,rare,legendary) # choose rarity
+                rarity = random.choice([common,common,common,rare,rare,legendary]) # choose rarity
                 validChanges = FindValidChanges(art, rarity)  # i dont want to overwrite previous behaviour so check what i can change on an art
                 myChange = random.choice(validChanges) # choose a change to apply
-                changeName = myChange()
+                newNamePrefix = myChange()
+                
                 
                 for name in nameData["rows"]: # Get the old name
-                    if name == art["Name"]:
+                    if name["$id"] == art["Name"]:
                         oldName = name["name"]
                         break
-                        
-                
-                art["Name"] =  newNameID # Set new name id
-                newName = {
+
+                newName = { # create new name
                     "$id" : newNameID,
                     "style" : 15,
-                    "name" : f"{changeName} {oldName}"
+                    "name" : f"[System:Color name=green]{newNamePrefix}[/System:Color] {oldName}"
                 }
-                nameData.extend
+                art["Name"] =  newNameID # Set new name id to the art
+                nameData["rows"].append(newName) # add newname
                 
 
 
                 # AOE
                 # Buff
-                # Debuff
                 # Damage Type
                 # Reaction
-                # Cooldown
                 # Enhancement
                 # Name (Make new name id)
-                
-                    
-                    
-                
-                # for name in nameData["rows"]: # Changes Names
-                #     if name["$id"] == art["Name"]:
-                #         oldName = name["name"]
-                #         enhanceName = enh.name +  ('+'*(enh.Rarity))
-                #         if len(enhanceName + oldName) > 20:
-                #             oldnameList = oldName.split()
-                #             oldName = oldnameList[-1]           
-                #         name["name"] = f"[System:Color name=tutorial]{enhanceName}[/System:Color] {oldName}"
-                #         break
 
             
             NamesFile.seek(0)
@@ -69,23 +54,37 @@ def EnemyStats(spinBox):
         EnArtsFile.truncate()
         json.dump(enArtsData, EnArtsFile, indent=2, ensure_ascii=False)
         
-# class EnemyArtEnhancement(Enhancement):
-#     def __init__(self, name, enhancement, para1 = [0,0,0,0],para2 = [0,0,0,0]):
-#         self.name = name
-#         self.EnhanceEffect = enhancement.EnhanceEffect
-#         self.Caption = 0
-#         self.addToList = False
-#         self.Param1 = para1
-#         self.Param2 = para2
-#         ValidSkills.append(self)
-   
-   
 def FindValidChanges(art, rarity):
     ValidChanges = []
-    if art["Recast"] not in [0]:
-        ValidChanges.append(lambda: Cooldown(art, rarity))
+    if art["Recast"] not in [0]:    # Art has a Cooldown
+        ValidChanges.append(lambda: Cooldown(art, rarity)) # Cooldown
+    if art["ArtsDeBuff"] in [0]: # Only change arts with no debuff
+        ValidChanges.append(lambda: Debuff(art))                # Debuff
+    if art["Target"] in [0] # Only change art reactions that target enemies:
+        ValidChanges.append(lambda: Reaction(art))
     return ValidChanges
 
+
+def Reaction(art):
+    pass
+
+def Debuff(art):
+    Debuffs = {
+        "Taunt" : 11,
+        "Stench": 12,
+        "Shackle": 13,
+        "Shackle": 14,
+        "NlHeal": 15,
+        "Doom": 21,
+        "Def↓": 23,
+        "EDef↓": 24,
+        "Res↓": 25,
+        "Rage": 35
+    }
+    name,value = random.choice(list(Debuffs.items()))
+    art["ArtsDeBuff"] = value
+    return name
+    
 
 def Cooldown(art, rarity): 
     if rarity == common:
@@ -96,7 +95,7 @@ def Cooldown(art, rarity):
         div = 6
     
     art["Recast"] //= div
-    return [f"CD{"↓" * rarity + 1}"]
+    return f"CD↓{'+' * rarity}"
 
 
 
