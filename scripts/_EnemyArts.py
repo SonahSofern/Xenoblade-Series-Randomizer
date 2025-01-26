@@ -1,9 +1,7 @@
 import json, random
 from Enhancements import *
 
-common = 0
-rare = 1
-legendary = 2
+
 
 def EnemyArtAttributes(spinBox):
     with open("./_internal/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as EnArtsFile:
@@ -16,15 +14,14 @@ def EnemyArtAttributes(spinBox):
                     continue
                 if art["Name"] == 0: # Avoid changing autoattacks and things with no name
                     continue
-                rarity = random.choice([common,common,common,rare,rare,legendary]) # choose rarity
-                validChanges = FindValidChanges(art, rarity)  # i dont want to overwrite previous behaviour so check what i can change on an art
+                validChanges = FindValidChanges(art)  # i dont want to overwrite previous behaviour so check what i can change on an art
                 if not validChanges: # Make sure theres at least one valid change to make
                     continue
                 newNameID += 1
 
                 
                 myChange = random.choice(validChanges) # choose a change to apply
-                newNamePrefix, rarity = myChange()
+                newNamePrefix = myChange()
                 
                 
                 for name in nameData["rows"]: # Get the old name
@@ -47,19 +44,19 @@ def EnemyArtAttributes(spinBox):
         EnArtsFile.truncate()
         json.dump(enArtsData, EnArtsFile, indent=2, ensure_ascii=False)
         
-def FindValidChanges(art, rarity):
+def FindValidChanges(art):
     ValidChanges = []
     if art["Recast"] not in [0]:    # Art has a Cooldown
-        ValidChanges.append(lambda: Cooldown(art, rarity)) # Cooldown
+        ValidChanges.append(lambda: Cooldown(art)) # Cooldown
     if art["ArtsDeBuff"] in [0]: # Only change arts with no debuff
-        ValidChanges.append(lambda: Debuff(art, rarity))                # Debuff
+        ValidChanges.append(lambda: Debuff(art))                # Debuff
     if art["Target"] in [0]: # Only change art reactions that target enemies
         for i in range(1,17): # Check that the art has at least one an empty hit to place a combo into
             if art[f"ReAct{i}"] == 0 and art[f"HitFrm{i}"] != 0:
-                ValidChanges.append(lambda: Reaction(art, rarity))
+                ValidChanges.append(lambda: Reaction(art))
                 break
     if art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff
-        ValidChanges.append(lambda: Buff(art, rarity))
+        ValidChanges.append(lambda: Buff(art))
     if art["Enhance"] == 0: # Add enhancements only to arts without them
         ValidChanges.append(lambda: Enhancements(art))
     return ValidChanges
@@ -87,9 +84,9 @@ def Enhancements(art):
     skill = random.choice(ValidSkills)
     skill.RollEnhancement()
     art["Enhance"] = skill.id
-    return skill.name, skill.Rarity
+    return skill.name
 
-def Reaction(art, rarity):
+def Reaction(art):
     FullReactions = {
         "Combo" : [1,2,3,4],
         "KB": [5,6,7,8,9],
@@ -102,10 +99,10 @@ def Reaction(art, rarity):
         if art[f"ReAct{i}"] != 0: # Make sure it doesnt already have a reaction 
             continue
         art[f"ReAct{i}"] = random.choice(values)
-    return name, rarity
+    return name
 
 
-def Buff(art, rarity):
+def Buff(art):
     Buffs = {
         "Evade": 2,
         "Block": 3,
@@ -117,9 +114,9 @@ def Buff(art, rarity):
     }
     name,value = random.choice(list(Buffs.items()))
     art["ArtsBuff"] = value
-    return name, rarity
+    return name
 
-def Debuff(art, rarity): 
+def Debuff(art): 
     Debuffs = {
         "Taunt" : 11,
         "Stench": 12,
@@ -134,19 +131,12 @@ def Debuff(art, rarity):
     }
     name,value = random.choice(list(Debuffs.items()))
     art["ArtsDeBuff"] = value
-    return name, rarity
+    return name
     
 
-def Cooldown(art, rarity): 
-    if rarity == common:
-        div = 2
-    elif rarity == rare:
-        div = 4
-    elif rarity == legendary:
-        div = 6
-    
-    art["Recast"] //= div
-    return f"CD↓{'+' * rarity}", rarity
+def Cooldown(art): 
+    art["Recast"] //= random.choice(2,4,6)
+    return f"CD↓"
 
 
 
