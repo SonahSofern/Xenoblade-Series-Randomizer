@@ -111,13 +111,12 @@ def GenCustomArtDescriptions():
         "Cancel↑": [2810],
         "Crit↑": [2975],
         "Crit CD↓": [2840],
-        "Evade": [2866,2872],
+        "Evade": [2825,2866,2872],
         "Flying↑": [2700],
         "Front↑": [2740],
         "Vamp": [2735,2878],
         "Party Vamp": [2845],
         "High HP↑": [2800,2805],
-        "Evade": [2825],
         "HP Potion": [2815,2860],
         "Insect↑": [2685],
         "Launch↑": [2780,2775],
@@ -161,6 +160,7 @@ def GenCustomArtDescriptions():
             
             for art in artsData["rows"]:
                 if art["$id"] in ValidArtIDs:
+
                     CurrDesc = art["Caption"]
                     CombinedCaption = ["","","","",""]
                     FirstDescriptionMod = 0
