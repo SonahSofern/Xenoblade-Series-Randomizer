@@ -225,7 +225,10 @@ def GenCustomArtDescriptions():
                             if CombinedCaption[i] != "":
                                 TotalArtDescription += " / "
                                 TotalArtDescription += CombinedCaption[i]
-                                
+
+                    if TotalArtDescription == "":
+                        TotalArtDescription = "No Effects"
+
                     # Update Descriptions
                     for desc in descData["rows"]:
                         if desc["$id"] == CurrDesc:
