@@ -103,7 +103,7 @@ def RaceModeChanging(OptionsRunDict):
                     if row["$id"] == LandmarkMapSpecificIDstoTarget[i]:
                         row["getEXP"] = ExpDiff[i]
                         if (i+2) % 2 == 0: 
-                            row["getSP"] = 7500 * ChosenIndices[i]
+                            row["getSP"] = 7000 * ChosenIndices[i]
                 file.seek(0)
                 file.truncate()
                 json.dump(data, file, indent=2, ensure_ascii=False)
@@ -390,6 +390,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
     AuxCoreEnh = OptionsRunDict["Blade Aux Cores"]["optionTypeVal"].get()
     if DriverAccesEnh: # If we have the wacky enhancements:
         CommonDAcc, RareDAcc, LegDAcc = Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [0], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [1], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [2], "$id")
+        CommonDAcc, RareDAcc, LegDAcc = [x for x in CommonDAcc if x in Accessories], [x for x in RareDAcc if x in Accessories], [x for x in LegDAcc if x in Accessories]
         CommonDAcc, RareDAcc, LegDAcc = [x for x in CommonDAcc if x not in TornaOnlyAccessories], [x for x in RareDAcc if x not in TornaOnlyAccessories], [x for x in LegDAcc if x not in TornaOnlyAccessories]
         random.shuffle(CommonDAcc)
         random.shuffle(RareDAcc)
@@ -1227,6 +1228,6 @@ def ScriptAdjustments(): # For individual script changes
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def XPDownScaling(): # Scales the amount of XP per level and xp gained dramatically, to allow me to level the user up quickly
-    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2", "EnemyExp"], ['row[key] // 10'])
-    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/FLD_QuestReward.json"], ["EXP"], ['row[key] // 10'])
-    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common_gmk/ma02a_FLD_LandmarkPop.json"] + LandmarkFilestoTarget,["getEXP"], ['row[key] // 10'])
+    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2", "EnemyExp"], ['max(row[key] // 10,1)'])
+    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/FLD_QuestReward.json"], ["EXP"], ['max(row[key] // 10,1)'])
+    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common_gmk/ma02a_FLD_LandmarkPop.json"] + LandmarkFilestoTarget,["getEXP"], ['max(row[key] // 10,1)'])
