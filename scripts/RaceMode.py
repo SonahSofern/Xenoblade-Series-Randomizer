@@ -188,6 +188,7 @@ def RaceModeChanging(OptionsRunDict):
     XPDownScaling()
     DriverLvandSPFix()
     LandmarkConditions()
+    GimmickAdjustments()
     HideMapAreas(ScenarioFlagLists)
     print(OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get())
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get():
@@ -1231,3 +1232,7 @@ def XPDownScaling(): # Scales the amount of XP per level and xp gained dramatica
     Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2", "EnemyExp"], ['max(row[key] // 10,1)'])
     Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/FLD_QuestReward.json"], ["EXP"], ['max(row[key] // 10,1)'])
     Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common_gmk/ma02a_FLD_LandmarkPop.json"] + LandmarkFilestoTarget,["getEXP"], ['max(row[key] // 10,1)'])
+
+def GimmickAdjustments(): # removes requirements for specific gimmicks
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_MapGimmick.json", ["Condition"], 0)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_EffectPop.json", ["Condition", "QuestFlagMin", "QuestFlagMax"], 0)
