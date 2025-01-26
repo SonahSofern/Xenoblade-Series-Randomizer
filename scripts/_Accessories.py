@@ -2,10 +2,13 @@ import json, random
 from Enhancements import *
 
 
-def RandomizeAccessoryEnhancements():
+def RandomizeAccessoryEnhancements(OptionDictionary):
     InvalidSkillEnhancements = [ForcedHPPotionOnHit,BlockBoost,FlatBlockBoost,CritBoost, FlatCritBoost, PartyCritMaxAffinity, DamageAndCritUpMaxAffinity,HpPotChanceFor2,EyeOfJustice, BladeSwitchDamageUp, ArtCancel, XStartBattle, YStartBattle, BStartBattle, EvadeDriverArt, EvadeDrainHp,ArtDamageHeal, BladeSwapDamage, FlatAgiBoost,FlatDefBoost,FlatDexBoost, FlatEtherBoost, FlatHPBoost, FlatStrengthBoost, FlatLuckBoost, BladeComboOrbAdder]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
     
+    if OptionDictionary["Race Mode"]["optionTypeVal"].get():
+        InvalidSkillEnhancements.append(CombatSpeed)
+
     with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as EnhanceFile:
         with open("./_internal/JsonOutputs/common_ms/itm_pcequip.json", 'r+', encoding='utf-8') as NamesFile: # overflows past a certain num so cant make new names
             enhanceFile = json.load(EnhanceFile)
