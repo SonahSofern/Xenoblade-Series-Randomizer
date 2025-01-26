@@ -11,7 +11,7 @@ from Cosmetics import *
 from UI_Colors import *
 from tkinter.font import Font
 
-Version = "1.2.0"
+Version = "1.2.1"
 CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
 OptionDictionary = {}
