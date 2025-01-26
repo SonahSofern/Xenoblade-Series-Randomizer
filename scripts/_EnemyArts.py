@@ -40,7 +40,6 @@ def EnemyArtAttributes(spinBox):
                 art["Name"] =  newNameID # Set new name id to the art
                 nameData["rows"].append(newName) # add newname
                 
-                # Buff
                 # Enhancement
 
             
@@ -62,15 +61,12 @@ def FindValidChanges(art, rarity):
             if art[f"ReAct{i}"] == 0 and art[f"HitFrm{i}"] != 0:
                 ValidChanges.append(lambda: Reaction(art))
                 break
+    if art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff
+        ValidChanges.append(lambda: Buff(art))
     return ValidChanges
 
-def AOE(art, rarity):
-    HitTypes = {
-        "Single": [0],
-        "Circle": [1],
-        "Cone": [2]
-        
-    }
+def Enhancements(art):
+    pass
 
 def Reaction(art):
     FullReactions = {
@@ -87,7 +83,22 @@ def Reaction(art):
         art[f"ReAct{i}"] = random.choice(values)
     return name
 
-def Debuff(art):
+
+def Buff(art):
+    Buffs = {
+        "Evade": 2,
+        "Block": 3,
+        "Counter": 6,
+        "↑Counter": 7,
+        "Reflect": 5,
+        "Invincible": 4,
+        "Absorb":  17
+    }
+    name,value = random.choice(list(Buffs.items()))
+    art["ArtsBuff"] = value
+    return name
+
+def Debuff(art): 
     Debuffs = {
         "Taunt" : 11,
         "Stench": 12,
