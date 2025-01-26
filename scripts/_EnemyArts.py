@@ -24,7 +24,7 @@ def EnemyArtAttributes(spinBox):
 
                 
                 myChange = random.choice(validChanges) # choose a change to apply
-                newNamePrefix = myChange()
+                newNamePrefix, rarity = myChange()
                 
                 
                 for name in nameData["rows"]: # Get the old name
@@ -39,9 +39,6 @@ def EnemyArtAttributes(spinBox):
                 }
                 art["Name"] =  newNameID # Set new name id to the art
                 nameData["rows"].append(newName) # add newname
-                
-                # Enhancement
-
             
             NamesFile.seek(0)
             NamesFile.truncate()
@@ -55,20 +52,44 @@ def FindValidChanges(art, rarity):
     if art["Recast"] not in [0]:    # Art has a Cooldown
         ValidChanges.append(lambda: Cooldown(art, rarity)) # Cooldown
     if art["ArtsDeBuff"] in [0]: # Only change arts with no debuff
-        ValidChanges.append(lambda: Debuff(art))                # Debuff
+        ValidChanges.append(lambda: Debuff(art, rarity))                # Debuff
     if art["Target"] in [0]: # Only change art reactions that target enemies
         for i in range(1,17): # Check that the art has at least one an empty hit to place a combo into
             if art[f"ReAct{i}"] == 0 and art[f"HitFrm{i}"] != 0:
-                ValidChanges.append(lambda: Reaction(art))
+                ValidChanges.append(lambda: Reaction(art, rarity))
                 break
     if art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff
-        ValidChanges.append(lambda: Buff(art))
+        ValidChanges.append(lambda: Buff(art, rarity))
+    if art["Enhance"] == 0: # Add enhancements only to arts without them
+        ValidChanges.append(lambda: Enhancements(art))
     return ValidChanges
 
-def Enhancements(art):
-    pass
+ValidSkills = []
+class EnemyArtEnhancements(Enhancement):
+    def __init__(self, name, enhancement, para1 = [0,0,0,0],para2 = [0,0,0,0]):
+        self.name = name
+        self.EnhanceEffect = enhancement.EnhanceEffect
+        self.Caption = 0
+        self.addToList = False
+        self.Param1 = para1
+        self.Param2 = para2
+        ValidSkills.append(self)
+    
+backatk = EnemyArtEnhancements("Back↑", BackDamageUp, [40,60,80,100])
+frontatk = EnemyArtEnhancements("Front↑", FrontDamageUp, [20,40,60,80])
+pierce = EnemyArtEnhancements("Pierce", GuardAnnulAttack, [100,100,100,100])
+lowhpDamage = EnemyArtEnhancements("HP↓Dmg↑", DamageUpWhenHpDown, [10,20,30,40])
+repeated = EnemyArtEnhancements("Repeat", DidIDoThat, [20,40,60,80])
+transmig = EnemyArtEnhancements("Flip", Transmigration, [50,70,90,100])
+vamp = EnemyArtEnhancements("Vamp", ArtDamageHeal, [200,400,600,800])
 
-def Reaction(art):
+def Enhancements(art):
+    skill = random.choice(ValidSkills)
+    skill.RollEnhancement()
+    art["Enhance"] = skill.id
+    return skill.name, skill.Rarity
+
+def Reaction(art, rarity):
     FullReactions = {
         "Combo" : [1,2,3,4],
         "KB": [5,6,7,8,9],
@@ -81,24 +102,24 @@ def Reaction(art):
         if art[f"ReAct{i}"] != 0: # Make sure it doesnt already have a reaction 
             continue
         art[f"ReAct{i}"] = random.choice(values)
-    return name
+    return name, rarity
 
 
-def Buff(art):
+def Buff(art, rarity):
     Buffs = {
         "Evade": 2,
         "Block": 3,
         "Counter": 6,
         "↑Counter": 7,
-        "Reflect": 5,
-        "Invincible": 4,
+        "Rflct": 5,
+        "Invi": 4,
         "Absorb":  17
     }
     name,value = random.choice(list(Buffs.items()))
     art["ArtsBuff"] = value
-    return name
+    return name, rarity
 
-def Debuff(art): 
+def Debuff(art, rarity): 
     Debuffs = {
         "Taunt" : 11,
         "Stench": 12,
@@ -113,7 +134,7 @@ def Debuff(art):
     }
     name,value = random.choice(list(Debuffs.items()))
     art["ArtsDeBuff"] = value
-    return name
+    return name, rarity
     
 
 def Cooldown(art, rarity): 
@@ -125,10 +146,10 @@ def Cooldown(art, rarity):
         div = 6
     
     art["Recast"] //= div
-    return f"CD↓{'+' * rarity}"
+    return f"CD↓{'+' * rarity}", rarity
 
 
 
 
-
+# Next step is to make this work for enemy blade attacks they are conisdered specials so i need to update their effects
 

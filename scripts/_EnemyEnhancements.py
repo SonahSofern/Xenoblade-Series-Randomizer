@@ -75,6 +75,7 @@ FirstStrike = EnemyEnhancement("Supriser", FirstArtDamage,[300,500,600,700])
 Lightning  = EnemyEnhancement("Lightning", AutoSpeedArtsSpeed,[300,400,500,600],[200,300,400,500])
 Repeat = EnemyEnhancement("Repeat", DidIDoThat,[20,40,60,80])
 Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
+Warmup = EnemyEnhancement("Warmup", BattleDurationDamageUp, [70,100,120,150])
 
 #New testing
 Regen = EnemyEnhancement("Regenerative", LowHPRegen, [4,8,12,16])
