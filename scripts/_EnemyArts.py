@@ -1,6 +1,24 @@
 import json, random
 from Enhancements import *
 
+def EnemyArts(spinbox):
+    Arts = {
+        "Skin Upgrade": 176,
+        "Life Plant": 393,
+        "Reset Punch": 50,
+        "Element Breaker": 990,
+        "Cold Era": 582
+    }
+    with open("./_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as EnFile:
+        EnData = json.load(EnFile) # Adds a single new art to enemies
+        validSkills = []
+        for en in EnData["rows"]:
+            if spinbox < random.randrange(0,100): # Spinbox value check
+                continue
+            en["ArtsNum16"] = random.choice(validSkills)
+        BlArtsFile.seek(0)
+        BlArtsFile.truncate()
+        json.dump(blArtsData, BlArtsFile, indent=2, ensure_ascii=False)  
 
 
 def EnemyArtAttributes(spinBox):
@@ -79,28 +97,28 @@ def ChangeArts(artData, artNameData, spinBox):
         
 def FindValidChanges(art):
     ValidChanges = []
-    # try:
-    #     if art["Recast"] not in [0]:    # Art has a Cooldown
-    #         ValidChanges.append(lambda: Cooldown(art)) # Cooldown
-    # except:
-    #     pass # BTL_Arts_Bl doesnt have this
-    # try:
-    #     if art["ArtsDeBuff"] in [0]: # Only change arts with no debuff
-    #         ValidChanges.append(lambda: Debuff(art))                # Debuff
-    # except:
-        # pass # Enemy blade arts dont have ArtsDeBuff for some reason
+    try:
+        if art["Recast"] not in [0]:    # Art has a Cooldown
+            ValidChanges.append(lambda: Cooldown(art)) # Cooldown
+    except:
+        pass # BTL_Arts_Bl doesnt have this
+    try:
+        if art["ArtsDeBuff"] in [0]: # Only change arts with no debuff
+            ValidChanges.append(lambda: Debuff(art))                # Debuff
+    except:
+        pass # Enemy blade arts dont have ArtsDeBuff for some reason
     if art["Target"] in [0]: # Only change art reactions that target enemies
         for i in range(1,17): # Check that the art has at least one an empty hit to place a combo into
             if art[f"ReAct{i}"] == 0 and art[f"HitFrm{i}"] != 0:
                 ValidChanges.append(lambda: Reaction(art))
                 break
-    # if art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff
-    #     ValidChanges.append(lambda: Buff(art))
-    # try:
-    #     if art["Enhance"] == 0: # Add enhancements only to arts without them
-    #         ValidChanges.append(lambda: Enhancements(art))
-    # except:
-    #     pass # BTL_Arts_Bl doesnt have this
+    if art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff
+        ValidChanges.append(lambda: Buff(art))
+    try:
+        if art["Enhance"] == 0: # Add enhancements only to arts without them
+            ValidChanges.append(lambda: Enhancements(art))
+    except:
+        pass # BTL_Arts_Bl doesnt have this
     return ValidChanges
 
 ValidSkills = []
@@ -129,14 +147,12 @@ def Enhancements(art):
 
 def Reaction(art):
     FullReactions = {
-        # "Combo" : [1,2,3,4],
-        # "KB": [5,6,7,8,9],
-        # "BD": [10,11,12,13,14],
+        "Combo" : [1,2,3,4],
+        "KB": [5,6,7,8,9],
+        "BD": [10,11,12,13,14],
         "Aff↓": [23],
-        "GhostFac": [26],
-        "SkinUp": [27],
-        "DancLotus": [38],
-        "SpecialDown": [34]
+        # "SkinUp": [27], # Levels up the enemy but according the the DMGMGN of the move so its very not balanceable lol
+        # "SpecialDown": [34] # Procs but seems to proc on the enemy themselves
     }
     name,values = random.choice(list(FullReactions.items()))
     for i in range(1,17):
