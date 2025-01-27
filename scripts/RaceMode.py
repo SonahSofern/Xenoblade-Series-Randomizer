@@ -103,7 +103,7 @@ def RaceModeChanging(OptionsRunDict):
                     if row["$id"] == LandmarkMapSpecificIDstoTarget[i]:
                         row["getEXP"] = ExpDiff[i]
                         if (i+2) % 2 == 0: 
-                            row["getSP"] = 7000 * ChosenIndices[i]
+                            row["getSP"] = 1500 + 6800 * ChosenIndices[i] #This allows me to award some sp for gormott area 1, which feels barren at the moment.
                 file.seek(0)
                 file.truncate()
                 json.dump(data, file, indent=2, ensure_ascii=False)

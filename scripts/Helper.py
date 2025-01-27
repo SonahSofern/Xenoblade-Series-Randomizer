@@ -106,3 +106,9 @@ def MathmaticalColumnAdjust(filenames: list, ColumnsChange: list, equation: list
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
+
+def ExtendList(inputlist: list, extendtolength: int, extendusingvalues: str): # extends a list to a given length, using values based on an equation
+    while len(inputlist) < extendtolength:
+        inputlist.append(eval(extendusingvalues))
+    outputlist = inputlist.copy()
+    return outputlist
