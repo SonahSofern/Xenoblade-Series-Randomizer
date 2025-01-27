@@ -51,8 +51,8 @@ Guide adapted from: https://gamebanana.com/tuts/13815
 7. There should now be a new "bdat" folder inside "modified"; This is the folder that the randomizer program targets as the input folder. The output folder should be\
 FOR YUZU: C:/Users/yourName/AppData/Roaming/yuzu/load/0100E95004039001/Randomizer/romfs/bdat\
 FOR RYUJINX: C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/contents/0100e95004039001/romfs/bdat\
-FOR CONSOLE: This PC\Nintendo Switch\SD Card\atmosphere\contents\0100E95004039001\romfs\bdat (This is on your microsd card)\
+FOR CONSOLE: This PC/Nintendo Switch/SD Card/atmosphere/contents/0100E95004039001/romfs/bdat (This is on your microsd card)\
 NOTE: You will have to create the 0100E95004039001 folder.
 8. Choose your preferred settings, then use the randomizer program to randomize the contents of the game.
-9. CONSOLE ONLY: Put your microSD card back into your Switch, use Atmosphere and Homebrew to launch the game. Pressing L bypasses the active patches, so if you wish to play the vanilla game again, you can do so in this way.
+9. CONSOLE ONLY: Put your microSD card back into your Switch and Launch the game. Pressing L bypasses the active patches, so if you wish to play the vanilla game again, you can do so in this way.
 10. You should be ready to start playing!
