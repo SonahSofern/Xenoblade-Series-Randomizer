@@ -147,7 +147,9 @@ def Enhancements(art):
 
 def AOE(art):
     
-    CircleAroundTarget = 1, ConeAhead = 2, CircleAroundUser = 5
+    CircleAroundTarget = 1
+    ConeAhead = 2
+    CircleAroundUser = 5
     RangeType = random.choice(CircleAroundTarget, ConeAhead, CircleAroundUser)
     RandomRadius = random.randint(5,10)
     
