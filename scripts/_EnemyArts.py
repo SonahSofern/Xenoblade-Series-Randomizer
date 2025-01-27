@@ -14,7 +14,7 @@ def EnemyArts(spinbox):
         for en in EnData["rows"]:
             if spinbox < random.randrange(0,100): # Spinbox value check
                 continue
-            name,en["ArtsNum1"] = random.choice(list(Arts.items()))
+            en["ArtsNum16"] = random.choice(list(Arts.values()))
         EnFile.seek(0)
         EnFile.truncate()
         json.dump(EnData, EnFile, indent=2, ensure_ascii=False)  
@@ -56,6 +56,7 @@ def EnemyArtAttributes(spinBox):
         EnArtsFile.seek(0)
         EnArtsFile.truncate()
         json.dump(enArtsData, EnArtsFile, indent=2, ensure_ascii=False)
+        
 def ChangeArts(artData, artNameData, spinBox):
     newNameID = 457 # Starting id to add new names to old names file
     for art in artData["rows"]:
@@ -92,6 +93,7 @@ def ChangeArts(artData, artNameData, spinBox):
         }
         art["Name"] =  newNameID # Set new name id to the art
         artNameData["rows"].append(newName) # add newname
+        
 def FindValidChanges(art):
     ValidChanges = []
     # try:
@@ -104,10 +106,10 @@ def FindValidChanges(art):
     #         ValidChanges.append(lambda: Debuff(art))                # Debuff
     # except:
     #     pass # Enemy blade arts dont have ArtsDeBuff for some reason
-    for i in range(1,17): # Check that the art has at least one an empty hit to place a combo into
-        if art[f"ReAct{i}"] == 0 and art[f"HitFrm{i}"] != 0:
-            ValidChanges.append(lambda: Reaction(art))
-            break
+    # for i in range(1,17): # Check that the art has at least one an empty hit to place a combo into
+    #     if art[f"ReAct{i}"] == 0 and art[f"HitFrm{i}"] != 0:
+    #         ValidChanges.append(lambda: Reaction(art))
+    #         break
     # if art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff
     #     ValidChanges.append(lambda: Buff(art))
     # try:
@@ -115,6 +117,8 @@ def FindValidChanges(art):
     #         ValidChanges.append(lambda: Enhancements(art))
     # except:
     #     pass # BTL_Arts_Bl doesnt have this
+    if art["RangeType"] == 0 and art["ArtsType"] in [1,2,3]: # Make sure art is single target and a physical ether or healing move
+        ValidChanges.append(lambda: AOE(art))
     return ValidChanges
 
 ValidSkills = []
@@ -141,8 +145,15 @@ def Enhancements(art):
     art["Enhance"] = skill.id
     return skill.name
 
-def Summon(art):
-    pass # randomly choose something to summon dont make it good jsut weird
+def AOE(art):
+    
+    CircleAroundTarget = 1, ConeAhead = 2, CircleAroundUser = 5
+    RangeType = random.choice(CircleAroundTarget, ConeAhead, CircleAroundUser)
+    RandomRadius = random.randint(5,10)
+    
+    art["RangeType"] = RangeType
+    art["Radius"] =  RandomRadius # Not sure what makes a good radius
+    return "AOE"
 
 def Reaction(art):
     #F combo is forced combo so it cant be resisted
@@ -150,13 +161,14 @@ def Reaction(art):
         # "Combo" : [1,2,3,4],
         # "KB": [5,6,7,8,9],
         # "BD": [10,11,12,13,14],
-        # "Aff↓": [21,22,23,24,25],
         # "-Orb": [46],
-        # "Element": [45,17],
+        # "Element": [45,17, 35],
         # "Escape": [18]
-        # "Enrage": [19],
+        "Enrage": [19,39,37], # Type 10 art or Range type 1, also make sure enemy actually has an enrage form
         # "ElementRebound": [20],
-        # "SpecialDown": [34] # Procs but seems to proc on the enemy themselves
+        # "Aff↓": [21,22,23,24,25],
+        # "BlCombo↓": [34,40,45],
+        "Flames": [38], # Needs circle id 1-6
     }
     name,values = random.choice(list(FullReactions.items()))
     for i in range(1,17):
@@ -193,8 +205,8 @@ def Debuff(art):
         "Def↓": 23,
         "EDef↓": 24,
         "Res↓": 25,
-        "Rage": 35,
-        "Fire": 33
+        "Rage": 35, # We just resist rage strike??
+        # "Fire": 33 Already have fire this might just be a different buff even though its only on brighids confining flames
     }
     name,value = random.choice(list(Debuffs.items()))
     art["ArtsDeBuff"] = value
