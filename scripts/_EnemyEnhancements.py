@@ -61,7 +61,7 @@ class EnemyEnhancement(Enhancement):
 Healthy = EnemyEnhancement("Healthy", HPBoost, [100,150,200,300])
 Strong = EnemyEnhancement("Strong", StrengthBoost, [50,100,150,200])
 Etheras = EnemyEnhancement("Etherite", EtherBoost, [50,100,150,200])
-Agility = EnemyEnhancement("Agile", AgiBoost, [200,400,600,800])
+Agility = EnemyEnhancement("Agile", AgiBoost, [100,200,300,400])
 EtherBlock = EnemyEnhancement("Eth Def", FlatEthDefBoost, [60,70,80,100])
 PhyBlock = EnemyEnhancement("Phys Def", FlatDefBoost, [60,70,80,100])
 Spike = EnemyEnhancement("Spiky", EtherCounter, [30,40,50,60])
