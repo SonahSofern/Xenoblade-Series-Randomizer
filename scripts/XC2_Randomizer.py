@@ -247,7 +247,7 @@ def Options():
     GenStandardOption("Enemy Aggro", TabEnemies, "The percentage of all non-boss and non-quest enemies that will aggro the player", [lambda: EnemyRandoLogic.EnemyAggroProportion(OptionDictionary)],optionType=Spinbox)
     GenStandardOption("Enemy Move Speed", TabEnemies, "Randomizes how fast enemies move in the overworld", [lambda: JSONParser.ChangeJSONFile(["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.InclRange(0,100), Helper.InclRange(0,100) + Helper.InclRange(250,255))],optionType=Spinbox)
     # GenStandardOption("Enemy Rage", TabEnemies, "Randomizes the effects of enemy enraged states", ["common/BTL_Aura"])
-    GenStandardOption("Enemy Arts Effects", TabEnemies, "Gives enemies a random enhancement to their arts; displayed by their art's name", [lambda: _EnemyArts.EnemyArtAttributes(OptionDictionary["Enemy Arts Effects"]["spinBoxVal"].get())],optionType=Spinbox)
+    GenStandardOption("Enemy Arts Effects", TabEnemies, "Gives enemies a random enhancement to their arts; displayed by their art's name", [lambda: _EnemyArts.EnemyArtAttributes(OptionDictionary)], ["AOE", [], "Debuffs", [], "Buffs", [], "Reactions", [], "Enhancements", []],optionType=Spinbox)
     # GenStandardOption("Enemy Arts", TabEnemies, "Gives enemies a new art", [lambda: _EnemyArts.EnemyArts(OptionDictionary["Enemy Arts"]["spinBoxVal"].get())],optionType=Spinbox)
 
 

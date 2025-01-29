@@ -1,6 +1,7 @@
 import json, random
 from Enhancements import *
 
+
 def EnemyArts(spinbox):
     Arts = {
         "Skin Upgrade": 176,
@@ -20,7 +21,7 @@ def EnemyArts(spinbox):
         json.dump(EnData, EnFile, indent=2, ensure_ascii=False)  
 
 
-def EnemyArtAttributes(spinBox):
+def EnemyArtAttributes(optionsDict):
     with open("./_internal/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as EnArtsFile:
         with open("./_internal/JsonOutputs/common/BTL_Arts_BlSp.json", 'r+', encoding='utf-8') as EnBlArtsFile:
             with open("./_internal/JsonOutputs/common_ms/btl_arts_en_ms.json", 'r+', encoding='utf-8') as EnArtsNamesFile:  
@@ -34,8 +35,8 @@ def EnemyArtAttributes(spinBox):
                             blArtNameData = json.load(BlArtsNamesFile)
                             blArtsData = json.load(BlArtsFile)
                             
-                            ChangeArts(enArtsData, enArtsNameData, spinBox)
-                            ChangeArts(enBlArtsData, enBlArtsNameData, spinBox)
+                            ChangeArts(enArtsData, enArtsNameData, optionsDict)
+                            ChangeArts(enBlArtsData, enBlArtsNameData, optionsDict)
                             # ChangeArts(blArtsData, blArtNameData, spinBox) # Currently this will change ally and enemy because they use the same files :/
                             
                             BlArtsFile.seek(0)
@@ -57,8 +58,17 @@ def EnemyArtAttributes(spinBox):
         EnArtsFile.truncate()
         json.dump(enArtsData, EnArtsFile, indent=2, ensure_ascii=False)
         
-def ChangeArts(artData, artNameData, spinBox):
+def ChangeArts(artData, artNameData, optionsDict):
     newNameID = 457 # Starting id to add new names to old names file
+    
+    spinBox = optionsDict["Enemy Arts Effects"]["spinBoxVal"].get()
+    isReactions = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["Reactions"]["subOptionTypeVal"].get()
+    isDebuffs = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["Debuffs"]["subOptionTypeVal"].get()
+    isBuffs = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["Buffs"]["subOptionTypeVal"].get()
+    isEnhancements = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["Enhancements"]["subOptionTypeVal"].get()
+    isAOE = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["AOE"]["subOptionTypeVal"].get()
+                    
+    
     for art in artData["rows"]:
         try:
             if art["Camera1"] == 0 and art["Camera2"] == 0 and art["Camera3"] == 0:
@@ -71,7 +81,7 @@ def ChangeArts(artData, artNameData, spinBox):
             continue
         if art["Name"] == 0: # Avoid changing autoattacks and things with no name
             continue
-        validChanges = FindValidChanges(art)  # i dont want to overwrite previous behaviour so check what i can change on an art
+        validChanges = FindValidChanges(art, isReactions, isDebuffs, isBuffs, isEnhancements, isAOE)  # i dont want to overwrite previous behaviour so check what i can change on an art
         if not validChanges: # Make sure theres at least one valid change to make
             continue
         newNameID += 1
@@ -94,32 +104,21 @@ def ChangeArts(artData, artNameData, spinBox):
         art["Name"] =  newNameID # Set new name id to the art
         artNameData["rows"].append(newName) # add newname
         
-def FindValidChanges(art):
+def FindValidChanges(art, isReactions, isDebuffs, isBuffs, isEnhancements, isAOE):
     ValidChanges = []
-    # try:
-    #     if art["Recast"] not in [0]:    # Art has a Cooldown
-    #         ValidChanges.append(lambda: Cooldown(art)) # Cooldown
-    # except:
-    #     pass # BTL_Arts_Bl doesnt have this
-    try:
-        if art["ArtsDeBuff"] in [0] and art["Target"] == 0: # Only change arts with no debuff and target enemies
-            ValidChanges.append(lambda: Debuff(art))           # Debuff
-    except:
-        pass # Enemy blade arts dont have ArtsDeBuff for some reason
-
-    if art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff
+    if isDebuffs and art.get("ArtsDebuff") != None and art["ArtsDeBuff"] in [0] and art["Target"] == 0: # Only change arts with no debuff and target enemies
+        ValidChanges.append(lambda: Debuff(art))           # Debuff
+    if isBuffs and art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff
         ValidChanges.append(lambda: Buff(art))
-    try:
-        if art["Enhance"] == 0 and art["Target"] == 0: # Add enhancements only to arts without them and that target enemies
-            ValidChanges.append(lambda: Enhancements(art))
-    except:
-        pass # BTL_Arts_Bl doesnt have this
-    if art["RangeType"] == 0 and art["ArtsType"] in [1,2,3]: # Make sure art is single target and a physical ether or healing move
+    if isEnhancements and art.get("Enhance") != None and art["Enhance"] == 0 and art["Target"] == 0: # Add enhancements only to arts without them and that target enemies
+        ValidChanges.append(lambda: Enhancements(art))
+    if isAOE and art["RangeType"] == 0 and art["ArtsType"] in [1,2,3]: # Make sure art is single target and a physical ether or healing move
         ValidChanges.append(lambda: AOE(art))
-    for i in range(1,17): # Check that the art has at least one an empty hit to place a combo into
-        if art[f"ReAct{i}"] == 0 and art[f"HitFrm{i}"] != 0:
-            ValidChanges.append(lambda: Reaction(art))
-            break
+    if isReactions:
+        for i in range(1,17): # Check that the art has at least one an empty hit to place a combo into
+            if art[f"ReAct{i}"] == 0 and art[f"HitFrm{i}"] != 0:
+                ValidChanges.append(lambda: Reaction(art))
+                break
     return ValidChanges
 
 ValidSkills = []
@@ -151,14 +150,13 @@ def AOE(art):
     ConeAhead = 2
     CircleAroundUser = 5
     RangeType = random.choice([CircleAroundTarget, ConeAhead, CircleAroundUser])
-    RandomRadius = random.randint(5,10)
+    RandomRadius = random.randint(10,15)
     
     art["RangeType"] = RangeType
     art["Radius"] =  RandomRadius # Not sure what makes a good radius
     return "AOE"
 
 def Reaction(art):
-    #F combo is forced combo so it cant be resisted\
     ValidReactions = {
         "Orb↓": [46],
         "BlCombo↓": [34,40,45],
@@ -184,10 +182,17 @@ def Reaction(art):
         ValidReactions.update(EnemyTargetReactions) # Add enemy targeting
     if art["CircleID"] == 0:
         ValidReactions.update(Flames) # Add flames 
+    
         
     name,values = random.choice(list(ValidReactions.items()))
+    
+    # Special Cases that need more changes
     if name == "Flames":
         art["CircleID"] = random.choice([1,3,4,6])
+    elif name == "Combo":
+        art["Flag"]["Fcombo"] = 1 # Forces combos to work even if out of order
+        
+        
     for i in range(1,17):
         if art[f"HitFrm{i}"] == 0: # Make sure there is a hit
             break
@@ -205,10 +210,15 @@ def Buff(art):
         "↑Counter": 7,
         "Rflct": 5,
         "Invi": 4,
-        "Absorb":  17
+        "Absorb":  17,
+        "CD↓": None, # Special case its not really a buff but I dont want to give it its own category, I think it makes sense as a buff
     }
+    
     name,value = random.choice(list(Buffs.items()))
-    art["ArtsBuff"] = value
+    if art.get("Recast") and name == "CD↓" and art["Recast"] != 0: # Checks to be sure recast exists some dont have it
+        art["Recast"] //= random.choice([2,4,6])
+    else:
+        art["ArtsBuff"] = value
     return name
 
 def Debuff(art): 
@@ -233,9 +243,3 @@ def Debuff(art):
     art["ArtsDeBuff"] = value
     return name
     
-
-# def Cooldown(art): 
-#     art["Recast"] //= random.choice([2,4,6])
-#     return f"CD↓"
-
-
