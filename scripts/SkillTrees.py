@@ -118,6 +118,11 @@ def RandomizeSkillEnhancements(optDict):
         enhancementFile.seek(0)
         enhancementFile.truncate()
         json.dump(enhanceFile, enhancementFile, indent=2, ensure_ascii=False)
+        
+        
+        
+        
+        
 def FirstSlotCost(): # Used since art cancel gets put here
     for i in range(1, 7):
         with open(f"./_internal/JsonOutputs/common/BTL_Skill_Dr_Table0{i}.json", 'r+', encoding='utf-8') as driverFiles:
@@ -128,3 +133,9 @@ def FirstSlotCost(): # Used since art cancel gets put here
             driverFiles.seek(0)
             driverFiles.truncate()
             json.dump(dFile, driverFiles, indent=2, ensure_ascii=False)
+            
+            
+            
+def BladeSkillTreeShortening():
+    JSONParser.ChangeJSONLine(["common/CHR_Bl.json"],[0],Helper.StartsWith("ArtsAchievement",1,3) + Helper.StartsWith("SkillAchievement",1,3) + Helper.StartsWith("FskillAchivement",1,3) + ["KeyAchievement"], 15, replaceAll=True) # 15 is a trust condition and sets everything to that, so its all on trust with this
+

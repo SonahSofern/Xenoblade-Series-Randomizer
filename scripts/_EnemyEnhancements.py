@@ -65,7 +65,7 @@ Agility = EnemyEnhancement("Agile", AgiBoost, [100,200,300,400])
 EtherBlock = EnemyEnhancement("Eth Def", FlatEthDefBoost, [60,70,80,100])
 PhyBlock = EnemyEnhancement("Phys Def", FlatDefBoost, [60,70,80,100])
 Spike = EnemyEnhancement("Spiky", EtherCounter, [30,40,50,60])
-Pursuer = EnemyEnhancement("Pursuer", CombatSpeed, [100,200,300,400])
+Pursuer = EnemyEnhancement("Pursuer", CombatMoveSpeed, [100,200,300,400])
 AllReactionNull = EnemyEnhancement("Stable", TranquilGuard,[40,60,80,100])
 BlowdownSpike = EnemyEnhancement("Bouncy", GravityPinwheel, [10,15,20,25], [1,2,3,5])
 TasSnack = EnemyEnhancement("Devourer", TastySnack, [30,50,70,100])
@@ -78,9 +78,9 @@ Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
 Warmup = EnemyEnhancement("Warmup", BattleDurationDamageUp, [70,100,120,150])
 
 #New testing
-Regen = EnemyEnhancement("Regenerative", LowHPRegen, [4,8,12,16])
+Regen = EnemyEnhancement("Regen", LowHPRegen, [3,5,7,9])
 ChainHeal = EnemyEnhancement("Chain Heal", ChainAttackHeal, [50,60,70,80])
-CloseArmor = EnemyEnhancement("Close Guard", ReduceDamageFromNearbyEnemies, [70,80,90,100])
+CloseArmor = EnemyEnhancement("Guardian", ReduceDamageFromNearbyEnemies, [30,50,70,90])
 
 
 # Not including

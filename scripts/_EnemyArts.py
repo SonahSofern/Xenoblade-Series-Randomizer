@@ -108,7 +108,7 @@ def FindValidChanges(art, isReactions, isDebuffs, isBuffs, isEnhancements, isAOE
     ValidChanges = []
     if isDebuffs and art.get("ArtsDebuff") != None and art["ArtsDeBuff"] in [0] and art["Target"] == 0: # Only change arts with no debuff and target enemies
         ValidChanges.append(lambda: Debuff(art))           # Debuff
-    if isBuffs and art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff
+    if isBuffs and art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff (Current AOE is placed only on these things so gotta fix that)
         ValidChanges.append(lambda: Buff(art))
     if isEnhancements and art.get("Enhance") != None and art["Enhance"] == 0 and art["Target"] == 0: # Add enhancements only to arts without them and that target enemies
         ValidChanges.append(lambda: Enhancements(art))
@@ -134,7 +134,7 @@ class EnemyArtEnhancements(Enhancement):
     
 backatk = EnemyArtEnhancements("Back↑", BackDamageUp, [40,60,80,100])
 frontatk = EnemyArtEnhancements("Front↑", FrontDamageUp, [20,40,60,80])
-pierce = EnemyArtEnhancements("Pierce", GuardAnnulAttack, [100,100,100,100])
+# pierce = EnemyArtEnhancements("Pierce", GuardAnnulAttack, [100,100,100,100]) is already a flag so idk
 # lowhpDamage = EnemyArtEnhancements("HP↓Dmg↑", DamageUpWhenHpDown, [10,20,30,40])
 transmig = EnemyArtEnhancements("Flip", Transmigration, [100,100,100,100])
 vamp = EnemyArtEnhancements("Vamp", ArtDamageHeal, [200,400,600,800])
@@ -188,7 +188,7 @@ def Reaction(art):
     
     # Special Cases that need more changes
     if name == "Flames":
-        art["CircleID"] = random.choice([1,3,4,6])
+        art["CircleID"] = 1
     elif name == "Combo":
         art["Flag"]["Fcombo"] = 1 # Forces combos to work even if out of order
         
@@ -211,7 +211,7 @@ def Buff(art):
         "Rflct": 5,
         "Invi": 4,
         "Absorb":  17,
-        "CD↓": None, # Special case its not really a buff but I dont want to give it its own category, I think it makes sense as a buff
+        "CD↓": None, # Special case its not really a buff but I dont want to give it its own category, I think it makes sense as a buff, this causes the problem that only arts with no buff can have their cd reduced which is fine maybe
     }
     
     name,value = random.choice(list(Buffs.items()))

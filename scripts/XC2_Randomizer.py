@@ -1,7 +1,7 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, SkillTreeAdjustments, FieldSkillAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, CustomArts, PermalinkManagement, Helper, SkillTrees, Enhancements, BigItems, _EnemyEnhancements, CameraFixes, UniqueMonsterHunt
+import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, FieldSkillAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, CustomArts, PermalinkManagement, Helper, SkillTrees, Enhancements, BigItems, _EnemyEnhancements, CameraFixes, UniqueMonsterHunt
 import GUISettings, TrustBeam, _EnemyArts
 import _WeaponChips as WPChips
 import _AuxCores as AuxCr
@@ -277,7 +277,7 @@ def Options():
     GenStandardOption("Blade Weapon Cosmetics", TabQOL, "Keeps all blades default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])])
     GenStandardOption("Enhancement Display", TabQOL, "Shows when enhancements activate such as Hunter's Chemistry", [lambda: Enhancements.SearchAndSetDisplayIDs()])
     GenStandardOption("Chest Type Matches Contents", TabQOL, "Chest model and label changes depending on tier of loot", [lambda: RaceMode.ChestTypeMatching(OptionDictionary)])
-
+    GenStandardOption("Fast Blade Skill Trees", TabQOL, "Removes conditions for levelling up a tree, making trust the only requirement to unlock nodes", [lambda: SkillTrees.BladeSkillTreeShortening()])
     
     # Funny
     GenStandardOption("Projectile Treasure Chests", TabFunny, "Launches your items from chests", [lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [15])])
@@ -291,6 +291,9 @@ def Options():
     
     # Race Mode
     GenStandardOption("Race Mode", TabRaceMode, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(OptionDictionary), RaceMode.SeedHash], ["Zohar Fragment Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", []])
+    GenStandardOption("Difficulty", TabRaceMode, "Forces this difficulty, regardless of what is chosen in the options menu", [], ["Easy", [], "Normal", [], "Bringer of Chaos", [], "Ultimate", []])
+
+    
     
     #GenStandardOption("Unique Monster Hunt", TabRaceMode, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt()], optionType=Spinbox)
 
