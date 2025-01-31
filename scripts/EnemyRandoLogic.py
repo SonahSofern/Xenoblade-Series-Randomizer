@@ -2,7 +2,7 @@ import json
 import random
 import time
 import Helper
-from IDs import ValidEnemies, ValidEnemyPopFileNames
+from IDs import ValidEnemies, ValidEnemyPopFileNames, FlyingEnArrangeIDs, OriginalFlyingHeights, OriginalWalkSpeeds, OriginalRunSpeeds, OriginalBtlSpeeds
 
 AllBossDefaultIDs = [179, 180, 181, 182, 184, 185, 186, 187, 189, 190, 191, 193, 195, 196, 197, 198, 199, 201, 202, 203, 204, 206, 208, 210, 212, 214, 216, 217, 219, 220, 221, 222, 223, 225, 227, 229, 231, 232, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 248, 249, 250, 251, 252, 253, 254, 256, 258, 260, 262, 266, 267, 268, 269, 270, 271, 274, 1342, 1429, 1430, 1431, 1432, 1433, 1434, 1435, 1436, 1437, 1438, 1439, 1440, 1441, 1442, 1443, 1444, 1445, 1448, 1454, 1632, 1733, 1746, 1747, 1748, 1749, 1754, 1755]
 AllBossDefaultLevels = [1, 2, 4, 5, 6, 8, 6, 10, 11, 12, 13, 15, 22, 25, 24, 26, 20, 18, 19, 21, 22, 24, 23, 23, 24, 26, 29, 31, 27, 29, 31, 32, 33, 34, 32, 35, 40, 38, 38, 39, 42, 42, 43, 42, 44, 46, 44, 52, 54, 56, 52, 50, 60, 60, 57, 66, 68, 60, 60, 60, 60, 13, 24, 26, 32, 33, 34, 60, 36, 2, 2, 8, 10, 10, 14, 10, 11, 20, 16, 17, 18, 29, 29, 40, 38, 48, 53, 3, 32, 63, 60, 58, 64, 62, 64, 64]
@@ -538,6 +538,57 @@ def EnemyDupeBossCondition(NewBossIDs): # If a phantasm or elma (which summon co
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+def FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs):
+    NewFlyingEnemyEnArrangeIDs, EnParamstoDupe, ResourceIDstoDupe, ResourceRowstoDupe, FlyingEnParamIDs  = [], [], [], [], []
+    for i in range(0, len(TotalDefaultEnemyIDs)):
+        if TotalDefaultEnemyIDs[i] in FlyingEnArrangeIDs:
+            NewFlyingEnemyEnArrangeIDs.append(TotalRandomizedEnemyIDs[i]) # gets the new Flying Enemy IDs
+    with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for i in range(0, len(NewFlyingEnemyEnArrangeIDs)):
+            for row in data['rows']:
+                if row["$id"] == NewFlyingEnemyEnArrangeIDs[i]:
+                    FlyingEnParamIDs.append(row["ParamID"])
+                    row["ParamID"] = 1856 + i # now change the param id to a new id, since we're replacing the old one
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for i in range(0, len(FlyingEnParamIDs)):
+            for row in data['rows']:
+                if row["$id"] == FlyingEnParamIDs[i]:
+                    EnParamstoDupe.append(row) # getting a copy of that row which we're going to append
+                    ResourceIDstoDupe.append(row["ResourceID"])
+                    break
+        for i in range(0, len(EnParamstoDupe)):
+            EnParamstoDupe[i]["$id"] = 1856 + i
+            EnParamstoDupe[i]["ResourceID"] = 557 + i
+            EnParamstoDupe[i]["WalkSpeed"] = OriginalWalkSpeeds[i]
+            EnParamstoDupe[i]["RunSpeed"] = OriginalRunSpeeds[i]
+            EnParamstoDupe[i]["BtlSpeed"] = OriginalBtlSpeeds[i]
+            data["rows"].append(EnParamstoDupe[i])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for i in range(0, len(ResourceIDstoDupe)):
+            for row in data['rows']:
+                if row["$id"] == ResourceIDstoDupe[i]:
+                    ResourceRowstoDupe.append(row)
+                    break
+        for i in range(0, len(ResourceRowstoDupe)):
+            ResourceRowstoDupe[i]["$id"] = 557 + i
+            ResourceRowstoDupe[i]["ActType"] = 3
+            ResourceRowstoDupe[i]["Flag"]["Bait"] = 1
+            ResourceRowstoDupe[i]["FlyHeight"] = OriginalFlyingHeights[i]
+            data["rows"].append(ResourceRowstoDupe[i])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
 def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/fights
     ReducePCHPBattle1()
     SummonsLevelAdjustment()
@@ -671,6 +722,7 @@ def EnemyLogic(OptionsRunDict):
         PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict)
         BalanceFixes()
         EnemyDupeBossCondition(NewBossIDs)
+        FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
 
 
 

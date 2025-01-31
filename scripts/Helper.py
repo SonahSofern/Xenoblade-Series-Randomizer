@@ -18,7 +18,7 @@ def InsertHelper(insertIndex,  lowNum, highNum, mainString = str, pathTo = str):
     #print(listOfFiles)
     return listOfFiles
 
-def FindValues(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue): # used to find a list of values from a file with certain characteristsics that i want to remove
+def FindValues(filePath: str, keyWordList: list, keywordBadValueList: list, returnedKeyWordValue: str): # used to find a list of values from a file with certain characteristsics that i want to remove
     bad_values_found = []
     with open(filePath, 'r+', encoding='utf-8') as file:
         data = json.load(file)

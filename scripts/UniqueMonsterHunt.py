@@ -502,3 +502,9 @@ def CustomShopSetup(ChosenAreaOrder): # Sets up the custom shops with loot
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 # done
+
+def FlyingEnemyFix(): #Fixes flying enemies falling
+    pass
+    #FlyingEnemyRSCIDs = Helper.FindValues("./_internal/JsonOutputs/common/RSC_En.json", ["ActType"], [3], "$id")
+    #FlyingEnParamIDs = Helper.FindValues("./_internal/JsonOutputs/common/CHR_EnParam.json", ["ResourceID"], FlyingEnemyRSCIDs, "$id")
+    #FlyingEnArrangeIDs = Helper.FindValues("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["ParamID"], FlyingEnParamIDs, "$id")
