@@ -156,6 +156,9 @@ def AOE(art):
     art["Radius"] =  RandomRadius # Not sure what makes a good radius
     return "AOE"
 
+def Hits(art):
+    pass
+
 def Reaction(art):
     ValidReactions = {
         "Orb↓": [46],
