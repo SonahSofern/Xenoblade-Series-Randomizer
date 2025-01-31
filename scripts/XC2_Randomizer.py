@@ -29,7 +29,7 @@ else:
     
 root = Tk()
 defFontVar = tk.StringVar(value="Arial")
-defFontSizeVar = tk.IntVar(value=16)
+defFontSizeVar = tk.IntVar(value=11)
 defGUIThemeVar = tk.StringVar(value="Light Mode")
 loadData([defFontVar, defFontSizeVar, defGUIThemeVar], "GUISavedOptions.txt")
 
@@ -167,7 +167,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     # Major Option Checkbox
 
     checkButtonObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=40, style="midColor.TCheckbutton",command= StateSet)
-    checkButtonObj.grid(row=rowIncrement, column=0, sticky="e")
+    checkButtonObj.grid(row=rowIncrement, column=0, sticky="w")
     checkButtonVar = var
     
     # Description Label
