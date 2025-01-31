@@ -2,7 +2,8 @@ import json
 import random
 import time
 import Helper
-from IDs import ValidEnemies, ValidEnemyPopFileNames, FlyingEnArrangeIDs, OriginalFlyingHeights, OriginalWalkSpeeds, OriginalRunSpeeds, OriginalBtlSpeeds
+from IDs import ValidEnemies, ValidEnemyPopFileNames, FlyingEnArrangeIDs, OriginalFlyingHeights, OriginalWalkSpeeds, OriginalRunSpeeds, OriginalBtlSpeeds, SwimmingEnArrangeIDs
+import copy
 
 AllBossDefaultIDs = [179, 180, 181, 182, 184, 185, 186, 187, 189, 190, 191, 193, 195, 196, 197, 198, 199, 201, 202, 203, 204, 206, 208, 210, 212, 214, 216, 217, 219, 220, 221, 222, 223, 225, 227, 229, 231, 232, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 248, 249, 250, 251, 252, 253, 254, 256, 258, 260, 262, 266, 267, 268, 269, 270, 271, 274, 1342, 1429, 1430, 1431, 1432, 1433, 1434, 1435, 1436, 1437, 1438, 1439, 1440, 1441, 1442, 1443, 1444, 1445, 1448, 1454, 1632, 1733, 1746, 1747, 1748, 1749, 1754, 1755]
 AllBossDefaultLevels = [1, 2, 4, 5, 6, 8, 6, 10, 11, 12, 13, 15, 22, 25, 24, 26, 20, 18, 19, 21, 22, 24, 23, 23, 24, 26, 29, 31, 27, 29, 31, 32, 33, 34, 32, 35, 40, 38, 38, 39, 42, 42, 43, 42, 44, 46, 44, 52, 54, 56, 52, 50, 60, 60, 57, 66, 68, 60, 60, 60, 60, 13, 24, 26, 32, 33, 34, 60, 36, 2, 2, 8, 10, 10, 14, 10, 11, 20, 16, 17, 18, 29, 29, 40, 38, 48, 53, 3, 32, 63, 60, 58, 64, 62, 64, 64]
@@ -539,17 +540,21 @@ def EnemyDupeBossCondition(NewBossIDs): # If a phantasm or elma (which summon co
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs):
-    NewFlyingEnemyEnArrangeIDs, EnParamstoDupe, ResourceIDstoDupe, ResourceRowstoDupe, FlyingEnParamIDs  = [], [], [], [], []
+    NewFlyingEnemyEnArrangeIDs, FlyingEnemyBladeIDs, EnParamstoDupe, BladeParamstoDupe, BladeParamRowstoDupe, ResourceIDstoDupe, BladeResourceIDstoDupe, ResourceRowstoDupe, BladeResourceRowstoDupe, FlyingEnParamIDs = [], [], [], [], [], [], [], [], [], []
     for i in range(0, len(TotalDefaultEnemyIDs)):
         if TotalDefaultEnemyIDs[i] in FlyingEnArrangeIDs:
             NewFlyingEnemyEnArrangeIDs.append(TotalRandomizedEnemyIDs[i]) # gets the new Flying Enemy IDs
+    EnParamLastRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/CHR_EnParam.json", "$id")
+    RSCEnLastRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/RSC_En.json", "$id")
     with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for i in range(0, len(NewFlyingEnemyEnArrangeIDs)):
             for row in data['rows']:
                 if row["$id"] == NewFlyingEnemyEnArrangeIDs[i]:
                     FlyingEnParamIDs.append(row["ParamID"])
-                    row["ParamID"] = 1856 + i # now change the param id to a new id, since we're replacing the old one
+                    if row["EnemyBladeID"] > 0:
+                        FlyingEnemyBladeIDs.append(row["EnemyBladeID"])
+                    row["ParamID"] = EnParamLastRow + 1 + i # now change the param id to a new id, since we're replacing the old one
                     break
         file.seek(0)
         file.truncate()
@@ -559,12 +564,12 @@ def FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs):
         for i in range(0, len(FlyingEnParamIDs)):
             for row in data['rows']:
                 if row["$id"] == FlyingEnParamIDs[i]:
-                    EnParamstoDupe.append(row) # getting a copy of that row which we're going to append
+                    EnParamstoDupe.append(copy.deepcopy(row)) # getting a copy of that row which we're going to append
                     ResourceIDstoDupe.append(row["ResourceID"])
                     break
         for i in range(0, len(EnParamstoDupe)):
-            EnParamstoDupe[i]["$id"] = 1856 + i
-            EnParamstoDupe[i]["ResourceID"] = 557 + i
+            EnParamstoDupe[i]["$id"] = EnParamLastRow + 1 + i
+            EnParamstoDupe[i]["ResourceID"] = RSCEnLastRow + 1 + i
             EnParamstoDupe[i]["WalkSpeed"] = OriginalWalkSpeeds[i]
             EnParamstoDupe[i]["RunSpeed"] = OriginalRunSpeeds[i]
             EnParamstoDupe[i]["BtlSpeed"] = OriginalBtlSpeeds[i]
@@ -577,13 +582,112 @@ def FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs):
         for i in range(0, len(ResourceIDstoDupe)):
             for row in data['rows']:
                 if row["$id"] == ResourceIDstoDupe[i]:
-                    ResourceRowstoDupe.append(row)
+                    ResourceRowstoDupe.append(copy.deepcopy(row))
                     break
         for i in range(0, len(ResourceRowstoDupe)):
-            ResourceRowstoDupe[i]["$id"] = 557 + i
+            ResourceRowstoDupe[i]["$id"] = RSCEnLastRow + 1 + i
             ResourceRowstoDupe[i]["ActType"] = 3
             ResourceRowstoDupe[i]["Flag"]["Bait"] = 1
             ResourceRowstoDupe[i]["FlyHeight"] = OriginalFlyingHeights[i]
+            data["rows"].append(ResourceRowstoDupe[i])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+# to do their blades, probably need to do something like ben does where we open 3 files, differently named, match values from them.
+# take flying blade 1, go from blade id->param id->rscid
+# we want to add a new row in enparam and rscid
+# in enarrange, we want to change the paramid
+# in enparam, we change the resource id
+# in rscid, we change the acttype and flyheight
+# maybe need to make a function for easy traversal between the files tbh, it's getting pretty convoluted
+# Now for their blades
+    if len(FlyingEnemyBladeIDs) > 0: # if we got any drivers randomized, what are their blades' ParamIDs so we can get those fixed as well
+        EnParamLastRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/CHR_EnParam.json", "$id")
+        RSCEnLastRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/RSC_En.json", "$id")
+        with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for i in range(0, len(FlyingEnemyBladeIDs)):
+                for row in data["rows"]:
+                    if row["$id"] == FlyingEnemyBladeIDs[i]:
+                        BladeParamstoDupe.append(row["ParamID"])
+                        row["ParamID"] = EnParamLastRow + 1 + i
+                        break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+        with open("./_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for i in range(0, len(BladeParamstoDupe)):
+                for row in data['rows']:
+                    if row["$id"] == BladeParamstoDupe[i]:
+                        BladeParamRowstoDupe.append(copy.deepcopy(row)) # getting a copy of that row which we're going to append
+                        BladeResourceIDstoDupe.append(row["ResourceID"])
+                        break
+            for i in range(0, len(BladeParamRowstoDupe)):
+                BladeParamRowstoDupe[i]["$id"] = EnParamLastRow + 1 + i
+                BladeParamRowstoDupe[i]["ResourceID"] = RSCEnLastRow + 1 + i
+                data["rows"].append(BladeParamRowstoDupe)
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+        with open("./_internal/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for i in range(0, len(BladeResourceIDstoDupe)):
+                for row in data['rows']:
+                    if row["$id"] == BladeResourceIDstoDupe[i]:
+                        BladeResourceRowstoDupe.append(copy.deepcopy(row))
+                        break
+            for i in range(0, len(BladeResourceRowstoDupe)):
+                BladeResourceRowstoDupe[i]["$id"] = RSCEnLastRow + 1 + i
+                BladeResourceRowstoDupe[i]["ActType"] = 3
+                data["rows"].append(ResourceRowstoDupe[i])
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
+def SwimmingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs):
+    NewSwimmingEnemyEnArrangeIDs, EnParamstoDupe, ResourceIDstoDupe, ResourceRowstoDupe, SwimmingEnParamIDs = [], [], [], [], []
+    EnParamLastRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/CHR_EnParam.json", "$id")
+    RSCEnLastRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/RSC_En.json", "$id")
+    for i in range(0, len(TotalDefaultEnemyIDs)):
+        if TotalDefaultEnemyIDs[i] in SwimmingEnArrangeIDs:
+            NewSwimmingEnemyEnArrangeIDs.append(TotalRandomizedEnemyIDs[i]) # gets the new Swimming Enemy IDs
+    with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for i in range(0, len(NewSwimmingEnemyEnArrangeIDs)):
+            for row in data['rows']:
+                if row["$id"] == NewSwimmingEnemyEnArrangeIDs[i]:
+                    SwimmingEnParamIDs.append(row["ParamID"])
+                    row["ParamID"] = EnParamLastRow + 1 + i # now change the param id to a new id, since we're replacing the old one
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for i in range(0, len(SwimmingEnParamIDs)):
+            for row in data['rows']:
+                if row["$id"] == SwimmingEnParamIDs[i]:
+                    EnParamstoDupe.append(copy.deepcopy(row)) # getting a copy of that row which we're going to append
+                    ResourceIDstoDupe.append(row["ResourceID"])
+                    break
+        for i in range(0, len(EnParamstoDupe)):
+            EnParamstoDupe[i]["$id"] = EnParamLastRow + 1 + i
+            EnParamstoDupe[i]["ResourceID"] = RSCEnLastRow + 1 + i
+            data["rows"].append(EnParamstoDupe[i])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for i in range(0, len(ResourceIDstoDupe)):
+            for row in data['rows']:
+                if row["$id"] == ResourceIDstoDupe[i]:
+                    ResourceRowstoDupe.append(copy.deepcopy(row))
+                    break
+        for i in range(0, len(ResourceRowstoDupe)):
+            ResourceRowstoDupe[i]["$id"] = RSCEnLastRow + 1 + i
+            ResourceRowstoDupe[i]["ActType"] = 1
             data["rows"].append(ResourceRowstoDupe[i])
         file.seek(0)
         file.truncate()
@@ -723,6 +827,8 @@ def EnemyLogic(OptionsRunDict):
         BalanceFixes()
         EnemyDupeBossCondition(NewBossIDs)
         FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
+        SwimmingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
+
 
 
 

@@ -112,3 +112,13 @@ def ExtendList(inputlist: list, extendtolength: int, extendusingvalues: str): # 
         inputlist.append(eval(extendusingvalues))
     outputlist = inputlist.copy()
     return outputlist
+
+def GetMaxValue(filename: str, columnname: str): # Returns the maximum Value for a given column in a given file
+    with open(filename, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        MaxRow = max(data["rows"], key = lambda x:x[columnname])
+        MaxID = MaxRow[columnname]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    return MaxID
