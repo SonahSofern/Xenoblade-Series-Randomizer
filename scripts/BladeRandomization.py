@@ -2,34 +2,24 @@ import copy, random, JSONParser, Helper
 
 from JSONParser import ALL
 
-#TODO: Things to check
-# (✓) Does having blade Nia early break anything?
-# (✓) Can I turn Driver Nia into Wulfric?
-#     (X) Replace the text "Make Nia a Driver" with "Turn Wulfric into Nia"
-#     (X) Replace the text "Make Nia a Blade" with "Turn Nia into Wulfric"
+# TODO:
+#  - Replace the text "Make Nia a Driver" with "Turn {Blade}} into Nia"
+#  - Replace the text "Make Nia a Blade" with "Turn Nia into {Blade}"
+#  - Replace "Switch to Pyra?" and "Switch to Mythra" menu text
 #     - Only do these if blade Nia was actually replaced with something that isn't Blade Nia
-# (X) Blade names should be replaced in all dialogs
-# (?) Blade quests (does godfrey still do his blade quest or does Pyra now do it? What is desired?)
-
-#TODO: Bugs
-# 4. Since it's based on poppiswap, Poppi has no abilities on her specials
-# 5. No combination of Godfrey/Wulfric or Pyra/Nia's do the special tier 4.
-
-
-#TODO: Things to try
-# 3. Can I use poppiswap on Crossette to modify Poppi? (cannot be tested until Poppi and Crossette get arts for other characters)
-
-# TODO: ChangeJSONFileWithCallback() could probably be renamed to be clearer.
-
-# TODO: all functions which actually modify the tables should be renamed to start with "apply". This will differentiate between determining the calculations and applying them
-
-# TODO: Shuffle the gacha blades for the Torna blades to make Mikhail accessible
+#  - Replace "Pandoria" on Zeke's Unleash Shining Justice skill
+#  - Probably various other menu texts
+#  - Randomize Poppi Forms
+#  - Figure out how to randomize Torna blades properly (Apparently NoBuildWpn in CHR_Bl is not sufficient)
+#  - Blade names should be replaced in all dialogs where possible
+#  - Cosmetics do not work
+#  - Replace driver voice lines when changing blades (Rex will currently shout "Pyra" when switching to Pyra's replacement)
+#  - Replace field skill voice lines (Pyra's replacement currently says "I bring upon the power of fire!" in Pyra's voice)
 
 OriginalBlades = dict()        # Maps Blade ID to the dictionary of the unrandomized blade date. Populated in PopulateBlades()
 BladeNames = dict()            # Maps ID to Blade Name. Populated in PopulateBlades()
 Original2Replacement = dict()  # Maps Unrandomized Blade ID to Randomized Blade ID. Populated in RandomizeBlades()
 Replacement2Original = dict()  # Maps Randomized Blade ID to Unrandomized Blade ID. Populated in RandomizeBlades()
-OriginalGacha = dict()         # Maps Gacha ID to Unrandomized Blade ID. Populated in PopulateGacha()
 
 BladesRexCantUse = []
 BladesNiaCantUse = [1001, 1002, 1009, 1010, 1011]
@@ -43,7 +33,6 @@ RexHealerBlades = [1011]
 NiaHealerBlades = [1004, 1021, 1033, 1038, 1041, 1107, 1109, 1111] # + Obrona if we can get NG+ Blades working without the weapon chip quirks
 PossibleGuaranteedHealerBlades = RexHealerBlades + NiaHealerBlades
 
-# TODO: Is this used?
 PoppiForms = [1005, 1006, 1007]
 
 # Note: Every Blade besides Roc is randomizable. Roc being randomized would mess up Vandham, and he's exclusive to Rex anyway so may as well keep it that way.
@@ -65,7 +54,6 @@ def BladeRandomization(OptionsRunDict):
 
 def InitialSetup():
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], ALL, PopulateBlades)
-    JSONParser.ChangeJSONLineWithCallback(["common/BLD_RareList.json"], ALL, PopulateGacha)
     JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], ALL, MakeAllArtsAccessible)
 
 
@@ -84,13 +72,6 @@ def PopulateBlades(blade):
     JSONParser.ChangeJSONLineWithCallback(["common_ms/chr_bl_ms.json"], [name_id], getName)
 
     BladeNames[blade_id] = Name
-
-
-def PopulateGacha(gacha): # TODO: Perhaps not needed anymore
-    if gacha['Blade'] == 1022: # Replace Original Dagas with True Dagas in the table
-        OriginalGacha[gacha['$id']] = 1050
-    else:
-        OriginalGacha[gacha['$id']] = gacha['Blade']
 
 
 def MakeAllArtsAccessible(art):
@@ -196,8 +177,8 @@ def ApplyBladeRandomization(blade):
 
 def RandomizePoppiForms(OptionsRunDict):
     print('TODO: RandomizePoppiForms()')
-    # TODO: Randomize Poppi
-    # TODO: How do I make it so the poppiswaps are in the right spot
+    # TODO: Randomize Poppi forms so they appear in a random order (such as QTpi in Ch2, then Alpha in Ch4, then QT after doing QTpi's side quest)
+    # TODO: How do I make it so the poppiswaps are in the right spot?
 
 
 def BugFixes_PostRandomization():
@@ -237,7 +218,7 @@ def FixCutsceneCrashForNotHavingTwoWeapons(cutscene):
     cutscene['resourceR'] = WeaponType2Resource(OriginalBlades[replacement]['WeaponType'], 'R')
 
 
-# side is either L or R (case doesn't matter).
+# side is either 'L' or 'R' (case doesn't matter).
 def WeaponType2Resource(weapon_type, side):
 
     base_string = 'wp' + str(weapon_type).zfill(2) + '0101'
