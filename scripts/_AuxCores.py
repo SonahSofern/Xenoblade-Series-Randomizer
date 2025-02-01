@@ -5,9 +5,6 @@ from Enhancements import *
 def RandomizeAuxCoreEnhancements(OptionDictionary):
     InvalidSkillEnhancements = [ForcedHPPotionOnHit,ArtCancel,HpPotChanceFor2, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, EvadeDrainHp, EvadeDriverArt,ArtDamageHeal]
 
-    if OptionDictionary["Race Mode"]["optionTypeVal"].get():
-        InvalidSkillEnhancements.append(CombatSpeed)
-
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
 
     with open("./_internal/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as file:
@@ -23,7 +20,7 @@ def RandomizeAuxCoreEnhancements(OptionDictionary):
                     skillNameID = Aux["Name"]
                     enhancement = random.choice(ValidSkills)
                     enhancement.RollEnhancement()
-                    # ValidSkills.remove(enhancement) # Need full pool
+                    # ValidSkills.remove(enhancement) # Need full pool to remove 
                     for skillName in auxNameFile["rows"]:  
                         if skillName["$id"] == skillNameID:    
                             skillName["name"] = f"{enhancement.name} Core"
