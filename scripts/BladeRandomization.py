@@ -39,6 +39,8 @@ BladesAlwaysRandomized = [1001, 1002, 1009, 1010, 1011, 1014, 1015, 1016, 1017, 
 NewGamePlusBlades = [1043, 1044, 1045, 1046, 1047, 1048, 1049] # Currently cannot be randomized, but I would like to figure this out eventually. Will be an option when that works though, because they would be unbalanced if you get them early on
 
 
+include_printouts = False  # Debugging
+
 def BladeRandomization(OptionsRunDict):
     InitialSetup()
 
@@ -99,12 +101,14 @@ def RandomizeBlades(OptionsRunDict):
         # If Dromarch isn't randomized, he's the healer by default
         if not OptionsRunDict["Blades"]["subOptionObjects"]["Randomize Dromarch"]["subOptionTypeVal"].get():
             GuaranteedHealer = 1004
-            #print("The guaranteed healer is Dromarch (by default).")
+            if include_printouts:
+                print("The guaranteed healer is Dromarch (by default).")
         else:
             potential_healers = PossibleGuaranteedHealerBlades.copy()
             random.shuffle(potential_healers)
             GuaranteedHealer = potential_healers[0]
-            #print("The guaranteed healer is " + BladeNames[GuaranteedHealer])
+            if include_printouts:
+                print("The guaranteed healer is " + BladeNames[GuaranteedHealer])
 
     # Note: It is important that BladesLeftToRandomize starts with the default blades,
     # as otherwise the below loop could be stuck indefinitely if the last replacement is incompatible
@@ -129,9 +133,10 @@ def RandomizeBlades(OptionsRunDict):
         if canBeReplaced(next_blade, next_replacement, OptionsRunDict):
             Original2Replacement[next_blade] = next_replacement
             Replacement2Original[next_replacement] = next_blade
-            #print('========================================')
-            #print(BladeNames[next_blade] + ' was replaced with ' + BladeNames[next_replacement])
-            #print(str(next_blade) + ' was replaced with ' + str(next_replacement))
+            if include_printouts:
+                print('========================================')
+                print(BladeNames[next_blade] + ' was replaced with ' + BladeNames[next_replacement])
+                print(str(next_blade) + ' was replaced with ' + str(next_replacement))
             del blades_left_to_randomize[0]
             del randomized_order[0]
         else:
@@ -191,7 +196,8 @@ def BugFixes_PostRandomization():
 #       cool to fight against Zeke with Pandoria replaced with something else. But for now, this is not the case.
 def FixRandomizedEnemyBladeCrashes(enemy):
     if enemy['BladeID'] in Replacement2Original:
-        print("Enemy: " + BladeNames[enemy['BladeID']] + " (" + str(enemy['BladeID']) + ") was replaced with " + BladeNames[Replacement2Original[enemy['BladeID']]] + " (" + str(Replacement2Original[enemy['BladeID']]) + ")")
+        if include_printouts:
+            print("Enemy: " + BladeNames[enemy['BladeID']] + " (" + str(enemy['BladeID']) + ") was replaced with " + BladeNames[Replacement2Original[enemy['BladeID']]] + " (" + str(Replacement2Original[enemy['BladeID']]) + ")")
         enemy['BladeID'] = Replacement2Original[enemy['BladeID']]
 
 
