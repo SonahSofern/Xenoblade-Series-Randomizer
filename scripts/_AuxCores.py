@@ -2,7 +2,7 @@ import json, random
 from Enhancements import *
 
 
-def RandomizeAuxCoreEnhancements(OptionDictionary):
+def RandomizeAuxCoreEnhancements():
     InvalidSkillEnhancements = [ForcedHPPotionOnHit,ArtCancel,HpPotChanceFor2, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, EvadeDrainHp, EvadeDriverArt,ArtDamageHeal]
 
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
