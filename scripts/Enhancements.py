@@ -415,7 +415,7 @@ RechargeOnEvade = Enhancement("Flicker",248, 304, Baby)
 PartyLaunchDamageUp = Enhancement("Sky High",249, 306, Mega)
 PotionPickupDamageUp = Enhancement("Drunkard",250, 307, Small, DisTag="Damage ↑")
 ItemCollectionRange = Enhancement("Collector",251, 308, Mega)
-CombatMoveSpeed = Enhancement("Blitz",211, 309, Large) # Distag Repeats each step u take
+CombatMoveSpeed = Enhancement("Blitz",211, 309, [40,50,60,70]) # Distag Repeats each step u take
 NullHealRes = Enhancement("Healers",252, 310, Medium)
 DoomRes = Enhancement("Optimist",253, 311, Medium)
 PartyDrainRes = Enhancement("Party",254, 312, Medium)

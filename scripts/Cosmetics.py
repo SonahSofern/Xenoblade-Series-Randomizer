@@ -164,7 +164,7 @@ PoppiQTπCosmetics = [
 
 def Cosmetics(optionDict):
     #Drivers
-    odds = optionDict["Cosmetics"]["optionTypeVal"].get()
+    odds = optionDict["Character Outfits"]["optionTypeVal"].get()
     with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data['rows']:
