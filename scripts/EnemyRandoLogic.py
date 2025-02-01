@@ -2,7 +2,8 @@ import json
 import random
 import time
 import Helper
-from IDs import ValidEnemies, ValidEnemyPopFileNames
+from IDs import ValidEnemies, ValidEnemyPopFileNames, FlyingEnArrangeIDs, OriginalFlyingHeights, OriginalWalkSpeeds, OriginalRunSpeeds, OriginalBtlSpeeds, SwimmingEnArrangeIDs
+import copy
 
 AllBossDefaultIDs = [179, 180, 181, 182, 184, 185, 186, 187, 189, 190, 191, 193, 195, 196, 197, 198, 199, 201, 202, 203, 204, 206, 208, 210, 212, 214, 216, 217, 219, 220, 221, 222, 223, 225, 227, 229, 231, 232, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 248, 249, 250, 251, 252, 253, 254, 256, 258, 260, 262, 266, 267, 268, 269, 270, 271, 274, 1342, 1429, 1430, 1431, 1432, 1433, 1434, 1435, 1436, 1437, 1438, 1439, 1440, 1441, 1442, 1443, 1444, 1445, 1448, 1454, 1632, 1733, 1746, 1747, 1748, 1749, 1754, 1755]
 AllBossDefaultLevels = [1, 2, 4, 5, 6, 8, 6, 10, 11, 12, 13, 15, 22, 25, 24, 26, 20, 18, 19, 21, 22, 24, 23, 23, 24, 26, 29, 31, 27, 29, 31, 32, 33, 34, 32, 35, 40, 38, 38, 39, 42, 42, 43, 42, 44, 46, 44, 52, 54, 56, 52, 50, 60, 60, 57, 66, 68, 60, 60, 60, 60, 13, 24, 26, 32, 33, 34, 60, 36, 2, 2, 8, 10, 10, 14, 10, 11, 20, 16, 17, 18, 29, 29, 40, 38, 48, 53, 3, 32, 63, 60, 58, 64, 62, 64, 64]
@@ -169,10 +170,10 @@ def ReducePCHPBattle1():
         json.dump(data, file, indent=2, ensure_ascii= False)
 
 def SummonsLevelAdjustment(): # We want the summoned enemies to be the same level as the enemy that summoned them
-    OriginalSummonedFirstIDs = [1, 1, 724, 122, 66, 1369, 1304, 1385, 1372, 1308, 242, 1376, 1378, 1379, 1807, 150, 1373, 1377, 1380, 1806, 1285, 1285, 1381, 725, 725, 1358, 1362, 1700, 1521, 728, 846, 1420, 1347, 1370, 1354, 1354, 1352, 1367, 1371, 1368, 1356, 1357, 1365, 1384, 1593, 1599, 1353, 1349, 1355, 1361, 1382, 1364, 1350, 1724, 1724, 1724, 1724, 1731, 1787, 1788, 1789, 1805, 1881, 1883, 1885, 1641, 1533, 1568, 1569, 1569]
-    OriginalSummonedSecondIDs = [0, 0, 0, 0, 67, 0, 0, 0, 0, 0, 0, 1376, 1378, 1379, 1807, 152, 1374, 0, 0, 0, 0, 0, 1381, 726, 727, 1359, 1362, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1382, 0, 1350, 1725, 1725, 1725, 1726, 0, 0, 0, 0, 1805, 0, 1883, 1885, 0, 0, 0, 0, 0]
-    OriginalSummonedThirdIDs = [6, 6, 0, 0, 135, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 154, 1375, 0, 0, 0, 0, 0, 1381, 727, 0, 1360, 1363, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1383, 0, 1351, 0, 1726, 1727, 1727, 0, 0, 0, 0, 1805, 0, 1883, 1885, 0, 0, 0, 0, 0]
-    EnemyIDThatSummonedThem = [[0], [0], [184], [0], [0], [957], [222, 269], [236], [250, 274, 351], [239], [242], [1168, 1177, 326], [1188], [1380], [1803], [0], [1165, 1184, 558], [1184], [1189], [1802], [0], [265, 275], [0], [655], [0], [1046], [1109], [1699], [1516], [711], [862], [0], [688], [1128], [860], [0], [794], [951], [1154], [950], [1009], [1010], [1081], [1212], [1635], [1630], [795], [710], [892], [772, 1065, 1066, 1115, 1225, 1613, 1717], [1260], [1114], [714], [1723], [1723], [1723], [1723], [1733], [1786], [1786], [1786], [1804], [1864], [1882, 1883, 1885], [1884], [1629], [1547], [1562], [1560], [1560]]  
+    OriginalSummonedFirstIDs = [724, 1369, 1304, 1385, 1372, 1308, 242, 1376, 1378, 1379, 1807, 1373, 1377, 1380, 1806, 1285, 725, 1358, 1362, 1700, 1521, 728, 846, 1347, 1370, 1354, 1352, 1367, 1371, 1368, 1356, 1357, 1365, 1384, 1593, 1599, 1353, 1349, 1355, 1361, 1382, 1364, 1350, 1724, 1724, 1724, 1724, 1731, 1787, 1788, 1789, 1805, 1881, 1883, 1885, 1641, 1533, 1568, 1569, 1569]
+    OriginalSummonedSecondIDs = [0, 0, 0, 0, 0, 0, 0, 1376, 1378, 1379, 1807, 1374, 0, 0, 0, 0, 726, 1359, 1362, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1382, 0, 1350, 1725, 1725, 1725, 1726, 0, 0, 0, 0, 1805, 0, 1883, 1885, 0, 0, 0, 0, 0]
+    OriginalSummonedThirdIDs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1375, 0, 0, 0, 0, 727, 1360, 1363, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1383, 0, 1351, 0, 1726, 1727, 1727, 0, 0, 0, 0, 1805, 0, 1883, 1885, 0, 0, 0, 0, 0]
+    EnemyIDThatSummonedThem = [[184], [957], [222, 269], [236], [250, 274, 351], [239], [242], [1168, 1177, 326], [1188], [1380], [1803], [1165, 1184, 558], [1184], [1189], [1802], [265, 275], [655], [1046], [1109], [1699], [1516], [711], [862], [688], [1128], [860], [794], [951], [1154], [950], [1009], [1010], [1081], [1212], [1635], [1630], [795], [710], [892], [772, 1065, 1066, 1115, 1225, 1613, 1717], [1260], [1114], [714], [1723], [1723], [1723], [1723], [1733], [1786], [1786], [1786], [1804], [1864], [1882, 1883, 1885], [1884], [1629], [1547], [1562], [1560], [1560]]
     MinLevels = []
     MinLevel = 255
     filename = "./_internal/JsonOutputs/common/CHR_EnArrange.json"
@@ -456,7 +457,7 @@ def AeshmaCoreHPNerf(): #this fight sucks
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 318:
-                row["HpMaxRev"] = 1000 # nerfed hp by 7/8ths
+                row["HpMaxRev"] = 1500 # nerfed hp by 5/6ths
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)        
@@ -471,9 +472,11 @@ def GortOgreUppercutRemoval(): # Gort 2's Ogre Uppercut seems to be buggy, repor
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def RedRingClear(item):
+def RedRingClear(row):
+    KeepRingIDs = [7007,7008,7001,7005]
     try:
-        item["battlelockname"] = 0
+        if row["$id"] not in KeepRingIDs:
+            row["battlelockname"] = 0
     except:
         pass
     
@@ -514,6 +517,202 @@ def PadraigFightFix(): # padraig fight fails to spawn unique monster if it repla
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+def EnemyDupeBossCondition(NewBossIDs): # If a phantasm or elma (which summon copies of themselves) end up as a boss enemy, the boss fight should require all copies to be dead for you to win.
+    DupingEnemyIDs = [242, 281, 1882, 1884]
+    EnemyGroupsWithDupingEnemies = []
+    with open("./_internal/JsonOutputs/common/FLD_EnemyGroup.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data['rows']:
+            for i in range(1, 13):
+                if (row[f"EnemyID{i}"] in DupingEnemyIDs) & (row[f"EnemyID{i}"] in NewBossIDs):
+                    EnemyGroupsWithDupingEnemies.append(row["$id"])
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/FLD_QuestBattle.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data['rows']:
+            if ((row["EnemyID"] in DupingEnemyIDs) & (row["EnemyID"] in NewBossIDs)) or (row["EnemyGroupID"] in EnemyGroupsWithDupingEnemies):
+                row["DeadAll"] = 1
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs):
+    NewFlyingEnemyIDs, NewFlyingEnemyParamIDs, NewFlyingEnemyResourceIDs = [], [], [] # Regular Enemy ID Holders
+    FlyingBladeIDs, FlyingBladeParamIDs, FlyingBladeRSCIDs = [], [], [] # Blade ID Holders
+    for i in range(0, len(TotalDefaultEnemyIDs)):
+        if TotalDefaultEnemyIDs[i] in FlyingEnArrangeIDs:
+            NewFlyingEnemyIDs.append(TotalRandomizedEnemyIDs[i]) # gets the new Flying Enemy IDs
+    EnParamLastRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/CHR_EnParam.json", "$id")
+    RSCEnLastRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/RSC_En.json", "$id")
+    with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as arrangefile: #this way of nesting files gets complicated with naming, but it definitely does look cleaner
+        arrangedata = json.load(arrangefile)
+        with open("./_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramfile:
+            paramdata = json.load(paramfile) 
+            with open("./_internal/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as rscfile:
+                rscdata = json.load(rscfile)
+                FlyingBladeParamIDs = []
+                FlyingBladeRSCIDs = []
+                ParamCurrRow = EnParamLastRow + 1 # These two hold the current ParamID and RSCID we're on. We have to use this approach because we are only adding new Params for blades if their drivers can fly, so we skip some values of i in the loop
+                RSCCurrRow = RSCEnLastRow + 1 
+                for i in range(0, len(NewFlyingEnemyIDs)): # making drivers fly
+                    for arrangerow in arrangedata["rows"]:
+                        if arrangerow["$id"] == NewFlyingEnemyIDs[i]:
+                            NewFlyingEnemyParamIDs.append(arrangerow["ParamID"])
+                            if arrangerow["EnemyBladeID"] > 0:
+                                FlyingBladeIDs.append(arrangerow["EnemyBladeID"])
+                            else:
+                                FlyingBladeIDs.append(0)
+                            arrangerow["ParamID"] = ParamCurrRow
+                            break
+                    for paramrow in paramdata["rows"]:
+                        if paramrow["$id"] == NewFlyingEnemyParamIDs[i]:
+                            NewFlyingEnemyResourceIDs.append(paramrow["ResourceID"])
+                            paramrownew = copy.deepcopy(paramrow)
+                            paramrownew["$id"] = ParamCurrRow
+                            paramrownew["ResourceID"] = RSCCurrRow
+                            paramrownew["WalkSpeed"] = OriginalWalkSpeeds[i]
+                            paramrownew["RunSpeed"] = OriginalRunSpeeds[i]
+                            paramrownew["BtlSpeed"] = OriginalBtlSpeeds[i]
+                            paramdata["rows"].append(paramrownew)
+                            break
+                    for rscrow in rscdata["rows"]:
+                        if rscrow["$id"] == NewFlyingEnemyResourceIDs[i]:
+                            rscrownew = copy.deepcopy(rscrow)
+                            rscrownew["$id"] = RSCCurrRow
+                            rscrownew["FlyHeight"] = OriginalFlyingHeights[i]
+                            rscrownew["ActType"] = 3
+                            rscrownew["Flag"]["Bait"] = 1
+                            rscdata["rows"].append(rscrownew)
+                            break
+                    ParamCurrRow += 1
+                    RSCCurrRow += 1 
+                for i in range(0, len(FlyingBladeIDs)): # now we do the blades
+                    if FlyingBladeIDs[i] > 0:
+                        for arrangerow in arrangedata["rows"]:
+                            if arrangerow["$id"] == FlyingBladeIDs[i]:
+                                FlyingBladeParamIDs.append(arrangerow["ParamID"])
+                                arrangerow["ParamID"] = ParamCurrRow # because these are two separate loops, we need to add the length of the first set of rows added
+                                break
+                        for paramrow in paramdata["rows"]:
+                            if paramrow["$id"] == FlyingBladeParamIDs[i]:
+                                FlyingBladeRSCIDs.append(paramrow["ResourceID"])
+                                paramrownew = copy.deepcopy(paramrow)
+                                paramrownew["$id"] = ParamCurrRow
+                                paramrownew["ResourceID"] = RSCCurrRow
+                                paramrownew["WalkSpeed"] = OriginalWalkSpeeds[i]
+                                paramrownew["RunSpeed"] = OriginalRunSpeeds[i]
+                                paramrownew["BtlSpeed"] = OriginalBtlSpeeds[i]
+                                paramdata["rows"].append(paramrownew)
+                                break
+                        for rscrow in rscdata["rows"]:
+                            if rscrow["$id"] == FlyingBladeRSCIDs[i]:
+                                rscrownew = copy.deepcopy(rscrow)
+                                rscrownew["$id"] = RSCCurrRow
+                                rscrownew["FlyHeight"] = OriginalFlyingHeights[i]
+                                rscrownew["ActType"] = 3
+                                rscdata["rows"].append(rscrownew)
+                                break
+                        ParamCurrRow += 1
+                        RSCCurrRow += 1 
+                    else:
+                        FlyingBladeParamIDs.append(0)
+                        FlyingBladeRSCIDs.append(0)
+                rscfile.seek(0)
+                rscfile.truncate()
+                json.dump(rscdata, rscfile, indent=2, ensure_ascii=False)
+            paramfile.seek(0)
+            paramfile.truncate()
+            json.dump(paramdata, paramfile, indent=2, ensure_ascii=False)
+        arrangefile.seek(0)
+        arrangefile.truncate()
+        json.dump(arrangedata, arrangefile, indent=2, ensure_ascii=False)
+
+def SwimmingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs):
+    NewSwimmingEnemyIDs, NewSwimmingEnemyParamIDs, NewSwimmingEnemyResourceIDs = [], [], [] # Regular Enemy ID Holders
+    SwimmingBladeIDs, SwimmingBladeParamIDs, SwimmingBladeRSCIDs = [], [], [] # Blade ID Holders
+    for i in range(0, len(TotalDefaultEnemyIDs)):
+        if TotalDefaultEnemyIDs[i] in SwimmingEnArrangeIDs:
+            NewSwimmingEnemyIDs.append(TotalRandomizedEnemyIDs[i]) # gets the new Swimming Enemy IDs
+    EnParamLastRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/CHR_EnParam.json", "$id")
+    RSCEnLastRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/RSC_En.json", "$id")
+    with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as arrangefile: #this way of nesting files gets complicated with naming, but it definitely does look cleaner
+        arrangedata = json.load(arrangefile)
+        with open("./_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramfile:
+            paramdata = json.load(paramfile) 
+            with open("./_internal/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as rscfile:
+                rscdata = json.load(rscfile)
+                SwimmingBladeParamIDs = []
+                SwimmingBladeRSCIDs = []
+                ParamCurrRow = EnParamLastRow + 1 # These two hold the current ParamID and RSCID we're on. We have to use this approach because we are only adding new Params for blades if their drivers can fly, so we skip some values of i in the loop
+                RSCCurrRow = RSCEnLastRow + 1 
+                for i in range(0, len(NewSwimmingEnemyIDs)): # making drivers fly
+                    for arrangerow in arrangedata["rows"]:
+                        if arrangerow["$id"] == NewSwimmingEnemyIDs[i]:
+                            NewSwimmingEnemyParamIDs.append(arrangerow["ParamID"])
+                            if arrangerow["EnemyBladeID"] > 0:
+                                SwimmingBladeIDs.append(arrangerow["EnemyBladeID"])
+                            else:
+                                SwimmingBladeIDs.append(0)
+                            arrangerow["ParamID"] = ParamCurrRow
+                            break
+                    for paramrow in paramdata["rows"]:
+                        if paramrow["$id"] == NewSwimmingEnemyParamIDs[i]:
+                            NewSwimmingEnemyResourceIDs.append(paramrow["ResourceID"])
+                            paramrownew = copy.deepcopy(paramrow)
+                            paramrownew["$id"] = ParamCurrRow
+                            paramrownew["ResourceID"] = RSCCurrRow
+                            paramdata["rows"].append(paramrownew)
+                            break
+                    for rscrow in rscdata["rows"]:
+                        if rscrow["$id"] == NewSwimmingEnemyResourceIDs[i]:
+                            rscrownew = copy.deepcopy(rscrow)
+                            rscrownew["$id"] = RSCCurrRow
+                            rscrownew["ActType"] = 1
+                            rscrownew["Flag"]["Bait"] = 1
+                            rscdata["rows"].append(rscrownew)
+                            break
+                    ParamCurrRow += 1
+                    RSCCurrRow += 1 
+                for i in range(0, len(SwimmingBladeIDs)): # now we do the blades
+                    if SwimmingBladeIDs[i] > 0:
+                        for arrangerow in arrangedata["rows"]:
+                            if arrangerow["$id"] == SwimmingBladeIDs[i]:
+                                SwimmingBladeParamIDs.append(arrangerow["ParamID"])
+                                arrangerow["ParamID"] = ParamCurrRow # because these are two separate loops, we need to add the length of the first set of rows added
+                                break
+                        for paramrow in paramdata["rows"]:
+                            if paramrow["$id"] == SwimmingBladeParamIDs[i]:
+                                SwimmingBladeRSCIDs.append(paramrow["ResourceID"])
+                                paramrownew = copy.deepcopy(paramrow)
+                                paramrownew["$id"] = ParamCurrRow
+                                paramrownew["ResourceID"] = RSCCurrRow
+                                paramdata["rows"].append(paramrownew)
+                                break
+                        for rscrow in rscdata["rows"]:
+                            if rscrow["$id"] == SwimmingBladeRSCIDs[i]:
+                                rscrownew = copy.deepcopy(rscrow)
+                                rscrownew["$id"] = RSCCurrRow
+                                rscrownew["ActType"] = 1
+                                rscdata["rows"].append(rscrownew)
+                                break
+                        ParamCurrRow += 1
+                        RSCCurrRow += 1 
+                    else:
+                        SwimmingBladeParamIDs.append(0)
+                        SwimmingBladeRSCIDs.append(0)
+                rscfile.seek(0)
+                rscfile.truncate()
+                json.dump(rscdata, rscfile, indent=2, ensure_ascii=False)
+            paramfile.seek(0)
+            paramfile.truncate()
+            json.dump(paramdata, paramfile, indent=2, ensure_ascii=False)
+        arrangefile.seek(0)
+        arrangefile.truncate()
+        json.dump(arrangedata, arrangefile, indent=2, ensure_ascii=False)
+
 def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/fights
     ReducePCHPBattle1()
     SummonsLevelAdjustment()
@@ -532,13 +731,13 @@ def EnemyLogic(OptionsRunDict):
     CheckboxList = [] #I'm lazy, so i'm just going to pass the names and true/false states to two arrays
     CheckboxStates = []
     StoryBossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Story Bosses"]["subOptionTypeVal"].get()
-    KeepStoryBossesLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Keep Story Boss Levels"]["subOptionTypeVal"].get()
+    KeepStoryBossesLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Original Boss Encounter Levels"]["subOptionTypeVal"].get()
     QuestEnemyBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Quest Enemies"]["subOptionTypeVal"].get()
-    KeepQuestEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Keep Quest Enemy Levels"]["subOptionTypeVal"].get()
+    KeepQuestEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Original Quest Encounter Levels"]["subOptionTypeVal"].get()
     UniqueMonstersBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Unique Monsters"]["subOptionTypeVal"].get()
     SuperbossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Superbosses"]["subOptionTypeVal"].get()
     NormalEnemiesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Normal Enemies"]["subOptionTypeVal"].get()
-    KeepAllEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Keep All Enemy Levels"]["subOptionTypeVal"].get()
+    KeepAllEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use All Original Encounter Levels"]["subOptionTypeVal"].get()
     MixEnemiesBetweenTypesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Mix Enemies Between Types"]["subOptionTypeVal"].get()
     AllBossDefaultIDstoUse = AllBossDefaultIDs
     AllBossDefaultLevelstoUse = AllBossDefaultLevels
@@ -547,7 +746,7 @@ def EnemyLogic(OptionsRunDict):
         del AllBossDefaultLevelstoUse[83]
     if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox:
         EnemyRandoOn = True
-        CheckboxList = ["Story Bosses", "Quest Enemies", "Unique Monsters", "Superbosses", "Normal Enemies", "Mix Enemies Between Types", "Keep All Enemy Levels", "Keep Quest Enemy Levels", "Keep Story Boss Levels"]
+        CheckboxList = ["Story Bosses", "Quest Enemies", "Unique Monsters", "Superbosses", "Normal Enemies", "Mix Enemies Between Types", "Use All Original Encounter Levels", "Use Original Quest Encounter Levels", "Use Original Boss Encounter Levels"]
         CheckboxStates = [StoryBossesBox, QuestEnemyBox, UniqueMonstersBox, SuperbossesBox, NormalEnemiesBox, MixEnemiesBetweenTypesBox, KeepAllEnemyLevelsBox, KeepQuestEnemyLevelsBox, KeepStoryBossesLevelsBox]
     if EnemyRandoOn == True:
         print("Randomizing Enemies")
@@ -646,6 +845,10 @@ def EnemyLogic(OptionsRunDict):
         Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], 0)
         PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict)
         BalanceFixes()
+        EnemyDupeBossCondition(NewBossIDs)
+        FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
+        SwimmingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
+
 
 
 

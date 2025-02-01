@@ -1,5 +1,7 @@
 import json, random, os, IDs
 
+ALL = object # Flag for saying "All IDs"
+
 def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list = [], rangeValidReplacements:list = [], InvalidTargetIDs:list = [], SliderOdds = 100, IgnoreID_AND_Key = [["",""]]): # make this a function to reuse, check the settings ot see if we even do this
 
     # print(f"Valid Replacements: {Replacements}")
@@ -42,14 +44,18 @@ def ChangeJSONLine(filenames, ids, keys, replacement, replaceAll = False):
         with open(filePath, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for item in data['rows']:
+<<<<<<< HEAD
+                if ids is ALL or item["$id"] in ids:
+=======
                 if replaceAll or item["$id"] in ids:
+>>>>>>> origin/main
                    for key in keys:
                     item[key] = replacement
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
-def ChangeJSONLineWithCallback(filenames, ids, callback, replaceAll = False):
+def ChangeJSONLineWithCallback(filenames, ids, callback):
     for name in filenames:
         filePath = "./_internal/JsonOutputs/" + name
         if not os.path.exists(filePath):
@@ -57,7 +63,7 @@ def ChangeJSONLineWithCallback(filenames, ids, callback, replaceAll = False):
         with open(filePath, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for item in data['rows']:
-                if replaceAll or item["$id"] in ids:
+                if ids is ALL or item["$id"] in ids:
                     callback(item)
             file.seek(0)
             file.truncate()
@@ -74,6 +80,18 @@ def QueryJSONLine(filename, searchField, searchVal):
                     return item
         return None
 
+def PrintTable(filenames):
+    for name in filenames:
+        filePath = "./_internal/JsonOutputs/" + name
+        if not os.path.exists(filePath):
+            continue
+        with open(filePath, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for item in data['rows']:
+                print(item)
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
 
 def ExtendJSONFile(filePath, additionsList = []):
     with open("./_internal/JsonOutputs/" + filePath, 'r+', encoding='utf-8') as file:

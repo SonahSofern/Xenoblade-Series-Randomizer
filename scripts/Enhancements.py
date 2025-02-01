@@ -32,7 +32,6 @@ class Enhancement:
     ReversePar1 = False
     ReversePar2 = False
     addToList = True
-    firstTime = True
     DisTag = ""
     def __init__(self,Name, Enhancement, Caption,  Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReversePar1 = False, ReversePar2  = False, addToList = True, DisTag = ""):
         self.name = Name
@@ -48,6 +47,18 @@ class Enhancement:
         self.DisTag = DisTag
         if self.addToList:
             EnhanceClassList.append(self)
+            
+        if self.DisTag != "":
+            global DisplayTagID
+            DisplayTagDict = {
+            "$id": DisplayTagID,
+            "style": 36,
+            "name": self.DisTag,
+            "enhanceEff": self.EnhanceEffect
+            }
+            DisplayTagID += 1
+            DisplayTagList.append(DisplayTagDict)
+
     def RollEnhancement(self):
         global EnhanceID
         self.id = EnhanceID
@@ -56,20 +67,9 @@ class Enhancement:
         Rare = 1
         Legendary = 2
         self.Rarity = random.choice([Common,Common,Common, Rare,Rare, Legendary])
-        def SetParams(ParameterChoices, isReverse): # Restrict this to only run until all rarities are rolled then it picks an already rolled one
-            if isReverse:
-                Common = 2
-                Rare = 1
-                Legendary = 0
-            else:
-                Common = 0
-                Rare = 1
-                Legendary = 2
-                
-            if ParameterChoices == Baby:
-                Pstep = 1
-            else:
-                Pstep = 5
+        def SetParams(ParameterChoices, isReverse):
+            Common, Rare, Legendary = (2, 1, 0) if isReverse else (0, 1, 2)
+            Pstep = 1 if ParameterChoices == Baby else 5
                 
             if ParameterChoices == [0,0,0,0]:
                 Parameter = 0
@@ -84,22 +84,9 @@ class Enhancement:
                     Parameter = random.randrange(ParameterChoices[2],ParameterChoices[3]+1,Pstep)
 
             return Parameter
-
-        if self.firstTime:
-            if self.Description != "":
-                JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"],[self.Caption], ["name"], self.Description)
-
-            if self.DisTag != "":
-                global DisplayTagID
-                DisplayTagDict = {
-                "$id": DisplayTagID,
-                "style": 36,
-                "name": self.DisTag,
-                "enhanceEff": self.EnhanceEffect
-                }
-                DisplayTagID += 1
-                DisplayTagList.append(DisplayTagDict)
-            self.firstTime = False
+            
+        if self.Description != "":
+            JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"],[self.Caption], ["name"], self.Description)
             
         EnhanceEffectsDict = {
             "$id": EnhanceID,
@@ -112,24 +99,24 @@ class Enhancement:
         EnhanceEffectsList.append([EnhanceEffectsDict])
         
 def AddCustomEnhancements():
-    global EnhanceID, DisplayTagID
+    global EnhanceID
     JSONParser.ChangeJSONFile(["common/BTL_EnhanceEff.json"],["Param"], Helper.InclRange(1,1000), [1000], [241, 250, 245,54,143,257,259])
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randint(20,50)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randint(30,70)) # Healing with low HP
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randint(10,60)) # Healing with low HP
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randrange(20,51, 5)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randrange(30,71, 5)) # Healing with low HP
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randrange(10,61,5)) # Healing with low HP
     JSONParser.ExtendJSONFile("common/BTL_Enhance.json", EnhanceEffectsList)
-    SearchAndSetDisplayIDs(DisplayTagList)
     EnhanceID = 3896
-    DisplayTagID = 65
     EnhanceEffectsList.clear()
-    DisplayTagList.clear()
 
 
-def SearchAndSetDisplayIDs(disList):
+def SearchAndSetDisplayIDs():
+    global DisplayTagID
     with open("./_internal/JsonOutputs/common/BTL_EnhanceEff.json", 'r+', encoding='utf-8') as EnEffFile:
         with open("./_internal/JsonOutputs/common_ms/btl_buff_ms.json", 'r+', encoding='utf-8') as btlBuffFile:
             EnEff = json.load(EnEffFile)
             btlBuff = json.load(btlBuffFile)
+            disList = DisplayTagList
+
             
             for eff in EnEff["rows"]:   # sets names in EnhanceEff File
                 for enhancement in disList:        
@@ -150,7 +137,8 @@ def SearchAndSetDisplayIDs(disList):
         EnEffFile.seek(0)
         EnEffFile.truncate()
         json.dump(EnEff,  EnEffFile, indent=2, ensure_ascii=False)    
-    
+
+
 
 HPBoost =       Enhancement("Health",1,1, Small)
 StrengthBoost = Enhancement("Strength", 2,2, Small)
@@ -189,18 +177,18 @@ BeastExecute = Enhancement("Beast",22, 223, [0], Baby)
 BladeComboDamUp = Enhancement("Combo",23,21, Large)
 FusionComboDamUp = Enhancement("Combo",24,22, Large)
 EtherCounter = Enhancement("Eth Counter",25,23, Giga)
-PhysCounter = Enhancement("Phys Counter",26,24, Giga)
+PhysCounter = Enhancement("Phys Counter",26,24, Giga, addToList=False)
 AutoAttackHeal = Enhancement("Auto Vamp",27,26, Mini)
 SpecialANDArtHeal = Enhancement("Omnivamp",28,27, Baby, Description="Restores [ML:Enhance kind=Param1 ]% HP of damage dealt when\n a Special or Art connects.")
 ArtDamageHeal = Enhancement("Omnivamp",28, 28, Small) # This goes on arts only or else it will heal from special and arts
-EnemyKillHeal = Enhancement("Scavenger",29,30, Medium, DisTag="Scavenge Heal")
+EnemyKillHeal = Enhancement("Scavenger",29,30, Medium)
 CritHeal = Enhancement("Crit Vamp",30,31, Mini)
 CritDamageUp = Enhancement("Crit Damage",31,32, Medium)
 PercentDoubleAuto = Enhancement("Doublestrike",32,33, Medium, DisTag="Doublestrike")
 FrontDamageUp = Enhancement("Front",33,34, Medium)
 SideDamageUp = Enhancement("Side",34,35, Medium)
 BackDamageUp = Enhancement("Back",35,36, Medium)
-SurpriseAttackUp = Enhancement("Suprise",36,37, Giga, DisTag="Suprise!!!")
+SurpriseAttackUp = Enhancement("Surprise",36,37, Giga, DisTag="Surprise!")
 ToppleDamageUp = Enhancement("Topple",37,38, Large, DisTag="Topple Damage ↑")
 LaunchDamageUp = Enhancement("Launch",38,39, Large, DisTag="Launch Damage ↑")
 SmashDamageUp = Enhancement("Smash",39,40, Mega, DisTag="Smash Damage ↑")
@@ -226,7 +214,7 @@ OnBlockNullDamage = Enhancement("Guardian",59, 59, Small, DisTag="Null Damage")
 HPLowEvasion = Enhancement("Sway",62, 60, Small, Medium, DisTag="Sway")
 EvasionWhileMoving = Enhancement("Agile",63, 61, Medium)
 HPLowBlockRate = Enhancement("Block",64, 62, Small, Medium)
-ReduceDamageFromNearbyEnemies = Enhancement("Aura",65, 63, Small)
+ReduceDamageFromNearbyEnemies = Enhancement("Guardian",65, 63, Mini)
 ReduceDamageOnLowHP = Enhancement("Everlasting",66,64, Small, Small)
 HighHPDamageUp = Enhancement("Confidence",67,65, Medium,Large, ReversePar1=True )
 ReduceSpikeDamage =Enhancement("Spike Breaker",68,66, Medium)
@@ -243,7 +231,7 @@ SpecialAndArtsAggroDown = Enhancement("Aggro ↓",79, 77, Medium)
 SpecialAggroDown = Enhancement("Aggro ↓",79, 79, Medium) # For Specials only 
 SpecialAndArtsAggroUp = Enhancement("Aggro ↑",80, 81, Medium)
 AggroReductionUp = Enhancement("Friendly",81, 85, Small)
-AggroEverySecond = Enhancement("Provocative",82, 86, Small, Description="Increases aggro every second by [ML:Enhance kind=Param1 ].")
+AggroEverySecond = Enhancement("Provocative",82, 86, Small, Description="Increases aggro every second by [ML:Enhance kind=Param1 ].") # didnt work??
 StartBattleAggro = Enhancement("Irksome",83, 92, Giga) # distag didnt work
 RevivalHP = Enhancement("Revival",84, 96, Large)
 RevivalHPTeammate = Enhancement("Revival",85, 97, Large)
@@ -281,7 +269,7 @@ BladeArtDuration = Enhancement("Artsy",126, 136, Medium)
 AffinityMaxBarrier = Enhancement("Barrier",127, 137, Small)
 AffinityMaxAttack = Enhancement("Battlecry",128, 138, Medium)
 AffinityMaxEvade = Enhancement("Dodgy",129, 139, Small)
-HunterChem = Enhancement("Hunter",130, 140, Mega, DisTag="Hunters Chemistry")
+HunterChem = Enhancement("Hunter",130, 140, Mega, DisTag="Hunter's Chemistry")
 ShoulderToShoulder = Enhancement("Prey",131, 141, Mega, DisTag="Shoulder-to-Shoulder")
 BladeCooldownReduc = Enhancement("Swapper",132, 142, Medium)
 PartyHealBladeSwitch = Enhancement("Parting Gift",133, 143, Small, DisTag="Switch Heal")
@@ -294,7 +282,7 @@ SmallHpPotCreate = Enhancement("Bottle",136, 146, Small)
 PotionEffectUp = Enhancement("Potioneer",137, 147, Medium)
 PurifyingFlames = Enhancement("Purifying",138, 148, Small, Mini)
 ForeSight = Enhancement("Foresight",139, 149, Small)
-DreamOfTheFuture = Enhancement("Dream",140, 150)
+DreamOfTheFuture = Enhancement("Dream",140, 150, addToList=False)
 ReduceEnemyBladeComboDamage = Enhancement("Blade ↓",142, 151, Medium, DisTag="Resist Combo")
 DamagePerEvadeUp = Enhancement("Counterattack",143, 152, Mini)
 ArtsRechargeMaxAffinity = Enhancement("Arts Charging",144, 154, Small)
@@ -305,7 +293,7 @@ Reflection = Enhancement("Reflection",148, 158, Small)
 MaxAffinityEvadeXAttacks = Enhancement("Harmony",149, 159, Mini, DisTag="Harmony Evasion")
 ToppleANDLaunchDamageUp = Enhancement("Top Launch",150, 160, Large)
 InstaKill = Enhancement("Instakill",151,161, Baby)
-PartyDamageReducMaxAffinity = Enhancement("Ally Guard",152, 162, Mini)
+PartyDamageReducMaxAffinity = Enhancement("Guardian",152, 162, Mini)
 KaiserZone = Enhancement("Kaiser",153, 163, Medium)
 TastySnack = Enhancement("Snack",154, 164, Medium)
 HealingUpMaxAffinity =  Enhancement("Healing",155, 165, Small)
@@ -346,8 +334,8 @@ CancelWindowUp = Enhancement("Canceller",191, 201, Medium)
 RestoreHitDamageToParty = Enhancement("Vamp",192, 202, Baby)
 AddBufferTimeSwitchingToComboBlade = Enhancement("Buffer",193, 203, Medium)
 PartyDamageMaxAffinity = Enhancement("Partygoer",194, 204, Mini)
-AegisDriver = Enhancement("Dream",195, 205)
-AegisParty = Enhancement("Dream",196, 206)
+AegisDriver = Enhancement("Dream",195, 205, addToList=False)
+AegisParty = Enhancement("Dream",196, 206, addToList=False)
 ReduceFireDamage = Enhancement("Fire ↓",58, 207, [1], Medium)
 ReduceWaterDamage = Enhancement("Water ↓",58, 208, [2], Medium)
 ReduceWindDamage = Enhancement("Wind ↓",58, 209, [3], Medium)
@@ -356,8 +344,8 @@ ReduceElectricDamage = Enhancement("Electric ↓",58, 211, [5], Medium)
 ReduceIceDamage = Enhancement("Ice ↓",58, 212, [6], Medium)
 ReduceLightDamage = Enhancement("Light ↓",58, 213, [7], Medium)
 ReduceDarkDamage = Enhancement("Dark ↓",58, 214, [8], Medium)
-ChainAttackPower = Enhancement("Superchain",106, 215, Baby, Description="Increases attack power ratio\nat the start of a Chain Attack by [ML:Enhance kind=Param1 ]00%.")
-LowHPHeal = Enhancement("Regenerate",181, 230, Baby)
+ChainAttackPower = Enhancement("Superchain",106, 215, Baby, Description="Increases attack power ratio\nat the start of a Chain Attack by [ML:Enhance kind=Param1 ].")
+LowHPRegen = Enhancement("Regenerate",181, 230, Mini)
 ArtUseHeal = Enhancement("Art Heal",86, 231, Baby)
 AutoDriverArtCancelHeal = Enhancement("Heal",91, 233, Baby)
 TakeDamageHeal = Enhancement("Mending",90, 235, Mini, DisTag="Mend")
@@ -406,7 +394,7 @@ TauntRes = Enhancement("Calm",217, 280, Medium)
 DriverShackRes = Enhancement("Free",218, 281, Medium)
 BladeShackRes = Enhancement("Free",219, 282, Medium)
 BurstDestroyAnotherOrb = Enhancement("Splash",226, 283)
-HpPotChanceFor2 = Enhancement("Potted",227, 284, Medium)
+HpPotChanceFor2 = Enhancement("Potted",227, 284, Medium, addToList=False)
 DestroyOrbOpposingElement = Enhancement("Element X",228, 285)
 TargetNearbyOrbsChainAttack = Enhancement("Splash",229, 286, Medium)
 TargetDamagedNonOpposingElement = Enhancement("Splash",230, 287)
@@ -425,9 +413,9 @@ PartyCritMaxAffinity = Enhancement("Critical",244, 300, Small)
 DamageUpPerCrit = Enhancement("Exploit",245, 301, Baby, Baby)
 RechargeOnEvade = Enhancement("Flicker",248, 304, Baby)
 PartyLaunchDamageUp = Enhancement("Sky High",249, 306, Mega)
-PotionPickupDamageUp = Enhancement("Drunkard",250, 307, Small)
+PotionPickupDamageUp = Enhancement("Drunkard",250, 307, Small, DisTag="Damage ↑")
 ItemCollectionRange = Enhancement("Collector",251, 308, Mega)
-CombatSpeed = Enhancement("Blitz",211, 309, Mega) # Distag Repeats each step u take
+CombatMoveSpeed = Enhancement("Blitz",211, 309, Large) # Distag Repeats each step u take
 NullHealRes = Enhancement("Healers",252, 310, Medium)
 DoomRes = Enhancement("Optimist",253, 311, Medium)
 PartyDrainRes = Enhancement("Party",254, 312, Medium)

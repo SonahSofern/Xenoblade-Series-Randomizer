@@ -115,6 +115,17 @@ def ShortenedTutorial(OptionsRunDict):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    # JSONParser.ChangeJSONFile(["common/MNU_Tutorial.json"],["param1"], Helper.InclRange(0, 300), [0] )
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Tutorial.json", ["script_file"], "aoc_challenge_tutorial")
+        
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Tutorial.json", ["script_file"], "aoc_challenge_tutorial") # Shortens battle tutorials
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Tutorial.json", ["start_id"], 0)
+    
+    
+    with open("./_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # removing more tutorials
+        data = json.load(file)
+        removables = ["tut_sys26", "tut_sys22", "tut_sys14", "tut_sys02", "tut_btl23"]
+        for row in data["rows"]:
+            if row["scriptName"] in removables:
+                row["scriptName"] = ""
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)

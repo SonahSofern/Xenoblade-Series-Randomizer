@@ -18,7 +18,7 @@ def InsertHelper(insertIndex,  lowNum, highNum, mainString = str, pathTo = str):
     #print(listOfFiles)
     return listOfFiles
 
-def FindValues(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue): # used to find a list of values from a file with certain characteristsics that i want to remove
+def FindValues(filePath: str, keyWordList: list, keywordBadValueList: list, returnedKeyWordValue: str): # used to find a list of values from a file with certain characteristsics that i want to remove
     bad_values_found = []
     with open(filePath, 'r+', encoding='utf-8') as file:
         data = json.load(file)
@@ -68,7 +68,6 @@ def OptionCarveouts(ValidValuesList, ToggleableIndexValues, stateOfButton = None
         ValidValuesList[:] = [x for x in ValidValuesList if x not in ToggleableIndexValues]
     # print(ValidValuesList, end='\n\n')
 
-
 def SubColumnAdjust(filename, colName, adjustedSubColName, desiredValue): #when your column you want to adjust is nested inside a dict
     with open(filename, 'r+', encoding='utf-8') as file:
         data = json.load(file)
@@ -78,7 +77,7 @@ def SubColumnAdjust(filename, colName, adjustedSubColName, desiredValue): #when 
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def ColumnAdjust(filename, clearedCols, desiredValue):
+def ColumnAdjust(filename: str, clearedCols: list, desiredValue):
     with open(filename, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for k in range(0, len(clearedCols)):
@@ -90,3 +89,36 @@ def ColumnAdjust(filename, clearedCols, desiredValue):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def MathmaticalColumnAdjust(filenames: list, ColumnsChange: list, equation: list): # use an equation to adjust whole columns
+    for filename in filenames:
+        with open(filename, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for k in range(0, len(ColumnsChange)):
+                for row in data["rows"]:
+                    for key, value in row.items():
+                        if key != ColumnsChange[k]:
+                            continue
+                        if len(equation) != 1:
+                            row[ColumnsChange[k]] = eval(equation[k])
+                        else: # if you only want to use 1 equation to change every column, this allows it
+                            row[ColumnsChange[k]] = eval(equation[0])
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
+def ExtendList(inputlist: list, extendtolength: int, extendusingvalues: str): # extends a list to a given length, using values based on an equation
+    while len(inputlist) < extendtolength:
+        inputlist.append(eval(extendusingvalues))
+    outputlist = inputlist.copy()
+    return outputlist
+
+def GetMaxValue(filename: str, columnname: str): # Returns the maximum Value for a given column in a given file
+    with open(filename, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        MaxRow = max(data["rows"], key = lambda x:x[columnname])
+        MaxID = MaxRow[columnname]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    return MaxID

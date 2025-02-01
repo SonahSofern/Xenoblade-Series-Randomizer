@@ -1,12 +1,10 @@
 import JSONParser
 import Helper
 
-from JSONParser import ALL
-
 
 def UnlockNGPlusBlades():
     # Make T-elos and Torna blades available in base playthrough
-    JSONParser.ChangeJSONLineWithCallback(["common/BLD_RareList.json"], ALL, ModifyGachaAvailability)
+    JSONParser.ChangeJSONLineWithCallback(["common/BLD_RareList.json"], [], ModifyGachaAvailability, replaceAll=True)
 
     # Adds Mikhail to the Gacha table
     MikhailGachaRow = {

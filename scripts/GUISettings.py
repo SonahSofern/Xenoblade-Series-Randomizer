@@ -179,7 +179,7 @@ def LoadTheme(defaultFont, themeName):
                     "indicatorcolor": currentTheme["darkColor"],
                     "indicatorbackground": currentTheme["darkColor"],
                     "font": defaultFont,
-                    "indicatorrelief": "flat",
+                    "indicatorrelief": "ridge",
                     "focuscolor":"",
                     "indicatormargin": (0,0,10,0),
                 },
@@ -266,6 +266,12 @@ def LoadTheme(defaultFont, themeName):
                     "foreground": [("disabled", currentTheme["midGray"])],
                     "arrowcolor": [("disabled", currentTheme["midGray"])],
                 }
+            },
+                     "TSeparator": {
+                "configure": {
+                    "background": currentTheme["midColor"],
+
+                },
             }
         })
     except:

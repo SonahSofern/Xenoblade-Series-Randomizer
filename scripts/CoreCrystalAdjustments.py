@@ -3,7 +3,8 @@ import json
 import Helper as Helper
 import random
 import JSONParser
-
+import IDs
+import RaceMode
 
 FLDSkillMaxLv = [3, 5, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 3, 5, 3, 3, 3, 5, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 5, 3, 3, 5, 3, 5, 3, 3, 5, 5, 5, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 5, 5]
 # Helper.FindValues("./_internal/JsonOutputs/common/FLD_FieldSkillList.json", ["$id"], Helper.inclRange(2, 7) + Helper.inclRange(9,74), "MaxLevel")
@@ -121,10 +122,41 @@ def FixingGivenCoreCrystalTutorial():
 def LandofChallengeRelease(): #frees shulk, elma, fiora from land of challenge restriction
     Helper.SubColumnAdjust("./_internal/JsonOutputs/common/CHR_Bl.json", "Flag", "OnlyChBtl", 0)
 
-def CoreCrystalChanges():
+def RegularLootDistribution(): #Adds core crystals to the loot pool if race mode isn't on (Chests Only)
+    TotalTBox = 667
+    ItemPool = []
+    ChestPercent = IDs.CurrentSliderOdds
+    AdjustedValidCrystalList = []
+    for i in range(0, TotalTBox):
+        if AdjustedValidCrystalList == []: #this makes sure all crystals get rotated in evenly, preventing you getting locked out of one crystal permanently if it doesn't get shuffled in.
+            AdjustedValidCrystalList.extend(ValidCrystalListIDs)
+        if ChestPercent > random.randint(0,100):
+            ChosenCrystal = random.choice(AdjustedValidCrystalList)
+            ItemPool.append(ChosenCrystal)
+            AdjustedValidCrystalList.remove(ChosenCrystal)
+        else:
+            ItemPool.append(0)
+    k = 0
+    for TBoxFile in IDs.ValidTboxMapNames:
+        with open(TBoxFile, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] not in IDs.InvalidTreasureBoxIDs:
+                    row["itm8ID"] = ItemPool[k]
+                    if ItemPool[k] != 0:
+                        row["itm8Num"] = 1
+                        row["itm8Per"] = 0
+                    k = k + 1
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
+def CoreCrystalChanges(OptionsRunDict):
     RareBladeProbabilityEqualizer()
     AdjustingCrystalList()
     LandofChallengeRelease()
     FixingGivenCoreCrystalTutorial()
     #ChangeRankCondition()
-
+    if not OptionsRunDict["Race Mode"]["optionTypeVal"].get():
+        RegularLootDistribution()
+        RaceMode.FindtheBladeNames(OptionsRunDict)

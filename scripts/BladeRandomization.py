@@ -1,7 +1,5 @@
 import copy, random, JSONParser, Helper
 
-from JSONParser import ALL
-
 # TODO:
 #  - Replace the text "Make Nia a Driver" with "Turn {Blade}} into Nia"
 #  - Replace the text "Make Nia a Blade" with "Turn Nia into {Blade}"
@@ -53,8 +51,8 @@ def BladeRandomization(OptionsRunDict):
 
 
 def InitialSetup():
-    JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], ALL, PopulateBlades)
-    JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], ALL, MakeAllArtsAccessible)
+    JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], [], PopulateBlades, replaceAll=True)
+    JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], [], MakeAllArtsAccessible, replaceAll=True)
 
 
 def PopulateBlades(blade):
@@ -101,12 +99,12 @@ def RandomizeBlades(OptionsRunDict):
         # If Dromarch isn't randomized, he's the healer by default
         if not OptionsRunDict["Blades"]["subOptionObjects"]["Randomize Dromarch"]["subOptionTypeVal"].get():
             GuaranteedHealer = 1004
-            print("The guaranteed healer is Dromarch (by default).")
+            #print("The guaranteed healer is Dromarch (by default).")
         else:
             potential_healers = PossibleGuaranteedHealerBlades.copy()
             random.shuffle(potential_healers)
             GuaranteedHealer = potential_healers[0]
-            print("The guaranteed healer is " + BladeNames[GuaranteedHealer])
+            #print("The guaranteed healer is " + BladeNames[GuaranteedHealer])
 
     # Note: It is important that BladesLeftToRandomize starts with the default blades,
     # as otherwise the below loop could be stuck indefinitely if the last replacement is incompatible
@@ -131,9 +129,9 @@ def RandomizeBlades(OptionsRunDict):
         if canBeReplaced(next_blade, next_replacement, OptionsRunDict):
             Original2Replacement[next_blade] = next_replacement
             Replacement2Original[next_replacement] = next_blade
-            print('========================================')
-            print(BladeNames[next_blade] + ' was replaced with ' + BladeNames[next_replacement])
-            print(str(next_blade) + ' was replaced with ' + str(next_replacement))
+            #print('========================================')
+            #print(BladeNames[next_blade] + ' was replaced with ' + BladeNames[next_replacement])
+            #print(str(next_blade) + ' was replaced with ' + str(next_replacement))
             del blades_left_to_randomize[0]
             del randomized_order[0]
         else:
@@ -141,7 +139,7 @@ def RandomizeBlades(OptionsRunDict):
             random.shuffle(randomized_order)
 
     # Apply Randomizations
-    JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], ALL, ApplyBladeRandomization)
+    JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], [], ApplyBladeRandomization, replaceAll=True)
 
 
 def canBeReplaced(original, replacement, OptionsRunDict):
@@ -182,8 +180,8 @@ def RandomizePoppiForms(OptionsRunDict):
 
 
 def BugFixes_PostRandomization():
-    JSONParser.ChangeJSONLineWithCallback(["common/CHR_EnArrange.json"], ALL, FixRandomizedEnemyBladeCrashes)
-    JSONParser.ChangeJSONLineWithCallback(["common/EVT_cutscene_wp.json"], ALL, FixCutsceneCrashForNotHavingTwoWeapons)
+    JSONParser.ChangeJSONLineWithCallback(["common/CHR_EnArrange.json"], [], FixRandomizedEnemyBladeCrashes, replaceAll=True)
+    JSONParser.ChangeJSONLineWithCallback(["common/EVT_cutscene_wp.json"], [], FixCutsceneCrashForNotHavingTwoWeapons, replaceAll=True)
     FixPandoriaSpriteAfterElpys()
 
 
