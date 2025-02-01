@@ -137,13 +137,17 @@ def GenHeader(headerName, parentTab, backgroundColor):
 
 stateSetList = []    
 
-def StateUpdate(button, textList):
+def StateUpdate(button, textList, dropdownObjects):
     if button.get():
         for item in textList:
-            item.state(["!disabled"])       
+            item.state(["!disabled"])
+        for item in dropdownObjects:
+            item.grid()     
     else:
         for item in textList:
             item.state(["disabled"])
+        for item in dropdownObjects:
+            item.grid_remove()
             
 def InteractableStateSet():
     for item in stateSetList:
@@ -158,7 +162,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     var = BooleanVar()
     spinDesc = ttk.Label()
     spinBoxObj = ttk.Spinbox()
-    StateSet = lambda: StateUpdate(checkButtonVar, [optionDesc, spinDesc, spinBoxObj] + checkBoxList)
+    StateSet = lambda: StateUpdate(checkButtonVar, [optionDesc, spinDesc, spinBoxObj] + checkBoxList, checkBoxList)
 
     # Parent Frame
     optionPanel = ttk.Frame(parentTab)
@@ -171,7 +175,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     checkButtonVar = var
     
     # Description Label
-    optionDesc = ttk.Label(optionPanel, text=description, anchor="w", width=60, wraplength=650)
+    optionDesc = ttk.Label(optionPanel, text=description, anchor="w", width=60, wraplength=400)
     optionDesc.grid(row=rowIncrement, column=1, sticky="w", padx=0)
     
     # % Boxes
@@ -254,7 +258,7 @@ def Options():
 
 
     # Misc
-    GenStandardOption("Music", TabMisc, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle(OptionDictionary)], ["Seperate Battle and \nEnvironment Themes", []]) # need to change title screen music
+    GenStandardOption("Music", TabMisc, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle(OptionDictionary)], ["Mix Battle and \nEnvironment Themes", []]) # need to change title screen music
     GenStandardOption("Trust Lines", TabMisc, "Randomizes blade trust lines in battle (colors, power, etc.)", [lambda: TrustBeam.BeamRandomizer()])
     GenStandardOption("Custom Core Crystals", TabMisc, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests.", [lambda: CoreCrystalAdjustments.CoreCrystalChanges(OptionDictionary)], optionType=Spinbox) # The slider shouldnt do anything tbh the other things have sliders like enemy drop rando, chest rando etc. All this should do is add custom crystals to the crystal file. 
 

@@ -23,13 +23,13 @@ https://gitlab.com/damysteryman/XC2SaveNETThingy/-/tags/r6.1
 
 ### Requirements:
 [Python v3.11.0](https://www.python.org/downloads/release/python-3110/)\
-Legal Dump of Xenoblade 2 Switch v2.1.0 + All DLC\
+Legal Dump of Xenoblade 2 Switch v2.1.0 + Torna\
 Homebrewed Switch or Emulator\
 [NXDumpTool](https://github.com/DarkMatterCore/nxdumptool)\
 [Xenoblade 2 Set](https://gbatemp.net/threads/xenoblade-chronicles-2-graphics-settings.529436/)
 
 ### Console Also Requires:
-microSD card (A 32GB minimum exFAT-formatted microSD card is recommended; FAT32 seems to mess stuff up.)\
+microSD card (A 32GB minimum exFAT-formatted microSD card is recommended; FAT32 will split up your files and youll have to take an extra step to combine them.)\
 Modded Nintendo Switch with Atmosphere
 
 
