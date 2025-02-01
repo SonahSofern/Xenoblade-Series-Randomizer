@@ -1,5 +1,6 @@
 import json, random, os, IDs
 
+ALL = object # Flag for saying "All IDs"
 
 def ChangeJSONFile(Filename, keyWords, rangeofValuesToReplace = [], rangeValidReplacements = [], InvalidTargetIDs = [], SliderOdds = 100, IgnoreID_AND_Key = [["",""]]): # make this a function to reuse, check the settings ot see if we even do this
 
@@ -50,18 +51,18 @@ def ChangeJSONLine(filenames, ids, keys, replacement):
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
-def ChangeJSONFileWithCallback(filenames, callback):
-    for name in filenames:
-        filePath = "./_internal/JsonOutputs/" + name
-        if not os.path.exists(filePath):
-          continue
-        with open(filePath, 'r+', encoding='utf-8') as file:
-            data = json.load(file)
-            for item in data['rows']:
-                callback(item)
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
+#def ChangeJSONFileWithCallback(filenames, callback):
+#    for name in filenames:
+#        filePath = "./_internal/JsonOutputs/" + name
+#        if not os.path.exists(filePath):
+#          continue
+#        with open(filePath, 'r+', encoding='utf-8') as file:
+#            data = json.load(file)
+#            for item in data['rows']:
+#                callback(item)
+#            file.seek(0)
+#            file.truncate()
+#            json.dump(data, file, indent=2, ensure_ascii=False)
 
 def ChangeJSONLineWithCallback(filenames, ids, callback):
     for name in filenames:
@@ -71,12 +72,36 @@ def ChangeJSONLineWithCallback(filenames, ids, callback):
         with open(filePath, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for item in data['rows']:
-                if item["$id"] in ids:
+                if ids is ALL or item["$id"] in ids:
                     callback(item)
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-            
+
+def QuerySingleRow(filename, searchField, searchVal):
+        filePath = "./_internal/JsonOutputs/" + filename
+        if not os.path.exists(filePath):
+            return
+        with open(filePath, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for item in data['rows']:
+                if item[searchField] == searchVal:
+                    return item
+        return None
+
+def DebugTable(filenames):
+    for name in filenames:
+        filePath = "./_internal/JsonOutputs/" + name
+        if not os.path.exists(filePath):
+            continue
+        with open(filePath, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for item in data['rows']:
+                print(item)
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
 def ExtendJSONFile(filePath, additionsList = []):
     with open("./_internal/JsonOutputs/" + filePath, 'r+', encoding='utf-8') as file:
         data = json.load(file)
