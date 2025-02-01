@@ -38,7 +38,6 @@ PoppiForms = [1005, 1006, 1007]
 BladesAlwaysRandomized = [1001, 1002, 1009, 1010, 1011, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1050, 1104, 1105, 1106, 1107, 1108, 1109, 1111]
 NewGamePlusBlades = [1043, 1044, 1045, 1046, 1047, 1048, 1049] # Currently cannot be randomized, but I would like to figure this out eventually. Will be an option when that works though, because they would be unbalanced if you get them early on
 
-
 include_printouts = False  # Debugging
 
 def BladeRandomization(OptionsRunDict):
@@ -167,13 +166,22 @@ def canBeReplaced(original, replacement, OptionsRunDict):
 
 
 def ApplyBladeRandomization(blade):
+    # Certain field skills are not randomized for progression reasons
+    excluded_field_skills = dict()
+    excluded_field_skills[1001] = ['FSkill1', 'FSkill2', 'FSkill3']  # Pyra: Fire Mastery, Focus, Cooking
+    excluded_field_skills[1005] = ['FSkill3']  # Poppi Alpha: Superstrength
+    excluded_field_skills[1008] = ['FSkill2']  # Roc: Miasma Dispersal
+
     blade_id = blade['$id']
     if blade_id in Original2Replacement:
         replace_with_id = Original2Replacement[blade_id]
 
-        # Copy all fields (except ID and ReleaseLock) from the replacement blade to the original blade
+        # Copy all fields (except ID, ReleaseLock, and the excluded field skills)
+        # from the replacement blade to the original blade
         for key, value in blade.items():
             if key in ['$id', 'ReleaseLock']:
+                continue
+            if blade_id in excluded_field_skills and key in excluded_field_skills[blade_id]:
                 continue
             blade[key] = copy.deepcopy(OriginalBlades[replace_with_id][key])
 
