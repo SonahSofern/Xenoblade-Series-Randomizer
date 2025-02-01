@@ -1,1 +1,0 @@
-# Adjust the min/max and default value of sliders

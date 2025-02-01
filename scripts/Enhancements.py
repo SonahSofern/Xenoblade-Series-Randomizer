@@ -101,9 +101,9 @@ class Enhancement:
 def AddCustomEnhancements():
     global EnhanceID
     JSONParser.ChangeJSONFile(["common/BTL_EnhanceEff.json"],["Param"], Helper.InclRange(1,1000), [1000], [241, 250, 245,54,143,257,259])
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randint(20,50)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randint(30,70)) # Healing with low HP
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randint(10,60)) # Healing with low HP
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randrange(20,51, 5)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randrange(30,71, 5)) # Healing with low HP
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randrange(10,61,5)) # Healing with low HP
     JSONParser.ExtendJSONFile("common/BTL_Enhance.json", EnhanceEffectsList)
     EnhanceID = 3896
     EnhanceEffectsList.clear()
@@ -188,7 +188,7 @@ PercentDoubleAuto = Enhancement("Doublestrike",32,33, Medium, DisTag="Doublestri
 FrontDamageUp = Enhancement("Front",33,34, Medium)
 SideDamageUp = Enhancement("Side",34,35, Medium)
 BackDamageUp = Enhancement("Back",35,36, Medium)
-SurpriseAttackUp = Enhancement("Suprise",36,37, Giga, DisTag="Suprise!!!")
+SurpriseAttackUp = Enhancement("Surprise",36,37, Giga, DisTag="Surprise!")
 ToppleDamageUp = Enhancement("Topple",37,38, Large, DisTag="Topple Damage ↑")
 LaunchDamageUp = Enhancement("Launch",38,39, Large, DisTag="Launch Damage ↑")
 SmashDamageUp = Enhancement("Smash",39,40, Mega, DisTag="Smash Damage ↑")
@@ -214,7 +214,7 @@ OnBlockNullDamage = Enhancement("Guardian",59, 59, Small, DisTag="Null Damage")
 HPLowEvasion = Enhancement("Sway",62, 60, Small, Medium, DisTag="Sway")
 EvasionWhileMoving = Enhancement("Agile",63, 61, Medium)
 HPLowBlockRate = Enhancement("Block",64, 62, Small, Medium)
-ReduceDamageFromNearbyEnemies = Enhancement("Aura",65, 63, Small)
+ReduceDamageFromNearbyEnemies = Enhancement("Guardian",65, 63, Mini)
 ReduceDamageOnLowHP = Enhancement("Everlasting",66,64, Small, Small)
 HighHPDamageUp = Enhancement("Confidence",67,65, Medium,Large, ReversePar1=True )
 ReduceSpikeDamage =Enhancement("Spike Breaker",68,66, Medium)
@@ -293,7 +293,7 @@ Reflection = Enhancement("Reflection",148, 158, Small)
 MaxAffinityEvadeXAttacks = Enhancement("Harmony",149, 159, Mini, DisTag="Harmony Evasion")
 ToppleANDLaunchDamageUp = Enhancement("Top Launch",150, 160, Large)
 InstaKill = Enhancement("Instakill",151,161, Baby)
-PartyDamageReducMaxAffinity = Enhancement("Ally Guard",152, 162, Mini)
+PartyDamageReducMaxAffinity = Enhancement("Guardian",152, 162, Mini)
 KaiserZone = Enhancement("Kaiser",153, 163, Medium)
 TastySnack = Enhancement("Snack",154, 164, Medium)
 HealingUpMaxAffinity =  Enhancement("Healing",155, 165, Small)
@@ -345,7 +345,7 @@ ReduceIceDamage = Enhancement("Ice ↓",58, 212, [6], Medium)
 ReduceLightDamage = Enhancement("Light ↓",58, 213, [7], Medium)
 ReduceDarkDamage = Enhancement("Dark ↓",58, 214, [8], Medium)
 ChainAttackPower = Enhancement("Superchain",106, 215, Baby, Description="Increases attack power ratio\nat the start of a Chain Attack by [ML:Enhance kind=Param1 ].")
-LowHPRegen = Enhancement("Regenerate",181, 230, Baby)
+LowHPRegen = Enhancement("Regenerate",181, 230, Mini)
 ArtUseHeal = Enhancement("Art Heal",86, 231, Baby)
 AutoDriverArtCancelHeal = Enhancement("Heal",91, 233, Baby)
 TakeDamageHeal = Enhancement("Mending",90, 235, Mini, DisTag="Mend")
@@ -413,9 +413,9 @@ PartyCritMaxAffinity = Enhancement("Critical",244, 300, Small)
 DamageUpPerCrit = Enhancement("Exploit",245, 301, Baby, Baby)
 RechargeOnEvade = Enhancement("Flicker",248, 304, Baby)
 PartyLaunchDamageUp = Enhancement("Sky High",249, 306, Mega)
-PotionPickupDamageUp = Enhancement("Drunkard",250, 307, Small)
+PotionPickupDamageUp = Enhancement("Drunkard",250, 307, Small, DisTag="Damage ↑")
 ItemCollectionRange = Enhancement("Collector",251, 308, Mega)
-CombatSpeed = Enhancement("Blitz",211, 309, Mega) # Distag Repeats each step u take
+CombatMoveSpeed = Enhancement("Blitz",211, 309, Large) # Distag Repeats each step u take
 NullHealRes = Enhancement("Healers",252, 310, Medium)
 DoomRes = Enhancement("Optimist",253, 311, Medium)
 PartyDrainRes = Enhancement("Party",254, 312, Medium)
