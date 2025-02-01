@@ -106,7 +106,7 @@ def ChangeArts(artData, artNameData, optionsDict):
         
 def FindValidChanges(art, isReactions, isDebuffs, isBuffs, isEnhancements, isAOE):
     ValidChanges = []
-    if isDebuffs and art.get("ArtsDebuff") != None and art["ArtsDeBuff"] in [0] and art["Target"] == 0: # Only change arts with no debuff and target enemies
+    if isDebuffs and art.get("ArtsDeBuff") != None and art["ArtsDeBuff"] in [0] and art["Target"] == 0: # Only change arts with no debuff and target enemies
         ValidChanges.append(lambda: Debuff(art))           # Debuff
     if isBuffs and art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff (Current AOE is placed only on these things so gotta fix that)
         ValidChanges.append(lambda: Buff(art))
@@ -132,7 +132,7 @@ class EnemyArtEnhancements(Enhancement):
         self.Param2 = para2
         ValidSkills.append(self)
     
-backatk = EnemyArtEnhancements("Back↑", BackDamageUp, [40,60,80,100])
+# backatk = EnemyArtEnhancements("Back↑", BackDamageUp, [40,60,80,100])
 frontatk = EnemyArtEnhancements("Front↑", FrontDamageUp, [20,40,60,80])
 # pierce = EnemyArtEnhancements("Pierce", GuardAnnulAttack, [100,100,100,100]) is already a flag so idk
 # lowhpDamage = EnemyArtEnhancements("HP↓Dmg↑", DamageUpWhenHpDown, [10,20,30,40])
@@ -156,7 +156,7 @@ def AOE(art):
     art["Radius"] =  RandomRadius # Not sure what makes a good radius
     return "AOE"
 
-def Hits(art):
+def Hits(art): # Theres also LoopNum which might be interesting
     pass
 
 def Reaction(art):
@@ -183,7 +183,7 @@ def Reaction(art):
         ValidReactions.update(SelfTargetReactions) # Add self targeting
     elif art["Target"] == 0:
         ValidReactions.update(EnemyTargetReactions) # Add enemy targeting
-    if art["CircleID"] == 0:
+    if art["CircleID"] == 0 and art["Target"] == 0:
         ValidReactions.update(Flames) # Add flames 
     
         
@@ -233,7 +233,7 @@ def Debuff(art):
         "Def↓": 23,
         "EDef↓": 24,
         "Res↓": 25,
-        "Rage": 35, # We just resist rage strike?? Test on BOC d iffculty
+        # "Rage": 35, # We just resist rage strike?? Test on BOC d iffculty
         # "Fire": 33 Already have fire this might just be a different buff even though its only on brighids confining flames
     }
     SingleTarget = {

@@ -11,7 +11,7 @@ from Cosmetics import *
 from UI_Colors import *
 from tkinter.font import Font
 
-Version = "1.2.0"
+Version = "1.2.1"
 CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
 OptionDictionary = {}
@@ -29,7 +29,7 @@ else:
     
 root = Tk()
 defFontVar = tk.StringVar(value="Arial")
-defFontSizeVar = tk.IntVar(value=11)
+defFontSizeVar = tk.IntVar(value=13)
 defGUIThemeVar = tk.StringVar(value="Dark Mode")
 loadData([defFontVar, defFontSizeVar, defGUIThemeVar], "GUISavedOptions.txt")
 
@@ -124,7 +124,7 @@ MainWindow.add(TabMiscOuter, text ='Misc.')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 def ShowTitleScreenText():
-    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], [f"Randomizer v{Version}"]) # Change Title Version to Randomizer v0.1.0
+    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], [f"Randomizer v{Version}"]) # Change Title Version to Randomizer vX.x.x
 
 def GenHeader(headerName, parentTab, backgroundColor):
     global rowIncrement
@@ -169,7 +169,6 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
     
     # Major Option Checkbox
-
     checkButtonObj = ttk.Checkbutton(optionPanel, variable= var, text=optionName, width=40, style="midColor.TCheckbutton",command= StateSet)
     checkButtonObj.grid(row=rowIncrement, column=0, sticky="w")
     checkButtonVar = var
@@ -184,7 +183,6 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
         spinDesc = ttk.Label(optionPanel, text="% randomized", anchor="w")
         spinDesc.grid(row=rowIncrement, column=3, sticky="w", padx=0)
-
 
     # Create Main Option Dictionary Entry
     OptionDictionary[optionName]={

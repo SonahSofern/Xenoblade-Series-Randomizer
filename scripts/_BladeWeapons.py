@@ -127,3 +127,5 @@ def FixArtLevels():
     
 def FixBladeWepModels():
     JSONParser.ChangeJSONLine(["common/CHR_Bl.json"],[1], ["OnlyWpn"], [0])
+
+# New plan is to keep the weapon the same for the blades, but change the arts wpntype and the model for the weapon to match, so it will lkook and act like the weapon but the blade wont care that its not
