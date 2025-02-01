@@ -49,7 +49,7 @@ def RaceModeChanging(OptionsRunDict):
 
     # The Save File is set up in a way that it is level 5 already to start with.
     # XP needed to reach a given level, formatted in [Given Level, Total XP Needed]
-    XPNeededToReachLv = [[5, 39], [15, 910], [20, 2136], [26, 4452], [29, 5982], [34, 9132], [35, 9858], [38, 12252], [42, 16008], [46, 20514], [51, 27464], [59, 42812], [68, 68204], [70, 78992]]
+    XPNeededToReachLv = [[5, 390], [15, 9100], [20, 21360], [26, 44520], [29, 59820], [34, 91320], [35, 98580], [38, 122520], [42, 160080], [46, 205140], [51, 274640], [59, 428120], [68, 682040], [70, 789920]]
     global ChosenIndices
     ChosenIndices = []
 
@@ -66,7 +66,7 @@ def RaceModeChanging(OptionsRunDict):
     for i in range(0, len(ChosenIndices)): # Defines the EXP difference we need to give to the first landmark in a race-mode location    
         for j in range(0, len(XPNeededToReachLv)):
             if i == 0:
-                ExpBefore[i] = 35
+                ExpBefore[i] = 390
                 if LevelAtStartofArea[ChosenIndices[i]] == XPNeededToReachLv[j][0]:    
                     ExpAfter[i] = XPNeededToReachLv[j][1]
                     break
@@ -76,14 +76,12 @@ def RaceModeChanging(OptionsRunDict):
                 if LevelAtStartofArea[ChosenIndices[i]] == XPNeededToReachLv[j][0]:
                     ExpAfter[i] = XPNeededToReachLv[j][1]
             if i == 4:
-                ExpAfter[i] = 68204
+                ExpAfter[i] = 682040
                 if LevelAtEndofArea[ChosenIndices[i-1]] == XPNeededToReachLv[j][0]:
                     ExpBefore[i] = XPNeededToReachLv[j][1]
                     break
                 
         ExpDiff[i] = ExpAfter[i] - ExpBefore[i]
-        if ExpDiff[i] > 65535:
-            ExpDiff[i] = 65535
 
     MapSpecificIDs = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 2012, 2103]
     FileStart = "./_internal/JsonOutputs/common_gmk/"
