@@ -49,7 +49,7 @@ def RaceModeChanging(OptionsRunDict):
 
     # The Save File is set up in a way that it is level 5 already to start with.
     # XP needed to reach a given level, formatted in [Given Level, Total XP Needed]
-    XPNeededToReachLv = [[5, 385], [15, 9100], [20, 21360], [26, 44520], [29, 59820], [34, 91320], [35, 98580], [38, 122520], [42, 160080], [46, 205140], [51, 274640], [59, 428120], [68, 682040], [70, 789920]]
+    XPNeededToReachLv = [[5, 39], [15, 910], [20, 2136], [26, 4452], [29, 5982], [34, 9132], [35, 9858], [38, 12252], [42, 16008], [46, 20514], [51, 27464], [59, 42812], [68, 68204], [70, 78992]]
     global ChosenIndices
     ChosenIndices = []
 
@@ -66,7 +66,7 @@ def RaceModeChanging(OptionsRunDict):
     for i in range(0, len(ChosenIndices)): # Defines the EXP difference we need to give to the first landmark in a race-mode location    
         for j in range(0, len(XPNeededToReachLv)):
             if i == 0:
-                ExpBefore[i] = 353
+                ExpBefore[i] = 35
                 if LevelAtStartofArea[ChosenIndices[i]] == XPNeededToReachLv[j][0]:    
                     ExpAfter[i] = XPNeededToReachLv[j][1]
                     break
@@ -76,7 +76,7 @@ def RaceModeChanging(OptionsRunDict):
                 if LevelAtStartofArea[ChosenIndices[i]] == XPNeededToReachLv[j][0]:
                     ExpAfter[i] = XPNeededToReachLv[j][1]
             if i == 4:
-                ExpAfter[i] = 682040
+                ExpAfter[i] = 68204
                 if LevelAtEndofArea[ChosenIndices[i-1]] == XPNeededToReachLv[j][0]:
                     ExpBefore[i] = XPNeededToReachLv[j][1]
                     break
@@ -88,6 +88,7 @@ def RaceModeChanging(OptionsRunDict):
     MapSpecificIDs = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 2012, 2103]
     FileStart = "./_internal/JsonOutputs/common_gmk/"
     FileEnd = "_FLD_LandmarkPop.json"
+    global LandmarkFilestoTarget
     LandmarkFilestoTarget = [] 
     LandmarkMapSpecificIDstoTarget = []
     
@@ -102,7 +103,7 @@ def RaceModeChanging(OptionsRunDict):
                     if row["$id"] == LandmarkMapSpecificIDstoTarget[i]:
                         row["getEXP"] = ExpDiff[i]
                         if (i+2) % 2 == 0: 
-                            row["getSP"] = 6000 * ChosenIndices[i]
+                            row["getSP"] = 1500 + 6800 * ChosenIndices[i] #This allows me to award some sp for gormott area 1, which feels barren at the moment.
                 file.seek(0)
                 file.truncate()
                 json.dump(data, file, indent=2, ensure_ascii=False)
@@ -184,8 +185,10 @@ def RaceModeChanging(OptionsRunDict):
     NGPlusBladeCrystalIDs = DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
     PickupRadiusDeedStart()
     DifficultyChanges()
+    XPDownScaling()
     DriverLvandSPFix()
     LandmarkConditions()
+    GimmickAdjustments()
     HideMapAreas(ScenarioFlagLists)
     print(OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get())
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get():
@@ -388,6 +391,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
     AuxCoreEnh = OptionsRunDict["Blade Aux Cores"]["optionTypeVal"].get()
     if DriverAccesEnh: # If we have the wacky enhancements:
         CommonDAcc, RareDAcc, LegDAcc = Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [0], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [1], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [2], "$id")
+        CommonDAcc, RareDAcc, LegDAcc = [x for x in CommonDAcc if x in Accessories], [x for x in RareDAcc if x in Accessories], [x for x in LegDAcc if x in Accessories]
         CommonDAcc, RareDAcc, LegDAcc = [x for x in CommonDAcc if x not in TornaOnlyAccessories], [x for x in RareDAcc if x not in TornaOnlyAccessories], [x for x in LegDAcc if x not in TornaOnlyAccessories]
         random.shuffle(CommonDAcc)
         random.shuffle(RareDAcc)
@@ -1226,3 +1230,12 @@ def ScriptAdjustments(): # For individual script changes
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def XPDownScaling(): # Scales the amount of XP per level and xp gained dramatically, to allow me to level the user up quickly
+    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2", "EnemyExp"], ['max(row[key] // 10,1)'])
+    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/FLD_QuestReward.json"], ["EXP"], ['max(row[key] // 10,1)'])
+    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common_gmk/ma02a_FLD_LandmarkPop.json"] + LandmarkFilestoTarget,["getEXP"], ['max(row[key] // 10,1)'])
+
+def GimmickAdjustments(): # removes requirements for specific gimmicks
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_MapGimmick.json", ["Condition"], 0)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_EffectPop.json", ["Condition", "QuestFlagMin", "QuestFlagMax"], 0)

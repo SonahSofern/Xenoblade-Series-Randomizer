@@ -18,7 +18,7 @@ def InsertHelper(insertIndex,  lowNum, highNum, mainString = str, pathTo = str):
     #print(listOfFiles)
     return listOfFiles
 
-def FindValues(filePath, keyWordList, keywordBadValueList, returnedKeyWordValue): # used to find a list of values from a file with certain characteristsics that i want to remove
+def FindValues(filePath: str, keyWordList: list, keywordBadValueList: list, returnedKeyWordValue: str): # used to find a list of values from a file with certain characteristsics that i want to remove
     bad_values_found = []
     with open(filePath, 'r+', encoding='utf-8') as file:
         data = json.load(file)
@@ -106,3 +106,19 @@ def MathmaticalColumnAdjust(filenames: list, ColumnsChange: list, equation: list
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
+
+def ExtendList(inputlist: list, extendtolength: int, extendusingvalues: str): # extends a list to a given length, using values based on an equation
+    while len(inputlist) < extendtolength:
+        inputlist.append(eval(extendusingvalues))
+    outputlist = inputlist.copy()
+    return outputlist
+
+def GetMaxValue(filename: str, columnname: str): # Returns the maximum Value for a given column in a given file
+    with open(filename, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        MaxRow = max(data["rows"], key = lambda x:x[columnname])
+        MaxID = MaxRow[columnname]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    return MaxID
