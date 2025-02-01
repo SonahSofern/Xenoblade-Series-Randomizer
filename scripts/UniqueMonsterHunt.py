@@ -1,4 +1,4 @@
-import json, random, Helper, IDs
+import json, random, Helper, IDs, EnemyRandoLogic
 
 AllUniqueMonsterDefaultIDs = [611, 612, 705, 706, 707, 708, 709, 710, 711, 712, 713, 715, 736, 738, 808, 809, 810, 811, 812, 814, 815, 816, 817, 819, 890, 891, 892, 893, 894, 895, 896, 898, 899, 926, 929, 953, 954, 955, 957, 958, 1019, 1020, 1023, 1025, 1026, 1101, 1102, 1104, 1106, 1108, 1109, 1111, 1112, 1113, 1114, 1115, 1131, 1132, 1134, 1155, 1156, 1157, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1255, 1256, 1258, 1260, 1261, 1262, 1264, 1265, 1563, 1564, 1566, 1567, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1670, 1774, 1886]
 
@@ -262,6 +262,11 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
                 AllOriginalUMIDs.append(CurrentAreaOriginalUMIDs)
                 AllAreaUMs.append(CurrentAreaUMs)
                 AllAreaMonsters.append(CurrentAreaMonsters)
+    EnemyRandoLogic.FlyingEnemyFix(AllOriginalUMIDs, AllAreaUMs)
+    EnemyRandoLogic.SwimmingEnemyFix(AllOriginalUMIDs, AllAreaUMs)
+    EnemyRandoLogic.FishFix()
+    EnemyRandoLogic.BigEnemyCollisionFix()
+    EnemyRandoLogic.SummonsLevelAdjustment()
     return AllAreaUMs, AllAreaMonsters
     
 def CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder): # adjusts aggro + drops of all enemies
