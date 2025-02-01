@@ -30,7 +30,7 @@ else:
 root = Tk()
 defFontVar = tk.StringVar(value="Arial")
 defFontSizeVar = tk.IntVar(value=11)
-defGUIThemeVar = tk.StringVar(value="Light Mode")
+defGUIThemeVar = tk.StringVar(value="Dark Mode")
 loadData([defFontVar, defFontSizeVar, defGUIThemeVar], "GUISavedOptions.txt")
 
 
@@ -141,12 +141,12 @@ def StateUpdate(button, textList, dropdownObjects):
     if button.get():
         for item in textList:
             item.state(["!disabled"])
-        for item in dropdownObjects:
+        for item in dropdownObjects: # Handles Dropdown
             item.grid()     
     else:
         for item in textList:
             item.state(["disabled"])
-        for item in dropdownObjects:
+        for item in dropdownObjects: # Handles Dropdown
             item.grid_remove()
             
 def InteractableStateSet():
@@ -198,7 +198,7 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     # Create Suboptions Dictionary Entry
     for i in range((len(subOptionName_subCommandList))//2):
         var = BooleanVar()
-        checkBox = ttk.Checkbutton(optionPanel, text=subOptionName_subCommandList[2*i], variable=var, width=35)
+        checkBox = ttk.Checkbutton(optionPanel, text=subOptionName_subCommandList[2*i], variable=var, width=30)
         checkBox.grid(row=rowIncrement+i+1, column=0, sticky="sw")
         checkBoxList.append(checkBox)
         OptionDictionary[optionName]["subOptionObjects"][subOptionName_subCommandList[2*i]] = {
@@ -206,7 +206,11 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
         "subOptionTypeVal": var,
         "subCommandList": subOptionName_subCommandList[2*i+1],
         }
+        
+    # borderLines = ttk.Separator(optionPanel, orient="horizontal")
     rowIncrement += 1
+    # borderLines.grid(row=rowIncrement+len(checkBoxList), column=0, columnspan=6, sticky="ew", pady=1)
+    
     # Variable to help set initial states of interactables
     stateSetList.append(StateSet)
     
@@ -279,7 +283,7 @@ def Options():
     # GenStandardOption("Less UI", TabQOL, "Removes some of the unneccessary on screen UI (Blade Swap and Current Objective)", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[88], ["sheet05", "sheet03"], [""])])
     # GenStandardOption("Screenshot Mode", TabQOL, "Removes most UI for screenshots", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[88], ["sheet05", "sheet03", "sheet04"], ""), lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[86], ["sheet02", "sheet03"], "")])
     GenStandardOption("Blade Weapon Cosmetics", TabQOL, "Keeps all blades default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])])
-    GenStandardOption("Enhancement Display", TabQOL, "Shows when enhancements activate such as Hunter's Chemistry", [lambda: Enhancements.SearchAndSetDisplayIDs()])
+    GenStandardOption("Enhancement Display", TabQOL, "Shows when enhancements activate in battle", [lambda: Enhancements.SearchAndSetDisplayIDs()])
     GenStandardOption("Chest Type Matches Contents", TabQOL, "Chest model and label changes depending on tier of loot", [lambda: RaceMode.ChestTypeMatching(OptionDictionary)])
     GenStandardOption("Easy Blade Skill Trees", TabQOL, "Makes trust the only condition for levelling up a blade's skill tree", [lambda: SkillTrees.BladeSkillTreeShortening()])
     GenStandardOption("Faster Levels", TabQOL, "Decreases EXP requires for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 2'])])
