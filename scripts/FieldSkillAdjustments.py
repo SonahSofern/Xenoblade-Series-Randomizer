@@ -13,7 +13,7 @@ def RemoveFieldSkills(Options):
     else:
         mapGimmickIds = [
             4, 5,           # Trees in early Gormott
-            10,11,          # Vent/Valve in Gormott Titan Battleship
+            16,11,          # Vent/Valve in Gormott Titan Battleship
             36,             # Tardy Gate flood blockade
             7,              # Ether Miasma
             55, 57,         # Old Factory ventilation fans

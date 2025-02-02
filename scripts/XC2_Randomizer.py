@@ -282,7 +282,7 @@ def Options():
     # GenStandardOption("Screenshot Mode", TabQOL, "Removes most UI for screenshots", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[88], ["sheet05", "sheet03", "sheet04"], ""), lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[86], ["sheet02", "sheet03"], "")])
     GenStandardOption("Enhancement Display", TabQOL, "Shows when enhancements activate in battle", [lambda: Enhancements.SearchAndSetDisplayIDs()])
     GenStandardOption("Easy Blade Skill Trees", TabQOL, "Makes trust the only condition for levelling up a blade's skill tree", [lambda: SkillTrees.BladeSkillTreeShortening()])
-    GenStandardOption("Faster Levels", TabQOL, "Decreases EXP requires for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 2'])])
+    GenStandardOption("Faster Levels", TabQOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 2'])])
     
     # Funny
     GenStandardOption("Projectile Treasure Chests", TabFunny, "Launches your items from chests", [lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [15])])
