@@ -2,7 +2,7 @@ from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys
 from tkinter import *
 import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, FieldSkillAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, CustomArts, PermalinkManagement, Helper, SkillTrees, Enhancements, BigItems, _EnemyEnhancements, CameraFixes, UniqueMonsterHunt
-import GUISettings, TrustBeam, _EnemyArts, _BladeWeapons
+import GUISettings, TrustBeam, _EnemyArts, _BladeWeapons, BladeRandomization, GachaModifications
 import _WeaponChips as WPChips
 import _AuxCores as AuxCr
 import _Accessories as Accs
@@ -231,6 +231,7 @@ def Options():
     GenStandardOption("Driver Arts", TabDrivers, "Randomizes effects of all driver arts", [lambda: CustomArts.GenCustomArtDescriptions()], ["Cooldown", [lambda: CustomArts.RandomArtCooldowns(OptionDictionary)], "Damage", [lambda: CustomArts.RandomArtDamageRatios(OptionDictionary)], "Enhancements", [lambda: CustomArts.RandomArtEnhancements(OptionDictionary)], "Animation Speed", [lambda: JSONParser.ChangeJSONFile(["common/BTL_Arts_Dr.json"], ["ActSpeed"], Helper.InclRange(0,255), Helper.InclRange(50,255), InvalidTargetIDs=AutoAttacks)]], optionType = Spinbox)
        
     # Blades
+    GenStandardOption("Blades", TabBlades, "Randomizes when blades appear in the story", [lambda: BladeRandomization.BladeRandomization(OptionDictionary)], ["Randomize Dromarch", [], "Guarantee a Healer", []], optionType=Spinbox)
     GenStandardOption("Blade Aux Cores", TabBlades, "Randomizes a Blade's Aux Core enhancement", [lambda: AuxCr.RandomizeAuxCoreEnhancements()])
     GenStandardOption("Blade Aux Core Slots", TabBlades, "Randomizes a Blade's maximum Aux Core Slots", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), IDs.BladeAuxCoreSlotDistribution)])
     GenStandardOption("Blade Arts", TabBlades, "Randomizes a Blade's arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])
@@ -272,6 +273,7 @@ def Options():
 
     # QOL
     GenStandardOption("Shortened Tutorial", TabQOL, "Shortens/removes tutorials", [lambda: TutorialShortening.ShortenedTutorial(OptionDictionary)])
+    GenStandardOption("Unlock NG+ Blades", TabQOL, "Allows all blades to be accessible in a fresh playthrough",[lambda: GachaModifications.UnlockNGPlusBlades()])
     GenStandardOption("Freely Engage Blades", TabQOL, "Allows blades to be freely engaged by all valid drivers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["FreeEngage"], [0], [1], [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1075, 1076, 1103])])
     GenStandardOption("Treasure Chest Visibility", TabQOL, "Increases the range you can see treasure chests from", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["msgVisible", "msgdigVisible"], Helper.InclRange(0,200), [255])])
     GenStandardOption("Remove Story Field Skills", TabQOL, "Removes field skill checks",  [lambda: FieldSkillAdjustments.RemoveFieldSkills(OptionDictionary)], ["Remove All Field Skills", []])
