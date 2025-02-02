@@ -10,8 +10,6 @@ TotalAreaPool = ["Gormott", "Uraya", "Mor Ardain", "Leftheria", "Temperantia", "
 # "Driver": ["scriptName", "scriptStartID"]
 PartyMembersAddScripts = {"Tora": ["chapt02", 7], "Nia": ["chapt02", 9], "Morag": ["chapt05", 7], "Zeke": ["chapt06", 5]}
 
-ArgentumNPCShops = [2079, 2080, 2085, 2087, 2088, 2092, 2097, 2182, 2313, 2398]
-
 # TO DO
 # all blades unlock skill tree levels by purchasing items in shops?
 # need to add custom shops with deeds/other stuff for purchase in each area
@@ -35,8 +33,9 @@ def UMHunt():
         NoUnintendedRewards(ChosenAreaOrder)
         SpiritCrucibleEntranceRemoval()
         UMRewardDropChanges()
-        CustomShopSetup(ChosenAreaOrder)
+        CustomShopSetup()
         Cleanup()
+        UMHuntMenuTextChanges()
 
 def WarpManagement(SetCount, ChosenAreaOrder, PartyMemberstoAdd, EnemySets): # Main function was getting a bit too cluttered
     EventSetup(SetCount, ChosenAreaOrder, PartyMemberstoAdd)
@@ -390,7 +389,25 @@ def SpiritCrucibleEntranceRemoval(): # Exiting or Entering Spirit Crucible has p
             if row["$id"] == 3: # Leftherian Entrance to Spirit Crucible
                 row["MapJumpId"] = 166 # get pranked lmao
             if row["$id"] == 4: # Spirit Crucible Entrance to Leftheria
-                row["MapJumpId"] = 167 # get pranked lmao    
+                row["MapJumpId"] = 167 # get pranked lmao
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def UMHuntMenuTextChanges():
+    seedhashcomplete = random.choice(IDs.SeedHashAdj) + " " + random.choice(IDs.SeedHashNoun) 
+    with open("./_internal/JsonOutputs/common_ms/menu_ms.json", 'r+', encoding='utf-8') as file: #puts the seed hash text on the main menu and on the save game screen
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 128:
+                row["name"] = f"Seed Hash: {seedhashcomplete}"
+                row["style"] = 166
+            if row["$id"] == 129:
+                row["name"] = "[System:Color name=red]Unique Monster Hunt[/System:Color]"
+            if row["$id"] in [983, 1227]:
+                row["name"] = "Bounties"
+            if row["$id"] == 1644:
+                row["name"] = f"{seedhashcomplete}"
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -408,38 +425,70 @@ def UMRewardDropChanges(): #Changes text for the UM drops we want
         data = json.load(file)
         for i in range(1, 11):
             for row in data["rows"]:
-                if row["$id"] == 963 + i:
+                if row["$id"] == 962 + i:
                     row["name"] = f"[System:Color name=green]Bounty Token Lv{i}[/System:Color]"
-                if row["$id"] == 979 + i:
+                if row["$id"] == 978 + i:
                     row["name"] = "Can be traded at the \nBounty Token Exchange for upgrades."
         for row in data["rows"]:
-            if row["$id"] == 974:
+            if row["$id"] == 973:
                 row["name"] = "[System:Color name=tutorial]Shop Token[/System:Color]"
-            if row["$id"] == 990:
+            if row["$id"] == 989:
                 row["name"] = "Can be traded at shops for upgrades."
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def CustomShopSetup(ChosenAreaOrder): # Sets up the custom shops with loot
+def CustomShopSetup(): # Sets up the custom shops with loot
+    # Sanity Checks: The number of items in InputTaskIDs should always be 16
+    # The number of SetItem1IDs, RewardIDs, RewardNames, RewardSP, and RewardXP should all be the same, and also equal to the number of non-zero InputTaskIDs
+    # Reward IDs, RewardQtys should have same number of values in each list as SetItem1IDs, however, each list should be made up of 4 lists, 1 for each item slot that a reward can be
+    ArgentumShopNPCIDs = [2079, 2080, 2085, 2087, 2088, 2092, 2097, 2182, 2313, 2398]
+    ArgentumShopEventIDs = [40045, 40054, 40051, 40048, 40052, 40056, 40050, 40058, 40055]
+    TokenFillerList = Helper.ExtendList([], 10, "0") # This gets used so much, I'd rather not screw up typing it out, also by initializing it here, it doesn't calculate the value every time in the dictionary
     TokenExchangeShop = {
-        "ShopID": 2398,
-        "ShopIcon": 420,
-        "Name": "[System:Color name=green]Bounty Token[/System:Color] Exchange",
-        "InputTaskIDs": Helper.ExtendList(Helper.InclRange(917, 926), 16, "0"),
-        "SetItem1IDs": Helper.InclRange(25479, 25488),
-        "RewardIDs": Helper.InclRange(1282, 1291),
-        "RewardNames": ["Shop Token", "Shop Token (x2)", "Shop Token (x3)", "Shop Token (x4)", "Shop Token (x5)", "Shop Token (x6)", "Shop Token (x7)", "Shop Token (x8)", "Shop Token (x9)", "Shop Token (x10)"],
-        "RewardSP": [625, 1250, 1875, 2500, 3125, 3750, 4375, 5000, 5625, 6250],
-        "RewardXP": [63, 63, 63, 63, 63, 63, 63, 63, 63, 63]
+        "NPCID": 2079, # ma02a_FLD_NpcPop $id
+        "ShopIcon": 420, # MNU_ShopList ShopIcon
+        "ShopIDtoReplace": 18, # MNU_ShopList $id
+        "ShopNametoReplace": 9, # fld_shopname $id
+        "ShopEventID": 40045, # ma02a_FLD_NpcPop EventID
+        "Name": "[System:Color name=green]Bounty Token[/System:Color] Exchange", # fld_shopname name
+        "InputTaskIDs": Helper.ExtendList(Helper.InclRange(917, 926), 16, "0"), # MNU_ShopChangeTask $id, feeds into MNU_ShopChange DefTaskSet1->8 and AddTaskSet1->8. Should always have length of 16
+        "AddTaskConditions": Helper.ExtendList([1,1], 8, "0"), # MNU_ShopChange AddCondition1->8 (0 if no task, 1 otherwise) # how many InputTaskIDs you have past 8 determines number of 1s, always 8 items long
+        "SetItemIDs": [Helper.InclRange(25479, 25488), TokenFillerList, TokenFillerList, TokenFillerList, TokenFillerList], # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
+        "SetItemQtys": [Helper.ExtendList([], 10, "1"), TokenFillerList, TokenFillerList, TokenFillerList, TokenFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
+        "RewardIDs": Helper.InclRange(1282, 1291), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
+        "RewardQtys": [[1,2,3,4,5,6,7,8,9,10], TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
+        "RewardItemIDs": [Helper.ExtendList([], 10, "25489"), TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
+        "RewardNames": ["Shop Token", "Shop Token (x2)", "Shop Token (x3)", "Shop Token (x4)", "Shop Token (x5)", "Shop Token (x6)", "Shop Token (x7)", "Shop Token (x8)", "Shop Token (x9)", "Shop Token (x10)"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
+        "RewardSP": [625, 1250, 1875, 2500, 3125, 3750, 4375, 5000, 5625, 6250], #FLD_QuestReward Sp
+        "RewardXP": [630, 630, 630, 630, 630, 630, 630, 630, 630, 630] # FLD_QuestReward EXP
     }
-    
+    #CoreCrystalShop = {
+    #    "NPCID": 2080, # ma02a_FLD_NpcPop $id
+    #    "ShopIcon": 427, # MNU_ShopList ShopIcon
+    #    "ShopIDtoReplace": 18, # MNU_ShopList $id
+    #    "ShopNametoReplace": 8, # fld_shopname $id
+    #    "ShopEventID": 40054, # ma02a_FLD_NpcPop EventID
+    #    "Name": "Core Crystal Bundles", # fld_shopname name
+    #    "InputTaskIDs": Helper.InclRange(927, 942), # MNU_ShopChangeTask $id, feeds into MNU_ShopChange DefTaskSet1->8 and AddTaskSet1->8. Should always have length of 16
+    #    "AddTaskConditions": Helper.ExtendList([1], 8, "1"), # MNU_ShopChange AddCondition1->8 (0 if no task, 1 otherwise) # how many InputTaskIDs you have past 8 determines number of 1s, always 8 items long
+    #    "SetItemIDs": [, , , , ], # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
+    #    "SetItemQtys": [Helper.ExtendList([], 10, "1"), TokenFillerList, TokenFillerList, TokenFillerList, TokenFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
+    #    "RewardIDs": Helper.InclRange(1282, 1291), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
+    #    "RewardQtys": [[1,2,3,4,5,6,7,8,9,10], TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
+    #    "RewardItemIDs": [Helper.ExtendList([], 10, "25489"), TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
+    #    "RewardNames": ["Shop Token", "Shop Token (x2)", "Shop Token (x3)", "Shop Token (x4)", "Shop Token (x5)", "Shop Token (x6)", "Shop Token (x7)", "Shop Token (x8)", "Shop Token (x9)", "Shop Token (x10)"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
+    #    "RewardSP": [625, 1250, 1875, 2500, 3125, 3750, 4375, 5000, 5625, 6250], #FLD_QuestReward Sp
+    #    "RewardXP": [630, 630, 630, 630, 630, 630, 630, 630, 630, 630] # FLD_QuestReward EXP
+    #}
+
     ShopList = [TokenExchangeShop]
     with open("./_internal/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file: # Adds the exchange tasks
         data = json.load(file)
+        ShopChangeStartRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/MNU_ShopChange.json", "$id") + 1 # used in MNU_ShopList for "TableID"
         CurrRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/MNU_ShopChange.json", "$id") + 1
         for shop in ShopList:
-            data["rows"].append({"$id": CurrRow, "DefTaskSet1": shop["InputTaskIDs"][0], "DefTaskSet2": shop["InputTaskIDs"][1], "DefTaskSet3": shop["InputTaskIDs"][2], "DefTaskSet4": shop["InputTaskIDs"][3], "DefTaskSet5": shop["InputTaskIDs"][4], "DefTaskSet6": shop["InputTaskIDs"][5], "DefTaskSet7": shop["InputTaskIDs"][6], "DefTaskSet8": shop["InputTaskIDs"][7], "AddTaskSet1": shop["InputTaskIDs"][8], "AddCondition1": 1, "AddTaskSet2": shop["InputTaskIDs"][9], "AddCondition2": 1, "AddTaskSet3": shop["InputTaskIDs"][10], "AddCondition3": 1, "AddTaskSet4": shop["InputTaskIDs"][11], "AddCondition4": 1, "AddTaskSet5": shop["InputTaskIDs"][12], "AddCondition5": 1, "AddTaskSet6": shop["InputTaskIDs"][13], "AddCondition6": 1, "AddTaskSet7": shop["InputTaskIDs"][14], "AddCondition7": 1, "AddTaskSet8": shop["InputTaskIDs"][15], "AddCondition8": 1, "LinkQuestTask": 0, "LinkQuestTaskID": 0, "UnitText": 0})
+            data["rows"].append({"$id": CurrRow, "DefTaskSet1": shop["InputTaskIDs"][0], "DefTaskSet2": shop["InputTaskIDs"][1], "DefTaskSet3": shop["InputTaskIDs"][2], "DefTaskSet4": shop["InputTaskIDs"][3], "DefTaskSet5": shop["InputTaskIDs"][4], "DefTaskSet6": shop["InputTaskIDs"][5], "DefTaskSet7": shop["InputTaskIDs"][6], "DefTaskSet8": shop["InputTaskIDs"][7], "AddTaskSet1": shop["InputTaskIDs"][8], "AddCondition1": shop["AddTaskConditions"][0], "AddTaskSet2": shop["InputTaskIDs"][9], "AddCondition2": shop["AddTaskConditions"][1], "AddTaskSet3": shop["InputTaskIDs"][10], "AddCondition3": shop["AddTaskConditions"][2], "AddTaskSet4": shop["InputTaskIDs"][11], "AddCondition4": shop["AddTaskConditions"][3], "AddTaskSet5": shop["InputTaskIDs"][12], "AddCondition5": shop["AddTaskConditions"][4], "AddTaskSet6": shop["InputTaskIDs"][13], "AddCondition6": shop["AddTaskConditions"][5], "AddTaskSet7": shop["InputTaskIDs"][14], "AddCondition7": shop["AddTaskConditions"][6], "AddTaskSet8": shop["InputTaskIDs"][15], "AddCondition8": shop["AddTaskConditions"][7], "LinkQuestTask": 0, "LinkQuestTaskID": 0, "UnitText": 0})
             CurrRow += 1
         file.seek(0)
         file.truncate()
@@ -447,10 +496,10 @@ def CustomShopSetup(ChosenAreaOrder): # Sets up the custom shops with loot
     with open("./_internal/JsonOutputs/common_ms/fld_shopchange.json", 'r+', encoding='utf-8') as file: # Changes the reward name for the token shop
         data = json.load(file)
         CurrRow = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/fld_shopchange.json", "$id") + 1
-        StartingShopChangeNameRow = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/fld_shopchange.json", "$id") + 1
+        StartingShopChangeNameRow = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/fld_shopchange.json", "$id") + 1 # Used in MNU_ShopChangeTask for "Name"
         for shop in ShopList:
-            for reward in ShopList[shop]["RewardNames"]:
-                data["rows"].append({"$id": CurrRow, "style": 36, "name": ShopList[shop]["RewardNames"][reward]})
+            for reward in shop["RewardNames"]:
+                data["rows"].append({"$id": CurrRow, "style": 36, "name": reward})
                 CurrRow += 1
         file.seek(0)
         file.truncate()
@@ -459,8 +508,8 @@ def CustomShopSetup(ChosenAreaOrder): # Sets up the custom shops with loot
         data = json.load(file)
         CurrRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/MNU_ShopChangeTask.json", "$id") + 1
         for shop in ShopList:
-            for item in ShopList[shop]["SetItem1IDs"]:
-                data["rows"].append({"$id": CurrRow, "Name": StartingShopChangeNameRow, "SetItem1": ShopList[shop]["SetItem1IDs"][item], "SetNumber1": 1, "SetItem2": 0, "SetNumber2": 0, "SetItem3": 0, "SetNumber3": 0, "SetItem4": 0, "SetNumber4": 0, "SetItem5": 0, "SetNumber5": 0, "HideReward": 0, "Reward": ShopList[shop]["RewardIDs"][item], "HideRewardFlag": 0, "AddFlagValue": 0, "forcequit": 0, "IraCraftIndex": 0})
+            for i in range(0, len(shop["SetItemIDs"][0])):
+                data["rows"].append({"$id": CurrRow, "Name": StartingShopChangeNameRow, "SetItem1": shop["SetItemIDs"][0][i], "SetNumber1": shop["SetItemQtys"][0][i], "SetItem2": shop["SetItemIDs"][1][i], "SetNumber2": shop["SetItemQtys"][1][i], "SetItem3": shop["SetItemIDs"][2][i], "SetNumber3": shop["SetItemQtys"][2][i], "SetItem4": shop["SetItemIDs"][3][i], "SetNumber4": shop["SetItemQtys"][3][i], "SetItem5": shop["SetItemIDs"][4][i], "SetNumber5": shop["SetItemQtys"][4][i], "HideReward": 0, "Reward": shop["RewardIDs"][i], "HideRewardFlag": 0, "AddFlagValue": 0, "forcequit": 0, "IraCraftIndex": 0})
                 CurrRow += 1
                 StartingShopChangeNameRow += 1
         file.seek(0)
@@ -470,45 +519,54 @@ def CustomShopSetup(ChosenAreaOrder): # Sets up the custom shops with loot
         data = json.load(file)
         CurrRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_QuestReward.json", "$id") + 1
         for shop in ShopList:
-            for i in range(0, len(ShopList[shop]["RewardIDs"])):
-                newrewardrow = {"$id": CurrRow, "Gold": 0, "EXP": ShopList[shop]["RewardXP"][i], "Sp": ShopList[shop]["RewardSP"][i], "Coin": 0, "DevelopZone": 0, "DevelopPoint": 0, "TrustPoint": 0, "MercenariesPoint": 0, "IdeaCategory": 0, "IdeaValue": 0, "ItemID1": ShopList[shop]["RewardIDs"][i], "ItemNumber1": 1, "ItemID2": 0, "ItemNumber2": 0, "ItemID3": 0, "ItemNumber3": 0, "ItemID4": 0, "ItemNumber4": 0}
-                data["rows"].append(newrewardrow)
+            for i in range(0, len(shop["RewardIDs"])):
+                data["rows"].append({"$id": CurrRow, "Gold": 0, "EXP": shop["RewardXP"][i], "Sp": shop["RewardSP"][i], "Coin": 0, "DevelopZone": 0, "DevelopPoint": 0, "TrustPoint": 0, "MercenariesPoint": 0, "IdeaCategory": 0, "IdeaValue": 0, "ItemID1": shop["RewardItemIDs"][0][i], "ItemNumber1": shop["RewardQtys"][0][i], "ItemID2": shop["RewardItemIDs"][1][i], "ItemNumber2": shop["RewardQtys"][1][i], "ItemID3": shop["RewardItemIDs"][2][i], "ItemNumber3": shop["RewardQtys"][2][i], "ItemID4": shop["RewardItemIDs"][3][i], "ItemNumber4": shop["RewardQtys"][3][i]})
                 CurrRow += 1
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    # The following runs always, regardless of input shop
-    with open("./_internal/JsonOutputs/common_ms/fld_shopname.json", 'r+', encoding='utf-8') as file: # Adds new shop name to list
+    with open("./_internal/JsonOutputs/common_ms/fld_shopname.json", 'r+', encoding='utf-8') as file: # Adds new shop name to list 
         data = json.load(file)
+        CurrRow = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/fld_shopname.json", "$id") + 1
+        ShopNameStartingRow = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/fld_shopname.json", "$id") + 1 # used in MNU_ShopList for "Name"
         for i in range(0, len(ShopList)):
-            data["rows"].append({"$id": 238 + i, "style": 70, "name": ShopList[i]["Name"]})
+            data["rows"].append({"$id": CurrRow, "style": 70, "name": ShopList[i]["Name"]})
+            CurrRow += 1
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-# done
-    with open("./_internal/JsonOutputs/common/MNU_ShopList.json", 'r+', encoding='utf-8') as file: # Adds new shop to list of shops
+    with open("./_internal/JsonOutputs/common/MNU_ShopList.json", 'r+', encoding='utf-8') as file: # Changes existing shop to match what we want
         data = json.load(file)
         for i in range(0, len(ShopList)):
-            data["rows"].append({"$id": 261 + i, "Name": 238 + i, "ShopIcon": ShopList[i]["ShopIcon"], "ShopType": 1, "TableID": 117 + i, "Discount1": 0, "Discount2": 0, "Discount3": 0, "Discount4": 0, "Discount5": 0})
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-# done
-    with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] != 2096: # keeps only the inn as a shop in Argentum
-                row["ShopId"] = 0
-        for i in range(0, len(ArgentumNPCShops)): # gives a specific npc the shop we want
             for row in data["rows"]:
-                row["ShopID"] = 0
-                if row["$id"] == ArgentumNPCShops[i]:
-                    row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["TimeRange"] = row["Condition"] = row["Mot"] = row["QuestID"] = 0
-                    row["ScenarioFlagMax"] = 10048
-                    row["Flag"]["Talkable"] = 1
-                    row["ShopID"] = 261 + i
+                if row["$id"] == ShopList[i]["ShopIDtoReplace"]:
+                    row["Name"] = ShopNameStartingRow
+                    row["ShopIcon"] = ShopList[i]["ShopIcon"]
+                    row["TableID"] = ShopChangeStartRow
+                    row["Discount1"] = row["Discount2"] = row["Discount3"] = row["Discount4"] = row["Discount5"] = 0
+                    row["ShopType"] = 1
+                    ShopChangeStartRow += 1
+                    ShopNameStartingRow += 1
                     break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-# done
+    with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] != 2096: # keeps only the inn as a shop in Argentum
+                row["ShopID"] = 0
+                row["flag"]["Talkable"] = 0
+                row["EventID"] = 0
+        for i in range(0, len(ShopList)): # gives a specific npc the shop we want
+            for row in data["rows"]:
+                if row["$id"] == ShopList[i]["NPCID"]:
+                    row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["TimeRange"] = row["Condition"] = row["Mot"] = row["QuestID"] = 0
+                    row["ScenarioFlagMax"] = 10048
+                    row["flag"]["Talkable"] = 1
+                    row["EventID"] = ShopList[i]["ShopEventID"]
+                    row["ShopID"] = ShopList[i]["ShopIDtoReplace"]
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
