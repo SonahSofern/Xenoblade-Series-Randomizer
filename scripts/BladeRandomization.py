@@ -183,7 +183,15 @@ def ApplyBladeRandomization(blade):
                 continue
             if blade_id in excluded_field_skills and key in excluded_field_skills[blade_id]:
                 continue
-            blade[key] = copy.deepcopy(OriginalBlades[replace_with_id][key])
+            if key == 'Flag':
+                for flag_key, flag_value in OriginalBlades[replace_with_id]['Flag'].items():
+                    if flag_key in ['FreeEngage', 'NoMapRev']:
+                        continue
+
+                    blade['Flag'][flag_key] = OriginalBlades[replace_with_id]['Flag'][flag_key]
+            else:
+                blade[key] = OriginalBlades[replace_with_id][key]
+
 
 
 def RandomizePoppiForms(OptionsRunDict):
