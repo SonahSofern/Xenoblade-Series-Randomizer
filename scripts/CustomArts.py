@@ -141,7 +141,7 @@ def GenCustomArtDescriptions():
         "Foe Armor": [16],
         "Foe Atk↑": [17],
         "Taunt": [11],
-        "Stench": [12],
+        # "Stench": [12], # This one makes annoying noise and doesnt affect most enemies, im not even sure it affects enemy drivers tbh
         "Shackle Dr": [13],
         "Shackle Bl": [14],
         "Null Heal": [15],

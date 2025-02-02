@@ -741,7 +741,7 @@ def ZoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap): # Experimental Mode to
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    NameTexts = ["Zohar Fragment A", "Zohar Fragment B", "Zohar Fragment C", "Zohar Fragment D"]
+    NameTexts = ["[System:Color name=tutorial]Zohar Fragment A[/System:Color]", "[System:Color name=tutorial]Zohar Fragment B[/System:Color]", "[System:Color name=tutorial]Zohar Fragment C[/System:Color]", "[System:Color name=tutorial]Zohar Fragment D[/System:Color]"]
     with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # renaming the fragments in menus
         data = json.load(file)
         for i in range(0, len(TBoxFiles)):
@@ -988,7 +988,7 @@ def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
     if RaceModeOn:
         if ZoharFragOn:
             ChestTierListIDs[0] = 3
-            ChestTierListItemNames[0] = "Zohar Fragment"
+            ChestTierListItemNames[0] = "[System:Color name=tutorial]Zohar Fragment[/System:Color]"
         if CoreCrystalRandoOn:
             ChestTierListIDs[1] = 5
             ChestTierListItemNames[1] = "Core Crystal"

@@ -15,7 +15,7 @@ def RandomizeAccessoryEnhancements():
             
             for Acc in enhanceFile["rows"]:
                 
-                enhancement = random.choice(ValidSkills)
+                enhancement:Enhancement = random.choice(ValidSkills)
                 prevNames.append({"myName" :Acc["Name"], "myEnhance": enhancement})
                 
                 for pair in prevNames: # Ensures the same name has the same enhancement
@@ -34,7 +34,12 @@ def RandomizeAccessoryEnhancements():
                         oldName = skillName["name"]
                         oldNameList = oldName.split()
                         lastWord = oldNameList[-1]
-                        skillName["name"] = f"{enhancement.name} {lastWord}"                        
+                        if enhancement.Rarity == 0: # Common
+                            skillName["name"] = f"{enhancement.name} {lastWord}"
+                        elif enhancement.Rarity == 1: # Rare
+                            skillName["name"] = f"[System:Color name=green]{enhancement.name}+ {lastWord}[/System:Color]"  
+                        elif enhancement.Rarity == 2: # Legendary
+                            skillName["name"] = f"[System:Color name=tutorial]{enhancement.name}++ {lastWord}[/System:Color]"                         
                         break
 
                 

@@ -76,15 +76,15 @@ Lightning  = EnemyEnhancement("Lightning", AutoSpeedArtsSpeed,[300,400,500,600],
 Repeat = EnemyEnhancement("Repeat", DidIDoThat,[20,40,60,80])
 Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
 Warmup = EnemyEnhancement("Warmup", BattleDurationDamageUp, [70,100,120,150])
-
-#New testing
 Regen = EnemyEnhancement("Regen", LowHPRegen, [3,5,7,9])
-ChainHeal = EnemyEnhancement("Chain Heal", ChainAttackHeal, [50,60,70,80])
 CloseArmor = EnemyEnhancement("Guardian", ReduceDamageFromNearbyEnemies, [30,50,70,90])
 
 
+#New testing
+
 # Not including
 # BladeComboResist = EnemyEnhancement("Combo Resist", ReduceEnemyBladeComboDamage, [60,70,90,100])
+# ChainHeal = EnemyEnhancement("Chain Heal", ChainAttackHeal, [50,60,70,80]) didnt work
 
 
 

@@ -163,8 +163,11 @@ PoppiQTπCosmetics = [
 ]
 
 def Cosmetics(optionDict):
-    #Drivers
+    
+    # Slider
     odds = optionDict["Character Outfits"]["optionTypeVal"].get()
+    
+    # Drivers
     with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data['rows']:
@@ -175,7 +178,8 @@ def Cosmetics(optionDict):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    #Blades
+        
+    # Blades
     with open("./_internal/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data['rows']:
@@ -186,7 +190,8 @@ def Cosmetics(optionDict):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    #ArtificialBlades
+        
+    # ArtificialBlades
     with open("./_internal/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data['rows']:
@@ -197,6 +202,8 @@ def Cosmetics(optionDict):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+        
+    # Clear globals
     IDs.ValidDriverCosmetics.clear()
     IDs.ValidBladeCosmetics.clear()
     IDs.ValidArtificialBladeCosmetics.clear()

@@ -70,36 +70,42 @@ def ChangeArts(artData, artNameData, optionsDict):
                     
     
     for art in artData["rows"]:
-        try:
-            if art["Camera1"] == 0 and art["Camera2"] == 0 and art["Camera3"] == 0:
-                pass
-            else:
-                continue
-        except:
-            pass # Needed to target only arts with no camera data because that corresponds with valid enemy blade arts 
-        if spinBox < random.randrange(0,100): # Spinbox value check
+        
+        # Needed to target only arts with no camera data because that corresponds with valid enemy blade arts 
+        if art.get("Camera1") and art["Camera1"] != 0 and art["Camera2"] != 0 and art["Camera3"] != 0:
             continue
-        if art["Name"] == 0: # Avoid changing autoattacks and things with no name
+
+        # Spinbox value check
+        if spinBox < random.randrange(0,100): 
             continue
-        validChanges = FindValidChanges(art, isReactions, isDebuffs, isBuffs, isEnhancements, isAOE)  # i dont want to overwrite previous behaviour so check what i can change on an art
-        if not validChanges: # Make sure theres at least one valid change to make
+        
+         # Avoid changing autoattacks and things with no name
+        if art["Name"] == 0:
+            continue
+        
+         # Dont want to overwrite previous behaviour so check what i can change on an art
+        validChanges = FindValidChanges(art, isReactions, isDebuffs, isBuffs, isEnhancements, isAOE) 
+        
+        # Make sure theres at least one valid change to make
+        if not validChanges:
             continue
         newNameID += 1
 
-        
-        myChange = random.choice(validChanges) # choose a change to apply
+        # choose a change to apply
+        myChange = random.choice(validChanges) 
         newNamePrefix = myChange()
         
-        
-        for name in artNameData["rows"]: # Get the old name
+        # Get the old name 
+        for name in artNameData["rows"]:
             if name["$id"] == art["Name"]:
                 oldName = name["name"]
                 break
 
-        newName = { # create new name
+        # create new name
+        newName = { 
             "$id" : newNameID,
             "style" : 15,
-            "name" : f"[System:Color name=green]{newNamePrefix}[/System:Color] {oldName}"
+            "name" : f"{newNamePrefix} {oldName}"
         }
         art["Name"] =  newNameID # Set new name id to the art
         artNameData["rows"].append(newName) # add newname
@@ -134,16 +140,16 @@ class EnemyArtEnhancements(Enhancement):
     
 # backatk = EnemyArtEnhancements("Back↑", BackDamageUp, [40,60,80,100])
 frontatk = EnemyArtEnhancements("Front↑", FrontDamageUp, [20,40,60,80])
-# pierce = EnemyArtEnhancements("Pierce", GuardAnnulAttack, [100,100,100,100]) is already a flag so idk
+pierce = EnemyArtEnhancements("Pierce", GuardAnnulAttack, [100,100,100,100])
 # lowhpDamage = EnemyArtEnhancements("HP↓Dmg↑", DamageUpWhenHpDown, [10,20,30,40])
 transmig = EnemyArtEnhancements("Flip", Transmigration, [100,100,100,100])
-vamp = EnemyArtEnhancements("Vamp", ArtDamageHeal, [200,400,600,800])
+vamp = EnemyArtEnhancements("Vamp", ArtDamageHeal, [400,500,600,700])
 
 def Enhancements(art):
-    skill = random.choice(ValidSkills)
+    skill:Enhancement = random.choice(ValidSkills)
     skill.RollEnhancement()
     art["Enhance"] = skill.id
-    return skill.name
+    return f"[System:Color name=green]{skill.name}[/System:Color]"
 
 def AOE(art):
     CircleAroundTarget = 1
@@ -154,7 +160,7 @@ def AOE(art):
     
     art["RangeType"] = RangeType
     art["Radius"] =  RandomRadius # Not sure what makes a good radius
-    return "AOE"
+    return f"[System:Color name=green]AOE[/System:Color]"
 
 def Hits(art): # Theres also LoopNum which might be interesting
     pass
@@ -164,7 +170,7 @@ def Reaction(art):
         "Orb↓": [46],
         "BlCombo↓": [34,40,45],
         "Element": [17, 35],
-        "Element Refl": [20],
+        "Elem Ref": [20],
     }
     Flames = {
         "Flames": [38], # Needs circle id 1-6
@@ -183,9 +189,8 @@ def Reaction(art):
         ValidReactions.update(SelfTargetReactions) # Add self targeting
     elif art["Target"] == 0:
         ValidReactions.update(EnemyTargetReactions) # Add enemy targeting
-    if art["CircleID"] == 0 and art["Target"] == 0:
-        ValidReactions.update(Flames) # Add flames 
-    
+    if art.get("CircleID") and art["CircleID"] == 0 and art["Target"] == 0:
+            ValidReactions.update(Flames) # Add flames 
         
     name,values = random.choice(list(ValidReactions.items()))
     
@@ -202,7 +207,7 @@ def Reaction(art):
         if art[f"ReAct{i}"] != 0: # Make sure it doesnt already have a reaction 
             continue
         art[f"ReAct{i}"] =  random.choice(values)
-    return name
+    return f"[System:Color name=tutorial]{name}[/System:Color]"
 
 
 def Buff(art):
@@ -222,7 +227,7 @@ def Buff(art):
         art["Recast"] //= random.choice([2,4,6])
     else:
         art["ArtsBuff"] = value
-    return name
+    return f"[System:Color name=green]{name}[/System:Color]"
 
 def Debuff(art): 
     Debuffs = {
@@ -244,5 +249,5 @@ def Debuff(art):
         Debuffs.update(SingleTarget)
     name,value = random.choice(list(Debuffs.items()))
     art["ArtsDeBuff"] = value
-    return name
+    return f"[System:Color name=red]{name}[/System:Color]"
     
