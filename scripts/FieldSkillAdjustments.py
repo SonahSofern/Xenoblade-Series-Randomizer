@@ -24,7 +24,7 @@ def RemoveFieldSkills(Options):
         ]
         npcPopIds = [
             8006,           # Green Barrel
-            5268            # Pyra's Cooking
+            5267            # Pyra's Cooking
         ]    
         jumpGimiickIds = [
             34, 33,38,      # Cliffs of Morytha
