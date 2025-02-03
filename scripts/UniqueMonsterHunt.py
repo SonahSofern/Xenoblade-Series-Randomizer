@@ -1,4 +1,4 @@
-import json, random, Helper, IDs, EnemyRandoLogic
+import json, random, Helper, IDs, EnemyRandoLogic, RaceMode, math
 
 AllUniqueMonsterDefaultIDs = [611, 612, 705, 706, 707, 708, 709, 710, 711, 712, 713, 715, 736, 738, 808, 809, 810, 811, 812, 814, 815, 816, 817, 819, 890, 891, 892, 893, 894, 895, 896, 898, 899, 926, 929, 953, 954, 955, 957, 958, 1019, 1020, 1023, 1025, 1026, 1101, 1102, 1104, 1106, 1108, 1109, 1111, 1112, 1113, 1114, 1115, 1131, 1132, 1134, 1155, 1156, 1157, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1255, 1256, 1258, 1260, 1261, 1262, 1264, 1265, 1563, 1564, 1566, 1567, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1670, 1774, 1886]
 
@@ -10,13 +10,15 @@ TotalAreaPool = ["Gormott", "Uraya", "Mor Ardain", "Leftheria", "Temperantia", "
 # "Driver": ["scriptName", "scriptStartID"]
 PartyMembersAddScripts = {"Tora": ["chapt02", 7], "Nia": ["chapt02", 9], "Morag": ["chapt05", 7], "Zeke": ["chapt06", 5]}
 
+# Item ID 25489 is the Shop Token!
+
 # TO DO
 # all blades unlock skill tree levels by purchasing items in shops?
 # need to add custom shops with deeds/other stuff for purchase in each area
 # I can just start with all continents having 1 landmark on them, and then just allow the mapON condition to be dependent on the order.
 # change font color of "Current Objective", and change it to something like "bounties remaining"
 
-def UMHunt():
+def UMHunt(OptionDictionary):
     if IDs.CurrentSliderOdds != 0:
         SetCount = IDs.CurrentSliderOdds
         ChosenAreaOrder = []
@@ -33,6 +35,7 @@ def UMHunt():
         NoUnintendedRewards(ChosenAreaOrder)
         SpiritCrucibleEntranceRemoval()
         UMRewardDropChanges()
+        CoreCrystalIdentification(OptionDictionary)
         CustomShopSetup()
         Cleanup()
         UMHuntMenuTextChanges()
@@ -403,7 +406,7 @@ def UMHuntMenuTextChanges():
                 row["name"] = f"Seed Hash: {seedhashcomplete}"
                 row["style"] = 166
             if row["$id"] == 129:
-                row["name"] = "[System:Color name=red]Unique Monster Hunt[/System:Color]"
+                row["name"] = "[System:Color name=tutorial]Unique Monster Hunt[/System:Color]"
             if row["$id"] in [983, 1227]:
                 row["name"] = "Bounties"
             if row["$id"] == 1644:
@@ -438,13 +441,160 @@ def UMRewardDropChanges(): #Changes text for the UM drops we want
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+def IdentifyDLCBladeCrystals(CrystalList):
+    DLCBladeCrystalList = []
+    with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: # Adds the exchange tasks
+        data = json.load(file)
+        for i in range(0, len(CrystalList)):
+            for row in data["rows"]:
+                if (row["$id"] == CrystalList[i]) and (row["BladeID"] in [1105, 1106, 1107, 1108, 1109, 1111]):
+                    DLCBladeCrystalList.append(row["$id"])
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    return DLCBladeCrystalList
+
+def IdentifyClassBladeCrystals(CrystalList): # go from ITM_CrystalList $id->bladeID-> CHR_Bl $id->WeaponType-> ITM_PcWpnType $id->Role
+    CrystalBladeIDList = []
+    CrystalWeaponTypeIDList = []
+    CrystalWeaponRoleList = []
+    AttackerList = []
+    HealerList = []
+    TankList = []
+    with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: # Getting BladeIDs for a Crystal $id
+        data = json.load(file)
+        for i in range(0, len(CrystalList)):
+            for row in data["rows"]:
+                if row["$id"] == CrystalList[i]:
+                    CrystalBladeIDList.append(row["BladeID"])
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as file: # Getting WeaponType for a Blade $id
+        data = json.load(file)
+        for i in range(0, len(CrystalBladeIDList)):
+            for row in data["rows"]:
+                if row["$id"] == CrystalBladeIDList[i]:
+                    CrystalWeaponTypeIDList.append(row["WeaponType"])
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/ITM_PcWpnType.json", 'r+', encoding='utf-8') as file: # Getting Role for a WeaponType $id
+        data = json.load(file)
+        for i in range(0, len(CrystalWeaponTypeIDList)):
+            for row in data["rows"]:
+                if row["$id"] == CrystalWeaponTypeIDList[i]:
+                    CrystalWeaponRoleList.append(row["Role"])
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    for i in range(0, len(CrystalList)):
+        if CrystalWeaponRoleList[i] == 1: # Tank
+            TankList.append(CrystalList[i])
+        elif CrystalWeaponRoleList[i] == 2: # Attacker
+            AttackerList.append(CrystalList[i])
+        else: # Healer
+            HealerList.append(CrystalList[i])
+    return TankList, AttackerList, HealerList
+
+def CoreCrystalIdentification(OptionsRunDict): # Figuring out the groups that each Core Crystal Belongs to, then picking items from each group for the shop
+    ShuffleCoreCrystals()
+    AllBladeCrystalIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
+    NGPlusBladeCrystalIDs = RaceMode.DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
+    RemainingBladeCrystalIDs = [x for x in AllBladeCrystalIDs if x not in NGPlusBladeCrystalIDs]
+    DLCBladeCrystalIDs = IdentifyDLCBladeCrystals(RemainingBladeCrystalIDs)
+    RemainingBladeCrystalIDs = [x for x in RemainingBladeCrystalIDs if x not in DLCBladeCrystalIDs]
+    TankBladeCrystalIDs, AttackerBladeCrystalIDs, HealerBladeCrystalIDs = IdentifyClassBladeCrystals(RemainingBladeCrystalIDs)
+    CoreCrystalGroupCreation(NGPlusBladeCrystalIDs, DLCBladeCrystalIDs, TankBladeCrystalIDs, AttackerBladeCrystalIDs, HealerBladeCrystalIDs)
+
+def ShuffleCoreCrystals(): # first we need to shuffle the blade ids into the core crystal pool
+    AllBladeCrystalIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
+    BladeIDs = [1008, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1050, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1104, 1108, 1109, 1105, 1106, 1107, 1111]
+    with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        RandomBlades = BladeIDs.copy()
+        random.shuffle(RandomBlades)
+        for i in range(0, len(AllBladeCrystalIDs)):
+            for row in data["rows"]:
+                if row["$id"] == AllBladeCrystalIDs[i]:
+                    row["BladeID"] = RandomBlades[i]
+                    row["ValueMax"] = 1
+                    row["NoMultiple"] = i + 11
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def CoreCrystalGroupCreation(NGPlusBladeCrystalIDs, DLCBladeCrystalIDs, TankBladeCrystalIDs, AttackerBladeCrystalIDs, HealerBladeCrystalIDs):
+    Item1IDs, Item2IDs, Item3IDs, Item4IDs = [], [], Helper.ExtendListtoLength([], 16, "0"), Helper.ExtendListtoLength([], 16, "0")
+    ChosenAtkBlades, ChosenTnkBlades, ChosenHlrBlades = random.sample(AttackerBladeCrystalIDs, min(8, len(AttackerBladeCrystalIDs))), random.sample(TankBladeCrystalIDs, min(6, len(TankBladeCrystalIDs))), random.sample(HealerBladeCrystalIDs, min(6, len(HealerBladeCrystalIDs)))
+    ChosenAtkBlades = Helper.ExtendListtoLength(ChosenAtkBlades, 8 , "0")
+    ChosenTnkBlades = Helper.ExtendListtoLength(ChosenTnkBlades, 6 , "0")
+    ChosenHlrBlades = Helper.ExtendListtoLength(ChosenHlrBlades, 6 , "0")
+    ChosenNGPlusBladeCrystalIDs = random.sample(NGPlusBladeCrystalIDs, min(3, len(NGPlusBladeCrystalIDs)))
+    ChosenDLCBladeCrystalIDs = random.sample(DLCBladeCrystalIDs, min(3, len(DLCBladeCrystalIDs)))
+    ChosenNGPlusBladeCrystalIDs = Helper.ExtendListtoLength(ChosenNGPlusBladeCrystalIDs, 3, "0")
+    ChosenDLCBladeCrystalIDs = Helper.ExtendListtoLength(ChosenDLCBladeCrystalIDs, 3, "0")
+    Item1IDs.extend(ChosenAtkBlades[:4])
+    Item1IDs.extend(ChosenTnkBlades[:3])
+    Item1IDs.extend(ChosenHlrBlades[:3])
+    Item1IDs.extend(ChosenDLCBladeCrystalIDs[:3])
+    Item1IDs.extend(ChosenNGPlusBladeCrystalIDs[:3])
+    Item2IDs.extend(ChosenAtkBlades[-4:])
+    Item2IDs.extend(ChosenTnkBlades[-3:])
+    Item2IDs.extend(ChosenHlrBlades[-3:])
+    Item2IDs = Helper.ExtendListtoLength(Item2IDs, 16, "0")
+    global OutputCrystalGroupItemIDs
+    OutputCrystalGroupItemIDs = [Item1IDs, Item2IDs, Item3IDs, Item4IDs]
+    RenameCrystals(NGPlusBladeCrystalIDs, DLCBladeCrystalIDs, TankBladeCrystalIDs, AttackerBladeCrystalIDs, HealerBladeCrystalIDs)
+    # Output should be [16, 16, 16, 16] format, with last 2 entries being 0
+
+def RenameCrystals(NGPlusBladeCrystalIDs, DLCBladeCrystalIDs, TankBladeCrystalIDs, AttackerBladeCrystalIDs, HealerBladeCrystalIDs):    
+    AllBladeCrystalIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["Condition", "CommonID", "CommonWPN", "CommonAtr", "Price", "RareTableProb", "RareBladeRev", "AssureP"], 0)
+    with open("./_internal/JsonOutputs/common_ms/itm_crystal.json", "r+", encoding='utf-8') as file: # Now we want to rename crystals according to their category
+        IDNumbers = Helper.InclRange(16, 20)
+        CrystalCategoryNames = ["NG+ Core Crystal", "DLC Core Crystal", "TNK Core Crystal", "ATK Core Crystal", "HLR Core Crystal"]
+        data = json.load(file)
+        for i in range(0, len(IDNumbers)):
+            data["rows"].append({"$id": IDNumbers[i], "style": 36, "name": CrystalCategoryNames[i]})
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in NGPlusBladeCrystalIDs:
+                row["Name"] = 16
+            elif row["$id"] in DLCBladeCrystalIDs:
+                row["Name"] = 17
+            elif row["$id"] in TankBladeCrystalIDs:
+                row["Name"] = 18
+            elif row["$id"] in AttackerBladeCrystalIDs:
+                row["Name"] = 19
+            elif row["$id"] in HealerBladeCrystalIDs:
+                row["Name"] = 20
+            else:
+                row["Name"] = 12
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
 def CustomShopSetup(): # Sets up the custom shops with loot
     # Sanity Checks: The number of items in InputTaskIDs should always be 16
     # The number of SetItem1IDs, RewardIDs, RewardNames, RewardSP, and RewardXP should all be the same, and also equal to the number of non-zero InputTaskIDs
     # Reward IDs, RewardQtys should have same number of values in each list as SetItem1IDs, however, each list should be made up of 4 lists, 1 for each item slot that a reward can be
     ArgentumShopNPCIDs = [2079, 2080, 2085, 2087, 2088, 2092, 2097, 2182, 2313, 2398]
     ArgentumShopEventIDs = [40045, 40054, 40051, 40048, 40052, 40056, 40050, 40058, 40055]
-    TokenFillerList = Helper.ExtendList([], 10, "0") # This gets used so much, I'd rather not screw up typing it out, also by initializing it here, it doesn't calculate the value every time in the dictionary
+    OriginalShopIDs = [18, 17, 24, 21, 26, 13, 23, 16, 183, 28]
+    OriginalShopNames = [9, 8, 16, 13, 17, 3, 15, 7, 188, 19]
+    CoreCrystalCostDistribution = [1, 2, 3, 4, 1, 2, 3, 1, 2, 3, 8, 10, 12, 25, 35, 45]
+    TokenFillerList = Helper.ExtendListtoLength([], 10, "0") # This gets used so much, I'd rather not screw up typing it out, also by initializing it here, it doesn't calculate the value every time in the dictionary
+    FullFillerList = Helper.ExtendListtoLength([], 16, "0") # Empty list of full size
     TokenExchangeShop = {
         "NPCID": 2079, # ma02a_FLD_NpcPop $id
         "ShopIcon": 420, # MNU_ShopList ShopIcon
@@ -452,37 +602,37 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         "ShopNametoReplace": 9, # fld_shopname $id
         "ShopEventID": 40045, # ma02a_FLD_NpcPop EventID
         "Name": "[System:Color name=green]Bounty Token[/System:Color] Exchange", # fld_shopname name
-        "InputTaskIDs": Helper.ExtendList(Helper.InclRange(917, 926), 16, "0"), # MNU_ShopChangeTask $id, feeds into MNU_ShopChange DefTaskSet1->8 and AddTaskSet1->8. Should always have length of 16
-        "AddTaskConditions": Helper.ExtendList([1,1], 8, "0"), # MNU_ShopChange AddCondition1->8 (0 if no task, 1 otherwise) # how many InputTaskIDs you have past 8 determines number of 1s, always 8 items long
+        "InputTaskIDs": Helper.ExtendListtoLength(Helper.InclRange(917, 926), 16, "0"), # MNU_ShopChangeTask $id, feeds into MNU_ShopChange DefTaskSet1->8 and AddTaskSet1->8. Should always have length of 16
+        "AddTaskConditions": Helper.ExtendListtoLength([1,1], 8, "0"), # MNU_ShopChange AddCondition1->8 (0 if no task, 1 otherwise) # how many InputTaskIDs you have past 8 determines number of 1s, always 8 items long
         "SetItemIDs": [Helper.InclRange(25479, 25488), TokenFillerList, TokenFillerList, TokenFillerList, TokenFillerList], # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
-        "SetItemQtys": [Helper.ExtendList([], 10, "1"), TokenFillerList, TokenFillerList, TokenFillerList, TokenFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
+        "SetItemQtys": [Helper.ExtendListtoLength([], 10, "1"), TokenFillerList, TokenFillerList, TokenFillerList, TokenFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
         "RewardIDs": Helper.InclRange(1282, 1291), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
+        "RewardItemIDs": [Helper.ExtendListtoLength([], 10, "25489"), TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
         "RewardQtys": [[1,2,3,4,5,6,7,8,9,10], TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
-        "RewardItemIDs": [Helper.ExtendList([], 10, "25489"), TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
         "RewardNames": ["Shop Token", "Shop Token (x2)", "Shop Token (x3)", "Shop Token (x4)", "Shop Token (x5)", "Shop Token (x6)", "Shop Token (x7)", "Shop Token (x8)", "Shop Token (x9)", "Shop Token (x10)"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
         "RewardSP": [625, 1250, 1875, 2500, 3125, 3750, 4375, 5000, 5625, 6250], #FLD_QuestReward Sp
         "RewardXP": [630, 630, 630, 630, 630, 630, 630, 630, 630, 630] # FLD_QuestReward EXP
     }
-    #CoreCrystalShop = {
-    #    "NPCID": 2080, # ma02a_FLD_NpcPop $id
-    #    "ShopIcon": 427, # MNU_ShopList ShopIcon
-    #    "ShopIDtoReplace": 18, # MNU_ShopList $id
-    #    "ShopNametoReplace": 8, # fld_shopname $id
-    #    "ShopEventID": 40054, # ma02a_FLD_NpcPop EventID
-    #    "Name": "Core Crystal Bundles", # fld_shopname name
-    #    "InputTaskIDs": Helper.InclRange(927, 942), # MNU_ShopChangeTask $id, feeds into MNU_ShopChange DefTaskSet1->8 and AddTaskSet1->8. Should always have length of 16
-    #    "AddTaskConditions": Helper.ExtendList([1], 8, "1"), # MNU_ShopChange AddCondition1->8 (0 if no task, 1 otherwise) # how many InputTaskIDs you have past 8 determines number of 1s, always 8 items long
-    #    "SetItemIDs": [, , , , ], # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
-    #    "SetItemQtys": [Helper.ExtendList([], 10, "1"), TokenFillerList, TokenFillerList, TokenFillerList, TokenFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
-    #    "RewardIDs": Helper.InclRange(1282, 1291), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
-    #    "RewardQtys": [[1,2,3,4,5,6,7,8,9,10], TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
-    #    "RewardItemIDs": [Helper.ExtendList([], 10, "25489"), TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
-    #    "RewardNames": ["Shop Token", "Shop Token (x2)", "Shop Token (x3)", "Shop Token (x4)", "Shop Token (x5)", "Shop Token (x6)", "Shop Token (x7)", "Shop Token (x8)", "Shop Token (x9)", "Shop Token (x10)"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
-    #    "RewardSP": [625, 1250, 1875, 2500, 3125, 3750, 4375, 5000, 5625, 6250], #FLD_QuestReward Sp
-    #    "RewardXP": [630, 630, 630, 630, 630, 630, 630, 630, 630, 630] # FLD_QuestReward EXP
-    #}
+    CoreCrystalShop = {
+        "NPCID": 2080, # ma02a_FLD_NpcPop $id
+        "ShopIcon": 427, # MNU_ShopList ShopIcon
+        "ShopIDtoReplace": 17, # MNU_ShopList $id
+        "ShopNametoReplace": 8, # fld_shopname $id
+        "ShopEventID": 40054, # ma02a_FLD_NpcPop EventID
+        "Name": "Core Crystal Cache", # fld_shopname name
+        "InputTaskIDs": Helper.InclRange(927, 942), # MNU_ShopChangeTask $id, feeds into MNU_ShopChange DefTaskSet1->8 and AddTaskSet1->8. Should always have length of 16
+        "AddTaskConditions": Helper.ExtendListtoLength([], 8, "1"), # MNU_ShopChange AddCondition1->8 (0 if no task, 1 otherwise) # how many InputTaskIDs you have past 8 determines number of 1s, always 8 items long
+        "SetItemIDs": [Helper.ExtendListtoLength([], 16, "25489"), FullFillerList, FullFillerList, FullFillerList, FullFillerList], # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
+        "SetItemQtys": [CoreCrystalCostDistribution, FullFillerList, FullFillerList, FullFillerList, FullFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
+        "RewardIDs": Helper.InclRange(1292, 1307), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
+        "RewardItemIDs": OutputCrystalGroupItemIDs, # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
+        "RewardQtys": [Helper.ExtendListtoLength([], 16, "1"), Helper.ExtendListtoLength([], 16, "1"), FullFillerList, FullFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
+        "RewardNames": ["ATK Blade Bundle", "ATK Blade Bundle", "ATK Blade Bundle", "ATK Blade Bundle", "TNK Blade Bundle", "TNK Blade Bundle", "TNK Blade Bundle", "HLR Blade Bundle", "HLR Blade Bundle", "HLR Blade Bundle", "DLC Core Crystal", "DLC Core Crystal", "DLC Core Crystal", "NG+ Core Crystal", "NG+ Core Crystal", "NG+ Core Crystal"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
+        "RewardSP": FullFillerList, #FLD_QuestReward Sp
+        "RewardXP": FullFillerList # FLD_QuestReward EXP
+    }
 
-    ShopList = [TokenExchangeShop]
+    ShopList = [TokenExchangeShop, CoreCrystalShop]
     with open("./_internal/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file: # Adds the exchange tasks
         data = json.load(file)
         ShopChangeStartRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/MNU_ShopChange.json", "$id") + 1 # used in MNU_ShopList for "TableID"

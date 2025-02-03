@@ -239,7 +239,7 @@ def LessGrinding(): #adjusting level based exp gains, and debuffs while underlev
 def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
     NGPlusBladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
     NGPlusBladeCrystalIDs = []
-    if OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get():
+    if (OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get()) or (OptionsRunDict["Unique Monster Hunt"]["optionTypeVal"].get()):
         with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
             for i in range(0, len(NGPlusBladeIDs)):
