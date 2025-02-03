@@ -64,7 +64,7 @@ TabEnemiesOuter = ttk.Frame(MainWindow)
 TabMiscOuter = ttk.Frame(MainWindow) 
 TabQOLOuter = ttk.Frame(MainWindow)
 TabCosmeticsOuter = ttk.Frame(MainWindow)
-TabRaceModeOuter = ttk.Frame(MainWindow)
+TabGameModeOuter = ttk.Frame(MainWindow)
 TabFunnyOuter = ttk.Frame(MainWindow)
 
 # Canvas 
@@ -75,7 +75,7 @@ TabEnemiesCanvas = Canvas(TabEnemiesOuter)
 TabMiscCanvas = Canvas(TabMiscOuter)
 TabQOLCanvas = Canvas(TabQOLOuter)
 TabCosmeticsCanvas = Canvas(TabCosmeticsOuter)
-TabRaceModeCanvas = Canvas(TabRaceModeOuter)
+TabGameModeCanvas = Canvas(TabGameModeOuter)
 TabFunnyCanvas = Canvas(TabFunnyOuter)
 
 # Actual Scrollable Content
@@ -86,7 +86,7 @@ TabEnemies = ttk.Frame(TabEnemiesCanvas)
 TabMisc = ttk.Frame(TabMiscCanvas)
 TabQOL = ttk.Frame(TabQOLCanvas)
 TabCosmetics = ttk.Frame(TabCosmeticsCanvas)
-TabRaceMode = ttk.Frame(TabRaceModeCanvas)
+TabGameMode = ttk.Frame(TabGameModeCanvas)
 TabFunny = ttk.Frame(TabFunnyCanvas)
 
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
@@ -109,7 +109,7 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touc
         Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
         OuterFrames[i].pack(expand=True, fill="both")
 
-CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabRaceModeOuter, TabFunnyOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabRaceModeCanvas, TabFunnyCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabRaceMode, TabFunny])
+CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabGameModeOuter, TabFunnyOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabGameModeCanvas, TabFunnyCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabGameMode, TabFunny])
 
 # Tabs
 MainWindow.add(TabGeneralOuter, text ='General') 
@@ -118,7 +118,7 @@ MainWindow.add(TabBladesOuter, text ='Blades')
 MainWindow.add(TabEnemiesOuter, text ='Enemies') 
 MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.add(TabQOLOuter, text = 'Quality of Life')
-MainWindow.add(TabRaceModeOuter, text='Game Modes')
+MainWindow.add(TabGameModeOuter, text='Game Modes')
 MainWindow.add(TabFunnyOuter, text='Funny')
 MainWindow.add(TabMiscOuter, text ='Misc.') 
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
@@ -263,6 +263,7 @@ def Options():
     GenStandardOption("Music", TabMisc, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle(OptionDictionary)], ["Mix Battle and \nEnvironment Themes", []]) # need to change title screen music
     GenStandardOption("Trust Lines", TabMisc, "Randomizes blade trust lines in battle (colors, power, etc.)", [lambda: TrustBeam.BeamRandomizer()])
     GenStandardOption("Custom Core Crystals", TabMisc, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests.", [lambda: CoreCrystalAdjustments.CoreCrystalChanges(OptionDictionary)], optionType=Spinbox) # The slider shouldnt do anything tbh the other things have sliders like enemy drop rando, chest rando etc. All this should do is add custom crystals to the crystal file. 
+    GenStandardOption("Difficulty", TabMisc, "Forces this difficulty, regardless of what is chosen in the options menu", [], ["Easy", [], "Normal", [], "Bringer of Chaos", [], "Ultimate", []])
 
     
     
@@ -296,9 +297,8 @@ def Options():
     GenStandardOption("Character Outfits", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics(OptionDictionary)], RexCosmetics + NiaDriverCosmetics + ToraCosmetics + MoragCosmetics + ZekeCosmetics + PyraCosmetics + MythraCosmetics + DromarchCosmetics + BrighidCosmetics + PandoriaCosmetics + NiaBladeCosmetics + PoppiαCosmetics + PoppiQTCosmetics + PoppiQTπCosmetics, Spinbox)
     
     # Race Mode
-    GenStandardOption("Race Mode", TabRaceMode, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(OptionDictionary), RaceMode.SeedHash], ["Zohar Fragment Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", [], "Field Skill Trees", [lambda: CoreCrystalAdjustments.FieldSkillLevelAdjustment()]])
-    GenStandardOption("Difficulty", TabRaceMode, "Forces this difficulty, regardless of what is chosen in the options menu", [], ["Easy", [], "Normal", [], "Bringer of Chaos", [], "Ultimate", []])
-    GenStandardOption("Unique Monster Hunt", TabRaceMode, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt()], optionType=Spinbox)
+    GenStandardOption("Race Mode", TabGameMode, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(OptionDictionary), RaceMode.SeedHash], ["Zohar Fragment Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", [], "Field Skill Trees", [lambda: CoreCrystalAdjustments.FieldSkillLevelAdjustment()]])
+    GenStandardOption("Unique Monster Hunt", TabGameMode, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt()], optionType=Spinbox)
 
     # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
     GenStandardOption("Blade Names", TabBlades, "Randomizes a Blade's name", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
@@ -311,9 +311,6 @@ Options()
 
 def Randomize():
     def ThreadedRandomize():
-        # Variables
-        global OptionDictionary
-        
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
 
