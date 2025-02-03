@@ -13,10 +13,16 @@ PartyMembersAddScripts = {"Tora": ["chapt02", 7], "Nia": ["chapt02", 9], "Morag"
 # Item ID 25489 is the Shop Token!
 
 # TO DO
+
 # all blades unlock skill tree levels by purchasing items in shops?
 # need to add custom shops with deeds/other stuff for purchase in each area
 # I can just start with all continents having 1 landmark on them, and then just allow the mapON condition to be dependent on the order.
-# change font color of "Current Objective", and change it to something like "bounties remaining"
+# Maybe change the blade bundles to be from the same overall class distribution pool, but have them be mixed up, and change the names to "Blade Bundle 1->10", and increase the cost accordingly
+
+
+# Known Issues: 
+# Map is fucky at Argentum
+# No indicator to let you know if you've bought a blade bundle before.
 
 def UMHunt(OptionDictionary):
     if IDs.CurrentSliderOdds != 0:
@@ -39,6 +45,7 @@ def UMHunt(OptionDictionary):
         CustomShopSetup()
         Cleanup()
         UMHuntMenuTextChanges()
+        #DebugItemsPlace()
 
 def WarpManagement(SetCount, ChosenAreaOrder, PartyMemberstoAdd, EnemySets): # Main function was getting a bit too cluttered
     EventSetup(SetCount, ChosenAreaOrder, PartyMemberstoAdd)
@@ -266,7 +273,7 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
     EnemyRandoLogic.SwimmingEnemyFix(AllOriginalUMIDs, AllAreaUMs)
     EnemyRandoLogic.FishFix()
     EnemyRandoLogic.BigEnemyCollisionFix()
-    EnemyRandoLogic.SummonsLevelAdjustment()
+
     return AllAreaUMs, AllAreaMonsters
     
 def CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder): # adjusts aggro + drops of all enemies
@@ -287,6 +294,7 @@ def CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder): # adj
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+    EnemyRandoLogic.SummonsLevelAdjustment()
 
 def LandmarkAdjustments(ChosenAreaOrder): # removes xp and sp gains from landmarks, except for the first one
     for i in range(0, len(ChosenAreaOrder)):
@@ -341,7 +349,7 @@ def AddQuestConditions(SetCount, ChosenAreaOrder): # Adding conditions for each 
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     OrderedMapIDs = []
-    with open("./_internal/JsonOutputs/common/FLD_maplist.json", 'r+', encoding='utf-8') as file:
+    with open("./_internal/JsonOutputs/common/FLD_maplist.json", 'r+', encoding='utf-8') as file: # pretty sure this is messing up stuff with the maps
         data = json.load(file)
         for i in range(0, len(ChosenAreaOrder)):
             for row in data["rows"]:
@@ -429,7 +437,7 @@ def UMRewardDropChanges(): #Changes text for the UM drops we want
         for i in range(1, 11):
             for row in data["rows"]:
                 if row["$id"] == 962 + i:
-                    row["name"] = f"[System:Color name=green]Bounty Token Lv{i}[/System:Color]"
+                    row["name"] = f"[System:Color name=green]Bounty Token Lv {i}[/System:Color]"
                 if row["$id"] == 978 + i:
                     row["name"] = "Can be traded at the \nBounty Token Exchange for upgrades."
         for row in data["rows"]:
@@ -627,7 +635,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         "RewardIDs": Helper.InclRange(1292, 1307), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
         "RewardItemIDs": OutputCrystalGroupItemIDs, # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
         "RewardQtys": [Helper.ExtendListtoLength([], 16, "1"), Helper.ExtendListtoLength([], 16, "1"), FullFillerList, FullFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
-        "RewardNames": ["ATK Blade Bundle", "ATK Blade Bundle", "ATK Blade Bundle", "ATK Blade Bundle", "TNK Blade Bundle", "TNK Blade Bundle", "TNK Blade Bundle", "HLR Blade Bundle", "HLR Blade Bundle", "HLR Blade Bundle", "DLC Core Crystal", "DLC Core Crystal", "DLC Core Crystal", "NG+ Core Crystal", "NG+ Core Crystal", "NG+ Core Crystal"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
+        "RewardNames": ["ATK Blade Bundle 1", "ATK Blade Bundle 2", "ATK Blade Bundle 3", "ATK Blade Bundle 4", "TNK Blade Bundle 1", "TNK Blade Bundle 2", "TNK Blade Bundle 3", "HLR Blade Bundle 1", "HLR Blade Bundle 2", "HLR Blade Bundle 3", "DLC Core Crystal 1", "DLC Core Crystal 2", "DLC Core Crystal 3", "NG+ Core Crystal 1", "NG+ Core Crystal 2", "NG+ Core Crystal 3"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
         "RewardSP": FullFillerList, #FLD_QuestReward Sp
         "RewardXP": FullFillerList # FLD_QuestReward EXP
     }
@@ -717,6 +725,23 @@ def CustomShopSetup(): # Sets up the custom shops with loot
                     row["EventID"] = ShopList[i]["ShopEventID"]
                     row["ShopID"] = ShopList[i]["ShopIDtoReplace"]
                     break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def DebugItemsPlace(): #need to place some tokens to play around with them in the shops
+    with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_TboxPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 209:
+                row["itm1ID"] = 25488
+                row["itm1Num"] = 1
+                row["itm2ID"] = 25487
+                row["itm2Num"] = 1
+                row["itm3ID"] = 25489
+                row["itm3Num"] = 1
+                row["itm4ID"] = 25485
+                row["itm4Num"] = 1
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
