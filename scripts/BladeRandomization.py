@@ -26,8 +26,8 @@ BladesZekeCantUse = [1001, 1002, 1009, 1011]
 # Specifically, these are healers which have a healing halo equivalent move. So Twin Rings and Bitballs
 # TODO: How does this work when considering randomized art effects?
 GuaranteedHealer = None
-RexHealerBlades = [1011]
-NiaHealerBlades = [1004, 1021, 1033, 1038, 1041, 1107, 1109, 1111] # + Obrona if we can get NG+ Blades working without the weapon chip quirks
+RexHealerBlades = [] #[1011] Blade Nia, removed for now because I think it's unfair since Pyra leaves the party a few times. Might revisit this or make this its own option in the future.
+NiaHealerBlades = [1004, 1021, 1033, 1038, 1041, 1107, 1109, 1111] # + Obrona (and Mikhail?) if we can get NG+ Blades working without the weapon chip quirks
 PossibleGuaranteedHealerBlades = RexHealerBlades + NiaHealerBlades
 
 PoppiForms = [1005, 1006, 1007]
