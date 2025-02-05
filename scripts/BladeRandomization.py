@@ -7,7 +7,6 @@ import copy, random, JSONParser, Helper
 #     - Only do these if blade Nia was actually replaced with something that isn't Blade Nia
 #  - Replace "Pandoria" on Zeke's Unleash Shining Justice skill
 #  - Probably various other menu texts
-#  - Randomize Poppi Forms
 #  - Figure out how to randomize Torna blades properly (Apparently NoBuildWpn in CHR_Bl is not sufficient)
 #  - Blade names should be replaced in all dialogs where possible
 #  - Cosmetics do not work
@@ -45,7 +44,7 @@ def BladeRandomization(OptionsRunDict):
 
     BugFixes_PreRandomization()
     RandomizeBlades(OptionsRunDict)
-    # RandomizePoppiForms(OptionsRunDict) # TODO
+    RandomizePoppiForms(OptionsRunDict)
     BugFixes_PostRandomization()
 
     # FinalTouches() #TODO
@@ -195,9 +194,58 @@ def ApplyBladeRandomization(blade):
 
 
 def RandomizePoppiForms(OptionsRunDict):
-    print('TODO: RandomizePoppiForms()')
-    # TODO: Randomize Poppi forms so they appear in a random order (such as QTpi in Ch2, then Alpha in Ch4, then QT after doing QTpi's side quest)
-    # TODO: How do I make it so the poppiswaps are in the right spot?
+    blades_left_to_randomize = PoppiForms.copy()
+    randomized_order = blades_left_to_randomize.copy()
+    random.shuffle(randomized_order)
+
+    # Determine the randomization prior to randomizing.
+    # This way we can populate Original2Replacement and Replacement2Original,
+    # which will be needed later on for various reasons
+    while blades_left_to_randomize:
+        next_blade = blades_left_to_randomize[0]
+        next_replacement = randomized_order[0]
+        Original2Replacement[next_blade] = next_replacement
+        Replacement2Original[next_replacement] = next_blade
+        if include_printouts:
+            print('========================================')
+            print(BladeNames[next_blade] + ' was replaced with ' + BladeNames[next_replacement])
+            print(str(next_blade) + ' was replaced with ' + str(next_replacement))
+        del blades_left_to_randomize[0]
+        del randomized_order[0]
+
+    # Apply Randomizations
+    JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], PoppiForms, ApplyBladeRandomization)
+
+    # Replace Poppiswap images
+    def ReplacePoppiswapImages(image):
+        # Poppi alpha is 1005, and the poppis are ordered sequentially. Easy calculation by adding 1004 to the image ID
+        original_poppi_id = image['$id'] + 1004
+        new_image_num = Original2Replacement[original_poppi_id] - 1004
+        image['filename'] = 'mnu091_hana_img0' + str(new_image_num)
+    JSONParser.ChangeJSONLineWithCallback(["common/MNU_Hana_custom.json"], [], ReplacePoppiswapImages, replaceAll=True)
+
+    # Randomize initial Poppi chipset
+    # Only randomize fields which have settings explicitly set.
+    # For example, don't randomize the Element Core unless blade elements are randomized.
+    PoppiRoles = Helper.InclRange(56001, 56036)
+    PoppiElements = Helper.InclRange(57001, 57008)
+    PoppiBladeArts = Helper.InclRange(59001, 59045)
+    random.shuffle(PoppiRoles)
+    random.shuffle(PoppiElements)
+    random.shuffle(PoppiBladeArts)
+    def ReplacePoppiChipset(poppi):
+        if OptionsRunDict["Blade Weapon Class"]["optionTypeVal"].get():
+            poppi['RoleParts'] = PoppiRoles[0]
+            del PoppiRoles[0]
+        if OptionsRunDict["Blade Elements"]["optionTypeVal"].get():
+            poppi['AtrParts'] = PoppiElements[0]
+            del PoppiElements[0]
+        if OptionsRunDict["Blade Arts"]["optionTypeVal"].get():
+            for i in Helper.InclRange(1, 3):
+                if poppi['NArtsParts' + str(i)]:
+                    poppi['NArtsParts' + str(i)] = PoppiBladeArts[0]
+                    del PoppiBladeArts[0]
+    JSONParser.ChangeJSONLineWithCallback(["common/BTL_HanaChipset.json"], [], ReplacePoppiChipset, replaceAll=True)
 
 
 def BugFixes_PostRandomization():
