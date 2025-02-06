@@ -14,17 +14,19 @@ def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list =
         with open(filePath, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for item in data['rows']:
-                if not item["$id"] in InvalidTargetIDs:
-                    for key in item:  
-                        if ([item["$id"], key] not in IgnoreID_AND_Key):       
-                            if key in keyWords:
-                                if (((rangeofValuesToReplace == []) or (item[key] in rangeofValuesToReplace)) and (SliderOdds >= random.randint(1,100))):
-                                    item[key] = random.choice(rangeValidReplacements)
-                            elif key == "Flag":
-                                for flag, flagVal in item[key].items():
-                                    if flag in keyWords:
-                                        if ((flagVal in rangeofValuesToReplace) and (SliderOdds >= random.randint(1,100))):
-                                            item[key][flag] = random.choice(rangeValidReplacements)                                
+                if item["$id"] in InvalidTargetIDs:
+                    continue
+                for key in item:  
+                    if ([item["$id"], key] in IgnoreID_AND_Key):
+                        continue       
+                    if key in keyWords:
+                        if (((rangeofValuesToReplace == []) or (item[key] in rangeofValuesToReplace)) and (SliderOdds >= random.randint(1,100))):
+                            item[key] = random.choice(rangeValidReplacements)
+                    elif key == "Flag":
+                        for flag, flagVal in item[key].items():
+                            if flag in keyWords:
+                                if ((flagVal in rangeofValuesToReplace) and (SliderOdds >= random.randint(1,100))):
+                                    item[key][flag] = random.choice(rangeValidReplacements)                                
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)

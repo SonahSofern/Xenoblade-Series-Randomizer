@@ -108,7 +108,7 @@ def RandomizeSkillEnhancements(optDict):
                         skill = BStartBattle
                     else:
                         skill = random.choice(ValidSkills)
-                        ValidSkills.remove(skill)
+                        # ValidSkills.remove(skill)
                     skill.RollEnhancement()
                     skillNameFile["rows"][skillSlot["$id"]-1]["name"] = skill.name
                     enhanceFile["rows"][skillSlot["$id"]-1]["Enhance"] = skill.id

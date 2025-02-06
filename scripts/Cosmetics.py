@@ -1,12 +1,13 @@
 import json, random, IDs
 
+# List passed to gen the options 
+CosmeticsList = []
 
-class Cosmetic:
-    def __init__(self, model: str, characterID: int, characterName:str):
-        self.model = model
-        self.characterID = characterID
-        self.characterName = characterName
-        
+# Types
+Blade = 1
+Driver = 2
+ArtBlade = 3
+
 # Character Numbers
 Rex = "Rex"
 Nia = "Nia"
@@ -22,202 +23,89 @@ PoppiQTπ = "PoppiQTπ"
 Brighid = "Brighid"
 Pandoria = "Pandoria"
 
-# Blades
-JadeOrchidBrighid = Cosmetic("bl/bl121001", 1009, Brighid)
-WaterLilyBrighid = Cosmetic("bl/bl111001", 1009, Brighid)
-CrimsonOrchidBrighid = Cosmetic("bl/bl101001", 1009, Brighid)
-DefaultBrighid = Cosmetic("bl/bl001001", 1009, Brighid)
-
-MagicalPinkPandoria = Cosmetic("bl/bl120901", 1010, Pandoria)
-MermaidBluePandoria = Cosmetic("bl/bl100901", 1010, Pandoria)
-BeachDatePandoria = Cosmetic("bl/bl110901", 1010, Pandoria)
-DefaultPandoria = Cosmetic("bl/bl000901", 1010, Pandoria)
-ClearGlassesPandoria = Cosmetic("bl/bl000902", 1010, Pandoria)
-
-ObsidianDromarch = Cosmetic("bl/bl120501", 1004, Dromarch)
-SavageDromarch = Cosmetic("bl/bl100501", 1004, Dromarch)
-DefaultDromarch = Cosmetic("bl/bl000501", 1004, Dromarch)
-
-DevotedMarigoldNia = Cosmetic("bl/bl120403", 1011, Nia)
-SincerePrimroseNia = Cosmetic("bl/bl120402", 1011, Nia)
-LoyalBellflowerNia = Cosmetic("bl/bl120401", 1011, Nia)
-DefaultBladeNia = Cosmetic("bl/bl000401", 1011, Nia)
-
-CarbonMythra = Cosmetic("bl/bl120201", 1002, Mythra)
-RadiantBeachMythra = Cosmetic("bl/bl110201", 1002, Mythra)
-PyraStyleMythra = Cosmetic("bl/bl100201", 1002, Mythra)
-DefaultMythra = Cosmetic("bl/bl000201", 1002, Mythra)
-
-MythraStylePyra = Cosmetic("bl/bl100102", 1001, Pyra)
-DisguisedPyra = Cosmetic("bl/bl100101", 1001, Pyra)
-BlueSkyPyra = Cosmetic("bl/bl120101", 1001, Pyra)
-ProSwimmerPyra = Cosmetic("bl/bl110101", 1001, Pyra)
-DefaultPyra = Cosmetic("bl/bl000101", 1001, Pyra)
-
-DefaultPoppiα = Cosmetic("bl/bl000601", 1005, Poppiα)
-CornflowerPoppiα = Cosmetic("bl/bl120601", 1005, Poppiα)
-SwimLessonPoppiα = Cosmetic("bl/bl110601", 1005, Poppiα)
-
-DefaultPoppiQT = Cosmetic("bl/bl000701", 1006, PoppiQT)
-AntiquePrincessPoppiQT = Cosmetic("bl/bl120701", 1006, PoppiQT)
-
-DefaultPoppiQTπ = Cosmetic("bl/bl000801", 1007, PoppiQTπ)
-NanoOrangeQTπ = Cosmetic("bl/bl120801", 1007, PoppiQTπ)
-
-# Drivers
-CloudSeaKingRex = Cosmetic("pc/pc120101", 1, Rex)
-CloudSeaSharkRex = Cosmetic("pc/pc110101", 1, Rex)
-PrototypeSuitRex = Cosmetic("pc/pc100101", 1, Rex)
-MasterDriverRex = Cosmetic("pc/pc000103", 1, Rex)
-HelmetedRex = Cosmetic("pc/pc000102", 1, Rex)
-DefaultRex = Cosmetic("pc/pc000101", 1, Rex)
-
-ObligatoryLeaveMorag = Cosmetic("pc/pc110601", 6, Morag)
-DressUniformMorag = Cosmetic("pc/pc100601", 6, Morag)
-ScarletInquisitorMorag = Cosmetic("pc/pc120601", 6, Morag)
-DefaultMorag = Cosmetic("pc/pc000601", 6, Morag)
-
-SurfinatorZeke = Cosmetic("pc/pc110501", 3, Zeke)
-EmbercakeZeke = Cosmetic("pc/pc100501", 3, Zeke)
-ShiningJusticeZeke = Cosmetic("pc/pc120501", 3, Zeke)
-DefaultZeke = Cosmetic("pc/pc000501", 3, Zeke)
-HoodedZeke = Cosmetic("pc/pc000502", 3, Zeke)
-
-BestGirlFanTora = Cosmetic("pc/pc110301", 4, Tora)
-BusterModeTora = Cosmetic("pc/pc100301", 4, Tora)
-SkullfacePunkTora = Cosmetic("pc/pc120301", 4, Tora)
-DefaultTora = Cosmetic("pc/pc000301", 4, Tora)
-
-FancySundressNia = Cosmetic("pc/pc110201", 2, Nia)
-CandyStripeNia = Cosmetic("pc/pc100201", 2, Nia)
-BloodWitchNia = Cosmetic("pc/pc120201", 2, Nia)
-DefaultDriverNia = Cosmetic("pc/pc000201", 2, Nia)
-
-
-
-# Drivers
-RexCosmetics = [
-    "Master Driver Rex", 
-    [lambda: IDs.ValidDriverCosmetics.append(MasterDriverRex)],
-    "Cloud Sea King Rex", 
-    [lambda: IDs.ValidDriverCosmetics.append(CloudSeaKingRex)],
-    "Cloud Sea Shark Rex", 
-    [lambda: IDs.ValidDriverCosmetics.append(CloudSeaSharkRex)],
-    "Prototype Suit Rex", 
-    [lambda: IDs.ValidDriverCosmetics.append(PrototypeSuitRex)],
-    "Helmeted Rex", 
-    [lambda: IDs.ValidDriverCosmetics.append(HelmetedRex)],
-]
-
-NiaDriverCosmetics = [
-    "Blood Witch Nia", 
-    [lambda: IDs.ValidDriverCosmetics.append(BloodWitchNia)],
-    "Candy Stripe Nia", 
-    [lambda: IDs.ValidDriverCosmetics.append(CandyStripeNia)],
-    "Fancy Sundress Nia", 
-    [lambda: IDs.ValidDriverCosmetics.append(FancySundressNia)],
-]
-
-ToraCosmetics = [
-    "Buster Mode Tora", 
-    [lambda: IDs.ValidDriverCosmetics.append(BusterModeTora)],
-    "Skullface Punk Tora", 
-    [lambda: IDs.ValidDriverCosmetics.append(SkullfacePunkTora)],
-    "Best Girl Fan Tora", 
-    [lambda: IDs.ValidDriverCosmetics.append(BestGirlFanTora)],
-]
-
-MoragCosmetics = [
-    "Dress Uniform Morag", 
-    [lambda: IDs.ValidDriverCosmetics.append(DressUniformMorag)],
-    "Scarlet Inquisitor Morag", 
-    [lambda: IDs.ValidDriverCosmetics.append(ScarletInquisitorMorag)],
-    "Obligatory Leave Morag", 
-    [lambda: IDs.ValidDriverCosmetics.append(ObligatoryLeaveMorag)],
-]
-
-ZekeCosmetics = [
-    "Shining Justice Zeke", 
-    [lambda: IDs.ValidDriverCosmetics.append(ShiningJusticeZeke)],
-    "Embercake Zeke", 
-    [lambda: IDs.ValidDriverCosmetics.append(EmbercakeZeke)],
-    "Surfinator Zeke", 
-    [lambda: IDs.ValidDriverCosmetics.append(SurfinatorZeke)],
-]
+class Cosmetic:
+    def __init__(self, model: str, characterID: int, characterName:str, cosmeticName:str, type:int):
+        self.model = model
+        self.characterID = characterID
+        self.characterName = characterName
+        self.cosmeticName = cosmeticName
+        if type == Driver:
+            CosmeticsList.extend([self.cosmeticName, [lambda: IDs.ValidDriverCosmetics.append(self)]])
+        elif type == Blade:
+            CosmeticsList.extend([self.cosmeticName, [lambda: IDs.ValidBladeCosmetics.append(self)]])
+        elif type == ArtBlade:
+            CosmeticsList.extend([self.cosmeticName, [lambda: IDs.ValidArtificialBladeCosmetics.append(self)]])
 
 # Blades
-PyraCosmetics = [
-    "Blue Sky Pyra", 
-    [lambda: IDs.ValidBladeCosmetics.append(BlueSkyPyra)],
-    "Disguised Pyra", 
-    [lambda: IDs.ValidBladeCosmetics.append(DisguisedPyra)],
-    "Mythra Style Pyra", 
-    [lambda: IDs.ValidBladeCosmetics.append(MythraStylePyra)],
-    "Pro Swimmer Pyra", 
-    [lambda: IDs.ValidBladeCosmetics.append(ProSwimmerPyra)],
-]
+JadeOrchidBrighid = Cosmetic("bl/bl121001", 1009, Brighid, "Jade Orchid Brighid", Blade)
+WaterLilyBrighid = Cosmetic("bl/bl111001", 1009, Brighid, "Water Lily Brighid", Blade)
+CrimsonOrchidBrighid = Cosmetic("bl/bl101001", 1009, Brighid, "Crimson Orchid Brighid", Blade)
+# DefaultBrighid = Cosmetic("bl/bl001001", 1009, Brighid, "Default Brighid", Blade)
 
-MythraCosmetics = [
-    "Carbon Mythra", 
-    [lambda: IDs.ValidBladeCosmetics.append(CarbonMythra)],
-    "Pyra Style Mythra", 
-    [lambda: IDs.ValidBladeCosmetics.append(PyraStyleMythra)],
-    "Radiant Beach Mythra", 
-    [lambda: IDs.ValidBladeCosmetics.append(RadiantBeachMythra)],
-]
+MagicalPinkPandoria = Cosmetic("bl/bl120901", 1010, Pandoria, "Magical Pink Pandoria", Blade)
+MermaidBluePandoria = Cosmetic("bl/bl100901", 1010, Pandoria, "Mermaid Blue Pandoria", Blade)
+BeachDatePandoria = Cosmetic("bl/bl110901", 1010, Pandoria, "Beach Date Pandoria", Blade)
+# DefaultPandoria = Cosmetic("bl/bl000901", 1010, Pandoria, "Default Pandoria", Blade)
+ClearGlassesPandoria = Cosmetic("bl/bl000902", 1010, Pandoria, "Clear Glasses Pandoria", Blade)
 
-DromarchCosmetics = [
-    "Obsidian Dromarch", 
-    [lambda: IDs.ValidBladeCosmetics.append(ObsidianDromarch)],
-    "Savage Dromarch", 
-    [lambda: IDs.ValidBladeCosmetics.append(SavageDromarch)],
-]
+ObsidianDromarch = Cosmetic("bl/bl120501", 1004, Dromarch, "Obsidian Dromarch", Blade)
+SavageDromarch = Cosmetic("bl/bl100501", 1004, Dromarch, "Savage Dromarch", Blade)
+# DefaultDromarch = Cosmetic("bl/bl000501", 1004, Dromarch, "Default Dromarch", Blade)
 
-BrighidCosmetics = [
-    "Jade Orchid Brighid", 
-    [lambda: IDs.ValidBladeCosmetics.append(JadeOrchidBrighid)],
-    "Crimson Orchid Brighid", 
-    [lambda: IDs.ValidBladeCosmetics.append(CrimsonOrchidBrighid)],
-    "Water Lily Brighid", 
-    [lambda: IDs.ValidBladeCosmetics.append(WaterLilyBrighid)],
-]
+DevotedMarigoldNia = Cosmetic("bl/bl120403", 1011, Nia, "Devoted Marigold Nia", Blade)
+SincerePrimroseNia = Cosmetic("bl/bl120402", 1011, Nia, "Sincere Primrose Nia", Blade)
+LoyalBellflowerNia = Cosmetic("bl/bl120401", 1011, Nia, "Loyal Bellflower Nia", Blade)
+# DefaultBladeNia = Cosmetic("bl/bl000401", 1011, Nia, "Default Nia", Blade)
 
-PandoriaCosmetics = [
-    "Magical Pink Pandoria", 
-    [lambda: IDs.ValidBladeCosmetics.append(MagicalPinkPandoria)],
-    "Mermaid Blue Pandoria", 
-    [lambda: IDs.ValidBladeCosmetics.append(MermaidBluePandoria)],
-    "Beach Date Pandoria", 
-    [lambda: IDs.ValidBladeCosmetics.append(BeachDatePandoria)],
-    "Clear Glasses Pandoria", 
-    [lambda: IDs.ValidBladeCosmetics.append(ClearGlassesPandoria)],
-]
+CarbonMythra = Cosmetic("bl/bl120201", 1002, Mythra, "Carbon Mythra", Blade)
+RadiantBeachMythra = Cosmetic("bl/bl110201", 1002, Mythra, "Radiant Beach Mythra", Blade)
+PyraStyleMythra = Cosmetic("bl/bl100201", 1002, Mythra, "Pyra Style Mythra", Blade)
+# DefaultMythra = Cosmetic("bl/bl000201", 1002, Mythra, "Default Mythra", Blade)
 
-NiaBladeCosmetics = [
-    "Devoted Marigold Nia", 
-    [lambda: IDs.ValidBladeCosmetics.append(DevotedMarigoldNia)],
-    "Sincere Primrose Nia", 
-    [lambda: IDs.ValidBladeCosmetics.append(SincerePrimroseNia)],
-    "Loyal Bellflower Nia", 
-    [lambda: IDs.ValidBladeCosmetics.append(LoyalBellflowerNia)],
-]
+MythraStylePyra = Cosmetic("bl/bl100102", 1001, Pyra, "Mythra Style Pyra", Blade)
+DisguisedPyra = Cosmetic("bl/bl100101", 1001, Pyra, "Disguised Pyra", Blade)
+BlueSkyPyra = Cosmetic("bl/bl120101", 1001, Pyra, "Blue Sky Pyra", Blade)
+ProSwimmerPyra = Cosmetic("bl/bl110101", 1001, Pyra, "Pro Swimmer Pyra", Blade)
+# DefaultPyra = Cosmetic("bl/bl000101", 1001, Pyra, "Default Pyra", Blade)
 
-PoppiαCosmetics = [
-    "Cornflower Poppiα", 
-    [lambda: IDs.ValidArtificialBladeCosmetics.append(CornflowerPoppiα)],
-    "Swim Lesson Poppiα", 
-    [lambda: IDs.ValidArtificialBladeCosmetics.append(SwimLessonPoppiα)],
-]
+# DefaultPoppiα = Cosmetic("bl/bl000601", 1005, Poppiα, "Default Poppiα", ArtBlade)
+CornflowerPoppiα = Cosmetic("bl/bl120601", 1005, Poppiα, "Cornflower Poppi α", ArtBlade)
+SwimLessonPoppiα = Cosmetic("bl/bl110601", 1005, Poppiα, "Swim Lesson Poppi α", ArtBlade)
 
-PoppiQTCosmetics = [
-    "Antique Princess PoppiQT", 
-    [lambda: IDs.ValidArtificialBladeCosmetics.append(AntiquePrincessPoppiQT)],
-]
+# DefaultPoppiQT = Cosmetic("bl/bl000701", 1006, PoppiQT, "Default PoppiQT", ArtBlade)
+AntiquePrincessPoppiQT = Cosmetic("bl/bl120701", 1006, PoppiQT, "Antique Princess QT", ArtBlade)
 
-PoppiQTπCosmetics = [
-    "Nano Orange QTπ", 
-    [lambda: IDs.ValidArtificialBladeCosmetics.append(NanoOrangeQTπ)],
-]
+# DefaultPoppiQTπ = Cosmetic("bl/bl000801", 1007, PoppiQTπ, "Default PoppiQTπ", ArtBlade)
+NanoOrangeQTπ = Cosmetic("bl/bl120801", 1007, PoppiQTπ, "Nano Orange QTπ", ArtBlade)
+
+# Drivers
+CloudSeaKingRex = Cosmetic("pc/pc120101", 1, Rex, "Cloud Sea King Rex", Driver)
+CloudSeaSharkRex = Cosmetic("pc/pc110101", 1, Rex, "Cloud Sea Shark Rex", Driver)
+PrototypeSuitRex = Cosmetic("pc/pc100101", 1, Rex, "Prototype Suit Rex", Driver)
+MasterDriverRex = Cosmetic("pc/pc000103", 1, Rex, "Master Driver Rex", Driver)
+HelmetedRex = Cosmetic("pc/pc000102", 1, Rex, "Helmeted Rex", Driver)
+# DefaultRex = Cosmetic("pc/pc000101", 1, Rex, "Default Rex", Driver)
+
+ObligatoryLeaveMorag = Cosmetic("pc/pc110601", 6, Morag, "Obligatory Leave Morag", Driver)
+DressUniformMorag = Cosmetic("pc/pc100601", 6, Morag, "Dress Uniform Morag", Driver)
+ScarletInquisitorMorag = Cosmetic("pc/pc120601", 6, Morag, "Scarlet Inquisitor Morag", Driver)
+# DefaultMorag = Cosmetic("pc/pc000601", 6, Morag, "Default Morag", Driver)
+
+SurfinatorZeke = Cosmetic("pc/pc110501", 3, Zeke, "Surfinator Zeke", Driver)
+EmbercakeZeke = Cosmetic("pc/pc100501", 3, Zeke, "Embercake Zeke", Driver)
+ShiningJusticeZeke = Cosmetic("pc/pc120501", 3, Zeke, "Shining Justice Zeke", Driver)
+# DefaultZeke = Cosmetic("pc/pc000501", 3, Zeke, "Default Zeke", Driver)
+HoodedZeke = Cosmetic("pc/pc000502", 3, Zeke, "Hooded Zeke", Driver)
+
+BestGirlFanTora = Cosmetic("pc/pc110301", 4, Tora, "Best Girl Fan Tora", Driver)
+BusterModeTora = Cosmetic("pc/pc100301", 4, Tora, "Buster Mode Tora", Driver)
+SkullfacePunkTora = Cosmetic("pc/pc120301", 4, Tora, "Skullface Punk Tora", Driver)
+# DefaultTora = Cosmetic("pc/pc000301", 4, Tora, "Default Tora", Driver)
+
+FancySundressNia = Cosmetic("pc/pc110201", 2, Nia, "Fancy Sundress Nia", Driver)
+CandyStripeNia = Cosmetic("pc/pc100201", 2, Nia, "Candy Stripe Nia", Driver)
+BloodWitchNia = Cosmetic("pc/pc120201", 2, Nia, "Blood Witch Nia", Driver)
+# DefaultDriverNia = Cosmetic("pc/pc000201", 2, Nia, "Default Nia", Driver)
 
 
 def CosmeticPairs(nameData, itmData,odds, charKeyWord, cosmeticsList):
@@ -233,13 +121,13 @@ def CosmeticPairs(nameData, itmData,odds, charKeyWord, cosmeticsList):
                 pairs[Acc["Name"]] = {"cosm": cosm}
             
             
-            for _Acc in nameData["rows"]:
+            for _Acc in nameData["rows"]: # Set name
                 if _Acc["$id"] == Acc["Name"]:
                     oldName = _Acc["name"]
                     oldNameList = oldName.split()
                     firstWord = oldNameList[0]
                     _Acc["name"] = f"{firstWord} {cosm.characterName}"  
-                    print(_Acc["name"])
+                    # print(_Acc["name"])
                     break
                 
             Acc["Model"] = cosm.model
