@@ -1,4 +1,9 @@
-import json, random, IDs
+import json, random
+
+# Lists of cosmetics to choose from
+ValidDriverCosmetics = []
+ValidBladeCosmetics = [] 
+ValidArtificialBladeCosmetics = [] 
 
 # List passed to gen the options 
 CosmeticsList = []
@@ -30,11 +35,11 @@ class Cosmetic:
         self.characterName = characterName
         self.cosmeticName = cosmeticName
         if type == Driver:
-            CosmeticsList.extend([self.cosmeticName, [lambda: IDs.ValidDriverCosmetics.append(self)]])
+            CosmeticsList.extend([self.cosmeticName, [lambda: ValidDriverCosmetics.append(self)]])
         elif type == Blade:
-            CosmeticsList.extend([self.cosmeticName, [lambda: IDs.ValidBladeCosmetics.append(self)]])
+            CosmeticsList.extend([self.cosmeticName, [lambda: ValidBladeCosmetics.append(self)]])
         elif type == ArtBlade:
-            CosmeticsList.extend([self.cosmeticName, [lambda: IDs.ValidArtificialBladeCosmetics.append(self)]])
+            CosmeticsList.extend([self.cosmeticName, [lambda: ValidArtificialBladeCosmetics.append(self)]])
 
 # Blades
 JadeOrchidBrighid = Cosmetic("bl/bl121001", 1009, Brighid, "Jade Orchid Brighid", Blade)
@@ -143,7 +148,7 @@ def Cosmetics(optionDict):
             eqData = json.load(file)
             accNameData = json.load(nameFile)
             
-            CosmeticPairs(accNameData, eqData, odds, "Driver", IDs.ValidDriverCosmetics)
+            CosmeticPairs(accNameData, eqData, odds, "Driver", ValidDriverCosmetics)
             
             nameFile.seek(0)
             nameFile.truncate()
@@ -158,7 +163,7 @@ def Cosmetics(optionDict):
             orbData = json.load(orbFile)
             nameData = json.load(nameFile)
             
-            CosmeticPairs(nameData,orbData,odds,"Blade", IDs.ValidBladeCosmetics)
+            CosmeticPairs(nameData,orbData,odds,"Blade", ValidBladeCosmetics)
             
             nameFile.seek(0)
             nameFile.truncate()
@@ -172,7 +177,7 @@ def Cosmetics(optionDict):
         eqData = json.load(file)
         for Acc in eqData["rows"]:
             if (odds > random.randint(0,99)):
-                cosm:Cosmetic = random.choice(IDs.ValidArtificialBladeCosmetics) # these names are shared with regular ones so its not going to work to put poppi names on them when most cant equip those anyway
+                cosm:Cosmetic = random.choice(ValidArtificialBladeCosmetics) # these names are shared with regular ones so its not going to work to put poppi names on them when most cant equip those anyway
                 Acc["Model"] = cosm.model
                 Acc["Blade"] = cosm.characterID
         file.seek(0)
@@ -180,6 +185,6 @@ def Cosmetics(optionDict):
         json.dump(eqData, file, indent=2, ensure_ascii=False)
         
     # Clear globals
-    IDs.ValidDriverCosmetics.clear()
-    IDs.ValidBladeCosmetics.clear()
-    IDs.ValidArtificialBladeCosmetics.clear()
+    ValidDriverCosmetics.clear()
+    ValidBladeCosmetics.clear()
+    ValidArtificialBladeCosmetics.clear()

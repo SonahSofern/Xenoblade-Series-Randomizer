@@ -6,9 +6,6 @@ import json
 ValidReplacements = [] # Global Variable Referenced for JsonParser
 InvalidReplacements = [] # Global Variable Referenced for JsonParser
 CurrentSliderOdds = 100 # Global Variable Referenced for JsonParser
-ValidDriverCosmetics = [] # Global Variable Referenced for Cosmetics
-ValidBladeCosmetics = [] # Global Variable Referenced for Cosmetics
-ValidArtificialBladeCosmetics = [] # Global Variable Referenced for Cosmetics
 
 CanvasesForStyling = []
 RootsForStyling = []
@@ -38,10 +35,6 @@ HitReactions = Helper.InclRange(0,16)
 ButtonCombos = Helper.InclRange(1,5)
 BladeBattleSkills = Helper.InclRange(1,270)
 
-InvalidFieldSkills = [1,8]
-TornaFieldSkills = [68,69,70,71,72, 66,65,64,63,61]
-UniqueFieldSkills = [74, 73, 31, 35, 46, 33,37,39,26,43,44,57,34,40,51,29,30,45,47,27,36,28,32,42,50,48,58,41,49]
-BladeFieldSkills = [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 38, 52, 53, 54, 55, 56, 59, 60, 62, 67]
 
 LootOptions = ["Accessories", [lambda: ValidReplacements.extend(Accessories)] ,"Torna Accessories", [lambda: ValidReplacements.extend(TornaAccessories)], "Weapon Chips", [lambda: ValidReplacements.extend(WeaponChips)], "Aux Cores", [lambda: ValidReplacements.extend(AuxCores)], "Refined Aux Cores", [lambda: ValidReplacements.extend(RefinedAuxCores)], "Core Crystals", [lambda: ValidReplacements.extend(CoreCrystals)], "Deeds", [lambda: ValidReplacements.extend(Deeds)], "Collection Point Materials", [lambda: ValidReplacements.extend(CollectionPointMaterials)]]
 PouchItemOption = ["Pouch Items", [lambda: ValidReplacements.extend(PouchItems)]]
