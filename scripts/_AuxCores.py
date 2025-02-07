@@ -3,7 +3,7 @@ from Enhancements import *
 
 
 def RandomizeAuxCoreEnhancements(OptionDictionary):
-    InvalidSkillEnhancements = [ForcedHPPotionOnHit,ArtCancel,HpPotChanceFor2, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, EvadeDrainHp, EvadeDriverArt,ArtDamageHeal]
+    InvalidSkillEnhancements = [ForcedHPPotionOnHit,ArtCancel,HpPotChanceFor2, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, EvadeDrainHp, EvadeDriverArt,ArtDamageHeal, BladeSwitchDamageUp]
 
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
 

@@ -175,6 +175,19 @@ def FixRoc(): # Fixes Roc softlock
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+#def FixArtReleaseLevels(): # Fixes issue with NG+ blades having incredibly high level requirements for arts
+#    with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
+#        data = json.load(file)
+#        RandomBlades = BladeIDs.copy()
+#        random.shuffle(RandomBlades)
+#        for row in data["rows"]:
+#            if (row["$id"] in IDs.ValidArtIDs) & (row["WpnType"] != 17):
+#                for i in range(1, 6):
+#                    row[f"ReleaseLv{i}"] = 1
+#        file.seek(0)
+#        file.truncate()
+#        json.dump(data, file, indent=2, ensure_ascii=False)
+
 def CoreCrystalChanges(OptionsRunDict):
     RareBladeProbabilityEqualizer()
     AdjustingCrystalList()
@@ -184,4 +197,5 @@ def CoreCrystalChanges(OptionsRunDict):
     if not OptionsRunDict["Race Mode"]["optionTypeVal"].get():
         RegularLootDistribution()
         FixRoc()
+        #FixArtReleaseLevels() # Need to just call Hybrid's function MakeAllArtsAccessible() when I merge it with my branch
         RaceMode.FindtheBladeNames(OptionsRunDict)

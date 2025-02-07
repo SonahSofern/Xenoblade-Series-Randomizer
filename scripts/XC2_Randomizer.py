@@ -154,7 +154,7 @@ def InteractableStateSet():
         item()
         
 
-def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton):   
+def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton, spinMin = 0, spinMax = 100, spinStep = 10, spinBoxDescription = "% randomized"):   
     # Variables
     global OptionDictionary
     global rowIncrement
@@ -179,9 +179,9 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     
     # % Boxes
     if (optionType == Spinbox):
-        spinBoxObj = ttk.Spinbox(optionPanel, from_=0, to=100, textvariable=spinBoxVar, wrap=True, width=3, increment=10)
+        spinBoxObj = ttk.Spinbox(optionPanel, from_=spinMin, to=spinMax, textvariable=spinBoxVar, wrap=True, width=3, increment= spinStep)
         spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
-        spinDesc = ttk.Label(optionPanel, text="% randomized", anchor="w")
+        spinDesc = ttk.Label(optionPanel, text=spinBoxDescription, anchor="w")
         spinDesc.grid(row=rowIncrement, column=3, sticky="w", padx=0)
 
     # Create Main Option Dictionary Entry
@@ -298,10 +298,8 @@ def Options():
     # Race Mode
     GenStandardOption("Race Mode", TabRaceMode, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(OptionDictionary), RaceMode.SeedHash], ["Zohar Fragment Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", [], "Field Skill Trees", [lambda: CoreCrystalAdjustments.FieldSkillLevelAdjustment()]])
     GenStandardOption("Difficulty", TabRaceMode, "Forces this difficulty, regardless of what is chosen in the options menu", [], ["Easy", [], "Normal", [], "Bringer of Chaos", [], "Ultimate", []])
-
     
-    
-    GenStandardOption("Unique Monster Hunt", TabRaceMode, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt(OptionDictionary)], optionType=Spinbox)
+    GenStandardOption("Unique Monster Hunt", TabRaceMode, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt(OptionDictionary)], optionType=Spinbox, spinMax = 10, spinStep = 1, spinBoxDescription = "round")
 
     # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
     GenStandardOption("Blade Names", TabBlades, "Randomizes a Blade's name", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
