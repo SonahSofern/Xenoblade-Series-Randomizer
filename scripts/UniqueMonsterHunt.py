@@ -1,4 +1,5 @@
 import json, random, Helper, IDs, EnemyRandoLogic, RaceMode, math
+from Enhancements import *
 
 AllUniqueMonsterDefaultIDs = [611, 612, 705, 706, 707, 708, 709, 710, 711, 712, 713, 715, 736, 738, 808, 809, 810, 811, 812, 814, 815, 816, 817, 819, 890, 891, 892, 893, 894, 895, 896, 898, 899, 926, 929, 953, 954, 955, 957, 958, 1019, 1020, 1023, 1025, 1026, 1101, 1102, 1104, 1106, 1108, 1109, 1111, 1112, 1113, 1114, 1115, 1131, 1132, 1134, 1155, 1156, 1157, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1255, 1256, 1258, 1260, 1261, 1262, 1264, 1265, 1563, 1564, 1566, 1567, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1670, 1774, 1886]
 
@@ -10,19 +11,28 @@ TotalAreaPool = ["Gormott", "Uraya", "Mor Ardain", "Leftheria", "Temperantia", "
 # "Driver": ["scriptName", "scriptStartID"]
 PartyMembersAddScripts = {"Tora": ["chapt02", 7], "Nia": ["chapt02", 9], "Morag": ["chapt05", 7], "Zeke": ["chapt06", 5]}
 
+ProofofPurchaseIDs = Helper.InclRange(25306, 25321)
+
+# For Weapon Chips
+
+
+
+
 # Item ID 25489 is the Shop Token!
 
 # TO DO
 
 # all blades unlock skill tree levels by purchasing items in shops?
+# Think it's probably better to make them story dependent, so when you hit a certain scenario flag minimum, it unlocks
 # need to add custom shops with deeds/other stuff for purchase in each area
 # I can just start with all continents having 1 landmark on them, and then just allow the mapON condition to be dependent on the order.
 # Maybe change the blade bundles to be from the same overall class distribution pool, but have them be mixed up, and change the names to "Blade Bundle 1->10", and increase the cost accordingly
-
+# Think I need to have story alternate between Argentum and Area
+# Need to add landmarks for Spirit Crucible and Cliffs of Morytha just like in Race Mode.
 
 # Known Issues: 
 # Map is fucky at Argentum
-# No indicator to let you know if you've bought a blade bundle before.
+# No indicator to let you know if you've bought a blade bundle before. Add another item called "Proof of Purchase"
 
 def UMHunt(OptionDictionary):
     if IDs.CurrentSliderOdds != 0:
@@ -42,10 +52,11 @@ def UMHunt(OptionDictionary):
         SpiritCrucibleEntranceRemoval()
         UMRewardDropChanges()
         CoreCrystalIdentification(OptionDictionary)
+        WeaponPowerLevel()
         CustomShopSetup()
         Cleanup()
         UMHuntMenuTextChanges()
-        #DebugItemsPlace()
+        DebugItemsPlace()
 
 def WarpManagement(SetCount, ChosenAreaOrder, PartyMemberstoAdd, EnemySets): # Main function was getting a bit too cluttered
     EventSetup(SetCount, ChosenAreaOrder, PartyMemberstoAdd)
@@ -296,7 +307,7 @@ def CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder): # adj
         json.dump(data, file, indent=2, ensure_ascii=False)
     EnemyRandoLogic.SummonsLevelAdjustment()
 
-def LandmarkAdjustments(ChosenAreaOrder): # removes xp and sp gains from landmarks, except for the first one
+def LandmarkAdjustments(ChosenAreaOrder): # removes xp and sp gains from landmarks, except for the first one, adds more safety landmarks to prevent players from getting softlocked
     for i in range(0, len(ChosenAreaOrder)):
         landmarkpopfile = "./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_LandmarkPop.json"
         with open(landmarkpopfile, 'r+', encoding='utf-8') as file:
@@ -305,6 +316,45 @@ def LandmarkAdjustments(ChosenAreaOrder): # removes xp and sp gains from landmar
                 row["getEXP"] = 0
                 row["getSP"] = 0
                 row["developZone"] = 0
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_gmk/ma17a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: # Adds Cliffs of Morytha Landmark
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] == 1701:
+                    row["menuPriority"] = 10
+                if row["$id"] == 1706:
+                    row["menuPriority"] = 20
+                    row["category"] = 0
+                    row["MAPJUMPID"] = 175
+                    break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_gmk/ma16a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: # Turning Canyon of Husks into a second Landmark that warps you to Spirit Crucible Entrance
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 1601:
+                row["menuPriority"] = 10
+            if row["$id"] == 1609:
+                row["category"] = 0
+                row["MAPJUMPID"] = 168
+                row["menuPriority"] = 20
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_gmk/ma20a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: # Turning World Tree Mizar Floor into another landmark
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] == 2001:
+                    row["menuPriority"] = 10
+                if row["$id"] == 2012:
+                    row["category"] = 0
+                    row["MAPJUMPID"] = 187
+                    row["menuPriority"] = 20
+                    break
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
@@ -362,26 +412,17 @@ def AddQuestConditions(SetCount, ChosenAreaOrder): # Adding conditions for each 
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] <= len(ChosenAreaOrder):
-                row["mapId"] = ContinentInfo[ChosenAreaOrder[row["$id"] - 1]][3]
+                row["mapId"] = ContinentInfo[ChosenAreaOrder[row["$id"] - 1]][3] # puts the mapIDs in order, so we can assign conditions in order
                 row["cond1"] = 3903 + row["$id"]
-                row["pos1"] = row["$id"]
             elif row["$id"] == len(ChosenAreaOrder) + 1:
                 row["mapId"] = 3
-                row["cond1"] = 1
-                break
+                row["cond1"] = 3904
+            else:
+                row["mapId"] = 0
+                row["cond1"] = 3903
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/MNU_MapInfoFile.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] <= len(ChosenAreaOrder):
-                row["file_name"] = ContinentInfo[ChosenAreaOrder[row["$id"] - 1]][2]
-            else:
-                row["file_name"] = ""
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)  
 
 def NoUnintendedRewards(ChosenAreaOrder): # Removes any cheese you can do by doing sidequests, selling Collection Point items
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_QuestReward.json", ["Gold", "EXP", "Sp", "Coin", "DevelopZone", "DevelopPoint", "TrustPoint", "MercenariesPoint", "IdeaCategory", "IdeaValue", "ItemID1", "ItemNumber1", "ItemID2", "ItemNumber2", "ItemID3", "ItemNumber3", "ItemID4", "ItemNumber4"], 0) # doing quests don't reward you
@@ -389,7 +430,7 @@ def NoUnintendedRewards(ChosenAreaOrder): # Removes any cheese you can do by doi
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_SalvagePointList.json", ["Condition"], 3903) # salvaging is disabled
     Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2", "EnemyExp"], ['252']) # It costs 252 xp to level up, regardless of level
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_GravePopList.json", ["en_popID"], 0) # Keeps you from respawning a UM.
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma02a_FLD_TboxPop.json", ["Condition"], 3903) # removes drops from chests in argentum
+    #Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma02a_FLD_TboxPop.json", ["Condition"], 3903) # removes drops from chests in argentum
     for area in ChosenAreaOrder:
         Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[area][2] + "_FLD_TboxPop.json", ["Condition"], 3903) # removes drops from chests
    
@@ -423,11 +464,37 @@ def UMHuntMenuTextChanges():
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+def ReceiptTextChanges(): # Changes the test for the Core Crystal Shop Receipts
+    ProofofPurchaseNameIDs = Helper.InclRange(617, 632)
+    ProofofPurchaseNameTexts = ["ATK 1 Receipt", "ATK 2 Receipt", "ATK 3 Receipt", "ATK 4 Receipt", "TNK 1 Receipt", "TNK 2 Receipt", "TNK 3 Receipt", "HLR 1 Receipt", "HLR 2 Receipt", "HLR 3 Receipt", "DLC 1 Receipt", "DLC 2 Receipt", "DLC 3 Receipt", "NG+ 1 Receipt", "NG+ 2 Receipt", "NG+ 3 Receipt"]
+    ProofofPurchaseDescriptionIDs = Helper.InclRange(718, 733)
+    ProofofPurchaseDescriptionText = "Proof you purchased this Blade Bundle."
+    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in ProofofPurchaseIDs: # Proof of Purchases for Core Crystal Bundles
+                row["ValueMax"] = 1
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
+        data = json.load(file)
+        for i in range(0, len(ProofofPurchaseIDs)):
+            for row in data["rows"]:
+                if row["$id"] == ProofofPurchaseNameIDs[i]:
+                    row["name"] = ProofofPurchaseNameTexts[i]
+                if row["$id"] == ProofofPurchaseDescriptionIDs[i]:
+                    row["name"] = ProofofPurchaseDescriptionText
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
 def UMRewardDropChanges(): #Changes text for the UM drops we want
     with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
-            if row["$id"] in Helper.InclRange(25479, 25489):
+            if row["$id"] in Helper.InclRange(25479, 25489): # Custom Shop/UM Drop Token IDs
                 row["ValueMax"] = 99
         file.seek(0)
         file.truncate()
@@ -440,6 +507,7 @@ def UMRewardDropChanges(): #Changes text for the UM drops we want
                     row["name"] = f"[System:Color name=green]Bounty Token Lv {i}[/System:Color]"
                 if row["$id"] == 978 + i:
                     row["name"] = "Can be traded at the \nBounty Token Exchange for upgrades."
+                    break
         for row in data["rows"]:
             if row["$id"] == 973:
                 row["name"] = "[System:Color name=tutorial]Shop Token[/System:Color]"
@@ -538,7 +606,7 @@ def ShuffleCoreCrystals(): # first we need to shuffle the blade ids into the cor
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def CoreCrystalGroupCreation(NGPlusBladeCrystalIDs, DLCBladeCrystalIDs, TankBladeCrystalIDs, AttackerBladeCrystalIDs, HealerBladeCrystalIDs):
-    Item1IDs, Item2IDs, Item3IDs, Item4IDs = [], [], Helper.ExtendListtoLength([], 16, "0"), Helper.ExtendListtoLength([], 16, "0")
+    Item1IDs, Item2IDs, Item3IDs, Item4IDs = [], [], ProofofPurchaseIDs, Helper.ExtendListtoLength([], 16, "0")
     ChosenAtkBlades, ChosenTnkBlades, ChosenHlrBlades = random.sample(AttackerBladeCrystalIDs, min(8, len(AttackerBladeCrystalIDs))), random.sample(TankBladeCrystalIDs, min(6, len(TankBladeCrystalIDs))), random.sample(HealerBladeCrystalIDs, min(6, len(HealerBladeCrystalIDs)))
     ChosenAtkBlades = Helper.ExtendListtoLength(ChosenAtkBlades, 8 , "0")
     ChosenTnkBlades = Helper.ExtendListtoLength(ChosenTnkBlades, 6 , "0")
@@ -592,26 +660,106 @@ def RenameCrystals(NGPlusBladeCrystalIDs, DLCBladeCrystalIDs, TankBladeCrystalID
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+def WPAdjustments(): # Changes how much a weapon manual gives, and how much is needed to max an art
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP2"], 250) # 250 to upgrade each level
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP3"], 250)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP4"], 250)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP5"], 250)
+    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 25405:
+                row["Type"] = 250 # Changed the amount of WP it gives to 250
+                continue
+            if row["$id"] == 25406:
+                row["Type"] = 500
+                continue
+            if row["$id"] == 25407:
+                row["Type"] = 1000
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes names of WP Boosting Items
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 715:
+                row["name"] = "250 WP Booster"
+                continue
+            if row["$id"] == 716:
+                row["name"] = "500 WP Booster"
+                continue
+            if row["$id"] == 717:
+                row["name"] = "1000 WP Booster"
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def ChipShopRewards():
+    ChipStrengthLists = Helper.ExtendListtoLength([], 20, "[]")
+    global ChipBundleNames
+    Chips1, Chips2, Chips3, Chips4, ChipBundleNames = [], [], [], Helper.ExtendListtoLength([], 16, "0"), []
+    with open("./_internal/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
+        data = json.load(file)
+        for row in data["rows"]:
+            ChipStrengthLists[row["Rank"] - 1].append(row["$id"])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    for i in range(0, 16):
+        if i <= 13:
+            chosenrewards = random.choices(ChipStrengthLists[i] + ChipStrengthLists[i+1], weights= Helper.ExtendListtoLength([], len(ChipStrengthLists[i]), "2")+ Helper.ExtendListtoLength([], len(ChipStrengthLists[i+1]), "1"), k = 3)
+        elif i == 14:
+            chosenrewards = random.choices(ChipStrengthLists[15] + ChipStrengthLists[16], weights= Helper.ExtendListtoLength([], len(ChipStrengthLists[15]), "2")+ Helper.ExtendListtoLength([], len(ChipStrengthLists[16]), "1"), k = 3)    
+        elif i == 15:
+            chosenrewards = random.choices(ChipStrengthLists[17] + ChipStrengthLists[18], weights= Helper.ExtendListtoLength([], len(ChipStrengthLists[17]), "2")+ Helper.ExtendListtoLength([], len(ChipStrengthLists[18]), "1"), k = 3)    
+        else:
+            chosenrewards = random.choices(ChipStrengthLists[19] + ChipStrengthLists[20], weights= Helper.ExtendListtoLength([], len(ChipStrengthLists[19]), "2")+ Helper.ExtendListtoLength([], len(ChipStrengthLists[20]), "1"), k = 3) 
+        Chips1.append(chosenrewards[0])
+        Chips2.append(chosenrewards[1])
+        Chips3.append(chosenrewards[2])
+    global ChipShopRewardDistribution
+    ChipShopRewardDistribution = [Chips1, Chips2, Chips3, Chips4]
+    for i in range(0, 16):
+        ChipBundleNames.append(f"Chip Bundle {i+1}")
+
 def CustomShopSetup(): # Sets up the custom shops with loot
-    # Sanity Checks: The number of items in InputTaskIDs should always be 16
-    # The number of SetItem1IDs, RewardIDs, RewardNames, RewardSP, and RewardXP should all be the same, and also equal to the number of non-zero InputTaskIDs
-    # Reward IDs, RewardQtys should have same number of values in each list as SetItem1IDs, however, each list should be made up of 4 lists, 1 for each item slot that a reward can be
+    
+    # Shop Item Setup
+    ReceiptTextChanges()
+    WPAdjustments()
+    ChipShopRewards()
+    
     ArgentumShopNPCIDs = [2079, 2080, 2085, 2087, 2088, 2092, 2097, 2182, 2313, 2398]
     ArgentumShopEventIDs = [40045, 40054, 40051, 40048, 40052, 40056, 40050, 40058, 40055]
     OriginalShopIDs = [18, 17, 24, 21, 26, 13, 23, 16, 183, 28]
     OriginalShopNames = [9, 8, 16, 13, 17, 3, 15, 7, 188, 19]
+    
+    # Cost Distributions
     CoreCrystalCostDistribution = [1, 2, 3, 4, 1, 2, 3, 1, 2, 3, 8, 10, 12, 25, 35, 45]
+    ManualCostDistribution = [1, 2, 4, 10, 10]
+    ChipShopCostDistribution = Helper.ExtendListtoLength([2],16,"inputlist[i-1]+2")
+
+    # Filler Lists
     TokenFillerList = Helper.ExtendListtoLength([], 10, "0") # This gets used so much, I'd rather not screw up typing it out, also by initializing it here, it doesn't calculate the value every time in the dictionary
     FullFillerList = Helper.ExtendListtoLength([], 16, "0") # Empty list of full size
+    ManualFillerList = Helper.ExtendListtoLength([], 5, "0") # Empty list for manual shop
+    
+    # List of Shops
+    # Sanity Checks: The number of items in InputTaskIDs should always be less than 16
+    # The number of SetItem1IDs, RewardIDs, RewardNames, RewardSP, and RewardXP should all be the same, and also equal to the number of non-zero InputTaskIDs
+    # Reward IDs, RewardQtys should have same number of values in each list as SetItem1IDs, however, each list should be made up of 4 lists, 1 for each item slot that a reward can be
+
     TokenExchangeShop = {
         "NPCID": 2079, # ma02a_FLD_NpcPop $id
         "ShopIcon": 420, # MNU_ShopList ShopIcon
         "ShopIDtoReplace": 18, # MNU_ShopList $id
         "ShopNametoReplace": 9, # fld_shopname $id
         "ShopEventID": 40045, # ma02a_FLD_NpcPop EventID
-        "Name": "[System:Color name=green]Bounty Token[/System:Color] Exchange", # fld_shopname name
-        "InputTaskIDs": Helper.ExtendListtoLength(Helper.InclRange(917, 926), 16, "0"), # MNU_ShopChangeTask $id, feeds into MNU_ShopChange DefTaskSet1->8 and AddTaskSet1->8. Should always have length of 16
-        "AddTaskConditions": Helper.ExtendListtoLength([1,1], 8, "0"), # MNU_ShopChange AddCondition1->8 (0 if no task, 1 otherwise) # how many InputTaskIDs you have past 8 determines number of 1s, always 8 items long
+        "Name": "[System:Color name=green]Bounty Token[/System:Color] Bartering", # fld_shopname name
+        "InputTaskIDs": Helper.InclRange(917, 926), # MNU_ShopChangeTask $id, feeds into MNU_ShopChange DefTaskSet1->8 and AddTaskSet1->8.
+        "AddTaskConditions": [1, 1], # MNU_ShopChange AddCondition1->8 (0 if no task, 1 otherwise) # how many InputTaskIDs you have past 8 determines number of 1s,
         "SetItemIDs": [Helper.InclRange(25479, 25488), TokenFillerList, TokenFillerList, TokenFillerList, TokenFillerList], # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
         "SetItemQtys": [Helper.ExtendListtoLength([], 10, "1"), TokenFillerList, TokenFillerList, TokenFillerList, TokenFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
         "RewardIDs": Helper.InclRange(1282, 1291), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
@@ -621,6 +769,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         "RewardSP": [625, 1250, 1875, 2500, 3125, 3750, 4375, 5000, 5625, 6250], #FLD_QuestReward Sp
         "RewardXP": [630, 630, 630, 630, 630, 630, 630, 630, 630, 630] # FLD_QuestReward EXP
     }
+
     CoreCrystalShop = {
         "NPCID": 2080, # ma02a_FLD_NpcPop $id
         "ShopIcon": 427, # MNU_ShopList ShopIcon
@@ -634,19 +783,66 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         "SetItemQtys": [CoreCrystalCostDistribution, FullFillerList, FullFillerList, FullFillerList, FullFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
         "RewardIDs": Helper.InclRange(1292, 1307), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
         "RewardItemIDs": OutputCrystalGroupItemIDs, # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
-        "RewardQtys": [Helper.ExtendListtoLength([], 16, "1"), Helper.ExtendListtoLength([], 16, "1"), FullFillerList, FullFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
+        "RewardQtys": [Helper.ExtendListtoLength([], 16, "1"), Helper.ExtendListtoLength([], 16, "1"), Helper.ExtendListtoLength([], 16, "1"), FullFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
         "RewardNames": ["ATK Blade Bundle 1", "ATK Blade Bundle 2", "ATK Blade Bundle 3", "ATK Blade Bundle 4", "TNK Blade Bundle 1", "TNK Blade Bundle 2", "TNK Blade Bundle 3", "HLR Blade Bundle 1", "HLR Blade Bundle 2", "HLR Blade Bundle 3", "DLC Core Crystal 1", "DLC Core Crystal 2", "DLC Core Crystal 3", "NG+ Core Crystal 1", "NG+ Core Crystal 2", "NG+ Core Crystal 3"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
         "RewardSP": FullFillerList, #FLD_QuestReward Sp
         "RewardXP": FullFillerList # FLD_QuestReward EXP
     }
 
-    ShopList = [TokenExchangeShop, CoreCrystalShop]
+    WPManualShop = {
+        "NPCID": 2085, # ma02a_FLD_NpcPop $id
+        "ShopIcon": 442, # MNU_ShopList ShopIcon
+        "ShopIDtoReplace": 24, # MNU_ShopList $id
+        "ShopNametoReplace": 16, # fld_shopname $id
+        "ShopEventID": 40051, # ma02a_FLD_NpcPop EventID
+        "Name": "Manual Marketplace", # fld_shopname name
+        "InputTaskIDs": Helper.InclRange(943, 947), # MNU_ShopChangeTask $id, feeds into MNU_ShopChange DefTaskSet1->8 and AddTaskSet1->8. Should always have length of 16
+        "AddTaskConditions": [], # MNU_ShopChange AddCondition1->8 (0 if no task, 1 otherwise) # how many InputTaskIDs you have past 8 determines number of 1s, always 8 items long
+        "SetItemIDs": [Helper.ExtendListtoLength([], 5, "25489"), ManualFillerList, ManualFillerList, ManualFillerList, ManualFillerList], # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
+        "SetItemQtys": [ManualCostDistribution, ManualFillerList, ManualFillerList, ManualFillerList, ManualFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
+        "RewardIDs": Helper.InclRange(1308, 1312), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
+        "RewardItemIDs": [[25405, 25406, 25407, 25305, 25450], ManualFillerList, ManualFillerList, ManualFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
+        "RewardQtys": [Helper.ExtendListtoLength([], 5, "1"), ManualFillerList, ManualFillerList, ManualFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
+        "RewardNames": ["Driver Art Upgrade V1", "Driver Art Upgrade V2", "Driver Art Upgrade V3", "Pouch Expander", "Accessory Expander"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
+        "RewardSP": ManualFillerList, #FLD_QuestReward Sp
+        "RewardXP": ManualFillerList # FLD_QuestReward EXP
+    }
+
+    WeaponChipShop = {
+        "NPCID": 2087, # ma02a_FLD_NpcPop $id
+        "ShopIcon": 430, # MNU_ShopList ShopIcon
+        "ShopIDtoReplace": 21, # MNU_ShopList $id
+        "ShopNametoReplace": 13, # fld_shopname $id
+        "ShopEventID": 40048, # ma02a_FLD_NpcPop EventID
+        "Name": "Weapon Warehouse", # fld_shopname name
+        "InputTaskIDs": Helper.InclRange(948, 963), # MNU_ShopChangeTask $id, feeds into MNU_ShopChange DefTaskSet1->8 and AddTaskSet1->8. Should always have length of 16
+        "AddTaskConditions": Helper.ExtendListtoLength([], 8, "1"), # MNU_ShopChange AddCondition1->8 (0 if no task, 1 otherwise) # how many InputTaskIDs you have past 8 determines number of 1s, always 8 items long
+        "SetItemIDs": [Helper.ExtendListtoLength([], 16, "25489"), FullFillerList, FullFillerList, FullFillerList, FullFillerList], # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
+        "SetItemQtys": [ChipShopCostDistribution, FullFillerList, FullFillerList, FullFillerList, FullFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
+        "RewardIDs": Helper.InclRange(1313, 1328), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
+        "RewardItemIDs": ChipShopRewardDistribution, # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
+        "RewardQtys": [Helper.ExtendListtoLength([], 16, "2"), Helper.ExtendListtoLength([], 16, "1"), Helper.ExtendListtoLength([], 16, "1"), FullFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
+        "RewardNames": ChipBundleNames, # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
+        "RewardSP": FullFillerList, #FLD_QuestReward Sp
+        "RewardXP": FullFillerList # FLD_QuestReward EXP
+    }
+
+    ShopList = [TokenExchangeShop, CoreCrystalShop, WPManualShop, WeaponChipShop]
+    
+    # Does the magic
     with open("./_internal/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file: # Adds the exchange tasks
         data = json.load(file)
         ShopChangeStartRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/MNU_ShopChange.json", "$id") + 1 # used in MNU_ShopList for "TableID"
         CurrRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/MNU_ShopChange.json", "$id") + 1
         for shop in ShopList:
-            data["rows"].append({"$id": CurrRow, "DefTaskSet1": shop["InputTaskIDs"][0], "DefTaskSet2": shop["InputTaskIDs"][1], "DefTaskSet3": shop["InputTaskIDs"][2], "DefTaskSet4": shop["InputTaskIDs"][3], "DefTaskSet5": shop["InputTaskIDs"][4], "DefTaskSet6": shop["InputTaskIDs"][5], "DefTaskSet7": shop["InputTaskIDs"][6], "DefTaskSet8": shop["InputTaskIDs"][7], "AddTaskSet1": shop["InputTaskIDs"][8], "AddCondition1": shop["AddTaskConditions"][0], "AddTaskSet2": shop["InputTaskIDs"][9], "AddCondition2": shop["AddTaskConditions"][1], "AddTaskSet3": shop["InputTaskIDs"][10], "AddCondition3": shop["AddTaskConditions"][2], "AddTaskSet4": shop["InputTaskIDs"][11], "AddCondition4": shop["AddTaskConditions"][3], "AddTaskSet5": shop["InputTaskIDs"][12], "AddCondition5": shop["AddTaskConditions"][4], "AddTaskSet6": shop["InputTaskIDs"][13], "AddCondition6": shop["AddTaskConditions"][5], "AddTaskSet7": shop["InputTaskIDs"][14], "AddCondition7": shop["AddTaskConditions"][6], "AddTaskSet8": shop["InputTaskIDs"][15], "AddCondition8": shop["AddTaskConditions"][7], "LinkQuestTask": 0, "LinkQuestTaskID": 0, "UnitText": 0})
+            ShopChangeRowToAdd = {"$id": CurrRow, "DefTaskSet1": 0, "DefTaskSet2": 0, "DefTaskSet3": 0, "DefTaskSet4": 0, "DefTaskSet5": 0, "DefTaskSet6": 0, "DefTaskSet7": 0, "DefTaskSet8": 0, "AddTaskSet1": 0, "AddCondition1": 0, "AddTaskSet2": 0, "AddCondition2": 0, "AddTaskSet3": 0, "AddCondition3": 0, "AddTaskSet4": 0, "AddCondition4": 0, "AddTaskSet5": 0, "AddCondition5": 0, "AddTaskSet6": 0, "AddCondition6": 0, "AddTaskSet7": 0, "AddCondition7": 0, "AddTaskSet8": 0, "AddCondition8": 0, "LinkQuestTask": 0, "LinkQuestTaskID": 0, "UnitText": 0}
+            for i in range(0, len(shop["InputTaskIDs"])):
+                if i <= 7:
+                    ShopChangeRowToAdd[f"DefTaskSet{i+1}"] = shop["InputTaskIDs"][i]
+                else: # once we get past all the regular tasks, we add new ones to addtaskset instead
+                    ShopChangeRowToAdd[f"AddTaskSet{i-7}"] = shop["InputTaskIDs"][i]
+                    ShopChangeRowToAdd[f"AddCondition{i-7}"] = shop["AddTaskConditions"][i-8]
+            data["rows"].append(ShopChangeRowToAdd)
             CurrRow += 1
         file.seek(0)
         file.truncate()
@@ -745,3 +941,42 @@ def DebugItemsPlace(): #need to place some tokens to play around with them in th
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def WeaponPowerLevel(): # Assigns appropriately powered enhancement and damage value based on rank of weapon
+    WeaponStrengthList = Helper.ExtendListtoLength([], 20, "[]")
+    WeaponDamageRanges = [[14,31], [26, 61], [49, 117], [86, 184], [123, 248], [160, 324], [197, 409], [243, 480], [275, 544], [307, 588], [332, 639], [360, 695], [387, 746], [421, 811], [470, 872], [501, 919], [527, 967], [549, 990], [553, 1037], [592, 1108]]
+    InvalidSkillEnhancements = [ArtCancel,EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, BladeSwapDamage, CatScimPowerUp, EvadeDrainHp, EvadeDriverArt, EtherCannonRange,ArtDamageHeal, DreamOfTheFuture]
+    ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
+    Common = 0
+    Rare = 1
+    Legendary = 2
+    with open("./_internal/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
+        data = json.load(file)
+        for row in data["rows"]:
+            for i in range(1, 37):
+                WeaponStrengthList[row["Rank"] - 1].append(row[f"CreateWpn{i}"])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            for i in range(0, len(WeaponStrengthList)):
+                if row["$id"] in WeaponStrengthList[i]:
+                    row["Damage"] = random.randrange(WeaponDamageRanges[i][0], WeaponDamageRanges[i][1])
+                    if row["Rank"] <= 7:
+                        curEnh:Enhancement = random.choice(ValidSkills)
+                        curEnh.RollEnhancement(Common)
+                        row["Enhance1"] = curEnh.id
+                    elif row["Rank"] <= 14:
+                        curEnh:Enhancement = random.choice(ValidSkills)
+                        curEnh.RollEnhancement(Rare)
+                        row["Enhance1"] = curEnh.id
+                    else:
+                        curEnh:Enhancement = random.choice(ValidSkills)
+                        curEnh.RollEnhancement(Legendary)
+                        row["Enhance1"] = curEnh.id
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    

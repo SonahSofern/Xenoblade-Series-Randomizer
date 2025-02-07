@@ -344,7 +344,7 @@ def Randomize():
         # Runs all randomization
         RunOptions()
         randoProgressDisplay.config(text="Packing BDATs")
-        
+    
         try:
             # Packs BDATs
             subprocess.run(f"{bdat_path} pack {JsonOutput} -o {outputDirVar.get().strip()} -f json", check=True, creationflags=subprocess.CREATE_NO_WINDOW)

@@ -151,6 +151,30 @@ def RegularLootDistribution(): #Adds core crystals to the loot pool if race mode
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
+def FixRoc(): # Fixes Roc softlock
+    with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        RandomBlades = BladeIDs.copy()
+        random.shuffle(RandomBlades)
+        for row in data["rows"]:
+            if row["BladeID"] == 1008:
+                row["Condition"] = 2212
+                CrystalID = row["$id"]
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/MNU_BladeCreate.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        RandomBlades = BladeIDs.copy()
+        random.shuffle(RandomBlades)
+        for row in data["rows"]:
+            if row["$id"] == 2:
+                row["limited_item"] = CrystalID
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
 def CoreCrystalChanges(OptionsRunDict):
     RareBladeProbabilityEqualizer()
     AdjustingCrystalList()
@@ -159,4 +183,5 @@ def CoreCrystalChanges(OptionsRunDict):
     #ChangeRankCondition()
     if not OptionsRunDict["Race Mode"]["optionTypeVal"].get():
         RegularLootDistribution()
+        FixRoc()
         RaceMode.FindtheBladeNames(OptionsRunDict)

@@ -76,7 +76,7 @@ def RandomArtEnhancements(OptionsRunDict): # randomizes art enhancements
 
 def GenCustomArtDescriptions():
     RangeType = {
-        "AOE" : [3,5]
+        "AOE" : [1,2,5]
     }
 
     MoveType = {
