@@ -162,8 +162,6 @@ def AOE(art):
     art["Radius"] =  RandomRadius # Not sure what makes a good radius
     return f"[System:Color name=green]AOE[/System:Color]"
 
-def Hits(art): # Theres also LoopNum which might be interesting
-    pass
 
 def Reaction(art):
     ValidReactions = {
@@ -217,14 +215,27 @@ def Buff(art):
         "Counter": 6,
         "↑Counter": 7,
         "Rflct": 5,
-        "Invi": 4,
+        "Inv": 4,
         "Absorb":  17,
-        "CD↓": None, # Special case its not really a buff but I dont want to give it its own category, I think it makes sense as a buff, this causes the problem that only arts with no buff can have their cd reduced which is fine maybe
     }
+    CD = {
+        "CD↓": 0, # Special case its not really a buff but I dont want to give it its own category, I think it makes sense as a buff, this causes the problem that only arts with no buff can have their cd reduced which is fine maybe
+    }
+    # Loop = {
+    #     "Loop": 0 # Another special case
+    # }
+    
+    if art.get("Recast") and art["Recast"] != 0:
+        Buffs.update(CD)
+    
+    # if art["LoopNum"] == 0:
+    #     Buffs.update(Loop)
     
     name,value = random.choice(list(Buffs.items()))
-    if art.get("Recast") and name == "CD↓" and art["Recast"] != 0: # Checks to be sure recast exists some dont have it
+    if name == "CD↓": # Checks to be sure recast exists some dont have it
         art["Recast"] //= random.choice([2,4,6])
+    elif name == "Loop":
+        art["LoopNum"] = random.choice([1,1,1,1,2,2,2,3,3,4])
     else:
         art["ArtsBuff"] = value
     return f"[System:Color name=green]{name}[/System:Color]"

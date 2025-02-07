@@ -168,7 +168,7 @@ def GenCustomArtDescriptions():
                     # AOE
                     for key,values in RangeType.items():    
                         if art["RangeType"] in values:
-                            CombinedCaption[0] += f"{key}"
+                            CombinedCaption[0] += f"[System:Color name=green]{key}[/System:Color]"
                             break
 
                     # Type of Art
@@ -184,29 +184,29 @@ def GenCustomArtDescriptions():
                         if art[f"HitDirID{i}"] != 0:
                             for key,values in Reactions.items():
                                 if art[f"ReAct{i}"] in values:
-                                    ReactCaption += f"{key}->"
+                                    ReactCaption += f"[System:Color name=tutorial]{key}[/System:Color]->"
                                     TypeReactions.append(art[f"ReAct{i}"])
                                     break
                     ReactCaption = ReactCaption[:-2]
                     if len(ReactCaption) > 15: # If the length is too long, shorten it to "Driver Combo"
-                        ReactCaption = "Driver Combo"
+                        ReactCaption = "[System:Color name=tutorial]Driver Combo[/System:Color]"
                     elif len(TypeReactions) == 1: # If the length is 1, spell out the reaction
                         for key,values in FullReactions.items():
                             if TypeReactions[0] in values:
-                                ReactCaption = f"{key}"
+                                ReactCaption = f"[System:Color name=tutorial]{key}[/System:Color]"
                                 break
                     CombinedCaption[2] = ReactCaption
                         
                     # Enhancements
                     for key,values in Enhancements.items():
                         if art["Enhance1"] in values:
-                            CombinedCaption[3] += f"{key}"
+                            CombinedCaption[3] += f"[System:Color name=green]{key}[/System:Color]"
                             break
                         
                     # Debuffs                       
                     for key,values in Debuffs.items():
                         if art["ArtsDeBuff"] in values:
-                            CombinedCaption[4] = f"{key}"
+                            CombinedCaption[4] = f"[System:Color name=red]{key}[/System:Color]"
                             break
 
                     # Putting it all together
