@@ -225,7 +225,7 @@ def Options():
 
     # Drivers
     GenStandardOption("Driver Accessories", TabDrivers, "Randomizes effects of Accessories", [lambda: Accs.RandomizeAccessoryEnhancements()])
-    GenStandardOption("Driver Arts", TabDrivers, "Randomizes effects of all driver arts", [lambda: _DriverArts.DriverArtRandomizer(OptionDictionary), lambda: _DriverArts.GenCustomArtDescriptions()], ["Auto Attacks", [],"Reactions", [lambda: Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", Helper.StartsWith("ReAct", 1,16), 0)], "Multiple Reactions", [] ,"Debuffs",[],"Buffs",[],"Cooldown", [], "Damage", [], "Enhancements", [], "Animation Speed", [], "AOE", []], optionType = Spinbox)
+    GenStandardOption("Driver Arts", TabDrivers, "Randomizes effects of all driver arts", [lambda: _DriverArts.DriverArtRandomizer(OptionDictionary), lambda: _DriverArts.GenCustomArtDescriptions()], ["Auto Attacks", [],"Reactions", [], "Multiple Reactions", [] ,"Debuffs",[],"Buffs",[],"Cooldown", [], "Damage", [], "Enhancements", [], "Animation Speed", [], "AOE", []], optionType = Spinbox)
     GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees",[lambda: SkillTrees.RandomizeSkillEnhancements(OptionDictionary)],["Nonstandard Skills", [], "Early Arts Cancel", [], "Early XYB Attack", []])
        
     # Blades

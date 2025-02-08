@@ -24,22 +24,34 @@ def DriverArtRandomizer(optionDict):
         for art in artData["rows"]:
             if (not isAutoAttacks) and (isAutoAttacks or (art["$id"] in AutoAttacks)): # Ignore auto attacks unless the option is clicked
                 continue
-            isEnemyTarget = (art["Target"] == 0) # Ensures Targeting Enemy
+            isEnemyTarget = (art["Target"] in [0,4]) # Ensures Targeting Enemy
     
-            if isReactions and isEnemyTarget and OddCheck(odds):
-                Reaction(art, isMultiReact)
+            if (isReactions or isMultiReact) and isEnemyTarget:
+                for i in range(1,17):
+                    art[f"ReAct{i}"] = 0 # Clearing Defaults these are needed bc torna arts are weird so i cant clear them blindly before hand gotta follow these conditions so this is the easiest way
+                if OddCheck(odds):
+                    Reaction(art, isMultiReact)
             if isCooldowns and OddCheck(odds):
                 Cooldowns(art)
             if isDamage and OddCheck(odds):
                 Damage(art)
-            if isEnhancements and isEnemyTarget and OddCheck(odds):
-                Enhancements(art)
-            if isBuffs and OddCheck(odds):
-                Buffs(art)
-            if isDebuffs and OddCheck(odds):
-                Debuffs(art)
-            if isAOE and OddCheck(odds):
-                AOE(art)
+            if isEnhancements and isEnemyTarget:
+                for i in range(1,7):
+                    art[f"Enhance{i}"] = 0
+                if OddCheck(odds):
+                    Enhancements(art)
+            if isBuffs:
+                art["ArtsBuff"] = 0 
+                if OddCheck(odds):
+                    Buffs(art)
+            if isDebuffs and isEnemyTarget:
+                art["ArtsDeBuff"] = 0
+                if OddCheck(odds):
+                    Debuffs(art)
+            if isAOE and isEnemyTarget:
+                art["RangeType"] = 0
+                if OddCheck(odds):
+                    AOE(art)
             if isSpeed and OddCheck(odds):
                 AnimationSpeed(art)
             
@@ -211,6 +223,18 @@ def GenCustomArtDescriptions():
         "Freeze": [30],
         "Enrage": [35]
     }
+    Buffs = {
+        "NlReact": [1],
+        "Evade": [2],
+        "Block": [3],
+        "Counter": [6],
+        "↑Counter": [7],
+        "Reflect": [5],
+        "Invincible": [4],
+        "Absorb":  [17]
+        # Eventually might add logic for damage absorb and release
+    }
+    
     with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", "r+", encoding='utf-8') as ArtsFile:     
         with open("./_internal/JsonOutputs/common_ms/btl_arts_dr_cap.json", "r+", encoding='utf-8') as DescFile:     
             artsData = json.load(ArtsFile)
@@ -230,9 +254,14 @@ def GenCustomArtDescriptions():
                             CombinedCaption[0] += f"[System:Color name=blue]{key}[/System:Color]"
                             break
 
-                    # Type of Art
-                    for key,values in MoveType.items():
-                        if art["ArtsType"] in values:
+                    # Type of Art Not changing this currently 
+                    # for key,values in MoveType.items():
+                    #     if art["ArtsType"] in values:
+                    #         CombinedCaption[1] += f"{key}"
+                    #         break
+                    
+                    for key,values in Buffs.items():
+                        if art["ArtsBuff"] in values:
                             CombinedCaption[1] += f"{key}"
                             break
 
