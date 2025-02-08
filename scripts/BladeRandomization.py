@@ -18,16 +18,14 @@ BladeNames = dict()            # Maps ID to Blade Name. Populated in PopulateBla
 Original2Replacement = dict()  # Maps Unrandomized Blade ID to Randomized Blade ID. Populated in RandomizeBlades()
 Replacement2Original = dict()  # Maps Randomized Blade ID to Unrandomized Blade ID. Populated in RandomizeBlades()
 
-BladesRexCantUse = []
 BladesNiaCantUse = [1001, 1002, 1009, 1010, 1011]
 BladesMoragCantUse = [1001, 1002, 1010, 1011]
 BladesZekeCantUse = [1001, 1002, 1009, 1011]
 
 # Specifically, these are healers which have a healing halo equivalent move. So Twin Rings and Bitballs
-# TODO: How does this work when considering randomized art effects?
 GuaranteedHealer = None
 RexHealerBlades = [] #[1011] Blade Nia, removed for now because I think it's unfair since Pyra leaves the party a few times. Might revisit this or make this its own option in the future.
-NiaHealerBlades = [1004, 1021, 1033, 1038, 1041, 1107, 1109, 1111] # + Obrona (and Mikhail?) if we can get NG+ Blades working without the weapon chip quirks
+NiaHealerBlades = [1004, 1021, 1033, 1038, 1041, 1107, 1109, 1111] # + Obrona and Mikhail if we can get NG+ Blades working without the weapon chip quirks
 PossibleGuaranteedHealerBlades = RexHealerBlades + NiaHealerBlades
 
 PoppiForms = [1005, 1006, 1007]
@@ -54,12 +52,11 @@ def InitialSetup():
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], [], PopulateBlades, replaceAll=True)
     JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], [], MakeAllArtsAccessible, replaceAll=True)
 
-
 def PopulateBlades(blade):
     blade_id = blade['$id']
     OriginalBlades[blade_id] = dict()
     for key, value in blade.items():
-        OriginalBlades[blade_id][key] = blade[key]
+        OriginalBlades[blade_id][key] = copy.deepcopy(blade[key])
 
     Name = ''
     name_id = blade['Name']
@@ -192,7 +189,6 @@ def ApplyBladeRandomization(blade):
                 blade[key] = OriginalBlades[replace_with_id][key]
 
 
-
 def RandomizePoppiForms(OptionsRunDict):
     blades_left_to_randomize = PoppiForms.copy()
     randomized_order = blades_left_to_randomize.copy()
@@ -216,35 +212,52 @@ def RandomizePoppiForms(OptionsRunDict):
     # Apply Randomizations
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], PoppiForms, ApplyBladeRandomization)
 
-    # Replace Poppiswap images
+    # Copy original poppi-related tables so we can swap things below
+    OriginalPoppiBase = JSONParser.CopyJSONFile("common/BTL_HanaBase.json")
+    OriginalPoppiChipset = JSONParser.CopyJSONFile("common/BTL_HanaChipset.json")
+    OriginalPoppiPower = JSONParser.CopyJSONFile("common/BTL_HanaPower.json")
+
+    # In most of the following tables, rows for the Poppi forms are 1-3.
+    # Poppi alpha's blade ID is 1005, so I just add/subtract 1004 to convert between row and blade ID
+
+    # Replace Poppiswap images (background of Poppiswap menu)
     def ReplacePoppiswapImages(image):
-        # Poppi alpha is 1005, and the poppis are ordered sequentially. Easy calculation by adding 1004 to the image ID
         original_poppi_id = image['$id'] + 1004
         new_image_num = Original2Replacement[original_poppi_id] - 1004
         image['filename'] = 'mnu091_hana_img0' + str(new_image_num)
     JSONParser.ChangeJSONLineWithCallback(["common/MNU_Hana_custom.json"], [], ReplacePoppiswapImages, replaceAll=True)
 
-    # Randomize initial Poppi chipset
-    # Only randomize fields which have settings explicitly set.
-    # For example, don't randomize the Element Core unless blade elements are randomized.
-    PoppiRoles = Helper.InclRange(56001, 56036)
-    PoppiElements = Helper.InclRange(57001, 57008)
-    PoppiBladeArts = Helper.InclRange(59001, 59045)
-    random.shuffle(PoppiRoles)
-    random.shuffle(PoppiElements)
-    random.shuffle(PoppiBladeArts)
-    def ReplacePoppiChipset(poppi):
-        if OptionsRunDict["Blade Weapon Class"]["optionTypeVal"].get():
-            poppi['RoleParts'] = PoppiRoles[0]
-            del PoppiRoles[0]
-        if OptionsRunDict["Blade Elements"]["optionTypeVal"].get():
-            poppi['AtrParts'] = PoppiElements[0]
-            del PoppiElements[0]
-        if OptionsRunDict["Blade Arts"]["optionTypeVal"].get():
-            for i in Helper.InclRange(1, 3):
-                if poppi['NArtsParts' + str(i)]:
-                    poppi['NArtsParts' + str(i)] = PoppiBladeArts[0]
-                    del PoppiBladeArts[0]
+    # Replace Poppi Base (Available Poppiswaps)
+    # TODO: I don't think this actually does anything. Unsure if it's even used in the code
+    #  It's supposed to change the available Poppiswap slots (Alpha has 1 skill ram, but QTpi has 3)
+    def ReplacePoppiBase(base):
+       original_poppi_id = base['$id'] + 1004
+       new_poppi_id = Original2Replacement[original_poppi_id]
+       for key, value in OriginalPoppiBase[new_poppi_id - 1004].items():
+           if key != '$id':
+               base[key] = copy.deepcopy(OriginalPoppiBase[new_poppi_id - 1004][key])
+    JSONParser.ChangeJSONLineWithCallback(["common/BTL_HanaBase.json"], [], ReplacePoppiBase, replaceAll=True)
+
+    # Replace Poppi Power (Energy Upgrades & Cost)
+    def ReplacePoppiPower(power):
+        for i in [1, 2, 3]:
+            original_poppi_id = i + 1004
+            new_poppi_id = Original2Replacement[original_poppi_id]
+            new_i = new_poppi_id - 1004
+
+            for field in ['PowerNum', 'EtherNum']:
+                old_field = field + str(i)
+                new_field = field + str(new_i)
+                power[old_field] = copy.deepcopy(OriginalPoppiPower[power['$id']][new_field])
+    JSONParser.ChangeJSONLineWithCallback(["common/BTL_HanaPower.json"], [], ReplacePoppiPower, replaceAll=True)
+
+    # Replace Poppi Chipset (Default Poppiswap Loadout)
+    def ReplacePoppiChipset(chipset):
+        original_poppi_id = chipset['$id'] + 1004
+        new_poppi_id = Original2Replacement[original_poppi_id]
+        for key, value in OriginalPoppiChipset[new_poppi_id - 1004].items():
+            if key != '$id':
+                chipset[key] = copy.deepcopy(OriginalPoppiChipset[new_poppi_id - 1004][key])
     JSONParser.ChangeJSONLineWithCallback(["common/BTL_HanaChipset.json"], [], ReplacePoppiChipset, replaceAll=True)
 
 
@@ -326,4 +339,5 @@ def FixPandoriaSpriteAfterElpys():
 
 def FinalTouches():
     # This function is a placeholder for all the small things. Menu text, etc. Not yet implemented
-    print('TODO: FinalTouches()')
+    if include_printouts:
+        print('TODO: FinalTouches()')
