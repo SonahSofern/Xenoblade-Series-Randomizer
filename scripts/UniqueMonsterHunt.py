@@ -440,7 +440,7 @@ def SpiritCrucibleEntranceRemoval(): # Exiting or Entering Spirit Crucible has p
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def BladeTrustRequirementChanges(): # changes the blade trust/skill unlock requirements to using a specific item
+def BladeTrustRequirementChanges(): # changes the blade trust/skill unlock requirements to defeating a specific number of UMs
     NumberofUMstoDefeat = [8, 16, 24, 32]
     KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]
     KeyAchievementIDs = list(set([x for x in KeyAchievementIDs if x != 0]))

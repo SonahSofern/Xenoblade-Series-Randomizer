@@ -7,6 +7,7 @@ import time
 import JSONParser
 import DebugLog
 import math
+import CoreCrystalAdjustments
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
@@ -188,33 +189,29 @@ def RaceModeChanging(OptionsRunDict):
     LandmarkConditions()
     GimmickAdjustments()
     HideMapAreas(ScenarioFlagLists)
-    print(OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get())
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get():
-        print("Filling Chests with Custom Loot")
-        RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict)
-        StackableCoreCrystalsandKeyItems()
-        FindtheBladeNames(OptionsRunDict)
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Less Grinding"]["subOptionTypeVal"].get():
-        print("Reducing amount of grinding")
-        LessGrinding()
-        if NGPlusBladeCrystalIDs != None:
-            ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs)
-            ReduceBladeReqTrustVals()
-        SecondSkillTreeCostReduc()
-        DriverArtUpgradeCostChange()
-        BladeTreeMaxRewardChange()
-        PoppiswapCostReductions()
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get():    
-        print("Changing Shops")
-        ShyniniSaveUs()
-        ShopRemovals()
-        WeaponChipShopPowerLevelIncrease()
-        MovespeedDeedChanges()
-        PouchItemCarryCapacityIncrease()
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Enemy Drop Changes"]["subOptionTypeVal"].get():
-        print("Removing enemy drops")
-        EnemyDropRemoval()
-        EnemyRandoLogic.KeyItemsReAdd()
+    print("Filling Chests with Custom Loot")
+    RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict)
+    StackableCoreCrystalsandKeyItems()
+    FindtheBladeNames(OptionsRunDict)
+    print("Reducing amount of grinding")
+    LessGrinding()
+    if NGPlusBladeCrystalIDs != None:
+        ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs)
+        ReduceBladeReqTrustVals()
+    SecondSkillTreeCostReduc()
+    DriverArtUpgradeCostChange()
+    BladeTreeMaxRewardChange()
+    PoppiswapCostReductions()   
+    print("Changing Shops")
+    ShyniniSaveUs()
+    ShopRemovals()
+    WeaponChipShopPowerLevelIncrease()
+    MovespeedDeedChanges()
+    PouchItemCarryCapacityIncrease()
+    print("Removing enemy drops")
+    EnemyDropRemoval()
+    EnemyRandoLogic.KeyItemsReAdd()
+    CoreCrystalAdjustments.FieldSkillLevelAdjustment()
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["DLC Item Removal"]["subOptionTypeVal"].get():
         print("Nerfing Corvin and Crossette")
         DLCItemChanges()
@@ -437,8 +434,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
             A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
     AllEquipIDs = [A1Equip, A2Equip, A3Equip, A4Equip]
     Area1ShopDeedIDs, Area2ShopDeedIDs, Area3ShopDeedIDs, Area4ShopDeedIDs = [], [], [], []
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get():
-        Area1ShopDeedIDs, Area2ShopDeedIDs, Area3ShopDeedIDs, Area4ShopDeedIDs = Helper.InclRange(25249, 25264), Helper.InclRange(25265, 25280), Helper.InclRange(25281, 25291), Helper.InclRange(25292, 25299)
+    Area1ShopDeedIDs, Area2ShopDeedIDs, Area3ShopDeedIDs, Area4ShopDeedIDs = Helper.InclRange(25249, 25264), Helper.InclRange(25265, 25280), Helper.InclRange(25281, 25291), Helper.InclRange(25292, 25299)
     Area1LootIDs = A1CoreCrystalIDs * 2 + [25305] * 3 + Area1ShopDeedIDs * 2 + [25450] * 3 + A1Equip + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2 + [25407] * 10
     if ChosenIndices[1] == 3: # Leftherian Archipelago (30ish chests)
         Area2LootIDs = A2CoreCrystalIDs + [25305] * 2 + Area2ShopDeedIDs + [25450] * 2 + A2Equip + [25408] * 3 + [25220, 25220] + A2RaceModeCoreChipIDs + [25407] * 5
@@ -979,8 +975,6 @@ def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
     RaceModeOn = OptionsRunDict["Race Mode"]["optionTypeVal"].get()
     ZoharFragOn = OptionsRunDict["Race Mode"]["subOptionObjects"]["Zohar Fragment Hunt"]["subOptionTypeVal"].get()
     CoreCrystalRandoOn = OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get()
-    CustomLootOn = OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get()
-    ShopChangesOn = OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get()
     ZoharFragItemIDs = [25135, 25136, 25137, 25138]
     CoreCrystalIDs = AllCoreCrystals
     MovespeedDeedIDs = Helper.InclRange(25249, 25300)
@@ -998,15 +992,13 @@ def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
             ChestTierListItemNames[0] = "Zohar Fragment"
         if CoreCrystalRandoOn:
             ChestTierListIDs[1] = 5
-            ChestTierListItemNames[1] = "Core Crystal"
-        if ShopChangesOn:
-            ChestTierListIDs[2] = 2
-            ChestTierListItemNames[2] = "Movespeed Deed"
-        if CustomLootOn:
-            ChestTierListIDs[3] = 1
-            ChestTierListIDs[4] = 4
-            ChestTierListItemNames[3] = "Rare Item"
-            ChestTierListItemNames[4] = "Equipment/Gold"        
+            ChestTierListItemNames[1] = "Core Crystal"   
+        ChestTierListIDs[2] = 2
+        ChestTierListItemNames[2] = "Movespeed Deed"
+        ChestTierListIDs[3] = 1
+        ChestTierListIDs[4] = 4
+        ChestTierListItemNames[3] = "Rare Item"
+        ChestTierListItemNames[4] = "Equipment/Gold"        
         for i in range(0, len(ListTboxFiles)):
             with open(ListTboxFiles[i], 'r+', encoding='utf-8') as file: 
                 data = json.load(file)
@@ -1027,26 +1019,24 @@ def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
                                     rowcatfound = True
                                     CoreCrystalChests.append(row["$id"])
                                     break
-                    if ShopChangesOn:
-                        if not rowcatfound:
-                            for j in range(1, 9):
-                                if row[f"itm{j}ID"] in MovespeedDeedIDs:
-                                    row["RSC_ID"] = ChestTierListIDs[2]
-                                    rowcatfound = True
-                                    MovespeedDeedChests.append(row["$id"])
-                                    break
-                    if CustomLootOn:
-                        if not rowcatfound:
-                            for j in range(1, 9):
-                                if row[f"itm{j}ID"] in RareItemIDs:
-                                    row["RSC_ID"] = ChestTierListIDs[3]
-                                    rowcatfound = True
-                                    RareItemChests.append(row["$id"])
-                                    break
-                        if not rowcatfound:
-                            row["RSC_ID"] = ChestTierListIDs[4]
-                            rowcatfound = True
-                            EquipmentGoldChests.append(row["$id"])
+                    if not rowcatfound:
+                        for j in range(1, 9):
+                            if row[f"itm{j}ID"] in MovespeedDeedIDs:
+                                row["RSC_ID"] = ChestTierListIDs[2]
+                                rowcatfound = True
+                                MovespeedDeedChests.append(row["$id"])
+                                break
+                    if not rowcatfound:
+                        for j in range(1, 9):
+                            if row[f"itm{j}ID"] in RareItemIDs:
+                                row["RSC_ID"] = ChestTierListIDs[3]
+                                rowcatfound = True
+                                RareItemChests.append(row["$id"])
+                                break
+                    if not rowcatfound:
+                        row["RSC_ID"] = ChestTierListIDs[4]
+                        rowcatfound = True
+                        EquipmentGoldChests.append(row["$id"])
                 file.seek(0)
                 file.truncate()
                 json.dump(data, file, indent=2, ensure_ascii=False)
