@@ -221,15 +221,9 @@ def Buff(art):
     CD = {
         "CD↓": 0, # Special case its not really a buff but I dont want to give it its own category, I think it makes sense as a buff, this causes the problem that only arts with no buff can have their cd reduced which is fine maybe
     }
-    # Loop = {
-    #     "Loop": 0 # Another special case
-    # }
     
     if art.get("Recast") and art["Recast"] != 0:
         Buffs.update(CD)
-    
-    # if art["LoopNum"] == 0:
-    #     Buffs.update(Loop)
     
     name,value = random.choice(list(Buffs.items()))
     if name == "CD↓": # Checks to be sure recast exists some dont have it
@@ -249,7 +243,7 @@ def Debuff(art):
         "Def↓": 23,
         "EDef↓": 24,
         "Res↓": 25,
-        # "Rage": 35, # We just resist rage strike?? Test on BOC d iffculty
+        # "Rage": 35, # We just resist rage strike?? even on BOC and enemy is enraged
         # "Fire": 33 Already have fire this might just be a different buff even though its only on brighids confining flames
     }
     SingleTarget = {

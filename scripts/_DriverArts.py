@@ -2,28 +2,67 @@ import json, JSONParser
 import random
 from IDs import Lv1ArtCDs, EnhancementSets, ValidArtIDs, EvasionEnhancementIDs, SpecialEffectArtIDs, AutoAttacks, OriginalAOECaptionIDs
 
-def RandomArtReactions(OptionsRunDict):
-    HitReactionDistribution = [1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,5,6,7,8,9,10,11,12,13,14]
-    MultipleReactions = OptionsRunDict["Art Reactions"]["subOptionObjects"]["Multiple Reactions"]["subOptionTypeVal"].get()
-    sliderOdds = OptionsRunDict["Art Reactions"]["spinBoxVal"].get()
+def Reaction(art, multReact):
+    ValidReactions = {
+        "Teleport": [43],
+        "Backstep": [36]
+    }
+    SelfTargetReactions = {
+
+    }
+    EnemyTargetReactions = {
+        "Break" : [1],
+        "Topple": [2],
+        "Launch": [3],
+        "Smash": [4],
+        "Combo" : [1,2,3,4],
+        "KB": [5,6,7,8,9],
+        "BD": [10,11,12,13,14],
+    }
     
-    with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] in AutoAttacks: # Ignore autoes
+    if art["Target"] == 1:
+        ValidReactions.update(SelfTargetReactions) # Add self targeting
+    elif art["Target"] == 0:
+        ValidReactions.update(EnemyTargetReactions) # Add enemy targeting
+    
+    for i in range(1,17):
+        name,values = random.choice(list(ValidReactions.items()))
+        if art[f"HitFrm{i}"] == 0: # Make sure there is a hit
+            art[f"HitFrm{i-1}"] = random.choice(values) # Adds something to the last hit
+            break
+        if multReact:
+            art[f"ReAct{i}"] =  random.choice(values) # Adds each hit
+
+
+def DriverArtRandomizer(optionDict):
+    with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as artFile:
+        artData = json.load(artFile)
+        
+        isAutoAttacks = optionDict["Driver Arts"]["subOptionObjects"]["Auto Attacks"]["subOptionTypeVal"].get()
+        multipleReactions = optionDict["Driver Arts"]["subOptionObjects"]["Multiple Reactions"]["subOptionTypeVal"].get()
+        odds = optionDict["Driver Arts"]["spinBoxVal"].get()
+        
+        for art in artData["rows"]:
+            
+            if not isAutoAttacks or art["$id"] in AutoAttacks: # Ignore auto attacks unless the option is clicked
                 continue
-            if sliderOdds > random.randrange(0,100): # Check slider
-                for i in range(1,17):
-                    if row[f"HitFrm{i}"] == 0: # Check if there is actually a hit
-                        break
-                    else:
-                        row[f"ReAct{i}"] =  random.choice(HitReactionDistribution) # Apply a random reaction
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-                
-    if not MultipleReactions:
-        JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], ValidArtIDs, RemoveReactionsFromNonLastHit)
+            
+            validChanges = FindValidChanges(art, odds,  multipleReactions) # Find Valid Changes
+
+            for change in validChanges: # Apply Changes
+                change()
+        
+        artFile.seek(0)
+        artFile.truncate()
+        json.dump(artData, artFile, indent=2, ensure_ascii=False)
+ 
+def FindValidChanges(art,odds,  multipleReactions):
+    validChanges = []
+    
+    if odds > random.range(0,100):
+        validChanges.append(lambda: Reaction(art, multipleReactions))
+    
+    return validChanges
 
 def RandomArtCooldowns(OptionsRunDict): # randomizes art cooldowns
     sliderOdds = OptionsRunDict["Driver Arts"]["spinBoxVal"].get()
@@ -249,19 +288,3 @@ def GenCustomArtDescriptions():
         ArtsFile.seek(0)
         ArtsFile.truncate()
         json.dump(artsData, ArtsFile, indent=2, ensure_ascii=False)
-
-def RemoveReactionsFromNonLastHit(art):
-    last_hit = -1
-    last_react = -1
-    for i in range(16, 0, -1):
-        if art['HitFrm' + str(i)] != 0 and last_hit == -1: # The final hit
-            last_hit = i
-            if art['ReAct' + str(i)] != 0: # if the final hit contains the final reaction
-                last_react = i
-        elif (i < last_hit) & (last_react == -1): # Before the final hit, when the last reaction is not yet found
-            if art['ReAct' + str(i)] != 0:
-                last_react = i
-        elif i < last_hit: # Before the final hit, when the last reaction has been found    
-            art['ReAct' + str(i)] = 0
-        else: # Reactions which come after the final hit (unused, but let's keep the table clean for debugging purposes)
-            art['ReAct' + str(i)] = 0
