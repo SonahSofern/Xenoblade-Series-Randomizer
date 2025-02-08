@@ -1,37 +1,6 @@
 import json, JSONParser
 import random
-from IDs import Lv1ArtCDs, EnhancementSets, ValidArtIDs, EvasionEnhancementIDs, SpecialEffectArtIDs, AutoAttacks, OriginalAOECaptionIDs
-
-def Reaction(art, multReact):
-    ValidReactions = {
-        "Teleport": [43],
-        "Backstep": [36]
-    }
-    SelfTargetReactions = {
-
-    }
-    EnemyTargetReactions = {
-        "Break" : [1],
-        "Topple": [2],
-        "Launch": [3],
-        "Smash": [4],
-        "Combo" : [1,2,3,4],
-        "KB": [5,6,7,8,9],
-        "BD": [10,11,12,13,14],
-    }
-    
-    if art["Target"] == 1:
-        ValidReactions.update(SelfTargetReactions) # Add self targeting
-    elif art["Target"] == 0:
-        ValidReactions.update(EnemyTargetReactions) # Add enemy targeting
-    
-    for i in range(1,17):
-        name,values = random.choice(list(ValidReactions.items()))
-        if art[f"HitFrm{i}"] == 0: # Make sure there is a hit
-            art[f"HitFrm{i-1}"] = random.choice(values) # Adds something to the last hit
-            break
-        if multReact:
-            art[f"ReAct{i}"] =  random.choice(values) # Adds each hit
+from IDs import EnhancementSets, ValidArtIDs, EvasionEnhancementIDs, SpecialEffectArtIDs, AutoAttacks
 
 
 def DriverArtRandomizer(optionDict):
@@ -40,14 +9,17 @@ def DriverArtRandomizer(optionDict):
         
         isAutoAttacks = optionDict["Driver Arts"]["subOptionObjects"]["Auto Attacks"]["subOptionTypeVal"].get()
         multipleReactions = optionDict["Driver Arts"]["subOptionObjects"]["Multiple Reactions"]["subOptionTypeVal"].get()
+        isReactions = optionDict["Driver Arts"]["subOptionObjects"]["Reactions"]["subOptionTypeVal"].get()
+        isCooldowns = optionDict["Driver Arts"]["subOptionObjects"]["Cooldown"]["subOptionTypeVal"].get()
+        isDamage = optionDict["Driver Arts"]["subOptionObjects"]["Damage"]["subOptionTypeVal"].get()
+
         odds = optionDict["Driver Arts"]["spinBoxVal"].get()
         
         for art in artData["rows"]:
             
-            if not isAutoAttacks or art["$id"] in AutoAttacks: # Ignore auto attacks unless the option is clicked
+            if (not isAutoAttacks) and (isAutoAttacks or (art["$id"] in AutoAttacks)): # Ignore auto attacks unless the option is clicked
                 continue
-            
-            validChanges = FindValidChanges(art, odds,  multipleReactions) # Find Valid Changes
+            validChanges = FindValidChanges(art, odds,  multipleReactions, isReactions, isCooldowns, isDamage) # Find Valid Changes
 
             for change in validChanges: # Apply Changes
                 change()
@@ -56,44 +28,50 @@ def DriverArtRandomizer(optionDict):
         artFile.truncate()
         json.dump(artData, artFile, indent=2, ensure_ascii=False)
  
-def FindValidChanges(art,odds,  multipleReactions):
+def FindValidChanges(art,odds, multipleReactions, isReactions, isCooldowns, isDamage):
     validChanges = []
     
-    if odds > random.range(0,100):
+    if isReactions and (art["Target"] == 0) and (odds > random.randrange(0,100)): # Ensures Targeting enemy
         validChanges.append(lambda: Reaction(art, multipleReactions))
-    
+    if isCooldowns and (odds > random.randrange(0,100)):
+        validChanges.append(lambda: Cooldowns(art))
+    if isDamage and (odds > random.randrange(0,100)):
+        validChanges.append(lambda: Damage(art))
     return validChanges
 
-def RandomArtCooldowns(OptionsRunDict): # randomizes art cooldowns
-    sliderOdds = OptionsRunDict["Driver Arts"]["spinBoxVal"].get()
-    with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] in ValidArtIDs:
-                if sliderOdds > random.randrange(0,100):
-                    row["Recast1"] = random.choice(Lv1ArtCDs)
-                    for j in range(2, 7):
-                        row[f"Recast{j}"] = row[f"Recast{j-1}"] - random.choice([0, 0, 0, 1, 1, 2])
-                        if row[f"Recast{j}"] < 1:
-                            row[f"Recast{j}"] = 1
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
 
-def RandomArtDamageRatios(OptionsRunDict): # randomizes damage ratios
-    sliderOdds = OptionsRunDict["Driver Arts"]["spinBoxVal"].get()
-    Lv1DamageRatios = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 125, 125, 130, 130, 130, 130, 130, 130, 140, 140, 140, 140, 144, 144, 144, 144, 144, 144, 144, 150, 150, 150, 150, 150, 150, 150, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160, 168, 168, 168, 168, 168, 168, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 210, 210, 210, 210, 210, 210, 210, 210, 210, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 230, 231, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 250, 250, 250, 250, 255, 255, 255, 260, 260, 260, 260, 260, 260, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 285, 285, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 315, 315, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 330, 345, 345, 345, 345, 360, 360, 360, 360, 360, 360, 360, 360, 360, 375, 375, 375, 375, 390, 390, 390, 420, 420, 420]
-    with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] in ValidArtIDs:
-                if sliderOdds > random.randrange(0,100):
-                    row["DmgMgn1"] = random.choice(Lv1DamageRatios)
-                    for j in range(2, 7):
-                        row[f"DmgMgn{j}"] = row[f"DmgMgn{j-1}"] + random.choice([20, 20, 30, 30, 30, 30, 30, 30, 40, 40, 40, 50, 50])
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+def Reaction(art, multReact):
+    ValidReactions = {
+        "Break" : [1],
+        "Topple": [2],
+        "Launch": [3],
+        "Smash": [4],
+        "KB": [5,6,7,8,9],
+        "BD": [10,11,12,13,14],
+    }
+    
+    for i in range(1,17):
+        name,values = random.choice(list(ValidReactions.items()))
+        if art[f"HitFrm{i}"] == 0: # Make sure there is a hit
+            art[f"ReAct{i-1}"] = random.choice(values) # Adds something to the last hit
+            break
+        if multReact:
+            art[f"ReAct{i}"] =  random.choice(values) # Adds each hit
+
+def Cooldowns(art): # randomizes art cooldowns
+    CD = random.randrange(2,12)
+    for i in range(1,7):
+        step = random.choice([0,0,0,1,1,2])
+        if CD > step:
+            CD -= step
+        art[f"Recast{i}"] = CD
+
+def Damage(art): # randomizes damage ratios
+    DMG = random.randrange(100,200,10)
+    for i in range(1,7):
+        step = random.choice([0,0,20,20,50,100])
+        DMG += step
+        art[f"DmgMgn{i}"] = DMG
 
 def RandomArtEnhancements(OptionsRunDict): # randomizes art enhancements
     sliderOdds = OptionsRunDict["Driver Arts"]["spinBoxVal"].get()
@@ -227,9 +205,9 @@ def GenCustomArtDescriptions():
                                     TypeReactions.append(art[f"ReAct{i}"])
                                     break
                     ReactCaption = ReactCaption[:-2]
-                    if len(ReactCaption) > 15: # If the length is too long, shorten it to "Driver Combo"
-                        ReactCaption = "[System:Color name=tutorial]Driver Combo[/System:Color]"
-                    elif len(TypeReactions) == 1: # If the length is 1, spell out the reaction
+                    # if len(ReactCaption) > 15: # If the length is too long, shorten it to "Driver Combo"
+                    #     ReactCaption = "[System:Color name=tutorial]Driver Combo[/System:Color]"
+                    if len(TypeReactions) == 1: # If the length is 1, spell out the reaction
                         for key,values in FullReactions.items():
                             if TypeReactions[0] in values:
                                 ReactCaption = f"[System:Color name=tutorial]{key}[/System:Color]"
