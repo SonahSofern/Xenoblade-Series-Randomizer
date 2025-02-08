@@ -119,7 +119,7 @@ def Debuffs(art):
     art["ArtsDeBuff"] = debuff
 
 def AnimationSpeed(art):
-    art["ActSpeed"] = random.randrange(10,200,10)
+    art["ActSpeed"] = random.randrange(50,200,10)
 
 def AOE(art):
     Single = 0
@@ -227,7 +227,7 @@ def GenCustomArtDescriptions():
                     # AOE
                     for key,values in RangeType.items():    
                         if art["RangeType"] in values:
-                            CombinedCaption[0] += f"[System:Color name=green]{key}[/System:Color]"
+                            CombinedCaption[0] += f"[System:Color name=blue]{key}[/System:Color]"
                             break
 
                     # Type of Art
