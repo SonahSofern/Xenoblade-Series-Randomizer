@@ -156,10 +156,13 @@ def AOE(art):
     ConeAhead = 2
     CircleAroundUser = 5
     RangeType = random.choice([CircleAroundTarget, ConeAhead, CircleAroundUser])
-    RandomRadius = random.randint(10,15)
+    RandomRadius = random.randrange(8,16)
+    RandomLength = random.randrange(2,17,4)
+    
     
     art["RangeType"] = RangeType
     art["Radius"] =  RandomRadius # Not sure what makes a good radius
+    art["Length"] = RandomLength
     return f"[System:Color name=green]AOE[/System:Color]"
 
 
