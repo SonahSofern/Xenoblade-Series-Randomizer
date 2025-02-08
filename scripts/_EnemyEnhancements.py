@@ -13,32 +13,32 @@ def EnemyStats(spinBox):
             EnArr = json.load(EnArrangeFile)
             Names = json.load(NamesFile)
             
-            
             for Enemy in EnArr["rows"]:
-                if spinBox > random.randrange(0,100):
+                if spinBox < random.randrange(0,100):
+                    continue
                         
-                    enh = random.choice(ValidSkills)
-                    prevNames.append({"myName" :Enemy["Name"], "myEnhance": enh})
+                enh = random.choice(ValidSkills)
+                prevNames.append({"myName" :Enemy["Name"], "myEnhance": enh})
+                
+                for pair in prevNames: # Ensures the same name has the same enhancement
+                    if pair["myName"] == Enemy["Name"]:
+                        enh = pair["myEnhance"]
+                        break
                     
-                    for pair in prevNames: # Ensures the same name has the same enhancement
-                        if pair["myName"] == Enemy["Name"]:
-                            enh = pair["myEnhance"]
-                            break
-                        
-                        
+                    
 
-                    enh.RollEnhancement()                        
-                    Enemy["EnhanceID3"] = enh.id
-                    
-                    for name in Names["rows"]: # Changes Names
-                        if name["$id"] == Enemy["Name"]:
-                            oldName = name["name"]
-                            enhanceName = enh.name +  ('+'*(enh.Rarity))
-                            if len(enhanceName + oldName) > 20:
-                                oldnameList = oldName.split()
-                                oldName = oldnameList[-1]           
-                            name["name"] = f"[System:Color name=tutorial]{enhanceName}[/System:Color] {oldName}"
-                            break
+                enh.RollEnhancement()                        
+                Enemy["EnhanceID3"] = enh.id
+                
+                for name in Names["rows"]: # Changes Names
+                    if name["$id"] == Enemy["Name"]:
+                        oldName = name["name"]
+                        enhanceName = enh.name +  ('+'*(enh.Rarity))
+                        if len(enhanceName + oldName) > 20:
+                            oldnameList = oldName.split()
+                            oldName = oldnameList[-1]           
+                        name["name"] = f"[System:Color name=tutorial]{enhanceName}[/System:Color] {oldName}"
+                        break
 
             
             NamesFile.seek(0)
@@ -61,9 +61,8 @@ class EnemyEnhancement(Enhancement):
 Healthy = EnemyEnhancement("Healthy", HPBoost, [100,150,200,300])
 Strong = EnemyEnhancement("Strong", StrengthBoost, [50,100,150,200])
 Etheras = EnemyEnhancement("Etherite", EtherBoost, [50,100,150,200])
-Agility = EnemyEnhancement("Agile", AgiBoost, [100,200,300,400])
-EtherBlock = EnemyEnhancement("Eth Def", FlatEthDefBoost, [60,70,80,100])
-PhyBlock = EnemyEnhancement("Phys Def", FlatDefBoost, [60,70,80,100])
+EtherBlock = EnemyEnhancement("E. Def", FlatEthDefBoost, [60,70,80,100])
+PhyBlock = EnemyEnhancement("P. Def", FlatDefBoost, [60,70,80,100])
 Spike = EnemyEnhancement("Spiky", EtherCounter, [30,40,50,60])
 Pursuer = EnemyEnhancement("Pursuer", CombatMoveSpeed, [100,200,300,400])
 AllReactionNull = EnemyEnhancement("Stable", TranquilGuard,[40,60,80,100])
@@ -75,7 +74,6 @@ FirstStrike = EnemyEnhancement("Supriser", FirstArtDamage,[300,500,600,700])
 Lightning  = EnemyEnhancement("Lightning", AutoSpeedArtsSpeed,[300,400,500,600],[200,300,400,500])
 Repeat = EnemyEnhancement("Repeat", DidIDoThat,[20,40,60,80])
 Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
-Warmup = EnemyEnhancement("Warmup", BattleDurationDamageUp, [70,100,120,150])
 Regen = EnemyEnhancement("Regen", LowHPRegen, [3,5,7,9])
 CloseArmor = EnemyEnhancement("Guardian", ReduceDamageFromNearbyEnemies, [30,50,70,90])
 
@@ -85,6 +83,8 @@ CloseArmor = EnemyEnhancement("Guardian", ReduceDamageFromNearbyEnemies, [30,50,
 # Not including
 # BladeComboResist = EnemyEnhancement("Combo Resist", ReduceEnemyBladeComboDamage, [60,70,90,100])
 # ChainHeal = EnemyEnhancement("Chain Heal", ChainAttackHeal, [50,60,70,80]) didnt work
+# Warmup = EnemyEnhancement("Warmup", BattleDurationDamageUp, [70,100,120,150])
+# Agility = EnemyEnhancement("Agile", AgiBoost, [100,200,300,400])
 
 
 

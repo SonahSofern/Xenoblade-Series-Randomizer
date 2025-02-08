@@ -143,7 +143,7 @@ frontatk = EnemyArtEnhancements("Front↑", FrontDamageUp, [20,40,60,80])
 pierce = EnemyArtEnhancements("Pierce", GuardAnnulAttack, [100,100,100,100])
 # lowhpDamage = EnemyArtEnhancements("HP↓Dmg↑", DamageUpWhenHpDown, [10,20,30,40])
 transmig = EnemyArtEnhancements("Flip", Transmigration, [100,100,100,100])
-vamp = EnemyArtEnhancements("Vamp", ArtDamageHeal, [400,500,600,700])
+vamp = EnemyArtEnhancements("Vamp", ArtDamageHeal, [200,250,300,350])
 
 def Enhancements(art):
     skill:Enhancement = random.choice(ValidSkills)
@@ -156,14 +156,15 @@ def AOE(art):
     ConeAhead = 2
     CircleAroundUser = 5
     RangeType = random.choice([CircleAroundTarget, ConeAhead, CircleAroundUser])
-    RandomRadius = random.randint(10,15)
+    RandomRadius = random.randrange(8,16)
+    RandomLength = random.randrange(2,17,4)
+    
     
     art["RangeType"] = RangeType
     art["Radius"] =  RandomRadius # Not sure what makes a good radius
+    art["Length"] = RandomLength
     return f"[System:Color name=green]AOE[/System:Color]"
 
-def Hits(art): # Theres also LoopNum which might be interesting
-    pass
 
 def Reaction(art):
     ValidReactions = {
@@ -217,14 +218,21 @@ def Buff(art):
         "Counter": 6,
         "↑Counter": 7,
         "Rflct": 5,
-        "Invi": 4,
+        "Inv": 4,
         "Absorb":  17,
-        "CD↓": None, # Special case its not really a buff but I dont want to give it its own category, I think it makes sense as a buff, this causes the problem that only arts with no buff can have their cd reduced which is fine maybe
+    }
+    CD = {
+        "CD↓": 0, # Special case its not really a buff but I dont want to give it its own category, I think it makes sense as a buff, this causes the problem that only arts with no buff can have their cd reduced which is fine maybe
     }
     
+    if art.get("Recast") and art["Recast"] != 0:
+        Buffs.update(CD)
+    
     name,value = random.choice(list(Buffs.items()))
-    if art.get("Recast") and name == "CD↓" and art["Recast"] != 0: # Checks to be sure recast exists some dont have it
+    if name == "CD↓": # Checks to be sure recast exists some dont have it
         art["Recast"] //= random.choice([2,4,6])
+    elif name == "Loop":
+        art["LoopNum"] = random.choice([1,1,1,1,2,2,2,3,3,4])
     else:
         art["ArtsBuff"] = value
     return f"[System:Color name=green]{name}[/System:Color]"
@@ -238,7 +246,7 @@ def Debuff(art):
         "Def↓": 23,
         "EDef↓": 24,
         "Res↓": 25,
-        # "Rage": 35, # We just resist rage strike?? Test on BOC d iffculty
+        # "Rage": 35, # We just resist rage strike?? even on BOC and enemy is enraged
         # "Fire": 33 Already have fire this might just be a different buff even though its only on brighids confining flames
     }
     SingleTarget = {
