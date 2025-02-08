@@ -11,7 +11,7 @@ def DriverArtRandomizer(optionDict):
         
         isAutoAttacks = optionDict["Driver Arts"]["subOptionObjects"]["Auto Attacks"]["subOptionTypeVal"].get()
         isMultiReact = optionDict["Driver Arts"]["subOptionObjects"]["Multiple Reactions"]["subOptionTypeVal"].get()
-        isReactions = optionDict["Driver Arts"]["subOptionObjects"]["Reactions"]["subOptionTypeVal"].get()
+        isReactions = optionDict["Driver Arts"]["subOptionObjects"]["Single Reaction"]["subOptionTypeVal"].get()
         isCooldowns = optionDict["Driver Arts"]["subOptionObjects"]["Cooldown"]["subOptionTypeVal"].get()
         isDamage = optionDict["Driver Arts"]["subOptionObjects"]["Damage"]["subOptionTypeVal"].get()
         isEnhancements = optionDict["Driver Arts"]["subOptionObjects"]["Enhancements"]["subOptionTypeVal"].get()
@@ -31,27 +31,34 @@ def DriverArtRandomizer(optionDict):
                     art[f"ReAct{i}"] = 0 # Clearing Defaults these are needed bc torna arts are weird so i cant clear them blindly before hand gotta follow these conditions so this is the easiest way
                 if OddCheck(odds):
                     Reaction(art, isMultiReact)
+                    
             if isCooldowns and OddCheck(odds):
                 Cooldowns(art)
+                
             if isDamage and OddCheck(odds):
                 Damage(art)
+                
             if isEnhancements and isEnemyTarget:
                 for i in range(1,7):
                     art[f"Enhance{i}"] = 0
                 if OddCheck(odds):
                     Enhancements(art)
+                    
             if isBuffs:
                 art["ArtsBuff"] = 0 
                 if OddCheck(odds):
                     Buffs(art)
+                    
             if isDebuffs and isEnemyTarget:
                 art["ArtsDeBuff"] = 0
                 if OddCheck(odds):
                     Debuffs(art)
+                    
             if isAOE and isEnemyTarget:
                 art["RangeType"] = 0
                 if OddCheck(odds):
                     AOE(art)
+                    
             if isSpeed and OddCheck(odds):
                 AnimationSpeed(art)
             
@@ -79,22 +86,22 @@ def Reaction(art, multReact):
         if multReact:
             art[f"ReAct{i}"] =  random.choice(values) # Adds each hit
 
-def Cooldowns(art): # randomizes art cooldowns
-    CD = random.randrange(2,12)
+def Cooldowns(art): 
+    CD = random.randrange(7,9)
     for i in range(1,7):
         step = random.choice([0,0,0,1,1,2])
         if CD > step:
             CD -= step
         art[f"Recast{i}"] = CD
 
-def Damage(art): # randomizes damage ratios
+def Damage(art): 
     DMG = random.randrange(100,200,10)
     for i in range(1,7):
-        step = random.choice([0,0,20,20,50,100])
+        step = random.choice([0,0,30,30,50,50,100])
         DMG += step
         art[f"DmgMgn{i}"] = DMG
         
-def Enhancements(art): # randomizes art enhancements
+def Enhancements(art): 
     Enhancement = random.choice(EnhancementSets)
     for i in range(1,7):
         art[f"Enhance{i}"] = Enhancement[i-1]
@@ -117,7 +124,7 @@ def Buffs(art):
 def Debuffs(art):
     Debuffs = {
         "Taunt" : 11,
-        "Stench": 12,
+        # "Stench": 12,
         "NlHeal": 15,
         "Shackle": 14,
         "Def↓": 23,
@@ -134,11 +141,10 @@ def AnimationSpeed(art):
     art["ActSpeed"] = random.randrange(50,200,10)
 
 def AOE(art):
-    Single = 0
     CircleAroundTarget = 1
     ConeAhead = 2
     CircleAroundUser = 5
-    RangeType = random.choice([Single,CircleAroundTarget, ConeAhead, CircleAroundUser])
+    RangeType = random.choice([CircleAroundTarget, ConeAhead, CircleAroundUser])
     RandomRadius = random.randint(10,15)
     RandomLength = random.randrange(2,17,4)
     art["RangeType"] = RangeType
