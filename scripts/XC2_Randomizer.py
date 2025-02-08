@@ -11,7 +11,7 @@ from Cosmetics import *
 from UI_Colors import *
 from tkinter.font import Font
 
-Version = "1.2.1"
+Version = "1.3.0"
 CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
 OptionDictionary = {}
@@ -406,12 +406,14 @@ outDirEntry.pack(side="left", padx=2)
 SeedFrame = ttk.Frame(root, style="NoBackground.TFrame")
 SeedFrame.pack(anchor="w", padx=10)
 seedDesc = ttk.Button(SeedFrame, text="Seed", command=lambda: GenRandomSeed(seedEntryVar))
+
 seedDesc.pack(side='left', padx=2, pady=2)
 
 RootsForStyling.append(bdatcommonFrame)
 
 # Seed entry box
 seedEntryVar = StringVar()
+GenRandomSeed(seedEntryVar)
 randoSeedEntry = ttk.Entry(SeedFrame, width=30, textvariable=seedEntryVar)
 randoSeedEntry.pack(side='left', padx=2)
 

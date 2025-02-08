@@ -87,7 +87,7 @@ def Reaction(art, multReact):
             art[f"ReAct{i}"] =  random.choice(values) # Adds each hit
 
 def Cooldowns(art): 
-    CD = random.randrange(7,9)
+    CD = random.randrange(7,13)
     for i in range(1,7):
         step = random.choice([0,0,0,1,1,2])
         if CD > step:
@@ -148,7 +148,7 @@ def AOE(art):
     RandomRadius = random.randint(10,15)
     RandomLength = random.randrange(2,17,4)
     art["RangeType"] = RangeType
-    art["Radius"] =  RandomRadius # Not sure what makes a good radius
+    art["Radius"] =  RandomRadius
     art["Length"] = RandomLength
 
 def GenCustomArtDescriptions():

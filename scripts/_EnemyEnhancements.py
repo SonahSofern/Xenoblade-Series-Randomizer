@@ -13,32 +13,32 @@ def EnemyStats(spinBox):
             EnArr = json.load(EnArrangeFile)
             Names = json.load(NamesFile)
             
-            
             for Enemy in EnArr["rows"]:
-                if spinBox > random.randrange(0,100):
+                if spinBox < random.randrange(0,100):
+                    continue
                         
-                    enh = random.choice(ValidSkills)
-                    prevNames.append({"myName" :Enemy["Name"], "myEnhance": enh})
+                enh = random.choice(ValidSkills)
+                prevNames.append({"myName" :Enemy["Name"], "myEnhance": enh})
+                
+                for pair in prevNames: # Ensures the same name has the same enhancement
+                    if pair["myName"] == Enemy["Name"]:
+                        enh = pair["myEnhance"]
+                        break
                     
-                    for pair in prevNames: # Ensures the same name has the same enhancement
-                        if pair["myName"] == Enemy["Name"]:
-                            enh = pair["myEnhance"]
-                            break
-                        
-                        
+                    
 
-                    enh.RollEnhancement()                        
-                    Enemy["EnhanceID3"] = enh.id
-                    
-                    for name in Names["rows"]: # Changes Names
-                        if name["$id"] == Enemy["Name"]:
-                            oldName = name["name"]
-                            enhanceName = enh.name +  ('+'*(enh.Rarity))
-                            if len(enhanceName + oldName) > 20:
-                                oldnameList = oldName.split()
-                                oldName = oldnameList[-1]           
-                            name["name"] = f"[System:Color name=tutorial]{enhanceName}[/System:Color] {oldName}"
-                            break
+                enh.RollEnhancement()                        
+                Enemy["EnhanceID3"] = enh.id
+                
+                for name in Names["rows"]: # Changes Names
+                    if name["$id"] == Enemy["Name"]:
+                        oldName = name["name"]
+                        enhanceName = enh.name +  ('+'*(enh.Rarity))
+                        if len(enhanceName + oldName) > 20:
+                            oldnameList = oldName.split()
+                            oldName = oldnameList[-1]           
+                        name["name"] = f"[System:Color name=tutorial]{enhanceName}[/System:Color] {oldName}"
+                        break
 
             
             NamesFile.seek(0)
