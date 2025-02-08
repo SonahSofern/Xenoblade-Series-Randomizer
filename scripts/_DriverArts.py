@@ -9,7 +9,7 @@ def DriverArtRandomizer(optionDict):
         artData = json.load(artFile)
         
         isAutoAttacks = optionDict["Driver Arts"]["subOptionObjects"]["Auto Attacks"]["subOptionTypeVal"].get()
-        multipleReactions = optionDict["Driver Arts"]["subOptionObjects"]["Multiple Reactions"]["subOptionTypeVal"].get()
+        isMultiReact = optionDict["Driver Arts"]["subOptionObjects"]["Multiple Reactions"]["subOptionTypeVal"].get()
         isReactions = optionDict["Driver Arts"]["subOptionObjects"]["Reactions"]["subOptionTypeVal"].get()
         isCooldowns = optionDict["Driver Arts"]["subOptionObjects"]["Cooldown"]["subOptionTypeVal"].get()
         isDamage = optionDict["Driver Arts"]["subOptionObjects"]["Damage"]["subOptionTypeVal"].get()
@@ -18,40 +18,36 @@ def DriverArtRandomizer(optionDict):
         isDebuffs = optionDict["Driver Arts"]["subOptionObjects"]["Debuffs"]["subOptionTypeVal"].get()
         isAOE = optionDict["Driver Arts"]["subOptionObjects"]["AOE"]["subOptionTypeVal"].get()
         isSpeed = optionDict["Driver Arts"]["subOptionObjects"]["Animation Speed"]["subOptionTypeVal"].get()
-
-
-
         odds = optionDict["Driver Arts"]["spinBoxVal"].get()
         
         for art in artData["rows"]:
             if (not isAutoAttacks) and (isAutoAttacks or (art["$id"] in AutoAttacks)): # Ignore auto attacks unless the option is clicked
                 continue
-            ApplyChanges(art, odds,  multipleReactions, isReactions, isCooldowns, isDamage, isEnhancements, isBuffs, isDebuffs, isAOE, isSpeed) # Find Valid Changes
-
+            isEnemyTarget = (art["Target"] == 0) # Ensures Targeting Enemy
+    
+            if isReactions and isEnemyTarget and OddCheck(odds):
+                Reaction(art, isMultiReact)
+            if isCooldowns and OddCheck(odds):
+                Cooldowns(art)
+            if isDamage and OddCheck(odds):
+                Damage(art)
+            if isEnhancements and isEnemyTarget and OddCheck(odds):
+                Enhancements(art)
+            if isBuffs and OddCheck(odds):
+                Buffs(art)
+            if isDebuffs and OddCheck(odds):
+                Debuffs(art)
+            if isAOE and OddCheck(odds):
+                AOE(art)
+            if isSpeed and OddCheck(odds):
+                AnimationSpeed(art)
+            
         artFile.seek(0)
         artFile.truncate()
         json.dump(artData, artFile, indent=2, ensure_ascii=False)
  
-def ApplyChanges(art,odds, multipleReactions, isReactions, isCooldowns, isDamage, isEnhancements, isBuffs, isDebuffs, isAOE, isSpeed):
-    isEnemyTarget = (art["Target"] == 0) # Ensures Targeting Enemy
-    
-    if isReactions and isEnemyTarget and (odds > random.randrange(0,100)):
-        Reaction(art, multipleReactions)
-    if isCooldowns and (odds > random.randrange(0,100)):
-        Cooldowns(art)
-    if isDamage and (odds > random.randrange(0,100)):
-        Damage(art)
-    if isEnhancements and isEnemyTarget and (odds > random.randrange(0,100)):
-        Enhancements(art)
-    if isBuffs and (odds > random.randrange(0,100)):
-        Buffs(art)
-    if isDebuffs and (odds > random.randrange(0,100)):
-        Debuffs(art)
-    if isAOE and (odds > random.randrange(0,100)):
-        AOE(art)
-    if isSpeed and (odds > random.randrange(0,100)):
-        AnimationSpeed(art)
-
+def OddCheck(odds):
+    return (odds > random.randrange(0,100))
 
 def Reaction(art, multReact):
     ValidReactions = {
@@ -62,7 +58,6 @@ def Reaction(art, multReact):
         "KB": [5,6,7,8,9],
         "BD": [10,11,12,13,14],
     }
-    
     for i in range(1,17):
         name,values = random.choice(list(ValidReactions.items()))
         if art[f"HitFrm{i}"] == 0: # Make sure there is a hit
@@ -92,6 +87,7 @@ def Enhancements(art): # randomizes art enhancements
         art[f"Enhance{i}"] = Enhancement[i-1]
 
 def Buffs(art):
+    
     pass
 
 def Debuffs(art):
@@ -170,7 +166,7 @@ def GenCustomArtDescriptions():
         "Foe Armor": [16],
         "Foe Atk↑": [17],
         "Taunt": [11],
-        # "Stench": [12], # This one makes annoying noise and doesnt affect most enemies, im not even sure it affects enemy drivers tbh
+        "Stench": [12], 
         "Shackle Dr": [13],
         "Shackle Bl": [14],
         "Null Heal": [15],
