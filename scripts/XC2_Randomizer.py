@@ -2,7 +2,7 @@ from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys
 from tkinter import *
 import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, FieldSkillAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, _DriverArts, PermalinkManagement, Helper, SkillTrees, Enhancements, BigItems, _EnemyEnhancements, CameraFixes, UniqueMonsterHunt
-import GUISettings, TrustBeam, _EnemyArts, _BladeWeapons, BladeRandomization, GachaModifications, _GreenSkills, , BladeArtsRando, BladeElementsRando, BladeWeaponClassRando
+import GUISettings, TrustBeam, _EnemyArts, _BladeWeapons, BladeRandomization, GachaModifications, _GreenSkills, BladeArtsRando, BladeElementsRando, BladeWeaponClassRando
 import _WeaponChips as WPChips
 import _AuxCores as AuxCr
 import _Accessories as Accs
