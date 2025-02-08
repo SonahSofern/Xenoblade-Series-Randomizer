@@ -1,4 +1,4 @@
-import json, JSONParser
+import json
 import random
 from IDs import Arts, AutoAttacks
 
@@ -14,18 +14,25 @@ def DriverArtRandomizer(optionDict):
         isCooldowns = optionDict["Driver Arts"]["subOptionObjects"]["Cooldown"]["subOptionTypeVal"].get()
         isDamage = optionDict["Driver Arts"]["subOptionObjects"]["Damage"]["subOptionTypeVal"].get()
         isEnhancements = optionDict["Driver Arts"]["subOptionObjects"]["Enhancements"]["subOptionTypeVal"].get()
+        isBuffs = optionDict["Driver Arts"]["subOptionObjects"]["Buffs"]["subOptionTypeVal"].get()
+        isDebuffs = optionDict["Driver Arts"]["subOptionObjects"]["Debuffs"]["subOptionTypeVal"].get()
+        isAOE = optionDict["Driver Arts"]["subOptionObjects"]["AOE"]["subOptionTypeVal"].get()
+        isSpeed = optionDict["Driver Arts"]["subOptionObjects"]["Animation Speed"]["subOptionTypeVal"].get()
+
+
+
         odds = optionDict["Driver Arts"]["spinBoxVal"].get()
         
         for art in artData["rows"]:
             if (not isAutoAttacks) and (isAutoAttacks or (art["$id"] in AutoAttacks)): # Ignore auto attacks unless the option is clicked
                 continue
-            ApplyChanges(art, odds,  multipleReactions, isReactions, isCooldowns, isDamage, isEnhancements) # Find Valid Changes
+            ApplyChanges(art, odds,  multipleReactions, isReactions, isCooldowns, isDamage, isEnhancements, isBuffs, isDebuffs, isAOE, isSpeed) # Find Valid Changes
 
         artFile.seek(0)
         artFile.truncate()
         json.dump(artData, artFile, indent=2, ensure_ascii=False)
  
-def ApplyChanges(art,odds, multipleReactions, isReactions, isCooldowns, isDamage, isEnhancements):
+def ApplyChanges(art,odds, multipleReactions, isReactions, isCooldowns, isDamage, isEnhancements, isBuffs, isDebuffs, isAOE, isSpeed):
     isEnemyTarget = (art["Target"] == 0) # Ensures Targeting Enemy
     
     if isReactions and isEnemyTarget and (odds > random.randrange(0,100)):
@@ -36,6 +43,14 @@ def ApplyChanges(art,odds, multipleReactions, isReactions, isCooldowns, isDamage
         Damage(art)
     if isEnhancements and isEnemyTarget and (odds > random.randrange(0,100)):
         Enhancements(art)
+    if isBuffs and (odds > random.randrange(0,100)):
+        Buffs(art)
+    if isDebuffs and (odds > random.randrange(0,100)):
+        Debuffs(art)
+    if isAOE and (odds > random.randrange(0,100)):
+        AOE(art)
+    if isSpeed and (odds > random.randrange(0,100)):
+        AnimationSpeed(art)
 
 
 def Reaction(art, multReact):
@@ -76,6 +91,17 @@ def Enhancements(art): # randomizes art enhancements
     for i in range(1,7):
         art[f"Enhance{i}"] = Enhancement[i-1]
 
+def Buffs(art):
+    pass
+
+def Debuffs(art):
+    pass
+
+def AnimationSpeed(art):
+    pass
+
+def AOE(art):
+    pass
 
 def GenCustomArtDescriptions():
     RangeType = {
