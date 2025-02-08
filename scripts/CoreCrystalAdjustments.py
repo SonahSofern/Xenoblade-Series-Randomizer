@@ -50,32 +50,6 @@ def FieldSkillLevelAdjustment():
         json.dump(data, file, indent=2, ensure_ascii=False)
     # JSONParser.ChangeJSONFile("common/FLD_AchievementSet.json",Helper.StartsWith("AchievementID",1,5), Helper.InclRange(1,3824), [40], (x for x in FieldSkillAchievementIDs if x in ChangeableFieldSkillAchievementIDs) )
 
-def ChangeRankCondition(): # This breaks the blades currently, not letting you unlock them at all
-    # Changes the requirement to unlock trust level of blade from some weird ones like money to trust values instead (Boreas, etc)
-    KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]
-    KeyAchievementIDs = list(set([x for x in KeyAchievementIDs if x != 0]))
-    AchievementsToBlank = []
-    Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], Helper.InclRange(1001, 1132), "KeyAchievement")
-    with open("./_internal/JsonOutputs/common/FLD_AchievementSet.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for i in range(0, len(KeyAchievementIDs)):
-            for row in data["rows"]:
-                if row["$id"] == KeyAchievementIDs[i]:
-                    for j in range(1, 6):
-                        AchievementsToBlank.append(row[f"AchievementID{j}"])
-                    break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/FLD_AchievementList.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] in AchievementsToBlank:
-                row["Task"] = 0
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-
 def AdjustingCrystalList():
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["Condition", "BladeID", "CommonID", "CommonWPN", "CommonAtr"], 0)
     ITMCrystalFile = "./_internal/JsonOutputs/common/ITM_CrystalList.json"
@@ -175,27 +149,54 @@ def FixRoc(): # Fixes Roc softlock
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-#def FixArtReleaseLevels(): # Fixes issue with NG+ blades having incredibly high level requirements for arts
-#    with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
-#        data = json.load(file)
-#        RandomBlades = BladeIDs.copy()
-#        random.shuffle(RandomBlades)
-#        for row in data["rows"]:
-#            if (row["$id"] in IDs.ValidArtIDs) & (row["WpnType"] != 17):
-#                for i in range(1, 6):
-#                    row[f"ReleaseLv{i}"] = 1
-#        file.seek(0)
-#        file.truncate()
-#        json.dump(data, file, indent=2, ensure_ascii=False)
+def FixOpeningSoftlock():
+    StartingCondListRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
+    StartingCondScenarioRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_ConditionScenario.json", "$id") + 1
+    with open("./_internal/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        data["rows"].append({"$id": StartingCondListRow, "Premise": 0, "ConditionType1": 1, "Condition1": StartingCondScenarioRow, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/FLD_ConditionScenario.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        data["rows"].append({"$id": StartingCondScenarioRow, "ScenarioMin": 2001, "ScenarioMax": 10048, "NotScenarioMin": 0, "NotScenarioMax": 0})
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        RandomBlades = BladeIDs.copy()
+        random.shuffle(RandomBlades)
+        for row in data["rows"]:
+            if row["BladeID"] != 1008:
+                row["Condition"] = StartingCondListRow
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)    
+
+def FixArtReleaseLevels(): # Fixes issue with NG+ blades having incredibly high level requirements for arts
+    with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        RandomBlades = BladeIDs.copy()
+        random.shuffle(RandomBlades)
+        for row in data["rows"]:
+            if (row["$id"] in IDs.ValidArtIDs) & (row["WpnType"] != 17):
+                for i in range(1, 6):
+                    row[f"ReleaseLv{i}"] = 1
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def CoreCrystalChanges(OptionsRunDict):
     RareBladeProbabilityEqualizer()
     AdjustingCrystalList()
     LandofChallengeRelease()
     FixingGivenCoreCrystalTutorial()
-    #ChangeRankCondition()
     if not OptionsRunDict["Race Mode"]["optionTypeVal"].get():
         RegularLootDistribution()
         FixRoc()
-        #FixArtReleaseLevels() # Need to just call Hybrid's function MakeAllArtsAccessible() when I merge it with my branch
+        FixOpeningSoftlock() # Removes ability to pull before you get Pyra, softlocking if you don't get a blade with arts 
+        FixArtReleaseLevels() # Need to just call Hybrid's function MakeAllArtsAccessible() when I merge it with my branch
         RaceMode.FindtheBladeNames(OptionsRunDict)
