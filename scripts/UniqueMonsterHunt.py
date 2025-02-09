@@ -17,15 +17,9 @@ ProofofPurchaseIDs = Helper.InclRange(25306, 25321)
 
 # TO DO
 
-# Add these shops:
-# Mystery Items (they're cheaper, but don't say what they do, and it can be bad?) - not sure
-# Gambling Shop: Voucher that unlocks a DLC reward, which can be anywhere from 0 to 20 shop tokens
 # Maybe change the blade bundles to be from the same overall class distribution pool, but have them be mixed up, and change the names to "Blade Bundle 1->10", and increase the cost accordingly
-# Think I need to have story alternate between Argentum and Area
-# Clear out all shops on other continents
-# Start the player with 250% movespeed (add precious ID 25249 using save file editor)
-# Start the save file with all keys
 # Start the player with 3 Landmarks on Each Map, enough to get around easily enough
+# Rename menu things related to the DLC Items (Expansion Pass), so they fit the bounty hunt mode.
 
 # Known Issues: 
 # Poppiswap is going to be fucked up with custom enhancements
@@ -50,6 +44,7 @@ def UMHunt(OptionDictionary):
         WeaponPowerLevel()
         BladeTrustRequirementChanges()
         PoppiswapCostChanges()
+        AddDLCRewards()
         CustomShopSetup()
         MoveSpeedDeedSetup()
         Cleanup()
@@ -92,12 +87,12 @@ def MoveSpeedDeedSetup():
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 25249:
-                row["Caption"] = 603 # Increases running speed by 5%
+                row["Caption"] = 603 # Increases running speed by 500%
     with open("./_internal/JsonOutputs/common/FLD_OwnerBonus.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 1:
-                row["Value"] = 250
+                row["Value"] = 500
                 row["Type"] = 1
                 break
         file.seek(0)
@@ -107,7 +102,7 @@ def MoveSpeedDeedSetup():
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 1:
-                row["Max"] = 500
+                row["Max"] = 750
                 break
         file.seek(0)
         file.truncate()
@@ -118,7 +113,7 @@ def MoveSpeedDeedSetup():
             if row["$id"] == 491:
                 row["name"] = "Movespeed Deed"
             if row["$id"] == 608:
-                row["name"] = "Increases running speed by 250%."
+                row["name"] = "Increases running speed by 500%."
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -145,7 +140,7 @@ def QuestListSetup(SetCount, ChosenAreaOrder): # Adjusting the quest list
                         row["PurposeID"] = 249 + i
                         row["CountCancel"] = 0
                         row["NextQuestA"] = 30000
-                        row["CallEventA"] = 10503
+                        row["CallEventA"] = 10494
                         break
         file.seek(0)
         file.truncate()
@@ -314,8 +309,8 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
                 AllOriginalUMIDs.append(CurrentAreaOriginalUMIDs)
                 AllAreaUMs.append(CurrentAreaUMs)
                 AllAreaMonsters.append(CurrentAreaMonsters)
-    EnemyRandoLogic.FlyingEnemyFix(AllOriginalUMIDs, AllAreaUMs)
-    EnemyRandoLogic.SwimmingEnemyFix(AllOriginalUMIDs, AllAreaUMs)
+        EnemyRandoLogic.FlyingEnemyFix(AllOriginalUMIDs[k], AllAreaUMs[k])
+        EnemyRandoLogic.SwimmingEnemyFix(AllOriginalUMIDs[k], AllAreaUMs[k])
     EnemyRandoLogic.FishFix()
     EnemyRandoLogic.BigEnemyCollisionFix()
 
@@ -333,7 +328,6 @@ def CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder): # adj
             for j in range(0, len(EnemySets[i])):
                 for row in data["rows"]:
                     if row["$id"] == EnemySets[i][j]:
-                        row["PreciousID"] = 25479 + i
                         row["ZoneID"] = ContinentInfo[ChosenAreaOrder[i]][3]
                         break
         file.seek(0)
@@ -1094,7 +1088,7 @@ def AccessoryShopRewards(): # Creates the accessory shop
     AccessoryShopRewardDistribution = [Helper.ExtendListtoLength([1], 16, "inputlist[i-1]+4"), Helper.ExtendListtoLength([2], 16, "inputlist[i-1]+4"), Helper.ExtendListtoLength([3], 16, "inputlist[i-1]+4"), Helper.ExtendListtoLength([4], 16, "inputlist[i-1]+4")]
 
 def PoppiswapShopRewards(): # Creates rewards for Poppiswap Shop
-    CrystalRows = Helper.InclRange(1,11)
+    CrystalRows = Helper.InclRange(27, 37)
     StartingCondListRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
     StartingItemCondRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_ConditionItem.json", "$id") + 1
     StartingDLCItemTextRow = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
@@ -1132,13 +1126,13 @@ def PoppiswapShopRewards(): # Creates rewards for Poppiswap Shop
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in CrystalRows:
-                row["releasecount"] = 1
+                row["releasecount"] = 2
                 row["item_id"] = 0
                 row["category"] = 3
-                row["value"] = 1000*row["$id"]
+                row["value"] = 1000*(row["$id"] - 26)
                 row["disp_item_info"] = 0
-                row["condition"] = StartingCondListRow + (row["$id"] - 1)
-                row["title"] = StartingDLCItemTextRow + (row["$id"]- 1)
+                row["condition"] = StartingCondListRow + (row["$id"] - 27)
+                row["title"] = StartingDLCItemTextRow + (row["$id"] - 27)
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1156,7 +1150,7 @@ def PoppiswapCostChanges(): # Reduces cost of poppiswap stuff
     Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_HanaBase.json"], ["Circuit4Num", "Circuit5Num", "Circuit6Num"], ['max(row[key] // 10, 1)'])
 
 def GambaShopRewards(): # Makes the rewards for the gamba shop
-    GambaCouponRows = Helper.InclRange(12, 27)
+    GambaCouponRows = Helper.InclRange(11, 26)
     StartingCondListRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
     StartingItemCondRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_ConditionItem.json", "$id") + 1
     StartingDLCItemTextRow = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
@@ -1197,7 +1191,7 @@ def GambaShopRewards(): # Makes the rewards for the gamba shop
         for i in range(0, len(GambaCouponRows)):
             for row in data["rows"]:
                 if row["$id"] == GambaCouponRows[i]:
-                    row["releasecount"] = 2
+                    row["releasecount"] = 3
                     row["item_id"] = 25489
                     row["category"] = 1
                     row["value"] = ShopTokenRewardResults[i]
@@ -1205,11 +1199,6 @@ def GambaShopRewards(): # Makes the rewards for the gamba shop
                     row["condition"] = StartingCondListRow + i
                     row["title"] = StartingDLCItemTextRow + i
                     break
-        for row in data["rows"]:
-            if row["$id"] not in Helper.InclRange(1, 27):
-                row["item_id"] = 0
-                row["category"] = 2
-                row["value"] = 1
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1219,9 +1208,13 @@ def GambaShopRewards(): # Makes the rewards for the gamba shop
             data["rows"].append({"$id": StartingDLCItemTextRow + i, "style": 162, "name": f"[System:Color name=tutorial]Shop Token[/System:Color] Booster Pack {i+1}"})
         for row in data["rows"]:
             if row["$id"] == 8:
-                row["name"] = "Poppiswap Crafting Materials"
+                row["name"] = "[System:Color name=green]Bounty Token[/System:Color] Rewards"
             if row["$id"] == 9:
+                row["name"] = "Poppiswap Crafting Materials"
+            if row["$id"] == 38:
                 row["name"] = "[System:Color name=tutorial]Shop Token[/System:Color] Booster Packs"
+            if row["$id"] == 10:
+                row["name"] = "Junk"
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1229,6 +1222,39 @@ def GambaShopRewards(): # Makes the rewards for the gamba shop
     global GambaShopRewardList
     GambaShopRewardList = Helper.ExtendListtoLength([25333], 16, "inputlist[i-1] + 1")
     random.shuffle(GambaShopRewardList)
+
+def AddDLCRewards():
+    BountyCollectionRewards = Helper.InclRange(1, 10)
+    StartingDLCItemTextRow = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
+    with open("./_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
+        data = json.load(file)
+        for i in range(0, len(BountyCollectionRewards)):
+            for row in data["rows"]:
+                if row["$id"] == BountyCollectionRewards[i]:
+                    row["releasecount"] = 1
+                    row["item_id"] = 25479 + i
+                    row["category"] = 1
+                    row["value"] = 4
+                    row["disp_item_info"] = 0
+                    row["condition"] = 3904 + i
+                    row["title"] = StartingDLCItemTextRow + i
+                    break
+        for row in data["rows"]:
+            if row["$id"] not in Helper.InclRange(1, 37):
+                row["item_id"] = 0
+                row["category"] = 2
+                row["value"] = 1
+                row["releasecount"] = 4
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", 'r+', encoding='utf-8') as file: #edits DLC items
+        data = json.load(file)
+        for i in range(0, 10):
+            data["rows"].append({"$id": StartingDLCItemTextRow + i, "style": 162, "name": f"[System:Color name=green]Bounty Token[/System:Color] Rewards, Set {i+1}"})
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def CustomShopSetup(): # Sets up the custom shops with loot
     
@@ -1286,10 +1312,10 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         "SetItemQtys": [Helper.ExtendListtoLength([], 10, "1"), TokenFillerList, TokenFillerList, TokenFillerList, TokenFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
         "RewardIDs": Helper.InclRange(1282, 1291), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
         "RewardItemIDs": [Helper.ExtendListtoLength([], 10, "25489"), TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
-        "RewardQtys": [[1,2,3,4,5,6,7,8,9,10], TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
+        "RewardQtys": [[2,3,4,5,6,7,8,9,10,11], TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
         "RewardNames": ["Shop Token", "Shop Token (x2)", "Shop Token (x3)", "Shop Token (x4)", "Shop Token (x5)", "Shop Token (x6)", "Shop Token (x7)", "Shop Token (x8)", "Shop Token (x9)", "Shop Token (x10)"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
-        "RewardSP": [625, 1250, 1875, 2500, 3125, 3750, 4375, 5000, 5625, 6250], #FLD_QuestReward Sp
-        "RewardXP": [630, 630, 630, 630, 630, 630, 630, 630, 630, 630], # FLD_QuestReward EXP
+        "RewardSP": [0, 1250, 1875, 2500, 3125, 3750, 4375, 5000, 5625, 6250], #FLD_QuestReward Sp
+        "RewardXP": [0, 630, 630, 630, 630, 630, 630, 630, 630, 630], # FLD_QuestReward EXP
         "HideReward": TokenFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
     }
 
@@ -1567,4 +1593,3 @@ def DebugItemsPlace(): #need to place some tokens to play around with them in th
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-
