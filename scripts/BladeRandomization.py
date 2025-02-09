@@ -303,7 +303,6 @@ def FixCutsceneCrashForNotHavingTwoWeapons(cutscene):
 def FixCosmetics(accessory):
     if accessory['Blade'] in Replacement2Original:
         accessory['Blade'] = Replacement2Original[accessory['Blade']]
-        print(accessory)
 
 
 # side is either 'L' or 'R' (case doesn't matter).
