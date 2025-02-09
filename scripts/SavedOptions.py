@@ -21,6 +21,8 @@ def loadData(DataList, Filename):
                 if data.get(option.name) == False:
                     continue
                 option.checkBoxVal.set(data[option.name])
+                for sub in option.subOptions:
+                    sub.checkBoxVal.set(data[f"{option.name}->{sub.name}"])
 
     except:
         print("Couldn't Load Saved Options")

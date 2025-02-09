@@ -15,7 +15,7 @@ class SubOption():
         self.prio = _prio
 
 class Option():
-    def __init__(self, _name:str, _tab, _desc:str, _commands:list, _subOptions: list, _defState = False, _prio = 0):
+    def __init__(self, _name:str, _tab, _desc:str, _commands:list, _subOptions: list, _defState = False, _prio = 0, _hasSpinBox = False):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
@@ -27,7 +27,7 @@ class Option():
         self.name =  _name
         self.tab = _tab
         self.desc = _desc
-        self.hasSpinBox = False
+        self.hasSpinBox = _hasSpinBox
         self.commands:list = _commands
         self.subDefState = _defState
         self.subOptions:list[SubOption] = _subOptions
@@ -42,7 +42,7 @@ class Option():
     def GenStandardOption(self, parentTab):   
         # Variables
         global rowIncrement
-        spinBoxVar = IntVar(value=100)
+        self.spinBoxVal = IntVar(value=100)
         var = BooleanVar()
         self.spinBoxObj = ttk.Label()
         self.spinBoxObj = ttk.Spinbox()
@@ -62,7 +62,7 @@ class Option():
         
         # % Boxes
         if self.hasSpinBox:
-            self.spinBoxObj = ttk.Spinbox(optionPanel, from_=0, to=100, textvariable=spinBoxVar, wrap=True, width=3, increment=10)
+            self.spinBoxObj = ttk.Spinbox(optionPanel, from_=0, to=100, textvariable=self.spinBoxVal, wrap=True, width=3, increment=10)
             self.spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
             self.spinBoxObj = ttk.Label(optionPanel, text="% randomized", anchor="w")
             self.spinBoxObj.grid(row=rowIncrement, column=3, sticky="w", padx=0)
@@ -105,7 +105,7 @@ General = 1
 Driver  = 2
 
 subAccessoryShopsOption_Accessories = SubOption("Accessories")
-AccessoryShopsOption = Option("Accessory Shops", General, "Randomizes the contents of Accessory Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(Accessories)-set([1])),[])],[subAccessoryShopsOption_Accessories], _defState=True)
+AccessoryShopsOption = Option("Accessory Shops", General, "Randomizes the contents of Accessory Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(Accessories)-set([1])),[])],[subAccessoryShopsOption_Accessories], _defState=True, _hasSpinBox = True)
 
 
 
