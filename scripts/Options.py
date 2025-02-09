@@ -1,5 +1,5 @@
 from tkinter import ttk
-import JSONParser, Helper
+import JSONParser, Helper, SavedOptions
 from IDs import *
 from tkinter import *
 
@@ -96,6 +96,8 @@ class Option():
     
     def GetCheckBox(self):
         return self.checkBoxVal.get()
+    
+
 
 rowIncrement = 0   
 OptionList:list[Option] = []
@@ -200,3 +202,7 @@ AccessoryShopsOption = Option("Accessory Shops", General, "Randomizes the conten
 #     # DebugLog.CreateDebugLog(OptionDictionary, Version, randoSeedEntry.get())
 #     # GenStandardOption("Enemy Arts", TabEnemies, "Gives enemies new arts", [lambda: _EnemyArts.EnemyArts(OptionDictionary["Enemy Arts"]["spinBoxVal"].get())],optionType=Spinbox)
 #     # GenStandardOption("Enemy Rage", TabEnemies, "Randomizes the effects of enemy enraged states", ["common/BTL_Aura"])   
+
+def UpdateAllStates():
+    for opt in OptionList:
+        opt.StateUpdate()

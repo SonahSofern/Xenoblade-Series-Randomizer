@@ -6,7 +6,7 @@ def saveData(DataList, Filename):
         sav= {}
         for saveData in DataList:
             sav.update({saveData.name: saveData.checkBoxVal.get()})
-        json.dump(sav, file)
+        json.dump(sav, file, indent=4)
 
 
             

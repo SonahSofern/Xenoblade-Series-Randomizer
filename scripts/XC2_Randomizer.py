@@ -267,10 +267,9 @@ permLink = SavedEntry("Permalink", permalinkVar)
 seedVar = SavedEntry("Seed", seedEntryVar)
 
 # Save and Load Last Options
-EveryObjectToSaveAndLoad = ([fileEnt, fileOut, permLink, seedVar] + OptionList)
-
-SavedOptions.loadData(EveryObjectToSaveAndLoad, SavedOptionsFileName)
-
+EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
+SavedOptions.loadData(EntriesToSave + OptionList, SavedOptionsFileName)
+UpdateAllStates()
 
 # # Permalink Options/Variables
 # permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame")
@@ -302,7 +301,7 @@ Cog = PhotoImage(file=icon_path)
 SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, defGUIThemeVar))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
-root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EveryObjectToSaveAndLoad, SavedOptionsFileName), root.destroy()))
+root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + OptionList, SavedOptionsFileName), root.destroy()))
 GUISettings.LoadTheme(defaultFont, defGUIThemeVar.get())
 
 
