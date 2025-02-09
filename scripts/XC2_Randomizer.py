@@ -278,7 +278,6 @@ def Options():
     GenStandardOption("Field Items", TabFunny, "Randomizes the size and spin rate of items from chests and collection points", [lambda: BigItems.BigItemsRando()])
 
     # Cosmetics
-    GenStandardOption("Character Outfits", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics(OptionDictionary)], CosmeticsList, Spinbox, defState=True)
     GenStandardOption("Blade Weapon Cosmetics", TabCosmetics, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])])
     
     # Race Mode
@@ -290,6 +289,8 @@ def Options():
 
     # CTMC (has to run after Race Mode in current iteration, needs to know what chests have what loot)
     GenStandardOption("Chest Type Matches Contents", TabQOL, "Chest model and label changes depending on tier of loot", [lambda: RaceMode.ChestTypeMatching(OptionDictionary)])
+
+    GenStandardOption("Character Outfits", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics(OptionDictionary)], CosmeticsList, Spinbox, defState=True)
 
     # Currently Disabled for Various Reasons
     # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
