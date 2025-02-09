@@ -9,7 +9,6 @@ import copy, random, JSONParser, Helper
 #  - Probably various other menu texts
 #  - Figure out how to randomize Torna blades properly (Apparently NoBuildWpn in CHR_Bl is not sufficient)
 #  - Blade names should be replaced in all dialogs where possible
-#  - Cosmetics do not work
 #  - Replace driver voice lines when changing blades (Rex will currently shout "Pyra" when switching to Pyra's replacement)
 #  - Replace field skill voice lines (Pyra's replacement currently says "I bring upon the power of fire!" in Pyra's voice)
 
@@ -264,6 +263,8 @@ def RandomizePoppiForms(OptionsRunDict):
 def BugFixes_PostRandomization():
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_EnArrange.json"], [], FixRandomizedEnemyBladeCrashes, replaceAll=True)
     JSONParser.ChangeJSONLineWithCallback(["common/EVT_cutscene_wp.json"], [], FixCutsceneCrashForNotHavingTwoWeapons, replaceAll=True)
+    JSONParser.ChangeJSONLineWithCallback(["common/ITM_OrbEquip.json"], [], FixCosmetics, replaceAll=True)
+    JSONParser.ChangeJSONLineWithCallback(["common/ITM_HanaAssist.json"], [], FixCosmetics, replaceAll=True)
     FixPandoriaSpriteAfterElpys()
 
 
@@ -297,6 +298,12 @@ def FixCutsceneCrashForNotHavingTwoWeapons(cutscene):
     replacement = Original2Replacement[original]
     cutscene['resourceL'] = WeaponType2Resource(OriginalBlades[replacement]['WeaponType'], 'L')
     cutscene['resourceR'] = WeaponType2Resource(OriginalBlades[replacement]['WeaponType'], 'R')
+
+
+def FixCosmetics(accessory):
+    if accessory['Blade'] in Replacement2Original:
+        accessory['Blade'] = Replacement2Original[accessory['Blade']]
+        print(accessory)
 
 
 # side is either 'L' or 'R' (case doesn't matter).
