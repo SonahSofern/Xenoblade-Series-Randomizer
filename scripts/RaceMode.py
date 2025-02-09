@@ -7,6 +7,7 @@ import time
 import JSONParser
 import DebugLog
 import math
+import CoreCrystalAdjustments
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
@@ -188,33 +189,29 @@ def RaceModeChanging(OptionsRunDict):
     LandmarkConditions()
     GimmickAdjustments()
     HideMapAreas(ScenarioFlagLists)
-    print(OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get())
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get():
-        print("Filling Chests with Custom Loot")
-        RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict)
-        StackableCoreCrystalsandKeyItems()
-        FindtheBladeNames(OptionsRunDict)
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Less Grinding"]["subOptionTypeVal"].get():
-        print("Reducing amount of grinding")
-        LessGrinding()
-        if NGPlusBladeCrystalIDs != None:
-            ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs)
-            ReduceBladeReqTrustVals()
-        SecondSkillTreeCostReduc()
-        DriverArtUpgradeCostChange()
-        BladeTreeMaxRewardChange()
-        PoppiswapCostReductions()
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get():    
-        print("Changing Shops")
-        ShyniniSaveUs()
-        ShopRemovals()
-        WeaponChipShopPowerLevelIncrease()
-        MovespeedDeedChanges()
-        PouchItemCarryCapacityIncrease()
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Enemy Drop Changes"]["subOptionTypeVal"].get():
-        print("Removing enemy drops")
-        EnemyDropRemoval()
-        EnemyRandoLogic.KeyItemsReAdd()
+    print("Filling Chests with Custom Loot")
+    RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict)
+    StackableCoreCrystalsandKeyItems()
+    FindtheBladeNames(OptionsRunDict)
+    print("Reducing amount of grinding")
+    LessGrinding()
+    if NGPlusBladeCrystalIDs != None:
+        ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs)
+        ReduceBladeReqTrustVals()
+    SecondSkillTreeCostReduc()
+    DriverArtUpgradeCostChange()
+    BladeTreeMaxRewardChange()
+    PoppiswapCostReductions()   
+    print("Changing Shops")
+    ShyniniSaveUs()
+    ShopRemovals()
+    WeaponChipShopPowerLevelIncrease()
+    MovespeedDeedChanges()
+    PouchItemCarryCapacityIncrease()
+    print("Removing enemy drops")
+    EnemyDropRemoval()
+    EnemyRandoLogic.KeyItemsReAdd()
+    CoreCrystalAdjustments.FieldSkillLevelAdjustment()
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["DLC Item Removal"]["subOptionTypeVal"].get():
         print("Nerfing Corvin and Crossette")
         DLCItemChanges()
@@ -239,7 +236,7 @@ def LessGrinding(): #adjusting level based exp gains, and debuffs while underlev
 def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
     NGPlusBladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
     NGPlusBladeCrystalIDs = []
-    if OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get():
+    if (OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get()) or (OptionsRunDict["Unique Monster Hunt"]["optionTypeVal"].get()):
         with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
             for i in range(0, len(NGPlusBladeIDs)):
@@ -437,8 +434,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
             A4Equip.append(RaceModeAuxCoreIDs[i][A4Num])
     AllEquipIDs = [A1Equip, A2Equip, A3Equip, A4Equip]
     Area1ShopDeedIDs, Area2ShopDeedIDs, Area3ShopDeedIDs, Area4ShopDeedIDs = [], [], [], []
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get():
-        Area1ShopDeedIDs, Area2ShopDeedIDs, Area3ShopDeedIDs, Area4ShopDeedIDs = Helper.InclRange(25249, 25264), Helper.InclRange(25265, 25280), Helper.InclRange(25281, 25291), Helper.InclRange(25292, 25299)
+    Area1ShopDeedIDs, Area2ShopDeedIDs, Area3ShopDeedIDs, Area4ShopDeedIDs = Helper.InclRange(25249, 25264), Helper.InclRange(25265, 25280), Helper.InclRange(25281, 25291), Helper.InclRange(25292, 25299)
     Area1LootIDs = A1CoreCrystalIDs * 2 + [25305] * 3 + Area1ShopDeedIDs * 2 + [25450] * 3 + A1Equip + [25408] * 5 + [25218, 25218, 25218, 25219, 25219, 25219] + A1RaceModeCoreChipIDs * 2 + [25407] * 10
     if ChosenIndices[1] == 3: # Leftherian Archipelago (30ish chests)
         Area2LootIDs = A2CoreCrystalIDs + [25305] * 2 + Area2ShopDeedIDs + [25450] * 2 + A2Equip + [25408] * 3 + [25220, 25220] + A2RaceModeCoreChipIDs + [25407] * 5
@@ -886,12 +882,19 @@ def ITMCrystalAdditions(BladeNames, CorrespondingBladeIDs):
 def PouchItemCarryCapacityIncrease(): # Set the max carry capacity of pouch items to 10 for all items
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/ITM_FavoriteList.json", ["ValueMax"], 10)
 
-def DriverArtUpgradeCostChange(): # to reduce the amount of time spent menuing, a single manual (5000 WP) should be enough to upgrade an art to level 5
+def DriverArtUpgradeCostChange(): # to reduce the amount of time spent menuing, a single manual should be enough to upgrade an art to level 5
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP2"], 250)
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP3"], 500)
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP4"], 1000)
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP5"], 2000)
-
+    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 25407:
+                row["Type"] = 3750 # Changed the amount of WP it gives 
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 def BladeTreeMaxRewardChange(): # When a blade skill tree completes, rewards that I already add to the item pool get given to the player, so I just replace the rewards with nothing.
     with open("./_internal/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
@@ -972,8 +975,6 @@ def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
     RaceModeOn = OptionsRunDict["Race Mode"]["optionTypeVal"].get()
     ZoharFragOn = OptionsRunDict["Race Mode"]["subOptionObjects"]["Zohar Fragment Hunt"]["subOptionTypeVal"].get()
     CoreCrystalRandoOn = OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get()
-    CustomLootOn = OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get()
-    ShopChangesOn = OptionsRunDict["Race Mode"]["subOptionObjects"]["Shop Changes"]["subOptionTypeVal"].get()
     ZoharFragItemIDs = [25135, 25136, 25137, 25138]
     CoreCrystalIDs = AllCoreCrystals
     MovespeedDeedIDs = Helper.InclRange(25249, 25300)
@@ -991,15 +992,13 @@ def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
             ChestTierListItemNames[0] = "[System:Color name=tutorial]Zohar Fragment[/System:Color]"
         if CoreCrystalRandoOn:
             ChestTierListIDs[1] = 5
-            ChestTierListItemNames[1] = "Core Crystal"
-        if ShopChangesOn:
-            ChestTierListIDs[2] = 2
-            ChestTierListItemNames[2] = "Movespeed Deed"
-        if CustomLootOn:
-            ChestTierListIDs[3] = 1
-            ChestTierListIDs[4] = 4
-            ChestTierListItemNames[3] = "Rare Item"
-            ChestTierListItemNames[4] = "Equipment/Gold"        
+            ChestTierListItemNames[1] = "Core Crystal"   
+        ChestTierListIDs[2] = 2
+        ChestTierListItemNames[2] = "Movespeed Deed"
+        ChestTierListIDs[3] = 1
+        ChestTierListIDs[4] = 4
+        ChestTierListItemNames[3] = "Rare Item"
+        ChestTierListItemNames[4] = "Equipment/Gold"        
         for i in range(0, len(ListTboxFiles)):
             with open(ListTboxFiles[i], 'r+', encoding='utf-8') as file: 
                 data = json.load(file)
@@ -1020,26 +1019,24 @@ def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
                                     rowcatfound = True
                                     CoreCrystalChests.append(row["$id"])
                                     break
-                    if ShopChangesOn:
-                        if not rowcatfound:
-                            for j in range(1, 9):
-                                if row[f"itm{j}ID"] in MovespeedDeedIDs:
-                                    row["RSC_ID"] = ChestTierListIDs[2]
-                                    rowcatfound = True
-                                    MovespeedDeedChests.append(row["$id"])
-                                    break
-                    if CustomLootOn:
-                        if not rowcatfound:
-                            for j in range(1, 9):
-                                if row[f"itm{j}ID"] in RareItemIDs:
-                                    row["RSC_ID"] = ChestTierListIDs[3]
-                                    rowcatfound = True
-                                    RareItemChests.append(row["$id"])
-                                    break
-                        if not rowcatfound:
-                            row["RSC_ID"] = ChestTierListIDs[4]
-                            rowcatfound = True
-                            EquipmentGoldChests.append(row["$id"])
+                    if not rowcatfound:
+                        for j in range(1, 9):
+                            if row[f"itm{j}ID"] in MovespeedDeedIDs:
+                                row["RSC_ID"] = ChestTierListIDs[2]
+                                rowcatfound = True
+                                MovespeedDeedChests.append(row["$id"])
+                                break
+                    if not rowcatfound:
+                        for j in range(1, 9):
+                            if row[f"itm{j}ID"] in RareItemIDs:
+                                row["RSC_ID"] = ChestTierListIDs[3]
+                                rowcatfound = True
+                                RareItemChests.append(row["$id"])
+                                break
+                    if not rowcatfound:
+                        row["RSC_ID"] = ChestTierListIDs[4]
+                        rowcatfound = True
+                        EquipmentGoldChests.append(row["$id"])
                 file.seek(0)
                 file.truncate()
                 json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1232,7 +1229,7 @@ def ScriptAdjustments(): # For individual script changes
 def XPDownScaling(): # Scales the amount of XP per level and xp gained dramatically, to allow me to level the user up quickly
     Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2", "EnemyExp"], ['max(row[key] // 10,1)'])
     Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/FLD_QuestReward.json"], ["EXP"], ['max(row[key] // 10,1)'])
-    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common_gmk/ma02a_FLD_LandmarkPop.json"] + LandmarkFilestoTarget,["getEXP"], ['max(row[key] // 10,1)'])
+    Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common_gmk/ma02a_FLD_LandmarkPop.json"] + LandmarkFilestoTarget, ["getEXP"], ['max(row[key] // 10,1)'])
 
 def GimmickAdjustments(): # removes requirements for specific gimmicks
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_MapGimmick.json", ["Condition"], 0)

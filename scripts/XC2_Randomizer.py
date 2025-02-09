@@ -154,7 +154,7 @@ def InteractableStateSet():
         item()
         
 
-def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton, defState = False):   
+def GenStandardOption(optionName, parentTab, description, commandList = [], subOptionName_subCommandList = [], optionType = Checkbutton, spinMin = 0, spinMax = 100, spinStep = 10, spinBoxDescription = "% randomized", spinBoxWidth = 3, spinBoxObjCol = 2, spinBoxDescCol = 3, spinBoxObjPadding = (15,0), spinBoxDescPadding = 0, defState = False):   
     # Variables
     global OptionDictionary
     global rowIncrement
@@ -179,10 +179,10 @@ def GenStandardOption(optionName, parentTab, description, commandList = [], subO
     
     # % Boxes
     if (optionType == Spinbox):
-        spinBoxObj = ttk.Spinbox(optionPanel, from_=0, to=100, textvariable=spinBoxVar, wrap=True, width=3, increment=10)
-        spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
-        spinDesc = ttk.Label(optionPanel, text="% randomized", anchor="w")
-        spinDesc.grid(row=rowIncrement, column=3, sticky="w", padx=0)
+        spinBoxObj = ttk.Spinbox(optionPanel, from_=spinMin, to=spinMax, textvariable=spinBoxVar, wrap=True, width=spinBoxWidth, increment= spinStep)
+        spinBoxObj.grid(row=rowIncrement, column=spinBoxObjCol, padx=spinBoxObjPadding)
+        spinDesc = ttk.Label(optionPanel, text=spinBoxDescription, anchor="w")
+        spinDesc.grid(row=rowIncrement, column=spinBoxDescCol, sticky="w", padx=spinBoxDescPadding)
 
     # Create Main Option Dictionary Entry
     OptionDictionary[optionName]={
@@ -282,9 +282,13 @@ def Options():
     GenStandardOption("Blade Weapon Cosmetics", TabCosmetics, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])])
     
     # Race Mode
-    GenStandardOption("Race Mode", TabGameMode, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(OptionDictionary), RaceMode.SeedHash], ["Zohar Fragment Hunt", [], "Less Grinding", [], "Shop Changes", [], "Enemy Drop Changes", [], "DLC Item Removal", [], "Custom Loot", [], "Field Skill Trees", [lambda: CoreCrystalAdjustments.FieldSkillLevelAdjustment()]], defState=True)
-    GenStandardOption("Unique Monster Hunt", TabGameMode, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt()], optionType=Spinbox)
+    GenStandardOption("Race Mode", TabGameMode, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(OptionDictionary), RaceMode.SeedHash], ["Zohar Fragment Hunt", [], "DLC Item Removal", []])    
+    GenStandardOption("Unique Monster Hunt", TabGameMode, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt(OptionDictionary)], optionType=Spinbox, spinMax = 10, spinStep = 1, spinBoxDescription = "Round(s):", spinBoxWidth = 2, spinBoxDescCol = 2, spinBoxObjCol = 3, spinBoxObjPadding = (0,0))
 
+    # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
+    GenStandardOption("Blade Names", TabBlades, "Randomizes a Blade's name", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
+
+    # CTMC (has to run after Race Mode in current iteration, needs to know what chests have what loot)
     GenStandardOption("Chest Type Matches Contents", TabQOL, "Chest model and label changes depending on tier of loot", [lambda: RaceMode.ChestTypeMatching(OptionDictionary)])
 
     # Currently Disabled for Various Reasons
@@ -334,7 +338,7 @@ def Randomize():
         # Runs all randomization
         RunOptions()
         randoProgressDisplay.config(text="Packing BDATs")
-        
+    
         try:
             # Packs BDATs
             subprocess.run(f"{bdat_path} pack {JsonOutput} -o {outputDirVar.get().strip()} -f json", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
