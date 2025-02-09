@@ -1,22 +1,24 @@
 saveFolderName = "SaveData"
-import os
+import os, json
 
 def saveData(DataList, Filename):
     with open(f"{saveFolderName}/{Filename}", 'w') as file:
+        sav= {}
         for saveData in DataList:
-            try:
-                file.write(f"{saveData.get()}" + '\n')
-            except:
-                file.write(f"{saveData}" + '\n')
+            sav.update({saveData.name: saveData.checkBoxVal.get()})
+        json.dump(sav, file)
+
 
             
 def loadData(DataList, Filename):
     try:
         os.makedirs(saveFolderName, exist_ok=True)
-        with open(f"{saveFolderName}/{Filename}", 'a+') as file:
-            file.seek(0)
-            savedLines = file.readlines()
-            for i in range(len(savedLines)):
-                DataList[i].set(savedLines[i].strip())
+        with open(f"{saveFolderName}/{Filename}", 'r') as file:
+            data = json.load(file)
+            for option in DataList:
+                try:
+                    option.checkBoxVal.set(data[option.name])
+                except:
+                    pass
     except:
-        print("Error Loading Settings Saved Values (Likely an option was added or removed)")
+        print("Couldn't Load Saved Options")
