@@ -81,6 +81,7 @@ def Cleanup():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_Dr.json", ["DefAcce"], 0)
 
 def MoveSpeedDeedSetup():
     with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes caption and name
@@ -590,7 +591,7 @@ def UMHuntMenuTextChanges():
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 128:
-                row["name"] = f"Seed Hash: {seedhashcomplete}"
+                row["name"] = f"Seed Hash: [System:Color name=green]{seedhashcomplete}[/System:Color]"
                 row["style"] = 166
             if row["$id"] == 129:
                 row["name"] = "[System:Color name=tutorial]Unique Monster Hunt[/System:Color]"
@@ -598,6 +599,14 @@ def UMHuntMenuTextChanges():
                 row["name"] = "Bounties"
             if row["$id"] == 1644:
                 row["name"] = f"{seedhashcomplete}"
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_ms/menu_main_contents_ms.json", 'r+', encoding='utf-8') as file: # Changes the name of "Expansion Pass"
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 10:
+                row["name"] = "Voucher Rewards"
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -884,14 +893,20 @@ def WeaponPowerLevel(): # Assigns appropriately powered enhancement and damage v
                     row["Damage"] = random.randrange(WeaponDamageRanges[i][0], WeaponDamageRanges[i][1])
                     if row["Rank"] <= 7:
                         curEnh:Enhancement = random.choice(ValidSkills)
+                        while curEnh.Caption > 256: # This is needed because the chips descriptions will not load properly they overflow if a caption is above 256. Super annoying the effects work the caption doesnt.
+                            curEnh = random.choice(ValidSkills)
                         curEnh.RollEnhancement(Common)
                         row["Enhance1"] = curEnh.id
                     elif row["Rank"] <= 14:
                         curEnh:Enhancement = random.choice(ValidSkills)
+                        while curEnh.Caption > 256: # This is needed because the chips descriptions will not load properly they overflow if a caption is above 256. Super annoying the effects work the caption doesnt.
+                            curEnh = random.choice(ValidSkills)
                         curEnh.RollEnhancement(Rare)
                         row["Enhance1"] = curEnh.id
                     else:
                         curEnh:Enhancement = random.choice(ValidSkills)
+                        while curEnh.Caption > 256: # This is needed because the chips descriptions will not load properly they overflow if a caption is above 256. Super annoying the effects work the caption doesnt.
+                            curEnh = random.choice(ValidSkills)
                         curEnh.RollEnhancement(Legendary)
                         row["Enhance1"] = curEnh.id
         file.seek(0)
@@ -953,6 +968,7 @@ def AuxCoreRewards(): # Makes the Aux Core Bundles
                                 curAuxCore.RollEnhancement(rarity)
                                 row["Enhance"] = curAuxCore.id
                                 row["Rarity"] = curAuxCore.Rarity
+                                row["EnhanceCategory"] = CurRow
                                 CurName = row["Name"]
                                 CurRow += 1
                                 break
@@ -1270,7 +1286,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
     
     # Cost Distributions
     CoreCrystalCostDistribution = [1, 2, 3, 4, 1, 2, 3, 1, 2, 3, 8, 10, 12, 25, 35, 45]
-    ManualCostDistribution = [1, 2, 4, 10, 10]
+    ManualCostDistribution = [1, 2, 4, 8, 12]
     ChipShopCostDistribution = Helper.ExtendListtoLength([2],16,"inputlist[i-1]+2")
     
     CommonAuxCoreCosts = [2, 3, 4, 5, 2, 3, 4]
@@ -1278,7 +1294,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
     LegendaryAuxCoreCosts = [10, 10, 15, 15]
     AuxCoreShopCostDistribution = CommonAuxCoreCosts + RareAuxCoreCosts + LegendaryAuxCoreCosts
 
-    PouchItemShopCostDistribution = [4,4,4,4,2,1,1,1,3,3,3,2,2,3,2,1]
+    PouchItemShopCostDistribution = [2,2,2,2,3,2,2,2,4,4,4,3,3,4,3,2]
     
     CommonAccessoryCosts = [3, 4, 5, 6, 3, 4, 5]
     RareAccessoryCosts = [5, 7, 5, 7, 9]
@@ -1313,7 +1329,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         "RewardIDs": Helper.InclRange(1282, 1291), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
         "RewardItemIDs": [Helper.ExtendListtoLength([], 10, "25489"), TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
         "RewardQtys": [[2,3,4,5,6,7,8,9,10,11], TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
-        "RewardNames": ["Shop Token", "Shop Token (x2)", "Shop Token (x3)", "Shop Token (x4)", "Shop Token (x5)", "Shop Token (x6)", "Shop Token (x7)", "Shop Token (x8)", "Shop Token (x9)", "Shop Token (x10)"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
+        "RewardNames": ["Shop Token (x2)", "Shop Token (x3)", "Shop Token (x4)", "Shop Token (x5)", "Shop Token (x6)", "Shop Token (x7)", "Shop Token (x8)", "Shop Token (x9)", "Shop Token (x10)", "Shop Token (x11)"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
         "RewardSP": [0, 1250, 1875, 2500, 3125, 3750, 4375, 5000, 5625, 6250], #FLD_QuestReward Sp
         "RewardXP": [0, 630, 630, 630, 630, 630, 630, 630, 630, 630], # FLD_QuestReward EXP
         "HideReward": TokenFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
@@ -1393,7 +1409,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         "RewardIDs": Helper.InclRange(1329, 1344), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
         "RewardItemIDs": AuxCoreShopRewardDistribution, # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
         "RewardQtys": [FullFillerList, FullFillerList, FullFillerList, FullFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
-        "RewardNames": ["Common Damage 1", "Common Damage 2", "Common Damage 3", "Common Damage 4", "Common Defense 1", "Common Defense 2", "Common Unique", "Rare Damage 1", "Rare Damage 2", "Rare Defense 1", "Rare Defense 2", "Rare Unique", "Legendary Damage", "Legendary Defense", "Legendary Unique 1", "Legendary Unique 2"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
+        "RewardNames": ["[System:Color name=blue]Common[/System:Color] Damage 1", "[System:Color name=blue]Common[/System:Color] Damage 2", "[System:Color name=blue]Common[/System:Color] Damage 3", "[System:Color name=blue]Common[/System:Color] Damage 4", "[System:Color name=blue]Common[/System:Color] Defense 1", "[System:Color name=blue]Common[/System:Color] Defense 2", "[System:Color name=blue]Common[/System:Color] Unique", "[System:Color name=red]Rare[/System:Color] Damage 1", "[System:Color name=red]Rare[/System:Color] Damage 2", "[System:Color name=red]Rare[/System:Color] Defense 1", "[System:Color name=red]Rare[/System:Color] Defense 2", "[System:Color name=red]Rare[/System:Color] Unique", "[System:Color name=tutorial]Legendary[/System:Color] Damage", "[System:Color name=tutorial]Legendary[/System:Color] Defense", "[System:Color name=tutorial]Legendary[/System:Color] Unique 1", "[System:Color name=tutorial]Legendary[/System:Color] Unique 2"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
         "RewardSP": EmptyFillerList, #FLD_QuestReward Sp
         "RewardXP": EmptyFillerList, # FLD_QuestReward EXP
         "HideReward": FullFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
@@ -1433,7 +1449,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         "RewardIDs": Helper.InclRange(1361, 1376), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
         "RewardItemIDs": AccessoryShopRewardDistribution, # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
         "RewardQtys": [FullFillerList, FullFillerList, FullFillerList, FullFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
-        "RewardNames": ["Common Set (Damage) 1", "Common Set (Damage) 2", "Common Set (Damage) 3", "Common Set (Damage) 4", "Common Set (Defense) 1", "Common Set (Defense) 2", "Common Set (Unique)", "Rare Set (Damage) 1", "Rare Set (Damage) 2", "Rare Set (Defense) 1", "Rare Set (Defense) 2", "Rare Set (Unique)", "Legendary Set (Damage)", "Legendary Set (Defense)", "Legendary Set (Unique) 1", "Legendary Set (Unique) 2"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
+        "RewardNames": ["[System:Color name=blue]Common[/System:Color] Damage 1", "[System:Color name=blue]Common[/System:Color] Damage 2", "[System:Color name=blue]Common[/System:Color] Damage 3", "[System:Color name=blue]Common[/System:Color] Damage 4", "[System:Color name=blue]Common[/System:Color] Defense 1", "[System:Color name=blue]Common[/System:Color] Defense 2", "[System:Color name=blue]Common[/System:Color] Unique", "[System:Color name=red]Rare[/System:Color] Damage 1", "[System:Color name=red]Rare[/System:Color] Damage 2", "[System:Color name=red]Rare[/System:Color] Defense 1", "[System:Color name=red]Rare[/System:Color] Defense 2", "[System:Color name=red]Rare[/System:Color] Unique", "[System:Color name=tutorial]Legendary[/System:Color] Damage", "[System:Color name=tutorial]Legendary[/System:Color] Defense", "[System:Color name=tutorial]Legendary[/System:Color] Unique 1", "[System:Color name=tutorial]Legendary[/System:Color] Unique 2"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
         "RewardSP": EmptyFillerList, #FLD_QuestReward Sp
         "RewardXP": EmptyFillerList, # FLD_QuestReward EXP
         "HideReward": FullFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
@@ -1445,7 +1461,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         "ShopIDtoReplace": 16, # MNU_ShopList $id
         "ShopNametoReplace": 7, # fld_shopname $id
         "ShopEventID": 40058, # ma02a_FLD_NpcPop EventID
-        "Name": "The Poppiswap Parlor", # fld_shopname name
+        "Name": "The Poppishop", # fld_shopname name
         "InputTaskIDs": Helper.InclRange(1012, 1027), # MNU_ShopChangeTask $id, feeds into MNU_ShopChange DefTaskSet1->8 and AddTaskSet1->8. Should always have length of 16
         "AddTaskConditions": Helper.ExtendListtoLength([], 8, "1"), # MNU_ShopChange AddCondition1->8 (0 if no task, 1 otherwise) # how many InputTaskIDs you have past 8 determines number of 1s, always 8 items long
         "SetItemIDs": [Helper.ExtendListtoLength([], 16, "25489"), EmptyFillerList, EmptyFillerList, EmptyFillerList, EmptyFillerList], # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
