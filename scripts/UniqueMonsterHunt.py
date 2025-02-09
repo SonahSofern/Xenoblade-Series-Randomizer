@@ -1157,7 +1157,7 @@ def GambaShopRewards(): # Makes the rewards for the gamba shop
     GambaVoucherNameIDs = Helper.InclRange(644, 659)
     GambaVoucherCaptionIDs = Helper.InclRange(745, 760)
     global ShopTokenRewardResults
-    ShopTokenRewardResults = random.choices([1, 3, 5, 8, 10, 15, 25], weights=[25, 15, 15, 15, 15, 10, 5], k = 16) # 40% chance to lose tokens, 60% chance to make winnings back + some in theory, but can be better or worse depending on rolled values
+    ShopTokenRewardResults = random.choices([1, 3, 5, 8, 10, 15, 25], weights=[30, 20, 15, 15, 10, 5, 5], k = 16) # 50% chance to lose tokens, 50% chance to make winnings back + some in theory, but can be better or worse depending on rolled values
     with open("./_internal/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for i in range(0, 16): # ConditionType of 5 is "Item", meaning you need that item listed in FLD_ConditionItem
