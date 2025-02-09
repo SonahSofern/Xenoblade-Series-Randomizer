@@ -6,6 +6,8 @@ def saveData(DataList, Filename):
         sav= {}
         for saveData in DataList:
             sav.update({saveData.name: saveData.checkBoxVal.get()})
+            for sub in saveData.subOptions:
+                sav.update({f"{saveData.name}->{sub.name}": sub.checkBoxVal.get()})
         json.dump(sav, file, indent=4)
 
 
@@ -16,9 +18,9 @@ def loadData(DataList, Filename):
         with open(f"{saveFolderName}/{Filename}", 'r') as file:
             data = json.load(file)
             for option in DataList:
-                try:
-                    option.checkBoxVal.set(data[option.name])
-                except:
-                    pass
+                if data.get(option.name) == False:
+                    continue
+                option.checkBoxVal.set(data[option.name])
+
     except:
         print("Couldn't Load Saved Options")

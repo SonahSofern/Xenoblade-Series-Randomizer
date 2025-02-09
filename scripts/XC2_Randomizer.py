@@ -260,6 +260,7 @@ class SavedEntry:
     def __init__(self, _name, _val):
         self.name =_name
         self.checkBoxVal = _val # Polymorphism with the Option Class
+        self.subOptions = []
         
 fileEnt = SavedEntry("Input Bdats",fileEntryVar)
 fileOut = SavedEntry("Output Bdats", outputDirVar)
