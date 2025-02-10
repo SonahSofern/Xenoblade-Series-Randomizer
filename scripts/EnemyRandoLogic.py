@@ -349,6 +349,7 @@ def BossQuestAggroAdjustments(NewBossIDs, NewQuestIDs): # Required to allow boss
                 row["BatInterval"] = 200
                 row["BatArea"] = 200
                 row["Flag"]["mBoss"] = 1
+                row["Flag"]["Named"] = 0
                 continue
             elif row["$id"] in NewQuestIDs:
                 row["Flag"]["AlwaysAttack"] = 0
@@ -358,6 +359,7 @@ def BossQuestAggroAdjustments(NewBossIDs, NewQuestIDs): # Required to allow boss
                 row["SearchRadius"] = 1
                 row["BatInterval"] = 50
                 row["BatArea"] = 50
+                row["Flag"]["Named"] = 0
                 continue
         file.seek(0)
         file.truncate()

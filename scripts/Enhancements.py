@@ -59,14 +59,17 @@ class Enhancement:
             DisplayTagID += 1
             DisplayTagList.append(DisplayTagDict)
 
-    def RollEnhancement(self):
+    def RollEnhancement(self, forcedRarity = None):
         global EnhanceID
         self.id = EnhanceID
         EnhanceID += 1
         Common = 0
         Rare = 1
         Legendary = 2
-        self.Rarity = random.choice([Common,Common,Common, Rare,Rare, Legendary])
+        if forcedRarity == None:
+            self.Rarity = random.choice([Common,Common,Common, Rare,Rare, Legendary])
+        else:
+            self.Rarity = forcedRarity
         def SetParams(ParameterChoices, isReverse):
             Common, Rare, Legendary = (2, 1, 0) if isReverse else (0, 1, 2)
             Pstep = 1 if ParameterChoices == Baby else 5
