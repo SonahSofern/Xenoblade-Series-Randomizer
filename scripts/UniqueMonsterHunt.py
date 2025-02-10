@@ -18,11 +18,25 @@ ProofofPurchaseIDs = Helper.InclRange(25306, 25321)
 # TO DO
 
 # Maybe change the blade bundles to be from the same overall class distribution pool, but have them be mixed up, and change the names to "Blade Bundle 1->10", and increase the cost accordingly
-# Start the player with 3 Landmarks on Each Map, enough to get around easily enough
-# Rename menu things related to the DLC Items (Expansion Pass), so they fit the bounty hunt mode.
+# Remove enemy arts that summon enemies that summon more enemies
+# Add SP Gain Shop
+# Add some secret shops on the map
+# nerf pneuma
+# move us back a bit on the starting stairs
+# clear all treasure chests on the elysium map
+# add um sets for superbosses?
+# delete extra unused dlc
+# add the names of weapons
+# the skill trees may be fucked for starter blades
+# check tantal warp cutscene, it plops you in the ocean
+# change some of the npc shop models
+# nerf the costs of the hidden affinity tree
+# remove argentum xp gains from landmarks?
+# check the mor ardain warp cutscene, it spawns you in a tent, which lags
 
 # Known Issues: 
 # Poppiswap is going to be fucked up with custom enhancements
+# Blade Nia disappears
 
 def UMHunt(OptionDictionary):
     if IDs.CurrentSliderOdds != 0:
@@ -1345,7 +1359,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         "RewardItemIDs": [Helper.ExtendListtoLength([], 10, "25489"), TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
         "RewardQtys": [[2,3,4,5,6,7,8,9,10,11], TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
         "RewardNames": ["Shop Token (x2)", "Shop Token (x3)", "Shop Token (x4)", "Shop Token (x5)", "Shop Token (x6)", "Shop Token (x7)", "Shop Token (x8)", "Shop Token (x9)", "Shop Token (x10)", "Shop Token (x11)"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
-        "RewardSP": [0, 1250, 1875, 2500, 3125, 3750, 4375, 5000, 5625, 6250], #FLD_QuestReward Sp
+        "RewardSP": [650, 1250, 1875, 2500, 3125, 3750, 4375, 5000, 5625, 6250], #FLD_QuestReward Sp
         "RewardXP": [0, 630, 630, 630, 630, 630, 630, 630, 630, 630], # FLD_QuestReward EXP
         "HideReward": TokenFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
     }
