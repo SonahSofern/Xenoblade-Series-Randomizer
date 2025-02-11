@@ -715,6 +715,21 @@ def SwimmingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs):
         arrangefile.truncate()
         json.dump(arrangedata, arrangefile, indent=2, ensure_ascii=False)
 
+def GerolfSovereignFix(): # Gerolf Sovereign gets summoned by Mk VI. Sovereign, which in turn can summon enemies. This breaks the code that changes summons levels to match the enemy that summoned them.
+    with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: #id 1379 needs to match 1380 in levels
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 1380:
+                GerolfLevel = row["Lv"]
+                break
+        for row in data["rows"]:
+            if row["$id"] == 1379:
+                row["Lv"] = GerolfLevel
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
 def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/fights
     ReducePCHPBattle1()
     SummonsLevelAdjustment()
@@ -725,6 +740,7 @@ def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/f
     GortOgreUppercutRemoval()
     EarthBreathNerf()
     PadraigFightFix()
+    GerolfSovereignFix()
 
 def EnemyLogic(OptionsRunDict):
     EnemyRandoOn = False

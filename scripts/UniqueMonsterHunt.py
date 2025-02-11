@@ -20,8 +20,6 @@ ValidPouchItems = [x for x in IDs.PouchItems if x not in [40314, 40428]]
 # TO DO
 
 # Maybe change the blade bundles to be from the same overall class distribution pool, but have them be mixed up, and change the names to "Blade Bundle 1->10", and increase the cost accordingly
-# Remove enemy arts that summon enemies that summon more enemies
-# Add some secret shops on the map?
 # add um sets for superbosses?
 # add the names of weapons
 
@@ -374,6 +372,8 @@ def CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder): # adj
                 for row in data["rows"]:
                     if row["$id"] == EnemySets[i][j]:
                         row["ZoneID"] = ContinentInfo[ChosenAreaOrder[i]][3]
+                        if row["Scale"] < 35:
+                            row["Scale"] = 35
                         break
         file.seek(0)
         file.truncate()
@@ -1373,7 +1373,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         TokenExchangeRewards.append([random.randint(1 + 5*i, 3 + 5*i)])
     CoreCrystalCostDistribution = [4, 8, 12, 16, 4, 8, 12, 4, 8, 12, 20, 30, 40, 115, 125, 135]
     ManualCostDistribution = [3, 6, 9, 20, 35, 9, 17, 33]
-    ChipShopCostDistribution = Helper.ExtendListtoLength([0],16,"inputlist[i-1]+9")
+    ChipShopCostDistribution = Helper.ExtendListtoLength([1],16,"inputlist[i-1]+9")
     
     CommonAuxCoreCosts = [3, 6, 9, 12, 3, 6, 9]
     RareAuxCoreCosts = [6, 12, 6, 12, 10]
@@ -1705,8 +1705,6 @@ def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of i
     for i in range(0, len(ChosenAreaOrder)):
         MapValidNPCIDs = Helper.FindSubOptionValuesList("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", "flag", "Talkable", 1, "$id")
         ChosenSecretNPCID = random.choice(MapValidNPCIDs)
-        if i == 0:
-            ChosenSecretNPCID = 13024
         with open("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
             data = json.load(file)
             for row in data["rows"]:
