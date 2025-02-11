@@ -526,9 +526,6 @@ def NoUnintendedRewards(ChosenAreaOrder): # Removes any cheese you can do by doi
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma21a_FLD_TboxPop.json", ["Condition"], 3903) # removes treasure chests from Elysium
     for area in ChosenAreaOrder:
         Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[area][2] + "_FLD_TboxPop.json", ["Condition"], 3903) # removes drops from chests
-        Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[area][2] + "_FLD_NpcPop.json", ["EventID"], 0) # removes talking to NPCs
-        Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[area][2] + "_FLD_NpcPop.json", ["QuestID"], 0) # removes talking to NPCs
-        Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[area][2] + "_FLD_NpcPop.json", ["ShopID"], 0) # removes talking to NPCs
 
 def SpiritCrucibleEntranceRemoval(): # Exiting or Entering Spirit Crucible has problems with resetting the quest condition. So we remove that by warping the player back to the original landmark in that area.
     with open("./_internal/JsonOutputs/common_gmk/FLD_MapJump.json", 'r+', encoding='utf-8') as file:
@@ -1235,7 +1232,7 @@ def GambaShopRewards(): # Makes the rewards for the gamba shop
     GambaVoucherNameIDs = Helper.InclRange(644, 659)
     GambaVoucherCaptionIDs = Helper.InclRange(745, 760)
     global ShopTokenRewardResults
-    ShopTokenRewardResults = random.choices([1, 3, 5, 8, 10, 15, 25], weights=[30, 20, 15, 15, 10, 5, 5], k = 16) # 50% chance to lose tokens, 50% chance to make winnings back + some in theory, but can be better or worse depending on rolled values
+    ShopTokenRewardResults = random.choices([5, 10, 15, 25, 35, 50, 100], weights=[30, 20, 15, 15, 10, 5, 5], k = 16) # 50% chance to lose tokens, 50% chance to make winnings back + some in theory, but can be better or worse depending on rolled values
     with open("./_internal/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for i in range(0, 16): # ConditionType of 5 is "Item", meaning you need that item listed in FLD_ConditionItem
@@ -1371,24 +1368,27 @@ def CustomShopSetup(): # Sets up the custom shops with loot
     AddSPManual()
     
     # Cost Distributions
-    CoreCrystalCostDistribution = [1, 2, 3, 4, 1, 2, 3, 1, 2, 3, 8, 10, 12, 25, 35, 45]
-    ManualCostDistribution = [1, 2, 4, 8, 12, 2, 4, 8]
-    ChipShopCostDistribution = Helper.ExtendListtoLength([2],16,"inputlist[i-1]+2")
+    TokenExchangeRewards = []
+    for i in range(0, 10):
+        TokenExchangeRewards.append([random.randint(1 + 5*i, 3 + 5*i)])
+    CoreCrystalCostDistribution = [4, 8, 12, 16, 4, 8, 12, 4, 8, 12, 20, 30, 40, 115, 125, 135]
+    ManualCostDistribution = [3, 6, 9, 20, 35, 9, 17, 33]
+    ChipShopCostDistribution = Helper.ExtendListtoLength([0],16,"inputlist[i-1]+9")
     
-    CommonAuxCoreCosts = [2, 3, 4, 5, 2, 3, 4]
-    RareAuxCoreCosts = [4, 6, 4, 6, 8]
-    LegendaryAuxCoreCosts = [10, 10, 15, 15]
+    CommonAuxCoreCosts = [3, 6, 9, 12, 3, 6, 9]
+    RareAuxCoreCosts = [6, 12, 6, 12, 10]
+    LegendaryAuxCoreCosts = [20, 20, 30, 30]
     AuxCoreShopCostDistribution = CommonAuxCoreCosts + RareAuxCoreCosts + LegendaryAuxCoreCosts
 
-    PouchItemShopCostDistribution = [2,2,2,2,3,2,2,2,4,4,4,3,3,4,3,2]
+    PouchItemShopCostDistribution = [5,5,5,5,10,5,5,5,15,15,15,10,10,15,10,5]
     
-    CommonAccessoryCosts = [3, 4, 5, 6, 3, 4, 5]
-    RareAccessoryCosts = [5, 7, 5, 7, 9]
-    LegendaryAccessoryCosts = [12, 12, 18, 18]
+    CommonAccessoryCosts = [4, 8, 12, 16, 4, 8, 12]
+    RareAccessoryCosts = [15, 20, 15, 20, 25]
+    LegendaryAccessoryCosts = [30, 30, 50, 50]
     AccessoryShopCostDistribution = CommonAccessoryCosts + RareAccessoryCosts + LegendaryAccessoryCosts
 
-    PoppiswapShopCosts = [2, 4, 8, 16, 24, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22]
-    GambaShopCosts = Helper.ExtendListtoLength([], 16, "5")
+    PoppiswapShopCosts = [10, 20, 30, 40, 50, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44]
+    GambaShopCosts = Helper.ExtendListtoLength([], 16, "15")
 
     # Filler Lists
     TokenFillerList = Helper.ExtendListtoLength([], 10, "0") # This gets used so much, I'd rather not screw up typing it out, also by initializing it here, it doesn't calculate the value every time in the dictionary
@@ -1415,7 +1415,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         "SetItemQtys": [Helper.ExtendListtoLength([], 10, "1"), TokenFillerList, TokenFillerList, TokenFillerList, TokenFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
         "RewardIDs": Helper.InclRange(1282, 1291), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
         "RewardItemIDs": [Helper.ExtendListtoLength([], 10, "25489"), TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
-        "RewardQtys": [[2,3,4,5,6,7,8,9,10,11], TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
+        "RewardQtys": [TokenExchangeRewards, TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
         "RewardNames": ["Doubloon (x2)", "Doubloon (x3)", "Doubloon (x4)", "Doubloon (x5)", "Doubloon (x6)", "Doubloon (x7)", "Doubloon (x8)", "Doubloon (x9)", "Doubloon (x10)", "Doubloon (x11)"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
         "RewardSP": [650, 1250, 1875, 2500, 3125, 3750, 4375, 5000, 5625, 6250], #FLD_QuestReward Sp
         "RewardXP": [0, 630, 630, 630, 630, 630, 630, 630, 630, 630], # FLD_QuestReward EXP
@@ -1716,8 +1716,13 @@ def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of i
                     row["ScenarioFlagMax"] = 10048
                     row["EventID"] = UsableShopEventIDs[i]
                     row["ShopID"] = UsableShopIDs[i]
-                    row["NpcID"] = 3445 # Traveling Bard from Argentum
-                    break
+                    row["NpcID"] = 2012 # Klaus
+                    row["LookAt"] = 0
+                    row["NpcTurn"] = 0
+                else:
+                    row["EventID"] = 0
+                    row["ShopID"] = 0
+                    row["QuestID"] = 0
             for row in data["rows"]: # Need to account for more lines where the original NPC speaks, they overlap bodies and it looks weird
                 if row["NpcID"] == OrigNPCID:
                     row["NpcID"] = 3445
@@ -1838,7 +1843,7 @@ def SecretShopRewardGeneration(ChosenAreaOrder): # Makes the reward sets for the
             elif RewardTypeChoices[i] == 4: # Doubloons
                 SetRewards1[i] = 25489
                 SetRewards2[i] = 25489
-                DoubloonQuantities = random.choices([1, 3, 5, 8, 10], weights=[30, 25, 20, 15, 10], k = 2)
+                DoubloonQuantities = random.choices([5, 10, 15, 20, 25], weights=[30, 25, 20, 15, 10], k = 2)
                 SetQuantities1[i] = DoubloonQuantities[0]
                 SetQuantities2[i] = DoubloonQuantities[1]
             elif RewardTypeChoices[i] == 5: # Weapon Chips
