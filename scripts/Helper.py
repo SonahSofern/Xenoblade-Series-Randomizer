@@ -43,14 +43,14 @@ def AdjustedFindBadValuesList(filePath, keyWordList, keywordBadValueList, return
     #print(bad_values_found)
     return(bad_values_found)
 
-def FindSubOptionValuesList(filePath, dictName, subDictName, subDictValue, returndictValue):
+def FindSubOptionValuesList(filePath: str, dictName: str, subDictName: str, subDictValue, returndictValue):
     bad_values = []
     with open(filePath, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row[dictName][subDictName] == subDictValue:
                 bad_values.append(row[returndictValue])
-    print(bad_values)
+    #print(bad_values)
     return(bad_values)
 
 
