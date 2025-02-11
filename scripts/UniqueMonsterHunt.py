@@ -1705,6 +1705,8 @@ def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of i
     for i in range(0, len(ChosenAreaOrder)):
         MapValidNPCIDs = Helper.FindSubOptionValuesList("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", "flag", "Talkable", 1, "$id")
         ChosenSecretNPCID = random.choice(MapValidNPCIDs)
+        if i == 0:
+            ChosenSecretNPCID = 13024
         with open("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
             data = json.load(file)
             for row in data["rows"]:
@@ -1836,7 +1838,7 @@ def SecretShopRewardGeneration(ChosenAreaOrder): # Makes the reward sets for the
             elif RewardTypeChoices[i] == 4: # Doubloons
                 SetRewards1[i] = 25489
                 SetRewards2[i] = 25489
-                DoubloonQuantities = random.choices([3, 5, 8, 10, 15, 25], weights=[20, 15, 15, 10, 5, 5], k = 2)
+                DoubloonQuantities = random.choices([1, 3, 5, 8, 10], weights=[30, 25, 20, 15, 10], k = 2)
                 SetQuantities1[i] = DoubloonQuantities[0]
                 SetQuantities2[i] = DoubloonQuantities[1]
             elif RewardTypeChoices[i] == 5: # Weapon Chips
