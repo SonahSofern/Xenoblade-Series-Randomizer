@@ -151,7 +151,7 @@ def RegularLootDistribution(): #Adds core crystals to the loot pool if race mode
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
-def CoreCrystalChanges(OptionsRunDict):
+def CoreCrystalChanges():
     RareBladeProbabilityEqualizer()
     AdjustingCrystalList()
     LandofChallengeRelease()

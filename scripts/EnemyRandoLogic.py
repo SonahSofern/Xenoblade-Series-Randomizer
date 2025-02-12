@@ -3,7 +3,7 @@ import random
 import time
 import Helper
 from IDs import ValidEnemies, ValidEnemyPopFileNames, FlyingEnArrangeIDs, OriginalFlyingHeights, OriginalWalkSpeeds, OriginalRunSpeeds, OriginalBtlSpeeds, SwimmingEnArrangeIDs
-import copy
+import copy, Options
 
 AllBossDefaultIDs = [179, 180, 181, 182, 184, 185, 186, 187, 189, 190, 191, 193, 195, 196, 197, 198, 199, 201, 202, 203, 204, 206, 208, 210, 212, 214, 216, 217, 219, 220, 221, 222, 223, 225, 227, 229, 231, 232, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 248, 249, 250, 251, 252, 253, 254, 256, 258, 260, 262, 266, 267, 268, 269, 270, 271, 274, 1342, 1429, 1430, 1431, 1432, 1433, 1434, 1435, 1436, 1437, 1438, 1439, 1440, 1441, 1442, 1443, 1444, 1445, 1448, 1454, 1632, 1733, 1746, 1747, 1748, 1749, 1754, 1755]
 AllBossDefaultLevels = [1, 2, 4, 5, 6, 8, 6, 10, 11, 12, 13, 15, 22, 25, 24, 26, 20, 18, 19, 21, 22, 24, 23, 23, 24, 26, 29, 31, 27, 29, 31, 32, 33, 34, 32, 35, 40, 38, 38, 39, 42, 42, 43, 42, 44, 46, 44, 52, 54, 56, 52, 50, 60, 60, 57, 66, 68, 60, 60, 60, 60, 13, 24, 26, 32, 33, 34, 60, 36, 2, 2, 8, 10, 10, 14, 10, 11, 20, 16, 17, 18, 29, 29, 40, 38, 48, 53, 3, 32, 63, 60, 58, 64, 62, 64, 64]
@@ -363,17 +363,17 @@ def BossQuestAggroAdjustments(NewBossIDs, NewQuestIDs): # Required to allow boss
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def EnemyAggroProportion(OptionsRunDict):
-    EnemyRandoOnBox = OptionsRunDict["Enemies"]["optionTypeVal"].get()
-    StoryBossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Story Bosses"]["subOptionTypeVal"].get()
-    QuestEnemyBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Quest Enemies"]["subOptionTypeVal"].get()
-    UniqueMonstersBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Unique Monsters"]["subOptionTypeVal"].get()
-    SuperbossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Superbosses"]["subOptionTypeVal"].get()
-    NormalEnemiesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Normal Enemies"]["subOptionTypeVal"].get()
+def EnemyAggroProportion():
+    EnemyRandoOnBox = Options.EnemiesOption.GetCheckBox()
+    StoryBossesBox = Options.EnemiesOption_Bosses.GetCheckBox()
+    QuestEnemyBox = Options.EnemiesOption_QuestEnemies.GetCheckBox()
+    UniqueMonstersBox = Options.EnemiesOption_UniqueMonsters.GetCheckBox()
+    SuperbossesBox = Options.EnemiesOption_Superbosses.GetCheckBox()
+    NormalEnemiesBox = Options.EnemiesOption_NormalEnemies.GetCheckBox()
     if EnemyRandoOnBox:
         if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox: # do nothing, got handled after enemy randomization
             pass
-    EnemyAggroSliderOdds = OptionsRunDict["Enemy Aggro"]["spinBoxVal"].get()
+    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetCheckBox()
     NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
     if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive
         with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
@@ -420,9 +420,9 @@ def EnemyAggroProportion(OptionsRunDict):
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
-def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict): #when enemy rando is on
-    EnemyAggroOnBox = OptionsRunDict["Enemy Aggro"]["optionTypeVal"].get()
-    EnemyAggroSliderOdds = OptionsRunDict["Enemy Aggro"]["spinBoxVal"].get()
+def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs): #when enemy rando is on
+    EnemyAggroOnBox = Options.EnemyAggroOption.GetCheckBox()
+    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetSpinBox()
     if EnemyAggroOnBox: # if enemy aggro is randomized
         with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
@@ -724,21 +724,21 @@ def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/f
     EarthBreathNerf()
     PadraigFightFix()
 
-def EnemyLogic(OptionsRunDict):
+def EnemyLogic():
     EnemyRandoOn = False
     EnemiestoPass = []
     LevelstoPass = []
     CheckboxList = [] #I'm lazy, so i'm just going to pass the names and true/false states to two arrays
     CheckboxStates = []
-    StoryBossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Story Bosses"]["subOptionTypeVal"].get()
-    KeepStoryBossesLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Original Boss Encounter Levels"]["subOptionTypeVal"].get()
-    QuestEnemyBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Quest Enemies"]["subOptionTypeVal"].get()
-    KeepQuestEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Original Quest Encounter Levels"]["subOptionTypeVal"].get()
-    UniqueMonstersBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Unique Monsters"]["subOptionTypeVal"].get()
-    SuperbossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Superbosses"]["subOptionTypeVal"].get()
-    NormalEnemiesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Normal Enemies"]["subOptionTypeVal"].get()
-    KeepAllEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use All Original Encounter Levels"]["subOptionTypeVal"].get()
-    MixEnemiesBetweenTypesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Mix Enemies Between Types"]["subOptionTypeVal"].get()
+    StoryBossesBox = Options.EnemiesOption_Bosses.GetCheckBox()
+    # KeepStoryBossesLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Original Boss Encounter Levels"]["subOptionTypeVal"].get()
+    QuestEnemyBox = Options.EnemiesOption_QuestEnemies.GetCheckBox()
+    # KeepQuestEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Original Quest Encounter Levels"]["subOptionTypeVal"].get()
+    UniqueMonstersBox = Options.EnemiesOption_UniqueMonsters.GetCheckBox()
+    SuperbossesBox = Options.EnemiesOption_Superbosses.GetCheckBox()
+    NormalEnemiesBox = Options.EnemiesOption_NormalEnemies.GetCheckBox()
+    KeepAllEnemyLevelsBox = Options.EnemiesOption_BalancedLevels.GetCheckBox()
+    MixEnemiesBetweenTypesBox = Options.EnemiesOption_MixedTypes.GetCheckBox()
     AllBossDefaultIDstoUse = AllBossDefaultIDs
     AllBossDefaultLevelstoUse = AllBossDefaultLevels
     if OptionsRunDict["Race Mode"]["optionTypeVal"].get(): # removing malos in auresco fight for race mode specifically, he has an absurd amount of hp and is just a slog of a fight

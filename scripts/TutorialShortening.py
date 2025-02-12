@@ -2,7 +2,7 @@ import json
 import Helper
 import EnemyRandoLogic
 
-def ShortenedTutorial(OptionsRunDict):
+def ShortenedTutorial():
     RaceModeBox = OptionsRunDict["Race Mode"]["optionTypeVal"].get()
     if not RaceModeBox:
         print("Shortening Tutorials")

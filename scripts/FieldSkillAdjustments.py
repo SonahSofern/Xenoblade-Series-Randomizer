@@ -1,8 +1,8 @@
-import JSONParser
+import JSONParser, Options
 
     
-def RemoveFieldSkills(Options):
-    isAllChecks  = Options["Remove Story Field Skills"]["subOptionObjects"]["Remove All Field Skills"]["subOptionTypeVal"].get()
+def RemoveFieldSkills():
+    isAllChecks  = Options.RemoveFieldSkillsOption_AllFieldSkills.GetCheckBox()
     
     if isAllChecks:
         mapGimmickIds = range(1,186)

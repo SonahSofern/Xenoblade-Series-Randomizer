@@ -1,4 +1,4 @@
-import json, random
+import json, random, Options
 from Enhancements import *
 
 
@@ -61,12 +61,12 @@ def EnemyArtAttributes(optionsDict):
 def ChangeArts(artData, artNameData, optionsDict):
     newNameID = 457 # Starting id to add new names to old names file
     
-    spinBox = optionsDict["Enemy Arts Effects"]["spinBoxVal"].get()
-    isReactions = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["Reactions"]["subOptionTypeVal"].get()
-    isDebuffs = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["Debuffs"]["subOptionTypeVal"].get()
-    isBuffs = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["Buffs"]["subOptionTypeVal"].get()
-    isEnhancements = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["Enhancements"]["subOptionTypeVal"].get()
-    isAOE = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["AOE"]["subOptionTypeVal"].get()
+    spinBox = Options.EnemyArtEffectsOption.GetSpinBox()
+    isReactions = Options.EnemyArtEffectsOption_Reactions.GetCheckBox()
+    isDebuffs = Options.EnemyArtEffectsOption_Debuffs.GetCheckBox()
+    isBuffs = Options.EnemyArtEffectsOption_Buffs.GetCheckBox()
+    isEnhancements = Options.EnemyArtEffectsOption_Enhancements.GetCheckBox()
+    isAOE = Options.EnemyArtEffectsOption_AOE.GetCheckBox()
                     
     
     for art in artData["rows"]:

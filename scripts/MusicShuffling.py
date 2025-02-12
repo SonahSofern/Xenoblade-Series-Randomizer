@@ -2,7 +2,7 @@ from IDs import EnemyBattleMusicMOVs, NonBattleMusicMOVs, NonBattleMusicIDs, Rep
 import JSONParser
 import Helper
 import json
-import random
+import random, Options
 
 # RSC_BgmCondition:
 # An area usually has 2-3 conditions. If it has 3, its a weather related condition (music is adjusted for weather), usually can tell via large condition value
@@ -18,8 +18,8 @@ import random
 # Looking like you won't be able to hear all battle themes in game
 # So then we keep CHR_EnArrange the same, and randomize the .wav files and place a set number of them into the IDs that work with CHR_EnArrange
 
-def MusicShuffle(OptionsRunDict):
-    if OptionsRunDict["Music"]["subOptionObjects"]["Mix Battle and \nEnvironment Themes"]["subOptionTypeVal"].get():
+def MusicShuffle():
+    if Options.MusicOption_MixBattleAndEnv.GetCheckBox():
         JSONParser.ChangeJSONFile(["common/RSC_BgmList.json"], ["filename"], NonBattleMusicMOVs + EnemyBattleMusicMOVs, NonBattleMusicMOVs + EnemyBattleMusicMOVs)
     else:
         with open("./_internal/JsonOutputs/common/RSC_BgmList.json", 'r+', encoding='utf-8') as file:
