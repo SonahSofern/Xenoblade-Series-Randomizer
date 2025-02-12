@@ -1266,7 +1266,7 @@ def AccessoryShopRewards(): # Creates the accessory shop
         },
         "Legendary": {
             "Damage": [KaiserZone, VersusBossUniqueEnemyDamageUp, AutoSpeedArtsSpeed, DamageUpOnCancel, FlatStrengthBoost, FlatEtherBoost],
-            "Defensive": [GravityPinwheel, RestoreHitDamageToParty, ForeSight, FlatAgiBoost, HPBoost,],
+            "Defensive": [GravityPinwheel, RestoreHitDamageToParty, ForeSight, FlatAgiBoost, HPBoost],
             "Playstyle Defining": [RecoverRechargeCrit, HpPotChanceFor2, BladeComboOrbAdder, PotionPickupDamageUp, Vision, DamageUpPerCrit, TakeDamageHeal, DamagePerEvadeUp, PartyHealBladeSwitch]
         }
     }
