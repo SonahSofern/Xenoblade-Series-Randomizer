@@ -12,11 +12,13 @@ def RandomizeAuxCoreEnhancements():
             with open("./_internal/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as poppiAuxEnhancements:
                 
                 
-                
+                AuxCategory = 0
                 poppiAux = json.load(poppiAuxEnhancements)
                 enhanceFile = json.load(file)
                 auxNameFile = json.load(auxNames)
                 for Aux in enhanceFile["rows"]:
+                    Aux["EnhanceCategory"] = AuxCategory # Stops the cannot equip same effect message
+                    AuxCategory += 1
                     skillNameID = Aux["Name"]
                     enhancement = random.choice(ValidSkills)
                     enhancement.RollEnhancement()

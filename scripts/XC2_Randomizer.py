@@ -2,7 +2,7 @@ from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys
 from tkinter import *
 import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, FieldSkillAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, _DriverArts, PermalinkManagement, Helper, SkillTrees, Enhancements, BigItems, _EnemyEnhancements, CameraFixes, UniqueMonsterHunt
-import GUISettings, TrustBeam, _EnemyArts, _BladeWeapons, BladeRandomization, GachaModifications, _GreenSkills
+import GUISettings, TrustBeam, _EnemyArts, _BladeWeapons, BladeRandomization, GachaModifications, _GreenSkills, SavedOptions
 import _WeaponChips as WPChips
 import _AuxCores as AuxCr
 import _Accessories as Accs
@@ -10,6 +10,7 @@ from IDs import *
 from Cosmetics import *
 from UI_Colors import *
 from tkinter.font import Font
+import tkinter as tk
 
 Version = "1.3.0"
 CommonBdatInput = ""
@@ -31,7 +32,7 @@ root = Tk()
 defFontVar = tk.StringVar(value="Arial")
 defFontSizeVar = tk.IntVar(value=13)
 defGUIThemeVar = tk.StringVar(value="Dark Mode")
-loadData([defFontVar, defFontSizeVar, defGUIThemeVar], "GUISavedOptions.txt")
+SavedOptions.loadData([defFontVar, defFontSizeVar, defGUIThemeVar], "GUISavedOptions.txt")
 
 
 RootsForStyling.append(root)
