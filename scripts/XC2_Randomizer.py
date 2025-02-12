@@ -228,7 +228,7 @@ def Options():
     GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees",[lambda: SkillTrees.RandomizeSkillEnhancements(OptionDictionary)],["Nonstandard Skills", [], "Early Arts Cancel", [], "Early XYB Attack", []])
        
     # Blades
-    GenStandardOption("Blades", TabBlades, "Randomizes when blades appear in the story", [lambda: BladeRandomization.BladeRandomization(OptionDictionary)], ["Randomize Dromarch", [], "Guarantee a Healer", []], optionType=Spinbox)
+    GenStandardOption("Blades", TabBlades, "Randomizes when blades appear in the story", [lambda: BladeRandomization.BladeRandomization(OptionDictionary)], ["Randomize Dromarch", [], "Guarantee a Healer", []])
     GenStandardOption("Blade Aux Cores", TabBlades, "Randomizes the effects of Aux Cores", [lambda: AuxCr.RandomizeAuxCoreEnhancements()])
     GenStandardOption("Blade Aux Core Slots", TabBlades, "Randomizes a Blade's maximum Aux Core Slots", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), IDs.BladeAuxCoreSlotDistribution)])
     GenStandardOption("Blade Arts", TabBlades, "Randomizes a Blade's arts", [lambda: BladeArtsRando.BladeArtsRandomization()])
