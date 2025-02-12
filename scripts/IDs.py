@@ -1,7 +1,4 @@
 import Helper as Helper
-from SavedOptions import loadData
-import tkinter as tk
-import json
 
 ValidReplacements = [] # Global Variable Referenced for JsonParser
 InvalidReplacements = [] # Global Variable Referenced for JsonParser
@@ -37,7 +34,7 @@ BladeBattleSkills = Helper.InclRange(1,270)
 
 
 LootOptions = ["Accessories", [lambda: ValidReplacements.extend(Accessories)] ,"Torna Accessories", [lambda: ValidReplacements.extend(TornaAccessories)], "Weapon Chips", [lambda: ValidReplacements.extend(WeaponChips)], "Aux Cores", [lambda: ValidReplacements.extend(AuxCores)], "Refined Aux Cores", [lambda: ValidReplacements.extend(RefinedAuxCores)], "Core Crystals", [lambda: ValidReplacements.extend(CoreCrystals)], "Deeds", [lambda: ValidReplacements.extend(Deeds)], "Collection Point Materials", [lambda: ValidReplacements.extend(CollectionPointMaterials)]]
-PouchItemOption = ["Pouch Items", [lambda: ValidReplacements.extend(PouchItems)]]
+
 
 BladeSpecials = Helper.InclRange(1,269)
 BladeTreeUnlockConditions = Helper.InclRange(1,1768)

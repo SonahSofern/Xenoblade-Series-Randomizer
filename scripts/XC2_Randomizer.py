@@ -1,19 +1,17 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys
 from tkinter import *
-import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, FieldSkillAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, _DriverArts, PermalinkManagement, Helper, SkillTrees, Enhancements, BigItems, _EnemyEnhancements, CameraFixes, UniqueMonsterHunt
-import GUISettings, TrustBeam, _EnemyArts, _BladeWeapons, BladeRandomization, GachaModifications, _GreenSkills
-import _WeaponChips as WPChips
-import _AuxCores as AuxCr
-import _Accessories as Accs
-from Options import *
+import SavedOptions, SeedNames, JSONParser,  IDs,Helper
+from Enhancements import *
+import GUISettings
+import Options
 from IDs import *
 from Cosmetics import *
 from UI_Colors import *
 from tkinter.font import Font
+import tkinter as tk
 
-
-Version = "1.3.0"
+Version = "UIOVERHAUL"
 CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
 MaxWidth = 1000
@@ -124,11 +122,13 @@ MainWindow.add(TabMiscOuter, text ='Misc.')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 
-for opt in OptionList:
-    if opt.tab == General:
+for opt in Options.OptionList:
+    if opt.tab == Options.General:
         opt.DisplayOption(TabGeneral)
-    elif opt.tab == Driver:
+    elif opt.tab == Options.Driver:
         opt.DisplayOption(TabDrivers)
+    elif opt.tab == Options.Blade:
+        opt.DisplayOption(TabBlades)
 
 
 def ShowTitleScreenText():
@@ -161,7 +161,7 @@ def Randomize():
             return
 
         # Runs all randomization
-        # RunOptions()
+        RunOptions()
         randoProgressDisplay.config(text="Packing BDATs")
         
         try:
@@ -191,9 +191,9 @@ def Randomize():
 
 def RunOptions():
     
-    OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
+    Options.OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
     
-    for opt in OptionList:
+    for opt in Options.OptionList:
         if not opt.GetCheckBox(): # Checks state
             continue
         
@@ -220,7 +220,7 @@ def RunOptions():
     
     # Nonstandard Options
     ShowTitleScreenText()
-    Enhancements.AddCustomEnhancements() # Figure out how to not run this here just dont have time rn
+    AddCustomEnhancements() # Figure out how to not run this here just dont have time rn
 
 
 def GenRandomSeed(randoSeedEntryVar):
@@ -269,8 +269,8 @@ seedVar = SavedEntry("Seed", seedEntryVar)
 
 # Save and Load Last Options
 EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
-SavedOptions.loadData(EntriesToSave + OptionList, SavedOptionsFileName)
-UpdateAllStates()
+SavedOptions.loadData(EntriesToSave + Options.OptionList, SavedOptionsFileName)
+Options.UpdateAllStates()
 
 # # Permalink Options/Variables
 # permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame")
@@ -302,7 +302,7 @@ Cog = PhotoImage(file=icon_path)
 SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, defGUIThemeVar))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
-root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + OptionList, SavedOptionsFileName), root.destroy()))
+root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Options.OptionList, SavedOptionsFileName), root.destroy()))
 GUISettings.LoadTheme(defaultFont, defGUIThemeVar.get())
 
 

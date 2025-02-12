@@ -1,18 +1,22 @@
 import json, random
 from Enhancements import *
+import Options
 
-def RandomizeSkillEnhancements(optDict):
+def RandomizeSkillEnhancements():
     DefaultArtsCancelSlots, DefaultXSlots, DefaultYSlots, DefaultBSlots  = [12,55,82,102,131,161], [1,51,61,91,121,162], [11,31,71,101,141,171], [21,52,62,92,122,151]
     ArtsCancelSlots, X_Slots, Y_Slots, B_Slots = [], [], [], []
     Rex, Nia, Tora, Vandham, Morag, Zeke = Helper.InclRange(1, 30), Helper.InclRange(31, 60), Helper.InclRange(61, 90), Helper.InclRange(91, 120), Helper.InclRange (121, 150), Helper.InclRange(151, 180)
     DriverList = [Rex, Nia, Tora, Vandham, Morag, Zeke]
+    isVanilla = not Options.DriverSkillTreesOption_NonstandardSkills.GetCheckBox()
+    isEarlyArtsCancel = Options.DriverSkillTreesOption_EarlyArtsCancel.GetCheckBox()
+    isEarlyXYB = Options.DriverSkillTreesOption_EarlyXYBAttack.GetCheckBox()
     for Driver in DriverList:
         RemainingUnusedDriverIDs = Driver.copy()
-        if optDict["Driver Skill Trees"]["subOptionObjects"]["Early Arts Cancel"]["subOptionTypeVal"].get(): # remove defaults first
+        if isEarlyArtsCancel: # remove defaults first
             ArtsCancelSlots.append(DefaultArtsCancelSlots[DriverList.index(Driver)])
             RemainingUnusedDriverIDs.remove(DefaultArtsCancelSlots[DriverList.index(Driver)])
             FirstSlotCost()
-        if optDict["Driver Skill Trees"]["subOptionObjects"]["Early XYB Attack"]["subOptionTypeVal"].get():
+        if isEarlyXYB:
             X_Slots.append(DefaultXSlots[DriverList.index(Driver)])
             RemainingUnusedDriverIDs.remove(DefaultXSlots[DriverList.index(Driver)])
             Y_Slots.append(DefaultYSlots[DriverList.index(Driver)])
@@ -23,11 +27,11 @@ def RandomizeSkillEnhancements(optDict):
             ChosenID = random.choice(RemainingUnusedDriverIDs)
             ZekeEyeSlot = [ChosenID]
             RemainingUnusedDriverIDs.remove(ChosenID)
-        if not optDict["Driver Skill Trees"]["subOptionObjects"]["Early Arts Cancel"]["subOptionTypeVal"].get(): # have to separate out the if nots to avoid overwriting an arts cancel slot
+        if not isEarlyArtsCancel: # have to separate out the if nots to avoid overwriting an arts cancel slot
             ChosenID = random.choice(RemainingUnusedDriverIDs)
             ArtsCancelSlots.append(ChosenID)
             RemainingUnusedDriverIDs.remove(ChosenID)
-        if not optDict["Driver Skill Trees"]["subOptionObjects"]["Early XYB Attack"]["subOptionTypeVal"].get():
+        if not isEarlyXYB:
             ChosenIDs = random.sample(RemainingUnusedDriverIDs, 3)
             X_Slots.append(ChosenIDs[0])
             RemainingUnusedDriverIDs.remove(ChosenIDs[0])
@@ -36,7 +40,6 @@ def RandomizeSkillEnhancements(optDict):
             B_Slots.append(ChosenIDs[2])
             RemainingUnusedDriverIDs.remove(ChosenIDs[2])
 
-    isVanilla = not optDict["Driver Skill Trees"]["subOptionObjects"]["Nonstandard Skills"]["subOptionTypeVal"].get()
     with open("./_internal/JsonOutputs/common/BTL_Skill_Dr.json", 'r+', encoding='utf-8') as enhancementFile:
         with open("./_internal/JsonOutputs/common_ms/btl_skill_dr_name.json", 'r+', encoding='utf-8') as nameFile:
             enhanceFile = json.load(enhancementFile)

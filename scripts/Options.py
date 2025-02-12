@@ -1,27 +1,19 @@
 from tkinter import ttk
-import JSONParser, Helper, SavedOptions
+import JSONParser, Helper
 from IDs import *
 from tkinter import *
+import _Accessories, _DriverArts, SkillTrees, BladeRandomization, _AuxCores, IDs, _GreenSkills
 
-
-
-class SubOption():
-    def __init__(self, _name, _commands = [], _defState = True, _prio = 0):
-        self.name = _name
-        self.checkBoxVal = None
-        self.checkBox:ttk.Checkbutton = None
-        self.commands = _commands    
-        self.defState = _defState
-        self.prio = _prio
 
 class Option():
-    def __init__(self, _name:str, _tab, _desc:str, _commands:list, _subOptions: list, _defState = False, _prio = 0, _hasSpinBox = False):
+    def __init__(self, _name:str, _tab, _desc:str, _commands:list, _defState = False, _prio = 0, _hasSpinBox = False):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
         self.spinBoxVal = None
         self.checkBox = None
         self.checkBoxVal = None
+        self.subOptions:list[SubOption] = []
 
         # Initial Data
         self.name =  _name
@@ -30,7 +22,6 @@ class Option():
         self.hasSpinBox = _hasSpinBox
         self.commands:list = _commands
         self.subDefState = _defState
-        self.subOptions:list[SubOption] = _subOptions
         self.prio = _prio
         OptionList.append(self)
         
@@ -52,9 +43,9 @@ class Option():
         optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
         
         # Major Option Checkbox
-        checkButtonObj = ttk.Checkbutton(optionPanel, variable= var, text=self.name, width=40, style="midColor.TCheckbutton", command=lambda: self.StateUpdate())
+        self.checkBox = ttk.Checkbutton(optionPanel, variable= var, text=self.name, width=40, style="midColor.TCheckbutton", command=lambda: self.StateUpdate())
         self.checkBoxVal = var
-        checkButtonObj.grid(row=rowIncrement, column=0, sticky="w")
+        self.checkBox.grid(row=rowIncrement, column=0, sticky="w")
         
         # Description Label
         self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, wraplength=400)
@@ -70,13 +61,12 @@ class Option():
         for sub in self.subOptions:
             rowIncrement += 1
             sub.checkBoxVal = BooleanVar(value=sub.defState)
-            self.checkBox = ttk.Checkbutton(optionPanel, text=sub.name, variable=sub.checkBoxVal, width=30)
-            sub.checkBox = self.checkBox
-            self.checkBox.grid(row=rowIncrement, column=0, sticky="sw")
+            sub.checkBox = ttk.Checkbutton(optionPanel, text=sub.name, variable=sub.checkBoxVal, width=30)
+            sub.checkBox.grid(row=rowIncrement, column=0, sticky="sw")
         rowIncrement += 1
 
     def StateUpdate(self):
-        if self.checkBoxVal.get():
+        if self.GetCheckBox():
             for sub in self.subOptions:
                 sub.checkBox.state(["!disabled"])
             self.descObj.state(["!disabled"])
@@ -96,46 +86,93 @@ class Option():
     
     def GetCheckBox(self):
         return self.checkBoxVal.get()
-    
 
+class SubOption():
+    def __init__(self, _name, _parent:Option, _commands = [], _defState = True, _prio = 0):
+        self.name = _name
+        self.checkBoxVal = None
+        self.checkBox:ttk.Checkbutton = None
+        self.commands = _commands    
+        self.defState = _defState
+        self.prio = _prio
+        self.parent = _parent
+        _parent.subOptions.append(self)
 
+    def GetCheckBox(self):
+        return self.checkBoxVal.get()
 rowIncrement = 0   
 OptionList:list[Option] = []
 General = 1
 Driver  = 2
+Blade = 3
 
-subAccessoryShopsOption_Accessories = SubOption("Accessories")
-AccessoryShopsOption = Option("Accessory Shops", General, "Randomizes the contents of Accessory Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(Accessories)-set([1])),[])],[subAccessoryShopsOption_Accessories], _defState=True, _hasSpinBox = True)
+AccessoryShopsOption = Option("Accessory Shops", General, "Randomizes the contents of Accessory Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(Accessories)-set([1])),[])], _defState=True, _hasSpinBox = True)
+AccessoryShopsOption_Accessories = SubOption("Accessories", AccessoryShopsOption, [lambda: ValidReplacements.extend(Accessories)], True)
+AccessoryShopsOption_TornaAccessories = SubOption("Torna Accessories", AccessoryShopsOption, [lambda: ValidReplacements.extend(TornaAccessories)], True)
+AccessoryShopsOption_WeaponChips = SubOption("Weapon Chips", AccessoryShopsOption, [lambda: ValidReplacements.extend(WeaponChips)], True)
+AccessoryShopsOption_AuxCores = SubOption("Aux Cores", AccessoryShopsOption, [lambda: ValidReplacements.extend(AuxCores)], True)
+AccessoryShopsOption_RefinedAuxCores = SubOption("Refined Aux Cores", AccessoryShopsOption, [lambda: ValidReplacements.extend(RefinedAuxCores)], True)
+AccessoryShopsOption_CoreCrystals = SubOption("Core Crystals", AccessoryShopsOption, [lambda: ValidReplacements.extend(CoreCrystals)], True)
+AccessoryShopsOption_Deeds = SubOption("Shop Deeds", AccessoryShopsOption, [lambda: ValidReplacements.extend(Deeds)], True)
+AccessoryShopsOption_CollectionPointMaterials = SubOption("Collection Point Materials", AccessoryShopsOption, [lambda: ValidReplacements.extend(CollectionPointMaterials)], True)
+AccessoryShopsOption_PouchItems = SubOption("Pouch Items", AccessoryShopsOption, [lambda: ValidReplacements.extend(PouchItems)], True)
+CollectionPointsOption = Option("Collection Points", General, "Randomizes the contents of Collection Points", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID"], list(set(CollectionPointMaterials) - set([30019])), [])], _defState=True, _hasSpinBox = True)
+CollectionPointsOption_Accessories = SubOption("Accessories", CollectionPointsOption, [lambda: ValidReplacements.extend(Accessories)], True)
+CollectionPointsOption_TornaAccessories = SubOption("Torna Accessories", CollectionPointsOption, [lambda: ValidReplacements.extend(TornaAccessories)], True)
+CollectionPointsOption_WeaponChips = SubOption("Weapon Chips", CollectionPointsOption, [lambda: ValidReplacements.extend(WeaponChips)], True)
+CollectionPointsOption_AuxCores = SubOption("Aux Cores", CollectionPointsOption, [lambda: ValidReplacements.extend(AuxCores)], True)
+CollectionPointsOption_RefinedAuxCores = SubOption("Refined Aux Cores", CollectionPointsOption, [lambda: ValidReplacements.extend(RefinedAuxCores)], True)
+CollectionPointsOption_CoreCrystals = SubOption("Core Crystals", CollectionPointsOption, [lambda: ValidReplacements.extend(CoreCrystals)], True)
+CollectionPointsOption_Deeds = SubOption("Shop Deeds", CollectionPointsOption, [lambda: ValidReplacements.extend(Deeds)], True)
+CollectionPointsOption_CollectionPointMaterials = SubOption("Collection Point Materials", CollectionPointsOption, [lambda: ValidReplacements.extend(CollectionPointMaterials)], True)
+PouchItemShopOption = Option("Pouch Item Shops", General, "Randomizes the contents of Pouch Item Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), [])], _hasSpinBox = True)
+PouchShopOption_Accessories = SubOption("Accessories", PouchItemShopOption, [lambda: ValidReplacements.extend(Accessories)], True)
+PouchShopOption_TornaAccessories = SubOption("Torna Accessories", PouchItemShopOption, [lambda: ValidReplacements.extend(TornaAccessories)], True)
+PouchShopOption_WeaponChips = SubOption("Weapon Chips", PouchItemShopOption, [lambda: ValidReplacements.extend(WeaponChips)], True)
+PouchShopOption_AuxCores = SubOption("Aux Cores", PouchItemShopOption, [lambda: ValidReplacements.extend(AuxCores)], True)
+PouchShopOption_RefinedAuxCores = SubOption("Refined Aux Cores", PouchItemShopOption, [lambda: ValidReplacements.extend(RefinedAuxCores)], True)
+PouchShopOption_CoreCrystals = SubOption("Core Crystals", PouchItemShopOption, [lambda: ValidReplacements.extend(CoreCrystals)], True)
+PouchShopOption_Deeds = SubOption("Shop Deeds", PouchItemShopOption, [lambda: ValidReplacements.extend(Deeds)], True)
+PouchShopOption_CollectionPointMaterials = SubOption("Collection Point Materials", PouchItemShopOption, [lambda: ValidReplacements.extend(CollectionPointMaterials)], True)
+PouchShopOption_PouchItems = SubOption("Pouch Items", PouchItemShopOption, [lambda: ValidReplacements.extend(PouchItems)], True)
+TreasureChestOption = Option("Treasure Chests", General, "Randomizes the contents of Treasure Chests", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + Boosters + WeaponChips + AuxCores + CoreCrystals + RefinedAuxCores,[])], _hasSpinBox = True)
+TreasureChestOption_Accessories = SubOption("Accessories", TreasureChestOption, [lambda: ValidReplacements.extend(Accessories)], True)
+TreasureChestOption_TornaAccessories = SubOption("Torna Accessories", TreasureChestOption, [lambda: ValidReplacements.extend(TornaAccessories)], True)
+TreasureChestOption_WeaponChips = SubOption("Weapon Chips", TreasureChestOption, [lambda: ValidReplacements.extend(WeaponChips)], True)
+TreasureChestOption_AuxCores = SubOption("Aux Cores", TreasureChestOption, [lambda: ValidReplacements.extend(AuxCores)], True)
+TreasureChestOption_RefinedAuxCores = SubOption("Refined Aux Cores", TreasureChestOption, [lambda: ValidReplacements.extend(RefinedAuxCores)], True)
+TreasureChestOption_CoreCrystals = SubOption("Core Crystals", TreasureChestOption, [lambda: ValidReplacements.extend(CoreCrystals)], True)
+TreasureChestOption_Deeds = SubOption("Shop Deeds", TreasureChestOption, [lambda: ValidReplacements.extend(Deeds)], True)
+TreasureChestOption_CollectionPointMaterials = SubOption("Collection Point Materials", TreasureChestOption, [lambda: ValidReplacements.extend(CollectionPointMaterials)], True)
+WeaponChipShopOption = Option("Weapon Chip Shops", General, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)] , _hasSpinBox = True)
+DriverAccessoriesOption = Option("Driver Accessories", Driver, "Randomizes effects of Accessories", [lambda: _Accessories.RandomizeAccessoryEnhancements()])
+DriverArtsOption = Option("Driver Arts", Driver, "Randomizes effects of all driver arts", [lambda: _DriverArts.DriverArtRandomizer(), lambda: _DriverArts.GenCustomArtDescriptions()], _hasSpinBox = True)
+DriverArtsOption_AutoAttacks = SubOption("Auto Attacks", DriverArtsOption, [], _defState = False)
+DriverArtsOption_SingleReaction = SubOption("Single Reaction", DriverArtsOption, [], _defState = True)
+DriverArtsOption_MultipleReactions = SubOption("Multiple Reactions", DriverArtsOption, [], _defState = True)
+DriverArtsOption_Debuffs = SubOption("Debuffs", DriverArtsOption, [], _defState = True)
+DriverArtsOption_Buffs = SubOption("Buffs", DriverArtsOption, [], _defState = True)
+DriverArtsOption_Cooldown = SubOption("Cooldown", DriverArtsOption, [], _defState = True)
+DriverArtsOption_Damage = SubOption("Damage", DriverArtsOption, [], _defState = True)
+DriverArtsOption_Enhancements = SubOption("Enhancements", DriverArtsOption, [], _defState = True)
+DriverArtsOption_AnimationSpeed = SubOption("Animation Speed", DriverArtsOption, [], _defState = True)
+DriverArtsOption_AOE= SubOption("AOE", DriverArtsOption, [], _defState = True)
+DriverSkillTreesOption = Option("Driver Skill Trees", Driver, "Randomizes driver's skill trees", [lambda: SkillTrees.RandomizeSkillEnhancements()])
+DriverSkillTreesOption_NonstandardSkills = SubOption("Nonstandard Skills", DriverSkillTreesOption)
+DriverSkillTreesOption_EarlyArtsCancel = SubOption("Early Arts Cancel", DriverSkillTreesOption)
+DriverSkillTreesOption_EarlyXYBAttack = SubOption("Early XYB Attack", DriverSkillTreesOption)
+BladesOption = Option("Blades", Blade, "Randomizes when blades appear in the story", [lambda: BladeRandomization.BladeRandomization()], _hasSpinBox = True)
+BladesOption_Dromarch = SubOption("Randomize Dromarch", BladesOption)
+BladesOption_Healer = SubOption("Guaranteed Healer", BladesOption)
+BladeAuxCoresOption = Option("Blade Aux Cores", Blade, "Randomizes the effects of Aux Cores", [lambda: _AuxCores.RandomizeAuxCoreEnhancements()])
+BladeAuxCoreSlotsOption = Option("Blade Aux Core Slots", Blade, "Randomizes a Blade's maximum Aux Core Slots", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), IDs.BladeAuxCoreSlotDistribution)])
+BladeArtsOption = Option("Blade Arts", Blade, "Randomizes a Blade's combat arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])
+BladeBattleSkillsOption = Option("Blade Battle Skills", Blade, "Randomizes a Blade's battle (yellow) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), list(set(BladeBattleSkills) - set([268, 8, 9])), list(set(BladeBattleSkills) - set([268, 267,266,265,144,142,143, 8, 9])) )], _hasSpinBox = True)
+BladeFieldSkillsOption = Option("Blade Field Skills", Blade, "Randomizes a Blade's field (green) skill tree", [lambda: _GreenSkills.RandomizeFieldSkills()])
+BladeFieldSkillsOption_QuestSkills = SubOption("Quest Skills", BladeFieldSkillsOption)
+BladeCooldownOption = Option("Blade Cooldowns", Blade, "Randomizes a Blade's swap cooldown", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["CoolTime"], Helper.InclRange(1,1000), Helper.InclRange(1,1000))], _hasSpinBox = True)
 
 
-
-        
-
-
-
-
-# def Options():
-    
-#     # General
-#     GenStandardOption("Accessory Shops", TabGeneral, "Randomizes the contents of Accessory Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(IDs.Accessories)-set([1])),[])],LootOptions + PouchItemOption, defState=True)
-#     GenStandardOption("Collection Points", TabGeneral, "Randomizes the contents of Collection Points", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID"], list(set(CollectionPointMaterials) - set([30019])), [])], LootOptions + PouchItemOption, defState=True)
-#     GenStandardOption("Pouch Item Shops", TabGeneral, "Randomizes the contents of Pouch Item Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(PouchItems)-set([40007])), [])], LootOptions + PouchItemOption, defState=True)
-#     GenStandardOption("Treasure Chests Contents", TabGeneral, "Randomizes the contents of Treasure Chests", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID","itm5ID","itm6ID","itm7ID","itm8ID"], Accessories + Boosters + WeaponChips + AuxCores + CoreCrystals + RefinedAuxCores,[])], LootOptions, defState=True)
-#     GenStandardOption("Weapon Chip Shops", TabGeneral, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)])
-
-#     # Drivers
-#     GenStandardOption("Driver Accessories", TabDrivers, "Randomizes effects of Accessories", [lambda: Accs.RandomizeAccessoryEnhancements()])
-#     GenStandardOption("Driver Arts", TabDrivers, "Randomizes effects of all driver arts", [lambda: _DriverArts.DriverArtRandomizer(OptionDictionary), lambda: _DriverArts.GenCustomArtDescriptions()], ["Auto Attacks", [],"Single Reaction", [], "Multiple Reactions", [] ,"Debuffs",[],"Buffs",[],"Cooldown", [], "Damage", [], "Enhancements", [], "Animation Speed", [], "AOE", []], optionType = Spinbox, defState=True)
-#     GenStandardOption("Driver Skill Trees", TabDrivers, "Randomizes driver's skill trees",[lambda: SkillTrees.RandomizeSkillEnhancements(OptionDictionary)],["Nonstandard Skills", [], "Early Arts Cancel", [], "Early XYB Attack", []])
-       
-#     # Blades
-#     GenStandardOption("Blades", TabBlades, "Randomizes when blades appear in the story", [lambda: BladeRandomization.BladeRandomization(OptionDictionary)], ["Randomize Dromarch", [], "Guarantee a Healer", []], optionType=Spinbox)
-#     GenStandardOption("Blade Aux Cores", TabBlades, "Randomizes the effects of Aux Cores", [lambda: AuxCr.RandomizeAuxCoreEnhancements()])
-#     GenStandardOption("Blade Aux Core Slots", TabBlades, "Randomizes a Blade's maximum Aux Core Slots", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), IDs.BladeAuxCoreSlotDistribution)])
-#     GenStandardOption("Blade Arts", TabBlades, "Randomizes a Blade's arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])
-#     GenStandardOption("Blade Battle Skills", TabBlades, "Randomizes a Blade's battle (yellow) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("BSkill", 1, 3), list(set(BladeBattleSkills) - set([268, 8, 9])), list(set(BladeBattleSkills) - set([268, 267,266,265,144,142,143, 8, 9])) )])
-#     GenStandardOption("Blade Field Skills", TabBlades, "Randomizes a Blade's field (green) skill tree",[lambda: _GreenSkills.RandomizeFieldSkills(OptionDictionary)], ["Quest Skills", []])
-#     GenStandardOption("Blade Cooldowns", TabBlades, "Randomizes a Blade's swap cooldown", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["CoolTime"], Helper.InclRange(1,1000), Helper.InclRange(1,1000))])
 #     GenStandardOption("Blade Defenses", TabBlades, "Randomizes a Blade's Physical and Ether Defense", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.InclRange(0,100), BladeDefenseDistribution)],optionType=Spinbox)
 #     GenStandardOption("Blade Elements", TabBlades, "Randomizes a Blade's element", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["Atr"], Helper.InclRange(1,8), Helper.InclRange(1,8))],optionType=Spinbox)
 #     GenStandardOption("Blade Mods", TabBlades, "Randomizes a Blade's Stat Modifiers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.InclRange(1,100), BladeModDistribution)])

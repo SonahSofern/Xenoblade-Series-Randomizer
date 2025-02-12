@@ -1,5 +1,4 @@
-import copy, random, JSONParser, Helper
-
+import copy, random, JSONParser, Helper, Options
 # TODO:
 #  - Replace the text "Make Nia a Driver" with "Turn {Blade}} into Nia"
 #  - Replace the text "Make Nia a Blade" with "Turn Nia into {Blade}"
@@ -40,12 +39,12 @@ NewGamePlusBlades = [1043, 1044, 1045, 1046, 1047, 1048, 1049] # Currently canno
 
 include_printouts = False  # Debugging
 
-def BladeRandomization(OptionsRunDict):
+def BladeRandomization():
     InitialSetup()
 
     BugFixes_PreRandomization()
-    RandomizeBlades(OptionsRunDict)
-    # RandomizePoppiForms(OptionsRunDict) # TODO
+    RandomizeBlades()
+    # RandomizePoppiForms() # TODO
     BugFixes_PostRandomization()
 
     # FinalTouches() #TODO
@@ -92,13 +91,13 @@ def BugFixes_PreRandomization():
     JSONParser.ChangeJSONLine(["common/BLD_RareList.json"], [7], ['Blade'], 1050)
 
 
-def RandomizeBlades(OptionsRunDict):
+def RandomizeBlades():
     # Determine the guaranteed healer, if specified
-    if OptionsRunDict["Blades"]["subOptionObjects"]["Guarantee a Healer"]["subOptionTypeVal"].get():
+    if Options.BladesOption_Healer.GetCheckBox():
         global GuaranteedHealer
 
         # If Dromarch isn't randomized, he's the healer by default
-        if not OptionsRunDict["Blades"]["subOptionObjects"]["Randomize Dromarch"]["subOptionTypeVal"].get():
+        if not Options.BladesOption_Dromarch.GetCheckBox():
             GuaranteedHealer = 1004
             if include_printouts:
                 print("The guaranteed healer is Dromarch (by default).")
@@ -114,7 +113,7 @@ def RandomizeBlades(OptionsRunDict):
     blades_left_to_randomize = BladesAlwaysRandomized.copy()
 
     # Only add Dromarch to the pool if explicitly randomizing him
-    if OptionsRunDict["Blades"]["subOptionObjects"]["Randomize Dromarch"]["subOptionTypeVal"].get():
+    if Options.BladesOption_Dromarch.GetCheckBox():
         blades_left_to_randomize = [1004] + blades_left_to_randomize
 
     # TODO: Re-add this once NG+ blades' weapon chips work properly
@@ -129,7 +128,7 @@ def RandomizeBlades(OptionsRunDict):
     while blades_left_to_randomize:
         next_blade = blades_left_to_randomize[0]
         next_replacement = randomized_order[0]
-        if canBeReplaced(next_blade, next_replacement, OptionsRunDict):
+        if canBeReplaced(next_blade, next_replacement):
             Original2Replacement[next_blade] = next_replacement
             Replacement2Original[next_replacement] = next_blade
             if include_printouts:
@@ -146,9 +145,9 @@ def RandomizeBlades(OptionsRunDict):
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], [], ApplyBladeRandomization, replaceAll=True)
 
 
-def canBeReplaced(original, replacement, OptionsRunDict):
+def canBeReplaced(original, replacement):
     # Handle the case of having the guaranteed healer
-    if OptionsRunDict["Blades"]["subOptionObjects"]["Guarantee a Healer"]["subOptionTypeVal"].get():
+    if Options.BladesOption_Healer.GetCheckBox():
         if (original == 1001 and GuaranteedHealer in RexHealerBlades) or \
            (original == 1004 and GuaranteedHealer in NiaHealerBlades):
             return replacement == GuaranteedHealer
@@ -194,7 +193,7 @@ def ApplyBladeRandomization(blade):
 
 
 
-def RandomizePoppiForms(OptionsRunDict):
+def RandomizePoppiForms():
     print('TODO: RandomizePoppiForms()')
     # TODO: Randomize Poppi forms so they appear in a random order (such as QTpi in Ch2, then Alpha in Ch4, then QT after doing QTpi's side quest)
     # TODO: How do I make it so the poppiswaps are in the right spot?
