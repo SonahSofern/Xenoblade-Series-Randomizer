@@ -126,3 +126,13 @@ def GetMaxValue(filename: str, columnname: str): # Returns the maximum Value for
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     return MaxID
+
+def GetMinValue(filename: str, columnname: str): # Returns the maximum Value for a given column in a given file
+    with open(filename, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        MinRow = min(data["rows"], key = lambda x:x[columnname])
+        MinID = MinRow[columnname]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    return MinID
