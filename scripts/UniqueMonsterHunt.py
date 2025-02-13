@@ -58,7 +58,7 @@ def UMHunt(OptionDictionary):
         Cleanup()
         UMHuntMenuTextChanges()
         #DebugItemsPlace() # currently doesnt matter since I hide all the argentum chests anyways
-        #DebugEasyMode()
+        DebugEasyMode()
 
 def CheckForSuperbosses(SetCount, OptionDictionary):
     global ExtraSuperbosses
@@ -1191,7 +1191,7 @@ def AuxCoreRewards(): # Makes the Aux Core Bundles
         }
     }
 
-    Common, Rare, Legendary, Secret = 0, 1, 2, 2
+    Common, Rare, Legendary = 0, 1, 2
 
     ChosenAuxCores = {
         Common: {
@@ -1208,11 +1208,10 @@ def AuxCoreRewards(): # Makes the Aux Core Bundles
             "Damage": random.sample(AuxCoreSkillGroups["Legendary"]["Damage"], 4),
             "Defensive": random.sample(AuxCoreSkillGroups["Legendary"]["Defensive"], 4),
             "Playstyle Defining": random.sample(AuxCoreSkillGroups["Legendary"]["Playstyle Defining"], 8)
-        },
-        Secret: {
-            "All": AuxCoreSkillGroups["Secret"]["All"]
         }
     }
+
+    SecretAuxCores = AuxCoreSkillGroups["Secret"]["All"]
 
     with open("./_internal/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as file: 
         with open("./_internal/JsonOutputs/common_ms/itm_orb.json", 'r+', encoding='utf-8') as namefile:
@@ -1238,6 +1237,21 @@ def AuxCoreRewards(): # Makes the Aux Core Bundles
                             if namerow["$id"] == CurName:    
                                 namerow["name"] = f"{curAuxCore.name} Core"
                                 break
+            for auxCore in SecretAuxCores:
+                for row in data["rows"]:
+                    if row["$id"] == CurRow + 17000:
+                        curAuxCore:UMHuntSecretShopEnhancements = auxCore
+                        curAuxCore.RollEnhancement(2)
+                        row["Enhance"] = curAuxCore.id
+                        row["Rarity"] = curAuxCore.Rarity
+                        row["EnhanceCategory"] = CurRow
+                        CurName = row["Name"]
+                        CurRow += 1
+                        break
+                for namerow in namedata["rows"]:  
+                    if namerow["$id"] == CurName:    
+                        namerow["name"] = f"{curAuxCore.name} Core"
+                        break
             namefile.seek(0)
             namefile.truncate()
             json.dump(namedata, namefile, indent=2, ensure_ascii=False)
@@ -1297,7 +1311,7 @@ def AccessoryShopRewards(): # Creates the accessory shop
         }
     }
 
-    Common, Rare, Legendary, Secret = 0, 1, 2, 2
+    Common, Rare, Legendary = 0, 1, 2
 
     ChosenAccessories = {
         Common: {
@@ -1314,11 +1328,10 @@ def AccessoryShopRewards(): # Creates the accessory shop
             "Damage": random.sample(AccessorySkillGroups["Legendary"]["Damage"], 4),
             "Defensive": random.sample(AccessorySkillGroups["Legendary"]["Defensive"], 4),
             "Playstyle Defining": random.sample(AccessorySkillGroups["Legendary"]["Playstyle Defining"], 8)
-        },
-        Secret: {
-            "All": AccessorySkillGroups["Secret"]["All"]
         }
     }
+
+    SecretAccessories = AccessorySkillGroups["Secret"]["All"]
 
     AccessoryTypesandNames = { # What icon should go with what noun:
         0:["Sandals", "Crocs", "Jordans", "Boots", "Sneakers"], 
@@ -1359,6 +1372,23 @@ def AccessoryShopRewards(): # Creates the accessory shop
                                 lastWord = random.choice(AccessoryTypesandNames[ItemType])
                                 namerow["name"] = f"{curAccessory.name} {lastWord}"
                                 break
+            for accessory in SecretAccessories:
+                for row in data["rows"]:
+                    if row["$id"] == CurRow:
+                        curAccessory:UMHuntSecretShopEnhancements = accessory
+                        curAccessory.RollEnhancement(2)
+                        row["Enhance1"] = curAccessory.id
+                        row["Rarity"] = curAccessory.Rarity
+                        ItemType = random.randint(0,9)
+                        row["Icon"] = ItemType
+                        CurName = row["Name"]
+                        CurRow += 1
+                        break
+                for namerow in namedata["rows"]:  
+                    if namerow["$id"] == CurName:
+                        lastWord = random.choice(AccessoryTypesandNames[ItemType])
+                        namerow["name"] = f"{curAccessory.name} {lastWord}"
+                        break
             namefile.seek(0)
             namefile.truncate()
             json.dump(namedata, namefile, indent=2, ensure_ascii=False)
