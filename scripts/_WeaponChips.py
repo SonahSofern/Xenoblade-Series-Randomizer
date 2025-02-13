@@ -11,12 +11,12 @@ def RandomizeWeaponEnhancements():
     with open("./_internal/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file:
         with open("./_internal/JsonOutputs/common_ms/itm_pcwpn_ms.json", 'r+', encoding='utf-8') as wepNames:
             
-            slider = Options.BladeWeaponChipsOption.GetSpinBox()
+            slider = Options.BladeWeaponChipsOption.GetOdds()
             enhanceFile = json.load(file)
             skillNameFile = json.load(wepNames)
             for Wep in enhanceFile["rows"]:
                 
-                if slider.get() < random.randrange(0,100):
+                if slider < random.randrange(0,100):
                     continue
                 
                 skillNameID = Wep["Name"]

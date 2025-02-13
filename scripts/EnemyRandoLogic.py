@@ -364,16 +364,16 @@ def BossQuestAggroAdjustments(NewBossIDs, NewQuestIDs): # Required to allow boss
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def EnemyAggroProportion():
-    EnemyRandoOnBox = Options.EnemiesOption.GetCheckBox()
-    StoryBossesBox = Options.EnemiesOption_Bosses.GetCheckBox()
-    QuestEnemyBox = Options.EnemiesOption_QuestEnemies.GetCheckBox()
-    UniqueMonstersBox = Options.EnemiesOption_UniqueMonsters.GetCheckBox()
-    SuperbossesBox = Options.EnemiesOption_Superbosses.GetCheckBox()
-    NormalEnemiesBox = Options.EnemiesOption_NormalEnemies.GetCheckBox()
+    EnemyRandoOnBox = Options.EnemiesOption.isOn()
+    StoryBossesBox = Options.EnemiesOption_Bosses.isOn()
+    QuestEnemyBox = Options.EnemiesOption_QuestEnemies.isOn()
+    UniqueMonstersBox = Options.EnemiesOption_UniqueMonsters.isOn()
+    SuperbossesBox = Options.EnemiesOption_Superbosses.isOn()
+    NormalEnemiesBox = Options.EnemiesOption_NormalEnemies.isOn()
     if EnemyRandoOnBox:
         if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox: # do nothing, got handled after enemy randomization
             pass
-    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetCheckBox()
+    EnemyAggroSliderOdds = Options.EnemyAggroOption.isOn()
     NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
     if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive
         with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
@@ -421,8 +421,8 @@ def EnemyAggroProportion():
             json.dump(data, file, indent=2, ensure_ascii=False)
 
 def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs): #when enemy rando is on
-    EnemyAggroOnBox = Options.EnemyAggroOption.GetCheckBox()
-    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetSpinBox()
+    EnemyAggroOnBox = Options.EnemyAggroOption.isOn()
+    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetOdds()
     if EnemyAggroOnBox: # if enemy aggro is randomized
         with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
@@ -730,18 +730,18 @@ def EnemyLogic():
     LevelstoPass = []
     CheckboxList = [] #I'm lazy, so i'm just going to pass the names and true/false states to two arrays
     CheckboxStates = []
-    StoryBossesBox = Options.EnemiesOption_Bosses.GetCheckBox()
+    StoryBossesBox = Options.EnemiesOption_Bosses.isOn()
     # KeepStoryBossesLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Original Boss Encounter Levels"]["subOptionTypeVal"].get()
-    QuestEnemyBox = Options.EnemiesOption_QuestEnemies.GetCheckBox()
+    QuestEnemyBox = Options.EnemiesOption_QuestEnemies.isOn()
     # KeepQuestEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Original Quest Encounter Levels"]["subOptionTypeVal"].get()
-    UniqueMonstersBox = Options.EnemiesOption_UniqueMonsters.GetCheckBox()
-    SuperbossesBox = Options.EnemiesOption_Superbosses.GetCheckBox()
-    NormalEnemiesBox = Options.EnemiesOption_NormalEnemies.GetCheckBox()
-    KeepAllEnemyLevelsBox = Options.EnemiesOption_BalancedLevels.GetCheckBox()
-    MixEnemiesBetweenTypesBox = Options.EnemiesOption_MixedTypes.GetCheckBox()
+    UniqueMonstersBox = Options.EnemiesOption_UniqueMonsters.isOn()
+    SuperbossesBox = Options.EnemiesOption_Superbosses.isOn()
+    NormalEnemiesBox = Options.EnemiesOption_NormalEnemies.isOn()
+    KeepAllEnemyLevelsBox = Options.EnemiesOption_BalancedLevels.isOn()
+    MixEnemiesBetweenTypesBox = Options.EnemiesOption_MixedTypes.isOn()
     AllBossDefaultIDstoUse = AllBossDefaultIDs
     AllBossDefaultLevelstoUse = AllBossDefaultLevels
-    if Options.RaceModeOption.GetCheckBox(): # removing malos in auresco fight for race mode specifically, he has an absurd amount of hp and is just a slog of a fight
+    if Options.RaceModeOption.isOn(): # removing malos in auresco fight for race mode specifically, he has an absurd amount of hp and is just a slog of a fight
         AllBossDefaultIDstoUse = [x for x in AllBossDefaultIDs if x != 1443]
         del AllBossDefaultLevelstoUse[83]
     if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox:

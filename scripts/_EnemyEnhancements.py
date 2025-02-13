@@ -12,7 +12,7 @@ def EnemyEnhances():
         with open("./_internal/JsonOutputs/common_ms/fld_enemyname.json", 'r+', encoding='utf-8') as NamesFile:      
             EnArr = json.load(EnArrangeFile)
             Names = json.load(NamesFile)
-            spinbox  = Options.EnemyEnhancementsOption.GetSpinBox()
+            spinbox  = Options.EnemyEnhancementsOption.GetOdds()
             for Enemy in EnArr["rows"]:
                 if spinbox < random.randrange(0,100):
                     continue

@@ -13,6 +13,7 @@ class Option():
         # Objects
         self.descObj = None
         self.spinBoxObj = None
+        self.spinBoxLabel = None
         self.spinBoxVal = None
         self.checkBox = None
         self.checkBoxVal = None
@@ -57,8 +58,8 @@ class Option():
         if self.hasSpinBox:
             self.spinBoxObj = ttk.Spinbox(optionPanel, from_=0, to=100, textvariable=self.spinBoxVal, wrap=True, width=3, increment=10)
             self.spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
-            self.spinBoxObj = ttk.Label(optionPanel, text="% randomized", anchor="w")
-            self.spinBoxObj.grid(row=rowIncrement, column=3, sticky="w", padx=0)
+            self.spinBoxLabel = ttk.Label(optionPanel, text="% randomized", anchor="w")
+            self.spinBoxLabel.grid(row=rowIncrement, column=3, sticky="w", padx=0)
 
         for sub in self.subOptions:
             rowIncrement += 1
@@ -69,11 +70,13 @@ class Option():
 
     
     def StateUpdate(self):
-        if self.GetCheckBox():
+        if self.isOn():
             for sub in self.subOptions:
                 sub.checkBox.state(["!disabled"])
             self.descObj.state(["!disabled"])
             self.spinBoxObj.state(["!disabled"])
+            if self.spinBoxLabel != None: # If we dont have one
+                self.spinBoxLabel.state(["!disabled"])
             for sub in self.subOptions: # Handles Dropdown
                 sub.checkBox.grid()     
         else:
@@ -81,13 +84,15 @@ class Option():
                 sub.checkBox.state(["disabled"])
             self.descObj.state(["disabled"])
             self.spinBoxObj.state(["disabled"])
+            if self.spinBoxLabel != None:
+                self.spinBoxLabel.state(["disabled"])
             for sub in self.subOptions: # Handles Dropdown
                 sub.checkBox.grid_remove()
     
-    def GetSpinBox(self):
+    def GetOdds(self):
         return self.spinBoxVal.get()
     
-    def GetCheckBox(self):
+    def isOn(self):
         return self.checkBoxVal.get()
 
 class SubOption():
@@ -101,7 +106,7 @@ class SubOption():
         self.parent = _parent
         _parent.subOptions.append(self)
 
-    def GetCheckBox(self):
+    def isOn(self):
         return self.checkBoxVal.get()
 rowIncrement = 0   
 OptionList:list[Option] = []
@@ -272,9 +277,9 @@ FieldItemOption = Option("Field Item Size", Funny, "Randomizes the size and spin
 
 # Cosmetics
 BladeWeaponCosmeticsOption = Option("Blade Weapon Cosmetics", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])])
-Cosmetics.CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()], _hasSpinBox = True) # Sub are created by another class
+CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()], _hasSpinBox = True) # Sub are created by another class
 for opt in Cosmetics.CosmeticsList: # To gen these since listing them here would be annoying
-    opt.CreateSubOptions()
+    opt.CreateSubOptions(CosmeticsOption)
 
 # Game Modes
 RaceModeOption = Option("Race Mode", GameModeTab, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(), RaceMode.SeedHash])
@@ -283,20 +288,20 @@ RaceModeOption_DLC = SubOption("DLC Item Removal", RaceModeOption)
 UMHunt = Option("Unique Monster Hunt", GameModeTab, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt()], _hasSpinBox = True)
 
 
-#     # Currently Disabled for Various Reasons
-#     # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
-#     # GenStandardOption("Blade Names", TabBlades, "Randomizes a Blade's name", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
-#     # GenStandardOption("Less UI", TabQOL, "Removes some of the unneccessary on screen UI (Blade Swap and Current Objective)", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[88], ["sheet05", "sheet03"], [""])])
-#     # GenStandardOption("Screenshot Mode", TabQOL, "Removes most UI for screenshots", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[88], ["sheet05", "sheet03", "sheet04"], ""), lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[86], ["sheet02", "sheet03"], "")])
-#     # CTMC (has to run after Race Mode in current iteration, needs to know what chests have what loot)
-#     # GenDictionary("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.InclRange(0,3721), Helper.InclRange(2001,3721))])
-#     # GenOption("Funny Faces", TabMisc, "Randomizes Facial Expressions", ["common/EVT_eyetype.json"], ["$id"], Helper.inclRange(0,15), Helper.inclRange(0,15)) # doesnt work yet
-#     # GenDictionary("Menu Colors", TabMisc, "Randomizes Colors in the UI", [lambda: JSONParser.ChangeJSON(["common/MNU_ColorList.json"], ["col_r", "col_g", "col_b"], Helper.InclRange(0,255), Helper.InclRange(0,0))])
-#     # GenStandardOption("Blade Weapons", TabBlades, "Randomizes a Blade Weapon type, for example Pyra can now be a Knuckle Claws user", [lambda: _BladeWeapons.WepRando()])
-#     # GenStandardOption("Blade Specials", TabBlades, "Randomizes blades special (red) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials,  list(set(BladeSpecials) - set([215])))]) works okay, but animations dont connect feels mid
-#     # DebugLog.CreateDebugLog(OptionDictionary, Version, randoSeedEntry.get())
-#     # GenStandardOption("Enemy Arts", TabEnemies, "Gives enemies new arts", [lambda: _EnemyArts.EnemyArts(OptionDictionary["Enemy Arts"]["spinBoxVal"].get())],optionType=Spinbox)
-#     # GenStandardOption("Enemy Rage", TabEnemies, "Randomizes the effects of enemy enraged states", ["common/BTL_Aura"])   
+# Currently Disabled for Various Reasons
+# Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
+# GenStandardOption("Blade Names", TabBlades, "Randomizes a Blade's name", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
+# GenStandardOption("Less UI", TabQOL, "Removes some of the unneccessary on screen UI (Blade Swap and Current Objective)", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[88], ["sheet05", "sheet03"], [""])])
+# GenStandardOption("Screenshot Mode", TabQOL, "Removes most UI for screenshots", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[88], ["sheet05", "sheet03", "sheet04"], ""), lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[86], ["sheet02", "sheet03"], "")])
+# CTMC (has to run after Race Mode in current iteration, needs to know what chests have what loot)
+# GenDictionary("NPCs", TabMisc, "Randomizes what NPCs appear in the world (still testing)", [lambda: JSONParser.ChangeJSON(Helper.InsertHelper(2, 1,90,"maa_FLD_NpcPop.json", "common_gmk/"), ["NpcID"], Helper.InclRange(0,3721), Helper.InclRange(2001,3721))])
+# GenOption("Funny Faces", TabMisc, "Randomizes Facial Expressions", ["common/EVT_eyetype.json"], ["$id"], Helper.inclRange(0,15), Helper.inclRange(0,15)) # doesnt work yet
+# GenDictionary("Menu Colors", TabMisc, "Randomizes Colors in the UI", [lambda: JSONParser.ChangeJSON(["common/MNU_ColorList.json"], ["col_r", "col_g", "col_b"], Helper.InclRange(0,255), Helper.InclRange(0,0))])
+# GenStandardOption("Blade Weapons", TabBlades, "Randomizes a Blade Weapon type, for example Pyra can now be a Knuckle Claws user", [lambda: _BladeWeapons.WepRando()])
+# GenStandardOption("Blade Specials", TabBlades, "Randomizes blades special (red) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials,  list(set(BladeSpecials) - set([215])))]) works okay, but animations dont connect feels mid
+# DebugLog.CreateDebugLog(OptionDictionary, Version, randoSeedEntry.get())
+# GenStandardOption("Enemy Arts", TabEnemies, "Gives enemies new arts", [lambda: _EnemyArts.EnemyArts(OptionDictionary["Enemy Arts"]["spinBoxVal"].get())],optionType=Spinbox)
+# GenStandardOption("Enemy Rage", TabEnemies, "Randomizes the effects of enemy enraged states", ["common/BTL_Aura"])   
 
 def UpdateAllStates():
     for opt in OptionList:

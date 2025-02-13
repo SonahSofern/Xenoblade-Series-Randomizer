@@ -122,7 +122,8 @@ MainWindow.add(TabFunnyOuter, text='Funny')
 MainWindow.add(TabMiscOuter, text ='Misc.') 
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
-for opt in Options.OptionList: # Cant reference directly because of circular imports
+Options.OptionList.sort(key= lambda x: x.name) # Sorts alphabetically
+for opt in Options.OptionList: # Cant reference directly because of circular imports :/
     if opt.tab == Options.General:
         opt.DisplayOption(TabGeneral)
     elif opt.tab == Options.Driver:
@@ -205,11 +206,11 @@ def RunOptions():
     Options.OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
     
     for opt in Options.OptionList:
-        if not opt.GetCheckBox(): # Checks state
+        if not opt.isOn(): # Checks state
             continue
         
         opt.subOptions.sort(key= lambda x: x.prio) # Sort suboptions by priority
-        IDs.CurrentSliderOdds = opt.GetSpinBox()
+        IDs.CurrentSliderOdds = opt.GetOdds()
         
         for sub in opt.subOptions:
             if not sub.checkBoxVal.get(): # Checks state

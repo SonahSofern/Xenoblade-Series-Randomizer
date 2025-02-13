@@ -157,6 +157,6 @@ def CoreCrystalChanges():
     LandofChallengeRelease()
     FixingGivenCoreCrystalTutorial()
     #ChangeRankCondition()
-    if not Options.RaceModeOption.GetCheckBox():
+    if not Options.RaceModeOption.isOn():
         RegularLootDistribution()
         RaceMode.FindtheBladeNames()

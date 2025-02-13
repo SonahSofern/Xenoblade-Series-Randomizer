@@ -2,7 +2,7 @@ import JSONParser, Options
 
     
 def RemoveFieldSkills():
-    isAllChecks  = Options.RemoveFieldSkillsOption_AllFieldSkills.GetCheckBox()
+    isAllChecks  = Options.RemoveFieldSkillsOption_AllFieldSkills.isOn()
     
     if isAllChecks:
         mapGimmickIds = range(1,186)

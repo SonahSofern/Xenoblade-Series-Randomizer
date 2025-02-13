@@ -21,7 +21,7 @@ def EnemyArts(spinbox):
         json.dump(EnData, EnFile, indent=2, ensure_ascii=False)  
 
 
-def EnemyArtAttributes(optionsDict):
+def EnemyArtAttributes():
     with open("./_internal/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as EnArtsFile:
         with open("./_internal/JsonOutputs/common/BTL_Arts_BlSp.json", 'r+', encoding='utf-8') as EnBlArtsFile:
             with open("./_internal/JsonOutputs/common_ms/btl_arts_en_ms.json", 'r+', encoding='utf-8') as EnArtsNamesFile:  
@@ -35,8 +35,8 @@ def EnemyArtAttributes(optionsDict):
                             blArtNameData = json.load(BlArtsNamesFile)
                             blArtsData = json.load(BlArtsFile)
                             
-                            ChangeArts(enArtsData, enArtsNameData, optionsDict)
-                            ChangeArts(enBlArtsData, enBlArtsNameData, optionsDict)
+                            ChangeArts(enArtsData, enArtsNameData)
+                            ChangeArts(enBlArtsData, enBlArtsNameData)
                             # ChangeArts(blArtsData, blArtNameData, spinBox) # Currently this will change ally and enemy because they use the same files :/
                             
                             BlArtsFile.seek(0)
@@ -58,15 +58,15 @@ def EnemyArtAttributes(optionsDict):
         EnArtsFile.truncate()
         json.dump(enArtsData, EnArtsFile, indent=2, ensure_ascii=False)
         
-def ChangeArts(artData, artNameData, optionsDict):
+def ChangeArts(artData, artNameData):
     newNameID = 457 # Starting id to add new names to old names file
     
-    spinBox = Options.EnemyArtEffectsOption.GetSpinBox()
-    isReactions = Options.EnemyArtEffectsOption_Reactions.GetCheckBox()
-    isDebuffs = Options.EnemyArtEffectsOption_Debuffs.GetCheckBox()
-    isBuffs = Options.EnemyArtEffectsOption_Buffs.GetCheckBox()
-    isEnhancements = Options.EnemyArtEffectsOption_Enhancements.GetCheckBox()
-    isAOE = Options.EnemyArtEffectsOption_AOE.GetCheckBox()
+    spinBox = Options.EnemyArtEffectsOption.GetOdds()
+    isReactions = Options.EnemyArtEffectsOption_Reactions.isOn()
+    isDebuffs = Options.EnemyArtEffectsOption_Debuffs.isOn()
+    isBuffs = Options.EnemyArtEffectsOption_Buffs.isOn()
+    isEnhancements = Options.EnemyArtEffectsOption_Enhancements.isOn()
+    isAOE = Options.EnemyArtEffectsOption_AOE.isOn()
                     
     
     for art in artData["rows"]:

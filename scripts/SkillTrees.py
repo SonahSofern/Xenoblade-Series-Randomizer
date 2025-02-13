@@ -7,9 +7,9 @@ def RandomizeSkillEnhancements():
     ArtsCancelSlots, X_Slots, Y_Slots, B_Slots = [], [], [], []
     Rex, Nia, Tora, Vandham, Morag, Zeke = Helper.InclRange(1, 30), Helper.InclRange(31, 60), Helper.InclRange(61, 90), Helper.InclRange(91, 120), Helper.InclRange (121, 150), Helper.InclRange(151, 180)
     DriverList = [Rex, Nia, Tora, Vandham, Morag, Zeke]
-    isVanilla = not Options.DriverSkillTreesOption_NonstandardSkills.GetCheckBox()
-    isEarlyArtsCancel = Options.DriverSkillTreesOption_EarlyArtsCancel.GetCheckBox()
-    isEarlyXYB = Options.DriverSkillTreesOption_EarlyXYBAttack.GetCheckBox()
+    isVanilla = not Options.DriverSkillTreesOption_NonstandardSkills.isOn()
+    isEarlyArtsCancel = Options.DriverSkillTreesOption_EarlyArtsCancel.isOn()
+    isEarlyXYB = Options.DriverSkillTreesOption_EarlyXYBAttack.isOn()
     for Driver in DriverList:
         RemainingUnusedDriverIDs = Driver.copy()
         if isEarlyArtsCancel: # remove defaults first
