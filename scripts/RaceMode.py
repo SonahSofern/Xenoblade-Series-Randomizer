@@ -6,7 +6,7 @@ from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipID
 import time
 import JSONParser
 import DebugLog
-import math
+import math, Options
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
@@ -19,7 +19,7 @@ DamageRevLow = [100, 100, 100, 98, 96, 94, 92, 90, 88, 86, 84, 82, 80, 78, 76, 7
 HitRevLow = [110, 115, 122, 129, 138, 147, 158, 169, 182, 195, 210, 225, 242, 259, 278, 297, 318, 339, 362, 385]
 ReactRevHigh = [0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 40, 60, 80, 100, 100, 100, 100, 100, 100, 100]
 
-def RaceModeChanging(OptionsRunDict): 
+def RaceModeChanging(): 
     print("Setting Up Race Mode")    
     #Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
     #Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
@@ -188,7 +188,6 @@ def RaceModeChanging(OptionsRunDict):
     LandmarkConditions()
     GimmickAdjustments()
     HideMapAreas(ScenarioFlagLists)
-    print(OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get())
     if OptionsRunDict["Race Mode"]["subOptionObjects"]["Custom Loot"]["subOptionTypeVal"].get():
         print("Filling Chests with Custom Loot")
         RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict)
@@ -854,8 +853,8 @@ def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy 
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def FindtheBladeNames(OptionsRunDict):
-    if OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get():
+def FindtheBladeNames():
+    if Options.CustomCoreCrystalOption.GetCheckBox():
         ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
         CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
         CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")

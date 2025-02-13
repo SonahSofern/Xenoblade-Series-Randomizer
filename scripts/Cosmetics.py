@@ -1,4 +1,4 @@
-import json, random
+import json, random, Options
 
 # Lists of cosmetics to choose from
 ValidDriverCosmetics = []
@@ -35,11 +35,11 @@ class Cosmetic:
         self.characterName = characterName
         self.cosmeticName = cosmeticName
         if type == Driver:
-            CosmeticsList.extend([self.cosmeticName, [lambda: ValidDriverCosmetics.append(self)]])
+            Options.SubOption(self.cosmeticName, Options.CosmeticsOption,  [lambda: ValidDriverCosmetics.append(self)])
         elif type == Blade:
-            CosmeticsList.extend([self.cosmeticName, [lambda: ValidBladeCosmetics.append(self)]])
+            Options.SubOption(self.cosmeticName, Options.CosmeticsOption,  [lambda: ValidBladeCosmetics.append(self)])
         elif type == ArtBlade:
-            CosmeticsList.extend([self.cosmeticName, [lambda: ValidArtificialBladeCosmetics.append(self)]])
+            Options.SubOption(self.cosmeticName, Options.CosmeticsOption,  [lambda: ValidArtificialBladeCosmetics.append(self)])
 
 # Blades
 JadeOrchidBrighid = Cosmetic("bl/bl121001", 1009, Brighid, "Jade Orchid Brighid", Blade)
@@ -138,9 +138,9 @@ def CosmeticPairs(nameData, itmData,odds, charKeyWord, cosmeticsList):
             Acc["Model"] = cosm.model
             Acc[f"{charKeyWord}"] = cosm.characterID
             
-def Cosmetics(optionDict):
+def Cosmetics():
     # Slider
-    odds = optionDict["Character Outfits"]["spinBoxVal"].get()
+    odds = Options.CosmeticsOption.GetSpinBox()
     
     # Drivers
     with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file:

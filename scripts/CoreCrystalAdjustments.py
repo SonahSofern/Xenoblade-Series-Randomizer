@@ -2,7 +2,7 @@ import EnemyRandoLogic as EnemyRandoLogic
 import json
 import Helper as Helper
 import random
-import JSONParser
+import JSONParser, Options
 import IDs
 import RaceMode
 
@@ -157,6 +157,6 @@ def CoreCrystalChanges():
     LandofChallengeRelease()
     FixingGivenCoreCrystalTutorial()
     #ChangeRankCondition()
-    if not OptionsRunDict["Race Mode"]["optionTypeVal"].get():
+    if not Options.RaceModeOption.GetCheckBox():
         RegularLootDistribution()
-        RaceMode.FindtheBladeNames(OptionsRunDict)
+        RaceMode.FindtheBladeNames()

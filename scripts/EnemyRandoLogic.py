@@ -741,13 +741,13 @@ def EnemyLogic():
     MixEnemiesBetweenTypesBox = Options.EnemiesOption_MixedTypes.GetCheckBox()
     AllBossDefaultIDstoUse = AllBossDefaultIDs
     AllBossDefaultLevelstoUse = AllBossDefaultLevels
-    if OptionsRunDict["Race Mode"]["optionTypeVal"].get(): # removing malos in auresco fight for race mode specifically, he has an absurd amount of hp and is just a slog of a fight
+    if Options.RaceModeOption.GetCheckBox(): # removing malos in auresco fight for race mode specifically, he has an absurd amount of hp and is just a slog of a fight
         AllBossDefaultIDstoUse = [x for x in AllBossDefaultIDs if x != 1443]
         del AllBossDefaultLevelstoUse[83]
     if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox:
         EnemyRandoOn = True
-        CheckboxList = ["Story Bosses", "Quest Enemies", "Unique Monsters", "Superbosses", "Normal Enemies", "Mix Enemies Between Types", "Use All Original Encounter Levels", "Use Original Quest Encounter Levels", "Use Original Boss Encounter Levels"]
-        CheckboxStates = [StoryBossesBox, QuestEnemyBox, UniqueMonstersBox, SuperbossesBox, NormalEnemiesBox, MixEnemiesBetweenTypesBox, KeepAllEnemyLevelsBox, KeepQuestEnemyLevelsBox, KeepStoryBossesLevelsBox]
+        CheckboxList = ["Story Bosses", "Quest Enemies", "Unique Monsters", "Superbosses", "Normal Enemies", "Mix Enemies Between Types", "Use All Original Encounter Levels"]
+        CheckboxStates = [StoryBossesBox, QuestEnemyBox, UniqueMonstersBox, SuperbossesBox, NormalEnemiesBox, MixEnemiesBetweenTypesBox, KeepAllEnemyLevelsBox]
     if EnemyRandoOn == True:
         print("Randomizing Enemies")
         TotalDefaultEnemyIDs = []
@@ -783,15 +783,6 @@ def EnemyLogic():
                 if KeepAllEnemyLevelsBox:
                     LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, LevelstoPass)
                     print("Reverting all enemy levels")
-                else:
-                    if QuestEnemyBox:
-                        if KeepQuestEnemyLevelsBox:
-                            LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
-                            print("Reverting Quest Enemy levels")
-                    if StoryBossesBox:
-                        if KeepStoryBossesLevelsBox:
-                            LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
-                            print("Reverting Story Boss Levels")
         if not MixEnemiesBetweenTypesBox:
             print("Enemies not shuffled")
             for o in range(0, len(CheckboxList)):
@@ -828,22 +819,12 @@ def EnemyLogic():
                         LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, LevelstoPass)
                         print("Reverting all enemy levels")
                         continue
-                    if (CheckboxList[o] == "Quest Enemies") & (CheckboxStates[o] == True):
-                        if KeepQuestEnemyLevelsBox == True:
-                            LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
-                            print("Reverting Quest Enemy levels")
-                            continue
-                    if (CheckboxList[o] == "Story Bosses") & (CheckboxStates[o] == True):
-                        if KeepStoryBossesLevelsBox == True:
-                            LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
-                            print("Reverting Story Boss Levels")
-                            continue
         NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
         BossQuestAggroAdjustments(NewBossIDs, NewQuestIDs)
         KeyItemsReAdd()
         Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["LvRand", "DriverLev"], 0)
         Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], 0)
-        PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict)
+        PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs)
         BalanceFixes()
         EnemyDupeBossCondition(NewBossIDs)
         FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)

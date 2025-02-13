@@ -131,6 +131,14 @@ for opt in Options.OptionList:
         opt.DisplayOption(TabBlades)
     elif opt.tab == Options.Enemies:
         opt.DisplayOption(TabEnemies)
+    elif opt.tab == Options.Misce:
+        opt.DisplayOption(TabMisc)
+    elif opt.tab == Options.QOL:
+        opt.DisplayOption(TabQOL)
+    elif opt.tab == Options.Funny:
+        opt.DisplayOption(TabFunny)
+    elif opt.tab == Options.GameModeTab:
+        opt.DisplayOption(TabGameMode)
 
 def ShowTitleScreenText():
     JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], [f"Randomizer v{Version}"]) # Change Title Version to Randomizer vX.x.x
