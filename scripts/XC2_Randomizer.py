@@ -1,6 +1,9 @@
 from tkinter import PhotoImage, ttk
-import random, subprocess, shutil, os, threading, traceback, time, sys
 from tkinter import *
+import tkinter as tk
+root = Tk()
+
+import random, subprocess, shutil, os, threading, traceback, time, sys
 import SavedOptions, SeedNames, JSONParser,  IDs,Helper
 from Enhancements import *
 import GUISettings
@@ -8,8 +11,7 @@ import Options
 from IDs import *
 from UI_Colors import *
 from tkinter.font import Font
-import tkinter as tk
-import Cosmetics
+import Options
 
 Version = "UIOVERHAUL"
 CommonBdatInput = ""
@@ -25,7 +27,6 @@ if getattr(sys, 'frozen', False):  # If the app is running as a bundled executab
 else:
     isOnefile = False
     
-root = Tk()
 defFontVar = tk.StringVar(value="Arial")
 defFontSizeVar = tk.IntVar(value=13)
 defGUIThemeVar = tk.StringVar(value="Dark Mode")
@@ -77,7 +78,7 @@ TabGameModeCanvas = Canvas(TabGameModeOuter)
 TabFunnyCanvas = Canvas(TabFunnyOuter)
 
 # Actual Scrollable Content
-TabGeneral = ttk.Frame(TabGeneralCanvas) 
+TabGeneral = ttk.Frame(TabGeneralCanvas)
 TabDrivers = ttk.Frame(TabDriversCanvas) 
 TabBlades = ttk.Frame(TabBladesCanvas)
 TabEnemies = ttk.Frame(TabEnemiesCanvas) 
@@ -121,29 +122,25 @@ MainWindow.add(TabFunnyOuter, text='Funny')
 MainWindow.add(TabMiscOuter, text ='Misc.') 
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
-
-CosmeticsOption = Options.Option("Character Outfits", TabCosmetics, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()], _hasSpinBox = True) # Sub are created by another class
-
-
-# for opt in Options.OptionList:
-#     if opt.tab == Options.General:
-#         opt.DisplayOption(TabGeneral)
-#     elif opt.tab == Options.Driver:
-#         opt.DisplayOption(TabDrivers)
-#     elif opt.tab == Options.Blade:
-#         opt.DisplayOption(TabBlades)
-#     elif opt.tab == Options.Enemies:
-#         opt.DisplayOption(TabEnemies)
-#     elif opt.tab == Options.Misce:
-#         opt.DisplayOption(TabMisc)
-#     elif opt.tab == Options.QOL:
-#         opt.DisplayOption(TabQOL)
-#     elif opt.tab == Options.Funny:
-#         opt.DisplayOption(TabFunny)
-#     elif opt.tab == Options.CosmeticsTab:
-#         opt.DisplayOption(TabCosmetics)
-#     elif opt.tab == Options.GameModeTab:
-#         opt.DisplayOption(TabGameMode)
+for opt in Options.OptionList:
+    if opt.tab == Options.General:
+        opt.DisplayOption(TabGeneral)
+    elif opt.tab == Options.Driver:
+        opt.DisplayOption(TabDrivers)
+    elif opt.tab == Options.Blade:
+        opt.DisplayOption(TabBlades)
+    elif opt.tab == Options.Enemies:
+        opt.DisplayOption(TabEnemies)
+    elif opt.tab == Options.Misce:
+        opt.DisplayOption(TabMisc)
+    elif opt.tab == Options.QOL:
+        opt.DisplayOption(TabQOL)
+    elif opt.tab == Options.Funny:
+        opt.DisplayOption(TabFunny)
+    elif opt.tab == Options.CosmeticsTab:
+        opt.DisplayOption(TabCosmetics)
+    elif opt.tab == Options.GameModeTab:
+        opt.DisplayOption(TabGameMode)
 
 def ShowTitleScreenText():
     JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], [f"Randomizer v{Version}"]) # Change Title Version to Randomizer vX.x.x
@@ -284,7 +281,7 @@ seedVar = SavedEntry("Seed", seedEntryVar)
 # Save and Load Last Options
 EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
 SavedOptions.loadData(EntriesToSave + Options.OptionList, SavedOptionsFileName)
-# Options.UpdateAllStates()
+Options.UpdateAllStates()
 
 # # Permalink Options/Variables
 # permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame")

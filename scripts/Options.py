@@ -3,8 +3,7 @@ import JSONParser, Helper
 from IDs import *
 from tkinter import *
 import _Accessories, _DriverArts, SkillTrees, BladeRandomization, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments
-import TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UniqueMonsterHunt
-
+import TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UniqueMonsterHunt, Cosmetics
 
 class Option():
     def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 0, _hasSpinBox = False):
@@ -25,12 +24,11 @@ class Option():
         self.subDefState = _defState
         self.prio = _prio
         OptionList.append(self)
-        
+
     def DisplayOption(self, tab):
         self.GenStandardOption(tab)
-        # Load Saved Option
         self.StateUpdate()
-    
+        
     def GenStandardOption(self, parentTab):   
         # Variables
         global rowIncrement
@@ -66,6 +64,7 @@ class Option():
             sub.checkBox.grid(row=rowIncrement, column=0, sticky="sw")
         rowIncrement += 1
 
+    
     def StateUpdate(self):
         if self.GetCheckBox():
             for sub in self.subOptions:
@@ -103,6 +102,7 @@ class SubOption():
         return self.checkBoxVal.get()
 rowIncrement = 0   
 OptionList:list[Option] = []
+
 General = 1
 Driver  = 2
 Blade = 3
@@ -269,6 +269,7 @@ FieldItemOption = Option("Field Item Size", Funny, "Randomizes the size and spin
 
 # Cosmetics
 BladeWeaponCosmeticsOption = Option("Blade Weapon Cosmetics", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])])
+CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()], _hasSpinBox = True) # Sub are created by another class
 
 # Game Modes
 RaceModeOption = Option("Race Mode", GameModeTab, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(), RaceMode.SeedHash])

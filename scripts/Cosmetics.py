@@ -1,6 +1,5 @@
 import json, random, Options
 
-CosmeticsOption = Options.Option("Character Outfits", Options.CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()], _hasSpinBox = True) # Sub are created by another class
 
 
 # Lists of cosmetics to choose from
