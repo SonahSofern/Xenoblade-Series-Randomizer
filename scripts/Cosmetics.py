@@ -1,6 +1,10 @@
 import json, random, Options
 
 
+CosmeticsOption = None
+
+
+
 
 # Lists of cosmetics to choose from
 ValidDriverCosmetics = []
@@ -36,11 +40,14 @@ class Cosmetic:
         self.characterID = characterID
         self.characterName = characterName
         self.cosmeticName = cosmeticName
-        if type == Driver:
+        self.type = type
+        CosmeticsList.append(self)
+    def CreateSubOptions(self):
+        if self.type == Driver:
             Options.SubOption(self.cosmeticName, CosmeticsOption,  [lambda: ValidDriverCosmetics.append(self)])
-        elif type == Blade:
+        elif self.type == Blade:
             Options.SubOption(self.cosmeticName, CosmeticsOption,  [lambda: ValidBladeCosmetics.append(self)])
-        elif type == ArtBlade:
+        elif self.type == ArtBlade:
             Options.SubOption(self.cosmeticName, CosmeticsOption,  [lambda: ValidArtificialBladeCosmetics.append(self)])
 
 # Blades

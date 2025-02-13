@@ -122,7 +122,7 @@ MainWindow.add(TabFunnyOuter, text='Funny')
 MainWindow.add(TabMiscOuter, text ='Misc.') 
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
-for opt in Options.OptionList:
+for opt in Options.OptionList: # Cant reference directly because of circular imports
     if opt.tab == Options.General:
         opt.DisplayOption(TabGeneral)
     elif opt.tab == Options.Driver:

@@ -5,8 +5,11 @@ from tkinter import *
 import _Accessories, _DriverArts, SkillTrees, BladeRandomization, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments
 import TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UniqueMonsterHunt, Cosmetics
 
+First = 0
+Last = 100
+
 class Option():
-    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 0, _hasSpinBox = False):
+    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50, _hasSpinBox = False):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
@@ -208,7 +211,7 @@ EnemiesOption_UniqueMonsters = SubOption("Unique Monsters", EnemiesOption)
 EnemiesOption_Superbosses = SubOption("Superbosses", EnemiesOption)
 EnemiesOption_NormalEnemies = SubOption("Normal Enemies", EnemiesOption)
 EnemiesOption_MixedTypes = SubOption("Mix Enemies Between Types", EnemiesOption)
-EnemiesOption_BalancedLevels = SubOption("Unbalanced Levels", EnemiesOption)
+EnemiesOption_BalancedLevels = SubOption("Unbalanced Levels", EnemiesOption, _defState = False)
 # EnemiesOption_Bosses = SubOption("Bosses", EnemiesOption) removed cause i dont want these options but it broke last time i tried to remove
 # EnemiesOption_Bosses = SubOption("Bosses", EnemiesOption)
 EnemyEnhancementsOption = Option("Enemy Enhancements", Enemies, "Gives enemies a random enhancement; displayed by their name", [lambda: _EnemyEnhancements.EnemyEnhances()], _hasSpinBox = True)
@@ -261,7 +264,7 @@ FasterLevelsOption_8 = SubOption("8x", FasterLevelsOption, [lambda: Helper.Mathm
 FasterLevelsOption_16 = SubOption("16x", FasterLevelsOption, [lambda: Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 16'])])
 
 # Funny
-ProjTreasureChestOption = Option("Projectile Treasure Chests", Funny, [lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [15])])
+ProjTreasureChestOption = Option("Projectile Treasure Chests", Funny, "Launches your items from chests",[lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [15])])
 BladeSizeOption = Option("Blade Size", Funny, "Randomizes the size of Blades", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Scale", "WpnScale"], [], BladeScales)], _hasSpinBox = True)
 NPCSizeOption = Option("NPC Size", Funny, "Randomizes the size of NPCs", [lambda: JSONParser.ChangeJSONFile(["common/RSC_NpcList.json"], ["Scale"],[], NPCScales)], _hasSpinBox = True)
 EnemySizeOption = Option("Enemy Size", Funny, "Randomizes the size of enemies", [lambda: JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"], ["Scale"], [], EnemyScales)], _hasSpinBox = True)
@@ -269,7 +272,9 @@ FieldItemOption = Option("Field Item Size", Funny, "Randomizes the size and spin
 
 # Cosmetics
 BladeWeaponCosmeticsOption = Option("Blade Weapon Cosmetics", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])])
-CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()], _hasSpinBox = True) # Sub are created by another class
+Cosmetics.CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()], _hasSpinBox = True) # Sub are created by another class
+for opt in Cosmetics.CosmeticsList: # To gen these since listing them here would be annoying
+    opt.CreateSubOptions()
 
 # Game Modes
 RaceModeOption = Option("Race Mode", GameModeTab, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(), RaceMode.SeedHash])
