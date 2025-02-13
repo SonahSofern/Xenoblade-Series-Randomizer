@@ -4,7 +4,15 @@ from tkinter import font, ttk
 from IDs import CanvasesForStyling, RootsForStyling
 
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
-# Dont like the way im saving and loading data its convoluted
+import SavedOptions
+
+defFontVar = StringVar(value="Arial")
+defFontSizeVar = IntVar(value=13)
+defGUIThemeVar = StringVar(value="Dark Mode")
+
+fontType = SavedOptions.SavedEntry("Font", defFontVar)
+fontSizeSave = SavedOptions.SavedEntry("Font Size", defFontSizeVar)
+GUITheme = SavedOptions.SavedEntry("Theme", defGUIThemeVar)
 
 GUIWindow = None
 
@@ -32,8 +40,9 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
         defaultFont.config(family=allFonts[iter])
 
     def SaveUIChanges(event = None):
-        import SavedOptions
-        SavedOptions.saveData([defaultFont.cget("family"), defaultFont.cget("size"), darkMode.cget("text")], "GUISavedOptions.txt")
+        fontType.checkBoxVal.set(defaultFont.cget("family"))
+        fontSizeSave.checkBoxVal.set(defaultFont.cget("size"))
+        SavedOptions.saveData([fontType,fontSizeSave,GUITheme], "GUISavedOptions.txt")
 
     def IncreaseFontSize(event = None):
         newSize = defaultFont.cget("size") + 1

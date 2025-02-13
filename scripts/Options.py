@@ -5,6 +5,7 @@ from tkinter import *
 import _Accessories, _DriverArts, SkillTrees, BladeRandomization, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments
 import TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UniqueMonsterHunt, Cosmetics
 
+# Prio
 First = 0
 Last = 100
 
@@ -37,7 +38,7 @@ class Option():
         # Variables
         global rowIncrement
         self.spinBoxVal = IntVar(value=100)
-        var = BooleanVar()
+        self.checkBoxVal = BooleanVar()
         self.spinBoxObj = ttk.Label()
         self.spinBoxObj = ttk.Spinbox()
 
@@ -46,8 +47,7 @@ class Option():
         optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
         
         # Major Option Checkbox
-        self.checkBox = ttk.Checkbutton(optionPanel, variable= var, text=self.name, width=40, style="midColor.TCheckbutton", command=lambda: self.StateUpdate())
-        self.checkBoxVal = var
+        self.checkBox = ttk.Checkbutton(optionPanel, variable= self.checkBoxVal, text=self.name, width=40, style="midColor.TCheckbutton", command=lambda: self.StateUpdate())
         self.checkBox.grid(row=rowIncrement, column=0, sticky="w")
         
         # Description Label

@@ -1,5 +1,5 @@
 saveFolderName = "SaveData"
-import os, json
+import os, json, Options, traceback
 
 def saveData(DataList, Filename):
     with open(f"{saveFolderName}/{Filename}", 'w') as file:
@@ -18,11 +18,17 @@ def loadData(DataList, Filename):
         with open(f"{saveFolderName}/{Filename}", 'r') as file:
             data = json.load(file)
             for option in DataList:
-                if data.get(option.name) == False:
-                    continue
                 option.checkBoxVal.set(data[option.name])
                 for sub in option.subOptions:
                     sub.checkBoxVal.set(data[f"{option.name}->{sub.name}"])
+                option.StateUpdate()
+    except Exception as error:
+                print(f"{traceback.format_exc()}") # shows the full error
 
-    except:
-        print("Couldn't Load Saved Options")
+class SavedEntry:
+    def __init__(self, _name, _val):
+        self.name =_name
+        self.checkBoxVal = _val # Polymorphism with the Option Class
+        self.subOptions = []
+    def StateUpdate(self): # Used so loadData doesnt care
+        pass

@@ -27,14 +27,11 @@ if getattr(sys, 'frozen', False):  # If the app is running as a bundled executab
 else:
     isOnefile = False
     
-defFontVar = tk.StringVar(value="Arial")
-defFontSizeVar = tk.IntVar(value=13)
-defGUIThemeVar = tk.StringVar(value="Dark Mode")
-# loadData([defFontVar, defFontSizeVar, defGUIThemeVar], "GUISavedOptions.txt")
+SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt")
 
 
 RootsForStyling.append(root)
-defaultFont = Font(family=defFontVar.get(), size=defFontSizeVar.get())
+defaultFont = Font(family=GUISettings.defFontVar.get(), size=GUISettings.defFontSizeVar.get())
 
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
@@ -268,21 +265,16 @@ randoSeedEntry.pack(side='left', padx=2)
 
 permalinkVar = StringVar()
 
-class SavedEntry:
-    def __init__(self, _name, _val):
-        self.name =_name
-        self.checkBoxVal = _val # Polymorphism with the Option Class
-        self.subOptions = []
+
         
-fileEnt = SavedEntry("Input Bdats",fileEntryVar)
-fileOut = SavedEntry("Output Bdats", outputDirVar)
-permLink = SavedEntry("Permalink", permalinkVar)
-seedVar = SavedEntry("Seed", seedEntryVar)
+fileEnt = SavedOptions.SavedEntry("Input Bdats",fileEntryVar)
+fileOut = SavedOptions.SavedEntry("Output Bdats", outputDirVar)
+permLink = SavedOptions.SavedEntry("Permalink", permalinkVar)
+seedVar = SavedOptions.SavedEntry("Seed", seedEntryVar)
 
 # Save and Load Last Options
 EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
 SavedOptions.loadData(EntriesToSave + Options.OptionList, SavedOptionsFileName)
-Options.UpdateAllStates()
 
 # # Permalink Options/Variables
 # permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame")
@@ -311,11 +303,11 @@ if isOnefile:  # If the app is running as a bundled executable
 else:  # If running as a script (not bundled)
     icon_path = "./_internal/Images/SmallSettingsCog.png"
 Cog = PhotoImage(file=icon_path)
-SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, defGUIThemeVar))
+SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, GUISettings.defGUIThemeVar))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Options.OptionList, SavedOptionsFileName), root.destroy()))
-GUISettings.LoadTheme(defaultFont, defGUIThemeVar.get())
+GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
 
 
 root.mainloop()
