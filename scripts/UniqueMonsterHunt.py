@@ -20,7 +20,11 @@ ProofofPurchaseIDs = Helper.InclRange(25306, 25321)
 
 ValidPouchItems = [x for x in IDs.PouchItems if x not in [40314, 40428]]
 
-# Item ID 25489 is the Doubloon ID!
+#25333->25348 for Casino Vouchers
+#25479->25488 for Bounty Tokens
+#25405->25407 for WP Manuals
+#25349->25351 for SP Manuals
+#25489 for Doubloons (1)
 
 # TO DO
 
@@ -37,6 +41,7 @@ def UMHunt(OptionDictionary):
         ChosenAreaOrder = []
         if IDs.CurrentSliderOdds > 10: #really need to limit the spinbox instead
             SetCount = 10
+        CheckForSuperbosses(SetCount, OptionDictionary)
         ChosenAreaOrder.extend(random.sample(TotalAreaPool, SetCount))
         PartyMemberstoAdd = PartyMemberAddition(SetCount, ChosenAreaOrder)
         AreaUMs, AllAreaMonsters = CustomEnemyRando(ChosenAreaOrder, OptionDictionary)
@@ -48,12 +53,19 @@ def UMHunt(OptionDictionary):
         SpiritCrucibleEntranceRemoval()
         ShopChanges(ChosenAreaOrder, OptionDictionary)
         BalanceChanges(ChosenAreaOrder)
-        if (OptionDictionary["Unique Monster Hunt"]["subOptionObjects"]["Extra Superbosses"]["subOptionTypeVal"].get()) & (SetCount == 10):
+        if ExtraSuperbosses:
             OhBoyHereWeGoAgain()
         Cleanup()
         UMHuntMenuTextChanges()
-        DebugItemsPlace() # currently doesnt matter since I hide all the argentum chests anyways
-        DebugEasyMode()
+        #DebugItemsPlace() # currently doesnt matter since I hide all the argentum chests anyways
+        #DebugEasyMode()
+
+def CheckForSuperbosses(SetCount, OptionDictionary):
+    global ExtraSuperbosses
+    if (OptionDictionary["Unique Monster Hunt"]["subOptionObjects"]["Extra Superbosses"]["subOptionTypeVal"].get()) & (SetCount == 10):
+        ExtraSuperbosses = True
+    else:
+        ExtraSuperbosses = False
 
 def Cleanup():
     with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file:
@@ -61,7 +73,7 @@ def Cleanup():
         for row in data["rows"]:
             if (row["PRTQuestID"] != 0) and (row["$id"] >= 25):
                 row["PRTQuestID"] = 6
-            if row["$id"] == 15: # Talking to Spraine
+            if row["$id"] == 15: # Talking to Spraine, this doesnt work with the Quest Flags turned off
                 row["NextQuestA"] = 234
         file.seek(0)
         file.truncate()
@@ -78,7 +90,9 @@ def Cleanup():
         json.dump(data, file, indent=2, ensure_ascii=False)
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_Dr.json", ["DefAcce", "DefWP", "DefSP"], 0)
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_Dr.json", ["DefLv"], 10)
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_Dr.json", ["DefWPType", "DefSPType", "DefLvType"], 1)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_Dr.json", ["DefWPType", "DefLvType"], 1)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_Dr.json", ["DefSPType"], 2)
+    GimmickAdjustments()
 
 def ShopChanges(ChosenAreaOrder, OptionDictionary): # Moved these out since they were cluttering the main function up. Order probably matters
     UMRewardDropChanges()
@@ -97,6 +111,26 @@ def BalanceChanges(ChosenAreaOrder): # Moved to reduce clutter, doesn't matter o
     PneumaNerfs()
     SpiritCrucibleNerfs(ChosenAreaOrder)
     RaceMode.SecondSkillTreeCostReduc()
+
+def GimmickAdjustments():
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_DoorGimmick.json", ["Condition"], 0)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_JumpGimmick.json", ["Condition"], 0)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_MapGimmick.json", ["Condition"], 0)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_ElevatorGimmick.json", ["OP_Condition"], 0)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_EffectPop.json", ["Condition", "QuestFlagMin", "QuestFlagMax"], 0)
+    with open("./_internal/JsonOutputs/common/FLD_LODList.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in [211, 226]: # door in urayan titan's head that blocks off Vampire Bride Marion, Ether Gust Wall thingy in Uraya
+                row["flag"]["Visible"] = 0
+                row["ScenarioFlagMin1"] = 1001
+                row["ScenarioFlagMax1"] = 10048
+                row["QuestFlag1"] = 0
+                row["QuestFlagMin1"] = 0
+                row["QuestFlagMax1"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def InnShopCosts(): # Removes cost to stay at inn
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_ShopInn.json", ["Price"], 0)
@@ -183,17 +217,14 @@ def OhBoyHereWeGoAgain(): # this is going to take so much effort to add extras, 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def WarpManagement(SetCount, ChosenAreaOrder, PartyMemberstoAdd, EnemySets, OptionDictionary): # Main function was getting a bit too cluttered
-    if (OptionDictionary["Unique Monster Hunt"]["subOptionObjects"]["Extra Superbosses"]["subOptionTypeVal"].get()) & (SetCount == 10):
-        ExtraSuperbosses = True
+    if ExtraSuperbosses:
         EnemyGroupSetup()
-    else:
-        ExtraSuperbosses = False
     EventSetup(SetCount, ChosenAreaOrder, PartyMemberstoAdd)
     EventChangeSetup(SetCount, ChosenAreaOrder)
-    QuestListSetup(SetCount, ChosenAreaOrder, ExtraSuperbosses)
-    QuestTaskSetup(SetCount, ChosenAreaOrder, EnemySets, ExtraSuperbosses)
-    FieldQuestBattleSetup(SetCount, ChosenAreaOrder, EnemySets, ExtraSuperbosses)
-    FieldQuestTaskLogSetup(SetCount, ChosenAreaOrder, EnemySets, ExtraSuperbosses)
+    QuestListSetup(SetCount, ChosenAreaOrder)
+    QuestTaskSetup(SetCount, ChosenAreaOrder, EnemySets)
+    FieldQuestBattleSetup(SetCount, ChosenAreaOrder, EnemySets)
+    FieldQuestTaskLogSetup(SetCount, ChosenAreaOrder, EnemySets)
     AddQuestConditions(SetCount, ChosenAreaOrder)
 
 def EnemyGroupSetup(): # Makes extra group for superbosses:
@@ -205,7 +236,7 @@ def EnemyGroupSetup(): # Makes extra group for superbosses:
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def QuestListSetup(SetCount, ChosenAreaOrder, ExtraSuperbosses): # Adjusting the quest list
+def QuestListSetup(SetCount, ChosenAreaOrder): # Adjusting the quest list
     with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for i in range(0, SetCount):
@@ -302,7 +333,7 @@ def PartyMemberAddition(SetCount, ChosenAreaOrder): # Adds new party members
     RNGAdjustedChosenPartyMemberOrder = FirstPartyMember
     return RNGAdjustedChosenPartyMemberOrder
 
-def QuestTaskSetup(SetCount, ChosenAreaOrder, EnemySets, ExtraSuperbosses): # Adds the new quest tasks
+def QuestTaskSetup(SetCount, ChosenAreaOrder, EnemySets): # Adds the new quest tasks
     StartingQuestTaskRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_QuestBattle.json", "$id") + 1
     StartingQuestLogRow = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/fld_quest.json", "$id") + 1
     with open("./_internal/JsonOutputs/common/FLD_QuestTask.json", 'r+', encoding='utf-8') as file:
@@ -322,7 +353,7 @@ def QuestTaskSetup(SetCount, ChosenAreaOrder, EnemySets, ExtraSuperbosses): # Ad
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def FieldQuestBattleSetup(SetCount, ChosenAreaOrder, EnemySets, ExtraSuperbosses): # Adds new rows in FLD_QuestBattle accordingly
+def FieldQuestBattleSetup(SetCount, ChosenAreaOrder, EnemySets): # Adds new rows in FLD_QuestBattle accordingly
     StartingQuestBattleFlag = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_QuestBattle.json", "CountFlag") + 1
     with open("./_internal/JsonOutputs/common/FLD_QuestBattle.json", 'r+', encoding='utf-8') as file:
         LastRow = 777
@@ -333,13 +364,13 @@ def FieldQuestBattleSetup(SetCount, ChosenAreaOrder, EnemySets, ExtraSuperbosses
                 data["rows"].append({"$id": LastRow, "Refer": 1, "EnemyID": EnemySets[i][j], "EnemyGroupID": 0, "EnemySpeciesID": 0, "EnemyRaceID": 0, "Count": 1, "CountFlag": LastFlag, "DeadAll": 0, "TimeCount": 0, "TimeCountFlag": 0, "ReduceEnemyHP": 0, "ReducePCHP": 0, "TargetOff": 0}) 
                 LastRow = LastRow + 1
                 LastFlag = LastFlag + 1
-        if ChosenSuperbosses:
+        if ExtraSuperbosses:
             data["rows"].append({"$id": LastRow, "Refer": 2, "EnemyID": 0, "EnemyGroupID": Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_EnemyGroup.json", "$id") + 1, "EnemySpeciesID": 0, "EnemyRaceID": 0, "Count": 4, "CountFlag": StartingQuestBattleFlag, "DeadAll": 0, "TimeCount": 0, "TimeCountFlag": 0, "ReduceEnemyHP": 0, "ReducePCHP": 0, "TargetOff": 0}) 
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def FieldQuestTaskLogSetup(SetCount, ChosenAreaOrder, EnemySets, ExtraSuperbosses): # Adds the task logs for the field quests
+def FieldQuestTaskLogSetup(SetCount, ChosenAreaOrder, EnemySets): # Adds the task logs for the field quests
     AllEnemySetNames = []
     AllEnemySetNameIDs = []
     with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: # add level scaling here
@@ -351,6 +382,23 @@ def FieldQuestTaskLogSetup(SetCount, ChosenAreaOrder, EnemySets, ExtraSuperbosse
                     if row["$id"] == EnemySets[i][j]:
                         CurrEnemySetNameIDs.append(row["Name"])
                         row["Lv"] = 5 + 12*i # Sets level of enemy equal to 5 min, then for each set after, the level goes up by 11 more
+                        LuckyDrop = random.randint(0, 99)
+                        if LuckyDrop <= 74:
+                            break
+                        elif LuckyDrop >= 99: # 1% chance for Bounty Token, of any level!
+                            row["PreciousID"] = random.choice(Helper.InclRange(25479, 25488))
+                            break
+                        elif LuckyDrop >= 95: # 4% chance for Casino Voucher
+                            row["PreciousID"] = random.choice(Helper.InclRange(25479, 25488))
+                            break
+                        elif LuckyDrop >= 90: # 5% chance for SP Manual
+                            row["PreciousID"] = random.choice([25349, 25350, 25351])
+                            break
+                        elif LuckyDrop >= 85: # 5% chance for WP Manual
+                            row["PreciousID"] = random.choice([25405, 25406, 25407])
+                            break
+                        elif LuckyDrop >= 75: # 10% chance for a doubloon
+                            row["PreciousID"] = 25489
                         break
             AllEnemySetNameIDs.append(CurrEnemySetNameIDs)
         file.seek(0)
@@ -408,6 +456,7 @@ def CustomEnemyRando(ChosenAreaOrder, OptionDictionary): # Custom shuffling of e
                 CurrentAreaUMs = []
                 CurrentAreaMonsters = []
                 enemypopfile = "./_internal/JsonOutputs/common_gmk/" + IDs.ValidEnemyPopFileNames[i]
+                Helper.ColumnAdjust(enemypopfile, ["battlelockname"], 0)
                 with open(enemypopfile, 'r+', encoding='utf-8') as file:
                     data = json.load(file)
                     for row in data["rows"]:
@@ -420,7 +469,8 @@ def CustomEnemyRando(ChosenAreaOrder, OptionDictionary): # Custom shuffling of e
                     NewAreaEnemies = [x for x in NewAreaEnemies if x not in AllUniqueMonsterDefaultIDs + AllSuperBossDefaultIDs] # now remove all ums and superbosses
                     del NewAreaEnemies[-2:] # remove two slots, this accounts for the land of morytha, where there's only 3 unique monsters, and no superbosses. Everywhere else has 4, and we need at least 5 slots to add 4 ums + 1 superboss to each area
                     NewAreaEnemies.extend(Chosen4UMs) # add the 4 UMs back to the pool
-                    NewAreaEnemies.append(ChosenSuperBoss) # add the superboss to the pool
+                    if ExtraSuperbosses:
+                        NewAreaEnemies.append(ChosenSuperBoss) # add the superboss to the pool
                     while len(NewAreaEnemies) < len(OriginalAreaEnemies): # while the new enemy pool is less than the original, we need to add more to make them equal
                         ChosenNormalEnemy = random.choice(AllNormalEnemyDefaultIDs)
                         if ChosenNormalEnemy not in NewAreaEnemies:
@@ -464,16 +514,17 @@ def CustomEnemyRando(ChosenAreaOrder, OptionDictionary): # Custom shuffling of e
         EnemyRandoLogic.SwimmingEnemyFix(OriginalAreaEnemies, NewAreaEnemies)
     EnemyRandoLogic.FishFix()
     EnemyRandoLogic.BigEnemyCollisionFix()
-    AllAreaSuperbosses = list(set(AllAreaSuperbosses))
-    ChosenSuperbossNumbers = random.choices(Helper.InclRange(0, 9), k = 4)
-    global ChosenSuperbosses
-    ChosenSuperbosses = []
-    for i in range(0, 4):
-        ChosenSuperbosses.append(AllAreaSuperbosses[ChosenSuperbossNumbers[i]])
-    global SuperbossMaps
-    SuperbossMaps = []
-    for i in range(0, 4):
-        SuperbossMaps.append(ChosenAreaOrder[ChosenSuperbossNumbers[i]])
+    if ExtraSuperbosses:
+        AllAreaSuperbosses = list(set(AllAreaSuperbosses))
+        ChosenSuperbossNumbers = random.choices(Helper.InclRange(0, 9), k = 4)
+        global ChosenSuperbosses
+        ChosenSuperbosses = []
+        for i in range(0, 4):
+            ChosenSuperbosses.append(AllAreaSuperbosses[ChosenSuperbossNumbers[i]])
+        global SuperbossMaps
+        SuperbossMaps = []
+        for i in range(0, 4):
+            SuperbossMaps.append(ChosenAreaOrder[ChosenSuperbossNumbers[i]])
     UMEnemyAggro(OptionDictionary)
     return AllAreaUMs, AllAreaMonsters
     
@@ -481,21 +532,29 @@ def UMEnemyAggro(OptionDictionary): # custom enemy aggro
     EnemyAggroSliderOdds = OptionDictionary["Enemy Aggro"]["spinBoxVal"].get()
     if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive, except the unique monsters
         with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
-                data = json.load(file)
-                for row in data["rows"]:
-                    if (row["$id"] in IDs.ValidEnemies) & (row["$id"] not in AllUniqueMonsterDefaultIDs + AllSuperBossDefaultIDs):
-                        row["Flag"]["AlwaysAttack"] = 0
-                        row["Flag"]["mBoss"] = 0
-                        row["SearchRange"] = 0
-                        row["SearchRadius"] = 0
-                        row["SearchAngle"] = 0
-                        row["Detects"] = 0
-                        row["BatInterval"] = 50
-                        row["BatArea"] = 50
-                file.seek(0)
-                file.truncate()
-                json.dump(data, file, indent=2, ensure_ascii=False)
-    else: # everything can be aggro or not. ums untouched, since they all aggro by default i believe?
+            data = json.load(file)
+            for row in data["rows"]:
+                if (row["$id"] in IDs.ValidEnemies) & (row["$id"] not in AllUniqueMonsterDefaultIDs + AllSuperBossDefaultIDs):
+                    row["Flag"]["AlwaysAttack"] = 0
+                    row["Flag"]["mBoss"] = 0
+                    row["SearchRange"] = 0
+                    row["SearchRadius"] = 0
+                    row["SearchAngle"] = 0
+                    row["Detects"] = 0
+                    row["BatInterval"] = 50
+                    row["BatArea"] = 50
+                elif (row["$id"] in AllUniqueMonsterDefaultIDs + AllSuperBossDefaultIDs) & (row["$id"] in IDs.ValidEnemies):
+                    row["Flag"]["AlwaysAttack"] = 1
+                    row["Flag"]["mBoss"] = 0
+                    row["Flag"]["Named"] = 1
+                    row["Detects"] = 3
+                    row["SearchRange"] = 10
+                    row["SearchAngle"] = 360
+                    row["SearchRadius"] = 5
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+    else: # everything can be aggro or not. ums untouched, since they all aggro by default i believe? nope
         with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
             for row in data["rows"]:
@@ -509,17 +568,13 @@ def UMEnemyAggro(OptionDictionary): # custom enemy aggro
                     row["BatInterval"] = 50
                     row["BatArea"] = 50
                 elif (row["$id"] in AllUniqueMonsterDefaultIDs + AllSuperBossDefaultIDs) & (row["$id"] in IDs.ValidEnemies):
-                    row["Flag"]["mBoss"] = 0
                     row["Flag"]["AlwaysAttack"] = 1
-                    row["Detects"] = 1
-                    if row["SearchRange"] == 0:
-                        row["SearchRange"] = random.randint(5, 25)
-                    if row["SearchAngle"] == 0:
-                        row["SearchAngle"] = random.randint(45, 135)
-                    if row["SearchRadius"] == 0:
-                        row["SearchRadius"] = random.randint(1, 10)
-                    row["BatInterval"] = 50
-                    row["BatArea"] = 50
+                    row["Flag"]["mBoss"] = 0
+                    row["Flag"]["Named"] = 1
+                    row["Detects"] = 3
+                    row["SearchRange"] = 10
+                    row["SearchAngle"] = 360
+                    row["SearchRadius"] = 5
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
@@ -547,7 +602,7 @@ def CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder): # adj
         json.dump(data, file, indent=2, ensure_ascii=False)
     with open("./_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
-        for i in range(0, 4):
+        for i in range(0, min(len(EnemySets),4)):
             NerfRatio = 0.6 + (i+1)*0.1 # 60%->70%->80%->90%->100% after area 4 ends
             for row in data["rows"]:
                 if row["$id"] in EnemyParamstoNerf[i]:
@@ -559,7 +614,7 @@ def CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder): # adj
     
     EnemyRandoLogic.SummonsLevelAdjustment()
 
-def LandmarkAdjustments(ChosenAreaOrder): # removes xp and sp gains from landmarks, except for the first one, adds more safety landmarks to prevent players from getting softlocked
+def LandmarkAdjustments(ChosenAreaOrder): # removes xp and sp gains from landmarks, except for the first one
     for i in range(0, len(ChosenAreaOrder)):
         landmarkpopfile = "./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_LandmarkPop.json"
         with open(landmarkpopfile, 'r+', encoding='utf-8') as file:
@@ -586,45 +641,6 @@ def LandmarkAdjustments(ChosenAreaOrder): # removes xp and sp gains from landmar
                 row["getEXP"] = 0
                 row["getSP"] = 0
                 row["developZone"] = 0
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common_gmk/ma17a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: # Adds Cliffs of Morytha Landmark
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] == 1701:
-                    row["menuPriority"] = 10
-                if row["$id"] == 1706:
-                    row["menuPriority"] = 20
-                    row["category"] = 0
-                    row["MAPJUMPID"] = 175
-                    break
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common_gmk/ma16a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: # Turning Canyon of Husks into a second Landmark that warps you to Spirit Crucible Entrance
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 1601:
-                row["menuPriority"] = 10
-            if row["$id"] == 1609:
-                row["category"] = 0
-                row["MAPJUMPID"] = 168
-                row["menuPriority"] = 20
-                break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common_gmk/ma20a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: # Turning World Tree Mizar Floor into another landmark
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] == 2001:
-                    row["menuPriority"] = 10
-                if row["$id"] == 2012:
-                    row["category"] = 0
-                    row["MAPJUMPID"] = 187
-                    row["menuPriority"] = 20
-                    break
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
@@ -701,10 +717,11 @@ def NoUnintendedRewards(ChosenAreaOrder): # Removes any cheese you can do by doi
     Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2", "EnemyExp"], ['252']) # It costs 252 xp to level up, regardless of level
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_GravePopList.json", ["en_popID"], 0) # Keeps you from respawning a UM.
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma02a_FLD_TboxPop.json", ["Condition"], 3903) # removes drops from chests in argentum
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma02a_FLD_TboxPop.json", ["QuestID"], 0) # removes talking to NPCs in argentum
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", ["QuestID"], 0) # removes talking to NPCs in argentum
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma21a_FLD_TboxPop.json", ["Condition"], 3903) # removes treasure chests from Elysium
     for area in ChosenAreaOrder:
         Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[area][2] + "_FLD_TboxPop.json", ["Condition"], 3903) # removes drops from chests
+        Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[area][2] + "_FLD_NpcPop.json", ["QuestID"], 0) # removes talking to NPCs in area
 
 def SpiritCrucibleEntranceRemoval(): # Exiting or Entering Spirit Crucible has problems with resetting the quest condition. So we remove that by warping the player back to the original landmark in that area.
     with open("./_internal/JsonOutputs/common_gmk/FLD_MapJump.json", 'r+', encoding='utf-8') as file:
@@ -1161,17 +1178,20 @@ def AuxCoreRewards(): # Makes the Aux Core Bundles
         },
         "Rare": {
             "Damage": [IndoorsDamageUp, OutdoorsDamageUp, DamageUpOnEnemyKill, DoubleHitExtraAutoDamage, ToppleANDLaunchDamageUp, PartyDamageMaxAffinity, PartyCritMaxAffinity, AutoAttackCancelDamageUp, AggroedEnemyDamageUp, Transmigration, OppositeGenderBladeDamageUp],
-            "Defensive": [HunterChem, ShoulderToShoulder, WhenDiesHealAllies, SmallHpPotCreate, Twang, Jamming, PotionEffectUp, EtherCounter, PhysCounter, RechargeOnEvade, FlatHPBoost],
+            "Defensive": [HunterChem, ShoulderToShoulder, WhenDiesHealAllies, SmallHpPotCreate, Twang, Jamming, PotionEffectUp, EtherCounter, PhysCounter, RechargeOnEvade],
             "Playstyle Defining": [CritHeal, PartyGaugeCritFill, GlassCannon, CombatMoveSpeed, DestroyOrbOpposingElement, TargetNearbyOrbsChainAttack, PartyGaugeDriverArtFill]
         },
         "Legendary": {
             "Damage": [KaiserZone, AffinityMaxAttack, VersusBossUniqueEnemyDamageUp, AutoSpeedArtsSpeed, DamageUpOnCancel, DamageAndCritUpMaxAffinity, FlatCritBoost],
             "Defensive": [PartyDamageReducMaxAffinity, PhyAndEthDefenseUp, ReduceEnemyChargeMaxAffinity, GravityPinwheel, RestoreHitDamageToParty, ForeSight, FlatBlockBoost],
             "Playstyle Defining": [RecoverRechargeCrit, DealMoreTakeLessMaxAffinity, HpPotChanceFor2, BladeComboOrbAdder, PotionPickupDamageUp, Vision, DamageUpPerCrit, HealingUpMaxAffinity, TakeDamageHeal, StopThinking, ChainAttackPower, DamagePerEvadeUp]
+        },
+        "Secret":{
+            "All": [UMFlatCritBoost, UMSurpriseAttackUp, UMSpecialRecievesAfterImage, UMAutoSpeedArtsSpeed, UMPhyAndEthDefenseUp, UMOnBlockNullDamage, UMFlatBlockBoost]
         }
     }
 
-    Common, Rare, Legendary = 0, 1, 2
+    Common, Rare, Legendary, Secret = 0, 1, 2, 2
 
     ChosenAuxCores = {
         Common: {
@@ -1188,6 +1208,9 @@ def AuxCoreRewards(): # Makes the Aux Core Bundles
             "Damage": random.sample(AuxCoreSkillGroups["Legendary"]["Damage"], 4),
             "Defensive": random.sample(AuxCoreSkillGroups["Legendary"]["Defensive"], 4),
             "Playstyle Defining": random.sample(AuxCoreSkillGroups["Legendary"]["Playstyle Defining"], 8)
+        },
+        Secret: {
+            "All": AuxCoreSkillGroups["Secret"]["All"]
         }
     }
 
@@ -1266,12 +1289,15 @@ def AccessoryShopRewards(): # Creates the accessory shop
         },
         "Legendary": {
             "Damage": [KaiserZone, VersusBossUniqueEnemyDamageUp, AutoSpeedArtsSpeed, DamageUpOnCancel, FlatStrengthBoost, FlatEtherBoost],
-            "Defensive": [GravityPinwheel, RestoreHitDamageToParty, ForeSight, FlatAgiBoost, HPBoost],
-            "Playstyle Defining": [RecoverRechargeCrit, HpPotChanceFor2, BladeComboOrbAdder, PotionPickupDamageUp, Vision, DamageUpPerCrit, TakeDamageHeal, DamagePerEvadeUp, PartyHealBladeSwitch]
+            "Defensive": [GravityPinwheel, RestoreHitDamageToParty, ForeSight, FlatAgiBoost, HPBoost, CritHeal],
+            "Playstyle Defining": [RecoverRechargeCrit, HpPotChanceFor2, BladeComboOrbAdder, PotionPickupDamageUp, Vision, DamageUpPerCrit, TakeDamageHeal, DamagePerEvadeUp, PartyHealBladeSwitch, LowHPSpecialUp]
+        },
+        "Secret": {
+            "All": [UMAllWeaponAttackUp, UMSpecialRechargeCancelling, UMHigherLVEnemyDamageUp, UMVision, UMBreakResDown, UMStrengthBoost, UMEtherBoost]
         }
     }
 
-    Common, Rare, Legendary = 0, 1, 2
+    Common, Rare, Legendary, Secret = 0, 1, 2, 2
 
     ChosenAccessories = {
         Common: {
@@ -1288,6 +1314,9 @@ def AccessoryShopRewards(): # Creates the accessory shop
             "Damage": random.sample(AccessorySkillGroups["Legendary"]["Damage"], 4),
             "Defensive": random.sample(AccessorySkillGroups["Legendary"]["Defensive"], 4),
             "Playstyle Defining": random.sample(AccessorySkillGroups["Legendary"]["Playstyle Defining"], 8)
+        },
+        Secret: {
+            "All": AccessorySkillGroups["Secret"]["All"]
         }
     }
 
@@ -1595,7 +1624,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         "RewardIDs": Helper.InclRange(1282, 1291), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
         "RewardItemIDs": [Helper.ExtendListtoLength([], 10, "25489"), TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
         "RewardQtys": [TokenExchangeRewards, TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
-        "RewardNames": ["Doubloon (x2)", "Doubloon (x3)", "Doubloon (x4)", "Doubloon (x5)", "Doubloon (x6)", "Doubloon (x7)", "Doubloon (x8)", "Doubloon (x9)", "Doubloon (x10)", "Doubloon (x11)"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
+        "RewardNames": ["Doubloons + EXP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
         "RewardSP": [250, 375, 500, 625, 750, 875, 1000, 1250, 1500, 1750], #FLD_QuestReward Sp
         "RewardXP": [0, 630, 630, 630, 630, 630, 630, 630, 630, 630], # FLD_QuestReward EXP
         "HideReward": TokenFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
@@ -1856,6 +1885,7 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
                     row["ShopID"] = 0
                     row["flag"]["Talkable"] = 0
                     row["EventID"] = 0
+                    row["QuestFlag"] = 0
             for i in range(0, len(ShopList)): # gives a specific npc the shop we want
                 for row in data["rows"]:
                     if row["$id"] == ShopList[i]["NPCID"]:
@@ -1924,7 +1954,7 @@ def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of i
             "SetItemQtys": [SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
             "RewardIDs": Helper.ExtendListtoLength([RewardTaskStartingID], 5, "inputlist[i-1]+1"), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
             "RewardItemIDs": [Helper.ExtendListtoLength([SecretReceiptIDs[i]], 5, "inputlist[i-1]"), SecretShopRewardListItem1[i], SecretShopRewardListItem2[i], SecretEmptyFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
-            "RewardQtys": [SecretFullFillerList, SecretShopRewardQuantities1[i], SecretShopRewardQuantities2[i], SecretEmptyFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
+            "RewardQtys": [SecretShopCostList[i], SecretShopRewardQuantities1[i], SecretShopRewardQuantities2[i], SecretEmptyFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
             "RewardNames": ["Secret Trade 1", "Secret Trade 2", "Secret Trade 3", "Secret Trade 4", "Secret Trade 5"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
             "RewardSP": RewardSPList, #FLD_QuestReward Sp
             "RewardXP": SecretEmptyFillerList, # FLD_QuestReward EXP
@@ -1949,7 +1979,7 @@ def CreateSecretShopReceipts(): # Makes receipts for secret shops, limiting the 
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in SecretReceiptIDs:
-                row["ValueMax"] = 2
+                row["ValueMax"] = 5
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1968,6 +1998,35 @@ def CreateSecretShopReceipts(): # Makes receipts for secret shops, limiting the 
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+class UMHuntSecretShopEnhancements(Enhancement):
+    def __init__(self, name, Enhancement, Caption, Param1 = [0,0,0,0], Param2 = [0,0,0,0], ReversePar1 = False, DisTag = ""):
+        self.addToList = False 
+        self.name = name
+        self.EnhanceEffect = Enhancement
+        self.Caption = Caption
+        self.Param1 = Param1
+        self.Param2 = Param2
+        self.ReversePar1 = ReversePar1
+        self.DisTag = DisTag
+
+# Accessories
+UMAllWeaponAttackUp = UMHuntSecretShopEnhancements("Master",120, 130, Medium)
+UMSpecialRechargeCancelling = UMHuntSecretShopEnhancements("Special",92, 100, Large)
+UMHigherLVEnemyDamageUp = UMHuntSecretShopEnhancements("Underdog",40,41, Mega)
+UMVision = UMHuntSecretShopEnhancements("Monado",242, 298, Small, ReversePar1=True)
+UMBreakResDown = UMHuntSecretShopEnhancements("Breaker",180, 192, Medium)
+UMStrengthBoost = UMHuntSecretShopEnhancements("Strength", 2,2, Medium)
+UMEtherBoost = UMHuntSecretShopEnhancements("Ether", 3,3, Medium)
+
+# Aux Cores
+UMFlatCritBoost = UMHuntSecretShopEnhancements("Critical",17,17, Medium)
+UMSurpriseAttackUp = UMHuntSecretShopEnhancements("Surprise",36,37, [0, 0, 10000, 20000], DisTag="Surprise!")
+UMSpecialRecievesAfterImage = UMHuntSecretShopEnhancements("Afterimage",213, 335, Mini, DisTag="Afterimage")
+UMAutoSpeedArtsSpeed= UMHuntSecretShopEnhancements("Lightning",240, 296, High, High)
+UMPhyAndEthDefenseUp = UMHuntSecretShopEnhancements("Full Guard",146, 156, [0, 0, 60, 100])
+UMOnBlockNullDamage = UMHuntSecretShopEnhancements("Guardian",59, 59, Medium, DisTag="Null Damage")
+UMFlatBlockBoost = UMHuntSecretShopEnhancements("Block",20,20, Medium)
+
 def SecretShopRewardGeneration(ChosenAreaOrder): # Makes the reward sets for the secret shops
     global SecretShopRewardListItem1
     SecretShopRewardListItem1 = []
@@ -1977,7 +2036,9 @@ def SecretShopRewardGeneration(ChosenAreaOrder): # Makes the reward sets for the
     SecretShopRewardQuantities1 = [] 
     global SecretShopRewardQuantities2
     SecretShopRewardQuantities2 = []
-    
+    global SecretShopCostList
+    SecretShopCostList = []
+
     WeaponRankList = Helper.ExtendListtoLength([], 20, "[]")
     with open("./_internal/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
         data = json.load(file)
@@ -1991,7 +2052,7 @@ def SecretShopRewardGeneration(ChosenAreaOrder): # Makes the reward sets for the
         1: "WP Manual", 
         2: "Pouch Item Set",
         3: "Driver Accessory Set",
-        4: "Doubloons",
+        4: "Bounty Tokens",
         5: "Weapon Chips",
         6: "Pouch/Accessory Expander",
         7: "Aux Cores"
@@ -2004,38 +2065,46 @@ def SecretShopRewardGeneration(ChosenAreaOrder): # Makes the reward sets for the
         SetQuantities1 = [1,1,1,1,1]
         SetQuantities2 = [1,1,1,1,1]
         RewardTypeChoices = random.choices([1, 2, 3, 4, 5, 6, 7], weights = [20, 20, 15, 10, 15, 5, 15], k = 5) # Choose Type of Reward
+        ShopCostReceiptList = [0,0,0,0,0]
         for i in range(0, 5): # For each reward,
             match RewardTypeChoices[i]:
                 case 1: # WP Manual
                     RandomManuals = random.choices([25405, 25406, 25407], weights = [1, 2, 3], k = 2)
                     SetRewards1[i] = RandomManuals[0]
                     SetRewards2[i] = RandomManuals[1]
+                    ShopCostReceiptList[i] = 1
                 case 2: # Pouch Item Set
                     RandomPouchItems = random.choices(ValidPouchItems, k = 2)
                     SetRewards1[i] = RandomPouchItems[0]
                     SetRewards2[i] = RandomPouchItems[1]
+                    ShopCostReceiptList[i] = 1
                 case 3: # Driver Accessory Set
-                    RandomAccessories = random.choices(Helper.InclRange(1, 64), k = 2)
+                    RandomAccessories = random.choices(Helper.InclRange(65, 71), k = 2)
                     SetRewards1[i] = RandomAccessories[0]
                     SetRewards2[i] = RandomAccessories[1]
-                case 4: # Doubloons
-                    SetRewards1[i] = 25489
-                    SetRewards2[i] = 25489
-                    DoubloonQuantities = random.choices([5, 10, 15, 20, 25], weights=[30, 25, 20, 15, 10], k = 2)
-                    SetQuantities1[i] = DoubloonQuantities[0]
-                    SetQuantities2[i] = DoubloonQuantities[1]
+                    ShopCostReceiptList[i] = 5
+                case 4: # Bounty Tokens
+                    RandomBountyToken = random.choice(Helper.InclRange(25479, 25481))
+                    SetRewards1[i] = RandomBountyToken
+                    SetRewards2[i] = 0
+                    SetQuantities2[i] = 0
+                    ShopCostReceiptList[i] = 3
                 case 5: # Weapon Chips
                     RandomWeaponChips = random.choices(WeaponRankList[min((i+1)*2,19)], k = 2)
                     SetRewards1[i] = RandomWeaponChips[0]
                     SetRewards2[i] = RandomWeaponChips[1]
+                    ShopCostReceiptList[i] = 2
                 case 6: # Pouch/Accessory Expander
                     RandomPouchorAccessoryExpander = random.choices([25305, 25450], weights = [66, 34], k = 2)
                     SetRewards1[i] = RandomPouchorAccessoryExpander[0]
                     SetRewards2[i] = RandomPouchorAccessoryExpander[1]
+                    ShopCostReceiptList[i] = 2
                 case _: # Aux Cores
-                    RandomAuxCores = random.choices(Helper.InclRange(17001, 17064), k = 2)
+                    RandomAuxCores = random.choices(Helper.InclRange(17065, 17071), k = 2)
                     SetRewards1[i] = RandomAuxCores[0]
                     SetRewards2[i] = RandomAuxCores[1]
+                    ShopCostReceiptList[i] = 4
+        SecretShopCostList.append(ShopCostReceiptList)
         SecretShopRewardListItem1.append(SetRewards1)
         SecretShopRewardListItem2.append(SetRewards2)
         SecretShopRewardQuantities1.append(SetQuantities1)
@@ -2061,9 +2130,8 @@ def DebugItemsPlace(): #need to place some tokens to play around with them in th
 def DebugEasyMode(): # if this is on, enemies will be lv 1, makes it easier to playtest
     with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: # Adjusted their levels
         data = json.load(file)
-        for i in range(0, len(ChosenSuperbosses)):
-            for row in data["rows"]:
-                row["Lv"] = 1
+        for row in data["rows"]:
+            row["Lv"] = 1
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
