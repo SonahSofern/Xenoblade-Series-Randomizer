@@ -3,7 +3,8 @@ import JSONParser, Helper
 from IDs import *
 from tkinter import *
 import _Accessories, _DriverArts, SkillTrees, BladeRandomization, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments
-import TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, Cosmetics, RaceMode, UniqueMonsterHunt
+import TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UniqueMonsterHunt
+
 
 class Option():
     def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 0, _hasSpinBox = False):
@@ -267,7 +268,6 @@ EnemySizeOption = Option("Enemy Size", Funny, "Randomizes the size of enemies", 
 FieldItemOption = Option("Field Item Size", Funny, "Randomizes the size and spin rate of items from chests and collection points", [lambda: BigItems.BigItemsRando()])
 
 # Cosmetics
-CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()], _hasSpinBox = True) # Sub are created by another class
 BladeWeaponCosmeticsOption = Option("Blade Weapon Cosmetics", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])])
 
 # Game Modes

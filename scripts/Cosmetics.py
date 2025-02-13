@@ -1,5 +1,8 @@
 import json, random, Options
 
+CosmeticsOption = Options.Option("Character Outfits", Options.CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()], _hasSpinBox = True) # Sub are created by another class
+
+
 # Lists of cosmetics to choose from
 ValidDriverCosmetics = []
 ValidBladeCosmetics = [] 
@@ -35,11 +38,11 @@ class Cosmetic:
         self.characterName = characterName
         self.cosmeticName = cosmeticName
         if type == Driver:
-            Options.SubOption(self.cosmeticName, Options.CosmeticsOption,  [lambda: ValidDriverCosmetics.append(self)])
+            Options.SubOption(self.cosmeticName, CosmeticsOption,  [lambda: ValidDriverCosmetics.append(self)])
         elif type == Blade:
-            Options.SubOption(self.cosmeticName, Options.CosmeticsOption,  [lambda: ValidBladeCosmetics.append(self)])
+            Options.SubOption(self.cosmeticName, CosmeticsOption,  [lambda: ValidBladeCosmetics.append(self)])
         elif type == ArtBlade:
-            Options.SubOption(self.cosmeticName, Options.CosmeticsOption,  [lambda: ValidArtificialBladeCosmetics.append(self)])
+            Options.SubOption(self.cosmeticName, CosmeticsOption,  [lambda: ValidArtificialBladeCosmetics.append(self)])
 
 # Blades
 JadeOrchidBrighid = Cosmetic("bl/bl121001", 1009, Brighid, "Jade Orchid Brighid", Blade)
