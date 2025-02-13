@@ -8,7 +8,7 @@ def saveData(DataList, Filename):
             sav.update({saveData.name: saveData.checkBoxVal.get()})
             for sub in saveData.subOptions:
                 sav.update({f"{saveData.name}->{sub.name}": sub.checkBoxVal.get()})
-        json.dump(sav, file, indent=4)
+        json.dump(sav, file, indent=4, ensure_ascii=True)
 
 
             
