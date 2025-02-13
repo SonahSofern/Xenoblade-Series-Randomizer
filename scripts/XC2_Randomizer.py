@@ -3,7 +3,7 @@ from tkinter import *
 import tkinter as tk
 root = Tk()
 
-import random, subprocess, shutil, os, threading, traceback, time, sys
+import random, subprocess, shutil, os, threading, traceback, time, sys, PermalinkManagement
 import SavedOptions, SeedNames, JSONParser,  IDs,Helper
 from Enhancements import *
 import GUISettings
@@ -119,26 +119,21 @@ MainWindow.add(TabFunnyOuter, text='Funny')
 MainWindow.add(TabMiscOuter, text ='Misc.') 
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
+Tabs = {
+    1: TabGeneral,
+    2: TabDrivers,
+    3: TabBlades,
+    4: TabEnemies,
+    5: TabMisc,
+    6: TabQOL,
+    7: TabFunny,
+    8: TabCosmetics,
+    9: TabGameMode
+}
+
 Options.OptionList.sort(key= lambda x: x.name) # Sorts alphabetically
 for opt in Options.OptionList: # Cant reference directly because of circular imports :/
-    if opt.tab == Options.General:
-        opt.DisplayOption(TabGeneral)
-    elif opt.tab == Options.Driver:
-        opt.DisplayOption(TabDrivers)
-    elif opt.tab == Options.Blade:
-        opt.DisplayOption(TabBlades)
-    elif opt.tab == Options.Enemies:
-        opt.DisplayOption(TabEnemies)
-    elif opt.tab == Options.Misce:
-        opt.DisplayOption(TabMisc)
-    elif opt.tab == Options.QOL:
-        opt.DisplayOption(TabQOL)
-    elif opt.tab == Options.Funny:
-        opt.DisplayOption(TabFunny)
-    elif opt.tab == Options.CosmeticsTab:
-        opt.DisplayOption(TabCosmetics)
-    elif opt.tab == Options.GameModeTab:
-        opt.DisplayOption(TabGameMode)
+    opt.DisplayOption(Tabs[opt.tab])
 
 def ShowTitleScreenText():
     JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], [f"Randomizer v{Version}"]) # Change Title Version to Randomizer vX.x.x
@@ -275,18 +270,19 @@ seedVar = SavedOptions.SavedEntry("Seed", seedEntryVar)
 # Save and Load Last Options
 EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
 SavedOptions.loadData(EntriesToSave + Options.OptionList, SavedOptionsFileName)
+EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Options.OptionList)) + list((x.spinBoxVal for x in Options.OptionList)) + list((sub.checkBoxVal for x in Options.OptionList for sub in x.subOptions))
 
-# # Permalink Options/Variables
-# permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame")
-# permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth, textvariable=permalinkVar)
-# CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
-# permalinkVar.set(CompressedPermalink)
-# permalinkButton = ttk.Button(permalinkFrame, text="Settings")
-# permalinkButton.state(["disabled"])
-# permalinkFrame.pack(padx=10, pady=2, anchor="w")
-# permalinkButton.pack(side="left", padx=2)
-# permalinkEntry.pack(side='left', padx=2)
-# PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:InteractableStateSet())
+# Permalink Options/Variables
+permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame")
+permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth, textvariable=permalinkVar)
+CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
+permalinkVar.set(CompressedPermalink)
+permalinkButton = ttk.Button(permalinkFrame, text="Settings")
+permalinkButton.state(["disabled"])
+permalinkFrame.pack(padx=10, pady=2, anchor="w")
+permalinkButton.pack(side="left", padx=2)
+permalinkEntry.pack(side='left', padx=2)
+PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:Options.UpdateAllStates())
 
 
 # Bottom Left Progress Display Text
