@@ -59,6 +59,7 @@ def UMHunt(OptionDictionary):
         UMHuntMenuTextChanges()
         #DebugItemsPlace() # currently doesnt matter since I hide all the argentum chests anyways
         DebugEasyMode()
+        #DebugSpawnCountPrint(EnemySets, ChosenAreaOrder)
 
 def CheckForSuperbosses(SetCount, OptionDictionary):
     global ExtraSuperbosses
@@ -71,8 +72,9 @@ def Cleanup():
     with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
-            if (row["PRTQuestID"] != 0) and (row["$id"] >= 25):
+            if row["$id"] >= 25:
                 row["PRTQuestID"] = 6
+                row["FlagPRT"] = 0
             if row["$id"] == 15: # Talking to Spraine, this doesnt work with the Quest Flags turned off
                 row["NextQuestA"] = 234
         file.seek(0)
@@ -297,6 +299,7 @@ def EventSetup(SetCount, ChosenAreaOrder, PartyMemberstoAdd): # Adjusting the in
                     row["linkID"] = 0
                     row["nextID"] = 0
                     row["nextIDtheater"] = 0
+
                     if PartyMemberstoAdd[i] != 0:
                         row["scriptName"] = PartyMembersAddScripts[PartyMemberstoAdd[i]][0]
                         row["scriptStartId"] = PartyMembersAddScripts[PartyMemberstoAdd[i]][1]
@@ -486,7 +489,7 @@ def CustomEnemyRando(ChosenAreaOrder, OptionDictionary): # Custom shuffling of e
                             else:
                                 for m in range(0, len(NewAreaEnemies)): # enemy
                                     if row[f"ene{j}ID"] == OriginalAreaEnemies[m]: # if it matches the original enemy number
-                                        row[f"ene{j}ID"] = NewAreaEnemies[m] # give it the new enemy
+                                        row[f"ene{j}ID"] = NewAreaEnemies[m] # give it the new 
                                         break
                     for row in data["rows"]:
                         for j in range(1, 5):
@@ -495,12 +498,12 @@ def CustomEnemyRando(ChosenAreaOrder, OptionDictionary): # Custom shuffling of e
                             else:
                                 CurrentAreaMonsters.append(row[f"ene{j}ID"])
                                 if row[f"ene{j}ID"] in AllUniqueMonsterDefaultIDs: # if it's a um we want it to always show up
-                                    row["Condition"] = row["ScenarioFlagMax"] = row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["muteki_QuestFlag"] = row["muteki_QuestFlagMin"] = row["muteki_QuestFlagMax"] = row["muteki_Condition"] = row["ene1Lv"] = 0
+                                    row["Condition"] = row["ScenarioFlagMax"] = row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["muteki_QuestFlag"] = row["muteki_QuestFlagMin"] = row["muteki_QuestFlagMax"] = row["muteki_Condition"] = row[f"ene{j}Lv"] = 0
                                     row["POP_TIME"] = 256
                                     row["popWeather"] = 255
                                     CurrentAreaUMs.append(row[f"ene{j}ID"]) # now add it to the list of ums for this area, used in many places, so we need to keep track of this
                                 elif row[f"ene{j}ID"] in AllSuperBossDefaultIDs: # if it's a superboss, do the same as for ums, except add it to its' own list
-                                    row["Condition"] = row["ScenarioFlagMax"] = row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["muteki_QuestFlag"] = row["muteki_QuestFlagMin"] = row["muteki_QuestFlagMax"] = row["muteki_Condition"] = row["ene1Lv"] = 0
+                                    row["Condition"] = row["ScenarioFlagMax"] = row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["muteki_QuestFlag"] = row["muteki_QuestFlagMin"] = row["muteki_QuestFlagMax"] = row["muteki_Condition"] = row[f"ene{j}Lv"] = 0
                                     row["POP_TIME"] = 256
                                     row["popWeather"] = 255
                                     AllAreaSuperbosses.append(row[f"ene{j}ID"])
@@ -700,6 +703,7 @@ def AddQuestConditions(SetCount, ChosenAreaOrder): # Adding conditions for each 
             if row["$id"] <= len(ChosenAreaOrder):
                 row["mapId"] = ContinentInfo[ChosenAreaOrder[row["$id"] - 1]][3] # puts the mapIDs in order, so we can assign conditions in order
                 row["cond1"] = 3903 + row["$id"]
+                row["enter"] = 0
             elif row["$id"] == len(ChosenAreaOrder) + 1:
                 row["mapId"] = 3
                 row["cond1"] = 3904
@@ -1933,13 +1937,14 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
 def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of interest
     CreateSecretShopReceipts()
     SecretShopRewardGeneration(ChosenAreaOrder)
-    UsableShopEventIDs = [40338, 40441, 40339, 40442, 40340, 40443, 40444, 40445, 40446, 41042] # NpcPop EventID
-    UsableShopIDs = Helper.InclRange(65, 74) # MNU_ShopList $id, NpcPop ShopID
-    UsableShopNames = [66, 51, 72, 52, 68, 53, 54, 55, 56, 57] # MNU_ShopList Name
+    UsableShopEventIDs = [40338, 40441, 40339, 40442, 40340, 40443, 40444, 40445, 40446, 40450] # NpcPop EventID
+    UsableShopIDs = Helper.InclRange(65, 73) + [81] # MNU_ShopList $id, NpcPop ShopID
+    UsableShopNames = [66, 51, 72, 52, 68, 53, 54, 55, 56, 61] # MNU_ShopList Name
     SecretEmptyFillerList = Helper.ExtendListtoLength([], 5, "0")
     SecretFullFillerList = Helper.ExtendListtoLength([], 5, "1")
     InputTaskStartingID = Helper.GetMaxValue("./_internal/JsonOutputs/common/MNU_ShopChangeTask.json", "$id") + 1
     RewardTaskStartingID = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_QuestReward.json", "$id") + 1
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma07a_FLD_NpcPop.json", ["FSID1", "FSID2", "FSID3"], 0)
     ShopList = []
     for i in range(0, len(ChosenAreaOrder)):
         MapValidNPCIDs = Helper.FindSubOptionValuesList("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", "flag", "Talkable", 1, "$id")
@@ -1949,7 +1954,7 @@ def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of i
             for row in data["rows"]:
                 if row["$id"] == ChosenSecretNPCID:
                     OrigNPCID = row["NpcID"]
-                    row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["TimeRange"] = row["Condition"] = row["Mot"] = row["QuestID"] = 0
+                    row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["TimeRange"] = row["Condition"] = row["Mot"] = row["QuestID"] = row["FSID1"] = row["FSID2"] = row["FSID3"] = 0
                     row["ScenarioFlagMax"] = 10048
                     row["EventID"] = UsableShopEventIDs[i]
                     row["ShopID"] = UsableShopIDs[i]
@@ -2165,3 +2170,26 @@ def DebugEasyMode(): # if this is on, enemies will be lv 1, makes it easier to p
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def DebugSpawnCountPrint(EnemySets, ChosenAreaOrder): # Prints how many times an enemy spawns, think it's causing a crash
+    debugfilename = "D:/XC2 Rando Debug Logs/EnemyCounting.txt"
+    debugfile = open(debugfilename, "w", encoding= "utf-8")
+    for k in range(0, len(ChosenAreaOrder)):
+        for i in range(0, len(IDs.ValidEnemyPopFileNames)):
+            if ContinentInfo[ChosenAreaOrder[k]][2] in IDs.ValidEnemyPopFileNames[i]:
+                enemypopfile = "./_internal/JsonOutputs/common_gmk/" + IDs.ValidEnemyPopFileNames[i]
+                AreaUMCount = [0,0,0,0]
+                with open(enemypopfile, 'r+', encoding='utf-8') as file:
+                    data = json.load(file)
+                    for row in data["rows"]:
+                        for j in range(0, len(EnemySets[k])):
+                            for l in range(1, 5):
+                                if row[f"ene{l}ID"] == EnemySets[k][j]:
+                                    AreaUMCount[j] += row[f"ene{l}num"]
+                    file.seek(0)
+                    file.truncate()
+                    json.dump(data, file, indent=2, ensure_ascii=False)
+                debugfile.write(f"{ChosenAreaOrder[k]}\n\n")
+                for j in range(0, 4):
+                    debugfile.write(f"ID:{EnemySets[k][j]} Count:{AreaUMCount[j]}\n")  
+    debugfile.close()
