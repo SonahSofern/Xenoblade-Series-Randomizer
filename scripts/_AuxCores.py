@@ -7,34 +7,55 @@ def RandomizeAuxCoreEnhancements():
 
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
 
-    with open("./_internal/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as file:
-        with open("./_internal/JsonOutputs/common_ms/itm_orb.json", 'r+', encoding='utf-8') as auxNames:
-            with open("./_internal/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as poppiAuxEnhancements:
+    with open("./_internal/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as AuxCoreFile:
+        with open("./_internal/JsonOutputs/common_ms/itm_orb.json", 'r+', encoding='utf-8') as auxNamesFile:
+            with open("./_internal/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as poppiAuxEnhancementsFile:
+                poppiAuxData = json.load(poppiAuxEnhancementsFile)
+                enhanceData = json.load(AuxCoreFile)
+                auxNameData = json.load(auxNamesFile)
                 
+
                 
-                
-                poppiAux = json.load(poppiAuxEnhancements)
-                enhanceFile = json.load(file)
-                auxNameFile = json.load(auxNames)
-                for Aux in enhanceFile["rows"]:
-                    skillNameID = Aux["Name"]
-                    enhancement = random.choice(ValidSkills)
+                for aux in poppiAuxData["rows"]: # Must do poppis first because of overlap name ids then I update them later down below
+                    enhancement:Enhancement = random.choice(ValidSkills)
                     enhancement.RollEnhancement()
-                    # ValidSkills.remove(enhancement) # Need full pool to remove 
-                    for skillName in auxNameFile["rows"]:  
+                    skillNameID = aux["Name"]
+                    aux["Enhance"] = enhancement.id
+                    
+                    for skillName in auxNameData["rows"]:  
                         if skillName["$id"] == skillNameID:    
                             skillName["name"] = f"{enhancement.name} Core"
                             break
+                    
+                
+                for Aux in enhanceData["rows"]:
+                    skillNameID = Aux["Name"]
+                    enhancement:Enhancement = random.choice(ValidSkills)
+                    enhancement.RollEnhancement()
+                    # ValidSkills.remove(enhancement) # Need full pool to remove 
+
+
+                
+                    for skillName in auxNameData["rows"]:  
+                        if skillName["$id"] == skillNameID:    
+                            skillName["name"] = f"{enhancement.name} Core"
+                            break
+                        
+                    for poppiAux in poppiAuxData["rows"]: # Since poppi uses the same names and I cant add more, poppis must match the effects of the rolled name
+                        if poppiAux["Name"] == skillNameID:
+                            poppiAux["Enhance"] = enhancement.id
+                            break
+                                            
                     Aux["Enhance"] = enhancement.id
                     Aux["Rarity"] = enhancement.Rarity
                     
                     
-                poppiAuxEnhancements.seek(0)
-                poppiAuxEnhancements.truncate()
-                json.dump(poppiAux, poppiAuxEnhancements, indent=2, ensure_ascii=False)
-            auxNames.seek(0)
-            auxNames.truncate()
-            json.dump(auxNameFile, auxNames, indent=2, ensure_ascii=False)
-        file.seek(0)
-        file.truncate()
-        json.dump(enhanceFile, file, indent=2, ensure_ascii=False)
+                poppiAuxEnhancementsFile.seek(0)
+                poppiAuxEnhancementsFile.truncate()
+                json.dump(poppiAuxData, poppiAuxEnhancementsFile, indent=2, ensure_ascii=False)
+            auxNamesFile.seek(0)
+            auxNamesFile.truncate()
+            json.dump(auxNameData, auxNamesFile, indent=2, ensure_ascii=False)
+        AuxCoreFile.seek(0)
+        AuxCoreFile.truncate()
+        json.dump(enhanceData, AuxCoreFile, indent=2, ensure_ascii=False)
