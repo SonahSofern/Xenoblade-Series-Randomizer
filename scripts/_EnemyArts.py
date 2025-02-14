@@ -116,7 +116,7 @@ def FindValidChanges(art, isReactions, isDebuffs, isBuffs, isEnhancements, isAOE
         ValidChanges.append(lambda: Debuff(art))           # Debuff
     if isBuffs and art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff (Current AOE is placed only on these things so gotta fix that)
         ValidChanges.append(lambda: Buff(art))
-    if isEnhancements and art.get("Enhance") != None and art["Enhance"] == 0 and art["Target"] == 0: # Add enhancements only to arts without them and that target enemies
+    if isEnhancements and art.get("Enhance") != None and art["Enhance"] == 0 and art["Target"] == 0 and art["ArtsType"] != 4: # Add enhancements only to arts without them and that target enemies
         ValidChanges.append(lambda: Enhancements(art))
     if isAOE and art["RangeType"] == 0 and art["ArtsType"] in [1,2,3]: # Make sure art is single target and a physical ether or healing move
         ValidChanges.append(lambda: AOE(art))
@@ -171,7 +171,7 @@ def Reaction(art):
         "Orb↓": [46],
         "BlCombo↓": [34,40,45],
         "Element": [17, 35],
-        "Elem Ref": [20],
+        # "Elem Ref": [20], not satifying to deal with
     }
     Flames = {
         "Flames": [38], # Needs circle id 1-6

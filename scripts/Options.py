@@ -5,6 +5,7 @@ from tkinter import *
 import _Accessories, _DriverArts, SkillTrees, BladeRandomization, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments
 import TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UniqueMonsterHunt, Cosmetics
 
+
 # Prio
 First = 0
 Last = 100
@@ -216,7 +217,7 @@ EnemiesOption_UniqueMonsters = SubOption("Unique Monsters", EnemiesOption)
 EnemiesOption_Superbosses = SubOption("Superbosses", EnemiesOption)
 EnemiesOption_NormalEnemies = SubOption("Normal Enemies", EnemiesOption)
 EnemiesOption_MixedTypes = SubOption("Mix Enemies Between Types", EnemiesOption)
-EnemiesOption_BalancedLevels = SubOption("Unbalanced Levels", EnemiesOption, _defState = False)
+EnemiesOption_BalancedLevels = SubOption("Balanced Levels", EnemiesOption, _defState = False)
 # EnemiesOption_Bosses = SubOption("Bosses", EnemiesOption) removed cause i dont want these options but it broke last time i tried to remove
 # EnemiesOption_Bosses = SubOption("Bosses", EnemiesOption)
 EnemyEnhancementsOption = Option("Enemy Enhancements", Enemies, "Gives enemies a random enhancement; displayed by their name", [lambda: _EnemyEnhancements.EnemyEnhances()], _hasSpinBox = True)
@@ -240,7 +241,7 @@ EnemyMovespeedOption = Option("Enemy Movespeed", Enemies, "Randomizes how fast e
 
 # Misc
 MusicOption = Option("Music", Misce, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()])
-MusicOption_MixBattleAndEnv = SubOption("Mix Battle and Environment Themes", MusicOption)
+MusicOption_MixBattleAndEnv = SubOption("Mix Battle and Environment Themes", MusicOption, _defState = False)
 TrustLineOption = Option("Trust Lines", Misce, "Randomizes blade trust lines in battle (colors, power, etc.)", [lambda: TrustBeam.BeamRandomizer()])
 CustomCoreCrystalOption = Option("Custom Core Crystals", Misce, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], _hasSpinBox = True)
 DifficultyOption = Option("Difficulty", Misce, "Forces this difficulty, regardless of what is chosen in the options menu")
@@ -259,9 +260,17 @@ RemoveFieldSkillsOption = Option("Remove Story Field Skills", QOL, "Removes fiel
 RemoveFieldSkillsOption_AllFieldSkills = SubOption("Remove All Field Skills", RemoveFieldSkillsOption)
 EverlastingPouchItemsOption = Option("Everlasting Pouch Items", QOL, "Makes Pouch Items last as long as possible", [lambda: JSONParser.ChangeJSONFile(["common/ITM_FavoriteList.json"],["Time"], Helper.InclRange(0,255), [6099])])
 CondenseGoldOption = Option("Condense Gold Loot", QOL, "Condenses gold in chests so you can see other items", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"),["goldPopMin", "goldPopMax"], Helper.InclRange(0,100000), [1])])
-MutePopupsOption = Option("Mute Popups", QOL, "Stops blade skill and pouch item refill popups", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[89], ["sheet06"], [""])],["Landmarks", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[85], ["sheet04"], [""])]])
+MutePopupsOption = Option("Mute Popups", QOL, "Stops blade skill and pouch item refill popups", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[89], ["sheet06"], [""])])
+MutePopupsOption_Landmarks = SubOption("Landmarks", MutePopupsOption, [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[85], ["sheet04"], [""])])
 EnhancementDisplay = Option("Enhancement Display", QOL, "Shows when enhancements activate in battle", [lambda: Enhancements.SearchAndSetDisplayIDs()])
-EasySkillTreesOption = Option("Easy Blade Skill Trees", QOL, "Makes trust the only condition for levelling up a blade's skill tree", [lambda: SkillTrees.BladeSkillTreeShortening()])
+EasySkillTreesOption = Option("Fast Blade Skill Trees", QOL, "Makes trust the only condition for levelling up a blade's skill tree", [lambda: SkillTrees.BladeSkillTreeShortening()])
+FasterDriverSkillTrees = Option("Fast Driver Skill Trees", QOL, "Decreases SP required for each node")
+FasterDriverSkillTrees_2 = SubOption("2x", FasterDriverSkillTrees, [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 19, addJson=True), ["NeedSp"], ['row[key] // 2'])], _defState = False)
+FasterDriverSkillTrees_4 = SubOption("4x", FasterDriverSkillTrees, [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 19, addJson=True), ["NeedSp"], ['row[key] // 4'])], _defState = False)
+FasterDriverSkillTrees_8 = SubOption("8x", FasterDriverSkillTrees, [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 19, addJson=True), ["NeedSp"], ['row[key] // 8'])], _defState = False)
+FasterDriverSkillTrees_16 = SubOption("16x", FasterDriverSkillTrees, [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 19, addJson=True), ["NeedSp"], ['row[key] // 16'])], _defState = False)
+FasterDriverSkillTrees_32 = SubOption("32x", FasterDriverSkillTrees, [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 19, addJson=True), ["NeedSp"], ['row[key] // 32'])], _defState = False)
+
 FasterLevelsOption = Option("Faster Levels", QOL, "Decreases EXP required for each levelup")
 FasterLevelsOption_2 = SubOption("2x", FasterLevelsOption, [lambda: Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 2'])])
 FasterLevelsOption_4 = SubOption("4x", FasterLevelsOption, [lambda: Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 4'])])

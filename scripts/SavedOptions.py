@@ -1,5 +1,5 @@
 saveFolderName = "SaveData"
-import os, json, Options, traceback
+import os, json, traceback, Options
 
 def saveData(DataList, Filename):
     with open(f"{saveFolderName}/{Filename}", 'w') as file:
@@ -13,17 +13,22 @@ def saveData(DataList, Filename):
 
             
 def loadData(DataList, Filename):
-    try:
-        os.makedirs(saveFolderName, exist_ok=True)
-        with open(f"{saveFolderName}/{Filename}", 'r') as file:
-            data = json.load(file)
-            for option in DataList:
+    os.makedirs(saveFolderName, exist_ok=True)
+    with open(f"{saveFolderName}/{Filename}", 'r') as file:
+        data = json.load(file)
+        for option in DataList:
+            try:
                 option.checkBoxVal.set(data[option.name])
-                for sub in option.subOptions:
+            except:
+                pass
+            for sub in option.subOptions:
+                try:
                     sub.checkBoxVal.set(data[f"{option.name}->{sub.name}"])
-                option.StateUpdate()
-    except Exception as error:
-                print(f"{traceback.format_exc()}") # shows the full error
+                    option.StateUpdate()
+                except:
+                    pass
+    # except Exception as error:
+    #             print(f"{traceback.format_exc()}") # shows the full error
 
 class SavedEntry:
     def __init__(self, _name, _val):

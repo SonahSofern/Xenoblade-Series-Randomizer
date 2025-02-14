@@ -48,7 +48,7 @@ def DriverArtRandomizer():
                     
             if isBuffs:
                 art["ArtsBuff"] = 0 
-                if OddCheck(odds):
+                if OddCheck(odds//2): # These are really strong so im lowering the odds
                     Buffs(art)
                     
             if isDebuffs and isEnemyTarget:

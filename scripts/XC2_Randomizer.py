@@ -2,16 +2,15 @@ from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
 root = Tk()
+import Options
 
 import random, subprocess, shutil, os, threading, traceback, time, sys, PermalinkManagement
 import SavedOptions, SeedNames, JSONParser,  IDs,Helper
 from Enhancements import *
 import GUISettings
-import Options
 from IDs import *
 from UI_Colors import *
 from tkinter.font import Font
-import Options
 
 Version = "UIOVERHAUL"
 CommonBdatInput = ""
@@ -84,6 +83,7 @@ TabQOL = ttk.Frame(TabQOLCanvas)
 TabCosmetics = ttk.Frame(TabCosmeticsCanvas)
 TabGameMode = ttk.Frame(TabGameModeCanvas)
 TabFunny = ttk.Frame(TabFunnyCanvas)
+
 
 def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
