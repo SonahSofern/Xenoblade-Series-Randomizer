@@ -58,7 +58,7 @@ def UMHunt(OptionDictionary):
         Cleanup()
         UMHuntMenuTextChanges()
         #DebugItemsPlace() # currently doesnt matter since I hide all the argentum chests anyways
-        DebugEasyMode()
+        #DebugEasyMode()
         #DebugSpawnCountPrint(EnemySets, ChosenAreaOrder)
 
 def CheckForSuperbosses(SetCount, OptionDictionary):
@@ -585,7 +585,7 @@ def UMEnemyAggro(OptionDictionary): # custom enemy aggro
 
 def CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder): # adjusts aggro + drops of all enemies + levels + stats
     EnemyParamstoNerf = Helper.ExtendListtoLength([], len(EnemySets), "[]") # we want to nerf the early enemies in all their stats, you just don't have much damage or tankiness
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["ExpRev", "GoldRev", "WPRev", "SPRev", "DropTableID", "DropTableID2", "DropTableID3", "PreciousID"], 0)         
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["ExpRev", "GoldRev", "WPRev", "SPRev", "DropTableID", "DropTableID2", "DropTableID3"], 0)         
     with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for i in range(0, len(AllAreaMonsters)):
