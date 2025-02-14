@@ -1,7 +1,4 @@
 import Helper as Helper
-from SavedOptions import loadData
-import tkinter as tk
-import json
 
 ValidReplacements = [] # Global Variable Referenced for JsonParser
 InvalidReplacements = [] # Global Variable Referenced for JsonParser
@@ -62,7 +59,7 @@ BladeModDistribution = [5,5,5,10,10,10,10,10,15,15,15,20,20,20,25,25,25,25,25,30
 BladeAuxCoreSlotDistribution = [0,1,1,1,2,2,2,2,2,3,3]
 BladeWeaponCritDistribution = [0,0,0,0,5,5,5,5,5,5,5,5,5,10,10,10,10,10,10,15,15,15,15,15,15,20,20,20,25,30,35,40,45,50,70,100]
 BladeWeaponGuardDistribution = [0,0,0,0,5,5,5,5,5,5,5,5,5,10,10,10,10,10,10,15,15,15,15,15,15,20,20,20,25,30,35,40,45,50,70,100]
-BladeScales= [1,5,10,20,30,40,50,60,70,80,90,110,120,130,140,160,180,200,400,600,1000,3000,15000]
+BladeScales= [10,20,30,40,50,60,70,80,90,110,120,130,140,160,180,200,400,600,1000]
 NPCScales = [20,30,40,50,60,70,80,90,110,120,130,140,160,180,200,400,600]
 EnemyScales= [10,20,30,40,50,60,70,80,90,110,120,130,140,160,180,200,400,600,1000,3000,8000]
 
