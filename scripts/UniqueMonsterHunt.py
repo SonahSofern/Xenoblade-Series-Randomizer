@@ -452,12 +452,13 @@ def FieldQuestTaskLogSetup(EnemySets): # Adds the task logs for the field quests
                             row["PreciousID"] = 25489
                         break
             AllEnemySetNameIDs.append(CurrEnemySetNameIDs)        
-        for i in range(0, len(ChosenSuperbosses)):
-            for row in data["rows"]:
-                if row["$id"] == ChosenSuperbosses[i]:
-                    row["PreciousID"] = 25488 # You get another level 10 bounty token per um defeated
-                    SuperbossNameIDs.append(row["Name"])
-                    break
+        if ExtraSuperbosses:
+            for i in range(0, len(ChosenSuperbosses)):
+                for row in data["rows"]:
+                    if row["$id"] == ChosenSuperbosses[i]:
+                        row["PreciousID"] = 25488 # You get another level 10 bounty token per um defeated
+                        SuperbossNameIDs.append(row["Name"])
+                        break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
