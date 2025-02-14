@@ -1,16 +1,9 @@
 import copy, random, JSONParser, Helper
 
 # TODO:
-#  - Replace the text "Make Nia a Driver" with "Turn {Blade}} into Nia"
-#  - Replace the text "Make Nia a Blade" with "Turn Nia into {Blade}"
-#  - Replace "Switch to Pyra?" and "Switch to Mythra" menu text
-#     - Only do these if blade Nia was actually replaced with something that isn't Blade Nia
-#  - Replace "Pandoria" on Zeke's Unleash Shining Justice skill
-#  - Probably various other menu texts
-#  - Randomize Poppi Forms
+#  - Replace the images in the Pyra/Mythra selection to the blades which replaced them
 #  - Figure out how to randomize Torna blades properly (Apparently NoBuildWpn in CHR_Bl is not sufficient)
 #  - Blade names should be replaced in all dialogs where possible
-#  - Cosmetics do not work
 #  - Replace driver voice lines when changing blades (Rex will currently shout "Pyra" when switching to Pyra's replacement)
 #  - Replace field skill voice lines (Pyra's replacement currently says "I bring upon the power of fire!" in Pyra's voice)
 
@@ -19,16 +12,14 @@ BladeNames = dict()            # Maps ID to Blade Name. Populated in PopulateBla
 Original2Replacement = dict()  # Maps Unrandomized Blade ID to Randomized Blade ID. Populated in RandomizeBlades()
 Replacement2Original = dict()  # Maps Randomized Blade ID to Unrandomized Blade ID. Populated in RandomizeBlades()
 
-BladesRexCantUse = []
 BladesNiaCantUse = [1001, 1002, 1009, 1010, 1011]
 BladesMoragCantUse = [1001, 1002, 1010, 1011]
 BladesZekeCantUse = [1001, 1002, 1009, 1011]
 
 # Specifically, these are healers which have a healing halo equivalent move. So Twin Rings and Bitballs
-# TODO: How does this work when considering randomized art effects?
 GuaranteedHealer = None
-RexHealerBlades = [1011]
-NiaHealerBlades = [1004, 1021, 1033, 1038, 1041, 1107, 1109, 1111] # + Obrona if we can get NG+ Blades working without the weapon chip quirks
+RexHealerBlades = [] #[1011] Blade Nia, removed for now because I think it's unfair since Pyra leaves the party a few times. Might revisit this or make this its own option in the future.
+NiaHealerBlades = [1004, 1021, 1033, 1038, 1041, 1107, 1109, 1111] # + Obrona and Mikhail if we can get NG+ Blades working without the weapon chip quirks
 PossibleGuaranteedHealerBlades = RexHealerBlades + NiaHealerBlades
 
 PoppiForms = [1005, 1006, 1007]
@@ -45,22 +36,19 @@ def BladeRandomization(OptionsRunDict):
 
     BugFixes_PreRandomization()
     RandomizeBlades(OptionsRunDict)
-    # RandomizePoppiForms(OptionsRunDict) # TODO
+    RandomizePoppiForms(OptionsRunDict)
     BugFixes_PostRandomization()
-
-    # FinalTouches() #TODO
 
 
 def InitialSetup():
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], [], PopulateBlades, replaceAll=True)
     JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], [], MakeAllArtsAccessible, replaceAll=True)
 
-
 def PopulateBlades(blade):
     blade_id = blade['$id']
     OriginalBlades[blade_id] = dict()
     for key, value in blade.items():
-        OriginalBlades[blade_id][key] = blade[key]
+        OriginalBlades[blade_id][key] = copy.deepcopy(blade[key])
 
     Name = ''
     name_id = blade['Name']
@@ -193,17 +181,85 @@ def ApplyBladeRandomization(blade):
                 blade[key] = OriginalBlades[replace_with_id][key]
 
 
-
 def RandomizePoppiForms(OptionsRunDict):
-    print('TODO: RandomizePoppiForms()')
-    # TODO: Randomize Poppi forms so they appear in a random order (such as QTpi in Ch2, then Alpha in Ch4, then QT after doing QTpi's side quest)
-    # TODO: How do I make it so the poppiswaps are in the right spot?
+    blades_left_to_randomize = PoppiForms.copy()
+    randomized_order = blades_left_to_randomize.copy()
+    random.shuffle(randomized_order)
+
+    # Determine the randomization prior to randomizing.
+    # This way we can populate Original2Replacement and Replacement2Original,
+    # which will be needed later on for various reasons
+    while blades_left_to_randomize:
+        next_blade = blades_left_to_randomize[0]
+        next_replacement = randomized_order[0]
+        Original2Replacement[next_blade] = next_replacement
+        Replacement2Original[next_replacement] = next_blade
+        if include_printouts:
+            print('========================================')
+            print(BladeNames[next_blade] + ' was replaced with ' + BladeNames[next_replacement])
+            print(str(next_blade) + ' was replaced with ' + str(next_replacement))
+        del blades_left_to_randomize[0]
+        del randomized_order[0]
+
+    # Apply Randomizations
+    JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], PoppiForms, ApplyBladeRandomization)
+
+    # Copy original poppi-related tables so we can swap things below
+    OriginalPoppiBase = JSONParser.CopyJSONFile("common/BTL_HanaBase.json")
+    OriginalPoppiChipset = JSONParser.CopyJSONFile("common/BTL_HanaChipset.json")
+    OriginalPoppiPower = JSONParser.CopyJSONFile("common/BTL_HanaPower.json")
+
+    # In most of the following tables, rows for the Poppi forms are 1-3.
+    # Poppi alpha's blade ID is 1005, so I just add/subtract 1004 to convert between row and blade ID
+
+    # Replace Poppiswap images (background of Poppiswap menu)
+    def ReplacePoppiswapImages(image):
+        original_poppi_id = image['$id'] + 1004
+        new_image_num = Original2Replacement[original_poppi_id] - 1004
+        image['filename'] = 'mnu091_hana_img0' + str(new_image_num)
+    JSONParser.ChangeJSONLineWithCallback(["common/MNU_Hana_custom.json"], [], ReplacePoppiswapImages, replaceAll=True)
+
+    # Replace Poppi Base (Available Poppiswaps)
+    # TODO: I don't think this actually does anything. Unsure if it's even used in the code
+    #  It's supposed to change the available Poppiswap slots (Alpha has 1 skill ram, but QTpi has 3)
+    def ReplacePoppiBase(base):
+       original_poppi_id = base['$id'] + 1004
+       new_poppi_id = Original2Replacement[original_poppi_id]
+       for key, value in OriginalPoppiBase[new_poppi_id - 1004].items():
+           if key != '$id':
+               base[key] = copy.deepcopy(OriginalPoppiBase[new_poppi_id - 1004][key])
+    JSONParser.ChangeJSONLineWithCallback(["common/BTL_HanaBase.json"], [], ReplacePoppiBase, replaceAll=True)
+
+    # Replace Poppi Power (Energy Upgrades & Cost)
+    def ReplacePoppiPower(power):
+        for i in [1, 2, 3]:
+            original_poppi_id = i + 1004
+            new_poppi_id = Original2Replacement[original_poppi_id]
+            new_i = new_poppi_id - 1004
+
+            for field in ['PowerNum', 'EtherNum']:
+                old_field = field + str(i)
+                new_field = field + str(new_i)
+                power[old_field] = copy.deepcopy(OriginalPoppiPower[power['$id']][new_field])
+    JSONParser.ChangeJSONLineWithCallback(["common/BTL_HanaPower.json"], [], ReplacePoppiPower, replaceAll=True)
+
+    # Replace Poppi Chipset (Default Poppiswap Loadout)
+    def ReplacePoppiChipset(chipset):
+        original_poppi_id = chipset['$id'] + 1004
+        new_poppi_id = Original2Replacement[original_poppi_id]
+        for key, value in OriginalPoppiChipset[new_poppi_id - 1004].items():
+            if key != '$id':
+                chipset[key] = copy.deepcopy(OriginalPoppiChipset[new_poppi_id - 1004][key])
+    JSONParser.ChangeJSONLineWithCallback(["common/BTL_HanaChipset.json"], [], ReplacePoppiChipset, replaceAll=True)
 
 
 def BugFixes_PostRandomization():
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_EnArrange.json"], [], FixRandomizedEnemyBladeCrashes, replaceAll=True)
     JSONParser.ChangeJSONLineWithCallback(["common/EVT_cutscene_wp.json"], [], FixCutsceneCrashForNotHavingTwoWeapons, replaceAll=True)
+    JSONParser.ChangeJSONLineWithCallback(["common/ITM_OrbEquip.json"], [], FixCosmetics, replaceAll=True)
+    JSONParser.ChangeJSONLineWithCallback(["common/ITM_HanaAssist.json"], [], FixCosmetics, replaceAll=True)
     FixPandoriaSpriteAfterElpys()
+    FixMenuText()
 
 
 # Unsure why, but it is possible for the game to crash when an enemy blade gets randomized (for example, Pandoria).
@@ -236,6 +292,11 @@ def FixCutsceneCrashForNotHavingTwoWeapons(cutscene):
     replacement = Original2Replacement[original]
     cutscene['resourceL'] = WeaponType2Resource(OriginalBlades[replacement]['WeaponType'], 'L')
     cutscene['resourceR'] = WeaponType2Resource(OriginalBlades[replacement]['WeaponType'], 'R')
+
+
+def FixCosmetics(accessory):
+    if accessory['Blade'] in Replacement2Original:
+        accessory['Blade'] = Replacement2Original[accessory['Blade']]
 
 
 # side is either 'L' or 'R' (case doesn't matter).
@@ -276,6 +337,30 @@ def FixPandoriaSpriteAfterElpys():
     for field in ['offs_x', 'offs_y', 'scale', 'offs_x2', 'offs_y2', 'scale2', 'offs_x3', 'offs_y3', 'scale3', 'offs_x4', 'offs_y4', 'scale4', 'offs_x5', 'offs_y5', 'scale5']:
         JSONParser.ChangeJSONLine(["common/MNU_BlImageID.json"], [50], [field], PandoriaReplacementImageRow[field])
 
-def FinalTouches():
-    # This function is a placeholder for all the small things. Menu text, etc. Not yet implemented
-    print('TODO: FinalTouches()')
+def FixMenuText():
+    # Zeke's Eye of Shining Justice Skill
+    JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"], [294], ['name'], 'At max Affinity w/ ' + BladeNames[Original2Replacement[1010]] + ': R and +\nto awaken for a time (once per battle).')
+
+    # Switch between Driver/Blade Nia text
+    if Original2Replacement[1011] != 1011:
+        JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [261], ['name'], 'Turn Nia into ' + BladeNames[Original2Replacement[1011]] + '?''')
+        JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [262], ['name'], 'Turn ' + BladeNames[Original2Replacement[1011]] + ' into Nia?')
+        JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [297], ['name'], 'You cannot turn ' + BladeNames[Original2Replacement[1011]] + ' into Nia because\nno other Blades are engaged.')
+
+    # Swap to between Pyra/Mythra text
+    # Note: The words "Swap to" have been intentionally dropped because any blade which a name longer than 6 letters gets cut off
+    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [260], ['name'], 'Changing to ' + BladeNames[Original2Replacement[1001]] + '. Is this OK?')
+    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [259], ['name'], 'Changing to ' + BladeNames[Original2Replacement[1002]] + '. Is this OK?')
+    JSONParser.ChangeJSONLine(["common_ms/menu_operation_info_ms.json"], [89], ['name'], BladeNames[Original2Replacement[1002]]) # "Swap to" Text
+    JSONParser.ChangeJSONLine(["common_ms/menu_operation_info_ms.json"], [90], ['name'], BladeNames[Original2Replacement[1001]]) # "Swap to" Text
+
+    # Pyra/Mythra choice text
+    JSONParser.ChangeJSONLine(["common_ms/cmm_homuri_name_ms.json"], [1], ['name'], BladeNames[Original2Replacement[1001]]) # Pneuma's name when "Pyra" is selected
+    JSONParser.ChangeJSONLine(["common_ms/cmm_homuri_name_ms.json"], [2], ['name'], BladeNames[Original2Replacement[1002]]) # Pneuma's name when "Mythra" is selected
+    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"], [1736], ['name'], BladeNames[Original2Replacement[1001]]) # The choice selection
+    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"], [1737], ['name'], BladeNames[Original2Replacement[1002]]) # The choice selection
+    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [257], ['name'], 'The name will be set to "' + BladeNames[Original2Replacement[1001]] + '". Is this OK?')
+    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [258], ['name'], 'The name will be set to "' + BladeNames[Original2Replacement[1002]] + '". Is this OK?')
+
+    # Pyra/Mythra choice images
+    # TODO
