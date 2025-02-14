@@ -1,12 +1,7 @@
 import copy, random, JSONParser, Helper
 
 # TODO:
-#  - Replace the text "Make Nia a Driver" with "Turn {Blade}} into Nia"
-#  - Replace the text "Make Nia a Blade" with "Turn Nia into {Blade}"
-#  - Replace "Switch to Pyra?" and "Switch to Mythra" menu text
-#     - Only do these if blade Nia was actually replaced with something that isn't Blade Nia
-#  - Replace "Pandoria" on Zeke's Unleash Shining Justice skill
-#  - Probably various other menu texts
+#  - Replace the images in the Pyra/Mythra selection to the blades which replaced them
 #  - Figure out how to randomize Torna blades properly (Apparently NoBuildWpn in CHR_Bl is not sufficient)
 #  - Blade names should be replaced in all dialogs where possible
 #  - Replace driver voice lines when changing blades (Rex will currently shout "Pyra" when switching to Pyra's replacement)
@@ -43,8 +38,6 @@ def BladeRandomization(OptionsRunDict):
     RandomizeBlades(OptionsRunDict)
     RandomizePoppiForms(OptionsRunDict)
     BugFixes_PostRandomization()
-
-    # FinalTouches() #TODO
 
 
 def InitialSetup():
@@ -266,6 +259,7 @@ def BugFixes_PostRandomization():
     JSONParser.ChangeJSONLineWithCallback(["common/ITM_OrbEquip.json"], [], FixCosmetics, replaceAll=True)
     JSONParser.ChangeJSONLineWithCallback(["common/ITM_HanaAssist.json"], [], FixCosmetics, replaceAll=True)
     FixPandoriaSpriteAfterElpys()
+    FixMenuText()
 
 
 # Unsure why, but it is possible for the game to crash when an enemy blade gets randomized (for example, Pandoria).
@@ -343,7 +337,30 @@ def FixPandoriaSpriteAfterElpys():
     for field in ['offs_x', 'offs_y', 'scale', 'offs_x2', 'offs_y2', 'scale2', 'offs_x3', 'offs_y3', 'scale3', 'offs_x4', 'offs_y4', 'scale4', 'offs_x5', 'offs_y5', 'scale5']:
         JSONParser.ChangeJSONLine(["common/MNU_BlImageID.json"], [50], [field], PandoriaReplacementImageRow[field])
 
-def FinalTouches():
-    # This function is a placeholder for all the small things. Menu text, etc. Not yet implemented
-    if include_printouts:
-        print('TODO: FinalTouches()')
+def FixMenuText():
+    # Zeke's Eye of Shining Justice Skill
+    JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"], [294], ['name'], 'At max Affinity w/ ' + BladeNames[Original2Replacement[1010]] + ': R and +\nto awaken for a time (once per battle).')
+
+    # Switch between Driver/Blade Nia text
+    if Original2Replacement[1011] != 1011:
+        JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [261], ['name'], 'Turn Nia into ' + BladeNames[Original2Replacement[1011]] + '?''')
+        JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [262], ['name'], 'Turn ' + BladeNames[Original2Replacement[1011]] + ' into Nia?')
+        JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [297], ['name'], 'You cannot turn ' + BladeNames[Original2Replacement[1011]] + ' into Nia because\nno other Blades are engaged.')
+
+    # Swap to between Pyra/Mythra text
+    # Note: The words "Swap to" have been intentionally dropped because any blade which a name longer than 6 letters gets cut off
+    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [260], ['name'], 'Changing to ' + BladeNames[Original2Replacement[1001]] + '. Is this OK?')
+    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [259], ['name'], 'Changing to ' + BladeNames[Original2Replacement[1002]] + '. Is this OK?')
+    JSONParser.ChangeJSONLine(["common_ms/menu_operation_info_ms.json"], [89], ['name'], BladeNames[Original2Replacement[1002]]) # "Swap to" Text
+    JSONParser.ChangeJSONLine(["common_ms/menu_operation_info_ms.json"], [90], ['name'], BladeNames[Original2Replacement[1001]]) # "Swap to" Text
+
+    # Pyra/Mythra choice text
+    JSONParser.ChangeJSONLine(["common_ms/cmm_homuri_name_ms.json"], [1], ['name'], BladeNames[Original2Replacement[1001]]) # Pneuma's name when "Pyra" is selected
+    JSONParser.ChangeJSONLine(["common_ms/cmm_homuri_name_ms.json"], [2], ['name'], BladeNames[Original2Replacement[1002]]) # Pneuma's name when "Mythra" is selected
+    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"], [1736], ['name'], BladeNames[Original2Replacement[1001]]) # The choice selection
+    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"], [1737], ['name'], BladeNames[Original2Replacement[1002]]) # The choice selection
+    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [257], ['name'], 'The name will be set to "' + BladeNames[Original2Replacement[1001]] + '". Is this OK?')
+    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [258], ['name'], 'The name will be set to "' + BladeNames[Original2Replacement[1002]] + '". Is this OK?')
+
+    # Pyra/Mythra choice images
+    # TODO
