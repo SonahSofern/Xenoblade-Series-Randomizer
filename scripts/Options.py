@@ -297,6 +297,7 @@ RaceModeOption = Option("Race Mode", GameModeTab, "Enables Race Mode (see the Ra
 RaceModeOption_Zohar = SubOption("Zohar Fragment Hunt", RaceModeOption)
 RaceModeOption_DLC = SubOption("DLC Item Removal", RaceModeOption)
 UMHuntOption = Option("Unique Monster Hunt", GameModeTab, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt()], _hasSpinBox = True)
+UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
     # GenStandardOption("Unique Monster Hunt", TabGameMode, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt(OptionDictionary)], ["Extra Superbosses", []], optionType=Spinbox, spinMin = 1, spinMax = 10, spinStep = 1, spinBoxDescription = "Round(s):", spinBoxWidth = 2, spinBoxDescCol = 2, spinBoxObjCol = 3, spinBoxObjPadding = (0,0))
 
 

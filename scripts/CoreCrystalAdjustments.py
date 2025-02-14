@@ -182,14 +182,14 @@ def FixArtReleaseLevels(): # Fixes issue with NG+ blades having incredibly high 
         RandomBlades = BladeIDs.copy()
         random.shuffle(RandomBlades)
         for row in data["rows"]:
-            if (row["$id"] in IDs.ValidArtIDs) & (row["WpnType"] != 17):
+            if (row["$id"] not in IDs.AutoAttacks) & (row["WpnType"] != 17):
                 for i in range(1, 6):
                     row[f"ReleaseLv{i}"] = 1
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def CoreCrystalChanges(OptionsRunDict):
+def CoreCrystalChanges():
     RareBladeProbabilityEqualizer()
     AdjustingCrystalList()
     LandofChallengeRelease()
@@ -199,4 +199,4 @@ def CoreCrystalChanges(OptionsRunDict):
         FixRoc()
         FixOpeningSoftlock() # Removes ability to pull before you get Pyra, softlocking if you don't get a blade with arts 
         FixArtReleaseLevels() # Need to just call Hybrid's function MakeAllArtsAccessible() when I merge it with my branch
-        RaceMode.FindtheBladeNames(OptionsRunDict)
+        RaceMode.FindtheBladeNames()

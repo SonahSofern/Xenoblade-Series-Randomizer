@@ -183,7 +183,7 @@ def Randomize():
             randoProgressDisplay.config(text="")
             randoProgressDisplay.pack_forget()
             
-            print(f"Finished at {datetime.now()}")
+            print(f"Finished at {datetime.datetime.now()}")
         except:
             print(f"{traceback.format_exc()}") # shows the full error
             randoProgressDisplay.config(text="Invalid Output Directory")

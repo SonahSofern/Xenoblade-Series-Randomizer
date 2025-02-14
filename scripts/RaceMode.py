@@ -368,7 +368,7 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade trust
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
+def RaceModeLootChanges(NGPlusBladeCrystalIDs):
     if NGPlusBladeCrystalIDs == None:
         A1CoreCrystalIDs, A2CoreCrystalIDs, A3CoreCrystalIDs, A4CoreCrystalIDs = [], [], [], []
     if NGPlusBladeCrystalIDs != None:
@@ -382,8 +382,8 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
         A3CoreCrystalIDs = (NonNGPlusCoreCrystalIDs)
         A4CoreCrystalIDs = NGPlusBladeCrystalIDs
     A1Equip, A2Equip, A3Equip, A4Equip = [], [], [], []
-    DriverAccesEnh = OptionsRunDict["Driver Accessories"]["optionTypeVal"].get()
-    AuxCoreEnh = OptionsRunDict["Blade Aux Cores"]["optionTypeVal"].get()
+    DriverAccesEnh = Options.DriverAccessoriesOption.isOn()
+    AuxCoreEnh = Options.BladeAuxCoresOption.isOn()
     if DriverAccesEnh: # If we have the wacky enhancements:
         CommonDAcc, RareDAcc, LegDAcc = Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [0], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [1], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [2], "$id")
         CommonDAcc, RareDAcc, LegDAcc = [x for x in CommonDAcc if x in Accessories], [x for x in RareDAcc if x in Accessories], [x for x in LegDAcc if x in Accessories]
@@ -535,7 +535,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict):
                     file.seek(0)
                     file.truncate()
                     json.dump(data, file, indent=2, ensure_ascii=False)
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["Zohar Fragment Hunt"]["subOptionTypeVal"].get(): 
+    if Options.RaceModeOption_Zohar.isOn(): 
         print("Shuffling in Zohar Fragments")
         ZoharFragmentHunt(TBoxFiles, BoxestoRandomizePerMap)
         
@@ -971,7 +971,7 @@ def WeaponChipShopPowerLevelIncrease(): # Common issue at start of run is first 
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
+def ChestTypeMatching():  # Chest type matches Contents
     RaceModeOn = Options.RaceModeOption.isOn()
     ZoharFragOn = Options.RaceModeOption_Zohar.isOn()
     CoreCrystalRandoOn = Options.CustomCoreCrystalOption.isOn()

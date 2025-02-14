@@ -21,7 +21,10 @@ def RandomizeAuxCoreEnhancements():
                     enhancement.RollEnhancement()
                     skillNameID = aux["Name"]
                     aux["Enhance"] = enhancement.id
-                    aux["EnhanceCategory"] = enhancement.EnhanceEffect
+                    cat = enhancement.EnhanceEffect
+                    if cat > 255: # not great temp solution cant set category above 255 but you cant equip things of the same category at once
+                        cat -= random.randrange(14,256)
+                    aux["EnhanceCategory"] = cat
                     for skillName in auxNameData["rows"]:  
                         if skillName["$id"] == skillNameID:    
                             skillName["name"] = f"{enhancement.name} Core"
@@ -48,7 +51,10 @@ def RandomizeAuxCoreEnhancements():
                                             
                     Aux["Enhance"] = enhancement.id
                     Aux["Rarity"] = enhancement.Rarity
-                    Aux["EnhanceCategory"] = enhancement.EnhanceEffect
+                    cat = enhancement.EnhanceEffect
+                    if cat > 255: # not great temp solution cant set category above 255 but you cant equip things of the same category at once
+                        cat -= random.randrange(14,256)
+                    aux["EnhanceCategory"] = cat
 
                     
                 poppiAuxEnhancementsFile.seek(0)
