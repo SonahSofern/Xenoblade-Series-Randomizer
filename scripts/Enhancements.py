@@ -33,7 +33,7 @@ class Enhancement:
     ReversePar2 = False
     addToList = True
     DisTag = ""
-    def __init__(self,Name, Enhancement, Caption,  Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReversePar1 = False, ReversePar2  = False, addToList = True, DisTag = ""):
+    def __init__(self,Name, Enhancement, Caption, Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReversePar1 = False, ReversePar2  = False, addToList = True, DisTag = ""):
         self.name = Name
         self.EnhanceEffect = Enhancement
         self.Caption = Caption
@@ -299,7 +299,7 @@ InstaKill = Enhancement("Instakill",151,161, Baby)
 PartyDamageReducMaxAffinity = Enhancement("Guardian",152, 162, Mini)
 KaiserZone = Enhancement("Kaiser",153, 163, Medium)
 TastySnack = Enhancement("Snack",154, 164, Medium)
-HealingUpMaxAffinity =  Enhancement("Healing",155, 165, Small)
+HealingUpMaxAffinity = Enhancement("Healing",155, 165, Small)
 AggroPerSecondANDAggroUp  = Enhancement("Aggy",156, 166, Small, Small)
 MoreDamTakeLessAllyLowOrDown = Enhancement("Super",157, 167, Large, Small)
 StopThinking = Enhancement("Enthrall",158, 168, Medium, Baby)

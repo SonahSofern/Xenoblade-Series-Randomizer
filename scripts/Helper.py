@@ -43,14 +43,14 @@ def AdjustedFindBadValuesList(filePath, keyWordList, keywordBadValueList, return
     #print(bad_values_found)
     return(bad_values_found)
 
-def FindSubOptionValuesList(filePath, dictName, subDictName, subDictValue, returndictValue):
+def FindSubOptionValuesList(filePath: str, dictName: str, subDictName: str, subDictValue, returndictValue):
     bad_values = []
     with open(filePath, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row[dictName][subDictName] == subDictValue:
                 bad_values.append(row[returndictValue])
-    print(bad_values)
+    #print(bad_values)
     return(bad_values)
 
 
@@ -126,3 +126,13 @@ def GetMaxValue(filename: str, columnname: str): # Returns the maximum Value for
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     return MaxID
+
+def GetMinValue(filename: str, columnname: str): # Returns the maximum Value for a given column in a given file
+    with open(filename, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        MinRow = min(data["rows"], key = lambda x:x[columnname])
+        MinID = MinRow[columnname]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    return MinID

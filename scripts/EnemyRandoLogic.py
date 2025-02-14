@@ -13,12 +13,12 @@ AllQuestDefaultEnemyIDs = [303, 304, 305, 307, 308, 309, 310, 318, 319, 320, 323
 AllQuestEnemyDefaultLevels = [5, 14, 22, 18, 19, 21, 12, 33, 35, 40, 41, 56, 56, 58, 25, 47, 25, 26, 10, 12, 9, 91, 36, 41, 57, 57, 38, 54, 25, 26, 28, 30, 32, 25, 26, 49, 44, 41, 27, 29, 22, 28, 29, 31, 33, 30, 31, 32, 60, 61, 58, 60, 62, 63, 62, 63, 64, 36, 34, 61, 42, 41, 69, 66, 67, 70, 50, 40, 40, 42, 42, 42, 44, 46, 51, 50, 53, 26, 26, 26, 30, 55, 52, 33, 34, 33, 38, 38, 38, 38, 40, 33, 33, 35, 35, 45, 46, 43, 53, 51, 48, 51, 45, 45, 46, 46, 47, 47, 48, 48, 50, 48, 51, 53, 52, 33, 33, 34, 35, 36, 39, 42, 42, 42, 44, 45, 44, 43, 56, 57, 50, 64, 43, 42, 45, 58, 55, 55, 57, 60, 61, 56, 58, 60, 43, 19, 19, 36, 36, 37, 42, 44, 44, 58, 58, 56, 61, 59, 9, 20, 40, 60, 80, 39, 6, 15, 6, 2, 7, 3, 2, 11, 14, 33, 25, 5, 16, 13, 23, 39, 19, 35, 17, 18, 20, 9, 18, 19, 18, 19, 19, 22, 23, 20, 21, 23, 20, 18, 35, 22, 20, 37, 20, 20, 21, 20, 19, 19, 18, 22, 75, 74, 76, 74, 75, 77, 78, 23, 35, 25, 27, 27, 25, 26, 27, 29, 81, 27, 26, 83, 83, 28, 80, 28, 33, 28, 29, 28, 80, 44, 43, 45, 46, 45, 44, 43, 44, 44, 44, 46, 43, 45, 34, 34, 39, 35, 39, 42, 34, 35, 42, 38, 39, 39, 36, 38, 35, 39, 41, 38, 40, 41, 39, 39, 40, 80, 41, 40, 39, 40, 40, 38, 38, 42, 42, 42, 42, 42, 84, 84, 84, 84, 85, 46, 48, 51, 49, 47, 49, 47, 47, 60, 49, 47, 50, 52, 52, 52, 52, 52, 53, 53, 54, 55, 53, 58, 57, 60, 55, 55, 55, 55, 58, 58, 58, 60, 55, 58, 60, 60, 58, 31, 32, 31, 31, 32, 33, 32, 42, 44, 32, 31, 32, 47, 44, 43, 38, 31, 32, 34, 32, 32, 44, 31, 31, 31, 43, 31, 33, 33, 33, 33, 33, 32, 43, 42, 44, 43, 42, 42, 58, 43, 42, 41, 9, 7, 65, 68, 66, 62, 38, 43, 45, 58, 60, 70, 70, 70, 70, 60, 58, 63, 61, 60, 84, 78, 81, 92, 88, 125, 96, 96, 62, 32, 35, 42, 46, 35, 40, 37, 39, 41, 20, 19, 24, 50, 10, 16, 43, 40, 14, 12, 15, 41, 32, 15, 26, 34, 14, 12, 32, 37, 38, 33, 9, 40, 20, 18, 40, 40, 23, 43, 38, 36, 6, 38, 23, 5, 28, 21, 32, 23, 30, 42, 3, 38, 19, 38, 40, 39, 25, 28, 38, 62, 63, 61, 65, 64, 62, 61, 33, 62, 68, 66, 59, 60, 61, 60, 59, 62]
 #print(Helper.FindValues("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["$id"], AllQuestDefaultEnemyIDs, "Lv"))
 
-AllSuperbossDefaultIDs = [247, 714, 928, 1022, 1027, 1110, 1135, 1137, 1189, 1559, 1560, 1561, 1562, 1723, 1756, 1758, 1759, 1763, 1765, 1766, 1767, 1768, 1769, 1770, 1771, 1772, 1773, 1775, 1776, 1777, 1778, 1779, 1783, 1784, 1785, 1786, 1792, 1793, 1794, 1795, 1800, 1802, 1803, 1804, 1808, 1809, 1811, 1812, 1813, 1814]
-AllSuperbossDefaultLevels = [99, 104, 120, 130, 109, 110, 100, 117, 114, 75, 100, 85, 65, 100, 110, 104, 100, 100, 102, 104, 100, 101, 105, 104, 106, 103, 108, 106, 108, 110, 113, 115, 120, 110, 100, 140, 102, 110, 115, 150, 200, 110, 106, 120, 100, 100, 112, 130, 108, 104]
+AllSuperbossDefaultIDs = [247, 714, 928, 1022, 1027, 1110, 1135, 1137, 1189, 1559, 1560, 1561, 1562, 1723, 1756, 1758, 1759, 1763, 1765, 1766, 1767, 1768, 1769, 1770, 1771, 1772, 1773, 1775, 1776, 1777, 1778, 1779, 1783, 1784, 1785, 1786, 1792, 1793, 1794, 1795, 1800, 1802, 1803, 1804, 1808, 1809, 1811, 1812, 1813, 1814, 1886]
+AllSuperbossDefaultLevels = [99, 104, 120, 130, 109, 110, 100, 117, 114, 75, 100, 85, 65, 100, 110, 104, 100, 100, 102, 104, 100, 101, 105, 104, 106, 103, 108, 106, 108, 110, 113, 115, 120, 110, 100, 140, 102, 110, 115, 150, 200, 110, 106, 120, 100, 100, 112, 130, 108, 104, 66]
 #print(Helper.FindValues("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["$id"], AllSuperbossDefaultIDs, "Lv"))
 
-AllUniqueMonsterDefaultIDs = [611, 612, 705, 706, 707, 708, 709, 710, 711, 712, 713, 715, 736, 738, 808, 809, 810, 811, 812, 814, 815, 816, 817, 819, 890, 891, 892, 893, 894, 895, 896, 898, 899, 926, 929, 953, 954, 955, 957, 958, 1019, 1020, 1023, 1025, 1026, 1101, 1102, 1104, 1106, 1108, 1109, 1111, 1112, 1113, 1114, 1115, 1131, 1132, 1134, 1155, 1156, 1157, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1255, 1256, 1258, 1260, 1261, 1262, 1264, 1265, 1563, 1564, 1566, 1567, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1670, 1774, 1886]
-AllUniqueMonsterDefaultLevels = [99, 99, 12, 8, 81, 90, 25, 45, 18, 75, 20, 28, 27, 14, 23, 65, 24, 80, 23, 78, 41, 48, 99, 26, 30, 32, 31, 62, 33, 33, 33, 86, 40, 99, 99, 46, 47, 48, 50, 51, 95, 55, 58, 62, 94, 41, 42, 42, 46, 44, 43, 51, 42, 60, 54, 46, 53, 54, 58, 56, 57, 58, 62, 60, 58, 64, 66, 65, 66, 66, 38, 38, 39, 47, 49, 48, 48, 45, 50, 45, 25, 18, 34, 48, 44, 50, 40, 38, 33, 23, 48, 36, 55, 25, 99, 66]
+AllUniqueMonsterDefaultIDs = [611, 612, 705, 706, 707, 708, 709, 710, 711, 712, 713, 715, 736, 738, 808, 809, 810, 811, 812, 814, 815, 816, 817, 819, 890, 891, 892, 893, 894, 895, 896, 898, 899, 926, 929, 953, 954, 955, 957, 958, 1019, 1020, 1023, 1025, 1026, 1101, 1102, 1104, 1106, 1108, 1109, 1111, 1112, 1113, 1114, 1115, 1131, 1132, 1134, 1155, 1156, 1157, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1255, 1256, 1258, 1260, 1261, 1262, 1264, 1265, 1563, 1564, 1566, 1567, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1670, 1774]
+AllUniqueMonsterDefaultLevels = [99, 99, 12, 8, 81, 90, 25, 45, 18, 75, 20, 28, 27, 14, 23, 65, 24, 80, 23, 78, 41, 48, 99, 26, 30, 32, 31, 62, 33, 33, 33, 86, 40, 99, 99, 46, 47, 48, 50, 51, 95, 55, 58, 62, 94, 41, 42, 42, 46, 44, 43, 51, 42, 60, 54, 46, 53, 54, 58, 56, 57, 58, 62, 60, 58, 64, 66, 65, 66, 66, 38, 38, 39, 47, 49, 48, 48, 45, 50, 45, 25, 18, 34, 48, 44, 50, 40, 38, 33, 23, 48, 36, 55, 25, 99]
 #print(Helper.FindValues("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["$id"], AllUniqueMonsterDefaultIDs, "Lv"))
 
 AllNormalEnemyDefaultIDs = [313, 315, 339, 413, 474, 476, 521, 523, 555, 568, 630, 631, 632, 633, 634, 637, 638, 643, 645, 646, 647, 648, 651, 652, 653, 654, 655, 656, 657, 658, 659, 660, 662, 664, 665, 666, 668, 670, 672, 674, 675, 676, 678, 679, 680, 681, 682, 683, 684, 685, 686, 687, 688, 689, 691, 692, 693, 694, 695, 696, 699, 701, 703, 716, 717, 718, 719, 720, 721, 722, 723, 729, 730, 731, 732, 733, 734, 735, 745, 749, 754, 756, 757, 758, 762, 763, 764, 766, 769, 770, 771, 772, 773, 774, 776, 777, 793, 794, 795, 796, 798, 800, 802, 804, 806, 825, 835, 836, 843, 844, 845, 847, 849, 850, 851, 852, 853, 854, 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 865, 866, 867, 868, 869, 870, 871, 872, 873, 874, 875, 876, 877, 878, 879, 880, 881, 882, 884, 886, 888, 901, 902, 903, 904, 905, 906, 907, 908, 909, 910, 911, 912, 913, 914, 915, 916, 917, 918, 919, 920, 922, 924, 931, 933, 937, 940, 941, 942, 945, 950, 951, 952, 959, 960, 961, 962, 963, 966, 969, 971, 972, 973, 974, 976, 977, 978, 979, 980, 981, 982, 983, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 997, 998, 999, 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1015, 1016, 1017, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1044, 1045, 1050, 1051, 1056, 1057, 1060, 1061, 1062, 1063, 1064, 1067, 1068, 1069, 1070, 1072, 1073, 1079, 1080, 1081, 1082, 1083, 1084, 1085, 1086, 1087, 1088, 1089, 1090, 1091, 1092, 1098, 1099, 1100, 1127, 1138, 1139, 1140, 1141, 1142, 1143, 1144, 1170, 1171, 1176, 1177, 1178, 1190, 1191, 1192, 1193, 1194, 1195, 1198, 1208, 1209, 1213, 1214, 1217, 1220, 1221, 1222, 1228, 1232, 1233, 1235, 1241, 1243, 1247, 1251, 1254, 1266, 1267, 1268, 1269, 1270, 1271, 1272, 1273, 1276, 1277, 1279, 1281, 1282, 1283, 1284, 1286, 1287, 1288, 1320, 1321, 1322, 1324, 1326, 1329, 1366, 1380, 1396, 1399, 1421, 1455, 1456, 1459, 1460, 1461, 1462, 1463, 1464, 1466, 1473, 1474, 1476, 1477, 1478, 1479, 1483, 1487, 1488, 1496, 1498, 1500, 1501, 1503, 1507, 1508, 1511, 1513, 1515, 1522, 1529, 1530, 1531, 1532, 1535, 1536, 1539, 1541, 1542, 1543, 1544, 1545, 1547, 1550, 1565, 1570, 1571, 1572, 1573, 1574, 1577, 1578, 1580, 1582, 1583, 1584, 1586, 1587, 1588, 1590, 1591, 1595, 1597, 1600, 1601, 1603, 1606, 1608, 1609, 1611, 1612, 1613, 1617, 1622, 1623, 1624, 1625, 1626, 1627, 1629, 1630, 1631, 1635, 1636, 1637, 1638, 1639, 1640, 1642, 1643, 1645, 1646, 1647, 1649, 1650, 1652, 1656, 1691, 1692, 1693, 1694, 1695, 1696, 1697, 1698, 1699, 1701, 1702, 1703, 1704, 1705, 1706, 1707, 1708, 1709, 1710, 1711, 1712, 1713, 1714, 1715, 1716, 1717, 1718, 1719, 1720, 1721, 1722, 1728, 1729, 1730, 1732, 1734, 1735, 1736, 1737, 1738, 1739, 1740, 1741, 1742, 1743, 1744, 1745, 1757, 1760, 1761, 1762, 1764, 1780, 1781, 1782, 1790, 1791, 1796, 1797, 1798, 1799, 1801, 1810, 1815, 1816, 1817, 1818, 1819, 1820, 1821, 1822, 1823, 1824, 1825, 1826, 1827, 1828, 1829, 1830, 1831, 1832, 1833, 1834, 1835, 1836, 1837, 1838, 1839, 1840, 1841, 1842, 1843, 1844, 1845, 1846, 1847, 1848, 1849, 1850, 1851, 1852, 1853, 1854, 1855, 1856, 1857, 1858, 1859, 1860, 1861, 1862, 1863, 1864, 1865, 1866, 1867, 1868, 1869, 1870, 1871, 1872, 1873, 1874, 1875, 1876, 1877, 1878, 1879, 1880, 1882, 1884]
@@ -366,61 +366,62 @@ def BossQuestAggroAdjustments(NewBossIDs, NewQuestIDs): # Required to allow boss
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def EnemyAggroProportion(OptionsRunDict):
-    EnemyRandoOnBox = OptionsRunDict["Enemies"]["optionTypeVal"].get()
-    StoryBossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Story Bosses"]["subOptionTypeVal"].get()
-    QuestEnemyBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Quest Enemies"]["subOptionTypeVal"].get()
-    UniqueMonstersBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Unique Monsters"]["subOptionTypeVal"].get()
-    SuperbossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Superbosses"]["subOptionTypeVal"].get()
-    NormalEnemiesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Normal Enemies"]["subOptionTypeVal"].get()
-    if EnemyRandoOnBox:
-        if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox: # do nothing, got handled after enemy randomization
-            pass
-    EnemyAggroSliderOdds = OptionsRunDict["Enemy Aggro"]["spinBoxVal"].get()
-    NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
-    if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive
-        with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
-            data = json.load(file)
-            for row in data["rows"]:
-                if (row["$id"] in ValidEnemies) & (row["$id"] in OtherEnemyIDs):
-                    row["Flag"]["AlwaysAttack"] = 0
-                    row["Flag"]["mBoss"] = 0
-                    row["SearchRange"] = 0
-                    row["SearchRadius"] = 0
-                    row["SearchAngle"] = 0
-                    row["Detects"] = 0
-                    row["BatInterval"] = 50
-                    row["BatArea"] = 50
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
-    else: # run aggro adjustments on non-randomized enemies, not touching boss or quest enemy ids
-        with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
-            data = json.load(file)
-            for row in data["rows"]:
-                if (EnemyAggroSliderOdds != 100) & (row["$id"] in OtherEnemyIDs) & (random.randint(0,100) >= EnemyAggroSliderOdds) & (row["$id"] in ValidEnemies):
-                    row["Flag"]["AlwaysAttack"] = 0
-                    row["Flag"]["mBoss"] = 0
-                    row["SearchRange"] = 0
-                    row["SearchRadius"] = 0
-                    row["SearchAngle"] = 0
-                    row["Detects"] = 0
-                    row["BatInterval"] = 50
-                    row["BatArea"] = 50
-                elif (row["$id"] in OtherEnemyIDs) & (row["$id"] in ValidEnemies):
-                    row["Flag"]["mBoss"] = 0
-                    row["Flag"]["AlwaysAttack"] = 1
-                    row["Detects"] = 1
-                    if row["SearchRange"] == 0:
-                        row["SearchRange"] = random.randint(5, 25)
-                    if row["SearchAngle"] == 0:
-                        row["SearchAngle"] = random.randint(45, 135)
-                    if row["SearchRadius"] == 0:
-                        row["SearchRadius"] = random.randint(1, 10)
-                    row["BatInterval"] = 50
-                    row["BatArea"] = 50
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
+    if not OptionsRunDict["Unique Monster Hunt"]["optionTypeVal"].get():
+        EnemyRandoOnBox = OptionsRunDict["Enemies"]["optionTypeVal"].get()
+        StoryBossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Story Bosses"]["subOptionTypeVal"].get()
+        QuestEnemyBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Quest Enemies"]["subOptionTypeVal"].get()
+        UniqueMonstersBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Unique Monsters"]["subOptionTypeVal"].get()
+        SuperbossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Superbosses"]["subOptionTypeVal"].get()
+        NormalEnemiesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Normal Enemies"]["subOptionTypeVal"].get()
+        if EnemyRandoOnBox:
+            if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox: # do nothing, got handled after enemy randomization
+                pass
+        EnemyAggroSliderOdds = OptionsRunDict["Enemy Aggro"]["spinBoxVal"].get()
+        NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
+        if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive
+            with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
+                data = json.load(file)
+                for row in data["rows"]:
+                    if (row["$id"] in ValidEnemies) & (row["$id"] in OtherEnemyIDs):
+                        row["Flag"]["AlwaysAttack"] = 0
+                        row["Flag"]["mBoss"] = 0
+                        row["SearchRange"] = 0
+                        row["SearchRadius"] = 0
+                        row["SearchAngle"] = 0
+                        row["Detects"] = 0
+                        row["BatInterval"] = 50
+                        row["BatArea"] = 50
+                file.seek(0)
+                file.truncate()
+                json.dump(data, file, indent=2, ensure_ascii=False)
+        else: # run aggro adjustments on non-randomized enemies, not touching boss or quest enemy ids
+            with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
+                data = json.load(file)
+                for row in data["rows"]:
+                    if (EnemyAggroSliderOdds != 100) & (row["$id"] in OtherEnemyIDs) & (random.randint(0,100) >= EnemyAggroSliderOdds) & (row["$id"] in ValidEnemies):
+                        row["Flag"]["AlwaysAttack"] = 0
+                        row["Flag"]["mBoss"] = 0
+                        row["SearchRange"] = 0
+                        row["SearchRadius"] = 0
+                        row["SearchAngle"] = 0
+                        row["Detects"] = 0
+                        row["BatInterval"] = 50
+                        row["BatArea"] = 50
+                    elif (row["$id"] in OtherEnemyIDs) & (row["$id"] in ValidEnemies):
+                        row["Flag"]["mBoss"] = 0
+                        row["Flag"]["AlwaysAttack"] = 1
+                        row["Detects"] = 1
+                        if row["SearchRange"] == 0:
+                            row["SearchRange"] = random.randint(5, 25)
+                        if row["SearchAngle"] == 0:
+                            row["SearchAngle"] = random.randint(45, 135)
+                        if row["SearchRadius"] == 0:
+                            row["SearchRadius"] = random.randint(1, 10)
+                        row["BatInterval"] = 50
+                        row["BatArea"] = 50
+                file.seek(0)
+                file.truncate()
+                json.dump(data, file, indent=2, ensure_ascii=False)
 
 def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict): #when enemy rando is on
     EnemyAggroOnBox = OptionsRunDict["Enemy Aggro"]["optionTypeVal"].get()
@@ -715,6 +716,21 @@ def SwimmingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs):
         arrangefile.truncate()
         json.dump(arrangedata, arrangefile, indent=2, ensure_ascii=False)
 
+def GerolfSovereignFix(): # Gerolf Sovereign gets summoned by Mk VI. Sovereign, which in turn can summon enemies. This breaks the code that changes summons levels to match the enemy that summoned them.
+    with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: #id 1379 needs to match 1380 in levels
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 1380:
+                GerolfLevel = row["Lv"]
+                break
+        for row in data["rows"]:
+            if row["$id"] == 1379:
+                row["Lv"] = GerolfLevel
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
 def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/fights
     ReducePCHPBattle1()
     SummonsLevelAdjustment()
@@ -725,6 +741,7 @@ def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/f
     GortOgreUppercutRemoval()
     EarthBreathNerf()
     PadraigFightFix()
+    GerolfSovereignFix()
 
 def EnemyLogic(OptionsRunDict):
     EnemyRandoOn = False

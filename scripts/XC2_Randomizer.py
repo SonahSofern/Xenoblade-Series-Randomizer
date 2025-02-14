@@ -1,5 +1,6 @@
 from tkinter import PhotoImage, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys
+from datetime import datetime
 from tkinter import *
 import EnemyRandoLogic, SavedOptions, SeedNames, JSONParser, FieldSkillAdjustments, CoreCrystalAdjustments, RaceMode, TutorialShortening, IDs, MusicShuffling, DebugLog, _DriverArts, PermalinkManagement, Helper, SkillTrees, Enhancements, BigItems, _EnemyEnhancements, CameraFixes, UniqueMonsterHunt
 import GUISettings, TrustBeam, _EnemyArts, _BladeWeapons, BladeRandomization, GachaModifications, _GreenSkills, SavedOptions
@@ -283,7 +284,7 @@ def Options():
     
     # Race Mode
     GenStandardOption("Race Mode", TabGameMode, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(OptionDictionary), RaceMode.SeedHash], ["Zohar Fragment Hunt", [], "DLC Item Removal", []])    
-    GenStandardOption("Unique Monster Hunt", TabGameMode, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt(OptionDictionary)], optionType=Spinbox, spinMax = 10, spinStep = 1, spinBoxDescription = "Round(s):", spinBoxWidth = 2, spinBoxDescCol = 2, spinBoxObjCol = 3, spinBoxObjPadding = (0,0))
+    GenStandardOption("Unique Monster Hunt", TabGameMode, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt(OptionDictionary)], ["Extra Superbosses", []], optionType=Spinbox, spinMin = 1, spinMax = 10, spinStep = 1, spinBoxDescription = "Round(s):", spinBoxWidth = 2, spinBoxDescCol = 2, spinBoxObjCol = 3, spinBoxObjPadding = (0,0))
 
     # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
     GenStandardOption("Blade Names", TabBlades, "Randomizes a Blade's name", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
@@ -355,7 +356,7 @@ def Randomize():
             randoProgressDisplay.config(text="")
             randoProgressDisplay.pack_forget()
             
-            print("Done")
+            print(f"Finished at {datetime.now()}")
         except:
             print(f"{traceback.format_exc()}") # shows the full error
             randoProgressDisplay.config(text="Invalid Output Directory")
