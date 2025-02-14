@@ -194,7 +194,7 @@ def CoreCrystalChanges():
     AdjustingCrystalList()
     LandofChallengeRelease()
     FixingGivenCoreCrystalTutorial()
-    if not Options.RaceModeOption.isOn():
+    if not Options.RaceModeOption.GetState():
         RegularLootDistribution()
         FixRoc()
         FixOpeningSoftlock() # Removes ability to pull before you get Pyra, softlocking if you don't get a blade with arts 

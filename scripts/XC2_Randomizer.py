@@ -199,7 +199,7 @@ def RunOptions():
     Options.OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
     
     for opt in Options.OptionList:
-        if not opt.isOn(): # Checks state
+        if not opt.GetState(): # Checks state
             continue
         
         opt.subOptions.sort(key= lambda x: x.prio) # Sort suboptions by priority

@@ -236,7 +236,7 @@ def LessGrinding(): #adjusting level based exp gains, and debuffs while underlev
 def DetermineNGPlusBladeCrystalIDs():
     NGPlusBladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
     NGPlusBladeCrystalIDs = []
-    if (Options.CustomCoreCrystalOption.isOn()) or (Options.UMHuntOption.isOn()):
+    if (Options.CustomCoreCrystalOption.GetState()) or (Options.UMHuntOption.GetState()):
         with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
             for i in range(0, len(NGPlusBladeIDs)):
@@ -382,8 +382,8 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs):
         A3CoreCrystalIDs = (NonNGPlusCoreCrystalIDs)
         A4CoreCrystalIDs = NGPlusBladeCrystalIDs
     A1Equip, A2Equip, A3Equip, A4Equip = [], [], [], []
-    DriverAccesEnh = Options.DriverAccessoriesOption.isOn()
-    AuxCoreEnh = Options.BladeAuxCoresOption.isOn()
+    DriverAccesEnh = Options.DriverAccessoriesOption.GetState()
+    AuxCoreEnh = Options.BladeAuxCoresOption.GetState()
     if DriverAccesEnh: # If we have the wacky enhancements:
         CommonDAcc, RareDAcc, LegDAcc = Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [0], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [1], "$id"), Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [2], "$id")
         CommonDAcc, RareDAcc, LegDAcc = [x for x in CommonDAcc if x in Accessories], [x for x in RareDAcc if x in Accessories], [x for x in LegDAcc if x in Accessories]
@@ -851,7 +851,7 @@ def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def FindtheBladeNames():
-    if Options.CustomCoreCrystalOption.isOn():
+    if Options.CustomCoreCrystalOption.GetState():
         ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
         CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
         CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
@@ -972,9 +972,9 @@ def WeaponChipShopPowerLevelIncrease(): # Common issue at start of run is first 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def ChestTypeMatching():  # Chest type matches Contents
-    RaceModeOn = Options.RaceModeOption.isOn()
+    RaceModeOn = Options.RaceModeOption.GetState()
     ZoharFragOn = Options.RaceModeOption_Zohar.isOn()
-    CoreCrystalRandoOn = Options.CustomCoreCrystalOption.isOn()
+    CoreCrystalRandoOn = Options.CustomCoreCrystalOption.GetState()
     ZoharFragItemIDs = [25135, 25136, 25137, 25138]
     CoreCrystalIDs = AllCoreCrystals
     MovespeedDeedIDs = Helper.InclRange(25249, 25300)

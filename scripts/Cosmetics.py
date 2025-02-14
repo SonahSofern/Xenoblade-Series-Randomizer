@@ -140,14 +140,14 @@ def CosmeticPairs(nameData, itmData,odds, charKeyWord, cosmeticsList):
                     break
                 
             Acc["Model"] = cosm.model
-            if Options.BladesOption.isOn() and cosm.characterID in Replacement2Original:
+            if Options.BladesOption.GetState() and cosm.characterID in Replacement2Original:
                 Acc[f"{charKeyWord}"] = Replacement2Original[cosm.characterID]
             else:
                 Acc[f"{charKeyWord}"] = cosm.characterID
             
 def Cosmetics():
     # Slider
-    odds = Options.CosmeticsOption.isOn()
+    odds = Options.CosmeticsOption.GetState()
     
     # Drivers
     with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file:
@@ -186,7 +186,7 @@ def Cosmetics():
             if (odds > random.randint(0,99)):
                 cosm:Cosmetic = random.choice(ValidArtificialBladeCosmetics) # these names are shared with regular ones so its not going to work to put poppi names on them when most cant equip those anyway
                 Acc["Model"] = cosm.model
-                if Options.BladesOption.isOn() and cosm.characterID in Replacement2Original:
+                if Options.BladesOption.GetState() and cosm.characterID in Replacement2Original:
                     Acc["Blade"] = Replacement2Original[cosm.characterID]
                 else:
                     Acc["Blade"] = cosm.characterID

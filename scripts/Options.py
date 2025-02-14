@@ -11,7 +11,7 @@ First = 0
 Last = 100
 
 class Option():
-    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50, _hasSpinBox = False):
+    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50, _hasSpinBox = False, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
@@ -30,12 +30,19 @@ class Option():
         self.subDefState = _defState
         self.prio = _prio
         OptionList.append(self)
+        
+        # Custom Spinboxes
+        self.spinBoxMin = _spinMin
+        self.spinBoxMax = _spinMax
+        self.spinDesc = _spinDesc
+        self.spinWidth = _spinWidth
+        self.spinIncr = _spinIncr
 
     def DisplayOption(self, tab):
         self.GenStandardOption(tab)
         self.StateUpdate()
         
-    def GenStandardOption(self, parentTab):   
+    def GenStandardOption(self, parentTab):    # This probably shouldnt be a class function what if we want to make a nonstandard option we could make a carveout and let you call a custom function but how would you set everything with a custom function
         # Variables
         global rowIncrement
         self.spinBoxVal = IntVar(value=100)
@@ -57,9 +64,9 @@ class Option():
         
         # % Boxes
         if self.hasSpinBox:
-            self.spinBoxObj = ttk.Spinbox(optionPanel, from_=0, to=100, textvariable=self.spinBoxVal, wrap=True, width=3, increment=10)
+            self.spinBoxObj = ttk.Spinbox(optionPanel, from_=self.spinBoxMin, to=self.spinBoxMax, textvariable=self.spinBoxVal, wrap=True, width=self.spinWidth, increment=self.spinIncr)
             self.spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
-            self.spinBoxLabel = ttk.Label(optionPanel, text="% randomized", anchor="w")
+            self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w")
             self.spinBoxLabel.grid(row=rowIncrement, column=3, sticky="w", padx=0)
 
         for sub in self.subOptions:
@@ -71,7 +78,7 @@ class Option():
 
     
     def StateUpdate(self):
-        if self.isOn():
+        if self.GetState():
             for sub in self.subOptions:
                 sub.checkBox.state(["!disabled"])
             self.descObj.state(["!disabled"])
@@ -93,7 +100,7 @@ class Option():
     def GetOdds(self):
         return self.spinBoxVal.get()
     
-    def isOn(self):
+    def GetState(self):
         return self.checkBoxVal.get()
 
 class SubOption():
@@ -254,7 +261,7 @@ DifficultyOption_Ultimate = SubOption("Ultimate", DifficultyOption)
 ShortenTutorialOption = Option("Shorten Tutorial", QOL, "Shortens/removes tutorials", [lambda: TutorialShortening.ShortenedTutorial()])
 NewGamePlusBladesOption = Option("NG+ Blades", QOL, "Allows all blades to be accessible in a fresh playthrough", [lambda: GachaModifications.UnlockNGPlusBlades()])
 FreelyEngageBladesOption = Option("Freely Engage Blades", QOL, "Allows blades to be freely engaged by all valid drivers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["FreeEngage"], [0], [1], [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1075, 1076, 1103])])
-CTMCOption = Option("Chest Type Matches Contents", QOL, "Chest model and label changes depending on tier of loot", [lambda: RaceMode.ChestTypeMatching()])
+CTMCOption = Option("Chest Type Matches Contents", QOL, "Chest model and label changes depending on tier of loot", [lambda: RaceMode.ChestTypeMatching()], _prio = 95)
 TreasureChestVisOption =  Option("Treasure Chest Visibility", QOL, "Increases the range you can see treasure chests from", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["msgVisible", "msgdigVisible"], Helper.InclRange(0,200), [255])])
 RemoveFieldSkillsOption = Option("Remove Story Field Skills", QOL, "Removes field skill checks", [lambda: FieldSkillAdjustments.RemoveFieldSkills()], ["Remove All Field Skills", []])
 RemoveFieldSkillsOption_AllFieldSkills = SubOption("Remove All Field Skills", RemoveFieldSkillsOption)
@@ -288,7 +295,7 @@ FieldItemOption = Option("Field Item Size", Funny, "Randomizes the size and spin
 
 # Cosmetics
 BladeWeaponCosmeticsOption = Option("Blade Weapon Cosmetics", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])])
-CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()], _hasSpinBox = True) # Sub are created by another class
+CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()],_prio=51, _hasSpinBox = True) # Sub are created by another class
 for opt in Cosmetics.CosmeticsList: # To gen these since listing them here would be annoying
     opt.CreateSubOptions(CosmeticsOption)
 
@@ -296,9 +303,9 @@ for opt in Cosmetics.CosmeticsList: # To gen these since listing them here would
 RaceModeOption = Option("Race Mode", GameModeTab, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(), RaceMode.SeedHash])
 RaceModeOption_Zohar = SubOption("Zohar Fragment Hunt", RaceModeOption)
 RaceModeOption_DLC = SubOption("DLC Item Removal", RaceModeOption)
-UMHuntOption = Option("Unique Monster Hunt", GameModeTab, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt()], _hasSpinBox = True)
+UMHuntOption = Option("Unique Monster Hunt", GameModeTab, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt()], _hasSpinBox = True, _spinMin = 1, _spinMax = 10, _spinIncr = 1, _spinDesc = "Rounds:", _spinWidth = 2)
 UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
-    # GenStandardOption("Unique Monster Hunt", TabGameMode, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt(OptionDictionary)], ["Extra Superbosses", []], optionType=Spinbox, spinMin = 1, spinMax = 10, spinStep = 1, spinBoxDescription = "Round(s):", spinBoxWidth = 2, spinBoxDescCol = 2, spinBoxObjCol = 3, spinBoxObjPadding = (0,0))
+#  spinMin = 1, spinMax = 10, spinStep = 1, spinBoxDescription = "Round(s):", spinBoxWidth = 2, spinBoxDescCol = 2, spinBoxObjCol = 3, spinBoxObjPadding = (0,0))
 
 
 # Currently Disabled for Various Reasons

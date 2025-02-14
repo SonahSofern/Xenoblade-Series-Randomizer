@@ -366,9 +366,9 @@ def BossQuestAggroAdjustments(NewBossIDs, NewQuestIDs): # Required to allow boss
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def EnemyAggroProportion():
-    if Options.UMHuntOption.isOn():
+    if Options.UMHuntOption.GetState():
         return
-    EnemyRandoOnBox = Options.EnemiesOption.isOn()
+    EnemyRandoOnBox = Options.EnemiesOption.GetState()
     StoryBossesBox = Options.EnemiesOption_Bosses.isOn()
     QuestEnemyBox = Options.EnemiesOption_QuestEnemies.isOn()
     UniqueMonstersBox = Options.EnemiesOption_UniqueMonsters.isOn()
@@ -377,7 +377,7 @@ def EnemyAggroProportion():
     if EnemyRandoOnBox:
         if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox: # do nothing, got handled after enemy randomization
             pass
-    EnemyAggroSliderOdds = Options.EnemyAggroOption.isOn()
+    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetState()
     NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
     if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive
         with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
@@ -425,7 +425,7 @@ def EnemyAggroProportion():
             json.dump(data, file, indent=2, ensure_ascii=False)
 
 def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs): #when enemy rando is on
-    EnemyAggroOnBox = Options.EnemyAggroOption.isOn()
+    EnemyAggroOnBox = Options.EnemyAggroOption.GetState()
     EnemyAggroSliderOdds = Options.EnemyAggroOption.GetOdds()
     if EnemyAggroOnBox: # if enemy aggro is randomized
         with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
@@ -761,7 +761,7 @@ def EnemyLogic():
     MixEnemiesBetweenTypesBox = Options.EnemiesOption_MixedTypes.isOn()
     AllBossDefaultIDstoUse = AllBossDefaultIDs
     AllBossDefaultLevelstoUse = AllBossDefaultLevels
-    if Options.RaceModeOption.isOn(): # removing malos in auresco fight for race mode specifically, he has an absurd amount of hp and is just a slog of a fight
+    if Options.RaceModeOption.GetState(): # removing malos in auresco fight for race mode specifically, he has an absurd amount of hp and is just a slog of a fight
         AllBossDefaultIDstoUse = [x for x in AllBossDefaultIDs if x != 1443]
         del AllBossDefaultLevelstoUse[83]
     if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox:

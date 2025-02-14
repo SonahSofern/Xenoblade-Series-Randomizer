@@ -3,7 +3,7 @@ import JSONParser, Options
     
 def RemoveFieldSkills():
     isAllChecks  = Options.RemoveFieldSkillsOption_AllFieldSkills.isOn()
-    UMHUNT = Options.UMHuntOption.isOn()
+    UMHUNT = Options.UMHuntOption.GetState()
     if isAllChecks or UMHUNT:
         mapGimmickIds = range(1,186)
         npcPopIds = range(1,50000)     
