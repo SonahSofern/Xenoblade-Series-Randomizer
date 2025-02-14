@@ -1,20 +1,20 @@
 import json, random
 from Enhancements import *
-
+import Options
 
 Nope = [MaxAffinityHeal,ReduceDamageFromNearbyEnemies, DamageUpOnEnemyKill] # Retry these used on armu enemy with dupe
 ValidSkills = []   
 
 
-def EnemyStats(spinBox):
+def EnemyEnhances():
     prevNames = []
     with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as EnArrangeFile:
         with open("./_internal/JsonOutputs/common_ms/fld_enemyname.json", 'r+', encoding='utf-8') as NamesFile:      
             EnArr = json.load(EnArrangeFile)
             Names = json.load(NamesFile)
-            
+            spinbox  = Options.EnemyEnhancementsOption.GetOdds()
             for Enemy in EnArr["rows"]:
-                if spinBox < random.randrange(0,100):
+                if spinbox < random.randrange(0,100):
                     continue
                         
                 enh = random.choice(ValidSkills)

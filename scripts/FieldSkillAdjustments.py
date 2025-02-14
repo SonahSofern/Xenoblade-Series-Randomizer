@@ -1,11 +1,10 @@
-import JSONParser
+import JSONParser, Options
 
     
-def RemoveFieldSkills(Options):
-    isAllChecks  = Options["Remove Story Field Skills"]["subOptionObjects"]["Remove All Field Skills"]["subOptionTypeVal"].get()
-    isUMHunt = Options["Unique Monster Hunt"]["optionTypeVal"].get()
-
-    if isAllChecks or isUMHunt:
+def RemoveFieldSkills():
+    isAllChecks  = Options.RemoveFieldSkillsOption_AllFieldSkills.isOn()
+    UMHUNT = Options.UMHuntOption.isOn()
+    if isAllChecks or UMHUNT:
         mapGimmickIds = range(1,186)
         npcPopIds = range(1,50000)     
         jumpGimiickIds = range(1,45)

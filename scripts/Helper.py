@@ -5,10 +5,13 @@ import tkinter as tk
 def InclRange(start, end):
      return list(range(start, end+1))
 
-def StartsWith(startingWord, lowNum, highNum):
+def StartsWith(startingWord, lowNum, highNum, addJson = False):
     listofWords = []
     for i in range(lowNum, highNum + 1):
-        listofWords.append(startingWord + str(i))
+        newVer = startingWord + str(i)
+        if addJson:
+            newVer = newVer + ".json"
+        listofWords.append(newVer)
     return listofWords
 
 def InsertHelper(insertIndex,  lowNum, highNum, mainString = str, pathTo = str):

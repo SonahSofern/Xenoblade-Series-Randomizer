@@ -1,4 +1,4 @@
-import json, random
+import json, random, Options
 from BladeRandomization import Replacement2Original
 
 # Lists of cosmetics to choose from
@@ -35,12 +35,15 @@ class Cosmetic:
         self.characterID = characterID
         self.characterName = characterName
         self.cosmeticName = cosmeticName
-        if type == Driver:
-            CosmeticsList.extend([self.cosmeticName, [lambda: ValidDriverCosmetics.append(self)]])
-        elif type == Blade:
-            CosmeticsList.extend([self.cosmeticName, [lambda: ValidBladeCosmetics.append(self)]])
-        elif type == ArtBlade:
-            CosmeticsList.extend([self.cosmeticName, [lambda: ValidArtificialBladeCosmetics.append(self)]])
+        self.type = type
+        CosmeticsList.append(self)
+    def CreateSubOptions(self, parentOption):
+        if self.type == Driver:
+            Options.SubOption(self.cosmeticName, parentOption,  [lambda: ValidDriverCosmetics.append(self)])
+        elif self.type == Blade:
+            Options.SubOption(self.cosmeticName, parentOption,  [lambda: ValidBladeCosmetics.append(self)])
+        elif self.type == ArtBlade:
+            Options.SubOption(self.cosmeticName, parentOption,  [lambda: ValidArtificialBladeCosmetics.append(self)])
 
 # Blades
 JadeOrchidBrighid = Cosmetic("bl/bl121001", 1009, Brighid, "Jade Orchid Brighid", Blade)
@@ -114,7 +117,7 @@ BloodWitchNia = Cosmetic("pc/pc120201", 2, Nia, "Blood Witch Nia", Driver)
 # DefaultDriverNia = Cosmetic("pc/pc000201", 2, Nia, "Default Nia", Driver)
 
 
-def CosmeticPairs(nameData, itmData,odds, charKeyWord, cosmeticsList, optionDict):
+def CosmeticPairs(nameData, itmData,odds, charKeyWord, cosmeticsList):
     pairs = {}
     for Acc in itmData["rows"]:
         if (odds > random.randint(0,99)):
@@ -137,14 +140,14 @@ def CosmeticPairs(nameData, itmData,odds, charKeyWord, cosmeticsList, optionDict
                     break
                 
             Acc["Model"] = cosm.model
-            if optionDict["Blades"]["optionTypeVal"].get() and cosm.characterID in Replacement2Original:
+            if Options.BladesOption.isOn() and cosm.characterID in Replacement2Original:
                 Acc[f"{charKeyWord}"] = Replacement2Original[cosm.characterID]
             else:
                 Acc[f"{charKeyWord}"] = cosm.characterID
             
-def Cosmetics(optionDict):
+def Cosmetics():
     # Slider
-    odds = optionDict["Character Outfits"]["spinBoxVal"].get()
+    odds = Options.CosmeticsOption.isOn()
     
     # Drivers
     with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file:
@@ -152,7 +155,7 @@ def Cosmetics(optionDict):
             eqData = json.load(file)
             accNameData = json.load(nameFile)
             
-            CosmeticPairs(accNameData, eqData, odds, "Driver", ValidDriverCosmetics, optionDict)
+            CosmeticPairs(accNameData, eqData, odds, "Driver", ValidDriverCosmetics)
             
             nameFile.seek(0)
             nameFile.truncate()
@@ -167,7 +170,7 @@ def Cosmetics(optionDict):
             orbData = json.load(orbFile)
             nameData = json.load(nameFile)
             
-            CosmeticPairs(nameData,orbData,odds,"Blade", ValidBladeCosmetics, optionDict)
+            CosmeticPairs(nameData,orbData,odds,"Blade", ValidBladeCosmetics,)
             
             nameFile.seek(0)
             nameFile.truncate()
@@ -183,7 +186,7 @@ def Cosmetics(optionDict):
             if (odds > random.randint(0,99)):
                 cosm:Cosmetic = random.choice(ValidArtificialBladeCosmetics) # these names are shared with regular ones so its not going to work to put poppi names on them when most cant equip those anyway
                 Acc["Model"] = cosm.model
-                if optionDict["Blades"]["optionTypeVal"].get() and cosm.characterID in Replacement2Original:
+                if Options.BladesOption.isOn() and cosm.characterID in Replacement2Original:
                     Acc["Blade"] = Replacement2Original[cosm.characterID]
                 else:
                     Acc["Blade"] = cosm.characterID

@@ -1,4 +1,4 @@
-import json, random
+import json, random, Options
 from Enhancements import *
 
 
@@ -21,7 +21,7 @@ def EnemyArts(spinbox):
         json.dump(EnData, EnFile, indent=2, ensure_ascii=False)  
 
 
-def EnemyArtAttributes(optionsDict):
+def EnemyArtAttributes():
     with open("./_internal/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as EnArtsFile:
         with open("./_internal/JsonOutputs/common/BTL_Arts_BlSp.json", 'r+', encoding='utf-8') as EnBlArtsFile:
             with open("./_internal/JsonOutputs/common_ms/btl_arts_en_ms.json", 'r+', encoding='utf-8') as EnArtsNamesFile:  
@@ -35,8 +35,8 @@ def EnemyArtAttributes(optionsDict):
                             blArtNameData = json.load(BlArtsNamesFile)
                             blArtsData = json.load(BlArtsFile)
                             
-                            ChangeArts(enArtsData, enArtsNameData, optionsDict)
-                            ChangeArts(enBlArtsData, enBlArtsNameData, optionsDict)
+                            ChangeArts(enArtsData, enArtsNameData)
+                            ChangeArts(enBlArtsData, enBlArtsNameData)
                             # ChangeArts(blArtsData, blArtNameData, spinBox) # Currently this will change ally and enemy because they use the same files :/
                             
                             BlArtsFile.seek(0)
@@ -58,15 +58,15 @@ def EnemyArtAttributes(optionsDict):
         EnArtsFile.truncate()
         json.dump(enArtsData, EnArtsFile, indent=2, ensure_ascii=False)
         
-def ChangeArts(artData, artNameData, optionsDict):
+def ChangeArts(artData, artNameData):
     newNameID = 457 # Starting id to add new names to old names file
     
-    spinBox = optionsDict["Enemy Arts Effects"]["spinBoxVal"].get()
-    isReactions = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["Reactions"]["subOptionTypeVal"].get()
-    isDebuffs = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["Debuffs"]["subOptionTypeVal"].get()
-    isBuffs = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["Buffs"]["subOptionTypeVal"].get()
-    isEnhancements = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["Enhancements"]["subOptionTypeVal"].get()
-    isAOE = optionsDict["Enemy Arts Effects"]["subOptionObjects"]["AOE"]["subOptionTypeVal"].get()
+    spinBox = Options.EnemyArtEffectsOption.GetOdds()
+    isReactions = Options.EnemyArtEffectsOption_Reactions.isOn()
+    isDebuffs = Options.EnemyArtEffectsOption_Debuffs.isOn()
+    isBuffs = Options.EnemyArtEffectsOption_Buffs.isOn()
+    isEnhancements = Options.EnemyArtEffectsOption_Enhancements.isOn()
+    isAOE = Options.EnemyArtEffectsOption_AOE.isOn()
                     
     
     for art in artData["rows"]:
@@ -116,7 +116,7 @@ def FindValidChanges(art, isReactions, isDebuffs, isBuffs, isEnhancements, isAOE
         ValidChanges.append(lambda: Debuff(art))           # Debuff
     if isBuffs and art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff (Current AOE is placed only on these things so gotta fix that)
         ValidChanges.append(lambda: Buff(art))
-    if isEnhancements and art.get("Enhance") != None and art["Enhance"] == 0 and art["Target"] == 0: # Add enhancements only to arts without them and that target enemies
+    if isEnhancements and art.get("Enhance") != None and art["Enhance"] == 0 and art["Target"] == 0 and art["ArtsType"] != 4: # Add enhancements only to arts without them and that target enemies
         ValidChanges.append(lambda: Enhancements(art))
     if isAOE and art["RangeType"] == 0 and art["ArtsType"] in [1,2,3]: # Make sure art is single target and a physical ether or healing move
         ValidChanges.append(lambda: AOE(art))
@@ -171,7 +171,7 @@ def Reaction(art):
         "Orb↓": [46],
         "BlCombo↓": [34,40,45],
         "Element": [17, 35],
-        "Elem Ref": [20],
+        # "Elem Ref": [20], not satifying to deal with
     }
     Flames = {
         "Flames": [38], # Needs circle id 1-6

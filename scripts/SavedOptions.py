@@ -1,22 +1,39 @@
 saveFolderName = "SaveData"
-import os
+import os, json, traceback, Options
 
 def saveData(DataList, Filename):
     with open(f"{saveFolderName}/{Filename}", 'w') as file:
+        sav= {}
         for saveData in DataList:
-            try:
-                file.write(f"{saveData.get()}" + '\n')
-            except:
-                file.write(f"{saveData}" + '\n')
+            sav.update({saveData.name: saveData.checkBoxVal.get()})
+            for sub in saveData.subOptions:
+                sav.update({f"{saveData.name}->{sub.name}": sub.checkBoxVal.get()})
+        json.dump(sav, file, indent=4, ensure_ascii=True)
+
 
             
 def loadData(DataList, Filename):
-    try:
-        os.makedirs(saveFolderName, exist_ok=True)
-        with open(f"{saveFolderName}/{Filename}", 'a+') as file:
-            file.seek(0)
-            savedLines = file.readlines()
-            for i in range(len(savedLines)):
-                DataList[i].set(savedLines[i].strip())
-    except:
-        print("Error Loading Settings Saved Values (Likely an option was added or removed)")
+    os.makedirs(saveFolderName, exist_ok=True)
+    with open(f"{saveFolderName}/{Filename}", 'r') as file:
+        data = json.load(file)
+        for option in DataList:
+            try:
+                option.checkBoxVal.set(data[option.name])
+            except:
+                pass
+            for sub in option.subOptions:
+                try:
+                    sub.checkBoxVal.set(data[f"{option.name}->{sub.name}"])
+                    option.StateUpdate()
+                except:
+                    pass
+    # except Exception as error:
+    #             print(f"{traceback.format_exc()}") # shows the full error
+
+class SavedEntry:
+    def __init__(self, _name, _val):
+        self.name =_name
+        self.checkBoxVal = _val # Polymorphism with the Option Class
+        self.subOptions = []
+    def StateUpdate(self): # Used so loadData doesnt care
+        pass

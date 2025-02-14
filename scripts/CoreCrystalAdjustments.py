@@ -2,7 +2,7 @@ import EnemyRandoLogic as EnemyRandoLogic
 import json
 import Helper as Helper
 import random
-import JSONParser
+import JSONParser, Options
 import IDs
 import RaceMode
 
@@ -194,7 +194,7 @@ def CoreCrystalChanges(OptionsRunDict):
     AdjustingCrystalList()
     LandofChallengeRelease()
     FixingGivenCoreCrystalTutorial()
-    if not OptionsRunDict["Race Mode"]["optionTypeVal"].get():
+    if not Options.RaceModeOption.isOn():
         RegularLootDistribution()
         FixRoc()
         FixOpeningSoftlock() # Removes ability to pull before you get Pyra, softlocking if you don't get a blade with arts 

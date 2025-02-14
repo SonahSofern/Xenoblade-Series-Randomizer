@@ -3,7 +3,7 @@ import random
 import time
 import Helper
 from IDs import ValidEnemies, ValidEnemyPopFileNames, FlyingEnArrangeIDs, OriginalFlyingHeights, OriginalWalkSpeeds, OriginalRunSpeeds, OriginalBtlSpeeds, SwimmingEnArrangeIDs
-import copy
+import copy, Options
 
 AllBossDefaultIDs = [179, 180, 181, 182, 184, 185, 186, 187, 189, 190, 191, 193, 195, 196, 197, 198, 199, 201, 202, 203, 204, 206, 208, 210, 212, 214, 216, 217, 219, 220, 221, 222, 223, 225, 227, 229, 231, 232, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 248, 249, 250, 251, 252, 253, 254, 256, 258, 260, 262, 266, 267, 268, 269, 270, 271, 274, 1342, 1429, 1430, 1431, 1432, 1433, 1434, 1435, 1436, 1437, 1438, 1439, 1440, 1441, 1442, 1443, 1444, 1445, 1448, 1454, 1632, 1733, 1746, 1747, 1748, 1749, 1754, 1755]
 AllBossDefaultLevels = [1, 2, 4, 5, 6, 8, 6, 10, 11, 12, 13, 15, 22, 25, 24, 26, 20, 18, 19, 21, 22, 24, 23, 23, 24, 26, 29, 31, 27, 29, 31, 32, 33, 34, 32, 35, 40, 38, 38, 39, 42, 42, 43, 42, 44, 46, 44, 52, 54, 56, 52, 50, 60, 60, 57, 66, 68, 60, 60, 60, 60, 13, 24, 26, 32, 33, 34, 60, 36, 2, 2, 8, 10, 10, 14, 10, 11, 20, 16, 17, 18, 29, 29, 40, 38, 48, 53, 3, 32, 63, 60, 58, 64, 62, 64, 64]
@@ -365,67 +365,68 @@ def BossQuestAggroAdjustments(NewBossIDs, NewQuestIDs): # Required to allow boss
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def EnemyAggroProportion(OptionsRunDict):
-    if not OptionsRunDict["Unique Monster Hunt"]["optionTypeVal"].get():
-        EnemyRandoOnBox = OptionsRunDict["Enemies"]["optionTypeVal"].get()
-        StoryBossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Story Bosses"]["subOptionTypeVal"].get()
-        QuestEnemyBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Quest Enemies"]["subOptionTypeVal"].get()
-        UniqueMonstersBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Unique Monsters"]["subOptionTypeVal"].get()
-        SuperbossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Superbosses"]["subOptionTypeVal"].get()
-        NormalEnemiesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Normal Enemies"]["subOptionTypeVal"].get()
-        if EnemyRandoOnBox:
-            if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox: # do nothing, got handled after enemy randomization
-                pass
-        EnemyAggroSliderOdds = OptionsRunDict["Enemy Aggro"]["spinBoxVal"].get()
-        NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
-        if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive
-            with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
-                data = json.load(file)
-                for row in data["rows"]:
-                    if (row["$id"] in ValidEnemies) & (row["$id"] in OtherEnemyIDs):
-                        row["Flag"]["AlwaysAttack"] = 0
-                        row["Flag"]["mBoss"] = 0
-                        row["SearchRange"] = 0
-                        row["SearchRadius"] = 0
-                        row["SearchAngle"] = 0
-                        row["Detects"] = 0
-                        row["BatInterval"] = 50
-                        row["BatArea"] = 50
-                file.seek(0)
-                file.truncate()
-                json.dump(data, file, indent=2, ensure_ascii=False)
-        else: # run aggro adjustments on non-randomized enemies, not touching boss or quest enemy ids
-            with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
-                data = json.load(file)
-                for row in data["rows"]:
-                    if (EnemyAggroSliderOdds != 100) & (row["$id"] in OtherEnemyIDs) & (random.randint(0,100) >= EnemyAggroSliderOdds) & (row["$id"] in ValidEnemies):
-                        row["Flag"]["AlwaysAttack"] = 0
-                        row["Flag"]["mBoss"] = 0
-                        row["SearchRange"] = 0
-                        row["SearchRadius"] = 0
-                        row["SearchAngle"] = 0
-                        row["Detects"] = 0
-                        row["BatInterval"] = 50
-                        row["BatArea"] = 50
-                    elif (row["$id"] in OtherEnemyIDs) & (row["$id"] in ValidEnemies):
-                        row["Flag"]["mBoss"] = 0
-                        row["Flag"]["AlwaysAttack"] = 1
-                        row["Detects"] = 1
-                        if row["SearchRange"] == 0:
-                            row["SearchRange"] = random.randint(5, 25)
-                        if row["SearchAngle"] == 0:
-                            row["SearchAngle"] = random.randint(45, 135)
-                        if row["SearchRadius"] == 0:
-                            row["SearchRadius"] = random.randint(1, 10)
-                        row["BatInterval"] = 50
-                        row["BatArea"] = 50
-                file.seek(0)
-                file.truncate()
-                json.dump(data, file, indent=2, ensure_ascii=False)
+def EnemyAggroProportion():
+    if Options.UMHuntOption.isOn():
+        return
+    EnemyRandoOnBox = Options.EnemiesOption.isOn()
+    StoryBossesBox = Options.EnemiesOption_Bosses.isOn()
+    QuestEnemyBox = Options.EnemiesOption_QuestEnemies.isOn()
+    UniqueMonstersBox = Options.EnemiesOption_UniqueMonsters.isOn()
+    SuperbossesBox = Options.EnemiesOption_Superbosses.isOn()
+    NormalEnemiesBox = Options.EnemiesOption_NormalEnemies.isOn()
+    if EnemyRandoOnBox:
+        if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox: # do nothing, got handled after enemy randomization
+            pass
+    EnemyAggroSliderOdds = Options.EnemyAggroOption.isOn()
+    NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
+    if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive
+        with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
+            data = json.load(file)
+            for row in data["rows"]:
+                if (row["$id"] in ValidEnemies) & (row["$id"] in OtherEnemyIDs):
+                    row["Flag"]["AlwaysAttack"] = 0
+                    row["Flag"]["mBoss"] = 0
+                    row["SearchRange"] = 0
+                    row["SearchRadius"] = 0
+                    row["SearchAngle"] = 0
+                    row["Detects"] = 0
+                    row["BatInterval"] = 50
+                    row["BatArea"] = 50
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+    else: # run aggro adjustments on non-randomized enemies, not touching boss or quest enemy ids
+        with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
+            data = json.load(file)
+            for row in data["rows"]:
+                if (EnemyAggroSliderOdds != 100) & (row["$id"] in OtherEnemyIDs) & (random.randint(0,100) >= EnemyAggroSliderOdds) & (row["$id"] in ValidEnemies):
+                    row["Flag"]["AlwaysAttack"] = 0
+                    row["Flag"]["mBoss"] = 0
+                    row["SearchRange"] = 0
+                    row["SearchRadius"] = 0
+                    row["SearchAngle"] = 0
+                    row["Detects"] = 0
+                    row["BatInterval"] = 50
+                    row["BatArea"] = 50
+                elif (row["$id"] in OtherEnemyIDs) & (row["$id"] in ValidEnemies):
+                    row["Flag"]["mBoss"] = 0
+                    row["Flag"]["AlwaysAttack"] = 1
+                    row["Detects"] = 1
+                    if row["SearchRange"] == 0:
+                        row["SearchRange"] = random.randint(5, 25)
+                    if row["SearchAngle"] == 0:
+                        row["SearchAngle"] = random.randint(45, 135)
+                    if row["SearchRadius"] == 0:
+                        row["SearchRadius"] = random.randint(1, 10)
+                    row["BatInterval"] = 50
+                    row["BatArea"] = 50
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
 
-def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict): #when enemy rando is on
-    EnemyAggroOnBox = OptionsRunDict["Enemy Aggro"]["optionTypeVal"].get()
-    EnemyAggroSliderOdds = OptionsRunDict["Enemy Aggro"]["spinBoxVal"].get()
+def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs): #when enemy rando is on
+    EnemyAggroOnBox = Options.EnemyAggroOption.isOn()
+    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetOdds()
     if EnemyAggroOnBox: # if enemy aggro is randomized
         with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
@@ -743,30 +744,30 @@ def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/f
     PadraigFightFix()
     GerolfSovereignFix()
 
-def EnemyLogic(OptionsRunDict):
+def EnemyLogic():
     EnemyRandoOn = False
     EnemiestoPass = []
     LevelstoPass = []
     CheckboxList = [] #I'm lazy, so i'm just going to pass the names and true/false states to two arrays
     CheckboxStates = []
-    StoryBossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Story Bosses"]["subOptionTypeVal"].get()
-    KeepStoryBossesLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Original Boss Encounter Levels"]["subOptionTypeVal"].get()
-    QuestEnemyBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Quest Enemies"]["subOptionTypeVal"].get()
-    KeepQuestEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Original Quest Encounter Levels"]["subOptionTypeVal"].get()
-    UniqueMonstersBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Unique Monsters"]["subOptionTypeVal"].get()
-    SuperbossesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Superbosses"]["subOptionTypeVal"].get()
-    NormalEnemiesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Normal Enemies"]["subOptionTypeVal"].get()
-    KeepAllEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use All Original Encounter Levels"]["subOptionTypeVal"].get()
-    MixEnemiesBetweenTypesBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Mix Enemies Between Types"]["subOptionTypeVal"].get()
+    StoryBossesBox = Options.EnemiesOption_Bosses.isOn()
+    # KeepStoryBossesLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Original Boss Encounter Levels"]["subOptionTypeVal"].get()
+    QuestEnemyBox = Options.EnemiesOption_QuestEnemies.isOn()
+    # KeepQuestEnemyLevelsBox = OptionsRunDict["Enemies"]["subOptionObjects"]["Use Original Quest Encounter Levels"]["subOptionTypeVal"].get()
+    UniqueMonstersBox = Options.EnemiesOption_UniqueMonsters.isOn()
+    SuperbossesBox = Options.EnemiesOption_Superbosses.isOn()
+    NormalEnemiesBox = Options.EnemiesOption_NormalEnemies.isOn()
+    KeepAllEnemyLevelsBox = Options.EnemiesOption_BalancedLevels.isOn()
+    MixEnemiesBetweenTypesBox = Options.EnemiesOption_MixedTypes.isOn()
     AllBossDefaultIDstoUse = AllBossDefaultIDs
     AllBossDefaultLevelstoUse = AllBossDefaultLevels
-    if OptionsRunDict["Race Mode"]["optionTypeVal"].get(): # removing malos in auresco fight for race mode specifically, he has an absurd amount of hp and is just a slog of a fight
+    if Options.RaceModeOption.isOn(): # removing malos in auresco fight for race mode specifically, he has an absurd amount of hp and is just a slog of a fight
         AllBossDefaultIDstoUse = [x for x in AllBossDefaultIDs if x != 1443]
         del AllBossDefaultLevelstoUse[83]
     if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox:
         EnemyRandoOn = True
-        CheckboxList = ["Story Bosses", "Quest Enemies", "Unique Monsters", "Superbosses", "Normal Enemies", "Mix Enemies Between Types", "Use All Original Encounter Levels", "Use Original Quest Encounter Levels", "Use Original Boss Encounter Levels"]
-        CheckboxStates = [StoryBossesBox, QuestEnemyBox, UniqueMonstersBox, SuperbossesBox, NormalEnemiesBox, MixEnemiesBetweenTypesBox, KeepAllEnemyLevelsBox, KeepQuestEnemyLevelsBox, KeepStoryBossesLevelsBox]
+        CheckboxList = ["Story Bosses", "Quest Enemies", "Unique Monsters", "Superbosses", "Normal Enemies", "Mix Enemies Between Types", "Use All Original Encounter Levels"]
+        CheckboxStates = [StoryBossesBox, QuestEnemyBox, UniqueMonstersBox, SuperbossesBox, NormalEnemiesBox, MixEnemiesBetweenTypesBox, KeepAllEnemyLevelsBox]
     if EnemyRandoOn == True:
         print("Randomizing Enemies")
         TotalDefaultEnemyIDs = []
@@ -802,15 +803,6 @@ def EnemyLogic(OptionsRunDict):
                 if KeepAllEnemyLevelsBox:
                     LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, LevelstoPass)
                     print("Reverting all enemy levels")
-                else:
-                    if QuestEnemyBox:
-                        if KeepQuestEnemyLevelsBox:
-                            LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
-                            print("Reverting Quest Enemy levels")
-                    if StoryBossesBox:
-                        if KeepStoryBossesLevelsBox:
-                            LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
-                            print("Reverting Story Boss Levels")
         if not MixEnemiesBetweenTypesBox:
             print("Enemies not shuffled")
             for o in range(0, len(CheckboxList)):
@@ -847,22 +839,12 @@ def EnemyLogic(OptionsRunDict):
                         LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, LevelstoPass)
                         print("Reverting all enemy levels")
                         continue
-                    if (CheckboxList[o] == "Quest Enemies") & (CheckboxStates[o] == True):
-                        if KeepQuestEnemyLevelsBox == True:
-                            LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllQuestDefaultEnemyIDs, AllQuestEnemyDefaultLevels)
-                            print("Reverting Quest Enemy levels")
-                            continue
-                    if (CheckboxList[o] == "Story Bosses") & (CheckboxStates[o] == True):
-                        if KeepStoryBossesLevelsBox == True:
-                            LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, AllBossDefaultIDs, AllBossDefaultLevels)
-                            print("Reverting Story Boss Levels")
-                            continue
         NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
         BossQuestAggroAdjustments(NewBossIDs, NewQuestIDs)
         KeyItemsReAdd()
         Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_EnArrange.json", ["LvRand", "DriverLev"], 0)
         Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_SalvageEnemySet.json", ["ene1Lv", "ene2Lv", "ene3Lv", "ene4Lv"], 0)
-        PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs, OptionsRunDict)
+        PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs)
         BalanceFixes()
         EnemyDupeBossCondition(NewBossIDs)
         FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)

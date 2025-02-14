@@ -6,8 +6,8 @@ from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipID
 import time
 import JSONParser
 import DebugLog
-import math
 import CoreCrystalAdjustments
+import math, Options
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
@@ -20,7 +20,7 @@ DamageRevLow = [100, 100, 100, 98, 96, 94, 92, 90, 88, 86, 84, 82, 80, 78, 76, 7
 HitRevLow = [110, 115, 122, 129, 138, 147, 158, 169, 182, 195, 210, 225, 242, 259, 278, 297, 318, 339, 362, 385]
 ReactRevHigh = [0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 40, 60, 80, 100, 100, 100, 100, 100, 100, 100]
 
-def RaceModeChanging(OptionsRunDict): 
+def RaceModeChanging(): 
     print("Setting Up Race Mode")    
     #Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
     #Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
@@ -181,7 +181,7 @@ def RaceModeChanging(OptionsRunDict):
         json.dump(data, file, indent=2, ensure_ascii=False)
     
     ScriptAdjustments()
-    NGPlusBladeCrystalIDs = DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
+    NGPlusBladeCrystalIDs = DetermineNGPlusBladeCrystalIDs()
     PickupRadiusDeedStart()
     DifficultyChanges()
     XPDownScaling()
@@ -190,9 +190,9 @@ def RaceModeChanging(OptionsRunDict):
     GimmickAdjustments()
     HideMapAreas(ScenarioFlagLists)
     print("Filling Chests with Custom Loot")
-    RaceModeLootChanges(NGPlusBladeCrystalIDs, OptionsRunDict)
+    RaceModeLootChanges(NGPlusBladeCrystalIDs)
     StackableCoreCrystalsandKeyItems()
-    FindtheBladeNames(OptionsRunDict)
+    FindtheBladeNames()
     print("Reducing amount of grinding")
     LessGrinding()
     if NGPlusBladeCrystalIDs != None:
@@ -212,7 +212,7 @@ def RaceModeChanging(OptionsRunDict):
     EnemyDropRemoval()
     EnemyRandoLogic.KeyItemsReAdd()
     CoreCrystalAdjustments.FieldSkillLevelAdjustment()
-    if OptionsRunDict["Race Mode"]["subOptionObjects"]["DLC Item Removal"]["subOptionTypeVal"].get():
+    if Options.RaceModeOption_DLC.isOn():
         print("Nerfing Corvin and Crossette")
         DLCItemChanges()
 
@@ -233,10 +233,10 @@ def LessGrinding(): #adjusting level based exp gains, and debuffs while underlev
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def DetermineNGPlusBladeCrystalIDs(OptionsRunDict):
+def DetermineNGPlusBladeCrystalIDs():
     NGPlusBladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
     NGPlusBladeCrystalIDs = []
-    if (OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get()) or (OptionsRunDict["Unique Monster Hunt"]["optionTypeVal"].get()):
+    if (Options.CustomCoreCrystalOption.isOn()) or (Options.UMHuntOption.isOn()):
         with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
             for i in range(0, len(NGPlusBladeIDs)):
@@ -850,8 +850,8 @@ def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy 
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def FindtheBladeNames(OptionsRunDict):
-    if OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get():
+def FindtheBladeNames():
+    if Options.CustomCoreCrystalOption.isOn():
         ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
         CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
         CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("./_internal/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
@@ -972,9 +972,9 @@ def WeaponChipShopPowerLevelIncrease(): # Common issue at start of run is first 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def ChestTypeMatching(OptionsRunDict):  # Chest type matches Contents
-    RaceModeOn = OptionsRunDict["Race Mode"]["optionTypeVal"].get()
-    ZoharFragOn = OptionsRunDict["Race Mode"]["subOptionObjects"]["Zohar Fragment Hunt"]["subOptionTypeVal"].get()
-    CoreCrystalRandoOn = OptionsRunDict["Custom Core Crystals"]["optionTypeVal"].get()
+    RaceModeOn = Options.RaceModeOption.isOn()
+    ZoharFragOn = Options.RaceModeOption_Zohar.isOn()
+    CoreCrystalRandoOn = Options.CustomCoreCrystalOption.isOn()
     ZoharFragItemIDs = [25135, 25136, 25137, 25138]
     CoreCrystalIDs = AllCoreCrystals
     MovespeedDeedIDs = Helper.InclRange(25249, 25300)

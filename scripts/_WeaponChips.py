@@ -1,9 +1,9 @@
 import json, random
 from Enhancements import *
+import Options
 
 
-
-def RandomizeWeaponEnhancements(slider):
+def RandomizeWeaponEnhancements():
     InvalidSkillEnhancements = [ArtCancel,EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, BladeSwapDamage,CatScimPowerUp, EvadeDrainHp, EvadeDriverArt, EtherCannonRange,ArtDamageHeal, DreamOfTheFuture]
     ValidWeaponNames = ["Rings", "Ball", "Cannon", "Sword", "Slayer", "Edge", "Brand", "Scimitar", "Cleaver", "Shield", "Destroyer", "Plate", "Pavise", "Gauntlets", "Arms", "Saber", "Slicer", "Whips", "Claw", "Scythes", "Sickles", "Gutters", "Hatchet", "Axe", "Greataxe", "Lance", "Mecha-Spear", "Hammer", "Smasher", "Tachi", "Katana", "Knuckles", "Fists", "Nodachi", "Crosier", "Gunknives"]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
@@ -11,12 +11,12 @@ def RandomizeWeaponEnhancements(slider):
     with open("./_internal/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file:
         with open("./_internal/JsonOutputs/common_ms/itm_pcwpn_ms.json", 'r+', encoding='utf-8') as wepNames:
             
-            
+            slider = Options.BladeWeaponChipsOption.GetOdds()
             enhanceFile = json.load(file)
             skillNameFile = json.load(wepNames)
             for Wep in enhanceFile["rows"]:
                 
-                if slider.get() < random.randrange(0,100):
+                if slider < random.randrange(0,100):
                     continue
                 
                 skillNameID = Wep["Name"]

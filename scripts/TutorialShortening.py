@@ -1,9 +1,9 @@
 import json
 import Helper
-import EnemyRandoLogic
+import EnemyRandoLogic, Options
 
-def ShortenedTutorial(OptionsRunDict):
-    RaceModeBox = OptionsRunDict["Race Mode"]["optionTypeVal"].get()
+def ShortenedTutorial():
+    RaceModeBox = Options.RaceModeOption.isOn()
     if not RaceModeBox:
         print("Shortening Tutorials")
         Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Condition.json", ["cond"], 1)
