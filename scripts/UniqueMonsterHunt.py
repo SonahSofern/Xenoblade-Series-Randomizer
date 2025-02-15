@@ -1,4 +1,4 @@
-import json, random, Helper, IDs, EnemyRandoLogic, RaceMode, math
+import json, random, Helper, IDs, EnemyRandoLogic, RaceMode, math, Options
 from Enhancements import *
 
 #Keeping these 3 separate from the already existing IDs in EnemyRandoLogic in case I want to do some balancing or something
@@ -35,24 +35,24 @@ ValidPouchItems = [x for x in IDs.PouchItems if x not in [40314, 40428]]
 # Known Issues: 
 # Poppiswap is going to be fucked up with custom enhancements
 
-def UMHunt(OptionDictionary):
+def UMHunt():
     if IDs.CurrentSliderOdds != 0:
         SetCount = IDs.CurrentSliderOdds
         ChosenAreaOrder = []
         if IDs.CurrentSliderOdds > 10: #really need to limit the spinbox instead
             SetCount = 10
-        CheckForSuperbosses(SetCount, OptionDictionary)
+        CheckForSuperbosses(SetCount)
         ChosenAreaOrder.extend(random.sample(TotalAreaPool, SetCount))
         #FindMonsters(ChosenAreaOrder)
         PartyMemberstoAdd = PartyMemberAddition(SetCount)
-        AreaUMs, AllAreaMonsters = CustomEnemyRando(ChosenAreaOrder, OptionDictionary)
+        AreaUMs, AllAreaMonsters = CustomEnemyRando(ChosenAreaOrder)
         EnemySets = ChosenEnemySets(SetCount, AreaUMs)
         WarpManagement(SetCount, ChosenAreaOrder, PartyMemberstoAdd, EnemySets)
         CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder)
         LandmarkAdjustments(ChosenAreaOrder)
         NoUnintendedRewards(ChosenAreaOrder)
         SpiritCrucibleEntranceRemoval()
-        ShopChanges(ChosenAreaOrder, OptionDictionary)
+        ShopChanges(ChosenAreaOrder)
         BalanceChanges(ChosenAreaOrder)
         if ExtraSuperbosses:
             OhBoyHereWeGoAgain()
@@ -90,10 +90,10 @@ def FindMonsters(ChosenAreaOrder): # was used to debug and find enemies that spa
             toolargepool["Counts"].append(enemycountholder[i])
     print(toolargepool)
 
-def CheckForSuperbosses(SetCount, OptionDictionary):
+def CheckForSuperbosses(SetCount):
     global ExtraSuperbosses
     global SuperbossCount
-    if (OptionDictionary["Unique Monster Hunt"]["subOptionObjects"]["Extra Superbosses"]["subOptionTypeVal"].get()) & (SetCount == 10):
+    if (Options.UMHuntOption_SuperbossWave.GetState()) & (SetCount == 10):
         ExtraSuperbosses = True
         SuperbossCount = 5
     else:
@@ -128,9 +128,9 @@ def Cleanup():
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/CHR_Dr.json", ["DefSPType"], 2)
     GimmickAdjustments()
 
-def ShopChanges(ChosenAreaOrder, OptionDictionary): # Moved these out since they were cluttering the main function up. Order probably matters
+def ShopChanges(ChosenAreaOrder): # Moved these out since they were cluttering the main function up. Order probably matters
     UMRewardDropChanges()
-    CoreCrystalIdentification(OptionDictionary)
+    CoreCrystalIdentification()
     WeaponPowerLevel()
     BladeTrustRequirementChanges()
     PoppiswapCostChanges()
@@ -503,7 +503,7 @@ def ChosenEnemySets(SetCount, AreaUMs): # Figuring out what enemies to turn into
             EnemySets.append(random.sample(AreaUMs[i], len(AreaUMs[i])))
     return EnemySets
 
-def CustomEnemyRando(ChosenAreaOrder, OptionDictionary): # Custom shuffling of enemies
+def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
     AllAreaUMs = []
     AllAreaMonsters = []
     AllAreaSuperbosses = []
@@ -594,11 +594,11 @@ def CustomEnemyRando(ChosenAreaOrder, OptionDictionary): # Custom shuffling of e
                 if AllAreaSuperbosses[j] == ChosenSuperbosses[i]: # if we have a chosen superboss that matches the entire list of superbosses and their maps (both of equal length!)
                     SuperbossMaps.append(SuperbossMapsFull[j]) # add the superboss's map to the list of maps we care about
                     break
-    UMEnemyAggro(OptionDictionary)
+    UMEnemyAggro()
     return AllAreaUMs, AllAreaMonsters
     
-def UMEnemyAggro(OptionDictionary): # custom enemy aggro
-    EnemyAggroSliderOdds = OptionDictionary["Enemy Aggro"]["spinBoxVal"].get()
+def UMEnemyAggro(): # custom enemy aggro
+    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetOdds()
     if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive, except the unique monsters
         with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
@@ -1050,10 +1050,10 @@ def IdentifyClassBladeCrystals(CrystalList): # go from ITM_CrystalList $id->blad
             HealerList.append(CrystalList[i])
     return TankList, AttackerList, HealerList
 
-def CoreCrystalIdentification(OptionsRunDict): # Figuring out the groups that each Core Crystal Belongs to, then picking items from each group for the shop
+def CoreCrystalIdentification(): # Figuring out the groups that each Core Crystal Belongs to, then picking items from each group for the shop
     ShuffleCoreCrystals()
     AllBladeCrystalIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
-    NGPlusBladeCrystalIDs = RaceMode.DetermineNGPlusBladeCrystalIDs(OptionsRunDict)
+    NGPlusBladeCrystalIDs = RaceMode.DetermineNGPlusBladeCrystalIDs()
     RemainingBladeCrystalIDs = [x for x in AllBladeCrystalIDs if x not in NGPlusBladeCrystalIDs]
     DLCBladeCrystalIDs = IdentifyDLCBladeCrystals(RemainingBladeCrystalIDs)
     RemainingBladeCrystalIDs = [x for x in RemainingBladeCrystalIDs if x not in DLCBladeCrystalIDs]
