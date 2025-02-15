@@ -516,72 +516,70 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
     ShuffledSuperBossIDs = AllSuperBossDefaultIDs.copy()
     random.shuffle(ShuffledSuperBossIDs)
     random.shuffle(ShuffledUniqueEnemyIDs)
-    for k in range(0, len(ChosenAreaOrder)):
+    for k in range(0, len(ChosenAreaOrder)): # 10 loops max
         Chosen4UMs = ShuffledUniqueEnemyIDs[(4*k):(4+4*k)]
         ChosenSuperBoss = ShuffledSuperBossIDs[k]
-        for i in range(0, len(IDs.ValidEnemyPopFileNames)):
-            UniqueAreaEnemies = []
-            if ContinentInfo[ChosenAreaOrder[k]][2] in IDs.ValidEnemyPopFileNames[i]:
-                OriginalAreaEnemies = []
-                CurrentAreaUMs = []
-                CurrentAreaMonsters = []
-                enemypopfile = "./_internal/JsonOutputs/common_gmk/" + IDs.ValidEnemyPopFileNames[i]
-                Helper.ColumnAdjust(enemypopfile, ["battlelockname"], 0)
-                with open(enemypopfile, 'r+', encoding='utf-8') as file:
-                    data = json.load(file)
-                    for row in data["rows"]:
-                        for j in range(1, 5):
-                            if row[f"ene{j}ID"] in IDs.ValidEnemies: # if it's not a boss row and has a valid enemy id
-                                OriginalAreaEnemies.append(row[f"ene{j}ID"]) # add to list of enemies to choose from
-                    UniqueAreaEnemies = list(OrderedDict.fromkeys(OriginalAreaEnemies)) # then we remove dupes, and sort it
-                    OriginalAreaEnemies = UniqueAreaEnemies
-                    #print(OriginalAreaEnemies)
-                    NewAreaEnemies = OriginalAreaEnemies.copy() # make a copy of the list
-                    NewAreaEnemies = [x for x in NewAreaEnemies if x not in AllUniqueMonsterDefaultIDs + AllSuperBossDefaultIDs] # now remove all ums and superbosses
-                    del NewAreaEnemies[-2:] # remove two slots, this accounts for the land of morytha, where there's only 3 unique monsters, and no superbosses. Everywhere else has 4, and we need at least 5 slots to add 4 ums + 1 superboss to each area
-                    NewAreaEnemies.extend(Chosen4UMs) # add the 4 UMs back to the pool
-                    if ExtraSuperbosses:
-                        NewAreaEnemies.append(ChosenSuperBoss) # add the superboss to the pool
-                    while len(NewAreaEnemies) < len(OriginalAreaEnemies): # while the new enemy pool is less than the original, we need to add more to make them equal
-                        ChosenNormalEnemy = random.choice(AllNormalEnemyDefaultIDs)
-                        if ChosenNormalEnemy not in NewAreaEnemies:
-                            NewAreaEnemies.append(ChosenNormalEnemy)
-                            AllNormalEnemyDefaultIDs.remove(ChosenNormalEnemy)
-                    random.shuffle(NewAreaEnemies) # now mix up the enemies
-                    #print(NewAreaEnemies)
-                    #print("-------------")
-                    for row in data["rows"]: # row
-                        for j in range(1, 5): # column
-                            if row[f"ene{j}ID"] == 0:
+        UniqueAreaEnemies = []
+        OriginalAreaEnemies = []
+        CurrentAreaUMs = []
+        CurrentAreaMonsters = []
+        enemypopfile = "./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[k]][2] + "_FLD_EnemyPop.json"
+        Helper.ColumnAdjust(enemypopfile, ["battlelockname"], 0)
+        with open(enemypopfile, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for row in data["rows"]: # ~550 loops
+                for j in range(1, 5): # 4 loops
+                    if row[f"ene{j}ID"] in IDs.ValidEnemies: # if it's not a boss row and has a valid enemy id
+                        OriginalAreaEnemies.append(row[f"ene{j}ID"]) # add to list of enemies to choose from
+            UniqueAreaEnemies = list(OrderedDict.fromkeys(OriginalAreaEnemies)) # then we remove dupes, and sort it
+            OriginalAreaEnemies = UniqueAreaEnemies
+            #print(OriginalAreaEnemies)
+            NewAreaEnemies = OriginalAreaEnemies.copy() # make a copy of the list
+            NewAreaEnemies = [x for x in NewAreaEnemies if x not in AllUniqueMonsterDefaultIDs + AllSuperBossDefaultIDs] # now remove all ums and superbosses
+            del NewAreaEnemies[-2:] # remove two slots, this accounts for the land of morytha, where there's only 3 unique monsters, and no superbosses. Everywhere else has 4, and we need at least 5 slots to add 4 ums + 1 superboss to each area
+            NewAreaEnemies.extend(Chosen4UMs) # add the 4 UMs back to the pool
+            if ExtraSuperbosses:
+                NewAreaEnemies.append(ChosenSuperBoss) # add the superboss to the pool
+            while len(NewAreaEnemies) < len(OriginalAreaEnemies): # while the new enemy pool is less than the original, we need to add more to make them equal
+                ChosenNormalEnemy = random.choice(AllNormalEnemyDefaultIDs)
+                if ChosenNormalEnemy not in NewAreaEnemies:
+                    NewAreaEnemies.append(ChosenNormalEnemy)
+                    AllNormalEnemyDefaultIDs.remove(ChosenNormalEnemy)
+            random.shuffle(NewAreaEnemies) # now mix up the enemies
+            #print(NewAreaEnemies)
+            #print("-------------")
+            for row in data["rows"]: # row
+                for j in range(1, 5): # column
+                    if row[f"ene{j}ID"] == 0:
+                        break
+                    else:
+                        for m in range(0, len(NewAreaEnemies)): # enemy
+                            if row[f"ene{j}ID"] == OriginalAreaEnemies[m]: # if it matches the original enemy number
+                                row[f"ene{j}ID"] = NewAreaEnemies[m] # give it the new 
                                 break
-                            else:
-                                for m in range(0, len(NewAreaEnemies)): # enemy
-                                    if row[f"ene{j}ID"] == OriginalAreaEnemies[m]: # if it matches the original enemy number
-                                        row[f"ene{j}ID"] = NewAreaEnemies[m] # give it the new 
-                                        break
-                    for row in data["rows"]:
-                        for j in range(1, 5):
-                            if row[f"ene{j}ID"] == 0:
-                                break
-                            else:
-                                CurrentAreaMonsters.append(row[f"ene{j}ID"])
-                                if row[f"ene{j}ID"] in AllUniqueMonsterDefaultIDs: # if it's a um we want it to always show up
-                                    row["Condition"] = row["ScenarioFlagMax"] = row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["muteki_QuestFlag"] = row["muteki_QuestFlagMin"] = row["muteki_QuestFlagMax"] = row["muteki_Condition"] = row[f"ene{j}Lv"] = 0
-                                    row["POP_TIME"] = 256
-                                    row["popWeather"] = 255
-                                    CurrentAreaUMs.append(row[f"ene{j}ID"]) # now add it to the list of ums for this area, used in many places, so we need to keep track of this
-                                elif row[f"ene{j}ID"] in AllSuperBossDefaultIDs: # if it's a superboss, do the same as for ums, except add it to its' own list
-                                    row["Condition"] = row["ScenarioFlagMax"] = row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["muteki_QuestFlag"] = row["muteki_QuestFlagMin"] = row["muteki_QuestFlagMax"] = row["muteki_Condition"] = row[f"ene{j}Lv"] = 0
-                                    row["POP_TIME"] = 256
-                                    row["popWeather"] = 255
-                                    AllAreaSuperbosses.append(row[f"ene{j}ID"])
-                                    SuperbossMapsFull.append(ChosenAreaOrder[k])
-                    file.seek(0)
-                    file.truncate()
-                    json.dump(data, file, indent=2, ensure_ascii=False)
-                CurrentAreaUMs = list(set(CurrentAreaUMs))
-                AllAreaUMs.append(CurrentAreaUMs)
-                AllAreaMonsters.append(CurrentAreaMonsters)
+            for row in data["rows"]:
+                for j in range(1, 5):
+                    if row[f"ene{j}ID"] == 0:
+                        break
+                    else:
+                        CurrentAreaMonsters.append(row[f"ene{j}ID"])
+                        if row[f"ene{j}ID"] in AllUniqueMonsterDefaultIDs: # if it's a um we want it to always show up
+                            row["Condition"] = row["ScenarioFlagMax"] = row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["muteki_QuestFlag"] = row["muteki_QuestFlagMin"] = row["muteki_QuestFlagMax"] = row["muteki_Condition"] = row[f"ene{j}Lv"] = 0
+                            row["POP_TIME"] = 256
+                            row["popWeather"] = 255
+                            CurrentAreaUMs.append(row[f"ene{j}ID"]) # now add it to the list of ums for this area, used in many places, so we need to keep track of this
+                        elif row[f"ene{j}ID"] in AllSuperBossDefaultIDs: # if it's a superboss, do the same as for ums, except add it to its' own list
+                            row["Condition"] = row["ScenarioFlagMax"] = row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["muteki_QuestFlag"] = row["muteki_QuestFlagMin"] = row["muteki_QuestFlagMax"] = row["muteki_Condition"] = row[f"ene{j}Lv"] = 0
+                            row["POP_TIME"] = 256
+                            row["popWeather"] = 255
+                            AllAreaSuperbosses.append(row[f"ene{j}ID"])
+                            SuperbossMapsFull.append(ChosenAreaOrder[k])
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+        CurrentAreaUMs = list(set(CurrentAreaUMs))
+        AllAreaUMs.append(CurrentAreaUMs)
+        AllAreaMonsters.append(CurrentAreaMonsters)
         EnemyRandoLogic.FlyingEnemyFix(OriginalAreaEnemies, NewAreaEnemies)
         EnemyRandoLogic.SwimmingEnemyFix(OriginalAreaEnemies, NewAreaEnemies)
     EnemyRandoLogic.FishFix()
