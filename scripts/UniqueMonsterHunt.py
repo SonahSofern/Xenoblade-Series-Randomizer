@@ -794,6 +794,7 @@ def NoUnintendedRewards(ChosenAreaOrder): # Removes any cheese you can do by doi
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_GravePopList.json", ["en_popID"], 0) # Keeps you from respawning a UM.
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma02a_FLD_TboxPop.json", ["Condition"], 3903) # removes drops from chests in argentum
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", ["QuestID"], 0) # removes talking to NPCs in argentum
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", ["Visible_XZ", "Visible_Y"], 100) # makes despawn radius smaller for npcs
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma21a_FLD_TboxPop.json", ["Condition"], 3903) # removes treasure chests from Elysium
     for area in ChosenAreaOrder:
         Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[area][2] + "_FLD_TboxPop.json", ["Condition"], 3903) # removes drops from chests
@@ -1654,7 +1655,7 @@ def AddSPManual(): # Creates 3 SP Manuals, using ID 25015, 25018, 25033
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in SPManualIDs:
-                row["ValueMax"] == 99
+                row["ValueMax"] = 99
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1911,7 +1912,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
     }
 
     GambaShop = {
-        "NPCModel": 3324,# from RSC_NpcList, goes to ma02a_FLD_NpcPop NpcID. Generic Mercenary
+        "NPCModel": 2006, # from RSC_NpcList, goes to ma02a_FLD_NpcPop NpcID. Lora
         "NPCID": 2188, # ma02a_FLD_NpcPop $id
         "ShopIcon": 443, # MNU_ShopList ShopIcon
         "ShopIDtoReplace": 27, # MNU_ShopList $id
