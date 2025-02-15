@@ -548,7 +548,7 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
                             NewAreaEnemies.append(ChosenNormalEnemy)
                             AllNormalEnemyDefaultIDs.remove(ChosenNormalEnemy)
                     random.shuffle(NewAreaEnemies) # now mix up the enemies
-                    print(NewAreaEnemies)
+                    #print(NewAreaEnemies)
                     #print("-------------")
                     for row in data["rows"]: # row
                         for j in range(1, 5): # column
@@ -2095,7 +2095,7 @@ def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of i
             "HideReward": SecretEmptyFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
         }
 
-        print(SecretShop["NPCID"])
+        #print(SecretShop["NPCID"])
 
         ShopList.append(SecretShop)
 
