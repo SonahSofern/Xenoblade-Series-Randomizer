@@ -587,7 +587,7 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
     EnemyRandoLogic.FishFix()
     EnemyRandoLogic.BigEnemyCollisionFix()
     if ExtraSuperbosses:
-        UniqueSuperbosses = list(set(AllAreaSuperbosses))
+        UniqueSuperbosses = list(OrderedDict.fromkeys(AllAreaSuperbosses))
         ChosenSuperbossNumbers = random.choices(Helper.InclRange(0, 9), k = SuperbossCount)
         global ChosenSuperbosses
         ChosenSuperbosses = []
