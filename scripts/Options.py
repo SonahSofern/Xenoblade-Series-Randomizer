@@ -303,7 +303,7 @@ for opt in Cosmetics.CosmeticsList: # To gen these since listing them here would
 RaceModeOption = Option("Race Mode", GameModeTab, "Enables Race Mode (see the Race Mode README)", [lambda: RaceMode.RaceModeChanging(), RaceMode.SeedHash])
 RaceModeOption_Zohar = SubOption("Zohar Fragment Hunt", RaceModeOption)
 RaceModeOption_DLC = SubOption("DLC Item Removal", RaceModeOption)
-UMHuntOption = Option("Unique Monster Hunt", GameModeTab, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt()], _hasSpinBox = True, _spinMin = 1, _spinMax = 10, _spinIncr = 1, _spinDesc = "Rounds:", _spinWidth = 2)
+UMHuntOption = Option("Unique Monster Hunt", GameModeTab, "Experimental Mode", [lambda: UniqueMonsterHunt.UMHunt()], _hasSpinBox = True, _spinMin = 1, _spinMax = 10, _spinIncr = 1, _spinDesc = "Round(s)", _spinWidth = 2)
 UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
 #  spinMin = 1, spinMax = 10, spinStep = 1, spinBoxDescription = "Round(s):", spinBoxWidth = 2, spinBoxDescCol = 2, spinBoxObjCol = 3, spinBoxObjPadding = (0,0))
 
