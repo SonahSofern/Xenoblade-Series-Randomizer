@@ -6,6 +6,8 @@ def saveData(DataList, Filename):
         sav= {}
         for saveData in DataList:
             sav.update({saveData.name: saveData.checkBoxVal.get()})
+            if saveData.spinBoxVal != None:
+                sav.update({f"{saveData.name} Spinbox: ": saveData.spinBoxVal.get()})
             for sub in saveData.subOptions:
                 sav.update({f"{saveData.name}->{sub.name}": sub.checkBoxVal.get()})
         json.dump(sav, file, indent=4, ensure_ascii=True)
@@ -20,6 +22,10 @@ def loadData(DataList, Filename):
             for option in DataList:
                 try:
                     option.checkBoxVal.set(data[option.name])
+                except:
+                    pass
+                try:
+                    option.spinBoxVal.set(data[f"{option.name} Spinbox: "])
                 except:
                     pass
                 for sub in option.subOptions:
@@ -38,5 +44,6 @@ class SavedEntry:
         self.name =_name
         self.checkBoxVal = _val # Polymorphism with the Option Class
         self.subOptions = []
+        self.spinBoxVal = None
     def StateUpdate(self): # Used so loadData doesnt care
         pass
