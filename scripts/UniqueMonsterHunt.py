@@ -545,7 +545,7 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
                             NewAreaEnemies.append(ChosenNormalEnemy)
                             AllNormalEnemyDefaultIDs.remove(ChosenNormalEnemy)
                     random.shuffle(NewAreaEnemies) # now mix up the enemies
-                    #print(NewAreaEnemies)
+                    print(NewAreaEnemies)
                     #print("-------------")
                     for row in data["rows"]: # row
                         for j in range(1, 5): # column
@@ -1626,7 +1626,7 @@ def AddDLCRewards(ChosenAreaOrder):
                     row["title"] = StartingDLCItemTextRow + i
                     break
         if len(ChosenAreaOrder) != len(BountyCollectionRewards):
-            for i in range(len(ChosenAreaOrder), BountyCollectionRewards):
+            for i in range(len(ChosenAreaOrder), len(BountyCollectionRewards)):
                 for row in data["rows"]:
                     if row["$id"] == BountyCollectionRewards[i]:
                         row["condition"] = 3903
