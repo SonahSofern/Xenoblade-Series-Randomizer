@@ -1,6 +1,7 @@
 import json, random, Helper, IDs, EnemyRandoLogic, RaceMode, math, Options
 from Enhancements import *
 from collections import OrderedDict
+from BladeRandomization import Original2Replacement, Replacement2Original
 
 #Keeping these 3 separate from the already existing IDs in EnemyRandoLogic in case I want to do some balancing or something
 AllUniqueMonsterDefaultIDs = [611, 612, 705, 706, 707, 708, 709, 710, 711, 712, 713, 715, 736, 738, 808, 809, 810, 811, 812, 814, 815, 816, 817, 819, 890, 891, 892, 893, 894, 895, 896, 898, 899, 926, 929, 953, 954, 955, 957, 958, 1019, 1020, 1023, 1025, 1026, 1101, 1102, 1104, 1106, 1108, 1109, 1111, 1112, 1113, 1114, 1115, 1131, 1132, 1134, 1155, 1156, 1157, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1255, 1256, 1258, 1260, 1261, 1262, 1264, 1265, 1563, 1564, 1566, 1567, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1670, 1774]
@@ -32,7 +33,6 @@ InvalidMapNPCs = [8284, 5487]
 # TO DO
 
 # Maybe change the blade bundles to be from the same overall class distribution pool, but have them be mixed up, and change the names to "Blade Bundle 1->10", and increase the cost accordingly
-# add um sets for superbosses?
 # add the names of weapons
 
 # Known Issues: 
@@ -998,12 +998,19 @@ def UMRewardDropChanges(): #Changes text for the UM drops we want
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def IdentifyDLCBladeCrystals(CrystalList):
+    DLCBladeIDs = [1105, 1106, 1107, 1108, 1109, 1111]
+    if Options.BladesOption.GetState():
+        RandomizedBladeIDs = []
+        for originalblade in DLCBladeIDs:
+            RandomizedBladeIDs.append(Original2Replacement[originalblade])
+        DLCBladeIDs = RandomizedBladeIDs
+        print(DLCBladeIDs)
     DLCBladeCrystalList = []
     with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: # Adds the exchange tasks
         data = json.load(file)
         for i in range(0, len(CrystalList)):
             for row in data["rows"]:
-                if (row["$id"] == CrystalList[i]) and (row["BladeID"] in [1105, 1106, 1107, 1108, 1109, 1111]):
+                if (row["$id"] == CrystalList[i]) and (row["BladeID"] in DLCBladeIDs):
                     DLCBladeCrystalList.append(row["$id"])
                     break
         file.seek(0)

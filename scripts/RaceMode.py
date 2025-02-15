@@ -8,6 +8,7 @@ import JSONParser
 import DebugLog
 import CoreCrystalAdjustments
 import math, Options
+from BladeRandomization import Original2Replacement, Replacement2Original
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
@@ -235,6 +236,12 @@ def LessGrinding(): #adjusting level based exp gains, and debuffs while underlev
 
 def DetermineNGPlusBladeCrystalIDs():
     NGPlusBladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049]
+    #if Options.BladesOption.GetState(): # currently ng+ blades aren't randomized 
+    #    RandomizedBladeIDs = []
+    #    for originalblade in NGPlusBladeIDs:
+    #        RandomizedBladeIDs.append(Original2Replacement[originalblade])
+    #    NGPlusBladeIDs = RandomizedBladeIDs
+    #    print(NGPlusBladeIDs)
     NGPlusBladeCrystalIDs = []
     if (Options.CustomCoreCrystalOption.GetState()) or (Options.UMHuntOption.GetState()):
         with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
