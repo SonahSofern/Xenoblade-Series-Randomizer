@@ -20,6 +20,8 @@ ProofofPurchaseIDs = Helper.InclRange(25306, 25321)
 
 ValidPouchItems = [x for x in IDs.PouchItems if x not in [40314, 40428]]
 
+InvalidMapNPCs = [8284, 5487]
+
 #25333->25348 for Casino Vouchers
 #25479->25488 for Bounty Tokens
 #25405->25407 for WP Manuals
@@ -134,7 +136,7 @@ def ShopChanges(ChosenAreaOrder): # Moved these out since they were cluttering t
     WeaponPowerLevel()
     BladeTrustRequirementChanges()
     PoppiswapCostChanges()
-    AddDLCRewards()
+    AddDLCRewards(ChosenAreaOrder)
     CustomShopSetup()
     MoveSpeedDeedSetup()
     InnShopCosts()
@@ -1607,7 +1609,7 @@ def GambaShopRewards(): # Makes the rewards for the gamba shop
     GambaShopRewardList = Helper.ExtendListtoLength([25333], 16, "inputlist[i-1] + 1")
     random.shuffle(GambaShopRewardList)
 
-def AddDLCRewards():
+def AddDLCRewards(ChosenAreaOrder):
     BountyCollectionRewards = Helper.InclRange(1, 10)
     StartingDLCItemTextRow = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
     with open("./_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
@@ -1623,6 +1625,11 @@ def AddDLCRewards():
                     row["condition"] = 3904 + i
                     row["title"] = StartingDLCItemTextRow + i
                     break
+        if len(ChosenAreaOrder) != len(BountyCollectionRewards):
+            for i in range(len(ChosenAreaOrder), BountyCollectionRewards):
+                for row in data["rows"]:
+                    if row["$id"] == BountyCollectionRewards[i]:
+                        row["condition"] = 3903
         del data["rows"][37:]
         file.seek(0)
         file.truncate()
@@ -1702,7 +1709,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
     TokenExchangeRewards = []
     for i in range(0, 10):
         TokenExchangeRewards.append([random.randint(2 + 4*i, 4 + 5*i)])
-    CoreCrystalCostDistribution = [4, 8, 12, 16, 4, 8, 12, 4, 8, 12, 20, 30, 40, 115, 125, 135]
+    CoreCrystalCostDistribution = [4, 8, 12, 16, 4, 8, 12, 4, 8, 12, 20, 30, 40, 130, 145, 160]
     ManualCostDistribution = [3, 6, 9, 20, 35, 9, 17, 33]
     ChipShopCostDistribution = Helper.ExtendListtoLength([1],16,"inputlist[i-1]+9")
     
@@ -1747,7 +1754,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         "RewardIDs": Helper.InclRange(1282, 1291), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
         "RewardItemIDs": [Helper.ExtendListtoLength([], 10, "25489"), TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
         "RewardQtys": [TokenExchangeRewards, TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
-        "RewardNames": ["Doubloons + EXP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
+        "RewardNames": ["Doubloons + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
         "RewardSP": [250, 375, 500, 625, 750, 875, 1000, 1250, 1500, 1750], #FLD_QuestReward Sp
         "RewardXP": [0, 630, 630, 630, 630, 630, 630, 630, 630, 630], # FLD_QuestReward EXP
         "HideReward": TokenFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
@@ -2036,7 +2043,7 @@ def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of i
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma07a_FLD_NpcPop.json", ["FSID1", "FSID2", "FSID3"], 0)
     ShopList = []
     for i in range(0, len(ChosenAreaOrder)):
-        MapValidNPCIDs = Helper.FindSubOptionValuesList("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", "flag", "Talkable", 1, "$id")
+        MapValidNPCIDs = [x for x in Helper.FindSubOptionValuesList("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", "flag", "Talkable", 1, "$id") if x not in InvalidMapNPCs]
         ChosenSecretNPCID = random.choice(MapValidNPCIDs)
         with open("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
             data = json.load(file)
