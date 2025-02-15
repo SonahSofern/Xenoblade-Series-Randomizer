@@ -13,20 +13,23 @@ def saveData(DataList, Filename):
 
             
 def loadData(DataList, Filename):
-    os.makedirs(saveFolderName, exist_ok=True)
-    with open(f"{saveFolderName}/{Filename}", 'r') as file:
-        data = json.load(file)
-        for option in DataList:
-            try:
-                option.checkBoxVal.set(data[option.name])
-            except:
-                pass
-            for sub in option.subOptions:
+    try:
+        os.makedirs(saveFolderName, exist_ok=True)
+        with open(f"{saveFolderName}/{Filename}", 'r') as file:
+            data = json.load(file)
+            for option in DataList:
                 try:
-                    sub.checkBoxVal.set(data[f"{option.name}->{sub.name}"])
-                    option.StateUpdate()
+                    option.checkBoxVal.set(data[option.name])
                 except:
                     pass
+                for sub in option.subOptions:
+                    try:
+                        sub.checkBoxVal.set(data[f"{option.name}->{sub.name}"])
+                        option.StateUpdate()
+                    except:
+                        pass
+    except:
+        pass # The file is created upon closing the window so it will error initial launch
     # except Exception as error:
     #             print(f"{traceback.format_exc()}") # shows the full error
 
