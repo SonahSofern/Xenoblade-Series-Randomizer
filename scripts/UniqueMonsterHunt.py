@@ -1,5 +1,6 @@
 import json, random, Helper, IDs, EnemyRandoLogic, RaceMode, math, Options
 from Enhancements import *
+from collections import OrderedDict
 
 #Keeping these 3 separate from the already existing IDs in EnemyRandoLogic in case I want to do some balancing or something
 AllUniqueMonsterDefaultIDs = [611, 612, 705, 706, 707, 708, 709, 710, 711, 712, 713, 715, 736, 738, 808, 809, 810, 811, 812, 814, 815, 816, 817, 819, 890, 891, 892, 893, 894, 895, 896, 898, 899, 926, 929, 953, 954, 955, 957, 958, 1019, 1020, 1023, 1025, 1026, 1101, 1102, 1104, 1106, 1108, 1109, 1111, 1112, 1113, 1114, 1115, 1131, 1132, 1134, 1155, 1156, 1157, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1255, 1256, 1258, 1260, 1261, 1262, 1264, 1265, 1563, 1564, 1566, 1567, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1670, 1774]
@@ -519,6 +520,7 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
         Chosen4UMs = ShuffledUniqueEnemyIDs[(4*k):(4+4*k)]
         ChosenSuperBoss = ShuffledSuperBossIDs[k]
         for i in range(0, len(IDs.ValidEnemyPopFileNames)):
+            UniqueAreaEnemies = []
             if ContinentInfo[ChosenAreaOrder[k]][2] in IDs.ValidEnemyPopFileNames[i]:
                 OriginalAreaEnemies = []
                 CurrentAreaUMs = []
@@ -531,7 +533,8 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
                         for j in range(1, 5):
                             if row[f"ene{j}ID"] in IDs.ValidEnemies: # if it's not a boss row and has a valid enemy id
                                 OriginalAreaEnemies.append(row[f"ene{j}ID"]) # add to list of enemies to choose from
-                    OriginalAreaEnemies = list(set(OriginalAreaEnemies)) # then we remove dupes, and sort it
+                    UniqueAreaEnemies = list(OrderedDict.fromkeys(OriginalAreaEnemies)) # then we remove dupes, and sort it
+                    OriginalAreaEnemies = UniqueAreaEnemies
                     #print(OriginalAreaEnemies)
                     NewAreaEnemies = OriginalAreaEnemies.copy() # make a copy of the list
                     NewAreaEnemies = [x for x in NewAreaEnemies if x not in AllUniqueMonsterDefaultIDs + AllSuperBossDefaultIDs] # now remove all ums and superbosses
