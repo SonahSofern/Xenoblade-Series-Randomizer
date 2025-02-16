@@ -1247,7 +1247,7 @@ def ChipShopRewards():
 
 def WeaponPowerLevel(): # Assigns appropriately powered enhancement and damage value based on rank of weapon
     WeaponStrengthList = Helper.ExtendListtoLength([], 20, "[]")
-    WeaponDamageRanges = [[14, 31], [26, 61], [49, 117], [86, 184], [123, 248], [160, 324], [197, 409], [243, 480], [275, 544], [307, 588], [332, 639], [360, 695], [387, 746], [421, 811], [470, 872], [501, 919], [527, 967], [549, 990], [553, 1037], [592, 1108]]
+    WeaponDamageRanges = [[21, 46], [39, 92], [74, 176], [129, 276], [184, 372], [240, 486], [296, 614], [364, 720], [412, 816], [460, 882], [498, 958], [540, 1042], [580, 1119], [632, 1216], [705, 1308], [752, 1378], [790, 1450], [824, 1485], [830, 1556], [888, 1662]] #these numbers are 1.5 times vanilla
     InvalidSkillEnhancements = [ArtCancel,EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, BladeSwapDamage, CatScimPowerUp, EvadeDrainHp, EvadeDriverArt, EtherCannonRange,ArtDamageHeal, DreamOfTheFuture, WPEnemiesBoost, ExpEnemiesBoost]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
     Common, Rare, Legendary = 0, 1, 2
@@ -1691,7 +1691,7 @@ def AddSPManual(): # Creates 3 SP Manuals, using ID 25015, 25018, 25033
     SPManualIDs = [25349, 25350, 25351]
     SPManualNameIDs = [660, 661, 662]
     SPManualCaptionIDs = [761, 762, 763]
-    SPManualValues = [1500, 3000, 6000]
+    SPManualValues = [2500, 5000, 10000]
     with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes max quantity
         data = json.load(file)
         for row in data["rows"]:
