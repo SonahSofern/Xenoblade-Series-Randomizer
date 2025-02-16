@@ -89,31 +89,17 @@ def Reaction(art, multReact):
             art[f"ReAct{i}"] =  random.choice(values) # Adds each hit
 
 def Cooldowns(art): 
-    CD = random.randrange(5,14)
+    CD = random.randrange(7,13)
     for i in range(1,7):
-        step = random.choice([0,0,1,1,1,2])
+        step = random.choice([0,0,0,1,1,2])
         if CD > step:
             CD -= step
         art[f"Recast{i}"] = CD
 
 def Damage(art): 
-    DMG = random.randrange(100,325,5)
-    initDMG = DMG
-    # different damage scalings for different arts, chosen at random, added to make arts feel more unique. Arts with lower base damages should scale lower, while arts with higher base damages should scale higher
-    scales = { 
-        "low": [10, 15, 20],
-        "med": [25, 30, 35],
-        "high": [35, 40, 45]
-    }
+    DMG = random.randrange(100,200,10)
     for i in range(1,7):
-        match initDMG:
-            case initDMG if initDMG <= 175:
-                chosenscale = "low"
-            case initDMG if 175 < initDMG <= 250:
-                chosenscale = "med"
-            case initDMG if initDMG > 250:
-                chosenscale = "high"
-        step = random.choice(scales[chosenscale])
+        step = random.choice([0,0,30,30,50,50,100])
         DMG += step
         art[f"DmgMgn{i}"] = DMG
         

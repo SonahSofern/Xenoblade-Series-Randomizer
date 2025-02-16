@@ -592,7 +592,7 @@ def FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs):
                             rscdata["rows"].append(rscrownew)
                             break
                     ParamCurrRow += 1
-                    RSCCurrRow += 1
+                    RSCCurrRow += 1 
                 for i in range(0, len(FlyingBladeIDs)): # now we do the blades
                     if FlyingBladeIDs[i] > 0:
                         for arrangerow in arrangedata["rows"]:
