@@ -302,6 +302,9 @@ RaceModeOption = Option("Race Mode", GameModeTab, "Enables Race Mode (see the Ra
 RaceModeOption_Zohar = SubOption("Zohar Fragment Hunt", RaceModeOption)
 RaceModeOption_DLC = SubOption("DLC Item Removal", RaceModeOption)
 UMHuntOption = Option("Unique Monster Hunt", GameModeTab, "Defeat Unique Monsters in this Roguelike mode!\nUses a custom save file.\nSee the README for more info.", [lambda: UniqueMonsterHunt.UMHunt()], _hasSpinBox = True, _spinMin = 1, _spinMax = 10, _spinIncr = 1, _spinDesc = "Round(s)", _spinWidth = 2)
+UMHuntOption_DifficultyEasy = SubOption("Easy", UMHuntOption)
+UMHuntOption_DifficultyNormal = SubOption("Normal", UMHuntOption)
+UMHuntOption_DifficultyHard = SubOption("Hard", UMHuntOption)
 UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
 
 # Currently Disabled for Various Reasons

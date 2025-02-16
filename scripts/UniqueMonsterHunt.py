@@ -56,31 +56,29 @@ ValidRandomizeableBladeIDs = [1001, 1002, 1008, 1009, 1010, 1011, 1014, 1015, 10
 # Poppiswap is going to be fucked up with custom enhancements
 
 def UMHunt():
-    if IDs.CurrentSliderOdds != 0:
-        SetCount = IDs.CurrentSliderOdds
-        ChosenAreaOrder = []
-        if IDs.CurrentSliderOdds > 10: #really need to limit the spinbox instead
-            SetCount = 10
-        CheckForSuperbosses(SetCount)
-        ChosenAreaOrder.extend(random.sample(TotalAreaPool, SetCount))
-        #FindMonsters(ChosenAreaOrder)
-        PartyMemberstoAdd = PartyMemberAddition(SetCount)
-        AreaUMs, AllAreaMonsters = CustomEnemyRando(ChosenAreaOrder)
-        EnemySets = ChosenEnemySets(SetCount, AreaUMs)
-        WarpManagement(SetCount, ChosenAreaOrder, PartyMemberstoAdd, EnemySets)
-        CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder)
-        LandmarkAdjustments(ChosenAreaOrder)
-        NoUnintendedRewards(ChosenAreaOrder)
-        SpiritCrucibleEntranceRemoval()
-        ShopChanges(ChosenAreaOrder)
-        BalanceChanges(ChosenAreaOrder)
-        if ExtraSuperbosses:
-            OhBoyHereWeGoAgain()
-        Cleanup()
-        UMHuntMenuTextChanges()
-        #DebugItemsPlace() # currently doesnt matter since I hide all the argentum chests anyways
-        #DebugEasyMode()
-        #DebugSpawnCountPrint(EnemySets, ChosenAreaOrder)
+    SetCount = IDs.CurrentSliderOdds
+    ChosenAreaOrder = []
+    GetDifficulty()
+    CheckForSuperbosses(SetCount)
+    ChosenAreaOrder.extend(random.sample(TotalAreaPool, SetCount))
+    #FindMonsters(ChosenAreaOrder)
+    PartyMemberstoAdd = PartyMemberAddition(SetCount)
+    AreaUMs, AllAreaMonsters = CustomEnemyRando(ChosenAreaOrder)
+    EnemySets = ChosenEnemySets(SetCount, AreaUMs)
+    WarpManagement(SetCount, ChosenAreaOrder, PartyMemberstoAdd, EnemySets)
+    CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder)
+    LandmarkAdjustments(ChosenAreaOrder)
+    NoUnintendedRewards(ChosenAreaOrder)
+    SpiritCrucibleEntranceRemoval()
+    ShopChanges(ChosenAreaOrder)
+    BalanceChanges(ChosenAreaOrder)
+    if ExtraSuperbosses:
+        OhBoyHereWeGoAgain()
+    Cleanup()
+    UMHuntMenuTextChanges()
+    #DebugItemsPlace() # currently doesnt matter since I hide all the argentum chests anyways
+    #DebugEasyMode()
+    #DebugSpawnCountPrint(EnemySets, ChosenAreaOrder)
 
 def FindMonsters(ChosenAreaOrder): # was used to debug and find enemies that spawned in too often. If the objective pointer points towards defeating an enemy of which there are 16 or more on the map you're on, the game will freeze upon loading.
     enemycountholder = Helper.ExtendListtoLength([0], len(AllQuestDefaultEnemyIDs),"0")
@@ -109,6 +107,15 @@ def FindMonsters(ChosenAreaOrder): # was used to debug and find enemies that spa
             toolargepool["IDs"].append(AllQuestDefaultEnemyIDs[i])
             toolargepool["Counts"].append(enemycountholder[i])
     print(toolargepool)
+
+def GetDifficulty(): # Gets the difficulty chosen
+    global ChosenDifficulty
+    if Options.UMHuntOption_DifficultyHard.GetState():
+        ChosenDifficulty = "Hard"
+    elif Options.UMHuntOption_DifficultyNormal.GetState():
+        ChosenDifficulty = "Normal"
+    else:
+        ChosenDifficulty = "Easy"
 
 def CheckForSuperbosses(SetCount):
     global ExtraSuperbosses
