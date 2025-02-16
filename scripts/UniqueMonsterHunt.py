@@ -40,6 +40,8 @@ ValidPouchItems = [x for x in IDs.PouchItems if x not in [40314, 40428]]
 
 InvalidMapNPCs = [8284, 5487]
 
+ValidRandomizeableBladeIDs = [1001, 1002, 1008, 1009, 1010, 1011, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1050, 1104, 1105, 1106, 1107, 1108, 1109, 1111]
+
 #25333->25348 for Casino Vouchers
 #25479->25488 for Bounty Tokens
 #25405->25407 for WP Manuals
@@ -165,6 +167,7 @@ def BalanceChanges(ChosenAreaOrder): # Moved to reduce clutter, doesn't matter o
     PneumaNerfs()
     SpiritCrucibleNerfs(ChosenAreaOrder)
     RaceMode.SecondSkillTreeCostReduc()
+    BladeDefaultWeapons()
 
 def GimmickAdjustments():
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_DoorGimmick.json", ["Condition"], 0)
@@ -188,6 +191,28 @@ def GimmickAdjustments():
 
 def InnShopCosts(): # Removes cost to stay at inn
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_ShopInn.json", ["Price"], 0)
+
+def BladeDefaultWeapons(): # Always make the default weapons for a blade the primitive versions
+    Rank1Wpns = Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcWpn.json", ["Rank"], [1], "$id")
+    ValidRank1WeaponIDs = [x for x in Rank1Wpns if x not in Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcWpn.json", ["Name"], [0], "$id") + [5970]]
+    Rank1Types = Helper.FindValues("./_internal/JsonOutputs/common/ITM_PcWpn.json", ["$id"], ValidRank1WeaponIDs, "WpnType")
+    Rank1DefWeapons = {}
+    for j in range(0, len(Rank1Types)):
+        for i in range(1, max(Rank1Types) + 1):
+            if Rank1Types[j] == i:
+                Rank1DefWeapons[i] = ValidRank1WeaponIDs[j]
+                break
+    with open("./_internal/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as file: # Changes default weapon to a rank 1 weapon
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in ValidRandomizeableBladeIDs:
+                try:
+                    row["DefWeapon"] = Rank1DefWeapons[row["WeaponType"]]
+                except:
+                    pass
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def PneumaNerfs(): # Mods, break her kneecaps
     with open("./_internal/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file:
