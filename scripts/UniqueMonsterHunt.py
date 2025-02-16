@@ -1,4 +1,4 @@
-import json, random, Helper, IDs, EnemyRandoLogic, RaceMode, math, Options, time
+import json, random, Helper, IDs, EnemyRandoLogic, RaceMode, math, Options, time, FieldSkillAdjustments
 from Enhancements import *
 from collections import OrderedDict
 from BladeRandomization import Replacement2Original
@@ -175,6 +175,8 @@ def GimmickAdjustments():
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_MapGimmick.json", ["Condition"], 0)
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_ElevatorGimmick.json", ["OP_Condition"], 0)
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_EffectPop.json", ["Condition", "QuestFlagMin", "QuestFlagMax"], 0)
+    if not Options.RemoveFieldSkillsOption.GetState(): # if this isn't already enabled, turn it on. We need to remove all field skill checks for this mode.
+        FieldSkillAdjustments.RemoveFieldSkills()
     with open("./_internal/JsonOutputs/common/FLD_LODList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
