@@ -1423,10 +1423,10 @@ def PouchItemRewards():
             for row in data["rows"]:
                 if (row["Category"] == i) & (row["$id"] in ValidPouchItems):
                     CurrentItemTypeList.append(row["$id"])
-            ChosenItems = random.sample(CurrentItemTypeList, 2)
+            ChosenItems = random.sample(CurrentItemTypeList, 3)
             PouchItemShopRewardDistribution[0].append(ChosenItems[0])
             PouchItemShopRewardDistribution[1].append(ChosenItems[1])
-        PouchItemShopRewardDistribution[2] = Helper.ExtendListtoLength(PouchItemShopRewardDistribution[2], 16, "0")
+            PouchItemShopRewardDistribution[2].append(ChosenItems[2])
         PouchItemShopRewardDistribution[3] = Helper.ExtendListtoLength(PouchItemShopRewardDistribution[2], 16, "0")    
         for row in data["rows"]: # Change the duration of all to 60 minutes, and they all give no trust points
             row["Time"] = 60
@@ -1932,7 +1932,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
         "SetItemQtys": [PouchItemShopCostDistribution, EmptyFillerList, EmptyFillerList, EmptyFillerList, EmptyFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
         "RewardIDs": Helper.InclRange(1348, 1363), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
         "RewardItemIDs": PouchItemShopRewardDistribution, # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
-        "RewardQtys": [Helper.ExtendListtoLength([1,1,1,1], 16, "2"), Helper.ExtendListtoLength([1,1,1,1], 16, "2"), Helper.ExtendListtoLength([1,1,1,1], 16, "0"), Helper.ExtendListtoLength([1,1,1,1], 16, "0")], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
+        "RewardQtys": [Helper.ExtendListtoLength([1,1,1,1], 16, "2"), Helper.ExtendListtoLength([1,1,1,1], 16, "2"), Helper.ExtendListtoLength([1,1,1,1], 16, "2"), Helper.ExtendListtoLength([1,1,1,1], 16, "0")], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
         "RewardNames": ["Mystery Set 1", "Mystery Set 2", "Mystery Set 3", "Mystery Set 4", "Staple Foods", "Vegetables", "Meat", "Seafood", "Desserts", "Drinks", "Instruments", "Art", "Literature", "Board Games", "Cosmetics", "Textiles"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
         "RewardSP": EmptyFillerList, #FLD_QuestReward Sp
         "RewardXP": EmptyFillerList, # FLD_QuestReward EXP
