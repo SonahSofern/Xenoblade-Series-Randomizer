@@ -1,6 +1,5 @@
 import json, random, Helper, IDs, EnemyRandoLogic, RaceMode, math, Options, time, FieldSkillAdjustments
 from Enhancements import *
-from collections import OrderedDict
 from BladeRandomization import Replacement2Original
 
 #Keeping these 3 separate from the already existing IDs in EnemyRandoLogic in case I want to do some balancing or something
@@ -600,7 +599,8 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
                                 row["popWeather"] = 255
                                 CurrentAreaUMs.append(row[f"ene{j}ID"]) # now add it to the list of ums for this area, used in many places, so we need to keep track of this
                             elif NewEnemyID in AllSuperBossDefaultIDs: # if it's a superboss, do the same as for ums, except add it to its' own list
-                                row["Condition"] = row["ScenarioFlagMax"] = row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["muteki_QuestFlag"] = row["muteki_QuestFlagMin"] = row["muteki_QuestFlagMax"] = row["muteki_Condition"] = row[f"ene{j}Lv"] = 0
+                                row["ScenarioFlagMax"] = row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["muteki_QuestFlag"] = row["muteki_QuestFlagMin"] = row["muteki_QuestFlagMax"] = row["muteki_Condition"] = row[f"ene{j}Lv"] = 0
+                                row["Condition"] = 3913 # superbosses should only show up when you're on the last set
                                 row["POP_TIME"] = 256
                                 row["popWeather"] = 255
                                 AllAreaSuperbosses.append(NewEnemyID)
@@ -610,9 +610,12 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-        CurrentAreaUMs = list(set(CurrentAreaUMs))
+        CurrentAreaUMs = list(dict.fromkeys(CurrentAreaUMs))
         AllAreaUMs.append(CurrentAreaUMs)
-        CurrentAreaMonsters = list(set(CurrentAreaMonsters))
+        CurrentAreaMonsters = list(dict.fromkeys(CurrentAreaMonsters))
+        print(ChosenAreaOrder[k])
+        print(CurrentAreaMonsters)
+        print(CurrentAreaUMs)
         AllAreaMonsters.append(CurrentAreaMonsters)
         AllOriginalAreaEnemies.extend(OriginalAreaEnemies[ChosenAreaOrder[k]])
         AllNewAreaEnemies.extend(NewAreaEnemies)
@@ -622,7 +625,7 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
     EnemyRandoLogic.FishFix()
     EnemyRandoLogic.BigEnemyCollisionFix()
     if ExtraSuperbosses:
-        UniqueSuperbosses = list(OrderedDict.fromkeys(AllAreaSuperbosses))
+        UniqueSuperbosses = list(dict.fromkeys(AllAreaSuperbosses))
         ChosenSuperbossNumbers = random.choices(Helper.InclRange(0, 9), k = SuperbossCount)
         global ChosenSuperbosses
         ChosenSuperbosses = []
@@ -966,6 +969,7 @@ def UMHuntMenuTextChanges():
                 row["name"] = "Bounties"
             if row["$id"] == 1644:
                 row["name"] = f"{seedhashcomplete}"
+                break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -974,9 +978,34 @@ def UMHuntMenuTextChanges():
         for row in data["rows"]:
             if row["$id"] == 10:
                 row["name"] = "Voucher Rewards"
+                break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_ms/menu_sub_contents_ms.json", 'r+', encoding='utf-8') as file: # Changes the name of "Expansion Pass"
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 61:
+                row["name"] = "Voucher Rewards"
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_ms/fld_landmark.json", 'r+', encoding='utf-8') as file: # Changes the name of "Expansion Pass"
+        data = json.load(file)
+        for row in data["rows"]:
+            rownum = row["$id"]
+            match rownum:
+                case 4:
+                    row["name"] = "[System:Color name=green]Bounty Token[/System:Color] Exchange"
+                case 8:
+                    row["name"] = "[System:Color name=tutorial]Doubloon[/System:Color] Bazaar"
+                    break
+                case _:
+                    continue
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)    
 
 def ReceiptTextChanges(): # Changes the test for the Core Crystal Shop Receipts
     ProofofPurchaseNameIDs = Helper.InclRange(617, 632)
@@ -2148,7 +2177,7 @@ def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of i
 
             InputTaskStartingID += 5
             RewardTaskStartingID += 5
-            
+
     if len(ShopList) > 0:
         ShopCreator(ShopList, False) # run the function on the whole list at once
 
