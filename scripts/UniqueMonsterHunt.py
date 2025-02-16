@@ -625,7 +625,7 @@ def UMEnemyAggro(): # custom enemy aggro
                     row["BatInterval"] = 50
                     row["BatArea"] = 50
                 elif (row["$id"] in AllUniqueMonsterDefaultIDs + AllSuperBossDefaultIDs) & (row["$id"] in IDs.ValidEnemies):
-                    row["Flag"]["AlwaysAttack"] = 1
+                    row["Flag"]["AlwaysAttack"] = 0
                     row["Flag"]["mBoss"] = 0
                     row["Flag"]["Named"] = 1
                     row["Detects"] = 3
@@ -649,7 +649,7 @@ def UMEnemyAggro(): # custom enemy aggro
                     row["BatInterval"] = 50
                     row["BatArea"] = 50
                 elif (row["$id"] in AllUniqueMonsterDefaultIDs + AllSuperBossDefaultIDs) & (row["$id"] in IDs.ValidEnemies):
-                    row["Flag"]["AlwaysAttack"] = 1
+                    row["Flag"]["AlwaysAttack"] = 0
                     row["Flag"]["mBoss"] = 0
                     row["Flag"]["Named"] = 1
                     row["Detects"] = 3
@@ -2087,8 +2087,8 @@ def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of i
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-        RewardSPList = random.choices([0, 1000, 2000, 3000, 4000], weights = [49, 25, 15, 10, 1], k = 5)
-        
+        #RewardSPList = random.choices([0, 1000, 2000, 3000, 4000], weights = [49, 25, 15, 10, 1], k = 5)
+        RewardSPList = SecretEmptyFillerList
         # defining the shop itself
 
         SecretShop = {
