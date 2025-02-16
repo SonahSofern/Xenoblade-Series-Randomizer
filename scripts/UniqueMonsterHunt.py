@@ -2092,63 +2092,65 @@ def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of i
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma07a_FLD_NpcPop.json", ["FSID1", "FSID2", "FSID3"], 0)
     ShopList = []
     for i in range(0, len(ChosenAreaOrder)):
-        MapValidNPCIDs = [x for x in Helper.FindSubOptionValuesList("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", "flag", "Talkable", 1, "$id") if x not in InvalidMapNPCs]
-        ChosenSecretNPCID = random.choice(MapValidNPCIDs)
-        with open("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] == ChosenSecretNPCID:
-                    OrigNPCID = row["NpcID"]
-                    row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["TimeRange"] = row["Condition"] = row["Mot"] = row["QuestID"] = row["FSID1"] = row["FSID2"] = row["FSID3"] = 0
-                    row["ScenarioFlagMax"] = 10048
-                    row["EventID"] = UsableShopEventIDs[i]
-                    row["ShopID"] = UsableShopIDs[i]
-                    row["NpcID"] = 2012 # Klaus
-                    row["LookAt"] = 0
-                    row["NpcTurn"] = 0
-                else:
-                    row["EventID"] = 0
-                    row["ShopID"] = 0
-                    row["QuestID"] = 0
-            for row in data["rows"]: # Need to account for more lines where the original NPC speaks, they overlap bodies and it looks weird
-                if row["NpcID"] == OrigNPCID:
-                    row["NpcID"] = 3445
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
-        #RewardSPList = random.choices([0, 1000, 2000, 3000, 4000], weights = [49, 25, 15, 10, 1], k = 5)
-        RewardSPList = SecretEmptyFillerList
-        # defining the shop itself
+        if random.randint(1, 100) > 50: # 50% chance for a secret shop to exist
+            MapValidNPCIDs = [x for x in Helper.FindSubOptionValuesList("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", "flag", "Talkable", 1, "$id") if x not in InvalidMapNPCs]
+            ChosenSecretNPCID = random.choice(MapValidNPCIDs)
+            with open("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
+                data = json.load(file)
+                for row in data["rows"]:
+                    if row["$id"] == ChosenSecretNPCID:
+                        OrigNPCID = row["NpcID"]
+                        row["ScenarioFlagMin"] = row["QuestFlag"] = row["QuestFlagMin"] = row["QuestFlagMax"] = row["TimeRange"] = row["Condition"] = row["Mot"] = row["QuestID"] = row["FSID1"] = row["FSID2"] = row["FSID3"] = 0
+                        row["ScenarioFlagMax"] = 10048
+                        row["EventID"] = UsableShopEventIDs[i]
+                        row["ShopID"] = UsableShopIDs[i]
+                        row["NpcID"] = 2012 # Klaus
+                        row["LookAt"] = 0
+                        row["NpcTurn"] = 0
+                    else:
+                        row["EventID"] = 0
+                        row["ShopID"] = 0
+                        row["QuestID"] = 0
+                for row in data["rows"]: # Need to account for more lines where the original NPC speaks, they overlap bodies and it looks weird
+                    if row["NpcID"] == OrigNPCID:
+                        row["NpcID"] = 3445
+                file.seek(0)
+                file.truncate()
+                json.dump(data, file, indent=2, ensure_ascii=False)
+            #RewardSPList = random.choices([0, 1000, 2000, 3000, 4000], weights = [49, 25, 15, 10, 1], k = 5)
+            RewardSPList = SecretEmptyFillerList
+            # defining the shop itself
 
-        SecretShop = {
-            "NPCModel": 3445,# from RSC_NpcList, goes to ma02a_FLD_NpcPop NpcID. Soosoo
-            "NPCID": ChosenSecretNPCID, # ma02a_FLD_NpcPop $id
-            "ShopIcon": 419, # MNU_ShopList ShopIcon
-            "ShopIDtoReplace": UsableShopIDs[i], # MNU_ShopList $id
-            "ShopNametoReplace": UsableShopNames[i], # fld_shopname $id
-            "ShopEventID": UsableShopEventIDs[i], # ma02a_FLD_NpcPop EventID
-            "Name": f"[System:Color name=tutorial]Super-Secret Shop {i+1}[/System:Color]", # fld_shopname name
-            "InputTaskIDs": Helper.ExtendListtoLength([InputTaskStartingID], 5, "inputlist[i-1]+1"), # MNU_ShopChangeTask $id, feeds into MNU_ShopChange DefTaskSet1->8 and AddTaskSet1->8. Should always have length of 16
-            "AddTaskConditions": Helper.ExtendListtoLength([], 8, "0"), # MNU_ShopChange AddCondition1->8 (0 if no task, 1 otherwise) # how many InputTaskIDs you have past 8 determines number of 1s, always 8 items long
-            "SetItemIDs": [SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList], # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
-            "SetItemQtys": [SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
-            "RewardIDs": Helper.ExtendListtoLength([RewardTaskStartingID], 5, "inputlist[i-1]+1"), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
-            "RewardItemIDs": [Helper.ExtendListtoLength([SecretReceiptIDs[i]], 5, "inputlist[i-1]"), SecretShopRewardListItem1[i], SecretShopRewardListItem2[i], SecretEmptyFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
-            "RewardQtys": [SecretShopCostList[i], SecretShopRewardQuantities1[i], SecretShopRewardQuantities2[i], SecretEmptyFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
-            "RewardNames": ["Secret Trade 1", "Secret Trade 2", "Secret Trade 3", "Secret Trade 4", "Secret Trade 5"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
-            "RewardSP": RewardSPList, #FLD_QuestReward Sp
-            "RewardXP": SecretEmptyFillerList, # FLD_QuestReward EXP
-            "HideReward": SecretEmptyFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
-        }
+            SecretShop = {
+                "NPCModel": 3445,# from RSC_NpcList, goes to ma02a_FLD_NpcPop NpcID. Soosoo
+                "NPCID": ChosenSecretNPCID, # ma02a_FLD_NpcPop $id
+                "ShopIcon": 419, # MNU_ShopList ShopIcon
+                "ShopIDtoReplace": UsableShopIDs[i], # MNU_ShopList $id
+                "ShopNametoReplace": UsableShopNames[i], # fld_shopname $id
+                "ShopEventID": UsableShopEventIDs[i], # ma02a_FLD_NpcPop EventID
+                "Name": f"[System:Color name=tutorial]Super-Secret Shop {i+1}[/System:Color]", # fld_shopname name
+                "InputTaskIDs": Helper.ExtendListtoLength([InputTaskStartingID], 5, "inputlist[i-1]+1"), # MNU_ShopChangeTask $id, feeds into MNU_ShopChange DefTaskSet1->8 and AddTaskSet1->8. Should always have length of 16
+                "AddTaskConditions": Helper.ExtendListtoLength([], 8, "0"), # MNU_ShopChange AddCondition1->8 (0 if no task, 1 otherwise) # how many InputTaskIDs you have past 8 determines number of 1s, always 8 items long
+                "SetItemIDs": [SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList], # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
+                "SetItemQtys": [SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList, SecretEmptyFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
+                "RewardIDs": Helper.ExtendListtoLength([RewardTaskStartingID], 5, "inputlist[i-1]+1"), # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
+                "RewardItemIDs": [Helper.ExtendListtoLength([SecretReceiptIDs[i]], 5, "inputlist[i-1]"), SecretShopRewardListItem1[i], SecretShopRewardListItem2[i], SecretEmptyFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
+                "RewardQtys": [SecretShopCostList[i], SecretShopRewardQuantities1[i], SecretShopRewardQuantities2[i], SecretEmptyFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
+                "RewardNames": ["Secret Trade 1", "Secret Trade 2", "Secret Trade 3", "Secret Trade 4", "Secret Trade 5"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
+                "RewardSP": RewardSPList, #FLD_QuestReward Sp
+                "RewardXP": SecretEmptyFillerList, # FLD_QuestReward EXP
+                "HideReward": SecretEmptyFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
+            }
 
-        #print(SecretShop["NPCID"])
+            #print(SecretShop["NPCID"])
 
-        ShopList.append(SecretShop)
+            ShopList.append(SecretShop)
 
-        InputTaskStartingID += 5
-        RewardTaskStartingID += 5
-
-    ShopCreator(ShopList, False) # run the function on the whole list at once
+            InputTaskStartingID += 5
+            RewardTaskStartingID += 5
+            
+    if len(ShopList) > 0:
+        ShopCreator(ShopList, False) # run the function on the whole list at once
 
 def CreateSecretShopReceipts(): # Makes receipts for secret shops, limiting the amount of things a player can buy from a shop.
     global SecretReceiptIDs
