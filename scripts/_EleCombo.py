@@ -197,13 +197,25 @@ def RandomizeElementRoutes():
     # 2. So we can iterate over ReplacedCombos once done to apply all the names at once
 
     RemainingTier1s = list(OriginalCombos[1].values())
-    RemainingTier2Elements = [i for i in Helper.InclRange(1,8) for _ in range(3)] # 3 chances to appear
-    RemainingTier3Elements = [i for i in Helper.InclRange(1, 8) for _ in range(4)]  # 4 chances to appear
     random.shuffle(RemainingTier1s)
-    random.shuffle(RemainingTier2Elements)
-    random.shuffle(RemainingTier3Elements)
+    RemainingTier2Elements = list() # Initially empty, populated below in randomize()
+    RemainingTier3Elements = list() # Initially empty, populated below in randomize()
 
     def randomize(combo):
+        # Each potential randomization is lists of [1, 1, 2, 2, 3, 3, ...]
+        # This ensures each element appears twice in the pool
+        # This is not sufficient to account for all combos, so once the list runs out, populate the list again in the same way
+        # This ensures that each element appears at least twice for each stage and prevents cases where the element does not appear at all
+        nonlocal RemainingTier2Elements
+        nonlocal RemainingTier3Elements
+        if len(RemainingTier2Elements) == 0:
+            RemainingTier2Elements = [i for i in Helper.InclRange(1, 8) for _ in range(2)]
+            random.shuffle(RemainingTier2Elements)
+        if len(RemainingTier3Elements) == 0:
+            RemainingTier3Elements = [i for i in Helper.InclRange(1, 8) for _ in range(2)]
+            random.shuffle(RemainingTier3Elements)
+
+
         # Skip Torna combos such as Heat II, Stone II, etc. (they should still work after randomization)
         if combo['ComboStage'] != 1 and combo['PreCombo'] == 0:
             return
