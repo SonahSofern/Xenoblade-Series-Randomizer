@@ -327,13 +327,25 @@ def RandomizeDOT():
     # 5/16 tier 2s have a DoT of 8%
     # 1/16 tier 2s have a DoT of 10% (Why is Volcano like this?)
     # none of the tier 3s have a DoT
-
     print('TODO: RandomizeDOT')
 
 
 def RandomizeDamage():
     # For each combo, take the base damage and add +/- 25% for both Damage and DoT
-    print('TODO: RandomizeDamage()')
+    def randomize(combo):
+        minDmg = combo['DD'] * 0.75
+        maxDmg = combo['DD'] * 1.25
+        minDoT = combo['Dot'] * 0.75
+        maxDoT = combo['Dot'] * 1.25
+        minDmgEn = combo['DDEn'] * 0.75
+        maxDmgEn = combo['DDEn'] * 1.25
+        minDoTEn = combo['DotEn'] * 0.75
+        maxDoTEn = combo['DotEn'] * 1.25
+        combo['DD'] = round(random.uniform(minDmg, maxDmg))
+        combo['Dot'] = round(random.uniform(minDoT, maxDoT))
+        combo['DDEn'] = random.uniform(minDmgEn, maxDmgEn)
+        combo['DotEn'] = random.uniform(minDoTEn, maxDoTEn)
+    JSONParser.ChangeJSONLineWithCallback(["common/BTL_ElementalCombo.json"], [], randomize, replaceAll=True)
 
 def RandomizeReactions():
     # For some reason, "Blowdown" is listed as "Break" in the bdat (https://xenoblade.github.io/xb2/bdat/common/BTL_ElementalCombo.html)
