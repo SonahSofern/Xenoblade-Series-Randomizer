@@ -194,8 +194,6 @@ def PopulateMaps():
 
 
 def RandomizeElementRoutes():
-    print('RandomizeElementRoutes()')
-
     # Note: Debug names are set for 2 reasons:
     # 1. So I can understand the randomization as it's happening
     # 2. So we can iterate over ReplacedCombos once done to apply all the names at once
@@ -279,13 +277,13 @@ def RandomizeElementRoutes():
 
             # Create the new combo
             baseStage3Combo = getBaseStage3Combo(comboRoute)
-            if baseStage3Combo is None:
+            if baseStage3Combo is None: # Custom combo, create it
                 stage3ComboTemplate = CustomLevel3Templates[stage3Element]
                 newComboName = stage2Combo.tier3adjectives[0] + " " + stage3ComboTemplate.nameNouns[0]
                 newComboBase = stage3ComboTemplate.bases[0]
                 del stage3ComboTemplate.nameNouns[0]
                 del stage3ComboTemplate.bases[0]
-            else:
+            else: # Combo that exists in the base game, just use that as is
                 newComboName = baseStage3Combo.name
                 newComboBase = baseStage3Combo.base
 
@@ -323,11 +321,41 @@ def RandomizeAOE():
 
 
 def RandomizeDOT():
-    # 7/8 tier 1s have a DoT. They all do 6%
-    # 5/16 tier 2s have a DoT of 8%
-    # 1/16 tier 2s have a DoT of 10% (Why is Volcano like this?)
-    # none of the tier 3s have a DoT
-    print('TODO: RandomizeDOT')
+    # Note: This function randomizes whether the combo is DoT or not.
+    # This does NOT randomize the damage of the DoT. See RandomizeDamage() for that.
+
+    def randomize(combo):
+        # Stage 3 cannot have DOT
+        if combo['ComboStage'] == 3:
+            return
+
+        # Determine probabilities for DoT
+        if combo['ComboStage'] == 1: # 6/8 Stage 1s have a DoT. Match that distribution
+            DotDistribution = [0, 0, 1, 1, 1, 1, 1, 1]
+        else: # Must be ComboStage 2. 6/16 Stage 2s have a DoT. Match that distribution
+            DotDistribution = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1]
+        hasDot = random.choice(DotDistribution)
+
+        # Make no changes if randomization doesn't change the result
+        if hasDot == combo['Dot']:
+            return
+
+        # Constants are guesstimates based on existing combos. Seems to work well
+        DD_TO_DOT_SCALE = 3.8 # Used for converting DoT to no DoT and vice versa
+        BASE_DOT_RATIO = 6.25 # Ratio of DoT to DD for DoT combos
+
+        # Changing from Dot to No Dot. Increase base damage and remove DOT
+        if combo['Dot']:
+            combo['DD'] = round(combo['DD'] * DD_TO_DOT_SCALE)
+            combo['Dot'] = 0
+            combo['Interval'] = 0
+        # Changing from No Dot to Dot. Decrease damage and add Dot
+        else:
+            combo['DD'] = round(combo['DD'] / DD_TO_DOT_SCALE)
+            combo['Dot'] = round(combo['DD'] / BASE_DOT_RATIO)
+            combo['Interval'] = 45 # All DoT combos use 45
+
+    JSONParser.ChangeJSONLineWithCallback(["common/BTL_ElementalCombo.json"], [], randomize, replaceAll=True)
 
 
 def RandomizeDamage():
