@@ -18,6 +18,7 @@ CustomLevel2s = list()
 BaseLevel3s = list()
 CustomLevel3Templates = dict()
 
+
 class CustomLevel2Combo:
     def __init__(self, name, elemRoute, baseName, tier3adjectives):
         random.shuffle(tier3adjectives)
@@ -30,6 +31,7 @@ class CustomLevel2Combo:
 
         CustomLevel2s.append(self)
 
+
 class Level3Combo:
     def __init__(self, name, elemRoute):
         self.name = name
@@ -37,6 +39,7 @@ class Level3Combo:
         self.base = copy.deepcopy(OriginalCombos[3][name])
 
         BaseLevel3s.append(self)
+
 
 class CustomLevel3ComboTemplate:
     def __init__(self, elem, nameNouns, baseNames):
@@ -54,6 +57,7 @@ class CustomLevel3ComboTemplate:
             self.bases.append(copy.deepcopy(OriginalCombos[3][baseName]))
 
         CustomLevel3Templates[self.elem] = self
+
 
 def CreateCustomCombos():
     # Every combination of first 2 stages are defined with a custom name.
@@ -165,9 +169,6 @@ def BladeComboRandomization():
         RandomizeDamage()
     if Options.BladeCombosOption_Reactions.GetState():
         RandomizeReactions()
-
-    JSONParser.PrintTable("common/BTL_ElementalCombo.json")
-    JSONParser.PrintTable("common_ms/BTL_ElementalCombo_ms.json")
 
 
 def PopulateMaps():
@@ -375,6 +376,26 @@ def RandomizeDamage():
         combo['DotEn'] = random.uniform(minDoTEn, maxDoTEn)
     JSONParser.ChangeJSONLineWithCallback(["common/BTL_ElementalCombo.json"], [], randomize, replaceAll=True)
 
+
 def RandomizeReactions():
-    # For some reason, "Blowdown" is listed as "Break" in the bdat (https://xenoblade.github.io/xb2/bdat/common/BTL_ElementalCombo.html)
-    print('TODO: RandomizeReactions()')
+    def randomize(combo):
+        # To add variety while maintaining general game balance, The probabilities are:
+        # Stage 1s have a 1/32 chance of a reaction. 1/32 chance of Blowdown (31/32 chance of Knockback)
+        # Stage 2s have a 1/8 chance of a reaction. 1/8 chance of Blowdown (7/8 chance of Knockback)
+        # Stage 3s have a 1/2 chance of a reaction. 1/2 chance of Blowdown (1/2 chance of Knockback)
+        maxRandom = 2*pow(4, 3-combo['ComboStage'])
+        hasReaction = random.randint(1, maxRandom) == 1
+
+        if hasReaction:
+            # Reaction level has a floor of the combo stage. 3s should be stronger than 2s, on average
+            combo['ReactionLv'] = random.randint(combo['ComboStage'], 5)
+            hasBlowdown = random.randint(1, maxRandom) == 1
+            if hasBlowdown:
+                combo['Reaction'] = 2
+            else: # Knockback instead
+                combo['Reaction'] = 1
+        else:
+            combo['Reaction'] = 0
+            combo['ReactionLv'] = 0
+
+    JSONParser.ChangeJSONLineWithCallback(["common/BTL_ElementalCombo.json"], [], randomize, replaceAll=True)
