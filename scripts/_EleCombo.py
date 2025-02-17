@@ -143,6 +143,7 @@ def getCustomStage2Combo(elemRoute):
             return combo
     return None
 
+
 def getBaseStage3Combo(elemRoute):
     for combo in BaseLevel3s:
         if combo.elemRoute == elemRoute:
@@ -160,8 +161,10 @@ def BladeComboRandomization():
         RandomizeAOE()
     if Options.BladeCombosOption_DOT.GetState():
         RandomizeDOT()
-    if Options.BladeCombosOption_Animations.GetState():
-        RandomizeAnimations()
+    if Options.BladeCombosOption_Damage.GetState():
+        RandomizeDamage()
+    if Options.BladeCombosOption_Reactions.GetState():
+        RandomizeReactions()
 
     JSONParser.PrintTable("common/BTL_ElementalCombo.json")
     JSONParser.PrintTable("common_ms/BTL_ElementalCombo_ms.json")
@@ -189,6 +192,7 @@ def PopulateMaps():
         Name2Elem[elem['name']] = elem['$id']-1
     JSONParser.ChangeJSONLineWithCallback(["common_ms/menu_attr_ms.json"], Helper.InclRange(2,9), getElems)
 
+
 def RandomizeElementRoutes():
     print('RandomizeElementRoutes()')
 
@@ -214,7 +218,6 @@ def RandomizeElementRoutes():
         if len(RemainingTier3Elements) == 0:
             RemainingTier3Elements = [i for i in Helper.InclRange(1, 8) for _ in range(2)]
             random.shuffle(RemainingTier3Elements)
-
 
         # Skip Torna combos such as Heat II, Stone II, etc. (they should still work after randomization)
         if combo['ComboStage'] != 1 and combo['PreCombo'] == 0:
@@ -308,13 +311,30 @@ def RandomizeElementRoutes():
 
 
 def RandomizeAOE():
-    print('TODO: RandomizeAOE()')
+    # Roughly half of the base combos have AoE.
+    # Some have a range of 3 and others a range of 5. Unsure what happens if you do something outside of this. Not sure if 3 is a radius or an enumeration of some shape (line, circle, etc)
+    def randomize(combo):
+        coinFlip = random.randint(0, 1)
+        if coinFlip:
+            combo['Range'] = random.randint(3, 5)
+        else:
+            combo['Range'] = 0
+    JSONParser.ChangeJSONLineWithCallback(["common/BTL_ElementalCombo.json"], [], randomize, replaceAll=True)
 
 
 def RandomizeDOT():
+    # 7/8 tier 1s have a DoT. They all do 6%
+    # 5/16 tier 2s have a DoT of 8%
+    # 1/16 tier 2s have a DoT of 10% (Why is Volcano like this?)
+    # none of the tier 3s have a DoT
+
     print('TODO: RandomizeDOT')
 
 
-def RandomizeAnimations():
-    print('TODO: RandomizeAnimations()')
+def RandomizeDamage():
+    # For each combo, take the base damage and add +/- 25% for both Damage and DoT
+    print('TODO: RandomizeDamage()')
 
+def RandomizeReactions():
+    # For some reason, "Blowdown" is listed as "Break" in the bdat (https://xenoblade.github.io/xb2/bdat/common/BTL_ElementalCombo.html)
+    print('TODO: RandomizeReactions()')

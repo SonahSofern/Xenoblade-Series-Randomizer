@@ -219,7 +219,8 @@ BladeCombosOption = Option("Blade Combos", Blade, "", [lambda: _EleCombo.BladeCo
 BladeCombosOption_ElementRoutes = SubOption("Element Routes", BladeCombosOption)
 BladeCombosOption_AOE = SubOption("AOE", BladeCombosOption)
 BladeCombosOption_DOT = SubOption("DoT", BladeCombosOption)
-BladeCombosOption_Animations = SubOption("Animations", BladeCombosOption)
+BladeCombosOption_Damage = SubOption("Damage", BladeCombosOption)
+BladeCombosOption_Reactions = SubOption("Reactions", BladeCombosOption)
 
 # Enemies
 EnemiesOption = Option("Enemies", Enemies, "Randomizes what enemies appear in the world", [lambda: EnemyRandoLogic.EnemyLogic()])
