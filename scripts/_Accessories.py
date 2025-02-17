@@ -44,7 +44,3 @@ def RandomizeAccessoryEnhancements():
         EnhanceFile.seek(0)
         EnhanceFile.truncate()
         json.dump(enhanceFile, EnhanceFile, indent=2, ensure_ascii=False)
-
-    
-        
-

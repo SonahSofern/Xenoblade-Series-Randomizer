@@ -1,4 +1,4 @@
-import json, random, Helper, IDs, EnemyRandoLogic, RaceMode, math, Options, time, FieldSkillAdjustments
+import json, random, Helper, IDs, EnemyRandoLogic, RaceMode, math, Options, time, FieldSkillAdjustments, ExchangeShopCreator
 from Enhancements import *
 from BladeRandomization import Replacement2Original
 
@@ -30,6 +30,20 @@ OriginalAreaEnemies = {
     "Cliffs of Morytha": [243, 244, 245, 1116, 1117, 1118, 1119, 1120, 1121, 1122, 1123, 1124, 1125, 1126, 1127, 1128, 1131, 1132, 1134, 1135, 1137, 1400, 1402],
     "Land of Morytha": [248, 249, 250, 274, 324, 351, 565, 1145, 1146, 1147, 1148, 1149, 1150, 1151, 1152, 1153, 1154, 1155, 1156, 1157, 1423, 1424],
     "World Tree": [251, 252, 253, 254, 325, 326, 557, 558, 564, 1158, 1159, 1160, 1161, 1162, 1163, 1164, 1165, 1166, 1167, 1168, 1170, 1171, 1172, 1173, 1174, 1175, 1176, 1177, 1178, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1189, 1422]
+}
+
+# Map: Landmarks
+LandmarkPool = {
+    "Gormott": [501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, 512, 513, 514, 515, 539, 540, 541, 542, 543, 554, 555, 556, 557, 559, 560, 576, 577, 578],
+    "Uraya": [701, 702, 703, 704, 705, 706, 707, 708, 709, 710, 711, 712, 713, 714, 739, 740, 741, 750, 751, 752, 753, 754],
+    "Mor Ardain": [801, 802, 803, 804, 805, 806, 807, 808, 809, 810, 811, 832, 833, 834, 835, 836, 837, 838, 839, 849, 850, 851, 852, 853, 854, 855, 856, 870],
+    "Leftheria": [1501, 1502, 1503, 1504, 1505, 1506, 1507, 1508, 1509, 1510, 1520, 1521, 1522, 1523],
+    "Temperantia": [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1023],
+    "Tantal": [1301, 1302, 1303, 1304, 1305, 1306, 1307, 1308, 1309, 1310, 1311, 1312, 1313, 1327, 1334, 1335, 1336, 1337, 1338, 1339, 1344],
+    "Spirit Crucible": [1601, 1602, 1603, 1604, 1605, 1606, 1607, 1608, 1617],
+    "Cliffs of Morytha": [1701, 1702, 1703, 1704, 1705],
+    "Land of Morytha": [1801, 1802, 1803, 1804, 1805, 1806, 1807],
+    "World Tree": [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011]
 }
 
 # Misc IDs
@@ -73,11 +87,12 @@ def UMHunt():
     SpiritCrucibleEntranceRemoval()
     ShopChanges(ChosenAreaOrder)
     BalanceChanges(ChosenAreaOrder)
+    RandomLandmarkCreation()
     if ExtraSuperbosses:
         OhBoyHereWeGoAgain()
     Cleanup()
     UMHuntMenuTextChanges()
-    DebugTesting()
+    #DebugTesting()
     #DebugItemsPlace() # currently doesnt matter since I hide all the argentum chests anyways
     #DebugEasyMode()
     #DebugSpawnCountPrint(EnemySets, ChosenAreaOrder)
@@ -193,7 +208,7 @@ def BalanceChanges(ChosenAreaOrder): # Moved to reduce clutter, doesn't matter o
 def GimmickAdjustments():
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_DoorGimmick.json", ["Condition"], 0)
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_JumpGimmick.json", ["Condition"], 0)
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_MapGimmick.json", ["Condition"], 0)
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_MapGimmick.json", ["Condition", "OP_Condition"], 0)
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_ElevatorGimmick.json", ["OP_Condition"], 0)
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_EffectPop.json", ["Condition", "QuestFlagMin", "QuestFlagMax"], 0)
     if not Options.RemoveFieldSkillsOption.GetState(): # if this isn't already enabled, turn it on. We need to remove all field skill checks for this mode.
@@ -201,7 +216,7 @@ def GimmickAdjustments():
     with open("./_internal/JsonOutputs/common/FLD_LODList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
-            if row["$id"] in [211, 226]: # door in urayan titan's head that blocks off Vampire Bride Marion, Ether Gust Wall thingy in Uraya
+            if row["$id"] in [211, 226]: # door in urayan titan's head that blocks off Vampire Bride Marion, Ether Gust Wall thingy in Uraya (it gets dispelled mid-cutscene, unlike the one in Gormott)
                 row["flag"]["Visible"] = 0
                 row["ScenarioFlagMin1"] = 1001
                 row["ScenarioFlagMax1"] = 10048
@@ -265,7 +280,7 @@ def ReplaceBana(): # I want to use Bana as the exchange shop, so I move rumtumtu
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def MoveSpeedDeedSetup():
+def MoveSpeedDeedSetup(): # We add the movespeed deed to the inventory via DLC, codewise it's located with the RandomLandmarkCreation code
     with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes caption and name
         data = json.load(file)
         for row in data["rows"]:
@@ -775,6 +790,71 @@ def LandmarkAdjustments(ChosenAreaOrder): # removes xp and sp gains from landmar
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
+def RandomLandmarkCreation(): # Creates random landmarks and adds them to the DLC rewards. Also adds movespeed deed here because it's convenient
+    CurrentID = Helper.GetMaxValue("./_internal/JsonOutputs/common/MNU_DlcGift.json", "$id") + 1
+    StartingNameID = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
+    CurrentNameID = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
+    if Options.UMHuntOption_RandomLandmarks.GetState():
+        GuaranteedLandmarks = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 1801, 2001]
+        ChosenLandmarks = GuaranteedLandmarks.copy()
+        for area in LandmarkPool:
+            ChosenLandmarks.extend(random.choices(LandmarkPool[area], k = 4))
+        with open("./_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            # Movespeed Deed
+            data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": 3904, "category": 1, "item_id": 25249, "value": 1, "disp_item_info": 0, "getflag": 35400})
+            CurrentID += 1
+            CurrentNameID += 1
+            # Landmarks
+            for landmark in ChosenLandmarks:
+                data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": 3904, "category": 2, "item_id": 0, "value": 1, "disp_item_info": 0, "getflag": 51161 + landmark})
+                CurrentID += 1
+                CurrentNameID += 1
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+        with open("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            # Movespeed Deed
+            data["rows"].append({"$id": StartingNameID, "style": 162, "name": "Movespeed Deed"})
+            StartingNameID += 1
+            # Landmarks
+            for landmark in ChosenLandmarks:
+                data["rows"].append({"$id": StartingNameID, "style": 162, "name": "Landmark Receival"})
+                StartingNameID += 1
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+    else:
+        DefaultLandmarkFlags = [51662, 51667, 51668, 51673, 51700, 51718, 51865, 51867, 51871, 51872, 51900, 51963, 51968, 51998, 52011, 52167, 52170, 52172, 52462, 52468, 52469, 52471, 52500, 52665, 52669, 52681, 52762, 52765, 52766, 52768, 52770, 52862, 52863, 52865, 52962, 52964, 53164, 53165, 53166, 53170]
+        with open("./_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            # Movespeed Deed
+            data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": 3904, "category": 2, "item_id": 0, "value": 1, "disp_item_info": 0, "getflag": 51161 + landmark})
+            CurrentID += 1
+            CurrentNameID += 1
+            # Landmarks
+            for flag in DefaultLandmarkFlags:
+                data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": 3904, "category": 2, "item_id": 0, "value": 1, "disp_item_info": 0, "getflag": flag})
+                CurrentID += 1
+                CurrentNameID += 1
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+        with open("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            # Movespeed Deed
+            data["rows"].append({"$id": StartingNameID, "style": 162, "name": "Movespeed Deed"})
+            StartingNameID += 1
+            # Landmarks
+            for flag in DefaultLandmarkFlags:
+                data["rows"].append({"$id": StartingNameID, "style": 162, "name": "Landmark Receival"})
+                StartingNameID += 1
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
+
 def AddQuestConditions(SetCount, ChosenAreaOrder): # Adding conditions for each area's warp to be unlocked + 1 to allow me to disable all other stuff (salvage points are the big one atm)
     # First, need to replace any conditions
     with open("./_internal/JsonOutputs/common/FLD_ConditionScenario.json", 'r+', encoding='utf-8') as file:
@@ -829,7 +909,7 @@ def AddQuestConditions(SetCount, ChosenAreaOrder): # Adding conditions for each 
         for row in data["rows"]:
             if row["$id"] <= len(ChosenAreaOrder):
                 row["mapId"] = ContinentInfo[ChosenAreaOrder[row["$id"] - 1]][3] # puts the mapIDs in order, so we can assign conditions in order
-                row["cond1"] = 3903 + row["$id"]
+                row["cond1"] = 3904 #3903 + row["$id"]
                 row["enter"] = 0
             elif row["$id"] == len(ChosenAreaOrder) + 1:
                 row["mapId"] = 3
@@ -1691,7 +1771,7 @@ def GambaShopRewards(): # Makes the rewards for the gamba shop
             if row["$id"] == 38:
                 row["name"] = "[System:Color name=tutorial]Doubloon[/System:Color] Booster Packs"
             if row["$id"] == 10:
-                row["name"] = "Junk"
+                row["name"] = "Starting Item Receivals"
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -2020,6 +2100,7 @@ def CustomShopSetup(): # Sets up the custom shops with loot
     }
 
     ShopList = [TokenExchangeShop, CoreCrystalShop, WPManualShop, WeaponChipShop, AuxCoreShop, PouchItemShop, DriverAccessoryShop, PoppiswapShop, GambaShop]
+    ExchangeShopCreator.ShopDictToClass(ShopList)
     ShopCreator(ShopList, True)
 
 def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops

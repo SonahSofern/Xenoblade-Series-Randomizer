@@ -306,6 +306,7 @@ UMHuntOption_DifficultyEasy = SubOption("Easy", UMHuntOption)
 UMHuntOption_DifficultyNormal = SubOption("Normal", UMHuntOption)
 UMHuntOption_DifficultyHard = SubOption("Hard", UMHuntOption)
 UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
+UMHuntOption_RandomLandmarks = SubOption("Random Starting Landmarks", UMHuntOption)
 
 # Currently Disabled for Various Reasons
 # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
