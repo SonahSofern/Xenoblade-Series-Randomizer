@@ -77,9 +77,23 @@ def UMHunt():
         OhBoyHereWeGoAgain()
     Cleanup()
     UMHuntMenuTextChanges()
+    DebugTesting()
     #DebugItemsPlace() # currently doesnt matter since I hide all the argentum chests anyways
     #DebugEasyMode()
     #DebugSpawnCountPrint(EnemySets, ChosenAreaOrder)
+
+def DebugTesting():
+    with open("./_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
+        MaxRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/MNU_DlcGift.json", "$id") + 1
+        MaxFlag = Helper.GetMaxValue("./_internal/JsonOutputs/common/MNU_DlcGift.json", "getflag") + 1
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 1:
+                row["getflag"] = 51367
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def FindMonsters(ChosenAreaOrder): # was used to debug and find enemies that spawned in too often. If the objective pointer points towards defeating an enemy of which there are 16 or more on the map you're on, the game will freeze upon loading.
     enemycountholder = Helper.ExtendListtoLength([0], len(AllQuestDefaultEnemyIDs),"0")
@@ -1001,9 +1015,9 @@ def UMHuntMenuTextChanges():
             match rownum:
                 case 4:
                     row["name"] = "[System:Color name=green]Bounty Token[/System:Color] Exchange"
-                case 8:
-                    row["name"] = "[System:Color name=tutorial]Doubloon[/System:Color] Bazaar"
                     break
+                case 3:
+                    row["name"] = "[System:Color name=tutorial]Doubloon[/System:Color] Bazaar"
                 case _:
                     continue
         file.seek(0)
