@@ -16,7 +16,7 @@ ReplacedComboRoutes = list()
 
 CustomLevel2s = list()
 BaseLevel3s = list()
-CustomLevel3Templates = dict()
+CustomLevel3Templates = dict() # Key is element
 
 
 class CustomLevel2Combo:
@@ -49,7 +49,6 @@ class CustomLevel3ComboTemplate:
         nameNouns_shuffled, baseNames_shuffled = zip(*combined)
         nameNouns = list(nameNouns_shuffled)
         baseNames = list(baseNames_shuffled)
-
         self.elem = Name2Elem[elem]
         self.nameNouns = nameNouns
         self.bases = list()
@@ -57,6 +56,22 @@ class CustomLevel3ComboTemplate:
             self.bases.append(copy.deepcopy(OriginalCombos[3][baseName]))
 
         CustomLevel3Templates[self.elem] = self
+
+
+def BladeComboRandomization():
+    PopulateMaps()
+
+    if Options.BladeCombosOption_ElementRoutes.GetState():
+        CreateCustomCombos()
+        RandomizeElementRoutes()
+    if Options.BladeCombosOption_AOE.GetState():
+        RandomizeAOE()
+    if Options.BladeCombosOption_DOT.GetState():
+        RandomizeDOT()
+    if Options.BladeCombosOption_Damage.GetState():
+        RandomizeDamage()
+    if Options.BladeCombosOption_Reactions.GetState():
+        RandomizeReactions()
 
 
 def CreateCustomCombos():
@@ -129,7 +144,7 @@ def CreateCustomCombos():
     CustomLevel2Combo('Luminous Dusk', ['Light', 'Dark'], 'Pandemic', ['Midnight', 'Interstellar'])
     CustomLevel2Combo('Gamma Ray', ['Light', 'Light'], 'Gamma Ray', ['Illuminating', 'Spectral'])
 
-    # Since there are 512 possible combinations, I'm not creating names for all of them
+    # Since there are 512 possible combinations, I'm not creating names for all stage 3s
     # Instead, the first 2 stages determine an adjective. The element types determine possible nouns. Combine the 2 to form a new combo name
     CustomLevel3ComboTemplate('Fire', ['Inferno', 'Blaze', 'Explosion', 'Combustion', 'Conflagration'], ['Volcanic Storm', 'Mega Explosion', 'Mega Explosion', 'Nuclear Blast', 'Mega Eruption'])
     CustomLevel3ComboTemplate('Water', ['Tsunami', 'Torrent', 'Maelstrom', 'Riptide', 'Undertow'], ['Steam Explosion', 'Electrolysis', 'Electrolysis', 'Steam Explosion', 'Splash Hazard'])
@@ -155,22 +170,6 @@ def getBaseStage3Combo(elemRoute):
     return None
 
 
-def BladeComboRandomization():
-    PopulateMaps()
-
-    if Options.BladeCombosOption_ElementRoutes.GetState():
-        CreateCustomCombos()
-        RandomizeElementRoutes()
-    if Options.BladeCombosOption_AOE.GetState():
-        RandomizeAOE()
-    if Options.BladeCombosOption_DOT.GetState():
-        RandomizeDOT()
-    if Options.BladeCombosOption_Damage.GetState():
-        RandomizeDamage()
-    if Options.BladeCombosOption_Reactions.GetState():
-        RandomizeReactions()
-
-
 def PopulateMaps():
     def getNames(combo):
         OriginalID2Name[combo['$id']] = combo['name']
@@ -189,7 +188,7 @@ def PopulateMaps():
     JSONParser.ChangeJSONLineWithCallback(["common/BTL_ElementalCombo.json"], [], getCombos, replaceAll=True)
 
     def getElems(elem):
-        # Note: -1 because the blade combo elements are offset by 1 for some reason (presumably as there is no "None")
+        # Note: -1 because the blade combo elements are offset by 1 for some reason (presumably as there is no "None" in blade combos)
         Name2Elem[elem['name']] = elem['$id']-1
     JSONParser.ChangeJSONLineWithCallback(["common_ms/menu_attr_ms.json"], Helper.InclRange(2,9), getElems)
 
