@@ -226,6 +226,16 @@ def RunOptions():
     # Nonstandard Options
     ShowTitleScreenText()
     AddCustomEnhancements() # Figure out how to not run this here just dont have time rn
+    # JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"],["SearchRange"], [], [1000])
+    # JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"],["SearchRadius"], [], [255])
+    # JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"],["SearchAngle"], [], [360])
+    # JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"],["BatArea"], [], [255])
+    # JSONParser.ChangeJSONFile(["common/RSC_En.json"],["EnRadius"], [], [255])
+    # JSONParser.ChangeJSONFile(["common/RSC_En.json"],["NoVanish"], [], [1])
+    JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"],["DriverLev"], [], [5])
+
+
+    
 
 
 def GenRandomSeed(randoSeedEntryVar):
@@ -272,7 +282,6 @@ seedVar = SavedOptions.SavedEntry("Seed", seedEntryVar)
 EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
 SavedOptions.loadData(EntriesToSave + Options.OptionList, SavedOptionsFileName)
 EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Options.OptionList)) + list((x.spinBoxVal for x in Options.OptionList)) + list((sub.checkBoxVal for x in Options.OptionList for sub in x.subOptions))
-
 
 # Permalink Options/Variables
 permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame")

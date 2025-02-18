@@ -32,9 +32,10 @@ def loadData(DataList, Filename):
                 for sub in option.subOptions:
                     try:
                         sub.checkBoxVal.set(data[f"{option.name}->{sub.name}"])
-                        option.StateUpdate()
                     except:
                         pass
+                option.StateUpdate()
+
     except:
         pass # The file is created upon closing the window so it will error initial launch
     # except Exception as error:
