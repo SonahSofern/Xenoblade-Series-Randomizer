@@ -1,11 +1,13 @@
 from tkinter import *
 from UI_Colors import *
 from tkinter import font, ttk
-from IDs import CanvasesForStyling, RootsForStyling
 
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
 import SavedOptions
 
+
+CanvasesForStyling = []
+RootsForStyling = []
 defFontVar = StringVar(value="Arial")
 defFontSizeVar = IntVar(value=13)
 defGUIThemeVar = StringVar(value="Dark Mode")
