@@ -1,5 +1,5 @@
 saveFolderName = "SaveData"
-import os, json, traceback, Options
+import os, json
 
 
 def saveData(DataList, Filename):

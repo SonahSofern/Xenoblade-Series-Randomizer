@@ -1,7 +1,7 @@
 import json
 import random
 import time
-import Helper
+from scripts import Helper
 from IDs import ValidEnemies, ValidEnemyPopFileNames, FlyingEnArrangeIDs, OriginalFlyingHeights, OriginalWalkSpeeds, OriginalRunSpeeds, OriginalBtlSpeeds, SwimmingEnArrangeIDs
 import copy, Options
 

@@ -1,10 +1,9 @@
-import Helper as Helper
+from scripts import Helper, JSONParser
 import json
 import EnemyRandoLogic as EnemyRandoLogic
 import random
 from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, Accessories, WeaponChips, AuxCores, RefinedAuxCores, CollectionPointMaterials, TornaAccessories
 import time
-import JSONParser
 import DebugLog
 import CoreCrystalAdjustments
 import math, Options

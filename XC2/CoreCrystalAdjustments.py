@@ -1,8 +1,8 @@
 import EnemyRandoLogic as EnemyRandoLogic
 import json
-import Helper as Helper
+from scripts import Helper, JSONParser
 import random
-import JSONParser, Options
+import Options
 import IDs
 import RaceMode
 

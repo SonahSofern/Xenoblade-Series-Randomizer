@@ -1,5 +1,5 @@
-import JSONParser, Options
-
+import Options
+from scripts import JSONParser
     
 def RemoveFieldSkills():
     isAllChecks  = Options.RemoveFieldSkillsOption_AllFieldSkills.GetState()

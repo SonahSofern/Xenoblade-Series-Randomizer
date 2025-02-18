@@ -1,6 +1,6 @@
 from IDs import EnemyBattleMusicMOVs, NonBattleMusicMOVs, NonBattleMusicIDs, ReplacementNonBattleMusicMOVs, ValidEnemyMusicIDs, ValidEnemyMusicWAVs
-import JSONParser
-import Helper
+from scripts import JSONParser
+from scripts import Helper
 import json
 import random, Options
 

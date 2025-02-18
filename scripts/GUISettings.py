@@ -2,6 +2,7 @@ from tkinter import *
 from UI_Colors import *
 from tkinter import font, ttk
 
+
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
 import SavedOptions
 

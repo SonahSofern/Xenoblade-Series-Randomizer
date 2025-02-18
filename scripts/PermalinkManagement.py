@@ -4,7 +4,6 @@ import PackedBits
 import base64
 import struct
 
-
 # most of this is from github.com/LagoLunatic/wwrando
 
 def SanitizeUserSeed(SeedName):

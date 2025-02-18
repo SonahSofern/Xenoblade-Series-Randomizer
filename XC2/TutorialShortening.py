@@ -1,5 +1,5 @@
 import json
-import Helper
+from scripts import Helper
 import EnemyRandoLogic, Options
 
 def ShortenedTutorial():

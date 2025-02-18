@@ -1,5 +1,5 @@
-import JSONParser, Helper, random, json
-
+import random, json
+from scripts import JSONParser, Helper
 
 Baby = [1,2,4,5]
 Mini = [1,7,14,20]

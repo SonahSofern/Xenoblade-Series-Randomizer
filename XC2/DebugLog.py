@@ -1,5 +1,5 @@
-import random, Helper, json
-
+import random, json
+from scripts import Helper
 def CreateDebugLog(OptionsRunDict, Version, randoSeedEntry):
     if OptionsRunDict["Create Debug Log"]["optionTypeVal"].get():
         Range1 = Helper.InclRange(1, 100)

@@ -1,8 +1,6 @@
-import Helper as Helper
+import scripts.Helper as Helper
 
-ValidReplacements = [] # Global Variable Referenced for JsonParser
-InvalidReplacements = [] # Global Variable Referenced for JsonParser
-CurrentSliderOdds = 100 # Global Variable Referenced for JsonParser
+
 
 
 
@@ -31,7 +29,6 @@ ButtonCombos = Helper.InclRange(1,5)
 BladeBattleSkills = Helper.InclRange(1,270)
 
 
-LootOptions = ["Accessories", [lambda: ValidReplacements.extend(Accessories)] ,"Torna Accessories", [lambda: ValidReplacements.extend(TornaAccessories)], "Weapon Chips", [lambda: ValidReplacements.extend(WeaponChips)], "Aux Cores", [lambda: ValidReplacements.extend(AuxCores)], "Refined Aux Cores", [lambda: ValidReplacements.extend(RefinedAuxCores)], "Core Crystals", [lambda: ValidReplacements.extend(CoreCrystals)], "Deeds", [lambda: ValidReplacements.extend(Deeds)], "Collection Point Materials", [lambda: ValidReplacements.extend(CollectionPointMaterials)]]
 
 
 BladeSpecials = Helper.InclRange(1,269)

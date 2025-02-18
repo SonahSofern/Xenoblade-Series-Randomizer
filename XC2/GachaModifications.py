@@ -1,5 +1,4 @@
-import JSONParser
-import Helper
+from scripts import JSONParser, Helper
 
 
 def UnlockNGPlusBlades():

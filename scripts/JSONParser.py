@@ -1,12 +1,17 @@
 import copy
-import json, random, os, IDs
+import json, random, os
+import XC2.IDs as IDs
+
+ValidReplacements = [] 
+InvalidReplacements = [] 
+CurrentSliderOdds = 100 
 
 def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list = [], rangeValidReplacements:list = [], InvalidTargetIDs:list = [], SliderOdds = 100, IgnoreID_AND_Key = [["",""]]): # make this a function to reuse, check the settings ot see if we even do this
 
     # print(f"Valid Replacements: {Replacements}")
-    SliderOdds = IDs.CurrentSliderOdds
-    rangeValidReplacements.extend(IDs.ValidReplacements)
-    rangeValidReplacements = [x for x in rangeValidReplacements if x not in IDs.InvalidReplacements]
+    SliderOdds = CurrentSliderOdds
+    rangeValidReplacements.extend(ValidReplacements)
+    rangeValidReplacements = [x for x in rangeValidReplacements if x not in InvalidReplacements]
     for name in Filename:
         filePath = "./_internal/JsonOutputs/" + name
         if not os.path.exists(filePath):
@@ -31,9 +36,9 @@ def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list =
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-    IDs.ValidReplacements.clear()
-    IDs.InvalidReplacements.clear()
-    IDs.CurrentSliderOdds = 100
+    ValidReplacements.clear()
+    InvalidReplacements.clear()
+    CurrentSliderOdds = 100
 
 
 def ChangeJSONLine(filenames, ids, keys, replacement, replaceAll = False):

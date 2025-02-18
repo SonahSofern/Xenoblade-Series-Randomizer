@@ -1,4 +1,6 @@
-import copy, random, JSONParser, Helper, Options
+import copy, random, Options
+from scripts import JSONParser, Helper
+
 # TODO:
 #  - Replace the images in the Pyra/Mythra selection to the blades which replaced them
 #  - Figure out how to randomize Torna blades properly (Apparently NoBuildWpn in CHR_Bl is not sufficient)

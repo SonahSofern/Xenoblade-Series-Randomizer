@@ -1,15 +1,17 @@
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
 root = Tk()
 import Options
-
-import random, subprocess, shutil, os, threading, traceback, time, sys, PermalinkManagement, datetime
-import SavedOptions, SeedNames, JSONParser,  IDs,Helper
+import scripts.PermalinkManagement as PermalinkManagement
+import random, subprocess, shutil, os, threading, traceback, time, sys, datetime
+from scripts import SavedOptions, JSONParser, Helper, GUISettings
+import SeedNames
 from Enhancements import *
-import GUISettings
 from IDs import *
-from UI_Colors import *
+from scripts.UI_Colors import *
 from tkinter.font import Font
 import tkinter as tk
 
@@ -30,7 +32,7 @@ else:
 SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt")
 
 
-RootsForStyling.append(root)
+GUISettings.RootsForStyling.append(root)
 defaultFont = Font(family=GUISettings.defFontVar.get(), size=GUISettings.defFontSizeVar.get())
 
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
@@ -90,7 +92,7 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touc
     for i in range(len(Canvases)):
         scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
         Canvases[i].config(yscrollcommand=scrollbar.set, borderwidth=0, relief="flat", highlightthickness=0)
-        CanvasesForStyling.append(Canvases[i])
+        GUISettings.CanvasesForStyling.append(Canvases[i])
         # OuterFrames[i].config(borderwidth=0, relief="flat")
         InnerFrames[i].bind("<Configure>", lambda e, canvas=Canvases[i]: canvas.configure(scrollregion=canvas.bbox("all")))
 
@@ -203,8 +205,7 @@ def RunOptions():
             continue
         
         opt.subOptions.sort(key= lambda x: x.prio) # Sort suboptions by priority
-        IDs.CurrentSliderOdds = opt.GetOdds()
-        
+            
         for sub in opt.subOptions:
             if not sub.checkBoxVal.get(): # Checks state
                 continue
@@ -261,7 +262,7 @@ seedDesc = ttk.Button(SeedFrame, text="Seed", command=lambda: GenRandomSeed(seed
 
 seedDesc.pack(side='left', padx=2, pady=2)
 
-RootsForStyling.append(bdatcommonFrame)
+GUISettings.RootsForStyling.append(bdatcommonFrame)
 
 # Seed entry box
 seedEntryVar = StringVar()
