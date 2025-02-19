@@ -173,7 +173,7 @@ def Randomize():
     
         try:
             # Packs BDATs
-            subprocess.run(f"{bdat_path} pack {JsonOutput} -o {outputDirVar.get().strip()} -f json", check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            subprocess.run([bdat_path, "pack", JsonOutput, "-o", outputDirVar.get().strip(), "-f", "json"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
             # Outputs common_ms in the correct file structure
             os.makedirs(f"{outputDirVar.get().strip()}/gb", exist_ok=True)

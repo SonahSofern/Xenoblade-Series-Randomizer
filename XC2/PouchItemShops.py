@@ -18,6 +18,8 @@ def RandoPouchShops():
         ValidReplacements.append(IDs.Deeds)
     if Options.PouchItemShopOption_PouchItems.GetState():
         ValidReplacements.append(IDs.PouchItems)
+    if Options.PouchItemShopOption_CollectionPointMaterials.GetState():
+        ValidReplacements.append(IDs.CollectionPointMaterials)
         
     odds = Options.PouchItemShopOption.GetOdds()
 

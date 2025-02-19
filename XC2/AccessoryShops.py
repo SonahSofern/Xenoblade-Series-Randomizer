@@ -18,6 +18,8 @@ def RandoAccessoryShops():
         ValidReplacements.append(IDs.Deeds)
     if Options.AccessoryShopsOption_PouchItems.GetState():
         ValidReplacements.append(IDs.PouchItems)
+    if Options.AccessoryShopsOption_CollectionPointMaterials.GetState():
+        ValidReplacements.append(IDs.CollectionPointMaterials)
     
     if ValidReplacements == []: # In case they dont select anything
         return

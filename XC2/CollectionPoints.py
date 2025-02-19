@@ -16,6 +16,8 @@ def RandoCollectionPoints():
         ValidReplacements.append(IDs.CoreCrystals)
     if Options.CollectionPointsOption_Deeds.GetState():
         ValidReplacements.append(IDs.Deeds)
+    if Options.CollectionPointsOption_CollectionPointMaterials.GetState():
+        ValidReplacements.append(IDs.CollectionPointMaterials)
     odds = Options.CollectionPointsOption.GetOdds()
 
     
@@ -27,7 +29,7 @@ def RandoCollectionPoints():
             with open(f"./_internal/JsonOutputs/common_gmk/ma{area}a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as collFile:
                 collData = json.load(collFile)
                 for point in collData["rows"]:
-                    for i in range(1,4):
+                    for i in range(1,5):
                         if not Helper.OddsCheck(odds): # Check spinbox
                             continue
                         if point[f"itm{i}ID"] == 0: # Ignore empty spots in points
