@@ -1,5 +1,5 @@
 import sys, os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))) # Allows us to use the scripts folder as a module
 from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
@@ -225,13 +225,7 @@ def RunOptions():
     # Nonstandard Options
     ShowTitleScreenText()
     AddCustomEnhancements() # Figure out how to not run this here just dont have time rn
-    # JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"],["SearchRange"], [], [1000])
-    # JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"],["SearchRadius"], [], [255])
-    # JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"],["SearchAngle"], [], [360])
-    # JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"],["BatArea"], [], [255])
-    # JSONParser.ChangeJSONFile(["common/RSC_En.json"],["EnRadius"], [], [255])
-    # JSONParser.ChangeJSONFile(["common/RSC_En.json"],["NoVanish"], [], [1])
-    JSONParser.ChangeJSONFile(["common/CHR_EnArrange.json"],["DriverLev"], [], [5])
+
 
 
     
@@ -280,7 +274,7 @@ seedVar = SavedOptions.SavedEntry("Seed", seedEntryVar)
 # Save and Load Last Options
 EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
 SavedOptions.loadData(EntriesToSave + Options.OptionList, SavedOptionsFileName)
-EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Options.OptionList)) + list((x.spinBoxVal for x in Options.OptionList)) + list((sub.checkBoxVal for x in Options.OptionList for sub in x.subOptions))
+EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Options.OptionList)) + list((x.spinBoxVal for x in Options.OptionList if x.spinBoxVal is not None)) + list((sub.checkBoxVal for x in Options.OptionList for sub in x.subOptions))
 
 # Permalink Options/Variables
 permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame")
