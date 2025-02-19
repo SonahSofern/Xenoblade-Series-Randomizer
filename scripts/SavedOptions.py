@@ -1,9 +1,12 @@
 saveFolderName = "SaveData"
-import os, json, traceback, Options
+import os, json
 
 
-def saveData(DataList, Filename):
-    with open(f"{saveFolderName}/{Filename}", 'w') as file:
+def saveData(DataList, Filename, GamePrefix):
+    savePath = os.path.join(GamePrefix, saveFolderName)
+    os.makedirs(savePath, exist_ok=True)  
+    saveFilePath = os.path.join(savePath, Filename)
+    with open(saveFilePath, 'w') as file:
         sav= {}
         for saveData in DataList:
             sav.update({saveData.name: saveData.checkBoxVal.get()})
@@ -15,10 +18,12 @@ def saveData(DataList, Filename):
 
 
             
-def loadData(DataList, Filename):
+def loadData(DataList, Filename, GamePrefix):
     try:
-        os.makedirs(saveFolderName, exist_ok=True)
-        with open(f"{saveFolderName}/{Filename}", 'r') as file:
+        savePath = os.path.join(GamePrefix, saveFolderName)
+        saveFilePath = os.path.join(savePath, Filename)
+        os.makedirs(savePath, exist_ok=True)
+        with open(saveFilePath, 'r') as file:
             data = json.load(file)
             for option in DataList:
                 try:
