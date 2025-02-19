@@ -5,7 +5,7 @@ from tkinter import *
 import tkinter as tk
 root = Tk()
 import Options, os, sys
-from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkManagement, UI_Colors
+from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkManagement, UI_Colors, Seed
 import SeedNames
 from tkinter.font import Font
 import tkinter as tk
@@ -85,7 +85,7 @@ GUISettings.CreateScrollBars([TabGeneralOuter, TabCharactersOuter, TabEnemiesOut
 
 # Tabs
 MainWindow.add(TabGeneralOuter, text ='General') 
-MainWindow.add(TabCharactersOuter, text ='Drivers') 
+MainWindow.add(TabCharactersOuter, text ='Characters') 
 MainWindow.add(TabEnemiesOuter, text ='Enemies') 
 MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.add(TabQOLOuter, text = 'Quality of Life')
@@ -114,7 +114,7 @@ def ShowTitleScreenText():
 
 
 def GenRandomSeed(randoSeedEntryVar):
-    randoSeedEntryVar.set(SeedNames.RandomSeedName())
+    randoSeedEntryVar.set(Seed.RandomSeedName(SeedNames.Nouns, SeedNames.Verbs))
 
 bdatcommonFrame = ttk.Frame(root, style="NoBackground.TFrame")
 bdatcommonFrame.pack(anchor="w", padx=10)
