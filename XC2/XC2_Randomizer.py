@@ -45,7 +45,7 @@ else:
 if isOnefile: 
     icon_path = os.path.join(sys._MEIPASS, 'Images', 'XC2Icon.png')
 else:
-    icon_path = "./_internal/Images/XC2Icon.png"
+    icon_path = "./XC2/_internal/Images/XC2Icon.png"
 icon = PhotoImage(file=icon_path)
 root.iconphoto(True, icon)
 
@@ -307,7 +307,7 @@ RandomizeButton.config(padding=5)
 if isOnefile:  # If the app is running as a bundled executable
     icon_path = os.path.join(sys._MEIPASS, 'Images', 'SmallSettingsCog.png')
 else:  # If running as a script (not bundled)
-    icon_path = "./_internal/Images/SmallSettingsCog.png"
+    icon_path = "./XC2/_internal/Images/SmallSettingsCog.png"
 Cog = PhotoImage(file=icon_path)
 SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, GUISettings.defGUIThemeVar))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 

@@ -47,7 +47,7 @@ class Option():
         # Variables
         global rowIncrement
         self.checkBoxVal = BooleanVar()
-        self.spinBoxObj = ttk.Label()
+        self.spinBoxLabel = ttk.Label()
         self.spinBoxObj = ttk.Spinbox()
 
         # Parent Frame
@@ -106,7 +106,7 @@ class Option():
 class SubOption():
     def __init__(self, _name, _parent:Option, _commands = [], _defState = True, _prio = 0):
         self.name = _name
-        self.checkBoxVal = None
+        self.checkBoxVal = BooleanVar
         self.checkBox:ttk.Checkbutton = None
         self.commands = _commands    
         self.defState = _defState
