@@ -1,4 +1,4 @@
-Xenoblade Randomizer
+# Xenoblade Randomizer
 A randomizer project for the whole Xenoblade series on the switch
 
 
