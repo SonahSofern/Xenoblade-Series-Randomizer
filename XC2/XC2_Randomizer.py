@@ -138,7 +138,7 @@ for opt in Options.OptionList: # Cant reference directly because of circular imp
     opt.DisplayOption(Tabs[opt.tab])
 
 def ShowTitleScreenText():
-    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], [f"Randomizer v{Version}"]) # Change Title Version to Randomizer vX.x.x
+    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], f"Randomizer v{Version}") # Change Title Version to Randomizer vX.x.x
 
 
 def GenRandomSeed(randoSeedEntryVar):
@@ -203,7 +203,7 @@ PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, se
 randoProgressDisplay = ttk.Label(text="", anchor="e", padding=2, style="BorderlessLabel.TLabel")
 
 # Randomize Button
-RandomizeButton = ttk.Button(text='Randomize', command=lambda: (GUISettings.Randomize(RandomizeButton, randoProgressDisplay, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Options.OptionList), ShowTitleScreenText(), AddCustomEnhancements()))
+RandomizeButton = ttk.Button(text='Randomize', command=lambda: (GUISettings.Randomize(RandomizeButton, randoProgressDisplay, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Options.OptionList, [lambda: ShowTitleScreenText(), lambda: AddCustomEnhancements()])))
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
 RandomizeButton.config(padding=5)
 

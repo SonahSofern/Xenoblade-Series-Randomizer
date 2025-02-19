@@ -331,7 +331,7 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touc
         Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
         OuterFrames[i].pack(expand=True, fill="both")
 
-def Randomize(RandomizeButton, randoProgressDisplay, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList):
+def Randomize(RandomizeButton, randoProgressDisplay, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, ExtraCommands = []):
     def ThreadedRandomize():
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
@@ -360,6 +360,8 @@ def Randomize(RandomizeButton, randoProgressDisplay, fileEntryVar, bdat_path, pe
 
         # Runs all randomization
         RunOptions(OptionList, randoProgressDisplay)
+        for command in ExtraCommands: # Runs extra commands like show title screen
+            command()
         randoProgressDisplay.config(text="Packing BDATs")
     
         try:

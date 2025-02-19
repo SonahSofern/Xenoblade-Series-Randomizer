@@ -42,4 +42,5 @@ def RemoveFieldSkills():
     for i in range(51):
         JSONParser.ChangeJSONLine([f"common_gmk/ma{i:02}a_FLD_NpcPop.json"], npcPopIds, ["FSID1", "FSID2", "FSID3"], 0)
         JSONParser.ChangeJSONLine([f"common_gmk/ma{i:02}a_FLD_TboxPop.json"], tBoxIds, ["FSID", "FSID2"], 0)
-
+    JSONParser.ChangeJSONLine(["common/FLD_FieldSkillSetting.json"],[1294,1077],["FieldSkillLevel1", "FieldSkillLevel2"], 0)
+    

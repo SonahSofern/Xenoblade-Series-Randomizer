@@ -21,7 +21,7 @@ def RandomizeFieldSkills(): # Make logic to have all skills in the game
         KeepVanilla = {
             1001: ["FSkill1","FSkill2", "FSkill3"], # Pyra needs all her skills
             1008: ["FSkill2"], # Roc Miasma
-            
+            1005: ["FSkill3"] # Poppia superstrength
         }
         Slots = ["FSkill1","FSkill2", "FSkill3"]
         
