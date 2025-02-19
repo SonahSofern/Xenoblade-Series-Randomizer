@@ -1,4 +1,4 @@
-# XC_Randomizer
+# Xenoblade_Chronicles_Randomizer
 A randomizer project for the whole Xenoblade series on the switch
 
 
