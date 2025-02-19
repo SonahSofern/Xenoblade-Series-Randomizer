@@ -13,6 +13,7 @@ from IDs import *
 from tkinter.font import Font
 import tkinter as tk
 
+Game = "XC2"
 Version = "1.3.0"
 CommonBdatInput = ""
 JsonOutput = "./_internal/JsonOutputs"
@@ -27,7 +28,7 @@ if getattr(sys, 'frozen', False):  # If the app is running as a bundled executab
 else:
     isOnefile = False
     
-SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt")
+SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt", Game)
 
 
 GUISettings.RootsForStyling.append(root)
@@ -273,7 +274,7 @@ seedVar = SavedOptions.SavedEntry("Seed", seedEntryVar)
 
 # Save and Load Last Options
 EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
-SavedOptions.loadData(EntriesToSave + Options.OptionList, SavedOptionsFileName)
+SavedOptions.loadData(EntriesToSave + Options.OptionList, SavedOptionsFileName, Game)
 EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Options.OptionList)) + list((x.spinBoxVal for x in Options.OptionList if x.spinBoxVal is not None)) + list((sub.checkBoxVal for x in Options.OptionList for sub in x.subOptions))
 
 # Permalink Options/Variables
@@ -306,7 +307,7 @@ Cog = PhotoImage(file=icon_path)
 SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, GUISettings.defGUIThemeVar))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
-root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Options.OptionList, SavedOptionsFileName), root.destroy()))
+root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Options.OptionList, SavedOptionsFileName, Game), root.destroy()))
 GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
 
 

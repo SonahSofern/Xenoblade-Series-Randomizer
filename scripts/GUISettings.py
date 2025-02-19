@@ -45,7 +45,7 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
     def SaveUIChanges(event = None):
         fontType.checkBoxVal.set(defaultFont.cget("family"))
         fontSizeSave.checkBoxVal.set(defaultFont.cget("size"))
-        SavedOptions.saveData([fontType,fontSizeSave,GUITheme], "GUISavedOptions.txt")
+        SavedOptions.saveData([fontType,fontSizeSave,GUITheme], "GUISavedOptions.txt", "GUI")
 
     def IncreaseFontSize(event = None):
         newSize = defaultFont.cget("size") + 1
