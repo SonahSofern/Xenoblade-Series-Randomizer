@@ -2,16 +2,10 @@ import copy
 import json, random, os
 import XC2.IDs as IDs
 
-ValidReplacements = [] 
-InvalidReplacements = [] 
-CurrentSliderOdds = 100 
 
-def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list = [], rangeValidReplacements:list = [], InvalidTargetIDs:list = [], SliderOdds = 100, IgnoreID_AND_Key = [["",""]]): # make this a function to reuse, check the settings ot see if we even do this
+def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list = [], rangeValidReplacements:list = [], InvalidTargetIDs:list = [], IgnoreID_AND_Key = [["",""]]): # make this a function to reuse, check the settings ot see if we even do this
 
     # print(f"Valid Replacements: {Replacements}")
-    SliderOdds = CurrentSliderOdds
-    rangeValidReplacements.extend(ValidReplacements)
-    rangeValidReplacements = [x for x in rangeValidReplacements if x not in InvalidReplacements]
     for name in Filename:
         filePath = "./_internal/JsonOutputs/" + name
         if not os.path.exists(filePath):
@@ -26,19 +20,16 @@ def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list =
                     if ([item["$id"], key] in IgnoreID_AND_Key):
                         continue       
                     if key in keyWords:
-                        if (((rangeofValuesToReplace == []) or (item[key] in rangeofValuesToReplace)) and (SliderOdds >= random.randint(1,100))):
+                        if (rangeofValuesToReplace == []) or (item[key] in rangeofValuesToReplace):
                             item[key] = random.choice(rangeValidReplacements)
                     elif key == "Flag":
                         for flag, flagVal in item[key].items():
                             if flag in keyWords:
-                                if ((flagVal in rangeofValuesToReplace) and (SliderOdds >= random.randint(1,100))):
+                                if (flagVal in rangeofValuesToReplace):
                                     item[key][flag] = random.choice(rangeValidReplacements)                                
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-    ValidReplacements.clear()
-    InvalidReplacements.clear()
-    CurrentSliderOdds = 100
 
 
 def ChangeJSONLine(filenames, ids, keys, replacement, replaceAll = False):

@@ -12,12 +12,12 @@ First = 0
 Last = 100
 
 class Option():
-    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50, _spinBoxVal = None, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10):
+    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50, _hasSpinBox = False, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
         self.spinBoxLabel = None
-        self.spinBoxVal = _spinBoxVal
+        self.spinBoxVal = None
         self.checkBox = None
         self.checkBoxVal = None
         self.subOptions:list[SubOption] = []
@@ -27,6 +27,7 @@ class Option():
         self.tab = _tab
         self.desc = _desc
         self.commands:list = _commands
+        self.hasSpinBox = _hasSpinBox
         self.subDefState = _defState
         self.prio = _prio
         OptionList.append(self)
@@ -62,7 +63,7 @@ class Option():
         self.descObj.grid(row=rowIncrement, column=1, sticky="w", padx=0)
         
         # % Boxes
-        if self.spinBoxVal != None:
+        if self.hasSpinBox:
             self.spinBoxObj = ttk.Spinbox(optionPanel, from_=self.spinBoxMin, to=self.spinBoxMax, textvariable=self.spinBoxVal, wrap=True, width=self.spinWidth, increment=self.spinIncr)
             self.spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
             self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w")
@@ -129,8 +130,7 @@ CosmeticsTab = 8
 GameModeTab = 9
 
 # General
-AccessoryShopsOption_Spinbox = IntVar()
-AccessoryShopsOption = Option("Accessory Shops", General, "Randomizes the contents of Accessory Shops", [lambda : JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(Accessories)-set([1])),[])], _defState=True, _spinBoxVal = AccessoryShopsOption_Spinbox)
+AccessoryShopsOption = Option("Accessory Shops", General, "Randomizes the contents of Accessory Shops", [lambda : JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), list(set(Accessories)-set([1])),[])], _defState=True, _hasSpinBox = True)
 AccessoryShopsOption_Accessories = SubOption("Accessories", AccessoryShopsOption, [lambda: ValidReplacements.extend(Accessories)])
 AccessoryShopsOption_TornaAccessories = SubOption("Torna Accessories", AccessoryShopsOption, [lambda: ValidReplacements.extend(TornaAccessories)])
 AccessoryShopsOption_WeaponChips = SubOption("Weapon Chips", AccessoryShopsOption, [lambda: ValidReplacements.extend(WeaponChips)])
@@ -140,8 +140,7 @@ AccessoryShopsOption_CoreCrystals = SubOption("Core Crystals", AccessoryShopsOpt
 AccessoryShopsOption_Deeds = SubOption("Shop Deeds", AccessoryShopsOption, [lambda: ValidReplacements.extend(Deeds)])
 AccessoryShopsOption_CollectionPointMaterials = SubOption("Collection Point Materials", AccessoryShopsOption, [lambda: ValidReplacements.extend(CollectionPointMaterials)])
 AccessoryShopsOption_PouchItems = SubOption("Pouch Items", AccessoryShopsOption, [lambda: ValidReplacements.extend(PouchItems)])
-CollectionPointsOption_Spinbox = IntVar()
-CollectionPointsOption = Option("Collection Points", General, "Randomizes the contents of Collection Points", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID"], list(set(CollectionPointMaterials) - set([30019])), [])], _defState=True, _spinBoxVal = CollectionPointsOption_Spinbox)
+CollectionPointsOption = Option("Collection Points", General, "Randomizes the contents of Collection Points", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_CollectionPopList.json", "common_gmk/"), ["itm1ID", "itm2ID", "itm3ID", "itm4ID"], list(set(CollectionPointMaterials) - set([30019])), [])], _defState=True, _hasSpinBox = True)
 CollectionPointsOption_Accessories = SubOption("Accessories", CollectionPointsOption, [lambda: ValidReplacements.extend(Accessories)])
 CollectionPointsOption_TornaAccessories = SubOption("Torna Accessories", CollectionPointsOption, [lambda: ValidReplacements.extend(TornaAccessories)])
 CollectionPointsOption_WeaponChips = SubOption("Weapon Chips", CollectionPointsOption, [lambda: ValidReplacements.extend(WeaponChips)])
