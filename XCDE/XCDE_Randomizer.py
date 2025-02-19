@@ -4,17 +4,16 @@ from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
 root = Tk()
-import Options
-import random, subprocess, shutil, os, threading, traceback, time, sys, datetime
+import Options, os, sys
 from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkManagement, UI_Colors
 import SeedNames
 from tkinter.font import Font
 import tkinter as tk
 
-Game = "XC2"
-Version = "1.3.0"
+Game = "XCDE"
+Version = "1.0.0"
 CommonBdatInput = ""
-JsonOutput = "./XC2/_internal/JsonOutputs"
+JsonOutput = "./XCDE/_internal/JsonOutputs"
 MaxWidth = 1000
 windowWidth = "1550"
 windowHeight = "900"
@@ -32,19 +31,19 @@ SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettin
 GUISettings.RootsForStyling.append(root)
 defaultFont = Font(family=GUISettings.defFontVar.get(), size=GUISettings.defFontSizeVar.get())
 
-root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
+root.title(f"Xenoblade Chronicles DE Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
 root.geometry(f'{windowWidth}x{windowHeight}')
 
 if isOnefile:
     bdat_path = os.path.join(sys._MEIPASS, 'Toolset', 'bdat-toolset-win64.exe')
 else:
-    bdat_path = "./XC2/_internal/Toolset/bdat-toolset-win64.exe"
+    bdat_path = "./XCDE/_internal/Toolset/bdat-toolset-win64.exe"
 
 if isOnefile: 
-    icon_path = os.path.join(sys._MEIPASS, 'Images', 'XC2Icon.png')
+    icon_path = os.path.join(sys._MEIPASS, 'Images', 'XCDEIcon.png')
 else:
-    icon_path = "./XC2/_internal/Images/XC2Icon.png"
+    icon_path = "./XCDE/_internal/Images/XCDEIcon.png"
 icon = PhotoImage(file=icon_path)
 root.iconphoto(True, icon)
 
@@ -53,8 +52,7 @@ root.iconphoto(True, icon)
 MainWindow = ttk.Notebook(root, height=5)
 # Frames in the notebook
 TabGeneralOuter = ttk.Frame(MainWindow) 
-TabDriversOuter = ttk.Frame(MainWindow) 
-TabBladesOuter = ttk.Frame(MainWindow) 
+TabCharactersOuter = ttk.Frame(MainWindow) 
 TabEnemiesOuter = ttk.Frame(MainWindow) 
 TabMiscOuter = ttk.Frame(MainWindow) 
 TabQOLOuter = ttk.Frame(MainWindow)
@@ -64,8 +62,7 @@ TabFunnyOuter = ttk.Frame(MainWindow)
 
 # Canvas 
 TabGeneralCanvas = Canvas(TabGeneralOuter) 
-TabDriversCanvas = Canvas(TabDriversOuter) 
-TabBladesCanvas = Canvas(TabBladesOuter)
+TabDriversCanvas = Canvas(TabCharactersOuter) 
 TabEnemiesCanvas = Canvas(TabEnemiesOuter) 
 TabMiscCanvas = Canvas(TabMiscOuter)
 TabQOLCanvas = Canvas(TabQOLOuter)
@@ -76,7 +73,6 @@ TabFunnyCanvas = Canvas(TabFunnyOuter)
 # Actual Scrollable Content
 TabGeneral = ttk.Frame(TabGeneralCanvas)
 TabDrivers = ttk.Frame(TabDriversCanvas) 
-TabBlades = ttk.Frame(TabBladesCanvas)
 TabEnemies = ttk.Frame(TabEnemiesCanvas) 
 TabMisc = ttk.Frame(TabMiscCanvas)
 TabQOL = ttk.Frame(TabQOLCanvas)
@@ -85,32 +81,11 @@ TabGameMode = ttk.Frame(TabGameModeCanvas)
 TabFunny = ttk.Frame(TabFunnyCanvas)
 
 
-def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
-    for i in range(len(Canvases)):
-        scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
-        Canvases[i].config(yscrollcommand=scrollbar.set, borderwidth=0, relief="flat", highlightthickness=0)
-        GUISettings.CanvasesForStyling.append(Canvases[i])
-        # OuterFrames[i].config(borderwidth=0, relief="flat")
-        InnerFrames[i].bind("<Configure>", lambda e, canvas=Canvases[i]: canvas.configure(scrollregion=canvas.bbox("all")))
-
-        OuterFrames[i].pack_propagate(False)
-        Canvases[i].create_window((0, 0), window=InnerFrames[i], anchor="nw")
-        Canvases[i].pack(side="left", fill="both", expand=True)
-        scrollbar.pack(side="right", fill="y")
-
-        def _on_mousewheel(event, canvas=Canvases[i]):
-            canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-
-        Canvases[i].bind("<Enter>", lambda e, canvas=Canvases[i]: canvas.bind_all("<MouseWheel>", lambda event: _on_mousewheel(event, canvas)))
-        Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
-        OuterFrames[i].pack(expand=True, fill="both")
-
-CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabGameModeOuter, TabFunnyOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabGameModeCanvas, TabFunnyCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabGameMode, TabFunny])
+GUISettings.CreateScrollBars([TabGeneralOuter, TabCharactersOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabGameModeOuter, TabFunnyOuter],[TabGeneralCanvas, TabDriversCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabGameModeCanvas, TabFunnyCanvas],[TabGeneral, TabDrivers, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabGameMode, TabFunny])
 
 # Tabs
 MainWindow.add(TabGeneralOuter, text ='General') 
-MainWindow.add(TabDriversOuter, text ='Drivers') 
-MainWindow.add(TabBladesOuter, text ='Blades') 
+MainWindow.add(TabCharactersOuter, text ='Drivers') 
 MainWindow.add(TabEnemiesOuter, text ='Enemies') 
 MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.add(TabQOLOuter, text = 'Quality of Life')
@@ -122,13 +97,12 @@ MainWindow.pack(expand = True, fill ="both", padx=10, pady=10)
 Tabs = {
     1: TabGeneral,
     2: TabDrivers,
-    3: TabBlades,
-    4: TabEnemies,
-    5: TabMisc,
-    6: TabQOL,
-    7: TabFunny,
-    8: TabCosmetics,
-    9: TabGameMode
+    3: TabEnemies,
+    4: TabMisc,
+    5: TabQOL,
+    6: TabFunny,
+    7: TabCosmetics,
+    8: TabGameMode
 }
 
 Options.OptionList.sort(key= lambda x: x.name) # Sorts alphabetically
@@ -137,97 +111,6 @@ for opt in Options.OptionList: # Cant reference directly because of circular imp
 
 def ShowTitleScreenText():
     JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], [f"Randomizer v{Version}"]) # Change Title Version to Randomizer vX.x.x
-
-def Randomize():
-    def ThreadedRandomize():
-        # Disable Repeated Button Click
-        RandomizeButton.config(state=DISABLED)
-
-        # Showing Progress Diplay 
-        randoProgressDisplay.pack(side='left', anchor='w', pady=10, padx=10)
-        randoProgressDisplay.config(text="Unpacking BDATs")
-
-        random.seed(permalinkVar.get())
-        print("Seed: " + randoSeedEntry.get())
-        print("Permalink: "+  permalinkVar.get())
-
-        try:
-        # Unpacks BDATs
-            print(f"{fileEntryVar.get().strip()}/common.bdat")
-            subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/common.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-            subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/common_gmk.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-            subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/gb/common_ms.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-        except:
-            print(f"{traceback.format_exc()}") # shows the full error
-            randoProgressDisplay.config(text="Invalid Input Directory")
-            time.sleep(3)
-            randoProgressDisplay.config(text="")
-            RandomizeButton.config(state=NORMAL)
-            return
-
-        # Runs all randomization
-        RunOptions()
-        randoProgressDisplay.config(text="Packing BDATs")
-    
-        try:
-            # Packs BDATs
-            subprocess.run([bdat_path, "pack", JsonOutput, "-o", outputDirVar.get().strip(), "-f", "json"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-
-            # Outputs common_ms in the correct file structure
-            os.makedirs(f"{outputDirVar.get().strip()}/gb", exist_ok=True)
-            shutil.move(f"{outputDirVar.get().strip()}/common_ms.bdat", f"{outputDirVar.get().strip()}/gb/common_ms.bdat")
-
-            # Displays Done and Clears Text
-            randoProgressDisplay.config(text="Done")
-            time.sleep(1.5)
-            randoProgressDisplay.config(text="")
-            randoProgressDisplay.pack_forget()
-            
-            print(f"Finished at {datetime.datetime.now()}")
-        except:
-            print(f"{traceback.format_exc()}") # shows the full error
-            randoProgressDisplay.config(text="Invalid Output Directory")
-
-        
-        # Re-Enables Randomize Button
-        RandomizeButton.config(state=NORMAL)
-
-    threading.Thread(target=ThreadedRandomize).start()
-
-def RunOptions():
-    
-    Options.OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
-    
-    for opt in Options.OptionList:
-        if not opt.GetState(): # Checks state
-            continue
-        
-        opt.subOptions.sort(key= lambda x: x.prio) # Sort suboptions by priority
-            
-        for sub in opt.subOptions:
-            if not sub.checkBoxVal.get(): # Checks state
-                continue
-            try:
-                for command in sub.commands:
-                    command()
-            except Exception as error:
-                print(f"ERROR: {opt.name}: {sub.name} | {error}")
-                print(f"{traceback.format_exc()}") # shows the full error
-                
-        randoProgressDisplay.config(text=opt.name)
-        for command in opt.commands:
-            try:
-                command()
-            except Exception as error:
-                print(f"ERROR: {opt.name} | {error}")
-                print(f"{traceback.format_exc()}") # shows the full error
-    
-    # Nonstandard Options
-    ShowTitleScreenText()
-
-
-
-    
 
 
 def GenRandomSeed(randoSeedEntryVar):
@@ -292,7 +175,7 @@ PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, se
 randoProgressDisplay = ttk.Label(text="", anchor="e", padding=2, style="BorderlessLabel.TLabel")
 
 # Randomize Button
-RandomizeButton = ttk.Button(text='Randomize', command=Randomize)
+RandomizeButton = ttk.Button(text='Randomize', command=GUISettings.Randomize)
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
 RandomizeButton.config(padding=5)
 

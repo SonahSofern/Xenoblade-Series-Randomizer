@@ -1,6 +1,7 @@
 from tkinter import *
 from scripts import UI_Colors
 from tkinter import font, ttk
+import random, subprocess, shutil, os, threading, traceback, time, sys, datetime
 
 
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
@@ -309,3 +310,110 @@ def LoadTheme(defaultFont, themeName):
             root.config(background=currentTheme["backgroundColor"])
         except:
             pass
+        
+def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
+    for i in range(len(Canvases)):
+        scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
+        Canvases[i].config(yscrollcommand=scrollbar.set, borderwidth=0, relief="flat", highlightthickness=0)
+        CanvasesForStyling.append(Canvases[i])
+        # OuterFrames[i].config(borderwidth=0, relief="flat")
+        InnerFrames[i].bind("<Configure>", lambda e, canvas=Canvases[i]: canvas.configure(scrollregion=canvas.bbox("all")))
+
+        OuterFrames[i].pack_propagate(False)
+        Canvases[i].create_window((0, 0), window=InnerFrames[i], anchor="nw")
+        Canvases[i].pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+
+        def _on_mousewheel(event, canvas=Canvases[i]):
+            canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+
+        Canvases[i].bind("<Enter>", lambda e, canvas=Canvases[i]: canvas.bind_all("<MouseWheel>", lambda event: _on_mousewheel(event, canvas)))
+        Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
+        OuterFrames[i].pack(expand=True, fill="both")
+
+def Randomize():
+    def ThreadedRandomize():
+        # Disable Repeated Button Click
+        RandomizeButton.config(state=DISABLED)
+
+        # Showing Progress Diplay 
+        randoProgressDisplay.pack(side='left', anchor='w', pady=10, padx=10)
+        randoProgressDisplay.config(text="Unpacking BDATs")
+
+        random.seed(permalinkVar.get())
+        print("Seed: " + randoSeedEntry.get())
+        print("Permalink: "+  permalinkVar.get())
+
+        try:
+        # Unpacks BDATs
+            print(f"{fileEntryVar.get().strip()}/common.bdat")
+            subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/common.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/common_gmk.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/gb/common_ms.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+        except:
+            print(f"{traceback.format_exc()}") # shows the full error
+            randoProgressDisplay.config(text="Invalid Input Directory")
+            time.sleep(3)
+            randoProgressDisplay.config(text="")
+            RandomizeButton.config(state=NORMAL)
+            return
+
+        # Runs all randomization
+        RunOptions()
+        randoProgressDisplay.config(text="Packing BDATs")
+    
+        try:
+            # Packs BDATs
+            subprocess.run([bdat_path, "pack", JsonOutput, "-o", outputDirVar.get().strip(), "-f", "json"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+
+            # Outputs common_ms in the correct file structure
+            os.makedirs(f"{outputDirVar.get().strip()}/gb", exist_ok=True)
+            shutil.move(f"{outputDirVar.get().strip()}/common_ms.bdat", f"{outputDirVar.get().strip()}/gb/common_ms.bdat")
+
+            # Displays Done and Clears Text
+            randoProgressDisplay.config(text="Done")
+            time.sleep(1.5)
+            randoProgressDisplay.config(text="")
+            randoProgressDisplay.pack_forget()
+            
+            print(f"Finished at {datetime.datetime.now()}")
+        except:
+            print(f"{traceback.format_exc()}") # shows the full error
+            randoProgressDisplay.config(text="Invalid Output Directory")
+
+        
+        # Re-Enables Randomize Button
+        RandomizeButton.config(state=NORMAL)
+
+    threading.Thread(target=ThreadedRandomize).start()
+
+def RunOptions():
+    
+    Options.OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
+    
+    for opt in Options.OptionList:
+        if not opt.GetState(): # Checks state
+            continue
+        
+        opt.subOptions.sort(key= lambda x: x.prio) # Sort suboptions by priority
+            
+        for sub in opt.subOptions:
+            if not sub.checkBoxVal.get(): # Checks state
+                continue
+            try:
+                for command in sub.commands:
+                    command()
+            except Exception as error:
+                print(f"ERROR: {opt.name}: {sub.name} | {error}")
+                print(f"{traceback.format_exc()}") # shows the full error
+                
+        randoProgressDisplay.config(text=opt.name)
+        for command in opt.commands:
+            try:
+                command()
+            except Exception as error:
+                print(f"ERROR: {opt.name} | {error}")
+                print(f"{traceback.format_exc()}") # shows the full error
+    
+    # Nonstandard Options
+    ShowTitleScreenText()
