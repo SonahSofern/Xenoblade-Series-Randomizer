@@ -65,10 +65,23 @@ ShopEventNameDict = {'Normal': {36: [40321, 30], 37: [40322, 31], 38: [40323, 32
 
 FullShopEventNameDict = {36: [40321, 30], 37: [40322, 31], 38: [40323, 32], 39: [40324, 33], 40: [40325, 34], 41: [40326, 35], 42: [40327, 36], 43: [40328, 37], 44: [40329, 38], 45: [40330, 39], 46: [40332, 40], 47: [40331, 41], 48: [41000, 42], 49: [40333, 43], 64: [40438, 50], 65: [40338, 66], 66: [40441, 51], 67: [40339, 72], 68: [40442, 52], 69: [40340, 68], 70: [40443, 53], 71: [40444, 54], 72: [40445, 55], 73: [40446, 56], 75: [40341, 69], 76: [40342, 70], 77: [40447, 58], 78: [40448, 59], 80: [40449, 60], 81: [40450, 61], 82: [40343, 71], 83: [40451, 62], 84: [41001, 45], 85: [41002, 46], 92: [40663, 91], 93: [40664, 92], 94: [40665, 93], 95: [40666, 94], 96: [40667, 95], 97: [40668, 96], 98: [40669, 97], 99: [40670, 98], 100: [40671, 99], 102: [40672, 100], 103: [40673, 101], 104: [41003, 102], 105: [40674, 103], 113: [40675, 112], 115: [40758, 114], 116: [40760, 115], 117: [40676, 116], 118: [40723, 117], 119: [40757, 118], 120: [40684, 119], 121: [40756, 120], 122: [40685, 122], 123: [41004, 121], 145: [41040, 143], 146: [41041, 144], 147: [40810, 145], 148: [40806, 146], 149: [40808, 147], 150: [40805, 148], 151: [40811, 149], 152: [40807, 150], 153: [41005, 151], 174: [20262, 167], 201: [41556, 117], 203: [21256, 42], 249: [42020, 228], 250: [42019, 229], 251: [42022, 230], 252: [42021, 231], 253: [41628, 232], 254: [41678, 233], 255: [42023, 234], 16: [40058, 245], 17: [40054, 239], 18: [40045, 238], 21: [40048, 241], 23: [40050, 244], 24: [40051, 240], 26: [40052, 242], 27: [40053, 246], 33: [40320, 23], 54: [40439, 49], 55: [40337, 65], 60: [20805, 82], 61: [20806, 83], 62: [20807, 84], 74: [41042, 57], 89: [40662, 88], 90: [20441, 89], 91: [20444, 90], 109: [40724, 108], 110: [40761, 109], 114: [40731, 243], 144: [40809, 142], 154: [41039, 152], 156: [40982, 155], 161: [20121, 165], 162: [20119, 166], 164: [20124, 73], 165: [20125, 74], 166: [20126, 75], 176: [20265, 25], 177: [20268, 26], 186: [41564, 183], 189: [40980, 154], 202: [41044, 191], 213: [21383, 193], 214: [21393, 194], 215: [21394, 195], 217: [21470, 197], 219: [21448, 200], 226: [21623, 205], 227: [21660, 206], 228: [21694, 207], 230: [21727, 209], 231: [21729, 210], 234: [21740, 213], 235: [21741, 214], 237: [21760, 216], 257: [42027, 236],32: [40319, 22], 52: [40440, 48], 53: [40336, 64], 88: [40661, 87], 108: [40759, 107]}
 
-FullUnusedShopList = [16, 17, 18, 21, 23, 24, 26, 27, 32, 33, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 52, 53, 54, 55, 60, 61, 62, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 80, 81, 82, 83, 84, 85, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 102, 103, 104, 105, 108, 109, 110, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 156, 161, 162, 164, 165, 166, 174, 176, 177, 186, 189, 201, 202, 203, 213, 214, 215, 217, 219, 226, 227, 228, 230, 231, 234, 235, 237, 249, 250, 251, 252, 253, 254, 255, 257]
+FullShopList = [16, 17, 18, 21, 23, 24, 26, 27, 32, 33, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 52, 53, 54, 55, 60, 61, 62, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 80, 81, 82, 83, 84, 85, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 102, 103, 104, 105, 108, 109, 110, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 156, 161, 162, 164, 165, 166, 174, 176, 177, 186, 189, 201, 202, 203, 213, 214, 215, 217, 219, 226, 227, 228, 230, 231, 234, 235, 237, 249, 250, 251, 252, 253, 254, 255, 257]
 
+UsedShopIDs = [18,24,16] + Helper.InclRange(65, 73) + [81]
 
-UsedShopIDs = Helper.InclRange(65, 73) + [81]
+FullUnusedShopList = [x for x in FullShopList if x not in UsedShopIDs]
+
+#NPC IDs (used to give a shop to)
+BazaarNPCRowIDs = [2109, 2236, 2038, 2001, 2415, 2419, 2351, 2090, 2125, 2088, 2359, 2362, 2085, 2092, 2361, 2087, 2425, 2080, 2089, 2163, 2002, 2182, 2086, 2091, 2352, 2126, 2316, 2250, 2197, 2039, 2416, 2424, 2205, 2426, 2136, 2068, 2176, 2341, 2110, 2040, 2393, 2251, 2069, 2177, 2342, 2111, 2417, 2127, 2164, 2003, 2011, 2083, 2206, 2041, 2128, 2070, 2343, 2112, 2418, 2084, 2208, 2165, 2012]
+
+UsedBazaarNPCRowIDs = [2088, 2087]
+
+UnusedBazaarNPCRowIDs = [2109, 2236, 2038, 2001, 2415, 2419, 2351, 2090, 2125, 2359, 2362, 2085, 2092, 2361, 2425, 2080, 2089, 2163, 2002, 2182, 2086, 2091, 2352, 2126, 2316, 2250, 2197, 2039, 2416, 2424, 2205, 2426, 2136, 2068, 2176, 2341, 2110, 2040, 2393, 2251, 2069, 2177, 2342, 2111, 2417, 2127, 2164, 2003, 2011, 2083, 2206, 2041, 2128, 2070, 2343, 2112, 2418, 2084, 2208, 2165, 2012]
+
+UniqueNPCs = [2236, 2088, 2359, 2362, 2092, 2361, 2087, 2080, 2089] #NPCs that only show up once in the Bazaar
+
+# NpcID: name
+NPCIDtoName = {2109: 'npc41300011_02', 2236: 'npc42350117_01', 2038: 'npc00600111_02', 2001: 'npc000401_01', 2415: 'npc43400391_01', 2419: 'npc42450291_01', 2351: 'npc42320112_01', 2090: 'npc42350115_02', 2125: 'npc41300012_05', 2088: 'npc42350113_01', 2359: 'npc42420251_02', 2362: 'npc42320191_02', 2085: 'npc42350112_02', 2092: 'npc42350114_01', 2361: 'npc42420192_02', 2087: 'npc42350111_01', 2425: 'npc42350192_01', 2080: 'npc42300017_01', 2089: 'npc42350116_01', 2163: 'npc42400013_07', 2002: 'npc000401_02', 2182: 'npc42450114_01', 2086: 'npc42350112_01', 2091: 'npc42350115_01', 2352: 'npc42320112_02', 2126: 'npc41300012_04', 2316: 'npc45200112_02', 2250: 'npc47100012_01', 2197: 'npc43400013_02', 2039: 'npc00600111_06', 2416: 'npc43400391_02', 2424: 'npc42450291_02', 2205: 'npc45300012_05', 2426: 'npc42350192_02', 2136: 'npc42300012_01', 2068: 'npc00640111_02', 2176: 'npc42450111_01', 2341: 'npc42350212_05', 2110: 'npc41300011_01', 2040: 'npc00600111_05', 2393: 'npc45200112_03', 2251: 'npc47100012_03', 2069: 'npc00640111_03', 2177: 'npc42450111_02', 2342: 'npc42350212_02', 2111: 'npc41300011_03', 2417: 'npc43400391_03', 2127: 'npc41300012_01', 2164: 'npc42400013_01', 2003: 'npc00040111_11', 2011: 'npc45450111_01', 2083: 'npc42340112_03', 2206: 'npc45300012_03', 2041: 'npc00600111_03', 2128: 'npc41300012_02', 2070: 'npc00640111_04', 2343: 'npc42350212_03', 2112: 'npc41300011_04', 2418: 'npc43400391_04', 2084: 'npc42340112_04', 2208: 'npc45300012_07', 2165: 'npc42400013_02', 2012: 'npc45450111_02'}
 
 # Custom Shop Stuff
 
@@ -123,7 +136,8 @@ TokenExchangeShop = {
     "RewardNames": ["Doubloons + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
     "RewardSP": [250, 375, 500, 625, 750, 875, 1000, 1250, 1500, 1750], #FLD_QuestReward Sp
     "RewardXP": [0, 630, 630, 630, 630, 630, 630, 630, 630, 630], # FLD_QuestReward EXP
-    "HideReward": TokenFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
+    "HideReward": TokenFillerList, # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
+    "Condition": 3904 # I know this one will always let you access it
 }
 
 CoreCrystalShop = {
@@ -137,7 +151,7 @@ CoreCrystalShop = {
 
 WPManualShop = {
     "NewNPCModel": 2001,# from RSC_NpcList, goes to ma02a_FLD_NpcPop NpcID. Gramps
-    "ChosenMapRowID": 2086, # ma02a_FLD_NpcPop $id
+    "ChosenMapRowID": 2087, # ma02a_FLD_NpcPop $id
     "ShopIcon": 442, # MNU_ShopList ShopIcon
     "ShopIDtoReplace": 24, # MNU_ShopList $id
     "ShopName": "Manual Marketplace", # fld_shopname name
@@ -171,7 +185,7 @@ WeaponChipShop = {
 
 AuxCoreShop = {
     "NewNPCModel": 3106,# from RSC_NpcList, goes to ma02a_FLD_NpcPop NpcID. Yumyum the Burglar
-    "ChosenMapRowID": 2088, # ma02a_FLD_NpcPop $id
+    "ChosenMapRowID": 2088, # ma02a_FLD_NpcPop $id Replaces Amumu
     "ShopIcon": 432, # MNU_ShopList ShopIcon
     "ShopIDtoReplace": 26, # MNU_ShopList $id
     "ShopName": "Aux Core Auction", # fld_shopname name
@@ -222,7 +236,7 @@ DriverAccessoryShop = {
 
 PoppiswapShop = {
     "NewNPCModel": 3576,# from RSC_NpcList, goes to ma02a_FLD_NpcPop NpcID. Soosoo
-    "ChosenMapRowID": 2182, # ma02a_FLD_NpcPop $id
+    "ChosenMapRowID": 2087, # ma02a_FLD_NpcPop $id Replaces Bonbon
     "ShopIcon": 433, # MNU_ShopList ShopIcon
     "ShopIDtoReplace": 16, # MNU_ShopList $id
     "ShopName": "The Poppishop", # fld_shopname name
@@ -296,7 +310,7 @@ def UMHunt():
     UMHuntMenuTextChanges()
     #DebugTesting()
     #DebugItemsPlace() # currently doesnt matter since I hide all the argentum chests anyways
-    #DebugEasyMode()
+    DebugEasyMode()
     #DebugSpawnCountPrint(EnemySets, ChosenAreaOrder)
 
 def DebugTesting():
@@ -2124,7 +2138,6 @@ def CustomShopSetup(ChosenAreaOrder): # Sets up the custom shops with loot
     PoppiswapShopRewards()
     GambaShopRewards()
     AddSPManual()
-    CreateNewReceipts()
 
     # List of Shops
     # Sanity Checks: The number of items in InputTaskIDs should always be less than 16
@@ -2132,7 +2145,7 @@ def CustomShopSetup(ChosenAreaOrder): # Sets up the custom shops with loot
     # Reward IDs, RewardQtys should have same number of values in each list as SetItem1IDs, however, each list should be made up of 4 lists, 1 for each item slot that a reward can be
 
     MultipleShopList = [CoreCrystalShop]
-    ShopList = [] # TokenExchangeShop, WPManualShop, PoppiswapShop, WeaponChipShop, AuxCoreShop, PouchItemShop, DriverAccessoryShop, GambaShop
+    ShopList = [TokenExchangeShop] # WPManualShop, PoppiswapShop, WeaponChipShop, AuxCoreShop, PouchItemShop, DriverAccessoryShop, GambaShop
     CurMapRowID = Helper.GetMaxValue("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", "$id") + 1
     for shop in MultipleShopList:
         for i in range(0, len(ChosenAreaOrder)):
@@ -2155,25 +2168,27 @@ def CustomShopSetup(ChosenAreaOrder): # Sets up the custom shops with loot
             UsedShopIDs.append(FullUnusedShopList[0])
             NewShop["ShopIDtoReplace"] = FullUnusedShopList[0]
             FullUnusedShopList.pop(0)
+            NewShop["ChosenMapRowID"] = UnusedBazaarNPCRowIDs[0]
+            UnusedBazaarNPCRowIDs.pop(0)
             ShopList.append(NewShop.copy())
     ShopCreator(ShopList, True)
 
 def CreateNewReceipts(): # Adds more Precious Items as Reciepts for shops
     ReceiptNames = []
     global CoreCrystalReceiptIDs, GambaShopReceiptIDs
-    CoreCrystalReceiptIDs = Helper.InclRange(1, CoreCrystalShop["TradeCount"]*SetCount)
-    GambaShopReceiptIDs = Helper.InclRange(CoreCrystalShop["TradeCount"]*SetCount + 1, CoreCrystalShop["TradeCount"]*SetCount + 1 + GambaShop["TradeCount"]*SetCount)
+    CoreCrystalReceiptIDs = Helper.InclRange(25001, 25000 + CoreCrystalShop["TradeCount"]*SetCount)
+    GambaShopReceiptIDs = Helper.InclRange(25000 + CoreCrystalShop["TradeCount"]*SetCount + 1, 25000 + CoreCrystalShop["TradeCount"]*SetCount + 1 + GambaShop["TradeCount"]*SetCount)
     for CurrentSet in range(1, SetCount + 1):
         for i in range(0, CoreCrystalShop["TradeCount"]): # there will always be CoreCrystalShop["TradeCount"]*SetCount receipts
-            ReceiptNames.append(f"Core Crystal Shop {CurrentSet} Item {i + 1} Receipt")
+            ReceiptNames.append(f"CC {CurrentSet} Item {i + 1} Receipt")
         for i in range(0, GambaShop["TradeCount"]): # there will always be GambaShop["TradeCount"]*SetCount receipts
             match i:
                 case 0:
-                    ReceiptNames.append(f"Gamba Shop {CurrentSet} Small Stakes Receipt")
+                    ReceiptNames.append(f"Casino {CurrentSet} S. Stakes")
                 case 1:
-                    ReceiptNames.append(f"Gamba Shop {CurrentSet} Medium Stakes Receipt") 
+                    ReceiptNames.append(f"Casino {CurrentSet} M. Stakes") 
                 case 2:
-                    ReceiptNames.append(f"Gamba Shop {CurrentSet} Large Stakes Receipt")
+                    ReceiptNames.append(f"Casino {CurrentSet} L. Stakes")
     NewestPreciousName = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
     StartingPreciousName = NewestPreciousName
     with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Caption
@@ -2188,8 +2203,18 @@ def CreateNewReceipts(): # Adds more Precious Items as Reciepts for shops
     with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Item
         data = json.load(file)
         for i in range(0, len(ReceiptNames)):
-            data["rows"].append({"$id": 25001 + i, "Name": NewestPreciousName, "Caption": StartingPreciousName, "Category": 29, "Type": 0, "Price": 0, "ValueMax": 1, "ClearNewGame": 0, "NoMultiple": 0, "sortJP": 0, "sortGE": 0, "sortFR": 0, "sortSP": 0, "sortIT": 0, "sortGB": 0, "sortCN": 0, "sortTW": 0, "sortKR": 0})
-            NewestPreciousName += 1
+            for row in data["rows"]:
+                if row["$id"] == 25001 + i:
+                    row["Name"] = NewestPreciousName
+                    row["Caption"] = StartingPreciousName
+                    row["Category"] = 29
+                    row["Type"] = 0
+                    row["Price"] = 0
+                    row["ValueMax"] = 1
+                    row["ClearNewGame"] = 0
+                    row["NoMultiple"] = 0
+                    NewestPreciousName += 1
+                    break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -2211,7 +2236,6 @@ def ShopLootGeneration(ShopLevel, Shop): # Makes the loot for the shops, using t
 
 def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
     # This section cuts down on the number of user inputs:
-    foundkey = 0
     StartingTaskID = Helper.GetMaxValue("./_internal/JsonOutputs/common/MNU_ShopChangeTask.json", "$id") + 1
     StartingQuestRewardID = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_QuestReward.json", "$id") + 1
     for shop in ShopList:
@@ -2584,3 +2608,94 @@ def DebugSpawnCountPrint(EnemySets, ChosenAreaOrder): # Prints how many times an
                 for j in range(0, 4):
                     debugfile.write(f"ID:{EnemySets[k][j]} Count:{AreaUMCount[j]}\n")  
     debugfile.close()
+
+def DebugGetNPCIDs(): # was used to figure out how many instances of an npc show up in the argentum bazaar. Checked by running around there myself
+    TargetedNPCIDs = []
+    with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
+        data = json.load(file)
+        CurNPC = 0
+        NPCCount = 0
+        CurCount = 3 # change this to change what version of an npc shows up (zero-indexed)
+        for row in data["rows"]:
+            CurNPC = row["NpcID"]
+            NPCCount = 0
+            for row2 in data["rows"]:
+                if row2["NpcID"] == CurNPC:
+                    CurNPC2 = row2["$id"]
+                    if NPCCount < CurCount:
+                        NPCCount += 1
+                        row2["ShopID"] = 0
+                        row2["flag"]["Talkable"] = 0
+                        row2["EventID"] = 0
+                        row2["QuestFlag"] = 0
+                        row2["ScenarioFlagMin"] = 10047
+                        row2["ScenarioFlagMax"] = 10048
+                        row2["QuestID"] = 0
+                    elif NPCCount == CurCount:
+                        row2["flag"]["Talkable"] = 1
+                        row2["QuestFlag"] = 0
+                        row2["ScenarioFlagMin"] = 1001
+                        row2["ScenarioFlagMax"] = 10048
+                        row2["Condition"] = 0
+                        row2["Mot"] = 0
+                        row2["TimeRange"] = 0
+                        row2["QuestID"] = 0
+                        row2["ShopID"] = 0
+                        row2["EventID"] = 41123
+                        row2["Visible_XZ"] = 100
+                        row2["Visible_Y"] = 10
+                        row2["Invisible_XZ"] = 105
+                        row2["Invisible_Y"] = 15
+                        TargetedNPCIDs.append(row2["$id"])
+                        break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+pass
+
+def DebugFindIDForName():
+    Instance1NPCNames = ["Shoon", "Hiyaya", "Melolo", "Pupunin", "Lhagen", "Hatatat", "Mitutu", "Motata", "Kynon", "Amumu", "Temimi", "Neyaya", "Pelala", "Mamalu", "Nunana", "Bonbon", "Momoni", "Denden", "Zuzu"]
+    Instance2NPCNames = ["Helehele", "Pupunin", "Shynini", "Pelala", "Motata", "Mitutu", "Kynon", "Lutie", "Kux", "Ysolde", "Melolo", "Lhagen", "Hatatat", "Max", "Momoni", "Tonadon", "Garram", "Kokoi", "Pilopilo", "Shoon"]
+    Instance3NPCNames = ["Melolo", "Lutie", "Kux", "Garram", "Kokoi", "Pilopilo", "Shoon", "Lhagen", "Kynon", "Helehele", "Pupunin", "Krujah", "Rurui", "Max"]
+    Instance4NPCNames = ["Melolo", "Kynon", "Garram", "Pilopilo", "Shoon", "Lhagen", "Rurui", "Max", "Helehele", "Krujah"]
+
+    NPCNames = Instance4NPCNames
+    fldnpcnameIDs = []
+    RSCNPCIDs = []
+    MATWOIDs = []
+
+
+    with open("./_internal/JsonOutputs/common_ms/fld_npcname.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
+        data = json.load(file)
+        for i in range(0, len(NPCNames)):
+            for row in data["rows"]:
+                if row["name"] == NPCNames[i]:
+                    fldnpcnameIDs.append(row["$id"])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/RSC_NpcList.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
+        data = json.load(file)
+        for i in range(0, len(fldnpcnameIDs)):
+            for row in data["rows"]:
+                if row["Name"] == fldnpcnameIDs[i]:
+                    RSCNPCIDs.append(row["$id"])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
+        data = json.load(file)
+        for i in range(0, len(RSCNPCIDs)):
+            FoundInstance = 0
+            for row in data["rows"]:
+                if row["NpcID"] == RSCNPCIDs[i]:
+                    if FoundInstance == 3: # change this to change the instance
+                        MATWOIDs.append(row["$id"])
+                        break
+                    else:
+                        FoundInstance += 1
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    print(MATWOIDs)
+    pass

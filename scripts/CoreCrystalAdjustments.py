@@ -171,7 +171,6 @@ def FixOpeningSoftlock():
         for row in data["rows"]:
             if row["BladeID"] != 1008:
                 row["Condition"] = StartingCondListRow
-                break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)    
