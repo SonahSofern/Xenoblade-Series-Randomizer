@@ -99,7 +99,7 @@ def LandofChallengeRelease(): #frees shulk, elma, fiora from land of challenge r
 def RegularLootDistribution(): #Adds core crystals to the loot pool if race mode isn't on (Chests Only)
     TotalTBox = 667
     ItemPool = []
-    ChestPercent = IDs.CurrentSliderOdds
+    ChestPercent = Options.CustomCoreCrystalOption.GetOdds()
     AdjustedValidCrystalList = []
     for i in range(0, TotalTBox):
         if AdjustedValidCrystalList == []: #this makes sure all crystals get rotated in evenly, preventing you getting locked out of one crystal permanently if it doesn't get shuffled in.

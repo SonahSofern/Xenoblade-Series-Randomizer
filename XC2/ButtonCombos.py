@@ -3,15 +3,15 @@ from scripts import Helper
 def BladeSpecialButtonChallenges():
     Buttons = []
     if Options.BladeSpecialButtonsOption_A.GetState():
-        Buttons.extend(1)
+        Buttons.append(1)
     if Options.BladeSpecialButtonsOption_B.GetState():
-        Buttons.extend(2)
+        Buttons.append(2)
     if Options.BladeSpecialButtonsOption_X.GetState():
-        Buttons.extend(3)
+        Buttons.append(3)
     if Options.BladeSpecialButtonsOption_Y.GetState():
-        Buttons.extend(4)
+        Buttons.append(4)
     if Options.BladeSpecialButtonsOption_Mystery.GetState():
-        Buttons.extend(5)
+        Buttons.append(5)
         
     with open(f"./XC2/_internal/JsonOutputs/common/MNU_BtnChallenge2.json", 'r+', encoding='utf-8') as btnFile:
         btnData = json.load(btnFile)
