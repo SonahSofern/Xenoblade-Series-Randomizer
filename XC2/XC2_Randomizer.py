@@ -6,7 +6,7 @@ import tkinter as tk
 root = Tk()
 import Options
 import random, subprocess, shutil, os, threading, traceback, time, sys, datetime
-from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkManagement, UI_Colors
+from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkManagement, UI_Colors, Seed
 import SeedNames
 from Enhancements import *
 from IDs import *
@@ -234,7 +234,7 @@ def RunOptions():
 
 
 def GenRandomSeed(randoSeedEntryVar):
-    randoSeedEntryVar.set(SeedNames.RandomSeedName())
+    randoSeedEntryVar.set(Seed.RandomSeedName(SeedNames.Nouns, SeedNames.Verbs))
 
 bdatcommonFrame = ttk.Frame(root, style="NoBackground.TFrame")
 bdatcommonFrame.pack(anchor="w", padx=10)
