@@ -4,8 +4,8 @@ import os, json
 
 def saveData(DataList, Filename, GamePrefix):
     savePath = os.path.join(GamePrefix, saveFolderName)
-    saveFilePath = os.path.join(savePath, Filename)
     os.makedirs(savePath, exist_ok=True)  
+    saveFilePath = os.path.join(savePath, Filename)
     with open(saveFilePath, 'w') as file:
         sav= {}
         for saveData in DataList:
