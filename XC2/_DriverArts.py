@@ -29,8 +29,8 @@ def DriverArtRandomizer():
             isEnemyTarget = (art["Target"] in [0,4]) # Ensures Targeting Enemy
     
             if (isReactions or isMultiReact) and isEnemyTarget:
-                for i in range(1,17):
-                    art[f"ReAct{i}"] = 0 # Clearing Defaults these are needed bc torna arts are weird so i cant clear them blindly before hand gotta follow these conditions so this is the easiest way
+                for j in range(1,17):
+                    art[f"ReAct{j}"] = 0 # Clearing Defaults these are needed bc torna arts are weird so i cant clear them blindly before hand gotta follow these conditions so this is the easiest way
                 if OddCheck(odds):
                     Reaction(art, isMultiReact)
                     
@@ -44,7 +44,7 @@ def DriverArtRandomizer():
                 for i in range(1,7):
                     art[f"Enhance{i}"] = 0
                 if OddCheck(odds):
-                    Enhancements(art)
+                    Enhancements(art, EnhancementSets)
                     
             if isBuffs:
                 art["ArtsBuff"] = 0 
@@ -82,7 +82,7 @@ def Reaction(art, multReact):
     }
     for i in range(1,17):
         name,values = random.choice(list(ValidReactions.items()))
-        if art[f"HitFrm{i}"] == 0: # Make sure there is a hit
+        if art[f"HitFrm{i}"] == 0 and (i != 16 and art[f"HitFrm{i+1}"] == 0): # Need the second condition because zenobias Ascension Blade 129 has no hit on frame 1 but afterwards has hits # Make sure there is a hit
             art[f"ReAct{i-1}"] = random.choice(values) # Adds something to the last hit
             break
         if multReact:
@@ -117,8 +117,8 @@ def Damage(art):
         DMG += step
         art[f"DmgMgn{i}"] = DMG
         
-def Enhancements(art): 
-    Enhancement = random.choice(EnhancementSets)
+def Enhancements(art, EnhancementSet): 
+    Enhancement = random.choice(EnhancementSet)
     for i in range(1,7):
         art[f"Enhance{i}"] = Enhancement[i-1]
 
@@ -167,7 +167,7 @@ def AOE(art):
     art["Radius"] =  RandomRadius
     art["Length"] = RandomLength
 
-def GenCustomArtDescriptions():
+def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False):
     RangeType = {
         "AOE" : [1,2,3,5]
     }
@@ -257,102 +257,100 @@ def GenCustomArtDescriptions():
         # Eventually might add logic for damage absorb and release
     }
     
-    with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", "r+", encoding='utf-8') as ArtsFile:     
-        with open("./XC2/_internal/JsonOutputs/common_ms/btl_arts_dr_cap.json", "r+", encoding='utf-8') as DescFile:     
+    with open(artsFile, "r+", encoding='utf-8') as ArtsFile:     
+        with open(descFile, "r+", encoding='utf-8') as DescFile:     
             artsData = json.load(ArtsFile)
             descData = json.load(DescFile)
             AnchorShotDesc = 0
             
             for art in artsData["rows"]:
-                if art["$id"] in Arts:
+                CurrDesc = art["Caption"]
+                CombinedCaption = ["","","","",""]
+                FirstDescriptionMod = 0
+                LastDescriptionMod = 0
+                # AOE
+                for key,values in RangeType.items():    
+                    if art["RangeType"] in values:
+                        CombinedCaption[0] += f"[System:Color name=blue]{key}[/System:Color]"
+                        break
 
-                    CurrDesc = art["Caption"]
-                    CombinedCaption = ["","","","",""]
-                    FirstDescriptionMod = 0
-                    LastDescriptionMod = 0
-                    # AOE
-                    for key,values in RangeType.items():    
-                        if art["RangeType"] in values:
-                            CombinedCaption[0] += f"[System:Color name=blue]{key}[/System:Color]"
-                            break
+                # Type of Art Not changing this currently 
+                # for key,values in MoveType.items():
+                #     if art["ArtsType"] in values:
+                #         CombinedCaption[1] += f"{key}"
+                #         break
+                
+                for key,values in Buffs.items():
+                    if art["ArtsBuff"] in values:
+                        CombinedCaption[1] += f"{key}"
+                        break
 
-                    # Type of Art Not changing this currently 
-                    # for key,values in MoveType.items():
-                    #     if art["ArtsType"] in values:
-                    #         CombinedCaption[1] += f"{key}"
-                    #         break
-                    
-                    for key,values in Buffs.items():
-                        if art["ArtsBuff"] in values:
-                            CombinedCaption[1] += f"{key}"
-                            break
-
-                    # Reactions 
-                    ReactCaption = ""
-                    TypeReactions = []
-                    for i in range(1,17):              
-                        if art[f"HitDirID{i}"] != 0:
-                            for key,values in Reactions.items():
-                                if art[f"ReAct{i}"] in values:
-                                    ReactCaption += f"[System:Color name=tutorial]{key}[/System:Color]->"
-                                    TypeReactions.append(art[f"ReAct{i}"])
-                                    break
-                    ReactCaption = ReactCaption[:-2]
-                    # if len(ReactCaption) > 15: # If the length is too long, shorten it to "Driver Combo"
-                    #     ReactCaption = "[System:Color name=tutorial]Driver Combo[/System:Color]"
-                    if len(TypeReactions) == 1: # If the length is 1, spell out the reaction
-                        for key,values in FullReactions.items():
-                            if TypeReactions[0] in values:
-                                ReactCaption = f"[System:Color name=tutorial]{key}[/System:Color]"
+                # Reactions 
+                ReactCaption = ""
+                TypeReactions = []
+                for i in range(1,17):              
+                    if art[f"HitDirID{i}"] != 0:
+                        for key,values in Reactions.items():
+                            if art[f"ReAct{i}"] in values:
+                                ReactCaption += f"[System:Color name=tutorial]{key}[/System:Color]->"
+                                TypeReactions.append(art[f"ReAct{i}"])
                                 break
-                    CombinedCaption[2] = ReactCaption
-                        
-                    # Enhancements
-                    for key,values in Enhancements.items():
-                        if art["Enhance1"] in values:
-                            CombinedCaption[3] += f"[System:Color name=green]{key}[/System:Color]"
+                ReactCaption = ReactCaption[:-2]
+                # if len(ReactCaption) > 15: # If the length is too long, shorten it to "Driver Combo"
+                #     ReactCaption = "[System:Color name=tutorial]Driver Combo[/System:Color]"
+                if len(TypeReactions) == 1: # If the length is 1, spell out the reaction
+                    for key,values in FullReactions.items():
+                        if TypeReactions[0] in values:
+                            ReactCaption = f"[System:Color name=tutorial]{key}[/System:Color]"
                             break
-                        
-                    # Debuffs                       
-                    for key,values in Debuffs.items():
-                        if art["ArtsDeBuff"] in values:
-                            CombinedCaption[4] = f"[System:Color name=red]{key}[/System:Color]"
-                            break
+                CombinedCaption[2] = ReactCaption
+                    
+                # Enhancements
+                for key,values in Enhancements.items():
+                    if art["Enhance1"] in values:
+                        CombinedCaption[3] += f"[System:Color name=green]{key}[/System:Color]"
+                        break
+                    
+                # Debuffs                       
+                for key,values in Debuffs.items():
+                    if art["ArtsDeBuff"] in values:
+                        CombinedCaption[4] = f"[System:Color name=red]{key}[/System:Color]"
+                        break
 
-                    # Putting it all together
-                    TotalArtDescription = ""    
-                    for i in range(0, len(CombinedCaption)):
+                # Putting it all together
+                TotalArtDescription = ""    
+                for i in range(0, len(CombinedCaption)):
+                    if CombinedCaption[i] != "":
+                        FirstDescriptionMod = i
+                        break
+                for i in range(len(CombinedCaption) - 1, 0, -1):
+                    if CombinedCaption[i] != "":
+                        LastDescriptionMod = i
+                        break
+                TotalArtDescription += CombinedCaption[FirstDescriptionMod]
+                if FirstDescriptionMod != LastDescriptionMod:
+                    for i in range(FirstDescriptionMod + 1, LastDescriptionMod + 1):
                         if CombinedCaption[i] != "":
-                            FirstDescriptionMod = i
-                            break
-                    for i in range(len(CombinedCaption) - 1, 0, -1):
-                        if CombinedCaption[i] != "":
-                            LastDescriptionMod = i
-                            break
-                    TotalArtDescription += CombinedCaption[FirstDescriptionMod]
-                    if FirstDescriptionMod != LastDescriptionMod:
-                        for i in range(FirstDescriptionMod + 1, LastDescriptionMod + 1):
-                            if CombinedCaption[i] != "":
-                                TotalArtDescription += " / "
-                                TotalArtDescription += CombinedCaption[i]
+                            TotalArtDescription += " / "
+                            TotalArtDescription += CombinedCaption[i]
 
-                    if TotalArtDescription == "":
-                        TotalArtDescription = "No Effects"
+                if TotalArtDescription == "":
+                    TotalArtDescription = "No Effects"
 
-                    # Update Descriptions
-                    for desc in descData["rows"]:
-                        if desc["$id"] == CurrDesc:
-                            desc["name"] = TotalArtDescription
-                            break
-
-            for desc in descData["rows"]:
-                if desc["$id"] == 4:
-                    AnchorShotDesc = desc["name"]
-                    break
-            for desc in descData["rows"]:
-                if desc["$id"] == 5:
-                    desc["name"] = AnchorShotDesc
-                    break
+                # Update Descriptions
+                for desc in descData["rows"]:
+                    if desc["$id"] == CurrDesc:
+                        desc["name"] = TotalArtDescription
+                        break
+            if not isSpecial:
+                for desc in descData["rows"]:
+                    if desc["$id"] == 4:
+                        AnchorShotDesc = desc["name"]
+                        break
+                for desc in descData["rows"]:
+                    if desc["$id"] == 5:
+                        desc["name"] = AnchorShotDesc
+                        break
             DescFile.seek(0)
             DescFile.truncate()
             json.dump(descData, DescFile, indent=2, ensure_ascii=False)             
