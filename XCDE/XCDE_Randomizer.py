@@ -62,7 +62,7 @@ TabFunnyOuter = ttk.Frame(MainWindow)
 
 # Canvas 
 TabGeneralCanvas = Canvas(TabGeneralOuter) 
-TabDriversCanvas = Canvas(TabCharactersOuter) 
+TabCharactersCanvas = Canvas(TabCharactersOuter) 
 TabEnemiesCanvas = Canvas(TabEnemiesOuter) 
 TabMiscCanvas = Canvas(TabMiscOuter)
 TabQOLCanvas = Canvas(TabQOLOuter)
@@ -72,7 +72,7 @@ TabFunnyCanvas = Canvas(TabFunnyOuter)
 
 # Actual Scrollable Content
 TabGeneral = ttk.Frame(TabGeneralCanvas)
-TabDrivers = ttk.Frame(TabDriversCanvas) 
+TabCharacters = ttk.Frame(TabCharactersCanvas) 
 TabEnemies = ttk.Frame(TabEnemiesCanvas) 
 TabMisc = ttk.Frame(TabMiscCanvas)
 TabQOL = ttk.Frame(TabQOLCanvas)
@@ -81,7 +81,7 @@ TabGameMode = ttk.Frame(TabGameModeCanvas)
 TabFunny = ttk.Frame(TabFunnyCanvas)
 
 
-GUISettings.CreateScrollBars([TabGeneralOuter, TabCharactersOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabGameModeOuter, TabFunnyOuter],[TabGeneralCanvas, TabDriversCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabGameModeCanvas, TabFunnyCanvas],[TabGeneral, TabDrivers, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabGameMode, TabFunny])
+GUISettings.CreateScrollBars([TabGeneralOuter, TabCharactersOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabGameModeOuter, TabFunnyOuter],[TabGeneralCanvas, TabCharactersCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabGameModeCanvas, TabFunnyCanvas],[TabGeneral, TabCharacters, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabGameMode, TabFunny])
 
 # Tabs
 MainWindow.add(TabGeneralOuter, text ='General') 
@@ -96,7 +96,7 @@ MainWindow.pack(expand = True, fill ="both", padx=10, pady=10)
 
 Tabs = {
     1: TabGeneral,
-    2: TabDrivers,
+    2: TabCharacters,
     3: TabEnemies,
     4: TabMisc,
     5: TabQOL,
@@ -175,7 +175,7 @@ PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, se
 randoProgressDisplay = ttk.Label(text="", anchor="e", padding=2, style="BorderlessLabel.TLabel")
 
 # Randomize Button
-RandomizeButton = ttk.Button(text='Randomize', command=GUISettings.Randomize)
+RandomizeButton = ttk.Button(text='Randomize', command=(lambda: GUISettings.Randomize(RandomizeButton, randoProgressDisplay, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar), (lambda: ShowTitleScreenText())))
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
 RandomizeButton.config(padding=5)
 

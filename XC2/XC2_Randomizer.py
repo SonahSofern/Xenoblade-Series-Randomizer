@@ -140,98 +140,6 @@ for opt in Options.OptionList: # Cant reference directly because of circular imp
 def ShowTitleScreenText():
     JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], [f"Randomizer v{Version}"]) # Change Title Version to Randomizer vX.x.x
 
-def Randomize():
-    def ThreadedRandomize():
-        # Disable Repeated Button Click
-        RandomizeButton.config(state=DISABLED)
-
-        # Showing Progress Diplay 
-        randoProgressDisplay.pack(side='left', anchor='w', pady=10, padx=10)
-        randoProgressDisplay.config(text="Unpacking BDATs")
-
-        random.seed(permalinkVar.get())
-        print("Seed: " + randoSeedEntry.get())
-        print("Permalink: "+  permalinkVar.get())
-
-        try:
-        # Unpacks BDATs
-            print(f"{fileEntryVar.get().strip()}/common.bdat")
-            subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/common.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-            subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/common_gmk.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-            subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/gb/common_ms.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-        except:
-            print(f"{traceback.format_exc()}") # shows the full error
-            randoProgressDisplay.config(text="Invalid Input Directory")
-            time.sleep(3)
-            randoProgressDisplay.config(text="")
-            RandomizeButton.config(state=NORMAL)
-            return
-
-        # Runs all randomization
-        RunOptions()
-        randoProgressDisplay.config(text="Packing BDATs")
-    
-        try:
-            # Packs BDATs
-            subprocess.run([bdat_path, "pack", JsonOutput, "-o", outputDirVar.get().strip(), "-f", "json"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-
-            # Outputs common_ms in the correct file structure
-            os.makedirs(f"{outputDirVar.get().strip()}/gb", exist_ok=True)
-            shutil.move(f"{outputDirVar.get().strip()}/common_ms.bdat", f"{outputDirVar.get().strip()}/gb/common_ms.bdat")
-
-            # Displays Done and Clears Text
-            randoProgressDisplay.config(text="Done")
-            time.sleep(1.5)
-            randoProgressDisplay.config(text="")
-            randoProgressDisplay.pack_forget()
-            
-            print(f"Finished at {datetime.datetime.now()}")
-        except:
-            print(f"{traceback.format_exc()}") # shows the full error
-            randoProgressDisplay.config(text="Invalid Output Directory")
-
-        
-        # Re-Enables Randomize Button
-        RandomizeButton.config(state=NORMAL)
-
-    threading.Thread(target=ThreadedRandomize).start()
-
-def RunOptions():
-    
-    Options.OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
-    
-    for opt in Options.OptionList:
-        if not opt.GetState(): # Checks state
-            continue
-        
-        opt.subOptions.sort(key= lambda x: x.prio) # Sort suboptions by priority
-            
-        for sub in opt.subOptions:
-            if not sub.checkBoxVal.get(): # Checks state
-                continue
-            try:
-                for command in sub.commands:
-                    command()
-            except Exception as error:
-                print(f"ERROR: {opt.name}: {sub.name} | {error}")
-                print(f"{traceback.format_exc()}") # shows the full error
-                
-        randoProgressDisplay.config(text=opt.name)
-        for command in opt.commands:
-            try:
-                command()
-            except Exception as error:
-                print(f"ERROR: {opt.name} | {error}")
-                print(f"{traceback.format_exc()}") # shows the full error
-    
-    # Nonstandard Options
-    ShowTitleScreenText()
-    AddCustomEnhancements() # Figure out how to not run this here just dont have time rn
-
-
-
-    
-
 
 def GenRandomSeed(randoSeedEntryVar):
     randoSeedEntryVar.set(Seed.RandomSeedName(SeedNames.Nouns, SeedNames.Verbs))
@@ -295,7 +203,7 @@ PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, se
 randoProgressDisplay = ttk.Label(text="", anchor="e", padding=2, style="BorderlessLabel.TLabel")
 
 # Randomize Button
-RandomizeButton = ttk.Button(text='Randomize', command=Randomize)
+RandomizeButton = ttk.Button(text='Randomize', command=lambda: (GUISettings.Randomize(RandomizeButton, randoProgressDisplay, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Options.OptionList), ShowTitleScreenText(), AddCustomEnhancements()))
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
 RandomizeButton.config(padding=5)
 

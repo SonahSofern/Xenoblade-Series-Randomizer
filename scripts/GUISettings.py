@@ -331,7 +331,7 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touc
         Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
         OuterFrames[i].pack(expand=True, fill="both")
 
-def Randomize():
+def Randomize(RandomizeButton, randoProgressDisplay, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList):
     def ThreadedRandomize():
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
@@ -359,7 +359,7 @@ def Randomize():
             return
 
         # Runs all randomization
-        RunOptions()
+        RunOptions(OptionList, randoProgressDisplay)
         randoProgressDisplay.config(text="Packing BDATs")
     
         try:
@@ -387,11 +387,11 @@ def Randomize():
 
     threading.Thread(target=ThreadedRandomize).start()
 
-def RunOptions():
+def RunOptions(OptionList, randoProgressDisplay):
     
-    Options.OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
+    OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
     
-    for opt in Options.OptionList:
+    for opt in OptionList:
         if not opt.GetState(): # Checks state
             continue
         
@@ -415,5 +415,3 @@ def RunOptions():
                 print(f"ERROR: {opt.name} | {error}")
                 print(f"{traceback.format_exc()}") # shows the full error
     
-    # Nonstandard Options
-    ShowTitleScreenText()
