@@ -1,4 +1,5 @@
 import json, random, Options, IDs
+from scripts import Helper
 def RandomizeBattleSkills(): # Make logic to have all skills in the game
     # Drivers
     with open("./XC2/_internal/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:
@@ -32,6 +33,8 @@ def RandomizeBattleSkills(): # Make logic to have all skills in the game
                 if blade[slot] == 0: # Only replace skillslots that have one (dagas needs this for his weak form)
                     continue
                 
+                if not Helper.OddsCheck(odds): # Roll odds
+                    continue
                 
                 Skill = random.choice(SkillPool) # Choose and Set a skill
                 if not isDuplicates:
