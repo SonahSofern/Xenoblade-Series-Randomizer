@@ -3,21 +3,21 @@ from scripts import Helper
 def RandoTreasureBoxes():
     ValidReplacements = []
     if Options.TreasureChestOption_Accessories.GetState():
-        ValidReplacements.append(IDs.Accessories)
+        ValidReplacements.extend(IDs.Accessories)
     if Options.TreasureChestOption_TornaAccessories.GetState():
-        ValidReplacements.append(IDs.TornaAccessories)
+        ValidReplacements.extend(IDs.TornaAccessories)
     if Options.TreasureChestOption_WeaponChips.GetState():
-        ValidReplacements.append(IDs.WeaponChips)
+        ValidReplacements.extend(IDs.WeaponChips)
     if Options.TreasureChestOption_AuxCores.GetState():
-        ValidReplacements.append(IDs.AuxCores)
+        ValidReplacements.extend(IDs.AuxCores)
     if Options.TreasureChestOption_RefinedAuxCores.GetState():
-        ValidReplacements.append(IDs.RefinedAuxCores)
+        ValidReplacements.extend(IDs.RefinedAuxCores)
     if Options.TreasureChestOption_CoreCrystals.GetState():
-        ValidReplacements.append(IDs.CoreCrystals)
+        ValidReplacements.extend(IDs.CoreCrystals)
     if Options.TreasureChestOption_Deeds.GetState():
-        ValidReplacements.append(IDs.Deeds)
+        ValidReplacements.extend(IDs.Deeds)
     if Options.TreasureChestOption_CollectionPointMaterials.GetState():
-        ValidReplacements.append(IDs.CollectionPointMaterials)
+        ValidReplacements.extend(IDs.CollectionPointMaterials)
     odds = Options.TreasureChestOption.GetOdds()
 
     
@@ -26,7 +26,7 @@ def RandoTreasureBoxes():
     
     for area in IDs.MajorAreaIds:
         try:
-            with open(f"./_internal/JsonOutputs/common_gmk/ma{area}a_FLD_TboxPop.json", 'r+', encoding='utf-8') as tboxFile:
+            with open(f"./XC2/_internal/JsonOutputs/common_gmk/ma{area}a_FLD_TboxPop.json", 'r+', encoding='utf-8') as tboxFile:
                 boxData = json.load(tboxFile)
                 for box in boxData["rows"]:
                     for i in range(1,9):

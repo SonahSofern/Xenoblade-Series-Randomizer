@@ -16,7 +16,7 @@ import tkinter as tk
 Game = "XC2"
 Version = "1.3.0"
 CommonBdatInput = ""
-JsonOutput = "./_internal/JsonOutputs"
+JsonOutput = "./XC2/_internal/JsonOutputs"
 MaxWidth = 1000
 windowWidth = "1550"
 windowHeight = "900"
@@ -41,7 +41,7 @@ root.geometry(f'{windowWidth}x{windowHeight}')
 if isOnefile:
     bdat_path = os.path.join(sys._MEIPASS, 'Toolset', 'bdat-toolset-win64.exe')
 else:
-    bdat_path = "./_internal/Toolset/bdat-toolset-win64.exe"
+    bdat_path = "./XC2/_internal/Toolset/bdat-toolset-win64.exe"
 
 if isOnefile: 
     icon_path = os.path.join(sys._MEIPASS, 'Images', 'XC2Icon.png')
@@ -155,6 +155,7 @@ def Randomize():
 
         try:
         # Unpacks BDATs
+            print(f"{fileEntryVar.get().strip()}/common.bdat")
             subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/common.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
             subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/common_gmk.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
             subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/gb/common_ms.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)

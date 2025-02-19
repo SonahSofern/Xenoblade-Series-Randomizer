@@ -7,8 +7,8 @@ def RandomizeAccessoryEnhancements():
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
 
 
-    with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as EnhanceFile:
-        with open("./_internal/JsonOutputs/common_ms/itm_pcequip.json", 'r+', encoding='utf-8') as NamesFile: # overflows past a certain num so cant make new names
+    with open("./XC2/_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as EnhanceFile:
+        with open("./XC2/_internal/JsonOutputs/common_ms/itm_pcequip.json", 'r+', encoding='utf-8') as NamesFile: # overflows past a certain num so cant make new names
             enhanceFile = json.load(EnhanceFile)
             NameFile = json.load(NamesFile)
             prevNames = []

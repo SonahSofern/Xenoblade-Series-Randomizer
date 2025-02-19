@@ -150,8 +150,8 @@ def Cosmetics():
     odds = Options.CosmeticsOption.GetState()
     
     # Drivers
-    with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file:
-        with open("./_internal/JsonOutputs/common_ms/itm_pcequip.json", 'r+', encoding='utf-8') as nameFile:  
+    with open("./XC2/_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file:
+        with open("./XC2/_internal/JsonOutputs/common_ms/itm_pcequip.json", 'r+', encoding='utf-8') as nameFile:  
             eqData = json.load(file)
             accNameData = json.load(nameFile)
             
@@ -165,8 +165,8 @@ def Cosmetics():
         json.dump(eqData, file, indent=2, ensure_ascii=False)
         
     # Blades
-    with open("./_internal/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as orbFile:
-        with open("./_internal/JsonOutputs/common_ms/itm_orb.json", 'r+', encoding='utf-8') as nameFile:
+    with open("./XC2/_internal/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as orbFile:
+        with open("./XC2/_internal/JsonOutputs/common_ms/itm_orb.json", 'r+', encoding='utf-8') as nameFile:
             orbData = json.load(orbFile)
             nameData = json.load(nameFile)
             
@@ -180,7 +180,7 @@ def Cosmetics():
         json.dump(orbData, orbFile, indent=2, ensure_ascii=False)
         
     # ArtificialBlades 
-    with open("./_internal/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/_internal/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as file:
         eqData = json.load(file)
         for Acc in eqData["rows"]:
             if (odds > random.randint(0,99)):

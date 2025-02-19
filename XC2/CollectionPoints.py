@@ -3,21 +3,21 @@ from scripts import Helper
 def RandoCollectionPoints():
     ValidReplacements = []
     if Options.CollectionPointsOption_Accessories.GetState():
-        ValidReplacements.append(IDs.Accessories)
+        ValidReplacements.extend(IDs.Accessories)
     if Options.CollectionPointsOption_TornaAccessories.GetState():
-        ValidReplacements.append(IDs.TornaAccessories)
+        ValidReplacements.extend(IDs.TornaAccessories)
     if Options.CollectionPointsOption_WeaponChips.GetState():
-        ValidReplacements.append(IDs.WeaponChips)
+        ValidReplacements.extend(IDs.WeaponChips)
     if Options.CollectionPointsOption_AuxCores.GetState():
-        ValidReplacements.append(IDs.AuxCores)
+        ValidReplacements.extend(IDs.AuxCores)
     if Options.CollectionPointsOption_RefinedAuxCores.GetState():
-        ValidReplacements.append(IDs.RefinedAuxCores)
+        ValidReplacements.extend(IDs.RefinedAuxCores)
     if Options.CollectionPointsOption_CoreCrystals.GetState():
-        ValidReplacements.append(IDs.CoreCrystals)
+        ValidReplacements.extend(IDs.CoreCrystals)
     if Options.CollectionPointsOption_Deeds.GetState():
-        ValidReplacements.append(IDs.Deeds)
+        ValidReplacements.extend(IDs.Deeds)
     if Options.CollectionPointsOption_CollectionPointMaterials.GetState():
-        ValidReplacements.append(IDs.CollectionPointMaterials)
+        ValidReplacements.extend(IDs.CollectionPointMaterials)
     odds = Options.CollectionPointsOption.GetOdds()
 
     
@@ -26,7 +26,7 @@ def RandoCollectionPoints():
     
     for area in IDs.MajorAreaIds:
         try:
-            with open(f"./_internal/JsonOutputs/common_gmk/ma{area}a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as collFile:
+            with open(f"./XC2/_internal/JsonOutputs/common_gmk/ma{area}a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as collFile:
                 collData = json.load(collFile)
                 for point in collData["rows"]:
                     for i in range(1,5):

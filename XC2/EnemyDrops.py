@@ -3,21 +3,21 @@ from scripts import Helper
 def RandoEnemyDrops():
     ValidReplacements = []
     if Options.EnemyDropOption_Accessories.GetState():
-        ValidReplacements.append(IDs.Accessories)
+        ValidReplacements.extend(IDs.Accessories)
     if Options.EnemyDropOption_TornaAccessories.GetState():
-        ValidReplacements.append(IDs.TornaAccessories)
+        ValidReplacements.extend(IDs.TornaAccessories)
     if Options.EnemyDropOption_WeaponChips.GetState():
-        ValidReplacements.append(IDs.WeaponChips)
+        ValidReplacements.extend(IDs.WeaponChips)
     if Options.EnemyDropOption_AuxCores.GetState():
-        ValidReplacements.append(IDs.AuxCores)
+        ValidReplacements.extend(IDs.AuxCores)
     if Options.EnemyDropOption_RefinedAuxCores.GetState():
-        ValidReplacements.append(IDs.RefinedAuxCores)
+        ValidReplacements.extend(IDs.RefinedAuxCores)
     if Options.EnemyDropOption_CoreCrystals.GetState():
-        ValidReplacements.append(IDs.CoreCrystals)
+        ValidReplacements.extend(IDs.CoreCrystals)
     if Options.EnemyDropOption_Deeds.GetState():
-        ValidReplacements.append(IDs.Deeds)
+        ValidReplacements.extend(IDs.Deeds)
     if Options.EnemyDropOption_CollectionPointMaterials.GetState():
-        ValidReplacements.append(IDs.CollectionPointMaterials)
+        ValidReplacements.extend(IDs.CollectionPointMaterials)
     odds = Options.EnemyDropOption.GetOdds()
 
     
@@ -26,7 +26,7 @@ def RandoEnemyDrops():
     
 
 
-    with open(f"./_internal/JsonOutputs/common/BTL_EnDropItem.json", 'r+', encoding='utf-8') as enDropFile:
+    with open(f"./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", 'r+', encoding='utf-8') as enDropFile:
         enDropData = json.load(enDropFile)
         for drop in enDropData["rows"]:
             for i in range(1,9):

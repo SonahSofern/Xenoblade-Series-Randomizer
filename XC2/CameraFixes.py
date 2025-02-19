@@ -1,7 +1,7 @@
 import json
 
 def BladeArtCameraFixes():
-    with open("./_internal/JsonOutputs/common/BTL_Arts_Bl_Cam.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_Bl_Cam.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data["rows"]:
                 for i in range(1, 8):
@@ -11,7 +11,7 @@ def BladeArtCameraFixes():
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
-    with open("./_internal/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/_internal/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data["rows"]:
                 row["Scale"] = 250

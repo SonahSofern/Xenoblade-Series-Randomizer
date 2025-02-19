@@ -8,7 +8,7 @@ EnhancementSets = [[2760, 2761, 2762, 2763, 2764, 2764], [2745, 2746, 2747, 2748
 
 
 def DriverArtRandomizer():
-    with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as artFile:
+    with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
         
         isAutoAttacks = Options.DriverArtsOption_AutoAttacks.GetState()
@@ -257,8 +257,8 @@ def GenCustomArtDescriptions():
         # Eventually might add logic for damage absorb and release
     }
     
-    with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", "r+", encoding='utf-8') as ArtsFile:     
-        with open("./_internal/JsonOutputs/common_ms/btl_arts_dr_cap.json", "r+", encoding='utf-8') as DescFile:     
+    with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", "r+", encoding='utf-8') as ArtsFile:     
+        with open("./XC2/_internal/JsonOutputs/common_ms/btl_arts_dr_cap.json", "r+", encoding='utf-8') as DescFile:     
             artsData = json.load(ArtsFile)
             descData = json.load(DescFile)
             AnchorShotDesc = 0

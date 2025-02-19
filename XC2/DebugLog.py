@@ -58,7 +58,7 @@ def AppendSeedHash(seedhash):
     debugfilewrite.close()
 
 def DebugCoreCrystalAddition(ValidCrystalListIDs, CorrespondingBladeNames):
-    TreasureBoxestoCheck = ['./_internal/JsonOutputs/common_gmk/ma05a_FLD_TboxPop.json', "./_internal/JsonOutputs/common_gmk/ma10a_FLD_TboxPop.json", './_internal/JsonOutputs/common_gmk/ma07a_FLD_TboxPop.json', './_internal/JsonOutputs/common_gmk/ma08a_FLD_TboxPop.json', './_internal/JsonOutputs/common_gmk/ma15a_FLD_TboxPop.json', './_internal/JsonOutputs/common_gmk/ma11a_FLD_TboxPop.json', './_internal/JsonOutputs/common_gmk/ma13a_FLD_TboxPop.json', './_internal/JsonOutputs/common_gmk/ma16a_FLD_TboxPop.json', './_internal/JsonOutputs/common_gmk/ma17a_FLD_TboxPop.json', "./_internal/JsonOutputs/common_gmk/ma18a_FLD_TboxPop.json", './_internal/JsonOutputs/common_gmk/ma20a_FLD_TboxPop.json', './_internal/JsonOutputs/common_gmk/ma21a_FLD_TboxPop.json']
+    TreasureBoxestoCheck = ['./XC2/_internal/JsonOutputs/common_gmk/ma05a_FLD_TboxPop.json', "./XC2/_internal/JsonOutputs/common_gmk/ma10a_FLD_TboxPop.json", './XC2/_internal/JsonOutputs/common_gmk/ma07a_FLD_TboxPop.json', './XC2/_internal/JsonOutputs/common_gmk/ma08a_FLD_TboxPop.json', './XC2/_internal/JsonOutputs/common_gmk/ma15a_FLD_TboxPop.json', './XC2/_internal/JsonOutputs/common_gmk/ma11a_FLD_TboxPop.json', './XC2/_internal/JsonOutputs/common_gmk/ma13a_FLD_TboxPop.json', './XC2/_internal/JsonOutputs/common_gmk/ma16a_FLD_TboxPop.json', './XC2/_internal/JsonOutputs/common_gmk/ma17a_FLD_TboxPop.json', "./XC2/_internal/JsonOutputs/common_gmk/ma18a_FLD_TboxPop.json", './XC2/_internal/JsonOutputs/common_gmk/ma20a_FLD_TboxPop.json', './XC2/_internal/JsonOutputs/common_gmk/ma21a_FLD_TboxPop.json']
     debugfileread = open(debugfilename, "r", encoding= "utf-8")
     alllines = debugfileread.readlines()
     alllines.append("\n")
@@ -88,12 +88,12 @@ def DebugZoharLocations(ZoharChestIDs):
 
 def DebugMovespeed():
     DeedTypeIDValues = Helper.InclRange(1, 51)
-    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes caption and name
+    with open("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes caption and name
         data = json.load(file)
         for row in data["rows"]:
             if row["Type"] in DeedTypeIDValues:
                 row["Caption"] = 603 # Increases running speed by 5%
-    with open("./_internal/JsonOutputs/common/FLD_OwnerBonus.json", 'r+', encoding='utf-8') as file: 
+    with open("./XC2/_internal/JsonOutputs/common/FLD_OwnerBonus.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in DeedTypeIDValues:
@@ -103,7 +103,7 @@ def DebugMovespeed():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/FLD_OwnerBonusParam.json", 'r+', encoding='utf-8') as file: # Changes max movespeed bonus to 250%
+    with open("./XC2/_internal/JsonOutputs/common/FLD_OwnerBonusParam.json", 'r+', encoding='utf-8') as file: # Changes max movespeed bonus to 250%
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 1:
@@ -112,7 +112,7 @@ def DebugMovespeed():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes name of deed
+    with open("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes name of deed
         data = json.load(file)
         for row in data["rows"]:
             if (row["$id"] >= 25249) & (row["$id"] <= 25299):
@@ -122,7 +122,7 @@ def DebugMovespeed():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
+    with open("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
         data = json.load(file)
         for row in data["rows"]:
             if (row["$id"] >= 491) & (row["$id"] < 542):
@@ -132,7 +132,7 @@ def DebugMovespeed():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_TboxPop.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/_internal/JsonOutputs/common_gmk/ma02a_FLD_TboxPop.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 209:

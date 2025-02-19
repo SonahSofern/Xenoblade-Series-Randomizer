@@ -20,9 +20,10 @@ def saveData(DataList, Filename, GamePrefix):
             
 def loadData(DataList, Filename, GamePrefix):
     try:
-        savePath = os.path.join(GamePrefix, saveFolderName, Filename)
+        savePath = os.path.join(GamePrefix, saveFolderName)
+        saveFilePath = os.path.join(savePath, Filename)
         os.makedirs(savePath, exist_ok=True)
-        with open(f"{GamePrefix}/{saveFolderName}/{Filename}", 'r') as file:
+        with open(saveFilePath, 'r') as file:
             data = json.load(file)
             for option in DataList:
                 try:

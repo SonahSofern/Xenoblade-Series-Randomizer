@@ -8,8 +8,8 @@ ValidSkills = []
 
 def EnemyEnhances():
     prevNames = []
-    with open("./_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as EnArrangeFile:
-        with open("./_internal/JsonOutputs/common_ms/fld_enemyname.json", 'r+', encoding='utf-8') as NamesFile:      
+    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as EnArrangeFile:
+        with open("./XC2/_internal/JsonOutputs/common_ms/fld_enemyname.json", 'r+', encoding='utf-8') as NamesFile:      
             EnArr = json.load(EnArrangeFile)
             Names = json.load(NamesFile)
             spinbox  = Options.EnemyEnhancementsOption.GetOdds()

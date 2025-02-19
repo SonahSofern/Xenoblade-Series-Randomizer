@@ -6,8 +6,8 @@ def ShortenedTutorial():
     RaceModeBox = Options.RaceModeOption.GetState()
     if not RaceModeBox:
         print("Shortening Tutorials")
-        Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Condition.json", ["cond"], 1)
-        with open("./_internal/JsonOutputs/common_gmk/FLD_Tutorial.json", 'r+', encoding='utf-8') as file: # part of core crystal tutorial
+        Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Condition.json", ["cond"], 1)
+        with open("./XC2/_internal/JsonOutputs/common_gmk/FLD_Tutorial.json", 'r+', encoding='utf-8') as file: # part of core crystal tutorial
             data = json.load(file)
             for row in data["rows"]:
                 if row["$id"] not in [65, 67, 70]:
@@ -19,7 +19,7 @@ def ShortenedTutorial():
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-        with open("./_internal/JsonOutputs/common_gmk/RSC_GmkSetList.json", 'r+', encoding='utf-8') as file: # part of core crystal tutorial
+        with open("./XC2/_internal/JsonOutputs/common_gmk/RSC_GmkSetList.json", 'r+', encoding='utf-8') as file: # part of core crystal tutorial
             data = json.load(file)
             for row in data["rows"]:
                 if row["tutorial"] != "ma05a_tutorial":
@@ -31,10 +31,10 @@ def ShortenedTutorial():
         EnemyRandoLogic.KeyItemsReAdd()
     else:
         print("Shortening Tutorials")
-        Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Condition.json", ["cond"], 1)
-        Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_Tutorial.json", ["ScenarioFlagMin", "QuestFlag", "QuestFlagMin", "QuestFlagMax", "SysMultiFlag"], 0)
-        Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/RSC_GmkSetList.json", ["tutorial", "tutorial_bdat"], "")
-    with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: #allows waypoints to work, and us to skip Melolo
+        Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Condition.json", ["cond"], 1)
+        Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common_gmk/FLD_Tutorial.json", ["ScenarioFlagMin", "QuestFlag", "QuestFlagMin", "QuestFlagMax", "SysMultiFlag"], 0)
+        Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common_gmk/RSC_GmkSetList.json", ["tutorial", "tutorial_bdat"], "")
+    with open("./XC2/_internal/JsonOutputs/common_gmk/ma02a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: #allows waypoints to work, and us to skip Melolo
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] <= 2005:
@@ -42,7 +42,7 @@ def ShortenedTutorial():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: #this makes it so spraine will talk to us no matter how small the flag
+    with open("./XC2/_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: #this makes it so spraine will talk to us no matter how small the flag
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 2045:
@@ -55,7 +55,7 @@ def ShortenedTutorial():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: # shortens opening section
+    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: # shortens opening section
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 7: #if we go to argentum
@@ -71,7 +71,7 @@ def ShortenedTutorial():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/FLD_QuestListNormal.json", 'r+', encoding='utf-8') as file: #shortens tutorials
+    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestListNormal.json", 'r+', encoding='utf-8') as file: #shortens tutorials
         data = json.load(file)
         for row in data["rows"]:
             if (row["$id"] >= 2001) and (row["$id"] <= 2008):
@@ -82,7 +82,7 @@ def ShortenedTutorial():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/FLD_QuestTaskNormal.json", 'r+', encoding='utf-8') as file: #adjusting tutorial quests
+    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestTaskNormal.json", 'r+', encoding='utf-8') as file: #adjusting tutorial quests
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 2001:
@@ -93,7 +93,7 @@ def ShortenedTutorial():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/FLD_Achievement.json", 'r+', encoding='utf-8') as file: #adjusting tutorial quests
+    with open("./XC2/_internal/JsonOutputs/common/FLD_Achievement.json", 'r+', encoding='utf-8') as file: #adjusting tutorial quests
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 1710:
@@ -104,7 +104,7 @@ def ShortenedTutorial():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing tutorials in tutorial
+    with open("./XC2/_internal/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing tutorials in tutorial
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 30005:
@@ -116,11 +116,11 @@ def ShortenedTutorial():
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
         
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Tutorial.json", ["script_file"], "aoc_challenge_tutorial") # Shortens battle tutorials
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_Tutorial.json", ["start_id"], 0)
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial.json", ["script_file"], "aoc_challenge_tutorial") # Shortens battle tutorials
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial.json", ["start_id"], 0)
     
     
-    with open("./_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # removing more tutorials
+    with open("./XC2/_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # removing more tutorials
         data = json.load(file)
         removables = ["tut_sys26", "tut_sys22", "tut_sys14", "tut_sys02", "tut_btl23"]
         for row in data["rows"]:

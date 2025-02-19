@@ -3,28 +3,28 @@ from scripts import Helper
 def RandoAccessoryShops():
     ValidReplacements = []
     if Options.AccessoryShopsOption_Accessories.GetState():
-        ValidReplacements.append(IDs.Accessories)
+        ValidReplacements.extend(IDs.Accessories)
     if Options.AccessoryShopsOption_TornaAccessories.GetState():
-        ValidReplacements.append(IDs.TornaAccessories)
+        ValidReplacements.extend(IDs.TornaAccessories)
     if Options.AccessoryShopsOption_WeaponChips.GetState():
-        ValidReplacements.append(IDs.WeaponChips)
+        ValidReplacements.extend(IDs.WeaponChips)
     if Options.AccessoryShopsOption_AuxCores.GetState():
-        ValidReplacements.append(IDs.AuxCores)
+        ValidReplacements.extend(IDs.AuxCores)
     if Options.AccessoryShopsOption_RefinedAuxCores.GetState():
-        ValidReplacements.append(IDs.RefinedAuxCores)
+        ValidReplacements.extend(IDs.RefinedAuxCores)
     if Options.AccessoryShopsOption_CoreCrystals.GetState():
-        ValidReplacements.append(IDs.CoreCrystals)
+        ValidReplacements.extend(IDs.CoreCrystals)
     if Options.AccessoryShopsOption_Deeds.GetState():
-        ValidReplacements.append(IDs.Deeds)
+        ValidReplacements.extend(IDs.Deeds)
     if Options.AccessoryShopsOption_PouchItems.GetState():
-        ValidReplacements.append(IDs.PouchItems)
+        ValidReplacements.extend(IDs.PouchItems)
     if Options.AccessoryShopsOption_CollectionPointMaterials.GetState():
-        ValidReplacements.append(IDs.CollectionPointMaterials)
+        ValidReplacements.extend(IDs.CollectionPointMaterials)
     
     if ValidReplacements == []: # In case they dont select anything
         return
     
-    with open("./_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as shopFile:
+    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as shopFile:
         shopData = json.load(shopFile)
         odds = Options.AccessoryShopsOption.GetOdds()
         for shop in shopData["rows"]:

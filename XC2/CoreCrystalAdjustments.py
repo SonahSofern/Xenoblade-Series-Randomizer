@@ -7,7 +7,7 @@ import IDs
 import RaceMode
 
 FLDSkillMaxLv = [3, 5, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 3, 5, 3, 3, 3, 5, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 5, 3, 3, 5, 3, 5, 3, 3, 5, 5, 5, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 5, 5]
-# Helper.FindValues("./_internal/JsonOutputs/common/FLD_FieldSkillList.json", ["$id"], Helper.inclRange(2, 7) + Helper.inclRange(9,74), "MaxLevel")
+# Helper.FindValues("./XC2/_internal/JsonOutputs/common/FLD_FieldSkillList.json", ["$id"], Helper.inclRange(2, 7) + Helper.inclRange(9,74), "MaxLevel")
 
 BladeFieldSkills = [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74]
 # print(Helper.inclRange(2,7) + Helper.inclRange(9,74))
@@ -23,12 +23,12 @@ FieldSkillAchievementIDs = Helper.InclRange(1,3824)
 ChangeableFieldSkillAchievementIDs = [12, 13, 14, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84, 92, 93, 94, 102, 103, 104, 112, 113, 114, 122, 123, 124, 132, 133, 134, 142, 143, 144, 152, 153, 154, 162, 163, 164, 172, 173, 174, 182, 183, 184, 192, 193, 194, 202, 203, 204, 212, 213, 214, 222, 223, 224, 232, 233, 234, 242, 243, 244, 252, 253, 254, 262, 263, 264, 272, 273, 274, 282, 283, 284, 292, 293, 294, 302, 303, 304, 312, 313, 314, 322, 323, 324, 332, 333, 334, 342, 343, 344, 352, 353, 354, 362, 363, 364, 372, 373, 374, 382, 383, 384, 392, 393, 394, 402, 403, 404, 412, 413, 414, 422, 423, 424, 432, 433, 434, 442, 443, 444, 452, 453, 454, 462, 463, 464, 1645, 1646, 1647, 1655, 1656, 1657, 1665, 1666, 1667, 1675, 1676, 1677, 1746, 1747, 1748, 1756, 1757, 1758, 1766, 1767, 1768]
 
 def RareBladeProbabilityEqualizer(): # makes it so all blades are equally likely to be pulled
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Condition", "Assure1", "Assure2", "Assure3", "Assure4", "Assure5"] , 0)
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common/BLD_RareList.json", ["Prob1", "Prob2", "Prob3", "Prob4", "Prob5"] , 1)
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BLD_RareList.json", ["Condition", "Assure1", "Assure2", "Assure3", "Assure4", "Assure5"] , 0)
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BLD_RareList.json", ["Prob1", "Prob2", "Prob3", "Prob4", "Prob5"] , 1)
 
 def FieldSkillLevelAdjustment():
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_FieldSkillList.json", ["MaxLevel"] , 1)
-    FieldAchievementSetFile = "./_internal/JsonOutputs/common/FLD_AchievementSet.json"
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_FieldSkillList.json", ["MaxLevel"] , 1)
+    FieldAchievementSetFile = "./XC2/_internal/JsonOutputs/common/FLD_AchievementSet.json"
     with open(FieldAchievementSetFile, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
@@ -51,8 +51,8 @@ def FieldSkillLevelAdjustment():
     # JSONParser.ChangeJSONFile("common/FLD_AchievementSet.json",Helper.StartsWith("AchievementID",1,5), Helper.InclRange(1,3824), [40], (x for x in FieldSkillAchievementIDs if x in ChangeableFieldSkillAchievementIDs) )
 
 def AdjustingCrystalList():
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CrystalList.json", ["Condition", "BladeID", "CommonID", "CommonWPN", "CommonAtr"], 0)
-    ITMCrystalFile = "./_internal/JsonOutputs/common/ITM_CrystalList.json"
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/ITM_CrystalList.json", ["Condition", "BladeID", "CommonID", "CommonWPN", "CommonAtr"], 0)
+    ITMCrystalFile = "./XC2/_internal/JsonOutputs/common/ITM_CrystalList.json"
     with open(ITMCrystalFile, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         RandomBlades = BladeIDs.copy()
@@ -76,7 +76,7 @@ def AdjustingCrystalList():
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def FixingGivenCoreCrystalTutorial():
-    with open("./_internal/JsonOutputs/common/MNU_BladeCreate.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/_internal/JsonOutputs/common/MNU_BladeCreate.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["limited_item"] == 45010:
@@ -84,7 +84,7 @@ def FixingGivenCoreCrystalTutorial():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/FLD_AddItem.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/_internal/JsonOutputs/common/FLD_AddItem.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] ==87:
@@ -94,7 +94,7 @@ def FixingGivenCoreCrystalTutorial():
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def LandofChallengeRelease(): #frees shulk, elma, fiora from land of challenge restriction
-    Helper.SubColumnAdjust("./_internal/JsonOutputs/common/CHR_Bl.json", "Flag", "OnlyChBtl", 0)
+    Helper.SubColumnAdjust("./XC2/_internal/JsonOutputs/common/CHR_Bl.json", "Flag", "OnlyChBtl", 0)
 
 def RegularLootDistribution(): #Adds core crystals to the loot pool if race mode isn't on (Chests Only)
     TotalTBox = 667
@@ -126,7 +126,7 @@ def RegularLootDistribution(): #Adds core crystals to the loot pool if race mode
             json.dump(data, file, indent=2, ensure_ascii=False)
 
 def FixRoc(): # Fixes Roc softlock
-    with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         RandomBlades = BladeIDs.copy()
         random.shuffle(RandomBlades)
@@ -138,7 +138,7 @@ def FixRoc(): # Fixes Roc softlock
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/MNU_BladeCreate.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/_internal/JsonOutputs/common/MNU_BladeCreate.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         RandomBlades = BladeIDs.copy()
         random.shuffle(RandomBlades)
@@ -150,21 +150,21 @@ def FixRoc(): # Fixes Roc softlock
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def FixOpeningSoftlock():
-    StartingCondListRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
-    StartingCondScenarioRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_ConditionScenario.json", "$id") + 1
-    with open("./_internal/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file:
+    StartingCondListRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
+    StartingCondScenarioRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionScenario.json", "$id") + 1
+    with open("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         data["rows"].append({"$id": StartingCondListRow, "Premise": 0, "ConditionType1": 1, "Condition1": StartingCondScenarioRow, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/FLD_ConditionScenario.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/_internal/JsonOutputs/common/FLD_ConditionScenario.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         data["rows"].append({"$id": StartingCondScenarioRow, "ScenarioMin": 2001, "ScenarioMax": 10048, "NotScenarioMin": 0, "NotScenarioMax": 0})
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         RandomBlades = BladeIDs.copy()
         random.shuffle(RandomBlades)
@@ -177,7 +177,7 @@ def FixOpeningSoftlock():
         json.dump(data, file, indent=2, ensure_ascii=False)    
 
 def FixArtReleaseLevels(): # Fixes issue with NG+ blades having incredibly high level requirements for arts
-    with open("./_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         RandomBlades = BladeIDs.copy()
         random.shuffle(RandomBlades)
