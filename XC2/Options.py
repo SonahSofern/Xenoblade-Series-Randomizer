@@ -1,6 +1,5 @@
 from tkinter import ttk
-from scripts.JSONParser import *
-import scripts.JSONParser as JSONParser, scripts.Helper as Helper
+from scripts import JSONParser,Helper
 from IDs import *
 from tkinter import *
 import _Accessories, _DriverArts, SkillTrees, BladeRandomization, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments

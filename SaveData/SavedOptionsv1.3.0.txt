@@ -119,7 +119,7 @@
     "Enemies->Normal Enemies": true,
     "Enemies->Mix Enemies Between Types": true,
     "Enemies->Balanced Levels": true,
-    "Enemy Aggro": false,
+    "Enemy Aggro": true,
     "Enemy Art Effects": false,
     "Enemy Art Effects->Reactions": true,
     "Enemy Art Effects->AOE": true,

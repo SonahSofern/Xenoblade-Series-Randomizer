@@ -26,14 +26,12 @@ def GenerateCompressedPermalink(SeedName, OptionsList, Version):
 
     bitswriter = PackedBits.PackedBitsWriter()
     for i in range(2, len(OptionsList)):
-        try:
-            optionvalue = OptionsList[i].get()
-            if isinstance(optionvalue, bool):
-                bitswriter.write(int(optionvalue), 1)
-            elif isinstance(optionvalue, int):
-                bitswriter.write(optionvalue, 8)
-        except:
-            pass
+        optionvalue = OptionsList[i].get()
+        if isinstance(optionvalue, bool):
+            bitswriter.write(int(optionvalue), 1)
+        elif isinstance(optionvalue, int):
+            bitswriter.write(optionvalue, 8)
+
     bitswriter.flush()
 
     for byte in bitswriter.bytes:
