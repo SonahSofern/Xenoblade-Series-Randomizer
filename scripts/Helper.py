@@ -1,4 +1,4 @@
-import json
+import json, random
 from tkinter import filedialog
 import tkinter as tk
 
@@ -139,3 +139,9 @@ def GetMinValue(filename: str, columnname: str): # Returns the maximum Value for
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     return MinID
+
+def OddsCheck(odds):
+    if odds > random.randrange(0,99):
+        return True
+    else:
+        return False

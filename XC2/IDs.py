@@ -27,7 +27,7 @@ DriverSkillTrees = Helper.InclRange(1,270)
 HitReactions = Helper.InclRange(0,16)
 ButtonCombos = Helper.InclRange(1,5)
 BladeBattleSkills = Helper.InclRange(1,270)
-
+MajorAreaIds = ["01","02","03","04","05","07","08","10","11","13","15","17","18","20","21","30","40","41","42","49","50","90"]
 
 
 
