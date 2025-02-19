@@ -1,10 +1,10 @@
 from tkinter import *
-from UI_Colors import *
+from scripts import UI_Colors
 from tkinter import font, ttk
 
 
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
-import SavedOptions
+from scripts import SavedOptions
 
 
 CanvasesForStyling = []
@@ -124,19 +124,19 @@ def LoadTheme(defaultFont, themeName):
     style= ttk.Style()
     # Initial colors for the themes
     lightThemeColors = {
-    "backgroundColor": Red,
-    "darkColor": LightGray,
-    "midColor": White,
-    "midGray": MiddleLightGray,
-    "lightColor": LightBlack,
+    "backgroundColor": UI_Colors.Red,
+    "darkColor": UI_Colors.LightGray,
+    "midColor": UI_Colors.White,
+    "midGray": UI_Colors.MiddleLightGray,
+    "lightColor": UI_Colors.LightBlack,
     }
 
     darkThemeColors = {
-    "backgroundColor": DarkerPurple,
-    "darkColor": LightBlack,
-    "midColor": DarkGray,
-    "midGray": MediumGray,
-    "lightColor": White,
+    "backgroundColor": UI_Colors.DarkerPurple,
+    "darkColor": UI_Colors.LightBlack,
+    "midColor": UI_Colors.DarkGray,
+    "midGray": UI_Colors.MediumGray,
+    "lightColor": UI_Colors.White,
     }
     if themeName == "Dark Mode":
         currentTheme = darkThemeColors
@@ -294,7 +294,7 @@ def LoadTheme(defaultFont, themeName):
     staticFont = Font(family="Arial", size=16)
     style.configure("midColor.TCheckbutton", padding=(20, 10))
     style.configure("STATIC.TButton", font=staticFont)
-    style.configure("BorderlessLabel.TLabel", background=currentTheme["backgroundColor"], foreground=White)
+    style.configure("BorderlessLabel.TLabel", background=currentTheme["backgroundColor"], foreground=UI_Colors.White)
     style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
 
     # Since Canvas and Roots arrent affected by normal styling

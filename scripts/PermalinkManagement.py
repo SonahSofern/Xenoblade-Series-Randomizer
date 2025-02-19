@@ -1,6 +1,6 @@
 import tkinter
 import string
-import PackedBits
+from scripts import PackedBits
 import base64
 import struct
 

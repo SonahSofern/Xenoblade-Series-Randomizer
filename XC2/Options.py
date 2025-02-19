@@ -149,7 +149,7 @@ CollectionPointsOption_RefinedAuxCores = SubOption("Refined Aux Cores", Collecti
 CollectionPointsOption_CoreCrystals = SubOption("Core Crystals", CollectionPointsOption)
 CollectionPointsOption_Deeds = SubOption("Shop Deeds", CollectionPointsOption)
 CollectionPointsOption_CollectionPointMaterials = SubOption("Collection Point Materials", CollectionPointsOption)
-PouchItemShopOption = Option("Pouch Item Shops", General, "Randomizes the contents of Pouch Item Shops" [lambda: PouchItemShops.RandoPouchShops()], _hasSpinBox = True)
+PouchItemShopOption = Option("Pouch Item Shops", General, "Randomizes the contents of Pouch Item Shops", [lambda: PouchItemShops.RandoPouchShops()], _hasSpinBox = True)
 PouchItemShopOption_Accessories = SubOption("Accessories", PouchItemShopOption)
 PouchItemShopOption_TornaAccessories = SubOption("Torna Accessories", PouchItemShopOption)
 PouchItemShopOption_WeaponChips = SubOption("Weapon Chips", PouchItemShopOption)

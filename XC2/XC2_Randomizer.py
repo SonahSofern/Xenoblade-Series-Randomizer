@@ -5,13 +5,11 @@ from tkinter import *
 import tkinter as tk
 root = Tk()
 import Options
-import scripts.PermalinkManagement as PermalinkManagement
 import random, subprocess, shutil, os, threading, traceback, time, sys, datetime
-from scripts import SavedOptions, JSONParser, Helper, GUISettings
+from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkManagement, UI_Colors
 import SeedNames
 from Enhancements import *
 from IDs import *
-from scripts.UI_Colors import *
 from tkinter.font import Font
 import tkinter as tk
 
@@ -21,8 +19,8 @@ JsonOutput = "./_internal/JsonOutputs"
 MaxWidth = 1000
 windowWidth = "1550"
 windowHeight = "900"
-OptionColorLight = White
-OptionColorDark = Gray
+OptionColorLight = UI_Colors.White
+OptionColorDark = UI_Colors.Gray
 SavedOptionsFileName = f"SavedOptionsv{Version}.txt"
 if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
     isOnefile = True
