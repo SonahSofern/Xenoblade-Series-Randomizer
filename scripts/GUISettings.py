@@ -331,7 +331,7 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touc
         Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
         OuterFrames[i].pack(expand=True, fill="both")
 
-def Randomize(RandomizeButton, randoProgressDisplay, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, ExtraCommands = []):
+def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATUnpackCommands = [], ExtraCommands = []):
     def ThreadedRandomize():
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
@@ -343,13 +343,12 @@ def Randomize(RandomizeButton, randoProgressDisplay, fileEntryVar, bdat_path, pe
         random.seed(permalinkVar.get())
         print("Seed: " + randoSeedEntry.get())
         print("Permalink: "+  permalinkVar.get())
-
         try:
-        # Unpacks BDATs
-            print(f"{fileEntryVar.get().strip()}/common.bdat")
-            subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/common.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-            subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/common_gmk.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-            subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/gb/common_ms.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            for file in BDATUnpackCommands:
+                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/gb/{file}", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+
+            # Unpacks BDATs
+
         except:
             print(f"{traceback.format_exc()}") # shows the full error
             randoProgressDisplay.config(text="Invalid Input Directory")
@@ -367,7 +366,8 @@ def Randomize(RandomizeButton, randoProgressDisplay, fileEntryVar, bdat_path, pe
         try:
             # Packs BDATs
             subprocess.run([bdat_path, "pack", JsonOutput, "-o", outputDirVar.get().strip(), "-f", "json"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-
+            
+            for file in 
             # Outputs common_ms in the correct file structure
             os.makedirs(f"{outputDirVar.get().strip()}/gb", exist_ok=True)
             shutil.move(f"{outputDirVar.get().strip()}/common_ms.bdat", f"{outputDirVar.get().strip()}/gb/common_ms.bdat")

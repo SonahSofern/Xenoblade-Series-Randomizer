@@ -4,7 +4,7 @@ from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
 root = Tk()
-import Options, os, sys
+import Options, os, sys, subprocess
 from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkManagement, UI_Colors, Seed
 import SeedNames
 from tkinter.font import Font
@@ -175,7 +175,7 @@ PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, se
 randoProgressDisplay = ttk.Label(text="", anchor="e", padding=2, style="BorderlessLabel.TLabel")
 
 # Randomize Button
-RandomizeButton = ttk.Button(text='Randomize', command=(lambda: GUISettings.Randomize(RandomizeButton, randoProgressDisplay, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar), (lambda: ShowTitleScreenText())))
+RandomizeButton = ttk.Button(text='Randomize', command=(lambda: GUISettings.Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Options.OptionList, ["bdat_common.bdat", "bdat_common_ms.bdat"])))
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
 RandomizeButton.config(padding=5)
 
