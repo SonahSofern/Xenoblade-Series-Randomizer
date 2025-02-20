@@ -97,7 +97,7 @@ ChipBundleNames = [] # temporary
 AuxCoreShopRewardDistribution = [] # temporary
 PouchItemShopRewardDistribution = [] # temporary
 AccessoryShopRewardDistribution = [] # temporary
-GambaShopRewardList = [] # temporary
+GambaShopQtyList = [] # temporary
 
 CommonAuxCoreCosts = [3, 6, 9, 12, 3, 6, 9]
 RareAuxCoreCosts = [10, 20, 10, 20, 15]
@@ -151,7 +151,7 @@ CoreCrystalShop = {
 
 WPManualShop = {
     "NewNPCModel": 2001,# from RSC_NpcList, goes to ma02a_FLD_NpcPop NpcID. Gramps
-    "ChosenMapRowID": 2087, # ma02a_FLD_NpcPop $id
+    "ChosenMapRowID": 2088, # ma02a_FLD_NpcPop $id
     "ShopIcon": 442, # MNU_ShopList ShopIcon
     "ShopIDtoReplace": 24, # MNU_ShopList $id
     "ShopName": "Manual Marketplace", # fld_shopname name
@@ -163,12 +163,13 @@ WPManualShop = {
     "RewardNames": ["250 Art WP", "500 Art WP", "1000 Art WP", "Pouch Expander", "Accessory Expander", "1500 Driver SP", "3000 Driver SP", "6000 Driver SP"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
     "RewardSP": ManualFillerList, #FLD_QuestReward Sp
     "RewardXP": ManualFillerList, # FLD_QuestReward EXP
-    "HideReward": ManualFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
+    "HideReward": ManualFillerList, # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
+    "Condition": 3904 # I know this one will always let you access it
 }
 
 WeaponChipShop = {
     "NewNPCModel": 3457,# from RSC_NpcList, goes to ma02a_FLD_NpcPop NpcID. Padraig
-    "ChosenMapRowID": 2087, # ma02a_FLD_NpcPop $id
+    "ChosenMapRowID": 2089, # ma02a_FLD_NpcPop $id
     "ShopIcon": 430, # MNU_ShopList ShopIcon
     "ShopIDtoReplace": 21, # MNU_ShopList $id
     "ShopName": "Weapon Warehouse", # fld_shopname name
@@ -185,7 +186,7 @@ WeaponChipShop = {
 
 AuxCoreShop = {
     "NewNPCModel": 3106,# from RSC_NpcList, goes to ma02a_FLD_NpcPop NpcID. Yumyum the Burglar
-    "ChosenMapRowID": 2088, # ma02a_FLD_NpcPop $id Replaces Amumu
+    "ChosenMapRowID": 2090, # ma02a_FLD_NpcPop $id Replaces Amumu
     "ShopIcon": 432, # MNU_ShopList ShopIcon
     "ShopIDtoReplace": 26, # MNU_ShopList $id
     "ShopName": "Aux Core Auction", # fld_shopname name
@@ -248,7 +249,8 @@ PoppiswapShop = {
     "RewardNames": ["Poppiswap Manual 1", "Poppiswap Manual 2", "Poppiswap Manual 3", "Poppiswap Manual 4", "Poppiswap Manual 5", "Ether Crystal Pack 1", "Ether Crystal Pack 2", "Ether Crystal Pack 3", "Ether Crystal Pack 4", "Ether Crystal Pack 5", "Ether Crystal Pack 6", "Ether Crystal Pack 7", "Ether Crystal Pack 8", "Ether Crystal Pack 9", "Ether Crystal Pack 10", "Ether Crystal Pack 11"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
     "RewardSP": EmptyFillerList, #FLD_QuestReward Sp
     "RewardXP": EmptyFillerList, # FLD_QuestReward EXP
-    "HideReward": EmptyFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
+    "HideReward": EmptyFillerList, # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
+    "Condition": 3904 # I know this one will always let you access it
 }
 
 GambaShop = {
@@ -257,15 +259,7 @@ GambaShop = {
     "ShopIcon": 443, # MNU_ShopList ShopIcon
     "ShopIDtoReplace": 27, # MNU_ShopList $id
     "ShopName": "The [System:Color name=tutorial]Casino[/System:Color]", # fld_shopname name
-    "TradeCount": 16, # Number of Trades the shop will have
-    "InputItemIDs": [Helper.ExtendListtoLength([], 16, "25489"), EmptyFillerList, EmptyFillerList, EmptyFillerList, EmptyFillerList], # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
-    "InputItemQtys": [GambaShopCosts, EmptyFillerList, EmptyFillerList, EmptyFillerList, EmptyFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
-    "RewardItemIDs": [GambaShopRewardList, EmptyFillerList, EmptyFillerList, EmptyFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
-    "RewardQtys": [FullFillerList, EmptyFillerList, EmptyFillerList, EmptyFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
-    "RewardNames": Helper.ExtendListtoLength(["Reward Voucher"], 16, "inputlist[0] + ' ' + str(i + 1)"), # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
-    "RewardSP": EmptyFillerList, #FLD_QuestReward Sp
-    "RewardXP": EmptyFillerList, # FLD_QuestReward EXP
-    "HideReward": FullFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
+    "TradeCount": 3, # Number of Trades the shop will have
 }
 
 FullShopTemplateList = [CoreCrystalShop, WeaponChipShop, AuxCoreShop, PouchItemShop, DriverAccessoryShop, GambaShop, TokenExchangeShop, WPManualShop, PoppiswapShop]
@@ -1908,7 +1902,7 @@ def AccessoryShopRewards(): # Creates the accessory shop
     AccessoryShopRewardDistribution = [Helper.ExtendListtoLength([1], 16, "inputlist[i-1]+4"), Helper.ExtendListtoLength([2], 16, "inputlist[i-1]+4"), Helper.ExtendListtoLength([3], 16, "inputlist[i-1]+4"), Helper.ExtendListtoLength([4], 16, "inputlist[i-1]+4")]
 
 def PoppiswapShopRewards(): # Creates rewards for Poppiswap Shop
-    CrystalRows = Helper.InclRange(27, 37)
+    CrystalRows = Helper.InclRange(11, 21)
     StartingCondListRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
     StartingItemCondRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_ConditionItem.json", "$id") + 1
     StartingDLCItemTextRow = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
@@ -1949,10 +1943,10 @@ def PoppiswapShopRewards(): # Creates rewards for Poppiswap Shop
                 row["releasecount"] = 2
                 row["item_id"] = 0
                 row["category"] = 3
-                row["value"] = 1000*(row["$id"] - 26)
+                row["value"] = 1000*(row["$id"] - 10)
                 row["disp_item_info"] = 0
-                row["condition"] = StartingCondListRow + (row["$id"] - 27)
-                row["title"] = StartingDLCItemTextRow + (row["$id"] - 27)
+                row["condition"] = StartingCondListRow + (row["$id"] - 11)
+                row["title"] = StartingDLCItemTextRow + (row["$id"] - 11)
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1970,78 +1964,25 @@ def PoppiswapCostChanges(): # Reduces cost of poppiswap stuff
     Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_HanaBase.json"], ["Circuit4Num", "Circuit5Num", "Circuit6Num"], ['max(row[key] // 10, 1)'])
 
 def GambaShopRewards(): # Makes the rewards for the gamba shop
-    GambaCouponRows = Helper.InclRange(11, 26)
-    StartingCondListRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
-    StartingItemCondRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_ConditionItem.json", "$id") + 1
-    StartingDLCItemTextRow = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
-    GambaVoucherNameIDs = Helper.InclRange(644, 659)
-    GambaVoucherCaptionIDs = Helper.InclRange(745, 760)
-    global ShopTokenRewardResults
-    ShopTokenRewardResults = random.choices([5, 10, 15, 25, 35, 50, 100], weights=[30, 20, 15, 15, 10, 5, 5], k = 16) # 50% chance to lose tokens, 50% chance to make winnings back + some in theory, but can be better or worse depending on rolled values
-    with open("./_internal/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for i in range(0, 16): # ConditionType of 5 is "Item", meaning you need that item listed in FLD_ConditionItem
-            data["rows"].append({"$id": StartingCondListRow + i, "Premise": 0, "ConditionType1": 5, "Condition1": StartingItemCondRow + i, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/FLD_ConditionItem.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for i in range(0, 16):
-            data["rows"].append({"$id": StartingItemCondRow + i, "ItemCategory": 0, "ItemID": 25333 + i, "Number": 1})
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes names of Contracts
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] >= 644:
-                for i in range(0, len(GambaVoucherNameIDs)):
-                    if row["$id"] == GambaVoucherNameIDs[i]:
-                        row["name"] = f"Mystery Voucher {i+1}"
-                    if row["$id"] == GambaVoucherCaptionIDs[i]:
-                        row["name"] = f"Unlocks the corresponding\n [System:Color name=tutorial]Doubloon[/System:Color] Booster Pack."
-            if row["$id"] >= 761:
-                break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
-        data = json.load(file)
-        for i in range(0, len(GambaCouponRows)):
-            for row in data["rows"]:
-                if row["$id"] == GambaCouponRows[i]:
-                    row["releasecount"] = 3
-                    row["item_id"] = 25489
-                    row["category"] = 1
-                    row["value"] = ShopTokenRewardResults[i]
-                    row["disp_item_info"] = 0
-                    row["condition"] = StartingCondListRow + i
-                    row["title"] = StartingDLCItemTextRow + i
-                    break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", 'r+', encoding='utf-8') as file: #edits DLC items
-        data = json.load(file)
-        for i in range(0, 16):
-            data["rows"].append({"$id": StartingDLCItemTextRow + i, "style": 162, "name": f"[System:Color name=tutorial]Doubloon[/System:Color] Booster Pack {i+1}"})
-        for row in data["rows"]:
-            if row["$id"] == 8:
-                row["name"] = "[System:Color name=green]Bounty Token[/System:Color] Rewards"
-            if row["$id"] == 9:
-                row["name"] = "Poppiswap Crafting Materials"
-            if row["$id"] == 38:
-                row["name"] = "[System:Color name=tutorial]Doubloon[/System:Color] Booster Packs"
-            if row["$id"] == 10:
-                row["name"] = "Starting Item Receivals"
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-
-    global GambaShopRewardList
-    GambaShopRewardList = Helper.ExtendListtoLength([25333], 16, "inputlist[i-1] + 1")
-    random.shuffle(GambaShopRewardList)
+    global GambaShopQtyList, GambaShopCostList, GambaShopRewardList
+    GambaShopCostList, GambaShopQtyList, GambaShopRewardList = [], [], []
+    CopyofGambaShopReceiptIDs = GambaShopReceiptIDs.copy()
+    FillerRewardSet = [0,0,0]
+    for i in range(0, SetCount):
+        RewardSet = []
+        Costs = [2 + 2*i, 5 + 3*i, 10 + 6*i] # Small, Medium, Large
+        for bet in Costs:
+            Reward = random.choices([0.25*bet, 0.5*bet, bet, 1.5*bet, 2*bet, 3*bet, 5*bet], weights=[30, 20, 15, 15, 10, 5, 5], k = 1)[0] # 50% chance to lose tokens, 50% chance to make winnings back + some in theory, but can be better or worse depending on rolled values
+            Reward = round(int(Reward))
+            if Reward > 255:
+                Reward = 255
+            if Reward < 1:
+                Reward = 1
+            RewardSet.append(Reward)
+        GambaShopQtyList.append(RewardSet)
+        GambaShopRewardList.append([[25489,25489,25489], CopyofGambaShopReceiptIDs[:3], FillerRewardSet, FillerRewardSet])
+        del CopyofGambaShopReceiptIDs[:3]
+        GambaShopCostList.append(Costs)
 
 def AddDLCRewards(ChosenAreaOrder):
     BountyCollectionRewards = Helper.InclRange(1, 10)
@@ -2064,12 +2005,19 @@ def AddDLCRewards(ChosenAreaOrder):
                 for row in data["rows"]:
                     if row["$id"] == BountyCollectionRewards[i]:
                         row["condition"] = 3903
-        del data["rows"][37:]
+        del data["rows"][21:]
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     with open("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", 'r+', encoding='utf-8') as file: #edits DLC items
         data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 8:
+                row["name"] = "[System:Color name=green]Bounty Token[/System:Color] Rewards"
+            if row["$id"] == 9:
+                row["name"] = "Poppiswap Crafting Materials"
+            if row["$id"] == 10:
+                row["name"] = "Starting Item Receivals"
         for i in range(0, 10):
             data["rows"].append({"$id": StartingDLCItemTextRow + i, "style": 162, "name": f"[System:Color name=green]Bounty Token[/System:Color] Rewards, Set {i+1}"})
         file.seek(0)
@@ -2144,8 +2092,8 @@ def CustomShopSetup(ChosenAreaOrder): # Sets up the custom shops with loot
     # The number of SetItem1IDs, RewardIDs, RewardNames, RewardSP, and RewardXP should all be the same, and also equal to the number of non-zero InputTaskIDs
     # Reward IDs, RewardQtys should have same number of values in each list as SetItem1IDs, however, each list should be made up of 4 lists, 1 for each item slot that a reward can be
 
-    MultipleShopList = [CoreCrystalShop]
-    ShopList = [TokenExchangeShop] # WPManualShop, PoppiswapShop, WeaponChipShop, AuxCoreShop, PouchItemShop, DriverAccessoryShop, GambaShop
+    MultipleShopList = [CoreCrystalShop, GambaShop]
+    ShopList = [TokenExchangeShop, WPManualShop, PoppiswapShop] # WPManualShop, PoppiswapShop, WeaponChipShop, AuxCoreShop, PouchItemShop, DriverAccessoryShop, GambaShop
     CurMapRowID = Helper.GetMaxValue("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", "$id") + 1
     for shop in MultipleShopList:
         for i in range(0, len(ChosenAreaOrder)):
@@ -2181,14 +2129,15 @@ def CreateNewReceipts(): # Adds more Precious Items as Reciepts for shops
     for CurrentSet in range(1, SetCount + 1):
         for i in range(0, CoreCrystalShop["TradeCount"]): # there will always be CoreCrystalShop["TradeCount"]*SetCount receipts
             ReceiptNames.append(f"CC {CurrentSet} Item {i + 1} Receipt")
+    for CurrentSet in range(1, SetCount + 1):
         for i in range(0, GambaShop["TradeCount"]): # there will always be GambaShop["TradeCount"]*SetCount receipts
             match i:
                 case 0:
-                    ReceiptNames.append(f"Casino {CurrentSet} S. Stakes")
+                    ReceiptNames.append(f"Casino {CurrentSet} S. Scratchoff")
                 case 1:
-                    ReceiptNames.append(f"Casino {CurrentSet} M. Stakes") 
+                    ReceiptNames.append(f"Casino {CurrentSet} M. Scratchoff") 
                 case 2:
-                    ReceiptNames.append(f"Casino {CurrentSet} L. Stakes")
+                    ReceiptNames.append(f"Casino {CurrentSet} L. Scratchoff")
     NewestPreciousName = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
     StartingPreciousName = NewestPreciousName
     with open("./_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Caption
@@ -2220,10 +2169,10 @@ def CreateNewReceipts(): # Adds more Precious Items as Reciepts for shops
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def ShopLootGeneration(ShopLevel, Shop): # Makes the loot for the shops, using the existing shop template
+    NumTrades = Shop["TradeCount"]
+    ShopFillerEmpty = Helper.ExtendListtoLength([], NumTrades, "0")
+    ShopFillerFull = Helper.ExtendListtoLength([], NumTrades, "1")
     if Shop == CoreCrystalShop:
-        NumTrades = Shop["TradeCount"]
-        ShopFillerEmpty = Helper.ExtendListtoLength([], NumTrades, "0")
-        ShopFillerFull = Helper.ExtendListtoLength([], NumTrades, "1")
         Shop["InputItemIDs"] = [Helper.ExtendListtoLength([], NumTrades, "25489"), ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty] # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
         Shop["InputItemQtys"] = [CrystalShopCostList[ShopLevel], ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty] # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
         Shop["RewardItemIDs"] = CrystalShopRewardList[ShopLevel] # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
@@ -2232,6 +2181,15 @@ def ShopLootGeneration(ShopLevel, Shop): # Makes the loot for the shops, using t
         Shop["RewardSP"] = ShopFillerEmpty #FLD_QuestReward Sp
         Shop["RewardXP"] = ShopFillerEmpty # FLD_QuestReward EXP
         Shop["HideReward"] = ShopFillerEmpty # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
+    elif Shop == GambaShop:
+        Shop["InputItemIDs"] = [Helper.ExtendListtoLength([], NumTrades, "25489"), ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty] # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
+        Shop["InputItemQtys"] = [GambaShopCostList[ShopLevel], ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty] # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
+        Shop["RewardItemIDs"] = GambaShopRewardList[ShopLevel] # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
+        Shop["RewardQtys"] = [GambaShopQtyList[ShopLevel], ShopFillerFull, ShopFillerEmpty, ShopFillerEmpty] # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
+        Shop["RewardNames"] = ["Small Bet Reward", "Medium Bet Reward", "Large Bet Reward"] # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
+        Shop["RewardSP"] = ShopFillerEmpty #FLD_QuestReward Sp
+        Shop["RewardXP"] = ShopFillerEmpty # FLD_QuestReward EXP
+        Shop["HideReward"] = ShopFillerFull # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
     return Shop
 
 def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
