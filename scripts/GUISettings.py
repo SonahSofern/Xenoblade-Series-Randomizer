@@ -344,8 +344,10 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
         print("Seed: " + randoSeedEntry.get())
         print("Permalink: "+  permalinkVar.get())
         try:
-            for file in (BDATFiles + SubBDATFiles):
+            for file in BDATFiles:
                 subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            for file in SubBDATFiles:
+                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/gb/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
             # Unpacks BDATs
 
@@ -369,9 +371,9 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
             
             # for file in 
             # Outputs common_ms in the correct file structure
+            os.makedirs(f"{outputDirVar.get().strip()}/gb", exist_ok=True)
             for file in SubBDATFiles:
-                os.makedirs(f"{outputDirVar.get().strip()}/gb", exist_ok=True)
-                shutil.move(f"{outputDirVar.get().strip()}/{file}.bdat", f"{outputDirVar.get().strip()}/{file}.bdat")
+                shutil.move(f"{outputDirVar.get().strip()}/{file}.bdat", f"{outputDirVar.get().strip()}/gb/{file}.bdat")
 
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
