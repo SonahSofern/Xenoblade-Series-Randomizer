@@ -32,7 +32,6 @@ def BladeSpecials():
         artFile.seek(0)
         artFile.truncate()
         json.dump(artData, artFile, indent=2, ensure_ascii=False)
-        BladeEXSpecials()
     _DriverArts.GenCustomArtDescriptions("./XC2/_internal/JsonOutputs/common/BTL_Arts_Bl.json", "./XC2/_internal/JsonOutputs/common_ms/btl_arts_bl_ms.json", True)
 
 
@@ -46,7 +45,7 @@ def Enhancements(art, EnhancementSet):
         art[f"Enhance{i}"] = Enhancement[i-1]
         
 
-def BladeEXSpecials():
+def BladeEXSpecials(): # Ex specials use different keys and dont have all 6 legvegls of enhancement needs its own function
     with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_BlSp.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
         
