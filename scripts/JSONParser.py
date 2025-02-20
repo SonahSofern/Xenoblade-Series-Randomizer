@@ -1,6 +1,5 @@
 import copy
 import json, random, os
-import XC2.IDs as IDs
 
 
 def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list = [], rangeValidReplacements:list = [], InvalidTargetIDs:list = [], IgnoreID_AND_Key = [["",""]]): # make this a function to reuse, check the settings ot see if we even do this
@@ -32,9 +31,9 @@ def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list =
             json.dump(data, file, indent=2, ensure_ascii=False)
 
 
-def ChangeJSONLine(filenames, ids, keys, replacement, replaceAll = False):
+def ChangeJSONLine(filenames, ids, keys, replacement, replaceAll = False, Game = "XC2"):
     for name in filenames:
-        filePath = "./XC2/_internal/JsonOutputs/" + name
+        filePath = f"./{Game}/_internal/JsonOutputs/" + name
         if not os.path.exists(filePath):
           #print(filePath + " filepath does not exist.")
           continue

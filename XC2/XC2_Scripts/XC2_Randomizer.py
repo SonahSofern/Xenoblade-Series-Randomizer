@@ -1,19 +1,22 @@
 import sys, os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))) # Allows us to use the scripts folder as a module
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))) # Allows us to use the scripts folder as a module
 from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
 root = Tk()
-import Options, os, sys, subprocess
-from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkManagement, UI_Colors, Seed
+import Options
+import random, subprocess, shutil, os, threading, traceback, time, sys, datetime
+from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkManagement, UI_Colors, Seed, Interactables
 import SeedNames
+from Enhancements import *
+from IDs import *
 from tkinter.font import Font
 import tkinter as tk
 
-Game = "XCDE"
-Version = "1.0.0"
+Game = "XC2"
+Version = "1.3.0"
 CommonBdatInput = ""
-JsonOutput = "./XCDE/_internal/JsonOutputs"
+JsonOutput = "./XC2/_internal/JsonOutputs"
 MaxWidth = 1000
 windowWidth = "1550"
 windowHeight = "900"
@@ -31,19 +34,19 @@ SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettin
 GUISettings.RootsForStyling.append(root)
 defaultFont = Font(family=GUISettings.defFontVar.get(), size=GUISettings.defFontSizeVar.get())
 
-root.title(f"Xenoblade Chronicles DE Randomizer v{Version}")
+root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
 root.geometry(f'{windowWidth}x{windowHeight}')
 
 if isOnefile:
     bdat_path = os.path.join(sys._MEIPASS, 'Toolset', 'bdat-toolset-win64.exe')
 else:
-    bdat_path = "./XCDE/_internal/Toolset/bdat-toolset-win64.exe"
+    bdat_path = "./XC2/_internal/Toolset/bdat-toolset-win64.exe"
 
 if isOnefile: 
-    icon_path = os.path.join(sys._MEIPASS, 'Images', 'XCDEIcon.png')
+    icon_path = os.path.join(sys._MEIPASS, 'Images', 'XC2Icon.png')
 else:
-    icon_path = "./XCDE/_internal/Images/XCDEIcon.png"
+    icon_path = "./XC2/_internal/Images/XC2Icon.png"
 icon = PhotoImage(file=icon_path)
 root.iconphoto(True, icon)
 
@@ -52,7 +55,8 @@ root.iconphoto(True, icon)
 MainWindow = ttk.Notebook(root, height=5)
 # Frames in the notebook
 TabGeneralOuter = ttk.Frame(MainWindow) 
-TabCharactersOuter = ttk.Frame(MainWindow) 
+TabDriversOuter = ttk.Frame(MainWindow) 
+TabBladesOuter = ttk.Frame(MainWindow) 
 TabEnemiesOuter = ttk.Frame(MainWindow) 
 TabMiscOuter = ttk.Frame(MainWindow) 
 TabQOLOuter = ttk.Frame(MainWindow)
@@ -62,7 +66,8 @@ TabFunnyOuter = ttk.Frame(MainWindow)
 
 # Canvas 
 TabGeneralCanvas = Canvas(TabGeneralOuter) 
-TabCharactersCanvas = Canvas(TabCharactersOuter) 
+TabDriversCanvas = Canvas(TabDriversOuter) 
+TabBladesCanvas = Canvas(TabBladesOuter)
 TabEnemiesCanvas = Canvas(TabEnemiesOuter) 
 TabMiscCanvas = Canvas(TabMiscOuter)
 TabQOLCanvas = Canvas(TabQOLOuter)
@@ -72,7 +77,8 @@ TabFunnyCanvas = Canvas(TabFunnyOuter)
 
 # Actual Scrollable Content
 TabGeneral = ttk.Frame(TabGeneralCanvas)
-TabCharacters = ttk.Frame(TabCharactersCanvas) 
+TabDrivers = ttk.Frame(TabDriversCanvas) 
+TabBlades = ttk.Frame(TabBladesCanvas)
 TabEnemies = ttk.Frame(TabEnemiesCanvas) 
 TabMisc = ttk.Frame(TabMiscCanvas)
 TabQOL = ttk.Frame(TabQOLCanvas)
@@ -81,11 +87,12 @@ TabGameMode = ttk.Frame(TabGameModeCanvas)
 TabFunny = ttk.Frame(TabFunnyCanvas)
 
 
-GUISettings.CreateScrollBars([TabGeneralOuter, TabCharactersOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabGameModeOuter, TabFunnyOuter],[TabGeneralCanvas, TabCharactersCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabGameModeCanvas, TabFunnyCanvas],[TabGeneral, TabCharacters, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabGameMode, TabFunny])
+GUISettings.CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabGameModeOuter, TabFunnyOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabGameModeCanvas, TabFunnyCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabGameMode, TabFunny])
 
 # Tabs
 MainWindow.add(TabGeneralOuter, text ='General') 
-MainWindow.add(TabCharactersOuter, text ='Characters') 
+MainWindow.add(TabDriversOuter, text ='Drivers') 
+MainWindow.add(TabBladesOuter, text ='Blades') 
 MainWindow.add(TabEnemiesOuter, text ='Enemies') 
 MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.add(TabQOLOuter, text = 'Quality of Life')
@@ -96,21 +103,22 @@ MainWindow.pack(expand = True, fill ="both", padx=10, pady=10)
 
 Tabs = {
     1: TabGeneral,
-    2: TabCharacters,
-    3: TabEnemies,
-    4: TabMisc,
-    5: TabQOL,
-    6: TabFunny,
-    7: TabCosmetics,
-    8: TabGameMode
+    2: TabDrivers,
+    3: TabBlades,
+    4: TabEnemies,
+    5: TabMisc,
+    6: TabQOL,
+    7: TabFunny,
+    8: TabCosmetics,
+    9: TabGameMode
 }
 
-Options.OptionList.sort(key= lambda x: x.name) # Sorts alphabetically
-for opt in Options.OptionList: # Cant reference directly because of circular imports :/
+Interactables.OptionList.sort(key= lambda x: x.name) # Sorts alphabetically
+for opt in Interactables.OptionList: # Cant reference directly because of circular imports :/
     opt.DisplayOption(Tabs[opt.tab])
 
 def ShowTitleScreenText():
-    JSONParser.ChangeJSONLine(["bdat_common_ms/MNU_title_ms.json"],[8], ["name"], f"Randomizer v{Version}") # Change Title Version to Randomizer vX.x.x
+    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], f"Randomizer v{Version}") # Change Title Version to Randomizer vX.x.x
 
 
 def GenRandomSeed(randoSeedEntryVar):
@@ -155,8 +163,8 @@ seedVar = SavedOptions.SavedEntry("Seed", seedEntryVar)
 
 # Save and Load Last Options
 EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
-SavedOptions.loadData(EntriesToSave + Options.OptionList, SavedOptionsFileName, Game)
-EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Options.OptionList)) + list((x.spinBoxVal for x in Options.OptionList if x.spinBoxVal is not None)) + list((sub.checkBoxVal for x in Options.OptionList for sub in x.subOptions))
+SavedOptions.loadData(EntriesToSave + Interactables.OptionList, SavedOptionsFileName, Game)
+EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.OptionList)) + list((x.spinBoxVal for x in Interactables.OptionList if x.spinBoxVal is not None)) + list((sub.checkBoxVal for x in Interactables.OptionList for sub in x.subOptions))
 
 # Permalink Options/Variables
 permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame")
@@ -168,14 +176,14 @@ permalinkButton.state(["disabled"])
 permalinkFrame.pack(padx=10, pady=2, anchor="w")
 permalinkButton.pack(side="left", padx=2)
 permalinkEntry.pack(side='left', padx=2)
-PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:Options.UpdateAllStates())
+PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:Interactables.UpdateAllStates())
 
 
 # Bottom Left Progress Display Text
 randoProgressDisplay = ttk.Label(text="", anchor="e", padding=2, style="BorderlessLabel.TLabel")
 
 # Randomize Button
-RandomizeButton = ttk.Button(text='Randomize', command=(lambda: GUISettings.Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Options.OptionList, ["bdat_common"], ["bdat_common_ms"],[lambda: ShowTitleScreenText()] )))
+RandomizeButton = ttk.Button(text='Randomize', command=lambda: (GUISettings.Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList,["common", "common_gmk"],["common_ms"],[lambda: ShowTitleScreenText(), lambda: AddCustomEnhancements()])))
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
 RandomizeButton.config(padding=5)
 
@@ -183,12 +191,12 @@ RandomizeButton.config(padding=5)
 if isOnefile:  # If the app is running as a bundled executable
     icon_path = os.path.join(sys._MEIPASS, 'Images', 'SmallSettingsCog.png')
 else:  # If running as a script (not bundled)
-    icon_path = "./XC2/_internal/Images/SmallSettingsCog.png"
+    icon_path = "./_internal/Images/SmallSettingsCog.png"
 Cog = PhotoImage(file=icon_path)
 SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, GUISettings.defGUIThemeVar))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
-root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Options.OptionList, SavedOptionsFileName, Game), root.destroy()))
+root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Interactables.OptionList, SavedOptionsFileName, Game), root.destroy()))
 GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
 
 
