@@ -331,7 +331,7 @@ def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touc
         Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
         OuterFrames[i].pack(expand=True, fill="both")
 
-def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATUnpackCommands = [], ExtraCommands = []):
+def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = []):
     def ThreadedRandomize():
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
@@ -344,14 +344,14 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
         print("Seed: " + randoSeedEntry.get())
         print("Permalink: "+  permalinkVar.get())
         try:
-            for file in BDATUnpackCommands:
-                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/gb/{file}", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            for file in (BDATFiles + SubBDATFiles):
+                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
             # Unpacks BDATs
 
         except:
             print(f"{traceback.format_exc()}") # shows the full error
-            randoProgressDisplay.config(text="Invalid Input Directory")
+            randoProgressDisplay.config(text="Failed Inputs")
             time.sleep(3)
             randoProgressDisplay.config(text="")
             RandomizeButton.config(state=NORMAL)
@@ -367,10 +367,11 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
             # Packs BDATs
             subprocess.run([bdat_path, "pack", JsonOutput, "-o", outputDirVar.get().strip(), "-f", "json"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
             
-            for file in 
+            # for file in 
             # Outputs common_ms in the correct file structure
-            os.makedirs(f"{outputDirVar.get().strip()}/gb", exist_ok=True)
-            shutil.move(f"{outputDirVar.get().strip()}/common_ms.bdat", f"{outputDirVar.get().strip()}/gb/common_ms.bdat")
+            for file in SubBDATFiles:
+                os.makedirs(f"{outputDirVar.get().strip()}/gb", exist_ok=True)
+                shutil.move(f"{outputDirVar.get().strip()}/{file}.bdat", f"{outputDirVar.get().strip()}/{file}.bdat")
 
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
@@ -381,7 +382,7 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
             print(f"Finished at {datetime.datetime.now()}")
         except:
             print(f"{traceback.format_exc()}") # shows the full error
-            randoProgressDisplay.config(text="Invalid Output Directory")
+            randoProgressDisplay.config(text="Failed Outputs")
 
         
         # Re-Enables Randomize Button
