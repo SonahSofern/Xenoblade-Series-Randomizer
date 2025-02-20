@@ -279,15 +279,15 @@ FasterDriverSkillTrees_2 = SubOption("2x", FasterDriverSkillTrees, [lambda: Help
 FasterDriverSkillTrees_4 = SubOption("4x", FasterDriverSkillTrees, [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], ['row[key] // 4'])], _defState = False)
 FasterDriverSkillTrees_16 = SubOption("16x", FasterDriverSkillTrees, [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], ['row[key] // 16'])], _defState = False)
 FasterDriverSkillTrees_32 = SubOption("32x", FasterDriverSkillTrees, [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], ['row[key] // 32'])], _defState = False)
-
 FasterLevelsOption = Option("Faster Levels", QOL, "Decreases EXP required for each levelup")
 FasterLevelsOption_2 = SubOption("2x", FasterLevelsOption, [lambda: Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 2'])], _defState = False)
 FasterLevelsOption_4 = SubOption("4x", FasterLevelsOption, [lambda: Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 4'])], _defState = False)
 FasterLevelsOption_8 = SubOption("8x", FasterLevelsOption, [lambda: Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 8'])], _defState = False)
 FasterLevelsOption_16 = SubOption("16x", FasterLevelsOption, [lambda: Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 16'])], _defState = False)
 FasterLevelsOption_32 = SubOption("32x", FasterLevelsOption, [lambda: Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 32'])], _defState = False)
-
-
+ShortcutsOption = Option("Shortcuts", QOL, "Various speedups for the main story quests")
+ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
+ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
 # Funny
 ProjTreasureChestOption = Option("Projectile Treasure Chests", Funny, "Launches your items from chests",[lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [15])])
 BladeSizeOption = Option("Blade Size", Funny, "Randomizes the size of Blades", [lambda: Scales.BladeScales()], _hasSpinBox = True)
