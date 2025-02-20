@@ -59,7 +59,7 @@ class Enhancement:
             DisplayTagID += 1
             DisplayTagList.append(DisplayTagDict)
 
-    def RollEnhancement(self, forcedRarity = None):
+    def RollEnhancement(self, forcedRarity = None, scalingFactor = 1):
         global EnhanceID
         self.id = EnhanceID
         EnhanceID += 1
@@ -70,21 +70,23 @@ class Enhancement:
             self.Rarity = random.choice([Common,Common,Common, Rare,Rare, Legendary])
         else:
             self.Rarity = forcedRarity
+        self.scalingFactor = scalingFactor
         def SetParams(ParameterChoices, isReverse):
             Common, Rare, Legendary = (2, 1, 0) if isReverse else (0, 1, 2)
             Pstep = 1 if ParameterChoices == Baby else 5
-                
+            Multiplier = 1/scalingFactor if isReverse else scalingFactor
+
             if ParameterChoices == [0,0,0,0]:
                 Parameter = 0
             elif len(ParameterChoices) == 1:
                 Parameter = ParameterChoices[0]
             else:
                 if self.Rarity == Common:
-                    Parameter = random.randrange(ParameterChoices[0],ParameterChoices[1]+1,Pstep)
+                    Parameter = random.randrange(round(ParameterChoices[0]*Multiplier),round(ParameterChoices[1]*Multiplier+1),Pstep)
                 elif self.Rarity == Rare:
-                    Parameter = random.randrange(ParameterChoices[1],ParameterChoices[2]+1,Pstep)
+                    Parameter = random.randrange(round(ParameterChoices[1]*Multiplier),round(ParameterChoices[2]*Multiplier)+1,Pstep)
                 elif self.Rarity == Legendary:
-                    Parameter = random.randrange(ParameterChoices[2],ParameterChoices[3]+1,Pstep)
+                    Parameter = random.randrange(round(ParameterChoices[2]*Multiplier),round(ParameterChoices[3]*Multiplier)+1,Pstep)
 
             return Parameter
             
