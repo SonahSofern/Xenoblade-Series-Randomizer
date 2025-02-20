@@ -1,8 +1,9 @@
 import json, random
 
 def RandomizePcArts():
-    with open("./XCDE/_internal/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as artFile:
+    with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
+        print("Donzo")
         for art in artData["rows"]:
             art["pc"] = random.randrange(1,9)
         artFile.seek(0)

@@ -1,5 +1,6 @@
 import PcArts
 from scripts.Interactables import Option, SubOption
+import PcArts
 OptionList =[]
 
 General = 1
@@ -11,4 +12,4 @@ Funny = 6
 CosmeticsTab = 7
 GameModeTab = 8
 
-Test = Option("Test",General, "Test")
+PlayerArtsOption = Option("Player Arts",Character, "Randomizes the effects of your arts", [lambda: PcArts.RandomizePcArts()])
