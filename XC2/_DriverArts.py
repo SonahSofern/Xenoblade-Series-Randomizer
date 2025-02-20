@@ -81,6 +81,8 @@ def Reaction(art, multReact):
         "BD": [10,11,12,13,14],
     }
     for i in range(1,17):
+        if art[f"ReAct{i}"] > 14: # Dont replace weird ones that just move blades
+            continue
         name,values = random.choice(list(ValidReactions.items()))
         if art[f"HitFrm{i}"] == 0 and (i != 16 and art[f"HitFrm{i+1}"] == 0): # Need the second condition because zenobias Ascension Blade 129 has no hit on frame 1 but afterwards has hits # Make sure there is a hit
             art[f"ReAct{i-1}"] = random.choice(values) # Adds something to the last hit
@@ -117,7 +119,7 @@ def Damage(art):
         DMG += step
         art[f"DmgMgn{i}"] = DMG
         
-def Enhancements(art, EnhancementSet): 
+def Enhancements(art, EnhancementSet):  # Go through and fix these to be variables of the function so i can reference all values in the name for genart description so i can make level 4 specials have the highest level effect and it still reads those effects
     Enhancement = random.choice(EnhancementSet)
     for i in range(1,7):
         art[f"Enhance{i}"] = Enhancement[i-1]
@@ -311,11 +313,12 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False):
                         CombinedCaption[3] += f"[System:Color name=green]{key}[/System:Color]"
                         break
                     
-                # Debuffs                       
-                for key,values in Debuffs.items():
-                    if art["ArtsDeBuff"] in values:
-                        CombinedCaption[4] = f"[System:Color name=red]{key}[/System:Color]"
-                        break
+                # Debuffs   
+                if art.get("ArtsDeBuff"):                    
+                    for key,values in Debuffs.items():
+                        if art["ArtsDeBuff"] in values:
+                            CombinedCaption[4] = f"[System:Color name=red]{key}[/System:Color]"
+                            break
 
                 # Putting it all together
                 TotalArtDescription = ""    
@@ -333,6 +336,9 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False):
                         if CombinedCaption[i] != "":
                             TotalArtDescription += " / "
                             TotalArtDescription += CombinedCaption[i]
+
+
+
 
                 if TotalArtDescription == "":
                     TotalArtDescription = "No Effects"
