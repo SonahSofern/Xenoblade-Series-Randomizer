@@ -303,7 +303,7 @@ HealingUpMaxAffinity = Enhancement("Healing",155, 165, Small)
 AggroPerSecondANDAggroUp  = Enhancement("Aggy",156, 166, Small, Small)
 MoreDamTakeLessAllyLowOrDown = Enhancement("Super",157, 167, Large, Small)
 StopThinking = Enhancement("Enthrall",158, 168, Medium, Baby)
-LowHPSpecialUp = Enhancement("Specialist",159, 169, Baby) #Uses decimals weird one not sure how it scales boosted special shows up wrong
+LowHPSpecialUp = Enhancement("Specialist",159, 169, [0.5,0.7,1,1.5]) #Uses decimals weird one not sure how it scales boosted special shows up wrong
 TranquilGuard = Enhancement("Stance",160, 171, Small)
 HPRestoreFusionCombo = Enhancement("Fusion",161, 172, Baby)
 AttackUpGoldUp = Enhancement("Mercenary",162, 173, Baby, Mega, Description="Increases attack power by [ML:Enhance kind=Param1 ]% as gold is\ncollected during battle (max: [ML:Enhance kind=Param2 ]%).")
