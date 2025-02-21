@@ -1756,7 +1756,6 @@ def PouchItemRewards():
         data = json.load(file)
         for i in range(0, 5): # we want to add room for our custom pouch items
             data["rows"].append({"$id": NewPouchItemRow + i, "Name": NewPouchItemNameRow + i, "Caption": 0, "Category": 24, "Zone": 3, "Rarity": 2, "Price": 0, "Type": NewPouchBuffRow + i, "Time": 60, "ValueMax": 10, "TrustPoint": 0, "sortJP": 0, "sortGE": 0, "sortFR": 0, "sortSP": 0, "sortIT": 0, "sortGB": 0, "sortCN": 0, "sortTW": 0, "sortKR": 0})
-            print()
             ValidPouchItemsUMHunt.append(NewPouchItemRow + i) # we need to add our custom pouch items to the valid ids
         for i in range(12, 25): # this gets the type of each pouch item
             CurrentItemTypeList = []
