@@ -50,8 +50,6 @@ LandmarkPool = {
 
 ProofofPurchaseIDs = Helper.InclRange(25306, 25321)
 
-ValidPouchItems = [x for x in IDs.PouchItems if x not in [40314, 40428]]
-
 InvalidMapNPCs = [8284, 5487]
 
 ValidRandomizeableBladeIDs = [1001, 1002, 1008, 1009, 1010, 1011, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1050, 1104, 1105, 1106, 1107, 1108, 1109, 1111]
@@ -89,27 +87,11 @@ NPCIDtoName = {2109: 'npc41300011_02', 2236: 'npc42350117_01', 2038: 'npc0060011
 TokenExchangeRewards = []
 for i in range(0, 10):
     TokenExchangeRewards.append([random.randint(2 + 4*i, 4 + 5*i)])
-CoreCrystalCostDistribution = [5, 10, 15, 20, 5, 10, 15, 10, 15, 20, 30, 40, 50, 130, 145, 160]
 ManualCostDistribution = [3, 6, 9, 35, 50, 9, 17, 33]
-AuxCoreShopRewardDistribution = [] # temporary
-PouchItemShopRewardDistribution = [] # temporary
-AccessoryShopRewardDistribution = [] # temporary
-GambaShopQtyList = [] # temporary
-
-CommonAuxCoreCosts = [3, 6, 9, 12, 3, 6, 9]
-RareAuxCoreCosts = [10, 20, 10, 20, 15]
-LegendaryAuxCoreCosts = [60, 60, 70, 70]
-AuxCoreShopCostDistribution = CommonAuxCoreCosts + RareAuxCoreCosts + LegendaryAuxCoreCosts
 
 PouchItemShopCostDistribution = [5,5,5,5,10,5,5,5,15,15,15,10,10,15,10,5]
 
-CommonAccessoryCosts = [4, 8, 12, 16, 4, 8, 12]
-RareAccessoryCosts = [20, 30, 20, 30, 35]
-LegendaryAccessoryCosts = [60, 60, 70, 70]
-AccessoryShopCostDistribution = CommonAccessoryCosts + RareAccessoryCosts + LegendaryAccessoryCosts
-
 PoppiswapShopCosts = [10, 20, 30, 40, 50, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44]
-GambaShopCosts = Helper.ExtendListtoLength([], 16, "15")
 
 # Filler Lists
 TokenFillerList = Helper.ExtendListtoLength([], 10, "0") # This gets used so much, I'd rather not screw up typing it out, also by initializing it here, it doesn't calculate the value every time in the dictionary
@@ -188,15 +170,7 @@ PouchItemShop = {
     "ShopIcon": 426, # MNU_ShopList ShopIcon
     "ShopIDtoReplace": 114, # MNU_ShopList $id
     "ShopName": "Pouch Item Patisserie", # fld_shopname name
-    "TradeCount": 16, # Number of Trades the shop will have
-    "InputItemIDs": [Helper.ExtendListtoLength([], 16, "25489"), EmptyFillerList, EmptyFillerList, EmptyFillerList, EmptyFillerList], # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
-    "InputItemQtys": [PouchItemShopCostDistribution, EmptyFillerList, EmptyFillerList, EmptyFillerList, EmptyFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
-    "RewardItemIDs": PouchItemShopRewardDistribution, # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
-    "RewardQtys": [Helper.ExtendListtoLength([1,1,1,1], 16, "2"), Helper.ExtendListtoLength([1,1,1,1], 16, "2"), Helper.ExtendListtoLength([1,1,1,1], 16, "2"), Helper.ExtendListtoLength([1,1,1,1], 16, "0")], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
-    "RewardNames": ["Mystery Set 1", "Mystery Set 2", "Mystery Set 3", "Mystery Set 4", "Staple Foods", "Vegetables", "Meat", "Seafood", "Desserts", "Drinks", "Instruments", "Art", "Literature", "Board Games", "Cosmetics", "Textiles"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
-    "RewardSP": EmptyFillerList, #FLD_QuestReward Sp
-    "RewardXP": EmptyFillerList, # FLD_QuestReward EXP
-    "HideReward": Helper.ExtendListtoLength([1,1,1,1], 16, "0") # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
+    "TradeCount": 5, # Number of Trades the shop will have
 }
 
 DriverAccessoryShop = {
@@ -205,15 +179,7 @@ DriverAccessoryShop = {
     "ShopIcon": 446, # MNU_ShopList ShopIcon
     "ShopIDtoReplace": 23, # MNU_ShopList $id
     "ShopName": "Excess Accessories", # fld_shopname name
-    "TradeCount": 16, # Number of Trades the shop will have
-    "InputItemIDs": [Helper.ExtendListtoLength([], 16, "25489"), EmptyFillerList, EmptyFillerList, EmptyFillerList, EmptyFillerList], # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
-    "InputItemQtys": [AccessoryShopCostDistribution, EmptyFillerList, EmptyFillerList, EmptyFillerList, EmptyFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
-    "RewardItemIDs": AccessoryShopRewardDistribution, # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
-    "RewardQtys": [FullFillerList, FullFillerList, FullFillerList, FullFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
-    "RewardNames": ["[System:Color name=blue]Common[/System:Color] Damage 1", "[System:Color name=blue]Common[/System:Color] Damage 2", "[System:Color name=blue]Common[/System:Color] Damage 3", "[System:Color name=blue]Common[/System:Color] Damage 4", "[System:Color name=blue]Common[/System:Color] Defense 1", "[System:Color name=blue]Common[/System:Color] Defense 2", "[System:Color name=blue]Common[/System:Color] Unique", "[System:Color name=red]Rare[/System:Color] Damage 1", "[System:Color name=red]Rare[/System:Color] Damage 2", "[System:Color name=red]Rare[/System:Color] Defense 1", "[System:Color name=red]Rare[/System:Color] Defense 2", "[System:Color name=red]Rare[/System:Color] Unique", "[System:Color name=tutorial]Legendary[/System:Color] Damage", "[System:Color name=tutorial]Legendary[/System:Color] Defense", "[System:Color name=tutorial]Legendary[/System:Color] Unique 1", "[System:Color name=tutorial]Legendary[/System:Color] Unique 2"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
-    "RewardSP": EmptyFillerList, #FLD_QuestReward Sp
-    "RewardXP": EmptyFillerList, # FLD_QuestReward EXP
-    "HideReward": FullFillerList # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
+    "TradeCount": 9, # Number of Trades the shop will have
 }
 
 PoppiswapShop = {
@@ -1672,7 +1638,7 @@ def AuxCoreRewards(): # Makes the Aux Core Bundles
     # starting odds, changes
     # common, rare, legendary
     SecretAuxCores = [UMFlatCritBoost, UMSurpriseAttackUp, UMSpecialRecievesAfterImage, UMAutoSpeedArtsSpeed, UMPhyAndEthDefenseUp, UMOnBlockNullDamage, UMFlatBlockBoost]
-    NumTrades = AuxCoreShop["TradeCount"]
+    NumTrades = DriverAccessoryShop["TradeCount"]
     RarityOdds = [85, 10, 5]
     AllRarities, AllAugments, AllMultipliers, AllSets, AllTypes = [], [], [], [], [] # i really could have just made this a dictionary, but i don't do anything except parse the list, so whatever
     for setnum in range(SetCount):
@@ -1772,25 +1738,45 @@ def AuxCoreRewards(): # Makes the Aux Core Bundles
         AuxCoreShopCostDistribution.append(CurAuxCoreCosts)
         AuxCoreShopRewardDistribution.append(Helper.ExtendListtoLength([17001 + (setnum * NumTrades)], NumTrades, "inputlist[i-1] + 1"))
 
-    
 def PouchItemRewards():
-    global PouchItemShopRewardDistribution
-    PouchItemShopRewardDistribution = [[],[],[],[]]
+    global PouchItemShopRewardDistribution, PouchItemShopCostDistribution, PouchItemNameDistribution, SecretPouchItemIDs
+    PouchItemShopRewardDistribution, PouchItemShopCostDistribution, PouchItemNameDistribution, SecretPouchItemIDs = [], [], [], []
+    global ValidPouchItemsUMHunt
+    ValidPouchItemsUMHunt = [x for x in IDs.PouchItems if x not in [40314, 40428]]
+    Cheap, Quality, Cuisine, Michelin = 5, 10, 15, 55 # these are the base costs for a given pouch item (Michelin is there for the custom pouch items)
+    PouchFoodTypetoCostName = {12: [Quality, "Staple Foods"], 13: [Cheap, "Vegetables"], 14: [Cheap, "Meat"], 15: [Cheap, "Seafood"], 16: [Cuisine, "Desserts"], 17: [Cuisine, "Drinks"], 18: [Cuisine, "Instruments"], 19: [Quality, "Art"], 20: [Quality, "Literature"], 21: [Cuisine, "Board Games"], 22: [Quality, "Cosmetics"], 23: [Cheap, "Textiles"], 24: [Michelin, "Secret"]}
+    NumTrades = PouchItemShop["TradeCount"]
+    NewPouchItemRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/ITM_FavoriteList.json", "$id") + 1
+    NewPouchItemNameRow = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/itm_favorite.json", "$id") + 1
+    NewPouchBuffRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/BTL_PouchBuffSet.json", "$id") + 1
+    SecretPouchItemIDs = Helper.InclRange(NewPouchItemRow, NewPouchItemRow + 4)
+    PouchItemStatCaps = {1: 50.0, 2: 50.0, 3: 30.0, 4: 30.0, 5: 1.0, 6: 50.0, 7: 300.0, 8: 50.0, 9: 50.0, 10: 8.0, 11: 100.0, 12: 100.0}
+    AllItemTypeList = []
     with open("./_internal/JsonOutputs/common/ITM_FavoriteList.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
-        for i in range(0, 4):
-            for j in range(0, 4):
-                PouchItemShopRewardDistribution[i].append(random.choice(ValidPouchItems))
-        for i in range(12, 24):
+        for i in range(0, 5): # we want to add room for our custom pouch items
+            data["rows"].append({"$id": NewPouchItemRow + i, "Name": NewPouchItemNameRow + i, "Caption": 0, "Category": 24, "Zone": 3, "Rarity": 2, "Price": 0, "Type": NewPouchBuffRow + i, "Time": 60, "ValueMax": 10, "TrustPoint": 0, "sortJP": 0, "sortGE": 0, "sortFR": 0, "sortSP": 0, "sortIT": 0, "sortGB": 0, "sortCN": 0, "sortTW": 0, "sortKR": 0})
+            print()
+            ValidPouchItemsUMHunt.append(NewPouchItemRow + i) # we need to add our custom pouch items to the valid ids
+        for i in range(12, 25): # this gets the type of each pouch item
             CurrentItemTypeList = []
             for row in data["rows"]:
-                if (row["Category"] == i) & (row["$id"] in ValidPouchItems):
+                if (row["Category"] == i) & (row["$id"] in ValidPouchItemsUMHunt):
                     CurrentItemTypeList.append(row["$id"])
-            ChosenItems = random.sample(CurrentItemTypeList, 3)
-            PouchItemShopRewardDistribution[0].append(ChosenItems[0])
-            PouchItemShopRewardDistribution[1].append(ChosenItems[1])
-            PouchItemShopRewardDistribution[2].append(ChosenItems[2])
-        PouchItemShopRewardDistribution[3] = Helper.ExtendListtoLength(PouchItemShopRewardDistribution[2], 16, "0")    
+                    if i == 24: # we want to remove the custom category, since we already put it in a bucket correctly, and the game won't recognize the custom category
+                        row["Category"] = random.randint(12, 23)
+            AllItemTypeList.append(CurrentItemTypeList)
+        PouchItem3IDs, PouchItem4IDs = Helper.ExtendListtoLength([0], NumTrades, "0"), Helper.ExtendListtoLength([0], NumTrades, "0")
+        for setnum in range(SetCount):
+            PouchItem1IDs, PouchItem2IDs = [], []
+            PouchItemTypes = random.choices(Helper.InclRange(12, 24), k = NumTrades)
+            for trade in range(NumTrades):
+                ChosenPouchItems = random.choices(AllItemTypeList[PouchItemTypes[trade] - 12], k = 2)
+                PouchItem1IDs.append(ChosenPouchItems[0])
+                PouchItem2IDs.append(ChosenPouchItems[1])
+            PouchItemShopCostDistribution.append([PouchFoodTypetoCostName[key][0] for key in PouchItemTypes])
+            PouchItemNameDistribution.append([PouchFoodTypetoCostName[key][1] for key in PouchItemTypes])
+            PouchItemShopRewardDistribution.append([PouchItem1IDs, PouchItem2IDs, PouchItem3IDs, PouchItem4IDs])
         for row in data["rows"]: # Change the duration of all to 60 minutes, and they all give no trust points
             row["Time"] = 60
             row["ValueMax"] = 10
@@ -1798,50 +1784,56 @@ def PouchItemRewards():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common_ms/itm_favorite.json", 'r+', encoding='utf-8') as file: # Giving the new pouch items names
+        data = json.load(file)
+        for i in range(0, len(SecretPouchItemIDs)):
+                data["rows"].append({"$id": NewPouchItemNameRow + i, "style": 36, "name": f"[System:Color name=tutorial]Superfood {i+1}[/System:Color]"})
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./_internal/JsonOutputs/common/BTL_PouchBuffSet.json", 'r+', encoding='utf-8') as file: # Giving the new pouch items their buffs
+        data = json.load(file)
+        for i in range(0, len(SecretPouchItemIDs)):
+            BuffChoices = random.sample(Helper.InclRange(1, 12), 3)
+            data["rows"].append({"$id": NewPouchBuffRow + i, "PBuff1": BuffChoices[0], "PBuffParam1": PouchItemStatCaps[BuffChoices[0]], "PBuff2": BuffChoices[1], "PBuffParam2": PouchItemStatCaps[BuffChoices[1]], "PBuff3": BuffChoices[2], "PBuffParam3": PouchItemStatCaps[BuffChoices[2]]})
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def AccessoryShopRewards(): # Creates the accessory shop
-    AccessorySkillGroups = {
-        "Common": {
-            "Damage": [TitanDamageUp, MachineDamageUp, HumanoidDamageUp, AquaticDamageUp, AerialDamageUp, InsectDamageUp, BeastDamageUp, CritDamageUp, PercentDoubleAuto, FrontDamageUp, SideDamageUp, BackDamageUp, SmashDamageUp, HigherLVEnemyDamageUp, AllyDownDamageUp, BattleDurationDamageUp],
-            "Defensive": [HPLowEvasion, HPLowBlockRate, ReduceSpikeDamage, SpecialAndArtsAggroDown, AggroPerSecondANDAggroUp, LowHPRegen, AllDebuffRes, TastySnack, DoomRes, TauntRes, BladeShackRes, DriverShackRes],
-            "Playstyle Defining": [SpecialRechargeCancelling, EnemyDropGoldOnHit, DealTakeMore, AwakenPurge, BurstDestroyAnotherOrb, AttackUpGoldUp, DidIDoThat]
-        },
-        "Rare": {
-            "Damage": [IndoorsDamageUp, OutdoorsDamageUp, DamageUpOnEnemyKill, DoubleHitExtraAutoDamage, ToppleANDLaunchDamageUp, AutoAttackCancelDamageUp, AggroedEnemyDamageUp, Transmigration, OppositeGenderBladeDamageUp, BladeSwitchDamageUp, BreakResDown],
-            "Defensive": [WhenDiesHealAllies, SmallHpPotCreate, Twang, Jamming, PotionEffectUp, EtherCounter, PhysCounter, RechargeOnEvade, FlatHPBoost, ArtUseHeal, AgiBoost],
-            "Playstyle Defining": [CritHeal, PartyGaugeCritFill, GlassCannon, CombatMoveSpeed, DestroyOrbOpposingElement, TargetNearbyOrbsChainAttack, PartyGaugeDriverArtFill]
-        },
-        "Legendary": {
-            "Damage": [KaiserZone, VersusBossUniqueEnemyDamageUp, AutoSpeedArtsSpeed, DamageUpOnCancel, FlatStrengthBoost, FlatEtherBoost],
-            "Defensive": [GravityPinwheel, RestoreHitDamageToParty, ForeSight, FlatAgiBoost, HPBoost, CritHeal],
-            "Playstyle Defining": [RecoverRechargeCrit, HpPotChanceFor2, BladeComboOrbAdder, PotionPickupDamageUp, Vision, DamageUpPerCrit, TakeDamageHeal, DamagePerEvadeUp, PartyHealBladeSwitch, LowHPSpecialUp]
-        },
-        "Secret": {
-            "All": [UMAllWeaponAttackUp, UMSpecialRechargeCancelling, UMHigherLVEnemyDamageUp, UMVision, UMBreakResDown, UMStrengthBoost, UMEtherBoost]
-        }
+    global AccessoryShopRewardDistribution, AccessoryShopCostDistribution, AccessoryNameDistribution, SecretAccessoryIDs
+    AccessoryShopRewardDistribution, AccessoryShopCostDistribution, AccessoryNameDistribution, SecretAccessoryIDs = [], [], [], []
+    AccessoryTypeGroups = {
+        "Damage": [TitanDamageUp, MachineDamageUp, HumanoidDamageUp, AquaticDamageUp, AerialDamageUp, InsectDamageUp, BeastDamageUp, CritDamageUp, PercentDoubleAuto, FrontDamageUp, SideDamageUp, BackDamageUp, SmashDamageUp, HigherLVEnemyDamageUp, AllyDownDamageUp, BattleDurationDamageUp,IndoorsDamageUp, OutdoorsDamageUp, DamageUpOnEnemyKill, DoubleHitExtraAutoDamage, ToppleANDLaunchDamageUp, AutoAttackCancelDamageUp, AggroedEnemyDamageUp, Transmigration, OppositeGenderBladeDamageUp, BladeSwitchDamageUp, BreakResDown,KaiserZone, VersusBossUniqueEnemyDamageUp, AutoSpeedArtsSpeed, DamageUpOnCancel, FlatStrengthBoost, FlatEtherBoost],
+        "Defensive": [HPLowEvasion, HPLowBlockRate, ReduceSpikeDamage, SpecialAndArtsAggroDown, AggroPerSecondANDAggroUp, LowHPRegen, AllDebuffRes, TastySnack, DoomRes, TauntRes, BladeShackRes, DriverShackRes, WhenDiesHealAllies, SmallHpPotCreate, Twang, Jamming, PotionEffectUp, EtherCounter, PhysCounter, RechargeOnEvade, FlatHPBoost, ArtUseHeal, AgiBoost,GravityPinwheel, RestoreHitDamageToParty, ForeSight, FlatAgiBoost, HPBoost, CritHeal],
+        "Playstyle Defining": [SpecialRechargeCancelling, EnemyDropGoldOnHit, DealTakeMore, AwakenPurge, BurstDestroyAnotherOrb, AttackUpGoldUp, DidIDoThat,CritHeal, PartyGaugeCritFill, GlassCannon, CombatMoveSpeed, DestroyOrbOpposingElement, TargetNearbyOrbsChainAttack, PartyGaugeDriverArtFill,RecoverRechargeCrit, HpPotChanceFor2, BladeComboOrbAdder, PotionPickupDamageUp, Vision, DamageUpPerCrit, TakeDamageHeal, DamagePerEvadeUp, PartyHealBladeSwitch, LowHPSpecialUp]
     }
-
     Common, Rare, Legendary = 0, 1, 2
-
-    ChosenAccessories = {
-        Common: {
-            "Damage": random.sample(AccessorySkillGroups["Common"]["Damage"], 16),
-            "Defensive": random.sample(AccessorySkillGroups["Common"]["Defensive"], 8),
-            "Playstyle Defining": random.sample(AccessorySkillGroups["Common"]["Playstyle Defining"], 4)
-        },
-        Rare: {
-            "Damage": random.sample(AccessorySkillGroups["Rare"]["Damage"], 8),
-            "Defensive": random.sample(AccessorySkillGroups["Rare"]["Defensive"], 8),
-            "Playstyle Defining": random.sample(AccessorySkillGroups["Rare"]["Playstyle Defining"], 4)
-        },
-        Legendary: {
-            "Damage": random.sample(AccessorySkillGroups["Legendary"]["Damage"], 4),
-            "Defensive": random.sample(AccessorySkillGroups["Legendary"]["Defensive"], 4),
-            "Playstyle Defining": random.sample(AccessorySkillGroups["Legendary"]["Playstyle Defining"], 8)
-        }
-    }
-
-    SecretAccessories = AccessorySkillGroups["Secret"]["All"]
+    # starting odds, changes
+    # common, rare, legendary
+    SecretAccessories = [UMAllWeaponAttackUp, UMSpecialRechargeCancelling, UMHigherLVEnemyDamageUp, UMVision, UMBreakResDown, UMStrengthBoost, UMEtherBoost]
+    NumTrades = DriverAccessoryShop["TradeCount"]
+    RarityOdds = [85, 10, 5]
+    AllRarities, AllAugments, AllMultipliers, AllSets, AllTypes = [], [], [], [], [] # i really could have just made this a dictionary, but i don't do anything except parse the list, so whatever
+    for setnum in range(SetCount):
+        ChosenAugments = []
+        ChosenTypes = []
+        match setnum:
+            case setnum if setnum <= 4:
+                RarityOdds = [RarityOdds[0] - 12, RarityOdds[1] + 10, RarityOdds[2] + 2]
+            case _:
+                RarityOdds = [RarityOdds[0] - 4, RarityOdds[1] - 8, RarityOdds[2] + 12]
+        ChosenRarities = random.choices([Common, Rare, Legendary], weights = RarityOdds, k = NumTrades)
+        ChosenAugments.extend(random.choices(AccessoryTypeGroups["Damage"], k = NumTrades//3))
+        ChosenAugments.extend(random.choices(AccessoryTypeGroups["Defensive"], k = NumTrades//3))
+        ChosenAugments.extend(random.choices(AccessoryTypeGroups["Playstyle Defining"], k = NumTrades//3))
+        ChosenMultipliers = Helper.ExtendListtoLength([0.75 + (setnum + 1) * 0.05], NumTrades, "inputlist[i-1]")
+        ChosenTypes = ["Damage", "Damage", "Damage", "Defensive", "Defensive", "Defensive", "Playstyle Defining", "Playstyle Defining", "Playstyle Defining"] # grug smash keyboard and type out by hand
+        AllSets.extend(Helper.ExtendListtoLength([setnum], NumTrades, "inputlist[i-1]"))
+        AllRarities.extend(ChosenRarities)
+        AllAugments.extend(ChosenAugments)
+        AllTypes.extend(ChosenTypes)
+        AllMultipliers.extend(ChosenMultipliers)
 
     AccessoryTypesandNames = { # What icon should go with what noun:
         0:["Sandals", "Crocs", "Jordans", "Boots", "Sneakers"], 
@@ -1858,41 +1850,37 @@ def AccessoryShopRewards(): # Creates the accessory shop
 
     with open("./_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file: 
         with open("./_internal/JsonOutputs/common_ms/itm_pcequip.json", 'r+', encoding='utf-8') as namefile:
-            
+    
             namedata = json.load(namefile) 
             data = json.load(file)
-            
-            CurRow = 1
-            for rarity in ChosenAccessories:
-                for category in ChosenAccessories[rarity]:
-                    for accessory in ChosenAccessories[rarity][category]:
-                        for row in data["rows"]:
-                            if row["$id"] == CurRow:
-                                curAccessory:Enhancement = accessory
-                                curAccessory.RollEnhancement(rarity)
-                                row["Enhance1"] = curAccessory.id
-                                row["Rarity"] = curAccessory.Rarity
-                                ItemType = random.randint(0,9)
-                                row["Icon"] = ItemType
-                                CurName = row["Name"]
-                                CurRow += 1
-                                break
-                        for namerow in namedata["rows"]:  
-                            if namerow["$id"] == CurName:
-                                lastWord = random.choice(AccessoryTypesandNames[ItemType])
-                                namerow["name"] = f"{curAccessory.name} {lastWord}"
-                                break
-            for accessory in SecretAccessories:
+
+            for i in range(len(AllRarities)):
                 for row in data["rows"]:
-                    if row["$id"] == CurRow:
-                        curAccessory:UMHuntSecretShopEnhancements = accessory
-                        curAccessory.RollEnhancement(2)
+                    if row["$id"] == 1 + i:
+                        curAccessory:Enhancement = AllAugments[i]
+                        curAccessory.RollEnhancement(AllRarities[i], AllMultipliers[i])
                         row["Enhance1"] = curAccessory.id
                         row["Rarity"] = curAccessory.Rarity
                         ItemType = random.randint(0,9)
                         row["Icon"] = ItemType
                         CurName = row["Name"]
-                        CurRow += 1
+                        break
+                for namerow in namedata["rows"]:  
+                    if namerow["$id"] == CurName:
+                        lastWord = random.choice(AccessoryTypesandNames[ItemType])
+                        namerow["name"] = f"{curAccessory.name} {lastWord}"
+                        break
+            for i in range(len(SecretAccessories)):
+                for row in data["rows"]:
+                    if row["$id"] == 1 + len(AllRarities) + i:
+                        curAccessory:UMHuntSecretShopEnhancements = SecretAccessories[i]
+                        curAccessory.RollEnhancement(2, 1)
+                        row["Enhance1"] = curAccessory.id
+                        row["Rarity"] = curAccessory.Rarity
+                        ItemType = random.randint(0,9)
+                        CurName = row["Name"]
+                        row["Icon"] = ItemType
+                        SecretAccessoryIDs.append(row["$id"])
                         break
                 for namerow in namedata["rows"]:  
                     if namerow["$id"] == CurName:
@@ -1906,9 +1894,40 @@ def AccessoryShopRewards(): # Creates the accessory shop
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-
-    global AccessoryShopRewardDistribution
-    AccessoryShopRewardDistribution = [Helper.ExtendListtoLength([1], 16, "inputlist[i-1]+4"), Helper.ExtendListtoLength([2], 16, "inputlist[i-1]+4"), Helper.ExtendListtoLength([3], 16, "inputlist[i-1]+4"), Helper.ExtendListtoLength([4], 16, "inputlist[i-1]+4")]
+    
+    # getting the costs
+    AllAccessoryCosts, AllAccessoryNames = [], []
+    for i in range(len(AllRarities)):
+        CurRarity = AllRarities[i]
+        CurType = AllTypes[i]
+        NameString = ""
+        match CurRarity:
+            case 0: # Common
+                AllAccessoryCosts.append(random.randint(2, 5) + AllSets[i])
+                NameString += "Common"
+            case 1: # Rare
+                AllAccessoryCosts.append(random.randint(5, 10) + round(AllSets[i]*1.5))
+                NameString += "[System:Color name=red]Rare[/System:Color]"
+            case 2: # Legendary
+                AllAccessoryCosts.append(random.randint(11, 16) + round(AllSets[i]*2))
+                NameString += "[System:Color name=tutorial]Legendary[/System:Color]"
+        match CurType:
+            case "Damage":
+                NameString += " Damage"
+            case "Defensive":
+                NameString += " Defensive"
+            case "Playstyle Defining":
+                NameString += " Unique"
+        AllAccessoryNames.append(NameString)
+    for setnum in range(SetCount):
+        CurAccessoryNames, CurAccessoryCosts = [], []
+        for i in range(len(AllSets)):
+            if AllSets[i] == setnum:
+                CurAccessoryNames.append(AllAccessoryNames[i])
+                CurAccessoryCosts.append(AllAccessoryCosts[i])
+        AccessoryNameDistribution.append(CurAccessoryNames)
+        AccessoryShopCostDistribution.append(CurAccessoryCosts)
+        AccessoryShopRewardDistribution.append(Helper.ExtendListtoLength([1 + (setnum * NumTrades)], NumTrades, "inputlist[i-1] + 1"))
 
 def PoppiswapShopRewards(): # Creates rewards for Poppiswap Shop
     CrystalRows = Helper.InclRange(11, 21)
@@ -2101,8 +2120,8 @@ def CustomShopSetup(ChosenAreaOrder): # Sets up the custom shops with loot
     # The number of SetItem1IDs, RewardIDs, RewardNames, RewardSP, and RewardXP should all be the same, and also equal to the number of non-zero InputTaskIDs
     # Reward IDs, RewardQtys should have same number of values in each list as SetItem1IDs, however, each list should be made up of 4 lists, 1 for each item slot that a reward can be
 
-    MultipleShopList = [CoreCrystalShop, GambaShop, WeaponChipShop, AuxCoreShop]
-    ShopList = [TokenExchangeShop, WPManualShop, PoppiswapShop] # WPManualShop, PoppiswapShop, WeaponChipShop, AuxCoreShop, PouchItemShop, DriverAccessoryShop, GambaShop
+    MultipleShopList = [CoreCrystalShop, GambaShop, WeaponChipShop, AuxCoreShop, DriverAccessoryShop, PouchItemShop]
+    ShopList = [TokenExchangeShop, WPManualShop, PoppiswapShop]
     CurMapRowID = Helper.GetMaxValue("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", "$id") + 1
     for shop in MultipleShopList:
         for i in range(0, len(ChosenAreaOrder)):
@@ -2204,13 +2223,21 @@ def ShopLootGeneration(ShopLevel, Shop): # Makes the loot for the shops, using t
         Shop["RewardItemIDs"] = ChipShopRewardDistribution[ShopLevel] # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
         Shop["RewardQtys"] = [[2,2,2,2,1], [1,1,1,1,1], [1,1,1,1,0], ShopFillerEmpty] # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
         Shop["RewardNames"] = ChipBundleNames[ShopLevel] # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
-        print(Shop["RewardItemIDs"])
     elif Shop == AuxCoreShop:
         Shop["InputItemQtys"] = [AuxCoreShopCostDistribution[ShopLevel], ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty] # MNU_ShopChangeTask SetItem1->5, 1 list for each SetItem1->SetItem5, and a number of items in each list equal to the number of InputTaskIDs
         Shop["RewardItemIDs"] = [AuxCoreShopRewardDistribution[ShopLevel], ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty] # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
         Shop["RewardQtys"] = [ShopFillerFull, ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty] # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
         Shop["RewardNames"] = AuxCoreNameDistribution[ShopLevel] # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
-        print(Shop["RewardItemIDs"])
+    elif Shop == DriverAccessoryShop:
+        Shop["InputItemQtys"] = [AccessoryShopCostDistribution[ShopLevel], ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty] # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
+        Shop["RewardItemIDs"] = [AccessoryShopRewardDistribution[ShopLevel], ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty] # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
+        Shop["RewardQtys"] = [ShopFillerFull, ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty] # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
+        Shop["RewardNames"] = AccessoryNameDistribution[ShopLevel]
+    elif Shop == PouchItemShop:
+        Shop["InputItemQtys"] = [PouchItemShopCostDistribution[ShopLevel], ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty, ShopFillerEmpty] # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
+        Shop["RewardItemIDs"] = PouchItemShopRewardDistribution[ShopLevel] # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
+        Shop["RewardQtys"] = [ShopFillerFull, ShopFillerFull, ShopFillerEmpty, ShopFillerEmpty] # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
+        Shop["RewardNames"] = PouchItemNameDistribution[ShopLevel]
     return Shop
 
 def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
@@ -2503,15 +2530,16 @@ def SecretShopRewardGeneration(ChosenAreaOrder): # Makes the reward sets for the
                     SetRewards2[i] = RandomManuals[1]
                     ShopCostReceiptList[i] = 1
                 case 2: # Pouch Item Set
-                    RandomPouchItems = random.choices(ValidPouchItems, k = 2)
+                    RandomPouchItems = random.choices(SecretPouchItemIDs, k = 2)
                     SetRewards1[i] = RandomPouchItems[0]
                     SetRewards2[i] = RandomPouchItems[1]
-                    ShopCostReceiptList[i] = 1
+                    ShopCostReceiptList[i] = 2
                 case 3: # Driver Accessory Set
-                    RandomAccessories = random.choices(Helper.InclRange(65, 71), k = 2)
+                    RandomAccessories = random.choices(SecretAccessoryIDs, k = 1)
                     SetRewards1[i] = RandomAccessories[0]
-                    SetRewards2[i] = RandomAccessories[1]
-                    ShopCostReceiptList[i] = 5
+                    SetRewards2[i] = 0
+                    SetQuantities2[i] = 0
+                    ShopCostReceiptList[i] = 2
                 case 4: # Bounty Tokens
                     RandomBountyToken = random.choice(Helper.InclRange(25479, 25481))
                     SetRewards1[i] = RandomBountyToken
@@ -2519,20 +2547,21 @@ def SecretShopRewardGeneration(ChosenAreaOrder): # Makes the reward sets for the
                     SetQuantities2[i] = 0
                     ShopCostReceiptList[i] = 3
                 case 5: # Weapon Chips
-                    RandomWeaponChips = random.choices(WeaponRankList[10]+ WeaponRankList[11] + WeaponRankList[12] + [WeaponRankList[13]], k = 2)
+                    RandomWeaponChips = random.choices(WeaponRankList[10:19], k = 2)
                     SetRewards1[i] = RandomWeaponChips[0]
                     SetRewards2[i] = RandomWeaponChips[1]
-                    ShopCostReceiptList[i] = 2
+                    ShopCostReceiptList[i] = 4
                 case 6: # Pouch/Accessory Expander
                     RandomPouchorAccessoryExpander = random.choices([25305, 25450], weights = [66, 34], k = 2)
                     SetRewards1[i] = RandomPouchorAccessoryExpander[0]
                     SetRewards2[i] = RandomPouchorAccessoryExpander[1]
-                    ShopCostReceiptList[i] = 2
+                    ShopCostReceiptList[i] = 3
                 case _: # Aux Cores
-                    RandomAuxCores = random.choices(SecretAuxCoreIDs, k = 2)
+                    RandomAuxCores = random.choices(SecretAuxCoreIDs, k = 1)
                     SetRewards1[i] = RandomAuxCores[0]
-                    SetRewards2[i] = RandomAuxCores[1]
-                    ShopCostReceiptList[i] = 4
+                    SetRewards2[i] = 0
+                    SetQuantities2[i] = 0
+                    ShopCostReceiptList[i] = 2
         SecretShopCostList.append(ShopCostReceiptList)
         SecretShopRewardListItem1.append(SetRewards1)
         SecretShopRewardListItem2.append(SetRewards2)
