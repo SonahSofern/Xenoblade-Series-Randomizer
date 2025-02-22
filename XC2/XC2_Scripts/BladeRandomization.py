@@ -41,7 +41,7 @@ def BladeRandomization():
     BugFixes_PostRandomization()
 
 def FreeEngage(): # If Blade Rando is on, we want to be able to move blades around freely to avoid bugs
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common/MNU_DlcGift.json", ["FreeEngage"], "1")
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", ["FreeEngage"], "1")
     
 def InitialSetup():
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], [], PopulateBlades, replaceAll=True)
