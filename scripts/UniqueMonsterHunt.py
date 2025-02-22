@@ -116,7 +116,6 @@ TokenExchangeShop = {
     "RewardSP": [250, 375, 500, 625, 750, 875, 1000, 1250, 1500, 1750], #FLD_QuestReward Sp
     "RewardXP": [0, 630, 630, 630, 630, 630, 630, 630, 630, 630], # FLD_QuestReward EXP
     "HideReward": TokenFillerList, # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
-    "Condition": 3904 # I know this one will always let you access it
 }
 
 CoreCrystalShop = {
@@ -139,11 +138,10 @@ WPManualShop = {
     "InputItemQtys": [ManualCostDistribution, ManualFillerList, ManualFillerList, ManualFillerList, ManualFillerList], # MNU_ShopChangeTask SetNumber1->5, 1 list for each 
     "RewardItemIDs": [[25405, 25406, 25407, 25305, 25450, 25349, 25350, 25351], ManualFillerList, ManualFillerList, ManualFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
     "RewardQtys": [Helper.ExtendListtoLength([], 8, "1"), ManualFillerList, ManualFillerList, ManualFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
-    "RewardNames": ["250 Art WP", "500 Art WP", "1000 Art WP", "Pouch Expander", "Accessory Expander", "1500 Driver SP", "3000 Driver SP", "6000 Driver SP"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
-    "RewardSP": ManualFillerList, #FLD_QuestReward Sp
+    "RewardNames": ["250 Art WP", "500 Art WP", "1000 Art WP", "Pouch Expander", "Accessory Expander", "2500 Driver SP", "5000 Driver SP", "10000 Driver SP"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
+    "RewardSP": [0, 0, 0, 0, 0, 2500, 5000, 10000], #FLD_QuestReward Sp
     "RewardXP": ManualFillerList, # FLD_QuestReward EXP
     "HideReward": ManualFillerList, # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
-    "Condition": 3904 # I know this one will always let you access it
 }
 
 WeaponChipShop = {
@@ -197,7 +195,6 @@ PoppiswapShop = {
     "RewardSP": EmptyFillerList, #FLD_QuestReward Sp
     "RewardXP": EmptyFillerList, # FLD_QuestReward EXP
     "HideReward": EmptyFillerList, # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
-    "Condition": 3904 # I know this one will always let you access it
 }
 
 GambaShop = {
@@ -226,8 +223,10 @@ FullShopTemplateList = [CoreCrystalShop, WeaponChipShop, AuxCoreShop, PouchItemS
 # Poppiswap is going to be fucked up with custom enhancements
 
 def UMHunt():
-    global SetCount
+    global SetCount, UMHuntDisableCondListID, UMHuntEnableCondListIDs
     SetCount = IDs.CurrentSliderOdds
+    UMHuntDisableCondListID = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
+    UMHuntEnableCondListIDs = Helper.ExtendListtoLength([UMHuntDisableCondListID + 1], 10, "inputlist[i-1] + 1")
     ChosenAreaOrder = []
     GetDifficulty()
     CheckForSuperbosses()
@@ -251,7 +250,7 @@ def UMHunt():
     UMHuntMenuTextChanges()
     #DebugTesting()
     #DebugItemsPlace() # currently doesnt matter since I hide all the argentum chests anyways
-    DebugEasyMode()
+    #DebugEasyMode()
     #DebugSpawnCountPrint(EnemySets, ChosenAreaOrder)
 
 def DebugTesting():
@@ -675,19 +674,16 @@ def FieldQuestTaskLogSetup(EnemySets): # Adds the task logs for the field quests
                         LuckyDrop = random.randint(0, 99)
                         if LuckyDrop <= 74:
                             break
-                        elif LuckyDrop >= 99: # 1% chance for Bounty Token, of any level!
+                        elif LuckyDrop > 99: # 1% chance for Bounty Token, of any level!
                             row["PreciousID"] = random.choice(Helper.InclRange(25479, 25488))
                             break
-                        elif LuckyDrop >= 95: # 4% chance for Casino Voucher
-                            row["PreciousID"] = random.choice(Helper.InclRange(25479, 25488))
-                            break
-                        elif LuckyDrop >= 90: # 5% chance for SP Manual
+                        elif LuckyDrop >= 95: # 5% chance for SP Manual
                             row["PreciousID"] = random.choice([25349, 25350, 25351])
                             break
-                        elif LuckyDrop >= 85: # 5% chance for WP Manual
+                        elif LuckyDrop >= 90: # 5% chance for WP Manual
                             row["PreciousID"] = random.choice([25405, 25406, 25407])
                             break
-                        elif LuckyDrop >= 75: # 10% chance for a doubloon
+                        elif LuckyDrop >= 80: # 10% chance for a doubloon
                             row["PreciousID"] = 25489
                         break
             AllEnemySetNameIDs.append(CurrEnemySetNameIDs)        
@@ -951,20 +947,28 @@ def RandomLandmarkCreation(): # Creates random landmarks and adds them to the DL
     CurrentID = Helper.GetMaxValue("./_internal/JsonOutputs/common/MNU_DlcGift.json", "$id") + 1
     StartingNameID = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
     CurrentNameID = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
+    ChangingLandmarkPool = LandmarkPool.copy()
     if Options.UMHuntOption_RandomLandmarks.GetState():
         GuaranteedLandmarks = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 1801, 2001]
         ChosenLandmarks = GuaranteedLandmarks.copy()
         for area in LandmarkPool:
-            ChosenLandmarks.extend(random.choices(LandmarkPool[area], k = 4))
+            for landmark in GuaranteedLandmarks:
+                if landmark in ChangingLandmarkPool[area]:
+                    ChangingLandmarkPool[area].remove(landmark)
+                    break
+            AreaLandmarksSelected = random.sample(ChangingLandmarkPool[area], k = 4)
+            ChosenLandmarks.extend(AreaLandmarksSelected)
+            for i in range(0, 4):
+                ChangingLandmarkPool[area].remove(AreaLandmarksSelected[i])
         with open("./_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
             # Movespeed Deed
-            data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": 3904, "category": 1, "item_id": 25249, "value": 1, "disp_item_info": 0, "getflag": 35400})
+            data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": UMHuntEnableCondListIDs[0], "category": 1, "item_id": 25249, "value": 1, "disp_item_info": 0, "getflag": 35400})
             CurrentID += 1
             CurrentNameID += 1
             # Landmarks
             for landmark in ChosenLandmarks:
-                data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": 3904, "category": 2, "item_id": 0, "value": 1, "disp_item_info": 0, "getflag": 51161 + landmark})
+                data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": UMHuntEnableCondListIDs[0], "category": 2, "item_id": 0, "value": 1, "disp_item_info": 0, "getflag": 51161 + landmark})
                 CurrentID += 1
                 CurrentNameID += 1
             file.seek(0)
@@ -987,12 +991,12 @@ def RandomLandmarkCreation(): # Creates random landmarks and adds them to the DL
         with open("./_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
             # Movespeed Deed
-            data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": 3904, "category": 2, "item_id": 0, "value": 1, "disp_item_info": 0, "getflag": 51161 + landmark})
+            data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": UMHuntEnableCondListIDs[0], "category": 2, "item_id": 0, "value": 1, "disp_item_info": 0, "getflag": 51161 + landmark})
             CurrentID += 1
             CurrentNameID += 1
             # Landmarks
             for flag in DefaultLandmarkFlags:
-                data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": 3904, "category": 2, "item_id": 0, "value": 1, "disp_item_info": 0, "getflag": flag})
+                data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": UMHuntEnableCondListIDs[0], "category": 2, "item_id": 0, "value": 1, "disp_item_info": 0, "getflag": flag})
                 CurrentID += 1
                 CurrentNameID += 1
             file.seek(0)
@@ -1034,7 +1038,6 @@ def AddQuestConditions(ChosenAreaOrder): # Adding conditions for each area's war
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-    # Condition 3903 Disables Stuff when applied to it. 3904+ allow you to unlock something permanently
     with open("./_internal/JsonOutputs/common/FLD_ConditionScenario.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         data["rows"].append({"$id": 322, "ScenarioMin": 1001, "ScenarioMax": 1002, "NotScenarioMin": 0, "NotScenarioMax": 0})
@@ -1045,9 +1048,9 @@ def AddQuestConditions(ChosenAreaOrder): # Adding conditions for each area's war
         json.dump(data, file, indent=2, ensure_ascii=False)
     with open("./_internal/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
-        data["rows"].append({"$id": 3903, "Premise": 0, "ConditionType1": 1, "Condition1": 322, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
+        data["rows"].append({"$id": UMHuntDisableCondListID, "Premise": 0, "ConditionType1": 1, "Condition1": 322, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
         for i in range(0, SetCount):
-            data["rows"].append({"$id": 3904 + i, "Premise": 0, "ConditionType1": 1, "Condition1": 323 + i, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
+            data["rows"].append({"$id": UMHuntEnableCondListIDs[i], "Premise": 0, "ConditionType1": 1, "Condition1": 323 + i, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1091,14 +1094,14 @@ def AddQuestConditions(ChosenAreaOrder): # Adding conditions for each area's war
         for row in data["rows"]:
             if row["$id"] <= len(ChosenAreaOrder):
                 row["mapId"] = ContinentInfo[ChosenAreaOrder[row["$id"] - 1]][3] # puts the mapIDs in order, so we can assign conditions in order
-                row["cond1"] = 3903 + row["$id"]
+                row["cond1"] = UMHuntDisableCondListID + row["$id"]
                 row["enter"] = 0
             elif row["$id"] == len(ChosenAreaOrder) + 1:
                 row["mapId"] = 3
-                row["cond1"] = 3904
+                row["cond1"] = UMHuntEnableCondListIDs[0]
             else:
                 row["mapId"] = 0
-                row["cond1"] = 3903
+                row["cond1"] = UMHuntDisableCondListID
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1106,14 +1109,14 @@ def AddQuestConditions(ChosenAreaOrder): # Adding conditions for each area's war
 def NoUnintendedRewards(ChosenAreaOrder): # Removes any cheese you can do by doing sidequests, selling Collection Point items
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/FLD_QuestReward.json", ["Gold", "EXP", "Sp", "Coin", "DevelopZone", "DevelopPoint", "TrustPoint", "MercenariesPoint", "IdeaCategory", "IdeaValue", "ItemID1", "ItemNumber1", "ItemID2", "ItemNumber2", "ItemID3", "ItemNumber3", "ItemID4", "ItemNumber4"], 0) # doing quests don't reward you
     Helper.ColumnAdjust("./_internal/JsonOutputs/common/ITM_CollectionList.json", ["Price"], 0) # collectables sell for 0
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_SalvagePointList.json", ["Condition"], 3903) # salvaging is disabled
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_SalvagePointList.json", ["Condition"], UMHuntDisableCondListID) # salvaging is disabled
     Helper.MathmaticalColumnAdjust(["./_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2", "EnemyExp"], ['252']) # It costs 252 xp to level up, regardless of level
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/FLD_GravePopList.json", ["en_popID"], 0) # Keeps you from respawning a UM.
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma02a_FLD_TboxPop.json", ["Condition"], 3903) # removes drops from chests in argentum
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma02a_FLD_TboxPop.json", ["Condition"], UMHuntDisableCondListID) # removes drops from chests in argentum
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", ["QuestID"], 0) # removes talking to NPCs in argentum
-    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma21a_FLD_TboxPop.json", ["Condition"], 3903) # removes treasure chests from Elysium
+    Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma21a_FLD_TboxPop.json", ["Condition"], UMHuntDisableCondListID) # removes treasure chests from Elysium
     for area in ChosenAreaOrder:
-        Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[area][2] + "_FLD_TboxPop.json", ["Condition"], 3903) # removes drops from chests
+        Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[area][2] + "_FLD_TboxPop.json", ["Condition"], UMHuntDisableCondListID) # removes drops from chests
         Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[area][2] + "_FLD_NpcPop.json", ["QuestID"], 0) # removes talking to NPCs in area
 
 def SpiritCrucibleEntranceRemoval(): # Exiting or Entering Spirit Crucible has problems with resetting the quest condition. So we remove that by warping the player back to the original landmark in that area.
@@ -2024,14 +2027,14 @@ def AddDLCRewards(ChosenAreaOrder):
                     row["category"] = 1
                     row["value"] = 4
                     row["disp_item_info"] = 0
-                    row["condition"] = 3904 + i
+                    row["condition"] = UMHuntEnableCondListIDs[i]
                     row["title"] = StartingDLCItemTextRow + i
                     break
         if len(ChosenAreaOrder) != len(BountyCollectionRewards):
             for i in range(len(ChosenAreaOrder), len(BountyCollectionRewards)):
                 for row in data["rows"]:
                     if row["$id"] == BountyCollectionRewards[i]:
-                        row["condition"] = 3903
+                        row["condition"] = UMHuntDisableCondListID
         del data["rows"][21:]
         file.seek(0)
         file.truncate()
@@ -2119,8 +2122,10 @@ def CustomShopSetup(ChosenAreaOrder): # Sets up the custom shops with loot
     # The number of SetItem1IDs, RewardIDs, RewardNames, RewardSP, and RewardXP should all be the same, and also equal to the number of non-zero InputTaskIDs
     # Reward IDs, RewardQtys should have same number of values in each list as SetItem1IDs, however, each list should be made up of 4 lists, 1 for each item slot that a reward can be
 
-    MultipleShopList = [CoreCrystalShop, GambaShop, WeaponChipShop, AuxCoreShop, DriverAccessoryShop, PouchItemShop]
-    ShopList = [TokenExchangeShop, WPManualShop, PoppiswapShop]
+    MultipleShopList = [CoreCrystalShop, GambaShop, WeaponChipShop, AuxCoreShop, DriverAccessoryShop, PouchItemShop] # these can get duplicated
+    ShopList = [TokenExchangeShop, WPManualShop, PoppiswapShop] # these don't get duplicated
+    for shop in ShopList:
+        shop["Condition"] = UMHuntEnableCondListIDs[0]
     CurMapRowID = Helper.GetMaxValue("./_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", "$id") + 1
     for shop in MultipleShopList:
         for i in range(0, len(ChosenAreaOrder)):
@@ -2358,7 +2363,7 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
                         break
                 for row in data["rows"]: # Need to account for more lines where the original NPC speaks, they overlap bodies and it looks weird
                     if row["NpcID"] == OrigNPCID:
-                        row["Condition"] = 3903
+                        row["Condition"] = UMHuntDisableCondListID
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
@@ -2370,8 +2375,10 @@ def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of i
     UsableShopIDs = Helper.InclRange(65, 73) + [81] # MNU_ShopList $id, NpcPop ShopID
     Helper.ColumnAdjust("./_internal/JsonOutputs/common_gmk/ma07a_FLD_NpcPop.json", ["FSID1", "FSID2", "FSID3"], 0)
     ShopList = []
+    SecretShopCount = 0
     for i in range(0, len(ChosenAreaOrder)):
-        if random.randint(1, 100) > 50: # 50% chance for a secret shop to exist
+        if (random.randint(1, 100) > 50) & (SecretShopCount < 4): # 50% chance for a secret shop to exist, and there can be no more than 5 (this is because I'm out space in one of my files?)
+            SecretShopCount += 1
             MapValidNPCIDs = [x for x in Helper.FindSubOptionValuesList("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", "flag", "Talkable", 1, "$id") if x not in InvalidMapNPCs]
             ChosenSecretNPCID = random.choice(MapValidNPCIDs)
             with open("./_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
@@ -2395,7 +2402,7 @@ def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of i
                         row["QuestID"] = 0
                 for row in data["rows"]: # Need to account for more lines where the original NPC speaks, they overlap bodies and it looks weird
                     if row["NpcID"] == OrigNPCID:
-                        row["Condition"] = 3903
+                        row["Condition"] = UMHuntDisableCondListID
                 file.seek(0)
                 file.truncate()
                 json.dump(data, file, indent=2, ensure_ascii=False)
