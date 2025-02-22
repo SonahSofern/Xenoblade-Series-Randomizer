@@ -1,9 +1,8 @@
 import tkinter
 import string
-import PackedBits
+from scripts import PackedBits
 import base64
 import struct
-
 
 # most of this is from github.com/LagoLunatic/wwrando
 
@@ -27,11 +26,14 @@ def GenerateCompressedPermalink(SeedName, OptionsList, Version):
 
     bitswriter = PackedBits.PackedBitsWriter()
     for i in range(2, len(OptionsList)):
-        optionvalue = OptionsList[i].get()
-        if isinstance(optionvalue, bool):
-            bitswriter.write(int(optionvalue), 1)
-        elif isinstance(optionvalue, int):
-            bitswriter.write(optionvalue, 8)
+        try:
+            optionvalue = OptionsList[i].get()
+            if isinstance(optionvalue, bool):
+                bitswriter.write(int(optionvalue), 1)
+            elif isinstance(optionvalue, int):
+                bitswriter.write(optionvalue, 8)
+        except:
+            pass
 
     bitswriter.flush()
 

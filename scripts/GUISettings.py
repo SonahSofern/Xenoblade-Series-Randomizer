@@ -1,11 +1,15 @@
 from tkinter import *
-from UI_Colors import *
+from scripts import UI_Colors
 from tkinter import font, ttk
-from IDs import CanvasesForStyling, RootsForStyling
+import random, subprocess, shutil, os, threading, traceback, time, sys, datetime
+
 
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
-import SavedOptions
+from scripts import SavedOptions
 
+
+CanvasesForStyling = []
+RootsForStyling = []
 defFontVar = StringVar(value="Arial")
 defFontSizeVar = IntVar(value=13)
 defGUIThemeVar = StringVar(value="Dark Mode")
@@ -42,7 +46,7 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
     def SaveUIChanges(event = None):
         fontType.checkBoxVal.set(defaultFont.cget("family"))
         fontSizeSave.checkBoxVal.set(defaultFont.cget("size"))
-        SavedOptions.saveData([fontType,fontSizeSave,GUITheme], "GUISavedOptions.txt")
+        SavedOptions.saveData([fontType,fontSizeSave,GUITheme], "GUISavedOptions.txt", "GUI")
 
     def IncreaseFontSize(event = None):
         newSize = defaultFont.cget("size") + 1
@@ -121,19 +125,19 @@ def LoadTheme(defaultFont, themeName):
     style= ttk.Style()
     # Initial colors for the themes
     lightThemeColors = {
-    "backgroundColor": Red,
-    "darkColor": LightGray,
-    "midColor": White,
-    "midGray": MiddleLightGray,
-    "lightColor": LightBlack,
+    "backgroundColor": UI_Colors.Red,
+    "darkColor": UI_Colors.LightGray,
+    "midColor": UI_Colors.White,
+    "midGray": UI_Colors.MiddleLightGray,
+    "lightColor": UI_Colors.LightBlack,
     }
 
     darkThemeColors = {
-    "backgroundColor": DarkerPurple,
-    "darkColor": LightBlack,
-    "midColor": DarkGray,
-    "midGray": MediumGray,
-    "lightColor": White,
+    "backgroundColor": UI_Colors.DarkerPurple,
+    "darkColor": UI_Colors.LightBlack,
+    "midColor": UI_Colors.DarkGray,
+    "midGray": UI_Colors.MediumGray,
+    "lightColor": UI_Colors.White,
     }
     if themeName == "Dark Mode":
         currentTheme = darkThemeColors
@@ -291,7 +295,7 @@ def LoadTheme(defaultFont, themeName):
     staticFont = Font(family="Arial", size=16)
     style.configure("midColor.TCheckbutton", padding=(20, 10))
     style.configure("STATIC.TButton", font=staticFont)
-    style.configure("BorderlessLabel.TLabel", background=currentTheme["backgroundColor"], foreground=White)
+    style.configure("BorderlessLabel.TLabel", background=currentTheme["backgroundColor"], foreground=UI_Colors.White)
     style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
 
     # Since Canvas and Roots arrent affected by normal styling
@@ -306,3 +310,119 @@ def LoadTheme(defaultFont, themeName):
             root.config(background=currentTheme["backgroundColor"])
         except:
             pass
+        
+def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
+    for i in range(len(Canvases)):
+        scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
+        Canvases[i].config(yscrollcommand=scrollbar.set, borderwidth=0, relief="flat", highlightthickness=0)
+        CanvasesForStyling.append(Canvases[i])
+        # OuterFrames[i].config(borderwidth=0, relief="flat")
+        InnerFrames[i].bind("<Configure>", lambda e, canvas=Canvases[i]: canvas.configure(scrollregion=canvas.bbox("all")))
+
+        OuterFrames[i].pack_propagate(False)
+        Canvases[i].create_window((0, 0), window=InnerFrames[i], anchor="nw")
+        Canvases[i].pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+
+        def _on_mousewheel(event, canvas=Canvases[i]):
+            canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+
+        Canvases[i].bind("<Enter>", lambda e, canvas=Canvases[i]: canvas.bind_all("<MouseWheel>", lambda event: _on_mousewheel(event, canvas)))
+        Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
+        OuterFrames[i].pack(expand=True, fill="both")
+
+def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = []):
+    def ThreadedRandomize():
+        # Disable Repeated Button Click
+        RandomizeButton.config(state=DISABLED)
+
+        # Showing Progress Diplay 
+        randoProgressDisplay.pack(side='left', anchor='w', pady=10, padx=10)
+        randoProgressDisplay.config(text="Unpacking BDATs")
+
+        random.seed(permalinkVar.get())
+        print("Seed: " + randoSeedEntry.get())
+        print("Permalink: "+  permalinkVar.get())
+        try:
+            for file in BDATFiles:
+                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            for file in SubBDATFiles:
+                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/gb/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+
+            # Unpacks BDATs
+
+        except:
+            print(f"{traceback.format_exc()}") # shows the full error
+            randoProgressDisplay.config(text="Failed Inputs")
+            time.sleep(3)
+            randoProgressDisplay.config(text="")
+            RandomizeButton.config(state=NORMAL)
+            return
+
+        # Runs all randomization
+        RunOptions(OptionList, randoProgressDisplay)
+        for command in ExtraCommands: # Runs extra commands like show title screen
+            command()
+        randoProgressDisplay.config(text="Packing BDATs")
+    
+        try:
+            # Packs BDATs
+            subprocess.run([bdat_path, "pack", JsonOutput, "-o", outputDirVar.get().strip(), "-f", "json"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            
+            # for file in 
+            # Outputs common_ms in the correct file structure
+            os.makedirs(f"{outputDirVar.get().strip()}/gb", exist_ok=True)
+            for file in SubBDATFiles:
+                shutil.move(f"{outputDirVar.get().strip()}/{file}.bdat", f"{outputDirVar.get().strip()}/gb/{file}.bdat")
+
+            # Displays Done and Clears Text
+            randoProgressDisplay.config(text="Done")
+            time.sleep(1.5)
+            randoProgressDisplay.config(text="")
+            randoProgressDisplay.pack_forget()
+            
+            print(f"Finished at {datetime.datetime.now()}")
+        except:
+            print(f"{traceback.format_exc()}") # shows the full error
+            randoProgressDisplay.config(text="Failed Outputs")
+
+        
+        # Re-Enables Randomize Button
+        RandomizeButton.config(state=NORMAL)
+
+    threading.Thread(target=ThreadedRandomize).start()
+
+def RunOptions(OptionList, randoProgressDisplay):
+    
+    OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
+    
+    for opt in OptionList:
+        if not opt.GetState(): # Checks state
+            continue
+        
+        opt.subOptions.sort(key= lambda x: x.prio) # Sort suboptions by priority
+            
+        for sub in opt.subOptions:
+            if not sub.checkBoxVal.get(): # Checks state
+                continue
+            try:
+                for command in sub.commands:
+                    command()
+            except Exception as error:
+                print(f"ERROR: {opt.name}: {sub.name} | {error}")
+                print(f"{traceback.format_exc()}") # shows the full error
+                
+        randoProgressDisplay.config(text=opt.name)
+        for command in opt.commands:
+            try:
+                command()
+            except Exception as error:
+                print(f"ERROR: {opt.name} | {error}")
+                print(f"{traceback.format_exc()}") # shows the full error
+    
+MaxWidth = 1000
+windowWidth = "1550"
+windowHeight = "900"
+OptionColorLight = UI_Colors.White
+OptionColorDark = UI_Colors.Gray
+

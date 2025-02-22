@@ -1,14 +1,12 @@
 import copy
-import json, random, os, IDs
+import json, random, os
 
-def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list = [], rangeValidReplacements:list = [], InvalidTargetIDs:list = [], SliderOdds = 100, IgnoreID_AND_Key = [["",""]]): # make this a function to reuse, check the settings ot see if we even do this
+
+def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list = [], rangeValidReplacements:list = [], InvalidTargetIDs:list = [], IgnoreID_AND_Key = [["",""]]): # make this a function to reuse, check the settings ot see if we even do this
 
     # print(f"Valid Replacements: {Replacements}")
-    SliderOdds = IDs.CurrentSliderOdds
-    rangeValidReplacements.extend(IDs.ValidReplacements)
-    rangeValidReplacements = [x for x in rangeValidReplacements if x not in IDs.InvalidReplacements]
     for name in Filename:
-        filePath = "./_internal/JsonOutputs/" + name
+        filePath = "./XC2/_internal/JsonOutputs/" + name
         if not os.path.exists(filePath):
           #print(filePath + " filepath does not exist.")
           continue
@@ -21,24 +19,21 @@ def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list =
                     if ([item["$id"], key] in IgnoreID_AND_Key):
                         continue       
                     if key in keyWords:
-                        if (((rangeofValuesToReplace == []) or (item[key] in rangeofValuesToReplace)) and (SliderOdds >= random.randint(1,100))):
+                        if (rangeofValuesToReplace == []) or (item[key] in rangeofValuesToReplace):
                             item[key] = random.choice(rangeValidReplacements)
                     elif key == "Flag":
                         for flag, flagVal in item[key].items():
                             if flag in keyWords:
-                                if ((flagVal in rangeofValuesToReplace) and (SliderOdds >= random.randint(1,100))):
+                                if (flagVal in rangeofValuesToReplace):
                                     item[key][flag] = random.choice(rangeValidReplacements)                                
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-    IDs.ValidReplacements.clear()
-    IDs.InvalidReplacements.clear()
-    IDs.CurrentSliderOdds = 100
 
 
-def ChangeJSONLine(filenames, ids, keys, replacement, replaceAll = False):
+def ChangeJSONLine(filenames, ids, keys, replacement, replaceAll = False, Game = "XC2"):
     for name in filenames:
-        filePath = "./_internal/JsonOutputs/" + name
+        filePath = f"./{Game}/_internal/JsonOutputs/" + name
         if not os.path.exists(filePath):
           #print(filePath + " filepath does not exist.")
           continue
@@ -54,7 +49,7 @@ def ChangeJSONLine(filenames, ids, keys, replacement, replaceAll = False):
 
 def ChangeJSONLineWithCallback(filenames, ids, callback, replaceAll = False):
     for name in filenames:
-        filePath = "./_internal/JsonOutputs/" + name
+        filePath = "./XC2/_internal/JsonOutputs/" + name
         if not os.path.exists(filePath):
           continue
         with open(filePath, 'r+', encoding='utf-8') as file:
@@ -67,7 +62,7 @@ def ChangeJSONLineWithCallback(filenames, ids, callback, replaceAll = False):
             json.dump(data, file, indent=2, ensure_ascii=False)
 
 def QueryJSONLine(filename, searchField, searchVal):
-        filePath = "./_internal/JsonOutputs/" + filename
+        filePath = "./XC2/_internal/JsonOutputs/" + filename
         if not os.path.exists(filePath):
             return
         with open(filePath, 'r+', encoding='utf-8') as file:
@@ -78,7 +73,7 @@ def QueryJSONLine(filename, searchField, searchVal):
         return None
 
 def CopyJSONFile(filename):
-    filePath = "./_internal/JsonOutputs/" + filename
+    filePath = "./XC2/_internal/JsonOutputs/" + filename
     if not os.path.exists(filePath):
       return dict()
     with open(filePath, 'r+', encoding='utf-8') as file:
@@ -95,7 +90,7 @@ def CopyJSONFile(filename):
 def PrintTable(filename):
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     print(filename)
-    filePath = "./_internal/JsonOutputs/" + filename
+    filePath = "./XC2/_internal/JsonOutputs/" + filename
     if not os.path.exists(filePath):
         return
     with open(filePath, 'r+', encoding='utf-8') as file:
@@ -105,7 +100,7 @@ def PrintTable(filename):
     print()
 
 def ExtendJSONFile(filePath, additionsList = []):
-    with open("./_internal/JsonOutputs/" + filePath, 'r+', encoding='utf-8') as file:
+    with open("./XC2/_internal/JsonOutputs/" + filePath, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for item in additionsList:
             data["rows"].extend(item)
@@ -115,7 +110,7 @@ def ExtendJSONFile(filePath, additionsList = []):
         
         
 def ReplaceJSONFile(filePath, replacement = []):
-    with open("./_internal/JsonOutputs/" + filePath, 'r+', encoding='utf-8') as file:
+    with open("./XC2/_internal/JsonOutputs/" + filePath, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         data["rows"] = replacement
         file.seek(0)
