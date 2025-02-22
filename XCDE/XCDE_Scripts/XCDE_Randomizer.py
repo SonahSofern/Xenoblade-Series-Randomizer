@@ -9,16 +9,12 @@ import  os, sys, subprocess
 from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkManagement, UI_Colors, Seed, Interactables
 from tkinter.font import Font
 import tkinter as tk
+from scripts.GUISettings import *
 
 Game = "XCDE"
 Version = "1.0.0"
-CommonBdatInput = ""
 JsonOutput = "./XCDE/_internal/JsonOutputs"
-MaxWidth = 1000
-windowWidth = "1550"
-windowHeight = "900"
-OptionColorLight = UI_Colors.White
-OptionColorDark = UI_Colors.Gray
+
 SavedOptionsFileName = f"SavedOptionsv{Version}.txt"
 if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
     isOnefile = True

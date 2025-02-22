@@ -12,16 +12,11 @@ from Enhancements import *
 from IDs import *
 from tkinter.font import Font
 import tkinter as tk
-
+from scripts.GUISettings import *
 Game = "XC2"
 Version = "1.3.0"
-CommonBdatInput = ""
 JsonOutput = "./XC2/_internal/JsonOutputs"
-MaxWidth = 1000
-windowWidth = "1550"
-windowHeight = "900"
-OptionColorLight = UI_Colors.White
-OptionColorDark = UI_Colors.Gray
+
 SavedOptionsFileName = f"SavedOptionsv{Version}.txt"
 if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
     isOnefile = True

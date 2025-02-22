@@ -420,3 +420,9 @@ def RunOptions(OptionList, randoProgressDisplay):
                 print(f"ERROR: {opt.name} | {error}")
                 print(f"{traceback.format_exc()}") # shows the full error
     
+MaxWidth = 1000
+windowWidth = "1550"
+windowHeight = "900"
+OptionColorLight = UI_Colors.White
+OptionColorDark = UI_Colors.Gray
+

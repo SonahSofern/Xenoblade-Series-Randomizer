@@ -32,7 +32,8 @@ class ActMatch: # A class so that when arts get randomized their animation somew
 def RechargeType(): # Controls how arts recharge
     pass
 
-def Cooldown(): # Controls how hard arts are to recharge
+def Cooldown(art): # Controls how hard arts are to recharge
+    art[""]
     pass
 
 def Damage():
