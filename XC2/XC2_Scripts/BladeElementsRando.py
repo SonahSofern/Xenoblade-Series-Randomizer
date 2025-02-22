@@ -1,5 +1,4 @@
-import JSONParser, Helper
-
+from scripts import JSONParser, Helper
 def BladeElementsRandomization():
     # Regular Blades
     JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Atr"], Helper.InclRange(1, 8), Helper.InclRange(1, 8))

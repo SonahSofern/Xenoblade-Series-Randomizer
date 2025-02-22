@@ -1,5 +1,5 @@
-import json, random, Helper, JSONParser
-
+import json, random
+from scripts import Helper, JSONParser
 WeaponsList = [] # Once the torna blades get their weapons fixed and allowed to be upgraded we can put them here
 
 # Cant get specials to work ):

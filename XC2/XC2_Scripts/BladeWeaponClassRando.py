@@ -1,4 +1,5 @@
-import random, JSONParser, Helper
+import random
+from scripts import JSONParser, Helper
 
 from IDs import WeaponTypeRoles
 
