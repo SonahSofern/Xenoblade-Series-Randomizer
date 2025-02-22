@@ -202,6 +202,12 @@ RaceModeOption_Zohar = SubOption("Zohar Fragment Hunt", RaceModeOption)
 RaceModeOption_DLC = SubOption("DLC Item Removal", RaceModeOption)
 UMHuntOption = Option("Unique Monster Hunt", GameModeTab, "Defeat Unique Monsters in this Roguelike mode!\nUses a custom save file.\nSee the README for more info.", [lambda: UniqueMonsterHunt.UMHunt()], _hasSpinBox = True, _spinMin = 1, _spinMax = 10, _spinIncr = 1, _spinDesc = "Round(s)", _spinWidth = 2)
 UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
+UMHuntOption_DifficultyEasy = SubOption("Easy", UMHuntOption)
+UMHuntOption_DifficultyNormal = SubOption("Normal", UMHuntOption)
+UMHuntOption_DifficultyHard = SubOption("Hard", UMHuntOption)
+UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
+UMHuntOption_RandomLandmarks = SubOption("Random Starting Landmarks", UMHuntOption)
+
 
 # Currently Disabled for Various Reasons
 # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
