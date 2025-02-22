@@ -2,12 +2,12 @@ import json, Options
 from scripts import Helper
 
 def CreateDLCtoSetFlag(ItemName: list[str], Flag: list[int]):
-    MaxRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/MNU_DlcGift.json", "$id") + 1
-    CurrentNameID = Helper.GetMaxValue("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
+    MaxRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", "$id") + 1
+    CurrentNameID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
     
-    with open("./_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
+    with open("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
         
-        with open("./_internal/JsonOutputs/common_ms/menu_dlc_gift.json", 'r+', encoding='utf-8') as namefile:
+        with open("./XC2/_internal/JsonOutputs/common_ms/menu_dlc_gift.json", 'r+', encoding='utf-8') as namefile:
             
             data = json.load(file)
             namedata = json.load(namefile)
