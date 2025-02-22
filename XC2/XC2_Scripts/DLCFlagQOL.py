@@ -1,4 +1,5 @@
-import json, Options, Helper
+import json, Options
+from scripts import Helper
 
 def CreateDLCtoSetFlag(ItemName: list[str], Flag: list[int]):
     MaxRow = Helper.GetMaxValue("./_internal/JsonOutputs/common/MNU_DlcGift.json", "$id") + 1
