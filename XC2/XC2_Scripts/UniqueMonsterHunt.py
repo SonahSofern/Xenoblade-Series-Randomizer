@@ -225,7 +225,7 @@ FullShopTemplateList = [CoreCrystalShop, WeaponChipShop, AuxCoreShop, PouchItemS
 
 def UMHunt():
     global SetCount, UMHuntDisableCondListID, UMHuntEnableCondListIDs
-    SetCount = IDs.CurrentSliderOdds
+    SetCount = Options.UMHuntOption.GetOdds()
     UMHuntDisableCondListID = Helper.GetMaxValue("./_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
     UMHuntEnableCondListIDs = Helper.ExtendListtoLength([UMHuntDisableCondListID + 1], 10, "inputlist[i-1] + 1")
     ChosenAreaOrder = []
