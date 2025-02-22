@@ -14,7 +14,7 @@ from tkinter.font import Font
 import tkinter as tk
 from scripts.GUISettings import *
 Game = "XC2"
-Version = "1.3.0"
+Version = "1.3.1"
 JsonOutput = "./XC2/_internal/JsonOutputs"
 
 SavedOptionsFileName = f"SavedOptionsv{Version}.txt"
