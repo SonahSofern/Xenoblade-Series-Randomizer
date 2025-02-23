@@ -119,6 +119,7 @@ BladeCombosOption_AOE = SubOption("AOE", BladeCombosOption)
 
 # Enemies
 EnemiesOption = Option("Enemies", Enemies, "Randomizes what enemies appear in the world", [lambda: EnemyRandoLogic.EnemyLogic()])
+EnemiesOption_BalanceEnemyGroups = SubOption("Balance Enemy Groups", EnemiesOption)
 EnemiesOption_Bosses = SubOption("Bosses", EnemiesOption)
 EnemiesOption_QuestEnemies = SubOption("Quest Enemies", EnemiesOption)
 EnemiesOption_UniqueMonsters = SubOption("Unique Monsters", EnemiesOption)

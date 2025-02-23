@@ -815,7 +815,7 @@ def getMaxCountViolations(DefaultEnemyIDs, RandomizedEnemyIDs):
     return violations
 
 
-def handleMaxCountViolations(DefaultEnemyIDs, RandomizedEnemyIDs):
+def BalanceEnemyGroups(DefaultEnemyIDs, RandomizedEnemyIDs):
     # Repeatedly check for and fix max count violations until there are none left
     while True:
         violations = getMaxCountViolations(DefaultEnemyIDs, RandomizedEnemyIDs)
@@ -844,6 +844,7 @@ def EnemyLogic():
     MixEnemiesBetweenTypesBox = Options.EnemiesOption_MixedTypes.GetState()
     AllBossDefaultIDstoUse = AllBossDefaultIDs
     AllBossDefaultLevelstoUse = AllBossDefaultLevels
+    BalanceEnemyGroupsBox = Options.EnemiesOption_BalancedEnemyGroups.GetState()
     if Options.RaceModeOption.GetState(): # removing malos in auresco fight for race mode specifically, he has an absurd amount of hp and is just a slog of a fight
         AllBossDefaultIDstoUse = [x for x in AllBossDefaultIDs if x != 1443]
         del AllBossDefaultLevelstoUse[83]
@@ -881,7 +882,8 @@ def EnemyLogic():
             random.shuffle(RandomizedEnemyIDs)
             TotalDefaultEnemyIDs = DefaultEnemyIDs
             TotalRandomizedEnemyIDs = RandomizedEnemyIDs
-            handleMaxCountViolations(DefaultEnemyIDs, RandomizedEnemyIDs)
+            if BalanceEnemyGroupsBox:
+                BalanceEnemyGroups(DefaultEnemyIDs, RandomizedEnemyIDs)
             ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
             if EnemiestoPass:
                 if KeepAllEnemyLevelsBox:
@@ -918,7 +920,8 @@ def EnemyLogic():
                     TotalDefaultEnemyIDs.extend(DefaultEnemyIDs)
                     random.shuffle(RandomizedEnemyIDs)
                     TotalRandomizedEnemyIDs.extend(RandomizedEnemyIDs)
-                    handleMaxCountViolations(DefaultEnemyIDs, RandomizedEnemyIDs)
+                    if BalanceEnemyGroupsBox:
+                        BalanceEnemyGroups(DefaultEnemyIDs, RandomizedEnemyIDs)
                     ReworkedEnemyRando(DefaultEnemyIDs, RandomizedEnemyIDs)
                     if KeepAllEnemyLevelsBox:
                         LevelReversion(DefaultEnemyIDs, RandomizedEnemyIDs, DefaultEnemyIDs, LevelstoPass)
