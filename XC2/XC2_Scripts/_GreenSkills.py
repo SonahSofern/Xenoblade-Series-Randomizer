@@ -46,7 +46,7 @@ def RandomizeFieldSkills(): # Make logic to have all skills in the game
                 if not ShuffleQuestSkills and (blade[slot] in QuestSkillPool): # Keep unique skills on that blade
                     continue
                 
-                if (KeepVanilla.get(BladeId) and slot in KeepVanilla[BladeId]): # Ignore special blades to make sure story is completeable
+                if ((KeepVanilla.get(BladeId) != None) and slot in KeepVanilla[BladeId]): # Ignore special blades to make sure story is completeable
                     continue
                   
                 if blade[slot] == 0: # Only replace skillslots that have one (dagas needs this for his weak form)
