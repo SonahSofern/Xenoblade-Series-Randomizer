@@ -112,11 +112,11 @@ def ChangeArts(artData, artNameData):
         
 def FindValidChanges(art, isReactions, isDebuffs, isBuffs, isEnhancements, isAOE):
     ValidChanges = []
-    if isDebuffs and art.get("ArtsDeBuff") != None and art["ArtsDeBuff"] in [0] and art["Target"] == 0: # Only change arts with no debuff and target enemies
+    if isDebuffs and (art.get("ArtsDeBuff") != None) and (art["ArtsDeBuff"] in [0]) and (art["Target"] == 0): # Only change arts with no debuff and target enemies
         ValidChanges.append(lambda: Debuff(art))           # Debuff
     if isBuffs and art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff (Current AOE is placed only on these things so gotta fix that)
         ValidChanges.append(lambda: Buff(art))
-    if isEnhancements and art.get("Enhance") != None and art["Enhance"] == 0 and art["Target"] == 0 and art["ArtsType"] != 4: # Add enhancements only to arts without them and that target enemies
+    if isEnhancements and (art.get("Enhance") != None) and art["Enhance"] == 0 and art["Target"] == 0 and art["ArtsType"] != 4: # Add enhancements only to arts without them and that target enemies
         ValidChanges.append(lambda: Enhancements(art))
     if isAOE and art["RangeType"] == 0 and art["ArtsType"] in [1,2,3]: # Make sure art is single target and a physical ether or healing move
         ValidChanges.append(lambda: AOE(art))
@@ -190,9 +190,9 @@ def Reaction(art):
         ValidReactions.update(SelfTargetReactions) # Add self targeting
     elif art["Target"] == 0:
         ValidReactions.update(EnemyTargetReactions) # Add enemy targeting
-    if art.get("CircleID") and art["CircleID"] == 0 and art["Target"] == 0:
+    if (art.get("CircleID") != None) and art["CircleID"] == 0 and art["Target"] == 0:
             ValidReactions.update(Flames) # Add flames 
-        
+            print("Added flames")
     name,values = random.choice(list(ValidReactions.items()))
     
     # Special Cases that need more changes
@@ -225,7 +225,7 @@ def Buff(art):
         "CD↓": 0, # Special case its not really a buff but I dont want to give it its own category, I think it makes sense as a buff, this causes the problem that only arts with no buff can have their cd reduced which is fine maybe
     }
     
-    if art.get("Recast") and art["Recast"] != 0:
+    if (art.get("Recast")!= None) and art["Recast"] != 0:
         Buffs.update(CD)
     
     name,value = random.choice(list(Buffs.items()))

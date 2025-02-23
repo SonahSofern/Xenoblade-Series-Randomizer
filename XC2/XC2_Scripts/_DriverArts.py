@@ -314,7 +314,7 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False):
                         break
                     
                 # Debuffs   
-                if art.get("ArtsDeBuff"):                    
+                if (art.get("ArtsDeBuff") != None):                    
                     for key,values in Debuffs.items():
                         if art["ArtsDeBuff"] in values:
                             CombinedCaption[4] = f"[System:Color name=red]{key}[/System:Color]"

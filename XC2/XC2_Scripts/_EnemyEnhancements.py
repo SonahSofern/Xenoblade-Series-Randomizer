@@ -74,7 +74,7 @@ FirstStrike = EnemyEnhancement("Supriser", FirstArtDamage,[300,500,600,700])
 Lightning  = EnemyEnhancement("Lightning", AutoSpeedArtsSpeed,[300,400,500,600],[200,300,400,500])
 Repeat = EnemyEnhancement("Repeat", DidIDoThat,[20,40,60,80])
 Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
-Regen = EnemyEnhancement("Regen", LowHPRegen, [3,5,7,9])
+Regen = EnemyEnhancement("Regen", LowHPRegen, [2,3,4,5])
 CloseArmor = EnemyEnhancement("Guardian", ReduceDamageFromNearbyEnemies, [30,50,70,90])
 
 
