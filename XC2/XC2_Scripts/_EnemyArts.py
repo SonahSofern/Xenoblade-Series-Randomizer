@@ -112,7 +112,7 @@ def ChangeArts(artData, artNameData):
         
 def FindValidChanges(art, isReactions, isDebuffs, isBuffs, isEnhancements, isAOE):
     ValidChanges = []
-    if isDebuffs and (art.get("ArtsDeBuff") != None) and (art["ArtsDeBuff"] in [0]) and (art["Target"] == 0): # Only change arts with no debuff and target enemies
+    if isDebuffs and (art.get("ArtsDeBuff") != None) and (art["ArtsDeBuff"] in [0]) and (art["Target"] == 0) and art["ArtsType"] != 4: # Only change arts with no debuff and target enemies
         ValidChanges.append(lambda: Debuff(art))           # Debuff
     if isBuffs and art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff (Current AOE is placed only on these things so gotta fix that)
         ValidChanges.append(lambda: Buff(art))
@@ -192,7 +192,6 @@ def Reaction(art):
         ValidReactions.update(EnemyTargetReactions) # Add enemy targeting
     if (art.get("CircleID") != None) and art["CircleID"] == 0 and art["Target"] == 0:
             ValidReactions.update(Flames) # Add flames 
-            print("Added flames")
     name,values = random.choice(list(ValidReactions.items()))
     
     # Special Cases that need more changes

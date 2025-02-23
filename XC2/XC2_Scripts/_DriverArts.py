@@ -206,7 +206,7 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False):
         "Cancel↑": [2810],
         "Crit↑": [2975],
         "Crit CD↓": [2840],
-        "Evade": [2825,2866,2872],
+        # "Evade": [2825,2866,2872], Evade is not an enhancement and wont work for it
         "Flying↑": [2700],
         "Front↑": [2740],
         "Vamp": [2735,2878],
