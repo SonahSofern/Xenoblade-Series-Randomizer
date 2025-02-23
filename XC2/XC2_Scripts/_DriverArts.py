@@ -24,6 +24,9 @@ def DriverArtRandomizer():
         odds = Options.DriverArtsOption.GetOdds()
         
         for art in artData["rows"]:
+            if art["$id"] in [4,5,6,7]: # Dont change aegis since they get copied to later
+                continue
+            
             if (not isAutoAttacks) and (isAutoAttacks or (art["$id"] in AutoAttacks)): # Ignore auto attacks unless the option is clicked
                 continue
             isEnemyTarget = (art["Target"] in [0,4]) # Ensures Targeting Enemy
@@ -63,11 +66,35 @@ def DriverArtRandomizer():
                     
             if isSpeed and OddCheck(odds):
                 AnimationSpeed(art)
-            
+
+        # Since Aegis and Broadsword Share Captions they need the same effects
+        CopyArt(artData,305,4)
+        CopyArt(artData,306,5)
+        CopyArt(artData,308,6)
+        CopyArt(artData,307,7)
         artFile.seek(0)
         artFile.truncate()
         json.dump(artData, artFile, indent=2, ensure_ascii=False)
  
+def CopyArt(artData, copyID, artID): # Copies all relavent effects of the art for shared captions
+    for art in artData["rows"]:
+        if art["$id"] == copyID:
+            copy = art
+            break
+    for art in artData["rows"]:
+        if art["$id"] == artID:
+            art["RangeType"] = copy["RangeType"]
+            art["Radius"] =  copy["Radius"]
+            art["Length"] = copy["Length"]
+            for i in range(1,17):
+                art[f"ReAct{i}"] = copy[f"ReAct{i}"]
+            for i in range(1,7):
+                art[f"Enhance{i}"] = copy[f"Enhance{i}"]
+            art["ArtsDeBuff"] = copy["ArtsDeBuff"]
+            art["ArtsBuff"] = copy["ArtsBuff"]
+            break
+
+
 def OddCheck(odds):
     return (odds > random.randrange(0,100))
 
@@ -338,25 +365,24 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False):
                             TotalArtDescription += CombinedCaption[i]
 
 
-
-
                 if TotalArtDescription == "":
                     TotalArtDescription = "No Effects"
 
                 # Update Descriptions
                 for desc in descData["rows"]:
                     if desc["$id"] == CurrDesc:
+                        if not isSpecial: 
+                            if desc["$id"] == 4:   # Sets anchor shot 5 to anchor shot 4's description since they are the same art
+                                TotalArtDescription = TotalArtDescription.replace(ReactCaption + " / ", "")   # Removes the reaction from 4 because it is disabled until you get to uraya. 4 Corresponds to before uraya description and 5 is after uraya.
+                                AnchorShotDesc = desc["name"]
+                                desc["name"]
+                            if desc["$id"] == 5:
+                                desc["name"] = AnchorShotDesc
+                                break
                         desc["name"] = TotalArtDescription
                         break
-            if not isSpecial:
-                for desc in descData["rows"]:
-                    if desc["$id"] == 4:
-                        AnchorShotDesc = desc["name"]
-                        break
-                for desc in descData["rows"]:
-                    if desc["$id"] == 5:
-                        desc["name"] = AnchorShotDesc
-                        break
+
+                    
             DescFile.seek(0)
             DescFile.truncate()
             json.dump(descData, DescFile, indent=2, ensure_ascii=False)             
