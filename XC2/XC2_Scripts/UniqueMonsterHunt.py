@@ -652,16 +652,13 @@ def FieldQuestTaskLogSetup(EnemySets): # Adds the task logs for the field quests
                         LuckyDrop = random.randint(0, 99)
                         if LuckyDrop <= 74:
                             break
-                        elif LuckyDrop > 99: # 1% chance for Bounty Token, of any level!
+                        elif LuckyDrop > 94: # 5% chance for Bounty Token, of any level!
                             row["PreciousID"] = random.choice(Helper.InclRange(25479, 25488))
                             break
-                        elif LuckyDrop >= 95: # 5% chance for SP Manual
-                            row["PreciousID"] = random.choice([25349, 25350, 25351])
-                            break
-                        elif LuckyDrop >= 90: # 5% chance for WP Manual
+                        elif LuckyDrop >= 85: # 10% chance for WP Manual
                             row["PreciousID"] = random.choice([25405, 25406, 25407])
                             break
-                        elif LuckyDrop >= 80: # 10% chance for a doubloon
+                        elif LuckyDrop >= 75: # 10% chance for a doubloon
                             row["PreciousID"] = 25489
                         break
             AllEnemySetNameIDs.append(CurrEnemySetNameIDs)        
