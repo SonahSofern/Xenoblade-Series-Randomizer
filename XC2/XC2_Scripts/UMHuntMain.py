@@ -1,4 +1,4 @@
-import json, random, IDs, EnemyRandoLogic, RaceMode, math, Options, time, FieldSkillAdjustments, UMHuntDebugFunctions, UMHuntShopCreation
+import json, random, IDs, EnemyRandoLogic, RaceMode, math, Options, time, FieldSkillAdjustments, UMHuntDebugFunctions, UMHuntShopCreation, TutorialShortening
 from Enhancements import *
 from BladeRandomization import Replacement2Original
 from scripts import Helper
@@ -30,6 +30,8 @@ ValidRandomizeableBladeIDs = [1001, 1002, 1008, 1009, 1010, 1011, 1014, 1015, 10
 # Poppiswap is going to be fucked up with custom enhancements
 
 def UMHunt():
+    if not Options.ShortenTutorialOption.GetState(): # we want to always run the tutorial shortening, otherwise it breaks stuff. spent 2 hours trying to figure out why completely unrelated changes were bricking my save file
+        TutorialShortening.ShortenedTutorial()
     UMHuntShopCreation.CreateShopDictionaries()
     global SetCount, UMHuntDisableCondListID, UMHuntEnableCondListIDs
     SetCount = Options.UMHuntOption.GetOdds()
@@ -85,7 +87,6 @@ def CheckForSuperbosses():
         SuperbossCount = 0
 
 def Cleanup():
-    print("Cleaning Up")
     with open("./XC2/_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
