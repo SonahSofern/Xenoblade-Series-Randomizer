@@ -737,7 +737,7 @@ def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/f
     SummonsLevelAdjustment()
     FightBalancing(["./XC2/_internal/JsonOutputs/common_gmk/ma13a_FLD_EnemyPop.json", "./XC2/_internal/JsonOutputs/common_gmk/ma16a_FLD_EnemyPop.json"], [13001, 16149], [-5, -5])
     FishFix()
-    BigEnemyCollisionFix()
+    # BigEnemyCollisionFix() no longer needed, we removed the red rings instead
     AeshmaCoreHPNerf()
     GortOgreUppercutRemoval()
     EarthBreathNerf()

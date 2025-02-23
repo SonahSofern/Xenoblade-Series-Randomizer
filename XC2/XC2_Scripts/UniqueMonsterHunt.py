@@ -799,7 +799,7 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
     EnemyRandoLogic.FlyingEnemyFix(AllOriginalAreaEnemies, AllNewAreaEnemies)
     EnemyRandoLogic.SwimmingEnemyFix(AllOriginalAreaEnemies, AllNewAreaEnemies)
     EnemyRandoLogic.FishFix()
-    EnemyRandoLogic.BigEnemyCollisionFix()
+    # EnemyRandoLogic.BigEnemyCollisionFix() no longer needed, there's no red rings at all.
     if ExtraSuperbosses:
         UniqueSuperbosses = list(dict.fromkeys(AllAreaSuperbosses))
         ChosenSuperbossNumbers = random.choices(Helper.InclRange(0, 9), k = SuperbossCount)
