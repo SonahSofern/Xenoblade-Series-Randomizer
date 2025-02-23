@@ -25,8 +25,6 @@ ValidRandomizeableBladeIDs = [1001, 1002, 1008, 1009, 1010, 1011, 1014, 1015, 10
 
 # TO DO
 
-# Maybe change the blade bundles to be from the same overall class distribution pool, but have them be mixed up, and change the names to "Blade Bundle 1->10", and increase the cost accordingly
-# add the names of weapons
 
 # Known Issues: 
 # Poppiswap is going to be fucked up with custom enhancements
@@ -53,8 +51,8 @@ def UMHunt():
     NoUnintendedRewards(ChosenAreaOrder)
     SpiritCrucibleEntranceRemoval()
     UMHuntShopCreation.ShopChanges(ChosenAreaOrder)
-    BladeTrustRequirementChanges() # not a shop change, see main
-    PoppiswapCostChanges() # not a shop change, see main
+    BladeTrustRequirementChanges()
+    PoppiswapCostChanges()
     MoveSpeedDeedSetup()
     BalanceChanges(ChosenAreaOrder)
     RandomLandmarkCreation()
@@ -63,7 +61,7 @@ def UMHunt():
     Cleanup()
     UMHuntMenuTextChanges()
     #UMHuntDebugFunctions.DebugItemsPlace() # currently doesnt matter since I hide all the argentum chests anyways
-    #UMHuntDebugFunctions.DebugEasyMode()
+    UMHuntDebugFunctions.DebugEasyMode()
     #UMHuntDebugFunctions.DebugSpawnCountPrint(EnemySets, ChosenAreaOrder)
     #UMHuntDebugFunctions.DebugEnemyLevels(ChosenAreaOrder)
 
@@ -87,6 +85,7 @@ def CheckForSuperbosses():
         SuperbossCount = 0
 
 def Cleanup():
+    print("Cleaning Up")
     with open("./XC2/_internal/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
@@ -489,6 +488,7 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
     SuperbossMapsFull = []
     AllOriginalAreaEnemies = []
     AllNewAreaEnemies = []
+    ChosenSuperbossNumbers = []
     # "Area Name": [Valid Unique Enemies]
     OriginalAreaEnemies = {
         "Gormott": [184, 185, 186, 187, 189, 190, 191, 193, 195, 196, 197, 198, 266, 303, 304, 329, 332, 341, 342, 345, 346, 347, 348, 349, 350, 352, 487, 488, 489, 490, 491, 492, 546, 547, 548, 559, 572, 598, 600, 601, 602, 603, 604, 607, 608, 609, 610, 611, 635, 636, 637, 638, 639, 641, 642, 643, 644, 645, 646, 647, 648, 649, 650, 651, 652, 653, 654, 655, 656, 657, 658, 659, 660, 661, 662, 663, 664, 665, 666, 667, 668, 669, 670, 671, 672, 673, 674, 675, 676, 677, 678, 679, 680, 681, 682, 684, 685, 686, 687, 688, 689, 690, 691, 692, 693, 694, 695, 696, 697, 699, 701, 703, 705, 706, 707, 708, 709, 710, 711, 712, 713, 714, 715, 723, 729, 730, 731, 732, 733, 734, 735, 736, 738, 1320, 1321, 1326, 1329, 1386, 1387],
@@ -567,7 +567,11 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
     # EnemyRandoLogic.BigEnemyCollisionFix() no longer needed, there's no red rings at all.
     if ExtraSuperbosses:
         UniqueSuperbosses = list(dict.fromkeys(AllAreaSuperbosses))
-        ChosenSuperbossNumbers = random.choices(Helper.InclRange(0, 9), k = SuperbossCount)
+        ValidSuperBossList = Helper.InclRange(0, 9)
+        for i in range(SuperbossCount):
+            ChosenSuperbossNumber = random.choice(ValidSuperBossList)
+            ChosenSuperbossNumbers.append(ChosenSuperbossNumber)
+            ValidSuperBossList.remove(ChosenSuperbossNumber)
         global ChosenSuperbosses
         ChosenSuperbosses = []
         for i in range(0, SuperbossCount):
