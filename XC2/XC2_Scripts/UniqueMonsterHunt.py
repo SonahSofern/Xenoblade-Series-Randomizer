@@ -823,6 +823,7 @@ def UMEnemyAggro(): # custom enemy aggro
                 if (row["$id"] in IDs.ValidEnemies) & (row["$id"] not in AllUniqueMonsterDefaultIDs + AllSuperBossDefaultIDs):
                     row["Flag"]["AlwaysAttack"] = 0
                     row["Flag"]["mBoss"] = 0
+                    row["Flag"]["LinkType"] = 0
                     row["SearchRange"] = 0
                     row["SearchRadius"] = 0
                     row["SearchAngle"] = 0
@@ -847,6 +848,7 @@ def UMEnemyAggro(): # custom enemy aggro
                 if (EnemyAggroSliderOdds != 100) & (row["$id"] not in AllUniqueMonsterDefaultIDs + AllSuperBossDefaultIDs) & (random.randint(0,100) >= EnemyAggroSliderOdds) & (row["$id"] in IDs.ValidEnemies):
                     row["Flag"]["AlwaysAttack"] = 0
                     row["Flag"]["mBoss"] = 0
+                    row["Flag"]["LinkType"] = 0
                     row["SearchRange"] = 0
                     row["SearchRadius"] = 0
                     row["SearchAngle"] = 0
@@ -861,6 +863,13 @@ def UMEnemyAggro(): # custom enemy aggro
                     row["SearchRange"] = 10
                     row["SearchAngle"] = 360
                     row["SearchRadius"] = 5
+                elif row["$id"] in AllBossDefaultIDs: # even if a boss doesnt roll non-aggression, we want to nerf it's aggro radius and area
+                    row["SearchRange"] = random.randint(5, 25)
+                    row["SearchAngle"] = random.randint(45, 75)
+                    row["SearchRadius"] = random.randint(1, 10)
+                    row["BatInterval"] = 50
+                    row["BatArea"] = 50
+                    row["Flag"]["mBoss"] = 0
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)

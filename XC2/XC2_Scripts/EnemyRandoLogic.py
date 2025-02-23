@@ -386,6 +386,7 @@ def EnemyAggroProportion():
                 if (row["$id"] in ValidEnemies) & (row["$id"] in OtherEnemyIDs):
                     row["Flag"]["AlwaysAttack"] = 0
                     row["Flag"]["mBoss"] = 0
+                    row["Flag"]["LinkType"] = 0
                     row["SearchRange"] = 0
                     row["SearchRadius"] = 0
                     row["SearchAngle"] = 0
@@ -402,6 +403,7 @@ def EnemyAggroProportion():
                 if (EnemyAggroSliderOdds != 100) & (row["$id"] in OtherEnemyIDs) & (random.randint(0,100) >= EnemyAggroSliderOdds) & (row["$id"] in ValidEnemies):
                     row["Flag"]["AlwaysAttack"] = 0
                     row["Flag"]["mBoss"] = 0
+                    row["Flag"]["LinkType"] = 0
                     row["SearchRange"] = 0
                     row["SearchRadius"] = 0
                     row["SearchAngle"] = 0
@@ -434,6 +436,7 @@ def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs): #when enemy
                 if (EnemyAggroSliderOdds != 100) & (row["$id"] in OtherEnemyIDs) & (random.randint(0,100) >= EnemyAggroSliderOdds) & (row["$id"] in ValidEnemies):
                     row["Flag"]["AlwaysAttack"] = 0
                     row["Flag"]["mBoss"] = 0
+                    row["Flag"]["LinkType"] = 0
                     row["SearchRange"] = 0
                     row["SearchRadius"] = 0
                     row["SearchAngle"] = 0
