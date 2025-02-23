@@ -19,10 +19,6 @@ TotalAreaPool = ["Gormott", "Uraya", "Mor Ardain", "Leftheria", "Temperantia", "
 # "Driver": ["scriptName", "scriptStartID"]
 PartyMembersAddScripts = {"Tora": ["chapt02", 7], "Nia": ["chapt02", 9], "Morag": ["chapt05", 7], "Zeke": ["chapt06", 5]}
 
-
-
-
-
 # Misc IDs
 
 ProofofPurchaseIDs = Helper.InclRange(25306, 25321)
@@ -226,7 +222,7 @@ def CreateShopDictionaries():
         "RewardItemIDs": [Helper.ExtendListtoLength([], 10, "25489"), TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemID1->4, item ids from ITM files, same number as RewardQtys
         "RewardQtys": [TokenExchangeRewards, TokenFillerList, TokenFillerList, TokenFillerList], # FLD_QuestReward ItemNumber1->4, 1 list for each ItemNumber, and number of items in each list equal to the number of InputTaskIDs
         "RewardNames": ["Doubloons + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP", "Doubloons + EXP + SP"], # names for items with IDs in FLD_QuestReward, as many items as non-zero InputTaskIDs
-        "RewardSP": [250, 375, 500, 625, 750, 875, 1000, 1250, 1500, 1750], #FLD_QuestReward Sp
+        "RewardSP": Helper.ExtendListtoLength([250], 10, "inputlist[i-1] + 40"), #FLD_QuestReward Sp
         "RewardXP": [0, 630, 630, 630, 630, 630, 630, 630, 630, 630], # FLD_QuestReward EXP
         "HideReward": TokenFillerList, # Whether or not to hide the reward, MNU_ShopChangeTask "HideReward"
     }
@@ -734,7 +730,7 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
         "Uraya": [199, 201, 202, 203, 204, 206, 208, 210, 212, 214, 267, 268, 305, 307, 308, 309, 310, 356, 365, 367, 369, 372, 373, 374, 375, 407, 409, 411, 451, 479, 481, 483, 485, 496, 503, 506, 508, 510, 512, 536, 538, 567, 577, 578, 579, 581, 583, 588, 591, 593, 739, 740, 741, 742, 743, 744, 745, 746, 747, 748, 749, 750, 751, 752, 753, 754, 755, 756, 757, 759, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 800, 802, 804, 806, 808, 809, 810, 811, 812, 814, 815, 816, 817, 819, 1674],
         "Mor Ardain": [216, 217, 219, 220, 221, 222, 223, 225, 227, 269, 270, 271, 313, 315, 383, 384, 385, 386, 389, 390, 391, 392, 393, 394, 395, 396, 399, 401, 403, 404, 405, 406, 454, 493, 495, 517, 519, 521, 523, 525, 532, 533, 534, 535, 540, 542, 544, 549, 550, 551, 555, 571, 821, 822, 823, 824, 825, 826, 827, 828, 829, 830, 831, 832, 833, 834, 835, 836, 837, 838, 839, 840, 841, 842, 843, 844, 845, 847, 848, 849, 850, 851, 852, 853, 854, 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 865, 866, 867, 868, 869, 870, 871, 872, 873, 874, 875, 876, 877, 878, 879, 880, 881, 882, 884, 886, 888, 890, 891, 892, 893, 894, 895, 896, 898, 899, 906, 908, 909, 910, 911, 912, 913, 914, 915, 916, 917, 918, 919, 920, 922, 924, 926, 928, 929, 1343, 1388, 1418, 1419, 1675, 1676, 1677, 1678, 1679, 1680, 1681],
         "Leftheria": [229, 318, 319, 414, 415, 418, 445, 446, 447, 448, 474, 476, 498, 503, 553, 1196, 1197, 1198, 1199, 1200, 1201, 1202, 1203, 1204, 1205, 1206, 1207, 1208, 1209, 1210, 1211, 1212, 1213, 1214, 1215, 1216, 1217, 1218, 1219, 1220, 1221, 1222, 1223, 1224, 1225, 1226, 1227, 1228, 1229, 1230, 1231, 1232, 1233, 1234, 1235, 1236, 1237, 1238, 1239, 1240, 1241, 1242, 1243, 1244, 1245, 1246, 1247, 1248, 1249, 1250, 1251, 1254, 1255, 1256, 1258, 1260, 1261, 1262, 1264, 1265, 1344, 1345, 1395, 1397, 1398, 1399, 1415, 1416, 1417, 1684, 1686, 1687, 1688, 1689, 1690],
-        "Temperantia": [231, 232, 234, 376, 475, 477, 500, 501, 504, 552, 560, 567, 569, 964, 965, 966, 967, 968, 969, 970, 971, 972, 973, 974, 975, 976, 977, 978, 979, 980, 981, 982, 983, 984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 996, 997, 998, 999, 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1015, 1016, 1017, 1019, 1020, 1022, 1023, 1025, 1026, 1027, 1342, 1389, 1391, 1393, 1408, 1410, 1412, 1413, 1414],
+        "Temperantia": [231, 232, 234, 376, 475, 477, 500, 501, 504, 552, 560, 567, 569, 964, 965, 966, 967, 968, 969, 970, 971, 972, 973, 974, 975, 976, 977, 978, 979, 980, 981, 982, 983, 984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 996, 997, 998, 999, 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1019, 1020, 1022, 1023, 1025, 1026, 1027, 1342, 1389, 1391, 1393, 1408, 1410, 1412, 1413, 1414],
         "Tantal": [237, 238, 239, 240, 241, 323, 436, 437, 455, 456, 457, 458, 459, 461, 462, 463, 513, 515, 566, 576, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050, 1051, 1052, 1053, 1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062, 1063, 1064, 1065, 1066, 1067, 1068, 1069, 1070, 1071, 1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079, 1080, 1081, 1082, 1083, 1084, 1085, 1086, 1087, 1088, 1089, 1090, 1091, 1092, 1093, 1094, 1095, 1096, 1097, 1098, 1099, 1100, 1101, 1102, 1104, 1106, 1108, 1109, 1110, 1111, 1112, 1113, 1114, 1115, 1404, 1405, 1406, 1425, 1682, 1683, 1888],
         "Spirit Crucible": [242, 359, 497, 503, 570, 573, 930, 931, 932, 933, 934, 935, 936, 938, 939, 940, 941, 942, 943, 944, 945, 946, 947, 948, 949, 950, 951, 952, 953, 954, 955, 957, 958],
         "Cliffs of Morytha": [243, 244, 245, 1116, 1117, 1118, 1119, 1120, 1121, 1122, 1123, 1124, 1125, 1126, 1127, 1128, 1131, 1132, 1134, 1135, 1137, 1400, 1402],
@@ -889,6 +885,8 @@ def CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder): # adj
                         EnemyParamstoNerf[i].append(row["ParamID"])
                         if row["Scale"] < 35:
                             row["Scale"] = 35
+                        elif row["Scale"] > 750:
+                            row["Scale"] = 750
                         break
         file.seek(0)
         file.truncate()
@@ -901,6 +899,8 @@ def CHR_EnArrangeAdjustments(AllAreaMonsters, EnemySets, ChosenAreaOrder): # adj
                 if row["$id"] in EnemyParamstoNerf[i]:
                     for stat in ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"]:
                         row[stat] = round(row[stat]*NerfRatio)
+        for row in data["rows"]:
+            row["HpMaxRev"] = round(row["HpMaxRev"]* 0.5) # nerf the enemy hp harder.         
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1788,7 +1788,7 @@ def PouchItemRewards():
             PouchItemNameDistribution.append([PouchFoodTypetoCostName[key][1] for key in PouchItemTypes])
             PouchItemShopRewardDistribution.append([PouchItem1IDs, PouchItem2IDs, PouchItem3IDs, PouchItem4IDs])
         for row in data["rows"]: # Change the duration of all to 60 minutes, and they all give no trust points
-            row["Time"] = 60
+            row["Time"] = 6099
             row["ValueMax"] = 10
             row["TrustPoint"] = 0
         file.seek(0)
