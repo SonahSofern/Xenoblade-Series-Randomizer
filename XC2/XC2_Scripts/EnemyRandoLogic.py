@@ -844,7 +844,7 @@ def EnemyLogic():
     MixEnemiesBetweenTypesBox = Options.EnemiesOption_MixedTypes.GetState()
     AllBossDefaultIDstoUse = AllBossDefaultIDs
     AllBossDefaultLevelstoUse = AllBossDefaultLevels
-    BalanceEnemyGroupsBox = Options.EnemiesOption_BalancedEnemyGroups.GetState()
+    BalanceEnemyGroupsBox = Options.EnemiesOption_BalanceEnemyGroups.GetState()
     if Options.RaceModeOption.GetState(): # removing malos in auresco fight for race mode specifically, he has an absurd amount of hp and is just a slog of a fight
         AllBossDefaultIDstoUse = [x for x in AllBossDefaultIDs if x != 1443]
         del AllBossDefaultLevelstoUse[83]
