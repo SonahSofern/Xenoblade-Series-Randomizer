@@ -793,9 +793,19 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
         AllAreaMonsters.append(CurrentAreaMonsters)
         AllOriginalAreaEnemies.extend(OriginalAreaEnemies[ChosenAreaOrder[k]])
         AllNewAreaEnemies.extend(NewAreaEnemies)
+    IDs.FlyingEnArrangeIDs.extend([244, 245]) # fixes issue with malos and jin's spawn points disappearing, and them not being flying enemies when the cliffs of morytha fall down
+    IDs.OriginalFlyingHeights.extend([-3000, -3000])
+    IDs.OriginalWalkSpeeds.extend([99, 99])
+    IDs.OriginalRunSpeeds.extend([99, 99])
+    IDs.OriginalBtlSpeeds.extend([99, 99])
     EnemyRandoLogic.FlyingEnemyFix(AllOriginalAreaEnemies, AllNewAreaEnemies)
     EnemyRandoLogic.SwimmingEnemyFix(AllOriginalAreaEnemies, AllNewAreaEnemies)
     EnemyRandoLogic.FishFix()
+    del IDs.FlyingEnArrangeIDs[-2:] 
+    del IDs.OriginalFlyingHeights[-2:]
+    del IDs.OriginalWalkSpeeds[-2:]
+    del IDs.OriginalRunSpeeds[-2:]
+    del IDs.OriginalBtlSpeeds[-2:]
     # EnemyRandoLogic.BigEnemyCollisionFix() no longer needed, there's no red rings at all.
     if ExtraSuperbosses:
         UniqueSuperbosses = list(dict.fromkeys(AllAreaSuperbosses))
