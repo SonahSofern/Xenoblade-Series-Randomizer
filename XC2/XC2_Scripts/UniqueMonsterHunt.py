@@ -97,7 +97,7 @@ def UMHunt():
     GetDifficulty()
     CheckForSuperbosses()
     ChosenAreaOrder.extend(random.sample(TotalAreaPool, SetCount))
-    #FindMonsters(ChosenAreaOrder)
+    #DebugFindMonsters(ChosenAreaOrder)
     PartyMemberstoAdd = PartyMemberAddition()
     AreaUMs, AllAreaMonsters = CustomEnemyRando(ChosenAreaOrder)
     EnemySets = ChosenEnemySets(AreaUMs)
@@ -118,6 +118,7 @@ def UMHunt():
     #DebugItemsPlace() # currently doesnt matter since I hide all the argentum chests anyways
     #DebugEasyMode()
     #DebugSpawnCountPrint(EnemySets, ChosenAreaOrder)
+    #DebugEnemyLevels(ChosenAreaOrder)
 
 def DebugTesting():
     with open("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
@@ -132,7 +133,42 @@ def DebugTesting():
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def FindMonsters(ChosenAreaOrder): # was used to debug and find enemies that spawned in too often. If the objective pointer points towards defeating an enemy of which there are 16 or more on the map you're on, the game will freeze upon loading.
+def DebugEnemyLevels(ChosenAreaOrder):
+    AllAreasEnemies = []
+    EnemiesinMorethan1Area = []
+    TotalAreasEnemies = []
+    for k in range(0, len(ChosenAreaOrder)):
+        CurrentAreasEnemies = []
+        enemypopfile = "./XC2/_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[k]][2] + "_FLD_EnemyPop.json"
+        with open(enemypopfile, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for row in data["rows"]:
+                for k in range(1, 5):
+                    if row[f"ene{k}ID"] == 0:
+                        break
+                    else:
+                        CurrentAreasEnemies.append(row[f"ene{k}ID"])
+                        break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+        AllAreasEnemies.append(CurrentAreasEnemies)
+        TotalAreasEnemies.extend(list(set(CurrentAreasEnemies)))
+    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for i in range(len(ChosenAreaOrder)):
+            for row in data["rows"]:
+                if (row["$id"] in AllAreasEnemies[i]) & (row["Lv"] not in [5+12*i, 115, 125, 135, 145]): #if the enemy level doesnt match what it should
+                    print(f"{row['$id']} is not the correct level for {ChosenAreaOrder[i]}! It should be level {5+12*i}.")
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    for i in range(len(TotalAreasEnemies)):
+        numofenemy = TotalAreasEnemies.count(TotalAreasEnemies[i])
+        if numofenemy > 1:
+            print(f"{TotalAreasEnemies[i]} appears {numofenemy} times!")
+
+def DebugFindMonsters(ChosenAreaOrder): # was used to debug and find enemies that spawned in too often. If the objective pointer points towards defeating an enemy of which there are 16 or more on the map you're on, the game will freeze upon loading.
     enemycountholder = Helper.ExtendListtoLength([0], len(AllQuestDefaultEnemyIDs),"0")
     for i in range(0, len(ChosenAreaOrder)):
         enemypopfile = "./XC2/_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_EnemyPop.json"
@@ -316,7 +352,6 @@ def CreateShopDictionaries():
     }
 
     FullShopTemplateList = [CoreCrystalShop, WeaponChipShop, AuxCoreShop, PouchItemShop, DriverAccessoryShop, GambaShop, TokenExchangeShop, WPManualShop, PoppiswapShop]
-
 
 
 def ShopChanges(ChosenAreaOrder): # Moved these out since they were cluttering the main function up. Order probably matters
@@ -724,13 +759,13 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
     # "Area Name": [Valid Unique Enemies]
     OriginalAreaEnemies = {
         "Gormott": [184, 185, 186, 187, 189, 190, 191, 193, 195, 196, 197, 198, 266, 303, 304, 329, 332, 341, 342, 345, 346, 347, 348, 349, 350, 352, 487, 488, 489, 490, 491, 492, 546, 547, 548, 559, 572, 598, 600, 601, 602, 603, 604, 607, 608, 609, 610, 611, 635, 636, 637, 638, 639, 641, 642, 643, 644, 645, 646, 647, 648, 649, 650, 651, 652, 653, 654, 655, 656, 657, 658, 659, 660, 661, 662, 663, 664, 665, 666, 667, 668, 669, 670, 671, 672, 673, 674, 675, 676, 677, 678, 679, 680, 681, 682, 684, 685, 686, 687, 688, 689, 690, 691, 692, 693, 694, 695, 696, 697, 699, 701, 703, 705, 706, 707, 708, 709, 710, 711, 712, 713, 714, 715, 723, 729, 730, 731, 732, 733, 734, 735, 736, 738, 1320, 1321, 1326, 1329, 1386, 1387],
-        "Uraya": [199, 201, 202, 203, 204, 206, 208, 210, 212, 214, 267, 268, 305, 307, 308, 309, 310, 356, 365, 367, 369, 372, 373, 374, 375, 407, 409, 411, 451, 479, 481, 483, 485, 496, 503, 506, 508, 510, 512, 536, 538, 567, 577, 578, 579, 581, 583, 588, 591, 593, 739, 740, 741, 742, 743, 744, 745, 746, 747, 748, 749, 750, 751, 752, 753, 754, 755, 756, 757, 759, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 800, 802, 804, 806, 808, 809, 810, 811, 812, 814, 815, 816, 817, 819, 1674],
+        "Uraya": [199, 201, 202, 203, 204, 206, 208, 210, 212, 214, 267, 268, 305, 307, 308, 309, 310, 356, 365, 367, 369, 372, 373, 374, 375, 407, 409, 411, 451, 479, 481, 483, 485, 496, 506, 508, 510, 512, 536, 538, 567, 577, 578, 579, 581, 583, 588, 591, 593, 739, 740, 741, 742, 743, 744, 745, 746, 747, 748, 749, 750, 751, 752, 753, 754, 755, 756, 757, 759, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 800, 802, 804, 806, 808, 809, 810, 811, 812, 814, 815, 816, 817, 819, 1674],
         "Mor Ardain": [216, 217, 219, 220, 221, 222, 223, 225, 227, 269, 270, 271, 313, 315, 383, 384, 385, 386, 389, 390, 391, 392, 393, 394, 395, 396, 399, 401, 403, 404, 405, 406, 454, 493, 495, 517, 519, 521, 523, 525, 532, 533, 534, 535, 540, 542, 544, 549, 550, 551, 555, 571, 821, 822, 823, 824, 825, 826, 827, 828, 829, 830, 831, 832, 833, 834, 835, 836, 837, 838, 839, 840, 841, 842, 843, 844, 845, 847, 848, 849, 850, 851, 852, 853, 854, 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 865, 866, 867, 868, 869, 870, 871, 872, 873, 874, 875, 876, 877, 878, 879, 880, 881, 882, 884, 886, 888, 890, 891, 892, 893, 894, 895, 896, 898, 899, 906, 908, 909, 910, 911, 912, 913, 914, 915, 916, 917, 918, 919, 920, 922, 924, 926, 928, 929, 1343, 1388, 1418, 1419, 1675, 1676, 1677, 1678, 1679, 1680, 1681],
-        "Leftheria": [229, 318, 319, 414, 415, 418, 445, 446, 447, 448, 474, 476, 498, 503, 553, 1196, 1197, 1198, 1199, 1200, 1201, 1202, 1203, 1204, 1205, 1206, 1207, 1208, 1209, 1210, 1211, 1212, 1213, 1214, 1215, 1216, 1217, 1218, 1219, 1220, 1221, 1222, 1223, 1224, 1225, 1226, 1227, 1228, 1229, 1230, 1231, 1232, 1233, 1234, 1235, 1236, 1237, 1238, 1239, 1240, 1241, 1242, 1243, 1244, 1245, 1246, 1247, 1248, 1249, 1250, 1251, 1254, 1255, 1256, 1258, 1260, 1261, 1262, 1264, 1265, 1344, 1345, 1395, 1397, 1398, 1399, 1415, 1416, 1417, 1684, 1686, 1687, 1688, 1689, 1690],
-        "Temperantia": [231, 232, 234, 376, 475, 477, 500, 501, 504, 552, 560, 567, 569, 964, 965, 966, 967, 968, 969, 970, 971, 972, 973, 974, 975, 976, 977, 978, 979, 980, 981, 982, 983, 984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 996, 997, 998, 999, 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1019, 1020, 1022, 1023, 1025, 1026, 1027, 1342, 1389, 1391, 1393, 1408, 1410, 1412, 1413, 1414],
+        "Leftheria": [229, 318, 319, 414, 415, 418, 445, 446, 447, 448, 474, 476, 498, 553, 1196, 1197, 1198, 1199, 1200, 1201, 1202, 1203, 1204, 1205, 1206, 1207, 1208, 1209, 1210, 1211, 1212, 1213, 1214, 1215, 1216, 1217, 1218, 1219, 1220, 1221, 1222, 1223, 1224, 1225, 1226, 1227, 1228, 1229, 1230, 1231, 1232, 1233, 1234, 1235, 1236, 1237, 1238, 1239, 1240, 1241, 1242, 1243, 1244, 1245, 1246, 1247, 1248, 1249, 1250, 1251, 1254, 1255, 1256, 1258, 1260, 1261, 1262, 1264, 1265, 1344, 1345, 1395, 1397, 1398, 1399, 1415, 1416, 1417, 1684, 1686, 1687, 1688, 1689, 1690],
+        "Temperantia": [231, 232, 234, 376, 475, 477, 500, 501, 504, 552, 560, 569, 964, 965, 966, 967, 968, 969, 970, 971, 972, 973, 974, 975, 976, 977, 978, 979, 980, 981, 982, 983, 984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 996, 997, 998, 999, 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1019, 1020, 1022, 1023, 1025, 1026, 1027, 1342, 1389, 1391, 1393, 1408, 1410, 1412, 1413, 1414],
         "Tantal": [237, 238, 239, 240, 241, 323, 436, 437, 455, 456, 457, 458, 459, 461, 462, 463, 513, 515, 566, 576, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050, 1051, 1052, 1053, 1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062, 1063, 1064, 1065, 1066, 1067, 1068, 1069, 1070, 1071, 1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079, 1080, 1081, 1082, 1083, 1084, 1085, 1086, 1087, 1088, 1089, 1090, 1091, 1092, 1093, 1094, 1095, 1096, 1097, 1098, 1099, 1100, 1101, 1102, 1104, 1106, 1108, 1109, 1110, 1111, 1112, 1113, 1114, 1115, 1404, 1405, 1406, 1425, 1682, 1683, 1888],
         "Spirit Crucible": [242, 359, 497, 503, 570, 573, 930, 931, 932, 933, 934, 935, 936, 938, 939, 940, 941, 942, 943, 944, 945, 946, 947, 948, 949, 950, 951, 952, 953, 954, 955, 957, 958],
-        "Cliffs of Morytha": [243, 244, 245, 1116, 1117, 1118, 1119, 1120, 1121, 1122, 1123, 1124, 1125, 1126, 1127, 1128, 1131, 1132, 1134, 1135, 1137, 1400, 1402],
+        "Cliffs of Morytha": [243, 1116, 1117, 1118, 1119, 1120, 1121, 1122, 1123, 1124, 1125, 1126, 1127, 1128, 1131, 1132, 1134, 1135, 1137, 1400, 1402],
         "Land of Morytha": [248, 249, 250, 274, 324, 351, 565, 1145, 1146, 1147, 1148, 1149, 1150, 1151, 1152, 1153, 1154, 1155, 1156, 1157, 1423, 1424],
         "World Tree": [251, 252, 253, 254, 325, 326, 557, 558, 564, 1158, 1159, 1160, 1161, 1162, 1163, 1164, 1165, 1166, 1167, 1168, 1170, 1171, 1172, 1173, 1174, 1175, 1176, 1177, 1178, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1189, 1422]
     }
@@ -783,7 +818,7 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
                                 AllAreaSuperbosses.append(NewEnemyID)
                                 SuperbossMapsFull.append(ChosenAreaOrder[k])
                         except:
-                            pass
+                            row[f"ene{j}num"] = 0
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
@@ -793,19 +828,9 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
         AllAreaMonsters.append(CurrentAreaMonsters)
         AllOriginalAreaEnemies.extend(OriginalAreaEnemies[ChosenAreaOrder[k]])
         AllNewAreaEnemies.extend(NewAreaEnemies)
-    IDs.FlyingEnArrangeIDs.extend([244, 245]) # fixes issue with malos and jin's spawn points disappearing, and them not being flying enemies when the cliffs of morytha fall down
-    IDs.OriginalFlyingHeights.extend([-3000, -3000])
-    IDs.OriginalWalkSpeeds.extend([99, 99])
-    IDs.OriginalRunSpeeds.extend([99, 99])
-    IDs.OriginalBtlSpeeds.extend([99, 99])
     EnemyRandoLogic.FlyingEnemyFix(AllOriginalAreaEnemies, AllNewAreaEnemies)
     EnemyRandoLogic.SwimmingEnemyFix(AllOriginalAreaEnemies, AllNewAreaEnemies)
     EnemyRandoLogic.FishFix()
-    del IDs.FlyingEnArrangeIDs[-2:] 
-    del IDs.OriginalFlyingHeights[-2:]
-    del IDs.OriginalWalkSpeeds[-2:]
-    del IDs.OriginalRunSpeeds[-2:]
-    del IDs.OriginalBtlSpeeds[-2:]
     # EnemyRandoLogic.BigEnemyCollisionFix() no longer needed, there's no red rings at all.
     if ExtraSuperbosses:
         UniqueSuperbosses = list(dict.fromkeys(AllAreaSuperbosses))
