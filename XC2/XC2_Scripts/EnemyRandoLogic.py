@@ -773,6 +773,8 @@ def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/f
 # returns list of all indices which did not satisfy the count conditions
 def getMaxCountViolations(DefaultEnemyIDs, RandomizedEnemyIDs):
     EnemyMaxCounts = {
+        214: 1, # Malos from Malos/Ahkos in Uraya (phase 1)
+        268: 1, # Malos from Malos/Ahkos in Uraya (phase 2)
         231: 2,  # Jin from Temperantia
         232: 2,  # Aeshma's Core, 1st fight
         234: 2,  # Aeshma's Core, 2nd fight
@@ -782,6 +784,8 @@ def getMaxCountViolations(DefaultEnemyIDs, RandomizedEnemyIDs):
         245: 1,  # Malos from Jin/Malos fight in Cliffs of Morytha
         253: 1,  # Jin from World Tree
         1443: 1,  # Malos from Torna
+        1446: 1,  # Malos from Torna
+        1447: 1,  # Malos from Torna
         1882: 1,  # Elma
         1884: 1,  # Also Elma, unsure what the difference is
     }
