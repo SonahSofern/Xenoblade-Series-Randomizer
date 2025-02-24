@@ -3,7 +3,6 @@ from scripts import UI_Colors
 from tkinter import font, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys, datetime
 
-
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
 from scripts import SavedOptions
 
@@ -13,6 +12,7 @@ RootsForStyling = []
 defFontVar = StringVar(value="Arial")
 defFontSizeVar = IntVar(value=13)
 defGUIThemeVar = StringVar(value="Dark Mode")
+fontNameVar = StringVar()
 
 fontType = SavedOptions.SavedEntry("Font", defFontVar)
 fontSizeSave = SavedOptions.SavedEntry("Font Size", defFontSizeVar)
@@ -66,7 +66,6 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
         GUIWindow = newWindow
         newWindow.protocol("WM_DELETE_WINDOW", lambda: (RootsForStyling.remove(newWindow), newWindow.destroy()))
         iter = 0
-        fontNameVar = StringVar()
         fontSizeVar = StringVar()
         newWindow.title("GUI Settings")
         newWindow.geometry("1000x300")
@@ -79,7 +78,6 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
         newWindow.bind("<Up>", IncreaseFontSize)
         newWindow.bind("<Down>", DecreaseFontSize) 
         newWindow.config(padx=10, pady=10)
-        # Still dont get these two lines but oh well
         fontNameVar.trace_add("write", lambda name, index, mode: LoadFontByName(fontNameVar.get()))
         fontSizeVar.trace_add("write", lambda name, index, mode: LoadFontSize(fontSizeVar.get()))
         from tkinter.font import Font

@@ -13,3 +13,4 @@ https://github.com/roccodev/bdat-rs \
 https://frontiernav.net/wiki/xenoblade-chronicles-2 \
 https://xenobladedata.github.io/ \
 https://gitlab.com/damysteryman/XC2SaveNETThingy/-/tags/r6.1 
+https://tcrf.net/Notes:Xenoblade_Chronicles/Music_Tracks

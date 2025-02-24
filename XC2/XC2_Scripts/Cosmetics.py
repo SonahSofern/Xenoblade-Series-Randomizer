@@ -69,12 +69,14 @@ LoyalBellflowerNia = Cosmetic("bl/bl120401", 1011, Nia, "Loyal Bellflower Nia", 
 CarbonMythra = Cosmetic("bl/bl120201", 1002, Mythra, "Carbon Mythra", Blade)
 RadiantBeachMythra = Cosmetic("bl/bl110201", 1002, Mythra, "Radiant Beach Mythra", Blade)
 PyraStyleMythra = Cosmetic("bl/bl100201", 1002, Mythra, "Pyra Style Mythra", Blade)
+MassiveMeleeMythra = Cosmetic("bl/bl000201", 1002, Mythra, "Massive Melee Mythra")
 # DefaultMythra = Cosmetic("bl/bl000201", 1002, Mythra, "Default Mythra", Blade)
 
 MythraStylePyra = Cosmetic("bl/bl100102", 1001, Pyra, "Mythra Style Pyra", Blade)
 DisguisedPyra = Cosmetic("bl/bl100101", 1001, Pyra, "Disguised Pyra", Blade)
 BlueSkyPyra = Cosmetic("bl/bl120101", 1001, Pyra, "Blue Sky Pyra", Blade)
 ProSwimmerPyra = Cosmetic("bl/bl110101", 1001, Pyra, "Pro Swimmer Pyra", Blade)
+HotSpringPyra = Cosmetic("bl/bl000101", 1002, Pyra, "Hot Springs Pyra", Blade)
 # DefaultPyra = Cosmetic("bl/bl000101", 1001, Pyra, "Default Pyra", Blade)
 
 # DefaultPoppiα = Cosmetic("bl/bl000601", 1005, Poppiα, "Default Poppiα", ArtBlade)
