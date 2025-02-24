@@ -143,7 +143,7 @@ EnemyMovespeedOption = Option("Enemy Movespeed", Enemies, "Randomizes how fast e
 MusicOption = Option("Music", Misce, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()])
 MusicOption_MixBattleAndEnv = SubOption("Mix Battle and Environment Themes", MusicOption, _defState = False)
 TrustLineOption = Option("Trust Lines", Misce, "Randomizes blade-driver trust lines in battle (colors, power, etc.)", [lambda: TrustBeam.BeamRandomizer()])
-CustomCoreCrystalOption = Option("Custom Core Crystals", Misce, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], _hasSpinBox = True)
+CustomCoreCrystalOption = Option("Custom Core Crystals", Misce, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], _hasSpinBox = True, _spinDesc = "% of Chests")
 # DifficultyOption = Option("Difficulty", Misce, "Forces this difficulty, regardless of what is chosen in the options menu")
 # DifficultyOption_Easy = SubOption("Easy", DifficultyOption)
 # DifficultyOption_Normal = SubOption("Normal", DifficultyOption)
@@ -179,9 +179,9 @@ FasterLevelsOption_32 = SubOption("32x", FasterLevelsOption, [lambda: Helper.Mat
 ShortcutsOption = Option("Shortcuts", QOL, "Various speedups for the main story quests")
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
-UnhideHiddenDriverSkillTreeOption = Option("Unlocked Hidden Skill Tree", QOL, "Unlocks the Hidden Driver Skill tree by default, without requring a NG+ save.", [lambda: DLCFlagQOL.CreateDLCtoSetFlag(["Driver Skill Tree Key"], [48589])])
-UnlockAllBladeSlots = Option("Unlock All Blade Equip Slots", QOL, "Unlocks the second and third blade equip slots before they normally would in the main story.", [lambda: DLCFlagQOL.CreateDLCtoSetFlag(["2nd Blade Equip Slot", "3rd Blade Equip Slot"], [35327, 35328])])
-
+UnhideHiddenDriverSkillTreeOption = Option("Unlocked Hidden Skill Tree", QOL, "Unlocks the Hidden Driver Skill tree by default, without requring a NG+ save. Accessed by accepting a DLC item in the DLC Menu.", [lambda: DLCFlagQOL.CreateDLCtoSetFlag(["Driver Skill Tree Key"], [48589])])
+UnlockAllBladeSlots = Option("Unlock All Blade Equip Slots", QOL, "Unlocks the second and third blade equip slots before they normally would in the main story. Accessed by accepting a DLC item in the DLC Menu.", [lambda: DLCFlagQOL.CreateDLCtoSetFlag(["2nd Blade Equip Slot", "3rd Blade Equip Slot"], [35327, 35328])])
+StartwithIncreasedMovespeed = Option("Increased Movespeed", QOL, "Adds a shop deed to the DLC items, one which gives you movespeed determined by the spinbox value (x10)! Accessed by accepting a DLC item in the DLC Menu.", [lambda: DLCFlagQOL.AddMovespeedDeed()], _hasSpinBox = True, _spinMin = 0, _spinMax = 50, _spinIncr = 5, _spinDesc = "% Increase (x10)", _spinWidth = 2)
 
 # Funny
 ProjTreasureChestOption = Option("Projectile Treasure Chests", Funny, "Launches your items from chests",[lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [15])])

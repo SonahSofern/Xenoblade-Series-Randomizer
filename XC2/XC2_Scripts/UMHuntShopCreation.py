@@ -1301,6 +1301,7 @@ def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of i
     for i in range(0, len(ChosenAreaOrder)):
         MapValidNPCIDs = [x for x in Helper.FindSubOptionValuesList("./XC2/_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", "flag", "Talkable", 1, "$id") if x not in InvalidMapNPCs]
         ChosenSecretNPCID = random.choice(MapValidNPCIDs)
+        OrigNPCID = 0
         with open("./XC2/_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
             data = json.load(file)
             for row in data["rows"]:
@@ -1490,6 +1491,8 @@ def ReAddInns(): # Need to readd inns to Mor Ardain and Gormott to allow you to 
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+def ExportAccessoryAuxCoreMaxIDs(): # outputs the globals to the UMHuntMain file, used to generate enemy drops
+    return SecretAccessoryIDs, SecretAuxCoreIDs
 
 class UMHuntSecretShopEnhancements(Enhancement):
     def __init__(self, name, Enhancement, Caption, Param1 = [0,0,0,0], Param2 = [0,0,0,0], ReversePar1 = False, DisTag = ""):

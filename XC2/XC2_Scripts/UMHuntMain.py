@@ -57,6 +57,7 @@ def UMHunt():
     MoveSpeedDeedSetup()
     BalanceChanges(ChosenAreaOrder)
     RandomLandmarkCreation()
+    CustomEnemyDrops(EnemySets)
     if ExtraSuperbosses:
         OhBoyHereWeGoAgain()
     Cleanup()
@@ -182,11 +183,14 @@ def SpiritCrucibleNerfs(ChosenAreaOrder): # Spirit Crucible is way too oppressiv
         Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BTL_MapRev.json", ["KizunaCap"], 1000)
 
 def MoveSpeedDeedSetup(): # We add the movespeed deed to the inventory via DLC, codewise it's located with the RandomLandmarkCreation code
+    CurrentNameID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
+    BonusMovespeed = 500
     with open("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes caption and name
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 25249:
-                row["Caption"] = 603 # Increases running speed by 500%
+                row["Name"] = CurrentNameID
+                row["Caption"] = CurrentNameID + 1 # Increases running speed by 500%
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -194,13 +198,13 @@ def MoveSpeedDeedSetup(): # We add the movespeed deed to the inventory via DLC, 
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 1:
-                row["Value"] = 500
+                row["Value"] = BonusMovespeed
                 row["Type"] = 1
                 break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/FLD_OwnerBonusParam.json", 'r+', encoding='utf-8') as file: # Changes max movespeed bonus to 250%
+    with open("./XC2/_internal/JsonOutputs/common/FLD_OwnerBonusParam.json", 'r+', encoding='utf-8') as file: # Changes max movespeed bonus to 750%
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 1:
@@ -211,11 +215,8 @@ def MoveSpeedDeedSetup(): # We add the movespeed deed to the inventory via DLC, 
         json.dump(data, file, indent=2, ensure_ascii=False)
     with open("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
         data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 491:
-                row["name"] = "Movespeed Deed"
-            if row["$id"] == 608:
-                row["name"] = "Increases running speed by 500%."
+        data["rows"].append({"$id": CurrentNameID, "style": 36, "name": "Movespeed Deed"})
+        data["rows"].append({"$id": CurrentNameID + 1, "style": 61, "name": f"Increases running speed by {BonusMovespeed}%."})
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -407,7 +408,7 @@ def FieldQuestTaskLogSetup(EnemySets): # Adds the task logs for the field quests
     AllEnemySetNameIDs = []
     SuperbossNameIDs = []
     SuperbossNames = []
-    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: # add level scaling here
+    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for i in range(0, len(EnemySets)):
             CurrEnemySetNameIDs = []
@@ -415,19 +416,6 @@ def FieldQuestTaskLogSetup(EnemySets): # Adds the task logs for the field quests
                 for row in data["rows"]:
                     if row["$id"] == EnemySets[i][j]:
                         CurrEnemySetNameIDs.append(row["Name"])
-                        row["Lv"] = 5 + 12*i # Sets level of enemy equal to 5 min, then for each set after, the level goes up by 12 more
-                        LuckyDrop = random.randint(0, 99)
-                        if LuckyDrop <= 74:
-                            break
-                        elif LuckyDrop > 94: # 5% chance for Bounty Token, of any level!
-                            row["PreciousID"] = random.choice(Helper.InclRange(25479, 25488))
-                            break
-                        elif LuckyDrop >= 85: # 10% chance for WP Manual
-                            row["PreciousID"] = random.choice([25405, 25406, 25407])
-                            break
-                        elif LuckyDrop >= 75: # 10% chance for a doubloon
-                            row["PreciousID"] = 25489
-                        break
             AllEnemySetNameIDs.append(CurrEnemySetNameIDs)        
         if ExtraSuperbosses:
             for i in range(0, len(ChosenSuperbosses)):
@@ -471,6 +459,173 @@ def FieldQuestTaskLogSetup(EnemySets): # Adds the task logs for the field quests
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def CustomEnemyDrops(EnemySets):
+    SecretAccessoryIDs, SecretAuxCoreIDs = UMHuntShopCreation.ExportAccessoryAuxCoreMaxIDs()
+    global NewAccessoryID, NewAuxCoreID
+    NewAccessoryID = max(SecretAccessoryIDs) + 1
+    NewAuxCoreID = max(SecretAuxCoreIDs) + 1
+    DropTableDrops = []
+    IDDrops = []
+    CurrentEnemyDropRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", "$id") + 1
+    # Generates Loot
+    for i in range(len(EnemySets)):
+        SetDropTableDrops = []
+        SetIDDrops = []
+        for j in range(len(EnemySets[i])):
+            LuckyDrop = random.randint(0, 99)
+            if LuckyDrop <= 34:
+                SetDropTableDrops.append([0,0,0,0])
+                SetIDDrops.append(0)
+            elif LuckyDrop > 94: # 5% chance for Bounty Token, of any level, and the highest tier of loot
+                SetIDDrops.append(CurrentEnemyDropRow)
+                CurrentEnemyDropRow += 1
+                SetDropTableDrops.append(CreateNewDropTable(2))
+            elif LuckyDrop >= 85: # 10% chance for WP Manual of max rank and the middle tier of loot
+                SetIDDrops.append(CurrentEnemyDropRow)
+                CurrentEnemyDropRow += 1
+                SetDropTableDrops.append(CreateNewDropTable(1))
+            elif LuckyDrop >= 35: # 10% chance for a doubloon and the lowest tier of loot
+                SetIDDrops.append(CurrentEnemyDropRow)
+                CurrentEnemyDropRow += 1
+                SetDropTableDrops.append(CreateNewDropTable(0))
+        DropTableDrops.append(SetDropTableDrops)
+        IDDrops.append(SetIDDrops)
+
+    with open("./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for i in range(len(IDDrops)):
+            for j in range(len(IDDrops[i])):
+                if IDDrops[i][j] != 0:
+                    newrow = {"$id": IDDrops[i][j], "LimitNum": 0, "SelectType": 0, "ItemID1": 0, "DropProb1": 0, "NoGetByEnh1": 0, "FirstNamed1": 0, "ItemID2": 0, "DropProb2": 0, "NoGetByEnh2": 0, "FirstNamed2": 0, "ItemID3": 0, "DropProb3": 0, "NoGetByEnh3": 0, "FirstNamed3": 0, "ItemID4": 0, "DropProb4": 0, "NoGetByEnh4": 0, "FirstNamed4": 0, "ItemID5": 0, "DropProb5": 0, "NoGetByEnh5": 0, "FirstNamed5": 0, "ItemID6": 0, "DropProb6": 0, "NoGetByEnh6": 0, "FirstNamed6": 0, "ItemID7": 0, "DropProb7": 0, "NoGetByEnh7": 0, "FirstNamed7": 0, "ItemID8": 0, "DropProb8": 0, "NoGetByEnh8": 0, "FirstNamed8": 0}
+                    for k in range(len(DropTableDrops[i][j])):
+                        newrow[f"ItemID{k+1}"] = DropTableDrops[i][j][k]
+                        newrow[f"FirstNamed{k+1}"] = 1
+                        newrow[f"DropProb{k+1}"] = 10
+                    data["rows"].append(newrow)
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)  
+
+    # Applies loot to File
+    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for i in range(0, len(EnemySets)):
+            for j in range(0, len(EnemySets[i])):
+                for row in data["rows"]:
+                    if row["$id"] == EnemySets[i][j]:
+                        LuckyDrop = random.randint(0, 99)
+                        if LuckyDrop <= 34:
+                            break
+                        elif LuckyDrop > 94: # 5% chance for Bounty Token, of any level, and the highest tier of loot
+                            row["PreciousID"] = random.choice(Helper.InclRange(25479, 25488))
+                            row["DropTableID"] = IDDrops[i][j]
+                            break
+                        elif LuckyDrop >= 85: # 10% chance for WP Manual of max rank and the middle tier of loot
+                            row["PreciousID"] = 25407
+                            row["DropTableID"] = IDDrops[i][j]
+                            break
+                        elif LuckyDrop >= 35: # 50% chance for a doubloon and the lowest tier of loot
+                            row["PreciousID"] = 25489
+                            row["DropTableID"] = IDDrops[i][j]
+                            break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)          
+
+def CreateNewDropTable(Rarity: int = 0):
+    ChosenDrops = random.choices(["AuxCore", "Accessory", "Nothing"], weights = [33, 33, 34], k = 4)
+    DropIDs = []
+    for item in ChosenDrops:
+        match item:
+            case "Nothing":
+                DropIDs.append(0)
+            case "Accessory":
+                DropIDs.append(CreateMonsterDropAccessory(Rarity))
+            case "AuxCore":
+                DropIDs.append(CreateMonsterDropAuxCore(Rarity))
+    return DropIDs
+
+def CreateMonsterDropAccessory(Rarity: int = 0):
+    global NewAccessoryID
+    AccessoryEnhancementList = [TitanDamageUp, MachineDamageUp, HumanoidDamageUp, AquaticDamageUp, AerialDamageUp, InsectDamageUp, BeastDamageUp, CritDamageUp, PercentDoubleAuto, FrontDamageUp, SideDamageUp, BackDamageUp, SmashDamageUp, HigherLVEnemyDamageUp, AllyDownDamageUp, BattleDurationDamageUp,IndoorsDamageUp, OutdoorsDamageUp, DamageUpOnEnemyKill, DoubleHitExtraAutoDamage, ToppleANDLaunchDamageUp, AutoAttackCancelDamageUp, AggroedEnemyDamageUp, Transmigration, OppositeGenderBladeDamageUp, BladeSwitchDamageUp, BreakResDown,KaiserZone, VersusBossUniqueEnemyDamageUp, AutoSpeedArtsSpeed, DamageUpOnCancel, FlatStrengthBoost, FlatEtherBoost, HPLowEvasion, HPLowBlockRate, ReduceSpikeDamage, SpecialAndArtsAggroDown, AggroPerSecondANDAggroUp, LowHPRegen, AllDebuffRes, TastySnack, DoomRes, TauntRes, BladeShackRes, DriverShackRes, WhenDiesHealAllies, SmallHpPotCreate, Twang, Jamming, PotionEffectUp, EtherCounter, PhysCounter, RechargeOnEvade, FlatHPBoost, ArtUseHeal, AgiBoost,GravityPinwheel, RestoreHitDamageToParty, ForeSight, FlatAgiBoost, HPBoost, CritHeal, SpecialRechargeCancelling, EnemyDropGoldOnHit, DealTakeMore, AwakenPurge, BurstDestroyAnotherOrb, AttackUpGoldUp, DidIDoThat,CritHeal, PartyGaugeCritFill, GlassCannon, CombatMoveSpeed, DestroyOrbOpposingElement, TargetNearbyOrbsChainAttack, PartyGaugeDriverArtFill,RecoverRechargeCrit, HpPotChanceFor2, BladeComboOrbAdder, PotionPickupDamageUp, Vision, DamageUpPerCrit, TakeDamageHeal, DamagePerEvadeUp, PartyHealBladeSwitch, LowHPSpecialUp]
+
+    AccessoryTypesandNames = { # What icon should go with what noun:
+            0:["Sandals", "Crocs", "Jordans", "Boots", "Sneakers"], 
+            1:["Baseball Cap", "Sweatband", "Beanie", "Earmuffs"], 
+            2:["Vest", "Tuxedo", "T-Shirt", "Tank Top", "Jacket"], 
+            3:["Choker", "Necklace", "Locket", "Tie"], 
+            4:["Belt", "Sash", "Scarf"], 
+            5:["Banner", "Loincloth", "Swimsuit", "Thread", "Lamp", "Incense"], 
+            6:["Gloves", "Silly Bandz", "Gauntlets", "Bangles", "Watches"],
+            7:["Cube", "AirPods", "Headphones", "Hard Drive", "Attachment"],
+            8:["Garnet", "Sapphire", "Diamond", "Ruby", "Emerald", "Prismarine"],
+            9:["Feather", "Medal", "Bling"]
+        }
+
+    with open("./XC2/_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file: 
+        with open("./XC2/_internal/JsonOutputs/common_ms/itm_pcequip.json", 'r+', encoding='utf-8') as namefile:
+    
+            namedata = json.load(namefile) 
+            data = json.load(file)
+
+            for row in data["rows"]:
+                if row["$id"] == NewAccessoryID:
+                    curAccessory:Enhancement = random.choice(AccessoryEnhancementList)
+                    curAccessory.RollEnhancement(Rarity, 0.6)
+                    row["Enhance1"] = curAccessory.id
+                    row["Rarity"] = curAccessory.Rarity
+                    ItemType = random.randint(0,9)
+                    row["Icon"] = ItemType
+                    CurName = row["Name"]
+                    NewAccessoryID += 1
+                    break
+            for namerow in namedata["rows"]:  
+                if namerow["$id"] == CurName:
+                    lastWord = random.choice(AccessoryTypesandNames[ItemType])
+                    namerow["name"] = f"{curAccessory.name} {lastWord}"
+                    break
+
+            namefile.seek(0)
+            namefile.truncate()
+            json.dump(namedata, namefile, indent=2, ensure_ascii=False)
+
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    return NewAccessoryID
+
+def CreateMonsterDropAuxCore(Rarity: int = 0):
+    global NewAuxCoreID
+    AuxCoreValidEnhancements = [TitanDamageUp, MachineDamageUp, HumanoidDamageUp, AquaticDamageUp, AerialDamageUp, InsectDamageUp, BeastDamageUp, BladeComboDamUp, FusionComboDamUp, CritDamageUp, PercentDoubleAuto, FrontDamageUp, SideDamageUp, BackDamageUp, SmashDamageUp, HigherLVEnemyDamageUp, AllyDownDamageUp, BattleDurationDamageUp, LV1Damage, LV2Damage, LV3Damage, LV4Damage, IndoorsDamageUp, OutdoorsDamageUp, DamageUpOnEnemyKill, DoubleHitExtraAutoDamage, ToppleANDLaunchDamageUp, PartyDamageMaxAffinity, PartyCritMaxAffinity, AutoAttackCancelDamageUp, AggroedEnemyDamageUp, Transmigration, OppositeGenderBladeDamageUp, KaiserZone, AffinityMaxAttack, VersusBossUniqueEnemyDamageUp, AutoSpeedArtsSpeed, DamageUpOnCancel, DamageAndCritUpMaxAffinity, FlatCritBoost, HPLowEvasion, HPLowBlockRate, ReduceSpikeDamage, SpecialAndArtsAggroDown, AggroPerSecondANDAggroUp, AffinityMaxBarrier, AffinityMaxEvade, LowHPRegen, AllDebuffRes, BladeArtsTriggerUp, BladeArtDuration, HunterChem, ShoulderToShoulder, WhenDiesHealAllies, SmallHpPotCreate, Twang, Jamming, PotionEffectUp, EtherCounter, PhysCounter, RechargeOnEvade, PartyDamageReducMaxAffinity, PhyAndEthDefenseUp, ReduceEnemyChargeMaxAffinity, GravityPinwheel, RestoreHitDamageToParty, ForeSight, FlatBlockBoost, SpecialRechargeCancelling, EnemyDropGoldOnHit, DealTakeMore, AwakenPurge, BurstDestroyAnotherOrb, AttackUpGoldUp, DidIDoThat, CritHeal, PartyGaugeCritFill, GlassCannon, CombatMoveSpeed, DestroyOrbOpposingElement, TargetNearbyOrbsChainAttack, PartyGaugeDriverArtFill, RecoverRechargeCrit, DealMoreTakeLessMaxAffinity, HpPotChanceFor2, BladeComboOrbAdder, PotionPickupDamageUp, Vision, DamageUpPerCrit, HealingUpMaxAffinity, TakeDamageHeal, StopThinking, ChainAttackPower, DamagePerEvadeUp]
+    with open("./XC2/_internal/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as file: 
+        with open("./XC2/_internal/JsonOutputs/common_ms/itm_orb.json", 'r+', encoding='utf-8') as namefile:
+    
+            namedata = json.load(namefile) 
+            data = json.load(file)
+
+            for row in data["rows"]:
+                if row["$id"] == NewAuxCoreID:
+                    curAuxCore:Enhancement = random.choice(AuxCoreValidEnhancements)
+                    curAuxCore.RollEnhancement(Rarity, 0.6) # monster accessories should be much weaker than ones in shops
+                    row["Enhance"] = curAuxCore.id
+                    row["Rarity"] = curAuxCore.Rarity
+                    row["EnhanceCategory"] = NewAuxCoreID - 17001
+                    NewAuxCoreID += 1
+                    CurName = row["Name"]
+                    break
+            for namerow in namedata["rows"]:  
+                if namerow["$id"] == CurName:    
+                    namerow["name"] = f"{curAuxCore.name} Core"
+                    break
+            namefile.seek(0)
+            namefile.truncate()
+            json.dump(namedata, namefile, indent=2, ensure_ascii=False)
+
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    return NewAuxCoreID
 
 def ChosenEnemySets(AreaUMs): # Figuring out what enemies to turn into a set
     EnemySets = []
