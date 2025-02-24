@@ -25,6 +25,12 @@ def RandomizePcArts():
 # Setting that just shuffles arts
 # Setting that randomizes effects of arts
 
+# Summon Flare had War Swing for reyn
+# Sharlas talent art is imporved since other char arts dont increase it
+# If you get one of your vanilla arts it should keep its vanilla act no
+# Keep spear break and starlight kick on the same char
+# Keep dunbans gale slash combo together
+# Melias conditional arts are strong because they ignore the condition when not on melia
 class ActMatch: # A class so that when arts get randomized their animation somewhat matches their effects by changing pc_arts act_idx
     def __init__(self, _pcID, _SingleAttack, _AOEAttack, _Buff):
         self.pcID = _pcID
