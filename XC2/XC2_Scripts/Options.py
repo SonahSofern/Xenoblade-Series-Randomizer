@@ -179,7 +179,7 @@ FasterLevelsOption_32 = SubOption("32x", FasterLevelsOption, [lambda: Helper.Mat
 ShortcutsOption = Option("Shortcuts", QOL, "Various speedups for the main story quests")
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
-UnhideHiddenDriverSkillTreeOption = Option("Unlocked Hidden Skill Tree", QOL, "Unlocks the Hidden Driver Skill tree by default, without requring a NG+ save.", [lambda: DLCFlagQOL.CreateDLCtoSetFlag(["Driver Skill Tree Key"], [48589])])
+UnhideHiddenDriverSkillTreeOption = Option("Unlock Hidden Skill Tree", QOL, "Unlocks the Hidden Driver Skill tree by default, without requring a NG+ save.", [lambda: DLCFlagQOL.CreateDLCtoSetFlag(["Driver Skill Tree Key"], [48589])])
 UnlockAllBladeSlots = Option("Unlock All Blade Equip Slots", QOL, "Unlocks the second and third blade equip slots before they normally would in the main story.", [lambda: DLCFlagQOL.CreateDLCtoSetFlag(["2nd Blade Equip Slot", "3rd Blade Equip Slot"], [35327, 35328])])
 
 

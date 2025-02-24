@@ -169,13 +169,13 @@ def Buffs(art):
 def Debuffs(art):
     Debuffs = {
         "Taunt" : 11,
-        # "Stench": 12,
+        # "Stench": 12, # It applies but im not sure enemy drivers even lose affinity with their blades like that
         "NlHeal": 15,
         "Shackle": 14,
         "Def↓": 23,
         "EDef↓": 24,
         "Res↓": 25,
-        # "Monado Armor": 16,
+        # "Monado Armor": 16, # These work just dont want player to apply them lol
         # "Doom": 21,
         # "Superstrength": 17
     }
@@ -373,7 +373,7 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False):
                     if desc["$id"] == CurrDesc:
                         if not isSpecial: 
                             if desc["$id"] == 4:   # Sets anchor shot 5 to anchor shot 4's description since they are the same art
-                                TotalArtDescription = TotalArtDescription.replace(ReactCaption + " / ", "")   # Removes the reaction from 4 because it is disabled until you get to uraya. 4 Corresponds to before uraya description and 5 is after uraya.
+                                TotalArtDescription = TotalArtDescription.replace(ReactCaption + " / ", "")   # Removes the reaction text from 4 because it is disabled until you get to uraya. 4 Corresponds to before uraya description and 5 is after uraya.
                                 AnchorShotDesc = desc["name"]
                                 desc["name"]
                             if desc["$id"] == 5:
