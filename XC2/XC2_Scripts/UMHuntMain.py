@@ -25,7 +25,6 @@ ValidRandomizeableBladeIDs = [1001, 1002, 1008, 1009, 1010, 1011, 1014, 1015, 10
 
 # TO DO
 
-
 # Known Issues: 
 # Poppiswap is going to be fucked up with custom enhancements
 
@@ -585,6 +584,7 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
                     SuperbossMaps.append(SuperbossMapsFull[j]) # add the superboss's map to the list of maps we care about
                     break
     UMEnemyAggro()
+    ClearExcessiveUMCounts(ChosenAreaOrder, AllAreaUMs)
     return AllAreaUMs, AllAreaMonsters
     
 def UMEnemyAggro(): # custom enemy aggro
@@ -643,6 +643,36 @@ def UMEnemyAggro(): # custom enemy aggro
                     row["BatInterval"] = 50
                     row["BatArea"] = 50
                     row["Flag"]["mBoss"] = 0
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
+def ClearExcessiveUMCounts(ChosenAreaOrder, AllAreaUMs): # if a um gets put in a spot where there's more than 15 enemies on the map, it crashes the game when you try to load into the area.
+    CombinedAreaUMs = []
+    for area in range(len(AllAreaUMs)):
+        CombinedAreaUMs.extend(AllAreaUMs[area])
+    CombinedAreaUMs.extend(ChosenSuperbosses)
+    enemycountholder = Helper.ExtendListtoLength([0], len(CombinedAreaUMs),"0")
+    for i in range(0, len(ChosenAreaOrder)):
+        enemypopfile = "./XC2/_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_EnemyPop.json"
+        with open(enemypopfile, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for row in data["rows"]:
+                for k in range(1, 5):
+                    if row[f"ene{k}ID"] == 0:
+                            break
+                    else:
+                        for j in range(len(CombinedAreaUMs)):
+                            if row[f"ene{k}ID"] == CombinedAreaUMs[j]:
+                                enemycountholder[j] += row[f"ene{k}num"]
+                                if enemycountholder[j] > 15: # if there's already too many of the enemy, then we want to remove that spawn point for the enemy.
+                                    enemycountholder[j] -= row[f"ene{k}num"]
+                                    row[f"ene{k}ID"] = 0
+                                    row[f"ene{k}Per"] = 0
+                                    row[f"ene{k}num"] = 0
+                                    row[f"ene{k}move"] = 0 
+                                    row[f"ene{k}Lv"] = 0                                   
+                                break
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)

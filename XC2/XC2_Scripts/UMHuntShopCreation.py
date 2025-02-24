@@ -22,11 +22,7 @@ FullUnusedShopList = [x for x in FullShopList if x not in UsedShopIDs]
 ContinentInfo = {"Gormott": [10043, 10044, "ma05a", 6], "Uraya": [10088, 10079, "ma07a", 9], "Mor Ardain": [10156, 10149, "ma08a", 10], "Leftheria": [10197, 10192, "ma15a", 14], "Temperantia": [10233, 10224, "ma10a", 11], "Tantal": [10272, 10269, "ma13a", 13], "Spirit Crucible": [10325, 10323, "ma16a", 15], "Cliffs of Morytha": [10351, 10345, "ma17a", 16], "Land of Morytha": [10369, 10363, "ma18a", 18], "World Tree": [10399, 10393, "ma20a", 20]}
 
 #NPC IDs (used to give a shop to)
-BazaarNPCRowIDs = [2109, 2236, 2038, 2001, 2415, 2419, 2351, 2090, 2125, 2088, 2359, 2362, 2085, 2092, 2361, 2087, 2425, 2080, 2089, 2163, 2002, 2182, 2086, 2091, 2352, 2126, 2316, 2250, 2197, 2039, 2416, 2424, 2205, 2426, 2136, 2068, 2176, 2341, 2110, 2040, 2393, 2251, 2069, 2177, 2342, 2111, 2417, 2127, 2164, 2003, 2011, 2083, 2206, 2041, 2128, 2070, 2343, 2112, 2418, 2084, 2208, 2165, 2012]
-
-UsedBazaarNPCRowIDs = [2088, 2087]
-
-UnusedBazaarNPCRowIDs = [2109, 2236, 2038, 2001, 2415, 2419, 2351, 2090, 2125, 2359, 2362, 2085, 2092, 2361, 2425, 2080, 2089, 2163, 2002, 2182, 2086, 2091, 2352, 2126, 2316, 2250, 2197, 2039, 2416, 2424, 2205, 2426, 2136, 2068, 2176, 2341, 2110, 2040, 2393, 2251, 2069, 2177, 2342, 2111, 2417, 2127, 2164, 2003, 2011, 2083, 2206, 2041, 2128, 2070, 2343, 2112, 2418, 2084, 2208, 2165, 2012]
+UnusedBazaarNPCRowIDs = [2109, 2362, 2086, 2205, 2069, 2206, 2236, 2085, 2091, 2426, 2177, 2041, 2038, 2092, 2352, 2136, 2342, 2128, 2001, 2361, 2126, 2068, 2111, 2070, 2415, 2425, 2316, 2176, 2343, 2417, 2419, 2080, 2250, 2341, 2127, 2112, 2351, 2089, 2197, 2110, 2164, 2418, 2090, 2163, 2039, 2003, 2084, 2040, 2125, 2002, 2416, 2393, 2011, 2208, 2359, 2182, 2424, 2251, 2083, 2165, 2012]
 
 UniqueNPCs = [2236, 2088, 2359, 2362, 2092, 2361, 2087, 2080, 2089] #NPCs that only show up once in the Bazaar
 
@@ -657,7 +653,9 @@ def ChipShopRewards():
             Chips2[tradenum] = random.choice(ChipStrengthLists[min(set + tradenum, 19)])
             Chips3[tradenum] = random.choice(ChipStrengthLists[min(set + tradenum, 19)])
             SetNames.append(f"Rank {set + tradenum + 1} Chip Bundle")
-            SetCosts.append(random.randint(max(1, (set + 1) * 10 + (tradenum - 3) * 7 - 5), max(1, min(200, (set + 1) * 10 + (tradenum - 3) * 7 + 5))))
+            SetCosts.append(random.randint(max(1, round((set + 1) * 10 + (tradenum - 3) * 7 - 5)), max(1, min(200, (set + 1) * 10 + (tradenum - 3) * 7 + 5))))
+            if tradenum < 3:
+                SetCosts[tradenum] = round(SetCosts[tradenum] * 0.8**(2 - tradenum))
         # for the last trade, we want random chips from a larger pool, and we only want 2 chips, instead of 3
         SetCosts.append(random.randint(max(set * 9, 5), max(set * 15, 10))) # the last trade in the set should always cost in this range
         SetNames.append("Powerful Chips")
@@ -671,7 +669,7 @@ def ChipShopRewards():
             Chips3[NumTrades - 1] = 0
         ChipShopRewardDistribution.append([Chips1, Chips2, Chips3, Chips4])
         ChipShopCostList.append(SetCosts)
-        ChipBundleNames.append(SetNames) 
+        ChipBundleNames.append(SetNames)
 
 def AuxCoreRewards(): # Makes the Aux Core Bundles
     global AuxCoreShopRewardDistribution, AuxCoreShopCostDistribution, AuxCoreNameDistribution, SecretAuxCoreIDs
@@ -824,7 +822,7 @@ def PouchItemRewards():
             PouchItemNameDistribution.append([PouchFoodTypetoCostName[key][1] for key in PouchItemTypes])
             PouchItemShopRewardDistribution.append([PouchItem1IDs, PouchItem2IDs, PouchItem3IDs, PouchItem4IDs])
         for row in data["rows"]: # Change the duration of all to 60 minutes, and they all give no trust points
-            row["Time"] = 6099
+            row["Time"] = 60
             row["ValueMax"] = 10
             row["TrustPoint"] = 0
         file.seek(0)
@@ -1129,6 +1127,9 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
     # This section cuts down on the number of user inputs:
     StartingTaskID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", "$id") + 1
     StartingQuestRewardID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", "$id") + 1
+    Shoplistnames = []
+    ShoplistNPCIDs = []
+    ShoplistNPCPositions = []
     for shop in ShopList:
         if shop["ShopIDtoReplace"] in FullShopEventNameDict:
             shop["ShopNametoReplace"] = FullShopEventNameDict[shop["ShopIDtoReplace"]][1] # fld_shopname $id. Can be taken from MNU_ShopList 'Name'
@@ -1141,7 +1142,28 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
         shop["RewardIDs"] = Helper.InclRange(StartingQuestRewardID, StartingQuestRewardID + shop["TradeCount"] - 1) # FLD_QuestReward $id, feeds into MNU_ShopChangeTask Reward
         StartingTaskID += shop["TradeCount"]
         StartingQuestRewardID += shop["TradeCount"]
-
+        Shoplistnames.append(shop["ShopName"])
+        ShoplistNPCIDs.append(shop["ChosenMapRowID"])
+    with open("./XC2/_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for i in range(len(ShoplistNPCIDs)):
+            for row in data["rows"]:
+                if row["$id"] == ShoplistNPCIDs[i]:
+                    ShoplistNPCPositions.append(row["name"])
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    ShopFullListDict = {}
+    ShopNamesList = ['[System:Color name=green]Bounty Token[/System:Color] Bartering', 'Manual Marketplace', 'The Poppishop', 'Core Crystal Cache', 'The [System:Color name=tutorial]Casino[/System:Color]', 'Weapon Warehouse', 'Aux Core Auction', 'Excess Accessories', 'Pouch Item Patisserie']
+    for name in ShopNamesList:
+        ShopFullListDict[name] = {"ma02a Row": [], "NPC Position": []}
+        for i in range(len(Shoplistnames)):
+            if Shoplistnames[i] == name:
+                ShopFullListDict[name]["ma02a Row"].append(ShoplistNPCIDs[i])
+                ShopFullListDict[name]["NPC Position"].append(ShoplistNPCPositions[i])
+    for i in range(0, 10):
+        EnemyWaveNPCPositionSet = []
     with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file: # Adds the exchange tasks
         data = json.load(file)
         ShopChangeStartRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", "$id") + 1 # used in MNU_ShopList for "TableID"
