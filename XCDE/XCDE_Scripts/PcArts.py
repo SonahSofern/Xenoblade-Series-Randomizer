@@ -1,15 +1,19 @@
 import json, random, Options
 
-TalentArts = [102,101,100,44,99,43,98,42,62,97,154,1,2,19,36,41,61,79,96,119,120,121,122,123,124,125,126,127,153,171] # Need to shuffle these seperately for various reasons
+TalentArts = [102,101,100,44,99,43,98,42,62,97,154,1,2,19,36,41,61,79,96,119,120,121,122,123,124,125,126,127,153,171,152] # Need to shuffle these seperately for various reasons
+DLCArts = [155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187]
+GuestArts = [144,145,146,147,148,149]
+PonspectorDLCArts = [188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254]
+ShulkMonadoArts = [3,4,5,6,7,8,9,10]
 DunbanMonadoArts = [150,151]
 
 def RandomizePcArts():
+    invalidArtIds = TalentArts + DunbanMonadoArts + ShulkMonadoArts + GuestArts + PonspectorDLCArts + DLCArts
     with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
         for art in artData["rows"]:
-            if art["$id"] in TalentArts: # Ignore Talent Arts
-                continue
-            if art["$id"] in DunbanMonadoArts: # Ignore Dunbans weird tutorial Arts
+            id = art["$id"]
+            if id in invalidArtIds: # Ignores invalid/ weird arts
                 continue
             if Options.PlayerArtsOption_EarlyArtsUnlock.GetState():
                 art["get_lv"] = 0
@@ -78,7 +82,7 @@ def Effect(): # st_type status type
 ShulkActs = ActMatch(1, _SingleAttack=[1,0,4,8,9,10,11,12],_AOEAttack=[5,7,15],_Buff=[3,2,6,7,10,13,14])
 ReynActs = ActMatch(2, _SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,3,5,7,8,9,10,14])
 FioraActs = ActMatch(3,  _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0])
-DunbanActs = ActMatch(4,  _SingleAttack=[0,1,3,5,9,14],_AOEAttack=[2,12,13,14],_Buff=[2,4,6,7,8,10,11,15])
+DunbanActs = ActMatch(4,  _SingleAttack=[0,1,3,5,9,14],_AOEAttack=[12,13,14],_Buff=[2,4,6,7,8,10,11,15])
 SharlaActs = ActMatch(5,  _SingleAttack=[0,1,7,11,14],_AOEAttack=[6,8,15],_Buff=[0,2,3,4,5,6,9,10,12,13])
 RikiActs = ActMatch(6,  _SingleAttack=[1,2,6,11,12,14,15],_AOEAttack=[0,4,6,7,9,10,13,15],_Buff=[0,3,5,8,10,13])
 MeliaActs = ActMatch(7,  _SingleAttack=[4,12],_AOEAttack=[5,14,15],_Buff=[0,1,2,3,6,7,8,9,10,11,13])

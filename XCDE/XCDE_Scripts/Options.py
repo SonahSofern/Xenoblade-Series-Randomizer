@@ -15,9 +15,9 @@ GameModeTab = 8
 PlayerArtsOption = Option("Player Arts",Character, "Randomizes the effects of your arts", [lambda: PcArts.RandomizePcArts()])
 PlayerArtsOption_Cooldown = SubOption("Cooldown", PlayerArtsOption)
 PlayerArtsOption_EarlyArtsUnlock = SubOption("Unlock All Arts at Level 1", PlayerArtsOption)
-
 MusicOption = Option("Randomizes Music", Misce, "Randomizes what music plays where", [lambda: Music.MusicRando()]) #https://xenobladedata.github.io/xb1de/bdat/bdat_common/bgmlist.html
-MusicOption_RemoveVision = SubOption("Remove Vision Music", MusicOption)
-MusicOption_RemoveLowTension = SubOption("Remove Low Tension Music", MusicOption)
+MusicOption_GoodThemes = SubOption("Only Good Themes", MusicOption)
+
+
 
 # ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html
