@@ -740,6 +740,7 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
                     break
     UMEnemyAggro()
     ClearExcessiveUMCounts(ChosenAreaOrder, AllAreaUMs)
+    Helper.SubColumnAdjust("./XC2/_internal/JsonOutputs/common/CHR_EnParam.json", "Flag", "FldDmgType", 0)
     return AllAreaUMs, AllAreaMonsters
     
 def UMEnemyAggro(): # custom enemy aggro

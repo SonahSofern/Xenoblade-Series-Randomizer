@@ -863,6 +863,7 @@ def EnemyLogic():
         EnemyDupeBossCondition(NewBossIDs)
         FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
         SwimmingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
+        Helper.SubColumnAdjust("./XC2/_internal/JsonOutputs/common/CHR_EnParam.json", "Flag", "FldDmgType", 0)
         #DebugEnemyAggro(NewBossIDs, NewQuestIDs, OtherEnemyIDs)
 
 def DebugEnemyAggro(NewBossIDs, NewQuestIDs, OtherEnemyIDs):
