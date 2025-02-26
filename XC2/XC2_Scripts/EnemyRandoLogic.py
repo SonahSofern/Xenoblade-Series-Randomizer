@@ -311,7 +311,8 @@ def NewNonBossandQuestIDs(): # don't trust my old method of getting quest and bo
         with open(enemypopfile, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data['rows']:
-                RedRingClear(row)
+                if ValidEnemyPopFileNames[i][4] != "c":
+                    RedRingClear(row)
                 if row["name"][:3] == "bos":
                     for j in range(1, 5):
                         if row[f"ene{j}ID"] != 0:
@@ -872,7 +873,8 @@ def DebugEnemyAggro(NewBossIDs, NewQuestIDs, OtherEnemyIDs):
         with open(enemypopfile, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data['rows']:
-                RedRingClear(row)
+                if ValidEnemyPopFileNames[i][4] != "c":
+                    RedRingClear(row)
                 if row["name"][:3] == "bos":
                     for j in range(1, 5):
                         if row[f"ene{j}ID"] != 0:

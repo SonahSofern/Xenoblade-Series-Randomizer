@@ -1002,7 +1002,7 @@ def PoppiswapShopRewards(): # Creates rewards for Poppiswap Shop
                     if row["$id"] == CrystalVoucherNameIDs[i]:
                         row["name"] = f"Ether Crystal Pack {i+1}"
                     if row["$id"] == CrystalVoucherCaptionIDs[i]:
-                        row["name"] = f"Unlocks a DLC {1000*(i+1)} Ether Crystal Reward"
+                        row["name"] = f"Unlocks a DLC {1000*(i+1)}\n Ether Crystal Reward"
             if row["$id"] >= 745:
                 break
         file.seek(0)
