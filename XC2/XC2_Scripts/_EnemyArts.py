@@ -144,6 +144,7 @@ pierce = EnemyArtEnhancements("Pierce", GuardAnnulAttack, [100,100,100,100])
 # lowhpDamage = EnemyArtEnhancements("HP↓Dmg↑", DamageUpWhenHpDown, [10,20,30,40])
 transmig = EnemyArtEnhancements("Flip", Transmigration, [100,100,100,100])
 vamp = EnemyArtEnhancements("Vamp", ArtDamageHeal, [200,250,300,350])
+partydrain = EnemyArtEnhancements("Party↓", PartyGaugeDrain, [30,50,70,100])
 
 def Enhancements(art):
     skill:Enhancement = random.choice(ValidSkills)

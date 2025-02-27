@@ -432,7 +432,6 @@ DamageAndCritUpMaxAffinity = Enhancement("Lucky",263, 320, Medium, Medium)
 ReducesTerrainDamage = Enhancement("Weathered",264, 334, Medium, DisTag="Terrain Resist")
 SpecialRecievesAfterImage = Enhancement("Afterimage",213, 335, Baby, DisTag="Afterimage")
 EyeOfJustice = Enhancement("Eye of Shining Justice",236,294, DisTag="Shining Justice")
-ChainAttackSeal = Enhancement("Chain Seal", 260, 0, [1,1,2,3], addToList=False) # Put on enemys
 #There are some torna effects not including them recoverable hp.
 # These do not have descriptions by default I dont think I can add more descriptions iirc
 EtherDamageReduce = Enhancement("Ether↓", 201, 0, [20,40,60,80],  addToList=False)
@@ -444,12 +443,13 @@ ConsumeAllyDamageUp = Enhancement("Consumer", 206, 0, [30,60,90,120], addToList=
 RaisesBladeComboIfOrb = Enhancement("Orby", 207, 0, addToList=False)
 RemoveAllAggro = Enhancement("Aggro Null", 208, 0, addToList=False) # Put on ally arts
 AggroUpForDamage = Enhancement("Aggro↑", 209, 0, [50,70,90,120], addToList=False)
-PermaRegen = Enhancement("Regen", 210, 0, [30,30,30,30], [1,2,3,4], addToList=False) # Put on enemy
+PermaRegen = Enhancement("Regen", 210, 0, [30,30,30,30], [1,2,3,4], addToList=False)
 BladeComboTimeDown = Enhancement("Blade↓", 212, 0, [50,70,90,100], addToList=False)
-PerAllyDamageUp = Enhancement("Per Ally DMG↑", 214, 0, Small, addToList=False) # Add to enemy
+PerAllyDamageUp = Enhancement("Per Ally DMG↑", 214, 0, Small, addToList=False)
 EnrageAllies = Enhancement("Enrage Allies", 215, 0, Medium, addToList=False)
 LoseHPOnArt = Enhancement("HpLoss", 220, 0, Baby, addToList=False)
 BuffDebuffDurationUp = Enhancement("Buff Debuff Time ↑", 221, Large, addToList=False)
 ArtRechargeUp = Enhancement("Recharge↑", 225, Baby, addToList=False)
-HpDownDamageUp = Enhancement("Low HP Damage↑", 232, Small, addToList=False) # Add to enemy
-PartyGaugeDrain = Enhancement("Party Drain", 237, 0, Medium, addToList=False) # Add to enemy arts
+HpDownDamageUp = Enhancement("Low HP Damage↑", 232, Small, addToList=False) 
+PartyGaugeDrain = Enhancement("Party Drain", 237, 0, Medium, addToList=False)
+ChainAttackSeal = Enhancement("Chain Seal", 260, 0, [1,1,2,3], addToList=False)

@@ -68,15 +68,16 @@ Pursuer = EnemyEnhancement("Pursuer", CombatMoveSpeed, [100,200,300,400])
 AllReactionNull = EnemyEnhancement("Stable", TranquilGuard,[40,60,80,100])
 BlowdownSpike = EnemyEnhancement("Bouncy", GravityPinwheel, [10,15,20,25], [1,2,3,5])
 TasSnack = EnemyEnhancement("Devourer", TastySnack, [30,50,70,100])
-Desperate = EnemyEnhancement("Desperate", DamageUpWhenHpDown,[10,15,20,25],[100,200,300,400])
+Desperate = EnemyEnhancement("Desperate", HpDownDamageUp,[10,15,20,25])
 Wish = EnemyEnhancement("Sacrificial", WhenDiesHealAllies,[50,70,80,100])
 FirstStrike = EnemyEnhancement("Supriser", FirstArtDamage,[300,500,600,700])
 Lightning  = EnemyEnhancement("Lightning", AutoSpeedArtsSpeed,[300,400,500,600],[200,300,400,500])
 Repeat = EnemyEnhancement("Repeat", DidIDoThat,[20,40,60,80])
 Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
-Regen = EnemyEnhancement("Regen", LowHPRegen, [2,3,4,5])
+Regen = EnemyEnhancement("Regen", PermaRegen,[120,90,60,30], [1,2,3,4])
 CloseArmor = EnemyEnhancement("Guardian", ReduceDamageFromNearbyEnemies, [30,50,70,90])
-
+Swarm = EnemyEnhancement("Swarming", PerAllyDamageUp, [20,40,60,80])
+Sealing = EnemyEnhancement("Sealing", ChainAttackSeal, [1,1,2,3])
 
 #New testing
 
