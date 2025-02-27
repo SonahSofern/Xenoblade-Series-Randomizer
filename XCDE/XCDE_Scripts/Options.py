@@ -12,24 +12,24 @@ Funny = 6
 CosmeticsTab = 7
 GameModeTab = 8
 
+LevelDiffOption = Option("Level Penalties", General, "Removes the harsh level penalties and bonuses from the game for more fair combat")
 PlayerArtsOption = Option("Player Arts",Character, "Randomizes the effects of your arts", [lambda: PcArts.RandomizePcArts()])
 PlayerArtsOption_Cooldown = SubOption("Cooldown", PlayerArtsOption)
 PlayerArtsOption_EarlyArtsUnlock = SubOption("Unlock All Arts at Level 1", PlayerArtsOption)
 BattleMusicOption = Option("Battle Music", Misce, "Randomizes battle themes among themselves", [lambda: Music.MusicRando(Music.AllBattleThemes)]) #https://xenobladedata.github.io/xb1de/bdat/bdat_common/bgmlist.html
 for song in Music.AllBattleThemes:
-    song.CreateOption(BattleMusicOption)
+    song.CreateOption(BattleMusicOption, Music.UsedBattleThemes)
 BossMusicOption = Option("Boss Music", Misce, "Randomizes boss themes among themselves", [lambda: Music.MusicRando(Music.AllBossThemes)])
 for song in Music.AllBossThemes:
-    song.CreateOption(BossMusicOption)
+    song.CreateOption(BossMusicOption, Music.UsedBossThemes)
 EnvironmentCutsceneMusicOption = Option("Environment/Cutscene Music", Misce, "Randomizes environment themes among themselves", [lambda: Music.MusicRando(Music.AllEnvironmentThemes)])
 for song in Music.AllEnvironmentThemes:
-    song.CreateOption(EnvironmentCutsceneMusicOption)
+    song.CreateOption(EnvironmentCutsceneMusicOption, Music.UsedEnvironmentThemes)
 for song in Music.AllCutsceneThemes:
-    song.CreateOption(EnvironmentCutsceneMusicOption)
+    song.CreateOption(EnvironmentCutsceneMusicOption, Music.UsedCutsceneThemes)
 JingleMusicOption = Option("Jingles", Misce, "Randomizes jingles among themselves", [lambda: Music.MusicRando(Music.AllJingles)])
 for song in Music.AllJingles:
-    song.CreateOption(JingleMusicOption)
-    # SubOption(song.songName, EnvironmentCutsceneMusicOption, [lambda: Music.UsedEnvironmentThemes.append(self)])
+    song.CreateOption(JingleMusicOption, Music.UsedJingles)
 
 
 # ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html

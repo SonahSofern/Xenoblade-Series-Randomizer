@@ -18,9 +18,6 @@ class Music:
         self.isGood = _isGood
         self.type = _type
         AllMusic.append(self)
-        
-        Interactables.SubOption(self.songName, parent, [lambda: UsedEnvironmentThemes.append(self)])
-        
         # Create the entire lists
         if Env in self.type:
             AllEnvironmentThemes.append(self)
@@ -33,16 +30,12 @@ class Music:
         if Jingle in self.type:
             AllJingles.append(self) 
     def CreateOption(self, parent, list):
-        if Env in self.type:
-            AllEnvironmentThemes.append(self)
-        if Cut in self.type:
-            AllCutsceneThemes.append(self)
-        if Battle in self.type:
-            AllBattleThemes.append(self)
-        if Boss in self.type:
-            AllBossThemes.append(self)
-        if Jingle in self.type:
-            AllJingles.append(self) 
+        if not self.isGood:
+            defState = False
+        else:
+            defState = True
+        Interactables.SubOption(self.songName, parent, [lambda: list.append(self)],_defState=defState)
+
 
 def MusicRando(Songs:list[Music]):
     with open("./XCDE/_internal/JsonOutputs/bdat_common/bgmlist.json", 'r+', encoding='utf-8') as bgmFile:
@@ -58,14 +51,9 @@ def MusicRando(Songs:list[Music]):
         bgmFile.seek(0)
         bgmFile.truncate()
         json.dump(bgmData, bgmFile, indent=2, ensure_ascii=False)
+    print(list(x.songName for x in UsedBattleThemes))
 
-
-# def RemoveInvalidSongs(Songs):
-#     for bgm in Songs: # 
-#         if bgm in InvalidSongsList:
-#             Songs.remove(bgm)
-        
-
+# Fix these from being global
 AllEnvironmentThemes = []
 AllCutsceneThemes = []
 AllBattleThemes = []
@@ -77,10 +65,6 @@ UsedCutsceneThemes = []
 UsedBattleThemes = []
 UsedBossThemes = []
 UsedJingles = []
-
-
-
-InvalidSongsList = []
 
 # Environment Themes
 Hometown = Music("Hometown", "f01_loop", [Env])
@@ -94,93 +78,93 @@ FrontierVillage = Music("Frontier Village", "f08_loop", [Env])
 WhereTheAncestorsSleep = Music("Where The Ancestors Sleep", "f10_loop", [Env])
 ErythSea = Music("Eryth Sea", "f11_loop", [Env])
 AlcamothImperialCapital = Music("Alcamoth Imperial Capital", "f12_loop", [Env])
-PrisonIsland = Music("PrisonIsland", "f13_loop", [Env])
-ValakMountain = Music("ValakMountain", "f14_loop", [Env])
-SwordValley = Music("SwordValley", "f15_loop", [Env])
-GalahadFortress = Music("GalahadFortress", "f16_loop", [Env])
-TheFallenLand = Music("TheFallenLand", "f17_loop", [Env])
-HiddenMachinaVillage = Music("HiddenMachinaVillage", "f18_loop", [Env])
-MechonisField = Music("MechonisField", "f19_loop", [Env])
-AgnirathaMechonisCapital = Music("AgnirathaMechonisCapital", "f20_loop", [Env])
-CentralFactory = Music("CentralFactory", "f21_loop", [Env])
-BionisInteriorCarcass = Music("BionisInteriorCarcass", "f22_loop", [Env])
-Colony6Rebuilding = Music("Colony6Rebuilding", "f23_loop", [Env])
-MemorysEnd = Music("MemorysEnd", "f24_loop", [Env])
-InTheRefugeeCamp = Music("InTheRefugeeCamp", "f25_loop", [Env])
-TheEndLiesAhead = Music("TheEndLiesAhead", "f26_loop", [Env])
-GranDellFC = Music("GranDellFC", "f51_loop", [Env])
-BionisShoulderFC = Music("BionisShoulderFC", "f52_loop", [Env])
+PrisonIsland = Music("Prison Island", "f13_loop", [Env])
+ValakMountain = Music("Valak Mountain", "f14_loop", [Env])
+SwordValley = Music("Sword Valley", "f15_loop", [Env])
+GalahadFortress = Music("Galahad Fortress", "f16_loop", [Env])
+TheFallenLand = Music("The Fallen Land", "f17_loop", [Env])
+HiddenMachinaVillage = Music("Hidden Machina Village", "f18_loop", [Env])
+MechonisField = Music("Mechonis Field", "f19_loop", [Env])
+AgnirathaMechonisCapital = Music("Agniratha Mechonis Capital", "f20_loop", [Env])
+CentralFactory = Music("Central Factory", "f21_loop", [Env])
+BionisInteriorCarcass = Music("Bionis Interior Carcass", "f22_loop", [Env])
+Colony6Rebuilding = Music("Colony 6 Rebuilding", "f23_loop", [Env])
+MemorysEnd = Music("Memorys End", "f24_loop", [Env])
+InTheRefugeeCamp = Music("In The Refugee Camp", "f25_loop", [Env])
+TheEndLiesAhead = Music("The End Lies Ahead", "f26_loop", [Env])
+GranDellFC = Music("Gran Dell FC", "f51_loop", [Env])
+BionisShoulderFC = Music("Bionis Shoulder FC", "f52_loop", [Env])
 
 # Battle Themes
-TimeToFight = Music("TimeToFight", "b01_loop", [Battle])
-MechanicalRhythm = Music("MechanicalRhythm", "b03_loop", [Battle])
-TimeToFightBionisShoulder = Music("TimeToFightBionisShoulder", "b51_loop", [Battle])
+TimeToFight = Music("Time To Fight!", "b01_loop", [Battle])
+MechanicalRhythm = Music("Mechanical Rhythm", "b03_loop", [Battle])
+TimeToFightBionisShoulder = Music("Time To Fight! Bionis Shoulder", "b51_loop", [Battle])
 Fogbeasts = Music("Fogbeasts", "b52_loop", [Battle])
-EnemiesClosingIn = Music("EnemiesClosingIn", "b08_loop", [Battle], Bad)
-SearchingGlance = Music("SearchingGlance", "b10_loop", [Battle], Bad)
-IrregularBound = Music("IrregularBound", "b11_loop", [Battle], Bad)
-ZanzasWorld = Music("ZanzasWorld", "b12_loop", [Battle], Bad)
-VisionsOfTheFuture = Music("VisionsOfTheFuture", "b09_loop", [Battle], Bad)
+EnemiesClosingIn = Music("Enemies Closing In", "b08_loop", [Battle], Bad)
+SearchingGlance = Music("Searching Glance", "b10_loop", [Battle], Bad)
+IrregularBound = Music("Irregular Bound", "b11_loop", [Battle], Bad)
+ZanzasWorld = Music("Zanzas World", "b12_loop", [Battle], Bad)
+VisionsOfTheFuture = Music("Visions Of The Future", "b09_loop", [Battle], Bad)
 
 # Boss Themes
-AnObstacleInOurPath = Music("AnObstacleInOurPath", "b05_loop", [Boss])
-YouWillKnowOurNames = Music("YouWillKnowOurNames", "b02_loop", [Boss])
-ZanzaTheDivine = Music("ZanzaTheDivine", "b06_loop", [Boss])
-ATragicDecision = Music("ATragicDecision", "b15_loop", [Boss])
-RoarFromBeyond = Music("RoarFromBeyond", "b53_loop", [Boss])
-UnfinishedBusiness = Music("UnfinishedBusiness", "e03", [Boss])
-TheGodSlayingSword = Music("TheGodSlayingSword", "b07_loop", [Boss])
-EngageTheEnemy = Music("EngageTheEnemy", "e04", [Boss])
+AnObstacleInOurPath = Music("An Obstacle In Our Path", "b05_loop", [Boss])
+YouWillKnowOurNames = Music("You Will Know Our Names", "b02_loop", [Boss])
+ZanzaTheDivine = Music("Zanza The Divine", "b06_loop", [Boss])
+ATragicDecision = Music("A Tragic Decision", "b15_loop", [Boss])
+RoarFromBeyond = Music("Roar From Beyond", "b53_loop", [Boss])
+UnfinishedBusiness = Music("Unfinished Business", "e03", [Boss])
+TheGodSlayingSword = Music("The God Slaying Sword", "b07_loop", [Boss])
+EngageTheEnemy = Music("Engage The Enemy", "e04", [Boss])
 
 # Jingles
-CollectopediaLineCompleted = Music("CollectopediaLineCompleted", "j01", [Jingle])
-CollectopediaPageCompleted = Music("CollectopediaPageCompleted", "j02", [Jingle])
-NewObjectiveReceived = Music("NewObjectiveReceived", "j03", [Jingle])
-NewAreaFound = Music("NewAreaFound", "j04", [Jingle])
-SecretAreaFound = Music("SecretAreaFound", "j05", [Jingle])
+CollectopediaLineCompleted = Music("Collectopedia Line Completed", "j01", [Jingle])
+CollectopediaPageCompleted = Music("Collectopedia Page Completed", "j02", [Jingle])
+NewObjectiveReceived = Music("New Objective Received", "j03", [Jingle])
+NewAreaFound = Music("New Area Found", "j04", [Jingle])
+SecretAreaFound = Music("Secret Area Found", "j05", [Jingle])
 
 # Cutscene Themes
-PrologueA = Music("PrologueA", "e01_a", [Cut, Battle])
-PrologueB = Music("PrologueB", "e01_b", [Cut, Battle])
-MainTheme = Music("MainTheme", "e02", [Cut])
-MainThemeLoop = Music("MainThemeLoop", "e02_loop", [Cut])
-BionisAwakening = Music("BionisAwakening", "e05", [Cut])
-AncientMysteries = Music("AncientMysteries", "e06", [Cut])
-ASpiritualPlace = Music("ASpiritualPlace", "e07", [Cut])
-ASpiritualPlaceLoop = Music("ASpiritualPlaceLoop", "e07_loop", [Cut])
+PrologueA = Music("Prologue A", "e01_a", [Cut, Battle])
+PrologueB = Music("Prologue B", "e01_b", [Cut, Battle])
+# MainTheme = Music("Main Theme", "e02", [Cut])
+MainThemeLoop = Music("Main Theme", "e02_loop", [Cut])
+BionisAwakening = Music("Bionis Awakening", "e05", [Cut])
+AncientMysteries = Music("Ancient Mysteries", "e06", [Cut])
+# ASpiritualPlace = Music("A Spiritual Place", "e07", [Cut])
+ASpiritualPlaceLoop = Music("A Spiritual Place", "e07_loop", [Cut])
 Epilogue = Music("Epilogue", "e08", [Cut])
-Memories = Music("Memories", "e09", [Cut])
-MemoriesLoop = Music("MemoriesLoop", "e09_loop", [Cut])
-EverydayLife = Music("EverydayLife", "e10", [Cut])
-EverydayLifeLoop = Music("EverydayLifeLoop", "e10_loop", [Cut])
-RikiTheLegendaryHeropon = Music("RikiTheLegendaryHeropon", "e11", [Cut])
-RikiTheLegendaryHeroponLoop = Music("RikiTheLegendaryHeroponLoop", "e11_loop", [Cut])
-ReminiscenceV1 = Music("ReminiscenceV1", "e12_v1", [Cut])
-ReminiscenceV1Loop = Music("ReminiscenceV1Loop", "e12_v1_loop", [Cut])
-ReminiscenceV2 = Music("ReminiscenceV2", "e12_v2", [Cut])
-ReminiscenceV2Loop = Music("ReminiscenceV2Loop", "e12_v2_loop", [Cut])
-AFriendOnMyMind = Music("AFriendOnMyMind", "e13", [Cut])
-AFriendOnMyMindLoop = Music("AFriendOnMyMindLoop", "e13_loop", [Cut])
-ShulkAndFiora = Music("ShulkAndFiora", "e14", [Cut])
-ShulkAndFioraLoop = Music("ShulkAndFioraLoop", "e14_loop", [Cut])
-Apprehension = Music("Apprehension", "e15", [Cut], Bad)
-ApprehensionLoop = Music("ApprehensionLoop", "e15_loop", [Cut], Bad)
-Tension = Music("Tension", "e16", [Cut], Bad)
-TensionLoop = Music("TensionLoop", "e16_loop", [Cut])
-Face = Music("Face", "e17", [Cut])
-FaceLoop = Music("FaceLoop", "e17_loop", [Cut])
-Disquiet = Music("Disquiet", "e18", [Cut], Bad)
-DisquietLoop = Music("DisquietLoop", "e18_loop", [Cut], Bad)
-Crisis = Music("Crisis", "e20", [Cut])
-CrisisLoop = Music("CrisisLoop", "e20_loop", [Cut])
-EgilsTheme = Music("EgilsTheme", "e21", [Cut], Bad)
-EgilsThemeLoop = Music("EgilsThemeLoop", "e21_loop", [Cut], Bad)
-ShadowsCreeping = Music("ShadowsCreeping", "e22", [Cut], Bad)
-ShadowsCreepingLoop = Music("ShadowsCreepingLoop", "e22_loop", [Cut], Bad)
-IntrigueV1 = Music("IntrigueV1", "e23_v1", [Cut], Bad)
-IntrigueV1Loop = Music("IntrigueV1Loop", "e23_v1_loop", [Cut], Bad)
-IntrigueV2 = Music("IntrigueV2", "e23_v2", [Cut], Bad)
-IntrigueV2Loop = Music("IntrigueV2Loop", "e23_v2_loop", [Cut], Bad)
+# Memories = Music("Memories", "e09", [Cut])
+MemoriesLoop = Music("Memories", "e09_loop", [Cut])
+# EverydayLife = Music("Everyday Life", "e10", [Cut])
+EverydayLifeLoop = Music("Everyday Life", "e10_loop", [Cut])
+# RikiTheLegendaryHeropon = Music("Riki The Legendary Heropon", "e11", [Cut])
+RikiTheLegendaryHeroponLoop = Music("Riki The Legendary Heropon", "e11_loop", [Cut])
+# ReminiscenceV1 = Music("Reminiscence V1", "e12_v1", [Cut])
+ReminiscenceV1Loop = Music("Reminiscence V1", "e12_v1_loop", [Cut])
+# ReminiscenceV2 = Music("Reminiscence V2", "e12_v2", [Cut])
+ReminiscenceV2Loop = Music("Reminiscence V2", "e12_v2_loop", [Cut])
+# AFriendOnMyMind = Music("A Friend On My Mind", "e13", [Cut])
+AFriendOnMyMindLoop = Music("A Friend On My Mind", "e13_loop", [Cut])
+# ShulkAndFiora = Music("Shulk And Fiora", "e14", [Cut])
+ShulkAndFioraLoop = Music("Shulk And Fiora", "e14_loop", [Cut])
+# Apprehension = Music("Apprehension", "e15", [Cut], Bad)
+ApprehensionLoop = Music("Apprehension", "e15_loop", [Cut], Bad)
+# Tension = Music("Tension", "e16", [Cut], Bad)
+TensionLoop = Music("Tension", "e16_loop", [Cut])
+# Face = Music("Face", "e17", [Cut])
+FaceLoop = Music("Face", "e17_loop", [Cut])
+# Disquiet = Music("Disquiet", "e18", [Cut], Bad)
+DisquietLoop = Music("Disquiet", "e18_loop", [Cut], Bad)
+# Crisis = Music("Crisis", "e20", [Cut])
+CrisisLoop = Music("Crisis", "e20_loop", [Cut])
+# EgilsTheme = Music("Egils Theme", "e21", [Cut], Bad)
+EgilsThemeLoop = Music("Egils Theme", "e21_loop", [Cut], Bad)
+# ShadowsCreeping = Music("Shadows Creeping", "e22", [Cut], Bad)
+ShadowsCreepingLoop = Music("Shadows Creeping", "e22_loop", [Cut], Bad)
+# IntrigueV1 = Music("Intrigue V1", "e23_v1", [Cut], Bad)
+IntrigueV1Loop = Music("Intrigue V1", "e23_v1_loop", [Cut], Bad)
+# IntrigueV2 = Music("Intrigue V2", "e23_v2", [Cut], Bad)
+IntrigueV2Loop = Music("Intrigue V2", "e23_v2_loop", [Cut], Bad)
     
 # EnvironmentThemes = [
 # "f01_loop", # - Hometown
