@@ -22,7 +22,7 @@ for song in Music.AllBattleThemes:
 BossMusicOption = Option("Boss Music", Misce, "Randomizes boss themes among themselves", [lambda: Music.MusicRando(Music.AllBossThemes)])
 for song in Music.AllBossThemes:
     song.CreateOption(BossMusicOption, Music.UsedBossThemes)
-EnvironmentCutsceneMusicOption = Option("Environment/Cutscene Music", Misce, "Randomizes environment themes among themselves", [lambda: Music.MusicRando(Music.AllEnvironmentThemes)])
+EnvironmentCutsceneMusicOption = Option("Environment/Cutscene Music", Misce, "Randomizes environment/cutscene themes among themselves", [lambda: Music.MusicRando(Music.AllEnvironmentThemes)])
 for song in Music.AllEnvironmentThemes:
     song.CreateOption(EnvironmentCutsceneMusicOption, Music.UsedEnvironmentThemes)
 for song in Music.AllCutsceneThemes:
