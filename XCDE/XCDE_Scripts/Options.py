@@ -1,6 +1,7 @@
 import PcArts
 from scripts.Interactables import Option, SubOption
-import PcArts, Music
+from scripts import Helper
+import PcArts, Music, AffinityTrees
 OptionList =[]
 
 General = 1
@@ -12,7 +13,9 @@ Funny = 6
 CosmeticsTab = 7
 GameModeTab = 8
 
-LevelDiffOption = Option("Level Penalties", General, "Removes the harsh level penalties and bonuses from the game for more fair combat")
+# LevelDiffOption = Option("Level Penalties", General, "Removes the harsh level penalties and bonuses from the game for more fair combat")
+AffinityTreeOption = Option("Affinity Skill Trees", Character, "Randomizes your skill trees", [lambda: AffinityTrees.SkillRando()])
+
 PlayerArtsOption = Option("Player Arts",Character, "Randomizes the effects of your arts", [lambda: PcArts.RandomizePcArts()])
 PlayerArtsOption_Cooldown = SubOption("Cooldown", PlayerArtsOption)
 PlayerArtsOption_EarlyArtsUnlock = SubOption("Unlock All Arts at Level 1", PlayerArtsOption)

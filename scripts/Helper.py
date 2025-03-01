@@ -1,4 +1,4 @@
-import json, random
+import json, random, time
 from tkinter import filedialog
 import tkinter as tk
 
@@ -145,3 +145,10 @@ def OddsCheck(odds):
         return True
     else:
         return False
+    
+def TimeFunction(command):
+    start = time.perf_counter() # Make a funciton that does this and just takes any funciton as an arg
+    me = lambda: command
+    me()
+    end = time.perf_counter()
+    print(f"Execution Time: {end - start:.6f} seconds")

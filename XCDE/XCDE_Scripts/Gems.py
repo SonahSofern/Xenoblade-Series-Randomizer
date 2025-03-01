@@ -1,0 +1,1 @@
+https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_skilllist.html

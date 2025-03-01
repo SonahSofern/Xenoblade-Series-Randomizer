@@ -51,6 +51,7 @@ def RandomizePcArts():
                 art["tp"] = random.randrange(-1,-25)
             elif art["tp"] < 0: # If sdharlas arts go on someone else it shouldnt buff their talent gauge
                 art["tp"] = 0
+                
             if isArtGroups:
                 for artGroup in ArtGroups: # Ensures grouped arts stay grouped
                     if id in artGroup.group:
@@ -87,7 +88,9 @@ CharacterList:list[ActMatch] = []
 def DetermineArtType(art, char:ActMatch):
     if art["pc"] == char.pcID: # If they get a vanilla art dont change the act no
         return
+    
     art["pc"] = char.pcID
+    
     if art["tgt"] in [2,3] or art["atk_type"] in [3]:
         art["act_idx"] = random.choice(char.Buff)
     elif art["range_type"] == 0:
