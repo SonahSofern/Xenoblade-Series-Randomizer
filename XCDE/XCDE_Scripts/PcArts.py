@@ -48,7 +48,7 @@ def RandomizePcArts():
             DetermineArtType(art, random.choice(CharacterList)) # Random choice
             
             if art["pc"] == SharlaActs.pcID: # Ensures sharlas arts still increment the cooldown talent art
-                art["tp"] = random.randrange(-1,-25)
+                art["tp"] = random.randrange(-25,-1)
             elif art["tp"] < 0: # If sdharlas arts go on someone else it shouldnt buff their talent gauge
                 art["tp"] = 0
                 
@@ -83,6 +83,23 @@ class ActMatch: # A class so that when arts get randomized their animation somew
         self.Buff = _Buff
         CharacterList.append(self)
 CharacterList:list[ActMatch] = []
+
+def BalanceArtUnlockLevels():
+    with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
+        artData = json.load(artFile)
+        for i in range(1,9): # Loop through the characters
+            unlockLv = 0 # Starting level to unlock arts
+            stepLv = [1,2,3,4] # How many levels for the next unlock 
+            for art in artData["rows"]:
+                if art["pc"] == i: # Find arts for a character
+                    art["get_lv"] = unlockLv
+                    unlockLv += random.choice(stepLv)
+                    print(unlockLv)
+
+            
+        artFile.seek(0)
+        artFile.truncate()
+        json.dump(artData, artFile, indent=2, ensure_ascii=False)
     
 
 def DetermineArtType(art, char:ActMatch):

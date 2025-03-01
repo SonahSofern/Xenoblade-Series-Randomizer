@@ -22,18 +22,19 @@ PlayerArtsOption_EarlyArtsUnlock = SubOption("Unlock All Arts at Level 1", Playe
 PlayerArtsOption_Summons = SubOption("Keep Melia's Summons", PlayerArtsOption)
 PlayerArtsOption_ArtGroups = SubOption("Keep Combo Arts Together", PlayerArtsOption)
 PlayerArtsOption_GuestArts = SubOption("Include Guest Arts", PlayerArtsOption)
-BattleMusicOption = Option("Battle Music", Misce, "Randomizes battle themes among themselves", [lambda: Music.MusicRando(Music.AllBattleThemes)]) #https://xenobladedata.github.io/xb1de/bdat/bdat_common/bgmlist.html
+PlayerArtsOption_KeepUnlockLevels = SubOption("Balanced Unlock Levels", PlayerArtsOption, [lambda: PcArts.BalanceArtUnlockLevels()])
+BattleMusicOption = Option("Battle Music", Misce, "Randomizes battle themes among themselves", [lambda: Music.MusicRando(Music.AllBattleThemes, Music.UsedBattleThemes)]) #https://xenobladedata.github.io/xb1de/bdat/bdat_common/bgmlist.html
 for song in Music.AllBattleThemes:
     song.CreateOption(BattleMusicOption, Music.UsedBattleThemes)
-BossMusicOption = Option("Boss Music", Misce, "Randomizes boss themes among themselves", [lambda: Music.MusicRando(Music.AllBossThemes)])
+BossMusicOption = Option("Boss Music", Misce, "Randomizes boss themes among themselves", [lambda: Music.MusicRando(Music.AllBossThemes, Music.UsedBossThemes)])
 for song in Music.AllBossThemes:
     song.CreateOption(BossMusicOption, Music.UsedBossThemes)
-EnvironmentCutsceneMusicOption = Option("Environment/Cutscene Music", Misce, "Randomizes environment/cutscene themes among themselves", [lambda: Music.MusicRando(Music.AllEnvironmentThemes)])
+EnvironmentCutsceneMusicOption = Option("Environment/Cutscene Music", Misce, "Randomizes environment/cutscene themes among themselves", [lambda: Music.MusicRando(Music.AllEnvironmentThemes + Music.AllCutsceneThemes, Music.UsedEnvironmentThemes + Music.UsedCutsceneThemes)])
 for song in Music.AllEnvironmentThemes:
     song.CreateOption(EnvironmentCutsceneMusicOption, Music.UsedEnvironmentThemes)
 for song in Music.AllCutsceneThemes:
     song.CreateOption(EnvironmentCutsceneMusicOption, Music.UsedCutsceneThemes)
-JingleMusicOption = Option("Jingles", Misce, "Randomizes jingles among themselves", [lambda: Music.MusicRando(Music.AllJingles)])
+JingleMusicOption = Option("Jingles", Misce, "Randomizes jingles among themselves", [lambda: Music.MusicRando(Music.AllJingles, Music.UsedJingles)])
 for song in Music.AllJingles:
     song.CreateOption(JingleMusicOption, Music.UsedJingles)
 

@@ -28,6 +28,7 @@ class Music:
         self.fileName = _fileName   
         self.isGood = _isGood
         self.type = _type
+        
         # Create the entire lists
         if Env in self.type:
             AllEnvironmentThemes.append(self)
@@ -39,35 +40,29 @@ class Music:
             AllBossThemes.append(self)
         if Jingle in self.type:
             AllJingles.append(self) 
+            
     def CreateOption(self, parent, list):
-        if not self.isGood:
-            defState = False
-        else:
+        if self.isGood:
             defState = True
+        else:
+            defState = False
         Interactables.SubOption(self.songName, parent, [lambda: list.append(self)],_defState=defState)
 
 
-def MusicRando(Songs:list[Music]):
+def MusicRando(Songs:list[Music], TempList:list[Music]):
     with open("./XCDE/_internal/JsonOutputs/bdat_common/bgmlist.json", 'r+', encoding='utf-8') as bgmFile:
         bgmData = json.load(bgmFile)
             
         for bgm in bgmData["rows"]:
             name = bgm["file_name"]
             if any(song.fileName == name for song in Songs):
-                bgm["file_name"] = random.choice(Songs).fileName
+                bgm["file_name"] = random.choice(TempList).fileName
+                
         bgmFile.seek(0)
         bgmFile.truncate()
         json.dump(bgmData, bgmFile, indent=2, ensure_ascii=False)
-    # print(list(x.songName for x in UsedBattleThemes))
-    ClearLists()
-
-
-def ClearLists():
-    UsedBattleThemes.clear()
-    UsedCutsceneThemes.clear()
-    UsedBossThemes.clear()
-    UsedJingles.clear()
-    UsedEnvironmentThemes.clear()
+    print(list(x.songName for x in UsedBattleThemes))
+    TempList.clear()
 
 
 # Environment Themes
@@ -128,8 +123,8 @@ NewAreaFound = Music("New Area Found", "j04", [Jingle])
 SecretAreaFound = Music("Secret Area Found", "j05", [Jingle])
 
 # Cutscene Themes
-PrologueA = Music("Prologue A", "e01_a", [Cut, Battle])
-PrologueB = Music("Prologue B", "e01_b", [Cut, Battle])
+PrologueA = Music("Prologue A", "e01_a", [Cut])
+PrologueB = Music("Prologue B", "e01_b", [Cut])
 # MainTheme = Music("Main Theme", "e02", [Cut])
 MainThemeLoop = Music("Main Theme", "e02_loop", [Cut])
 BionisAwakening = Music("Bionis Awakening", "e05", [Cut])

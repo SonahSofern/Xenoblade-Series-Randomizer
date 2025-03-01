@@ -11,6 +11,7 @@ ArmorEquips = [] # So we cant put people with no models with certain types but w
 
 SkillList= []
 
+
 class Skill:
     def __init__(self, _name, _shape, _target, _skill, _val1, _val2, _time, _point_PP, _point_SP, _flag):
         self.name = _name
@@ -29,6 +30,7 @@ class Skill:
 def SkillRando():
     with open("./XCDE/_internal/JsonOutputs/bdat_common/BTL_PSVskill.json", 'r+', encoding='utf-8') as skillFile:
         skillData = json.load(skillFile)
+        invalidSkills = yoinkSkills + MeliaSkills + MechonisArmor + SharlaCoolOff + ReynTaunts
         for skill in skillData["rows"]:
             Skill(skill["name"], skill["shape"], skill["target"], skill["skill"], skill["val1"], skill["val2"], skill["time"], skill["point_PP"], skill["point_SP"], skill["flag"])
         
