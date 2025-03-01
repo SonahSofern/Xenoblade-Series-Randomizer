@@ -311,7 +311,8 @@ def NewNonBossandQuestIDs(): # don't trust my old method of getting quest and bo
         with open(enemypopfile, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data['rows']:
-                RedRingClear(row)
+                if ValidEnemyPopFileNames[i][4] != "c":
+                    RedRingClear(row)
                 if row["name"][:3] == "bos":
                     for j in range(1, 5):
                         if row[f"ene{j}ID"] != 0:
@@ -333,6 +334,16 @@ def NewNonBossandQuestIDs(): # don't trust my old method of getting quest and bo
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
+
+    # fixes an issue where some enemies end up in multiple lists due to some enemies being placed in both a qst row and a regular row, or a bos row and a regular row.
+
+    EnemiesinOtherandBoss = list(set(BossIDsPostRandomization) & set(NonBossandQuestIDsPostRandomization))
+    EnemiesinOtherandQuest = list(set(QuestIDsPostRandomization) & set(NonBossandQuestIDsPostRandomization))
+    templist1 = list(set(NonBossandQuestIDsPostRandomization.copy()))
+    for enemy in EnemiesinOtherandBoss + EnemiesinOtherandQuest:
+        templist1.remove(enemy)
+    NonBossandQuestIDsPostRandomization = templist1
+
     return list(set(BossIDsPostRandomization)), list(set(QuestIDsPostRandomization)), list(set(NonBossandQuestIDsPostRandomization))       
 
 def BossQuestAggroAdjustments(NewBossIDs, NewQuestIDs): # Required to allow bosses/quest enemies to aggro (including ones we don't randomize!)
@@ -352,7 +363,7 @@ def BossQuestAggroAdjustments(NewBossIDs, NewQuestIDs): # Required to allow boss
                 row["Flag"]["Named"] = 0
                 continue
             elif row["$id"] in NewQuestIDs:
-                row["Flag"]["AlwaysAttack"] = 0
+                row["Flag"]["AlwaysAttack"] = 1
                 row["Detects"] = 1
                 row["SearchRange"] = 10
                 row["SearchAngle"] = 100
@@ -376,8 +387,8 @@ def EnemyAggroProportion():
     NormalEnemiesBox = Options.EnemiesOption_NormalEnemies.GetState()
     if EnemyRandoOnBox:
         if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox: # do nothing, got handled after enemy randomization
-            pass
-    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetState()
+            return
+    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetOdds()
     NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
     if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive
         with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
@@ -386,6 +397,7 @@ def EnemyAggroProportion():
                 if (row["$id"] in ValidEnemies) & (row["$id"] in OtherEnemyIDs):
                     row["Flag"]["AlwaysAttack"] = 0
                     row["Flag"]["mBoss"] = 0
+                    row["Flag"]["LinkType"] = 0
                     row["SearchRange"] = 0
                     row["SearchRadius"] = 0
                     row["SearchAngle"] = 0
@@ -402,6 +414,7 @@ def EnemyAggroProportion():
                 if (EnemyAggroSliderOdds != 100) & (row["$id"] in OtherEnemyIDs) & (random.randint(0,100) >= EnemyAggroSliderOdds) & (row["$id"] in ValidEnemies):
                     row["Flag"]["AlwaysAttack"] = 0
                     row["Flag"]["mBoss"] = 0
+                    row["Flag"]["LinkType"] = 0
                     row["SearchRange"] = 0
                     row["SearchRadius"] = 0
                     row["SearchAngle"] = 0
@@ -434,6 +447,7 @@ def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs): #when enemy
                 if (EnemyAggroSliderOdds != 100) & (row["$id"] in OtherEnemyIDs) & (random.randint(0,100) >= EnemyAggroSliderOdds) & (row["$id"] in ValidEnemies):
                     row["Flag"]["AlwaysAttack"] = 0
                     row["Flag"]["mBoss"] = 0
+                    row["Flag"]["LinkType"] = 0
                     row["SearchRange"] = 0
                     row["SearchRadius"] = 0
                     row["SearchAngle"] = 0
@@ -737,7 +751,7 @@ def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/f
     SummonsLevelAdjustment()
     FightBalancing(["./XC2/_internal/JsonOutputs/common_gmk/ma13a_FLD_EnemyPop.json", "./XC2/_internal/JsonOutputs/common_gmk/ma16a_FLD_EnemyPop.json"], [13001, 16149], [-5, -5])
     FishFix()
-    BigEnemyCollisionFix()
+    # BigEnemyCollisionFix() no longer needed, we removed the red rings instead
     AeshmaCoreHPNerf()
     GortOgreUppercutRemoval()
     EarthBreathNerf()
@@ -849,6 +863,67 @@ def EnemyLogic():
         EnemyDupeBossCondition(NewBossIDs)
         FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
         SwimmingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
+        Helper.SubColumnAdjust("./XC2/_internal/JsonOutputs/common/CHR_EnParam.json", "Flag", "FldDmgType", 0)
+        #DebugEnemyAggro(NewBossIDs, NewQuestIDs, OtherEnemyIDs)
+
+def DebugEnemyAggro(NewBossIDs, NewQuestIDs, OtherEnemyIDs):
+    BossIDsPostRandomization = []
+    QuestIDsPostRandomization = []
+    for i in range(0, len(ValidEnemyPopFileNames)):
+        enemypopfile = "./XC2/_internal/JsonOutputs/common_gmk/" + ValidEnemyPopFileNames[i]
+        with open(enemypopfile, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for row in data['rows']:
+                if ValidEnemyPopFileNames[i][4] != "c":
+                    RedRingClear(row)
+                if row["name"][:3] == "bos":
+                    for j in range(1, 5):
+                        if row[f"ene{j}ID"] != 0:
+                            BossIDsPostRandomization.append(row[f"ene{j}ID"])
+                        else:
+                            break
+                elif row["name"][:3] == "qst":
+                    for j in range(1, 5):
+                        if row[f"ene{j}ID"] != 0:
+                            QuestIDsPostRandomization.append(row[f"ene{j}ID"])
+                        else:
+                            break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+    
+    # These should return []
+    MissingBossEnemies = list(set(BossIDsPostRandomization)-set(NewBossIDs)) # difference between the NewBossIDs and the BossIDsPostRandomization
+    MissingQuestEnemies = list(set(QuestIDsPostRandomization)-set(NewQuestIDs)) # same but for quest enemies
+    print(MissingBossEnemies)
+    print(MissingQuestEnemies)
+
+    # These should return []
+    EnemiesinOtherandBoss = list(set(BossIDsPostRandomization) & set(OtherEnemyIDs))
+    EnemiesinOtherandQuest = list(set(QuestIDsPostRandomization) & set(OtherEnemyIDs))
+    print(EnemiesinOtherandBoss)
+    print(EnemiesinOtherandQuest)
+
+
+    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data['rows']:
+            if row["$id"] in BossIDsPostRandomization + QuestIDsPostRandomization:
+                if row["Flag"]["AlwaysAttack"] == 0:
+                    print(f"Enemy ID {row['$id']} is not always attacking like it should!")
+                if row["Detects"] == 0:
+                    print(f"Enemy ID {row['$id']} is not always detecting you like it should!")
+                if row["SearchRange"] == 0:
+                    print(f"Enemy ID {row['$id']} is not always searching as large a range as it should!")
+                if row["SearchAngle"] == 0:
+                    print(f"Enemy ID {row['$id']} is not always searching at an angle like it should!")
+                if row["SearchRadius"] == 0:
+                    print(f"Enemy ID {row['$id']} is not always searching the full radius like it should!")
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    
+
 
 
 

@@ -149,7 +149,6 @@ randoSeedEntry.pack(side='left', padx=2)
 
 permalinkVar = StringVar()
 
-
         
 fileEnt = SavedOptions.SavedEntry("Input Bdats",fileEntryVar)
 fileOut = SavedOptions.SavedEntry("Output Bdats", outputDirVar)
