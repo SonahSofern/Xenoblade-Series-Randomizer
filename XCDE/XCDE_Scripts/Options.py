@@ -16,6 +16,9 @@ LevelDiffOption = Option("Level Penalties", General, "Removes the harsh level pe
 PlayerArtsOption = Option("Player Arts",Character, "Randomizes the effects of your arts", [lambda: PcArts.RandomizePcArts()])
 PlayerArtsOption_Cooldown = SubOption("Cooldown", PlayerArtsOption)
 PlayerArtsOption_EarlyArtsUnlock = SubOption("Unlock All Arts at Level 1", PlayerArtsOption)
+PlayerArtsOption_Summons = SubOption("Keep Melia's Summons", PlayerArtsOption)
+PlayerArtsOption_ArtGroups = SubOption("Keep Combo Arts Together", PlayerArtsOption)
+PlayerArtsOption_GuestArts = SubOption("Include Guest Arts", PlayerArtsOption)
 BattleMusicOption = Option("Battle Music", Misce, "Randomizes battle themes among themselves", [lambda: Music.MusicRando(Music.AllBattleThemes)]) #https://xenobladedata.github.io/xb1de/bdat/bdat_common/bgmlist.html
 for song in Music.AllBattleThemes:
     song.CreateOption(BattleMusicOption, Music.UsedBattleThemes)
