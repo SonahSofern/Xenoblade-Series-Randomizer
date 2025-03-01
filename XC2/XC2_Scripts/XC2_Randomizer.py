@@ -4,7 +4,6 @@ from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
 root = Tk()
-import Options
 import random, subprocess, shutil, os, threading, traceback, time, sys, datetime
 from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkManagement, UI_Colors, Seed, Interactables
 import SeedNames
@@ -13,6 +12,7 @@ from IDs import *
 from tkinter.font import Font
 import tkinter as tk
 from scripts.GUISettings import *
+import Options
 Game = "XC2"
 Version = "1.3.1"
 JsonOutput = "./XC2/_internal/JsonOutputs"

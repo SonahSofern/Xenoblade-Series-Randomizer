@@ -147,7 +147,7 @@ def OddsCheck(odds):
         return False
     
 def TimeFunction(command):
-    start = time.perf_counter() # Make a funciton that does this and just takes any funciton as an arg
+    start = time.perf_counter() # Make a funciton that does this and just takes any function as an arg
     me = lambda: command
     me()
     end = time.perf_counter()
