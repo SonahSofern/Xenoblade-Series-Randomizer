@@ -63,7 +63,7 @@ def UMHunt():
     Cleanup()
     UMHuntMenuTextChanges()
     #UMHuntDebugFunctions.DebugItemsPlace() # currently doesnt matter since I hide all the argentum chests anyways
-    UMHuntDebugFunctions.DebugEasyMode()
+    #UMHuntDebugFunctions.DebugEasyMode()
     #UMHuntDebugFunctions.DebugSpawnCountPrint(EnemySets, ChosenAreaOrder)
     #UMHuntDebugFunctions.DebugEnemyLevels(ChosenAreaOrder)
 
