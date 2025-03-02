@@ -720,6 +720,7 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
     EnemyRandoLogic.SwimmingEnemyFix(AllOriginalAreaEnemies, AllNewAreaEnemies)
     EnemyRandoLogic.FishFix()
     # EnemyRandoLogic.BigEnemyCollisionFix() no longer needed, there's no red rings at all.
+    global ChosenSuperbosses, SuperbossMaps
     if ExtraSuperbosses:
         UniqueSuperbosses = list(dict.fromkeys(AllAreaSuperbosses))
         ValidSuperBossList = Helper.InclRange(0, 9)
@@ -727,17 +728,18 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
             ChosenSuperbossNumber = random.choice(ValidSuperBossList)
             ChosenSuperbossNumbers.append(ChosenSuperbossNumber)
             ValidSuperBossList.remove(ChosenSuperbossNumber)
-        global ChosenSuperbosses
         ChosenSuperbosses = []
         for i in range(0, SuperbossCount):
             ChosenSuperbosses.append(UniqueSuperbosses[ChosenSuperbossNumbers[i]])
-        global SuperbossMaps
         SuperbossMaps = []
         for i in range(0, SuperbossCount):
             for j in range(0, len(AllAreaSuperbosses)):
                 if AllAreaSuperbosses[j] == ChosenSuperbosses[i]: # if we have a chosen superboss that matches the entire list of superbosses and their maps (both of equal length!)
                     SuperbossMaps.append(SuperbossMapsFull[j]) # add the superboss's map to the list of maps we care about
                     break
+    else:
+        SuperbossMaps = []
+        ChosenSuperbosses = []
     UMEnemyAggro()
     ClearExcessiveUMCounts(ChosenAreaOrder, AllAreaUMs)
     Helper.SubColumnAdjust("./XC2/_internal/JsonOutputs/common/CHR_EnParam.json", "Flag", "FldDmgType", 0)
@@ -807,7 +809,10 @@ def ClearExcessiveUMCounts(ChosenAreaOrder, AllAreaUMs): # if a um gets put in a
     CombinedAreaUMs = []
     for area in range(len(AllAreaUMs)):
         CombinedAreaUMs.extend(AllAreaUMs[area])
-    CombinedAreaUMs.extend(ChosenSuperbosses)
+    try:
+        CombinedAreaUMs.extend(ChosenSuperbosses)
+    except:
+        pass
     enemycountholder = Helper.ExtendListtoLength([0], len(CombinedAreaUMs),"0")
     for i in range(0, len(ChosenAreaOrder)):
         enemypopfile = "./XC2/_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_EnemyPop.json"
