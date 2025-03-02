@@ -15,7 +15,9 @@ GameModeTab = 8
 
 # LevelDiffOption = Option("Level Penalties", General, "Removes the harsh level penalties and bonuses from the game for more fair combat")
 AffinityTreeOption = Option("Affinity Skill Trees", Character, "Randomizes your skill trees", [lambda: AffinityTrees.SkillRando()])
-
+AffinityTreeOption_Shape = SubOption("Node Shape", AffinityTreeOption)
+AffinityTreeOption_Power = SubOption("Power", AffinityTreeOption)
+AffinityTreeOption_LinkCost = SubOption("Link Cost", AffinityTreeOption)
 PlayerArtsOption = Option("Player Arts",Character, "Randomizes the effects of your arts", [lambda: PcArts.RandomizePcArts()])
 PlayerArtsOption_Cooldown = SubOption("Cooldown", PlayerArtsOption)
 PlayerArtsOption_EarlyArtsUnlock = SubOption("Unlock All Arts at Level 1", PlayerArtsOption)

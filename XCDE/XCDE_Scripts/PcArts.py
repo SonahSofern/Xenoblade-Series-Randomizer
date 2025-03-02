@@ -6,7 +6,8 @@ GuestArts = [144,145,146,147,148,149]
 PonspectorDLCArts = [188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254]
 ShulkMonadoArts = [3,4,5,6,7,8,9,10]
 DunbanMonadoArts = [150,151]
-MeliaSummons = [113,103,109,112,104,105,111]
+MeliaSummons = [113,103,109,112,104,105,111,116]
+MeliaElementBurst = [118,117]
 
 class ArtGroup:
     def __init__(self, _group):
@@ -36,6 +37,7 @@ def RandomizePcArts():
         
     if keepMeliaSummons:
         invalidArtIds.extend(MeliaSummons)
+        invalidArtIds.extend(MeliaElementBurst)
         
     with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
@@ -47,9 +49,9 @@ def RandomizePcArts():
             
             DetermineArtType(art, random.choice(CharacterList)) # Random choice
             
-            if art["pc"] == SharlaActs.pcID: # Ensures sharlas arts still increment the cooldown talent art
+            if art["pc"] in [SharlaActs.pcID, KinoActs.pcID]: # Ensures former healer's new arts still increment the cooldown talent art
                 art["tp"] = random.randrange(-25,-1)
-            elif art["tp"] < 0: # If sdharlas arts go on someone else it shouldnt buff their talent gauge
+            elif art["tp"] < 0: # If healer arts go on someone else it shouldnt buff their talent gauge
                 art["tp"] = 0
                 
             if isArtGroups:
@@ -72,9 +74,6 @@ def RandomizePcArts():
 # Setting to tie arts to weapon https://xenobladedata.github.io/xb1de/bdat/bdat_common/ITM_wpnlist.html#137 
 # Setting that randomizes effects of arts
 
-# Summon Flare had War Swing for reyn
-# Sharlas talent art is imporved since other char arts dont increase it
-# Melias conditional arts are strong because they ignore the condition when not on melia
 class ActMatch: # A class so that when arts get randomized their animation somewhat matches their effects by changing pc_arts act_idx
     def __init__(self, _pcID, _SingleAttack, _AOEAttack, _Buff):
         self.pcID = _pcID
@@ -91,10 +90,12 @@ def BalanceArtUnlockLevels():
             unlockLv = 0 # Starting level to unlock arts
             stepLv = [1,2,3,4] # How many levels for the next unlock 
             for art in artData["rows"]:
+                # print(unlockLv)
+                if art["$id"] in ShulkMonadoArts:
+                    continue
                 if art["pc"] == i: # Find arts for a character
                     art["get_lv"] = unlockLv
                     unlockLv += random.choice(stepLv)
-                    print(unlockLv)
 
             
         artFile.seek(0)
@@ -142,12 +143,12 @@ def Effect(): # st_type status type
    
 # Loop through the file and create a list of the attacks and their names for easy handling usese act_idx NOT IDS
 ShulkActs = ActMatch(1, _SingleAttack=[1,0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[3,2,6,10,13,14])
-ReynActs = ActMatch(2, _SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,3,5,7,8,9,10,14])
+ReynActs = ActMatch(2, _SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,5,7,8,9,10,14])
 FioraActs = ActMatch(3,  _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0])
 DunbanActs = ActMatch(4,  _SingleAttack=[0,1,3,5,9,14],_AOEAttack=[12,13,14],_Buff=[2,4,6,7,8,10,11,15])
 SharlaActs = ActMatch(5,  _SingleAttack=[0,1,7,11,14],_AOEAttack=[6,8,15],_Buff=[0,2,3,4,5,6,9,10,12,13])
 RikiActs = ActMatch(6,  _SingleAttack=[1,2,6,11,12,14,15],_AOEAttack=[0,4,6,7,9,10,13,15],_Buff=[0,3,5,8,10,13])
 MeliaActs = ActMatch(7,  _SingleAttack=[4,12],_AOEAttack=[5,14,15],_Buff=[0,1,2,3,6,7,8,9,10,11,13])
 SevenActs = ActMatch(8,  _SingleAttack=[0,2,3,10,11],_AOEAttack=[5,7,8,9,12,15],_Buff=[1,4,6,13,14])
-# DunbanActs = ActMatch(9,  _SingleAttack=[],_AOEAttack=[],_Buff=[])
-# art["arts_type"] = 1 This just make the art activate your talent art
+KinoActs = ActMatch(14,[0],[0],[0])
+NeneActs = ActMatch(15,[0],[0],[0])
