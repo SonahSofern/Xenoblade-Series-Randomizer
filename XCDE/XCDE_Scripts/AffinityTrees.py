@@ -100,9 +100,9 @@ def Power(skill):
     val1 = random.choice(dist)
     val2 = random.choice(dist)
     time = random.choice(dist)
-    skill["val1"] = int(skill["val1"] * val1)
-    skill["val2"] = int(skill["val2"] * val2)
-    skill["time"] = int(skill["time"] * time)
+    skill["val1"] = min(int(skill["val1"] * val1),255)
+    skill["val2"] = min(int(skill["val2"] * val2),255)
+    skill["time"] = min(int(skill["time"] * time),255)
 
 def LinkCost(skill):
     skillRoll = random.choice([.15,.25,.5,.7,1.2,1.5,2])
