@@ -4,7 +4,7 @@ from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
 root = Tk()
-import Options, SeedNames
+import Options, SeedNames, IDs
 import  os, sys, subprocess
 from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkManagement, UI_Colors, Seed, Interactables
 from tkinter.font import Font
@@ -169,9 +169,11 @@ PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, se
 
 # Bottom Left Progress Display Text
 randoProgressDisplay = ttk.Label(text="", anchor="e", padding=2, style="BorderlessLabel.TLabel")
-
+areaFiles = []
+for id in IDs.areaFileListNumbers:
+    areaFiles.append(f"bdat_ma{id}")
 # Randomize Button
-RandomizeButton = ttk.Button(text='Randomize', command=(lambda: GUISettings.Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, ["bdat_common", "bdat_menu_psv"], ["bdat_common_ms", "bdat_menu_psv_ms"],[lambda: ShowTitleScreenText()] )))
+RandomizeButton = ttk.Button(text='Randomize', command=(lambda: GUISettings.Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, ["bdat_common", "bdat_menu_psv"] + areaFiles, ["bdat_common_ms", "bdat_menu_psv_ms"],[lambda: ShowTitleScreenText()] )))
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
 RandomizeButton.config(padding=5)
 

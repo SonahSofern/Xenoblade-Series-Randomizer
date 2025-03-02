@@ -1,7 +1,7 @@
 import PcArts
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
-import PcArts, Music, AffinityTrees, Gems
+import PcArts, Music, AffinityTrees, Gems, Enemies as EnemiesScript
 OptionList =[]
 
 General = 1
@@ -14,6 +14,9 @@ CosmeticsTab = 7
 GameModeTab = 8
 
 # LevelDiffOption = Option("Level Penalties", General, "Removes the harsh level penalties and bonuses from the game for more fair combat")
+
+EnemyOption = Option("Enemies", Enemies, "Randomizes enemy in the overworld", [lambda: EnemiesScript.Enemies()])
+
 GemOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.Gems()])
 GemOption_NoCap = SubOption("Remove Cap", GemOption)
 GemOption_FreeEquip = SubOption("Freely Equip to Weapons and Armor", GemOption)
