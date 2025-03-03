@@ -1,25 +1,22 @@
 
 import json, random, Options, IDs
 
-      
-# Couldnt get it to work just changing ene1ID and matching it with a poplist. Game lags like crazy.
-
 class Enemy:
-    def __init__(self, enelistArea = None, enelist = None):
+    def __init__(self, enelistArea, enelist):
         self.eneListArea = enelistArea
         self.enelist = enelist
         
 
 def Enemies():
     EnemyList = []
-    EnemyAreaList = []
+    CombinedEnemyData:list[Enemy] = []     
     CopiedStats = ["move_speed", "named", "frame", "size", "scale", "family", "elem_phx", "elem_eth", "Lv_up_hp", "Lv_up_str", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "avoid", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "detects", "assist", "search_range", "search_angle", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_dmg", "spike_state", "spike_state_val", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
-     # "run_speed" Do NOT include run speed idk why the fuck it does this but it lags the game to 1 fps
+    # "run_speed" Do NOT include run speed idk why the fuck it does this but it lags the game to 1 fps
     CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
-        # Build our list of enemies
+    # Build our list of enemies
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
         eneData = json.load(eneFile)
-        BadEnemies = []
+        BadEnemies = [220]
         
         for enemy in eneData["rows"]: # Build our list of enemy resources and our list of bad enemies that we dont want to touch
             if enemy["name"] == 0:
@@ -27,45 +24,42 @@ def Enemies():
                 continue
             EnemyList.append(enemy)
             
-            # Create our list of enemies from all the area files
+        # Create our list of enemies from all the area files and Combine the data into the class
+
         for file in IDs.areaFileListNumbers:
             try:   
                 with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
                     eneAreaData = json.load(eneAreaFile)
                     for enemy in eneAreaData["rows"]:
-                        if enemy["$id"] in BadEnemies:
-                            continue
-                        EnemyAreaList.append(enemy)
-                        
+                        for en in EnemyList:
+                            if en["$id"] == enemy["$id"]:
+                                new = Enemy(enemy, en)      
+                                CombinedEnemyData.append(new)
+                                PrintEnemy(new)
+                                break   
                     eneAreaFile.seek(0)
                     eneAreaFile.truncate()
                     json.dump(eneAreaData, eneAreaFile, indent=2, ensure_ascii=False)
             except:
                 continue
-            
-        
-        CombinedEnemyData:list[Enemy] = []     
-        # Combine the data into the class
-        for i in range(1,len(EnemyAreaList)): # Remember this is leaving out some enemies each roll because enemy area list is shorter than enemy list because there are enemies who go in different locations. So theres on enemy in enelist but it gets put in area 1 and 2 so the area list adds another fix this
-            new = Enemy(EnemyAreaList[i], EnemyList[i])      
-            CombinedEnemyData.append(new)
                         
         for file in IDs.areaFileListNumbers:
             try:   
                 with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
                     eneAreaData = json.load(eneAreaFile)
                     for enemy in eneAreaData["rows"]:   
-                                             
+                        
+                        if enemy["$id"] in [7]:
+                            pass                  
                         if enemy["$id"] in BadEnemies:
                             continue
                         
                         chosen = random.choice(CombinedEnemyData)
-                        
                         for key in CopiedStats:
                             enemy[key] = chosen.eneListArea[key]
                             
-                        for ene in eneData["rows"]: # There are multiple enemies with same id in the area files, so whats happeneing is the last enemy with that id in the files is deciding all of the enemies arts We cant just match 1 to 1 the ID in enelist and the ID in areaEneList
-                            if ene["$id"] == enemy["$id"]:
+                        for ene in eneData["rows"]:
+                            if (ene["$id"] == enemy["$id"]):
                                 for key in CopiedInfo:
                                     ene[key] = chosen.enelist[key]
                                 break
@@ -79,7 +73,31 @@ def Enemies():
         json.dump(eneData, eneFile, indent=2, ensure_ascii=False)
     
 
-
+def PrintEnemy(enemy:Enemy):
+    with open(f"./XCDE/_internal/JsonOutputs/bdat_common_ms/BTL_enelist_ms.json", 'r+', encoding='utf-8') as enNamesFile:
+        with open(f"./XCDE/_internal/JsonOutputs/bdat_common_ms/ene_arts_ms.json", 'r+', encoding='utf-8') as enArtNamesFile:
+            with open(f"./XCDE/_internal/Enemies.txt", 'a', encoding='utf-8') as enemyTXT:
+                enemyNameData = json.load(enNamesFile)
+                enemyArtNameData = json.load(enArtNamesFile)
+                for name in enemyNameData["rows"]:
+                    if enemy.enelist["name"] == name["$id"]:
+                        print(f"Name: {name['name']}")
+                        enemyTXT.write(f" Name: {name['name']} ")
+                        break
+                for name in enemyArtNameData["rows"]:
+                    for i in range(1,9):
+                        if enemy.eneListArea[f"arts{i}"] == name["$id"]:
+                            print(f"Art {i}: {name['name']}")
+                            enemyTXT.write(f" Art {i}: {name['name']} ")
+                            break
+                enemyTXT.write("\n")
+        #     enArtNamesFile.seek(0)
+        #     enArtNamesFile.truncate()
+        #     json.dump(enemyArtNameData, enArtNamesFile, indent=2, ensure_ascii=False)
+        
+        # enNamesFile.seek(0)
+        # enNamesFile.truncate()
+        # json.dump(enemyNameData, enArtNamesFile, indent=2, ensure_ascii=False)
 
     
                # for enemy in eneData["rows"]: # Give each enemy a random resource so they turn into that enemy on the field
