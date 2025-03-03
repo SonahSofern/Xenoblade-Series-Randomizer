@@ -27,7 +27,8 @@ def EnemyEnhances():
                     
                     
 
-                enh.RollEnhancement()                        
+                enh.RollEnhancement()
+                  
                 Enemy["EnhanceID3"] = enh.id
                 
                 for name in Names["rows"]: # Changes Names
@@ -49,13 +50,15 @@ def EnemyEnhances():
         json.dump(EnArr, EnArrangeFile, indent=2, ensure_ascii=False)
         
 class EnemyEnhancement(Enhancement):
-    def __init__(self, name, enhancement, para1 = [0,0,0,0],para2 = [0,0,0,0]):
+    def __init__(self, name, enhancement, para1 = [0,0,0,0],para2 = [0,0,0,0], revP1 = False, revp2 = False):
         self.name = name
         self.EnhanceEffect = enhancement.EnhanceEffect
         self.Caption = 0
         self.addToList = False
         self.Param1 = para1
         self.Param2 = para2
+        self.ReversePar1 = revP1
+        self.ReversePar2 = revp2
         ValidSkills.append(self)
    
 Healthy = EnemyEnhancement("Healthy", HPBoost, [100,150,200,300])
@@ -74,7 +77,7 @@ FirstStrike = EnemyEnhancement("Supriser", FirstArtDamage,[300,500,600,700])
 Lightning  = EnemyEnhancement("Lightning", AutoSpeedArtsSpeed,[300,400,500,600],[200,300,400,500])
 Repeat = EnemyEnhancement("Repeat", DidIDoThat,[20,40,60,80])
 Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
-Regen = EnemyEnhancement("Regen", PermaRegen,[120,90,60,30], [1,2,3,4])
+Regen = EnemyEnhancement("Regen", PermaRegen,[30,60,90,120], [1,2,3,4], revP1=True)
 CloseArmor = EnemyEnhancement("Guardian", ReduceDamageFromNearbyEnemies, [30,50,70,90])
 Swarm = EnemyEnhancement("Swarming", PerAllyDamageUp, [20,40,60,80])
 Sealing = EnemyEnhancement("Sealing", ChainAttackSeal, [1,1,2,3])

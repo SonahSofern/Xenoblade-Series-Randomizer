@@ -46,7 +46,7 @@ def Enemies():
         
         CombinedEnemyData:list[Enemy] = []     
         # Combine the data into the class
-        for i in range(1,len(EnemyAreaList)):
+        for i in range(1,len(EnemyAreaList)): # Remember this is leaving out some enemies each roll because enemy area list is shorter than enemy list because there are enemies who go in different locations. So theres on enemy in enelist but it gets put in area 1 and 2 so the area list adds another fix this
             new = Enemy(EnemyAreaList[i], EnemyList[i])      
             CombinedEnemyData.append(new)
                         
