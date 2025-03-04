@@ -1064,6 +1064,9 @@ def AddQuestConditions(ChosenAreaOrder): # Adding conditions for each area's war
         for i in range(0, len(ChosenAreaOrder)):
             for row in data["rows"]:
                 if row["select"] == ContinentInfo[ChosenAreaOrder[i]][2]:
+                    if row["select"] == "ma05a" or "ma08a": # these let you do a long rest at an inn
+                        row["ebb_ON_cndID"] = 0 
+                        row["ebb_inn_cndID"] = 1
                     OrderedMapIDs.append(row["$id"])
         file.seek(0)
         file.truncate()

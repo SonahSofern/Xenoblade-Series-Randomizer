@@ -572,7 +572,7 @@ def ShopRemovals(): # Removes the Expensive Core Crystal from the shop, as well 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, makes the max movespeed bonus 250% instead of 25%
-    DeedTypeIDValues = Helper.InclRange(1, 51)
+    DeedTypeIDValues = Helper.InclRange(2, 51)
     with open("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes caption and name
         data = json.load(file)
         for row in data["rows"]:
@@ -592,7 +592,7 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 1:
-                row["Max"] = 150
+                row["Max"] = 750
                 break
         file.seek(0)
         file.truncate()
@@ -600,7 +600,7 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
     with open("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes name of deed
         data = json.load(file)
         for row in data["rows"]:
-            if (row["$id"] >= 25249) & (row["$id"] <= 25299):
+            if (row["$id"] >= 25250) & (row["$id"] <= 25299):
                 row["Caption"] = 603
             if row["$id"] > 25299:
                 break
@@ -610,7 +610,7 @@ def MovespeedDeedChanges(): #Replaces all other deed effects with movespeed, mak
     with open("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
         data = json.load(file)
         for row in data["rows"]:
-            if (row["$id"] >= 491) & (row["$id"] < 542):
+            if (row["$id"] >= 492) & (row["$id"] < 542):
                 row["name"] = "Movespeed Deed"
             if row["$id"] == 542:
                 break
@@ -683,7 +683,7 @@ def SeedHash():
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 128:
-                row["name"] = f"Seed Hash: {seedhashcomplete}"
+                row["name"] = f"Seed Hash: [System:Color name=tutorial]{seedhashcomplete}[/System:Color]"
                 row["style"] = 166
             if row["$id"] == 129:
                 row["name"] = "Race Mode Start"
