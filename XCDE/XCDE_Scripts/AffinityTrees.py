@@ -93,7 +93,7 @@ def Shape(skill, key, excludeShapes = []):
     Hexagon = 3
     Octagram = 4
     Diamond = 5
-    shapeChoices = (x for x in [Circle,Square,Hexagon,Octagram,Diamond] if x not in excludeShapes)
+    shapeChoices = list((x for x in [Circle,Square,Hexagon,Octagram,Diamond] if x not in excludeShapes))
     skill[key] = random.choice(shapeChoices)
 
 def Power(skill):
