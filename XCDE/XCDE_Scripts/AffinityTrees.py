@@ -69,7 +69,7 @@ def SkillRando():
                     Power(skill)
                 
                 if isShape:
-                    Shape(skill)
+                    Shape(skill, "shape")
                     
                 if isLinkCost:
                     LinkCost(skill)
@@ -87,19 +87,18 @@ def SkillRando():
         skillFile.truncate()
         json.dump(skillData, skillFile, indent=2, ensure_ascii=False)    
 
-def Shape(skill):
+def Shape(skill, key, excludeShapes = []):
     Circle = 1
     Square = 2
     Hexagon = 3
     Octagram = 4
     Diamond = 5
-    skill["shape"] = random.choice([Circle,Square,Hexagon,Octagram,Diamond])
+    shapeChoices = (x for x in [Circle,Square,Hexagon,Octagram,Diamond] if x not in excludeShapes)
+    skill[key] = random.choice(shapeChoices)
 
 def Power(skill):
     dist = [.3,.5,.7,.9,1.2,1.5,1.8,2,2.2,2.5,3]
-    val1 = random.choice(dist)
-    val2 = random.choice(dist)
-    time = random.choice(dist)
+    val1, val2, time = (random.choices(dist,k=3))
     skill["val1"] = min(int(skill["val1"] * val1),255)
     skill["val2"] = min(int(skill["val2"] * val2),255)
     skill["time"] = min(int(skill["time"] * time),255)
@@ -113,7 +112,7 @@ def SkillLinkNodeRando():
         linkData = json.load(linkFile)
         for link in linkData["rows"]:
             for i in range(1,6):
-                link[f"rvs_effect0{i}"] = random.randrange(1,5)
+                Shape(link, f"rvs_effect0{i}", [5]) # Want to exlcude diamond shapes to keep vanilla behaviour since that symbolizes a non linkable skill (we could use all if we wanted)
 
         linkFile.seek(0)
         linkFile.truncate()

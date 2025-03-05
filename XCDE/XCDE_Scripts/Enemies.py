@@ -81,13 +81,13 @@ def PrintEnemy(enemy:Enemy):
                 enemyArtNameData = json.load(enArtNamesFile)
                 for name in enemyNameData["rows"]:
                     if enemy.enelist["name"] == name["$id"]:
-                        print(f"Name: {name['name']}")
+                        # print(f"Name: {name['name']}")
                         enemyTXT.write(f" Name: {name['name']} ")
                         break
                 for name in enemyArtNameData["rows"]:
                     for i in range(1,9):
                         if enemy.eneListArea[f"arts{i}"] == name["$id"]:
-                            print(f"Art {i}: {name['name']}")
+                            # print(f"Art {i}: {name['name']}")
                             enemyTXT.write(f" Art {i}: {name['name']} ")
                             break
                 enemyTXT.write("\n")

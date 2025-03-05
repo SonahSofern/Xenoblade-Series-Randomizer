@@ -1,9 +1,9 @@
 from tkinter import ttk
 from tkinter import *
-
+from scripts import PopupDescriptions
 
 class Option():
-    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50, _hasSpinBox = False, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10):
+    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50, _hasSpinBox = False, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10, popupMarkdownFile = None):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
@@ -12,7 +12,8 @@ class Option():
         self.checkBox = None
         self.checkBoxVal = None
         self.subOptions:list[SubOption] = []
-
+        self.mdFile = popupMarkdownFile
+        
         # Initial Data
         self.name =  _name
         self.tab = _tab
@@ -49,9 +50,14 @@ class Option():
         self.checkBox = ttk.Checkbutton(optionPanel, variable= self.checkBoxVal, text=self.name, width=40, style="midColor.TCheckbutton", command=lambda: self.StateUpdate())
         self.checkBox.grid(row=rowIncrement, column=0, sticky="w")
         
-        # Description Label
-        self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, wraplength=400)
-        self.descObj.grid(row=rowIncrement, column=1, sticky="w", padx=0)
+        # Description Label or Button
+        if self.mdFile != None:
+            self.descObj = ttk.Button(optionPanel, text=self.desc, command=lambda: PopupDescriptions.GenPopup(self.mdFile))
+            padx = 20
+        else:
+            self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, wraplength=400)
+            padx= 0
+        self.descObj.grid(row=rowIncrement, column=1, sticky="w", padx=padx)
         
         # % Boxes
         if self.hasSpinBox:
@@ -61,6 +67,8 @@ class Option():
             self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w")
             self.spinBoxLabel.grid(row=rowIncrement, column=3, sticky="w", padx=0)
 
+
+            pass
         for sub in self.subOptions:
             rowIncrement += 1
             sub.checkBoxVal = BooleanVar(value=sub.defState)

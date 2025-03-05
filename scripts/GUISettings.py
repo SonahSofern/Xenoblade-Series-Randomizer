@@ -20,7 +20,7 @@ GUITheme = SavedOptions.SavedEntry("Theme", defGUIThemeVar)
 
 GUIWindow = None
 
-def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
+def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme, Game):
     
     def LoadFontByName(name):
         defaultFont.config(family=name)
@@ -46,7 +46,7 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme):
     def SaveUIChanges(event = None):
         fontType.checkBoxVal.set(defaultFont.cget("family"))
         fontSizeSave.checkBoxVal.set(defaultFont.cget("size"))
-        SavedOptions.saveData([fontType,fontSizeSave,GUITheme], "GUISavedOptions.txt", "GUI")
+        SavedOptions.saveData([fontType,fontSizeSave,GUITheme], "GUISavedOptions.txt", f"{Game}/GUI")
 
     def IncreaseFontSize(event = None):
         newSize = defaultFont.cget("size") + 1

@@ -18,3 +18,5 @@ XC2_Randomizer.spec
 .vscode/settings.json
 /XCDE/SaveData
 scripts/Goals.txt
+GUIGoals.txt
+XCDE/_internal/Enemies.txt
