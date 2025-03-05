@@ -103,7 +103,7 @@ Tabs = {
 
 Interactables.OptionList.sort(key= lambda x: x.name) # Sorts alphabetically
 for opt in Interactables.OptionList: # Cant reference directly because of circular imports :/
-    opt.DisplayOption(Tabs[opt.tab])
+    opt.DisplayOption(Tabs[opt.tab], root, defaultFont, GUISettings.defGUIThemeVar.get())
 
 def ShowTitleScreenText():
     JSONParser.ChangeJSONLine(["bdat_common_ms/MNU_title_ms.json"],[8], ["name"], f"Randomizer v{Version}", Game="XCDE") # Change Title Version to Randomizer vX.x.x

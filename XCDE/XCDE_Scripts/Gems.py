@@ -1,5 +1,7 @@
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_skilllist.html
 import json, random, Options
+from scripts.PopupDescriptions import Description
+import scripts.PopupDescriptions
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_bufflist.html#87 will be similar to enhancement in xc2 i can create gems with new effects and add back gems that dont get put in the game but already exist like cooldown reduc (cast quicken)
 class Gem:
     def __init__(self,_name, _cyl_name, _atr_type, _status, _rvs_type, _attach, _accum, _power, _percentPower, _money = 20, _category = 1):
@@ -27,3 +29,8 @@ def Gems():
 # 0 Equip to anything
 # 1 Equip to weapon
 # 2 Equip to armor
+
+
+GemDescription = Description("Gems")
+GemDescription.Text("This is a showcase for gems being freely equipped.")
+GemDescription.Image("./XCDE/_internal/Images/GemsFreeEquipped.png")

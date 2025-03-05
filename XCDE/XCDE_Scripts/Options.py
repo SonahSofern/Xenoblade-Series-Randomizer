@@ -1,5 +1,5 @@
 import PcArts
-from scripts.Interactables import Option, SubOption
+from scripts.Interactables import Option, SubOption, PopupDescriptions
 from scripts import Helper
 import PcArts, Music, AffinityTrees, Gems, Enemies as EnemiesScript
 OptionList =[]
@@ -19,7 +19,7 @@ GameModeTab = 8
 EnemyOption = Option("Enemies", Enemies, "Randomizes enemy in the overworld", [lambda: EnemiesScript.Enemies()])
 
 # Character
-GemOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.Gems()], popupMarkdownFile="Gems")
+GemOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.Gems()], descFileClass=Gems.GemDescription)
 GemOption_NoCap = SubOption("Remove Gem Stat Caps", GemOption)
 GemOption_FreeEquip = SubOption("Freely Equip to Weapons/Armor", GemOption)
 AffinityTreeOption = Option("Skill Trees", Character, "Randomizes all character's skill trees", [lambda: AffinityTrees.SkillRando()])

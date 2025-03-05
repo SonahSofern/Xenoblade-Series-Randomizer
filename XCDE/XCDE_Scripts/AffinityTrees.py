@@ -11,7 +11,7 @@ ArmorEquips = [] # So we cant put people with no models with certain types but w
 
 
 
-class Skill:
+class Skill: 
     newId = 0
     def __init__(self, _name, _shape, _target, _skill, _val1, _val2, _time, _point_PP, _point_SP, _flag, _id):
         self.name = _name
