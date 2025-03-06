@@ -33,4 +33,4 @@ def Gems():
 
 GemDescription = Description("Gems")
 GemDescription.Text("This is a showcase for gems being freely equipped.")
-GemDescription.Image("./XCDE/_internal/Images/GemsFreeEquipped.png")
+GemDescription.Image("./XCDE/_internal/Images/GemsFreeEquipped.png", 300)
