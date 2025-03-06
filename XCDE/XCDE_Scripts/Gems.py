@@ -32,5 +32,5 @@ def Gems():
 
 
 GemDescription = Description("Gems")
-GemDescription.Text("This is a showcase for gems being freely equipped.")
-GemDescription.Image("./XCDE/_internal/Images/GemsFreeEquipped.png", 300)
+GemDescription.Text("This allows any gem to be equipped to weapons and armor. \nDouble attack in the vanilla game could only be equipped to your weapon for example.")
+GemDescription.Image("./XCDE/_internal/Images/GemsFreeEquipped.png", 500)
