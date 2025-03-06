@@ -1,4 +1,5 @@
 import sys, os
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))) # Allows us to use the scripts folder as a module
 from tkinter import PhotoImage, ttk
 from tkinter import *
@@ -10,6 +11,7 @@ from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkMana
 from tkinter.font import Font
 import tkinter as tk
 from scripts.GUISettings import *
+
 
 Game = "XCDE"
 Version = "1.0.0"

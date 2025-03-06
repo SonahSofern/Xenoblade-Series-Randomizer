@@ -2,6 +2,7 @@
 from tkinter import *
 from tkinter import ttk
 import scripts.GUISettings
+from PIL import Image, ImageTk
 
 class Description:
     data:list[str] = []
@@ -22,12 +23,16 @@ def GenPopup(Description:Description, root, defaultFont, defTheme):
     scripts.GUISettings.RootsForStyling.append(top)
     scripts.GUISettings.LoadTheme(defaultFont, defTheme)
     # loop over data from the description class and parse it
-    # for obj in Description.data:
-    #     if obj.startswith("./"): # if we are a filepath
-    #         # ttk.
-    #         # Handle as filepath image
-    #     else:
-    #         # Handle as text
+    for obj in Description.data:
+        if obj.startswith("./"): # if we are a filepath
+            img = Image.open(obj)
+            img = ImageTk.PhotoImage(img)
+            imageLabel = ttk.Label(top, image=img)
+            imageLabel.pack()
+            # Handle as filepath image
+        else:
+            pass
+            # Handle as text
             
             
     print(f"Tried to gen popup {Description}.md")
