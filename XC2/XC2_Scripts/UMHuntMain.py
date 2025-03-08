@@ -71,12 +71,12 @@ def UMHunt():
 
 def GetDifficulty(): # Gets the difficulty chosen
     global ChosenDifficulty
-    if Options.UMHuntOption_DifficultyHard.GetState():
-        ChosenDifficulty = "Hard"
-    elif Options.UMHuntOption_DifficultyNormal.GetState():
-        ChosenDifficulty = "Normal"
-    else:
-        ChosenDifficulty = "Easy"
+    #if Options.UMHuntOption_DifficultyHard.GetState():
+    #    ChosenDifficulty = "Hard"
+    #elif Options.UMHuntOption_DifficultyNormal.GetState():
+    #    ChosenDifficulty = "Normal"
+    #else:
+    ChosenDifficulty = "Easy"
 
 def CheckForSuperbosses():
     global ExtraSuperbosses
