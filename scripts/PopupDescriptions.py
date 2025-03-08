@@ -7,11 +7,11 @@ ImageGroup = [] # Needed because garbage collection will delete pictures otherwi
 HeaderText = "HeaderHEAD "
 
 class Description:
-    data:list[str] = []
-    sizes:list[int] = []
+
     def __init__(self, geometry = (800,800)):
         self.geometry = geometry
-        
+        self.data:list[str] = []
+        self.sizes:list[int] = []
     def Text(self,text:str):
         self.data.append(text)
     
@@ -45,7 +45,7 @@ def GenPopup(optionName, descData, root, defaultFont, defTheme):
             img = ImageTk.PhotoImage(img)
             imageLabel = ttk.Label(InnerFrame, image=img, padding=5, style="DescriptionImage.TLabel")
             ImageGroup.append(img)
-            imageLabel.pack()
+            imageLabel.pack(anchor="w", padx=15)
             sizeCount += 1 # Keeps track of our list of sizes for each image
             # Handle as filepath image
         elif text.startswith(HeaderText):
@@ -55,10 +55,10 @@ def GenPopup(optionName, descData, root, defaultFont, defTheme):
         else:
             # print(Description.geometry[1])
             textLabel = ttk.Label(InnerFrame,text=text, wraplength=Description.geometry[1] - 60)
-            textLabel.pack()
+            textLabel.pack(anchor="w")
             # Handle as text
     InnerFrame.update_idletasks()  # Ensure all geometry calculations are up-to-date
-    top.geometry(f"{InnerFrame.winfo_width() + 38}x{ min(InnerFrame.winfo_height(), 1000)}")
+    top.geometry(f"{InnerFrame.winfo_width() + 38}x{ min(InnerFrame.winfo_height() + 40, 1000)}")
 
             
     # print(f"Tried to gen popup {Description}.md")
