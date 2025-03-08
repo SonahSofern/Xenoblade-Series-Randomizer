@@ -95,7 +95,7 @@ def EnemyEnhancementDescriptions():
     myDesc = scripts.PopupDescriptions.Description()
     myDesc.Header("Enemy Enhancements")
     myDesc.Text(f"Adds {len(ValidSkills)} possible enhancements to enemies, displayed like this.")
-    # myDesc.Image("./XC2/_internal/Images/NameTagEnhancement.png", 400)
+    myDesc.Image("NameTagEnhancement.png","XC2", 400)
     myDesc.Text("Each enhancement has 3 different strengths indicated by a +/++ after the enhancement name.")
     myDesc.Text(f"{Healthy.name} - Gives a % HP boost between {Healthy.Param1[0]}-{Healthy.Param1[3]}%")
     myDesc.Text(f"{Strong.name} - Gives a % Strength boost between {Strong.Param1[0]}-{Strong.Param1[3]}%")
@@ -117,7 +117,6 @@ def EnemyEnhancementDescriptions():
     myDesc.Text(f"{CloseArmor.name} - Reduces damage by {CloseArmor.Param1[0]}-{CloseArmor.Param1[3]}% to all allies and user within 5 meters")
     myDesc.Text(f"{Swarm.name} - Each ally the enemy has increases their own damage by {Swarm.Param1[0]}-{Swarm.Param1[3]}%")
     myDesc.Text(f"{Sealing.name} - Locks {Sealing.Param1[0]}-{Sealing.Param1[3]} blocks of party gauge.")
-
     return myDesc
 
 

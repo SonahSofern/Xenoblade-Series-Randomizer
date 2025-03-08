@@ -14,7 +14,7 @@ import tkinter as tk
 from scripts.GUISettings import *
 import Options
 Game = "XC2"
-Version = "1.4.1"
+Version = "1.4.0"
 JsonOutput = "./XC2/_internal/JsonOutputs"
 
 SavedOptionsFileName = f"SavedOptionsv{Version}.txt"
