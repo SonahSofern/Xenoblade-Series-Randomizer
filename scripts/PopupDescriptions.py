@@ -5,6 +5,7 @@ import scripts.GUISettings
 from PIL import Image, ImageTk
 ImageGroup = [] # Needed because garbage collection will delete pictures otherwise
 HeaderText = "HeaderHEAD "
+OpenWindows = []
 
 class Description:
 
@@ -24,10 +25,19 @@ class Description:
 
 def GenPopup(optionName, descData, root, defaultFont, defTheme):
     # Open a window with the 
+    
+    # Check if a popup with the same title is already open
+    for top in OpenWindows:
+        if top.winfo_exists() and top.title() == optionName:
+            top.focus()
+            top.deiconify() # unminimizes
+            return  # If it exists, don't create a new one
+        
     Description = descData()
     top = Toplevel(root, padx=10, pady=10)  # Create a new top-level window
     top.title(optionName)
     scripts.GUISettings.RootsForStyling.append(top)
+    OpenWindows.append(top)
     sizeCount = 0
     
     Outerframe = ttk.Frame(top) 
@@ -59,6 +69,7 @@ def GenPopup(optionName, descData, root, defaultFont, defTheme):
             # Handle as text
     InnerFrame.update_idletasks()  # Ensure all geometry calculations are up-to-date
     top.geometry(f"{InnerFrame.winfo_width() + 38}x{ min(InnerFrame.winfo_height() + 40, 1000)}")
+    top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
 
             
     # print(f"Tried to gen popup {Description}.md")
