@@ -23,7 +23,7 @@ if getattr(sys, 'frozen', False):  # If the app is running as a bundled executab
 else:
     isOnefile = False
     
-SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt", Game)
+SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt", f"{Game}/GUI")
 
 
 GUISettings.RootsForStyling.append(root)
