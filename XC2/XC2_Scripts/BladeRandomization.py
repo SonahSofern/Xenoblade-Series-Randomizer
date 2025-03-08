@@ -44,6 +44,13 @@ def FreeEngage(): # If Blade Rando is on, we want to be able to move blades arou
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", ["FreeEngage"], "1")
     
 def InitialSetup():
+    OriginalBlades.clear()
+    BladeNames.clear()
+    Original2Replacement.clear()
+    Replacement2Original.clear()
+    global GuaranteedHealer
+    GuaranteedHealer = None
+
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], [], PopulateBlades, replaceAll=True)
     JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], [], MakeAllArtsAccessible, replaceAll=True)
 

@@ -20,7 +20,6 @@ CustomLevel2s = list()
 BaseLevel3s = list()
 CustomLevel3Templates = dict() # Key is element
 
-
 class CustomLevel2Combo:
     def __init__(self, name, elemRoute, baseName, tier3adjectives):
         random.shuffle(tier3adjectives)
@@ -173,6 +172,17 @@ def getBaseStage3Combo(elemRoute):
 
 
 def PopulateMaps():
+    Name2Elem.clear()
+    OriginalID2Name.clear()
+    OriginalCombos[1].clear()
+    OriginalCombos[2].clear()
+    OriginalCombos[3].clear()
+    ReplacedCombos.clear()
+    ReplacedComboRoutes.clear()
+    CustomLevel2s.clear()
+    BaseLevel3s.clear()
+    CustomLevel3Templates.clear()
+
     def getNames(combo):
         OriginalID2Name[combo['$id']] = combo['name']
     JSONParser.ChangeJSONLineWithCallback(["common_ms/BTL_ElementalCombo_ms.json"], [], getNames, replaceAll=True)
@@ -241,11 +251,19 @@ def RandomizeElementRoutes():
             newCombo = getCustomStage2Combo(comboRoute)
 
             # If this combo has happened previously, shuffle the elements again
+            numReshuffles = 0
             while any(previousCombo == comboRoute for previousCombo in ReplacedComboRoutes):
+                if numReshuffles == 1000:
+                    # There must not be a valid element, add every element to the list again so something becomes valid
+                    for i in Helper.InclRange(1, 8):
+                        RemainingTier2Elements.append(i)
+                    numReshuffles = 0
                 random.shuffle(RemainingTier2Elements)
                 stage2Element = RemainingTier2Elements[0]
                 comboRoute = [stage1Element, stage2Element]
                 newCombo = getCustomStage2Combo(comboRoute)
+                numReshuffles = numReshuffles + 1
+
 
             # Replace the combo
             combo['DebugName'] = newCombo.name
@@ -272,7 +290,13 @@ def RandomizeElementRoutes():
             comboRoute = [stage1Element, stage2Element, stage3Element]
 
             # If this combo has happened previously, shuffle the elements again
+            numReshuffles = 0
             while any(previousCombo == comboRoute for previousCombo in ReplacedComboRoutes):
+                if numReshuffles == 1000:
+                    # There must not be a valid element, add every element to the list again so something becomes valid
+                    for i in Helper.InclRange(1, 8):
+                        RemainingTier2Elements.append(i)
+                    numReshuffles = 0
                 random.shuffle(RemainingTier3Elements)
                 stage3Element = RemainingTier3Elements[0]
                 comboRoute = [stage1Element, stage2Element, stage3Element]
