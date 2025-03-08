@@ -262,14 +262,14 @@ def LoadTheme(defaultFont, themeName):
             },
             "TSpinbox": {
                 "configure": {
-                    "background": currentTheme["darkColor"],
+                    "background": currentTheme["midColor"],
                     "foreground": currentTheme["lightColor"],
                     "fieldbackground": currentTheme["midColor"],
                     "darkcolor": currentTheme["darkColor"],
                     "lightcolor": currentTheme["darkColor"],
                     "insertcolor": currentTheme["midColor"],
-                    "relief": "ridge",
-                    "padding": (1,0,0,0),
+                    # "relief": "ridge",  No longer works lol idk why
+                    "padding": (4,0),
                     "focuscolor":"",
                     "selectforeground": currentTheme["lightColor"],
                     "selectbackground": currentTheme["midColor"],
@@ -298,7 +298,7 @@ def LoadTheme(defaultFont, themeName):
     style.configure("STATIC.TButton", font=staticFont)
     style.configure("BorderlessLabel.TLabel", background=currentTheme["backgroundColor"], foreground=UI_Colors.White)
     style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
-    # style.configure("Header.TLabel", background= currentTheme["midColor"])
+    style.configure("Header.TLabel", background= currentTheme["midColor"])
     # Since Canvas and Roots arrent affected by normal styling
     for canvas in CanvasesForStyling:
         try:

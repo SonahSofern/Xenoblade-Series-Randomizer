@@ -65,7 +65,7 @@ class Option():
         # % Boxes
         if self.hasSpinBox:
             self.spinBoxVal = IntVar(value=100)
-            self.spinBoxObj = ttk.Spinbox(optionPanel, from_=self.spinBoxMin, to=self.spinBoxMax, textvariable=self.spinBoxVal, wrap=True, width=self.spinWidth, increment=self.spinIncr)
+            self.spinBoxObj = ttk.Spinbox(optionPanel, from_=self.spinBoxMin, to=self.spinBoxMax, textvariable=self.spinBoxVal, wrap=True, width=self.spinWidth, increment=self.spinIncr, justify="center")
             self.spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
             self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w")
             self.spinBoxLabel.grid(row=rowIncrement, column=3, sticky="w", padx=0)
