@@ -27,7 +27,6 @@ def GenPopup(optionName, descData, root, defaultFont, defTheme):
     Description = descData()
     top = Toplevel(root, padx=10, pady=10)  # Create a new top-level window
     top.title(optionName)
-    top.geometry(f"{Description.geometry[0]}x{Description.geometry[1]}")
     scripts.GUISettings.RootsForStyling.append(top)
     sizeCount = 0
     
@@ -58,6 +57,9 @@ def GenPopup(optionName, descData, root, defaultFont, defTheme):
             textLabel = ttk.Label(InnerFrame,text=text, wraplength=Description.geometry[1] - 60)
             textLabel.pack()
             # Handle as text
+    InnerFrame.update_idletasks()  # Ensure all geometry calculations are up-to-date
+    height = min(InnerFrame.winfo_height(), 1000)
+    top.geometry(f"{InnerFrame.winfo_width() + 30}x{height}")
 
             
     # print(f"Tried to gen popup {Description}.md")
