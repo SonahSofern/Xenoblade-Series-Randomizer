@@ -57,6 +57,7 @@ def UMHunt():
     BladeTrustRequirementChanges()
     PoppiswapCostChanges()
     MoveSpeedDeedSetup()
+    LureRadiusDeedSetup()
     BalanceChanges(ChosenAreaOrder)
     RandomLandmarkCreation()
     CustomEnemyDrops(EnemySets)
@@ -219,6 +220,45 @@ def MoveSpeedDeedSetup(): # We add the movespeed deed to the inventory via DLC, 
         data = json.load(file)
         data["rows"].append({"$id": CurrentNameID, "style": 36, "name": "Movespeed Deed"})
         data["rows"].append({"$id": CurrentNameID + 1, "style": 61, "name": f"Increases running speed by {BonusMovespeed}%."})
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def LureRadiusDeedSetup(): # increases lure radius, adds lure radius up deed to starting inventory
+    CurrentNameID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
+    BonusLureDistance = 50
+    with open("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes caption and name
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 25250:
+                row["Name"] = CurrentNameID
+                row["Caption"] = CurrentNameID + 1
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common/FLD_OwnerBonus.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 2:
+                row["Value"] = BonusLureDistance
+                row["Type"] = 11
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common/FLD_OwnerBonusParam.json", 'r+', encoding='utf-8') as file: # Changes max lure range to 50(m?)
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 11:
+                row["Max"] = 50
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
+        data = json.load(file)
+        data["rows"].append({"$id": CurrentNameID, "style": 36, "name": "Lure Range Deed"})
+        data["rows"].append({"$id": CurrentNameID + 1, "style": 61, "name": f"Increases lure range by {BonusLureDistance}."})
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
