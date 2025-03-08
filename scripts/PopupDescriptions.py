@@ -29,7 +29,6 @@ def GenPopup(optionName, descData, root, defaultFont, defTheme):
     top.title(optionName)
     top.geometry(f"{Description.geometry[0]}x{Description.geometry[1]}")
     scripts.GUISettings.RootsForStyling.append(top)
-    scripts.GUISettings.LoadTheme(defaultFont, defTheme)
     sizeCount = 0
     
     Outerframe = ttk.Frame(top) 
@@ -45,18 +44,18 @@ def GenPopup(optionName, descData, root, defaultFont, defTheme):
             img = Image.open(text)
             img.thumbnail((Description.sizes[sizeCount], Description.sizes[sizeCount]), Image.LANCZOS) # Resizes our image and keeps ratio
             img = ImageTk.PhotoImage(img)
-            imageLabel = ttk.Label(canv, image=img, padding=5)
+            imageLabel = ttk.Label(InnerFrame, image=img, padding=5)
             ImageGroup.append(img)
             imageLabel.pack()
             sizeCount += 1 # Keeps track of our list of sizes for each image
             # Handle as filepath image
         elif text.startswith(HeaderText):
             text = text.replace(HeaderText, "")
-            textLabel = ttk.Label(canv,text=f"{text}", style="Header.TLabel")
+            textLabel = ttk.Label(InnerFrame,text=f"{text}", style="Header.TLabel")
             textLabel.pack(fill="x", expand=True)
         else:
             # print(Description.geometry[1])
-            textLabel = ttk.Label(canv,text=text, wraplength=Description.geometry[1] - 60)
+            textLabel = ttk.Label(InnerFrame,text=text, wraplength=Description.geometry[1] - 60)
             textLabel.pack()
             # Handle as text
 

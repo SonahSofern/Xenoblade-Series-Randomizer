@@ -314,6 +314,7 @@ def LoadTheme(defaultFont, themeName):
         
 def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFrames:list[ttk.Frame]): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
+        InnerFrames[i].pack(fill=BOTH, expand=True)
         scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
         Canvases[i].config(yscrollcommand=scrollbar.set, borderwidth=0, relief="flat", highlightthickness=0)
         CanvasesForStyling.append(Canvases[i])
@@ -322,16 +323,15 @@ def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFr
 
         OuterFrames[i].pack_propagate(False)
         Canvases[i].create_window((0, 0), window=InnerFrames[i], anchor="nw")
-        Canvases[i].pack(side="left", fill="both", expand=True)
+        Canvases[i].pack(side="left", fill=BOTH, expand=True)
         scrollbar.pack(side="right", fill="y")
 
         def _on_mousewheel(event, canvas=Canvases[i]):
             canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
-        Canvases[i].bind("<Enter>", lambda e, canvas=Canvases[i]: canvas.bind_all("<MouseWheel>", lambda event: _on_mousewheel(event, canvas)))
-        Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
+        OuterFrames[i].bind("<Enter>", lambda e, canvas=Canvases[i]: canvas.bind_all("<MouseWheel>", lambda event: _on_mousewheel(event, canvas)))
+        OuterFrames[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
         
-
         OuterFrames[i].pack(fill=BOTH, expand=True)
 
 def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = []):
