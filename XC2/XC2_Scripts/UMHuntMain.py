@@ -29,7 +29,9 @@ ValidRandomizeableBladeIDs = [1001, 1002, 1008, 1009, 1010, 1011, 1014, 1015, 10
 # Poppiswap is going to be fucked up with custom enhancements
 
 def UMHunt():
-    if not Options.ShortenTutorialOption.GetState(): # we want to always run the tutorial shortening, otherwise it breaks stuff. spent 2 hours trying to figure out why completely unrelated changes were bricking my save file
+    if not Options.ShortcutsOption.GetState(): # we want to always run the tutorial shortening, otherwise it breaks stuff. spent 2 hours trying to figure out why completely unrelated changes were bricking my save file
+        TutorialShortening.ShortenedTutorial()
+    elif not Options.ShortenTutorialOption.GetState():
         TutorialShortening.ShortenedTutorial()
     UMHuntShopCreation.CreateShopDictionaries()
     global SetCount, UMHuntDisableCondListID, UMHuntEnableCondListIDs
