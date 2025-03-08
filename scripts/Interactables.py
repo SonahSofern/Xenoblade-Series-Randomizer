@@ -3,7 +3,7 @@ from tkinter import *
 from scripts import PopupDescriptions
 
 class Option():
-    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50, _hasSpinBox = False, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10, descFileClass = None):
+    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50, _hasSpinBox = False, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10, descData = None):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
@@ -12,7 +12,7 @@ class Option():
         self.checkBox = None
         self.checkBoxVal = None
         self.subOptions:list[SubOption] = []
-        self.descClass = descFileClass
+        self.descData = descData
         
         # Initial Data
         self.name =  _name
@@ -54,8 +54,8 @@ class Option():
         self.checkBox.grid(row=rowIncrement, column=0, sticky="w")
         
         # Description Label or Button
-        if self.descClass != None:
-            self.descObj = ttk.Button(optionPanel, text=self.desc, command=lambda: PopupDescriptions.GenPopup(self.descClass, self.root, self.defFont, self.defTheme), style="BordlessBtn.TButton")
+        if self.descData != None:
+            self.descObj = ttk.Button(optionPanel, text=self.desc, command=lambda: PopupDescriptions.GenPopup(self.name, self.descData, self.root, self.defFont, self.defTheme), style="BordlessBtn.TButton")
             padx = 15
         else:
             self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, wraplength=400)

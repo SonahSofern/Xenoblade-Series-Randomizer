@@ -30,7 +30,14 @@ def Gems():
 # 1 Equip to weapon
 # 2 Equip to armor
 
-
-GemDescription = Description("Gems")
-GemDescription.Text("This allows any gem to be equipped to weapons and armor. \nDouble attack in the vanilla game could only be equipped to your weapon for example.")
-GemDescription.Image("./XCDE/_internal/Images/GemsFreeEquipped.png", 500)
+def GemDescriptions():
+    GemDescription = Description()
+    GemDescription.Header(Options.GemOption_FreeEquip.name)
+    GemDescription.Text("This allows any gem to be equipped to weapons and armor.")
+    GemDescription.Image("./XCDE/_internal/Images/GemsFreeEquipped.png", 500)
+    GemDescription.Text("For example, Double Attack can now be put on armor and HP Up on weapons.")
+    GemDescription.Header(Options.GemOption_NoCap.name)
+    GemDescription.Text("This removes the % and regular cap for all gems.")
+    GemDescription.Image("./XCDE/_internal/Images/GemCap.png", 500)
+    GemDescription.Text("Double Attack and Haste normally caps at 50.")
+    return GemDescription

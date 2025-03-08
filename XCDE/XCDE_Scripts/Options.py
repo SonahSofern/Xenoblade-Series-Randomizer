@@ -19,9 +19,9 @@ GameModeTab = 8
 EnemyOption = Option("Enemies", Enemies, "Randomizes enemy in the overworld", [lambda: EnemiesScript.Enemies()])
 
 # Character
-GemOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.Gems()], descFileClass=Gems.GemDescription)
-GemOption_NoCap = SubOption("Remove Gem Stat Caps", GemOption)
+GemOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.Gems()], descData=lambda: Gems.GemDescriptions())
 GemOption_FreeEquip = SubOption("Freely Equip to Weapons/Armor", GemOption)
+GemOption_NoCap = SubOption("Remove Gem Stat Caps", GemOption)
 AffinityTreeOption = Option("Skill Trees", Character, "Randomizes all character's skill trees", [lambda: AffinityTrees.SkillRando()])
 AffinityTreeOption_Power = SubOption("Power Level", AffinityTreeOption)
 AffinityTreeOption_LinkCost = SubOption("Affinity Coin Cost", AffinityTreeOption)

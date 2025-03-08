@@ -298,7 +298,7 @@ def LoadTheme(defaultFont, themeName):
     style.configure("STATIC.TButton", font=staticFont)
     style.configure("BorderlessLabel.TLabel", background=currentTheme["backgroundColor"], foreground=UI_Colors.White)
     style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
-
+    style.configure("Header.TLabel", background= currentTheme["midColor"])
     # Since Canvas and Roots arrent affected by normal styling
     for canvas in CanvasesForStyling:
         try:
@@ -312,7 +312,7 @@ def LoadTheme(defaultFont, themeName):
         except:
             pass
         
-def CreateScrollBars(OuterFrames, Canvases, InnerFrames): # I never want to touch this code again lol what a nightmare
+def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFrames:list[ttk.Frame]): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
         scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
         Canvases[i].config(yscrollcommand=scrollbar.set, borderwidth=0, relief="flat", highlightthickness=0)

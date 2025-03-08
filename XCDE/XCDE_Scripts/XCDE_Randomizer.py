@@ -23,7 +23,7 @@ if getattr(sys, 'frozen', False):  # If the app is running as a bundled executab
 else:
     isOnefile = False
     
-SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt", Game)
+SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt", f"{Game}/GUI")
 
 
 GUISettings.RootsForStyling.append(root)
@@ -162,7 +162,6 @@ permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth, textvariable=permalin
 CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
 permalinkVar.set(CompressedPermalink)
 permalinkButton = ttk.Button(permalinkFrame, text="Settings")
-permalinkButton.state(["disabled"])
 permalinkFrame.pack(padx=10, pady=2, anchor="w")
 permalinkButton.pack(side="left", padx=2)
 permalinkEntry.pack(side='left', padx=2)
