@@ -306,8 +306,12 @@ def RandomizeElementRoutes():
         if combo['$id'] in ReplacedCombos:
             combo['name'] = ReplacedCombos[combo['$id']]['DebugName']
 
-    JSONParser.ChangeJSONLineWithCallback(["common/BTL_ElementalCombo.json"], [], randomize, replaceAll=True)
-    JSONParser.ChangeJSONLineWithCallback(["common_ms/BTL_ElementalCombo_ms.json"], [], updateNames, replaceAll=True)
+    try:
+        JSONParser.ChangeJSONLineWithCallback(["common/BTL_ElementalCombo.json"], [], randomize, replaceAll=True)
+        JSONParser.ChangeJSONLineWithCallback(["common_ms/BTL_ElementalCombo_ms.json"], [], updateNames, replaceAll=True)
+    except Exception as e:
+        print(e)
+        
 
 
 def RandomizeAOE():

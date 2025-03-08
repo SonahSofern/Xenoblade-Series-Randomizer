@@ -32,7 +32,7 @@ def CreateDLCtoSetFlag(ItemName: list[str], Flag: list[int], Category: list[int]
 def AddMovespeedDeed():
     if not Options.UMHuntOption.GetState():
         CurrentNameID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
-        BonusMovespeed = Options.StartwithIncreasedMovespeedOption.GetOdds()
+        BonusMovespeed = Options.StartwithIncreasedMovespeedOption.GetOdds() * 10
         with open("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes caption and name
             data = json.load(file)
             for row in data["rows"]:
