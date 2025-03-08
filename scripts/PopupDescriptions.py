@@ -43,7 +43,7 @@ def GenPopup(optionName, descData, root, defaultFont, defTheme):
             img = Image.open(text)
             img.thumbnail((Description.sizes[sizeCount], Description.sizes[sizeCount]), Image.LANCZOS) # Resizes our image and keeps ratio
             img = ImageTk.PhotoImage(img)
-            imageLabel = ttk.Label(InnerFrame, image=img, padding=5)
+            imageLabel = ttk.Label(InnerFrame, image=img, padding=5, style="DescriptionImage.TLabel")
             ImageGroup.append(img)
             imageLabel.pack()
             sizeCount += 1 # Keeps track of our list of sizes for each image
@@ -58,8 +58,7 @@ def GenPopup(optionName, descData, root, defaultFont, defTheme):
             textLabel.pack()
             # Handle as text
     InnerFrame.update_idletasks()  # Ensure all geometry calculations are up-to-date
-    height = min(InnerFrame.winfo_height(), 1000)
-    top.geometry(f"{InnerFrame.winfo_width() + 30}x{height}")
+    top.geometry(f"{InnerFrame.winfo_width() + 38}x{ min(InnerFrame.winfo_height(), 1000)}")
 
             
     # print(f"Tried to gen popup {Description}.md")
