@@ -14,7 +14,7 @@ import tkinter as tk
 from scripts.GUISettings import *
 import Options
 Game = "XC2"
-Version = "1.3.1"
+Version = "1.4.1"
 JsonOutput = "./XC2/_internal/JsonOutputs"
 
 SavedOptionsFileName = f"SavedOptionsv{Version}.txt"
@@ -149,7 +149,7 @@ randoSeedEntry.pack(side='left', padx=2)
 
 permalinkVar = StringVar()
 
-        
+
 fileEnt = SavedOptions.SavedEntry("Input Bdats",fileEntryVar)
 fileOut = SavedOptions.SavedEntry("Output Bdats", outputDirVar)
 permLink = SavedOptions.SavedEntry("Permalink", permalinkVar)
