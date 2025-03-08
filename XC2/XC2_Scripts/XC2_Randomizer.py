@@ -166,7 +166,6 @@ permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth, textvariable=permalin
 CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
 permalinkVar.set(CompressedPermalink)
 permalinkButton = ttk.Button(permalinkFrame, text="Settings")
-permalinkButton.state(["disabled"])
 permalinkFrame.pack(padx=10, pady=2, anchor="w")
 permalinkButton.pack(side="left", padx=2)
 permalinkEntry.pack(side='left', padx=2)
@@ -187,7 +186,7 @@ if isOnefile:  # If the app is running as a bundled executable
 else:  # If running as a script (not bundled)
     icon_path = "./_internal/Images/SmallSettingsCog.png"
 Cog = PhotoImage(file=icon_path)
-SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, GUISettings.defGUIThemeVar))
+SettingsButton = ttk.Button(image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, GUISettings.defGUIThemeVar, Game))
 SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
 
 root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Interactables.OptionList, SavedOptionsFileName, Game), root.destroy()))

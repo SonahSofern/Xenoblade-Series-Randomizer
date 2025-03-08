@@ -39,5 +39,5 @@ def GemDescriptions():
     GemDescription.Header(Options.GemOption_NoCap.name)
     GemDescription.Text("This removes the % and regular cap for all gems.")
     GemDescription.Image("./XCDE/_internal/Images/GemCap.png", 500)
-    GemDescription.Text("Double Attack and Haste normally caps at 50.")
+    GemDescription.Text("Double Attack and Haste normally caps at 50%.")
     return GemDescription

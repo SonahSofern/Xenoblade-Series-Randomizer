@@ -33,17 +33,12 @@ def GenPopup(optionName, descData, root, defaultFont, defTheme):
     sizeCount = 0
     
     Outerframe = ttk.Frame(top) 
-    Outerframe.pack(fill=BOTH, expand=True)
     
     canv = Canvas(Outerframe)
-    scripts.GUISettings.CanvasesForStyling.append(canv)
-    canv.pack(fill=BOTH, expand=True)
     
     InnerFrame = ttk.Frame(canv)
-    InnerFrame.pack(fill=BOTH, expand=True)
-    
+    scripts.GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
     scripts.GUISettings.LoadTheme(defaultFont, defTheme)
-    
     # loop over data from the description class and parse it
     for text in Description.data:
         if text.startswith("./"): # if we are a filepath
@@ -64,7 +59,6 @@ def GenPopup(optionName, descData, root, defaultFont, defTheme):
             textLabel = ttk.Label(canv,text=text, wraplength=Description.geometry[1] - 60)
             textLabel.pack()
             # Handle as text
-    scripts.GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
 
             
     # print(f"Tried to gen popup {Description}.md")

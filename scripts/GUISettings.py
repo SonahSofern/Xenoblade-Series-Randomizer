@@ -298,7 +298,7 @@ def LoadTheme(defaultFont, themeName):
     style.configure("STATIC.TButton", font=staticFont)
     style.configure("BorderlessLabel.TLabel", background=currentTheme["backgroundColor"], foreground=UI_Colors.White)
     style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
-    style.configure("Header.TLabel", background= currentTheme["midColor"])
+    # style.configure("Header.TLabel", background= currentTheme["midColor"])
     # Since Canvas and Roots arrent affected by normal styling
     for canvas in CanvasesForStyling:
         try:
@@ -330,7 +330,9 @@ def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFr
 
         Canvases[i].bind("<Enter>", lambda e, canvas=Canvases[i]: canvas.bind_all("<MouseWheel>", lambda event: _on_mousewheel(event, canvas)))
         Canvases[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
-        OuterFrames[i].pack(expand=True, fill="both")
+        
+
+        OuterFrames[i].pack(fill=BOTH, expand=True)
 
 def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = []):
     def ThreadedRandomize():
