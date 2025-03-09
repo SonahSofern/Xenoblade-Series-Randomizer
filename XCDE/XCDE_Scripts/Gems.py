@@ -33,10 +33,10 @@ def GemDescriptions():
     GemDescription = scripts.PopupDescriptions.Description()
     GemDescription.Header(Options.GemOption_FreeEquip.name)
     GemDescription.Text("This allows any gem to be equipped to weapons and armor.")
-    GemDescription.Image("./XCDE/_internal/Images/GemsFreeEquipped.png", 500)
+    GemDescription.Image("GemsFreeEquipped.png","XCDE", 500)
     GemDescription.Text("Double Attack can now be put on armor and HP Up on weapons.")
     GemDescription.Header(Options.GemOption_NoCap.name)
     GemDescription.Text("This removes the % and regular cap for all gems.")
-    GemDescription.Image("./XCDE/_internal/Images/GemCap.png", 500)
+    GemDescription.Image("GemCap.png","XCDE", 500)
     GemDescription.Text("Double Attack and Haste can go above their vanilla 50% cap.")
     return GemDescription

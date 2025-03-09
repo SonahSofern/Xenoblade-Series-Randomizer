@@ -81,7 +81,7 @@ Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
 Regen = EnemyEnhancement("Regen", PermaRegen,[30,60,90,120], [1,2,3,4], revP1=True)
 CloseArmor = EnemyEnhancement("Guardian", ReduceDamageFromNearbyEnemies, [30,50,70,90])
 Swarm = EnemyEnhancement("Swarming", PerAllyDamageUp, [20,40,60,80])
-Sealing = EnemyEnhancement("Sealing", ChainAttackSeal, [1,1,2,3])
+Sealing = EnemyEnhancement("Sealing", ChainAttackSeal, [1,1,2,3], revP1=True)
 
 #New testing
 
@@ -116,7 +116,7 @@ def EnemyEnhancementDescriptions():
     myDesc.Text(f"{Regen.name} - Permanently regens {Regen.Param2[0]}-{Regen.Param2[3]}% of their max health every {Regen.Param1[0]//30}-{Regen.Param1[3]//30} seconds.")
     myDesc.Text(f"{CloseArmor.name} - Reduces damage by {CloseArmor.Param1[0]}-{CloseArmor.Param1[3]}% to all allies and user within 5 meters")
     myDesc.Text(f"{Swarm.name} - Each ally the enemy has increases their own damage by {Swarm.Param1[0]}-{Swarm.Param1[3]}%")
-    myDesc.Text(f"{Sealing.name} - Locks {Sealing.Param1[0]}-{Sealing.Param1[3]} blocks of party gauge.")
+    myDesc.Text(f"{Sealing.name} - Locks the first, second, or third block of the party gauge.")
     return myDesc
 
 
