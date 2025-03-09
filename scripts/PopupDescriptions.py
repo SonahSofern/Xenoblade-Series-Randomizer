@@ -1,11 +1,17 @@
 # This will be the template for when you click a more info thing it will load some markdown into this template to be viewed
 from tkinter import *
 from tkinter import ttk
-import scripts.GUISettings
+import scripts.GUISettings, os, sys
 from PIL import Image, ImageTk
 ImageGroup = [] # Needed because garbage collection will delete pictures otherwise
 HeaderText = "HeaderHEAD "
+ImageText = "ImageIMAGE "
 OpenWindows = []
+
+if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
+    isOnefile = True
+else:
+    isOnefile = False
 
 class Description:
 
@@ -15,8 +21,12 @@ class Description:
         self.sizes:list[int] = []
     def Text(self,text:str):
         self.data.append(text)
-    
-    def Image(self,imagePath:str, size):
+
+    def Image(self,imagePath:str, game, size):
+        if isOnefile:
+            imagePath = ImageText + os.path.join(sys._MEIPASS,"Images", imagePath)
+        else:
+            imagePath = f"{ImageText}./{game}/_internal/Images/{imagePath}"
         self.data.append(imagePath)
         self.sizes.append(size)
     
@@ -49,7 +59,9 @@ def GenPopup(optionName, descData, root, defaultFont, defTheme):
     scripts.GUISettings.LoadTheme(defaultFont, defTheme)
     # loop over data from the description class and parse it
     for text in Description.data:
-        if text.startswith("./"): # if we are a filepath
+        if text.startswith(ImageText): # if we are a filepath
+            text = text.replace(ImageText, "")
+            print("Loaded Image")
             img = Image.open(text)
             img.thumbnail((Description.sizes[sizeCount], Description.sizes[sizeCount]), Image.LANCZOS) # Resizes our image and keeps ratio
             img = ImageTk.PhotoImage(img)
