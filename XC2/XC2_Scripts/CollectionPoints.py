@@ -1,5 +1,5 @@
 import Options, IDs, json, random
-from scripts import Helper
+from scripts import Helper, PopupDescriptions
 def RandoCollectionPoints():
     ValidReplacements = []
     if Options.CollectionPointsOption_Accessories.GetState():
@@ -40,3 +40,12 @@ def RandoCollectionPoints():
                 json.dump(collData, collFile, indent=2, ensure_ascii=False)
         except:
             pass # Ignores wrong files
+
+def CollectionPointDescriptions():
+    desc = PopupDescriptions.Description()
+    desc.Header(Options.CollectionPointsOption.name)
+    # Insert image of accessory shop icon
+    desc.Text("This option randomizes a % of all items in Collection Points into the types of items chosen from suboptions.")
+    desc.Text("If no sub-options are selected this will do nothing.")
+    desc.Image("ColPointIcon.png", "XC2")
+    return desc

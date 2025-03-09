@@ -22,7 +22,7 @@ class Description:
     def Text(self,text:str):
         self.data.append(text)
 
-    def Image(self,imagePath:str, game, size):
+    def Image(self,imagePath:str, game, size = 400):
         if isOnefile:
             imagePath = ImageText + os.path.join(sys._MEIPASS,"Images", imagePath)
         else:

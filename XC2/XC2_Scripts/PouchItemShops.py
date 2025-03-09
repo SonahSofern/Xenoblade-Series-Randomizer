@@ -1,5 +1,5 @@
 import Options, IDs, json, random
-from scripts import Helper
+from scripts import Helper, PopupDescriptions
 def RandoPouchShops():
     ValidReplacements = []
     if Options.PouchItemShopOption_Accessories.GetState():
@@ -43,3 +43,13 @@ def RandoPouchShops():
         shopFile.seek(0)
         shopFile.truncate()
         json.dump(shopData, shopFile, indent=2, ensure_ascii=False)
+
+
+def PouchItemShopDesc():
+    desc = PopupDescriptions.Description()
+    desc.Header(Options.PouchItemShopOption.name)
+    # Insert image of accessory shop icon
+    desc.Text("This option randomizes a % of all items in Pouch Item Shops into the types of items chosen from suboptions.")
+    desc.Text("If no sub-options are selected this will do nothing.")
+    desc.Image("PouchItemShops.png", "XC2")
+    return desc

@@ -21,7 +21,7 @@ CosmeticsTab = 8
 GameModeTab = 9
 
 # General
-AccessoryShopsOption = Option("Accessory Shops", General, "Randomizes the contents of Accessory Shops", [lambda: AccessoryShops.RandoAccessoryShops()], _hasSpinBox = True)
+AccessoryShopsOption = Option("Accessory Shops", General, "Randomizes the contents of Accessory Shops", [lambda: AccessoryShops.RandoAccessoryShops()], _hasSpinBox = True, descData=lambda: AccessoryShops.AccessoryShopDescription())
 AccessoryShopsOption_Accessories = SubOption("Accessories", AccessoryShopsOption)
 AccessoryShopsOption_TornaAccessories = SubOption("Torna Accessories", AccessoryShopsOption)
 AccessoryShopsOption_WeaponChips = SubOption("Weapon Chips", AccessoryShopsOption)
@@ -31,7 +31,7 @@ AccessoryShopsOption_CoreCrystals = SubOption("Core Crystals", AccessoryShopsOpt
 AccessoryShopsOption_Deeds = SubOption("Shop Deeds", AccessoryShopsOption)
 AccessoryShopsOption_CollectionPointMaterials = SubOption("Collection Point Materials", AccessoryShopsOption)
 AccessoryShopsOption_PouchItems = SubOption("Pouch Items", AccessoryShopsOption)
-CollectionPointsOption = Option("Collection Points", General, "Randomizes the contents of Collection Points", [lambda: CollectionPoints.RandoCollectionPoints()], _hasSpinBox = True)
+CollectionPointsOption = Option("Collection Points", General, "Randomizes the contents of Collection Points", [lambda: CollectionPoints.RandoCollectionPoints()], _hasSpinBox = True, descData=lambda: CollectionPoints.CollectionPointDescriptions())
 CollectionPointsOption_Accessories = SubOption("Accessories", CollectionPointsOption)
 CollectionPointsOption_TornaAccessories = SubOption("Torna Accessories", CollectionPointsOption)
 CollectionPointsOption_WeaponChips = SubOption("Weapon Chips", CollectionPointsOption)
@@ -40,7 +40,7 @@ CollectionPointsOption_RefinedAuxCores = SubOption("Refined Aux Cores", Collecti
 CollectionPointsOption_CoreCrystals = SubOption("Core Crystals", CollectionPointsOption)
 CollectionPointsOption_Deeds = SubOption("Shop Deeds", CollectionPointsOption)
 CollectionPointsOption_CollectionPointMaterials = SubOption("Collection Point Materials", CollectionPointsOption)
-PouchItemShopOption = Option("Pouch Item Shops", General, "Randomizes the contents of Pouch Item Shops", [lambda: PouchItemShops.RandoPouchShops()], _hasSpinBox = True)
+PouchItemShopOption = Option("Pouch Item Shops", General, "Randomizes the contents of Pouch Item Shops", [lambda: PouchItemShops.RandoPouchShops()], _hasSpinBox = True, descData=lambda: PouchItemShops.PouchItemShopDesc())
 PouchItemShopOption_Accessories = SubOption("Accessories", PouchItemShopOption)
 PouchItemShopOption_TornaAccessories = SubOption("Torna Accessories", PouchItemShopOption)
 PouchItemShopOption_WeaponChips = SubOption("Weapon Chips", PouchItemShopOption)
