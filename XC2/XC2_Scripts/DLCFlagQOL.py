@@ -3,7 +3,7 @@ from scripts import Helper
 
 FreeDLCFlags = Helper.InclRange(65000, 65534)
 
-def CreateDLCtoSetFlag(ItemName: list[str], Flag: list[int], Category: list[int] = [2], ItemID: list[int] = [0], Quantity: list[int] = [1]):
+def CreateDLCtoSetFlag(ItemName: list[str], Flag: list[int], Category: list[int] = [2], ItemID: list[int] = [0], Quantity: list[int] = [1], Condition: list[int] = 1):
     if not Options.UMHuntOption.GetState():
         MaxRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", "$id") + 1
         CurrentNameID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
@@ -16,7 +16,7 @@ def CreateDLCtoSetFlag(ItemName: list[str], Flag: list[int], Category: list[int]
                 namedata = json.load(namefile)
                 
                 for item in range(len(ItemName)):
-                    data["rows"].append({"$id": MaxRow, "releasecount": 1, "title": CurrentNameID, "condition": 1, "category": Category[item], "item_id": ItemID[item], "value": Quantity[item], "disp_item_info": 0, "getflag": Flag[item]})
+                    data["rows"].append({"$id": MaxRow, "releasecount": 1, "title": CurrentNameID, "condition": Condition[item], "category": Category[item], "item_id": ItemID[item], "value": Quantity[item], "disp_item_info": 0, "getflag": Flag[item]})
                     namedata["rows"].append({"$id": CurrentNameID, "style": 162, "name": ItemName[item]})
                     MaxRow += 1
                     CurrentNameID += 1
