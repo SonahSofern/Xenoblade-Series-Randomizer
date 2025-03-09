@@ -545,7 +545,7 @@ def CustomShopSetup(ChosenAreaOrder): # Sets up the custom shops with loot
     CopyUnusedBazaarNPCRowIDs = UnusedBazaarNPCRowIDs.copy()
     CopyFullUnusedShopList = FullUnusedShopList.copy()
     for shop in MultipleShopList:
-        for i in range(0, len(ChosenAreaOrder)):
+        for i in range(len(ChosenAreaOrder)):
             with open("./XC2/_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file:
                 data = json.load(file)
                 for row in data["rows"]:

@@ -41,7 +41,8 @@ def UMHunt():
     ChosenAreaOrder = []
     GetDifficulty()
     CheckForSuperbosses()
-    ChosenAreaOrder.extend(random.sample(TotalAreaPool, SetCount))
+    ChosenAreaOrder = ["Gormott"]
+    #ChosenAreaOrder.extend(random.sample(TotalAreaPool, SetCount))
     #UMHuntDebugFunctions.DebugFindMonsters(ChosenAreaOrder)
     PartyMemberstoAdd = PartyMemberAddition()
     AreaUMs, AllAreaMonsters = CustomEnemyRando(ChosenAreaOrder)
@@ -134,13 +135,14 @@ def GimmickAdjustments():
     with open("./XC2/_internal/JsonOutputs/common/FLD_LODList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
-            if row["$id"] in [211, 226]: # door in urayan titan's head that blocks off Vampire Bride Marion, Ether Gust Wall thingy in Uraya (it gets dispelled mid-cutscene, unlike the one in Gormott)
+            if row["$id"] in [115, 117, 211, 226]: # door blocking gormott titan battleship hangar, door blocking gormott titan rest of battleship door in urayan titan's head that blocks off Vampire Bride Marion, Ether Gust Wall thingy in Uraya (it gets dispelled mid-cutscene, unlike the one in Gormott)
                 row["flag"]["Visible"] = 0
                 row["ScenarioFlagMin1"] = 1001
                 row["ScenarioFlagMax1"] = 10048
                 row["QuestFlag1"] = 0
                 row["QuestFlagMin1"] = 0
                 row["QuestFlagMax1"] = 0
+                #row["LODID"] = 0 # when this is enabled, you can fall through the floor if you target the wrong ids lol
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1012,7 +1014,7 @@ def RandomLandmarkCreation(): # Creates random landmarks and adds them to the DL
         with open("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
             # Movespeed Deed
-            data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": UMHuntEnableCondListIDs[0], "category": 2, "item_id": 0, "value": 1, "disp_item_info": 0, "getflag": 51161 + landmark})
+            data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": UMHuntEnableCondListIDs[0], "category": 1, "item_id": 25249, "value": 1, "disp_item_info": 0, "getflag": 35400})
             CurrentID += 1
             CurrentNameID += 1
             # Landmarks
