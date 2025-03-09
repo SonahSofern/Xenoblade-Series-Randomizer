@@ -1,4 +1,4 @@
-from scripts import Helper, JSONParser
+from scripts import Helper, JSONParser, PopupDescriptions
 import json
 import EnemyRandoLogic as EnemyRandoLogic
 import random
@@ -1125,6 +1125,13 @@ def ChestTypeMatching():  # Chest type matches Contents
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def CTMCDescription():
+    CTMCDesc = PopupDescriptions.Description()
+    CTMCDesc.Header(Options.CTMCOption.name)
+    CTMCDesc.Text("Test")
+    CTMCDesc.Image("CTMC.png", "XC2")
+    return CTMCDesc
 
 def HideMapAreas(ScenarioFlagLists): # Adding conditions for each area's map to be unlocked
     MapIDsforRaceModeAreas = [[4],[5],[6],[10],[7,8],[9],[11],[12,13],[14],[15]]

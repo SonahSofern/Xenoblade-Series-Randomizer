@@ -1162,8 +1162,14 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
             if Shoplistnames[i] == name:
                 ShopFullListDict[name]["ma02a Row"].append(ShoplistNPCIDs[i])
                 ShopFullListDict[name]["NPC Position"].append(ShoplistNPCPositions[i])
-    for i in range(0, 10):
-        EnemyWaveNPCPositionSet = []
+    DebugSetShop = []
+    for i in range(SetCount):
+        DebugSetShop = []
+        for shop in ShopFullListDict:
+            if shop not in ["[System:Color name=green]Bounty Token[/System:Color] Bartering", "Manual Marketplace", "The Poppishop"]:
+                if ShopFullListDict[shop]["NPC Position"][i] != "":
+                    DebugSetShop.append(ShopFullListDict[shop]["NPC Position"][i])
+        print(DebugSetShop)
     with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file: # Adds the exchange tasks
         data = json.load(file)
         ShopChangeStartRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", "$id") + 1 # used in MNU_ShopList for "TableID"
