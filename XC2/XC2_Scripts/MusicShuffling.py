@@ -1,6 +1,6 @@
 from IDs import EnemyBattleMusicMOVs, NonBattleMusicMOVs, NonBattleMusicIDs, ReplacementNonBattleMusicMOVs, ValidEnemyMusicIDs, ValidEnemyMusicWAVs
 from scripts import JSONParser
-from scripts import Helper
+from scripts import Helper, PopupDescriptions
 import json
 import random, Options
 
@@ -58,5 +58,13 @@ def MusicShuffle():
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/EVT_listBf.json", ["opBgm","edBgm"], 0)
+
+def MusicRandoDescription():
+    MusicDesc = PopupDescriptions.Description()
+    MusicDesc.Header(Options.MusicOption.name)
+    MusicDesc.Text("When enabled, this option randomizes the in-game music.")
+    MusicDesc.Header(Options.MusicOption_MixBattleAndEnv.name)
+    MusicDesc.Text("When enabled, the battle themes and non-battle themes will be randomized together.\n\nWhen disabled, the battle themes and non-battle themes will be randomized separately.")
+    return MusicDesc
 
 

@@ -430,6 +430,7 @@ def RenameCrystals(NGPlusBladeCrystalIDs, DLCBladeCrystalIDs, TankBladeCrystalID
 
 def WeaponPowerLevel(): # Assigns appropriately powered enhancement and damage value based on rank of weapon
     WeaponStrengthList = Helper.ExtendListtoLength([], 20, "[]")
+    WeaponStrengthNameList = Helper.ExtendListtoLength([], 20, "[]")
     WeaponDamageRanges = Helper.ExtendListtoLength([[26, 75]], 20, "[inputlist[i-1][0] + 50, inputlist[i-1][1] + 50]")
     InvalidSkillEnhancements = [ArtCancel,EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, BladeSwapDamage, CatScimPowerUp, EvadeDrainHp, EvadeDriverArt, EtherCannonRange, ArtDamageHeal, DreamOfTheFuture, WPEnemiesBoost, ExpEnemiesBoost, MachineExecute, HumanoidExecute, AquaticExecute, AerialExecute, InsectExecute, BeastExecute, InstaKill, AegisPowerUp, TwinRingPowerUp, DrillShieldPowerUp, MechArmsPowerUp, VarSaberPowerUp, WhipswordPowerUp, BigBangPowerUp, DualScythesPowerUp, GreataxePowerUp, MegalancePowerUp, EtherCannonPowerUp, ShieldHammerPowerUp, ChromaKatanaPowerUp, BitballPowerUp, KnuckleClawsPowerUp]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
@@ -439,6 +440,17 @@ def WeaponPowerLevel(): # Assigns appropriately powered enhancement and damage v
         for row in data["rows"]:
             for i in range(1, 37):
                 WeaponStrengthList[row["Rank"] - 1].append(row[f"CreateWpn{i}"])
+            WeaponStrengthNameList[row["Rank"] - 1].append(row["Name"])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common_ms/itm_pcwpnchip_ms.json", 'r+', encoding='utf-8') as file: # Renames chips according to their rank
+        data = json.load(file)
+        for row in data["rows"]:
+            for rank in range(len(WeaponStrengthNameList)):
+                if row["$id"] in WeaponStrengthNameList[rank]:
+                    row["name"] = f"{row["name"]} [System:Color name=red]({rank + 1})[/System:Color]"
+                    break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1170,7 +1182,7 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
                 if ShopFullListDict[shop]["NPC Position"] != []:
                     if ShopFullListDict[shop]["NPC Position"][i] != "":
                         DebugSetShop.append(ShopFullListDict[shop]["NPC Position"][i])
-        print(DebugSetShop)
+        #print(DebugSetShop)
     with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file: # Adds the exchange tasks
         data = json.load(file)
         ShopChangeStartRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", "$id") + 1 # used in MNU_ShopList for "TableID"
@@ -1421,17 +1433,14 @@ def SecretShopRewardGeneration(ChosenAreaOrder): # Makes the reward sets for the
         7: "Aux Cores"
     }
 
-    SecretShopChips = []
-    for i in range(10, 20):
-        SecretShopChips.extend(WeaponRankList[i])
-
     # Now assign rewards
     for j in range(0, len(ChosenAreaOrder)):
+        SecretShopChips = []
         SetRewards1 = [0,0,0,0,0]
         SetRewards2 = [0,0,0,0,0]
         SetQuantities1 = [1,1,1,1,1]
         SetQuantities2 = [1,1,1,1,1]
-        RewardTypeChoices = random.choices([1, 2, 3, 4, 5, 6, 7], weights = [20, 20, 15, 10, 15, 5, 15], k = 5) # Choose Type of Reward
+        RewardTypeChoices = random.choices([1, 2, 3, 4, 5, 6, 7], weights = [20, 20, 15, 10, 10, 10, 15], k = 5) # Choose Type of Reward
         ShopCostReceiptList = [0,0,0,0,0]
         for i in range(0, 5): # For each reward,
             match RewardTypeChoices[i]:
@@ -1452,12 +1461,14 @@ def SecretShopRewardGeneration(ChosenAreaOrder): # Makes the reward sets for the
                     SetQuantities2[i] = 0
                     ShopCostReceiptList[i] = 2
                 case 4: # Bounty Tokens
-                    RandomBountyToken = random.choice(Helper.InclRange(25479, 25481))
+                    RandomBountyToken = random.choice(Helper.InclRange(25479, 25480 + j))
                     SetRewards1[i] = RandomBountyToken
                     SetRewards2[i] = 0
                     SetQuantities2[i] = 0
                     ShopCostReceiptList[i] = 3
                 case 5: # Weapon Chips
+                    for k in range(j + 6, j + 11):
+                        SecretShopChips.extend(WeaponRankList[k])
                     RandomWeaponChips = random.choices(SecretShopChips, k = 2)
                     SetRewards1[i] = RandomWeaponChips[0]
                     SetRewards2[i] = RandomWeaponChips[1]

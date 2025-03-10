@@ -59,19 +59,27 @@ In order to complete a Storyline, you also must find 3-6 Mysterious Parts (depen
 
 ------------------------------------------------------------
 
+DLC Item Removal:
+
+If this option is enabled, the DLC gifts will all be replaced with 1G each, except for the DLC Quests, and 60000 Ether Crystals for Poppi.
+
+------------------------------------------------------------
+
+The following sections describe some additional features for Race Mode which are always enabled.
+
+------------------------------------------------------------
+
 Less Grinding:
 
-Regardless of whether or not this option is on, when you warp to a new Continent, the landmark that you appear near when you spawn in will give massively increased XP, in an attempt to bridge the power level gap between the two continents. You can only use this XP by resting at an Inn and leveling up that way, so it is a good idea to go to a previous inn and level up immediately. 
+When you warp to a new Continent, the landmark that you appear near when you spawn in will give massively increased XP, in an attempt to bridge the power level gap between the two continents. You can only use this XP by resting at an Inn and leveling up that way, so it is a good idea to go to a previous inn and level up immediately. 
 
 !! For Spirit Crucible Elpys in particular, once you get there, warp first to the Canyon of Husks landmark (which warps you to the Spirit Crucible Elpys landmark), then you can go to the inn and level up as needed. The Spirit Crucible Entrance landmark is required in order to receive your bonus xp and SP for this area. This is a known issue that currently has no workaround !!
 
 You also get a large amount of SP for the Driver Skill Tree at the First and Third Storyline sections of the game.
 
-If this option is turned on, several things happen, listed below.
-
 The XP gained from fighting higher level enemies is increased. The damage taken modifier when fighting higher level enemies is capped at 200%.
 
-If the "Guaranteed Rare Blades" option is on, Rare Blades will unlock their Blade Skill Tree ranks by reaching the first landmark of the Second and Fourth Storyline sections. So when you reach the Anangham #2 Dock landmark in Mor Ardain, all Rare Blades unlock the second and third levels of their skill trees. 
+If the "Guaranteed Rare Blades" option is on, Rare Blades will unlock their Blade Skill Tree ranks by reaching the first landmark of the Second and Fourth Storyline sections. So when you reach the Anangham #2 Dock landmark in Mor Ardain, for example, all Rare Blades unlock the second and third levels of their skill trees. 
 
 The SP Cost of your all skills on your Hidden Skill trees are reduced by 80%.
 
@@ -86,18 +94,6 @@ Additionally, the Shop Deeds you get for buying all items in a shop are removed,
 All Shop Deeds now give a 5% movement speed buff.
 
 The amount of each Pouch Item you can carry is increased to a minimum of 10.
-
-------------------------------------------------------------
-
-Enemy Drop Changes:
-
-If this option is on, all enemies will only drop gold upon being defeated. If an enemy would drop a key item, it will still drop that key item.
-
-------------------------------------------------------------
-
-DLC Item Removal:
-
-If this option is enabled, the DLC gifts will all be replaced with 1G each, except for the DLC Quests, and 60000 Ether Crystals for Poppi.
 
 ------------------------------------------------------------
 

@@ -216,6 +216,13 @@ def RaceModeChanging():
         print("Nerfing Corvin and Crossette")
         DLCItemChanges()
 
+def RaceModeDescription():
+    RaceModeDesc = PopupDescriptions.Description()
+    RaceModeDesc.Header(Options.RaceModeOption.name)
+    RaceModeDesc.Text("CTMC will let you know at a glance what is inside a chest or barrel. It will help you decide what chests are worthwhile to get.")
+    RaceModeDesc.Image("CTMC.png", "XC2")
+    return RaceModeDesc
+
 def PoppiswapCostReductions(): # reduces cost of poppiswap stuff
     Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/ITM_HanaArtsEnh.json","./XC2/_internal/JsonOutputs/common/ITM_HanaAssist.json", "./XC2/_internal/JsonOutputs/common/ITM_HanaAtr.json", "./XC2/_internal/JsonOutputs/common/ITM_HanaNArtsSet.json", "./XC2/_internal/JsonOutputs/common/ITM_HanaRole.json"], ["NeedEther", "DustEther"], ['row[key] // 2'])
     Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_HanaPower.json"], ["EtherNum1", "EtherNum2", "EtherNum3"], ['row[key] // 2'])
@@ -1129,7 +1136,7 @@ def ChestTypeMatching():  # Chest type matches Contents
 def CTMCDescription():
     CTMCDesc = PopupDescriptions.Description()
     CTMCDesc.Header(Options.CTMCOption.name)
-    CTMCDesc.Text("Test")
+    CTMCDesc.Text("CTMC will let you know at a glance what is inside a chest or barrel. It will help you decide what chests are worthwhile to get.")
     CTMCDesc.Image("CTMC.png", "XC2")
     return CTMCDesc
 

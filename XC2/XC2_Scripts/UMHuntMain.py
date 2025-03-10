@@ -1,7 +1,7 @@
 import json, random, IDs, EnemyRandoLogic, RaceMode, math, Options, time, FieldSkillAdjustments, UMHuntDebugFunctions, UMHuntShopCreation, TutorialShortening
 from Enhancements import *
 from BladeRandomization import Replacement2Original
-from scripts import Helper
+from scripts import Helper, JSONParser
 
 #Keeping these 3 separate from the already existing IDs in EnemyRandoLogic in case I want to do some balancing or something
 AllUniqueMonsterDefaultIDs = [611, 612, 705, 706, 707, 708, 709, 710, 711, 712, 713, 715, 736, 738, 808, 809, 810, 811, 812, 814, 815, 816, 817, 819, 890, 891, 892, 893, 894, 895, 896, 898, 899, 926, 929, 953, 954, 955, 957, 958, 1019, 1020, 1023, 1025, 1026, 1101, 1102, 1104, 1106, 1108, 1109, 1111, 1112, 1113, 1114, 1115, 1131, 1132, 1134, 1155, 1156, 1157, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1255, 1256, 1258, 1260, 1261, 1262, 1264, 1265, 1563, 1564, 1566, 1567, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1670, 1774]
@@ -41,8 +41,7 @@ def UMHunt():
     ChosenAreaOrder = []
     GetDifficulty()
     CheckForSuperbosses()
-    ChosenAreaOrder = ["Gormott"]
-    #ChosenAreaOrder.extend(random.sample(TotalAreaPool, SetCount))
+    ChosenAreaOrder.extend(random.sample(TotalAreaPool, SetCount))
     #UMHuntDebugFunctions.DebugFindMonsters(ChosenAreaOrder)
     PartyMemberstoAdd = PartyMemberAddition()
     AreaUMs, AllAreaMonsters = CustomEnemyRando(ChosenAreaOrder)
@@ -102,16 +101,7 @@ def Cleanup():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 10013:
-                row["nextID"] = 10464
-                row["scenarioFlag"] = 10009
-                row["nextIDtheater"] = 10464
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+    JSONParser.ChangeJSONLineInMultipleSpots(["common/EVT_listBf.json"], [10013], ["nextID", "scenarioFlag", "nextIDtheater"], [10464, 10009, 10464])
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/CHR_Dr.json", ["DefAcce", "DefWP", "DefSP"], 0)
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/CHR_Dr.json", ["DefLv"], 10)
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/CHR_Dr.json", ["DefWPType", "DefLvType"], 1)

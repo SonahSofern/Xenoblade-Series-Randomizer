@@ -40,9 +40,33 @@ def ChangeJSONLine(filenames, ids, keys, replacement, replaceAll = False, Game =
         with open(filePath, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for item in data['rows']:
-                if replaceAll or item["$id"] in ids:
-                   for key in keys:
-                    item[key] = replacement
+                if replaceAll:
+                    for key in keys:
+                        item[key] = replacement
+                elif item["$id"] in ids:
+                    for key in keys:
+                        item[key] = replacement
+                    break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
+def ChangeJSONLineInMultipleSpots(filenames: list[str], ids: list[int], keys: list[str], replacements: list, replaceAll = False, Game = "XC2"): # sometimes we want to change a json line at multiple locations, so you want to input a list of replacements that tie to the key they're going into
+    for name in filenames:
+        filePath = f"./{Game}/_internal/JsonOutputs/" + name
+        if not os.path.exists(filePath):
+          #print(filePath + " filepath does not exist.")
+          continue
+        with open(filePath, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for row in data['rows']:
+                if replaceAll:
+                    for key in range(len(keys)):
+                        row[keys[key]] = replacements[key]
+                elif row["$id"] in ids:
+                    for key in range(len(keys)):
+                        row[keys[key]] = replacements[key]
+                    break
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
