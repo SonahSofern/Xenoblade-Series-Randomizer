@@ -44,8 +44,7 @@ def RandoAccessoryShops():
 def AccessoryShopDescription():
     desc = PopupDescriptions.Description()
     desc.Header(Options.AccessoryShopsOption.name)
-    # Insert image of accessory shop icon
-    desc.Text("This option randomizes a % of all items in Accessory Shops into the types of items chosen from suboptions.")
+    desc.Text("This option randomizes a % of all non-key items in Accessory Shops into the types of items chosen from suboptions.")
     desc.Text("If no sub-options are selected this will do nothing.")
     desc.Image("AccessoryShopIcon.png", "XC2")
     return desc

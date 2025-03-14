@@ -33,7 +33,7 @@ class Enhancement:
     ReversePar2 = False
     addToList = True
     DisTag = ""
-    def __init__(self,Name, Enhancement, Caption, Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReversePar1 = False, ReversePar2  = False, addToList = True, DisTag = ""):
+    def __init__(self,Name, Enhancement, Caption, Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReversePar1 = False, ReversePar2  = False, addToList = True, DisTag = "", max = [0,0]):
         self.name = Name
         self.EnhanceEffect = Enhancement
         self.Caption = Caption
@@ -45,6 +45,7 @@ class Enhancement:
         self.ReversePar2 = ReversePar2
         self.addToList = addToList
         self.DisTag = DisTag
+        self.max = max
         if self.addToList:
             EnhanceClassList.append(self)
             
@@ -203,7 +204,7 @@ GuardAnnulAttack = Enhancement("Pierce",42,43, Medium, DisTag="Pierce")
 AnnulReflect = Enhancement("Phase",43,44, Medium, DisTag="Phase")
 DamageUpWhenHpDown = Enhancement("Desperation",44,45, Small, Large, DisTag="Desperation Attack")
 BattleDurationDamageUp = Enhancement("Delayed",45,46, High, DisTag="Strength ↑") # Uses weird parameter see above
-DamageUpOnEnemyKill = Enhancement("Massacre",46,47, Medium, DisTag="Damage ↑")
+DamageUpOnEnemyKill = Enhancement("Massacre",46,47, Medium, DisTag="Damage ↑", max=[100,600])
 BreakDurationUp = Enhancement("Duration",47,48, Medium, DisTag="Break Duration ↑")
 ToppleDurationUp = Enhancement("Duration",48,49, Medium, DisTag="Topple Duration ↑")
 LaunchDurationUp = Enhancement("Duration",49,50, Medium, DisTag="Launch Duration ↑")
@@ -211,7 +212,7 @@ AutoAttackDamageUp = Enhancement("Automatic",50,51, Mega)
 AggroedEnemyDamageUp = Enhancement("Self Defense",51,52, Large)
 IndoorsDamageUp = Enhancement("Indoor",52,53, Medium)
 OutdoorsDamageUp = Enhancement("Outdoor",53,54, Small)
-BladeSwitchDamageUp = Enhancement("Switchup",54,55, Small)
+BladeSwitchDamageUp = Enhancement("Switchup",54,55, Small, max=[100,500])
 OppositeGenderBladeDamageUp = Enhancement("Counterpart",55,56, Medium)
 ReduceEnemyToppleResist = Enhancement("Toppler",56,57, Medium)
 ReduceEnemyLaunchResist = Enhancement("Breaker",57,58, Medium)
@@ -252,7 +253,7 @@ WPEnemiesBoost = Enhancement("Expert",98, 106, Large)
 PartyGaugeExcellentFill = Enhancement("Party",101, 109, Small, Description="Fills the Party Gauge on an\n\"Excellent\" Special by [ML:Enhance kind=Param1 ].")
 PartyGaugeCritFill = Enhancement("Party",102, 112, Mini, Description="Fills the Party Gauge for\neach critical hit delivered by [ML:Enhance kind=Param1].")
 PartyGaugeDriverArtFill = Enhancement("Party",103, 115, Baby, Description="Fills the Party Gauge\nfor each Driver Art used by [ML:Enhance kind=Param1].")
-DamageUpEnemyNumber = Enhancement("Underdog",104, 116, Medium)
+DamageUpEnemyNumber = Enhancement("Underdog",104, 116, Medium, max=[100,500])
 ReflectDamageUp = Enhancement("Reflection",105, 117, Large)
 CritDuringChain = Enhancement("Critical",107, 118, Medium)
 ChainAttackHeal = Enhancement("Chain Heal",108, 119, Medium)
@@ -289,7 +290,7 @@ PurifyingFlames = Enhancement("Purifying",138, 148, Small, Mini)
 ForeSight = Enhancement("Foresight",139, 149, Small)
 DreamOfTheFuture = Enhancement("Dream",140, 150, addToList=False)
 ReduceEnemyBladeComboDamage = Enhancement("Blade↓",142, 151, Medium, DisTag="Resist Combo")
-DamagePerEvadeUp = Enhancement("Counterattack",143, 152, Mini, DisTag="Damage ↑")
+DamagePerEvadeUp = Enhancement("Counterattack",143, 152, Mini, DisTag="Damage ↑", max=[100,400])
 ArtsRechargeMaxAffinity = Enhancement("Arts Charging",144, 154, Small)
 ReduceAggroFromAttacks = Enhancement("Aggro↓",145, 155, Small)
 PhyAndEthDefenseUp = Enhancement("Full Guard",146, 156, Small)
@@ -327,7 +328,7 @@ AggroReducOnLandingHit = Enhancement("Concussion",177, 188, Medium)
 RecoverRechargeCrit = Enhancement("Flurry",178, 189, Medium)
 SpecialAffinityUp = Enhancement("Specialist",179,191, Medium)
 BreakResDown = Enhancement("Breaker",180, 192, Small)
-RepeatSpecialDamage = Enhancement("Magician",182, 193, Small, DisTag="Special ↑")
+RepeatSpecialDamage = Enhancement("Magician",182, 193, Small, DisTag="Special ↑", max=[100,500])
 Twang = Enhancement("Twang",183, 194, Small, Baby)
 MaxAffinityAccuracy = Enhancement("Hone",184, 195, Large)
 PotionStayLonger = Enhancement("Preservative",185, 196, Small)
@@ -409,16 +410,16 @@ ForcedHPPotionOnHit = Enhancement("Potter",227, 289)
 BladeComboOrbAdder = Enhancement("Orbs",234,290, Medium)
 EvadeDriverArt = Enhancement("Evader",32, 292)
 RetainAggro = Enhancement("Grudge",235, 293, Medium, DisTag="Grudge")
-DamageUpOnDeath = Enhancement("Martyr",238, 295, Large)
+DamageUpOnDeath = Enhancement("Martyr",238, 295, Large, max=[100,700])
 AutoSpeedArtsSpeed= Enhancement("Lightning",240, 296, Small, Small)
-LV4EachUseDmageUp = Enhancement("Glow",241, 297, Large)
+LV4EachUseDmageUp = Enhancement("Glow",241, 297, Large, max=[200,2000])
 Vision = Enhancement("Monado",242, 298, Medium, ReversePar1=True)
 AwakenPurge = Enhancement("Sleepy",243, 299, Medium)
 PartyCritMaxAffinity = Enhancement("Critical",244, 300, Small)
-DamageUpPerCrit = Enhancement("Exploit",245, 301, Baby, Baby)
+DamageUpPerCrit = Enhancement("Exploit",245, 301, Baby, Baby, max=[100,500])
 RechargeOnEvade = Enhancement("Flicker",248, 304, Baby)
 PartyLaunchDamageUp = Enhancement("Sky High",249, 306, Mega)
-PotionPickupDamageUp = Enhancement("Drunkard",250, 307, Small, DisTag="Damage ↑")
+PotionPickupDamageUp = Enhancement("Drunkard",250, 307, Small, DisTag="Damage ↑", max=[100,1000])
 ItemCollectionRange = Enhancement("Collector",251, 308, Mega)
 CombatMoveSpeed = Enhancement("Blitz",211, 309, [40,50,60,70]) # Distag Repeats each step u take
 NullHealRes = Enhancement("Healers",252, 310, Medium)
@@ -426,7 +427,7 @@ DoomRes = Enhancement("Optimist",253, 311, Medium)
 PartyDrainRes = Enhancement("Party",254, 312, Medium)
 DealTakeMore = Enhancement("Reckless",255, 313, Medium, Medium)
 AllDebuffRes = Enhancement("Dream",258, 316, Small)
-DamageUpOnCancel = Enhancement("Rhythm",259, 317, Mini)
+DamageUpOnCancel = Enhancement("Rhythm",259, 317, Mini, max=[100,500])
 PurgeRage = Enhancement("Soothe",261, 318, Medium)
 DamageAndCritUpMaxAffinity = Enhancement("Lucky",263, 320, Medium, Medium)
 ReducesTerrainDamage = Enhancement("Weathered",264, 334, Medium, DisTag="Terrain Resist")

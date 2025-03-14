@@ -1,5 +1,5 @@
 import Options, IDs, json, random
-from scripts import Helper
+from scripts import Helper, PopupDescriptions
 def RandoTreasureBoxes():
     ValidReplacements = []
     if Options.TreasureChestOption_Accessories.GetState():
@@ -40,3 +40,12 @@ def RandoTreasureBoxes():
                 json.dump(boxData, tboxFile, indent=2, ensure_ascii=False)
         except:
             pass # Ignores wrong files
+
+
+def TreasureChestDescription():
+    myDesc = PopupDescriptions.Description()
+    myDesc.Header(Options.TreasureChestOption.name)
+    myDesc.Text("This option randomizes a % of all non-key items in Treasure Chests into the types of items chosen from suboptions.")
+    myDesc.Text("If no sub-options are selected this will do nothing.")
+    myDesc.Image("TreasureChest.png", "XC2")
+    return myDesc

@@ -1,6 +1,6 @@
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_PSVskill.html
 import json, random, time
-import Options
+import Options, scripts.PopupDescriptions
 
 yoinkSkills = [140,138]
 MeliaSkills = [152,157,159]
@@ -30,6 +30,7 @@ def SkillRando():
     isShape = Options.AffinityTreeOption_Shape.GetState()
     isPower = Options.AffinityTreeOption_Power.GetState()
     isLinkCost = Options.AffinityTreeOption_LinkCost.GetState()
+    isEffect = Options.AffinityTreeOption_Effect.GetState()
     with open("./XCDE/_internal/JsonOutputs/bdat_common/BTL_PSVskill.json", 'r+', encoding='utf-8') as skillFile:
         with open("./XCDE/_internal/JsonOutputs/bdat_menu_psv/MNU_PSskil.json", 'r+', encoding='utf-8') as skillDescFile:
             skillData = json.load(skillFile)
@@ -46,30 +47,32 @@ def SkillRando():
             for skill in skillData["rows"]:
                 if skill["$id"] in invalidSkills:
                     continue
-                chosen:Skill = random.choice(SkillList)
-                SkillList.remove(chosen)
-                skill["name"] = chosen.name
-                skill["shape"] = chosen.shape
-                skill["target"] = chosen.target
-                skill["skill"] = chosen.skill
-                skill["val1"] = chosen.val1
-                skill["val2"] = chosen.val2
-                skill["time"] = chosen.time
-                # skill["point_PP"] = chosen.point_PP Dont copy because we want to keep the original costs so you dont get stuck with a 3500 cost skill in thge first slot
-                skill["point_SP"] = chosen.point_SP
-                skill["flag"] = chosen.flag
-                
-                # Fixing descriptions
-                for desc in descData["rows"]:
-                    if desc["$id"] == skill["$id"]:
-                        desc["help"] = chosen.id
-                        break
-                
+                if isEffect:
+                    chosen:Skill = random.choice(SkillList)
+                    SkillList.remove(chosen)
+                    skill["name"] = chosen.name
+                    skill["shape"] = chosen.shape
+                    skill["target"] = chosen.target
+                    skill["skill"] = chosen.skill
+                    skill["val1"] = chosen.val1
+                    skill["val2"] = chosen.val2
+                    skill["time"] = chosen.time
+                    # skill["point_PP"] = chosen.point_PP Dont copy because we want to keep the original costs so you dont get stuck with a 3500 cost skill in thge first slot
+                    skill["point_SP"] = chosen.point_SP
+                    skill["flag"] = chosen.flag
+                    
+                    # Fixing descriptions
+                    for desc in descData["rows"]:
+                        if desc["$id"] == skill["$id"]:
+                            desc["help"] = chosen.id
+                            break
+                    
                 if isPower:
                     Power(skill)
                 
                 if isShape:
                     Shape(skill, "shape")
+                    SkillLinkNodeRando()
                     
                 if isLinkCost:
                     LinkCost(skill)
@@ -117,3 +120,24 @@ def SkillLinkNodeRando():
         linkFile.seek(0)
         linkFile.truncate()
         json.dump(linkData, linkFile, indent=2, ensure_ascii=False)
+        
+        
+        
+def SkillTreeDesc():
+    myDesc = scripts.PopupDescriptions.Description()
+    myDesc.Header(Options.AffinityTreeOption_Effect.name)
+    myDesc.Text("Randomizes the skills in each characters skill tree.\nThis keeps the original cost of the node, regardless of the skill that replaces it.")
+    myDesc.Image("Effect.png", "XCDE", 800)
+    myDesc.Header(Options.AffinityTreeOption_Power.name)
+    myDesc.Text("This option affects the power level of skill trees, from 30%-300% of their original strength")
+    myDesc.Image("AmazingStars.png", "XCDE")
+    myDesc.Text("Amazing Stars normally reduces only 15% of cooldown during night. ")
+    
+    
+    myDesc.Header(Options.AffinityTreeOption_Shape.name)
+    myDesc.Text("This randomizes all skill node shapes into:\n- Circle\n- Square\n- Hexagon\n- Octagram\n- Diamond")
+    myDesc.Image("SkillTreesNodeShape.png", "XCDE", 800)
+    myDesc.Text("This randomizes each character's link skill node shapes into:\n- Circle\n- Square\n- Hexagon\n- Octagram\n")
+    myDesc.Text("Diamond Skills will still not be linkable to keep vanilla behaviour")
+    
+    return myDesc
