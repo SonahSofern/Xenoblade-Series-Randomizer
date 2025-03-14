@@ -52,7 +52,8 @@ def AccessoriesDesc():
     desc = PopupDescriptions.Description()
     desc.Header(Options.DriverAccessoriesOption.name)
     desc.Text("This option randomizes all accessory effects, even to effects that could not be obtained in normal gameplay.")
-    desc.Text("This also renames accessories to fit their new effect.")
+    desc.Image("accessoryeffects.png", "XC2", 700)
+    desc.Text("This also replaces the first word of accessories to fit their new effect.")
     effectDescription:str
     ValidSkills.sort(key=lambda x: x.name) # Alphabetic Sort
     for effect in ValidSkills:
@@ -72,7 +73,9 @@ def AccessoriesDesc():
         # Replace things we dont want user to see
         effectDescription = effectDescription.replace('\n', " ") # Remove new lines
         effectDescription = effectDescription.replace("[ML:Enhance kind=Param1 ]", f"{effect.Param1[0]}-{effect.Param1[-1]}")
+        effectDescription = effectDescription.replace("[ML:Enhance kind=Param1]", f"{effect.Param1[0]}-{effect.Param1[-1]}")
         effectDescription = effectDescription.replace("[ML:Enhance kind=Param2 ]", f"{effect.Param2[0]}-{effect.Param2[-1]}")
+        effectDescription = effectDescription.replace("[ML:Enhance kind=Param2]", f"{effect.Param2[0]}-{effect.Param2[-1]}")
         effectDescription = effectDescription.replace("[ML:Enhance ]", f"{effect.max[0]}-{effect.max[-1]}")
         effectDescription = effectDescription.replace("[max: [ML:Enhance kind=Param2", f"max: {effect.Param2[0]}-{effect.Param2[-1]}")
 
