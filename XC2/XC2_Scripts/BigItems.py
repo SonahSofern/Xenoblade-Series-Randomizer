@@ -18,5 +18,5 @@ def BigItemsDesc():
     BigItemDesc = PopupDescriptions.Description()
     BigItemDesc.Header(Options.FieldItemOption.name)
     BigItemDesc.Text("When enabled, this option randomizes the size and spinrate of all items dropped from Enemies, Collection Points, and Treasure Chests.")
-    BigItemDesc.Image("RandomLootSize.png", "XC2")
+    BigItemDesc.Image("RandomLootSize.png", "XC2", 700)
     return BigItemDesc

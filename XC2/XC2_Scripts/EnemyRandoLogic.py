@@ -1,7 +1,7 @@
 import json
 import random
 import time
-from scripts import Helper
+from scripts import Helper, PopupDescriptions
 from IDs import ValidEnemies, ValidEnemyPopFileNames, FlyingEnArrangeIDs, OriginalFlyingHeights, OriginalWalkSpeeds, OriginalRunSpeeds, OriginalBtlSpeeds, SwimmingEnArrangeIDs
 import copy, Options
 
@@ -692,7 +692,7 @@ def SwimmingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs):
                 SwimmingBladeRSCIDs = []
                 ParamCurrRow = EnParamLastRow + 1 # These two hold the current ParamID and RSCID we're on. We have to use this approach because we are only adding new Params for blades if their drivers can fly, so we skip some values of i in the loop
                 RSCCurrRow = RSCEnLastRow + 1 
-                for i in range(0, len(NewSwimmingEnemyIDs)): # making drivers fly
+                for i in range(0, len(NewSwimmingEnemyIDs)): # making drivers swim
                     for arrangerow in arrangedata["rows"]:
                         if arrangerow["$id"] == NewSwimmingEnemyIDs[i]:
                             NewSwimmingEnemyParamIDs.append(arrangerow["ParamID"])
@@ -1010,8 +1010,31 @@ def DebugEnemyAggro(NewBossIDs, NewQuestIDs, OtherEnemyIDs):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    
 
+def Description():
+    EnemyRandoDesc = PopupDescriptions.Description()
+    EnemyRandoDesc.Header(Options.EnemiesOption.name)
+    EnemyRandoDesc.Text("Requires at least one of the suboptions below to also be enabled to do anything.")
+    EnemyRandoDesc.Header(Options.EnemiesOption_Bosses.name)
+    EnemyRandoDesc.Text("Adds Boss Enemies to the types of enemies to be randomized.")
+    EnemyRandoDesc.Header(Options.EnemiesOption_QuestEnemies.name)
+    EnemyRandoDesc.Text("Adds Quest Enemies to the types of enemies to be randomized.")
+    EnemyRandoDesc.Header(Options.EnemiesOption_UniqueMonsters.name)
+    EnemyRandoDesc.Text("Adds Unique Monsters to the types of enemies to be randomized.")
+    EnemyRandoDesc.Header(Options.EnemiesOption_Superbosses.name)
+    EnemyRandoDesc.Text("Adds Superbosses to the types of enemies to be randomized.")
+    EnemyRandoDesc.Header(Options.EnemiesOption_NormalEnemies.name)
+    EnemyRandoDesc.Text("Adds all other enemies to the types of enemies to be randomized.")
+    EnemyRandoDesc.Header(Options.EnemiesOption_MixedTypes.name)
+    EnemyRandoDesc.Text("If enabled, the enemy types are all added into one larger pool of enemies and randomized together.\nIf this suboption is disabled, each type of enemy has its own separate pool to randomize between.")
+    EnemyRandoDesc.Header(Options.EnemiesOption_BalancedLevels.name)
+    EnemyRandoDesc.Text("If enabled, all enemies will have their level set to the level of the enemy that would be in that location in the normal game.")
+    EnemyRandoDesc.Image("EnemyRandomizationBalancedLevels.png", "XC2", 700)
+    EnemyRandoDesc.Text("If disabled, all enemies will have the level they had in the normal game, regardless of where they were placed through randomization.")
+    EnemyRandoDesc.Image("EnemyRandomizationVanillaLevels.png", "XC2", 700)
+    EnemyRandoDesc.Header(Options.EnemiesOption_BalanceEnemyGroups.name)
+    EnemyRandoDesc.Text("If enabled, prevents boss fights from having an unfair number of particularly difficult enemies.")
+    return EnemyRandoDesc
 
 
 

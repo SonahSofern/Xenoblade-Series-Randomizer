@@ -118,7 +118,7 @@ BladeCombosOption_Reactions = SubOption("Reactions", BladeCombosOption)
 BladeCombosOption_AOE = SubOption("AOE", BladeCombosOption)
 
 # Enemies
-EnemiesOption = Option("Enemies", Enemies, "Randomizes what enemies appear in the world", [lambda: EnemyRandoLogic.EnemyLogic()])
+EnemiesOption = Option("Enemies", Enemies, "Randomizes what enemies appear in the world", [lambda: EnemyRandoLogic.EnemyLogic()], descData= lambda: EnemyRandoLogic.Description())
 EnemiesOption_Bosses = SubOption("Bosses", EnemiesOption)
 EnemiesOption_QuestEnemies = SubOption("Quest Enemies", EnemiesOption)
 EnemiesOption_UniqueMonsters = SubOption("Unique Monsters", EnemiesOption)
@@ -150,7 +150,7 @@ EnemyMovespeedOption = Option("Enemy Movespeed", Enemies, "Randomizes how fast e
 MusicOption = Option("Music", Misce, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
 MusicOption_MixBattleAndEnv = SubOption("Mix Battle and Environment Themes", MusicOption, _defState = False)
 TrustLineOption = Option("Trust Lines", Misce, "Randomizes blade-driver trust lines in battle (colors, power, etc.)", [lambda: TrustBeam.BeamRandomizer()])
-CustomCoreCrystalOption = Option("Custom Core Crystals", Misce, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], _hasSpinBox = True, _spinDesc = "% of Chests")
+CustomCoreCrystalOption = Option("Custom Core Crystals", Misce, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], _hasSpinBox = True, _spinDesc = "% of Chests", descData= lambda: CoreCrystalAdjustments.Description())
 # DifficultyOption = Option("Difficulty", Misce, "Forces this difficulty, regardless of what is chosen in the options menu")
 # DifficultyOption_Easy = SubOption("Easy", DifficultyOption)
 # DifficultyOption_Normal = SubOption("Normal", DifficultyOption)
