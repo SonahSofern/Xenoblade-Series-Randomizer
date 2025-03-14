@@ -79,7 +79,9 @@ You also get a large amount of SP for the Driver Skill Tree at the First and Thi
 
 The XP gained from fighting higher level enemies is increased. The damage taken modifier when fighting higher level enemies is capped at 200%.
 
-If the "Guaranteed Rare Blades" option is on, Rare Blades will unlock their Blade Skill Tree ranks by reaching the first landmark of the Second and Fourth Storyline sections. So when you reach the Anangham #2 Dock landmark in Mor Ardain, for example, all Rare Blades unlock the second and third levels of their skill trees. 
+Rare Blades will unlock their Blade Skill Tree ranks by reaching the first landmark of the Second and Fourth Storyline sections. So when you reach the Anangham #2 Dock landmark in Mor Ardain, for example, all Rare Blades unlock the second and third levels of their skill trees. 
+
+DLC-exclusive blades are released from the Land of Challenge restriction, allowing you to use them anywhere without beating the appropriate Challenge Battle. 
 
 The SP Cost of your all skills on your Hidden Skill trees are reduced by 80%.
 
@@ -87,7 +89,7 @@ The SP Cost of your all skills on your Hidden Skill trees are reduced by 80%.
 
 Shop Changes:
 
-If this setting is on, Shynini (of the Argentum Trade Guild, F1) will sell Common, Rare, and Legendary Core Crystals.
+Shynini (of the Argentum Trade Guild, F1) will sell Common, Rare, and Legendary Core Crystals.
 
 Additionally, the Shop Deeds you get for buying all items in a shop are removed, as they are intended to be shuffled into the pool of treasure chests with the Zohar Fragment Hunt setting.
 
@@ -101,17 +103,7 @@ Custom Loot:
 
 This option replaces all chest loot on Race Mode continents with custom loot tables containing accessories, weapon manuals, pre-completed aux cores, weapon chips, and more. "Movespeed Deeds" are also added to the pool, each granting a 5% increase to your movement speed. When this option is on, note that enemies will only drop gold, so seeking out these chests is your main method of increasing your character power level!
 
-If the option "Custom Core Crystals" is on, then custom Core Crystals containing specific Rare Blades will also be shuffled into the pool. 
-
-------------------------------------------------------------
-
-Guaranteed Rare Blades (no longer a Race Mode exclusive feature, still included for clarity, as it does have effects on Race Mode if enabled):
-
-If this option is on, and "Custom Loot" is on, the gacha system is disabled, and Rare Blades are instead obtained by opening custom Core Crystals, found in the loot pool.
-
-If this option is on, and the "Less Grinding" option is on, then Rare Blades will unlock their Blade Skill Tree ranks by reaching the first landmark of a Storyline section. So when you reach the Forgotten Waste landmark in Gormott, all Rare Blades unlock the second level of their skill trees. 
-
-DLC-exclusive blades are released from the Land of Challenge restriction, allowing you to use them anywhere without beating the appropriate Challenge Battle. 
+Custom Core Crystals containing specific Rare Blades will also be shuffled into the pool. 
 
 ------------------------------------------------------------
 

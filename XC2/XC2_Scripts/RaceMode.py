@@ -26,7 +26,7 @@ def RaceModeChanging():
     #Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
 
     AreaList1 = [41, 68] #41, 68
-    AreaList2 = [99, 152] #99, 152
+    AreaList2 = [99] #99, 152
     AreaList3 = [125, 133, 168] #125, 133, 168
     AreaList4 = [175, 187] #175, 187
 
@@ -113,7 +113,7 @@ def RaceModeChanging():
             if (row["PRTQuestID"] != 0) and (row["$id"] >= 25):
                 row["PRTQuestID"] = 6
             if row["$id"] == 15: # Talking to Spraine
-                row["NextQuestA"] = NextQuestAList[ChosenIndices[0]]
+                row["NextQuestA"] = 100 #NextQuestAList[ChosenIndices[0]]
         for i in range(0, len(ChosenIndices) - 1):
             for row in data["rows"]:
                 if row["$id"] == LastQuestAList[ChosenIndices[i]]:
@@ -148,16 +148,19 @@ def RaceModeChanging():
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 10013:
-                if ChosenIndices[0] == 0:
-                    # Gormott
-                    row["nextID"] = 10035
-                    row["scenarioFlag"] = 2002
-                    row["nextIDtheater"] = 10035
-                if ChosenIndices[0] == 1:
-                    # Uraya
-                    row["nextID"] = 10088
-                    row["scenarioFlag"] = 3005
-                    row["nextIDtheater"] = 10088
+                row["nextID"] = 10156
+                row["scenarioFlag"] = 4025
+                row["nextIDtheater"] = 10156
+                #if ChosenIndices[0] == 0:
+                #    # Gormott
+                #    row["nextID"] = 10035
+                #    row["scenarioFlag"] = 2002
+                #    row["nextIDtheater"] = 10035
+                #if ChosenIndices[0] == 1:
+                #    # Uraya
+                #    row["nextID"] = 10088
+                #    row["scenarioFlag"] = 3005
+                #    row["nextIDtheater"] = 10088
         for i in range(0, len(ChosenIndices) - 1):
             for row in data["rows"]:
                 if row["$id"] == FinalContinentCutscenes[ChosenIndices[i]]:
@@ -215,6 +218,7 @@ def RaceModeChanging():
     if Options.RaceModeOption_DLC.GetState():
         print("Nerfing Corvin and Crossette")
         DLCItemChanges()
+    SeedHash()
 
 def RaceModeDescription():
     RaceModeDesc = PopupDescriptions.Description()
@@ -263,15 +267,6 @@ def DetermineNGPlusBladeCrystalIDs():
         return NGPlusBladeCrystalIDs
 
 def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade trust/skill unlock requirements to the same condition as reaching the 2nd and 4th race mode areas
-    KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]
-    KeyAchievementIDs = list(set([x for x in KeyAchievementIDs if x != 0]))
-    RelevantChosenIndices = [x for x in ChosenIndices if x != 9]
-    RelevantLocation = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 2012]
-    MapIDs = [6, 9, 10, 14, 12, 13, 15, 16, 20]
-    TaskIDs = [143, 309, 147, 285]
-    TaskLogIDs = [659, 660, 661, 662]
-    LocationNames = ["Gormott", "Uraya", "Mor Ardain", "Leftheria", "Indol", "Tantal", "Spirit Crucible Elpys", "the Cliffs of Morytha", "the World Tree"]
-
     StarterBladeTrustSetAppearance = [16, 12, 16, 14, 16] #rank 1
     A1TrustSetAppearance = [16, 12, 16, 14, 16] # rank 1
     A2TrustSetAppearance = [16, 16, 16, 14, 16] # rank 3
@@ -324,59 +319,48 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade trust
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-    with open("./XC2/_internal/JsonOutputs/common/FLD_Achievement.json", 'r+', encoding='utf-8') as file: #we need to change FLD_Achievement ID 1 to walk 1 step total
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 1:
-                    row["StatsID"] = 60
-                    row["Count"] = 1
-                    row["DebugName"] = "WALK_TOTAL"
-                    break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+    JSONParser.ChangeJSONLineInMultipleSpots(["common/FLD_Achievement.json"],[1], ["StatsID", "Count", "DebugName"], [60, 1, "WALK_TOTAL"])
+
+    MaxConditionListID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
+
+    MaxQuestConditionID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_QuestCondition.json", "$id") + 1
+
+    JSONParser.ExtendJSONFile("common/FLD_QuestCondition.json", [[{"$id": MaxQuestConditionID, "ConditionID": MaxConditionListID, "MapID": 0, "NpcID": 0}, {"$id": MaxQuestConditionID + 1, "ConditionID": MaxConditionListID + 1, "MapID": 0, "NpcID": 0}]])
 
     with open("./XC2/_internal/JsonOutputs/common/FLD_QuestTaskAchievement.json", 'r+', encoding='utf-8') as file: #now we need to modify the FLD_QuestTaskAchievement
         data = json.load(file)
-        for i in range(0, 4):
-            for row in data["rows"]:
-                if row["$id"] <= 7004:
-                    row["TaskType1"] = 5
-                    row["TaskID1"] = TaskIDs[row["$id"]-7001]
-                    row["TaskCondition1"] = 0
-                if row["$id"] == 7005:
-                    row["TaskType1"] = 12
-                    row["TaskID1"] = 1
-                    row["TaskCondition1"] = 0
-                    break
+        for row in data["rows"]:
+            if row["$id"] == 7002:
+                row["TaskType1"] = 10
+                row["TaskID1"] = MaxQuestConditionID
+                row["TaskCondition1"] = 0
+            elif row["$id"] == 7004:
+                row["TaskType1"] = 10
+                row["TaskID1"] = MaxQuestConditionID + 1
+                row["TaskCondition1"] = 0
+            elif row["$id"] == 7005:
+                row["TaskType1"] = 12
+                row["TaskID1"] = 1
+                row["TaskCondition1"] = 0
+                break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestReach.json", 'r+', encoding='utf-8') as file:  #modifying the tasks where you need to reach a certain location
-        data = json.load(file)
-        for i in range(0, 4):
-            for row in data["rows"]:
-                if row["$id"] == TaskIDs[i]:
-                    row["Category"] = 2
-                    row["MapID"] = MapIDs[RelevantChosenIndices[i]]
-                    row["PlaceID"] = RelevantLocation[RelevantChosenIndices[i]]
-                    break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+    MaxConditionScenarioID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionScenario.json", "$id") + 1
+    JSONParser.ExtendJSONFile("common/FLD_ConditionList.json", [[{"$id": MaxConditionListID,"Premise": 0,"ConditionType1": 1,"Condition1": MaxConditionScenarioID,"ConditionType2": 0,"Condition2": 0,"ConditionType3": 0,"Condition3": 0,"ConditionType4": 0,"Condition4": 0,"ConditionType5": 0,"Condition5": 0,"ConditionType6": 0,"Condition6": 0,"ConditionType7": 0,"Condition7": 0,"ConditionType8": 0,"Condition8": 0}, {"$id": MaxConditionListID + 1,"Premise": 0,"ConditionType1": 1,"Condition1": MaxConditionScenarioID + 1,"ConditionType2": 0,"Condition2": 0,"ConditionType3": 0,"Condition3": 0,"ConditionType4": 0,"Condition4": 0,"ConditionType5": 0,"Condition5": 0,"ConditionType6": 0,"Condition6": 0,"ConditionType7": 0,"Condition7": 0,"ConditionType8": 0,"Condition8": 0}]])
+    JSONParser.ExtendJSONFile("common/FLD_ConditionScenario.json", [[{"$id": MaxConditionScenarioID, "ScenarioMin": 4025, "ScenarioMax": 10048, "NotScenarioMin": 0, "NotScenarioMax": 0},{"$id": MaxConditionScenarioID + 1, "ScenarioMin": 7044, "ScenarioMax": 10048, "NotScenarioMin": 0, "NotScenarioMax": 0}]])
 
     with open("./XC2/_internal/JsonOutputs/common_ms/fld_quest_achievement.json", 'r+', encoding='utf-8') as file: #modifying the text files that describe what you need to do to unlock the node
         data = json.load(file)
-        for i in range(0, 4):
-            for row in data["rows"]:
-                if row["$id"] == TaskLogIDs[i]:
-                    row["name"] = f"Reach {LocationNames[RelevantChosenIndices[i]]}"
-                    break
-            for row in data["rows"]:
-                if row["$id"] == 663:
-                    row["name"] = "Unlocked once you unlock the \n corresponding Trust Level."
-                    break
+        for row in data["rows"]:
+            if row["$id"] in [659, 660]:
+                row["name"] = "Reach the second Race Mode continent."
+            elif row["$id"] in [661, 662]:
+                row["name"] = "Reach the fourth Race Mode continent."
+            elif row["$id"] == 663:
+                row["name"] = "Unlocked once you unlock the \n corresponding Trust Level."
+                break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -922,24 +906,10 @@ def BladeTreeMaxRewardChange(): # When a blade skill tree completes, rewards tha
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def LandmarkConditions(): # Makes Cliffs of Morytha and Spirit Crucible Elpys available on map if they're rolled as a race mode dungeon, we start with a second landmark unlocked in their area, but you can't open the menu to skip travel to it until you get a minimum scenario flag matching the area. 
-    ExtraConditionIDs = []
-    with open("./XC2/_internal/JsonOutputs/common/FLD_ConditionScenario.json", 'r+', encoding='utf-8') as file: 
-        data = json.load(file)
-        data["rows"].append({"$id": 322, "ScenarioMin": 1001, "ScenarioMax": 7018, "NotScenarioMin": 0, "NotScenarioMax": 0})
-        data["rows"].append({"$id": 323, "ScenarioMin": 1001, "ScenarioMax": 7043, "NotScenarioMin": 0, "NotScenarioMax": 0})
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    ExtraConditionIDs.append(322)
-    ExtraConditionIDs.append(323)
-    with open("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file: 
-        data = json.load(file)
-        ExtraScenarioIDs = [3903, 3904]
-        for i in range(0, len(ExtraConditionIDs)):
-            data["rows"].append({"$id": ExtraScenarioIDs[i], "Premise": 0, "ConditionType1": 1, "Condition1": ExtraConditionIDs[i], "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0 , "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+    MaxConditionScenarioID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionScenario.json", "$id") + 1
+    JSONParser.ExtendJSONFile("common/FLD_ConditionScenario.json", [[{"$id": MaxConditionScenarioID, "ScenarioMin": 1001, "ScenarioMax": 7018, "NotScenarioMin": 0, "NotScenarioMax": 0}, {"$id": MaxConditionScenarioID + 1, "ScenarioMin": 1001, "ScenarioMax": 7018, "NotScenarioMin": 0, "NotScenarioMax": 0}]])
+    MaxConditionListID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
+    JSONParser.ExtendJSONFile("common/FLD_ConditionList.json", [[{"$id": MaxConditionListID,"Premise": 0,"ConditionType1": 1,"Condition1": MaxConditionScenarioID,"ConditionType2": 0,"Condition2": 0,"ConditionType3": 0,"Condition3": 0,"ConditionType4": 0,"Condition4": 0,"ConditionType5": 0,"Condition5": 0,"ConditionType6": 0,"Condition6": 0,"ConditionType7": 0,"Condition7": 0,"ConditionType8": 0,"Condition8": 0}, {"$id": MaxConditionListID + 1,"Premise": 0,"ConditionType1": 1,"Condition1": MaxConditionScenarioID + 1,"ConditionType2": 0,"Condition2": 0,"ConditionType3": 0,"Condition3": 0,"ConditionType4": 0,"Condition4": 0,"ConditionType5": 0,"Condition5": 0,"ConditionType6": 0,"Condition6": 0,"ConditionType7": 0,"Condition7": 0,"ConditionType8": 0,"Condition8": 0}]])
     if ChosenIndices[2] == 6: # Spirit Crucible Chosen
         with open("./XC2/_internal/JsonOutputs/common_gmk/ma16a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: # Turning Canyon of Husks into a second Landmark that warps you to Spirit Crucible Entrance
             data = json.load(file)
@@ -950,7 +920,7 @@ def LandmarkConditions(): # Makes Cliffs of Morytha and Spirit Crucible Elpys av
                     row["category"] = 0
                     row["MAPJUMPID"] = 168
                     row["menuPriority"] = 20
-                    row["stoff_cndID"] = 3903 # only unlock if we have min scenario flag corresponding to reaching the area
+                    row["stoff_cndID"] = MaxConditionListID # only unlock if we have min scenario flag corresponding to reaching the area
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
@@ -961,7 +931,7 @@ def LandmarkConditions(): # Makes Cliffs of Morytha and Spirit Crucible Elpys av
                 if row["$id"] == 1701:
                     row["menuPriority"] = 10
                 if row["$id"] == 1706:
-                    row["stoff_cndID"] = 3904 #only unlock if we have min scenario flag corresponding to reaching the area
+                    row["stoff_cndID"] = MaxConditionListID + 1 #only unlock if we have min scenario flag corresponding to reaching the area
                     row["menuPriority"] = 20
                     row["category"] = 0
                     row["MAPJUMPID"] = 175
@@ -1142,20 +1112,12 @@ def CTMCDescription():
 
 def HideMapAreas(ScenarioFlagLists): # Adding conditions for each area's map to be unlocked
     MapIDsforRaceModeAreas = [[4],[5],[6],[10],[7,8],[9],[11],[12,13],[14],[15]]
-    with open("./XC2/_internal/JsonOutputs/common/FLD_ConditionScenario.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for i in range(0, len(ChosenIndices)):
-            data["rows"].append({"$id": 324 + i, "ScenarioMin": ScenarioFlagLists[ChosenIndices[i]], "ScenarioMax": 10048, "NotScenarioMin": 0, "NotScenarioMax": 0})
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for i in range(0, len(ChosenIndices)):
-            data["rows"].append({"$id": 3905 + i, "Premise": 0, "ConditionType1": 1, "Condition1": 324 + i, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+    MaxConditionScenarioID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionScenario.json", "$id") + 1
+    for i in range(len(ChosenIndices)):
+        JSONParser.ExtendJSONFile("common/FLD_ConditionScenario.json",[[{"$id": MaxConditionScenarioID + i, "ScenarioMin": ScenarioFlagLists[ChosenIndices[i]], "ScenarioMax": 10048, "NotScenarioMin": 0, "NotScenarioMax": 0}]])
+    MaxConditionListID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
+    for i in range(len(ChosenIndices)):
+        JSONParser.ExtendJSONFile("common/FLD_ConditionList.json",[[{"$id": MaxConditionListID + i, "Premise": 0, "ConditionType1": 1, "Condition1": MaxConditionScenarioID + i, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0}]])
     with open("./XC2/_internal/JsonOutputs/common/MNU_WorldMapCond.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
@@ -1163,9 +1125,9 @@ def HideMapAreas(ScenarioFlagLists): # Adding conditions for each area's map to 
                 for i in range(0, len(ChosenIndices)):
                     for j in range(0, len(MapIDsforRaceModeAreas[ChosenIndices[i]])):
                         if row["$id"] == MapIDsforRaceModeAreas[ChosenIndices[i]][j]:
-                            row["cond1"] = 3905 + i
+                            row["cond1"] = MaxConditionListID + i
                             break
-                if row["cond1"] <= 3000:
+                if row["cond1"] <= 3000: #this just disables the conditions
                     row["cond1"] = 3472   
         file.seek(0)
         file.truncate()
@@ -1175,64 +1137,68 @@ def ScriptAdjustments(): # For individual script changes
     with open("./XC2/_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # adjust story events, changing scenario flag
         data = json.load(file)
         for row in data["rows"]:
-            if row["$id"] == 10034: # this lets us start at the start of gormott but not have the broken objective pointer
-                row["chgEdID"] = 0
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10036: # this lets us start at the start of gormott but not have the broken objective pointer
-                row["nextID"] = 10034
-                row["nextIDtheater"] = 10034
-            if row["$id"] == 10189:
-                row["linkID"] = 0
-                row["envSeam"] = 0
-            if row["$id"] == 10094: # script that causes Vandham to join is name chapt03 startid 5
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10096: #
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10107: # script for the second time Vandham joins
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10129: # script for when Vandham dies (fixes bug where Roc on Rex gets deleted when Vandham dies)
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10211: # script that removes morag
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10213: # script that readds morag
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10240: # need to hard code the chapter transition for indol and temperantia section because I break some stuff to make warping between continents work.
-                row["scenarioFlag"] = 6001
-                row["nextID"] = 10244
-                row["nextIDtheater"] = 10244
-                row["linkID"] = 0
-            if row["$id"] == 10260: #removing script that removes morag
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10269: #removing script that removes morag
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10304:
-                row["linkID"] = 0
-            if row["$id"] == 10366: # need to hard code the leap between cliffs and land of morytha because I break some stuff to make warping between continents work.
-                row["scenarioFlag"] = 8001
-                row["nextID"] = 10369
-                row["nextIDtheater"] = 10369
-            if row["$id"] == 10370:
-                row["scriptName"] = "chapt08"
-                row["scriptStartId"] = 6
-            if row["$id"] == 10371:
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10411: # fix for world tree chapter 9 transition
-                row["nextID"] = 10427
-                row["nextIDtheater"] = 10427
-                row["linkID"] = 0
-                row["scenarioFlag"] = 9008
-            if row["$id"] == 10451: # end of world tree
-                row["linkID"] = 0
+            CurrRowID = row["$id"] # think this avoids having to find the id in the row object for each case check
+            match CurrRowID:
+                case 10034: # this lets us start at the start of gormott but not have the broken objective pointer
+                    row["chgEdID"] = 0
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10036: # this lets us start at the start of gormott but not have the broken objective pointer
+                    row["nextID"] = 10034
+                    row["nextIDtheater"] = 10034
+                case 10189:
+                    row["linkID"] = 0
+                    row["envSeam"] = 0
+                case 10094: # script that causes Vandham to join is name chapt03 startid 5
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10096: 
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10107: # script for the second time Vandham joins
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10129: # script for when Vandham dies (fixes bug where Roc on Rex gets deleted when Vandham dies)
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10211: # script that removes morag
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10213: # script that readds morag
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10240: # need to hard code the chapter transition for indol and temperantia section because I break some stuff to make warping between continents work.
+                    row["scenarioFlag"] = 6001
+                    row["nextID"] = 10244
+                    row["nextIDtheater"] = 10244
+                    row["linkID"] = 0
+                case 10260: #removing script that removes morag
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10269: #removing script that removes morag
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10304:
+                    row["linkID"] = 0
+                case 10366: # need to hard code the leap between cliffs and land of morytha because I break some stuff to make warping between continents work.
+                    row["scenarioFlag"] = 8001
+                    row["nextID"] = 10369
+                    row["nextIDtheater"] = 10369
+                case 10370:
+                    row["scriptName"] = "chapt08"
+                    row["scriptStartId"] = 6
+                case 10371:
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10411: # fix for world tree chapter 9 transition
+                    row["nextID"] = 10427
+                    row["nextIDtheater"] = 10427
+                    row["linkID"] = 0
+                    row["scenarioFlag"] = 9008
+                case 10451: # end of world tree
+                    row["linkID"] = 0
+                case _:
+                    pass
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
