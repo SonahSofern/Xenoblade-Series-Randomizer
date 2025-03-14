@@ -1,6 +1,7 @@
 import json, random
 from Enhancements import *
 import Options
+from scripts import PopupDescriptions
 
 def RandomizeSkillEnhancements():
     DefaultArtsCancelSlots, DefaultXSlots, DefaultYSlots, DefaultBSlots  = [12,55,82,102,131,161], [1,51,61,91,121,162], [11,31,71,101,141,171], [21,52,62,92,122,151]
@@ -23,6 +24,7 @@ def RandomizeSkillEnhancements():
             RemainingUnusedDriverIDs.remove(DefaultYSlots[DriverList.index(Driver)])
             B_Slots.append(DefaultBSlots[DriverList.index(Driver)])
             RemainingUnusedDriverIDs.remove(DefaultBSlots[DriverList.index(Driver)])
+            StartingArtSlotCosts()
         if Driver == Zeke:
             ChosenID = random.choice(RemainingUnusedDriverIDs)
             ZekeEyeSlot = [ChosenID]
@@ -92,7 +94,6 @@ def RandomizeSkillEnhancements():
                     skillSlot["Name"] = newOne[0]
                     skillSlot["Enhance"] = newOne[1]
             else:
-                
                 InvalidSkillEnhancements = [CritBoost,PhyAndEthDefenseUp, EtherCannonRange,BladeSwapDamage, FlatCritBoost, BlockBoost, FlatBlockBoost, PartyCritMaxAffinity, DamageAndCritUpMaxAffinity, ForcedHPPotionOnHit, HpPotChanceFor2, ArtCancel, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, AegisPowerUp, BigBangPowerUp, CatScimPowerUp, VarSaberPowerUp, MechArmsPowerUp, WhipswordPowerUp, DrillShieldPowerUp, DualScythesPowerUp, EvadeDrainHp, EvadeDriverArt, KnuckleClawsPowerUp, BitballPowerUp, GreataxePowerUp, TwinRingPowerUp, MegalancePowerUp,ShieldHammerPowerUp, ChromaKatanaPowerUp, EtherCannonPowerUp, ArtDamageHeal, AegisParty, AegisDriver, EthDefBoost, FlatEthDefBoost, PhysDefBoost, FlatDefBoost]
                 ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
                 ForcedSkills = []
@@ -122,23 +123,46 @@ def RandomizeSkillEnhancements():
         enhancementFile.truncate()
         json.dump(enhanceFile, enhancementFile, indent=2, ensure_ascii=False)
         
-        
-        
-        
-        
 def FirstSlotCost(): # Used since art cancel gets put here
     for i in range(1, 7):
         with open(f"./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0{i}.json", 'r+', encoding='utf-8') as driverFiles:
             dFile = json.load(driverFiles)
             for item in dFile["rows"]:
-                if item["Round"] == 1 and item["ColumnNum"] == 1 and item["RowNum"] == 1: 
+                if item["$id"] == 1: 
                     item["NeedSp"] = 0
             driverFiles.seek(0)
             driverFiles.truncate()
             json.dump(dFile, driverFiles, indent=2, ensure_ascii=False)
-            
-            
-            
-def BladeSkillTreeShortening():
+
+def StartingArtSlotCosts(): # Used to reduce cost of "Start with X Art" skills
+    for i in range(1, 7):
+        with open(f"./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0{i}.json", 'r+', encoding='utf-8') as driverFiles:
+            dFile = json.load(driverFiles)
+            for item in dFile["rows"]:
+                if item["$id"] in [4,7,10]:
+                    item["NeedSp"] = 0
+            driverFiles.seek(0)
+            driverFiles.truncate()
+            json.dump(dFile, driverFiles, indent=2, ensure_ascii=False)
+
+def BladeSkillTreeShortening(): #how do you do, fellow skill tree randomization functions
     JSONParser.ChangeJSONLine(["common/CHR_Bl.json"],[0],Helper.StartsWith("ArtsAchievement",1,3) + Helper.StartsWith("SkillAchievement",1,3) + Helper.StartsWith("FskillAchivement",1,3) + ["KeyAchievement"], 15, replaceAll=True) # 15 is a trust condition and sets everything to that, so its all on trust with this
 
+def Descriptions():
+    SkillTreeDesc = PopupDescriptions.Description()
+    SkillTreeDesc.Header(Options.DriverSkillTreesOption.name)
+    SkillTreeDesc.Text("If no suboptions are also enabled, skills will be randomly pulled from the vanilla list of driver skills.")
+    SkillTreeDesc.Image("DriverSkillTreeRandoBasic.png", "XC2", 700)
+    SkillTreeDesc.Text("\n")
+    SkillTreeDesc.Header(Options.DriverSkillTreesOption_NonstandardSkills.name)
+    SkillTreeDesc.Text("If this suboption is enabled, skills will instead be pulled from a randomly generated list of effects.")
+    SkillTreeDesc.Image("DriverSkillTreeRandoNonVanillaSkills.png", "XC2", 700)
+    SkillTreeDesc.Text("\n")
+    SkillTreeDesc.Header(Options.DriverSkillTreesOption_EarlyArtsCancel.name)
+    SkillTreeDesc.Text("If this suboption is enabled, the inner-left skill on each Driver's Skill Tree will always be:\n'Lets you use an Art after canceling an Art.'\nIt will also always cost 0 SP.")
+    SkillTreeDesc.Image("DriverSkillTreeRandoEarlyArtsCancel.png", "XC2", 700)
+    SkillTreeDesc.Text("\n")
+    SkillTreeDesc.Header(Options.DriverSkillTreesOption_EarlyXYBAttack.name)
+    SkillTreeDesc.Text("If this suboption is enabled, the inner-middle 3 skills on each Driver's Skill Tree will always be:\n'Allows use of the Driver Art assigned to [button] at the start of battle.'\nThey will also always cost 0 SP.")
+    SkillTreeDesc.Image("DriverSkillTreeRandoEarlyStartWithArt.png", "XC2", 700)
+    return SkillTreeDesc

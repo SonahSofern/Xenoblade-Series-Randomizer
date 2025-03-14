@@ -74,7 +74,7 @@ DriverArtsOption_Damage = SubOption("Damage", DriverArtsOption, [])
 DriverArtsOption_Enhancements = SubOption("Enhancements", DriverArtsOption, [])
 DriverArtsOption_AnimationSpeed = SubOption("Animation Speed", DriverArtsOption, [])
 DriverArtsOption_AOE= SubOption("AOE", DriverArtsOption, [])
-DriverSkillTreesOption = Option("Driver Skill Trees", Driver, "Randomizes driver's skill trees", [lambda: SkillTrees.RandomizeSkillEnhancements()])
+DriverSkillTreesOption = Option("Driver Skill Trees", Driver, "Randomizes driver's skill trees", [lambda: SkillTrees.RandomizeSkillEnhancements()], descData=lambda: SkillTrees.Descriptions())
 DriverSkillTreesOption_NonstandardSkills = SubOption("Nonstandard Skills", DriverSkillTreesOption)
 DriverSkillTreesOption_EarlyArtsCancel = SubOption("Early Arts Cancel", DriverSkillTreesOption)
 DriverSkillTreesOption_EarlyXYBAttack = SubOption("Early XYB Attack", DriverSkillTreesOption)
@@ -195,7 +195,7 @@ ProjTreasureChestOption = Option("Projectile Treasure Chests", Funny, "Launches 
 BladeSizeOption = Option("Blade Size", Funny, "Randomizes the size of Blades", [lambda: Scales.BladeScales()], _hasSpinBox = True)
 NPCSizeOption = Option("NPC Size", Funny, "Randomizes the size of NPCs", [lambda: Scales.NPCScales()], _hasSpinBox = True)
 EnemySizeOption = Option("Enemy Size", Funny, "Randomizes the size of enemies", [lambda: Scales.EnemyScales()], _hasSpinBox = True)
-FieldItemOption = Option("Field Item Size", Funny, "Randomizes the size and spin rate of items from chests and collection points", [lambda: BigItems.BigItemsRando()])
+FieldItemOption = Option("Field Item Size", Funny, "Randomizes the size and spin rate of items dropped on the field.", [lambda: BigItems.BigItemsRando()], descData=lambda: BigItems.BigItemsDesc())
 
 # Cosmetics
 BladeWeaponCosmeticsOption = Option("Blade Weapon Cosmetics", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])])
