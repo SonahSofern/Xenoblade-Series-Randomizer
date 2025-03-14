@@ -1032,6 +1032,7 @@ def Description():
     EnemyRandoDesc.Image("EnemyRandomizationBalancedLevels.png", "XC2", 700)
     EnemyRandoDesc.Text("If disabled, all enemies will have the level they had in the normal game, regardless of where they were placed through randomization.")
     EnemyRandoDesc.Image("EnemyRandomizationVanillaLevels.png", "XC2", 700)
+    EnemyRandoDesc.Text("")
     EnemyRandoDesc.Header(Options.EnemiesOption_BalanceEnemyGroups.name)
     EnemyRandoDesc.Text("If enabled, prevents boss fights from having an unfair number of particularly difficult enemies.")
     return EnemyRandoDesc

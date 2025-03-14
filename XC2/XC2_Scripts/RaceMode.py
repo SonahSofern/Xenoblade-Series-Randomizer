@@ -252,10 +252,11 @@ def RaceModeDescription():
     RaceModeDesc.Text(r"Roughly 1/3rd of the chests on the Storyline area contain a Mysterious Part for that area.")
     RaceModeDesc.Header("Suboption: DLC Item Removal")
     RaceModeDesc.Text(r"If enabled, the DLC gifts will all be replaced with 1G each, except for the DLC Quests, and 60000 Ether Crystals for Poppi.")
-    RaceModeDesc.Header("The following sections describe some additional features for Race Mode which are always enabled.")
+    RaceModeDesc.Header("The following sections describe some additional features for Race Mode which are always enabled.") # change this to not be a header
     RaceModeDesc.Header("Additional Feature: Less Grinding")
     RaceModeDesc.Text(r"When you warp to a new Continent, the landmark that you appear near when you spawn in will give massively increased XP, in an attempt to bridge the power level gap between the two continents.")
     RaceModeDesc.Text(r"You can only use this XP by resting at an Inn and leveling up that way, so it is a good idea to go to a previous inn and level up immediately.")
+    RaceModeDesc.Header("Warning: Spirit Crucible")
     RaceModeDesc.Text(r"!! For Spirit Crucible Elpys in particular, once you get there, warp first to the Canyon of Husks landmark (which warps you to the Spirit Crucible Elpys landmark), then you can go to the inn and level up as needed. The Spirit Crucible Entrance landmark is required in order to receive your bonus xp and SP for this area. This is a known issue that currently has no workaround !!")
     RaceModeDesc.Text(r"You also get a large amount of SP for the Driver Skill Tree at the First and Third Storyline sections of the game.")
     RaceModeDesc.Text(r"The XP gained from fighting higher level enemies is increased.")
