@@ -837,7 +837,7 @@ def BalanceEnemyGroups(DefaultEnemyIDs, RandomizedEnemyIDs):
             for i in violations:
                 # Swap the violation with a random enemy in the list in an attempt to solve it
                 j = random.randrange(len(DefaultEnemyIDs))
-                RandomizedEnemyIDs[i], RandomizedEnemyIDs[j] = RandomizedEnemyIDs[j], RandomizedEnemyIDs[j]
+                RandomizedEnemyIDs[i], RandomizedEnemyIDs[j] = RandomizedEnemyIDs[j], RandomizedEnemyIDs[i]
         else: # No more violations, bail
             break
 
