@@ -26,7 +26,7 @@ def RaceModeChanging():
     #Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
 
     AreaList1 = [41, 68] #41, 68
-    AreaList2 = [99] #99, 152
+    AreaList2 = [99, 152] #99, 152
     AreaList3 = [125, 133, 168] #125, 133, 168
     AreaList4 = [175, 187] #175, 187
 
@@ -113,7 +113,7 @@ def RaceModeChanging():
             if (row["PRTQuestID"] != 0) and (row["$id"] >= 25):
                 row["PRTQuestID"] = 6
             if row["$id"] == 15: # Talking to Spraine
-                row["NextQuestA"] = 100 #NextQuestAList[ChosenIndices[0]]
+                row["NextQuestA"] = NextQuestAList[ChosenIndices[0]]
         for i in range(0, len(ChosenIndices) - 1):
             for row in data["rows"]:
                 if row["$id"] == LastQuestAList[ChosenIndices[i]]:
@@ -148,19 +148,16 @@ def RaceModeChanging():
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 10013:
-                row["nextID"] = 10156
-                row["scenarioFlag"] = 4025
-                row["nextIDtheater"] = 10156
-                #if ChosenIndices[0] == 0:
-                #    # Gormott
-                #    row["nextID"] = 10035
-                #    row["scenarioFlag"] = 2002
-                #    row["nextIDtheater"] = 10035
-                #if ChosenIndices[0] == 1:
-                #    # Uraya
-                #    row["nextID"] = 10088
-                #    row["scenarioFlag"] = 3005
-                #    row["nextIDtheater"] = 10088
+                if ChosenIndices[0] == 0:
+                    # Gormott
+                    row["nextID"] = 10035
+                    row["scenarioFlag"] = 2002
+                    row["nextIDtheater"] = 10035
+                if ChosenIndices[0] == 1:
+                    # Uraya
+                    row["nextID"] = 10088
+                    row["scenarioFlag"] = 3005
+                    row["nextIDtheater"] = 10088
         for i in range(0, len(ChosenIndices) - 1):
             for row in data["rows"]:
                 if row["$id"] == FinalContinentCutscenes[ChosenIndices[i]]:
