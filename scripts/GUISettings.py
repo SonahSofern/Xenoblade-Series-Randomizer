@@ -298,7 +298,7 @@ def LoadTheme(defaultFont, themeName):
     style.configure("STATIC.TButton", font=staticFont)
     style.configure("BorderlessLabel.TLabel", background=currentTheme["backgroundColor"], foreground=UI_Colors.White)
     style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
-    style.configure("Header.TLabel", background= currentTheme["midColor"])
+    style.configure("Header.TButton", background= currentTheme["midColor"], relief = "flat")
     style.configure("DescriptionImage.TLabel", background= currentTheme["midColor"])
     # Since Canvas and Roots arrent affected by normal styling
     for canvas in CanvasesForStyling:
