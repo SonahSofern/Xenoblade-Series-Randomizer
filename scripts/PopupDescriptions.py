@@ -39,39 +39,45 @@ class DescriptionObject():
     def __init__(self, order, data):
         self.order = order
         self.data = data
+        self.obj = None
         order += 1
 
 class PopTag(DescriptionObject):
     def __init__(self, order, data):
         super().__init__(order, data)
+    def SpecialPack(self):
+        self.obj.pack(anchor="w")
 
 class PopText(DescriptionObject):
     def __init__(self, order, data):
         super().__init__(order, data)
-    
+    def SpecialPack(self):
+        self.obj.pack(anchor="w")
+        
 class PopImage(DescriptionObject):
     def __init__(self, order, data, size):
         super().__init__(order, data)
         self.size = size
-    
-class PopHeader(DescriptionObject):
+    def SpecialPack(self):
+        self.obj.pack()
+        
+class PopHeader(DescriptionObject): # Give these a hover color change
     def __init__(self, order, data):
         super().__init__(order, data)
         self.childGroup = []
         self.isOn = True
+    def SpecialPack(self):
+        self.obj.pack(anchor="w")
         
     def Dropdown(self):
         if self.isOn:
             for child in self.childGroup:
-                child.pack_forget()
+                child.obj.pack_forget()
             self.isOn = False
         else:
             for child in self.childGroup:
-                SpecialPack(child)
+                child.SpecialPack() 
             self.isOn = True
-
-def SpecialPack(obj):
-    obj.pack(anchor="w", padx = 10, pady = 5)
 
 def GenPopup(optionName, descData, root, defaultFont):
     # Check if a popup with the same title is already open
@@ -98,32 +104,32 @@ def GenPopup(optionName, descData, root, defaultFont):
     scripts.GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
     scripts.GUISettings.LoadTheme(defaultFont, scripts.GUISettings.defGUIThemeVar.get())
     # loop over data from the description class and parse it
-    for obj in myDescription.data:
-        if isinstance(obj, PopImage): # Image
-            img = Image.open(obj.data)
-            img.thumbnail((obj.size, obj.size), Image.LANCZOS) # Resizes our image and keeps ratio
+    for descObj in myDescription.data:
+        if isinstance(descObj, PopImage): # Image
+            img = Image.open(descObj.data)
+            img.thumbnail((descObj.size, descObj.size), Image.LANCZOS) # Resizes our image and keeps ratio
             img = ImageTk.PhotoImage(img)
-            imageLabel = ttk.Label(curFrame, image=img, padding=5, style="DescriptionImage.TLabel")
+            descObj.obj = ttk.Label(curFrame, image=img, padding=5, style="DescriptionImage.TLabel")
             ImageGroup.append(img)
-            SpecialPack(imageLabel)
-            curHeader.childGroup.append(imageLabel)
+            descObj.SpecialPack()
+            curHeader.childGroup.append(descObj)
             
-        elif isinstance(obj, PopHeader): # Header
+        elif isinstance(descObj, PopHeader): # Header
             curFrame = ttk.Frame(InnerFrame)
-            textLabel = ttk.Button(curFrame,text=obj.data, style="Header.TButton", padding=10, command=lambda obj= obj: obj.Dropdown())
-            textLabel.pack(fill="x", expand=True)
-            curHeader = obj
+            textLabel = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=10, command=lambda obj= descObj: obj.Dropdown())
+            textLabel.pack(fill="x")
+            curHeader = descObj
             curFrame.pack(fill="x", expand=True)
             
-        elif isinstance(obj, PopText): # Text
-            textLabel = ttk.Label(curFrame,text=obj.data, wraplength=myDescription.geometry[1] - 60)
-            SpecialPack(textLabel)
-            curHeader.childGroup.append(textLabel)
+        elif isinstance(descObj, PopText): # Text
+            descObj.obj = ttk.Label(curFrame,text=descObj.data, wraplength=myDescription.geometry[1] - 60)
+            descObj.SpecialPack()
+            curHeader.childGroup.append(descObj)
         
-        elif isinstance(obj, PopTag):
-            tag = ttk.Label(curFrame, text=obj.data, style="Header.TButton")
-            SpecialPack(tag)
-            curHeader.childGroup.append(tag)
+        elif isinstance(descObj, PopTag):
+            descObj.obj = ttk.Label(curFrame, text=descObj.data, style="Header.TButton")
+            descObj.SpecialPack()
+            curHeader.childGroup.append(descObj)
             
     InnerFrame.update_idletasks()  # Ensure all geometry calculations are up-to-date
     top.geometry(f"{InnerFrame.winfo_width() + 38}x{ min(InnerFrame.winfo_height() + 40, 1000)}")

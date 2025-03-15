@@ -347,9 +347,11 @@ def DriverArtDescriptions():
     
     desc.Header(Options.DriverArtsOption_Debuffs.name)
     desc.Text("Allows Debuffs to be placed on arts")
-    for key,value in DebuffsDict.items():
-        myDebuffs = "\n".join(DebuffsDict.keys())
-    desc.Text(myDebuffs)
+
+    for debuff in DebuffGroup:
+        desc.Tag(debuff.name)
+        desc.Text(debuff.desc)
+
     
     desc.Header(Options.DriverArtsOption_Buffs.name)
     desc.Text("Allows Buffs to be placed on arts.")
