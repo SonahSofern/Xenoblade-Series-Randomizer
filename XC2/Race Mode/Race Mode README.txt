@@ -109,7 +109,7 @@ Custom Core Crystals containing specific Rare Blades will also be shuffled into 
 
 Starting Items:
 
-You start with all 5 drivers with their associated blades (Pyra/Mythra, Dromarch, Poppy α, PoppyQT, PoppyQTπ, Pandoria, Brighid).
+You start with all 5 drivers with their associated blades (Pyra/Mythra, Dromarch, Poppi α, PoppiQT, PoppiQTπ, Pandoria, Brighid).
 
 You start with 100000g.
 

@@ -278,7 +278,7 @@ def RaceModeDescription():
     RaceModeDesc.Text(r" -  When this option is on, note that enemies will only drop gold, so seeking out these chests is your main method of increasing your character power level!")
     RaceModeDesc.Text(r" -  Custom Core Crystals containing specific Rare Blades will also be shuffled into the pool.")
     RaceModeDesc.Tag("Starting Items")
-    RaceModeDesc.Text(r"• You start with all 5 drivers with their associated blades (Pyra/Mythra, Dromarch, Poppy α, PoppyQT, PoppyQTπ, Pandoria, Brighid).")
+    RaceModeDesc.Text(r"• You start with all 5 drivers with their associated blades (Pyra/Mythra, Dromarch, Poppi α, PoppiQT, PoppiQTπ, Pandoria, Brighid).")
     RaceModeDesc.Text(r"• You start with 100000g.")
     return RaceModeDesc
 
@@ -704,7 +704,7 @@ def PickupRadiusDeedStart(): # Start with a Pickup Radius Up Deed, to account fo
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)        
 
-def DLCItemChanges(): # Changes all DLC gifts to 1 gold except for poppy crystals
+def DLCItemChanges(): # Changes all DLC gifts to 1 gold except for poppi crystals
     DLCIDRowsWithItems = Helper.InclRange(1,7) + [9, 10] + Helper.InclRange(16, 21) + [23,24] + [30] + [36, 37] + Helper.InclRange(43, 55)
     with open("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
         data = json.load(file)
