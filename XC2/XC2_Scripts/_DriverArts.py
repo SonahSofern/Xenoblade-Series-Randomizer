@@ -5,7 +5,6 @@ import Options
 import scripts.PopupDescriptions
 from _Arts import *
 
-EnhancementSets = [[2760, 2761, 2762, 2763, 2764, 2764], [2745, 2746, 2747, 2748, 2749, 2749], [2815, 2816, 2817, 2818, 2819, 2819], [2830, 2831, 2832, 2833, 2834, 2834], [2815, 2816, 2817, 2818, 2819, 2819], [2861, 2862, 2863, 2864, 2865, 2865], [2745, 2746, 2747, 2748, 2749, 2749], [2815, 2816, 2817, 2818, 2819, 2819], [2680, 2681, 2682, 2683, 2684, 2684], [2815, 2816, 2817, 2818, 2819, 2819], [2746, 2746, 2746, 2746, 2746, 2746], [2815, 2816, 2817, 2818, 2819, 2819], [2680, 2681, 2682, 2683, 2684, 2684], [2680, 2681, 2682, 2683, 2684, 2684], [2815, 2816, 2817, 2818, 2819, 2819], [2700, 2701, 2702, 2703, 2704, 2704], [2755, 2756, 2757, 2758, 2759, 2759], [2780, 2781, 2782, 2783, 2784, 2784], [2790, 2791, 2792, 2793, 2794, 2794], [2855, 2856, 2857, 2858, 2859, 2859], [2795, 2796, 2797, 2798, 2799, 2799], [2866, 2866, 2866, 2866, 2866, 2866], [2770, 2771, 2772, 2773, 2774, 2774], [2735, 2736, 2737, 2738, 2739, 2739], [2765, 2766, 2767, 2768, 2769, 2769], [2790, 2791, 2792, 2793, 2794, 2794], [2850, 2851, 2852, 2853, 2854, 2854], [2866, 2866, 2866, 2866, 2866, 2866], [2765, 2766, 2767, 2768, 2769, 2769], [2850, 2851, 2852, 2853, 2854, 2854], [2866, 2866, 2866, 2866, 2866, 2866], [2770, 2771, 2772, 2773, 2774, 2774], [2725, 2726, 2727, 2728, 2729, 2729], [2740, 2741, 2742, 2743, 2744, 2744], [2725, 2726, 2727, 2728, 2729, 2729], [2770, 2771, 2772, 2773, 2774, 2774], [2790, 2791, 2792, 2793, 2794, 2794], [2825, 2826, 2827, 2828, 2829, 2829], [2700, 2701, 2702, 2703, 2704, 2704], [2790, 2791, 2792, 2793, 2794, 2794], [2825, 2826, 2827, 2828, 2829, 2829], [2700, 2701, 2702, 2703, 2704, 2704], [2770, 2771, 2772, 2773, 2774, 2774], [2705, 2706, 2707, 2708, 2709, 2709], [2840, 2841, 2842, 2843, 2844, 2844], [2840, 2841, 2842, 2843, 2844, 2844], [2765, 2766, 2767, 2768, 2769, 2769], [2705, 2706, 2707, 2708, 2709, 2709], [2705, 2706, 2707, 2708, 2709, 2709], [2840, 2841, 2842, 2843, 2844, 2844], [2775, 2776, 2777, 2778, 2779, 2779], [2765, 2766, 2767, 2768, 2769, 2769], [2840, 2841, 2842, 2843, 2844, 2844], [2800, 2801, 2802, 2803, 2804, 2804], [2745, 2746, 2747, 2748, 2749, 2749], [2830, 2831, 2832, 2833, 2834, 2834], [2685, 2686, 2687, 2688, 2689, 2689], [2800, 2801, 2802, 2803, 2804, 2804], [2685, 2686, 2687, 2688, 2689, 2689], [2760, 2761, 2762, 2763, 2764, 2764], [2830, 2831, 2832, 2833, 2834, 2834], [2760, 2761, 2762, 2763, 2764, 2764], [2800, 2801, 2802, 2803, 2804, 2804], [2830, 2831, 2832, 2833, 2834, 2834], [2750, 2751, 2752, 2753, 2754, 2754], [2760, 2761, 2762, 2763, 2764, 2764], [2830, 2831, 2832, 2833, 2834, 2834], [2805, 2806, 2807, 2808, 2809, 2809], [2861, 2862, 2863, 2864, 2865, 2865], [2810, 2811, 2812, 2813, 2814, 2814], [2810, 2811, 2812, 2813, 2814, 2814], [2861, 2862, 2863, 2864, 2865, 2865], [2780, 2781, 2782, 2783, 2784, 2784], [2805, 2806, 2807, 2808, 2809, 2809], [2861, 2862, 2863, 2864, 2865, 2865], [2805, 2806, 2807, 2808, 2809, 2809], [2780, 2781, 2782, 2783, 2784, 2784], [2861, 2862, 2863, 2864, 2865, 2865], [2810, 2811, 2812, 2813, 2814, 2814], [2780, 2781, 2782, 2783, 2784, 2784], [2850, 2851, 2852, 2853, 2854, 2854], [2740, 2741, 2742, 2743, 2744, 2744], [2770, 2771, 2772, 2773, 2774, 2774], [2740, 2741, 2742, 2743, 2744, 2744], [2850, 2851, 2852, 2853, 2854, 2854], [2770, 2771, 2772, 2773, 2774, 2774], [2850, 2851, 2852, 2853, 2854, 2854], [2770, 2771, 2772, 2773, 2774, 2774], [2780, 2781, 2782, 2783, 2784, 2784], [2785, 2786, 2787, 2788, 2789, 2789], [2850, 2851, 2852, 2853, 2854, 2854], [2795, 2796, 2797, 2798, 2799, 2799], [2866, 2866, 2866, 2866, 2866, 2866], [2715, 2716, 2717, 2718, 2719, 2719], [2866, 2866, 2866, 2866, 2866, 2866], [2795, 2796, 2797, 2798, 2799, 2799], [2850, 2851, 2852, 2853, 2854, 2854], [2866, 2866, 2866, 2866, 2866, 2866], [2795, 2796, 2797, 2798, 2799, 2799], [2850, 2851, 2852, 2853, 2854, 2854], [2866, 2866, 2866, 2866, 2866, 2866], [2740, 2741, 2742, 2743, 2744, 2744], [2850, 2851, 2852, 2853, 2854, 2854], [2795, 2796, 2797, 2798, 2799, 2799], [2815, 2816, 2817, 2818, 2819, 2819], [2765, 2766, 2767, 2768, 2769, 2769], [2845, 2846, 2847, 2848, 2849, 2849], [2775, 2776, 2777, 2778, 2779, 2779], [2815, 2816, 2817, 2818, 2819, 2819], [2765, 2766, 2767, 2768, 2769, 2769], [2815, 2816, 2817, 2818, 2819, 2819], [2775, 2776, 2777, 2778, 2779, 2779], [2800, 2801, 2802, 2803, 2804, 2804], [2755, 2756, 2757, 2758, 2759, 2759], [2765, 2766, 2767, 2768, 2769, 2769], [2845, 2846, 2847, 2848, 2849, 2849], [2815, 2816, 2817, 2818, 2819, 2819], [2810, 2811, 2812, 2813, 2814, 2814], [2815, 2816, 2817, 2818, 2819, 2819], [2755, 2756, 2757, 2758, 2759, 2759], [2810, 2811, 2812, 2813, 2814, 2814], [2815, 2816, 2817, 2818, 2819, 2819], [2745, 2746, 2747, 2748, 2749, 2749], [2810, 2811, 2812, 2813, 2814, 2814], [2815, 2816, 2817, 2818, 2819, 2819], [2745, 2746, 2747, 2748, 2749, 2749], [2755, 2756, 2757, 2758, 2759, 2759], [2815, 2816, 2817, 2818, 2819, 2819], [2830, 2831, 2832, 2833, 2834, 2834], [2760, 2761, 2762, 2763, 2764, 2764], [2745, 2746, 2747, 2748, 2749, 2749], [2830, 2831, 2832, 2833, 2834, 2834], [2860, 2860, 2860, 2860, 2860, 2860], [2760, 2761, 2762, 2763, 2764, 2764], [2861, 2862, 2863, 2864, 2865, 2865], [2740, 2741, 2742, 2743, 2744, 2744], [2805, 2806, 2807, 2808, 2809, 2809], [2760, 2761, 2762, 2763, 2764, 2764], [2845, 2846, 2847, 2848, 2849, 2849], [2830, 2831, 2832, 2833, 2834, 2834], [2815, 2816, 2817, 2818, 2819, 2819], [2815, 2816, 2817, 2818, 2819, 2819], [2845, 2846, 2847, 2848, 2849, 2849], [2830, 2831, 2832, 2833, 2834, 2834], [2845, 2846, 2847, 2848, 2849, 2849], [2815, 2816, 2817, 2818, 2819, 2819], [2830, 2831, 2832, 2833, 2834, 2834], [2830, 2831, 2832, 2833, 2834, 2834], [2845, 2846, 2847, 2848, 2849, 2849], [2815, 2816, 2817, 2818, 2819, 2819], [2790, 2791, 2792, 2793, 2794, 2794], [2745, 2746, 2747, 2748, 2749, 2749], [2825, 2826, 2827, 2828, 2829, 2829], [2685, 2686, 2687, 2688, 2689, 2689], [2790, 2791, 2792, 2793, 2794, 2794], [2685, 2686, 2687, 2688, 2689, 2689], [2760, 2761, 2762, 2763, 2764, 2764], [2825, 2826, 2827, 2828, 2829, 2829], [2760, 2761, 2762, 2763, 2764, 2764], [2790, 2791, 2792, 2793, 2794, 2794], [2825, 2826, 2827, 2828, 2829, 2829], [2750, 2751, 2752, 2753, 2754, 2754], [2760, 2761, 2762, 2763, 2764, 2764], [2825, 2826, 2827, 2828, 2829, 2829], [2740, 2741, 2742, 2743, 2744, 2744], [2795, 2796, 2797, 2798, 2799, 2799], [2680, 2681, 2682, 2683, 2684, 2684], [2850, 2851, 2852, 2853, 2854, 2854], [2795, 2796, 2797, 2798, 2799, 2799], [2740, 2741, 2742, 2743, 2744, 2744], [2795, 2796, 2797, 2798, 2799, 2799], [2680, 2681, 2682, 2683, 2684, 2684], [2740, 2741, 2742, 2743, 2744, 2744], [2680, 2681, 2682, 2683, 2684, 2684], [2795, 2796, 2797, 2798, 2799, 2799], [2850, 2851, 2852, 2853, 2854, 2854], [2740, 2741, 2742, 2743, 2744, 2744], [2745, 2746, 2747, 2748, 2749, 2749], [2810, 2811, 2812, 2813, 2814, 2814], [2840, 2841, 2842, 2843, 2844, 2844], [2840, 2841, 2842, 2843, 2844, 2844], [2810, 2811, 2812, 2813, 2814, 2814], [2746, 2746, 2746, 2746, 2746, 2746], [2810, 2811, 2812, 2813, 2814, 2814], [2840, 2841, 2842, 2843, 2844, 2844], [2840, 2841, 2842, 2843, 2844, 2844], [2810, 2811, 2812, 2813, 2814, 2814], [2700, 2701, 2702, 2703, 2704, 2704], [2755, 2756, 2757, 2758, 2759, 2759], [2805, 2806, 2807, 2808, 2809, 2809], [2861, 2862, 2863, 2864, 2865, 2865], [2740, 2741, 2742, 2743, 2744, 2744], [2740, 2741, 2742, 2743, 2744, 2744], [2861, 2862, 2863, 2864, 2865, 2865], [2780, 2781, 2782, 2783, 2784, 2784], [2805, 2806, 2807, 2808, 2809, 2809], [2861, 2862, 2863, 2864, 2865, 2865], [2805, 2806, 2807, 2808, 2809, 2809], [2780, 2781, 2782, 2783, 2784, 2784], [2861, 2862, 2863, 2864, 2865, 2865], [2740, 2741, 2742, 2743, 2744, 2744], [2780, 2781, 2782, 2783, 2784, 2784], [2740, 2741, 2742, 2743, 2744, 2744], [2795, 2796, 2797, 2798, 2799, 2799], [2850, 2851, 2852, 2853, 2854, 2854], [2740, 2741, 2742, 2743, 2744, 2744], [2795, 2796, 2797, 2798, 2799, 2799], [2850, 2851, 2852, 2853, 2854, 2854], [2740, 2741, 2742, 2743, 2744, 2744], [2795, 2796, 2797, 2798, 2799, 2799], [2850, 2851, 2852, 2853, 2854, 2854], [2740, 2741, 2742, 2743, 2744, 2744], [2795, 2796, 2797, 2798, 2799, 2799], [2850, 2851, 2852, 2853, 2854, 2854], [2785, 2786, 2787, 2788, 2789, 2789], [2795, 2796, 2797, 2798, 2799, 2799], [2850, 2851, 2852, 2853, 2854, 2854], [2785, 2786, 2787, 2788, 2789, 2789], [2795, 2796, 2797, 2798, 2799, 2799], [2850, 2851, 2852, 2853, 2854, 2854], [2785, 2786, 2787, 2788, 2789, 2789], [2795, 2796, 2797, 2798, 2799, 2799], [2850, 2851, 2852, 2853, 2854, 2854], [2785, 2786, 2787, 2788, 2789, 2789], [2795, 2796, 2797, 2798, 2799, 2799], [2850, 2851, 2852, 2853, 2854, 2854], [2830, 2831, 2832, 2833, 2834, 2834], [2760, 2761, 2762, 2763, 2764, 2764], [2770, 2771, 2772, 2773, 2774, 2774], [2730, 2731, 2732, 2733, 2734, 2734], [2830, 2831, 2832, 2833, 2834, 2834], [2770, 2771, 2772, 2773, 2774, 2774], [2760, 2761, 2762, 2763, 2764, 2764], [2830, 2831, 2832, 2833, 2834, 2834], [2770, 2771, 2772, 2773, 2774, 2774], [2730, 2731, 2732, 2733, 2734, 2734], [2830, 2831, 2832, 2833, 2834, 2834], [2730, 2731, 2732, 2733, 2734, 2734], [2800, 2801, 2802, 2803, 2804, 2804], [2815, 2816, 2817, 2818, 2819, 2819], [2810, 2811, 2812, 2813, 2814, 2814], [2840, 2841, 2842, 2843, 2844, 2844], [2800, 2801, 2802, 2803, 2804, 2804], [2815, 2816, 2817, 2818, 2819, 2819], [2840, 2841, 2842, 2843, 2844, 2844], [2815, 2816, 2817, 2818, 2819, 2819], [2810, 2811, 2812, 2813, 2814, 2814], [2840, 2841, 2842, 2843, 2844, 2844], [2810, 2811, 2812, 2813, 2814, 2814], [2815, 2816, 2817, 2818, 2819, 2819], [2840, 2841, 2842, 2843, 2844, 2844], [2800, 2801, 2802, 2803, 2804, 2804], [2810, 2811, 2812, 2813, 2814, 2814], [2835, 2836, 2837, 2838, 2839, 2839], [2860, 2860, 2860, 2860, 2860, 2860], [2760, 2761, 2762, 2763, 2764, 2764], [2745, 2746, 2747, 2748, 2749, 2749], [2861, 2862, 2863, 2864, 2865, 2865], [2765, 2766, 2767, 2768, 2769, 2769], [2878, 2879, 2880, 2881, 2882, 2882], [3015, 3016, 3017, 3018, 3019, 3019], [2740, 2741, 2742, 2743, 2744, 2744], [2770, 2771, 2772, 2773, 2774, 2774], [2975, 2976, 2977, 2978, 2979, 2979], [2810, 2811, 2812, 2813, 2814, 2814], [2825, 2826, 2827, 2828, 2829, 2829], [2800, 2801, 2802, 2803, 2804, 2804], [2830, 2831, 2832, 2833, 2834, 2834], [2872, 2872, 2872, 2872, 2872, 2872], [2873, 2874, 2875, 2876, 2877, 2877], [2795, 2796, 2797, 2798, 2799, 2799], [2873, 2874, 2875, 2876, 2877, 2877], [2780, 2781, 2782, 2783, 2784, 2784], [2790, 2791, 2792, 2793, 2794, 2794], [2873, 2874, 2875, 2876, 2877, 2877], [2873, 2874, 2875, 2876, 2877, 2877], [2872, 2872, 2872, 2872, 2872, 2872], [2795, 2796, 2797, 2798, 2799, 2799], [2805, 2806, 2807, 2808, 2809, 2809], [2872, 2872, 2872, 2872, 2872, 2872], [2755, 2756, 2757, 2758, 2759, 2759], [2810, 2811, 2812, 2813, 2814, 2814], [2745, 2746, 2747, 2748, 2749, 2749], [2866, 2866, 2866, 2866, 2866, 2866], [2866, 2866, 2866, 2866, 2866, 2866], [2810, 2811, 2812, 2813, 2814, 2814], [2755, 2756, 2757, 2758, 2759, 2759], [2810, 2811, 2812, 2813, 2814, 2814], [2866, 2866, 2866, 2866, 2866, 2866], [2755, 2756, 2757, 2758, 2759, 2759], [2755, 2756, 2757, 2758, 2759, 2759], [2810, 2811, 2812, 2813, 2814, 2814], [2745, 2746, 2747, 2748, 2749, 2749], [2866, 2866, 2866, 2866, 2866, 2866], [2740, 2741, 2742, 2743, 2744, 2744], [2850, 2851, 2852, 2853, 2854, 2854], [2795, 2796, 2797, 2798, 2799, 2799], [2866, 2866, 2866, 2866, 2866, 2866], [2740, 2741, 2742, 2743, 2744, 2744], [2866, 2866, 2866, 2866, 2866, 2866], [2795, 2796, 2797, 2798, 2799, 2799], [2850, 2851, 2852, 2853, 2854, 2854], [2740, 2741, 2742, 2743, 2744, 2744], [2866, 2866, 2866, 2866, 2866, 2866], [2795, 2796, 2797, 2798, 2799, 2799], [2850, 2851, 2852, 2853, 2854, 2854], [2866, 2866, 2866, 2866, 2866, 2866], [2740, 2741, 2742, 2743, 2744, 2744], [2850, 2851, 2852, 2853, 2854, 2854], [2795, 2796, 2797, 2798, 2799, 2799]]
 
 
 def DriverArtRandomizer():
@@ -48,7 +47,7 @@ def DriverArtRandomizer():
                 for i in range(1,7):
                     art[f"Enhance{i}"] = 0
                 if OddCheck(odds):
-                    Enhancements(art, EnhancementSets)
+                    Enhancements(art)
                     
             if isBuffs:
                 art["ArtsBuff"] = 0 
@@ -77,7 +76,7 @@ def DriverArtRandomizer():
         artFile.truncate()
         json.dump(artData, artFile, indent=2, ensure_ascii=False)
  
-def CopyArt(artData, copyID, artID): # Copies all relavent effects of the art for shared captions
+def CopyArt(artData, copyID, artID): # Copies all relevant effects of the art for shared captions
     for art in artData["rows"]:
         if art["$id"] == copyID:
             copy = art
@@ -110,8 +109,10 @@ def Reaction(art, multReact):
         if multReact:
             art[f"ReAct{i}"] =  random.choice(choice.ids) # Adds each hit
 
+
+initialCooldownRange = [5,14]
 def Cooldowns(art): 
-    CD = random.randrange(5,14)
+    CD = random.randrange(initialCooldownRange[0], initialCooldownRange[1])
     for i in range(1,7):
         step = random.choice([0,0,1,1,1,2])
         if CD > step:
@@ -139,36 +140,25 @@ def Damage(art):
         DMG += step
         art[f"DmgMgn{i}"] = DMG
         
-def Enhancements(art, EnhancementSet):  # Go through and fix these to be variables of the function so i can reference all values in the name for genart description so i can make level 4 specials have the highest level effect and it still reads those effects
-    Enhancement = random.choice(EnhancementSet)
+def Enhancements(art): 
+    Enhancement = random.choice(EnhancementGroup) # Choose the group
+    enh = random.choice(Enhancement.ids) # Choose the inner group
     for i in range(1,7):
-        art[f"Enhance{i}"] = Enhancement[i-1]
+        art[f"Enhance{i}"] = enh[i-1]
 
 
 
 def Buffs(art):
-    name, buff = random.choice(list(BuffsDict.items()))
-    art["ArtsBuff"] = buff
-
-DebuffsDict = {
-    "Taunt" : 11,
-    # "Stench": 12, # It applies but im not sure enemy drivers even lose affinity with their blades like that
-    "NlHeal": 15,
-    "Shackle": 14,
-    "Def↓": 23,
-    "EDef↓": 24,
-    "Res↓": 25,
-    # "Monado Armor": 16, # These work just dont want player to apply them lol
-    # "Doom": 21,
-    # "Superstrength": 17
-}
+    buff = random.choice(BuffGroup)
+    art["ArtsBuff"] = random.choice(buff.ids)
 
 def Debuffs(art):
-    name, debuff = random.choice(list(DebuffsDict.items()))
-    art["ArtsDeBuff"] = debuff
+    debuff = random.choice(DebuffGroup)
+    art["ArtsDeBuff"] = random.choice(debuff.ids)
 
+animationSpeedRange = [50,200]
 def AnimationSpeed(art):
-    art["ActSpeed"] = random.randrange(50,200,10)
+    art["ActSpeed"] = random.randrange(animationSpeedRange[0],animationSpeedRange[1],10)
 
 def AOE(art):
     RangeType = random.choice(AOEGroup)
@@ -181,45 +171,6 @@ def AOE(art):
 
 
 def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False):
-    EnhancementsDict = {
-        "Aggro↓" : [2830,2835],
-        "Aggro↑" : [2850,2873],
-        "Aggroed↑": [2795],
-        "Aquatic↑": [2705],
-        "Back↑": [2760,2755],
-        "Cancel↑": [2810],
-        "Crit↑": [2975],
-        "Crit CD↓": [2840],
-        # "Evade": [2825,2866,2872], Evade is not an enhancement and wont work for it
-        "Flying↑": [2700],
-        "Front↑": [2740],
-        "Vamp": [2735,2878],
-        "Party Vamp": [2845],
-        "High HP↑": [2800,2805],
-        "HP Potion": [2815,2860],
-        "Insect↑": [2685],
-        "Launch↑": [2780,2775],
-        "Low HP↑": [2790,2785],
-        "Machine↑": [2730,2725],
-        "Pierce": [2861],
-        "Side↑": [2746,2745,2750],
-        "Topple↑": [2770,2765],
-        "Beast↑": [2680],
-        "Humanoid↑": [2715]
-    }
-
-    BuffsDict = {
-        "NlReact": [1],
-        "Evade": [2],
-        "Block": [3],
-        "Counter": [6],
-        "↑Counter": [7],
-        "Reflect": [5],
-        "Invincible": [4],
-        "Absorb":  [17]
-        # Eventually might add logic for damage absorb and release
-    }
-    
     with open(artsFile, "r+", encoding='utf-8') as ArtsFile:     
         with open(descFile, "r+", encoding='utf-8') as DescFile:     
             artsData = json.load(ArtsFile)
@@ -234,7 +185,7 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False):
                 # AOE
                 for aoe in AOEGroup:    
                     if art["RangeType"] in aoe.ids:
-                        CombinedCaption[0] += f"[System:Color name=blue]{aoe.abvName}[/System:Color]"
+                        CombinedCaption[0] += f"[System:Color name=blue]{aoe.name}[/System:Color]"
                         break
 
                 # Type of Art Not changing this currently 
@@ -243,16 +194,17 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False):
                 #         CombinedCaption[1] += f"{key}"
                 #         break
                 
-                for key,values in BuffsDict.items():
-                    if art["ArtsBuff"] in values:
-                        CombinedCaption[1] += f"{key}"
+                for buff in BuffGroup:
+                    if art["ArtsBuff"] in buff.ids:
+                        CombinedCaption[1] += f"[System:Color name=green]{buff.name}[/System:Color]"
                         break
 
                 # Reactions 
                 ReactCaption = ""
                 TypeReactions = []
+                art
                 for i in range(1,17):              
-                    if art[f"HitDirID{i}"] != 0:
+                    if (art[f"HitDirID{i}"] != 0) or (isSpecial and (art[f"HitFrm{i}"] != 0)):
                         for react in ReactionGroup:
                             if art[f"ReAct{i}"] in react.ids:
                                 ReactCaption += f"[System:Color name=tutorial]{react.abvName}[/System:Color]->"
@@ -269,16 +221,16 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False):
                 CombinedCaption[2] = ReactCaption
                     
                 # Enhancements
-                for key,values in EnhancementsDict.items():
-                    if art["Enhance1"] in values:
-                        CombinedCaption[3] += f"[System:Color name=green]{key}[/System:Color]"
+                for enh in EnhancementGroup:
+                    if any(art["Enhance1"] in sublist for sublist in enh.ids):
+                        CombinedCaption[3] += f"{enh.name}"
                         break
                     
                 # Debuffs   
                 if (art.get("ArtsDeBuff") != None):                    
-                    for key,values in DebuffsDict.items():
-                        if art["ArtsDeBuff"] in values:
-                            CombinedCaption[4] = f"[System:Color name=red]{key}[/System:Color]"
+                    for debuff in DebuffGroup:
+                        if art["ArtsDeBuff"] in debuff.ids:
+                            CombinedCaption[4] = f"[System:Color name=red]{debuff.name}[/System:Color]"
                             break
 
                 # Putting it all together
@@ -336,27 +288,39 @@ def DriverArtDescriptions():
     desc.Text("Applies your chosen options to each driver's autoattacks as well as arts.")
     desc.Header(f"{Options.DriverArtsOption_SingleReaction.name}/{Options.DriverArtsOption_MultipleReactions.name}")
     
-    desc.Text("Allows single/multiple reaction(s) to be placed on arts. These effects are shown in yellow text. These will be abbreviated if the description gets too long.\nIf both options are enabled multiple reactions will take priority.")
-    reactions = []
+    desc.Text("Allows single/multiple reaction(s) to be placed on arts, shown in yellow text. \nThese will be abbreviated if the description gets too long.\nIf both options are enabled multiple reactions will take priority.")
     for react in ReactionGroup:
-        reactions.append(f"{react.name} ({react.abvName}) - {react.desc}")
-    desc.Text("\n".join(reactions))
-
-    
-    # desc.Text("Break - B\nTopple - T\nLaunch - L\nSmash - S\nBlowdown - Bd\nKnockback - Kb")
-    
+        desc.Tag(f"{react.name} ({react.abvName})")
+        desc.Text(react.desc)
+        
     desc.Header(Options.DriverArtsOption_Debuffs.name)
-    desc.Text("Allows Debuffs to be placed on arts")
+    desc.Text("Allows Debuffs to be placed on arts, shown in red text.")
 
     for debuff in DebuffGroup:
         desc.Tag(debuff.name)
         desc.Text(debuff.desc)
-
-    
+        
     desc.Header(Options.DriverArtsOption_Buffs.name)
-    desc.Text("Allows Buffs to be placed on arts.")
-    for key,value in BuffsDict.items():
-        myBuffs = "\n".join(BuffsDict.keys())
-    desc.Text(myBuffs)
+    desc.Text("Allows Buffs to be placed on arts, shown in green text.")
+    for buff in BuffGroup:
+        desc.Tag(buff.name)
+        desc.Text(buff.desc)
     
+    desc.Header(Options.DriverArtsOption_Enhancements.name)
+    desc.Text("Randomizes the enhancements on arts, shown in neutral text.")
+    for enh in EnhancementGroup:
+        desc.Tag(enh.name)
+        desc.Text(enh.desc)
+        
+    desc.Header(Options.DriverArtsOption_Cooldown.name)
+    desc.Text(f"Randomizes cooldowns for arts. Each art has a random starting cooldown. Then each level up has a chance to lower the cooldown.")    
+        
+    desc.Header(Options.DriverArtsOption_Damage.name)
+    desc.Text(f"Randomizes damage ratios of arts. Each art has a random starting ratio. Then each level up increases the damage by a random amount.")
+    
+    desc.Header(Options.DriverArtsOption_AnimationSpeed.name)
+    desc.Text(f"Randomizes animation speeds of arts between {animationSpeedRange[0]} - {animationSpeedRange[1]}%.")
+    
+    desc.Header(Options.DriverArtsOption_AOE.name)
+    desc.Text(f"Randomizes the AOE types of your arts.\nAOE around target\nAOE around user\nAOE cone")
     return desc

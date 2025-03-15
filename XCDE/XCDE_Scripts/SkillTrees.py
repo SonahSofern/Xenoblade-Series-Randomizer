@@ -128,6 +128,7 @@ def SkillTreeDesc():
     myDesc.Header(Options.AffinityTreeOption_Effect.name)
     myDesc.Text("Randomizes the skills in each characters skill tree.\nThis keeps the original cost of the node, regardless of the skill that replaces it.")
     myDesc.Image("Effect.png", "XCDE", 800)
+    myDesc.Text("Shulk has Fiora's skill Maiden's Zeal")
     myDesc.Header(Options.AffinityTreeOption_Power.name)
     myDesc.Text("This option affects the power level of skill trees, from 30%-300% of their original strength")
     myDesc.Image("AmazingStars.png", "XCDE")

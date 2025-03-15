@@ -46,7 +46,7 @@ class PopTag(DescriptionObject): # Make these grouped with some text
     def __init__(self, order, data):
         super().__init__(order, data)
     def SpecialPack(self):
-        self.obj.pack(anchor="w", side="left")
+        self.obj.pack(anchor="w",padx=20)
 
 class PopText(DescriptionObject):
     def __init__(self, order, data):
@@ -61,7 +61,7 @@ class PopImage(DescriptionObject):
     def SpecialPack(self):
         self.obj.pack(padx=5)
         
-class PopHeader(DescriptionObject): # Give these a hover color change
+class PopHeader(DescriptionObject):
     def __init__(self, order, data):
         super().__init__(order, data)
         self.childGroup = []
@@ -111,28 +111,25 @@ def GenPopup(optionName, descData, root, defaultFont):
             img = ImageTk.PhotoImage(img)
             descObj.obj = ttk.Label(curFrame, image=img, padding=5, style="DescriptionImage.TLabel")
             ImageGroup.append(img)
-            descObj.SpecialPack()
             curHeader.childGroup.append(descObj)
             
         elif isinstance(descObj, PopHeader): # Header
             curFrame = ttk.Frame(InnerFrame)
             descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=10, command=lambda obj= descObj: obj.Dropdown())
-            descObj.SpecialPack()
             curHeader = descObj
             curFrame.pack(fill="x", expand=True)
             
         elif isinstance(descObj, PopText): # Text
             descObj.obj = ttk.Label(curFrame,text=descObj.data, wraplength=myDescription.geometry[1] - 60)
-            descObj.SpecialPack()
             curHeader.childGroup.append(descObj)
         
-        elif isinstance(descObj, PopTag):
-            descObj.obj = ttk.Label(curFrame, text=descObj.data, style="Header.TButton")
-            descObj.SpecialPack()
+        elif isinstance(descObj, PopTag): # Tag
+            descObj.obj = ttk.Label(curFrame, text=descObj.data, style="Tag.TLabel")
             curHeader.childGroup.append(descObj)
-            
+        descObj.SpecialPack()
+ 
     InnerFrame.update_idletasks()  # Ensure all geometry calculations are up-to-date
-    top.geometry(f"{InnerFrame.winfo_width() + 38}x{ min(InnerFrame.winfo_height() + 40, 1000)}")
+    top.geometry(f"{InnerFrame.winfo_width() + 38}x{ min(InnerFrame.winfo_height() + 40, 800)}")
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
 
             
