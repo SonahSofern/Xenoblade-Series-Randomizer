@@ -1,7 +1,7 @@
 import json
 import random
 import time
-from scripts import Helper, PopupDescriptions
+from scripts import Helper, PopupDescriptions, JSONParser
 from IDs import ValidEnemies, ValidEnemyPopFileNames, FlyingEnArrangeIDs, OriginalFlyingHeights, OriginalWalkSpeeds, OriginalRunSpeeds, OriginalBtlSpeeds, SwimmingEnArrangeIDs
 import copy, Options
 
@@ -952,6 +952,7 @@ def EnemyLogic():
         FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
         SwimmingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
         Helper.SubColumnAdjust("./XC2/_internal/JsonOutputs/common/CHR_EnParam.json", "Flag", "FldDmgType", 0)
+        TornaWave1FightChanges()
         #DebugEnemyAggro(NewBossIDs, NewQuestIDs, OtherEnemyIDs)
 
 def DebugEnemyAggro(NewBossIDs, NewQuestIDs, OtherEnemyIDs):
@@ -1037,8 +1038,28 @@ def Description():
     EnemyRandoDesc.Text("If enabled, prevents boss fights from having an unfair number of particularly difficult enemies.")
     return EnemyRandoDesc
 
+#------------------------------------------------------TORNA SPECIFIC------------------------------------------------------#
 
-
-
-        
+def TornaWave1FightChanges(): # we can't allow the player to lose the first fight, since the quest condition is a gimmick corresponding to clearing the entire enemy wave, not a battle that they can lose through the param ReducePCHP
+    DesiredParams = [307, 17, 306, 308] # basically give the new enemy the old enemy's stats
+    TargetIDs = [0,0,0,0] # IDs we want to target to give the nerfed stats
+    with open("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_EnemyPop.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            CurRowID = row["$id"]
+            match CurRowID:
+                case 40547:
+                    TargetIDs[0] = row["ene1ID"]
+                case 40548:
+                    TargetIDs[1] = row["ene1ID"]
+                    TargetIDs[2] = row["ene2ID"]
+                case 40549:
+                    TargetIDs[3] = row["ene1ID"]
+                case 40550:
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    for enemy in range(len(TargetIDs)):
+        JSONParser.ChangeJSONLine(["common/CHR_EnArrange.json"], [TargetIDs[enemy]], ["ParamRev"], DesiredParams[enemy])   
 

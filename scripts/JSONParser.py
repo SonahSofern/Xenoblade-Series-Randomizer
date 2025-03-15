@@ -31,7 +31,7 @@ def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list =
             json.dump(data, file, indent=2, ensure_ascii=False)
 
 
-def ChangeJSONLine(filenames, ids, keys, replacement, replaceAll = False, Game = "XC2"):
+def ChangeJSONLine(filenames: list[str], ids: list[int], keys: list[str], replacement, replaceAll = False, Game = "XC2"):
     for name in filenames:
         filePath = f"./{Game}/_internal/JsonOutputs/" + name
         if not os.path.exists(filePath):
