@@ -110,7 +110,7 @@ BladeWeaponChipsOption_AutoAtk = SubOption("Auto Attacks", BladeWeaponChipsOptio
 BladeWeaponChipsOption_CritRate = SubOption("Crit Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["CriRate"],Helper.InclRange(0,100), BladeWeaponCritDistribution)],_defState= True)
 BladeWeaponChipsOption_GuardRate = SubOption("Guard Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["GuardRate"],Helper.InclRange(0,100), BladeWeaponGuardDistribution)],_defState= True)
 BladeWeaponChipsOption_Enhancement = SubOption("Enhancements", BladeWeaponChipsOption, [lambda: _WeaponChips.RandomizeWeaponEnhancements()], _defState= True)
-BladeWeaponClassOption = Option("Blade Weapon Class", Blade, "Randomizes weapon roles (ATK, TNK, HLR)", [lambda: BladeWeaponClassRando.BladeWeaponClassRandomization()], descData=lambda: MusicShuffling.MusicRandoDescription())
+BladeWeaponClassOption = Option("Blade Weapon Class", Blade, "Randomizes weapon roles (ATK, TNK, HLR)", [lambda: BladeWeaponClassRando.BladeWeaponClassRandomization()], descData=lambda: BladeWeaponClassRando.BladeWeaponClassDesc())
 BladeCombosOption = Option("Blade Combos", Blade, "", [lambda: _EleCombo.BladeComboRandomization()])
 BladeCombosOption_ElementRoutes = SubOption("Element Routes", BladeCombosOption)
 BladeCombosOption_Damage = SubOption("Damage", BladeCombosOption)

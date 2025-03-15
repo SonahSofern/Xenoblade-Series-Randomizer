@@ -16,7 +16,7 @@ def RandomizeSkillEnhancements():
         if isEarlyArtsCancel: # remove defaults first
             ArtsCancelSlots.append(DefaultArtsCancelSlots[DriverList.index(Driver)])
             RemainingUnusedDriverIDs.remove(DefaultArtsCancelSlots[DriverList.index(Driver)])
-            FirstSlotCost()
+            SlotCostZero([1])
         if isEarlyXYB:
             X_Slots.append(DefaultXSlots[DriverList.index(Driver)])
             RemainingUnusedDriverIDs.remove(DefaultXSlots[DriverList.index(Driver)])
@@ -24,7 +24,7 @@ def RandomizeSkillEnhancements():
             RemainingUnusedDriverIDs.remove(DefaultYSlots[DriverList.index(Driver)])
             B_Slots.append(DefaultBSlots[DriverList.index(Driver)])
             RemainingUnusedDriverIDs.remove(DefaultBSlots[DriverList.index(Driver)])
-            StartingArtSlotCosts()
+            SlotCostZero([4,7,10])
         if Driver == Zeke:
             ChosenID = random.choice(RemainingUnusedDriverIDs)
             ZekeEyeSlot = [ChosenID]
@@ -123,23 +123,12 @@ def RandomizeSkillEnhancements():
         enhancementFile.truncate()
         json.dump(enhanceFile, enhancementFile, indent=2, ensure_ascii=False)
         
-def FirstSlotCost(): # Used since art cancel gets put here
+def SlotCostZero(ids): # Used since art cancel gets put here
     for i in range(1, 7):
         with open(f"./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0{i}.json", 'r+', encoding='utf-8') as driverFiles:
             dFile = json.load(driverFiles)
             for item in dFile["rows"]:
-                if item["$id"] == 1: 
-                    item["NeedSp"] = 0
-            driverFiles.seek(0)
-            driverFiles.truncate()
-            json.dump(dFile, driverFiles, indent=2, ensure_ascii=False)
-
-def StartingArtSlotCosts(): # Used to reduce cost of "Start with X Art" skills
-    for i in range(1, 7):
-        with open(f"./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0{i}.json", 'r+', encoding='utf-8') as driverFiles:
-            dFile = json.load(driverFiles)
-            for item in dFile["rows"]:
-                if item["$id"] in [4,7,10]:
+                if item["$id"] in ids: 
                     item["NeedSp"] = 0
             driverFiles.seek(0)
             driverFiles.truncate()

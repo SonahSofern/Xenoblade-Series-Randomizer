@@ -40,13 +40,9 @@ def ChangeJSONLine(filenames: list[str], ids: list[int], keys: list[str], replac
         with open(filePath, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for item in data['rows']:
-                if replaceAll:
+                if replaceAll or (item["$id"] in ids):
                     for key in keys:
                         item[key] = replacement
-                elif item["$id"] in ids:
-                    for key in keys:
-                        item[key] = replacement
-                    break
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
