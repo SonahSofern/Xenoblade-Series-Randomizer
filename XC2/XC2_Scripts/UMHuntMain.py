@@ -1,7 +1,7 @@
 import json, random, IDs, EnemyRandoLogic, RaceMode, math, Options, time, FieldSkillAdjustments, UMHuntDebugFunctions, UMHuntShopCreation, TutorialShortening
 from Enhancements import *
 from BladeRandomization import Replacement2Original
-from scripts import Helper
+from scripts import Helper, JSONParser, PopupDescriptions
 
 #Keeping these 3 separate from the already existing IDs in EnemyRandoLogic in case I want to do some balancing or something
 AllUniqueMonsterDefaultIDs = [611, 612, 705, 706, 707, 708, 709, 710, 711, 712, 713, 715, 736, 738, 808, 809, 810, 811, 812, 814, 815, 816, 817, 819, 890, 891, 892, 893, 894, 895, 896, 898, 899, 926, 929, 953, 954, 955, 957, 958, 1019, 1020, 1023, 1025, 1026, 1101, 1102, 1104, 1106, 1108, 1109, 1111, 1112, 1113, 1114, 1115, 1131, 1132, 1134, 1155, 1156, 1157, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1255, 1256, 1258, 1260, 1261, 1262, 1264, 1265, 1563, 1564, 1566, 1567, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1670, 1774]
@@ -101,16 +101,7 @@ def Cleanup():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 10013:
-                row["nextID"] = 10464
-                row["scenarioFlag"] = 10009
-                row["nextIDtheater"] = 10464
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+    JSONParser.ChangeJSONLineInMultipleSpots(["common/EVT_listBf.json"], [10013], ["nextID", "scenarioFlag", "nextIDtheater"], [10464, 10009, 10464])
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/CHR_Dr.json", ["DefAcce", "DefWP", "DefSP"], 0)
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/CHR_Dr.json", ["DefLv"], 10)
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/CHR_Dr.json", ["DefWPType", "DefLvType"], 1)
@@ -134,13 +125,14 @@ def GimmickAdjustments():
     with open("./XC2/_internal/JsonOutputs/common/FLD_LODList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
-            if row["$id"] in [211, 226]: # door in urayan titan's head that blocks off Vampire Bride Marion, Ether Gust Wall thingy in Uraya (it gets dispelled mid-cutscene, unlike the one in Gormott)
+            if row["$id"] in [115, 117, 211, 226]: # door blocking gormott titan battleship hangar, door blocking gormott titan rest of battleship door in urayan titan's head that blocks off Vampire Bride Marion, Ether Gust Wall thingy in Uraya (it gets dispelled mid-cutscene, unlike the one in Gormott)
                 row["flag"]["Visible"] = 0
                 row["ScenarioFlagMin1"] = 1001
                 row["ScenarioFlagMax1"] = 10048
                 row["QuestFlag1"] = 0
                 row["QuestFlagMin1"] = 0
                 row["QuestFlagMax1"] = 0
+                #row["LODID"] = 0 # when this is enabled, you can fall through the floor if you target the wrong ids lol
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1012,7 +1004,7 @@ def RandomLandmarkCreation(): # Creates random landmarks and adds them to the DL
         with open("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
             # Movespeed Deed
-            data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": UMHuntEnableCondListIDs[0], "category": 2, "item_id": 0, "value": 1, "disp_item_info": 0, "getflag": 51161 + landmark})
+            data["rows"].append({"$id": CurrentID, "releasecount": 4, "title": CurrentNameID, "condition": UMHuntEnableCondListIDs[0], "category": 1, "item_id": 25249, "value": 1, "disp_item_info": 0, "getflag": 35400})
             CurrentID += 1
             CurrentNameID += 1
             # Landmarks
@@ -1317,3 +1309,63 @@ def PoppiswapCostChanges(): # Reduces cost of poppiswap stuff
     Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/ITM_HanaArtsEnh.json","./XC2/_internal/JsonOutputs/common/ITM_HanaAssist.json", "./XC2/_internal/JsonOutputs/common/ITM_HanaAtr.json", "./XC2/_internal/JsonOutputs/common/ITM_HanaNArtsSet.json", "./XC2/_internal/JsonOutputs/common/ITM_HanaRole.json"], ["NeedEther", "DustEther"], ['max(row[key] // 4, 1)'])
     Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_HanaPower.json"], ["EtherNum1", "EtherNum2", "EtherNum3"], ['max(row[key] // 4, 1)'])
     Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_HanaBase.json"], ["Circuit4Num", "Circuit5Num", "Circuit6Num"], ['max(row[key] // 10, 1)'])
+
+def Description():
+    RaceModeDesc = PopupDescriptions.Description()
+    RaceModeDesc.Header("Info: Setup")
+    RaceModeDesc.Text("Unique Monster Hunt uses a custom starting save file")
+    RaceModeDesc.Text("This save file can be found in the Randomizer download, in the folder titled 'UM Hunt Save'.")
+    RaceModeDesc.Text("CONSOLE: Use a homebrew save file manager and place the save file in the correct spot on your SD card.")
+    RaceModeDesc.Text(r"EMULATOR: To use this custom starting save file, place it in the emulator file path \nand\user\save\0000000000000000\BF50755B382CCC6AC0A69D441CBBF62C\0100E95004038000")
+    RaceModeDesc.Header("Info: Objective")
+    RaceModeDesc.Text(r"Defeat all waves of Unique Monsters to win!")
+    RaceModeDesc.Header("Suboption: Superboss Wave")
+    RaceModeDesc.Text(r"If you chose 10 waves in the spinbox, and also selected this suboption, you will also get 5 additional waves of Superbosses, on areas you have previously visited.")
+    RaceModeDesc.Text(r"Defeat those waves to warp to the credits!")
+    RaceModeDesc.Header("Suboption: Random Starting Landmarks")
+    RaceModeDesc.Text(r"If you chose the suboption 'Random Starting Landmarks', then the Landmarks you receive through the DLC rewards will be for random locations on the map.")
+    RaceModeDesc.Header("General Info:")
+    RaceModeDesc.Text(r"Start your run by walking down the stairs to discover your first area!")
+    RaceModeDesc.Text(r"At the start of each area, go to the DLC Items slot, renamed 'Voucher Reward'.")
+    RaceModeDesc.Image("UMHunt_voucher_reward.png", "XC2", 700)
+    RaceModeDesc.Text(r"Collect all rewards available from the DLC by pressing Y.")
+    RaceModeDesc.Text(r"This will give you Bounty Tokens, which are traded in at the Argentum Trade Guild, near the Lemour Inn skip travel point.")
+    RaceModeDesc.Image("UMHunt_bounty_token_shop.png", "XC2", 700)
+    RaceModeDesc.Text(r"Doing so will in turn give you some EXP, SP, and Doubloons.")
+    RaceModeDesc.Text(r"These Doubloons are used in the Argentum shops on the first floor to buy items for your characters, and the EXP/SP are crucial to making sure you are keeping up with the growing strength of the Unique Monsters!")
+    RaceModeDesc.Image("UMHunt_shops.png", "XC2", 700)
+    RaceModeDesc.Text(r"The shops may move between rounds, and the loot in most of them is randomly generated for each round, so if you see something you like, buy it now, as you may not see it again!")
+    RaceModeDesc.Text(r"The loot in the shops becomes better as more rounds go on.")
+    RaceModeDesc.Text(r"Also received from the DLC rewards are Landmarks, which allow for easier traversal of the maps.")
+    RaceModeDesc.Text(r"If you chose the suboption 'Random Starting Landmarks', then the Landmarks you receive through the DLC rewards will be for random locations on the map.")
+    RaceModeDesc.Text(r"When you have powered up enough, go defeat the Unique Monsters.")
+    RaceModeDesc.Image("UMHunt_enemy.png", "XC2", 700)
+    RaceModeDesc.Text(r"When all 4 have been defeated, you will progress to the next area and next set of Unique Monsters.")
+    RaceModeDesc.Text(r"Keep an eye out for Secret Shops on the maps with Unique Monsters, denoted by a green dot when you are close enough to see it on the map, but not in the menu.")
+    RaceModeDesc.Text(r"These Secret Shops have loot you can't find anywhere else, and so they're very helpful.")
+    RaceModeDesc.Text(r"Each map has a 50% chance to spawn a Secret Shop, and it will replace one random NPC on that map if it does spawn in.")
+    RaceModeDesc.Text(r"You can tell whether a Secret Shop has spawned on the map by seeing if any regular NPC on that map has any option to talk to them above their head, and if not, then a Secret Shop has spawned.")
+    RaceModeDesc.Image("UMHunt_SecretShop.png", "XC2", 700)
+    RaceModeDesc.Text(r"Unique Monsters may also drop loot when defeated.")
+    RaceModeDesc.Text(r"The loot they drop will be weaker than the loot in shops, but should still allow you to make a viable build with those items.")
+    RaceModeDesc.Text(r"Beating all sets of Unique Monsters will warp you to the credits.")
+    RaceModeDesc.Text(r"If you chose 10 waves, and also selected the 'Superboss Wave' suboption, you will also get 5 additional waves of Superbosses, on areas you have previously visited.")
+    RaceModeDesc.Text(r"Defeat those waves to warp to the credits!")
+    RaceModeDesc.Header(r"Warning: Ignored Settings")
+    RaceModeDesc.Text(r"This mode uses a lot of randomization features already by default, and so it will override the following settings, as the mode was balanced around having some of these on or off:")
+    RaceModeDesc.Text(r"Accessory Shops")
+    RaceModeDesc.Text(r"Collection Points")
+    RaceModeDesc.Text(r"Pouch Item Shops")
+    RaceModeDesc.Text(r"Treasure Chests")
+    RaceModeDesc.Text(r"Weapon Chip Shops")
+    RaceModeDesc.Text(r"Driver Accessories")
+    RaceModeDesc.Text(r"Blade Aux Cores")
+    RaceModeDesc.Text(r"Blade Weapon Chips")
+    RaceModeDesc.Text(r"Enemies")
+    RaceModeDesc.Text(r"Enemy Drops")
+    RaceModeDesc.Text(r"Faster Blade Skill Trees")
+    RaceModeDesc.Text(r"Faster Driver Skill Trees")
+    RaceModeDesc.Text(r"Faster Levels")
+    RaceModeDesc.Text(r"NG+ Blades")
+    RaceModeDesc.Text(r"Race Mode")
+    return RaceModeDesc

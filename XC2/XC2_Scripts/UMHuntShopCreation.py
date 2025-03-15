@@ -22,7 +22,7 @@ FullUnusedShopList = [x for x in FullShopList if x not in UsedShopIDs]
 ContinentInfo = {"Gormott": [10043, 10044, "ma05a", 6], "Uraya": [10088, 10079, "ma07a", 9], "Mor Ardain": [10156, 10149, "ma08a", 10], "Leftheria": [10197, 10192, "ma15a", 14], "Temperantia": [10233, 10224, "ma10a", 11], "Tantal": [10272, 10269, "ma13a", 13], "Spirit Crucible": [10325, 10323, "ma16a", 15], "Cliffs of Morytha": [10351, 10345, "ma17a", 16], "Land of Morytha": [10369, 10363, "ma18a", 18], "World Tree": [10399, 10393, "ma20a", 20]}
 
 #NPC IDs (used to give a shop to)
-UnusedBazaarNPCRowIDs = [2109, 2362, 2086, 2205, 2069, 2206, 2236, 2085, 2091, 2426, 2177, 2041, 2038, 2092, 2352, 2136, 2342, 2128, 2001, 2361, 2126, 2068, 2111, 2070, 2415, 2425, 2316, 2176, 2343, 2417, 2419, 2080, 2250, 2341, 2127, 2112, 2351, 2089, 2197, 2110, 2164, 2418, 2090, 2163, 2039, 2003, 2084, 2040, 2125, 2002, 2416, 2393, 2011, 2208, 2359, 2182, 2424, 2251, 2083, 2165, 2012]
+UnusedBazaarNPCRowIDs = [2109, 2362, 2086, 2205, 2069, 2206, 2236, 2085, 2091, 2426, 2177, 2041, 2038, 2092, 2352, 2136, 2342, 2128, 2001, 2361, 2126, 2068, 2111, 2070, 2415, 2425, 2316, 2176, 2343, 2417, 2419, 2080, 2250, 2341, 2127, 2112, 2351, 2089, 2197, 2110, 2164, 2418, 2090, 2163, 2039, 2003, 2084, 2040, 2125, 2002, 2416, 2393, 2011, 2359, 2208, 2182, 2424, 2251, 2083, 2165, 2012]
 
 UniqueNPCs = [2236, 2088, 2359, 2362, 2092, 2361, 2087, 2080, 2089] #NPCs that only show up once in the Bazaar
 
@@ -430,6 +430,7 @@ def RenameCrystals(NGPlusBladeCrystalIDs, DLCBladeCrystalIDs, TankBladeCrystalID
 
 def WeaponPowerLevel(): # Assigns appropriately powered enhancement and damage value based on rank of weapon
     WeaponStrengthList = Helper.ExtendListtoLength([], 20, "[]")
+    WeaponStrengthNameList = Helper.ExtendListtoLength([], 20, "[]")
     WeaponDamageRanges = Helper.ExtendListtoLength([[26, 75]], 20, "[inputlist[i-1][0] + 50, inputlist[i-1][1] + 50]")
     InvalidSkillEnhancements = [ArtCancel,EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, BladeSwapDamage, CatScimPowerUp, EvadeDrainHp, EvadeDriverArt, EtherCannonRange, ArtDamageHeal, DreamOfTheFuture, WPEnemiesBoost, ExpEnemiesBoost, MachineExecute, HumanoidExecute, AquaticExecute, AerialExecute, InsectExecute, BeastExecute, InstaKill, AegisPowerUp, TwinRingPowerUp, DrillShieldPowerUp, MechArmsPowerUp, VarSaberPowerUp, WhipswordPowerUp, BigBangPowerUp, DualScythesPowerUp, GreataxePowerUp, MegalancePowerUp, EtherCannonPowerUp, ShieldHammerPowerUp, ChromaKatanaPowerUp, BitballPowerUp, KnuckleClawsPowerUp]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
@@ -439,6 +440,17 @@ def WeaponPowerLevel(): # Assigns appropriately powered enhancement and damage v
         for row in data["rows"]:
             for i in range(1, 37):
                 WeaponStrengthList[row["Rank"] - 1].append(row[f"CreateWpn{i}"])
+            WeaponStrengthNameList[row["Rank"] - 1].append(row["Name"])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common_ms/itm_pcwpnchip_ms.json", 'r+', encoding='utf-8') as file: # Renames chips according to their rank
+        data = json.load(file)
+        for row in data["rows"]:
+            for rank in range(len(WeaponStrengthNameList)):
+                if row["$id"] in WeaponStrengthNameList[rank]:
+                    row["name"] = f"{row["name"]} [System:Color name=red]({rank + 1})[/System:Color]"
+                    break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -545,7 +557,7 @@ def CustomShopSetup(ChosenAreaOrder): # Sets up the custom shops with loot
     CopyUnusedBazaarNPCRowIDs = UnusedBazaarNPCRowIDs.copy()
     CopyFullUnusedShopList = FullUnusedShopList.copy()
     for shop in MultipleShopList:
-        for i in range(0, len(ChosenAreaOrder)):
+        for i in range(len(ChosenAreaOrder)):
             with open("./XC2/_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file:
                 data = json.load(file)
                 for row in data["rows"]:
@@ -1162,8 +1174,15 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
             if Shoplistnames[i] == name:
                 ShopFullListDict[name]["ma02a Row"].append(ShoplistNPCIDs[i])
                 ShopFullListDict[name]["NPC Position"].append(ShoplistNPCPositions[i])
-    for i in range(0, 10):
-        EnemyWaveNPCPositionSet = []
+    DebugSetShop = []
+    for i in range(SetCount):
+        DebugSetShop = []
+        for shop in ShopFullListDict:
+            if shop not in ["[System:Color name=green]Bounty Token[/System:Color] Bartering", "Manual Marketplace", "The Poppishop"]:
+                if ShopFullListDict[shop]["NPC Position"] != []:
+                    if ShopFullListDict[shop]["NPC Position"][i] != "":
+                        DebugSetShop.append(ShopFullListDict[shop]["NPC Position"][i])
+        #print(DebugSetShop)
     with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file: # Adds the exchange tasks
         data = json.load(file)
         ShopChangeStartRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", "$id") + 1 # used in MNU_ShopList for "TableID"
@@ -1267,6 +1286,8 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
                 for row in data["rows"]: # Need to account for more lines where the original NPC speaks, they overlap bodies and it looks weird
                     if row["NpcID"] == OrigNPCID:
                         row["Condition"] = UMHuntDisableCondListID
+                        row["Mot"] = 0
+                        row["TimeRange"] = 0
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1292,6 +1313,7 @@ def ReplaceBana(): # I want to use Bana as the exchange shop, so I move rumtumtu
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of interest
+    SecretShopList = []
     CreateSecretShopReceipts()
     SecretShopRewardGeneration(ChosenAreaOrder)
     SecretEmptyFillerList = Helper.ExtendListtoLength([], 5, "0")
@@ -1411,17 +1433,14 @@ def SecretShopRewardGeneration(ChosenAreaOrder): # Makes the reward sets for the
         7: "Aux Cores"
     }
 
-    SecretShopChips = []
-    for i in range(10, 20):
-        SecretShopChips.extend(WeaponRankList[i])
-
     # Now assign rewards
     for j in range(0, len(ChosenAreaOrder)):
+        SecretShopChips = []
         SetRewards1 = [0,0,0,0,0]
         SetRewards2 = [0,0,0,0,0]
         SetQuantities1 = [1,1,1,1,1]
         SetQuantities2 = [1,1,1,1,1]
-        RewardTypeChoices = random.choices([1, 2, 3, 4, 5, 6, 7], weights = [20, 20, 15, 10, 15, 5, 15], k = 5) # Choose Type of Reward
+        RewardTypeChoices = random.choices([1, 2, 3, 4, 5, 6, 7], weights = [20, 20, 15, 10, 10, 10, 15], k = 5) # Choose Type of Reward
         ShopCostReceiptList = [0,0,0,0,0]
         for i in range(0, 5): # For each reward,
             match RewardTypeChoices[i]:
@@ -1442,12 +1461,14 @@ def SecretShopRewardGeneration(ChosenAreaOrder): # Makes the reward sets for the
                     SetQuantities2[i] = 0
                     ShopCostReceiptList[i] = 2
                 case 4: # Bounty Tokens
-                    RandomBountyToken = random.choice(Helper.InclRange(25479, 25481))
+                    RandomBountyToken = random.choice(Helper.InclRange(25479, 25480 + j))
                     SetRewards1[i] = RandomBountyToken
                     SetRewards2[i] = 0
                     SetQuantities2[i] = 0
                     ShopCostReceiptList[i] = 3
                 case 5: # Weapon Chips
+                    for k in range(j + 6, j + 11):
+                        SecretShopChips.extend(WeaponRankList[k])
                     RandomWeaponChips = random.choices(SecretShopChips, k = 2)
                     SetRewards1[i] = RandomWeaponChips[0]
                     SetRewards2[i] = RandomWeaponChips[1]

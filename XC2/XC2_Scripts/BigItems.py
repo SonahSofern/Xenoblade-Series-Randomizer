@@ -1,5 +1,7 @@
 import json
 import random
+from scripts import PopupDescriptions
+import Options
 
 def BigItemsRando():
     with open("./XC2/_internal/JsonOutputs/common_gmk/RSC_dropitemParam.json", 'r+', encoding='utf-8') as file:
@@ -11,3 +13,10 @@ def BigItemsRando():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def BigItemsDesc():
+    BigItemDesc = PopupDescriptions.Description()
+    BigItemDesc.Header(Options.FieldItemOption.name)
+    BigItemDesc.Text("When enabled, this option randomizes the size and spinrate of all items dropped from Enemies, Collection Points, and Treasure Chests.")
+    BigItemDesc.Image("RandomLootSize.png", "XC2", 700)
+    return BigItemDesc

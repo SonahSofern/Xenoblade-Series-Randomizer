@@ -1,4 +1,4 @@
-from scripts import Helper, JSONParser
+from scripts import Helper, JSONParser, PopupDescriptions
 import json
 import EnemyRandoLogic as EnemyRandoLogic
 import random
@@ -26,7 +26,7 @@ def RaceModeChanging():
     #Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
 
     AreaList1 = [41, 68] #41, 68
-    AreaList2 = [99, 152] #99, 152
+    AreaList2 = [99] #99, 152
     AreaList3 = [125, 133, 168] #125, 133, 168
     AreaList4 = [175, 187] #175, 187
 
@@ -113,7 +113,7 @@ def RaceModeChanging():
             if (row["PRTQuestID"] != 0) and (row["$id"] >= 25):
                 row["PRTQuestID"] = 6
             if row["$id"] == 15: # Talking to Spraine
-                row["NextQuestA"] = NextQuestAList[ChosenIndices[0]]
+                row["NextQuestA"] = 100 #NextQuestAList[ChosenIndices[0]]
         for i in range(0, len(ChosenIndices) - 1):
             for row in data["rows"]:
                 if row["$id"] == LastQuestAList[ChosenIndices[i]]:
@@ -148,16 +148,19 @@ def RaceModeChanging():
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 10013:
-                if ChosenIndices[0] == 0:
-                    # Gormott
-                    row["nextID"] = 10035
-                    row["scenarioFlag"] = 2002
-                    row["nextIDtheater"] = 10035
-                if ChosenIndices[0] == 1:
-                    # Uraya
-                    row["nextID"] = 10088
-                    row["scenarioFlag"] = 3005
-                    row["nextIDtheater"] = 10088
+                row["nextID"] = 10156
+                row["scenarioFlag"] = 4025
+                row["nextIDtheater"] = 10156
+                #if ChosenIndices[0] == 0:
+                #    # Gormott
+                #    row["nextID"] = 10035
+                #    row["scenarioFlag"] = 2002
+                #    row["nextIDtheater"] = 10035
+                #if ChosenIndices[0] == 1:
+                #    # Uraya
+                #    row["nextID"] = 10088
+                #    row["scenarioFlag"] = 3005
+                #    row["nextIDtheater"] = 10088
         for i in range(0, len(ChosenIndices) - 1):
             for row in data["rows"]:
                 if row["$id"] == FinalContinentCutscenes[ChosenIndices[i]]:
@@ -215,6 +218,67 @@ def RaceModeChanging():
     if Options.RaceModeOption_DLC.GetState():
         print("Nerfing Corvin and Crossette")
         DLCItemChanges()
+    SeedHash()
+
+def RaceModeDescription():
+    RaceModeDesc = PopupDescriptions.Description()
+    RaceModeDesc.Header("Info: Setup")
+    RaceModeDesc.Text("Race Mode uses a custom starting save file.")
+    RaceModeDesc.Text("This save file can be found in the Randomizer download, in the folder titled 'RaceModeSave'.")
+    RaceModeDesc.Text("CONSOLE: Use a homebrew save file manager and place the save file in the correct spot on your SD card.")
+    RaceModeDesc.Text(r"EMULATOR: To use this custom starting save file, place it in the emulator file path \nand\user\save\0000000000000000\BF50755B382CCC6AC0A69D441CBBF62C\0100E95004038000")
+    RaceModeDesc.Header("Info: Explanation of Race Mode")
+    RaceModeDesc.Text(r"The intent of Race Mode is to allow for the player to experience the joys of the normal game, in a shorter single playsession, aiming for 3-4 hours for experienced individuals.")
+    RaceModeDesc.Text(r"This is accomplished by reducing the amount of grinding and reducing the portion of the story that you play through (to smaller chunks called Storylines).")
+    RaceModeDesc.Text(r"Most of your character's power in Race Mode will come from the custom loot tables given to the Treasure Chests on the Continents with the Storylines you are required to complete.")
+    RaceModeDesc.Text(r"You could even have a friendly race between people on the same seed, and compete to see who finishes the game first!")
+    RaceModeDesc.Text(r"To import those settings, copy the settings string into the field next to the 'Settings' label at the bottom of the randomizer.")
+    RaceModeDesc.Text(r"To begin Race Mode when in game, click the 'Race Mode Start' option on the main menu.")
+    RaceModeDesc.Text(r"The save file starts in NG+, so you have access to your Hidden Skill Trees and Pneuma from the start of the game.")
+    RaceModeDesc.Text(r"The difficulty level of the game is set to and stuck at a minimum of Normal. (The values for Easy have been changed to match Normal.)")
+    RaceModeDesc.Header("Info: Storylines")
+    RaceModeDesc.Text(r"You have to complete 4 Storylines to unlock access to the end of the game, where you win by defeating Artifice Aion.")
+    RaceModeDesc.Text(r"To start the first Storyline, talk to the NPC called Spraine, located near the Maelstrom.")
+    RaceModeDesc.Text(r"Completing one Storyline will automatically warp you via cutscene to the new continent containing the next required Storyline.")
+    RaceModeDesc.Text(r"The 4 Storylines are selected from the following:")
+    RaceModeDesc.Text(r"1 of either Gormott (Defeat Morag after rescuing Nia) or Uraya (Defeat Akhos and Malos)")
+    RaceModeDesc.Text(r"1 of either Mor Ardain (Defeat Patroka and Mikhail) or Leftherian Archipelago (Defeat Zeke)")
+    RaceModeDesc.Text(r"1 of either Indoline Praetorium + Temperantia (Defeat Giga Rosa) or Tantal (Defeat Jin) or Spirit Crucible Elpys (Defeat Phantasms)")
+    RaceModeDesc.Text(r"1 of either Cliffs of Morytha + Land of Morytha (Defeat Infernal Guldo) or World Tree (Defeat Amalthus)")
+    RaceModeDesc.Header("Suboption: Zohar Fragment Hunt")
+    RaceModeDesc.Text(r"In order to complete a Storyline, you also must find 3-6 Mysterious Parts (depending on the total number of chests in that area) from that Storyline section.")
+    RaceModeDesc.Text(r"These can be found in treasure chests throughout the continents the given Storyline takes place on.")
+    RaceModeDesc.Text(r"You will not be able to progress past the final quest in a Storyline without finding these items.")
+    RaceModeDesc.Text(r"Roughly 1/3rd of the chests on the Storyline area contain a Mysterious Part for that area.")
+    RaceModeDesc.Header("Suboption: DLC Item Removal")
+    RaceModeDesc.Text(r"If enabled, the DLC gifts will all be replaced with 1G each, except for the DLC Quests, and 60000 Ether Crystals for Poppi.")
+    RaceModeDesc.Header("The following sections describe some additional features for Race Mode which are always enabled.") # change this to not be a header
+    RaceModeDesc.Header("Additional Feature: Less Grinding")
+    RaceModeDesc.Text(r"When you warp to a new Continent, the landmark that you appear near when you spawn in will give massively increased XP, in an attempt to bridge the power level gap between the two continents.")
+    RaceModeDesc.Text(r"You can only use this XP by resting at an Inn and leveling up that way, so it is a good idea to go to a previous inn and level up immediately.")
+    RaceModeDesc.Header("Warning: Spirit Crucible")
+    RaceModeDesc.Text(r"!! For Spirit Crucible Elpys in particular, once you get there, warp first to the Canyon of Husks landmark (which warps you to the Spirit Crucible Elpys landmark), then you can go to the inn and level up as needed. The Spirit Crucible Entrance landmark is required in order to receive your bonus xp and SP for this area. This is a known issue that currently has no workaround !!")
+    RaceModeDesc.Text(r"You also get a large amount of SP for the Driver Skill Tree at the First and Third Storyline sections of the game.")
+    RaceModeDesc.Text(r"The XP gained from fighting higher level enemies is increased.")
+    RaceModeDesc.Text(r"The damage taken modifier when fighting higher level enemies is capped at 200%.")
+    RaceModeDesc.Text(r"Rare Blades will unlock their Blade Skill Tree ranks by reaching the first landmark of the Second and Fourth Storyline sections.")
+    RaceModeDesc.Text(r"So when you reach the Anangham #2 Dock landmark in Mor Ardain, for example, all Rare Blades unlock the second and third levels of their skill trees.")
+    RaceModeDesc.Text(r"DLC-exclusive blades are released from the Land of Challenge restriction, allowing you to use them anywhere without beating the appropriate Challenge Battle.")
+    RaceModeDesc.Text(r"The SP Cost of your all skills on your Hidden Skill trees are reduced by 80%.")
+    RaceModeDesc.Header("Additional Feature: Shop Changes")
+    RaceModeDesc.Text(r"Shynini (of the Argentum Trade Guild, F1) will sell Common, Rare, and Legendary Core Crystals.")
+    RaceModeDesc.Text(r"Additionally, the Shop Deeds you get for buying all items in a shop are removed, as they are intended to be shuffled into the pool of treasure chests with the Zohar Fragment Hunt setting.")
+    RaceModeDesc.Text(r"All Shop Deeds now give a 5% movement speed buff.")
+    RaceModeDesc.Text(r"The amount of each Pouch Item you can carry is increased to a minimum of 10.")
+    RaceModeDesc.Header("Additional Feature: Custom Loot")
+    RaceModeDesc.Text(r"This option replaces all chest loot on Race Mode continents with custom loot tables containing accessories, weapon manuals, pre-completed aux cores, weapon chips, and more.")
+    RaceModeDesc.Text(r"'Movespeed Deeds' are also added to the pool, each granting a 5% increase to your movement speed.")
+    RaceModeDesc.Text(r"When this option is on, note that enemies will only drop gold, so seeking out these chests is your main method of increasing your character power level!")
+    RaceModeDesc.Text(r"Custom Core Crystals containing specific Rare Blades will also be shuffled into the pool.")
+    RaceModeDesc.Header("Additional Feature: Starting Items:")
+    RaceModeDesc.Text(r"You start with all 5 drivers with their associated blades (Pyra/Mythra, Dromarch, Poppy α, PoppyQT, PoppyQTπ, Pandoria, Brighid).")
+    RaceModeDesc.Text(r"You start with 100000g.")
+    return RaceModeDesc
 
 def PoppiswapCostReductions(): # reduces cost of poppiswap stuff
     Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/ITM_HanaArtsEnh.json","./XC2/_internal/JsonOutputs/common/ITM_HanaAssist.json", "./XC2/_internal/JsonOutputs/common/ITM_HanaAtr.json", "./XC2/_internal/JsonOutputs/common/ITM_HanaNArtsSet.json", "./XC2/_internal/JsonOutputs/common/ITM_HanaRole.json"], ["NeedEther", "DustEther"], ['row[key] // 2'])
@@ -256,15 +320,6 @@ def DetermineNGPlusBladeCrystalIDs():
         return NGPlusBladeCrystalIDs
 
 def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade trust/skill unlock requirements to the same condition as reaching the 2nd and 4th race mode areas
-    KeyAchievementIDs = [15, 25, 0, 35, 45, 55, 65, 75, 85, 95, 105, 0, 0, 115, 125, 135, 145, 375, 385, 155, 185, 165, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295, 305, 315, 325, 335, 345, 195, 355, 365, 395, 0, 415, 425, 465, 455, 445, 435, 405, 175, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95, 405, 455, 455, 445, 435, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 365, 85, 1668, 1678, 1648, 1658, 1739, 1749, 0, 1759, 1739, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 325, 325, 325, 1679, 1689, 1699, 1709, 1719, 1729]
-    KeyAchievementIDs = list(set([x for x in KeyAchievementIDs if x != 0]))
-    RelevantChosenIndices = [x for x in ChosenIndices if x != 9]
-    RelevantLocation = [501, 701, 832, 1501, 1101, 1301, 1601, 1701, 2012]
-    MapIDs = [6, 9, 10, 14, 12, 13, 15, 16, 20]
-    TaskIDs = [143, 309, 147, 285]
-    TaskLogIDs = [659, 660, 661, 662]
-    LocationNames = ["Gormott", "Uraya", "Mor Ardain", "Leftheria", "Indol", "Tantal", "Spirit Crucible Elpys", "the Cliffs of Morytha", "the World Tree"]
-
     StarterBladeTrustSetAppearance = [16, 12, 16, 14, 16] #rank 1
     A1TrustSetAppearance = [16, 12, 16, 14, 16] # rank 1
     A2TrustSetAppearance = [16, 16, 16, 14, 16] # rank 3
@@ -279,14 +334,17 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade trust
     A3BladeIDs = []
     A4BladeIDs = [1043, 1044, 1045, 1046, 1047, 1048, 1049, 1011]
 
-    ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
-    ValidCrystalListIDs = [x for x in ValidCrystalListIDs if x not in NGPlusBladeCrystalIDs]
-    CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./XC2/_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
-    A1BladeIDs = CorrespondingBladeIDs[:12]
-    del CorrespondingBladeIDs[:12]
-    A2BladeIDs = CorrespondingBladeIDs[:12]
-    del CorrespondingBladeIDs[:12]
-    A3BladeIDs = CorrespondingBladeIDs
+    if NGPlusBladeCrystalIDs == None:
+        StarterBladeIDs = [x for x in Helper.InclRange(1001, 1132) if x not in A4BladeIDs]
+    else:
+        ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
+        ValidCrystalListIDs = [x for x in ValidCrystalListIDs if x not in NGPlusBladeCrystalIDs]
+        CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./XC2/_internal/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
+        A1BladeIDs = CorrespondingBladeIDs[:12]
+        del CorrespondingBladeIDs[:12]
+        A2BladeIDs = CorrespondingBladeIDs[:12]
+        del CorrespondingBladeIDs[:12]
+        A3BladeIDs = CorrespondingBladeIDs
     AllBladeIDs = [StarterBladeIDs, A1BladeIDs, A2BladeIDs, A3BladeIDs, A4BladeIDs]
 
     ArtandSkillCols = ["ArtsAchievement1", "ArtsAchievement2", "ArtsAchievement3", "SkillAchievement1", "SkillAchievement2", "SkillAchievement3"]
@@ -317,59 +375,48 @@ def ChangeBladeLevelUnlockReqs(NGPlusBladeCrystalIDs): # changes the blade trust
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-    with open("./XC2/_internal/JsonOutputs/common/FLD_Achievement.json", 'r+', encoding='utf-8') as file: #we need to change FLD_Achievement ID 1 to walk 1 step total
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 1:
-                    row["StatsID"] = 60
-                    row["Count"] = 1
-                    row["DebugName"] = "WALK_TOTAL"
-                    break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+    JSONParser.ChangeJSONLineInMultipleSpots(["common/FLD_Achievement.json"],[1], ["StatsID", "Count", "DebugName"], [60, 1, "WALK_TOTAL"])
+
+    MaxConditionListID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
+
+    MaxQuestConditionID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_QuestCondition.json", "$id") + 1
+
+    JSONParser.ExtendJSONFile("common/FLD_QuestCondition.json", [[{"$id": MaxQuestConditionID, "ConditionID": MaxConditionListID, "MapID": 0, "NpcID": 0}, {"$id": MaxQuestConditionID + 1, "ConditionID": MaxConditionListID + 1, "MapID": 0, "NpcID": 0}]])
 
     with open("./XC2/_internal/JsonOutputs/common/FLD_QuestTaskAchievement.json", 'r+', encoding='utf-8') as file: #now we need to modify the FLD_QuestTaskAchievement
         data = json.load(file)
-        for i in range(0, 4):
-            for row in data["rows"]:
-                if row["$id"] <= 7004:
-                    row["TaskType1"] = 5
-                    row["TaskID1"] = TaskIDs[row["$id"]-7001]
-                    row["TaskCondition1"] = 0
-                if row["$id"] == 7005:
-                    row["TaskType1"] = 12
-                    row["TaskID1"] = 1
-                    row["TaskCondition1"] = 0
-                    break
+        for row in data["rows"]:
+            if row["$id"] == 7002:
+                row["TaskType1"] = 10
+                row["TaskID1"] = MaxQuestConditionID
+                row["TaskCondition1"] = 0
+            elif row["$id"] == 7004:
+                row["TaskType1"] = 10
+                row["TaskID1"] = MaxQuestConditionID + 1
+                row["TaskCondition1"] = 0
+            elif row["$id"] == 7005:
+                row["TaskType1"] = 12
+                row["TaskID1"] = 1
+                row["TaskCondition1"] = 0
+                break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestReach.json", 'r+', encoding='utf-8') as file:  #modifying the tasks where you need to reach a certain location
-        data = json.load(file)
-        for i in range(0, 4):
-            for row in data["rows"]:
-                if row["$id"] == TaskIDs[i]:
-                    row["Category"] = 2
-                    row["MapID"] = MapIDs[RelevantChosenIndices[i]]
-                    row["PlaceID"] = RelevantLocation[RelevantChosenIndices[i]]
-                    break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+    MaxConditionScenarioID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionScenario.json", "$id") + 1
+    JSONParser.ExtendJSONFile("common/FLD_ConditionList.json", [[{"$id": MaxConditionListID,"Premise": 0,"ConditionType1": 1,"Condition1": MaxConditionScenarioID,"ConditionType2": 0,"Condition2": 0,"ConditionType3": 0,"Condition3": 0,"ConditionType4": 0,"Condition4": 0,"ConditionType5": 0,"Condition5": 0,"ConditionType6": 0,"Condition6": 0,"ConditionType7": 0,"Condition7": 0,"ConditionType8": 0,"Condition8": 0}, {"$id": MaxConditionListID + 1,"Premise": 0,"ConditionType1": 1,"Condition1": MaxConditionScenarioID + 1,"ConditionType2": 0,"Condition2": 0,"ConditionType3": 0,"Condition3": 0,"ConditionType4": 0,"Condition4": 0,"ConditionType5": 0,"Condition5": 0,"ConditionType6": 0,"Condition6": 0,"ConditionType7": 0,"Condition7": 0,"ConditionType8": 0,"Condition8": 0}]])
+    JSONParser.ExtendJSONFile("common/FLD_ConditionScenario.json", [[{"$id": MaxConditionScenarioID, "ScenarioMin": 4025, "ScenarioMax": 10048, "NotScenarioMin": 0, "NotScenarioMax": 0},{"$id": MaxConditionScenarioID + 1, "ScenarioMin": 7044, "ScenarioMax": 10048, "NotScenarioMin": 0, "NotScenarioMax": 0}]])
 
     with open("./XC2/_internal/JsonOutputs/common_ms/fld_quest_achievement.json", 'r+', encoding='utf-8') as file: #modifying the text files that describe what you need to do to unlock the node
         data = json.load(file)
-        for i in range(0, 4):
-            for row in data["rows"]:
-                if row["$id"] == TaskLogIDs[i]:
-                    row["name"] = f"Reach {LocationNames[RelevantChosenIndices[i]]}"
-                    break
-            for row in data["rows"]:
-                if row["$id"] == 663:
-                    row["name"] = "Unlocked once you unlock the \n corresponding Trust Level."
-                    break
+        for row in data["rows"]:
+            if row["$id"] in [659, 660]:
+                row["name"] = "Reach the second Race Mode continent."
+            elif row["$id"] in [661, 662]:
+                row["name"] = "Reach the fourth Race Mode continent."
+            elif row["$id"] == 663:
+                row["name"] = "Unlocked once you unlock the \n corresponding Trust Level."
+                break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -915,24 +962,10 @@ def BladeTreeMaxRewardChange(): # When a blade skill tree completes, rewards tha
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def LandmarkConditions(): # Makes Cliffs of Morytha and Spirit Crucible Elpys available on map if they're rolled as a race mode dungeon, we start with a second landmark unlocked in their area, but you can't open the menu to skip travel to it until you get a minimum scenario flag matching the area. 
-    ExtraConditionIDs = []
-    with open("./XC2/_internal/JsonOutputs/common/FLD_ConditionScenario.json", 'r+', encoding='utf-8') as file: 
-        data = json.load(file)
-        data["rows"].append({"$id": 322, "ScenarioMin": 1001, "ScenarioMax": 7018, "NotScenarioMin": 0, "NotScenarioMax": 0})
-        data["rows"].append({"$id": 323, "ScenarioMin": 1001, "ScenarioMax": 7043, "NotScenarioMin": 0, "NotScenarioMax": 0})
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    ExtraConditionIDs.append(322)
-    ExtraConditionIDs.append(323)
-    with open("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file: 
-        data = json.load(file)
-        ExtraScenarioIDs = [3903, 3904]
-        for i in range(0, len(ExtraConditionIDs)):
-            data["rows"].append({"$id": ExtraScenarioIDs[i], "Premise": 0, "ConditionType1": 1, "Condition1": ExtraConditionIDs[i], "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0 , "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+    MaxConditionScenarioID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionScenario.json", "$id") + 1
+    JSONParser.ExtendJSONFile("common/FLD_ConditionScenario.json", [[{"$id": MaxConditionScenarioID, "ScenarioMin": 1001, "ScenarioMax": 7018, "NotScenarioMin": 0, "NotScenarioMax": 0}, {"$id": MaxConditionScenarioID + 1, "ScenarioMin": 1001, "ScenarioMax": 7018, "NotScenarioMin": 0, "NotScenarioMax": 0}]])
+    MaxConditionListID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
+    JSONParser.ExtendJSONFile("common/FLD_ConditionList.json", [[{"$id": MaxConditionListID,"Premise": 0,"ConditionType1": 1,"Condition1": MaxConditionScenarioID,"ConditionType2": 0,"Condition2": 0,"ConditionType3": 0,"Condition3": 0,"ConditionType4": 0,"Condition4": 0,"ConditionType5": 0,"Condition5": 0,"ConditionType6": 0,"Condition6": 0,"ConditionType7": 0,"Condition7": 0,"ConditionType8": 0,"Condition8": 0}, {"$id": MaxConditionListID + 1,"Premise": 0,"ConditionType1": 1,"Condition1": MaxConditionScenarioID + 1,"ConditionType2": 0,"Condition2": 0,"ConditionType3": 0,"Condition3": 0,"ConditionType4": 0,"Condition4": 0,"ConditionType5": 0,"Condition5": 0,"ConditionType6": 0,"Condition6": 0,"ConditionType7": 0,"Condition7": 0,"ConditionType8": 0,"Condition8": 0}]])
     if ChosenIndices[2] == 6: # Spirit Crucible Chosen
         with open("./XC2/_internal/JsonOutputs/common_gmk/ma16a_FLD_LandmarkPop.json", 'r+', encoding='utf-8') as file: # Turning Canyon of Husks into a second Landmark that warps you to Spirit Crucible Entrance
             data = json.load(file)
@@ -943,7 +976,7 @@ def LandmarkConditions(): # Makes Cliffs of Morytha and Spirit Crucible Elpys av
                     row["category"] = 0
                     row["MAPJUMPID"] = 168
                     row["menuPriority"] = 20
-                    row["stoff_cndID"] = 3903 # only unlock if we have min scenario flag corresponding to reaching the area
+                    row["stoff_cndID"] = MaxConditionListID # only unlock if we have min scenario flag corresponding to reaching the area
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
@@ -954,7 +987,7 @@ def LandmarkConditions(): # Makes Cliffs of Morytha and Spirit Crucible Elpys av
                 if row["$id"] == 1701:
                     row["menuPriority"] = 10
                 if row["$id"] == 1706:
-                    row["stoff_cndID"] = 3904 #only unlock if we have min scenario flag corresponding to reaching the area
+                    row["stoff_cndID"] = MaxConditionListID + 1 #only unlock if we have min scenario flag corresponding to reaching the area
                     row["menuPriority"] = 20
                     row["category"] = 0
                     row["MAPJUMPID"] = 175
@@ -1126,22 +1159,21 @@ def ChestTypeMatching():  # Chest type matches Contents
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+def CTMCDescription():
+    CTMCDesc = PopupDescriptions.Description()
+    CTMCDesc.Header(Options.CTMCOption.name)
+    CTMCDesc.Text("CTMC will let you know at a glance what is inside a chest or barrel. It will help you decide what chests are worthwhile to get.")
+    CTMCDesc.Image("CTMC.png", "XC2")
+    return CTMCDesc
+
 def HideMapAreas(ScenarioFlagLists): # Adding conditions for each area's map to be unlocked
     MapIDsforRaceModeAreas = [[4],[5],[6],[10],[7,8],[9],[11],[12,13],[14],[15]]
-    with open("./XC2/_internal/JsonOutputs/common/FLD_ConditionScenario.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for i in range(0, len(ChosenIndices)):
-            data["rows"].append({"$id": 324 + i, "ScenarioMin": ScenarioFlagLists[ChosenIndices[i]], "ScenarioMax": 10048, "NotScenarioMin": 0, "NotScenarioMax": 0})
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for i in range(0, len(ChosenIndices)):
-            data["rows"].append({"$id": 3905 + i, "Premise": 0, "ConditionType1": 1, "Condition1": 324 + i, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+    MaxConditionScenarioID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionScenario.json", "$id") + 1
+    for i in range(len(ChosenIndices)):
+        JSONParser.ExtendJSONFile("common/FLD_ConditionScenario.json",[[{"$id": MaxConditionScenarioID + i, "ScenarioMin": ScenarioFlagLists[ChosenIndices[i]], "ScenarioMax": 10048, "NotScenarioMin": 0, "NotScenarioMax": 0}]])
+    MaxConditionListID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
+    for i in range(len(ChosenIndices)):
+        JSONParser.ExtendJSONFile("common/FLD_ConditionList.json",[[{"$id": MaxConditionListID + i, "Premise": 0, "ConditionType1": 1, "Condition1": MaxConditionScenarioID + i, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0}]])
     with open("./XC2/_internal/JsonOutputs/common/MNU_WorldMapCond.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
@@ -1149,9 +1181,9 @@ def HideMapAreas(ScenarioFlagLists): # Adding conditions for each area's map to 
                 for i in range(0, len(ChosenIndices)):
                     for j in range(0, len(MapIDsforRaceModeAreas[ChosenIndices[i]])):
                         if row["$id"] == MapIDsforRaceModeAreas[ChosenIndices[i]][j]:
-                            row["cond1"] = 3905 + i
+                            row["cond1"] = MaxConditionListID + i
                             break
-                if row["cond1"] <= 3000:
+                if row["cond1"] <= 3000: #this just disables the conditions
                     row["cond1"] = 3472   
         file.seek(0)
         file.truncate()
@@ -1161,64 +1193,68 @@ def ScriptAdjustments(): # For individual script changes
     with open("./XC2/_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # adjust story events, changing scenario flag
         data = json.load(file)
         for row in data["rows"]:
-            if row["$id"] == 10034: # this lets us start at the start of gormott but not have the broken objective pointer
-                row["chgEdID"] = 0
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10036: # this lets us start at the start of gormott but not have the broken objective pointer
-                row["nextID"] = 10034
-                row["nextIDtheater"] = 10034
-            if row["$id"] == 10189:
-                row["linkID"] = 0
-                row["envSeam"] = 0
-            if row["$id"] == 10094: # script that causes Vandham to join is name chapt03 startid 5
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10096: #
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10107: # script for the second time Vandham joins
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10129: # script for when Vandham dies (fixes bug where Roc on Rex gets deleted when Vandham dies)
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10211: # script that removes morag
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10213: # script that readds morag
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10240: # need to hard code the chapter transition for indol and temperantia section because I break some stuff to make warping between continents work.
-                row["scenarioFlag"] = 6001
-                row["nextID"] = 10244
-                row["nextIDtheater"] = 10244
-                row["linkID"] = 0
-            if row["$id"] == 10260: #removing script that removes morag
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10269: #removing script that removes morag
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10304:
-                row["linkID"] = 0
-            if row["$id"] == 10366: # need to hard code the leap between cliffs and land of morytha because I break some stuff to make warping between continents work.
-                row["scenarioFlag"] = 8001
-                row["nextID"] = 10369
-                row["nextIDtheater"] = 10369
-            if row["$id"] == 10370:
-                row["scriptName"] = "chapt08"
-                row["scriptStartId"] = 6
-            if row["$id"] == 10371:
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-            if row["$id"] == 10411: # fix for world tree chapter 9 transition
-                row["nextID"] = 10427
-                row["nextIDtheater"] = 10427
-                row["linkID"] = 0
-                row["scenarioFlag"] = 9008
-            if row["$id"] == 10451: # end of world tree
-                row["linkID"] = 0
+            CurrRowID = row["$id"] # think this avoids having to find the id in the row object for each case check
+            match CurrRowID:
+                case 10034: # this lets us start at the start of gormott but not have the broken objective pointer
+                    row["chgEdID"] = 0
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10036: # this lets us start at the start of gormott but not have the broken objective pointer
+                    row["nextID"] = 10034
+                    row["nextIDtheater"] = 10034
+                case 10189:
+                    row["linkID"] = 0
+                    row["envSeam"] = 0
+                case 10094: # script that causes Vandham to join is name chapt03 startid 5
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10096: 
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10107: # script for the second time Vandham joins
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10129: # script for when Vandham dies (fixes bug where Roc on Rex gets deleted when Vandham dies)
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10211: # script that removes morag
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10213: # script that readds morag
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10240: # need to hard code the chapter transition for indol and temperantia section because I break some stuff to make warping between continents work.
+                    row["scenarioFlag"] = 6001
+                    row["nextID"] = 10244
+                    row["nextIDtheater"] = 10244
+                    row["linkID"] = 0
+                case 10260: #removing script that removes morag
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10269: #removing script that removes morag
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10304:
+                    row["linkID"] = 0
+                case 10366: # need to hard code the leap between cliffs and land of morytha because I break some stuff to make warping between continents work.
+                    row["scenarioFlag"] = 8001
+                    row["nextID"] = 10369
+                    row["nextIDtheater"] = 10369
+                case 10370:
+                    row["scriptName"] = "chapt08"
+                    row["scriptStartId"] = 6
+                case 10371:
+                    row["scriptName"] = ""
+                    row["scriptStartId"] = 0
+                case 10411: # fix for world tree chapter 9 transition
+                    row["nextID"] = 10427
+                    row["nextIDtheater"] = 10427
+                    row["linkID"] = 0
+                    row["scenarioFlag"] = 9008
+                case 10451: # end of world tree
+                    row["linkID"] = 0
+                case _:
+                    pass
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)

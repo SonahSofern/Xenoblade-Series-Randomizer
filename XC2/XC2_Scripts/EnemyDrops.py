@@ -32,7 +32,7 @@ def RandoEnemyDrops():
             for i in range(1,9):
                 if not Helper.OddsCheck(odds): # Check spinbox
                     continue
-                if drop[f"ItemID{i}"] == 0: # Ignore empty spots in points
+                if drop[f"ItemID{i}"] in [0, 30380] : # Ignore empty spots in points, and Feris Beastmeat for Torna
                     continue
                 drop[f"ItemID{i}"] = random.choice(ValidReplacements) # Make our selection
         enDropFile.seek(0)

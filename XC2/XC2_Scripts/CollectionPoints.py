@@ -32,7 +32,7 @@ def RandoCollectionPoints():
                     for i in range(1,5):
                         if not Helper.OddsCheck(odds): # Check spinbox
                             continue
-                        if point[f"itm{i}ID"] == 0: # Ignore empty spots in points
+                        if point[f"itm{i}ID"] in [0, 30019]: # Ignore empty spots in points and puzzletree wood
                             continue
                         point[f"itm{i}ID"] = random.choice(ValidReplacements) # Make our selection
                 collFile.seek(0)

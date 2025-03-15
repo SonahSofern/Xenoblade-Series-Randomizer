@@ -50,6 +50,60 @@ def RandomizeWeaponEnhancements():
         file.truncate()
         json.dump(enhanceFile, file, indent=2, ensure_ascii=False)
 
+#range should be between 0 and 1300
+def RandomizePowerLevels(): # this makes the weapon chips uniform in their power level based on the rank they are
+    if not Options.UMHuntOption.GetState():
+        WeaponStrengthList = Helper.ExtendListtoLength([], 20, "[]")
+        WeaponDamageRanges = Helper.ExtendListtoLength([[26, 75]], 20, "[inputlist[i-1][0] + 55, inputlist[i-1][1] + 55]")
+        WeaponRankPool = []
+        for rank in range(1, 21):
+            WeaponRankPool.extend([rank, rank, rank])
+        random.shuffle(WeaponRankPool)
+        with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
+            data = json.load(file)
+            for row in data["rows"]:
+                if Helper.OddsCheck(Options.BladeWeaponChipsOption.GetOdds()):
+                    row["Rank"] = WeaponRankPool[row["$id"]-10001]
+                    for i in range(1, 37):
+                        WeaponStrengthList[row["Rank"] - 1].append(row[f"CreateWpn{i}"])
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file: # Sets damage of weapon based on rank of chip, with a little extra wiggle room
+        data = json.load(file)
+        for row in data["rows"]:
+            for i in range(0, len(WeaponStrengthList)):
+                if row["$id"] in WeaponStrengthList[i]:
+                    row["Damage"] = random.randrange(int(WeaponDamageRanges[i][0]*0.75), int(WeaponDamageRanges[i][1]*1.25))
+                    row["Rank"] = i + 1 #this is an unused value in the code afaik, but keeping this identical as the rank of the chip itself, in case the code checks this.
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def ChangeWeaponRankNames():
+    if not Options.UMHuntOption.GetState():
+        if Options.BladeWeaponChipsOption_AutoAtk.GetState():
+            RandomizePowerLevels()
+        WeaponStrengthNameList = Helper.ExtendListtoLength([], 20, "[]")
+        with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
+            data = json.load(file)
+            for row in data["rows"]:
+                WeaponStrengthNameList[row["Rank"] - 1].append(row["Name"])
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+        with open("./XC2/_internal/JsonOutputs/common_ms/itm_pcwpnchip_ms.json", 'r+', encoding='utf-8') as file: # Renames chips according to their rank
+            data = json.load(file)
+            for row in data["rows"]:
+                for rank in range(len(WeaponStrengthNameList)):
+                    if row["$id"] in WeaponStrengthNameList[rank]:
+                        row["name"] = f"{row["name"]} [System:Color name=red]({rank + 1})[/System:Color]"
+                        break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
+
 
 def WeaponChipDesc():
     desc = PopupDescriptions.Description()

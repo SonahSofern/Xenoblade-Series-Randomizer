@@ -32,7 +32,7 @@ def RandoTreasureBoxes():
                     for i in range(1,9):
                         if not Helper.OddsCheck(odds): # Check spinbox
                             continue
-                        if box[f"itm{i}ID"] == 0: # Ignore empty spots in points
+                        if box[f"itm{i}ID"] in [0] + IDs.PreciousItems: # Ignore empty spots in points
                             continue
                         box[f"itm{i}ID"] = random.choice(ValidReplacements) # Make our selection
                 tboxFile.seek(0)
