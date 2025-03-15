@@ -170,7 +170,7 @@ def AOE(art):
 
 
 
-def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False):
+def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False, enhancementKey = "Enhance1"):
     with open(artsFile, "r+", encoding='utf-8') as ArtsFile:     
         with open(descFile, "r+", encoding='utf-8') as DescFile:     
             artsData = json.load(ArtsFile)
@@ -222,7 +222,7 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False):
                     
                 # Enhancements
                 for enh in EnhancementGroup:
-                    if any(art["Enhance1"] in sublist for sublist in enh.ids):
+                    if any(art[enhancementKey] in sublist for sublist in enh.ids):
                         CombinedCaption[3] += f"{enh.name}"
                         break
                     

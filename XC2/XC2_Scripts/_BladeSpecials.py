@@ -25,7 +25,7 @@ def BladeSpecials():
                 if Helper.OddsCheck(odds):
                     _DriverArts.Debuffs(art)
 
-        # BladeEXSpecials()     
+        BladeEXSpecials()     
         artFile.seek(0)
         artFile.truncate()
         json.dump(artData, artFile, indent=2, ensure_ascii=False)
@@ -66,7 +66,7 @@ def BladeEXSpecials(): # Ex specials use different keys and dont have all 6 legv
         artFile.seek(0)
         artFile.truncate()
         json.dump(artData, artFile, indent=2, ensure_ascii=False)
-    _DriverArts.GenCustomArtDescriptions("./XC2/_internal/JsonOutputs/common/BTL_Arts_BlSp.json", "./XC2/_internal/JsonOutputs/common_ms/btl_arts_blsp_ms.json", True)
+    _DriverArts.GenCustomArtDescriptions("./XC2/_internal/JsonOutputs/common/BTL_Arts_BlSp.json", "./XC2/_internal/JsonOutputs/common_ms/btl_arts_blsp_ms.json", True, "Enhance")
 
 def EXEnhancements(art):
     Enhancement = random.choice(_Arts.EnhancementGroup)
