@@ -6,6 +6,7 @@ from PIL import Image, ImageTk
 ImageGroup = [] # Needed because garbage collection will delete pictures otherwise
 OpenWindows = []
 
+
 if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
     isOnefile = True
 else:
@@ -17,6 +18,9 @@ class Description:
         self.geometry = geometry
         self.data:list[DescriptionObject] = []
         self.order = 0
+        
+    def Tag(self, text:str):
+        self.data.append(PopTag(self.order, text))
         
     def Text(self,text:str):
         self.data.append(PopText(self.order, text))
@@ -37,6 +41,9 @@ class DescriptionObject():
         self.data = data
         order += 1
 
+class PopTag(DescriptionObject):
+    def __init__(self, order, data):
+        super().__init__(order, data)
 
 class PopText(DescriptionObject):
     def __init__(self, order, data):
@@ -60,9 +67,11 @@ class PopHeader(DescriptionObject):
             self.isOn = False
         else:
             for child in self.childGroup:
-                child.pack() # Find a way to pass back the appropriate arguements to the repack
+                SpecialPack(child)
             self.isOn = True
 
+def SpecialPack(obj):
+    obj.pack(anchor="w", padx = 10, pady = 5)
 
 def GenPopup(optionName, descData, root, defaultFont):
     # Check if a popup with the same title is already open
@@ -96,7 +105,7 @@ def GenPopup(optionName, descData, root, defaultFont):
             img = ImageTk.PhotoImage(img)
             imageLabel = ttk.Label(curFrame, image=img, padding=5, style="DescriptionImage.TLabel")
             ImageGroup.append(img)
-            imageLabel.pack(anchor="w", padx=15, pady=5)
+            SpecialPack(imageLabel)
             curHeader.childGroup.append(imageLabel)
             
         elif isinstance(obj, PopHeader): # Header
@@ -108,9 +117,14 @@ def GenPopup(optionName, descData, root, defaultFont):
             
         elif isinstance(obj, PopText): # Text
             textLabel = ttk.Label(curFrame,text=obj.data, wraplength=myDescription.geometry[1] - 60)
-            textLabel.pack(anchor="w")
+            SpecialPack(textLabel)
             curHeader.childGroup.append(textLabel)
         
+        elif isinstance(obj, PopTag):
+            tag = ttk.Label(curFrame, text=obj.data, style="Header.TButton")
+            SpecialPack(tag)
+            curHeader.childGroup.append(tag)
+            
     InnerFrame.update_idletasks()  # Ensure all geometry calculations are up-to-date
     top.geometry(f"{InnerFrame.winfo_width() + 38}x{ min(InnerFrame.winfo_height() + 40, 1000)}")
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close

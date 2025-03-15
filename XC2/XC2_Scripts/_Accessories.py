@@ -80,6 +80,6 @@ def AccessoriesDesc():
         effectDescription = effectDescription.replace("[max: [ML:Enhance kind=Param2", f"max: {effect.Param2[0]}-{effect.Param2[-1]}")
 
         
-        desc.Header(effect.name)
+        desc.Tag(effect.name)
         desc.Text(effectDescription)
     return desc
