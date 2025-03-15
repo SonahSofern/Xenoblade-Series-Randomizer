@@ -4,8 +4,6 @@ from tkinter import ttk
 import scripts.GUISettings, os, sys
 from PIL import Image, ImageTk
 ImageGroup = [] # Needed because garbage collection will delete pictures otherwise
-HeaderText = "HeaderHEAD "
-ImageText = "ImageIMAGE "
 OpenWindows = []
 
 if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
@@ -17,25 +15,44 @@ class Description:
 
     def __init__(self, geometry = (800,800)):
         self.geometry = geometry
-        self.data:list[str] = []
-        self.sizes:list[int] = []
+        self.data:list[DescriptionObject] = []
+        self.order = 0
+        
     def Text(self,text:str):
-        self.data.append(text)
+        self.data.append(PopText(self.order, text, self.data))
 
     def Image(self,imagePath:str, game, size = 400):
-        if isOnefile:
-            imagePath = ImageText + os.path.join(sys._MEIPASS,"Images", imagePath)
+        if isOnefile: # Images come from a different path when packed to one file
+            imagePath = os.path.join(sys._MEIPASS,"Images", imagePath)
         else:
-            imagePath = f"{ImageText}./{game}/_internal/Images/{imagePath}"
-        self.data.append(imagePath)
-        self.sizes.append(size)
+            imagePath = f"./{game}/_internal/Images/{imagePath}"
+        self.data.append(PopImage(self.order, imagePath, size, self.data))
     
     def Header(self, text:str):
-        self.data.append(f"{HeaderText}{text}")
+        self.data.append(PopHeader(self.order, text, self.data))
 
-def GenPopup(optionName, descData, root, defaultFont, defTheme):
-    # Open a window with the 
+class DescriptionObject():
+    def __init__(self, order, data, list:list):
+        self.order = order
+        self.data = data
+        list.append(self)
+        order += 1
+        
+
+class PopText(DescriptionObject):
+    def __init__(self, order, data, list):
+        super().__init__(order, data, list)
     
+class PopImage(DescriptionObject):
+    def __init__(self, order, data, size, list):
+        super().__init__(order, data, list)
+        self.size = size
+    
+class PopHeader(DescriptionObject):
+    def __init__(self, order, data, list):
+        super().__init__(order, data, list)
+
+def GenPopup(optionName, descData, root, defaultFont):
     # Check if a popup with the same title is already open
     for top in OpenWindows:
         if top.winfo_exists() and top.title() == optionName:
@@ -54,34 +71,32 @@ def GenPopup(optionName, descData, root, defaultFont, defTheme):
     
     canv = Canvas(Outerframe)
     
+    # curHeader = None # Tracks how to place children under headers
+    
     InnerFrame = ttk.Frame(canv)
     scripts.GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
-    scripts.GUISettings.LoadTheme(defaultFont, defTheme)
+    scripts.GUISettings.LoadTheme(defaultFont, scripts.GUISettings.defGUIThemeVar.get())
     # loop over data from the description class and parse it
-    for text in Description.data:
-        if text.startswith(ImageText): # if we are a filepath
-            text = text.replace(ImageText, "")
-            print("Loaded Image")
-            img = Image.open(text)
-            img.thumbnail((Description.sizes[sizeCount], Description.sizes[sizeCount]), Image.LANCZOS) # Resizes our image and keeps ratio
+    for obj in Description.data:
+        if isinstance(obj, PopImage): # Image
+            img = Image.open(obj.data)
+            img.thumbnail((obj.size, obj.size), Image.LANCZOS) # Resizes our image and keeps ratio
             img = ImageTk.PhotoImage(img)
             imageLabel = ttk.Label(InnerFrame, image=img, padding=5, style="DescriptionImage.TLabel")
             ImageGroup.append(img)
-            imageLabel.pack(anchor="w", padx=15)
+            imageLabel.pack(anchor="w", padx=15, pady=5)
             sizeCount += 1 # Keeps track of our list of sizes for each image
-            # Handle as filepath image
-        elif text.startswith(HeaderText):
-            text = text.replace(HeaderText, "")
-            textLabel = ttk.Label(InnerFrame,text=f"{text}", style="Header.TLabel")
+            
+        elif isinstance(obj, PopHeader): # Header
+            textLabel = ttk.Label(InnerFrame,text=obj.data, style="Header.TLabel")
             textLabel.pack(fill="x", expand=True)
-        else:
-            # print(Description.geometry[1])
-            textLabel = ttk.Label(InnerFrame,text=text, wraplength=Description.geometry[1] - 60)
+            # curHeader = textLabel
+            
+        elif isinstance(obj, PopText):            # Text
+            textLabel = ttk.Label(InnerFrame,text=obj.data, wraplength=Description.geometry[1] - 60)
             textLabel.pack(anchor="w")
-            # Handle as text
     InnerFrame.update_idletasks()  # Ensure all geometry calculations are up-to-date
     top.geometry(f"{InnerFrame.winfo_width() + 38}x{ min(InnerFrame.winfo_height() + 40, 1000)}")
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
 
             
-    # print(f"Tried to gen popup {Description}.md")

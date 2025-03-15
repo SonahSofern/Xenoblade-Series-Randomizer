@@ -32,6 +32,7 @@ defaultFont = Font(family=GUISettings.defFontVar.get(), size=GUISettings.defFont
 root.title(f"Xenoblade Chronicles 2 Randomizer v{Version}")
 root.option_add("*Font", defaultFont)
 root.geometry(f'{windowWidth}x{windowHeight}')
+root.doublebuffer = True
 
 if isOnefile:
     bdat_path = os.path.join(sys._MEIPASS, 'Toolset', 'bdat-toolset-win64.exe')

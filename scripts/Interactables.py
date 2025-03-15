@@ -56,7 +56,7 @@ class Option():
         
         # Description Label or Button
         if self.descData != None:
-            self.descObj = ttk.Button(optionPanel, text=self.desc, command=lambda: PopupDescriptions.GenPopup(self.name, self.descData, self.root, self.defFont, self.defTheme), style="BordlessBtn.TButton", width=60)
+            self.descObj = ttk.Button(optionPanel, text=self.desc, command=lambda: PopupDescriptions.GenPopup(self.name, self.descData, self.root, self.defFont), style="BordlessBtn.TButton", width=60)
             padx = 13
         else:
             self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, wraplength=400)

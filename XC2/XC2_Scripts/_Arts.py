@@ -17,7 +17,7 @@ Knockback = ArtEffect([5,6,7,8,9], "Knockback", "Inflicts Knockback", [ReactionG
 Blowdown = ArtEffect([10,11,12,13,14], "Blowdown", "Inflicts Blowdown", [ReactionGroup], abvName="Bd")
 
 AOEGroup:list[ArtEffect] = []
-AOE = ArtEffect([1,2,5], "Area of Effect", "AOE", "Makes this art an Area of Effect, there are 3 types:\nAround User\nAround Target\nCone\n", [AOEGroup])
+AOE = ArtEffect([1,2,5], "AOE", "Makes this art an Area of Effect, there are 3 types:\nAround User\nAround Target\nCone\n", [AOEGroup])
 
 DebuffGroup:list[ArtEffect] = []
 Taunt = ArtEffect([11], "Taunt", "Inflicts Taunt", [DebuffGroup])
