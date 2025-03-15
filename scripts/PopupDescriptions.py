@@ -42,11 +42,11 @@ class DescriptionObject():
         self.obj = None
         order += 1
 
-class PopTag(DescriptionObject):
+class PopTag(DescriptionObject): # Make these grouped with some text
     def __init__(self, order, data):
         super().__init__(order, data)
     def SpecialPack(self):
-        self.obj.pack(anchor="w")
+        self.obj.pack(anchor="w", side="left")
 
 class PopText(DescriptionObject):
     def __init__(self, order, data):
@@ -59,7 +59,7 @@ class PopImage(DescriptionObject):
         super().__init__(order, data)
         self.size = size
     def SpecialPack(self):
-        self.obj.pack()
+        self.obj.pack(padx=5)
         
 class PopHeader(DescriptionObject): # Give these a hover color change
     def __init__(self, order, data):
@@ -67,7 +67,7 @@ class PopHeader(DescriptionObject): # Give these a hover color change
         self.childGroup = []
         self.isOn = True
     def SpecialPack(self):
-        self.obj.pack(anchor="w")
+        self.obj.pack(padx=2,pady=2, fill="x", expand=True)
         
     def Dropdown(self):
         if self.isOn:
@@ -116,8 +116,8 @@ def GenPopup(optionName, descData, root, defaultFont):
             
         elif isinstance(descObj, PopHeader): # Header
             curFrame = ttk.Frame(InnerFrame)
-            textLabel = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=10, command=lambda obj= descObj: obj.Dropdown())
-            textLabel.pack(fill="x")
+            descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=10, command=lambda obj= descObj: obj.Dropdown())
+            descObj.SpecialPack()
             curHeader = descObj
             curFrame.pack(fill="x", expand=True)
             

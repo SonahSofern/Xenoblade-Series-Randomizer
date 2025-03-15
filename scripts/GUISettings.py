@@ -280,12 +280,13 @@ def LoadTheme(defaultFont, themeName):
                     "arrowcolor": [("disabled", currentTheme["midGray"])],
                 }
             },
-                     "TSeparator": {
+                "TSeparator": {
                 "configure": {
                     "background": currentTheme["midColor"],
 
                 },
-            }
+            },
+            
         })
     except:
         pass
@@ -298,7 +299,7 @@ def LoadTheme(defaultFont, themeName):
     style.configure("STATIC.TButton", font=staticFont)
     style.configure("BorderlessLabel.TLabel", background=currentTheme["backgroundColor"], foreground=UI_Colors.White)
     style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
-    style.configure("Header.TButton", background= currentTheme["midColor"], relief = "flat")
+    # style.configure("Header.TButton", background= currentTheme["midGray"])
     style.configure("DescriptionImage.TLabel", background= currentTheme["midColor"])
     # Since Canvas and Roots arrent affected by normal styling
     for canvas in CanvasesForStyling:
