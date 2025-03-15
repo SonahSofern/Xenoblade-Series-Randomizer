@@ -60,7 +60,7 @@ class PopHeader(DescriptionObject):
             self.isOn = False
         else:
             for child in self.childGroup:
-                child.pack()
+                child.pack() # Find a way to pass back the appropriate arguements to the repack
             self.isOn = True
 
 
@@ -83,6 +83,7 @@ def GenPopup(optionName, descData, root, defaultFont):
     canv = Canvas(Outerframe)
     
     curHeader:PopHeader = None # Tracks how to place children under headers
+    curFrame:ttk.Frame = None # Groups our options so they can collapse and regroup together
     
     InnerFrame = ttk.Frame(canv)
     scripts.GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
@@ -93,18 +94,20 @@ def GenPopup(optionName, descData, root, defaultFont):
             img = Image.open(obj.data)
             img.thumbnail((obj.size, obj.size), Image.LANCZOS) # Resizes our image and keeps ratio
             img = ImageTk.PhotoImage(img)
-            imageLabel = ttk.Label(InnerFrame, image=img, padding=5, style="DescriptionImage.TLabel")
+            imageLabel = ttk.Label(curFrame, image=img, padding=5, style="DescriptionImage.TLabel")
             ImageGroup.append(img)
-            imageLabel.pack(anchor="w", padx=15, pady=5) # Gonna have to use grid because pack forget fucks this up
+            imageLabel.pack(anchor="w", padx=15, pady=5)
             curHeader.childGroup.append(imageLabel)
             
         elif isinstance(obj, PopHeader): # Header
-            textLabel = ttk.Button(InnerFrame,text=obj.data, style="Header.TButton", padding=10, command=lambda obj= obj: obj.Dropdown())
+            curFrame = ttk.Frame(InnerFrame)
+            textLabel = ttk.Button(curFrame,text=obj.data, style="Header.TButton", padding=10, command=lambda obj= obj: obj.Dropdown())
             textLabel.pack(fill="x", expand=True)
             curHeader = obj
+            curFrame.pack(fill="x", expand=True)
             
         elif isinstance(obj, PopText): # Text
-            textLabel = ttk.Label(InnerFrame,text=obj.data, wraplength=myDescription.geometry[1] - 60)
+            textLabel = ttk.Label(curFrame,text=obj.data, wraplength=myDescription.geometry[1] - 60)
             textLabel.pack(anchor="w")
             curHeader.childGroup.append(textLabel)
         
