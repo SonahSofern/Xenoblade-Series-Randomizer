@@ -21,8 +21,8 @@ class Description:
     def Tag(self, text:str, padx=(20,20), pady=(0,0), anchor="w", side=None):
         self.data.append(PopTag(text, padx, pady, anchor, side=side))
         
-    def Text(self,text:str, padx=(20,20), pady=(5,5), anchor="w"):
-        self.data.append(PopText(text,padx,pady, anchor))
+    def Text(self,text:str, padx=(20,20), pady=(5,5), anchor="w", side=None):
+        self.data.append(PopText(text,padx,pady, anchor, side=side))
 
     def Image(self,imagePath:str, game, size = 400, padx=5, pady=(5,5), anchor=None, side=None):
         if isOnefile: # Images come from a different path when packed to one file
@@ -129,6 +129,6 @@ def GenPopup(optionName, descData, root, defaultFont):
             
 def ResizeWindow(top, innerFrame):
     innerFrame.update_idletasks()  # Ensure the geometry is up to date
-    w = innerFrame.winfo_width() + 38
-    h = min(innerFrame.winfo_height() + 40, 800)
+    w = innerFrame.winfo_width() + 37
+    h = min(innerFrame.winfo_height() + 20, 700)
     top.geometry(f"{w}x{h}")
