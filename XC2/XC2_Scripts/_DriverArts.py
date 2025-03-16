@@ -321,7 +321,7 @@ def DriverArtDescription():
     
     desc.Header(Options.DriverArtsOption_AOE.name)
     desc.Text(f"Randomizes the AOE types of your arts.")
-    desc.Tag("AOE around target")
-    desc.Tag("AOE around user")
-    desc.Tag("AOE cone")
+    desc.Tag("AOE around target", pady=5)
+    desc.Tag("AOE around user", pady=5)
+    desc.Tag("AOE cone", pady=5)
     return desc

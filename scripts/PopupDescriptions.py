@@ -17,56 +17,51 @@ class Description:
     def __init__(self, geometry = (800,800)):
         self.geometry = geometry
         self.data:list[DescriptionObject] = []
-        self.order = 0
         
-    def Tag(self, text:str):
-        self.data.append(PopTag(self.order, text))
+    def Tag(self, text:str, padx=(20,20), pady=(0,0), anchor="w", side=None):
+        self.data.append(PopTag(text, padx, pady, anchor, side=side))
         
-    def Text(self,text:str):
-        self.data.append(PopText(self.order, text))
+    def Text(self,text:str, padx=(20,20), pady=(5,5), anchor="w"):
+        self.data.append(PopText(text,padx,pady, anchor))
 
-    def Image(self,imagePath:str, game, size = 400):
+    def Image(self,imagePath:str, game, size = 400, padx=5, pady=(5,5), anchor=None, side=None):
         if isOnefile: # Images come from a different path when packed to one file
             imagePath = os.path.join(sys._MEIPASS,"Images", imagePath)
         else:
             imagePath = f"./{game}/_internal/Images/{imagePath}"
-        self.data.append(PopImage(self.order, imagePath, size))
+        self.data.append(PopImage(imagePath, size, padx, pady, anchor, side=side))
     
-    def Header(self, text:str):
-            self.data.append(PopHeader(self.order, text))
+    def Header(self, text:str, padx=2, pady=(0,5), anchor="w"):
+            self.data.append(PopHeader(text, padx, pady, anchor))
 
 class DescriptionObject():
-    def __init__(self, order, data):
-        self.order = order
+    def __init__(self, data, padx,pady, anchor, fill = None, expand = None, side=None):
         self.data = data
         self.obj = None
-        order += 1
-
-class PopTag(DescriptionObject): # Make these grouped with some text
-    def __init__(self, order, data):
-        super().__init__(order, data)
+        self.anchor = anchor
+        self.padx = padx
+        self.pady = pady
+        self.fill = fill
+        self.expand = expand
+        self.side = side
     def SpecialPack(self):
-        self.obj.pack(anchor="w",padx=20)
+        self.obj.pack(anchor=self.anchor, padx= self.padx, pady=self.pady, fill=self.fill, expand=self.expand, side=self.side)
+
+class PopTag(DescriptionObject):
+    pass
 
 class PopText(DescriptionObject):
-    def __init__(self, order, data):
-        super().__init__(order, data)
-    def SpecialPack(self):
-        self.obj.pack(anchor="w")
+    pass
         
 class PopImage(DescriptionObject):
-    def __init__(self, order, data, size):
-        super().__init__(order, data)
+    def __init__(self, data, size, padx, pady, anchor, fill=None, expand=None, side=None):
+        super().__init__(data, padx, pady, anchor, fill, expand, side=side)
         self.size = size
-    def SpecialPack(self):
-        self.obj.pack(padx=5)
         
 class PopHeader(DescriptionObject):
-    def __init__(self, order, data):
-        super().__init__(order, data)
+    def __init__(self, data, padx, pady, anchor, fill="x", expand=True):
+        super().__init__(data, padx, pady, anchor, fill, expand)
         self.childGroup = []
-    def SpecialPack(self):
-        self.obj.pack(padx=2,pady=2, fill="x", expand=True)
         
     def Dropdown(self):
         if any(child.obj.winfo_ismapped() for child in self.childGroup): # Checks if any of the children are packed currently to tell which way to toggle things
