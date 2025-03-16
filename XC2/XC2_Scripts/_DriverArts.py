@@ -5,8 +5,6 @@ import Options
 import scripts.PopupDescriptions
 from _Arts import *
 
-
-
 def DriverArtRandomizer():
     with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
@@ -277,7 +275,7 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False, enhancementK
         json.dump(artsData, ArtsFile, indent=2, ensure_ascii=False)
         
         
-def DriverArtDescriptions():
+def DriverArtDescription():
     desc= scripts.PopupDescriptions.Description()
     desc.Header(Options.DriverArtsOption.name)
     desc.Text("This option randomizes various effects of driver arts, even to effects that could not be obtained in the normal game.")
@@ -286,7 +284,7 @@ def DriverArtDescriptions():
     desc.Header(Options.DriverArtsOption_AutoAttacks.name)
     
     desc.Text("Applies your chosen options to each driver's autoattacks as well as arts.")
-    desc.Header(f"{Options.DriverArtsOption_SingleReaction.name}/{Options.DriverArtsOption_MultipleReactions.name}")
+    desc.Header(f"{Options.DriverArtsOption_SingleReaction.name} / {Options.DriverArtsOption_MultipleReactions.name}")
     
     desc.Text("Allows single/multiple reaction(s) to be placed on arts, shown in yellow text. \nThese will be abbreviated if the description gets too long.\nIf both options are enabled multiple reactions will take priority.")
     for react in ReactionGroup:
@@ -322,5 +320,8 @@ def DriverArtDescriptions():
     desc.Text(f"Randomizes animation speeds of arts between {animationSpeedRange[0]} - {animationSpeedRange[1]}%.")
     
     desc.Header(Options.DriverArtsOption_AOE.name)
-    desc.Text(f"Randomizes the AOE types of your arts.\nAOE around target\nAOE around user\nAOE cone")
+    desc.Text(f"Randomizes the AOE types of your arts.")
+    desc.Tag("AOE around target")
+    desc.Tag("AOE around user")
+    desc.Tag("AOE cone")
     return desc
