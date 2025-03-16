@@ -97,26 +97,67 @@ def EnemyEnhancementDescriptions():
     myDesc.Text(f"Adds {len(ValidSkills)} possible enhancements to enemies, displayed like this.")
     myDesc.Image("NameTagEnhancement.png","XC2", 400)
     myDesc.Text("Each enhancement has 3 different strengths indicated by a +/++ after the enhancement name.")
-    myDesc.Text(f"{Healthy.name} - Gives a % HP boost between {Healthy.Param1[0]}-{Healthy.Param1[3]}%")
-    myDesc.Text(f"{Strong.name} - Gives a % Strength boost between {Strong.Param1[0]}-{Strong.Param1[3]}%")
-    myDesc.Text(f"{Etheras.name} - Gives a % Ether boost between {Etheras.Param1[0]}-{Etheras.Param1[3]}%")
-    myDesc.Text(f"{EtherBlock.name} - Gives a flat ether resist boost between {EtherBlock.Param1[0]}-{EtherBlock.Param1[3]}%")
-    myDesc.Text(f"{PhyBlock.name} - Gives a flat physical resist boost between {PhyBlock.Param1[0]}-{PhyBlock.Param1[3]}%")
-    myDesc.Text(f"{Spike.name} - Gives a spike for {Spike.Param1[0]}-{Spike.Param1[3]}% of ether stat (This is known to not work for some enemies)")
-    myDesc.Text(f"{Pursuer.name} - Gives a movement speed boost in combat between {Pursuer.Param1[0]}-{Pursuer.Param1[3]}%")
-    myDesc.Text(f"{AllReactionNull.name} - Gives a {AllReactionNull.Param1[0]}-{AllReactionNull.Param1[3]}% chance to negate incoming reactions (break, topple, launch, smash)")
-    myDesc.Text(f"{BlowdownSpike.name}- Gives a lv {BlowdownSpike.Param2[0]}-{BlowdownSpike.Param2[3]} blowdown spike with odds of activating between {BlowdownSpike.Param1[0]}-{BlowdownSpike.Param1[3]}%")
-    myDesc.Text(f"{TasSnack.name} - When this enemy defeats a driver it will heal {TasSnack.Param1[0]}-{TasSnack.Param1[3]}% of its max health.")
-    myDesc.Text(f"{Desperate.name} - As their HP goes down they deal {Desperate.Param1[0]}-{Desperate.Param1[3]}% more damage linearly")
-    myDesc.Text(f"{Wish.name} - Upon death heals all allies in the battle by {Wish.Param1[0]}-{Wish.Param1[3]}% of their max health")
-    myDesc.Text(f"{FirstStrike.name} - Enemies first attack of the battle deals {FirstStrike.Param1[0]}-{FirstStrike.Param1[3]}% bonus damage")
-    myDesc.Text(f"{Lightning.name} - Enemy animations are sped up by {Lightning.Param1[0]}-{Lightning.Param1[3]}%")
-    myDesc.Text(f"{Repeat.name} - Gives a {Repeat.Param1[0]}-{Repeat.Param1[3]}% chance to not put arts and attacks on cooldown when used.")
-    myDesc.Text(f"{Enraged.name} - Each enemy that dies increases this enemies damage by {Enraged.Param1[0]}-{Enraged.Param1[3]}%")
-    myDesc.Text(f"{Regen.name} - Permanently regens {Regen.Param2[0]}-{Regen.Param2[3]}% of their max health every {Regen.Param1[0]//30}-{Regen.Param1[3]//30} seconds.")
-    myDesc.Text(f"{CloseArmor.name} - Reduces damage by {CloseArmor.Param1[0]}-{CloseArmor.Param1[3]}% to all allies and user within 5 meters")
-    myDesc.Text(f"{Swarm.name} - Each ally the enemy has increases their own damage by {Swarm.Param1[0]}-{Swarm.Param1[3]}%")
-    myDesc.Text(f"{Sealing.name} - Locks the first, second, or third block of the party gauge.")
+    
+    myDesc.Tag(Healthy.name, padx=0)
+    myDesc.Text(f"Gives a % HP boost between {Healthy.Param1[0]}-{Healthy.Param1[3]}%")
+
+    myDesc.Tag(Strong.name, padx=0)
+    myDesc.Text(f"Gives a % Strength boost between {Strong.Param1[0]}-{Strong.Param1[3]}%")
+
+    myDesc.Tag(Etheras.name, padx=0)
+    myDesc.Text(f"Gives a % Ether boost between {Etheras.Param1[0]}-{Etheras.Param1[3]}%")
+
+    myDesc.Tag(EtherBlock.name, padx=0)
+    myDesc.Text(f"Gives a flat ether resist boost between {EtherBlock.Param1[0]}-{EtherBlock.Param1[3]}%")
+
+    myDesc.Tag(PhyBlock.name, padx=0)
+    myDesc.Text(f"Gives a flat physical resist boost between {PhyBlock.Param1[0]}-{PhyBlock.Param1[3]}%")
+
+    myDesc.Tag(Spike.name, padx=0)
+    myDesc.Text(f"Gives a spike for {Spike.Param1[0]}-{Spike.Param1[3]}% of ether stat (This is known to not work for some enemies)")
+
+    myDesc.Tag(Pursuer.name, padx=0)
+    myDesc.Text(f"Gives a movement speed boost in combat between {Pursuer.Param1[0]}-{Pursuer.Param1[3]}%")
+
+    myDesc.Tag(AllReactionNull.name, padx=0)
+    myDesc.Text(f"Gives a {AllReactionNull.Param1[0]}-{AllReactionNull.Param1[3]}% chance to negate incoming reactions (break, topple, launch, smash)")
+
+    myDesc.Tag(BlowdownSpike.name, padx=0)
+    myDesc.Text(f"Gives a lv {BlowdownSpike.Param2[0]}-{BlowdownSpike.Param2[3]} blowdown spike with odds of activating between {BlowdownSpike.Param1[0]}-{BlowdownSpike.Param1[3]}%")
+
+    myDesc.Tag(TasSnack.name, padx=0)
+    myDesc.Text(f"When this enemy defeats a driver it will heal {TasSnack.Param1[0]}-{TasSnack.Param1[3]}% of its max health.")
+
+    myDesc.Tag(Desperate.name, padx=0)
+    myDesc.Text(f"As their HP goes down they deal {Desperate.Param1[0]}-{Desperate.Param1[3]}% more damage linearly")
+
+    myDesc.Tag(Wish.name, padx=0)
+    myDesc.Text(f"Upon death heals all allies in the battle by {Wish.Param1[0]}-{Wish.Param1[3]}% of their max health")
+
+    myDesc.Tag(FirstStrike.name, padx=0)
+    myDesc.Text(f"Enemies' first attack of the battle deals {FirstStrike.Param1[0]}-{FirstStrike.Param1[3]}% bonus damage")
+
+    myDesc.Tag(Lightning.name, padx=0)
+    myDesc.Text(f"Enemy animations are sped up by {Lightning.Param1[0]}-{Lightning.Param1[3]}%")
+
+    myDesc.Tag(Repeat.name, padx=0)
+    myDesc.Text(f"Gives a {Repeat.Param1[0]}-{Repeat.Param1[3]}% chance to not put arts and attacks on cooldown when used.")
+
+    myDesc.Tag(Enraged.name, padx=0)
+    myDesc.Text(f"Each enemy that dies increases this enemy's damage by {Enraged.Param1[0]}-{Enraged.Param1[3]}%")
+
+    myDesc.Tag(Regen.name, padx=0)
+    myDesc.Text(f"Permanently regens {Regen.Param2[0]}-{Regen.Param2[3]}% of their max health every {Regen.Param1[0]//30}-{Regen.Param1[3]//30} seconds.")
+
+    myDesc.Tag(CloseArmor.name, padx=0)
+    myDesc.Text(f"Reduces damage by {CloseArmor.Param1[0]}-{CloseArmor.Param1[3]}% to all allies and user within 5 meters")
+
+    myDesc.Tag(Swarm.name, padx=0)
+    myDesc.Text(f"Each ally the enemy has increases their own damage by {Swarm.Param1[0]}-{Swarm.Param1[3]}%")
+
+    myDesc.Tag(Sealing.name, padx=0)
+    myDesc.Text(f"Locks the first, second, or third block of the party gauge.")
+
     return myDesc
 
 

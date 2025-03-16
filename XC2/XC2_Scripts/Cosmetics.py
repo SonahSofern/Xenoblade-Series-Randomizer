@@ -1,6 +1,6 @@
 import json, random, Options
 from BladeRandomization import Replacement2Original
-from scripts import Helper
+from scripts import Helper, PopupDescriptions
 # Lists of cosmetics to choose from
 ValidDriverCosmetics = []
 ValidBladeCosmetics = [] 
@@ -206,3 +206,12 @@ def Cosmetics():
     ValidDriverCosmetics.clear()
     ValidBladeCosmetics.clear()
     ValidArtificialBladeCosmetics.clear()
+
+
+def CosmeticsDescription():
+    desc = PopupDescriptions.Description()
+    desc.Header(Options.CosmeticsOption.name)
+    desc.Text("This places random cosmetics on accessories and aux cores.\nThe name of the character it targets will be put at the end of the item name.")
+    desc.Image("cosmaux.png", "XC2", 600)
+    desc.Image("cosmacc.png", "XC2", 600)
+    return desc
