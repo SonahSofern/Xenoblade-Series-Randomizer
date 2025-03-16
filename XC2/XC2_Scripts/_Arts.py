@@ -33,7 +33,7 @@ WindsOfTime = ArtEffect([30], "Freeze", "Stops enemy from acting for a time")
 Enrage = ArtEffect([35], "Enrage", "Enrages the target if possible")
 
 BuffGroup:list[ArtEffect] = []
-NullReact = ArtEffect([1], "NlReact", "Nullifies all incoming reactions while casting this art", [BuffGroup])
+NullReact = ArtEffect([1], "NlReact", "Nullifies all incoming reactions while casting this art.", [BuffGroup])
 Evade = ArtEffect([2], "Evade", "Evade all incoming attacks while casting this art.", [BuffGroup])
 Block = ArtEffect([3], "Block", "Block all incoming attacks while casting this art.", [BuffGroup])
 Invincible = ArtEffect([4], "Inv", "Negate all incoming attacks while casting this art.", [BuffGroup])
@@ -53,7 +53,7 @@ AquaticUp = ArtEffect([[2705, 2706, 2707, 2708, 2709, 2709]], "Aquatic↑", "Inc
 CancelUp = ArtEffect([[2810, 2811, 2812, 2813, 2814, 2814]], "Cancel↑", "Increased damage on cancelled attacks.", [EnhancementGroup])
 CritUp = ArtEffect([[2975, 2976, 2977, 2978, 2979, 2979]], "Crit↑", "Increased crit damage.", [EnhancementGroup])
 CritCDDown = ArtEffect([[2840, 2841, 2842, 2843, 2844, 2844]], "Crit CD↓", "Reduces cooldown for this art on a crit.", [EnhancementGroup])
-FlyingUp = ArtEffect([[2700, 2701, 2702, 2703, 2704, 2704]], "Flying↑", "Increased damage to flying enemies", [EnhancementGroup])
+FlyingUp = ArtEffect([[2700, 2701, 2702, 2703, 2704, 2704]], "Flying↑", "Increased damage to flying enemies.", [EnhancementGroup])
 FrontUp = ArtEffect([[2740, 2741, 2742, 2743, 2744, 2744]], "Front↑", "Increased damage from the front.", [EnhancementGroup])
 Vamp = ArtEffect([[2735, 2736, 2737, 2738, 2739, 2739],[2878, 2879, 2880, 2881, 2882, 2882]], "Vamp", "Heals a % of the damage dealt.", [EnhancementGroup])
 PartyVamp = ArtEffect([[2845, 2846, 2847, 2848, 2849, 2849]], "Party Vamp", "Heals your party a % of the damage dealt.", [EnhancementGroup])
