@@ -77,10 +77,12 @@ def Enemies():
                 with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
                     eneAreaData = json.load(eneAreaFile)
                     for enemy in eneAreaData["rows"]:   
-                        enID = enemy["$id"]
+                        
                         if enemy["$id"] not in ChosenEnemyIds: # Only want to replace enemies chosen from our groups
                             continue
-                        group = []
+                        
+                        enID = enemy["$id"]
+                        
                         if isMixed:
                             group = CombinedNormalEnemyData + CombinedUniqueEnemyData + CombinedSuperbossEnemyData + CombinedBossEnemyData
                         elif enID in NormalEnemies:
@@ -97,19 +99,15 @@ def Enemies():
                         if (not isDupe):
                             group.remove(chosen)
                         
-                        # KeepStatRatios(enemy, chosen.eneListArea)
-
                         # Copy our chosens stats over
                         for key in CopiedStats: 
                             enemy[key] = chosen.eneListArea[key]
                         
-                        if enemy["$id"] == 1306:
-                            pass
                         # Copy stats with ratios to original stats
                         replacementTotalStats = TotalStats(chosen.eneListArea, CopiedStatsWithRatios)
                         originalTotalStats = TotalStats(enemy, CopiedStatsWithRatios)
-                        print("\n") 
-                        print(f"ID {enemy["$id"]} Replaced With ID {chosen.eneListArea["$id"]} Stat Total: {originalTotalStats}")
+                        # print("\n") 
+                        # print(f"ID {enemy["$id"]} Replaced With ID {chosen.eneListArea["$id"]} Stat Total: {originalTotalStats}")
 
                         for key in CopiedStatsWithRatios:
                             enemy[key] = KeepStatRatio(enemy, chosen.eneListArea, key, replacementTotalStats, originalTotalStats)
@@ -139,42 +137,8 @@ def KeepStatRatio(enemy, chosen, key, replacementTotal, originalTotal):
     ratio = chosen[key]/replacementTotal
     origStat = enemy[key]
     newStat = math.ceil((ratio*originalTotal))
-    print(f"{key}: {origStat} - {newStat}")
+    # print(f"{key}: {origStat} - {newStat}")
     return newStat
-# def KeepStatRatio(enemy, chosen): # Enemy is taking all of chosens stat ratios
-#     # Chosen ratio
-
-#     chosenTotal = 0
-#     enemyTotal = 0
-#     keys = ["hp", "str", "agi", "eth"]
-#     for key in keys:
-#         chosenTotal += chosen[key]
-        
-#     hpRatio = chosen["hp"]/chosenTotal
-#     strRatio = chosen["str"]/chosenTotal
-#     agiRatio = chosen["agi"]/chosenTotal
-#     ethRatio = chosen["eth"]/chosenTotal
-    
-#     for key in keys: # Stat total for the enemy before 
-#         enemyTotal += enemy[key]
-    
-#     enemy["hp"] = int(chosenTotal * hpRatio)
-#     enemy["str"] = int(chosenTotal * strRatio)
-#     enemy["agi"] = int(chosenTotal * agiRatio)
-#     enemy["eth"] = int(chosenTotal * ethRatio)
-
-#     if (Helper.OddsCheck(100)):
-#         print(f"Enemy: {enemy["$id"]}")
-#         print(f"Chosen: {chosen["$id"]}")
-#         print(f"Enemy Original Stat Total: {enemyTotal}")
-#         print(f"Chosen Stat Total: {chosenTotal}")
-#         print(f"HP: {enemy["hp"]}")
-#         print(f"Strength: {enemy["str"]}")
-#         print(f"Agility: {enemy["agi"]}")
-#         print(f"Ether: {enemy["eth"]}\n")
-    
-#     # Total up the enemy stats then dole them out according to the ratio
-
 
 # dummylist = []
 def PrintEnemy(enemy:Enemy):
