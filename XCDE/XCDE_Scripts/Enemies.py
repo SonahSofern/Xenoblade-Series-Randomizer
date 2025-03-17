@@ -1,5 +1,5 @@
 
-import json, random, Options, IDs, copy
+import json, random, Options, IDs, copy, traceback, math
 from scripts import Helper
 class Enemy:
     def __init__(self, enelistArea, enelist):
@@ -18,6 +18,7 @@ def Enemies():
     isBoss = Options.EnemyOption_Boss.GetState()
     isSuper = Options.EnemyOption_Superboss.GetState()
     isMixed = Options.EnemyOption_MixTypes.GetState()
+    isDupe = Options.EnemyOption_Duplicates.GetState()
     
     ChosenEnemyIds = []
     if isNormal:
@@ -34,7 +35,8 @@ def Enemies():
     CombinedBossEnemyData:list[Enemy] = []
     CombinedSuperbossEnemyData:list[Enemy] = []
     # "run_speed" Do NOT include run speed it lags the game to 1 fps
-    CopiedStats = ["move_speed", "named", "frame", "size", "scale", "family", "hp","str","agi","eth","elem_phx", "elem_eth", "Lv_up_hp", "Lv_up_str", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "avoid", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "detects", "assist", "search_range", "search_angle", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_dmg", "spike_state", "spike_state_val", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
+    CopiedStats = ["move_speed", "named", "frame", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "avoid", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "detects", "assist", "search_range", "search_angle", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_dmg", "spike_state", "spike_state_val", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
+    CopiedStatsWithRatios = ["hp", "str", "agi", "eth", "Lv_up_hp", "Lv_up_str", "Lv_up_eth", "Lv_up_agi"]
     CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
         eneData = json.load(eneFile)    
@@ -92,11 +94,25 @@ def Enemies():
                             
                         chosen = random.choice(group) # Choose from the desired pool
                         
-                        KeepStatRatios(chosen.eneListArea, enemy)
+                        if (not isDupe):
+                            group.remove(chosen)
+                        
+                        # KeepStatRatios(enemy, chosen.eneListArea)
 
                         # Copy our chosens stats over
                         for key in CopiedStats: 
                             enemy[key] = chosen.eneListArea[key]
+                        
+                        if enemy["$id"] == 1306:
+                            pass
+                        # Copy stats with ratios to original stats
+                        replacementTotalStats = TotalStats(chosen.eneListArea, CopiedStatsWithRatios)
+                        originalTotalStats = TotalStats(enemy, CopiedStatsWithRatios)
+                        print("\n") 
+                        print(f"ID {enemy["$id"]} Replaced With ID {chosen.eneListArea["$id"]} Stat Total: {originalTotalStats}")
+
+                        for key in CopiedStatsWithRatios:
+                            enemy[key] = KeepStatRatio(enemy, chosen.eneListArea, key, replacementTotalStats, originalTotalStats)
                             
                         for ene in eneData["rows"]:
                             if (ene["$id"] == enID):
@@ -106,42 +122,58 @@ def Enemies():
                     eneAreaFile.seek(0)
                     eneAreaFile.truncate()
                     json.dump(eneAreaData, eneAreaFile, indent=2, ensure_ascii=False)
-            except:
-                continue
+            except Exception as error:
+                print(f"{traceback.format_exc()}") # shows the full error
         eneFile.seek(0)
         eneFile.truncate()
         json.dump(eneData, eneFile, indent=2, ensure_ascii=False)
     
-def KeepStatRatios(chosen, enemy): # Enemy is taking all of chosens stat ratios
-    # Chosen ratio
-
-    chosenTotal = 0
-    enemyTotal = 0
-    keys = ["hp", "str", "agi", "eth"]
+    
+def TotalStats(chosen, keys):
+    total = 0
     for key in keys:
-        chosenTotal += chosen[key]
-        
-    hpRatio = chosen["hp"]/chosenTotal
-    strRatio = chosen["str"]/chosenTotal
-    agiRatio = chosen["agi"]/chosenTotal
-    ethRatio = chosen["eth"]/chosenTotal
+        total += chosen[key]
+    return total    
     
-    for key in keys: # Stat total for the enemy before 
-        enemyTotal += enemy[key]
-    
-    enemy["hp"] = int(chosenTotal * hpRatio)
-    enemy["str"] = int(chosenTotal * strRatio)
-    enemy["agi"] = int(chosenTotal * agiRatio)
-    enemy["eth"] = int(chosenTotal * ethRatio)
+def KeepStatRatio(enemy, chosen, key, replacementTotal, originalTotal):
+    ratio = chosen[key]/replacementTotal
+    origStat = enemy[key]
+    newStat = math.ceil((ratio*originalTotal))
+    print(f"{key}: {origStat} - {newStat}")
+    return newStat
+# def KeepStatRatio(enemy, chosen): # Enemy is taking all of chosens stat ratios
+#     # Chosen ratio
 
-    # print(f"Enemy Original Stat Total: {enemyTotal}")
-    # print(f"Chosen Stat Total: {chosenTotal}")
-    # print(f"HP: {enemy["hp"]}")
-    # print(f"Strength: {enemy["str"]}")
-    # print(f"Agility: {enemy["agi"]}")
-    # print(f"Ether: {enemy["eth"]}\n")
+#     chosenTotal = 0
+#     enemyTotal = 0
+#     keys = ["hp", "str", "agi", "eth"]
+#     for key in keys:
+#         chosenTotal += chosen[key]
+        
+#     hpRatio = chosen["hp"]/chosenTotal
+#     strRatio = chosen["str"]/chosenTotal
+#     agiRatio = chosen["agi"]/chosenTotal
+#     ethRatio = chosen["eth"]/chosenTotal
     
-    # Total up the enemy stats then dole them out according to the ratio
+#     for key in keys: # Stat total for the enemy before 
+#         enemyTotal += enemy[key]
+    
+#     enemy["hp"] = int(chosenTotal * hpRatio)
+#     enemy["str"] = int(chosenTotal * strRatio)
+#     enemy["agi"] = int(chosenTotal * agiRatio)
+#     enemy["eth"] = int(chosenTotal * ethRatio)
+
+#     if (Helper.OddsCheck(100)):
+#         print(f"Enemy: {enemy["$id"]}")
+#         print(f"Chosen: {chosen["$id"]}")
+#         print(f"Enemy Original Stat Total: {enemyTotal}")
+#         print(f"Chosen Stat Total: {chosenTotal}")
+#         print(f"HP: {enemy["hp"]}")
+#         print(f"Strength: {enemy["str"]}")
+#         print(f"Agility: {enemy["agi"]}")
+#         print(f"Ether: {enemy["eth"]}\n")
+    
+#     # Total up the enemy stats then dole them out according to the ratio
 
 
 # dummylist = []
@@ -177,3 +209,10 @@ def PrintEnemy(enemy:Enemy):
     #     enemyTXT.seek(0)
     #     enemyTXT.truncate()
             # print(dummylist)
+
+def EarlyMechonClause():
+    pass
+    # If mechon gets placed early remove its mechon flag
+    # Dont place mechon early
+    # Allow junk sword to damage mechon
+    # Flag Weapons 3 Anti Mechon, 5, Anti Mechon but cant hurt human, 7 Anti mechon and human

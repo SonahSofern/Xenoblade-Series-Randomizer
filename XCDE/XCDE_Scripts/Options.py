@@ -16,13 +16,13 @@ GameModeTab = 8
 # LevelDiffOption = Option("Level Penalties", General, "Removes the harsh level penalties and bonuses from the game for more fair combat")
 
 # Enemy
-EnemyOption = Option("Enemies", Enemies, "Randomizes enemy in the overworld", [lambda: EnemiesScript.Enemies()])
+EnemyOption = Option("Enemies", Enemies, "Randomizes enemies in the overworld", [lambda: EnemiesScript.Enemies()])
 EnemyOption_Normal = SubOption("Normal Enemies", EnemyOption)
 EnemyOption_Unique = SubOption("Unique Monsters", EnemyOption)
 EnemyOption_Boss = SubOption("Bosses", EnemyOption)
 EnemyOption_Superboss = SubOption("Superbosses", EnemyOption)
-EnemyOption_MixTypes = SubOption("Mix Enemy Types", EnemyOption)
-
+EnemyOption_MixTypes = SubOption("Mix Enemy Types", EnemyOption, _defState=False)
+EnemyOption_Duplicates = SubOption("Allow Duplicates", EnemyOption, _defState=False)
 
 # Character
 GemOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.Gems()], descData=lambda: Gems.GemDescriptions())
