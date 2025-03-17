@@ -17,6 +17,12 @@ GameModeTab = 8
 
 # Enemy
 EnemyOption = Option("Enemies", Enemies, "Randomizes enemy in the overworld", [lambda: EnemiesScript.Enemies()])
+EnemyOption_Normal = SubOption("Normal Enemies", EnemyOption)
+EnemyOption_Unique = SubOption("Unique Monsters", EnemyOption)
+EnemyOption_Boss = SubOption("Bosses", EnemyOption)
+EnemyOption_Superboss = SubOption("Superbosses", EnemyOption)
+EnemyOption_MixTypes = SubOption("Mix Enemy Types", EnemyOption)
+
 
 # Character
 GemOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.Gems()], descData=lambda: Gems.GemDescriptions())
