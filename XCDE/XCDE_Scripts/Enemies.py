@@ -5,7 +5,7 @@ class Enemy:
     def __init__(self, enelistArea, enelist):
         self.eneListArea = enelistArea
         self.enelist = enelist
-      
+   
 # BadEnemies = [220, 1154, 1157, 2403, 2406, 2413, 2750, 2906, 2908, 2909] + Helper.InclRange(930,998)+ Helper.InclRange(1131,1196)+ Helper.InclRange(1239, 1301)+ Helper.InclRange(701,779)+ Helper.InclRange(1769,1800)+ Helper.InclRange(1850,1897)
 def Enemies():
     NormalEnemies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 41, 43, 52, 53, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 108, 109, 110, 115, 116, 117, 118, 119, 120, 121, 122, 123, 126, 127, 128, 129, 130, 132, 133, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 165, 166, 167, 168, 169, 170, 171, 173, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 280, 285, 286, 287, 288, 289, 290, 291, 292, 294, 295, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 319, 320, 321, 322, 323, 324, 335, 336, 337, 342, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 426, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, 512, 513, 514, 515, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533, 549, 550, 551, 552, 553, 554, 601, 602, 603, 604, 605, 606, 607, 608, 609, 610, 611, 612, 613, 614, 615, 616, 617, 618, 619, 620, 621, 622, 623, 624, 625, 626, 627, 628, 629, 630, 631, 632, 633, 634, 635, 649, 901, 902, 903, 904, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1055, 1057, 1059, 1060, 1061, 1062, 1063, 1064, 1104, 1105, 1106, 1107, 1108, 1109, 1110, 1111, 1112, 1113, 1114, 1115, 1201, 1202, 1203, 1302, 1303, 1304, 1305, 1306, 1307, 1308, 1309, 1310, 1311, 1312, 1313, 1314, 1401, 1402, 1403, 1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411, 1412, 1413, 1414, 1415, 1416, 1417, 1418, 1419, 1420, 1421, 1422, 1423, 1424, 1425, 1426, 1427, 1428, 1429, 1430, 1431, 1432, 1433, 1434, 1435, 1450, 1451, 1506, 1507, 1508, 1509, 1510, 1511, 1521, 1522, 1523, 1524, 1525, 1526, 1527, 1528, 1529, 1530, 1531, 1532, 1533, 1534, 1547, 1602, 1603, 1604, 1605, 1606, 1607, 1608, 1609, 1610, 1611, 1612, 1613, 1617, 1701, 1702, 1703, 1704, 1705, 1706, 1707, 1708, 1709, 1710, 1711, 1712, 1713, 1714, 1715, 1716, 1717, 1718, 1719, 1720, 1721, 1734, 1735, 1736, 1737, 1738, 1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 1911, 1912, 1913, 2101, 2102, 2103, 2104, 2105, 2106, 2107, 2108, 2109, 2110, 2111, 2112, 2113, 2114, 2201, 2202, 2203, 2204, 2205, 2206, 2207, 2208, 2209, 2210, 2211, 2212, 2213, 2214, 2215, 2216, 2228, 2229, 2230, 2231, 2232, 2301, 2302, 2303, 2304, 2305, 2306, 2307, 2308, 2401, 2402, 2404, 2405, 2718, 2719, 2720, 2721, 2722, 2723, 2725, 2726, 2727, 2728, 2731, 2732, 2741, 2742, 2763, 2764, 2765, 2766, 2767, 2768, 2769, 2770, 2771, 2772, 2773, 2774, 2775, 2776, 2777, 2778, 2779, 2780, 2781, 2782, 2783, 2784, 2785, 2786, 2787, 2788, 2789, 2790, 2791, 2792, 2793, 2794, 2795, 2796, 2797, 2798, 2799, 2800, 2801, 2802, 2803, 2804, 2805, 2806, 2807, 2808, 2809, 2810, 2811, 2812, 2813, 2814, 2815, 2816, 2817, 2818, 2819, 2820, 2821, 2822, 2823, 2824, 2825, 2826, 2827, 2828, 2829, 2830, 2831, 2832, 2833, 2834, 2835, 2836, 2837, 2838, 2839, 2840, 2841, 2842, 2843, 2844, 2845, 2846, 2847, 2848, 2849, 2850, 2851, 2852, 2853, 2854, 2855, 2867, 2868, 2869, 2872, 2873, 2874, 2875, 2876, 2877, 2878, 2879, 2880, 2881, 2882, 2883, 2884, 2885, 2886, 2887, 2888, 2889, 2905, 2907, 2910, 2911, 2922, 2923, 2924, 2925, 2926, 2927, 2928, 2929, 3051, 3052, 3053, 3054, 3055, 3056, 3095, 3096, 3097, 3098, 3099, 3101, 3102, 3103, 3104, 3105, 3106, 3151, 3152, 3153, 3154, 3155, 3156, 3201, 3202, 3203, 3204, 3205, 3251, 3252, 3253, 3254, 3255, 3256, 3301, 3302, 3303, 3304, 3305, 3306, 3351, 3353, 3501, 3502, 3503, 3504]
@@ -33,9 +33,8 @@ def Enemies():
     CombinedUniqueEnemyData:list[Enemy] = []
     CombinedBossEnemyData:list[Enemy] = []
     CombinedSuperbossEnemyData:list[Enemy] = []
-    CombinedEnemyData:list[Enemy] = []     
     # "run_speed" Do NOT include run speed it lags the game to 1 fps
-    CopiedStats = ["move_speed", "named", "frame", "size", "scale", "family", "elem_phx", "elem_eth", "Lv_up_hp", "Lv_up_str", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "avoid", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "detects", "assist", "search_range", "search_angle", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_dmg", "spike_state", "spike_state_val", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
+    CopiedStats = ["move_speed", "named", "frame", "size", "scale", "family", "hp","str","agi","eth","elem_phx", "elem_eth", "Lv_up_hp", "Lv_up_str", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "avoid", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "detects", "assist", "search_range", "search_angle", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_dmg", "spike_state", "spike_state_val", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
     CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
         eneData = json.load(eneFile)    
@@ -53,18 +52,17 @@ def Enemies():
                             if enID == enemy["$id"]:
                                 enemyCopy = copy.copy(enemy)
                                 enCopy = copy.copy(en)
-                                new = Enemy(enemyCopy, enCopy)
+                                newEnemy = Enemy(enemyCopy, enCopy)
                                 if enID in NormalEnemies:
-                                    CombinedNormalEnemyData.append(new)
+                                    CombinedNormalEnemyData.append(newEnemy)
                                 elif enID in BossEnemies:
-                                    CombinedBossEnemyData.append(new)
+                                    CombinedBossEnemyData.append(newEnemy)
                                 elif enID in UniqueEnemies:
-                                    CombinedUniqueEnemyData.append(new)
+                                    CombinedUniqueEnemyData.append(newEnemy)
                                 elif enID in SuperbossEnemies:
-                                    CombinedSuperbossEnemyData.append(new)
+                                    CombinedSuperbossEnemyData.append(newEnemy)
                                 # PrintEnemy(new)
                                 break   
-                    CombinedEnemyData = CombinedNormalEnemyData + CombinedUniqueEnemyData + CombinedSuperbossEnemyData + CombinedBossEnemyData 
                     eneAreaFile.seek(0)
                     eneAreaFile.truncate()
                     json.dump(eneAreaData, eneAreaFile, indent=2, ensure_ascii=False)
@@ -80,9 +78,9 @@ def Enemies():
                         enID = enemy["$id"]
                         if enemy["$id"] not in ChosenEnemyIds: # Only want to replace enemies chosen from our groups
                             continue
-                        
+                        group = []
                         if isMixed:
-                            group = CombinedEnemyData 
+                            group = CombinedNormalEnemyData + CombinedUniqueEnemyData + CombinedSuperbossEnemyData + CombinedBossEnemyData
                         elif enID in NormalEnemies:
                             group = CombinedNormalEnemyData
                         elif enID in BossEnemies:
@@ -93,7 +91,9 @@ def Enemies():
                             group = CombinedSuperbossEnemyData
                             
                         chosen = random.choice(group) # Choose from the desired pool
-                            
+                        
+                        KeepStatRatios(chosen.eneListArea, enemy)
+
                         # Copy our chosens stats over
                         for key in CopiedStats: 
                             enemy[key] = chosen.eneListArea[key]
@@ -103,7 +103,6 @@ def Enemies():
                                 for key in CopiedInfo:
                                     ene[key] = chosen.enelist[key]
                                 break
-                            
                     eneAreaFile.seek(0)
                     eneAreaFile.truncate()
                     json.dump(eneAreaData, eneAreaFile, indent=2, ensure_ascii=False)
@@ -113,8 +112,36 @@ def Enemies():
         eneFile.truncate()
         json.dump(eneData, eneFile, indent=2, ensure_ascii=False)
     
-def KeepStatRatios(): # Right now enemies take on the stats of the enemy they replaced in the world. We could fix that. 
-    pass
+def KeepStatRatios(chosen, enemy): # Enemy is taking all of chosens stat ratios
+    # Chosen ratio
+
+    chosenTotal = 0
+    enemyTotal = 0
+    keys = ["hp", "str", "agi", "eth"]
+    for key in keys:
+        chosenTotal += chosen[key]
+        
+    hpRatio = chosen["hp"]/chosenTotal
+    strRatio = chosen["str"]/chosenTotal
+    agiRatio = chosen["agi"]/chosenTotal
+    ethRatio = chosen["eth"]/chosenTotal
+    
+    for key in keys: # Stat total for the enemy before 
+        enemyTotal += enemy[key]
+    
+    enemy["hp"] = int(chosenTotal * hpRatio)
+    enemy["str"] = int(chosenTotal * strRatio)
+    enemy["agi"] = int(chosenTotal * agiRatio)
+    enemy["eth"] = int(chosenTotal * ethRatio)
+
+    # print(f"Enemy Original Stat Total: {enemyTotal}")
+    # print(f"Chosen Stat Total: {chosenTotal}")
+    # print(f"HP: {enemy["hp"]}")
+    # print(f"Strength: {enemy["str"]}")
+    # print(f"Agility: {enemy["agi"]}")
+    # print(f"Ether: {enemy["eth"]}\n")
+    
+    # Total up the enemy stats then dole them out according to the ratio
 
 
 # dummylist = []
