@@ -111,7 +111,7 @@ def LinkCost(skill):
     skill["point_SP"] = int(skill["point_SP"] * skillRoll)
 
 def SkillLinkNodeRando():
-    with open("./XCDE/_internal/JsonOutputs/bdat_menu_psv.json", 'r+', encoding='utf-8') as linkFile: # Randomizes the node shape for skill link trees
+    with open("./XCDE/_internal/JsonOutputs/bdat_menu_psv/MNU_PSset.json", 'r+', encoding='utf-8') as linkFile: # Randomizes the node shape for skill link trees
         linkData = json.load(linkFile)
         for link in linkData["rows"]:
             for i in range(1,6):
