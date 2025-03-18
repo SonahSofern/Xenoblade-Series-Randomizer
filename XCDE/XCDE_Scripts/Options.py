@@ -1,7 +1,7 @@
 import PcArts
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
-import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript
+import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials
 OptionList =[]
 
 General = 1
@@ -34,7 +34,7 @@ AffinityTreeOption_Power = SubOption("Power Level", AffinityTreeOption)
 AffinityTreeOption_LinkCost = SubOption("Affinity Coin Cost", AffinityTreeOption)
 AffinityTreeOption_Shape = SubOption("Node Shape", AffinityTreeOption)
 PlayerArtsOption = Option("Player Arts",Character, "Randomizes character's arts and their effects", [lambda: PcArts.RandomizePcArts()])
-PlayerArtsOption_BalancedUnlockLevels = SubOption("Balanced Unlock Levels", PlayerArtsOption, [lambda: PcArts.BalanceArtUnlockLevels()])
+PlayerArtsOption_BalancedUnlockLevels = SubOption("Balanced Unlock Levels", PlayerArtsOption)
 # PlayerArtsOption_EarlyArtsUnlock = SubOption("Unlock All Arts at Level 1", PlayerArtsOption)
 PlayerArtsOption_ArtGroups = SubOption("Keep Combo Arts Together", PlayerArtsOption)
 PlayerArtsOption_Summons = SubOption("Keep Melia's Summons", PlayerArtsOption)
@@ -57,5 +57,6 @@ JingleMusicOption = Option("Jingles", Misce, "Randomizes the chosen jingles onto
 for song in Music.AllJingles:
     song.CreateOption(JingleMusicOption, Music.UsedJingles)
 
+TutorialSkipsOption = Option("Tutorial Skips", QOL, "Skips tutorials", [lambda: Tutorials.TutorialSkips()])
 
 # ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html
