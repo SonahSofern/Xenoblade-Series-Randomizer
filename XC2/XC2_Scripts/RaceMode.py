@@ -278,7 +278,7 @@ def RaceModeDescription():
     RaceModeDesc.Text(r" -  When this option is on, note that enemies will only drop gold, so seeking out these chests is your main method of increasing your character power level!")
     RaceModeDesc.Text(r" -  Custom Core Crystals containing specific Rare Blades will also be shuffled into the pool.")
     RaceModeDesc.Tag("Starting Items")
-    RaceModeDesc.Text(r"• You start with all 5 drivers with their associated blades (Pyra/Mythra, Dromarch, Poppy α, PoppyQT, PoppyQTπ, Pandoria, Brighid).")
+    RaceModeDesc.Text(r"• You start with all 5 drivers with their associated blades (Pyra/Mythra, Dromarch, Poppi α, PoppiQT, PoppiQTπ, Pandoria, Brighid).")
     RaceModeDesc.Text(r"• You start with 100000g.")
     return RaceModeDesc
 
@@ -704,7 +704,7 @@ def PickupRadiusDeedStart(): # Start with a Pickup Radius Up Deed, to account fo
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)        
 
-def DLCItemChanges(): # Changes all DLC gifts to 1 gold except for poppy crystals
+def DLCItemChanges(): # Changes all DLC gifts to 1 gold except for poppi crystals
     DLCIDRowsWithItems = Helper.InclRange(1,7) + [9, 10] + Helper.InclRange(16, 21) + [23,24] + [30] + [36, 37] + Helper.InclRange(43, 55)
     with open("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
         data = json.load(file)
@@ -1165,7 +1165,23 @@ def CTMCDescription():
     CTMCDesc = PopupDescriptions.Description()
     CTMCDesc.Header(Options.CTMCOption.name)
     CTMCDesc.Text("CTMC will let you know at a glance what is inside a chest or barrel. It will help you decide what chests are worthwhile to get.")
-    CTMCDesc.Image("CTMC.png", "XC2")
+    CTMCDesc.Image("CTMC.png", "XC2", 700)
+    CTMCDesc.Header("Chest Hierarchies")
+    CTMCDesc.Tag("Non-Race Mode Chests")
+    CTMCDesc.Text("For each chest, the following hierarchy will be used to determine the label and appearance given to a chest:")
+    CTMCDesc.Text("Key Item/Quest Item")
+    CTMCDesc.Text("Core Crystal")
+    CTMCDesc.Text("Shop Deed")
+    CTMCDesc.Text("Equipment")
+    CTMCDesc.Text("Collection Materials")
+    CTMCDesc.Text("Gold")
+    CTMCDesc.Tag("Race Mode Chests")
+    CTMCDesc.Text("For each chest in Race Mode, the following hierarchy will be used to determine the label and appearance given to a chest:")
+    CTMCDesc.Text("Zohar Fragment (Zohar Fragment Hunt exclusive)")
+    CTMCDesc.Text("Core Crystal")
+    CTMCDesc.Text("Movespeed Deed")
+    CTMCDesc.Text("Rare Item")
+    CTMCDesc.Text("Equipment/Gold")
     return CTMCDesc
 
 def HideMapAreas(ScenarioFlagLists): # Adding conditions for each area's map to be unlocked

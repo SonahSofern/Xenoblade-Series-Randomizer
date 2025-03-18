@@ -30,6 +30,11 @@ def CreateDLCtoSetFlag(ItemName: list[str], Flag: list[int], Category: list[int]
             json.dump(data, file, indent=2, ensure_ascii=False)
 
 def AddMovespeedDeed():
+    # Torna Exclusive debug
+    #JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"],[49],["Value"], 500)
+    #JSONParser.ChangeJSONLine(["common/FLD_OwnerBonusParam.json"],[1],["Max"], 1000)
+    #Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", ["FSID", "FSID2"], 0)
+    # Torna Exclusive debug
     if not Options.UMHuntOption.GetState():
         CurrentNameID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
         BonusMovespeed = Options.StartwithIncreasedMovespeedOption.GetOdds() * 10
