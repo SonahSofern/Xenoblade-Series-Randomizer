@@ -54,7 +54,6 @@ TabCharactersOuter = ttk.Frame(MainWindow)
 TabEnemiesOuter = ttk.Frame(MainWindow) 
 TabMiscOuter = ttk.Frame(MainWindow) 
 TabQOLOuter = ttk.Frame(MainWindow)
-TabCosmeticsOuter = ttk.Frame(MainWindow)
 TabGameModeOuter = ttk.Frame(MainWindow)
 TabFunnyOuter = ttk.Frame(MainWindow)
 
@@ -64,7 +63,6 @@ TabCharactersCanvas = Canvas(TabCharactersOuter)
 TabEnemiesCanvas = Canvas(TabEnemiesOuter) 
 TabMiscCanvas = Canvas(TabMiscOuter)
 TabQOLCanvas = Canvas(TabQOLOuter)
-TabCosmeticsCanvas = Canvas(TabCosmeticsOuter)
 TabGameModeCanvas = Canvas(TabGameModeOuter)
 TabFunnyCanvas = Canvas(TabFunnyOuter)
 
@@ -74,18 +72,16 @@ TabCharacters = ttk.Frame(TabCharactersCanvas)
 TabEnemies = ttk.Frame(TabEnemiesCanvas) 
 TabMisc = ttk.Frame(TabMiscCanvas)
 TabQOL = ttk.Frame(TabQOLCanvas)
-TabCosmetics = ttk.Frame(TabCosmeticsCanvas)
 TabGameMode = ttk.Frame(TabGameModeCanvas)
 TabFunny = ttk.Frame(TabFunnyCanvas)
 
 
-GUISettings.CreateScrollBars([TabGeneralOuter, TabCharactersOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabGameModeOuter, TabFunnyOuter],[TabGeneralCanvas, TabCharactersCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabGameModeCanvas, TabFunnyCanvas],[TabGeneral, TabCharacters, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabGameMode, TabFunny])
+GUISettings.CreateScrollBars([TabGeneralOuter, TabCharactersOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabGameModeOuter, TabFunnyOuter],[TabGeneralCanvas, TabCharactersCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabGameModeCanvas, TabFunnyCanvas],[TabGeneral, TabCharacters, TabEnemies, TabMisc, TabQOL, TabGameMode, TabFunny])
 
 # Tabs
 MainWindow.add(TabGeneralOuter, text ='General') 
 MainWindow.add(TabCharactersOuter, text ='Characters') 
 MainWindow.add(TabEnemiesOuter, text ='Enemies') 
-MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.add(TabQOLOuter, text = 'Quality of Life')
 MainWindow.add(TabGameModeOuter, text='Game Modes')
 MainWindow.add(TabFunnyOuter, text='Funny')
@@ -99,8 +95,7 @@ Tabs = {
     4: TabMisc,
     5: TabQOL,
     6: TabFunny,
-    7: TabCosmetics,
-    8: TabGameMode
+    7: TabGameMode
 }
 
 Interactables.OptionList.sort(key= lambda x: x.name) # Sorts alphabetically

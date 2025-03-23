@@ -21,10 +21,7 @@ def Gems():
             if isNotCapped:
                 gem["max"] = 10000
             if isFreeEquip:
-                gem["attach"] = 0
-                # 0 Equip to anything
-                # 1 Equip to weapon
-                # 2 Equip to armor
+                gem["attach"] = 0                # 0 Equip to anything                # 1 Equip to weapon                # 2 Equip to armor
             if isPower:
                 RankPower(gem, ranks)
         if isPower:
@@ -50,12 +47,7 @@ def ItemPower(gemData, ranks):
             rank = gem["rankType"]
             for g in gemData:
                 if g["$id"] == gem["itemID"]:
-                    low = g[f"lower_{ranks[rank-1]}"]
-                    high = g[f"upper_{ranks[rank-1]}"]
-                    try:
-                        gem["percent"] = random.randrange(low, high)
-                    except:
-                        pass
+                    gem["percent"] = random.randrange(g[f"lower_{ranks[rank-1]}"], g[f"upper_{ranks[rank-1]}"])
                     break
         gemItemFile.seek(0)
         gemItemFile.truncate()
@@ -63,12 +55,14 @@ def ItemPower(gemData, ranks):
 
 def GemDescriptions():
     GemDescription = scripts.PopupDescriptions.Description()
+    GemDescription.Header(Options.GemOption_Power.name)
+    GemDescription.Text("This randomizes the power level of crafted and premade gems")
     GemDescription.Header(Options.GemOption_FreeEquip.name)
     GemDescription.Text("This allows any gem to be equipped to weapons and armor.")
     GemDescription.Image("GemsFreeEquipped.png","XCDE", 500)
     GemDescription.Text("Double Attack on armor and HP Up on weapons.")
     GemDescription.Header(Options.GemOption_NoCap.name)
-    GemDescription.Text("This removes the % and regular cap for all gems.")
+    GemDescription.Text("This removes the % and regular cap for all gems when you equip them.")
     GemDescription.Image("GemCap.png","XCDE", 500)
     GemDescription.Text("Double Attack and Haste above their vanilla 50% cap.")
     return GemDescription

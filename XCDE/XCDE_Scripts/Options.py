@@ -10,8 +10,7 @@ Enemies = 3
 Misce = 4
 QOL = 5
 Funny = 6
-CosmeticsTab = 7
-GameModeTab = 8
+GameModeTab = 7
 
 # LevelDiffOption = Option("Level Penalties", General, "Removes the harsh level penalties and bonuses from the game for more fair combat")
 
@@ -26,9 +25,9 @@ EnemyOption_Duplicates = SubOption("Allow Duplicates", EnemyOption, _defState=Fa
 
 # Character
 GemOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.Gems()], descData=lambda: Gems.GemDescriptions())
+GemOption_Power = SubOption("Power", GemOption)
 GemOption_FreeEquip = SubOption("Freely Equip to Weapons/Armor", GemOption)
 GemOption_NoCap = SubOption("Remove Gem Stat Caps", GemOption)
-GemOption_Power = SubOption("Power", GemOption)
 AffinityTreeOption = Option("Skill Trees", Character, "Randomizes all character's skill trees", [lambda: SkillTrees.SkillRando()], descData=lambda: SkillTrees.SkillTreeDesc())
 AffinityTreeOption_Effect = SubOption("Skill", AffinityTreeOption)
 AffinityTreeOption_Power = SubOption("Power Level", AffinityTreeOption)
@@ -43,6 +42,7 @@ PlayerArtsOption_GuestArts = SubOption("Include Guest Arts", PlayerArtsOption)
 PlayerArtsOption_Cooldown = SubOption("Cooldown", PlayerArtsOption)
 EquipmentOption = Option("Armor", Character, "Randomizes effects of Armor", [lambda: Armor.ArmorRando()])
 EquipmentOption_RemoveStartingEq = SubOption("Remove Starting Equipment", EquipmentOption)
+EquipmentOption_Appearance = SubOption("Appearance", EquipmentOption)
 # EquipmentOption_Appearance = SubOption("Appearance", EquipmentOption)
 # EquipmentOption_UniqueGems = SubOption("Gems", EquipmentOption)
 # EquipmentOption_Slots = SubOption("Slots", EquipmentOption)
@@ -67,3 +67,5 @@ for song in Music.AllJingles:
 TutorialSkipsOption = Option("Tutorial Skips", QOL, "Reduces tutorials as much as possible", [lambda: Tutorials.TutorialSkips()])
 
 # ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html
+
+# Character models rando https://xenobladedata.github.io/xb1de/bdat/bdat_common/MNU_Stream_full_dr.html
