@@ -61,7 +61,7 @@ def MusicRando(Songs:list[Music], TempList:list[Music]):
         bgmFile.seek(0)
         bgmFile.truncate()
         json.dump(bgmData, bgmFile, indent=2, ensure_ascii=False)
-    # print(list(x.songName for x in UsedBattleThemes))
+    print(list(x.songName for x in UsedBossThemes))
     TempList.clear()
 
 

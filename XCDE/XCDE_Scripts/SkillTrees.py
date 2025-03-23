@@ -138,7 +138,7 @@ def SkillTreeDesc():
     myDesc.Header(Options.AffinityTreeOption_Shape.name)
     myDesc.Text("This randomizes all skill node shapes into:\n- Circle\n- Square\n- Hexagon\n- Octagram\n- Diamond")
     myDesc.Image("SkillTreesNodeShape.png", "XCDE", 800)
-    myDesc.Text("This randomizes each character's link skill node shapes into:\n- Circle\n- Square\n- Hexagon\n- Octagram\n")
+    myDesc.Text("This also randomizes each character's link skill node shapes into:\n- Circle\n- Square\n- Hexagon\n- Octagram")
     myDesc.Text("Diamond Skills will still not be linkable to keep vanilla behaviour")
     
     return myDesc

@@ -1,7 +1,7 @@
 import PcArts
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
-import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials
+import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor
 OptionList =[]
 
 General = 1
@@ -17,7 +17,7 @@ GameModeTab = 8
 
 # Enemy
 EnemyOption = Option("Enemies", Enemies, "Randomizes enemies in the overworld", [lambda: EnemiesScript.Enemies()])
-EnemyOption_Normal = SubOption("Normal Enemies", EnemyOption)
+EnemyOption_Normal = SubOption("Normal Monsters", EnemyOption)
 EnemyOption_Unique = SubOption("Unique Monsters", EnemyOption)
 EnemyOption_Boss = SubOption("Bosses", EnemyOption)
 EnemyOption_Superboss = SubOption("Superbosses", EnemyOption)
@@ -28,6 +28,7 @@ EnemyOption_Duplicates = SubOption("Allow Duplicates", EnemyOption, _defState=Fa
 GemOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.Gems()], descData=lambda: Gems.GemDescriptions())
 GemOption_FreeEquip = SubOption("Freely Equip to Weapons/Armor", GemOption)
 GemOption_NoCap = SubOption("Remove Gem Stat Caps", GemOption)
+GemOption_Power = SubOption("Power", GemOption)
 AffinityTreeOption = Option("Skill Trees", Character, "Randomizes all character's skill trees", [lambda: SkillTrees.SkillRando()], descData=lambda: SkillTrees.SkillTreeDesc())
 AffinityTreeOption_Effect = SubOption("Skill", AffinityTreeOption)
 AffinityTreeOption_Power = SubOption("Power Level", AffinityTreeOption)
@@ -40,6 +41,12 @@ PlayerArtsOption_ArtGroups = SubOption("Keep Combo Arts Together", PlayerArtsOpt
 PlayerArtsOption_Summons = SubOption("Keep Melia's Summons", PlayerArtsOption)
 PlayerArtsOption_GuestArts = SubOption("Include Guest Arts", PlayerArtsOption)
 PlayerArtsOption_Cooldown = SubOption("Cooldown", PlayerArtsOption)
+EquipmentOption = Option("Armor", Character, "Randomizes effects of Armor", [lambda: Armor.ArmorRando()])
+EquipmentOption_RemoveStartingEq = SubOption("Remove Starting Equipment", EquipmentOption)
+# EquipmentOption_Appearance = SubOption("Appearance", EquipmentOption)
+# EquipmentOption_UniqueGems = SubOption("Gems", EquipmentOption)
+# EquipmentOption_Slots = SubOption("Slots", EquipmentOption)
+
 
 # Misc
 BattleMusicOption = Option("Battle Music", Misce, "Randomizes the chosen battle themes onto all battle themes", [lambda: Music.MusicRando(Music.AllBattleThemes, Music.UsedBattleThemes)]) #https://xenobladedata.github.io/xb1de/bdat/bdat_common/bgmlist.html
@@ -57,6 +64,6 @@ JingleMusicOption = Option("Jingles", Misce, "Randomizes the chosen jingles onto
 for song in Music.AllJingles:
     song.CreateOption(JingleMusicOption, Music.UsedJingles)
 
-TutorialSkipsOption = Option("Tutorial Skips", QOL, "Skips tutorials", [lambda: Tutorials.TutorialSkips()])
+TutorialSkipsOption = Option("Tutorial Skips", QOL, "Reduces tutorials as much as possible", [lambda: Tutorials.TutorialSkips()])
 
 # ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html
