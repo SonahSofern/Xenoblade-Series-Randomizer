@@ -2,13 +2,37 @@
 import json, random, Options
 import scripts.PopupDescriptions
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_bufflist.html#87 will be similar to enhancement in xc2 i can create gems with new effects and add back gems that dont get put in the game but already exist like cooldown reduc (cast quicken)
+# Cant extend gems, the descriptions wont load will have to replace old ones
+
+GemList = []
 class Gem:
-    def __init__(self,_name, _cyl_name, _atr_type, _status, _rvs_type, _attach, _accum, _power, _percentPower, _money = 20, _category = 1):
-        self.status = _status
-        self.power = _power
-        self.pPower = _percentPower
-        self.money = _money 
-        self.category = _category
+    def __init__(self, name = 0, atr_type = 0, status = 0, rvs_type = 0, attach = 0, max = 0, val_type = 0, power = [0,0], percentPower = [0,0], money = 20, category = 1, rvs_caption = 0):
+        self.name = name # Gen the ID from launch
+        self.atr_type = atr_type
+        self.status = status
+        self.rvstype = rvs_type # A number that represents how the value of this gem in XC1 is input to its status (e.g. added vs multiplied).
+        self.attach = attach
+        self.accum = 1
+        self.max = max
+        self.val_type = val_type # 1 for stats 0 for else
+        self.power = power
+        self.pPower = percentPower
+        self.money = money 
+        self.category = category
+        self.rvs_caption = rvs_caption
+        GemList.append(self)
+  
+Red = 4
+Blue = 5
+Yellow = 6
+Teal = 7
+Green = 8
+Orange = 9
+        
+StrengthUp = Gem("Strength Up", Red, 88, 1, 0, 150, 1, [5,100], [0,0], 200, 1, "\\[Passive\\][XENO:n ]\nIncreases strength by $1.")
+ChillDef = Gem("Chill Defence", Red, 138, 3, 2, 100, 0, [2,75], [0,0], 400, 3, "\\[Passive\\] Decreases Chill damage[XENO:n ]\ntaken by $1.")
+
+
 
 def Gems():
     ranks = ["E", "D", "C", "B", "A", "S"] # Calculate proper gem amount based on rank
@@ -17,6 +41,7 @@ def Gems():
         isNotCapped = Options.GemOption_NoCap.GetState()
         isFreeEquip = Options.GemOption_FreeEquip.GetState()
         isPower = Options.GemOption_Power.GetState()
+        isUnusedGems = Options.GemOption_Effect.GetState()
         for gem in gemData["rows"]:
             if isNotCapped:
                 gem["max"] = 10000
@@ -24,12 +49,19 @@ def Gems():
                 gem["attach"] = 0                # 0 Equip to anything                # 1 Equip to weapon                # 2 Equip to armor
             if isPower:
                 RankPower(gem, ranks)
+            if isUnusedGems:
+                UnusedGems(gem)
+            
         if isPower:
              ItemPower(gemData["rows"], ranks)
         gemFile.seek(0)
         gemFile.truncate()
         json.dump(gemData, gemFile, indent=2, ensure_ascii=False)
-        
+
+    
+def UnusedGems(gem):
+    pass
+    
 
 def RankPower(gem, ranks):
     mult = random.choice([0.1,0.2, 0.3, 0.4, 0.6, 0.8, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0, 2.5, 3.0])

@@ -26,6 +26,7 @@ EnemyOption_Duplicates = SubOption("Allow Duplicates", EnemyOption, _defState=Fa
 # Character
 GemOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.Gems()], descData=lambda: Gems.GemDescriptions())
 GemOption_Power = SubOption("Power", GemOption)
+GemOption_Effect = SubOption("Unused Gems", GemOption)
 GemOption_FreeEquip = SubOption("Freely Equip to Weapons/Armor", GemOption)
 GemOption_NoCap = SubOption("Remove Gem Stat Caps", GemOption)
 AffinityTreeOption = Option("Skill Trees", Character, "Randomizes all character's skill trees", [lambda: SkillTrees.SkillRando()], descData=lambda: SkillTrees.SkillTreeDesc())
@@ -65,6 +66,10 @@ for song in Music.AllJingles:
     song.CreateOption(JingleMusicOption, Music.UsedJingles)
 
 TutorialSkipsOption = Option("Tutorial Skips", QOL, "Reduces tutorials as much as possible", [lambda: Tutorials.TutorialSkips()])
+FasterLvOption = Option("Fast Levels", QOL, "Decreases level up requirements by a set amount.")
+FasterLvOption_2 = SubOption("2x", FasterLvOption, [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], ['row[key] // 2'])])
+FasterLvOption_4 = SubOption("4x", FasterLvOption, [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], ['row[key] // 4'])], _defState = False)
+FasterLvOption_8 = SubOption("8x", FasterLvOption, [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], ['row[key] // 8'])], _defState = False)
 
 # ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html
 

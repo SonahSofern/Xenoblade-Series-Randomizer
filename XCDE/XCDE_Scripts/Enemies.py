@@ -76,7 +76,6 @@ def Enemies():
                     json.dump(eneAreaData, eneAreaFile, indent=2, ensure_ascii=False)
             except:
                 continue   
-        RingRemoval() 
         # Randomly assign enemies     
         for file in IDs.areaFileListNumbers:
             try:   
@@ -147,6 +146,7 @@ def Enemies():
         eneFile.seek(0)
         eneFile.truncate()
         json.dump(eneData, eneFile, indent=2, ensure_ascii=False)
+        RingRemoval() 
     
 def SpikeBalancer(enemy, chosen, bossFights): # spike damage is 10x the spike_dmg value
     if chosen["spike_dmg"] != 0:
