@@ -5,6 +5,7 @@ from tkinter import *
 import _Accessories, _DriverArts, SkillTrees, BladeRandomization, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeWeaponClassRando
 import TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UMHuntMain, Cosmetics, AccessoryShops, CollectionPoints, PouchItemShops, TreasureChests, ButtonCombos, EnemyDrops, _EleCombo
 import _YellowSkills, _BladeSpecials, Scales, DLCFlagQOL, _Drivers
+import TornaMain
 from scripts.Interactables import Option, SubOption
 # Prio
 First = 0
@@ -211,6 +212,9 @@ RaceModeOption_DLC = SubOption("DLC Item Removal", RaceModeOption)
 UMHuntOption = Option("Unique Monster Hunt", GameModeTab, "Defeat Unique Monsters in this Roguelike mode!", [lambda: UMHuntMain.UMHunt()], _hasSpinBox = True, _spinMin = 1, _spinMax = 10, _spinIncr = 1, _spinDesc = "Round(s)", _spinWidth = 2, spinDefault = 10, descData= lambda: UMHuntMain.Description())
 UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
 UMHuntOption_RandomLandmarks = SubOption("Random Starting Landmarks", UMHuntOption)
+
+# Torna
+TornaMainOption = Option("Torna Randomization", GameModeTab, "WIP", [lambda: TornaMain.AllTornaRando()])
 
 
 # Currently Disabled for Various Reasons
