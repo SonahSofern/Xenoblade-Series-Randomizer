@@ -17,67 +17,59 @@ class Description:
     def __init__(self, geometry = (800,800)):
         self.geometry = geometry
         self.data:list[DescriptionObject] = []
-        self.order = 0
         
-    def Tag(self, text:str):
-        self.data.append(PopTag(self.order, text))
+    def Tag(self, text:str, padx=(20,20), pady=(0,0), anchor="w", side=None):
+        self.data.append(PopTag(text, padx, pady, anchor, side=side))
         
-    def Text(self,text:str):
-        self.data.append(PopText(self.order, text))
+    def Text(self,text:str, padx=(20,20), pady=(5,5), anchor="w", side=None):
+        self.data.append(PopText(text,padx,pady, anchor, side=side))
 
-    def Image(self,imagePath:str, game, size = 400):
+    def Image(self,imagePath:str, game, size = 400, padx=5, pady=(5,5), anchor=None, side=None):
         if isOnefile: # Images come from a different path when packed to one file
             imagePath = os.path.join(sys._MEIPASS,"Images", imagePath)
         else:
             imagePath = f"./{game}/_internal/Images/{imagePath}"
-        self.data.append(PopImage(self.order, imagePath, size))
+        self.data.append(PopImage(imagePath, size, padx, pady, anchor, side=side))
     
-    def Header(self, text:str):
-            self.data.append(PopHeader(self.order, text))
+    def Header(self, text:str, padx=2, pady=(0,5), anchor="w"):
+            self.data.append(PopHeader(text, padx, pady, anchor))
 
 class DescriptionObject():
-    def __init__(self, order, data):
-        self.order = order
+    def __init__(self, data, padx,pady, anchor, fill = None, expand = None, side=None):
         self.data = data
         self.obj = None
-        order += 1
-
-class PopTag(DescriptionObject): # Make these grouped with some text
-    def __init__(self, order, data):
-        super().__init__(order, data)
+        self.anchor = anchor
+        self.padx = padx
+        self.pady = pady
+        self.fill = fill
+        self.expand = expand
+        self.side = side
     def SpecialPack(self):
-        self.obj.pack(anchor="w",padx=20)
+        self.obj.pack(anchor=self.anchor, padx= self.padx, pady=self.pady, fill=self.fill, expand=self.expand, side=self.side)
+
+class PopTag(DescriptionObject):
+    pass
 
 class PopText(DescriptionObject):
-    def __init__(self, order, data):
-        super().__init__(order, data)
-    def SpecialPack(self):
-        self.obj.pack(anchor="w")
+    pass
         
 class PopImage(DescriptionObject):
-    def __init__(self, order, data, size):
-        super().__init__(order, data)
+    def __init__(self, data, size, padx, pady, anchor, fill=None, expand=None, side=None):
+        super().__init__(data, padx, pady, anchor, fill, expand, side=side)
         self.size = size
-    def SpecialPack(self):
-        self.obj.pack(padx=5)
         
 class PopHeader(DescriptionObject):
-    def __init__(self, order, data):
-        super().__init__(order, data)
+    def __init__(self, data, padx, pady, anchor, fill="x", expand=True):
+        super().__init__(data, padx, pady, anchor, fill, expand)
         self.childGroup = []
-        self.isOn = True
-    def SpecialPack(self):
-        self.obj.pack(padx=2,pady=2, fill="x", expand=True)
         
     def Dropdown(self):
-        if self.isOn:
+        if any(child.obj.winfo_ismapped() for child in self.childGroup): # Checks if any of the children are packed currently to tell which way to toggle things
             for child in self.childGroup:
                 child.obj.pack_forget()
-            self.isOn = False
         else:
             for child in self.childGroup:
-                child.SpecialPack() 
-            self.isOn = True
+                child.SpecialPack()
 
 def GenPopup(optionName, descData, root, defaultFont):
     # Check if a popup with the same title is already open
@@ -104,6 +96,7 @@ def GenPopup(optionName, descData, root, defaultFont):
     scripts.GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
     scripts.GUISettings.LoadTheme(defaultFont, scripts.GUISettings.defGUIThemeVar.get())
     # loop over data from the description class and parse it
+    hasFewHeaders = sum(isinstance(item, PopHeader) for item in myDescription.data) < 3
     for descObj in myDescription.data:
         if isinstance(descObj, PopImage): # Image
             img = Image.open(descObj.data)
@@ -115,10 +108,11 @@ def GenPopup(optionName, descData, root, defaultFont):
             
         elif isinstance(descObj, PopHeader): # Header
             curFrame = ttk.Frame(InnerFrame)
-            descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=10, command=lambda obj= descObj: obj.Dropdown())
+            descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=10, command=lambda obj= descObj: (obj.Dropdown(), ResizeWindow(top, InnerFrame)))
             curHeader = descObj
             curFrame.pack(fill="x", expand=True)
-            
+            descObj.SpecialPack()
+
         elif isinstance(descObj, PopText): # Text
             descObj.obj = ttk.Label(curFrame,text=descObj.data, wraplength=myDescription.geometry[1] - 60)
             curHeader.childGroup.append(descObj)
@@ -126,10 +120,15 @@ def GenPopup(optionName, descData, root, defaultFont):
         elif isinstance(descObj, PopTag): # Tag
             descObj.obj = ttk.Label(curFrame, text=descObj.data, style="Tag.TLabel")
             curHeader.childGroup.append(descObj)
-        descObj.SpecialPack()
- 
-    InnerFrame.update_idletasks()  # Ensure all geometry calculations are up-to-date
-    top.geometry(f"{InnerFrame.winfo_width() + 38}x{ min(InnerFrame.winfo_height() + 40, 800)}")
+        if hasFewHeaders: # If we have less than 3 headers go ahead and pack everything
+            descObj.SpecialPack()
+
+    ResizeWindow(top, InnerFrame)
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
 
             
+def ResizeWindow(top, innerFrame):
+    innerFrame.update_idletasks()  # Ensure the geometry is up to date
+    w = innerFrame.winfo_width() + 37
+    h = min(innerFrame.winfo_height() + 20, 700)
+    top.geometry(f"{w}x{h}")

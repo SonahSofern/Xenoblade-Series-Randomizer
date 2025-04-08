@@ -220,8 +220,8 @@ def LoadTheme(defaultFont, themeName):
                 "configure": {
                     "troughcolor": currentTheme["midColor"],
                     "background": currentTheme["darkColor"],
-                    "borderwidth": 3,
-                    "relief": "ridge",
+                    "borderwidth": 1,
+                    "relief": "flat",
                     "arrowcolor": currentTheme["lightColor"],
                 }
             },
@@ -315,7 +315,7 @@ def LoadTheme(defaultFont, themeName):
         except:
             pass
         
-def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFrames:list[ttk.Frame]): # I never want to touch this code again lol what a nightmare
+def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFrames:list[ttk.Frame], genScrollbar = True): # I never want to touch this code again lol what a nightmare
     for i in range(len(Canvases)):
         InnerFrames[i].pack(fill=BOTH, expand=True)
 
@@ -327,7 +327,8 @@ def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFr
 
         Canvases[i].create_window((0, 0), window=InnerFrames[i], anchor="nw")
         Canvases[i].pack(side="left", fill=BOTH, expand=True)
-        scrollbar.pack(side="right", fill="y")
+        if genScrollbar:
+            scrollbar.pack(side="right", fill="y")
 
         def _on_mousewheel(event, canvas=Canvases[i]):
             canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
@@ -337,7 +338,6 @@ def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFr
         
         OuterFrames[i].pack_propagate(False)
         OuterFrames[i].pack(fill=BOTH, expand=True)
-        
         
 
 def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = []):

@@ -1,6 +1,6 @@
 import json, random, Options
 from BladeRandomization import Replacement2Original
-
+from scripts import Helper, PopupDescriptions
 # Lists of cosmetics to choose from
 ValidDriverCosmetics = []
 ValidBladeCosmetics = [] 
@@ -76,7 +76,7 @@ MythraStylePyra = Cosmetic("bl/bl100102", 1001, Pyra, "Mythra Style Pyra", Blade
 DisguisedPyra = Cosmetic("bl/bl100101", 1001, Pyra, "Disguised Pyra", Blade)
 BlueSkyPyra = Cosmetic("bl/bl120101", 1001, Pyra, "Blue Sky Pyra", Blade)
 ProSwimmerPyra = Cosmetic("bl/bl110101", 1001, Pyra, "Pro Swimmer Pyra", Blade)
-HotSpringPyra = Cosmetic("bl/bl000101", 1002, Pyra, "Hot Springs Pyra", Blade)
+# HotSpringPyra = Cosmetic("bl/bl000101", 1001, Pyra, "Hot Springs Pyra", Blade)
 # DefaultPyra = Cosmetic("bl/bl000101", 1001, Pyra, "Default Pyra", Blade)
 
 # DefaultPoppiα = Cosmetic("bl/bl000601", 1005, Poppiα, "Default Poppiα", ArtBlade)
@@ -122,8 +122,11 @@ BloodWitchNia = Cosmetic("pc/pc120201", 2, Nia, "Blood Witch Nia", Driver)
 def CosmeticPairs(nameData, itmData,odds, charKeyWord, cosmeticsList):
     pairs = {}
     for Acc in itmData["rows"]:
-        if (odds > random.randint(0,99)):
-            cosm:Cosmetic = random.choice(cosmeticsList)
+        if Helper.OddsCheck(odds):
+            try:
+                cosm:Cosmetic = random.choice(cosmeticsList)
+            except:
+                continue
             
             # Keep pairing since we cant make more names
             if Acc["Name"] in pairs:
@@ -142,14 +145,14 @@ def CosmeticPairs(nameData, itmData,odds, charKeyWord, cosmeticsList):
                     break
                 
             Acc["Model"] = cosm.model
-            if Options.BladesOption.GetState() and cosm.characterID in Replacement2Original:
+            if Options.BladesOption.GetState() and (cosm.characterID in Replacement2Original):
                 Acc[f"{charKeyWord}"] = Replacement2Original[cosm.characterID]
             else:
                 Acc[f"{charKeyWord}"] = cosm.characterID
             
 def Cosmetics():
     # Slider
-    odds = Options.CosmeticsOption.GetState()
+    odds = Options.CosmeticsOption.GetOdds()
     
     # Drivers
     with open("./XC2/_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file:
@@ -186,7 +189,10 @@ def Cosmetics():
         eqData = json.load(file)
         for Acc in eqData["rows"]:
             if (odds > random.randint(0,99)):
-                cosm:Cosmetic = random.choice(ValidArtificialBladeCosmetics) # these names are shared with regular ones so its not going to work to put poppi names on them when most cant equip those anyway
+                try:
+                    cosm:Cosmetic = random.choice(ValidArtificialBladeCosmetics) # these names are shared with regular ones so its not going to work to put poppi names on them when most cant equip those anyway
+                except:
+                    continue
                 Acc["Model"] = cosm.model
                 if Options.BladesOption.GetState() and cosm.characterID in Replacement2Original:
                     Acc["Blade"] = Replacement2Original[cosm.characterID]
@@ -200,3 +206,12 @@ def Cosmetics():
     ValidDriverCosmetics.clear()
     ValidBladeCosmetics.clear()
     ValidArtificialBladeCosmetics.clear()
+
+
+def CosmeticsDescription():
+    desc = PopupDescriptions.Description()
+    desc.Header(Options.CosmeticsOption.name)
+    desc.Text("This places random cosmetics on accessories and aux cores.\nThe name of the character it targets will be put at the end of the item name.")
+    desc.Image("cosmaux.png", "XC2", 600)
+    desc.Image("cosmacc.png", "XC2", 600)
+    return desc

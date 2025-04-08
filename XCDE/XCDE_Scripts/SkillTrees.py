@@ -106,12 +106,13 @@ def Power(skill):
     skill["val2"] = min(int(skill["val2"] * val2),255)
     skill["time"] = min(int(skill["time"] * time),255)
 
+linkCostRange = [.15,.25,.5,.7,1.2,1.5,2]
 def LinkCost(skill):
-    skillRoll = random.choice([.15,.25,.5,.7,1.2,1.5,2])
+    skillRoll = random.choice(linkCostRange)
     skill["point_SP"] = int(skill["point_SP"] * skillRoll)
 
 def SkillLinkNodeRando():
-    with open("./XCDE/_internal/JsonOutputs/bdat_menu_psv.json", 'r+', encoding='utf-8') as linkFile: # Randomizes the node shape for skill link trees
+    with open("./XCDE/_internal/JsonOutputs/bdat_menu_psv/MNU_PSset.json", 'r+', encoding='utf-8') as linkFile: # Randomizes the node shape for skill link trees
         linkData = json.load(linkFile)
         for link in linkData["rows"]:
             for i in range(1,6):
@@ -133,12 +134,10 @@ def SkillTreeDesc():
     myDesc.Text("This option affects the power level of skill trees, from 30%-300% of their original strength")
     myDesc.Image("AmazingStars.png", "XCDE")
     myDesc.Text("Amazing Stars normally reduces only 15% of cooldown during night. ")
-    
-    
+    myDesc.Header(Options.AffinityTreeOption_LinkCost.name)
+    myDesc.Text(f"This randomizes the cost when linking skills to your allies between {linkCostRange[0]}x-{linkCostRange[-1]}x")
     myDesc.Header(Options.AffinityTreeOption_Shape.name)
     myDesc.Text("This randomizes all skill node shapes into:\n- Circle\n- Square\n- Hexagon\n- Octagram\n- Diamond")
     myDesc.Image("SkillTreesNodeShape.png", "XCDE", 800)
-    myDesc.Text("This randomizes each character's link skill node shapes into:\n- Circle\n- Square\n- Hexagon\n- Octagram\n")
-    myDesc.Text("Diamond Skills will still not be linkable to keep vanilla behaviour")
-    
+    myDesc.Text("This also randomizes each character's link skill node shapes into:\n- Circle\n- Square\n- Hexagon\n- Octagram\nDiamond Skills will still not be linkable to keep vanilla behaviour")
     return myDesc

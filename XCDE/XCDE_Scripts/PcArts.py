@@ -50,7 +50,7 @@ StarlightKickGroup = ArtGroup([115,107])
 # Setting that just shuffles arts
 def RandomizePcArts():
     keepMeliaSummons = Options.PlayerArtsOption_Summons.GetState()
-    # earlyArts = Options.PlayerArtsOption_EarlyArtsUnlock.GetState()
+    isBalancedLv = Options.PlayerArtsOption_BalancedUnlockLevels.GetState()
     cooldowns = Options.PlayerArtsOption_Cooldown.GetState()
     isArtGroups = Options.PlayerArtsOption_ArtGroups.GetState()
     isGuestArts = Options.PlayerArtsOption_GuestArts.GetState()
@@ -89,9 +89,9 @@ def RandomizePcArts():
                 
             if cooldowns:
                 Cooldown(art)
-                
-            # if earlyArts: # Early arts option
-            #     art["get_lv"] = 0
+
+        if isBalancedLv:
+            BalanceArtUnlockLevels(artData)
                 
         artFile.seek(0)
         artFile.truncate()
@@ -99,24 +99,21 @@ def RandomizePcArts():
         
 
 
-def BalanceArtUnlockLevels():
-    with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
-        artData = json.load(artFile)
-        for i in range(1,9): # Loop through the characters
-            unlockLv = 0 # Starting level to unlock arts
-            stepLv = [1,2,3,4] # How many levels for the next unlock 
-            for art in artData["rows"]:
-                # print(unlockLv)
-                if art["$id"] in ShulkMonadoArts:
-                    continue
-                if art["pc"] == i: # Find arts for a character
-                    art["get_lv"] = unlockLv
-                    unlockLv += random.choice(stepLv)
+def BalanceArtUnlockLevels(artData):
+    for i in range(1,9): # Loop through the characters
+        unlockLv = -3 # Starting level to unlock arts
+        stepLv = [1,2,3] # How many levels for the next unlock 
+        for art in artData["rows"]:
+            # print(unlockLv)
+            if art["$id"] in ShulkMonadoArts + TalentArts + DunbanMonadoArts + PonspectorDLCArts + DLCArts:
+                continue
+            if art["pc"] == i: # Find arts for a character
+                # if i == 1:
+                #     print(f"ID: {art["$id"]} Lv: {unlockLv}") this isnt using the max careful
+                art["get_lv"] = max(unlockLv,0) # Max to frontload the arts a little bit so you get them early
+                art["get_type"] = 1
+                unlockLv += random.choice(stepLv)
 
-            
-        artFile.seek(0)
-        artFile.truncate()
-        json.dump(artData, artFile, indent=2, ensure_ascii=False)
     
 
 def DetermineArtType(art, char:ActMatch):

@@ -64,7 +64,7 @@ WeaponChipShopOption = Option("Weapon Chip Shops", General, "Randomizes Weapon C
 # Drivers
 DriverOption = Option("Driver", Driver, "Randomizes which drivers appear in the world", [lambda: _Drivers.Driver()])
 DriverAccessoriesOption = Option("Driver Accessories", Driver, "Randomizes effects of Accessories", [lambda: _Accessories.RandomizeAccessoryEnhancements()], descData=lambda: _Accessories.AccessoriesDesc())
-DriverArtsOption = Option("Driver Arts", Driver, "Randomizes effects of all driver arts", [lambda: (_DriverArts.DriverArtRandomizer(), _DriverArts.GenCustomArtDescriptions("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/_internal/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], _hasSpinBox = True,spinDefault=40, descData=lambda: _DriverArts.DriverArtDescriptions())
+DriverArtsOption = Option("Driver Arts", Driver, "Randomizes effects of all driver arts", [lambda: (_DriverArts.DriverArtRandomizer(), _DriverArts.GenCustomArtDescriptions("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/_internal/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], _hasSpinBox = True,spinDefault=40, descData=lambda: _DriverArts.DriverArtDescription())
 DriverArtsOption_AutoAttacks = SubOption("Auto Attacks", DriverArtsOption, [], _defState = False)
 DriverArtsOption_SingleReaction = SubOption("Single Reaction", DriverArtsOption, [])
 DriverArtsOption_MultipleReactions = SubOption("Multiple Reactions", DriverArtsOption, [])
@@ -199,16 +199,16 @@ EnemySizeOption = Option("Enemy Size", Funny, "Randomizes the size of enemies", 
 FieldItemOption = Option("Field Item Size", Funny, "Randomizes the size and spin rate of items dropped on the field.", [lambda: BigItems.BigItemsRando()], descData=lambda: BigItems.BigItemsDesc())
 
 # Cosmetics
-BladeWeaponCosmeticsOption = Option("Blade Weapon Cosmetics", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])])
-CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()],_prio=51, _hasSpinBox = True) # Sub are created by another class
+BladeWeaponCosmeticsOption = Option("Blade Weapon Cosmetics", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])], spinDefault=25)
+CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()],_prio=51, _hasSpinBox = True, descData=lambda: Cosmetics.CosmeticsDescription()) # Sub are created by another class
 for opt in Cosmetics.CosmeticsList: # To gen these since listing them here would be annoying
     opt.CreateSubOptions(CosmeticsOption)
 
 # Game Modes
-RaceModeOption = Option("Race Mode", GameModeTab, "Play through a condensed version of the game in this mode!\nUses a custom save file.\nClick here for more info.", [lambda: RaceMode.RaceModeChanging()], descData = lambda: RaceMode.RaceModeDescription())
+RaceModeOption = Option("Race Mode", GameModeTab, "Play through a condensed version of the game in this mode!", [lambda: RaceMode.RaceModeChanging()], descData = lambda: RaceMode.RaceModeDescription())
 RaceModeOption_Zohar = SubOption("Zohar Fragment Hunt", RaceModeOption)
 RaceModeOption_DLC = SubOption("DLC Item Removal", RaceModeOption)
-UMHuntOption = Option("Unique Monster Hunt", GameModeTab, "Defeat Unique Monsters in this Roguelike mode!\nUses a custom save file.\nClick here for more info.", [lambda: UMHuntMain.UMHunt()], _hasSpinBox = True, _spinMin = 1, _spinMax = 10, _spinIncr = 1, _spinDesc = "Round(s)", _spinWidth = 2, spinDefault = 10, descData= lambda: UMHuntMain.Description())
+UMHuntOption = Option("Unique Monster Hunt", GameModeTab, "Defeat Unique Monsters in this Roguelike mode!", [lambda: UMHuntMain.UMHunt()], _hasSpinBox = True, _spinMin = 1, _spinMax = 10, _spinIncr = 1, _spinDesc = "Round(s)", _spinWidth = 2, spinDefault = 10, descData= lambda: UMHuntMain.Description())
 UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
 UMHuntOption_RandomLandmarks = SubOption("Random Starting Landmarks", UMHuntOption)
 
