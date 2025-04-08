@@ -50,7 +50,7 @@ PouchItemShopOption_CoreCrystals = SubOption("Core Crystals", PouchItemShopOptio
 PouchItemShopOption_Deeds = SubOption("Shop Deeds", PouchItemShopOption)
 PouchItemShopOption_CollectionPointMaterials = SubOption("Collection Point Materials", PouchItemShopOption)
 PouchItemShopOption_PouchItems = SubOption("Pouch Items", PouchItemShopOption)
-TreasureChestOption = Option("Treasure Chests", General, "Randomizes the contents of Treasure Chests",[lambda: TreasureChests.RandoTreasureBoxes()], _hasSpinBox = True, descData=lambda: TreasureChests.TreasureChestDescription())
+TreasureChestOption = Option("Treasure Chests", General, "Randomizes the contents of Treasure Chests",[lambda: TreasureChests.RandoTreasureBoxes()], _prio = 51, _hasSpinBox = True, descData=lambda: TreasureChests.TreasureChestDescription())
 TreasureChestOption_Accessories = SubOption("Accessories", TreasureChestOption)
 TreasureChestOption_TornaAccessories = SubOption("Torna Accessories", TreasureChestOption)
 TreasureChestOption_WeaponChips = SubOption("Weapon Chips", TreasureChestOption)

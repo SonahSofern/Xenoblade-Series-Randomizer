@@ -114,7 +114,7 @@ for opt in Interactables.OptionList: # Cant reference directly because of circul
     opt.DisplayOption(Tabs[opt.tab], root, defaultFont, GUISettings.defGUIThemeVar.get())
 
 def ShowTitleScreenText():
-    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], f"[System:Color r=122 g= 122 b =255 a =1]Randomizer v{Version}[/System:Color]") # Change Title Version to Randomizer vX.x.x
+    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], f"Randomizer v{Version}") # Change Title Version to Randomizer vX.x.x
 
 
 def GenRandomSeed(randoSeedEntryVar):

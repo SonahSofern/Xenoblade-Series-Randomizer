@@ -6,7 +6,7 @@ AuxCores = Helper.InclRange(15001, 15406)
 RefinedAuxCores = Helper.InclRange(17001, 17424)
 WeaponChips = Helper.InclRange(10001, 10060)
 AllCoreCrystals = Helper.InclRange(45001,45057)
-CoreCrystals = [45001, 45002,45003,45004,45005,45006,45007,45008,45009,45011,45012,45013,45016,45056,45057]
+CoreCrystals = [45001,45002,45003,45004,45005,45006,45007,45008,45009,45011,45012,45013,45016,45056,45057]
 TornaAccessories = Helper.InclRange(585, 647) + Helper.InclRange(657,680)
 Accessories = [x for x in Helper.InclRange(1,687) if x not in ([444,445,446,447,448,449,450,451,452,453,454,455,653] + TornaAccessories)]
 PreciousItems = Helper.InclRange(25001, 25499)
@@ -23,7 +23,7 @@ VanillaEnhancements = Helper.InclRange(1,3894)
 DriverSkillTrees = Helper.InclRange(1,270)
 HitReactions = Helper.InclRange(0,16)
 ButtonCombos = Helper.InclRange(1,5)
-BladeBattleSkills = list(set(Helper.InclRange(1,270)) - set([268, 267,266,265,144,142,143,141,8,9]))   
+BladeBattleSkills = list(set(Helper.InclRange(1,270)) - set([268,267,266,265,144,142,143,141,8,9]))   
 
 MajorAreaIds = ["01","02","03","04","05","07","08","10","11","13","15","17","18","20","21","30","40","41","42","49","50","90"]
 
