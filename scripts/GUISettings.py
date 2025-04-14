@@ -340,7 +340,7 @@ def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFr
         OuterFrames[i].pack(fill=BOTH, expand=True)
         
 
-def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = []):
+def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb"):
     def ThreadedRandomize():
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
@@ -356,7 +356,7 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
             for file in BDATFiles:
                 subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
             for file in SubBDATFiles:
-                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/gb/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/{textFolderName}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
             # Unpacks BDATs
 
@@ -380,9 +380,9 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
             
             # for file in 
             # Outputs common_ms in the correct file structure
-            os.makedirs(f"{outputDirVar.get().strip()}/gb", exist_ok=True)
+            os.makedirs(f"{outputDirVar.get().strip()}/{textFolderName}", exist_ok=True)
             for file in SubBDATFiles:
-                shutil.move(f"{outputDirVar.get().strip()}/{file}.bdat", f"{outputDirVar.get().strip()}/gb/{file}.bdat")
+                shutil.move(f"{outputDirVar.get().strip()}/{file}.bdat", f"{outputDirVar.get().strip()}/{textFolderName}/{file}.bdat")
 
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
