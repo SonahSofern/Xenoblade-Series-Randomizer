@@ -201,3 +201,55 @@ CombinedTornaAccessories = list(set(TornaAccessories + Accessories))
 TornaPreciousIDs = Helper.InclRange(25457, 25466) + Helper.InclRange(25469, 25494) + Helper.InclRange(25501, 25528)
 TornaUMIDs = [1563, 1564, 1566, 1567, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1670, 1559, 1560, 1561, 1562]
 TornaRegularEnemyIDs = [1536, 1537, 1539, 1540, 1542, 1544, 1545, 1546, 1547, 1548, 1549, 1550, 1551, 1570, 1571, 1573, 1574, 1575, 1576, 1577, 1578, 1579, 1580, 1581, 1582, 1583, 1585, 1587, 1588, 1589, 1590, 1591, 1592, 1594, 1595, 1596, 1598, 1600, 1601, 1602, 1604, 1605, 1606, 1607, 1608, 1609, 1610, 1611, 1612, 1613, 1614, 1616, 1617, 1618, 1619, 1621, 1622, 1623, 1624, 1625, 1626, 1627, 1628, 1629, 1630, 1631, 1634, 1635, 1636, 1637, 1639, 1640, 1643, 1644, 1645, 1646, 1647, 1648, 1649, 1650, 1651, 1652, 1653, 1655, 1656, 1496, 1497, 1498, 1499, 1500, 1501, 1502, 1503, 1507, 1512, 1515, 1516, 1518, 1519, 1522, 1526, 1527, 1528, 1529, 1530, 1531, 1532, 1534, 1535]
+
+# Custom Randomizer Item IDs for Torna
+
+# Field Skill Unlocks
+MineralogyKey = Helper.InclRange(25544,25546)
+SwordplayKey = Helper.InclRange(25547,25549)
+FortitudeKey = Helper.InclRange(25550,25551)
+ForestryKey = Helper.InclRange(25552,25554)
+ManipEtherKey = Helper.InclRange(25555,25557)
+KeenEyeKey = Helper.InclRange(25558,25560)
+FocusKey = Helper.InclRange(25561,25563)
+LightKey = Helper.InclRange(25564,25566)
+GirlsTalkKey = [25567]
+EntomologyKey = Helper.InclRange(25568,25570)
+MiningKey = Helper.InclRange(25571,25573)
+BotanyKey = Helper.InclRange(25574,25576)
+LockpickKey = Helper.InclRange(25577,25579)
+IcthyologyKey = Helper.InclRange(25580,25582)
+ComWaterKey = Helper.InclRange(25583,25585)
+SuperstrKey = Helper.InclRange(25586,25588)
+
+# Campsite Unlocks
+HHC_Key = [25589]
+LC_Key = [25590]
+CLC_Key = [25591]
+HWC_Key = [25592]
+PVC_Key = [25593]
+FVC_Key = [25594]
+AGC_Key = [25595]
+OTC_Key = [25596]
+DDC_Key = [25597]
+HGC_Key = [25598]
+
+# Affinity Level Unlocks
+JinAff = Helper.InclRange(25599,25602)
+HazeAff = Helper.InclRange(25603,25606)
+MythraAff = Helper.InclRange(25607,25610)
+MinothAff = Helper.InclRange(25611,25614)
+BrighidAff = Helper.InclRange(25615,25618)
+AegaeonAff = Helper.InclRange(25619,25622)
+
+# Character Unlocks
+HazeKey = [25623]
+AddamKey = [25624]
+MythraKey = [25625]
+MinothKey = [25626]
+HugoKey = [25627]
+BrighidKey = [25628]
+AegaeonKey = [25629]
+
+# Level Up Unlocks
+LevelUpTokens = Helper.InclRange(25630,25725) # 96 tokens, we assume we get 2 levels from intro fight (stats required to beat fight?), and start at lv 1.
