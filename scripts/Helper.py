@@ -152,3 +152,12 @@ def TimeFunction(command):
     me()
     end = time.perf_counter()
     print(f"Execution Time: {end - start:.6f} seconds")
+
+def MultiLevelListToSingleLevelList(inputlist: list): # Converts a multi-level list [1, [2, 3], 4, [5]] to a single-level list [1, 2, 3, 4, 5]
+    outputlist = []
+    for item in inputlist:
+        if isinstance(item, list):
+            outputlist.extend(item)
+        else:
+            outputlist.append(item)
+    return outputlist
