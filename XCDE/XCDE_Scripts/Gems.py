@@ -52,7 +52,9 @@ def StandardGems(gemData, gemMSData, gemHelpMSData):
     
 
 def UnusedGems(gemData, gemMSData, gemHelpMSData):
-    QuickRecast = Gem("Cast Quicken", attributes[6], 44, 3,2, 90, 0, [10,50], [0,0], 1000, 4, "\\[Passive\\][XENO:n ] Reduces cast time by $1.")
+    pass
+    # QuickRecast = Gem("Cast Quicken", attributes[6], 44, 3,2, 90, 0, [90,100], [0,0], 1000, 4, "\\[Passive\\][XENO:n ] Reduces cast time by $1.") Doesnt seem to work
+    
 
 def Gems():
     ranks = ["E", "D", "C", "B", "A", "S"] # Calculate proper gem amount based on rank
@@ -88,7 +90,7 @@ def Gems():
                         RankPower(gem, ranks)
                         
                 
-                if isPower:
+                if isPower or isEffect or isUnusedGems:
                     ItemPower(gemData["rows"], ranks)
                     
                 GemList.clear() # Clear the global list
@@ -133,8 +135,7 @@ def Effects(gemData, gemMSData, gemHelpMSData):
             
         GemList.remove(gem)
         
-        
-        incr = int(gem.power[-1]/12)
+        incr = max(int((gem.power[-1] - gem.power[0])/12),1)
         pPowIncr = int(gem.pPower[-1]/6)
         
         
@@ -150,18 +151,18 @@ def Effects(gemData, gemMSData, gemHelpMSData):
                 "accum": gem.accum,
                 "max": gem.max,
                 "val_type": gem.val_type,
-                "lower_E": incr,
-                "upper_E": incr*2,
-                "lower_D": incr*3,
-                "upper_D": incr*4,
-                "lower_C": incr*5,
-                "upper_C": incr*6,
-                "lower_B": incr*7,
-                "upper_B": incr*8,
-                "lower_A": incr*9,
-                "upper_A": incr*10,
-                "lower_S": incr*11,
-                "upper_S": incr*12,
+                "lower_E": gem.power[0],
+                "upper_E": gem.power[0] + incr,
+                "lower_D": gem.power[0] + incr*2,
+                "upper_D": gem.power[0] + incr*3,
+                "lower_C": gem.power[0] + incr*4,
+                "upper_C": gem.power[0] + incr*5,
+                "lower_B": gem.power[0] + incr*6,
+                "upper_B": gem.power[0] + incr*7,
+                "lower_A": gem.power[0] + incr*8,
+                "upper_A": gem.power[0] + incr*9,
+                "lower_S": gem.power[0] + incr*10,
+                "upper_S": gem.power[0] + incr*11,
                 "percent_E": gem.pPower[0],
                 "percent_D": pPowIncr*2,
                 "percent_C": pPowIncr*3,
@@ -217,7 +218,7 @@ def ItemPower(gemData, ranks):
     with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as gemItemFile: 
         gemItemData = json.load(gemItemFile)
         for gem in gemItemData["rows"]:
-            if gem["itemType"] != 3: # If item is a gem
+            if gem["itemType"] != 3: # If item is not a gem continue
                 continue
             rank = gem["rankType"]
             newGem = random.choice(gemData)
