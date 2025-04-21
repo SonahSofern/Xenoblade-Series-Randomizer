@@ -158,7 +158,7 @@ def SpikeBalancer(enemy, chosen, bossFights): # spike damage is 10x the spike_dm
         chosen["spike_dmg"] = max(min(newPowerLv, 255), 1) # Set the new amount between 1 and 255
         # print(f"Level: {enemy["lv"]}")
         # print(f"Spike Damage: {chosen["spike_dmg"] * 10}")
-    if (chosen["spike_state_val"] == 220) and (enemy["$id"] in bossFights): # Removes instant death spikes from boss fights
+    if (chosen["spike_state_val"] == 220) and (enemy["lv"] <= 60): # Removes instant death spikes from all fights below level 60
         chosen["spike_state_val"] = 0
         
 

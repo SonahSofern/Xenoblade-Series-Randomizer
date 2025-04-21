@@ -136,3 +136,10 @@ def ReplaceJSONFile(filePath, replacement = []):
         file.seek(0)
         json.dump(data, file, indent=2, ensure_ascii=False)
         file.truncate()
+    
+
+def CloseFile(data, file):
+    """Truncates and Closes Xenoblade Json Files"""
+    file.seek(0)
+    file.truncate()
+    json.dump(data, file, indent=2, ensure_ascii=False)

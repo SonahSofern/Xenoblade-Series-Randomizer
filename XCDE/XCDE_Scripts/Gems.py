@@ -118,8 +118,8 @@ def Effects(gemData, gemMSData, gemHelpMSData):
         gemData["rows"].append(
             {
                 "$id": idCount,
-                "name": idCount,
-                "cylinder_name": idCount + 1,
+                "name": skillMSCount,
+                "cylinder_name": skillMSCount + 1,
                 "atr_type": gem.atr_type[0],
                 "rvs_status": gem.status,
                 "rvs_type": gem.rvstype,
@@ -147,7 +147,7 @@ def Effects(gemData, gemMSData, gemHelpMSData):
                 "percent_S": gem.pPower[-1],
                 "money": gem.money,
                 "category": gem.category,
-                "rvs_caption": idCount + 2
+                "rvs_caption": skillMSCount + 2
                             
             }
         )
