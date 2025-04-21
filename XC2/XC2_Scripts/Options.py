@@ -214,8 +214,14 @@ UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
 UMHuntOption_RandomLandmarks = SubOption("Random Starting Landmarks", UMHuntOption)
 
 # Torna
-TornaMainOption = Option("Torna Randomization", GameModeTab, "WIP", [lambda: TornaMain.AllTornaRando()])
-
+TornaMainOption = Option("Torna Randomization", GameModeTab, "WIP. Disabling any of the below options merely fills their rewards with non-progression items.", [lambda: TornaMain.AllTornaRando()])
+TornaOption_CollectionPoints = Option("Collection Points", GameModeTab, "Randomizes collection point contents. Each collection point has the number of items equal to the spinbox, weighted equally." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 4, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
+TornaOption_SideQuests = Option("Side Quests", GameModeTab, "Randomizes sidequest rewards. Each sidequest has the number of rewards equal to the spinbox." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 4, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
+TornaOption_EnemyDrops = Option("Enemy Drops", GameModeTab, "Randomizes enemy drops. Each enemy drops a number of items equal to the spinbox upon defeat." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 3, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
+TornaOption_TreasureChests = Option("Treasure Chests", GameModeTab, "Randomizes treasure chest contents. Each chest contains a number of rewards equal to the spinbox." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 7, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
+TornaOption_Shops = Option("Shops", GameModeTab, "Randomizes items in shops and from traveling bards. Each shop contains a number of items equal to the spinbox, and are all purchaseable for gold." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 16, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 2, spinDefault = 1)
+TornaOption_GroundItems = Option("Ground Items", GameModeTab, "Randomizes items in the red bags on the ground. Each red bag contains 1 item.")
+#TornaOption_ChooseLevel2CommunityReq = Option("Level 2 Community Req", GameModeTab, "Determines the number of people required for community.") # I don't know how to make this work in the game files for now.
 
 # Currently Disabled for Various Reasons
 # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)

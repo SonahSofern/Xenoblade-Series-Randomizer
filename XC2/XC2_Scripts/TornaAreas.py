@@ -668,16 +668,16 @@ def CreateAreaInfo(Sidequests, Mainquests):
         '$id': 2368,
         'Name': 'TastelessAltar',
         'Previous Location Reachable': 'Cavern of the Seal',
-        'Story Pre-Req': [53],
-        'Item Reqs': []
+        'Story Pre-Req': [25],
+        'Item Reqs': TornaSlatePieceIDs
     }
      
-    AllTornaAreas = [LasariaWoodland, PortonVillage, SecludedBoneway, HangnailCrossing, HaraddHills, CropwoodsofYorn, MernesFalls, FeltleyVillage, GreatCrater, UccarsTrail, YanchikHarbor, LaschamCove, LakeshoreCampsite, HiddenHuntingCamp, SingbreezeBough, TorigothArch, TitansRoar, LaschamPeninsula, OrdiaGreatPlains, SereneSpringside, DuelistsBridge, WaysideRespite, OutlookKnoll, LyanneMeadow, TorigothVillage, TorigothCemetery, CoolleyLake, HoaryWeald, SeigleFell, DepthsofIgnorance, GrandarborsEmbrace, NebleyWindCave, SaintsPracticeGrounds, HoaryWealdCamp, NoxPromontory, ValafumHill, StrategyRoom, CoolleyLakeCamp, AlettaHarbor, AlettaMilitiaGarrison, CavernoftheSeal, OssumMagnum, MillenniumGrotto, WrackhamMoor, TirkinCliffColony, LakeSarleigh, BehemothsRoost, AncientLakebed, LettBridge, OlnardsTrail, HyberVillage, TheGreatBreaksand, LoftinNaturePreserve, HolyGateofAltana, TurqosPlateau, TheBrayingCanyon, DannaghDesert, StreamsandCorridor, GoldenTwinMesa, VerdantFairylands, PelnPilgrimsSpringland, LakeWynn, TitansUlcer, OutridersForestTrail, SacredStaircase, AurescoMainGate, SpefanInn, AureusPalace, MedianGate, AurescoRearGate, PlanusBridge, FormideShoppingWard, FabriIndustryWard, AurescoResidentialWard, AcheronBackstreet, SachsumGardens, AquilaWatchtower, OremStorageWard, PischatorBridge, ViridianGate, TornasWomb, BalaurDarkZone1, FernyigesDarkZone2, SkygateEntrance, ZirnitraDarkZone3, TheSoaringRostrum, PedestalofStargazing, HallofWorship, CrookedTower, PantarheiTower, PulsatingPassage, HermitsAlleyway, SkygateEndlessRoad, TastelessAltar]
+    TornaAreaDict = [LasariaWoodland, PortonVillage, SecludedBoneway, HangnailCrossing, HaraddHills, CropwoodsofYorn, MernesFalls, FeltleyVillage, GreatCrater, UccarsTrail, YanchikHarbor, LaschamCove, LakeshoreCampsite, HiddenHuntingCamp, SingbreezeBough, TorigothArch, TitansRoar, LaschamPeninsula, OrdiaGreatPlains, SereneSpringside, DuelistsBridge, WaysideRespite, OutlookKnoll, LyanneMeadow, TorigothVillage, TorigothCemetery, CoolleyLake, HoaryWeald, SeigleFell, DepthsofIgnorance, GrandarborsEmbrace, NebleyWindCave, SaintsPracticeGrounds, HoaryWealdCamp, NoxPromontory, ValafumHill, StrategyRoom, CoolleyLakeCamp, AlettaHarbor, AlettaMilitiaGarrison, CavernoftheSeal, OssumMagnum, MillenniumGrotto, WrackhamMoor, TirkinCliffColony, LakeSarleigh, BehemothsRoost, AncientLakebed, LettBridge, OlnardsTrail, HyberVillage, TheGreatBreaksand, LoftinNaturePreserve, HolyGateofAltana, TurqosPlateau, TheBrayingCanyon, DannaghDesert, StreamsandCorridor, GoldenTwinMesa, VerdantFairylands, PelnPilgrimsSpringland, LakeWynn, TitansUlcer, OutridersForestTrail, SacredStaircase, AurescoMainGate, SpefanInn, AureusPalace, MedianGate, AurescoRearGate, PlanusBridge, FormideShoppingWard, FabriIndustryWard, AurescoResidentialWard, AcheronBackstreet, SachsumGardens, AquilaWatchtower, OremStorageWard, PischatorBridge, ViridianGate, TornasWomb, BalaurDarkZone1, FernyigesDarkZone2, SkygateEntrance, ZirnitraDarkZone3, TheSoaringRostrum, PedestalofStargazing, HallofWorship, CrookedTower, PantarheiTower, PulsatingPassage, HermitsAlleyway, SkygateEndlessRoad, TastelessAltar]
     
     global TornaAreas
     TornaAreas = []
 
-    for area in AllTornaAreas:
+    for area in TornaAreaDict:
         TornaArea(area, TornaAreas)
 
     for area in TornaAreas:

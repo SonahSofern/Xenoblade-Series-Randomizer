@@ -4,8 +4,10 @@ import random
 import time
 from IDs import *
 
+# if a quest has 2 rewardids, they need to equal each other so you can't miss out on progression.
+
 class TornaSideQuest: # created to allow me to pass these objects easier
-    def __init__(self, input, addtolist):
+    def __init__(self, input, addtolist, rewardnumber):
         self.id = input["Quest Number"]
         self.name = input["Quest Name"]
         self.mainreq = input["Main Story Req"]
@@ -14,6 +16,7 @@ class TornaSideQuest: # created to allow me to pass these objects easier
         self.complus = input["Community Gained"]
         self.comreq = input["Community Level Req"]
         self.rewardids = input["Reward Set IDs"]
+        self.randomizeditems = Helper.ExtendListtoLength([], rewardnumber,"0") # holds quest reward ids
         addtolist.append(self)
 
 class TornaMainQuest:
@@ -38,7 +41,7 @@ def SelectRandomPointGoal(): # There are some sidequests that require you to fee
     Quest47Optional = random.choice([[30343],[30351],[30357],[30371],[30380],[30382],[30384],[30386],[30027],[30041],[30042],[30424],[30439],[30432],[30434],[30436]])
     Quest55Optional = random.choice([[30345],[30349],[30252]])
 
-def SelectCommunityQuests(CommunityReqs: list): # Selects the community quests that logically unlock Story Events 38 and 50 (lv 2 and lv 4 community)
+def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the community quests that logically unlock Story Events 38 and 50 (lv 2 and lv 4 community)
     TornaSidequest1 = {
         'Quest Name': 'What Bars the Way',
         'Quest Number': 1,
@@ -780,12 +783,12 @@ def SelectCommunityQuests(CommunityReqs: list): # Selects the community quests t
         'Reward Set IDs': []
     }
 
-    AllTornaSidequests = [TornaSidequest1, TornaSidequest2, TornaSidequest3, TornaSidequest4, TornaSidequest5, TornaSidequest6, TornaSidequest7, TornaSidequest8, TornaSidequest9, TornaSidequest10, TornaSidequest11, TornaSidequest12, TornaSidequest13, TornaSidequest14, TornaSidequest15, TornaSidequest16, TornaSidequest17, TornaSidequest18, TornaSidequest19, TornaSidequest20, TornaSidequest21, TornaSidequest22, TornaSidequest23, TornaSidequest24, TornaSidequest25, TornaSidequest26, TornaSidequest27, TornaSidequest28, TornaSidequest29, TornaSidequest30, TornaSidequest31, TornaSidequest32, TornaSidequest33, TornaSidequest34, TornaSidequest35, TornaSidequest36, TornaSidequest37, TornaSidequest38, TornaSidequest39, TornaSidequest40, TornaSidequest41, TornaSidequest42, TornaSidequest43, TornaSidequest44, TornaSidequest45, TornaSidequest46, TornaSidequest47, TornaSidequest48, TornaSidequest49, TornaSidequest50, TornaSidequest51, TornaSidequest52, TornaSidequest53, TornaSidequest54, TornaSidequest55, TornaSidequest56, TornaSidequest57, TornaSidequest58, TornaSidequest59, TornaSidequest60, TornaSidequest61, TornaSidequest62, TornaSidequest63, TornaSidequest64, TornaSidequest65, TornaSidequest66, TornaSidequest67, TornaSidequest68, TornaSidequest69, TornaSidequest70, TornaSidequest71, TornaSidequest72, TornaSidequest73, TornaSidequest74]
+    TornaSidequestDict = [TornaSidequest1, TornaSidequest2, TornaSidequest3, TornaSidequest4, TornaSidequest5, TornaSidequest6, TornaSidequest7, TornaSidequest8, TornaSidequest9, TornaSidequest10, TornaSidequest11, TornaSidequest12, TornaSidequest13, TornaSidequest14, TornaSidequest15, TornaSidequest16, TornaSidequest17, TornaSidequest18, TornaSidequest19, TornaSidequest20, TornaSidequest21, TornaSidequest22, TornaSidequest23, TornaSidequest24, TornaSidequest25, TornaSidequest26, TornaSidequest27, TornaSidequest28, TornaSidequest29, TornaSidequest30, TornaSidequest31, TornaSidequest32, TornaSidequest33, TornaSidequest34, TornaSidequest35, TornaSidequest36, TornaSidequest37, TornaSidequest38, TornaSidequest39, TornaSidequest40, TornaSidequest41, TornaSidequest42, TornaSidequest43, TornaSidequest44, TornaSidequest45, TornaSidequest46, TornaSidequest47, TornaSidequest48, TornaSidequest49, TornaSidequest50, TornaSidequest51, TornaSidequest52, TornaSidequest53, TornaSidequest54, TornaSidequest55, TornaSidequest56, TornaSidequest57, TornaSidequest58, TornaSidequest59, TornaSidequest60, TornaSidequest61, TornaSidequest62, TornaSidequest63, TornaSidequest64, TornaSidequest65, TornaSidequest66, TornaSidequest67, TornaSidequest68, TornaSidequest69, TornaSidequest70, TornaSidequest71, TornaSidequest72, TornaSidequest73, TornaSidequest74]
     global TornaSidequests
     TornaSidequests = [] # holds the TornaSideQuest class objects
 
-    for sidequest in AllTornaSidequests:
-        TornaSideQuest(sidequest, TornaSidequests)
+    for sidequest in TornaSidequestDict:
+        TornaSideQuest(sidequest, TornaSidequests, QuestRewardQty)
 
     TornaMainQuest1 = {
         'FLD_QuestTask $id': 1,
@@ -1132,9 +1135,9 @@ def SelectCommunityQuests(CommunityReqs: list): # Selects the community quests t
 
     global TornaMainquests # holds the TornaMainQuest class objects
     TornaMainquests = []
-    AllTornaMainQuests = [TornaMainQuest1, TornaMainQuest2, TornaMainQuest3, TornaMainQuest4, TornaMainQuest5, TornaMainQuest6, TornaMainQuest7, TornaMainQuest8, TornaMainQuest9, TornaMainQuest10, TornaMainQuest11, TornaMainQuest12, TornaMainQuest13, TornaMainQuest14, TornaMainQuest15, TornaMainQuest16, TornaMainQuest17, TornaMainQuest18, TornaMainQuest19, TornaMainQuest20, TornaMainQuest21, TornaMainQuest22, TornaMainQuest23, TornaMainQuest24, TornaMainQuest25, TornaMainQuest26, TornaMainQuest27, TornaMainQuest28, TornaMainQuest29, TornaMainQuest30, TornaMainQuest31, TornaMainQuest32, TornaMainQuest33, TornaMainQuest34, TornaMainQuest35, TornaMainQuest36, TornaMainQuest37, TornaMainQuest38, TornaMainQuest39, TornaMainQuest40, TornaMainQuest41, TornaMainQuest42, TornaMainQuest43, TornaMainQuest44, TornaMainQuest45, TornaMainQuest46, TornaMainQuest47, TornaMainQuest48, TornaMainQuest49, TornaMainQuest50, TornaMainQuest51, TornaMainQuest52, TornaMainQuest53, TornaMainQuest54, TornaMainQuest55, TornaMainQuest56, TornaMainQuest57]
+    TornaMainQuestDict = [TornaMainQuest1, TornaMainQuest2, TornaMainQuest3, TornaMainQuest4, TornaMainQuest5, TornaMainQuest6, TornaMainQuest7, TornaMainQuest8, TornaMainQuest9, TornaMainQuest10, TornaMainQuest11, TornaMainQuest12, TornaMainQuest13, TornaMainQuest14, TornaMainQuest15, TornaMainQuest16, TornaMainQuest17, TornaMainQuest18, TornaMainQuest19, TornaMainQuest20, TornaMainQuest21, TornaMainQuest22, TornaMainQuest23, TornaMainQuest24, TornaMainQuest25, TornaMainQuest26, TornaMainQuest27, TornaMainQuest28, TornaMainQuest29, TornaMainQuest30, TornaMainQuest31, TornaMainQuest32, TornaMainQuest33, TornaMainQuest34, TornaMainQuest35, TornaMainQuest36, TornaMainQuest37, TornaMainQuest38, TornaMainQuest39, TornaMainQuest40, TornaMainQuest41, TornaMainQuest42, TornaMainQuest43, TornaMainQuest44, TornaMainQuest45, TornaMainQuest46, TornaMainQuest47, TornaMainQuest48, TornaMainQuest49, TornaMainQuest50, TornaMainQuest51, TornaMainQuest52, TornaMainQuest53, TornaMainQuest54, TornaMainQuest55, TornaMainQuest56, TornaMainQuest57]
 
-    for mainquest in AllTornaMainQuests:
+    for mainquest in TornaMainQuestDict:
         TornaMainQuest(mainquest, TornaMainquests)
 
     Community2Quests, Community4Quests = [], []
