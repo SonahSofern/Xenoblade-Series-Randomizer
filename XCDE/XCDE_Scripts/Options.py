@@ -26,8 +26,8 @@ EnemyOption_Duplicates = SubOption("Allow Duplicates", EnemyOption, _defState=Fa
 # Character
 GemOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.Gems()], descData=lambda: Gems.GemDescriptions())
 GemOption_Power = SubOption("Power", GemOption)
-GemOption_Effect = SubOption("Effect", GemOption)
-GemOption_Unused = SubOption("Unused Gems", GemOption)
+GemOption_Effect = SubOption("Standard Effects", GemOption)
+GemOption_Unused = SubOption("Unused Effects", GemOption)
 GemOption_FreeEquip = SubOption("Freely Equip to Weapons/Armor", GemOption)
 GemOption_NoCap = SubOption("Remove Gem Stat Caps", GemOption)
 AffinityTreeOption = Option("Skill Trees", Character, "Randomizes all character's skill trees", [lambda: SkillTrees.SkillRando()], descData=lambda: SkillTrees.SkillTreeDesc())

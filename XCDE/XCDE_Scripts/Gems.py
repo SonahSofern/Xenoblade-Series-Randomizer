@@ -1,11 +1,11 @@
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_skilllist.html
 import json, random, Options
-import scripts.PopupDescriptions
+import scripts.PopupDescriptions, scripts.JSONParser
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_bufflist.html#87 will be similar to enhancement in xc2 i can create gems with new effects and add back gems that dont get put in the game but already exist like cooldown reduc (cast quicken)
 # Cant extend gems, the descriptions wont load will have to replace old ones
 
 class Gem:
-    def __init__(self, name = "", atr_type = 0, status = 0, rvs_type = 0, attach = 0, max = 0, val_type = 0, power = [0,0], percentPower = [0,0], money = 20, category = 1, rvs_caption = "", menuCaption = "", isUnused = False):
+    def __init__(self, name = "", atr_type = 0, status = 0, rvs_type = 0, attach = 0, max = 0, val_type = 0, power = [0,0], percentPower = [0,0], money = 20, category = 1, rvs_caption = "", menuCaption = ""):
         self.name = name # Gen the ID from launch
         self.atr_type = atr_type
         self.status = status
@@ -23,21 +23,36 @@ class Gem:
         GemList.append(self)
 GemList:list[Gem] = []
             
-  
-Red = (4, "Fire")
-Blue = (5, "Water")
-Yellow = (6, "Electric")
-Teal = (7, "Ice")
-Green = (8, "Wind")
-Orange = (9, "Earth")
-       
-def StandardGems():
-    StrengthUp = Gem("Strength Up", Red, 88, 1, 0, 150, 1, [5,100], [0,0], 200, 1, "\\[Passive\\][XENO:n ]\nIncreases strength by $1.", "\\[Strength Up\\][XENO:n ]\nIncreases strength.")
-    ChillDef = Gem("Chill Defence", Red, 138, 3, 2, 100, 0, [2,75], [0,0], 400, 3, "\\[Passive\\] Decreases Chill damage[XENO:n ]\ntaken by $1.", "\\[Chill Defence\\][XENO:n ]\nDecreases Chill damage received.")
-    # SleepResist = Gem("Sleep Resist", Red, 26, 3, 2, 100, 0, [4,100], [0,0], 350, 3, "", "")
 
-def UnusedGems():
-    QuickRecast = Gem("Cast Quicken", Yellow, 44, 3,2, 90, 0, [10,50], [0,0], 1000, 4, "\[Passive\][XENO:n ] Reduces cast time by $1.")
+attributes = {
+    0 : (0, "NULL"),
+    4 : (4,"Fire"),
+    5 : (5, "Water"),
+    6 : (6, "Electric"),
+    7 : (7, "Ice"),
+    8 : (8, "Wind"),
+    9 : (9, "Earth")
+}
+
+     
+def StandardGems(gemData, gemMSData, gemHelpMSData):    
+    for gem in gemData["rows"]:
+        # Find name
+        for name in gemMSData["rows"]:
+            if gem["name"] == name["$id"]:
+                newName = name["name"]
+                break
+        for helpName in gemMSData["rows"]:
+            if gem["rvs_caption"] == helpName["$id"]:
+                newHelpName = helpName["name"]
+                break
+        
+        Gem(newName, attributes[gem["atr_type"]], gem["rvs_status"], gem["rvs_type"], gem["attach"], gem["max"], gem["val_type"], [gem["lower_E"], gem["upper_S"]], [gem["percent_E"], gem["percent_S"]], gem["money"], gem["category"], newHelpName, newHelpName)
+
+    
+
+def UnusedGems(gemData, gemMSData, gemHelpMSData):
+    QuickRecast = Gem("Cast Quicken", attributes[6], 44, 3,2, 90, 0, [10,50], [0,0], 1000, 4, "\\[Passive\\][XENO:n ] Reduces cast time by $1.")
 
 def Gems():
     ranks = ["E", "D", "C", "B", "A", "S"] # Calculate proper gem amount based on rank
@@ -55,11 +70,14 @@ def Gems():
                 isUnusedGems = Options.GemOption_Unused.GetState()
                 
                 # Might move this into isEffect
-                StandardGems()
+                if isEffect:
+                    StandardGems(gemData, gemMSData, gemHelpMSData)
                 
                 if isUnusedGems:
-                    UnusedGems()
+                    UnusedGems(gemData, gemMSData, gemHelpMSData)
                 
+                if isEffect or isUnusedGems:
+                    Effects(gemData, gemMSData, gemHelpMSData)
                 
                 for gem in gemData["rows"]:
                     if isNotCapped:
@@ -69,12 +87,12 @@ def Gems():
                     if isPower:
                         RankPower(gem, ranks)
                         
-                if isEffect:
-                    Effects(gemData, gemMSData, gemHelpMSData)
                 
                 if isPower:
                     ItemPower(gemData["rows"], ranks)
                     
+                GemList.clear() # Clear the global list
+                
                 gemFile.seek(0)
                 gemFile.truncate()
                 json.dump(gemData, gemFile, indent=2, ensure_ascii=False)
@@ -106,10 +124,15 @@ def Effects(gemData, gemMSData, gemHelpMSData):
     
     # Loop and generate our new gems
     for i in range(maxGems):
+    
+        if (len(GemList) == 0):
+            break
+        
         gem = random.choice(GemList)
         
-        if (len(GemList) > 1):
-            GemList.remove(gem)
+            
+        GemList.remove(gem)
+        
         
         incr = int(gem.power[-1]/12)
         pPowIncr = int(gem.pPower[-1]/6)
@@ -127,7 +150,7 @@ def Effects(gemData, gemMSData, gemHelpMSData):
                 "accum": gem.accum,
                 "max": gem.max,
                 "val_type": gem.val_type,
-                "lower_E": gem.power[0],
+                "lower_E": incr,
                 "upper_E": incr*2,
                 "lower_D": incr*3,
                 "upper_D": incr*4,
@@ -138,7 +161,7 @@ def Effects(gemData, gemMSData, gemHelpMSData):
                 "lower_A": incr*9,
                 "upper_A": incr*10,
                 "lower_S": incr*11,
-                "upper_S": gem.power[-1],
+                "upper_S": incr*12,
                 "percent_E": gem.pPower[0],
                 "percent_D": pPowIncr*2,
                 "percent_C": pPowIncr*3,
@@ -184,7 +207,7 @@ def Effects(gemData, gemMSData, gemHelpMSData):
 
 
 def RankPower(gem, ranks):
-    mult = random.choice([0.1,0.2, 0.3, 0.4, 0.6, 0.8, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0, 2.5, 3.0])
+    mult = random.choice([0.1, 0.2, 0.3, 0.4, 0.6, 0.8, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0, 2.5, 3.0])
     for r in ranks:
         gem[f"lower_{r}"] = min(max(int(gem[f"lower_{r}"] * mult), 1), 254) # Lotta of annoying math here to make sure that lower is smaller than upper but also between 0 and 255
         gem[f"upper_{r}"] = min(int(gem[f"upper_{r}"] * mult), 253) + 2
@@ -197,13 +220,10 @@ def ItemPower(gemData, ranks):
             if gem["itemType"] != 3: # If item is a gem
                 continue
             rank = gem["rankType"]
-            for g in gemData:
-                if g["$id"] == gem["itemID"]:
-                    gem["percent"] = random.randrange(g[f"lower_{ranks[rank-1]}"], g[f"upper_{ranks[rank-1]}"])
-                    break
-        gemItemFile.seek(0)
-        gemItemFile.truncate()
-        json.dump(gemItemData, gemItemFile, indent=2, ensure_ascii=False)
+            newGem = random.choice(gemData)
+            gem["itemID"] = newGem["$id"]
+            gem["percent"] = random.randrange(newGem[f"lower_{ranks[rank-1]}"], newGem[f"upper_{ranks[rank-1]}"])
+        scripts.JSONParser.CloseFile(gemItemData, gemItemFile)
 
 def GemDescriptions():
     GemDescription = scripts.PopupDescriptions.Description()

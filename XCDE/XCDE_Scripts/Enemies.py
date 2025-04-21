@@ -113,7 +113,7 @@ def Enemies():
                             # print("Stopped mechon")
                             
                         # Balance spikes
-                        SpikeBalancer(enemy, chosen.eneListArea, BossEnemies)
+                        SpikeBalancer(enemy, chosen.eneListArea)
                         
                         # Copy stats with ratios to original stats
                         replacementTotalStats = TotalStats(chosen.eneListArea, CopiedStatsWithRatios)
@@ -148,7 +148,7 @@ def Enemies():
         json.dump(eneData, eneFile, indent=2, ensure_ascii=False)
         RingRemoval() 
     
-def SpikeBalancer(enemy, chosen, bossFights): # spike damage is 10x the spike_dmg value
+def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
     if chosen["spike_dmg"] != 0:
         spikePerLv = 0.7 # base spike given per level
         expectedPowerLv = chosen["lv"] * spikePerLv # The expected power level of the spike before any changes
