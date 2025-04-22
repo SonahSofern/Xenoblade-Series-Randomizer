@@ -74,42 +74,26 @@ def WeightClass(arm):
         arm["arm_type"] = random.choice(changeAbleTypes)
 
 
-class Accessory:
-    def __init__(self, parts, char, cosmID, list:list):
-        self.parts = parts
-        self.char = char
-        self.cosmID = cosmID
-        list.append(self)
-
 def GearAppearance():
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ITM_equiplist.json", 'r+', encoding='utf-8') as equipFile:
         eqData = json.load(equipFile)
         isCrazy = Options.EquipmentOption_CrazyArmors.GetState()
+        invalidArmor = [190]
+        # Nested lists
+        armorList = [[[] for _ in range(16)] for _ in range(6)]
+
         
-    
-        accessoryLists = []
-        headLists = []
-        chestLists = []
-        armLists = []
-        legLists = []
-        bootLists = []
-        
-        # Loop over the characters and create our accessory lists
-        for i in range(0, 16):      
+        # Add the possible choices of cosmetic to the pool
+        for eq in eqData["rows"]:
+            # Loop over the characters and create our accessory lists
             
-            # Add a new subList for each character                  
-            accessoryLists.append([])
-            headLists.append([])
-            chestLists.append([])
-            armLists.append([])
-            legLists.append([])
-            bootLists.append([])
+            # Dont add invalid ones
+            if eq["$id"] in invalidArmor:
+                continue
             
-            
-            # Add the possible choices of cosmetic to the pool
-            for eq in eqData["rows"]:
+            for i in range(0, 16):      
                 cosmID = eq["pc"][i]
-                
+            
                 # 0 Means you cant equip it so we dont want to spread the armors they just dissapear
                 if cosmID == 0:
                     continue
@@ -119,52 +103,38 @@ def GearAppearance():
                     eq["parts"] = 2
                 
                 # Ensure that head cosmetic id stays on head pieces to maintain proper cosmetics
-                if eq["parts"] == 0:
-                    accessoryLists[i].append(cosmID)
-                elif eq["parts"] == 1:
-                    headLists[i].append(cosmID)
-                elif eq["parts"] == 2:
-                    chestLists[i].append(cosmID)     
-                elif eq["parts"] == 3:
-                    armLists[i].append(cosmID)                         
-                elif eq["parts"] == 4:
-                    legLists[i].append(cosmID)           
-                elif eq["parts"] == 5:
-                    bootLists[i].append(cosmID)   
+                armorList[eq["parts"]][i].append(cosmID)
+        
         
         # Loop over characters and Dole out the choices to the armours
-        for i in range(0, 16):
-                        
-            for eq in eqData["rows"]:
-                
+            
+        for eq in eqData["rows"]:
+            
+            # Defined here so that each new equipment 
+            listChoices = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]     
+            
+            if eq["$id"] in invalidArmor:
+                continue
+            
+            for i in range(0, 16):
                 if eq["pc"][i] == 0: # Ignore armors that you couldnt normally equip
                     continue
-                
                 # If crazy armor we want to randomly choose a list, otherwise choose the list corresponsing with the current character (i)
                 if isCrazy:
-                    j = random.choice([0,1,2,3,4,5,6,7,11,12])
+                    j = random.choice(listChoices)
+                    while armorList[eq["parts"]][j] == []:
+                        listChoices.remove(j)
+                        j = random.choice(listChoices)
                 else:
                     j = i
-                    
-                if  eq["parts"] == 0:
-                    possibleList = accessoryLists[j]
-                elif eq["parts"] == 1:
-                    possibleList = headLists[j]
-                elif eq["parts"] == 2:
-                    possibleList = chestLists[j]
-                elif eq["parts"] == 3:
-                    possibleList = armLists[j]
-                elif eq["parts"] == 4:
-                    possibleList = legLists[j]
-                elif eq["parts"] == 5:
-                    possibleList = bootLists[j]
                 
-                try:
-                    cosmID = random.choice(possibleList)
-                except:
-                    pass
+                # Choose list
+                possibleList = armorList[eq["parts"]][j]
+                
+
+                cosmID = random.choice(possibleList)
+                possibleList.remove(cosmID)    
                 eq["pc"][i] = cosmID
-                possibleList.remove(cosmID)
 
         JSONParser.CloseFile(eqData, equipFile)
 
