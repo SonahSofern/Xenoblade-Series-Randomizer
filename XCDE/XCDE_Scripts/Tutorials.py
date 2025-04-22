@@ -5,11 +5,18 @@ def TutorialSkips():
     UnskippableTutorials = [1, 6, 18]
     with open("./XCDE/_internal/JsonOutputs/bdat_menu_ttrl/MNU_ttrl.json", 'r+', encoding='utf-8') as tutFile:
         tutData = json.load(tutFile)
+        dupeFlags = []
         for f in tutData["rows"]:
-            if f["$id"] not in UnskippableTutorials:
-                f["type"] = 0 # Stops tutorials but the tutorial wont set its flags so cant be applied to all
+            # if f["$id"] not in UnskippableTutorials:
+            #     f["type"] = 0 # Stops tutorials but the tutorial wont set its flags so cant be applied to all
+            
+            if f["scenario_flag"] in dupeFlags:
+                f["type"] = 0
+            else:
+                dupeFlags.append(f["scenario_flag"])
+                
             f["page"] = 1 # Makes the tutorial only 1 page skipping unnesccesary ones
-                  
+            
             # f["page"] = 0 # Makes 0 pages but still pulls up the menu
             # f["order"] = 0
             # f["proc_value1"] = 0

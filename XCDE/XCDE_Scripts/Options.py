@@ -48,6 +48,8 @@ EquipmentOption_Appearance = SubOption("Appearance", EquipmentOption)
 EquipmentOption_Defenses = SubOption("Defenses", EquipmentOption)
 EquipmentOption_GemSlots = SubOption("Gem Slots", EquipmentOption)
 EquipmentOption_WeightClass = SubOption("Weight Class", EquipmentOption)
+EquipmentOption_CrazyArmors = SubOption("Crazy Armors", EquipmentOption)
+
 # EquipmentOption_Appearance = SubOption("Appearance", EquipmentOption)
 # EquipmentOption_UniqueGems = SubOption("Gems", EquipmentOption)
 # EquipmentOption_Slots = SubOption("Slots", EquipmentOption)
@@ -74,6 +76,9 @@ FasterLvOption = Option("Fast Levels", QOL, "Decreases level up requirements by 
 FasterLvOption_2 = SubOption("2x", FasterLvOption, [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], ['row[key] // 2'])])
 FasterLvOption_4 = SubOption("4x", FasterLvOption, [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], ['row[key] // 4'])], _defState = False)
 FasterLvOption_8 = SubOption("8x", FasterLvOption, [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], ['row[key] // 8'])], _defState = False)
+
+
+# Funny
 
 # ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html
 
