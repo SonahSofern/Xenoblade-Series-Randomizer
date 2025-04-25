@@ -34,7 +34,7 @@ Modded Nintendo Switch with Atmosphere
 
 
 ### Process:
-Guide adapted from: https://gamebanana.com/tuts/13815\
+Guide adapted from: https://gamebanana.com/tuts/13815
 If you have any issues come to the [discord](https://discord.gg/h93yqZHG8z) where we can help!
 
 1. CONSOLE ONLY: Use NXDumpTool to perform a full dump of XC2's RomFS to your microSD card, and put it into your computer.
@@ -46,7 +46,7 @@ If you have any issues come to the [discord](https://discord.gg/h93yqZHG8z) wher
 > **Windows: `copy /b` file1name `+` file2name `+` file3name `bf2.ard`\
 > **Mac/Linux: `cat` file1name file2name file3name `> bf2.ard`\
 > You should have the combined file now!
-4. Download the latest release of XenoLib (https://github.com/PredatorCZ/XenoLib), and extract its contents.
+4. Download the latest release of [XenoLib](https://github.com/PredatorCZ/XenoLib), and extract its contents.
 5. Drag and drop bf2.arh onto extract_arh.cmd.
 6. It should automatically start extracting. Many empty filename id warnings are normal, wait until it finishes extracting.
 7. It should output a zip folder and inside there should now be a folder named "bdat"; This is the folder that the randomizer program targets as the input folder. The output folder should be\
