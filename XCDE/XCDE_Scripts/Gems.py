@@ -112,7 +112,7 @@ def Gems():
 def Effects(gemData, gemMSData, gemHelpMSData):
     
     # Number of gems that the game will allow in a single file
-    maxGems = 92
+    # maxGems = 92
     
     # Keep track of what ids to put things in
     idCount = 1
@@ -125,7 +125,7 @@ def Effects(gemData, gemMSData, gemHelpMSData):
     gemHelpMSData["rows"].clear()
     
     # Loop and generate our new gems
-    for i in range(maxGems):
+    for i in range(len(GemList)):
     
         if (len(GemList) == 0):
             break

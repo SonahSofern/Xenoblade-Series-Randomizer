@@ -61,7 +61,7 @@ def EnemyArtAttributes():
 def ChangeArts(artData, artNameData):
     newNameID = 457 # Starting id to add new names to old names file
     
-    spinBox = Options.EnemyArtEffectsOption.GetOdds()
+    spinBox = Options.EnemyArtEffectsOption.GetSpinbox()
     isReactions = Options.EnemyArtEffectsOption_Reactions.GetState()
     isDebuffs = Options.EnemyArtEffectsOption_Debuffs.GetState()
     isBuffs = Options.EnemyArtEffectsOption_Buffs.GetState()

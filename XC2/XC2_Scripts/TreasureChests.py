@@ -18,7 +18,7 @@ def RandoTreasureBoxes():
         ValidReplacements.extend(IDs.Deeds)
     if Options.TreasureChestOption_CollectionPointMaterials.GetState():
         ValidReplacements.extend(IDs.CollectionPointMaterials)
-    odds = Options.TreasureChestOption.GetOdds()
+    odds = Options.TreasureChestOption.GetSpinbox()
 
     
     if ValidReplacements == []: # In case they dont select anything

@@ -780,7 +780,7 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
     return AllAreaUMs, AllAreaMonsters
     
 def UMEnemyAggro(): # custom enemy aggro
-    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetOdds()
+    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetSpinbox()
     if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive, except the unique monsters
         with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)

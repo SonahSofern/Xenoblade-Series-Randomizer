@@ -1,7 +1,7 @@
 import PcArts
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
-import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor
+import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL
 OptionList =[]
 
 General = 1
@@ -76,7 +76,7 @@ FasterLvOption = Option("Fast Levels", QOL, "Decreases level up requirements by 
 FasterLvOption_2 = SubOption("2x", FasterLvOption, [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], ['row[key] // 2'])])
 FasterLvOption_4 = SubOption("4x", FasterLvOption, [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], ['row[key] // 4'])], _defState = False)
 FasterLvOption_8 = SubOption("8x", FasterLvOption, [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], ['row[key] // 8'])], _defState = False)
-
+MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free quickstep gems.", [lambda: MiscQOL.Quickstep()], _hasSpinBox=True, _spinDesc="% Speed", _spinMax=255)
 
 # Funny
 

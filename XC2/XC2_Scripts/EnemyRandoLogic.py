@@ -414,7 +414,7 @@ def EnemyAggroProportion():
     if EnemyRandoOnBox:
         if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox: # do nothing, got handled after enemy randomization
             return
-    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetOdds()
+    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetSpinbox()
     NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
     if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive
         with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
@@ -465,7 +465,7 @@ def EnemyAggroProportion():
 
 def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs): #when enemy rando is on
     EnemyAggroOnBox = Options.EnemyAggroOption.GetState()
-    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetOdds()
+    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetSpinbox()
     if EnemyAggroOnBox: # if enemy aggro is randomized
         with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)

@@ -37,7 +37,7 @@ def AddMovespeedDeed():
     # Torna Exclusive debug
     if not Options.UMHuntOption.GetState():
         CurrentNameID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
-        BonusMovespeed = Options.StartwithIncreasedMovespeedOption.GetOdds() * 10
+        BonusMovespeed = Options.StartwithIncreasedMovespeedOption.GetSpinbox() * 10
         JSONParser.ChangeJSONLine(["common/ITM_PreciousList.json"], [25249], ["Name"], CurrentNameID)
         JSONParser.ChangeJSONLine(["common/ITM_PreciousList.json"], [25249], ["Caption"], CurrentNameID + 1)
         JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [1], ["Value"], BonusMovespeed)

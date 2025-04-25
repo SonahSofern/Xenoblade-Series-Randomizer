@@ -19,7 +19,7 @@ def DriverArtRandomizer():
         isDebuffs = Options.DriverArtsOption_Debuffs.GetState()
         isAOE = Options.DriverArtsOption_AOE.GetState()
         isSpeed = Options.DriverArtsOption_AnimationSpeed.GetState()
-        odds = Options.DriverArtsOption.GetOdds()
+        odds = Options.DriverArtsOption.GetSpinbox()
         
         for art in artData["rows"]:
             if art["$id"] in [4,5,6,7]: # Dont change aegis since they get copied to later

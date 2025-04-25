@@ -7,7 +7,6 @@ MeliaSkills = [152,157,159]
 MechonisArmor = [176]
 SharlaCoolOff = [110]
 ReynTaunts = [32,35,46]
-ArmorEquips = [] # So we cant put people with no models with certain types but we can have some fun by limiting. If reyn doesnt roll heavy armor no heavy armor for him
 
 
 

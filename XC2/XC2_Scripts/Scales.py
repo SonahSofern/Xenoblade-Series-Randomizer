@@ -7,7 +7,7 @@ def BladeScales():
 
     with open(f"./XC2/_internal/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:
         bladeData = json.load(bladeFile)
-        odds = Options.BladeSizeOption.GetOdds()
+        odds = Options.BladeSizeOption.GetSpinbox()
         for blade in bladeData["rows"]:
             if not Helper.OddsCheck(odds): # Check spinbox
                 continue
@@ -23,7 +23,7 @@ def NPCScales():
     
     with open(f"./XC2/_internal/JsonOutputs/common/RSC_NpcList.json", 'r+', encoding='utf-8') as npcFile:
         npcData = json.load(npcFile)
-        odds = Options.NPCSizeOption.GetOdds()
+        odds = Options.NPCSizeOption.GetSpinbox()
         for npc in npcData["rows"]:
             if not Helper.OddsCheck(odds): # Check spinbox
                 continue
@@ -38,7 +38,7 @@ def EnemyScales():
     
     with open(f"./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as enFile:
         enData = json.load(enFile)
-        odds = Options.EnemySizeOption.GetOdds()
+        odds = Options.EnemySizeOption.GetSpinbox()
         for en in enData["rows"]:
             if not Helper.OddsCheck(odds): # Check spinbox
                 continue

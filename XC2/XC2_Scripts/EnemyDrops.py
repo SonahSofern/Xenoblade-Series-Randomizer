@@ -18,7 +18,7 @@ def RandoEnemyDrops():
         ValidReplacements.extend(IDs.Deeds)
     if Options.EnemyDropOption_CollectionPointMaterials.GetState():
         ValidReplacements.extend(IDs.CollectionPointMaterials)
-    odds = Options.EnemyDropOption.GetOdds()
+    odds = Options.EnemyDropOption.GetSpinbox()
 
     
     if ValidReplacements == []: # In case they dont select anything

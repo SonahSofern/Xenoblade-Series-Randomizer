@@ -152,7 +152,7 @@ def CosmeticPairs(nameData, itmData,odds, charKeyWord, cosmeticsList):
             
 def Cosmetics():
     # Slider
-    odds = Options.CosmeticsOption.GetOdds()
+    odds = Options.CosmeticsOption.GetSpinbox()
     
     # Drivers
     with open("./XC2/_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file:

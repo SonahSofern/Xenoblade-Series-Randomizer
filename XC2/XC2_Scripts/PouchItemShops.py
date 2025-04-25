@@ -21,7 +21,7 @@ def RandoPouchShops():
     if Options.PouchItemShopOption_CollectionPointMaterials.GetState():
         ValidReplacements.extend(IDs.CollectionPointMaterials)
         
-    odds = Options.PouchItemShopOption.GetOdds()
+    odds = Options.PouchItemShopOption.GetSpinbox()
 
     
     if ValidReplacements == []: # In case they dont select anything

@@ -101,7 +101,7 @@ class Option():
             for sub in self.subOptions: # Handles Dropdown
                 sub.checkBox.grid_remove()
     
-    def GetOdds(self):
+    def GetSpinbox(self):
         return self.spinBoxVal.get()
     
     def GetState(self):

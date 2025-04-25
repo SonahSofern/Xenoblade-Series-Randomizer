@@ -79,6 +79,7 @@ def GearAppearance():
         eqData = json.load(equipFile)
         isCrazy = Options.EquipmentOption_CrazyArmors.GetState()
         invalidArmor = [190]
+        dontReplace = [1,2,3,4,5,6,7,212,8,9,10,4,4,332,336,328]
         # Nested lists
         armorList = [[[] for _ in range(16)] for _ in range(6)]
 
@@ -113,7 +114,7 @@ def GearAppearance():
             # Defined here so that each new equipment 
             listChoices = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]     
             
-            if eq["$id"] in invalidArmor:
+            if eq["$id"] in invalidArmor + dontReplace:
                 continue
             
             for i in range(0, 16):

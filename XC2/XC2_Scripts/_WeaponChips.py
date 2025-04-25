@@ -11,7 +11,7 @@ def RandomizeWeaponEnhancements():
     with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file:
         with open("./XC2/_internal/JsonOutputs/common_ms/itm_pcwpn_ms.json", 'r+', encoding='utf-8') as wepNames:
             
-            slider = Options.BladeWeaponChipsOption.GetOdds()
+            slider = Options.BladeWeaponChipsOption.GetSpinbox()
             enhanceFile = json.load(file)
             skillNameFile = json.load(wepNames)
             for Wep in enhanceFile["rows"]:
@@ -62,7 +62,7 @@ def RandomizePowerLevels(): # this makes the weapon chips uniform in their power
         with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
             data = json.load(file)
             for row in data["rows"]:
-                if Helper.OddsCheck(Options.BladeWeaponChipsOption.GetOdds()):
+                if Helper.OddsCheck(Options.BladeWeaponChipsOption.GetSpinbox()):
                     row["Rank"] = WeaponRankPool[row["$id"]-10001]
                     for i in range(1, 37):
                         WeaponStrengthList[row["Rank"] - 1].append(row[f"CreateWpn{i}"])

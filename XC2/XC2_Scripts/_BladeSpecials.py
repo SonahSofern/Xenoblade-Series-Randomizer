@@ -9,7 +9,7 @@ def BladeSpecials():
         isReact = Options.BladeSpecialOption_Reaction.GetState()
         isEnhancements = Options.BladeSpecialOption_Enhancement.GetState()
         isDebuffs = Options.BladeSpecialOption_Debuffs.GetState()
-        odds = Options.BladeSpecialOption.GetOdds()
+        odds = Options.BladeSpecialOption.GetSpinbox()
         
         for art in artData["rows"]:
             if isReact:
@@ -49,7 +49,7 @@ def BladeEXSpecials(): # Ex specials use different keys and dont have all 6 legv
         
         isReact = Options.BladeSpecialOption_Reaction.GetState()
         isEnhancements = Options.BladeSpecialOption_Enhancement.GetState()
-        odds = Options.BladeSpecialOption.GetOdds()
+        odds = Options.BladeSpecialOption.GetSpinbox()
         
         for art in artData["rows"]:
             if isReact:

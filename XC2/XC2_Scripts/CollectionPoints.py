@@ -18,7 +18,7 @@ def RandoCollectionPoints():
         ValidReplacements.extend(IDs.Deeds)
     if Options.CollectionPointsOption_CollectionPointMaterials.GetState():
         ValidReplacements.extend(IDs.CollectionPointMaterials)
-    odds = Options.CollectionPointsOption.GetOdds()
+    odds = Options.CollectionPointsOption.GetSpinbox()
 
     
     if ValidReplacements == []: # In case they dont select anything

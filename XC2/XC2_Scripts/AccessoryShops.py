@@ -26,7 +26,7 @@ def RandoAccessoryShops():
     
     with open("./XC2/_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as shopFile:
         shopData = json.load(shopFile)
-        odds = Options.AccessoryShopsOption.GetOdds()
+        odds = Options.AccessoryShopsOption.GetSpinbox()
         for shop in shopData["rows"]:
             if shop[f"DefItem1"] not in (IDs.Accessories + IDs.TornaAccessories): # Ensures it is an accessory shop
                 continue
