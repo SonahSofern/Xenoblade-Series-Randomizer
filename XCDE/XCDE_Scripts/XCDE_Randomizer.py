@@ -52,50 +52,45 @@ MainWindow = ttk.Notebook(root, height=5)
 TabGeneralOuter = ttk.Frame(MainWindow) 
 TabCharactersOuter = ttk.Frame(MainWindow) 
 TabEnemiesOuter = ttk.Frame(MainWindow) 
-TabMiscOuter = ttk.Frame(MainWindow) 
+TabMusicOuter = ttk.Frame(MainWindow) 
 TabQOLOuter = ttk.Frame(MainWindow)
-TabGameModeOuter = ttk.Frame(MainWindow)
 TabFunnyOuter = ttk.Frame(MainWindow)
 
 # Canvas 
 TabGeneralCanvas = Canvas(TabGeneralOuter) 
 TabCharactersCanvas = Canvas(TabCharactersOuter) 
 TabEnemiesCanvas = Canvas(TabEnemiesOuter) 
-TabMiscCanvas = Canvas(TabMiscOuter)
+TabMusicCanvas = Canvas(TabMusicOuter)
 TabQOLCanvas = Canvas(TabQOLOuter)
-TabGameModeCanvas = Canvas(TabGameModeOuter)
 TabFunnyCanvas = Canvas(TabFunnyOuter)
 
 # Actual Scrollable Content
 TabGeneral = ttk.Frame(TabGeneralCanvas)
 TabCharacters = ttk.Frame(TabCharactersCanvas) 
 TabEnemies = ttk.Frame(TabEnemiesCanvas) 
-TabMisc = ttk.Frame(TabMiscCanvas)
+TabMusic = ttk.Frame(TabMusicCanvas)
 TabQOL = ttk.Frame(TabQOLCanvas)
-TabGameMode = ttk.Frame(TabGameModeCanvas)
 TabFunny = ttk.Frame(TabFunnyCanvas)
 
 
-GUISettings.CreateScrollBars([TabGeneralOuter, TabCharactersOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabGameModeOuter, TabFunnyOuter],[TabGeneralCanvas, TabCharactersCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabGameModeCanvas, TabFunnyCanvas],[TabGeneral, TabCharacters, TabEnemies, TabMisc, TabQOL, TabGameMode, TabFunny])
+GUISettings.CreateScrollBars([TabGeneralOuter, TabCharactersOuter, TabEnemiesOuter, TabMusicOuter, TabQOLOuter, TabFunnyOuter],[TabGeneralCanvas, TabCharactersCanvas, TabEnemiesCanvas, TabMusicCanvas, TabQOLCanvas, TabFunnyCanvas],[TabGeneral, TabCharacters, TabEnemies, TabMusic, TabQOL, TabFunny])
 
 # Tabs
 MainWindow.add(TabGeneralOuter, text ='General') 
 MainWindow.add(TabCharactersOuter, text ='Characters') 
 MainWindow.add(TabEnemiesOuter, text ='Enemies') 
 MainWindow.add(TabQOLOuter, text = 'Quality of Life')
-MainWindow.add(TabGameModeOuter, text='Game Modes')
 MainWindow.add(TabFunnyOuter, text='Funny')
-MainWindow.add(TabMiscOuter, text ='Misc.') 
+MainWindow.add(TabMusicOuter, text ='Music') 
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 Tabs = {
     1: TabGeneral,
     2: TabCharacters,
     3: TabEnemies,
-    4: TabMisc,
+    4: TabMusic,
     5: TabQOL,
     6: TabFunny,
-    7: TabGameMode
 }
 
 Interactables.OptionList.sort(key= lambda x: x.name) # Sorts alphabetically

@@ -40,9 +40,9 @@ def Enemies():
     CombinedUniqueEnemyData:list[Enemy] = []
     CombinedBossEnemyData:list[Enemy] = []
     CombinedSuperbossEnemyData:list[Enemy] = []
-    # "run_speed" Do NOT include run speed it lags the game to 1 fps
-    CopiedStats = ["move_speed", "frame", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "avoid", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "detects", "assist", "search_range", "search_angle", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_dmg", "spike_state", "spike_state_val", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
-    CopiedStatsWithRatios = ["hp", "str", "agi", "eth", "Lv_up_hp", "Lv_up_str", "Lv_up_eth", "Lv_up_agi"]
+    # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle",
+    CopiedStats = ["move_speed", "frame", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "avoid", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_dmg", "spike_state", "spike_state_val", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
+    CopiedStatsWithRatios = ["hp", "str", "eth", "Lv_up_hp", "Lv_up_str", "Lv_up_eth"] # Not doing agility its too finicky and scales slowly compared to the other stats
     CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
         eneData = json.load(eneFile)    
@@ -83,8 +83,7 @@ def Enemies():
                     eneAreaData = json.load(eneAreaFile)
                     for enemy in eneAreaData["rows"]:   
                         
-                        if enemy["$id"] == 1502:
-                            pass
+
                         if enemy["$id"] not in ChosenEnemyIds: # Only want to replace enemies chosen from our groups
                             continue
                         

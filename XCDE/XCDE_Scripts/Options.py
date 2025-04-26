@@ -1,18 +1,23 @@
 import PcArts
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
-import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL
+import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales
 OptionList =[]
 
 General = 1
 Character  = 2
 Enemies = 3
-Misce = 4
+Musica = 4
 QOL = 5
 Funny = 6
 GameModeTab = 7
 
 # LevelDiffOption = Option("Level Penalties", General, "Removes the harsh level penalties and bonuses from the game for more fair combat")
+
+# General
+TradeOption = Option("NPC Trades", General, "Randomizes NPC trades")
+
+# Collectapedia
 
 # Enemy
 EnemyOption = Option("Enemies", Enemies, "Randomizes enemies in the overworld", [lambda: EnemiesScript.Enemies()])
@@ -50,24 +55,23 @@ EquipmentOption_GemSlots = SubOption("Gem Slots", EquipmentOption)
 EquipmentOption_WeightClass = SubOption("Weight Class", EquipmentOption)
 EquipmentOption_CrazyArmors = SubOption("Crazy Armors", EquipmentOption)
 
-# EquipmentOption_Appearance = SubOption("Appearance", EquipmentOption)
-# EquipmentOption_UniqueGems = SubOption("Gems", EquipmentOption)
-# EquipmentOption_Slots = SubOption("Slots", EquipmentOption)
+# Weapons
+
 
 
 # Misc
-BattleMusicOption = Option("Battle Music", Misce, "Randomizes the chosen battle themes onto all battle themes", [lambda: Music.MusicRando(Music.AllBattleThemes, Music.UsedBattleThemes)]) #https://xenobladedata.github.io/xb1de/bdat/bdat_common/bgmlist.html
+BattleMusicOption = Option("Battle Music", Musica, "Randomizes the chosen battle themes onto all battle themes", [lambda: Music.MusicRando(Music.AllBattleThemes, Music.UsedBattleThemes)]) #https://xenobladedata.github.io/xb1de/bdat/bdat_common/bgmlist.html
 for song in Music.AllBattleThemes:
     song.CreateOption(BattleMusicOption, Music.UsedBattleThemes)
-BossMusicOption = Option("Boss Music", Misce, "Randomizes the chosen boss themes onto all boss themes", [lambda: Music.MusicRando(Music.AllBossThemes, Music.UsedBossThemes)])
+BossMusicOption = Option("Boss Music", Musica, "Randomizes the chosen boss themes onto all boss themes", [lambda: Music.MusicRando(Music.AllBossThemes, Music.UsedBossThemes)])
 for song in Music.AllBossThemes:
     song.CreateOption(BossMusicOption, Music.UsedBossThemes)
-EnvironmentCutsceneMusicOption = Option("Environment/Cutscene Music", Misce, "Randomizes the chosen environment/cutscene themes onto all environment themes", [lambda: Music.MusicRando(Music.AllEnvironmentThemes + Music.AllCutsceneThemes, Music.UsedEnvironmentThemes + Music.UsedCutsceneThemes)])
+EnvironmentCutsceneMusicOption = Option("Environment/Cutscene Music", Musica, "Randomizes the chosen environment/cutscene themes onto all environment themes", [lambda: Music.MusicRando(Music.AllEnvironmentThemes + Music.AllCutsceneThemes, Music.UsedEnvironmentThemes + Music.UsedCutsceneThemes)])
 for song in Music.AllEnvironmentThemes:
     song.CreateOption(EnvironmentCutsceneMusicOption, Music.UsedEnvironmentThemes)
 for song in Music.AllCutsceneThemes:
     song.CreateOption(EnvironmentCutsceneMusicOption, Music.UsedCutsceneThemes)
-JingleMusicOption = Option("Jingles", Misce, "Randomizes the chosen jingles onto all jingles", [lambda: Music.MusicRando(Music.AllJingles, Music.UsedJingles)])
+JingleMusicOption = Option("Jingles", Musica, "Randomizes the chosen jingles onto all jingles", [lambda: Music.MusicRando(Music.AllJingles, Music.UsedJingles)])
 for song in Music.AllJingles:
     song.CreateOption(JingleMusicOption, Music.UsedJingles)
 
@@ -79,6 +83,8 @@ FasterLvOption_8 = SubOption("8x", FasterLvOption, [lambda: Helper.MathmaticalCo
 MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free quickstep gems.", [lambda: MiscQOL.Quickstep()], _hasSpinBox=True, _spinDesc="% Speed", _spinMax=255)
 
 # Funny
+EnemyScaleOption = Option("Enemy Scale", Funny, "", [lambda: Scales.EnemyScales()])
+
 
 # ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html
 

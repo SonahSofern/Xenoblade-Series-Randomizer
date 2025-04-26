@@ -112,20 +112,29 @@ def GearAppearance():
         for eq in eqData["rows"]:
             
             # Defined here so that each new equipment 
-            listChoices = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]     
             
+            
+            # Used to seperate nopon and human cosmetics they dont mix well and even crash sometimes
+            human = [0,1,2,3,4,6,7,8,9,10,11,12,15]
+            nopon = [5,13,14]
             if eq["$id"] in invalidArmor + dontReplace:
                 continue
-            
             for i in range(0, 16):
                 if eq["pc"][i] == 0: # Ignore armors that you couldnt normally equip
                     continue
                 # If crazy armor we want to randomly choose a list, otherwise choose the list corresponsing with the current character (i)
                 if isCrazy:
-                    j = random.choice(listChoices)
+                    
+                    if i in human:
+                        group = human
+                    elif i in nopon:
+                        group = nopon + human # Nopon can have human cosmetics but humans crash with nopon cosmetics
+                    else:
+                        group = None
+                        
+                    j = random.choice(group)
                     while armorList[eq["parts"]][j] == []:
-                        listChoices.remove(j)
-                        j = random.choice(listChoices)
+                        j = random.choice(group)
                 else:
                     j = i
                 
@@ -142,16 +151,14 @@ def GearAppearance():
 
 def RemoveStartingGear():
     removeStartingGearCharacters = [1,2,3,4,5,6,7,8]
+    armorKeys = ["def_head", "def_body", "def_arm", "def_waist", "def_legg","melia_def_head", "melia_def_body", "melia_def_arm", "melia_def_waist", "melia_def_legg"]
     with open("./XCDE/_internal/JsonOutputs/bdat_common/BTL_pclist.json", 'r+', encoding='utf-8') as charFile:
         charData = json.load(charFile)
         for char in charData["rows"]:
             if char["$id"] not in removeStartingGearCharacters:
                 continue
-            char["def_head"] = 0
-            char["def_body"] = 0
-            char["def_arm"] = 0
-            char["def_waist"] = 0
-            char["def_legg"] = 0
+            for key in armorKeys:
+                char[key] = 0
 
         charFile.seek(0)
         charFile.truncate()
