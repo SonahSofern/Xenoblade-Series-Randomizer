@@ -1,7 +1,7 @@
 import PcArts
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
-import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales
+import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales, NPC
 OptionList =[]
 
 General = 1
@@ -15,8 +15,12 @@ GameModeTab = 7
 # LevelDiffOption = Option("Level Penalties", General, "Removes the harsh level penalties and bonuses from the game for more fair combat")
 
 # General
-TradeOption = Option("NPC Trades", General, "Randomizes NPC trades")
-
+TradeOption = Option("NPC Trades", General, "Randomizes NPC trades", [lambda: NPC.Trades()])
+TradeOption_Weapon = SubOption("Weapons", TradeOption)
+TradeOption_Armor = SubOption("Armor", TradeOption)
+TradeOption_Gem = SubOption("Gems", TradeOption)
+TradeOption_Collectibles = SubOption("Collectibles", TradeOption)
+TradeOption_Materials = SubOption("Materials", TradeOption)
 # Collectapedia
 
 # Enemy
@@ -83,7 +87,7 @@ FasterLvOption_8 = SubOption("8x", FasterLvOption, [lambda: Helper.MathmaticalCo
 MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free quickstep gems.", [lambda: MiscQOL.Quickstep()], _hasSpinBox=True, _spinDesc="% Speed", _spinMax=255)
 
 # Funny
-EnemyScaleOption = Option("Enemy Scale", Funny, "", [lambda: Scales.EnemyScales()])
+EnemyScaleOption = Option("Enemy Scale", Funny, "Randomizes a % of enemy sizes.", [lambda: Scales.EnemyScales()], _hasSpinBox=True)
 
 
 # ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html
