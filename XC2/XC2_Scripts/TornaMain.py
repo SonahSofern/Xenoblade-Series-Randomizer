@@ -3,11 +3,15 @@ import json
 import random
 from IDs import *
 import time
-import TornaRecipes, TornaQuests, TornaEnemies, TornaAreas, TornaShops, TornaRedBagItems, TornaMiscItems, Options
+import TornaRecipes, TornaQuests, TornaEnemies, TornaAreas, TornaShops, TornaRedBagItems, TornaMiscItems, TornaChests, TornaCollectionPoints, Options
 
 # make each slate piece worth the same amount of points (1), and make the requirements be 5, 10, 16. 
 # This can be done by changing FLD_ConditionFlags 1445, 1446, 1447 to the respective values. Also change 1401 to 16 for min and max.
-# need to double check the Aletta region collection points around Lake Sarleigh, Lett Bridge, Ossum Magnum, Olnard's Trail.
+# need to change the required weather and time requirements for all collection points, to make them accessible at any time, except for the ones with seeker requirements or miasma requirements
+# need to remove script that removes aegaeon and hugo in early aletta
+# need to set up the unlock keys
+# need to make SP costs for upgrades much cheaper
+# remove all quest, weather, and time requirements for all chests, to make them accessible at any time
 
 def AllTornaRando():
     DetermineSettings()
@@ -20,6 +24,8 @@ def AllTornaRando():
     Shops = TornaShops.CreateShopInfo(Mainquests, Areas, ProgressionLocTypes[4])
     RedBags = TornaRedBagItems.CreateRedBagInfo(Mainquests, Areas, ProgressionLocTypes[5])
     MiscItems = TornaMiscItems.CreateMiscItems(Mainquests, Areas, ProgressionLocTypes[4]) # for now, is on if shops are on
+    Chests = TornaChests.CreateChestInfo(Mainquests, Areas, Enemies, ProgressionLocTypes[3])
+    TornaCollectionPointList, GormottCollectionPointList = TornaCollectionPoints.CreateCollectionPointInfo(Mainquests, Areas, Enemies, ProgressionLocTypes[1])
     pass
 
 def DetermineSettings():
