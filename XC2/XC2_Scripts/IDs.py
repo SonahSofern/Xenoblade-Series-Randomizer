@@ -6,7 +6,7 @@ AuxCores = Helper.InclRange(15001, 15406)
 RefinedAuxCores = Helper.InclRange(17001, 17424)
 WeaponChips = Helper.InclRange(10001, 10060)
 AllCoreCrystals = Helper.InclRange(45001,45057)
-CoreCrystals = [45001, 45002,45003,45004,45005,45006,45007,45008,45009,45011,45012,45013,45016,45056,45057]
+CoreCrystals = [45001,45002,45003,45004,45005,45006,45007,45008,45009,45011,45012,45013,45016,45056,45057]
 TornaAccessories = Helper.InclRange(585, 647) + Helper.InclRange(657,680)
 Accessories = [x for x in Helper.InclRange(1,687) if x not in ([444,445,446,447,448,449,450,451,452,453,454,455,653] + TornaAccessories)]
 PreciousItems = Helper.InclRange(25001, 25499)
@@ -23,7 +23,7 @@ VanillaEnhancements = Helper.InclRange(1,3894)
 DriverSkillTrees = Helper.InclRange(1,270)
 HitReactions = Helper.InclRange(0,16)
 ButtonCombos = Helper.InclRange(1,5)
-BladeBattleSkills = list(set(Helper.InclRange(1,270)) - set([268, 267,266,265,144,142,143,141,8,9]))   
+BladeBattleSkills = list(set(Helper.InclRange(1,270)) - set([268,267,266,265,144,142,143,141,8,9]))   
 
 MajorAreaIds = ["01","02","03","04","05","07","08","10","11","13","15","17","18","20","21","30","40","41","42","49","50","90"]
 
@@ -190,3 +190,66 @@ FullShopEventNameDict = {'Normal': {36: [40321, 30], 37: [40322, 31], 38: [40323
                     'Inn': {12: [40057, 2], 31: [40318, 21], 50: [40436, 47], 51: [40335, 63], 87: [40660, 86], 106: [40762, 105], 107: [40952, 106], 143: [41053, 141], 225: [41578, 204]},
                     'AuxCore': {32: [40319, 22], 52: [40440, 48], 53: [40336, 64], 88: [40661, 87], 108: [40759, 107]}
 }
+
+
+# Torna IDS
+ValidRecipeInfoIDs = Helper.InclRange(26139, 26163) + [26166] + Helper.InclRange(26171, 26191)
+TornaCollectibleIDs = [30340, 30341, 30342, 30343, 30344, 30345, 30346, 30347, 30348, 30349, 30350, 30351, 30352, 30353, 30354, 30355, 30356, 30357, 30358, 30359, 30360, 30361, 30362, 30363, 30364, 30365, 30366, 30367, 30368, 30369, 30370, 30371, 30372, 30373, 30374, 30375, 30376, 30377, 30378, 30380, 30384, 30386, 30387, 30388, 30389, 30390, 30391, 30392, 30393, 30394, 30395, 30396, 30397, 30398, 30399, 30400, 30401, 30402, 30403, 30404, 30405, 30406, 30407, 30408, 30409, 30410, 30411, 30412, 30413, 30414, 30415, 30416, 30417, 30418, 30419, 30420, 30421, 30422, 30423, 30424, 30425, 30426, 30427, 30428, 30429, 30430, 30432, 30433, 30434, 30435, 30436, 30437, 30438, 30439, 30442, 30443, 30444, 25457, 25458, 25463, 25473, 25536]
+TornaAuxCores = Helper.InclRange(17001, 17406) + [17425]
+TornaWeaponChips = WeaponChips
+CombinedTornaAccessories = list(set(TornaAccessories + Accessories))
+TornaPreciousIDs = Helper.InclRange(25457, 25466) + Helper.InclRange(25469, 25494) + Helper.InclRange(25501, 25528)
+TornaUMIDs = [1563, 1564, 1566, 1567, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1670, 1559, 1560, 1561, 1562]
+TornaRegularEnemyIDs = [1536, 1537, 1539, 1540, 1542, 1544, 1545, 1546, 1547, 1548, 1549, 1550, 1551, 1570, 1571, 1573, 1574, 1575, 1576, 1577, 1578, 1579, 1580, 1581, 1582, 1583, 1585, 1587, 1588, 1589, 1590, 1591, 1592, 1594, 1595, 1596, 1598, 1600, 1601, 1602, 1604, 1605, 1606, 1607, 1608, 1609, 1610, 1611, 1612, 1613, 1614, 1616, 1617, 1618, 1619, 1621, 1622, 1623, 1624, 1625, 1626, 1627, 1628, 1629, 1630, 1631, 1634, 1635, 1636, 1637, 1639, 1640, 1643, 1644, 1645, 1646, 1647, 1648, 1649, 1650, 1651, 1652, 1653, 1655, 1656, 1496, 1497, 1498, 1499, 1500, 1501, 1502, 1503, 1507, 1512, 1515, 1516, 1518, 1519, 1522, 1526, 1527, 1528, 1529, 1530, 1531, 1532, 1534, 1535]
+TornaSlatePieceIDs = [25479, 25480, 25481, 25482, 25483, 25484, 25485, 25486, 25487, 25488, 25489, 25490, 25491, 25492, 25493, 25494]
+# Custom Randomizer Item IDs for Torna
+
+# Field Skill Unlocks
+MineralogyKey = Helper.InclRange(25544,25546)
+SwordplayKey = Helper.InclRange(25547,25549)
+FortitudeKey = Helper.InclRange(25550,25551)
+ForestryKey = Helper.InclRange(25552,25554)
+ManipEtherKey = Helper.InclRange(25555,25557)
+KeenEyeKey = Helper.InclRange(25558,25560)
+FocusKey = Helper.InclRange(25561,25563)
+LightKey = Helper.InclRange(25564,25566)
+GirlsTalkKey = [25567]
+EntomologyKey = Helper.InclRange(25568,25570)
+MiningKey = Helper.InclRange(25571,25573)
+BotanyKey = Helper.InclRange(25574,25576)
+LockpickKey = Helper.InclRange(25577,25579)
+IcthyologyKey = Helper.InclRange(25580,25582)
+ComWaterKey = Helper.InclRange(25583,25585)
+SuperstrKey = Helper.InclRange(25586,25588)
+
+# Campsite Unlocks
+HHC_Key = [25589]
+LC_Key = [25590]
+CLC_Key = [25591]
+HWC_Key = [25592]
+PVC_Key = [25593]
+FVC_Key = [25594]
+AGC_Key = [25595]
+OTC_Key = [25596]
+DDC_Key = [25597]
+HGC_Key = [25598]
+
+# Affinity Level Unlocks
+JinAff = Helper.InclRange(25599,25602)
+HazeAff = Helper.InclRange(25603,25606)
+MythraAff = Helper.InclRange(25607,25610)
+MinothAff = Helper.InclRange(25611,25614)
+BrighidAff = Helper.InclRange(25615,25618)
+AegaeonAff = Helper.InclRange(25619,25622)
+
+# Character Unlocks
+HazeKey = [25623]
+AddamKey = [25624]
+MythraKey = [25625]
+MinothKey = [25626]
+HugoKey = [25627]
+BrighidKey = [25628]
+AegaeonKey = [25629]
+
+# Level Up Unlocks
+LevelUpTokens = Helper.InclRange(25630,25725) # 96 tokens, we assume we get 2 levels from intro fight (stats required to beat fight?), and start at lv 1.

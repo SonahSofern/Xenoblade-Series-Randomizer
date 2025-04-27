@@ -7,7 +7,7 @@ import time
 import DebugLog
 import CoreCrystalAdjustments
 import math, Options
-from BladeRandomization import Original2Replacement, Replacement2Original
+import TutorialShortening
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
@@ -21,7 +21,8 @@ HitRevLow = [110, 115, 122, 129, 138, 147, 158, 169, 182, 195, 210, 225, 242, 25
 ReactRevHigh = [0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 40, 60, 80, 100, 100, 100, 100, 100, 100, 100]
 
 def RaceModeChanging(): 
-    print("Setting Up Race Mode")    
+    print("Setting Up Race Mode")
+
     #Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_WorldMapCond.json", ["cond1"], 1850) #unlocks the world maps
     #Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_maplist.json", ["mapON_cndID"], 1850) #unlocks the world maps
 
@@ -215,6 +216,7 @@ def RaceModeChanging():
     if Options.RaceModeOption_DLC.GetState():
         print("Nerfing Corvin and Crossette")
         DLCItemChanges()
+    TutorialShortening.RaceModeTutorialShortening()
     SeedHash()
 
 def RaceModeDescription():

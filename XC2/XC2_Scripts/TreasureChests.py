@@ -2,25 +2,28 @@ import Options, IDs, json, random
 from scripts import Helper, PopupDescriptions
 def RandoTreasureBoxes():
     ValidReplacements = []
-    if Options.TreasureChestOption_Accessories.GetState():
-        ValidReplacements.extend(IDs.Accessories)
-    if Options.TreasureChestOption_TornaAccessories.GetState():
-        ValidReplacements.extend(IDs.TornaAccessories)
-    if Options.TreasureChestOption_WeaponChips.GetState():
-        ValidReplacements.extend(IDs.WeaponChips)
-    if Options.TreasureChestOption_AuxCores.GetState():
-        ValidReplacements.extend(IDs.AuxCores)
-    if Options.TreasureChestOption_RefinedAuxCores.GetState():
-        ValidReplacements.extend(IDs.RefinedAuxCores)
-    if Options.TreasureChestOption_CoreCrystals.GetState():
-        ValidReplacements.extend(IDs.CoreCrystals)
-    if Options.TreasureChestOption_Deeds.GetState():
-        ValidReplacements.extend(IDs.Deeds)
-    if Options.TreasureChestOption_CollectionPointMaterials.GetState():
-        ValidReplacements.extend(IDs.CollectionPointMaterials)
-    odds = Options.TreasureChestOption.GetSpinbox()
+    if not Options.RaceModeOption.GetState(): # if race mode is on, we don't want to do any of this
+        if Options.TreasureChestOption_Accessories.GetState():
+            ValidReplacements.extend(IDs.Accessories)
+        if Options.TreasureChestOption_TornaAccessories.GetState():
+            ValidReplacements.extend(IDs.TornaAccessories)
+        if Options.TreasureChestOption_WeaponChips.GetState():
+            ValidReplacements.extend(IDs.WeaponChips)
+        if Options.TreasureChestOption_AuxCores.GetState():
+            ValidReplacements.extend(IDs.AuxCores)
+        if Options.TreasureChestOption_RefinedAuxCores.GetState():
+            ValidReplacements.extend(IDs.RefinedAuxCores)
+        if Options.TreasureChestOption_CoreCrystals.GetState() and not Options.CustomCoreCrystalOption.GetState():
+                ValidReplacements.extend(IDs.CoreCrystals)
+        if Options.TreasureChestOption_Deeds.GetState():
+            if not Options.StartwithIncreasedMovespeedOption.GetState(): # if we have the bonus movespeed starting deed on, we want to exclude it from the deeds found in chests.
+                ValidReplacements.extend(IDs.Deeds)
+            else:
+                ValidReplacements.extend(Helper.InclRange(25250, 25300))
+        if Options.TreasureChestOption_CollectionPointMaterials.GetState():
+            ValidReplacements.extend(IDs.CollectionPointMaterials)
+    odds = Options.TreasureChestOption.GetOdds()
 
-    
     if ValidReplacements == []: # In case they dont select anything
         return
     
