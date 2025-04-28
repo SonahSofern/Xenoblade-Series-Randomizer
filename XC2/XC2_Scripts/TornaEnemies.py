@@ -5,20 +5,27 @@ from IDs import *
 
 # still need to create 3 drop table ids if they don't already exist for an enemy, each with 100% chance for one item. If it rolls a precious id, just put it in precious items, then restrict that enemy from getting any more precious items, and leave one loot table blank.
 
-class TornaEnemy: # created to allow me to pass these objects easier
+# some quest enemies are missable by alternate routes for the quests. they shouldn't have drops at all then, tbh.
+
+class TornaEnemyNormalDrops: # created to allow me to pass these objects easier
     def __init__(self, input, addtolist, rewardnumber):
         self.id = input["$id"]
         self.name = input["Name"]
         self.nearloc = input['Location Near']
         self.level = input["Level"]
-        self.mainreq = input['Story Pre-Req']
+        self.mainreq = input['Story Pre-Req'][0]
         self.duringquest = input["During Quest"]
         self.sideprereq = input['Quest Completion Pre-Req']
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Required Items'])
         self.summonedby = input['Summoned By']
         self.droptableids = input['Enemy Drop Table IDs']
-        self.randomizeditems = Helper.ExtendListtoLength([], rewardnumber, "0") # holds enemy drop ids
-        self.preciousitem = 0
+        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 3, "0"), 4, "-1") # holds ids, -1 for progression, 0 for filler spots
+        if rewardnumber > 0:
+            self.hasprogression = True
+            self.randomizeditems = Helper.ExtendListtoLength(self.randomizeditems, 4, "-1")
+        else:
+            self.hasprogression = False
+            self.randomizeditems = Helper.ExtendListtoLength(self.randomizeditems, 4, "0")
         addtolist.append(self)
 
 def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy requirements may change depending on the logic of which quests get rolled
@@ -28,7 +35,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
 		'Name': 'RagingVolff',
 		'Location Near': 2315,
 		'Level': 1,
-		'Story Pre-Req': [],
+		'Story Pre-Req': [0],
 		'During Quest': [],
 		'Quest Completion Pre-Req': [],
 		'Summoned By': [],
@@ -40,7 +47,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'JubelFeris',
         'Location Near': 2315,
         'Level': 2,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -52,7 +59,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'CursedBuloofoA',
         'Location Near': 2315,
         'Level': 2,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -304,7 +311,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'CursedBuloofoB',
         'Location Near': 2315,
         'Level': 3,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -316,7 +323,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'VanadiumTirkin',
         'Location Near': 2332,
         'Level': 31,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [33],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -328,7 +335,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'SorgusTirkin',
         'Location Near': 2332,
         'Level': 30,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [33],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -340,7 +347,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'LeractGogol',
         'Location Near': 2334,
         'Level': 32,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [32],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -352,7 +359,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'HewliGogol',
         'Location Near': 2330,
         'Level': 35,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [32],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -364,7 +371,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'MarrithAntol',
         'Location Near': 2317,
         'Level': 38,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [37],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -376,7 +383,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'IncubFlier',
         'Location Near': 2317,
         'Level': 39,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [37],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -388,7 +395,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'PradoCaterpile',
         'Location Near': 2317,
         'Level': 39,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [37],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -400,7 +407,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'AppetBrog',
         'Location Near': 2428,
         'Level': 35,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [53],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -412,7 +419,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'DurallBuloofo',
         'Location Near': 2410,
         'Level': 37,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [40],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -424,7 +431,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'InnocentVolff',
         'Location Near': 2410,
         'Level': 36,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [40],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -436,7 +443,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'LoweBlant',
         'Location Near': 2314,
         'Level': 42,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [48],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -448,7 +455,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'TizzaParisax',
         'Location Near': 2329,
         'Level': 38,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [54],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -460,7 +467,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'IndignantJerry',
         'Location Near': 2357,
         'Level': 46,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [56],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -472,7 +479,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'GraftonFeris',
         'Location Near': 2325,
         'Level': 35,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [20],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -484,7 +491,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'ConspiratorMacNeth',
         'Location Near': 2307,
         'Level': 40,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [38],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -496,7 +503,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'WanderingUrchon',
         'Location Near': 2327,
         'Level': 37,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [24],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -508,7 +515,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'WanderingRopl',
         'Location Near': 2327,
         'Level': 39,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [24],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -520,7 +527,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'WanderingLaia',
         'Location Near': 2327,
         'Level': 41,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [24],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -532,7 +539,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'TimidVolff',
         'Location Near': 2318,
         'Level': 9,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [2],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -544,7 +551,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'PickerBuloofo',
         'Location Near': 2318,
         'Level': 10,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [2],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -556,7 +563,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'ElegiacMercenary',
         'Location Near': 2358,
         'Level': 52,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [5],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -568,7 +575,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'HalcyonMercenary',
         'Location Near': 2358,
         'Level': 52,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [5],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -580,7 +587,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'ChatteringSkeeter',
         'Location Near': 2423,
         'Level': 41,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [39],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -592,7 +599,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'TacitusUrchon',
         'Location Near': 2401,
         'Level': 20,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [13],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -604,7 +611,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'GloomyAspar',
         'Location Near': 2409,
         'Level': 18,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [15],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -616,7 +623,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'WhistlingBathein',
         'Location Near': 2401,
         'Level': 19,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [11],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -628,7 +635,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'PreoccupiedGogol',
         'Location Near': 2306,
         'Level': 24,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [22],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -640,7 +647,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'TenaxEkidno',
         'Location Near': 2365,
         'Level': 50,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [51],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -652,7 +659,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'CalculatingGogol',
         'Location Near': 2356,
         'Level': 37,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [46],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -664,7 +671,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'ElectGogol',
         'Location Near': 2356,
         'Level': 39,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [46],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -676,7 +683,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'CloudArachno',
         'Location Near': 2320,
         'Level': 10,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [1],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -688,7 +695,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'DispareRopl',
         'Location Near': 2425,
         'Level': 16,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [8],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -700,7 +707,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'CreefGriffox',
         'Location Near': 2315,
         'Level': 43,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [41],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -2358,7 +2365,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     TornaEnemies = []
 
     for enemy in TornaEnemyDict:
-        TornaEnemy(enemy, TornaEnemies, DropQty)
+        TornaEnemyNormalDrops(enemy, TornaEnemies, DropQty)
 
     # adding back other requirements
 
@@ -2366,13 +2373,21 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
 
     for enemy in TornaEnemies:
         if enemy.mainreq != []:
-            enemy.itemreqs.extend(Mainquests[enemy.mainreq[0]].itemreqs) # adds the main story requirement to the enemy of choice
+            enemy.itemreqs.extend(Mainquests[enemy.mainreq - 1].itemreqs) # adds the main story requirement to the enemy of choice
         if enemy.duringquest != []:
-            enemy.itemreqs.extend(Sidequests[enemy.duringquest[0]].itemreqs) # adds the current sidequest item requirements to the enemy of choice
+            enemy.itemreqs.extend(Sidequests[enemy.duringquest[0] - 1].itemreqs) # adds the current sidequest item requirements to the enemy of choice
         if enemy.sideprereq != []:
-            enemy.itemreqs.extend(Sidequests[enemy.sideprereq[0]].itemreqs) # adds the pre-req sidequest items to the enemy of choice (used for one enemy that isn't directly part of a quest, but spawns after a sidequest is finished)
+            enemy.itemreqs.extend(Sidequests[enemy.sideprereq[0] - 1].itemreqs) # adds the pre-req sidequest items to the enemy of choice (used for one enemy that isn't directly part of a quest, but spawns after a sidequest is finished)
         if enemy.level > 3:
             enemy.itemreqs.extend(LevelUpTokens[:min(enemy.level + 1, 95)]) # adds the minimum level requirement, and then 2 extra levels over that
+        if enemy.id in TornaUMIDs:
+            enemy.type = "uniquemonster"
+        elif enemy.id in TornaBossIDs:
+            enemy.type = "boss"
+        elif enemy.id in TornaQuestEnemyIDs:
+            enemy.type = "questenemy"
+        elif enemy.id in TornaNormalEnemyIDs:
+            enemy.type = "normalenemy"
         for area in Areas: # adds the area reach requirements
             if enemy.nearloc == area.id:
                 enemy.itemreqs.extend(area.itemreqs)

@@ -11,10 +11,13 @@ class TornaMiscItem: # created to allow me to pass these objects easier
         self.mainreq = input['Story Pre-Req']
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Required Items'])
         if rewardnumber > 0:
-            self.randomizeditems = [0]
+            self.randomizeditems = [-1]
+            self.hasprogression = True
         else:
-            self.randomizeditems = []
+            self.randomizeditems = [0]
+            self.hasprogression = False
         self.nearloc = input['Location Near']
+        self.type = "misc"
         addtolist.append(self)
 
 def CreateMiscItems(Mainquests, Areas, MiscOn): # Currently only for massive melee mythra NPC, but wasn't sure how to classify it
@@ -23,7 +26,7 @@ def CreateMiscItems(Mainquests, Areas, MiscOn): # Currently only for massive mel
         'FLD_AddItem $id': 258,
         'Name': 'NamelessWanderponItem',
         'Location Near': 2303,
-        'Story Pre-Req': [8],
+        'Story Pre-Req': 8,
         'Required Items': []
     }
 
@@ -36,7 +39,7 @@ def CreateMiscItems(Mainquests, Areas, MiscOn): # Currently only for massive mel
     
     for item in TornaMiscItems:
         if item.mainreq != []:
-            item.itemreqs.extend(Mainquests[item.mainreq[0]].itemreqs) # adds main story req
+            item.itemreqs.extend(Mainquests[item.mainreq - 1].itemreqs) # adds main story req
             item.itemreqs = Helper.MultiLevelListToSingleLevelList(item.itemreqs)
             item.itemreqs = list(set(item.itemreqs))
             item.itemreqs.sort()

@@ -15,7 +15,12 @@ class TornaShop: # created to allow me to pass these objects easier
         self.mainreq = input['Story Pre-Req']
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Required Items'])
         self.talkeventid = input['Talk Event ID']
-        self.randomizeditems = Helper.ExtendListtoLength([], rewardnumber, "0") # holds shop item ids
+        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 16, "0") # holds shop item ids, -1 for progression, 0 for filler spots
+        self.type = "shop"
+        if rewardnumber > 0:
+            self.hasprogression = True
+        else:
+            self.hasprogression = False
         addtolist.append(self)
 
 def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
@@ -129,7 +134,7 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
 
     for shop in TornaShops:
         if shop.mainreq != []:
-            shop.itemreqs.extend(Mainquests[shop.mainreq].itemreqs) # adds main story req
+            shop.itemreqs.extend(Mainquests[shop.mainreq - 1].itemreqs) # adds main story req
             shop.itemreqs = Helper.MultiLevelListToSingleLevelList(shop.itemreqs)
             shop.itemreqs = list(set(shop.itemreqs))
             shop.itemreqs.sort()

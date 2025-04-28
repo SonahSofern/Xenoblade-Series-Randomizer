@@ -8,7 +8,7 @@ class TornaArea: # created to allow me to pass these objects easier
         self.id = input["$id"]
         self.name = input["Name"]
         self.prevloc = input['Previous Location Reachable']
-        self.mainreq = input['Story Pre-Req']
+        self.mainreq = input['Story Pre-Req'][0]
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Item Reqs'])
         addtolist.append(self)
 
@@ -682,7 +682,7 @@ def CreateAreaInfo(Sidequests, Mainquests):
 
     for area in TornaAreas:
         if area.mainreq != []:
-            area.itemreqs.extend(Mainquests[area.mainreq[0]].itemreqs) # adds main story req
+            area.itemreqs.extend(Mainquests[area.mainreq - 1].itemreqs) # adds main story req
             area.itemreqs = Helper.MultiLevelListToSingleLevelList(area.itemreqs)
             area.itemreqs = list(set(area.itemreqs))
             area.itemreqs.sort()

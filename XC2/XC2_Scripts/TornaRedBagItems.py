@@ -8,9 +8,15 @@ class TornaRedBag: # created to allow me to pass these objects easier
         self.id = input['ma40a PreciousPop $id']
         self.name = input["Name"]
         self.nearloc = input['Location Near']
-        self.mainreq = input['Story Pre-Req']
+        self.mainreq = input['Story Pre-Req'][0]
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Required Items'])
-        self.randomizeditems = Helper.ExtendListtoLength([], rewardnumber, "0") # holds enemy drop ids
+        self.type = "redbag"
+        if rewardnumber > 0:
+            self.hasprogression = True
+            self.randomizeditems = [-1]
+        else:
+            self.hasprogression = False
+            self.randomizeditems = [0]
         addtolist.append(self)
 
 def CreateRedBagInfo(Mainquests, Areas, RedBagsOn):
@@ -144,7 +150,7 @@ def CreateRedBagInfo(Mainquests, Areas, RedBagsOn):
 
     for bag in TornaRedBags:
         if bag.mainreq != []:
-            bag.itemreqs.extend(Mainquests[bag.mainreq[0]].itemreqs) # adds main story req
+            bag.itemreqs.extend(Mainquests[bag.mainreq - 1].itemreqs) # adds main story req
             bag.itemreqs = Helper.MultiLevelListToSingleLevelList(bag.itemreqs)
             bag.itemreqs = list(set(bag.itemreqs))
             bag.itemreqs.sort()

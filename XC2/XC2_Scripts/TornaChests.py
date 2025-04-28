@@ -8,10 +8,15 @@ class TornaChest:
         self.id = input["$id"]
         self.name = input["Name"]
         self.nearloc = input['Location Near']
-        self.mainreq = input['Story Pre-Req']
+        self.mainreq = input['Story Pre-Req'][0]
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Required Items'])
         self.enemyreqs = input['Must Defeat Enemy IDs']
-        self.randomizeditems = Helper.ExtendListtoLength([], rewardnumber,"0") # holds quest reward ids
+        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 7, "0") # holds shop item ids, -1 for progression, 0 for filler spots
+        self.type = "chest"
+        if rewardnumber > 0:
+            self.hasprogression = True
+        else:
+            self.hasprogression = False
         addtolist.append(self)
 
 def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
@@ -1938,7 +1943,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
 
     for chest in TornaChests:
         if chest.mainreq != []:
-            chest.itemreqs.extend(Mainquests[chest.mainreq[0]].itemreqs) # adds main story req
+            chest.itemreqs.extend(Mainquests[chest.mainreq - 1].itemreqs) # adds main story req
             chest.itemreqs = Helper.MultiLevelListToSingleLevelList(chest.itemreqs)
             chest.itemreqs = list(set(chest.itemreqs))
             chest.itemreqs.sort()
@@ -1950,6 +1955,6 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             for chestenemyreq in chest.enemyreqs:
                 for enemy in Enemies:
                     if enemy.id == chestenemyreq:
-                        chest.itemreqs.append(enemy.itemreqs)
+                        chest.itemreqs.extend(enemy.itemreqs)
                         break
     return TornaChests

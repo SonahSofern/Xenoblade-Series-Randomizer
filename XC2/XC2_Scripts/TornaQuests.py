@@ -6,6 +6,8 @@ from IDs import *
 
 # if a quest has 2 rewardids, they need to equal each other so you can't miss out on progression.
 
+# need to make the quest Unforgotten Promise only require 1 eternity loam, not 4, they're key items with the same id, so you can't make them a one-time reward, like from a boss drop, you need 4 in logic
+
 class TornaSideQuest: # created to allow me to pass these objects easier
     def __init__(self, input, addtolist, rewardnumber):
         self.id = input["Quest Number"]
@@ -16,16 +18,22 @@ class TornaSideQuest: # created to allow me to pass these objects easier
         self.complus = input["Community Gained"]
         self.comreq = input["Community Level Req"]
         self.rewardids = input["Reward Set IDs"]
-        self.randomizeditems = Helper.ExtendListtoLength([], rewardnumber,"0") # holds quest reward ids
+        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 4, "0") # holds ids, -1 for progression, 0 for filler spots
+        self.type = "sidequest"
+        if rewardnumber > 0:
+            self.hasprogression = True
+        else:
+            self.hasprogression = False
         addtolist.append(self)
 
 class TornaMainQuest:
     def __init__(self, input, addtolist):
-        self.id = input["FLD_QuestTask $id"]
+        self.fldquesttaskid = input["FLD_QuestTask $id"]
         self.summary = input["Task Summary"]
         self.comreq = input["Community Level Req"]
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input["Item Requirements"])
         addtolist.append(self)
+        self.id = addtolist.index(self) + 1
 
 def SelectRandomPointGoal(): # There are some sidequests that require you to feed items into a shop, any combination of items to get you to the point requirement. This function randomly chooses 1 of the items in that shop, and notes it down as the logical requirement, restricting it to be placed logically accessible before the quest
     global Quest15Optional, Quest28Optional, Quest29Optional1, Quest29Optional2, Quest30Optional, Quest34Optional1, Quest34Optional2, Quest44Optional1, Quest44Optional2, Quest47Optional, Quest55Optional
@@ -317,7 +325,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 28,
         'Main Story Req': 35,
         'Sidequest Pre-Req': [13],
-        'Item Requirements': [[30428,30375,30020,30433,26178] , [30428] , [30375] , [30020] , [30433] , Quest28Optional],
+        'Item Requirements': [[30428,30375,30020,30433,30428,30375,30020,30433] , [30428] , [30375] , [30020] , [30433] , Quest28Optional],
         'Community Gained': 1,
         'Community Level Req': 0,
         'Reward Set IDs': [1058, 1059]
