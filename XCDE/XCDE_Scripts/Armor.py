@@ -54,7 +54,7 @@ def GemSlots(arm):
         isSlotted = random.choice([0,0,0,1,1])
         arm["jwl_slot"] = isSlotted
     
-    # # rolls for unique augment and the flag associated with it
+    # rolls for unique augment and the flag associated with it
     # isUnique = Helper.OddsCheck(10)
     # if isUnique:
     #     uniFlag = 1
@@ -162,6 +162,4 @@ def RemoveStartingGear():
             for key in armorKeys:
                 char[key] = 0
 
-        charFile.seek(0)
-        charFile.truncate()
-        json.dump(charData, charFile, indent=2, ensure_ascii=False)
+        JSONParser.CloseFile(charData, charFile)

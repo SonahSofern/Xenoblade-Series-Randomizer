@@ -31,10 +31,9 @@ def WeaponRando():
             16: ['wp6203']
             }
 
-        list = []
         wpnData = json.load(wpnFile)
         for wep in wpnData["rows"]:
-            list.append(wep["att_lev"])
+            
             if isAppearance:
                 Appearance(wep, styles)
                 
@@ -54,7 +53,6 @@ def WeaponRando():
             if isGems:
                 Gems(wep)
 
-        print(list)
 
         JSONParser.CloseFile(wpnData, wpnFile)
 
@@ -93,10 +91,10 @@ def Crit(wep, VanCrit:list):
 
 def Speed(wep):
     mult = [0.7,0.8,0.9,1,1.1,1.3,1.5,1.7,1.9]
-    wep["speed"] = min(int(wep["speed"] * random.choice[mult]), 20)
+    wep["speed"] = min(int(wep["speed"] * random.choice(mult)), 20)
 
 def Gems(wep):
-    wep["jwl_slot"]
-    wep["jwl_skill1"]
-    wep["jwl_skill2"]
-    wep["jwl_skill3"]
+    if wep["uni_flag"]: # Dont want to modify unique weapons to keep vanilla feel. Plus redoing the gems requires knowledge of the weapons power level im surte i could make a formula but idk if i want to
+        return
+    
+    wep["jwl_slot"] = random.choice([0,1,2,3])
