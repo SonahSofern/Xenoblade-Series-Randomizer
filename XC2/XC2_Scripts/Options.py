@@ -63,7 +63,7 @@ TreasureChestOption_CollectionPointMaterials = SubOption("Collection Point Mater
 WeaponChipShopOption = Option("Weapon Chip Shops", General, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)], descData=lambda: _WeaponChips.WeaponChipDesc())
 
 # Drivers
-DriverOption = Option("Driver", Driver, "Randomizes which drivers appear in the world", [lambda: _Drivers.Driver()])
+# DriverOption = Option("Driver", Driver, "Randomizes which drivers appear in the world", [lambda: _Drivers.Driver()])
 DriverAccessoriesOption = Option("Driver Accessories", Driver, "Randomizes effects of Accessories", [lambda: _Accessories.RandomizeAccessoryEnhancements()], descData=lambda: _Accessories.AccessoriesDesc())
 DriverArtsOption = Option("Driver Arts", Driver, "Randomizes effects of all driver arts", [lambda: (_DriverArts.DriverArtRandomizer(), _DriverArts.GenCustomArtDescriptions("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/_internal/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], _hasSpinBox = True,spinDefault=40, descData=lambda: _DriverArts.DriverArtDescription())
 DriverArtsOption_AutoAttacks = SubOption("Auto Attacks", DriverArtsOption, [], _defState = False)
@@ -214,13 +214,13 @@ UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
 UMHuntOption_RandomLandmarks = SubOption("Random Starting Landmarks", UMHuntOption)
 
 # Torna
-TornaMainOption = Option("Torna Randomization", GameModeTab, "WIP. Disabling any of the below options merely fills their rewards with non-progression items.", [lambda: TornaMain.AllTornaRando()])
-TornaOption_CollectionPoints = Option("Torna Collection Points", GameModeTab, "Randomizes collection point contents. Each collection point has the number of items equal to the spinbox, weighted equally." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 4, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
-TornaOption_SideQuests = Option("Torna Side Quests", GameModeTab, "Randomizes sidequest rewards. Each sidequest has the number of rewards equal to the spinbox." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 4, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
-TornaOption_EnemyDrops = Option("Torna Enemy Drops", GameModeTab, "Randomizes enemy drops. Each enemy drops a number of items equal to the spinbox upon defeat." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 3, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
-TornaOption_TreasureChests = Option("Torna Treasure Chests", GameModeTab, "Randomizes treasure chest contents. Each chest contains a number of rewards equal to the spinbox." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 7, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
-TornaOption_Shops = Option("Torna Shops", GameModeTab, "Randomizes items in shops and from traveling bards. Each shop contains a number of items equal to the spinbox, and are all purchaseable for gold." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 16, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 2, spinDefault = 1)
-TornaOption_GroundItems = Option("Torna Ground Items", GameModeTab, "Randomizes items in the red bags on the ground. Each red bag contains 1 item.")
+# TornaMainOption = Option("Torna Randomization", GameModeTab, "WIP. Disabling any of the below options merely fills their rewards with non-progression items.", [lambda: TornaMain.AllTornaRando()])
+# TornaOption_CollectionPoints = Option("Torna Collection Points", GameModeTab, "Randomizes collection point contents. Each collection point has the number of items equal to the spinbox, weighted equally." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 4, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
+# TornaOption_SideQuests = Option("Torna Side Quests", GameModeTab, "Randomizes sidequest rewards. Each sidequest has the number of rewards equal to the spinbox." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 4, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
+# TornaOption_EnemyDrops = Option("Torna Enemy Drops", GameModeTab, "Randomizes enemy drops. Each enemy drops a number of items equal to the spinbox upon defeat." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 3, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
+# TornaOption_TreasureChests = Option("Torna Treasure Chests", GameModeTab, "Randomizes treasure chest contents. Each chest contains a number of rewards equal to the spinbox." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 7, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
+# TornaOption_Shops = Option("Torna Shops", GameModeTab, "Randomizes items in shops and from traveling bards. Each shop contains a number of items equal to the spinbox, and are all purchaseable for gold." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 16, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 2, spinDefault = 1)
+# TornaOption_GroundItems = Option("Torna Ground Items", GameModeTab, "Randomizes items in the red bags on the ground. Each red bag contains 1 item.")
 #TornaOption_ChooseLevel2CommunityReq = Option("Level 2 Community Req", GameModeTab, "Determines the number of people required for community.") # I don't know how to make this work in the game files for now.
 
 # Currently Disabled for Various Reasons

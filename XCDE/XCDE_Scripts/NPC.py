@@ -39,30 +39,32 @@ def Trades():
                 
                 for trade in tradeNPCData["rows"]:
                     
-                    if isWpn:
-                        trade["wpn1"] = random.choice(types[2])
+                    trade["wpn1"] = RandomTradeVerification(types[2], trade["wpn1"], isWpn)
+
+                    trade["head1"] = RandomTradeVerification(types[4], trade["head1"], isArmor)
+                    trade["body1"] = RandomTradeVerification(types[5], trade["body1"], isArmor)
+                    trade["arm1"] = RandomTradeVerification(types[6], trade["arm1"], isArmor)
+                    trade["waist1"] = RandomTradeVerification(types[7], trade["waist1"], isArmor)
+                    trade["legg1"] = RandomTradeVerification(types[8], trade["legg1"], isArmor)
                         
-                    if isArmor:
-                        trade["head1"] = random.choice(types[4])
-                        trade["body1"] = random.choice(types[5])
-                        trade["arm1"] = random.choice(types[6])
-                        trade["waist1"] = random.choice(types[7])
-                        trade["legg1"] = random.choice(types[8])
+                        
+                    trade["kessyou1"] = RandomTradeVerification(types[3], trade["kessyou1"], isGem)
+                    trade["kessyou2"] = RandomTradeVerification(types[3], trade["kessyou2"], isGem)
                     
-                    if isGem:
-                        trade["kessyou1"] = random.choice(types[3])
-                        trade["kessyou2"] = random.choice(types[3])
-                        
-                    if isCol:
-                        trade["collect1"] = random.choice(types[10]) 
-                        trade["collect2"] = random.choice(types[10]) 
-                        
-                    if isMat:
-                        trade["material1"] = random.choice(types[11])
-                        trade["material2"] = random.choice(types[11])
+                    trade["collect1"] = RandomTradeVerification(types[10], trade["collect1"], isCol)
+                    trade["collect2"] = RandomTradeVerification(types[10], trade["collect2"], isCol)
+                    
+                    trade["materia1"] = RandomTradeVerification(types[11], trade["materia1"], isMat)
+                    trade["materia2"] = RandomTradeVerification(types[11], trade["materia2"], isMat)
                         
                 
                 JSONParser.CloseFile(tradeNPCData, tradeNPCFile)
         except:
             pass
-            
+
+
+def RandomTradeVerification(typeChoice, trade, isOn):
+    if isOn:
+        if trade == 0: # Only fill out slots that previously had trades
+            return 0
+        return random.choice(typeChoice)

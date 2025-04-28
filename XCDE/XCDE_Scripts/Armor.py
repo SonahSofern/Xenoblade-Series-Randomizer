@@ -114,9 +114,7 @@ def GearAppearance():
             # Defined here so that each new equipment 
             
             
-            # Used to seperate nopon and human cosmetics they dont mix well and even crash sometimes
-            human = [0,1,2,3,4,6,7,8,9,10,11,12,15]
-            nopon = [5,13,14]
+
             if eq["$id"] in invalidArmor + dontReplace:
                 continue
             for i in range(0, 16):
@@ -124,16 +122,20 @@ def GearAppearance():
                     continue
                 # If crazy armor we want to randomly choose a list, otherwise choose the list corresponsing with the current character (i)
                 if isCrazy:
-                    
+                    # Used to seperate nopon and human cosmetics they dont mix well and even crash sometimes
+                    human = [0,1,2,3,4,6,7,8,9,10,11,12,15]
+                    nopon = [5,13,14]
                     if i in human:
                         group = human
                     elif i in nopon:
-                        group = nopon + human # Nopon can have human cosmetics but humans crash with nopon cosmetics
+                        group = nopon # Nopon can have human cosmetics but humans crash with nopon cosmetics
                     else:
                         group = None
-                        
+                    
+                    
                     j = random.choice(group)
                     while armorList[eq["parts"]][j] == []:
+                        group.remove(j)
                         j = random.choice(group)
                 else:
                     j = i
