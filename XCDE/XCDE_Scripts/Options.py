@@ -33,7 +33,7 @@ CollectableOptions_ArtBooks = SubOption("Art Books", CollectableOptions)
 # Collectapedia
 
 # Enemy
-EnemyOption = Option("Enemies", Enemies, "Randomizes enemies in the overworld", [lambda: EnemiesScript.Enemies()])
+EnemyOption = Option("Enemies", Enemies, "Randomizes enemies in the overworld", [lambda: EnemiesScript.Enemies()], descData=lambda: EnemiesScript.EnemyDesc())
 EnemyOption_Normal = SubOption("Normal Monsters", EnemyOption)
 EnemyOption_Unique = SubOption("Unique Monsters", EnemyOption)
 EnemyOption_Boss = SubOption("Bosses", EnemyOption)

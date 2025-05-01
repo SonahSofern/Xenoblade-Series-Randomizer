@@ -1,11 +1,12 @@
 
 import json, random, Options, IDs, copy, traceback, math
-from scripts import Helper, JSONParser
+from scripts import Helper, JSONParser, PopupDescriptions
 class Enemy:
     def __init__(self, enelistArea, enelist):
         self.eneListArea = enelistArea
         self.enelist = enelist
 
+instantDeathSpikeThreshold = 60
 # Dummy = [296, 329, 330, 331, 332, 333, 343, 651, 1204, 1206, 1329, 1548, 1625, 1626, 2602, 2603]
 # BadEnemies = [220, 1154, 1157, 2403, 2406, 2413, 2750, 2906, 2908, 2909] + Helper.InclRange(370,388) + Helper.InclRange(930,997)+ Helper.InclRange(1131,1195)+ Helper.InclRange(1239, 1300)+ Helper.InclRange(701,778)+ Helper.InclRange(1769,1799)+ Helper.InclRange(1850,1897)
 
@@ -164,7 +165,7 @@ def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
         chosen["spike_dmg"] = max(min(newPowerLv, 255), 1) # Set the new amount between 1 and 255
         # print(f"Level: {enemy["lv"]}")
         # print(f"Spike Damage: {chosen["spike_dmg"] * 10}")
-    if (chosen["spike_state_val"] == 220) and (enemy["lv"] <= 60): # Removes instant death spikes from all fights below level 60
+    if (chosen["spike_state_val"] == 220) and (enemy["lv"] <= instantDeathSpikeThreshold): # Removes instant death spikes from all fights below level 60
         chosen["spike_state_val"] = 0
         
 
@@ -225,3 +226,18 @@ def RingRemoval():
                 lock["popID1"] = 0
                 lock["popID2"] = 0
         JSONParser.CloseFile(lockData, lockFile)
+        
+        
+        
+def EnemyDesc():
+    myDesc = PopupDescriptions.Description()
+    myDesc.Header(Options.EnemyOption.name)
+    myDesc.Text(f"Randomizes the chosen categories of enemies between their own types.\nThere is various logic to prevent bad situations")
+    myDesc.Tag("Enemy stats do not scale with level in this game, so instead it takes the original enemies stat total and distributes it in the replacement enemies stat ratios.\nSo, if an enemy has a high attack stat compared to their other stats, they will still have a high attack stat but balanced with the replacement enemies' stats", pady=(5,5))
+    myDesc.Tag(f"Instant Death Spikes are removed for fights below level {instantDeathSpikeThreshold}", pady=(5,5))
+    myDesc.Tag("Mechon Enemies are not allowed for fights before you can damage mechon, toppling is not guaranteed with art randomization so this fix is needed", pady=(5,5))
+    myDesc.Tag("Telethia enemies are disabled for boss fights before Purge is unlocked\nEnemy spikes are tuned for their new level")
+    myDesc.Image("rondinecap.png", "XCDE", 800)
+    myDesc.Header(Options.EnemyOption_MixTypes.name)
+    myDesc.Header(Options.EnemyOption_Duplicates.name)
+    return myDesc
