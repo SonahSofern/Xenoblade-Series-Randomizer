@@ -16,3 +16,9 @@ def EnemyScales():
         except:
             pass
             
+def NPCScales():
+    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/FLD_npclist.json", 'r+', encoding='utf-8') as npcFile:
+        npcData = json.load(npcFile)
+        for npc in npcData["rows"]:
+            npc["scale"] = random.randrange(20,400)
+        JSONParser.CloseFile(npcData, npcFile)

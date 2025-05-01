@@ -9,8 +9,8 @@ from scripts import SavedOptions
 
 CanvasesForStyling = []
 RootsForStyling = []
-defFontVar = StringVar(value="Arial")
-defFontSizeVar = IntVar(value=13)
+defFontVar = StringVar(value="Calibri")
+defFontSizeVar = IntVar(value=14)
 defGUIThemeVar = StringVar(value="Dark Mode")
 fontNameVar = StringVar()
 

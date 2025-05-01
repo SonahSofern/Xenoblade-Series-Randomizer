@@ -1,7 +1,7 @@
 import PcArts
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
-import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales, NPC, Weapons
+import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales, NPC, Weapons, FieldCollectables
 OptionList =[]
 
 General = 1
@@ -15,12 +15,21 @@ GameModeTab = 7
 # LevelDiffOption = Option("Level Penalties", General, "Removes the harsh level penalties and bonuses from the game for more fair combat")
 
 # General
-TradeOption = Option("NPC Trades", General, "Randomizes NPC trades", [lambda: NPC.Trades()])
+TradeOption = Option("NPC Trades", General, "Randomizes chosen categories of NPC trades", [lambda: NPC.Trades()], descData=lambda: NPC.NPCTradesDesc())
 TradeOption_Weapon = SubOption("Weapons", TradeOption)
 TradeOption_Armor = SubOption("Armor", TradeOption)
 TradeOption_Gem = SubOption("Gems", TradeOption)
 TradeOption_Collectibles = SubOption("Collectibles", TradeOption)
 TradeOption_Materials = SubOption("Materials", TradeOption)
+
+CollectableOptions = Option("Collectables Orbs", General, "Randomizes collectables on the field into the chosen options", [lambda: FieldCollectables.FieldItems()])
+CollectableOptions_Collectables = SubOption("Collectables", CollectableOptions)
+CollectableOptions_Materials = SubOption("Materials", CollectableOptions)
+CollectableOptions_Armor = SubOption("Armor", CollectableOptions)
+CollectableOptions_Weapons = SubOption("Weapons", CollectableOptions)
+CollectableOptions_Gems = SubOption("Gems", CollectableOptions)
+CollectableOptions_Crystals = SubOption("Crystals", CollectableOptions)
+CollectableOptions_ArtBooks = SubOption("Art Books", CollectableOptions)
 # Collectapedia
 
 # Enemy
@@ -63,8 +72,8 @@ WeaponOption_Appearance = SubOption("Appearance", WeaponOption)
 WeaponOption_Damage = SubOption("Damage", WeaponOption)
 WeaponOption_Defense = SubOption("Block", WeaponOption)
 WeaponOption_Crit = SubOption("Crit", WeaponOption)
-WeaponOption_Speed = SubOption("Speed", WeaponOption)
-WeaponOption_Gems = SubOption("Slots", WeaponOption)
+WeaponOption_Speed = SubOption("Attack Speed", WeaponOption)
+WeaponOption_Gems = SubOption("Gem Slots", WeaponOption)
 
 
 # Weapons
@@ -93,7 +102,7 @@ MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free q
 
 # Funny
 EnemyScaleOption = Option("Enemy Scale", Funny, "Randomizes a % of enemy sizes.", [lambda: Scales.EnemyScales()], _hasSpinBox=True)
-
+NPCScaleOption = Option("NPC Scale", Funny, "Randomizes a % of npc sizes.", [lambda: Scales.NPCScales()], _hasSpinBox = True)
 
 # ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html
 

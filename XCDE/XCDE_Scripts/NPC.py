@@ -1,6 +1,6 @@
 # KP_list has the models
 import IDs, json, random, Options
-from scripts import JSONParser, Helper
+from scripts import JSONParser, Helper, PopupDescriptions
 
 def Trades():
     
@@ -28,7 +28,7 @@ def Trades():
             try:
                 types[item["itemType"]].append(item["$id"])
             except:
-                pass # Ignore the groups were not using for trades   
+                pass # Ignore the groups we're not using for trades   
     
     
     
@@ -68,3 +68,10 @@ def RandomTradeVerification(typeChoice, trade, isOn):
         if trade == 0: # Only fill out slots that previously had trades
             return 0
         return random.choice(typeChoice)
+    
+def NPCTradesDesc():
+    myDesc = PopupDescriptions.Description()
+    myDesc.Header(Options.TradeOption.name)
+    myDesc.Text("Randomizes the trades NPCs make. Only the chosen suboptions will be randomized.\nThe categories will stay the same so gems will always be replaced with gems etc.")
+    myDesc.Image("rondinecap.png", "XCDE", 800)
+    return myDesc
