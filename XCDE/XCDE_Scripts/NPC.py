@@ -72,6 +72,6 @@ def RandomTradeVerification(typeChoice, trade, isOn):
 def NPCTradesDesc():
     myDesc = PopupDescriptions.Description()
     myDesc.Header(Options.TradeOption.name)
-    myDesc.Text("Randomizes the trades NPCs make. Only the chosen suboptions will be randomized.\nThe categories will stay the same so gems will always be replaced with gems etc.")
+    myDesc.Text("Randomizes the trades NPCs make. Only the chosen suboptions will be randomized.\nThe categories will stay the same so helms will always replace helms and so on.")
     myDesc.Image("rondinecap.png", "XCDE", 800)
     return myDesc

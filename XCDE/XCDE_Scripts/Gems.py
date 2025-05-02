@@ -36,7 +36,10 @@ attributes = {
 
      
 def StandardGems(gemData, gemMSData, gemHelpMSData):    
+    badEffects = [60, 0, 83, 84, 87, 82, 44]
     for gem in gemData["rows"]:
+        if gem["rvs_status"] in badEffects:
+            continue
         # Find name
         for name in gemMSData["rows"]:
             if gem["name"] == name["$id"]:
@@ -52,9 +55,9 @@ def StandardGems(gemData, gemMSData, gemHelpMSData):
     
 
 def UnusedGems(gemData, gemMSData, gemHelpMSData):
-    pass
-    # QuickRecast = Gem("Cast Quicken", attributes[6], 44, 3,2, 90, 0, [90,100], [0,0], 1000, 4, "\\[Passive\\][XENO:n ] Reduces cast time by $1.") Doesnt seem to work
-    
+    # Gem("Cast Quicken", attributes[6], 45, 3,2, 90, 0, [10,90], [0,0], 1000, 4, "\\[Passive\\][XENO:n ] Reduces cast time by $1.")
+    # Gem("Reactive Heal", attributes[5], 54, 1, 2, 90, 0, [30,255], [0,0], 1500, 1, "\\[Passive\\][XENO:n ] On damage taken restore $1 health.", "Test")
+    Gem("Monado Enchant", attributes[7], 208, 1, 1, 90, 0, [100,200], [0,0], 2000, 1, "\\[Passive\\][XENO:n ] Your attacks pierce mechon armor and inflict $1 bonus damage.", "Test")
 
 def Gems():
     ranks = ["E", "D", "C", "B", "A", "S"] # Calculate proper gem amount based on rank
@@ -112,7 +115,7 @@ def Gems():
 def Effects(gemData, gemMSData, gemHelpMSData):
     
     # Number of gems that the game will allow in a single file
-    # maxGems = 92
+    maxGems = 92
     
     # Keep track of what ids to put things in
     idCount = 1
@@ -125,14 +128,13 @@ def Effects(gemData, gemMSData, gemHelpMSData):
     gemHelpMSData["rows"].clear()
     
     # Loop and generate our new gems
-    for i in range(len(GemList)):
+    for i in range(maxGems):
     
         if (len(GemList) == 0):
             break
         
         gem = random.choice(GemList)
         
-            
         GemList.remove(gem)
         
         incr = max(int((gem.power[-1] - gem.power[0])/12),1)
@@ -223,7 +225,7 @@ def ItemPower(gemData, ranks):
             rank = gem["rankType"]
             newGem = random.choice(gemData)
             gem["itemID"] = newGem["$id"]
-            gem["percent"] = random.randrange(newGem[f"lower_{ranks[rank-1]}"], newGem[f"upper_{ranks[rank-1]}"])
+            gem["percent"] = min(random.randrange(newGem[f"lower_{ranks[rank-1]}"], newGem[f"upper_{ranks[rank-1]}"]),255)
         scripts.JSONParser.CloseFile(gemItemData, gemItemFile)
 
 def GemDescriptions():

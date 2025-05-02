@@ -2,8 +2,9 @@ import json, random, time
 from tkinter import filedialog
 import tkinter as tk
 
-def InclRange(start, end):
-     return list(range(start, end+1))
+def InclRange(start, end, excluded = []):
+    tempList = list(range(start, end+1))
+    return list((x for x in tempList if x not in excluded))
 
 def StartsWith(startingWord, lowNum, highNum, addJson = False):
     listofWords = []

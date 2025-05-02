@@ -77,7 +77,7 @@ def WeightClass(arm):
 def GearAppearance():
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ITM_equiplist.json", 'r+', encoding='utf-8') as equipFile:
         eqData = json.load(equipFile)
-        isCrazy = Options.EquipmentOption_CrazyArmors.GetState()
+        isCrazy = Options.EquipmentOption_CrazyAppearance.GetState()
         invalidArmor = [190]
         dontReplace = [1,2,3,4,5,6,7,212,8,9,10,4,4,332,336,328]
         # Nested lists
