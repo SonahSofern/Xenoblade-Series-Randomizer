@@ -8,6 +8,7 @@ ShulkMonadoArts = [3,4,5,6,7,8,9,10]
 DunbanMonadoArts = [150,151]
 MeliaSummons = [113,103,109,112,104,105,111,116]
 MeliaElementBurst = [118,117]
+ReynGuardShift = [22] # Wont work on other characters
 
 # Setting to make arts all cost tp instead of having cooldowns basically auto attack recharging arts
 # Setting to tie arts to weapon https://xenobladedata.github.io/xb1de/bdat/bdat_common/ITM_wpnlist.html#137 

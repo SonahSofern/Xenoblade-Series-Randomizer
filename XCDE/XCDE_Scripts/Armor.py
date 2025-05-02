@@ -123,7 +123,7 @@ def GearAppearance():
                 # If crazy armor we want to randomly choose a list, otherwise choose the list corresponsing with the current character (i)
                 if isCrazy:
                     # Used to seperate nopon and human cosmetics they dont mix well and even crash sometimes
-                    human = [0,1,2,3,4,6,7,8,9,10,11,12,15]
+                    human = [0,1,2,3,4,6,7,8,9,10,15] # 11,12
                     nopon = [5,13,14]
                     if i in human:
                         group = human
