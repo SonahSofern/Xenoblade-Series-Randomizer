@@ -11,12 +11,23 @@ instantDeathSpikeThreshold = 60
 # Dummy = [296, 329, 330, 331, 332, 333, 343, 651, 1204, 1206, 1329, 1548, 1625, 1626, 2602, 2603]
 # BadEnemies = [220, 1154, 1157, 2403, 2406, 2413, 2750, 2906, 2908, 2909] + Helper.InclRange(370,388) + Helper.InclRange(930,997)+ Helper.InclRange(1131,1195)+ Helper.InclRange(1239, 1300)+ Helper.InclRange(701,778)+ Helper.InclRange(1769,1799)+ Helper.InclRange(1850,1897)
 
+class ForcedArt:
+    def __init__(self, id, artSlot, artId):
+        self.id = id
+        self.artSlot = artSlot
+        self.artId = artId
+
 def Enemies():
     MechonFamily = [1,2,4] # 4 Seems to share a lot of enemies that are aquatic, but mukhar is family 4 and we dont want him early so it cuts a few enemies off that we mightve wanted otherwise oh well
     TelethiaFamily = 9
     BadForMechon = [30, 31, 32,33, 63, 64, 65] # List of ids for the early game to make sure mechon arent placed here
     BadForTelethia = [30,31,61,62, 134, 265, 266, 268, 416, 417, 534] # Ids for early game so you dont get soul readed
-    ForcedStoryArt = [(61,[2]), (268,[5]), (1622, [1,2]), (1316,[2,8])] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
+    
+    MetalFace = ForcedArt(61, 2, 565)
+    MysteriousFace = ForcedArt(268,5,611)
+    GoldFace = ForcedArt(1622, 1, 740)
+    DiscipleDickson = ForcedArt(1316, 8, 942)
+    ForcedStoryArts = [MetalFace, MysteriousFace, GoldFace, DiscipleDickson] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
     
     isNormal = Options.EnemyOption_Normal.GetState()
     isUnique = Options.EnemyOption_Unique.GetState()
@@ -142,22 +153,24 @@ def Enemies():
                                     break
                             
                             # Fixes boss fights that require the enemy to use an art slot to end the fight 
-                            for id in ForcedStoryArt:
-                                if id[0] == enID:
-                                    # Build a list of the enemies arts IDs
-                                    validArts = []
-                                    for i in range(1,9):
-                                        if enemy[f"arts{i}"] != 0:
-                                            validArts.append(enemy[f"arts{i}"])
-                                            
-                                    # If for some reaosn the enemy does not have an art we need to give them one
-                                    if validArts == []:
-                                        validArts.append()
+                            for id in ForcedStoryArts:
+                                if id.id == enID:
+                                    # Grab the first valid enemy art
+                                    # validArt = 0
+                                    # for i in range(1,9):
+                                    #     if enemy[f"arts{i}"] != 0:
+                                    #         validArt = enemy[f"arts{i}"]
+                                    #         enemy[f"arts{i}"] = 0 # Remove the art from that slot
+                                    #         break
+                                    
+                                    
+                                    # If for some reaosn the enemy does not have an art we need to give them one (I randomly chose an unused art rush importantly its act 0 so every enemy should be able to cast it and theres a bug where if enemies have the same art twice they wont use either so it has to be unused)
+                                    # if validArts == 0:
+                                    #     validArts = 117
                                         
-                                    # Ensure that slot has the art
-                                    for artID in id[1]:
-                                        if enemy[f"arts{artID}"] == 0:
-                                            enemy[f"arts{artID}"] = random.choice(validArts)  # Change it to something
+                                    # Ensure that required slot has the art
+                                    # if enemy[f"arts{id.artSlot}"] == 0:
+                                    enemy[f"arts{id.artSlot}"] = id.artId  # Change it to their art
                                     break
 
                                             
@@ -174,7 +187,7 @@ def Enemies():
     
 def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
     if chosen["spike_dmg"] != 0:
-        spikePerLv = 0.7 # base spike given per level
+        spikePerLv = 0.5 # base spike given per level
         expectedPowerLv = chosen["lv"] * spikePerLv # The expected power level of the spike before any changes
         actualPowerLv = chosen["spike_dmg"]
         spikeMult = actualPowerLv/expectedPowerLv # If enemy has a stronger/weaker spike than something of its level make the spike stronger/weaker but still balanced
