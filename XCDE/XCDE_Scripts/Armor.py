@@ -68,12 +68,14 @@ def GemSlots(arm):
     # arm["uni_flag"] = uniFlag
         
 def WeightClass(arm):
-    # 1 Light
+    Light = 1
+    Medium = 2
+    Heavy = 3
     # 2 Medium
     # 3 Heavy 
     # 4-12 Fiora Drones changes level of her talent art
     # 13 Fiora Only Armor
-    changeAbleTypes = [1,2,3]
+    changeAbleTypes = [Light, Light, Light, Medium, Medium, Heavy]
     if arm["arm_type"] in changeAbleTypes:
         arm["arm_type"] = random.choice(changeAbleTypes)
 
@@ -84,6 +86,7 @@ def GearAppearance():
         isCrazy = Options.EquipmentOption_CrazyAppearance.GetState()
         invalidArmor = [190]
         dontReplace = [1,2,3,4,5,6,7,212,8,9,10,4,4,332,336,328]
+        fioraDrones = Helper.InclRange(168,189) + [198,205,212,255,256]
         # Nested lists
         armorList = [[[] for _ in range(16)] for _ in range(6)]
 
@@ -116,9 +119,6 @@ def GearAppearance():
         for eq in eqData["rows"]:
             
             # Defined here so that each new equipment 
-            
-            
-
             if eq["$id"] in invalidArmor + dontReplace:
                 continue
             for i in range(0, 16):

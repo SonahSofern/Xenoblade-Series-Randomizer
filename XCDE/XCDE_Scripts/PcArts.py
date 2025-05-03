@@ -54,14 +54,14 @@ def RandomizePcArts():
     isBalancedLv = Options.PlayerArtsOption_BalancedUnlockLevels.GetState()
     cooldowns = Options.PlayerArtsOption_Cooldown.GetState()
     isArtGroups = Options.PlayerArtsOption_ArtGroups.GetState()
-    isGuestArts = Options.PlayerArtsOption_GuestArts.GetState()
+    # isGuestArts = Options.PlayerArtsOption_GuestArts.GetState()
     
     for group in ArtGroups:
         group.chooseChar()
     invalidArtIds = TalentArts + DunbanMonadoArts + ShulkMonadoArts + PonspectorDLCArts + DLCArts
     
-    if not isGuestArts:
-        invalidArtIds.extend(GuestArts)
+    # if not isGuestArts:
+    #     invalidArtIds.extend(GuestArts)
         
     if keepMeliaSummons:
         invalidArtIds.extend(MeliaSummons)

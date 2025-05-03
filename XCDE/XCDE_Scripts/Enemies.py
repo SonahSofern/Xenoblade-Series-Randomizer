@@ -52,7 +52,7 @@ def Enemies():
     CombinedSuperbossEnemyData:list[Enemy] = []
     # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame"
     CopiedStats = ["move_speed", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "avoid", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_dmg", "spike_state", "spike_state_val", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
-    CopiedStatsWithRatios = ["hp", "str", "eth", "Lv_up_hp", "Lv_up_str", "Lv_up_eth"] # Not doing agility its too finicky and scales slowly compared to the other stats
+    CopiedStatsWithRatios = ["hp", "str", "eth"] # Not doing agility , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
     CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
         eneData = json.load(eneFile)    
