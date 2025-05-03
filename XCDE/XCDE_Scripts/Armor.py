@@ -8,6 +8,8 @@ def ArmorRando():
     isGemSlots = Options.EquipmentOption_GemSlots.GetState()
     isWeightClass = Options.EquipmentOption_WeightClass.GetState()
     
+    dontChange = [1,2,3,4,5]
+    
     if isRemoveStartingGear:
         RemoveStartingGear()
     
@@ -27,7 +29,9 @@ def ArmorRando():
         if isWeightClass:
             funcs.append(lambda arm: WeightClass(arm))
 
-        for arm in armData["rows"]:    
+        for arm in armData["rows"]:   
+            if arm["$id"] in dontChange:
+                continue
             for op in funcs:
                 op(arm)
 
@@ -123,14 +127,14 @@ def GearAppearance():
                 # If crazy armor we want to randomly choose a list, otherwise choose the list corresponsing with the current character (i)
                 if isCrazy:
                     # Used to seperate nopon and human cosmetics they dont mix well and even crash sometimes
-                    human = [0,1,2,3,4,6,7,8,9,10,15] # 11,12
+                    human = [0,1,2,3,4,6,7,12,15] # 11,12,8, 9,10
                     nopon = [5,13,14]
                     if i in human:
                         group = human
                     elif i in nopon:
                         group = nopon # Nopon can have human cosmetics but humans crash with nopon cosmetics
                     else:
-                        group = None
+                        continue
                     
                     
                     j = random.choice(group)

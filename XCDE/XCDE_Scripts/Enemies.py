@@ -16,7 +16,7 @@ def Enemies():
     TelethiaFamily = 9
     BadForMechon = [30, 31, 32,33, 63, 64, 65] # List of ids for the early game to make sure mechon arent placed here
     BadForTelethia = [30,31,61,62, 134, 265, 266, 268, 416, 417, 534] # Ids for early game so you dont get soul readed
-   
+    ForcedStoryArt = [(61,[2]), (268,[5]), (1622, [1,2]), (1316,[2,8])] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
     
     isNormal = Options.EnemyOption_Normal.GetState()
     isUnique = Options.EnemyOption_Unique.GetState()
@@ -39,8 +39,8 @@ def Enemies():
     CombinedUniqueEnemyData:list[Enemy] = []
     CombinedBossEnemyData:list[Enemy] = []
     CombinedSuperbossEnemyData:list[Enemy] = []
-    # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle",
-    CopiedStats = ["move_speed", "frame", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "avoid", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_dmg", "spike_state", "spike_state_val", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
+    # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame"
+    CopiedStats = ["move_speed", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "avoid", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_dmg", "spike_state", "spike_state_val", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
     CopiedStatsWithRatios = ["hp", "str", "eth", "Lv_up_hp", "Lv_up_str", "Lv_up_eth"] # Not doing agility its too finicky and scales slowly compared to the other stats
     CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
@@ -140,7 +140,26 @@ def Enemies():
                                     for key in CopiedInfo:
                                         ene[key] = chosen.enelist[key]
                                     break
-                                
+                            
+                            # Fixes boss fights that require the enemy to use an art slot to end the fight 
+                            for id in ForcedStoryArt:
+                                if id[0] == enID:
+                                    # Build a list of the enemies arts IDs
+                                    validArts = []
+                                    for i in range(1,9):
+                                        if enemy[f"arts{i}"] != 0:
+                                            validArts.append(enemy[f"arts{i}"])
+                                            
+                                    # If for some reaosn the enemy does not have an art we need to give them one
+                                    if validArts == []:
+                                        validArts.append()
+                                        
+                                    # Ensure that slot has the art
+                                    for artID in id[1]:
+                                        if enemy[f"arts{artID}"] == 0:
+                                            enemy[f"arts{artID}"] = random.choice(validArts)  # Change it to something
+                                    break
+
                                             
                             if (not isDupe): # Remove enemy if player wants 1 to 1
                                 group.remove(chosen)
