@@ -1,5 +1,5 @@
 import json, Options, IDs, random
-from scripts import JSONParser, Helper
+from scripts import JSONParser, Helper, PopupDescriptions
 
 def FieldItems():
     isCollect = Options.CollectableOptions_Collectables.GetState()
@@ -41,3 +41,9 @@ def FieldItems():
         except:
             pass
 
+def CollectDesc():
+    myDesc = PopupDescriptions.Description()
+    myDesc.Header(Options.CollectableOptions.name)
+    myDesc.Text("Randomizes collectables in the field. Collectibles have 8 different possible items per orb per location. There is an equal chance to roll each of the categories you have chosen.")
+    myDesc.Image("orb.png","XCDE", 500)
+    return myDesc
