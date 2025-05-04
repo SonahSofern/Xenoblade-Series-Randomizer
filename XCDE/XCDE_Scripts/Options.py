@@ -80,18 +80,16 @@ PlayerArtsOption_Summons = SubOption("Keep Melia's Summons", PlayerArtsOption)
 # PlayerArtsOption_GuestArts = SubOption("Include Guest Arts", PlayerArtsOption)
 PlayerArtsOption_Cooldown = SubOption("Cooldown", PlayerArtsOption)
 EquipmentOption = Option("Armor", Character, "Randomizes effects of Armor", [lambda: Armor.ArmorRando()])
-EquipmentOption_RemoveStartingEq = SubOption("Remove Starting Equipment", EquipmentOption)
 EquipmentOption_Appearance = SubOption("Appearance", EquipmentOption)
 EquipmentOption_CrazyAppearance = SubOption("Crazy Appearance", EquipmentOption)
-EquipmentOption_Defenses = SubOption("Defenses", EquipmentOption)
+# EquipmentOption_Defenses = SubOption("Defenses", EquipmentOption)
 EquipmentOption_GemSlots = SubOption("Gem Slots", EquipmentOption)
 EquipmentOption_WeightClass = SubOption("Weight Class", EquipmentOption)
 WeaponOption = Option("Weapons", Character, "Randomizes effects of Weapons", [lambda: Weapons.WeaponRando()])
 WeaponOption_Appearance = SubOption("Appearance", WeaponOption)
-WeaponOption_Damage = SubOption("Damage", WeaponOption)
-WeaponOption_Defense = SubOption("Block", WeaponOption)
-WeaponOption_Crit = SubOption("Crit", WeaponOption)
-WeaponOption_Speed = SubOption("Attack Speed", WeaponOption)
+# WeaponOption_Damage = SubOption("Damage", WeaponOption)
+# WeaponOption_Defense = SubOption("Block", WeaponOption)
+# WeaponOption_Crit = SubOption("Crit", WeaponOption)
 WeaponOption_Gems = SubOption("Gem Slots", WeaponOption)
 
 
@@ -118,12 +116,13 @@ for song in Music.AllJingles:
 # QOL
 TutorialSkipsOption = Option("Tutorial Skips", QOL, "Reduces tutorials as much as possible", [lambda: Tutorials.TutorialSkips()])
 FasterLvOption = Option("Fast Levels", QOL, "Decreases level up requirements by a set amount.", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 2, _spinMax = 256, _spinIncr = 2, _spinDesc = "x", spinDefault=2)
-MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free quickstep gems.", [lambda: MiscQOL.Quickstep()], _hasSpinBox=True, _spinDesc="% Speed", _spinMax=255)
+MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free quickstep gems.", [lambda: MiscQOL.Quickstep()], _hasSpinBox=True, _spinDesc="% Speed", _spinMax=255, _spinMin = 2)
 # CutsceneSkipOption = Option("Cutscene Skips", QOL, "Skips all possible cutscenes", [lambda: Cutscenes.CutsceneSkipper()])
 
 # Funny
 EnemyScaleOption = Option("Enemy Scale", Funny, "Randomizes a % of enemy sizes.", [lambda: Scales.EnemyScales()], _hasSpinBox=True)
 NPCScaleOption = Option("NPC Scale", Funny, "Randomizes a % of npc sizes.", [lambda: Scales.NPCScales()], _hasSpinBox = True)
+RemoveStartingArmorOption = Option("Remove Starting Equipment", Funny, "Removes starting armor on all the main characters.", [lambda: Armor.RemoveStartingGear()])
 
 # ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html
 

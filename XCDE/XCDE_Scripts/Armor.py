@@ -2,16 +2,11 @@ import Options, json, random
 from scripts import JSONParser, Helper
 
 def ArmorRando():
-    isRemoveStartingGear = Options.EquipmentOption_RemoveStartingEq.GetState()
     isAppearance = Options.EquipmentOption_Appearance.GetState()
-    isDefenses = Options.EquipmentOption_Defenses.GetState()
     isGemSlots = Options.EquipmentOption_GemSlots.GetState()
     isWeightClass = Options.EquipmentOption_WeightClass.GetState()
     
     dontChange = [1,2,3,4,5]
-    
-    if isRemoveStartingGear:
-        RemoveStartingGear()
     
     if isAppearance:
         GearAppearance()
@@ -19,9 +14,6 @@ def ArmorRando():
     with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_equiplist.json", 'r+', encoding='utf-8') as armorFile:
         armData = json.load(armorFile)
         funcs = []
-        
-        if isDefenses:
-            funcs.append(lambda arm: DefenseStats(arm))
                     
         if isGemSlots:
             funcs.append(lambda arm: GemSlots(arm))
