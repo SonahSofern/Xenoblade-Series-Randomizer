@@ -75,12 +75,12 @@ TabFunny = ttk.Frame(TabFunnyCanvas)
 GUISettings.CreateScrollBars([TabGeneralOuter, TabCharactersOuter, TabEnemiesOuter, TabMusicOuter, TabQOLOuter, TabFunnyOuter],[TabGeneralCanvas, TabCharactersCanvas, TabEnemiesCanvas, TabMusicCanvas, TabQOLCanvas, TabFunnyCanvas],[TabGeneral, TabCharacters, TabEnemies, TabMusic, TabQOL, TabFunny])
 
 # Tabs
-MainWindow.add(TabGeneralOuter, text ='General 🞛') 
-MainWindow.add(TabCharactersOuter, text ='Characters 🧍') 
-MainWindow.add(TabEnemiesOuter, text ='Enemies 💀') 
-MainWindow.add(TabQOLOuter, text = 'Quality of Life 🐇')
-MainWindow.add(TabFunnyOuter, text='Funny 😄')
-MainWindow.add(TabMusicOuter, text ='Music ♪') 
+MainWindow.add(TabGeneralOuter, text ='🞛 General') 
+MainWindow.add(TabCharactersOuter, text ='🧍 Characters') 
+MainWindow.add(TabEnemiesOuter, text ='💀 Enemies') 
+MainWindow.add(TabQOLOuter, text = '🐇 Quality of Life')
+MainWindow.add(TabFunnyOuter, text='😄 Funny')
+MainWindow.add(TabMusicOuter, text ='♪ Music') 
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 Tabs = {

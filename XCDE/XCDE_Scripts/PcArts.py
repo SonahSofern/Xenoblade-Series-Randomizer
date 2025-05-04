@@ -130,11 +130,11 @@ def DetermineArtType(art, char:ActMatch):
     else:
         art["act_idx"] = random.choice(char.AOEAttack)      
         
-CooldownStart = (10,60)
-CooldownStep = (5,10)
+CooldownStartRange = (10,60)
+CooldownStepRange = (5,10)
 def Cooldown(art): # Controls how hard arts are to recharge
-    Cooldown = random.randrange(CooldownStart[0],CooldownStart[1])
-    CooldownStep = Cooldown//random.randrange(CooldownStep[0],CooldownStep[1])
+    Cooldown = random.randrange(CooldownStartRange[0],CooldownStartRange[1])
+    CooldownStep = Cooldown//random.randrange(CooldownStepRange[0],CooldownStepRange[1])
     art["recast"] = Cooldown
     art["glow_recast"]= CooldownStep
 
@@ -169,5 +169,5 @@ def ArtsDescriptions():
     ArtDesc.Header(Options.PlayerArtsOption_Summons.name)
     ArtDesc.Text("Keeps Melia's summon arts (Wind, Earth, Ice, Aqua, Flare, Bolt, Copy and Power Effect) on her, so that her talent art is not useless.")
     ArtDesc.Header(Options.PlayerArtsOption_Cooldown.name)
-    ArtDesc.Text(f"Chooses a random cooldown between {CooldownStart[0]}-{CooldownStart[1]}s then each level up reduces that cooldown by the original cooldown / {CooldownStep[0]}-{CooldownStep[1]}")
+    ArtDesc.Text(f"Chooses a random cooldown between {CooldownStartRange[0]}-{CooldownStartRange[1]}s then each level up reduces that cooldown by the original cooldown / {CooldownStepRange[0]}-{CooldownStepRange[1]}")
     return ArtDesc

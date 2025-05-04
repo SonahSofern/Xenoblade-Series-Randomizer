@@ -36,8 +36,8 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss):
         ChosenEnemyIds.extend(BossEnemies)
     if isSuper:
         ChosenEnemyIds.extend(SuperbossEnemies)
-    # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame"
-    CopiedStats = ["move_speed", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "avoid", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_dmg", "spike_state", "spike_state_val", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
+    # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame",  "avoid"
+    CopiedStats = ["move_speed", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_dmg", "spike_state", "spike_state_val", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
     CopiedStatsWithRatios = ["hp", "str", "eth"] # Not doing agility , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
     CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
     
@@ -95,7 +95,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss):
                                 break
                         
                         ForcedArts(enemy, ForcedStoryArts)
-
+                        SmallAreaFights(enemy)
                         # Allows no dupes if possible if we dont have enough choices it reshuffles the original pool
                         filteredEnemyData.remove(chosen)   
                         if filteredEnemyData == []: # repopulate it if the group is empty
@@ -119,6 +119,12 @@ def VoicedEnemiesFix(eneVoiceData, chosen, enemy):
             voiceID["enemy"] = enemy["$id"] # Set the ID
             break    
 
+# Big enemies in small areas can break the ai and you cant target them if they go into ceilings (Had this in the two ancient machines fight with a big dragon)
+def SmallAreaFights(enemy):
+    SmallFights = [30,31]
+    if enemy["$id"] in SmallFights:
+        enemy["scale"] = max(int(enemy["scale"] /4),1)
+
 # Create our list of enemies from all the area files and Combine the data into the class
 def CreateEnemyDataClass(eneData, enAreaFiles):
     for file in enAreaFiles:  
@@ -140,7 +146,12 @@ def CreateEnemyDataClass(eneData, enAreaFiles):
 
 def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
     if chosen["spike_dmg"] != 0:
-        spikePerLv = 0.5 # base spike given per level
+        if enemy["lv"] < 20:
+            spikePerLv = 0.2 # base spike given per level
+        elif enemy["lv"] < 50:
+            spikePerLv = 0.5
+        else:
+            spikePerLv = 0.7
         expectedPowerLv = chosen["lv"] * spikePerLv # The expected power level of the spike before any changes
         actualPowerLv = chosen["spike_dmg"]
         spikeMult = actualPowerLv/expectedPowerLv # If enemy has a stronger/weaker spike than something of its level make the spike stronger/weaker but still balanced
