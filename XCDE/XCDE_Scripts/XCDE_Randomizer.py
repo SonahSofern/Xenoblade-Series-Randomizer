@@ -163,7 +163,7 @@ areaFiles = []
 for id in IDs.areaFileListNumbers:
     areaFiles.append(f"bdat_ma{id}")
 # Randomize Button
-RandomizeButton = ttk.Button(text='Randomize', command=(lambda: GUISettings.Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, ["bdat_common", "bdat_menu_psv", "bdat_menu_ttrl", "bdat_evt"] + areaFiles, ["bdat_common_ms", "bdat_menu_psv_ms", "bdat_menu_mes_ms"],[lambda: ShowTitleScreenText()] )))
+RandomizeButton = ttk.Button(text='Randomize', command=(lambda: GUISettings.Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, ["bdat_common", "bdat_menu_psv", "bdat_menu_ttrl", "bdat_evt"] + areaFiles, ["bdat_common_ms", "bdat_menu_psv_ms", "bdat_menu_mes_ms"],[lambda: ShowTitleScreenText(), lambda: IDs.OriginalEnemyData.clear()] )))
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
 RandomizeButton.config(padding=5)
 

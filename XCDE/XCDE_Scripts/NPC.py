@@ -4,17 +4,13 @@ from scripts import JSONParser, Helper, PopupDescriptions
 
 def Trades():
     
-    types = {
-        2 : [], # Weapon
-        3 : [], # Gem
-        4 : [], # Head
-        5 : [], # Body
-        6 : [], # Arm
-        7 : [], # Waist
-        8 : [], # Leg
-       10 : [], # Collectable
-       11 : []  # Material
-    }
+    # types = {
+    #     4 : IDs.HeadIDs, # Head
+    #     5 : IDs.ChestIDs, # Body
+    #     6 : IDs.ArmIDs, # Arm
+    #     7 : IDs.WaistIDs, # Waist
+    #     8 : IDs.LegIDs, # Leg
+    # }
     
     isWpn = Options.TradeOption_Weapon.GetState()
     isArmor = Options.TradeOption_Armor.GetState()
@@ -22,14 +18,20 @@ def Trades():
     isCol = Options.TradeOption_Collectibles.GetState()
     isMat = Options.TradeOption_Materials.GetState()
     
-    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as itemFile:
-        itemData = json.load(itemFile)
-        for item in itemData["rows"]:
-            try:
-                types[item["itemType"]].append(item["$id"])
-            except:
-                pass # Ignore the groups we're not using for trades   
-    
+    # with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as itemFile:
+    #     itemData = json.load(itemFile)
+    #     for item in itemData["rows"]:
+    #         if item["$id"] not in IDs.ArmorIDs:
+    #             continue
+    #         try:
+    #             types[item["itemType"]].append(item["$id"])
+    #         except:
+    #             pass # Ignore the groups we're not using for trades   
+    #     print(f"Head: {types[4]}")
+    #     print(f"Chest:  {types[5]}")
+    #     print(f"Arm:  {types[6]}")
+    #     print(f"Waist:  {types[7]}")
+    #     print(f"Leg:  {types[8]}")
     
     
     for file in IDs.areaFileListNumbers:
@@ -39,23 +41,23 @@ def Trades():
                 
                 for trade in tradeNPCData["rows"]:
                     
-                    trade["wpn1"] = RandomTradeVerification(types[2], trade["wpn1"], isWpn)
+                    trade["wpn1"] = RandomTradeVerification(IDs.WeaponIDs, trade["wpn1"], isWpn)
 
-                    trade["head1"] = RandomTradeVerification(types[4], trade["head1"], isArmor)
-                    trade["body1"] = RandomTradeVerification(types[5], trade["body1"], isArmor)
-                    trade["arm1"] = RandomTradeVerification(types[6], trade["arm1"], isArmor)
-                    trade["waist1"] = RandomTradeVerification(types[7], trade["waist1"], isArmor)
-                    trade["legg1"] = RandomTradeVerification(types[8], trade["legg1"], isArmor)
+                    trade["head1"] = RandomTradeVerification(IDs.HeadIDs, trade["head1"], isArmor)
+                    trade["body1"] = RandomTradeVerification(IDs.ChestIDs, trade["body1"], isArmor)
+                    trade["arm1"] = RandomTradeVerification(IDs.ArmIDs, trade["arm1"], isArmor)
+                    trade["waist1"] = RandomTradeVerification(IDs.WaistIDs, trade["waist1"], isArmor)
+                    trade["legg1"] = RandomTradeVerification(IDs.LegIDs, trade["legg1"], isArmor)
                         
                         
-                    trade["kessyou1"] = RandomTradeVerification(types[3], trade["kessyou1"], isGem)
-                    trade["kessyou2"] = RandomTradeVerification(types[3], trade["kessyou2"], isGem)
+                    trade["kessyou1"] = RandomTradeVerification(IDs.GemIDs, trade["kessyou1"], isGem)
+                    trade["kessyou2"] = RandomTradeVerification(IDs.GemIDs, trade["kessyou2"], isGem)
                     
-                    trade["collect1"] = RandomTradeVerification(types[10], trade["collect1"], isCol)
-                    trade["collect2"] = RandomTradeVerification(types[10], trade["collect2"], isCol)
+                    trade["collect1"] = RandomTradeVerification(IDs.CollectableIDs, trade["collect1"], isCol)
+                    trade["collect2"] = RandomTradeVerification(IDs.CollectableIDs, trade["collect2"], isCol)
                     
-                    trade["materia1"] = RandomTradeVerification(types[11], trade["materia1"], isMat)
-                    trade["materia2"] = RandomTradeVerification(types[11], trade["materia2"], isMat)
+                    trade["materia1"] = RandomTradeVerification(IDs.MaterialIDs, trade["materia1"], isMat)
+                    trade["materia2"] = RandomTradeVerification(IDs.MaterialIDs, trade["materia2"], isMat)
                         
                 
                 JSONParser.CloseFile(tradeNPCData, tradeNPCFile)

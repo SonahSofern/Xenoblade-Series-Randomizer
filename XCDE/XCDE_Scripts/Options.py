@@ -1,7 +1,7 @@
 import PcArts
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
-import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales, NPC, Weapons, FieldCollectables, Cutscenes
+import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales, NPC, Weapons, FieldCollectables, Cutscenes, IDs
 OptionList =[]
 
 General = 1
@@ -33,13 +33,32 @@ CollectableOptions_ArtBooks = SubOption("Art Books", CollectableOptions)
 # Collectapedia
 
 # Enemy
-EnemyOption = Option("Enemies", Enemies, "Randomizes enemies in the overworld", [lambda: EnemiesScript.Enemies()], descData=lambda: EnemiesScript.EnemyDesc())
-EnemyOption_Normal = SubOption("Normal Monsters", EnemyOption)
-EnemyOption_Unique = SubOption("Unique Monsters", EnemyOption)
-EnemyOption_Boss = SubOption("Bosses", EnemyOption)
-EnemyOption_Superboss = SubOption("Superbosses", EnemyOption)
-EnemyOption_MixTypes = SubOption("Mix Enemy Types", EnemyOption, _defState=False)
-EnemyOption_Duplicates = SubOption("Allow Duplicates", EnemyOption, _defState=False)
+# EnemyOption = Option("Enemies", Enemies, "Randomizes enemies in the overworld", [lambda: EnemiesScript.Enemies()], descData=lambda: EnemiesScript.EnemyDesc())
+# EnemyOption_Normal = SubOption("Normal Monsters", EnemyOption)
+# EnemyOption_Unique = SubOption("Unique Monsters", EnemyOption)
+# EnemyOption_Boss = SubOption("Bosses", EnemyOption)
+# EnemyOption_Superboss = SubOption("Superbosses", EnemyOption)
+# EnemyOption_MixTypes = SubOption("Mix Enemy Types", EnemyOption, _defState=False)
+# EnemyOption_Duplicates = SubOption("Allow Duplicates", EnemyOption, _defState=False)
+
+NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: EnemiesScript.Enemies(IDs.NormalEnemies, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss)])
+NormalEnemyOption_Normal = SubOption("Normal Monsters", NormalEnemyOption)
+NormalEnemyOption_Unique = SubOption("Unique Monsters", NormalEnemyOption)
+NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption)
+NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption)
+
+UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: EnemiesScript.Enemies(IDs.UniqueEnemies + IDs.SuperbossEnemies, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss)])
+UniqueEnemyOption_Normal = SubOption("Normal Monsters", UniqueEnemyOption)
+UniqueEnemyOption_Unique = SubOption("Unique Monsters", UniqueEnemyOption)
+UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption)
+UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption)
+
+BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: EnemiesScript.Enemies(IDs.BossEnemies, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss)])
+BossEnemyOption_Normal = SubOption("Normal Monsters", BossEnemyOption)
+BossEnemyOption_Unique = SubOption("Unique Monsters", BossEnemyOption)
+BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption)
+BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption)
+
 
 # Character
 GemOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.Gems()], descData=lambda: Gems.GemDescriptions())

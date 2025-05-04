@@ -7,6 +7,7 @@ class Enemy:
         self.eneListArea = enelistArea
         self.enelist = enelist
 
+
 instantDeathSpikeThreshold = 60
 # Dummy = [296, 329, 330, 331, 332, 333, 343, 651, 1204, 1206, 1329, 1548, 1625, 1626, 2602, 2603]
 # BadEnemies = [220, 1154, 1157, 2403, 2406, 2413, 2750, 2906, 2908, 2909] + Helper.InclRange(370,388) + Helper.InclRange(930,997)+ Helper.InclRange(1131,1195)+ Helper.InclRange(1239, 1300)+ Helper.InclRange(701,778)+ Helper.InclRange(1769,1799)+ Helper.InclRange(1850,1897)
@@ -17,8 +18,8 @@ class ForcedArt:
         self.artSlot = artSlot
         self.artId = artId
 
-def Enemies():
-    MechonFamily = [1,2,4] # 4 Seems to share a lot of enemies that are aquatic, but mukhar is family 4 and we dont want him early so it cuts a few enemies off that we mightve wanted otherwise oh well
+def Enemies(monsterTypeList, normal, unique, boss, superboss):
+    MechonFamily = [1,2,4] # 4 Seems to share a lot of enemies that are aquatic, but mumkhar is family 4 and we dont want him early so it cuts a few enemies off that we mightve wanted otherwise oh well
     TelethiaFamily = 9
     BadForMechon = [30, 31, 32,33, 63, 64, 65] # List of ids for the early game to make sure mechon arent placed here
     BadForTelethia = [30,31,61,62, 134, 265, 266, 268, 416, 417, 534] # Ids for early game so you dont get soul readed
@@ -29,12 +30,10 @@ def Enemies():
     DiscipleDickson = ForcedArt(1316, 8, 942)
     ForcedStoryArts = [MetalFace, MysteriousFace, GoldFace, DiscipleDickson] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
     
-    isNormal = Options.EnemyOption_Normal.GetState()
-    isUnique = Options.EnemyOption_Unique.GetState()
-    isBoss = Options.EnemyOption_Boss.GetState()
-    isSuper = Options.EnemyOption_Superboss.GetState()
-    isMixed = Options.EnemyOption_MixTypes.GetState()
-    isDupe = Options.EnemyOption_Duplicates.GetState()
+    isNormal = normal.GetState()
+    isUnique = unique.GetState()
+    isBoss = boss.GetState()
+    isSuper = superboss.GetState()
     
     ChosenEnemyIds = []
     if isNormal:
@@ -46,45 +45,45 @@ def Enemies():
     if isSuper:
         ChosenEnemyIds.extend(SuperbossEnemies)
         
-    CombinedNormalEnemyData:list[Enemy] = []
-    CombinedUniqueEnemyData:list[Enemy] = []
-    CombinedBossEnemyData:list[Enemy] = []
-    CombinedSuperbossEnemyData:list[Enemy] = []
+    enemyGroup:list[Enemy] = []
     # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame"
     CopiedStats = ["move_speed", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "avoid", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_dmg", "spike_state", "spike_state_val", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
     CopiedStatsWithRatios = ["hp", "str", "eth"] # Not doing agility , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
     CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
         eneData = json.load(eneFile)    
-
-        # Create our list of enemies from all the area files and Combine the data into the class
-        for file in IDs.areaFileListNumbers:
-            try:   
-                with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
-                    eneAreaData = json.load(eneAreaFile)
-                    for enemy in eneAreaData["rows"]:
-                        if enemy["$id"] not in ChosenEnemyIds: # Ignore non chosen enemies
-                            continue
-                        for en in eneData["rows"]:
-                            enID = en["$id"]
-                            if enID == enemy["$id"]:
-                                enemyCopy = copy.copy(enemy)
-                                enCopy = copy.copy(en)
-                                newEnemy = Enemy(enemyCopy, enCopy)
-                                if enID in NormalEnemies:
-                                    CombinedNormalEnemyData.append(newEnemy)
-                                elif enID in BossEnemies:
-                                    CombinedBossEnemyData.append(newEnemy)
-                                elif enID in UniqueEnemies:
-                                    CombinedUniqueEnemyData.append(newEnemy)
-                                elif enID in SuperbossEnemies:
-                                    CombinedSuperbossEnemyData.append(newEnemy)
-                                # PrintEnemy(newEnemy)
-                                break   
-                    JSONParser.CloseFile(eneAreaData, eneAreaFile)
-            except:
-                continue   
+        if IDs.OriginalEnemyData == []:
+            # Create our list of enemies from all the area files and Combine the data into the class
+            for file in IDs.areaFileListNumbers:
+                try:   
+                    with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
+                        eneAreaData = json.load(eneAreaFile)
+                        for enemy in eneAreaData["rows"]:
+                            # if enemy["$id"] not in ChosenEnemyIds: # Ignore non chosen enemies
+                            #     continue
+                            for en in eneData["rows"]:
+                                enID = en["$id"]
+                                if enID == enemy["$id"]:
+                                    enemyCopy = copy.copy(enemy)
+                                    enCopy = copy.copy(en)
+                                    newEnemy = Enemy(enemyCopy, enCopy)
+                                    enemyGroup.append(newEnemy)
+                                    # PrintEnemy(newEnemy)
+                                    break   
+                        JSONParser.CloseFile(eneAreaData, eneAreaFile)
+                except:
+                    continue   
+            IDs.OriginalEnemyData = enemyGroup.copy() # this needs to be all of the groups
+        else: # If we already have data (because this function is run multiple times) then just load the original data because if we load the current data it has already been altered on the first run
+            enemyGroup = OriginalEnemyData.copy()
+        originalEnemyGroup = enemyGroup.copy() # Used to repopulate the list after removing
         # Randomly assign enemies     
+        
+        # Filter the list so we randomly choose from the enem types we want
+        for en in enemyGroup:
+            if en.enelist["$id"] not in monsterTypeList:
+                enemyGroup.remove(en)
+        
         for file in IDs.areaFileListNumbers:
             try:   
                 with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
@@ -94,34 +93,29 @@ def Enemies():
                         for enemy in eneAreaData["rows"]:   
                             
 
-                            if enemy["$id"] not in ChosenEnemyIds: # Only want to replace enemies chosen from our groups
+                            if enemy["$id"] not in monsterTypeList: # Only want to replace enemies chosen from our groups
                                 continue
                             
                             enID = enemy["$id"]
-                            
-                            if isMixed:
-                                group = CombinedNormalEnemyData + CombinedUniqueEnemyData + CombinedSuperbossEnemyData + CombinedBossEnemyData
-                            elif enID in NormalEnemies:
-                                group = CombinedNormalEnemyData
-                            elif enID in BossEnemies:
-                                group = CombinedBossEnemyData
-                            elif enID in UniqueEnemies:
-                                group = CombinedUniqueEnemyData
-                            elif enID in SuperbossEnemies:
-                                group = CombinedSuperbossEnemyData
                                 
-                            chosen = random.choice(group) # Choose from the desired pool                     
+                            chosen = random.choice(enemyGroup) # Choose an enemy                
                             
                             # Telethia Early
                             if (enemy["$id"] in BadForTelethia) and (chosen.eneListArea["family"] == TelethiaFamily):
                                 for i in range(1,9):
                                     if chosen.eneListArea[f"arts{i}"] == 666:
-                                        chosen.eneListArea[f"arts{i}"] = 0# Remove soul read if we get an early telethia
+                                        chosen.eneListArea[f"arts{i}"] = 0 # Remove soul read if we get an early telethia
                         
-                            # Mechon Early
-                            while (enemy["$id"] in BadForMechon) and (chosen.eneListArea["family"] in MechonFamily):
-                                chosen = random.choice(group) # Rechoose if we get an early mechon
-                                # print("Stopped mechon")
+                            # # Mechon Early
+                            # mechonCount = 0
+                            # while (enemy["$id"] in BadForMechon) and (chosen.eneListArea["family"] in MechonFamily):
+                            #     chosen = random.choice(enemyGroup) # Rechoose if we get an early mechon
+                            #     mechonCount += 1
+                            #     if mechonCount > len(enemyGroup): # If we get to a situation where the only enemies to choose are mechon redo the list
+                            #         enemyGroup = originalEnemyGroup
+                            #         print(f"Stopped mechon {mechonCount}")
+                            #         mechonCount = 0
+                                    
 
                             # Fix voice lines
                             for voiceID in eneVoiceData["rows"]:
@@ -173,9 +167,11 @@ def Enemies():
                                     enemy[f"arts{id.artSlot}"] = id.artId  # Change it to their art
                                     break
 
-                                            
-                            if (not isDupe): # Remove enemy if player wants 1 to 1
-                                group.remove(chosen)
+                            # Allows no dupes if possible if we dont have enough choices it reshuffles the original pool
+                            enemyGroup.remove(chosen)   
+                            if enemyGroup == []: # repopuliate it if the group is empty
+                                  enemyGroup = originalEnemyGroup.copy()
+
                         JSONParser.CloseFile(eneVoiceData, eneVoiceFile)
                         JSONParser.CloseFile(eneAreaData, eneAreaFile)  
 
