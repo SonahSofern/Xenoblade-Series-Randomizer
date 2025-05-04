@@ -164,7 +164,7 @@ def RemoveStartingGear():
 def ArmorDesc():
     myDesc = PopupDescriptions.Description()
     myDesc.Header(Options.EquipmentOption_Appearance.name)
-    myDesc.Text("This randomizes the appearance of armor pieces. It will only randomize among your characters normally obtainable cosmetics\nFor example, Dunban will always have Dunban armors.")
+    myDesc.Text("This randomizes the appearance of armor pieces. It will only randomize among your characters normally obtainable cosmetics.\nFor example, Dunban will always have Dunban armors.")
     myDesc.Header(Options.EquipmentOption_CrazyAppearance.name)
     myDesc.Text("This randomizes the appearance of armor pieces, including between different characters. This has amazing results.")
     myDesc.Image("alvisshulk.png","XCDE", 600)

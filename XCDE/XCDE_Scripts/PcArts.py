@@ -129,10 +129,12 @@ def DetermineArtType(art, char:ActMatch):
         art["act_idx"] = random.choice(char.SingleAttack)
     else:
         art["act_idx"] = random.choice(char.AOEAttack)      
-
+        
+CooldownStart = (10,60)
+CooldownStep = (5,10)
 def Cooldown(art): # Controls how hard arts are to recharge
-    Cooldown = random.randrange(10,60)
-    CooldownStep = Cooldown//random.randrange(5,10)
+    Cooldown = random.randrange(CooldownStart[0],CooldownStart[1])
+    CooldownStep = Cooldown//random.randrange(CooldownStep[0],CooldownStep[1])
     art["recast"] = Cooldown
     art["glow_recast"]= CooldownStep
 
@@ -161,5 +163,11 @@ def ArtsDescriptions():
     ArtDesc.Header(Options.PlayerArtsOption_BalancedUnlockLevels.name)
     ArtDesc.Text("Ensures that your arts unlock consistently as your level up.\nOtherwise your might get really high levels arts and be stuck with nothing for most of the game.\nOn average your will unlock a new art every 2-3 levels.")
     ArtDesc.Header(Options.PlayerArtsOption_ArtGroups.name)
-    ArtDesc.Text("Keep arts that have combos randomized to the same character.\nGale Slash, Worldly Slash, Electric Gutbuster, Tempest Kick\nSpear Break, Starlight Kick")
+    ArtDesc.Text("Keep arts that have combos randomized to the same character.")
+    ArtDesc.Tag("Gale Slash, Worldly Slash, Electric Gutbuster, Tempest Kick", pady=3, anchor="center")
+    ArtDesc.Tag("Spear Break, Starlight Kick", pady=3, anchor="center")
+    ArtDesc.Header(Options.PlayerArtsOption_Summons.name)
+    ArtDesc.Text("Keeps Melia's summon arts (Wind, Earth, Ice, Aqua, Flare, Bolt, Copy and Power Effect) on her, so that her talent art is not useless.")
+    ArtDesc.Header(Options.PlayerArtsOption_Cooldown.name)
+    ArtDesc.Text(f"Chooses a random cooldown between {CooldownStart[0]}-{CooldownStart[1]}s then each level up reduces that cooldown by the original cooldown / {CooldownStep[0]}-{CooldownStep[1]}")
     return ArtDesc

@@ -15,7 +15,7 @@ Future connected has not been tested at all, it may or may not work.
 # Credits
 https://github.com/roccodev/bdat-rs \
 https://www.xenoserieswiki.org/wiki/Main_Page \
-https://xenobladedata.github.io/ \
+https://xenobladedata.github.io/
 
 # Setup
 

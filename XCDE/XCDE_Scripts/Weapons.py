@@ -1,5 +1,5 @@
 import Options, json, random
-from scripts import JSONParser, Helper
+from scripts import JSONParser, Helper, PopupDescriptions
 
 
 def WeaponRando():
@@ -89,3 +89,11 @@ def Gems(wep):
         return
     
     wep["jwl_slot"] = random.choice([0,1,2,3])
+
+def WepDesc():
+    myDesc = PopupDescriptions.Description()
+    myDesc.Header(Options.WeaponOption_Appearance.name)
+    myDesc.Text("This randomizes the appearance of weapons. It will only randomize among your characters normally obtainable cosmetics.\nFor example, Dunban will always have Dunban weapons.")
+    myDesc.Header(Options.WeaponOption_Gems.name)
+    myDesc.Text(f"This randomizes the gem slots in your weapons between 0 and 3 slots, this wont affect unique weapons.")
+    return myDesc

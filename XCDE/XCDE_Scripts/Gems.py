@@ -242,7 +242,7 @@ def ItemPower(gemData, ranks):
 def GemDescriptions():
     GemDescription = scripts.PopupDescriptions.Description()
     GemDescription.Header(Options.GemOption_Power.name)
-    GemDescription.Text("This randomizes the power level of crafted and premade gems")
+    GemDescription.Text("This randomizes the power level of crafted and premade gems.")
     GemDescription.Header(f"{Options.GemOption_Effect.name}/{Options.GemOption_Unused.name}")
     GemDescription.Text("This randomizes what each gems effect is. Essentially shuffling the gems. Armors or weapons with unique gems will be randomized as well as any gems given throughout the story, this will not affect crafting.")
     GemDescription.Text("Unused effects will add gems that don't exist in the vanilla game. For example, cooldown reduction gems, or gems infused with monado enchant.")
@@ -250,9 +250,9 @@ def GemDescriptions():
     GemDescription.Header(Options.GemOption_FreeEquip.name)
     GemDescription.Text("This allows any gem to be equipped to weapons and armor.")
     GemDescription.Image("GemsFreeEquipped.png","XCDE", 500)
-    GemDescription.Text("Double Attack on armor and HP Up on weapons.")
+    GemDescription.Text("Double Attack on armor and HP Up on weapons.", anchor="center")
     GemDescription.Header(Options.GemOption_NoCap.name)
     GemDescription.Text("This removes the % and regular cap for all gems when you equip them.")
     GemDescription.Image("GemCap.png","XCDE", 500)
-    GemDescription.Text("Double Attack and Haste above their vanilla 50% cap.")
+    GemDescription.Text("Double Attack and Haste above their vanilla 50% cap.", anchor="center")
     return GemDescription

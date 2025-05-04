@@ -85,7 +85,7 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme, Game):
         fontTestBack = ttk.Button(newWindow, text="Previous", command=PreviousFont, width=10, style="STATIC.TButton")
         fontName = ttk.Entry(newWindow, width=20, textvariable=fontNameVar)
         fontTestNext = ttk.Button(newWindow, text="Next", command=NextFont, style="STATIC.TButton")
-        saveGUI = ttk.Button(newWindow, text="Save Changes", command=SaveUIChanges, style="STATIC.TButton")
+        saveGUI = ttk.Button(newWindow, text="Save Changes 🖫", command=SaveUIChanges, style="STATIC.TButton")
         fontSize = ttk.Entry(newWindow, textvariable=fontSizeVar)
         fontSize.delete(0, END)
         fontSize.insert(0,defaultFont.cget("size"))

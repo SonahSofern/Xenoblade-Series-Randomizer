@@ -21,7 +21,7 @@ class Description:
     def Tag(self, text:str, padx=(20,20), pady=(0,0), anchor="w", side=None):
         self.data.append(PopTag(text, padx, pady, anchor, side=side))
         
-    def Text(self,text:str, padx=(20,20), pady=(5,5), anchor="w", side=None):
+    def Text(self,text:str, padx=(20,20), pady=(5,5), anchor="center", side=None):
         self.data.append(PopText(text,padx,pady, anchor, side=side))
 
     def Image(self,imagePath:str, game, size = 400, padx=5, pady=(5,5), anchor=None, side=None):

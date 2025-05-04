@@ -54,9 +54,15 @@ class Option():
         self.checkBox = ttk.Checkbutton(optionPanel, variable= self.checkBoxVal, text=self.name, width=40, style="midColor.TCheckbutton", command=lambda: self.StateUpdate())
         self.checkBox.grid(row=rowIncrement, column=0, sticky="w")
         
+        if self.descData == None:
+            text = self.desc
+        else:
+            text = f"{self.desc} 🗗"
+            # ◆ ◈ ✉ ⮚ ⸙ 🗗 🕮 🔎 📗 📜 🏴
+        
         # Description Label or Button
         if self.descData != None:
-            self.descObj = ttk.Button(optionPanel, text=self.desc, command=lambda: PopupDescriptions.GenPopup(self.name, self.descData, self.root, self.defFont), style="BordlessBtn.TButton", width=60)
+            self.descObj = ttk.Button(optionPanel, text = text, command=lambda: PopupDescriptions.GenPopup(self.name, self.descData, self.root, self.defFont), style="BordlessBtn.TButton", width=60)
             padx = 13
         else:
             self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, wraplength=400)

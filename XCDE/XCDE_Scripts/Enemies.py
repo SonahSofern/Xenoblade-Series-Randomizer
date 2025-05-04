@@ -225,17 +225,18 @@ def RingRemoval():
         
         
         
-def EnemyDesc():
+def EnemyDesc(categoryName):
     myDesc = PopupDescriptions.Description()
-    myDesc.Header(Options.EnemyOption.name)
-    myDesc.Text(f"Randomizes the chosen categories of enemies between their own types.\nThere is various logic to prevent bad situations")
+    myDesc.Header(categoryName)
+    myDesc.Text(f"Randomizes the chosen categories of enemies onto {categoryName}.")
+    myDesc.Text("There is various logic to prevent bad situations:", anchor="w")
     myDesc.Tag("Enemy stats do not scale with level in this game, so instead it takes the original enemies stat total and distributes it in the replacement enemies stat ratios.\nSo, if an enemy has a high attack stat compared to their other stats, they will still have a high attack stat but balanced with the replacement enemies' stats", pady=(5,5))
     myDesc.Tag(f"Instant Death Spikes are removed for fights below level {instantDeathSpikeThreshold}", pady=(5,5))
-    myDesc.Tag("Mechon Enemies are not allowed for fights before you can damage mechon, toppling is not guaranteed with art randomization so this fix is needed", pady=(5,5))
-    myDesc.Tag("Telethia enemies are disabled for boss fights before Purge is unlocked\nEnemy spikes are tuned for their new level")
-    myDesc.Image("rondinecap.png", "XCDE", 800)
-    myDesc.Header(Options.EnemyOption_MixTypes.name)
-    myDesc.Header(Options.EnemyOption_Duplicates.name)
+    myDesc.Tag("Mechon Enemies are not allowed for forced fights before you can damage mechon, toppling is not guaranteed with art randomization so this fix is needed.", pady=(5,5))
+    myDesc.Tag("Telethia enemies are disabled for boss fights before monado purge is unlocked.", pady=(5,5))
+    myDesc.Tag("Enemy spikes are tuned for their new level", pady=(5,5))
+    myDesc.Tag("A few boss fights require certain arts to be used to end. Mysterious Face in spiral valley for example.\nIn this case the enemy that replaces Mysterious Face will have that art added to their list in the slot it requires. (Only affects 4 fights in the game)", pady=(5,5))
+    myDesc.Tag("Some fights have really small green rings and if you get big enemies there it smashes you up against the wall. These fights will have the ring removed.", pady=(5,5))
     return myDesc
 
 
