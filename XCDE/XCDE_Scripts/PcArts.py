@@ -24,7 +24,7 @@ class ActMatch: # A class so that when arts get randomized their animation somew
         
 CharacterList:list[ActMatch] = []
 
-ShulkActs = ActMatch(1, _SingleAttack=[1,0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[3,2,6,10,13,14])
+ShulkActs = ActMatch(1, _SingleAttack=[0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[1,3,2,6,10,13,14])
 ReynActs = ActMatch(2, _SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,5,7,8,9,10,14])
 FioraActs = ActMatch(3,  _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0])
 DunbanActs = ActMatch(4,  _SingleAttack=[0,1,3,5,9,14],_AOEAttack=[12,13,14],_Buff=[2,4,6,7,8,10,11,15])

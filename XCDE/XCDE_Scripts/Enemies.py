@@ -36,8 +36,8 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss):
         ChosenEnemyIds.extend(BossEnemies)
     if isSuper:
         ChosenEnemyIds.extend(SuperbossEnemies)
-    # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame",  "avoid"
-    CopiedStats = ["move_speed", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_dmg", "spike_state", "spike_state_val", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
+    # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame",  "avoid", "spike_dmg", "spike_state_val"
+    CopiedStats = ["move_speed", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_state", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
     CopiedStatsWithRatios = ["hp", "str", "eth"] # Not doing agility , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
     CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
     
@@ -146,21 +146,36 @@ def CreateEnemyDataClass(eneData, enAreaFiles):
 
 def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
     if chosen["spike_dmg"] != 0:
+        
+        # Get current enemy
         if enemy["lv"] < 20:
-            spikePerLv = 0.2 # base spike given per level
+            spikePerLv = 0.4 # base spike given per level
         elif enemy["lv"] < 50:
-            spikePerLv = 0.5
+            spikePerLv = 0.6
         else:
             spikePerLv = 0.7
-        expectedPowerLv = chosen["lv"] * spikePerLv # The expected power level of the spike before any changes
+        
+        # Get chosens 
+        if chosen["lv"] < 20:
+            chosenSpikePerLv = 0.2 # base spike given per level
+        elif chosen["lv"] < 50:
+            chosenSpikePerLv = 0.5
+        else:
+            chosenSpikePerLv = 0.7
+        
+        # Run some equations to find a good balance for that level and how strong the spike was
+        expectedPowerLv = chosen["lv"] * chosenSpikePerLv # The expected power level of the spike before any changes
         actualPowerLv = chosen["spike_dmg"]
         spikeMult = actualPowerLv/expectedPowerLv # If enemy has a stronger/weaker spike than something of its level make the spike stronger/weaker but still balanced
-        newPowerLv = int(enemy["lv"] * spikeMult)
-        chosen["spike_dmg"] = max(min(newPowerLv, 255), 1) # Set the new amount between 1 and 255
+        newPowerLv = int(enemy["lv"] * spikePerLv * spikeMult)
+        enemy["spike_dmg"] = max(min(newPowerLv, 255), 1) # Set the new amount between 1 and 255
         # print(f"Level: {enemy["lv"]}")
-        # print(f"Spike Damage: {chosen["spike_dmg"] * 10}")
+        # print(f"Spike Damage: {enemy["spike_dmg"] * 10}")
+        # print(f"Mult: {spikeMult}")
     if (chosen["spike_state_val"] == 220) and (enemy["lv"] <= instantDeathSpikeThreshold): # Removes instant death spikes from all fights below level 60
-        chosen["spike_state_val"] = 0
+        enemy["spike_state_val"] = 0
+    else:
+        enemy["spike_state_val"] = chosen["spike_state_val"]
         
 def TelethiaEarly(enemy, chosen:Enemy):
     TelethiaFamily = 9
@@ -243,7 +258,7 @@ def EnemyDesc(categoryName):
     myDesc.Text("There is various logic to prevent bad situations:", anchor="w")
     myDesc.Tag("Enemy stats do not scale with level in this game, so instead it takes the original enemies stat total and distributes it in the replacement enemies stat ratios.\nSo, if an enemy has a high attack stat compared to their other stats, they will still have a high attack stat but balanced with the replacement enemies' stats", pady=(5,5))
     myDesc.Tag(f"Instant Death Spikes are removed for fights below level {instantDeathSpikeThreshold}", pady=(5,5))
-    myDesc.Tag("Mechon Enemies are not allowed for forced fights before you can damage mechon, toppling is not guaranteed with art randomization so this fix is needed.", pady=(5,5))
+    myDesc.Tag("Mechon Enemies have their resistances removed for forced fights before you can damage mechon, toppling is not guaranteed with art randomization so this fix is needed.", pady=(5,5))
     myDesc.Tag("Telethia enemies are disabled for boss fights before monado purge is unlocked.", pady=(5,5))
     myDesc.Tag("Enemy spikes are tuned for their new level", pady=(5,5))
     myDesc.Tag("A few boss fights require certain arts to be used to end. Mysterious Face in spiral valley for example.\nIn this case the enemy that replaces Mysterious Face will have that art added to their list in the slot it requires. (Only affects 4 fights in the game)", pady=(5,5))
