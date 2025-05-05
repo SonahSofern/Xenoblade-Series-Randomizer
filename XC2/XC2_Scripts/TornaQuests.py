@@ -5,7 +5,7 @@ import time
 from IDs import *
 
 # if a quest has 2 rewardids, they need to equal each other so you can't miss out on progression.
-
+# need to make the sidequest that require a certain number of points only require 1 point, and remove all other alternate sources, so you need that exact item.
 # need to make the quest Unforgotten Promise only require 1 eternity loam, not 4, they're key items with the same id, so you can't make them a one-time reward, like from a boss drop, you need 4 in logic
 
 class TornaSideQuest: # created to allow me to pass these objects easier

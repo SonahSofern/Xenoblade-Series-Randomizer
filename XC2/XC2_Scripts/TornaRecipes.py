@@ -5,6 +5,7 @@ import time
 from IDs import ValidEnemies, TornaUMIDs
 
 # FLD_CollectionTable $id -> ma40a and ma41a_FLD_CollectionPopList CollectionTable.
+# if i implement random crafting recipes, this will be useful
 
 def CreateTornaRecipeList():
     global TornaRecipeIDs
