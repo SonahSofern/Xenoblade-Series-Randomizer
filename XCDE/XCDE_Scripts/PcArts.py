@@ -52,7 +52,7 @@ StarlightKickGroup = ArtGroup([115,107])
 def RandomizePcArts():
     keepMeliaSummons = Options.PlayerArtsOption_Summons.GetState()
     isBalancedLv = Options.PlayerArtsOption_BalancedUnlockLevels.GetState()
-    cooldowns = Options.PlayerArtsOption_Cooldown.GetState()
+    # cooldowns = Options.PlayerArtsOption_Cooldown.GetState()
     isArtGroups = Options.PlayerArtsOption_ArtGroups.GetState()
     # isGuestArts = Options.PlayerArtsOption_GuestArts.GetState()
     
@@ -88,8 +88,8 @@ def RandomizePcArts():
                         DetermineArtType(art, artGroup.chosenChar)
                         break
                 
-            if cooldowns:
-                Cooldown(art)
+            # if cooldowns:
+            #     Cooldown(art)
 
         if isBalancedLv:
             BalanceArtUnlockLevels(artData)
