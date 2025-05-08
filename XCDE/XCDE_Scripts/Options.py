@@ -2,8 +2,8 @@ import PcArts
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales, NPC, Weapons, FieldCollectables, Cutscenes, IDs
-OptionList =[]
 
+OptionList =[]
 General = 1
 Character  = 2
 Enemies = 3
@@ -22,7 +22,7 @@ TradeOption_Gem = SubOption("Gems", TradeOption)
 TradeOption_Collectibles = SubOption("Collectibles", TradeOption)
 TradeOption_Materials = SubOption("Materials", TradeOption)
 
-CollectableOptions = Option("Collectables Orbs", General, "Randomizes collectables on the field into the chosen options", [lambda: FieldCollectables.FieldItems()], _hasSpinBox = True, descData=lambda: FieldCollectables.CollectDesc())
+CollectableOptions = Option("Collectable Orbs", General, "Randomizes collectables on the field into the chosen options", [lambda: FieldCollectables.FieldItems()], _hasSpinBox = True, descData=lambda: FieldCollectables.CollectDesc())
 CollectableOptions_Collectables = SubOption("Collectables", CollectableOptions)
 CollectableOptions_Materials = SubOption("Materials", CollectableOptions)
 CollectableOptions_Armor = SubOption("Armor", CollectableOptions)
@@ -33,14 +33,6 @@ CollectableOptions_ArtBooks = SubOption("Art Books", CollectableOptions)
 # Collectapedia
 
 # Enemy
-# EnemyOption = Option("Enemies", Enemies, "Randomizes enemies in the overworld", [lambda: EnemiesScript.Enemies()], descData=lambda: EnemiesScript.EnemyDesc())
-# EnemyOption_Normal = SubOption("Normal Monsters", EnemyOption)
-# EnemyOption_Unique = SubOption("Unique Monsters", EnemyOption)
-# EnemyOption_Boss = SubOption("Bosses", EnemyOption)
-# EnemyOption_Superboss = SubOption("Superbosses", EnemyOption)
-# EnemyOption_MixTypes = SubOption("Mix Enemy Types", EnemyOption, _defState=False)
-# EnemyOption_Duplicates = SubOption("Allow Duplicates", EnemyOption, _defState=False)
-
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: EnemiesScript.Enemies(IDs.NormalEnemies, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption)], descData=lambda: EnemiesScript.EnemyDesc(NormalEnemyOption.name), _hasSpinBox = True)
 NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption)
 NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption)
@@ -93,10 +85,6 @@ WeaponOption_Appearance = SubOption("Appearance", WeaponOption)
 WeaponOption_Gems = SubOption("Gem Slots", WeaponOption)
 
 
-# Weapons
-
-
-
 # Misc
 BattleMusicOption = Option("Battle Music", Musica, "Randomizes the chosen battle themes onto all battle themes", [lambda: Music.MusicRando(Music.AllBattleThemes, Music.UsedBattleThemes)]) #https://xenobladedata.github.io/xb1de/bdat/bdat_common/bgmlist.html
 for song in Music.AllBattleThemes:
@@ -115,8 +103,8 @@ for song in Music.AllJingles:
 
 # QOL
 TutorialSkipsOption = Option("Tutorial Skips", QOL, "Reduces tutorials as much as possible", [lambda: Tutorials.TutorialSkips()])
-FasterLvOption = Option("Fast Levels", QOL, "Decreases level up requirements by a set amount.", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 2, _spinMax = 256, _spinIncr = 2, _spinDesc = "x", spinDefault=2)
-MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free quickstep gems.", [lambda: MiscQOL.Quickstep()], _hasSpinBox=True, _spinDesc="% Speed", _spinMax=255, _spinMin = 2)
+FasterLvOption = Option("Fast Levels", QOL, "Decreases level up requirements by a set amount (Recommended 3x to rush the story).", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 2, _spinMax = 256, _spinIncr = 1, _spinDesc = "x", spinDefault=2)
+MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free quickstep gems.", [lambda: MiscQOL.Quickstep()], _hasSpinBox=True, _spinDesc="% Speed", _spinMax=100)
 # CutsceneSkipOption = Option("Cutscene Skips", QOL, "Skips all possible cutscenes", [lambda: Cutscenes.CutsceneSkipper()])
 
 # Funny

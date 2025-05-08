@@ -338,13 +338,11 @@ def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFr
         
         OuterFrames[i].pack_propagate(False)
         OuterFrames[i].pack(fill=BOTH, expand=True)
-        
-
+    
 def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb"):
     def ThreadedRandomize():
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
-
         # Showing Progress Diplay 
         randoProgressDisplay.pack(side='left', anchor='w', pady=10, padx=10)
         randoProgressDisplay.config(text="Unpacking BDATs")
@@ -435,3 +433,14 @@ windowHeight = "900"
 OptionColorLight = UI_Colors.White
 OptionColorDark = UI_Colors.Gray
 
+def RandomizeButtonDice(button:ttk.Button):
+    selection = [ "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
+    curText = button.cget("text")
+    dice1 = random.choice(selection)
+    dice2 = random.choice(selection)
+    newText = f"{dice1} {curText} {dice2}"
+    button.config(text=newText)
+    time.sleep(1)
+    
+    # Place random dice on both sides of the word
+    # Randomly swap them every second to simulate movement and randomization

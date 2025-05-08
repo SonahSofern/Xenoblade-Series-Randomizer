@@ -1,6 +1,6 @@
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_PSVskill.html
 import json, random, time
-import Options, scripts.PopupDescriptions
+import Options, scripts.PopupDescriptions, scripts.JSONParser
 
 yoinkSkills = [140,138]
 MeliaSkills = [152,157,159]
@@ -76,18 +76,8 @@ def SkillRando():
                 if isLinkCost:
                     LinkCost(skill)
                 
-            skillDescFile.seek(0)
-            skillDescFile.truncate()
-            json.dump(descData, skillDescFile, indent=2, ensure_ascii=False)
-        skillFile.seek(0)
-        skillFile.truncate()
-        json.dump(skillData, skillFile, indent=2, ensure_ascii=False)
-
-
-      
-        skillFile.seek(0)
-        skillFile.truncate()
-        json.dump(skillData, skillFile, indent=2, ensure_ascii=False)    
+            scripts.JSONParser.CloseFile(descData, skillDescFile)
+        scripts.JSONParser.CloseFile(skillData, skillFile) 
 
 def Shape(skill, key, excludeShapes = []):
     Circle = 1
@@ -116,10 +106,7 @@ def SkillLinkNodeRando():
         for link in linkData["rows"]:
             for i in range(1,6):
                 Shape(link, f"rvs_effect0{i}", [5]) # Want to exlcude diamond shapes to keep vanilla behaviour since that symbolizes a non linkable skill (we could use all if we wanted)
-
-        linkFile.seek(0)
-        linkFile.truncate()
-        json.dump(linkData, linkFile, indent=2, ensure_ascii=False)
+        scripts.JSONParser.CloseFile(linkData, linkFile)
         
         
         
