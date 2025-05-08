@@ -167,7 +167,8 @@ def ArtsDescriptions():
     ArtDesc.Tag("Gale Slash, Worldly Slash, Electric Gutbuster, Tempest Kick", pady=3, anchor="center")
     ArtDesc.Tag("Spear Break, Starlight Kick", pady=3, anchor="center")
     ArtDesc.Header(Options.PlayerArtsOption_Summons.name)
-    ArtDesc.Text("Keeps Melia's summon arts (Wind, Earth, Ice, Aqua, Flare, Bolt, Copy and Power Effect) on her, so that her talent art is not useless.")
-    ArtDesc.Header(Options.PlayerArtsOption_Cooldown.name)
-    ArtDesc.Text(f"Chooses a random cooldown between {CooldownStartRange[0]}-{CooldownStartRange[1]}s then each level up reduces that cooldown by the original cooldown / {CooldownStepRange[0]}-{CooldownStepRange[1]}")
+    ArtDesc.Text("Keeps Melia's summon arts on her, so that her talent art is not useless.")
+    ArtDesc.Tag("Summon Wind, Summon Earth, Summon Ice, Summon Aqua, Summon Flare, Summon Bolt, Summon Copy and Power Effect", pady=3, anchor="center")
+    # ArtDesc.Header(Options.PlayerArtsOption_Cooldown.name)
+    # ArtDesc.Text(f"Chooses a random cooldown between {CooldownStartRange[0]}-{CooldownStartRange[1]}s then each level up reduces that cooldown by the original cooldown / {CooldownStepRange[0]}-{CooldownStepRange[1]}")
     return ArtDesc

@@ -17,7 +17,7 @@ class ForcedArt:
         self.artSlot = artSlot
         self.artId = artId
 
-def Enemies(monsterTypeList, normal, unique, boss, superboss):
+def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     MetalFace = ForcedArt(61, 2, 565)
     MysteriousFace = ForcedArt(268,5,611)
     GoldFace = ForcedArt(1622, 1, 740)
@@ -27,6 +27,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss):
     isUnique = unique.GetState()
     isBoss = boss.GetState()
     isSuper = superboss.GetState()
+    odds = odds.GetSpinbox()
     ChosenEnemyIds = []
     if isNormal:
         ChosenEnemyIds.extend(NormalEnemies)
@@ -66,7 +67,10 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss):
                     eneAreaData = json.load(eneAreaFile)
                     
                     for enemy in eneAreaData["rows"]:   
-                    
+                        
+                        if not Helper.OddsCheck(odds):
+                            continue
+                        
                         if enemy["$id"] not in monsterTypeList: # Only want to replace enemies chosen from our groups
                             continue
                                                     
@@ -249,7 +253,7 @@ def RingRemoval():
                 lock["popID2"] = 0
         JSONParser.CloseFile(lockData, lockFile)
         
-        
+WeirdEnemiesTesting = [310,294,295,296,392]
         
 def EnemyDesc(categoryName):
     myDesc = PopupDescriptions.Description()
@@ -257,12 +261,12 @@ def EnemyDesc(categoryName):
     myDesc.Text(f"Randomizes the chosen categories of enemies onto {categoryName}.")
     myDesc.Text("There is various logic to prevent bad situations:", anchor="w")
     myDesc.Tag("Enemy stats do not scale with level in this game, so instead it takes the original enemies stat total and distributes it in the replacement enemies stat ratios.\nSo, if an enemy has a high attack stat compared to their other stats, they will still have a high attack stat but balanced with the replacement enemies' stats", pady=(5,5))
-    myDesc.Tag(f"Instant Death Spikes are removed for fights below level {instantDeathSpikeThreshold}", pady=(5,5))
     myDesc.Tag("Mechon Enemies have their resistances removed for forced fights before you can damage mechon, toppling is not guaranteed with art randomization so this fix is needed.", pady=(5,5))
-    myDesc.Tag("Telethia enemies are disabled for boss fights before monado purge is unlocked.", pady=(5,5))
+    myDesc.Tag("Telethia enemies Soul Reads are disabled for boss fights before monado purge is unlocked.", pady=(5,5))
     myDesc.Tag("Enemy spikes are tuned for their new level", pady=(5,5))
+    myDesc.Tag(f"Instant Death Spikes are removed for fights below level {instantDeathSpikeThreshold}", pady=(5,5))
     myDesc.Tag("A few boss fights require certain arts to be used to end. Mysterious Face in spiral valley for example.\nIn this case the enemy that replaces Mysterious Face will have that art added to their list in the slot it requires. (Only affects 4 fights in the game)", pady=(5,5))
-    myDesc.Tag("Some fights have really small green rings and if you get big enemies there it smashes you up against the wall. These fights will have the ring removed.", pady=(5,5))
+    myDesc.Tag("Some fights have small green rings and if you get big enemies there it smashes you up against the wall. These fights will have the ring removed.", pady=(5,5))
     return myDesc
 
 
