@@ -7,8 +7,7 @@ GuestArts = [144,145,146,147,148,149]
 PonspectorDLCArts = [188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254]
 ShulkMonadoArts = [3,4,5,6,7,8,9,10]
 DunbanMonadoArts = [150,151]
-MeliaSummons = [113,103,109,112,104,105,111,116]
-MeliaElementBurst = [118,117]
+MeliaSummonsNames = [267, 123, 91, 73, 191, 5, 323, 277, 321, 357]
 ReynGuardShift = [22] # Wont work on other characters
 
 # Setting to make arts all cost tp instead of having cooldowns basically auto attack recharging arts
@@ -39,17 +38,25 @@ NeneActs = ActMatch(15,[0],[0],[0])
 # Groups for the option to keep arts together
 class ArtGroup:
     def __init__(self, _group):
-        self.group = _group
+        self.group = _group # Group of name iDS
         ArtGroups.append(self)
     def chooseChar(self):
         self.chosenChar = random.choice(CharacterList)
         
 ArtGroups:list[ArtGroup] = []
-GaleSlashGroup = ArtGroup([45,46,48,54])
-StarlightKickGroup = ArtGroup([115,107])
+GaleSlashGroup = ArtGroup([107,91,89,95])
+StarlightKickGroup = ArtGroup([229,213])
 
+def namePrint(artList):
+    with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
+        artData = json.load(artFile)
+        nameList = []
+        for art in artData["rows"]:
+            if art["$id"] in artList:
+                nameList.append(art["name"])
+        print(nameList)
 
-def RemakeArtList():
+def RemakeArtList():    
     with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
         isDupes = Options.PlayerArtsOption_Duplicates.GetState()
@@ -85,51 +92,47 @@ def RandomizePcArts():
     
     keepMeliaSummons = Options.PlayerArtsOption_Summons.GetState()
     isBalancedLv = Options.PlayerArtsOption_BalancedUnlockLevels.GetState()
-    # cooldowns = Options.PlayerArtsOption_Cooldown.GetState()
     isArtGroups = Options.PlayerArtsOption_ArtGroups.GetState()
     
     
     for group in ArtGroups:
         group.chooseChar()
     invalidArtIds = TalentArts + DunbanMonadoArts + ShulkMonadoArts + PonspectorDLCArts + DLCArts
-    
-        
-    if keepMeliaSummons:
-        invalidArtIds.extend(MeliaSummons)
-        invalidArtIds.extend(MeliaElementBurst)
+
         
     with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
         for art in artData["rows"]:
+    
+            if art["$id"] in invalidArtIds: # Ignores invalid/ weird arts
+                continue
             
-            id = art["$id"]
-            if id in invalidArtIds: # Ignores invalid/ weird arts
+            if keepMeliaSummons and (art["name"] in MeliaSummonsNames): # Dont change the melias summons if we want her to keep em
                 continue
             
             DetermineArtType(art, random.choice(CharacterList)) # Random choice
-            
-            if art["pc"] in [SharlaActs.pcID, KinoActs.pcID]: # Ensures former healer's new arts still increment the cooldown talent art
-                art["tp"] = random.randrange(-25,-1)
-            elif art["tp"] < 0: # If healer arts go on someone else it shouldnt buff their talent gauge
-                art["tp"] = 0
-                
-            if isArtGroups:
-                for artGroup in ArtGroups: # Ensures grouped arts stay grouped
-                    if id in artGroup.group:
-                        DetermineArtType(art, artGroup.chosenChar)
-                        break
-                
-            # if cooldowns:
-            #     Cooldown(art)
+            FixSharlasNewArts(art)
+            ArtGroupManager(isArtGroups, art)
+
 
         if isBalancedLv:
             BalanceArtUnlockLevels(artData)
                 
-        artFile.seek(0)
-        artFile.truncate()
-        json.dump(artData, artFile, indent=2, ensure_ascii=False)
+        scripts.JSONParser.CloseFile(artData, artFile)
         
 
+def ArtGroupManager(isArtGroups, art):
+    if isArtGroups:
+        for artGroup in ArtGroups: # Ensures theres exists one set of grouped arts staying grouped
+            if art["name"] in artGroup.group:
+                DetermineArtType(art, artGroup.chosenChar)
+                break
+
+def FixSharlasNewArts(art): # Fixes the talent gauge working with her new arts
+    if art["pc"] in [SharlaActs.pcID, KinoActs.pcID]: # Ensures former healer's new arts still increment the cooldown talent art
+        art["tp"] = random.randrange(-25,-1)
+    elif art["tp"] < 0: # If healer arts go on someone else it shouldnt buff their talent gauge
+        art["tp"] = 0
 
 def BalanceArtUnlockLevels(artData):
     for i in range(1,9): # Loop through the characters
@@ -169,25 +172,17 @@ def Cooldown(art): # Controls how hard arts are to recharge
     art["recast"] = Cooldown
     art["glow_recast"]= CooldownStep
 
-def Damage():
-    pass
-
-def TargetType():
-    types= {
-        "Single": 1,
-        "Self": 2,
-        "Ally": 3
+# def TargetType():
+#     types= {
+#         "Single": 1,
+#         "Self": 2,
+#         "Ally": 3
         
-    }
-    rangeType={
-        "Party": 7
-    }
-    pass
-
-def Effect(): # st_type status type
-    pass
-
-
+#     }
+#     rangeType={
+#         "Party": 7
+#     }
+#     pass
 
 def ArtsDescriptions():
     ArtDesc = scripts.PopupDescriptions.Description()
