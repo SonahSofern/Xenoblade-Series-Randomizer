@@ -76,8 +76,6 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                                                     
                         chosen = random.choice(filteredEnemyData) # Choose an enemy                
                         
-                        TelethiaEarly(enemy, chosen)
-                        MechonEarly(enemy, chosen)
                         VoicedEnemiesFix(eneVoiceData, chosen, enemy)                                
                         SpikeBalancer(enemy, chosen.eneListArea)
                         
@@ -88,9 +86,10 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                         # Copy chosen stats over
                         for key in CopiedStats: 
                             enemy[key] = chosen.eneListArea[key]
-
-                        for key in CopiedStatsWithRatios:
-                            enemy[key] = KeepStatRatio(enemy, chosen.eneListArea, key, replacementTotalStats, originalTotalStats)
+                        
+                        if not FirstFights(enemy):
+                            for key in CopiedStatsWithRatios:
+                                enemy[key] = KeepStatRatio(enemy, chosen.eneListArea, key, replacementTotalStats, originalTotalStats)
                             
                         for ene in eneData["rows"]:
                             if (ene["$id"] == enemy["$id"]):
@@ -98,6 +97,8 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                                     ene[key] = chosen.enelist[key]
                                 break
                         
+                        TelethiaEarly(enemy, chosen)
+                        MechonEarly(enemy, chosen)
                         ForcedArts(enemy, ForcedStoryArts)
                         SmallAreaFights(enemy)
                         # Allows no dupes if possible if we dont have enough choices it reshuffles the original pool
@@ -186,14 +187,22 @@ def TelethiaEarly(enemy, chosen:Enemy):
     BadForTelethia = [30,31,61,62, 134, 265, 266, 268, 416, 417, 534] # Ids for early game so you dont get soul readed
     if (enemy["$id"] in BadForTelethia) and (chosen.eneListArea["family"] == TelethiaFamily):
         for i in range(1,9):
-            if chosen.eneListArea[f"arts{i}"] == 666:
-                chosen.eneListArea[f"arts{i}"] = 0 # Remove soul read if we get an early telethia
+            if enemy.eneListArea[f"arts{i}"] == 666:
+                enemy.eneListArea[f"arts{i}"] = 0 # Remove soul read if we get an early telethia
+
+# The first few fights can be really tough before cheering allies or any arts lets leave their stats vanilla
+def FirstFights(enemy):
+    EarlyFights = [32,33]
+    if enemy["$id"] in EarlyFights:
+        return True
+    else:
+        return False
 
 def MechonEarly(enemy, chosen:Enemy):
     MechonFamily = [1,2,4] # 4 Seems to share a lot of enemies that are aquatic, but mumkhar is family 4 and we dont want him early so it cuts a few enemies off that we mightve wanted otherwise oh well
     BadForMechon = [30, 31, 32,33, 63, 64, 65] # List of ids for the early game to make sure mechon arent placed here
     if (enemy["$id"] in BadForMechon) and (chosen.eneListArea["family"] in MechonFamily):
-        chosen.eneListArea["family"] = 0
+        enemy["family"] = 3
 
 
 def TotalStats(chosen, keys):

@@ -1,4 +1,5 @@
 import json, random, Options
+import scripts.JSONParser
 import scripts.PopupDescriptions 
 TalentArts = [102,101,100,44,99,43,98,42,62,97,154,1,2,19,36,41,61,79,96,119,120,121,122,123,124,125,126,127,153,171,152] # Need to shuffle these seperately for various reasons
 DLCArts = [155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187]
@@ -48,20 +49,50 @@ GaleSlashGroup = ArtGroup([45,46,48,54])
 StarlightKickGroup = ArtGroup([115,107])
 
 
+def RemakeArtList():
+    with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
+        artData = json.load(artFile)
+        isDupes = Options.PlayerArtsOption_Duplicates.GetState()
+        
+        badReplacementArts = PonspectorDLCArts + GuestArts + DunbanMonadoArts 
+        badReplacedArts =  PonspectorDLCArts + GuestArts + DunbanMonadoArts + TalentArts
+        artList = []
+        keyList = ["name", "pc", "cast", "recast", "tp", "dex", "rate1", "rate2", "arts_type", "atk_type", "chain_type", "elem", "dmg_type", "dmg_time", "tgt", "range_type", "range", "range_val", "hate", "flag", "st_type", "st_val", "st_val2", "st_time", "st_itv", "sp_cnd", "sp_proc", "sp_val1", "sp_val2", "kb_type", "kb_lv", "grow_powl", "grow_powh", "grow_st_time", "grow_st_val", "glow_recast", "icon", "icon_base", "act_idx", "idx", "list_idx", "get_type", "get_lv", "melia_lv", "melia_slot_idx", "help"]
+        
+        for art in artData["rows"]: # Build our list
+            if art["$id"] in badReplacementArts:
+                continue
+            artList.append(art)
+        
+        for art in artData["rows"]: # Replace the old list with random choices from the new list
+            if art["$id"] in badReplacedArts:
+                continue
+            
+            newArt = random.choice(artList) # Choose a new art for that slot
+            if isDupes:
+                artList.remove(newArt)
+            
+            for key in keyList: # Replace everything
+                art[key] = newArt[key]
+        scripts.JSONParser.CloseFile(artData, artFile)
+        
+        
+        # Edit the new data
+
 # Setting that just shuffles arts
 def RandomizePcArts():
+    RemakeArtList()
+    
     keepMeliaSummons = Options.PlayerArtsOption_Summons.GetState()
     isBalancedLv = Options.PlayerArtsOption_BalancedUnlockLevels.GetState()
     # cooldowns = Options.PlayerArtsOption_Cooldown.GetState()
     isArtGroups = Options.PlayerArtsOption_ArtGroups.GetState()
-    # isGuestArts = Options.PlayerArtsOption_GuestArts.GetState()
+    
     
     for group in ArtGroups:
         group.chooseChar()
     invalidArtIds = TalentArts + DunbanMonadoArts + ShulkMonadoArts + PonspectorDLCArts + DLCArts
     
-    # if not isGuestArts:
-    #     invalidArtIds.extend(GuestArts)
         
     if keepMeliaSummons:
         invalidArtIds.extend(MeliaSummons)
