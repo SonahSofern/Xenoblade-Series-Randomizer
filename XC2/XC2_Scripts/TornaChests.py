@@ -3,6 +3,8 @@ import json
 import random
 from IDs import *
 
+TornaChestIDs = Helper.InclRange(2201, 2351)
+
 class TornaChest:
     def __init__(self, input, addtolist, rewardnumber):
         self.id = input["$id"]
@@ -17,6 +19,10 @@ class TornaChest:
             self.hasprogression = True
         else:
             self.hasprogression = False
+        if self.id in TornaChestIDs:
+            self.continent = "Torna"
+        else:
+            self.continent = "Gormott"
         addtolist.append(self)
 
 def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):

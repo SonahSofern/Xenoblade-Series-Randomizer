@@ -13,9 +13,10 @@ import copy
 # need to set up the unlock keys
 # need to make SP costs for upgrades much cheaper
 # remove all quest, weather, and time requirements for all chests, to make them accessible at any time
-# remove the npc talking options for all npc quests that are not logically chosen for the playthrough. This lets you place their required items anywhere.
-# make the EXP levels past level 
-
+# remove the npc talking options for all npc quests that are not logically chosen for the playthrough. This lets you place their required items anywhere. This causes issues with items from chests, the chests currently aren't tied to a quest, just an enemy
+# Change Quest Point Shops to require only 1 item total, only the logically chosen item, and it gives 1 point. Change the point requirement for said shop to also be 1.
+# need to add a shop for the level up tokens
+# need to add the names, descriptions, sell prices of key items that I add
 
 class ItemInfo:
     def __init__(self, inputid, category, addtolist):
@@ -41,7 +42,8 @@ def AllTornaRando():
     ChosenSupporterAmounts = [1,16,32,48,64] # have a few sliders going forwards to let the player change this amount
     ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests = TornaQuests.SelectCommunityQuests(ChosenSupporterAmounts, ProgressionLocTypes[0])
     Areas = TornaAreas.CreateAreaInfo(Sidequests, Mainquests)
-    Enemies = TornaEnemies.AdjustEnemyRequirements(Sidequests, Mainquests, Areas, ProgressionLocTypes[2])
+    global MaxDropTableID
+    Enemies, MaxDropTableID = TornaEnemies.AdjustEnemyRequirements(Sidequests, Mainquests, Areas, ProgressionLocTypes[2])
     Shops = TornaShops.CreateShopInfo(Mainquests, Areas, ProgressionLocTypes[4])
     RedBags = TornaRedBagItems.CreateRedBagInfo(Mainquests, Areas, ProgressionLocTypes[5])
     MiscItems = TornaMiscItems.CreateMiscItems(Mainquests, Areas, ProgressionLocTypes[4]) # for now, is on if shops are on
@@ -286,7 +288,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
                     if loc.randomizeditems[item] == -1:
                         loc.randomizeditems[item] = 0
                         print(f"name: {loc.name}, type: {loc.type}")
-    pass
+    PutItemsInSpots(Locs)
 
 def DetermineValidItemSpots(ChosenItem, ChosenItemCat, CatList, CurrentStoryStep = -1): # certain item types cannot coexist with certain location types. collectible items cannot be put as quest rewards, since there is no renewable source of them in case the player uses them all up, for instance.
     ValidItemSpots = []
@@ -353,3 +355,213 @@ def AdjustLevelUpReqs(MinLogicalLevel):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def PutItemsInSpots(Locs): # now we actually feed the items into their corresponding pipelines in the bdats
+    
+    # sidequests
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", ["EXP", "ItemID1", "ItemNumber1", "ItemID2", "ItemNumber2", "ItemID3", "ItemNumber3", "ItemID4", "ItemNumber4"], 0)
+    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for sidequest in Locs[0]:
+            for rewardid in sidequest.rewardids: # currently only one quest has multiple reward ids, but they all need to have the same ending rewards.
+                for row in data["rows"]:
+                    if row["$id"] == rewardid:
+                        for i in range(4):
+                            row[f"ItemID{i+1}"] = sidequest.randomizeditems[i]
+                            row[f"ItemNumber{i+1}"] = 1
+                        break      
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+    # enemy drops    
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", Helper.ExtendListtoLength(["ItemID1", "DropProb1", "NoGetByEnh1", "FirstNamed1"], 32, "inputlist[i-4][:-1] +  str(int(inputlist[i-4][-1:])+1)"), 0)
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", ["DropProb1"], 100) # the first loot item in each row has a 100% chance to drop every time.
+    MaxEnemyLootID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", "$id")
+    if MaxDropTableID > MaxEnemyLootID: # need to add a row to BTL_EnDropItem for each regular loot drop 
+        NewLootIDRows = []
+        for tableid in range(MaxEnemyLootID + 1, MaxDropTableID + 1):
+            NewLootIDRows.append([{"$id": tableid, "LimitNum": 0, "SelectType": 0, "ItemID1": 0, "DropProb1": 0, "NoGetByEnh1": 0, "FirstNamed1": 0, "ItemID2": 0, "DropProb2": 0, "NoGetByEnh2": 0, "FirstNamed2": 0, "ItemID3": 0, "DropProb3": 0, "NoGetByEnh3": 0, "FirstNamed3": 0, "ItemID4": 0, "DropProb4": 0, "NoGetByEnh4": 0, "FirstNamed4": 0, "ItemID5": 0, "DropProb5": 0, "NoGetByEnh5": 0, "FirstNamed5": 0, "ItemID6": 0, "DropProb6": 0, "NoGetByEnh6": 0, "FirstNamed6": 0, "ItemID7": 0, "DropProb7": 0, "NoGetByEnh7": 0, "FirstNamed7": 0, "ItemID8": 0, "DropProb8": 0, "NoGetByEnh8": 0, "FirstNamed8": 0}])
+        JSONParser.ExtendJSONFile("common/BTL_EnDropItem.json", NewLootIDRows)
+    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for enemytype in range(1, 5):
+            for enemy in Locs[enemytype]:
+                for row in data["rows"]:
+                    if row["$id"] == enemy.id:
+                        row["DropTableID"] = enemy.droptableids[0]
+                        row["DropTableID2"] = enemy.droptableids[1]
+                        #row["DropTableID3"] = enemy.droptableids[2] # this should always be 0, but in case I decide to change the future behavior
+                        row["PreciousID"] = enemy.randomizeditems[3] # the precious id just gets the id itself plugged in here
+                        break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False) 
+    with open("./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for enemytype in range(1, 5):
+            for enemy in Locs[enemytype]:
+                for row in data["rows"]:
+                    if row["$id"] in enemy.droptableids:
+                        if row["$id"] == enemy.droptableids[0]:
+                            row["ItemID1"] = enemy.randomizeditems[0]
+                            break
+                        if row["$id"] == enemy.droptableids[1]:
+                            row["ItemID1"] = enemy.randomizeditems[1]
+                            break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    
+    # shops
+    with open("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # alters the NpcPop file to make the bards call different Event IDs and different Shop IDs
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 40660:
+                row["Condition"] = 0
+                row["EventID"] = 40339
+                row["ShopID"] = 67
+            if row["$id"] == 40662:
+                row["Condition"] = 0
+                row["EventID"] = 40442
+                row["ShopID"] = 68      
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopList.json", 'r+', encoding='utf-8') as file: # Changing ShopList
+        data = json.load(file)
+        for shop in Locs[5]:
+            for row in data["rows"]:
+                if row["$id"] == shop.shoplistid:
+                    row["ShopType"] = 0 # need to convert all shops to Normal shops if they aren't already
+                    row["TableID"] = shop.shopnormalid
+                    for i in range(1,6):
+                        row[f"Discount{i}"] = 0
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as file: # Adding items to ShopNormal
+        data = json.load(file)
+        for shop in Locs[5]:
+            for row in data["rows"]:
+                if row["$id"] == shop.shopnormalid:
+                    for key, value in row.items(): # clear out the other stuff in the row
+                        if key != "$id":
+                            row[key] = 0
+                    for defnum in range(0, 10):
+                        row[f"DefItem{defnum + 1}"] = shop.randomizeditems[defnum]
+                    for addtemnum in range(10, 15):
+                        row[f"Addtem{addtemnum - 9}"] = shop.randomizeditems[addtemnum]
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    
+    # redbags
+    with open("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_PreciousPopList.json", 'r+', encoding='utf-8') as file: # adding the redbag items
+        data = json.load(file)
+        for redbag in Locs[6]:
+            for row in data["rows"]:
+                if row["$id"] == redbag.id:
+                    row["QuestFlag"], row["QuestFlagMin"], row["QuestFlagMax"] = 0, 0, 0
+                    row["itmID"] = redbag.randomizeditems[0]
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    
+    # misc
+    with open("./XC2/_internal/JsonOutputs/common/FLD_AddItem.json", 'r+', encoding='utf-8') as file: # adding the misc items
+        data = json.load(file)
+        for miscitem in Locs[7]:
+            for row in data["rows"]:
+                if row["$id"] == miscitem.fldadditemid:
+                    row["ItemID1"] = miscitem.randomizeditems[0]
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+    # chests
+    with open("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", 'r+', encoding='utf-8') as fileT: # Torna chests
+        dataT = json.load(fileT)
+        with open("./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_TboxPop.json", 'r+', encoding='utf-8') as fileG: # Gormott chests
+            dataG = json.load(fileG)
+            for chest in Locs[8]:
+                if chest.continent == "Torna":
+                    for rowT in dataT["rows"]:
+                        if rowT["$id"] == chest.id:
+                            for i in range(1, 8):
+                                rowT[f"itm{i}ID"] = chest.randomizeditems[i-1]
+                                rowT[f"itm{i}Num"] = 1
+                                rowT[f"itm{i}Per"] = 100
+                            break
+                else:
+                    for rowG in dataG["rows"]:
+                        if rowG["$id"] == chest.id:
+                            for i in range(1, 8):
+                                rowG[f"itm{i}ID"] = chest.randomizeditems[i-1]
+                                rowG[f"itm{i}Num"] = 1
+                                rowG[f"itm{i}Per"] = 100
+                            break
+            fileG.seek(0)
+            fileG.truncate()
+            json.dump(dataG, fileG, indent=2, ensure_ascii=False)
+        fileT.seek(0)
+        fileT.truncate()
+        json.dump(dataT, fileT, indent=2, ensure_ascii=False)
+    
+    # collectionpoints
+    with open("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as file: # Torna collection points
+        data = json.load(file)
+        for collectionpoint in Locs[9]:
+            for row in data["rows"]:
+                if row["$id"] == collectionpoint.id:
+                    row["POP_TIME"] = 256
+                    row["popWeather"] = 0
+                    row["CollectionTable"] = collectionpoint.collectiontableid
+                    if row["Condition"] not in [3230, 3231]: # we only care about the gold and silver seeker conditions
+                        row["Condition"] = 0
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+       
+    with open("./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as file: # Gormott collection points
+        data = json.load(file)
+        for collectionpoint in Locs[10]:
+            for row in data["rows"]:
+                if row["$id"] == collectionpoint.id:
+                    row["POP_TIME"] = 256
+                    row["popWeather"] = 0
+                    row["CollectionTable"] = collectionpoint.collectiontableid
+                    if row["Condition"] not in [3230, 3231]: # we only care about the gold and silver seeker conditions
+                        row["Condition"] = 0
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    
+    DesiredMaxCollectionTableID = 501 # known, will always be the case, 1 collection point -> 1 collection table
+    CurMaxCollectionTableID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_CollectionTable.json", "$id")
+    NewCollectionTableRows = []
+    for i in range(CurMaxCollectionTableID + 1, DesiredMaxCollectionTableID + 1):
+        NewCollectionTableRows.append([{"$id": i, "FSID": 0, "randitmPopMin": 0, "randitmPopMax": 0, "itm1ID": 0, "itm1Per": 0, "itm2ID": 0, "itm2Per": 0, "itm3ID": 0, "itm3Per": 0, "itm4ID": 0, "itm4Per": 0, "goldMin": 0, "goldMax": 0, "goldPopMin": 0, "goldPopMax": 0, "rsc_paramID": 0, "categoryName": 0, "ZoneID": 0}])
+    JSONParser.ExtendJSONFile("common/FLD_CollectionTable.json", NewCollectionTableRows)
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_CollectionTable.json", ["randitmPopMin", "randitmPopMax"], 10)
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_CollectionTable.json", ["itm1Per", "itm2Per", "itm3Per", "itm4Per"], 100)
+    with open("./XC2/_internal/JsonOutputs/common/FLD_CollectionTable.json", 'r+', encoding='utf-8') as file: # collection table file
+        data = json.load(file)
+        for i in range(9, 11):
+            for collectionpoint in Locs[i]:
+                for row in data["rows"]:
+                    if row["$id"] == collectionpoint.collectiontableid:
+                        row["FSID"] = random.choice(Helper.InclRange(68, 72)) # add a bonus for a random field skill
+                        for item in range(1, 5):
+                            row[f"itm{item}ID"] = collectionpoint.randomizeditems[item-1]
+                        break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    pass

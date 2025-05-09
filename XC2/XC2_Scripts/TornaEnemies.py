@@ -8,7 +8,7 @@ from IDs import *
 # some quest enemies are missable by alternate routes for the quests. they shouldn't have drops at all then, tbh.
 
 class TornaEnemyNormalDrops: # created to allow me to pass these objects easier
-    def __init__(self, input, addtolist, rewardnumber):
+    def __init__(self, input, addtolist, rewardnumber, EnemyDropCounter):
         self.id = input["$id"]
         self.name = input["Name"]
         self.nearloc = input['Location Near']
@@ -18,8 +18,8 @@ class TornaEnemyNormalDrops: # created to allow me to pass these objects easier
         self.sideprereq = input['Quest Completion Pre-Req']
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Required Items'])
         self.summonedby = input['Summoned By']
-        self.droptableids = input['Enemy Drop Table IDs']
-        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 3, "0"), 4, "-1") # holds ids, -1 for progression, 0 for filler spots
+        self.droptableids = [EnemyDropCounter, EnemyDropCounter + 1]
+        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 3, "0") # holds ids, -1 for progression, 0 for filler spots
         if rewardnumber > 0:
             self.hasprogression = True
             self.randomizeditems = Helper.ExtendListtoLength(self.randomizeditems, 4, "-1")
@@ -2359,13 +2359,16 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Enemy Drop Table IDs': [480]
     }
 
+    EnemyDropCounter = 1
+
     TornaEnemyDict = [RagingVolff, JubelFeris, CursedBuloofoA, GargoyleA, Addam, Mythra, Brighid, ArdainianScoutA, ArdainianScoutB, GortA, AntipatheticArchibald, ScurvyCurtis, InsufferableUlysses, SlitheJagronA, SlitheJagronB, MalosA, GargoyleD, ArtificeColossus, MalosB, MalosC, GortB, ArtificeSirenA, ArtificeSirenB, CursedBuloofoB, VanadiumTirkin, SorgusTirkin, LeractGogol, HewliGogol, MarrithAntol, IncubFlier, PradoCaterpile, AppetBrog, DurallBuloofo, InnocentVolff, LoweBlant, TizzaParisax, IndignantJerry, GraftonFeris, ConspiratorMacNeth, WanderingUrchon, WanderingRopl, WanderingLaia, TimidVolff, PickerBuloofo, ElegiacMercenary, HalcyonMercenary, ChatteringSkeeter, TacitusUrchon, GloomyAspar, WhistlingBathein, PreoccupiedGogol, TenaxEkidno, CalculatingGogol, ElectGogol, CloudArachno, DispareRopl, CreefGriffox, EvokeBunnit, ForayBunnit, NoggleBunnit, PinchBunnit, FirmVolff, GeminiVolff, EspinaFeris, LekutFeris, RinkerEks, DominalFlamii, IngleCamill, GrayBuloofo, ImbaLizard, CelsarsTaos, DreadCaterpileSummon, KanooSkwaror, DreadCaterpileNormal, MyrrhesCrustip, ArrahRhogul, BohnQuadwing, HighbohnQuadwing, LapisVang, ErsSkeeter, AstorFlier, CascadeKrabble, KastKrabble, ReedPiranhax, MaramalPiranhax, KeatTirkin, GradsTirkin, VabraTirkin, EpistoTirkin, DerrahTirkin, XanePippito, CooraNest, GneoRopl, FersGrebel, HighscreebQuadwing, ScriboQuadwing, HerculeanGibson, HurricaneAnise, MesmerTlaloc, SentinelCarpathia, RavineBunnit, ErraticGoliante, HandwringingBigelow, OveraffectionateMurph, SpillitUrchon, ApostleRhogul, SteekyHox, RalshVolff, SowlFeris, UrbsArmuA, AureaArdun, SladeEks, LibelteFlamii, LefthFlamii, MarnaGaraffa, NemusCamill, AstleEllook, FaneBuloofo, VokkonGriffox, TelahRiik, WhispUpa, BebthUpa, OoneEkidno, ClocheRapchor, NobleAspar, TretsAspar, SurveeAntol, GreetzAntol, CheltaCaterpileLasaria, CaliberScorpox, ZafirahCrustip, YouseParisax, UisParisax, LegginParisax, BurranGyanna, SalshRhogul, TonbreRhogul, AnbuVang, LapseFlier, KlaretWisp, RegusMoramora, TwondusAspid, PhantomMedooz, BiblisPuffot, RobalKrabble, RibageGrady, SarchessGrady, LegarreMarrin, ArloKapiba, RooseBlant, DrothUrchon, TeppusPippito, ArcahPippito, TyphonTirkin, GratTirkin, CardineTirkin, ParoleTirkin, SomeliaNest, PsitEgg, VictorTotem, GargoyleB, GargoyleC, VenttsRopl, KnooberPod, AveroTirkin, SorolleArmu, MagraQuadwing, NightMagraQuadwing, LegiaFlier, SordisRhogul, TalesRapchor, AwarthScorpox, DakhimTirkin, TsorridTirkin, PallovTirkin, GlorrTotem, NereusQuadwing, SableVolff, GobeenGogol, DormineBrog, GrohlPlambus, CheltaCaterpileDannagh, LunarAmaruq, BeatificOphelia, NomadicRusholme, IonosphericMitchell, InterceptorGrace, GourmandGalgan, SleepwalkerMork, HarbingerCavill, SequesteredLudd, EverdarkErg, FlyingFortressDesmor, ScowlingQuincy]
     
     global TornaEnemies
     TornaEnemies = []
 
     for enemy in TornaEnemyDict:
-        TornaEnemyNormalDrops(enemy, TornaEnemies, DropQty)
+        TornaEnemyNormalDrops(enemy, TornaEnemies, DropQty, EnemyDropCounter)
+        EnemyDropCounter += 2
 
     # adding back other requirements
 
@@ -2407,5 +2410,5 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         enemy.itemreqs = list(set(enemy.itemreqs))
         enemy.itemreqs.sort()
 
-    return TornaEnemies
+    return TornaEnemies, EnemyDropCounter
 

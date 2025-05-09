@@ -15,7 +15,7 @@ class TornaShop: # created to allow me to pass these objects easier
         self.mainreq = input['Story Pre-Req']
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Required Items'])
         self.talkeventid = input['Talk Event ID']
-        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 16, "0") # holds shop item ids, -1 for progression, 0 for filler spots
+        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 15, "0") # holds shop item ids, -1 for progression, 0 for filler spots
         self.type = "shop"
         if rewardnumber > 0:
             self.hasprogression = True
@@ -142,4 +142,5 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
             if shop.nearloc == area.id:
                 shop.itemreqs.extend(area.itemreqs)
                 break
+            
     return TornaShops
