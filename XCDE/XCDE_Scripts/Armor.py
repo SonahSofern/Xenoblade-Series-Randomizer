@@ -77,7 +77,8 @@ def GearAppearance():
         eqData = json.load(equipFile)
         isCrazy = Options.EquipmentOption_CrazyAppearance.GetState()
         invalidArmor = [190]
-        dontReplace = [1,2,3,4,5,6,7,212,8,9,10,4,4,332,336,328]
+        # dontReplace = [1,2,3,4,5,6,7,212,8,9,10,4,4,332,336,328]
+        dontReplace = [1,2,3,4,5] 
         fioraDrones = Helper.InclRange(168,189) + [198,205,212,255,256]
         # Nested lists
         armorList = [[[] for _ in range(16)] for _ in range(6)]

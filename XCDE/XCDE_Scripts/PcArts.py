@@ -61,8 +61,8 @@ def RemakeArtList():
         artData = json.load(artFile)
         isDupes = Options.PlayerArtsOption_Duplicates.GetState()
         
-        badReplacementArts = PonspectorDLCArts + GuestArts + DunbanMonadoArts 
-        badReplacedArts =  PonspectorDLCArts + GuestArts + DunbanMonadoArts + TalentArts
+        badReplacementArts = PonspectorDLCArts + GuestArts + DunbanMonadoArts + DLCArts
+        badReplacedArts =  PonspectorDLCArts + GuestArts + DunbanMonadoArts + TalentArts + DLCArts
         artList = []
         keyList = ["name", "pc", "cast", "recast", "tp", "dex", "rate1", "rate2", "arts_type", "atk_type", "chain_type", "elem", "dmg_type", "dmg_time", "tgt", "range_type", "range", "range_val", "hate", "flag", "st_type", "st_val", "st_val2", "st_time", "st_itv", "sp_cnd", "sp_proc", "sp_val1", "sp_val2", "kb_type", "kb_lv", "grow_powl", "grow_powh", "grow_st_time", "grow_st_val", "glow_recast", "icon", "icon_base", "act_idx", "idx", "list_idx", "get_type", "get_lv", "melia_lv", "melia_slot_idx", "help"]
         
