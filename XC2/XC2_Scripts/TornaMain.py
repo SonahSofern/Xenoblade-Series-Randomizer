@@ -8,15 +8,12 @@ import copy
 
 # make each slate piece worth the same amount of points (1), and make the requirements be 5, 10, 16. 
 # This can be done by changing FLD_ConditionFlags 1445, 1446, 1447 to the respective values. Also change 1401 to 16 for min and max.
-# need to change the required weather and time requirements for all collection points, to make them accessible at any time, except for the ones with seeker requirements or miasma requirements
 # need to remove script that removes aegaeon and hugo in early aletta
 # need to set up the unlock keys
 # need to make SP costs for upgrades much cheaper
-# remove all quest, weather, and time requirements for all chests, to make them accessible at any time
 # remove the npc talking options for all npc quests that are not logically chosen for the playthrough. This lets you place their required items anywhere. This causes issues with items from chests, the chests currently aren't tied to a quest, just an enemy
 # Change Quest Point Shops to require only 1 item total, only the logically chosen item, and it gives 1 point. Change the point requirement for said shop to also be 1.
 # need to add a shop for the level up tokens
-# need to add the names, descriptions, sell prices of key items that I add
 
 class ItemInfo:
     def __init__(self, inputid, category, addtolist):
@@ -30,6 +27,15 @@ class LocationCategory:
         self.isprogresscategory = progbool # can the category have progression
         self.fullloclist = fulllocs # what is the full list of locations that belong in this category
         self.remlocations = fulllocs.copy() # what is the remaining list of locations that haven't been used yet
+
+class KeyItemParams:
+    def __init__(self, name, caption, nameid, captionid, preciousid, addtolist):
+        self.name = name
+        self.nameid = nameid
+        self.caption = caption
+        self.captionid = captionid
+        self.preciousid = preciousid
+        addtolist.append(self)
 
 def AllTornaRando():
     DetermineSettings()
@@ -52,6 +58,7 @@ def AllTornaRando():
     FullItemList = CreateItemLists()
     NormalEnemies, QuestEnemies, Bosses, UniqueMonsters = SplitEnemyTypes(Enemies)
     PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, Areas, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList)
+    AddMissingKeyItems()
     pass
 
 def DetermineSettings():
@@ -356,8 +363,8 @@ def AdjustLevelUpReqs(MinLogicalLevel):
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def PutItemsInSpots(Locs): # now we actually feed the items into their corresponding pipelines in the bdats
-    
+def PutItemsInSpots(Locs2): # now we actually feed the items into their corresponding pipelines in the bdats
+    Locs = ConsolidateLevelUpTokens(Locs2)
     # sidequests
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", ["EXP", "ItemID1", "ItemNumber1", "ItemID2", "ItemNumber2", "ItemID3", "ItemNumber3", "ItemID4", "ItemNumber4"], 0)
     with open("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file:
@@ -564,4 +571,28 @@ def PutItemsInSpots(Locs): # now we actually feed the items into their correspon
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    pass
+
+def ConsolidateLevelUpTokens(Locs): # need to now remove all level up tokens and replace them with 1 singular level up token, so the shop will only require 1 input trade.
+    for cat in Locs:
+        for loc in cat:
+            for req in range(len(loc.itemreqs)):
+                if loc.itemreqs[req] in LevelUpTokens:
+                    loc.itemreqs[req] = 25631
+    return Locs
+
+def AddMissingKeyItems():
+    NewDescID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
+    KeyItemNames = ["Mineralogy Lv. 1 Unlock", "Mineralogy Lv. 2 Unlock", "Mineralogy Lv. 3 Unlock", "Swordplay Lv. 1 Unlock", "Swordplay Lv. 2 Unlock", "Swordplay Lv. 3 Unlock", "Fortitude Lv. 1 Unlock", "Fortitude Lv. 2 Unlock", "Fortitude Lv. 3 Unlock", "Forestry Lv. 1 Unlock", "Forestry Lv. 2 Unlock", "Forestry Lv. 3 Unlock", "Manipulate Ether Lv. 1 Unlock", "Manipulate Ether Lv. 2 Unlock", "Manipulate Ether Lv. 3 Unlock", "Keen Eye Lv. 1 Unlock", "Keen Eye Lv. 2 Unlock", "Keen Eye Lv. 3 Unlock", "Focus Lv. 1 Unlock", "Focus Lv. 2 Unlock", "Focus Lv. 3 Unlock", "Power of Light Lv. 1 Unlock", "Power of Light Lv. 2 Unlock", "Power of Light Lv. 3 Unlock", "Girls' Talk Unlock", "Entomology Lv. 1 Unlock", "Entomology Lv. 2 Unlock", "Entomology Lv. 3 Unlock", "Mining Lv. 1 Unlock", "Mining Lv. 2 Unlock", "Mining Lv. 3 Unlock", "Botany Lv. 1 Unlock", "Botany Lv. 2 Unlock", "Botany Lv. 3 Unlock", "Lockpick Lv. 1 Unlock", "Lockpick Lv. 2 Unlock", "Lockpick Lv. 3 Unlock", "Icthyology Lv. 1 Unlock", "Icthyology Lv. 2 Unlock", "Icthyology Lv. 3 Unlock", "Command Water Lv. 1 Unlock", "Command Water Lv. 2 Unlock", "Command Water Lv. 3 Unlock", "Superstrength Lv. 1 Unlock", "Superstrength Lv. 2 Unlock", "Superstrength Lv. 3 Unlock", "Aletta Garrison Camp Unlock", "Coolley Lake Camp Unlock", "Dannagh Desert Camp Unlock", "Feltley Village Camp Unlock", "Hidden Hunting Camp Unlock", "Hoary Weald Camp Unlock", "Holy Gate Camp Unlock", "Lakeshore Campsite Unlock", "Olnard's Trail Campsite Unlock", "Porton Village Camp Unlock", "Jin Affinity Lv. 2 Unlock", "Jin Affinity Lv. 3 Unlock", "Jin Affinity Lv. 4 Unlock", "Jin Affinity Lv. 5 Unlock", "Haze Affinity Lv. 2 Unlock", "Haze Affinity Lv. 3 Unlock", "Haze Affinity Lv. 4 Unlock", "Haze Affinity Lv. 5 Unlock", "Mythra Affinity Lv. 2 Unlock", "Mythra Affinity Lv. 3 Unlock", "Mythra Affinity Lv. 4 Unlock", "Mythra Affinity Lv. 5 Unlock", "Minoth Affinity Lv. 2 Unlock", "Minoth Affinity Lv. 3 Unlock", "Minoth Affinity Lv. 4 Unlock", "Minoth Affinity Lv. 5 Unlock", "Brighid Affinity Lv. 2 Unlock", "Brighid Affinity Lv. 3 Unlock", "Brighid Affinity Lv. 4 Unlock", "Brighid Affinity Lv. 5 Unlock", "Aegaeon Affinity Lv. 2 Unlock", "Aegaeon Affinity Lv. 3 Unlock", "Aegaeon Affinity Lv. 4 Unlock", "Aegaeon Affinity Lv. 5 Unlock", "Haze Unlock Key", "Addam Unlock Key", "Mythra Unlock Key", "Minoth Unlock Key", "Hugo Unlock Key", "Brighid Unlock Key", "Aegaeon Unlock Key", "Level Up Token"]
+    KeyItemDescriptions = ["Unlocks the Mineralogy Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Mineralogy Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Mineralogy Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Swordplay Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Swordplay Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Swordplay Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Fortitude Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Fortitude Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Fortitude Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Forestry Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Forestry Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Forestry Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Manipulate Ether Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Manipulate Ether Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Manipulate Ether Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Keen Eye Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Keen Eye Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Keen Eye Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Focus Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Focus Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Focus Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Power of Light Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Power of Light Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Power of Light Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Girls' Talk Field Skill when the correct trust level is reached for that blade.", "Unlocks the Entomology Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Entomology Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Entomology Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Mining Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Mining Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Mining Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Botany Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Botany Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Botany Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Lockpick Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Lockpick Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Lockpick Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Icthyology Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Icthyology Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Icthyology Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Command Water Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Command Water Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Command Water Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Superstrength Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Superstrength Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Superstrength Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the ability to rest at the Aletta Garrison Campsite.", "Unlocks the ability to rest at the Coolley Lake Campsite.", "Unlocks the ability to rest at the Dannagh Desert Campsite.", "Unlocks the ability to rest at the Feltley Village Campsite.", "Unlocks the ability to rest at the Hidden Hunting Campsite.", "Unlocks the ability to rest at the Hoary Weald Campsite.", "Unlocks the ability to rest at the Holy Gate Campsite.", "Unlocks the ability to rest at the Lakeshore Campsite.", "Unlocks the ability to rest at the Olnard's Trail Campsite.", "Unlocks the ability to rest at the Porton Village Campsite.", "Unlocks Level 2 of Jin's Affinity Chart.", "Unlocks Level 3 of Jin's Affinity Chart.", "Unlocks Level 4 of Jin's Affinity Chart.", "Unlocks Level 5 of Jin's Affinity Chart.", "Unlocks Level 2 of Haze's Affinity Chart.", "Unlocks Level 3 of Haze's Affinity Chart.", "Unlocks Level 4 of Haze's Affinity Chart.", "Unlocks Level 5 of Haze's Affinity Chart.", "Unlocks Level 2 of Mythra's Affinity Chart.", "Unlocks Level 3 of Mythra's Affinity Chart.", "Unlocks Level 4 of Mythra's Affinity Chart.", "Unlocks Level 5 of Mythra's Affinity Chart.", "Unlocks Level 2 of Minoth's Affinity Chart.", "Unlocks Level 3 of Minoth's Affinity Chart.", "Unlocks Level 4 of Minoth's Affinity Chart.", "Unlocks Level 5 of Minoth's Affinity Chart.", "Unlocks Level 2 of Brighid's Affinity Chart.", "Unlocks Level 3 of Brighid's Affinity Chart.", "Unlocks Level 4 of Brighid's Affinity Chart.", "Unlocks Level 5 of Brighid's Affinity Chart.", "Unlocks Level 2 of Aegaeon's Affinity Chart.", "Unlocks Level 3 of Aegaeon's Affinity Chart.", "Unlocks Level 4 of Aegaeon's Affinity Chart.", "Unlocks Level 5 of Aegaeon's Affinity Chart.", 'Unlocks the ability to add Haze to your party.', 'Unlocks the ability to add Addam to your party.', 'Unlocks the ability to add Mythra to your party.', 'Unlocks the ability to add Minoth to your party.', 'Unlocks the ability to add Hugo to your party.', 'Unlocks the ability to add Brighid to your party.', 'Unlocks the ability to add Aegaeon to your party.', "Can be exchanged for 1 level's worth of EXP at the Token Exchange."]
+    KeyItemPreciousIDs = [25544, 25545, 25546, 25547, 25548, 25549, 25550, 25551, 25552, 25553, 25554, 25555, 25556, 25557, 25558, 25559, 25560, 25561, 25562, 25563, 25564, 25565, 25566, 25567, 25568, 25569, 25570, 25571, 25572, 25573, 25574, 25575, 25576, 25577, 25578, 25579, 25580, 25581, 25582, 25583, 25584, 25585, 25586, 25587, 25588, 25589, 25590, 25591, 25592, 25593, 25594, 25595, 25596, 25597, 25598, 25599, 25600, 25601, 25602, 25603, 25604, 25605, 25606, 25607, 25608, 25609, 25610, 25611, 25612, 25613, 25614, 25615, 25616, 25617, 25618, 25619, 25620, 25621, 25622, 25623, 25624, 25625, 25626, 25627, 25628, 25629, 25630, 25631]
+    KeyItemList = []
+    for name in range(len(KeyItemNames)):
+        KeyItemParams(f"{KeyItemNames[name]}",f"{KeyItemDescriptions[name]}", NewDescID, NewDescID + 1, KeyItemPreciousIDs[name], KeyItemList)
+        NewDescID += 2
+    NewPreciousListItems, NewDescList = [], []
+    for item in KeyItemList:
+        NewPreciousListItems.append([{"$id": item.preciousid, "Name": item.nameid, "Caption": item.captionid, "Category": 29, "Type": 0, "Price": 0, "ValueMax": 1, "ClearNewGame": 1, "NoMultiple": 0, "sortJP": item.preciousid, "sortGE": item.preciousid, "sortFR": item.preciousid, "sortSP": item.preciousid, "sortIT": item.preciousid, "sortGB": item.preciousid, "sortCN": item.preciousid, "sortTW": item.preciousid, "sortKR": item.preciousid}])
+        NewDescList.append([{"$id": item.nameid, "style": 36, "name": item.name}])
+        NewDescList.append([{"$id": item.captionid, "style": 61, "name": item.caption}])
+    JSONParser.ExtendJSONFile("common/ITM_PreciousList.json", NewPreciousListItems)
+    JSONParser.ExtendJSONFile("common_ms/itm_precious.json", NewDescList)

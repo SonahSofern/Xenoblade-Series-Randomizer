@@ -210,49 +210,49 @@ TornaQuestEnemyIDs = [1455, 1456, 1457, 1458, 1459, 1460, 1461, 1462, 1463, 1464
 # Field Skill Unlocks
 MineralogyKey = Helper.InclRange(25544,25546)
 SwordplayKey = Helper.InclRange(25547,25549)
-FortitudeKey = Helper.InclRange(25550,25551)
-ForestryKey = Helper.InclRange(25552,25554)
-ManipEtherKey = Helper.InclRange(25555,25557)
-KeenEyeKey = Helper.InclRange(25558,25560)
-FocusKey = Helper.InclRange(25561,25563)
-LightKey = Helper.InclRange(25564,25566)
-GirlsTalkKey = [25567]
-EntomologyKey = Helper.InclRange(25568,25570)
-MiningKey = Helper.InclRange(25571,25573)
-BotanyKey = Helper.InclRange(25574,25576)
-LockpickKey = Helper.InclRange(25577,25579)
-IcthyologyKey = Helper.InclRange(25580,25582)
-ComWaterKey = Helper.InclRange(25583,25585)
-SuperstrKey = Helper.InclRange(25586,25588)
+FortitudeKey = Helper.InclRange(25550,25552)
+ForestryKey = Helper.InclRange(25553,25555)
+ManipEtherKey = Helper.InclRange(25556,25558)
+KeenEyeKey = Helper.InclRange(25559,25561)
+FocusKey = Helper.InclRange(25562,25564)
+LightKey = Helper.InclRange(25565,25567)
+GirlsTalkKey = [25568]
+EntomologyKey = Helper.InclRange(25569,25571)
+MiningKey = Helper.InclRange(25572,25574)
+BotanyKey = Helper.InclRange(25575,25577)
+LockpickKey = Helper.InclRange(25578,25580)
+IcthyologyKey = Helper.InclRange(25581,25583)
+ComWaterKey = Helper.InclRange(25584,25586)
+SuperstrKey = Helper.InclRange(25587,25589)
 
 # Campsite Unlocks
-HHC_Key = [25589]
-LC_Key = [25590]
-CLC_Key = [25591]
-HWC_Key = [25592]
-PVC_Key = [25593]
-FVC_Key = [25594]
-AGC_Key = [25595]
-OTC_Key = [25596]
-DDC_Key = [25597]
-HGC_Key = [25598]
+HHC_Key = [25590]
+LC_Key = [25591]
+CLC_Key = [25592]
+HWC_Key = [25593]
+PVC_Key = [25594]
+FVC_Key = [25595]
+AGC_Key = [25596]
+OTC_Key = [25597]
+DDC_Key = [25598]
+HGC_Key = [25599]
 
 # Affinity Level Unlocks
-JinAff = Helper.InclRange(25599,25602)
-HazeAff = Helper.InclRange(25603,25606)
-MythraAff = Helper.InclRange(25607,25610)
-MinothAff = Helper.InclRange(25611,25614)
-BrighidAff = Helper.InclRange(25615,25618)
-AegaeonAff = Helper.InclRange(25619,25622)
+JinAff = Helper.InclRange(25600,25603)
+HazeAff = Helper.InclRange(25604,25607)
+MythraAff = Helper.InclRange(25608,25611)
+MinothAff = Helper.InclRange(25612,25615)
+BrighidAff = Helper.InclRange(25616,25619)
+AegaeonAff = Helper.InclRange(25620,25623)
 
 # Character Unlocks
-HazeKey = [25623]
-AddamKey = [25624]
-MythraKey = [25625]
-MinothKey = [25626]
-HugoKey = [25627]
-BrighidKey = [25628]
-AegaeonKey = [25629]
+HazeKey = [25624]
+AddamKey = [25625]
+MythraKey = [25626]
+MinothKey = [25627]
+HugoKey = [25628]
+BrighidKey = [25629]
+AegaeonKey = [25630]
 
 # Level Up Unlocks
-LevelUpTokens = Helper.InclRange(25630,25725) # 96 tokens, we assume we get 2 levels from intro fight (stats required to beat fight?), and start at lv 1.
+LevelUpTokens = Helper.InclRange(25631,25726) # 96 tokens, we assume we get 2 levels from intro fight (stats required to beat fight?), and start at lv 1.
