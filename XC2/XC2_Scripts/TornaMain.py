@@ -13,7 +13,8 @@ import copy
 # need to make SP costs for upgrades much cheaper
 # remove the npc talking options for all npc quests that are not logically chosen for the playthrough. This lets you place their required items anywhere. This causes issues with items from chests, the chests currently aren't tied to a quest, just an enemy
 # Change Quest Point Shops to require only 1 item total, only the logically chosen item, and it gives 1 point. Change the point requirement for said shop to also be 1.
-# need to add a shop for the level up tokens
+# need to add a shop for the level up tokens (maybe use Argentum?)
+# need to make the quest Unforgotten Promise only require 1 eternity loam, not 4, they're key items with the same id, so you can't make them a one-time reward, like from a boss drop, you need 4 in logic
 
 class ItemInfo:
     def __init__(self, inputid, category, addtolist):

@@ -3,8 +3,6 @@ import json
 import random
 from IDs import *
 
-# still need to alter the shops for the two bards. need to add one more custom shop that trades level tokens for exp.
-# need to altar the sidequest shops to make every item give the same amount of points, and make the max points needed 1, except for the slate piece shop
 
 class TornaShop: # created to allow me to pass these objects easier
     def __init__(self, input, addtolist, rewardnumber):

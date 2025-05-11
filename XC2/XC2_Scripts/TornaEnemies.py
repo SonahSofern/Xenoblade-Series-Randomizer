@@ -3,10 +3,6 @@ import json
 import random
 from IDs import *
 
-# still need to create 3 drop table ids if they don't already exist for an enemy, each with 100% chance for one item. If it rolls a precious id, just put it in precious items, then restrict that enemy from getting any more precious items, and leave one loot table blank.
-
-# some quest enemies are missable by alternate routes for the quests. they shouldn't have drops at all then, tbh.
-
 class TornaEnemyNormalDrops: # created to allow me to pass these objects easier
     def __init__(self, input, addtolist, rewardnumber, EnemyDropCounter):
         self.id = input["$id"]
