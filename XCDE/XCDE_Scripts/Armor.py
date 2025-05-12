@@ -5,11 +5,12 @@ def ArmorRando():
     isAppearance = Options.EquipmentOption_Appearance.GetState()
     isGemSlots = Options.EquipmentOption_GemSlots.GetState()
     isWeightClass = Options.EquipmentOption_WeightClass.GetState()
+    isCrazy = Options.EquipmentOption_CrazyAppearance.GetState()
     
     dontChange = [1,2,3,4,5]
     
-    if isAppearance:
-        GearAppearance()
+    if isAppearance or isCrazy:
+        GearAppearance(isCrazy)
    
     with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_equiplist.json", 'r+', encoding='utf-8') as armorFile:
         armData = json.load(armorFile)
@@ -72,10 +73,9 @@ def WeightClass(arm):
         arm["arm_type"] = random.choice(changeAbleTypes)
 
 
-def GearAppearance():
+def GearAppearance(isCrazy):
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ITM_equiplist.json", 'r+', encoding='utf-8') as equipFile:
         eqData = json.load(equipFile)
-        isCrazy = Options.EquipmentOption_CrazyAppearance.GetState()
         invalidArmor = [190]
         # dontReplace = [1,2,3,4,5,6,7,212,8,9,10,4,4,332,336,328]
         dontReplace = [1,2,3,4,5] 

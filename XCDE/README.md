@@ -46,8 +46,9 @@ If you have any issues come to the [discord](https://discord.gg/h93yqZHG8z) wher
 1. Use your emulator's built-in tool to perform a full dump of XCDE's RomFS.
 2. Inside the dump there should now be a folder named "bdat"; This is the folder that the randomizer program targets as the input folder. The output folder should be\
 FOR YUZU: C:/Users/yourName/AppData/Roaming/yuzu/load/0100FF500E34A000/Randomizer/romfs/bdat\
-FOR RYUJINX: C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/contents/0100FF500E34A000/romfs/bdat
-3. Choose your preferred settings, then use the randomizer program to randomize the contents of the game.
+FOR RYUJINX: C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/contents/0100FF500E34A000/romfs/bdat\
+> You will have to make the "Randomizer/romfs/bdat" folder path
+3. Choose your preferred settings, then use the randomizer program (.exe) to randomize the contents of the game.
 4. You should be ready to start playing!
 
 
