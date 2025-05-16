@@ -4,7 +4,8 @@ from scripts import GUISettings, SavedOptions
 import tkinter as tk
 import os
 OpenWindows = []
-def GenPopup(optionName, root, defaultFont, dir, interactAbles, game):
+
+def PresetsWindow(optionName, root, defaultFont, dir, interactAbles, game):
     defaultName = "Enter preset name.txt"
     # Check if a popup with the same title is already open
     for top in OpenWindows:
