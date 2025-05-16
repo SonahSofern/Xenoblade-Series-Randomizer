@@ -47,31 +47,38 @@ def LoadPresets(innerFrame, dir, interactables, game, top):
 
 def CreatePreset(filename, innerFrame, interactables, game, dir, top):
     # print("Created Preset")
-    pname = tk.StringVar(value=filename.replace(".txt", ""))
+    pnameVar = tk.StringVar(value=filename.replace(".txt", ""))
+    oldnameVar = tk.StringVar(value=pnameVar.get())
     presetFrame = ttk.Frame(innerFrame)
     presetFrame.pack(padx=3, pady=3)
-    garbList.append(pname) # Garbage collection strikes again
+    garbList.append(pnameVar) # Garbage collection strikes again
     
-    loadBtn = ttk.Button(presetFrame, text="Load", command=lambda: SavedOptions.loadData(interactables, f"{pname.get()}.txt", game))
+    loadBtn = ttk.Button(presetFrame, text="Load", command=lambda: SavedOptions.loadData(interactables, f"{pnameVar.get()}.txt", game))
     loadBtn.pack(side="left")
     
-    name = ttk.Entry(presetFrame, textvariable=pname)
-    name.bind("<KeyRelease>", lambda event, var=pname: RenamePreset(dir, var))
+    name = ttk.Entry(presetFrame, textvariable=pnameVar)
+    pnameVar.trace_add("write", lambda *args: OnNameChange(dir, pnameVar, oldnameVar))
     name.pack(side="left")
     
-    deleteBtn = ttk.Button(presetFrame, text=" X ", command=lambda preset=presetFrame: (DeletePreset(preset, pname), GUISettings.ResizeWindow(top, innerFrame, 20)))
+    deleteBtn = ttk.Button(presetFrame, text=" X ", command=lambda preset=presetFrame: (DeletePreset(preset, pnameVar, game), GUISettings.ResizeWindow(top, innerFrame, 20)))
     deleteBtn.pack(side="left")
     GUISettings.ResizeWindow(top, innerFrame, 20)
-    
+
+def OnNameChange(dir, var, oldnameVar):
+    RenamePreset(dir, var, oldnameVar)
+    UpdateOldName(oldnameVar, var)
+
+def UpdateOldName(old, curName):
+    old.set(curName.get())
     
 # Delete a Preset
-def DeletePreset(preset, file):
+def DeletePreset(preset, file, game):
     preset.destroy()
-    os.remove(f"XCDE/SaveData/{file.get()}.txt")
+    os.remove(f"{game}/SaveData/{file.get()}.txt")
     
     
 # Option to name preset
-def RenamePreset(dir,  strvar):
+def RenamePreset(dir,  strvar, oldVar):
+    full_path = os.path.join(dir, f"{oldVar.get()}.txt")
     os.rename(full_path, f"{dir}/{strvar.get()}.txt")
-    full_path = os.path.join(dir, f"{strvar.get()}.txt")
     # print(f"renamed to {strvar}")
