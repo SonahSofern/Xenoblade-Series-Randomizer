@@ -87,7 +87,7 @@ def RemakeArtList():
 
 # Setting that just shuffles arts
 def RandomizePcArts():
-    RemakeArtList()
+    # RemakeArtList()
     
     keepMeliaSummons = Options.PlayerArtsOption_Summons.GetState()
     isBalancedLv = Options.PlayerArtsOption_BalancedUnlockLevels.GetState()

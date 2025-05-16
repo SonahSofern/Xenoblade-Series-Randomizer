@@ -192,7 +192,7 @@ def TelethiaEarly(enemy, chosen:Enemy):
 
 # The first few fights can be really tough before cheering allies or any arts lets leave their stats vanilla
 def FirstFights(enemy):
-    EarlyFights = [32,33]
+    EarlyFights = [32, 33, 1501, 1502, 1503]
     if enemy["$id"] in EarlyFights:
         return True
     else:
@@ -262,7 +262,6 @@ def RingRemoval():
                 lock["popID2"] = 0
         JSONParser.CloseFile(lockData, lockFile)
         
-WeirdEnemiesTesting = [310,294,295,296,392]
         
 def EnemyDesc(categoryName):
     myDesc = PopupDescriptions.Description()
