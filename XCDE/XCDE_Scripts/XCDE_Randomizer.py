@@ -7,7 +7,7 @@ import tkinter as tk
 root = Tk()
 import Options, SeedNames, IDs
 import  os, sys, subprocess
-from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkManagement, UI_Colors, Seed, Interactables
+from scripts import SavedOptions, JSONParser, Helper, GUISettings, PermalinkManagement, UI_Colors, Seed, Interactables, SettingsPresets
 from tkinter.font import Font
 import tkinter as tk
 from scripts.GUISettings import *
@@ -150,7 +150,7 @@ permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame")
 permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth, textvariable=permalinkVar)
 CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
 permalinkVar.set(CompressedPermalink)
-permalinkButton = ttk.Button(permalinkFrame, text="Settings")
+permalinkButton = ttk.Button(permalinkFrame, text="Settings", command=lambda: SettingsPresets.GenPopup("Presets", root, defaultFont, "XCDE/SaveData", EntriesToSave + Interactables.OptionList, Game))
 permalinkFrame.pack(padx=10, pady=2, anchor="w")
 permalinkButton.pack(side="left", padx=2)
 permalinkEntry.pack(side='left', padx=2)

@@ -123,12 +123,7 @@ def GenPopup(optionName, descData, root, defaultFont):
         if hasFewHeaders: # If we have less than 3 headers go ahead and pack everything
             descObj.SpecialPack()
 
-    ResizeWindow(top, InnerFrame)
+    scripts.GUISettings.ResizeWindow(top, InnerFrame)
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
 
             
-def ResizeWindow(top, innerFrame):
-    innerFrame.update_idletasks()  # Ensure the geometry is up to date
-    w = innerFrame.winfo_width() + 37
-    h = min(innerFrame.winfo_height() + 20, 700)
-    top.geometry(f"{w}x{h}")

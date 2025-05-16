@@ -78,7 +78,6 @@ class Option():
             self.spinBoxLabel.grid(row=rowIncrement, column=3, sticky="w", padx=0)
 
 
-            pass
         for sub in self.subOptions:
             rowIncrement += 1
             sub.checkBoxVal = BooleanVar(value=sub.defState)
