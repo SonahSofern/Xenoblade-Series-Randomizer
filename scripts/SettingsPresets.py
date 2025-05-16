@@ -36,28 +36,30 @@ garbList = []
 
 def LoadPresets(innerFrame, dir, interactables, game):
     for filename in os.listdir(dir):
+        pname = tk.StringVar(value=filename.replace(".txt", ""))
         presetFrame = ttk.Frame(innerFrame)
         presetFrame.pack(padx=3, pady=3)
         
-        loadBtn = ttk.Button(presetFrame, text="Load", command=lambda: SavedOptions.loadData(interactables, filename, game))
+        loadBtn = ttk.Button(presetFrame, text="Load", command=lambda: SavedOptions.loadData(interactables, f"{pname.get()}.txt", game))
         loadBtn.pack(side="left")
         
-        pname = tk.StringVar(value=filename.replace(".txt", ""))
         name = ttk.Entry(presetFrame, textvariable=pname)
-        name.bind("<FocusOut>", RenamePreset(f"{dir}/{filename}", pname))
+        full_path = os.path.join(dir, filename)
+        name.bind("<FocusOut>", lambda event, path=full_path, var=pname: RenamePreset(path,dir, var.get()))
         name.pack(side="left")
         garbList.append(pname) # Garbage collection strikes again
         
-        deleteBtn = ttk.Button(presetFrame, text="Delete", command=lambda: DeletePreset(presetFrame, filename))
+        deleteBtn = ttk.Button(presetFrame, text="Delete", command=lambda preset=presetFrame: DeletePreset(preset, filename))
         deleteBtn.pack(side="left")
         
         # Save Current Settings as Preset Button
-        # Delete a Preset
-        # Option to name preset
 
+# Delete a Preset
 def DeletePreset(preset, file):
     preset.destroy()
     os.remove(f"XCDE/SaveData/{file}")
     
-def RenamePreset(file, strvar):
-    os.rename(file, strvar.get())
+# Option to name preset
+def RenamePreset(file,dir,  strvar, ):
+    os.rename(file, f"{dir}/{strvar}.txt")
+    print(f"renamed to {strvar}")

@@ -16,7 +16,7 @@ Game = "XCDE"
 Version = "1.0.0"
 JsonOutput = "./XCDE/_internal/JsonOutputs"
 
-SavedOptionsFileName = f"SavedOptionsv{Version}.txt"
+SavedOptionsFileName = f"LastSave.txt"
 if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
     isOnefile = True
 else:
