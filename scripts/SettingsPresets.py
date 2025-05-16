@@ -5,6 +5,7 @@ import tkinter as tk
 import os
 OpenWindows = []
 def GenPopup(optionName, root, defaultFont, dir, interactAbles, game):
+    defaultName = "Enter preset name.txt"
     # Check if a popup with the same title is already open
     for top in OpenWindows:
         if top.winfo_exists() and top.title() == optionName:
@@ -26,12 +27,11 @@ def GenPopup(optionName, root, defaultFont, dir, interactAbles, game):
     GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
     
-    saveasPresetBtn = ttk.Button(InnerFrame, text="Save Current Settings as Preset")
+    saveasPresetBtn = ttk.Button(InnerFrame, text="Save Current Settings as Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName ,game), CreatePreset(defaultName, InnerFrame, interactAbles, game, dir, top)))
     saveasPresetBtn.pack()
 
     
-    LoadPresets(InnerFrame, dir, interactAbles, game)
-    GUISettings.ResizeWindow(top, InnerFrame, 20)
+    LoadPresets(InnerFrame, dir, interactAbles, game, top)
 
 
     
@@ -39,34 +39,39 @@ def GenPopup(optionName, root, defaultFont, dir, interactAbles, game):
 
 garbList = []
 
-def LoadPresets(innerFrame, dir, interactables, game):
+def LoadPresets(innerFrame, dir, interactables, game, top):
     seperator = ttk.Label(innerFrame, text="--- Presets ---")
     seperator.pack()
     for filename in os.listdir(dir):
-        pname = tk.StringVar(value=filename.replace(".txt", ""))
-        presetFrame = ttk.Frame(innerFrame)
-        presetFrame.pack(padx=3, pady=3)
-        
-        loadBtn = ttk.Button(presetFrame, text="Load", command=lambda: SavedOptions.loadData(interactables, f"{pname.get()}.txt", game))
-        loadBtn.pack(side="left")
-        
-        name = ttk.Entry(presetFrame, textvariable=pname)
-        full_path = os.path.join(dir, filename)
-        name.bind("<FocusOut>", lambda event, path=full_path, var=pname: RenamePreset(path,dir, var.get()))
-        name.pack(side="left")
-        garbList.append(pname) # Garbage collection strikes again
-        
-        deleteBtn = ttk.Button(presetFrame, text="X", command=lambda preset=presetFrame: DeletePreset(preset, filename))
-        deleteBtn.pack(side="left")
-        
-        # Save Current Settings as Preset Button
+        CreatePreset(filename, innerFrame, interactables, game, dir, top)
 
+def CreatePreset(filename, innerFrame, interactables, game, dir, top):
+    # print("Created Preset")
+    pname = tk.StringVar(value=filename.replace(".txt", ""))
+    presetFrame = ttk.Frame(innerFrame)
+    presetFrame.pack(padx=3, pady=3)
+    garbList.append(pname) # Garbage collection strikes again
+    
+    loadBtn = ttk.Button(presetFrame, text="Load", command=lambda: SavedOptions.loadData(interactables, f"{pname.get()}.txt", game))
+    loadBtn.pack(side="left")
+    
+    name = ttk.Entry(presetFrame, textvariable=pname)
+    name.bind("<KeyRelease>", lambda event, var=pname: RenamePreset(dir, var))
+    name.pack(side="left")
+    
+    deleteBtn = ttk.Button(presetFrame, text=" X ", command=lambda preset=presetFrame: (DeletePreset(preset, pname), GUISettings.ResizeWindow(top, innerFrame, 20)))
+    deleteBtn.pack(side="left")
+    GUISettings.ResizeWindow(top, innerFrame, 20)
+    
+    
 # Delete a Preset
 def DeletePreset(preset, file):
     preset.destroy()
-    os.remove(f"XCDE/SaveData/{file}")
+    os.remove(f"XCDE/SaveData/{file.get()}.txt")
+    
     
 # Option to name preset
-def RenamePreset(file,dir,  strvar, ):
-    os.rename(file, f"{dir}/{strvar}.txt")
-    print(f"renamed to {strvar}")
+def RenamePreset(dir,  strvar):
+    os.rename(full_path, f"{dir}/{strvar.get()}.txt")
+    full_path = os.path.join(dir, f"{strvar.get()}.txt")
+    # print(f"renamed to {strvar}")
