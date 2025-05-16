@@ -25,6 +25,9 @@ def GenPopup(optionName, root, defaultFont, dir, interactAbles, game):
     InnerFrame = ttk.Frame(canv)
     GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
+    
+    loadBtn = ttk.Button(InnerFrame, text="Save Current Settings as Preset")
+    loadBtn.pack()
     LoadPresets(InnerFrame, dir, interactAbles, game)
     GUISettings.ResizeWindow(top, InnerFrame)
 
