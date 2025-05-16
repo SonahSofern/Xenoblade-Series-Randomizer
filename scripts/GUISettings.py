@@ -361,7 +361,7 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
             for file in BDATFiles:
                 subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty", "--hashes", "XC3/_internal/Toolset/xbc3Hashes.txt"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
             for file in SubBDATFiles:
-                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/{textFolderName}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/{textFolderName}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty", "--hashes", "XC3/_internal/Toolset/xbc3Hashes.txt"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
             # Unpacks BDATs
 
@@ -387,6 +387,8 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
             # Outputs common_ms in the correct file structure
             os.makedirs(f"{outputDirVar.get().strip()}/{textFolderName}", exist_ok=True)
             for file in SubBDATFiles:
+                # print(f"{outputDirVar.get().strip()}/{file}.bdat")
+                # print(f"{outputDirVar.get().strip()}/{textFolderName}/{file}.bdat")
                 shutil.move(f"{outputDirVar.get().strip()}/{file}.bdat", f"{outputDirVar.get().strip()}/{textFolderName}/{file}.bdat")
 
             # Displays Done and Clears Text

@@ -53,4 +53,4 @@ FOR RYUJINX: C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/content
 4. You should be ready to start playing!
 
 
-
+./XC3/_internal/Toolset/bdat-toolset-win64.exe extract, ./XC3/bdat/gb/game/menu.bdat -o ./XC3/test -f json --pretty --hashes XC3/_internal/Toolset/xbc3Hashes.txt
