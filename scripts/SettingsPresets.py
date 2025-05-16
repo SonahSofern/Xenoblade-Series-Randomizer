@@ -26,10 +26,12 @@ def GenPopup(optionName, root, defaultFont, dir, interactAbles, game):
     GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
     
-    loadBtn = ttk.Button(InnerFrame, text="Save Current Settings as Preset")
-    loadBtn.pack()
+    saveasPresetBtn = ttk.Button(InnerFrame, text="Save Current Settings as Preset")
+    saveasPresetBtn.pack()
+
+    
     LoadPresets(InnerFrame, dir, interactAbles, game)
-    GUISettings.ResizeWindow(top, InnerFrame)
+    GUISettings.ResizeWindow(top, InnerFrame, 20)
 
 
     
@@ -38,6 +40,8 @@ def GenPopup(optionName, root, defaultFont, dir, interactAbles, game):
 garbList = []
 
 def LoadPresets(innerFrame, dir, interactables, game):
+    seperator = ttk.Label(innerFrame, text="--- Presets ---")
+    seperator.pack()
     for filename in os.listdir(dir):
         pname = tk.StringVar(value=filename.replace(".txt", ""))
         presetFrame = ttk.Frame(innerFrame)
@@ -52,7 +56,7 @@ def LoadPresets(innerFrame, dir, interactables, game):
         name.pack(side="left")
         garbList.append(pname) # Garbage collection strikes again
         
-        deleteBtn = ttk.Button(presetFrame, text="Delete", command=lambda preset=presetFrame: DeletePreset(preset, filename))
+        deleteBtn = ttk.Button(presetFrame, text="X", command=lambda preset=presetFrame: DeletePreset(preset, filename))
         deleteBtn.pack(side="left")
         
         # Save Current Settings as Preset Button

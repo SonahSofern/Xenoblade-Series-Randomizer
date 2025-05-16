@@ -123,7 +123,7 @@ def GenPopup(optionName, descData, root, defaultFont):
         if hasFewHeaders: # If we have less than 3 headers go ahead and pack everything
             descObj.SpecialPack()
 
-    scripts.GUISettings.ResizeWindow(top, InnerFrame)
+    scripts.GUISettings.ResizeWindow(top, InnerFrame, 37)
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
 
             

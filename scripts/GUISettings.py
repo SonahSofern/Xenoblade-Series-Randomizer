@@ -339,9 +339,9 @@ def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFr
         OuterFrames[i].pack_propagate(False)
         OuterFrames[i].pack(fill=BOTH, expand=True)
 
-def ResizeWindow(top, innerFrame):
+def ResizeWindow(top, innerFrame, padx):
     innerFrame.update_idletasks()  # Ensure the geometry is up to date
-    w = innerFrame.winfo_width() + 37
+    w = innerFrame.winfo_width() + padx
     h = min(innerFrame.winfo_height() + 20, 700)
     top.geometry(f"{w}x{h}")
  
