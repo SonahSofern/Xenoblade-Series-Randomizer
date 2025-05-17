@@ -6,8 +6,6 @@ import time
 import TornaRecipes, TornaQuests, TornaEnemies, TornaAreas, TornaShops, TornaRedBagItems, TornaMiscItems, TornaChests, TornaCollectionPoints, Options
 import copy
 
-# make each slate piece worth the same amount of points (1), and make the requirements be 5, 10, 16. 
-# This can be done by changing FLD_ConditionFlags 1445, 1446, 1447 to the respective values. Also change 1401 to 16 for min and max.
 # need to set up the unlock keys
 # remove the npc talking options for all npc quests that are not logically chosen for the playthrough. This lets you place their required items anywhere. This causes issues with items from chests, the chests currently aren't tied to a quest, just an enemy
 # Change Quest Point Shops to require only 1 item total, only the logically chosen item, and it gives 1 point. Change the point requirement for said shop to also be 1.
@@ -61,6 +59,7 @@ def AllTornaRando():
     AddMissingKeyItems()
     CreateLevelCaps()
     HugoComeBack()
+    AdjustSlateValue()
     pass
 
 def DetermineSettings():
@@ -654,6 +653,40 @@ def HugoComeBack(): # Hugo is scripted to leave the party with Aegaeon whenever 
                 row["scriptStartId"] = 0
             if row["$id"] > 30187:
                 break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def AdjustSlateValue(): # changes the slate pieces to be worth 1 point apiece, and make the requirements for the different sections 5, 10, and 16 points.
+    with open("./XC2/_internal/JsonOutputs/common/FLD_ConditionFlag.json", 'r+', encoding='utf-8') as file: # various conditions related to how many pieces you've inserted
+        data = json.load(file)
+        for row in data["rows"]:
+            match row["$id"]:
+                case 1401:
+                    row["FlagMin"] = 16
+                    row["FlagMax"] = 16
+                case 1445:
+                    row["FlagMin"] = 5
+                    row["FlagMax"] = 5
+                case 1446:
+                    row["FlagMin"] = 10
+                    row["FlagMax"] = 10
+                case 1447:
+                    row["FlagMin"] = 16
+                    row["FlagMax"] = 16
+                case 1448:
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file: # enemy file
+        data = json.load(file)
+        for row in data["rows"]:
+            match row["$id"]:
+                case Helper.InclRange(723, 738): # these rows contain the slate pieces, provided there's no randomization done on where a shop item needs to be inserted.
+                    row["AddFlagValue"] = 1
+                case 739:
+                    break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
