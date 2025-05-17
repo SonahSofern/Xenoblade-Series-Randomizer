@@ -10,15 +10,11 @@ import copy
 # This can be done by changing FLD_ConditionFlags 1445, 1446, 1447 to the respective values. Also change 1401 to 16 for min and max.
 # need to remove script that removes aegaeon and hugo in early aletta
 # need to set up the unlock keys
-# need to make SP costs for upgrades much cheaper
 # remove the npc talking options for all npc quests that are not logically chosen for the playthrough. This lets you place their required items anywhere. This causes issues with items from chests, the chests currently aren't tied to a quest, just an enemy
 # Change Quest Point Shops to require only 1 item total, only the logically chosen item, and it gives 1 point. Change the point requirement for said shop to also be 1.
-# need to add a shop for the level up tokens (maybe use Argentum?)
-# might remove level up tokens in favor of a level cap based on story progression
 # need to make the quest Unforgotten Promise only require 1 eternity loam, not 4, they're key items with the same id, so you can't make them a one-time reward, like from a boss drop, you need 4 in logic
 # hints
 # spoiler log
-# need logic for weapon chips, since they're such a large chunk of the damage you deal
 
 class ItemInfo:
     def __init__(self, inputid, category, addtolist):
@@ -628,7 +624,7 @@ def CreateLevelCaps():
         data = json.load(file)
         for row in data["rows"]:
             match row["$id"]:
-                case [1430, 1434, 1437, 1442, 1632, 1443]: # all enemies that raise level cap upon defeat
+                case [1430, 1433, 1434, 1437, 1442, 1632, 1443]: # all enemies that raise level cap upon defeat
                     row["ExpRev"] = 100 # 1000*1000 = 100000, but caps at 99999
                 case _:
                     row["ExpRev"] = 0 # all other enemies get 0*1000 = 0
