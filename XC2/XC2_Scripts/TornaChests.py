@@ -270,8 +270,8 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             '$id': 2231,
             'Name': 'TreasureChest2231',
             'Location Near': 2325,
-            'Story Pre-Req': [25],
-            'Required Items': [BrighidKey, LockpickKey[:1], [BrighidAff[0]] , HazeKey, KeenEyeKey[:1], [HazeAff[0]],[25460], [25461], LevelUpTokens[:36]],
+            'Story Pre-Req': [30], # [25],
+            'Required Items': [BrighidKey, LockpickKey[:1], [BrighidAff[0]] , HazeKey, KeenEyeKey[:1], [HazeAff[0]],[25460], [25461]], # LevelUpTokens[:36]],
             'Must Defeat Enemy IDs': [1468]
         }
     TreasureChest2232 = {
@@ -374,8 +374,8 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             '$id': 2244,
             'Name': 'TreasureChest2244',
             'Location Near': 2325,
-            'Story Pre-Req': [25],
-            'Required Items': [MinothKey, [MiningKey[0]] , [FortitudeKey[0]],[25460] , [25461] , LevelUpTokens[:36]],
+            'Story Pre-Req': [30], # [25],
+            'Required Items': [MinothKey, [MiningKey[0]] , [FortitudeKey[0]],[25460] , [25461]], # LevelUpTokens[:36]],
             'Must Defeat Enemy IDs': [1468]
         }
     TreasureChest2245 = {

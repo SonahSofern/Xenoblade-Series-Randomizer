@@ -2371,14 +2371,13 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     SummonedList = []
 
     for enemy in TornaEnemies:
+        TurnEnemyLevelIntoMainStoryReq(enemy)
         if enemy.mainreq != []:
             enemy.itemreqs.extend(Mainquests[enemy.mainreq - 1].itemreqs) # adds the main story requirement to the enemy of choice
         if enemy.duringquest != []:
             enemy.itemreqs.extend(Sidequests[enemy.duringquest[0] - 1].itemreqs) # adds the current sidequest item requirements to the enemy of choice
         if enemy.sideprereq != []:
             enemy.itemreqs.extend(Sidequests[enemy.sideprereq[0] - 1].itemreqs) # adds the pre-req sidequest items to the enemy of choice (used for one enemy that isn't directly part of a quest, but spawns after a sidequest is finished)
-        if enemy.level > 3:
-            enemy.itemreqs.extend(LevelUpTokens[:min(enemy.level + 1, 95)]) # adds the minimum level requirement, and then 2 extra levels over that
         if enemy.id in TornaUMIDs:
             enemy.type = "uniquemonster"
         elif enemy.id in TornaBossIDs:
@@ -2408,3 +2407,22 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
 
     return TornaEnemies, EnemyDropCounter
 
+def TurnEnemyLevelIntoMainStoryReq(enemy): # decided not to go with the enemy level token system and instead use a level cap based system.
+    match enemy.level:
+        case _ if enemy.level > 14 and enemy.level <= 19:
+           enemy.mainreqs = max(enemy.mainreqs, 8)
+        case _ if enemy.level > 19 and enemy.level <= 25:
+            enemy.mainreqs = max(enemy.mainreqs, 16)
+        case _ if enemy.level > 25 and enemy.level <= 34:
+            enemy.mainreqs = max(enemy.mainreqs, 19)
+        case _ if enemy.level > 34 and enemy.level <= 37:
+            enemy.mainreqs = max(enemy.mainreqs, 30)
+        case _ if enemy.level > 37 and enemy.level <= 45:
+            enemy.mainreqs = max(enemy.mainreqs, 40)
+        case _ if enemy.level > 45:
+            enemy.mainreqs = max(enemy.mainreqs, 44)
+
+    #if enemy.level < 3: # this was the old way I did it, no longer needed
+    #    enemy.itemreqs.extend(LevelUpTokens[:min(enemy.level + 1, 96)]) # adds the minimum level requirement, and then 2 extra levels over that
+
+    

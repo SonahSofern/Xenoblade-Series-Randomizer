@@ -14,7 +14,11 @@ import copy
 # remove the npc talking options for all npc quests that are not logically chosen for the playthrough. This lets you place their required items anywhere. This causes issues with items from chests, the chests currently aren't tied to a quest, just an enemy
 # Change Quest Point Shops to require only 1 item total, only the logically chosen item, and it gives 1 point. Change the point requirement for said shop to also be 1.
 # need to add a shop for the level up tokens (maybe use Argentum?)
+# might remove level up tokens in favor of a level cap based on story progression
 # need to make the quest Unforgotten Promise only require 1 eternity loam, not 4, they're key items with the same id, so you can't make them a one-time reward, like from a boss drop, you need 4 in logic
+# hints
+# spoiler log
+# need logic for weapon chips, since they're such a large chunk of the damage you deal
 
 class ItemInfo:
     def __init__(self, inputid, category, addtolist):
@@ -60,6 +64,7 @@ def AllTornaRando():
     NormalEnemies, QuestEnemies, Bosses, UniqueMonsters = SplitEnemyTypes(Enemies)
     PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, Areas, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList)
     AddMissingKeyItems()
+    CreateLevelCaps()
     pass
 
 def DetermineSettings():
@@ -98,7 +103,7 @@ def CreateItemLists():
         ItemInfo(item, "Accessory", AccessoryList)
     for item in Helper.InclRange(585, 647):
         ItemInfo(item, "WeaponAccessory", WeaponAccessoryList)
-    UncleanKeyItemList = [25455, Helper.InclRange(25457, 25466), Helper.InclRange(25479, 25494), 25529, Helper.InclRange(25531, 25535),MineralogyKey,SwordplayKey,FortitudeKey,ForestryKey,ManipEtherKey,KeenEyeKey,FocusKey,LightKey,GirlsTalkKey,EntomologyKey,MiningKey,BotanyKey,LockpickKey,IcthyologyKey,ComWaterKey,SuperstrKey,HHC_Key,LC_Key,CLC_Key,HWC_Key,PVC_Key,FVC_Key,AGC_Key,OTC_Key,DDC_Key,HGC_Key,JinAff,HazeAff,MythraAff,MinothAff,BrighidAff,AegaeonAff,HazeKey,AddamKey,MythraKey,MinothKey,HugoKey,BrighidKey,AegaeonKey,LevelUpTokens, ValidRecipeInfoIDs, 26164, 26192, 26193, 26194, 26195, 25473, 25536]
+    UncleanKeyItemList = [25455, Helper.InclRange(25457, 25466), Helper.InclRange(25479, 25494), 25529, Helper.InclRange(25531, 25535),MineralogyKey,SwordplayKey,FortitudeKey,ForestryKey,ManipEtherKey,KeenEyeKey,FocusKey,LightKey,GirlsTalkKey,EntomologyKey,MiningKey,BotanyKey,LockpickKey,IcthyologyKey,ComWaterKey,SuperstrKey,HHC_Key,LC_Key,CLC_Key,HWC_Key,PVC_Key,FVC_Key,AGC_Key,OTC_Key,DDC_Key,HGC_Key,JinAff,HazeAff,MythraAff,MinothAff,BrighidAff,AegaeonAff,HazeKey,AddamKey,MythraKey,MinothKey,HugoKey,BrighidKey,AegaeonKey, ValidRecipeInfoIDs, 26164, 26192, 26193, 26194, 26195, 25473, 25536]
     UncleanKeyItemList = Helper.MultiLevelListToSingleLevelList(UncleanKeyItemList)
     for item in UncleanKeyItemList:
         ItemInfo(item, "KeyItem", KeyItemList)
@@ -234,11 +239,11 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
     FullItemReqList.extend(ValidRecipeInfoIDs)
     FullItemReqList = list(set(FullItemReqList))
     UnplacedProgressionItems = [x for x in FullItemReqList if x not in PlacedItems] # this holds the items that unlock stuff but don't logically contribute to the playthrough
-    UnplacedLevelUpTokens = [x for x in UnplacedProgressionItems if x in LevelUpTokens] # we want to get only the level up tokens, note down the id number, then determine past what level, you can easily get exp.
-    MinLogicalLevel = UnplacedLevelUpTokens[0] - 25626
-    for loc in AllLocations: # remove the level token requirement from all remaining locations
-        loc.itemreqs = [x for x in loc.itemreqs if x not in UnplacedLevelUpTokens]
-    AdjustLevelUpReqs(MinLogicalLevel)
+    #UnplacedLevelUpTokens = [x for x in UnplacedProgressionItems if x in LevelUpTokens] # we want to get only the level up tokens, note down the id number, then determine past what level, you can easily get exp.
+    #MinLogicalLevel = UnplacedLevelUpTokens[0] - 25626
+    #for loc in AllLocations: # remove the level token requirement from all remaining locations
+    #    loc.itemreqs = [x for x in loc.itemreqs if x not in UnplacedLevelUpTokens]
+    #AdjustLevelUpReqs(MinLogicalLevel)
     # place filler items in all remaining checks, regardless of if it has progression enabled.
     HelpfulUpgrades = [MineralogyKey,SwordplayKey,FortitudeKey,ForestryKey,ManipEtherKey,KeenEyeKey,FocusKey,LightKey,GirlsTalkKey,EntomologyKey,MiningKey,BotanyKey,LockpickKey,IcthyologyKey,ComWaterKey,SuperstrKey,HHC_Key,LC_Key,CLC_Key,HWC_Key,PVC_Key,FVC_Key,AGC_Key,OTC_Key,DDC_Key,HGC_Key,JinAff,HazeAff,MythraAff,MinothAff,BrighidAff,AegaeonAff,HazeKey,AddamKey,MythraKey,MinothKey,HugoKey,BrighidKey,AegaeonKey]
     HelpfulUpgrades = Helper.MultiLevelListToSingleLevelList(HelpfulUpgrades)
@@ -365,7 +370,8 @@ def AdjustLevelUpReqs(MinLogicalLevel):
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def PutItemsInSpots(Locs2): # now we actually feed the items into their corresponding pipelines in the bdats
-    Locs = ConsolidateLevelUpTokens(Locs2)
+    # Locs = ConsolidateLevelUpTokens(Locs2) no longer need to consolidate levelup tokens, since we use level cap now
+    Locs = Locs2
     # sidequests
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", ["EXP", "ItemID1", "ItemNumber1", "ItemID2", "ItemNumber2", "ItemID3", "ItemNumber3", "ItemID4", "ItemNumber4"], 0)
     with open("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file:
@@ -592,8 +598,54 @@ def AddMissingKeyItems():
         NewDescID += 2
     NewPreciousListItems, NewDescList = [], []
     for item in KeyItemList:
-        NewPreciousListItems.append([{"$id": item.preciousid, "Name": item.nameid, "Caption": item.captionid, "Category": 29, "Type": 0, "Price": 0, "ValueMax": 1, "ClearNewGame": 1, "NoMultiple": 0, "sortJP": item.preciousid, "sortGE": item.preciousid, "sortFR": item.preciousid, "sortSP": item.preciousid, "sortIT": item.preciousid, "sortGB": item.preciousid, "sortCN": item.preciousid, "sortTW": item.preciousid, "sortKR": item.preciousid}])
+        NewPreciousListItems.append([{"$id": item.preciousid, "Name": item.nameid, "Caption": item.captionid, "Category": 29, "Type": 0, "Price": 1, "ValueMax": 1, "ClearNewGame": 1, "NoMultiple": 0, "sortJP": item.preciousid, "sortGE": item.preciousid, "sortFR": item.preciousid, "sortSP": item.preciousid, "sortIT": item.preciousid, "sortGB": item.preciousid, "sortCN": item.preciousid, "sortTW": item.preciousid, "sortKR": item.preciousid}])
         NewDescList.append([{"$id": item.nameid, "style": 36, "name": item.name}])
         NewDescList.append([{"$id": item.captionid, "style": 61, "name": item.caption}])
     JSONParser.ExtendJSONFile("common/ITM_PreciousList.json", NewPreciousListItems)
     JSONParser.ExtendJSONFile("common_ms/itm_precious.json", NewDescList)
+
+def CreateLevelCaps(): 
+    # makes the level caps in the files, removing all other xp sources than the story bosses, which give max xp possible. all other sources will give 1 xp.
+    # it takes max xp to level up past a level cap, and 1 xp otherwise.
+    # technically this is cheeseable with fights where there are multiple enemies, if you defeat the one that lets you pass the level cap, then die to another, you can get that same xp again, I believe.
+    with open("./XC2/_internal/JsonOutputs/common/BTL_Grow.json", 'r+', encoding='utf-8') as file: # xp requirements file
+        data = json.load(file)
+        for row in data["rows"]:
+            match row["$id"]:
+                case [15, 20, 26, 35, 38, 46, 100]:
+                    row["LevelExp2"] = 99999 # LevelExp2 is for Torna, LevelExp is for base game
+                case _:
+                    row["LevelExp2"] = 1
+            row["EnemyExp"] = 1000 # believe this is the base xp gained by defeating an enemy of this level, before accounting for level differences
+            row["EnemyWP"] = row["EnemyWP"] * 10
+            row["EnemySP"] = row["EnemySP"] * 10
+            row["EnemyGold"] = row["EnemyGold"] * 10
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BTL_Lv_Rev.json", ["ExpRevHigh", "ExpRevLow", "ExpRevLow2"], 100) # make it so you always get 100% of the exp you earn, regardless of level difference.
+    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: # enemy file
+        data = json.load(file)
+        for row in data["rows"]:
+            match row["$id"]:
+                case [1430, 1434, 1437, 1442, 1632, 1443]: # all enemies that raise level cap upon defeat
+                    row["ExpRev"] = 100 # 1000*1000 = 100000, but caps at 99999
+                case _:
+                    row["ExpRev"] = 0 # all other enemies get 0*1000 = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    LandmarkFiles = ["./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_LandmarkPop.json", "./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_LandmarkPop.json"]
+    for map in LandmarkFiles:
+        with open(map, 'r+', encoding='utf-8') as file:
+                data = json.load(file)
+                for row in data["rows"]:
+                    row["getEXP"] = 10
+                    row["getSP"] = row["getSP"] * 10 # amp the SP gains by 10, to reduce grinding
+                    row["developZone"] = 0
+                file.seek(0)
+                file.truncate()
+                json.dump(data, file, indent=2, ensure_ascii=False)
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", ["EXP"], 0) # doing quests doesn't reward any xp
+    Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json"], ["Gold", "SP"], ['row[key] * 10']) # quests reward 10x gold and sp
+

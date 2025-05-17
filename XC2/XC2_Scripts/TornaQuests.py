@@ -51,7 +51,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 1,
         'Main Story Req': 9,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [HazeKey, [ManipEtherKey[0]], [HazeAff[0]], MythraKey, [LightKey[0]] , LevelUpTokens[:11]],
+        'Item Requirements': [HazeKey, [ManipEtherKey[0]], [HazeAff[0]], MythraKey, [LightKey[0]]], # LevelUpTokens[:11]],
         'Community Gained': 0,
         'Community Level Req': 0,
         'Reward Set IDs': [1082]
@@ -61,7 +61,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 2,
         'Main Story Req': 10,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [LevelUpTokens[:11]],
+        'Item Requirements': [], # LevelUpTokens[:11]],
         'Community Gained': 1,
         'Community Level Req': 0,
         'Reward Set IDs': [1060]
@@ -71,7 +71,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 3,
         'Main Story Req': 10,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [[SwordplayKey[0]] , LevelUpTokens[:7]],
+        'Item Requirements': [[SwordplayKey[0]]], #LevelUpTokens[:7]],
         'Community Gained': 1,
         'Community Level Req': 0,
         'Reward Set IDs': [1076]
@@ -99,9 +99,9 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     TornaSidequest6 = {
         'Quest Name': 'Punpuns Rival',
         'Quest Number': 6,
-        'Main Story Req': 12,
+        'Main Story Req': 30, # used to be 12, when LevelUpTokens were going to be included
         'Sidequest Pre-Req': [],
-        'Item Requirements': [LevelUpTokens[:35]],
+        'Item Requirements': [], # LevelUpTokens[:35]],
         'Community Gained': 1,
         'Community Level Req': 0,
         'Reward Set IDs': [1081]
@@ -111,7 +111,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 7,
         'Main Story Req': 12,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [LevelUpTokens[:13]],
+        'Item Requirements': [], # LevelUpTokens[:13]],
         'Community Gained': 1,
         'Community Level Req': 0,
         'Reward Set IDs': [1080]
@@ -121,7 +121,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 8,
         'Main Story Req': 16,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [LevelUpTokens[:17]],
+        'Item Requirements': [], # LevelUpTokens[:17]],
         'Community Gained': 0,
         'Community Level Req': 0,
         'Reward Set IDs': [1083]
@@ -151,7 +151,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 11,
         'Main Story Req': 16,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [LevelUpTokens[:20]],
+        'Item Requirements': [], # LevelUpTokens[:20]],
         'Community Gained': 1,
         'Community Level Req': 0,
         'Reward Set IDs': [1074]
@@ -171,7 +171,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 13,
         'Main Story Req': 16,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [[30426] , [30427] , [25465] , LevelUpTokens[:21]],
+        'Item Requirements': [[30426] , [30427] , [25465]], # LevelUpTokens[:21]],
         'Community Gained': 1,
         'Community Level Req': 0,
         'Reward Set IDs': [1063]
@@ -239,9 +239,9 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     TornaSidequest20 = {
         'Quest Name': 'What Matters Most',
         'Quest Number': 20,
-        'Main Story Req': 25,
+        'Main Story Req': 30, # used to be 25, changed when I removed the level up token item 
         'Sidequest Pre-Req': [],
-        'Item Requirements': [[25460] , [25461] , LevelUpTokens[:36]],
+        'Item Requirements': [[25460] , [25461]], # LevelUpTokens[:36]],
         'Community Gained': 1,
         'Community Level Req': 0,
         'Reward Set IDs': [1054]
@@ -261,7 +261,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 22,
         'Main Story Req': 26,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [LevelUpTokens[:25]],
+        'Item Requirements': [], # LevelUpTokens[:25]],
         'Community Gained': 0,
         'Community Level Req': 0,
         'Reward Set IDs': [1086]
@@ -281,7 +281,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 24,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [LevelUpTokens[:42]],
+        'Item Requirements': [], # LevelUpTokens[:42]],
         'Community Gained': 2,
         'Community Level Req': 4,
         'Reward Set IDs': [1057]
@@ -361,7 +361,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 32,
         'Main Story Req': 37,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [LevelUpTokens[:36]],
+        'Item Requirements': [], #LevelUpTokens[:36]],
         'Community Gained': 1,
         'Community Level Req': 0,
         'Reward Set IDs': [1035]
@@ -371,7 +371,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 33,
         'Main Story Req': 37,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [HazeKey, [KeenEyeKey[0]], MythraKey, [FocusKey[0]] , LevelUpTokens[:32]],
+        'Item Requirements': [HazeKey, [KeenEyeKey[0]], MythraKey, [FocusKey[0]]], # LevelUpTokens[:32]],
         'Community Gained': 2,
         'Community Level Req': 0,
         'Reward Set IDs': [1032]
@@ -411,7 +411,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 37,
         'Main Story Req': 46,
         'Sidequest Pre-Req': [30],
-        'Item Requirements': [[SwordplayKey[0]] , [30374] , [30378] , [25462] , LevelUpTokens[:40]],
+        'Item Requirements': [[SwordplayKey[0]] , [30374] , [30378] , [25462]], #LevelUpTokens[:40]],
         'Community Gained': 1,
         'Community Level Req': 2,
         'Reward Set IDs': [1037]
@@ -421,7 +421,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 38,
         'Main Story Req': 46,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [LevelUpTokens[:41]],
+        'Item Requirements': [], #LevelUpTokens[:41]],
         'Community Gained': 2,
         'Community Level Req': 2,
         'Reward Set IDs': [1055]
@@ -431,7 +431,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 39,
         'Main Story Req': 46,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [LevelUpTokens[:42]],
+        'Item Requirements': [], #LevelUpTokens[:42]],
         'Community Gained': 2,
         'Community Level Req': 2,
         'Reward Set IDs': [1062]
@@ -441,7 +441,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 40,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [MinothKey, MiningKey[:1], MinothAff[:1], FortitudeKey[:1], JinAff[:1] , 25455 , LevelUpTokens[:38]],
+        'Item Requirements': [MinothKey, MiningKey[:1], MinothAff[:1], FortitudeKey[:1], JinAff[:1] , 25455], # LevelUpTokens[:38]],
         'Community Gained': 1,
         'Community Level Req': 2,
         'Reward Set IDs': [1043]
@@ -451,7 +451,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 41,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [2],
-        'Item Requirements': [AegaeonKey, SuperstrKey[:1], AegaeonAff[:1], MythraKey, FocusKey[:1], [MythraAff[0]] , LevelUpTokens[:44]],
+        'Item Requirements': [AegaeonKey, SuperstrKey[:1], AegaeonAff[:1], MythraKey, FocusKey[:1], [MythraAff[0]]], # LevelUpTokens[:44]],
         'Community Gained': 2,
         'Community Level Req': 2,
         'Reward Set IDs': [1038]
@@ -501,7 +501,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 46,
         'Main Story Req': 46,
         'Sidequest Pre-Req': [31, 32],
-        'Item Requirements': [MythraKey, FocusKey[:1], [MythraAff[0]], HazeKey, KeenEyeKey[:1], [HazeAff[0]] , LevelUpTokens[:40]],
+        'Item Requirements': [MythraKey, FocusKey[:1], [MythraAff[0]], HazeKey, KeenEyeKey[:1], [HazeAff[0]]], #  LevelUpTokens[:40]],
         'Community Gained': 2,
         'Community Level Req': 3,
         'Reward Set IDs': [1040]
@@ -531,7 +531,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 49,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [[30020] , [25464] , LevelUpTokens[:43]],
+        'Item Requirements': [[30020] , [25464]], # LevelUpTokens[:43]],
         'Community Gained': 3,
         'Community Level Req': 3,
         'Reward Set IDs': [1042]
@@ -581,7 +581,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 54,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [AegaeonKey, ComWaterKey[:1], AegaeonAff[:1] , [25463,30413,30423,30359,26182] , LevelUpTokens[:39]],
+        'Item Requirements': [AegaeonKey, ComWaterKey[:1], AegaeonAff[:1] , [25463,30413,30423,30359,26182]], # LevelUpTokens[:39]],
         'Community Gained': 1,
         'Community Level Req': 4,
         'Reward Set IDs': [1045]
@@ -834,13 +834,13 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'FLD_QuestTask $id': 4,
         'Task Summary': 'Defeat Gargoyle in Crater',
         'Community Level Req': 0,
-        'Item Requirements': [LevelUpTokens[:12]]
+        'Item Requirements': [] # [LevelUpTokens[:12]]
     }
     TornaMainQuest8 = {
         'FLD_QuestTask $id': 5,
         'Task Summary': 'Defeat Addam and Mythra',
         'Community Level Req': 0,
-        'Item Requirements': [AddamKey, MythraKey, HazeKey, LevelUpTokens[:14]]
+        'Item Requirements': [AddamKey, MythraKey, HazeKey] #,LevelUpTokens[:14]]
     }
     TornaMainQuest9 = {
         'FLD_QuestTask $id': 6,
@@ -888,7 +888,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'FLD_QuestTask $id': 12,
         'Task Summary': 'Defeat Brighid',
         'Community Level Req': 0,
-        'Item Requirements': [HugoKey, BrighidKey, AegaeonKey, LevelUpTokens[:18]]
+        'Item Requirements': [HugoKey, BrighidKey, AegaeonKey] #, LevelUpTokens[:18]]
     }
     TornaMainQuest17 = {
         'FLD_QuestTask $id': 13,
@@ -906,7 +906,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'FLD_QuestTask $id': 15,
         'Task Summary': 'Defeat Gort',
         'Community Level Req': 0,
-        'Item Requirements': [LevelUpTokens[:24]]
+        'Item Requirements': [] #LevelUpTokens[:24]]
     }
     TornaMainQuest20 = {
         'FLD_QuestTask $id': 16,
@@ -954,7 +954,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'FLD_QuestTask $id': 23,
         'Task Summary': 'Complete Lett Bridge Restoration',
         'Community Level Req': 0,
-        'Item Requirements': [LevelUpTokens[:25]]
+        'Item Requirements': [] # LevelUpTokens[:25]]
     }
     TornaMainQuest28 = {
         'FLD_QuestTask $id': 57,
@@ -972,7 +972,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'FLD_QuestTask $id': 25,
         'Task Summary': 'Defeat Slithe Jagron',
         'Community Level Req': 0,
-        'Item Requirements': [LevelUpTokens[:33]]
+        'Item Requirements': [] # LevelUpTokens[:33]]
     }
     TornaMainQuest31 = {
         'FLD_QuestTask $id': 26,
@@ -1032,7 +1032,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'FLD_QuestTask $id': 35,
         'Task Summary': 'Defeat Gargoyles Pt 1',
         'Community Level Req': 2,
-        'Item Requirements': [LevelUpTokens[:36]]
+        'Item Requirements': [] # LevelUpTokens[:36]]
     }
     TornaMainQuest41 = {
         'FLD_QuestTask $id': 52,
@@ -1056,7 +1056,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'FLD_QuestTask $id': 37,
         'Task Summary': 'Defeat Malos',
         'Community Level Req': 2,
-        'Item Requirements': [LevelUpTokens[:44]]
+        'Item Requirements': [] # LevelUpTokens[:44]]
     }
     TornaMainQuest45 = {
         'FLD_QuestTask $id': 38,
@@ -1122,7 +1122,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'FLD_QuestTask $id': 46,
         'Task Summary': 'Defeat Malos Pt 1',
         'Community Level Req': 4,
-        'Item Requirements': [LevelUpTokens[:54]]
+        'Item Requirements': [] # LevelUpTokens[:54]]
     }
     TornaMainQuest56 = {
         'FLD_QuestTask $id': 47,
@@ -1134,7 +1134,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'FLD_QuestTask $id': 48,
         'Task Summary': 'Defeat Gort',
         'Community Level Req': 4,
-        'Item Requirements': [LevelUpTokens[:57]]
+        'Item Requirements': [] # LevelUpTokens[:57]]
     }
 
     global TornaMainquests # holds the TornaMainQuest class objects
