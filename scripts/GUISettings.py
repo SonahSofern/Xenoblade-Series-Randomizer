@@ -346,7 +346,7 @@ def ResizeWindow(top, innerFrame, padx = 37):
     top.geometry(f"{w}x{h}")
  
     
-def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb"):
+def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = []):
     def ThreadedRandomize():
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
@@ -359,9 +359,9 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
         print("Permalink: "+  permalinkVar.get())
         try:
             for file in BDATFiles:
-                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty", "--hashes", "XC3/_internal/Toolset/xbc3Hashes.txt"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
             for file in SubBDATFiles:
-                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/{textFolderName}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty", "--hashes", "XC3/_internal/Toolset/xbc3Hashes.txt"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/{textFolderName}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
             # Unpacks BDATs
 
