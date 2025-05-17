@@ -8,7 +8,6 @@ import copy
 
 # make each slate piece worth the same amount of points (1), and make the requirements be 5, 10, 16. 
 # This can be done by changing FLD_ConditionFlags 1445, 1446, 1447 to the respective values. Also change 1401 to 16 for min and max.
-# need to remove script that removes aegaeon and hugo in early aletta
 # need to set up the unlock keys
 # remove the npc talking options for all npc quests that are not logically chosen for the playthrough. This lets you place their required items anywhere. This causes issues with items from chests, the chests currently aren't tied to a quest, just an enemy
 # Change Quest Point Shops to require only 1 item total, only the logically chosen item, and it gives 1 point. Change the point requirement for said shop to also be 1.
@@ -61,6 +60,7 @@ def AllTornaRando():
     PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, Areas, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList)
     AddMissingKeyItems()
     CreateLevelCaps()
+    HugoComeBack()
     pass
 
 def DetermineSettings():
@@ -645,3 +645,15 @@ def CreateLevelCaps():
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", ["EXP"], 0) # doing quests doesn't reward any xp
     Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json"], ["Gold", "SP"], ['row[key] * 10']) # quests reward 10x gold and sp
 
+def HugoComeBack(): # Hugo is scripted to leave the party with Aegaeon whenever you receive the quest "Feeding an Army". We don't want this, it messes with logic (at least right now).
+    with open("./XC2/_internal/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # enemy file
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in [30185, 30187]:
+                row["scriptName"] = 0
+                row["scriptStartId"] = 0
+            if row["$id"] > 30187:
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
