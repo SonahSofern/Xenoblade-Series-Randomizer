@@ -1,9 +1,9 @@
 # Xenoblade Randomizer
-A randomizer project for the whole Xenoblade series on the switch
+A randomizer project for the whole Xenoblade series on the switch.
 
 
 # General Description
-This program randomizes the BDAT files in The Xenoblade Chronicles Games. Only Xenoblade 2 has been published for now.
+This program randomizes the BDAT files in The Xenoblade Chronicles Games. Only Xenoblade 1 DE and Xenoblade 2 have been published for now.
 
 # Contact Us
 Discord: https://discord.gg/h93yqZHG8z
