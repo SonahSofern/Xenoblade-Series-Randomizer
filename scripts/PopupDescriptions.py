@@ -108,7 +108,7 @@ def GenPopup(optionName, descData, root, defaultFont):
             
         elif isinstance(descObj, PopHeader): # Header
             curFrame = ttk.Frame(InnerFrame)
-            descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=10, command=lambda obj= descObj: (obj.Dropdown(), ResizeWindow(top, InnerFrame)))
+            descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=10, command=lambda obj= descObj: (obj.Dropdown(), scripts.GUISettings.ResizeWindow(top, InnerFrame)))
             curHeader = descObj
             curFrame.pack(fill="x", expand=True)
             descObj.SpecialPack()
@@ -123,7 +123,7 @@ def GenPopup(optionName, descData, root, defaultFont):
         if hasFewHeaders: # If we have less than 3 headers go ahead and pack everything
             descObj.SpecialPack()
 
-    scripts.GUISettings.ResizeWindow(top, InnerFrame, 37)
+    scripts.GUISettings.ResizeWindow(top, InnerFrame)
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
 
             

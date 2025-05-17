@@ -112,6 +112,7 @@ def ShortenedTutorial():
             
         Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial.json", ["script_file"], "aoc_challenge_tutorial") # Shortens battle tutorials
         Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial.json", ["start_id"], 0)
+        Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial.json", ["param1"], 0)
         
         with open("./XC2/_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # removing more tutorials
             data = json.load(file)
