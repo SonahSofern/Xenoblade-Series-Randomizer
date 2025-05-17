@@ -187,8 +187,8 @@ def TelethiaEarly(enemy, chosen:Enemy):
     BadForTelethia = [30,31,61,62, 134, 265, 266, 268, 416, 417, 534] # Ids for early game so you dont get soul readed
     if (enemy["$id"] in BadForTelethia) and (chosen.eneListArea["family"] == TelethiaFamily):
         for i in range(1,9):
-            if enemy.eneListArea[f"arts{i}"] == 666:
-                enemy.eneListArea[f"arts{i}"] = 0 # Remove soul read if we get an early telethia
+            if enemy[f"arts{i}"] == 666:
+                enemy[f"arts{i}"] = 0 # Remove soul read if we get an early telethia
 
 # The first few fights can be really tough before cheering allies or any arts lets leave their stats vanilla
 def FirstFights(enemy):

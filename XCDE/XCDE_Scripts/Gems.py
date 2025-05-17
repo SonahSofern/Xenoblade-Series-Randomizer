@@ -55,7 +55,7 @@ def StandardGems(gemData, gemMSData, gemHelpMSData):
     
 
 def UnusedGems():
-    Gem("Cast Quicken", attributes[6], 45, 3,2, 90, 0, [10,90], [0,0], 1000, 4, "\\[Passive\\][XENO:n ] Reduces cast time by $1.")
+    Gem("Cast Quicken", attributes[6], 45, 3,2, 90, 0, [10,30], [0,0], 1000, 4, "\\[Passive\\][XENO:n ] Reduces cast time by $1.")
     Gem("Reactive Heal", attributes[5], 54, 1, 2, 90, 0, [30,255], [0,0], 1500, 1, "\\[Passive\\][XENO:n ] On damage taken restore $1 health.", "Test")
     Gem("Monado Enchant", attributes[7], 208, 1, 1, 90, 0, [100,200], [0,0], 2000, 1, "\\[Passive\\][XENO:n ] Your attacks pierce mechon armor and inflict $1 bonus damage.", "Test")
     if Options.MovespeedOption.GetState():
