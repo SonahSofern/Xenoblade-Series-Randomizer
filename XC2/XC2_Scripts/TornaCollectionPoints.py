@@ -178,7 +178,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4417',
         'Location Near': 2317,
         'Story Pre-Req': [5],
-        'Required Items': [30019,30411,30041,30360,30444],
+        'Required Items': [30387,30411,30421,30360,30444],
         'Must Defeat Enemy IDs': [],
         'Rarity': 0,
         'CollectionTableID': 17
@@ -188,7 +188,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4418',
         'Location Near': 2304,
         'Story Pre-Req': [10],
-        'Required Items': [30019,30411,30041,30360,30444],
+        'Required Items': [30387,30411,30421,30360,30444],
         'Must Defeat Enemy IDs': [],
         'Rarity': 0,
         'CollectionTableID': 18
@@ -198,7 +198,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4419',
         'Location Near': 2305,
         'Story Pre-Req': [25],
-        'Required Items': [30019,30411,30041,30360,30444],
+        'Required Items': [30387,30411,30421,30360,30444],
         'Must Defeat Enemy IDs': [],
         'Rarity': 0,
         'CollectionTableID': 19
@@ -208,7 +208,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4420',
         'Location Near': 2307,
         'Story Pre-Req': [33],
-        'Required Items': [30019,30411,30041,30360,30444],
+        'Required Items': [30387,30411,30421,30360,30444],
         'Must Defeat Enemy IDs': [],
         'Rarity': 0,
         'CollectionTableID': 20
@@ -218,7 +218,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4421',
         'Location Near': 2334,
         'Story Pre-Req': [35],
-        'Required Items': [30019,30411,30041,30360,30444],
+        'Required Items': [30387,30411,30421,30360,30444],
         'Must Defeat Enemy IDs': [],
         'Rarity': 0,
         'CollectionTableID': 21
@@ -228,7 +228,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4422',
         'Location Near': 2351,
         'Story Pre-Req': [36],
-        'Required Items': [30019,30411,30041,30360,30444],
+        'Required Items': [30387,30411,30421,30360,30444],
         'Must Defeat Enemy IDs': [],
         'Rarity': 0,
         'CollectionTableID': 22
@@ -238,7 +238,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4423',
         'Location Near': 2303,
         'Story Pre-Req': [8],
-        'Required Items': [30378,30428,30372,30020,30436],
+        'Required Items': [30378,30428,30372,30388,30436],
         'Must Defeat Enemy IDs': [],
         'Rarity': 1,
         'CollectionTableID': 23
@@ -248,7 +248,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4424',
         'Location Near': 2322,
         'Story Pre-Req': [25],
-        'Required Items': [30378,30428,30372,30020,30436],
+        'Required Items': [30378,30428,30372,30388,30436],
         'Must Defeat Enemy IDs': [],
         'Rarity': 1,
         'CollectionTableID': 24
@@ -258,7 +258,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4425',
         'Location Near': 2333,
         'Story Pre-Req': [35],
-        'Required Items': [30378,30428,30372,30020,30436],
+        'Required Items': [30378,30428,30372,30388,30436],
         'Must Defeat Enemy IDs': [],
         'Rarity': 1,
         'CollectionTableID': 25
@@ -4308,7 +4308,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4812',
         'Location Near': 2401,
         'Story Pre-Req': [12],
-        'Required Items': [30019,30411,30041,30360,30444],
+        'Required Items': [30387,30411,30421,30360,30444],
         'Must Defeat Enemy IDs': [],
         'Rarity': 0,
         'CollectionTableID': 440
@@ -4318,7 +4318,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4813',
         'Location Near': 2402,
         'Story Pre-Req': [12],
-        'Required Items': [30019,30411,30041,30360,30444],
+        'Required Items': [30387,30411,30421,30360,30444],
         'Must Defeat Enemy IDs': [],
         'Rarity': 0,
         'CollectionTableID': 441
@@ -4328,7 +4328,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4814',
         'Location Near': 2414,
         'Story Pre-Req': [12],
-        'Required Items': [30378,30428,30372,30020,30436],
+        'Required Items': [30378,30428,30372,30388,30436],
         'Must Defeat Enemy IDs': [],
         'Rarity': 1,
         'CollectionTableID': 442
@@ -4338,7 +4338,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4815',
         'Location Near': 2414,
         'Story Pre-Req': [12],
-        'Required Items': [30019,30411,30041,30360,30444],
+        'Required Items': [30387,30411,30421,30360,30444],
         'Must Defeat Enemy IDs': [],
         'Rarity': 0,
         'CollectionTableID': 443
@@ -4348,7 +4348,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4816',
         'Location Near': 2423,
         'Story Pre-Req': [12],
-        'Required Items': [30019,30411,30041,30360,30444],
+        'Required Items': [30387,30411,30421,30360,30444],
         'Must Defeat Enemy IDs': [],
         'Rarity': 0,
         'CollectionTableID': 444
@@ -4358,7 +4358,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4817',
         'Location Near': 2423,
         'Story Pre-Req': [12],
-        'Required Items': [30019,30411,30041,30360,30444],
+        'Required Items': [30387,30411,30421,30360,30444],
         'Must Defeat Enemy IDs': [],
         'Rarity': 0,
         'CollectionTableID': 445
@@ -4368,7 +4368,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4818',
         'Location Near': 2421,
         'Story Pre-Req': [12],
-        'Required Items': [30019,30411,30041,30360,30444],
+        'Required Items': [30387,30411,30421,30360,30444],
         'Must Defeat Enemy IDs': [],
         'Rarity': 0,
         'CollectionTableID': 446
@@ -4378,7 +4378,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4819',
         'Location Near': 2418,
         'Story Pre-Req': [12],
-        'Required Items': [30378,30428,30372,30020,30436],
+        'Required Items': [30378,30428,30372,30388,30436],
         'Must Defeat Enemy IDs': [],
         'Rarity': 1,
         'CollectionTableID': 447
@@ -4388,7 +4388,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'ma40aCollectionPoint4820',
         'Location Near': 2423,
         'Story Pre-Req': [12],
-        'Required Items': [30378,30428,30372,30020,30436],
+        'Required Items': [30378,30428,30372,30388,30436],
         'Must Defeat Enemy IDs': [],
         'Rarity': 1,
         'CollectionTableID': 448

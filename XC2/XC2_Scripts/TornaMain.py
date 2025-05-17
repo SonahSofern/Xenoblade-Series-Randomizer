@@ -40,8 +40,8 @@ def AllTornaRando():
     if ProgressionLocTypes == [0,0,0,0,0,0]:
         print("There are no progression locations enabled, cannot generate seed!")
         return
-    #TornaRecipes.CreateTornaRecipeList()
-    TornaQuests.SelectRandomPointGoal()
+    Recipes = TornaRecipes.CreateTornaRecipeList()
+    TornaQuests.SelectRandomPointGoal(Recipes)
     #global Areas, Enemies, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters
     ChosenSupporterAmounts = [1,16,32,48,64] # have a few sliders going forwards to let the player change this amount
     ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests = TornaQuests.SelectCommunityQuests(ChosenSupporterAmounts, ProgressionLocTypes[0])
@@ -300,7 +300,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
 
 def DetermineValidItemSpots(ChosenItem, ChosenItemCat, CatList, CurrentStoryStep = -1): # certain item types cannot coexist with certain location types. collectible items cannot be put as quest rewards, since there is no renewable source of them in case the player uses them all up, for instance.
     ValidItemSpots = []
-    if ChosenItem == 30266:
+    if ChosenItem == 30392:
         pass
     match ChosenItemCat:
         case "CollectionMat":
@@ -679,11 +679,12 @@ def AdjustSlateValue(): # changes the slate pieces to be worth 1 point apiece, a
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+    SlateRows = Helper.InclRange(723, 738)
     with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file: # enemy file
         data = json.load(file)
         for row in data["rows"]:
             match row["$id"]:
-                case Helper.InclRange(723, 738): # these rows contain the slate pieces, provided there's no randomization done on where a shop item needs to be inserted.
+                case item if item in SlateRows: # these rows contain the slate pieces, provided there's no randomization done on where a shop item needs to be inserted.
                     row["AddFlagValue"] = 1
                 case 739:
                     break

@@ -20,6 +20,7 @@ class TornaSideQuest: # created to allow me to pass these objects easier
             self.hasprogression = True
         else:
             self.hasprogression = False
+        self.shopchangeids = input["Shop Change IDs"]
         addtolist.append(self)
 
 class TornaMainQuest:
@@ -31,19 +32,43 @@ class TornaMainQuest:
         addtolist.append(self)
         self.id = addtolist.index(self) + 1
 
-def SelectRandomPointGoal(): # There are some sidequests that require you to feed items into a shop, any combination of items to get you to the point requirement. This function randomly chooses 1 of the items in that shop, and notes it down as the logical requirement, restricting it to be placed logically accessible before the quest
+def SelectRandomPointGoal(Recipes): # There are some sidequests that require you to feed items into a shop, any combination of items to get you to the point requirement. This function randomly chooses 1 of the items in that shop, and notes it down as the logical requirement, restricting it to be placed logically accessible before the quest
+    OptionalRows = [91,92,95,96,97,98,99,100,101,102,103]
+    TaskLists = []
+    # need to do something like for each optional row in MNU_ShopChange, get all task IDs. then, choose a random task ID. then, remove all other task ids, and select the corresponding item requirement from the QuestOptional global variables below
+    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for optional in OptionalRows:
+            for row in data["rows"]:
+                if row["$id"] == optional:
+                    for num in range(1, 9):
+                        if row[f"DefTaskSet{num}"] != 0:
+
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    
+    for 
+
     global Quest15Optional, Quest28Optional, Quest29Optional1, Quest29Optional2, Quest30Optional, Quest34Optional1, Quest34Optional2, Quest44Optional1, Quest44Optional2, Quest47Optional, Quest55Optional
-    Quest15Optional = random.choice([[30347,30352,30379],[30400,30032,30030],[30407,30438,30408,30411],[30384,30032,30352,30407,30408],[30363,30352,30353],[30252,30032,30408,30407,30030,26146],[30386,30365,30409,30407,26147]])
-    Quest28Optional = random.choice([[30353],[30030],[30438],[30356]])
+    Quest15Optional = random.choice([[30347,30352,30379],[30400,30032,30403],[30407,30438,30408,30411],[30384,30032,30352,30407,30408],[30363,30352,30353],[30406,30032,30408,30407,30403,26146],[30386,30365,30409,30407,26147]])
+    Quest28Optional = random.choice([[30353],[30403],[30438],[30356]])
     Quest29Optional1 = random.choice([[30373],[30374],[30375],[30377],[30378]])
     Quest29Optional2 = random.choice([[30425],[30426],[30427],[30428],[30429],[30430]])
     Quest30Optional = random.choice([[30358],[30359],[30360],[30361],[30362],[30409],[30410],[30411],[30412],[30413]])
-    Quest34Optional1 = random.choice([[30347,30352,30379],[30400,30032,30030],[30352,30353,30354],[30347,30353,30380],[30384,30032,30352,30407,30408],[30382,30383,30356,30400],[30363,30352,30353],[30400,30363,30252],[30025,30021,30354],[30364,30365,30029],[30365,30358,30355,30385,30025],[30400,30363,30364,30366,30349],[30347,30352,30360],[30380,30358,30353,30363],[30386,30028,30029,30438]])
-    Quest34Optional2 = random.choice([[30348,30349,30357,30039],[30345,30354,30364],[30407,30438,30408,30411],[30033,30028,30039,30381],[30356,30357,30400,30385,30033],[30407,30029,30021,30384],[30438,30383,30027,30356,30028]])
-    Quest44Optional1 = random.choice([[30363],[30364],[30039],[30366]])
-    Quest44Optional2 = random.choice([[30363],[30364],[30366],[30037],[30039],[30417],[30419]])
-    Quest47Optional = random.choice([[30343],[30351],[30357],[30371],[30380],[30382],[30384],[30386],[30027],[30041],[30042],[30424],[30439],[30432],[30434],[30436]])
-    Quest55Optional = random.choice([[30345],[30349],[30252]])
+    Quest34Optional1 = random.choice([[30347,30352,30379],[30400,30032,30403],[30352,30353,30354],[30347,30353,30380],[30384,30032,30352,30407,30408],[30382,30383,30356,30400],[30363,30352,30353],[30400,30363,30406],[30396,30389,30354],[30364,30365,30402],[30365,30358,30355,30385,30396],[30400,30363,30364,30366,30349],[30347,30352,30360],[30380,30358,30353,30363],[30386,30401,30402,30438]])
+    Quest34Optional2 = random.choice([[30348,30349,30357,30416],[30345,30354,30364],[30407,30438,30408,30411],[30033,30401,30416,30381],[30356,30357,30400,30385,30033],[30407,30402,30389,30384],[30438,30383,30398,30356,30401]])
+    Quest44Optional1 = random.choice([[30363],[30364],[30416],[30366]])
+    Quest44Optional2 = random.choice([[30363],[30364],[30366],[30037],[30416],[30417],[30419]])
+    Quest47Optional = random.choice([[30343],[30351],[30357],[30371],[30380],[30382],[30384],[30386],[30398],[30421],[30422],[30424],[30439],[30432],[30434],[30436]])
+    Quest55Optional = random.choice([[30345],[30349],[30406]])
+    AllOptionals = [Quest15Optional, Quest28Optional, Quest29Optional1, Quest29Optional2, Quest30Optional, Quest34Optional1, Quest34Optional2, Quest44Optional1, Quest44Optional2, Quest47Optional, Quest55Optional]
+    global AllOptionalObjects
+    AllOptionalObjects = []
+    for optional in AllOptionals:
+        for recipe in Recipes:
+            if optional == recipe.subcomponentid:
+                AllOptionalObjects.append(recipe)
 
 def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the community quests that logically unlock Story Events 38 and 50 (lv 2 and lv 4 community)
     TornaSidequest1 = {
@@ -54,7 +79,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [HazeKey, [ManipEtherKey[0]], [HazeAff[0]], MythraKey, [LightKey[0]]], # LevelUpTokens[:11]],
         'Community Gained': 0,
         'Community Level Req': 0,
-        'Reward Set IDs': [1082]
+        'Reward Set IDs': [1082],
+        'Shop Change IDs': []
     }
     TornaSidequest2 = {
         'Quest Name': 'A Simple Errand',
@@ -64,7 +90,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [], # LevelUpTokens[:11]],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1060]
+        'Reward Set IDs': [1060],
+        'Shop Change IDs': []
     }
     TornaSidequest3 = {
         'Quest Name': 'Barmy Tale of Barney',
@@ -74,7 +101,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [[SwordplayKey[0]]], #LevelUpTokens[:7]],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1076]
+        'Reward Set IDs': [1076],
+        'Shop Change IDs': []
     }
     TornaSidequest4 = {
         'Quest Name': 'Driver Coaching',
@@ -84,7 +112,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 0,
         'Community Level Req': 0,
-        'Reward Set IDs': [1206]
+        'Reward Set IDs': [1206],
+        'Shop Change IDs': []
     }
     TornaSidequest5 = {
         'Quest Name': 'A Rare Sense of Justice',
@@ -94,7 +123,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [AegaeonKey, SuperstrKey, AegaeonAff[:2], HazeKey, KeenEyeKey, HazeAff[:2]],
         'Community Gained': 2,
         'Community Level Req': 5,
-        'Reward Set IDs': [1061]
+        'Reward Set IDs': [1061],
+        'Shop Change IDs': []
     }
     TornaSidequest6 = {
         'Quest Name': 'Punpuns Rival',
@@ -104,7 +134,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [], # LevelUpTokens[:35]],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1081]
+        'Reward Set IDs': [1081],
+        'Shop Change IDs': []
     }
     TornaSidequest7 = {
         'Quest Name': 'Doc, the Miasma Slayer',
@@ -114,7 +145,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [], # LevelUpTokens[:13]],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1080]
+        'Reward Set IDs': [1080],
+        'Shop Change IDs': []
     }
     TornaSidequest8 = {
         'Quest Name': 'Power Unimaginable',
@@ -124,7 +156,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [], # LevelUpTokens[:17]],
         'Community Gained': 0,
         'Community Level Req': 0,
-        'Reward Set IDs': [1083]
+        'Reward Set IDs': [1083],
+        'Shop Change IDs': []
     }
     TornaSidequest9 = {
         'Quest Name': 'Blade Coaching',
@@ -134,7 +167,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 0,
         'Community Level Req': 0,
-        'Reward Set IDs': [1208]
+        'Reward Set IDs': [1208],
+        'Shop Change IDs': []
     }
     TornaSidequest10 = {
         'Quest Name': 'Further Blade Coaching',
@@ -144,7 +178,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 0,
         'Community Level Req': 0,
-        'Reward Set IDs': [1209]
+        'Reward Set IDs': [1209],
+        'Shop Change IDs': []
     }
     TornaSidequest11 = {
         'Quest Name': 'The Ardainian Gunman',
@@ -154,17 +189,19 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [], # LevelUpTokens[:20]],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1074]
+        'Reward Set IDs': [1074],
+        'Shop Change IDs': []
     }
     TornaSidequest12 = {
         'Quest Name': 'A Taste of Home',
         'Quest Number': 12,
         'Main Story Req': 16,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [[30347,30379,30252,30418,26149] , [30400,30379,30252,30418,30029,26191]],
+        'Item Requirements': [[30347,30379,30406,30418,26149] , [30400,30379,30406,30418,30402,26191]],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1075]
+        'Reward Set IDs': [1075],
+        'Shop Change IDs': []
     }
     TornaSidequest13 = {
         'Quest Name': 'Salvage the Salvager',
@@ -174,7 +211,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [[30426] , [30427] , [25465]], # LevelUpTokens[:21]],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1063]
+        'Reward Set IDs': [1063],
+        'Shop Change IDs': []
     }
     TornaSidequest14 = {
         'Quest Name': 'Wheres the Boy Gone',
@@ -184,7 +222,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 0,
         'Community Level Req': 0,
-        'Reward Set IDs': [1084]
+        'Reward Set IDs': [1084],
+        'Shop Change IDs': []
     }
     TornaSidequest15 = {
         'Quest Name': 'My First Adventure',
@@ -194,17 +233,19 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [Quest15Optional],
         'Community Gained': 2,
         'Community Level Req': 0,
-        'Reward Set IDs': [1064]
+        'Reward Set IDs': [1064],
+        'Shop Change IDs': [91]
     }
     TornaSidequest16 = {
         'Quest Name': 'Seeking a Seeker',
         'Quest Number': 16,
         'Main Story Req': 20,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [[30019,30411,30041,30360,30444] , [30425] , [30428]],
+        'Item Requirements': [[30387,30411,30421,30360,30444] , [30425] , [30428]],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1079]
+        'Reward Set IDs': [1079],
+        'Shop Change IDs': []
     }
     TornaSidequest17 = {
         'Quest Name': 'Feeding an Army',
@@ -214,7 +255,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [[30380] , [30438] , [30347]],
         'Community Gained': 0,
         'Community Level Req': 0,
-        'Reward Set IDs': [1085]
+        'Reward Set IDs': [1085],
+        'Shop Change IDs': []
     }
     TornaSidequest18 = {
         'Quest Name': 'Further Driver Coaching',
@@ -224,7 +266,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 0,
         'Community Level Req': 0,
-        'Reward Set IDs': [1207]
+        'Reward Set IDs': [1207],
+        'Shop Change IDs': []
     }
     TornaSidequest19 = {
         'Quest Name': 'Fusion Coaching',
@@ -234,7 +277,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 2,
         'Community Level Req': 2,
-        'Reward Set IDs': [1210]
+        'Reward Set IDs': [1210],
+        'Shop Change IDs': []
     }
     TornaSidequest20 = {
         'Quest Name': 'What Matters Most',
@@ -244,7 +288,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [[25460] , [25461]], # LevelUpTokens[:36]],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1054]
+        'Reward Set IDs': [1054],
+        'Shop Change IDs': []
     }
     TornaSidequest21 = {
         'Quest Name': 'The Malcontent Doctor',
@@ -254,7 +299,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [[25457]],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1053]
+        'Reward Set IDs': [1053],
+        'Shop Change IDs': []
     }
     TornaSidequest22 = {
         'Quest Name': 'Lett Bridge Restoration',
@@ -264,7 +310,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [], # LevelUpTokens[:25]],
         'Community Gained': 0,
         'Community Level Req': 0,
-        'Reward Set IDs': [1086]
+        'Reward Set IDs': [1086],
+        'Shop Change IDs': []
     }
     TornaSidequest23 = {
         'Quest Name': 'Thicker Than Water',
@@ -274,7 +321,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [HazeKey, KeenEyeKey[:1], [HazeAff[0]], MythraKey, FocusKey, MythraAff[:2]],
         'Community Gained': 3,
         'Community Level Req': 2,
-        'Reward Set IDs': [1052]
+        'Reward Set IDs': [1052],
+        'Shop Change IDs': []
     }
     TornaSidequest24 = {
         'Quest Name': 'The Travails of War',
@@ -284,7 +332,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [], # LevelUpTokens[:42]],
         'Community Gained': 2,
         'Community Level Req': 4,
-        'Reward Set IDs': [1057]
+        'Reward Set IDs': [1057],
+        'Shop Change IDs': []
     }
     TornaSidequest25 = {
         'Quest Name': 'To Cross a Desert',
@@ -294,7 +343,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [[30355] , [30383]],
         'Community Gained': 0,
         'Community Level Req': 0,
-        'Reward Set IDs': [1087]
+        'Reward Set IDs': [1087],
+        'Shop Change IDs': []
     }
     TornaSidequest26 = {
         'Quest Name': 'For Lack of a Hunter',
@@ -304,7 +354,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [[30380]],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1078]
+        'Reward Set IDs': [1078],
+        'Shop Change IDs': []
     }
     TornaSidequest27 = {
         'Quest Name': 'Here Be Treasure',
@@ -314,17 +365,19 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [MinothKey, [MiningKey[0]], [FortitudeKey[0]]],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1077]
+        'Reward Set IDs': [1077],
+        'Shop Change IDs': []
     }
     TornaSidequest28 = {
         'Quest Name': 'The Secret of Dannagh',
         'Quest Number': 28,
         'Main Story Req': 35,
         'Sidequest Pre-Req': [13],
-        'Item Requirements': [[30428,30375,30020,30433,30428,30375,30020,30433] , [30428] , [30375] , [30020] , [30433] , Quest28Optional],
+        'Item Requirements': [[30428,30375,30338,30433,30428,30375,30338,30433] , [30428] , [30375] , [30338] , [30433] , Quest28Optional],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1058, 1059]
+        'Reward Set IDs': [1058, 1059],
+        'Shop Change IDs': [95]
     }
     TornaSidequest29 = {
         'Quest Name': 'The Tornan Inventor',
@@ -334,7 +387,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [Quest29Optional1 , Quest29Optional2],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1068]
+        'Reward Set IDs': [1068],
+        'Shop Change IDs': [99,100]
     }
     TornaSidequest30 = {
         'Quest Name': 'Nuts about Bugs',
@@ -344,7 +398,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [Quest30Optional],
         'Community Gained': 0,
         'Community Level Req': 0,
-        'Reward Set IDs': [1066]
+        'Reward Set IDs': [1066],
+        'Shop Change IDs': [96]
     }
     TornaSidequest31 = {
         'Quest Name': 'Lighting the Way',
@@ -354,7 +409,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1034]
+        'Reward Set IDs': [1034],
+        'Shop Change IDs': []
     }
     TornaSidequest32 = {
         'Quest Name': 'An Oasis for All',
@@ -364,7 +420,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [], #LevelUpTokens[:36]],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1035]
+        'Reward Set IDs': [1035],
+        'Shop Change IDs': []
     }
     TornaSidequest33 = {
         'Quest Name': 'Armus Gone Astray',
@@ -374,7 +431,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [HazeKey, [KeenEyeKey[0]], MythraKey, [FocusKey[0]]], # LevelUpTokens[:32]],
         'Community Gained': 2,
         'Community Level Req': 0,
-        'Reward Set IDs': [1032]
+        'Reward Set IDs': [1032],
+        'Shop Change IDs': []
     }
     TornaSidequest34 = {
         'Quest Name': 'Hungry for More',
@@ -384,17 +442,19 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [Quest34Optional1 , Quest34Optional2],
         'Community Gained': 1,
         'Community Level Req': 0,
-        'Reward Set IDs': [1071]
+        'Reward Set IDs': [1071],
+        'Shop Change IDs': [101,102]
     }
     TornaSidequest35 = {
         'Quest Name': 'Bolstering Sales',
         'Quest Number': 35,
         'Main Story Req': 37,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [[30340] , [30348] , [30268] , [30341] , [30024] , [30423]],
+        'Item Requirements': [[30340] , [30348] , [30399] , [30341] , [30395] , [30423]],
         'Community Gained': 2,
         'Community Level Req': 0,
-        'Reward Set IDs': [1033]
+        'Reward Set IDs': [1033],
+        'Shop Change IDs': []
     }
     TornaSidequest36 = {
         'Quest Name': 'Helping the Helper',
@@ -404,7 +464,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [[25458,30342,30368,30429,26164] , [25458]],
         'Community Gained': 1,
         'Community Level Req': 2,
-        'Reward Set IDs': [1036]
+        'Reward Set IDs': [1036],
+        'Shop Change IDs': []
     }
     TornaSidequest37 = {
         'Quest Name': 'Homegrown Inventor',
@@ -414,7 +475,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [[SwordplayKey[0]] , [30374] , [30378] , [25462]], #LevelUpTokens[:40]],
         'Community Gained': 1,
         'Community Level Req': 2,
-        'Reward Set IDs': [1037]
+        'Reward Set IDs': [1037],
+        'Shop Change IDs': []
     }
     TornaSidequest38 = {
         'Quest Name': 'Duplicity',
@@ -424,7 +486,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [], #LevelUpTokens[:41]],
         'Community Gained': 2,
         'Community Level Req': 2,
-        'Reward Set IDs': [1055]
+        'Reward Set IDs': [1055],
+        'Shop Change IDs': []
     }
     TornaSidequest39 = {
         'Quest Name': 'Sweetest Tidings',
@@ -434,7 +497,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [], #LevelUpTokens[:42]],
         'Community Gained': 2,
         'Community Level Req': 2,
-        'Reward Set IDs': [1062]
+        'Reward Set IDs': [1062],
+        'Shop Change IDs': []
     }
     TornaSidequest40 = {
         'Quest Name': 'Passing the Torch',
@@ -444,7 +508,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [MinothKey, MiningKey[:1], MinothAff[:1], FortitudeKey[:1], JinAff[:1] , 25455], # LevelUpTokens[:38]],
         'Community Gained': 1,
         'Community Level Req': 2,
-        'Reward Set IDs': [1043]
+        'Reward Set IDs': [1043],
+        'Shop Change IDs': []
     }
     TornaSidequest41 = {
         'Quest Name': 'Trail of Destruction',
@@ -454,7 +519,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [AegaeonKey, SuperstrKey[:1], AegaeonAff[:1], MythraKey, FocusKey[:1], [MythraAff[0]]], # LevelUpTokens[:44]],
         'Community Gained': 2,
         'Community Level Req': 2,
-        'Reward Set IDs': [1038]
+        'Reward Set IDs': [1038],
+        'Shop Change IDs': []
     }
     TornaSidequest42 = {
         'Quest Name': 'Forest Trail Antics',
@@ -464,7 +530,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 2,
-        'Reward Set IDs': [1039]
+        'Reward Set IDs': [1039],
+        'Shop Change IDs': []
     }
     TornaSidequest43 = {
         'Quest Name': 'Making Up the Numbers',
@@ -474,7 +541,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 3,
         'Community Level Req': 2,
-        'Reward Set IDs': [1056]
+        'Reward Set IDs': [1056],
+        'Shop Change IDs': []
     }
     TornaSidequest44 = {
         'Quest Name': 'The Fish That Could Be',
@@ -484,7 +552,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [Quest44Optional1 , Quest44Optional2],
         'Community Gained': 1,
         'Community Level Req': 2,
-        'Reward Set IDs': [1067]
+        'Reward Set IDs': [1067],
+        'Shop Change IDs': [97,98]
     }
     TornaSidequest45 = {
         'Quest Name': 'Hubbie Takes a Hike',
@@ -494,7 +563,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 2,
         'Community Level Req': 3,
-        'Reward Set IDs': [1073]
+        'Reward Set IDs': [1073],
+        'Shop Change IDs': []
     }
     TornaSidequest46 = {
         'Quest Name': 'Manning the Gates',
@@ -504,7 +574,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [MythraKey, FocusKey[:1], [MythraAff[0]], HazeKey, KeenEyeKey[:1], [HazeAff[0]]], #  LevelUpTokens[:40]],
         'Community Gained': 2,
         'Community Level Req': 3,
-        'Reward Set IDs': [1040]
+        'Reward Set IDs': [1040],
+        'Shop Change IDs': []
     }
     TornaSidequest47 = {
         'Quest Name': '100k in the Red',
@@ -514,7 +585,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [Quest47Optional],
         'Community Gained': 1,
         'Community Level Req': 3,
-        'Reward Set IDs': [1072]
+        'Reward Set IDs': [1072],
+        'Shop Change IDs': [103]
     }
     TornaSidequest48 = {
         'Quest Name': 'Proof of Love',
@@ -524,17 +596,19 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 2,
         'Community Level Req': 3,
-        'Reward Set IDs': [1044]
+        'Reward Set IDs': [1044],
+        'Shop Change IDs': []
     }
     TornaSidequest49 = {
         'Quest Name': 'Planning for the Future',
         'Quest Number': 49,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [[30020] , [25464]], # LevelUpTokens[:43]],
+        'Item Requirements': [[30338] , [25464]], # LevelUpTokens[:43]],
         'Community Gained': 3,
         'Community Level Req': 3,
-        'Reward Set IDs': [1042]
+        'Reward Set IDs': [1042],
+        'Shop Change IDs': []
     }
     TornaSidequest50 = {
         'Quest Name': 'The Bard Factor',
@@ -544,7 +618,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 4,
-        'Reward Set IDs': [1069]
+        'Reward Set IDs': [1069],
+        'Shop Change IDs': []
     }
     TornaSidequest51 = {
         'Quest Name': 'Azurda SOS',
@@ -554,27 +629,30 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [LevelUpTokens[:51]],
         'Community Gained': 2,
         'Community Level Req': 4,
-        'Reward Set IDs': [1065]
+        'Reward Set IDs': [1065],
+        'Shop Change IDs': []
     }
     TornaSidequest52 = {
         'Quest Name': 'Great Tornan Cook-Off',
         'Quest Number': 52,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [34],
-        'Item Requirements': [[30382,30384,30347,30383,30408,26148] , [30033,30400,30347,30027,30438,26150]],
+        'Item Requirements': [[30382,30384,30347,30383,30408,26148] , [30033,30400,30347,30398,30438,26150]],
         'Community Gained': 2,
         'Community Level Req': 4,
-        'Reward Set IDs': [1047, 1048]
+        'Reward Set IDs': [1047, 1048],
+        'Shop Change IDs': []
     }
     TornaSidequest53 = {
         'Quest Name': 'Safety Measures',
         'Quest Number': 53,
         'Main Story Req': 46,
         'Sidequest Pre-Req': [15, 43, 49],
-        'Item Requirements': [[30020] , [30372] , [30019] , [30266] , [30427]],
+        'Item Requirements': [[30338] , [30372] , [30387] , [30392] , [30427]],
         'Community Gained': 2,
         'Community Level Req': 3,
-        'Reward Set IDs': [1041]
+        'Reward Set IDs': [1041],
+        'Shop Change IDs': []
     }
     TornaSidequest54 = {
         'Quest Name': 'Further Feeding Issues',
@@ -584,7 +662,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [AegaeonKey, ComWaterKey[:1], AegaeonAff[:1] , [25463,30413,30423,30359,26182]], # LevelUpTokens[:39]],
         'Community Gained': 1,
         'Community Level Req': 4,
-        'Reward Set IDs': [1045]
+        'Reward Set IDs': [1045],
+        'Shop Change IDs': []
     }
     TornaSidequest55 = {
         'Quest Name': 'Unforgotten Promise',
@@ -594,7 +673,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [MythraKey, FocusKey, MythraAff[:2], HazeKey, KeenEyeKey, HazeAff[:2] , [30344] , [30370] , [25536] , Quest55Optional],
         'Community Gained': 2,
         'Community Level Req': 4,
-        'Reward Set IDs': [1046]
+        'Reward Set IDs': [1046],
+        'Shop Change IDs': [92]
     }
     TornaSidequest56 = {
         'Quest Name': 'What Goes Around',
@@ -604,7 +684,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 2,
         'Community Level Req': 5,
-        'Reward Set IDs': [1049]
+        'Reward Set IDs': [1049],
+        'Shop Change IDs': []
     }
     TornaSidequest57 = {
         'Quest Name': 'Community Spirit',
@@ -614,7 +695,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 2,
         'Community Level Req': 5,
-        'Reward Set IDs': [1051]
+        'Reward Set IDs': [1051],
+        'Shop Change IDs': []
     }
     TornaSidequest58 = {
         'Quest Name': 'A Small Promise',
@@ -624,7 +706,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 2,
         'Community Level Req': 5,
-        'Reward Set IDs': [1050]
+        'Reward Set IDs': [1050],
+        'Shop Change IDs': []
     }
     TornaSidequest59 = {
         'Quest Name': 'Martha',
@@ -634,7 +717,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 5,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest60 = {
         'Quest Name': 'Benny',
@@ -644,7 +728,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 2,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest61 = {
         'Quest Name': 'Dolala',
@@ -654,7 +739,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 2,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest62 = {
         'Quest Name': 'Clemens',
@@ -664,7 +750,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 2,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest63 = {
         'Quest Name': 'Nalsaz',
@@ -674,7 +761,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 2,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest64 = {
         'Quest Name': 'Yrissa',
@@ -684,7 +772,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 2,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest65 = {
         'Quest Name': 'Clarke',
@@ -694,7 +783,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 4,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest66 = {
         'Quest Name': 'Augustus',
@@ -704,7 +794,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 4,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest67 = {
         'Quest Name': 'Lavinia',
@@ -714,7 +805,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 4,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest68 = {
         'Quest Name': 'Mini',
@@ -724,7 +816,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 3,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest69 = {
         'Quest Name': 'Tranc',
@@ -734,7 +827,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 5,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest70 = {
         'Quest Name': 'Vill Ethelmar',
@@ -744,7 +838,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 5,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest71 = {
         'Quest Name': 'Gedd',
@@ -754,7 +849,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 5,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest72 = {
         'Quest Name': 'Piper',
@@ -764,7 +860,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 5,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest73 = {
         'Quest Name': 'Mauna',
@@ -774,7 +871,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 5,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
     TornaSidequest74 = {
         'Quest Name': 'Elba',
@@ -784,15 +882,21 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Item Requirements': [],
         'Community Gained': 1,
         'Community Level Req': 5,
-        'Reward Set IDs': []
+        'Reward Set IDs': [],
+        'Shop Change IDs': []
     }
 
     TornaSidequestDict = [TornaSidequest1, TornaSidequest2, TornaSidequest3, TornaSidequest4, TornaSidequest5, TornaSidequest6, TornaSidequest7, TornaSidequest8, TornaSidequest9, TornaSidequest10, TornaSidequest11, TornaSidequest12, TornaSidequest13, TornaSidequest14, TornaSidequest15, TornaSidequest16, TornaSidequest17, TornaSidequest18, TornaSidequest19, TornaSidequest20, TornaSidequest21, TornaSidequest22, TornaSidequest23, TornaSidequest24, TornaSidequest25, TornaSidequest26, TornaSidequest27, TornaSidequest28, TornaSidequest29, TornaSidequest30, TornaSidequest31, TornaSidequest32, TornaSidequest33, TornaSidequest34, TornaSidequest35, TornaSidequest36, TornaSidequest37, TornaSidequest38, TornaSidequest39, TornaSidequest40, TornaSidequest41, TornaSidequest42, TornaSidequest43, TornaSidequest44, TornaSidequest45, TornaSidequest46, TornaSidequest47, TornaSidequest48, TornaSidequest49, TornaSidequest50, TornaSidequest51, TornaSidequest52, TornaSidequest53, TornaSidequest54, TornaSidequest55, TornaSidequest56, TornaSidequest57, TornaSidequest58, TornaSidequest59, TornaSidequest60, TornaSidequest61, TornaSidequest62, TornaSidequest63, TornaSidequest64, TornaSidequest65, TornaSidequest66, TornaSidequest67, TornaSidequest68, TornaSidequest69, TornaSidequest70, TornaSidequest71, TornaSidequest72, TornaSidequest73, TornaSidequest74]
     global TornaSidequests
     TornaSidequests = [] # holds the TornaSideQuest class objects
 
+    ShopChangeIDs = Helper.ExtendListtoLength([], len(TornaSidequestDict),"0")
+
+
     for sidequest in TornaSidequestDict:
         TornaSideQuest(sidequest, TornaSidequests, QuestRewardQty)
+
+
 
     TornaMainQuest1 = {
         'FLD_QuestTask $id': 1,
@@ -1203,7 +1307,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     TotalLevel4QuestRequirements.sort()
 
     StackStoryRequirements(TotalLevel2QuestRequirements, TotalLevel4QuestRequirements)
-
+    #ChangeQuestShops()
     return ChosenLevel2Quests, ChosenLevel4Quests, TornaSidequests, TornaMainquests
 
 def StackStoryRequirements(Level2QuestReqs, Level4QuestReqs): # This adds the previous story requirements to the current story step's requirements. I wanted to keep the original requirements clear in case someone makes a tracker from the dictionary above
@@ -1216,3 +1320,7 @@ def StackStoryRequirements(Level2QuestReqs, Level4QuestReqs): # This adds the pr
             TornaMainquests[storystep].itemreqs.extend(Level4QuestReqs)
         TornaMainquests[storystep].itemreqs = list(set(TornaMainquests[storystep].itemreqs))
         TornaMainquests[storystep].itemreqs.sort()
+
+#def ChangeQuestShops():
+#    for optional in AllOptionals:
+#        if 

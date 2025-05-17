@@ -1,5 +1,5 @@
 import scripts.Helper as Helper
-
+import json
 
 #HELPFUL VARIABLES
 AuxCores = Helper.InclRange(15001, 15406)
@@ -194,7 +194,7 @@ FullShopEventNameDict = {'Normal': {36: [40321, 30], 37: [40322, 31], 38: [40323
 
 # Torna IDS
 ValidRecipeInfoIDs = Helper.InclRange(26139, 26163) + [26166] + Helper.InclRange(26171, 26191)
-TornaCollectibleIDs = [30340, 30341, 30342, 30343, 30344, 30345, 30346, 30347, 30348, 30349, 30350, 30351, 30352, 30353, 30354, 30355, 30356, 30357, 30358, 30359, 30360, 30361, 30362, 30363, 30364, 30365, 30366, 30367, 30368, 30369, 30370, 30371, 30372, 30373, 30374, 30375, 30376, 30377, 30378, 30380, 30384, 30386, 30387, 30388, 30389, 30390, 30391, 30392, 30393, 30394, 30395, 30396, 30397, 30398, 30399, 30400, 30401, 30402, 30403, 30404, 30405, 30406, 30407, 30408, 30409, 30410, 30411, 30412, 30413, 30414, 30415, 30416, 30417, 30418, 30419, 30420, 30421, 30422, 30423, 30424, 30425, 30426, 30427, 30428, 30429, 30430, 30432, 30433, 30434, 30435, 30436, 30437, 30438, 30439, 30442, 30443, 30444, 25457, 25458, 25463, 25473, 25536, 30041]
+TornaCollectibleIDs = [30340, 30341, 30342, 30343, 30344, 30345, 30346, 30347, 30348, 30349, 30350, 30351, 30352, 30353, 30354, 30355, 30356, 30357, 30358, 30359, 30360, 30361, 30362, 30363, 30364, 30365, 30366, 30367, 30368, 30369, 30370, 30371, 30372, 30373, 30374, 30375, 30376, 30377, 30378, 30380, 30384, 30386, 30387, 30388, 30389, 30390, 30391, 30392, 30393, 30394, 30395, 30396, 30397, 30398, 30399, 30400, 30401, 30402, 30403, 30404, 30405, 30406, 30407, 30408, 30409, 30410, 30411, 30412, 30413, 30414, 30415, 30416, 30417, 30418, 30419, 30420, 30421, 30422, 30423, 30424, 30425, 30426, 30427, 30428, 30429, 30430, 30432, 30433, 30434, 30435, 30436, 30437, 30438, 30439, 30442, 30443, 30444, 25457, 25458, 25463, 25473, 25536]
 TornaAuxCores = Helper.InclRange(17001, 17406) + [17425]
 TornaWeaponChips = WeaponChips
 CombinedTornaAccessories = list(set(TornaAccessories + Accessories))
@@ -256,3 +256,17 @@ AegaeonKey = [25630]
 
 # Level Up Unlocks (no longer used, kept in for reference)
 LevelUpTokens = Helper.InclRange(25631,25726) # 96 tokens, we assume we get 2 levels from intro fight (stats required to beat fight?), and start at lv 1.
+
+#with open("./XC2/_internal/JsonOutputs/common/ITM_CollectionList.json", 'r+', encoding='utf-8') as file:
+#    data = json.load(file)
+#    for row in data["rows"]:
+#        CurDuplicatedItemNames = {"Original ID": row["$id"], "Shares a Name With": []}
+#        CurRowName = row["Name"]
+#        for row2 in data["rows"]:
+#            if row2["Name"] == CurRowName and row["$id"] != row2["$id"]:
+#                CurDuplicatedItemNames["Shares a Name With"].append(row2["$id"])
+#        if CurDuplicatedItemNames["Shares a Name With"] != []:
+#            print(CurDuplicatedItemNames)
+#    file.seek(0)
+#    file.truncate()
+#    json.dump(data, file, indent=2, ensure_ascii=False)
