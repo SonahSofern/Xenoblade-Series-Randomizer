@@ -187,8 +187,7 @@ def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
         enemy["spike_state_val"] = chosen["spike_state_val"]
 
 def BossSelfDestructs(enemy, chosen:Enemy, selfDestructArts):
-    NebulaFamily = 7
-    if (enemy["$id"] in IDs.BossEnemies) and (chosen.eneListArea["family"] == NebulaFamily):
+    if (enemy["limit"] > 0): # If enemy has a health threshold remove the self destruct art
         for i in range(1,9):
             if enemy[f"arts{i}"] in selfDestructArts:
                 enemy[f"arts{i}"] = 0 # Remove self destruct arts 
