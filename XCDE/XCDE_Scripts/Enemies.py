@@ -23,6 +23,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     GoldFace = ForcedArt(1622, 1, 740)
     DiscipleDickson = ForcedArt(1316, 8, 942)
     GroupEnemies = [135,136,137,138,139]
+    selfDestructArts = [1005,1015,1017,1009, 1007, 1013, 396, 406, 915, 408, 812, 814, 400, 923, 1053, 398, 899, 404, 410, 1127, 820] + Helper.InclRange(900, 929)
     ForcedStoryArts = [MetalFace, MysteriousFace, GoldFace, DiscipleDickson] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
     isNormal = normal.GetState()
     isUnique = unique.GetState()
@@ -99,9 +100,11 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                                 break
                         
                         TelethiaEarly(enemy, chosen)
+                        BossSelfDestructs(enemy, chosen, selfDestructArts)
                         MechonEarly(enemy, chosen)
-                        ForcedArts(enemy, ForcedStoryArts)
                         SmallAreaFights(enemy)
+                        ForcedArts(enemy, ForcedStoryArts)
+                        
                         # Allows no dupes if possible if we dont have enough choices it reshuffles the original pool
                         filteredEnemyData.remove(chosen)   
                         if filteredEnemyData == []: # repopulate it if the group is empty
@@ -183,6 +186,12 @@ def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
     else:
         enemy["spike_state_val"] = chosen["spike_state_val"]
 
+def BossSelfDestructs(enemy, chosen:Enemy, selfDestructArts):
+    NebulaFamily = 7
+    if (enemy["$id"] in IDs.BossEnemies) and (chosen.eneListArea["family"] == NebulaFamily):
+        for i in range(1,9):
+            if enemy[f"arts{i}"] in selfDestructArts:
+                enemy[f"arts{i}"] = 0 # Remove self destruct arts 
 
 def TelethiaEarly(enemy, chosen:Enemy):
     TelethiaFamily = 9
