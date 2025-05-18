@@ -9,8 +9,10 @@ def TutorialSkips():
         tutData = json.load(tutFile)
         dupeFlags = []
         for f in tutData["rows"]:
+            
+            f["page"] = 1 # Makes the tutorial only 1 page skipping unnesccesary ones
+            
             if f["$id"] in UnskippableTutorials:
-                f["page"] = 1 # Makes the tutorial only 1 page skipping unnesccesary ones
                 continue
             
             if f["$id"] in MechonTutorials:
@@ -25,7 +27,6 @@ def TutorialSkips():
             else:
                 dupeFlags.append(f["scenario_flag"])
                 
-            f["page"] = 1 # Makes the tutorial only 1 page skipping unnesccesary ones
             
             
                 # could this unlock your menu stuff https://xenobladedata.github.io/xb1de/bdat/bdat_common/MNU_game_option_item.html

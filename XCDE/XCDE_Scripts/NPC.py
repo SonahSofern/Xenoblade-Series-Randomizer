@@ -33,7 +33,7 @@ def Trades():
     #     print(f"Waist:  {types[7]}")
     #     print(f"Leg:  {types[8]}")
     
-    
+    #
     for file in IDs.areaFileListNumbers:
         try:   
             with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/exchangelist{file}.json", 'r+', encoding='utf-8') as tradeNPCFile:
@@ -69,7 +69,12 @@ def RandomTradeVerification(typeChoice, trade, isOn):
     if isOn:
         if trade == 0: # Only fill out slots that previously had trades
             return 0
+        ch = random.choice(typeChoice)
+        if ch == None:
+            pass
         return random.choice(typeChoice)
+    else:
+        return trade
     
 def NPCTradesDesc():
     myDesc = PopupDescriptions.Description()
