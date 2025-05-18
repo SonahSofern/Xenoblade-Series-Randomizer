@@ -7,7 +7,7 @@ GuestArts = [144,145,146,147,148,149]
 PonspectorDLCArts = [188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254]
 ShulkMonadoArts = [3,4,5,6,7,8,9,10]
 DunbanMonadoArts = [150,151]
-MeliaSummonsNames = [267, 123, 91, 73, 191, 5, 323, 277, 321, 357]
+MeliaSummonsNames = [205, 207, 209, 217, 221, 223, 225, 231]
 ReynGuardShift = [22] # Wont work on other characters
 
 # Setting to make arts all cost tp instead of having cooldowns basically auto attack recharging arts
@@ -148,7 +148,6 @@ def BalanceArtUnlockLevels(artData):
                 art["get_type"] = 1
                 unlockLv += random.choice(stepLv)
 
-    
 
 def DetermineArtType(art, char:ActMatch):
     if art["pc"] == char.pcID: # If they get a vanilla art dont change the act no

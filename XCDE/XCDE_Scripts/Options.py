@@ -12,8 +12,6 @@ QOL = 5
 Funny = 6
 GameModeTab = 7
 
-# LevelDiffOption = Option("Level Penalties", General, "Removes the harsh level penalties and bonuses from the game for more fair combat")
-
 # General
 TradeOption = Option("NPC Trades", General, "Randomizes chosen categories of NPC trades", [lambda: NPC.Trades()], descData=lambda: NPC.NPCTradesDesc())
 TradeOption_Weapon = SubOption("Weapons", TradeOption)
@@ -105,7 +103,10 @@ for song in Music.AllJingles:
 # QOL
 TutorialSkipsOption = Option("Tutorial Skips", QOL, "Reduces tutorials as much as possible", [lambda: Tutorials.TutorialSkips()])
 FasterLvOption = Option("Fast Levels", QOL, "Decreases level up requirements by a set amount (Recommended 3x to rush the story).", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 2, _spinMax = 256, _spinIncr = 1, _spinDesc = "x", spinDefault=2)
+FasterSkillTrees = Option("Fast Skill Trees", QOL, "Increases SP gains for skill trees", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["en_ap"], [f'row[key] * {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 2, _spinMax = 256, _spinIncr = 1, _spinDesc = "x", spinDefault=2)
+FasterArtLevels = Option("Fast Art Levels", QOL, "Increases AP gains for art level ups",[lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["en_exp"], [f'row[key] * {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 2, _spinMax = 256, _spinIncr = 1, _spinDesc = "x", spinDefault=2)
 MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free quickstep gems.", [lambda: MiscQOL.Quickstep()], _hasSpinBox=True, _spinDesc="% Speed", _spinMax=100)
+
 # CutsceneSkipOption = Option("Cutscene Skips", QOL, "Skips all possible cutscenes", [lambda: Cutscenes.CutsceneSkipper()])
 
 # Funny
@@ -116,3 +117,5 @@ RemoveStartingArmorOption = Option("Remove Starting Equipment", Funny, "Removes 
 # ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html
 
 # Character models rando https://xenobladedata.github.io/xb1de/bdat/bdat_common/MNU_Stream_full_dr.html
+
+# Collectapedia bdat_menu_item

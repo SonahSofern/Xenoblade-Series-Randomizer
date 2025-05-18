@@ -22,6 +22,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     MysteriousFace = ForcedArt(268,5,611)
     GoldFace = ForcedArt(1622, 1, 740)
     DiscipleDickson = ForcedArt(1316, 8, 942)
+    GroupEnemies = [135,136,137,138,139]
     ForcedStoryArts = [MetalFace, MysteriousFace, GoldFace, DiscipleDickson] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
     isNormal = normal.GetState()
     isUnique = unique.GetState()
@@ -87,7 +88,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                         for key in CopiedStats: 
                             enemy[key] = chosen.eneListArea[key]
                         
-                        if not FirstFights(enemy):
+                        if (not FirstFights(enemy)) and (enemy["$id"] not in GroupEnemies):
                             for key in CopiedStatsWithRatios:
                                 enemy[key] = KeepStatRatio(enemy, chosen.eneListArea, key, replacementTotalStats, originalTotalStats)
                             
@@ -154,17 +155,17 @@ def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
         
         # Get current enemy
         if enemy["lv"] < 20:
-            spikePerLv = 0.4 # base spike given per level
-        elif enemy["lv"] < 50:
-            spikePerLv = 0.6
+            spikePerLv = 0.2 # base spike given per level
+        elif enemy["lv"] < 40:
+            spikePerLv = 0.4
         else:
             spikePerLv = 0.7
         
         # Get chosens 
         if chosen["lv"] < 20:
             chosenSpikePerLv = 0.2 # base spike given per level
-        elif chosen["lv"] < 50:
-            chosenSpikePerLv = 0.5
+        elif chosen["lv"] < 40:
+            chosenSpikePerLv = 0.4
         else:
             chosenSpikePerLv = 0.7
         
@@ -181,7 +182,8 @@ def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
         enemy["spike_state_val"] = 0
     else:
         enemy["spike_state_val"] = chosen["spike_state_val"]
-        
+
+
 def TelethiaEarly(enemy, chosen:Enemy):
     TelethiaFamily = 9
     BadForTelethia = [30,31,61,62, 134, 265, 266, 268, 416, 417, 534] # Ids for early game so you dont get soul readed
