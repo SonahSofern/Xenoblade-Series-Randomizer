@@ -20,16 +20,13 @@ def RandoPouchShops():
         ValidReplacements.extend(IDs.PouchItems)
     if Options.PouchItemShopOption_CollectionPointMaterials.GetState():
         ValidReplacements.extend(IDs.CollectionPointMaterials)
-        
-    odds = Options.PouchItemShopOption.GetSpinbox()
 
-    
     if ValidReplacements == []: # In case they dont select anything
         return
     
     with open("./XC2/_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as shopFile:
         shopData = json.load(shopFile)
-        odds = Options.PouchItemShopOption.GetOdds()
+        odds = Options.PouchItemShopOption.GetSpinbox()
         for shop in shopData["rows"]:
             if shop[f"DefItem1"] not in (IDs.PouchItems): # Ensures it is an pouch item shop
                 continue

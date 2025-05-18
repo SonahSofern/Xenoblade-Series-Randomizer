@@ -22,7 +22,7 @@ def RandoTreasureBoxes():
                 ValidReplacements.extend(Helper.InclRange(25250, 25300))
         if Options.TreasureChestOption_CollectionPointMaterials.GetState():
             ValidReplacements.extend(IDs.CollectionPointMaterials)
-    odds = Options.TreasureChestOption.GetOdds()
+    odds = Options.TreasureChestOption.GetSpinbox()
 
     if ValidReplacements == []: # In case they dont select anything
         return
