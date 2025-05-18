@@ -105,7 +105,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                         filteredEnemyData.remove(chosen)   
                         if filteredEnemyData == []: # repopulate it if the group is empty
                                 filteredEnemyData = filteredEnemyDataCopy.copy()
-
+                        enemy["move_speed"] = 0
                     JSONParser.CloseFile(eneVoiceData, eneVoiceFile)
                     JSONParser.CloseFile(eneAreaData, eneAreaFile)  
         JSONParser.CloseFile(eneData, eneFile)
@@ -299,3 +299,7 @@ def EnemyDesc(categoryName):
                                     
                         # print("\n") 
                         # print(f"ID {enemy["$id"]} Replaced With ID {chosen.eneListArea["$id"]} Stat Total: {originalTotalStats}")
+                        
+                            #                     if file == "0301" and enemy["$id"] in [261]: # Game doenst like the pods being replaced here
+                            # continue # 233 leg lizard [227,241, 233] try 264 this range crashes (260,265)
+                        

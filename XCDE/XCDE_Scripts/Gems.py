@@ -36,7 +36,7 @@ attributes = {
 
      
 def StandardGems(gemData, gemMSData, gemHelpMSData):    
-    badEffects = [60, 0, 83, 84, 87, 82, 44]
+    badEffects = [60, 0, 83, 84, 87, 82, 44, 94]
     for gem in gemData["rows"]:
         if gem["rvs_status"] in badEffects:
             continue
@@ -58,6 +58,7 @@ def UnusedGems():
     Gem("Cast Quicken", attributes[6], 45, 3,2, 90, 0, [10,30], [0,0], 1000, 4, "\\[Passive\\][XENO:n ] Reduces cast time by $1.")
     Gem("Reactive Heal", attributes[5], 54, 1, 2, 90, 0, [30,255], [0,0], 1500, 1, "\\[Passive\\][XENO:n ] On damage taken restore $1 health.", "Test")
     Gem("Monado Enchant", attributes[7], 208, 1, 1, 90, 0, [100,200], [0,0], 2000, 1, "\\[Passive\\][XENO:n ] Your attacks pierce mechon armor and inflict $1 bonus damage.", "Test")
+    # 94 is accuracy up might add here if it works
     if Options.MovespeedOption.GetState():
         Gem("Quickstep", attributes[8], 3, 3, 2, 25, 0, [2,25], [0,0], 500, 5, "\\[Passive\\][XENO:n ] Increases movement speed by $1.", "\\[Passive\\][XENO:n ] Increases movement speed by $1.")
                     
