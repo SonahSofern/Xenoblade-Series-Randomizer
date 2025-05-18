@@ -161,3 +161,53 @@ def MultiLevelListToSingleLevelList(inputlist: list): # Converts a multi-level l
         else:
             outputlist.append(item)
     return outputlist
+
+def TheTunneler(filepaths: list[str], rowvalues: list[int], inputheaders: list[str], outputheaders: list[str], offsets: list[int]=[0]): # tunnels through multiple files in a row, getting file names in sequential order from list 1, getting a starting row header from list 2, then getting the corresponding column value from list 3, then going to the next file in list 1, taking that corresponding column value, and using it as the new id to look for the header in list 3. Does this for all objects in list 2, returning a list of objects the same length as the input list 2.
+    '''
+    inputheaders should be a list, the first item of which is the column header that we want to search the first file in filepaths for each item in rowids.
+    The remaining items in inputheaders are the headers which we want to look for in file 2 and try and find a match with the outputheader column value from file 1, etc.
+    
+    offsets is optional, if you need to look x rows higher or lower than the returned row from a step, you would fill out offsets like [0,x,0,0], if you had 4 steps
+
+    i.e.
+    So file1, we want the "Icon" column value for the rows with "$id" values in the following list [1,2,3]
+    Then, we want to use those output "Icon" column values from file1 to find their corresponding "Description" column values in file2, and return those values
+    as a list from this function. We don't need any offsetting of rows for this example, so we would call this function like:
+    
+    Helper.TheTunneler(["filepath/file1.json", "filepath/file2.json"], [1,2,3], ["$id", "$id"], ["Icon1", "Description"],[0,0])
+
+    '''
+    tempholder = ExtendListtoLength([], len(rowvalues), "False")
+    functionaloffsets = ExtendListtoLength(offsets, len(rowvalues), "0")
+    for specificfile in range(len(filepaths)):
+        if specificfile == 0:
+            with open("./XC2/_internal/JsonOutputs/" + filepaths[specificfile], 'r+', encoding='utf-8') as file:
+                data = json.load(file)
+                for idnum in range(len(rowvalues)):
+                    for row in data["rows"]:
+                        if row[inputheaders[specificfile]] == rowvalues[idnum] + functionaloffsets[specificfile]:
+                            tempholder[idnum] = row[outputheaders[specificfile]]
+                            break
+                file.seek(0)
+                file.truncate()
+                json.dump(data, file, indent=2, ensure_ascii=False)
+        else:
+            with open("./XC2/_internal/JsonOutputs/" + filepaths[specificfile], 'r+', encoding='utf-8') as file:
+                data = json.load(file)
+                for idnum in range(len(rowvalues)):
+                    if tempholder2[idnum] != 0:
+                        for row in data["rows"]:
+                            if row[inputheaders[specificfile]] == tempholder2[idnum] + functionaloffsets[specificfile]:
+                                tempholder[idnum] = row[outputheaders[specificfile]]
+                                break
+                    else:
+                        tempholder[idnum] = 0
+                file.seek(0)
+                file.truncate()
+                json.dump(data, file, indent=2, ensure_ascii=False)
+        tempholder2 = tempholder
+        tempholder = []
+        tempholder = ExtendListtoLength([], len(rowvalues), "False")
+    
+    return tempholder2
+    

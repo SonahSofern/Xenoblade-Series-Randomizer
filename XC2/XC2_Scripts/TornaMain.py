@@ -6,8 +6,11 @@ import time
 import TornaRecipes, TornaQuests, TornaEnemies, TornaAreas, TornaShops, TornaRedBagItems, TornaMiscItems, TornaChests, TornaCollectionPoints, Options
 import copy
 
-# need to set up the unlock keys
+# need to set up the unlock keys for blade skill tree nodes
+# need to set up the campfire unlock keys
+# need to set up the character unlock keys, by tying them to the cutscene triggers
 # remove the npc talking options for all npc quests that are not logically chosen for the playthrough. This lets you place their required items anywhere. This causes issues with items from chests, the chests currently aren't tied to a quest, just an enemy
+# there's probably a better way of denoting the NPCs which are logically chosen for the playthrough. Maybe their name gets turned a color?
 # hints
 # spoiler log
 
@@ -32,6 +35,26 @@ class KeyItemParams:
         self.captionid = captionid
         self.preciousid = preciousid
         addtolist.append(self)
+
+class BladeInfo:
+    def __init__(self, name, rowid):
+        self.name = name
+        self.purposeids = []
+        self.achievementids = []
+        self.questlistachievementids = []
+        with open("./XC2/_internal/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] == rowid:
+                    for i in range(1, 6):
+                        self.achievementids.extend(Helper.TheTunneler(["common/FLD_AchievementSet.json"], [row["KeyAchievement"], row["FskillAchivement1"], row["FskillAchivement2"], row["FskillAchivement3"]], ["$id"], [f"AchievementID{i}"]))
+                        self.questlistachievementids.extend(Helper.TheTunneler(["common/FLD_AchievementSet.json", "common/FLD_AchievementList.json"], [row["KeyAchievement"], row["FskillAchivement1"], row["FskillAchivement2"], row["FskillAchivement3"]], ["$id", "$id"], [f"AchievementID{i}", "Task"]))
+                        self.purposeids.extend(Helper.TheTunneler(["common/FLD_AchievementSet.json", "common/FLD_AchievementList.json", "common/FLD_QuestListAchievement.json"], [row["KeyAchievement"], row["FskillAchivement1"], row["FskillAchivement2"], row["FskillAchivement3"]], ["$id", "$id", "$id"], [f"AchievementID{i}", "Task", "PurposeID"], [0, 0, 1]))
+                    break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+        
 
 def AllTornaRando():
     DetermineSettings()
@@ -59,6 +82,7 @@ def AllTornaRando():
     HugoComeBack()
     AdjustSlateValue()
     EternityLoamChange()
+    SkillTreeSetup()
     pass
 
 def DetermineSettings():
@@ -700,3 +724,44 @@ def EternityLoamChange(): # need to make eternity loam only require 1 of for the
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+def SkillTreeSetup(): # sets up the blade skill tree nodes for each blade.
+    Blades = ["Jin", "Haze", "Mythra", "Minoth", "Brighid", "Aegaeon"]
+    RowIDs = Helper.InclRange(1127, 1132)
+    FSkill1Names = ["Mineralogy", "Forestry", "Focus", "Entomology", "Botany", "Ichthyology"]
+    FSkill2Names = ["Swift Swordplay", "Manipulate Ether", "Power of Light", "Mining", "Lockpicking", "Command Water"]
+    FSkill3Names = ["Fortitude", "Keen Eye", "Girls' Talk", 0, 0, "Superstrength"]
+    BladeInfoList = []
+    for blade in range(len(Blades)):
+        BladeInfoList.append(BladeInfo(Blades[blade], RowIDs[blade]))
+    # PurposeIDs will get spat out in the following order: [AffinityRank1, FieldSkill1Rank1, FieldSkill2Rank1, FieldSkill3Rank1, AffinityRank2, ...]
+    CurMaxPurposeID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_QuestTaskAchievement.json", "$id") + 1
+    CurMaxQuestListAchievementID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_QuestListAchievement.json", "$id") + 1
+    CurMaxQuestCollectID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_QuestCollect.json", "$id") + 1
+    CurMaxTaskLogID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/fld_quest_achievement.json", "$id") + 1
+    RowExtensionCount = 0 # keeps track of how many extra rows we need to add to the FLD_QuestTaskAchievement file
+    QuestListAchievementNewRows, QuestTaskAchievementNewRows = [], []
+    for blade in BladeInfoList:
+        for id in range(1, len(blade.questlistachievementids)): # want to skip the first purpose id, since it belongs to the affinity tree rank 1 itself, which should always be unlocked.
+            if blade.questlistachievementids[id] == 0 and blade.achievementids[id] != 0: # if there's a non-empty node in the skill tree, we want to lock it with a purpose ID even if it is rank 1, excluding the affinity node rank 1
+                # adding a new goal in FLD_QuestListAchievement requires addition of two separate rows, one of which points to the other, idk why they made it this way tbh
+                QuestListAchievementNewRows.append({"$id": CurMaxQuestListAchievementID, "QuestTitle": 0, "QuestCategory": 6, "Visible": 0, "Talker": 0, "Summary": 0, "ResultA": 5131, "ResultB": 0, "SortNo": 0, "RewardDisp": 0, "RewardSetA": 0, "RewardSetB": 0, "PRTQuestID": 0, "FlagPRT": 0, "FlagCLD": 0, "PurposeID": 0, "CountCancel": 0, "NextQuestA": CurMaxQuestListAchievementID + 1, "CallEventA": 0, "NextQuestB": 0, "CallEventB": 0, "HintsID": 0, "ClearVoice": 0, "AutoStart": 0, "ItemLost": 0, "CancelCondition": 0, "QuestIcon": 0, "LinkedQuestID": 0})
+                QuestListAchievementNewRows.append({"$id": CurMaxQuestListAchievementID + 1, "QuestTitle": 0, "QuestCategory": 6, "Visible": 0, "Talker": 0, "Summary": 0, "ResultA": 0, "ResultB": 0, "SortNo": 0, "RewardDisp": 0, "RewardSetA": 0, "RewardSetB": 0, "PRTQuestID": CurMaxQuestListAchievementID, "FlagPRT": 0, "FlagCLD": 0, "PurposeID": CurMaxPurposeID, "CountCancel": 0, "NextQuestA": 30000, "CallEventA": 0, "NextQuestB": 0, "CallEventB": 0, "HintsID": 0, "ClearVoice": 0, "AutoStart": 0, "ItemLost": 0, "CancelCondition": 0, "QuestIcon": 0, "LinkedQuestID": 0})
+                QuestTaskAchievementNewRows.append({"$id": CurMaxPurposeID, "PreCondition": 0, "TaskType1": 3, "TaskID1": CurMaxQuestCollectID, "Branch1": 0, "TaskLog1": CurMaxTaskLogID, "TaskUI1": 0, "TaskCondition1": 0, "TaskType2": 0, "TaskID2": 0, "Branch2": 0, "TaskLog2": 0, "TaskUI2": 0, "TaskCondition2": 0, "TaskType3": 0, "TaskID3": 0, "Branch3": 0, "TaskLog3": 0, "TaskUI3": 0, "TaskCondition3": 0, "TaskType4": 0, "TaskID4": 0, "Branch4": 0, "TaskLog4": 0, "TaskUI4": 0, "TaskCondition4": 0})
+                with open("./XC2/_internal/JsonOutputs/common/FLD_AchievementList.json", 'r+', encoding='utf-8') as file: # hook up the new questlistachievementid to the "Task" column
+                    data = json.load(file)
+                    for row in data["rows"]:
+                        if row["$id"] == blade.achievementids[id]:
+                            row["Task"] = CurMaxQuestListAchievementID
+                            break
+                    file.seek(0)
+                    file.truncate()
+                    json.dump(data, file, indent=2, ensure_ascii=False)
+                blade.purposeids[id] = CurMaxPurposeID
+                CurMaxPurposeID += 1
+                CurMaxQuestListAchievementID += 2
+                CurMaxTaskLogID += 1
+    # this still needs to add the new FLD_QuestTaskAchievement rows, and add the new ones. Also needs to add new rows to FLD_QuestCollect, and fld_quest_achievement
+    # TheTunneler is pretty slow, what if I just add new rows to FLD_AchievementList, FLD_QuestListAchievement, FLD_QuestTaskAchievment, FLD_QuestCollect, fld_quest_achievement instead?
+    # think this would be much easier...
+    pass
