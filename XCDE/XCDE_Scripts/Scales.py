@@ -20,7 +20,6 @@ def EnemyScales():
             
 def NPCScales():
     odds = Options.NPCScaleOption.GetSpinbox()
-    dontChange = [1,2,3,4,5,6,7,8]
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/FLD_npclist.json", 'r+', encoding='utf-8') as npcFile:
         npcData = json.load(npcFile)
         for npc in npcData["rows"]:
