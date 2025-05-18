@@ -109,7 +109,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                         filteredEnemyData.remove(chosen)   
                         if filteredEnemyData == []: # repopulate it if the group is empty
                                 filteredEnemyData = filteredEnemyDataCopy.copy()
-                        enemy["move_speed"] = 0
+
                     JSONParser.CloseFile(eneVoiceData, eneVoiceFile)
                     JSONParser.CloseFile(eneAreaData, eneAreaFile)  
         JSONParser.CloseFile(eneData, eneFile)

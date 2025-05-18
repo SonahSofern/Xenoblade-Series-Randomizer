@@ -69,9 +69,6 @@ def RandomTradeVerification(typeChoice, trade, isOn):
     if isOn:
         if trade == 0: # Only fill out slots that previously had trades
             return 0
-        ch = random.choice(typeChoice)
-        if ch == None:
-            pass
         return random.choice(typeChoice)
     else:
         return trade
