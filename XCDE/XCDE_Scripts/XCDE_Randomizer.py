@@ -13,7 +13,7 @@ import tkinter as tk
 from scripts.GUISettings import *
 
 Game = "XCDE"
-Version = "1.0.0"
+Version = "1.0.1"
 JsonOutput = "./XCDE/_internal/JsonOutputs"
 
 SavedOptionsFileName = f"LastSave.txt"
