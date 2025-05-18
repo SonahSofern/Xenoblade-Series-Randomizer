@@ -8,8 +8,6 @@ import copy
 
 # need to set up the unlock keys
 # remove the npc talking options for all npc quests that are not logically chosen for the playthrough. This lets you place their required items anywhere. This causes issues with items from chests, the chests currently aren't tied to a quest, just an enemy
-# Change Quest Point Shops to require only 1 item total, only the logically chosen item, and it gives 1 point. Change the point requirement for said shop to also be 1.
-# need to make the quest Unforgotten Promise only require 1 eternity loam, not 4, they're key items with the same id, so you can't make them a one-time reward, like from a boss drop, you need 4 in logic
 # hints
 # spoiler log
 
@@ -40,8 +38,8 @@ def AllTornaRando():
     if ProgressionLocTypes == [0,0,0,0,0,0]:
         print("There are no progression locations enabled, cannot generate seed!")
         return
-    Recipes = TornaRecipes.CreateTornaRecipeList()
-    TornaQuests.SelectRandomPointGoal(Recipes)
+    #Recipes = TornaRecipes.CreateTornaRecipeList()
+    TornaQuests.SelectRandomPointGoal()
     #global Areas, Enemies, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters
     ChosenSupporterAmounts = [1,16,32,48,64] # have a few sliders going forwards to let the player change this amount
     ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests = TornaQuests.SelectCommunityQuests(ChosenSupporterAmounts, ProgressionLocTypes[0])
@@ -60,6 +58,7 @@ def AllTornaRando():
     CreateLevelCaps()
     HugoComeBack()
     AdjustSlateValue()
+    EternityLoamChange()
     pass
 
 def DetermineSettings():
@@ -645,11 +644,11 @@ def CreateLevelCaps():
     Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json"], ["Gold", "SP"], ['row[key] * 10']) # quests reward 10x gold and sp
 
 def HugoComeBack(): # Hugo is scripted to leave the party with Aegaeon whenever you receive the quest "Feeding an Army". We don't want this, it messes with logic (at least right now).
-    with open("./XC2/_internal/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # enemy file
+    with open("./XC2/_internal/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in [30185, 30187]:
-                row["scriptName"] = 0
+                row["scriptName"] = ""
                 row["scriptStartId"] = 0
             if row["$id"] > 30187:
                 break
@@ -680,7 +679,7 @@ def AdjustSlateValue(): # changes the slate pieces to be worth 1 point apiece, a
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     SlateRows = Helper.InclRange(723, 738)
-    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file: # enemy file
+    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             match row["$id"]:
@@ -688,6 +687,16 @@ def AdjustSlateValue(): # changes the slate pieces to be worth 1 point apiece, a
                     row["AddFlagValue"] = 1
                 case 739:
                     break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def EternityLoamChange(): # need to make eternity loam only require 1 of for the quest "Unforgotten Promise".
+    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestCollect.json", 'r+', encoding='utf-8') as file: # not sure which row is actually used by the quest, but both 274 and 316 have the same item id, so do it to both
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in [274, 316]:
+                row["Count"] = 1
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)

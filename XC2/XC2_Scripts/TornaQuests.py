@@ -32,43 +32,70 @@ class TornaMainQuest:
         addtolist.append(self)
         self.id = addtolist.index(self) + 1
 
-def SelectRandomPointGoal(Recipes): # There are some sidequests that require you to feed items into a shop, any combination of items to get you to the point requirement. This function randomly chooses 1 of the items in that shop, and notes it down as the logical requirement, restricting it to be placed logically accessible before the quest
-    OptionalRows = [91,92,95,96,97,98,99,100,101,102,103]
+def SelectRandomPointGoal(): # There are some sidequests that require you to feed items into a shop, any combination of items to get you to the point requirement. This function randomly chooses 1 of the items in that shop, and notes it down as the logical requirement, restricting it to be placed logically accessible before the quest
+    # there's probably a much easier way to do this that I'm just not thinking of, but it gets the job done. Probably a dictionary now that I think about it more, but at this point it works, why fix it
+    OptionalRows = [91,95,99,100,96,101,102,97,98,103,92] # needs to stay in this order or else the indexes will be wrong!
     TaskLists = []
-    # need to do something like for each optional row in MNU_ShopChange, get all task IDs. then, choose a random task ID. then, remove all other task ids, and select the corresponding item requirement from the QuestOptional global variables below
+    CurTaskList = []
     with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for optional in OptionalRows:
+            CurTaskList = []
             for row in data["rows"]:
                 if row["$id"] == optional:
                     for num in range(1, 9):
                         if row[f"DefTaskSet{num}"] != 0:
-
+                            CurTaskList.append(row[f"DefTaskSet{num}"])
+                        if row[f"AddTaskSet{num}"] != 0:
+                            CurTaskList.append(row[f"AddTaskSet{num}"])
+                    break
+            TaskLists.append(CurTaskList)
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     
-    for 
-
-    global Quest15Optional, Quest28Optional, Quest29Optional1, Quest29Optional2, Quest30Optional, Quest34Optional1, Quest34Optional2, Quest44Optional1, Quest44Optional2, Quest47Optional, Quest55Optional
-    Quest15Optional = random.choice([[30347,30352,30379],[30400,30032,30403],[30407,30438,30408,30411],[30384,30032,30352,30407,30408],[30363,30352,30353],[30406,30032,30408,30407,30403,26146],[30386,30365,30409,30407,26147]])
-    Quest28Optional = random.choice([[30353],[30403],[30438],[30356]])
-    Quest29Optional1 = random.choice([[30373],[30374],[30375],[30377],[30378]])
-    Quest29Optional2 = random.choice([[30425],[30426],[30427],[30428],[30429],[30430]])
-    Quest30Optional = random.choice([[30358],[30359],[30360],[30361],[30362],[30409],[30410],[30411],[30412],[30413]])
-    Quest34Optional1 = random.choice([[30347,30352,30379],[30400,30032,30403],[30352,30353,30354],[30347,30353,30380],[30384,30032,30352,30407,30408],[30382,30383,30356,30400],[30363,30352,30353],[30400,30363,30406],[30396,30389,30354],[30364,30365,30402],[30365,30358,30355,30385,30396],[30400,30363,30364,30366,30349],[30347,30352,30360],[30380,30358,30353,30363],[30386,30401,30402,30438]])
-    Quest34Optional2 = random.choice([[30348,30349,30357,30416],[30345,30354,30364],[30407,30438,30408,30411],[30033,30401,30416,30381],[30356,30357,30400,30385,30033],[30407,30402,30389,30384],[30438,30383,30398,30356,30401]])
-    Quest44Optional1 = random.choice([[30363],[30364],[30416],[30366]])
-    Quest44Optional2 = random.choice([[30363],[30364],[30366],[30037],[30416],[30417],[30419]])
-    Quest47Optional = random.choice([[30343],[30351],[30357],[30371],[30380],[30382],[30384],[30386],[30398],[30421],[30422],[30424],[30439],[30432],[30434],[30436]])
-    Quest55Optional = random.choice([[30345],[30349],[30406]])
+    TaskIndexes = []
+    for tasklist in TaskLists: # choose the index
+        TaskIndexes.append(random.choice(Helper.InclRange(0, len(tasklist) - 1)))
+    Quest15List = [[30347,30352,30379],[30400,30032,30403],[30407,30438,30408,30411],[30384,30032,30352,30407,30408],[30363,30352,30353],[30406,30032,30408,30407,30403,26146],[30386,30365,30409,30407,26147]]
+    Quest28List = [[30353],[30403],[30438],[30356]]
+    Quest29List1 = [[30373],[30374],[30375],[30377],[30378]]
+    Quest29List2 = [[30425],[30426],[30427],[30428],[30429],[30430]]
+    Quest30List = [[30358],[30359],[30360],[30361],[30362],[30409],[30410],[30411],[30412],[30413]]
+    Quest34List1 = [[30347,30352,30379],[30400,30032,30403],[30352,30353,30354],[30347,30353,30380],[30384,30032,30352,30407,30408],[30382,30383,30356,30400],[30363,30352,30353],[30400,30363,30406],[30396,30389,30354],[30364,30365,30402],[30365,30358,30355,30385,30396],[30400,30363,30364,30366,30349],[30347,30352,30360],[30380,30358,30353,30363],[30386,30401,30402,30438]]
+    Quest34List2 = [[30348,30349,30357,30416],[30345,30354,30364],[30407,30438,30408,30411],[30033,30401,30416,30381],[30356,30357,30400,30385,30033],[30407,30402,30389,30384],[30438,30383,30398,30356,30401]]
+    Quest44List1 = [[30363],[30364],[30416],[30366]]
+    Quest44List2 = [[30363],[30364],[30366],[30037],[30416],[30417],[30419]]
+    Quest47List = [[30343],[30351],[30357],[30371],[30380],[30382],[30384],[30386],[30398],[30421],[30422],[30424],[30439],[30432],[30434],[30436]]
+    Quest55List = [[30345],[30349],[30406]]
+    AllQuestListTasks = [Quest15List,Quest28List, Quest29List1, Quest29List2, Quest30List, Quest34List1, Quest34List2, Quest44List1, Quest44List2, Quest47List, Quest55List]
+    Quest15Optional, Quest28Optional, Quest29Optional1, Quest29Optional2, Quest30Optional, Quest34Optional1, Quest34Optional2, Quest44Optional1, Quest44Optional2, Quest47Optional, Quest55Optional = [],[],[],[],[],[],[],[],[],[],[]
+    global AllOptionals
     AllOptionals = [Quest15Optional, Quest28Optional, Quest29Optional1, Quest29Optional2, Quest30Optional, Quest34Optional1, Quest34Optional2, Quest44Optional1, Quest44Optional2, Quest47Optional, Quest55Optional]
-    global AllOptionalObjects
-    AllOptionalObjects = []
-    for optional in AllOptionals:
-        for recipe in Recipes:
-            if optional == recipe.subcomponentid:
-                AllOptionalObjects.append(recipe)
+    for optional in range(len(AllOptionals)):
+        AllOptionals[optional] = AllQuestListTasks[optional][TaskIndexes[optional]]
+    
+    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for optional in range(len(OptionalRows)):
+            for row in data["rows"]:
+                if row["$id"] == OptionalRows[optional]:
+                    for num in range(1, 9):
+                        row[f"DefTaskSet{num}"], row[f"AddTaskSet{num}"], row[f"AddCondition{num}"] = 0,0,0
+                    row["DefTaskSet1"] = TaskLists[optional][TaskIndexes[optional]]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for optional in range(len(TaskLists)):
+            for row in data["rows"]:
+                if row["$id"] == TaskLists[optional][TaskIndexes[optional]]:
+                    row["AddFlagValue"] = 100 # 100 should be enough to instantly clear any flag requirements
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the community quests that logically unlock Story Events 38 and 50 (lv 2 and lv 4 community)
     TornaSidequest1 = {
@@ -230,7 +257,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 15,
         'Main Story Req': 20,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [Quest15Optional],
+        'Item Requirements': [AllOptionals[0]],
         'Community Gained': 2,
         'Community Level Req': 0,
         'Reward Set IDs': [1064],
@@ -373,7 +400,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 28,
         'Main Story Req': 35,
         'Sidequest Pre-Req': [13],
-        'Item Requirements': [[30428,30375,30338,30433,30428,30375,30338,30433] , [30428] , [30375] , [30338] , [30433] , Quest28Optional],
+        'Item Requirements': [[30428,30375,30338,30433,30428,30375,30338,30433] , [30428] , [30375] , [30338] , [30433] , AllOptionals[1]],
         'Community Gained': 1,
         'Community Level Req': 0,
         'Reward Set IDs': [1058, 1059],
@@ -384,7 +411,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 29,
         'Main Story Req': 36,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [Quest29Optional1 , Quest29Optional2],
+        'Item Requirements': [AllOptionals[2] , AllOptionals[3]],
         'Community Gained': 1,
         'Community Level Req': 0,
         'Reward Set IDs': [1068],
@@ -395,7 +422,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 30,
         'Main Story Req': 36,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [Quest30Optional],
+        'Item Requirements': [AllOptionals[4]],
         'Community Gained': 0,
         'Community Level Req': 0,
         'Reward Set IDs': [1066],
@@ -439,7 +466,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 34,
         'Main Story Req': 37,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [Quest34Optional1 , Quest34Optional2],
+        'Item Requirements': [AllOptionals[5] , AllOptionals[6]],
         'Community Gained': 1,
         'Community Level Req': 0,
         'Reward Set IDs': [1071],
@@ -549,7 +576,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 44,
         'Main Story Req': 46,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [Quest44Optional1 , Quest44Optional2],
+        'Item Requirements': [AllOptionals[7] , AllOptionals[8]],
         'Community Gained': 1,
         'Community Level Req': 2,
         'Reward Set IDs': [1067],
@@ -582,7 +609,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 47,
         'Main Story Req': 46,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [Quest47Optional],
+        'Item Requirements': [AllOptionals[9]],
         'Community Gained': 1,
         'Community Level Req': 3,
         'Reward Set IDs': [1072],
@@ -670,7 +697,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 55,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [MythraKey, FocusKey, MythraAff[:2], HazeKey, KeenEyeKey, HazeAff[:2] , [30344] , [30370] , [25536] , Quest55Optional],
+        'Item Requirements': [MythraKey, FocusKey, MythraAff[:2], HazeKey, KeenEyeKey, HazeAff[:2] , [30344] , [30370] , [25536] , AllOptionals[10]],
         'Community Gained': 2,
         'Community Level Req': 4,
         'Reward Set IDs': [1046],
