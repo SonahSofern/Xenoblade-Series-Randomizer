@@ -97,7 +97,7 @@ for opt in Interactables.OptionList:
     opt.DisplayOption(Tabs[opt.tab], root, defaultFont, GUISettings.defGUIThemeVar.get())
 
 def ShowTitleScreenText():
-    JSONParser.ChangeJSONLine(["menu/msg_mnu_title.json"],[11], ["name"], f"Randomizer v{Version}", Game="XC3") # Change Title Version to Randomizer vX.x.x
+    JSONParser.ChangeJSONLine(["menu/msg_mnu_title.json"],[11], ["name"], f" Randomizer v{Version}", Game="XC3") # Change Title Version to Randomizer vX.x.x
 
 
 def GenRandomSeed(randoSeedEntryVar):
@@ -162,7 +162,7 @@ randoProgressDisplay = ttk.Label(text="", anchor="e", padding=2, style="Borderle
 areaFiles = []
 
 # Randomize Button
-RandomizeButton = ttk.Button(text='Randomize', command=lambda: GUISettings.Randomize(RandomizeButton, fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, ["mnu", "des", "btl", "evt", "fld", "map", "prg", "qst", "sys"], ["autotalk", "battle", "field", "menu", "quest", "system"], textFolderName="gb/game", ExtraCommands=[lambda: ShowTitleScreenText()], extraArgs=["--hashes", "XC3/_internal/Toolset/xbc3Hashes.txt"]))
+RandomizeButton = ttk.Button(text='Randomize', command=lambda: GUISettings.Randomize(RandomizeButton, fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, ["mnu", "des", "btl", "evt", "fld", "map", "prg", "qst"], ["autotalk", "battle", "field", "menu", "quest", "system"], textFolderName="gb/game", ExtraCommands=[lambda: ShowTitleScreenText()], extraArgs=["--hashes", "XC3/_internal/Toolset/xbc3Hashes.txt"]))
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
 RandomizeButton.config(padding=5)
 
