@@ -14,7 +14,7 @@ import tkinter as tk
 from scripts.GUISettings import *
 import Options
 Game = "XC2"
-Version = "1.4.1"
+Version = "1.5.0"
 JsonOutput = "./XC2/_internal/JsonOutputs"
 
 SavedOptionsFileName = f"SavedOptionsv{Version}.txt"
@@ -143,7 +143,7 @@ GUISettings.RootsForStyling.append(bdatcommonFrame)
 
 # Seed entry box
 seedEntryVar = StringVar()
-GenRandomSeed(seedEntryVar) # Gen a random seed if you have no save data 
+GenRandomSeed(seedEntryVar) # Gen a random seed if you have no save data
 randoSeedEntry = ttk.Entry(SeedFrame, width=30, textvariable=seedEntryVar)
 randoSeedEntry.pack(side='left', padx=2)
 
@@ -176,7 +176,7 @@ PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, se
 randoProgressDisplay = ttk.Label(text="", anchor="e", padding=2, style="BorderlessLabel.TLabel")
 
 # Randomize Button
-RandomizeButton = ttk.Button(text='Randomize', command=lambda: (GUISettings.Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList,["common", "common_gmk"],["common_ms"],[lambda: ShowTitleScreenText(), lambda: AddCustomEnhancements()])))
+RandomizeButton = ttk.Button(text='Randomize', command=lambda: (GUISettings.Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList,["common", "common_gmk"],["common_ms"],[lambda: ShowTitleScreenText(), lambda: AddCustomEnhancements(), lambda: Options.TornaMain.PassAlongSpoilerLogInfo(fileEntryVar, Version, permalinkVar, seedEntryVar)])))
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
 RandomizeButton.config(padding=5)
 

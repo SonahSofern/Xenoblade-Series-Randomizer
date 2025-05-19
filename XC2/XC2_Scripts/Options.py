@@ -221,6 +221,7 @@ TornaOption_EnemyDrops = Option("Torna Enemy Drops", GameModeTab, "Randomizes en
 TornaOption_TreasureChests = Option("Torna Treasure Chests", GameModeTab, "Randomizes treasure chest contents. Each chest contains a number of rewards equal to the spinbox." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 7, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
 TornaOption_Shops = Option("Torna Shops", GameModeTab, "Randomizes items in shops and from traveling bards. Each shop contains a number of items equal to the spinbox, and are all purchaseable for gold." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 15, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 2, spinDefault = 1)
 TornaOption_GroundItems = Option("Torna Ground Items", GameModeTab, "Randomizes items in the red bags on the ground. Each red bag contains 1 item.")
+TornaOption_CreateSpoilerLog = Option("Create Spoiler Log", GameModeTab, "Outputs a Spoiler Log containing information on where each item is placed, located one level above your input folder, in a separate folder called 'Torna Spoiler Logs'. ")
 #TornaOption_ChooseLevel2CommunityReq = Option("Level 2 Community Req", GameModeTab, "Determines the number of people required for community.") # I don't know how to make this work in the game files for now.
 
 # Currently Disabled for Various Reasons
