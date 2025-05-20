@@ -36,7 +36,7 @@ attributes = {
 
      
 def StandardGems(gemData, gemMSData, gemHelpMSData):    
-    badEffects = [60, 0, 83, 84, 87, 82, 44, 94]
+    badEffects = [60, 0, 83, 84, 87, 82, 44, 94, 61]
     for gem in gemData["rows"]:
         if gem["rvs_status"] in badEffects:
             continue

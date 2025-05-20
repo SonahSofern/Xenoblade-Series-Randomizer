@@ -377,6 +377,7 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
         RunOptions(OptionList, randoProgressDisplay)
         for command in ExtraCommands: # Runs extra commands like show title screen
             command()
+            
         randoProgressDisplay.config(text="Packing BDATs")
     
         try:

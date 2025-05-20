@@ -3,7 +3,7 @@ import string
 from scripts import PackedBits
 import base64
 import struct
-
+import scripts.SavedOptions
 # most of this is from github.com/LagoLunatic/wwrando
 
 def SanitizeUserSeed(SeedName):
@@ -76,8 +76,9 @@ def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version, buttonS
             permaLinkVar.set("")
     
     def PermalinkEntryUpdate():
-        compressedPermalink = GenerateCompressedPermalink(seedEntryVar.get(), traceObjects, version)
-        permaLinkVar.set(compressedPermalink)
+        if not scripts.SavedOptions.stopPermalinkUpdate:
+            compressedPermalink = GenerateCompressedPermalink(seedEntryVar.get(), traceObjects, version)
+            permaLinkVar.set(compressedPermalink)
         
     permaLinkVar.trace_add("write", lambda i,x,o: PermalinkFromEntry())
     for interactAble in traceObjects[3:]:

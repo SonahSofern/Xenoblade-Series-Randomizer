@@ -1,6 +1,7 @@
 saveFolderName = "SaveData"
 import os, json
 
+stopPermalinkUpdate = False
 
 def saveData(DataList, Filename, GamePrefix):
     savePath = os.path.join(GamePrefix, saveFolderName)
@@ -17,8 +18,9 @@ def saveData(DataList, Filename, GamePrefix):
         json.dump(sav, file, indent=4, ensure_ascii=True)
 
 
-            
 def loadData(DataList, Filename, GamePrefix):
+    global stopPermalinkUpdate
+    stopPermalinkUpdate = True
     try:
         savePath = os.path.join(GamePrefix, saveFolderName)
         saveFilePath = os.path.join(savePath, Filename)
@@ -42,6 +44,7 @@ def loadData(DataList, Filename, GamePrefix):
         pass # The file is created upon closing the window so it will error initial launch
     # except Exception as error:
     #             print(f"{traceback.format_exc()}") # shows the full error
+    stopPermalinkUpdate = False
 
 class SavedEntry:
     def __init__(self, _name, _val):
