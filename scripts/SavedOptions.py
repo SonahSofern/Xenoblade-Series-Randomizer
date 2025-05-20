@@ -28,7 +28,10 @@ def loadData(DataList, Filename, GamePrefix):
         with open(saveFilePath, 'r') as file:
             data = json.load(file)
             for option in DataList:
-                option.checkBoxVal.set(data[option.name])
+                try:
+                    option.checkBoxVal.set(data[option.name])
+                except:
+                    pass
                 try:
                     option.spinBoxVal.set(data[f"{option.name} Spinbox: "])
                 except:

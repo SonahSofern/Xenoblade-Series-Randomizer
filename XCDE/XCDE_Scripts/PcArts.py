@@ -116,7 +116,8 @@ def RandomizePcArts():
 
         if isBalancedLv:
             BalanceArtUnlockLevels(artData)
-                
+        
+        MatchArtBooks(artData)
         scripts.JSONParser.CloseFile(artData, artFile)
         
 
@@ -148,7 +149,16 @@ def BalanceArtUnlockLevels(artData):
                 art["get_type"] = 1
                 unlockLv += random.choice(stepLv)
 
-
+# Fixes art books
+def MatchArtBooks(artData):
+    with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_artslist.json", 'r+', encoding='utf-8') as artBookFile:
+        artBookData = json.load(artBookFile)
+        for book in artBookData["rows"]:
+            for art in artData["rows"]:
+                if art["$id"] == book["get_arts"]:
+                    book["pc_type"] = art["pc"]
+                    break
+                
 def DetermineArtType(art, char:ActMatch):
     if art["pc"] == char.pcID: # If they get a vanilla art dont change the act no
         return
