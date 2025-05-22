@@ -51,7 +51,7 @@ BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption)
 
 
 # Character
-GemOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.Gems()], descData=lambda: Gems.GemDescriptions())
+GemOption = Option("Gems", Character, "Randomizes the effects of Gems and Crystals", [lambda: Gems.Gems()], descData=lambda: Gems.GemDescriptions())
 GemOption_Power = SubOption("Power", GemOption)
 GemOption_Effect = SubOption("Effects", GemOption)
 GemOption_Unused = SubOption("Unused Effects", GemOption)

@@ -260,7 +260,7 @@ def GemDescriptions():
     GemDescription.Header(Options.GemOption_Power.name)
     GemDescription.Text("This randomizes the power level of crafted and premade gems.")
     GemDescription.Header(f"{Options.GemOption_Effect.name}/{Options.GemOption_Unused.name}")
-    GemDescription.Text("This randomizes what each gems effect is. Essentially shuffling the gems. Armors or weapons with unique gems will be randomized as well as any gems given throughout the story, this will not affect crafting.")
+    GemDescription.Text("This randomizes what each gems effect is. Essentially shuffling the gems. Armors or weapons with unique gems will be randomized as well as any gems given throughout the story, this will also affect crystals.")
     GemDescription.Text("Unused effects will add gems that don't exist in the vanilla game. For example, cooldown reduction gems, or gems infused with monado enchant.")
     GemDescription.Image("crazygems.png", "XCDE", 800)
     GemDescription.Header(Options.GemOption_FreeEquip.name)
