@@ -8,11 +8,11 @@ MechonisArmor = [176]
 SharlaCoolOff = [110]
 ReynTaunts = [32,35,46]
 
-
+# Tree focus buffs like dunban gets agility for focusing this tree https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_PSVlink.html#6
 
 class Skill: 
     newId = 0
-    def __init__(self, _name, _shape, _target, _skill, _val1, _val2, _time, _point_PP, _point_SP, _flag, _id):
+    def __init__(self, _name, _shape, _target, _skill, _val1, _val2, _time, _point_PP, _point_SP, _flag, _id, type, icon):
         self.name = _name
         self.shape = _shape
         self.target = _target
@@ -24,6 +24,8 @@ class Skill:
         self.point_SP = _point_SP
         self.flag = _flag
         self.id = _id
+        self.type = type
+        self.icon = icon
         
 def SkillRando():
     isShape = Options.AffinityTreeOption_Shape.GetState()
@@ -32,52 +34,62 @@ def SkillRando():
     isEffect = Options.AffinityTreeOption_Effect.GetState()
     with open("./XCDE/_internal/JsonOutputs/bdat_common/BTL_PSVskill.json", 'r+', encoding='utf-8') as skillFile:
         with open("./XCDE/_internal/JsonOutputs/bdat_menu_psv/MNU_PSskil.json", 'r+', encoding='utf-8') as skillDescFile:
-            skillData = json.load(skillFile)
-            descData = json.load(skillDescFile)
-            
-            SkillList:list[Skill]= []
-            invalidSkills = yoinkSkills + MeliaSkills + MechonisArmor + SharlaCoolOff + ReynTaunts
-            for skill in skillData["rows"]:
-                if skill["$id"] in invalidSkills:
-                    continue
-                newSkill = Skill(skill["name"], skill["shape"], skill["target"], skill["skill"], skill["val1"], skill["val2"], skill["time"], skill["point_PP"], skill["point_SP"], skill["flag"], skill["$id"])
-                SkillList.append(newSkill)
-            
-            for skill in skillData["rows"]:
-                if skill["$id"] in invalidSkills:
-                    continue
-                if isEffect:
-                    chosen:Skill = random.choice(SkillList)
-                    SkillList.remove(chosen)
-                    skill["name"] = chosen.name
-                    skill["shape"] = chosen.shape
-                    skill["target"] = chosen.target
-                    skill["skill"] = chosen.skill
-                    skill["val1"] = chosen.val1
-                    skill["val2"] = chosen.val2
-                    skill["time"] = chosen.time
-                    # skill["point_PP"] = chosen.point_PP Dont copy because we want to keep the original costs so you dont get stuck with a 3500 cost skill in thge first slot
-                    skill["point_SP"] = chosen.point_SP
-                    skill["flag"] = chosen.flag
-                    
-                    # Fixing descriptions
-                    for desc in descData["rows"]:
-                        if desc["$id"] == skill["$id"]:
-                            desc["help"] = chosen.id
+            with open("./XCDE/_internal/JsonOutputs/bdat_menu_psv/MNU_PSskil.json", 'r+', encoding='utf-8') as psFile:
+                psData = json.load(psFile)
+                skillData = json.load(skillFile)
+                descData = json.load(skillDescFile)
+                
+                
+                SkillList:list[Skill]= []
+                invalidSkills = yoinkSkills + MeliaSkills + MechonisArmor + SharlaCoolOff + ReynTaunts
+                for skill in skillData["rows"]:
+                    if skill["$id"] in invalidSkills:
+                        continue
+                    for ps in psData["rows"]:
+                        if ps["$id"] == skill["$id"]:
+                            newType = ps["type"]
+                            newIcon = ps["icon"]
                             break
-                    
-                if isPower:
-                    Power(skill)
+                    newSkill = Skill(skill["name"], skill["shape"], skill["target"], skill["skill"], skill["val1"], skill["val2"], skill["time"], skill["point_PP"], skill["point_SP"], skill["flag"], skill["$id"], newType, newIcon)
+                    SkillList.append(newSkill)
                 
-                if isShape:
-                    Shape(skill, "shape")
-                    SkillLinkNodeRando()
+                for skill in skillData["rows"]:
+                    if skill["$id"] in invalidSkills:
+                        continue
+                    if isEffect:
+                        chosen:Skill = random.choice(SkillList)
+                        SkillList.remove(chosen)
+                        skill["name"] = chosen.name
+                        skill["shape"] = chosen.shape
+                        skill["target"] = chosen.target
+                        skill["skill"] = chosen.skill
+                        skill["val1"] = chosen.val1
+                        skill["val2"] = chosen.val2
+                        skill["time"] = chosen.time
+                        # skill["point_PP"] = chosen.point_PP Dont copy because we want to keep the original costs so you dont get stuck with a 3500 cost skill in thge first slot
+                        skill["point_SP"] = chosen.point_SP
+                        skill["flag"] = chosen.flag
+                        
+                        # Fixing descriptions
+                        for desc in descData["rows"]:
+                            if desc["$id"] == skill["$id"]:
+                                desc["help"] = chosen.id
+                                desc["type"] = chosen.type
+                                desc["icon"] = chosen.icon
+                                break
+                        
+                    if isPower:
+                        Power(skill)
                     
-                if isLinkCost:
-                    LinkCost(skill)
-                
-            scripts.JSONParser.CloseFile(descData, skillDescFile)
-        scripts.JSONParser.CloseFile(skillData, skillFile) 
+                    if isShape:
+                        Shape(skill, "shape")
+                        SkillLinkNodeRando()
+                        
+                    if isLinkCost:
+                        LinkCost(skill)
+                    
+                scripts.JSONParser.CloseFile(descData, skillDescFile)
+            scripts.JSONParser.CloseFile(skillData, skillFile) 
 
 def Shape(skill, key, excludeShapes = []):
     Circle = 1
@@ -92,7 +104,7 @@ def Power(skill):
     dist = [.3,.5,.7,.9,1.2,1.5,1.8,2,2.2,2.5,3]
     val1, val2, time = (random.choices(dist,k=3))
     skill["val1"] = min(int(skill["val1"] * val1),255)
-    skill["val2"] = min(int(skill["val2"] * val2),255)
+    skill["val2"] = min(int(skill["val2"] * val2),100)
     skill["time"] = min(int(skill["time"] * time),255)
 
 linkCostRange = [.15,.25,.5,.7,1.2,1.5,2]
@@ -108,8 +120,7 @@ def SkillLinkNodeRando():
                 Shape(link, f"rvs_effect0{i}", [5]) # Want to exlcude diamond shapes to keep vanilla behaviour since that symbolizes a non linkable skill (we could use all if we wanted)
         scripts.JSONParser.CloseFile(linkData, linkFile)
         
-        
-        
+
 def SkillTreeDesc():
     myDesc = scripts.PopupDescriptions.Description()
     myDesc.Header(Options.AffinityTreeOption_Effect.name)
