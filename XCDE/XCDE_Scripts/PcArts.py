@@ -15,25 +15,26 @@ ReynGuardShift = [22] # Wont work on other characters
 # Setting that randomizes effects of arts
 
 class ActMatch: # A class so that when arts get randomized their animation somewhat matches their effects by changing pc_arts act_idx
-    def __init__(self, _pcID, _SingleAttack, _AOEAttack, _Buff):
+    def __init__(self, _pcID, _SingleAttack, _AOEAttack, _Buff, maxArts = 14):
         self.pcID = _pcID
         self.SingleAttack = _SingleAttack
         self.AOEAttack = _AOEAttack
         self.Buff = _Buff
+        self.artCount = maxArts
         CharacterList.append(self)
         
 CharacterList:list[ActMatch] = []
 
 ShulkActs = ActMatch(1, _SingleAttack=[0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[1,3,2,6,10,13,14])
 ReynActs = ActMatch(2, _SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,5,7,8,9,10,14])
-FioraActs = ActMatch(3,  _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0])
+FioraActs = ActMatch(3,  _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0], maxArts = 6)
 DunbanActs = ActMatch(4,  _SingleAttack=[0,1,3,5,9,14],_AOEAttack=[12,13,14],_Buff=[2,4,6,7,8,10,11,15])
 SharlaActs = ActMatch(5,  _SingleAttack=[0,1,7,11,14],_AOEAttack=[6,8,15],_Buff=[0,2,3,4,5,6,9,10,12,13])
 RikiActs = ActMatch(6,  _SingleAttack=[1,2,6,11,12,14,15],_AOEAttack=[0,4,6,7,9,10,13,15],_Buff=[0,3,5,8,10,13])
 MeliaActs = ActMatch(7,  _SingleAttack=[4,12],_AOEAttack=[5,14,15],_Buff=[0,1,2,3,6,7,8,9,10,11,13])
 SevenActs = ActMatch(8,  _SingleAttack=[0,2,3,10,11],_AOEAttack=[5,7,8,9,12,15],_Buff=[1,4,6,13,14])
-KinoActs = ActMatch(14,[0],[0],[0])
-NeneActs = ActMatch(15,[0],[0],[0])
+KinoActs = ActMatch(14,[0],[0],[0], 0)
+NeneActs = ActMatch(15,[0],[0],[0], 0)
 
 # Groups for the option to keep arts together
 class ArtGroup:
@@ -59,7 +60,7 @@ def namePrint(artList):
 def RemakeArtList():    
     with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
-        isDupes = Options.PlayerArtsOption_Duplicates.GetState()
+        # isDupes = Options.PlayerArtsOption_Duplicates.GetState()
         artList = []
         keyList = ["name", "pc", "cast", "recast", "tp", "dex", "rate1", "rate2", "arts_type", "atk_type", "chain_type", "elem", "dmg_type", "dmg_time", "tgt", "range_type", "range", "range_val", "hate", "flag", "st_type", "st_val", "st_val2", "st_time", "st_itv", "sp_cnd", "sp_proc", "sp_val1", "sp_val2", "kb_type", "kb_lv", "grow_powl", "grow_powh", "grow_st_time", "grow_st_val", "glow_recast", "icon", "icon_base", "act_idx", "idx", "list_idx", "get_type", "get_lv", "melia_lv", "melia_slot_idx", "help"]
         
@@ -75,8 +76,8 @@ def RemakeArtList():
                 continue
             
             newArt = random.choice(artList) # Choose a new art for that slot
-            if isDupes:
-                artList.remove(newArt)
+            # if isDupes:
+            #     artList.remove(newArt)
             
             for key in keyList: # Replace everything
                 art[key] = newArt[key]
@@ -98,6 +99,7 @@ def RandomizePcArts():
         group.chooseChar()
     invalidArtIds = TalentArts + DunbanMonadoArts + ShulkMonadoArts + PonspectorDLCArts + DLCArts + GuestArts
 
+    charList = CharacterList.copy()
         
     with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
@@ -109,7 +111,15 @@ def RandomizePcArts():
             if keepMeliaSummons and (art["name"] in MeliaSummonsNames): # Dont change the melias summons if we want her to keep em
                 continue
             
-            DetermineArtType(art, random.choice(CharacterList)) # Random choice
+            # Choose a character if they have reached their max arts remove them
+            char = random.choice(charList)
+            while char.artCount == 0:
+                charList.remove(char)
+                char = random.choice(charList)
+            char.artCount = char.artCount - 1 
+                
+            
+            DetermineArtType(art, char) # Random choice
             FixSharlasNewArts(art)
             ArtGroupManager(isArtGroups, art)
 
@@ -179,18 +189,6 @@ def Cooldown(art): # Controls how hard arts are to recharge
     CooldownStep = Cooldown//random.randrange(CooldownStepRange[0],CooldownStepRange[1])
     art["recast"] = Cooldown
     art["glow_recast"]= CooldownStep
-
-# def TargetType():
-#     types= {
-#         "Single": 1,
-#         "Self": 2,
-#         "Ally": 3
-        
-#     }
-#     rangeType={
-#         "Party": 7
-#     }
-#     pass
 
 def ArtsDescriptions():
     ArtDesc = scripts.PopupDescriptions.Description()

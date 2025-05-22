@@ -64,7 +64,7 @@ AffinityTreeOption_LinkCost = SubOption("Affinity Coin Cost", AffinityTreeOption
 AffinityTreeOption_Shape = SubOption("Node Shape", AffinityTreeOption)
 PlayerArtsOption = Option("Player Arts",Character, "Randomizes character's arts and their effects", [lambda: PcArts.RandomizePcArts()], descData=lambda: PcArts.ArtsDescriptions())
 PlayerArtsOption_BalancedUnlockLevels = SubOption("Balanced Unlock Levels", PlayerArtsOption)
-PlayerArtsOption_Duplicates = SubOption("Allow Duplicates", PlayerArtsOption)
+# PlayerArtsOption_Duplicates = SubOption("Allow Duplicates", PlayerArtsOption)
 # PlayerArtsOption_EarlyArtsUnlock = SubOption("Unlock All Arts at Level 1", PlayerArtsOption)
 PlayerArtsOption_ArtGroups = SubOption("Keep Combo Arts Together", PlayerArtsOption)
 PlayerArtsOption_Summons = SubOption("Keep Melia's Summons", PlayerArtsOption)
