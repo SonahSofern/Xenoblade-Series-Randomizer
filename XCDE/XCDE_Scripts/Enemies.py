@@ -155,6 +155,7 @@ def CreateEnemyDataClass(eneData, enAreaFiles):
                         break   
             JSONParser.CloseFile(eneAreaData, eneAreaFile)
 
+# There is no fix for topple spikes always being active just nerfed all spikes instead
 def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
     if chosen["spike_dmg"] != 0:
         
@@ -178,7 +179,7 @@ def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
         expectedPowerLv = chosen["lv"] * chosenSpikePerLv # The expected power level of the spike before any changes
         actualPowerLv = chosen["spike_dmg"]
         spikeMult = min(actualPowerLv/expectedPowerLv, 2) # If enemy has a stronger/weaker spike than something of its level make the spike stronger/weaker but still balanced
-        print(spikeMult)
+        # print(spikeMult)
         newPowerLv = int(enemy["lv"] * spikePerLv * spikeMult)
         enemy["spike_dmg"] = max(min(newPowerLv, 255), 1) # Set the new amount between 1 and 255
         # print(f"Level: {enemy["lv"]}")
