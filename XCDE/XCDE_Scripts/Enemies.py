@@ -160,24 +160,25 @@ def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
         
         # Get current enemy
         if enemy["lv"] < 20:
-            spikePerLv = 0.2 # base spike given per level
+            spikePerLv = 0.1 # base spike given per level
         elif enemy["lv"] < 40:
-            spikePerLv = 0.4
+            spikePerLv = 0.2
         else:
-            spikePerLv = 0.7
+            spikePerLv = 0.3
         
         # Get chosens 
         if chosen["lv"] < 20:
             chosenSpikePerLv = 0.2 # base spike given per level
         elif chosen["lv"] < 40:
-            chosenSpikePerLv = 0.4
+            chosenSpikePerLv = 0.3
         else:
-            chosenSpikePerLv = 0.7
+            chosenSpikePerLv = 0.4
         
         # Run some equations to find a good balance for that level and how strong the spike was
         expectedPowerLv = chosen["lv"] * chosenSpikePerLv # The expected power level of the spike before any changes
         actualPowerLv = chosen["spike_dmg"]
-        spikeMult = actualPowerLv/expectedPowerLv # If enemy has a stronger/weaker spike than something of its level make the spike stronger/weaker but still balanced
+        spikeMult = min(actualPowerLv/expectedPowerLv, 2) # If enemy has a stronger/weaker spike than something of its level make the spike stronger/weaker but still balanced
+        print(spikeMult)
         newPowerLv = int(enemy["lv"] * spikePerLv * spikeMult)
         enemy["spike_dmg"] = max(min(newPowerLv, 255), 1) # Set the new amount between 1 and 255
         # print(f"Level: {enemy["lv"]}")
@@ -297,6 +298,8 @@ def EnemyDesc(categoryName):
     myDesc.Tag(f"Instant Death Spikes are removed for fights below level {instantDeathSpikeThreshold}", pady=(5,5))
     myDesc.Tag("A few boss fights require certain arts to be used to end. Mysterious Face in spiral valley for example.\nIn this case the enemy that replaces Mysterious Face will have that art added to their list in the slot it requires. (Only affects 4 fights in the game)", pady=(5,5))
     myDesc.Tag("Some fights have small green rings and if you get big enemies there it smashes you up against the wall. These fights will have the ring removed.", pady=(5,5))
+    myDesc.Tag("Enemies who self destruct will not be able to if placed in certain boss fights that require arts to end", pady=(5,5))
+    myDesc.Tag("The first two required fights in the game (Dunbans Prologue and Shulks Colony 9 introduction scene) are made easier to avoid softlocking.", pady=(5,5))
     return myDesc
 
 
