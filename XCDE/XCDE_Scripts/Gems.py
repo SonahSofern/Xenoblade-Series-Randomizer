@@ -124,7 +124,7 @@ def Gems():
 def Effects(gemData, gemMSData, gemHelpMSData):
     
     # Number of gems that the game will allow in a single file
-    maxGems = 92
+    maxGems = 98
     
     # Keep track of what ids to put things in
     idCount = 1
@@ -223,8 +223,18 @@ def Effects(gemData, gemMSData, gemHelpMSData):
         
         idCount += 1
         skillMSCount += 3
-    
+    CrystalFix(len(gemData["rows"]))
 
+def CrystalFix(gemLength): # Goes through and edits crystals that have values outside the current population of skills
+    with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_dropcrystallist.json", 'r+', encoding='utf-8') as crystalFile: 
+        cryData = json.load(crystalFile)
+        for crystal in cryData["rows"]:
+            for i in range(1,3):
+                if crystal[f"skill{i}"] > gemLength:
+                    crystal[f"skill{i}"] = random.randrange(1,gemLength+1)
+        scripts.JSONParser.CloseFile(cryData, crystalFile)
+            
+    
 
 def RankPower(gem, ranks):
     mult = random.choice([0.1, 0.2, 0.3, 0.4, 0.6, 0.8, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0, 2.5, 3.0])
