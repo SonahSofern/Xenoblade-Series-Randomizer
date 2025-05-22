@@ -15,102 +15,54 @@ ReynGuardShift = [22] # Wont work on other characters
 # Setting that randomizes effects of arts
 
 class ActMatch: # A class so that when arts get randomized their animation somewhat matches their effects by changing pc_arts act_idx
-    def __init__(self, _pcID, _SingleAttack, _AOEAttack, _Buff, startLv = 1, weight = 0):
+    def __init__(self, _pcID, _SingleAttack, _AOEAttack, _Buff, startLv = 1, artSlots = 16):
         self.pcID = _pcID
         self.SingleAttack = _SingleAttack
         self.AOEAttack = _AOEAttack
         self.Buff = _Buff
         self.startLv = startLv
-        self.weight = weight
-        CharacterList.append(self)
+        self.slots = artSlots
         
-CharacterList:list[ActMatch] = []
-
-
-ShulkActs = ActMatch(1, _SingleAttack=[0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[1,3,2,6,10,13,14], weight=15)
-ReynActs = ActMatch(2, _SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,5,7,8,9,10,14], weight=15)
-FioraActs = ActMatch(3,  _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0],startLv=-10, weight = 3)
-DunbanActs = ActMatch(4,  _SingleAttack=[0,1,3,5,9,14],_AOEAttack=[12,13,14],_Buff=[2,4,6,7,8,10,11,15], startLv=20, weight= 15)
-SharlaActs = ActMatch(5,  _SingleAttack=[0,1,7,11,14],_AOEAttack=[6,8,15],_Buff=[0,2,3,4,5,6,9,10,12,13], startLv=10, weight= 15)
-RikiActs = ActMatch(6,  _SingleAttack=[1,2,6,11,12,14,15],_AOEAttack=[0,4,6,7,9,10,13,15],_Buff=[0,3,5,8,10,13], startLv=22, weight=15)
-MeliaActs = ActMatch(7,  _SingleAttack=[4,12],_AOEAttack=[5,14,15],_Buff=[0,1,2,3,6,7,8,9,10,11,13], startLv=23, weight=15)
-SevenActs = ActMatch(8,  _SingleAttack=[0,2,3,10,11],_AOEAttack=[5,7,8,9,12,15],_Buff=[1,4,6,13,14], startLv=40, weight= 15)
-KinoActs = ActMatch(14,[0],[0],[0])
-NeneActs = ActMatch(15,[0],[0],[0])
-
 # Groups for the option to keep arts together
 class ArtGroup:
     def __init__(self, _group):
         self.group = _group # Group of name iDS
-        ArtGroups.append(self)
     def chooseChar(self, charList):
         self.chosenChar = random.choice(charList)
+        return self.chosenChar
         
-ArtGroups:list[ArtGroup] = []
-GaleSlashGroup = ArtGroup([107,91,89,95])
-StarlightKickGroup = ArtGroup([229,213])
 
-def namePrint(artList):
-    with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
-        artData = json.load(artFile)
-        nameList = []
-        for art in artData["rows"]:
-            if art["$id"] in artList:
-                nameList.append(art["name"])
-        print(nameList)
-
-def RemakeArtList():    
-    with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
-        artData = json.load(artFile)
-        # isDupes = Options.PlayerArtsOption_Duplicates.GetState()
-        artList = []
-        keyList = ["name", "pc", "cast", "recast", "tp", "dex", "rate1", "rate2", "arts_type", "atk_type", "chain_type", "elem", "dmg_type", "dmg_time", "tgt", "range_type", "range", "range_val", "hate", "flag", "st_type", "st_val", "st_val2", "st_time", "st_itv", "sp_cnd", "sp_proc", "sp_val1", "sp_val2", "kb_type", "kb_lv", "grow_powl", "grow_powh", "grow_st_time", "grow_st_val", "glow_recast", "icon", "icon_base", "act_idx", "idx", "list_idx", "get_type", "get_lv", "melia_lv", "melia_slot_idx", "help"]
-        
-        badReplacementArts = PonspectorDLCArts + GuestArts + DunbanMonadoArts + TalentArts + DLCArts
-        for art in artData["rows"]: # Build our list
-            if art["$id"] in badReplacementArts:
-                continue
-            artList.append(art)
-        
-        badReplacedArts =  PonspectorDLCArts + GuestArts + DunbanMonadoArts + TalentArts + DLCArts
-        for art in artData["rows"]: # Replace the old list with random choices from the new list
-            if art["$id"] in badReplacedArts:
-                continue
-            
-            newArt = random.choice(artList) # Choose a new art for that slot
-            # if isDupes:
-            #     artList.remove(newArt)
-            
-            for key in keyList: # Replace everything
-                art[key] = newArt[key]
-        scripts.JSONParser.CloseFile(artData, artFile)
-        
-        
-        # Edit the new data
 
 # Setting that just shuffles arts
 def RandomizePcArts():
+    ShulkActs = ActMatch(1, _SingleAttack=[0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[1,3,2,6,10,13,14])
+    ReynActs = ActMatch(2, _SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,5,7,8,9,10,14])
+    FioraActs = ActMatch(3,  _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0],startLv=-10, artSlots = 4)
+    DunbanActs = ActMatch(4,  _SingleAttack=[0,1,3,5,9,14],_AOEAttack=[12,13,14],_Buff=[2,4,6,7,8,10,11,15], startLv=20)
+    SharlaActs = ActMatch(5,  _SingleAttack=[0,1,7,11,14],_AOEAttack=[6,8,15],_Buff=[0,2,3,4,5,6,9,10,12,13], startLv=10)
+    RikiActs = ActMatch(6,  _SingleAttack=[1,2,6,11,12,14,15],_AOEAttack=[0,4,6,7,9,10,13,15],_Buff=[0,3,5,8,10,13], startLv=22)
+    MeliaActs = ActMatch(7,  _SingleAttack=[4,12],_AOEAttack=[5,14,15],_Buff=[0,1,2,3,6,7,8,9,10,11,13], startLv=23)
+    SevenActs = ActMatch(8,  _SingleAttack=[0,2,3,10,11],_AOEAttack=[5,7,8,9,12,15],_Buff=[1,4,6,13,14], startLv=40)
+    KinoActs = ActMatch(14,[0],[0],[0], artSlots=0)
+    NeneActs = ActMatch(15,[0],[0],[0], artSlots=0)
+    GaleSlashGroup = ArtGroup([107,91,89,95])
+    StarlightKickGroup = ArtGroup([229,213])
+    CharacterList:list[ActMatch] = [ShulkActs, ReynActs, FioraActs, DunbanActs, SharlaActs, RikiActs, MeliaActs, SevenActs]
+    ArtGroups:list[ArtGroup] = [GaleSlashGroup, StarlightKickGroup]
+
     # RemakeArtList()
     
     keepMeliaSummons = Options.PlayerArtsOption_Summons.GetState()
     isBalancedLv = Options.PlayerArtsOption_BalancedUnlockLevels.GetState()
     isArtGroups = Options.PlayerArtsOption_ArtGroups.GetState()
     
-    charList = CharacterList.copy()
-    charWeights = []
     
-    if keepMeliaSummons: # If melia keeps her summons we should reduce her weights a bit
-        MeliaActs.weight = 5
-    else:
-        MeliaActs.weight = 15
-    
-    for chr in charList: # Create the weights list
-        charWeights.append(chr.weight)
-    
+    MeliaWeight(keepMeliaSummons, MeliaActs)
     
     # Dole out the special art groups
     for group in ArtGroups:
-        group.chooseChar(charList)
+        chosen = group.chooseChar(CharacterList)
+        chosen.slots = chosen.slots - len(group.group)
         
     invalidArtIds = TalentArts + DunbanMonadoArts + ShulkMonadoArts + PonspectorDLCArts + DLCArts + GuestArts
     
@@ -126,35 +78,44 @@ def RandomizePcArts():
             if keepMeliaSummons and (art["name"] in MeliaSummonsNames): # Dont change the melias summons if we want her to keep em
                 continue
             
-            char = random.choices(charList,charWeights,k=1)[0]
-
+            # Random choice
+            char = random.choice(CharacterList)
+            char.slots = char.slots-1
+            if char.slots <= 0:
+                CharacterList.remove(char)
             
-            DetermineArtType(art, char) # Random choice
-            FixSharlasNewArts(art)
-            ArtGroupManager(isArtGroups, art)
+            AssignArt(art, char)
+            FixSharlasNewArts(art, SharlaActs, KinoActs)
+            ArtGroupManager(isArtGroups, art, ArtGroups)
 
 
         if isBalancedLv:
-            BalanceArtUnlockLevels(artData)
+            BalanceArtUnlockLevels(artData, CharacterList)
         
         MatchArtBooks(artData)
         scripts.JSONParser.CloseFile(artData, artFile)
-        
 
-def ArtGroupManager(isArtGroups, art):
+
+def MeliaWeight(keepMeliaSummons, MeliaActs):
+    if keepMeliaSummons: # If melia keeps her summons we reduce her slots
+        MeliaActs.slots = 6
+    else:
+        MeliaActs.slots = 14
+
+def ArtGroupManager(isArtGroups, art, ArtGroups):
     if isArtGroups:
         for artGroup in ArtGroups: # Ensures theres exists one set of grouped arts staying grouped
             if art["name"] in artGroup.group:
-                DetermineArtType(art, artGroup.chosenChar)
+                AssignArt(art, artGroup.chosenChar)
                 break
 
-def FixSharlasNewArts(art): # Fixes the talent gauge working with her new arts
+def FixSharlasNewArts(art, SharlaActs, KinoActs): # Fixes the talent gauge working with her new arts
     if art["pc"] in [SharlaActs.pcID, KinoActs.pcID]: # Ensures former healer's new arts still increment the cooldown talent art
         art["tp"] = random.randrange(-25,-1)
     elif art["tp"] < 0: # If healer arts go on someone else it shouldnt buff their talent gauge
         art["tp"] = 0
 
-def BalanceArtUnlockLevels(artData):
+def BalanceArtUnlockLevels(artData, CharacterList):
     for char in CharacterList: # Loop through the characters
         unlockLv = char.startLv - 3 # Starting level to unlock arts
         stepLv = [2,3,4,5,6] # How many levels for the next unlock 
@@ -164,7 +125,7 @@ def BalanceArtUnlockLevels(artData):
                 continue
             if art["pc"] == char.pcID: # Find arts for a character
                 getlv = min(max(unlockLv,0),80) # Max to frontload the arts a little bit so you get them early
-                # if char.pcID == 3:
+                # if char.pcID == 4:
                 #     print(f"ID: {art["$id"]} Lv: {getlv}")
                 art["get_lv"] = getlv
                 art["get_type"] = 1
@@ -180,7 +141,7 @@ def MatchArtBooks(artData):
                     book["pc_type"] = art["pc"]
                     break
                 
-def DetermineArtType(art, char:ActMatch):
+def AssignArt(art, char:ActMatch):
     if art["pc"] == char.pcID: # If they get a vanilla art dont change the act no
         return
     
@@ -215,3 +176,45 @@ def ArtsDescriptions():
     # ArtDesc.Header(Options.PlayerArtsOption_Cooldown.name)
     # ArtDesc.Text(f"Chooses a random cooldown between {CooldownStartRange[0]}-{CooldownStartRange[1]}s then each level up reduces that cooldown by the original cooldown / {CooldownStepRange[0]}-{CooldownStepRange[1]}")
     return ArtDesc
+
+
+
+
+
+# def namePrint(artList):
+#     with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
+#         artData = json.load(artFile)
+#         nameList = []
+#         for art in artData["rows"]:
+#             if art["$id"] in artList:
+#                 nameList.append(art["name"])
+#         print(nameList)
+
+# def RemakeArtList():    
+#     with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
+#         artData = json.load(artFile)
+#         # isDupes = Options.PlayerArtsOption_Duplicates.GetState()
+#         artList = []
+#         keyList = ["name", "pc", "cast", "recast", "tp", "dex", "rate1", "rate2", "arts_type", "atk_type", "chain_type", "elem", "dmg_type", "dmg_time", "tgt", "range_type", "range", "range_val", "hate", "flag", "st_type", "st_val", "st_val2", "st_time", "st_itv", "sp_cnd", "sp_proc", "sp_val1", "sp_val2", "kb_type", "kb_lv", "grow_powl", "grow_powh", "grow_st_time", "grow_st_val", "glow_recast", "icon", "icon_base", "act_idx", "idx", "list_idx", "get_type", "get_lv", "melia_lv", "melia_slot_idx", "help"]
+        
+#         badReplacementArts = PonspectorDLCArts + GuestArts + DunbanMonadoArts + TalentArts + DLCArts
+#         for art in artData["rows"]: # Build our list
+#             if art["$id"] in badReplacementArts:
+#                 continue
+#             artList.append(art)
+        
+#         badReplacedArts =  PonspectorDLCArts + GuestArts + DunbanMonadoArts + TalentArts + DLCArts
+#         for art in artData["rows"]: # Replace the old list with random choices from the new list
+#             if art["$id"] in badReplacedArts:
+#                 continue
+            
+#             newArt = random.choice(artList) # Choose a new art for that slot
+#             # if isDupes:
+#             #     artList.remove(newArt)
+            
+#             for key in keyList: # Replace everything
+#                 art[key] = newArt[key]
+#         scripts.JSONParser.CloseFile(artData, artFile)
+        
+        
+#         # Edit the new data
