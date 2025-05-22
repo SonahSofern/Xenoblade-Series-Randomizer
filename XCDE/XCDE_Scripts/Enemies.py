@@ -22,9 +22,10 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     MysteriousFace = ForcedArt(268,5,611)
     GoldFace = ForcedArt(1622, 1, 740)
     DiscipleDickson = ForcedArt(1316, 8, 942)
+    Yaldabaoth = ForcedArt(2501, 5, 843)
     GroupEnemies = [135,136,137,138,139]
     selfDestructArts = [1005,1015,1017,1009, 1007, 1013, 396, 406, 915, 408, 812, 814, 400, 923, 1053, 398, 899, 404, 410, 1127, 820] + Helper.InclRange(900, 929)
-    ForcedStoryArts = [MetalFace, MysteriousFace, GoldFace, DiscipleDickson] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
+    ForcedStoryArts = [MetalFace, MysteriousFace, GoldFace, DiscipleDickson, Yaldabaoth] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
     isNormal = normal.GetState()
     isUnique = unique.GetState()
     isBoss = boss.GetState()
@@ -76,7 +77,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                         if enemy["$id"] not in monsterTypeList: # Only want to replace enemies chosen from our groups
                             continue
                                                     
-                        chosen = random.choice(filteredEnemyData) # Choose an enemy                
+                        chosen:Enemy = random.choice(filteredEnemyData) # Choose an enemy                
                         
                         VoicedEnemiesFix(eneVoiceData, chosen, enemy)                                
                         SpikeBalancer(enemy, chosen.eneListArea)
@@ -104,7 +105,8 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                         MechonEarly(enemy, chosen)
                         SmallAreaFights(enemy)
                         ForcedArts(enemy, ForcedStoryArts)
-                        
+                        if enemy["$id"] == 2501 and chosen.enelist["$id"] != 2501: # If egil is randomized into not egil we need to move him
+                            EgilArenaFix()
                         # Allows no dupes if possible if we dont have enough choices it reshuffles the original pool
                         filteredEnemyData.remove(chosen)   
                         if filteredEnemyData == []: # repopulate it if the group is empty
@@ -130,7 +132,7 @@ def VoicedEnemiesFix(eneVoiceData, chosen, enemy):
 
 # Big enemies in small areas can break the ai and you cant target them if they go into ceilings (Had this in the two ancient machines fight with a big dragon)
 def SmallAreaFights(enemy):
-    SmallFights = [30,31]
+    SmallFights = [30,31, 1617]
     if enemy["$id"] in SmallFights:
         enemy["scale"] = max(int(enemy["scale"] /4),1)
 
@@ -271,7 +273,17 @@ def RingRemoval():
                 lock["popID1"] = 0
                 lock["popID2"] = 0
         JSONParser.CloseFile(lockData, lockFile)
-        
+
+
+def EgilArenaFix():
+    with open(f"./XCDE/_internal/JsonOutputs/bdat_ma2301/poplist2301.json", 'r+', encoding='utf-8') as enpopFile:
+        popData = json.load(enpopFile)
+        for en in popData["rows"]:
+            if en["$id"] == 2:
+                en["posX"] = 10
+                en["posY"] = 0
+        JSONParser.CloseFile(popData, enpopFile)
+  
         
 def EnemyDesc(categoryName):
     myDesc = PopupDescriptions.Description()
