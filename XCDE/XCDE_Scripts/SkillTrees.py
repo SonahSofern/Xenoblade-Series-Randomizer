@@ -54,7 +54,7 @@ def SkillRando():
                     SkillList.append(newSkill)
                 
                 for skill in skillData["rows"]:
-                    if scripts.Helper.OddsCheck(odds):
+                    if not scripts.Helper.OddsCheck(odds):
                         continue
                     
                     if skill["$id"] in invalidSkills:

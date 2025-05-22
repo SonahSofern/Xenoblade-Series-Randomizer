@@ -164,8 +164,8 @@ def BalanceArtUnlockLevels(artData):
                 continue
             if art["pc"] == char.pcID: # Find arts for a character
                 getlv = min(max(unlockLv,0),80) # Max to frontload the arts a little bit so you get them early
-                if char.pcID == 3:
-                    print(f"ID: {art["$id"]} Lv: {getlv}")
+                # if char.pcID == 3:
+                #     print(f"ID: {art["$id"]} Lv: {getlv}")
                 art["get_lv"] = getlv
                 art["get_type"] = 1
                 unlockLv += random.choice(stepLv)
