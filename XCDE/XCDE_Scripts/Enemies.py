@@ -42,7 +42,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
         ChosenEnemyIds.extend(SuperbossEnemies)
     # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame",  "avoid", "spike_dmg", "spike_state_val"
     CopiedStats = ["move_speed", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_state", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
-    CopiedStatsWithRatios = ["hp", "str", "eth"] # Not doing agility , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
+    CopiedStatsWithRatios = ["str", "eth"] # Not doing agility or hp , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
     CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
     
     # 5001 doesnt have enemies
@@ -105,8 +105,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                         MechonEarly(enemy, chosen)
                         SmallAreaFights(enemy)
                         ForcedArts(enemy, ForcedStoryArts)
-                        if enemy["$id"] == 2501 and chosen.enelist["$id"] != 2501: # If egil is randomized into not egil we need to move him
-                            EgilArenaFix()
+                        EgilArenaFix(enemy, chosen)
                         # Allows no dupes if possible if we dont have enough choices it reshuffles the original pool
                         filteredEnemyData.remove(chosen)   
                         if filteredEnemyData == []: # repopulate it if the group is empty
@@ -125,15 +124,15 @@ def ForcedArts(enemy, ForcedStoryArts):
             break    
 
 def VoicedEnemiesFix(eneVoiceData, chosen, enemy):
-    newVoices = []
+    newVoiceList = []
     for voiceID in eneVoiceData["rows"]:
         if chosen.enelist["$id"] == voiceID["enemy"]: # If the chosen enemy has a voice
             newVoice = voiceID.copy()
             newVoice["enemy"] = enemy["$id"] # Set the ID
-            newVoice["$id"] = len(eneVoiceData["rows"]) + len(newVoices) + 1
-            newVoices.append(newVoice)
+            newVoice["$id"] = len(eneVoiceData["rows"]) + len(newVoiceList) + 1
+            newVoiceList.append(newVoice)
             break    
-    eneVoiceData["rows"].extend(newVoices)
+    eneVoiceData["rows"].extend(newVoiceList)
 
 # Big enemies in small areas can break the ai and you cant target them if they go into ceilings (Had this in the two ancient machines fight with a big dragon)
 def SmallAreaFights(enemy):
@@ -282,14 +281,15 @@ def RingRemoval():
         JSONParser.CloseFile(lockData, lockFile)
 
 
-def EgilArenaFix():
-    with open(f"./XCDE/_internal/JsonOutputs/bdat_ma2301/poplist2301.json", 'r+', encoding='utf-8') as enpopFile:
-        popData = json.load(enpopFile)
-        for en in popData["rows"]:
-            if en["$id"] == 2:
-                en["posX"] = 10
-                en["posY"] = 0
-        JSONParser.CloseFile(popData, enpopFile)
+def EgilArenaFix(enemy, chosen):
+    if enemy["$id"] == 2501 and chosen.enelist["$id"] != 2501: # If egil is randomized into not egil we need to move him
+        with open(f"./XCDE/_internal/JsonOutputs/bdat_ma2301/poplist2301.json", 'r+', encoding='utf-8') as enpopFile:
+            popData = json.load(enpopFile)
+            for en in popData["rows"]:
+                if en["$id"] == 2:
+                    en["posX"] = 10
+                    en["posY"] = 0
+            JSONParser.CloseFile(popData, enpopFile)
   
         
 def EnemyDesc(categoryName):
