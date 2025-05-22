@@ -21,16 +21,15 @@ class ActMatch: # A class so that when arts get randomized their animation somew
         self.AOEAttack = _AOEAttack
         self.Buff = _Buff
         self.startLv = startLv
+        self.weight = weight
         CharacterList.append(self)
-        CharWeights.append(weight)
         
 CharacterList:list[ActMatch] = []
-CharWeights:list = []
 
 
 ShulkActs = ActMatch(1, _SingleAttack=[0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[1,3,2,6,10,13,14], weight=15)
 ReynActs = ActMatch(2, _SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,5,7,8,9,10,14], weight=15)
-FioraActs = ActMatch(3,  _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0], weight = 5)
+FioraActs = ActMatch(3,  _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0], weight = 3)
 DunbanActs = ActMatch(4,  _SingleAttack=[0,1,3,5,9,14],_AOEAttack=[12,13,14],_Buff=[2,4,6,7,8,10,11,15], startLv=20, weight= 15)
 SharlaActs = ActMatch(5,  _SingleAttack=[0,1,7,11,14],_AOEAttack=[6,8,15],_Buff=[0,2,3,4,5,6,9,10,12,13], startLv=10, weight= 15)
 RikiActs = ActMatch(6,  _SingleAttack=[1,2,6,11,12,14,15],_AOEAttack=[0,4,6,7,9,10,13,15],_Buff=[0,3,5,8,10,13], startLv=22, weight=15)
@@ -98,12 +97,22 @@ def RandomizePcArts():
     isArtGroups = Options.PlayerArtsOption_ArtGroups.GetState()
     
     charList = CharacterList.copy()
+    charWeights = []
+    
+    if keepMeliaSummons: # If melia keeps her summons we should reduce her weights a bit
+        MeliaActs.weight = 5
+    else:
+        MeliaActs.weight = 15
+    
+    for chr in charList: # Create the weights list
+        charWeights.append(chr.weight)
+    
     
     # Dole out the special art groups
     for group in ArtGroups:
         group.chooseChar(charList)
     invalidArtIds = TalentArts + DunbanMonadoArts + ShulkMonadoArts + PonspectorDLCArts + DLCArts + GuestArts
-
+    
         
     with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
@@ -116,7 +125,7 @@ def RandomizePcArts():
                 continue
             
             # Choose a character if they have reached their max arts remove them
-            char = random.choices(charList,CharWeights,k=1)[0]
+            char = random.choices(charList,charWeights,k=1)[0]
 
             
             DetermineArtType(art, char) # Random choice
@@ -153,9 +162,10 @@ def BalanceArtUnlockLevels(artData):
             if art["$id"] in ShulkMonadoArts + TalentArts + DunbanMonadoArts + PonspectorDLCArts + DLCArts:
                 continue
             if art["pc"] == char.pcID: # Find arts for a character
-                # if char.pcID == 4:
-                #     print(f"ID: {art["$id"]} Lv: {unlockLv}")
-                art["get_lv"] = max(unlockLv,0) # Max to frontload the arts a little bit so you get them early
+                getlv = min(max(unlockLv,0),80) # Max to frontload the arts a little bit so you get them early
+                if char.pcID == 3:
+                    print(f"ID: {art["$id"]} Lv: {getlv}")
+                art["get_lv"] = getlv
                 art["get_type"] = 1
                 unlockLv += random.choice(stepLv)
 
