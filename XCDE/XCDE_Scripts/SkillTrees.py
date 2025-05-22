@@ -1,6 +1,6 @@
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_PSVskill.html
 import json, random, time
-import Options, scripts.PopupDescriptions, scripts.JSONParser
+import Options, scripts.PopupDescriptions, scripts.JSONParser, scripts.Helper
 
 yoinkSkills = [140,138]
 MeliaSkills = [152,157,159]
@@ -38,7 +38,7 @@ def SkillRando():
                 psData = json.load(psFile)
                 skillData = json.load(skillFile)
                 descData = json.load(skillDescFile)
-                
+                odds = Options.AffinityTreeOption.GetSpinbox()
                 
                 SkillList:list[Skill]= []
                 invalidSkills = yoinkSkills + MeliaSkills + MechonisArmor + SharlaCoolOff + ReynTaunts
@@ -54,6 +54,9 @@ def SkillRando():
                     SkillList.append(newSkill)
                 
                 for skill in skillData["rows"]:
+                    if scripts.Helper.OddsCheck(odds):
+                        continue
+                    
                     if skill["$id"] in invalidSkills:
                         continue
                     if isEffect:

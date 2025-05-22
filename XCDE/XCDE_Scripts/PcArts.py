@@ -111,7 +111,9 @@ def RandomizePcArts():
     # Dole out the special art groups
     for group in ArtGroups:
         group.chooseChar(charList)
+        
     invalidArtIds = TalentArts + DunbanMonadoArts + ShulkMonadoArts + PonspectorDLCArts + DLCArts + GuestArts
+    
     
         
     with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
@@ -124,7 +126,6 @@ def RandomizePcArts():
             if keepMeliaSummons and (art["name"] in MeliaSummonsNames): # Dont change the melias summons if we want her to keep em
                 continue
             
-            # Choose a character if they have reached their max arts remove them
             char = random.choices(charList,charWeights,k=1)[0]
 
             
@@ -159,7 +160,7 @@ def BalanceArtUnlockLevels(artData):
         stepLv = [2,3,4,5,6] # How many levels for the next unlock 
         for art in artData["rows"]:
             # print(unlockLv)
-            if art["$id"] in ShulkMonadoArts + TalentArts + DunbanMonadoArts + PonspectorDLCArts + DLCArts:
+            if art["$id"] in ShulkMonadoArts + TalentArts + DunbanMonadoArts + PonspectorDLCArts + DLCArts + GuestArts:
                 continue
             if art["pc"] == char.pcID: # Find arts for a character
                 getlv = min(max(unlockLv,0),80) # Max to frontload the arts a little bit so you get them early

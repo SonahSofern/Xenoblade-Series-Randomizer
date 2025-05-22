@@ -125,10 +125,15 @@ def ForcedArts(enemy, ForcedStoryArts):
             break    
 
 def VoicedEnemiesFix(eneVoiceData, chosen, enemy):
+    newVoices = []
     for voiceID in eneVoiceData["rows"]:
         if chosen.enelist["$id"] == voiceID["enemy"]: # If the chosen enemy has a voice
-            voiceID["enemy"] = enemy["$id"] # Set the ID
+            newVoice = voiceID.copy()
+            newVoice["enemy"] = enemy["$id"] # Set the ID
+            newVoice["$id"] = len(eneVoiceData["rows"]) + len(newVoices) + 1
+            newVoices.append(newVoice)
             break    
+    eneVoiceData["rows"].extend(newVoices)
 
 # Big enemies in small areas can break the ai and you cant target them if they go into ceilings (Had this in the two ancient machines fight with a big dragon)
 def SmallAreaFights(enemy):
