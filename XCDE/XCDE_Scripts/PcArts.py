@@ -15,34 +15,34 @@ ReynGuardShift = [22] # Wont work on other characters
 # Setting that randomizes effects of arts
 
 class ActMatch: # A class so that when arts get randomized their animation somewhat matches their effects by changing pc_arts act_idx
-    def __init__(self, _pcID, _SingleAttack, _AOEAttack, _Buff, maxArts = 14):
+    def __init__(self, _pcID, _SingleAttack, _AOEAttack, _Buff):
         self.pcID = _pcID
         self.SingleAttack = _SingleAttack
         self.AOEAttack = _AOEAttack
         self.Buff = _Buff
-        self.artCount = maxArts
         CharacterList.append(self)
         
 CharacterList:list[ActMatch] = []
 
 ShulkActs = ActMatch(1, _SingleAttack=[0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[1,3,2,6,10,13,14])
 ReynActs = ActMatch(2, _SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,5,7,8,9,10,14])
-FioraActs = ActMatch(3,  _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0], maxArts = 6)
+FioraActs = ActMatch(3,  _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0])
 DunbanActs = ActMatch(4,  _SingleAttack=[0,1,3,5,9,14],_AOEAttack=[12,13,14],_Buff=[2,4,6,7,8,10,11,15])
 SharlaActs = ActMatch(5,  _SingleAttack=[0,1,7,11,14],_AOEAttack=[6,8,15],_Buff=[0,2,3,4,5,6,9,10,12,13])
 RikiActs = ActMatch(6,  _SingleAttack=[1,2,6,11,12,14,15],_AOEAttack=[0,4,6,7,9,10,13,15],_Buff=[0,3,5,8,10,13])
 MeliaActs = ActMatch(7,  _SingleAttack=[4,12],_AOEAttack=[5,14,15],_Buff=[0,1,2,3,6,7,8,9,10,11,13])
 SevenActs = ActMatch(8,  _SingleAttack=[0,2,3,10,11],_AOEAttack=[5,7,8,9,12,15],_Buff=[1,4,6,13,14])
-KinoActs = ActMatch(14,[0],[0],[0], 0)
-NeneActs = ActMatch(15,[0],[0],[0], 0)
+KinoActs = ActMatch(14,[0],[0],[0])
+NeneActs = ActMatch(15,[0],[0],[0])
 
 # Groups for the option to keep arts together
 class ArtGroup:
     def __init__(self, _group):
         self.group = _group # Group of name iDS
         ArtGroups.append(self)
-    def chooseChar(self):
-        self.chosenChar = random.choice(CharacterList)
+    def chooseChar(self, charList):
+        self.chosenChar = random.choice(charList)
+        return self.chosenChar
         
 ArtGroups:list[ArtGroup] = []
 GaleSlashGroup = ArtGroup([107,91,89,95])
@@ -94,12 +94,19 @@ def RandomizePcArts():
     isBalancedLv = Options.PlayerArtsOption_BalancedUnlockLevels.GetState()
     isArtGroups = Options.PlayerArtsOption_ArtGroups.GetState()
     
+    if keepMeliaSummons:
+        MeliaActs.artCount = 2 # Ensures that with this setting melia still gets the same amount of arts as others
+    else:
+        MeliaActs.artCount = 4
     
+    charList = CharacterList.copy()
+    
+    # Dole out the special art groups
     for group in ArtGroups:
-        group.chooseChar()
+        chosenCharForGroup = group.chooseChar(charList)
+        chosenCharForGroup.artCount = chosenCharForGroup.artCount - len(group.group)
     invalidArtIds = TalentArts + DunbanMonadoArts + ShulkMonadoArts + PonspectorDLCArts + DLCArts + GuestArts
 
-    charList = CharacterList.copy()
         
     with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
@@ -113,8 +120,10 @@ def RandomizePcArts():
             
             # Choose a character if they have reached their max arts remove them
             char = random.choice(charList)
-            while char.artCount == 0:
+            while char.artCount <= 0:
                 charList.remove(char)
+                if charList == []:
+                    charList = CharacterList.copy()
                 char = random.choice(charList)
             char.artCount = char.artCount - 1 
                 
