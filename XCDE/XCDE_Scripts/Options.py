@@ -66,6 +66,7 @@ PlayerArtsOption = Option("Player Arts",Character, "Randomizes character's arts 
 PlayerArtsOption_BalancedUnlockLevels = SubOption("Balanced Unlock Levels", PlayerArtsOption)
 # PlayerArtsOption_Duplicates = SubOption("Allow Duplicates", PlayerArtsOption)
 # PlayerArtsOption_EarlyArtsUnlock = SubOption("Unlock All Arts at Level 1", PlayerArtsOption)
+PlayerArtsOption_Power = SubOption("Power", PlayerArtsOption)
 PlayerArtsOption_ArtGroups = SubOption("Keep Combo Arts Together", PlayerArtsOption)
 PlayerArtsOption_Summons = SubOption("Keep Melia's Summons", PlayerArtsOption)
 # PlayerArtsOption_GuestArts = SubOption("Include Guest Arts", PlayerArtsOption)

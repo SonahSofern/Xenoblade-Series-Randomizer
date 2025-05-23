@@ -55,6 +55,7 @@ def RandomizePcArts():
     keepMeliaSummons = Options.PlayerArtsOption_Summons.GetState()
     isBalancedLv = Options.PlayerArtsOption_BalancedUnlockLevels.GetState()
     isArtGroups = Options.PlayerArtsOption_ArtGroups.GetState()
+    isPower = Options.PlayerArtsOption_Power.GetState()
     
     editableList = CharacterList.copy()
     
@@ -89,7 +90,8 @@ def RandomizePcArts():
             AssignArt(art, char)
             FixSharlasNewArts(art, SharlaActs, KinoActs)
             ArtGroupManager(isArtGroups, art, ArtGroups)
-
+            if isPower:
+                Power(art)
 
         if isBalancedLv:
             BalanceArtUnlockLevels(artData, CharacterList)
@@ -135,6 +137,44 @@ def BalanceArtUnlockLevels(artData, CharacterList):
                 unlockLv += random.choice(stepLv)
         print(f"Total: {count}\n")
 
+# class Mult:
+#     def __init__(self, keys = [], mults = [], rollOnce = False):
+#         self.keys = keys
+#         self.mults = mults
+#         self.rollOnce = rollOnce
+#     def Roll(self, art):
+#         mult = random.choice(self.mults)
+#         for key in self.keys:
+#             art[key] = art[key] * mult
+            
+#             # If we want seperate mult rolls for each
+#             if not self.rollOnce:
+#                 mult = random.choice(self.mults)
+
+def Mult(art, keys = [], mults = [1], rollOnce = False, minVal = 0, maxVal = 255):
+        mult = random.choice(mults)
+        for key in keys:
+            print(key)
+            print(f"old: {art[key]}")
+            art[key] = max(min(int(art[key] * mult),maxVal), minVal)
+            print(f"new: {art[key]}")
+            print("\n")
+            # If we want seperate mult rolls for each
+            if not rollOnce:
+                mult = random.choice(mults)
+
+testMults = [0.2,0.5,0.7,0.9,1.2,1.5,1.8,2.2]
+
+def Power(art):
+    Mult(art,["grow_powl", "grow_powh"], testMults, True)
+    Mult(art,["rate1", "rate2"], testMults, True)
+    Mult(art,["st_time", "grow_st_time"], testMults)
+    Mult(art,["sp_val2"], testMults)
+    Mult(art,["st_val", "st_val2", "grow_st_val"], testMults)
+    Mult(art,["tp"], testMults)
+    Mult(art,["recast", "glow_recast"], testMults, True)
+    
+    
 # Fixes art books
 def MatchArtBooks(artData):
     with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_artslist.json", 'r+', encoding='utf-8') as artBookFile:
@@ -158,13 +198,7 @@ def AssignArt(art, char:ActMatch):
     else:
         art["act_idx"] = random.choice(char.AOEAttack)      
         
-CooldownStartRange = (10,60)
-CooldownStepRange = (5,10)
-def Cooldown(art): # Controls how hard arts are to recharge
-    Cooldown = random.randrange(CooldownStartRange[0],CooldownStartRange[1])
-    CooldownStep = Cooldown//random.randrange(CooldownStepRange[0],CooldownStepRange[1])
-    art["recast"] = Cooldown
-    art["glow_recast"]= CooldownStep
+
 
 def ArtsDescriptions():
     ArtDesc = scripts.PopupDescriptions.Description()
@@ -174,6 +208,8 @@ def ArtsDescriptions():
     ArtDesc.Text("Keep arts that have combos randomized to the same character.")
     ArtDesc.Tag("Gale Slash, Worldly Slash, Electric Gutbuster, Tempest Kick", pady=3, anchor="center")
     ArtDesc.Tag("Spear Break, Starlight Kick", pady=3, anchor="center")
+    ArtDesc.Header(Options.PlayerArtsOption_Power.name)
+    ArtDesc.Text("Randomizes the strength of various aspects of arts and their level ups")
     ArtDesc.Header(Options.PlayerArtsOption_Summons.name)
     ArtDesc.Text("Keeps Melia's summon arts on her, so that her talent art is not useless.")
     ArtDesc.Tag("Summon Wind, Summon Earth, Summon Ice, Summon Aqua, Summon Flare, Summon Bolt, Summon Copy and Power Effect", pady=3, anchor="center")
