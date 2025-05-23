@@ -129,7 +129,7 @@ def BalanceArtUnlockLevels(artData, CharacterList):
     for char in CharacterList: # Loop through the characters
         unlockLv = char.startLv - 3 # Starting level to unlock arts
         stepLv = [2,3,4,5,6] # How many levels for the next unlock 
-        print(char.pcID)
+        # print(char.pcID)
         count = 0
         for art in artData["rows"]:
             if art["$id"] in ShulkMonadoArts + TalentArts + DunbanMonadoArts + PonspectorDLCArts + DLCArts + GuestArts:
@@ -137,11 +137,11 @@ def BalanceArtUnlockLevels(artData, CharacterList):
             if art["pc"] == char.pcID: # Find arts for a character
                 count = count + 1
                 getlv = min(max(unlockLv,0),80) # Max to frontload the arts a little bit so you get them early
-                print(f"ID: {art["$id"]} Lv: {getlv}")
+                # print(f"ID: {art["$id"]} Lv: {getlv}")
                 art["get_lv"] = getlv
                 art["get_type"] = 1
                 unlockLv += random.choice(stepLv)
-        print(f"Total: {count}\n")
+        # print(f"Total: {count}\n")
 
 # class Mult:
 #     def __init__(self, keys = [], mults = [], rollOnce = False):
@@ -160,11 +160,11 @@ def BalanceArtUnlockLevels(artData, CharacterList):
 def Mult(art, keys = [], mults = [20,220], rollOnce = False, maxVal = 255):
         mult = random.choice(mults)/100
         for key in keys:
-            print(key)
-            print(f"old: {art[key]}")
+            # print(key)
+            # print(f"old: {art[key]}")
             art[key] = min(int(art[key] * mult),maxVal)
-            print(f"new: {art[key]}")
-            print("\n")
+            # print(f"new: {art[key]}")
+            # print("\n")
             # If we want seperate mult rolls for each
             if not rollOnce:
                 mult = random.choice(mults)

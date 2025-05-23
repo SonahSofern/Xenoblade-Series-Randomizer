@@ -19,20 +19,15 @@ class Gem:
         self.money = money 
         self.category = category
         self.rvs_caption = rvs_caption
-        self.menuCaption = menuCaption
+        if menuCaption == "":
+            self.menuCaption = rvs_caption
+        else:
+            self.menuCaption = menuCaption
         GemList.append(self)
 GemList:list[Gem] = []
             
 
-attributes = {
-    0 : (0, "NULL"),
-    4 : (4,"Fire"),
-    5 : (5, "Water"),
-    6 : (6, "Electric"),
-    7 : (7, "Ice"),
-    8 : (8, "Wind"),
-    9 : (9, "Earth")
-}
+
 
      
 def StandardGems(gemData, gemMSData, gemHelpMSData):    
@@ -56,16 +51,35 @@ def StandardGems(gemData, gemMSData, gemHelpMSData):
         
         Gem(newName, attributes[gem["atr_type"]], gem["rvs_status"], gem["rvs_type"], gem["attach"], gem["max"], gem["val_type"], [gem["lower_E"], gem["upper_S"]], [gem["percent_E"], gem["percent_S"]], gem["money"], gem["category"], newHelpName, help)
 
-    
+attributes = {
+    0 : (0, "NULL"),
+    4 : (4,"Fire"),
+    5 : (5, "Water"),
+    6 : (6, "Electric"),
+    7 : (7, "Ice"),
+    8 : (8, "Wind"),
+    9 : (9, "Earth")
+}
 
 def UnusedGems():
-    Gem("Cast Quicken", attributes[6], 45, 3,2, 90, 0, [10,30], [0,0], 1000, 4, "\\[Passive\\][XENO:n ] Reduces cast time by $1.", "\\[Passive\\][XENO:n ] Reduces cast time.")
-    Gem("Reactive Heal", attributes[5], 54, 1, 2, 90, 0, [30,255], [0,0], 1500, 1, "\\[Passive\\][XENO:n ] On damage taken restore $1 health.", "\\[Passive\\][XENO:n ] On damage taken restore health.")
-    Gem("Monado Enchant", attributes[7], 208, 1, 1, 90, 0, [100,200], [0,0], 2000, 1, "\\[Passive\\][XENO:n ] Your attacks pierce mechon armor and inflict $1 bonus damage.", "\\[Passive\\][XENO:n ] Your attacks pierce mechon armor and inflict bonus damage.")
+    # Gem("Cast Quicken", attributes[6], 45, 3,2, 90, 0, [10,30], [0,0], 1000, 4, "\\[Passive\\][XENO:n ] Reduces cast time by $1.", "\\[Passive\\][XENO:n ] Reduces cast time.")
+    # Gem("Reactive Heal", attributes[5], 54, 1, 2, 90, 0, [30,255], [0,0], 1500, 1, "\\[Passive\\][XENO:n ] On damage taken restore $1 health.", "\\[Passive\\][XENO:n ] On damage taken restore health.")
+    # Gem("Monado Enchant", attributes[7], 208, 1, 1, 90, 0, [100,200], [0,0], 2000, 1, "\\[Passive\\][XENO:n ] Your attacks pierce mechon armor and inflict $1 bonus damage.", "\\[Passive\\][XENO:n ] Your attacks pierce mechon armor and inflict bonus damage.")
+    # Gem("Cursed Regen", attributes[8], 53, 1, 2, 1000, 0, [100,100], [1,2], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
+    Gem("Recovery Down 0", attributes[8], 142, 1, 0, 1000, 0, [20,20], [100,100], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
+    Gem("Recovery Down 1", attributes[8], 142, 0, 0, 1000, 0, [20,20], [100,100], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
+    
+    
     # 94 is accuracy up might add here if it works
     if Options.MovespeedOption.GetState():
         Gem("Quickstep", attributes[8], 3, 3, 2, 25, 0, [2,25], [0,0], 500, 5, "\\[Passive\\][XENO:n ] Increases movement speed by $1.", "\\[Passive\\][XENO:n ] Increases movement speed.")
-                    
+
+# Dont work 
+# Gem("Regenerate", attributes[5], 52, 1, 2, 1000, 0, [40,200], [1,2], 2999, 1, "Test", "Test")
+# Gem("Fall", attributes[8], 58, 0, 2, 1000, 0, [100,100], [100,100], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
+# Gem("Recovery Down 1", attributes[8], 142, 0, 0, 1000, 0, [20,20], [100,100], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
+
+                 
 def Gems():
     ranks = ["E", "D", "C", "B", "A", "S"] # Calculate proper gem amount based on rank
     with open("./XCDE/_internal/JsonOutputs/bdat_common/BTL_skilllist.json", 'r+', encoding='utf-8') as gemFile:
