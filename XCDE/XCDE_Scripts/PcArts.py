@@ -200,6 +200,13 @@ def MatchArtBooks(artData):
                 if art["$id"] == book["get_arts"]:
                     book["pc_type"] = art["pc"]
                     break
+    # with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as itemFile: currently dont care enough to rename the names in the descriptions
+    #     with open("./XCDE/_internal/JsonOutputs/bdat_menu_item/MNU_item_mes_b.json", 'r+', encoding='utf-8') as artDescFile:
+    #         with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_artslist.json", 'r+', encoding='utf-8') as artsListFile:
+    #             itemData = json.load(itemFile)
+    #             for art in artsListFile["rows"]:
+                
+            
                 
 def AssignArt(art, char:ActMatch):
     if art["pc"] == char.pcID: # If they get a vanilla art dont change the act no
