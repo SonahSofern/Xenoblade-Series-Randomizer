@@ -1,4 +1,5 @@
 import json, random, Options
+import scripts.Helper
 import scripts.JSONParser
 import scripts.PopupDescriptions 
 TalentArts = [102,101,100,44,99,43,98,42,62,97,154,1,2,19,36,41,61,79,96,119,120,121,122,123,124,125,126,127,153,171,152] # Need to shuffle these seperately for various reasons
@@ -35,20 +36,21 @@ class ArtGroup:
 
 # Setting that just shuffles arts
 def RandomizePcArts():
-    ShulkActs = ActMatch(1, _SingleAttack=[0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[1,3,2,6,10,13,14], artSlots=16)
-    ReynActs = ActMatch(2, _SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,5,7,8,9,10,14], artSlots=16)
+    ShulkActs = ActMatch(1, _SingleAttack=[0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[1,3,2,6,10,13,14])
+    ReynActs = ActMatch(2, _SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,5,7,8,9,10,14], artSlots=17)
     FioraActs = ActMatch(3,  _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0],startLv=-3, artSlots = 4)
-    DunbanActs = ActMatch(4,  _SingleAttack=[0,1,3,5,9,14],_AOEAttack=[12,13,14],_Buff=[2,4,6,7,8,10,11,15],artSlots=16, startLv=20)
-    SharlaActs = ActMatch(5,  _SingleAttack=[0,1,7,11,14],_AOEAttack=[6,8,15],_Buff=[0,2,3,4,5,6,9,10,12,13],artSlots=16, startLv=10)
-    RikiActs = ActMatch(6,  _SingleAttack=[1,2,6,11,12,14,15],_AOEAttack=[0,4,6,7,9,10,13,15],_Buff=[0,3,5,8,10,13],artSlots=16, startLv=22)
+    DunbanActs = ActMatch(4,  _SingleAttack=[0,1,3,5,9,14],_AOEAttack=[12,13,14],_Buff=[2,4,6,7,8,10,11,15], startLv=20)
+    SharlaActs = ActMatch(5,  _SingleAttack=[0,1,7,11,14],_AOEAttack=[6,8,15],_Buff=[0,2,3,4,5,6,9,10,12,13], startLv=10)
+    RikiActs = ActMatch(6,  _SingleAttack=[1,2,6,11,12,14,15],_AOEAttack=[0,4,6,7,9,10,13,15],_Buff=[0,3,5,8,10,13], startLv=22)
     MeliaActs = ActMatch(7,  _SingleAttack=[4,12],_AOEAttack=[5,14,15],_Buff=[0,1,2,3,6,7,8,9,10,11,13], startLv=23)
-    SevenActs = ActMatch(8,  _SingleAttack=[0,2,3,10,11],_AOEAttack=[5,7,8,9,12,15],_Buff=[1,4,6,13,14],artSlots=15, startLv=30)
+    SevenActs = ActMatch(8,  _SingleAttack=[0,2,3,10,11],_AOEAttack=[5,7,8,9,12,15],_Buff=[1,4,6,13,14], startLv=30)
     KinoActs = ActMatch(14,[0],[0],[0], artSlots=0)
     NeneActs = ActMatch(15,[0],[0],[0], artSlots=0)
     GaleSlashGroup = ArtGroup([107,91,89,95])
     StarlightKickGroup = ArtGroup([229,213])
+    BoneUpperDiveSobat = ArtGroup([61,63])
     CharacterList:list[ActMatch] = [ShulkActs, ReynActs, FioraActs, DunbanActs, SharlaActs, RikiActs, MeliaActs, SevenActs]
-    ArtGroups:list[ArtGroup] = [GaleSlashGroup, StarlightKickGroup]
+    ArtGroups:list[ArtGroup] = [GaleSlashGroup, StarlightKickGroup, BoneUpperDiveSobat]
 
     # RemakeArtList()
     
@@ -81,6 +83,9 @@ def RandomizePcArts():
                 continue
             
             # Random choice
+            if editableList == []: # Renew the list if empty
+                editableList = CharacterList.copy()
+                
             char = random.choice(editableList)
 
             char.slots = char.slots-1
@@ -90,7 +95,8 @@ def RandomizePcArts():
             AssignArt(art, char)
             FixSharlasNewArts(art, SharlaActs, KinoActs)
             ArtGroupManager(isArtGroups, art, ArtGroups)
-            if isPower:
+        if isPower:
+            for art in artData["rows"]:
                 Power(art)
 
         if isBalancedLv:
@@ -151,28 +157,38 @@ def BalanceArtUnlockLevels(artData, CharacterList):
 #             if not self.rollOnce:
 #                 mult = random.choice(self.mults)
 
-def Mult(art, keys = [], mults = [1], rollOnce = False, minVal = 0, maxVal = 255):
-        mult = random.choice(mults)
+def Mult(art, keys = [], mults = [20,220], rollOnce = False, maxVal = 255):
+        mult = random.choice(mults)/100
         for key in keys:
             print(key)
             print(f"old: {art[key]}")
-            art[key] = max(min(int(art[key] * mult),maxVal), minVal)
+            art[key] = min(int(art[key] * mult),maxVal)
             print(f"new: {art[key]}")
             print("\n")
             # If we want seperate mult rolls for each
             if not rollOnce:
                 mult = random.choice(mults)
 
-testMults = [0.2,0.5,0.7,0.9,1.2,1.5,1.8,2.2]
+
 
 def Power(art):
-    Mult(art,["grow_powl", "grow_powh"], testMults, True)
-    Mult(art,["rate1", "rate2"], testMults, True)
-    Mult(art,["st_time", "grow_st_time"], testMults)
-    Mult(art,["sp_val2"], testMults)
-    Mult(art,["st_val", "st_val2", "grow_st_val"], testMults)
-    Mult(art,["tp"], testMults)
-    Mult(art,["recast", "glow_recast"], testMults, True)
+    
+    Mult(art,["grow_powl", "grow_powh"], rollOnce=True)
+    
+    Mult(art,["rate1", "rate2"], [70,180], True, 4095)
+    
+    Mult(art,["st_time"], maxVal=2047)
+    Mult(art,["grow_st_time"])
+    
+    Mult(art,["sp_val2"])
+    
+    Mult(art,["st_val", "st_val2"], [50, 250])
+    Mult(art,["grow_st_val"],[50,220])
+    
+    Mult(art,["tp"], [20,90], maxVal=127)
+    
+    Mult(art,["recast"], [80,120], True)
+    Mult(art,["glow_recast"], [80,120], True, 31)
     
     
 # Fixes art books
@@ -202,14 +218,15 @@ def AssignArt(art, char:ActMatch):
 
 def ArtsDescriptions():
     ArtDesc = scripts.PopupDescriptions.Description()
+    ArtDesc.Header(Options.PlayerArtsOption_Power.name)
+    ArtDesc.Text("Randomizes the strength of various aspects of arts and their level ups")
+    ArtDesc.Image("spiritBreath.png", "XCDE", 600)
     ArtDesc.Header(Options.PlayerArtsOption_BalancedUnlockLevels.name)
     ArtDesc.Text("Ensures that your arts unlock consistently as your level up.\nOtherwise your might get really high levels arts and be stuck with nothing for most of the game.\nOn average your will unlock a new art every 2-3 levels.")
     ArtDesc.Header(Options.PlayerArtsOption_ArtGroups.name)
     ArtDesc.Text("Keep arts that have combos randomized to the same character.")
     ArtDesc.Tag("Gale Slash, Worldly Slash, Electric Gutbuster, Tempest Kick", pady=3, anchor="center")
     ArtDesc.Tag("Spear Break, Starlight Kick", pady=3, anchor="center")
-    ArtDesc.Header(Options.PlayerArtsOption_Power.name)
-    ArtDesc.Text("Randomizes the strength of various aspects of arts and their level ups")
     ArtDesc.Header(Options.PlayerArtsOption_Summons.name)
     ArtDesc.Text("Keeps Melia's summon arts on her, so that her talent art is not useless.")
     ArtDesc.Tag("Summon Wind, Summon Earth, Summon Ice, Summon Aqua, Summon Flare, Summon Bolt, Summon Copy and Power Effect", pady=3, anchor="center")
