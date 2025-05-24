@@ -58,6 +58,7 @@ TabQOLOuter = ttk.Frame(MainWindow)
 TabCosmeticsOuter = ttk.Frame(MainWindow)
 TabGameModeOuter = ttk.Frame(MainWindow)
 TabFunnyOuter = ttk.Frame(MainWindow)
+TabTornaOuter = ttk.Frame(MainWindow)
 
 # Canvas 
 TabGeneralCanvas = Canvas(TabGeneralOuter) 
@@ -69,6 +70,7 @@ TabQOLCanvas = Canvas(TabQOLOuter)
 TabCosmeticsCanvas = Canvas(TabCosmeticsOuter)
 TabGameModeCanvas = Canvas(TabGameModeOuter)
 TabFunnyCanvas = Canvas(TabFunnyOuter)
+TabTornaCanvas = Canvas(TabTornaOuter)
 
 # Actual Scrollable Content
 TabGeneral = ttk.Frame(TabGeneralCanvas)
@@ -80,9 +82,9 @@ TabQOL = ttk.Frame(TabQOLCanvas)
 TabCosmetics = ttk.Frame(TabCosmeticsCanvas)
 TabGameMode = ttk.Frame(TabGameModeCanvas)
 TabFunny = ttk.Frame(TabFunnyCanvas)
+TabTorna = ttk.Frame(TabTornaCanvas)
 
-
-GUISettings.CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabGameModeOuter, TabFunnyOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabGameModeCanvas, TabFunnyCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabGameMode, TabFunny])
+GUISettings.CreateScrollBars([TabGeneralOuter, TabDriversOuter, TabBladesOuter, TabEnemiesOuter, TabMiscOuter, TabQOLOuter, TabCosmeticsOuter, TabGameModeOuter, TabFunnyOuter, TabTornaOuter],[TabGeneralCanvas, TabDriversCanvas, TabBladesCanvas, TabEnemiesCanvas, TabMiscCanvas, TabQOLCanvas, TabCosmeticsCanvas, TabGameModeCanvas, TabFunnyCanvas, TabTornaCanvas],[TabGeneral, TabDrivers, TabBlades, TabEnemies, TabMisc, TabQOL, TabCosmetics, TabGameMode, TabFunny, TabTorna])
 
 # Tabs
 MainWindow.add(TabGeneralOuter, text ='General') 
@@ -93,7 +95,8 @@ MainWindow.add(TabCosmeticsOuter, text='Cosmetics')
 MainWindow.add(TabQOLOuter, text = 'Quality of Life')
 MainWindow.add(TabGameModeOuter, text='Game Modes')
 MainWindow.add(TabFunnyOuter, text='Funny')
-MainWindow.add(TabMiscOuter, text ='Misc.') 
+MainWindow.add(TabMiscOuter, text ='Misc.')
+MainWindow.add(TabTornaOuter, text = 'Torna Options')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 Tabs = {
@@ -105,7 +108,8 @@ Tabs = {
     6: TabQOL,
     7: TabFunny,
     8: TabCosmetics,
-    9: TabGameMode
+    9: TabGameMode,
+    10: TabTorna
 }
 
 Interactables.OptionList.sort(key= lambda x: x.name) # Sorts alphabetically

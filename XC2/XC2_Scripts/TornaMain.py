@@ -9,8 +9,13 @@ import os
 from scripts.Interactables import OptionList
 
 # hints
+# what do hints look like? Hint specific progression items? hint troublesome locations? hint regions? regions makes a lot of sense, but would require more info for every single check.
+# who would give the hints? would need to change dialog of a character? would require importing more files 
 # object color matches contents. make the name of a check container yellow if it has progression, green if it has helpful items, and normal if it doesn't? Not possible for collection points
-# look into options for pre-completed quests or EZ-complete quests
+# look into options for pre-completed quests or EZ-complete quests?
+# required items for a given quest would need to be zeroed out for said quest, besides the pre-req items.
+# option to exclude locations?
+# need a way to tell the user if the generation failed, and for what reason.
 # option to remove specific quests or locations from list
 # nicer Spoiler Log location names.
 
