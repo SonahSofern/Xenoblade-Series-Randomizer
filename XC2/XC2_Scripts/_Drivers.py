@@ -1,3 +1,4 @@
+import Options, CharacterRandomization
 import copy, random
 from scripts import JSONParser, Helper
 
@@ -31,6 +32,11 @@ ReplacementBlade2Original = dict()  # Maps Randomized Blade ID to Unrandomized B
 #  Instead of swapping blades, can I just define arts like I do for broadsword (so Nia can use Pyra, for example) Specials might be broken
 
 def Driver():
+    # TODO: Move all the logic after this function to CharacterRandomization
+    #       Once everything is moved, this file can go away
+    #       The option needs to call CharacterRandomization.CharacterRandomization() instead of this function
+    CharacterRandomization.CharacterRandomization()
+
     InitialSetup()
 
     RandomizeDrivers()

@@ -2,9 +2,9 @@ from tkinter import ttk
 from scripts import JSONParser,Helper
 from IDs import *
 from tkinter import *
-import _Accessories, _DriverArts, SkillTrees, BladeRandomization, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeWeaponClassRando
+import _Accessories, _DriverArts, SkillTrees, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeWeaponClassRando
 import TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UMHuntMain, Cosmetics, AccessoryShops, CollectionPoints, PouchItemShops, TreasureChests, ButtonCombos, EnemyDrops, _EleCombo
-import _YellowSkills, _BladeSpecials, Scales, DLCFlagQOL, _Drivers
+import _YellowSkills, _BladeSpecials, Scales, DLCFlagQOL, _Drivers, CharacterRandomization
 import TornaMain
 from scripts.Interactables import Option, SubOption
 # Prio
@@ -82,7 +82,7 @@ DriverSkillTreesOption_EarlyArtsCancel = SubOption("Early Arts Cancel", DriverSk
 DriverSkillTreesOption_EarlyXYBAttack = SubOption("Early XYB Attack", DriverSkillTreesOption)
 
 # Blades
-BladesOption = Option("Blades", Blade, "Randomizes when blades appear in the story", [lambda: BladeRandomization.BladeRandomization()], _hasSpinBox = True)
+BladesOption = Option("Blades", Blade, "Randomizes when blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], _hasSpinBox = True)
 BladesOption_Dromarch = SubOption("Randomize Dromarch", BladesOption)
 BladesOption_Healer = SubOption("Guaranteed Healer", BladesOption)
 BladeAuxCoresOption = Option("Blade Aux Cores", Blade, "Randomizes the effects of Aux Cores", [lambda: _AuxCores.RandomizeAuxCoreEnhancements()])

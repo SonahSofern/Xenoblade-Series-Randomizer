@@ -1,5 +1,5 @@
 import json, random, Options
-from BladeRandomization import Replacement2Original
+from CharacterRandomization import Replacement2Original
 from scripts import Helper, PopupDescriptions
 # Lists of cosmetics to choose from
 ValidDriverCosmetics = []

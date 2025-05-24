@@ -32,13 +32,27 @@ NewGamePlusBlades = [1043, 1044, 1045, 1046, 1047, 1048, 1049] # Currently canno
 
 include_printouts = False  # Debugging
 
-def BladeRandomization():
-    InitialSetup()
-    FreeEngage()
-    BugFixes_PreRandomization()
-    RandomizeBlades()
-    RandomizePoppiForms()
-    BugFixes_PostRandomization()
+first_character_randomization = True # Both drivers and blade options call this same function. Only run this logic once
+
+
+# TODO: Only blades for now
+def CharacterRandomization():
+    # Make sure this logic is called only once
+    global first_character_randomization
+    if first_character_randomization:
+        first_character_randomization = False
+    else:
+        return
+
+    if Options.DriverOption.GetState():
+        print("TODO: Combine driver and blade randomization into one file")
+    if Options.BladesOption.GetState():
+        InitialSetup()
+        FreeEngage()
+        BugFixes_PreRandomization()
+        RandomizeBlades()
+        RandomizePoppiForms()
+        BugFixes_PostRandomization()
 
 def FreeEngage(): # If Blade Rando is on, we want to be able to move blades around freely to avoid bugs
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", ["FreeEngage"], "1")
