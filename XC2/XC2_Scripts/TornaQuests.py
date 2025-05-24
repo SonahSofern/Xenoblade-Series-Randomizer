@@ -154,7 +154,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Shop Change IDs': []
     }
     TornaSidequest6 = {
-        'Quest Name': 'Punpuns Rival',
+        'Quest Name': 'Punpun\'s Rival',
         'Quest Number': 6,
         'Main Story Req': 30, # used to be 12, when LevelUpTokens were going to be included
         'Sidequest Pre-Req': [],
@@ -242,7 +242,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Shop Change IDs': []
     }
     TornaSidequest14 = {
-        'Quest Name': 'Wheres the Boy Gone',
+        'Quest Name': 'Where\'s the Boy Gone',
         'Quest Number': 14,
         'Main Story Req': 20,
         'Sidequest Pre-Req': [],
@@ -400,7 +400,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 28,
         'Main Story Req': 35,
         'Sidequest Pre-Req': [13],
-        'Item Requirements': [[30428,30375,30338,30433,30428,30375,30338,30433] , [30428] , [30375] , [30338] , [30433] , AllOptionals[1]],
+        'Item Requirements': [[30428,30375,30388,30433,30428,30375,30388,30433] , [30428] , [30375] , [30388] , [30433] , AllOptionals[1]],
         'Community Gained': 1,
         'Community Level Req': 0,
         'Reward Set IDs': [1058, 1059],
@@ -631,7 +631,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 49,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [[30338] , [25464]], # LevelUpTokens[:43]],
+        'Item Requirements': [[30388] , [25464]], # LevelUpTokens[:43]],
         'Community Gained': 3,
         'Community Level Req': 3,
         'Reward Set IDs': [1042],
@@ -675,7 +675,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 53,
         'Main Story Req': 46,
         'Sidequest Pre-Req': [15, 43, 49],
-        'Item Requirements': [[30338] , [30372] , [30387] , [30392] , [30427]],
+        'Item Requirements': [[30388] , [30372] , [30387] , [30392] , [30427]],
         'Community Gained': 2,
         'Community Level Req': 3,
         'Reward Set IDs': [1041],
@@ -927,7 +927,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
 
     TornaMainQuest1 = {
         'FLD_QuestTask $id': 1,
-        'Task Summary': 'Defeat Tutorial Fight',
+        'Task Summary': 'Defeat the Tutorial Fight',
         'Community Level Req': 0,
         'Item Requirements': []
     }
@@ -963,7 +963,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     }
     TornaMainQuest7 = {
         'FLD_QuestTask $id': 4,
-        'Task Summary': 'Defeat Gargoyle in Crater',
+        'Task Summary': 'Defeat the Gargoyle in the Crater',
         'Community Level Req': 0,
         'Item Requirements': [] # [LevelUpTokens[:12]]
     }
@@ -981,7 +981,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     }
     TornaMainQuest10 = {
         'FLD_QuestTask $id': 7,
-        'Task Summary': 'Complete What Bars the Way',
+        'Task Summary': 'Complete \"What Bars the Way\"',
         'Community Level Req': 0,
         'Item Requirements': [[ManipEtherKey[0]], [HazeAff[0]], [LightKey[0]]]
     }
@@ -1011,7 +1011,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     }
     TornaMainQuest15 = {
         'FLD_QuestTask $id': 11,
-        'Task Summary': 'Go to Torigoth graves',
+        'Task Summary': 'Go to the Torigoth graves',
         'Community Level Req': 0,
         'Item Requirements': []
     }
@@ -1023,7 +1023,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     }
     TornaMainQuest17 = {
         'FLD_QuestTask $id': 13,
-        'Task Summary': 'Complete Power Unimaginable',
+        'Task Summary': 'Complete \"Power Unimaginable\"',
         'Community Level Req': 0,
         'Item Requirements': []
     }
@@ -1047,13 +1047,13 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     }
     TornaMainQuest21 = {
         'FLD_QuestTask $id': 17,
-        'Task Summary': 'Compete Wheres the Boy Gone?',
+        'Task Summary': "Complete \"Where's the Boy Gone?\"",
         'Community Level Req': 0,
         'Item Requirements': []
     }
     TornaMainQuest22 = {
         'FLD_QuestTask $id': 18,
-        'Task Summary': 'Head to Strategy Room',
+        'Task Summary': 'Head to the Strategy Room',
         'Community Level Req': 0,
         'Item Requirements': []
     }
@@ -1071,25 +1071,25 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     }
     TornaMainQuest25 = {
         'FLD_QuestTask $id': 21,
-        'Task Summary': 'Reach Militia Garrison',
+        'Task Summary': 'Reach the Militia Garrison',
         'Community Level Req': 0,
         'Item Requirements': []
     }
     TornaMainQuest26 = {
         'FLD_QuestTask $id': 22,
-        'Task Summary': 'Complete Feeding an Army',
+        'Task Summary': 'Complete \"Feeding an Army\"',
         'Community Level Req': 0,
         'Item Requirements': [[30380], [30438], [30347], [30365]]
     }
     TornaMainQuest27 = {
         'FLD_QuestTask $id': 23,
-        'Task Summary': 'Complete Lett Bridge Restoration',
+        'Task Summary': 'Complete \"Lett Bridge Restoration\"',
         'Community Level Req': 0,
         'Item Requirements': [] # LevelUpTokens[:25]]
     }
     TornaMainQuest28 = {
         'FLD_QuestTask $id': 57,
-        'Task Summary': 'Return to Alettas Military Garrison',
+        'Task Summary': 'Return to Aletta\'s Military Garrison',
         'Community Level Req': 0,
         'Item Requirements': []
     }
@@ -1113,19 +1113,19 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     }
     TornaMainQuest32 = {
         'FLD_QuestTask $id': 27,
-        'Task Summary': 'Rest at Campsite',
+        'Task Summary': 'Rest at Olnard\'s Trail Campsite',
         'Community Level Req': 0,
         'Item Requirements': [OTC_Key]
     }
     TornaMainQuest33 = {
         'FLD_QuestTask $id': 28,
-        'Task Summary': 'Complete To Cross a Desert',
+        'Task Summary': 'Complete \"To Cross a Desert\"',
         'Community Level Req': 0,
         'Item Requirements': [[30355] , [30383]]
     }
     TornaMainQuest34 = {
         'FLD_QuestTask $id': 29,
-        'Task Summary': 'Head past Olnards Trail',
+        'Task Summary': 'Head past Olnard\'s Trail',
         'Community Level Req': 0,
         'Item Requirements': []
     }
@@ -1161,19 +1161,19 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     }
     TornaMainQuest40 = {
         'FLD_QuestTask $id': 35,
-        'Task Summary': 'Defeat Gargoyles Pt 1',
+        'Task Summary': 'Defeat Gargoyles Pt. 1',
         'Community Level Req': 2,
         'Item Requirements': [] # LevelUpTokens[:36]]
     }
     TornaMainQuest41 = {
         'FLD_QuestTask $id': 52,
-        'Task Summary': 'Defeat Gargoyles Pt 2',
+        'Task Summary': 'Defeat Gargoyles Pt. 2',
         'Community Level Req': 2,
         'Item Requirements': []
     }
     TornaMainQuest42 = {
         'FLD_QuestTask $id': 53,
-        'Task Summary': 'Defeat Gargoyles Pt 3',
+        'Task Summary': 'Defeat Gargoyles Pt. 3',
         'Community Level Req': 2,
         'Item Requirements': []
     }
@@ -1191,7 +1191,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     }
     TornaMainQuest45 = {
         'FLD_QuestTask $id': 38,
-        'Task Summary': 'Defeat Gargoyles Pt 4',
+        'Task Summary': 'Defeat Gargoyles Pt. 4',
         'Community Level Req': 2,
         'Item Requirements': []
     }
@@ -1203,13 +1203,13 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     }
     TornaMainQuest47 = {
         'FLD_QuestTask $id': 40,
-        'Task Summary': 'Head to Tornas Womb',
+        'Task Summary': 'Head to Torna\'s Womb',
         'Community Level Req': 2,
         'Item Requirements': []
     }
     TornaMainQuest48 = {
         'FLD_QuestTask $id': 56,
-        'Task Summary': 'Head to Tornas Womb Pt 2',
+        'Task Summary': 'Head to Torna\'s Womb Pt. 2',
         'Community Level Req': 2,
         'Item Requirements': []
     }
@@ -1251,13 +1251,13 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     }
     TornaMainQuest55 = {
         'FLD_QuestTask $id': 46,
-        'Task Summary': 'Defeat Malos Pt 1',
+        'Task Summary': 'Defeat Malos Pt. 1',
         'Community Level Req': 4,
         'Item Requirements': [] # LevelUpTokens[:54]]
     }
     TornaMainQuest56 = {
         'FLD_QuestTask $id': 47,
-        'Task Summary': 'Defeat Malos Pt 2',
+        'Task Summary': 'Defeat Malos Pt. 2',
         'Community Level Req': 4,
         'Item Requirements': []
     }
@@ -1341,13 +1341,9 @@ def StackStoryRequirements(Level2QuestReqs, Level4QuestReqs): # This adds the pr
     for storystep in range(1, len(TornaMainquests)):
         TornaMainquests[storystep].itemreqs.extend(TornaMainquests[storystep - 1].itemreqs) # adds the previous step's requirements
         TornaMainquests[storystep].itemreqs = Helper.MultiLevelListToSingleLevelList(TornaMainquests[storystep].itemreqs) # turns nested lists into one list
-        if TornaMainquests[storystep].id == 33:
+        if TornaMainquests[storystep].id == 38:
             TornaMainquests[storystep].itemreqs.extend(Level2QuestReqs)
-        elif TornaMainquests[storystep].comreq == 42:
+        elif TornaMainquests[storystep].id == 50:
             TornaMainquests[storystep].itemreqs.extend(Level4QuestReqs)
         TornaMainquests[storystep].itemreqs = list(set(TornaMainquests[storystep].itemreqs))
         TornaMainquests[storystep].itemreqs.sort()
-
-#def ChangeQuestShops():
-#    for optional in AllOptionals:
-#        if 

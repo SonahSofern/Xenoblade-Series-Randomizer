@@ -2693,19 +2693,20 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Rarity': 2,
         'CollectionTableID': 273
         }
+    # gormott collection points
     ma41aCollectionPoint4651 = {
-	'$id': '4651colle_ma41a_f004',
-	'Name': 'ma40aCollectionPoint4651',
-	'Location Near': 2412,
-	'Story Pre-Req': [12],
-	'Required Items': [],
-	'Must Defeat Enemy IDs': [],
-	'Rarity': 1,
-	'CollectionTableID': 279
+        '$id': '4651colle_ma41a_f004',
+        'Name': 'ma41aCollectionPoint4651',
+        'Location Near': 2412,
+        'Story Pre-Req': [12],
+        'Required Items': [],
+        'Must Defeat Enemy IDs': [],
+        'Rarity': 1,
+        'CollectionTableID': 279
     }
     ma41aCollectionPoint4652 = {
         '$id': '4652colle_ma41a_f005',
-        'Name': 'ma40aCollectionPoint4652',
+        'Name': 'ma41aCollectionPoint4652',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2715,7 +2716,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4653 = {
         '$id': '4653colle_ma41a_f006',
-        'Name': 'ma40aCollectionPoint4653',
+        'Name': 'ma41aCollectionPoint4653',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2725,7 +2726,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4654 = {
         '$id': '4654colle_ma41a_f007',
-        'Name': 'ma40aCollectionPoint4654',
+        'Name': 'ma41aCollectionPoint4654',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2735,7 +2736,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4655 = {
         '$id': '4655colle_ma41a_f008',
-        'Name': 'ma40aCollectionPoint4655',
+        'Name': 'ma41aCollectionPoint4655',
         'Location Near': 2406,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2745,7 +2746,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4656 = {
         '$id': '4656colle_ma41a_f009',
-        'Name': 'ma40aCollectionPoint4656',
+        'Name': 'ma41aCollectionPoint4656',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2755,7 +2756,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4657 = {
         '$id': '4657colle_ma41a_f010',
-        'Name': 'ma40aCollectionPoint4657',
+        'Name': 'ma41aCollectionPoint4657',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2765,7 +2766,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4658 = {
         '$id': '4658colle_ma41a_f011',
-        'Name': 'ma40aCollectionPoint4658',
+        'Name': 'ma41aCollectionPoint4658',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2775,7 +2776,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4659 = {
         '$id': '4659colle_ma41a_f012',
-        'Name': 'ma40aCollectionPoint4659',
+        'Name': 'ma41aCollectionPoint4659',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2785,7 +2786,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4660 = {
         '$id': '4660colle_ma41a_f015',
-        'Name': 'ma40aCollectionPoint4660',
+        'Name': 'ma41aCollectionPoint4660',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2795,7 +2796,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4661 = {
         '$id': '4661colle_ma41a_f016',
-        'Name': 'ma40aCollectionPoint4661',
+        'Name': 'ma41aCollectionPoint4661',
         'Location Near': 2402,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2805,7 +2806,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4662 = {
         '$id': '4662colle_ma41a_f017',
-        'Name': 'ma40aCollectionPoint4662',
+        'Name': 'ma41aCollectionPoint4662',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2815,7 +2816,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4663 = {
         '$id': '4663colle_ma41a_f018',
-        'Name': 'ma40aCollectionPoint4663',
+        'Name': 'ma41aCollectionPoint4663',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2825,7 +2826,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4664 = {
         '$id': '4664colle_ma41a_f019',
-        'Name': 'ma40aCollectionPoint4664',
+        'Name': 'ma41aCollectionPoint4664',
         'Location Near': 2418,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2835,7 +2836,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4665 = {
         '$id': '4665colle_ma41a_f020',
-        'Name': 'ma40aCollectionPoint4665',
+        'Name': 'ma41aCollectionPoint4665',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2845,7 +2846,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4666 = {
         '$id': '4666colle_ma41a_f021',
-        'Name': 'ma40aCollectionPoint4666',
+        'Name': 'ma41aCollectionPoint4666',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2855,7 +2856,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4667 = {
         '$id': '4667colle_ma41a_f022',
-        'Name': 'ma40aCollectionPoint4667',
+        'Name': 'ma41aCollectionPoint4667',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2865,7 +2866,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4668 = {
         '$id': '4668colle_ma41a_f023',
-        'Name': 'ma40aCollectionPoint4668',
+        'Name': 'ma41aCollectionPoint4668',
         'Location Near': 2402,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2875,7 +2876,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4669 = {
         '$id': '4669colle_ma41a_f024',
-        'Name': 'ma40aCollectionPoint4669',
+        'Name': 'ma41aCollectionPoint4669',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2885,7 +2886,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4670 = {
         '$id': '4670colle_ma41a_f026',
-        'Name': 'ma40aCollectionPoint4670',
+        'Name': 'ma41aCollectionPoint4670',
         'Location Near': 2420,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2895,7 +2896,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4671 = {
         '$id': '4671colle_ma41a_f027',
-        'Name': 'ma40aCollectionPoint4671',
+        'Name': 'ma41aCollectionPoint4671',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2905,7 +2906,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4672 = {
         '$id': '4672colle_ma41a_f028',
-        'Name': 'ma40aCollectionPoint4672',
+        'Name': 'ma41aCollectionPoint4672',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2915,7 +2916,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4673 = {
         '$id': '4673colle_ma41a_f029',
-        'Name': 'ma40aCollectionPoint4673',
+        'Name': 'ma41aCollectionPoint4673',
         'Location Near': 2422,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2925,7 +2926,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4674 = {
         '$id': '4674colle_ma41a_f030',
-        'Name': 'ma40aCollectionPoint4674',
+        'Name': 'ma41aCollectionPoint4674',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2935,7 +2936,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4675 = {
         '$id': '4675colle_ma41a_f032',
-        'Name': 'ma40aCollectionPoint4675',
+        'Name': 'ma41aCollectionPoint4675',
         'Location Near': 2414,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2945,7 +2946,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4676 = {
         '$id': '4676colle_ma41a_f033',
-        'Name': 'ma40aCollectionPoint4676',
+        'Name': 'ma41aCollectionPoint4676',
         'Location Near': 2420,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2955,7 +2956,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4677 = {
         '$id': '4677colle_ma41a_f034',
-        'Name': 'ma40aCollectionPoint4677',
+        'Name': 'ma41aCollectionPoint4677',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2965,7 +2966,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4678 = {
         '$id': '4678colle_ma41a_f035',
-        'Name': 'ma40aCollectionPoint4678',
+        'Name': 'ma41aCollectionPoint4678',
         'Location Near': 2408,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2975,7 +2976,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4679 = {
         '$id': '4679colle_ma41a_f036',
-        'Name': 'ma40aCollectionPoint4679',
+        'Name': 'ma41aCollectionPoint4679',
         'Location Near': 2422,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2985,7 +2986,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4680 = {
         '$id': '4680colle_ma41a_f037',
-        'Name': 'ma40aCollectionPoint4680',
+        'Name': 'ma41aCollectionPoint4680',
         'Location Near': 2402,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -2995,7 +2996,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4681 = {
         '$id': '4681colle_ma41a_f038',
-        'Name': 'ma40aCollectionPoint4681',
+        'Name': 'ma41aCollectionPoint4681',
         'Location Near': 2401,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3005,7 +3006,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4682 = {
         '$id': '4682colle_ma41a_f039',
-        'Name': 'ma40aCollectionPoint4682',
+        'Name': 'ma41aCollectionPoint4682',
         'Location Near': 2408,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3015,7 +3016,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4683 = {
         '$id': '4683colle_ma41a_f040',
-        'Name': 'ma40aCollectionPoint4683',
+        'Name': 'ma41aCollectionPoint4683',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3025,7 +3026,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4684 = {
         '$id': '4684colle_ma41a_f041',
-        'Name': 'ma40aCollectionPoint4684',
+        'Name': 'ma41aCollectionPoint4684',
         'Location Near': 2401,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3035,7 +3036,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4685 = {
         '$id': '4685colle_ma41a_f043',
-        'Name': 'ma40aCollectionPoint4685',
+        'Name': 'ma41aCollectionPoint4685',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3045,7 +3046,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4686 = {
         '$id': '4686colle_ma41a_f044',
-        'Name': 'ma40aCollectionPoint4686',
+        'Name': 'ma41aCollectionPoint4686',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3055,7 +3056,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4687 = {
         '$id': '4687colle_ma41a_f045',
-        'Name': 'ma40aCollectionPoint4687',
+        'Name': 'ma41aCollectionPoint4687',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3065,7 +3066,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4688 = {
         '$id': '4688colle_ma41a_f047',
-        'Name': 'ma40aCollectionPoint4688',
+        'Name': 'ma41aCollectionPoint4688',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3075,7 +3076,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4689 = {
         '$id': '4689colle_ma41a_f048',
-        'Name': 'ma40aCollectionPoint4689',
+        'Name': 'ma41aCollectionPoint4689',
         'Location Near': 2408,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3085,7 +3086,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4690 = {
         '$id': '4690colle_ma41a_f051',
-        'Name': 'ma40aCollectionPoint4690',
+        'Name': 'ma41aCollectionPoint4690',
         'Location Near': 2401,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3095,7 +3096,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4691 = {
         '$id': '4691colle_ma41a_f052',
-        'Name': 'ma40aCollectionPoint4691',
+        'Name': 'ma41aCollectionPoint4691',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3105,7 +3106,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4692 = {
         '$id': '4692colle_ma41a_f055',
-        'Name': 'ma40aCollectionPoint4692',
+        'Name': 'ma41aCollectionPoint4692',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3115,7 +3116,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4693 = {
         '$id': '4693colle_ma41a_f056',
-        'Name': 'ma40aCollectionPoint4693',
+        'Name': 'ma41aCollectionPoint4693',
         'Location Near': 2408,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3125,7 +3126,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4694 = {
         '$id': '4694colle_ma41a_f058',
-        'Name': 'ma40aCollectionPoint4694',
+        'Name': 'ma41aCollectionPoint4694',
         'Location Near': 2409,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3135,7 +3136,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4695 = {
         '$id': '4695colle_ma41a_f059',
-        'Name': 'ma40aCollectionPoint4695',
+        'Name': 'ma41aCollectionPoint4695',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3145,7 +3146,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4696 = {
         '$id': '4696colle_ma41a_f060',
-        'Name': 'ma40aCollectionPoint4696',
+        'Name': 'ma41aCollectionPoint4696',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3155,7 +3156,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4697 = {
         '$id': '4697colle_ma41a_f061',
-        'Name': 'ma40aCollectionPoint4697',
+        'Name': 'ma41aCollectionPoint4697',
         'Location Near': 2422,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3165,7 +3166,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4698 = {
         '$id': '4698colle_ma41a_f062',
-        'Name': 'ma40aCollectionPoint4698',
+        'Name': 'ma41aCollectionPoint4698',
         'Location Near': 2424,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3175,7 +3176,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4699 = {
         '$id': '4699colle_ma41a_f063',
-        'Name': 'ma40aCollectionPoint4699',
+        'Name': 'ma41aCollectionPoint4699',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3185,7 +3186,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4700 = {
         '$id': '4700colle_ma41a_f064',
-        'Name': 'ma40aCollectionPoint4700',
+        'Name': 'ma41aCollectionPoint4700',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3195,7 +3196,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4701 = {
         '$id': '4701colle_ma41a_f065',
-        'Name': 'ma40aCollectionPoint4701',
+        'Name': 'ma41aCollectionPoint4701',
         'Location Near': 2415,
         'Story Pre-Req': [16],
         'Required Items': [],
@@ -3205,7 +3206,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4702 = {
         '$id': '4702colle_ma41a_f066',
-        'Name': 'ma40aCollectionPoint4702',
+        'Name': 'ma41aCollectionPoint4702',
         'Location Near': 2419,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3215,7 +3216,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4703 = {
         '$id': '4703colle_ma41a_f067',
-        'Name': 'ma40aCollectionPoint4703',
+        'Name': 'ma41aCollectionPoint4703',
         'Location Near': 2408,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3225,7 +3226,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4704 = {
         '$id': '4704colle_ma41a_f069',
-        'Name': 'ma40aCollectionPoint4704',
+        'Name': 'ma41aCollectionPoint4704',
         'Location Near': 2415,
         'Story Pre-Req': [16],
         'Required Items': [],
@@ -3235,7 +3236,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4705 = {
         '$id': '4705colle_ma41a_f070',
-        'Name': 'ma40aCollectionPoint4705',
+        'Name': 'ma41aCollectionPoint4705',
         'Location Near': 2414,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3245,7 +3246,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4706 = {
         '$id': '4706colle_ma41a_f071',
-        'Name': 'ma40aCollectionPoint4706',
+        'Name': 'ma41aCollectionPoint4706',
         'Location Near': 2408,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3255,7 +3256,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4707 = {
         '$id': '4707colle_ma41a_f072',
-        'Name': 'ma40aCollectionPoint4707',
+        'Name': 'ma41aCollectionPoint4707',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3265,7 +3266,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4708 = {
         '$id': '4708colle_ma41a_f073',
-        'Name': 'ma40aCollectionPoint4708',
+        'Name': 'ma41aCollectionPoint4708',
         'Location Near': 2401,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3275,7 +3276,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4709 = {
         '$id': '4709colle_ma41a_f076',
-        'Name': 'ma40aCollectionPoint4709',
+        'Name': 'ma41aCollectionPoint4709',
         'Location Near': 2419,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3285,7 +3286,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4710 = {
         '$id': '4710colle_ma41a_f077',
-        'Name': 'ma40aCollectionPoint4710',
+        'Name': 'ma41aCollectionPoint4710',
         'Location Near': 2419,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3295,7 +3296,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4711 = {
         '$id': '4711colle_ma41a_f078',
-        'Name': 'ma40aCollectionPoint4711',
+        'Name': 'ma41aCollectionPoint4711',
         'Location Near': 2422,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3305,7 +3306,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4712 = {
         '$id': '4712colle_ma41a_f079',
-        'Name': 'ma40aCollectionPoint4712',
+        'Name': 'ma41aCollectionPoint4712',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3315,7 +3316,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4713 = {
         '$id': '4713colle_ma41a_f081',
-        'Name': 'ma40aCollectionPoint4713',
+        'Name': 'ma41aCollectionPoint4713',
         'Location Near': 2422,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3325,7 +3326,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4714 = {
         '$id': '4714colle_ma41a_f082',
-        'Name': 'ma40aCollectionPoint4714',
+        'Name': 'ma41aCollectionPoint4714',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3335,7 +3336,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4715 = {
         '$id': '4715colle_ma41a_f083',
-        'Name': 'ma40aCollectionPoint4715',
+        'Name': 'ma41aCollectionPoint4715',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3345,7 +3346,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4716 = {
         '$id': '4716colle_ma41a_f085',
-        'Name': 'ma40aCollectionPoint4716',
+        'Name': 'ma41aCollectionPoint4716',
         'Location Near': 2419,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3355,7 +3356,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4717 = {
         '$id': '4717colle_ma41a_f086',
-        'Name': 'ma40aCollectionPoint4717',
+        'Name': 'ma41aCollectionPoint4717',
         'Location Near': 2419,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3365,7 +3366,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4718 = {
         '$id': '4718colle_ma41a_f087',
-        'Name': 'ma40aCollectionPoint4718',
+        'Name': 'ma41aCollectionPoint4718',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3375,7 +3376,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4719 = {
         '$id': '4719colle_ma41a_f088',
-        'Name': 'ma40aCollectionPoint4719',
+        'Name': 'ma41aCollectionPoint4719',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3385,7 +3386,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4720 = {
         '$id': '4720colle_ma41a_f089',
-        'Name': 'ma40aCollectionPoint4720',
+        'Name': 'ma41aCollectionPoint4720',
         'Location Near': 2406,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3395,7 +3396,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4721 = {
         '$id': '4721colle_ma41a_f090',
-        'Name': 'ma40aCollectionPoint4721',
+        'Name': 'ma41aCollectionPoint4721',
         'Location Near': 2405,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3405,7 +3406,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4722 = {
         '$id': '4722colle_ma41a_f091',
-        'Name': 'ma40aCollectionPoint4722',
+        'Name': 'ma41aCollectionPoint4722',
         'Location Near': 2411,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3415,7 +3416,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4723 = {
         '$id': '4723colle_ma41a_f092',
-        'Name': 'ma40aCollectionPoint4723',
+        'Name': 'ma41aCollectionPoint4723',
         'Location Near': 2405,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3425,7 +3426,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4724 = {
         '$id': '4724colle_ma41a_f093',
-        'Name': 'ma40aCollectionPoint4724',
+        'Name': 'ma41aCollectionPoint4724',
         'Location Near': 2411,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3435,7 +3436,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4725 = {
         '$id': '4725colle_ma41a_f094',
-        'Name': 'ma40aCollectionPoint4725',
+        'Name': 'ma41aCollectionPoint4725',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3445,7 +3446,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4726 = {
         '$id': '4726colle_ma41a_f097',
-        'Name': 'ma40aCollectionPoint4726',
+        'Name': 'ma41aCollectionPoint4726',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3455,7 +3456,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4727 = {
         '$id': '4727colle_ma41a_f098',
-        'Name': 'ma40aCollectionPoint4727',
+        'Name': 'ma41aCollectionPoint4727',
         'Location Near': 2411,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3465,7 +3466,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4728 = {
         '$id': '4728colle_ma41a_f099',
-        'Name': 'ma40aCollectionPoint4728',
+        'Name': 'ma41aCollectionPoint4728',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3475,7 +3476,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4729 = {
         '$id': '4729colle_ma41a_f100',
-        'Name': 'ma40aCollectionPoint4729',
+        'Name': 'ma41aCollectionPoint4729',
         'Location Near': 2409,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3485,7 +3486,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4730 = {
         '$id': '4730colle_ma41a_f101',
-        'Name': 'ma40aCollectionPoint4730',
+        'Name': 'ma41aCollectionPoint4730',
         'Location Near': 2420,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3495,7 +3496,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4731 = {
         '$id': '4731colle_ma41a_f102',
-        'Name': 'ma40aCollectionPoint4731',
+        'Name': 'ma41aCollectionPoint4731',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3505,7 +3506,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4732 = {
         '$id': '4732colle_ma41a_f104',
-        'Name': 'ma40aCollectionPoint4732',
+        'Name': 'ma41aCollectionPoint4732',
         'Location Near': 2418,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3515,7 +3516,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4733 = {
         '$id': '4733colle_ma41a_f106',
-        'Name': 'ma40aCollectionPoint4733',
+        'Name': 'ma41aCollectionPoint4733',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3525,7 +3526,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4734 = {
         '$id': '4734colle_ma41a_f111',
-        'Name': 'ma40aCollectionPoint4734',
+        'Name': 'ma41aCollectionPoint4734',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3535,7 +3536,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4735 = {
         '$id': '4735colle_ma41a_f112',
-        'Name': 'ma40aCollectionPoint4735',
+        'Name': 'ma41aCollectionPoint4735',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3545,7 +3546,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4736 = {
         '$id': '4736colle_ma41a_f113',
-        'Name': 'ma40aCollectionPoint4736',
+        'Name': 'ma41aCollectionPoint4736',
         'Location Near': 2403,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3555,7 +3556,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4737 = {
         '$id': '4737colle_ma41a_f114',
-        'Name': 'ma40aCollectionPoint4737',
+        'Name': 'ma41aCollectionPoint4737',
         'Location Near': 2414,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3565,7 +3566,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4738 = {
         '$id': '4738colle_ma41a_f115',
-        'Name': 'ma40aCollectionPoint4738',
+        'Name': 'ma41aCollectionPoint4738',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3575,7 +3576,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4739 = {
         '$id': '4739colle_ma41a_f116',
-        'Name': 'ma40aCollectionPoint4739',
+        'Name': 'ma41aCollectionPoint4739',
         'Location Near': 2406,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3585,7 +3586,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4740 = {
         '$id': '4740colle_ma41a_f117',
-        'Name': 'ma40aCollectionPoint4740',
+        'Name': 'ma41aCollectionPoint4740',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3595,7 +3596,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4741 = {
         '$id': '4741colle_ma41a_f118',
-        'Name': 'ma40aCollectionPoint4741',
+        'Name': 'ma41aCollectionPoint4741',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3605,7 +3606,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4742 = {
         '$id': '4742colle_ma41a_f119',
-        'Name': 'ma40aCollectionPoint4742',
+        'Name': 'ma41aCollectionPoint4742',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3615,7 +3616,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4743 = {
         '$id': '4743colle_ma41a_f120',
-        'Name': 'ma40aCollectionPoint4743',
+        'Name': 'ma41aCollectionPoint4743',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3625,7 +3626,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4744 = {
         '$id': '4744colle_ma41a_f128',
-        'Name': 'ma40aCollectionPoint4744',
+        'Name': 'ma41aCollectionPoint4744',
         'Location Near': 2408,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3635,7 +3636,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4745 = {
         '$id': '4745colle_ma41a_f129',
-        'Name': 'ma40aCollectionPoint4745',
+        'Name': 'ma41aCollectionPoint4745',
         'Location Near': 2420,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3645,7 +3646,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4746 = {
         '$id': '4746colle_ma41a_f130',
-        'Name': 'ma40aCollectionPoint4746',
+        'Name': 'ma41aCollectionPoint4746',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3655,7 +3656,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4747 = {
         '$id': '4747colle_ma41a_f131',
-        'Name': 'ma40aCollectionPoint4747',
+        'Name': 'ma41aCollectionPoint4747',
         'Location Near': 2421,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3665,7 +3666,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4748 = {
         '$id': '4748colle_ma41a_f132',
-        'Name': 'ma40aCollectionPoint4748',
+        'Name': 'ma41aCollectionPoint4748',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3675,7 +3676,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4749 = {
         '$id': '4749colle_ma41a_f133',
-        'Name': 'ma40aCollectionPoint4749',
+        'Name': 'ma41aCollectionPoint4749',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3685,7 +3686,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4750 = {
         '$id': '4750colle_ma41a_f134',
-        'Name': 'ma40aCollectionPoint4750',
+        'Name': 'ma41aCollectionPoint4750',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3695,7 +3696,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4751 = {
         '$id': '4751colle_ma41a_f135',
-        'Name': 'ma40aCollectionPoint4751',
+        'Name': 'ma41aCollectionPoint4751',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3705,7 +3706,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4752 = {
         '$id': '4752colle_ma41a_f136',
-        'Name': 'ma40aCollectionPoint4752',
+        'Name': 'ma41aCollectionPoint4752',
         'Location Near': 2421,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3715,7 +3716,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4753 = {
         '$id': '4753colle_ma41a_f137',
-        'Name': 'ma40aCollectionPoint4753',
+        'Name': 'ma41aCollectionPoint4753',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3725,7 +3726,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4754 = {
         '$id': '4754colle_ma41a_f143',
-        'Name': 'ma40aCollectionPoint4754',
+        'Name': 'ma41aCollectionPoint4754',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3735,7 +3736,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4755 = {
         '$id': '4755colle_ma41a_f144',
-        'Name': 'ma40aCollectionPoint4755',
+        'Name': 'ma41aCollectionPoint4755',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3745,7 +3746,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4756 = {
         '$id': '4756colle_ma41a_f156',
-        'Name': 'ma40aCollectionPoint4756',
+        'Name': 'ma41aCollectionPoint4756',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3755,7 +3756,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4757 = {
         '$id': '4757colle_ma41a_f157',
-        'Name': 'ma40aCollectionPoint4757',
+        'Name': 'ma41aCollectionPoint4757',
         'Location Near': 2406,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3765,7 +3766,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4758 = {
         '$id': '4758colle_ma41a_f178',
-        'Name': 'ma40aCollectionPoint4758',
+        'Name': 'ma41aCollectionPoint4758',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3775,7 +3776,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4759 = {
         '$id': '4759colle_ma41a_f180',
-        'Name': 'ma40aCollectionPoint4759',
+        'Name': 'ma41aCollectionPoint4759',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3785,7 +3786,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4760 = {
         '$id': '4760colle_ma41a_f181',
-        'Name': 'ma40aCollectionPoint4760',
+        'Name': 'ma41aCollectionPoint4760',
         'Location Near': 2412,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3795,7 +3796,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4761 = {
         '$id': '4761colle_ma41a_f182',
-        'Name': 'ma40aCollectionPoint4761',
+        'Name': 'ma41aCollectionPoint4761',
         'Location Near': 2402,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3805,7 +3806,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4762 = {
         '$id': '4762colle_ma41a_f183',
-        'Name': 'ma40aCollectionPoint4762',
+        'Name': 'ma41aCollectionPoint4762',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3815,7 +3816,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4763 = {
         '$id': '4763colle_ma41a_f184',
-        'Name': 'ma40aCollectionPoint4763',
+        'Name': 'ma41aCollectionPoint4763',
         'Location Near': 2407,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3825,7 +3826,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4764 = {
         '$id': '4764colle_ma41a_f185',
-        'Name': 'ma40aCollectionPoint4764',
+        'Name': 'ma41aCollectionPoint4764',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3835,7 +3836,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4765 = {
         '$id': '4765colle_ma41a_f186',
-        'Name': 'ma40aCollectionPoint4765',
+        'Name': 'ma41aCollectionPoint4765',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3845,7 +3846,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4766 = {
         '$id': '4766colle_ma41a_f187',
-        'Name': 'ma40aCollectionPoint4766',
+        'Name': 'ma41aCollectionPoint4766',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3855,7 +3856,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4767 = {
         '$id': '4767colle_ma41a_f191',
-        'Name': 'ma40aCollectionPoint4767',
+        'Name': 'ma41aCollectionPoint4767',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3865,7 +3866,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4768 = {
         '$id': '4768colle_ma41a_f192',
-        'Name': 'ma40aCollectionPoint4768',
+        'Name': 'ma41aCollectionPoint4768',
         'Location Near': 2421,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3875,7 +3876,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4769 = {
         '$id': '4769colle_ma41a_f193',
-        'Name': 'ma40aCollectionPoint4769',
+        'Name': 'ma41aCollectionPoint4769',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3885,7 +3886,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4770 = {
         '$id': '4770colle_ma41a_f194',
-        'Name': 'ma40aCollectionPoint4770',
+        'Name': 'ma41aCollectionPoint4770',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3895,7 +3896,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4771 = {
         '$id': '4771colle_ma41a_f198',
-        'Name': 'ma40aCollectionPoint4771',
+        'Name': 'ma41aCollectionPoint4771',
         'Location Near': 2406,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3905,7 +3906,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4772 = {
         '$id': '4772colle_ma41a_f201',
-        'Name': 'ma40aCollectionPoint4772',
+        'Name': 'ma41aCollectionPoint4772',
         'Location Near': 2406,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3915,7 +3916,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4773 = {
         '$id': '4773colle_ma41a_f202',
-        'Name': 'ma40aCollectionPoint4773',
+        'Name': 'ma41aCollectionPoint4773',
         'Location Near': 2421,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3925,7 +3926,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4774 = {
         '$id': '4774colle_ma41a_f203',
-        'Name': 'ma40aCollectionPoint4774',
+        'Name': 'ma41aCollectionPoint4774',
         'Location Near': 2420,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3935,7 +3936,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4775 = {
         '$id': '4775colle_ma41a_f204',
-        'Name': 'ma40aCollectionPoint4775',
+        'Name': 'ma41aCollectionPoint4775',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3945,7 +3946,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4776 = {
         '$id': '4776colle_ma41a_f205',
-        'Name': 'ma40aCollectionPoint4776',
+        'Name': 'ma41aCollectionPoint4776',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3955,7 +3956,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4777 = {
         '$id': '4777colle_ma41a_f206',
-        'Name': 'ma40aCollectionPoint4777',
+        'Name': 'ma41aCollectionPoint4777',
         'Location Near': 2421,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3965,7 +3966,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4778 = {
         '$id': '4778colle_ma41a_f207',
-        'Name': 'ma40aCollectionPoint4778',
+        'Name': 'ma41aCollectionPoint4778',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3975,7 +3976,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4779 = {
         '$id': '4779colle_ma41a_f208',
-        'Name': 'ma40aCollectionPoint4779',
+        'Name': 'ma41aCollectionPoint4779',
         'Location Near': 2415,
         'Story Pre-Req': [16],
         'Required Items': [],
@@ -3985,7 +3986,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4780 = {
         '$id': '4780colle_ma41a_f209',
-        'Name': 'ma40aCollectionPoint4780',
+        'Name': 'ma41aCollectionPoint4780',
         'Location Near': 2416,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -3995,7 +3996,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4781 = {
         '$id': '4781colle_ma41a_f210',
-        'Name': 'ma40aCollectionPoint4781',
+        'Name': 'ma41aCollectionPoint4781',
         'Location Near': 2408,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4005,7 +4006,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4782 = {
         '$id': '4782colle_ma41a_f211',
-        'Name': 'ma40aCollectionPoint4782',
+        'Name': 'ma41aCollectionPoint4782',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4015,7 +4016,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4783 = {
         '$id': '4783colle_ma41a_f212',
-        'Name': 'ma40aCollectionPoint4783',
+        'Name': 'ma41aCollectionPoint4783',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4025,7 +4026,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4784 = {
         '$id': '4784colle_ma41a_f213',
-        'Name': 'ma40aCollectionPoint4784',
+        'Name': 'ma41aCollectionPoint4784',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4035,7 +4036,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4785 = {
         '$id': '4785colle_ma41a_f214',
-        'Name': 'ma40aCollectionPoint4785',
+        'Name': 'ma41aCollectionPoint4785',
         'Location Near': 2411,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4045,7 +4046,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4786 = {
         '$id': '4786colle_ma41a_f215',
-        'Name': 'ma40aCollectionPoint4786',
+        'Name': 'ma41aCollectionPoint4786',
         'Location Near': 2407,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4055,7 +4056,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4787 = {
         '$id': '4787colle_ma41a_f216',
-        'Name': 'ma40aCollectionPoint4787',
+        'Name': 'ma41aCollectionPoint4787',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4065,7 +4066,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4788 = {
         '$id': '4788colle_ma41a_f217',
-        'Name': 'ma40aCollectionPoint4788',
+        'Name': 'ma41aCollectionPoint4788',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4075,7 +4076,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4789 = {
         '$id': '4789colle_ma41a_f218',
-        'Name': 'ma40aCollectionPoint4789',
+        'Name': 'ma41aCollectionPoint4789',
         'Location Near': 2420,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4085,7 +4086,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4790 = {
         '$id': '4790colle_ma41a_f219',
-        'Name': 'ma40aCollectionPoint4790',
+        'Name': 'ma41aCollectionPoint4790',
         'Location Near': 2409,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4095,7 +4096,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4791 = {
         '$id': '4791colle_ma41a_f220',
-        'Name': 'ma40aCollectionPoint4791',
+        'Name': 'ma41aCollectionPoint4791',
         'Location Near': 2420,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4105,7 +4106,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4792 = {
         '$id': '4792colle_ma41a_f221',
-        'Name': 'ma40aCollectionPoint4792',
+        'Name': 'ma41aCollectionPoint4792',
         'Location Near': 2414,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4115,7 +4116,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4793 = {
         '$id': '4793colle_ma41a_f222',
-        'Name': 'ma40aCollectionPoint4793',
+        'Name': 'ma41aCollectionPoint4793',
         'Location Near': 2414,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4125,7 +4126,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4794 = {
         '$id': '4794colle_ma41a_f223',
-        'Name': 'ma40aCollectionPoint4794',
+        'Name': 'ma41aCollectionPoint4794',
         'Location Near': 2420,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4135,7 +4136,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4795 = {
         '$id': '4795colle_ma41a_f224',
-        'Name': 'ma40aCollectionPoint4795',
+        'Name': 'ma41aCollectionPoint4795',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4145,7 +4146,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4796 = {
         '$id': '4796colle_ma41a_f225',
-        'Name': 'ma40aCollectionPoint4796',
+        'Name': 'ma41aCollectionPoint4796',
         'Location Near': 2420,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4155,7 +4156,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4797 = {
         '$id': '4797colle_ma41a_f226',
-        'Name': 'ma40aCollectionPoint4797',
+        'Name': 'ma41aCollectionPoint4797',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4165,7 +4166,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4798 = {
         '$id': '4798colle_ma41a_f227',
-        'Name': 'ma40aCollectionPoint4798',
+        'Name': 'ma41aCollectionPoint4798',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4175,7 +4176,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4799 = {
         '$id': '4799colle_ma41a_f228',
-        'Name': 'ma40aCollectionPoint4799',
+        'Name': 'ma41aCollectionPoint4799',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4185,7 +4186,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4800 = {
         '$id': '4800colle_ma41a_f229',
-        'Name': 'ma40aCollectionPoint4800',
+        'Name': 'ma41aCollectionPoint4800',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4195,7 +4196,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4801 = {
         '$id': '4801colle_ma41a_f230',
-        'Name': 'ma40aCollectionPoint4801',
+        'Name': 'ma41aCollectionPoint4801',
         'Location Near': 2402,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4205,7 +4206,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4802 = {
         '$id': '4802colle_ma41a_f232',
-        'Name': 'ma40aCollectionPoint4802',
+        'Name': 'ma41aCollectionPoint4802',
         'Location Near': 2406,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4215,7 +4216,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4803 = {
         '$id': '4803colle_ma41a_f233',
-        'Name': 'ma40aCollectionPoint4803',
+        'Name': 'ma41aCollectionPoint4803',
         'Location Near': 2408,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4225,7 +4226,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4804 = {
         '$id': '4804colle_ma41a_f234',
-        'Name': 'ma40aCollectionPoint4804',
+        'Name': 'ma41aCollectionPoint4804',
         'Location Near': 2405,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4235,7 +4236,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4805 = {
         '$id': '4805colle_ma41a_f235',
-        'Name': 'ma40aCollectionPoint4805',
+        'Name': 'ma41aCollectionPoint4805',
         'Location Near': 2408,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4245,7 +4246,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4806 = {
         '$id': '4806colle_ma41a_f236',
-        'Name': 'ma40aCollectionPoint4806',
+        'Name': 'ma41aCollectionPoint4806',
         'Location Near': 2401,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4255,7 +4256,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4807 = {
         '$id': '4807colle_ma41a_f237',
-        'Name': 'ma40aCollectionPoint4807',
+        'Name': 'ma41aCollectionPoint4807',
         'Location Near': 2414,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4265,7 +4266,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4808 = {
         '$id': '4808colle_ma41a_f238',
-        'Name': 'ma40aCollectionPoint4808',
+        'Name': 'ma41aCollectionPoint4808',
         'Location Near': 2414,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4275,7 +4276,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4809 = {
         '$id': '4809colle_ma41a_f239',
-        'Name': 'ma40aCollectionPoint4809',
+        'Name': 'ma41aCollectionPoint4809',
         'Location Near': 2414,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4285,7 +4286,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4810 = {
         '$id': '4810colle_ma41a_f240',
-        'Name': 'ma40aCollectionPoint4810',
+        'Name': 'ma41aCollectionPoint4810',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4295,7 +4296,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4811 = {
         '$id': '4811colle_ma41a_f241',
-        'Name': 'ma40aCollectionPoint4811',
+        'Name': 'ma41aCollectionPoint4811',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4305,7 +4306,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4812 = {
         '$id': '4812colle_ma41a_f301',
-        'Name': 'ma40aCollectionPoint4812',
+        'Name': 'ma41aCollectionPoint4812',
         'Location Near': 2401,
         'Story Pre-Req': [12],
         'Required Items': [30387,30411,30421,30360,30444],
@@ -4315,7 +4316,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4813 = {
         '$id': '4813colle_ma41a_f302',
-        'Name': 'ma40aCollectionPoint4813',
+        'Name': 'ma41aCollectionPoint4813',
         'Location Near': 2402,
         'Story Pre-Req': [12],
         'Required Items': [30387,30411,30421,30360,30444],
@@ -4325,7 +4326,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4814 = {
         '$id': '4814colle_ma41a_f303',
-        'Name': 'ma40aCollectionPoint4814',
+        'Name': 'ma41aCollectionPoint4814',
         'Location Near': 2414,
         'Story Pre-Req': [12],
         'Required Items': [30378,30428,30372,30388,30436],
@@ -4335,7 +4336,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4815 = {
         '$id': '4815colle_ma41a_f304',
-        'Name': 'ma40aCollectionPoint4815',
+        'Name': 'ma41aCollectionPoint4815',
         'Location Near': 2414,
         'Story Pre-Req': [12],
         'Required Items': [30387,30411,30421,30360,30444],
@@ -4345,7 +4346,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4816 = {
         '$id': '4816colle_ma41a_f305',
-        'Name': 'ma40aCollectionPoint4816',
+        'Name': 'ma41aCollectionPoint4816',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [30387,30411,30421,30360,30444],
@@ -4355,7 +4356,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4817 = {
         '$id': '4817colle_ma41a_f306',
-        'Name': 'ma40aCollectionPoint4817',
+        'Name': 'ma41aCollectionPoint4817',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [30387,30411,30421,30360,30444],
@@ -4365,7 +4366,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4818 = {
         '$id': '4818colle_ma41a_f307',
-        'Name': 'ma40aCollectionPoint4818',
+        'Name': 'ma41aCollectionPoint4818',
         'Location Near': 2421,
         'Story Pre-Req': [12],
         'Required Items': [30387,30411,30421,30360,30444],
@@ -4375,7 +4376,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4819 = {
         '$id': '4819colle_ma41a_f308',
-        'Name': 'ma40aCollectionPoint4819',
+        'Name': 'ma41aCollectionPoint4819',
         'Location Near': 2418,
         'Story Pre-Req': [12],
         'Required Items': [30378,30428,30372,30388,30436],
@@ -4385,7 +4386,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4820 = {
         '$id': '4820colle_ma41a_f309',
-        'Name': 'ma40aCollectionPoint4820',
+        'Name': 'ma41aCollectionPoint4820',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [30378,30428,30372,30388,30436],
@@ -4395,7 +4396,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4821 = {
         '$id': '4821colle_ma41a_shouki_1',
-        'Name': 'ma40aCollectionPoint4821',
+        'Name': 'ma41aCollectionPoint4821',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [HazeKey, [ManipEtherKey[0]], [HazeAff[0]] , MythraKey, [LightKey[0]]],
@@ -4405,7 +4406,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4822 = {
         '$id': '4822colle_ma41a_shouki_2',
-        'Name': 'ma40aCollectionPoint4822',
+        'Name': 'ma41aCollectionPoint4822',
         'Location Near': 2407,
         'Story Pre-Req': [12],
         'Required Items': [HazeKey, [ManipEtherKey[0]], [HazeAff[0]] , MythraKey, [LightKey[0]]],
@@ -4415,7 +4416,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4823 = {
         '$id': '4823colle_ma41a_shouki_3',
-        'Name': 'ma40aCollectionPoint4823',
+        'Name': 'ma41aCollectionPoint4823',
         'Location Near': 2428,
         'Story Pre-Req': [12],
         'Required Items': [HazeKey, ManipEtherKey[:1], HazeAff[:1] , MythraKey, LightKey[:1], MythraAff[:1]],
@@ -4425,7 +4426,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4824 = {
         '$id': '4824colle_ma41a_shouki_4',
-        'Name': 'ma40aCollectionPoint4824',
+        'Name': 'ma41aCollectionPoint4824',
         'Location Near': 2422,
         'Story Pre-Req': [12],
         'Required Items': [HazeKey, ManipEtherKey, HazeAff[:2] , MythraKey, LightKey, MythraAff],
@@ -4435,7 +4436,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4825 = {
         '$id': '4825colle_ma41a_shouki_5',
-        'Name': 'ma40aCollectionPoint4825',
+        'Name': 'ma41aCollectionPoint4825',
         'Location Near': 2421,
         'Story Pre-Req': [12],
         'Required Items': [HazeKey, ManipEtherKey, HazeAff[:2] , MythraKey, LightKey, MythraAff],
@@ -4445,7 +4446,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4826 = {
         '$id': '4826colle_ma41a_f310',
-        'Name': 'ma40aCollectionPoint4826',
+        'Name': 'ma41aCollectionPoint4826',
         'Location Near': 2401,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4455,7 +4456,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4827 = {
         '$id': '4827colle_ma41a_f311',
-        'Name': 'ma40aCollectionPoint4827',
+        'Name': 'ma41aCollectionPoint4827',
         'Location Near': 2408,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4465,7 +4466,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4828 = {
         '$id': '4828colle_ma41a_f312',
-        'Name': 'ma40aCollectionPoint4828',
+        'Name': 'ma41aCollectionPoint4828',
         'Location Near': 2415,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4475,7 +4476,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4829 = {
         '$id': '4829colle_ma41a_f313',
-        'Name': 'ma40aCollectionPoint4829',
+        'Name': 'ma41aCollectionPoint4829',
         'Location Near': 2409,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4485,7 +4486,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4830 = {
         '$id': '4830colle_ma41a_f314',
-        'Name': 'ma40aCollectionPoint4830',
+        'Name': 'ma41aCollectionPoint4830',
         'Location Near': 2409,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4495,7 +4496,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4831 = {
         '$id': '4831colle_ma41a_f315',
-        'Name': 'ma40aCollectionPoint4831',
+        'Name': 'ma41aCollectionPoint4831',
         'Location Near': 2409,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4505,7 +4506,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4832 = {
         '$id': '4832colle_ma41a_f316',
-        'Name': 'ma40aCollectionPoint4832',
+        'Name': 'ma41aCollectionPoint4832',
         'Location Near': 2409,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4515,7 +4516,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4833 = {
         '$id': '4833colle_ma41a_f317',
-        'Name': 'ma40aCollectionPoint4833',
+        'Name': 'ma41aCollectionPoint4833',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4525,7 +4526,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4834 = {
         '$id': '4834colle_ma41a_f318',
-        'Name': 'ma40aCollectionPoint4834',
+        'Name': 'ma41aCollectionPoint4834',
         'Location Near': 2409,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4535,7 +4536,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4835 = {
         '$id': '4835colle_ma41a_f319',
-        'Name': 'ma40aCollectionPoint4835',
+        'Name': 'ma41aCollectionPoint4835',
         'Location Near': 2418,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4545,7 +4546,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4836 = {
         '$id': '4836colle_ma41a_f320',
-        'Name': 'ma40aCollectionPoint4836',
+        'Name': 'ma41aCollectionPoint4836',
         'Location Near': 2418,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4555,7 +4556,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4837 = {
         '$id': '4837colle_ma41a_f321',
-        'Name': 'ma40aCollectionPoint4837',
+        'Name': 'ma41aCollectionPoint4837',
         'Location Near': 2418,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4565,7 +4566,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4838 = {
         '$id': '4838colle_ma41a_f322',
-        'Name': 'ma40aCollectionPoint4838',
+        'Name': 'ma41aCollectionPoint4838',
         'Location Near': 2410,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4575,7 +4576,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4839 = {
         '$id': '4839colle_ma41a_f323',
-        'Name': 'ma40aCollectionPoint4839',
+        'Name': 'ma41aCollectionPoint4839',
         'Location Near': 2410,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4585,7 +4586,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4840 = {
         '$id': '4840colle_ma41a_f324',
-        'Name': 'ma40aCollectionPoint4840',
+        'Name': 'ma41aCollectionPoint4840',
         'Location Near': 2410,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4595,7 +4596,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4841 = {
         '$id': '4841colle_ma41a_f325',
-        'Name': 'ma40aCollectionPoint4841',
+        'Name': 'ma41aCollectionPoint4841',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4605,7 +4606,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4842 = {
         '$id': '4842colle_ma41a_f326',
-        'Name': 'ma40aCollectionPoint4842',
+        'Name': 'ma41aCollectionPoint4842',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4615,7 +4616,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4843 = {
         '$id': '4843colle_ma41a_f327',
-        'Name': 'ma40aCollectionPoint4843',
+        'Name': 'ma41aCollectionPoint4843',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4625,7 +4626,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4844 = {
         '$id': '4844colle_ma41a_f328',
-        'Name': 'ma40aCollectionPoint4844',
+        'Name': 'ma41aCollectionPoint4844',
         'Location Near': 2419,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4635,7 +4636,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4845 = {
         '$id': '4845colle_ma41a_f329',
-        'Name': 'ma40aCollectionPoint4845',
+        'Name': 'ma41aCollectionPoint4845',
         'Location Near': 2422,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4645,7 +4646,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4846 = {
         '$id': '4846colle_ma41a_f330',
-        'Name': 'ma40aCollectionPoint4846',
+        'Name': 'ma41aCollectionPoint4846',
         'Location Near': 2422,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4655,7 +4656,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4847 = {
         '$id': '4847colle_ma41a_f331',
-        'Name': 'ma40aCollectionPoint4847',
+        'Name': 'ma41aCollectionPoint4847',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4665,7 +4666,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4848 = {
         '$id': '4848colle_ma41a_f332',
-        'Name': 'ma40aCollectionPoint4848',
+        'Name': 'ma41aCollectionPoint4848',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4675,7 +4676,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4849 = {
         '$id': '4849colle_ma41a_f333',
-        'Name': 'ma40aCollectionPoint4849',
+        'Name': 'ma41aCollectionPoint4849',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4685,7 +4686,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4850 = {
         '$id': '4850colle_ma41a_f334',
-        'Name': 'ma40aCollectionPoint4850',
+        'Name': 'ma41aCollectionPoint4850',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4695,7 +4696,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4851 = {
         '$id': '4851colle_ma41a_f335',
-        'Name': 'ma40aCollectionPoint4851',
+        'Name': 'ma41aCollectionPoint4851',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4705,7 +4706,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4852 = {
         '$id': '4852colle_ma41a_f336',
-        'Name': 'ma40aCollectionPoint4852',
+        'Name': 'ma41aCollectionPoint4852',
         'Location Near': 2422,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4715,7 +4716,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4853 = {
         '$id': '4853colle_ma41a_f337',
-        'Name': 'ma40aCollectionPoint4853',
+        'Name': 'ma41aCollectionPoint4853',
         'Location Near': 2422,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4725,7 +4726,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4854 = {
         '$id': '4854colle_ma41a_f338',
-        'Name': 'ma40aCollectionPoint4854',
+        'Name': 'ma41aCollectionPoint4854',
         'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4735,7 +4736,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4855 = {
         '$id': '4855colle_ma41a_f339',
-        'Name': 'ma40aCollectionPoint4855',
+        'Name': 'ma41aCollectionPoint4855',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4745,7 +4746,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4856 = {
         '$id': '4856colle_ma41a_f340',
-        'Name': 'ma40aCollectionPoint4856',
+        'Name': 'ma41aCollectionPoint4856',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4755,7 +4756,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4857 = {
         '$id': '4857colle_ma41a_f341',
-        'Name': 'ma40aCollectionPoint4857',
+        'Name': 'ma41aCollectionPoint4857',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4765,7 +4766,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4858 = {
         '$id': '4858colle_ma41a_f342',
-        'Name': 'ma40aCollectionPoint4858',
+        'Name': 'ma41aCollectionPoint4858',
         'Location Near': 2423,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4775,7 +4776,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4859 = {
         '$id': '4859colle_ma41a_f343',
-        'Name': 'ma40aCollectionPoint4859',
+        'Name': 'ma41aCollectionPoint4859',
         'Location Near': 2420,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4785,7 +4786,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4860 = {
         '$id': '4860colle_ma41a_f344',
-        'Name': 'ma40aCollectionPoint4860',
+        'Name': 'ma41aCollectionPoint4860',
         'Location Near': 2425,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4795,7 +4796,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4861 = {
         '$id': '4861colle_ma41a_f345',
-        'Name': 'ma40aCollectionPoint4861',
+        'Name': 'ma41aCollectionPoint4861',
         'Location Near': 2414,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4805,7 +4806,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4862 = {
         '$id': '4862colle_ma41a_f346',
-        'Name': 'ma40aCollectionPoint4862',
+        'Name': 'ma41aCollectionPoint4862',
         'Location Near': 2415,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4815,7 +4816,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4863 = {
         '$id': '4863colle_ma41a_f347',
-        'Name': 'ma40aCollectionPoint4863',
+        'Name': 'ma41aCollectionPoint4863',
         'Location Near': 2415,
         'Story Pre-Req': [16],
         'Required Items': [],
@@ -4825,7 +4826,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4864 = {
         '$id': '4864colle_ma41a_f348',
-        'Name': 'ma40aCollectionPoint4864',
+        'Name': 'ma41aCollectionPoint4864',
         'Location Near': 2408,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4835,7 +4836,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4865 = {
         '$id': '4865colle_ma41a_f349',
-        'Name': 'ma40aCollectionPoint4865',
+        'Name': 'ma41aCollectionPoint4865',
         'Location Near': 2401,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4845,7 +4846,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4866 = {
         '$id': '4866colle_ma41a_f350',
-        'Name': 'ma40aCollectionPoint4866',
+        'Name': 'ma41aCollectionPoint4866',
         'Location Near': 2407,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4855,7 +4856,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4867 = {
         '$id': '4867colle_ma41a_f351',
-        'Name': 'ma40aCollectionPoint4867',
+        'Name': 'ma41aCollectionPoint4867',
         'Location Near': 2407,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4865,7 +4866,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4868 = {
         '$id': '4868colle_ma41a_f352',
-        'Name': 'ma40aCollectionPoint4868',
+        'Name': 'ma41aCollectionPoint4868',
         'Location Near': 2407,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4875,7 +4876,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4869 = {
         '$id': '4869colle_ma41a_f353',
-        'Name': 'ma40aCollectionPoint4869',
+        'Name': 'ma41aCollectionPoint4869',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4885,7 +4886,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4870 = {
         '$id': '4870colle_ma41a_f354',
-        'Name': 'ma40aCollectionPoint4870',
+        'Name': 'ma41aCollectionPoint4870',
         'Location Near': 2402,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4895,7 +4896,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4871 = {
         '$id': '4871colle_ma41a_f355',
-        'Name': 'ma40aCollectionPoint4871',
+        'Name': 'ma41aCollectionPoint4871',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4905,7 +4906,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4872 = {
         '$id': '4872colle_ma41a_f356',
-        'Name': 'ma40aCollectionPoint4872',
+        'Name': 'ma41aCollectionPoint4872',
         'Location Near': 2413,
         'Story Pre-Req': [12],
         'Required Items': [],
@@ -4915,7 +4916,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     }
     ma41aCollectionPoint4873 = {
         '$id': '4873',
-        'Name': 'ma40aCollectionPoint4873',
+        'Name': 'ma41aCollectionPoint4873',
         'Location Near': 2410,
         'Story Pre-Req': [12],
         'Required Items': [],
