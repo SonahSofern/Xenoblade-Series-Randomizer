@@ -9,9 +9,9 @@ import os
 from scripts.Interactables import OptionList
 
 # hints
-# what do hints look like? Hint specific progression items? hint troublesome locations? hint regions? regions makes a lot of sense, but would require more info for every single check.
-# who would give the hints? would need to change dialog of a character? would require importing more files 
+# need to add hints to the tips menu, they currently exist in the spoiler log.
 # object color matches contents. make the name of a check container yellow if it has progression, green if it has helpful items, and normal if it doesn't? Not possible for collection points
+# you could do this by making 1 name for a collection point, and giving that spot that name if it has progression
 # look into options for pre-completed quests or EZ-complete quests?
 # required items for a given quest would need to be zeroed out for said quest, besides the pre-req items.
 # option to exclude locations?
@@ -81,9 +81,9 @@ def AllTornaRando():
     TornaQuests.SelectRandomPointGoal()
     #global Areas, Enemies, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters
     ChosenSupporterAmounts = [1,16,32,48,64] # have a few sliders going forwards to let the player change this amount
-    global ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, Areas, MaxDropTableID, Enemies, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList, FullItemList, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters
+    global ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, Areas, AreaIDtoNameDict, MaxDropTableID, Enemies, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList, FullItemList, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters
     ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests = TornaQuests.SelectCommunityQuests(ChosenSupporterAmounts, ProgressionLocTypes[0])
-    Areas = TornaAreas.CreateAreaInfo(Sidequests, Mainquests)
+    Areas, AreaIDtoNameDict = TornaAreas.CreateAreaInfo(Sidequests, Mainquests)
     Enemies, MaxDropTableID = TornaEnemies.AdjustEnemyRequirements(Sidequests, Mainquests, Areas, ProgressionLocTypes[2])
     Shops = TornaShops.CreateShopInfo(Mainquests, Areas, ProgressionLocTypes[4])
     RedBags = TornaRedBagItems.CreateRedBagInfo(Mainquests, Areas, ProgressionLocTypes[5])
@@ -101,6 +101,7 @@ def AllTornaRando():
     SkillTreeSetup()
     CampfireUnlocks()
     CharacterUnlocks()
+    GenerateHints()
     pass
 
 def DetermineSettings():
@@ -653,7 +654,7 @@ def CreateLevelCaps():
         data = json.load(file)
         for row in data["rows"]:
             match row["$id"]:
-                case [15, 20, 26, 35, 38, 46, 100]:
+                case 15 | 20 | 26 | 35 | 38 | 46 | 100:
                     row["LevelExp2"] = 99999 # LevelExp2 is for Torna, LevelExp is for base game
                 case _:
                     row["LevelExp2"] = 1
@@ -669,7 +670,7 @@ def CreateLevelCaps():
         data = json.load(file)
         for row in data["rows"]:
             match row["$id"]:
-                case [1430, 1433, 1434, 1437, 1442, 1632, 1443]: # all enemies that raise level cap upon defeat
+                case 1430 | 1433 | 1434 | 1437 | 1442 | 1632 | 1443: # all enemies that raise level cap upon defeat
                     row["ExpRev"] = 100 # 1000*1000 = 100000, but caps at 99999
                 case _:
                     row["ExpRev"] = 0 # all other enemies get 0*1000 = 0
@@ -845,7 +846,7 @@ def CharacterUnlocks(): # sets up the character unlock keys
         data = json.load(file)
         for row in data["rows"]:
             match row["$id"]:
-                case 5, 12:
+                case 5 | 12:
                     for i in range(2, 5):
                         row[f"TaskType{i}"] = 3
                         row[f"TaskID{i}"] = CurMaxFLDQuestCollectID
@@ -867,6 +868,31 @@ def CharacterUnlocks(): # sets up the character unlock keys
         json.dump(data, file, indent=2, ensure_ascii=False)
     JSONParser.ExtendJSONFile("common/FLD_QuestCollect.json", [FLDQuestCollectNewRows])
     JSONParser.ExtendJSONFile("common_ms/fld_quest.json", [fldquestnewrows])
+
+def GenerateHints():
+    global HintedItemText, HintedLocText
+    HintedItemText, HintedLocText = [], []
+    if Options.TornaOption_HintedItems.GetState():
+        HintedItemKeys = random.sample(list(KeyItemtoLocDict.keys()), Options.TornaOption_HintedItems.GetOdds())
+        for item in HintedItemKeys:
+            if HintedItemKeys[4] == item:
+                pass
+            match KeyItemtoLocDict[item].type:
+                case "normalenemy" | "uniquemonster" | "boss" | "questenemy":
+                    HintedItemText.append(f"{ItemIDtoItemName[item]} can be found by defeating {KeyItemtoLocDict[item].name} near {AreaIDtoNameDict[KeyItemtoLocDict[item].nearloc].name}.")
+                case "sidequest":
+                    HintedItemText.append(f"{ItemIDtoItemName[item]} can be found by completing {KeyItemtoLocDict[item].name}.")
+                case _:
+                    HintedItemText.append(f"{ItemIDtoItemName[item]} can be found at {KeyItemtoLocDict[item].name} near {AreaIDtoNameDict[KeyItemtoLocDict[item].nearloc].name}.")
+    if Options.TornaOption_LocProgCountHints.GetState():
+        HintedLocs = random.sample(list(AreaIDtoNameDict.keys()), Options.TornaOption_LocProgCountHints.GetOdds())
+        for loc in HintedLocs:
+            LocProgCount = 0
+            for item in KeyItemtoLocDict.keys():
+                if KeyItemtoLocDict[item].type != "sidequest":
+                    if KeyItemtoLocDict[item].nearloc == loc:
+                        LocProgCount += 1
+            HintedLocText.append(f"There are {LocProgCount} required progression item(s) found near {AreaIDtoNameDict[loc].name}.")
     
 def CreateSpoilerLog():
     IDstoAdd = []
@@ -919,6 +945,20 @@ def CreateSpoilerLog():
     debugfileread = open(DesiredSpoilerLogLocation, "r", encoding= "utf-8")
     alllines = debugfileread.readlines()
     alllines.append("\n")
+    if HintedItemText != [] or HintedLocText != []:
+        alllines.append("Hints:")
+        alllines.append("\n")
+        if HintedItemText != []:
+            alllines.append("     Item Hints:\n\n")
+            for hint in HintedItemText:
+                alllines.append(f"          {hint}\n")
+            alllines.append("\n")
+        if HintedLocText != []:
+            alllines.append("     Location Progression Count Hints:\n\n")
+            for hint in HintedLocText:
+                alllines.append(f"          {hint}\n")
+            alllines.append("\n")
+        alllines.append("\n")
     alllines.append("Chosen Required Quests and NPC Conversations by Community Level Requirement:\n")
     alllines.append("\n")
     QuestListByCommReq = {0:[],1:[],2:[],3:[],4:[],5:[]}
@@ -951,7 +991,7 @@ def CreateSpoilerLog():
                         alllines.append(f"               Item {reward + 1}: {ItemIDtoItemName.get(loc.randomizeditems[reward])}\n")
                 alllines.append("\n")
     alllines.append("\n")
-    alllines.append("Items per Location:\n")
+    alllines.append("Items per Check (by Category):\n")
     alllines.append("\n")
     alllines.append(f"     {LocTypetoSpoilerLogHeader[AllLocations[0].type]}:")
     alllines.append("\n\n")
@@ -967,8 +1007,23 @@ def CreateSpoilerLog():
             if ItemIDtoItemName.get(AllLocations[loc].randomizeditems[reward]) == None and AllLocations[loc].randomizeditems[reward] != 0:
                 IDstoAdd.append(AllLocations[loc].randomizeditems[reward])
             alllines.append(f"               Item {reward + 1}: {ItemIDtoItemName.get(AllLocations[loc].randomizeditems[reward])}\n")
+    alllines.append("\n\n")
+    alllines.append("Items per Check (by Location (Excludes Sidequests!)):\n\n")
+    for loc in AreaIDtoNameDict.keys():
+        alllines.append(f"     {AreaIDtoNameDict[loc].name}\n\n")
+        for check in range(len(AllLocations)):
+            if AllLocations[check].type != "sidequest":
+                if AllLocations[check].nearloc == loc:
+                    alllines.append(f"          {AllLocations[check].name}:\n")
+                    for reward in range(len(AllLocations[check].randomizeditems)):
+                        if ItemIDtoItemName.get(AllLocations[check].randomizeditems[reward]) == None and AllLocations[check].randomizeditems[reward] != 0:
+                            IDstoAdd.append(AllLocations[check].randomizeditems[reward])
+                        alllines.append(f"               Item {reward + 1}: {ItemIDtoItemName.get(AllLocations[check].randomizeditems[reward])}\n")
+        alllines.append("\n")
+    alllines.append("\n\n")
     debugfilewrite = open(DesiredSpoilerLogLocation, "w", encoding= "utf-8")
     debugfilewrite.writelines(alllines)
     debugfilewrite.close()
     IDstoAdd = list(set(IDstoAdd))
     print(IDstoAdd)
+
