@@ -23,9 +23,11 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     GoldFace = ForcedArt(1622, 1, 740)
     DiscipleDickson = ForcedArt(1316, 8, 942)
     Yaldabaoth = ForcedArt(2501, 5, 843)
+    YaldabaothTwo = ForcedArt(2123, 1, 828)
+    SurenyTelethia = ForcedArt(2601, 1, 870)
     GroupEnemies = [135,136,137,138,139]
     selfDestructArts = [1005,1015,1017,1009, 1007, 1013, 396, 406, 915, 408, 812, 814, 400, 923, 1053, 398, 899, 404, 410, 1127, 820] + Helper.InclRange(900, 929)
-    ForcedStoryArts = [MetalFace, MysteriousFace, GoldFace, DiscipleDickson, Yaldabaoth] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
+    ForcedStoryArts = [MetalFace, MysteriousFace, GoldFace, DiscipleDickson, Yaldabaoth, YaldabaothTwo, SurenyTelethia] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
     isNormal = normal.GetState()
     isUnique = unique.GetState()
     isBoss = boss.GetState()
