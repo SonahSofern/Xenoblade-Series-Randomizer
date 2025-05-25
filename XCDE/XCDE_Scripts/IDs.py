@@ -13,7 +13,7 @@ LegIDs =  [646, 651, 656, 661, 666, 671, 676, 681, 696, 701, 706, 711, 716, 721,
 WeaponIDs = [2,4,5,8,10,19,28,29,38,3947,48,49,56,57,65,67,73,74,75,76,77,78,79] + Helper.InclRange(97,118) + Helper.InclRange(137,149) + Helper.InclRange(157,169) + Helper.InclRange(177,187) + Helper.InclRange(197, 207) + [237,238,239,240,241,242] + Helper.InclRange(277,318) + Helper.InclRange(357,380) + Helper.InclRange(397,424) + Helper.InclRange(437,457) + Helper.InclRange(477,496) + Helper.InclRange(517,539) + Helper.InclRange(567,576) + Helper.InclRange(587, 612) + [617,618,619,621,622,623,624,625]
 GemIDs = Helper.InclRange(3104, 3747) + Helper.InclRange(4264, 4550) + Helper.InclRange(4579,4585)
 CrystalIDs = Helper.InclRange(1252,1851)
-ArtBookIDs = Helper.InclRange(2864, 3103, Helper.InclRange(2912,2919) + Helper.InclRange(3008,3015))
+ArtBookIDs = Helper.InclRange(2864, 3103, Helper.InclRange(2866, 2879) + Helper.InclRange(2912,2919) + Helper.InclRange(3008,3015))
 StoryRequiredKeyItemIDs = Helper.InclRange(2664,2669) + Helper.InclRange(2671,2684)
 KeyItemIDs = Helper.InclRange(2707, 2861, [2823])
 
