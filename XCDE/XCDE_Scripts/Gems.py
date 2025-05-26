@@ -62,12 +62,12 @@ attributes = {
 }
 
 def UnusedGems():
-    # Gem("Cast Quicken", attributes[6], 45, 3,2, 90, 0, [10,30], [0,0], 1000, 4, "\\[Passive\\][XENO:n ] Reduces cast time by $1.", "\\[Passive\\][XENO:n ] Reduces cast time.")
-    # Gem("Reactive Heal", attributes[5], 54, 1, 2, 90, 0, [30,255], [0,0], 1500, 1, "\\[Passive\\][XENO:n ] On damage taken restore $1 health.", "\\[Passive\\][XENO:n ] On damage taken restore health.")
-    # Gem("Monado Enchant", attributes[7], 208, 1, 1, 90, 0, [100,200], [0,0], 2000, 1, "\\[Passive\\][XENO:n ] Your attacks pierce mechon armor and inflict $1 bonus damage.", "\\[Passive\\][XENO:n ] Your attacks pierce mechon armor and inflict bonus damage.")
-    # Gem("Cursed Regen", attributes[8], 53, 1, 2, 1000, 0, [100,100], [1,2], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
-    Gem("Recovery Down 0", attributes[8], 142, 1, 0, 1000, 0, [20,20], [100,100], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
-    Gem("Recovery Down 1", attributes[8], 142, 0, 0, 1000, 0, [20,20], [100,100], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
+    Gem("Cast Quicken", attributes[6], 45, 3,2, 90, 0, [10,30], [0,0], 1000, 4, "\\[Passive\\][XENO:n ] Reduces cast time by $1.", "\\[Passive\\][XENO:n ] Reduces cast time.")
+    Gem("Reactive Heal", attributes[5], 54, 1, 2, 90, 0, [30,255], [0,0], 1500, 1, "\\[Passive\\][XENO:n ] On damage taken restore $1 health.", "\\[Passive\\][XENO:n ] On damage taken restore health.")
+    Gem("Monado Enchant", attributes[7], 208, 1, 1, 90, 0, [100,200], [0,0], 2000, 1, "\\[Passive\\][XENO:n ] Your attacks pierce mechon armor [XENO:n ]\nand inflict $1 bonus damage.", "\\[Passive\\][XENO:n ] Your attacks pierce mechon armor and inflict bonus damage.")
+    Gem("Cursed Regen", attributes[8], 53, 1, 2, 1000, 0, [100,100], [1,2], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
+    # Gem("Recovery Down 0", attributes[8], 142, 1, 0, 1000, 0, [20,20], [100,100], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
+    # Gem("Recovery Down 1", attributes[8], 142, 0, 0, 1000, 0, [20,20], [100,100], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
     
     
     # 94 is accuracy up might add here if it works
