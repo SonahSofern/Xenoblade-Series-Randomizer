@@ -6,6 +6,7 @@ import time
 import TornaRecipes, TornaQuests, TornaEnemies, TornaAreas, TornaShops, TornaRedBagItems, TornaMiscItems, TornaChests, TornaCollectionPoints, Options
 import copy
 import os
+import math
 from scripts.Interactables import OptionList
 
 # hints
@@ -870,8 +871,8 @@ def CharacterUnlocks(): # sets up the character unlock keys
     JSONParser.ExtendJSONFile("common_ms/fld_quest.json", [fldquestnewrows])
 
 def GenerateHints():
-    global HintedItemText, HintedLocText
-    HintedItemText, HintedLocText = [], []
+    global HintedItemText, HintedLocText, ItemHintNames, LocHintNames, LocHintCount, ItemHintCheckLoc, ItemHintCheckNear
+    HintedItemText, HintedLocText, ItemHintNames, ItemHintCheckLoc, ItemHintCheckNear, LocHintNames, LocHintCount = [], [], [], [], [], [], []
     if Options.TornaOption_HintedItems.GetState():
         HintedItemKeys = random.sample(list(KeyItemtoLocDict.keys()), Options.TornaOption_HintedItems.GetOdds())
         for item in HintedItemKeys:
@@ -884,6 +885,9 @@ def GenerateHints():
                     HintedItemText.append(f"{ItemIDtoItemName[item]} can be found by completing {KeyItemtoLocDict[item].name}.")
                 case _:
                     HintedItemText.append(f"{ItemIDtoItemName[item]} can be found at {KeyItemtoLocDict[item].name} near {AreaIDtoNameDict[KeyItemtoLocDict[item].nearloc].name}.")
+            ItemHintNames.append(f"{ItemIDtoItemName[item]}")
+            ItemHintCheckLoc.append(f"{KeyItemtoLocDict[item].name}")
+            ItemHintCheckNear.append(f"{AreaIDtoNameDict[KeyItemtoLocDict[item].nearloc].name}")
     if Options.TornaOption_LocProgCountHints.GetState():
         HintedLocs = random.sample(list(AreaIDtoNameDict.keys()), Options.TornaOption_LocProgCountHints.GetOdds())
         for loc in HintedLocs:
@@ -893,7 +897,90 @@ def GenerateHints():
                     if KeyItemtoLocDict[item].nearloc == loc:
                         LocProgCount += 1
             HintedLocText.append(f"There are {LocProgCount} required progression item(s) found near {AreaIDtoNameDict[loc].name}.")
+            LocHintNames.append(f"{AreaIDtoNameDict[loc].name}")
+            LocHintCount.append(f"{LocProgCount}")
+    if HintedLocs != [] or HintedItemKeys != []:
+        AddHintstoBdats()
+
+def AddHintstoBdats():
+    numitempages = math.ceil(len(HintedItemText) / 3)
+    numlocpages = math.ceil(len(HintedLocText) / 3)
+    CurMessage = 85
+    CurHintedItemNum = 0 
+    CurHintedLocNum = 0
+    NewLineHintedItemTexts = HintedItemText.copy()
+    NewLineHintedLocTexts = HintedLocText.copy()
+    for hint in range(len(NewLineHintedItemTexts)): # adding newlines and yellow text to the hints.
+        NewLineHintedItemTexts[hint] = NewLineHintedItemTexts[hint].replace(" found ", " found\n")
+        NewLineHintedItemTexts[hint] = NewLineHintedItemTexts[hint].replace(" near ", " near\n")
+        NewLineHintedItemTexts[hint] = NewLineHintedItemTexts[hint].replace(f"{ItemHintNames[hint]}", f"[System:Color name=tutorial ]{ItemHintNames[hint]}[/System:Color]")
+        NewLineHintedItemTexts[hint] = NewLineHintedItemTexts[hint].replace(f"{ItemHintCheckLoc[hint]}", f"[System:Color name=tutorial ]{ItemHintCheckLoc[hint]}[/System:Color]")
+        NewLineHintedItemTexts[hint] = NewLineHintedItemTexts[hint].replace(f"{ItemHintCheckNear[hint]}", f"[System:Color name=tutorial ]{ItemHintCheckNear[hint]}[/System:Color]")
+    for hint in range(len(NewLineHintedLocTexts)):
+        NewLineHintedLocTexts[hint] = NewLineHintedLocTexts[hint].replace(" near ", " near\n")
+        NewLineHintedLocTexts[hint] = NewLineHintedLocTexts[hint].replace(f"{LocHintNames[hint]}", f"[System:Color name=tutorial ]{LocHintNames[hint]}[/System:Color]")
+        NewLineHintedLocTexts[hint] = NewLineHintedLocTexts[hint].replace(f"{LocHintCount[hint]}", f"[System:Color name=tutorial ]{LocHintCount[hint]}[/System:Color]", 1) # replacing only the first instance accounts for areas like "Balaur, Dark Zone #1, if it were to have only 1 progressive item"
     
+    with open("./XC2/_internal/JsonOutputs/common/MNU_Tutorial_Tips.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+
+        with open("./XC2/_internal/JsonOutputs/common_ms/menu_tutorial_chbtl.json", 'r+', encoding='utf-8') as filet:
+            datat = json.load(filet)
+            
+            rowscopy = [row for row in data["rows"] if row.get("$id") <= 99 + numitempages + numlocpages]
+            data["rows"] = rowscopy
+            
+            for row in data["rows"]:
+                row["page"] = row["$id"] - 99
+                row["bg_type"] = 1
+                for i in range(1, 4):
+                    row[f"window_y{i}"] = -50 + 150*i
+                    row[f"message{i}"] = 0
+                
+            for ipage in range(numitempages):
+                for row in data["rows"]:
+                    if row["$id"] == 100 + ipage:
+                        CurRowTitle = row["title"]
+                        for i in range(1, 4):
+                            try:
+                                row[f"message{i}"] = CurMessage
+                                for rowt in datat["rows"]:
+                                    if rowt["$id"] == CurRowTitle:
+                                        rowt["name"] = f"Item Hints (Page {ipage + 1})"
+                                    if rowt["$id"] == CurMessage:
+                                        rowt["name"] = NewLineHintedItemTexts[CurHintedItemNum]
+                                CurMessage += 1
+                                CurHintedItemNum += 1
+                            except:
+                                row[f"message{i}"] = 0
+                                break
+
+            for lpage in range(numlocpages):
+                for row in data["rows"]:
+                    if row["$id"] == 100 + numitempages + lpage:
+                        CurRowTitle = row["title"]
+                        for i in range(1, 4):
+                            try:
+                                row[f"message{i}"] = CurMessage
+                                for rowt in datat["rows"]:
+                                    if rowt["$id"] == CurRowTitle:
+                                        rowt["name"] = f"Location Hints (Page {lpage + 1})"
+                                    if rowt["$id"] == CurMessage:
+                                        rowt["name"] = NewLineHintedLocTexts[CurHintedLocNum]
+                                CurMessage += 1
+                                CurHintedLocNum += 1
+                            except:
+                                row[f"message{i}"] = 0
+                                break
+
+            filet.seek(0)
+            filet.truncate()
+            json.dump(datat, filet, indent=2, ensure_ascii=False)
+
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
 def CreateSpoilerLog():
     IDstoAdd = []
     DesiredSpoilerLogDirectory = os.path.dirname(fileEntryVar.get()) + "/Torna_Spoiler_Logs"
