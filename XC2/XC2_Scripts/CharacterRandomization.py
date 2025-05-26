@@ -12,8 +12,6 @@ from scripts import JSONParser, Helper
 #  - All blade's weapons should scale to who they replace. For example, if a gacha blade replaces Brighid, they should have a coil chip. If Pandoria becomes Gacha, she should have a tier 1 chip.
 
 # TODO: (drivers)
-#  - Broadsword arts should only be available at the levels that Rex's broadsword arts are valid. Ensure that none of the arts cause crashes.
-#  - Game crashes when Zeke uses Detonation blow with the broadsword (if I can't figure out why, just remove the art)
 #  - Voice lines in the menu (such as when spending affinity tokens) is still the original driver's voice
 #  - Where weapons are located on the player model is wrong. When Rex becomes Morag for example, the whipswords on Morag's back line up with where Rex puts his weapons (his back) not where Morag puts her weapons (hips)
 #    - This is likely tied to the weapon's animations, so that probably cannot be fixed.
@@ -225,7 +223,9 @@ def RandomizeDrivers():
         if GuaranteedHealer and GuaranteedHealer == 1011:
             randomized_order = [3, 1, 6, 2]
         else:
-            randomized_order = [2, 6, 1, 3]
+            #randomized_order = [2, 6, 1, 3] # Play as Nia
+            #randomized_order = [6, 3, 2, 1] # Play as Morag
+            randomized_order = [3, 1, 6, 2] # Play as Zeke
 
         # If there is a guaranteed healer, make sure they're in Nia's spot (index 1)
         # Keep shuffling until that happens
@@ -705,60 +705,71 @@ def DefineBroadswordArtsForRexsReplacement():
     if rexs_replacement == 1:
         return
 
+    existing_arts = JSONParser.CopyJSONFile("common/BTL_Arts_Dr.json")
+
     match rexs_replacement:
         case 2: # Nia
-            # Define Broadsword arts for Nia, using Monado arts as a base
+            # Define Broadsword arts for Nia, using Shield Hammer arts as a base
             NiaHammerAA1 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 193)
             NiaHammerAA2 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 194)
             NiaHammerAA3 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 195)
             NiaHammerArt1 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 206)
             NiaHammerArt2 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 207)
             NiaHammerArt3 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 208)
-            NiaHammerArt4 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 209)
+            #NiaHammerArt4 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 209) # Crashes the game
 
             new_auto_attacks = [NiaHammerAA1, NiaHammerAA2, NiaHammerAA3]
-            new_arts = [NiaHammerArt1, NiaHammerArt2, NiaHammerArt3, NiaHammerArt4]
+            #new_arts = [NiaHammerArt1, NiaHammerArt2, NiaHammerArt3, NiaHammerArt4]
+            new_arts = [NiaHammerArt1, NiaHammerArt2, NiaHammerArt3]
         case 3: # Zeke
+            # TODO: Detonation blow crashes the game. Remove that art
             # TODO: One of these crashes the game. Need to figure out which and just remove it
             # TODO: Figure out if there are any other arts for other characters which need arts removed
-            # Define Broadsword arts for Zeke, using Monado arts as a base
-            ZekeHammerAA1 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 199)
-            ZekeHammerAA2 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 200)
-            ZekeHammerAA3 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 201)
-            ZekeHammerArt1 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 214)
-            ZekeHammerArt2 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 215)
-            ZekeHammerArt3 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 216)
-            ZekeHammerArt4 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 217)
+            # Define Broadsword arts for Zeke, using Shield Hammer arts as a base
+            ZekeHammerAA1 = existing_arts[199].copy()
+            ZekeHammerAA2 = existing_arts[200].copy()
+            ZekeHammerAA3 = existing_arts[201].copy()
+            ZekeHammerArt1 = existing_arts[214].copy()
+            ZekeHammerArt2 = existing_arts[215].copy()
+            #ZekeHammerArt3 = existing_arts[216].copy() # Crashes the game
+            ZekeHammerArt4 = existing_arts[217].copy()
 
             new_auto_attacks = [ZekeHammerAA1, ZekeHammerAA2, ZekeHammerAA3]
-            new_arts = [ZekeHammerArt1, ZekeHammerArt2, ZekeHammerArt3, ZekeHammerArt4]
+            #new_arts = [ZekeHammerArt1, ZekeHammerArt2, ZekeHammerArt3, ZekeHammerArt4]
+            new_arts = [ZekeHammerArt1, ZekeHammerArt2, ZekeHammerArt4]
         case 6: # Morag
-            # Define Broadsword arts for Zeke, using Hammer arts as a base
+            # Define Broadsword arts for Morag, using Shield Hammer arts as a base
             MoragHammerAA1 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 196)
             MoragHammerAA2 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 197)
             MoragHammerAA3 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 198)
             MoragHammerArt1 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 210)
             MoragHammerArt2 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 211)
             MoragHammerArt3 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 212)
-            MoragHammerArt4 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 213)
+            #MoragHammerArt4 = JSONParser.QueryJSONLine("common/BTL_Arts_Dr.json", "$id", 213) # Crashes the game
 
             new_auto_attacks = [MoragHammerAA1, MoragHammerAA2, MoragHammerAA3]
-            new_arts = [MoragHammerArt1, MoragHammerArt2, MoragHammerArt3, MoragHammerArt4]
+            #new_arts = [MoragHammerArt1, MoragHammerArt2, MoragHammerArt3, MoragHammerArt4]
+            new_arts = [MoragHammerArt1, MoragHammerArt2, MoragHammerArt3]
         case _: # Invalid
             print("Invalid Rex replacement...this should never happen")
             return
 
-    next_art_ID = 743 # The last art in the table by default is 742
+    next_art_ID = list(existing_arts)[-1] + 1
     last_AA_ID = next_art_ID + len(new_auto_attacks) - 1
+
+    # Match unlock levels to Rex's Broadsword arts
+    art_unlock_levels = [1, 1, 1, 1, 3, 5, 7] # First 3 are the AAs
+    art_unlock_level_idx = 0
 
     # Iterate over each new art to make the required modifications
     new_auto_attacks_and_arts = new_auto_attacks + new_arts
     for art in new_auto_attacks_and_arts:
         art['$id'] = next_art_ID                  # Set the art ID
         art['WpnType'] = 17                       # Assign the art to Broadswords
-        art['ActSpeed'] = 120                      # Change Speed to match Monado TODO: Multiple speed by 1.2 instead of hardcoding, since the art speed may have been randomized earlier)
-        for i in Helper.InclRange(1,5): # Make arts accessible at level 1
-            art['ReleaseLv' + str(i)] = 1         # TODO: Levels shouldn't be 1. They should match Rex's Broadsword art levels
+        art['ActSpeed'] = int(art['ActSpeed'] * 1.2)   # Shield hammer arts art slow, make them Monado speed instead
+        for i in Helper.InclRange(1,5): # Make arts accessible at the desired levels
+            art['ReleaseLv' + str(i)] = art_unlock_levels[art_unlock_level_idx]
+        art_unlock_level_idx = art_unlock_level_idx + 1
         if next_art_ID < last_AA_ID:              # This is a non-final auto attack, chain them together
             art["NextArts"] = next_art_ID + 1
         next_art_ID = next_art_ID + 1 # Increment counter
