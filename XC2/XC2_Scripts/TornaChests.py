@@ -28,7 +28,7 @@ class TornaChest:
 def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
     TreasureChest2201 = {
 		'$id': 2201,
-		'Name': 'TreasureChest2201',
+		'Name': 'Treasure Chest 2201',
 		'Location Near': 2362,
 		'Story Pre-Req': [49],
 		'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:2], HazeKey, KeenEyeKey, HazeAff[:2]],
@@ -36,7 +36,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
 	}
     TreasureChest2202 = {
         '$id': 2202,
-        'Name': 'TreasureChest2202',
+        'Name': 'Treasure Chest 2202',
         'Location Near': 2362,
         'Story Pre-Req': [49],
         'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:2], HazeKey, KeenEyeKey, HazeAff[:2]],
@@ -44,7 +44,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
     }
     TreasureChest2203 = {
         '$id': 2203,
-        'Name': 'TreasureChest2203',
+        'Name': 'Treasure Chest 2203',
         'Location Near': 2362,
         'Story Pre-Req': [49],
         'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:2], HazeKey, KeenEyeKey, HazeAff[:2]],
@@ -52,7 +52,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
     }
     TreasureChest2204 = {
         '$id': 2204,
-        'Name': 'TreasureChest2204',
+        'Name': 'Treasure Chest 2204',
         'Location Near': 2362,
         'Story Pre-Req': [49],
         'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:2], HazeKey, KeenEyeKey, HazeAff[:2]],
@@ -60,7 +60,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
     }
     TreasureChest2205 = {
         '$id': 2205,
-        'Name': 'TreasureChest2205',
+        'Name': 'Treasure Chest 2205',
         'Location Near': 2330,
         'Story Pre-Req': [35],
         'Required Items': [MinothKey, [MiningKey[0]] , [FortitudeKey[0]],MinothKey, [MiningKey[0]], [FortitudeKey[0]]],
@@ -68,7 +68,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
     }
     TreasureChest2206 = {
         '$id': 2206,
-        'Name': 'TreasureChest2206',
+        'Name': 'Treasure Chest 2206',
         'Location Near': 2301,
         'Story Pre-Req': [5],
         'Required Items': [],
@@ -76,7 +76,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
     }
     TreasureChest2207 = {
         '$id': 2207,
-        'Name': 'TreasureChest2207',
+        'Name': 'Treasure Chest 2207',
         'Location Near': 2316,
         'Story Pre-Req': [5],
         'Required Items': [],
@@ -84,7 +84,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
     }
     TreasureChest2208 = {
         '$id': 2208,
-        'Name': 'TreasureChest2208',
+        'Name': 'Treasure Chest 2208',
         'Location Near': 2317,
         'Story Pre-Req': [5],
         'Required Items': [],
@@ -92,7 +92,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
     }
     TreasureChest2209 = {
         '$id': 2209,
-        'Name': 'TreasureChest2209',
+        'Name': 'Treasure Chest 2209',
         'Location Near': 2317,
         'Story Pre-Req': [5],
         'Required Items': [],
@@ -100,7 +100,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
     }
     TreasureChest2210 = {
         '$id': 2210,
-        'Name': 'TreasureChest2210',
+        'Name': 'Treasure Chest 2210',
         'Location Near': 2317,
         'Story Pre-Req': [5],
         'Required Items': [HazeKey, [ManipEtherKey[0]], [HazeAff[0]]],
@@ -108,7 +108,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
     }
     TreasureChest2211 = {
             '$id': 2211,
-            'Name': 'TreasureChest2211',
+            'Name': 'Treasure Chest 2211',
             'Location Near': 2318,
             'Story Pre-Req': [5],
             'Required Items': [],
@@ -116,7 +116,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2212 = {
             '$id': 2212,
-            'Name': 'TreasureChest2212',
+            'Name': 'Treasure Chest 2212',
             'Location Near': 2303,
             'Story Pre-Req': [8],
             'Required Items': [],
@@ -124,7 +124,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2213 = {
             '$id': 2213,
-            'Name': 'TreasureChest2213',
+            'Name': 'Treasure Chest 2213',
             'Location Near': 2304,
             'Story Pre-Req': [10],
             'Required Items': [],
@@ -132,7 +132,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2214 = {
             '$id': 2214,
-            'Name': 'TreasureChest2214',
+            'Name': 'Treasure Chest 2214',
             'Location Near': 2304,
             'Story Pre-Req': [10],
             'Required Items': [],
@@ -140,7 +140,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2215 = {
             '$id': 2215,
-            'Name': 'TreasureChest2215',
+            'Name': 'Treasure Chest 2215',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [BrighidKey, LockpickKey[:1], [BrighidAff[0]] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
@@ -148,7 +148,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2216 = {
             '$id': 2216,
-            'Name': 'TreasureChest2216',
+            'Name': 'Treasure Chest 2216',
             'Location Near': 2323,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -156,7 +156,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2217 = {
             '$id': 2217,
-            'Name': 'TreasureChest2217',
+            'Name': 'Treasure Chest 2217',
             'Location Near': 2308,
             'Story Pre-Req': [25],
             'Required Items': [TornaSlatePieceIDs[:4]],
@@ -164,7 +164,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2218 = {
             '$id': 2218,
-            'Name': 'TreasureChest2218',
+            'Name': 'Treasure Chest 2218',
             'Location Near': 2308,
             'Story Pre-Req': [25],
             'Required Items': [TornaSlatePieceIDs[:9]],
@@ -172,7 +172,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2219 = {
             '$id': 2219,
-            'Name': 'TreasureChest2219',
+            'Name': 'Treasure Chest 2219',
             'Location Near': 2368,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -180,7 +180,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2220 = {
             '$id': 2220,
-            'Name': 'TreasureChest2220',
+            'Name': 'Treasure Chest 2220',
             'Location Near': 2309,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -188,7 +188,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2221 = {
             '$id': 2221,
-            'Name': 'TreasureChest2221',
+            'Name': 'Treasure Chest 2221',
             'Location Near': 2307,
             'Story Pre-Req': [33],
             'Required Items': [],
@@ -196,7 +196,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2222 = {
             '$id': 2222,
-            'Name': 'TreasureChest2222',
+            'Name': 'Treasure Chest 2222',
             'Location Near': 2329,
             'Story Pre-Req': [35],
             'Required Items': [],
@@ -204,7 +204,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2223 = {
             '$id': 2223,
-            'Name': 'TreasureChest2223',
+            'Name': 'Treasure Chest 2223',
             'Location Near': 2310,
             'Story Pre-Req': [35],
             'Required Items': [MinothKey, [MiningKey[0]] , [FortitudeKey[0]]],
@@ -212,7 +212,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2224 = {
             '$id': 2224,
-            'Name': 'TreasureChest2224',
+            'Name': 'Treasure Chest 2224',
             'Location Near': 2335,
             'Story Pre-Req': [35],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2], HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -220,7 +220,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2225 = {
             '$id': 2225,
-            'Name': 'TreasureChest2225',
+            'Name': 'Treasure Chest 2225',
             'Location Near': 2331,
             'Story Pre-Req': [35],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2], HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -228,7 +228,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2226 = {
             '$id': 2226,
-            'Name': 'TreasureChest2226',
+            'Name': 'Treasure Chest 2226',
             'Location Near': 2331,
             'Story Pre-Req': [35],
             'Required Items': [],
@@ -236,7 +236,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2227 = {
             '$id': 2227,
-            'Name': 'TreasureChest2227',
+            'Name': 'Treasure Chest 2227',
             'Location Near': 2333,
             'Story Pre-Req': [35],
             'Required Items': [],
@@ -244,7 +244,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2228 = {
             '$id': 2228,
-            'Name': 'TreasureChest2228',
+            'Name': 'Treasure Chest 2228',
             'Location Near': 2331,
             'Story Pre-Req': [35],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -252,7 +252,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2229 = {
             '$id': 2229,
-            'Name': 'TreasureChest2229',
+            'Name': 'Treasure Chest 2229',
             'Location Near': 2311,
             'Story Pre-Req': [35],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -260,7 +260,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2230 = {
             '$id': 2230,
-            'Name': 'TreasureChest2230',
+            'Name': 'Treasure Chest 2230',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -268,7 +268,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2231 = {
             '$id': 2231,
-            'Name': 'TreasureChest2231',
+            'Name': 'Treasure Chest 2231',
             'Location Near': 2325,
             'Story Pre-Req': [30], # [25],
             'Required Items': [BrighidKey, LockpickKey[:1], [BrighidAff[0]] , HazeKey, KeenEyeKey[:1], [HazeAff[0]],[25460], [25461]], # LevelUpTokens[:36]],
@@ -276,7 +276,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2232 = {
             '$id': 2232,
-            'Name': 'TreasureChest2232',
+            'Name': 'Treasure Chest 2232',
             'Location Near': 2328,
             'Story Pre-Req': [29],
             'Required Items': [],
@@ -284,7 +284,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2233 = {
             '$id': 2233,
-            'Name': 'TreasureChest2233',
+            'Name': 'Treasure Chest 2233',
             'Location Near': 2334,
             'Story Pre-Req': [35],
             'Required Items': [],
@@ -292,7 +292,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2234 = {
             '$id': 2234,
-            'Name': 'TreasureChest2234',
+            'Name': 'Treasure Chest 2234',
             'Location Near': 2317,
             'Story Pre-Req': [5],
             'Required Items': [],
@@ -300,7 +300,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2235 = {
             '$id': 2235,
-            'Name': 'TreasureChest2235',
+            'Name': 'Treasure Chest 2235',
             'Location Near': 2302,
             'Story Pre-Req': [5],
             'Required Items': [],
@@ -308,7 +308,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2236 = {
             '$id': 2236,
-            'Name': 'TreasureChest2236',
+            'Name': 'Treasure Chest 2236',
             'Location Near': 2303,
             'Story Pre-Req': [8],
             'Required Items': [],
@@ -316,7 +316,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2237 = {
             '$id': 2237,
-            'Name': 'TreasureChest2237',
+            'Name': 'Treasure Chest 2237',
             'Location Near': 2303,
             'Story Pre-Req': [8],
             'Required Items': [],
@@ -324,7 +324,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2238 = {
             '$id': 2238,
-            'Name': 'TreasureChest2238',
+            'Name': 'Treasure Chest 2238',
             'Location Near': 2304,
             'Story Pre-Req': [10],
             'Required Items': [],
@@ -332,7 +332,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2239 = {
             '$id': 2239,
-            'Name': 'TreasureChest2239',
+            'Name': 'Treasure Chest 2239',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -340,7 +340,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2240 = {
             '$id': 2240,
-            'Name': 'TreasureChest2240',
+            'Name': 'Treasure Chest 2240',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -348,7 +348,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2241 = {
             '$id': 2241,
-            'Name': 'TreasureChest2241',
+            'Name': 'Treasure Chest 2241',
             'Location Near': 2326,
             'Story Pre-Req': [25],
             'Required Items': [BrighidKey, [LockpickKey[0]] , HazeKey, [KeenEyeKey[0]]],
@@ -356,7 +356,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2242 = {
             '$id': 2242,
-            'Name': 'TreasureChest2242',
+            'Name': 'Treasure Chest 2242',
             'Location Near': 2324,
             'Story Pre-Req': [25],
             'Required Items': [BrighidKey, LockpickKey[:1], [BrighidAff[0]] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
@@ -364,7 +364,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2243 = {
             '$id': 2243,
-            'Name': 'TreasureChest2243',
+            'Name': 'Treasure Chest 2243',
             'Location Near': 2324,
             'Story Pre-Req': [25],
             'Required Items': [MinothKey, [MiningKey[0]] , [FortitudeKey[0]]],
@@ -372,7 +372,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2244 = {
             '$id': 2244,
-            'Name': 'TreasureChest2244',
+            'Name': 'Treasure Chest 2244',
             'Location Near': 2325,
             'Story Pre-Req': [30], # [25],
             'Required Items': [MinothKey, [MiningKey[0]] , [FortitudeKey[0]],[25460] , [25461]], # LevelUpTokens[:36]],
@@ -380,7 +380,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2245 = {
             '$id': 2245,
-            'Name': 'TreasureChest2245',
+            'Name': 'Treasure Chest 2245',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -388,7 +388,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2246 = {
             '$id': 2246,
-            'Name': 'TreasureChest2246',
+            'Name': 'Treasure Chest 2246',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [BrighidKey, LockpickKey[:1], [BrighidAff[0]] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
@@ -396,7 +396,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2247 = {
             '$id': 2247,
-            'Name': 'TreasureChest2247',
+            'Name': 'Treasure Chest 2247',
             'Location Near': 2309,
             'Story Pre-Req': [25],
             'Required Items': [SwordplayKey[:1], [JinAff[0]]],
@@ -404,7 +404,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2248 = {
             '$id': 2248,
-            'Name': 'TreasureChest2248',
+            'Name': 'Treasure Chest 2248',
             'Location Near': 2326,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -412,7 +412,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2249 = {
             '$id': 2249,
-            'Name': 'TreasureChest2249',
+            'Name': 'Treasure Chest 2249',
             'Location Near': 2307,
             'Story Pre-Req': [33],
             'Required Items': [],
@@ -420,7 +420,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2250 = {
             '$id': 2250,
-            'Name': 'TreasureChest2250',
+            'Name': 'Treasure Chest 2250',
             'Location Near': 2303,
             'Story Pre-Req': [8],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -428,7 +428,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2251 = {
             '$id': 2251,
-            'Name': 'TreasureChest2251',
+            'Name': 'Treasure Chest 2251',
             'Location Near': 2310,
             'Story Pre-Req': [35],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -436,7 +436,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2252 = {
             '$id': 2252,
-            'Name': 'TreasureChest2252',
+            'Name': 'Treasure Chest 2252',
             'Location Near': 2332,
             'Story Pre-Req': [35],
             'Required Items': [],
@@ -444,7 +444,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2253 = {
             '$id': 2253,
-            'Name': 'TreasureChest2253',
+            'Name': 'Treasure Chest 2253',
             'Location Near': 2334,
             'Story Pre-Req': [35],
             'Required Items': [],
@@ -452,7 +452,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2254 = {
             '$id': 2254,
-            'Name': 'TreasureChest2254',
+            'Name': 'Treasure Chest 2254',
             'Location Near': 2337,
             'Story Pre-Req': [35],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -460,7 +460,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2255 = {
             '$id': 2255,
-            'Name': 'TreasureChest2255',
+            'Name': 'Treasure Chest 2255',
             'Location Near': 2334,
             'Story Pre-Req': [35],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -468,7 +468,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2256 = {
             '$id': 2256,
-            'Name': 'TreasureChest2256',
+            'Name': 'Treasure Chest 2256',
             'Location Near': 2310,
             'Story Pre-Req': [35],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -476,7 +476,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2257 = {
             '$id': 2257,
-            'Name': 'TreasureChest2257',
+            'Name': 'Treasure Chest 2257',
             'Location Near': 2319,
             'Story Pre-Req': [8],
             'Required Items': [MinothKey, MiningKey, MinothAff , FortitudeKey, JinAff],
@@ -484,7 +484,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2258 = {
             '$id': 2258,
-            'Name': 'TreasureChest2258',
+            'Name': 'Treasure Chest 2258',
             'Location Near': 2327,
             'Story Pre-Req': [24],
             'Required Items': [[FortitudeKey[0]] , AegaeonKey, [SuperstrKey[0]]],
@@ -492,7 +492,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2259 = {
             '$id': 2259,
-            'Name': 'TreasureChest2259',
+            'Name': 'Treasure Chest 2259',
             'Location Near': 2317,
             'Story Pre-Req': [5],
             'Required Items': [MinothKey, [MiningKey[0]] , [FortitudeKey[0]]],
@@ -500,7 +500,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2260 = {
             '$id': 2260,
-            'Name': 'TreasureChest2260',
+            'Name': 'Treasure Chest 2260',
             'Location Near': 2332,
             'Story Pre-Req': [35],
             'Required Items': [MinothKey, MiningKey[:1], MinothAff[:1] , FortitudeKey[:1], JinAff[:1]],
@@ -508,7 +508,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2261 = {
             '$id': 2261,
-            'Name': 'TreasureChest2261',
+            'Name': 'Treasure Chest 2261',
             'Location Near': 2307,
             'Story Pre-Req': [33],
             'Required Items': [MinothKey, [MiningKey[0]] , [FortitudeKey[0]]],
@@ -516,7 +516,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2262 = {
             '$id': 2262,
-            'Name': 'TreasureChest2262',
+            'Name': 'Treasure Chest 2262',
             'Location Near': 2329,
             'Story Pre-Req': [35],
             'Required Items': [],
@@ -524,7 +524,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2263 = {
             '$id': 2263,
-            'Name': 'TreasureChest2263',
+            'Name': 'Treasure Chest 2263',
             'Location Near': 2330,
             'Story Pre-Req': [35],
             'Required Items': [MinothKey, [MiningKey[0]] , [FortitudeKey[0]]],
@@ -532,7 +532,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2264 = {
             '$id': 2264,
-            'Name': 'TreasureChest2264',
+            'Name': 'Treasure Chest 2264',
             'Location Near': 2314,
             'Story Pre-Req': [35],
             'Required Items': [MinothKey, MiningKey, MinothAff , FortitudeKey, JinAff],
@@ -540,7 +540,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2265 = {
             '$id': 2265,
-            'Name': 'TreasureChest2265',
+            'Name': 'Treasure Chest 2265',
             'Location Near': 2314,
             'Story Pre-Req': [35],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -548,7 +548,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2266 = {
             '$id': 2266,
-            'Name': 'TreasureChest2266',
+            'Name': 'Treasure Chest 2266',
             'Location Near': 2312,
             'Story Pre-Req': [35],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -556,7 +556,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2267 = {
             '$id': 2267,
-            'Name': 'TreasureChest2267',
+            'Name': 'Treasure Chest 2267',
             'Location Near': 2368,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -564,7 +564,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2268 = {
             '$id': 2268,
-            'Name': 'TreasureChest2268',
+            'Name': 'Treasure Chest 2268',
             'Location Near': 2368,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -572,7 +572,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2269 = {
             '$id': 2269,
-            'Name': 'TreasureChest2269',
+            'Name': 'Treasure Chest 2269',
             'Location Near': 2368,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -580,7 +580,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2270 = {
             '$id': 2270,
-            'Name': 'TreasureChest2270',
+            'Name': 'Treasure Chest 2270',
             'Location Near': 2346,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -588,7 +588,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2271 = {
             '$id': 2271,
-            'Name': 'TreasureChest2271',
+            'Name': 'Treasure Chest 2271',
             'Location Near': 2346,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -596,7 +596,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2272 = {
             '$id': 2272,
-            'Name': 'TreasureChest2272',
+            'Name': 'Treasure Chest 2272',
             'Location Near': 2347,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -604,7 +604,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2273 = {
             '$id': 2273,
-            'Name': 'TreasureChest2273',
+            'Name': 'Treasure Chest 2273',
             'Location Near': 2347,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -612,7 +612,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2274 = {
             '$id': 2274,
-            'Name': 'TreasureChest2274',
+            'Name': 'Treasure Chest 2274',
             'Location Near': 2344,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -620,7 +620,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2275 = {
             '$id': 2275,
-            'Name': 'TreasureChest2275',
+            'Name': 'Treasure Chest 2275',
             'Location Near': 2341,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -628,7 +628,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2276 = {
             '$id': 2276,
-            'Name': 'TreasureChest2276',
+            'Name': 'Treasure Chest 2276',
             'Location Near': 2348,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -636,7 +636,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2277 = {
             '$id': 2277,
-            'Name': 'TreasureChest2277',
+            'Name': 'Treasure Chest 2277',
             'Location Near': 2346,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -644,7 +644,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2278 = {
             '$id': 2278,
-            'Name': 'TreasureChest2278',
+            'Name': 'Treasure Chest 2278',
             'Location Near': 2341,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -652,7 +652,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2279 = {
             '$id': 2279,
-            'Name': 'TreasureChest2279',
+            'Name': 'Treasure Chest 2279',
             'Location Near': 2344,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -660,7 +660,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2280 = {
             '$id': 2280,
-            'Name': 'TreasureChest2280',
+            'Name': 'Treasure Chest 2280',
             'Location Near': 2344,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -668,7 +668,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2281 = {
             '$id': 2281,
-            'Name': 'TreasureChest2281',
+            'Name': 'Treasure Chest 2281',
             'Location Near': 2350,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -676,7 +676,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2282 = {
             '$id': 2282,
-            'Name': 'TreasureChest2282',
+            'Name': 'Treasure Chest 2282',
             'Location Near': 2303,
             'Story Pre-Req': [8],
             'Required Items': [],
@@ -684,7 +684,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2283 = {
             '$id': 2283,
-            'Name': 'TreasureChest2283',
+            'Name': 'Treasure Chest 2283',
             'Location Near': 2303,
             'Story Pre-Req': [8],
             'Required Items': [],
@@ -692,7 +692,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2284 = {
             '$id': 2284,
-            'Name': 'TreasureChest2284',
+            'Name': 'Treasure Chest 2284',
             'Location Near': 2303,
             'Story Pre-Req': [8],
             'Required Items': [],
@@ -700,7 +700,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2285 = {
             '$id': 2285,
-            'Name': 'TreasureChest2285',
+            'Name': 'Treasure Chest 2285',
             'Location Near': 2303,
             'Story Pre-Req': [8],
             'Required Items': [],
@@ -708,7 +708,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2286 = {
             '$id': 2286,
-            'Name': 'TreasureChest2286',
+            'Name': 'Treasure Chest 2286',
             'Location Near': 2303,
             'Story Pre-Req': [8],
             'Required Items': [],
@@ -716,7 +716,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2287 = {
             '$id': 2287,
-            'Name': 'TreasureChest2287',
+            'Name': 'Treasure Chest 2287',
             'Location Near': 2303,
             'Story Pre-Req': [8],
             'Required Items': [],
@@ -724,7 +724,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2288 = {
             '$id': 2288,
-            'Name': 'TreasureChest2288',
+            'Name': 'Treasure Chest 2288',
             'Location Near': 2304,
             'Story Pre-Req': [10],
             'Required Items': [],
@@ -732,7 +732,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2289 = {
             '$id': 2289,
-            'Name': 'TreasureChest2289',
+            'Name': 'Treasure Chest 2289',
             'Location Near': 2304,
             'Story Pre-Req': [10],
             'Required Items': [],
@@ -740,7 +740,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2290 = {
             '$id': 2290,
-            'Name': 'TreasureChest2290',
+            'Name': 'Treasure Chest 2290',
             'Location Near': 2304,
             'Story Pre-Req': [10],
             'Required Items': [],
@@ -748,7 +748,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2291 = {
             '$id': 2291,
-            'Name': 'TreasureChest2291',
+            'Name': 'Treasure Chest 2291',
             'Location Near': 2304,
             'Story Pre-Req': [10],
             'Required Items': [],
@@ -756,7 +756,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2292 = {
             '$id': 2292,
-            'Name': 'TreasureChest2292',
+            'Name': 'Treasure Chest 2292',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -764,7 +764,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2293 = {
             '$id': 2293,
-            'Name': 'TreasureChest2293',
+            'Name': 'Treasure Chest 2293',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -772,7 +772,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2294 = {
             '$id': 2294,
-            'Name': 'TreasureChest2294',
+            'Name': 'Treasure Chest 2294',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -780,7 +780,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2295 = {
             '$id': 2295,
-            'Name': 'TreasureChest2295',
+            'Name': 'Treasure Chest 2295',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -788,7 +788,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2296 = {
             '$id': 2296,
-            'Name': 'TreasureChest2296',
+            'Name': 'Treasure Chest 2296',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -796,7 +796,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2297 = {
             '$id': 2297,
-            'Name': 'TreasureChest2297',
+            'Name': 'Treasure Chest 2297',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -804,7 +804,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2298 = {
             '$id': 2298,
-            'Name': 'TreasureChest2298',
+            'Name': 'Treasure Chest 2298',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -812,7 +812,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2299 = {
             '$id': 2299,
-            'Name': 'TreasureChest2299',
+            'Name': 'Treasure Chest 2299',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -820,7 +820,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2300 = {
             '$id': 2300,
-            'Name': 'TreasureChest2300',
+            'Name': 'Treasure Chest 2300',
             'Location Near': 2305,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -828,7 +828,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2301 = {
             '$id': 2301,
-            'Name': 'TreasureChest2301',
+            'Name': 'Treasure Chest 2301',
             'Location Near': 2323,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -836,7 +836,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2302 = {
             '$id': 2302,
-            'Name': 'TreasureChest2302',
+            'Name': 'Treasure Chest 2302',
             'Location Near': 2323,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -844,7 +844,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2303 = {
             '$id': 2303,
-            'Name': 'TreasureChest2303',
+            'Name': 'Treasure Chest 2303',
             'Location Near': 2323,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -852,7 +852,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2304 = {
             '$id': 2304,
-            'Name': 'TreasureChest2304',
+            'Name': 'Treasure Chest 2304',
             'Location Near': 2323,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -860,7 +860,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2305 = {
             '$id': 2305,
-            'Name': 'TreasureChest2305',
+            'Name': 'Treasure Chest 2305',
             'Location Near': 2323,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -868,7 +868,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2306 = {
             '$id': 2306,
-            'Name': 'TreasureChest2306',
+            'Name': 'Treasure Chest 2306',
             'Location Near': 2307,
             'Story Pre-Req': [33],
             'Required Items': [],
@@ -876,7 +876,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2307 = {
             '$id': 2307,
-            'Name': 'TreasureChest2307',
+            'Name': 'Treasure Chest 2307',
             'Location Near': 2307,
             'Story Pre-Req': [33],
             'Required Items': [],
@@ -884,7 +884,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2308 = {
             '$id': 2308,
-            'Name': 'TreasureChest2308',
+            'Name': 'Treasure Chest 2308',
             'Location Near': 2307,
             'Story Pre-Req': [33],
             'Required Items': [],
@@ -892,7 +892,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2309 = {
             '$id': 2309,
-            'Name': 'TreasureChest2309',
+            'Name': 'Treasure Chest 2309',
             'Location Near': 2307,
             'Story Pre-Req': [33],
             'Required Items': [],
@@ -900,7 +900,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2310 = {
             '$id': 2310,
-            'Name': 'TreasureChest2310',
+            'Name': 'Treasure Chest 2310',
             'Location Near': 2307,
             'Story Pre-Req': [33],
             'Required Items': [],
@@ -908,7 +908,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2311 = {
             '$id': 2311,
-            'Name': 'TreasureChest2311',
+            'Name': 'Treasure Chest 2311',
             'Location Near': 2310,
             'Story Pre-Req': [35],
             'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -916,7 +916,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2312 = {
             '$id': 2312,
-            'Name': 'TreasureChest2312',
+            'Name': 'Treasure Chest 2312',
             'Location Near': 2323,
             'Story Pre-Req': [25],
             'Required Items': [AegaeonKey, SuperstrKey[:1], AegaeonAff[:1] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
@@ -924,7 +924,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2313 = {
             '$id': 2313,
-            'Name': 'TreasureChest2313',
+            'Name': 'Treasure Chest 2313',
             'Location Near': 2307,
             'Story Pre-Req': [33],
             'Required Items': [AegaeonKey, [SuperstrKey[0]] , HazeKey, [KeenEyeKey[0]]],
@@ -932,7 +932,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2314 = {
             '$id': 2314,
-            'Name': 'TreasureChest2314',
+            'Name': 'Treasure Chest 2314',
             'Location Near': 2333,
             'Story Pre-Req': [35],
             'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -940,7 +940,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2315 = {
             '$id': 2315,
-            'Name': 'TreasureChest2315',
+            'Name': 'Treasure Chest 2315',
             'Location Near': 2321,
             'Story Pre-Req': [5],
             'Required Items': [],
@@ -948,7 +948,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2316 = {
             '$id': 2316,
-            'Name': 'TreasureChest2316',
+            'Name': 'Treasure Chest 2316',
             'Location Near': 2304,
             'Story Pre-Req': [10],
             'Required Items': [SwordplayKey, JinAff[:2] , MythraKey, FocusKey, MythraAff[:2]],
@@ -956,7 +956,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2317 = {
             '$id': 2317,
-            'Name': 'TreasureChest2317',
+            'Name': 'Treasure Chest 2317',
             'Location Near': 2313,
             'Story Pre-Req': [25],
             'Required Items': [],
@@ -964,7 +964,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2318 = {
             '$id': 2318,
-            'Name': 'TreasureChest2318',
+            'Name': 'Treasure Chest 2318',
             'Location Near': 2336,
             'Story Pre-Req': [35],
             'Required Items': [HazeKey, ManipEtherKey, HazeAff[:2] , AegaeonKey, ComWaterKey, AegaeonAff],
@@ -972,7 +972,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2319 = {
             '$id': 2319,
-            'Name': 'TreasureChest2319',
+            'Name': 'Treasure Chest 2319',
             'Location Near': 2365,
             'Story Pre-Req': [46],
             'Required Items': [],
@@ -980,7 +980,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2320 = {
             '$id': 2320,
-            'Name': 'TreasureChest2320',
+            'Name': 'Treasure Chest 2320',
             'Location Near': 2356,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -988,7 +988,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2321 = {
             '$id': 2321,
-            'Name': 'TreasureChest2321',
+            'Name': 'Treasure Chest 2321',
             'Location Near': 2354,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -996,7 +996,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2322 = {
             '$id': 2322,
-            'Name': 'TreasureChest2322',
+            'Name': 'Treasure Chest 2322',
             'Location Near': 2358,
             'Story Pre-Req': [36],
             'Required Items': [FortitudeKey[:1], JinAff[:1] , AegaeonKey, SuperstrKey[:1], AegaeonAff[:1]],
@@ -1004,7 +1004,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2323 = {
             '$id': 2323,
-            'Name': 'TreasureChest2323',
+            'Name': 'Treasure Chest 2323',
             'Location Near': 2363,
             'Story Pre-Req': [36],
             'Required Items': [FortitudeKey, JinAff , AegaeonKey, SuperstrKey, AegaeonAff[:2]],
@@ -1012,7 +1012,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2324 = {
             '$id': 2324,
-            'Name': 'TreasureChest2324',
+            'Name': 'Treasure Chest 2324',
             'Location Near': 2361,
             'Story Pre-Req': [36],
             'Required Items': [MinothKey, [MiningKey[0]] , [FortitudeKey[0]]],
@@ -1020,7 +1020,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2325 = {
             '$id': 2325,
-            'Name': 'TreasureChest2325',
+            'Name': 'Treasure Chest 2325',
             'Location Near': 2362,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1028,7 +1028,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2326 = {
             '$id': 2326,
-            'Name': 'TreasureChest2326',
+            'Name': 'Treasure Chest 2326',
             'Location Near': 2361,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1036,7 +1036,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2327 = {
             '$id': 2327,
-            'Name': 'TreasureChest2327',
+            'Name': 'Treasure Chest 2327',
             'Location Near': 2362,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1044,7 +1044,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2328 = {
             '$id': 2328,
-            'Name': 'TreasureChest2328',
+            'Name': 'Treasure Chest 2328',
             'Location Near': 2365,
             'Story Pre-Req': [46],
             'Required Items': [],
@@ -1052,7 +1052,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2329 = {
             '$id': 2329,
-            'Name': 'TreasureChest2329',
+            'Name': 'Treasure Chest 2329',
             'Location Near': 2362,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1060,7 +1060,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2330 = {
             '$id': 2330,
-            'Name': 'TreasureChest2330',
+            'Name': 'Treasure Chest 2330',
             'Location Near': 2362,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1068,7 +1068,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2331 = {
             '$id': 2331,
-            'Name': 'TreasureChest2331',
+            'Name': 'Treasure Chest 2331',
             'Location Near': 2362,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1076,7 +1076,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2332 = {
             '$id': 2332,
-            'Name': 'TreasureChest2332',
+            'Name': 'Treasure Chest 2332',
             'Location Near': 2362,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1084,7 +1084,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2333 = {
             '$id': 2333,
-            'Name': 'TreasureChest2333',
+            'Name': 'Treasure Chest 2333',
             'Location Near': 2357,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1092,7 +1092,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2334 = {
             '$id': 2334,
-            'Name': 'TreasureChest2334',
+            'Name': 'Treasure Chest 2334',
             'Location Near': 2357,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1100,7 +1100,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2335 = {
             '$id': 2335,
-            'Name': 'TreasureChest2335',
+            'Name': 'Treasure Chest 2335',
             'Location Near': 2365,
             'Story Pre-Req': [46],
             'Required Items': [],
@@ -1108,7 +1108,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2336 = {
             '$id': 2336,
-            'Name': 'TreasureChest2336',
+            'Name': 'Treasure Chest 2336',
             'Location Near': 2365,
             'Story Pre-Req': [46],
             'Required Items': [],
@@ -1116,7 +1116,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2337 = {
             '$id': 2337,
-            'Name': 'TreasureChest2337',
+            'Name': 'Treasure Chest 2337',
             'Location Near': 2360,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1124,7 +1124,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2338 = {
             '$id': 2338,
-            'Name': 'TreasureChest2338',
+            'Name': 'Treasure Chest 2338',
             'Location Near': 2362,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1132,7 +1132,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2339 = {
             '$id': 2339,
-            'Name': 'TreasureChest2339',
+            'Name': 'Treasure Chest 2339',
             'Location Near': 2362,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1140,7 +1140,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2340 = {
             '$id': 2340,
-            'Name': 'TreasureChest2340',
+            'Name': 'Treasure Chest 2340',
             'Location Near': 2362,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1148,7 +1148,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2341 = {
             '$id': 2341,
-            'Name': 'TreasureChest2341',
+            'Name': 'Treasure Chest 2341',
             'Location Near': 2361,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1156,7 +1156,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2342 = {
             '$id': 2342,
-            'Name': 'TreasureChest2342',
+            'Name': 'Treasure Chest 2342',
             'Location Near': 2361,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1164,7 +1164,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2343 = {
             '$id': 2343,
-            'Name': 'TreasureChest2343',
+            'Name': 'Treasure Chest 2343',
             'Location Near': 2361,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1172,7 +1172,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2344 = {
             '$id': 2344,
-            'Name': 'TreasureChest2344',
+            'Name': 'Treasure Chest 2344',
             'Location Near': 2361,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1180,7 +1180,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2345 = {
             '$id': 2345,
-            'Name': 'TreasureChest2345',
+            'Name': 'Treasure Chest 2345',
             'Location Near': 2361,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1188,7 +1188,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2346 = {
             '$id': 2346,
-            'Name': 'TreasureChest2346',
+            'Name': 'Treasure Chest 2346',
             'Location Near': 2361,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1196,7 +1196,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2347 = {
             '$id': 2347,
-            'Name': 'TreasureChest2347',
+            'Name': 'Treasure Chest 2347',
             'Location Near': 2363,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1204,7 +1204,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2348 = {
             '$id': 2348,
-            'Name': 'TreasureChest2348',
+            'Name': 'Treasure Chest 2348',
             'Location Near': 2363,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1212,7 +1212,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2349 = {
             '$id': 2349,
-            'Name': 'TreasureChest2349',
+            'Name': 'Treasure Chest 2349',
             'Location Near': 2362,
             'Story Pre-Req': [36],
             'Required Items': [],
@@ -1220,7 +1220,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2350 = {
             '$id': 2350,
-            'Name': 'TreasureChest2350',
+            'Name': 'Treasure Chest 2350',
             'Location Near': 2368,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -1228,7 +1228,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2351 = {
             '$id': 2351,
-            'Name': 'TreasureChest2351',
+            'Name': 'Treasure Chest 2351',
             'Location Near': 2368,
             'Story Pre-Req': [53],
             'Required Items': [],
@@ -1236,7 +1236,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2501 = {
             '$id': 2501,
-            'Name': 'TreasureChest2501',
+            'Name': 'Treasure Chest 2501',
             'Location Near': 2424,
             'Story Pre-Req': [12],
             'Required Items': [MinothKey, MiningKey[:1], MinothAff[:1] , FortitudeKey[:1], JinAff[:1]],
@@ -1244,7 +1244,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2502 = {
             '$id': 2502,
-            'Name': 'TreasureChest2502',
+            'Name': 'Treasure Chest 2502',
             'Location Near': 2414,
             'Story Pre-Req': [12],
             'Required Items': [MinothKey, [MiningKey[0]] , [FortitudeKey[0]]],
@@ -1252,7 +1252,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2503 = {
             '$id': 2503,
-            'Name': 'TreasureChest2503',
+            'Name': 'Treasure Chest 2503',
             'Location Near': 2401,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1260,7 +1260,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2504 = {
             '$id': 2504,
-            'Name': 'TreasureChest2504',
+            'Name': 'Treasure Chest 2504',
             'Location Near': 2407,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1268,7 +1268,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2505 = {
             '$id': 2505,
-            'Name': 'TreasureChest2505',
+            'Name': 'Treasure Chest 2505',
             'Location Near': 2401,
             'Story Pre-Req': [16],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -1276,7 +1276,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2506 = {
             '$id': 2506,
-            'Name': 'TreasureChest2506',
+            'Name': 'Treasure Chest 2506',
             'Location Near': 2401,
             'Story Pre-Req': [16],
             'Required Items': [],
@@ -1284,7 +1284,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2507 = {
             '$id': 2507,
-            'Name': 'TreasureChest2507',
+            'Name': 'Treasure Chest 2507',
             'Location Near': 2407,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1292,7 +1292,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2508 = {
             '$id': 2508,
-            'Name': 'TreasureChest2508',
+            'Name': 'Treasure Chest 2508',
             'Location Near': 2413,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1300,7 +1300,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2509 = {
             '$id': 2509,
-            'Name': 'TreasureChest2509',
+            'Name': 'Treasure Chest 2509',
             'Location Near': 2414,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1308,7 +1308,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2510 = {
             '$id': 2510,
-            'Name': 'TreasureChest2510',
+            'Name': 'Treasure Chest 2510',
             'Location Near': 2414,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1316,7 +1316,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2511 = {
             '$id': 2511,
-            'Name': 'TreasureChest2511',
+            'Name': 'Treasure Chest 2511',
             'Location Near': 2414,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1324,7 +1324,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2512 = {
             '$id': 2512,
-            'Name': 'TreasureChest2512',
+            'Name': 'Treasure Chest 2512',
             'Location Near': 2404,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1332,7 +1332,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2513 = {
             '$id': 2513,
-            'Name': 'TreasureChest2513',
+            'Name': 'Treasure Chest 2513',
             'Location Near': 2403,
             'Story Pre-Req': [12],
             'Required Items': [BrighidKey, LockpickKey[:1], [BrighidAff[0]] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
@@ -1340,7 +1340,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2514 = {
             '$id': 2514,
-            'Name': 'TreasureChest2514',
+            'Name': 'Treasure Chest 2514',
             'Location Near': 2413,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1348,7 +1348,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2515 = {
             '$id': 2515,
-            'Name': 'TreasureChest2515',
+            'Name': 'Treasure Chest 2515',
             'Location Near': 2416,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1356,7 +1356,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2516 = {
             '$id': 2516,
-            'Name': 'TreasureChest2516',
+            'Name': 'Treasure Chest 2516',
             'Location Near': 2421,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1364,7 +1364,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2517 = {
             '$id': 2517,
-            'Name': 'TreasureChest2517',
+            'Name': 'Treasure Chest 2517',
             'Location Near': 2413,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1372,7 +1372,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2518 = {
             '$id': 2518,
-            'Name': 'TreasureChest2518',
+            'Name': 'Treasure Chest 2518',
             'Location Near': 2417,
             'Story Pre-Req': [12],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -1380,7 +1380,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2519 = {
             '$id': 2519,
-            'Name': 'TreasureChest2519',
+            'Name': 'Treasure Chest 2519',
             'Location Near': 2417,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1388,7 +1388,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2520 = {
             '$id': 2520,
-            'Name': 'TreasureChest2520',
+            'Name': 'Treasure Chest 2520',
             'Location Near': 2422,
             'Story Pre-Req': [12],
             'Required Items': [MinothKey, [MiningKey[0]] , [FortitudeKey[0]]],
@@ -1396,7 +1396,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2521 = {
             '$id': 2521,
-            'Name': 'TreasureChest2521',
+            'Name': 'Treasure Chest 2521',
             'Location Near': 2421,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1404,7 +1404,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2522 = {
             '$id': 2522,
-            'Name': 'TreasureChest2522',
+            'Name': 'Treasure Chest 2522',
             'Location Near': 2404,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1412,7 +1412,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2523 = {
             '$id': 2523,
-            'Name': 'TreasureChest2523',
+            'Name': 'Treasure Chest 2523',
             'Location Near': 2411,
             'Story Pre-Req': [12],
             'Required Items': [MinothKey, [MiningKey[0]] , [FortitudeKey[0]]],
@@ -1420,7 +1420,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2524 = {
             '$id': 2524,
-            'Name': 'TreasureChest2524',
+            'Name': 'Treasure Chest 2524',
             'Location Near': 2412,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1428,7 +1428,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2525 = {
             '$id': 2525,
-            'Name': 'TreasureChest2525',
+            'Name': 'Treasure Chest 2525',
             'Location Near': 2410,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1436,7 +1436,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2526 = {
             '$id': 2526,
-            'Name': 'TreasureChest2526',
+            'Name': 'Treasure Chest 2526',
             'Location Near': 2415,
             'Story Pre-Req': [16],
             'Required Items': [MinothKey, MiningKey[:1], MinothAff[:1] , FortitudeKey[:1], JinAff[:1]],
@@ -1444,7 +1444,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2527 = {
             '$id': 2527,
-            'Name': 'TreasureChest2527',
+            'Name': 'Treasure Chest 2527',
             'Location Near': 2423,
             'Story Pre-Req': [12],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -1452,7 +1452,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2528 = {
             '$id': 2528,
-            'Name': 'TreasureChest2528',
+            'Name': 'Treasure Chest 2528',
             'Location Near': 2420,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1460,7 +1460,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2529 = {
             '$id': 2529,
-            'Name': 'TreasureChest2529',
+            'Name': 'Treasure Chest 2529',
             'Location Near': 2410,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1468,7 +1468,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2530 = {
             '$id': 2530,
-            'Name': 'TreasureChest2530',
+            'Name': 'Treasure Chest 2530',
             'Location Near': 2407,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1476,7 +1476,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2531 = {
             '$id': 2531,
-            'Name': 'TreasureChest2531',
+            'Name': 'Treasure Chest 2531',
             'Location Near': 2426,
             'Story Pre-Req': [16],
             'Required Items': [],
@@ -1484,7 +1484,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2532 = {
             '$id': 2532,
-            'Name': 'TreasureChest2532',
+            'Name': 'Treasure Chest 2532',
             'Location Near': 2422,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1492,7 +1492,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2533 = {
             '$id': 2533,
-            'Name': 'TreasureChest2533',
+            'Name': 'Treasure Chest 2533',
             'Location Near': 2416,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1500,7 +1500,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2534 = {
             '$id': 2534,
-            'Name': 'TreasureChest2534',
+            'Name': 'Treasure Chest 2534',
             'Location Near': 2408,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1508,7 +1508,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2535 = {
             '$id': 2535,
-            'Name': 'TreasureChest2535',
+            'Name': 'Treasure Chest 2535',
             'Location Near': 2413,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1516,7 +1516,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2536 = {
             '$id': 2536,
-            'Name': 'TreasureChest2536',
+            'Name': 'Treasure Chest 2536',
             'Location Near': 2408,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1524,7 +1524,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2537 = {
             '$id': 2537,
-            'Name': 'TreasureChest2537',
+            'Name': 'Treasure Chest 2537',
             'Location Near': 2409,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1532,7 +1532,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2538 = {
             '$id': 2538,
-            'Name': 'TreasureChest2538',
+            'Name': 'Treasure Chest 2538',
             'Location Near': 2404,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1540,7 +1540,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2539 = {
             '$id': 2539,
-            'Name': 'TreasureChest2539',
+            'Name': 'Treasure Chest 2539',
             'Location Near': 2408,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1548,7 +1548,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2540 = {
             '$id': 2540,
-            'Name': 'TreasureChest2540',
+            'Name': 'Treasure Chest 2540',
             'Location Near': 2414,
             'Story Pre-Req': [12],
             'Required Items': [MinothKey, MiningKey[:1], MinothAff[:1] , FortitudeKey[:1], JinAff[:1]],
@@ -1556,7 +1556,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2541 = {
             '$id': 2541,
-            'Name': 'TreasureChest2541',
+            'Name': 'Treasure Chest 2541',
             'Location Near': 2406,
             'Story Pre-Req': [12],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -1564,7 +1564,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2542 = {
             '$id': 2542,
-            'Name': 'TreasureChest2542',
+            'Name': 'Treasure Chest 2542',
             'Location Near': 2406,
             'Story Pre-Req': [12],
             'Required Items': [MinothKey, MiningKey, MinothAff , FortitudeKey, JinAff],
@@ -1572,7 +1572,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2543 = {
             '$id': 2543,
-            'Name': 'TreasureChest2543',
+            'Name': 'Treasure Chest 2543',
             'Location Near': 2419,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1580,7 +1580,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2544 = {
             '$id': 2544,
-            'Name': 'TreasureChest2544',
+            'Name': 'Treasure Chest 2544',
             'Location Near': 2419,
             'Story Pre-Req': [12],
             'Required Items': [MinothKey, [MiningKey[0]] , [FortitudeKey[0]]],
@@ -1588,7 +1588,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2545 = {
             '$id': 2545,
-            'Name': 'TreasureChest2545',
+            'Name': 'Treasure Chest 2545',
             'Location Near': 2403,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1596,7 +1596,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2546 = {
             '$id': 2546,
-            'Name': 'TreasureChest2546',
+            'Name': 'Treasure Chest 2546',
             'Location Near': 2418,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1604,7 +1604,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2547 = {
             '$id': 2547,
-            'Name': 'TreasureChest2547',
+            'Name': 'Treasure Chest 2547',
             'Location Near': 2403,
             'Story Pre-Req': [12],
             'Required Items': [MinothKey, MiningKey[:1], MinothAff[:1] , FortitudeKey[:1], JinAff[:1]],
@@ -1612,7 +1612,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2548 = {
             '$id': 2548,
-            'Name': 'TreasureChest2548',
+            'Name': 'Treasure Chest 2548',
             'Location Near': 2417,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1620,7 +1620,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2549 = {
             '$id': 2549,
-            'Name': 'TreasureChest2549',
+            'Name': 'Treasure Chest 2549',
             'Location Near': 2417,
             'Story Pre-Req': [12],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -1628,7 +1628,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2550 = {
             '$id': 2550,
-            'Name': 'TreasureChest2550',
+            'Name': 'Treasure Chest 2550',
             'Location Near': 2423,
             'Story Pre-Req': [12],
             'Required Items': [BrighidKey, LockpickKey[:1], [BrighidAff[0]] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
@@ -1636,7 +1636,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2551 = {
             '$id': 2551,
-            'Name': 'TreasureChest2551',
+            'Name': 'Treasure Chest 2551',
             'Location Near': 2404,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1644,7 +1644,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2552 = {
             '$id': 2552,
-            'Name': 'TreasureChest2552',
+            'Name': 'Treasure Chest 2552',
             'Location Near': 2404,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1652,7 +1652,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2553 = {
             '$id': 2553,
-            'Name': 'TreasureChest2553',
+            'Name': 'Treasure Chest 2553',
             'Location Near': 2428,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1660,7 +1660,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2554 = {
             '$id': 2554,
-            'Name': 'TreasureChest2554',
+            'Name': 'Treasure Chest 2554',
             'Location Near': 2402,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1668,7 +1668,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2555 = {
             '$id': 2555,
-            'Name': 'TreasureChest2555',
+            'Name': 'Treasure Chest 2555',
             'Location Near': 2406,
             'Story Pre-Req': [12],
             'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -1676,7 +1676,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2556 = {
             '$id': 2556,
-            'Name': 'TreasureChest2556',
+            'Name': 'Treasure Chest 2556',
             'Location Near': 2416,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1684,7 +1684,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2557 = {
             '$id': 2557,
-            'Name': 'TreasureChest2557',
+            'Name': 'Treasure Chest 2557',
             'Location Near': 2411,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1692,7 +1692,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2558 = {
             '$id': 2558,
-            'Name': 'TreasureChest2558',
+            'Name': 'Treasure Chest 2558',
             'Location Near': 2401,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1700,7 +1700,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2559 = {
             '$id': 2559,
-            'Name': 'TreasureChest2559',
+            'Name': 'Treasure Chest 2559',
             'Location Near': 2401,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1708,7 +1708,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2560 = {
             '$id': 2560,
-            'Name': 'TreasureChest2560',
+            'Name': 'Treasure Chest 2560',
             'Location Near': 2401,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1716,7 +1716,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2561 = {
             '$id': 2561,
-            'Name': 'TreasureChest2561',
+            'Name': 'Treasure Chest 2561',
             'Location Near': 2402,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1724,7 +1724,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2562 = {
             '$id': 2562,
-            'Name': 'TreasureChest2562',
+            'Name': 'Treasure Chest 2562',
             'Location Near': 2414,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1732,7 +1732,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2563 = {
             '$id': 2563,
-            'Name': 'TreasureChest2563',
+            'Name': 'Treasure Chest 2563',
             'Location Near': 2414,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1740,7 +1740,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2564 = {
             '$id': 2564,
-            'Name': 'TreasureChest2564',
+            'Name': 'Treasure Chest 2564',
             'Location Near': 2414,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1748,7 +1748,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2565 = {
             '$id': 2565,
-            'Name': 'TreasureChest2565',
+            'Name': 'Treasure Chest 2565',
             'Location Near': 2414,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1756,7 +1756,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2566 = {
             '$id': 2566,
-            'Name': 'TreasureChest2566',
+            'Name': 'Treasure Chest 2566',
             'Location Near': 2414,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1764,7 +1764,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2567 = {
             '$id': 2567,
-            'Name': 'TreasureChest2567',
+            'Name': 'Treasure Chest 2567',
             'Location Near': 2414,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1772,7 +1772,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2568 = {
             '$id': 2568,
-            'Name': 'TreasureChest2568',
+            'Name': 'Treasure Chest 2568',
             'Location Near': 2414,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1780,7 +1780,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2569 = {
             '$id': 2569,
-            'Name': 'TreasureChest2569',
+            'Name': 'Treasure Chest 2569',
             'Location Near': 2415,
             'Story Pre-Req': [16],
             'Required Items': [],
@@ -1788,7 +1788,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2570 = {
             '$id': 2570,
-            'Name': 'TreasureChest2570',
+            'Name': 'Treasure Chest 2570',
             'Location Near': 2415,
             'Story Pre-Req': [16],
             'Required Items': [],
@@ -1796,7 +1796,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2571 = {
             '$id': 2571,
-            'Name': 'TreasureChest2571',
+            'Name': 'Treasure Chest 2571',
             'Location Near': 2428,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1804,7 +1804,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2572 = {
             '$id': 2572,
-            'Name': 'TreasureChest2572',
+            'Name': 'Treasure Chest 2572',
             'Location Near': 2428,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1812,7 +1812,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2573 = {
             '$id': 2573,
-            'Name': 'TreasureChest2573',
+            'Name': 'Treasure Chest 2573',
             'Location Near': 2423,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1820,7 +1820,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2574 = {
             '$id': 2574,
-            'Name': 'TreasureChest2574',
+            'Name': 'Treasure Chest 2574',
             'Location Near': 2423,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1828,7 +1828,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2575 = {
             '$id': 2575,
-            'Name': 'TreasureChest2575',
+            'Name': 'Treasure Chest 2575',
             'Location Near': 2403,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1836,7 +1836,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2576 = {
             '$id': 2576,
-            'Name': 'TreasureChest2576',
+            'Name': 'Treasure Chest 2576',
             'Location Near': 2403,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1844,7 +1844,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2577 = {
             '$id': 2577,
-            'Name': 'TreasureChest2577',
+            'Name': 'Treasure Chest 2577',
             'Location Near': 2403,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1852,7 +1852,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2578 = {
             '$id': 2578,
-            'Name': 'TreasureChest2578',
+            'Name': 'Treasure Chest 2578',
             'Location Near': 2415,
             'Story Pre-Req': [16],
             'Required Items': [AegaeonKey, SuperstrKey[:1], AegaeonAff[:1] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
@@ -1860,7 +1860,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2579 = {
             '$id': 2579,
-            'Name': 'TreasureChest2579',
+            'Name': 'Treasure Chest 2579',
             'Location Near': 2422,
             'Story Pre-Req': [12],
             'Required Items': [AegaeonKey, [SuperstrKey[0]] , HazeKey, [KeenEyeKey[0]]],
@@ -1868,7 +1868,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2580 = {
             '$id': 2580,
-            'Name': 'TreasureChest2580',
+            'Name': 'Treasure Chest 2580',
             'Location Near': 2404,
             'Story Pre-Req': [12],
             'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
@@ -1876,7 +1876,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2581 = {
             '$id': 2581,
-            'Name': 'TreasureChest2581',
+            'Name': 'Treasure Chest 2581',
             'Location Near': 2419,
             'Story Pre-Req': [12],
             'Required Items': [AegaeonKey, SuperstrKey[:1], AegaeonAff[:1] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
@@ -1884,7 +1884,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2582 = {
             '$id': 2582,
-            'Name': 'TreasureChest2582',
+            'Name': 'Treasure Chest 2582',
             'Location Near': 2421,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1892,7 +1892,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2583 = {
             '$id': 2583,
-            'Name': 'TreasureChest2583',
+            'Name': 'Treasure Chest 2583',
             'Location Near': 2421,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1900,7 +1900,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2584 = {
             '$id': 2584,
-            'Name': 'TreasureChest2584',
+            'Name': 'Treasure Chest 2584',
             'Location Near': 2421,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1908,7 +1908,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2585 = {
             '$id': 2585,
-            'Name': 'TreasureChest2585',
+            'Name': 'Treasure Chest 2585',
             'Location Near': 2412,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1916,7 +1916,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2586 = {
             '$id': 2586,
-            'Name': 'TreasureChest2586',
+            'Name': 'Treasure Chest 2586',
             'Location Near': 2422,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1924,7 +1924,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2587 = {
             '$id': 2587,
-            'Name': 'TreasureChest2587',
+            'Name': 'Treasure Chest 2587',
             'Location Near': 2410,
             'Story Pre-Req': [12],
             'Required Items': [],
@@ -1932,7 +1932,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         }
     TreasureChest2588 = {
             '$id': 2588,
-            'Name': 'TreasureChest2588',
+            'Name': 'Treasure Chest 2588',
             'Location Near': 2426,
             'Story Pre-Req': [16],
             'Required Items': [],

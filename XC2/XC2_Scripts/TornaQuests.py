@@ -1011,7 +1011,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     }
     TornaMainQuest15 = {
         'FLD_QuestTask $id': 11,
-        'Task Summary': 'Go to the Torigoth graves',
+        'Task Summary': 'Go to the Torigoth Cemetary',
         'Community Level Req': 0,
         'Item Requirements': []
     }

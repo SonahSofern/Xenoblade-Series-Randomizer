@@ -24,7 +24,7 @@ def CreateMiscItems(Mainquests, Areas, MiscOn): # Currently only for massive mel
     
     NamelessWanderponItem = {
         'FLD_AddItem $id': 258,
-        'Name': 'NamelessWanderponItem',
+        'Name': 'Nameless Wanderpon Gift Item',
         'Location Near': 2303,
         'Story Pre-Req': 8,
         'Required Items': []

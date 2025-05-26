@@ -22,119 +22,119 @@ class TornaRedBag: # created to allow me to pass these objects easier
 def CreateRedBagInfo(Mainquests, Areas, RedBagsOn):
     VaultKeyBag = {
         'ma40a PreciousPop $id': 1101,
-        'Name': 'VaultKeyBag',
+        'Name': 'Vault Key Bag',
         'Location Near': 2325,
         'Story Pre-Req': [25],
         'Required Items': []
     }
     IndigoSlatePieceBag = {
         'ma40a PreciousPop $id': 1102,
-        'Name': 'IndigoSlatePieceBag',
+        'Name': 'Indigo Slate Piece Bag',
         'Location Near': 2301,
         'Story Pre-Req': [2],
         'Required Items': []
     }
     DawningSlatePieceBag = {
         'ma40a PreciousPop $id': 1103,
-        'Name': 'DawningSlatePieceBag',
+        'Name': 'Dawning Slate Piece Bag',
         'Location Near': 2321,
         'Story Pre-Req': [5],
         'Required Items': []
     }
     CrimsonSlatePieceBag = {
         'ma40a PreciousPop $id': 1104,
-        'Name': 'CrimsonSlatePieceBag',
+        'Name': 'Crimson Slate Piece Bag',
         'Location Near': 2303,
         'Story Pre-Req': [8],
         'Required Items': []
     }
     RustySlatePieceBag = {
         'ma40a PreciousPop $id': 1105,
-        'Name': 'RustySlatePieceBag',
+        'Name': 'Rusty Slate Piece Bag',
         'Location Near': 2304,
         'Story Pre-Req': [10],
         'Required Items': []
     }
     PurpleSlatePieceBag = {
         'ma40a PreciousPop $id': 1106,
-        'Name': 'PurpleSlatePieceBag',
+        'Name': 'Purple Slate Piece Bag',
         'Location Near': 2305,
         'Story Pre-Req': [25],
         'Required Items': []
     }
     ChestnutSlatePieceBag = {
         'ma40a PreciousPop $id': 1107,
-        'Name': 'ChestnutSlatePieceBag',
+        'Name': 'Chestnut Slate Piece Bag',
         'Location Near': 2323,
         'Story Pre-Req': [25],
         'Required Items': []
     }
     CinnabarSlatePieceBag = {
         'ma40a PreciousPop $id': 1108,
-        'Name': 'CinnabarSlatePieceBag',
+        'Name': 'Cinnabar Slate Piece Bag',
         'Location Near': 2326,
         'Story Pre-Req': [25],
         'Required Items': []
     }
     ScarletSlatePieceBag = {
         'ma40a PreciousPop $id': 1109,
-        'Name': 'ScarletSlatePieceBag',
+        'Name': 'Scarlet Slate Piece Bag',
         'Location Near': 2313,
         'Story Pre-Req': [25],
         'Required Items': []
     }
     NavyBlueSlatePieceBag = {
         'ma40a PreciousPop $id': 1110,
-        'Name': 'Navy-BlueSlatePieceBag',
+        'Name': 'Navy-Blue Slate Piece Bag',
         'Location Near': 2307,
         'Story Pre-Req': [33],
         'Required Items': []
     }
     InkySlatePieceBag = {
         'ma40a PreciousPop $id': 1111,
-        'Name': 'InkySlatePieceBag',
+        'Name': 'Inky Slate Piece Bag',
         'Location Near': 2342,
         'Story Pre-Req': [53],
         'Required Items': []
     }
     CherrySlatePieceBag = {
         'ma40a PreciousPop $id': 1112,
-        'Name': 'CherrySlatePieceBag',
+        'Name': 'Cherry Slate Piece Bag',
         'Location Near': 2333,
         'Story Pre-Req': [35],
         'Required Items': []
     }
     PeachSlatePieceBag = {
         'ma40a PreciousPop $id': 1113,
-        'Name': 'PeachSlatePieceBag',
+        'Name': 'Peach Slate Piece Bag',
         'Location Near': 2311,
         'Story Pre-Req': [35],
         'Required Items': []
     }
     DarkGraySlatePieceBag = {
         'ma40a PreciousPop $id': 1114,
-        'Name': 'Dark-GraySlatePieceBag',
+        'Name': 'Dark-Gray Slate Piece Bag',
         'Location Near': 2361,
         'Story Pre-Req': [36],
         'Required Items': []
     }
     MossGreenSlatePieceBag = {
         'ma40a PreciousPop $id': 1116,
-        'Name': 'Moss-GreenSlatePieceBag',
+        'Name': 'Moss-Green Slate Piece Bag',
         'Location Near': 2355,
         'Story Pre-Req': [46],
         'Required Items': []
     }
     HollyhockSlatePieceBag = {
         'ma40a PreciousPop $id': 1117,
-        'Name': 'HollyhockSlatePieceBag',
+        'Name': 'Hollyhock Slate Piece Bag',
         'Location Near': 2306,
         'Story Pre-Req': [29],
         'Required Items': []
     }
     LeadenSlatePieceBag = {
         'ma40a PreciousPop $id': 1118,
-        'Name': 'LeadenSlatePieceBag',
+        'Name': 'Leaden Slate Piece Bag',
         'Location Near': 2347,
         'Story Pre-Req': [53],
         'Required Items': []
