@@ -18,7 +18,6 @@ from scripts import JSONParser, Helper
 #  - swapped drivers are not zoomed in properly when summoning core crystals
 #  - "Not to boast, but that was spectacular! Right gramps?" after winning a fight without Rex in the party yet
 #  - DefWeapon on each blade is not scaled to the correct damage. Brighid normally starts with a Coil chip for example but when Rex replaced her he has a rank 1 weapon
-#  - Text for "Make Nia a Driver" Should say "Turn Nia into Morag" or something
 #  - Rex's Master Driver icon is still not fixed for the small icons
 #    - It is correct for the big icon
 #  -
@@ -336,11 +335,12 @@ def SwapDefaultBlades():
     # Pyra, Dromarch, Brighid, and Pandoria can be handled as simple swaps.
     # Roc needs to stay because of Vandham
     # Blade Nia will stay for convenience. But whoever replaces Rex will not be able to use her #TODO: can blade nia swap blades with the QoL setting enabled?
-    # TODO Mythra on the other hand is a strange one. Mythra needs to be replaced with *somebody*
+    # Mythra's replacement is as follows:
     #  - If Nia replaced Rex, Mythra should become Crossette
     #  - If Morag replaced Rex, Mythra should become Corvin (Or Aegeaon?)
     #  - If Zeke replaced Rex, Mythra should become Herald
-    #  - In each of these cases, the core crystals items which contain these blades should also be renamed to "Aegis core crystal"
+    #  - In each of these cases, the core crystals items which contain these blades should also be renamed to "Aegis core crystal", as they now contain Mythra
+    # Pneuma is replaced with a "custom" blade, which is an "Ascended" version of either Dromarch, Brighid, or Pandoria.
 
     original_driver_to_primary_blade = {
         1: 1001, # Rex to Pyra
@@ -393,13 +393,12 @@ def SwapDefaultBlades():
             print(str(replacement_blade_id) + ' was replaced with ' + str(original_blade_id))
 
     # Replace Pneuma with the new character's default blade with an actually strong weapon
-    # Note: Pneuma's "Model" and "DefWeapon" fields are explicitly ignored in ApplyBladeSwaps
+    # Note: Pneuma's "Model" and "DefWeapon" fields are explicitly ignored in ApplyBladeRandomization()
     # Also rename the core crystal which now contains Mythra (if Mythra was swapped above)
-    # TODO: Only if Blades are not randomized
     match OriginalDriver2Replacement[1]:
         case 1: # Rex was not replaced
             if include_printouts:
-                print("Rex was not replaced.")
+                print("Since Rex was not replaced:")
                 print("- Pneuma remains unchanged.")
                 print("- No core crystals were renamed")
         case 2: # Rex Replaced by Nia
@@ -576,11 +575,11 @@ def BugFixes_PostRandomization():
         FreeEngage()
 
     if Options.DriversOption.GetState():
-        # TODO: FixDriverSkillTrees()
         DefineBroadswordArtsForRexsReplacement()
         FixRexStillAfterHeDies()
         FixRexStillMasterDriver()
         FixDriverArts()
+        FixDriverSkillTrees()
 
 # Unsure why, but it is possible for the game to crash when an enemy blade gets randomized (for example, Pandoria).
 # Replace the enemy version of the blade with the blade who that enemy replaced.
@@ -844,3 +843,22 @@ def FixDriverArts():
         if original_driver_id in DriversToRandomize:
             art["Driver"] = ReplacementDriver2Original[original_driver_id]
     JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], [], callback, replaceAll=True)
+
+def FixDriverSkillTrees():
+    # Populate original skill trees
+    original_skill_trees = dict()
+    for driver_id in DriversToRandomize:
+        original_skill_trees[driver_id] = JSONParser.CopyJSONFile(f"common/BTL_Skill_Dr_Table{driver_id:02d}.json")
+
+    # Move the skill trees to the correct driver after randomization
+    for original_driver_id in DriversToRandomize:
+        replacement_driver_id = OriginalDriver2Replacement[original_driver_id]
+
+        # Convert dict to list
+        new_skill_tree = []
+        for key, value in original_skill_trees[replacement_driver_id].items():
+            item = {"$id": key}
+            item.update(value)
+            new_skill_tree.append(item)
+
+        JSONParser.ReplaceJSONFile(f"common/BTL_Skill_Dr_Table{original_driver_id:02d}.json", new_skill_tree)
