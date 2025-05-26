@@ -1,6 +1,6 @@
 import json, random, IDs, EnemyRandoLogic, RaceMode, math, Options, time, FieldSkillAdjustments
 from Enhancements import *
-from CharacterRandomization import Replacement2Original
+from CharacterRandomization import ReplacementBlade2Original
 from scripts import Helper
 
 # ShopID: [ShopType: EventID, Name]
@@ -293,7 +293,7 @@ def IdentifyDLCBladeCrystals(CrystalList):
     if Options.BladesOption.GetState():
         RandomizedBladeIDs = []
         for originalblade in DLCBladeIDs:
-            RandomizedBladeIDs.append(Replacement2Original[originalblade])
+            RandomizedBladeIDs.append(ReplacementBlade2Original[originalblade])
         DLCBladeIDs = RandomizedBladeIDs
     DLCBladeCrystalList = []
     with open("./XC2/_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: # Adds the exchange tasks

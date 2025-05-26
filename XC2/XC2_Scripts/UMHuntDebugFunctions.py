@@ -1,6 +1,5 @@
 import json, random, IDs, EnemyRandoLogic, RaceMode, math, Options, time, FieldSkillAdjustments
 from Enhancements import *
-from CharacterRandomization import Replacement2Original
 from scripts import Helper
 from UMHuntMain import *
 

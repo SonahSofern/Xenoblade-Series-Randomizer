@@ -411,7 +411,16 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
 def RunOptions(OptionList, randoProgressDisplay):
     
     OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
-    
+
+    # resets all options
+    for opt in OptionList:
+        for command in opt.resetCommands:
+            try:
+                command()
+            except Exception as error:
+                print(f"ERROR: {opt.name} | {error}")
+                print(f"{traceback.format_exc()}") # shows the full error
+
     for opt in OptionList:
         if not opt.GetState(): # Checks state
             continue
