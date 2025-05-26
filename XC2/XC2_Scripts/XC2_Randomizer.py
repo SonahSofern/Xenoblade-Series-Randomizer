@@ -180,7 +180,7 @@ PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, se
 randoProgressDisplay = ttk.Label(text="", anchor="e", padding=2, style="BorderlessLabel.TLabel")
 
 # Randomize Button
-RandomizeButton = ttk.Button(text='Randomize', command=lambda: (GUISettings.Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList,["common", "common_gmk"],["common_ms"],[lambda: ShowTitleScreenText(), lambda: AddCustomEnhancements(), lambda: Options.TornaMain.PassAlongSpoilerLogInfo(fileEntryVar, Version, permalinkVar, seedEntryVar)])))
+RandomizeButton = ttk.Button(text='Randomize', command=lambda: (GUISettings.Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList,["common", "common_gmk"],["common_ms"],[lambda: ShowTitleScreenText(), lambda: AddCustomEnhancements(), lambda: Options.TornaMain.PassAlongSpoilerLogInfo(fileEntryVar, Version, permalinkVar, seedEntryVar), lambda: Options.ObjectNameCleanup.ReassignAlphabeticalSort()])))
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
 RandomizeButton.config(padding=5)
 

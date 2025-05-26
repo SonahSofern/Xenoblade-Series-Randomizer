@@ -6,6 +6,7 @@ import _Accessories, _DriverArts, SkillTrees, BladeRandomization, _AuxCores, IDs
 import TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UMHuntMain, Cosmetics, AccessoryShops, CollectionPoints, PouchItemShops, TreasureChests, ButtonCombos, EnemyDrops, _EleCombo
 import _YellowSkills, _BladeSpecials, Scales, DLCFlagQOL, _Drivers
 import TornaMain
+import ObjectNameCleanup
 from scripts.Interactables import Option, SubOption
 # Prio
 First = 0
