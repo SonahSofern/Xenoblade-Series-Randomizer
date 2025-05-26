@@ -55,7 +55,6 @@ def RandomizePcArts():
     # RemakeArtList()
     
     keepMeliaSummons = Options.PlayerArtsOption_Summons.GetState()
-    isBalancedLv = Options.PlayerArtsOption_BalancedUnlockLevels.GetState()
     isArtGroups = Options.PlayerArtsOption_ArtGroups.GetState()
     isPower = Options.PlayerArtsOption_Power.GetState()
     
@@ -99,8 +98,7 @@ def RandomizePcArts():
             for art in artData["rows"]:
                 Power(art)
 
-        if isBalancedLv:
-            BalanceArtUnlockLevels(artData, CharacterList)
+        BalanceArtUnlockLevels(artData, CharacterList)
         
         MatchArtBooks(artData)
         scripts.JSONParser.CloseFile(artData, artFile)

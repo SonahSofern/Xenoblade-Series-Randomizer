@@ -43,7 +43,7 @@ UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption)
 UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption)
 UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption)
 
-BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: EnemiesScript.Enemies(IDs.BossEnemies, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption)], descData=lambda: EnemiesScript.EnemyDesc(BossEnemyOption.name), _hasSpinBox = True)
+BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: EnemiesScript.Enemies(IDs.BossEnemies, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption), lambda: EnemiesScript.EgilArenaFix()], descData=lambda: EnemiesScript.EnemyDesc(BossEnemyOption.name), _hasSpinBox = True)
 BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption)
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption)
@@ -64,7 +64,7 @@ AffinityTreeOption_LinkCost = SubOption("Affinity Coin Cost", AffinityTreeOption
 AffinityTreeOption_Shape = SubOption("Node Shape", AffinityTreeOption)
 PlayerArtsOption = Option("Player Arts",Character, "Randomizes character's arts and their effects", [lambda: PcArts.RandomizePcArts()], descData=lambda: PcArts.ArtsDescriptions())
 PlayerArtsOption_Power = SubOption("Power", PlayerArtsOption)
-PlayerArtsOption_BalancedUnlockLevels = SubOption("Balanced Unlock Levels", PlayerArtsOption)
+# PlayerArtsOption_BalancedUnlockLevels = SubOption("Balanced Unlock Levels", PlayerArtsOption)
 # PlayerArtsOption_Duplicates = SubOption("Allow Duplicates", PlayerArtsOption)
 # PlayerArtsOption_EarlyArtsUnlock = SubOption("Unlock All Arts at Level 1", PlayerArtsOption)
 PlayerArtsOption_ArtGroups = SubOption("Keep Combo Arts Together", PlayerArtsOption)
@@ -102,10 +102,10 @@ for song in Music.AllJingles:
     song.CreateOption(JingleMusicOption, Music.UsedJingles)
 
 # QOL
-TutorialSkipsOption = Option("Tutorial Skips", QOL, "Reduces tutorials as much as possible", [lambda: (Tutorials.TutorialSkips(), Landmarks.LandmarkRando())])
-FasterLvOption = Option("EXP Boost", QOL, "Decreases level up requirements by a set amount (Recommended 3x to rush the story).", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 2, _spinMax = 256, _spinIncr = 1, _spinDesc = "x", spinDefault=2)
-FasterSkillTrees = Option("SP Boost", QOL, "Increases SP (skill point) gains for skill trees", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["en_ap"], [f'row[key] * {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 2, _spinMax = 256, _spinIncr = 1, _spinDesc = "x", spinDefault=2)
-FasterArtLevels = Option("AP Boost", QOL, "Increases AP (art point) gains for art level ups",[lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["en_exp"], [f'row[key] * {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 2, _spinMax = 256, _spinIncr = 1, _spinDesc = "x", spinDefault=2)
+TutorialSkipsOption = Option("Tutorial Skips", QOL, "Reduces tutorials as much as possible", [lambda: Tutorials.TutorialSkips()])
+FasterLvOption = Option("EXP Boost", QOL, "Decreases level up requirements by a set amount (Recommended 3x to rush the story).", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 0, _spinMax = 256, _spinIncr = 1, _spinDesc = "x", spinDefault=3)
+FasterSkillTrees = Option("SP Boost", QOL, "Increases SP (skill point) gains for skill trees", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["en_ap"], [f'row[key] * {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 0, _spinMax = 256, _spinIncr = 1, _spinDesc = "x", spinDefault=2)
+FasterArtLevels = Option("AP Boost", QOL, "Increases AP (art point) gains for art level ups",[lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["en_exp"], [f'row[key] * {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 0, _spinMax = 256, _spinIncr = 1, _spinDesc = "x", spinDefault=2)
 MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free quickstep gems.", [lambda: MiscQOL.Quickstep()], _hasSpinBox=True, _spinDesc="% Speed", _spinMax=100)
 
 # CutsceneSkipOption = Option("Cutscene Skips", QOL, "Skips all possible cutscenes", [lambda: Cutscenes.CutsceneSkipper()])
@@ -114,6 +114,7 @@ MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free q
 EnemyScaleOption = Option("Enemy Scale", Funny, "Randomizes a % of enemy sizes.", [lambda: Scales.EnemyScales()], _hasSpinBox=True)
 NPCScaleOption = Option("NPC Scale", Funny, "Randomizes a % of npc sizes.", [lambda: Scales.NPCScales()], _hasSpinBox = True)
 RemoveStartingArmorOption = Option("Remove Starting Equipment", Funny, "Removes starting armor on all the main characters.", [lambda: Armor.RemoveStartingGear()])
+NPCModelsOption = Option("NPC Models", Funny, "Randomizes NPC models", [lambda: NPC.NPCModelRando()], _hasSpinBox = True)
 
 # ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html
 

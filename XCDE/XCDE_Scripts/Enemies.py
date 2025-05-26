@@ -23,11 +23,14 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     GoldFace = ForcedArt(1622, 1, 740)
     DiscipleDickson = ForcedArt(1316, 8, 942)
     Yaldabaoth = ForcedArt(2501, 5, 843)
+    YaldabaothThree = ForcedArt(2501, 8, 846)
     YaldabaothTwo = ForcedArt(2123, 1, 828)
     SurenyTelethia = ForcedArt(2601, 1, 870)
+    EnergyDevice = ForcedArt(2506, 1, 848) # Not using since the enemies have removed their limits anyway to account for UM who cant be instakilled
+    EnergyDeviceTwo = ForcedArt(2506, 2, 848)
     GroupEnemies = [135,136,137,138,139]
     selfDestructArts = [1005,1015,1017,1009, 1007, 1013, 396, 406, 915, 408, 812, 814, 400, 923, 1053, 398, 899, 404, 410, 1127, 820] + Helper.InclRange(900, 929)
-    ForcedStoryArts = [MetalFace, MysteriousFace, GoldFace, DiscipleDickson, Yaldabaoth, YaldabaothTwo, SurenyTelethia] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
+    ForcedStoryArts = [MetalFace, MysteriousFace, GoldFace, DiscipleDickson, Yaldabaoth, YaldabaothTwo, SurenyTelethia, YaldabaothThree] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
     isNormal = normal.GetState()
     isUnique = unique.GetState()
     isBoss = boss.GetState()
@@ -107,7 +110,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                         MechonEarly(enemy, chosen)
                         SmallAreaFights(enemy)
                         ForcedArts(enemy, ForcedStoryArts)
-                        EgilArenaFix(enemy, chosen)
+                        DevicesAttachedToEgilFix(enemy)
                         # Allows no dupes if possible if we dont have enough choices it reshuffles the original pool
                         filteredEnemyData.remove(chosen)   
                         if filteredEnemyData == []: # repopulate it if the group is empty
@@ -116,14 +119,23 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                     JSONParser.CloseFile(eneVoiceData, eneVoiceFile)
                     JSONParser.CloseFile(eneAreaData, eneAreaFile)  
         JSONParser.CloseFile(eneData, eneFile)
-        RingRemoval() 
+        RingRemoval()
     
 def ForcedArts(enemy, ForcedStoryArts):
     # Fixes boss fights that require the enemy to use an art slot to end the fight 
     for id in ForcedStoryArts:
         if id.id == enemy["$id"]:
             enemy[f"arts{id.artSlot}"] = id.artId  # Change it to their art
-            break    
+
+def HighActIDFix():
+    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ene_arts.json", 'r+', encoding='utf-8') as artFile:
+        artData = json.load(artFile)
+        for art in artData["rows"]:
+            if art["$id"] == 846:
+                art["act_idx"] = 0
+                break
+        JSONParser.CloseFile(artData, artFile)
+
 
 def VoicedEnemiesFix(eneVoiceData, chosen, enemy):
     newVoiceList = []
@@ -282,16 +294,28 @@ def RingRemoval():
                 lock["popID2"] = 0
         JSONParser.CloseFile(lockData, lockFile)
 
+def DevicesAttachedToEgilFix(enemy):
+    if enemy["$id"] == 2506: # Remove the limit on these because unique monsters cannot be inflicted with instant death like their art wants to do
+        enemy["limit"] = 0
 
-def EgilArenaFix(enemy, chosen):
-    if enemy["$id"] == 2501 and chosen.enelist["$id"] != 2501: # If egil is randomized into not egil we need to move him
-        with open(f"./XCDE/_internal/JsonOutputs/bdat_ma2301/poplist2301.json", 'r+', encoding='utf-8') as enpopFile:
-            popData = json.load(enpopFile)
-            for en in popData["rows"]:
-                if en["$id"] == 2:
-                    en["posX"] = 10
-                    en["posY"] = 0
-            JSONParser.CloseFile(popData, enpopFile)
+
+def EgilArenaFix():
+    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
+        enData = json.load(eneFile)
+        for en in enData["rows"]:
+            if en["$id"] == 2501:
+                en["resource"] = 486
+                break
+        JSONParser.CloseFile(enData, eneFile)
+    
+    # if enemy["$id"] == 2501 and chosen.enelist["$id"] != 2501: # If egil is randomized into not egil we need to move him
+    #     with open(f"./XCDE/_internal/JsonOutputs/bdat_ma2301/poplist2301.json", 'r+', encoding='utf-8') as enpopFile:
+    #         popData = json.load(enpopFile)
+    #         for en in popData["rows"]:
+    #             if en["$id"] == 2:
+    #                 en["posX"] = 5
+    #                 en["posY"] = 0
+    #         JSONParser.CloseFile(popData, enpopFile)
   
         
 def EnemyDesc(categoryName):
