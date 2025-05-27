@@ -35,7 +35,7 @@ def UMHunt():
         TutorialShortening.ShortenedTutorial()
     UMHuntShopCreation.CreateShopDictionaries()
     global SetCount, UMHuntDisableCondListID, UMHuntEnableCondListIDs
-    SetCount = Options.UMHuntOption.GetOdds()
+    SetCount = Options.UMHuntOption.GetSpinbox()
     UMHuntDisableCondListID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
     UMHuntEnableCondListIDs = Helper.ExtendListtoLength([UMHuntDisableCondListID + 1], 10, "inputlist[i-1] + 1")
     ChosenAreaOrder = []

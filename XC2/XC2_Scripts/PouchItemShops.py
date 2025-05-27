@@ -29,7 +29,7 @@ def RandoPouchShops():
     
     with open("./XC2/_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as shopFile:
         shopData = json.load(shopFile)
-        odds = Options.PouchItemShopOption.GetOdds()
+        odds = Options.PouchItemShopOption.GetSpinbox()
         for shop in shopData["rows"]:
             if shop[f"DefItem1"] not in (IDs.PouchItems): # Ensures it is an pouch item shop
                 continue

@@ -33,19 +33,19 @@ def DetermineSettings():
     SidequestRewardQty, CollectionPointQty, EnemyDropQty, TreasureChestQty, ShopQty, GroundItemQty = 0,0,0,0,0,0
     
     if Options.TornaOption_SideQuests.GetState(): # if Sidequest Rewards are randomized
-        SidequestRewardQty = Options.TornaOption_SideQuests.GetOdds()
+        SidequestRewardQty = Options.TornaOption_SideQuests.GetSpinbox()
     
     if Options.TornaOption_CollectionPoints.GetState(): # if Collection Points are randomized
-        CollectionPointQty = Options.TornaOption_CollectionPoints.GetOdds()
+        CollectionPointQty = Options.TornaOption_CollectionPoints.GetSpinbox()
     
     if Options.TornaOption_EnemyDrops.GetState(): # if Enemy Drops are randomized
-        EnemyDropQty = Options.TornaOption_EnemyDrops.GetOdds()
+        EnemyDropQty = Options.TornaOption_EnemyDrops.GetSpinbox()
     
     if Options.TornaOption_TreasureChests.GetState(): # if Treasure Chests are randomized
-        TreasureChestQty = Options.TornaOption_TreasureChests.GetOdds()
+        TreasureChestQty = Options.TornaOption_TreasureChests.GetSpinbox()
     
     if Options.TornaOption_Shops.GetState(): # if Shops are randomized
-        ShopQty = Options.TornaOption_Shops.GetOdds()
+        ShopQty = Options.TornaOption_Shops.GetSpinbox()
     
     if Options.TornaOption_GroundItems.GetState(): # if Ground Items are randomized
         GroundItemQty = 1
