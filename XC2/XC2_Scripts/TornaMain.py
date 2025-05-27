@@ -9,16 +9,12 @@ import os
 import math
 from scripts.Interactables import OptionList
 
-# hints
-# need to add hints to the tips menu, they currently exist in the spoiler log.
-# object color matches contents. make the name of a check container yellow if it has progression, green if it has helpful items, and normal if it doesn't? Not possible for collection points
-# you could do this by making 1 name for a collection point, and giving that spot that name if it has progression
+# TO DO
 # look into options for pre-completed quests or EZ-complete quests?
 # required items for a given quest would need to be zeroed out for said quest, besides the pre-req items.
-# option to exclude locations?
+
 # need a way to tell the user if the generation failed, and for what reason.
 # option to remove specific quests or locations from list
-# nicer Spoiler Log location names.
 
 class ItemInfo:
     def __init__(self, inputid, category, addtolist):
@@ -103,6 +99,8 @@ def AllTornaRando():
     CampfireUnlocks()
     CharacterUnlocks()
     GenerateHints()
+    if Options.TornaOption_ObjectColorMatchesContents.GetState():
+        GildedCheckNames()
     pass
 
 def DetermineSettings():
@@ -752,7 +750,6 @@ def EternityLoamChange(): # need to make eternity loam only require 1 of for the
 
 def SkillTreeSetup(): # sets up the blade skill tree nodes for each blade.
     Blades = ["Jin", "Haze", "Mythra", "Minoth", "Brighid", "Aegaeon"]
-    RowIDs = Helper.InclRange(1127, 1132)
     FSkill1Names = ["Mineralogy", "Forestry", "Focus", "Entomology", "Botany", "Ichthyology"]
     FSkill2Names = ["Swift Swordplay", "Manipulate Ether", "Power of Light", "Mining", "Lockpicking", "Command Water"]
     FSkill3Names = ["Fortitude", "Keen Eye", "Girls' Talk", 0, 0, "Superstrength"]
@@ -869,6 +866,147 @@ def CharacterUnlocks(): # sets up the character unlock keys
         json.dump(data, file, indent=2, ensure_ascii=False)
     JSONParser.ExtendJSONFile("common/FLD_QuestCollect.json", [FLDQuestCollectNewRows])
     JSONParser.ExtendJSONFile("common_ms/fld_quest.json", [fldquestnewrows])
+
+def GildedCheckNames():
+    # current problems:
+    # cannot change anything about the red bag items in the field, they display no text, and I'm not sure where their model info is in the bdats, or if it even exists. probably tied to the map itself?
+    RequiredItems = KeyItemtoLocDict.keys()
+    RequiredLocations = KeyItemtoLocDict.values()
+    RequiredCollectionPoints = [x.collectiontableid for x in RequiredLocations if x.type in ["tornacollectionpoint", "gormottcollectionpoint"]]
+    RequiredChestIDs = [x.id for x in RequiredLocations if x.type == "chest"]
+    RequiredEnemies = [x.id for x in RequiredLocations if x.type in ["normalenemy", "uniquemonster", "boss", "questenemy"]]
+    RequiredMisc = [x.name for x in RequiredLocations if x.type == "misc"]
+    RequiredShops = [x.shoplistid for x in RequiredLocations if x.type == "shop"]
+    RequiredQuests = [x.rewardids[0] for x in RequiredLocations if x.type == "sidequest"]
+    CurGmkNameMax = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/fld_gmkname.json", "$id")
+    ProgressID = CurGmkNameMax + 1
+    NonProgressID = CurGmkNameMax + 2
+    NewGmkNameRows = [{"$id": ProgressID, "style": 36, "name": "[System:Color name=tutorial ]Progression[/System:Color]"}, {"$id": NonProgressID, "style": 36, "name": "[System:Color name=red ]Unrequired[/System:Color]"}]
+    JSONParser.ExtendJSONFile("common_ms/fld_gmkname.json", [NewGmkNameRows])
+
+    # collection points
+    with open("./XC2/_internal/JsonOutputs/common/FLD_CollectionTable.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in RequiredCollectionPoints:
+                row["categoryName"] = ProgressID
+            else:
+                row["categoryName"] = NonProgressID
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_CollectionPopList.json", ["nameRadius"], 255) # makes it easier to see from far away
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_CollectionPopList.json", ["nameRadius"], 255) # makes it easier to see from far away
+
+    # chests
+    with open("./XC2/_internal/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            row["initWaitTimeRand"] = 0 # why would you add a random wait time before items start popping out??? get that out of here
+            row["initWaitTime"] = 0
+            match row["$id"]:
+                case 10 | 3:
+                    row["MSG_ID"] = ProgressID
+                case 7 | 1:
+                    row["MSG_ID"] = NonProgressID
+                case _:
+                    pass
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    FileList = ["./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", "./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_TboxPop.json"]
+    for curfile in FileList:
+        with open(curfile, 'r+', encoding='utf-8') as file: 
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] in RequiredChestIDs:
+                    if row["RSC_ID"] in [7, 10]: # all barrels with progression get turned into a barrel of model type 10
+                        row["RSC_ID"] = 10
+                    else: # all chests with progression get turned into a chest of model type 3
+                        row["RSC_ID"] = 3
+                else:
+                    if row["RSC_ID"] in [7, 10]: # all barrels without progression get turned into barrels of model type 7
+                        row["RSC_ID"] = 7
+                    else: # all chests without progression get turned into a chest of model type 1
+                        row["RSC_ID"] = 1
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+        Helper.ColumnAdjust(curfile, ["msgVisible", "msgdigVisible"], 255) # makes it easier to see from far away
+
+    # enemies
+    # we're just going to turn the name yellow if it is required, red if not required, it's a bit more work than just setting the name to "Progression" or "Unrequired", but worth it
+    RequiredEnemyNameList = []
+    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in RequiredEnemies:
+                RequiredEnemyNameList.append(row["Name"])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common_ms/fld_enemyname.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in RequiredEnemyNameList:
+                row["name"] = "[System:Color name=tutorial ]" + row["name"] + "[/System:Color]"
+            else:
+                row["name"] = "[System:Color name=red ]" + row["name"] + "[/System:Color]"
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+    # misc
+    # each of the misc ones has to be hardcoded, since the idea is that it is a rarely used bucket for a bunch of one-off checks.
+    if 'Nameless Wanderpon Gift Item' in RequiredMisc:
+        ReplacementName = "[System:Color name=tutorial ]Nameless Wanderpon[/System:Color]"
+    else:
+        ReplacementName = "[System:Color name=red ]Nameless Wanderpon[/System:Color]"
+    JSONParser.ChangeJSONLine(["common_ms/fld_npcname.json"],[1258],["name"], ReplacementName)
+
+    # shops
+    # again, coloring the existing shop name yellow or red if it has progression or doesnt
+    RequiredShopNameList = []
+    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopList.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in RequiredShops:
+                RequiredShopNameList.append(row["Name"])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common_ms/fld_shopname.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in RequiredShopNameList:
+                row["name"] = "[System:Color name=tutorial ]" + row["name"] + "[/System:Color]"
+            else:
+                row["name"] = "[System:Color name=red ]" + row["name"] + "[/System:Color]"
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+    # sidequests
+    # yellow name if progression, red name if it doesn't
+    RequiredSidequestNameList = []
+    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestListNormalIra.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["RewardSetA"] in RequiredQuests:
+                RequiredSidequestNameList.append(row["QuestTitle"])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common_ms/fld_quest_normal.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in RequiredSidequestNameList:
+                row["name"] = "[System:Color name=tutorial ]" + row["name"] + "[/System:Color]"
+            else:
+                row["name"] = "[System:Color name=red ]" + row["name"] + "[/System:Color]"
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def GenerateHints():
     global HintedItemText, HintedLocText, ItemHintNames, LocHintNames, LocHintCount, ItemHintCheckLoc, ItemHintCheckNear

@@ -226,6 +226,7 @@ TornaOption_GroundItems = Option("Torna Ground Items", TornaTab, "Randomizes ite
 TornaOption_CreateSpoilerLog = Option("Create Torna Spoiler Log", TornaTab, "Outputs a Spoiler Log containing information on where each item is placed, located one level above your input folder, in a separate folder called 'Torna_Spoiler_Logs'. ")
 TornaOption_HintedItems = Option("Torna Item Hints", TornaTab, "Adds hints for randomly chosen required items in the \"Tips\" Submenu.", _hasSpinBox = True, _spinMin = 1, _spinMax = 10, _spinIncr = 1, _spinDesc = "Hint(s)", _spinWidth = 2, spinDefault = 1)
 TornaOption_LocProgCountHints = Option("Torna Location Progression Item Count Hints", TornaTab, "Adds hints for randomly chosen landmarks or locations in the \"Tips\" Submenu, denoting how many required progression items a landmark or location has.", _hasSpinBox = True, _spinMin = 1, _spinMax = 10, _spinIncr = 1, _spinDesc = "Hint(s)", _spinWidth = 2, spinDefault = 1)
+TornaOption_ObjectColorMatchesContents = Option("Gilded Required Check Names", TornaTab, "Colors the names of checks with required items gold, and checks without required items red.")
 #TornaOption_ChooseLevel2CommunityReq = Option("Level 2 Community Req", GameModeTab, "Determines the number of people required for community.") # I don't know how to make this work in the game files for now.
 
 # Currently Disabled for Various Reasons

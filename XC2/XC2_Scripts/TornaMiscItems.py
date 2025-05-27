@@ -18,6 +18,7 @@ class TornaMiscItem: # created to allow me to pass these objects easier
             self.hasprogression = False
         self.nearloc = input['Location Near']
         self.type = "misc"
+        self.id = input['FLD_AddItem $id']
         addtolist.append(self)
 
 def CreateMiscItems(Mainquests, Areas, MiscOn): # Currently only for massive melee mythra NPC, but wasn't sure how to classify it
