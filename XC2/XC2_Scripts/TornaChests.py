@@ -13,7 +13,7 @@ class TornaChest:
         self.mainreq = input['Story Pre-Req'][0]
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Required Items'])
         self.enemyreqs = input['Must Defeat Enemy IDs']
-        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 7, "0") # holds shop item ids, -1 for progression, 0 for filler spots
+        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 8, "0") # holds shop item ids, -1 for progression, 0 for filler spots
         self.type = "chest"
         if rewardnumber > 0:
             self.hasprogression = True

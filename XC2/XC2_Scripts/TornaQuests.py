@@ -3,6 +3,7 @@ import json
 import random
 import time
 from IDs import *
+from scripts import Helper
 
 class TornaSideQuest: # created to allow me to pass these objects easier
     def __init__(self, input, addtolist, rewardnumber):
@@ -97,7 +98,7 @@ def SelectRandomPointGoal(): # There are some sidequests that require you to fee
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the community quests that logically unlock Story Events 38 and 50 (lv 2 and lv 4 community)
+def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, Community2Gate): # Selects the community quests that logically unlock Story Events 38 and 50 (lv 2 and lv 4 community)
     TornaSidequest1 = {
         'Quest Name': 'What Bars the Way',
         'Quest Number': 1,
@@ -653,7 +654,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
         'Quest Number': 51,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [47, 48],
-        'Item Requirements': [LevelUpTokens[:51]],
+        'Item Requirements': [], #LevelUpTokens[:51]],
         'Community Gained': 2,
         'Community Level Req': 4,
         'Reward Set IDs': [1065],
@@ -917,13 +918,8 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     global TornaSidequests
     TornaSidequests = [] # holds the TornaSideQuest class objects
 
-    ShopChangeIDs = Helper.ExtendListtoLength([], len(TornaSidequestDict),"0")
-
-
     for sidequest in TornaSidequestDict:
         TornaSideQuest(sidequest, TornaSidequests, QuestRewardQty)
-
-
 
     TornaMainQuest1 = {
         'FLD_QuestTask $id': 1,
@@ -1149,122 +1145,122 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     }
     TornaMainQuest38 = {
         'FLD_QuestTask $id': 33,
-        'Task Summary': 'Raise Community to Level 2',
-        'Community Level Req': 2,
+        'Task Summary': f"Raise Community to Level {Community1Gate}",
+        'Community Level Req': Community1Gate,
         'Item Requirements': []
     }
     TornaMainQuest39 = {
         'FLD_QuestTask $id': 34,
         'Task Summary': 'Head to Sachsum Gardens',
-        'Community Level Req': 2,
+        'Community Level Req': Community1Gate,
         'Item Requirements': []
     }
     TornaMainQuest40 = {
         'FLD_QuestTask $id': 35,
         'Task Summary': 'Defeat Gargoyles Pt. 1',
-        'Community Level Req': 2,
+        'Community Level Req': Community1Gate,
         'Item Requirements': [] # LevelUpTokens[:36]]
     }
     TornaMainQuest41 = {
         'FLD_QuestTask $id': 52,
         'Task Summary': 'Defeat Gargoyles Pt. 2',
-        'Community Level Req': 2,
+        'Community Level Req': Community1Gate,
         'Item Requirements': []
     }
     TornaMainQuest42 = {
         'FLD_QuestTask $id': 53,
         'Task Summary': 'Defeat Gargoyles Pt. 3',
-        'Community Level Req': 2,
+        'Community Level Req': Community1Gate,
         'Item Requirements': []
     }
     TornaMainQuest43 = {
         'FLD_QuestTask $id': 36,
         'Task Summary': 'Return to Sachsum Gardens',
-        'Community Level Req': 2,
+        'Community Level Req': Community1Gate,
         'Item Requirements': []
     }
     TornaMainQuest44 = {
         'FLD_QuestTask $id': 37,
         'Task Summary': 'Defeat Malos',
-        'Community Level Req': 2,
+        'Community Level Req': Community1Gate,
         'Item Requirements': [] # LevelUpTokens[:44]]
     }
     TornaMainQuest45 = {
         'FLD_QuestTask $id': 38,
         'Task Summary': 'Defeat Gargoyles Pt. 4',
-        'Community Level Req': 2,
+        'Community Level Req': Community1Gate,
         'Item Requirements': []
     }
     TornaMainQuest46 = {
         'FLD_QuestTask $id': 39,
         'Task Summary': 'Speak with Palace Guard Clemens',
-        'Community Level Req': 2,
+        'Community Level Req': Community1Gate,
         'Item Requirements': []
     }
     TornaMainQuest47 = {
         'FLD_QuestTask $id': 40,
         'Task Summary': 'Head to Torna\'s Womb',
-        'Community Level Req': 2,
+        'Community Level Req': Community1Gate,
         'Item Requirements': []
     }
     TornaMainQuest48 = {
         'FLD_QuestTask $id': 56,
         'Task Summary': 'Head to Torna\'s Womb Pt. 2',
-        'Community Level Req': 2,
+        'Community Level Req': Community1Gate,
         'Item Requirements': []
     }
     TornaMainQuest49 = {
         'FLD_QuestTask $id': 41,
         'Task Summary': 'Head to Spefan Inn',
-        'Community Level Req': 2,
+        'Community Level Req': Community1Gate,
         'Item Requirements': []
     }
     TornaMainQuest50 = {
         'FLD_QuestTask $id': 42,
-        'Task Summary': 'Raise Community to Level 4',
-        'Community Level Req': 4,
+        'Task Summary': f"Raise Community to Level {Community2Gate}",
+        'Community Level Req': Community2Gate,
         'Item Requirements': []
     }
     TornaMainQuest51 = {
         'FLD_QuestTask $id': 54,
         'Task Summary': 'Return to Main Auresco Gate',
-        'Community Level Req': 4,
+        'Community Level Req': Community2Gate,
         'Item Requirements': []
     }
     TornaMainQuest52 = {
         'FLD_QuestTask $id': 43,
         'Task Summary': 'Return to Spefan Inn',
-        'Community Level Req': 4,
+        'Community Level Req': Community2Gate,
         'Item Requirements': []
     }
     TornaMainQuest53 = {
         'FLD_QuestTask $id': 44,
         'Task Summary': 'Cross Dannagh Desert',
-        'Community Level Req': 4,
+        'Community Level Req': Community2Gate,
         'Item Requirements': []
     }
     TornaMainQuest54 = {
         'FLD_QuestTask $id': 45,
         'Task Summary': 'Reach Malos',
-        'Community Level Req': 4,
+        'Community Level Req': Community2Gate,
         'Item Requirements': []
     }
     TornaMainQuest55 = {
         'FLD_QuestTask $id': 46,
         'Task Summary': 'Defeat Malos Pt. 1',
-        'Community Level Req': 4,
+        'Community Level Req': Community2Gate,
         'Item Requirements': [] # LevelUpTokens[:54]]
     }
     TornaMainQuest56 = {
         'FLD_QuestTask $id': 47,
         'Task Summary': 'Defeat Malos Pt. 2',
-        'Community Level Req': 4,
+        'Community Level Req': Community2Gate,
         'Item Requirements': []
     }
     TornaMainQuest57 = {
         'FLD_QuestTask $id': 48,
         'Task Summary': 'Defeat Gort',
-        'Community Level Req': 4,
+        'Community Level Req': Community2Gate,
         'Item Requirements': [] # LevelUpTokens[:57]]
     }
 
@@ -1275,75 +1271,80 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty): # Selects the co
     for mainquest in TornaMainQuestDict:
         TornaMainQuest(mainquest, TornaMainquests)
 
-    Community2Quests, Community4Quests = [], []
+    CommunityGate1Quests, CommunityGate2Quests = [], []
 
     for sidequest in TornaSidequests:
-        if sidequest.mainreq < 38 and sidequest.comreq < 2:
-            Community2Quests.append(sidequest)
-        if sidequest.mainreq < 50 and sidequest.comreq < 4:
-            Community4Quests.append(sidequest)
+        if sidequest.mainreq < 38 and sidequest.comreq < Community1Gate:
+            CommunityGate1Quests.append(sidequest)
+        if sidequest.mainreq < 50 and sidequest.comreq < max(Community1Gate, Community2Gate):
+            CommunityGate2Quests.append(sidequest)
 
-    ChosenLevel2Quests, ChosenLevel4Quests = [], []
-    AlteredLevel2Quests, AlteredLevel4Quests = Community2Quests.copy(), Community4Quests.copy()
+    AllSidequestItemReqs = []
+    for sidequest in TornaSidequests:
+        AllSidequestItemReqs.append(Helper.MultiLevelListToSingleLevelList(sidequest.itemreqs))
+    NewAllSidequestItemReqs = list(set(Helper.MultiLevelListToSingleLevelList(AllSidequestItemReqs)))
+
+    ChosenGate1Quests, ChosenGate2Quests = [], []
+    AlteredGate1Quests, AlteredGate2Quests = CommunityGate1Quests.copy(), CommunityGate2Quests.copy()
     ChosenPeopleGained = 0
-    TotalLevel2QuestRequirements, TotalLevel4QuestRequirements = [], []
+    TotalGate1QuestRequirements, TotalGate2QuestRequirements = [], []
 
-    while ChosenPeopleGained < CommunityReqs[1]:
-        CurrentQuest = random.choice(AlteredLevel2Quests)
-        ChosenLevel2Quests.append(CurrentQuest)
-        ChosenLevel4Quests.append(CurrentQuest)
-        ChosenPeopleGained += CurrentQuest.complus
-        AlteredLevel2Quests.remove(CurrentQuest)
-        AlteredLevel4Quests.remove(CurrentQuest)
-        if CurrentQuest.sideprereq != []:
-            for i in range(10): # should be enough to get dependency chains
-                for quest in ChosenLevel2Quests:
-                    if quest.sideprereq != []:
-                        for prereq in quest.sideprereq:
-                            if TornaSidequests[prereq - 1] not in ChosenLevel2Quests:
-                                ChosenLevel2Quests.append(TornaSidequests[prereq - 1])
-                                ChosenLevel4Quests.append(TornaSidequests[prereq - 1])
-                                ChosenPeopleGained += TornaSidequests[prereq - 1].complus
-                                AlteredLevel2Quests.remove(TornaSidequests[prereq - 1])
-                                AlteredLevel4Quests.remove(TornaSidequests[prereq - 1])
+    if Community1Gate != 0:
+        while ChosenPeopleGained < CommunityReqs[Community1Gate - 1]:
+            CurrentQuest = random.choice(AlteredGate1Quests)
+            ChosenGate1Quests.append(CurrentQuest)
+            ChosenGate2Quests.append(CurrentQuest)
+            ChosenPeopleGained += CurrentQuest.complus
+            AlteredGate1Quests.remove(CurrentQuest)
+            AlteredGate2Quests.remove(CurrentQuest)
+            if CurrentQuest.sideprereq != []:
+                for i in range(10): # should be enough to get dependency chains
+                    for quest in ChosenGate1Quests:
+                        if quest.sideprereq != []:
+                            for prereq in quest.sideprereq:
+                                if TornaSidequests[prereq - 1] not in ChosenGate1Quests:
+                                    ChosenGate1Quests.append(TornaSidequests[prereq - 1])
+                                    ChosenGate2Quests.append(TornaSidequests[prereq - 1])
+                                    ChosenPeopleGained += TornaSidequests[prereq - 1].complus
+                                    AlteredGate1Quests.remove(TornaSidequests[prereq - 1])
+                                    AlteredGate2Quests.remove(TornaSidequests[prereq - 1])
+    if Community2Gate != 0:
+        while ChosenPeopleGained < CommunityReqs[Community2Gate - 1]:
+            CurrentQuest = random.choice(AlteredGate2Quests)
+            ChosenGate2Quests.append(CurrentQuest)
+            ChosenPeopleGained += CurrentQuest.complus
+            AlteredGate2Quests.remove(CurrentQuest)
+            if CurrentQuest.sideprereq != []:
+                for i in range(10): # should be enough to get dependency chains
+                    for quest in ChosenGate2Quests:
+                        if quest.sideprereq != []:
+                            for prereq in quest.sideprereq:
+                                if TornaSidequests[prereq - 1] not in ChosenGate2Quests:
+                                    ChosenGate2Quests.append(TornaSidequests[prereq - 1])
+                                    ChosenPeopleGained += TornaSidequests[prereq - 1].complus
+                                    AlteredGate2Quests.remove(TornaSidequests[prereq - 1])
+    for quest in ChosenGate1Quests:
+        TotalGate1QuestRequirements.extend(quest.itemreqs)
+    for quest in ChosenGate2Quests:
+        TotalGate2QuestRequirements.extend(quest.itemreqs)
+    TotalGate1QuestRequirements = Helper.MultiLevelListToSingleLevelList(TotalGate1QuestRequirements)
+    TotalGate2QuestRequirements = Helper.MultiLevelListToSingleLevelList(TotalGate2QuestRequirements)
+    TotalGate1QuestRequirements = list(set(TotalGate1QuestRequirements))
+    TotalGate2QuestRequirements = list(set(TotalGate2QuestRequirements))
+    TotalGate1QuestRequirements.sort()
+    TotalGate2QuestRequirements.sort()
 
-    while ChosenPeopleGained < CommunityReqs[3]:
-        CurrentQuest = random.choice(AlteredLevel4Quests)
-        ChosenLevel4Quests.append(CurrentQuest)
-        ChosenPeopleGained += CurrentQuest.complus
-        AlteredLevel4Quests.remove(CurrentQuest)
-        if CurrentQuest.sideprereq != []:
-            for i in range(10): # should be enough to get dependency chains
-                for quest in ChosenLevel4Quests:
-                    if quest.sideprereq != []:
-                        for prereq in quest.sideprereq:
-                            if TornaSidequests[prereq - 1] not in ChosenLevel4Quests:
-                                ChosenLevel4Quests.append(TornaSidequests[prereq - 1])
-                                ChosenPeopleGained += TornaSidequests[prereq - 1].complus
-                                AlteredLevel4Quests.remove(TornaSidequests[prereq - 1])
-    
-    for quest in ChosenLevel2Quests:
-        TotalLevel2QuestRequirements.extend(quest.itemreqs)
-    for quest in ChosenLevel4Quests:
-        TotalLevel4QuestRequirements.extend(quest.itemreqs)
-    TotalLevel2QuestRequirements = Helper.MultiLevelListToSingleLevelList(TotalLevel2QuestRequirements)
-    TotalLevel4QuestRequirements = Helper.MultiLevelListToSingleLevelList(TotalLevel4QuestRequirements)
-    TotalLevel2QuestRequirements = list(set(TotalLevel2QuestRequirements))
-    TotalLevel4QuestRequirements = list(set(TotalLevel4QuestRequirements))
-    TotalLevel2QuestRequirements.sort()
-    TotalLevel4QuestRequirements.sort()
-
-    StackStoryRequirements(TotalLevel2QuestRequirements, TotalLevel4QuestRequirements)
+    StackStoryRequirements(TotalGate1QuestRequirements, TotalGate2QuestRequirements)
     #ChangeQuestShops()
-    return ChosenLevel2Quests, ChosenLevel4Quests, TornaSidequests, TornaMainquests
+    return ChosenGate1Quests, ChosenGate2Quests, TornaSidequests, TornaMainquests, NewAllSidequestItemReqs
 
-def StackStoryRequirements(Level2QuestReqs, Level4QuestReqs): # This adds the previous story requirements to the current story step's requirements. I wanted to keep the original requirements clear in case someone makes a tracker from the dictionary above
+def StackStoryRequirements(Gate1QuestReqs, Gate2QuestReqs): # This adds the previous story requirements to the current story step's requirements. I wanted to keep the original requirements clear in case someone makes a tracker from the dictionary above
     for storystep in range(1, len(TornaMainquests)):
         TornaMainquests[storystep].itemreqs.extend(TornaMainquests[storystep - 1].itemreqs) # adds the previous step's requirements
         TornaMainquests[storystep].itemreqs = Helper.MultiLevelListToSingleLevelList(TornaMainquests[storystep].itemreqs) # turns nested lists into one list
         if TornaMainquests[storystep].id == 38:
-            TornaMainquests[storystep].itemreqs.extend(Level2QuestReqs)
+            TornaMainquests[storystep].itemreqs.extend(Gate1QuestReqs)
         elif TornaMainquests[storystep].id == 50:
-            TornaMainquests[storystep].itemreqs.extend(Level4QuestReqs)
+            TornaMainquests[storystep].itemreqs.extend(Gate2QuestReqs)
         TornaMainquests[storystep].itemreqs = list(set(TornaMainquests[storystep].itemreqs))
         TornaMainquests[storystep].itemreqs.sort()

@@ -14,14 +14,14 @@ class TornaEnemyNormalDrops: # created to allow me to pass these objects easier
         self.sideprereq = input['Quest Completion Pre-Req']
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Required Items'])
         self.summonedby = input['Summoned By']
-        self.droptableids = [EnemyDropCounter, EnemyDropCounter + 1]
-        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 3, "0") # holds ids, -1 for progression, 0 for filler spots
+        self.droptableids = [EnemyDropCounter]
+        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], max(rewardnumber - 1, 0), "-1"), 8, "0") # holds ids, -1 for progression, 0 for filler spots
         if rewardnumber > 0:
             self.hasprogression = True
-            self.randomizeditems = Helper.ExtendListtoLength(self.randomizeditems, 4, "-1")
+            self.randomizeditems = Helper.ExtendListtoLength(self.randomizeditems, 9, "-1")
         else:
             self.hasprogression = False
-            self.randomizeditems = Helper.ExtendListtoLength(self.randomizeditems, 4, "0")
+            self.randomizeditems = Helper.ExtendListtoLength(self.randomizeditems, 9, "0")
         addtolist.append(self)
 
 def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy requirements may change depending on the logic of which quests get rolled
@@ -2364,7 +2364,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
 
     for enemy in TornaEnemyDict:
         TornaEnemyNormalDrops(enemy, TornaEnemies, DropQty, EnemyDropCounter)
-        EnemyDropCounter += 2
+        EnemyDropCounter += 1
 
     # adding back other requirements
 

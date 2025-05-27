@@ -71,15 +71,15 @@ def PassAlongSpoilerLogInfo(fileEntryVar2, Version2, permalinkVar2, seedEntryVar
 
 def AllTornaRando():
     DetermineSettings()
-    if ProgressionLocTypes == [0,0,0,0,0,0]:
+    if ProgressionLocTypes[:6] == [0,0,0,0,0,0]:
         print("There are no progression locations enabled, cannot generate seed!")
         return
     #Recipes = TornaRecipes.CreateTornaRecipeList()
     TornaQuests.SelectRandomPointGoal()
     #global Areas, Enemies, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters
     ChosenSupporterAmounts = [1,16,32,48,64] # have a few sliders going forwards to let the player change this amount
-    global ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, Areas, AreaIDtoNameDict, MaxDropTableID, Enemies, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList, FullItemList, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters
-    ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests = TornaQuests.SelectCommunityQuests(ChosenSupporterAmounts, ProgressionLocTypes[0])
+    global ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, Areas, AreaIDtoNameDict, MaxDropTableID, Enemies, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList, FullItemList, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters, AllSidequestProgressionItems
+    ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, AllSidequestProgressionItems = TornaQuests.SelectCommunityQuests(ChosenSupporterAmounts, ProgressionLocTypes[0], ProgressionLocTypes[6], ProgressionLocTypes[7])
     Areas, AreaIDtoNameDict = TornaAreas.CreateAreaInfo(Sidequests, Mainquests)
     Enemies, MaxDropTableID = TornaEnemies.AdjustEnemyRequirements(Sidequests, Mainquests, Areas, ProgressionLocTypes[2])
     Shops = TornaShops.CreateShopInfo(Mainquests, Areas, ProgressionLocTypes[4])
@@ -105,7 +105,7 @@ def AllTornaRando():
 
 def DetermineSettings():
     global ProgressionLocTypes
-    SidequestRewardQty, CollectionPointQty, EnemyDropQty, TreasureChestQty, ShopQty, GroundItemQty = 0,0,0,0,0,0
+    SidequestRewardQty, CollectionPointQty, EnemyDropQty, TreasureChestQty, ShopQty, GroundItemQty, Gate1CommReq, Gate2CommReq = 0,0,0,0,0,0,2,4
     
     if Options.TornaOption_SideQuests.GetState(): # if Sidequest Rewards are randomized
         SidequestRewardQty = Options.TornaOption_SideQuests.GetOdds()
@@ -125,7 +125,15 @@ def DetermineSettings():
     if Options.TornaOption_GroundItems.GetState(): # if Ground Items are randomized
         GroundItemQty = 1
 
-    ProgressionLocTypes = [SidequestRewardQty, CollectionPointQty, EnemyDropQty, TreasureChestQty, ShopQty, GroundItemQty]
+    if Options.TornaOption_ChooseLevel2CommunityReq.GetState(): # if we are changing the first community gate requirement
+        Gate1CommReq = Options.TornaOption_ChooseLevel2CommunityReq.GetOdds()
+        AddNewFlagPointers(Gate1CommReq, 1)
+
+    if Options.TornaOption_ChooseLevel4CommunityReq.GetState(): # if we are changing the second community gate requirement
+        Gate2CommReq = Options.TornaOption_ChooseLevel4CommunityReq.GetOdds()
+        AddNewFlagPointers(Gate2CommReq, 2)
+
+    ProgressionLocTypes = [SidequestRewardQty, CollectionPointQty, EnemyDropQty, TreasureChestQty, ShopQty, GroundItemQty, Gate1CommReq, Gate2CommReq]
 
 def CreateItemLists():
     CollectionMaterialList, AuxCoreList, WeaponChipList, AccessoryList, WeaponAccessoryList, KeyItemList = [], [], [], [], [], []
@@ -207,26 +215,26 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
                     stucknotice = 0
                     while decidedonlocation == False:
                         try:
-                            ChosenLocation = random.choice(ValidLocations)
+                            ChosenLocation = random.choices(ValidLocations, weights=[loc.randomizeditems.count(-1) for loc in ValidLocations])[0] # this technically has a slight bias towards enemies due to the way I do the randomization of them, splitting up the progression items into the normal item slots, and the key item slot (so enemies all have 1 more weight than they should)
                             for cat in CatList:
                                 for loc in cat.fullloclist:
                                     if loc.name == ChosenLocation.name and loc.type == ChosenLocation.type:
                                         ChosenLocation = loc
                         except:
                             print(f"Generation failed during location selection: No valid locations available for {ChosenItem.name}!")
-                        if ChosenItemCat == "KeyItem" and ChosenLocation.type in ["sidequest", "uniquemonster", "boss", "normalenemy"]: # enemy drops need to be handled differently, there's a set spot for key items, only 1 spot is open, not 3, so we need to account for that
-                            if ChosenLocation.randomizeditems[3] == -1: # if there's a spot open for a precious item, and there's no spots for other items left, the location needs to be removed from the list of remaining progress locations
-                                ChosenLocation.randomizeditems[3] = ChosenItem
+                        if ChosenItemCat == "KeyItem" and ChosenLocation.type in ["uniquemonster", "boss", "normalenemy"]: # enemy drops need to be handled differently, there's a set spot for key items, only 1 spot is open, not 3, so we need to account for that
+                            if ChosenLocation.randomizeditems[8] == -1: # if there's a spot open for a precious item, and there's no spots for other items left, the location needs to be removed from the list of remaining progress locations
+                                ChosenLocation.randomizeditems[8] = ChosenItem
                                 decidedonlocation = True
                             else:
                                 ValidLocations.remove(ChosenLocation)
                                 continue
-                        elif ChosenLocation.type in ["sidequest", "uniquemonster", "boss", "normalenemy"]: #if the location the item is being placed is an enemy, but the item is not a key item, there's 3 slots open for it, so check those for an opening
-                            if -1 not in ChosenLocation.randomizeditems[:2]:
+                        elif ChosenLocation.type in ["uniquemonster", "boss", "normalenemy"]: #if the location the item is being placed is an enemy, but the item is not a key item, there's 3 slots open for it, so check those for an opening
+                            if -1 not in ChosenLocation.randomizeditems[:8]:
                                 ValidLocations.remove(ChosenLocation)
                                 continue
                             else:
-                                for itemspot in range(len(ChosenLocation.randomizeditems[:2])):
+                                for itemspot in range(len(ChosenLocation.randomizeditems[:8])):
                                     if ChosenLocation.randomizeditems[itemspot] == -1: # if we find a progression spot
                                         ChosenLocation.randomizeditems[itemspot] = ChosenItem # put the chosen item into that spot
                                         decidedonlocation = True
@@ -252,7 +260,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
                     PlacedItems.append(ChosenItem)
                     KeyItemtoLocDict[ChosenItem] = ChosenLocation
                     PlacedItems.sort()
-                    if ChosenLocation.type in ["sidequest", "uniquemonster", "boss", "normalenemy"] and ChosenLocation.randomizeditems.count(-1) == 1:
+                    if ChosenLocation.type in ["uniquemonster", "boss", "normalenemy"] and ChosenLocation.randomizeditems.count(-1) == 1:
                         for cat in CatList:
                             for loc in cat.remlocations:
                                 if loc.name == ChosenLocation.name and loc.type == ChosenLocation.type:
@@ -278,6 +286,23 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
             FullItemReqList.extend(check.itemreqs)
     FullItemReqList.extend(ValidRecipeInfoIDs)
     FullItemReqList = list(set(FullItemReqList))
+    #LocNameList = {"Side Quests": [], "Normal Enemies": [], "Unique Monsters": [], "Bosses": [], "Quest Enemies": [], "Ground Item Spots": [], "Miscellaneous":[], "Chests": [], "Shops": [], "Collection Points (Torna)":[], "Collection Points (Gormott)": []}
+    #for loc in Locs:
+    #    for check in loc:
+    #        LocNameList[LocTypetoSpoilerLogHeader[check.type]].append(check.name)
+    #for cat in LocNameList.keys():
+    #    print(cat)
+    #    print(LocNameList[cat])
+    #FullItemReqList.extend(AllSidequestProgressionItems)
+    #FullItemReqList = list(set(FullItemReqList))
+    FullItemReqList.sort()
+    #FullItemNameReqList = []
+    #for item in FullItemReqList:
+    #    FullItemNameReqList.append(ItemIDtoItemName[item])
+    #AllTrackedItemsIDtoNameDict = {}
+    #for item in range(len(FullItemReqList)):
+    #    AllTrackedItemsIDtoNameDict[FullItemReqList[item]] = FullItemNameReqList[item]
+    #print(AllTrackedItemsIDtoNameDict)
     UnplacedProgressionItems = [x for x in FullItemReqList if x not in PlacedItems] # this holds the items that unlock stuff but don't logically contribute to the playthrough
     #UnplacedLevelUpTokens = [x for x in UnplacedProgressionItems if x in LevelUpTokens] # we want to get only the level up tokens, note down the id number, then determine past what level, you can easily get exp.
     #MinLogicalLevel = UnplacedLevelUpTokens[0] - 25626
@@ -298,10 +323,11 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
     AuxCoreList = FullItemList[3]
     CollectionMaterialList = FullItemList[4]
     CollectionMaterialList = [item for item in CollectionMaterialList if item.id not in FullItemReqList]
-    FullItemList[4] = CollectionMaterialList
-    FullItemList.append(HelpfulUnplacedUpgrades)
+    NewItemList = [AccessoryList, WeaponAccessoryList, WeaponChipList, AuxCoreList]
+    NewItemList.append(CollectionMaterialList)
+    NewItemList.append(HelpfulUnplacedUpgrades)
     SelectiveItemPool = []
-    for cat in FullItemList:
+    for cat in NewItemList:
         SelectiveItemPool.append(random.choices(cat, k = PoolMaxItemsPerCategory))
     SelAccList, SelWAccList, SelChipList, SelXCoreList, SelMatList, SelUpgradeList = SelectiveItemPool[0], SelectiveItemPool[1], SelectiveItemPool[2], SelectiveItemPool[3], SelectiveItemPool[4], SelectiveItemPool[5]
     SelFull = SelAccList + SelWAccList + SelChipList + SelXCoreList + SelMatList + SelUpgradeList
@@ -324,15 +350,24 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
             for remloc in cat.fullloclist:
                 for item in range(len(remloc.randomizeditems)):
                     if remloc.randomizeditems[item] in [0, -1]:
-                        remloc.randomizeditems[item] = random.choice(ValidItems).id
+                        if Helper.OddsCheck(25):
+                            remloc.randomizeditems[item] = random.choice(ValidItems).id
+                        else:
+                            remloc.randomizeditems[item] = 0
                 FilledLocations.append(remloc)
         else:
             for remloc in cat.fullloclist:
-                for item in range(2):
+                for item in range(8):
                     if remloc.randomizeditems[item] in [0, -1]:
-                        remloc.randomizeditems[item] = random.choice(ValidItems).id
-                if remloc.randomizeditems[3] in [0, -1]:
-                    remloc.randomizeditems[3] = random.choice(SelUpgradeList).id
+                        if Helper.OddsCheck(25):
+                            remloc.randomizeditems[item] = random.choice(ValidItems).id
+                        else:
+                            remloc.randomizeditems[item] = 0
+                if remloc.randomizeditems[8] in [0, -1]:
+                    if Helper.OddsCheck(50):
+                        remloc.randomizeditems[8] = random.choice(SelUpgradeList).id
+                    else:
+                        remloc.randomizeditems[8] = 0
                 FilledLocations.append(remloc)
     for cat in CatList:
         for loc in cat.fullloclist:
@@ -346,8 +381,6 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
 
 def DetermineValidItemSpots(ChosenItem, ChosenItemCat, CatList, CurrentStoryStep = -1): # certain item types cannot coexist with certain location types. collectible items cannot be put as quest rewards, since there is no renewable source of them in case the player uses them all up, for instance.
     ValidItemSpots = []
-    if ChosenItem == 30392:
-        pass
     match ChosenItemCat:
         case "CollectionMat":
             for cat in CatList:
@@ -423,17 +456,20 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
                     if row["$id"] == rewardid:
                         for i in range(4):
                             row[f"ItemID{i+1}"] = sidequest.randomizeditems[i]
-                            row[f"ItemNumber{i+1}"] = 1
+                            if row[f"ItemID{i+1}"] != 0:
+                                row[f"ItemNumber{i+1}"] = 1
+                            else:
+                                row[f"ItemNumber{i+1}"] = 0
                         break      
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-    # enemy drops    
+    # enemy drops
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", Helper.ExtendListtoLength(["ItemID1", "DropProb1", "NoGetByEnh1", "FirstNamed1"], 32, "inputlist[i-4][:-1] +  str(int(inputlist[i-4][-1:])+1)"), 0)
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", ["DropProb1"], 100) # the first loot item in each row has a 100% chance to drop every time.
+    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", ["DropProb1", "DropProb2", "DropProb3", "DropProb4", "DropProb5", "DropProb6", "DropProb7", "DropProb8"], 1000) # the first loot item in each row has a 100% chance to drop every time.
     MaxEnemyLootID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", "$id")
-    if MaxDropTableID > MaxEnemyLootID: # need to add a row to BTL_EnDropItem for each regular loot drop 
+    if MaxDropTableID > MaxEnemyLootID: # need to add a row to BTL_EnDropItem for each enemy past the max # of rows 
         NewLootIDRows = []
         for tableid in range(MaxEnemyLootID + 1, MaxDropTableID + 1):
             NewLootIDRows.append([{"$id": tableid, "LimitNum": 0, "SelectType": 0, "ItemID1": 0, "DropProb1": 0, "NoGetByEnh1": 0, "FirstNamed1": 0, "ItemID2": 0, "DropProb2": 0, "NoGetByEnh2": 0, "FirstNamed2": 0, "ItemID3": 0, "DropProb3": 0, "NoGetByEnh3": 0, "FirstNamed3": 0, "ItemID4": 0, "DropProb4": 0, "NoGetByEnh4": 0, "FirstNamed4": 0, "ItemID5": 0, "DropProb5": 0, "NoGetByEnh5": 0, "FirstNamed5": 0, "ItemID6": 0, "DropProb6": 0, "NoGetByEnh6": 0, "FirstNamed6": 0, "ItemID7": 0, "DropProb7": 0, "NoGetByEnh7": 0, "FirstNamed7": 0, "ItemID8": 0, "DropProb8": 0, "NoGetByEnh8": 0, "FirstNamed8": 0}])
@@ -445,9 +481,7 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
                 for row in data["rows"]:
                     if row["$id"] == enemy.id:
                         row["DropTableID"] = enemy.droptableids[0]
-                        row["DropTableID2"] = enemy.droptableids[1]
-                        #row["DropTableID3"] = enemy.droptableids[2] # this should always be 0, but in case I decide to change the future behavior
-                        row["PreciousID"] = enemy.randomizeditems[3] # the precious id just gets the id itself plugged in here
+                        row["PreciousID"] = enemy.randomizeditems[8] # the precious id just gets the id itself plugged in here
                         break
         file.seek(0)
         file.truncate()
@@ -457,13 +491,12 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         for enemytype in range(1, 5):
             for enemy in Locs[enemytype]:
                 for row in data["rows"]:
-                    if row["$id"] in enemy.droptableids:
-                        if row["$id"] == enemy.droptableids[0]:
-                            row["ItemID1"] = enemy.randomizeditems[0]
-                            break
-                        if row["$id"] == enemy.droptableids[1]:
-                            row["ItemID1"] = enemy.randomizeditems[1]
-                            break
+                    if row["$id"] == enemy.droptableids[0]:
+                        for i in range(1, 9):
+                            row[f"ItemID{i}"] = enemy.randomizeditems[i - 1]
+                            if row[f"ItemID{i}"] == 0:
+                                row[f"DropProb{i}"] = 0
+                        break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -547,18 +580,26 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
                 if chest.continent == "Torna":
                     for rowT in dataT["rows"]:
                         if rowT["$id"] == chest.id:
-                            for i in range(1, 8):
+                            for i in range(1, 9):
                                 rowT[f"itm{i}ID"] = chest.randomizeditems[i-1]
-                                rowT[f"itm{i}Num"] = 1
-                                rowT[f"itm{i}Per"] = 100
+                                if rowT[f"itm{i}ID"] != 0:
+                                    rowT[f"itm{i}Num"] = 1
+                                    rowT[f"itm{i}Per"] = 100
+                                else:
+                                    rowT[f"itm{i}Num"] = 0
+                                    rowT[f"itm{i}Per"] = 0
                             break
                 else:
                     for rowG in dataG["rows"]:
                         if rowG["$id"] == chest.id:
-                            for i in range(1, 8):
+                            for i in range(1, 9):
                                 rowG[f"itm{i}ID"] = chest.randomizeditems[i-1]
-                                rowG[f"itm{i}Num"] = 1
-                                rowG[f"itm{i}Per"] = 100
+                                if rowG[f"itm{i}ID"] != 0:
+                                    rowG[f"itm{i}Num"] = 1
+                                    rowG[f"itm{i}Per"] = 100
+                                else:
+                                    rowG[f"itm{i}Num"] = 0
+                                    rowG[f"itm{i}Per"] = 0
                             break
             fileG.seek(0)
             fileG.truncate()
@@ -615,6 +656,8 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
                         row["FSID"] = random.choice(Helper.InclRange(68, 72)) # add a bonus for a random field skill
                         for item in range(1, 5):
                             row[f"itm{item}ID"] = collectionpoint.randomizeditems[item-1]
+                            if row[f"itm{item}ID"] == 0:
+                                row[f"itm{item}Per"] = 0
                         break
         file.seek(0)
         file.truncate()
@@ -631,7 +674,7 @@ def ConsolidateLevelUpTokens(Locs): # need to now remove all level up tokens and
 def AddMissingKeyItems():
     NewDescID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
     KeyItemNames = ["Mineralogy Lv. 1 Unlock", "Mineralogy Lv. 2 Unlock", "Mineralogy Lv. 3 Unlock", "Swordplay Lv. 1 Unlock", "Swordplay Lv. 2 Unlock", "Swordplay Lv. 3 Unlock", "Fortitude Lv. 1 Unlock", "Fortitude Lv. 2 Unlock", "Fortitude Lv. 3 Unlock", "Forestry Lv. 1 Unlock", "Forestry Lv. 2 Unlock", "Forestry Lv. 3 Unlock", "Manipulate Ether Lv. 1 Unlock", "Manipulate Ether Lv. 2 Unlock", "Manipulate Ether Lv. 3 Unlock", "Keen Eye Lv. 1 Unlock", "Keen Eye Lv. 2 Unlock", "Keen Eye Lv. 3 Unlock", "Focus Lv. 1 Unlock", "Focus Lv. 2 Unlock", "Focus Lv. 3 Unlock", "Power of Light Lv. 1 Unlock", "Power of Light Lv. 2 Unlock", "Power of Light Lv. 3 Unlock", "Girls' Talk Unlock", "Entomology Lv. 1 Unlock", "Entomology Lv. 2 Unlock", "Entomology Lv. 3 Unlock", "Mining Lv. 1 Unlock", "Mining Lv. 2 Unlock", "Mining Lv. 3 Unlock", "Botany Lv. 1 Unlock", "Botany Lv. 2 Unlock", "Botany Lv. 3 Unlock", "Lockpick Lv. 1 Unlock", "Lockpick Lv. 2 Unlock", "Lockpick Lv. 3 Unlock", "Icthyology Lv. 1 Unlock", "Icthyology Lv. 2 Unlock", "Icthyology Lv. 3 Unlock", "Command Water Lv. 1 Unlock", "Command Water Lv. 2 Unlock", "Command Water Lv. 3 Unlock", "Superstrength Lv. 1 Unlock", "Superstrength Lv. 2 Unlock", "Superstrength Lv. 3 Unlock", "Aletta Garrison Camp Unlock", "Coolley Lake Camp Unlock", "Dannagh Desert Camp Unlock", "Feltley Village Camp Unlock", "Hidden Hunting Camp Unlock", "Hoary Weald Camp Unlock", "Holy Gate Camp Unlock", "Lakeshore Campsite Unlock", "Olnard's Trail Campsite Unlock", "Porton Village Camp Unlock", "Jin Affinity Lv. 2 Unlock", "Jin Affinity Lv. 3 Unlock", "Jin Affinity Lv. 4 Unlock", "Jin Affinity Lv. 5 Unlock", "Haze Affinity Lv. 2 Unlock", "Haze Affinity Lv. 3 Unlock", "Haze Affinity Lv. 4 Unlock", "Haze Affinity Lv. 5 Unlock", "Mythra Affinity Lv. 2 Unlock", "Mythra Affinity Lv. 3 Unlock", "Mythra Affinity Lv. 4 Unlock", "Mythra Affinity Lv. 5 Unlock", "Minoth Affinity Lv. 2 Unlock", "Minoth Affinity Lv. 3 Unlock", "Minoth Affinity Lv. 4 Unlock", "Minoth Affinity Lv. 5 Unlock", "Brighid Affinity Lv. 2 Unlock", "Brighid Affinity Lv. 3 Unlock", "Brighid Affinity Lv. 4 Unlock", "Brighid Affinity Lv. 5 Unlock", "Aegaeon Affinity Lv. 2 Unlock", "Aegaeon Affinity Lv. 3 Unlock", "Aegaeon Affinity Lv. 4 Unlock", "Aegaeon Affinity Lv. 5 Unlock", "Haze Unlock Key", "Addam Unlock Key", "Mythra Unlock Key", "Minoth Unlock Key", "Hugo Unlock Key", "Brighid Unlock Key", "Aegaeon Unlock Key", "Level Up Token"]
-    KeyItemDescriptions = ["Unlocks the Mineralogy Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Mineralogy Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Mineralogy Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Swordplay Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Swordplay Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Swordplay Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Fortitude Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Fortitude Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Fortitude Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Forestry Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Forestry Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Forestry Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Manipulate Ether Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Manipulate Ether Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Manipulate Ether Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Keen Eye Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Keen Eye Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Keen Eye Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Focus Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Focus Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Focus Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Power of Light Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Power of Light Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Power of Light Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Girls' Talk Field Skill when the correct trust level is reached for that blade.", "Unlocks the Entomology Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Entomology Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Entomology Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Mining Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Mining Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Mining Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Botany Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Botany Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Botany Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Lockpick Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Lockpick Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Lockpick Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Icthyology Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Icthyology Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Icthyology Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Command Water Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Command Water Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Command Water Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Superstrength Lv. 1 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Superstrength Lv. 2 Field Skill when the correct trust level is reached for that blade.", "Unlocks the Superstrength Lv. 3 Field Skill when the correct trust level is reached for that blade.", "Unlocks the ability to rest at the Aletta Garrison Campsite.", "Unlocks the ability to rest at the Coolley Lake Campsite.", "Unlocks the ability to rest at the Dannagh Desert Campsite.", "Unlocks the ability to rest at the Feltley Village Campsite.", "Unlocks the ability to rest at the Hidden Hunting Campsite.", "Unlocks the ability to rest at the Hoary Weald Campsite.", "Unlocks the ability to rest at the Holy Gate Campsite.", "Unlocks the ability to rest at the Lakeshore Campsite.", "Unlocks the ability to rest at the Olnard's Trail Campsite.", "Unlocks the ability to rest at the Porton Village Campsite.", "Unlocks Level 2 of Jin's Affinity Chart.", "Unlocks Level 3 of Jin's Affinity Chart.", "Unlocks Level 4 of Jin's Affinity Chart.", "Unlocks Level 5 of Jin's Affinity Chart.", "Unlocks Level 2 of Haze's Affinity Chart.", "Unlocks Level 3 of Haze's Affinity Chart.", "Unlocks Level 4 of Haze's Affinity Chart.", "Unlocks Level 5 of Haze's Affinity Chart.", "Unlocks Level 2 of Mythra's Affinity Chart.", "Unlocks Level 3 of Mythra's Affinity Chart.", "Unlocks Level 4 of Mythra's Affinity Chart.", "Unlocks Level 5 of Mythra's Affinity Chart.", "Unlocks Level 2 of Minoth's Affinity Chart.", "Unlocks Level 3 of Minoth's Affinity Chart.", "Unlocks Level 4 of Minoth's Affinity Chart.", "Unlocks Level 5 of Minoth's Affinity Chart.", "Unlocks Level 2 of Brighid's Affinity Chart.", "Unlocks Level 3 of Brighid's Affinity Chart.", "Unlocks Level 4 of Brighid's Affinity Chart.", "Unlocks Level 5 of Brighid's Affinity Chart.", "Unlocks Level 2 of Aegaeon's Affinity Chart.", "Unlocks Level 3 of Aegaeon's Affinity Chart.", "Unlocks Level 4 of Aegaeon's Affinity Chart.", "Unlocks Level 5 of Aegaeon's Affinity Chart.", 'Unlocks the ability to add Haze to your party.', 'Unlocks the ability to add Addam to your party.', 'Unlocks the ability to add Mythra to your party.', 'Unlocks the ability to add Minoth to your party.', 'Unlocks the ability to add Hugo to your party.', 'Unlocks the ability to add Brighid to your party.', 'Unlocks the ability to add Aegaeon to your party.', "Can be exchanged for 1 level's worth of EXP at the Token Exchange."]
+    KeyItemDescriptions = ["Unlocks the Mineralogy Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Mineralogy Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Mineralogy Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Swordplay Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Swordplay Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Swordplay Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Fortitude Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Fortitude Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Fortitude Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Forestry Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Forestry Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Forestry Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Manipulate Ether Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Manipulate Ether Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Manipulate Ether Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Keen Eye Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Keen Eye Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Keen Eye Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Focus Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Focus Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Focus Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Power of Light Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Power of Light Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Power of Light Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Girls' Talk Field Skill\nwhen the correct trust level is reached.", "Unlocks the Entomology Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Entomology Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Entomology Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Mining Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Mining Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Mining Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Botany Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Botany Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Botany Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Lockpick Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Lockpick Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Lockpick Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Icthyology Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Icthyology Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Icthyology Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Command Water Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Command Water Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Command Water Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Superstrength Lv. 1 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Superstrength Lv. 2 Field Skill\nwhen the correct trust level is reached.", "Unlocks the Superstrength Lv. 3 Field Skill\nwhen the correct trust level is reached.", "Unlocks the ability to rest at\nthe Aletta Garrison Campsite.", "Unlocks the ability to rest at\nthe Coolley Lake Campsite.", "Unlocks the ability to rest at\nthe Dannagh Desert Campsite.", "Unlocks the ability to rest at\nthe Feltley Village Campsite.", "Unlocks the ability to rest at\nthe Hidden Hunting Campsite.", "Unlocks the ability to rest at\nthe Hoary Weald Campsite.", "Unlocks the ability to rest at\nthe Holy Gate Campsite.", "Unlocks the ability to rest at\nthe Lakeshore Campsite.", "Unlocks the ability to rest at\nthe Olnard's Trail Campsite.", "Unlocks the ability to rest at\nthe Porton Village Campsite.", "Unlocks Level 2 of \nJin's Affinity Chart.", "Unlocks Level 3 of \nJin's Affinity Chart.", "Unlocks Level 4 of \nJin's Affinity Chart.", "Unlocks Level 5 of \nJin's Affinity Chart.", "Unlocks Level 2 of \nHaze's Affinity Chart.", "Unlocks Level 3 of \nHaze's Affinity Chart.", "Unlocks Level 4 of \nHaze's Affinity Chart.", "Unlocks Level 5 of \nHaze's Affinity Chart.", "Unlocks Level 2 of\nMythra's Affinity Chart.", "Unlocks Level 3 of\nMythra's Affinity Chart.", "Unlocks Level 4 of\nMythra's Affinity Chart.", "Unlocks Level 5 of\nMythra's Affinity Chart.", "Unlocks Level 2 of\nMinoth's Affinity Chart.", "Unlocks Level 3 of\nMinoth's Affinity Chart.", "Unlocks Level 4 of\nMinoth's Affinity Chart.", "Unlocks Level 5 of\nMinoth's Affinity Chart.", "Unlocks Level 2 of \nBrighid's Affinity Chart.", "Unlocks Level 3 of \nBrighid's Affinity Chart.", "Unlocks Level 4 of \nBrighid's Affinity Chart.", "Unlocks Level 5 of \nBrighid's Affinity Chart.", "Unlocks Level 2 of \nAegaeon's Affinity Chart.", "Unlocks Level 3 of \nAegaeon's Affinity Chart.", "Unlocks Level 4 of \nAegaeon's Affinity Chart.", "Unlocks Level 5 of \nAegaeon's Affinity Chart.", 'Unlocks the ability to add\nHaze to your party.', 'Unlocks the ability to add\nAddam to your party.', 'Unlocks the ability to add\nMythra to your party.', 'Unlocks the ability to add\nMinoth to your party.', 'Unlocks the ability to add\nHugo to your party.', 'Unlocks the ability to add\nBrighid to your party.', 'Unlocks the ability to add\nAegaeon to your party.', "Can be exchanged for 1 level's worth of EXP at the Token Exchange."]
     KeyItemPreciousIDs = [25544, 25545, 25546, 25547, 25548, 25549, 25550, 25551, 25552, 25553, 25554, 25555, 25556, 25557, 25558, 25559, 25560, 25561, 25562, 25563, 25564, 25565, 25566, 25567, 25568, 25569, 25570, 25571, 25572, 25573, 25574, 25575, 25576, 25577, 25578, 25579, 25580, 25581, 25582, 25583, 25584, 25585, 25586, 25587, 25588, 25589, 25590, 25591, 25592, 25593, 25594, 25595, 25596, 25597, 25598, 25599, 25600, 25601, 25602, 25603, 25604, 25605, 25606, 25607, 25608, 25609, 25610, 25611, 25612, 25613, 25614, 25615, 25616, 25617, 25618, 25619, 25620, 25621, 25622, 25623, 25624, 25625, 25626, 25627, 25628, 25629, 25630, 25631]
     KeyItemList = []
     for name in range(len(KeyItemNames)):
@@ -642,7 +685,7 @@ def AddMissingKeyItems():
         NewPreciousListItems.append([{"$id": item.preciousid, "Name": item.nameid, "Caption": item.captionid, "Category": 29, "Type": 0, "Price": 1, "ValueMax": 1, "ClearNewGame": 1, "NoMultiple": 0, "sortJP": item.preciousid, "sortGE": item.preciousid, "sortFR": item.preciousid, "sortSP": item.preciousid, "sortIT": item.preciousid, "sortGB": item.preciousid, "sortCN": item.preciousid, "sortTW": item.preciousid, "sortKR": item.preciousid}])
         NewDescList.append([{"$id": item.nameid, "style": 36, "name": item.name}])
         NewDescList.append([{"$id": item.captionid, "style": 61, "name": item.caption}])
-    JSONParser.ExtendJSONFile("common/ITM_PreciousList.json", NewPreciousListItems)
+    JSONParser.ExtendJSONFile("common/ITM_PreciousListIra.json", NewPreciousListItems)
     JSONParser.ExtendJSONFile("common_ms/itm_precious.json", NewDescList)
 
 def CreateLevelCaps(): 
@@ -670,9 +713,9 @@ def CreateLevelCaps():
         for row in data["rows"]:
             match row["$id"]:
                 case 1430 | 1433 | 1434 | 1437 | 1442 | 1632 | 1443: # all enemies that raise level cap upon defeat
-                    row["ExpRev"] = 100 # 1000*1000 = 100000, but caps at 99999
+                    row["ExpRev"] = 10000 # 10000% of 1000
                 case _:
-                    row["ExpRev"] = 0 # all other enemies get 0*1000 = 0
+                    row["ExpRev"] = 0 # all other enemies get 0*99999 = 0
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -791,7 +834,7 @@ def SkillTreeSetup(): # sets up the blade skill tree nodes for each blade.
                                 FLDQuestListAchievementNewRows.append({"$id": CurMaxQuestListAchievementID + 1, "QuestTitle": 0, "QuestCategory": 6, "Visible": 0, "Talker": 0, "Summary": 0, "ResultA": 0, "ResultB": 0, "SortNo": 0, "RewardDisp": 0, "RewardSetA": 0, "RewardSetB": 0, "PRTQuestID": CurMaxQuestListAchievementID, "FlagPRT": 0, "FlagCLD": 0, "PurposeID": CurMaxPurposeID, "CountCancel": 0, "NextQuestA": 30000, "CallEventA": 0, "NextQuestB": 0, "CallEventB": 0, "HintsID": 0, "ClearVoice": 0, "AutoStart": 0, "ItemLost": 0, "CancelCondition": 0, "QuestIcon": 0, "LinkedQuestID": 0})
                                 FLDQuestTaskAchievementNewRows.append({"$id": CurMaxPurposeID, "PreCondition": 0, "TaskType1": 3, "TaskID1": CurMaxQuestCollectID, "Branch1": 0, "TaskLog1": CurMaxTaskLogID, "TaskUI1": 0, "TaskCondition1": 0, "TaskType2": 0, "TaskID2": 0, "Branch2": 0, "TaskLog2": 0, "TaskUI2": 0, "TaskCondition2": 0, "TaskType3": 0, "TaskID3": 0, "Branch3": 0, "TaskLog3": 0, "TaskUI3": 0, "TaskCondition3": 0, "TaskType4": 0, "TaskID4": 0, "Branch4": 0, "TaskLog4": 0, "TaskUI4": 0, "TaskCondition4": 0})
                                 FLDQuestCollectNewRows.append({"$id": CurMaxQuestCollectID, "Refer": 4, "ItemID": blade.unlockkeyids[CurRank], "Category": 0, "Count": 1, "Deduct": 0, "TresureID": 0, "EnemyID": 0, "MapID": 0, "NpcID": 0, "CollectionID": 0})
-                                fldquestachievementtextfilenewrows.append({"$id": CurMaxTaskLogID, "style": 62, "name": "Unlocked by the respective unlock key item\nfound in locations across Alrest."})
+                                fldquestachievementtextfilenewrows.append({"$id": CurMaxTaskLogID, "style": 62, "name": "Unlocked by the respective unlock key\nitem found in locations across Alrest."})
                                 CurMaxQuestListAchievementID += 2
                                 CurMaxPurposeID += 1
                                 CurMaxQuestCollectID += 1
@@ -1020,12 +1063,15 @@ def GenerateHints():
                 case "normalenemy" | "uniquemonster" | "boss" | "questenemy":
                     HintedItemText.append(f"{ItemIDtoItemName[item]} can be found by defeating {KeyItemtoLocDict[item].name} near {AreaIDtoNameDict[KeyItemtoLocDict[item].nearloc].name}.")
                 case "sidequest":
-                    HintedItemText.append(f"{ItemIDtoItemName[item]} can be found by completing {KeyItemtoLocDict[item].name}.")
+                    HintedItemText.append(f"{ItemIDtoItemName[item]} can be found by completing \"{KeyItemtoLocDict[item].name}\".")
                 case _:
                     HintedItemText.append(f"{ItemIDtoItemName[item]} can be found at {KeyItemtoLocDict[item].name} near {AreaIDtoNameDict[KeyItemtoLocDict[item].nearloc].name}.")
             ItemHintNames.append(f"{ItemIDtoItemName[item]}")
             ItemHintCheckLoc.append(f"{KeyItemtoLocDict[item].name}")
-            ItemHintCheckNear.append(f"{AreaIDtoNameDict[KeyItemtoLocDict[item].nearloc].name}")
+            try:
+                ItemHintCheckNear.append(f"{AreaIDtoNameDict[KeyItemtoLocDict[item].nearloc].name}")
+            except:
+                ItemHintCheckNear.append("null")
     if Options.TornaOption_LocProgCountHints.GetState():
         HintedLocs = random.sample(list(AreaIDtoNameDict.keys()), Options.TornaOption_LocProgCountHints.GetOdds())
         for loc in HintedLocs:
@@ -1119,6 +1165,15 @@ def AddHintstoBdats():
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+def AddNewFlagPointers(GateCommReq, GateNumber): # if we reduce the required community level, we want to make a separate FLD_ConditionList row, with a different Condition1 value, to avoid screwing up any other events relying on that Flag Condition ()
+    NewCondFlagRowID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionFlag.json","$id") + 1
+    if GateNumber == 1:
+        JSONParser.ChangeJSONLine(["common/FLD_ConditionList.json"], [2918], ["Condition1"], NewCondFlagRowID)
+        JSONParser.ExtendJSONFile("common/FLD_ConditionFlag.json", [[{"$id": NewCondFlagRowID, "FlagType": 4, "FlagID": 652, "FlagMin": GateCommReq, "FlagMax": 6}]])
+    else:
+        JSONParser.ChangeJSONLine(["common/FLD_ConditionList.json"], [2919], ["Condition1"], NewCondFlagRowID)
+        JSONParser.ExtendJSONFile("common/FLD_ConditionFlag.json", [[{"$id": NewCondFlagRowID, "FlagType": 4, "FlagID": 652, "FlagMin": GateCommReq, "FlagMax": 6}]])
+
 def CreateSpoilerLog():
     IDstoAdd = []
     DesiredSpoilerLogDirectory = os.path.dirname(fileEntryVar.get()) + "/Torna_Spoiler_Logs"
@@ -1139,8 +1194,7 @@ def CreateSpoilerLog():
         if OptionVal == True: # if the option is checked
             if option.hasSpinBox == True:
                 OptionOdds = option.GetOdds()
-                if OptionOdds != 0: # slider and not 0
-                    debugfile.write(f" {OptionName}: {OptionOdds};")
+                debugfile.write(f" {OptionName}: {OptionOdds};")
             else:
                 debugfile.write(f" {OptionName};")
     debugfile.write("\n\n")
@@ -1172,7 +1226,7 @@ def CreateSpoilerLog():
     alllines.append("\n")
     if HintedItemText != [] or HintedLocText != []:
         alllines.append("Hints:")
-        alllines.append("\n")
+        alllines.append("\n\n")
         if HintedItemText != []:
             alllines.append("     Item Hints:\n\n")
             for hint in HintedItemText:

@@ -506,7 +506,7 @@ def CreateAreaInfo(Sidequests, Mainquests):
     PlanusBridge = {
         '$id': 2356,
         'Name': 'Planus Bridge',
-        'Previous Location Reachable': 'Outrider\,s Forest Trail',
+        'Previous Location Reachable': 'Outrider\'s Forest Trail',
         'Story Pre-Req': [36],
         'Item Reqs': []
     }
