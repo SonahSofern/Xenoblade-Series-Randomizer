@@ -2,18 +2,19 @@ import json, Options, IDs, random
 from scripts import JSONParser, Helper, PopupDescriptions
 
 def FieldItems():
-    isCollect = Options.CollectableOptions_Collectables.GetState()
+    isCol = Options.CollectableOptions_Collectables.GetState()
     isMat = Options.CollectableOptions_Materials.GetState()
     isArm = Options.CollectableOptions_Armor.GetState()
     isWep = Options.CollectableOptions_Weapons.GetState()
     isGem = Options.CollectableOptions_Gems.GetState()
     isCry = Options.CollectableOptions_Crystals.GetState()
     isArt = Options.CollectableOptions_ArtBooks.GetState()
+    isKey = Options.CollectableOptions_KeyItems.GetState()
     odds = Options.CollectableOptions.GetSpinbox()
     
     itemList = []
     
-    if isCollect:
+    if isCol:
         itemList.append(IDs.CollectableIDs)
     if isMat:
         itemList.append(IDs.MaterialIDs)
@@ -27,6 +28,8 @@ def FieldItems():
         itemList.append(IDs.CrystalIDs)
     if isArt:
         itemList.append(IDs.ArtBookIDs)
+    if isKey:
+        itemList.append(IDs.KeyItemIDs + IDs.StoryRequiredKeyItemIDs)
         
     for area in IDs.areaFileListNumbers:  
         try:

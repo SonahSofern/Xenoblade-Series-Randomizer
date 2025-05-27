@@ -71,10 +71,12 @@ def NPCModelRando():
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/KP_list.json", 'r+', encoding='utf-8') as lmFile:
         lmData = json.load(lmFile)
         for lm in lmData["rows"]:
+            if (lm["$id"] in dontReplace) or (not (lm["model"].startswith("en") or lm["model"].startswith("np"))):
+                continue
             ObjectList.append([lm["model"], lm["motion"], lm["action"], lm["effect"], lm["sound"]])
 
         for lm in lmData["rows"]:
-            if lm["$id"] in dontReplace or lm["model"].startswith("en"):
+            if lm["$id"] in dontReplace or (not lm["model"].startswith("np")):
                 continue
             if not Helper.OddsCheck(odds):
                 continue

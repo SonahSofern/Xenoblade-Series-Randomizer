@@ -4,7 +4,7 @@ from scripts import Helper
 import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales, NPC, Weapons, FieldCollectables, Cutscenes, IDs, Landmarks
 
 OptionList =[]
-General = 1
+Loot = 1
 Character  = 2
 Enemies = 3
 Musica = 4
@@ -13,14 +13,14 @@ Funny = 6
 GameModeTab = 7
 
 # General
-TradeOption = Option("NPC Trades", General, "Randomizes chosen categories of NPC trades", [lambda: NPC.Trades()], descData=lambda: NPC.NPCTradesDesc())
+TradeOption = Option("NPC Trades", Loot, "Randomizes chosen categories of NPC trades", [lambda: NPC.Trades()], descData=lambda: NPC.NPCTradesDesc())
 TradeOption_Weapon = SubOption("Weapons", TradeOption)
 TradeOption_Armor = SubOption("Armor", TradeOption)
 TradeOption_Gem = SubOption("Gems", TradeOption)
 TradeOption_Collectibles = SubOption("Collectibles", TradeOption)
 TradeOption_Materials = SubOption("Materials", TradeOption)
 
-CollectableOptions = Option("Collectable Orbs", General, "Randomizes collectables on the field into the chosen options", [lambda: FieldCollectables.FieldItems()], _hasSpinBox = True, descData=lambda: FieldCollectables.CollectDesc())
+CollectableOptions = Option("Collectable Orbs", Loot, "Randomizes collectables on the field into the chosen options", [lambda: FieldCollectables.FieldItems()], _hasSpinBox = True, descData=lambda: FieldCollectables.CollectDesc())
 CollectableOptions_Collectables = SubOption("Collectables", CollectableOptions)
 CollectableOptions_Materials = SubOption("Materials", CollectableOptions)
 CollectableOptions_Armor = SubOption("Armor", CollectableOptions)
@@ -28,7 +28,19 @@ CollectableOptions_Weapons = SubOption("Weapons", CollectableOptions)
 CollectableOptions_Gems = SubOption("Gems", CollectableOptions)
 CollectableOptions_Crystals = SubOption("Crystals", CollectableOptions)
 CollectableOptions_ArtBooks = SubOption("Art Books", CollectableOptions)
-# Collectapedia
+CollectableOptions_KeyItems = SubOption("Key Items", CollectableOptions)
+
+# CollectapediaOption = Option("Collectapedia", Loot, "Randomizes")
+
+# EnemyDropOption = Option("Enemy Drops", Loot, "Randomizes")
+
+# QuestRewardsOption = Option("Quest Rewards", Loot, "Randomizes")
+
+# GiantsChestOption = Option("Giants Chests", Loot, "Randomizes")
+
+# ShopOption = Option("Shops", Loot, "Randomizes") # Key item rando settings would be fun 
+
+# https://xenobladedata.github.io/xb1de/bdat/bdat_common/FLD_valpoplist.html#1 Red orbs found here not sure what to do with them yet
 
 # Enemy
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: EnemiesScript.Enemies(IDs.NormalEnemies, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption)], descData=lambda: EnemiesScript.EnemyDesc(NormalEnemyOption.name), _hasSpinBox = True)
@@ -104,7 +116,7 @@ for song in Music.AllJingles:
 # QOL
 TutorialSkipsOption = Option("Tutorial Skips", QOL, "Reduces tutorials as much as possible", [lambda: Tutorials.TutorialSkips()])
 FasterLvOption = Option("EXP Boost", QOL, "Decreases level up requirements by a set amount (Recommended 3x to rush the story).", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 0, _spinMax = 256, _spinIncr = 1, _spinDesc = "x", spinDefault=3)
-FasterSkillTrees = Option("SP Boost", QOL, "Increases SP (skill point) gains for skill trees", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["en_ap"], [f'row[key] * {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 0, _spinMax = 256, _spinIncr = 1, _spinDesc = "x", spinDefault=2)
+FasterSkillTrees = Option("SP Boost", QOL, "Decreases SP (skill point) requirements for skill trees", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_PSVskill.json"], ["point_PP"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 0, _spinMax = 256, _spinIncr = 1, _spinDesc = "x", spinDefault=2)
 FasterArtLevels = Option("AP Boost", QOL, "Increases AP (art point) gains for art level ups",[lambda: Helper.MathmaticalColumnAdjust(["./XCDE/_internal/JsonOutputs/bdat_common/BTL_growlist.json"], ["en_exp"], [f'row[key] * {FasterLvOption.GetSpinbox()}'])], _hasSpinBox = True, _spinMin = 0, _spinMax = 256, _spinIncr = 1, _spinDesc = "x", spinDefault=2)
 MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free quickstep gems.", [lambda: MiscQOL.Quickstep()], _hasSpinBox=True, _spinDesc="% Speed", _spinMax=100)
 
@@ -114,7 +126,7 @@ MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free q
 EnemyScaleOption = Option("Enemy Scale", Funny, "Randomizes a % of enemy sizes.", [lambda: Scales.EnemyScales()], _hasSpinBox=True)
 NPCScaleOption = Option("NPC Scale", Funny, "Randomizes a % of npc sizes.", [lambda: Scales.NPCScales()], _hasSpinBox = True)
 RemoveStartingArmorOption = Option("Remove Starting Equipment", Funny, "Removes starting armor on all the main characters.", [lambda: Armor.RemoveStartingGear()])
-NPCModelsOption = Option("NPC Models", Funny, "Randomizes NPC models", [lambda: NPC.NPCModelRando()], _hasSpinBox = True)
+NPCModelsOption = Option("NPC Models", Funny, "Randomizes NPC models *Experimental, can cause crashes", [lambda: NPC.NPCModelRando()], _hasSpinBox = True)
 
 # ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html
 

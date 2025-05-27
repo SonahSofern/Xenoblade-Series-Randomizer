@@ -79,8 +79,8 @@ MainWindow.add(TabGeneralOuter, text ='🞛 General')
 MainWindow.add(TabCharactersOuter, text ='🧍 Characters') 
 MainWindow.add(TabEnemiesOuter, text ='💀 Enemies') 
 MainWindow.add(TabQOLOuter, text = '🐇 Quality of Life')
-MainWindow.add(TabFunnyOuter, text='😄 Funny')
 MainWindow.add(TabMusicOuter, text ='♪ Music') 
+MainWindow.add(TabFunnyOuter, text='😄 Funny')
 MainWindow.pack(expand = True, fill ="both", padx=10, pady=10) 
 
 Tabs = {

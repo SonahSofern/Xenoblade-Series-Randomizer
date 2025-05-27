@@ -107,7 +107,8 @@ def Power(skill):
     dist = [.3,.5,.7,.9,1.2,1.5,1.8,2,2.2,2.5,3]
     val1, val2, time = (random.choices(dist,k=3))
     skill["val1"] = min(int(skill["val1"] * val1),255)
-    skill["val2"] = min(int(skill["val2"] * val2),100)
+    if skill["val2"] != 100: # Lets not change skills that are supposed to have 100% proc rate
+        skill["val2"] = min(int(skill["val2"] * val2),100)
     skill["time"] = min(int(skill["time"] * time),255)
 
 linkCostRange = [.15,.25,.5,.7,1.2,1.5,2]
