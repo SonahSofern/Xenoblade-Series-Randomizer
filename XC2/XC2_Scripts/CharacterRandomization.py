@@ -113,7 +113,7 @@ def CharacterRandomization():
     if include_printouts:
         print("Character Randomization: ")
         print("\tRandomize Drivers: " + str(Options.DriversOption.GetState()))
-        print("\t\tRandomize Nia: " + str(Options.DriversOption_Nia.GetState()))
+        print("\t\tGuarantee Early Nia: " + str(Options.DriversOption_Nia.GetState()))
         print("\tRandomize Blades: " + str(Options.BladesOption.GetState()))
         print("\t\tRandomize Dromarch: " + str(Options.BladesOption_Dromarch.GetState()))
         print("\t\tGuarantee Healer: " + str(Options.BladesOption_Healer.GetState()))
@@ -224,31 +224,28 @@ def RandomizeDrivers():
 
         # TODO: Testing. Remove this
         #  This makes it so no driver is in their starting position
-        #if GuaranteedHealer and GuaranteedHealer == 1011:
-        #    randomized_order = [3, 1, 6, 2]
-        #else:
-        #    randomized_order = [2, 6, 1, 3] # Play as Nia
-        #    #randomized_order = [6, 3, 2, 1] # Play as Morag
-        #    #randomized_order = [3, 1, 6, 2] # Play as Zeke
+        if GuaranteedHealer and GuaranteedHealer == 1011:
+            randomized_order = [3, 1, 6, 2]
+        else:
+            randomized_order = [2, 6, 1, 3] # Play as Nia
+            #randomized_order = [6, 3, 2, 1] # Play as Morag
+            #randomized_order = [3, 1, 6, 2] # Play as Zeke
 
-        # If there is a guaranteed healer, make sure they're in Nia's spot (index 1)
+        # Two conditions might be required for the randomized driver order to be valid:
+        # 1. If Guarantee Early Nia is set, she must be one of the first two drivers
+        # 2. If there is a guaranteed healer, make sure they're in Nia's spot (index 1)
         # Keep shuffling until that happens
         def niaSettingIsSatisfied():
-            return (not Options.DriversOption_Nia.GetState()) or (randomized_order[1] == 1)
+            return (not Options.DriversOption_Nia.GetState()) or (randomized_order[0] == 2 or randomized_order[1] == 2)
         def healerSettingIsSatisfied():
             return (GuaranteedHealer is None) or (GuaranteedHealer in PossibleHealerBladesForEachDriver[randomized_order[1]])
         while not (niaSettingIsSatisfied() and healerSettingIsSatisfied()):
             if include_printouts:
                 if not niaSettingIsSatisfied():
-                    print("Nia was set to not randomize, but Nia was randomized to %s. Reshuffling drivers..." % (DriverNames[randomized_order[1]]))
+                    print("Nia was set to show up early, but the first two drivers were %s and %s. Reshuffling drivers..." % (DriverNames[randomized_order[0]], DriverNames[randomized_order[1]]))
                 elif not healerSettingIsSatisfied():
                     print("The guaranteed healer was %s but Nia was randomized to %s. Reshuffling drivers..." % (BladeNames[GuaranteedHealer], DriverNames[randomized_order[1]]))
             random.shuffle(randomized_order)
-        #if GuaranteedHealer is not None:
-        #    while GuaranteedHealer not in PossibleHealerBladesForEachDriver[randomized_order[1]]:
-        #        if include_printouts:
-        #            print("The guaranteed healer was %s but Nia was randomized to %s. Reshuffling drivers..." % (BladeNames[GuaranteedHealer], DriverNames[randomized_order[1]]))
-        #        random.shuffle(randomized_order)
 
         # Determine the randomization prior to randomizing.
         # This way we can populate Original2Replacement and Replacement2Original,
@@ -903,8 +900,6 @@ def RebalanceDefaultWeapons():
         replacement_blade_id = OriginalBlade2Replacement[original_blade_id]
         replacement_blade = blade
         replacement_weapon_type_id = replacement_blade['WeaponType']
-
-
 
         # Search for the original blade's default weapon in the weapon chip table
         original_chip = None
