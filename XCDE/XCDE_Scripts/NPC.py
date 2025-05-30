@@ -35,34 +35,31 @@ def Trades():
     
     #
     for file in IDs.areaFileListNumbers:
-        try:   
-            with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/exchangelist{file}.json", 'r+', encoding='utf-8') as tradeNPCFile:
-                tradeNPCData = json.load(tradeNPCFile)
-                
-                for trade in tradeNPCData["rows"]:
-                    
-                    trade["wpn1"] = RandomTradeVerification(IDs.WeaponIDs, trade["wpn1"], isWpn)
+        with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/exchangelist{file}.json", 'r+', encoding='utf-8') as tradeNPCFile:
+            tradeNPCData = json.load(tradeNPCFile)
+            
+            for trade in tradeNPCData["rows"]:
+                trade["wpn1"] = RandomTradeVerification(IDs.WeaponIDs, trade["wpn1"], isWpn)
 
-                    trade["head1"] = RandomTradeVerification(IDs.HeadIDs, trade["head1"], isArmor)
-                    trade["body1"] = RandomTradeVerification(IDs.ChestIDs, trade["body1"], isArmor)
-                    trade["arm1"] = RandomTradeVerification(IDs.ArmIDs, trade["arm1"], isArmor)
-                    trade["waist1"] = RandomTradeVerification(IDs.WaistIDs, trade["waist1"], isArmor)
-                    trade["legg1"] = RandomTradeVerification(IDs.LegIDs, trade["legg1"], isArmor)
-                        
-                        
-                    trade["kessyou1"] = RandomTradeVerification(IDs.GemIDs, trade["kessyou1"], isGem)
-                    trade["kessyou2"] = RandomTradeVerification(IDs.GemIDs, trade["kessyou2"], isGem)
+                trade["head1"] = RandomTradeVerification(IDs.HeadIDs, trade["head1"], isArmor)
+                trade["body1"] = RandomTradeVerification(IDs.ChestIDs, trade["body1"], isArmor)
+                trade["arm1"] = RandomTradeVerification(IDs.ArmIDs, trade["arm1"], isArmor)
+                trade["waist1"] = RandomTradeVerification(IDs.WaistIDs, trade["waist1"], isArmor)
+                trade["legg1"] = RandomTradeVerification(IDs.LegIDs, trade["legg1"], isArmor)
                     
-                    trade["collect1"] = RandomTradeVerification(IDs.CollectableIDs, trade["collect1"], isCol)
-                    trade["collect2"] = RandomTradeVerification(IDs.CollectableIDs, trade["collect2"], isCol)
                     
-                    trade["materia1"] = RandomTradeVerification(IDs.MaterialIDs, trade["materia1"], isMat)
-                    trade["materia2"] = RandomTradeVerification(IDs.MaterialIDs, trade["materia2"], isMat)
-                        
+                trade["kessyou1"] = RandomTradeVerification(IDs.GemIDs, trade["kessyou1"], isGem)
+                trade["kessyou2"] = RandomTradeVerification(IDs.GemIDs, trade["kessyou2"], isGem)
                 
-                JSONParser.CloseFile(tradeNPCData, tradeNPCFile)
-        except:
-            pass
+                trade["collect1"] = RandomTradeVerification(IDs.CollectableIDs, trade["collect1"], isCol)
+                trade["collect2"] = RandomTradeVerification(IDs.CollectableIDs, trade["collect2"], isCol)
+                
+                trade["materia1"] = RandomTradeVerification(IDs.MaterialIDs, trade["materia1"], isMat)
+                trade["materia2"] = RandomTradeVerification(IDs.MaterialIDs, trade["materia2"], isMat)
+                    
+            
+            JSONParser.CloseFile(tradeNPCData, tradeNPCFile)
+
 
 def NPCModelRando():
     odds = Options.NPCModelsOption.GetSpinbox()

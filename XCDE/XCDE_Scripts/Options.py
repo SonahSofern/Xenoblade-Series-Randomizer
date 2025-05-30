@@ -30,15 +30,15 @@ CollectableOptions_Crystals = SubOption("Crystals", CollectableOptions)
 CollectableOptions_ArtBooks = SubOption("Art Books", CollectableOptions)
 CollectableOptions_KeyItems = SubOption("Key Items", CollectableOptions)
 
-# CollectapediaOption = Option("Collectapedia", Loot, "Randomizes")
+CollectapediaOption = Option("Collectapedia Rewards", Loot, "Randomizes", [])
 
-# EnemyDropOption = Option("Enemy Drops", Loot, "Randomizes")
+EnemyDropOption = Option("Enemy Drops", Loot, "Randomizes", [])
 
-# QuestRewardsOption = Option("Quest Rewards", Loot, "Randomizes")
+QuestRewardsOption = Option("Quest Rewards", Loot, "Randomizes", [])
 
-# GiantsChestOption = Option("Giants Chests", Loot, "Randomizes")
+GiantsChestOption = Option("Giants Chests", Loot, "Randomizes", [])
 
-# ShopOption = Option("Shops", Loot, "Randomizes") # Key item rando settings would be fun 
+ShopOption = Option("Shops", Loot, "Randomizes", []) # Key item rando settings would be fun 
 
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/FLD_valpoplist.html#1 Red orbs found here not sure what to do with them yet
 

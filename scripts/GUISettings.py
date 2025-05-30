@@ -4,7 +4,7 @@ from tkinter import font, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys, datetime
 
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
-from scripts import SavedOptions
+from scripts import SavedOptions, PopupDescriptions
 
 
 CanvasesForStyling = []
@@ -346,7 +346,7 @@ def ResizeWindow(top, innerFrame, padx = 37):
     top.geometry(f"{w}x{h}")
  
     
-def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = []):
+def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = []):
     def ThreadedRandomize():
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
@@ -374,7 +374,7 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
             return
 
         # Runs all randomization
-        RunOptions(OptionList, randoProgressDisplay)
+        RunOptions(OptionList, randoProgressDisplay, root)
         for command in ExtraCommands: # Runs extra commands like show title screen
             command()
             
@@ -409,10 +409,10 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
 
     threading.Thread(target=ThreadedRandomize).start()
 
-def RunOptions(OptionList, randoProgressDisplay):
+def RunOptions(OptionList, randoProgressDisplay, root):
     
     OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
-    
+    errorMsgObj = PopupDescriptions.Description()
     for opt in OptionList:
         if not opt.GetState(): # Checks state
             continue
@@ -430,12 +430,22 @@ def RunOptions(OptionList, randoProgressDisplay):
                 print(f"{traceback.format_exc()}") # shows the full error
                 
         randoProgressDisplay.config(text=opt.name)
+        def ErrorLog():
+            return errorMsgObj
         for command in opt.commands:
             try:
-                command()
+                errorMsg = command()
             except Exception as error:
                 print(f"ERROR: {opt.name} | {error}")
-                print(f"{traceback.format_exc()}") # shows the full error
+                print(traceback.format_exc()) # shows the full error
+                if errorMsg == None:
+                    errorMsg = error
+                errorMsgObj.Header(f"Error: {opt.name}")
+                errorMsgObj.Text(errorMsg)
+
+                randoProgressDisplay.config(text=f"{opt.name}: {errorMsg}")
+    PopupDescriptions.GenPopup("Error Log", lambda: ErrorLog(),root,defFontVar)
+
     
 MaxWidth = 1000
 windowWidth = "1550"

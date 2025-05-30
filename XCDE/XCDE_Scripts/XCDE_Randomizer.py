@@ -13,7 +13,7 @@ import tkinter as tk
 from scripts.GUISettings import *
 
 Game = "XCDE"
-Version = "1.0.2"
+Version = "1.1.0"
 JsonOutput = "./XCDE/_internal/JsonOutputs"
 
 SavedOptionsFileName = f"LastSave.txt"
@@ -163,7 +163,7 @@ areaFiles = []
 for id in IDs.areaFileListNumbers:
     areaFiles.append(f"bdat_ma{id}")
 # Randomize Button
-RandomizeButton = ttk.Button(text='Randomize', command=(lambda: GUISettings.Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, ["bdat_common", "bdat_menu_psv", "bdat_menu_ttrl", "bdat_evt", "bdat_menu_map"] + areaFiles, ["bdat_common_ms", "bdat_menu_psv_ms", "bdat_menu_mes_ms"],[lambda: ShowTitleScreenText(), lambda: Options.EnemiesScript.OriginalEnemyData.clear()] )))
+RandomizeButton = ttk.Button(text='Randomize', command=(lambda: GUISettings.Randomize(root, RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, ["bdat_common", "bdat_menu_psv", "bdat_menu_ttrl", "bdat_evt", "bdat_menu_map"] + areaFiles, ["bdat_common_ms", "bdat_menu_psv_ms", "bdat_menu_mes_ms"],[lambda: ShowTitleScreenText(), lambda: Options.EnemiesScript.OriginalEnemyData.clear()] )))
 RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
 RandomizeButton.config(padding=5)
 

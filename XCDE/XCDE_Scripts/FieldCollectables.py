@@ -44,6 +44,25 @@ def FieldItems():
         except:
             pass
 
+class ItemType:
+    def __init__(self, ids, isOn):
+        self.ids = ids
+        self.isOn = isOn
+def ItemRandomization(itemTypes:list[ItemType] = [], files = []):
+    randoList = []
+    for item in itemTypes:
+        if item.isOn:
+            randoList.append(item.ids)
+    
+    for file in files:
+        with open(file, 'r+', encoding='utf-8') as ItemFile:
+            itemData = json.load(ItemFile)
+            for itm in itemData["rows"]:
+                if not Helper.OddsCheck(odds):
+                    continue
+                itm = random.choice(random.choice(randoList))
+            
+
 def CollectDesc():
     myDesc = PopupDescriptions.Description()
     myDesc.Header(Options.CollectableOptions.name)
