@@ -440,7 +440,7 @@ def RunOptions(OptionList, randoProgressDisplay, root):
                 print(traceback.format_exc()) # shows the full error
                 if errorMsg == None:
                     errorMsg = error
-                errorMsgObj.Header(f"Error: {opt.name}")
+                errorMsgObj.Header(opt.name)
                 errorMsgObj.Text(errorMsg)
 
                 randoProgressDisplay.config(text=f"{opt.name}: {errorMsg}")
