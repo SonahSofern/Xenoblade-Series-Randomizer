@@ -113,7 +113,7 @@ class Option():
         return self.checkBoxVal.get()
 
 class SubOption():
-    def __init__(self, _name, _parent:Option, _commands = [], _defState = True, _prio = 0):
+    def __init__(self, _name, _parent:Option, _commands = [], _defState = True, _prio = 0, hasSpinBox = False):
         self.name = _name
         self.checkBoxVal = BooleanVar
         self.checkBox:ttk.Checkbutton = None
@@ -121,6 +121,7 @@ class SubOption():
         self.defState = _defState
         self.prio = _prio
         self.parent = _parent
+        self.hasSpinBox = hasSpinBox
         _parent.subOptions.append(self)
 
     def GetState(self):

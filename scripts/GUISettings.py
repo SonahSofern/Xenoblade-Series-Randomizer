@@ -374,7 +374,7 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path
             return
 
         # Runs all randomization
-        RunOptions(OptionList, randoProgressDisplay, root)
+        RunOptions(OptionList, randoProgressDisplay, root, randoSeedEntry.get(), permalinkVar.get())
         for command in ExtraCommands: # Runs extra commands like show title screen
             command()
             
@@ -409,10 +409,14 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path
 
     threading.Thread(target=ThreadedRandomize).start()
 
-def RunOptions(OptionList, randoProgressDisplay, root):
+def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink):
     
     OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
     errorMsgObj = PopupDescriptions.Description()
+    errorMsgObj.Header("Randomization Complete")
+    errorMsgObj.Tag(f"Seed: {seed}", pady=5, anchor="center") # Seed
+    errorMsgObj.Tag(f"Settings: {permalink}", pady=5, anchor="center") # Permalink
+    errorMsgObj.Tag(f"Time: {datetime.datetime.now()}", pady=5, anchor="center") # Time
     for opt in OptionList:
         if not opt.GetState(): # Checks state
             continue
@@ -444,7 +448,7 @@ def RunOptions(OptionList, randoProgressDisplay, root):
                 errorMsgObj.Text(errorMsg)
 
                 randoProgressDisplay.config(text=f"{opt.name}: {errorMsg}")
-    PopupDescriptions.GenPopup("Error Log", lambda: ErrorLog(),root,defFontVar)
+    PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(),root,defFontVar)
 
     
 MaxWidth = 1000

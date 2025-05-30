@@ -33,8 +33,12 @@ def Trades():
     #     print(f"Waist:  {types[7]}")
     #     print(f"Leg:  {types[8]}")
     
+    filteredFiles = IDs.areaFileListNumbers.copy()
+    badFiles = ['0801', '0901', '1201', '1202', '1401', '1501', '1901', '2001', '2101', '2201', '2301', '2401', '2501', '2601', '5001', '5101', '5201', '5301', '5401', '5501', '5601', '5701', '5801', '5901', '6001']
     #
-    for file in IDs.areaFileListNumbers:
+    for file in filteredFiles:
+        if file in badFiles:
+            continue
         with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/exchangelist{file}.json", 'r+', encoding='utf-8') as tradeNPCFile:
             tradeNPCData = json.load(tradeNPCFile)
             
@@ -59,7 +63,6 @@ def Trades():
                     
             
             JSONParser.CloseFile(tradeNPCData, tradeNPCFile)
-
 
 def NPCModelRando():
     odds = Options.NPCModelsOption.GetSpinbox()
