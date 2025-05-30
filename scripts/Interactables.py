@@ -97,7 +97,10 @@ class Option():
                 sub.checkBox.state(["!disabled"])
                 sub.checkBox.grid()
                 if sub.spinBoxObj != None:
-                    sub.spinBoxObj.state(["!disabled"])
+                    if sub.GetState():
+                        sub.spinBoxObj.state(["!disabled"])
+                    else:
+                        sub.spinBoxObj.state(["disabled"])
                     sub.spinBoxObj.grid()
             self.descObj.state(["!disabled"])
             self.spinBoxObj.state(["!disabled"])
@@ -108,7 +111,6 @@ class Option():
                 sub.checkBox.state(["disabled"])
                 sub.checkBox.grid_remove()
                 if sub.spinBoxObj != None:
-                    sub.spinBoxObj.state(["disabled"])
                     sub.spinBoxObj.grid_remove()
             self.descObj.state(["disabled"])
             self.spinBoxObj.state(["disabled"])
@@ -145,6 +147,9 @@ class SubOption():
 
     def GetState(self):
         return self.checkBoxVal.get()
+    
+    def GetSpinBox(self):
+        return self.spinBoxVal.get()
 rowIncrement = 0   
 
 OptionList:list[Option] = []

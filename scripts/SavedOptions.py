@@ -3,6 +3,7 @@ import os, json
 
 stopPermalinkUpdate = False
 
+
 def saveData(DataList, Filename, GamePrefix):
     savePath = os.path.join(GamePrefix, saveFolderName)
     os.makedirs(savePath, exist_ok=True)  
@@ -15,6 +16,8 @@ def saveData(DataList, Filename, GamePrefix):
                 sav.update({f"{saveData.name} Spinbox: ": saveData.spinBoxVal.get()})
             for sub in saveData.subOptions:
                 sav.update({f"{saveData.name}->{sub.name}": sub.checkBoxVal.get()})
+                if sub.hasSpinBox:
+                    sav.update({f"{saveData.name}->{sub.name} Spinbox: ": sub.spinBoxVal.get()})
         json.dump(sav, file, indent=4, ensure_ascii=True)
 
 
@@ -37,10 +40,10 @@ def loadData(DataList, Filename, GamePrefix):
                 except:
                     pass
                 for sub in option.subOptions:
-                    try:
-                        sub.checkBoxVal.set(data[f"{option.name}->{sub.name}"])
-                    except:
-                        pass
+                    sub.checkBoxVal.set(data[f"{option.name}->{sub.name}"])
+                    if sub.hasSpinBox:
+                        sub.spinBoxVal.set(data[f"{option.name}->{sub.name} Spinbox: "])
+
                 option.StateUpdate()
 
     except:

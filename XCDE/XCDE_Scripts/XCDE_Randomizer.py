@@ -143,7 +143,7 @@ seedVar = SavedOptions.SavedEntry("Seed", seedEntryVar)
 # Save and Load Last Options
 EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
 SavedOptions.loadData(EntriesToSave + Interactables.OptionList, SavedOptionsFileName, Game)
-EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.OptionList)) + list((x.spinBoxVal for x in Interactables.OptionList if x.spinBoxVal is not None)) + list((sub.checkBoxVal for x in Interactables.OptionList for sub in x.subOptions))
+EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.OptionList)) + list((x.spinBoxVal for x in Interactables.OptionList if x.hasSpinBox)) + list((sub.checkBoxVal for x in Interactables.OptionList for sub in x.subOptions)) + list((sub.spinBoxVal for x in Interactables.OptionList for sub in x.subOptions if sub.hasSpinBox))
 
 # Permalink Options/Variables
 permalinkFrame = ttk.Frame(root,style="NoBackground.TFrame")
