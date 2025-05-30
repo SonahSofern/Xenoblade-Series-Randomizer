@@ -83,6 +83,11 @@ class Option():
             sub.checkBoxVal = BooleanVar(value=sub.defState)
             sub.checkBox = ttk.Checkbutton(optionPanel, text=sub.name, variable=sub.checkBoxVal, width=30)
             sub.checkBox.grid(row=rowIncrement, column=0, sticky="sw")
+            if sub.hasSpinBox:
+                sub.spinBoxVal = IntVar(value=sub.spinDefault)
+                sub.spinBoxObj = ttk.Spinbox(optionPanel, from_=sub.spinBoxMin, to=sub.spinBoxMax, textvariable=sub.spinBoxVal, wrap=True, width=sub.spinWidth, increment=sub.spinIncr)
+                sub.spinBoxObj.grid(row=rowIncrement, column=0, padx=(15,0), pady=(0,0))
+
         rowIncrement += 1
 
     
@@ -90,21 +95,25 @@ class Option():
         if self.GetState():
             for sub in self.subOptions:
                 sub.checkBox.state(["!disabled"])
+                sub.checkBox.grid()
+                if sub.spinBoxObj != None:
+                    sub.spinBoxObj.state(["!disabled"])
+                    sub.spinBoxObj.grid()
             self.descObj.state(["!disabled"])
             self.spinBoxObj.state(["!disabled"])
             if self.spinBoxLabel != None: # If we dont have one
                 self.spinBoxLabel.state(["!disabled"])
-            for sub in self.subOptions: # Handles Dropdown
-                sub.checkBox.grid()     
         else:
             for sub in self.subOptions:
                 sub.checkBox.state(["disabled"])
+                sub.checkBox.grid_remove()
+                if sub.spinBoxObj != None:
+                    sub.spinBoxObj.state(["disabled"])
+                    sub.spinBoxObj.grid_remove()
             self.descObj.state(["disabled"])
             self.spinBoxObj.state(["disabled"])
             if self.spinBoxLabel != None:
                 self.spinBoxLabel.state(["disabled"])
-            for sub in self.subOptions: # Handles Dropdown
-                sub.checkBox.grid_remove()
     
     def GetSpinbox(self):
         return self.spinBoxVal.get()
@@ -122,7 +131,17 @@ class SubOption():
         self.prio = _prio
         self.parent = _parent
         self.hasSpinBox = hasSpinBox
+        self.spinBoxVal = None
+        self.spinBoxObj = None
+        self.spinBoxMin = 0
+        self.spinBoxMax = 100
+        self.spinDefault = 0
+        self.spinBoxLabel = ""
+        self.spinWidth = 3
+        self.spinIncr = 1
+        self.spinDesc = ""
         _parent.subOptions.append(self)
+
 
     def GetState(self):
         return self.checkBoxVal.get()

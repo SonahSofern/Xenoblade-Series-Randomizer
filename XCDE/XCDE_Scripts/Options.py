@@ -27,8 +27,8 @@ CollectableOptions_Armor = SubOption("Armor", CollectableOptions)
 CollectableOptions_Weapons = SubOption("Weapons", CollectableOptions)
 CollectableOptions_Gems = SubOption("Gems", CollectableOptions)
 CollectableOptions_Crystals = SubOption("Crystals", CollectableOptions)
-CollectableOptions_ArtBooks = SubOption("Art Books", CollectableOptions)
-CollectableOptions_KeyItems = SubOption("Key Items", CollectableOptions)
+CollectableOptions_ArtBooks = SubOption("Art Books", CollectableOptions, hasSpinBox=True)
+CollectableOptions_KeyItems = SubOption("Key Items", CollectableOptions, hasSpinBox=True)
 
 CollectapediaOption = Option("Collectapedia Rewards", Loot, "Randomizes", [])
 
