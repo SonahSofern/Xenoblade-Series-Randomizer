@@ -15,14 +15,11 @@ from scripts import JSONParser, Helper
 #  - Voice lines in the menu (such as when spending affinity tokens) is still the original driver's voice
 #  - Where weapons are located on the player model is wrong. When Rex becomes Morag for example, the whipswords on Morag's back line up with where Rex puts his weapons (his back) not where Morag puts her weapons (hips)
 #    - This is likely tied to the weapon's animations, so that probably cannot be fixed.
+#    - This might also be part of common/RSC_PcWpnMount, although I'm not sure if modifying this table has side effects
 #  - swapped drivers are not zoomed in properly when summoning core crystals
 #  - "Not to boast, but that was spectacular! Right gramps?" after winning a fight without Rex in the party yet
-#  - DefWeapon on each blade is not scaled to the correct damage. Brighid normally starts with a Coil chip for example but when Rex replaced her he has a rank 1 weapon
-#  - Rex's Master Driver icon is still not fixed for the small icons
-#    - It is correct for the big icon
 #  -
 #  - hard to tell if master driver logic is working properly, since I have the QoL setting for swapping blades. Try another run without that and without NG+ stuff
-#  - Driver randomization should be disabled if either of the side modes are selected (driver randomization is kind of fundamentally incompatible with custom save files)
 #  -
 #  - Replace driver names in all dialog text (nice to have)
 
@@ -84,11 +81,16 @@ NewGamePlusBlades = [1043, 1044, 1045, 1046, 1047, 1048, 1049] # Currently canno
 
 first_character_randomization = True # Both drivers and blade options call this same function. Only run this logic once
 
+randomize_drivers = False
+randomize_blades = False
+
 include_printouts = True  # Debugging
 
 def resetGlobals():
     global GuaranteedHealer
     global first_character_randomization
+    global randomize_drivers
+    global randomize_blades
 
     OriginalDrivers.clear()
     OriginalBlades.clear()
@@ -100,6 +102,8 @@ def resetGlobals():
     ReplacementBlade2Original.clear()
     GuaranteedHealer = None
     first_character_randomization = True
+    randomize_drivers = False
+    randomize_blades = False
 
 
 def CharacterRandomization():
@@ -110,11 +114,24 @@ def CharacterRandomization():
     else:
         return
 
+    global randomize_drivers
+    global randomize_blades
+    randomize_drivers = Options.DriversOption.GetState()
+    randomize_blades = Options.BladesOption.GetState()
+
+    # Disable driver randomization if custom mode is used
+    if Options.RaceModeOption.GetState():
+        print("Driver randomization is not supported in Race Mode")
+        randomize_drivers = False
+    if Options.UMHuntOption.GetState():
+        print("Driver randomization is not supported in UM Hunt")
+        randomize_drivers = False
+
     if include_printouts:
         print("Character Randomization: ")
-        print("\tRandomize Drivers: " + str(Options.DriversOption.GetState()))
+        print("\tRandomize Drivers: " + str(randomize_drivers))
         print("\t\tGuarantee Early Nia: " + str(Options.DriversOption_Nia.GetState()))
-        print("\tRandomize Blades: " + str(Options.BladesOption.GetState()))
+        print("\tRandomize Blades: " + str(randomize_blades))
         print("\t\tRandomize Dromarch: " + str(Options.BladesOption_Dromarch.GetState()))
         print("\t\tGuarantee Healer: " + str(Options.BladesOption_Healer.GetState()))
 
@@ -174,18 +191,18 @@ def PopulateBlades(blade):
 
 
 def DetermineGuaranteedHealer():
-    if Options.BladesOption.GetState() and Options.BladesOption_Healer.GetState():
+    if randomize_blades and Options.BladesOption_Healer.GetState():
         global GuaranteedHealer
 
         # If Dromarch isn't randomized, he's the healer by default
-        if Options.BladesOption.GetState() and not Options.BladesOption_Dromarch.GetState():
+        if randomize_blades and not Options.BladesOption_Dromarch.GetState():
             GuaranteedHealer = 1004
             if include_printouts:
                 print("The guaranteed healer is Dromarch (by default).")
         else:
             # If Nia isn't randomized, make sure the healer is one of hers
             # Otherwise, pick any of the possible healers for any driver
-            if Options.DriversOption.GetState() and Options.DriversOption_Nia.GetState():
+            if randomize_drivers and Options.DriversOption_Nia.GetState():
                 potential_healers = PossibleHealerBladesForEachDriver[2].copy()
             else:
                 potential_healers = PossibleHealerBlades.copy()
@@ -209,14 +226,14 @@ def MakeAllArtsAccessible(art):
 
 
 def BugFixes_PreRandomization():
-    if Options.BladesOption.GetState():
+    if randomize_blades:
         # Replace Dagas 1022 with Dagas 1050 in gacha table. Since they are different blades, they could randomize weirdly.
         # For the purposes of this randomizer, 1022 is inaccessible
         JSONParser.ChangeJSONLine(["common/BLD_RareList.json"], [7], ['Blade'], 1050)
 
 
 def RandomizeDrivers():
-    if Options.DriversOption.GetState():
+    if randomize_drivers:
         drivers_left_to_randomize = DriversToRandomize.copy()
 
         randomized_order = drivers_left_to_randomize.copy()
@@ -266,6 +283,8 @@ def RandomizeDrivers():
         # Apply Randomizations
         JSONParser.ChangeJSONLineWithCallback(["common/CHR_Dr.json"], [], ApplyDriverRandomization, replaceAll=True)
 
+        CreatePneumaReplacement()
+
     # No randomization, populate the maps with no swaps
     else:
         for driver_id in DriversToRandomize:
@@ -274,13 +293,13 @@ def RandomizeDrivers():
 
 
 def RandomizeBlades():
-    if Options.BladesOption.GetState():
+    if randomize_blades:
         # Note: It is important that BladesLeftToRandomize starts with the default blades,
         # as otherwise the below loop could be stuck indefinitely if the last replacement is incompatible
         blades_left_to_randomize = BladesAlwaysRandomized.copy()
 
         # Only add Dromarch to the pool if explicitly randomizing him
-        if Options.BladesOption.GetState() and Options.BladesOption_Dromarch.GetState():
+        if Options.BladesOption_Dromarch.GetState():
             blades_left_to_randomize = [1004] + blades_left_to_randomize
 
         # TODO: Re-add this once NG+ blades' weapon chips work properly
@@ -325,7 +344,7 @@ def bladeCanBeReplaced(original_blade, replacement_blade):
     blades_replacement_driver = OriginalDriver2Replacement[blades_original_driver]
 
     # Handle the case of having the guaranteed healer
-    if Options.BladesOption.GetState() and Options.BladesOption_Healer.GetState():
+    if randomize_blades and Options.BladesOption_Healer.GetState():
         if original_blade == 1004 and GuaranteedHealer in PossibleHealerBladesForEachDriver[OriginalDriver2Replacement[blades_original_driver]]:
             if replacement_blade != GuaranteedHealer:
                 if include_printouts:
@@ -342,6 +361,41 @@ def bladeCanBeReplaced(original_blade, replacement_blade):
         return False
 
     return True
+
+
+def CreatePneumaReplacement():
+    # Replace Pneuma with the new character's default blade with an actually strong weapon
+    # Note: Pneuma's "Model" and "DefWeapon" fields are explicitly ignored in ApplyBladeRandomization()
+    match OriginalDriver2Replacement[1]:
+        case 1: # Rex was not replaced
+            if include_printouts:
+                print("Since Rex was not replaced:")
+                print("- Pneuma remains unchanged.")
+                print("- No core crystals were renamed")
+        case 2: # Rex Replaced by Nia
+            if include_printouts:
+                print("Since Rex was replaced by Nia:")
+                print("- Replaced Pneuma with Savage Dromarch with the Meteorite Rings")
+                print("- Renamed Crossette's crystal to Aegis Core Crystal (since Crossette and Mythra swapped)")
+            OriginalBlade2Replacement[1003] = 1004
+            JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['Model'], "bl/bl100501")
+            JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['DefWeapon'], 5179) #TODO: Custom weapon? The strongest weapons are much weaker than base Pneuma
+        case 3: # Rex replaced by Zeke
+            if include_printouts:
+                print("Since Rex was replaced by Zeke:")
+                print("- Replaced Pneuma with Mermaid Blue Pandoria with the Meteorite Edge")
+                print("- Renamed Corvin's crystal to Aegis Core Crystal (since Corvin and Mythra swapped)")
+            OriginalBlade2Replacement[1003] = 1010
+            JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['Model'], "bl/bl100901")
+            JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['DefWeapon'], 5479) #TODO: Custom weapon? The strongest weapons are much weaker than base Pneuma
+        case 6: # Rex Replaced by Morag
+            if include_printouts:
+                print("Since Rex was replaced by Morag:")
+                print("- Replaced Pneuma with Jade Orchid Brighid with the Meteorite Whips")
+                print("- Renamed Aegaeon's crystal to Aegis Core Crystal (since Aegeaon and Mythra swapped)")
+            OriginalBlade2Replacement[1003] = 1009
+            JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['Model'], "bl/bl121001")
+            JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['DefWeapon'], 5419) #TODO: Custom weapon? The strongest weapons are much weaker than base Pneuma
 
 
 def SwapDefaultBlades():
@@ -405,40 +459,27 @@ def SwapDefaultBlades():
             print(BladeNames[replacement_blade_id] + ' was replaced with ' + BladeNames[original_blade_id])
             print(str(replacement_blade_id) + ' was replaced with ' + str(original_blade_id))
 
-    # Replace Pneuma with the new character's default blade with an actually strong weapon
-    # Note: Pneuma's "Model" and "DefWeapon" fields are explicitly ignored in ApplyBladeRandomization()
-    # Also rename the core crystal which now contains Mythra (if Mythra was swapped above)
+    # Also Rename the core crystal which now contains Mythra (if Mythra was swapped above)
     match OriginalDriver2Replacement[1]:
         case 1: # Rex was not replaced
             if include_printouts:
                 print("Since Rex was not replaced:")
-                print("- Pneuma remains unchanged.")
                 print("- No core crystals were renamed")
         case 2: # Rex Replaced by Nia
             if include_printouts:
                 print("Since Rex was replaced by Nia:")
-                print("- Replaced Pneuma with Savage Dromarch with the Meteorite Rings")
                 print("- Renamed Crossette's crystal to Aegis Core Crystal (since Crossette and Mythra swapped)")
-            OriginalBlade2Replacement[1003] = 1004
-            JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['Model'], "bl/bl100501")
-            JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['DefWeapon'], 5179) #TODO: Custom weapon? The strongest weapons are much weaker than base Pneuma
             JSONParser.ChangeJSONLine(["common_ms/itm_crystal.json"], [15], ['name'], 'Aegis Core Crystal')
         case 3: # Rex replaced by Zeke
             if include_printouts:
                 print("Since Rex was replaced by Zeke:")
-                print("- Replaced Pneuma with Mermaid Blue Pandoria with the Meteorite Edge")
                 print("- Renamed Corvin's crystal to Aegis Core Crystal (since Corvin and Mythra swapped)")
-            OriginalBlade2Replacement[1003] = 1010
-            JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['Model'], "bl/bl100901")
-            JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['DefWeapon'], 5479) #TODO: Custom weapon? The strongest weapons are much weaker than base Pneuma
+            JSONParser.ChangeJSONLine(["common_ms/itm_crystal.json"], [14], ['name'], 'Aegis Core Crystal')
         case 6: # Rex Replaced by Morag
             if include_printouts:
                 print("Since Rex was replaced by Morag:")
-                print("- Replaced Pneuma with Jade Orchid Brighid with the Meteorite Whips")
                 print("- Renamed Aegaeon's crystal to Aegis Core Crystal (since Aegeaon and Mythra swapped)")
-            OriginalBlade2Replacement[1003] = 1009
-            JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['Model'], "bl/bl121001")
-            JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['DefWeapon'], 5419) #TODO: Custom weapon? The strongest weapons are much weaker than base Pneuma
+            JSONParser.ChangeJSONLine(["common_ms/itm_crystal.json"], [7], ['name'], 'Aegis Core Crystal')
 
     # Apply Swaps
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], [], ApplyBladeRandomization, replaceAll=True)
@@ -473,7 +514,7 @@ def ApplyBladeRandomization(blade):
     excluded_fields[1005] = ['FSkill3']  # Poppi Alpha: Superstrength
     excluded_fields[1008] = ['FSkill2']  # Roc: Miasma Dispersal
 
-    # Pneuma is only randomized when Drivers are randomized but Blades are not
+    # Pneuma is only randomized when Drivers are randomized
     # 1. Default weapons not randomized, as it is set in SwapDefaultBlades()
     # 2. Model not randomized, as it is set in SwapDefaultBlades()
     # 3. Battle skills, as it is what makes Pneuma...Pneuma
@@ -585,10 +626,10 @@ def BugFixes_PostRandomization():
     FixMenuText()
     RebalanceDefaultWeapons()
 
-    if Options.BladesOption.GetState():
+    if randomize_blades:
         FreeEngage()
 
-    if Options.DriversOption.GetState():
+    if randomize_drivers:
         DefineBroadswordArtsForRexsReplacement()
         FixRexStillAfterHeDies()
         FixRexStillMasterDriver()
@@ -662,10 +703,11 @@ def FixPandoriaSpriteAfterElpys():
 
     # Grab the file name from the File ID
     fileName = JSONParser.QueryJSONLine("common/MNU_Stream_full_bl.json", "$id", PandoriaReplacementImageRow['$id'])['filename']
-    # TODO fix the glow as well?
+    fileName_glow = JSONParser.QueryJSONLine("common/MNU_Stream_full_glow_bl.json", "$id", PandoriaReplacementImageRow['$id'])['filename']
 
     # Replace the image for Pandoria with her replacement's image. Row 50 corresponds to Pandoria's portrait with transparent glasses
     JSONParser.ChangeJSONLine(["common/MNU_Stream_full_bl.json"], [50], ['filename'], fileName)
+    JSONParser.ChangeJSONLine(["common/MNU_Stream_full_glow_bl.json"], [50], ['filename'], fileName_glow)
 
     # Fix the cropping of the image of Pandoria's replacement. Row 50 corresponds to Pandoria's portrait with transparent glasses
     for field in ['offs_x', 'offs_y', 'scale', 'offs_x2', 'offs_y2', 'scale2', 'offs_x3', 'offs_y3', 'scale3', 'offs_x4', 'offs_y4', 'scale4', 'offs_x5', 'offs_y5', 'scale5']:
@@ -793,7 +835,7 @@ def DefineBroadswordArtsForRexsReplacement():
 
 
 
-def FixRexStillAfterHeDies(): # Mostly duplicate with the pandoria bugfix, but with different ids, and using the driver table instead of the blade table
+def FixRexStillAfterHeDies(): # TODO Mostly duplicate with the pandoria bugfix, but with different ids, and using the driver table instead of the blade table
     # Get the still of the driver which replaced Rex
     rex_replacement_still = OriginalDrivers[OriginalDriver2Replacement[1]]['Still']
 
@@ -810,7 +852,6 @@ def FixRexStillAfterHeDies(): # Mostly duplicate with the pandoria bugfix, but w
     # Grab the file name from the File ID
     fileName = JSONParser.QueryJSONLine("common/MNU_Stream_full_dr.json", "$id", RexReplacementImageRow['$id'])['filename']
     fileName_glow = JSONParser.QueryJSONLine("common/MNU_Stream_full_glow_dr.json", "$id", RexReplacementImageRow['$id'])['filename']
-    # TODO: Add the glow logic to Pandoria bugfix
 
     # Replace the image for Rex with his replacement's image. Row 9 corresponds to Rex's portrait with Pyra's core crystal
     JSONParser.ChangeJSONLine(["common/MNU_Stream_full_dr.json"], [9], ['filename'], fileName)
@@ -821,16 +862,15 @@ def FixRexStillAfterHeDies(): # Mostly duplicate with the pandoria bugfix, but w
         JSONParser.ChangeJSONLine(["common/MNU_DrImageID.json"], [9], [field], RexReplacementImageRow[field])
 
 
-# TODO: Unsure if this works, I think it needs a full playthrough. Save right before Jalos to confirm
-def FixRexStillMasterDriver(): # Mostly duplicate with the pandoria bugfix, but with different ids, and using the driver table instead of the blade table
+def FixRexStillMasterDriver(): # TODO Mostly duplicate with the pandoria bugfix, but with different ids, and using the driver table instead of the blade table
     # Get the still of the driver which replaced Rex
     rex_replacement_still = OriginalDrivers[OriginalDriver2Replacement[1]]['Still']
 
     # Use the still to find the icon index of the driver which replaced Rex
     icon_index = JSONParser.QueryJSONLine("common/MNU_IconList.json", "$id", rex_replacement_still)["icon_index"]
 
-    # Fix the small icon for Rex's replacement. Row 265 corresponds to Rex Master Driver
-    JSONParser.ChangeJSONLine(["common/MNU_IconList.json"], [265], ['icon_index'], icon_index)
+    # Fix the small icon for Rex's replacement. Row 264 corresponds to Rex Master Driver
+    JSONParser.ChangeJSONLine(["common/MNU_IconList.json"], [264], ['icon_index'], icon_index)
 
     # Get the driver image for Rex's replacement
     # This includes both the File ID and scaling/cropping information of the image
@@ -839,7 +879,6 @@ def FixRexStillMasterDriver(): # Mostly duplicate with the pandoria bugfix, but 
     # Grab the file name from the File ID
     fileName = JSONParser.QueryJSONLine("common/MNU_Stream_full_dr.json", "$id", RexReplacementImageRow['$id'])['filename']
     fileName_glow = JSONParser.QueryJSONLine("common/MNU_Stream_full_glow_dr.json", "$id", RexReplacementImageRow['$id'])['filename']
-    # TODO: Add the glow logic to Pandoria bugfix
 
     # Replace the image for Rex with his replacement's image. Row 10 corresponds to Rex's portrait with Master Driver
     JSONParser.ChangeJSONLine(["common/MNU_Stream_full_dr.json"], [10], ['filename'], fileName)
