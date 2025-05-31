@@ -4,8 +4,6 @@ from tkinter import *
 root = Tk()
 import scripts.XCRandomizer, SeedNames, IDs, scripts.JSONParser, Options
 
-
-
 Version = "1.1.0"
 
 Tabs = {
