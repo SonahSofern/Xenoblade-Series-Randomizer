@@ -454,7 +454,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink):
                 print(traceback.format_exc()) # shows the full error
                 if errorMsg == None:
                     errorMsg = error
-                errorMsgObj.Header(opt.name)
+                errorMsgObj.Header(f"Error: {opt.name}")
                 errorMsgObj.Text(errorMsg)
 
                 randoProgressDisplay.config(text=f"{opt.name}: {errorMsg}")
