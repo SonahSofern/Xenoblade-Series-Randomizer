@@ -1,5 +1,5 @@
 import scripts.Helper as Helper
-
+import json
 
 #HELPFUL VARIABLES
 AuxCores = Helper.InclRange(15001, 15406)
@@ -199,57 +199,74 @@ TornaAuxCores = Helper.InclRange(17001, 17406) + [17425]
 TornaWeaponChips = WeaponChips
 CombinedTornaAccessories = list(set(TornaAccessories + Accessories))
 TornaPreciousIDs = Helper.InclRange(25457, 25466) + Helper.InclRange(25469, 25494) + Helper.InclRange(25501, 25528)
-TornaUMIDs = [1563, 1564, 1566, 1567, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1670, 1559, 1560, 1561, 1562]
+TornaUMIDs = [1559, 1560, 1561, 1562, 1563, 1564, 1566, 1567, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1670]
 TornaRegularEnemyIDs = [1536, 1537, 1539, 1540, 1542, 1544, 1545, 1546, 1547, 1548, 1549, 1550, 1551, 1570, 1571, 1573, 1574, 1575, 1576, 1577, 1578, 1579, 1580, 1581, 1582, 1583, 1585, 1587, 1588, 1589, 1590, 1591, 1592, 1594, 1595, 1596, 1598, 1600, 1601, 1602, 1604, 1605, 1606, 1607, 1608, 1609, 1610, 1611, 1612, 1613, 1614, 1616, 1617, 1618, 1619, 1621, 1622, 1623, 1624, 1625, 1626, 1627, 1628, 1629, 1630, 1631, 1634, 1635, 1636, 1637, 1639, 1640, 1643, 1644, 1645, 1646, 1647, 1648, 1649, 1650, 1651, 1652, 1653, 1655, 1656, 1496, 1497, 1498, 1499, 1500, 1501, 1502, 1503, 1507, 1512, 1515, 1516, 1518, 1519, 1522, 1526, 1527, 1528, 1529, 1530, 1531, 1532, 1534, 1535]
 TornaSlatePieceIDs = [25479, 25480, 25481, 25482, 25483, 25484, 25485, 25486, 25487, 25488, 25489, 25490, 25491, 25492, 25493, 25494]
+TornaBossIDs = [1428, 1429, 1430, 1431, 1432, 1433, 1434, 1435, 1436, 1437, 1438, 1439, 1440, 1441, 1442, 1443, 1444, 1445, 1446, 1447, 1448, 1449, 1450, 1454, 1632, 1633]
+TornaNormalEnemyIDs = [1496, 1497, 1498, 1499, 1500, 1501, 1502, 1503, 1507, 1512, 1515, 1516, 1518, 1519, 1522, 1526, 1527, 1528, 1529, 1530, 1531, 1532, 1534, 1535, 1536, 1537, 1539, 1540, 1542, 1544, 1545, 1546, 1547, 1548, 1549, 1550, 1551, 1570, 1571, 1573, 1574, 1575, 1576, 1577, 1578, 1579, 1580, 1581, 1582, 1583, 1585, 1587, 1588, 1589, 1590, 1591, 1592, 1594, 1595, 1596, 1598, 1600, 1601, 1602, 1604, 1605, 1607, 1608, 1609, 1610, 1611, 1612, 1613, 1614, 1616, 1617, 1618, 1619, 1621, 1622, 1623, 1624, 1625, 1626, 1627, 1628, 1629, 1630, 1631, 1634, 1635, 1636, 1637, 1639, 1640, 1643, 1644, 1645, 1646, 1647, 1648, 1649, 1650, 1651, 1652, 1653, 1655, 1656, 1521, 1533, 1568, 1569, 1593, 1599, 1641]
+TornaQuestEnemyIDs = [1455, 1456, 1457, 1458, 1459, 1460, 1461, 1462, 1463, 1464, 1465, 1466, 1467, 1468, 1469, 1470, 1471, 1472, 1473, 1474, 1476, 1477, 1479, 1482, 1483, 1484, 1485, 1486, 1487, 1488, 1489, 1490, 1491]
 # Custom Randomizer Item IDs for Torna
 
 # Field Skill Unlocks
 MineralogyKey = Helper.InclRange(25544,25546)
 SwordplayKey = Helper.InclRange(25547,25549)
-FortitudeKey = Helper.InclRange(25550,25551)
-ForestryKey = Helper.InclRange(25552,25554)
-ManipEtherKey = Helper.InclRange(25555,25557)
-KeenEyeKey = Helper.InclRange(25558,25560)
-FocusKey = Helper.InclRange(25561,25563)
-LightKey = Helper.InclRange(25564,25566)
-GirlsTalkKey = [25567]
-EntomologyKey = Helper.InclRange(25568,25570)
-MiningKey = Helper.InclRange(25571,25573)
-BotanyKey = Helper.InclRange(25574,25576)
-LockpickKey = Helper.InclRange(25577,25579)
-IcthyologyKey = Helper.InclRange(25580,25582)
-ComWaterKey = Helper.InclRange(25583,25585)
-SuperstrKey = Helper.InclRange(25586,25588)
+FortitudeKey = Helper.InclRange(25550,25552)
+ForestryKey = Helper.InclRange(25553,25555)
+ManipEtherKey = Helper.InclRange(25556,25558)
+KeenEyeKey = Helper.InclRange(25559,25561)
+FocusKey = Helper.InclRange(25562,25564)
+LightKey = Helper.InclRange(25565,25567)
+GirlsTalkKey = [25568]
+EntomologyKey = Helper.InclRange(25569,25571)
+MiningKey = Helper.InclRange(25572,25574)
+BotanyKey = Helper.InclRange(25575,25577)
+LockpickKey = Helper.InclRange(25578,25580)
+IcthyologyKey = Helper.InclRange(25581,25583)
+ComWaterKey = Helper.InclRange(25584,25586)
+SuperstrKey = Helper.InclRange(25587,25589)
 
 # Campsite Unlocks
-HHC_Key = [25589]
-LC_Key = [25590]
-CLC_Key = [25591]
-HWC_Key = [25592]
-PVC_Key = [25593]
-FVC_Key = [25594]
-AGC_Key = [25595]
-OTC_Key = [25596]
-DDC_Key = [25597]
-HGC_Key = [25598]
+HHC_Key = [25590]
+LC_Key = [25591]
+CLC_Key = [25592]
+HWC_Key = [25593]
+PVC_Key = [25594]
+FVC_Key = [25595]
+AGC_Key = [25596]
+OTC_Key = [25597]
+DDC_Key = [25598]
+HGC_Key = [25599]
 
 # Affinity Level Unlocks
-JinAff = Helper.InclRange(25599,25602)
-HazeAff = Helper.InclRange(25603,25606)
-MythraAff = Helper.InclRange(25607,25610)
-MinothAff = Helper.InclRange(25611,25614)
-BrighidAff = Helper.InclRange(25615,25618)
-AegaeonAff = Helper.InclRange(25619,25622)
+JinAff = Helper.InclRange(25600,25603)
+HazeAff = Helper.InclRange(25604,25607)
+MythraAff = Helper.InclRange(25608,25611)
+MinothAff = Helper.InclRange(25612,25615)
+BrighidAff = Helper.InclRange(25616,25619)
+AegaeonAff = Helper.InclRange(25620,25623)
 
 # Character Unlocks
-HazeKey = [25623]
-AddamKey = [25624]
-MythraKey = [25625]
-MinothKey = [25626]
-HugoKey = [25627]
-BrighidKey = [25628]
-AegaeonKey = [25629]
+HazeKey = [25624]
+AddamKey = [25625]
+MythraKey = [25626]
+MinothKey = [25627]
+HugoKey = [25628]
+BrighidKey = [25629]
+AegaeonKey = [25630]
 
-# Level Up Unlocks
-LevelUpTokens = Helper.InclRange(25630,25725) # 96 tokens, we assume we get 2 levels from intro fight (stats required to beat fight?), and start at lv 1.
+# Level Up Unlocks (no longer used, kept in for reference)
+LevelUpTokens = Helper.InclRange(25631,25726) # 96 tokens, we assume we get 2 levels from intro fight (stats required to beat fight?), and start at lv 1.
+
+#with open("./XC2/_internal/JsonOutputs/common/ITM_CollectionList.json", 'r+', encoding='utf-8') as file:
+#    data = json.load(file)
+#    for row in data["rows"]:
+#        CurDuplicatedItemNames = {"Original ID": row["$id"], "Shares a Name With": []}
+#        CurRowName = row["Name"]
+#        for row2 in data["rows"]:
+#            if row2["Name"] == CurRowName and row["$id"] != row2["$id"]:
+#                CurDuplicatedItemNames["Shares a Name With"].append(row2["$id"])
+#        if CurDuplicatedItemNames["Shares a Name With"] != []:
+#            print(CurDuplicatedItemNames)
+#    file.seek(0)
+#    file.truncate()
+#    json.dump(data, file, indent=2, ensure_ascii=False)

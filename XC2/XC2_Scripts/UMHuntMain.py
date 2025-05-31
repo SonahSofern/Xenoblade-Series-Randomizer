@@ -717,6 +717,12 @@ def CustomEnemyRando(ChosenAreaOrder): # Custom shuffling of enemies
                 CopyofUnusedNormalValidEnemyDefaultIDs.remove(ChosenNormalEnemy)
             random.shuffle(NewAreaEnemies) # now mix up the enemies
             Old2NewEnemy = {OriginalAreaEnemies[ChosenAreaOrder[k]][i]: NewAreaEnemies[i] for i in range(len(OriginalAreaEnemies[ChosenAreaOrder[k]]))} # dictionary showing how old enemy should get replaced by new enemy
+            try:
+                while Old2NewEnemy[1137] in Chosen4UMs + ChosenSuperBoss: # if the ophion slot gets chosen for a um or superboss, reroll the list
+                    random.shuffle(NewAreaEnemies)
+                    Old2NewEnemy = {OriginalAreaEnemies[ChosenAreaOrder[k]][i]: NewAreaEnemies[i] for i in range(len(OriginalAreaEnemies[ChosenAreaOrder[k]]))} # dictionary showing how old enemy should get replaced by new enemy
+            except:
+                pass
             for row in data["rows"]: # row ~550 loops
                 for j in range(1, 5): # column 4 loops
                     OldEnemyID = row[f"ene{j}ID"]

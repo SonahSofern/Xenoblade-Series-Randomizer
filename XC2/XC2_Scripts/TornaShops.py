@@ -3,8 +3,6 @@ import json
 import random
 from IDs import *
 
-# still need to alter the shops for the two bards. need to add one more custom shop that trades level tokens for exp.
-# need to altar the sidequest shops to make every item give the same amount of points, and make the max points needed 1, except for the slate piece shop
 
 class TornaShop: # created to allow me to pass these objects easier
     def __init__(self, input, addtolist, rewardnumber):
@@ -15,7 +13,12 @@ class TornaShop: # created to allow me to pass these objects easier
         self.mainreq = input['Story Pre-Req']
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Required Items'])
         self.talkeventid = input['Talk Event ID']
-        self.randomizeditems = Helper.ExtendListtoLength([], rewardnumber, "0") # holds shop item ids
+        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 15, "0") # holds shop item ids, -1 for progression, 0 for filler spots
+        self.type = "shop"
+        if rewardnumber > 0:
+            self.hasprogression = True
+        else:
+            self.hasprogression = False
         addtolist.append(self)
 
 def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
@@ -129,7 +132,7 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
 
     for shop in TornaShops:
         if shop.mainreq != []:
-            shop.itemreqs.extend(Mainquests[shop.mainreq].itemreqs) # adds main story req
+            shop.itemreqs.extend(Mainquests[shop.mainreq - 1].itemreqs) # adds main story req
             shop.itemreqs = Helper.MultiLevelListToSingleLevelList(shop.itemreqs)
             shop.itemreqs = list(set(shop.itemreqs))
             shop.itemreqs.sort()
@@ -137,4 +140,5 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
             if shop.nearloc == area.id:
                 shop.itemreqs.extend(area.itemreqs)
                 break
+            
     return TornaShops
