@@ -6,6 +6,10 @@ from tkinter import *
 import tkinter as tk
 from scripts.GUISettings import *
 
+seedEntryVar = StringVar()
+permalinkVar = StringVar()
+fileEntryVar = StringVar()
+
 class Tab():
     def __init__(self, name, outer, canvas, inner):
         self.name = name
@@ -83,7 +87,6 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     bdatcommonFrame.pack(anchor="w", padx=10)
     bdatButton = ttk.Button(bdatcommonFrame, width=17, text="Choose Input Folder", command= lambda: Helper.DirectoryChoice("Choose your folder containing common.bdat, common_ms.bdat and common_gmk.bdat", bdatFilePathEntry))
     bdatButton.pack(side="left", padx=2, pady=2)
-    fileEntryVar = StringVar()
     bdatFilePathEntry = ttk.Entry(bdatcommonFrame, width=MaxWidth, textvariable=fileEntryVar)
     bdatFilePathEntry.pack(side="left", padx=2)
     OutputDirectoryFrame = ttk.Frame(root, style="NoBackground.TFrame")
@@ -102,12 +105,10 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     GUISettings.RootsForStyling.append(bdatcommonFrame)
 
     # Seed entry box
-    seedEntryVar = StringVar()
     GenRandomSeed(seedEntryVar) # Gen a random seed if you have no save data 
     randoSeedEntry = ttk.Entry(SeedFrame, width=30, textvariable=seedEntryVar)
     randoSeedEntry.pack(side='left', padx=2)
 
-    permalinkVar = StringVar()
 
 
             

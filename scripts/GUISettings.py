@@ -426,6 +426,8 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink):
     errorMsgObj.Tag(f"Seed: {seed}", pady=5, anchor="center") # Seed
     errorMsgObj.Tag(f"Settings: {permalink}", pady=5, anchor="center") # Permalink
     errorMsgObj.Tag(f"Time: {datetime.datetime.now()}", pady=5, anchor="center") # Time
+    def ErrorLog():
+        return errorMsgObj
     for opt in OptionList:
         if not opt.GetState(): # Checks state
             continue
@@ -443,8 +445,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink):
                 print(f"{traceback.format_exc()}") # shows the full error
                 
         randoProgressDisplay.config(text=opt.name)
-        def ErrorLog():
-            return errorMsgObj
+
         for command in opt.commands:
             try:
                 errorMsg = command()
