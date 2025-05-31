@@ -137,7 +137,7 @@ class SubOption():
         self.spinBoxObj = None
         self.spinBoxMin = 0
         self.spinBoxMax = 100
-        self.spinDefault = 0
+        self.spinDefault = 1
         self.spinBoxLabel = ""
         self.spinWidth = 3
         self.spinIncr = 1
