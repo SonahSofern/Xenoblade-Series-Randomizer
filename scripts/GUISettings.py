@@ -314,30 +314,39 @@ def LoadTheme(defaultFont, themeName):
             root.config(background=currentTheme["backgroundColor"])
         except:
             pass
-        
-def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFrames:list[ttk.Frame], genScrollbar = True): # I never want to touch this code again lol what a nightmare
+scrollbars = []
+
+def _on_mousewheel(event, canvas:Canvas):
+    canvas.update_idletasks()
+    canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+    # print(canvas.cget("scrollregion"))
+    
+def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFrames:list[ttk.Frame], genScrollbar = True):
     for i in range(len(Canvases)):
         InnerFrames[i].pack(fill=BOTH, expand=True)
 
         scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
+        scrollbars.append(scrollbar)
         Canvases[i].config(yscrollcommand=scrollbar.set, borderwidth=0, relief="flat", highlightthickness=0)
         CanvasesForStyling.append(Canvases[i])
         # OuterFrames[i].config(borderwidth=0, relief="flat")
         InnerFrames[i].bind("<Configure>", lambda e, canvas=Canvases[i]: canvas.configure(scrollregion=canvas.bbox("all")))
 
         Canvases[i].create_window((0, 0), window=InnerFrames[i], anchor="nw")
+
         Canvases[i].pack(side="left", fill=BOTH, expand=True)
         if genScrollbar:
             scrollbar.pack(side="right", fill="y")
 
-        def _on_mousewheel(event, canvas=Canvases[i]):
-            canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+
 
         OuterFrames[i].bind("<Enter>", lambda e, canvas=Canvases[i]: canvas.bind_all("<MouseWheel>", lambda event: _on_mousewheel(event, canvas)))
         OuterFrames[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
         
         OuterFrames[i].pack_propagate(False)
         OuterFrames[i].pack(fill=BOTH, expand=True)
+    return scrollbars
+
 
 def ResizeWindow(top, innerFrame, padx = 37):
     innerFrame.update_idletasks()  # Ensure the geometry is up to date
