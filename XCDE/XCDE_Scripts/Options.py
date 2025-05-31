@@ -4,23 +4,22 @@ from scripts import Helper
 import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales, NPC, Weapons, Items, Cutscenes, IDs, Landmarks
 
 OptionList =[]
-Loot = 1
+General = 1
 Character  = 2
 Enemies = 3
-Musica = 4
-QOL = 5
+Musica = 5
+QOL = 4
 Funny = 6
-GameModeTab = 7
 
 # General
-TradeOption = Option("NPC Trades", Loot, "Randomizes chosen categories of NPC trades", [lambda: NPC.Trades()], descData=lambda: NPC.NPCTradesDesc())
+TradeOption = Option("NPC Trades", General, "Randomizes chosen categories of NPC trades", [lambda: NPC.Trades()], descData=lambda: NPC.NPCTradesDesc())
 TradeOption_Weapon = SubOption("Weapons", TradeOption)
 TradeOption_Armor = SubOption("Armor", TradeOption)
 TradeOption_Gem = SubOption("Gems", TradeOption)
 TradeOption_Collectibles = SubOption("Collectibles", TradeOption)
 TradeOption_Materials = SubOption("Materials", TradeOption)
 
-CollectableOptions = Option("Collectable Orbs", Loot, "Randomizes collectables on the field into the chosen options", [lambda: Items.Collectables()], _hasSpinBox = True, descData=lambda: Items.CollectDesc())
+CollectableOptions = Option("Collectable Orbs", General, "Randomizes collectables on the field into the chosen options", [lambda: Items.Collectables()], _hasSpinBox = True, descData=lambda: Items.CollectDesc())
 CollectableOptions_Collectables = SubOption("Collectables", CollectableOptions, hasSpinBox=True)
 CollectableOptions_Materials = SubOption("Materials", CollectableOptions, hasSpinBox=True)
 CollectableOptions_Armor = SubOption("Armor", CollectableOptions, hasSpinBox=True)
@@ -30,7 +29,7 @@ CollectableOptions_Crystals = SubOption("Crystals", CollectableOptions, hasSpinB
 CollectableOptions_ArtBooks = SubOption("Art Books", CollectableOptions, hasSpinBox=True)
 CollectableOptions_KeyItems = SubOption("Key Items", CollectableOptions, hasSpinBox=True)
 
-CollectapediaOptions = Option("Collectapedia Rewards", Loot, "Randomizes rewards from the collectapedia into the chosen options", [lambda: Items.Collectapedia()], descData=lambda: Items.CollectapediaDesc(), _hasSpinBox = True)
+CollectapediaOptions = Option("Collectapedia Rewards", General, "Randomizes rewards from the collectapedia into the chosen options", [lambda: Items.Collectapedia()], descData=lambda: Items.CollectapediaDesc(), _hasSpinBox = True)
 CollectapediaOptions_Collectables = SubOption("Collectables", CollectapediaOptions, hasSpinBox=True)
 CollectapediaOptions_Materials = SubOption("Materials", CollectapediaOptions, hasSpinBox=True)
 CollectapediaOptions_Armor = SubOption("Armor", CollectapediaOptions, hasSpinBox=True)
@@ -40,11 +39,11 @@ CollectapediaOptions_Crystals = SubOption("Crystals", CollectapediaOptions, hasS
 CollectapediaOptions_ArtBooks = SubOption("Art Books", CollectapediaOptions, hasSpinBox=True)
 CollectapediaOptions_KeyItems = SubOption("Key Items", CollectapediaOptions, hasSpinBox=True)
 
-EnemyDropOption = Option("Enemy Drops", Loot, "Randomizes", [])
+EnemyDropOption = Option("Enemy Drops", General, "Randomizes", [])
 
-QuestRewardsOption = Option("Quest Rewards", Loot, "Randomizes", [])
+QuestRewardsOption = Option("Quest Rewards", General, "Randomizes", [])
 
-GiantsChestOption = Option("Giants Chests", Loot, "Randomizes the contents of Giants Chests into the chosen options", [lambda: Items.GiantsChests()], descData=lambda: Items.GiantsChestsDesc(), _hasSpinBox = True)
+GiantsChestOption = Option("Giants Chests", General, "Randomizes the contents of Giants Chests into the chosen options", [lambda: Items.GiantsChests()], descData=lambda: Items.GiantsChestsDesc(), _hasSpinBox = True)
 GiantsChestOptions_Collectables = SubOption("Collectables", GiantsChestOption, hasSpinBox=True)
 GiantsChestOptions_Materials = SubOption("Materials", GiantsChestOption, hasSpinBox=True)
 GiantsChestOptions_Armor = SubOption("Armor", GiantsChestOption, hasSpinBox=True)
@@ -55,7 +54,7 @@ GiantsChestOptions_ArtBooks = SubOption("Art Books", GiantsChestOption, hasSpinB
 GiantsChestOptions_KeyItems = SubOption("Key Items", GiantsChestOption, hasSpinBox=True)
 
 
-ShopOption = Option("Shops", Loot, "Randomizes", []) # Key item rando settings would be fun 
+ShopOption = Option("Shops", General, "Randomizes", []) # Key item rando settings would be fun 
 
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/FLD_valpoplist.html#1 Red orbs found here not sure what to do with them yet
 
