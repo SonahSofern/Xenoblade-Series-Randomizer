@@ -127,7 +127,7 @@ GemOption_Power = SubOption("Power", GemOption)
 GemOption_Effect = SubOption("Effects", GemOption)
 GemOption_Unused = SubOption("Unused Effects", GemOption)
 GemOption_FreeEquip = SubOption("Freely Equip to Weapons/Armor", GemOption)
-GemOption_NoCap = SubOption("Remove Gem Stat Caps", GemOption)
+GemOption_NoCap = SubOption("Gem Caps", GemOption)
 AffinityTreeOption = Option("Skill Trees", Character, "Randomizes all character's skill trees", [lambda: SkillTrees.SkillRando()], descData=lambda: SkillTrees.SkillTreeDesc(), hasSpinBox = True)
 AffinityTreeOption_Effect = SubOption("Skill", AffinityTreeOption)
 AffinityTreeOption_Power = SubOption("Power", AffinityTreeOption)
@@ -182,7 +182,7 @@ MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free q
 # CutsceneSkipOption = Option("Cutscene Skips", QOL, "Skips all possible cutscenes", [lambda: Cutscenes.CutsceneSkipper()])
 
 # Funny
-EnemyScaleOption = Option("Enemy Scale", Funny, "Randomizes a % of enemy sizes.", [lambda: Scales.EnemyScales()], hasSpinBox=True)
+# EnemyScaleOption = Option("Enemy Scale", Funny, "Randomizes a % of enemy sizes.", [lambda: Scales.EnemyScales()], hasSpinBox=True)
 NPCScaleOption = Option("NPC Scale", Funny, "Randomizes a % of npc sizes.", [lambda: Scales.NPCScales()], hasSpinBox = True)
 RemoveStartingArmorOption = Option("Remove Starting Equipment", Funny, "Removes starting armor on all the main characters.", [lambda: Armor.RemoveStartingGear()])
 NPCModelsOption = Option("NPC Models", Funny, "Randomizes NPC models *Experimental, can cause crashes", [lambda: NPC.NPCModelRando()], hasSpinBox = True)

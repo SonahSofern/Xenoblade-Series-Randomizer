@@ -26,8 +26,8 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     YaldabaothThree = ForcedArt(2501, 8, 846)
     YaldabaothTwo = ForcedArt(2123, 1, 828)
     SurenyTelethia = ForcedArt(2601, 1, 870)
-    EnergyDevice = ForcedArt(2506, 1, 848) # Not using since the enemies have removed their limits anyway to account for UM who cant be instakilled
-    EnergyDeviceTwo = ForcedArt(2506, 2, 848)
+    # EnergyDevice = ForcedArt(2506, 1, 848) # Not using since the enemies have removed their limits anyway to account for UM who cant be instakilled
+    # EnergyDeviceTwo = ForcedArt(2506, 2, 848)
     GroupEnemies = [135,136,137,138,139]
     selfDestructArts = [1005,1015,1017,1009, 1007, 1013, 396, 406, 915, 408, 812, 814, 400, 923, 1053, 398, 899, 404, 410, 1127, 820] + Helper.InclRange(900, 929)
     ForcedStoryArts = [MetalFace, MysteriousFace, GoldFace, DiscipleDickson, Yaldabaoth, YaldabaothTwo, SurenyTelethia, YaldabaothThree] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
@@ -38,13 +38,13 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     odds = odds.GetSpinbox()
     ChosenEnemyIds = []
     if isNormal:
-        ChosenEnemyIds.extend(NormalEnemies)
+        ChosenEnemyIds.append(NormalEnemies)
     if isUnique:
-        ChosenEnemyIds.extend(UniqueEnemies)
+        ChosenEnemyIds.append(UniqueEnemies)
     if isBoss:
-        ChosenEnemyIds.extend(BossEnemies)
+        ChosenEnemyIds.append(BossEnemies)
     if isSuper:
-        ChosenEnemyIds.extend(SuperbossEnemies)
+        ChosenEnemyIds.append(SuperbossEnemies)
     # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame",  "avoid", "spike_dmg", "spike_state_val"
     CopiedStats = ["move_speed", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_state", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
     CopiedStatsWithRatios = ["str", "eth"] # Not doing agility or hp , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
@@ -151,8 +151,8 @@ def VoicedEnemiesFix(eneVoiceData, chosen, enemy):
 # Big enemies in small areas can break the ai and you cant target them if they go into ceilings (Had this in the two ancient machines fight with a big dragon)
 def SmallAreaFights(enemy):
     SmallFights = [30,31, 1617]
-    if enemy["$id"] in SmallFights:
-        enemy["scale"] = max(int(enemy["scale"] /4),1)
+    if (enemy["$id"] in SmallFights) and (enemy["size"] >= 4):
+        enemy["scale"] = max(int(enemy["scale"] /3),1)
 
 # Create our list of enemies from all the area files and Combine the data into the class
 def CreateEnemyDataClass(eneData, enAreaFiles):

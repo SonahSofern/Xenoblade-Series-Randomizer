@@ -6,7 +6,7 @@ from scripts import JSONParser, Helper, PopupDescriptions
 def NPCModelRando():
     odds = Options.NPCModelsOption.GetSpinbox()
     ObjectList = []
-    dontReplace = Helper.InclRange(655,680) + [650,651]
+    dontReplace = Helper.InclRange(654,680) + [650,651]
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/KP_list.json", 'r+', encoding='utf-8') as lmFile:
         lmData = json.load(lmFile)
         for lm in lmData["rows"]:

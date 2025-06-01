@@ -109,7 +109,7 @@ def Gems():
                 for gem in gemData["rows"]:
                     if isNotCapped:
                         if gem["rvs_status"] not in [146, 45]:
-                            gem["max"] = 10000
+                            gem["max"] = int(gem["max"] * random.choice([0.2,0.4,0.6,0.8,1.2,1.4,1.6,1.8,2.2,3,3,4]))
                     if isFreeEquip:
                         gem["attach"] = 0                # 0 Equip to anything                # 1 Equip to weapon                # 2 Equip to armor
                     if isPower:
@@ -282,7 +282,7 @@ def GemDescriptions():
     GemDescription.Image("GemsFreeEquipped.png","XCDE", 500)
     GemDescription.Text("Double Attack on armor and HP Up on weapons.", anchor="center")
     GemDescription.Header(Options.GemOption_NoCap.name)
-    GemDescription.Text("This removes the % and regular cap for all gems when you equip them.")
+    GemDescription.Text("This randomizes the % and regular cap for all gems when you equip them.")
     GemDescription.Image("GemCap.png","XCDE", 500)
     GemDescription.Text("Double Attack and Haste above their vanilla 50% cap.", anchor="center")
     return GemDescription
