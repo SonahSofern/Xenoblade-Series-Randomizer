@@ -421,8 +421,9 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path
 def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink):
     
     OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
+    status = "Complete"
     errorMsgObj = PopupDescriptions.Description(bonusWidth= 15)
-    errorMsgObj.Header("Randomization Complete")
+    errorMsgObj.Header(f"Randomization {status}")
     errorMsgObj.Tag(f"Seed: {seed}", pady=5, anchor="center") # Seed
     # errorMsgObj.Tag(f"Settings: {permalink}", pady=5, anchor="center") # Permalink
     errorMsgObj.Tag(f"Time: {datetime.datetime.now()}", pady=5, anchor="center") # Time
@@ -450,6 +451,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink):
             try:
                 errorMsg = command()
             except Exception as error:
+                status = "FAILED"
                 print(f"ERROR: {opt.name} | {error}")
                 print(traceback.format_exc()) # shows the full error
                 if errorMsg == None:
