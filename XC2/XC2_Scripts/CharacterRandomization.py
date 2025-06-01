@@ -4,22 +4,15 @@ from scripts import JSONParser, Helper
 # TODO (blades):
 #  - Replace the images in the Pyra/Mythra selection to the blades which replaced them
 #  - Figure out how to randomize Torna blades properly (Apparently NoBuildWpn in CHR_Bl is not sufficient)
-#  - Blade names should be replaced in all dialogs where possible
+#  - Blade names should be replaced in all dialogs where possible (nice to have)
 #  - Replace driver voice lines when changing blades (Rex will currently shout "Pyra" when switching to Pyra's replacement)
 #  - Replace field skill voice lines (Pyra's replacement currently says "I bring upon the power of fire!" in Pyra's voice)
 #  - Only do the Pandoria glasses fix if Pandoria is actually randomized
 #  - Could Pandoria's glasses overworld model still be used if we apply a condition? Currently a condition isn't used, so I'm not sure how that cosmetic model gets applies
-#  - All blade's weapons should scale to who they replace. For example, if a gacha blade replaces Brighid, they should have a coil chip. If Pandoria becomes Gacha, she should have a tier 1 chip.
 
 # TODO: (drivers)
 #  - Voice lines in the menu (such as when spending affinity tokens) is still the original driver's voice
-#  - Where weapons are located on the player model is wrong. When Rex becomes Morag for example, the whipswords on Morag's back line up with where Rex puts his weapons (his back) not where Morag puts her weapons (hips)
-#    - This is likely tied to the weapon's animations, so that probably cannot be fixed.
-#    - This might also be part of common/RSC_PcWpnMount, although I'm not sure if modifying this table has side effects
-#  - swapped drivers are not zoomed in properly when summoning core crystals
 #  - "Not to boast, but that was spectacular! Right gramps?" after winning a fight without Rex in the party yet
-#  -
-#  - hard to tell if master driver logic is working properly, since I have the QoL setting for swapping blades. Try another run without that and without NG+ stuff
 #  -
 #  - Replace driver names in all dialog text (nice to have)
 
@@ -238,15 +231,6 @@ def RandomizeDrivers():
 
         randomized_order = drivers_left_to_randomize.copy()
         random.shuffle(randomized_order)
-
-        # TODO: Testing. Remove this
-        #  This makes it so no driver is in their starting position
-        if GuaranteedHealer and GuaranteedHealer == 1011:
-            randomized_order = [3, 1, 6, 2]
-        else:
-            randomized_order = [2, 6, 1, 3] # Play as Nia
-            #randomized_order = [6, 3, 2, 1] # Play as Morag
-            #randomized_order = [3, 1, 6, 2] # Play as Zeke
 
         # Two conditions might be required for the randomized driver order to be valid:
         # 1. If Guarantee Early Nia is set, she must be one of the first two drivers
@@ -506,19 +490,20 @@ def ApplyDriverRandomization(driver):
 
 
 def ApplyBladeRandomization(blade):
-    # Certain fields are not randomized
-    # 1. Field skills for progression reasons (TODO: If field skills QoL options are not picked)
+    # Certain skills are not randomized
+    # 1. Field skills for progression reasons
     # 2. Pneuma skills, for purposes of Driver randomization without Blade randomization
-    excluded_fields = dict()
-    excluded_fields[1001] = ['FSkill1', 'FSkill2', 'FSkill3']  # Pyra: Fire Mastery, Focus, Cooking
-    excluded_fields[1005] = ['FSkill3']  # Poppi Alpha: Superstrength
-    excluded_fields[1008] = ['FSkill2']  # Roc: Miasma Dispersal
+    excluded_skills = dict()
+    if not Options.RemoveFieldSkillsOption.GetState():
+        excluded_skills[1001] = ['FSkill1', 'FSkill2', 'FSkill3']  # Pyra: Fire Mastery, Focus, Cooking
+        excluded_skills[1005] = ['FSkill3']  # Poppi Alpha: Superstrength
+        excluded_skills[1008] = ['FSkill2']  # Roc: Miasma Dispersal
 
     # Pneuma is only randomized when Drivers are randomized
     # 1. Default weapons not randomized, as it is set in SwapDefaultBlades()
     # 2. Model not randomized, as it is set in SwapDefaultBlades()
     # 3. Battle skills, as it is what makes Pneuma...Pneuma
-    excluded_fields[1003] = ["DefWeapon", "Model", "BSkill1", "BSkill2", "BSkill3"]
+    excluded_skills[1003] = ["Name", "DefWeapon", "Model", "BSkill1", "BSkill2", "BSkill3"]
 
     blade_id = blade['$id']
     if blade_id in OriginalBlade2Replacement:
@@ -529,7 +514,7 @@ def ApplyBladeRandomization(blade):
         for key, value in blade.items():
             if key in ['$id', 'ReleaseLock']:
                 continue
-            if blade_id in excluded_fields and key in excluded_fields[blade_id]:
+            if blade_id in excluded_skills and key in excluded_skills[blade_id]:
                 continue
             if key == 'Flag':
                 for flag_key, flag_value in OriginalBlades[replace_with_id]['Flag'].items():
@@ -614,10 +599,7 @@ def RandomizePoppiForms():
 
 
 def BugFixes_PostRandomization():
-    # TODO: I had the following line commented out when testing driver rando in isolation.
-    #  Is this why Dromarch didn't appear in the ghosts fight?
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_EnArrange.json"], [], FixRandomizedEnemyBladeCrashes, replaceAll=True)
-
     JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], [], MakeAllArtsAccessible, replaceAll=True)
     JSONParser.ChangeJSONLineWithCallback(["common/EVT_cutscene_wp.json"], [], FixCutsceneCrashForNotHavingTwoWeapons, replaceAll=True)
     JSONParser.ChangeJSONLineWithCallback(["common/ITM_OrbEquip.json"], [], FixCosmetics, replaceAll=True)
@@ -625,9 +607,7 @@ def BugFixes_PostRandomization():
     FixPandoriaSpriteAfterElpys()
     FixMenuText()
     RebalanceDefaultWeapons()
-
-    if randomize_blades:
-        FreeEngage()
+    FreeEngage()
 
     if randomize_drivers:
         DefineBroadswordArtsForRexsReplacement()
@@ -635,6 +615,7 @@ def BugFixes_PostRandomization():
         FixRexStillMasterDriver()
         FixDriverArts()
         FixDriverSkillTrees()
+        FixWeaponMounts()
 
 # Unsure why, but it is possible for the game to crash when an enemy blade gets randomized (for example, Pandoria).
 # Replace the enemy version of the blade with the blade who that enemy replaced.
@@ -713,41 +694,31 @@ def FixPandoriaSpriteAfterElpys():
     for field in ['offs_x', 'offs_y', 'scale', 'offs_x2', 'offs_y2', 'scale2', 'offs_x3', 'offs_y3', 'scale3', 'offs_x4', 'offs_y4', 'scale4', 'offs_x5', 'offs_y5', 'scale5']:
         JSONParser.ChangeJSONLine(["common/MNU_BlImageID.json"], [50], [field], PandoriaReplacementImageRow[field])
 
+
 def FixMenuText():
-    # TODO: How do I figure out default blades if both Drivers and Blades have been randomized?
-    #  This matters for Pandoria at least, perhaps others.
-
-
     # Zeke's Eye of Shining Justice Skill
-    # TODO Also, does this skill even work if Zeke gets swapped?
     JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"], [294], ['name'], 'At max Affinity w/ ' + BladeNames[OriginalBlade2Replacement[1010]] + ': R and +\nto awaken for a time (once per battle).')
 
     # Switch between Driver/Blade Nia text
     if 1011 in OriginalBlade2Replacement and OriginalBlade2Replacement[1011] != 1011:
-        # TODO: Test this change
-        #JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [261], ['name'], 'Turn Nia into ' + BladeNames[OriginalBlade2Replacement[1011]] + '?''')
-        #JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [262], ['name'], 'Turn ' + BladeNames[OriginalBlade2Replacement[1011]] + ' into Nia?')
-        #JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [297], ['name'], 'You cannot turn ' + BladeNames[OriginalBlade2Replacement[1011]] + ' into Nia because\nno other Blades are engaged.')
         JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [261], ['name'], "Turn %s into %s?" % (DriverNames[OriginalDriver2Replacement[2]], BladeNames[OriginalBlade2Replacement[1011]]))
         JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [262], ['name'], "Turn %s into %s?" % (BladeNames[OriginalBlade2Replacement[1011]], DriverNames[OriginalDriver2Replacement[2]]))
         JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [297], ['name'], "You cannot turn %s into %s because\nno other Blades are engaged." % (BladeNames[OriginalBlade2Replacement[1011]], DriverNames[OriginalDriver2Replacement[2]]))
 
     # Swap to between Pyra/Mythra text
     # Note: The words "Swap to" have been intentionally dropped because any blade which a name longer than 6 letters gets cut off
-    # TODO: Test this change
     JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [260], ['name'], "Changing to %s. Is this OK?" % (BladeNames[OriginalBlade2Replacement[1001]]))
     JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [259], ['name'], "Changing to %s. Is this OK?" % (BladeNames[OriginalBlade2Replacement[1002]]))
     JSONParser.ChangeJSONLine(["common_ms/menu_operation_info_ms.json"], [89], ['name'], BladeNames[OriginalBlade2Replacement[1002]]) # "Swap to" Text
     JSONParser.ChangeJSONLine(["common_ms/menu_operation_info_ms.json"], [90], ['name'], BladeNames[OriginalBlade2Replacement[1001]]) # "Swap to" Text
 
     # Pyra/Mythra choice text
-    # TODO: Test this change
     JSONParser.ChangeJSONLine(["common_ms/cmm_homuri_name_ms.json"], [1], ['name'], BladeNames[OriginalBlade2Replacement[1001]]) # Pneuma's name when "Pyra" is selected
     JSONParser.ChangeJSONLine(["common_ms/cmm_homuri_name_ms.json"], [2], ['name'], BladeNames[OriginalBlade2Replacement[1002]]) # Pneuma's name when "Mythra" is selected
     JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"], [1736], ['name'], BladeNames[OriginalBlade2Replacement[1001]]) # The choice selection
     JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"], [1737], ['name'], BladeNames[OriginalBlade2Replacement[1002]]) # The choice selection
-    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [257], ['name'], "The name will be set to %s. Is this OK?" % (BladeNames[OriginalBlade2Replacement[1001]]))
-    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [258], ['name'], "The name will be set to %s. Is this OK?" % (BladeNames[OriginalBlade2Replacement[1002]]))
+    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [257], ['name'], "The name will be set to %s.\nIs this OK?" % (BladeNames[OriginalBlade2Replacement[1001]]))
+    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [258], ['name'], "The name will be set to %s.\nIs this OK?" % (BladeNames[OriginalBlade2Replacement[1002]]))
 
     # Pyra/Mythra choice images
     # TODO
@@ -777,9 +748,6 @@ def DefineBroadswordArtsForRexsReplacement():
             #new_arts = [NiaHammerArt1, NiaHammerArt2, NiaHammerArt3, NiaHammerArt4]
             new_arts = [NiaHammerArt1, NiaHammerArt2, NiaHammerArt3]
         case 3: # Zeke
-            # TODO: Detonation blow crashes the game. Remove that art
-            # TODO: One of these crashes the game. Need to figure out which and just remove it
-            # TODO: Figure out if there are any other arts for other characters which need arts removed
             # Define Broadsword arts for Zeke, using Shield Hammer arts as a base
             ZekeHammerAA1 = existing_arts[199].copy()
             ZekeHammerAA2 = existing_arts[200].copy()
@@ -911,7 +879,16 @@ def FixDriverSkillTrees():
         new_skill_tree = []
         for key, value in original_skill_trees[replacement_driver_id].items():
             item = {"$id": key}
-            item.update(value)
+            # Zeke's Eye of Shining Justice sadly doesn't work with randomized drivers
+            # The functionality exists on Zeke's replacement, but the game softlocks when you try to activate it
+            # Replace Zeke's Shining Justice Skill with Rex's Combo Enhance skill (arbitrarily selected, but it's
+            # one of the few skills not common between drivers)
+            # This only happens if Zeke was actually randomized
+            if (OriginalDriver2Replacement[3] != [3]) and (replacement_driver_id == 3 and key == 24):
+                item.update(original_skill_trees[1][8])
+            else:
+                item.update(value)
+
             new_skill_tree.append(item)
 
         JSONParser.ReplaceJSONFile(f"common/BTL_Skill_Dr_Table{original_driver_id:02d}.json", new_skill_tree)
@@ -959,3 +936,18 @@ def RebalanceDefaultWeapons():
         print("%s's new default weapon is: %s" % (BladeNames[replacement_blade_id], new_replacement_weapon_id))
 
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], [], callback, replaceAll=True)
+
+def FixWeaponMounts():
+    weapon_mount_table = JSONParser.CopyJSONFile("common/RSC_PcWpnMount.json")
+
+    def callback(wpn_mount):
+        for i in Helper.InclRange(1,36):
+            fields = [f"Wpn{i:02d}rIn", f"Wpn{i:02d}rOut", f"Wpn{i:02d}lIn", f"Wpn{i:02d}lOut"]
+            for field in fields:
+                if field in wpn_mount.keys():
+                    nonlocal weapon_mount_table
+                    original_driver_id = wpn_mount['$id']
+                    replacement_driver_id = OriginalDriver2Replacement[original_driver_id]
+                    wpn_mount[field] = weapon_mount_table[replacement_driver_id][field]
+
+    JSONParser.ChangeJSONLineWithCallback(["common/RSC_PcWpnMount.json"], DriversToRandomize, callback)
