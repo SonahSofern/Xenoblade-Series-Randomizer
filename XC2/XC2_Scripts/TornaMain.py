@@ -14,12 +14,15 @@ import _WeaponChips
 # look into options for pre-completed quests or EZ-complete quests?
 # required items for a given quest would need to be zeroed out for said quest, besides the pre-req items.
 
-# if gilded required check names is on, turn the rarity of all required items to legendary, all the non-required items to common, change the colors of their names to gold or red respectively.
+# need to figure out which landmarks will give exactly 1 xp, to allow you to break the level cap?
+
+# you fight 2 enemies in order, A then B.
+# enemy A gives 1 xp, enough to reach the next level cap, then enemy B gives 99999 xp, enough to break that level cap
+# could work I think
 
 # option to remove specific quests or locations from list
 
 # there's probably a few enemies that are hard to get to aggro.
-# may want to change the level cap system slightly, so that the required xp to level up is decreased by like 50%ish, and enemies (excluding the boss level cap enemies) drop their normal xp
 
 class ItemInfo:
     def __init__(self, inputid, category, addtolist):
@@ -298,30 +301,22 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
             FullItemReqList.extend(check.itemreqs)
     FullItemReqList.extend(ValidRecipeInfoIDs)
     FullItemReqList = list(set(FullItemReqList))
-    #LocNameList = {"Side Quests": [], "Normal Enemies": [], "Unique Monsters": [], "Bosses": [], "Quest Enemies": [], "Ground Item Spots": [], "Miscellaneous":[], "Chests": [], "Shops": [], "Collection Points (Torna)":[], "Collection Points (Gormott)": []}
-    #for loc in Locs:
-    #    for check in loc:
-    #        LocNameList[LocTypetoSpoilerLogHeader[check.type]].append(check.name)
-    #for cat in LocNameList.keys():
-    #    print(cat)
-    #    print(LocNameList[cat])
-    #FullItemReqList.extend(AllSidequestProgressionItems)
-    #FullItemReqList = list(set(FullItemReqList))
     FullItemReqList.sort()
-    #FullItemNameReqList = []
-    #for item in FullItemReqList:
-    #    FullItemNameReqList.append(ItemIDtoItemName[item])
-    #AllTrackedItemsIDtoNameDict = {}
-    #for item in range(len(FullItemReqList)):
-    #    AllTrackedItemsIDtoNameDict[FullItemReqList[item]] = FullItemNameReqList[item]
-    #print(AllTrackedItemsIDtoNameDict)
     UnplacedProgressionItems = [x for x in FullItemReqList if x not in PlacedItems] # this holds the items that unlock stuff but don't logically contribute to the playthrough
-    #UnplacedLevelUpTokens = [x for x in UnplacedProgressionItems if x in LevelUpTokens] # we want to get only the level up tokens, note down the id number, then determine past what level, you can easily get exp.
-    #MinLogicalLevel = UnplacedLevelUpTokens[0] - 25626
-    #for loc in AllLocations: # remove the level token requirement from all remaining locations
-    #    loc.itemreqs = [x for x in loc.itemreqs if x not in UnplacedLevelUpTokens]
-    #AdjustLevelUpReqs(MinLogicalLevel)
+
     # place filler items in all remaining checks, regardless of if it has progression enabled.
+
+    #RowtoRankDict = {}
+    #with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file:
+    #    data = json.load(file)
+    #    for row in data["rows"]:
+    #        RowtoRankDict[row["$id"]] = row["Rank"]
+    #    file.seek(0)
+    #    file.truncate()
+    #    json.dump(data, file, indent=2, ensure_ascii=False)
+    #
+    #TasktoMaxChipRankDict = {7:3, 16:4, 19:6, 30:9, 40:11, 44:13, 55:20} # task : max chip rank
+
     global HelpfulUpgrades
     HelpfulUpgrades = [MineralogyKey,SwordplayKey,FortitudeKey,ForestryKey,ManipEtherKey,KeenEyeKey,FocusKey,LightKey,GirlsTalkKey,EntomologyKey,MiningKey,BotanyKey,LockpickKey,IcthyologyKey,ComWaterKey,SuperstrKey,HHC_Key,LC_Key,CLC_Key,HWC_Key,PVC_Key,FVC_Key,AGC_Key,OTC_Key,DDC_Key,HGC_Key,JinAff,HazeAff,MythraAff,MinothAff,BrighidAff,AegaeonAff,HazeKey,AddamKey,MythraKey,MinothKey,HugoKey,BrighidKey,AegaeonKey]
     HelpfulUpgrades = Helper.MultiLevelListToSingleLevelList(HelpfulUpgrades)
@@ -332,7 +327,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
     PoolMaxItemsPerCategory = 200
     AccessoryList = FullItemList[0]
     WeaponAccessoryList = FullItemList[1]
-    WeaponChipList = FullItemList[2]
+    WeaponChipList = [chip for chip in FullItemList[2] if chip not in FullItemReqList]
     AuxCoreList = FullItemList[3]
     CollectionMaterialList = FullItemList[4]
     CollectionMaterialList = [item for item in CollectionMaterialList if item.id not in FullItemReqList]
@@ -708,7 +703,7 @@ def ConsolidateLevelUpTokens(Locs): # need to now remove all level up tokens and
 def AddMissingKeyItems():
     NewDescID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
     KeyItemNames = ["Mineralogy Lv. 1", "Mineralogy Lv. 2", "Mineralogy Lv. 3", "Swordplay Lv. 1", "Swordplay Lv. 2", "Swordplay Lv. 3", "Fortitude Lv. 1", "Fortitude Lv. 2", "Fortitude Lv. 3", "Forestry Lv. 1", "Forestry Lv. 2", "Forestry Lv. 3", "Manipulate Ether Lv. 1", "Manipulate Ether Lv. 2", "Manipulate Ether Lv. 3", "Keen Eye Lv. 1", "Keen Eye Lv. 2", "Keen Eye Lv. 3", "Focus Lv. 1", "Focus Lv. 2", "Focus Lv. 3", "Power of Light Lv. 1", "Power of Light Lv. 2", "Power of Light Lv. 3", "Girls' Talk", "Entomology Lv. 1", "Entomology Lv. 2", "Entomology Lv. 3", "Mining Lv. 1", "Mining Lv. 2", "Mining Lv. 3", "Botany Lv. 1", "Botany Lv. 2", "Botany Lv. 3", "Lockpicking Lv. 1", "Lockpicking Lv. 2", "Lockpicking Lv. 3", "Icthyology Lv. 1", "Icthyology Lv. 2", "Icthyology Lv. 3", "Command Water Lv. 1", "Command Water Lv. 2", "Command Water Lv. 3", "Superstrength Lv. 1", "Superstrength Lv. 2", "Superstrength Lv. 3", "Aletta Garrison Camp", "Coolley Lake Camp", "Dannagh Desert Camp", "Feltley Village Camp", "Hidden Hunting Camp", "Hoary Weald Camp", "Holy Gate Camp", "Lakeshore Campsite", "Olnard's Trail Campsite", "Porton Village Camp", "Jin Affinity Lv. 2", "Jin Affinity Lv. 3", "Jin Affinity Lv. 4", "Jin Affinity Lv. 5", "Haze Affinity Lv. 2", "Haze Affinity Lv. 3", "Haze Affinity Lv. 4", "Haze Affinity Lv. 5", "Mythra Affinity Lv. 2", "Mythra Affinity Lv. 3", "Mythra Affinity Lv. 4", "Mythra Affinity Lv. 5", "Minoth Affinity Lv. 2", "Minoth Affinity Lv. 3", "Minoth Affinity Lv. 4", "Minoth Affinity Lv. 5", "Brighid Affinity Lv. 2", "Brighid Affinity Lv. 3", "Brighid Affinity Lv. 4", "Brighid Affinity Lv. 5", "Aegaeon Affinity Lv. 2", "Aegaeon Affinity Lv. 3", "Aegaeon Affinity Lv. 4", "Aegaeon Affinity Lv. 5", "Haze Key", "Addam Key", "Mythra Key", "Minoth Key", "Hugo Key", "Brighid Key", "Aegaeon Key", "Level Up Token"]
-    KeyItemDescriptions = ["Unlocks the Mineralogy Lv. 1 Field Skill.", "Unlocks the Mineralogy Lv. 2 Field Skill.", "Unlocks the Mineralogy Lv. 3 Field Skill.", "Unlocks the Swordplay Lv. 1 Field Skill.", "Unlocks the Swordplay Lv. 2 Field Skill.", "Unlocks the Swordplay Lv. 3 Field Skill.", "Unlocks the Fortitude Lv. 1 Field Skill.", "Unlocks the Fortitude Lv. 2 Field Skill.", "Unlocks the Fortitude Lv. 3 Field Skill.", "Unlocks the Forestry Lv. 1 Field Skill.", "Unlocks the Forestry Lv. 2 Field Skill.", "Unlocks the Forestry Lv. 3 Field Skill.", "Unlocks the Manipulate Ether Lv. 1 Field Skill.", "Unlocks the Manipulate Ether Lv. 2 Field Skill.", "Unlocks the Manipulate Ether Lv. 3 Field Skill.", "Unlocks the Keen Eye Lv. 1 Field Skill.", "Unlocks the Keen Eye Lv. 2 Field Skill.", "Unlocks the Keen Eye Lv. 3 Field Skill.", "Unlocks the Focus Lv. 1 Field Skill.", "Unlocks the Focus Lv. 2 Field Skill.", "Unlocks the Focus Lv. 3 Field Skill.", "Unlocks the Power of Light Lv. 1 Field Skill.", "Unlocks the Power of Light Lv. 2 Field Skill.", "Unlocks the Power of Light Lv. 3 Field Skill.", "Unlocks the Girls' Talk Field Skill.", "Unlocks the Entomology Lv. 1 Field Skill.", "Unlocks the Entomology Lv. 2 Field Skill.", "Unlocks the Entomology Lv. 3 Field Skill.", "Unlocks the Mining Lv. 1 Field Skill.", "Unlocks the Mining Lv. 2 Field Skill.", "Unlocks the Mining Lv. 3 Field Skill.", "Unlocks the Botany Lv. 1 Field Skill.", "Unlocks the Botany Lv. 2 Field Skill.", "Unlocks the Botany Lv. 3 Field Skill.", "Unlocks the Lockpicking Lv. 1 Field Skill.", "Unlocks the Lockpicking Lv. 2 Field Skill.", "Unlocks the Lockpicking Lv. 3 Field Skill.", "Unlocks the Icthyology Lv. 1 Field Skill.", "Unlocks the Icthyology Lv. 2 Field Skill.", "Unlocks the Icthyology Lv. 3 Field Skill.", "Unlocks the Command Water Lv. 1 Field Skill.", "Unlocks the Command Water Lv. 2 Field Skill.", "Unlocks the Command Water Lv. 3 Field Skill.", "Unlocks the Superstrength Lv. 1 Field Skill.", "Unlocks the Superstrength Lv. 2 Field Skill.", "Unlocks the Superstrength Lv. 3 Field Skill.", "Unlocks the ability to rest at\nthe Aletta Garrison Campsite.", "Unlocks the ability to rest at\nthe Coolley Lake Campsite.", "Unlocks the ability to rest at\nthe Dannagh Desert Campsite.", "Unlocks the ability to rest at\nthe Feltley Village Campsite.", "Unlocks the ability to rest at\nthe Hidden Hunting Campsite.", "Unlocks the ability to rest at\nthe Hoary Weald Campsite.", "Unlocks the ability to rest at\nthe Holy Gate Campsite.", "Unlocks the ability to rest at\nthe Lakeshore Campsite.", "Unlocks the ability to rest at\nthe Olnard's Trail Campsite.", "Unlocks the ability to rest at\nthe Porton Village Campsite.", "Unlocks Level 2 of \nJin's Affinity Chart.", "Unlocks Level 3 of \nJin's Affinity Chart.", "Unlocks Level 4 of \nJin's Affinity Chart.", "Unlocks Level 5 of \nJin's Affinity Chart.", "Unlocks Level 2 of \nHaze's Affinity Chart.", "Unlocks Level 3 of \nHaze's Affinity Chart.", "Unlocks Level 4 of \nHaze's Affinity Chart.", "Unlocks Level 5 of \nHaze's Affinity Chart.", "Unlocks Level 2 of\nMythra's Affinity Chart.", "Unlocks Level 3 of\nMythra's Affinity Chart.", "Unlocks Level 4 of\nMythra's Affinity Chart.", "Unlocks Level 5 of\nMythra's Affinity Chart.", "Unlocks Level 2 of\nMinoth's Affinity Chart.", "Unlocks Level 3 of\nMinoth's Affinity Chart.", "Unlocks Level 4 of\nMinoth's Affinity Chart.", "Unlocks Level 5 of\nMinoth's Affinity Chart.", "Unlocks Level 2 of \nBrighid's Affinity Chart.", "Unlocks Level 3 of \nBrighid's Affinity Chart.", "Unlocks Level 4 of \nBrighid's Affinity Chart.", "Unlocks Level 5 of \nBrighid's Affinity Chart.", "Unlocks Level 2 of \nAegaeon's Affinity Chart.", "Unlocks Level 3 of \nAegaeon's Affinity Chart.", "Unlocks Level 4 of \nAegaeon's Affinity Chart.", "Unlocks Level 5 of \nAegaeon's Affinity Chart.", 'Unlocks the ability to add\nHaze to your party.', 'Unlocks the ability to add\nAddam to your party.', 'Unlocks the ability to add\nMythra to your party.', 'Unlocks the ability to add\nMinoth to your party.', 'Unlocks the ability to add\nHugo to your party.', 'Unlocks the ability to add\nBrighid to your party.', 'Unlocks the ability to add\nAegaeon to your party.', "Can be exchanged for 1 level's worth of EXP at the Token Exchange."]
+    KeyItemDescriptions = ["Unlocks the Mineralogy\nLv. 1 Field Skill.", "Unlocks the Mineralogy\nLv. 2 Field Skill.", "Unlocks the Mineralogy\nLv. 3 Field Skill.", "Unlocks the Swordplay\nLv. 1 Field Skill.", "Unlocks the Swordplay\nLv. 2 Field Skill.", "Unlocks the Swordplay\nLv. 3 Field Skill.", "Unlocks the Fortitude\nLv. 1 Field Skill.", "Unlocks the Fortitude\nLv. 2 Field Skill.", "Unlocks the Fortitude\nLv. 3 Field Skill.", "Unlocks the Forestry\nLv. 1 Field Skill.", "Unlocks the Forestry\nLv. 2 Field Skill.", "Unlocks the Forestry\nLv. 3 Field Skill.", "Unlocks the Manipulate Ether\nLv. 1 Field Skill.", "Unlocks the Manipulate Ether\nLv. 2 Field Skill.", "Unlocks the Manipulate Ether\nLv. 3 Field Skill.", "Unlocks the Keen Eye\nLv. 1 Field Skill.", "Unlocks the Keen Eye\nLv. 2 Field Skill.", "Unlocks the Keen Eye\nLv. 3 Field Skill.", "Unlocks the Focus\nLv. 1 Field Skill.", "Unlocks the Focus\nLv. 2 Field Skill.", "Unlocks the Focus\nLv. 3 Field Skill.", "Unlocks the Power of Light\nLv. 1 Field Skill.", "Unlocks the Power of Light\nLv. 2 Field Skill.", "Unlocks the Power of Light\nLv. 3 Field Skill.", "Unlocks the Girls' Talk Field Skill.", "Unlocks the Entomology\nLv. 1 Field Skill.", "Unlocks the Entomology\nLv. 2 Field Skill.", "Unlocks the Entomology\nLv. 3 Field Skill.", "Unlocks the Mining\nLv. 1 Field Skill.", "Unlocks the Mining\nLv. 2 Field Skill.", "Unlocks the Mining\nLv. 3 Field Skill.", "Unlocks the Botany\nLv. 1 Field Skill.", "Unlocks the Botany\nLv. 2 Field Skill.", "Unlocks the Botany\nLv. 3 Field Skill.", "Unlocks the Lockpicking\nLv. 1 Field Skill.", "Unlocks the Lockpicking\nLv. 2 Field Skill.", "Unlocks the Lockpicking\nLv. 3 Field Skill.", "Unlocks the Icthyology\nLv. 1 Field Skill.", "Unlocks the Icthyology\nLv. 2 Field Skill.", "Unlocks the Icthyology\nLv. 3 Field Skill.", "Unlocks the Command Water\nLv. 1 Field Skill.", "Unlocks the Command Water\nLv. 2 Field Skill.", "Unlocks the Command Water\nLv. 3 Field Skill.", "Unlocks the Superstrength\nLv. 1 Field Skill.", "Unlocks the Superstrength\nLv. 2 Field Skill.", "Unlocks the Superstrength\nLv. 3 Field Skill.", "Unlocks the ability to rest at\nthe Aletta Garrison Campsite.", "Unlocks the ability to rest at\nthe Coolley Lake Campsite.", "Unlocks the ability to rest at\nthe Dannagh Desert Campsite.", "Unlocks the ability to rest at\nthe Feltley Village Campsite.", "Unlocks the ability to rest at\nthe Hidden Hunting Campsite.", "Unlocks the ability to rest at\nthe Hoary Weald Campsite.", "Unlocks the ability to rest at\nthe Holy Gate Campsite.", "Unlocks the ability to rest at\nthe Lakeshore Campsite.", "Unlocks the ability to rest at\nthe Olnard's Trail Campsite.", "Unlocks the ability to rest at\nthe Porton Village Campsite.", "Unlocks Level 2 of \nJin's Affinity Chart.", "Unlocks Level 3 of \nJin's Affinity Chart.", "Unlocks Level 4 of \nJin's Affinity Chart.", "Unlocks Level 5 of \nJin's Affinity Chart.", "Unlocks Level 2 of \nHaze's Affinity Chart.", "Unlocks Level 3 of \nHaze's Affinity Chart.", "Unlocks Level 4 of \nHaze's Affinity Chart.", "Unlocks Level 5 of \nHaze's Affinity Chart.", "Unlocks Level 2 of\nMythra's Affinity Chart.", "Unlocks Level 3 of\nMythra's Affinity Chart.", "Unlocks Level 4 of\nMythra's Affinity Chart.", "Unlocks Level 5 of\nMythra's Affinity Chart.", "Unlocks Level 2 of\nMinoth's Affinity Chart.", "Unlocks Level 3 of\nMinoth's Affinity Chart.", "Unlocks Level 4 of\nMinoth's Affinity Chart.", "Unlocks Level 5 of\nMinoth's Affinity Chart.", "Unlocks Level 2 of \nBrighid's Affinity Chart.", "Unlocks Level 3 of \nBrighid's Affinity Chart.", "Unlocks Level 4 of \nBrighid's Affinity Chart.", "Unlocks Level 5 of \nBrighid's Affinity Chart.", "Unlocks Level 2 of \nAegaeon's Affinity Chart.", "Unlocks Level 3 of \nAegaeon's Affinity Chart.", "Unlocks Level 4 of \nAegaeon's Affinity Chart.", "Unlocks Level 5 of \nAegaeon's Affinity Chart.", 'Unlocks the ability to add\nHaze to your party.', 'Unlocks the ability to add\nAddam to your party.', 'Unlocks the ability to add\nMythra to your party.', 'Unlocks the ability to add\nMinoth to your party.', 'Unlocks the ability to add\nHugo to your party.', 'Unlocks the ability to add\nBrighid to your party.', 'Unlocks the ability to add\nAegaeon to your party.', "Can be exchanged for 1 level's worth of EXP at the Token Exchange."]
     KeyItemPreciousIDs = [25544, 25545, 25546, 25547, 25548, 25549, 25550, 25551, 25552, 25553, 25554, 25555, 25556, 25557, 25558, 25559, 25560, 25561, 25562, 25563, 25564, 25565, 25566, 25567, 25568, 25569, 25570, 25571, 25572, 25573, 25574, 25575, 25576, 25577, 25578, 25579, 25580, 25581, 25582, 25583, 25584, 25585, 25586, 25587, 25588, 25589, 25590, 25591, 25592, 25593, 25594, 25595, 25596, 25597, 25598, 25599, 25600, 25601, 25602, 25603, 25604, 25605, 25606, 25607, 25608, 25609, 25610, 25611, 25612, 25613, 25614, 25615, 25616, 25617, 25618, 25619, 25620, 25621, 25622, 25623, 25624, 25625, 25626, 25627, 25628, 25629, 25630, 25631]
     KeyItemList = []
     for name in range(len(KeyItemNames)):
@@ -730,10 +725,10 @@ def CreateLevelCaps():
         data = json.load(file)
         for row in data["rows"]:
             match row["$id"]:
-                case 10:
-                    row["LevelExp2"] = 99999 # we start with 8 exp for some reason
-                case 20 | 26 | 35 | 38 | 46 | 100:
+                case 10 | 20 | 26 | 35 | 38 | 46 | 100:
                     row["LevelExp2"] = 99999 # LevelExp2 is for Torna, LevelExp is for base game
+                case 11 | 21 | 27 | 36 | 39 | 47: # 1 exp needs to be required for the next level, so that when you hit the level cap, you don't immediately jump to the next one
+                    row["LevelExp2"] = 1
                 case _:
                     row["LevelExp2"] = 0
             row["EnemyExp"] = 1000 # believe this is the base xp gained by defeating an enemy of this level, before accounting for level differences
@@ -1326,8 +1321,6 @@ def AddNewFlagPointers(GateCommReq, GateNumber): # if we reduce the required com
         JSONParser.ChangeJSONLine(["common/FLD_ConditionList.json"], [2919], ["Condition1"], NewCondFlagRowID)
         JSONParser.ExtendJSONFile("common/FLD_ConditionFlag.json", [[{"$id": NewCondFlagRowID, "FlagType": 4, "FlagID": 652, "FlagMin": GateCommReq, "FlagMax": 6}]])
 
-# if you're ever wondering why an item in the spoiler log 
-
 def CreateSpoilerLog():
     IDstoAdd = []
     DesiredSpoilerLogDirectory = os.path.dirname(fileEntryVar.get()) + "/Torna_Spoiler_Logs"
@@ -1363,7 +1356,7 @@ def CreateSpoilerLog():
                 if SubOptionVal: # if the suboption is a checkbox and checked
                     if subOption.hasSpinBox:
                         subOptionOdds = subOption.GetSpinbox()
-                        debugfile.write(f" {OptionName}: {SubOptionName}: [{OptionOdds}];")
+                        debugfile.write(f" {OptionName}: {SubOptionName}: [{subOptionOdds}];")
                     else:
                         debugfile.write(f" {OptionName}: {SubOptionName};")
     debugfile.write("\n")   

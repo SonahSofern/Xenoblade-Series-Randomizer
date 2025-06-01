@@ -95,8 +95,8 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [3], "$id"), # requires all weapon chips with a rank of 3
-        'Enemy Drop Table IDs': []
+        'Required Items': [],
+        'Enemy Drop Table IDs': [],
     }
     Brighid = {
         '$id': 1434,
@@ -107,7 +107,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [4], "$id"),
+        'Required Items': [],
         'Enemy Drop Table IDs': []
     }
     ArdainianScoutA = {
@@ -143,7 +143,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [6], "$id"),
+        'Required Items': [],
         'Enemy Drop Table IDs': []
     }
     AntipatheticArchibald = {
@@ -203,7 +203,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [9], "$id"),
+        'Required Items': [],
         'Enemy Drop Table IDs': []
     }
     MalosA = {
@@ -215,7 +215,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [13], "$id"),
+        'Required Items': [],
         'Enemy Drop Table IDs': []
     }
     GargoyleD = {
@@ -1955,7 +1955,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [11], "$id"),
+        'Required Items': [],
         'Enemy Drop Table IDs': [352]
     }
     GargoyleC = {
@@ -2421,8 +2421,5 @@ def TurnEnemyLevelIntoMainStoryReq(enemy): # decided not to go with the enemy le
             enemy.mainreq = max(enemy.mainreq, 40)
         case _ if enemy.level > 45:
             enemy.mainreq = max(enemy.mainreq, 44)
-
-    #if enemy.level < 3: # this was the old way I did it, no longer needed
-    #    enemy.itemreqs.extend(LevelUpTokens[:min(enemy.level + 1, 96)]) # adds the minimum level requirement, and then 2 extra levels over that
 
     
