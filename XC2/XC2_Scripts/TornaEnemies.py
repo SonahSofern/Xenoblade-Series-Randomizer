@@ -2372,7 +2372,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
 
     for enemy in TornaEnemies:
         TurnEnemyLevelIntoMainStoryReq(enemy)
-        if enemy.mainreq != []:
+        if enemy.mainreq != 0:
             enemy.itemreqs.extend(Mainquests[enemy.mainreq - 1].itemreqs) # adds the main story requirement to the enemy of choice
         if enemy.duringquest != []:
             enemy.itemreqs.extend(Sidequests[enemy.duringquest[0] - 1].itemreqs) # adds the current sidequest item requirements to the enemy of choice
