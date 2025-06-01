@@ -13,8 +13,12 @@ from scripts.Interactables import OptionList
 # look into options for pre-completed quests or EZ-complete quests?
 # required items for a given quest would need to be zeroed out for said quest, besides the pre-req items.
 
-# need a way to tell the user if the generation failed, and for what reason.
+# if gilded required check names is on, turn the rarity of all required items to legendary, all the non-required items to common, change the colors of their names to gold or red respectively.
+
 # option to remove specific quests or locations from list
+
+# there's probably a few enemies that are hard to get to aggro.
+# may want to change the level cap system slightly, so that the required xp to level up is decreased by like 50%ish, and enemies (excluding the boss level cap enemies) drop their normal xp
 
 class ItemInfo:
     def __init__(self, inputid, category, addtolist):
@@ -66,14 +70,13 @@ def PassAlongSpoilerLogInfo(fileEntryVar2, Version2, permalinkVar2, seedEntryVar
     Version = Version2
     permalinkVar = permalinkVar2
     seedEntryVar = seedEntryVar2
-    if Options.TornaOption_CreateSpoilerLog.GetState():
+    if Options.TornaCreateSpoilerLog.GetState():
         CreateSpoilerLog()
 
 def AllTornaRando():
     DetermineSettings()
     if ProgressionLocTypes[:6] == [0,0,0,0,0,0]:
-        print("There are no progression locations enabled, cannot generate seed!")
-        return
+        raise Exception("There are no progression locations enabled, cannot generate seed!")
     #Recipes = TornaRecipes.CreateTornaRecipeList()
     TornaQuests.SelectRandomPointGoal()
     #global Areas, Enemies, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters
@@ -99,7 +102,7 @@ def AllTornaRando():
     CampfireUnlocks()
     CharacterUnlocks()
     GenerateHints()
-    if Options.TornaOption_ObjectColorMatchesContents.GetState():
+    if Options.TornaObjectColorMatchesContents.GetState():
         GildedCheckNames()
     pass
 
@@ -107,30 +110,30 @@ def DetermineSettings():
     global ProgressionLocTypes
     SidequestRewardQty, CollectionPointQty, EnemyDropQty, TreasureChestQty, ShopQty, GroundItemQty, Gate1CommReq, Gate2CommReq = 0,0,0,0,0,0,2,4
     
-    if Options.TornaOption_SideQuests.GetState(): # if Sidequest Rewards are randomized
-        SidequestRewardQty = Options.TornaOption_SideQuests.GetSpinbox()
+    if Options.TornaMainOption_SideQuests.GetState(): # if Sidequest Rewards are randomized
+        SidequestRewardQty = Options.TornaMainOption_SideQuests.GetSpinbox()
     
-    if Options.TornaOption_CollectionPoints.GetState(): # if Collection Points are randomized
-        CollectionPointQty = Options.TornaOption_CollectionPoints.GetSpinbox()
+    if Options.TornaMainOption_CollectionPoints.GetState(): # if Collection Points are randomized
+        CollectionPointQty = Options.TornaMainOption_CollectionPoints.GetSpinbox()
     
-    if Options.TornaOption_EnemyDrops.GetState(): # if Enemy Drops are randomized
-        EnemyDropQty = Options.TornaOption_EnemyDrops.GetSpinbox()
+    if Options.TornaMainOption_EnemyDrops.GetState(): # if Enemy Drops are randomized
+        EnemyDropQty = Options.TornaMainOption_EnemyDrops.GetSpinbox()
     
-    if Options.TornaOption_TreasureChests.GetState(): # if Treasure Chests are randomized
-        TreasureChestQty = Options.TornaOption_TreasureChests.GetSpinbox()
+    if Options.TornaMainOption_TreasureChests.GetState(): # if Treasure Chests are randomized
+        TreasureChestQty = Options.TornaMainOption_TreasureChests.GetSpinbox()
     
-    if Options.TornaOption_Shops.GetState(): # if Shops are randomized
-        ShopQty = Options.TornaOption_Shops.GetSpinbox()
+    if Options.TornaMainOption_Shops.GetState(): # if Shops are randomized
+        ShopQty = Options.TornaMainOption_Shops.GetSpinbox()
     
-    if Options.TornaOption_GroundItems.GetState(): # if Ground Items are randomized
+    if Options.TornaMainOption_GroundItems.GetState(): # if Ground Items are randomized
         GroundItemQty = 1
 
-    if Options.TornaOption_ChooseLevel2CommunityReq.GetState(): # if we are changing the first community gate requirement
-        Gate1CommReq = Options.TornaOption_ChooseLevel2CommunityReq.GetOdds()
+    if Options.TornaChooseCommunityReqs_Gate1Req.GetState(): # if we are changing the first community gate requirement
+        Gate1CommReq = Options.TornaChooseCommunityReqs_Gate1Req.GetSpinbox()
         AddNewFlagPointers(Gate1CommReq, 1)
 
-    if Options.TornaOption_ChooseLevel4CommunityReq.GetState(): # if we are changing the second community gate requirement
-        Gate2CommReq = Options.TornaOption_ChooseLevel4CommunityReq.GetOdds()
+    if Options.TornaChooseCommunityReqs_Gate2Req.GetState(): # if we are changing the second community gate requirement
+        Gate2CommReq = Options.TornaChooseCommunityReqs_Gate2Req.GetSpinbox()
         AddNewFlagPointers(Gate2CommReq, 2)
 
     ProgressionLocTypes = [SidequestRewardQty, CollectionPointQty, EnemyDropQty, TreasureChestQty, ShopQty, GroundItemQty, Gate1CommReq, Gate2CommReq]
@@ -198,7 +201,8 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
             CurrentStepReqs = MQ.itemreqs.copy()
             random.shuffle(CurrentStepReqs)
             CurrentStepReqs = [x for x in CurrentStepReqs if x not in PlacedItems]
-            for ChosenItem in CurrentStepReqs:
+            while len(CurrentStepReqs) > 0:
+                ChosenItem = CurrentStepReqs[0]
                 if ChosenItem not in PlacedItems:
                     ChosenItemCat = 0
                     for index in range(len(FullItemList)):
@@ -221,7 +225,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
                                     if loc.name == ChosenLocation.name and loc.type == ChosenLocation.type:
                                         ChosenLocation = loc
                         except:
-                            print(f"Generation failed during location selection: No valid locations available for {ChosenItem.name}!")
+                            raise Exception(f"Generation failed during location selection: No valid locations available for {ChosenItem.name}!")
                         if ChosenItemCat == "KeyItem" and ChosenLocation.type in ["uniquemonster", "boss", "normalenemy"]: # enemy drops need to be handled differently, there's a set spot for key items, only 1 spot is open, not 3, so we need to account for that
                             if ChosenLocation.randomizeditems[8] == -1: # if there's a spot open for a precious item, and there's no spots for other items left, the location needs to be removed from the list of remaining progress locations
                                 ChosenLocation.randomizeditems[8] = ChosenItem
@@ -247,8 +251,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
                                     break # immediately leave loop, we don't want to replace all important drops
                         stucknotice += 1
                         if stucknotice > 1000:
-                            print(f"Generation got stuck trying to place {ChosenItem.name} !")
-                            break
+                            raise Exception(f"Generation got stuck trying to place {ChosenItem.name} !")
                     CurrentStepReqs.extend(ChosenLocation.itemreqs)
                     CurrentStepReqs = list(set(CurrentStepReqs))
                     CurrentStepReqs = [x for x in CurrentStepReqs if x not in PlacedItems]
@@ -257,6 +260,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
                         if MQ2.id >= MQ.id:
                             MQ2.itemreqs.extend(CurrentStepReqs)
                             MQ2.itemreqs = list(set(MQ2.itemreqs))
+                    CurrentStepReqs.remove(ChosenItem)               
                     PlacedItems.append(ChosenItem)
                     KeyItemtoLocDict[ChosenItem] = ChosenLocation
                     PlacedItems.sort()
@@ -351,7 +355,11 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
                 for item in range(len(remloc.randomizeditems)):
                     if remloc.randomizeditems[item] in [0, -1]:
                         if Helper.OddsCheck(25):
-                            remloc.randomizeditems[item] = random.choice(ValidItems).id
+                            ChosenValidItem = random.choice(ValidItems)
+                            remloc.randomizeditems[item] = ChosenValidItem.id
+                            if ChosenValidItem in SelUpgradeList:
+                                SelUpgradeList.remove(ChosenValidItem)
+                                ValidItems.remove(ChosenValidItem)
                         else:
                             remloc.randomizeditems[item] = 0
                 FilledLocations.append(remloc)
@@ -360,12 +368,23 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
                 for item in range(8):
                     if remloc.randomizeditems[item] in [0, -1]:
                         if Helper.OddsCheck(25):
-                            remloc.randomizeditems[item] = random.choice(ValidItems).id
+                            ChosenValidItem = random.choice(ValidItems)
+                            remloc.randomizeditems[item] = ChosenValidItem.id
+                            if ChosenValidItem in SelUpgradeList:
+                                SelUpgradeList.remove(ChosenValidItem)
+                                ValidItems.remove(ChosenValidItem)
                         else:
                             remloc.randomizeditems[item] = 0
                 if remloc.randomizeditems[8] in [0, -1]:
                     if Helper.OddsCheck(50):
-                        remloc.randomizeditems[8] = random.choice(SelUpgradeList).id
+                        try:
+                            ChosenValidItem = random.choice(SelUpgradeList)
+                            remloc.randomizeditems[8] = ChosenValidItem.id
+                            if ChosenValidItem in SelUpgradeList:
+                                SelUpgradeList.remove(ChosenValidItem)
+                                ValidItems.remove(ChosenValidItem)
+                        except: # in case we run out of upgrade items to place
+                            remloc.randomizeditems[item] = 0
                     else:
                         remloc.randomizeditems[8] = 0
                 FilledLocations.append(remloc)
@@ -395,13 +414,13 @@ def DetermineValidItemSpots(ChosenItem, ChosenItemCat, CatList, CurrentStoryStep
                 ValidItemSpots.extend(cat.remlocations)
     TempValidItemSpots = [loc for loc in ValidItemSpots if ChosenItem not in loc.itemreqs] # make sure the item isn't put in a spot locked by itself
     if TempValidItemSpots == []:
-        print(f"Ran out of valid locations when trying to ensure {ChosenItem} was not locked by itself!")
+        raise Exception(f"Ran out of valid locations when trying to ensure {ChosenItem} was not locked by itself!")
     else:
         ValidItemSpots = TempValidItemSpots
     if CurrentStoryStep != -1:
         TempValidItemSpots = [loc for loc in ValidItemSpots if loc.mainreq < CurrentStoryStep + 1] # make sure the item isn't past the spot in the story where it can be accessed
         if TempValidItemSpots == []:
-            print(f"Ran out of valid locations when trying to ensure {ChosenItem} was not placed further ahead in the story than the player can reach!")
+            raise Exception(f"Ran out of valid locations when trying to ensure {ChosenItem} was not placed further ahead in the story than the player can reach!")
         else:
             ValidItemSpots = TempValidItemSpots
     #TempValidItemSpots = [loc for loc in ValidItemSpots if len(loc.itemreqs) < len(MainQuestStep.itemreqs) + 25] # make sure we aren't adding a bunch more requirements
@@ -425,7 +444,7 @@ def UpdateAllItemReqs(CurrentStepReqs, Locations, ChosenLocation, ChosenItem, Al
                             subloc.itemreqs.extend(CurrentStepReqs)
                             subloc.itemreqs = list(set(subloc.itemreqs))
                         except:
-                            print(f"Generation failed to update item requirements: Invalid item placed at {subloc}!")
+                            raise Exception(f"Generation failed to update item requirements: Invalid item placed at {subloc}!")
 
 def AdjustLevelUpReqs(MinLogicalLevel):
     with open("./XC2/_internal/JsonOutputs/common/BTL_Grow.json", 'r+', encoding='utf-8') as file:
@@ -645,19 +664,23 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
     for i in range(CurMaxCollectionTableID + 1, DesiredMaxCollectionTableID + 1):
         NewCollectionTableRows.append([{"$id": i, "FSID": 0, "randitmPopMin": 0, "randitmPopMax": 0, "itm1ID": 0, "itm1Per": 0, "itm2ID": 0, "itm2Per": 0, "itm3ID": 0, "itm3Per": 0, "itm4ID": 0, "itm4Per": 0, "goldMin": 0, "goldMax": 0, "goldPopMin": 0, "goldPopMax": 0, "rsc_paramID": 0, "categoryName": 0, "ZoneID": 0}])
     JSONParser.ExtendJSONFile("common/FLD_CollectionTable.json", NewCollectionTableRows)
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_CollectionTable.json", ["randitmPopMin", "randitmPopMax"], 10)
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_CollectionTable.json", ["itm1Per", "itm2Per", "itm3Per", "itm4Per"], 100)
     with open("./XC2/_internal/JsonOutputs/common/FLD_CollectionTable.json", 'r+', encoding='utf-8') as file: # collection table file
         data = json.load(file)
         for i in range(9, 11):
             for collectionpoint in Locs[i]:
                 for row in data["rows"]:
+                    itemcount = 0
                     if row["$id"] == collectionpoint.collectiontableid:
                         row["FSID"] = random.choice(Helper.InclRange(68, 72)) # add a bonus for a random field skill
                         for item in range(1, 5):
                             row[f"itm{item}ID"] = collectionpoint.randomizeditems[item-1]
+                            itemcount += 1
                             if row[f"itm{item}ID"] == 0:
                                 row[f"itm{item}Per"] = 0
+                                itemcount -= 1
+                        row["randitmPopMax"] = itemcount
+                        row["randitmPopMin"] = itemcount
                         break
         file.seek(0)
         file.truncate()
@@ -696,7 +719,7 @@ def CreateLevelCaps():
         data = json.load(file)
         for row in data["rows"]:
             match row["$id"]:
-                case 15 | 20 | 26 | 35 | 38 | 46 | 100:
+                case 10 | 20 | 26 | 35 | 38 | 46 | 100:
                     row["LevelExp2"] = 99999 # LevelExp2 is for Torna, LevelExp is for base game
                 case _:
                     row["LevelExp2"] = 1
@@ -1054,11 +1077,9 @@ def GildedCheckNames():
 def GenerateHints():
     global HintedItemText, HintedLocText, ItemHintNames, LocHintNames, LocHintCount, ItemHintCheckLoc, ItemHintCheckNear
     HintedItemText, HintedLocText, ItemHintNames, ItemHintCheckLoc, ItemHintCheckNear, LocHintNames, LocHintCount = [], [], [], [], [], [], []
-    if Options.TornaOption_HintedItems.GetState():
-        HintedItemKeys = random.sample(list(KeyItemtoLocDict.keys()), Options.TornaOption_HintedItems.GetOdds())
+    if Options.TornaAddHints_ItemHints.GetState():
+        HintedItemKeys = random.sample(list(KeyItemtoLocDict.keys()), Options.TornaAddHints_ItemHints.GetSpinbox())
         for item in HintedItemKeys:
-            if HintedItemKeys[4] == item:
-                pass
             match KeyItemtoLocDict[item].type:
                 case "normalenemy" | "uniquemonster" | "boss" | "questenemy":
                     HintedItemText.append(f"{ItemIDtoItemName[item]} can be found by defeating {KeyItemtoLocDict[item].name} near {AreaIDtoNameDict[KeyItemtoLocDict[item].nearloc].name}.")
@@ -1072,8 +1093,8 @@ def GenerateHints():
                 ItemHintCheckNear.append(f"{AreaIDtoNameDict[KeyItemtoLocDict[item].nearloc].name}")
             except:
                 ItemHintCheckNear.append("null")
-    if Options.TornaOption_LocProgCountHints.GetState():
-        HintedLocs = random.sample(list(AreaIDtoNameDict.keys()), Options.TornaOption_LocProgCountHints.GetOdds())
+    if Options.TornaAddHints_LocProgHints.GetState():
+        HintedLocs = random.sample(list(AreaIDtoNameDict.keys()), Options.TornaAddHints_LocProgHints.GetSpinbox())
         for loc in HintedLocs:
             LocProgCount = 0
             for item in KeyItemtoLocDict.keys():
@@ -1174,6 +1195,8 @@ def AddNewFlagPointers(GateCommReq, GateNumber): # if we reduce the required com
         JSONParser.ChangeJSONLine(["common/FLD_ConditionList.json"], [2919], ["Condition1"], NewCondFlagRowID)
         JSONParser.ExtendJSONFile("common/FLD_ConditionFlag.json", [[{"$id": NewCondFlagRowID, "FlagType": 4, "FlagID": 652, "FlagMin": GateCommReq, "FlagMax": 6}]])
 
+# if you're ever wondering why an item in the spoiler log 
+
 def CreateSpoilerLog():
     IDstoAdd = []
     DesiredSpoilerLogDirectory = os.path.dirname(fileEntryVar.get()) + "/Torna_Spoiler_Logs"
@@ -1193,7 +1216,7 @@ def CreateSpoilerLog():
         OptionVal = option.GetState()
         if OptionVal == True: # if the option is checked
             if option.hasSpinBox == True:
-                OptionOdds = option.GetOdds()
+                OptionOdds = option.GetSpinbox()
                 debugfile.write(f" {OptionName}: {OptionOdds};")
             else:
                 debugfile.write(f" {OptionName};")
@@ -1305,4 +1328,3 @@ def CreateSpoilerLog():
     debugfilewrite.close()
     IDstoAdd = list(set(IDstoAdd))
     print(IDstoAdd)
-

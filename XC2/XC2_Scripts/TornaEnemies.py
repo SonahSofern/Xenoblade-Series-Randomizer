@@ -2409,7 +2409,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
 
 def TurnEnemyLevelIntoMainStoryReq(enemy): # decided not to go with the enemy level token system and instead use a level cap based system.
     match enemy.level:
-        case _ if enemy.level > 14 and enemy.level <= 19:
+        case _ if enemy.level > 9 and enemy.level <= 19:
            enemy.mainreq = max(enemy.mainreq, 8)
         case _ if enemy.level > 19 and enemy.level <= 25:
             enemy.mainreq = max(enemy.mainreq, 16)

@@ -48,11 +48,11 @@ class Option():
 
         # Parent Frame
         optionPanel = ttk.Frame(parentTab)
-        optionPanel.grid(row = rowIncrement, column= 0, sticky="ew")
+        optionPanel.grid(row = rowIncrement, column = 0, sticky="ew")
         
         # Major Option Checkbox
         self.checkBox = ttk.Checkbutton(optionPanel, variable= self.checkBoxVal, text=self.name, width=40, style="midColor.TCheckbutton", command=lambda: self.StateUpdate())
-        self.checkBox.grid(row=rowIncrement, column=0, sticky="w")
+        self.checkBox.grid(row=rowIncrement, column = 0, sticky="w")
         
         if self.descData == None:
             text = self.desc
@@ -67,16 +67,15 @@ class Option():
         else:
             self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, wraplength=400)
             padx= 0
-        self.descObj.grid(row=rowIncrement, column=1, sticky="w", padx=padx)
+        self.descObj.grid(row=rowIncrement, column = 3, sticky="w", padx=padx)
         
         # % Boxes
         if self.hasSpinBox:
             self.spinBoxVal = IntVar(value=self.spinDefault)
             self.spinBoxObj = ttk.Spinbox(optionPanel, from_=self.spinBoxMin, to=self.spinBoxMax, textvariable=self.spinBoxVal, wrap=True, width=self.spinWidth, increment=self.spinIncr, justify="center")
-            self.spinBoxObj.grid(row=rowIncrement, column=2, padx=(15,0))
+            self.spinBoxObj.grid(row=rowIncrement, column = 4, padx=(15,0))
             self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w")
-            self.spinBoxLabel.grid(row=rowIncrement, column=3, sticky="w", padx=0)
-
+            self.spinBoxLabel.grid(row=rowIncrement, column = 5, sticky="w", padx=0)
 
         for sub in self.subOptions:
             rowIncrement += 1
@@ -86,11 +85,12 @@ class Option():
             if sub.hasSpinBox:
                 sub.spinBoxVal = IntVar(value=sub.spinDefault)
                 sub.spinBoxObj = ttk.Spinbox(optionPanel, from_=sub.spinBoxMin, to=sub.spinBoxMax, textvariable=sub.spinBoxVal, wrap=True, width=sub.spinWidth, increment=sub.spinIncr)
-                sub.spinBoxObj.grid(row=rowIncrement, column=0, padx=(15,0), pady=(0,0))
+                sub.spinBoxObj.grid(row=rowIncrement, column = 1, padx=(sub.spinpadx, 0), pady=(0, 0))
+                sub.spinBoxLabel = ttk.Label(optionPanel, text=sub.spinDesc, anchor = "w")
+                sub.spinBoxLabel.grid(row=rowIncrement, column = 2, sticky = "w", padx = 0, pady = 0)
 
         rowIncrement += 1
 
-    
     def StateUpdate(self):
         if self.GetState():
             for sub in self.subOptions:
@@ -99,9 +99,12 @@ class Option():
                 if sub.spinBoxObj != None:
                     if sub.GetState():
                         sub.spinBoxObj.state(["!disabled"])
+                        sub.spinBoxLabel.state(["!disabled"])
                     else:
                         sub.spinBoxObj.state(["disabled"])
+                        sub.spinBoxLabel.state(["disabled"])
                     sub.spinBoxObj.grid()
+                    sub.spinBoxLabel.grid()
             self.descObj.state(["!disabled"])
             self.spinBoxObj.state(["!disabled"])
             if self.spinBoxLabel != None: # If we dont have one
@@ -112,6 +115,7 @@ class Option():
                 sub.checkBox.grid_remove()
                 if sub.spinBoxObj != None:
                     sub.spinBoxObj.grid_remove()
+                    sub.spinBoxLabel.grid_remove()
             self.descObj.state(["disabled"])
             self.spinBoxObj.state(["disabled"])
             if self.spinBoxLabel != None:
@@ -124,7 +128,7 @@ class Option():
         return self.checkBoxVal.get()
 
 class SubOption():
-    def __init__(self, _name, _parent:Option, _commands = [], _defState = True, _prio = 0, hasSpinBox = False):
+    def __init__(self, _name, _parent:Option, _commands = [], _defState = True, _prio = 0, spinDefault = 1, _spinMin = 0, _spinMax = 100, _spinWidth = 3, _spinIncr = 1, _hasSpinBox = False, _spinPadX = 15, _spinDesc = ""):
         self.name = _name
         self.checkBoxVal = BooleanVar
         self.checkBox:ttk.Checkbutton = None
@@ -132,24 +136,25 @@ class SubOption():
         self.defState = _defState
         self.prio = _prio
         self.parent = _parent
-        self.hasSpinBox = hasSpinBox
+        self.hasSpinBox = _hasSpinBox
         self.spinBoxVal = None
         self.spinBoxObj = None
-        self.spinBoxMin = 0
-        self.spinBoxMax = 100
-        self.spinDefault = 1
+        self.spinBoxMin = _spinMin
+        self.spinBoxMax = _spinMax
+        self.spinDefault = spinDefault
         self.spinBoxLabel = ""
-        self.spinWidth = 3
-        self.spinIncr = 1
-        self.spinDesc = ""
+        self.spinWidth = _spinWidth
+        self.spinIncr = _spinIncr
+        self.spinDesc = _spinDesc
+        self.spinpadx = _spinPadX
         _parent.subOptions.append(self)
-
 
     def GetState(self):
         return self.checkBoxVal.get()
     
-    def GetSpinBox(self):
+    def GetSpinbox(self):
         return self.spinBoxVal.get()
+    
 rowIncrement = 0   
 
 OptionList:list[Option] = []

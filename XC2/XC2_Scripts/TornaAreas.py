@@ -610,7 +610,7 @@ def CreateAreaInfo(Sidequests, Mainquests):
     }
     TheSoaringRostrum = {
         '$id': 2343,
-        'Name': 'TheSoaringRostrum',
+        'Name': 'The Soaring Rostrum',
         'Previous Location Reachable': 'Skygate, Endless Road',
         'Story Pre-Req': [53],
         'Item Reqs': []
