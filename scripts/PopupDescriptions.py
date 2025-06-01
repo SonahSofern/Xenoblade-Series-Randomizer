@@ -14,8 +14,9 @@ else:
 
 class Description:
 
-    def __init__(self, geometry = (800,800)):
+    def __init__(self, geometry = (800,800), bonusWidth = 37):
         self.geometry = geometry
+        self.bonusWidth = bonusWidth
         self.data:list[DescriptionObject] = []
         
     def Tag(self, text:str, padx=(20,20), pady=(0,0), anchor="w", side=None):
@@ -123,7 +124,7 @@ def GenPopup(optionName, descData, root, defaultFont):
         if hasFewHeaders: # If we have less than 3 headers go ahead and pack everything
             descObj.SpecialPack()
 
-    scripts.GUISettings.ResizeWindow(top, InnerFrame)
+    scripts.GUISettings.ResizeWindow(top, InnerFrame, myDescription.bonusWidth)
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
 
             

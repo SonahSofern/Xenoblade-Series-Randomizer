@@ -7,7 +7,7 @@ import scripts.XCRandomizer, SeedNames, IDs, scripts.JSONParser, Options
 Version = "1.1.0"
 
 Tabs = {
-    1: '🞛 General',
+    1: '🞛 Items',
     2: '🧍 Characters',
     3: '💀 Enemies',
     4: '🐇 Quality of Life',

@@ -2,67 +2,6 @@
 import IDs, json, random, Options
 from scripts import JSONParser, Helper, PopupDescriptions
 
-def Trades():
-    
-    # types = {
-    #     4 : IDs.HeadIDs, # Head
-    #     5 : IDs.ChestIDs, # Body
-    #     6 : IDs.ArmIDs, # Arm
-    #     7 : IDs.WaistIDs, # Waist
-    #     8 : IDs.LegIDs, # Leg
-    # }
-    
-    isWpn = Options.TradeOption_Weapon.GetState()
-    isArmor = Options.TradeOption_Armor.GetState()
-    isGem = Options.TradeOption_Gem.GetState()
-    isCol = Options.TradeOption_Collectibles.GetState()
-    isMat = Options.TradeOption_Materials.GetState()
-    
-    # with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as itemFile:
-    #     itemData = json.load(itemFile)
-    #     for item in itemData["rows"]:
-    #         if item["$id"] not in IDs.ArmorIDs:
-    #             continue
-    #         try:
-    #             types[item["itemType"]].append(item["$id"])
-    #         except:
-    #             pass # Ignore the groups we're not using for trades   
-    #     print(f"Head: {types[4]}")
-    #     print(f"Chest:  {types[5]}")
-    #     print(f"Arm:  {types[6]}")
-    #     print(f"Waist:  {types[7]}")
-    #     print(f"Leg:  {types[8]}")
-    
-    filteredFiles = IDs.areaFileListNumbers.copy()
-    badFiles = ['0801', '0901', '1201', '1202', '1401', '1501', '1901', '2001', '2101', '2201', '2301', '2401', '2501', '2601', '5001', '5101', '5201', '5301', '5401', '5501', '5601', '5701', '5801', '5901', '6001']
-    #
-    for file in filteredFiles:
-        if file in badFiles:
-            continue
-        with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/exchangelist{file}.json", 'r+', encoding='utf-8') as tradeNPCFile:
-            tradeNPCData = json.load(tradeNPCFile)
-            
-            for trade in tradeNPCData["rows"]:
-                trade["wpn1"] = RandomTradeVerification(IDs.WeaponIDs, trade["wpn1"], isWpn)
-
-                trade["head1"] = RandomTradeVerification(IDs.HeadIDs, trade["head1"], isArmor)
-                trade["body1"] = RandomTradeVerification(IDs.ChestIDs, trade["body1"], isArmor)
-                trade["arm1"] = RandomTradeVerification(IDs.ArmIDs, trade["arm1"], isArmor)
-                trade["waist1"] = RandomTradeVerification(IDs.WaistIDs, trade["waist1"], isArmor)
-                trade["legg1"] = RandomTradeVerification(IDs.LegIDs, trade["legg1"], isArmor)
-                    
-                    
-                trade["kessyou1"] = RandomTradeVerification(IDs.GemIDs, trade["kessyou1"], isGem)
-                trade["kessyou2"] = RandomTradeVerification(IDs.GemIDs, trade["kessyou2"], isGem)
-                
-                trade["collect1"] = RandomTradeVerification(IDs.CollectableIDs, trade["collect1"], isCol)
-                trade["collect2"] = RandomTradeVerification(IDs.CollectableIDs, trade["collect2"], isCol)
-                
-                trade["materia1"] = RandomTradeVerification(IDs.MaterialIDs, trade["materia1"], isMat)
-                trade["materia2"] = RandomTradeVerification(IDs.MaterialIDs, trade["materia2"], isMat)
-                    
-            
-            JSONParser.CloseFile(tradeNPCData, tradeNPCFile)
 
 def NPCModelRando():
     odds = Options.NPCModelsOption.GetSpinbox()
@@ -94,19 +33,4 @@ def NPCModelRando():
             # lm["sound"] = "sn302701"               
         JSONParser.CloseFile(lmData, lmFile)
 
-
-def RandomTradeVerification(typeChoice, trade, isOn):
-    if isOn:
-        if trade == 0: # Only fill out slots that previously had trades
-            return 0
-        return random.choice(typeChoice)
-    else:
-        return trade
-    
-def NPCTradesDesc():
-    myDesc = PopupDescriptions.Description()
-    myDesc.Header(Options.TradeOption.name)
-    myDesc.Text("Randomizes the trades NPCs make. Only the chosen suboptions will be randomized.\nThe categories will stay the same so helms will always replace helms and so on.")
-    myDesc.Image("rondinecap.png", "XCDE", 800)
-    return myDesc
 
