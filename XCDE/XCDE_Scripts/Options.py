@@ -20,6 +20,7 @@ Funny = 6
 # TradeOption_Materials = SubOption("Materials", TradeOption)
 
 TradeOption = Option("Trading", General, "Randomizes the offers of NPC trades into the chosen options", [lambda: Items.TradeOptions()], descData=lambda: Items.TradeOptionsDesc(), hasSpinBox = True)
+TradeOption_KeepType = SubOption("Keep Item Type", TradeOption)
 TradeOptions_Collectables = SubOption("Collectables", TradeOption, hasSpinBox=True)
 TradeOptions_Materials = SubOption("Materials", TradeOption, hasSpinBox=True)
 TradeOptions_Armor = SubOption("Armor", TradeOption, hasSpinBox=True)
@@ -28,7 +29,6 @@ TradeOptions_Gems = SubOption("Gems", TradeOption, hasSpinBox=True)
 TradeOptions_Crystals = SubOption("Crystals", TradeOption, hasSpinBox=True)
 TradeOptions_ArtBooks = SubOption("Art Books", TradeOption, hasSpinBox=True)
 TradeOptions_KeyItems = SubOption("Key Items", TradeOption, hasSpinBox=True)
-
 
 CollectableOptions = Option("Collectable Orbs", General, "Randomizes collectables on the field into the chosen options", [lambda: Items.Collectables()], hasSpinBox = True, descData=lambda: Items.CollectDesc())
 CollectableOptions_Collectables = SubOption("Collectables", CollectableOptions, hasSpinBox=True)
@@ -41,6 +41,7 @@ CollectableOptions_ArtBooks = SubOption("Art Books", CollectableOptions, hasSpin
 CollectableOptions_KeyItems = SubOption("Key Items", CollectableOptions, hasSpinBox=True)
 
 CollectapediaOptions = Option("Collectapedia Rewards", General, "Randomizes rewards from the collectapedia into the chosen options", [lambda: Items.Collectapedia()], descData=lambda: Items.CollectapediaDesc(), hasSpinBox = True)
+CollectapediaOptions_KeepType = SubOption("Keep Item Type", CollectapediaOptions)
 CollectapediaOptions_Collectables = SubOption("Collectables", CollectapediaOptions, hasSpinBox=True)
 CollectapediaOptions_Materials = SubOption("Materials", CollectapediaOptions, hasSpinBox=True)
 CollectapediaOptions_Armor = SubOption("Armor", CollectapediaOptions, hasSpinBox=True)
@@ -50,7 +51,9 @@ CollectapediaOptions_Crystals = SubOption("Crystals", CollectapediaOptions, hasS
 CollectapediaOptions_ArtBooks = SubOption("Art Books", CollectapediaOptions, hasSpinBox=True)
 CollectapediaOptions_KeyItems = SubOption("Key Items", CollectapediaOptions, hasSpinBox=True)
 
+
 EnemyDropOption = Option("Enemy Drops", General, "Randomizes loot from enemies", [lambda: Items.EnemyDrops()], descData=lambda: Items.EnemyDropsDesc(), hasSpinBox = True)
+EnemyDropOption_KeepType = SubOption("Keep Item Type", EnemyDropOption)
 EnemyDropOptions_Collectables = SubOption("Collectables", EnemyDropOption, hasSpinBox=True)
 EnemyDropOptions_Materials = SubOption("Materials", EnemyDropOption, hasSpinBox=True)
 EnemyDropOptions_Armor = SubOption("Armor", EnemyDropOption, hasSpinBox=True)
@@ -62,6 +65,7 @@ EnemyDropOptions_KeyItems = SubOption("Key Items", EnemyDropOption, hasSpinBox=T
 
 
 GiantsChestOption = Option("Giants Chests", General, "Randomizes the contents of Giants Chests into the chosen options", [lambda: Items.GiantsChests()], descData=lambda: Items.GiantsChestsDesc(), hasSpinBox = True)
+GiantsChest_KeepType = SubOption("Keep Item Type", GiantsChestOption)
 GiantsChestOptions_Collectables = SubOption("Collectables", GiantsChestOption, hasSpinBox=True)
 GiantsChestOptions_Materials = SubOption("Materials", GiantsChestOption, hasSpinBox=True)
 GiantsChestOptions_Armor = SubOption("Armor", GiantsChestOption, hasSpinBox=True)
@@ -73,6 +77,7 @@ GiantsChestOptions_KeyItems = SubOption("Key Items", GiantsChestOption, hasSpinB
 
 
 ShopOption = Option("Shops", General, "Randomizes the contents of shops", [lambda: Items.Shops()], descData=lambda: Items.ShopsDesc(), hasSpinBox = True) # Key item rando settings would be fun 
+ShopOption_KeepType = SubOption("Keep Item Type", ShopOption)
 ShopOptions_Collectables = SubOption("Collectables", ShopOption, hasSpinBox=True)
 ShopOptions_Materials = SubOption("Materials", ShopOption, hasSpinBox=True)
 ShopOptions_Armor = SubOption("Armor", ShopOption, hasSpinBox=True)
@@ -81,7 +86,9 @@ ShopOptions_Gems = SubOption("Gems", ShopOption, hasSpinBox=True)
 ShopOptions_ArtBooks = SubOption("Art Books", ShopOption, hasSpinBox=True)
 ShopOptions_KeyItems = SubOption("Key Items", ShopOption, hasSpinBox=True)
 
+
 QuestRewardsOption = Option("Quest Rewards", General, "Randomizes the rewards from quests into the chosen options", [lambda: Items.QuestRewards()], descData=lambda: Items.QuestRewardsDesc(), hasSpinBox = True)
+QuestRewardsOption_KeepType = SubOption("Keep Item Type", QuestRewardsOption)
 QuestRewardsOptions_Collectables = SubOption("Collectables", QuestRewardsOption, hasSpinBox=True)
 QuestRewardsOptions_Materials = SubOption("Materials", QuestRewardsOption, hasSpinBox=True)
 QuestRewardsOptions_Armor = SubOption("Armor", QuestRewardsOption, hasSpinBox=True)
@@ -90,6 +97,7 @@ QuestRewardsOptions_Gems = SubOption("Gems", QuestRewardsOption, hasSpinBox=True
 QuestRewardsOptions_Crystals = SubOption("Crystals", QuestRewardsOption, hasSpinBox=True)
 QuestRewardsOptions_ArtBooks = SubOption("Art Books", QuestRewardsOption, hasSpinBox=True)
 QuestRewardsOptions_KeyItems = SubOption("Key Items", QuestRewardsOption, hasSpinBox=True)
+
 
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/FLD_valpoplist.html#1 Red orbs found here not sure what to do with them yet
 

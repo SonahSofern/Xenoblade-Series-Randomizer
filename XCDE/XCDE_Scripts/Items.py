@@ -1,22 +1,26 @@
 import json, Options, IDs, random
 from scripts import JSONParser, Helper, PopupDescriptions
 
+keepTypeDescriptions = "This will ensure that items replacing an item will be of the same type\n(Weapons replace Weapons, Chestplates replace Chestplates etc.) \nThis will override any of the weight options."
+
 class ItemType:
-    def __init__(self, ids, obj):
+    def __init__(self, ids, obj =None):
         self.originalIds = ids.copy()
         self.ids = ids.copy()
         self.obj:Options.SubOption = obj
     def RefreshList(self):
         self.ids = self.originalIds.copy()
         
-def ItemRandomization(itemTypes:list[ItemType] = [], files = [],odds = 0, game = "", keys = [], dontReplace = []):
-    randoList = []
+def ItemRandomization(itemTypes:list[ItemType] = [], files = [],odds = 0, game = "", keys = [], dontReplace = [], keepType = False):
+    randoLists = []
     weights = []
     for item in itemTypes:
         if item.obj.GetState():
-            randoList.append(item)
+            randoLists.append(item)
             weights.append(item.obj.GetSpinBox())
-        
+    
+    allItemLists = [ItemType(IDs.ArtBookIDs), ItemType(IDs.CollectableIDs), ItemType(IDs.CrystalIDs), ItemType(IDs.GemIDs), ItemType(IDs.ArmIDs), ItemType(IDs.ChestIDs), ItemType(IDs.LegIDs), ItemType(IDs.WaistIDs), ItemType(IDs.HeadIDs), ItemType(IDs.KeyItemIDs), ItemType(IDs.StoryRequiredKeyItemIDs), ItemType(IDs.MaterialIDs), ItemType(IDs.WeaponIDs)].copy()
+    
     for file in files:
         try:
             with open(f"./{game}/_internal/JsonOutputs/{file}.json", 'r+', encoding='utf-8') as ItemFile:
@@ -29,15 +33,25 @@ def ItemRandomization(itemTypes:list[ItemType] = [], files = [],odds = 0, game =
                             continue
                         if not Helper.OddsCheck(odds):
                             continue
-                        chosenList = random.choices(randoList, weights, k=1)[0]
+                        
+                        if keepType:
+                            for list in allItemLists:
+                                if itm[key] in list.originalIds:
+                                    chosenList = list
+                                    break
+                        else:
+                            chosenList = random.choices(randoLists, weights, k=1)[0]
+                            
                         if chosenList.ids == []:
                             chosenList.RefreshList()
+                            
                         chosen = random.choice(chosenList.ids)
+
                         chosenList.ids.remove(chosen)
                         itm[key] = chosen
                 JSONParser.CloseFile(itemData, ItemFile)
         except Exception as e:
-            # print(e)
+            print(e)
             pass
 # Add a keep item type option so the repleacement for x type will always be the same type 
 
@@ -77,13 +91,17 @@ def Collectapedia():
     cry = ItemType(IDs.CrystalIDs, Options.CollectapediaOptions_Crystals)
     art = ItemType(IDs.ArtBookIDs, Options.CollectapediaOptions_ArtBooks)
     key = ItemType(IDs.KeyItemIDs, Options.CollectapediaOptions_KeyItems)
+    keepType = Options.CollectapediaOptions_KeepType
+    
     odds = Options.CollectapediaOptions.GetSpinbox()
-    ItemRandomization([col, mat, arm, wep, gem, cry, art, key], ["bdat_menu_item/MNU_col"], odds,"XCDE",  ["itemID"])
+    ItemRandomization([col, mat, arm, wep, gem, cry, art, key], ["bdat_menu_item/MNU_col"], odds,"XCDE",  ["itemID"], keepType=keepType.GetState())
 
 def CollectapediaDesc():
     myDesc = PopupDescriptions.Description()
     myDesc.Header(Options.CollectapediaOptions.name)
     myDesc.Text("Randomizes rewards from the collectapedia. You can choose the weights for the categories you have chosen.")
+    myDesc.Header(Options.QuestRewardsOption_KeepType.name)
+    myDesc.Text(keepTypeDescriptions)
     return myDesc
 
 
@@ -96,13 +114,17 @@ def GiantsChests():
     cry = ItemType(IDs.CrystalIDs, Options.GiantsChestOptions_Crystals)
     art = ItemType(IDs.ArtBookIDs, Options.GiantsChestOptions_ArtBooks)
     key = ItemType(IDs.KeyItemIDs, Options.GiantsChestOptions_KeyItems)
+    keepType = Options.GiantsChest_KeepType
+    
     odds = Options.GiantsChestOption.GetSpinbox()
-    ItemRandomization([col, mat, arm, wep, gem, cry, art, key], ["bdat_common/FLD_tboxlist"], odds,"XCDE",  ["itm1ID","itm2ID","itm3ID","itm4ID"])
+    ItemRandomization([col, mat, arm, wep, gem, cry, art, key], ["bdat_common/FLD_tboxlist"], odds,"XCDE",  ["itm1ID","itm2ID","itm3ID","itm4ID"], keepType=keepType.GetState())
 
 def GiantsChestsDesc():
     myDesc = PopupDescriptions.Description()
     myDesc.Header(Options.GiantsChestOption.name)
     myDesc.Text("Randomizes the contents of giants chests. You can choose the weights for the categories you have chosen.")
+    myDesc.Header(Options.QuestRewardsOption_KeepType.name)
+    myDesc.Text(keepTypeDescriptions)
     return myDesc
 
 def Shops():
@@ -113,6 +135,8 @@ def Shops():
     gem = ItemType(IDs.GemIDs, Options.ShopOptions_Gems)
     art = ItemType(IDs.ArtBookIDs, Options.ShopOptions_ArtBooks)
     key = ItemType(IDs.KeyItemIDs, Options.ShopOptions_KeyItems)
+    keepType = Options.ShopOption_KeepType
+    
     odds = Options.ShopOption.GetSpinbox()
     
     keys = []
@@ -122,12 +146,14 @@ def Shops():
             keys.append(f"{pkey}{i}")
     
     
-    ItemRandomization([col, mat, arm, wep, gem, art, key], ["bdat_common/shoplist"], odds,"XCDE",  keys)
+    ItemRandomization([col, mat, arm, wep, gem, art, key], ["bdat_common/shoplist"], odds,"XCDE",  keys, keepType=keepType.GetState())
 
 def ShopsDesc():
     myDesc = PopupDescriptions.Description()
     myDesc.Header(Options.ShopOption.name)
     myDesc.Text("Randomizes the contents of shops. You can choose the weights for the categories you have chosen.")
+    myDesc.Header(Options.QuestRewardsOption_KeepType.name)
+    myDesc.Text(keepTypeDescriptions)
     return myDesc
 
 def EnemyDrops():
@@ -139,6 +165,8 @@ def EnemyDrops():
     cry = ItemType(IDs.CrystalIDs, Options.EnemyDropOptions_Crystals)
     art = ItemType(IDs.ArtBookIDs, Options.EnemyDropOptions_ArtBooks)
     key = ItemType(IDs.KeyItemIDs, Options.EnemyDropOptions_KeyItems)
+    keepType = Options.EnemyDropOption_KeepType
+    
     odds = Options.EnemyDropOption.GetSpinbox()
     
     nmlFiles = []
@@ -155,14 +183,16 @@ def EnemyDrops():
         sprKeys.append(f"uni_equip{i}")
         sprKeys.append(f"uni_wpn{i}")
     
-    ItemRandomization([col, mat, arm, wep, gem, cry, art, key], nmlFiles, odds,"XCDE",  ["materia1", "materia2"])
-    ItemRandomization([col, mat, arm, wep, gem, cry, art, key], rarFiles, odds,"XCDE",  ["crystal1", "crystal2", "wpn1", "wpn2", "wpn3", "wpn4", "equip1", "equip2", "equip3", "equip4"])
-    ItemRandomization([col, mat, arm, wep, gem, cry, art, key], sprFiles, odds,"XCDE",  sprKeys)
+    ItemRandomization([col, mat, arm, wep, gem, cry, art, key], nmlFiles, odds,"XCDE",  ["materia1", "materia2"], keepType=keepType.GetState())
+    ItemRandomization([col, mat, arm, wep, gem, cry, art, key], rarFiles, odds,"XCDE",  ["crystal1", "crystal2", "wpn1", "wpn2", "wpn3", "wpn4", "equip1", "equip2", "equip3", "equip4"], keepType=keepType.GetState())
+    ItemRandomization([col, mat, arm, wep, gem, cry, art, key], sprFiles, odds,"XCDE",  sprKeys, keepType=keepType.GetState())
 
 def EnemyDropsDesc():
     myDesc = PopupDescriptions.Description()
     myDesc.Header(Options.EnemyDropOption.name)
     myDesc.Text("Randomizes the contents of chests dropped from enemies. You can choose the weights for the categories you have chosen.")
+    myDesc.Header(Options.QuestRewardsOption_KeepType.name)
+    myDesc.Text(keepTypeDescriptions)
     return myDesc
 
 
@@ -175,18 +205,22 @@ def QuestRewards():
     cry = ItemType(IDs.CrystalIDs, Options.QuestRewardsOptions_Crystals)
     art = ItemType(IDs.ArtBookIDs, Options.QuestRewardsOptions_ArtBooks)
     key = ItemType(IDs.KeyItemIDs, Options.QuestRewardsOptions_KeyItems)
+    keepType = Options.QuestRewardsOption_KeepType
+    
     odds = Options.QuestRewardsOption.GetSpinbox()
     
     areas = []
     for area in IDs.areaFileListNumbers:
         areas.append(f"bdat_common/JNL_quest{area}")
     
-    ItemRandomization([col, mat, arm, wep, gem, cry, art, key], areas, odds,"XCDE",  ["reward_A1","reward_A2","reward_A3","reward_B1","reward_B2","reward_B3"])
+    ItemRandomization([col, mat, arm, wep, gem, cry, art, key], areas, odds,"XCDE",  ["reward_A1","reward_A2","reward_A3","reward_B1","reward_B2","reward_B3"], keepType=keepType.GetState())
 
 def QuestRewardsDesc():
     myDesc = PopupDescriptions.Description()
     myDesc.Header(Options.QuestRewardsOption.name)
     myDesc.Text("Randomizes rewards from quests. You can choose the weights for the categories you have chosen.")
+    myDesc.Header(Options.QuestRewardsOption_KeepType.name)
+    myDesc.Text(keepTypeDescriptions)
     return myDesc
 
 
@@ -199,18 +233,22 @@ def TradeOptions():
     cry = ItemType(IDs.CrystalIDs, Options.TradeOptions_Crystals)
     art = ItemType(IDs.ArtBookIDs, Options.TradeOptions_ArtBooks)
     key = ItemType(IDs.KeyItemIDs, Options.TradeOptions_KeyItems)
+    keepType = Options.TradeOption_KeepType
+    
     odds = Options.TradeOption.GetSpinbox()
     
     areas = []
     for area in IDs.areaFileListNumbers:
         areas.append(f"bdat_ma{area}/exchangelist{area}")
     
-    ItemRandomization([col, mat, arm, wep, gem, cry, art, key], areas, odds,"XCDE",  ["wpn1", "head1", "body1", "arm1", "waist1", "legg1", "kessyou1", "kessyou2", "collect1", "collect2", "materia1", "materia2"])
+    ItemRandomization([col, mat, arm, wep, gem, cry, art, key], areas, odds,"XCDE",  ["wpn1", "head1", "body1", "arm1", "waist1", "legg1", "kessyou1", "kessyou2", "collect1", "collect2", "materia1", "materia2"], keepType=keepType.GetState())
 
 def TradeOptionsDesc():
     myDesc = PopupDescriptions.Description()
     myDesc.Header(Options.TradeOption.name)
     myDesc.Text("Randomizes the trades NPCs make. Only the chosen suboptions will be randomized.\nThe categories will stay the same so helms will always replace helms and so on.")
     myDesc.Image("rondinecap.png", "XCDE", 800)
+    myDesc.Header(Options.QuestRewardsOption_KeepType.name)
+    myDesc.Text(keepTypeDescriptions)
     return myDesc
 
