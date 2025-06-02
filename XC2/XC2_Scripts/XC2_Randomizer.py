@@ -10,6 +10,10 @@ Version = "1.5.0"
 
 backgrounds = ["titlescreen1.png"]
 
+for i in range(1,11):
+    backgrounds.append(f"ch{i}.png")
+
+
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], f"Randomizer v{Version}") # Change Title Version to Randomizer vX.x.x
 
