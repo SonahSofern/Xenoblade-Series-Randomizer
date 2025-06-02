@@ -23,6 +23,20 @@ CosmeticsTab = 8
 GameModeTab = 9
 TornaTab = 10
 
+
+Tabs = {
+    General: "General",
+    Driver: "Drivers",
+    Blade: "Blades",
+    Enemies: "Enemies",
+    Misce: "Misc",
+    QOL: "Quality of Life",
+    Funny: "Funny",
+    CosmeticsTab: "Cosmetics",
+    GameModeTab: "Game Modes",
+    TornaTab: "Torna"
+}
+
 # General
 AccessoryShopsOption = Option("Accessory Shops", General, "Randomizes the contents of Accessory Shops", [lambda: AccessoryShops.RandoAccessoryShops()], hasSpinBox = True, descData=lambda: AccessoryShops.AccessoryShopDescription())
 AccessoryShopsOption_Accessories = SubOption("Accessories", AccessoryShopsOption)

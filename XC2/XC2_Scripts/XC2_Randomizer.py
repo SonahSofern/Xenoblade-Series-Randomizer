@@ -7,18 +7,6 @@ import scripts.XCRandomizer, SeedNames, scripts.JSONParser, Options
 Version = "1.5.0"
 
 
-Tabs = {
-    1: "General",
-    2: "Drivers",
-    3: "Blades",
-    4: "Enemies",
-    5: "Misc",
-    6: "Quality of Life",
-    7: "Funny",
-    8: "Cosmetics",
-    9: "Game Modes",
-    10: "Torna"
-}
 
 backgrounds = ["titlescreen1.png"]
 
@@ -29,4 +17,4 @@ extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.Add
 mainFolderNames = ["common", "common_gmk"]
 subFolderNames = ["common_ms"]
 
-scripts.XCRandomizer.CreateMainWindow(root, "XC2", Version, "Xenoblade Chronicles 2 Randomizer", Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds)
+scripts.XCRandomizer.CreateMainWindow(root, "XC2", Version, "Xenoblade Chronicles 2 Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds)

@@ -80,7 +80,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
 
     
     # The Notebook
-    MainWindow = ttk.Notebook(background, height=5)
+    MainWindow = ttk.Notebook(background)
     outerList = []
     canvasList = []
     innerList = []

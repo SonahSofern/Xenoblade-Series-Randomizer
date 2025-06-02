@@ -11,6 +11,15 @@ Musica = 5
 QOL = 4
 Funny = 6
 
+Tabs = {
+    General: '🞛 Items',
+    Character: '🧍 Characters',
+    Enemies: '💀 Enemies',
+    QOL: '🐇 Quality of Life',
+    Musica: '♪ Music',
+    Funny: '😄 Funny',
+}
+
 # # General
 # TradeOption = Option("NPC Trades", General, "Randomizes chosen categories of NPC trades", [lambda: NPC.Trades()], descData=lambda: NPC.NPCTradesDesc())
 # TradeOption_Weapon = SubOption("Weapons", TradeOption)
