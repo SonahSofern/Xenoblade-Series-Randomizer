@@ -4,7 +4,7 @@ from tkinter import font, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys, datetime
 
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
-from scripts import SavedOptions
+from scripts import SavedOptions, PopupDescriptions
 
 
 CanvasesForStyling = []
@@ -100,9 +100,9 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme, Game):
         fontSize.configure(font=staticFont) # Have to config them like this for entry it doesnt accept style= whn you make the thing
         LoadTheme(defaultFont, defaultTheme.get())
         
-        # Dark Mode Controls
-        darkMode = ttk.Button(newWindow, text=defaultTheme.get(), command=lambda: ToggleLightDarkMode(darkMode, defaultFont, defaultTheme), style="STATIC.TButton")
-        darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
+        # # Dark Mode Controls
+        # darkMode = ttk.Button(newWindow, text=defaultTheme.get(), command=lambda: ToggleLightDarkMode(darkMode, defaultFont, defaultTheme), style="STATIC.TButton")
+        # darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
     else:
         GUIWindow.focus()
         GUIWindow.deiconify() # unminimizes
@@ -148,7 +148,6 @@ def LoadTheme(defaultFont, themeName):
                     "font": defaultFont,
                     "background": currentTheme["backgroundColor"],
                     "borderwidth": 4,
-                    "relief": "flat",
                 }
             },
             "TNotebook.Tab": {
@@ -297,7 +296,7 @@ def LoadTheme(defaultFont, themeName):
     style.configure("BordlessBtn.TButton", relief = FLAT)
     style.configure("midColor.TCheckbutton", padding=(20, 10))
     style.configure("STATIC.TButton", font=staticFont)
-    style.configure("BorderlessLabel.TLabel", background=currentTheme["backgroundColor"], foreground=UI_Colors.White)
+    style.configure("BorderlessLabel.TLabel", background=currentTheme["darkColor"], foreground=UI_Colors.White)
     style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
     style.configure("Header.TButton", borderwidth=0, background=currentTheme["midGray"])
     style.configure("Tag.TLabel", background= currentTheme["midGray"], relief="flat", padding=(9,2), margin=(5,0))
@@ -314,30 +313,39 @@ def LoadTheme(defaultFont, themeName):
             root.config(background=currentTheme["backgroundColor"])
         except:
             pass
-        
-def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFrames:list[ttk.Frame], genScrollbar = True): # I never want to touch this code again lol what a nightmare
+scrollbars = []
+
+def _on_mousewheel(event, canvas:Canvas):
+    canvas.update_idletasks()
+    canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+    # print(canvas.cget("scrollregion"))
+    
+def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFrames:list[ttk.Frame], genScrollbar = True):
     for i in range(len(Canvases)):
         InnerFrames[i].pack(fill=BOTH, expand=True)
 
         scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
+        scrollbars.append(scrollbar)
         Canvases[i].config(yscrollcommand=scrollbar.set, borderwidth=0, relief="flat", highlightthickness=0)
         CanvasesForStyling.append(Canvases[i])
         # OuterFrames[i].config(borderwidth=0, relief="flat")
         InnerFrames[i].bind("<Configure>", lambda e, canvas=Canvases[i]: canvas.configure(scrollregion=canvas.bbox("all")))
 
         Canvases[i].create_window((0, 0), window=InnerFrames[i], anchor="nw")
+
         Canvases[i].pack(side="left", fill=BOTH, expand=True)
         if genScrollbar:
             scrollbar.pack(side="right", fill="y")
 
-        def _on_mousewheel(event, canvas=Canvases[i]):
-            canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+
 
         OuterFrames[i].bind("<Enter>", lambda e, canvas=Canvases[i]: canvas.bind_all("<MouseWheel>", lambda event: _on_mousewheel(event, canvas)))
         OuterFrames[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
         
         OuterFrames[i].pack_propagate(False)
         OuterFrames[i].pack(fill=BOTH, expand=True)
+    return scrollbars
+
 
 def ResizeWindow(top, innerFrame, padx = 37):
     innerFrame.update_idletasks()  # Ensure the geometry is up to date
@@ -346,7 +354,7 @@ def ResizeWindow(top, innerFrame, padx = 37):
     top.geometry(f"{w}x{h}")
  
     
-def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = []):
+def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = []):
     def ThreadedRandomize():
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
@@ -374,9 +382,10 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
             return
 
         # Runs all randomization
-        RunOptions(OptionList, randoProgressDisplay)
+        RunOptions(OptionList, randoProgressDisplay, root, randoSeedEntry.get(), permalinkVar.get())
         for command in ExtraCommands: # Runs extra commands like show title screen
             command()
+            
         randoProgressDisplay.config(text="Packing BDATs")
     
         try:
@@ -408,9 +417,18 @@ def Randomize(RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, per
 
     threading.Thread(target=ThreadedRandomize).start()
 
-def RunOptions(OptionList, randoProgressDisplay):
+def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink):
     
     OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
+    
+    status = "Complete"
+    errorMsgObj = PopupDescriptions.Description(bonusWidth= 15)
+    errorMsgObj.Header(f"Randomization {status}")
+    errorMsgObj.Tag(f"Seed: {seed}", pady=5, anchor="center") # Seed
+    # errorMsgObj.Tag(f"Settings: {permalink}", pady=5, anchor="center") # Permalink
+    errorMsgObj.Tag(f"Time: {datetime.datetime.now()}", pady=5, anchor="center") # Time
+    def ErrorLog():
+        return errorMsgObj
 
     for opt in OptionList: # runs pre-randomization commands before the actual options
         for command in opt.preRandoCommands:
@@ -437,14 +455,24 @@ def RunOptions(OptionList, randoProgressDisplay):
                 print(f"{traceback.format_exc()}") # shows the full error
                 
         randoProgressDisplay.config(text=opt.name)
+
         for command in opt.commands:
             try:
-                command()
+                errorMsg = command()
             except Exception as error:
+                status = "FAILED"
                 print(f"ERROR: {opt.name} | {error}")
-                print(f"{traceback.format_exc()}") # shows the full error
+                print(traceback.format_exc()) # shows the full error
+                if errorMsg == None:
+                    errorMsg = error
+                errorMsgObj.Header(f"Error: {opt.name}")
+                errorMsgObj.Text(errorMsg)
+
+                randoProgressDisplay.config(text=f"{opt.name}: {errorMsg}")
+    PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(),root,defFontVar)
+
     
-MaxWidth = 1000
+MaxWidth = 500
 windowWidth = "1550"
 windowHeight = "900"
 OptionColorLight = UI_Colors.White

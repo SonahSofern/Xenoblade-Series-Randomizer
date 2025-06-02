@@ -1,6 +1,8 @@
 saveFolderName = "SaveData"
 import os, json
 
+stopPermalinkUpdate = False
+
 
 def saveData(DataList, Filename, GamePrefix):
     savePath = os.path.join(GamePrefix, saveFolderName)
@@ -14,11 +16,14 @@ def saveData(DataList, Filename, GamePrefix):
                 sav.update({f"{saveData.name} Spinbox: ": saveData.spinBoxVal.get()})
             for sub in saveData.subOptions:
                 sav.update({f"{saveData.name}->{sub.name}": sub.checkBoxVal.get()})
+                if sub.hasSpinBox:
+                    sav.update({f"{saveData.name}->{sub.name} Spinbox: ": sub.spinBoxVal.get()})
         json.dump(sav, file, indent=4, ensure_ascii=True)
 
 
-            
 def loadData(DataList, Filename, GamePrefix):
+    global stopPermalinkUpdate
+    stopPermalinkUpdate = True
     try:
         savePath = os.path.join(GamePrefix, saveFolderName)
         saveFilePath = os.path.join(savePath, Filename)
@@ -26,22 +31,26 @@ def loadData(DataList, Filename, GamePrefix):
         with open(saveFilePath, 'r') as file:
             data = json.load(file)
             for option in DataList:
-                option.checkBoxVal.set(data[option.name])
+                try:
+                    option.checkBoxVal.set(data[option.name])
+                except:
+                    pass
                 try:
                     option.spinBoxVal.set(data[f"{option.name} Spinbox: "])
                 except:
                     pass
                 for sub in option.subOptions:
-                    try:
-                        sub.checkBoxVal.set(data[f"{option.name}->{sub.name}"])
-                    except:
-                        pass
+                    sub.checkBoxVal.set(data[f"{option.name}->{sub.name}"])
+                    if sub.hasSpinBox:
+                        sub.spinBoxVal.set(data[f"{option.name}->{sub.name} Spinbox: "])
+
                 option.StateUpdate()
 
     except:
         pass # The file is created upon closing the window so it will error initial launch
     # except Exception as error:
     #             print(f"{traceback.format_exc()}") # shows the full error
+    stopPermalinkUpdate = False
 
 class SavedEntry:
     def __init__(self, _name, _val):

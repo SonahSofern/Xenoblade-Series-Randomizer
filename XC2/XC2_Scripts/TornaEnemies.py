@@ -3,32 +3,35 @@ import json
 import random
 from IDs import *
 
-# still need to create 3 drop table ids if they don't already exist for an enemy, each with 100% chance for one item. If it rolls a precious id, just put it in precious items, then restrict that enemy from getting any more precious items, and leave one loot table blank.
-
-class TornaEnemy: # created to allow me to pass these objects easier
-    def __init__(self, input, addtolist, rewardnumber):
+class TornaEnemyNormalDrops: # created to allow me to pass these objects easier
+    def __init__(self, input, addtolist, rewardnumber, EnemyDropCounter):
         self.id = input["$id"]
         self.name = input["Name"]
         self.nearloc = input['Location Near']
         self.level = input["Level"]
-        self.mainreq = input['Story Pre-Req']
+        self.mainreq = input['Story Pre-Req'][0]
         self.duringquest = input["During Quest"]
         self.sideprereq = input['Quest Completion Pre-Req']
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Required Items'])
         self.summonedby = input['Summoned By']
-        self.droptableids = input['Enemy Drop Table IDs']
-        self.randomizeditems = Helper.ExtendListtoLength([], rewardnumber, "0") # holds enemy drop ids
-        self.preciousitem = 0
+        self.droptableids = [EnemyDropCounter]
+        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], max(rewardnumber - 1, 0), "-1"), 8, "0") # holds ids, -1 for progression, 0 for filler spots
+        if rewardnumber > 0:
+            self.hasprogression = True
+            self.randomizeditems = Helper.ExtendListtoLength(self.randomizeditems, 9, "-1")
+        else:
+            self.hasprogression = False
+            self.randomizeditems = Helper.ExtendListtoLength(self.randomizeditems, 9, "0")
         addtolist.append(self)
 
 def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy requirements may change depending on the logic of which quests get rolled
     
     RagingVolff = {
 		'$id': 1428,
-		'Name': 'RagingVolff',
+		'Name': 'Raging Volff',
 		'Location Near': 2315,
 		'Level': 1,
-		'Story Pre-Req': [],
+		'Story Pre-Req': [0],
 		'During Quest': [],
 		'Quest Completion Pre-Req': [],
 		'Summoned By': [],
@@ -37,10 +40,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
 	}
     JubelFeris = {
         '$id': 1429,
-        'Name': 'JubelFeris',
+        'Name': 'Jubel Feris',
         'Location Near': 2315,
         'Level': 2,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -49,10 +52,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     CursedBuloofoA = {
         '$id': 1430,
-        'Name': 'CursedBuloofoA',
+        'Name': 'Cursed Buloofo A',
         'Location Near': 2315,
         'Level': 2,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -61,7 +64,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GargoyleA = {
         '$id': 1431,
-        'Name': 'GargoyleA',
+        'Name': 'Gargoyle A',
         'Location Near': 2318,
         'Level': 8,
         'Story Pre-Req': [6],
@@ -92,7 +95,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': [],
+        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [3], "$id"), # requires all weapon chips with a rank of 3
         'Enemy Drop Table IDs': []
     }
     Brighid = {
@@ -104,12 +107,12 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': [],
+        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [4], "$id"),
         'Enemy Drop Table IDs': []
     }
     ArdainianScoutA = {
         '$id': 1435,
-        'Name': 'ArdainianScoutA',
+        'Name': 'Ardainian Scout A',
         'Location Near': 2415,
         'Level': 10,
         'Story Pre-Req': [15],
@@ -121,7 +124,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ArdainianScoutB = {
         '$id': 1436,
-        'Name': 'ArdainianScoutB',
+        'Name': 'Ardainian Scout B',
         'Location Near': 2415,
         'Level': 11,
         'Story Pre-Req': [15],
@@ -133,19 +136,19 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GortA = {
         '$id': 1437,
-        'Name': 'GortA',
+        'Name': 'Gort A',
         'Location Near': 2415,
         'Level': 20,
         'Story Pre-Req': [18],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': [],
+        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [6], "$id"),
         'Enemy Drop Table IDs': []
     }
     AntipatheticArchibald = {
         '$id': 1438,
-        'Name': 'AntipatheticArchibald',
+        'Name': 'Antipathetic Archibald',
         'Location Near': 2415,
         'Level': 16,
         'Story Pre-Req': [18],
@@ -157,7 +160,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ScurvyCurtis = {
         '$id': 1439,
-        'Name': 'ScurvyCurtis',
+        'Name': 'Scurvy Curtis',
         'Location Near': 2415,
         'Level': 17,
         'Story Pre-Req': [18],
@@ -169,7 +172,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     InsufferableUlysses = {
         '$id': 1440,
-        'Name': 'InsufferableUlysses',
+        'Name': 'Insufferable Ulysses',
         'Location Near': 2415,
         'Level': 18,
         'Story Pre-Req': [18],
@@ -181,7 +184,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SlitheJagronA = {
         '$id': 1441,
-        'Name': 'SlitheJagronA',
+        'Name': 'Slithe Jagron A',
         'Location Near': 2328,
         'Level': 29,
         'Story Pre-Req': [29],
@@ -193,31 +196,31 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SlitheJagronB = {
         '$id': 1442,
-        'Name': 'SlitheJagronB',
+        'Name': 'Slithe Jagron B',
         'Location Near': 2328,
         'Level': 29,
         'Story Pre-Req': [30],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': [],
+        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [9], "$id"),
         'Enemy Drop Table IDs': []
     }
     MalosA = {
         '$id': 1443,
-        'Name': 'MalosA',
+        'Name': 'Malos A',
         'Location Near': 2353,
         'Level': 40,
         'Story Pre-Req': [43],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': [],
+        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [13], "$id"),
         'Enemy Drop Table IDs': []
     }
     GargoyleD = {
         '$id': 1444,
-        'Name': 'GargoyleD',
+        'Name': 'Gargoyle D',
         'Location Near': 2353,
         'Level': 38,
         'Story Pre-Req': [43],
@@ -229,7 +232,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ArtificeColossus = {
         '$id': 1445,
-        'Name': 'ArtificeColossus',
+        'Name': 'Artifice Colossus',
         'Location Near': 2343,
         'Level': 48,
         'Story Pre-Req': [54],
@@ -241,7 +244,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     MalosB = {
         '$id': 1446,
-        'Name': 'MalosB',
+        'Name': 'Malos B',
         'Location Near': 2343,
         'Level': 50,
         'Story Pre-Req': [54],
@@ -253,7 +256,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     MalosC = {
         '$id': 1447,
-        'Name': 'MalosC',
+        'Name': 'Malos C',
         'Location Near': 2343,
         'Level': 50,
         'Story Pre-Req': [55],
@@ -265,7 +268,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GortB = {
         '$id': 1448,
-        'Name': 'GortB',
+        'Name': 'Gort B',
         'Location Near': 2343,
         'Level': 53,
         'Story Pre-Req': [56],
@@ -277,7 +280,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ArtificeSirenA = {
         '$id': 1449,
-        'Name': 'ArtificeSirenA',
+        'Name': 'Artifice Siren A',
         'Location Near': 2343,
         'Level': 50,
         'Story Pre-Req': [54],
@@ -289,7 +292,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ArtificeSirenB = {
         '$id': 1450,
-        'Name': 'ArtificeSirenB',
+        'Name': 'Artifice Siren B',
         'Location Near': 2343,
         'Level': 50,
         'Story Pre-Req': [54],
@@ -301,10 +304,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     CursedBuloofoB = {
         '$id': 1454,
-        'Name': 'CursedBuloofoB',
+        'Name': 'Cursed Buloofo B',
         'Location Near': 2315,
         'Level': 3,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -313,10 +316,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     VanadiumTirkin = {
         '$id': 1455,
-        'Name': 'VanadiumTirkin',
+        'Name': 'Vanadium Tirkin',
         'Location Near': 2332,
         'Level': 31,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [33],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -325,10 +328,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SorgusTirkin = {
         '$id': 1456,
-        'Name': 'SorgusTirkin',
+        'Name': 'Sorgus Tirkin',
         'Location Near': 2332,
         'Level': 30,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [33],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -337,10 +340,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     LeractGogol = {
         '$id': 1457,
-        'Name': 'LeractGogol',
+        'Name': 'Leract Gogol',
         'Location Near': 2334,
         'Level': 32,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [32],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -349,10 +352,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     HewliGogol = {
         '$id': 1458,
-        'Name': 'HewliGogol',
+        'Name': 'Hewli Gogol',
         'Location Near': 2330,
         'Level': 35,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [32],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -361,10 +364,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     MarrithAntol = {
         '$id': 1459,
-        'Name': 'MarrithAntol',
+        'Name': 'Marrith Antol',
         'Location Near': 2317,
         'Level': 38,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [37],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -373,10 +376,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     IncubFlier = {
         '$id': 1460,
-        'Name': 'IncubFlier',
+        'Name': 'Incub Flier',
         'Location Near': 2317,
         'Level': 39,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [37],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -385,10 +388,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     PradoCaterpile = {
         '$id': 1461,
-        'Name': 'PradoCaterpile',
+        'Name': 'Prado Caterpile',
         'Location Near': 2317,
         'Level': 39,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [37],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -397,10 +400,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     AppetBrog = {
         '$id': 1462,
-        'Name': 'AppetBrog',
+        'Name': 'Appet Brog',
         'Location Near': 2428,
         'Level': 35,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [53],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -409,10 +412,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     DurallBuloofo = {
         '$id': 1463,
-        'Name': 'DurallBuloofo',
+        'Name': 'Durall Buloofo',
         'Location Near': 2410,
         'Level': 37,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [40],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -421,10 +424,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     InnocentVolff = {
         '$id': 1464,
-        'Name': 'InnocentVolff',
+        'Name': 'Innocent Volff',
         'Location Near': 2410,
         'Level': 36,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [40],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -433,10 +436,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     LoweBlant = {
         '$id': 1465,
-        'Name': 'LoweBlant',
+        'Name': 'Lowe Blant',
         'Location Near': 2314,
         'Level': 42,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [48],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -445,10 +448,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     TizzaParisax = {
         '$id': 1466,
-        'Name': 'TizzaParisax',
+        'Name': 'Tizza Parisax',
         'Location Near': 2329,
         'Level': 38,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [54],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -457,10 +460,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     IndignantJerry = {
         '$id': 1467,
-        'Name': 'IndignantJerry',
+        'Name': 'Indignant Jerry',
         'Location Near': 2357,
         'Level': 46,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [56],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -469,10 +472,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GraftonFeris = {
         '$id': 1468,
-        'Name': 'GraftonFeris',
+        'Name': 'Grafton Feris',
         'Location Near': 2325,
         'Level': 35,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [20],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -481,10 +484,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ConspiratorMacNeth = {
         '$id': 1469,
-        'Name': 'ConspiratorMacNeth',
+        'Name': 'Conspirator MacNeth',
         'Location Near': 2307,
         'Level': 40,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [38],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -493,10 +496,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     WanderingUrchon = {
         '$id': 1470,
-        'Name': 'WanderingUrchon',
+        'Name': 'Wandering Urchon',
         'Location Near': 2327,
         'Level': 37,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [24],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -505,10 +508,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     WanderingRopl = {
         '$id': 1471,
-        'Name': 'WanderingRopl',
+        'Name': 'Wandering Ropl',
         'Location Near': 2327,
         'Level': 39,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [24],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -517,10 +520,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     WanderingLaia = {
         '$id': 1472,
-        'Name': 'WanderingLaia',
+        'Name': 'Wandering Laia',
         'Location Near': 2327,
         'Level': 41,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [24],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -529,10 +532,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     TimidVolff = {
         '$id': 1473,
-        'Name': 'TimidVolff',
+        'Name': 'Timid Volff',
         'Location Near': 2318,
         'Level': 9,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [2],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -541,10 +544,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     PickerBuloofo = {
         '$id': 1474,
-        'Name': 'PickerBuloofo',
+        'Name': 'Picker Buloofo',
         'Location Near': 2318,
         'Level': 10,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [2],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -553,10 +556,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ElegiacMercenary = {
         '$id': 1476,
-        'Name': 'ElegiacMercenary',
+        'Name': 'Elegiac Mercenary',
         'Location Near': 2358,
         'Level': 52,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [5],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -565,10 +568,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     HalcyonMercenary = {
         '$id': 1477,
-        'Name': 'HalcyonMercenary',
+        'Name': 'Halcyon Mercenary',
         'Location Near': 2358,
         'Level': 52,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [5],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -577,10 +580,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ChatteringSkeeter = {
         '$id': 1479,
-        'Name': 'ChatteringSkeeter',
+        'Name': 'Chattering Skeeter',
         'Location Near': 2423,
         'Level': 41,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [39],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -589,10 +592,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     TacitusUrchon = {
         '$id': 1482,
-        'Name': 'TacitusUrchon',
+        'Name': 'Tacitus Urchon',
         'Location Near': 2401,
         'Level': 20,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [13],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -601,10 +604,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GloomyAspar = {
         '$id': 1483,
-        'Name': 'GloomyAspar',
+        'Name': 'Gloomy Aspar',
         'Location Near': 2409,
         'Level': 18,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [15],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -613,10 +616,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     WhistlingBathein = {
         '$id': 1484,
-        'Name': 'WhistlingBathein',
+        'Name': 'Whistling Bathein',
         'Location Near': 2401,
         'Level': 19,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [11],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -625,10 +628,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     PreoccupiedGogol = {
         '$id': 1485,
-        'Name': 'PreoccupiedGogol',
+        'Name': 'Preoccupied Gogol',
         'Location Near': 2306,
         'Level': 24,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [22],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -637,10 +640,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     TenaxEkidno = {
         '$id': 1486,
-        'Name': 'TenaxEkidno',
+        'Name': 'Tenax Ekidno',
         'Location Near': 2365,
         'Level': 50,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [51],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -649,10 +652,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     CalculatingGogol = {
         '$id': 1487,
-        'Name': 'CalculatingGogol',
+        'Name': 'Calculating Gogol',
         'Location Near': 2356,
         'Level': 37,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [46],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -661,10 +664,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ElectGogol = {
         '$id': 1488,
-        'Name': 'ElectGogol',
+        'Name': 'Elect Gogol',
         'Location Near': 2356,
         'Level': 39,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [46],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -673,10 +676,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     CloudArachno = {
         '$id': 1489,
-        'Name': 'CloudArachno',
+        'Name': 'Cloud Arachno',
         'Location Near': 2320,
         'Level': 10,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [1],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -685,10 +688,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     DispareRopl = {
         '$id': 1490,
-        'Name': 'DispareRopl',
+        'Name': 'Dispare Ropl',
         'Location Near': 2425,
         'Level': 16,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [8],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -697,10 +700,10 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     CreefGriffox = {
         '$id': 1491,
-        'Name': 'CreefGriffox',
+        'Name': 'Creef Griffox',
         'Location Near': 2315,
         'Level': 43,
-        'Story Pre-Req': [],
+        'Story Pre-Req': [0],
         'During Quest': [41],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -709,7 +712,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     EvokeBunnit = {
         '$id': 1496,
-        'Name': 'EvokeBunnit',
+        'Name': 'Evoke Bunnit',
         'Location Near': 2417,
         'Level': 38,
         'Story Pre-Req': [12],
@@ -721,7 +724,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ForayBunnit = {
         '$id': 1497,
-        'Name': 'ForayBunnit',
+        'Name': 'Foray Bunnit',
         'Location Near': 2417,
         'Level': 40,
         'Story Pre-Req': [12],
@@ -733,7 +736,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     NoggleBunnit = {
         '$id': 1498,
-        'Name': 'NoggleBunnit',
+        'Name': 'Noggle Bunnit',
         'Location Near': 2408,
         'Level': 12,
         'Story Pre-Req': [12],
@@ -745,7 +748,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     PinchBunnit = {
         '$id': 1499,
-        'Name': 'PinchBunnit',
+        'Name': 'Pinch Bunnit',
         'Location Near': 2408,
         'Level': 14,
         'Story Pre-Req': [12],
@@ -757,7 +760,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     FirmVolff = {
         '$id': 1500,
-        'Name': 'FirmVolff',
+        'Name': 'Firm Volff',
         'Location Near': 2425,
         'Level': 16,
         'Story Pre-Req': [12],
@@ -769,7 +772,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GeminiVolff = {
         '$id': 1501,
-        'Name': 'GeminiVolff',
+        'Name': 'Gemini Volff',
         'Location Near': 2425,
         'Level': 10,
         'Story Pre-Req': [12],
@@ -781,7 +784,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     EspinaFeris = {
         '$id': 1502,
-        'Name': 'EspinaFeris',
+        'Name': 'Espina Feris',
         'Location Near': 2408,
         'Level': 12,
         'Story Pre-Req': [12],
@@ -793,7 +796,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     LekutFeris = {
         '$id': 1503,
-        'Name': 'LekutFeris',
+        'Name': 'Lekut Feris',
         'Location Near': 2408,
         'Level': 8,
         'Story Pre-Req': [12],
@@ -805,7 +808,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     RinkerEks = {
         '$id': 1507,
-        'Name': 'RinkerEks',
+        'Name': 'Rinker Eks',
         'Location Near': 2408,
         'Level': 11,
         'Story Pre-Req': [12],
@@ -817,7 +820,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     DominalFlamii = {
         '$id': 1512,
-        'Name': 'DominalFlamii',
+        'Name': 'Dominal Flamii',
         'Location Near': 2413,
         'Level': 15,
         'Story Pre-Req': [12],
@@ -829,7 +832,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     IngleCamill = {
         '$id': 1515,
-        'Name': 'IngleCamill',
+        'Name': 'Ingle Camill',
         'Location Near': 2408,
         'Level': 11,
         'Story Pre-Req': [12],
@@ -841,7 +844,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GrayBuloofo = {
         '$id': 1516,
-        'Name': 'GrayBuloofo',
+        'Name': 'Gray Buloofo',
         'Location Near': 2417,
         'Level': 41,
         'Story Pre-Req': [12],
@@ -853,7 +856,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ImbaLizard = {
         '$id': 1518,
-        'Name': 'ImbaLizard',
+        'Name': 'Imba Lizard',
         'Location Near': 2416,
         'Level': 32,
         'Story Pre-Req': [12],
@@ -865,7 +868,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     CelsarsTaos = {
         '$id': 1519,
-        'Name': 'CelsarsTaos',
+        'Name': 'Celsars Taos',
         'Location Near': 2413,
         'Level': 15,
         'Story Pre-Req': [12],
@@ -877,7 +880,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     DreadCaterpileSummon = {
         '$id': 1521,
-        'Name': 'DreadCaterpileSummon',
+        'Name': 'Dread Caterpile (Summon)',
         'Location Near': 2417,
         'Level': 36,
         'Story Pre-Req': [12],
@@ -889,7 +892,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     KanooSkwaror = {
         '$id': 1522,
-        'Name': 'KanooSkwaror',
+        'Name': 'Kanoo Skwaror',
         'Location Near': 2413,
         'Level': 12,
         'Story Pre-Req': [12],
@@ -901,7 +904,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     DreadCaterpileNormal = {
         '$id': 1526,
-        'Name': 'DreadCaterpileNormal',
+        'Name': 'Dread Caterpile (Normal)',
         'Location Near': 2425,
         'Level': 26,
         'Story Pre-Req': [12],
@@ -913,7 +916,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     MyrrhesCrustip = {
         '$id': 1527,
-        'Name': 'MyrrhesCrustip',
+        'Name': 'Myrrhes Crustip',
         'Location Near': 2409,
         'Level': 34,
         'Story Pre-Req': [12],
@@ -925,7 +928,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ArrahRhogul = {
         '$id': 1528,
-        'Name': 'ArrahRhogul',
+        'Name': 'Arrah Rhogul',
         'Location Near': 2413,
         'Level': 14,
         'Story Pre-Req': [12],
@@ -937,7 +940,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     BohnQuadwing = {
         '$id': 1529,
-        'Name': 'BohnQuadwing',
+        'Name': 'Bohn Quadwing',
         'Location Near': 2404,
         'Level': 11,
         'Story Pre-Req': [12],
@@ -949,7 +952,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     HighbohnQuadwing = {
         '$id': 1530,
-        'Name': 'HighbohnQuadwing',
+        'Name': 'Highbohn Quadwing',
         'Location Near': 2404,
         'Level': 15,
         'Story Pre-Req': [12],
@@ -961,7 +964,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     LapisVang = {
         '$id': 1531,
-        'Name': 'LapisVang',
+        'Name': 'Lapis Vang',
         'Location Near': 2410,
         'Level': 36,
         'Story Pre-Req': [12],
@@ -973,7 +976,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ErsSkeeter = {
         '$id': 1532,
-        'Name': 'ErsSkeeter',
+        'Name': 'Ers Skeeter',
         'Location Near': 2408,
         'Level': 12,
         'Story Pre-Req': [12],
@@ -985,7 +988,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     AstorFlier = {
         '$id': 1533,
-        'Name': 'AstorFlier',
+        'Name': 'Astor Flier',
         'Location Near': 2425,
         'Level': 34,
         'Story Pre-Req': [12],
@@ -997,7 +1000,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     CascadeKrabble = {
         '$id': 1534,
-        'Name': 'CascadeKrabble',
+        'Name': 'Cascade Krabble',
         'Location Near': 2407,
         'Level': 12,
         'Story Pre-Req': [12],
@@ -1009,7 +1012,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     KastKrabble = {
         '$id': 1535,
-        'Name': 'KastKrabble',
+        'Name': 'Kast Krabble',
         'Location Near': 2416,
         'Level': 30,
         'Story Pre-Req': [12],
@@ -1021,7 +1024,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ReedPiranhax = {
         '$id': 1536,
-        'Name': 'ReedPiranhax',
+        'Name': 'Reed Piranhax',
         'Location Near': 2409,
         'Level': 13,
         'Story Pre-Req': [12],
@@ -1033,7 +1036,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     MaramalPiranhax = {
         '$id': 1537,
-        'Name': 'MaramalPiranhax',
+        'Name': 'Maramal Piranhax',
         'Location Near': 2416,
         'Level': 32,
         'Story Pre-Req': [12],
@@ -1045,7 +1048,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     KeatTirkin = {
         '$id': 1539,
-        'Name': 'KeatTirkin',
+        'Name': 'Keat Tirkin',
         'Location Near': 2422,
         'Level': 38,
         'Story Pre-Req': [12],
@@ -1057,7 +1060,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GradsTirkin = {
         '$id': 1540,
-        'Name': 'GradsTirkin',
+        'Name': 'Grads Tirkin',
         'Location Near': 2422,
         'Level': 37,
         'Story Pre-Req': [12],
@@ -1069,7 +1072,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     VabraTirkin = {
         '$id': 1542,
-        'Name': 'VabraTirkin',
+        'Name': 'Vabra Tirkin',
         'Location Near': 2422,
         'Level': 38,
         'Story Pre-Req': [12],
@@ -1081,7 +1084,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     EpistoTirkin = {
         '$id': 1544,
-        'Name': 'EpistoTirkin',
+        'Name': 'Episto Tirkin',
         'Location Near': 2422,
         'Level': 36,
         'Story Pre-Req': [12],
@@ -1093,7 +1096,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     DerrahTirkin = {
         '$id': 1545,
-        'Name': 'DerrahTirkin',
+        'Name': 'Derrah Tirkin',
         'Location Near': 2422,
         'Level': 35,
         'Story Pre-Req': [12],
@@ -1105,7 +1108,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     XanePippito = {
         '$id': 1546,
-        'Name': 'XanePippito',
+        'Name': 'Xane Pippito',
         'Location Near': 2418,
         'Level': 38,
         'Story Pre-Req': [12],
@@ -1117,7 +1120,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     CooraNest = {
         '$id': 1547,
-        'Name': 'CooraNest',
+        'Name': 'Coora Nest',
         'Location Near': 2425,
         'Level': 36,
         'Story Pre-Req': [12],
@@ -1129,7 +1132,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GneoRopl = {
         '$id': 1548,
-        'Name': 'GneoRopl',
+        'Name': 'Gneo Ropl',
         'Location Near': 2425,
         'Level': 33,
         'Story Pre-Req': [12],
@@ -1141,7 +1144,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     FersGrebel = {
         '$id': 1549,
-        'Name': 'FersGrebel',
+        'Name': 'Fers Grebel',
         'Location Near': 2408,
         'Level': 9,
         'Story Pre-Req': [12],
@@ -1153,7 +1156,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     HighscreebQuadwing = {
         '$id': 1550,
-        'Name': 'HighscreebQuadwing',
+        'Name': 'Highscreeb Quadwing',
         'Location Near': 2417,
         'Level': 39,
         'Story Pre-Req': [12],
@@ -1165,7 +1168,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ScriboQuadwing = {
         '$id': 1551,
-        'Name': 'ScriboQuadwing',
+        'Name': 'Scribo Quadwing',
         'Location Near': 2417,
         'Level': 40,
         'Story Pre-Req': [12],
@@ -1177,7 +1180,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     HerculeanGibson = {
         '$id': 1559,
-        'Name': 'HerculeanGibson',
+        'Name': 'Herculean Gibson',
         'Location Near': 2322,
         'Level': 75,
         'Story Pre-Req': [25],
@@ -1189,7 +1192,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     HurricaneAnise = {
         '$id': 1560,
-        'Name': 'HurricaneAnise',
+        'Name': 'Hurricane Anise',
         'Location Near': 2344,
         'Level': 100,
         'Story Pre-Req': [53],
@@ -1201,7 +1204,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     MesmerTlaloc = {
         '$id': 1561,
-        'Name': 'MesmerTlaloc',
+        'Name': 'Mesmer Tlaloc',
         'Location Near': 2331,
         'Level': 85,
         'Story Pre-Req': [35],
@@ -1213,7 +1216,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SentinelCarpathia = {
         '$id': 1562,
-        'Name': 'SentinelCarpathia',
+        'Name': 'Sentinel Carpathia',
         'Location Near': 2319,
         'Level': 65,
         'Story Pre-Req': [8],
@@ -1225,7 +1228,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     RavineBunnit = {
         '$id': 1563,
-        'Name': 'RavineBunnit',
+        'Name': 'Ravine Bunnit',
         'Location Near': 2417,
         'Level': 50,
         'Story Pre-Req': [12],
@@ -1237,7 +1240,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ErraticGoliante = {
         '$id': 1564,
-        'Name': 'ErraticGoliante',
+        'Name': 'Erratic Goliante',
         'Location Near': 2422,
         'Level': 45,
         'Story Pre-Req': [12],
@@ -1249,7 +1252,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     HandwringingBigelow = {
         '$id': 1566,
-        'Name': 'HandwringingBigelow',
+        'Name': 'Handwringing Bigelow',
         'Location Near': 2409,
         'Level': 25,
         'Story Pre-Req': [12],
@@ -1261,7 +1264,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     OveraffectionateMurph = {
         '$id': 1567,
-        'Name': 'OveraffectionateMurph',
+        'Name': 'Overaffectionate Murph',
         'Location Near': 2408,
         'Level': 18,
         'Story Pre-Req': [12],
@@ -1273,7 +1276,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SpillitUrchon = {
         '$id': 1568,
-        'Name': 'SpillitUrchon',
+        'Name': 'Spillit Urchon',
         'Location Near': 2319,
         'Level': 60,
         'Story Pre-Req': [8],
@@ -1285,7 +1288,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ApostleRhogul = {
         '$id': 1569,
-        'Name': 'ApostleRhogul',
+        'Name': 'Apostle Rhogul',
         'Location Near': 2344,
         'Level': 99,
         'Story Pre-Req': [53],
@@ -1297,7 +1300,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SteekyHox = {
         '$id': 1570,
-        'Name': 'SteekyHox',
+        'Name': 'Steeky Hox',
         'Location Near': 2317,
         'Level': 4,
         'Story Pre-Req': [5],
@@ -1309,7 +1312,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     RalshVolff = {
         '$id': 1571,
-        'Name': 'RalshVolff',
+        'Name': 'Ralsh Volff',
         'Location Near': 2315,
         'Level': 3,
         'Story Pre-Req': [1],
@@ -1321,7 +1324,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SowlFeris = {
         '$id': 1573,
-        'Name': 'SowlFeris',
+        'Name': 'Sowl Feris',
         'Location Near': 2322,
         'Level': 21,
         'Story Pre-Req': [25],
@@ -1333,7 +1336,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     UrbsArmuA = {
         '$id': 1574,
-        'Name': 'UrbsArmuA',
+        'Name': 'Urbs Armu A',
         'Location Near': 2322,
         'Level': 18,
         'Story Pre-Req': [25],
@@ -1345,7 +1348,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     AureaArdun = {
         '$id': 1575,
-        'Name': 'AureaArdun',
+        'Name': 'Aurea Ardun',
         'Location Near': 2322,
         'Level': 20,
         'Story Pre-Req': [25],
@@ -1357,7 +1360,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SladeEks = {
         '$id': 1576,
-        'Name': 'SladeEks',
+        'Name': 'Slade Eks',
         'Location Near': 2322,
         'Level': 18,
         'Story Pre-Req': [25],
@@ -1369,7 +1372,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     LibelteFlamii = {
         '$id': 1577,
-        'Name': 'LibelteFlamii',
+        'Name': 'Libelte Flamii',
         'Location Near': 2326,
         'Level': 26,
         'Story Pre-Req': [25],
@@ -1381,7 +1384,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     LefthFlamii = {
         '$id': 1578,
-        'Name': 'LefthFlamii',
+        'Name': 'Lefth Flamii',
         'Location Near': 2317,
         'Level': 4,
         'Story Pre-Req': [5],
@@ -1393,7 +1396,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     MarnaGaraffa = {
         '$id': 1579,
-        'Name': 'MarnaGaraffa',
+        'Name': 'Marna Garaffa',
         'Location Near': 2311,
         'Level': 40,
         'Story Pre-Req': [35],
@@ -1405,7 +1408,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     NemusCamill = {
         '$id': 1580,
-        'Name': 'NemusCamill',
+        'Name': 'Nemus Camill',
         'Location Near': 2318,
         'Level': 6,
         'Story Pre-Req': [5],
@@ -1417,7 +1420,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     AstleEllook = {
         '$id': 1581,
-        'Name': 'AstleEllook',
+        'Name': 'Astle Ellook',
         'Location Near': 2311,
         'Level': 40,
         'Story Pre-Req': [35],
@@ -1429,7 +1432,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     FaneBuloofo = {
         '$id': 1582,
-        'Name': 'FaneBuloofo',
+        'Name': 'Fane Buloofo',
         'Location Near': 2315,
         'Level': 4,
         'Story Pre-Req': [1],
@@ -1441,7 +1444,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     VokkonGriffox = {
         '$id': 1583,
-        'Name': 'VokkonGriffox',
+        'Name': 'Vokkon Griffox',
         'Location Near': 2330,
         'Level': 32,
         'Story Pre-Req': [35],
@@ -1453,7 +1456,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     TelahRiik = {
         '$id': 1585,
-        'Name': 'TelahRiik',
+        'Name': 'Telah Riik',
         'Location Near': 2328,
         'Level': 23,
         'Story Pre-Req': [29],
@@ -1465,7 +1468,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     WhispUpa = {
         '$id': 1587,
-        'Name': 'WhispUpa',
+        'Name': 'Whisp Upa',
         'Location Near': 2301,
         'Level': 3,
         'Story Pre-Req': [2],
@@ -1477,7 +1480,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     BebthUpa = {
         '$id': 1588,
-        'Name': 'BebthUpa',
+        'Name': 'Bebth Upa',
         'Location Near': 2321,
         'Level': 9,
         'Story Pre-Req': [5],
@@ -1489,7 +1492,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     OoneEkidno = {
         '$id': 1589,
-        'Name': 'OoneEkidno',
+        'Name': 'Oone Ekidno',
         'Location Near': 2335,
         'Level': 43,
         'Story Pre-Req': [35],
@@ -1501,7 +1504,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ClocheRapchor = {
         '$id': 1590,
-        'Name': 'ClocheRapchor',
+        'Name': 'Cloche Rapchor',
         'Location Near': 2322,
         'Level': 19,
         'Story Pre-Req': [25],
@@ -1513,7 +1516,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     NobleAspar = {
         '$id': 1591,
-        'Name': 'NobleAspar',
+        'Name': 'Noble Aspar',
         'Location Near': 2408,
         'Level': 13,
         'Story Pre-Req': [12],
@@ -1525,7 +1528,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     TretsAspar = {
         '$id': 1592,
-        'Name': 'TretsAspar',
+        'Name': 'Trets Aspar',
         'Location Near': 2330,
         'Level': 38,
         'Story Pre-Req': [35],
@@ -1537,7 +1540,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SurveeAntol = {
         '$id': 1593,
-        'Name': 'SurveeAntol',
+        'Name': 'Survee Antol',
         'Location Near': 2310,
         'Level': 32,
         'Story Pre-Req': [35],
@@ -1549,7 +1552,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GreetzAntol = {
         '$id': 1594,
-        'Name': 'GreetzAntol',
+        'Name': 'Greetz Antol',
         'Location Near': 2310,
         'Level': 36,
         'Story Pre-Req': [35],
@@ -1561,7 +1564,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     CheltaCaterpileLasaria = {
         '$id': 1595,
-        'Name': 'CheltaCaterpileLasaria',
+        'Name': 'Chelta Caterpile (Lasaria)',
         'Location Near': 2317,
         'Level': 5,
         'Story Pre-Req': [5],
@@ -1573,7 +1576,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     CaliberScorpox = {
         '$id': 1596,
-        'Name': 'CaliberScorpox',
+        'Name': 'Caliber Scorpox',
         'Location Near': 2317,
         'Level': 6,
         'Story Pre-Req': [5],
@@ -1585,7 +1588,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ZafirahCrustip = {
         '$id': 1598,
-        'Name': 'ZafirahCrustip',
+        'Name': 'Zafirah Crustip',
         'Location Near': 2331,
         'Level': 38,
         'Story Pre-Req': [35],
@@ -1597,7 +1600,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     YouseParisax = {
         '$id': 1599,
-        'Name': 'YouseParisax',
+        'Name': 'Youse Parisax',
         'Location Near': 2347,
         'Level': 39,
         'Story Pre-Req': [53],
@@ -1609,7 +1612,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     UisParisax = {
         '$id': 1600,
-        'Name': 'UisParisax',
+        'Name': 'Uis Parisax',
         'Location Near': 2347,
         'Level': 43,
         'Story Pre-Req': [53],
@@ -1621,7 +1624,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     LegginParisax = {
         '$id': 1601,
-        'Name': 'LegginParisax',
+        'Name': 'Leggin Parisax',
         'Location Near': 2347,
         'Level': 45,
         'Story Pre-Req': [53],
@@ -1633,7 +1636,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     BurranGyanna = {
         '$id': 1602,
-        'Name': 'BurranGyanna',
+        'Name': 'Burran Gyanna',
         'Location Near': 2326,
         'Level': 23,
         'Story Pre-Req': [25],
@@ -1645,7 +1648,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SalshRhogul = {
         '$id': 1604,
-        'Name': 'SalshRhogul',
+        'Name': 'Salsh Rhogul',
         'Location Near': 2317,
         'Level': 5,
         'Story Pre-Req': [5],
@@ -1657,7 +1660,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     TonbreRhogul = {
         '$id': 1605,
-        'Name': 'TonbreRhogul',
+        'Name': 'Tonbre Rhogul',
         'Location Near': 2329,
         'Level': 28,
         'Story Pre-Req': [35],
@@ -1669,7 +1672,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     AnbuVang = {
         '$id': 1607,
-        'Name': 'AnbuVang',
+        'Name': 'Anbu Vang',
         'Location Near': 2309,
         'Level': 21,
         'Story Pre-Req': [25],
@@ -1681,7 +1684,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     LapseFlier = {
         '$id': 1608,
-        'Name': 'LapseFlier',
+        'Name': 'Lapse Flier',
         'Location Near': 2301,
         'Level': 4,
         'Story Pre-Req': [2],
@@ -1693,7 +1696,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     KlaretWisp = {
         '$id': 1609,
-        'Name': 'KlaretWisp',
+        'Name': 'Klaret Wisp',
         'Location Near': 2330,
         'Level': 33,
         'Story Pre-Req': [35],
@@ -1705,7 +1708,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     RegusMoramora = {
         '$id': 1610,
-        'Name': 'RegusMoramora',
+        'Name': 'Regus Moramora',
         'Location Near': 2326,
         'Level': 32,
         'Story Pre-Req': [25],
@@ -1717,7 +1720,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     TwondusAspid = {
         '$id': 1611,
-        'Name': 'TwondusAspid',
+        'Name': 'Twondus Aspid',
         'Location Near': 2347,
         'Level': 48,
         'Story Pre-Req': [53],
@@ -1729,7 +1732,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     PhantomMedooz = {
         '$id': 1612,
-        'Name': 'PhantomMedooz',
+        'Name': 'Phantom Medooz',
         'Location Near': 2347,
         'Level': 40,
         'Story Pre-Req': [53],
@@ -1741,7 +1744,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     BiblisPuffot = {
         '$id': 1613,
-        'Name': 'BiblisPuffot',
+        'Name': 'Biblis Puffot',
         'Location Near': 2322,
         'Level': 20,
         'Story Pre-Req': [25],
@@ -1753,7 +1756,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     RobalKrabble = {
         '$id': 1614,
-        'Name': 'RobalKrabble',
+        'Name': 'Robal Krabble',
         'Location Near': 2326,
         'Level': 23,
         'Story Pre-Req': [25],
@@ -1765,7 +1768,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     RibageGrady = {
         '$id': 1616,
-        'Name': 'RibageGrady',
+        'Name': 'Ribage Grady',
         'Location Near': 2317,
         'Level': 30,
         'Story Pre-Req': [5],
@@ -1777,7 +1780,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SarchessGrady = {
         '$id': 1617,
-        'Name': 'SarchessGrady',
+        'Name': 'Sarchess Grady',
         'Location Near': 2321,
         'Level': 10,
         'Story Pre-Req': [5],
@@ -1789,7 +1792,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     LegarreMarrin = {
         '$id': 1618,
-        'Name': 'LegarreMarrin',
+        'Name': 'Legarre Marrin',
         'Location Near': 2310,
         'Level': 42,
         'Story Pre-Req': [35],
@@ -1801,7 +1804,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ArloKapiba = {
         '$id': 1619,
-        'Name': 'ArloKapiba',
+        'Name': 'Arlo Kapiba',
         'Location Near': 2316,
         'Level': 3,
         'Story Pre-Req': [5],
@@ -1813,7 +1816,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     RooseBlant = {
         '$id': 1621,
-        'Name': 'RooseBlant',
+        'Name': 'Roose Blant',
         'Location Near': 2314,
         'Level': 38,
         'Story Pre-Req': [35],
@@ -1825,7 +1828,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     DrothUrchon = {
         '$id': 1622,
-        'Name': 'DrothUrchon',
+        'Name': 'Droth Urchon',
         'Location Near': 2314,
         'Level': 36,
         'Story Pre-Req': [35],
@@ -1837,7 +1840,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     TeppusPippito = {
         '$id': 1623,
-        'Name': 'TeppusPippito',
+        'Name': 'Teppus Pippito',
         'Location Near': 2331,
         'Level': 25,
         'Story Pre-Req': [35],
@@ -1849,7 +1852,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ArcahPippito = {
         '$id': 1624,
-        'Name': 'ArcahPippito',
+        'Name': 'Arcah Pippito',
         'Location Near': 2343,
         'Level': 51,
         'Story Pre-Req': [53],
@@ -1861,7 +1864,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     TyphonTirkin = {
         '$id': 1625,
-        'Name': 'TyphonTirkin',
+        'Name': 'Typhon Tirkin',
         'Location Near': 2323,
         'Level': 21,
         'Story Pre-Req': [25],
@@ -1873,7 +1876,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GratTirkin = {
         '$id': 1626,
-        'Name': 'GratTirkin',
+        'Name': 'Grat Tirkin',
         'Location Near': 2323,
         'Level': 20,
         'Story Pre-Req': [25],
@@ -1885,7 +1888,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     CardineTirkin = {
         '$id': 1627,
-        'Name': 'CardineTirkin',
+        'Name': 'Cardine Tirkin',
         'Location Near': 2323,
         'Level': 19,
         'Story Pre-Req': [25],
@@ -1897,7 +1900,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ParoleTirkin = {
         '$id': 1628,
-        'Name': 'ParoleTirkin',
+        'Name': 'Parole Tirkin',
         'Location Near': 2323,
         'Level': 19,
         'Story Pre-Req': [25],
@@ -1909,7 +1912,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SomeliaNest = {
         '$id': 1629,
-        'Name': 'SomeliaNest',
+        'Name': 'Somelia Nest',
         'Location Near': 2328,
         'Level': 21,
         'Story Pre-Req': [29],
@@ -1921,7 +1924,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     PsitEgg = {
         '$id': 1630,
-        'Name': 'PsitEgg',
+        'Name': 'Psit Egg',
         'Location Near': 2347,
         'Level': 43,
         'Story Pre-Req': [53],
@@ -1933,7 +1936,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     VictorTotem = {
         '$id': 1631,
-        'Name': 'VictorTotem',
+        'Name': 'Victor Totem',
         'Location Near': 2323,
         'Level': 20,
         'Story Pre-Req': [25],
@@ -1945,19 +1948,19 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GargoyleB = {
         '$id': 1632,
-        'Name': 'GargoyleB',
+        'Name': 'Gargoyle B',
         'Location Near': 2351,
         'Level': 32,
         'Story Pre-Req': [40],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': [],
+        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [11], "$id"),
         'Enemy Drop Table IDs': [352]
     }
     GargoyleC = {
         '$id': 1633,
-        'Name': 'GargoyleC',
+        'Name': 'Gargoyle C',
         'Location Near': 2357,
         'Level': 32,
         'Story Pre-Req': [40],
@@ -1969,7 +1972,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     VenttsRopl = {
         '$id': 1634,
-        'Name': 'VenttsRopl',
+        'Name': 'Ventts Ropl',
         'Location Near': 2331,
         'Level': 38,
         'Story Pre-Req': [35],
@@ -1981,7 +1984,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     KnooberPod = {
         '$id': 1635,
-        'Name': 'KnooberPod',
+        'Name': 'Knoober Pod',
         'Location Near': 2310,
         'Level': 33,
         'Story Pre-Req': [35],
@@ -1993,7 +1996,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     AveroTirkin = {
         '$id': 1636,
-        'Name': 'AveroTirkin',
+        'Name': 'Avero Tirkin',
         'Location Near': 2322,
         'Level': 20,
         'Story Pre-Req': [25],
@@ -2005,7 +2008,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SorolleArmu = {
         '$id': 1637,
-        'Name': 'SorolleArmu',
+        'Name': 'Sorolle Armu',
         'Location Near': 2322,
         'Level': 11,
         'Story Pre-Req': [25],
@@ -2017,7 +2020,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     MagraQuadwing = {
         '$id': 1639,
-        'Name': 'MagraQuadwing',
+        'Name': 'Magra Quadwing',
         'Location Near': 2315,
         'Level': 2,
         'Story Pre-Req': [1],
@@ -2029,7 +2032,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     NightMagraQuadwing = {
         '$id': 1640,
-        'Name': 'NightMagraQuadwing',
+        'Name': 'Night Magra Quadwing',
         'Location Near': 2315,
         'Level': 4,
         'Story Pre-Req': [1],
@@ -2041,7 +2044,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     LegiaFlier = {
         '$id': 1641,
-        'Name': 'LegiaFlier',
+        'Name': 'Legia Flier',
         'Location Near': 2328,
         'Level': 21,
         'Story Pre-Req': [29],
@@ -2053,7 +2056,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SordisRhogul = {
         '$id': 1643,
-        'Name': 'SordisRhogul',
+        'Name': 'Sordis Rhogul',
         'Location Near': 2322,
         'Level': 22,
         'Story Pre-Req': [25],
@@ -2065,7 +2068,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     TalesRapchor = {
         '$id': 1644,
-        'Name': 'TalesRapchor',
+        'Name': 'Tales Rapchor',
         'Location Near': 2335,
         'Level': 40,
         'Story Pre-Req': [35],
@@ -2077,7 +2080,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     AwarthScorpox = {
         '$id': 1645,
-        'Name': 'AwarthScorpox',
+        'Name': 'Awarth Scorpox',
         'Location Near': 2330,
         'Level': 27,
         'Story Pre-Req': [35],
@@ -2089,7 +2092,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     DakhimTirkin = {
         '$id': 1646,
-        'Name': 'DakhimTirkin',
+        'Name': 'Dakhim Tirkin',
         'Location Near': 2335,
         'Level': 39,
         'Story Pre-Req': [35],
@@ -2101,7 +2104,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     TsorridTirkin = {
         '$id': 1647,
-        'Name': 'TsorridTirkin',
+        'Name': 'Tsorrid Tirkin',
         'Location Near': 2335,
         'Level': 39,
         'Story Pre-Req': [35],
@@ -2113,7 +2116,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     PallovTirkin = {
         '$id': 1648,
-        'Name': 'PallovTirkin',
+        'Name': 'Pallov Tirkin',
         'Location Near': 2333,
         'Level': 39,
         'Story Pre-Req': [35],
@@ -2125,7 +2128,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GlorrTotem = {
         '$id': 1649,
-        'Name': 'GlorrTotem',
+        'Name': 'Glorr Totem',
         'Location Near': 2333,
         'Level': 39,
         'Story Pre-Req': [35],
@@ -2137,7 +2140,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     NereusQuadwing = {
         '$id': 1650,
-        'Name': 'NereusQuadwing',
+        'Name': 'Nereus Quadwing',
         'Location Near': 2322,
         'Level': 21,
         'Story Pre-Req': [25],
@@ -2149,7 +2152,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SableVolff = {
         '$id': 1651,
-        'Name': 'SableVolff',
+        'Name': 'Sable Volff',
         'Location Near': 2330,
         'Level': 25,
         'Story Pre-Req': [35],
@@ -2161,7 +2164,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GobeenGogol = {
         '$id': 1652,
-        'Name': 'GobeenGogol',
+        'Name': 'Gobeen Gogol',
         'Location Near': 2330,
         'Level': 28,
         'Story Pre-Req': [35],
@@ -2173,7 +2176,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     DormineBrog = {
         '$id': 1653,
-        'Name': 'DormineBrog',
+        'Name': 'Dormine Brog',
         'Location Near': 2326,
         'Level': 28,
         'Story Pre-Req': [25],
@@ -2185,7 +2188,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GrohlPlambus = {
         '$id': 1655,
-        'Name': 'GrohlPlambus',
+        'Name': 'Grohl Plambus',
         'Location Near': 2413,
         'Level': 38,
         'Story Pre-Req': [12],
@@ -2197,7 +2200,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     CheltaCaterpileDannagh = {
         '$id': 1656,
-        'Name': 'CheltaCaterpileDannagh',
+        'Name': 'Chelta Caterpile (Dannagh)',
         'Location Near': 2330,
         'Level': 30,
         'Story Pre-Req': [35],
@@ -2209,7 +2212,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     LunarAmaruq = {
         '$id': 1657,
-        'Name': 'LunarAmaruq',
+        'Name': 'Lunar Amaruq',
         'Location Near': 2307,
         'Level': 34,
         'Story Pre-Req': [33],
@@ -2221,7 +2224,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     BeatificOphelia = {
         '$id': 1658,
-        'Name': 'BeatificOphelia',
+        'Name': 'Beatific Ophelia',
         'Location Near': 2311,
         'Level': 48,
         'Story Pre-Req': [35],
@@ -2233,7 +2236,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     NomadicRusholme = {
         '$id': 1659,
-        'Name': 'NomadicRusholme',
+        'Name': 'Nomadic Rusholme',
         'Location Near': 2325,
         'Level': 44,
         'Story Pre-Req': [25],
@@ -2245,7 +2248,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     IonosphericMitchell = {
         '$id': 1660,
-        'Name': 'IonosphericMitchell',
+        'Name': 'Ionospheric Mitchell',
         'Location Near': 2320,
         'Level': 50,
         'Story Pre-Req': [8],
@@ -2257,7 +2260,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     InterceptorGrace = {
         '$id': 1661,
-        'Name': 'InterceptorGrace',
+        'Name': 'Interceptor Grace',
         'Location Near': 2310,
         'Level': 40,
         'Story Pre-Req': [35],
@@ -2269,7 +2272,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     GourmandGalgan = {
         '$id': 1662,
-        'Name': 'GourmandGalgan',
+        'Name': 'Gourmand Galgan',
         'Location Near': 2322,
         'Level': 38,
         'Story Pre-Req': [25],
@@ -2281,7 +2284,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SleepwalkerMork = {
         '$id': 1663,
-        'Name': 'SleepwalkerMork',
+        'Name': 'Sleepwalker Mork',
         'Location Near': 2334,
         'Level': 33,
         'Story Pre-Req': [35],
@@ -2293,7 +2296,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     HarbingerCavill = {
         '$id': 1664,
-        'Name': 'HarbingerCavill',
+        'Name': 'Harbinger Cavill',
         'Location Near': 2317,
         'Level': 23,
         'Story Pre-Req': [5],
@@ -2305,7 +2308,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     SequesteredLudd = {
         '$id': 1665,
-        'Name': 'SequesteredLudd',
+        'Name': 'Sequestered Ludd',
         'Location Near': 2348,
         'Level': 48,
         'Story Pre-Req': [53],
@@ -2317,7 +2320,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     EverdarkErg = {
         '$id': 1666,
-        'Name': 'EverdarkErg',
+        'Name': 'Everdark Erg',
         'Location Near': 2315,
         'Level': 36,
         'Story Pre-Req': [24],
@@ -2329,7 +2332,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     FlyingFortressDesmor = {
         '$id': 1667,
-        'Name': 'FlyingFortressDesmor',
+        'Name': 'Flying Fortress Desmor',
         'Location Near': 2314,
         'Level': 55,
         'Story Pre-Req': [35],
@@ -2341,7 +2344,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     }
     ScowlingQuincy = {
         '$id': 1670,
-        'Name': 'ScowlingQuincy',
+        'Name': 'Scowling Quincy',
         'Location Near': 2323,
         'Level': 25,
         'Story Pre-Req': [25],
@@ -2352,27 +2355,37 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Enemy Drop Table IDs': [480]
     }
 
+    EnemyDropCounter = 1
+
     TornaEnemyDict = [RagingVolff, JubelFeris, CursedBuloofoA, GargoyleA, Addam, Mythra, Brighid, ArdainianScoutA, ArdainianScoutB, GortA, AntipatheticArchibald, ScurvyCurtis, InsufferableUlysses, SlitheJagronA, SlitheJagronB, MalosA, GargoyleD, ArtificeColossus, MalosB, MalosC, GortB, ArtificeSirenA, ArtificeSirenB, CursedBuloofoB, VanadiumTirkin, SorgusTirkin, LeractGogol, HewliGogol, MarrithAntol, IncubFlier, PradoCaterpile, AppetBrog, DurallBuloofo, InnocentVolff, LoweBlant, TizzaParisax, IndignantJerry, GraftonFeris, ConspiratorMacNeth, WanderingUrchon, WanderingRopl, WanderingLaia, TimidVolff, PickerBuloofo, ElegiacMercenary, HalcyonMercenary, ChatteringSkeeter, TacitusUrchon, GloomyAspar, WhistlingBathein, PreoccupiedGogol, TenaxEkidno, CalculatingGogol, ElectGogol, CloudArachno, DispareRopl, CreefGriffox, EvokeBunnit, ForayBunnit, NoggleBunnit, PinchBunnit, FirmVolff, GeminiVolff, EspinaFeris, LekutFeris, RinkerEks, DominalFlamii, IngleCamill, GrayBuloofo, ImbaLizard, CelsarsTaos, DreadCaterpileSummon, KanooSkwaror, DreadCaterpileNormal, MyrrhesCrustip, ArrahRhogul, BohnQuadwing, HighbohnQuadwing, LapisVang, ErsSkeeter, AstorFlier, CascadeKrabble, KastKrabble, ReedPiranhax, MaramalPiranhax, KeatTirkin, GradsTirkin, VabraTirkin, EpistoTirkin, DerrahTirkin, XanePippito, CooraNest, GneoRopl, FersGrebel, HighscreebQuadwing, ScriboQuadwing, HerculeanGibson, HurricaneAnise, MesmerTlaloc, SentinelCarpathia, RavineBunnit, ErraticGoliante, HandwringingBigelow, OveraffectionateMurph, SpillitUrchon, ApostleRhogul, SteekyHox, RalshVolff, SowlFeris, UrbsArmuA, AureaArdun, SladeEks, LibelteFlamii, LefthFlamii, MarnaGaraffa, NemusCamill, AstleEllook, FaneBuloofo, VokkonGriffox, TelahRiik, WhispUpa, BebthUpa, OoneEkidno, ClocheRapchor, NobleAspar, TretsAspar, SurveeAntol, GreetzAntol, CheltaCaterpileLasaria, CaliberScorpox, ZafirahCrustip, YouseParisax, UisParisax, LegginParisax, BurranGyanna, SalshRhogul, TonbreRhogul, AnbuVang, LapseFlier, KlaretWisp, RegusMoramora, TwondusAspid, PhantomMedooz, BiblisPuffot, RobalKrabble, RibageGrady, SarchessGrady, LegarreMarrin, ArloKapiba, RooseBlant, DrothUrchon, TeppusPippito, ArcahPippito, TyphonTirkin, GratTirkin, CardineTirkin, ParoleTirkin, SomeliaNest, PsitEgg, VictorTotem, GargoyleB, GargoyleC, VenttsRopl, KnooberPod, AveroTirkin, SorolleArmu, MagraQuadwing, NightMagraQuadwing, LegiaFlier, SordisRhogul, TalesRapchor, AwarthScorpox, DakhimTirkin, TsorridTirkin, PallovTirkin, GlorrTotem, NereusQuadwing, SableVolff, GobeenGogol, DormineBrog, GrohlPlambus, CheltaCaterpileDannagh, LunarAmaruq, BeatificOphelia, NomadicRusholme, IonosphericMitchell, InterceptorGrace, GourmandGalgan, SleepwalkerMork, HarbingerCavill, SequesteredLudd, EverdarkErg, FlyingFortressDesmor, ScowlingQuincy]
     
     global TornaEnemies
     TornaEnemies = []
 
     for enemy in TornaEnemyDict:
-        TornaEnemy(enemy, TornaEnemies, DropQty)
+        TornaEnemyNormalDrops(enemy, TornaEnemies, DropQty, EnemyDropCounter)
+        EnemyDropCounter += 1
 
     # adding back other requirements
 
     SummonedList = []
 
     for enemy in TornaEnemies:
+        TurnEnemyLevelIntoMainStoryReq(enemy)
         if enemy.mainreq != []:
-            enemy.itemreqs.extend(Mainquests[enemy.mainreq[0]].itemreqs) # adds the main story requirement to the enemy of choice
+            enemy.itemreqs.extend(Mainquests[enemy.mainreq - 1].itemreqs) # adds the main story requirement to the enemy of choice
         if enemy.duringquest != []:
-            enemy.itemreqs.extend(Sidequests[enemy.duringquest[0]].itemreqs) # adds the current sidequest item requirements to the enemy of choice
+            enemy.itemreqs.extend(Sidequests[enemy.duringquest[0] - 1].itemreqs) # adds the current sidequest item requirements to the enemy of choice
         if enemy.sideprereq != []:
-            enemy.itemreqs.extend(Sidequests[enemy.sideprereq[0]].itemreqs) # adds the pre-req sidequest items to the enemy of choice (used for one enemy that isn't directly part of a quest, but spawns after a sidequest is finished)
-        if enemy.level > 3:
-            enemy.itemreqs.extend(LevelUpTokens[:min(enemy.level + 1, 95)]) # adds the minimum level requirement, and then 2 extra levels over that
+            enemy.itemreqs.extend(Sidequests[enemy.sideprereq[0] - 1].itemreqs) # adds the pre-req sidequest items to the enemy of choice (used for one enemy that isn't directly part of a quest, but spawns after a sidequest is finished)
+        if enemy.id in TornaUMIDs:
+            enemy.type = "uniquemonster"
+        elif enemy.id in TornaBossIDs:
+            enemy.type = "boss"
+        elif enemy.id in TornaQuestEnemyIDs:
+            enemy.type = "questenemy"
+        elif enemy.id in TornaNormalEnemyIDs:
+            enemy.type = "normalenemy"
         for area in Areas: # adds the area reach requirements
             if enemy.nearloc == area.id:
                 enemy.itemreqs.extend(area.itemreqs)
@@ -2392,5 +2405,24 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         enemy.itemreqs = list(set(enemy.itemreqs))
         enemy.itemreqs.sort()
 
-    return TornaEnemies
+    return TornaEnemies, EnemyDropCounter
 
+def TurnEnemyLevelIntoMainStoryReq(enemy): # decided not to go with the enemy level token system and instead use a level cap based system.
+    match enemy.level:
+        case _ if enemy.level > 14 and enemy.level <= 19:
+           enemy.mainreq = max(enemy.mainreq, 8)
+        case _ if enemy.level > 19 and enemy.level <= 25:
+            enemy.mainreq = max(enemy.mainreq, 16)
+        case _ if enemy.level > 25 and enemy.level <= 34:
+            enemy.mainreq = max(enemy.mainreq, 19)
+        case _ if enemy.level > 34 and enemy.level <= 37:
+            enemy.mainreq = max(enemy.mainreq, 30)
+        case _ if enemy.level > 37 and enemy.level <= 45:
+            enemy.mainreq = max(enemy.mainreq, 40)
+        case _ if enemy.level > 45:
+            enemy.mainreq = max(enemy.mainreq, 44)
+
+    #if enemy.level < 3: # this was the old way I did it, no longer needed
+    #    enemy.itemreqs.extend(LevelUpTokens[:min(enemy.level + 1, 96)]) # adds the minimum level requirement, and then 2 extra levels over that
+
+    

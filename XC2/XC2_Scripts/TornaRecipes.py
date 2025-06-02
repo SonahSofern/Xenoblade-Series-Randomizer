@@ -5,25 +5,34 @@ import time
 from IDs import ValidEnemies, TornaUMIDs
 
 # FLD_CollectionTable $id -> ma40a and ma41a_FLD_CollectionPopList CollectionTable.
+# if i implement random crafting recipes, this will be useful
 
 def CreateTornaRecipeList():
-    global TornaRecipeIDs
     TornaRecipeIDs = []
     TornaRegularEnemyIDs = []
     TornaMA40AEnemyIDs = []
     TornaMA41AEnemyIDs = []
+
     class TornaRecipe:
         def __init__(self, id):
-            self.id = id
+            self.shopchangetaskid = id
             self.components = list()
             subcomponentid = 0
             for i in range(1, 6):
-                subcomponentid = Helper.FindValues("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", ["$id"], [self.id], f"SetItem{i}")
+                subcomponentid = Helper.FindValues("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", ["$id"], [self.shopchangetaskid], f"SetItem{i}")
                 if subcomponentid != [0]:
                     self.components.extend(subcomponentid)
-            self.nameid = Helper.FindValues("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", ["$id"], [self.id], "Name")[0]
-            self.name = Helper.FindValues("./XC2/_internal/JsonOutputs/common_ms/fld_shopchange.json", ["$id"], [self.nameid], "name")[0]
+            self.shopchangenameid = Helper.FindValues("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", ["$id"], [self.shopchangetaskid], "Name")[0]
+            self.shopchangenametext = Helper.FindValues("./XC2/_internal/JsonOutputs/common_ms/fld_shopchange.json", ["$id"], [self.shopchangenameid], "name")[0]
+            self.itmnametext = Helper.FindValues("./XC2/_internal/JsonOutputs/common_ms/itm_favorite.json", ["name"], [self.shopchangenametext], "$id")
+            if self.itmnametext != []:
+                self.itmnametext = self.itmnametext[0]
+            self.itmfavlistid = Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_FavoriteList.json", ["Name"], [self.itmnametext], "$id")
+            if self.itmfavlistid != []:
+                self.itmfavlistid = self.itmfavlistid[0]
+            print("{'Shop Task ID': " + str(self.shopchangetaskid) + ", 'Ingredients': " + str(self.components) +"}")
             TornaRecipeIDs.append(self)
+
     with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
@@ -32,6 +41,9 @@ def CreateTornaRecipeList():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+
+    return TornaRecipeIDs
+
 #    with open("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_EnemyPop.json", 'r+', encoding='utf-8') as file:
 #        data = json.load(file)
 #        for row in data["rows"]:

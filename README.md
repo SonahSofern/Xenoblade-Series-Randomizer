@@ -1,5 +1,5 @@
 # Xenoblade Randomizer
-A randomizer project for the whole Xenoblade series on the switch.
+A randomizer project for the Xenoblade Chronicles series on the switch.
 
 
 # General Description

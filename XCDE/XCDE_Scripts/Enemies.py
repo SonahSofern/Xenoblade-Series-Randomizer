@@ -22,9 +22,15 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     MysteriousFace = ForcedArt(268,5,611)
     GoldFace = ForcedArt(1622, 1, 740)
     DiscipleDickson = ForcedArt(1316, 8, 942)
+    Yaldabaoth = ForcedArt(2501, 5, 843)
+    YaldabaothThree = ForcedArt(2501, 8, 846)
+    YaldabaothTwo = ForcedArt(2123, 1, 828)
+    SurenyTelethia = ForcedArt(2601, 1, 870)
+    # EnergyDevice = ForcedArt(2506, 1, 848) # Not using since the enemies have removed their limits anyway to account for UM who cant be instakilled
+    # EnergyDeviceTwo = ForcedArt(2506, 2, 848)
     GroupEnemies = [135,136,137,138,139]
     selfDestructArts = [1005,1015,1017,1009, 1007, 1013, 396, 406, 915, 408, 812, 814, 400, 923, 1053, 398, 899, 404, 410, 1127, 820] + Helper.InclRange(900, 929)
-    ForcedStoryArts = [MetalFace, MysteriousFace, GoldFace, DiscipleDickson] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
+    ForcedStoryArts = [MetalFace, MysteriousFace, GoldFace, DiscipleDickson, Yaldabaoth, YaldabaothTwo, SurenyTelethia, YaldabaothThree] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
     isNormal = normal.GetState()
     isUnique = unique.GetState()
     isBoss = boss.GetState()
@@ -41,7 +47,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
         ChosenEnemyIds.extend(SuperbossEnemies)
     # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame",  "avoid", "spike_dmg", "spike_state_val"
     CopiedStats = ["move_speed", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_state", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
-    CopiedStatsWithRatios = ["hp", "str", "eth"] # Not doing agility , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
+    CopiedStatsWithRatios = ["str", "eth"] # Not doing agility or hp , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
     CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
     
     # 5001 doesnt have enemies
@@ -76,7 +82,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                         if enemy["$id"] not in monsterTypeList: # Only want to replace enemies chosen from our groups
                             continue
                                                     
-                        chosen = random.choice(filteredEnemyData) # Choose an enemy                
+                        chosen:Enemy = random.choice(filteredEnemyData) # Choose an enemy                
                         
                         VoicedEnemiesFix(eneVoiceData, chosen, enemy)                                
                         SpikeBalancer(enemy, chosen.eneListArea)
@@ -104,7 +110,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                         MechonEarly(enemy, chosen)
                         SmallAreaFights(enemy)
                         ForcedArts(enemy, ForcedStoryArts)
-                        
+                        DevicesAttachedToEgilFix(enemy)
                         # Allows no dupes if possible if we dont have enough choices it reshuffles the original pool
                         filteredEnemyData.remove(chosen)   
                         if filteredEnemyData == []: # repopulate it if the group is empty
@@ -113,26 +119,40 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                     JSONParser.CloseFile(eneVoiceData, eneVoiceFile)
                     JSONParser.CloseFile(eneAreaData, eneAreaFile)  
         JSONParser.CloseFile(eneData, eneFile)
-        RingRemoval() 
+        RingRemoval()
     
 def ForcedArts(enemy, ForcedStoryArts):
     # Fixes boss fights that require the enemy to use an art slot to end the fight 
     for id in ForcedStoryArts:
         if id.id == enemy["$id"]:
             enemy[f"arts{id.artSlot}"] = id.artId  # Change it to their art
-            break    
+
+def HighActIDFix():
+    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ene_arts.json", 'r+', encoding='utf-8') as artFile:
+        artData = json.load(artFile)
+        for art in artData["rows"]:
+            if art["$id"] == 846:
+                art["act_idx"] = 0
+                break
+        JSONParser.CloseFile(artData, artFile)
+    
 
 def VoicedEnemiesFix(eneVoiceData, chosen, enemy):
+    newVoiceList = []
     for voiceID in eneVoiceData["rows"]:
         if chosen.enelist["$id"] == voiceID["enemy"]: # If the chosen enemy has a voice
-            voiceID["enemy"] = enemy["$id"] # Set the ID
+            newVoice = voiceID.copy()
+            newVoice["enemy"] = enemy["$id"] # Set the ID
+            newVoice["$id"] = len(eneVoiceData["rows"]) + len(newVoiceList) + 1
+            newVoiceList.append(newVoice)
             break    
+    eneVoiceData["rows"].extend(newVoiceList)
 
 # Big enemies in small areas can break the ai and you cant target them if they go into ceilings (Had this in the two ancient machines fight with a big dragon)
 def SmallAreaFights(enemy):
-    SmallFights = [30,31]
-    if enemy["$id"] in SmallFights:
-        enemy["scale"] = max(int(enemy["scale"] /4),1)
+    SmallFights = [30,31, 1617]
+    if (enemy["$id"] in SmallFights) and (enemy["size"] >= 4):
+        enemy["scale"] = max(int(enemy["scale"] /3),1)
 
 # Create our list of enemies from all the area files and Combine the data into the class
 def CreateEnemyDataClass(eneData, enAreaFiles):
@@ -153,29 +173,31 @@ def CreateEnemyDataClass(eneData, enAreaFiles):
                         break   
             JSONParser.CloseFile(eneAreaData, eneAreaFile)
 
+# There is no fix for topple spikes always being active just nerfed all spikes instead
 def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
     if chosen["spike_dmg"] != 0:
         
         # Get current enemy
         if enemy["lv"] < 20:
-            spikePerLv = 0.2 # base spike given per level
+            spikePerLv = 0.1 # base spike given per level
         elif enemy["lv"] < 40:
-            spikePerLv = 0.4
+            spikePerLv = 0.2
         else:
-            spikePerLv = 0.7
+            spikePerLv = 0.3
         
         # Get chosens 
         if chosen["lv"] < 20:
             chosenSpikePerLv = 0.2 # base spike given per level
         elif chosen["lv"] < 40:
-            chosenSpikePerLv = 0.4
+            chosenSpikePerLv = 0.3
         else:
-            chosenSpikePerLv = 0.7
+            chosenSpikePerLv = 0.4
         
         # Run some equations to find a good balance for that level and how strong the spike was
         expectedPowerLv = chosen["lv"] * chosenSpikePerLv # The expected power level of the spike before any changes
         actualPowerLv = chosen["spike_dmg"]
-        spikeMult = actualPowerLv/expectedPowerLv # If enemy has a stronger/weaker spike than something of its level make the spike stronger/weaker but still balanced
+        spikeMult = min(actualPowerLv/expectedPowerLv, 2) # If enemy has a stronger/weaker spike than something of its level make the spike stronger/weaker but still balanced
+        # print(spikeMult)
         newPowerLv = int(enemy["lv"] * spikePerLv * spikeMult)
         enemy["spike_dmg"] = max(min(newPowerLv, 255), 1) # Set the new amount between 1 and 255
         # print(f"Level: {enemy["lv"]}")
@@ -271,7 +293,30 @@ def RingRemoval():
                 lock["popID1"] = 0
                 lock["popID2"] = 0
         JSONParser.CloseFile(lockData, lockFile)
-        
+
+def DevicesAttachedToEgilFix(enemy):
+    if enemy["$id"] == 2506: # Remove the limit on these because unique monsters cannot be inflicted with instant death like their art wants to do
+        enemy["limit"] = 0
+
+
+def EgilArenaFix():
+    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
+        enData = json.load(eneFile)
+        for en in enData["rows"]:
+            if en["$id"] == 2501:
+                en["resource"] = 486
+                break
+        JSONParser.CloseFile(enData, eneFile)
+    
+    # if enemy["$id"] == 2501 and chosen.enelist["$id"] != 2501: # If egil is randomized into not egil we need to move him
+    #     with open(f"./XCDE/_internal/JsonOutputs/bdat_ma2301/poplist2301.json", 'r+', encoding='utf-8') as enpopFile:
+    #         popData = json.load(enpopFile)
+    #         for en in popData["rows"]:
+    #             if en["$id"] == 2:
+    #                 en["posX"] = 5
+    #                 en["posY"] = 0
+    #         JSONParser.CloseFile(popData, enpopFile)
+  
         
 def EnemyDesc(categoryName):
     myDesc = PopupDescriptions.Description()
@@ -285,6 +330,8 @@ def EnemyDesc(categoryName):
     myDesc.Tag(f"Instant Death Spikes are removed for fights below level {instantDeathSpikeThreshold}", pady=(5,5))
     myDesc.Tag("A few boss fights require certain arts to be used to end. Mysterious Face in spiral valley for example.\nIn this case the enemy that replaces Mysterious Face will have that art added to their list in the slot it requires. (Only affects 4 fights in the game)", pady=(5,5))
     myDesc.Tag("Some fights have small green rings and if you get big enemies there it smashes you up against the wall. These fights will have the ring removed.", pady=(5,5))
+    myDesc.Tag("Enemies who self destruct will not be able to if placed in certain boss fights that require arts to end", pady=(5,5))
+    myDesc.Tag("The first two required fights in the game (Dunbans Prologue and Shulks Colony 9 introduction scene) are made easier to avoid softlocking.", pady=(5,5))
     return myDesc
 
 

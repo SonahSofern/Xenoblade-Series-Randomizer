@@ -178,7 +178,7 @@ def Cosmetics():
             orbData = json.load(orbFile)
             nameData = json.load(nameFile)
             
-            CosmeticPairs(nameData,orbData,odds,"Blade", ValidBladeCosmetics,)
+            CosmeticPairs(nameData,orbData,odds,"Blade", ValidBladeCosmetics)
             
             nameFile.seek(0)
             nameFile.truncate()

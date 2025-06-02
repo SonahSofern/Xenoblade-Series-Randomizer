@@ -19,24 +19,19 @@ class Gem:
         self.money = money 
         self.category = category
         self.rvs_caption = rvs_caption
-        self.menuCaption = menuCaption
+        if menuCaption == "":
+            self.menuCaption = rvs_caption
+        else:
+            self.menuCaption = menuCaption
         GemList.append(self)
 GemList:list[Gem] = []
             
 
-attributes = {
-    0 : (0, "NULL"),
-    4 : (4,"Fire"),
-    5 : (5, "Water"),
-    6 : (6, "Electric"),
-    7 : (7, "Ice"),
-    8 : (8, "Wind"),
-    9 : (9, "Earth")
-}
+
 
      
 def StandardGems(gemData, gemMSData, gemHelpMSData):    
-    badEffects = [60, 0, 83, 84, 87, 82, 44, 94]
+    badEffects = [60, 0, 83, 84, 87, 82, 44, 61, 194, 231, 161]
     for gem in gemData["rows"]:
         if gem["rvs_status"] in badEffects:
             continue
@@ -49,19 +44,42 @@ def StandardGems(gemData, gemMSData, gemHelpMSData):
             if gem["rvs_caption"] == helpName["$id"]:
                 newHelpName = helpName["name"]
                 break
+        for gemDesc in gemHelpMSData["rows"]:
+            if gemDesc["$id"] == gem["$id"]:
+                help = gemDesc["name"]
+                break
         
-        Gem(newName, attributes[gem["atr_type"]], gem["rvs_status"], gem["rvs_type"], gem["attach"], gem["max"], gem["val_type"], [gem["lower_E"], gem["upper_S"]], [gem["percent_E"], gem["percent_S"]], gem["money"], gem["category"], newHelpName, newHelpName)
+        Gem(newName, attributes[gem["atr_type"]], gem["rvs_status"], gem["rvs_type"], gem["attach"], gem["max"], gem["val_type"], [gem["lower_E"], gem["upper_S"]], [gem["percent_E"], gem["percent_S"]], gem["money"], gem["category"], newHelpName, help)
 
-    
+attributes = {
+    0 : (0, "NULL"),
+    4 : (4,"Fire"),
+    5 : (5, "Water"),
+    6 : (6, "Electric"),
+    7 : (7, "Ice"),
+    8 : (8, "Wind"),
+    9 : (9, "Earth")
+}
 
 def UnusedGems():
-    Gem("Cast Quicken", attributes[6], 45, 3,2, 90, 0, [10,30], [0,0], 1000, 4, "\\[Passive\\][XENO:n ] Reduces cast time by $1.")
-    Gem("Reactive Heal", attributes[5], 54, 1, 2, 90, 0, [30,255], [0,0], 1500, 1, "\\[Passive\\][XENO:n ] On damage taken restore $1 health.", "Test")
-    Gem("Monado Enchant", attributes[7], 208, 1, 1, 90, 0, [100,200], [0,0], 2000, 1, "\\[Passive\\][XENO:n ] Your attacks pierce mechon armor and inflict $1 bonus damage.", "Test")
+    Gem("Cast Quicken", attributes[6], 45, 3,2, 90, 0, [10,30], [0,0], 1000, 4, "\\[Passive\\][XENO:n ] Reduces cast time by $1.", "\\[Passive\\][XENO:n ] Reduces cast time.")
+    Gem("Reactive Heal", attributes[5], 54, 1, 2, 90, 0, [30,255], [0,0], 1500, 1, "\\[Passive\\][XENO:n ] On damage taken restore $1 health.", "\\[Passive\\][XENO:n ] On damage taken restore health.")
+    Gem("Monado Enchant", attributes[7], 208, 1, 1, 90, 0, [100,200], [0,0], 2000, 1, "\\[Passive\\][XENO:n ] Your attacks pierce mechon armor [XENO:n ]\nand inflict $1 bonus damage.", "\\[Passive\\][XENO:n ] Your attacks pierce mechon armor and inflict bonus damage.")
+    Gem("Cursed Regen", attributes[8], 53, 1, 2, 1000, 0, [100,100], [1,2], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
+    # Gem("Recovery Down 0", attributes[8], 142, 1, 0, 1000, 0, [20,20], [100,100], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
+    # Gem("Recovery Down 1", attributes[8], 142, 0, 0, 1000, 0, [20,20], [100,100], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
+    
+    
     # 94 is accuracy up might add here if it works
     if Options.MovespeedOption.GetState():
-        Gem("Quickstep", attributes[8], 3, 3, 2, 25, 0, [2,25], [0,0], 500, 5, "\\[Passive\\][XENO:n ] Increases movement speed by $1.", "\\[Passive\\][XENO:n ] Increases movement speed by $1.")
-                    
+        Gem("Quickstep", attributes[8], 3, 3, 2, 25, 0, [2,25], [0,0], 500, 5, "\\[Passive\\][XENO:n ] Increases movement speed by $1.", "\\[Passive\\][XENO:n ] Increases movement speed.")
+
+# Dont work 
+# Gem("Regenerate", attributes[5], 52, 1, 2, 1000, 0, [40,200], [1,2], 2999, 1, "Test", "Test")
+# Gem("Fall", attributes[8], 58, 0, 2, 1000, 0, [100,100], [100,100], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
+# Gem("Recovery Down 1", attributes[8], 142, 0, 0, 1000, 0, [20,20], [100,100], 6500, 1, "\\[Passive\\][XENO:n ] Disables automatic regeneration.")
+
+                 
 def Gems():
     ranks = ["E", "D", "C", "B", "A", "S"] # Calculate proper gem amount based on rank
     with open("./XCDE/_internal/JsonOutputs/bdat_common/BTL_skilllist.json", 'r+', encoding='utf-8') as gemFile:
@@ -90,7 +108,8 @@ def Gems():
                 
                 for gem in gemData["rows"]:
                     if isNotCapped:
-                        gem["max"] = 10000
+                        if gem["rvs_status"] not in [146, 45]:
+                            gem["max"] = int(gem["max"] * random.choice([0.2,0.4,0.6,0.8,1.2,1.4,1.6,1.8,2.2,3,3,4]))
                     if isFreeEquip:
                         gem["attach"] = 0                # 0 Equip to anything                # 1 Equip to weapon                # 2 Equip to armor
                     if isPower:
@@ -119,7 +138,7 @@ def Gems():
 def Effects(gemData, gemMSData, gemHelpMSData):
     
     # Number of gems that the game will allow in a single file
-    maxGems = 92
+    maxGems = 98
     
     # Keep track of what ids to put things in
     idCount = 1
@@ -218,8 +237,18 @@ def Effects(gemData, gemMSData, gemHelpMSData):
         
         idCount += 1
         skillMSCount += 3
-    
+    CrystalFix(len(gemData["rows"]))
 
+def CrystalFix(gemLength): # Goes through and edits crystals that have values outside the current population of skills
+    with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_dropcrystallist.json", 'r+', encoding='utf-8') as crystalFile: 
+        cryData = json.load(crystalFile)
+        for crystal in cryData["rows"]:
+            for i in range(1,3):
+                if crystal[f"skill{i}"] > gemLength:
+                    crystal[f"skill{i}"] = random.randrange(1,gemLength+1)
+        scripts.JSONParser.CloseFile(cryData, crystalFile)
+            
+    
 
 def RankPower(gem, ranks):
     mult = random.choice([0.1, 0.2, 0.3, 0.4, 0.6, 0.8, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0, 2.5, 3.0])
@@ -245,7 +274,7 @@ def GemDescriptions():
     GemDescription.Header(Options.GemOption_Power.name)
     GemDescription.Text("This randomizes the power level of crafted and premade gems.")
     GemDescription.Header(f"{Options.GemOption_Effect.name}/{Options.GemOption_Unused.name}")
-    GemDescription.Text("This randomizes what each gems effect is. Essentially shuffling the gems. Armors or weapons with unique gems will be randomized as well as any gems given throughout the story, this will not affect crafting.")
+    GemDescription.Text("This randomizes what each gems effect is. Essentially shuffling the gems. Armors or weapons with unique gems will be randomized as well as any gems given throughout the story, this will also affect crystals.")
     GemDescription.Text("Unused effects will add gems that don't exist in the vanilla game. For example, cooldown reduction gems, or gems infused with monado enchant.")
     GemDescription.Image("crazygems.png", "XCDE", 800)
     GemDescription.Header(Options.GemOption_FreeEquip.name)
@@ -253,7 +282,7 @@ def GemDescriptions():
     GemDescription.Image("GemsFreeEquipped.png","XCDE", 500)
     GemDescription.Text("Double Attack on armor and HP Up on weapons.", anchor="center")
     GemDescription.Header(Options.GemOption_NoCap.name)
-    GemDescription.Text("This removes the % and regular cap for all gems when you equip them.")
+    GemDescription.Text("This randomizes the % and regular cap for all gems when you equip them.")
     GemDescription.Image("GemCap.png","XCDE", 500)
     GemDescription.Text("Double Attack and Haste above their vanilla 50% cap.", anchor="center")
     return GemDescription
