@@ -82,7 +82,7 @@ def RandomizePowerLevels(): # this makes the weapon chips uniform in their power
 
 def ChangeWeaponRankNames():
     if not Options.UMHuntOption.GetState():
-        if Options.BladeWeaponChipsOption_AutoAtk.GetState():
+        if Options.BladeWeaponChipsOption.GetState() and Options.BladeWeaponChipsOption_AutoAtk.GetState():
             RandomizePowerLevels()
         WeaponStrengthNameList = Helper.ExtendListtoLength([], 20, "[]")
         with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
