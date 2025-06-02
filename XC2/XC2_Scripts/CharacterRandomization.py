@@ -349,7 +349,6 @@ def CreatePneumaReplacement():
             if include_printouts:
                 print("Since Rex was replaced by Nia:")
                 print("- Replaced Pneuma with Savage Dromarch with the Meteorite Rings")
-                print("- Renamed Crossette's crystal to Aegis Core Crystal (since Crossette and Mythra swapped)")
             OriginalCharacter2Replacement[1003] = 1004
             JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['Model'], "bl/bl100501")
             JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['DefWeapon'], 5179) #TODO: Custom weapon? The strongest weapons are much weaker than base Pneuma
@@ -357,7 +356,6 @@ def CreatePneumaReplacement():
             if include_printouts:
                 print("Since Rex was replaced by Zeke:")
                 print("- Replaced Pneuma with Mermaid Blue Pandoria with the Meteorite Edge")
-                print("- Renamed Corvin's crystal to Aegis Core Crystal (since Corvin and Mythra swapped)")
             OriginalCharacter2Replacement[1003] = 1010
             JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['Model'], "bl/bl100901")
             JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['DefWeapon'], 5479) #TODO: Custom weapon? The strongest weapons are much weaker than base Pneuma
@@ -365,7 +363,6 @@ def CreatePneumaReplacement():
             if include_printouts:
                 print("Since Rex was replaced by Morag:")
                 print("- Replaced Pneuma with Jade Orchid Brighid with the Meteorite Whips")
-                print("- Renamed Aegaeon's crystal to Aegis Core Crystal (since Aegeaon and Mythra swapped)")
             OriginalCharacter2Replacement[1003] = 1009
             JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['Model'], "bl/bl121001")
             JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['DefWeapon'], 5419) #TODO: Custom weapon? The strongest weapons are much weaker than base Pneuma
@@ -374,11 +371,11 @@ def CreatePneumaReplacement():
 def SwapDefaultBlades():
     # Pyra, Dromarch, Brighid, and Pandoria can be handled as simple swaps.
     # Roc needs to stay because of Vandham
-    # Blade Nia will stay for convenience. But whoever replaces Rex will not be able to use her #TODO: can blade nia swap blades with the QoL setting enabled?
+    # Blade Nia will stay for convenience. But whoever replaces Rex will not be able to use her
     # Mythra's replacement is as follows:
     #  - If Nia replaced Rex, Mythra should become Crossette
-    #  - If Morag replaced Rex, Mythra should become Corvin (Or Aegeaon?)
-    #  - If Zeke replaced Rex, Mythra should become Herald
+    #  - If Morag replaced Rex, Mythra should become Corvin
+    #  - If Zeke replaced Rex, Mythra should become Wulfric
     #  - In each of these cases, the core crystals items which contain these blades should also be renamed to "Aegis core crystal", as they now contain Mythra
     # Pneuma is replaced with a "custom" blade, which is an "Ascended" version of either Dromarch, Brighid, or Pandoria.
 
@@ -391,8 +388,8 @@ def SwapDefaultBlades():
     original_driver_to_secondary_blades = {
         1: 1002, # Rex to Mythra
         2: 1109, # Nia to Crossette
-        3: 1108, # Zeke to Corvin
-        6: 1014, # Morag to Aegeaon
+        3: 1016, # Zeke to Wulfric
+        6: 1108, # Morag to Corvin
     }
 
     # Swap primary blades for all drivers
@@ -446,13 +443,13 @@ def SwapDefaultBlades():
         case 3: # Rex replaced by Zeke
             if include_printouts:
                 print("Since Rex was replaced by Zeke:")
-                print("- Renamed Corvin's crystal to Aegis Core Crystal (since Corvin and Mythra swapped)")
-            JSONParser.ChangeJSONLine(["common_ms/itm_crystal.json"], [14], ['name'], 'Aegis Core Crystal')
+                print("- Renamed Wulfric's crystal to Aegis Core Crystal (since Wulfric and Mythra swapped)")
+            JSONParser.ChangeJSONLine(["common_ms/itm_crystal.json"], [13], ['name'], 'Aegis Core Crystal')
         case 6: # Rex Replaced by Morag
             if include_printouts:
                 print("Since Rex was replaced by Morag:")
-                print("- Renamed Aegaeon's crystal to Aegis Core Crystal (since Aegeaon and Mythra swapped)")
-            JSONParser.ChangeJSONLine(["common_ms/itm_crystal.json"], [7], ['name'], 'Aegis Core Crystal')
+                print("- Renamed Corvin's crystal to Aegis Core Crystal (since Corvin and Mythra swapped)")
+            JSONParser.ChangeJSONLine(["common_ms/itm_crystal.json"], [14], ['name'], 'Aegis Core Crystal')
 
     # Apply Swaps
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], [], ApplyBladeRandomization, replaceAll=True)
@@ -594,18 +591,21 @@ def BugFixes_PostRandomization():
     JSONParser.ChangeJSONLineWithCallback(["common/ITM_PcEquip.json"], [], FixDriverCosmetics, replaceAll=True)
     JSONParser.ChangeJSONLineWithCallback(["common/ITM_OrbEquip.json"], [], FixBladeCosmetics, replaceAll=True)
     JSONParser.ChangeJSONLineWithCallback(["common/ITM_HanaAssist.json"], [], FixBladeCosmetics, replaceAll=True)
-    FixCharacterMenuIcon(1010, 261, 50, "BL") # Pandoria with transparent glasses
     FixMenuText()
     RebalanceDefaultWeapons()
     FreeEngage()
 
+    if OriginalCharacter2Replacement[1010] != 1010: # Pandoria was randomized
+        FixCharacterMenuIcon(1010, 261, 50, "BL") # Pandoria with transparent glasses
+
     if randomize_drivers:
         DefineBroadswordArtsForRexsReplacement()
-        FixCharacterMenuIcon(1, 262, 9, "DR") # Rex after he gets Pyra's core crystal
-        FixCharacterMenuIcon(1, 264, 10, "DR") # Rex with the Master Driver outfit
         FixDriverArts()
         FixDriverSkillTrees()
         FixWeaponMounts()
+        if OriginalCharacter2Replacement[1] != 1: # Rex was randomized
+            FixCharacterMenuIcon(1, 262, 9, "DR") # Rex after he gets Pyra's core crystal
+            FixCharacterMenuIcon(1, 264, 10, "DR") # Rex with the Master Driver outfit
 
 
 # Unsure why, but it is possible for the game to crash when an enemy blade gets randomized (for example, Pandoria).

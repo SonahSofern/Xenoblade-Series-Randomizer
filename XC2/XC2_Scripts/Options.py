@@ -85,7 +85,7 @@ DriverSkillTreesOption_EarlyXYBAttack = SubOption("Early XYB Attack", DriverSkil
 # Blades
 BladesOption = Option("Blades", Blade, "Randomizes when blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], _hasSpinBox = True, _preRandoCommands=[lambda: CharacterRandomization.resetGlobals()])
 BladesOption_Dromarch = SubOption("Randomize Dromarch", BladesOption)
-BladesOption_Healer = SubOption("Guaranteed Healer", BladesOption)
+BladesOption_Healer = SubOption("Guarantee Healing Art", BladesOption)
 BladeAuxCoresOption = Option("Blade Aux Cores", Blade, "Randomizes the effects of Aux Cores", [lambda: _AuxCores.RandomizeAuxCoreEnhancements()])
 BladeAuxCoreSlotsOption = Option("Blade Aux Core Slots", Blade, "Randomizes a Blade's maximum Aux Core Slots", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), IDs.BladeAuxCoreSlotDistribution)])
 BladeArtsOption = Option("Blade Arts", Blade, "Randomizes a Blade's combat arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])
