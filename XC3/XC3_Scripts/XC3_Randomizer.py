@@ -7,15 +7,7 @@ import scripts.XCRandomizer, SeedNames, scripts.JSONParser, Options
 Version = "1.0.0"
 
 
-Tabs = {
-    1: "General",
-    2: "Characters",
-    4: "Enemies",
-    5: "Misc",
-    6: "Quality of Life",
-    7: "Funny",
-    8: "Cosmetics",
-}
+backgrounds = ["col9.jpg"]
 
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["menu/msg_mnu_title.json"],[11], ["name"], f"Randomizer v{Version}", Game="XC3") # Change Title Version to Randomizer vX.x.x
@@ -26,4 +18,4 @@ mainFolderNames = ["des", "btl", "evt", "fld", "map", "prg", "qst"]
 subFolderNames = ["autotalk", "battle", "field", "menu", "quest", "system"]
 textFolderName="gb/game"
 
-scripts.XCRandomizer.CreateMainWindow(root, "XC3", Version, "Xenoblade Chronicles 3 Randomizer", Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, textFolderName,extraArgs=extraArgs)
+scripts.XCRandomizer.CreateMainWindow(root, "XC3", Version, "Xenoblade Chronicles 3 Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, textFolderName,extraArgs=extraArgs, backgroundImages=backgrounds)
