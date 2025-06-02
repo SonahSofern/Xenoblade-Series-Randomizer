@@ -16,15 +16,10 @@ from scripts import JSONParser, Helper
 #  -
 #  - Replace driver names in all dialog text (nice to have)
 
-OriginalDrivers = dict()            # Maps Driver ID to the dictionary of the unrandomized driver date. Populated in PopulateDrivers()
-DriverNames = dict()                # Maps ID to Driver Name. Populated in PopulateDrivers()
-OriginalDriver2Replacement = dict() # Maps Unrandomized Driver ID to Randomized Driver ID. Populated in RandomizeDrivers()
-ReplacementDriver2Original = dict() # Maps Randomized Driver ID to Unrandomized Driver ID. Populated in RandomizeDrivers()
-
-OriginalBlades = dict()        # Maps Blade ID to the dictionary of the unrandomized blade date. Populated in PopulateBlades()
-BladeNames = dict()            # Maps ID to Blade Name. Populated in PopulateBlades()
-OriginalBlade2Replacement = dict()  # Maps Unrandomized Blade ID to Randomized Blade ID. Populated in RandomizeBlades()
-ReplacementBlade2Original = dict()  # Maps Randomized Blade ID to Unrandomized Blade ID. Populated in RandomizeBlades()
+OriginalCharacters = dict()            # Maps Driver/Blade ID to the dictionary of the unrandomized driver/blade data. Populated in PopulateDrivers() and PopulateBlades()
+CharacterNames = dict()                # Maps ID to Driver/Blade Name. Populated in PopulateDrivers() and PopulateBlades()
+OriginalCharacter2Replacement = dict() # Maps Unrandomized Driver/Blade ID to Randomized Driver/Blade ID. Populated in RandomizeDrivers() and PopulateBlades()
+ReplacementCharacter2Original = dict() # Maps Randomized Driver/Blade ID to Unrandomized Driver/Blade ID. Populated in RandomizeDrivers() and PopulateBlades()
 
 
 DriversToRandomize = [1, 2, 3, 6]
@@ -84,14 +79,10 @@ def resetGlobals():
     global randomize_drivers
     global randomize_blades
 
-    OriginalDrivers.clear()
-    OriginalBlades.clear()
-    DriverNames.clear()
-    BladeNames.clear()
-    OriginalDriver2Replacement.clear()
-    OriginalBlade2Replacement.clear()
-    ReplacementDriver2Original.clear()
-    ReplacementBlade2Original.clear()
+    OriginalCharacters.clear()
+    CharacterNames.clear()
+    OriginalCharacter2Replacement.clear()
+    ReplacementCharacter2Original.clear()
     GuaranteedHealer = None
     first_character_randomization = True
     randomize_drivers = False
@@ -150,9 +141,9 @@ def InitialSetup():
 
 def PopulateDrivers(driver):
     driver_id = driver['$id']
-    OriginalDrivers[driver_id] = dict()
+    OriginalCharacters[driver_id] = dict()
     for key, value in driver.items():
-        OriginalDrivers[driver_id][key] = copy.deepcopy(driver[key])
+        OriginalCharacters[driver_id][key] = copy.deepcopy(driver[key])
 
     Name = ''
     name_id = driver['Name']
@@ -162,14 +153,14 @@ def PopulateDrivers(driver):
         Name = row['name']
     JSONParser.ChangeJSONLineWithCallback(["common_ms/chr_dr_ms.json"], [name_id], getName)
 
-    DriverNames[driver_id] = Name
+    CharacterNames[driver_id] = Name
 
 
 def PopulateBlades(blade):
     blade_id = blade['$id']
-    OriginalBlades[blade_id] = dict()
+    OriginalCharacters[blade_id] = dict()
     for key, value in blade.items():
-        OriginalBlades[blade_id][key] = copy.deepcopy(blade[key])
+        OriginalCharacters[blade_id][key] = copy.deepcopy(blade[key])
 
     Name = ''
     name_id = blade['Name']
@@ -179,7 +170,7 @@ def PopulateBlades(blade):
         Name = row['name']
     JSONParser.ChangeJSONLineWithCallback(["common_ms/chr_bl_ms.json"], [name_id], getName)
 
-    BladeNames[blade_id] = Name
+    CharacterNames[blade_id] = Name
 
 
 def DetermineGuaranteedHealer():
@@ -201,7 +192,7 @@ def DetermineGuaranteedHealer():
             random.shuffle(potential_healers)
             GuaranteedHealer = potential_healers[0]
             if include_printouts:
-                print("The guaranteed healer is " + BladeNames[GuaranteedHealer])
+                print("The guaranteed healer is " + CharacterNames[GuaranteedHealer])
 
 
 def MakeAllArtsAccessible(art):
@@ -242,9 +233,9 @@ def RandomizeDrivers():
         while not (niaSettingIsSatisfied() and healerSettingIsSatisfied()):
             if include_printouts:
                 if not niaSettingIsSatisfied():
-                    print("Nia was set to show up early, but the first two drivers were %s and %s. Reshuffling drivers..." % (DriverNames[randomized_order[0]], DriverNames[randomized_order[1]]))
+                    print("Nia was set to show up early, but the first two drivers were %s and %s. Reshuffling drivers..." % (CharacterNames[randomized_order[0]], CharacterNames[randomized_order[1]]))
                 elif not healerSettingIsSatisfied():
-                    print("The guaranteed healer was %s but Nia was randomized to %s. Reshuffling drivers..." % (BladeNames[GuaranteedHealer], DriverNames[randomized_order[1]]))
+                    print("The guaranteed healer was %s but Nia was randomized to %s. Reshuffling drivers..." % (CharacterNames[GuaranteedHealer], CharacterNames[randomized_order[1]]))
             random.shuffle(randomized_order)
 
         # Determine the randomization prior to randomizing.
@@ -254,11 +245,11 @@ def RandomizeDrivers():
             next_driver = drivers_left_to_randomize[0]
             next_replacement = randomized_order[0]
 
-            OriginalDriver2Replacement[next_driver] = next_replacement
-            ReplacementDriver2Original[next_replacement] = next_driver
+            OriginalCharacter2Replacement[next_driver] = next_replacement
+            ReplacementCharacter2Original[next_replacement] = next_driver
             if include_printouts:
                 print('========================================')
-                print(DriverNames[next_driver] + ' was replaced with ' + DriverNames[next_replacement])
+                print(CharacterNames[next_driver] + ' was replaced with ' + CharacterNames[next_replacement])
                 print(str(next_driver) + ' was replaced with ' + str(next_replacement))
             del drivers_left_to_randomize[0]
             del randomized_order[0]
@@ -271,8 +262,8 @@ def RandomizeDrivers():
     # No randomization, populate the maps with no swaps
     else:
         for driver_id in DriversToRandomize:
-            OriginalDriver2Replacement[driver_id] = driver_id
-            ReplacementDriver2Original[driver_id] = driver_id
+            OriginalCharacter2Replacement[driver_id] = driver_id
+            ReplacementCharacter2Original[driver_id] = driver_id
 
 
 def RandomizeBlades():
@@ -298,11 +289,11 @@ def RandomizeBlades():
             next_blade = blades_left_to_randomize[0]
             next_replacement = randomized_order[0]
             if bladeCanBeReplaced(next_blade, next_replacement):
-                OriginalBlade2Replacement[next_blade] = next_replacement
-                ReplacementBlade2Original[next_replacement] = next_blade
+                OriginalCharacter2Replacement[next_blade] = next_replacement
+                ReplacementCharacter2Original[next_replacement] = next_blade
                 if include_printouts:
                     print('========================================')
-                    print(BladeNames[next_blade] + ' was replaced with ' + BladeNames[next_replacement])
+                    print(CharacterNames[next_blade] + ' was replaced with ' + CharacterNames[next_replacement])
                     print(str(next_blade) + ' was replaced with ' + str(next_replacement))
                 del blades_left_to_randomize[0]
                 del randomized_order[0]
@@ -324,23 +315,23 @@ def bladeCanBeReplaced(original_blade, replacement_blade):
         return True
 
     blades_original_driver = LockedBladeToDriver[original_blade]
-    blades_replacement_driver = OriginalDriver2Replacement[blades_original_driver]
+    blades_replacement_driver = OriginalCharacter2Replacement[blades_original_driver]
 
     # Handle the case of having the guaranteed healer
     if randomize_blades and Options.BladesOption_Healer.GetState():
-        if original_blade == 1004 and GuaranteedHealer in PossibleHealerBladesForEachDriver[OriginalDriver2Replacement[blades_original_driver]]:
+        if original_blade == 1004 and GuaranteedHealer in PossibleHealerBladesForEachDriver[OriginalCharacter2Replacement[blades_original_driver]]:
             if replacement_blade != GuaranteedHealer:
                 if include_printouts:
-                    print("%s cannot be replaced with %s" % (BladeNames[original_blade], BladeNames[replacement_blade]))
-                    print("\tRandomized blade is %s. Expected healer blade is %s." % (BladeNames[replacement_blade], BladeNames[GuaranteedHealer]))
-                    print("\tDriver is %s (originally %s)" % (blades_replacement_driver, DriverNames[blades_original_driver]))
+                    print("%s cannot be replaced with %s" % (CharacterNames[original_blade], CharacterNames[replacement_blade]))
+                    print("\tRandomized blade is %s. Expected healer blade is %s." % (CharacterNames[replacement_blade], CharacterNames[GuaranteedHealer]))
+                    print("\tDriver is %s (originally %s)" % (blades_replacement_driver, CharacterNames[blades_original_driver]))
                 return False
 
     # Handle cases where arts wouldn't be defined for the replacement
     if replacement_blade in BladesDriverCantUse[blades_replacement_driver]:
         if include_printouts:
-            print("%s cannot be replaced with %s" % (BladeNames[original_blade], BladeNames[replacement_blade]))
-            print("\tDriver is %s (originally %s)" % (DriverNames[blades_replacement_driver], DriverNames[blades_original_driver]))
+            print("%s cannot be replaced with %s" % (CharacterNames[original_blade], CharacterNames[replacement_blade]))
+            print("\tDriver is %s (originally %s)" % (CharacterNames[blades_replacement_driver], CharacterNames[blades_original_driver]))
         return False
 
     return True
@@ -349,7 +340,7 @@ def bladeCanBeReplaced(original_blade, replacement_blade):
 def CreatePneumaReplacement():
     # Replace Pneuma with the new character's default blade with an actually strong weapon
     # Note: Pneuma's "Model" and "DefWeapon" fields are explicitly ignored in ApplyBladeRandomization()
-    match OriginalDriver2Replacement[1]:
+    match OriginalCharacter2Replacement[1]:
         case 1: # Rex was not replaced
             if include_printouts:
                 print("Since Rex was not replaced:")
@@ -360,7 +351,7 @@ def CreatePneumaReplacement():
                 print("Since Rex was replaced by Nia:")
                 print("- Replaced Pneuma with Savage Dromarch with the Meteorite Rings")
                 print("- Renamed Crossette's crystal to Aegis Core Crystal (since Crossette and Mythra swapped)")
-            OriginalBlade2Replacement[1003] = 1004
+            OriginalCharacter2Replacement[1003] = 1004
             JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['Model'], "bl/bl100501")
             JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['DefWeapon'], 5179) #TODO: Custom weapon? The strongest weapons are much weaker than base Pneuma
         case 3: # Rex replaced by Zeke
@@ -368,7 +359,7 @@ def CreatePneumaReplacement():
                 print("Since Rex was replaced by Zeke:")
                 print("- Replaced Pneuma with Mermaid Blue Pandoria with the Meteorite Edge")
                 print("- Renamed Corvin's crystal to Aegis Core Crystal (since Corvin and Mythra swapped)")
-            OriginalBlade2Replacement[1003] = 1010
+            OriginalCharacter2Replacement[1003] = 1010
             JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['Model'], "bl/bl100901")
             JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['DefWeapon'], 5479) #TODO: Custom weapon? The strongest weapons are much weaker than base Pneuma
         case 6: # Rex Replaced by Morag
@@ -376,7 +367,7 @@ def CreatePneumaReplacement():
                 print("Since Rex was replaced by Morag:")
                 print("- Replaced Pneuma with Jade Orchid Brighid with the Meteorite Whips")
                 print("- Renamed Aegaeon's crystal to Aegis Core Crystal (since Aegeaon and Mythra swapped)")
-            OriginalBlade2Replacement[1003] = 1009
+            OriginalCharacter2Replacement[1003] = 1009
             JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['Model'], "bl/bl121001")
             JSONParser.ChangeJSONLine(["common/CHR_Bl.json"], [1003], ['DefWeapon'], 5419) #TODO: Custom weapon? The strongest weapons are much weaker than base Pneuma
 
@@ -407,43 +398,43 @@ def SwapDefaultBlades():
 
     # Swap primary blades for all drivers
     for original_driver_id in DriversToRandomize:
-        replacement_driver_id = OriginalDriver2Replacement[original_driver_id]
+        replacement_driver_id = OriginalCharacter2Replacement[original_driver_id]
 
         original_blade_id = original_driver_to_primary_blade[original_driver_id]
         replacement_blade_id = original_driver_to_primary_blade[replacement_driver_id]
 
-        OriginalBlade2Replacement[original_blade_id] = replacement_blade_id
-        ReplacementBlade2Original[replacement_blade_id] = original_blade_id
+        OriginalCharacter2Replacement[original_blade_id] = replacement_blade_id
+        ReplacementCharacter2Original[replacement_blade_id] = original_blade_id
 
         if include_printouts:
             print('========================================')
-            print(BladeNames[original_blade_id] + ' was replaced with ' + BladeNames[replacement_blade_id])
+            print(CharacterNames[original_blade_id] + ' was replaced with ' + CharacterNames[replacement_blade_id])
             print(str(original_blade_id) + ' was replaced with ' + str(replacement_blade_id))
 
     # Swap Mythra (and only Mythra) with the secondary blades
     # Only bother if Rex was randomized
-    if OriginalDriver2Replacement[1] != 1:
+    if OriginalCharacter2Replacement[1] != 1:
         original_driver_id = 1 # Rex
-        replacement_driver_id = OriginalDriver2Replacement[original_driver_id]
+        replacement_driver_id = OriginalCharacter2Replacement[original_driver_id]
 
         original_blade_id = original_driver_to_secondary_blades[original_driver_id] # Mythra
         replacement_blade_id = original_driver_to_secondary_blades[replacement_driver_id]
 
-        OriginalBlade2Replacement[original_blade_id] = replacement_blade_id
-        OriginalBlade2Replacement[replacement_blade_id] = original_blade_id
-        ReplacementBlade2Original[original_blade_id] = replacement_blade_id
-        ReplacementBlade2Original[replacement_blade_id] = original_blade_id
+        OriginalCharacter2Replacement[original_blade_id] = replacement_blade_id
+        OriginalCharacter2Replacement[replacement_blade_id] = original_blade_id
+        ReplacementCharacter2Original[original_blade_id] = replacement_blade_id
+        ReplacementCharacter2Original[replacement_blade_id] = original_blade_id
 
         if include_printouts:
             print('========================================')
-            print(BladeNames[original_blade_id] + ' was replaced with ' + BladeNames[replacement_blade_id])
+            print(CharacterNames[original_blade_id] + ' was replaced with ' + CharacterNames[replacement_blade_id])
             print(str(original_blade_id) + ' was replaced with ' + str(replacement_blade_id))
             print('========================================')
-            print(BladeNames[replacement_blade_id] + ' was replaced with ' + BladeNames[original_blade_id])
+            print(CharacterNames[replacement_blade_id] + ' was replaced with ' + CharacterNames[original_blade_id])
             print(str(replacement_blade_id) + ' was replaced with ' + str(original_blade_id))
 
     # Also Rename the core crystal which now contains Mythra (if Mythra was swapped above)
-    match OriginalDriver2Replacement[1]:
+    match OriginalCharacter2Replacement[1]:
         case 1: # Rex was not replaced
             if include_printouts:
                 print("Since Rex was not replaced:")
@@ -470,8 +461,8 @@ def SwapDefaultBlades():
 
 def ApplyDriverRandomization(driver):
     driver_id = driver['$id']
-    if driver_id in OriginalDriver2Replacement:
-        replace_with_id = OriginalDriver2Replacement[driver_id]
+    if driver_id in OriginalCharacter2Replacement:
+        replace_with_id = OriginalCharacter2Replacement[driver_id]
 
         # Copy all fields (except ID) from the replacement driver to the original driver
         for key, value in driver.items():
@@ -483,9 +474,9 @@ def ApplyDriverRandomization(driver):
                 for i in range(0,len(driver[key])):
                     if i == 16: # Skip Broadsword, which should remain on Rex's replacement
                         continue
-                    driver[key][i] = OriginalDrivers[replace_with_id][key][i]
+                    driver[key][i] = OriginalCharacters[replace_with_id][key][i]
             else:
-                driver[key] = OriginalDrivers[replace_with_id][key]
+                driver[key] = OriginalCharacters[replace_with_id][key]
 
 
 def ApplyBladeRandomization(blade):
@@ -505,8 +496,8 @@ def ApplyBladeRandomization(blade):
     excluded_skills[1003] = ["Name", "DefWeapon", "Model", "BSkill1", "BSkill2", "BSkill3"]
 
     blade_id = blade['$id']
-    if blade_id in OriginalBlade2Replacement:
-        replace_with_id = OriginalBlade2Replacement[blade_id]
+    if blade_id in OriginalCharacter2Replacement:
+        replace_with_id = OriginalCharacter2Replacement[blade_id]
 
         # Copy all fields (except ID, ReleaseLock, and the excluded field skills)
         # from the replacement blade to the original blade
@@ -516,13 +507,13 @@ def ApplyBladeRandomization(blade):
             if blade_id in excluded_skills and key in excluded_skills[blade_id]:
                 continue
             if key == 'Flag':
-                for flag_key, flag_value in OriginalBlades[replace_with_id]['Flag'].items():
+                for flag_key, flag_value in OriginalCharacters[replace_with_id]['Flag'].items():
                     if flag_key in ['FreeEngage', 'NoMapRev']:
                         continue
 
-                    blade['Flag'][flag_key] = OriginalBlades[replace_with_id]['Flag'][flag_key]
+                    blade['Flag'][flag_key] = OriginalCharacters[replace_with_id]['Flag'][flag_key]
             else:
-                blade[key] = OriginalBlades[replace_with_id][key]
+                blade[key] = OriginalCharacters[replace_with_id][key]
 
 
 def RandomizePoppiForms():
@@ -536,11 +527,11 @@ def RandomizePoppiForms():
     while blades_left_to_randomize:
         next_blade = blades_left_to_randomize[0]
         next_replacement = randomized_order[0]
-        OriginalBlade2Replacement[next_blade] = next_replacement
-        ReplacementBlade2Original[next_replacement] = next_blade
+        OriginalCharacter2Replacement[next_blade] = next_replacement
+        ReplacementCharacter2Original[next_replacement] = next_blade
         if include_printouts:
             print('========================================')
-            print(BladeNames[next_blade] + ' was replaced with ' + BladeNames[next_replacement])
+            print(CharacterNames[next_blade] + ' was replaced with ' + CharacterNames[next_replacement])
             print(str(next_blade) + ' was replaced with ' + str(next_replacement))
         del blades_left_to_randomize[0]
         del randomized_order[0]
@@ -559,7 +550,7 @@ def RandomizePoppiForms():
     # Replace Poppiswap images (background of Poppiswap menu)
     def ReplacePoppiswapImages(image):
         original_poppi_id = image['$id'] + 1004
-        new_image_num = OriginalBlade2Replacement[original_poppi_id] - 1004
+        new_image_num = OriginalCharacter2Replacement[original_poppi_id] - 1004
         image['filename'] = 'mnu091_hana_img0' + str(new_image_num)
     JSONParser.ChangeJSONLineWithCallback(["common/MNU_Hana_custom.json"], [], ReplacePoppiswapImages, replaceAll=True)
 
@@ -568,7 +559,7 @@ def RandomizePoppiForms():
     #  It's supposed to change the available Poppiswap slots (Alpha has 1 skill ram, but QTpi has 3)
     def ReplacePoppiBase(base):
        original_poppi_id = base['$id'] + 1004
-       new_poppi_id = OriginalBlade2Replacement[original_poppi_id]
+       new_poppi_id = OriginalCharacter2Replacement[original_poppi_id]
        for key, value in OriginalPoppiBase[new_poppi_id - 1004].items():
            if key != '$id':
                base[key] = copy.deepcopy(OriginalPoppiBase[new_poppi_id - 1004][key])
@@ -578,7 +569,7 @@ def RandomizePoppiForms():
     def ReplacePoppiPower(power):
         for i in [1, 2, 3]:
             original_poppi_id = i + 1004
-            new_poppi_id = OriginalBlade2Replacement[original_poppi_id]
+            new_poppi_id = OriginalCharacter2Replacement[original_poppi_id]
             new_i = new_poppi_id - 1004
 
             for field in ['PowerNum', 'EtherNum']:
@@ -590,7 +581,7 @@ def RandomizePoppiForms():
     # Replace Poppi Chipset (Default Poppiswap Loadout)
     def ReplacePoppiChipset(chipset):
         original_poppi_id = chipset['$id'] + 1004
-        new_poppi_id = OriginalBlade2Replacement[original_poppi_id]
+        new_poppi_id = OriginalCharacter2Replacement[original_poppi_id]
         for key, value in OriginalPoppiChipset[new_poppi_id - 1004].items():
             if key != '$id':
                 chipset[key] = copy.deepcopy(OriginalPoppiChipset[new_poppi_id - 1004][key])
@@ -604,15 +595,15 @@ def BugFixes_PostRandomization():
     JSONParser.ChangeJSONLineWithCallback(["common/ITM_PcEquip.json"], [], FixDriverCosmetics, replaceAll=True)
     JSONParser.ChangeJSONLineWithCallback(["common/ITM_OrbEquip.json"], [], FixBladeCosmetics, replaceAll=True)
     JSONParser.ChangeJSONLineWithCallback(["common/ITM_HanaAssist.json"], [], FixBladeCosmetics, replaceAll=True)
-    FixPandoriaSpriteAfterElpys()
+    FixCharacterMenuIcon(1010, 261, 50, "BL") # Pandoria with transparent glasses
     FixMenuText()
     RebalanceDefaultWeapons()
     FreeEngage()
 
     if randomize_drivers:
         DefineBroadswordArtsForRexsReplacement()
-        FixRexStillAfterHeDies()
-        FixRexStillMasterDriver()
+        FixCharacterMenuIcon(1, 262, 9, "DR") # Rex after he gets Pyra's core crystal
+        FixCharacterMenuIcon(1, 264, 10, "DR") # Rex with the Master Driver outfit
         FixDriverArts()
         FixDriverSkillTrees()
         FixWeaponMounts()
@@ -622,10 +613,10 @@ def BugFixes_PostRandomization():
 # TODO: Investigate the crash and see if it becomes possible to resolve while preserving the randomization. It would be
 #       cool to fight against Zeke with Pandoria replaced with something else. But for now, this is not the case.
 def FixRandomizedEnemyBladeCrashes(enemy):
-    if enemy['BladeID'] in ReplacementBlade2Original:
+    if enemy['BladeID'] in ReplacementCharacter2Original:
         if include_printouts:
-            print("Enemy: " + BladeNames[enemy['BladeID']] + " (" + str(enemy['BladeID']) + ") was replaced with " + BladeNames[ReplacementBlade2Original[enemy['BladeID']]] + " (" + str(ReplacementBlade2Original[enemy['BladeID']]) + ")")
-        enemy['BladeID'] = ReplacementBlade2Original[enemy['BladeID']]
+            print("Enemy: " + CharacterNames[enemy['BladeID']] + " (" + str(enemy['BladeID']) + ") was replaced with " + CharacterNames[ReplacementCharacter2Original[enemy['BladeID']]] + " (" + str(ReplacementCharacter2Original[enemy['BladeID']]) + ")")
+        enemy['BladeID'] = ReplacementCharacter2Original[enemy['BladeID']]
 
 
 # When swapping blades, there is a bug where cutscenes will crash when attempting to load. This is caused because in 2 ways
@@ -640,22 +631,22 @@ def FixCutsceneCrashForNotHavingTwoWeapons(cutscene):
     original = cutscene['blade']
 
     # Bail if this blade was not randomized
-    if original not in OriginalBlade2Replacement:
+    if original not in OriginalCharacter2Replacement:
         return
 
     # Replace resources with weapon type of the blade who replaced the original
-    replacement = OriginalBlade2Replacement[original]
-    cutscene['resourceL'] = WeaponType2Resource(OriginalBlades[replacement]['WeaponType'], 'L')
-    cutscene['resourceR'] = WeaponType2Resource(OriginalBlades[replacement]['WeaponType'], 'R')
+    replacement = OriginalCharacter2Replacement[original]
+    cutscene['resourceL'] = WeaponType2Resource(OriginalCharacters[replacement]['WeaponType'], 'L')
+    cutscene['resourceR'] = WeaponType2Resource(OriginalCharacters[replacement]['WeaponType'], 'R')
 
 def FixDriverCosmetics(accessory):
-    if accessory['Driver'] in ReplacementDriver2Original:
-        accessory['Driver'] = ReplacementDriver2Original[accessory['Driver']]
+    if accessory['Driver'] in ReplacementCharacter2Original:
+        accessory['Driver'] = ReplacementCharacter2Original[accessory['Driver']]
 
 
 def FixBladeCosmetics(accessory):
-    if accessory['Blade'] in ReplacementBlade2Original:
-        accessory['Blade'] = ReplacementBlade2Original[accessory['Blade']]
+    if accessory['Blade'] in ReplacementCharacter2Original:
+        accessory['Blade'] = ReplacementCharacter2Original[accessory['Blade']]
 
 
 # side is either 'L' or 'R' (case doesn't matter).
@@ -669,67 +660,38 @@ def WeaponType2Resource(weapon_type, side):
     else:
         return base_string
 
-# Pandoria's menu icon and portrait changes at some point in chapter 7. Her glasses go from opaque to transparent.
-# When this happens, the icon and portrait would replace whichever blade replaced her.
-# This function replaces the transparent glasses images with images for whoever replaced Pandoria
-def FixPandoriaSpriteAfterElpys():
-    # Get the still of the blade which replaced Pandoria
-    pandoria_replacement_still = OriginalBlades[OriginalBlade2Replacement[1010]]['Still']
-
-    # Use the still to find the icon index of the blade which replaced Pandoria
-    icon_index = JSONParser.QueryJSONLine("common/MNU_IconList.json", "$id", pandoria_replacement_still)["icon_index"]
-
-    # Fix the small icon for Pandoria's replacement. Row 261 corresponds to Pandoria's icon with transparent glasses
-    JSONParser.ChangeJSONLine(["common/MNU_IconList.json"], [261], ['icon_index'], icon_index)
-
-    # Get the blade image for Pandoria's replacement
-    # This includes both the File ID and scaling/cropping information of the image
-    PandoriaReplacementImageRow = JSONParser.QueryJSONLine("common/MNU_BlImageID.json", "icon_id", pandoria_replacement_still)
-
-    # Grab the file name from the File ID
-    fileName = JSONParser.QueryJSONLine("common/MNU_Stream_full_bl.json", "$id", PandoriaReplacementImageRow['$id'])['filename']
-    fileName_glow = JSONParser.QueryJSONLine("common/MNU_Stream_full_glow_bl.json", "$id", PandoriaReplacementImageRow['$id'])['filename']
-
-    # Replace the image for Pandoria with her replacement's image. Row 50 corresponds to Pandoria's portrait with transparent glasses
-    JSONParser.ChangeJSONLine(["common/MNU_Stream_full_bl.json"], [50], ['filename'], fileName)
-    JSONParser.ChangeJSONLine(["common/MNU_Stream_full_glow_bl.json"], [50], ['filename'], fileName_glow)
-
-    # Fix the cropping of the image of Pandoria's replacement. Row 50 corresponds to Pandoria's portrait with transparent glasses
-    for field in ['offs_x', 'offs_y', 'scale', 'offs_x2', 'offs_y2', 'scale2', 'offs_x3', 'offs_y3', 'scale3', 'offs_x4', 'offs_y4', 'scale4', 'offs_x5', 'offs_y5', 'scale5']:
-        JSONParser.ChangeJSONLine(["common/MNU_BlImageID.json"], [50], [field], PandoriaReplacementImageRow[field])
-
 
 def FixMenuText():
     # Zeke's Eye of Shining Justice Skill
-    JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"], [294], ['name'], 'At max Affinity w/ ' + BladeNames[OriginalBlade2Replacement[1010]] + ': R and +\nto awaken for a time (once per battle).')
+    JSONParser.ChangeJSONLine(["common_ms/btl_enhance_cap.json"], [294], ['name'], 'At max Affinity w/ ' + CharacterNames[OriginalCharacter2Replacement[1010]] + ': R and +\nto awaken for a time (once per battle).')
 
     # Switch between Driver/Blade Nia text
-    if 1011 in OriginalBlade2Replacement and OriginalBlade2Replacement[1011] != 1011:
-        JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [261], ['name'], "Turn %s into %s?" % (DriverNames[OriginalDriver2Replacement[2]], BladeNames[OriginalBlade2Replacement[1011]]))
-        JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [262], ['name'], "Turn %s into %s?" % (BladeNames[OriginalBlade2Replacement[1011]], DriverNames[OriginalDriver2Replacement[2]]))
-        JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [297], ['name'], "You cannot turn %s into %s because\nno other Blades are engaged." % (BladeNames[OriginalBlade2Replacement[1011]], DriverNames[OriginalDriver2Replacement[2]]))
+    if 1011 in OriginalCharacter2Replacement and OriginalCharacter2Replacement[1011] != 1011:
+        JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [261], ['name'], "Turn %s into %s?" % (CharacterNames[OriginalCharacter2Replacement[2]], CharacterNames[OriginalCharacter2Replacement[1011]]))
+        JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [262], ['name'], "Turn %s into %s?" % (CharacterNames[OriginalCharacter2Replacement[1011]], CharacterNames[OriginalCharacter2Replacement[2]]))
+        JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [297], ['name'], "You cannot turn %s into %s because\nno other Blades are engaged." % (CharacterNames[OriginalCharacter2Replacement[1011]], CharacterNames[OriginalCharacter2Replacement[2]]))
 
     # Swap to between Pyra/Mythra text
     # Note: The words "Swap to" have been intentionally dropped because any blade which a name longer than 6 letters gets cut off
-    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [260], ['name'], "Changing to %s. Is this OK?" % (BladeNames[OriginalBlade2Replacement[1001]]))
-    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [259], ['name'], "Changing to %s. Is this OK?" % (BladeNames[OriginalBlade2Replacement[1002]]))
-    JSONParser.ChangeJSONLine(["common_ms/menu_operation_info_ms.json"], [89], ['name'], BladeNames[OriginalBlade2Replacement[1002]]) # "Swap to" Text
-    JSONParser.ChangeJSONLine(["common_ms/menu_operation_info_ms.json"], [90], ['name'], BladeNames[OriginalBlade2Replacement[1001]]) # "Swap to" Text
+    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [260], ['name'], "Changing to %s. Is this OK?" % (CharacterNames[OriginalCharacter2Replacement[1001]]))
+    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [259], ['name'], "Changing to %s. Is this OK?" % (CharacterNames[OriginalCharacter2Replacement[1002]]))
+    JSONParser.ChangeJSONLine(["common_ms/menu_operation_info_ms.json"], [89], ['name'], CharacterNames[OriginalCharacter2Replacement[1002]]) # "Swap to" Text
+    JSONParser.ChangeJSONLine(["common_ms/menu_operation_info_ms.json"], [90], ['name'], CharacterNames[OriginalCharacter2Replacement[1001]]) # "Swap to" Text
 
     # Pyra/Mythra choice text
-    JSONParser.ChangeJSONLine(["common_ms/cmm_homuri_name_ms.json"], [1], ['name'], BladeNames[OriginalBlade2Replacement[1001]]) # Pneuma's name when "Pyra" is selected
-    JSONParser.ChangeJSONLine(["common_ms/cmm_homuri_name_ms.json"], [2], ['name'], BladeNames[OriginalBlade2Replacement[1002]]) # Pneuma's name when "Mythra" is selected
-    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"], [1736], ['name'], BladeNames[OriginalBlade2Replacement[1001]]) # The choice selection
-    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"], [1737], ['name'], BladeNames[OriginalBlade2Replacement[1002]]) # The choice selection
-    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [257], ['name'], "The name will be set to %s.\nIs this OK?" % (BladeNames[OriginalBlade2Replacement[1001]]))
-    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [258], ['name'], "The name will be set to %s.\nIs this OK?" % (BladeNames[OriginalBlade2Replacement[1002]]))
+    JSONParser.ChangeJSONLine(["common_ms/cmm_homuri_name_ms.json"], [1], ['name'], CharacterNames[OriginalCharacter2Replacement[1001]]) # Pneuma's name when "Pyra" is selected
+    JSONParser.ChangeJSONLine(["common_ms/cmm_homuri_name_ms.json"], [2], ['name'], CharacterNames[OriginalCharacter2Replacement[1002]]) # Pneuma's name when "Mythra" is selected
+    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"], [1736], ['name'], CharacterNames[OriginalCharacter2Replacement[1001]]) # The choice selection
+    JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"], [1737], ['name'], CharacterNames[OriginalCharacter2Replacement[1002]]) # The choice selection
+    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [257], ['name'], "The name will be set to %s.\nIs this OK?" % (CharacterNames[OriginalCharacter2Replacement[1001]]))
+    JSONParser.ChangeJSONLine(["common_ms/menu_cmnwindow.json"], [258], ['name'], "The name will be set to %s.\nIs this OK?" % (CharacterNames[OriginalCharacter2Replacement[1002]]))
 
     # Pyra/Mythra choice images
     # TODO
 
 
 def DefineBroadswordArtsForRexsReplacement():
-    rexs_replacement = OriginalDriver2Replacement[1]
+    rexs_replacement = OriginalCharacter2Replacement[1]
 
     # If Rex was not replaced, bail
     if rexs_replacement == 1:
@@ -806,67 +768,12 @@ def DefineBroadswordArtsForRexsReplacement():
     JSONParser.ChangeJSONLine(["common/ITM_PcWpnType.json"], [17], ['Motion'], 13)
 
 
-
-def FixRexStillAfterHeDies(): # TODO Mostly duplicate with the pandoria bugfix, but with different ids, and using the driver table instead of the blade table
-    # Get the still of the driver which replaced Rex
-    rex_replacement_still = OriginalDrivers[OriginalDriver2Replacement[1]]['Still']
-
-    # Use the still to find the icon index of the driver which replaced Rex
-    icon_index = JSONParser.QueryJSONLine("common/MNU_IconList.json", "$id", rex_replacement_still)["icon_index"]
-
-    # Fix the small icon for Rex's replacement. Row 262 corresponds to Rex with Pyra's core crystal
-    JSONParser.ChangeJSONLine(["common/MNU_IconList.json"], [262], ['icon_index'], icon_index)
-
-    # Get the driver image for Rex's replacement
-    # This includes both the File ID and scaling/cropping information of the image
-    RexReplacementImageRow = JSONParser.QueryJSONLine("common/MNU_DrImageID.json", "icon_id", rex_replacement_still)
-
-    # Grab the file name from the File ID
-    fileName = JSONParser.QueryJSONLine("common/MNU_Stream_full_dr.json", "$id", RexReplacementImageRow['$id'])['filename']
-    fileName_glow = JSONParser.QueryJSONLine("common/MNU_Stream_full_glow_dr.json", "$id", RexReplacementImageRow['$id'])['filename']
-
-    # Replace the image for Rex with his replacement's image. Row 9 corresponds to Rex's portrait with Pyra's core crystal
-    JSONParser.ChangeJSONLine(["common/MNU_Stream_full_dr.json"], [9], ['filename'], fileName)
-    JSONParser.ChangeJSONLine(["common/MNU_Stream_full_glow_dr.json"], [9], ['filename'], fileName_glow)
-
-    # Fix the cropping of the image of Rex's replacement. Row 9 corresponds to Rex's portrait with Pyra's core crystal
-    for field in ['offs_x', 'offs_y', 'scale', 'offs_x2', 'offs_y2', 'scale2', 'offs_x3', 'offs_y3', 'scale3', 'offs_x4', 'offs_y4', 'scale4', 'offs_x5', 'offs_y5', 'scale5']:
-        JSONParser.ChangeJSONLine(["common/MNU_DrImageID.json"], [9], [field], RexReplacementImageRow[field])
-
-
-def FixRexStillMasterDriver(): # TODO Mostly duplicate with the pandoria bugfix, but with different ids, and using the driver table instead of the blade table
-    # Get the still of the driver which replaced Rex
-    rex_replacement_still = OriginalDrivers[OriginalDriver2Replacement[1]]['Still']
-
-    # Use the still to find the icon index of the driver which replaced Rex
-    icon_index = JSONParser.QueryJSONLine("common/MNU_IconList.json", "$id", rex_replacement_still)["icon_index"]
-
-    # Fix the small icon for Rex's replacement. Row 264 corresponds to Rex Master Driver
-    JSONParser.ChangeJSONLine(["common/MNU_IconList.json"], [264], ['icon_index'], icon_index)
-
-    # Get the driver image for Rex's replacement
-    # This includes both the File ID and scaling/cropping information of the image
-    RexReplacementImageRow = JSONParser.QueryJSONLine("common/MNU_DrImageID.json", "icon_id", rex_replacement_still)
-
-    # Grab the file name from the File ID
-    fileName = JSONParser.QueryJSONLine("common/MNU_Stream_full_dr.json", "$id", RexReplacementImageRow['$id'])['filename']
-    fileName_glow = JSONParser.QueryJSONLine("common/MNU_Stream_full_glow_dr.json", "$id", RexReplacementImageRow['$id'])['filename']
-
-    # Replace the image for Rex with his replacement's image. Row 10 corresponds to Rex's portrait with Master Driver
-    JSONParser.ChangeJSONLine(["common/MNU_Stream_full_dr.json"], [10], ['filename'], fileName)
-    JSONParser.ChangeJSONLine(["common/MNU_Stream_full_glow_dr.json"], [10], ['filename'], fileName_glow)
-
-    # Fix the cropping of the image of Rex's replacement. Row 10 corresponds to Rex's portrait with Master Driver
-    for field in ['offs_x', 'offs_y', 'scale', 'offs_x2', 'offs_y2', 'scale2', 'offs_x3', 'offs_y3', 'scale3', 'offs_x4', 'offs_y4', 'scale4', 'offs_x5', 'offs_y5', 'scale5']:
-        JSONParser.ChangeJSONLine(["common/MNU_DrImageID.json"], [10], [field], RexReplacementImageRow[field])
-
-
 # Assigns arts to the correct driver, which has since been swapped
 def FixDriverArts():
     def callback(art):
         original_driver_id = art["Driver"]
         if original_driver_id in DriversToRandomize:
-            art["Driver"] = ReplacementDriver2Original[original_driver_id]
+            art["Driver"] = ReplacementCharacter2Original[original_driver_id]
     JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], [], callback, replaceAll=True)
 
 def FixDriverSkillTrees():
@@ -877,7 +784,7 @@ def FixDriverSkillTrees():
 
     # Move the skill trees to the correct driver after randomization
     for original_driver_id in DriversToRandomize:
-        replacement_driver_id = OriginalDriver2Replacement[original_driver_id]
+        replacement_driver_id = OriginalCharacter2Replacement[original_driver_id]
 
         # Convert dict to list
         new_skill_tree = []
@@ -888,7 +795,7 @@ def FixDriverSkillTrees():
             # Replace Zeke's Shining Justice Skill with Rex's Combo Enhance skill (arbitrarily selected, but it's
             # one of the few skills not common between drivers)
             # This only happens if Zeke was actually randomized
-            if (OriginalDriver2Replacement[3] != [3]) and (replacement_driver_id == 3 and key == 24):
+            if (OriginalCharacter2Replacement[3] != [3]) and (replacement_driver_id == 3 and key == 24):
                 item.update(original_skill_trees[1][8])
             else:
                 item.update(value)
@@ -908,16 +815,16 @@ def RebalanceDefaultWeapons():
             return
 
         # Skip blades which were never randomized in the first place
-        if blade['$id'] not in OriginalBlade2Replacement:
+        if blade['$id'] not in OriginalCharacter2Replacement:
             return
 
         original_blade_id = blade['$id']
-        original_blade = OriginalBlades[original_blade_id]
+        original_blade = OriginalCharacters[original_blade_id]
         original_weapon_type_id = original_blade['WeaponType']
         original_default_weapon_id = original_blade['DefWeapon']
         original_default_weapon = weapon_table[original_default_weapon_id]
 
-        replacement_blade_id = OriginalBlade2Replacement[original_blade_id]
+        replacement_blade_id = OriginalCharacter2Replacement[original_blade_id]
         replacement_blade = blade
         replacement_weapon_type_id = replacement_blade['WeaponType']
 
@@ -937,9 +844,10 @@ def RebalanceDefaultWeapons():
         # Find the weapon that this chip becomes for the replacement blade's weapon type
         new_replacement_weapon_id = chip_table[original_chip]["CreateWpn" + str(replacement_weapon_type_id)]
         blade["DefWeapon"] = new_replacement_weapon_id
-        print("%s's new default weapon is: %s" % (BladeNames[replacement_blade_id], new_replacement_weapon_id))
+        print("%s's new default weapon is: %s" % (CharacterNames[replacement_blade_id], new_replacement_weapon_id))
 
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], [], callback, replaceAll=True)
+
 
 def FixWeaponMounts():
     weapon_mount_table = JSONParser.CopyJSONFile("common/RSC_PcWpnMount.json")
@@ -951,7 +859,41 @@ def FixWeaponMounts():
                 if field in wpn_mount.keys():
                     nonlocal weapon_mount_table
                     original_driver_id = wpn_mount['$id']
-                    replacement_driver_id = OriginalDriver2Replacement[original_driver_id]
+                    replacement_driver_id = OriginalCharacter2Replacement[original_driver_id]
                     wpn_mount[field] = weapon_mount_table[replacement_driver_id][field]
 
     JSONParser.ChangeJSONLineWithCallback(["common/RSC_PcWpnMount.json"], DriversToRandomize, callback)
+
+
+# Several characters' menu icon and portrait change at some point in the story
+# When this happens, the base game icon and portrait would replace whichever character replaced them.
+# This function replaces the original image with images for whoever replaced that character
+# We cannot modify who gets their image replaced, since that's tied to the executable.
+def FixCharacterMenuIcon(character_id, icon_id, full_image_id, suffix):
+    suffix_low = suffix.lower()
+    suffix_cap = suffix_low.capitalize()
+
+    # Get the still of the character which replaced this character
+    replacement_still = OriginalCharacters[OriginalCharacter2Replacement[character_id]]['Still']
+
+    # Use the still to find the icon index of the blade which replaced this character
+    icon_index = JSONParser.QueryJSONLine("common/MNU_IconList.json", "$id", replacement_still)["icon_index"]
+
+    # Fix the small icon for this character's replacement.
+    JSONParser.ChangeJSONLine(["common/MNU_IconList.json"], [icon_id], ['icon_index'], icon_index)
+
+    # Get the image for this character's replacement
+    # This includes both the File ID and scaling/cropping information of the image
+    replacement_image_row = JSONParser.QueryJSONLine(f"common/MNU_{suffix_cap}ImageID.json", "icon_id", replacement_still)
+
+    # Grab the file name from the File ID
+    file_name = JSONParser.QueryJSONLine(f"common/MNU_Stream_full_{suffix_low}.json", "$id", replacement_image_row['$id'])['filename']
+    file_name_glow = JSONParser.QueryJSONLine(f"common/MNU_Stream_full_glow_{suffix_low}.json", "$id", replacement_image_row['$id'])['filename']
+
+    # Replace the image for this character with their replacement's image.
+    JSONParser.ChangeJSONLine([f"common/MNU_Stream_full_{suffix_low}.json"], [full_image_id], ['filename'], file_name)
+    JSONParser.ChangeJSONLine([f"common/MNU_Stream_full_glow_{suffix_low}.json"], [full_image_id], ['filename'], file_name_glow)
+
+    # Fix the cropping of the image of this character's replacement.
+    for field in ['offs_x', 'offs_y', 'scale', 'offs_x2', 'offs_y2', 'scale2', 'offs_x3', 'offs_y3', 'scale3', 'offs_x4', 'offs_y4', 'scale4', 'offs_x5', 'offs_y5', 'scale5']:
+        JSONParser.ChangeJSONLine([f"common/MNU_{suffix_cap}ImageID.json"], [full_image_id], [field], replacement_image_row[field])
