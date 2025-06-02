@@ -12,15 +12,13 @@ from scripts import JSONParser, Helper
 
 # TODO: (drivers)
 #  - Voice lines in the menu (such as when spending affinity tokens) is still the original driver's voice
-#  - "Not to boast, but that was spectacular! Right gramps?" after winning a fight without Rex in the party yet
-#  -
+#  - Voice lines after combat ("Not to boast, but that was spectacular! Right gramps?") is still in the original driver's voice
 #  - Replace driver names in all dialog text (nice to have)
 
 OriginalCharacters = dict()            # Maps Driver/Blade ID to the dictionary of the unrandomized driver/blade data. Populated in PopulateDrivers() and PopulateBlades()
 CharacterNames = dict()                # Maps ID to Driver/Blade Name. Populated in PopulateDrivers() and PopulateBlades()
 OriginalCharacter2Replacement = dict() # Maps Unrandomized Driver/Blade ID to Randomized Driver/Blade ID. Populated in RandomizeDrivers() and PopulateBlades()
 ReplacementCharacter2Original = dict() # Maps Randomized Driver/Blade ID to Unrandomized Driver/Blade ID. Populated in RandomizeDrivers() and PopulateBlades()
-
 
 DriversToRandomize = [1, 2, 3, 6]
 
@@ -49,7 +47,7 @@ BladesDriverCantUse = {
 }
 
 # Specifically, these are healers which have a healing halo equivalent move.
-# The guaranteed Healer must belong on the driver who replaced NIA
+# The guaranteed Healer must belong to the driver who replaced NIA
 GuaranteedHealer = None
 PossibleHealerBladesForEachDriver = {
     1: [1011],
@@ -72,6 +70,7 @@ randomize_drivers = False
 randomize_blades = False
 
 include_printouts = True  # Debugging
+
 
 def resetGlobals():
     global GuaranteedHealer
@@ -607,6 +606,7 @@ def BugFixes_PostRandomization():
         FixDriverArts()
         FixDriverSkillTrees()
         FixWeaponMounts()
+
 
 # Unsure why, but it is possible for the game to crash when an enemy blade gets randomized (for example, Pandoria).
 # Replace the enemy version of the blade with the blade who that enemy replaced.

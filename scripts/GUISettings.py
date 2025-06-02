@@ -412,9 +412,8 @@ def RunOptions(OptionList, randoProgressDisplay):
     
     OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
 
-    # resets all options
-    for opt in OptionList:
-        for command in opt.resetCommands:
+    for opt in OptionList: # runs pre-randomization commands before the actual options
+        for command in opt.preRandoCommands:
             try:
                 command()
             except Exception as error:

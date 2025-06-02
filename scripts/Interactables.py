@@ -3,7 +3,7 @@ from tkinter import *
 from scripts import PopupDescriptions
 
 class Option():
-    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50, _hasSpinBox = False, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10, spinDefault = 100, descData = None, _resetCommands:list = []):
+    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50, _hasSpinBox = False, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10, spinDefault = 100, descData = None, _preRandoCommands:list = []):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
@@ -20,7 +20,7 @@ class Option():
         self.tab = _tab
         self.desc = _desc
         self.commands:list = _commands
-        self.resetCommands:list = _resetCommands
+        self.preRandoCommands:list = _preRandoCommands
         self.hasSpinBox = _hasSpinBox
         self.subDefState = _defState
         self.prio = _prio
