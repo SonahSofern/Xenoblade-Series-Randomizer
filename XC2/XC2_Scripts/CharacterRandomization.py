@@ -69,7 +69,7 @@ first_character_randomization = True # Both drivers and blade options call this 
 randomize_drivers = False
 randomize_blades = False
 
-include_printouts = True  # Debugging
+include_printouts = False  # Debugging
 
 
 def resetGlobals():
@@ -844,7 +844,8 @@ def RebalanceDefaultWeapons():
         # Find the weapon that this chip becomes for the replacement blade's weapon type
         new_replacement_weapon_id = chip_table[original_chip]["CreateWpn" + str(replacement_weapon_type_id)]
         blade["DefWeapon"] = new_replacement_weapon_id
-        print("%s's new default weapon is: %s" % (CharacterNames[replacement_blade_id], new_replacement_weapon_id))
+        if include_printouts:
+            print("%s's new default weapon is: %s" % (CharacterNames[replacement_blade_id], new_replacement_weapon_id))
 
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_Bl.json"], [], callback, replaceAll=True)
 
