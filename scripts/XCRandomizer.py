@@ -101,7 +101,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     for tab, value in NewTabDictionary.items():
         MainWindow.add(value, text =TabDict[tab]) 
         
-    MainWindow.pack(expand = True, fill ="both", padx=10, pady=(10,0)) 
+    MainWindow.pack(expand = True, fill ="both", padx=10, pady=(10,10)) 
 
 
     Interactables.OptionList.sort(key= lambda x: x.name) # Sorts alphabetically
@@ -132,7 +132,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
 
     # Seed entry box
     GenRandomSeed(seedEntryVar) # Gen a random seed if you have no save data 
-    randoSeedEntry = ttk.Entry(SeedFrame, width=30, textvariable=seedEntryVar)
+    randoSeedEntry = ttk.Entry(SeedFrame, width=MaxWidth, textvariable=seedEntryVar)
 
 
 
@@ -141,7 +141,9 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     fileOut = SavedOptions.SavedEntry("Output Bdats", outputDirVar)
     permLink = SavedOptions.SavedEntry("Permalink", permalinkVar)
     seedVar = SavedOptions.SavedEntry("Seed", seedEntryVar)
-
+    SeedFrame.pack(anchor="w", padx=10)
+    seedDesc.pack(side='left')
+    randoSeedEntry.pack(side='left')
     # Save and Load Last Options
     EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
     SavedOptions.loadData(EntriesToSave + Interactables.OptionList, SavedOptionsFileName, Game)
@@ -166,7 +168,9 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     RandomizeButton = ttk.Button(background,text='Randomize', command=(lambda: GUISettings.Randomize(root, RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs)))
     RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
     RandomizeButton.config(padding=5)
+    
 
+    
     # Options Cog
     if isOneFile:  # If the app is running as a bundled executable
         icon_path = os.path.join(sys._MEIPASS, 'Images', 'SmallSettingsCog.png')
@@ -175,9 +179,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     Cog = PhotoImage(file=icon_path)
     SettingsButton = ttk.Button(background, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, GUISettings.defGUIThemeVar, Game))
     SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
-    SeedFrame.pack(anchor="w", padx=10)
-    seedDesc.pack(side='left')
-    randoSeedEntry.pack(side='left')
+
 
     root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Interactables.OptionList, SavedOptionsFileName, Game), root.destroy()))
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())

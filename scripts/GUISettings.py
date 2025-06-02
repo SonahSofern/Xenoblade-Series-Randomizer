@@ -148,7 +148,6 @@ def LoadTheme(defaultFont, themeName):
                     "font": defaultFont,
                     "background": currentTheme["backgroundColor"],
                     "borderwidth": 4,
-                    "padding": (0,0,0,0)
                 }
             },
             "TNotebook.Tab": {
@@ -463,7 +462,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink):
     PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(),root,defFontVar)
 
     
-MaxWidth = 1000
+MaxWidth = 500
 windowWidth = "1550"
 windowHeight = "900"
 OptionColorLight = UI_Colors.White
