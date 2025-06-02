@@ -16,7 +16,6 @@ from scripts import JSONParser, Helper
 #  -
 #  - Replace driver names in all dialog text (nice to have)
 
-# TODO: Can these structures be combined with the ones for blades?
 OriginalDrivers = dict()            # Maps Driver ID to the dictionary of the unrandomized driver date. Populated in PopulateDrivers()
 DriverNames = dict()                # Maps ID to Driver Name. Populated in PopulateDrivers()
 OriginalDriver2Replacement = dict() # Maps Unrandomized Driver ID to Randomized Driver ID. Populated in RandomizeDrivers()
@@ -602,8 +601,9 @@ def BugFixes_PostRandomization():
     JSONParser.ChangeJSONLineWithCallback(["common/CHR_EnArrange.json"], [], FixRandomizedEnemyBladeCrashes, replaceAll=True)
     JSONParser.ChangeJSONLineWithCallback(["common/BTL_Arts_Dr.json"], [], MakeAllArtsAccessible, replaceAll=True)
     JSONParser.ChangeJSONLineWithCallback(["common/EVT_cutscene_wp.json"], [], FixCutsceneCrashForNotHavingTwoWeapons, replaceAll=True)
-    JSONParser.ChangeJSONLineWithCallback(["common/ITM_OrbEquip.json"], [], FixCosmetics, replaceAll=True)
-    JSONParser.ChangeJSONLineWithCallback(["common/ITM_HanaAssist.json"], [], FixCosmetics, replaceAll=True)
+    JSONParser.ChangeJSONLineWithCallback(["common/ITM_PcEquip.json"], [], FixDriverCosmetics, replaceAll=True)
+    JSONParser.ChangeJSONLineWithCallback(["common/ITM_OrbEquip.json"], [], FixBladeCosmetics, replaceAll=True)
+    JSONParser.ChangeJSONLineWithCallback(["common/ITM_HanaAssist.json"], [], FixBladeCosmetics, replaceAll=True)
     FixPandoriaSpriteAfterElpys()
     FixMenuText()
     RebalanceDefaultWeapons()
@@ -648,8 +648,12 @@ def FixCutsceneCrashForNotHavingTwoWeapons(cutscene):
     cutscene['resourceL'] = WeaponType2Resource(OriginalBlades[replacement]['WeaponType'], 'L')
     cutscene['resourceR'] = WeaponType2Resource(OriginalBlades[replacement]['WeaponType'], 'R')
 
-# TODO: How to fix cosmetics for drivers? Make sure to account for that in the cosmetics settings as well
-def FixCosmetics(accessory):
+def FixDriverCosmetics(accessory):
+    if accessory['Driver'] in ReplacementDriver2Original:
+        accessory['Driver'] = ReplacementDriver2Original[accessory['Driver']]
+
+
+def FixBladeCosmetics(accessory):
     if accessory['Blade'] in ReplacementBlade2Original:
         accessory['Blade'] = ReplacementBlade2Original[accessory['Blade']]
 
