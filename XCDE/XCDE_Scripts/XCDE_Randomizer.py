@@ -16,6 +16,7 @@ Tabs = {
 }
 extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.EnemiesScript.OriginalEnemyData.clear()]
 
+backgrounds = ["stars.png", "morning2.png", "stars3.png", "sunset2.png", "day.png"]
 # Folder Names 
 areaFiles = []
 for id in IDs.areaFileListNumbers:
@@ -29,4 +30,4 @@ def ShowTitleScreenText():
 
 
 
-scripts.XCRandomizer.CreateMainWindow(root, "XCDE", Version, "Xenoblade Chronicles DE Randomizer", Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs)
+scripts.XCRandomizer.CreateMainWindow(root, "XCDE", Version, "Xenoblade Chronicles DE Randomizer", Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds)

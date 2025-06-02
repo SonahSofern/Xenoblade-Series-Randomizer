@@ -100,9 +100,9 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme, Game):
         fontSize.configure(font=staticFont) # Have to config them like this for entry it doesnt accept style= whn you make the thing
         LoadTheme(defaultFont, defaultTheme.get())
         
-        # Dark Mode Controls
-        darkMode = ttk.Button(newWindow, text=defaultTheme.get(), command=lambda: ToggleLightDarkMode(darkMode, defaultFont, defaultTheme), style="STATIC.TButton")
-        darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
+        # # Dark Mode Controls
+        # darkMode = ttk.Button(newWindow, text=defaultTheme.get(), command=lambda: ToggleLightDarkMode(darkMode, defaultFont, defaultTheme), style="STATIC.TButton")
+        # darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
     else:
         GUIWindow.focus()
         GUIWindow.deiconify() # unminimizes
