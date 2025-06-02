@@ -12,7 +12,7 @@ from scripts.Interactables import Option, SubOption
 First = 0
 Last = 100
 
-General = 1
+Items = 1
 Driver  = 2
 Blade = 3
 Enemies = 4
@@ -25,20 +25,20 @@ TornaTab = 10
 
 
 Tabs = {
-    General: "General",
-    Driver: "Drivers",
-    Blade: "Blades",
-    Enemies: "Enemies",
-    Misce: "Misc",
-    QOL: "Quality of Life",
-    Funny: "Funny",
-    CosmeticsTab: "Cosmetics",
-    GameModeTab: "Game Modes",
-    TornaTab: "Torna"
+    Items: "🞛 Items",
+    Driver: "🧍 Drivers",
+    Blade: "⚔ Blades",
+    Enemies: "💀 Enemies",
+    Misce: "♪ Music",
+    QOL: "🐇 Quality of Life",
+    Funny: "😄 Funny",
+    CosmeticsTab: "👚 Cosmetics",
+    GameModeTab: "🏓 Game Modes",
+    TornaTab: "🔷 Torna"
 }
 
 # General
-AccessoryShopsOption = Option("Accessory Shops", General, "Randomizes the contents of Accessory Shops", [lambda: AccessoryShops.RandoAccessoryShops()], hasSpinBox = True, descData=lambda: AccessoryShops.AccessoryShopDescription())
+AccessoryShopsOption = Option("Accessory Shops", Items, "Randomizes the contents of Accessory Shops", [lambda: AccessoryShops.RandoAccessoryShops()], hasSpinBox = True, descData=lambda: AccessoryShops.AccessoryShopDescription())
 AccessoryShopsOption_Accessories = SubOption("Accessories", AccessoryShopsOption)
 AccessoryShopsOption_TornaAccessories = SubOption("Torna Accessories", AccessoryShopsOption)
 AccessoryShopsOption_WeaponChips = SubOption("Weapon Chips", AccessoryShopsOption)
@@ -48,7 +48,7 @@ AccessoryShopsOption_CoreCrystals = SubOption("Core Crystals", AccessoryShopsOpt
 AccessoryShopsOption_Deeds = SubOption("Shop Deeds", AccessoryShopsOption)
 AccessoryShopsOption_CollectionPointMaterials = SubOption("Collection Point Materials", AccessoryShopsOption)
 AccessoryShopsOption_PouchItems = SubOption("Pouch Items", AccessoryShopsOption)
-CollectionPointsOption = Option("Collection Points", General, "Randomizes the contents of Collection Points", [lambda: CollectionPoints.RandoCollectionPoints()], hasSpinBox = True, descData=lambda: CollectionPoints.CollectionPointDescriptions())
+CollectionPointsOption = Option("Collection Points", Items, "Randomizes the contents of Collection Points", [lambda: CollectionPoints.RandoCollectionPoints()], hasSpinBox = True, descData=lambda: CollectionPoints.CollectionPointDescriptions())
 CollectionPointsOption_Accessories = SubOption("Accessories", CollectionPointsOption)
 CollectionPointsOption_TornaAccessories = SubOption("Torna Accessories", CollectionPointsOption)
 CollectionPointsOption_WeaponChips = SubOption("Weapon Chips", CollectionPointsOption)
@@ -57,7 +57,7 @@ CollectionPointsOption_RefinedAuxCores = SubOption("Refined Aux Cores", Collecti
 CollectionPointsOption_CoreCrystals = SubOption("Core Crystals", CollectionPointsOption)
 CollectionPointsOption_Deeds = SubOption("Shop Deeds", CollectionPointsOption)
 CollectionPointsOption_CollectionPointMaterials = SubOption("Collection Point Materials", CollectionPointsOption)
-PouchItemShopOption = Option("Pouch Item Shops", General, "Randomizes the contents of Pouch Item Shops", [lambda: PouchItemShops.RandoPouchShops()], hasSpinBox = True, descData=lambda: PouchItemShops.PouchItemShopDesc())
+PouchItemShopOption = Option("Pouch Item Shops", Items, "Randomizes the contents of Pouch Item Shops", [lambda: PouchItemShops.RandoPouchShops()], hasSpinBox = True, descData=lambda: PouchItemShops.PouchItemShopDesc())
 PouchItemShopOption_Accessories = SubOption("Accessories", PouchItemShopOption)
 PouchItemShopOption_TornaAccessories = SubOption("Torna Accessories", PouchItemShopOption)
 PouchItemShopOption_WeaponChips = SubOption("Weapon Chips", PouchItemShopOption)
@@ -67,7 +67,7 @@ PouchItemShopOption_CoreCrystals = SubOption("Core Crystals", PouchItemShopOptio
 PouchItemShopOption_Deeds = SubOption("Shop Deeds", PouchItemShopOption)
 PouchItemShopOption_CollectionPointMaterials = SubOption("Collection Point Materials", PouchItemShopOption)
 PouchItemShopOption_PouchItems = SubOption("Pouch Items", PouchItemShopOption)
-TreasureChestOption = Option("Treasure Chests", General, "Randomizes the contents of Treasure Chests",[lambda: TreasureChests.RandoTreasureBoxes()], _prio = 51, hasSpinBox = True, descData=lambda: TreasureChests.TreasureChestDescription())
+TreasureChestOption = Option("Treasure Chests", Items, "Randomizes the contents of Treasure Chests",[lambda: TreasureChests.RandoTreasureBoxes()], _prio = 51, hasSpinBox = True, descData=lambda: TreasureChests.TreasureChestDescription())
 TreasureChestOption_Accessories = SubOption("Accessories", TreasureChestOption)
 TreasureChestOption_TornaAccessories = SubOption("Torna Accessories", TreasureChestOption)
 TreasureChestOption_WeaponChips = SubOption("Weapon Chips", TreasureChestOption)
@@ -76,7 +76,7 @@ TreasureChestOption_RefinedAuxCores = SubOption("Refined Aux Cores", TreasureChe
 TreasureChestOption_CoreCrystals = SubOption("Core Crystals", TreasureChestOption)
 TreasureChestOption_Deeds = SubOption("Shop Deeds", TreasureChestOption)
 TreasureChestOption_CollectionPointMaterials = SubOption("Collection Point Materials", TreasureChestOption)
-WeaponChipShopOption = Option("Weapon Chip Shops", General, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)], descData=lambda: _WeaponChips.WeaponChipDesc())
+WeaponChipShopOption = Option("Weapon Chip Shops", Items, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)], descData=lambda: _WeaponChips.WeaponChipDesc())
 
 # Drivers
 # DriverOption = Option("Driver", Driver, "Randomizes which drivers appear in the world", [lambda: _Drivers.Driver()])
@@ -167,8 +167,7 @@ EnemyMovespeedOption = Option("Enemy Movespeed", Enemies, "Randomizes how fast e
 # Misc
 MusicOption = Option("Music", Misce, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
 MusicOption_MixBattleAndEnv = SubOption("Mix Battle and Environment Themes", MusicOption, _defState = False)
-TrustLineOption = Option("Trust Lines", Misce, "Randomizes blade-driver trust lines in battle (colors, power, etc.)", [lambda: TrustBeam.BeamRandomizer()])
-CustomCoreCrystalOption = Option("Custom Core Crystals", Misce, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], hasSpinBox = True, _spinDesc = "% of Chests", descData= lambda: CoreCrystalAdjustments.Description())
+CustomCoreCrystalOption = Option("Custom Core Crystals", Items, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], hasSpinBox = True, _spinDesc = "% of Chests", descData= lambda: CoreCrystalAdjustments.Description())
 # DifficultyOption = Option("Difficulty", Misce, "Forces this difficulty, regardless of what is chosen in the options menu")
 # DifficultyOption_Easy = SubOption("Easy", DifficultyOption)
 # DifficultyOption_Normal = SubOption("Normal", DifficultyOption)
@@ -217,6 +216,7 @@ FieldItemOption = Option("Field Item Size", Funny, "Randomizes the size and spin
 
 # Cosmetics
 BladeWeaponCosmeticsOption = Option("Blade Weapon Cosmetics", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])], spinDefault=25)
+TrustLineOption = Option("Blade Trust Lines", CosmeticsTab, "Randomizes blade-driver trust lines in battle (colors, power, etc.)", [lambda: TrustBeam.BeamRandomizer()])
 CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()],_prio=51, hasSpinBox = True, descData=lambda: Cosmetics.CosmeticsDescription()) # Sub are created by another class
 for opt in Cosmetics.CosmeticsList: # To gen these since listing them here would be annoying
     opt.CreateSubOptions(CosmeticsOption)
