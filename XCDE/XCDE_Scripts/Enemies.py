@@ -38,13 +38,13 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     odds = odds.GetSpinbox()
     ChosenEnemyIds = []
     if isNormal:
-        ChosenEnemyIds.append(NormalEnemies)
+        ChosenEnemyIds.extend(NormalEnemies)
     if isUnique:
-        ChosenEnemyIds.append(UniqueEnemies)
+        ChosenEnemyIds.extend(UniqueEnemies)
     if isBoss:
-        ChosenEnemyIds.append(BossEnemies)
+        ChosenEnemyIds.extend(BossEnemies)
     if isSuper:
-        ChosenEnemyIds.append(SuperbossEnemies)
+        ChosenEnemyIds.extend(SuperbossEnemies)
     # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame",  "avoid", "spike_dmg", "spike_state_val"
     CopiedStats = ["move_speed", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_state", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
     CopiedStatsWithRatios = ["str", "eth"] # Not doing agility or hp , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
@@ -135,7 +135,7 @@ def HighActIDFix():
                 art["act_idx"] = 0
                 break
         JSONParser.CloseFile(artData, artFile)
-
+    
 
 def VoicedEnemiesFix(eneVoiceData, chosen, enemy):
     newVoiceList = []

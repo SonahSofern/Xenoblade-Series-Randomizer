@@ -162,7 +162,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
 
 
     # Bottom Left Progress Display Text
-    randoProgressDisplay = ttk.Label(background, text="", anchor="e", padding=2, style="BorderlessLabel.TLabel")
+    randoProgressDisplay = ttk.Label(background, text="", anchor="e", padding=4, style="BorderlessLabel.TLabel")
 
     # Randomize Button
     RandomizeButton = ttk.Button(background,text='Randomize', command=(lambda: GUISettings.Randomize(root, RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs)))

@@ -34,14 +34,15 @@ def ItemRandomization(itemTypes:list[ItemType] = [], files = [],odds = 0, game =
                         if not Helper.OddsCheck(odds):
                             continue
                         
+                        chosenList = random.choices(randoLists, weights, k=1)[0]
+                    
                         if keepType:
                             for list in allItemLists:
                                 if itm[key] in list.originalIds:
                                     chosenList = list
                                     break
-                        else:
-                            chosenList = random.choices(randoLists, weights, k=1)[0]
-                            
+                        
+    
                         if chosenList.ids == []:
                             chosenList.RefreshList()
                             
@@ -51,7 +52,7 @@ def ItemRandomization(itemTypes:list[ItemType] = [], files = [],odds = 0, game =
                         itm[key] = chosen
                 JSONParser.CloseFile(itemData, ItemFile)
         except Exception as e:
-            print(e)
+            # print(e)
             pass
 # Add a keep item type option so the repleacement for x type will always be the same type 
 

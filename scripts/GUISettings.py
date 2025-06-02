@@ -296,7 +296,7 @@ def LoadTheme(defaultFont, themeName):
     style.configure("BordlessBtn.TButton", relief = FLAT)
     style.configure("midColor.TCheckbutton", padding=(20, 10))
     style.configure("STATIC.TButton", font=staticFont)
-    style.configure("BorderlessLabel.TLabel", background=currentTheme["backgroundColor"], foreground=UI_Colors.White)
+    style.configure("BorderlessLabel.TLabel", background=currentTheme["darkColor"], foreground=UI_Colors.White)
     style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
     style.configure("Header.TButton", borderwidth=0, background=currentTheme["midGray"])
     style.configure("Tag.TLabel", background= currentTheme["midGray"], relief="flat", padding=(9,2), margin=(5,0))
