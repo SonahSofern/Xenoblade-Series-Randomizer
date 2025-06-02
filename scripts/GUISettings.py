@@ -148,7 +148,7 @@ def LoadTheme(defaultFont, themeName):
                     "font": defaultFont,
                     "background": currentTheme["backgroundColor"],
                     "borderwidth": 4,
-                    "relief": "flat",
+                    "padding": (0,0,0,0)
                 }
             },
             "TNotebook.Tab": {

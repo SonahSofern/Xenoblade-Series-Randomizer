@@ -20,6 +20,8 @@ Tabs = {
     10: "Torna"
 }
 
+backgrounds = ["titlescreen1.png"]
+
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], f"Randomizer v{Version}") # Change Title Version to Randomizer vX.x.x
 
@@ -27,4 +29,4 @@ extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.Add
 mainFolderNames = ["common", "common_gmk"]
 subFolderNames = ["common_ms"]
 
-scripts.XCRandomizer.CreateMainWindow(root, "XC2", Version, "Xenoblade Chronicles 2 Randomizer", Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs)
+scripts.XCRandomizer.CreateMainWindow(root, "XC2", Version, "Xenoblade Chronicles 2 Randomizer", Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds)
