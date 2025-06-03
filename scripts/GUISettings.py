@@ -433,7 +433,7 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
     threading.Thread(target=ThreadedRandomize).start()
 
 def SumTotalCommands(OptionList):
-    TotalCommands = 0
+    TotalCommands = 1
     for opt in OptionList:
         if opt.GetState(): # Checks state
             TotalCommands += 1
