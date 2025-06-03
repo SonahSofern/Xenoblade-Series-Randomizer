@@ -50,7 +50,7 @@ def RandomizeAccessoryEnhancements():
         
 def AccessoriesDesc():
     desc = PopupDescriptions.Description()
-    desc.Header(Options.DriverAccessoriesOption.name)
+    desc.Header(Options.AccessoriesOption.name)
     desc.Text("This option randomizes all accessory effects, even to effects that could not be obtained in normal gameplay.")
     desc.Image("accessoryeffects.png", "XC2", 700)
     desc.Text("This also replaces the first word of accessories to fit their new effect.")

@@ -4,7 +4,7 @@ import copy
 import Options
 
 def ReassignAlphabeticalSort(): # we add some custom named items if any of the following settings are on:
-    if Options.DriverAccessoriesOption.GetState() or Options.BladeAuxCoresOption.GetState() or Options.BladeWeaponChipsOption.GetState() or Options.CosmeticsOption.GetState() or Options.StartwithIncreasedMovespeedOption.GetState() or Options.RaceModeOption.GetState() or Options.UMHuntOption.GetState() or Options.TornaMainOption.GetState():
+    if Options.AccessoriesOption.GetState() or Options.AuxCoresOption.GetState() or Options.BladeWeaponChipsOption.GetState() or Options.CosmeticsOption.GetState() or Options.StartwithIncreasedMovespeedOption.GetState() or Options.RaceModeOption.GetState() or Options.UMHuntOption.GetState() or Options.TornaMainOption.GetState():
         ItemFileList = ['ITM_BoosterList', 'ITM_CollectionList', 'ITM_CrystalList', 'ITM_EventList', 'ITM_FavoriteList', 'ITM_HanaArtsEnh', 'ITM_HanaAssist', 'ITM_HanaAtr', 'ITM_HanaNArtsSet', 'ITM_HanaRole', 'ITM_InfoList', 'ITM_Orb', 'ITM_OrbEquip', 'ITM_PcEquip', 'ITM_PcWpnChip', 'ITM_PreciousList', 'ITM_PreciousListIra', 'ITM_SalvageList', 'ITM_TresureList']
         TextFileList = ['itm_booster', 'itm_collection', 'itm_crystal', 'itm_evt', 'itm_favorite', 'itm_orb', 'itm_orb', 'itm_hana_atr_ms', 'itm_hana_narts_set_ms', 'itm_hana_role_ms', 'itm_info', 'itm_orb', 'itm_orb', 'itm_pcequip', 'itm_pcwpnchip_ms', 'itm_precious', 'itm_precious', 'itm_salvage', 'itm_tresure']
         DictList = []
