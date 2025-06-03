@@ -372,8 +372,8 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
         RandomizeButton.config(state=DISABLED)
         # Showing Progress Diplay 
         randoProgressDisplay.config(text="Unpacking BDATs")
-        randoProgressFill.pack(after=SettingsButton,padx=windowPadding, pady=10)
-        pb.pack(side='bottom', padx=1,pady=10)
+        randoProgressFill.pack(after=SettingsButton,padx=windowPadding, pady=(30,0))
+        pb.pack(side='bottom', padx=0,pady=(0,20))
         random.seed(permalinkVar.get())
         print("Seed: " + randoSeedEntry.get())
         print("Permalink: "+  permalinkVar.get())
@@ -415,6 +415,7 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
 
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
+            pb['value'] = 100
             time.sleep(1.5)
             randoProgressFill.pack_forget()
             pb.pack_forget()
@@ -432,7 +433,7 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
     threading.Thread(target=ThreadedRandomize).start()
 
 def SumTotalCommands(OptionList):
-    TotalCommands = 0
+    TotalCommands = 1
     for opt in OptionList:
         if opt.GetState(): # Checks state
             TotalCommands += 1
