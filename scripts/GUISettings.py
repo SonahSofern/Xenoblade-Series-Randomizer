@@ -354,12 +354,11 @@ def ResizeWindow(top, innerFrame, padx = 37):
     top.geometry(f"{w}x{h}")
  
     
-def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = []):
+def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0):
     def ThreadedRandomize():
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
         # Showing Progress Diplay 
-        randoProgressDisplay.pack(side='left', anchor='w', pady=10, padx=10)
         randoProgressDisplay.config(text="Unpacking BDATs")
 
         random.seed(permalinkVar.get())
@@ -377,7 +376,6 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path
             print(f"{traceback.format_exc()}") # shows the full error
             randoProgressDisplay.config(text="Failed Inputs")
             time.sleep(3)
-            randoProgressDisplay.config(text="")
             RandomizeButton.config(state=NORMAL)
             return
 
@@ -404,7 +402,6 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path
             randoProgressDisplay.config(text="Done")
             time.sleep(1.5)
             randoProgressDisplay.config(text="")
-            randoProgressDisplay.pack_forget()
             
             print(f"Finished at {datetime.datetime.now()}")
         except:
@@ -462,7 +459,6 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink):
     PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(),root,defFontVar)
 
     
-MaxWidth = 500
 windowWidth = "1550"
 windowHeight = "900"
 OptionColorLight = UI_Colors.White

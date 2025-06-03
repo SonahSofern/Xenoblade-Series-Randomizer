@@ -48,6 +48,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     from scripts import SavedOptions, Helper, GUISettings, PermalinkManagement, Seed, Interactables, SettingsPresets
     from tkinter.font import Font
     import tkinter as tk
+    windowPadding = 50
     isOneFile = isPacked()
     SavedOptionsFileName = f"LastSave.txt"
     JsonOutput = f"./{Game}/_internal/JsonOutputs"
@@ -101,7 +102,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     for tab, value in NewTabDictionary.items():
         MainWindow.add(value, text =TabDict[tab]) 
         
-    MainWindow.pack(expand = True, fill ="both", padx=10, pady=(10,10)) 
+    MainWindow.pack(expand = True, fill ="both", padx=windowPadding, pady=(windowPadding, 5))
 
 
     Interactables.OptionList.sort(key= lambda x: x.name) # Sorts alphabetically
@@ -112,18 +113,22 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
         randoSeedEntryVar.set(Seed.RandomSeedName(SeedNouns, SeedVerbs))
 
     bottomFrame = ttk.Frame(background, style="NoBackground.TFrame", padding=(0,0))
-    bottomFrame.pack(anchor="w", padx=10)
+    bottomFrame.pack(anchor="w", padx=windowPadding, fill=X)
+    
     bdatButton = ttk.Button(bottomFrame, width=17, text="Choose Input Folder", command= lambda: Helper.DirectoryChoice("Choose your folder containing common.bdat, common_ms.bdat and common_gmk.bdat", bdatFilePathEntry))
-    bdatButton.pack(side="left")
-    bdatFilePathEntry = ttk.Entry(bottomFrame, width=MaxWidth, textvariable=fileEntryVar)
-    bdatFilePathEntry.pack(side="left")
-    OutputDirectoryFrame = ttk.Frame(background, style="NoBackground.TFrame")
-    OutputDirectoryFrame.pack(anchor="w", padx=10)
+    bdatButton.pack(side="left", pady=0)
+    bdatFilePathEntry = ttk.Entry(bottomFrame, textvariable=fileEntryVar)
+    bdatFilePathEntry.pack(side="left", expand=True, fill=X, pady=0)
+    
+    OutputDirectoryFrame = ttk.Frame(background, style="NoBackground.TFrame", padding=(0,0))
+    OutputDirectoryFrame.pack(anchor="w", padx=windowPadding, fill=X)
+    
     outputDirButton = ttk.Button(OutputDirectoryFrame, width = 17, text='Choose Output Folder', command= lambda: Helper.DirectoryChoice("Choose an output folder", outDirEntry))
-    outputDirButton.pack(side="left")
+    outputDirButton.pack(side="left", pady=0)
     outputDirVar = StringVar()
-    outDirEntry = ttk.Entry(OutputDirectoryFrame, width=MaxWidth, textvariable=outputDirVar)
-    outDirEntry.pack(side="left")
+    outDirEntry = ttk.Entry(OutputDirectoryFrame, textvariable=outputDirVar)
+    outDirEntry.pack(side="left", expand=True, fill=X)
+    
     SeedFrame = ttk.Frame(background, style="NoBackground.TFrame")
     seedDesc = ttk.Button(SeedFrame, text="Seed", command=lambda: GenRandomSeed(seedEntryVar))
 
@@ -132,7 +137,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
 
     # Seed entry box
     GenRandomSeed(seedEntryVar) # Gen a random seed if you have no save data 
-    randoSeedEntry = ttk.Entry(SeedFrame, width=MaxWidth, textvariable=seedEntryVar)
+    randoSeedEntry = ttk.Entry(SeedFrame, textvariable=seedEntryVar)
 
 
 
@@ -141,9 +146,9 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     fileOut = SavedOptions.SavedEntry("Output Bdats", outputDirVar)
     permLink = SavedOptions.SavedEntry("Permalink", permalinkVar)
     seedVar = SavedOptions.SavedEntry("Seed", seedEntryVar)
-    SeedFrame.pack(anchor="w", padx=10)
+    SeedFrame.pack(anchor="w", padx=windowPadding, fill=X)
     seedDesc.pack(side='left')
-    randoSeedEntry.pack(side='left')
+    randoSeedEntry.pack(side='left', fill=X, expand=True)
     # Save and Load Last Options
     EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
     SavedOptions.loadData(EntriesToSave + Interactables.OptionList, SavedOptionsFileName, Game)
@@ -151,25 +156,23 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
 
     # Permalink Options/Variables
     permalinkFrame = ttk.Frame(background,style="NoBackground.TFrame")
-    permalinkEntry = ttk.Entry(permalinkFrame, width=MaxWidth, textvariable=permalinkVar)
+    permalinkEntry = ttk.Entry(permalinkFrame, textvariable=permalinkVar)
     CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
     permalinkVar.set(CompressedPermalink)
     permalinkButton = ttk.Button(permalinkFrame, text="Settings", command=lambda: SettingsPresets.PresetsWindow("Presets", root, defaultFont, f"{Game}/SaveData", EntriesToSave + Interactables.OptionList, Game))
-    permalinkFrame.pack(padx=10, anchor="w")
+    permalinkFrame.pack(padx=windowPadding, anchor="w", fill=X)
     permalinkButton.pack(side="left")
-    permalinkEntry.pack(side='left')
+    permalinkEntry.pack(side='left', fill=X, expand=True)
     PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:Interactables.UpdateAllStates())
 
 
     # Bottom Left Progress Display Text
-    randoProgressDisplay = ttk.Label(background, text="", anchor="e", padding=4, style="BorderlessLabel.TLabel")
+    randoProgressDisplay = ttk.Button(background, text="", padding=0)
+    randoProgressDisplay.pack(side='left',padx=windowPadding, pady=0,expand=True, anchor=W)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background,text='Randomize', command=(lambda: GUISettings.Randomize(root, RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs)))
-    RandomizeButton.place(relx=0.5, rely=1, y= -10, anchor="s")
-    RandomizeButton.config(padding=5)
-    
-
+    RandomizeButton = ttk.Button(background,padding=5,text='Randomize', command=(lambda: GUISettings.Randomize(root, RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding)))
+    RandomizeButton.pack(pady=(10,windowPadding), padx=(windowPadding, 0), side='left', anchor=CENTER)
     
     # Options Cog
     if isOneFile:  # If the app is running as a bundled executable
@@ -177,14 +180,13 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     else:  # If running as a script (not bundled)
         icon_path = "./_internal/Images/SmallSettingsCog.png"
     Cog = PhotoImage(file=icon_path)
-    SettingsButton = ttk.Button(background, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, GUISettings.defGUIThemeVar, Game))
-    SettingsButton.pack(pady=10, padx=10, side='right', anchor='e') 
+    SettingsButton = ttk.Button(background,padding=5, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, GUISettings.defGUIThemeVar, Game))
+    SettingsButton.pack(pady=(10,windowPadding),anchor="e",expand=True, side=LEFT, padx=windowPadding) 
 
 
     root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Interactables.OptionList, SavedOptionsFileName, Game), root.destroy()))
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
 
     root.bind("<Configure>", lambda event: resize_bg(event, root, bg_photo, bg_image, background))
-
     root.mainloop()
 
