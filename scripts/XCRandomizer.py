@@ -159,7 +159,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     permalinkEntry = ttk.Entry(permalinkFrame, textvariable=permalinkVar)
     CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
     permalinkVar.set(CompressedPermalink)
-    permalinkButton = ttk.Button(permalinkFrame, text="Settings", command=lambda: SettingsPresets.PresetsWindow("Presets", root, defaultFont, f"{Game}/SaveData", EntriesToSave + Interactables.OptionList, Game))
+    permalinkButton = ttk.Button(permalinkFrame, text="Preset", command=lambda: SettingsPresets.PresetsWindow("Presets", root, defaultFont, f"{Game}/SaveData", EntriesToSave + Interactables.OptionList, Game))
     permalinkFrame.pack(padx=windowPadding, anchor="w", fill=X)
     permalinkButton.pack(side="left")
     permalinkEntry.pack(side='left', fill=X, expand=True)

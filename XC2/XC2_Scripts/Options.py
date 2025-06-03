@@ -27,13 +27,13 @@ TornaTab = 10
 Tabs = {
     Items: "🞛 Items",
     Driver: "🧍 Drivers",
-    Blade: "⚔ Blades",
+    Blade: "🗡Blades",
     Enemies: "💀 Enemies",
     Misce: "♪ Music",
     QOL: "🐇 Quality of Life",
     Funny: "😄 Funny",
     CosmeticsTab: "👚 Cosmetics",
-    GameModeTab: "🏓 Game Modes",
+    GameModeTab: "♘ Game Modes",
     TornaTab: "🔷 Torna"
 }
 
