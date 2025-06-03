@@ -168,7 +168,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
 
     # Bottom Left Progress Display Text
     randoProgressFill = ttk.Frame(background, padding=0)
-    randoProgressDisplay = ttk.Label(randoProgressFill, padding=5)
+    randoProgressDisplay = ttk.Button(randoProgressFill, padding=5)
     randoProgressDisplay.pack(pady=0, side=LEFT)
 
     # Randomize Button
