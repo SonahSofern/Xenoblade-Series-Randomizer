@@ -167,11 +167,12 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
 
 
     # Bottom Left Progress Display Text
-    randoProgressDisplay = ttk.Button(background, text="", padding=0)
-    randoProgressDisplay.pack(side='left',padx=windowPadding, pady=0,expand=True, anchor=W)
+    randoProgressFill = ttk.Frame(background, padding=0)
+    randoProgressDisplay = ttk.Button(randoProgressFill, padding=5)
+    randoProgressDisplay.pack(side='left', pady=0,expand=True, anchor="w")
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background,padding=5,text='Randomize', command=(lambda: GUISettings.Randomize(root, RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding)))
+    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(root, RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding)))
     RandomizeButton.pack(pady=(10,windowPadding), padx=(windowPadding, 0), side='left', anchor=CENTER)
     
     # Options Cog
@@ -181,9 +182,10 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
         icon_path = "./_internal/Images/SmallSettingsCog.png"
     Cog = PhotoImage(file=icon_path)
     SettingsButton = ttk.Button(background,padding=5, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, GUISettings.defGUIThemeVar, Game))
-    SettingsButton.pack(pady=(10,windowPadding),anchor="e",expand=True, side=LEFT, padx=windowPadding) 
+    SettingsButton.pack(pady=(10,windowPadding),anchor="e",expand=True, side=RIGHT, padx=windowPadding) 
 
 
+    
     root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Interactables.OptionList, SavedOptionsFileName, Game), root.destroy()))
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
 

@@ -354,12 +354,13 @@ def ResizeWindow(top, innerFrame, padx = 37):
     top.geometry(f"{w}x{h}")
  
     
-def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0):
+def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0):
     def ThreadedRandomize():
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
         # Showing Progress Diplay 
         randoProgressDisplay.config(text="Unpacking BDATs")
+        randoProgressFill.pack(after=SettingsButton,padx=windowPadding, fill=X, pady=10)
 
         random.seed(permalinkVar.get())
         print("Seed: " + randoSeedEntry.get())
@@ -401,7 +402,8 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay, bdat_path
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
             time.sleep(1.5)
-            randoProgressDisplay.config(text="")
+            randoProgressFill.pack_forget()
+
             
             print(f"Finished at {datetime.datetime.now()}")
         except:
