@@ -372,8 +372,8 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
         RandomizeButton.config(state=DISABLED)
         # Showing Progress Diplay 
         randoProgressDisplay.config(text="Unpacking BDATs")
-        randoProgressFill.pack(after=SettingsButton,padx=windowPadding, pady=(30,0))
-        pb.pack(side='bottom', padx=0,pady=(0,20))
+        randoProgressFill.pack(pady=(30,0))
+        pb.pack(padx=0,pady=(0,20))
         random.seed(permalinkVar.get())
         print("Seed: " + randoSeedEntry.get())
         print("Permalink: "+  permalinkVar.get())
