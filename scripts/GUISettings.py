@@ -433,7 +433,7 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
     threading.Thread(target=ThreadedRandomize).start()
 
 def SumTotalCommands(OptionList):
-    TotalCommands = 1
+    TotalCommands = 0
     for opt in OptionList:
         if opt.GetState(): # Checks state
             TotalCommands += 1
@@ -482,7 +482,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
                     errorMsg = error
                 errorMsgObj.Header(f"Error: {opt.name}")
                 errorMsgObj.Text(errorMsg)
-                randoProgressDisplay.config(text=f"{opt.name}: {errorMsg}")
+                randoProgressDisplay.config(text=f"{opt.name}: {traceback.format_exc()}")
         pb['value'] += (100/TotalCommands)
 
     PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(),root,defFontVar)
