@@ -3,7 +3,7 @@ from tkinter import *
 from scripts import PopupDescriptions
 
 class Option():
-    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50, hasSpinBox = False, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10, spinDefault = 100, descData = None):
+    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50,hasSpinBox = False, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = []):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
@@ -20,6 +20,7 @@ class Option():
         self.tab = _tab
         self.desc = _desc
         self.commands:list = _commands
+        self.preRandoCommands:list = preRandoCommands
         self.hasSpinBox = hasSpinBox
         self.subDefState = _defState
         self.prio = _prio
@@ -124,11 +125,12 @@ class Option():
         return self.checkBoxVal.get()
 
 class SubOption():
-    def __init__(self, _name, _parent:Option, _commands = [], _defState = True, _prio = 0, hasSpinBox = False):
+    def __init__(self, _name, _parent:Option, _commands = [], _defState = True, _prio = 0, hasSpinBox = False, preRandoCommands:list = []):
         self.name = _name
         self.checkBoxVal = BooleanVar
         self.checkBox:ttk.Checkbutton = None
-        self.commands = _commands    
+        self.commands = _commands
+        self.preRandoCommands = preRandoCommands
         self.defState = _defState
         self.prio = _prio
         self.parent = _parent

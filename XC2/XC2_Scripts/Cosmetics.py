@@ -1,5 +1,8 @@
 import json, random, Options
-from BladeRandomization import Replacement2Original
+
+from CharacterRandomization import randomize_drivers
+from CharacterRandomization import randomize_blades
+from CharacterRandomization import ReplacementCharacter2Original
 from scripts import Helper, PopupDescriptions
 # Lists of cosmetics to choose from
 ValidDriverCosmetics = []
@@ -145,8 +148,8 @@ def CosmeticPairs(nameData, itmData,odds, charKeyWord, cosmeticsList):
                     break
                 
             Acc["Model"] = cosm.model
-            if Options.BladesOption.GetState() and (cosm.characterID in Replacement2Original):
-                Acc[f"{charKeyWord}"] = Replacement2Original[cosm.characterID]
+            if (randomize_drivers or randomize_blades) and (cosm.characterID in ReplacementCharacter2Original):
+                Acc[f"{charKeyWord}"] = ReplacementCharacter2Original[cosm.characterID]
             else:
                 Acc[f"{charKeyWord}"] = cosm.characterID
             
@@ -194,8 +197,8 @@ def Cosmetics():
                 except:
                     continue
                 Acc["Model"] = cosm.model
-                if Options.BladesOption.GetState() and cosm.characterID in Replacement2Original:
-                    Acc["Blade"] = Replacement2Original[cosm.characterID]
+                if randomize_blades and cosm.characterID in ReplacementCharacter2Original:
+                    Acc["Blade"] = ReplacementCharacter2Original[cosm.characterID]
                 else:
                     Acc["Blade"] = cosm.characterID
         file.seek(0)

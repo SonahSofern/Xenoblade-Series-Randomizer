@@ -442,6 +442,7 @@ def SumTotalCommands(OptionList):
 def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
     
     OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
+    
     status = "Complete"
     errorMsgObj = PopupDescriptions.Description(bonusWidth= 15)
     errorMsgObj.Header(f"Randomization {status}")
@@ -450,11 +451,18 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
     errorMsgObj.Tag(f"Time: {datetime.datetime.now()}", pady=5, anchor="center") # Time
     def ErrorLog():
         return errorMsgObj
-    
+
+    for opt in OptionList: # runs pre-randomization commands before the actual options
+        for command in opt.preRandoCommands:
+            try:
+                command()
+            except Exception as error:
+                print(f"ERROR: {opt.name} | {error}")
+                print(f"{traceback.format_exc()}") # shows the full error
     TotalCommands = SumTotalCommands(OptionList)       
-    
-    for opt in OptionList:  
-        if not opt.GetState(): # Checks state      
+
+    for opt in OptionList:
+        if not opt.GetState(): # Checks state
             continue
         opt.subOptions.sort(key= lambda x: x.prio) # Sort suboptions by priority
             
