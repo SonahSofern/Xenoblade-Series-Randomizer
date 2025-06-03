@@ -285,7 +285,19 @@ def LoadTheme(defaultFont, themeName):
 
                 },
             },
-            
+           "TProgressbar": {
+    "configure": {
+        "background": currentTheme["lightColor"],
+        "troughcolor": currentTheme["midColor"],
+        "darkcolor": currentTheme["darkColor"],
+        "lightcolor": currentTheme["lightColor"],
+        "thickness": 2,
+        "padding": 0,
+    },
+    "map": {
+        "background": [("disabled", currentTheme["midGray"])],
+    }
+}
         })
     except:
         pass
@@ -354,14 +366,14 @@ def ResizeWindow(top, innerFrame, padx = 37):
     top.geometry(f"{w}x{h}")
  
     
-def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0):
+def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0):
     def ThreadedRandomize():
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
         # Showing Progress Diplay 
         randoProgressDisplay.config(text="Unpacking BDATs")
-        randoProgressFill.pack(after=SettingsButton,padx=windowPadding, fill=X, pady=10)
-
+        randoProgressFill.pack(after=SettingsButton,padx=windowPadding, pady=10)
+        pb.pack(side='bottom', padx=1,pady=10)
         random.seed(permalinkVar.get())
         print("Seed: " + randoSeedEntry.get())
         print("Permalink: "+  permalinkVar.get())
@@ -381,9 +393,11 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
             return
 
         # Runs all randomization
-        RunOptions(OptionList, randoProgressDisplay, root, randoSeedEntry.get(), permalinkVar.get())
+        RunOptions(OptionList, randoProgressDisplay, root, randoSeedEntry.get(), permalinkVar.get(), pb)
         for command in ExtraCommands: # Runs extra commands like show title screen
             command()
+
+            
             
         randoProgressDisplay.config(text="Packing BDATs")
     
@@ -403,7 +417,7 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
             randoProgressDisplay.config(text="Done")
             time.sleep(1.5)
             randoProgressFill.pack_forget()
-
+            pb.pack_forget()
             
             print(f"Finished at {datetime.datetime.now()}")
         except:
@@ -413,10 +427,18 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
         
         # Re-Enables Randomize Button
         RandomizeButton.config(state=NORMAL)
+        pb["value"] = 0
 
     threading.Thread(target=ThreadedRandomize).start()
 
-def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink):
+def SumTotalCommands(OptionList):
+    TotalCommands = 0
+    for opt in OptionList:
+        if opt.GetState(): # Checks state
+            TotalCommands += 1
+    return TotalCommands
+
+def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
     
     OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
     status = "Complete"
@@ -427,10 +449,12 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink):
     errorMsgObj.Tag(f"Time: {datetime.datetime.now()}", pady=5, anchor="center") # Time
     def ErrorLog():
         return errorMsgObj
-    for opt in OptionList:
-        if not opt.GetState(): # Checks state
+    
+    TotalCommands = SumTotalCommands(OptionList)       
+    
+    for opt in OptionList:  
+        if not opt.GetState(): # Checks state      
             continue
-        
         opt.subOptions.sort(key= lambda x: x.prio) # Sort suboptions by priority
             
         for sub in opt.subOptions:
@@ -448,6 +472,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink):
         for command in opt.commands:
             try:
                 errorMsg = command()
+
             except Exception as error:
                 status = "FAILED"
                 print(f"ERROR: {opt.name} | {error}")
@@ -456,8 +481,9 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink):
                     errorMsg = error
                 errorMsgObj.Header(f"Error: {opt.name}")
                 errorMsgObj.Text(errorMsg)
-
                 randoProgressDisplay.config(text=f"{opt.name}: {errorMsg}")
+        pb['value'] += (100/TotalCommands)
+
     PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(),root,defFontVar)
 
     
