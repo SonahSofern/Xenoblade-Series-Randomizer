@@ -4,7 +4,7 @@ from tkinter import *
 root = Tk()
 import scripts.XCRandomizer, SeedNames, scripts.JSONParser, Options
 
-Version = "1.0.0"
+Version = "BETA"
 
 
 backgrounds = ["col9.jpg"]
