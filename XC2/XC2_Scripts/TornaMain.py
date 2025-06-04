@@ -582,6 +582,8 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
                 if row["$id"] == redbag.id:
                     row["QuestFlag"], row["QuestFlagMin"], row["QuestFlagMax"] = 0, 0, 0
                     row["itmID"] = redbag.randomizeditems[0]
+                    if row["itmID"] == 0: # if there's no item, we just disappear the bag.
+                        row["Condition"] = 2112
                     break
         file.seek(0)
         file.truncate()
@@ -1021,6 +1023,15 @@ def CharacterUnlocks(): # sets up the character unlock keys
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common/CHR_Dr.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] > 17:
+                row["DefLvType"] = 2
+                row["DefLv"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
     JSONParser.ExtendJSONFile("common/FLD_QuestCollect.json", [FLDQuestCollectNewRows])
     JSONParser.ExtendJSONFile("common_ms/fld_quest.json", [fldquestnewrows])
 
@@ -1221,7 +1232,7 @@ def GildedCheckNames():
         for row in data["rows"]:
             if row["$id"] in RequiredShopNameList:
                 row["name"] = "[System:Color name=tutorial ]" + row["name"] + "[/System:Color]"
-            else:
+            elif row["$id"] >= 226:
                 row["name"] = "[System:Color name=red ]" + row["name"] + "[/System:Color]"
         file.seek(0)
         file.truncate()

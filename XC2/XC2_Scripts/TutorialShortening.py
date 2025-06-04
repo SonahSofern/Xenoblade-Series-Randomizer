@@ -118,7 +118,7 @@ def ShortenedTutorial():
         Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial_Ira.json", ["start_id"], 0)
         with open("./XC2/_internal/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing torna tutorials
             data = json.load(file)
-            removables = ["aoc_tut04", "aoc_tut10", "aoc_tut25", "aoc_tut14", "aoc_tut21", "aoc_tut06", "aoc_tut07", "aoc_tut09", "aoc_tut08"]
+            removables = ["aoc_tut04", "aoc_tut25", "aoc_tut14", "aoc_tut21", "aoc_tut06", "aoc_tut07", "aoc_tut09", "aoc_tut08"] # "aoc_tut10"
             for row in data["rows"]:
                 if row["scriptName"] in removables:
                     row["scriptName"] = ""
