@@ -11,4 +11,5 @@ Discord: https://discord.gg/h93yqZHG8z
 # Credits
 https://github.com/roccodev/bdat-rs \
 https://xenobladedata.github.io/ \
-https://tcrf.net/Notes:Xenoblade_Chronicles/Music_Tracks
+https://tcrf.net/Notes:Xenoblade_Chronicles/Music_Tracks  
+https://www.xenoserieswiki.org/

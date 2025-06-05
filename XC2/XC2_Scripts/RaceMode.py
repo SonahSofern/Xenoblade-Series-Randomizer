@@ -439,8 +439,8 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs):
         A3CoreCrystalIDs = (NonNGPlusCoreCrystalIDs)
         A4CoreCrystalIDs = NGPlusBladeCrystalIDs
     A1Equip, A2Equip, A3Equip, A4Equip = [], [], [], []
-    DriverAccesEnh = Options.DriverAccessoriesOption.GetState()
-    AuxCoreEnh = Options.BladeAuxCoresOption.GetState()
+    DriverAccesEnh = Options.AccessoriesOption.GetState()
+    AuxCoreEnh = Options.AuxCoresOption.GetState()
     if DriverAccesEnh: # If we have the wacky enhancements:
         CommonDAcc, RareDAcc, LegDAcc = Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [0], "$id"), Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [1], "$id"), Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [2], "$id")
         CommonDAcc, RareDAcc, LegDAcc = [x for x in CommonDAcc if x in Accessories], [x for x in RareDAcc if x in Accessories], [x for x in LegDAcc if x in Accessories]

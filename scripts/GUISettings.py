@@ -393,7 +393,7 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
             return
 
         # Runs all randomization
-        RunOptions(OptionList, randoProgressDisplay, root, randoSeedEntry.get(), permalinkVar.get(), pb)
+        popup = RunOptions(OptionList, randoProgressDisplay, root, randoSeedEntry.get(), permalinkVar.get(), pb)
         for command in ExtraCommands: # Runs extra commands like show title screen
             command()
 
@@ -417,6 +417,7 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
             randoProgressDisplay.config(text="Done")
             pb['value'] = 100
             time.sleep(1.5)
+            popup()
             randoProgressFill.pack_forget()
             pb.pack_forget()
             
@@ -493,7 +494,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
                 randoProgressDisplay.config(text=f"{opt.name}: {traceback.format_exc()}")
         pb['value'] += (100/TotalCommands)
 
-    PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(),root,defFontVar)
+    return lambda: PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(),root,defFontVar)
 
     
 windowWidth = "1550"

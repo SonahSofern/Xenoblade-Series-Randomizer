@@ -27,17 +27,19 @@ TornaTab = 10
 Tabs = {
     Items: "🞛 Items",
     Driver: "🧍 Drivers",
-    Blade: "⚔ Blades",
+    Blade: "🗡Blades",
     Enemies: "💀 Enemies",
     Misce: "♪ Music",
     QOL: "🐇 Quality of Life",
     Funny: "😄 Funny",
     CosmeticsTab: "👚 Cosmetics",
-    GameModeTab: "🏓 Game Modes",
+    GameModeTab: "♘ Game Modes",
     TornaTab: "🔷 Torna"
 }
 
 # General
+AccessoriesOption = Option("Accessories", Items, "Randomizes effects of Accessories", [lambda: _Accessories.RandomizeAccessoryEnhancements()], descData=lambda: _Accessories.AccessoriesDesc())
+AuxCoresOption = Option("Aux Cores", Items, "Randomizes the effects of Aux Cores", [lambda: _AuxCores.RandomizeAuxCoreEnhancements()])
 AccessoryShopsOption = Option("Accessory Shops", Items, "Randomizes the contents of Accessory Shops", [lambda: AccessoryShops.RandoAccessoryShops()], hasSpinBox = True, descData=lambda: AccessoryShops.AccessoryShopDescription())
 AccessoryShopsOption_Accessories = SubOption("Accessories", AccessoryShopsOption)
 AccessoryShopsOption_TornaAccessories = SubOption("Torna Accessories", AccessoryShopsOption)
@@ -81,7 +83,6 @@ WeaponChipShopOption = Option("Weapon Chip Shops", Items, "Randomizes Weapon Chi
 # Drivers
 DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.DriversDescriptions())
 DriversOption_Nia = SubOption("Guarantee Early Nia", DriversOption, _defState = False)
-DriverAccessoriesOption = Option("Driver Accessories", Driver, "Randomizes effects of Accessories", [lambda: _Accessories.RandomizeAccessoryEnhancements()], descData=lambda: _Accessories.AccessoriesDesc())
 DriverArtsOption = Option("Driver Arts", Driver, "Randomizes effects of all driver arts", [lambda: (_DriverArts.DriverArtRandomizer(), _DriverArts.GenCustomArtDescriptions("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/_internal/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], hasSpinBox = True,spinDefault=40, descData=lambda: _DriverArts.DriverArtDescription())
 DriverArtsOption_AutoAttacks = SubOption("Auto Attacks", DriverArtsOption, [], _defState = False)
 DriverArtsOption_SingleReaction = SubOption("Single Reaction", DriverArtsOption, [])
@@ -102,7 +103,6 @@ DriverSkillTreesOption_EarlyXYBAttack = SubOption("Early XYB Attack", DriverSkil
 BladesOption = Option("Blades", Blade, "Randomizes when blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], hasSpinBox = True, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.BladesDescriptions())
 BladesOption_Dromarch = SubOption("Randomize Dromarch", BladesOption)
 BladesOption_Healer = SubOption("Guarantee Healing Art", BladesOption)
-BladeAuxCoresOption = Option("Blade Aux Cores", Blade, "Randomizes the effects of Aux Cores", [lambda: _AuxCores.RandomizeAuxCoreEnhancements()])
 BladeArtsOption = Option("Blade Arts", Blade, "Randomizes a Blade's combat arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])
 BladeBattleSkillsOption = Option("Blade Battle Skills", Blade, "Randomizes a Blade's battle (yellow) skill tree", [lambda: _YellowSkills.RandomizeBattleSkills()], hasSpinBox = True)
 BladeBattleSkillsOption_Duplicates = SubOption("Allow Duplicates", BladeBattleSkillsOption)
@@ -123,7 +123,7 @@ BladeWeaponChipsOption_AutoAtk = SubOption("Auto Attacks", BladeWeaponChipsOptio
 BladeWeaponChipsOption_CritRate = SubOption("Crit Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["CriRate"],Helper.InclRange(0,100), BladeWeaponCritDistribution)],_defState= True)
 BladeWeaponChipsOption_GuardRate = SubOption("Guard Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["GuardRate"],Helper.InclRange(0,100), BladeWeaponGuardDistribution)],_defState= True)
 BladeWeaponChipsOption_Enhancement = SubOption("Enhancements", BladeWeaponChipsOption, [lambda: _WeaponChips.RandomizeWeaponEnhancements()], _defState= True)
-BladeCombosOption = Option("Blade Combos", Blade, "", [lambda: _EleCombo.BladeComboRandomization()], descData=lambda: _EleCombo.BladeCombosDescription())
+BladeCombosOption = Option("Blade Combos", Blade, "Randomizes blade elemental combos", [lambda: _EleCombo.BladeComboRandomization()], descData=lambda: _EleCombo.BladeCombosDescription())
 BladeCombosOption_ElementRoutes = SubOption("Element Routes", BladeCombosOption)
 BladeCombosOption_Damage = SubOption("Damage", BladeCombosOption)
 BladeCombosOption_DOT = SubOption("DoT", BladeCombosOption)
@@ -165,7 +165,7 @@ EnemyDropOption_CoreCrystals = SubOption("Core Crystals", EnemyDropOption)
 EnemyDropOption_Deeds = SubOption("Shop Deeds", EnemyDropOption)
 EnemyDropOption_CollectionPointMaterials = SubOption("Collection Point Materials", EnemyDropOption)
 EnemyAggroOption = Option("Enemy Aggro", Enemies, "The percentage of all non-boss and non-quest enemies that will aggro the player", [lambda: EnemyRandoLogic.EnemyAggroProportion()], hasSpinBox = True)
-EnemyMovespeedOption = Option("Enemy Movespeed", Enemies, "Randomizes how fast enemies move in the overworld", [lambda: JSONParser.ChangeJSONFile(["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.InclRange(0,100), Helper.InclRange(0,100) + Helper.InclRange(250,255))])
+# EnemyMovespeedOption = Option("Enemy Movespeed", Enemies, "Randomizes how fast enemies move in the overworld", [lambda: JSONParser.ChangeJSONFile(["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.InclRange(0,100), Helper.InclRange(0,100) + Helper.InclRange(250,255))])
 
 # Misc
 MusicOption = Option("Music", Misce, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
@@ -188,21 +188,11 @@ CondenseGoldOption = Option("Condense Gold Loot", QOL, "Condenses gold in chests
 MutePopupsOption = Option("Mute Popups", QOL, "Stops blade skill and pouch item refill popups", [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[89], ["sheet06"], [""])])
 MutePopupsOption_Landmarks = SubOption("Landmarks", MutePopupsOption, [lambda: JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[85], ["sheet04"], [""])])
 EnhancementDisplayOption = Option("Enhancement Display", QOL, "Shows when enhancements activate in battle", [lambda: Enhancements.SearchAndSetDisplayIDs()])
-EasySkillTreesOption = Option("Fast Blade Skill Trees", QOL, "Makes trust the only condition for levelling up a blade's skill tree", [lambda: SkillTrees.BladeSkillTreeShortening()])
-FasterDriverSkillTrees = Option("Fast Driver Skill Trees", QOL, "Decreases SP required for each node")
-FasterDriverSkillTrees_2 = SubOption("2x", FasterDriverSkillTrees, [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], ['row[key] // 2'])], _defState = False)
-FasterDriverSkillTrees_4 = SubOption("4x", FasterDriverSkillTrees, [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], ['row[key] // 4'])], _defState = False)
-FasterDriverSkillTrees_8 = SubOption("8x", FasterDriverSkillTrees, [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], ['row[key] // 8'])], _defState = False)
-FasterDriverSkillTrees_16 = SubOption("16x", FasterDriverSkillTrees, [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], ['row[key] // 16'])], _defState = False)
-FasterDriverSkillTrees_32 = SubOption("32x", FasterDriverSkillTrees, [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], ['row[key] // 32'])], _defState = False)
-FasterLevelsOption = Option("Faster Levels", QOL, "Decreases EXP required for each levelup")
-FasterLevelsOption_2 = SubOption("2x", FasterLevelsOption, [lambda: Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 2'])], _defState = False)
-FasterLevelsOption_4 = SubOption("4x", FasterLevelsOption, [lambda: Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 4'])], _defState = False)
-FasterLevelsOption_8 = SubOption("8x", FasterLevelsOption, [lambda: Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 8'])], _defState = False)
-FasterLevelsOption_16 = SubOption("16x", FasterLevelsOption, [lambda: Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 16'])], _defState = False)
-FasterLevelsOption_32 = SubOption("32x", FasterLevelsOption, [lambda: Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], ['row[key] // 32'])], _defState = False)
+EasySkillTreesOption = Option("Easy Affinity Trees", QOL, "Makes trust the only condition for levelling up a blade's affinity tree", [lambda: SkillTrees.BladeSkillTreeShortening()])
+FasterDriverSkillTrees = Option("Fast Driver Skill Trees", QOL, "Decreases SP required for each node", [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], [f'row[key] // {FasterDriverSkillTrees.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, _spinIncr = 1,  _spinDesc = "x Faster")
+FasterLevelsOption = Option("Faster Levels", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2,_spinIncr = 1, _spinDesc = "x Faster")
 ShortcutsOption = Option("Shortcuts", QOL, "Various speedups for the main story quests")
-ShortenTutorialOption = SubOption("Tutorials Skip", ShortcutsOption, [lambda: TutorialShortening.ShortenedTutorial()])
+ShortcutsOption_Tutorials = SubOption("Tutorials Skip", ShortcutsOption, [lambda: TutorialShortening.ShortenedTutorial()])
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
 StartwithIncreasedMovespeedOption = Option("Increased Movespeed", QOL, "Adds a shop deed to the DLC items to increase your movement speed", [lambda: DLCFlagQOL.AddMovespeedDeed()], hasSpinBox = True, _spinMin = 0, _spinMax = 50, _spinIncr = 5, _spinDesc = "% Increase (x10)", _spinWidth = 5, spinDefault = 50)
