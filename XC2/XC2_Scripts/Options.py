@@ -79,7 +79,7 @@ TreasureChestOption_CollectionPointMaterials = SubOption("Collection Point Mater
 WeaponChipShopOption = Option("Weapon Chip Shops", Items, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)], descData=lambda: _WeaponChips.WeaponChipDesc())
 
 # Drivers
-DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], preRandoCommands=[lambda: CharacterRandomization.resetGlobals()])
+DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.DriversDescriptions())
 DriversOption_Nia = SubOption("Guarantee Early Nia", DriversOption, _defState = False)
 DriverAccessoriesOption = Option("Driver Accessories", Driver, "Randomizes effects of Accessories", [lambda: _Accessories.RandomizeAccessoryEnhancements()], descData=lambda: _Accessories.AccessoriesDesc())
 DriverArtsOption = Option("Driver Arts", Driver, "Randomizes effects of all driver arts", [lambda: (_DriverArts.DriverArtRandomizer(), _DriverArts.GenCustomArtDescriptions("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/_internal/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], hasSpinBox = True,spinDefault=40, descData=lambda: _DriverArts.DriverArtDescription())
@@ -99,7 +99,7 @@ DriverSkillTreesOption_EarlyArtsCancel = SubOption("Early Arts Cancel", DriverSk
 DriverSkillTreesOption_EarlyXYBAttack = SubOption("Early XYB Attack", DriverSkillTreesOption)
 
 # Blades
-BladesOption = Option("Blades", Blade, "Randomizes when blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], hasSpinBox = True, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()])
+BladesOption = Option("Blades", Blade, "Randomizes when blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], hasSpinBox = True, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.BladesDescriptions())
 BladesOption_Dromarch = SubOption("Randomize Dromarch", BladesOption)
 BladesOption_Healer = SubOption("Guarantee Healing Art", BladesOption)
 BladeAuxCoresOption = Option("Blade Aux Cores", Blade, "Randomizes the effects of Aux Cores", [lambda: _AuxCores.RandomizeAuxCoreEnhancements()])
@@ -129,7 +129,7 @@ BladeWeaponChipsOption_CritRate = SubOption("Crit Rate", BladeWeaponChipsOption,
 BladeWeaponChipsOption_GuardRate = SubOption("Guard Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["GuardRate"],Helper.InclRange(0,100), BladeWeaponGuardDistribution)],_defState= True)
 BladeWeaponChipsOption_Enhancement = SubOption("Enhancements", BladeWeaponChipsOption, [lambda: _WeaponChips.RandomizeWeaponEnhancements()], _defState= True)
 BladeWeaponClassOption = Option("Blade Weapon Class", Blade, "Randomizes weapon roles (ATK, TNK, HLR)", [lambda: BladeWeaponClassRando.BladeWeaponClassRandomization()], descData=lambda: BladeWeaponClassRando.BladeWeaponClassDesc())
-BladeCombosOption = Option("Blade Combos", Blade, "", [lambda: _EleCombo.BladeComboRandomization()])
+BladeCombosOption = Option("Blade Combos", Blade, "", [lambda: _EleCombo.BladeComboRandomization()], descData=lambda: _EleCombo.BladeCombosDescription())
 BladeCombosOption_ElementRoutes = SubOption("Element Routes", BladeCombosOption)
 BladeCombosOption_Damage = SubOption("Damage", BladeCombosOption)
 BladeCombosOption_DOT = SubOption("DoT", BladeCombosOption)

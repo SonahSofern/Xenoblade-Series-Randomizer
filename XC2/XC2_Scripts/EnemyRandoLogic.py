@@ -1035,7 +1035,15 @@ def Description():
     EnemyRandoDesc.Image("EnemyRandomizationVanillaLevels.png", "XC2", 700)
     EnemyRandoDesc.Text("")
     EnemyRandoDesc.Header(Options.EnemiesOption_BalanceEnemyGroups.name)
-    EnemyRandoDesc.Text("If enabled, prevents boss fights from having an unfair number of particularly difficult enemies.")
+    EnemyRandoDesc.Text("If enabled, prevents boss fights from having an unfair number of particularly difficult enemies. This suboption prevents the following:")
+    EnemyRandoDesc.Image("WayTooManyJins.png", "XC2", 700)
+    EnemyRandoDesc.Text("The exact limitations are as follows:", anchor="w")
+    EnemyRandoDesc.Text("- Malos cannot appear more than once at a time", anchor="w", pady=0)
+    EnemyRandoDesc.Text("- Jin cannot appear more than once at a time", anchor="w", pady=0)
+    EnemyRandoDesc.Text("- Aeshma's Core cannot appear more than twice at a time", anchor="w", pady=0)
+    EnemyRandoDesc.Text("- Elma cannot appear more than once at a time", anchor="w", pady=0)
+    EnemyRandoDesc.Text("Note that it is theoretically possible for these limits to be exceeded in the same fight, as this can happen if two different enemies randomize to the same thing (for example, if Mikhail and Patroka happen to both randomize into Jin). However, this is quite rare.")
+
     return EnemyRandoDesc
 
 #------------------------------------------------------TORNA SPECIFIC------------------------------------------------------#
