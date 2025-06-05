@@ -1,5 +1,5 @@
 import copy, random, Options
-from scripts import JSONParser, Helper
+from scripts import JSONParser, Helper, PopupDescriptions
 
 # TODO (blades):
 #  - Replace the images in the Pyra/Mythra selection to the blades which replaced them
@@ -898,3 +898,51 @@ def FixCharacterMenuIcon(character_id, icon_id, full_image_id, suffix):
     # Fix the cropping of the image of this character's replacement.
     for field in ['offs_x', 'offs_y', 'scale', 'offs_x2', 'offs_y2', 'scale2', 'offs_x3', 'offs_y3', 'scale3', 'offs_x4', 'offs_y4', 'scale4', 'offs_x5', 'offs_y5', 'scale5']:
         JSONParser.ChangeJSONLine([f"common/MNU_{suffix_cap}ImageID.json"], [full_image_id], [field], replacement_image_row[field])
+
+
+def BladesDescriptions():
+    BladesDesc = PopupDescriptions.Description()
+    BladesDesc.Header(Options.BladesOption.name)
+    BladesDesc.Image("BladeRandomization.png", "XC2", 700)
+    BladesDesc.Text("This option randomizes when blades join the party throughout the story. This includes a driver's default blade, blades obtained through gacha, and blades obtained through side quests.")
+    BladesDesc.Text("A few notes:")
+    BladesDesc.Text("- Not every driver can use every blade. For example, Nia cannot use Pyra. Because of this, all blades can be freely engaged on any driver. An incompatible blade cannot appear as a driver's default blade.", anchor="w")
+    BladesDesc.Text("- The blades who replace Pyra and Mythra will be able to swap between each other, as well as ascend into Pneuma. ", anchor="w")
+    BladesDesc.Text("- The blade which replaces Nia will be able to swap between blade form and Nia's driver form.", anchor="w")
+    BladesDesc.Text("- Roc is not randomized, as that would break Vandham.", anchor="w")
+    BladesDesc.Text("- Dagas's base form is inaccessible. His true form appears when blades are randomized. Admittedly, I have no idea what happens if you decide to complete his side quest.", anchor="w")
+    BladesDesc.Text("- The NG+ exclusive blades (Akhos, Obrona, Patroka, Perdido, Mikhail, Cressidus, and Sever) are not randomized. This is due to issues caused by their lack of unique weapon chips.", anchor="w")
+    BladesDesc.Text("- A handful of voice lines do not work correctly, such as when using field skills.", anchor="w")
+
+    BladesDesc.Header(Options.BladesOption_Dromarch.name)
+    BladesDesc.Text("This suboption allows Dromarch to be randomized. This is generally recommended, however it introduces a weird glitch you should know about. Randomizing Dromarch may cause a player to teleport to a location specific to the current map, often out of bounds. This teleportation is known as \"Niaporting\" and can sometimes be burdensome but also sometimes be useful.")
+    BladesDesc.Text("In the base game, playing as Nia with Dromarch causes Nia to ride Dromarch's back. In actuality, you are controlling Dromarch, and Nia just happens to be anchored to him. When Dromarch gets replaced, you are instead controlling the replaced blade. However, Nia is NOT anchored to this replacement blade. She is instead floating at the world's (0,0,0) coordinate. This is easiest to see in Argentum, where she is floating in the air at the Central Exchange.")
+    BladesDesc.Image("FloatingNia.png", "XC2", 600)
+    BladesDesc.Text("When changing the party in any form (drivers or blades), the game tries to reload the party at the active driver's location. If the active driver is Nia at the (0,0,0) location, that causes your party to reload at the (0,0,0) location, thus causing you to teleport there.")
+    BladesDesc.Text("In order to avoid this behavior while using this suboption, make sure that  Nia's primary blade is not the blade who replaced Dromarch when controlling Nia and changing your party.")
+    BladesDesc.Text("Controlling a blade directly has some interesting behavior. For example, they cannot interact with NPCs (only drivers can). Some blades do not have climbing animations and are unable to climb ladders (interestingly though, some blades actually can climb ladders). Blades also have some voice clips which are normally inaccessible, such as jumping and taking fall damage.")
+
+    BladesDesc.Header(Options.BladesOption_Healer.name)
+    BladesDesc.Text(f"This suboption only has an effect if {Options.BladesOption_Dromarch.name} is also selected. With this suboption, it ensures that the blade which replaces Dromarch has a Healing Halo equivalent art. This is used to ensure that there is a healer in the party. This includes any blade which is a Bitball or Twin Rings (or a clone of Twin Rings) weapon. This blade is is not always a Healer class, as some blades like Elma have healing arts as Attackers.")
+    BladesDesc.Text("If drivers are also randomized, this suboption ensures that whichever driver replaces Nia gets paired with a blade who has a Healing Halo equivalent art. Nia and Morag have the same healing weapons, listed above. Rex's only healing weapon is the Catalyst Scimitar. If Rex replaces Nia, Nia will be his default blade. Zeke has no Healing Halo arts on any weapon, and so he cannot replace Nia if this suboption is selected.")
+    return BladesDesc
+
+
+def DriversDescriptions():
+    DriversDesc = PopupDescriptions.Description()
+    DriversDesc.Header(Options.DriversOption.name)
+    DriversDesc.Image("DriverRandomization.png", "XC2", 700)
+    DriversDesc.Text("This option randomizes when the drivers join the party throughout the story. Specifically: Rex, Nia, Morag, and Zeke are randomized.")
+    DriversDesc.Text("Since weapons are not compatible between these drivers (for example, Nia cannot use the Aegis Sword) their default blades get swapped as well. So if Morag replaces Rex, that means that Brighid will replace Pyra as well.")
+    DriversDesc.Text("Mythra also gets swapped out when Rex gets randomized. Mythra gets replaced with either Crossette, Corvin, or Wulfric, depending on which driver replaced Rex (Nia, Morag, and Zeke respectively). These blades were selected because they are the 3 blades which are guaranteed the earliest in the game, while also matching the classes (HLR/TNK/ATK) of the driver's default blade. The Pyra/Mythra replacements can swap between each other freely during combat. The core crystal which normally summons this blade is replaced with an Aegis Core Crystal, which summons Mythra. This should be used on Rex.")
+    DriversDesc.Text("Pneuma gets a full replacement if Rex gets randomized. This replacement will be an \"ascended\" version of either Dromarch, Brighid, or Pandoria. This is a more powerful version of this blade which gets Pneuma's ability to perform any blade combo.")
+    # TODO: Custom Pneuma image
+    DriversDesc.Text("A few notes:")
+    DriversDesc.Text(f"- This option is incompatible with {Options.RaceModeOption.name} and {Options.UMHuntOption.name}. If those game modes are selected, drivers will not be randomized.", anchor="w")
+    DriversDesc.Text("- Zeke's Eye of Shining Justice skill does not work properly when Zeke gets randomized. This skill is replaced by Rex's Combo Breaker in this case.", anchor="w")
+    DriversDesc.Text("- A handful of voice lines do not work correctly, such as when unlocking affinity nodes.", anchor="w")
+
+    DriversDesc.Header(Options.DriversOption_Nia.name)
+    DriversDesc.Text("This suboption ensures that Nia is one of the first two drivers that join the party (either replacing Rex or herself). This is recommended when not randomizing blades, as this guarantees a healer.")
+
+    return DriversDesc

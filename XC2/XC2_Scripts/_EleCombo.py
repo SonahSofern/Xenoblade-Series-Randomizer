@@ -1,6 +1,6 @@
 import Options, copy, random
 
-from scripts import JSONParser, Helper
+from scripts import JSONParser, Helper, PopupDescriptions
 
 Name2Elem = dict()
 OriginalID2Name = dict()
@@ -428,3 +428,12 @@ def RandomizeReactions():
             combo['ReactionLv'] = 0
 
     JSONParser.ChangeJSONLineWithCallback(["common/BTL_ElementalCombo.json"], [], randomize, replaceAll=True)
+
+def BladeCombosDescription():
+    ComboDesc = PopupDescriptions.Description()
+    ComboDesc.Header(Options.BladeCombosOption.name)
+    ComboDesc.Image("BladeCombos.png", "XC2", 700)
+    ComboDesc.Text("Blade combo element routes can be completely randomized. Each unique route even has its own unique name! Be sure to try every combination to see what they do.")
+    ComboDesc.Text("Each randomized combo uses a combo from the base game as its base. The announcer will say the name of the base combo. Unless randomized further with suboptions, the combos will work identically to the combo which they are based on. For example, a randomized Glacial Tsunami (Earth --> Ice --> Water) uses Steam Explosion as a base. This combo will do 234 damage, have an AOE, and will inflict level 5 Blowdown.")
+    ComboDesc.Text("In addition to the combo routes, you are able to randomize the damage, reactions (Blowdown and Knockback), DoT, and AOE of blade combos.")
+    return ComboDesc
