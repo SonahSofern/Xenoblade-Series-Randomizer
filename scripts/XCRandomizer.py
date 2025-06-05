@@ -107,6 +107,10 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
 
     Interactables.OptionList.sort(key= lambda x: x.name) # Sorts alphabetically
     for opt in Interactables.OptionList: # Cant reference directly because of circular imports :/
+        
+        if isOneFile and opt.isDevOption: # Dont show dev options when packed for users
+            continue
+        
         opt.DisplayOption(InnerDict[opt.tab], root, defaultFont, GUISettings.defGUIThemeVar.get())
 
     def GenRandomSeed(randoSeedEntryVar):
