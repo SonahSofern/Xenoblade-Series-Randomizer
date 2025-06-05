@@ -2,7 +2,7 @@ from tkinter import ttk
 from scripts import JSONParser,Helper
 from IDs import *
 from tkinter import *
-import _Accessories, _DriverArts, SkillTrees, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeWeaponClassRando
+import _Accessories, _DriverArts, SkillTrees, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeStats
 import TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UMHuntMain, Cosmetics, AccessoryShops, CollectionPoints, PouchItemShops, TreasureChests, ButtonCombos, EnemyDrops, _EleCombo
 import _YellowSkills, _BladeSpecials, Scales, DLCFlagQOL, CharacterRandomization
 import TornaMain
@@ -103,17 +103,12 @@ BladesOption = Option("Blades", Blade, "Randomizes when blades appear in the sto
 BladesOption_Dromarch = SubOption("Randomize Dromarch", BladesOption)
 BladesOption_Healer = SubOption("Guarantee Healing Art", BladesOption)
 BladeAuxCoresOption = Option("Blade Aux Cores", Blade, "Randomizes the effects of Aux Cores", [lambda: _AuxCores.RandomizeAuxCoreEnhancements()])
-BladeAuxCoreSlotsOption = Option("Blade Aux Core Slots", Blade, "Randomizes a Blade's maximum Aux Core Slots", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), IDs.BladeAuxCoreSlotDistribution)])
 BladeArtsOption = Option("Blade Arts", Blade, "Randomizes a Blade's combat arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])
 BladeBattleSkillsOption = Option("Blade Battle Skills", Blade, "Randomizes a Blade's battle (yellow) skill tree", [lambda: _YellowSkills.RandomizeBattleSkills()], hasSpinBox = True)
 BladeBattleSkillsOption_Duplicates = SubOption("Allow Duplicates", BladeBattleSkillsOption)
 BladeFieldSkillsOption = Option("Blade Field Skills", Blade, "Randomizes a Blade's field (green) skill tree", [lambda: _GreenSkills.RandomizeFieldSkills()])
 BladeFieldSkillsOption_QuestSkills = SubOption("Quest Skills", BladeFieldSkillsOption)
-BladeCooldownOption = Option("Blade Cooldowns", Blade, "Randomizes a Blade's swap cooldown", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["CoolTime"], Helper.InclRange(1,1000), Helper.InclRange(1,1000))])
-BladeDefensesOption = Option("Blade Defenses", Blade, "Randomizes a Blade's Physical and Ether Defense", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.InclRange(0,100), BladeDefenseDistribution)])
-BladeElementsOption = Option("Blade Elements", Blade, "Randomizes a Blade's element", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["Atr"], Helper.InclRange(1,8), Helper.InclRange(1,8))])
-BladeModsOption = Option("Blade Stat Mods", Blade, "Randomizes a Blade's Stat Modifiers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.InclRange(1,100), BladeModDistribution)])
-BladeSpecialButtonsOption = Option("Blade Button Combos", Blade, "Randomizes what button a special uses for its button challenge",[lambda: ButtonCombos.BladeSpecialButtonChallenges()])
+BladeSpecialButtonsOption = Option("Blade Button Combos", Funny, "Randomizes what button a special uses for its button challenge",[lambda: ButtonCombos.BladeSpecialButtonChallenges()])
 BladeSpecialButtonsOption_A = SubOption("A", BladeSpecialButtonsOption)
 BladeSpecialButtonsOption_B = SubOption("B", BladeSpecialButtonsOption)
 BladeSpecialButtonsOption_X = SubOption("X", BladeSpecialButtonsOption)
@@ -128,13 +123,20 @@ BladeWeaponChipsOption_AutoAtk = SubOption("Auto Attacks", BladeWeaponChipsOptio
 BladeWeaponChipsOption_CritRate = SubOption("Crit Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["CriRate"],Helper.InclRange(0,100), BladeWeaponCritDistribution)],_defState= True)
 BladeWeaponChipsOption_GuardRate = SubOption("Guard Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["GuardRate"],Helper.InclRange(0,100), BladeWeaponGuardDistribution)],_defState= True)
 BladeWeaponChipsOption_Enhancement = SubOption("Enhancements", BladeWeaponChipsOption, [lambda: _WeaponChips.RandomizeWeaponEnhancements()], _defState= True)
-BladeWeaponClassOption = Option("Blade Weapon Class", Blade, "Randomizes weapon roles (ATK, TNK, HLR)", [lambda: BladeWeaponClassRando.BladeWeaponClassRandomization()], descData=lambda: BladeWeaponClassRando.BladeWeaponClassDesc())
 BladeCombosOption = Option("Blade Combos", Blade, "", [lambda: _EleCombo.BladeComboRandomization()], descData=lambda: _EleCombo.BladeCombosDescription())
 BladeCombosOption_ElementRoutes = SubOption("Element Routes", BladeCombosOption)
 BladeCombosOption_Damage = SubOption("Damage", BladeCombosOption)
 BladeCombosOption_DOT = SubOption("DoT", BladeCombosOption)
 BladeCombosOption_Reactions = SubOption("Reactions", BladeCombosOption)
 BladeCombosOption_AOE = SubOption("AOE", BladeCombosOption)
+
+BladeStatsOption = Option("Blade Stats", Blade, "Randomizes various stats of blades")
+BladeAuxCoreSlotsOption = SubOption("Aux Core Slots", BladeStatsOption, [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), IDs.BladeAuxCoreSlotDistribution)])
+BladeCooldownOption = SubOption("Cooldowns", BladeStatsOption, [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["CoolTime"], Helper.InclRange(1,1000), Helper.InclRange(1,1000))])
+BladeElementsOption = SubOption("Elements", BladeStatsOption, [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["Atr"], Helper.InclRange(1,8), Helper.InclRange(1,8))])
+BladeDefensesOption = SubOption("Defenses", BladeStatsOption, [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.InclRange(0,100), BladeDefenseDistribution)])
+BladeModsOption = SubOption("Stat Mods", BladeStatsOption, [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.InclRange(1,100), BladeModDistribution)])
+BladeWeaponClassOption = SubOption("Weapon Class", BladeStatsOption, [lambda: BladeStats.BladeWeaponClassRandomization()])
 
 # Enemies
 EnemiesOption = Option("Enemies", Enemies, "Randomizes what enemies appear in the world", [lambda: EnemyRandoLogic.EnemyLogic()], descData= lambda: EnemyRandoLogic.Description())
@@ -153,7 +155,7 @@ EnemyArtEffectsOption_AOE = SubOption("AOE", EnemyArtEffectsOption)
 EnemyArtEffectsOption_Buffs = SubOption("Buffs", EnemyArtEffectsOption)
 EnemyArtEffectsOption_Debuffs = SubOption("Debuffs", EnemyArtEffectsOption)
 EnemyArtEffectsOption_Enhancements = SubOption("Enhancements", EnemyArtEffectsOption)
-EnemyDropOption = Option("Enemy Drops", Enemies, "Randomizes enemy drops/loot", [lambda: EnemyDrops.RandoEnemyDrops()], hasSpinBox = True)
+EnemyDropOption = Option("Enemy Drops", Items, "Randomizes enemy drops/loot", [lambda: EnemyDrops.RandoEnemyDrops()], hasSpinBox = True)
 EnemyDropOption_Accessories = SubOption("Accessories", EnemyDropOption)
 EnemyDropOption_TornaAccessories = SubOption("Torna Accessories", EnemyDropOption)
 EnemyDropOption_WeaponChips = SubOption("Weapon Chips", EnemyDropOption)
