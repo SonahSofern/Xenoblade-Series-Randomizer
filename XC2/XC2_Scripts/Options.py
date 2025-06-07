@@ -216,15 +216,15 @@ UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
 UMHuntOption_RandomLandmarks = SubOption("Random Starting Landmarks", UMHuntOption)
 
 # Torna
-TornaMainOption = Option("Torna Randomization", TornaTab, "Randomizes the Torna DLC, in a logic-based method, requiring progression items to be found to progress in the story. The categories listed below will have progression items if enabled. Each location in each category will have a maximum number of progression items placed equal to the number in the Spinbox next to it.", [lambda: TornaMain.AllTornaRando()])
+TornaMainOption = Option("Torna Randomization", TornaTab, "Randomizes the Torna DLC, in a logic-based method.", [lambda: TornaMain.AllTornaRando()], descData=lambda:TornaMain.TornaMainDescription())
 TornaMainOption_CollectionPoints = SubOption("Collection Points", TornaMainOption, _hasSpinBox = True, _spinMin = 1, _spinMax = 4, _spinIncr = 1, _spinWidth = 1, spinDefault = 1, _spinDesc = "Items")
 TornaMainOption_EnemyDrops = SubOption("Enemy Drops", TornaMainOption, _hasSpinBox = True, _spinMin = 1, _spinMax = 9, _spinIncr = 1, _spinWidth = 1, spinDefault = 1, _spinDesc = "Items")
 TornaMainOption_GroundItems = SubOption("Ground Items", TornaMainOption)
 TornaMainOption_Shops = SubOption("Shops", TornaMainOption, _hasSpinBox = True, _spinMin = 1, _spinMax = 15, _spinIncr = 1, _spinWidth = 2, spinDefault = 1, _spinDesc = "Items")
 TornaMainOption_SideQuests = SubOption("Side Quests", TornaMainOption, _hasSpinBox = True, _spinMin = 1, _spinMax = 4, _spinIncr = 1, _spinWidth = 1, spinDefault = 1, _spinDesc = "Items")
 TornaMainOption_TreasureChests = SubOption("Treasure Chests", TornaMainOption, _hasSpinBox = True, _spinMin = 1, _spinMax = 8, _spinIncr = 1, _spinWidth = 1, spinDefault = 1, _spinDesc = "Items")
-TornaCreateSpoilerLog = Option("Create Torna Spoiler Log", TornaTab, "Outputs a Spoiler Log containing information on where each item is placed, located one level above your input folder, in a separate folder called 'Torna_Spoiler_Logs'. ")
-TornaAddHints = Option("Torna In-Game Hints", TornaTab, "Adds hints to the in the \"Tips\" Submenu in-game. The quantity of each kind of hint is chosen below.")
+TornaCreateSpoilerLog = Option("Create Torna Spoiler Log", TornaTab, "Outputs a Spoiler Log containing information on where each item is placed, located one level above your input folder, in a separate folder called 'Torna_Spoiler_Logs'.")
+TornaAddHints = Option("Torna In-Game Hints", TornaTab, "Adds hints to the in the \"Tips\" Submenu in-game.", descData=lambda:TornaMain.TornaHintDescription())
 TornaAddHints_ItemHints = SubOption("Item Hints", TornaAddHints, _hasSpinBox = True, _spinMin = 1, _spinMax = 12, _spinIncr = 1, _spinWidth = 2, spinDefault = 1, _spinDesc = "Hints")
 TornaAddHints_LocProgHints = SubOption("Location Hints", TornaAddHints, _hasSpinBox = True, _spinMin = 1, _spinMax = 12, _spinIncr = 1, _spinWidth = 2, spinDefault = 1, _spinDesc = "Hints")
 TornaObjectColorMatchesContents = Option("Gilded Required Check Names", TornaTab, "Colors the names of checks with required items gold, and checks without required items red.")
@@ -259,4 +259,3 @@ TornaChooseCommunityReqs_Gate2Req = SubOption("Community Gate 2 Required Level",
 # DebugLog.CreateDebugLog(OptionDictionary, Version, randoSeedEntry.get())
 # GenStandardOption("Enemy Arts", TabEnemies, "Gives enemies new arts", [lambda: _EnemyArts.EnemyArts(OptionDictionary["Enemy Arts"]["spinBoxVal"].get())],optionType=Spinbox)
 # GenStandardOption("Enemy Rage", TabEnemies, "Randomizes the effects of enemy enraged states", ["common/BTL_Aura"])   
-

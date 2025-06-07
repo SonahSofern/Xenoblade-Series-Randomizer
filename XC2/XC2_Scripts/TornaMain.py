@@ -14,8 +14,6 @@ import _WeaponChips
 # look into options for pre-completed quests or EZ-complete quests?
 # required items for a given quest would need to be zeroed out for said quest, besides the pre-req items.
 
-# one of the tutorial shortening tutorials is stopping addam and mythra from being added to your party.
-
 # option to remove specific quests or locations from list
 
 # there's probably a few enemies that are hard to get to aggro.
@@ -74,12 +72,12 @@ def PassAlongSpoilerLogInfo(fileEntryVar2, Version2, permalinkVar2, seedEntryVar
         CreateSpoilerLog()
 
 def AllTornaRando():
+    CheckforIncompatibleSettings()
     DetermineSettings()
     if ProgressionLocTypes[:6] == [0,0,0,0,0,0]:
         raise Exception("There are no progression locations enabled, cannot generate seed!")
     #Recipes = TornaRecipes.CreateTornaRecipeList()
     TornaQuests.SelectRandomPointGoal()
-    #global Areas, Enemies, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters
     ChosenSupporterAmounts = [1,16,32,48,64] # have a few sliders going forwards to let the player change this amount
     global ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, Areas, AreaIDtoNameDict, MaxDropTableID, Enemies, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList, FullItemList, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters, AllSidequestProgressionItems
     ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, AllSidequestProgressionItems = TornaQuests.SelectCommunityQuests(ChosenSupporterAmounts, ProgressionLocTypes[0], ProgressionLocTypes[6], ProgressionLocTypes[7])
@@ -105,7 +103,28 @@ def AllTornaRando():
     if Options.TornaObjectColorMatchesContents.GetState():
         GildedCheckNames()
         ChangeReqItemRarities()
-    pass
+
+def CheckforIncompatibleSettings():
+    AllowableOptions = ['Blade Button Combos', 'Blade Defenses', 'Blade Elements', 'Community Level Story Requirements', 'Condense Gold Loot', 'Create Torna Spoiler Log', 'Enemy Movespeed', 'Enhancement Display', 'Everlasting Pouch Items', 'Field Item Size', 'Gilded Required Check Names', 'Increased Movespeed', 'Music', 'Mute Popups', 'NPC Size', 'Shortcuts', 'Torna In-Game Hints', 'Torna Randomization', 'Treasure Chest Visibility', 'Trust Lines']
+    ConflictingOptions = []
+    ConflictingOptionNames = []
+    ConflictingSubOptions = []
+    exceptionmsg = ""
+    for opt in OptionList:
+        if opt.GetState() and opt.name not in AllowableOptions:
+            ConflictingOptions.append(opt)
+            ConflictingOptionNames.append(opt.name)
+    for opt in OptionList:
+        if opt.name == 'Shortcuts':
+            for sub in opt.subOptions:
+                if sub.GetState() and sub.name != 'Tutorials Skip':
+                    ConflictingSubOptions.append(sub.name)
+    if ConflictingOptions != []:
+        exceptionmsg += f"Torna Randomization did not complete due to the following conflicting options:\n{ConflictingOptionNames}.\n\n"
+    if ConflictingSubOptions != []:
+        exceptionmsg += f"Torna Randomization did not complete due to the following conflicting suboptions:\nShortcuts: {ConflictingSubOptions}."
+    if exceptionmsg != "":
+        raise Exception(exceptionmsg)
 
 def DetermineSettings():
     global ProgressionLocTypes
@@ -354,7 +373,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
             for remloc in cat.fullloclist:
                 for item in range(len(remloc.randomizeditems)):
                     if remloc.randomizeditems[item] in [0, -1]:
-                        if Helper.OddsCheck(25):
+                        if Helper.OddsCheck(15):
                             ChosenValidItem = random.choice(ValidItems)
                             remloc.randomizeditems[item] = ChosenValidItem.id
                             if ChosenValidItem in SelUpgradeList:
@@ -368,7 +387,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
             for remloc in cat.fullloclist:
                 for item in range(8):
                     if remloc.randomizeditems[item] in [0, -1]:
-                        if Helper.OddsCheck(25):
+                        if Helper.OddsCheck(15):
                             ChosenValidItem = random.choice(ValidItems)
                             remloc.randomizeditems[item] = ChosenValidItem.id
                             if ChosenValidItem in SelUpgradeList:
@@ -378,7 +397,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
                         else:
                             remloc.randomizeditems[item] = 0
                 if remloc.randomizeditems[8] in [0, -1]:
-                    if Helper.OddsCheck(50):
+                    if Helper.OddsCheck(35):
                         try:
                             ChosenValidItem = random.choice(SelUpgradeList)
                             remloc.randomizeditems[8] = ChosenValidItem.id
@@ -1152,6 +1171,11 @@ def GildedCheckNames():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+    
+    ChestIDToUnearthFieldSkillID = {2205:1509, 2223:1549, 2243:1550, 2244:1551, 2257:1561, 2259:1552, 2260:1557, 2261:1554, 2263:1553, 2264:1562, 2324:1594, 2501:1497, 2502:1496, 2520:1577, 2523:1578, 2526:1580, 2540:1581, 2542:1583, 2544:1579, 2547:1582}
+    RequiredUnearthIDs = [ChestIDToUnearthFieldSkillID[x] for x in RequiredChestIDs]
+    AllUnearthIDs = [1509, 1549, 1550, 1551, 1561, 1552, 1557, 1554, 1553, 1562, 1594, 1497, 1496, 1577, 1578, 1580, 1581, 1583, 1579, 1582]
+
     FileList = ["./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", "./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_TboxPop.json"]
     for curfile in FileList:
         with open(curfile, 'r+', encoding='utf-8') as file: 
@@ -1170,7 +1194,23 @@ def GildedCheckNames():
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-        Helper.ColumnAdjust(curfile, ["msgVisible", "msgdigVisible"], 255) # makes it easier to see from far away
+        Helper.ColumnAdjust(curfile, ["msgVisible", "msgdigVisible"], 255) # makes it easier to see from far away    
+    with open("./XC2/_internal/JsonOutputs/common_ms/fld_fieldskillplace.json", 'r+', encoding='utf-8') as file: # need to deal with the "Unearth" chest locations
+        data = json.load(file)
+        for row in data["rows"]:
+            match row["$id"]:
+                case 12:
+                    row["name"] = "[System:Color name=tutorial]Unearth[/System:Color]"
+                case 71:
+                    row["name"] = "[System:Color name=red]Unearth[/System:Color]"
+                case _:
+                    pass
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    JSONParser.ChangeJSONLine(["common/FLD_FieldSkillSetting.json"], AllUnearthIDs, ["Name"], 71)
+    if RequiredUnearthIDs != []:
+        JSONParser.ChangeJSONLine(["common/FLD_FieldSkillSetting.json"], RequiredUnearthIDs, ["Name"], 12)
 
     # enemies
     # we're just going to turn the name yellow if it is required, red if not required, it's a bit more work than just setting the name to "Progression" or "Unrequired", but worth it
@@ -1383,6 +1423,16 @@ def AddNewFlagPointers(GateCommReq, GateNumber): # if we reduce the required com
 
 def CreateSpoilerLog():
     IDstoAdd = []
+    try: 
+        if HintedItemText != []:
+            pass
+    except:
+        HintedItemText = []
+    try: 
+        if HintedLocText != []:
+            pass
+    except:
+        HintedLocText = []
     DesiredSpoilerLogDirectory = os.path.dirname(fileEntryVar.get()) + "/Torna_Spoiler_Logs"
     if not os.path.exists(DesiredSpoilerLogDirectory):
         os.makedirs(DesiredSpoilerLogDirectory)
@@ -1516,4 +1566,37 @@ def CreateSpoilerLog():
     debugfilewrite.close()
     IDstoAdd = list(set(IDstoAdd))
     print(IDstoAdd)
-    pass
+    
+def TornaMainDescription():
+    TornaMainDesc = PopupDescriptions.Description()
+    TornaMainDesc.Header("Option Description")
+    TornaMainDesc.Text(r"Randomizes the Torna DLC, in a logic-based method, requiring Progression Items to be found at Checks to progress in the story. For  When enabled, each of the following Categories of Checks can have Progression Items. ")
+    TornaMainDesc.Tag("Definitions")
+    TornaMainDesc.Text(r"Category: A group of Checks. Usually this refers to all Checks of a specific type, like 'Treasure Chests' or 'Quest Rewards'.")
+    TornaMainDesc.Text(r"Check: Each individual spot in-game where items can be found, i.e. a specific Treasure Chest, or a specific Enemy's drops.")
+    TornaMainDesc.Text(r"Progression Item: An in-game item that is required to beat the main story.")
+    TornaMainDesc.Header("Suboptions")
+    TornaMainDesc.Tag("Collection Points")
+    TornaMainDesc.Text(r"If enabled, Progression Items can be found by interacting with Collection Points. Each Collection Point can have a maximum number of Progression Items placed there equal to the number in the Spinbox.")
+    TornaMainDesc.Tag("Enemy Drops")
+    TornaMainDesc.Text(r"If enabled, Progression Items can be found by defeating Enemies. Each Enemy can have a maximum number of Progression Items placed there equal to the number in the Spinbox. Quest Enemies will never have Progression Items due to the possibility of some of them being permanently missable.")
+    TornaMainDesc.Tag("Ground Items")
+    TornaMainDesc.Text(r"If enabled, Progression Items can be found by running into Ground Item spots on the ground. Each Ground Item can only have 1 item inside it.")
+    TornaMainDesc.Image("httpswwwxenoserieswikiorgwikiFileDawning_Slate_Piece_Locationjpg.jpg", "XC2", 700)
+    TornaMainDesc.Tag("Shops")
+    TornaMainDesc.Text(r"If enabled, Progression Items can be found by purchasing items from Shops and Traveling Bards, and by receiving the gift item from the Nameless Wanderpon. Each Shop Check (excluding the Nameless Wanderpon) can have a maximum number of Progression Items placed there equal to the number in the Spinbox. The Nameless Wanderpon only gives 1 item when talked to.")
+    TornaMainDesc.Tag("Side Quests")
+    TornaMainDesc.Text(r"If enabled, Progression Items can be found by completing Side Quests. Each Side Quest can have a maximum number of Progression Items placed there equal to the number in the Spinbox.")
+    TornaMainDesc.Tag("Treasure Chests")
+    TornaMainDesc.Text(r"If enabled, Progression Items can be found by opening Treasure Chests. Each Treasure Chest can have a maximum number of Progression Items placed there equal to the number in the Spinbox.")
+    return TornaMainDesc
+
+def TornaHintDescription():
+    TornaHintDesc = PopupDescriptions.Description()
+    TornaHintDesc.Header("Item Hints")
+    TornaHintDesc.Text("Item Hints are hints that tell the player at which Check a specific Progression Item can be found.")
+    TornaHintDesc.Image("Torna_Item_Hints.png", "XC2", 700)
+    TornaHintDesc.Header("Location Hints")
+    TornaHintDesc.Text("Location Hints are hints that tell the player exactly how many Progression Items can be found in Checks around the Location listed.")
+    TornaHintDesc.Image("Torna_Location_Hints.png", "XC2", 700)
+    return TornaHintDesc

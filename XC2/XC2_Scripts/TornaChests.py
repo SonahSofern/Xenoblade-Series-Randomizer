@@ -5,6 +5,8 @@ from IDs import *
 
 TornaChestIDs = Helper.InclRange(2201, 2351)
 
+ChestIDToUnearthFieldSkillID = {2205:1509, 2223:1549, 2243:1550, 2244:1551, 2257:1561, 2259:1552, 2260:1557, 2261:1554, 2263:1553, 2264:1562, 2324:1594, 2501:1497, 2502:1496, 2520:1577, 2523:1578, 2526:1580, 2540:1581, 2542:1583, 2544:1579, 2547:1582}
+
 class TornaChest:
     def __init__(self, input, addtolist, rewardnumber):
         self.id = input["$id"]
@@ -23,6 +25,10 @@ class TornaChest:
             self.continent = "Torna"
         else:
             self.continent = "Gormott"
+        try:
+            self.fieldskillid = ChestIDToUnearthFieldSkillID[self.id]
+        except:
+            self.fieldskillid = 0
         addtolist.append(self)
 
 def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
