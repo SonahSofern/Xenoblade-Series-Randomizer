@@ -145,6 +145,26 @@ def ShortenedTutorial():
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
+        #with open("./XC2/_internal/JsonOutputs/common/EVT_chgBf01.json", 'r+', encoding='utf-8') as file: # skipping an area reload
+        #    data = json.load(file)
+        #    for row in data["rows"]:
+        #        if row["$id"] == 10910:
+        #            row["id"] = 11004
+        #    file.seek(0)
+        #    file.truncate()
+        #    json.dump(data, file, indent=2, ensure_ascii=False)
+
+        with open("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: # skipping an area reload
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] in [40053, 40054, 40055, 40056]:
+                    row["ScenarioFlagMin"] = row["ScenarioFlagMax"] = 11130
+                #elif row["$id"] == 40001:
+                #    row["ScenarioFlagMin"] = row["ScenarioFlagMax"] = 11004
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
 def RaceModeTutorialShortening(): # we need to call this from the race mode function
     ShortenedTutorial()
     Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common_gmk/FLD_Tutorial.json", ["ScenarioFlagMin", "QuestFlag", "QuestFlagMin", "QuestFlagMax", "SysMultiFlag"], 0)

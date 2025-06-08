@@ -1173,8 +1173,8 @@ def GildedCheckNames():
         json.dump(data, file, indent=2, ensure_ascii=False)
     
     ChestIDToUnearthFieldSkillID = {2205:1509, 2223:1549, 2243:1550, 2244:1551, 2257:1561, 2259:1552, 2260:1557, 2261:1554, 2263:1553, 2264:1562, 2324:1594, 2501:1497, 2502:1496, 2520:1577, 2523:1578, 2526:1580, 2540:1581, 2542:1583, 2544:1579, 2547:1582}
-    RequiredUnearthIDs = [ChestIDToUnearthFieldSkillID[x] for x in RequiredChestIDs]
     AllUnearthIDs = [1509, 1549, 1550, 1551, 1561, 1552, 1557, 1554, 1553, 1562, 1594, 1497, 1496, 1577, 1578, 1580, 1581, 1583, 1579, 1582]
+    RequiredUnearthIDs = [ChestIDToUnearthFieldSkillID[x] for x in RequiredChestIDs if x in AllUnearthIDs]
 
     FileList = ["./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", "./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_TboxPop.json"]
     for curfile in FileList:
@@ -1234,6 +1234,9 @@ def GildedCheckNames():
                 CurDupeEnemy += 1
             if row["$id"] in RequiredEnemies:
                 RequiredEnemyNameList.append(row["Name"])
+                row["Flag"]["mBoss"] = 1
+            else:
+                row["Flag"]["mBoss"] = 0
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1600,3 +1603,21 @@ def TornaHintDescription():
     TornaHintDesc.Text("Location Hints are hints that tell the player exactly how many Progression Items can be found in Checks around the Location listed.")
     TornaHintDesc.Image("Torna_Location_Hints.png", "XC2", 700)
     return TornaHintDesc
+
+def TornaCCMCDescription():
+    TornaCCMCDesc = PopupDescriptions.Description()
+    TornaCCMCDesc.Header("Explanation")
+    TornaCCMCDesc.Text("If this setting is enabled, all Progression Items will be of yellow rarity. The check that each Progression Item is located at will also have yellow names, in some capacity. In the case of Ground Item Checks, the bag they would normally spawn in will not show up. All enemies with Progression Items will also have a special icon above their heads. All Non-Progression Items will be of red rarity and the checks they are located at will have red names, unless there is a Progression Item there as well.")
+    TornaCCMCDesc.Image("object type matches contents.png", "XC2", 700)
+    TornaCCMCDesc.Tag("Progression Enemy Tag")
+    TornaCCMCDesc.Image("special enemy tag.png", "XC2", 700)
+    return TornaCCMCDesc
+
+def TornaStoryReqChangeDescription():
+    TornaStoryDesc = PopupDescriptions.Description()
+    TornaStoryDesc.Header("Suboptions")
+    TornaStoryDesc.Tag("Community Gate 1 Required Level")
+    TornaStoryDesc.Text("When enabled, changes the community level requirement that prevents you from talking with the Tornan King for the first time.")
+    TornaStoryDesc.Tag("Community Gate 2 Required Level")
+    TornaStoryDesc.Text("When enabled, changes the community level requirement that prevents you from heading out to the Titan's Interior.")
+    return TornaStoryDesc
