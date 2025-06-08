@@ -1,6 +1,7 @@
 TextBDAT/
 BDAT_JSON/
 JsonOutputs/
+JsonOutputs2/
 dist/
 build/
 RandomizedBDATOutput/

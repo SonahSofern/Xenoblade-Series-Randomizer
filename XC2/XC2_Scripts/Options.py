@@ -8,6 +8,7 @@ import _YellowSkills, _BladeSpecials, Scales, DLCFlagQOL, CharacterRandomization
 import TornaMain
 import ObjectNameCleanup
 from scripts.Interactables import Option, SubOption
+from scripts.XCRandomizer import isOneFile
 # Prio
 First = 0
 Last = 100
@@ -36,6 +37,12 @@ Tabs = {
     GameModeTab: "♘ Game Modes",
     TornaTab: "🔷 Torna"
 }
+
+if not isOneFile:
+    devTab = 11
+    Tabs[devTab] = "Dev Options"
+    CompareBDATOption = Option("Compare BDAT", devTab, "Compare your bdats to the previous ones")
+
 
 # General
 AccessoriesOption = Option("Accessories", Items, "Randomizes effects of Accessories", [lambda: _Accessories.RandomizeAccessoryEnhancements()], descData=lambda: _Accessories.AccessoriesDesc())

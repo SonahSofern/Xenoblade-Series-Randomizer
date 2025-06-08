@@ -1,4 +1,4 @@
-import json, random, Options
+import json, random, Options, IDs
 def RandomizeFieldSkills(): # Make logic to have all skills in the game
     # Drivers
     with open("./XC2/_internal/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:
@@ -11,15 +11,13 @@ def RandomizeFieldSkills(): # Make logic to have all skills in the game
         # Torna
         TornaSkillPool = [72, 58, 66, 68, 59, 65, 67, 60, 73, 70, 63, 69, 64, 71, 62, 61]
         TornaBladeIDs = [1124,1125,1126,1127,1128,1129,1130,1131,1132]
-
-        InvalidBladeIDs = [1012, 1013, 1082, 1083, 1084, 1085, 1086, 1087, 1088, 1089, 1090, 1091, 1092, 1093, 1094, 1095, 1096, 1097, 1098, 1099, 1100, 1101, 1113, 1114, 1115, 1116, 1117, 1118, 1119, 1120, 1121, 1122, 1123, 1074, 1003, 1103, 1112, 1081, 1102, 1078, 1079, 1076, 1080, 1075, 1042, 1012, 1018, 1033, 1016, 1036, 1072, 1067, 1068, 1065, 1071, 1070, 1066, 1069, 1060, 1061, 1058, 1064, 1063, 1059, 1062, 1053, 1054, 1051, 1057, 1056, 1052, 1055]
         
         ShuffleQuestSkills = Options.BladeFieldSkillsOption_QuestSkills.GetState()
         QuestSkillPool = [74, 73, 31, 35, 46, 33,37,39,26,43,44,57,34,40,51,29,30,45,47,36,28,32,42,50,48,58,41,49]     
 
         # Carveouts to make sure the story is completeable
         KeepVanilla = {
-            1001: ["FSkill1","FSkill2", "FSkill3"], # Pyra needs all her skills
+            1001: ["FSkill1","FSkill2"], # Pyra fire mastery and focus
             1008: ["FSkill2"], # Roc Miasma
             1005: ["FSkill3"] # Poppia superstrength
         }
@@ -33,7 +31,7 @@ def RandomizeFieldSkills(): # Make logic to have all skills in the game
             
             BladeId = blade["$id"]
             
-            if BladeId in InvalidBladeIDs: # Ignore bad blades
+            if BladeId in IDs.InvalidBladeSkillTreeIDs: # Ignore bad blades
                 continue
                
             if BladeId in BaseGameBladeIDs: # Decide which pool Torna or Original Game

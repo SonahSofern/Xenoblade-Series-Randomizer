@@ -7,7 +7,7 @@ import tkinter as tk
 from scripts.GUISettings import *
 from PIL import Image, ImageTk
 
-
+isOneFile = True
 seedEntryVar = StringVar()
 permalinkVar = StringVar()
 fileEntryVar = StringVar()
@@ -19,11 +19,10 @@ class Tab():
         self.canvas = canvas
         self.inner = inner
 
-def isPacked():
-    if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
-        return True
-    else:
-        return False
+if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
+    isOneFile = True
+else:
+    isOneFile = False
 
 lastWidth = -1
 lastHeight = -1
@@ -49,7 +48,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     from tkinter.font import Font
     import tkinter as tk
     windowPadding = 50
-    isOneFile = isPacked()
+    global isOneFile
     SavedOptionsFileName = f"LastSave.txt"
     JsonOutput = f"./{Game}/_internal/JsonOutputs"
     SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt", f"{Game}/GUI")

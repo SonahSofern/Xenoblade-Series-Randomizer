@@ -2,7 +2,7 @@ from tkinter import *
 from scripts import UI_Colors
 from tkinter import font, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys, datetime
-
+import json
 # I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
 from scripts import SavedOptions, PopupDescriptions
 
@@ -366,7 +366,7 @@ def ResizeWindow(top, innerFrame, padx = 37):
     top.geometry(f"{w}x{h}")
  
     
-def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0):
+def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, ):
     def ThreadedRandomize():
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
@@ -412,7 +412,7 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
                 # print(f"{outputDirVar.get().strip()}/{file}.bdat")
                 # print(f"{outputDirVar.get().strip()}/{textFolderName}/{file}.bdat")
                 shutil.move(f"{outputDirVar.get().strip()}/{file}.bdat", f"{outputDirVar.get().strip()}/{textFolderName}/{file}.bdat")
-
+            AddTitleScreenTexture(outputDirVar)
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
             pb['value'] = 100
@@ -433,6 +433,11 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
 
     threading.Thread(target=ThreadedRandomize).start()
 
+def AddTitleScreenTexture(output):
+    pass
+    # \menu\image\mnu001_titlelogo_us.wilay
+
+
 def SumTotalCommands(OptionList):
     TotalCommands = 1
     for opt in OptionList:
@@ -450,6 +455,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
     errorMsgObj.Tag(f"Seed: {seed}", pady=5, anchor="center") # Seed
     # errorMsgObj.Tag(f"Settings: {permalink}", pady=5, anchor="center") # Permalink
     errorMsgObj.Tag(f"Time: {datetime.datetime.now()}", pady=5, anchor="center") # Time
+    
     def ErrorLog():
         return errorMsgObj
 
@@ -493,6 +499,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
                 errorMsgObj.Text(errorMsg)
                 randoProgressDisplay.config(text=f"{opt.name}: {traceback.format_exc()}")
         pb['value'] += (100/TotalCommands)
+    # CompareBDATs("./XC2/_internal/JsonOutputs", "./XC2/_internal/JsonOutputs2")
 
     return lambda: PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(),root,defFontVar)
 
@@ -501,6 +508,7 @@ windowWidth = "1550"
 windowHeight = "900"
 OptionColorLight = UI_Colors.White
 OptionColorDark = UI_Colors.Gray
+
 
 def RandomizeButtonDice(button:ttk.Button):
     selection = [ "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
