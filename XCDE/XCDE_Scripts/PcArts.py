@@ -85,15 +85,16 @@ def RandomizePcArts():
             if editableList == []: # Renew the list if empty
                 editableList = CharacterList.copy()
                 
-            char = random.choice(editableList)
+            if not ArtGroupManager(isArtGroups, art, ArtGroups):
+                char = random.choice(editableList)
 
-            char.slots = char.slots-1
-            if char.slots <= 0:
-                editableList.remove(char)
-            
-            AssignArt(art, char)
+                char.slots = char.slots-1
+                if char.slots <= 0:
+                    editableList.remove(char)
+                
+                AssignArt(art, char)
+                
             FixSharlasNewArts(art, SharlaActs, KinoActs)
-            ArtGroupManager(isArtGroups, art, ArtGroups)
         if isPower:
             for art in artData["rows"]:
                 Power(art)
@@ -115,7 +116,9 @@ def ArtGroupManager(isArtGroups, art, ArtGroups):
         for artGroup in ArtGroups: # Ensures theres exists one set of grouped arts staying grouped
             if art["name"] in artGroup.group:
                 AssignArt(art, artGroup.chosenChar)
-                break
+                return True
+    else:
+        return False
 
 def FixSharlasNewArts(art, SharlaActs, KinoActs): # Fixes the talent gauge working with her new arts
     if art["pc"] in [SharlaActs.pcID, KinoActs.pcID]: # Ensures former healer's new arts still increment the cooldown talent art
@@ -127,7 +130,7 @@ def BalanceArtUnlockLevels(artData, CharacterList):
     for char in CharacterList: # Loop through the characters
         unlockLv = char.startLv - 3 # Starting level to unlock arts
         stepLv = [2,3,4,5,6] # How many levels for the next unlock 
-        # print(char.pcID)
+        print(char.pcID)
         count = 0
         for art in artData["rows"]:
             if art["$id"] in ShulkMonadoArts + TalentArts + DunbanMonadoArts + PonspectorDLCArts + DLCArts + GuestArts:
@@ -135,11 +138,11 @@ def BalanceArtUnlockLevels(artData, CharacterList):
             if art["pc"] == char.pcID: # Find arts for a character
                 count = count + 1
                 getlv = min(max(unlockLv,0),80) # Max to frontload the arts a little bit so you get them early
-                # print(f"ID: {art["$id"]} Lv: {getlv}")
+                print(f"ID: {art["$id"]} Lv: {getlv}")
                 art["get_lv"] = getlv
                 art["get_type"] = 1
                 unlockLv += random.choice(stepLv)
-        # print(f"Total: {count}\n")
+        print(f"Total: {count}\n")
 
 def Mult(art, keys = [], mults = [60,180], rollOnce = False, maxVal = 255):
         mult = random.choice(mults)/100
