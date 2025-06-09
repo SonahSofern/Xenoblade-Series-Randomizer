@@ -39,11 +39,11 @@ def RandomizePcArts():
     ShulkActs = ActMatch(1, _SingleAttack=[0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[1,3,2,6,10,13,14])
     ReynActs = ActMatch(2, _SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,5,7,8,9,10,14], artSlots=17)
     FioraActs = ActMatch(3,  _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0],startLv=-3, artSlots = 4)
-    DunbanActs = ActMatch(4,  _SingleAttack=[0,1,3,5,9,14],_AOEAttack=[12,13,14],_Buff=[2,4,6,7,8,10,11,15], startLv=20)
+    DunbanActs = ActMatch(4,  _SingleAttack=[0,1,3,5,9,14],_AOEAttack=[12,13,14],_Buff=[2,4,6,7,8,10,11,15])
     SharlaActs = ActMatch(5,  _SingleAttack=[0,1,7,11,14],_AOEAttack=[6,8,15],_Buff=[0,2,3,4,5,6,9,10,12,13], startLv=10)
-    RikiActs = ActMatch(6,  _SingleAttack=[1,2,6,11,12,14,15],_AOEAttack=[0,4,6,7,9,10,13,15],_Buff=[0,3,5,8,10,13], startLv=22)
-    MeliaActs = ActMatch(7,  _SingleAttack=[4,12],_AOEAttack=[5,14,15],_Buff=[0,1,2,3,6,7,8,9,10,11,13], startLv=23)
-    SevenActs = ActMatch(8,  _SingleAttack=[0,2,3,10,11],_AOEAttack=[5,7,8,9,12,15],_Buff=[1,4,6,13,14], startLv=30)
+    RikiActs = ActMatch(6,  _SingleAttack=[1,2,6,11,12,14,15],_AOEAttack=[0,4,6,7,9,10,13,15],_Buff=[0,3,5,8,10,13], startLv=10)
+    MeliaActs = ActMatch(7,  _SingleAttack=[4,12],_AOEAttack=[5,14,15],_Buff=[0,1,2,3,6,7,8,9,10,11,13], startLv=10)
+    SevenActs = ActMatch(8,  _SingleAttack=[0,2,3,10,11],_AOEAttack=[5,7,8,9,12,15],_Buff=[1,4,6,13,14], startLv=20)
     KinoActs = ActMatch(14,[0],[0],[0], artSlots=0)
     NeneActs = ActMatch(15,[0],[0],[0], artSlots=0)
     GaleSlashGroup = ArtGroup([107,91,89,95])
@@ -87,6 +87,7 @@ def RandomizePcArts():
                 if editableList == []: # Renew the list if empty
                     editableList = CharacterList.copy()
                     
+            if not ArtGroupManager(isArtGroups, art, ArtGroups):
                 char = random.choice(editableList)
 
                 char.slots = char.slots-1
@@ -95,9 +96,11 @@ def RandomizePcArts():
                 
                 AssignArt(art, char)
                 FixSharlasNewArts(art, SharlaActs, KinoActs)
-                ArtGroupManager(isArtGroups, art, ArtGroups)
+
             BalanceArtUnlockLevels(artData, CharacterList)
             MatchArtBooks(artData)
+            FixSharlasNewArts(art, SharlaActs, KinoActs)
+            
         if isPower:
             for art in artData["rows"]:
                 Power(art)
@@ -117,7 +120,9 @@ def ArtGroupManager(isArtGroups, art, ArtGroups):
         for artGroup in ArtGroups: # Ensures theres exists one set of grouped arts staying grouped
             if art["name"] in artGroup.group:
                 AssignArt(art, artGroup.chosenChar)
-                break
+                return True
+    else:
+        return False
 
 def FixSharlasNewArts(art, SharlaActs, KinoActs): # Fixes the talent gauge working with her new arts
     if art["pc"] in [SharlaActs.pcID, KinoActs.pcID]: # Ensures former healer's new arts still increment the cooldown talent art
@@ -129,7 +134,7 @@ def BalanceArtUnlockLevels(artData, CharacterList):
     for char in CharacterList: # Loop through the characters
         unlockLv = char.startLv - 3 # Starting level to unlock arts
         stepLv = [2,3,4,5,6] # How many levels for the next unlock 
-        # print(char.pcID)
+        print(char.pcID)
         count = 0
         for art in artData["rows"]:
             if art["$id"] in ShulkMonadoArts + TalentArts + DunbanMonadoArts + PonspectorDLCArts + DLCArts + GuestArts:
@@ -137,13 +142,13 @@ def BalanceArtUnlockLevels(artData, CharacterList):
             if art["pc"] == char.pcID: # Find arts for a character
                 count = count + 1
                 getlv = min(max(unlockLv,0),80) # Max to frontload the arts a little bit so you get them early
-                # print(f"ID: {art["$id"]} Lv: {getlv}")
+                print(f"ID: {art["$id"]} Lv: {getlv}")
                 art["get_lv"] = getlv
                 art["get_type"] = 1
                 unlockLv += random.choice(stepLv)
-        # print(f"Total: {count}\n")
+        print(f"Total: {count}\n")
 
-def Mult(art, keys = [], mults = [20,220], rollOnce = False, maxVal = 255):
+def Mult(art, keys = [], mults = [60,180], rollOnce = False, maxVal = 255):
         mult = random.choice(mults)/100
         for key in keys:
             # print(key)
@@ -163,7 +168,7 @@ def Power(art):
     
     Mult(art,["rate1", "rate2"], [70,180], True, 4095)
     
-    Mult(art,["st_time"], maxVal=2047)
+    Mult(art,["st_time"], [70,140], maxVal=2047)
     Mult(art,["grow_st_time"])
     
     Mult(art,["sp_val2"])
@@ -171,7 +176,7 @@ def Power(art):
     Mult(art,["st_val", "st_val2"], [50, 250])
     Mult(art,["grow_st_val"],[50,220])
     
-    Mult(art,["tp"], [20,90], maxVal=127)
+    Mult(art,["tp"], [40,100], maxVal=127)
     
     Mult(art,["recast"], [80,120], True)
     Mult(art,["glow_recast"], [80,120], True, 31)

@@ -157,13 +157,14 @@ def ShopsDesc():
     myDesc.Text(keepTypeDescriptions)
     return myDesc
 
+
 def EnemyDrops():
     col = ItemType(IDs.CollectableIDs, Options.EnemyDropOptions_Collectables)
     mat = ItemType(IDs.MaterialIDs, Options.EnemyDropOptions_Materials)
     arm = ItemType(IDs.ArmorIDs, Options.EnemyDropOptions_Armor)
     wep = ItemType(IDs.WeaponIDs, Options.EnemyDropOptions_Weapons)
     gem = ItemType(IDs.GemIDs, Options.EnemyDropOptions_Gems)
-    cry = ItemType(IDs.CrystalIDs, Options.EnemyDropOptions_Crystals)
+    cry = ItemType(IDs.DropCrystalIDs, Options.EnemyDropOptions_Crystals)
     art = ItemType(IDs.ArtBookIDs, Options.EnemyDropOptions_ArtBooks)
     key = ItemType(IDs.KeyItemIDs, Options.EnemyDropOptions_KeyItems)
     keepType = Options.EnemyDropOption_KeepType
