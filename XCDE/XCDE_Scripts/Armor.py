@@ -1,4 +1,4 @@
-import Options, json, random
+import Options, json, random, copy
 from scripts import JSONParser, Helper, PopupDescriptions
 
 def ArmorRando():
@@ -73,7 +73,7 @@ def WeightClass(arm):
         arm["arm_type"] = random.choice(changeAbleTypes)
 
 
-def FindCosmeticLists(CosmeticTypeName, filename):
+def FindCosmeticLists(CosmeticTypeName, filename, bonusList = []):
     Chars = {
     1: "Shulk",
     2: "Reyn",
@@ -90,10 +90,11 @@ def FindCosmeticLists(CosmeticTypeName, filename):
         for i in range(1,17):
             curList = []
             for eq in eqData["rows"]:
-                if (eq["pcid"] == i):
+                if (eq["pcid"] == i) and (eq["style"] != 0):
                     curList.append(eq["$id"])
             # print(f"{Chars[i]}{CosmeticTypeName} = {list(set(curList))}")
             TotalList.append(list(set(curList)))
+        TotalList.append(list(set(bonusList)))
         return TotalList
         # print(f"Misc{CosmeticTypeName} = {list(set(MiscList))}")
             
@@ -105,15 +106,15 @@ def GearAppearance(isCrazy):
         invalidArmor = [190]
         dontReplace = [1,2,3,4,5] 
         
-        Helms = FindCosmeticLists("Helms", "headlist")
+        Helms = FindCosmeticLists("Helms", "headlist", bonusList=[8,9,10,18, 325, 326, 328])
         Chests = FindCosmeticLists("Chests", "bodylist")
         Gloves = FindCosmeticLists("Gloves", "armlist")
         Waists = FindCosmeticLists("Waists", "waistlist")
         Legs = FindCosmeticLists("Legs", "legglist")
         
         
-        armorList = [Helms, Chests, Gloves, Waists, Legs]
-        originalList = armorList.copy()
+        originalList = [Helms, Chests, Gloves, Waists, Legs]
+        armorList = copy.deepcopy(originalList)
         
         # Loop over characters and Dole out the choices to the armours
             
@@ -128,28 +129,23 @@ def GearAppearance(isCrazy):
                 # If crazy armor we want to randomly choose a list, otherwise choose the list corresponsing with the current character (i)
                 if isCrazy:
                     # Used to seperate nopon and human cosmetics they dont mix well and even crash sometimes
-                    human = [0,1,2,3,4,6,7,8,9,10] # 11,12
+                    human = [0,1,2,3,4,6,7,8,9,10,16] # 11,12
                     nopon = [5,13,14]
                     if i in human:
                         group = human
                     elif i in nopon:
-                        group = nopon # Nopon can have human cosmetics but humans crash with nopon cosmetics
+                        group = nopon
                     else:
                         continue
                     
-                    
-                    j = random.choice(group) # Might want to come back and add weird IDs somehow, ids 
-                    while armorList[parts][j] == []:
+                    j = random.choice(group)
+                    while originalList[parts][j] == []:
                         group.remove(j)
-                        try:
-                            j = random.choice(group)
-                        except:
-                            pass
+                        j = random.choice(group)
                 else:
                     j = i
-                
-                if originalList[parts][j] == []: # If the list is empty obviously cant choose anything
-                    continue
+                    if originalList[parts][j] == []: # If the list is empty obviously cant choose anything
+                        continue
                 
                 # Refresh List
                 if armorList[parts][j] == []:
