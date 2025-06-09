@@ -842,6 +842,8 @@ def BalanceEnemyGroups(DefaultEnemyIDs, RandomizedEnemyIDs):
             break
 
 def EnemyLogic():
+    if Options.UMHuntOption.GetState():
+        raise Exception("UM Hunt already randomizes the enemies. Disable \"Enemies\" to fix this error.")
     EnemyRandoOn = False
     EnemiestoPass = []
     LevelstoPass = []
