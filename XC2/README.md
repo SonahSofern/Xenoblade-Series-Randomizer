@@ -50,10 +50,10 @@ If you have any issues come to the [discord](https://discord.gg/h93yqZHG8z) wher
 5. Drag and drop bf2.arh onto extract_arh.cmd.
 6. It should automatically start extracting. Many empty filename id warnings are normal, wait until it finishes extracting.
 7. It should output a zip folder and inside there should now be a folder named "bdat"; This is the folder that the randomizer program targets as the input folder. The output folder should be\
-FOR YUZU: C:/Users/yourName/AppData/Roaming/yuzu/load/0100E95004039001/Randomizer/romfs/bdat\
-FOR RYUJINX: C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/contents/0100e95004039001/romfs/bdat\
-FOR CONSOLE: This PC/Nintendo Switch/SD Card/atmosphere/contents/0100E95004039001/romfs/bdat (This is on your microsd card)\
-NOTE: The program will create the romfs/bdat folder for you.
+FOR YUZU: C:/Users/yourName/AppData/Roaming/yuzu/load/0100E95004039001/Randomizer\
+FOR RYUJINX: C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/contents/0100e95004039001\
+FOR CONSOLE: This PC/Nintendo Switch/SD Card/atmosphere/contents/0100E95004039001 (This is on your microsd card)\
+NOTE: The program will create the romfs/bdat folder for you if it doesn't exist.
 8. Choose your preferred settings, then use the randomizer program to randomize the contents of the game.
 9. CONSOLE ONLY: Put your microSD card back into your Switch and Launch the game. Pressing L bypasses the active patches, so if you wish to play the vanilla game again, you can do so in this way.
 10. You should be ready to start playing!

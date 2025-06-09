@@ -36,7 +36,7 @@ If you have any issues come to the [discord](https://discord.gg/h93yqZHG8z) wher
 
 ### Console
 1. Use [NXDumpTool](https://github.com/DarkMatterCore/nxdumptool) to perform a full dump of XCDE's RomFS to your microSD card, and put it into your computer.
-2. Inside the dump there should now be a folder named "bdat"; This is the folder that the randomizer program targets as the input folder. The output folder should be: This PC/Nintendo Switch/SD Card/atmosphere/contents/0100FF500E34A000/romfs/bdat (This is on your microsd card)
+2. Inside the dump there should now be a folder named "bdat"; This is the folder that the randomizer program targets as the input folder. The output folder should be: This PC/Nintendo Switch/SD Card/atmosphere/contents/0100FF500E34A000 (This is on your microsd card)
 3. Choose your preferred settings, then use the randomizer program to randomize the contents of the game.
 4. Put your microSD card back into your Switch and Launch the game. Pressing L bypasses the active patches, so if you wish to play the vanilla game again, you can do so in this way.
 5. You should be ready to start playing!
@@ -46,11 +46,11 @@ If you have any issues come to the [discord](https://discord.gg/h93yqZHG8z) wher
 1. Use your emulator's built-in tool to perform a full dump of XCDE's RomFS.
 2. Inside the dump there should now be a folder named "bdat"; This is the folder that the randomizer program targets as the input folder. The output folder should be:  
 >FOR YUZU:\
-C:/Users/yourName/AppData/Roaming/yuzu/load/0100FF500E34A000/Randomizer/romfs/bdat\
+C:/Users/yourName/AppData/Roaming/yuzu/load/0100FF500E34A000/Randomizer\
 The program will create the romfs/bdat folder for you.
 
 >FOR RYUJINX:\
-C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/contents/0100FF500E34A000/romfs/bdat\
+C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/contents/0100FF500E34A000\
 The program will create the romfs/bdat folder for you.
 4. Choose your preferred settings, then use the randomizer program (.exe) to randomize the contents of the game.
 5. You should be ready to start playing!
