@@ -1279,6 +1279,14 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         if sidequest.mainreq < 50 and sidequest.comreq < max(Community1Gate, Community2Gate):
             CommunityGate2Quests.append(sidequest)
 
+    for sq in range(len(TornaSidequests)):
+        if TornaSidequests[sq].sideprereq != []:
+            for prereq in TornaSidequests[sq].sideprereq:
+                TornaSidequests[sq].itemreqs.extend(TornaSidequests[prereq - 1].itemreqs)
+        TornaSidequests[sq].itemreqs = list(set(TornaSidequests[sq].itemreqs)).sort()
+        if TornaSidequests[sq].itemreqs == None:
+            TornaSidequests[sq].itemreqs = []
+
     AllSidequestItemReqs = []
     for sidequest in TornaSidequests:
         AllSidequestItemReqs.append(Helper.MultiLevelListToSingleLevelList(sidequest.itemreqs))

@@ -417,7 +417,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         '$id': '4441colle_ma40a_rock_r_3',
         'Name': 'Torna Collection Point 4441',
         'Location Near': 2318,
-        'Story Pre-Req': [5],
+        'Story Pre-Req': [8],
         'Required Items': [[SwordplayKey[0]] , MythraKey, [FocusKey[0]]],
         'Must Defeat Enemy IDs': [],
         'Rarity': 1,

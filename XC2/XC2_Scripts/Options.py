@@ -227,23 +227,14 @@ TornaCreateSpoilerLog = Option("Create Torna Spoiler Log", TornaTab, "Outputs a 
 TornaAddHints = Option("Torna In-Game Hints", TornaTab, "Adds hints to the in the \"Tips\" Submenu in-game.", descData=lambda:TornaMain.TornaHintDescription())
 TornaAddHints_ItemHints = SubOption("Item Hints", TornaAddHints, _hasSpinBox = True, _spinMin = 1, _spinMax = 12, _spinIncr = 1, _spinWidth = 2, spinDefault = 1, _spinDesc = "Hints")
 TornaAddHints_LocProgHints = SubOption("Location Hints", TornaAddHints, _hasSpinBox = True, _spinMin = 1, _spinMax = 12, _spinIncr = 1, _spinWidth = 2, spinDefault = 1, _spinDesc = "Hints")
-TornaObjectColorMatchesContents = Option("Gilded Required Check Names", TornaTab, " Turns names of Checks with Progression Items gold.", descData=lambda:TornaMain.TornaCCMCDescription())
+TornaObjectColorMatchesContents = Option("Gilded Required Check Names", TornaTab, "Turns names of Checks with Progression Items gold.", descData=lambda:TornaMain.TornaCCMCDescription())
 TornaChooseCommunityReqs = Option("Community Level Story Requirements", TornaTab, "Changes the Community Level requirement for the story events.", descData=lambda:TornaMain.TornaStoryReqChangeDescription())
 TornaChooseCommunityReqs_Gate1Req = SubOption("Community Gate 1 Required Level", TornaChooseCommunityReqs, _hasSpinBox = True, _spinMin = 0, _spinMax = 2, _spinIncr = 1, _spinWidth = 1, spinDefault = 0)
 TornaChooseCommunityReqs_Gate2Req = SubOption("Community Gate 2 Required Level", TornaChooseCommunityReqs, _hasSpinBox = True, _spinMin = 0, _spinMax = 4, _spinIncr = 1, _spinWidth = 1, spinDefault = 0)
-#TornaSkipBattleTutorials = Option("Skip Battle Tutorials", TornaTab, "Skips all battle tutorials.", [lambda: (Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial_Ira.json", ["param1"], 0), Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial_Ira.json", ["script_file"], "aoc_challenge_tutorial"), Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial_Ira.json", ["start_id"], 0))])
+TornaRemoveGormottChecks = Option("Remove Certain Gormott Checks", TornaTab, "Progression Items will not be found in Checks near locations in Gormott selected below.")
+for loc in TornaMain.GormottNametoLocID.keys(): # Automatically Generates these
+    SubOption(loc, TornaRemoveGormottChecks, _defState = True)
 
-#TornaOption_CollectionPoints = Option("Torna Collection Points", TornaTab, "Randomizes collection point contents. Each collection point has the number of items equal to the spinbox, weighted equally." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 4, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
-#TornaOption_SideQuests = Option("Torna Side Quests", TornaTab, "Randomizes sidequest rewards. Each sidequest has the number of rewards equal to the spinbox." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 4, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
-#TornaOption_EnemyDrops = Option("Torna Enemy Drops", TornaTab, "Randomizes enemy drops. Each enemy drops a number of items equal to the spinbox upon defeat." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 9, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
-#TornaOption_TreasureChests = Option("Torna Treasure Chests", TornaTab, "Randomizes treasure chest contents. Each chest contains a number of rewards equal to the spinbox." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 8, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 1, spinDefault = 1)
-#TornaOption_Shops = Option("Torna Shops", TornaTab, "Randomizes items in shops and from traveling bards. Each shop contains a number of items equal to the spinbox, and are all purchaseable for gold." ,_hasSpinBox = True, _spinMin = 1, _spinMax = 15, _spinIncr = 1, _spinDesc = "Item(s)", _spinWidth = 2, spinDefault = 1)
-#TornaOption_GroundItems = Option("Torna Ground Items", TornaTab, "Randomizes items in the red bags on the ground. Each red bag contains 1 item.")
-#
-#TornaOption_HintedItems = Option("Torna Item Hints", TornaTab, "Adds hints for randomly chosen required items in the \"Tips\" Submenu.", _hasSpinBox = True, _spinMin = 1, _spinMax = 10, _spinIncr = 1, _spinDesc = "Hint(s)", _spinWidth = 2, spinDefault = 1)
-#TornaOption_LocProgCountHints = Option("Torna Location Progression Item Count Hints", TornaTab, "Adds hints for randomly chosen landmarks or locations in the \"Tips\" Submenu, denoting how many required progression items a landmark or location has.", _hasSpinBox = True, _spinMin = 1, _spinMax = 10, _spinIncr = 1, _spinDesc = "Hint(s)", _spinWidth = 2, spinDefault = 1)
-#TornaOption_ChooseLevel2CommunityReq = Option("Community Gate 1 Required Level", TornaTab, "Determines the community level requirement for the first story gate that requires it (normally requires Community Level 2).", _hasSpinBox = True, _spinMin = 0, _spinMax = 1, _spinIncr = 1, _spinDesc = "Level(s)", _spinWidth = 1, spinDefault = 0)
-#TornaOption_ChooseLevel4CommunityReq = Option("Community Gate 2 Required Level", TornaTab, "Determines the community level requirement for the second story gate that requires it (normally requires Community Level 4).", _hasSpinBox = True, _spinMin = 0, _spinMax = 3, _spinIncr = 1, _spinDesc = "Level(s)", _spinWidth = 1, spinDefault = 0)
 
 # Currently Disabled for Various Reasons
 # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
