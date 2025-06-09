@@ -87,13 +87,10 @@ def FindCosmeticLists(CosmeticTypeName, filename):
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ITM_{filename}.json", 'r+', encoding='utf-8') as equipFile:
         eqData = json.load(equipFile)
         TotalList = []
-        MiscList = []
-        for i in range(1,9):
+        for i in range(1,17):
             curList = []
             for eq in eqData["rows"]:
-                if eq["pcid"] > 9:
-                    MiscList.append(eq["$id"])
-                elif eq["pcid"] == i:
+                if eq["pcid"] == i:
                     curList.append(eq["$id"])
             # print(f"{Chars[i]}{CosmeticTypeName} = {list(set(curList))}")
             TotalList.append(list(set(curList)))
@@ -119,6 +116,7 @@ def GearAppearance(isCrazy):
         # Loop over characters and Dole out the choices to the armours
             
         for eq in eqData["rows"]:
+            parts = (eq["parts"] - 1)
             # Defined here so that each new equipment 
             if eq["$id"] in invalidArmor + dontReplace:
                 continue
@@ -128,7 +126,7 @@ def GearAppearance(isCrazy):
                 # If crazy armor we want to randomly choose a list, otherwise choose the list corresponsing with the current character (i)
                 if isCrazy:
                     # Used to seperate nopon and human cosmetics they dont mix well and even crash sometimes
-                    human = [0,1,2,3,4,6,7,12,15] # 11,12,8, 9,10
+                    human = [0,1,2,3,4,6,7,12] # 11,12,8, 9,10
                     nopon = [5,13,14]
                     if i in human:
                         group = human
@@ -139,18 +137,24 @@ def GearAppearance(isCrazy):
                     
                     
                     j = random.choice(group)
-                    while armorList[eq["parts"]][j] == []:
-                        group.remove(j)
-                        j = random.choice(group)
+                    try:
+                        while armorList[parts][j] == []:
+                            group.remove(j)
+                            j = random.choice(group)
+                    except:
+                        pass
                 else:
                     j = i
+                    
                 
                 # Choose list
-                possibleList = armorList[eq["parts"]][j]
+                possibleList = armorList[parts][j]
                 
-
-                cosmID = random.choice(possibleList)
-                possibleList.remove(cosmID)    
+                try:
+                    cosmID = random.choice(possibleList)
+                except:
+                    pass
+                # possibleList.remove(cosmID)    
                 eq["pc"][i] = cosmID
 
         JSONParser.CloseFile(eqData, equipFile)
