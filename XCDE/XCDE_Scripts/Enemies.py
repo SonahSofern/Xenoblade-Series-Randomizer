@@ -16,6 +16,32 @@ class ForcedArt:
         self.id = id
         self.artSlot = artSlot
         self.artId = artId
+enAreaFiles = areaFileListNumbers.copy()
+enAreaFiles.remove("5001")
+
+# Finds locked enemies
+# enemiesInLock = []
+# for file in enAreaFiles:
+#     try:
+#         with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/FieldLock{file}.json", 'r+', encoding='utf-8') as eneLockFile:
+#             with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/poplist{file}.json", 'r+', encoding='utf-8') as enePopFile:
+#                 enePopData = json.load(enePopFile)
+#                 eneLockData = json.load(eneLockFile)
+#                 locks = []
+#                 for lock in eneLockData["rows"]:
+#                     for i in range(1,4):
+#                         if lock[f"popID{i}"] != 0:  
+#                             locks.append(lock[f"popID{i}"])
+#                 for pop in enePopData["rows"]:
+#                     if pop["$id"] in locks:
+#                         for j in range(1,6):
+#                             if pop[f"ene{j}ID"] != 0:
+#                                 enemiesInLock.append(pop[f"ene{j}ID"])
+#     except:
+#         pass
+# print(enemiesInLock)
+                            
+
 
 def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     MetalFace = ForcedArt(61, 2, 565)
@@ -107,10 +133,12 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                         
                         TelethiaEarly(enemy, chosen)
                         BossSelfDestructs(enemy, chosen, selfDestructArts)
-                        MechonEarly(enemy, chosen)
+                        MechonEarly(enemy, chosen, [1,2,4], [30, 31, 32,33, 63, 64, 65]) # Mechon before enchant
+                        MechonEarly(enemy, chosen, [2], [67, 68, 68, 66, 69, 70, 71, 134, 138, 138, 138, 139, 138, 138, 138, 139, 269, 269, 266, 265, 267, 267, 268, 327, 326, 328, 326, 338, 339, 341, 340, 340, 416, 417, 422, 421, 421, 420, 534, 636, 636, 636, 637, 638, 906, 905, 907, 908, 909, 909, 1039, 1101, 1103, 1103, 1102, 1102]) # Face mechon before monado shackles released
                         SmallAreaFights(enemy)
                         ForcedArts(enemy, ForcedStoryArts)
                         DevicesAttachedToEgilFix(enemy)
+                        
                         # Allows no dupes if possible if we dont have enough choices it reshuffles the original pool
                         filteredEnemyData.remove(chosen)   
                         if filteredEnemyData == []: # repopulate it if the group is empty
@@ -120,6 +148,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                     JSONParser.CloseFile(eneAreaData, eneAreaFile)  
         JSONParser.CloseFile(eneData, eneFile)
         RingRemoval()
+        NoCooldownFix()
     
 def ForcedArts(enemy, ForcedStoryArts):
     # Fixes boss fights that require the enemy to use an art slot to end the fight 
@@ -230,12 +259,9 @@ def FirstFights(enemy):
     else:
         return False
 
-def MechonEarly(enemy, chosen:Enemy):
-    MechonFamily = [1,2,4] # 4 Seems to share a lot of enemies that are aquatic, but mumkhar is family 4 and we dont want him early so it cuts a few enemies off that we mightve wanted otherwise oh well
-    BadForMechon = [30, 31, 32,33, 63, 64, 65] # List of ids for the early game to make sure mechon arent placed here
-    if (enemy["$id"] in BadForMechon) and (chosen.eneListArea["family"] in MechonFamily):
-        enemy["family"] = 3
-
+def MechonEarly(enemy, chosen, BadFamily = [], BadSpots = [], replacementFamily = 3):
+    if (enemy["$id"] in BadSpots) and (chosen.eneListArea["family"] in BadFamily):# 4 Seems to share a lot of enemies that are aquatic, but mumkhar is family 4 and we dont want him early so it cuts a few enemies off that we mightve wanted otherwise oh well
+        enemy["family"] = replacementFamily
 
 def TotalStats(chosen, keys):
     total = 0
@@ -293,6 +319,18 @@ def RingRemoval():
                 lock["popID1"] = 0
                 lock["popID2"] = 0
         JSONParser.CloseFile(lockData, lockFile)
+
+def NoCooldownFix():
+    Cooldowns = [10,15,20,25,30]
+    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ene_arts.json", 'r+', encoding='utf-8') as artFile:
+        artData = json.load(artFile)
+        for art in artData["rows"]:
+            if art["tp"] != 0:
+                continue
+            if art["recast"] == 0:
+                art["recast"] = random.choice(Cooldowns)
+        JSONParser.CloseFile(artData, artFile)
+    
 
 def DevicesAttachedToEgilFix(enemy):
     if enemy["$id"] == 2506: # Remove the limit on these because unique monsters cannot be inflicted with instant death like their art wants to do

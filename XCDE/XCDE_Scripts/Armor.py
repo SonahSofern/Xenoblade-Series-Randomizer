@@ -73,44 +73,52 @@ def WeightClass(arm):
         arm["arm_type"] = random.choice(changeAbleTypes)
 
 
+def FindCosmeticLists(CosmeticTypeName, filename):
+    Chars = {
+    1: "Shulk",
+    2: "Reyn",
+    3: "HomsFiora",
+    4: "Dunban",
+    5: "Sharla",
+    6: "Riki",
+    7: "Melia",
+    8: "MechFiora",
+}
+    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ITM_{filename}.json", 'r+', encoding='utf-8') as equipFile:
+        eqData = json.load(equipFile)
+        TotalList = []
+        MiscList = []
+        for i in range(1,9):
+            curList = []
+            for eq in eqData["rows"]:
+                if eq["pcid"] > 9:
+                    MiscList.append(eq["$id"])
+                elif eq["pcid"] == i:
+                    curList.append(eq["$id"])
+            # print(f"{Chars[i]}{CosmeticTypeName} = {list(set(curList))}")
+            TotalList.append(list(set(curList)))
+        return TotalList
+        # print(f"Misc{CosmeticTypeName} = {list(set(MiscList))}")
+            
+
+
 def GearAppearance(isCrazy):
     with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ITM_equiplist.json", 'r+', encoding='utf-8') as equipFile:
         eqData = json.load(equipFile)
         invalidArmor = [190]
-        # dontReplace = [1,2,3,4,5,6,7,212,8,9,10,4,4,332,336,328]
         dontReplace = [1,2,3,4,5] 
-        fioraDrones = Helper.InclRange(168,189) + [198,205,212,255,256]
-        # Nested lists
-        armorList = [[[] for _ in range(16)] for _ in range(6)]
-
         
-        # Add the possible choices of cosmetic to the pool
-        for eq in eqData["rows"]:
-            # Loop over the characters and create our accessory lists
-            
-            # Dont add invalid ones
-            if eq["$id"] in invalidArmor:
-                continue
-            
-            for i in range(0, 16):      
-                cosmID = eq["pc"][i]
-            
-                # 0 Means you cant equip it so we dont want to spread the armors they just dissapear
-                if cosmID == 0:
-                    continue
-                
-                # For some reason Parlour Jacket is listed as gloves so this fixes that (tested in game and this is good)
-                if eq["$id"] == 57:
-                    eq["parts"] = 2
-                
-                # Ensure that head cosmetic id stays on head pieces to maintain proper cosmetics
-                armorList[eq["parts"]][i].append(cosmID)
+        Helms = FindCosmeticLists("Helms", "headlist")
+        Chests = FindCosmeticLists("Chests", "bodylist")
+        Gloves = FindCosmeticLists("Gloves", "armlist")
+        Waists = FindCosmeticLists("Waists", "waistlist")
+        Legs = FindCosmeticLists("Legs", "legglist")
         
+        armorList = [Helms, Chests, Gloves, Waists, Legs]
         
         # Loop over characters and Dole out the choices to the armours
             
         for eq in eqData["rows"]:
-            
             # Defined here so that each new equipment 
             if eq["$id"] in invalidArmor + dontReplace:
                 continue

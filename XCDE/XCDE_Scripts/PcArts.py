@@ -57,6 +57,7 @@ def RandomizePcArts():
     keepMeliaSummons = Options.PlayerArtsOption_Summons.GetState()
     isArtGroups = Options.PlayerArtsOption_ArtGroups.GetState()
     isPower = Options.PlayerArtsOption_Power.GetState()
+    isArts = Options.PlayerArtsOption_Arts.GetState()
     
     editableList = CharacterList.copy()
     
@@ -73,34 +74,35 @@ def RandomizePcArts():
         
     with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
-        for art in artData["rows"]:
-    
-            if art["$id"] in invalidArtIds: # Ignores invalid/ weird arts
-                continue
-            
-            if keepMeliaSummons and (art["name"] in MeliaSummonsNames): # Dont change the melias summons if we want her to keep em
-                continue
-            
-            # Random choice
-            if editableList == []: # Renew the list if empty
-                editableList = CharacterList.copy()
+        if isArts:
+            for art in artData["rows"]:
+        
+                if art["$id"] in invalidArtIds: # Ignores invalid/ weird arts
+                    continue
                 
-            char = random.choice(editableList)
+                if keepMeliaSummons and (art["name"] in MeliaSummonsNames): # Dont change the melias summons if we want her to keep em
+                    continue
+                
+                # Random choice
+                if editableList == []: # Renew the list if empty
+                    editableList = CharacterList.copy()
+                    
+                char = random.choice(editableList)
 
-            char.slots = char.slots-1
-            if char.slots <= 0:
-                editableList.remove(char)
-            
-            AssignArt(art, char)
-            FixSharlasNewArts(art, SharlaActs, KinoActs)
-            ArtGroupManager(isArtGroups, art, ArtGroups)
+                char.slots = char.slots-1
+                if char.slots <= 0:
+                    editableList.remove(char)
+                
+                AssignArt(art, char)
+                FixSharlasNewArts(art, SharlaActs, KinoActs)
+                ArtGroupManager(isArtGroups, art, ArtGroups)
+            BalanceArtUnlockLevels(artData, CharacterList)
+            MatchArtBooks(artData)
         if isPower:
             for art in artData["rows"]:
                 Power(art)
 
-        BalanceArtUnlockLevels(artData, CharacterList)
-        
-        MatchArtBooks(artData)
+
         scripts.JSONParser.CloseFile(artData, artFile)
 
 
@@ -140,20 +142,6 @@ def BalanceArtUnlockLevels(artData, CharacterList):
                 art["get_type"] = 1
                 unlockLv += random.choice(stepLv)
         # print(f"Total: {count}\n")
-
-# class Mult:
-#     def __init__(self, keys = [], mults = [], rollOnce = False):
-#         self.keys = keys
-#         self.mults = mults
-#         self.rollOnce = rollOnce
-#     def Roll(self, art):
-#         mult = random.choice(self.mults)
-#         for key in self.keys:
-#             art[key] = art[key] * mult
-            
-#             # If we want seperate mult rolls for each
-#             if not self.rollOnce:
-#                 mult = random.choice(self.mults)
 
 def Mult(art, keys = [], mults = [20,220], rollOnce = False, maxVal = 255):
         mult = random.choice(mults)/100
@@ -223,6 +211,8 @@ def AssignArt(art, char:ActMatch):
 
 def ArtsDescriptions():
     ArtDesc = scripts.PopupDescriptions.Description()
+    ArtDesc.Header(Options.PlayerArtsOption_Arts.name)
+    ArtDesc.Text("Randomizes what character gets an art. Generally each character will have their vanilla total number of arts.\nThis doesn't include talent arts")
     ArtDesc.Header(Options.PlayerArtsOption_Power.name)
     ArtDesc.Text("Randomizes the strength of various aspects of arts and their level ups")
     ArtDesc.Image("spiritBreath.png", "XCDE", 600)
