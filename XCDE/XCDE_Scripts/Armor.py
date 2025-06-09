@@ -90,7 +90,7 @@ def FindCosmeticLists(CosmeticTypeName, filename):
         for i in range(1,17):
             curList = []
             for eq in eqData["rows"]:
-                if eq["pcid"] == i:
+                if (eq["pcid"] == i):
                     curList.append(eq["$id"])
             # print(f"{Chars[i]}{CosmeticTypeName} = {list(set(curList))}")
             TotalList.append(list(set(curList)))
@@ -111,7 +111,9 @@ def GearAppearance(isCrazy):
         Waists = FindCosmeticLists("Waists", "waistlist")
         Legs = FindCosmeticLists("Legs", "legglist")
         
+        
         armorList = [Helms, Chests, Gloves, Waists, Legs]
+        originalList = armorList.copy()
         
         # Loop over characters and Dole out the choices to the armours
             
@@ -126,7 +128,7 @@ def GearAppearance(isCrazy):
                 # If crazy armor we want to randomly choose a list, otherwise choose the list corresponsing with the current character (i)
                 if isCrazy:
                     # Used to seperate nopon and human cosmetics they dont mix well and even crash sometimes
-                    human = [0,1,2,3,4,6,7,12] # 11,12,8, 9,10
+                    human = [0,1,2,3,4,6,7,8,9,10] # 11,12
                     nopon = [5,13,14]
                     if i in human:
                         group = human
@@ -136,25 +138,26 @@ def GearAppearance(isCrazy):
                         continue
                     
                     
-                    j = random.choice(group)
-                    try:
-                        while armorList[parts][j] == []:
-                            group.remove(j)
+                    j = random.choice(group) # Might want to come back and add weird IDs somehow, ids 
+                    while armorList[parts][j] == []:
+                        group.remove(j)
+                        try:
                             j = random.choice(group)
-                    except:
-                        pass
+                        except:
+                            pass
                 else:
                     j = i
+                
+                if originalList[parts][j] == []: # If the list is empty obviously cant choose anything
+                    continue
+                
+                # Refresh List
+                if armorList[parts][j] == []:
+                    armorList[parts][j] = originalList[parts][j].copy()
                     
-                
-                # Choose list
                 possibleList = armorList[parts][j]
-                
-                try:
-                    cosmID = random.choice(possibleList)
-                except:
-                    pass
-                # possibleList.remove(cosmID)    
+                cosmID = random.choice(possibleList)
+                possibleList.remove(cosmID)    
                 eq["pc"][i] = cosmID
 
         JSONParser.CloseFile(eqData, equipFile)
