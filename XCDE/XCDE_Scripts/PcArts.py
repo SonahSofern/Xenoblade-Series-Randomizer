@@ -95,7 +95,6 @@ def RandomizePcArts():
                     editableList.remove(char)
                 
                 AssignArt(art, char)
-                FixSharlasNewArts(art, SharlaActs, KinoActs)
 
             BalanceArtUnlockLevels(artData, CharacterList)
             MatchArtBooks(artData)
