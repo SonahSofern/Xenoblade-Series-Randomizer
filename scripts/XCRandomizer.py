@@ -39,10 +39,14 @@ def resize_bg(event, root, bg_photo, bg_image, background):
         background.delete("all")
         background.create_image(0, 0, image=bgPhoto, anchor="nw")
     
+class ImageFiles:
+    def __init__(self, images, location, filename):
+        self.images = images
+        self.location = location
+        self.filename = filename
 
 
-
-def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = []):
+def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = []):
     import  os, sys
     from scripts import SavedOptions, Helper, GUISettings, PermalinkManagement, Seed, Interactables, SettingsPresets
     from tkinter.font import Font
@@ -175,7 +179,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     randoProgressDisplay.pack(pady=0, side=LEFT)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(root, RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding)))
+    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(root, RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles)))
     RandomizeButton.pack(pady=(5,windowPadding),side="left", padx=(windowPadding, 0), anchor=CENTER)
     
     # Options Cog

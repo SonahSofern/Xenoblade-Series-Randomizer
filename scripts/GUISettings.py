@@ -366,8 +366,10 @@ def ResizeWindow(top, innerFrame, padx = 37):
     top.geometry(f"{w}x{h}")
  
     
-def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, ):
+def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
     def ThreadedRandomize():
+        entrySpot = fileEntryVar.get().strip()
+        outSpot = outputDirVar.get().strip()
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
         # Showing Progress Diplay 
@@ -379,9 +381,9 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
         print("Permalink: "+  permalinkVar.get())
         try:
             for file in BDATFiles:
-                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+                subprocess.run([bdat_path, "extract", f"{entrySpot}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
             for file in SubBDATFiles:
-                subprocess.run([bdat_path, "extract", f"{fileEntryVar.get().strip()}/{textFolderName}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+                subprocess.run([bdat_path, "extract", f"{entrySpot}/{textFolderName}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
             # Unpacks BDATs
 
@@ -403,16 +405,16 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
     
         try:
             # Packs BDATs
-            subprocess.run([bdat_path, "pack", JsonOutput, "-o", outputDirVar.get().strip(), "-f", "json"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            subprocess.run([bdat_path, "pack", JsonOutput, "-o", outSpot, "-f", "json"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
             
             # for file in 
             # Outputs common_ms in the correct file structure
-            os.makedirs(f"{outputDirVar.get().strip()}/{textFolderName}", exist_ok=True)
+            os.makedirs(f"{outSpot}/{textFolderName}", exist_ok=True)
             for file in SubBDATFiles:
                 # print(f"{outputDirVar.get().strip()}/{file}.bdat")
                 # print(f"{outputDirVar.get().strip()}/{textFolderName}/{file}.bdat")
-                shutil.move(f"{outputDirVar.get().strip()}/{file}.bdat", f"{outputDirVar.get().strip()}/{textFolderName}/{file}.bdat")
-            AddTitleScreenTexture(outputDirVar)
+                shutil.move(f"{outSpot}/{file}.bdat", f"{outSpot}/{textFolderName}/{file}.bdat")
+            AddFileToOutput(outSpot, extraFiles)
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
             pb['value'] = 100
@@ -433,9 +435,12 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
 
     threading.Thread(target=ThreadedRandomize).start()
 
-def AddTitleScreenTexture(output):
-    pass
-    # \menu\image\mnu001_titlelogo_us.wilay
+def AddFileToOutput(output, files):
+    for file in files:
+        outputSpot = f"{os.path.dirname(output)}/{file.location}"
+        os.makedirs(outputSpot, exist_ok=True)
+        shutil.copy(random.choice(file.images), f"{outputSpot}/{file.filename}")
+
 
 
 def SumTotalCommands(OptionList):
