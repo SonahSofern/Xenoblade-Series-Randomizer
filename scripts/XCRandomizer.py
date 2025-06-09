@@ -39,9 +39,15 @@ def resize_bg(event, root, bg_photo, bg_image, background):
         background.delete("all")
         background.create_image(0, 0, image=bgPhoto, anchor="nw")
     
-class ImageFiles:
-    def __init__(self, images, location, filename):
-        self.images = images
+class FileReplacer:
+    def __init__(self, images, location, filename, game):
+        self.images = []
+        for image in images:
+            if isOneFile:
+                image = os.path.join(sys._MEIPASS, image)
+            else:
+                image = f"{game}/_internal/{image}"
+            self.images.append(image)
         self.location = location
         self.filename = filename
 
@@ -75,7 +81,10 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     root.iconphoto(True, icon)
 
     bg = random.choice(backgroundImages)
-    bg_image = Image.open(f"./{Game}/_internal/Images/{bg}")
+    if isOneFile: 
+        bg_image = Image.open(os.path.join(sys._MEIPASS, 'Images', bg))
+    else:
+        bg_image = Image.open(f"./{Game}/_internal/Images/{bg}")
     bg_photo = ImageTk.PhotoImage(bg_image)
 
     background = tk.Canvas(root)

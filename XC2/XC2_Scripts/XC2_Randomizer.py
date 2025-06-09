@@ -10,7 +10,7 @@ Version = "1.5.0"
 
 backgrounds = ["titlescreen1.png"]
 
-TitlescreenSplash = scripts.XCRandomizer.ImageFiles(["XC2/_internal/Images/Logos/Aegis.wilay"],  "/menu/image", "mnu001_titlelogo_us.wilay")
+TitlescreenSplash = scripts.XCRandomizer.FileReplacer(["Images/Logos/Aegis.wilay"],  "/menu/image", "mnu001_titlelogo_us.wilay", "XC2")
 
 for i in range(1,11):
     backgrounds.append(f"ch{i}.png")

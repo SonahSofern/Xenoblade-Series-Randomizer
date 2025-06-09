@@ -47,10 +47,10 @@ If you have any issues come to the [discord](https://discord.gg/h93yqZHG8z) wher
 2. Inside the dump there should now be a folder named "bdat"; This is the folder that the randomizer program targets as the input folder. The output folder should be:  
 >FOR YUZU:\
 C:/Users/yourName/AppData/Roaming/yuzu/load/0100FF500E34A000/Randomizer/romfs/bdat\
-You will have to make the "Randomizer/romfs/bdat" folder path
+The program will create the romfs/bdat folder for you.
 
 >FOR RYUJINX:\
 C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/contents/0100FF500E34A000/romfs/bdat\
-You will have to make the "romfs/bdat" folder path
+The program will create the romfs/bdat folder for you.
 4. Choose your preferred settings, then use the randomizer program (.exe) to randomize the contents of the game.
 5. You should be ready to start playing!

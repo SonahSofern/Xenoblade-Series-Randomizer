@@ -369,7 +369,7 @@ def ResizeWindow(top, innerFrame, padx = 37):
 def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
     def ThreadedRandomize():
         entrySpot = fileEntryVar.get().strip()
-        outSpot = outputDirVar.get().strip()
+        outSpot = f"{outputDirVar.get().strip()}/romfs/bdat"
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
         # Showing Progress Diplay 
@@ -379,6 +379,7 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
         random.seed(permalinkVar.get())
         print("Seed: " + randoSeedEntry.get())
         print("Permalink: "+  permalinkVar.get())
+        os.makedirs(outSpot, exist_ok=True) # Make the directory for them
         try:
             for file in BDATFiles:
                 subprocess.run([bdat_path, "extract", f"{entrySpot}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
@@ -398,8 +399,6 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
         popup = RunOptions(OptionList, randoProgressDisplay, root, randoSeedEntry.get(), permalinkVar.get(), pb)
         for command in ExtraCommands: # Runs extra commands like show title screen
             command()
-
-            
             
         randoProgressDisplay.config(text="Packing BDATs")
     
