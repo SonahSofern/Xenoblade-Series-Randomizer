@@ -35,7 +35,7 @@ Tabs = {
     Funny: "😄 Funny",
     CosmeticsTab: "👚 Cosmetics",
     GameModeTab: "♘ Game Modes",
-    TornaTab: " Torna"
+    TornaTab: "🞛 Torna"
 }
 
 # if not isOneFile:
