@@ -12,10 +12,12 @@ def ShowTitleScreenText():
 extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.EnemiesScript.OriginalEnemyData.clear()]
 
 backgrounds = ["stars.png", "morning2.png", "stars3.png", "sunset2.png", "day.png"]
+
 # Folder Names 
 areaFiles = []
 for id in IDs.areaFileListNumbers:
     areaFiles.append(f"bdat_ma{id}")
+    
 mainFolderNames = ["bdat_common", "bdat_menu_psv", "bdat_menu_ttrl", "bdat_evt", "bdat_menu_map", "bdat_menu_item"] + areaFiles
 subFolderNames = ["bdat_common_ms", "bdat_menu_psv_ms", "bdat_menu_mes_ms"]
 
