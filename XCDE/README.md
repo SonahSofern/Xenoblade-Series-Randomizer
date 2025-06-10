@@ -1,7 +1,6 @@
 # XCDE_Randomizer
 A randomizer project for Xenoblade Chronicles 1 DE capable of randomizing: Enemies, Armors, Music, Loot and much more!
 
-
 # General Description
 This program randomizes the BDAT files in Xenoblade Chronicles 1 DE. Tested on the main story of the English Version 1.1.2. The project is still a work in progress, please report bugs or suggestions to our discord so we can make this better!
 
@@ -10,7 +9,6 @@ Discord: https://discord.gg/h93yqZHG8z
 
 # Known Issues
 Future connected has not been tested at all, it may or may not work.
-
 
 # Credits
 https://github.com/roccodev/bdat-rs \
@@ -30,7 +28,6 @@ Homebrewed Switch or Emulator\
 microSD card (A 32GB minimum exFAT-formatted microSD card is recommended; FAT32 will split up your files and youll have to take an extra step to combine them.)\
 Modded Nintendo Switch with Atmosphere
 
-
 ## Process:
 If you have any issues come to the [discord](https://discord.gg/h93yqZHG8z) where we can help!
 
@@ -41,16 +38,14 @@ If you have any issues come to the [discord](https://discord.gg/h93yqZHG8z) wher
 4. Put your microSD card back into your Switch and Launch the game. Pressing L bypasses the active patches, so if you wish to play the vanilla game again, you can do so in this way.
 5. You should be ready to start playing!
 
-
 ### Emulator
 1. Use your emulator's built-in tool to perform a full dump of XCDE's RomFS.
 2. Inside the dump there should now be a folder named "bdat"; This is the folder that the randomizer program targets as the input folder. The output folder should be:  
 >FOR YUZU:\
 C:/Users/yourName/AppData/Roaming/yuzu/load/0100FF500E34A000/Randomizer\
-The program will create the romfs/bdat folder for you.
 
 >FOR RYUJINX:\
 C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/contents/0100FF500E34A000\
-The program will create the romfs/bdat folder for you.
+
 4. Choose your preferred settings, then use the randomizer program (.exe) to randomize the contents of the game.
 5. You should be ready to start playing!
