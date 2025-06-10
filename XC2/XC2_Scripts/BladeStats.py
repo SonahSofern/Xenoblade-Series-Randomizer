@@ -29,7 +29,7 @@ def BladeWeaponClassRandomization():
 
 def BladeWeaponClassDesc():
     BladeWeaponDesc = PopupDescriptions.Description()
-    BladeWeaponDesc.Header(Options.BladeWeaponClassOption.name)
+    BladeWeaponDesc.Header(Options.BladeStatsOption_Class.name)
     BladeWeaponDesc.Text("When enabled, this option randomizes the class for a given weapon type, also changing the class for all blades that use that weapon.\n\nThis option will always make 17 ATK, 12 TNK, and 7 HLR weapons, the same as the base game.\n\n")
     BladeWeaponDesc.Text("Poppiswap Role Cores are also randomized when this option is enabled.")
     return BladeWeaponDesc
