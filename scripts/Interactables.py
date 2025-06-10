@@ -130,7 +130,7 @@ class Option():
         return self.checkBoxVal.get()
 
 class SubOption():
-    def __init__(self, _name, _parent:Option, _commands = [], _defState = True, _prio = 0, spinDefault = 1, _spinMin = 0, _spinMax = 100, _spinWidth = 3, _spinIncr = 1, _hasSpinBox = False, _spinPadX = 15, _spinDesc = "", preRandoCommands:list = []):
+    def __init__(self, _name, _parent:Option, _commands = [], _defState = True, _prio = 0, spinDefault = 1, _spinMin = 0, _spinMax = 100, _spinWidth = 3, _spinIncr = 1, hasSpinBox = False, _spinPadX = 15, _spinDesc = "", preRandoCommands:list = []):
         self.name = _name
         self.checkBoxVal = BooleanVar
         self.checkBox:ttk.Checkbutton = None
@@ -139,7 +139,7 @@ class SubOption():
         self.defState = _defState
         self.prio = _prio
         self.parent = _parent
-        self.hasSpinBox = _hasSpinBox
+        self.hasSpinBox = hasSpinBox
         self.spinBoxVal = None
         self.spinBoxObj = None
         self.spinBoxMin = _spinMin
