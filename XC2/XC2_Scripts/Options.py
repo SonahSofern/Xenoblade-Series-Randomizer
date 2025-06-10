@@ -38,10 +38,10 @@ Tabs = {
     # TornaTab: " Torna"
 }
 
-if not isOneFile:
-    devTab = 11
-    Tabs[devTab] = "Dev Options"
-    CompareBDATOption = Option("Compare BDAT", devTab, "Compare your bdats to the previous ones")
+# if not isOneFile:
+#     devTab = 11
+#     Tabs[devTab] = "Dev Options"
+#     CompareBDATOption = Option("Compare BDAT", devTab, "Compare your bdats to the previous ones")
 
 
 # General
