@@ -12,6 +12,8 @@ def ShowTitleScreenText():
 extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.EnemiesScript.OriginalEnemyData.clear()]
 
 backgrounds = ["stars.png", "morning2.png", "stars3.png", "sunset2.png", "day.png"]
+TitlescreenSplash = scripts.XCRandomizer.FileReplacer(["Images/Logos/conflict.wilay", "Images/Logos/monado.wilay", "Images/Logos/red.wilay", "Images/Logos/thedivine.wilay"],  "/menu/image", "mnu001_cont02_en.wilay", "XCDE")
+
 
 # Folder Names 
 areaFiles = []
@@ -22,4 +24,4 @@ mainFolderNames = ["bdat_common", "bdat_menu_psv", "bdat_menu_ttrl", "bdat_evt",
 subFolderNames = ["bdat_common_ms", "bdat_menu_psv_ms", "bdat_menu_mes_ms"]
 
 
-scripts.XCRandomizer.CreateMainWindow(root, "XCDE", Version, "Xenoblade Chronicles DE Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds)
+scripts.XCRandomizer.CreateMainWindow(root, "XCDE", Version, "Xenoblade Chronicles DE Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash])
