@@ -113,13 +113,54 @@ def ShortenedTutorial():
         Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial.json", ["script_file"], "aoc_challenge_tutorial") # Shortens battle tutorials
         Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial.json", ["start_id"], 0)
         Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial.json", ["param1"], 0)
-        
-        with open("./XC2/_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # removing more tutorials
+        Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial_Ira.json", ["param1"], 0)
+        Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial_Ira.json", ["script_file"], "aoc_challenge_tutorial")
+        Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_Tutorial_Ira.json", ["start_id"], 0)
+        with open("./XC2/_internal/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing torna tutorials
             data = json.load(file)
-            removables = ["tut_sys26", "tut_sys22", "tut_sys14", "tut_sys02", "tut_btl23"]
+            removables = ["aoc_tut04", "aoc_tut25", "aoc_tut14", "aoc_tut21", "aoc_tut06", "aoc_tut07", "aoc_tut09", "aoc_tut08"] # "aoc_tut10"
             for row in data["rows"]:
                 if row["scriptName"] in removables:
                     row["scriptName"] = ""
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+        with open("./XC2/_internal/JsonOutputs/common/EVT_listQst01.json", 'r+', encoding='utf-8') as file: # removing torna tutorials
+            data = json.load(file)
+            removables = ["aoc_tut14", "aoc_tut11", "aoc_tut12", "aoc_tut26", "aoc_tut22", "aoc_tut20", "aoc_tut15", "aoc_tut017"]
+            for row in data["rows"]:
+                if row["scriptName"] in removables:
+                    row["scriptName"] = ""
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+        
+        with open("./XC2/_internal/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # removing more tutorials
+            data = json.load(file)
+            removables = ["tut_sys26", "tut_sys22", "tut_sys14", "tut_sys02", "tut_btl23", "aoc_tut27"]
+            for row in data["rows"]:
+                if row["scriptName"] in removables:
+                    row["scriptName"] = ""
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
+        #with open("./XC2/_internal/JsonOutputs/common/EVT_chgBf01.json", 'r+', encoding='utf-8') as file: # skipping an area reload
+        #    data = json.load(file)
+        #    for row in data["rows"]:
+        #        if row["$id"] == 10910:
+        #            row["id"] = 11004
+        #    file.seek(0)
+        #    file.truncate()
+        #    json.dump(data, file, indent=2, ensure_ascii=False)
+
+        with open("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: # skipping an area reload
+            data = json.load(file)
+            for row in data["rows"]:
+                if row["$id"] in [40053, 40054, 40055, 40056]:
+                    row["ScenarioFlagMin"] = row["ScenarioFlagMax"] = 11130
+                #elif row["$id"] == 40001:
+                #    row["ScenarioFlagMin"] = row["ScenarioFlagMax"] = 11004
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)

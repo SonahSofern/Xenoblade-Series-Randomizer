@@ -3,6 +3,8 @@ import json
 import random
 from IDs import *
 
+AreaNametoIDDict = {'Lasaria Woodland': 2315, 'Porton Village': 2301, 'Secluded Boneway': 2302, 'Hangnail Crossing': 2316, 'Haradd Hills': 2317, 'Cropwoods of Yorn': 2318, 'Mernes Falls': 2321, 'Feltley Village': 2303, 'Great Crater': 2319, "Uccar's Trail": 2320, 'Yanchik Harbor': 2304, 'Lascham Cove': 2401, 'Lakeshore Campsite': 2402, 'Hidden Hunting Camp': 2403, 'Singbreeze Bough': 2404, 'Torigoth Arch': 2405, "Titan's Roar": 2406, 'Lascham Peninsula': 2407, 'Ordia Great Plains': 2408, 'Serene Springside': 2409, "Duelist's Bridge": 2410, 'Wayside Respite': 2411, 'Outlook Knoll': 2412, 'Lyanne Meadow': 2413, 'Torigoth Village': 2414, 'Torigoth Cemetery': 2415, 'Coolley Lake': 2416, 'Hoary Weald': 2417, 'Seigle Fell': 2418, 'Depths of Ignorance': 2419, "Grandarbor's Embrace": 2420, 'Nebley Wind Cave': 2421, "Saint's Practice Grounds": 2422, 'Hoary Weald Camp': 2423, 'Nox Promontory': 2424, 'Valafum Hill': 2425, 'Strategy Room': 2426, 'Coolley Lake Camp': 2428, 'Aletta Harbor': 2327, 'Aletta: Militia Garrison': 2305, 'Cavern of the Seal': 2308, 'Ossum Magnum': 2309, 'Millennium Grotto': 2313, 'Wrackham Moor': 2322, 'Tirkin Cliff Colony': 2323, 'Lake Sarleigh': 2324, "Behemoth's Roost": 2325, 'Ancient Lakebed': 2326, 'Lett Bridge': 2306, "Olnard's Trail": 2328, 'Hyber Village': 2307, 'The Great Breaksand': 2310, 'Loftin Nature Preserve': 2311, 'Holy Gate of Altana': 2312, 'Turqos Plateau': 2314, 'The Braying Canyon': 2329, 'Dannagh Desert': 2330, 'Streamsand Corridor': 2331, 'Golden Twin Mesa': 2332, 'Verdant Fairylands': 2333, "Peln, Pilgrim's Springland": 2334, 'Lake Wynn': 2335, "Titan's Ulcer": 2336, 'Outriders Forest Trail': 2337, 'Sacred Staircase': 2338, 'Auresco, Main Gate': 2351, 'Spefan Inn': 2352, 'Aureus Palace': 2353, 'Median Gate': 2354, 'Auresco, Rear Gate': 2355, 'Planus Bridge': 2356, 'Formide Shopping Ward': 2357, 'Fabri Industry Ward': 2358, 'Auresco Residential Ward': 2359, 'Acheron Backstreet': 2360, 'Sachsum Gardens': 2361, 'Aquila Watchtower': 2362, 'Orem Storage Ward': 2363, 'Pischator Bridge': 2364, 'Viridian Gate': 2366, "Torna's Womb": 2365, 'Balaur, Dark Zone #1': 2339, 'Fernyiges, Dark Zone #2': 2340, 'Skygate Entrance': 2341, 'Zirnitra, Dark Zone #3': 2342, 'The Soaring Rostrum': 2343, 'Pedestal of Stargazing': 2344, 'Hall of Worship': 2345, 'Crooked Tower': 2346, 'Pantarhei Tower': 2347, 'Pulsating Passage': 2348, "Hermit's Alleyway": 2349, 'Skygate, Endless Road': 2350, 'Tasteless Altar': 2368}
+
 class TornaArea: # created to allow me to pass these objects easier
     def __init__(self, input, addtolist):
         self.id = input["$id"]
@@ -10,6 +12,10 @@ class TornaArea: # created to allow me to pass these objects easier
         self.prevloc = input['Previous Location Reachable']
         self.mainreq = input['Story Pre-Req'][0]
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Item Reqs'])
+        try:
+            self.prevlocid = AreaNametoIDDict[self.prevloc]
+        except:
+            self.prevlocid = 0
         addtolist.append(self)
 
 def CreateAreaInfo(Sidequests, Mainquests):
@@ -127,7 +133,7 @@ def CreateAreaInfo(Sidequests, Mainquests):
     }
     TitansRoar = {
         '$id': 2406,
-        'Name': 'Titans Roar',
+        'Name': 'Titan\'s Roar',
         'Previous Location Reachable': 'Lascham Cove',
         'Story Pre-Req': [12],
         'Item Reqs': []
@@ -610,7 +616,7 @@ def CreateAreaInfo(Sidequests, Mainquests):
     }
     TheSoaringRostrum = {
         '$id': 2343,
-        'Name': 'TheSoaringRostrum',
+        'Name': 'The Soaring Rostrum',
         'Previous Location Reachable': 'Skygate, Endless Road',
         'Story Pre-Req': [53],
         'Item Reqs': []
@@ -680,15 +686,17 @@ def CreateAreaInfo(Sidequests, Mainquests):
     for area in TornaAreaDict:
         TornaArea(area, TornaAreas)
 
-    for area in TornaAreas:
-        if area.mainreq != []:
-            area.itemreqs.extend(Mainquests[area.mainreq - 1].itemreqs) # adds main story req
-            area.itemreqs = Helper.MultiLevelListToSingleLevelList(area.itemreqs)
-            area.itemreqs = list(set(area.itemreqs))
-            area.itemreqs.sort()
-
     TornaAreaIDtoNameDict = {}
     for area in TornaAreas:
         TornaAreaIDtoNameDict[area.id] = area
-        
+
+    for area in TornaAreas:
+        if area.mainreq != []:
+            area.itemreqs.extend(Mainquests[area.mainreq - 1].itemreqs) # adds main story req
+        if area.prevlocid != 0:
+            area.itemreqs.extend(TornaAreaIDtoNameDict[area.prevlocid].itemreqs)
+        area.itemreqs = Helper.MultiLevelListToSingleLevelList(area.itemreqs)
+        area.itemreqs = list(set(area.itemreqs))
+        area.itemreqs.sort()
+
     return TornaAreas, TornaAreaIDtoNameDict

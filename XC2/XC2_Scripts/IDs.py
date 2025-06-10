@@ -257,17 +257,3 @@ AegaeonKey = [25630]
 
 # Level Up Unlocks (no longer used, kept in for reference)
 LevelUpTokens = Helper.InclRange(25631,25726) # 96 tokens, we assume we get 2 levels from intro fight (stats required to beat fight?), and start at lv 1.
-
-#with open("./XC2/_internal/JsonOutputs/common/ITM_CollectionList.json", 'r+', encoding='utf-8') as file:
-#    data = json.load(file)
-#    for row in data["rows"]:
-#        CurDuplicatedItemNames = {"Original ID": row["$id"], "Shares a Name With": []}
-#        CurRowName = row["Name"]
-#        for row2 in data["rows"]:
-#            if row2["Name"] == CurRowName and row["$id"] != row2["$id"]:
-#                CurDuplicatedItemNames["Shares a Name With"].append(row2["$id"])
-#        if CurDuplicatedItemNames["Shares a Name With"] != []:
-#            print(CurDuplicatedItemNames)
-#    file.seek(0)
-#    file.truncate()
-#    json.dump(data, file, indent=2, ensure_ascii=False)

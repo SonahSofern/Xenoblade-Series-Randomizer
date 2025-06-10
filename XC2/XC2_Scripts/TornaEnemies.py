@@ -31,7 +31,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
 		'Name': 'Raging Volff',
 		'Location Near': 2315,
 		'Level': 1,
-		'Story Pre-Req': [0],
+		'Story Pre-Req': [1],
 		'During Quest': [],
 		'Quest Completion Pre-Req': [],
 		'Summoned By': [],
@@ -43,7 +43,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Jubel Feris',
         'Location Near': 2315,
         'Level': 2,
-        'Story Pre-Req': [0],
+        'Story Pre-Req': [1],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -55,7 +55,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Cursed Buloofo A',
         'Location Near': 2315,
         'Level': 2,
-        'Story Pre-Req': [0],
+        'Story Pre-Req': [1],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -67,7 +67,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Gargoyle A',
         'Location Near': 2318,
         'Level': 8,
-        'Story Pre-Req': [6],
+        'Story Pre-Req': [7],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -79,7 +79,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Addam',
         'Location Near': 2318,
         'Level': 10,
-        'Story Pre-Req': [7],
+        'Story Pre-Req': [8],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -91,23 +91,23 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Mythra',
         'Location Near': 2318,
         'Level': 10,
-        'Story Pre-Req': [7],
+        'Story Pre-Req': [8],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [3], "$id"), # requires all weapon chips with a rank of 3
-        'Enemy Drop Table IDs': []
+        'Required Items': [],
+        'Enemy Drop Table IDs': [],
     }
     Brighid = {
         '$id': 1434,
         'Name': 'Brighid',
         'Location Near': 2415,
         'Level': 14,
-        'Story Pre-Req': [15],
+        'Story Pre-Req': [16],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [4], "$id"),
+        'Required Items': [],
         'Enemy Drop Table IDs': []
     }
     ArdainianScoutA = {
@@ -115,7 +115,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Ardainian Scout A',
         'Location Near': 2415,
         'Level': 10,
-        'Story Pre-Req': [15],
+        'Story Pre-Req': [16],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -127,7 +127,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Ardainian Scout B',
         'Location Near': 2415,
         'Level': 11,
-        'Story Pre-Req': [15],
+        'Story Pre-Req': [16],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -139,11 +139,11 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Gort A',
         'Location Near': 2415,
         'Level': 20,
-        'Story Pre-Req': [18],
+        'Story Pre-Req': [19],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [6], "$id"),
+        'Required Items': [],
         'Enemy Drop Table IDs': []
     }
     AntipatheticArchibald = {
@@ -151,7 +151,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Antipathetic Archibald',
         'Location Near': 2415,
         'Level': 16,
-        'Story Pre-Req': [18],
+        'Story Pre-Req': [19],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -163,7 +163,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Scurvy Curtis',
         'Location Near': 2415,
         'Level': 17,
-        'Story Pre-Req': [18],
+        'Story Pre-Req': [19],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -175,35 +175,35 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Insufferable Ulysses',
         'Location Near': 2415,
         'Level': 18,
-        'Story Pre-Req': [18],
+        'Story Pre-Req': [19],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
         'Required Items': [],
         'Enemy Drop Table IDs': []
     }
-    SlitheJagronA = {
-        '$id': 1441,
-        'Name': 'Slithe Jagron A',
-        'Location Near': 2328,
-        'Level': 29,
-        'Story Pre-Req': [29],
-        'During Quest': [],
-        'Quest Completion Pre-Req': [],
-        'Summoned By': [],
-        'Required Items': [],
-        'Enemy Drop Table IDs': []
-    }
+    #SlitheJagronA = { # this enemy technically can't be killed, the loot table can get smashed out of it I think. regardless, removing it from the pool
+    #    '$id': 1441,
+    #    'Name': 'Slithe Jagron A',
+    #    'Location Near': 2328,
+    #    'Level': 29,
+    #    'Story Pre-Req': [30],
+    #    'During Quest': [],
+    #    'Quest Completion Pre-Req': [],
+    #    'Summoned By': [],
+    #    'Required Items': [],
+    #    'Enemy Drop Table IDs': []
+    #}
     SlitheJagronB = {
         '$id': 1442,
         'Name': 'Slithe Jagron B',
         'Location Near': 2328,
         'Level': 29,
-        'Story Pre-Req': [30],
+        'Story Pre-Req': [31],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [9], "$id"),
+        'Required Items': [],
         'Enemy Drop Table IDs': []
     }
     MalosA = {
@@ -211,11 +211,11 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Malos A',
         'Location Near': 2353,
         'Level': 40,
-        'Story Pre-Req': [43],
+        'Story Pre-Req': [44],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [13], "$id"),
+        'Required Items': [],
         'Enemy Drop Table IDs': []
     }
     GargoyleD = {
@@ -223,7 +223,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Gargoyle D',
         'Location Near': 2353,
         'Level': 38,
-        'Story Pre-Req': [43],
+        'Story Pre-Req': [44],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -235,7 +235,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Artifice Colossus',
         'Location Near': 2343,
         'Level': 48,
-        'Story Pre-Req': [54],
+        'Story Pre-Req': [55],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -247,7 +247,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Malos B',
         'Location Near': 2343,
         'Level': 50,
-        'Story Pre-Req': [54],
+        'Story Pre-Req': [55],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -259,7 +259,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Malos C',
         'Location Near': 2343,
         'Level': 50,
-        'Story Pre-Req': [55],
+        'Story Pre-Req': [56],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -271,7 +271,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Gort B',
         'Location Near': 2343,
         'Level': 53,
-        'Story Pre-Req': [56],
+        'Story Pre-Req': [57],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -283,7 +283,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Artifice Siren A',
         'Location Near': 2343,
         'Level': 50,
-        'Story Pre-Req': [54],
+        'Story Pre-Req': [55],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -295,7 +295,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Artifice Siren B',
         'Location Near': 2343,
         'Level': 50,
-        'Story Pre-Req': [54],
+        'Story Pre-Req': [56],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -307,7 +307,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'Name': 'Cursed Buloofo B',
         'Location Near': 2315,
         'Level': 3,
-        'Story Pre-Req': [0],
+        'Story Pre-Req': [1],
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
@@ -1955,7 +1955,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [11], "$id"),
+        'Required Items': [],
         'Enemy Drop Table IDs': [352]
     }
     GargoyleC = {
@@ -2357,7 +2357,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
 
     EnemyDropCounter = 1
 
-    TornaEnemyDict = [RagingVolff, JubelFeris, CursedBuloofoA, GargoyleA, Addam, Mythra, Brighid, ArdainianScoutA, ArdainianScoutB, GortA, AntipatheticArchibald, ScurvyCurtis, InsufferableUlysses, SlitheJagronA, SlitheJagronB, MalosA, GargoyleD, ArtificeColossus, MalosB, MalosC, GortB, ArtificeSirenA, ArtificeSirenB, CursedBuloofoB, VanadiumTirkin, SorgusTirkin, LeractGogol, HewliGogol, MarrithAntol, IncubFlier, PradoCaterpile, AppetBrog, DurallBuloofo, InnocentVolff, LoweBlant, TizzaParisax, IndignantJerry, GraftonFeris, ConspiratorMacNeth, WanderingUrchon, WanderingRopl, WanderingLaia, TimidVolff, PickerBuloofo, ElegiacMercenary, HalcyonMercenary, ChatteringSkeeter, TacitusUrchon, GloomyAspar, WhistlingBathein, PreoccupiedGogol, TenaxEkidno, CalculatingGogol, ElectGogol, CloudArachno, DispareRopl, CreefGriffox, EvokeBunnit, ForayBunnit, NoggleBunnit, PinchBunnit, FirmVolff, GeminiVolff, EspinaFeris, LekutFeris, RinkerEks, DominalFlamii, IngleCamill, GrayBuloofo, ImbaLizard, CelsarsTaos, DreadCaterpileSummon, KanooSkwaror, DreadCaterpileNormal, MyrrhesCrustip, ArrahRhogul, BohnQuadwing, HighbohnQuadwing, LapisVang, ErsSkeeter, AstorFlier, CascadeKrabble, KastKrabble, ReedPiranhax, MaramalPiranhax, KeatTirkin, GradsTirkin, VabraTirkin, EpistoTirkin, DerrahTirkin, XanePippito, CooraNest, GneoRopl, FersGrebel, HighscreebQuadwing, ScriboQuadwing, HerculeanGibson, HurricaneAnise, MesmerTlaloc, SentinelCarpathia, RavineBunnit, ErraticGoliante, HandwringingBigelow, OveraffectionateMurph, SpillitUrchon, ApostleRhogul, SteekyHox, RalshVolff, SowlFeris, UrbsArmuA, AureaArdun, SladeEks, LibelteFlamii, LefthFlamii, MarnaGaraffa, NemusCamill, AstleEllook, FaneBuloofo, VokkonGriffox, TelahRiik, WhispUpa, BebthUpa, OoneEkidno, ClocheRapchor, NobleAspar, TretsAspar, SurveeAntol, GreetzAntol, CheltaCaterpileLasaria, CaliberScorpox, ZafirahCrustip, YouseParisax, UisParisax, LegginParisax, BurranGyanna, SalshRhogul, TonbreRhogul, AnbuVang, LapseFlier, KlaretWisp, RegusMoramora, TwondusAspid, PhantomMedooz, BiblisPuffot, RobalKrabble, RibageGrady, SarchessGrady, LegarreMarrin, ArloKapiba, RooseBlant, DrothUrchon, TeppusPippito, ArcahPippito, TyphonTirkin, GratTirkin, CardineTirkin, ParoleTirkin, SomeliaNest, PsitEgg, VictorTotem, GargoyleB, GargoyleC, VenttsRopl, KnooberPod, AveroTirkin, SorolleArmu, MagraQuadwing, NightMagraQuadwing, LegiaFlier, SordisRhogul, TalesRapchor, AwarthScorpox, DakhimTirkin, TsorridTirkin, PallovTirkin, GlorrTotem, NereusQuadwing, SableVolff, GobeenGogol, DormineBrog, GrohlPlambus, CheltaCaterpileDannagh, LunarAmaruq, BeatificOphelia, NomadicRusholme, IonosphericMitchell, InterceptorGrace, GourmandGalgan, SleepwalkerMork, HarbingerCavill, SequesteredLudd, EverdarkErg, FlyingFortressDesmor, ScowlingQuincy]
+    TornaEnemyDict = [RagingVolff, JubelFeris, CursedBuloofoA, GargoyleA, Addam, Mythra, Brighid, ArdainianScoutA, ArdainianScoutB, GortA, AntipatheticArchibald, ScurvyCurtis, InsufferableUlysses, SlitheJagronB, MalosA, GargoyleD, ArtificeColossus, MalosB, MalosC, GortB, ArtificeSirenA, ArtificeSirenB, CursedBuloofoB, VanadiumTirkin, SorgusTirkin, LeractGogol, HewliGogol, MarrithAntol, IncubFlier, PradoCaterpile, AppetBrog, DurallBuloofo, InnocentVolff, LoweBlant, TizzaParisax, IndignantJerry, GraftonFeris, ConspiratorMacNeth, WanderingUrchon, WanderingRopl, WanderingLaia, TimidVolff, PickerBuloofo, ElegiacMercenary, HalcyonMercenary, ChatteringSkeeter, TacitusUrchon, GloomyAspar, WhistlingBathein, PreoccupiedGogol, TenaxEkidno, CalculatingGogol, ElectGogol, CloudArachno, DispareRopl, CreefGriffox, EvokeBunnit, ForayBunnit, NoggleBunnit, PinchBunnit, FirmVolff, GeminiVolff, EspinaFeris, LekutFeris, RinkerEks, DominalFlamii, IngleCamill, GrayBuloofo, ImbaLizard, CelsarsTaos, DreadCaterpileSummon, KanooSkwaror, DreadCaterpileNormal, MyrrhesCrustip, ArrahRhogul, BohnQuadwing, HighbohnQuadwing, LapisVang, ErsSkeeter, AstorFlier, CascadeKrabble, KastKrabble, ReedPiranhax, MaramalPiranhax, KeatTirkin, GradsTirkin, VabraTirkin, EpistoTirkin, DerrahTirkin, XanePippito, CooraNest, GneoRopl, FersGrebel, HighscreebQuadwing, ScriboQuadwing, HerculeanGibson, HurricaneAnise, MesmerTlaloc, SentinelCarpathia, RavineBunnit, ErraticGoliante, HandwringingBigelow, OveraffectionateMurph, SpillitUrchon, ApostleRhogul, SteekyHox, RalshVolff, SowlFeris, UrbsArmuA, AureaArdun, SladeEks, LibelteFlamii, LefthFlamii, MarnaGaraffa, NemusCamill, AstleEllook, FaneBuloofo, VokkonGriffox, TelahRiik, WhispUpa, BebthUpa, OoneEkidno, ClocheRapchor, NobleAspar, TretsAspar, SurveeAntol, GreetzAntol, CheltaCaterpileLasaria, CaliberScorpox, ZafirahCrustip, YouseParisax, UisParisax, LegginParisax, BurranGyanna, SalshRhogul, TonbreRhogul, AnbuVang, LapseFlier, KlaretWisp, RegusMoramora, TwondusAspid, PhantomMedooz, BiblisPuffot, RobalKrabble, RibageGrady, SarchessGrady, LegarreMarrin, ArloKapiba, RooseBlant, DrothUrchon, TeppusPippito, ArcahPippito, TyphonTirkin, GratTirkin, CardineTirkin, ParoleTirkin, SomeliaNest, PsitEgg, VictorTotem, GargoyleB, GargoyleC, VenttsRopl, KnooberPod, AveroTirkin, SorolleArmu, MagraQuadwing, NightMagraQuadwing, LegiaFlier, SordisRhogul, TalesRapchor, AwarthScorpox, DakhimTirkin, TsorridTirkin, PallovTirkin, GlorrTotem, NereusQuadwing, SableVolff, GobeenGogol, DormineBrog, GrohlPlambus, CheltaCaterpileDannagh, LunarAmaruq, BeatificOphelia, NomadicRusholme, IonosphericMitchell, InterceptorGrace, GourmandGalgan, SleepwalkerMork, HarbingerCavill, SequesteredLudd, EverdarkErg, FlyingFortressDesmor, ScowlingQuincy] # SlitheJagronA
     
     global TornaEnemies
     TornaEnemies = []
@@ -2372,7 +2372,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
 
     for enemy in TornaEnemies:
         TurnEnemyLevelIntoMainStoryReq(enemy)
-        if enemy.mainreq != []:
+        if enemy.mainreq != 0:
             enemy.itemreqs.extend(Mainquests[enemy.mainreq - 1].itemreqs) # adds the main story requirement to the enemy of choice
         if enemy.duringquest != []:
             enemy.itemreqs.extend(Sidequests[enemy.duringquest[0] - 1].itemreqs) # adds the current sidequest item requirements to the enemy of choice
@@ -2408,21 +2408,18 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
     return TornaEnemies, EnemyDropCounter
 
 def TurnEnemyLevelIntoMainStoryReq(enemy): # decided not to go with the enemy level token system and instead use a level cap based system.
-    match enemy.level:
-        case _ if enemy.level > 14 and enemy.level <= 19:
+    match enemy.level: # these should be 3 levels under the level cap
+        case _ if enemy.level > 8 and enemy.level <= 14:
            enemy.mainreq = max(enemy.mainreq, 8)
-        case _ if enemy.level > 19 and enemy.level <= 25:
+        case _ if enemy.level > 14 and enemy.level <= 21:
             enemy.mainreq = max(enemy.mainreq, 16)
-        case _ if enemy.level > 25 and enemy.level <= 34:
+        case _ if enemy.level > 21 and enemy.level <= 30:
             enemy.mainreq = max(enemy.mainreq, 19)
-        case _ if enemy.level > 34 and enemy.level <= 37:
+        case _ if enemy.level > 30 and enemy.level <= 34:
             enemy.mainreq = max(enemy.mainreq, 30)
-        case _ if enemy.level > 37 and enemy.level <= 45:
+        case _ if enemy.level > 34 and enemy.level <= 42:
             enemy.mainreq = max(enemy.mainreq, 40)
-        case _ if enemy.level > 45:
+        case _ if enemy.level > 42:
             enemy.mainreq = max(enemy.mainreq, 44)
-
-    #if enemy.level < 3: # this was the old way I did it, no longer needed
-    #    enemy.itemreqs.extend(LevelUpTokens[:min(enemy.level + 1, 96)]) # adds the minimum level requirement, and then 2 extra levels over that
 
     
