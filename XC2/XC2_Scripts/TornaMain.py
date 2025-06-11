@@ -24,6 +24,8 @@ import _WeaponChips
 # need to add the quests that are required for their rewards to the spoiler log as well
 # re-evaluate whether or not quest enemies can have progression, I disabled them for now
 
+# if a quest isn't required for progression or item reward, disable the quest.
+
 class ItemInfo:
     def __init__(self, inputid, category, addtolist):
         self.id = inputid
@@ -98,6 +100,8 @@ GormottNametoLocID = {
     "Wayside Respite": 2411
 }
 
+QuestGiverNPCIDtoQuestNumber = {40017: 32, 40023: 33, 40039: 2, 40047: 40, 41010: 5, 41011: 15, 40050: 42, 40080: 21, 40081: 36, 40105: 37, 40111: 54, 40132: 20, 40115: 49, 41022: 13, 40135: 55, 40125: 38, 40297: 48, 40144: 43, 40160: 23, 40163: 35, 40168: 41, 40180: 31, 41029: 39, 40181: 58, 40085: 53, 40186: 46, 40205: 24, 40154: 56, 40210: 28, 40270: 51, 40227: 52, 40221: 57, 40103: 30, 40228: 44, 40217: 29, 40231: 50, 40234: 34, 40196: 47, 40238: 45, 41046: 11, 41040: 12, 40149: 3, 40240: 27, 40241: 26, 41048: 16, 41050: 7, 41052: 6, 40258: 4, 40261: 18, 41063: 9, 41066: 10, 40267: 19}
+
 def PassAlongSpoilerLogInfo(fileEntryVar2, Version2, permalinkVar2, seedEntryVar2):
     global fileEntryVar, Version, permalinkVar, seedEntryVar
     fileEntryVar = fileEntryVar2
@@ -136,6 +140,7 @@ def AllTornaRando():
     SkillTreeSetup()
     CampfireUnlocks()
     CharacterUnlocks()
+    DisableUnrequiredQuests()
     GenerateHints()
     if Options.TornaObjectColorMatchesContents.GetState():
         GildedCheckNames()
@@ -253,6 +258,10 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
     FilledLocations = []
     AllProgressLocations = []
     AllNonProgressLocations = []
+    global AllRequiredSidequests
+    AllRequiredSidequests = [sq for sq in Sidequests if sq.id in [1, 8, 14, 17, 22, 25]] # the required quests for the story
+    AllRequiredSidequests.extend(ChosenLevel2Quests)
+    AllRequiredSidequests.extend(ChosenLevel4Quests)
     for loc in Locs:
         if loc[0].hasprogression == True:
             CatList.append(LocationCategory(loc[0].type, 1, loc))
@@ -355,6 +364,8 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
                                     cat.remlocations.remove(ChosenLocation)
                                     FilledLocations.append(ChosenLocation)
                                     break
+                    if ChosenLocation.type == "sidequest":
+                        AllRequiredSidequests.append(ChosenLocation)
     # for now, I'm not placing progress items that unlock checks that aren't required for the playthrough
     FullItemReqList = []
     for loc in Locs:
@@ -1096,6 +1107,23 @@ def CharacterUnlocks(): # sets up the character unlock keys
     JSONParser.ExtendJSONFile("common/FLD_QuestCollect.json", [FLDQuestCollectNewRows])
     JSONParser.ExtendJSONFile("common_ms/fld_quest.json", [fldquestnewrows])
 
+def DisableUnrequiredQuests(): # we want the npcs for non-required quests to not have any quest giving ability
+    global AllUnrequiredSidequests
+    AllUnrequiredSidequests = [sq for sq in Sidequests if sq not in AllRequiredSidequests]
+    for filename in ["./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_NpcPop.json", "./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_NpcPop.json"]:
+        with open(filename, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for sq in AllUnrequiredSidequests:
+                for row in data["rows"]:
+                    if row["$id"] in QuestGiverNPCIDtoQuestNumber.keys():
+                        if sq == QuestGiverNPCIDtoQuestNumber[row["$id"]]:
+                            row["QuestID"] = 0
+                            row["EventID"] = 0
+                            break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
 def ChangeReqItemRarities(): # we want the useful items that get dropped from chests and enemies to have a golden glow, so that people know to pick them up.
     RequiredItems = KeyItemtoLocDict.keys()
     MinWeaponChipID = Helper.GetMinValue("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", "$id") # should be 10001, but just in case
@@ -1176,7 +1204,7 @@ def GildedCheckNames():
     RequiredEnemies = [x.id for x in RequiredLocations if x.type in ["normalenemy", "uniquemonster", "boss", "questenemy"]]
     RequiredMisc = [x.name for x in RequiredLocations if x.type == "misc"]
     RequiredShops = [x.shoplistid for x in RequiredLocations if x.type == "shop"]
-    RequiredQuests = [x.rewardids[0] for x in RequiredLocations + ChosenLevel2Quests + ChosenLevel4Quests if x.type == "sidequest" and x.rewardids != []]
+    RequiredQuests = [x.rewardids[0] for x in AllRequiredSidequests]
     CurGmkNameMax = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/fld_gmkname.json", "$id")
     ProgressID = CurGmkNameMax + 1
     NonProgressID = CurGmkNameMax + 2
@@ -1552,7 +1580,7 @@ def CreateSpoilerLog():
     alllines.append("Chosen Required Quests and NPC Conversations by Community Level Requirement:\n")
     alllines.append("\n")
     QuestListByCommReq = {0:[],1:[],2:[],3:[],4:[],5:[]}
-    for sq in ChosenLevel4Quests:
+    for sq in AllRequiredSidequests:
         QuestListByCommReq[sq.comreq].append(sq)
     for commlevel in range(0, 6):
         if commlevel == 0:

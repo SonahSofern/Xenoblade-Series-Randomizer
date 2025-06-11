@@ -318,7 +318,7 @@ def CreateAreaInfo(Sidequests, Mainquests):
         'Name': 'Millennium Grotto',
         'Previous Location Reachable': 'Aletta: Militia Garrison',
         'Story Pre-Req': [25],
-        'Item Reqs': [SwordplayKey[:1], [JinAff[0]] , AegaeonKey, ComWaterKey, AegaeonAff]
+        'Item Reqs': [SwordplayKey[:2], [JinAff[0]] , AegaeonKey, ComWaterKey, AegaeonAff]
     }
     WrackhamMoor = {
         '$id': 2322,
@@ -402,7 +402,7 @@ def CreateAreaInfo(Sidequests, Mainquests):
         'Name': 'Turqos Plateau',
         'Previous Location Reachable': 'The Great Breaksand',
         'Story Pre-Req': [35],
-        'Item Reqs': [SwordplayKey[:1], [JinAff[0]] , FortitudeKey[:1], JinAff[:1]]
+        'Item Reqs': [SwordplayKey[:2], [JinAff[0]] , FortitudeKey[:2], JinAff[:2]]
     }
     TheBrayingCanyon = {
         '$id': 2329,
@@ -437,7 +437,7 @@ def CreateAreaInfo(Sidequests, Mainquests):
         'Name': 'Verdant Fairylands',
         'Previous Location Reachable': 'Lake Wynn',
         'Story Pre-Req': [35],
-        'Item Reqs': [AegaeonKey, ComWaterKey[:1], AegaeonAff[:1]]
+        'Item Reqs': [AegaeonKey, ComWaterKey[:2], AegaeonAff[:2]]
     }
     PelnPilgrimsSpringland = {
         '$id': 2334,
@@ -458,7 +458,7 @@ def CreateAreaInfo(Sidequests, Mainquests):
         'Name': 'Titan\'s Ulcer',
         'Previous Location Reachable': 'Dannagh Desert',
         'Story Pre-Req': [35],
-        'Item Reqs': [HazeKey, ManipEtherKey, HazeAff[:2] , AegaeonKey, ComWaterKey, AegaeonAff]
+        'Item Reqs': [HazeKey, ManipEtherKey, HazeAff[:3] , AegaeonKey, ComWaterKey, AegaeonAff]
     }
     OutridersForestTrail = {
         '$id': 2337,

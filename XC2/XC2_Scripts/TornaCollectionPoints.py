@@ -288,7 +288,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'Torna Collection Point 4428',
         'Location Near': 2328,
         'Story Pre-Req': [29],
-        'Required Items': [HazeKey, ManipEtherKey[:1], HazeAff[:1] , MythraKey, LightKey[:1], MythraAff[:1]],
+        'Required Items': [HazeKey, ManipEtherKey[:2], HazeAff[:2] , MythraKey, LightKey[:2], MythraAff[:2]],
         'Must Defeat Enemy IDs': [],
         'Rarity': 2,
         'CollectionTableID': 28
@@ -298,7 +298,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'Torna Collection Point 4429',
         'Location Near': 2330,
         'Story Pre-Req': [35],
-        'Required Items': [HazeKey, ManipEtherKey, HazeAff[:2] , MythraKey, LightKey, MythraAff],
+        'Required Items': [HazeKey, ManipEtherKey, HazeAff[:3] , MythraKey, LightKey, MythraAff],
         'Must Defeat Enemy IDs': [],
         'Rarity': 2,
         'CollectionTableID': 29
@@ -308,7 +308,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'Torna Collection Point 4430',
         'Location Near': 2310,
         'Story Pre-Req': [35],
-        'Required Items': [HazeKey, ManipEtherKey, HazeAff[:2] , MythraKey, LightKey, MythraAff],
+        'Required Items': [HazeKey, ManipEtherKey, HazeAff[:3] , MythraKey, LightKey, MythraAff],
         'Must Defeat Enemy IDs': [],
         'Rarity': 2,
         'CollectionTableID': 30
@@ -2118,7 +2118,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'Torna Collection Point 4613',
         'Location Near': 2330,
         'Story Pre-Req': [35],
-        'Required Items': [HazeKey, ManipEtherKey, HazeAff[:2] , AegaeonKey, ComWaterKey, AegaeonAff],
+        'Required Items': [HazeKey, ManipEtherKey, HazeAff[:3] , AegaeonKey, ComWaterKey, AegaeonAff],
         'Must Defeat Enemy IDs': [],
         'Rarity': 1,
         'CollectionTableID': 213
@@ -4419,7 +4419,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'Gormott Collection Point 4823',
         'Location Near': 2428,
         'Story Pre-Req': [12],
-        'Required Items': [HazeKey, ManipEtherKey[:1], HazeAff[:1] , MythraKey, LightKey[:1], MythraAff[:1]],
+        'Required Items': [HazeKey, ManipEtherKey[:2], HazeAff[:2] , MythraKey, LightKey[:2], MythraAff[:2]],
         'Must Defeat Enemy IDs': [],
         'Rarity': 2,
         'CollectionTableID': 451
@@ -4429,7 +4429,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'Gormott Collection Point 4824',
         'Location Near': 2422,
         'Story Pre-Req': [12],
-        'Required Items': [HazeKey, ManipEtherKey, HazeAff[:2] , MythraKey, LightKey, MythraAff],
+        'Required Items': [HazeKey, ManipEtherKey, HazeAff[:3] , MythraKey, LightKey, MythraAff],
         'Must Defeat Enemy IDs': [],
         'Rarity': 2,
         'CollectionTableID': 452
@@ -4439,7 +4439,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'Gormott Collection Point 4825',
         'Location Near': 2421,
         'Story Pre-Req': [12],
-        'Required Items': [HazeKey, ManipEtherKey, HazeAff[:2] , MythraKey, LightKey, MythraAff],
+        'Required Items': [HazeKey, ManipEtherKey, HazeAff[:3] , MythraKey, LightKey, MythraAff],
         'Must Defeat Enemy IDs': [],
         'Rarity': 2,
         'CollectionTableID': 453

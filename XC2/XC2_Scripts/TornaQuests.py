@@ -11,6 +11,8 @@ class TornaSideQuest: # created to allow me to pass these objects easier
         self.name = input["Quest Name"]
         self.mainreq = input["Main Story Req"]
         self.sideprereq = input["Sidequest Pre-Req"]
+        if self.id == 20:
+            pass
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input["Item Requirements"])
         self.complus = input["Community Gained"]
         self.comreq = input["Community Level Req"]
@@ -148,7 +150,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Quest Number': 5,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [32, 56],
-        'Item Requirements': [AegaeonKey, SuperstrKey, AegaeonAff[:2], HazeKey, KeenEyeKey, HazeAff[:2]],
+        'Item Requirements': [AegaeonKey, SuperstrKey, AegaeonAff[:3], HazeKey, KeenEyeKey, HazeAff[:3]],
         'Community Gained': 2,
         'Community Level Req': 5,
         'Reward Set IDs': [1061],
@@ -243,7 +245,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Shop Change IDs': []
     }
     TornaSidequest14 = {
-        'Quest Name': 'Where\'s the Boy Gone',
+        'Quest Name': 'Where\'s the Boy Gone?',
         'Quest Number': 14,
         'Main Story Req': 20,
         'Sidequest Pre-Req': [],
@@ -346,7 +348,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Quest Number': 23,
         'Main Story Req': 37,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [HazeKey, KeenEyeKey[:1], [HazeAff[0]], MythraKey, FocusKey, MythraAff[:2]],
+        'Item Requirements': [HazeKey, KeenEyeKey[:2], [HazeAff[0]], MythraKey, FocusKey, MythraAff[:3]],
         'Community Gained': 3,
         'Community Level Req': 2,
         'Reward Set IDs': [1052],
@@ -533,7 +535,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Quest Number': 40,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [MinothKey, MiningKey[:1], MinothAff[:1], FortitudeKey[:1], JinAff[:1] , 25455], # LevelUpTokens[:38]],
+        'Item Requirements': [MinothKey, MiningKey[:2], MinothAff[:2], FortitudeKey[:2], JinAff[:2] , 25455], # LevelUpTokens[:38]],
         'Community Gained': 1,
         'Community Level Req': 2,
         'Reward Set IDs': [1043],
@@ -544,7 +546,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Quest Number': 41,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [2],
-        'Item Requirements': [AegaeonKey, SuperstrKey[:1], AegaeonAff[:1], MythraKey, FocusKey[:1], [MythraAff[0]]], # LevelUpTokens[:44]],
+        'Item Requirements': [AegaeonKey, SuperstrKey[:2], AegaeonAff[:2], MythraKey, FocusKey[:2], [MythraAff[0]]], # LevelUpTokens[:44]],
         'Community Gained': 2,
         'Community Level Req': 2,
         'Reward Set IDs': [1038],
@@ -599,7 +601,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Quest Number': 46,
         'Main Story Req': 46,
         'Sidequest Pre-Req': [31, 32],
-        'Item Requirements': [MythraKey, FocusKey[:1], [MythraAff[0]], HazeKey, KeenEyeKey[:1], [HazeAff[0]]], #  LevelUpTokens[:40]],
+        'Item Requirements': [MythraKey, FocusKey[:2], [MythraAff[0]], HazeKey, KeenEyeKey[:2], [HazeAff[0]]], #  LevelUpTokens[:40]],
         'Community Gained': 2,
         'Community Level Req': 3,
         'Reward Set IDs': [1040],
@@ -687,7 +689,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Quest Number': 54,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [AegaeonKey, ComWaterKey[:1], AegaeonAff[:1] , [25463,30413,30423,30359,26182]], # LevelUpTokens[:39]],
+        'Item Requirements': [AegaeonKey, ComWaterKey[:2], AegaeonAff[:2] , [25463,30413,30423,30359,26182]], # LevelUpTokens[:39]],
         'Community Gained': 1,
         'Community Level Req': 4,
         'Reward Set IDs': [1045],
@@ -698,7 +700,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Quest Number': 55,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [MythraKey, FocusKey, MythraAff[:2], HazeKey, KeenEyeKey, HazeAff[:2] , [30344] , [30370] , [25536] , AllOptionals[10]],
+        'Item Requirements': [MythraKey, FocusKey, MythraAff[:3], HazeKey, KeenEyeKey, HazeAff[:3] , [30344] , [30370] , [25536] , AllOptionals[10]],
         'Community Gained': 2,
         'Community Level Req': 4,
         'Reward Set IDs': [1046],
@@ -1280,10 +1282,12 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
             CommunityGate2Quests.append(sidequest)
 
     for sq in range(len(TornaSidequests)):
+        if sq == 19:
+            pass
         if TornaSidequests[sq].sideprereq != []:
             for prereq in TornaSidequests[sq].sideprereq:
                 TornaSidequests[sq].itemreqs.extend(TornaSidequests[prereq - 1].itemreqs)
-        TornaSidequests[sq].itemreqs = list(set(TornaSidequests[sq].itemreqs)).sort()
+        TornaSidequests[sq].itemreqs = sorted(list(set(TornaSidequests[sq].itemreqs)))
         if TornaSidequests[sq].itemreqs == None:
             TornaSidequests[sq].itemreqs = []
 
