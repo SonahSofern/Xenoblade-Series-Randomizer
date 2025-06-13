@@ -157,7 +157,7 @@ class SubOption():
     def GetState(self):
         return self.checkBoxVal.get()
     
-    def GetSpinBox(self):
+    def GetSpinbox(self):
         return self.spinBoxVal.get()
 rowIncrement = 0   
 

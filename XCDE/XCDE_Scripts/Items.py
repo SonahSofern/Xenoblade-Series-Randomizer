@@ -17,7 +17,7 @@ def ItemRandomization(itemTypes:list[ItemType] = [], files = [],odds = 0, game =
     for item in itemTypes:
         if item.obj.GetState():
             randoLists.append(item)
-            weights.append(item.obj.GetSpinBox())
+            weights.append(item.obj.GetSpinbox())
     
     allItemLists = [ItemType(IDs.ArtBookIDs), ItemType(IDs.CollectableIDs), ItemType(IDs.CrystalIDs), ItemType(IDs.GemIDs), ItemType(IDs.ArmIDs), ItemType(IDs.ChestIDs), ItemType(IDs.LegIDs), ItemType(IDs.WaistIDs), ItemType(IDs.HeadIDs), ItemType(IDs.KeyItemIDs), ItemType(IDs.StoryRequiredKeyItemIDs), ItemType(IDs.MaterialIDs), ItemType(IDs.WeaponIDs)].copy()
     

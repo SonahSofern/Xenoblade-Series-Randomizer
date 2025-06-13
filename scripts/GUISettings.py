@@ -489,6 +489,9 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
                 print(f"{traceback.format_exc()}") # shows the full error
                 
         randoProgressDisplay.config(text=opt.name)
+        
+        nextStep =  pb['value'] + (100/TotalCommands) # Cache it here so it doesnt matter how far the bar goes 
+        threading.Thread(target=lambda: SlowBurn(pb, nextStep)).start()
 
         for command in opt.commands:
             try:
@@ -502,9 +505,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
                     errorMsg = error
                 errorMsgObj.Header(f"Error: {opt.name}")
                 errorMsgObj.Text(errorMsg)
-                randoProgressDisplay.config(text=f"{opt.name}: {traceback.format_exc()}")
-        pb['value'] += (100/TotalCommands)
-    # CompareBDATs("./XC2/_internal/JsonOutputs", "./XC2/_internal/JsonOutputs2")
+        pb['value'] = nextStep
 
     return lambda: PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(),root,defFontVar)
 
@@ -514,6 +515,10 @@ windowHeight = "900"
 OptionColorLight = UI_Colors.White
 OptionColorDark = UI_Colors.Gray
 
+def SlowBurn(progressBar, nextStop):
+    while(progressBar['value'] < nextStop):
+        time.sleep(0.02)
+        progressBar['value'] += 0.05
 
 def RandomizeButtonDice(button:ttk.Button):
     selection = [ "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
