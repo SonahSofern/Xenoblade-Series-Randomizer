@@ -6,7 +6,6 @@ import Options, scripts.PopupDescriptions
 Nope = [MaxAffinityHeal,ReduceDamageFromNearbyEnemies, DamageUpOnEnemyKill] # Retry these used on armu enemy with dupe
 ValidSkills = []   
 
-
 def EnemyEnhances():
     prevNames = []
     with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as EnArrangeFile:
@@ -18,7 +17,7 @@ def EnemyEnhances():
                 if spinbox < random.randrange(0,100):
                     continue
                         
-                enh = random.choice(ValidSkills)
+                enh = random.choice(TestSkills)
                 prevNames.append({"myName" :Enemy["Name"], "myEnhance": enh})
                 
                 for pair in prevNames: # Ensures the same name has the same enhancement
@@ -49,7 +48,7 @@ def EnemyEnhances():
         json.dump(EnArr, EnArrangeFile, indent=2, ensure_ascii=False)
         
 class EnemyEnhancement(Enhancement):
-    def __init__(self, name, enhancement, para1 = [0,0,0,0],para2 = [0,0,0,0], revP1 = False, revp2 = False):
+    def __init__(self, name, enhancement, para1 = [0,0,0,0],para2 = [0,0,0,0], revP1 = False, revp2 = False, isRounded = True):
         self.name = name
         self.EnhanceEffect = enhancement.EnhanceEffect
         self.Caption = 0
@@ -58,6 +57,7 @@ class EnemyEnhancement(Enhancement):
         self.Param2 = para2
         self.ReversePar1 = revP1
         self.ReversePar2 = revp2
+        self.isRounded = isRounded
         ValidSkills.append(self)
    
 Healthy = EnemyEnhancement("Healthy", HPBoost, [100,150,200,300])
@@ -76,12 +76,13 @@ FirstStrike = EnemyEnhancement("Supriser", FirstArtDamage,[300,500,600,700])
 Lightning  = EnemyEnhancement("Lightning", AutoSpeedArtsSpeed,[300,400,500,600],[200,300,400,500])
 Repeat = EnemyEnhancement("Repeat", DidIDoThat,[20,40,60,80])
 Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
-# Regen = EnemyEnhancement("Regen", PermaRegen,[30,60,90,120], [1,2,3,4], revP1=True) # 1,2,3,4 dont work they need to be 0.05 for 5% of health for example 
+Regen = EnemyEnhancement("Regen", PermaRegen,[30,60,90,120], [0.02,0.03,0.04,0.05], revP1=True, isRounded=False ) # 1,2,3,4 dont work they need to be 0.05 for 5% of health for example 
 CloseArmor = EnemyEnhancement("Guardian", ReduceDamageFromNearbyEnemies, [30,50,70,90])
 Swarm = EnemyEnhancement("Swarming", PerAllyDamageUp, [20,40,60,80])
 Sealing = EnemyEnhancement("Sealing", ChainAttackSeal, [1,1,2,3], revP1=True)
 
 #New testing
+TestSkills = [Regen]
 
 # Not including
 # BladeComboResist = EnemyEnhancement("Combo Resist", ReduceEnemyBladeComboDamage, [60,70,90,100])

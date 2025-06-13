@@ -33,7 +33,7 @@ class Enhancement:
     ReversePar2 = False
     addToList = True
     DisTag = ""
-    def __init__(self,Name, Enhancement, Caption, Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReversePar1 = False, ReversePar2  = False, addToList = True, DisTag = "", max = [0,0]):
+    def __init__(self,Name, Enhancement, Caption, Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReversePar1 = False, ReversePar2  = False, addToList = True, DisTag = "", max = [0,0], isRounded = True):
         self.name = Name
         self.EnhanceEffect = Enhancement
         self.Caption = Caption
@@ -46,6 +46,7 @@ class Enhancement:
         self.addToList = addToList
         self.DisTag = DisTag
         self.max = max
+        self.isRounded = isRounded
         if self.addToList:
             EnhanceClassList.append(self)
             
@@ -73,8 +74,6 @@ class Enhancement:
             self.Rarity = forcedRarity
         self.scalingFactor = scalingFactor
         def SetParams(ParameterChoices, isReverse):
-            Common, Rare, Legendary = (2, 1, 0) if isReverse else (0, 1, 2)
-            Pstep = 1 if ParameterChoices == Baby else 5
             Multiplier = 1/scalingFactor if isReverse else scalingFactor
 
             if ParameterChoices == [0,0,0,0]:
@@ -82,13 +81,14 @@ class Enhancement:
             elif len(ParameterChoices) == 1:
                 Parameter = ParameterChoices[0]
             else:
-                if self.Rarity == Common:
-                    Parameter = random.randrange(round(ParameterChoices[0]*Multiplier),round(ParameterChoices[1]*Multiplier+1),Pstep)
-                elif self.Rarity == Rare:
-                    Parameter = random.randrange(round(ParameterChoices[1]*Multiplier),round(ParameterChoices[2]*Multiplier)+1,Pstep)
-                elif self.Rarity == Legendary:
-                    Parameter = random.randrange(round(ParameterChoices[2]*Multiplier),round(ParameterChoices[3]*Multiplier)+1,Pstep)
+                Parameter = random.uniform(ParameterChoices[self.Rarity+(1*isReverse)],ParameterChoices[self.Rarity + 1 - (2*isReverse)])
 
+                    
+            Parameter *= Multiplier
+            
+            if self.isRounded:
+                Parameter = round(Parameter)
+                
             return Parameter
             
         if self.Description != "":
@@ -114,6 +114,9 @@ def AddCustomEnhancements():
     EnhanceID = 3896
     EnhanceEffectsList.clear()
 
+def HandleAllRange(start, stop, step):
+    pass
+    
 
 def SearchAndSetDisplayIDs():
     global DisplayTagID

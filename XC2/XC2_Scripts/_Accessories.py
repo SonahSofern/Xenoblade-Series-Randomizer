@@ -7,9 +7,6 @@ InvalidSkillEnhancements = [PhyAndEthDefenseUp,ForcedHPPotionOnHit,BlockBoost,Fl
 ValidSkills:list[Enhancement] = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
 
 def RandomizeAccessoryEnhancements():
-
-
-
     with open("./XC2/_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as EnhanceFile:
         with open("./XC2/_internal/JsonOutputs/common_ms/itm_pcequip.json", 'r+', encoding='utf-8') as NamesFile: # overflows past a certain num so cant make new names
             enhanceFile = json.load(EnhanceFile)
@@ -40,7 +37,6 @@ def RandomizeAccessoryEnhancements():
                         skillName["name"] = f"{enhancement.name} {lastWord}"  
                         break
 
-                
             NamesFile.seek(0)
             NamesFile.truncate()
             json.dump(NameFile, NamesFile, indent=2, ensure_ascii=False)

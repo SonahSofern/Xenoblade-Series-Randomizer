@@ -38,11 +38,6 @@ Tabs = {
     TornaTab: "🞛 Torna"
 }
 
-# if not isOneFile:
-#     devTab = 11
-#     Tabs[devTab] = "Dev Options"
-#     CompareBDATOption = Option("Compare BDAT", devTab, "Compare your bdats to the previous ones")
-
 
 # General
 AccessoriesOption = Option("Accessories", Items, "Randomizes effects of Accessories", [lambda: _Accessories.RandomizeAccessoryEnhancements()], descData=lambda: _Accessories.AccessoriesDesc())
@@ -171,7 +166,6 @@ EnemyDropOption_CoreCrystals = SubOption("Core Crystals", EnemyDropOption)
 EnemyDropOption_Deeds = SubOption("Shop Deeds", EnemyDropOption)
 EnemyDropOption_CollectionPointMaterials = SubOption("Collection Point Materials", EnemyDropOption)
 EnemyAggroOption = Option("Enemy Aggro", Enemies, "The percentage of all non-boss and non-quest enemies that will aggro the player", [lambda: EnemyRandoLogic.EnemyAggroProportion()], hasSpinBox = True)
-# EnemyMovespeedOption = Option("Enemy Movespeed", Enemies, "Randomizes how fast enemies move in the overworld", [lambda: JSONParser.ChangeJSONFile(["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.InclRange(0,100), Helper.InclRange(0,100) + Helper.InclRange(250,255))])
 
 # Misc
 MusicOption = Option("Music", Misce, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
@@ -262,4 +256,5 @@ for loc in TornaMain.GormottNametoLocID.keys(): # Automatically Generates these
 # GenStandardOption("Blade Specials", TabBlades, "Randomizes blades special (red) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("BArts", 1, 3) + ["BartsEx", "BartsEx2"], BladeSpecials,  list(set(BladeSpecials) - set([215])))]) works okay, but animations dont connect feels mid
 # DebugLog.CreateDebugLog(OptionDictionary, Version, randoSeedEntry.get())
 # GenStandardOption("Enemy Arts", TabEnemies, "Gives enemies new arts", [lambda: _EnemyArts.EnemyArts(OptionDictionary["Enemy Arts"]["spinBoxVal"].get())],optionType=Spinbox)
+# EnemyMovespeedOption = Option("Enemy Movespeed", Enemies, "Randomizes how fast enemies move in the overworld", [lambda: JSONParser.ChangeJSONFile(["common/CHR_EnParam.json"], ["WalkSpeed", "RunSpeed"], Helper.InclRange(0,100), Helper.InclRange(0,100) + Helper.InclRange(250,255))])
 # GenStandardOption("Enemy Rage", TabEnemies, "Randomizes the effects of enemy enraged states", ["common/BTL_Aura"])   
