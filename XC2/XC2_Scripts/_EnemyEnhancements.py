@@ -17,7 +17,7 @@ def EnemyEnhances():
                 if spinbox < random.randrange(0,100):
                     continue
                         
-                enh = random.choice(TestSkills)
+                enh = random.choice(ValidSkills)
                 prevNames.append({"myName" :Enemy["Name"], "myEnhance": enh})
                 
                 for pair in prevNames: # Ensures the same name has the same enhancement
@@ -76,7 +76,7 @@ FirstStrike = EnemyEnhancement("Supriser", FirstArtDamage,[300,500,600,700])
 Lightning  = EnemyEnhancement("Lightning", AutoSpeedArtsSpeed,[300,400,500,600],[200,300,400,500])
 Repeat = EnemyEnhancement("Repeat", DidIDoThat,[20,40,60,80])
 Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
-Regen = EnemyEnhancement("Regen", PermaRegen,[30,60,90,120], [0.02,0.03,0.04,0.05], revP1=True, isRounded=False ) # 1,2,3,4 dont work they need to be 0.05 for 5% of health for example 
+Regen = EnemyEnhancement("Regen", PermaRegen,[30,60,90,120], [0.02,0.03,0.04,0.05], revP1=True, isRounded=False)
 CloseArmor = EnemyEnhancement("Guardian", ReduceDamageFromNearbyEnemies, [30,50,70,90])
 Swarm = EnemyEnhancement("Swarming", PerAllyDamageUp, [20,40,60,80])
 Sealing = EnemyEnhancement("Sealing", ChainAttackSeal, [1,1,2,3], revP1=True)
