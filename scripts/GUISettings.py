@@ -313,6 +313,7 @@ def LoadTheme(defaultFont, themeName):
     style.configure("Header.TButton", borderwidth=0, background=currentTheme["midGray"])
     style.configure("Tag.TLabel", background= currentTheme["midGray"], relief="flat", padding=(9,2), margin=(5,0))
     style.configure("DescriptionImage.TLabel", background= currentTheme["midColor"])
+    style.configure("noMargin.TLabel", margin=(0,0), padding=(20,0))
     # Since Canvas and Roots arrent affected by normal styling
     for canvas in CanvasesForStyling:
         try:
