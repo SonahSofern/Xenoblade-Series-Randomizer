@@ -18,6 +18,8 @@ class TornaSideQuest: # created to allow me to pass these objects easier
         self.comreq = input["Community Level Req"]
         self.rewardids = input["Reward Set IDs"]
         self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 4, "0") # holds ids, -1 for progression, 0 for filler spots
+        if self.id > 58:
+            self.randomizeditems = [-2,-2,-2,-2] # we just throw some invalid items here, the randomizer will know not to give any items to these spots
         self.type = "sidequest"
         if rewardnumber > 0:
             self.hasprogression = True
