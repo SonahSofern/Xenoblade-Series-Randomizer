@@ -90,7 +90,7 @@ class Option():
                 sub.spinBoxObj = ttk.Spinbox(optionPanel, from_=sub.spinBoxMin, to=sub.spinBoxMax, textvariable=sub.spinBoxVal, wrap=True, width=sub.spinWidth, increment=sub.spinIncr)
                 sub.spinBoxObj.grid(row=rowIncrement, column=1, padx=(20,0), pady=(0,0), sticky="w")
                 sub.spinBoxLabel = ttk.Label(optionPanel, text=sub.spinDesc, style="noMargin.TLabel")
-                sub.spinBoxLabel.grid(row=rowIncrement, column=1, sticky="w", padx=(60,0))
+                sub.spinBoxLabel.grid(row=rowIncrement, column=1, sticky="w", padx=(80,0))
 
         rowIncrement += 1
 
@@ -133,7 +133,7 @@ class Option():
         return self.checkBoxVal.get()
 
 class SubOption():
-    def __init__(self, _name, _parent:Option, _commands = [], _defState = True, _prio = 0, spinDefault = 1, spinMin = 0, spinMax = 100, spinWidth = 3, spinIncr = 1, hasSpinBox = False, _spinPadX = 15, _spinDesc = "", preRandoCommands:list = []):
+    def __init__(self, _name, _parent:Option, _commands = [], _defState = True, _prio = 0, spinDefault = 1, spinMin = 0, spinMax = 100, spinWidth = 3, spinIncr = 1, hasSpinBox = False, spinPadX = 15, spinDesc = "", preRandoCommands:list = []):
         self.name = _name
         self.checkBoxVal = BooleanVar
         self.checkBox:ttk.Checkbutton = None
@@ -150,7 +150,7 @@ class SubOption():
         self.spinBoxLabel = None
         self.spinWidth = spinWidth
         self.spinIncr = spinIncr
-        self.spinDesc = _spinDesc
+        self.spinDesc = spinDesc
         _parent.subOptions.append(self)
 
 
