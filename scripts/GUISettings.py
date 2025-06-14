@@ -509,8 +509,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
     return lambda: PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(),root,defFontVar)
 
     
-windowWidth = "1600"
-windowHeight = "900"
+
 OptionColorLight = UI_Colors.White
 OptionColorDark = UI_Colors.Gray
 

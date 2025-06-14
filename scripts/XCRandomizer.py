@@ -7,7 +7,6 @@ import tkinter as tk
 from scripts.GUISettings import *
 from PIL import Image, ImageTk
 
-isOneFile = True
 seedEntryVar = StringVar()
 permalinkVar = StringVar()
 fileEntryVar = StringVar()
@@ -65,9 +64,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     RootsForStyling.append(root)
     defaultFont = Font(family=GUISettings.defFontVar.get(), size=GUISettings.defFontSizeVar.get())
 
-    root.title(f"{Title} v{Version}")
-    root.option_add("*Font", defaultFont)
-    root.geometry(f'{windowWidth}x{windowHeight}')
+
     if isOneFile:
         bdat_path = os.path.join(sys._MEIPASS, 'Toolset', 'bdat-toolset-win64.exe')
     else:
