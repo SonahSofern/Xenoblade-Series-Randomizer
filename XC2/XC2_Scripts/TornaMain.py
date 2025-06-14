@@ -18,10 +18,6 @@ import _WeaponChips
 
 # there's probably a few enemies that are hard to get to aggro.
 
-# need to turn pre-req quests golden/red
-# need to turn npcs that give quests golden/red
-
-# need to add the quests that are required for their rewards to the spoiler log as well
 # re-evaluate whether or not quest enemies can have progression, I disabled them for now
 
 class ItemInfo:
@@ -98,6 +94,10 @@ GormottNametoLocID = {
     "Wayside Respite": 2411
 }
 
+QuestGiverNPCIDtoQuestNumber = {40017: 32, 40023: 33, 40039: 2, 40047: 40, 41010: 5, 41011: 15, 40050: 42, 40080: 21, 40081: 36, 40105: 37, 40111: 54, 40132: 20, 40115: 49, 41022: 13, 40135: 55, 40125: 38, 40297: 48, 40144: 43, 40160: 23, 40163: 35, 40168: 41, 40180: 31, 41029: 39, 40181: 58, 40085: 53, 40186: 46, 40205: 24, 40154: 56, 40210: 28, 40270: 51, 40227: 52, 40221: 57, 40103: 30, 40228: 44, 40217: 29, 40231: 50, 40234: 34, 40196: 47, 40238: 45, 41046: 11, 41040: 12, 40149: 3, 40240: 27, 40241: 26, 41048: 16, 41050: 7, 41052: 6, 40258: 4, 40261: 18, 41063: 9, 41066: 10, 40267: 19}
+
+SidequestNPCNumbertoTextIDRow = {73: 1108, 64: 1109, 67: 1110, 59: 1112, 69: 1133, 72: 1138, 60: 1148, 66: 1177, 65: 1210, 68: 1211, 71: 1212, 62: 1214, 61: 1215, 63: 1218, 70: 1216, 74: 1225}
+
 def PassAlongSpoilerLogInfo(fileEntryVar2, Version2, permalinkVar2, seedEntryVar2):
     global fileEntryVar, Version, permalinkVar, seedEntryVar
     fileEntryVar = fileEntryVar2
@@ -136,6 +136,7 @@ def AllTornaRando():
     SkillTreeSetup()
     CampfireUnlocks()
     CharacterUnlocks()
+    DisableUnrequiredQuests()
     GenerateHints()
     if Options.TornaObjectColorMatchesContents.GetState():
         GildedCheckNames()
@@ -253,6 +254,10 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
     FilledLocations = []
     AllProgressLocations = []
     AllNonProgressLocations = []
+    global AllRequiredSidequests
+    AllRequiredSidequests = [sq for sq in Sidequests if sq.id in [1, 8, 14, 17, 22, 25]] # the required quests for the story
+    AllRequiredSidequests.extend(ChosenLevel2Quests)
+    AllRequiredSidequests.extend(ChosenLevel4Quests)
     for loc in Locs:
         if loc[0].hasprogression == True:
             CatList.append(LocationCategory(loc[0].type, 1, loc))
@@ -355,6 +360,8 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
                                     cat.remlocations.remove(ChosenLocation)
                                     FilledLocations.append(ChosenLocation)
                                     break
+                    if ChosenLocation.type == "sidequest":
+                        AllRequiredSidequests.append(ChosenLocation)
     # for now, I'm not placing progress items that unlock checks that aren't required for the playthrough
     FullItemReqList = []
     for loc in Locs:
@@ -469,6 +476,12 @@ def DetermineValidItemSpots(ChosenItem, ChosenItemCat, CatList, CurrentStoryStep
             for cat in CatList:
                 if cat.isprogresscategory == 1 and cat.category not in ["questenemy"]:
                     ValidItemSpots.extend(cat.remlocations)
+    InvalidSidequestLocs = []
+    for loc in ValidItemSpots:
+        if loc.type == "sidequest":
+            if loc.rewardids == []:
+                InvalidSidequestLocs.append(loc)
+    ValidItemSpots = [x for x in ValidItemSpots if x not in InvalidSidequestLocs] # want to make sure the item isn't being placed on a sidequest where you just talk to the npc (you cannot get items this way)
     TempValidItemSpots = [loc for loc in ValidItemSpots if ChosenItem not in loc.itemreqs] # make sure the item isn't put in a spot locked by itself
     if TempValidItemSpots == []:
         raise Exception(f"Ran out of valid locations when trying to ensure {ChosenItem}: ({ItemIDtoItemName[ChosenItem]} was not locked by itself!")
@@ -490,7 +503,9 @@ def DetermineValidItemSpots(ChosenItem, ChosenItemCat, CatList, CurrentStoryStep
         raise Exception(f"Ran out of valid locations when trying to ensure {ChosenItem}: ({ItemIDtoItemName[ChosenItem]} was not locked by itself!")
     else:
         ValidItemSpots = TempValidItemSpots
-    
+
+
+
     return ValidItemSpots
 
 def UpdateAllItemReqs(CurrentStepReqs, Locations, ChosenLocation, ChosenItem, AllLocations, CurrentStepNumber = -1):
@@ -590,6 +605,10 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     
+    for file in ["./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_EnemyPop.json", "./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_EnemyPop.json"]:
+        Helper.ColumnAdjust(file, ["POP_TIME"], 256)
+        Helper.ColumnAdjust(file, "popWeather", 255)
+
     # shops
     with open("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # alters the NpcPop file to make the bards call different Event IDs and different Shop IDs
         data = json.load(file)
@@ -1096,6 +1115,23 @@ def CharacterUnlocks(): # sets up the character unlock keys
     JSONParser.ExtendJSONFile("common/FLD_QuestCollect.json", [FLDQuestCollectNewRows])
     JSONParser.ExtendJSONFile("common_ms/fld_quest.json", [fldquestnewrows])
 
+def DisableUnrequiredQuests(): # we want the npcs for non-required quests to not have any quest giving ability
+    global AllUnrequiredSidequests
+    AllUnrequiredSidequests = [sq for sq in Sidequests if sq not in AllRequiredSidequests]
+    for filename in ["./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_NpcPop.json", "./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_NpcPop.json"]:
+        with open(filename, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+            for sq in AllUnrequiredSidequests:
+                for row in data["rows"]:
+                    if row["$id"] in QuestGiverNPCIDtoQuestNumber.keys():
+                        if sq == QuestGiverNPCIDtoQuestNumber[row["$id"]]:
+                            row["QuestID"] = 0
+                            row["EventID"] = 0
+                            break
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
 def ChangeReqItemRarities(): # we want the useful items that get dropped from chests and enemies to have a golden glow, so that people know to pick them up.
     RequiredItems = KeyItemtoLocDict.keys()
     MinWeaponChipID = Helper.GetMinValue("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", "$id") # should be 10001, but just in case
@@ -1176,7 +1212,8 @@ def GildedCheckNames():
     RequiredEnemies = [x.id for x in RequiredLocations if x.type in ["normalenemy", "uniquemonster", "boss", "questenemy"]]
     RequiredMisc = [x.name for x in RequiredLocations if x.type == "misc"]
     RequiredShops = [x.shoplistid for x in RequiredLocations if x.type == "shop"]
-    RequiredQuests = [x.rewardids[0] for x in RequiredLocations + ChosenLevel2Quests + ChosenLevel4Quests if x.type == "sidequest" and x.rewardids != []]
+    RequiredQuests = [x.rewardids[0] for x in AllRequiredSidequests if x.rewardids!= []]
+    RequiredNPCs = [x.id for x in AllRequiredSidequests if x.rewardids == []]
     CurGmkNameMax = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/fld_gmkname.json", "$id")
     ProgressID = CurGmkNameMax + 1
     NonProgressID = CurGmkNameMax + 2
@@ -1347,6 +1384,19 @@ def GildedCheckNames():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+    if RequiredNPCs != []:
+        with open("./XC2/_internal/JsonOutputs/common_ms/fld_npcname.json", 'r+', encoding='utf-8') as file: 
+            data = json.load(file)
+            for npc in RequiredNPCs:
+                for row in data["rows"]:
+                    if row["$id"] == SidequestNPCNumbertoTextIDRow[npc]:
+                        row["name"] = "[System:Color name=tutorial ]" + row["name"] + "[/System:Color]"
+                    elif row["$id"] in SidequestNPCNumbertoTextIDRow.values():
+                        row["name"] = "[System:Color name=red ]" + row["name"] + "[/System:Color]"
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
+
     # needs to account for npc giver name probably. not sure how fully to implement this. are there npcs that give multiple quests? I guess those are separate instances.
 
 
@@ -1552,7 +1602,7 @@ def CreateSpoilerLog():
     alllines.append("Chosen Required Quests and NPC Conversations by Community Level Requirement:\n")
     alllines.append("\n")
     QuestListByCommReq = {0:[],1:[],2:[],3:[],4:[],5:[]}
-    for sq in ChosenLevel4Quests:
+    for sq in AllRequiredSidequests:
         QuestListByCommReq[sq.comreq].append(sq)
     for commlevel in range(0, 6):
         if commlevel == 0:
@@ -1560,16 +1610,22 @@ def CreateSpoilerLog():
         else:
             alllines.append(f"     Community Level {commlevel} Required:\n\n")
         for quest in QuestListByCommReq[commlevel]:
-            alllines.append(f"          {quest.name}\n")
+            if quest not in ChosenLevel2Quests + ChosenLevel4Quests:
+                alllines.append(f"          {quest.name} (Quest Reward Required)\n")
+            elif quest in ChosenLevel2Quests:
+                alllines.append(f"          {quest.name} (Required for Story Step 38)\n")
+            else:
+                alllines.append(f"          {quest.name} (Required for Story Step 50)\n")
         alllines.append("\n")
     alllines.append("\n")
     alllines.append("Logical Playthrough:\n")
     alllines.append("\n")
-    #StoryStepList = []
     for MQ in range(len(Mainquests)):
         alllines.append(f"     Step {Mainquests[MQ].id}: {Mainquests[MQ].summary}\n")
         alllines.append("\n")
         CurStepLocList = []
+        if MQ == 49:
+            pass
         if MQ != 0:
             NewStepReqs = [item for item in Mainquests[MQ].itemreqs if item not in Mainquests[MQ - 1].itemreqs]
             for item in NewStepReqs:
@@ -1590,39 +1646,41 @@ def CreateSpoilerLog():
                         break
             Sphere0s = [loc for loc in CurStepLocListCopy if loc not in NonSphere0s]
             CurrSphere0Items = list(set(Helper.MultiLevelListToSingleLevelList([loc.randomizeditems for loc in Sphere0s])))
-            CurrSphere0Items = [item for item in CurrSphere0Items if item in NewStepReqs]
+            CurrSphere0Items = [item for item in CurrSphere0Items if item in NewStepReqs + Mainquests[MQ].itemreqs]
+            CurrSphere0Items.extend(Mainquests[MQ-1].itemreqs)
+            CurrSphere0Items = list(set(CurrSphere0Items))
             SpheretoLoc[0] = []
             CurrSphere = 0
             for loc in Sphere0s:
-                SpheretoLoc[0].append(LoctoLocCopy[loc])
+                SpheretoLoc[0].append(loc)
             CurStepLocListCopy = [loc for loc in CurStepLocListCopy if loc not in Sphere0s]
-            while sum(len(item) for item in SpheretoLoc.values()) < len(CurStepLocList):
-                if LastSphereItems == False: # if LastSphereItems is False, it has to be the first loop, so we do some setup
-                    CurrSphere = 1
-                    for loc in CurStepLocListCopy:
-                        loc.itemreqs = [item for item in loc.itemreqs if item in NewStepReqs and item not in CurrSphere0Items]
-                    LastSphereItems = CurrSphere0Items
-                    LastSphereLocs = Sphere0s
-                else:
-                    CurrSphereItems = list(set([item for item in CurrSphereItems if item in NewStepReqs]))
-                    LastSphereItems = CurrSphereItems
-                    LastSphereLocs = CurrSphereLocs
-                    CurStepLocListCopy = [loc for loc in CurStepLocListCopy if loc not in LastSphereLocs]
-                    for loc in CurStepLocListCopy:
-                        loc.itemreqs = [item for item in loc.itemreqs if item in NewStepReqs and item not in LastSphereItems] # basically removing the previous sphere's item requirements from the remaining locations
-                    CurrSphere += 1
-                CurrSphereLocs = []
-                CurrSphereItems = []
+            PrevSphereItems = CurrSphere0Items
+            while len(CurStepLocListCopy) > 1:
+                CurrSphere += 1
+                if CurrSphere == 2:
+                    pass
                 SpheretoLoc[CurrSphere] = []
-                for loc in CurStepLocListCopy:
-                    if loc.itemreqs == []:
-                        CurrSphereLocs.append(loc)
-                        SpheretoLoc[CurrSphere].append(LoctoLocCopy[loc])
-                    CurrSphereItems.extend(loc.randomizeditems)
-            if SpheretoLoc[CurrSphere] == []:
-                del SpheretoLoc[CurrSphere]
-            LastSphereItems = False
-
+                SpheretoLoc[CurrSphere + 1] = []
+                SpheretoLoc[CurrSphere].extend(CurStepLocListCopy)
+                for loc in SpheretoLoc[CurrSphere - 1]:
+                    PrevSphereItems.extend(loc.randomizeditems)
+                PrevSphereItems = list(set([x for x in PrevSphereItems if x in Mainquests[MQ].itemreqs]))
+                for loc in SpheretoLoc[CurrSphere]:
+                    if not all(item in PrevSphereItems for item in set(loc.itemreqs)):
+                        SpheretoLoc[CurrSphere + 1].append(loc)
+                if SpheretoLoc[CurrSphere] == SpheretoLoc[CurrSphere + 1]: # bandaid for now, my head hurts
+                    del SpheretoLoc[CurrSphere + 1]
+                    break
+                SpheretoLoc[CurrSphere] = [loc for loc in SpheretoLoc[CurrSphere] if loc not in SpheretoLoc[CurrSphere + 1]]
+                CurStepLocListCopy = [loc for loc in CurStepLocListCopy if loc not in SpheretoLoc[CurrSphere]]
+            try:
+                if SpheretoLoc[CurrSphere + 1] == []:
+                    del SpheretoLoc[CurrSphere + 1]
+            except:
+                pass
+            for item in range(len(SpheretoLoc)):
+                for loc in range(len(SpheretoLoc[item])):
+                    SpheretoLoc[item][loc] = LoctoLocCopy[SpheretoLoc[item][loc]]
             if CurStepLocList != []:
                 for sphere in range(0, max(SpheretoLoc.keys()) + 1):
                     alllines.append(f"          Sphere {sphere}:\n\n")                
@@ -1630,7 +1688,6 @@ def CreateSpoilerLog():
                         if loc in SpheretoLoc[sphere]:
                             if loc.type != "sidequest":
                                 alllines.append(f"               {AreaIDtoNameDict[loc.nearloc].name}: {loc.name} (Story Step {loc.mainreq})\n")
-                                #StoryStepList.append(loc.mainreq)
                             else:
                                 alllines.append(f"               Sidequest: {loc.name} (Story Step {loc.mainreq})\n")
                             for reward in range(len(loc.randomizeditems)):

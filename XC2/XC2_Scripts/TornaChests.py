@@ -37,7 +37,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
 		'Name': 'Treasure Chest 2201',
 		'Location Near': 2362,
 		'Story Pre-Req': [49],
-		'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:2], HazeKey, KeenEyeKey, HazeAff[:2]],
+		'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:3], HazeKey, KeenEyeKey, HazeAff[:3]],
 		'Must Defeat Enemy IDs': [1467]
 	}
     TreasureChest2202 = {
@@ -45,7 +45,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         'Name': 'Treasure Chest 2202',
         'Location Near': 2362,
         'Story Pre-Req': [49],
-        'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:2], HazeKey, KeenEyeKey, HazeAff[:2]],
+        'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:3], HazeKey, KeenEyeKey, HazeAff[:3]],
         'Must Defeat Enemy IDs': [1467]
     }
     TreasureChest2203 = {
@@ -53,7 +53,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         'Name': 'Treasure Chest 2203',
         'Location Near': 2362,
         'Story Pre-Req': [49],
-        'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:2], HazeKey, KeenEyeKey, HazeAff[:2]],
+        'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:3], HazeKey, KeenEyeKey, HazeAff[:3]],
         'Must Defeat Enemy IDs': [1467]
     }
     TreasureChest2204 = {
@@ -61,7 +61,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         'Name': 'Treasure Chest 2204',
         'Location Near': 2362,
         'Story Pre-Req': [49],
-        'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:2], HazeKey, KeenEyeKey, HazeAff[:2]],
+        'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:3], HazeKey, KeenEyeKey, HazeAff[:3]],
         'Must Defeat Enemy IDs': [1467]
     }
     TreasureChest2205 = {
@@ -149,7 +149,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2215',
             'Location Near': 2305,
             'Story Pre-Req': [25],
-            'Required Items': [BrighidKey, LockpickKey[:1], [BrighidAff[0]] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
+            'Required Items': [BrighidKey, LockpickKey[:2], [BrighidAff[0]] , HazeKey, KeenEyeKey[:2], [HazeAff[0]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2216 = {
@@ -221,7 +221,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2224',
             'Location Near': 2335,
             'Story Pre-Req': [35],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2], HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3], HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2225 = {
@@ -229,7 +229,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2225',
             'Location Near': 2331,
             'Story Pre-Req': [35],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2], HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3], HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2226 = {
@@ -253,7 +253,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2228',
             'Location Near': 2331,
             'Story Pre-Req': [35],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2229 = {
@@ -261,7 +261,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2229',
             'Location Near': 2311,
             'Story Pre-Req': [35],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2230 = {
@@ -277,7 +277,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2231',
             'Location Near': 2325,
             'Story Pre-Req': [30], # [25],
-            'Required Items': [BrighidKey, LockpickKey[:1], [BrighidAff[0]] , HazeKey, KeenEyeKey[:1], [HazeAff[0]],[25460], [25461]], # LevelUpTokens[:36]],
+            'Required Items': [BrighidKey, LockpickKey[:2], [BrighidAff[0]] , HazeKey, KeenEyeKey[:2], [HazeAff[0]],[25460], [25461]], # LevelUpTokens[:36]],
             'Must Defeat Enemy IDs': [1468]
         }
     TreasureChest2232 = {
@@ -365,7 +365,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2242',
             'Location Near': 2324,
             'Story Pre-Req': [25],
-            'Required Items': [BrighidKey, LockpickKey[:1], [BrighidAff[0]] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
+            'Required Items': [BrighidKey, LockpickKey[:2], [BrighidAff[0]] , HazeKey, KeenEyeKey[:2], [HazeAff[0]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2243 = {
@@ -397,7 +397,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2246',
             'Location Near': 2305,
             'Story Pre-Req': [25],
-            'Required Items': [BrighidKey, LockpickKey[:1], [BrighidAff[0]] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
+            'Required Items': [BrighidKey, LockpickKey[:2], [BrighidAff[0]] , HazeKey, KeenEyeKey[:2], [HazeAff[0]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2247 = {
@@ -405,7 +405,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2247',
             'Location Near': 2309,
             'Story Pre-Req': [25],
-            'Required Items': [SwordplayKey[:1], [JinAff[0]]],
+            'Required Items': [SwordplayKey[:2], [JinAff[0]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2248 = {
@@ -429,7 +429,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2250',
             'Location Near': 2303,
             'Story Pre-Req': [16],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2251 = {
@@ -437,7 +437,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2251',
             'Location Near': 2310,
             'Story Pre-Req': [35],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': [1661]
         }
     TreasureChest2252 = {
@@ -461,7 +461,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2254',
             'Location Near': 2337,
             'Story Pre-Req': [35],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2255 = {
@@ -469,7 +469,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2255',
             'Location Near': 2334,
             'Story Pre-Req': [35],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2256 = {
@@ -477,7 +477,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2256',
             'Location Near': 2310,
             'Story Pre-Req': [35],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2257 = {
@@ -509,7 +509,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2260',
             'Location Near': 2332,
             'Story Pre-Req': [35],
-            'Required Items': [MinothKey, MiningKey[:1], MinothAff[:1] , FortitudeKey[:1], JinAff[:1]],
+            'Required Items': [MinothKey, MiningKey[:2], MinothAff[:2] , FortitudeKey[:2], JinAff[:2]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2261 = {
@@ -549,7 +549,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2265',
             'Location Near': 2314,
             'Story Pre-Req': [35],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2266 = {
@@ -557,7 +557,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2266',
             'Location Near': 2312,
             'Story Pre-Req': [35],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2267 = {
@@ -917,7 +917,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2311',
             'Location Near': 2310,
             'Story Pre-Req': [35],
-            'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2312 = {
@@ -925,7 +925,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2312',
             'Location Near': 2323,
             'Story Pre-Req': [25],
-            'Required Items': [AegaeonKey, SuperstrKey[:1], AegaeonAff[:1] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
+            'Required Items': [AegaeonKey, SuperstrKey[:2], AegaeonAff[:2] , HazeKey, KeenEyeKey[:2], [HazeAff[0]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2313 = {
@@ -941,7 +941,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2314',
             'Location Near': 2333,
             'Story Pre-Req': [35],
-            'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2315 = {
@@ -957,7 +957,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2316',
             'Location Near': 2304,
             'Story Pre-Req': [10],
-            'Required Items': [SwordplayKey, JinAff[:2] , MythraKey, FocusKey, MythraAff[:2]],
+            'Required Items': [SwordplayKey, JinAff[:3] , MythraKey, FocusKey, MythraAff[:3]],
             'Must Defeat Enemy IDs': [1634, 1595, 1653]
         }
     TreasureChest2317 = {
@@ -973,7 +973,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2318',
             'Location Near': 2336,
             'Story Pre-Req': [35],
-            'Required Items': [HazeKey, ManipEtherKey, HazeAff[:2] , AegaeonKey, ComWaterKey, AegaeonAff],
+            'Required Items': [HazeKey, ManipEtherKey, HazeAff[:3] , AegaeonKey, ComWaterKey, AegaeonAff],
             'Must Defeat Enemy IDs': [1594, 1593]
         }
     TreasureChest2319 = {
@@ -1005,7 +1005,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2322',
             'Location Near': 2358,
             'Story Pre-Req': [36],
-            'Required Items': [FortitudeKey[:1], JinAff[:1] , AegaeonKey, SuperstrKey[:1], AegaeonAff[:1]],
+            'Required Items': [FortitudeKey[:2], JinAff[:2] , AegaeonKey, SuperstrKey[:2], AegaeonAff[:2]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2323 = {
@@ -1013,7 +1013,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2323',
             'Location Near': 2363,
             'Story Pre-Req': [36],
-            'Required Items': [FortitudeKey, JinAff , AegaeonKey, SuperstrKey, AegaeonAff[:2]],
+            'Required Items': [FortitudeKey, JinAff , AegaeonKey, SuperstrKey, AegaeonAff[:3]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2324 = {
@@ -1245,7 +1245,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2501',
             'Location Near': 2424,
             'Story Pre-Req': [31],
-            'Required Items': [MinothKey, MiningKey[:1], MinothAff[:1] , FortitudeKey[:1], JinAff[:1]],
+            'Required Items': [MinothKey, MiningKey[:2], MinothAff[:2] , FortitudeKey[:2], JinAff[:2]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2502 = {
@@ -1277,7 +1277,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2505',
             'Location Near': 2401,
             'Story Pre-Req': [16],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2506 = {
@@ -1341,7 +1341,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2513',
             'Location Near': 2403,
             'Story Pre-Req': [16],
-            'Required Items': [BrighidKey, LockpickKey[:1], [BrighidAff[0]] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
+            'Required Items': [BrighidKey, LockpickKey[:2], [BrighidAff[0]] , HazeKey, KeenEyeKey[:2], [HazeAff[0]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2514 = {
@@ -1381,7 +1381,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2518',
             'Location Near': 2417,
             'Story Pre-Req': [16],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2519 = {
@@ -1445,7 +1445,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2526',
             'Location Near': 2415,
             'Story Pre-Req': [31],
-            'Required Items': [MinothKey, MiningKey[:1], MinothAff[:1] , FortitudeKey[:1], JinAff[:1]],
+            'Required Items': [MinothKey, MiningKey[:2], MinothAff[:2] , FortitudeKey[:2], JinAff[:2]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2527 = {
@@ -1453,7 +1453,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2527',
             'Location Near': 2423,
             'Story Pre-Req': [16],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2528 = {
@@ -1557,7 +1557,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2540',
             'Location Near': 2414,
             'Story Pre-Req': [31],
-            'Required Items': [MinothKey, MiningKey[:1], MinothAff[:1] , FortitudeKey[:1], JinAff[:1]],
+            'Required Items': [MinothKey, MiningKey[:2], MinothAff[:2] , FortitudeKey[:2], JinAff[:2]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2541 = {
@@ -1565,7 +1565,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2541',
             'Location Near': 2406,
             'Story Pre-Req': [16],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2542 = {
@@ -1613,7 +1613,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2547',
             'Location Near': 2403,
             'Story Pre-Req': [31],
-            'Required Items': [MinothKey, MiningKey[:1], MinothAff[:1] , FortitudeKey[:1], JinAff[:1]],
+            'Required Items': [MinothKey, MiningKey[:2], MinothAff[:2] , FortitudeKey[:2], JinAff[:2]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2548 = {
@@ -1629,7 +1629,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2549',
             'Location Near': 2417,
             'Story Pre-Req': [16],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': [1563]
         }
     TreasureChest2550 = {
@@ -1637,7 +1637,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2550',
             'Location Near': 2423,
             'Story Pre-Req': [16],
-            'Required Items': [BrighidKey, LockpickKey[:1], [BrighidAff[0]] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
+            'Required Items': [BrighidKey, LockpickKey[:2], [BrighidAff[0]] , HazeKey, KeenEyeKey[:2], [HazeAff[0]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2551 = {
@@ -1677,7 +1677,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2555',
             'Location Near': 2406,
             'Story Pre-Req': [16],
-            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [BrighidKey, LockpickKey, BrighidAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2556 = {
@@ -1861,7 +1861,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2578',
             'Location Near': 2415,
             'Story Pre-Req': [16],
-            'Required Items': [AegaeonKey, SuperstrKey[:1], AegaeonAff[:1] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
+            'Required Items': [AegaeonKey, SuperstrKey[:2], AegaeonAff[:2] , HazeKey, KeenEyeKey[:2], [HazeAff[0]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2579 = {
@@ -1877,7 +1877,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2580',
             'Location Near': 2404,
             'Story Pre-Req': [16],
-            'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:2] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
+            'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2581 = {
@@ -1885,7 +1885,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
             'Name': 'Treasure Chest 2581',
             'Location Near': 2419,
             'Story Pre-Req': [16],
-            'Required Items': [AegaeonKey, SuperstrKey[:1], AegaeonAff[:1] , HazeKey, KeenEyeKey[:1], [HazeAff[0]]],
+            'Required Items': [AegaeonKey, SuperstrKey[:2], AegaeonAff[:2] , HazeKey, KeenEyeKey[:2], [HazeAff[0]]],
             'Must Defeat Enemy IDs': []
         }
     TreasureChest2582 = {
