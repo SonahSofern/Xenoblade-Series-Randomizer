@@ -129,13 +129,14 @@ def FindValidChanges(art, isReactions, isDebuffs, isBuffs, isEnhancements, isAOE
 
 ValidSkills = []
 class EnemyArtEnhancements(Enhancement):
-    def __init__(self, name, enhancement, para1 = [0,0,0,0],para2 = [0,0,0,0]):
+    def __init__(self, name, enhancement, para1 = [0,0,0,0],para2 = [0,0,0,0], isRounded = True):
         self.name = name
         self.EnhanceEffect = enhancement.EnhanceEffect
         self.Caption = 0
         self.addToList = False
         self.Param1 = para1
         self.Param2 = para2
+        self.isRounded = isRounded
         ValidSkills.append(self)
     
 # backatk = EnemyArtEnhancements("Back↑", BackDamageUp, [40,60,80,100])

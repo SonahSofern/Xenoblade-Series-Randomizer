@@ -1516,7 +1516,7 @@ def ExportAccessoryAuxCoreMaxIDs(): # outputs the globals to the UMHuntMain file
     return SecretAccessoryIDs, SecretAuxCoreIDs
 
 class UMHuntSecretShopEnhancements(Enhancement):
-    def __init__(self, name, Enhancement, Caption, Param1 = [0,0,0,0], Param2 = [0,0,0,0], ReversePar1 = False, DisTag = ""):
+    def __init__(self, name, Enhancement, Caption, Param1 = [0,0,0,0], Param2 = [0,0,0,0], ReversePar1 = False, DisTag = "", isRounded = True):
         self.addToList = False 
         self.name = name
         self.EnhanceEffect = Enhancement
@@ -1525,6 +1525,7 @@ class UMHuntSecretShopEnhancements(Enhancement):
         self.Param2 = Param2
         self.ReversePar1 = ReversePar1
         self.DisTag = DisTag
+        self.isRounded = isRounded
 
 # Accessories
 UMAllWeaponAttackUp = UMHuntSecretShopEnhancements("Master",120, 130, Medium)
