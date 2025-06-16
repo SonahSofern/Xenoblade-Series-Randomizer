@@ -794,9 +794,14 @@ def getMaxCountViolations(DefaultEnemyIDs, RandomizedEnemyIDs):
         234: 2,  # Aeshma's Core, 2nd fight
         241: 1,  # Jin from Tantal
         243: 1,  # Malos from solo fight in Cliffs of Morytha
-        244: 1,  # Jin from Jin/Malos fight in Cliffs of Morytha
-        245: 1,  # Malos from Jin/Malos fight in Cliffs of Morytha
+        244: 1,  # Jin from Jin/Malos fight in Cliffs of Morytha (phase 1)
+        245: 1,  # Malos from Jin/Malos fight in Cliffs of Morytha (phase 1)
         253: 1,  # Jin from World Tree
+        264: 1, # Malos, unsure which
+        268: 1, # Malos, unsure which
+        272: 1,  # Jin from Jin/Malos fight in Cliffs of Morytha (phase 2)
+        273: 1,  # Malos from Jin/Malos fight in Cliffs of Morytha (phase 2)
+        286: 1,  # Jin, unsure which
         1443: 1,  # Malos from Torna
         1446: 1,  # Malos from Torna
         1447: 1,  # Malos from Torna
