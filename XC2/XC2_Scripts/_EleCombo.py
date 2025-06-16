@@ -1,4 +1,5 @@
-import Options, copy, random
+from XC2.XC2_Scripts import Options
+import copy, random
 
 from scripts import JSONParser, Helper, PopupDescriptions
 

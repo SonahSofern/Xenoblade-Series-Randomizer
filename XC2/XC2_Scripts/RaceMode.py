@@ -1,13 +1,7 @@
 from scripts import Helper, JSONParser, PopupDescriptions
-import json
-import EnemyRandoLogic as EnemyRandoLogic
-import random
-from IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, Accessories, WeaponChips, AuxCores, RefinedAuxCores, CollectionPointMaterials, TornaAccessories
-import time
-import DebugLog
-import CoreCrystalAdjustments
-import math, Options
-import TutorialShortening
+from XC2.XC2_Scripts import EnemyRandoLogic, DebugLog, CoreCrystalAdjustments, Options, TutorialShortening
+import random, time, math, json
+from XC2.XC2_Scripts.IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, Accessories, WeaponChips, AuxCores, RefinedAuxCores, CollectionPointMaterials, TornaAccessories
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 

@@ -1,4 +1,5 @@
-import Options, IDs, json, random
+from XC2.XC2_Scripts import Options, IDs
+import json, random
 from scripts import Helper, PopupDescriptions
 def RandoAccessoryShops():
     ValidReplacements = []

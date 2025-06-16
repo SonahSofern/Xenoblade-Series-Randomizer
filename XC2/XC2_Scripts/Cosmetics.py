@@ -1,7 +1,6 @@
-import json, random, Options
-
-from CharacterRandomization import ReplacementCharacter2Original
-import CharacterRandomization
+import json, random
+from XC2.XC2_Scripts.CharacterRandomization import ReplacementCharacter2Original
+from XC2.XC2_Scripts import CharacterRandomization, Options
 from scripts import Helper, PopupDescriptions
 # Lists of cosmetics to choose from
 ValidDriverCosmetics = []

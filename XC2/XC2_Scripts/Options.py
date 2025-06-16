@@ -1,12 +1,8 @@
 from tkinter import ttk
 from scripts import JSONParser,Helper
-from IDs import *
+from XC2.XC2_Scripts.IDs import *
 from tkinter import *
-import _Accessories, _DriverArts, SkillTrees, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeStats
-import TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UMHuntMain, Cosmetics, AccessoryShops, CollectionPoints, PouchItemShops, TreasureChests, ButtonCombos, EnemyDrops, _EleCombo
-import _YellowSkills, _BladeSpecials, Scales, DLCFlagQOL, CharacterRandomization
-import TornaMain
-import ObjectNameCleanup
+from XC2.XC2_Scripts import _Accessories, _DriverArts, SkillTrees, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeStats,TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UMHuntMain, Cosmetics, AccessoryShops, CollectionPoints, PouchItemShops, TreasureChests, ButtonCombos, EnemyDrops, _EleCombo,_YellowSkills, _BladeSpecials, Scales, DLCFlagQOL, CharacterRandomization, TornaMain, ObjectNameCleanup
 from scripts.Interactables import Option, SubOption
 from scripts.XCRandomizer import isOneFile
 # Prio

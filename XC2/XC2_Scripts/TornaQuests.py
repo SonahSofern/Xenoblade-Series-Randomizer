@@ -2,7 +2,7 @@ from scripts import Helper, JSONParser, PopupDescriptions
 import json
 import random
 import time
-from IDs import *
+from XC2.XC2_Scripts.IDs import *
 from scripts import Helper
 
 class TornaSideQuest: # created to allow me to pass these objects easier

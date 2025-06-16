@@ -1,6 +1,6 @@
 import json, random
-from Enhancements import *
-import Options
+from XC2.XC2_Scripts.Enhancements import *
+from XC2.XC2_Scripts import Options
 from scripts import PopupDescriptions
 
 def RandomizeSkillEnhancements():

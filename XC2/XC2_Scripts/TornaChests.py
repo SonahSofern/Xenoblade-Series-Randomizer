@@ -1,7 +1,7 @@
 from scripts import Helper, JSONParser, PopupDescriptions
 import json
 import random
-from IDs import *
+from XC2.XC2_Scripts.IDs import *
 
 TornaChestIDs = Helper.InclRange(2201, 2351)
 

@@ -1,8 +1,6 @@
 from scripts import Helper, JSONParser, PopupDescriptions
-import json
-import random
-import time
-from IDs import ValidEnemies, TornaUMIDs
+import json, random, time
+from XC2.XC2_Scripts.IDs import ValidEnemies, TornaUMIDs
 
 # FLD_CollectionTable $id -> ma40a and ma41a_FLD_CollectionPopList CollectionTable.
 # if i implement random crafting recipes, this will be useful

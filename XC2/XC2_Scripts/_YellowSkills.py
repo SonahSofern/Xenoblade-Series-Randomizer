@@ -1,4 +1,5 @@
-import json, random, Options, IDs
+import json, random
+from XC2.XC2_Scripts import Options, IDs
 from scripts import Helper
 def RandomizeBattleSkills(): # Make logic to have all skills in the game
     with open("./XC2/_internal/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:

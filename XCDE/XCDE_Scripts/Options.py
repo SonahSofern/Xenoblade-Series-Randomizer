@@ -1,7 +1,6 @@
-import PcArts
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
-import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales, NPC, Weapons, Items, Cutscenes, IDs, Landmarks
+from XCDE.XCDE_Scripts import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales, NPC, Weapons, Items, Cutscenes, IDs, Landmarks
 
 OptionList =[]
 General = 1

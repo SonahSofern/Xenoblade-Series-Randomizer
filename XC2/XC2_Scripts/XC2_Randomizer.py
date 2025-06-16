@@ -2,8 +2,8 @@ import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))) # Allows us to use the scripts folder as a module
 from tkinter import *
 root = Tk()
-import scripts.XCRandomizer, SeedNames, scripts.JSONParser, Options
-
+import scripts.XCRandomizer, scripts.JSONParser
+from XC2.XC2_Scripts import SeedNames, Options
 Version = "1.5.0"
 
 

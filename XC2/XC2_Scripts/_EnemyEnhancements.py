@@ -1,6 +1,7 @@
 import json, random
-from Enhancements import *
-import Options, scripts.PopupDescriptions
+from XC2.XC2_Scripts.Enhancements import *
+from XC2.XC2_Scripts import Options 
+import scripts.PopupDescriptions
 
 
 Nope = [MaxAffinityHeal,ReduceDamageFromNearbyEnemies, DamageUpOnEnemyKill] # Retry these used on armu enemy with dupe

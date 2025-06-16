@@ -1,4 +1,5 @@
-import Options, json, random
+from XC2.XC2_Scripts import Options
+import json, random
 from scripts import Helper
 def BladeSpecialButtonChallenges():
     Buttons = []

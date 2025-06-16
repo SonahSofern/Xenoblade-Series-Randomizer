@@ -1,9 +1,8 @@
-from IDs import EnemyBattleMusicMOVs, NonBattleMusicMOVs, NonBattleMusicIDs, ReplacementNonBattleMusicMOVs, ValidEnemyMusicIDs, ValidEnemyMusicWAVs
-from scripts import JSONParser
-from scripts import Helper, PopupDescriptions
+from XC2.XC2_Scripts.IDs import EnemyBattleMusicMOVs, NonBattleMusicMOVs, NonBattleMusicIDs, ReplacementNonBattleMusicMOVs, ValidEnemyMusicIDs, ValidEnemyMusicWAVs
+from scripts import Helper, PopupDescriptions, JSONParser
 import json
-import random, Options
-
+import random
+from XC2.XC2_Scripts import Options
 # RSC_BgmCondition:
 # An area usually has 2-3 conditions. If it has 3, its a weather related condition (music is adjusted for weather), usually can tell via large condition value
 # condition of 454 is daytime

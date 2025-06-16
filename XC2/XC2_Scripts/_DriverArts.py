@@ -1,9 +1,9 @@
 import json
 import random
-from IDs import Arts, AutoAttacks
-import Options
+from XC2.XC2_Scripts.IDs import Arts, AutoAttacks
+from XC2.XC2_Scripts import Options
 import scripts.PopupDescriptions
-from _Arts import *
+from XC2.XC2_Scripts._Arts import *
 
 def DriverArtRandomizer():
     with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as artFile:

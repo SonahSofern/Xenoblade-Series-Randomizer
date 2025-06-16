@@ -70,12 +70,12 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     else:
         bdat_path = f"./{Game}/_internal/Toolset/bdat-toolset-win64.exe"
 
-    if isOneFile: 
-        icon_path = os.path.join(sys._MEIPASS, 'Images', f'{Game}Icon.png')
-    else:
-        icon_path = f"./{Game}/_internal/Images/{Game}Icon.png"
-    icon = PhotoImage(file=icon_path)
-    root.iconphoto(True, icon)
+    # if isOneFile: 
+    #     icon_path = os.path.join(sys._MEIPASS, 'Images', f'{Game}Icon.png')
+    # else:
+    #     icon_path = f"./{Game}/_internal/Images/{Game}Icon.png"
+    # icon = PhotoImage(file=icon_path)
+    # root.iconphoto(True, icon)
 
     bg = random.choice(backgroundImages)
     if isOneFile: 

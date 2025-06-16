@@ -1,9 +1,9 @@
 import random
 from scripts import JSONParser, Helper, PopupDescriptions
-import Options
+from XC2.XC2_Scripts import Options
 import json
 
-from IDs import WeaponTypeRoles
+from XC2.XC2_Scripts.IDs import WeaponTypeRoles
 
 def BladeWeaponClassRandomization():
     PoppiNewTypeRoles = []

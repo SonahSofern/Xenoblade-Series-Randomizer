@@ -1,6 +1,7 @@
-import json, random, IDs, EnemyRandoLogic, RaceMode, math, Options, time, FieldSkillAdjustments
-from Enhancements import *
-from CharacterRandomization import ReplacementCharacter2Original
+import json, random,  math,  time
+from XC2.XC2_Scripts import IDs, EnemyRandoLogic, RaceMode,Options,FieldSkillAdjustments
+from XC2.XC2_Scripts.Enhancements import *
+from XC2.XC2_Scripts.CharacterRandomization import ReplacementCharacter2Original
 from scripts import Helper
 
 # ShopID: [ShopType: EventID, Name]

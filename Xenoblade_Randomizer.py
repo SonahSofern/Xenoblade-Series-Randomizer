@@ -31,7 +31,7 @@ root.geometry(f'{windowWidth}x{windowHeight}')
 GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
 
 
-from XCDE.XCDE_Scripts.XCDE_Randomizer import *
+from XC2.XC2_Scripts.XC2_Randomizer import *
 scripts.XCRandomizer.CreateMainWindow(Xenoblade2, "XC2", Version, "Xenoblade Chronicles 2 Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash])
 
 

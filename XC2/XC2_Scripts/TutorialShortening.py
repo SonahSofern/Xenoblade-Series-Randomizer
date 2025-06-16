@@ -1,6 +1,6 @@
 import json
 from scripts import Helper
-import EnemyRandoLogic, Options
+from XC2.XC2_Scripts import Options, EnemyRandoLogic
 
 def ShortenedTutorial():
     RaceModeBox = Options.RaceModeOption.GetState()

@@ -1,5 +1,5 @@
 import json, random
-from Enhancements import *
+from XC2.XC2_Scripts.Enhancements import *
 
 
 def RandomizeAuxCoreEnhancements():

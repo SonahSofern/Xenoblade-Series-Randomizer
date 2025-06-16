@@ -1,7 +1,7 @@
 from scripts import Helper, JSONParser, PopupDescriptions
 import json
 import copy
-import Options
+from XC2.XC2_Scripts import Options
 
 def ReassignAlphabeticalSort(): # we add some custom named items if any of the following settings are on:
     if Options.AccessoriesOption.GetState() or Options.AuxCoresOption.GetState() or Options.BladeWeaponChipsOption.GetState() or Options.CosmeticsOption.GetState() or Options.StartwithIncreasedMovespeedOption.GetState() or Options.RaceModeOption.GetState() or Options.UMHuntOption.GetState() or Options.TornaMainOption.GetState():

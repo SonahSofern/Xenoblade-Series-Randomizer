@@ -1,6 +1,6 @@
-import json, Options, EnemyRandoLogic
+import json
+from XC2.XC2_Scripts import EnemyRandoLogic, Options
 from scripts import Helper, JSONParser
-
 FreeDLCFlags = Helper.InclRange(65000, 65534)
 
 def CreateDLCtoSetFlag(ItemName: list[str], Flag: list[int], Category: list[int] = [2], ItemID: list[int] = [0], Quantity: list[int] = [1], Condition: list[int] = [1]):

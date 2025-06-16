@@ -1,4 +1,5 @@
-import json, random, Options
+import json, random
+from XC2.XC2_Scripts import Options
 from scripts import Helper
 
 

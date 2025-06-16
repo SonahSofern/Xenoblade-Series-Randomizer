@@ -1,4 +1,4 @@
-import Options
+from XC2.XC2_Scripts import Options
 from scripts import JSONParser
     
 def RemoveFieldSkills():

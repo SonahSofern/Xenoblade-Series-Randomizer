@@ -2,8 +2,9 @@ import json
 import random
 import time
 from scripts import Helper, PopupDescriptions, JSONParser
-from IDs import ValidEnemies, ValidEnemyPopFileNames, FlyingEnArrangeIDs, OriginalFlyingHeights, OriginalWalkSpeeds, OriginalRunSpeeds, OriginalBtlSpeeds, SwimmingEnArrangeIDs
-import copy, Options
+from XC2.XC2_Scripts.IDs import ValidEnemies, ValidEnemyPopFileNames, FlyingEnArrangeIDs, OriginalFlyingHeights, OriginalWalkSpeeds, OriginalRunSpeeds, OriginalBtlSpeeds, SwimmingEnArrangeIDs
+import copy
+from XC2.XC2_Scripts import Options
 
 AllBossDefaultIDs = [179, 180, 181, 182, 184, 185, 186, 187, 189, 190, 191, 193, 195, 196, 197, 198, 199, 201, 202, 203, 204, 206, 208, 210, 212, 214, 216, 217, 219, 220, 221, 222, 223, 225, 227, 229, 231, 232, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 248, 249, 250, 251, 252, 253, 254, 256, 258, 260, 262, 266, 267, 268, 269, 270, 271, 274, 1342, 1429, 1430, 1431, 1432, 1433, 1434, 1435, 1436, 1437, 1438, 1439, 1440, 1441, 1442, 1443, 1444, 1445, 1448, 1454, 1632, 1733, 1746, 1747, 1748, 1749, 1754, 1755]
 AllBossDefaultLevels = [1, 2, 4, 5, 6, 8, 6, 10, 11, 12, 13, 15, 22, 25, 24, 26, 20, 18, 19, 21, 22, 24, 23, 23, 24, 26, 29, 31, 27, 29, 31, 32, 33, 34, 32, 35, 40, 38, 38, 39, 42, 42, 43, 42, 44, 46, 44, 52, 54, 56, 52, 50, 60, 60, 57, 66, 68, 60, 60, 60, 60, 13, 24, 26, 32, 33, 34, 60, 36, 2, 2, 8, 10, 10, 14, 10, 11, 20, 16, 17, 18, 29, 29, 40, 38, 48, 53, 3, 32, 63, 60, 58, 64, 62, 64, 64]

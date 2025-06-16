@@ -1,7 +1,7 @@
 import json
 import random
 from scripts import PopupDescriptions
-import Options
+from XC2.XC2_Scripts import Options
 
 def BigItemsRando():
     with open("./XC2/_internal/JsonOutputs/common_gmk/RSC_dropitemParam.json", 'r+', encoding='utf-8') as file:

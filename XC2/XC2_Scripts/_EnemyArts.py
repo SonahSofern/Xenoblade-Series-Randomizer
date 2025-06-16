@@ -1,6 +1,6 @@
-import json, random, Options
-from Enhancements import *
-
+import json, random
+from XC2.XC2_Scripts.Enhancements import *
+from XC2.XC2_Scripts import Options
 
 def EnemyArts(spinbox):
     Arts = {
