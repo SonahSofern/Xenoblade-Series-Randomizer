@@ -19,6 +19,7 @@ class TornaShop: # created to allow me to pass these objects easier
             self.hasprogression = True
         else:
             self.hasprogression = False
+        self.npcid = input['NPC ID']
         addtolist.append(self)
 
 def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
@@ -29,7 +30,8 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
         'Name': 'Lascham Weapons',
         'Location Near': 2401,
         'Story Pre-Req': 12,
-        'Required Items': []
+        'Required Items': [],
+        'NPC ID': 3667
     }
     LaschamAccessories = {
         'MNU_ShopList $id': 247,
@@ -38,7 +40,8 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
         'Name': 'Lascham Accessories',
         'Location Near': 2401,
         'Story Pre-Req': 12,
-        'Required Items': []
+        'Required Items': [],
+        'NPC ID': 3668
     }
     AlettaWeapons = {
         'MNU_ShopList $id': 250,
@@ -47,7 +50,8 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
         'Name': 'Aletta Weapons',
         'Location Near': 2305,
         'Story Pre-Req': 25,
-        'Required Items': []
+        'Required Items': [],
+        'NPC ID': 3669
     }
     AlettaAccessories = {
         'MNU_ShopList $id': 249,
@@ -56,7 +60,8 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
         'Name': 'Aletta Accessories',
         'Location Near': 2305,
         'Story Pre-Req': 25,
-        'Required Items': []
+        'Required Items': [],
+        'NPC ID': 3670
     }
     HyberWeapons = {
         'MNU_ShopList $id': 252,
@@ -65,7 +70,8 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
         'Name': 'Hyber Weapons',
         'Location Near': 2307,
         'Story Pre-Req': 33,
-        'Required Items': []
+        'Required Items': [],
+        'NPC ID': 3671
     }
     HyberAccessories = {
         'MNU_ShopList $id': 251,
@@ -74,7 +80,8 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
         'Name': 'Hyber Accessories',
         'Location Near': 2307,
         'Story Pre-Req': 33,
-        'Required Items': []
+        'Required Items': [],
+        'NPC ID': 3672
     }
     GoldenBeastInfo = {
         'MNU_ShopList $id': 255,
@@ -83,7 +90,8 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
         'Name': 'Golden Beast Info',
         'Location Near': 2368,
         'Story Pre-Req': 53,
-        'Required Items': TornaSlatePieceIDs
+        'Required Items': TornaSlatePieceIDs,
+        'NPC ID': 3673
     }
     CapitalWeapons = {
         'MNU_ShopList $id': 254,
@@ -92,7 +100,8 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
         'Name': 'Capital Weapons',
         'Location Near': 2357,
         'Story Pre-Req': 36,
-        'Required Items': []
+        'Required Items': [],
+        'NPC ID': 3376
     }
     CapitalAccessories = {
         'MNU_ShopList $id': 253,
@@ -101,7 +110,8 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
         'Name': 'Capital Accessories',
         'Location Near': 2357,
         'Story Pre-Req': 36,
-        'Required Items': []
+        'Required Items': [],
+        'NPC ID': 3375
     }
     TravelingBard1 = {
         'MNU_ShopList $id': 67,
@@ -110,7 +120,8 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
         'Name': 'Traveling Bard 1',
         'Location Near': 2355,
         'Story Pre-Req': 46,
-        'Required Items': []
+        'Required Items': [],
+        'NPC ID': 3704
     }
     TravelingBard2 = {
         'MNU_ShopList $id': 68,
@@ -119,7 +130,8 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
         'Name': 'Traveling Bard 2',
         'Location Near': 2355,
         'Story Pre-Req': 46,
-        'Required Items': []
+        'Required Items': [],
+        'NPC ID': 3717
     }
 
     TornaShopDict = [LaschamWeapons, LaschamAccessories, AlettaWeapons, AlettaAccessories, HyberWeapons, HyberAccessories, GoldenBeastInfo, CapitalWeapons, CapitalAccessories, TravelingBard1, TravelingBard2]

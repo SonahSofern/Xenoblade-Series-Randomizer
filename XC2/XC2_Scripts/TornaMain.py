@@ -107,11 +107,9 @@ def PassAlongSpoilerLogInfo(fileEntryVar2, Version2, permalinkVar2, seedEntryVar
     if Options.TornaCreateSpoilerLog.GetState():
         CreateSpoilerLog()
 
-def AllTornaRando():
-    CheckforIncompatibleSettings()
+def AllTornaRando(TornaCompatibleOptions):
     DetermineSettings()
-    if ProgressionLocTypes[:6] == [0,0,0,0,0,0]:
-        raise Exception("There are no progression locations enabled, cannot generate seed!")
+    CheckforIncompatibleSettings(TornaCompatibleOptions)
     #Recipes = TornaRecipes.CreateTornaRecipeList()
     TornaQuests.SelectRandomPointGoal()
     ChosenSupporterAmounts = [1,16,32,48,64] # have a few sliders going forwards to let the player change this amount
@@ -142,14 +140,14 @@ def AllTornaRando():
         GildedCheckNames()
         ChangeReqItemRarities()
 
-def CheckforIncompatibleSettings():
-    AllowableOptions = ['Blade Button Combos', 'Blade Defenses', 'Blade Elements', 'Community Level Story Requirements', 'Condense Gold Loot', 'Create Torna Spoiler Log', 'Enemy Movespeed', 'Enhancement Display', 'Everlasting Pouch Items', 'Field Item Size', 'Gilded Required Check Names', 'Increased Movespeed', 'Music', 'Mute Popups', 'NPC Size', 'Remove Certain Gormott Checks', 'Shortcuts', 'Torna In-Game Hints', 'Torna Randomization', 'Treasure Chest Visibility', 'Trust Lines']
+def CheckforIncompatibleSettings(TornaCompatibleOptions):
+    global DontMakeSpoilerLog
     ConflictingOptions = []
     ConflictingOptionNames = []
     ConflictingSubOptions = []
     exceptionmsg = ""
     for opt in OptionList:
-        if opt.GetState() and opt.name not in AllowableOptions:
+        if opt.GetState() and opt not in TornaCompatibleOptions:
             ConflictingOptions.append(opt)
             ConflictingOptionNames.append(opt.name)
     for opt in OptionList:
@@ -163,7 +161,13 @@ def CheckforIncompatibleSettings():
     if ConflictingSubOptions != []:
         exceptionmsg += f"Torna Randomization did not complete due to the following conflicting suboptions:\nShortcuts: {ConflictingSubOptions}."
     if exceptionmsg != "":
+        DontMakeSpoilerLog = True
         raise Exception(exceptionmsg)
+    elif ProgressionLocTypes[:6] == [0,0,0,0,0,0]:
+        DontMakeSpoilerLog = True
+        raise Exception("There are no progression locations enabled, cannot generate seed!")
+    else:
+        DontMakeSpoilerLog = False
 
 def DetermineSettings():
     global ProgressionLocTypes
@@ -213,7 +217,7 @@ def CreateItemLists():
         ItemInfo(item, "AuxCore", AuxCoreList)
     for item in TornaWeaponChips:
         ItemInfo(item, "WeaponChip", WeaponChipList)
-    for item in Accessories + Helper.InclRange(657,680):
+    for item in AllowedTornaAccessories:
         ItemInfo(item, "Accessory", AccessoryList)
     for item in Helper.InclRange(585, 647):
         ItemInfo(item, "WeaponAccessory", WeaponAccessoryList)
@@ -381,7 +385,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
     for item in FullItemList[5]:
         if item.id in HelpfulUpgrades and item.id not in PlacedItems:
             HelpfulUnplacedUpgrades.append(item)
-    PoolMaxItemsPerCategory = 200
+    PoolMaxItemsPerCategory = [250, 40, 40, 250, 200, 200] 
     AccessoryList = FullItemList[0]
     WeaponAccessoryList = FullItemList[1]
     WeaponChipList = [chip for chip in FullItemList[2] if chip not in FullItemReqList]
@@ -392,8 +396,8 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
     NewItemList.append(CollectionMaterialList)
     NewItemList.append(HelpfulUnplacedUpgrades)
     SelectiveItemPool = []
-    for cat in NewItemList:
-        SelectiveItemPool.append(random.choices(cat, k = PoolMaxItemsPerCategory))
+    for cat in range(len(NewItemList)):
+        SelectiveItemPool.append(random.choices(NewItemList[cat], k = PoolMaxItemsPerCategory[cat]))
     SelAccList, SelWAccList, SelChipList, SelXCoreList, SelMatList, SelUpgradeList = SelectiveItemPool[0], SelectiveItemPool[1], SelectiveItemPool[2], SelectiveItemPool[3], SelectiveItemPool[4], SelectiveItemPool[5]
     SelFull = SelAccList + SelWAccList + SelChipList + SelXCoreList + SelMatList + SelUpgradeList
     ValidItemtoLoc = {
@@ -503,9 +507,6 @@ def DetermineValidItemSpots(ChosenItem, ChosenItemCat, CatList, CurrentStoryStep
         raise Exception(f"Ran out of valid locations when trying to ensure {ChosenItem}: ({ItemIDtoItemName[ChosenItem]} was not locked by itself!")
     else:
         ValidItemSpots = TempValidItemSpots
-
-
-
     return ValidItemSpots
 
 def UpdateAllItemReqs(CurrentStepReqs, Locations, ChosenLocation, ChosenItem, AllLocations, CurrentStepNumber = -1):
@@ -727,13 +728,13 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
                     row["POP_TIME"] = 256
                     row["popWeather"] = 0
                     row["CollectionTable"] = collectionpoint.collectiontableid
-                    if row["Condition"] not in [3230, 3231]: # we only care about the gold and silver seeker conditions
+                    if row["Condition"] not in [3169, 3230, 3231, 3249, 3250, 3251, 3252]: # we only care about the gold and silver seeker conditions, and the miasma dispersal conditions
                         row["Condition"] = 0
                     break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-       
+
     with open("./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as file: # Gormott collection points
         data = json.load(file)
         for collectionpoint in Locs[10]:
@@ -742,7 +743,7 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
                     row["POP_TIME"] = 256
                     row["popWeather"] = 0
                     row["CollectionTable"] = collectionpoint.collectiontableid
-                    if row["Condition"] not in [3230, 3231]: # we only care about the gold and silver seeker conditions
+                    if row["Condition"] not in [3230, 3231, 3253, 3254, 3255, 3256, 3257]: # we only care about the gold and silver seeker conditions, and the miasma dispersal conditions
                         row["Condition"] = 0
                     break
         file.seek(0)
@@ -1124,9 +1125,8 @@ def DisableUnrequiredQuests(): # we want the npcs for non-required quests to not
             for sq in AllUnrequiredSidequests:
                 for row in data["rows"]:
                     if row["$id"] in QuestGiverNPCIDtoQuestNumber.keys():
-                        if sq == QuestGiverNPCIDtoQuestNumber[row["$id"]]:
+                        if sq.id == QuestGiverNPCIDtoQuestNumber[row["$id"]]:
                             row["QuestID"] = 0
-                            row["EventID"] = 0
                             break
             file.seek(0)
             file.truncate()
@@ -1207,11 +1207,17 @@ def GildedCheckNames():
     # cannot change anything about the red bag items in the field, they display no text, and I'm not sure where their model info is in the bdats, or if it even exists. probably tied to the map itself?
     RequiredItems = KeyItemtoLocDict.keys()
     RequiredLocations = list(KeyItemtoLocDict.values())
-    RequiredCollectionPoints = [x.collectiontableid for x in RequiredLocations if x.type in ["tornacollectionpoint", "gormottcollectionpoint"]]
+    RequiredCollectionPointTableIDs = [x.collectiontableid for x in RequiredLocations if x.type in ["tornacollectionpoint", "gormottcollectionpoint"]]
+    RequiredTornaCollectionPointMapIDs = [int(x.id) for x in RequiredLocations if x.type in ["tornacollectionpoint"]]
+    EmptyTornaCollectionPointMapIDs = [int(x.id) for x in TornaCollectionPointList if x.randomizeditems == [0,0,0,0] and x not in RequiredLocations]
+    RequiredGormottCollectionPointMapIDs = [int(x.id) for x in RequiredLocations if x.type in ["gormottcollectionpoint"]]
+    EmptyGormottCollectionPointMapIDs = [int(x.id) for x in GormottCollectionPointList if x.randomizeditems == [0,0,0,0] and x not in RequiredLocations]
     RequiredChestIDs = [x.id for x in RequiredLocations if x.type == "chest"]
     RequiredEnemies = [x.id for x in RequiredLocations if x.type in ["normalenemy", "uniquemonster", "boss", "questenemy"]]
     RequiredMisc = [x.name for x in RequiredLocations if x.type == "misc"]
     RequiredShops = [x.shoplistid for x in RequiredLocations if x.type == "shop"]
+    RequiredShopNPCs = [x.npcid for x in RequiredLocations if x.type == "shop"]
+    UnrequiredShopNPCs = [x.npcid for x in Shops if x.type == "shop" and x not in RequiredLocations]
     RequiredQuests = [x.rewardids[0] for x in AllRequiredSidequests if x.rewardids!= []]
     RequiredNPCs = [x.id for x in AllRequiredSidequests if x.rewardids == []]
     CurGmkNameMax = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/fld_gmkname.json", "$id")
@@ -1224,15 +1230,43 @@ def GildedCheckNames():
     with open("./XC2/_internal/JsonOutputs/common/FLD_CollectionTable.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
-            if row["$id"] in RequiredCollectionPoints:
+            if row["$id"] in RequiredCollectionPointTableIDs:
                 row["categoryName"] = ProgressID
             else:
                 row["categoryName"] = NonProgressID
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_CollectionPopList.json", ["nameRadius"], 255) # makes it easier to see from far away
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_CollectionPopList.json", ["nameRadius"], 255) # makes it easier to see from far away
+    with open("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in RequiredTornaCollectionPointMapIDs:
+                row["nameRadius"] = 255
+                row["rarity"] = 2
+            elif row["$id"] not in EmptyTornaCollectionPointMapIDs:
+                row["nameRadius"] = 15
+                row["rarity"] = 1
+            else:
+                row["nameRadius"] = 1
+                row["rarity"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in RequiredGormottCollectionPointMapIDs:
+                row["nameRadius"] = 255
+                row["rarity"] = 2
+            elif row["$id"] not in EmptyGormottCollectionPointMapIDs:
+                row["nameRadius"] = 15
+                row["rarity"] = 1
+            else:
+                row["nameRadius"] = 1
+                row["rarity"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)   
 
     # chests
     with open("./XC2/_internal/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as file: 
@@ -1253,7 +1287,7 @@ def GildedCheckNames():
     
     ChestIDToUnearthFieldSkillID = {2205:1509, 2223:1549, 2243:1550, 2244:1551, 2257:1561, 2259:1552, 2260:1557, 2261:1554, 2263:1553, 2264:1562, 2324:1594, 2501:1497, 2502:1496, 2520:1577, 2523:1578, 2526:1580, 2540:1581, 2542:1583, 2544:1579, 2547:1582}
     AllUnearthIDs = [1509, 1549, 1550, 1551, 1561, 1552, 1557, 1554, 1553, 1562, 1594, 1497, 1496, 1577, 1578, 1580, 1581, 1583, 1579, 1582]
-    RequiredUnearthIDs = [ChestIDToUnearthFieldSkillID[x] for x in RequiredChestIDs if x in AllUnearthIDs]
+    RequiredUnearthIDs = [ChestIDToUnearthFieldSkillID[x] for x in RequiredChestIDs if x in ChestIDToUnearthFieldSkillID.keys()]
 
     FileList = ["./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", "./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_TboxPop.json"]
     for curfile in FileList:
@@ -1323,9 +1357,9 @@ def GildedCheckNames():
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in RequiredEnemyNameList:
-                row["name"] = "[System:Color name=tutorial ]" + row["name"] + "[/System:Color]"
+                row["name"] = "[System:Color name=tutorial]"+ row["name"] + "[/System:Color]"
             else:
-                row["name"] = "[System:Color name=red ]" + row["name"] + "[/System:Color]"
+                row["name"] = "[System:Color name=red]"+ row["name"] + "[/System:Color]"
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1353,9 +1387,32 @@ def GildedCheckNames():
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in RequiredShopNameList:
-                row["name"] = "[System:Color name=tutorial ]" + row["name"] + "[/System:Color]"
+                row["name"] = "[System:Color name=tutorial]"+ row["name"] + "[/System:Color]"
             elif row["$id"] >= 226:
-                row["name"] = "[System:Color name=red ]" + row["name"] + "[/System:Color]"
+                row["name"] = "[System:Color name=red]"+ row["name"] + "[/System:Color]"
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+    RequiredShopNPCNames, UnrequiredShopNPCNames = [], []
+    with open("./XC2/_internal/JsonOutputs/common/RSC_NpcList.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in RequiredShopNPCs:
+                RequiredShopNPCNames.append(row["Name"])
+            elif row["$id"] in UnrequiredShopNPCs:
+                UnrequiredShopNPCNames.append(row["Name"])
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+    with open("./XC2/_internal/JsonOutputs/common_ms/fld_npcname.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in RequiredShopNPCNames:
+                row["name"] = "[System:Color name=tutorial]"+ row["name"] + "[/System:Color]"
+            elif row["$id"] in UnrequiredShopNPCNames:
+                row["name"] = "[System:Color name=red]"+ row["name"] + "[/System:Color]"
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1378,24 +1435,29 @@ def GildedCheckNames():
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in RequiredSidequestNameList:
-                row["name"] = "[System:Color name=tutorial ]" + row["name"] + "[/System:Color]"
+                row["name"] = "[System:Color name=tutorial]"+ row["name"] + "[/System:Color]"
             elif row["$id"] in NonRequiredSidequestNameList:
-                row["name"] = "[System:Color name=red ]" + row["name"] + "[/System:Color]"
+                row["name"] = "[System:Color name=red]"+ row["name"] + "[/System:Color]"
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    if RequiredNPCs != []:
-        with open("./XC2/_internal/JsonOutputs/common_ms/fld_npcname.json", 'r+', encoding='utf-8') as file: 
-            data = json.load(file)
+    with open("./XC2/_internal/JsonOutputs/common_ms/fld_npcname.json", 'r+', encoding='utf-8') as file: 
+        data = json.load(file)
+        for row in data["rows"]:
             for npc in RequiredNPCs:
-                for row in data["rows"]:
-                    if row["$id"] == SidequestNPCNumbertoTextIDRow[npc]:
-                        row["name"] = "[System:Color name=tutorial ]" + row["name"] + "[/System:Color]"
-                    elif row["$id"] in SidequestNPCNumbertoTextIDRow.values():
-                        row["name"] = "[System:Color name=red ]" + row["name"] + "[/System:Color]"
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
+                if row["$id"] == SidequestNPCNumbertoTextIDRow[npc]:
+                    if "[System:Color name=red]" in row["name"]: # if it already was assigned a red color due to the shop the npc has, replace the color with yellow since the npc reward is important
+                        row["name"].replace("[System:Color name=red]", "[System:Color name=tutorial]")
+                        break
+                    elif "[System:Color name=tutorial]" not in row["name"]: # doesnt need a second gold if it's already gold
+                        row["name"] = "[System:Color name=tutorial]"+ row["name"] + "[/System:Color]"
+                        break
+            if row["$id"] in SidequestNPCNumbertoTextIDRow.values():
+                if "[System:Color name=tutorial]" not in row["name"] and "[System:Color name=red]" not in row["name"]: # if it doesnt already have a red or yellow name and it's in the dictionary, turn it red
+                    row["name"] = "[System:Color name=red]"+ row["name"] + "[/System:Color]"
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
     # needs to account for npc giver name probably. not sure how fully to implement this. are there npcs that give multiple quests? I guess those are separate instances.
 
@@ -1522,6 +1584,8 @@ def AddNewFlagPointers(GateCommReq, GateNumber): # if we reduce the required com
         JSONParser.ExtendJSONFile("common/FLD_ConditionFlag.json", [[{"$id": NewCondFlagRowID, "FlagType": 4, "FlagID": 652, "FlagMin": GateCommReq, "FlagMax": 6}]])
 
 def CreateSpoilerLog():
+    if DontMakeSpoilerLog:
+        return
     IDstoAdd = []
     try: 
         if HintedItemText != []:
@@ -1602,6 +1666,7 @@ def CreateSpoilerLog():
     alllines.append("Chosen Required Quests and NPC Conversations by Community Level Requirement:\n")
     alllines.append("\n")
     QuestListByCommReq = {0:[],1:[],2:[],3:[],4:[],5:[]}
+    QuestNamesAlreadyUsed = []
     for sq in AllRequiredSidequests:
         QuestListByCommReq[sq.comreq].append(sq)
     for commlevel in range(0, 6):
@@ -1610,12 +1675,16 @@ def CreateSpoilerLog():
         else:
             alllines.append(f"     Community Level {commlevel} Required:\n\n")
         for quest in QuestListByCommReq[commlevel]:
-            if quest not in ChosenLevel2Quests + ChosenLevel4Quests:
-                alllines.append(f"          {quest.name} (Quest Reward Required)\n")
-            elif quest in ChosenLevel2Quests:
-                alllines.append(f"          {quest.name} (Required for Story Step 38)\n")
-            else:
-                alllines.append(f"          {quest.name} (Required for Story Step 50)\n")
+            if quest.name not in QuestNamesAlreadyUsed:
+                if quest not in ChosenLevel2Quests + ChosenLevel4Quests:
+                    alllines.append(f"          {quest.name} (Quest Reward Required)\n")
+                    QuestNamesAlreadyUsed.append(quest.name)
+                elif quest in ChosenLevel2Quests:
+                    alllines.append(f"          {quest.name} (Required for Story Step 38)\n")
+                    QuestNamesAlreadyUsed.append(quest.name)
+                else:
+                    alllines.append(f"          {quest.name} (Required for Story Step 50)\n")
+                    QuestNamesAlreadyUsed.append(quest.name)
         alllines.append("\n")
     alllines.append("\n")
     alllines.append("Logical Playthrough:\n")
