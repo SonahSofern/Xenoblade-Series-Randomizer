@@ -1,6 +1,7 @@
-import json, random, Options
+import json, random
+from XCDE.XCDE_Scripts import Options
 from scripts import JSONParser, Helper
-from IDs import *
+from XCDE.XCDE_Scripts.IDs import *
 
 def EnemyScales(): # Try editing the size flag as well since
     scales = [0.2,0.3,0.5,0.7,0.9,1.1,1.3,1.5,1.7,1.9,2.1]
@@ -29,4 +30,3 @@ def NPCScales():
                 npc["scale"] = random.randrange(20,400)
         JSONParser.CloseFile(npcData, npcFile)
         
-#MTAwAFJleW5Ub3BwbGVzQmFuYQDfu0+hMKBA9k9GFg/+Mf///////4/Po4d8

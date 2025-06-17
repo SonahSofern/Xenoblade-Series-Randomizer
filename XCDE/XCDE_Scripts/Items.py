@@ -1,6 +1,6 @@
-import json, Options, IDs, random
+import json, random
 from scripts import JSONParser, Helper, PopupDescriptions
-
+from  XCDE.XCDE_Scripts import Options, IDs
 keepTypeDescriptions = "This will ensure that items replacing an item will be of the same type\n(Weapons replace Weapons, Chestplates replace Chestplates etc.) \nThis will override any of the weight options."
 
 class ItemType:

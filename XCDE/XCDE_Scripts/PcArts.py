@@ -1,7 +1,7 @@
-import json, random, Options
-import scripts.Helper
-import scripts.JSONParser
-import scripts.PopupDescriptions 
+import json, random
+from XCDE.XCDE_Scripts import Options
+import scripts.Helper, scripts.JSONParser, scripts.PopupDescriptions
+
 TalentArts = [102,101,100,44,99,43,98,42,62,97,154,1,2,19,36,41,61,79,96,119,120,121,122,123,124,125,126,127,153,171,152] # Need to shuffle these seperately for various reasons
 DLCArts = [155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187]
 GuestArts = [144,145,146,147,148,149]

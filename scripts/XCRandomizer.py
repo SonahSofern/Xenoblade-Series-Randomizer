@@ -51,7 +51,7 @@ class FileReplacer:
         self.filename = filename
 
 
-def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = []):
+def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = []):
     import  os, sys
     from scripts import SavedOptions, Helper, GUISettings, PermalinkManagement, Seed, Interactables, SettingsPresets
     from tkinter.font import Font
@@ -61,7 +61,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     SavedOptionsFileName = f"LastSave.txt"
     JsonOutput = f"./{Game}/_internal/JsonOutputs"
     SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt", f"{Game}/GUI")
-    RootsForStyling.append(root)
+    RootsForStyling.append(window)
     defaultFont = Font(family=GUISettings.defFontVar.get(), size=GUISettings.defFontSizeVar.get())
 
 
@@ -70,13 +70,6 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     else:
         bdat_path = f"./{Game}/_internal/Toolset/bdat-toolset-win64.exe"
 
-    # if isOneFile: 
-    #     icon_path = os.path.join(sys._MEIPASS, 'Images', f'{Game}Icon.png')
-    # else:
-    #     icon_path = f"./{Game}/_internal/Images/{Game}Icon.png"
-    # icon = PhotoImage(file=icon_path)
-    # root.iconphoto(True, icon)
-
     bg = random.choice(backgroundImages)
     if isOneFile: 
         bg_image = Image.open(os.path.join(sys._MEIPASS, 'Images', bg))
@@ -84,7 +77,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
         bg_image = Image.open(f"./{Game}/_internal/Images/{bg}")
     bg_photo = ImageTk.PhotoImage(bg_image)
 
-    background = tk.Canvas(root)
+    background = tk.Canvas(window)
     background.pack(fill="both", expand=True, padx=0, pady=0)
     background.create_image(0, 0, image=bg_photo, anchor="nw")
 
@@ -120,7 +113,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
         if isOneFile and opt.isDevOption: # Dont show dev options when packed for users
             continue
         
-        opt.DisplayOption(InnerDict[opt.tab], root, defaultFont, GUISettings.defGUIThemeVar.get())
+        opt.DisplayOption(InnerDict[opt.tab], window, defaultFont, GUISettings.defGUIThemeVar.get())
 
     def GenRandomSeed(randoSeedEntryVar):
         randoSeedEntryVar.set(Seed.RandomSeedName(SeedNouns, SeedVerbs))
@@ -172,7 +165,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     permalinkEntry = ttk.Entry(permalinkFrame, textvariable=permalinkVar)
     CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
     permalinkVar.set(CompressedPermalink)
-    permalinkButton = ttk.Button(permalinkFrame, text="Preset", command=lambda: SettingsPresets.PresetsWindow("Presets", root, defaultFont, f"{Game}/SaveData", EntriesToSave + Interactables.OptionList, Game))
+    permalinkButton = ttk.Button(permalinkFrame, text="Preset", command=lambda: SettingsPresets.PresetsWindow("Presets", window, defaultFont, f"{Game}/SaveData", EntriesToSave + Interactables.OptionList, Game))
     permalinkFrame.pack(padx=windowPadding, anchor="w", fill=X)
     permalinkButton.pack(side="left")
     permalinkEntry.pack(side='left', fill=X, expand=True)
@@ -185,7 +178,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     randoProgressDisplay.pack(pady=0, side=LEFT)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(root, RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles)))
+    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(window, RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles)))
     RandomizeButton.pack(pady=(5,windowPadding),side="left", padx=(windowPadding, 0), anchor=CENTER)
     
     # Options Cog
@@ -194,10 +187,10 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     else:  # If running as a script (not bundled)
         icon_path = "./_internal/Images/SmallSettingsCog.png"
     Cog = PhotoImage(file=icon_path)
-    SettingsButton = ttk.Button(background,padding=5, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, GUISettings.defGUIThemeVar, Game))
+    SettingsButton = ttk.Button(background,padding=5, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(window, defaultFont, GUISettings.defGUIThemeVar, Game))
     SettingsButton.pack(pady=(5,windowPadding),anchor="e",expand=True, side=RIGHT, padx=windowPadding) 
-    
     root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Interactables.OptionList, SavedOptionsFileName, Game), root.destroy()))
+
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
 
     pb = ttk.Progressbar(
@@ -207,6 +200,5 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
         length=3000
     )
 
-    root.bind("<Configure>", lambda event: resize_bg(event, root, bg_photo, bg_image, background))
-    root.mainloop()
+    window.bind("<Configure>", lambda event: resize_bg(event, window, bg_photo, bg_image, background))
 

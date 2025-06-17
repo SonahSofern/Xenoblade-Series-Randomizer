@@ -1,6 +1,7 @@
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_PSVskill.html
 import json, random, time
-import Options, scripts.PopupDescriptions, scripts.JSONParser, scripts.Helper
+import scripts.PopupDescriptions, scripts.JSONParser, scripts.Helper
+from XCDE.XCDE_Scripts import Options
 
 yoinkSkills = [140,138]
 MeliaSkills = [152,157,159]

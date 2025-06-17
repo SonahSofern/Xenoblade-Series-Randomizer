@@ -1,4 +1,5 @@
-import Options, json, random
+import json, random
+from  XCDE.XCDE_Scripts import Options
 from scripts import JSONParser, Helper, PopupDescriptions
 
 

@@ -1,7 +1,6 @@
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))) # Allows us to use the scripts folder as a module
 from tkinter import *
-root = Tk()
 import scripts.XCRandomizer, scripts.JSONParser
 from XC2.XC2_Scripts import SeedNames, Options
 Version = "1.5.0"
@@ -21,5 +20,3 @@ def ShowTitleScreenText():
 extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.AddCustomEnhancements(), lambda: Options.ObjectNameCleanup.ReassignAlphabeticalSort()]
 mainFolderNames = ["common", "common_gmk"]
 subFolderNames = ["common_ms"]
-
-scripts.XCRandomizer.CreateMainWindow(root, "XC2", Version, "Xenoblade Chronicles 2 Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash])

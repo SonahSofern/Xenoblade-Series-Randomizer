@@ -1,4 +1,5 @@
-import Options, json, random, copy
+import json, random, copy
+from XCDE.XCDE_Scripts import Options
 from scripts import JSONParser, Helper, PopupDescriptions
 
 def ArmorRando():

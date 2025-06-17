@@ -1,4 +1,5 @@
-import json, random, Options
+import json, random
+from XCDE.XCDE_Scripts import Options
 from scripts import JSONParser, Helper
 
 def CutsceneSkipper():

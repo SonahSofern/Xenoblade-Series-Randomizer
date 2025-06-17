@@ -1,7 +1,7 @@
 # KP_list has the models
-import IDs, json, random, Options
+import json, random
 from scripts import JSONParser, Helper, PopupDescriptions
-
+from  XCDE.XCDE_Scripts import Options, IDs
 
 def NPCModelRando():
     odds = Options.NPCModelsOption.GetSpinbox()

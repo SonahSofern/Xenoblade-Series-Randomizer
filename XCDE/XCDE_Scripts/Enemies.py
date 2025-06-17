@@ -1,7 +1,9 @@
 
-import json, random, Options, IDs, copy, traceback, math
+import json, random, copy, traceback, math
+from XCDE.XCDE_Scripts import Options, IDs
 from scripts import Helper, JSONParser, PopupDescriptions
-from IDs import *
+from XCDE.XCDE_Scripts.IDs import *
+
 class Enemy:
     def __init__(self, enelistArea, enelist):
         self.eneListArea = enelistArea
