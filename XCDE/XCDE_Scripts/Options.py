@@ -3,6 +3,7 @@ from scripts import Helper
 from XCDE.XCDE_Scripts import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales, NPC, Weapons, Items, Cutscenes, IDs, Landmarks
 
 OptionList =[]
+
 General = 1
 Character  = 2
 Enemies = 3
@@ -19,14 +20,7 @@ Tabs = {
     Funny: '😄 Funny',
 }
 
-# # General
-# TradeOption = Option("NPC Trades", General, "Randomizes chosen categories of NPC trades", [lambda: NPC.Trades()], descData=lambda: NPC.NPCTradesDesc())
-# TradeOption_Weapon = SubOption("Weapons", TradeOption)
-# TradeOption_Armor = SubOption("Armor", TradeOption)
-# TradeOption_Gem = SubOption("Gems", TradeOption)
-# TradeOption_Collectibles = SubOption("Collectibles", TradeOption)
-# TradeOption_Materials = SubOption("Materials", TradeOption)
-
+# General
 TradeOption = Option("Trading", General, "Randomizes the offers of NPC trades into the chosen options", [lambda: Items.TradeOptions()], descData=lambda: Items.TradeOptionsDesc(), hasSpinBox = True)
 TradeOption_KeepType = SubOption("Keep Item Type", TradeOption)
 TradeOptions_Collectables = SubOption("Collectables", TradeOption, hasSpinBox=True, spinDesc="Weights ↓")
