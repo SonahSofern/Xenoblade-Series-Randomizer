@@ -1,6 +1,3 @@
-import sys, os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))) # Allows us to use the scripts folder as a module
-from tkinter import *
 import scripts.JSONParser
 from XC3.XC3_Scripts import SeedNames, Options
 Version = "BETA"

@@ -40,16 +40,16 @@ root.iconphoto(True, icon)
 
 
 from XC2.XC2_Scripts.XC2_Randomizer import *
-scripts.XCRandomizer.CreateMainWindow(root, Xenoblade2, "XC2", Version, "Xenoblade Chronicles 2 Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash])
+XCRandomizer.CreateMainWindow(root, Xenoblade2, "XC2", Version, "Xenoblade Chronicles 2 Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash])
 
 from XCDE.XCDE_Scripts.XCDE_Randomizer import *
-scripts.XCRandomizer.CreateMainWindow(root, XenobladeDE, "XCDE", Version, "Xenoblade Chronicles DE Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash])
+XCRandomizer.CreateMainWindow(root, XenobladeDE, "XCDE", Version, "Xenoblade Chronicles DE Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash])
 
 from XC3.XC3_Scripts.XC3_Randomizer import *
-scripts.XCRandomizer.CreateMainWindow(root, Xenoblade3,  "XC3", Version, "Xenoblade Chronicles 3 Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, textFolderName,extraArgs=extraArgs, backgroundImages=backgrounds)
+XCRandomizer.CreateMainWindow(root, Xenoblade3,  "XC3", Version, "Xenoblade Chronicles 3 Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, textFolderName,extraArgs=extraArgs, backgroundImages=backgrounds)
 
 from XCXDE.XCXDE_Scripts.XCXDE_Randomizer import *
-scripts.XCRandomizer.CreateMainWindow(root, XenobladeXDE, "XCXDE", Version, "Xenoblade Chronicles X DE Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds)
+XCRandomizer.CreateMainWindow(root, XenobladeXDE, "XCXDE", Version, "Xenoblade Chronicles X DE Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds)
 
 
 root.mainloop()

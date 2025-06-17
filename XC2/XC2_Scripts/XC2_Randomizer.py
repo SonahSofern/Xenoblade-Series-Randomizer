@@ -1,12 +1,7 @@
-import sys, os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))) # Allows us to use the scripts folder as a module
-from tkinter import *
 import scripts.XCRandomizer, scripts.JSONParser
 from XC2.XC2_Scripts import SeedNames, Options
+
 Version = "1.5.0"
-
-
-
 backgrounds = ["titlescreen1.png"]
 
 TitlescreenSplash = scripts.XCRandomizer.FileReplacer(["Images/Logos/Aegis.wilay"],  "/menu/image", "mnu001_titlelogo_us.wilay", "XC2")
