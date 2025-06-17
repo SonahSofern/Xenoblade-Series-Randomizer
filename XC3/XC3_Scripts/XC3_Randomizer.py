@@ -1,9 +1,8 @@
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))) # Allows us to use the scripts folder as a module
 from tkinter import *
-root = Tk()
-import scripts.XCRandomizer, SeedNames, scripts.JSONParser, Options
-
+import scripts.JSONParser
+from XC3.XC3_Scripts import SeedNames, Options
 Version = "BETA"
 
 
@@ -18,4 +17,3 @@ mainFolderNames = ["des", "btl", "evt", "fld", "map", "prg", "qst"]
 subFolderNames = ["autotalk", "battle", "field", "menu", "quest", "system"]
 textFolderName="gb/game"
 
-scripts.XCRandomizer.CreateMainWindow(root, "XC3", Version, "Xenoblade Chronicles 3 Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, textFolderName,extraArgs=extraArgs, backgroundImages=backgrounds)
