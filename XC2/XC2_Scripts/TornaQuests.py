@@ -6,13 +6,26 @@ from IDs import *
 from scripts import Helper
 
 class TornaSideQuest: # created to allow me to pass these objects easier
-    def __init__(self, input, addtolist, rewardnumber):
+    def __init__(self, input, addtolist, rewardnumber, RecipeList):
         self.id = input["Quest Number"]
         self.name = input["Quest Name"]
         self.mainreq = input["Main Story Req"]
         self.sideprereq = input["Sidequest Pre-Req"]
         if self.id == 20:
             pass
+        self.reqrecipenames = []
+        self.reqsoloitems = []
+        for itmlist in input["Item Requirements"]:
+            if isinstance(itmlist, list) and itmlist[0] >= 30000 and len(itmlist) > 1:
+                for recipe in RecipeList:
+                    if set(recipe.components) == set([item for item in itmlist if item >= 30000]):
+                        self.reqrecipenames.append(recipe.shopchangenametext)
+                        break
+            else:
+                if isinstance(itmlist, int):
+                    self.reqsoloitems.append(itmlist)
+                elif isinstance(itmlist, list):
+                    self.reqsoloitems.extend([item for item in itmlist])
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input["Item Requirements"])
         self.complus = input["Community Gained"]
         self.comreq = input["Community Level Req"]
@@ -37,7 +50,7 @@ class TornaMainQuest:
         addtolist.append(self)
         self.id = addtolist.index(self) + 1
 
-def SelectRandomPointGoal(): # There are some sidequests that require you to feed items into a shop, any combination of items to get you to the point requirement. This function randomly chooses 1 of the items in that shop, and notes it down as the logical requirement, restricting it to be placed logically accessible before the quest
+def SelectRandomPointGoal(Recipes): # There are some sidequests that require you to feed items into a shop, any combination of items to get you to the point requirement. This function randomly chooses 1 of the items in that shop, and notes it down as the logical requirement, restricting it to be placed logically accessible before the quest
     # there's probably a much easier way to do this that I'm just not thinking of, but it gets the job done. Probably a dictionary now that I think about it more, but at this point it works, why fix it
     OptionalRows = [91,95,99,100,96,101,102,97,98,103,92] # needs to stay in this order or else the indexes will be wrong!
     TaskLists = []
@@ -79,7 +92,6 @@ def SelectRandomPointGoal(): # There are some sidequests that require you to fee
     AllOptionals = [Quest15Optional, Quest28Optional, Quest29Optional1, Quest29Optional2, Quest30Optional, Quest34Optional1, Quest34Optional2, Quest44Optional1, Quest44Optional2, Quest47Optional, Quest55Optional]
     for optional in range(len(AllOptionals)):
         AllOptionals[optional] = AllQuestListTasks[optional][TaskIndexes[optional]]
-    
     with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for optional in range(len(OptionalRows)):
@@ -102,7 +114,7 @@ def SelectRandomPointGoal(): # There are some sidequests that require you to fee
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, Community2Gate): # Selects the community quests that logically unlock Story Events 38 and 50 (lv 2 and lv 4 community)
+def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, Community2Gate, RecipeList): # Selects the community quests that logically unlock Story Events 38 and 50 (lv 2 and lv 4 community)
     TornaSidequest1 = {
         'Quest Name': 'What Bars the Way',
         'Quest Number': 1,
@@ -284,7 +296,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Quest Number': 17,
         'Main Story Req': 25,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [[30380] , [30438] , [30347]],
+        'Item Requirements': [[30380] , [30438] , [30347], [30365]],
         'Community Gained': 0,
         'Community Level Req': 0,
         'Reward Set IDs': [1085],
@@ -923,7 +935,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
     TornaSidequests = [] # holds the TornaSideQuest class objects
 
     for sidequest in TornaSidequestDict:
-        TornaSideQuest(sidequest, TornaSidequests, QuestRewardQty)
+        TornaSideQuest(sidequest, TornaSidequests, QuestRewardQty, RecipeList)
 
     TornaMainQuest1 = {
         'FLD_QuestTask $id': 1,

@@ -110,11 +110,12 @@ def PassAlongSpoilerLogInfo(fileEntryVar2, Version2, permalinkVar2, seedEntryVar
 def AllTornaRando(TornaCompatibleOptions):
     DetermineSettings()
     CheckforIncompatibleSettings(TornaCompatibleOptions)
-    #Recipes = TornaRecipes.CreateTornaRecipeList()
-    TornaQuests.SelectRandomPointGoal()
+    global Recipes
+    Recipes = TornaRecipes.CreateTornaRecipeList()
+    TornaQuests.SelectRandomPointGoal(Recipes)
     ChosenSupporterAmounts = [1,16,32,48,64] # have a few sliders going forwards to let the player change this amount
     global ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, Areas, AreaIDtoNameDict, MaxDropTableID, Enemies, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList, FullItemList, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters, AllSidequestProgressionItems
-    ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, AllSidequestProgressionItems = TornaQuests.SelectCommunityQuests(ChosenSupporterAmounts, ProgressionLocTypes[0], ProgressionLocTypes[6], ProgressionLocTypes[7])
+    ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, AllSidequestProgressionItems = TornaQuests.SelectCommunityQuests(ChosenSupporterAmounts, ProgressionLocTypes[0], ProgressionLocTypes[6], ProgressionLocTypes[7], Recipes)
     Areas, AreaIDtoNameDict = TornaAreas.CreateAreaInfo(Sidequests, Mainquests)
     Enemies, MaxDropTableID = TornaEnemies.AdjustEnemyRequirements(Sidequests, Mainquests, Areas, ProgressionLocTypes[2])
     Shops = TornaShops.CreateShopInfo(Mainquests, Areas, ProgressionLocTypes[4])
@@ -136,9 +137,11 @@ def AllTornaRando(TornaCompatibleOptions):
     CharacterUnlocks()
     DisableUnrequiredQuests()
     GenerateHints()
+    AddTaskLogsforKeys()
     if Options.TornaObjectColorMatchesContents.GetState():
         GildedCheckNames()
         ChangeReqItemRarities()
+        #AddSpawnConditionsforRequiredChecks()
 
 def CheckforIncompatibleSettings(TornaCompatibleOptions):
     global DontMakeSpoilerLog
@@ -386,7 +389,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
         if item.id in HelpfulUpgrades and item.id not in PlacedItems:
             HelpfulUnplacedUpgrades.append(item)
     PoolMaxItemsPerCategory = [250, 40, 40, 250, 200, 200] 
-    AccessoryList = FullItemList[0]
+    AccessoryList = [acc for acc in FullItemList[0] if acc not in FullItemReqList]
     WeaponAccessoryList = FullItemList[1]
     WeaponChipList = [chip for chip in FullItemList[2] if chip not in FullItemReqList]
     AuxCoreList = FullItemList[3]
@@ -468,7 +471,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
 def DetermineValidItemSpots(ChosenItem, ChosenItemCat, CatList, CurrentStoryStep = -1): # certain item types cannot coexist with certain location types. collectible items cannot be put as quest rewards, since there is no renewable source of them in case the player uses them all up, for instance.
     ValidItemSpots = []
     match ChosenItemCat:
-        case "CollectionMat":
+        case "CollectionMat" | "Accessory":
             for cat in CatList:
                 if cat.isprogresscategory == 1 and cat.category in ["uniquemonster", "normalenemy", "shop", "tornacollectionpoint", "gormottcollectionpoint"]:
                     ValidItemSpots.extend(cat.remlocations)
@@ -1132,6 +1135,39 @@ def DisableUnrequiredQuests(): # we want the npcs for non-required quests to not
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
 
+def AddTaskLogsforKeys(): # to help the player know what they need, we add a task log for the key items that we're requiring they have for various story events.
+    CurQuestCollectRowID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_QuestCollect.json", "$id") + 1
+    CurQuestLogRowID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/fld_quest.json", "$id") + 1
+    QuestCollectRowstoAdd, QuestLogRowstoAdd = [], []
+    KeyIDstoAdd = [25624, 25625, 25626, 25628, 25629, 25630, 25627]
+    DescriptionTextstoAdd = ["Obtain the Haze Unlock Key.", "Obtain the Addam Unlock Key.", "Obtain the Mythra Unlock Key.", "Obtain the Hugo Unlock Key.", "Obtain the Brighid Unlock Key.", "Obtain the Aegaeon Unlock Key.", "Obtain the Minoth Unlock Key."]
+    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestTaskIra.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            match row["$id"]:
+                case 5 | 12:
+                    IndexList = [2,3,4]
+                case 26:
+                    IndexList = [2]
+                case _:
+                    IndexList = []
+            for index in IndexList:
+                row[f"TaskType{index}"] = 3
+                row[f"TaskID{index}"] = CurQuestCollectRowID
+                row[f"TaskLog{index}"] = CurQuestLogRowID
+                QuestCollectRowstoAdd.append({"$id": CurQuestCollectRowID, "Refer": 4, "ItemID": KeyIDstoAdd[0], "Category": 0, "Count": 1, "Deduct": 0, "TresureID": 0, "EnemyID": 0, "MapID": 0, "NpcID": 0, "CollectionID": 0})
+                QuestLogRowstoAdd.append({"$id": CurQuestLogRowID, "style": 62, "name": DescriptionTextstoAdd[0]})
+                DescriptionTextstoAdd.pop(0)
+                KeyIDstoAdd.pop(0)
+                CurQuestCollectRowID += 1
+                CurQuestLogRowID += 1
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    
+    JSONParser.ExtendJSONFile("common/FLD_QuestCollect.json", [QuestCollectRowstoAdd])
+    JSONParser.ExtendJSONFile("common_ms/fld_quest.json", [QuestLogRowstoAdd])
+
 def ChangeReqItemRarities(): # we want the useful items that get dropped from chests and enemies to have a golden glow, so that people know to pick them up.
     RequiredItems = KeyItemtoLocDict.keys()
     MinWeaponChipID = Helper.GetMinValue("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", "$id") # should be 10001, but just in case
@@ -1460,6 +1496,59 @@ def GildedCheckNames():
         json.dump(data, file, indent=2, ensure_ascii=False)
 
     # needs to account for npc giver name probably. not sure how fully to implement this. are there npcs that give multiple quests? I guess those are separate instances.
+
+def AddSpawnConditionsforRequiredChecks(): 
+    # as it is currently, there's way too many enemies that show up in 20 places which can end up as progression enemies. 
+    # This is pretty overwhelming for a player to remember which enemy they've defeated and which they haven't. 
+    # For that reason, if we check how many of an item the player has, 
+    # and add a condition to the spawn point of said enemy or collection point that disables spawning of that check
+    # while the player has more than the required number of the required item the check drops, we can stop this from being too overwhelming.
+    
+    # i.e. the player needs 2 tornan trout for the story objective id 49. they will also need 3 tornan trout for another sidequest later on.
+    # therefore, on the check that drops the tornan trout, the spawn condition should be tied to if the player has less than 5 tornan trout.
+    # if they do, the check spawns
+    # if not, then the check doesn't show up on the map
+
+    # this idea won't work. the only way I can stop an enemy from spawning or collection point from being there is if a) there's already enough space in the condition list for me to add as many conditions as I need, and b) each required item that the check has has room for me to put a "has 0 of this item"-> "has x of this item". some items alone could possibly require the player to have 5-6 if you roll the right sidequests, and then on top of that, if that check has any other items, that other item can't be required in quantities of more than 1-2
+
+    ItemToReqQtyDict = {}
+    for item in KeyItemtoLocDict.keys():
+        ReqQty = 0
+        MoreInfoReq = False
+        match item: # these are the required ingredients for story step 3. Will always be needed.
+            case 30363:
+                ReqQty += 2
+            case 30352 | 30353:
+                ReqQty += 1
+            case _:
+                pass
+        for cat in range(len(FullItemList)):
+            if [item2 for item2 in FullItemList[cat] if item2.id == item] != []:
+                match cat:
+                    case 0 | 2:
+                        ReqQty = 3
+                    case 4:
+                        MoreInfoReq = True
+                    case 5:
+                        ReqQty = 1
+                    case _:
+                        pass
+                break
+        if MoreInfoReq:
+            for sidequest in AllRequiredSidequests:
+                for recipename in sidequest.reqrecipenames:
+                    for recipe in Recipes:
+                        if recipe.shopchangenametext == recipename:
+                            for comp in range(len(recipe.components)):
+                                if comp == item:
+                                    ReqQty += recipe.componentqty[comp]
+                                    break
+                            break
+                for soloitem in sidequest.reqsoloitems:
+                    if item == soloitem:
+                        ReqQty += 1
+        ItemToReqQtyDict[item] = ReqQty
+
 
 
 def GenerateHints():

@@ -1187,7 +1187,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': [26192],
+        'Required Items': [26192, 473],
         'Enemy Drop Table IDs': [481]
     }
     HurricaneAnise = {
@@ -1211,7 +1211,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': [26194],
+        'Required Items': [26194, 479],
         'Enemy Drop Table IDs': [483]
     }
     SentinelCarpathia = {

@@ -6,8 +6,6 @@ import scripts.XCRandomizer, SeedNames, scripts.JSONParser, Options
 
 Version = "1.5.0"
 
-
-
 backgrounds = ["titlescreen1.png"]
 
 TitlescreenSplash = scripts.XCRandomizer.FileReplacer(["Images/Logos/Aegis.wilay"],  "/menu/image", "mnu001_titlelogo_us.wilay", "XC2")
