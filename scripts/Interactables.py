@@ -2,6 +2,8 @@ from tkinter import ttk
 from tkinter import *
 from scripts import PopupDescriptions
 
+Game = ""
+
 class Option():
     def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50,hasSpinBox = False, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False):
         # Objects
@@ -25,7 +27,7 @@ class Option():
         self.hasSpinBox = hasSpinBox
         self.subDefState = _defState
         self.prio = _prio
-        OptionList.append(self)
+        XenoOptionDict[Game].append(self)
         
         # Custom Spinboxes
         self.spinBoxMin = _spinMin
@@ -161,9 +163,14 @@ class SubOption():
         return self.spinBoxVal.get()
 rowIncrement = 0   
 
-OptionList:list[Option] = []
+XenoOptionDict = {
+    "XCDE": [],
+    "XC2": [],
+    "XC3": [],
+    "XCXDE": [],
+}
 
-def UpdateAllStates():
-    for opt in OptionList:
+def UpdateAllStates(Game):
+    for opt in XenoOptionDict[Game]:
         opt.StateUpdate()
 

@@ -1,8 +1,9 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 from XCDE.XCDE_Scripts import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales, NPC, Weapons, Items, Cutscenes, IDs, Landmarks
+import scripts.Interactables
 
-OptionList =[]
+scripts.Interactables.Game = "XCDE" 
 
 General = 1
 Character  = 2

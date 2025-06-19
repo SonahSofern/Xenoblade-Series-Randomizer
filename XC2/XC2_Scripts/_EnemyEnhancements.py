@@ -147,7 +147,7 @@ def EnemyEnhancementDescriptions():
     myDesc.Text(f"Each enemy that dies increases this enemy's damage by {Enraged.Param1[0]}-{Enraged.Param1[3]}%")
 
     myDesc.Tag(Regen.name, padx=0)
-    myDesc.Text(f"Permanently regens {Regen.Param2[0]}-{Regen.Param2[3]}% of their max health every {Regen.Param1[0]//30}-{Regen.Param1[3]//30} seconds.")
+    myDesc.Text(f"Permanently regens {Regen.Param2[0]*100}-{Regen.Param2[3]*100}% of their max health every {Regen.Param1[0]//30}-{Regen.Param1[3]//30} seconds.")
 
     myDesc.Tag(CloseArmor.name, padx=0)
     myDesc.Text(f"Reduces damage by {CloseArmor.Param1[0]}-{CloseArmor.Param1[3]}% to all allies and user within 5 meters")
@@ -156,7 +156,7 @@ def EnemyEnhancementDescriptions():
     myDesc.Text(f"Each ally the enemy has increases their own damage by {Swarm.Param1[0]}-{Swarm.Param1[3]}%")
 
     myDesc.Tag(Sealing.name, padx=0)
-    myDesc.Text(f"Locks the first, second, or third block of the party gauge.")
+    myDesc.Text(f"Locks the first, second, and/or third block of the party gauge.")
 
     return myDesc
 

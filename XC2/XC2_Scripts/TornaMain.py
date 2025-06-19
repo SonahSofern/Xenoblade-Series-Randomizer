@@ -2,7 +2,7 @@ from scripts import Helper, JSONParser, PopupDescriptions
 from XC2.XC2_Scripts.IDs import *
 import time, copy, os, math, random, json
 from XC2.XC2_Scripts import TornaRecipes,_WeaponChips, TornaQuests, TornaEnemies, TornaAreas, TornaShops, TornaRedBagItems, TornaMiscItems, TornaChests, TornaCollectionPoints, Options
-from scripts.Interactables import OptionList
+from scripts.Interactables import XenoOptionDict
 
 # TO DO
 # look into options for pre-completed quests or EZ-complete quests?

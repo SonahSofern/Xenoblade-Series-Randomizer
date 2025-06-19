@@ -51,7 +51,7 @@ class FileReplacer:
         self.filename = filename
 
 
-def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = []):
+def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= []):
     import  os, sys
     from scripts import SavedOptions, Helper, GUISettings, PermalinkManagement, Seed, Interactables, SettingsPresets
     from tkinter.font import Font
@@ -107,8 +107,8 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     MainWindow.pack(expand = True, fill ="both", padx=windowPadding, pady=(windowPadding, 5))
 
 
-    Interactables.OptionList.sort(key= lambda x: x.name) # Sorts alphabetically
-    for opt in Interactables.OptionList: # Cant reference directly because of circular imports :/
+    Interactables.XenoOptionDict[Game].sort(key= lambda x: x.name) # Sorts alphabetically
+    for opt in Interactables.XenoOptionDict[Game]:
         
         if isOneFile and opt.isDevOption: # Dont show dev options when packed for users
             continue
@@ -157,8 +157,8 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     randoSeedEntry.pack(side='left', fill=X, expand=True)
     # Save and Load Last Options
     EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
-    SavedOptions.loadData(EntriesToSave + Interactables.OptionList, SavedOptionsFileName, Game)
-    EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.OptionList)) + list((x.spinBoxVal for x in Interactables.OptionList if x.hasSpinBox)) + list((sub.checkBoxVal for x in Interactables.OptionList for sub in x.subOptions)) + list((sub.spinBoxVal for x in Interactables.OptionList for sub in x.subOptions if sub.hasSpinBox))
+    SavedOptions.loadData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game)
+    EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.XenoOptionDict[Game])) + list((x.spinBoxVal for x in Interactables.XenoOptionDict[Game] if x.hasSpinBox)) + list((sub.checkBoxVal for x in Interactables.XenoOptionDict[Game] for sub in x.subOptions)) + list((sub.spinBoxVal for x in Interactables.XenoOptionDict[Game] for sub in x.subOptions if sub.hasSpinBox))
 
     # Permalink Options/Variables
     permalinkFrame = ttk.Frame(background,style="NoBackground.TFrame")
@@ -169,7 +169,7 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     permalinkFrame.pack(padx=windowPadding, anchor="w", fill=X)
     permalinkButton.pack(side="left")
     permalinkEntry.pack(side='left', fill=X, expand=True)
-    PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:Interactables.UpdateAllStates())
+    PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:Interactables.UpdateAllStates(Game))
 
 
     # Bottom Left Progress Display Text
@@ -178,7 +178,7 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     randoProgressDisplay.pack(pady=0, side=LEFT)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(window, RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles)))
+    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(window, RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles)))
     RandomizeButton.pack(pady=(5,windowPadding),side="left", padx=(windowPadding, 0), anchor=CENTER)
     
     # Options Cog
@@ -189,7 +189,7 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     Cog = PhotoImage(file=icon_path)
     SettingsButton = ttk.Button(background,padding=5, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(window, defaultFont, GUISettings.defGUIThemeVar, Game))
     SettingsButton.pack(pady=(5,windowPadding),anchor="e",expand=True, side=RIGHT, padx=windowPadding) 
-    root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Interactables.OptionList, SavedOptionsFileName, Game), root.destroy()))
+    root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game), root.destroy()))
 
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
 
