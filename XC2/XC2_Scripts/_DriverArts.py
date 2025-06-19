@@ -30,7 +30,6 @@ def DriverArtRandomizer():
         oddsDebuffs = Options.DriverArtsOption_Debuffs.GetSpinbox()
         oddsAOE = Options.DriverArtsOption_AOE.GetSpinbox()
         oddsSpeed = Options.DriverArtsOption_AnimationSpeed.GetSpinbox()
-        
         odds = Options.DriverArtsOption.GetSpinbox()
         
         for art in artData["rows"]:
@@ -40,8 +39,12 @@ def DriverArtRandomizer():
             if art["$id"] in [4,5,6,7]: # Dont change aegis since they get copied to later
                 continue
             
-            if (not isAutoAttacks) and ((art["Name"] == 0) and OddCheck(oddsAutoAttacks)): # Ignore auto attacks unless the option is clicked
-                continue
+            if art["Name"] == 0: # If we are an auto attack
+                if not isAutoAttacks: # Ignore auto attacks unless the option is clicked
+                    continue
+                elif not OddCheck(oddsAutoAttacks): # If the option is on do a check for odds
+                    continue
+            
             
             isEnemyTarget = (art["Target"] in [0,4]) # Ensures Targeting Enemy
     
