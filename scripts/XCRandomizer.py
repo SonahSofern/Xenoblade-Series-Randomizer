@@ -7,10 +7,6 @@ import tkinter as tk
 from scripts.GUISettings import *
 from PIL import Image, ImageTk
 
-seedEntryVar = StringVar()
-permalinkVar = StringVar()
-fileEntryVar = StringVar()
-
 class Tab():
     def __init__(self, name, outer, canvas, inner):
         self.name = name
@@ -56,6 +52,9 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     from scripts import SavedOptions, Helper, GUISettings, PermalinkManagement, Seed, Interactables, SettingsPresets
     from tkinter.font import Font
     import tkinter as tk
+    seedEntryVar = StringVar()
+    permalinkVar = StringVar()
+    fileEntryVar = StringVar()
     windowPadding = 50
     global isOneFile
     SavedOptionsFileName = f"LastSave.txt"

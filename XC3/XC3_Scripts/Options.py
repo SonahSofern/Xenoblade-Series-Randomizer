@@ -3,6 +3,7 @@ from scripts import Helper
 import scripts.Interactables
 
 scripts.Interactables.Game = "XC3" 
+
 General = 1
 Character  = 2
 Enemies = 3
