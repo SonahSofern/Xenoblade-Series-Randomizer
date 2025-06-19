@@ -1,4 +1,4 @@
-from XCXDE.XCXDE_Scripts import SeedNames
+from XCXDE.XCXDE_Scripts import SeedNames, Options
 Version = "BETA"
 backgrounds = ["flower.jpg", "sunset.jpg", "purple.jpg"]
 extraCommands = []
