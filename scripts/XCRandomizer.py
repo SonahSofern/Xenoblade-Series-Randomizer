@@ -22,7 +22,7 @@ else:
 lastWidth = -1
 lastHeight = -1
 bgPhoto = [] # Globals to prevent garbage collection
-cogs = []
+garbageCollectionStopper = []
 
 def resize_bg(event, root, bg_photo, bg_image, background):
     global lastHeight, lastWidth, bgPhoto
@@ -47,12 +47,15 @@ class FileReplacer:
         self.location = location
         self.filename = filename
 
-def CreateImage(imagePath, Game):
+def CreateImage(imagePath):
     if isOneFile: 
         bg_image = Image.open(os.path.join(sys._MEIPASS, imagePath))
     else:
-        bg_image = Image.open(f"./{Game}/_internal/{imagePath}")
-    bg_photo = ImageTk.PhotoImage(bg_image)
+        bg_image = Image.open(imagePath)
+    bg_image = bg_image.resize((40,40))
+    newimg = ImageTk.PhotoImage(bg_image)
+    garbageCollectionStopper.append(newimg)
+    return newimg
 
 
 def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= []):
@@ -194,7 +197,7 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     else:  # If running as a script (not bundled)
         icon_path = "./_internal/Images/SmallSettingsCog.png"
     Cog = PhotoImage(file=icon_path)
-    cogs.append(Cog)
+    garbageCollectionStopper.append(Cog)
     SettingsButton = ttk.Button(background,padding=5, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(window, defaultFont, GUISettings.defGUIThemeVar, Game))
     SettingsButton.pack(pady=(5,windowPadding),anchor="e",expand=True, side=RIGHT, padx=windowPadding) 
     root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game), root.destroy()))
