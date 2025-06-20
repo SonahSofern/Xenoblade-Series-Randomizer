@@ -117,8 +117,6 @@ def ToggleLightDarkMode(togButton, defaultFont, defaultTheme):
         defaultTheme.set("Dark Mode")
         LoadTheme(defaultFont, "Dark Mode")
         
-
-
 def LoadTheme(defaultFont, themeName):
     style= ttk.Style()
     # Initial colors for the themes
@@ -149,7 +147,9 @@ def LoadTheme(defaultFont, themeName):
                     "background": currentTheme["backgroundColor"],
                     "borderwidth": 1,
                     "relief": FLAT,
-                    "focuscolor":"",# Checkbutton focus border
+                    "focuscolor":"", # Checkbutton focus border
+                    "padding": 0,
+                    "tabposition": "nw", # Cool for styling but gonnna kjeep it default for now
                 }
             },
             "TNotebook.Tab": {
@@ -319,7 +319,7 @@ def LoadTheme(defaultFont, themeName):
     # Since Canvas and Roots arrent affected by normal styling
     for canvas in CanvasesForStyling:
         try:
-            canvas.config(background=currentTheme["darkColor"], border=0)
+            canvas.config(background=currentTheme["darkColor"])
         except:
             pass
         
@@ -328,7 +328,6 @@ def LoadTheme(defaultFont, themeName):
             root.config(background=currentTheme["backgroundColor"])
         except:
             pass
-scrollbars = []
 
 def _on_mousewheel(event, canvas:Canvas):
     canvas.update_idletasks()
@@ -340,7 +339,6 @@ def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFr
         InnerFrames[i].pack(fill=BOTH, expand=True)
 
         scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
-        scrollbars.append(scrollbar)
         Canvases[i].config(yscrollcommand=scrollbar.set, borderwidth=0, relief="flat", highlightthickness=0)
         CanvasesForStyling.append(Canvases[i])
         # OuterFrames[i].config(borderwidth=0, relief="flat")
@@ -352,14 +350,11 @@ def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFr
         if genScrollbar:
             scrollbar.pack(side="right", fill="y")
 
-
-
         OuterFrames[i].bind("<Enter>", lambda e, canvas=Canvases[i]: canvas.bind_all("<MouseWheel>", lambda event: _on_mousewheel(event, canvas)))
         OuterFrames[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
         
         OuterFrames[i].pack_propagate(False)
         OuterFrames[i].pack(fill=BOTH, expand=True)
-    return scrollbars
 
 
 def ResizeWindow(top, innerFrame, padx = 37):
