@@ -141,11 +141,11 @@ def CheckforIncompatibleSettings():
     ConflictingOptionNames = []
     ConflictingSubOptions = []
     exceptionmsg = ""
-    for opt in OptionList:
+    for opt in XenoOptionDict["XC2"]:
         if opt.GetState() and opt.name not in AllowableOptions:
             ConflictingOptions.append(opt)
             ConflictingOptionNames.append(opt.name)
-    for opt in OptionList:
+    for opt in XenoOptionDict["XC2"]:
         if opt.name == 'Shortcuts':
             if opt.GetState():
                 for sub in opt.subOptions:
@@ -1489,7 +1489,7 @@ def CreateSpoilerLog():
     debugfile.write(f"Permalink: {permalinkVar.get()}\n\n")
     debugfile.write(f"Seed Name: {seedEntryVar.get()}\n\n")
     debugfile.write("Options Selected:\n")
-    for option in OptionList: # for each option
+    for option in XenoOptionDict["XC2"]: # for each option
         OptionName = option.name   
         OptionVal = option.GetState()
         if OptionVal: # if the option is checked
@@ -1500,7 +1500,7 @@ def CreateSpoilerLog():
                 debugfile.write(f" {OptionName};")
     debugfile.write("\n\n")
     debugfile.write("Suboptions Selected:\n")
-    for option in OptionList:
+    for option in XenoOptionDict["XC2"]:
         OptionName = option.name
         OptionVal = option.GetState()
         if OptionVal:

@@ -2,7 +2,7 @@ from tkinter import ttk
 from tkinter import *
 from scripts import PopupDescriptions
 
-Game = ""
+Game = "" # Used to tell what option goes to what games tab
 
 class Option():
     def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50,hasSpinBox = False, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False):
@@ -161,8 +161,8 @@ class SubOption():
     
     def GetSpinbox(self):
         return self.spinBoxVal.get()
-rowIncrement = 0   
 
+rowIncrement = 0   
 XenoOptionDict = {
     "XCDE": [],
     "XC2": [],

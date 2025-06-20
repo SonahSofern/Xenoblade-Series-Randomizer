@@ -21,7 +21,8 @@ else:
 
 lastWidth = -1
 lastHeight = -1
-bgPhoto = None
+bgPhoto = [] # Globals to prevent garbage collection
+cogs = []
 
 def resize_bg(event, root, bg_photo, bg_image, background):
     global lastHeight, lastWidth, bgPhoto
@@ -30,9 +31,9 @@ def resize_bg(event, root, bg_photo, bg_image, background):
         lastHeight = root.winfo_height()
         resized_image = bg_image.resize((event.width, event.height))
         bg_photo = ImageTk.PhotoImage(resized_image)
-        bgPhoto = bg_photo
+        bgPhoto.append(bg_photo)
         background.delete("all")
-        background.create_image(0, 0, image=bgPhoto, anchor="nw")
+        background.create_image(0, 0, image=bg_photo, anchor="nw")
     
 class FileReplacer:
     def __init__(self, images, location, filename, game):
@@ -45,6 +46,13 @@ class FileReplacer:
             self.images.append(image)
         self.location = location
         self.filename = filename
+
+def CreateImage(imagePath, Game):
+    if isOneFile: 
+        bg_image = Image.open(os.path.join(sys._MEIPASS, imagePath))
+    else:
+        bg_image = Image.open(f"./{Game}/_internal/{imagePath}")
+    bg_photo = ImageTk.PhotoImage(bg_image)
 
 
 def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= []):
@@ -164,7 +172,7 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     permalinkEntry = ttk.Entry(permalinkFrame, textvariable=permalinkVar)
     CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
     permalinkVar.set(CompressedPermalink)
-    permalinkButton = ttk.Button(permalinkFrame, text="Preset", command=lambda: SettingsPresets.PresetsWindow("Presets", window, defaultFont, f"{Game}/SaveData", EntriesToSave + Interactables.OptionList, Game))
+    permalinkButton = ttk.Button(permalinkFrame, text="Preset", command=lambda: SettingsPresets.PresetsWindow("Presets", window, defaultFont, f"{Game}/SaveData", EntriesToSave + Interactables.XenoOptionDict[Game], Game))
     permalinkFrame.pack(padx=windowPadding, anchor="w", fill=X)
     permalinkButton.pack(side="left")
     permalinkEntry.pack(side='left', fill=X, expand=True)
@@ -186,6 +194,7 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     else:  # If running as a script (not bundled)
         icon_path = "./_internal/Images/SmallSettingsCog.png"
     Cog = PhotoImage(file=icon_path)
+    cogs.append(Cog)
     SettingsButton = ttk.Button(background,padding=5, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(window, defaultFont, GUISettings.defGUIThemeVar, Game))
     SettingsButton.pack(pady=(5,windowPadding),anchor="e",expand=True, side=RIGHT, padx=windowPadding) 
     root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game), root.destroy()))
@@ -198,6 +207,5 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
         mode='determinate',
         length=3000
     )
-
     window.bind("<Configure>", lambda event: resize_bg(event, window, bg_photo, bg_image, background))
 

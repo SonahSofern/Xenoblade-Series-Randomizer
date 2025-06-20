@@ -18,4 +18,4 @@ Tabs = {
     Musica: '♪ Music',
 }
 
-TestOption = Option("3 Test", General, "Randomizes the offers of NPC trades into the chosen options")
+TestOption = Option("Empty", General, "Nothing to see yet!")
