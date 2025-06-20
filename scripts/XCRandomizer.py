@@ -21,19 +21,7 @@ else:
 
 lastWidth = -1
 lastHeight = -1
-bgPhoto = [] # Globals to prevent garbage collection
-garbageCollectionStopper = []
-
-def resize_bg(event, root, bg_photo, bg_image, background):
-    global lastHeight, lastWidth, bgPhoto
-    if (root.winfo_width() != lastWidth) or (root.winfo_height() != lastHeight):
-        lastWidth = root.winfo_width()
-        lastHeight = root.winfo_height()
-        resized_image = bg_image.resize((event.width, event.height))
-        bg_photo = ImageTk.PhotoImage(resized_image)
-        bgPhoto.append(bg_photo)
-        background.delete("all")
-        background.create_image(0, 0, image=bg_photo, anchor="nw")
+garbageCollectionStopper = []# Globals to prevent garbage collection
     
 class FileReplacer:
     def __init__(self, images, location, filename, game):
@@ -47,6 +35,8 @@ class FileReplacer:
         self.location = location
         self.filename = filename
 
+iconCollector = []# Globals to prevent garbage collection
+
 def CreateImage(imagePath):
     if isOneFile: 
         bg_image = Image.open(os.path.join(sys._MEIPASS, imagePath))
@@ -54,9 +44,35 @@ def CreateImage(imagePath):
         bg_image = Image.open(imagePath)
     bg_image = bg_image.resize((40,40))
     newimg = ImageTk.PhotoImage(bg_image)
-    garbageCollectionStopper.append(newimg)
+    iconCollector.append(newimg)
     return newimg
 
+lastHeight = -1
+lastWidth = -1
+lastGame = "" # Keeps tracks of when to update UI, dont love this solution though
+
+def resize_bg(event, root, bg_image, background, Game):
+    global lastWidth, lastHeight
+
+    if (root.winfo_width() != lastWidth) or (root.winfo_height() != lastHeight):
+        width, height = event.width, event.height
+
+        if Game == lastGame:
+            lastWidth = width
+            lastHeight = height
+
+        def resize_and_update(): # Processes the images on another thread because it slows down main thread a lot
+            resized_image = bg_image.resize((width, height))
+            bg_photo = ImageTk.PhotoImage(resized_image)
+
+            def update_gui(): # Update GUI on main thread because tkinter is not thread safe
+                garbageCollectionStopper.append(bg_photo)
+                background.delete("all")
+                background.create_image(0, 0, image=bg_photo, anchor="nw")
+
+            root.after(0, update_gui)
+
+        threading.Thread(target=resize_and_update, daemon=True).start()
 
 def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= []):
     import  os, sys
@@ -154,10 +170,7 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     # Seed entry box
     GenRandomSeed(seedEntryVar) # Gen a random seed if you have no save data 
     randoSeedEntry = ttk.Entry(SeedFrame, textvariable=seedEntryVar)
-
-
-
-            
+    
     fileEnt = SavedOptions.SavedEntry("Input Bdats",fileEntryVar)
     fileOut = SavedOptions.SavedEntry("Output Bdats", outputDirVar)
     permLink = SavedOptions.SavedEntry("Permalink", permalinkVar)
@@ -210,5 +223,7 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
         mode='determinate',
         length=3000
     )
-    window.bind("<Configure>", lambda event: resize_bg(event, window, bg_photo, bg_image, background))
+    global lastGame
+    lastGame = Game
+    root.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background, Game), add="+")
 
