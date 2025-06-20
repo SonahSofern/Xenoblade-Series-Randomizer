@@ -147,7 +147,9 @@ def LoadTheme(defaultFont, themeName):
                 "configure": {
                     "font": defaultFont,
                     "background": currentTheme["backgroundColor"],
-                    "borderwidth": 4,
+                    "borderwidth": 1,
+                    "relief": FLAT,
+                    "focuscolor":"",# Checkbutton focus border
                 }
             },
             "TNotebook.Tab": {
