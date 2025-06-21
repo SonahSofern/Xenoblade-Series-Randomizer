@@ -74,6 +74,8 @@ def resize_bg(event, root, bg_image, background, Game):
 
         threading.Thread(target=resize_and_update, daemon=True).start()
 
+saveCommands = []
+
 def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= []):
     import  os, sys
     from scripts import SavedOptions, Helper, GUISettings, PermalinkManagement, Seed, Interactables, SettingsPresets
@@ -210,11 +212,10 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     else:  # If running as a script (not bundled)
         icon_path = "./_internal/Images/SmallSettingsCog.png"
     Cog = PhotoImage(file=icon_path)
-    garbageCollectionStopper.append(Cog)
+    iconCollector.append(Cog)
     SettingsButton = ttk.Button(background,padding=5, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(window, defaultFont, GUISettings.defGUIThemeVar, Game))
     SettingsButton.pack(pady=(5,windowPadding),anchor="e",expand=True, side=RIGHT, padx=windowPadding) 
-    root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game), root.destroy()))
-
+    saveCommands.append(lambda: SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game))
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
 
     pb = ttk.Progressbar(

@@ -51,5 +51,5 @@ XCRandomizer.CreateMainWindow(root, Xenoblade3, "XC3", Version, "Xenoblade Chron
 from XCXDE.XCXDE_Scripts.XCXDE_Settings import *
 XCRandomizer.CreateMainWindow(root, XenobladeXDE, "XCXDE", Version, "Xenoblade Chronicles X DE Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds)
 
-
+root.protocol("WM_DELETE_WINDOW", lambda: ([cmd() for cmd in XCRandomizer.saveCommands] and root.destroy()))
 root.mainloop()
