@@ -28,7 +28,7 @@ class FileReplacer:
         self.images = []
         for image in images:
             if isOneFile:
-                image = os.path.join(sys._MEIPASS, image)
+                image = os.path.join(sys._MEIPASS,game, image)
             else:
                 image = f"{game}/{image}"
             self.images.append(image)
