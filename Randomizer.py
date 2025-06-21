@@ -13,7 +13,7 @@ windowHeight = "900"
 defaultFont = Font(family="Calibri", size=14)
 
 # The Notebook
-MainWindow = ttk.Notebook(root, padding=0)
+MainWindow = ttk.Notebook(root, padding=0, style = "centeredTabs.TNotebook")
 XenobladeDE = ttk.Frame(MainWindow)
 Xenoblade2  = ttk.Frame(MainWindow)
 Xenoblade3 = ttk.Frame(MainWindow)
@@ -37,7 +37,6 @@ else:
     
 icon = PhotoImage(file=icon_path)
 root.iconphoto(True, icon)
-
 
 from XC2.XC2_Scripts.XC2_Settings import *
 XCRandomizer.CreateMainWindow(root, Xenoblade2, "XC2", Version, "Xenoblade Chronicles 2 Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash])

@@ -309,6 +309,7 @@ def LoadTheme(defaultFont, themeName):
     staticFont = Font(family="Arial", size=16)
     style.configure("BordlessBtn.TButton", relief = FLAT)
     style.configure("midColor.TCheckbutton", padding=(20, 10))
+    style.configure("centeredTabs.TNotebook", tabposition= "nw")
     style.configure("STATIC.TButton", font=staticFont)
     style.configure("BorderlessLabel.TLabel", background=currentTheme["darkColor"], foreground=UI_Colors.White)
     style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
