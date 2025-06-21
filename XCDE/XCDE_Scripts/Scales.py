@@ -8,7 +8,7 @@ def EnemyScales(): # Try editing the size flag as well since
     odds = Options.EnemyScaleOption.GetSpinbox()
     for file in areaFileListNumbers:
         try:   
-            with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
+            with open(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
                 eneAreaData = json.load(eneAreaFile)
                 for en in eneAreaData["rows"]:
                     if en["$id"] in (BossEnemies + [2504]): # Excluded Mechonis in Egil Fight
@@ -23,7 +23,7 @@ def EnemyScales(): # Try editing the size flag as well since
             
 def NPCScales():
     odds = Options.NPCScaleOption.GetSpinbox()
-    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/FLD_npclist.json", 'r+', encoding='utf-8') as npcFile:
+    with open(f"./XCDE/JsonOutputs/bdat_common/FLD_npclist.json", 'r+', encoding='utf-8') as npcFile:
         npcData = json.load(npcFile)
         for npc in npcData["rows"]:
             if Helper.OddsCheck(odds):

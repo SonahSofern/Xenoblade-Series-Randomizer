@@ -42,8 +42,8 @@ def RandomizeSkillEnhancements():
             B_Slots.append(ChosenIDs[2])
             RemainingUnusedDriverIDs.remove(ChosenIDs[2])
 
-    with open("./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr.json", 'r+', encoding='utf-8') as enhancementFile:
-        with open("./XC2/_internal/JsonOutputs/common_ms/btl_skill_dr_name.json", 'r+', encoding='utf-8') as nameFile:
+    with open("./XC2/JsonOutputs/common/BTL_Skill_Dr.json", 'r+', encoding='utf-8') as enhancementFile:
+        with open("./XC2/JsonOutputs/common_ms/btl_skill_dr_name.json", 'r+', encoding='utf-8') as nameFile:
             enhanceFile = json.load(enhancementFile)
             skillNameFile = json.load(nameFile)
 
@@ -125,7 +125,7 @@ def RandomizeSkillEnhancements():
         
 def SlotCostZero(ids): # Used since art cancel gets put here
     for i in range(1, 7):
-        with open(f"./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0{i}.json", 'r+', encoding='utf-8') as driverFiles:
+        with open(f"./XC2/JsonOutputs/common/BTL_Skill_Dr_Table0{i}.json", 'r+', encoding='utf-8') as driverFiles:
             dFile = json.load(driverFiles)
             for item in dFile["rows"]:
                 if item["$id"] in ids: 

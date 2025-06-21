@@ -4,7 +4,7 @@ from scripts import JSONParser, Helper, PopupDescriptions
 
 
 def WeaponRando():
-    with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_wpnlist.json", 'r+', encoding='utf-8') as wpnFile:
+    with open("./XCDE/JsonOutputs/bdat_common/ITM_wpnlist.json", 'r+', encoding='utf-8') as wpnFile:
         
         isAppearance = Options.WeaponOption_Appearance.GetState()
         # isDam = Options.WeaponOption_Damage.GetState()

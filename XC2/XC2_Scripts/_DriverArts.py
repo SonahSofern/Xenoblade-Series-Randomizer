@@ -6,7 +6,7 @@ import scripts.PopupDescriptions
 from XC2.XC2_Scripts._Arts import *
 
 def DriverArtRandomizer():
-    with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as artFile:
+    with open("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
         
         isAutoAttacks = Options.DriverArtsOption_AutoAttacks.GetState()

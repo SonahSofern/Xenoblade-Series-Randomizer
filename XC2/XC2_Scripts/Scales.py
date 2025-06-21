@@ -6,7 +6,7 @@ from scripts import Helper
 def BladeScales():
     BladeScales = [20,30,40,50,60,70,80,90,110,120,130,140,160,180,200,400]
 
-    with open(f"./XC2/_internal/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:
+    with open(f"./XC2/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:
         bladeData = json.load(bladeFile)
         odds = Options.BladeSizeOption.GetSpinbox()
         for blade in bladeData["rows"]:
@@ -22,7 +22,7 @@ def BladeScales():
 def NPCScales():
     NPCScales = [20,30,40,50,60,70,80,90,110,120,130,140,160,180,200,400,600]
     
-    with open(f"./XC2/_internal/JsonOutputs/common/RSC_NpcList.json", 'r+', encoding='utf-8') as npcFile:
+    with open(f"./XC2/JsonOutputs/common/RSC_NpcList.json", 'r+', encoding='utf-8') as npcFile:
         npcData = json.load(npcFile)
         odds = Options.NPCSizeOption.GetSpinbox()
         for npc in npcData["rows"]:
@@ -37,7 +37,7 @@ def NPCScales():
 def EnemyScales():
     EnemyScales= [10,20,30,40,50,60,70,80,90,110,120,130,140,160,180,200,400,600]
     
-    with open(f"./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as enFile:
+    with open(f"./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as enFile:
         enData = json.load(enFile)
         odds = Options.EnemySizeOption.GetSpinbox()
         for en in enData["rows"]:

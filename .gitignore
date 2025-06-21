@@ -21,6 +21,6 @@ XCDE_Randomizer.spec
 /XCDE/SaveData
 scripts/Goals.txt
 GUIGoals.txt
-XCDE/_internal/Enemies.txt
+XCDE/Enemies.txt
 /.vscode
 XC2/Torna_Spoiler_Logs/

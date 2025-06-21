@@ -7,8 +7,8 @@ InvalidSkillEnhancements = [PhyAndEthDefenseUp,ForcedHPPotionOnHit,BlockBoost,Fl
 ValidSkills:list[Enhancement] = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
 
 def RandomizeAccessoryEnhancements():
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as EnhanceFile:
-        with open("./XC2/_internal/JsonOutputs/common_ms/itm_pcequip.json", 'r+', encoding='utf-8') as NamesFile: # overflows past a certain num so cant make new names
+    with open("./XC2/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as EnhanceFile:
+        with open("./XC2/JsonOutputs/common_ms/itm_pcequip.json", 'r+', encoding='utf-8') as NamesFile: # overflows past a certain num so cant make new names
             enhanceFile = json.load(EnhanceFile)
             NameFile = json.load(NamesFile)
             prevNames = []
@@ -55,7 +55,7 @@ def AccessoriesDesc():
     for effect in ValidSkills:
         if effect.Description == "":
             try:
-                with open("./XC2/_internal/JsonOutputs/common_ms/btl_enhance_cap.json", 'r+', encoding='utf-8') as descFile:
+                with open("./XC2/JsonOutputs/common_ms/btl_enhance_cap.json", 'r+', encoding='utf-8') as descFile:
                     descData = json.load(descFile)
                     for des in descData["rows"]:
                         if des["$id"] == effect.Caption:   

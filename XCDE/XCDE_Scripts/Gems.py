@@ -82,9 +82,9 @@ def UnusedGems():
                  
 def Gems():
     ranks = ["E", "D", "C", "B", "A", "S"] # Calculate proper gem amount based on rank
-    with open("./XCDE/_internal/JsonOutputs/bdat_common/BTL_skilllist.json", 'r+', encoding='utf-8') as gemFile:
-        with open("./XCDE/_internal/JsonOutputs/bdat_common_ms/BTL_skilllist_ms.json", 'r+', encoding='utf-8') as gemMSFile: 
-            with open("./XCDE/_internal/JsonOutputs/bdat_menu_mes_ms/MNU_skill_ms.json", 'r+', encoding='utf-8') as gemHelpMSFile: 
+    with open("./XCDE/JsonOutputs/bdat_common/BTL_skilllist.json", 'r+', encoding='utf-8') as gemFile:
+        with open("./XCDE/JsonOutputs/bdat_common_ms/BTL_skilllist_ms.json", 'r+', encoding='utf-8') as gemMSFile: 
+            with open("./XCDE/JsonOutputs/bdat_menu_mes_ms/MNU_skill_ms.json", 'r+', encoding='utf-8') as gemHelpMSFile: 
                 gemHelpMSData = json.load(gemHelpMSFile)
                 gemMSData = json.load(gemMSFile)
                 gemData = json.load(gemFile)
@@ -240,7 +240,7 @@ def Effects(gemData, gemMSData, gemHelpMSData):
     CrystalFix(len(gemData["rows"]))
 
 def CrystalFix(gemLength): # Goes through and edits crystals that have values outside the current population of skills
-    with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_dropcrystallist.json", 'r+', encoding='utf-8') as crystalFile: 
+    with open("./XCDE/JsonOutputs/bdat_common/ITM_dropcrystallist.json", 'r+', encoding='utf-8') as crystalFile: 
         cryData = json.load(crystalFile)
         for crystal in cryData["rows"]:
             for i in range(1,3):
@@ -258,7 +258,7 @@ def RankPower(gem, ranks):
         
 # Changes gems that are already items given out during the story
 def ItemPower(gemData, ranks):
-    with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as gemItemFile: 
+    with open("./XCDE/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as gemItemFile: 
         gemItemData = json.load(gemItemFile)
         for gem in gemItemData["rows"]:
             if gem["itemType"] != 3: # If item is not a gem continue

@@ -30,7 +30,7 @@ class FileReplacer:
             if isOneFile:
                 image = os.path.join(sys._MEIPASS, image)
             else:
-                image = f"{game}/_internal/{image}"
+                image = f"{game}/{image}"
             self.images.append(image)
         self.location = location
         self.filename = filename
@@ -87,25 +87,28 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     windowPadding = 50
     global isOneFile
     SavedOptionsFileName = f"LastSave.txt"
-    JsonOutput = f"./{Game}/_internal/JsonOutputs"
+    JsonOutput = f"./{Game}/JsonOutputs"
     SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt", f"{Game}/GUI")
-    RootsForStyling.append(window)
     defaultFont = Font(family=GUISettings.defFontVar.get(), size=GUISettings.defFontSizeVar.get())
+    
+    XCFrame = ttk.Frame(window) # Outer Frame
+    RootsForStyling.append(XCFrame)
 
+    window.add(XCFrame, text =Version, image=CreateImage(f"{Game}/Images/{Game}Icon.png"), compound="left") 
 
     if isOneFile:
         bdat_path = os.path.join(sys._MEIPASS, 'Toolset', 'bdat-toolset-win64.exe')
     else:
-        bdat_path = f"./{Game}/_internal/Toolset/bdat-toolset-win64.exe"
+        bdat_path = f"Toolset/bdat-toolset-win64.exe"
 
     bg = random.choice(backgroundImages)
     if isOneFile: 
-        bg_image = Image.open(os.path.join(sys._MEIPASS, 'Images', bg))
+        bg_image = Image.open(os.path.join(sys._MEIPASS, Game, 'Images', bg))
     else:
-        bg_image = Image.open(f"./{Game}/_internal/Images/{bg}")
+        bg_image = Image.open(f"./{Game}/Images/{bg}")
     bg_photo = ImageTk.PhotoImage(bg_image)
 
-    background = tk.Canvas(window)
+    background = tk.Canvas(XCFrame)
     background.pack(fill="both", expand=True, padx=0, pady=0)
     background.create_image(0, 0, image=bg_photo, anchor="nw")
 
@@ -141,7 +144,7 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
         if isOneFile and opt.isDevOption: # Dont show dev options when packed for users
             continue
         
-        opt.DisplayOption(InnerDict[opt.tab], window, defaultFont, GUISettings.defGUIThemeVar.get())
+        opt.DisplayOption(InnerDict[opt.tab], XCFrame, defaultFont, GUISettings.defGUIThemeVar.get())
 
     def GenRandomSeed(randoSeedEntryVar):
         randoSeedEntryVar.set(Seed.RandomSeedName(SeedNouns, SeedVerbs))
@@ -190,7 +193,7 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     permalinkEntry = ttk.Entry(permalinkFrame, textvariable=permalinkVar)
     CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
     permalinkVar.set(CompressedPermalink)
-    permalinkButton = ttk.Button(permalinkFrame, text="Preset", command=lambda: SettingsPresets.PresetsWindow("Presets", window, defaultFont, f"{Game}/SaveData", EntriesToSave + Interactables.XenoOptionDict[Game], Game))
+    permalinkButton = ttk.Button(permalinkFrame, text="Preset", command=lambda: SettingsPresets.PresetsWindow("Presets", XCFrame, defaultFont, f"{Game}/SaveData", EntriesToSave + Interactables.XenoOptionDict[Game], Game))
     permalinkFrame.pack(padx=windowPadding, anchor="w", fill=X)
     permalinkButton.pack(side="left")
     permalinkEntry.pack(side='left', fill=X, expand=True)
@@ -203,17 +206,17 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     randoProgressDisplay.pack(pady=0, side=LEFT)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(window, RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles)))
+    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(XCFrame, RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles)))
     RandomizeButton.pack(pady=(5,windowPadding),side="left", padx=(windowPadding, 0), anchor=CENTER)
     
     # Options Cog
     if isOneFile:  # If the app is running as a bundled executable
-        icon_path = os.path.join(sys._MEIPASS, 'Images', 'SmallSettingsCog.png')
+        icon_path = os.path.join(sys._MEIPASS, 'images', 'SmallSettingsCog.png')
     else:  # If running as a script (not bundled)
-        icon_path = "./_internal/Images/SmallSettingsCog.png"
+        icon_path = "images/SmallSettingsCog.png"
     Cog = PhotoImage(file=icon_path)
     iconCollector.append(Cog)
-    SettingsButton = ttk.Button(background,padding=5, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(window, defaultFont, GUISettings.defGUIThemeVar, Game))
+    SettingsButton = ttk.Button(background,padding=5, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(XCFrame, defaultFont, GUISettings.defGUIThemeVar, Game))
     SettingsButton.pack(pady=(5,windowPadding),anchor="e",expand=True, side=RIGHT, padx=windowPadding) 
     saveCommands.append(lambda: SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game))
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())

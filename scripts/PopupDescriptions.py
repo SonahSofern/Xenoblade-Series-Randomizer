@@ -27,9 +27,9 @@ class Description:
 
     def Image(self,imagePath:str, game, size = 400, padx=5, pady=(5,5), anchor=None, side=None):
         if isOnefile: # Images come from a different path when packed to one file
-            imagePath = os.path.join(sys._MEIPASS,"Images", imagePath)
+            imagePath = os.path.join(sys._MEIPASS,game, "Images", imagePath)
         else:
-            imagePath = f"./{game}/_internal/Images/{imagePath}"
+            imagePath = f"./{game}/Images/{imagePath}"
         self.data.append(PopImage(imagePath, size, padx, pady, anchor, side=side))
     
     def Header(self, text:str, padx=2, pady=(0,5), anchor="w"):

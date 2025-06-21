@@ -4,7 +4,7 @@ from scripts import PopupDescriptions
 from XC2.XC2_Scripts import Options
 
 def BigItemsRando():
-    with open("./XC2/_internal/JsonOutputs/common_gmk/RSC_dropitemParam.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common_gmk/RSC_dropitemParam.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             row["endScale"] = random.randint(1, 30)

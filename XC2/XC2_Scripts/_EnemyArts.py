@@ -10,7 +10,7 @@ def EnemyArts(spinbox):
         "Element Breaker": 990,
         "Cold Era": 582
     }
-    with open("./XC2/_internal/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as EnFile:
+    with open("./XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as EnFile:
         EnData = json.load(EnFile) # Adds a single new art to enemies to art 16
         for en in EnData["rows"]:
             if spinbox < random.randrange(0,100): # Spinbox value check
@@ -22,12 +22,12 @@ def EnemyArts(spinbox):
 
 
 def EnemyArtAttributes():
-    with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as EnArtsFile:
-        with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_BlSp.json", 'r+', encoding='utf-8') as EnBlArtsFile:
-            with open("./XC2/_internal/JsonOutputs/common_ms/btl_arts_en_ms.json", 'r+', encoding='utf-8') as EnArtsNamesFile:  
-                with open("./XC2/_internal/JsonOutputs/common_ms/btl_arts_blsp_ms.json", 'r+', encoding='utf-8') as EnBlArtsNamesFile:  
-                    with open("./XC2/_internal/JsonOutputs/common_ms/btl_arts_bl_ms.json", 'r+', encoding='utf-8') as BlArtsNamesFile:  
-                        with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as BlArtsFile:  
+    with open("./XC2/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as EnArtsFile:
+        with open("./XC2/JsonOutputs/common/BTL_Arts_BlSp.json", 'r+', encoding='utf-8') as EnBlArtsFile:
+            with open("./XC2/JsonOutputs/common_ms/btl_arts_en_ms.json", 'r+', encoding='utf-8') as EnArtsNamesFile:  
+                with open("./XC2/JsonOutputs/common_ms/btl_arts_blsp_ms.json", 'r+', encoding='utf-8') as EnBlArtsNamesFile:  
+                    with open("./XC2/JsonOutputs/common_ms/btl_arts_bl_ms.json", 'r+', encoding='utf-8') as BlArtsNamesFile:  
+                        with open("./XC2/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as BlArtsFile:  
                             enArtsData = json.load(EnArtsFile)
                             enBlArtsData = json.load(EnBlArtsFile)
                             enArtsNameData = json.load(EnArtsNamesFile)
@@ -136,6 +136,7 @@ class EnemyArtEnhancements(Enhancement):
         self.addToList = False
         self.Param1 = para1
         self.Param2 = para2
+        self.isRounded = True
         ValidSkills.append(self)
     
 # backatk = EnemyArtEnhancements("Back↑", BackDamageUp, [40,60,80,100])

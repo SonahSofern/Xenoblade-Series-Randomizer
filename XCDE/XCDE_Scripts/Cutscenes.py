@@ -3,7 +3,7 @@ from XCDE.XCDE_Scripts import Options
 from scripts import JSONParser, Helper
 
 def CutsceneSkipper():
-    with open("./XCDE/_internal/JsonOutputs/bdat_evt/EVT_sev.json", 'r+', encoding='utf-8') as eventFile:
+    with open("./XCDE/JsonOutputs/bdat_evt/EVT_sev.json", 'r+', encoding='utf-8') as eventFile:
         evData = json.load(eventFile)
             
         for ev in evData["rows"]: # remonving event and script on both the files didnt work sev and cs

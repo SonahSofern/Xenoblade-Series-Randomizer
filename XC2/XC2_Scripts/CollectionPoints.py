@@ -27,7 +27,7 @@ def RandoCollectionPoints():
     
     for area in IDs.MajorAreaIds:
         try:
-            with open(f"./XC2/_internal/JsonOutputs/common_gmk/ma{area}a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as collFile:
+            with open(f"./XC2/JsonOutputs/common_gmk/ma{area}a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as collFile:
                 collData = json.load(collFile)
                 for point in collData["rows"]:
                     for i in range(1,5):

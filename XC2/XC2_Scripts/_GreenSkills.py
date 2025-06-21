@@ -2,7 +2,7 @@ import json, random
 from XC2.XC2_Scripts import Options, IDs
 def RandomizeFieldSkills(): # Make logic to have all skills in the game
     # Drivers
-    with open("./XC2/_internal/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:
+    with open("./XC2/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:
         bladeData = json.load(bladeFile)
         
         # Base 

@@ -9,8 +9,8 @@ ValidSkills = []
 
 def EnemyEnhances():
     prevNames = []
-    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as EnArrangeFile:
-        with open("./XC2/_internal/JsonOutputs/common_ms/fld_enemyname.json", 'r+', encoding='utf-8') as NamesFile:      
+    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as EnArrangeFile:
+        with open("./XC2/JsonOutputs/common_ms/fld_enemyname.json", 'r+', encoding='utf-8') as NamesFile:      
             EnArr = json.load(EnArrangeFile)
             Names = json.load(NamesFile)
             spinbox  = Options.EnemyEnhancementsOption.GetSpinbox()
@@ -80,7 +80,7 @@ Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
 Regen = EnemyEnhancement("Regen", PermaRegen,[30,60,90,120], [0.02,0.03,0.04,0.05], revP1=True, isRounded=False)
 CloseArmor = EnemyEnhancement("Guardian", ReduceDamageFromNearbyEnemies, [30,50,70,90])
 Swarm = EnemyEnhancement("Swarming", PerAllyDamageUp, [20,40,60,80])
-Sealing = EnemyEnhancement("Sealing", ChainAttackSeal, [1,1,2,3], revP1=True)
+Sealing = EnemyEnhancement("Sealing", ChainAttackSeal, [2,2,3,4], revP1=True)
 
 #New testing
 TestSkills = [Regen]

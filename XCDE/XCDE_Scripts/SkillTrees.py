@@ -33,9 +33,9 @@ def SkillRando():
     isPower = Options.AffinityTreeOption_Power.GetState()
     isLinkCost = Options.AffinityTreeOption_LinkCost.GetState()
     isEffect = Options.AffinityTreeOption_Effect.GetState()
-    with open("./XCDE/_internal/JsonOutputs/bdat_common/BTL_PSVskill.json", 'r+', encoding='utf-8') as skillFile:
-        with open("./XCDE/_internal/JsonOutputs/bdat_menu_psv/MNU_PSskil.json", 'r+', encoding='utf-8') as skillDescFile:
-            with open("./XCDE/_internal/JsonOutputs/bdat_menu_psv/MNU_PSskil.json", 'r+', encoding='utf-8') as psFile:
+    with open("./XCDE/JsonOutputs/bdat_common/BTL_PSVskill.json", 'r+', encoding='utf-8') as skillFile:
+        with open("./XCDE/JsonOutputs/bdat_menu_psv/MNU_PSskil.json", 'r+', encoding='utf-8') as skillDescFile:
+            with open("./XCDE/JsonOutputs/bdat_menu_psv/MNU_PSskil.json", 'r+', encoding='utf-8') as psFile:
                 psData = json.load(psFile)
                 skillData = json.load(skillFile)
                 descData = json.load(skillDescFile)
@@ -118,7 +118,7 @@ def LinkCost(skill):
     skill["point_SP"] = int(skill["point_SP"] * skillRoll)
 
 def SkillLinkNodeRando():
-    with open("./XCDE/_internal/JsonOutputs/bdat_menu_psv/MNU_PSset.json", 'r+', encoding='utf-8') as linkFile: # Randomizes the node shape for skill link trees
+    with open("./XCDE/JsonOutputs/bdat_menu_psv/MNU_PSset.json", 'r+', encoding='utf-8') as linkFile: # Randomizes the node shape for skill link trees
         linkData = json.load(linkFile)
         for link in linkData["rows"]:
             for i in range(1,6):

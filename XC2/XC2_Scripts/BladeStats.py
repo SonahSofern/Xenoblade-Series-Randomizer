@@ -9,14 +9,14 @@ def BladeWeaponClassRandomization():
     PoppiNewTypeRoles = []
     NewTypeRoles = WeaponTypeRoles.copy()
     random.shuffle(NewTypeRoles)
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpnType.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/ITM_PcWpnType.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data['rows']:
             row["Role"] = NewTypeRoles[row["$id"] - 1]
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/ITM_HanaRole.json", 'r+', encoding='utf-8') as file: # Poppi
+    with open("./XC2/JsonOutputs/common/ITM_HanaRole.json", 'r+', encoding='utf-8') as file: # Poppi
         data = json.load(file)
         for row in data['rows']:
             PoppiNewTypeRoles.append(row["Role"])

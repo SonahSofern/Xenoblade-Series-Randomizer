@@ -13,7 +13,7 @@ def ArmorRando():
     if isAppearance or isCrazy:
         GearAppearance(isCrazy)
    
-    with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_equiplist.json", 'r+', encoding='utf-8') as armorFile:
+    with open("./XCDE/JsonOutputs/bdat_common/ITM_equiplist.json", 'r+', encoding='utf-8') as armorFile:
         armData = json.load(armorFile)
         funcs = []
                     
@@ -85,7 +85,7 @@ def FindCosmeticLists(CosmeticTypeName, filename, bonusList = []):
     7: "Melia",
     8: "MechFiora",
 }
-    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ITM_{filename}.json", 'r+', encoding='utf-8') as equipFile:
+    with open(f"./XCDE/JsonOutputs/bdat_common/ITM_{filename}.json", 'r+', encoding='utf-8') as equipFile:
         eqData = json.load(equipFile)
         TotalList = []
         for i in range(1,17):
@@ -102,7 +102,7 @@ def FindCosmeticLists(CosmeticTypeName, filename, bonusList = []):
 
 
 def GearAppearance(isCrazy):
-    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ITM_equiplist.json", 'r+', encoding='utf-8') as equipFile:
+    with open(f"./XCDE/JsonOutputs/bdat_common/ITM_equiplist.json", 'r+', encoding='utf-8') as equipFile:
         eqData = json.load(equipFile)
         invalidArmor = [190]
         dontReplace = [1,2,3,4,5] 
@@ -163,7 +163,7 @@ def GearAppearance(isCrazy):
 def RemoveStartingGear():
     removeStartingGearCharacters = [1,2,3,4,5,6,7,8]
     armorKeys = ["def_head", "def_body", "def_arm", "def_waist", "def_legg","melia_def_head", "melia_def_body", "melia_def_arm", "melia_def_waist", "melia_def_legg"]
-    with open("./XCDE/_internal/JsonOutputs/bdat_common/BTL_pclist.json", 'r+', encoding='utf-8') as charFile:
+    with open("./XCDE/JsonOutputs/bdat_common/BTL_pclist.json", 'r+', encoding='utf-8') as charFile:
         charData = json.load(charFile)
         for char in charData["rows"]:
             if char["$id"] not in removeStartingGearCharacters:

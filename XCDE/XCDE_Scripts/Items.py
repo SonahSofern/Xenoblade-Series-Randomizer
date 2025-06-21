@@ -23,7 +23,7 @@ def ItemRandomization(itemTypes:list[ItemType] = [], files = [],odds = 0, game =
     
     for file in files:
         try:
-            with open(f"./{game}/_internal/JsonOutputs/{file}.json", 'r+', encoding='utf-8') as ItemFile:
+            with open(f"./{game}/JsonOutputs/{file}.json", 'r+', encoding='utf-8') as ItemFile:
                 itemData = json.load(ItemFile)
                 for itm in itemData["rows"]:
                     for key in keys:

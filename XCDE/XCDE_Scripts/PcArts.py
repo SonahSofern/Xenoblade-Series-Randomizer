@@ -72,7 +72,7 @@ def RandomizePcArts():
     
     
         
-    with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
+    with open("./XCDE/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
         if isArts:
             for art in artData["rows"]:
@@ -183,16 +183,16 @@ def Power(art):
     
 # Fixes art books
 def MatchArtBooks(artData):
-    with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_artslist.json", 'r+', encoding='utf-8') as artBookFile:
+    with open("./XCDE/JsonOutputs/bdat_common/ITM_artslist.json", 'r+', encoding='utf-8') as artBookFile:
         artBookData = json.load(artBookFile)
         for book in artBookData["rows"]:
             for art in artData["rows"]:
                 if art["$id"] == book["get_arts"]:
                     book["pc_type"] = art["pc"]
                     break
-    # with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as itemFile: currently dont care enough to rename the names in the descriptions
-    #     with open("./XCDE/_internal/JsonOutputs/bdat_menu_item/MNU_item_mes_b.json", 'r+', encoding='utf-8') as artDescFile:
-    #         with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_artslist.json", 'r+', encoding='utf-8') as artsListFile:
+    # with open("./XCDE/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as itemFile: currently dont care enough to rename the names in the descriptions
+    #     with open("./XCDE/JsonOutputs/bdat_menu_item/MNU_item_mes_b.json", 'r+', encoding='utf-8') as artDescFile:
+    #         with open("./XCDE/JsonOutputs/bdat_common/ITM_artslist.json", 'r+', encoding='utf-8') as artsListFile:
     #             itemData = json.load(itemFile)
     #             for art in artsListFile["rows"]:
                 
@@ -238,7 +238,7 @@ def ArtsDescriptions():
 
 
 # def namePrint(artList):
-#     with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
+#     with open("./XCDE/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
 #         artData = json.load(artFile)
 #         nameList = []
 #         for art in artData["rows"]:
@@ -247,7 +247,7 @@ def ArtsDescriptions():
 #         print(nameList)
 
 # def RemakeArtList():    
-#     with open("./XCDE/_internal/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
+#     with open("./XCDE/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
 #         artData = json.load(artFile)
 #         # isDupes = Options.PlayerArtsOption_Duplicates.GetState()
 #         artList = []

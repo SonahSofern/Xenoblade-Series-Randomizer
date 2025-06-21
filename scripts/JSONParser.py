@@ -6,7 +6,7 @@ def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list =
 
     # print(f"Valid Replacements: {Replacements}")
     for name in Filename:
-        filePath = "./XC2/_internal/JsonOutputs/" + name
+        filePath = "./XC2/JsonOutputs/" + name
         if not os.path.exists(filePath):
           #print(filePath + " filepath does not exist.")
           continue
@@ -33,7 +33,7 @@ def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list =
 
 def ChangeJSONLine(filenames: list[str], ids: list[int], keys: list[str], replacement, replaceAll = False, Game = "XC2"):
     for name in filenames:
-        filePath = f"./{Game}/_internal/JsonOutputs/" + name
+        filePath = f"./{Game}/JsonOutputs/" + name
         if not os.path.exists(filePath):
           #print(filePath + " filepath does not exist.")
           continue
@@ -49,7 +49,7 @@ def ChangeJSONLine(filenames: list[str], ids: list[int], keys: list[str], replac
 
 def ChangeJSONLineInMultipleSpots(filenames: list[str], ids: list[int], keys: list[str], replacements: list, replaceAll = False, Game = "XC2"): # sometimes we want to change a json line at multiple locations, so you want to input a list of replacements that tie to the key they're going into
     for name in filenames:
-        filePath = f"./{Game}/_internal/JsonOutputs/" + name
+        filePath = f"./{Game}/JsonOutputs/" + name
         if not os.path.exists(filePath):
           #print(filePath + " filepath does not exist.")
           continue
@@ -69,7 +69,7 @@ def ChangeJSONLineInMultipleSpots(filenames: list[str], ids: list[int], keys: li
 
 def ChangeJSONLineWithCallback(filenames, ids, callback, replaceAll = False):
     for name in filenames:
-        filePath = "./XC2/_internal/JsonOutputs/" + name
+        filePath = "./XC2/JsonOutputs/" + name
         if not os.path.exists(filePath):
           continue
         with open(filePath, 'r+', encoding='utf-8') as file:
@@ -82,7 +82,7 @@ def ChangeJSONLineWithCallback(filenames, ids, callback, replaceAll = False):
             json.dump(data, file, indent=2, ensure_ascii=False)
 
 def QueryJSONLine(filename, searchField, searchVal):
-        filePath = "./XC2/_internal/JsonOutputs/" + filename
+        filePath = "./XC2/JsonOutputs/" + filename
         if not os.path.exists(filePath):
             return
         with open(filePath, 'r+', encoding='utf-8') as file:
@@ -93,7 +93,7 @@ def QueryJSONLine(filename, searchField, searchVal):
         return None
 
 def CopyJSONFile(filename):
-    filePath = "./XC2/_internal/JsonOutputs/" + filename
+    filePath = "./XC2/JsonOutputs/" + filename
     if not os.path.exists(filePath):
       return dict()
     with open(filePath, 'r+', encoding='utf-8') as file:
@@ -110,7 +110,7 @@ def CopyJSONFile(filename):
 def PrintTable(filename):
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     print(filename)
-    filePath = "./XC2/_internal/JsonOutputs/" + filename
+    filePath = "./XC2/JsonOutputs/" + filename
     if not os.path.exists(filePath):
         return
     with open(filePath, 'r+', encoding='utf-8') as file:
@@ -120,7 +120,7 @@ def PrintTable(filename):
     print()
 
 def ExtendJSONFile(filePath, additionsList = []):
-    with open("./XC2/_internal/JsonOutputs/" + filePath, 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/" + filePath, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for item in additionsList:
             data["rows"].extend(item)
@@ -130,7 +130,7 @@ def ExtendJSONFile(filePath, additionsList = []):
         
         
 def ReplaceJSONFile(filePath, replacement = []):
-    with open("./XC2/_internal/JsonOutputs/" + filePath, 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/" + filePath, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         data["rows"] = replacement
         file.seek(0)

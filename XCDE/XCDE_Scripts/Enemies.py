@@ -25,8 +25,8 @@ enAreaFiles.remove("5001")
 # enemiesInLock = []
 # for file in enAreaFiles:
 #     try:
-#         with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/FieldLock{file}.json", 'r+', encoding='utf-8') as eneLockFile:
-#             with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/poplist{file}.json", 'r+', encoding='utf-8') as enePopFile:
+#         with open(f"./XCDE/JsonOutputs/bdat_ma{file}/FieldLock{file}.json", 'r+', encoding='utf-8') as eneLockFile:
+#             with open(f"./XCDE/JsonOutputs/bdat_ma{file}/poplist{file}.json", 'r+', encoding='utf-8') as enePopFile:
 #                 enePopData = json.load(enePopFile)
 #                 eneLockData = json.load(eneLockFile)
 #                 locks = []
@@ -82,7 +82,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     enAreaFiles = areaFileListNumbers.copy()
     enAreaFiles.remove("5001")
     
-    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
+    with open(f"./XCDE/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
         eneData = json.load(eneFile)    
         
         if OriginalEnemyData == []:
@@ -97,8 +97,8 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
         
         # Randomly Assign Enemies
         for file in enAreaFiles:
-            with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
-                with open(f"./XCDE/_internal/JsonOutputs/bdat_common/VoEnemy.json", 'r+', encoding='utf-8') as eneVoiceFile:
+            with open(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
+                with open(f"./XCDE/JsonOutputs/bdat_common/VoEnemy.json", 'r+', encoding='utf-8') as eneVoiceFile:
                     eneVoiceData = json.load(eneVoiceFile)
                     eneAreaData = json.load(eneAreaFile)
                     
@@ -159,7 +159,7 @@ def ForcedArts(enemy, ForcedStoryArts):
             enemy[f"arts{id.artSlot}"] = id.artId  # Change it to their art
 
 def HighActIDFix():
-    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ene_arts.json", 'r+', encoding='utf-8') as artFile:
+    with open(f"./XCDE/JsonOutputs/bdat_common/ene_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
         for art in artData["rows"]:
             if art["$id"] == 846:
@@ -188,7 +188,7 @@ def SmallAreaFights(enemy):
 # Create our list of enemies from all the area files and Combine the data into the class
 def CreateEnemyDataClass(eneData, enAreaFiles):
     for file in enAreaFiles:  
-        with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
+        with open(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
             eneAreaData = json.load(eneAreaFile)
             for enemy in eneAreaData["rows"]:
                 # if enemy["$id"] not in ChosenEnemyIds: # Ignore non chosen enemies
@@ -280,9 +280,9 @@ def KeepStatRatio(enemy, chosen, key, replacementTotal, originalTotal):
 
 # dummylist = []
 def PrintEnemy(enemy:Enemy):
-    with open(f"./XCDE/_internal/JsonOutputs/bdat_common_ms/BTL_enelist_ms.json", 'r+', encoding='utf-8') as enNamesFile:
-        with open(f"./XCDE/_internal/JsonOutputs/bdat_common_ms/ene_arts_ms.json", 'r+', encoding='utf-8') as enArtNamesFile:
-            with open(f"./XCDE/_internal/Enemies.txt", 'a', encoding='utf-8') as enemyTXT:
+    with open(f"./XCDE/JsonOutputs/bdat_common_ms/BTL_enelist_ms.json", 'r+', encoding='utf-8') as enNamesFile:
+        with open(f"./XCDE/JsonOutputs/bdat_common_ms/ene_arts_ms.json", 'r+', encoding='utf-8') as enArtNamesFile:
+            with open(f"./XCDE/Enemies.txt", 'a', encoding='utf-8') as enemyTXT:
                 enemyNameData = json.load(enNamesFile)
                 enemyArtNameData = json.load(enArtNamesFile)
 
@@ -307,14 +307,14 @@ def PrintEnemy(enemy:Enemy):
         # enNamesFile.truncate()
         # json.dump(enemyNameData, enArtNamesFile, indent=2, ensure_ascii=False)
     
-    # with open(f"./XCDE/_internal/Enemies.txt", 'a', encoding='utf-8') as enemyTXT: # Clear our enemies file
+    # with open(f"./XCDE/Enemies.txt", 'a', encoding='utf-8') as enemyTXT: # Clear our enemies file
     #     enemyTXT.seek(0)
     #     enemyTXT.truncate()
 
 # Used for starting fight had some weird thing with the enemies
 def RingRemoval():
     RemoveLocks = [2]
-    with open(f"./XCDE/_internal/JsonOutputs/bdat_ma1401/FieldLock1401.json", 'r+', encoding='utf-8') as lockFile:
+    with open(f"./XCDE/JsonOutputs/bdat_ma1401/FieldLock1401.json", 'r+', encoding='utf-8') as lockFile:
         lockData = json.load(lockFile)
         for lock in lockData["rows"]:
             if lock["$id"] in RemoveLocks:
@@ -324,7 +324,7 @@ def RingRemoval():
 
 def NoCooldownFix():
     Cooldowns = [10,15,20,25,30]
-    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/ene_arts.json", 'r+', encoding='utf-8') as artFile:
+    with open(f"./XCDE/JsonOutputs/bdat_common/ene_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
         for art in artData["rows"]:
             if art["tp"] != 0:
@@ -340,7 +340,7 @@ def DevicesAttachedToEgilFix(enemy):
 
 
 def EgilArenaFix():
-    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
+    with open(f"./XCDE/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
         enData = json.load(eneFile)
         for en in enData["rows"]:
             if en["$id"] == 2501:
@@ -349,7 +349,7 @@ def EgilArenaFix():
         JSONParser.CloseFile(enData, eneFile)
     
     # if enemy["$id"] == 2501 and chosen.enelist["$id"] != 2501: # If egil is randomized into not egil we need to move him
-    #     with open(f"./XCDE/_internal/JsonOutputs/bdat_ma2301/poplist2301.json", 'r+', encoding='utf-8') as enpopFile:
+    #     with open(f"./XCDE/JsonOutputs/bdat_ma2301/poplist2301.json", 'r+', encoding='utf-8') as enpopFile:
     #         popData = json.load(enpopFile)
     #         for en in popData["rows"]:
     #             if en["$id"] == 2:

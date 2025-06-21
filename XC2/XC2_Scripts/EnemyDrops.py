@@ -27,7 +27,7 @@ def RandoEnemyDrops():
     
 
 
-    with open(f"./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", 'r+', encoding='utf-8') as enDropFile:
+    with open(f"./XC2/JsonOutputs/common/BTL_EnDropItem.json", 'r+', encoding='utf-8') as enDropFile:
         enDropData = json.load(enDropFile)
         for drop in enDropData["rows"]:
             for i in range(1,9):

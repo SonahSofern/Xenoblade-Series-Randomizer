@@ -5,12 +5,12 @@ FreeDLCFlags = Helper.InclRange(65000, 65534)
 
 def CreateDLCtoSetFlag(ItemName: list[str], Flag: list[int], Category: list[int] = [2], ItemID: list[int] = [0], Quantity: list[int] = [1], Condition: list[int] = [1]):
     if not Options.UMHuntOption.GetState():
-        MaxRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", "$id") + 1
-        CurrentNameID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
+        MaxRow = Helper.GetMaxValue("./XC2/JsonOutputs/common/MNU_DlcGift.json", "$id") + 1
+        CurrentNameID = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
         
-        with open("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
+        with open("./XC2/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
             
-            with open("./XC2/_internal/JsonOutputs/common_ms/menu_dlc_gift.json", 'r+', encoding='utf-8') as namefile:
+            with open("./XC2/JsonOutputs/common_ms/menu_dlc_gift.json", 'r+', encoding='utf-8') as namefile:
                 
                 data = json.load(file)
                 namedata = json.load(namefile)
@@ -33,17 +33,17 @@ def AddMovespeedDeed():
     # Torna Exclusive debug
     #JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"],[49],["Value"], 500)
     #JSONParser.ChangeJSONLine(["common/FLD_OwnerBonusParam.json"],[1],["Max"], 1000)
-    #Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", ["FSID", "FSID2"], 0)
+    #Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", ["FSID", "FSID2"], 0)
     # Torna Exclusive debug
     if not Options.UMHuntOption.GetState():
-        CurrentNameID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
+        CurrentNameID = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
         BonusMovespeed = Options.StartwithIncreasedMovespeedOption.GetSpinbox() * 10
         JSONParser.ChangeJSONLine(["common/ITM_PreciousList.json"], [25249], ["Name"], CurrentNameID)
         JSONParser.ChangeJSONLine(["common/ITM_PreciousList.json"], [25249], ["Caption"], CurrentNameID + 1)
         JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [1], ["Value"], BonusMovespeed)
         JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [1], ["Type"], 1)
         JSONParser.ChangeJSONLine(["common/FLD_OwnerBonusParam.json"], [1], ["Max"], 750)
-        with open("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
+        with open("./XC2/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
             data = json.load(file)
             data["rows"].append({"$id": CurrentNameID, "style": 36, "name": "Movespeed Deed"})
             data["rows"].append({"$id": CurrentNameID + 1, "style": 61, "name": f"Increases running speed by {BonusMovespeed}%."})

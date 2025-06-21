@@ -38,7 +38,7 @@ def SelectRandomPointGoal(): # There are some sidequests that require you to fee
     OptionalRows = [91,95,99,100,96,101,102,97,98,103,92] # needs to stay in this order or else the indexes will be wrong!
     TaskLists = []
     CurTaskList = []
-    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for optional in OptionalRows:
             CurTaskList = []
@@ -76,7 +76,7 @@ def SelectRandomPointGoal(): # There are some sidequests that require you to fee
     for optional in range(len(AllOptionals)):
         AllOptionals[optional] = AllQuestListTasks[optional][TaskIndexes[optional]]
     
-    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for optional in range(len(OptionalRows)):
             for row in data["rows"]:
@@ -87,7 +87,7 @@ def SelectRandomPointGoal(): # There are some sidequests that require you to fee
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for optional in range(len(TaskLists)):
             for row in data["rows"]:
@@ -961,7 +961,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'FLD_QuestTask $id': 4,
         'Task Summary': 'Defeat the Gargoyle in the Crater',
         'Community Level Req': 0,
-        'Item Requirements': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [3], "$id")[:2] # [LevelUpTokens[:12]]
+        'Item Requirements': Helper.FindValues("./XC2/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [3], "$id")[:2] # [LevelUpTokens[:12]]
     }
     TornaMainQuest8 = {
         'FLD_QuestTask $id': 5,
@@ -1015,7 +1015,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'FLD_QuestTask $id': 12,
         'Task Summary': 'Defeat Brighid',
         'Community Level Req': 0,
-        'Item Requirements': [HugoKey, BrighidKey, AegaeonKey, Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [4], "$id")[:2]] #, LevelUpTokens[:18]]
+        'Item Requirements': [HugoKey, BrighidKey, AegaeonKey, Helper.FindValues("./XC2/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [4], "$id")[:2]] #, LevelUpTokens[:18]]
     }
     TornaMainQuest17 = {
         'FLD_QuestTask $id': 13,
@@ -1033,7 +1033,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'FLD_QuestTask $id': 15,
         'Task Summary': 'Defeat Gort',
         'Community Level Req': 0,
-        'Item Requirements': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [6], "$id")[:2] #LevelUpTokens[:24]]
+        'Item Requirements': Helper.FindValues("./XC2/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [6], "$id")[:2] #LevelUpTokens[:24]]
     }
     TornaMainQuest20 = {
         'FLD_QuestTask $id': 16,
@@ -1099,7 +1099,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'FLD_QuestTask $id': 25,
         'Task Summary': 'Defeat Slithe Jagron',
         'Community Level Req': 0,
-        'Item Requirements': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [9], "$id")[:2] # LevelUpTokens[:33]]
+        'Item Requirements': Helper.FindValues("./XC2/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [9], "$id")[:2] # LevelUpTokens[:33]]
     }
     TornaMainQuest31 = {
         'FLD_QuestTask $id': 26,
@@ -1159,7 +1159,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'FLD_QuestTask $id': 35,
         'Task Summary': 'Defeat Gargoyles Pt. 1',
         'Community Level Req': Community1Gate,
-        'Item Requirements': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [11], "$id")[:2] # LevelUpTokens[:36]]
+        'Item Requirements': Helper.FindValues("./XC2/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [11], "$id")[:2] # LevelUpTokens[:36]]
     }
     TornaMainQuest41 = {
         'FLD_QuestTask $id': 52,
@@ -1183,7 +1183,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'FLD_QuestTask $id': 37,
         'Task Summary': 'Defeat Malos',
         'Community Level Req': Community1Gate,
-        'Item Requirements': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [13], "$id")[:2] # LevelUpTokens[:44]]
+        'Item Requirements': Helper.FindValues("./XC2/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [13], "$id")[:2] # LevelUpTokens[:44]]
     }
     TornaMainQuest45 = {
         'FLD_QuestTask $id': 38,
@@ -1249,7 +1249,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'FLD_QuestTask $id': 46,
         'Task Summary': 'Defeat Malos Pt. 1',
         'Community Level Req': Community2Gate,
-        'Item Requirements': Helper.FindValues("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [20], "$id")[:2] # LevelUpTokens[:54]]
+        'Item Requirements': Helper.FindValues("./XC2/JsonOutputs/common/ITM_PcWpnChip.json", ["Rank"], [20], "$id")[:2] # LevelUpTokens[:54]]
     }
     TornaMainQuest56 = {
         'FLD_QuestTask $id': 47,

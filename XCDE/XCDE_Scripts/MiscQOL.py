@@ -2,8 +2,8 @@ import json
 from scripts import JSONParser
 from  XCDE.XCDE_Scripts import Options
 def Quickstep(): # Originally wanted to give it to shulks default wep but you couldnt remnove it for some reason
-    with open("./XCDE/_internal/JsonOutputs/bdat_common/BTL_skilllist.json", 'r+', encoding='utf-8') as gemFile:
-        with open("./XCDE/_internal/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as itemFile:
+    with open("./XCDE/JsonOutputs/bdat_common/BTL_skilllist.json", 'r+', encoding='utf-8') as gemFile:
+        with open("./XCDE/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as itemFile:
             gemData = json.load(gemFile)
             itemData = json.load(itemFile)
             

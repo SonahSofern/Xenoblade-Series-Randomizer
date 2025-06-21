@@ -69,9 +69,9 @@ Broadsword = Weapon(17, [AegisSwordData, WhipswordsData, BigBangEdgeData, DualSc
 
 
 def WepRando():
-     with open("./XC2/_internal/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as BladeFile:
-        with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as BladeArtsFile:
-            with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_BlSp.json", 'r+', encoding='utf-8') as BladeSpArtsFile:
+     with open("./XC2/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as BladeFile:
+        with open("./XC2/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as BladeArtsFile:
+            with open("./XC2/JsonOutputs/common/BTL_Arts_BlSp.json", 'r+', encoding='utf-8') as BladeSpArtsFile:
                 BlData = json.load(BladeFile)
                 BlArtData = json.load(BladeArtsFile)
                 BlSpArtData = json.load(BladeSpArtsFile)

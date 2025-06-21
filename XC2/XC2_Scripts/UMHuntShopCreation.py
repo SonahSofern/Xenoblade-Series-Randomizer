@@ -190,9 +190,9 @@ def CreateNewReceipts(): # Adds more Precious Items as Reciepts for shops
                     ReceiptNames.append(f"Casino {CurrentSet} M. Scratchoff") 
                 case 2:
                     ReceiptNames.append(f"Casino {CurrentSet} L. Scratchoff")
-    NewestPreciousName = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
+    NewestPreciousName = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
     StartingPreciousName = NewestPreciousName
-    with open("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Caption
+    with open("./XC2/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Caption
         data = json.load(file)
         for i in range(0, len(ReceiptNames)):
             data["rows"].append({"$id": StartingPreciousName, "style": 36, "name": ReceiptNames[i]})
@@ -201,7 +201,7 @@ def CreateNewReceipts(): # Adds more Precious Items as Reciepts for shops
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Item
+    with open("./XC2/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Item
         data = json.load(file)
         for i in range(0, len(ReceiptNames)):
             for row in data["rows"]:
@@ -232,7 +232,7 @@ def ShopChanges(ChosenAreaOrder): # Moved these out since they were cluttering t
     ReAddInns()
 
 def UMRewardDropChanges(): #Changes text for the UM drops we want
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in Helper.InclRange(25479, 25489): # Custom Shop/UM Drop Token IDs
@@ -240,7 +240,7 @@ def UMRewardDropChanges(): #Changes text for the UM drops we want
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
+    with open("./XC2/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
         data = json.load(file)
         for i in range(1, 11):
             for row in data["rows"]:
@@ -274,7 +274,7 @@ def CoreCrystalIdentification(): # Figuring out the groups that each Core Crysta
 def ShuffleCoreCrystals(): # first we need to shuffle the blade ids into the core crystal pool
     AllBladeCrystalIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
     BladeIDs = [1008, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1050, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1104, 1108, 1109, 1105, 1106, 1107, 1111]
-    with open("./XC2/_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         RandomBlades = BladeIDs.copy()
         random.shuffle(RandomBlades)
@@ -297,7 +297,7 @@ def IdentifyDLCBladeCrystals(CrystalList):
             RandomizedBladeIDs.append(ReplacementCharacter2Original[originalblade])
         DLCBladeIDs = RandomizedBladeIDs
     DLCBladeCrystalList = []
-    with open("./XC2/_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: # Adds the exchange tasks
+    with open("./XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: # Adds the exchange tasks
         data = json.load(file)
         for i in range(0, len(CrystalList)):
             for row in data["rows"]:
@@ -316,7 +316,7 @@ def IdentifyClassBladeCrystals(CrystalList): # go from ITM_CrystalList $id->blad
     AttackerList = []
     HealerList = []
     TankList = []
-    with open("./XC2/_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: # Getting BladeIDs for a Crystal $id
+    with open("./XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: # Getting BladeIDs for a Crystal $id
         data = json.load(file)
         for i in range(0, len(CrystalList)):
             for row in data["rows"]:
@@ -326,7 +326,7 @@ def IdentifyClassBladeCrystals(CrystalList): # go from ITM_CrystalList $id->blad
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as file: # Getting WeaponType for a Blade $id
+    with open("./XC2/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as file: # Getting WeaponType for a Blade $id
         data = json.load(file)
         for i in range(0, len(CrystalBladeIDList)):
             for row in data["rows"]:
@@ -336,7 +336,7 @@ def IdentifyClassBladeCrystals(CrystalList): # go from ITM_CrystalList $id->blad
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpnType.json", 'r+', encoding='utf-8') as file: # Getting Role for a WeaponType $id
+    with open("./XC2/JsonOutputs/common/ITM_PcWpnType.json", 'r+', encoding='utf-8') as file: # Getting Role for a WeaponType $id
         data = json.load(file)
         for i in range(0, len(CrystalWeaponTypeIDList)):
             for row in data["rows"]:
@@ -400,8 +400,8 @@ def CoreCrystalGroupCreation(NGPlusBladeCrystalIDs, DLCBladeCrystalIDs, TankBlad
 
 def RenameCrystals(NGPlusBladeCrystalIDs, DLCBladeCrystalIDs, TankBladeCrystalIDs, AttackerBladeCrystalIDs, HealerBladeCrystalIDs):    
     AllBladeCrystalIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/ITM_CrystalList.json", ["Condition", "CommonID", "CommonWPN", "CommonAtr", "Price", "RareTableProb", "RareBladeRev", "AssureP"], 0)
-    with open("./XC2/_internal/JsonOutputs/common_ms/itm_crystal.json", "r+", encoding='utf-8') as file: # Now we want to rename crystals according to their category
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/ITM_CrystalList.json", ["Condition", "CommonID", "CommonWPN", "CommonAtr", "Price", "RareTableProb", "RareBladeRev", "AssureP"], 0)
+    with open("./XC2/JsonOutputs/common_ms/itm_crystal.json", "r+", encoding='utf-8') as file: # Now we want to rename crystals according to their category
         IDNumbers = Helper.InclRange(16, 20)
         CrystalCategoryNames = ["NG+ Core Crystal", "DLC Core Crystal", "TNK Core Crystal", "ATK Core Crystal", "HLR Core Crystal"]
         data = json.load(file)
@@ -410,7 +410,7 @@ def RenameCrystals(NGPlusBladeCrystalIDs, DLCBladeCrystalIDs, TankBladeCrystalID
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
+    with open("./XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in NGPlusBladeCrystalIDs:
@@ -436,7 +436,7 @@ def WeaponPowerLevel(): # Assigns appropriately powered enhancement and damage v
     InvalidSkillEnhancements = [ArtCancel,EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, BladeSwapDamage, CatScimPowerUp, EvadeDrainHp, EvadeDriverArt, EtherCannonRange, ArtDamageHeal, DreamOfTheFuture, WPEnemiesBoost, ExpEnemiesBoost, MachineExecute, HumanoidExecute, AquaticExecute, AerialExecute, InsectExecute, BeastExecute, InstaKill, AegisPowerUp, TwinRingPowerUp, DrillShieldPowerUp, MechArmsPowerUp, VarSaberPowerUp, WhipswordPowerUp, BigBangPowerUp, DualScythesPowerUp, GreataxePowerUp, MegalancePowerUp, EtherCannonPowerUp, ShieldHammerPowerUp, ChromaKatanaPowerUp, BitballPowerUp, KnuckleClawsPowerUp]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
     Common, Rare, Legendary = 0, 1, 2
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
+    with open("./XC2/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
         data = json.load(file)
         for row in data["rows"]:
             for i in range(1, 37):
@@ -445,7 +445,7 @@ def WeaponPowerLevel(): # Assigns appropriately powered enhancement and damage v
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/itm_pcwpnchip_ms.json", 'r+', encoding='utf-8') as file: # Renames chips according to their rank
+    with open("./XC2/JsonOutputs/common_ms/itm_pcwpnchip_ms.json", 'r+', encoding='utf-8') as file: # Renames chips according to their rank
         data = json.load(file)
         for row in data["rows"]:
             for rank in range(len(WeaponStrengthNameList)):
@@ -455,7 +455,7 @@ def WeaponPowerLevel(): # Assigns appropriately powered enhancement and damage v
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file: 
+    with open("./XC2/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             for i in range(0, len(WeaponStrengthList)):
@@ -485,8 +485,8 @@ def WeaponPowerLevel(): # Assigns appropriately powered enhancement and damage v
 
 def AddDLCRewards(ChosenAreaOrder):
     BountyCollectionRewards = Helper.InclRange(1, 10)
-    StartingDLCItemTextRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
-    with open("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
+    StartingDLCItemTextRow = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
+    with open("./XC2/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
         data = json.load(file)
         for i in range(0, len(BountyCollectionRewards)):
             for row in data["rows"]:
@@ -508,7 +508,7 @@ def AddDLCRewards(ChosenAreaOrder):
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/menu_dlc_gift.json", 'r+', encoding='utf-8') as file: #edits DLC items
+    with open("./XC2/JsonOutputs/common_ms/menu_dlc_gift.json", 'r+', encoding='utf-8') as file: #edits DLC items
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 8:
@@ -553,13 +553,13 @@ def CustomShopSetup(ChosenAreaOrder): # Sets up the custom shops with loot
     ShopList = [TokenExchangeShop, WPManualShop, PoppiswapShop] # these don't get duplicated
     for shop in ShopList:
         shop["Condition"] = UMHuntEnableCondListIDs[0]
-    CurMapRowID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", "$id") + 1
+    CurMapRowID = Helper.GetMaxValue("./XC2/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", "$id") + 1
     CopyUsedShopIDs = UsedShopIDs.copy()
     CopyUnusedBazaarNPCRowIDs = UnusedBazaarNPCRowIDs.copy()
     CopyFullUnusedShopList = FullUnusedShopList.copy()
     for shop in MultipleShopList:
         for i in range(len(ChosenAreaOrder)):
-            with open("./XC2/_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file:
+            with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file:
                 data = json.load(file)
                 for row in data["rows"]:
                     if row["$id"] == shop["ChosenMapRowID"]:
@@ -588,7 +588,7 @@ def ReceiptTextChanges(): # Changes the test for the Core Crystal Shop Receipts
     ProofofPurchaseNameTexts = ["ATK 1 Receipt", "ATK 2 Receipt", "ATK 3 Receipt", "ATK 4 Receipt", "TNK 1 Receipt", "TNK 2 Receipt", "TNK 3 Receipt", "HLR 1 Receipt", "HLR 2 Receipt", "HLR 3 Receipt", "DLC 1 Receipt", "DLC 2 Receipt", "DLC 3 Receipt", "NG+ 1 Receipt", "NG+ 2 Receipt", "NG+ 3 Receipt"]
     ProofofPurchaseDescriptionIDs = Helper.InclRange(718, 733)
     ProofofPurchaseDescriptionText = "Proof you purchased this Blade Bundle."
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in ProofofPurchaseIDs: # Proof of Purchases for Core Crystal Bundles
@@ -596,7 +596,7 @@ def ReceiptTextChanges(): # Changes the test for the Core Crystal Shop Receipts
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
+    with open("./XC2/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
         data = json.load(file)
         for i in range(0, len(ProofofPurchaseIDs)):
             for row in data["rows"]:
@@ -610,11 +610,11 @@ def ReceiptTextChanges(): # Changes the test for the Core Crystal Shop Receipts
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def WPAdjustments(): # Changes how much a weapon manual gives, and how much is needed to max an art
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP2"], 250) # 250 to upgrade each level
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP3"], 250)
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP4"], 250)
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP5"], 250)
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: 
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP2"], 250) # 250 to upgrade each level
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP3"], 250)
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP4"], 250)
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", ["NeedWP5"], 250)
+    with open("./XC2/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 25405:
@@ -629,7 +629,7 @@ def WPAdjustments(): # Changes how much a weapon manual gives, and how much is n
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes names of WP Boosting Items
+    with open("./XC2/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes names of WP Boosting Items
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 715:
@@ -651,7 +651,7 @@ def ChipShopRewards():
     ChipBundleNames, ChipShopCostList, ChipShopRewardDistribution = [], [], []
     NumTrades = WeaponChipShop["TradeCount"]
     Chips4 = Helper.ExtendListtoLength([], NumTrades, "0")
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
+    with open("./XC2/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
         data = json.load(file)
         for row in data["rows"]:
             ChipStrengthLists[row["Rank"] - 1].append(row["$id"])
@@ -719,8 +719,8 @@ def AuxCoreRewards(): # Makes the Aux Core Bundles
         AllTypes.extend(ChosenTypes)
         AllMultipliers.extend(ChosenMultipliers)
 
-    with open("./XC2/_internal/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as file: 
-        with open("./XC2/_internal/JsonOutputs/common_ms/itm_orb.json", 'r+', encoding='utf-8') as namefile:
+    with open("./XC2/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as file: 
+        with open("./XC2/JsonOutputs/common_ms/itm_orb.json", 'r+', encoding='utf-8') as namefile:
     
             namedata = json.load(namefile) 
             data = json.load(file)
@@ -804,13 +804,13 @@ def PouchItemRewards():
     Cheap, Quality, Cuisine, Michelin = 5, 10, 15, 55 # these are the base costs for a given pouch item (Michelin is there for the custom pouch items)
     PouchFoodTypetoCostName = {12: [Quality, "Staple Foods"], 13: [Cheap, "Vegetables"], 14: [Cheap, "Meat"], 15: [Cheap, "Seafood"], 16: [Cuisine, "Desserts"], 17: [Cuisine, "Drinks"], 18: [Cuisine, "Instruments"], 19: [Quality, "Art"], 20: [Quality, "Literature"], 21: [Cuisine, "Board Games"], 22: [Quality, "Cosmetics"], 23: [Cheap, "Textiles"], 24: [Michelin, "Secret"]}
     NumTrades = PouchItemShop["TradeCount"]
-    NewPouchItemRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/ITM_FavoriteList.json", "$id") + 1
-    NewPouchItemNameRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/itm_favorite.json", "$id") + 1
-    NewPouchBuffRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/BTL_PouchBuffSet.json", "$id") + 1
+    NewPouchItemRow = Helper.GetMaxValue("./XC2/JsonOutputs/common/ITM_FavoriteList.json", "$id") + 1
+    NewPouchItemNameRow = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/itm_favorite.json", "$id") + 1
+    NewPouchBuffRow = Helper.GetMaxValue("./XC2/JsonOutputs/common/BTL_PouchBuffSet.json", "$id") + 1
     SecretPouchItemIDs = Helper.InclRange(NewPouchItemRow, NewPouchItemRow + 4)
     PouchItemStatCaps = {1: 50.0, 2: 50.0, 3: 30.0, 4: 30.0, 5: 1.0, 6: 50.0, 7: 300.0, 8: 50.0, 9: 50.0, 10: 8.0, 11: 100.0, 12: 100.0}
     AllItemTypeList = []
-    with open("./XC2/_internal/JsonOutputs/common/ITM_FavoriteList.json", 'r+', encoding='utf-8') as file: 
+    with open("./XC2/JsonOutputs/common/ITM_FavoriteList.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for i in range(0, 5): # we want to add room for our custom pouch items
             data["rows"].append({"$id": NewPouchItemRow + i, "Name": NewPouchItemNameRow + i, "Caption": 0, "Category": 24, "Zone": 3, "Rarity": 2, "Price": 0, "Type": NewPouchBuffRow + i, "Time": 60, "ValueMax": 10, "TrustPoint": 0, "sortJP": 0, "sortGE": 0, "sortFR": 0, "sortSP": 0, "sortIT": 0, "sortGB": 0, "sortCN": 0, "sortTW": 0, "sortKR": 0})
@@ -841,14 +841,14 @@ def PouchItemRewards():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/itm_favorite.json", 'r+', encoding='utf-8') as file: # Giving the new pouch items names
+    with open("./XC2/JsonOutputs/common_ms/itm_favorite.json", 'r+', encoding='utf-8') as file: # Giving the new pouch items names
         data = json.load(file)
         for i in range(0, len(SecretPouchItemIDs)):
                 data["rows"].append({"$id": NewPouchItemNameRow + i, "style": 36, "name": f"[System:Color name=tutorial]Superfood {i+1}[/System:Color]"})
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/BTL_PouchBuffSet.json", 'r+', encoding='utf-8') as file: # Giving the new pouch items their buffs
+    with open("./XC2/JsonOutputs/common/BTL_PouchBuffSet.json", 'r+', encoding='utf-8') as file: # Giving the new pouch items their buffs
         data = json.load(file)
         for i in range(0, len(SecretPouchItemIDs)):
             BuffChoices = random.sample(Helper.InclRange(1, 12), 3)
@@ -905,8 +905,8 @@ def AccessoryShopRewards(): # Creates the accessory shop
         9:["Feather", "Medal", "Bling"]
     }
 
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file: 
-        with open("./XC2/_internal/JsonOutputs/common_ms/itm_pcequip.json", 'r+', encoding='utf-8') as namefile:
+    with open("./XC2/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file: 
+        with open("./XC2/JsonOutputs/common_ms/itm_pcequip.json", 'r+', encoding='utf-8') as namefile:
     
             namedata = json.load(namefile) 
             data = json.load(file)
@@ -988,26 +988,26 @@ def AccessoryShopRewards(): # Creates the accessory shop
 
 def PoppiswapShopRewards(): # Creates rewards for Poppiswap Shop
     CrystalRows = Helper.InclRange(11, 21)
-    StartingCondListRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
-    StartingItemCondRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionItem.json", "$id") + 1
-    StartingDLCItemTextRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
+    StartingCondListRow = Helper.GetMaxValue("./XC2/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
+    StartingItemCondRow = Helper.GetMaxValue("./XC2/JsonOutputs/common/FLD_ConditionItem.json", "$id") + 1
+    StartingDLCItemTextRow = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/menu_dlc_gift.json", "$id") + 1
     CrystalVoucherNameIDs = Helper.InclRange(633, 643)
     CrystalVoucherCaptionIDs = Helper.InclRange(734, 744)
-    with open("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for i in range(0, 11): # ConditionType of 5 is "Item", meaning you need that item listed in FLD_ConditionItem
             data["rows"].append({"$id": StartingCondListRow + i, "Premise": 0, "ConditionType1": 5, "Condition1": StartingItemCondRow + i, "ConditionType2": 0, "Condition2": 0, "ConditionType3": 0, "Condition3": 0, "ConditionType4": 0, "Condition4": 0, "ConditionType5": 0, "Condition5": 0, "ConditionType6": 0, "Condition6": 0, "ConditionType7": 0, "Condition7": 0, "ConditionType8": 0, "Condition8": 0})
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/FLD_ConditionItem.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/FLD_ConditionItem.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for i in range(0, 11):
             data["rows"].append({"$id": StartingItemCondRow + i, "ItemCategory": 0, "ItemID": 25322 + i, "Number": 1})
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes names of Contracts
+    with open("./XC2/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes names of Contracts
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] >= 633:
@@ -1021,7 +1021,7 @@ def PoppiswapShopRewards(): # Creates rewards for Poppiswap Shop
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
+    with open("./XC2/JsonOutputs/common/MNU_DlcGift.json", 'r+', encoding='utf-8') as file: #edits DLC items
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in CrystalRows:
@@ -1035,7 +1035,7 @@ def PoppiswapShopRewards(): # Creates rewards for Poppiswap Shop
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/menu_dlc_gift.json", 'r+', encoding='utf-8') as file: #edits DLC items
+    with open("./XC2/JsonOutputs/common_ms/menu_dlc_gift.json", 'r+', encoding='utf-8') as file: #edits DLC items
         data = json.load(file)
         for i in range(0, 11):
             data["rows"].append({"$id": StartingDLCItemTextRow + i, "style": 162, "name": f"Poppiswap Crafting Materials Rank {i+1}"})
@@ -1069,7 +1069,7 @@ def AddSPManual(): # Creates 3 SP Manuals, using ID 25015, 25018, 25033
     SPManualNameIDs = [660, 661, 662]
     SPManualCaptionIDs = [761, 762, 763]
     SPManualValues = [2500, 5000, 10000]
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes max quantity
+    with open("./XC2/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # Changes max quantity
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in SPManualIDs:
@@ -1077,7 +1077,7 @@ def AddSPManual(): # Creates 3 SP Manuals, using ID 25015, 25018, 25033
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes names of Contracts
+    with open("./XC2/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes names of Contracts
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] >= 660:
@@ -1138,8 +1138,8 @@ def ShopLootGeneration(ShopLevel, Shop): # Makes the loot for the shops, using t
 
 def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
     # This section cuts down on the number of user inputs:
-    StartingTaskID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", "$id") + 1
-    StartingQuestRewardID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", "$id") + 1
+    StartingTaskID = Helper.GetMaxValue("./XC2/JsonOutputs/common/MNU_ShopChangeTask.json", "$id") + 1
+    StartingQuestRewardID = Helper.GetMaxValue("./XC2/JsonOutputs/common/FLD_QuestReward.json", "$id") + 1
     Shoplistnames = []
     ShoplistNPCIDs = []
     ShoplistNPCPositions = []
@@ -1157,7 +1157,7 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
         StartingQuestRewardID += shop["TradeCount"]
         Shoplistnames.append(shop["ShopName"])
         ShoplistNPCIDs.append(shop["ChosenMapRowID"])
-    with open("./XC2/_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for i in range(len(ShoplistNPCIDs)):
             for row in data["rows"]:
@@ -1184,10 +1184,10 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
                     if ShopFullListDict[shop]["NPC Position"][i] != "":
                         DebugSetShop.append(ShopFullListDict[shop]["NPC Position"][i])
         #print(DebugSetShop)
-    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file: # Adds the exchange tasks
+    with open("./XC2/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file: # Adds the exchange tasks
         data = json.load(file)
-        ShopChangeStartRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", "$id") + 1 # used in MNU_ShopList for "TableID"
-        CurrRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/MNU_ShopChange.json", "$id") + 1
+        ShopChangeStartRow = Helper.GetMaxValue("./XC2/JsonOutputs/common/MNU_ShopChange.json", "$id") + 1 # used in MNU_ShopList for "TableID"
+        CurrRow = Helper.GetMaxValue("./XC2/JsonOutputs/common/MNU_ShopChange.json", "$id") + 1
         for shop in ShopList:
             ShopChangeRowToAdd = {"$id": CurrRow, "DefTaskSet1": 0, "DefTaskSet2": 0, "DefTaskSet3": 0, "DefTaskSet4": 0, "DefTaskSet5": 0, "DefTaskSet6": 0, "DefTaskSet7": 0, "DefTaskSet8": 0, "AddTaskSet1": 0, "AddCondition1": 0, "AddTaskSet2": 0, "AddCondition2": 0, "AddTaskSet3": 0, "AddCondition3": 0, "AddTaskSet4": 0, "AddCondition4": 0, "AddTaskSet5": 0, "AddCondition5": 0, "AddTaskSet6": 0, "AddCondition6": 0, "AddTaskSet7": 0, "AddCondition7": 0, "AddTaskSet8": 0, "AddCondition8": 0, "LinkQuestTask": 0, "LinkQuestTaskID": 0, "UnitText": 0}
             for i in range(0, len(shop["InputTaskIDs"])):
@@ -1201,10 +1201,10 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/fld_shopchange.json", 'r+', encoding='utf-8') as file: # Changes the reward name for the token shop
+    with open("./XC2/JsonOutputs/common_ms/fld_shopchange.json", 'r+', encoding='utf-8') as file: # Changes the reward name for the token shop
         data = json.load(file)
-        CurrRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/fld_shopchange.json", "$id") + 1
-        StartingShopChangeNameRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/fld_shopchange.json", "$id") + 1 # Used in MNU_ShopChangeTask for "ShopName"
+        CurrRow = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/fld_shopchange.json", "$id") + 1
+        StartingShopChangeNameRow = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/fld_shopchange.json", "$id") + 1 # Used in MNU_ShopChangeTask for "ShopName"
         for shop in ShopList:
             for reward in shop["RewardNames"]:
                 data["rows"].append({"$id": CurrRow, "style": 36, "name": reward})
@@ -1212,9 +1212,9 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file: # Now we define what each task does
+    with open("./XC2/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file: # Now we define what each task does
         data = json.load(file)
-        CurrRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", "$id") + 1
+        CurrRow = Helper.GetMaxValue("./XC2/JsonOutputs/common/MNU_ShopChangeTask.json", "$id") + 1
         for shop in ShopList:
             for i in range(0, len(shop["InputItemIDs"][0])):
                 data["rows"].append({"$id": CurrRow, "Name": StartingShopChangeNameRow, "SetItem1": shop["InputItemIDs"][0][i], "SetNumber1": shop["InputItemQtys"][0][i], "SetItem2": shop["InputItemIDs"][1][i], "SetNumber2": shop["InputItemQtys"][1][i], "SetItem3": shop["InputItemIDs"][2][i], "SetNumber3": shop["InputItemQtys"][2][i], "SetItem4": shop["InputItemIDs"][3][i], "SetNumber4": shop["InputItemQtys"][3][i], "SetItem5": shop["InputItemIDs"][4][i], "SetNumber5": shop["InputItemQtys"][4][i], "HideReward": shop["HideReward"][i], "Reward": shop["RewardIDs"][i], "HideRewardFlag": 0, "AddFlagValue": 0, "forcequit": 0, "IraCraftIndex": 0})
@@ -1223,9 +1223,9 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file: # Sets the reward for each task
+    with open("./XC2/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file: # Sets the reward for each task
         data = json.load(file)
-        CurrRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", "$id") + 1
+        CurrRow = Helper.GetMaxValue("./XC2/JsonOutputs/common/FLD_QuestReward.json", "$id") + 1
         for shop in ShopList:
             for i in range(0, len(shop["RewardIDs"])):
                 data["rows"].append({"$id": CurrRow, "Gold": 0, "EXP": shop["RewardXP"][i], "Sp": shop["RewardSP"][i], "Coin": 0, "DevelopZone": 0, "DevelopPoint": 0, "TrustPoint": 0, "MercenariesPoint": 0, "IdeaCategory": 0, "IdeaValue": 0, "ItemID1": shop["RewardItemIDs"][0][i], "ItemNumber1": shop["RewardQtys"][0][i], "ItemID2": shop["RewardItemIDs"][1][i], "ItemNumber2": shop["RewardQtys"][1][i], "ItemID3": shop["RewardItemIDs"][2][i], "ItemNumber3": shop["RewardQtys"][2][i], "ItemID4": shop["RewardItemIDs"][3][i], "ItemNumber4": shop["RewardQtys"][3][i]})
@@ -1233,17 +1233,17 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/fld_shopname.json", 'r+', encoding='utf-8') as file: # Adds new shop name to list 
+    with open("./XC2/JsonOutputs/common_ms/fld_shopname.json", 'r+', encoding='utf-8') as file: # Adds new shop name to list 
         data = json.load(file)
-        CurrRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/fld_shopname.json", "$id") + 1
-        ShopNameStartingRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/fld_shopname.json", "$id") + 1 # used in MNU_ShopList for "Name"
+        CurrRow = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/fld_shopname.json", "$id") + 1
+        ShopNameStartingRow = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/fld_shopname.json", "$id") + 1 # used in MNU_ShopList for "Name"
         for i in range(0, len(ShopList)):
             data["rows"].append({"$id": CurrRow, "style": 70, "name": ShopList[i]["ShopName"]})
             CurrRow += 1
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopList.json", 'r+', encoding='utf-8') as file: # Changes existing shop to match what we want
+    with open("./XC2/JsonOutputs/common/MNU_ShopList.json", 'r+', encoding='utf-8') as file: # Changes existing shop to match what we want
         data = json.load(file)
         for i in range(0, len(ShopList)):
             for row in data["rows"]:
@@ -1260,7 +1260,7 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     if DeleteArgentumShops:
-        with open("./XC2/_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
+        with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
             data = json.load(file)
             for row in data["rows"]:
                 if row["$id"] != 2096: # keeps only the inn as a shop in Argentum
@@ -1301,10 +1301,10 @@ def ShopCreator(ShopList: list, DeleteArgentumShops: bool): # Makes the shops
 
 
 def InnShopCosts(): # Removes cost to stay at inn
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_ShopInn.json", ["Price"], 0)
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_ShopInn.json", ["Price"], 0)
 
 def ReplaceBana(): # I want to use Bana as the exchange shop, so I move rumtumtum into Bana's spots on the map
-    with open("./XC2/_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Changes name text file
+    with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Changes name text file
         data = json.load(file)
         for row in data["rows"]:
             if (row["$id"] != 2079) & (row["NpcID"] == 2002):
@@ -1319,13 +1319,13 @@ def SecretShopMaker(ChosenAreaOrder): # Adds some secret shops in the areas of i
     SecretShopRewardGeneration(ChosenAreaOrder)
     SecretEmptyFillerList = Helper.ExtendListtoLength([], 5, "0")
     UsableShopIDs = Helper.InclRange(65, 73) + [81] # MNU_ShopList $id, NpcPop ShopID
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common_gmk/ma07a_FLD_NpcPop.json", ["FSID1", "FSID2", "FSID3"], 0)
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/ma07a_FLD_NpcPop.json", ["FSID1", "FSID2", "FSID3"], 0)
     ShopList = []
     for i in range(0, len(ChosenAreaOrder)):
-        MapValidNPCIDs = [x for x in Helper.FindSubOptionValuesList("./XC2/_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", "flag", "Talkable", 1, "$id") if x not in InvalidMapNPCs]
+        MapValidNPCIDs = [x for x in Helper.FindSubOptionValuesList("./XC2/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", "flag", "Talkable", 1, "$id") if x not in InvalidMapNPCs]
         ChosenSecretNPCID = random.choice(MapValidNPCIDs)
         OrigNPCID = 0
-        with open("./XC2/_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
+        with open("./XC2/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
             data = json.load(file)
             for row in data["rows"]:
                 if row["$id"] == ChosenSecretNPCID:
@@ -1380,7 +1380,7 @@ def CreateSecretShopReceipts(): # Makes receipts for secret shops, limiting the 
     SecretReceiptIDs = Helper.ExtendListtoLength([25352], 10, "inputlist[i-1]+1")
     SecretReceiptNameIDs = Helper.ExtendListtoLength([663], 10, "inputlist[i-1]+1")
     SecretReceiptCaptionIDs = Helper.ExtendListtoLength([764], 10, "inputlist[i-1]+1")
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # changes max quantity
+    with open("./XC2/JsonOutputs/common/ITM_PreciousList.json", 'r+', encoding='utf-8') as file: # changes max quantity
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in SecretReceiptIDs:
@@ -1388,7 +1388,7 @@ def CreateSecretShopReceipts(): # Makes receipts for secret shops, limiting the 
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes names of Contracts
+    with open("./XC2/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes names of Contracts
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] >= 663:
@@ -1416,7 +1416,7 @@ def SecretShopRewardGeneration(ChosenAreaOrder): # Makes the reward sets for the
     SecretShopCostList = []
 
     WeaponRankList = Helper.ExtendListtoLength([], 20, "[]")
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
+    with open("./XC2/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
         data = json.load(file)
         for row in data["rows"]:
             WeaponRankList[row["Rank"] - 1].append(row["$id"])
@@ -1492,7 +1492,7 @@ def SecretShopRewardGeneration(ChosenAreaOrder): # Makes the reward sets for the
         SecretShopRewardQuantities2.append(SetQuantities2)
 
 def ReAddInns(): # Need to readd inns to Mor Ardain and Gormott to allow you to change the tide level
-    with open("./XC2/_internal/JsonOutputs/common_gmk/ma05a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Gormott Inn
+    with open("./XC2/JsonOutputs/common_gmk/ma05a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Gormott Inn
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 5487:
@@ -1502,7 +1502,7 @@ def ReAddInns(): # Need to readd inns to Mor Ardain and Gormott to allow you to 
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_gmk/ma08a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Mor Ardain Inn
+    with open("./XC2/JsonOutputs/common_gmk/ma08a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Mor Ardain Inn
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 8284:

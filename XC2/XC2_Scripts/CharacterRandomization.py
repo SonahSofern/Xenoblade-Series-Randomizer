@@ -131,7 +131,7 @@ def CharacterRandomization():
 
 
 def FreeEngage(): # If Blade Rando is on, we want to be able to move blades around freely to avoid bugs
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/MNU_DlcGift.json", ["FreeEngage"], "1")
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_DlcGift.json", ["FreeEngage"], "1")
 
 
 def InitialSetup():

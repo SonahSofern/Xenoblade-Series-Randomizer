@@ -10,7 +10,7 @@ from scripts import JSONParser, Helper
 #     ObjectList = []
 #     for area in IDs.areaFileListNumbers:
 #         try:
-#             with open(f"./XCDE/_internal/JsonOutputs/bdat_common/mapobjfile{area}.json", 'r+', encoding='utf-8') as lmFile:
+#             with open(f"./XCDE/JsonOutputs/bdat_common/mapobjfile{area}.json", 'r+', encoding='utf-8') as lmFile:
 #                 lmData = json.load(lmFile)
 #                 for lm in lmData["rows"]:
 #                     ObjectList.append(lm["resource"])
@@ -21,7 +21,7 @@ from scripts import JSONParser, Helper
 #             pass
 #     for area in IDs.areaFileListNumbers:
 #         try:
-#             with open(f"./XCDE/_internal/JsonOutputs/bdat_ma{area}/mapobjlist{area}.json", 'r+', encoding='utf-8') as lmaFile:
+#             with open(f"./XCDE/JsonOutputs/bdat_ma{area}/mapobjlist{area}.json", 'r+', encoding='utf-8') as lmaFile:
 #                 lmaData = json.load(lmaFile)
 #                 for lm in lmaData["rows"]:
 #                     lm["ground"] = 1
@@ -33,7 +33,7 @@ from scripts import JSONParser, Helper
 #             pass
 #     for area in IDs.areaFileListNumbers:
 #         try:
-#             with open(f"./XCDE/_internal/JsonOutputs/bdat_common/mapobjfile{area}.json", 'r+', encoding='utf-8') as lmFile:
+#             with open(f"./XCDE/JsonOutputs/bdat_common/mapobjfile{area}.json", 'r+', encoding='utf-8') as lmFile:
 #                 lmData = json.load(lmFile)
 #                 for lm in lmData["rows"]:
 #                     # lm["resource"] = random.choice(ObjectList)
@@ -45,7 +45,7 @@ from scripts import JSONParser, Helper
 #             pass
 
 # def LandmarkRando():
-#     with open("./XCDE/_internal/JsonOutputs/bdat_common/MNU_ColorList.json", 'r+', encoding='utf-8') as lmFile:
+#     with open("./XCDE/JsonOutputs/bdat_common/MNU_ColorList.json", 'r+', encoding='utf-8') as lmFile:
 #         lmData = json.load(lmFile)
 #         colorKeys = ["col_r", "col_g", "col_b"]
 #         for lm in lmData["rows"]:

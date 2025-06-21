@@ -7,7 +7,7 @@ def NPCModelRando():
     odds = Options.NPCModelsOption.GetSpinbox()
     ObjectList = []
     dontReplace = Helper.InclRange(654,680) + [650,651]
-    with open(f"./XCDE/_internal/JsonOutputs/bdat_common/KP_list.json", 'r+', encoding='utf-8') as lmFile:
+    with open(f"./XCDE/JsonOutputs/bdat_common/KP_list.json", 'r+', encoding='utf-8') as lmFile:
         lmData = json.load(lmFile)
         for lm in lmData["rows"]:
             if (lm["$id"] in dontReplace) or (not (lm["model"].startswith("en") or lm["model"].startswith("np"))):

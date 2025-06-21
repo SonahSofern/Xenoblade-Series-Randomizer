@@ -25,7 +25,7 @@ def RandoPouchShops():
     if ValidReplacements == []: # In case they dont select anything
         return
     
-    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as shopFile:
+    with open("./XC2/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as shopFile:
         shopData = json.load(shopFile)
         odds = Options.PouchItemShopOption.GetSpinbox()
         for shop in shopData["rows"]:
