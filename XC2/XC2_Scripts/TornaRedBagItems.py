@@ -1,7 +1,7 @@
 from scripts import Helper, JSONParser, PopupDescriptions
 import json
 import random
-from IDs import *
+from XC2.XC2_Scripts.IDs import *
 
 class TornaRedBag: # created to allow me to pass these objects easier
     def __init__(self, input, addtolist, rewardnumber):

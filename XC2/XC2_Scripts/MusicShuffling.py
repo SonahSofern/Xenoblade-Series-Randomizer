@@ -1,9 +1,8 @@
-from IDs import EnemyBattleMusicMOVs, NonBattleMusicMOVs, NonBattleMusicIDs, ReplacementNonBattleMusicMOVs, ValidEnemyMusicIDs, ValidEnemyMusicWAVs
-from scripts import JSONParser
-from scripts import Helper, PopupDescriptions
+from XC2.XC2_Scripts.IDs import EnemyBattleMusicMOVs, NonBattleMusicMOVs, NonBattleMusicIDs, ReplacementNonBattleMusicMOVs, ValidEnemyMusicIDs, ValidEnemyMusicWAVs
+from scripts import Helper, PopupDescriptions, JSONParser
 import json
-import random, Options
-
+import random
+from XC2.XC2_Scripts import Options
 # RSC_BgmCondition:
 # An area usually has 2-3 conditions. If it has 3, its a weather related condition (music is adjusted for weather), usually can tell via large condition value
 # condition of 454 is daytime
@@ -22,7 +21,7 @@ def MusicShuffle():
     if Options.MusicOption_MixBattleAndEnv.GetState():
         JSONParser.ChangeJSONFile(["common/RSC_BgmList.json"], ["filename"], NonBattleMusicMOVs + EnemyBattleMusicMOVs, NonBattleMusicMOVs + EnemyBattleMusicMOVs)
     else:
-        with open("./XC2/_internal/JsonOutputs/common/RSC_BgmList.json", 'r+', encoding='utf-8') as file:
+        with open("./XC2/JsonOutputs/common/RSC_BgmList.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data['rows']:
                 if row["$id"] in ValidEnemyMusicIDs:
@@ -34,7 +33,7 @@ def MusicShuffle():
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-        with open("./XC2/_internal/JsonOutputs/common/RSC_BgmCondition.json", 'r+', encoding='utf-8') as file:
+        with open("./XC2/JsonOutputs/common/RSC_BgmCondition.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data['rows']:
                 if row["$id"] == 30: # Uraya dungeon theme
@@ -49,7 +48,7 @@ def MusicShuffle():
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-        with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+        with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data['rows']: # same issue with track m72.wav, which plays for the teammate fights before the architect (it's mid too). Other tracks have same overlap issue
                 if row["BGMID"] in [41, 43, 44, 49]:
@@ -57,7 +56,7 @@ def MusicShuffle():
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/EVT_listBf.json", ["opBgm","edBgm"], 0)
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/EVT_listBf.json", ["opBgm","edBgm"], 0)
 
 def MusicRandoDescription():
     MusicDesc = PopupDescriptions.Description()

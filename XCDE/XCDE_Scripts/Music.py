@@ -50,7 +50,7 @@ class Music:
 
 
 def MusicRando(Songs:list[Music], TempList:list[Music]):
-    with open("./XCDE/_internal/JsonOutputs/bdat_common/bgmlist.json", 'r+', encoding='utf-8') as bgmFile:
+    with open("./XCDE/JsonOutputs/bdat_common/bgmlist.json", 'r+', encoding='utf-8') as bgmFile:
         bgmData = json.load(bgmFile)
             
         for bgm in bgmData["rows"]:

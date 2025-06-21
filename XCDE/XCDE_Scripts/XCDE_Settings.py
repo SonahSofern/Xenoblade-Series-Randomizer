@@ -1,11 +1,7 @@
-import sys, os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))) # Allows us to use the scripts folder as a module
-from tkinter import *
-root = Tk()
-import scripts.XCRandomizer, SeedNames, IDs, scripts.JSONParser, Options
+import scripts.XCRandomizer, scripts.JSONParser
+from XCDE.XCDE_Scripts import SeedNames, IDs, Options
 
 Version = "1.1.0"
-
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["bdat_common_ms/MNU_title_ms.json"],[8], ["name"], f"Randomizer v{Version}", Game="XCDE") # Change Title Version to Randomizer vX.x.x
 
@@ -24,4 +20,3 @@ mainFolderNames = ["bdat_common", "bdat_menu_psv", "bdat_menu_ttrl", "bdat_evt",
 subFolderNames = ["bdat_common_ms", "bdat_menu_psv_ms", "bdat_menu_mes_ms"]
 
 
-scripts.XCRandomizer.CreateMainWindow(root, "XCDE", Version, "Xenoblade Chronicles DE Randomizer", Options.Tabs, extraCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash])

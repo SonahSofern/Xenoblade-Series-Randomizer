@@ -1,4 +1,5 @@
-import Options, IDs, json, random
+from XC2.XC2_Scripts import Options, IDs
+import json, random
 from scripts import Helper, PopupDescriptions
 def RandoTreasureBoxes():
     ValidReplacements = []
@@ -29,7 +30,7 @@ def RandoTreasureBoxes():
     
     for area in IDs.MajorAreaIds:
         try:
-            with open(f"./XC2/_internal/JsonOutputs/common_gmk/ma{area}a_FLD_TboxPop.json", 'r+', encoding='utf-8') as tboxFile:
+            with open(f"./XC2/JsonOutputs/common_gmk/ma{area}a_FLD_TboxPop.json", 'r+', encoding='utf-8') as tboxFile:
                 boxData = json.load(tboxFile)
                 for box in boxData["rows"]:
                     for i in range(1,9):

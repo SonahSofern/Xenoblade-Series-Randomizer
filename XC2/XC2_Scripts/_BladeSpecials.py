@@ -1,9 +1,10 @@
-import json, Options, _DriverArts, random, _Arts
+import json, random
+from XC2.XC2_Scripts import Options, _DriverArts, _Arts
 from scripts import Helper
 
 
 def BladeSpecials():
-    with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as artFile:
+    with open("./XC2/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
         
         isReact = Options.BladeSpecialOption_Reaction.GetState()
@@ -14,7 +15,7 @@ def BladeSpecials():
         for art in artData["rows"]:
             if isReact:
                 if Helper.OddsCheck(odds):
-                    _DriverArts.Reaction(art, True)
+                    _DriverArts.Reaction(art, True, 100)
                 
             if isEnhancements:
                 if Helper.OddsCheck(odds):
@@ -29,7 +30,7 @@ def BladeSpecials():
         artFile.seek(0)
         artFile.truncate()
         json.dump(artData, artFile, indent=2, ensure_ascii=False)
-    _DriverArts.GenCustomArtDescriptions("./XC2/_internal/JsonOutputs/common/BTL_Arts_Bl.json", "./XC2/_internal/JsonOutputs/common_ms/btl_arts_bl_ms.json", True)
+    _DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_Bl.json", "./XC2/JsonOutputs/common_ms/btl_arts_bl_ms.json", True)
 
 
 def Enhancements(art): 
@@ -44,7 +45,7 @@ def Enhancements(art):
         
 
 def BladeEXSpecials(): # Ex specials use different keys and dont have all 6 legvegls of enhancement needs its own function
-    with open("./XC2/_internal/JsonOutputs/common/BTL_Arts_BlSp.json", 'r+', encoding='utf-8') as artFile:
+    with open("./XC2/JsonOutputs/common/BTL_Arts_BlSp.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
         
         isReact = Options.BladeSpecialOption_Reaction.GetState()
@@ -57,7 +58,7 @@ def BladeEXSpecials(): # Ex specials use different keys and dont have all 6 legv
                     if art[f"ReAct{i}"] > 14: # Ignore special cases that just move the blade around
                         continue
                 if Helper.OddsCheck(odds):
-                    _DriverArts.Reaction(art, True)
+                    _DriverArts.Reaction(art, True, 100)
                 
             if isEnhancements:
                 if Helper.OddsCheck(odds):
@@ -66,7 +67,7 @@ def BladeEXSpecials(): # Ex specials use different keys and dont have all 6 legv
         artFile.seek(0)
         artFile.truncate()
         json.dump(artData, artFile, indent=2, ensure_ascii=False)
-    _DriverArts.GenCustomArtDescriptions("./XC2/_internal/JsonOutputs/common/BTL_Arts_BlSp.json", "./XC2/_internal/JsonOutputs/common_ms/btl_arts_blsp_ms.json", True, "Enhance")
+    _DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_BlSp.json", "./XC2/JsonOutputs/common_ms/btl_arts_blsp_ms.json", True, "Enhance")
 
 def EXEnhancements(art):
     Enhancement = random.choice(_Arts.EnhancementGroup)

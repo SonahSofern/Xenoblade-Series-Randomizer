@@ -7,11 +7,6 @@ import tkinter as tk
 from scripts.GUISettings import *
 from PIL import Image, ImageTk
 
-isOneFile = True
-seedEntryVar = StringVar()
-permalinkVar = StringVar()
-fileEntryVar = StringVar()
-
 class Tab():
     def __init__(self, name, outer, canvas, inner):
         self.name = name
@@ -26,68 +21,94 @@ else:
 
 lastWidth = -1
 lastHeight = -1
-bgPhoto = None
-
-def resize_bg(event, root, bg_photo, bg_image, background):
-    global lastHeight, lastWidth, bgPhoto
-    if (root.winfo_width() != lastWidth) or (root.winfo_height() != lastHeight):
-        lastWidth = root.winfo_width()
-        lastHeight = root.winfo_height()
-        resized_image = bg_image.resize((event.width, event.height))
-        bg_photo = ImageTk.PhotoImage(resized_image)
-        bgPhoto = bg_photo
-        background.delete("all")
-        background.create_image(0, 0, image=bgPhoto, anchor="nw")
+garbageCollectionStopper = []# Globals to prevent garbage collection
     
 class FileReplacer:
     def __init__(self, images, location, filename, game):
         self.images = []
         for image in images:
             if isOneFile:
-                image = os.path.join(sys._MEIPASS, image)
+                image = os.path.join(sys._MEIPASS,game, image)
             else:
-                image = f"{game}/_internal/{image}"
+                image = f"{game}/{image}"
             self.images.append(image)
         self.location = location
         self.filename = filename
 
+iconCollector = []# Globals to prevent garbage collection
 
-def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = []):
+def CreateImage(imagePath):
+    if isOneFile: 
+        bg_image = Image.open(os.path.join(sys._MEIPASS, imagePath))
+    else:
+        bg_image = Image.open(imagePath)
+    bg_image = bg_image.resize((40,40))
+    newimg = ImageTk.PhotoImage(bg_image)
+    iconCollector.append(newimg)
+    return newimg
+
+lastHeight = -1
+lastWidth = -1
+lastGame = "" # Keeps tracks of when to update UI, dont love this solution though
+
+def resize_bg(event, root, bg_image, background, Game):
+    global lastWidth, lastHeight
+
+    if (root.winfo_width() != lastWidth) or (root.winfo_height() != lastHeight):
+        width, height = event.width, event.height
+
+        if Game == lastGame:
+            lastWidth = width
+            lastHeight = height
+
+        def resize_and_update(): # Processes the images on another thread because it slows down main thread a lot
+            resized_image = bg_image.resize((width, height))
+            bg_photo = ImageTk.PhotoImage(resized_image)
+
+            def update_gui(): # Update GUI on main thread because tkinter is not thread safe
+                garbageCollectionStopper.append(bg_photo)
+                background.delete("all")
+                background.create_image(0, 0, image=bg_photo, anchor="nw")
+
+            root.after(0, update_gui)
+
+        threading.Thread(target=resize_and_update, daemon=True).start()
+
+saveCommands = []
+
+def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= []):
     import  os, sys
     from scripts import SavedOptions, Helper, GUISettings, PermalinkManagement, Seed, Interactables, SettingsPresets
     from tkinter.font import Font
     import tkinter as tk
+    seedEntryVar = StringVar()
+    permalinkVar = StringVar()
+    fileEntryVar = StringVar()
     windowPadding = 50
     global isOneFile
     SavedOptionsFileName = f"LastSave.txt"
-    JsonOutput = f"./{Game}/_internal/JsonOutputs"
+    JsonOutput = f"./{Game}/JsonOutputs"
     SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt", f"{Game}/GUI")
-    RootsForStyling.append(root)
     defaultFont = Font(family=GUISettings.defFontVar.get(), size=GUISettings.defFontSizeVar.get())
+    
+    XCFrame = ttk.Frame(window) # Outer Frame
+    RootsForStyling.append(XCFrame)
 
-    root.title(f"{Title} v{Version}")
-    root.option_add("*Font", defaultFont)
-    root.geometry(f'{windowWidth}x{windowHeight}')
+    window.add(XCFrame, text =Version, image=CreateImage(f"{Game}/Images/{Game}Icon.png"), compound="left") 
+
     if isOneFile:
         bdat_path = os.path.join(sys._MEIPASS, 'Toolset', 'bdat-toolset-win64.exe')
     else:
-        bdat_path = f"./{Game}/_internal/Toolset/bdat-toolset-win64.exe"
-
-    if isOneFile: 
-        icon_path = os.path.join(sys._MEIPASS, 'Images', f'{Game}Icon.png')
-    else:
-        icon_path = f"./{Game}/_internal/Images/{Game}Icon.png"
-    icon = PhotoImage(file=icon_path)
-    root.iconphoto(True, icon)
+        bdat_path = f"Toolset/bdat-toolset-win64.exe"
 
     bg = random.choice(backgroundImages)
     if isOneFile: 
-        bg_image = Image.open(os.path.join(sys._MEIPASS, 'Images', bg))
+        bg_image = Image.open(os.path.join(sys._MEIPASS, Game, 'Images', bg))
     else:
-        bg_image = Image.open(f"./{Game}/_internal/Images/{bg}")
+        bg_image = Image.open(f"./{Game}/Images/{bg}")
     bg_photo = ImageTk.PhotoImage(bg_image)
 
-    background = tk.Canvas(root)
+    background = tk.Canvas(XCFrame)
     background.pack(fill="both", expand=True, padx=0, pady=0)
     background.create_image(0, 0, image=bg_photo, anchor="nw")
 
@@ -117,13 +138,13 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     MainWindow.pack(expand = True, fill ="both", padx=windowPadding, pady=(windowPadding, 5))
 
 
-    Interactables.OptionList.sort(key= lambda x: x.name) # Sorts alphabetically
-    for opt in Interactables.OptionList: # Cant reference directly because of circular imports :/
+    Interactables.XenoOptionDict[Game].sort(key= lambda x: x.name) # Sorts alphabetically
+    for opt in Interactables.XenoOptionDict[Game]:
         
         if isOneFile and opt.isDevOption: # Dont show dev options when packed for users
             continue
         
-        opt.DisplayOption(InnerDict[opt.tab], root, defaultFont, GUISettings.defGUIThemeVar.get())
+        opt.DisplayOption(InnerDict[opt.tab], XCFrame, defaultFont, GUISettings.defGUIThemeVar.get())
 
     def GenRandomSeed(randoSeedEntryVar):
         randoSeedEntryVar.set(Seed.RandomSeedName(SeedNouns, SeedVerbs))
@@ -154,10 +175,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     # Seed entry box
     GenRandomSeed(seedEntryVar) # Gen a random seed if you have no save data 
     randoSeedEntry = ttk.Entry(SeedFrame, textvariable=seedEntryVar)
-
-
-
-            
+    
     fileEnt = SavedOptions.SavedEntry("Input Bdats",fileEntryVar)
     fileOut = SavedOptions.SavedEntry("Output Bdats", outputDirVar)
     permLink = SavedOptions.SavedEntry("Permalink", permalinkVar)
@@ -167,19 +185,19 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     randoSeedEntry.pack(side='left', fill=X, expand=True)
     # Save and Load Last Options
     EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
-    SavedOptions.loadData(EntriesToSave + Interactables.OptionList, SavedOptionsFileName, Game)
-    EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.OptionList)) + list((x.spinBoxVal for x in Interactables.OptionList if x.hasSpinBox)) + list((sub.checkBoxVal for x in Interactables.OptionList for sub in x.subOptions)) + list((sub.spinBoxVal for x in Interactables.OptionList for sub in x.subOptions if sub.hasSpinBox))
+    SavedOptions.loadData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game)
+    EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.XenoOptionDict[Game])) + list((x.spinBoxVal for x in Interactables.XenoOptionDict[Game] if x.hasSpinBox)) + list((sub.checkBoxVal for x in Interactables.XenoOptionDict[Game] for sub in x.subOptions)) + list((sub.spinBoxVal for x in Interactables.XenoOptionDict[Game] for sub in x.subOptions if sub.hasSpinBox))
 
     # Permalink Options/Variables
     permalinkFrame = ttk.Frame(background,style="NoBackground.TFrame")
     permalinkEntry = ttk.Entry(permalinkFrame, textvariable=permalinkVar)
     CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
     permalinkVar.set(CompressedPermalink)
-    permalinkButton = ttk.Button(permalinkFrame, text="Preset", command=lambda: SettingsPresets.PresetsWindow("Presets", root, defaultFont, f"{Game}/SaveData", EntriesToSave + Interactables.OptionList, Game))
+    permalinkButton = ttk.Button(permalinkFrame, text="Preset", command=lambda: SettingsPresets.PresetsWindow("Presets", XCFrame, defaultFont, f"{Game}/SaveData", EntriesToSave + Interactables.XenoOptionDict[Game], Game))
     permalinkFrame.pack(padx=windowPadding, anchor="w", fill=X)
     permalinkButton.pack(side="left")
     permalinkEntry.pack(side='left', fill=X, expand=True)
-    PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:Interactables.UpdateAllStates())
+    PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version, lambda:Interactables.UpdateAllStates(Game))
 
 
     # Bottom Left Progress Display Text
@@ -188,19 +206,19 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
     randoProgressDisplay.pack(pady=0, side=LEFT)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(root, RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.OptionList, mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles)))
+    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(XCFrame, RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles)))
     RandomizeButton.pack(pady=(5,windowPadding),side="left", padx=(windowPadding, 0), anchor=CENTER)
     
     # Options Cog
     if isOneFile:  # If the app is running as a bundled executable
-        icon_path = os.path.join(sys._MEIPASS, 'Images', 'SmallSettingsCog.png')
+        icon_path = os.path.join(sys._MEIPASS, 'images', 'SmallSettingsCog.png')
     else:  # If running as a script (not bundled)
-        icon_path = "./_internal/Images/SmallSettingsCog.png"
+        icon_path = "images/SmallSettingsCog.png"
     Cog = PhotoImage(file=icon_path)
-    SettingsButton = ttk.Button(background,padding=5, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(root, defaultFont, GUISettings.defGUIThemeVar, Game))
+    iconCollector.append(Cog)
+    SettingsButton = ttk.Button(background,padding=5, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(XCFrame, defaultFont, GUISettings.defGUIThemeVar, Game))
     SettingsButton.pack(pady=(5,windowPadding),anchor="e",expand=True, side=RIGHT, padx=windowPadding) 
-    
-    root.protocol("WM_DELETE_WINDOW", lambda: (SavedOptions.saveData(EntriesToSave + Interactables.OptionList, SavedOptionsFileName, Game), root.destroy()))
+    saveCommands.append(lambda: SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game))
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
 
     pb = ttk.Progressbar(
@@ -209,7 +227,7 @@ def CreateMainWindow(root, Game, Version, Title, TabDict = {}, Extracommands = [
         mode='determinate',
         length=3000
     )
-
-    root.bind("<Configure>", lambda event: resize_bg(event, root, bg_photo, bg_image, background))
-    root.mainloop()
+    global lastGame
+    lastGame = Game
+    root.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background, Game), add="+")
 

@@ -2,7 +2,7 @@ Nouns = ['Miibomii', 'Noah', 'Eunie', 'Lanz', 'Mio', 'Taion', 'Sena', 'Ashera', 
 Verbs = ["Breaks", "Topples", "Dazes", "Bursts", "Launches"]
 # import json
 # def GetNames():
-#     with open("./XC3/_internal/JsonOutputs/system/msg_npc_name.json", 'r+', encoding='utf-8') as npcFile:
+#     with open("./XC3/JsonOutputs/system/msg_npc_name.json", 'r+', encoding='utf-8') as npcFile:
 #         npcData = json.load(npcFile)
 #         npcNameList = []
 #         for npc in npcData["rows"]:

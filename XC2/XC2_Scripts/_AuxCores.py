@@ -1,5 +1,5 @@
 import json, random
-from Enhancements import *
+from XC2.XC2_Scripts.Enhancements import *
 
 
 def RandomizeAuxCoreEnhancements():
@@ -7,9 +7,9 @@ def RandomizeAuxCoreEnhancements():
 
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
 
-    with open("./XC2/_internal/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as AuxCoreFile:
-        with open("./XC2/_internal/JsonOutputs/common_ms/itm_orb.json", 'r+', encoding='utf-8') as auxNamesFile:
-            with open("./XC2/_internal/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as poppiAuxEnhancementsFile:
+    with open("./XC2/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as AuxCoreFile:
+        with open("./XC2/JsonOutputs/common_ms/itm_orb.json", 'r+', encoding='utf-8') as auxNamesFile:
+            with open("./XC2/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as poppiAuxEnhancementsFile:
                 poppiAuxData = json.load(poppiAuxEnhancementsFile)
                 enhanceData = json.load(AuxCoreFile)
                 auxNameData = json.load(auxNamesFile)

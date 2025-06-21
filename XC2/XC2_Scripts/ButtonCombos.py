@@ -1,4 +1,5 @@
-import Options, json, random
+from XC2.XC2_Scripts import Options
+import json, random
 from scripts import Helper
 def BladeSpecialButtonChallenges():
     Buttons = []
@@ -13,7 +14,7 @@ def BladeSpecialButtonChallenges():
     if Options.BladeSpecialButtonsOption_Mystery.GetState():
         Buttons.append(5)
         
-    with open(f"./XC2/_internal/JsonOutputs/common/MNU_BtnChallenge2.json", 'r+', encoding='utf-8') as btnFile:
+    with open(f"./XC2/JsonOutputs/common/MNU_BtnChallenge2.json", 'r+', encoding='utf-8') as btnFile:
         btnData = json.load(btnFile)
         for btn in btnData["rows"]:
             for i in range(1,4):

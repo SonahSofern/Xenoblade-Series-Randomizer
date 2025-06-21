@@ -1,6 +1,7 @@
 import json, random
-from Enhancements import *
-import Options, scripts.PopupDescriptions
+from XC2.XC2_Scripts.Enhancements import *
+from XC2.XC2_Scripts import Options 
+import scripts.PopupDescriptions
 
 
 Nope = [MaxAffinityHeal,ReduceDamageFromNearbyEnemies, DamageUpOnEnemyKill] # Retry these used on armu enemy with dupe
@@ -8,8 +9,8 @@ ValidSkills = []
 
 def EnemyEnhances():
     prevNames = []
-    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as EnArrangeFile:
-        with open("./XC2/_internal/JsonOutputs/common_ms/fld_enemyname.json", 'r+', encoding='utf-8') as NamesFile:      
+    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as EnArrangeFile:
+        with open("./XC2/JsonOutputs/common_ms/fld_enemyname.json", 'r+', encoding='utf-8') as NamesFile:      
             EnArr = json.load(EnArrangeFile)
             Names = json.load(NamesFile)
             spinbox  = Options.EnemyEnhancementsOption.GetSpinbox()
@@ -79,7 +80,7 @@ Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
 Regen = EnemyEnhancement("Regen", PermaRegen,[30,60,90,120], [0.02,0.03,0.04,0.05], revP1=True, isRounded=False)
 CloseArmor = EnemyEnhancement("Guardian", ReduceDamageFromNearbyEnemies, [30,50,70,90])
 Swarm = EnemyEnhancement("Swarming", PerAllyDamageUp, [20,40,60,80])
-Sealing = EnemyEnhancement("Sealing", ChainAttackSeal, [1,1,2,3], revP1=True)
+Sealing = EnemyEnhancement("Sealing", ChainAttackSeal, [2,2,3,4], revP1=True)
 
 #New testing
 TestSkills = [Regen]
@@ -146,7 +147,7 @@ def EnemyEnhancementDescriptions():
     myDesc.Text(f"Each enemy that dies increases this enemy's damage by {Enraged.Param1[0]}-{Enraged.Param1[3]}%")
 
     myDesc.Tag(Regen.name, padx=0)
-    myDesc.Text(f"Permanently regens {Regen.Param2[0]}-{Regen.Param2[3]}% of their max health every {Regen.Param1[0]//30}-{Regen.Param1[3]//30} seconds.")
+    myDesc.Text(f"Permanently regens {Regen.Param2[0]*100}-{Regen.Param2[3]*100}% of their max health every {Regen.Param1[0]//30}-{Regen.Param1[3]//30} seconds.")
 
     myDesc.Tag(CloseArmor.name, padx=0)
     myDesc.Text(f"Reduces damage by {CloseArmor.Param1[0]}-{CloseArmor.Param1[3]}% to all allies and user within 5 meters")
@@ -155,7 +156,7 @@ def EnemyEnhancementDescriptions():
     myDesc.Text(f"Each ally the enemy has increases their own damage by {Swarm.Param1[0]}-{Swarm.Param1[3]}%")
 
     myDesc.Tag(Sealing.name, padx=0)
-    myDesc.Text(f"Locks the first, second, or third block of the party gauge.")
+    myDesc.Text(f"Locks the first, second, and/or third block of the party gauge.")
 
     return myDesc
 

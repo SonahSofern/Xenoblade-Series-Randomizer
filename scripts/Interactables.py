@@ -2,6 +2,8 @@ from tkinter import ttk
 from tkinter import *
 from scripts import PopupDescriptions
 
+Game = "" # Used to tell what option goes to what games tab
+
 class Option():
     def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50,hasSpinBox = False, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False):
         # Objects
@@ -25,7 +27,7 @@ class Option():
         self.hasSpinBox = hasSpinBox
         self.subDefState = _defState
         self.prio = _prio
-        OptionList.append(self)
+        XenoOptionDict[Game].append(self)
         
         # Custom Spinboxes
         self.spinBoxMin = _spinMin
@@ -133,7 +135,7 @@ class Option():
         return self.checkBoxVal.get()
 
 class SubOption():
-    def __init__(self, _name, _parent:Option, _commands = [], _defState = True, _prio = 0, spinDefault = 1, spinMin = 0, spinMax = 100, spinWidth = 3, spinIncr = 1, hasSpinBox = False, spinPadX = 15, spinDesc = "", preRandoCommands:list = []):
+    def __init__(self, _name, _parent:Option, _commands = [], _defState = True, _prio = 0, spinDefault = 0, spinMin = 0, spinMax = 100, spinWidth = 3, spinIncr = 10, hasSpinBox = False, spinPadX = 15, spinDesc = "", preRandoCommands:list = []):
         self.name = _name
         self.checkBoxVal = BooleanVar
         self.checkBox:ttk.Checkbutton = None
@@ -159,11 +161,16 @@ class SubOption():
     
     def GetSpinbox(self):
         return self.spinBoxVal.get()
+
 rowIncrement = 0   
+XenoOptionDict = {
+    "XCDE": [],
+    "XC2": [],
+    "XC3": [],
+    "XCXDE": [],
+}
 
-OptionList:list[Option] = []
-
-def UpdateAllStates():
-    for opt in OptionList:
+def UpdateAllStates(Game):
+    for opt in XenoOptionDict[Game]:
         opt.StateUpdate()
 

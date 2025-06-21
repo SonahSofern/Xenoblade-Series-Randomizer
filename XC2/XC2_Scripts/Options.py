@@ -1,14 +1,11 @@
 from tkinter import ttk
 from scripts import JSONParser,Helper
-from IDs import *
+from XC2.XC2_Scripts.IDs import *
 from tkinter import *
-import _Accessories, _DriverArts, SkillTrees, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeStats
-import TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UMHuntMain, Cosmetics, AccessoryShops, CollectionPoints, PouchItemShops, TreasureChests, ButtonCombos, EnemyDrops, _EleCombo
-import _YellowSkills, _BladeSpecials, Scales, DLCFlagQOL, CharacterRandomization
-import TornaMain
-import ObjectNameCleanup
+from XC2.XC2_Scripts import _Accessories, _DriverArts, SkillTrees, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeStats,TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UMHuntMain, Cosmetics, AccessoryShops, CollectionPoints, PouchItemShops, TreasureChests, ButtonCombos, EnemyDrops, _EleCombo,_YellowSkills, _BladeSpecials, Scales, DLCFlagQOL, CharacterRandomization, TornaMain, ObjectNameCleanup
 from scripts.Interactables import Option, SubOption
-from scripts.XCRandomizer import isOneFile
+import scripts.Interactables
+scripts.Interactables.Game = "XC2"
 # Prio
 First = 0
 Last = 100
@@ -85,17 +82,17 @@ WeaponChipShopOption = Option("Weapon Chip Shops", Items, "Randomizes Weapon Chi
 # Drivers
 DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.DriversDescriptions())
 DriversOption_Nia = SubOption("Guarantee Early Nia", DriversOption, _defState = False)
-DriverArtsOption = Option("Driver Arts", Driver, "Randomizes effects of all driver arts", [lambda: (_DriverArts.DriverArtRandomizer(), _DriverArts.GenCustomArtDescriptions("./XC2/_internal/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/_internal/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], hasSpinBox = True,spinDefault=40, descData=lambda: _DriverArts.DriverArtDescription())
-DriverArtsOption_AutoAttacks = SubOption("Auto Attacks", DriverArtsOption, [], _defState = False)
-DriverArtsOption_SingleReaction = SubOption("Single Reaction", DriverArtsOption, [])
-DriverArtsOption_MultipleReactions = SubOption("Multiple Reactions", DriverArtsOption, [])
-DriverArtsOption_Debuffs = SubOption("Debuffs", DriverArtsOption, [])
-DriverArtsOption_Buffs = SubOption("Buffs", DriverArtsOption, [])
-DriverArtsOption_Enhancements = SubOption("Enhancements", DriverArtsOption, [])
-DriverArtsOption_Cooldown = SubOption("Cooldown", DriverArtsOption, [])
-DriverArtsOption_Damage = SubOption("Damage", DriverArtsOption, [])
-DriverArtsOption_AnimationSpeed = SubOption("Animation Speed", DriverArtsOption, [])
-DriverArtsOption_AOE= SubOption("AOE", DriverArtsOption, [])
+DriverArtsOption = Option("Driver Arts", Driver, "Randomizes effects of all driver arts", [lambda: (_DriverArts.DriverArtRandomizer(), _DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], hasSpinBox = True,spinDefault=40, descData=lambda: _DriverArts.DriverArtDescription())
+DriverArtsOption_AutoAttacks = SubOption("Auto Attacks", DriverArtsOption, [], _defState = False, hasSpinBox=True, spinDesc="% Randomized")
+DriverArtsOption_SingleReaction = SubOption("Single Reaction", DriverArtsOption, [], hasSpinBox=True, spinDesc="% Randomized")
+DriverArtsOption_MultipleReactions = SubOption("Multiple Reactions", DriverArtsOption, [], hasSpinBox=True, spinDesc="% Randomized")
+DriverArtsOption_Debuffs = SubOption("Debuffs", DriverArtsOption, [], hasSpinBox=True, spinDesc="% Randomized")
+DriverArtsOption_Buffs = SubOption("Buffs", DriverArtsOption, [], hasSpinBox=True, spinDesc="% Randomized")
+DriverArtsOption_Enhancements = SubOption("Enhancements", DriverArtsOption, [], hasSpinBox=True, spinDesc="% Randomized")
+DriverArtsOption_Cooldown = SubOption("Cooldown", DriverArtsOption, [], hasSpinBox=True, spinDesc="% Randomized")
+DriverArtsOption_Damage = SubOption("Damage", DriverArtsOption, [], hasSpinBox=True, spinDesc="% Randomized")
+DriverArtsOption_AnimationSpeed = SubOption("Animation Speed", DriverArtsOption, [], hasSpinBox=True, spinDesc="% Randomized")
+DriverArtsOption_AOE= SubOption("AOE", DriverArtsOption, [], hasSpinBox=True, spinDesc="% Randomized")
 DriverSkillTreesOption = Option("Driver Skill Trees", Driver, "Randomizes driver's skill trees", [lambda: SkillTrees.RandomizeSkillEnhancements()], descData=lambda: SkillTrees.Descriptions())
 DriverSkillTreesOption_NonstandardSkills = SubOption("Nonstandard Skills", DriverSkillTreesOption)
 DriverSkillTreesOption_EarlyArtsCancel = SubOption("Early Arts Cancel", DriverSkillTreesOption)
@@ -189,13 +186,14 @@ MutePopupsOption = Option("Mute Popups", QOL, "Stops blade skill and pouch item 
 MutePopupsOption_Landmarks = SubOption("Landmarks", MutePopupsOption, [lambda: (JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[85], ["sheet04"], [""]),JSONParser.ChangeJSONLine(["common/MNU_Layer_Dlc03.json"],[316], ["sheet04"], [""]))])
 EnhancementDisplayOption = Option("Enhancement Display", QOL, "Shows when enhancements activate in battle", [lambda: Enhancements.SearchAndSetDisplayIDs()])
 EasySkillTreesOption = Option("Easy Affinity Trees", QOL, "Makes trust the only condition for levelling up a blade's affinity tree", [lambda: SkillTrees.BladeSkillTreeShortening()])
-FasterDriverSkillTrees = Option("Fast Driver Skill Trees", QOL, "Decreases SP required for each node", [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./XC2/_internal/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], [f'row[key] // {FasterDriverSkillTrees.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, _spinIncr = 1,  _spinDesc = "x Faster")
-FasterLevelsOption = Option("Faster Levels", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2,_spinIncr = 1, _spinDesc = "x Faster")
+FasterDriverSkillTrees = Option("Fast Driver Skill Trees", QOL, "Decreases SP required for each node", [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["./XC2/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./XC2/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./XC2/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], [f'row[key] // {FasterDriverSkillTrees.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, _spinIncr = 1,  _spinDesc = "x Faster")
+FasterLevelsOption = Option("Faster Levels", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["./XC2/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2,_spinIncr = 1, _spinDesc = "x Faster")
 ShortcutsOption = Option("Shortcuts", QOL, "Various speedups for the main story quests")
 ShortcutsOption_Tutorials = SubOption("Tutorials Skip", ShortcutsOption, [lambda: TutorialShortening.ShortenedTutorial()])
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
-StartwithIncreasedMovespeedOption = Option("Increased Movespeed", QOL, "Adds a shop deed to the DLC items to increase your movement speed. (Torna has first enemy drop deed instead).", [lambda: DLCFlagQOL.AddMovespeedDeed()], hasSpinBox = True, _spinMin = 0, _spinMax = 50, _spinIncr = 5, _spinDesc = "% Increase (x10)", _spinWidth = 2, spinDefault = 50)
+ShortcutsOption_IndolQuiz = SubOption("Indol Quiz Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[43], ["ConditionID"], 1)])
+StartwithIncreasedMovespeedOption = Option("Increased Movespeed", QOL, "Adds a shop deed to the DLC items to increase your movement speed", [lambda: DLCFlagQOL.AddMovespeedDeed()], hasSpinBox = True, _spinMin = 0, _spinMax = 50, _spinIncr = 5, _spinDesc = "% Increase (x10)", _spinWidth = 5, spinDefault = 50)
 NewGamePlusFlagsOptions = Option("NG+ Flags", QOL, "Enables many NG+ behaviours like unlocked hidden driver skill trees, unlocked chain attacks from the start, unlocked blade slots etc. These must be accepted from the DLC Menu to work.", [lambda: DLCFlagQOL.CreateDLCtoSetFlag(["2nd Blade Equip Slot", "3rd Blade Equip Slot"], [35327, 35328], [2,2], [0,0], [1,1], [1,1])])
 NewGamePlusFlagsOptions_Blades = SubOption("NG+ Blades", NewGamePlusFlagsOptions, [lambda: GachaModifications.UnlockNGPlusBlades()])
 NewGamePlusFlagsOptionsHiddenDriverSkillTree = SubOption("Hidden Skill Tree Unlocked", NewGamePlusFlagsOptions, [lambda: DLCFlagQOL.FixIssuesCausedByNGPlusFlag()])

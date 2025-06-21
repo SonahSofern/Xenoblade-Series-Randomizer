@@ -1,14 +1,8 @@
 from scripts import Helper, JSONParser, PopupDescriptions
-import json
-import random
-from IDs import *
-import time
-import TornaRecipes, TornaQuests, TornaEnemies, TornaAreas, TornaShops, TornaRedBagItems, TornaMiscItems, TornaChests, TornaCollectionPoints, Options
-import copy
-import os
-import math
-from scripts.Interactables import OptionList
-import _WeaponChips
+from XC2.XC2_Scripts.IDs import *
+import time, copy, os, math, random, json
+from XC2.XC2_Scripts import TornaRecipes,_WeaponChips, TornaQuests, TornaEnemies, TornaAreas, TornaShops, TornaRedBagItems, TornaMiscItems, TornaChests, TornaCollectionPoints, Options
+from scripts.Interactables import XenoOptionDict
 
 # TO DO
 # look into options for pre-completed quests or EZ-complete quests?
@@ -148,11 +142,11 @@ def CheckforIncompatibleSettings():
     ConflictingOptionNames = []
     ConflictingSubOptions = []
     exceptionmsg = ""
-    for opt in OptionList:
+    for opt in XenoOptionDict["XC2"]:
         if opt.GetState() and opt.name not in AllowableOptions:
             ConflictingOptions.append(opt)
             ConflictingOptionNames.append(opt.name)
-    for opt in OptionList:
+    for opt in XenoOptionDict["XC2"]:
         if opt.name == 'Shortcuts':
             if opt.GetState():
                 for sub in opt.subOptions:
@@ -525,7 +519,7 @@ def UpdateAllItemReqs(CurrentStepReqs, Locations, ChosenLocation, ChosenItem, Al
                             raise Exception(f"Generation failed to update item requirements: Invalid item placed at {subloc}!")
 
 def AdjustLevelUpReqs(MinLogicalLevel):
-    with open("./XC2/_internal/JsonOutputs/common/BTL_Grow.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/BTL_Grow.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in [2,3]:
@@ -544,7 +538,7 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
     # Locs = ConsolidateLevelUpTokens(Locs2) no longer need to consolidate levelup tokens, since we use level cap now
     Locs = Locs2
     # sidequests
-    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] not in Helper.InclRange(1088, 1202):
@@ -552,7 +546,7 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for sidequest in Locs[0]:
             for rewardid in sidequest.rewardids: # currently only one quest has multiple reward ids, but they all need to have the same ending rewards.
@@ -570,15 +564,15 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         json.dump(data, file, indent=2, ensure_ascii=False)
 
     # enemy drops
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", Helper.ExtendListtoLength(["ItemID1", "DropProb1", "NoGetByEnh1", "FirstNamed1"], 32, "inputlist[i-4][:-1] +  str(int(inputlist[i-4][-1:])+1)"), 0)
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", ["DropProb1", "DropProb2", "DropProb3", "DropProb4", "DropProb5", "DropProb6", "DropProb7", "DropProb8"], 1000) # the first loot item in each row has a 100% chance to drop every time.
-    MaxEnemyLootID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", "$id")
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/BTL_EnDropItem.json", Helper.ExtendListtoLength(["ItemID1", "DropProb1", "NoGetByEnh1", "FirstNamed1"], 32, "inputlist[i-4][:-1] +  str(int(inputlist[i-4][-1:])+1)"), 0)
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/BTL_EnDropItem.json", ["DropProb1", "DropProb2", "DropProb3", "DropProb4", "DropProb5", "DropProb6", "DropProb7", "DropProb8"], 1000) # the first loot item in each row has a 100% chance to drop every time.
+    MaxEnemyLootID = Helper.GetMaxValue("./XC2/JsonOutputs/common/BTL_EnDropItem.json", "$id")
     if MaxDropTableID > MaxEnemyLootID: # need to add a row to BTL_EnDropItem for each enemy past the max # of rows 
         NewLootIDRows = []
         for tableid in range(MaxEnemyLootID + 1, MaxDropTableID + 1):
             NewLootIDRows.append([{"$id": tableid, "LimitNum": 0, "SelectType": 0, "ItemID1": 0, "DropProb1": 0, "NoGetByEnh1": 0, "FirstNamed1": 0, "ItemID2": 0, "DropProb2": 0, "NoGetByEnh2": 0, "FirstNamed2": 0, "ItemID3": 0, "DropProb3": 0, "NoGetByEnh3": 0, "FirstNamed3": 0, "ItemID4": 0, "DropProb4": 0, "NoGetByEnh4": 0, "FirstNamed4": 0, "ItemID5": 0, "DropProb5": 0, "NoGetByEnh5": 0, "FirstNamed5": 0, "ItemID6": 0, "DropProb6": 0, "NoGetByEnh6": 0, "FirstNamed6": 0, "ItemID7": 0, "DropProb7": 0, "NoGetByEnh7": 0, "FirstNamed7": 0, "ItemID8": 0, "DropProb8": 0, "NoGetByEnh8": 0, "FirstNamed8": 0}])
         JSONParser.ExtendJSONFile("common/BTL_EnDropItem.json", NewLootIDRows)
-    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for enemytype in range(1, 5):
             for enemy in Locs[enemytype]:
@@ -590,7 +584,7 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False) 
-    with open("./XC2/_internal/JsonOutputs/common/BTL_EnDropItem.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/BTL_EnDropItem.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for enemytype in range(1, 5):
             for enemy in Locs[enemytype]:
@@ -610,7 +604,7 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         Helper.ColumnAdjust(file, "popWeather", 255)
 
     # shops
-    with open("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # alters the NpcPop file to make the bards call different Event IDs and different Shop IDs
+    with open("./XC2/JsonOutputs/common_gmk/ma40a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # alters the NpcPop file to make the bards call different Event IDs and different Shop IDs
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 40660:
@@ -624,7 +618,7 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopList.json", 'r+', encoding='utf-8') as file: # Changing ShopList
+    with open("./XC2/JsonOutputs/common/MNU_ShopList.json", 'r+', encoding='utf-8') as file: # Changing ShopList
         data = json.load(file)
         for shop in Locs[5]:
             for row in data["rows"]:
@@ -637,7 +631,7 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as file: # Adding items to ShopNormal
+    with open("./XC2/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as file: # Adding items to ShopNormal
         data = json.load(file)
         for shop in Locs[5]:
             for row in data["rows"]:
@@ -655,7 +649,7 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         json.dump(data, file, indent=2, ensure_ascii=False)
     
     # redbags
-    with open("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_PreciousPopList.json", 'r+', encoding='utf-8') as file: # adding the redbag items
+    with open("./XC2/JsonOutputs/common_gmk/ma40a_FLD_PreciousPopList.json", 'r+', encoding='utf-8') as file: # adding the redbag items
         data = json.load(file)
         for redbag in Locs[6]:
             for row in data["rows"]:
@@ -670,7 +664,7 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         json.dump(data, file, indent=2, ensure_ascii=False)
     
     # misc
-    with open("./XC2/_internal/JsonOutputs/common/FLD_AddItem.json", 'r+', encoding='utf-8') as file: # adding the misc items
+    with open("./XC2/JsonOutputs/common/FLD_AddItem.json", 'r+', encoding='utf-8') as file: # adding the misc items
         data = json.load(file)
         for miscitem in Locs[7]:
             for row in data["rows"]:
@@ -682,9 +676,9 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         json.dump(data, file, indent=2, ensure_ascii=False)
 
     # chests
-    with open("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", 'r+', encoding='utf-8') as fileT: # Torna chests
+    with open("./XC2/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", 'r+', encoding='utf-8') as fileT: # Torna chests
         dataT = json.load(fileT)
-        with open("./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_TboxPop.json", 'r+', encoding='utf-8') as fileG: # Gormott chests
+        with open("./XC2/JsonOutputs/common_gmk/ma41a_FLD_TboxPop.json", 'r+', encoding='utf-8') as fileG: # Gormott chests
             dataG = json.load(fileG)
             for chest in Locs[8]:
                 if chest.continent == "Torna":
@@ -719,7 +713,7 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         json.dump(dataT, fileT, indent=2, ensure_ascii=False)
     
     # collectionpoints
-    with open("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as file: # Torna collection points
+    with open("./XC2/JsonOutputs/common_gmk/ma40a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as file: # Torna collection points
         data = json.load(file)
         for collectionpoint in Locs[9]:
             for row in data["rows"]:
@@ -734,7 +728,7 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
        
-    with open("./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as file: # Gormott collection points
+    with open("./XC2/JsonOutputs/common_gmk/ma41a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as file: # Gormott collection points
         data = json.load(file)
         for collectionpoint in Locs[10]:
             for row in data["rows"]:
@@ -750,13 +744,13 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         json.dump(data, file, indent=2, ensure_ascii=False)
     
     DesiredMaxCollectionTableID = 501 # known, will always be the case, 1 collection point -> 1 collection table
-    CurMaxCollectionTableID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_CollectionTable.json", "$id")
+    CurMaxCollectionTableID = Helper.GetMaxValue("./XC2/JsonOutputs/common/FLD_CollectionTable.json", "$id")
     NewCollectionTableRows = []
     for i in range(CurMaxCollectionTableID + 1, DesiredMaxCollectionTableID + 1):
         NewCollectionTableRows.append([{"$id": i, "FSID": 0, "randitmPopMin": 0, "randitmPopMax": 0, "itm1ID": 0, "itm1Per": 0, "itm2ID": 0, "itm2Per": 0, "itm3ID": 0, "itm3Per": 0, "itm4ID": 0, "itm4Per": 0, "goldMin": 0, "goldMax": 0, "goldPopMin": 0, "goldPopMax": 0, "rsc_paramID": 0, "categoryName": 0, "ZoneID": 0}])
     JSONParser.ExtendJSONFile("common/FLD_CollectionTable.json", NewCollectionTableRows)
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_CollectionTable.json", ["itm1Per", "itm2Per", "itm3Per", "itm4Per"], 100)
-    with open("./XC2/_internal/JsonOutputs/common/FLD_CollectionTable.json", 'r+', encoding='utf-8') as file: # collection table file
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/FLD_CollectionTable.json", ["itm1Per", "itm2Per", "itm3Per", "itm4Per"], 100)
+    with open("./XC2/JsonOutputs/common/FLD_CollectionTable.json", 'r+', encoding='utf-8') as file: # collection table file
         data = json.load(file)
         for i in range(9, 11):
             for collectionpoint in Locs[i]:
@@ -786,7 +780,7 @@ def ConsolidateLevelUpTokens(Locs): # need to now remove all level up tokens and
     return Locs
 
 def AddMissingKeyItems():
-    NewDescID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
+    NewDescID = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
     KeyItemNames = ["Mineralogy Lv. 1", "Mineralogy Lv. 2", "Mineralogy Lv. 3", "Swordplay Lv. 1", "Swordplay Lv. 2", "Swordplay Lv. 3", "Fortitude Lv. 1", "Fortitude Lv. 2", "Fortitude Lv. 3", "Forestry Lv. 1", "Forestry Lv. 2", "Forestry Lv. 3", "Manipulate Ether Lv. 1", "Manipulate Ether Lv. 2", "Manipulate Ether Lv. 3", "Keen Eye Lv. 1", "Keen Eye Lv. 2", "Keen Eye Lv. 3", "Focus Lv. 1", "Focus Lv. 2", "Focus Lv. 3", "Power of Light Lv. 1", "Power of Light Lv. 2", "Power of Light Lv. 3", "Girls' Talk", "Entomology Lv. 1", "Entomology Lv. 2", "Entomology Lv. 3", "Mining Lv. 1", "Mining Lv. 2", "Mining Lv. 3", "Botany Lv. 1", "Botany Lv. 2", "Botany Lv. 3", "Lockpicking Lv. 1", "Lockpicking Lv. 2", "Lockpicking Lv. 3", "Icthyology Lv. 1", "Icthyology Lv. 2", "Icthyology Lv. 3", "Command Water Lv. 1", "Command Water Lv. 2", "Command Water Lv. 3", "Superstrength Lv. 1", "Superstrength Lv. 2", "Superstrength Lv. 3", "Hidden Hunting Camp","Lakeshore Campsite","Coolley Lake Camp","Hoary Weald Camp","Porton Village Camp","Feltley Village Camp","Aletta Garrison Camp","Olnard's Trail Campsite","Dannagh Desert Camp","Holy Gate Camp","Jin Affinity Lv. 2", "Jin Affinity Lv. 3", "Jin Affinity Lv. 4", "Jin Affinity Lv. 5", "Haze Affinity Lv. 2", "Haze Affinity Lv. 3", "Haze Affinity Lv. 4", "Haze Affinity Lv. 5", "Mythra Affinity Lv. 2", "Mythra Affinity Lv. 3", "Mythra Affinity Lv. 4", "Mythra Affinity Lv. 5", "Minoth Affinity Lv. 2", "Minoth Affinity Lv. 3", "Minoth Affinity Lv. 4", "Minoth Affinity Lv. 5", "Brighid Affinity Lv. 2", "Brighid Affinity Lv. 3", "Brighid Affinity Lv. 4", "Brighid Affinity Lv. 5", "Aegaeon Affinity Lv. 2", "Aegaeon Affinity Lv. 3", "Aegaeon Affinity Lv. 4", "Aegaeon Affinity Lv. 5", "Haze Key", "Addam Key", "Mythra Key", "Minoth Key", "Hugo Key", "Brighid Key", "Aegaeon Key", "Level Up Token"]
     KeyItemDescriptions = ["Unlocks the Mineralogy\nLv. 1 Field Skill.", "Unlocks the Mineralogy\nLv. 2 Field Skill.", "Unlocks the Mineralogy\nLv. 3 Field Skill.", "Unlocks the Swordplay\nLv. 1 Field Skill.", "Unlocks the Swordplay\nLv. 2 Field Skill.", "Unlocks the Swordplay\nLv. 3 Field Skill.", "Unlocks the Fortitude\nLv. 1 Field Skill.", "Unlocks the Fortitude\nLv. 2 Field Skill.", "Unlocks the Fortitude\nLv. 3 Field Skill.", "Unlocks the Forestry\nLv. 1 Field Skill.", "Unlocks the Forestry\nLv. 2 Field Skill.", "Unlocks the Forestry\nLv. 3 Field Skill.", "Unlocks the Manipulate Ether\nLv. 1 Field Skill.", "Unlocks the Manipulate Ether\nLv. 2 Field Skill.", "Unlocks the Manipulate Ether\nLv. 3 Field Skill.", "Unlocks the Keen Eye\nLv. 1 Field Skill.", "Unlocks the Keen Eye\nLv. 2 Field Skill.", "Unlocks the Keen Eye\nLv. 3 Field Skill.", "Unlocks the Focus\nLv. 1 Field Skill.", "Unlocks the Focus\nLv. 2 Field Skill.", "Unlocks the Focus\nLv. 3 Field Skill.", "Unlocks the Power of Light\nLv. 1 Field Skill.", "Unlocks the Power of Light\nLv. 2 Field Skill.", "Unlocks the Power of Light\nLv. 3 Field Skill.", "Unlocks the Girls' Talk Field Skill.", "Unlocks the Entomology\nLv. 1 Field Skill.", "Unlocks the Entomology\nLv. 2 Field Skill.", "Unlocks the Entomology\nLv. 3 Field Skill.", "Unlocks the Mining\nLv. 1 Field Skill.", "Unlocks the Mining\nLv. 2 Field Skill.", "Unlocks the Mining\nLv. 3 Field Skill.", "Unlocks the Botany\nLv. 1 Field Skill.", "Unlocks the Botany\nLv. 2 Field Skill.", "Unlocks the Botany\nLv. 3 Field Skill.", "Unlocks the Lockpicking\nLv. 1 Field Skill.", "Unlocks the Lockpicking\nLv. 2 Field Skill.", "Unlocks the Lockpicking\nLv. 3 Field Skill.", "Unlocks the Icthyology\nLv. 1 Field Skill.", "Unlocks the Icthyology\nLv. 2 Field Skill.", "Unlocks the Icthyology\nLv. 3 Field Skill.", "Unlocks the Command Water\nLv. 1 Field Skill.", "Unlocks the Command Water\nLv. 2 Field Skill.", "Unlocks the Command Water\nLv. 3 Field Skill.", "Unlocks the Superstrength\nLv. 1 Field Skill.", "Unlocks the Superstrength\nLv. 2 Field Skill.", "Unlocks the Superstrength\nLv. 3 Field Skill.", "Unlocks the ability to rest at\nthe Hidden Hunting Campsite.", "Unlocks the ability to rest at\nthe Lakeshore Campsite.", "Unlocks the ability to rest at\nthe Coolley Lake Campsite.", "Unlocks the ability to rest at\nthe Hoary Weald Campsite.", "Unlocks the ability to rest at\nthe Porton Village Campsite.", "Unlocks the ability to rest at\nthe Feltley Village Campsite.", "Unlocks the ability to rest at\nthe Aletta Garrison Campsite.", "Unlocks the ability to rest at\nthe Olnard's Trail Campsite.", "Unlocks the ability to rest at\nthe Dannagh Desert Campsite.", "Unlocks the ability to rest at\nthe Holy Gate Campsite.","Unlocks Level 2 of \nJin's Affinity Chart.", "Unlocks Level 3 of \nJin's Affinity Chart.", "Unlocks Level 4 of \nJin's Affinity Chart.", "Unlocks Level 5 of \nJin's Affinity Chart.", "Unlocks Level 2 of \nHaze's Affinity Chart.", "Unlocks Level 3 of \nHaze's Affinity Chart.", "Unlocks Level 4 of \nHaze's Affinity Chart.", "Unlocks Level 5 of \nHaze's Affinity Chart.", "Unlocks Level 2 of\nMythra's Affinity Chart.", "Unlocks Level 3 of\nMythra's Affinity Chart.", "Unlocks Level 4 of\nMythra's Affinity Chart.", "Unlocks Level 5 of\nMythra's Affinity Chart.", "Unlocks Level 2 of\nMinoth's Affinity Chart.", "Unlocks Level 3 of\nMinoth's Affinity Chart.", "Unlocks Level 4 of\nMinoth's Affinity Chart.", "Unlocks Level 5 of\nMinoth's Affinity Chart.", "Unlocks Level 2 of \nBrighid's Affinity Chart.", "Unlocks Level 3 of \nBrighid's Affinity Chart.", "Unlocks Level 4 of \nBrighid's Affinity Chart.", "Unlocks Level 5 of \nBrighid's Affinity Chart.", "Unlocks Level 2 of \nAegaeon's Affinity Chart.", "Unlocks Level 3 of \nAegaeon's Affinity Chart.", "Unlocks Level 4 of \nAegaeon's Affinity Chart.", "Unlocks Level 5 of \nAegaeon's Affinity Chart.", 'Unlocks the ability to add\nHaze to your party.', 'Unlocks the ability to add\nAddam to your party.', 'Unlocks the ability to add\nMythra to your party.', 'Unlocks the ability to add\nMinoth to your party.', 'Unlocks the ability to add\nHugo to your party.', 'Unlocks the ability to add\nBrighid to your party.', 'Unlocks the ability to add\nAegaeon to your party.', "Can be exchanged for 1 level's worth of EXP at the Token Exchange."]
     KeyItemPreciousIDs = [25544, 25545, 25546, 25547, 25548, 25549, 25550, 25551, 25552, 25553, 25554, 25555, 25556, 25557, 25558, 25559, 25560, 25561, 25562, 25563, 25564, 25565, 25566, 25567, 25568, 25569, 25570, 25571, 25572, 25573, 25574, 25575, 25576, 25577, 25578, 25579, 25580, 25581, 25582, 25583, 25584, 25585, 25586, 25587, 25588, 25589, 25590, 25591, 25592, 25593, 25594, 25595, 25596, 25597, 25598, 25599, 25600, 25601, 25602, 25603, 25604, 25605, 25606, 25607, 25608, 25609, 25610, 25611, 25612, 25613, 25614, 25615, 25616, 25617, 25618, 25619, 25620, 25621, 25622, 25623, 25624, 25625, 25626, 25627, 25628, 25629, 25630, 25631]
@@ -807,7 +801,7 @@ def CreateLevelCaps():
     # it takes max xp to level up past a level cap, and 1 xp otherwise.
     # technically this is cheeseable with fights where there are multiple enemies, if you defeat the one that lets you pass the level cap, then die to another, you can get that same xp again, I believe.
     # unless you do ExpRevLow, set that to 0 when you're over .
-    with open("./XC2/_internal/JsonOutputs/common/BTL_Grow.json", 'r+', encoding='utf-8') as file: # xp requirements file
+    with open("./XC2/JsonOutputs/common/BTL_Grow.json", 'r+', encoding='utf-8') as file: # xp requirements file
         data = json.load(file)
         for row in data["rows"]:
             match row["$id"]:
@@ -828,8 +822,8 @@ def CreateLevelCaps():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/BTL_Lv_Rev.json", ["ExpRevHigh", "ExpRevLow", "ExpRevLow2"], 100) # make it so you always get 100% of the exp you earn, regardless of level difference.
-    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: # enemy file
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/BTL_Lv_Rev.json", ["ExpRevHigh", "ExpRevLow", "ExpRevLow2"], 100) # make it so you always get 100% of the exp you earn, regardless of level difference.
+    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: # enemy file
         data = json.load(file)
         for row in data["rows"]:
             match row["$id"]:
@@ -844,7 +838,7 @@ def CreateLevelCaps():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    LandmarkFiles = ["./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_LandmarkPop.json", "./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_LandmarkPop.json"]
+    LandmarkFiles = ["./XC2/JsonOutputs/common_gmk/ma40a_FLD_LandmarkPop.json", "./XC2/JsonOutputs/common_gmk/ma41a_FLD_LandmarkPop.json"]
     for map in LandmarkFiles:
         with open(map, 'r+', encoding='utf-8') as file:
                 data = json.load(file)
@@ -855,10 +849,10 @@ def CreateLevelCaps():
                 file.seek(0)
                 file.truncate()
                 json.dump(data, file, indent=2, ensure_ascii=False)
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json", ["EXP"], 0) # doing quests doesn't reward any xp
-    Helper.MathmaticalColumnAdjust(["./XC2/_internal/JsonOutputs/common/FLD_QuestReward.json"], ["Gold", "SP"], ['row[key] * 10']) # quests reward 10x gold and sp
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/FLD_QuestReward.json", ["EXP"], 0) # doing quests doesn't reward any xp
+    Helper.MathmaticalColumnAdjust(["./XC2/JsonOutputs/common/FLD_QuestReward.json"], ["Gold", "SP"], ['row[key] * 10']) # quests reward 10x gold and sp
     
-    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: # needed to make enemies over level 55 not impossible to kill while still being logically available. Setting the level cap to 100 makes the final boss a joke when you insta level up to that.
+    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: # needed to make enemies over level 55 not impossible to kill while still being logically available. Setting the level cap to 100 makes the final boss a joke when you insta level up to that.
         data = json.load(file)
         for row in data["rows"]:
             if row["Lv"] > 55:
@@ -867,7 +861,7 @@ def CreateLevelCaps():
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-    with open("./XC2/_internal/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: # needed to make enemies over level 55 not impossible to kill while still being logically available. Setting the level cap to 100 makes the final boss a joke when you insta level up to that.
+    with open("./XC2/JsonOutputs/common/BTL_Lv_Rev.json", 'r+', encoding='utf-8') as file: # needed to make enemies over level 55 not impossible to kill while still being logically available. Setting the level cap to 100 makes the final boss a joke when you insta level up to that.
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] >= 6:
@@ -879,7 +873,7 @@ def CreateLevelCaps():
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def HugoComeBack(): # Hugo is scripted to leave the party with Aegaeon whenever you receive the quest "Feeding an Army". We don't want this, it messes with logic (at least right now).
-    with open("./XC2/_internal/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in [30185, 30187]:
@@ -892,7 +886,7 @@ def HugoComeBack(): # Hugo is scripted to leave the party with Aegaeon whenever 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def AdjustSlateValue(): # changes the slate pieces to be worth 1 point apiece, and make the requirements for the different sections 5, 10, and 16 points.
-    with open("./XC2/_internal/JsonOutputs/common/FLD_ConditionFlag.json", 'r+', encoding='utf-8') as file: # various conditions related to how many pieces you've inserted
+    with open("./XC2/JsonOutputs/common/FLD_ConditionFlag.json", 'r+', encoding='utf-8') as file: # various conditions related to how many pieces you've inserted
         data = json.load(file)
         for row in data["rows"]:
             match row["$id"]:
@@ -914,7 +908,7 @@ def AdjustSlateValue(): # changes the slate pieces to be worth 1 point apiece, a
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     SlateRows = Helper.InclRange(723, 738)
-    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file: 
+    with open("./XC2/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             match row["$id"]:
@@ -927,7 +921,7 @@ def AdjustSlateValue(): # changes the slate pieces to be worth 1 point apiece, a
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def EternityLoamChange(): # need to make eternity loam only require 1 of for the quest "Unforgotten Promise".
-    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestCollect.json", 'r+', encoding='utf-8') as file: # not sure which row is actually used by the quest, but both 274 and 316 have the same item id, so do it to both
+    with open("./XC2/JsonOutputs/common/FLD_QuestCollect.json", 'r+', encoding='utf-8') as file: # not sure which row is actually used by the quest, but both 274 and 316 have the same item id, so do it to both
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in [274, 316]:
@@ -956,13 +950,13 @@ def SkillTreeSetup(): # sets up the blade skill tree nodes for each blade.
     for skillid in range(len(AllBladeIDs)):
         BladeInfoList.append(BladeInfo(AllNameValues[skillid], AllBladeIDs[skillid], AllUnlockKeyIDs[skillid]))
     # PurposeIDs will get spat out in the following order: [AffinityRank1, FieldSkill1Rank1, FieldSkill2Rank1, FieldSkill3Rank1, AffinityRank2, ...]
-    CurMaxPurposeID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_QuestTaskAchievement.json", "$id") + 1
-    CurMaxQuestListAchievementID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_QuestListAchievement.json", "$id") + 1
-    CurMaxQuestCollectID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_QuestCollect.json", "$id") + 1
-    CurMaxTaskLogID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/fld_quest_achievement.json", "$id") + 1
-    CurMaxFLDAchievementListID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_AchievementList.json", "$id") + 1
+    CurMaxPurposeID = Helper.GetMaxValue("./XC2/JsonOutputs/common/FLD_QuestTaskAchievement.json", "$id") + 1
+    CurMaxQuestListAchievementID = Helper.GetMaxValue("./XC2/JsonOutputs/common/FLD_QuestListAchievement.json", "$id") + 1
+    CurMaxQuestCollectID = Helper.GetMaxValue("./XC2/JsonOutputs/common/FLD_QuestCollect.json", "$id") + 1
+    CurMaxTaskLogID = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/fld_quest_achievement.json", "$id") + 1
+    CurMaxFLDAchievementListID = Helper.GetMaxValue("./XC2/JsonOutputs/common/FLD_AchievementList.json", "$id") + 1
     FLDAchievementListNewRows, FLDQuestListAchievementNewRows, FLDQuestTaskAchievementNewRows, FLDQuestCollectNewRows, fldquestachievementtextfilenewrows = [], [], [], [], []
-    with open("./XC2/_internal/JsonOutputs/common/FLD_AchievementSet.json", 'r+', encoding='utf-8') as file: # hook up the new questlistachievementid to the "Task" column
+    with open("./XC2/JsonOutputs/common/FLD_AchievementSet.json", 'r+', encoding='utf-8') as file: # hook up the new questlistachievementid to the "Task" column
         data = json.load(file)
         for blade in BladeInfoList:
             for row in data["rows"]:
@@ -999,7 +993,7 @@ def SkillTreeSetup(): # sets up the blade skill tree nodes for each blade.
 
 def RegularNodeSetup(): # split for readability, this basically makes all non-field skill and non-affinity rank blade tree unlocks get unlocked when the corresponding blade affinity rank is unlocked.
     RegularNodeIDs = [1680, 1681, 1682, 1683, 1684, 1685, 1690, 1691, 1692, 1693, 1694, 1695, 1700, 1701, 1702, 1703, 1704, 1705, 1710, 1711, 1712, 1713, 1714, 1715, 1720, 1721, 1722, 1723, 1724, 1725, 1730, 1731, 1732, 1733, 1734, 1735]
-    with open("./XC2/_internal/JsonOutputs/common/FLD_AchievementSet.json", 'r+', encoding='utf-8') as file: # now we need to modify corresponding set ids
+    with open("./XC2/JsonOutputs/common/FLD_AchievementSet.json", 'r+', encoding='utf-8') as file: # now we need to modify corresponding set ids
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in RegularNodeIDs:
@@ -1010,7 +1004,7 @@ def RegularNodeSetup(): # split for readability, this basically makes all non-fi
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-    with open("./XC2/_internal/JsonOutputs/common/FLD_Achievement.json", 'r+', encoding='utf-8') as file: #we need to change FLD_Achievement ID 1 to walk 1 step total
+    with open("./XC2/JsonOutputs/common/FLD_Achievement.json", 'r+', encoding='utf-8') as file: #we need to change FLD_Achievement ID 1 to walk 1 step total
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 1:
@@ -1022,7 +1016,7 @@ def RegularNodeSetup(): # split for readability, this basically makes all non-fi
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestTaskAchievement.json", 'r+', encoding='utf-8') as file: #now we need to modify the FLD_QuestTaskAchievement
+    with open("./XC2/JsonOutputs/common/FLD_QuestTaskAchievement.json", 'r+', encoding='utf-8') as file: #now we need to modify the FLD_QuestTaskAchievement
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 7005:
@@ -1034,7 +1028,7 @@ def RegularNodeSetup(): # split for readability, this basically makes all non-fi
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-    with open("./XC2/_internal/JsonOutputs/common_ms/fld_quest_achievement.json", 'r+', encoding='utf-8') as file: #modifying the text files that describe what you need to do to unlock the node
+    with open("./XC2/JsonOutputs/common_ms/fld_quest_achievement.json", 'r+', encoding='utf-8') as file: #modifying the text files that describe what you need to do to unlock the node
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 663:
@@ -1045,10 +1039,10 @@ def RegularNodeSetup(): # split for readability, this basically makes all non-fi
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def CampfireUnlocks(): # adds conditions to the campfire unlocks
-    CurMaxFLDConditionListID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
-    CurMaxFLDConditionItemID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionItem.json", "$id") + 1
+    CurMaxFLDConditionListID = Helper.GetMaxValue("./XC2/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
+    CurMaxFLDConditionItemID = Helper.GetMaxValue("./XC2/JsonOutputs/common/FLD_ConditionItem.json", "$id") + 1
     StartingFLDConditionListID = CurMaxFLDConditionListID
-    #Helper.MathmaticalColumnAdjust("./XC2/_internal/JsonOutputs/common_gmk/FLD_CampPop.json", ["ConditionID"], ['row["$id"] + 25589'])
+    #Helper.MathmaticalColumnAdjust("./XC2/JsonOutputs/common_gmk/FLD_CampPop.json", ["ConditionID"], ['row["$id"] + 25589'])
     AllCampsiteKeys = Helper.MultiLevelListToSingleLevelList([HHC_Key, LC_Key, CLC_Key, HWC_Key, PVC_Key, FVC_Key, AGC_Key, OTC_Key, DDC_Key, HGC_Key])
     NewFLDConditionListRows, NewFLDConditionItemRows = [], []
     for key in AllCampsiteKeys:
@@ -1061,7 +1055,7 @@ def CampfireUnlocks(): # adds conditions to the campfire unlocks
         CurMaxFLDConditionItemID += 1
     JSONParser.ExtendJSONFile("common/FLD_ConditionList.json", [NewFLDConditionListRows])
     JSONParser.ExtendJSONFile("common/FLD_ConditionItem.json", [NewFLDConditionItemRows])
-    with open("./XC2/_internal/JsonOutputs/common_gmk/FLD_CampPop.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common_gmk/FLD_CampPop.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             row["ConditionID"] = StartingFLDConditionListID + row["$id"] - 1
@@ -1076,10 +1070,10 @@ def CharacterUnlocks(): # sets up the character unlock keys
     AllCharUnlockKeys = Helper.MultiLevelListToSingleLevelList([AddamKey, MythraKey, HazeKey, HugoKey, BrighidKey, AegaeonKey, MinothKey])
     KeyNames = ["Addam", "Mythra", "Haze", "Hugo", "Brighid", "Aegaeon", "Minoth"]
     FLDQuestCollectNewRows, fldquestnewrows = [], []
-    CurMaxFLDQuestCollectID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_QuestCollect.json", "$id") + 1
-    CurMaxfldquestid = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/fld_quest.json", "$id") + 1
+    CurMaxFLDQuestCollectID = Helper.GetMaxValue("./XC2/JsonOutputs/common/FLD_QuestCollect.json", "$id") + 1
+    CurMaxfldquestid = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/fld_quest.json", "$id") + 1
     CurKeyCount = 0
-    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestTaskIra.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/FLD_QuestTaskIra.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             match row["$id"]:
@@ -1103,7 +1097,7 @@ def CharacterUnlocks(): # sets up the character unlock keys
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/CHR_Dr.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/CHR_Dr.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] > 17:
@@ -1134,16 +1128,16 @@ def DisableUnrequiredQuests(): # we want the npcs for non-required quests to not
 
 def ChangeReqItemRarities(): # we want the useful items that get dropped from chests and enemies to have a golden glow, so that people know to pick them up.
     RequiredItems = KeyItemtoLocDict.keys()
-    MinWeaponChipID = Helper.GetMinValue("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", "$id") # should be 10001, but just in case
-    MaxWeaponChipID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", "$id")
-    MinCollectionMatID = Helper.GetMinValue("./XC2/_internal/JsonOutputs/common/ITM_CollectionList.json", "$id") # should be 30001
-    MaxCollectionMatID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/ITM_CollectionList.json", "$id")
-    MinPreciousMainID = Helper.GetMinValue("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", "$id") # should be 25001
-    MaxPreciousMainID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", "$id")
-    MinPreciousTornaID = Helper.GetMinValue("./XC2/_internal/JsonOutputs/common/ITM_PreciousListIra.json", "$id") # should be 25001
-    MaxPreciousTornaID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/ITM_PreciousListIra.json", "$id")
-    MinInfoID = Helper.GetMinValue("./XC2/_internal/JsonOutputs/common/ITM_InfoList.json", "$id") # should be 25501
-    MaxInfoID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/ITM_InfoList.json", "$id")
+    MinWeaponChipID = Helper.GetMinValue("./XC2/JsonOutputs/common/ITM_PcWpnChip.json", "$id") # should be 10001, but just in case
+    MaxWeaponChipID = Helper.GetMaxValue("./XC2/JsonOutputs/common/ITM_PcWpnChip.json", "$id")
+    MinCollectionMatID = Helper.GetMinValue("./XC2/JsonOutputs/common/ITM_CollectionList.json", "$id") # should be 30001
+    MaxCollectionMatID = Helper.GetMaxValue("./XC2/JsonOutputs/common/ITM_CollectionList.json", "$id")
+    MinPreciousMainID = Helper.GetMinValue("./XC2/JsonOutputs/common/ITM_PreciousList.json", "$id") # should be 25001
+    MaxPreciousMainID = Helper.GetMaxValue("./XC2/JsonOutputs/common/ITM_PreciousList.json", "$id")
+    MinPreciousTornaID = Helper.GetMinValue("./XC2/JsonOutputs/common/ITM_PreciousListIra.json", "$id") # should be 25001
+    MaxPreciousTornaID = Helper.GetMaxValue("./XC2/JsonOutputs/common/ITM_PreciousListIra.json", "$id")
+    MinInfoID = Helper.GetMinValue("./XC2/JsonOutputs/common/ITM_InfoList.json", "$id") # should be 25501
+    MaxInfoID = Helper.GetMaxValue("./XC2/JsonOutputs/common/ITM_InfoList.json", "$id")
     WeaponChipIDRange = Helper.InclRange(MinWeaponChipID, MaxWeaponChipID)
     CollectionMatIDRange = Helper.InclRange(MinCollectionMatID, MaxCollectionMatID)
     PreciousMainIDRange = Helper.InclRange(MinPreciousMainID, MaxPreciousMainID)
@@ -1153,8 +1147,8 @@ def ChangeReqItemRarities(): # we want the useful items that get dropped from ch
     WeaponChipTextIDs, CollectionMatTextIDs, PreciousMainTextIDs, PreciousTornaTextIDs, InfoTextIDs = [], [], [], [], []
     AllRegularIDs = [WeaponChipRegularIDs, CollectionMatRegularIDs, PreciousRegularMainIDs, PreciousRegularTornaIDs, InfoRegularIDs]
     AllTextIDs = [WeaponChipTextIDs, CollectionMatTextIDs, PreciousMainTextIDs, PreciousTornaTextIDs, InfoTextIDs]
-    AllRegularTargetFiles = ["./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", "./XC2/_internal/JsonOutputs/common/ITM_CollectionList.json", "./XC2/_internal/JsonOutputs/common/ITM_PreciousList.json", "./XC2/_internal/JsonOutputs/common/ITM_PreciousListIra.json", "./XC2/_internal/JsonOutputs/common/ITM_InfoList.json"]
-    AllTextTargetFiles = ["./XC2/_internal/JsonOutputs/common_ms/itm_pcwpnchip_ms.json", "./XC2/_internal/JsonOutputs/common_ms/itm_collection.json", "./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", "./XC2/_internal/JsonOutputs/common_ms/itm_precious.json", "./XC2/_internal/JsonOutputs/common_ms/itm_info.json"]
+    AllRegularTargetFiles = ["./XC2/JsonOutputs/common/ITM_PcWpnChip.json", "./XC2/JsonOutputs/common/ITM_CollectionList.json", "./XC2/JsonOutputs/common/ITM_PreciousList.json", "./XC2/JsonOutputs/common/ITM_PreciousListIra.json", "./XC2/JsonOutputs/common/ITM_InfoList.json"]
+    AllTextTargetFiles = ["./XC2/JsonOutputs/common_ms/itm_pcwpnchip_ms.json", "./XC2/JsonOutputs/common_ms/itm_collection.json", "./XC2/JsonOutputs/common_ms/itm_precious.json", "./XC2/JsonOutputs/common_ms/itm_precious.json", "./XC2/JsonOutputs/common_ms/itm_info.json"]
 
     for item in RequiredItems:
         if item in WeaponChipIDRange:
@@ -1168,7 +1162,7 @@ def ChangeReqItemRarities(): # we want the useful items that get dropped from ch
         elif item in InfoIDRange:
             InfoRegularIDs.append(item)
 
-    for file in ["./XC2/_internal/JsonOutputs/common/ITM_BoosterList.json", "./XC2/_internal/JsonOutputs/common/ITM_CollectionList.json", "./XC2/_internal/JsonOutputs/common/ITM_CrystalList.json", "./XC2/_internal/JsonOutputs/common/ITM_FavoriteList.json", "./XC2/_internal/JsonOutputs/common/ITM_Orb.json",  "./XC2/_internal/JsonOutputs/common/ITM_OrbEquip.json",  "./XC2/_internal/JsonOutputs/common/ITM_OrbRecipe.json", "./XC2/_internal/JsonOutputs/common/ITM_PcEquip.json", "./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json",  "./XC2/_internal/JsonOutputs/common/ITM_SalvageList.json",  "./XC2/_internal/JsonOutputs/common/ITM_TresureList.json"]:
+    for file in ["./XC2/JsonOutputs/common/ITM_BoosterList.json", "./XC2/JsonOutputs/common/ITM_CollectionList.json", "./XC2/JsonOutputs/common/ITM_CrystalList.json", "./XC2/JsonOutputs/common/ITM_FavoriteList.json", "./XC2/JsonOutputs/common/ITM_Orb.json",  "./XC2/JsonOutputs/common/ITM_OrbEquip.json",  "./XC2/JsonOutputs/common/ITM_OrbRecipe.json", "./XC2/JsonOutputs/common/ITM_PcEquip.json", "./XC2/JsonOutputs/common/ITM_PcWpnChip.json",  "./XC2/JsonOutputs/common/ITM_SalvageList.json",  "./XC2/JsonOutputs/common/ITM_TresureList.json"]:
         Helper.ColumnAdjust(file, ["Rarity"], 1)
 
     for reqitemtype in range(len(AllRegularIDs)):
@@ -1214,14 +1208,14 @@ def GildedCheckNames():
     RequiredShops = [x.shoplistid for x in RequiredLocations if x.type == "shop"]
     RequiredQuests = [x.rewardids[0] for x in AllRequiredSidequests if x.rewardids!= []]
     RequiredNPCs = [x.id for x in AllRequiredSidequests if x.rewardids == []]
-    CurGmkNameMax = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/fld_gmkname.json", "$id")
+    CurGmkNameMax = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/fld_gmkname.json", "$id")
     ProgressID = CurGmkNameMax + 1
     NonProgressID = CurGmkNameMax + 2
     NewGmkNameRows = [{"$id": ProgressID, "style": 36, "name": "[System:Color name=tutorial ]Progression[/System:Color]"}, {"$id": NonProgressID, "style": 36, "name": "[System:Color name=red ]Unrequired[/System:Color]"}]
     JSONParser.ExtendJSONFile("common_ms/fld_gmkname.json", [NewGmkNameRows])
 
     # collection points
-    with open("./XC2/_internal/JsonOutputs/common/FLD_CollectionTable.json", 'r+', encoding='utf-8') as file: 
+    with open("./XC2/JsonOutputs/common/FLD_CollectionTable.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in RequiredCollectionPoints:
@@ -1231,11 +1225,11 @@ def GildedCheckNames():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_CollectionPopList.json", ["nameRadius"], 255) # makes it easier to see from far away
-    Helper.ColumnAdjust("./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_CollectionPopList.json", ["nameRadius"], 255) # makes it easier to see from far away
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/ma40a_FLD_CollectionPopList.json", ["nameRadius"], 255) # makes it easier to see from far away
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/ma41a_FLD_CollectionPopList.json", ["nameRadius"], 255) # makes it easier to see from far away
 
     # chests
-    with open("./XC2/_internal/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as file: 
+    with open("./XC2/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             row["initWaitTimeRand"] = 0 # why would you add a random wait time before items start popping out??? get that out of here
@@ -1255,7 +1249,7 @@ def GildedCheckNames():
     AllUnearthIDs = [1509, 1549, 1550, 1551, 1561, 1552, 1557, 1554, 1553, 1562, 1594, 1497, 1496, 1577, 1578, 1580, 1581, 1583, 1579, 1582]
     RequiredUnearthIDs = [ChestIDToUnearthFieldSkillID[x] for x in RequiredChestIDs if x in AllUnearthIDs]
 
-    FileList = ["./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", "./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_TboxPop.json"]
+    FileList = ["./XC2/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", "./XC2/JsonOutputs/common_gmk/ma41a_FLD_TboxPop.json"]
     for curfile in FileList:
         with open(curfile, 'r+', encoding='utf-8') as file: 
             data = json.load(file)
@@ -1274,7 +1268,7 @@ def GildedCheckNames():
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
         Helper.ColumnAdjust(curfile, ["msgVisible", "msgdigVisible"], 255) # makes it easier to see from far away    
-    with open("./XC2/_internal/JsonOutputs/common_ms/fld_fieldskillplace.json", 'r+', encoding='utf-8') as file: # need to deal with the "Unearth" chest locations
+    with open("./XC2/JsonOutputs/common_ms/fld_fieldskillplace.json", 'r+', encoding='utf-8') as file: # need to deal with the "Unearth" chest locations
         data = json.load(file)
         for row in data["rows"]:
             match row["$id"]:
@@ -1297,7 +1291,7 @@ def GildedCheckNames():
 
     # first, we give enemies with duplicate names unique name ids.
     # we need to do this because they reuse enemy name ids for enemies with the same name but different chr_enarrange ids, so an unrequired cursed buloofo (id 1430) and a required cursed buloofo (id 1454) share the same name id, which screws up the whole concept. So we need to give them new name ids.
-    MaxEnemyNameRow = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common_ms/fld_enemyname.json", "$id") + 1
+    MaxEnemyNameRow = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/fld_enemyname.json", "$id") + 1
     EnemiesWithDuplicateNames = [1436, 1442, 1444, 1446, 1447, 1448, 1450, 1454, 1526, 1606, 1632, 1633, 1651, 1653, 1655, 1656]
     DuplicateEnemyNames = ["Ardainian Scout", "Slithe Jagron", "Gargoyle", "Malos", "Malos", "Gort", "Artifice Siren", "Cursed Buloofo", "Dread Caterpile", "Urbs Armu", "Gargoyle", "Gargoyle", "Sable Volff", "Dormine Brog", "Grohl Plambus", "Chelta Caterpile"]
     AdditionalEnemyNameRows = []
@@ -1305,7 +1299,7 @@ def GildedCheckNames():
         AdditionalEnemyNameRows.append({"$id": MaxEnemyNameRow + enemy, "style": 15, "name": DuplicateEnemyNames[enemy]})
     JSONParser.ExtendJSONFile("common_ms/fld_enemyname.json", [AdditionalEnemyNameRows])
     CurDupeEnemy = 0
-    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
+    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in EnemiesWithDuplicateNames:
@@ -1319,7 +1313,7 @@ def GildedCheckNames():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/fld_enemyname.json", 'r+', encoding='utf-8') as file: 
+    with open("./XC2/JsonOutputs/common_ms/fld_enemyname.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in RequiredEnemyNameList:
@@ -1341,7 +1335,7 @@ def GildedCheckNames():
     # shops
     # again, coloring the existing shop name yellow or red if it has progression or doesnt
     RequiredShopNameList = []
-    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopList.json", 'r+', encoding='utf-8') as file: 
+    with open("./XC2/JsonOutputs/common/MNU_ShopList.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in RequiredShops:
@@ -1349,7 +1343,7 @@ def GildedCheckNames():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/fld_shopname.json", 'r+', encoding='utf-8') as file: 
+    with open("./XC2/JsonOutputs/common_ms/fld_shopname.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in RequiredShopNameList:
@@ -1364,7 +1358,7 @@ def GildedCheckNames():
     # yellow name if progression, red name if it doesn't
     RequiredSidequestNameList = []
     NonRequiredSidequestNameList = []
-    with open("./XC2/_internal/JsonOutputs/common/FLD_QuestListNormalIra.json", 'r+', encoding='utf-8') as file: 
+    with open("./XC2/JsonOutputs/common/FLD_QuestListNormalIra.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             if row["RewardSetA"] in RequiredQuests:
@@ -1374,7 +1368,7 @@ def GildedCheckNames():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_ms/fld_quest_normal.json", 'r+', encoding='utf-8') as file: 
+    with open("./XC2/JsonOutputs/common_ms/fld_quest_normal.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in RequiredSidequestNameList:
@@ -1452,10 +1446,10 @@ def AddHintstoBdats():
         NewLineHintedLocTexts[hint] = NewLineHintedLocTexts[hint].replace(f"{LocHintNames[hint]}", f"[System:Color name=tutorial ]{LocHintNames[hint]}[/System:Color]")
         NewLineHintedLocTexts[hint] = NewLineHintedLocTexts[hint].replace(f"{LocHintCount[hint]}", f"[System:Color name=tutorial ]{LocHintCount[hint]}[/System:Color]", 1) # replacing only the first instance accounts for areas like "Balaur, Dark Zone #1, if it were to have only 1 progressive item"
     
-    with open("./XC2/_internal/JsonOutputs/common/MNU_Tutorial_Tips.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/MNU_Tutorial_Tips.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
 
-        with open("./XC2/_internal/JsonOutputs/common_ms/menu_tutorial_chbtl.json", 'r+', encoding='utf-8') as filet:
+        with open("./XC2/JsonOutputs/common_ms/menu_tutorial_chbtl.json", 'r+', encoding='utf-8') as filet:
             datat = json.load(filet)
             
             rowscopy = [row for row in data["rows"] if row.get("$id") <= 99 + numitempages + numlocpages]
@@ -1513,7 +1507,7 @@ def AddHintstoBdats():
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def AddNewFlagPointers(GateCommReq, GateNumber): # if we reduce the required community level, we want to make a separate FLD_ConditionList row, with a different Condition1 value, to avoid screwing up any other events relying on that Flag Condition ()
-    NewCondFlagRowID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_ConditionFlag.json","$id") + 1
+    NewCondFlagRowID = Helper.GetMaxValue("./XC2/JsonOutputs/common/FLD_ConditionFlag.json","$id") + 1
     if GateNumber == 1:
         JSONParser.ChangeJSONLine(["common/FLD_ConditionList.json"], [2918], ["Condition1"], NewCondFlagRowID)
         JSONParser.ExtendJSONFile("common/FLD_ConditionFlag.json", [[{"$id": NewCondFlagRowID, "FlagType": 4, "FlagID": 652, "FlagMin": GateCommReq, "FlagMax": 6}]])
@@ -1545,7 +1539,7 @@ def CreateSpoilerLog():
     debugfile.write(f"Permalink: {permalinkVar.get()}\n\n")
     debugfile.write(f"Seed Name: {seedEntryVar.get()}\n\n")
     debugfile.write("Options Selected:\n")
-    for option in OptionList: # for each option
+    for option in XenoOptionDict["XC2"]: # for each option
         OptionName = option.name   
         OptionVal = option.GetState()
         if OptionVal: # if the option is checked
@@ -1556,7 +1550,7 @@ def CreateSpoilerLog():
                 debugfile.write(f" {OptionName};")
     debugfile.write("\n\n")
     debugfile.write("Suboptions Selected:\n")
-    for option in OptionList:
+    for option in XenoOptionDict["XC2"]:
         OptionName = option.name
         OptionVal = option.GetState()
         if OptionVal:

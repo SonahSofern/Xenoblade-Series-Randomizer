@@ -1,7 +1,8 @@
-import json, random, IDs, EnemyRandoLogic, RaceMode, math, Options, time, FieldSkillAdjustments
-from Enhancements import *
+import json, random,  math,  time
+from XC2.XC2_Scripts.Enhancements import *
+from XC2.XC2_Scripts import IDs, EnemyRandoLogic, RaceMode,Options,FieldSkillAdjustments
 from scripts import Helper
-from UMHuntMain import *
+from XC2.XC2_Scripts.UMHuntMain import *
 
 AllUniqueMonsterDefaultIDs = [611, 612, 705, 706, 707, 708, 709, 710, 711, 712, 713, 715, 736, 738, 808, 809, 810, 811, 812, 814, 815, 816, 817, 819, 890, 891, 892, 893, 894, 895, 896, 898, 899, 926, 929, 953, 954, 955, 957, 958, 1019, 1020, 1023, 1025, 1026, 1101, 1102, 1104, 1106, 1108, 1109, 1111, 1112, 1113, 1114, 1115, 1131, 1132, 1134, 1155, 1156, 1157, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1255, 1256, 1258, 1260, 1261, 1262, 1264, 1265, 1563, 1564, 1566, 1567, 1657, 1658, 1659, 1660, 1661, 1662, 1663, 1664, 1665, 1666, 1667, 1670, 1774]
 AllSuperBossDefaultIDs = [247, 714, 928, 1022, 1027, 1110, 1135, 1137, 1189, 1559, 1560, 1561, 1562, 1723, 1756, 1758, 1759, 1763, 1765, 1766, 1767, 1768, 1769, 1770, 1771, 1772, 1773, 1775, 1776, 1777, 1778, 1779, 1783, 1784, 1785, 1786, 1792, 1793, 1794, 1795, 1800, 1802, 1803, 1804, 1808, 1809, 1811, 1812, 1813, 1814, 1886]
@@ -29,7 +30,7 @@ def DebugEnemyLevels(ChosenAreaOrder):
     TotalAreasEnemies = []
     for k in range(0, len(ChosenAreaOrder)):
         CurrentAreasEnemies = []
-        enemypopfile = "./XC2/_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[k]][2] + "_FLD_EnemyPop.json"
+        enemypopfile = "./XC2/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[k]][2] + "_FLD_EnemyPop.json"
         with open(enemypopfile, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data["rows"]:
@@ -44,7 +45,7 @@ def DebugEnemyLevels(ChosenAreaOrder):
             json.dump(data, file, indent=2, ensure_ascii=False)
         AllAreasEnemies.append(CurrentAreasEnemies)
         TotalAreasEnemies.extend(list(set(CurrentAreasEnemies)))
-    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for i in range(len(ChosenAreaOrder)):
             for row in data["rows"]:
@@ -61,7 +62,7 @@ def DebugEnemyLevels(ChosenAreaOrder):
 def DebugFindMonsters(ChosenAreaOrder): # was used to debug and find enemies that spawned in too often. If the objective pointer points towards defeating an enemy of which there are 16 or more on the map you're on, the game will freeze upon loading.
     enemycountholder = Helper.ExtendListtoLength([0], len(AllNormalEnemyDefaultIDs),"0")
     for i in range(0, len(ChosenAreaOrder)):
-        enemypopfile = "./XC2/_internal/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_EnemyPop.json"
+        enemypopfile = "./XC2/JsonOutputs/common_gmk/" + ContinentInfo[ChosenAreaOrder[i]][2] + "_FLD_EnemyPop.json"
         with open(enemypopfile, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for row in data["rows"]:
@@ -87,7 +88,7 @@ def DebugFindMonsters(ChosenAreaOrder): # was used to debug and find enemies tha
     print(toolargepool)
 
 def DebugItemsPlace(): #need to place some tokens to play around with them in the shops
-    with open("./XC2/_internal/JsonOutputs/common_gmk/ma02a_FLD_TboxPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
+    with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_TboxPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 209:
@@ -104,7 +105,7 @@ def DebugItemsPlace(): #need to place some tokens to play around with them in th
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def DebugEasyMode(): # if this is on, enemies will be lv 1, makes it easier to playtest
-    with open("./XC2/_internal/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: # Adjusted their levels
+    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: # Adjusted their levels
         data = json.load(file)
         for row in data["rows"]:
             row["Lv"] = 1
@@ -118,7 +119,7 @@ def DebugSpawnCountPrint(EnemySets, ChosenAreaOrder): # Prints how many times an
     for k in range(0, len(ChosenAreaOrder)):
         for i in range(0, len(IDs.ValidEnemyPopFileNames)):
             if ContinentInfo[ChosenAreaOrder[k]][2] in IDs.ValidEnemyPopFileNames[i]:
-                enemypopfile = "./XC2/_internal/JsonOutputs/common_gmk/" + IDs.ValidEnemyPopFileNames[i]
+                enemypopfile = "./XC2/JsonOutputs/common_gmk/" + IDs.ValidEnemyPopFileNames[i]
                 AreaUMCount = [0,0,0,0]
                 with open(enemypopfile, 'r+', encoding='utf-8') as file:
                     data = json.load(file)
@@ -137,7 +138,7 @@ def DebugSpawnCountPrint(EnemySets, ChosenAreaOrder): # Prints how many times an
 
 def DebugGetNPCIDs(): # was used to figure out how many instances of an npc show up in the argentum bazaar. Checked by running around there myself
     TargetedNPCIDs = []
-    with open("./XC2/_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
+    with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
         data = json.load(file)
         CurNPC = 0
         NPCCount = 0
@@ -190,7 +191,7 @@ def DebugFindIDForName():
     RSCNPCIDs = []
     MATWOIDs = []
 
-    with open("./XC2/_internal/JsonOutputs/common_ms/fld_npcname.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
+    with open("./XC2/JsonOutputs/common_ms/fld_npcname.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
         data = json.load(file)
         for i in range(0, len(NPCNames)):
             for row in data["rows"]:
@@ -199,7 +200,7 @@ def DebugFindIDForName():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/RSC_NpcList.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
+    with open("./XC2/JsonOutputs/common/RSC_NpcList.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
         data = json.load(file)
         for i in range(0, len(fldnpcnameIDs)):
             for row in data["rows"]:
@@ -208,7 +209,7 @@ def DebugFindIDForName():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
+    with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: # Lets you rest in the Argentum Trade Guild Inn, but removes all other shops (we're adding them back after)
         data = json.load(file)
         for i in range(0, len(RSCNPCIDs)):
             FoundInstance = 0

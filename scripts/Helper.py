@@ -182,7 +182,7 @@ def TheTunneler(filepaths: list[str], rowvalues: list[int], inputheaders: list[s
     functionaloffsets = ExtendListtoLength(offsets, len(rowvalues), "0")
     for specificfile in range(len(filepaths)):
         if specificfile == 0:
-            with open("./XC2/_internal/JsonOutputs/" + filepaths[specificfile], 'r+', encoding='utf-8') as file:
+            with open("./XC2/JsonOutputs/" + filepaths[specificfile], 'r+', encoding='utf-8') as file:
                 data = json.load(file)
                 for idnum in range(len(rowvalues)):
                     for row in data["rows"]:
@@ -193,7 +193,7 @@ def TheTunneler(filepaths: list[str], rowvalues: list[int], inputheaders: list[s
                 file.truncate()
                 json.dump(data, file, indent=2, ensure_ascii=False)
         else:
-            with open("./XC2/_internal/JsonOutputs/" + filepaths[specificfile], 'r+', encoding='utf-8') as file:
+            with open("./XC2/JsonOutputs/" + filepaths[specificfile], 'r+', encoding='utf-8') as file:
                 data = json.load(file)
                 for idnum in range(len(rowvalues)):
                     if tempholder2[idnum] != 0:

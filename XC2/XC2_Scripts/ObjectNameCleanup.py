@@ -1,7 +1,7 @@
 from scripts import Helper, JSONParser, PopupDescriptions
 import json
 import copy
-import Options
+from XC2.XC2_Scripts import Options
 
 def ReassignAlphabeticalSort(): # we add some custom named items if any of the following settings are on:
     if Options.AccessoriesOption.GetState() or Options.AuxCoresOption.GetState() or Options.BladeWeaponChipsOption.GetState() or Options.CosmeticsOption.GetState() or Options.StartwithIncreasedMovespeedOption.GetState() or Options.RaceModeOption.GetState() or Options.UMHuntOption.GetState() or Options.TornaMainOption.GetState():
@@ -9,10 +9,10 @@ def ReassignAlphabeticalSort(): # we add some custom named items if any of the f
         TextFileList = ['itm_booster', 'itm_collection', 'itm_crystal', 'itm_evt', 'itm_favorite', 'itm_orb', 'itm_orb', 'itm_hana_atr_ms', 'itm_hana_narts_set_ms', 'itm_hana_role_ms', 'itm_info', 'itm_orb', 'itm_orb', 'itm_pcequip', 'itm_pcwpnchip_ms', 'itm_precious', 'itm_precious', 'itm_salvage', 'itm_tresure']
         DictList = []
         for fileindex in range(len(ItemFileList)):
-            with open(f"./XC2/_internal/JsonOutputs/common/{ItemFileList[fileindex]}.json", 'r+', encoding='utf-8') as file:
+            with open(f"./XC2/JsonOutputs/common/{ItemFileList[fileindex]}.json", 'r+', encoding='utf-8') as file:
                 data = json.load(file)
 
-                with open(f"./XC2/_internal/JsonOutputs/common_ms/{TextFileList[fileindex]}.json", 'r+', encoding='utf-8') as textfile:
+                with open(f"./XC2/JsonOutputs/common_ms/{TextFileList[fileindex]}.json", 'r+', encoding='utf-8') as textfile:
                     textdata = json.load(textfile)
 
                     for row in data["rows"]:
@@ -43,7 +43,7 @@ def ReassignAlphabeticalSort(): # we add some custom named items if any of the f
                 IDtoSortPos[SortedDictList[item]["$id"]] = 0
 
         for fileindex in range(len(ItemFileList)):
-            with open(f"./XC2/_internal/JsonOutputs/common/{ItemFileList[fileindex]}.json", 'r+', encoding='utf-8') as file:
+            with open(f"./XC2/JsonOutputs/common/{ItemFileList[fileindex]}.json", 'r+', encoding='utf-8') as file:
                 data = json.load(file)
                 for row in data["rows"]:
                     row["sortGB"] = IDtoSortPos[row["$id"]]

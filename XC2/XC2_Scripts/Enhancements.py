@@ -120,8 +120,8 @@ def HandleAllRange(start, stop, step):
 
 def SearchAndSetDisplayIDs():
     global DisplayTagID
-    with open("./XC2/_internal/JsonOutputs/common/BTL_EnhanceEff.json", 'r+', encoding='utf-8') as EnEffFile:
-        with open("./XC2/_internal/JsonOutputs/common_ms/btl_buff_ms.json", 'r+', encoding='utf-8') as btlBuffFile:
+    with open("./XC2/JsonOutputs/common/BTL_EnhanceEff.json", 'r+', encoding='utf-8') as EnEffFile:
+        with open("./XC2/JsonOutputs/common_ms/btl_buff_ms.json", 'r+', encoding='utf-8') as btlBuffFile:
             EnEff = json.load(EnEffFile)
             btlBuff = json.load(btlBuffFile)
             disList = DisplayTagList

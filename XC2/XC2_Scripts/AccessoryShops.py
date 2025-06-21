@@ -1,4 +1,5 @@
-import Options, IDs, json, random
+from XC2.XC2_Scripts import Options, IDs
+import json, random
 from scripts import Helper, PopupDescriptions
 def RandoAccessoryShops():
     ValidReplacements = []
@@ -24,7 +25,7 @@ def RandoAccessoryShops():
     if ValidReplacements == []: # In case they dont select anything
         return
     
-    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as shopFile:
+    with open("./XC2/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as shopFile:
         shopData = json.load(shopFile)
         odds = Options.AccessoryShopsOption.GetSpinbox()
         for shop in shopData["rows"]:

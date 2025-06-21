@@ -1,6 +1,6 @@
 import random
 from scripts import JSONParser, Helper
-from IDs import BladeArts
+from XC2.XC2_Scripts.IDs import BladeArts
 
 def BladeArtsRandomization():
     # Regular Blades

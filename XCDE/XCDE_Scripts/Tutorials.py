@@ -1,11 +1,12 @@
-import json, Options
+import json
+from  XCDE.XCDE_Scripts import Options
 from scripts import JSONParser
 
 
 def TutorialSkips(): 
     UnskippableTutorials = [59, 61, 62, 64, 65]
     MechonTutorials = [29] # Ids for tutorials relating to fights with mechon it wont load for some reason if the proc_type is default
-    with open("./XCDE/_internal/JsonOutputs/bdat_menu_ttrl/MNU_ttrl.json", 'r+', encoding='utf-8') as tutFile:
+    with open("./XCDE/JsonOutputs/bdat_menu_ttrl/MNU_ttrl.json", 'r+', encoding='utf-8') as tutFile:
         tutData = json.load(tutFile)
         dupeFlags = []
         for f in tutData["rows"]:

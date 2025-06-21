@@ -1,6 +1,6 @@
 import json, random
-from Enhancements import *
-import Options
+from XC2.XC2_Scripts.Enhancements import *
+from XC2.XC2_Scripts import Options
 from scripts import PopupDescriptions
 
 def RandomizeWeaponEnhancements():
@@ -8,8 +8,8 @@ def RandomizeWeaponEnhancements():
     ValidWeaponNames = ["Rings", "Ball", "Cannon", "Sword", "Slayer", "Edge", "Brand", "Scimitar", "Cleaver", "Shield", "Destroyer", "Plate", "Pavise", "Gauntlets", "Arms", "Saber", "Slicer", "Whips", "Claw", "Scythes", "Sickles", "Gutters", "Hatchet", "Axe", "Greataxe", "Lance", "Mecha-Spear", "Hammer", "Smasher", "Tachi", "Katana", "Knuckles", "Fists", "Nodachi", "Crosier", "Gunknives"]
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
     InvalidNames = ["Monado", "Well-Used Blades", "Archetype Ralzes", "Halteclere", "Masamune"]
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file:
-        with open("./XC2/_internal/JsonOutputs/common_ms/itm_pcwpn_ms.json", 'r+', encoding='utf-8') as wepNames:
+    with open("./XC2/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file:
+        with open("./XC2/JsonOutputs/common_ms/itm_pcwpn_ms.json", 'r+', encoding='utf-8') as wepNames:
             
             slider = Options.BladeWeaponChipsOption.GetSpinbox()
             enhanceFile = json.load(file)
@@ -59,7 +59,7 @@ def RandomizePowerLevels(): # this makes the weapon chips uniform in their power
         for rank in range(1, 21):
             WeaponRankPool.extend([rank, rank, rank])
         random.shuffle(WeaponRankPool)
-        with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
+        with open("./XC2/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
             data = json.load(file)
             for row in data["rows"]:
                 if Helper.OddsCheck(Options.BladeWeaponChipsOption.GetSpinbox()):
@@ -69,7 +69,7 @@ def RandomizePowerLevels(): # this makes the weapon chips uniform in their power
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file: # Sets damage of weapon based on rank of chip, with a little extra wiggle room
+    with open("./XC2/JsonOutputs/common/ITM_PcWpn.json", 'r+', encoding='utf-8') as file: # Sets damage of weapon based on rank of chip, with a little extra wiggle room
         data = json.load(file)
         for row in data["rows"]:
             for i in range(0, len(WeaponStrengthList)):
@@ -85,14 +85,14 @@ def ChangeWeaponRankNames():
         if Options.BladeWeaponChipsOption.GetState() and Options.BladeWeaponChipsOption_AutoAtk.GetState():
             RandomizePowerLevels()
         WeaponStrengthNameList = Helper.ExtendListtoLength([], 20, "[]")
-        with open("./XC2/_internal/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
+        with open("./XC2/JsonOutputs/common/ITM_PcWpnChip.json", 'r+', encoding='utf-8') as file: # Assigns weapons to groups based on category
             data = json.load(file)
             for row in data["rows"]:
                 WeaponStrengthNameList[row["Rank"] - 1].append(row["Name"])
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-        with open("./XC2/_internal/JsonOutputs/common_ms/itm_pcwpnchip_ms.json", 'r+', encoding='utf-8') as file: # Renames chips according to their rank
+        with open("./XC2/JsonOutputs/common_ms/itm_pcwpnchip_ms.json", 'r+', encoding='utf-8') as file: # Renames chips according to their rank
             data = json.load(file)
             for row in data["rows"]:
                 for rank in range(len(WeaponStrengthNameList)):

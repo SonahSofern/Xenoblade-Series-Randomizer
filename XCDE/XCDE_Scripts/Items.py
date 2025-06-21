@@ -1,6 +1,6 @@
-import json, Options, IDs, random
+import json, random
 from scripts import JSONParser, Helper, PopupDescriptions
-
+from  XCDE.XCDE_Scripts import Options, IDs
 keepTypeDescriptions = "This will ensure that items replacing an item will be of the same type\n(Weapons replace Weapons, Chestplates replace Chestplates etc.) \nThis will override any of the weight options."
 
 class ItemType:
@@ -23,7 +23,7 @@ def ItemRandomization(itemTypes:list[ItemType] = [], files = [],odds = 0, game =
     
     for file in files:
         try:
-            with open(f"./{game}/_internal/JsonOutputs/{file}.json", 'r+', encoding='utf-8') as ItemFile:
+            with open(f"./{game}/JsonOutputs/{file}.json", 'r+', encoding='utf-8') as ItemFile:
                 itemData = json.load(ItemFile)
                 for itm in itemData["rows"]:
                     for key in keys:
