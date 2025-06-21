@@ -900,6 +900,15 @@ def FixCharacterMenuIcon(character_id, icon_id, full_image_id, suffix):
         JSONParser.ChangeJSONLine([f"common/MNU_{suffix_cap}ImageID.json"], [full_image_id], [field], replacement_image_row[field])
 
 
+def BladeWarpingDescription(Desc):
+    Desc.Header("Blade Warping")
+    Desc.Text("When replacing Dromarch with somebody else (either via Driver randomization or Blade randomization) it can cause a player to teleport to a location specific to the current map, often out of bounds. This teleportation is known as \"Blade Warping\" and can sometimes be burdensome but also sometimes be useful. Here's how it works:")
+    Desc.Text("In the base game, playing as Nia with Dromarch causes Nia to ride Dromarch's back. In actuality, you are controlling Dromarch, and Nia just happens to be anchored to him. When Dromarch gets replaced, you are instead controlling the replaced blade. However, Nia is NOT anchored to this replacement blade. She is instead floating at the world's (0,0,0) coordinate. This is easiest to see in Argentum, where she is floating in the air at the Central Exchange.")
+    Desc.Image("FloatingNia.png", "XC2", 600)
+    Desc.Text("When changing the party in any form (drivers or blades), the game tries to reload the party at the active driver's location. If the active driver is Nia at the (0,0,0) location, that causes your party to reload at the (0,0,0) location, thus causing you to teleport there.")
+    Desc.Text("In order to avoid this behavior while Dromarch is replaced, make sure that Nia (or her replacement) has a primary blade that is NOT the blade who replaced Dromarch when controlling Nia (or her replacement) while changing your party.")
+    Desc.Text("Controlling a blade directly has some interesting behavior. For example, they cannot interact with NPCs (only drivers can). Some blades do not have climbing animations and are unable to climb ladders (interestingly though, some blades actually can climb ladders). Blades also have some voice clips which are normally inaccessible, such as jumping and taking fall damage.")
+
 def BladesDescriptions():
     BladesDesc = PopupDescriptions.Description()
     BladesDesc.Header(Options.BladesOption.name)
@@ -915,16 +924,14 @@ def BladesDescriptions():
     BladesDesc.Text("- A handful of voice lines do not work correctly, such as when using field skills.", anchor="w")
 
     BladesDesc.Header(Options.BladesOption_Dromarch.name)
-    BladesDesc.Text("This suboption allows Dromarch to be randomized. This is generally recommended, however it introduces a weird glitch you should know about. Randomizing Dromarch may cause a player to teleport to a location specific to the current map, often out of bounds. This teleportation is known as \"Niaporting\" and can sometimes be burdensome but also sometimes be useful.")
-    BladesDesc.Text("In the base game, playing as Nia with Dromarch causes Nia to ride Dromarch's back. In actuality, you are controlling Dromarch, and Nia just happens to be anchored to him. When Dromarch gets replaced, you are instead controlling the replaced blade. However, Nia is NOT anchored to this replacement blade. She is instead floating at the world's (0,0,0) coordinate. This is easiest to see in Argentum, where she is floating in the air at the Central Exchange.")
-    BladesDesc.Image("FloatingNia.png", "XC2", 600)
-    BladesDesc.Text("When changing the party in any form (drivers or blades), the game tries to reload the party at the active driver's location. If the active driver is Nia at the (0,0,0) location, that causes your party to reload at the (0,0,0) location, thus causing you to teleport there.")
-    BladesDesc.Text("In order to avoid this behavior while using this suboption, make sure that  Nia's primary blade is not the blade who replaced Dromarch when controlling Nia and changing your party.")
-    BladesDesc.Text("Controlling a blade directly has some interesting behavior. For example, they cannot interact with NPCs (only drivers can). Some blades do not have climbing animations and are unable to climb ladders (interestingly though, some blades actually can climb ladders). Blades also have some voice clips which are normally inaccessible, such as jumping and taking fall damage.")
+    BladesDesc.Text("This suboption allows Dromarch to be randomized. This is generally recommended, however it introduces a weird glitch. See the section below about Blade Warping.")
 
     BladesDesc.Header(Options.BladesOption_Healer.name)
     BladesDesc.Text(f"This suboption only has an effect if {Options.BladesOption_Dromarch.name} is also selected. With this suboption, it ensures that the blade which replaces Dromarch has a Healing Halo equivalent art. This is used to ensure that there is a healer in the party. This includes any blade which is a Bitball or Twin Rings (or a clone of Twin Rings) weapon. This blade is is not always a Healer class, as some blades like Elma have healing arts as Attackers.")
     BladesDesc.Text("If drivers are also randomized, this suboption ensures that whichever driver replaces Nia gets paired with a blade who has a Healing Halo equivalent art. Nia and Morag have the same healing weapons, listed above. Rex's only healing weapon is the Catalyst Scimitar. If Rex replaces Nia, Nia will be his default blade. Zeke has no Healing Halo arts on any weapon, and so he cannot replace Nia if this suboption is selected.")
+
+    BladeWarpingDescription(BladesDesc)
+
     return BladesDesc
 
 
@@ -941,8 +948,12 @@ def DriversDescriptions():
     DriversDesc.Text(f"- This option is incompatible with {Options.RaceModeOption.name} and {Options.UMHuntOption.name}. If those game modes are selected, drivers will not be randomized.", anchor="w")
     DriversDesc.Text("- Zeke's Eye of Shining Justice skill does not work properly when Zeke gets randomized. This skill is replaced by Rex's Combo Breaker in this case.", anchor="w")
     DriversDesc.Text("- A handful of voice lines do not work correctly, such as when unlocking affinity nodes.", anchor="w")
+    DriversDesc.Text("- A handful of voice lines do not work correctly, such as when unlocking affinity nodes.", anchor="w")
+    DriversDesc.Text("- This option introduces a weird glitch. See the section below about Blade Warping.", anchor="w")
 
     DriversDesc.Header(Options.DriversOption_Nia.name)
     DriversDesc.Text("This suboption ensures that Nia is one of the first two drivers that join the party (either replacing Rex or herself). This is recommended when not randomizing blades, as this guarantees a healer.")
+
+    BladeWarpingDescription(DriversDesc)
 
     return DriversDesc
