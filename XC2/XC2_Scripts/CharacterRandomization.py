@@ -480,16 +480,18 @@ def ApplyBladeRandomization(blade):
     # 1. Field skills for progression reasons
     # 2. Pneuma skills, for purposes of Driver randomization without Blade randomization
     excluded_skills = dict()
+
     if not Options.RemoveFieldSkillsOption.GetState():
-        excluded_skills[1001] = ['FSkill1', 'FSkill2', 'FSkill3']  # Pyra: Fire Mastery, Focus, Cooking
-        excluded_skills[1005] = ['FSkill3']  # Poppi Alpha: Superstrength
-        excluded_skills[1008] = ['FSkill2']  # Roc: Miasma Dispersal
+        excluded_skills[1001] = ['FSkill1', 'FSkill2', 'FSkill3', 'FskillAchivement1', 'FskillAchivement2', 'FskillAchivement3']  # Pyra: Fire Mastery, Focus, Cooking
+        excluded_skills[1005] = ['FSkill3', 'FskillAchievement3']  # Poppi Alpha: Superstrength
+        excluded_skills[1008] = ['FSkill2', 'FskillAchievement2']  # Roc: Miasma Dispersal
 
     # Pneuma is only randomized when Drivers are randomized
     # 1. Default weapons not randomized, as it is set in SwapDefaultBlades()
     # 2. Model not randomized, as it is set in SwapDefaultBlades()
     # 3. Battle skills, as it is what makes Pneuma...Pneuma
-    excluded_skills[1003] = ["Name", "DefWeapon", "Model", "BSkill1", "BSkill2", "BSkill3"]
+    # 4. Battle skill achievements so that battle skills are actually unlocked
+    excluded_skills[1003] = ["Name", "DefWeapon", "Model", "BSkill1", "BSkill2", "BSkill3", "SkillAchievement1", "SkillAchievement2", "SkillAchievement3"]
 
     blade_id = blade['$id']
     if blade_id in OriginalCharacter2Replacement:
