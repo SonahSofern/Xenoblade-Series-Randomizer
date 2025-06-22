@@ -983,7 +983,7 @@ def SkillTreeSetup(): # sets up the blade skill tree nodes for each blade.
                                 FLDQuestListAchievementNewRows.append({"$id": CurMaxQuestListAchievementID + 1, "QuestTitle": 0, "QuestCategory": 6, "Visible": 0, "Talker": 0, "Summary": 0, "ResultA": 0, "ResultB": 0, "SortNo": 0, "RewardDisp": 0, "RewardSetA": 0, "RewardSetB": 0, "PRTQuestID": CurMaxQuestListAchievementID, "FlagPRT": 0, "FlagCLD": 0, "PurposeID": CurMaxPurposeID, "CountCancel": 0, "NextQuestA": 30000, "CallEventA": 0, "NextQuestB": 0, "CallEventB": 0, "HintsID": 0, "ClearVoice": 0, "AutoStart": 0, "ItemLost": 0, "CancelCondition": 0, "QuestIcon": 0, "LinkedQuestID": 0})
                                 FLDQuestTaskAchievementNewRows.append({"$id": CurMaxPurposeID, "PreCondition": 0, "TaskType1": 3, "TaskID1": CurMaxQuestCollectID, "Branch1": 0, "TaskLog1": CurMaxTaskLogID, "TaskUI1": 0, "TaskCondition1": 0, "TaskType2": 0, "TaskID2": 0, "Branch2": 0, "TaskLog2": 0, "TaskUI2": 0, "TaskCondition2": 0, "TaskType3": 0, "TaskID3": 0, "Branch3": 0, "TaskLog3": 0, "TaskUI3": 0, "TaskCondition3": 0, "TaskType4": 0, "TaskID4": 0, "Branch4": 0, "TaskLog4": 0, "TaskUI4": 0, "TaskCondition4": 0})
                                 FLDQuestCollectNewRows.append({"$id": CurMaxQuestCollectID, "Refer": 4, "ItemID": blade.unlockkeyids[CurRank], "Category": 0, "Count": 1, "Deduct": 0, "TresureID": 0, "EnemyID": 0, "MapID": 0, "NpcID": 0, "CollectionID": 0})
-                                fldquestachievementtextfilenewrows.append({"$id": CurMaxTaskLogID, "style": 62, "name": "Unlocked by the respective unlock key\nitem found in locations across Alrest."})
+                                fldquestachievementtextfilenewrows.append({"$id": CurMaxTaskLogID, "style": 62, "name": "Unlocked by the respective unlock key\nitem found in locations across\nAlrest."})
                                 CurMaxQuestListAchievementID += 2
                                 CurMaxPurposeID += 1
                                 CurMaxQuestCollectID += 1
@@ -1093,7 +1093,7 @@ def CharacterUnlocks(): # sets up the character unlock keys
                         row[f"TaskID{i}"] = CurMaxFLDQuestCollectID
                         row[f"TaskLog{i}"] = CurMaxfldquestid
                         FLDQuestCollectNewRows.append({"$id": CurMaxFLDQuestCollectID, "Refer": 4, "ItemID": AllCharUnlockKeys[CurKeyCount], "Category": 0, "Count": 1, "Deduct": 0, "TresureID": 0, "EnemyID": 0, "MapID": 0, "NpcID": 0, "CollectionID": 0})
-                        fldquestnewrows.append({"$id": CurMaxfldquestid, "style": 62, "name": f"Obtain the {KeyNames[CurKeyCount]} unlock key\nfound in progression locations across Alrest."})
+                        fldquestnewrows.append({"$id": CurMaxfldquestid, "style": 62, "name": f"Obtain the {KeyNames[CurKeyCount]} unlock key\nfound in progression locations across\nAlrest."})
                         CurKeyCount += 1
                         CurMaxFLDQuestCollectID += 1
                         CurMaxfldquestid += 1
@@ -1102,7 +1102,7 @@ def CharacterUnlocks(): # sets up the character unlock keys
                     row["TaskID2"] = CurMaxFLDQuestCollectID
                     row["TaskLog2"] = CurMaxfldquestid
                     FLDQuestCollectNewRows.append({"$id": CurMaxFLDQuestCollectID, "Refer": 4, "ItemID": AllCharUnlockKeys[CurKeyCount], "Category": 0, "Count": 1, "Deduct": 0, "TresureID": 0, "EnemyID": 0, "MapID": 0, "NpcID": 0, "CollectionID": 0})
-                    fldquestnewrows.append({"$id": CurMaxfldquestid, "style": 62, "name": f"Obtain the {KeyNames[CurKeyCount]} unlock key\nfound in progression locations across Alrest."})
+                    fldquestnewrows.append({"$id": CurMaxfldquestid, "style": 62, "name": f"Obtain the {KeyNames[CurKeyCount]} unlock key\nfound in progression locations across\nAlrest."})
                     break
         file.seek(0)
         file.truncate()
