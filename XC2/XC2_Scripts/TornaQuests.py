@@ -120,7 +120,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Quest Number': 1,
         'Main Story Req': 9,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [HazeKey, [ManipEtherKey[0]], MythraKey, [LightKey[0]]], # LevelUpTokens[:11]],
+        'Item Requirements': [HazeKey, [ManipEtherKey[0]]], # LevelUpTokens[:11]],
         'Community Gained': 0,
         'Community Level Req': 0,
         'Reward Set IDs': [1082],
@@ -995,7 +995,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'FLD_QuestTask $id': 7,
         'Task Summary': 'Complete \"What Bars the Way\"',
         'Community Level Req': 0,
-        'Item Requirements': [[ManipEtherKey[0]], [LightKey[0]]]
+        'Item Requirements': [[ManipEtherKey[0]]]
     }
     TornaMainQuest11 = {
         'FLD_QuestTask $id': 55,
