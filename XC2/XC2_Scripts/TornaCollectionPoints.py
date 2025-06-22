@@ -2957,7 +2957,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     ma41aCollectionPoint4677 = {
         '$id': '4677colle_ma41a_f034',
         'Name': 'Gormott Collection Point 4677',
-        'Location Near': 2425,
+        'Location Near': 2417,
         'Story Pre-Req': [12],
         'Required Items': [],
         'Must Defeat Enemy IDs': [],

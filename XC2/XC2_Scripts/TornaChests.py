@@ -1651,7 +1651,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
     TreasureChest2552 = {
             '$id': 2552,
             'Name': 'Treasure Chest 2552',
-            'Location Near': 2404,
+            'Location Near': 2417,
             'Story Pre-Req': [12],
             'Required Items': [],
             'Must Defeat Enemy IDs': []
@@ -1875,7 +1875,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
     TreasureChest2580 = {
             '$id': 2580,
             'Name': 'Treasure Chest 2580',
-            'Location Near': 2404,
+            'Location Near': 2417,
             'Story Pre-Req': [16],
             'Required Items': [AegaeonKey, SuperstrKey, AegaeonAff[:3] , HazeKey, KeenEyeKey, [HazeAff[:2]]],
             'Must Defeat Enemy IDs': []
