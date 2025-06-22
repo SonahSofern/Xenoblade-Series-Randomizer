@@ -152,5 +152,17 @@ def CreateShopInfo(Mainquests, Areas, ItemsPerShop):
             if shop.nearloc == area.id:
                 shop.itemreqs.extend(area.itemreqs)
                 break
-            
+
+    FixWeaponShopCrash()
+
     return TornaShops
+
+def FixWeaponShopCrash(): # weapon shops selling items that are not weapon chips can crash the game if the player tries to equip the non-weapon chip item as a weapon chip after being prompted to after purchasing the item.
+    with open("./XC2/_internal/JsonOutputs/common/MNU_ShopList.json", 'r+', encoding='utf-8') as file: # fixing shop icons actually screws up the ui.
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in [248, 250, 252, 254]:
+                row["ShopIcon"] = 446
+            file.seek(0)
+            file.truncate()
+            json.dump(data, file, indent=2, ensure_ascii=False)
