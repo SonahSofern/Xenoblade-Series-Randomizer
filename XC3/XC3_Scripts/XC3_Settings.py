@@ -10,7 +10,7 @@ def ShowTitleScreenText():
 
 extraArgs= ["--hashes", "Toolset/xbc3Hashes.txt"]
 extraCommands = [lambda: ShowTitleScreenText()]
-mainFolderNames = ["des", "btl", "evt", "fld", "map", "prg", "qst"]
+mainFolderNames = ["des", "btl", "evt", "fld", "map", "prg", "qst", "sys", "zzz"] # "mnu"
 subFolderNames = ["autotalk", "battle", "field", "menu", "quest", "system"]
 textFolderName="gb/game"
 
