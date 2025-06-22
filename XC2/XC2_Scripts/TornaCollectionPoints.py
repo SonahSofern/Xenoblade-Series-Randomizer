@@ -268,7 +268,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'Torna Collection Point 4426',
         'Location Near': 2320,
         'Story Pre-Req': [10],
-        'Required Items': [HazeKey, [ManipEtherKey[0]], [HazeAff[0]]],
+        'Required Items': [HazeKey, [ManipEtherKey[0]]],
         'Must Defeat Enemy IDs': [],
         'Rarity': 2,
         'CollectionTableID': 26
@@ -278,7 +278,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'Torna Collection Point 4427',
         'Location Near': 2322,
         'Story Pre-Req': [25],
-        'Required Items': [HazeKey, [ManipEtherKey[0]], [HazeAff[0]] , MythraKey, [LightKey[0]]],
+        'Required Items': [HazeKey, [ManipEtherKey[0]] , MythraKey, [LightKey[0]]],
         'Must Defeat Enemy IDs': [],
         'Rarity': 2,
         'CollectionTableID': 27
@@ -4399,7 +4399,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'Gormott Collection Point 4821',
         'Location Near': 2413,
         'Story Pre-Req': [12],
-        'Required Items': [HazeKey, [ManipEtherKey[0]], [HazeAff[0]] , MythraKey, [LightKey[0]]],
+        'Required Items': [HazeKey, [ManipEtherKey[0]] , MythraKey, [LightKey[0]]],
         'Must Defeat Enemy IDs': [],
         'Rarity': 2,
         'CollectionTableID': 449
@@ -4409,7 +4409,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
         'Name': 'Gormott Collection Point 4822',
         'Location Near': 2407,
         'Story Pre-Req': [12],
-        'Required Items': [HazeKey, [ManipEtherKey[0]], [HazeAff[0]] , MythraKey, [LightKey[0]]],
+        'Required Items': [HazeKey, [ManipEtherKey[0]] , MythraKey, [LightKey[0]]],
         'Must Defeat Enemy IDs': [],
         'Rarity': 2,
         'CollectionTableID': 450

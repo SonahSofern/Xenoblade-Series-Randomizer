@@ -109,7 +109,7 @@ def CreateChestInfo(Mainquests, Areas, Enemies, ChestRewardQty):
         'Name': 'Treasure Chest 2210',
         'Location Near': 2317,
         'Story Pre-Req': [8],
-        'Required Items': [HazeKey, [ManipEtherKey[0]], [HazeAff[0]]],
+        'Required Items': [HazeKey, [ManipEtherKey[0]]],
         'Must Defeat Enemy IDs': []
     }
     TreasureChest2211 = {
