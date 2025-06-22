@@ -986,7 +986,7 @@ def CreateCollectionPointInfo(Mainquests, Areas, Enemies, CollectionRewardQty):
     ma40aCollectionPoint4498 = {
         '$id': '4498colle_ma40a_hana2_r_3',
         'Name': 'Torna Collection Point 4498',
-        'Location Near': 2326,
+        'Location Near': 2313,
         'Story Pre-Req': [25],
         'Required Items': [],
         'Must Defeat Enemy IDs': [],
