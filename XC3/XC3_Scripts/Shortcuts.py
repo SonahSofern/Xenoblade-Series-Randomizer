@@ -1,9 +1,8 @@
 import json, random
 from scripts import JSONParser, Helper, PopupDescriptions
 
-
 def TutorialSkips():
-    Unskippable = []
+    Unskippable = [4]
     
     # with open("XC3/JsonOutputs/fld/FLD_ConditionTutorial.json", 'r+', encoding='utf-8') as tutFile:
     #     tutData = json.load(tutFile)
@@ -13,7 +12,7 @@ def TutorialSkips():
     with open("XC3/JsonOutputs/prg/SYS_Tutorial.json", 'r+', encoding='utf-8') as tutFile:
         tutData = json.load(tutFile)
         for tut in tutData["rows"]:
-            if tut["$id"] in Unskippable:
+            if tut["$id"] in []:
                 continue
             tut["EnemyInfo"] = 0
             tut["Repeat"] = 0
@@ -22,8 +21,8 @@ def TutorialSkips():
     with open("XC3/JsonOutputs/sys/SYS_SystemOpen.json", 'r+', encoding='utf-8') as tutFile:
         tutData = json.load(tutFile)
         for tut in tutData["rows"]:
-            if tut["$id"] in  [30, 31, 32, 33, 34, 35, 36, 37, 38]:
-                tut["Flag"] = 21567 # Flag for class point accummulation which seems to be instantly
+            if tut["$id"] in  [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 53,54,55,56,57]:
+                tut["Flag"] = 21551 # Flag for class point accummulation which seems to be instantly as the game starts
         JSONParser.CloseFile(tutData, tutFile)
     # with open("XC3/JsonOutputs/prg/SYS_TutorialEnemyInfo.json", 'r+', encoding='utf-8') as tutFile:
     #     tutData = json.load(tutFile)
