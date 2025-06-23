@@ -146,10 +146,18 @@ def LoadTheme(defaultFont, themeName):
                     "font": defaultFont,
                     "background": currentTheme["backgroundColor"],
                     "borderwidth": 1,
+                    "bordercolor": currentTheme["backgroundColor"],
                     "relief": FLAT,
                     "focuscolor":"", # Checkbutton focus border
                     "padding": 0,
                     "tabposition": "nw", # Cool for styling but gonnna kjeep it default for now
+                    "tabmargins": 0,
+                    "lightcolor": currentTheme["backgroundColor"],
+                    "darkcolor": currentTheme["backgroundColor"],
+                },
+                "map": {
+                    "foreground": [("selected", currentTheme["darkColor"]), ("active", currentTheme["darkColor"])],
+                    "background": [("selected", currentTheme["darkColor"]), ("active", currentTheme["darkColor"])]                
                 }
             },
             "TNotebook.Tab": {
@@ -159,13 +167,15 @@ def LoadTheme(defaultFont, themeName):
                     "font": defaultFont,
                     "foreground": currentTheme["lightColor"],
                     "bordercolor": currentTheme["darkColor"],
-                    "borderwidth": 2,
+                    "borderwidth": 0,
                     "focuscolor":"",# Checkbutton focus border
                     "relief": "flat",
+                    "expand": 0,
                 },
                 "map": {
                     "foreground": [("selected", currentTheme["lightColor"]), ("active", currentTheme["lightColor"])],
-                    "background": [("selected", currentTheme["midColor"]), ("active", currentTheme["midColor"])]                
+                    "background": [("selected", currentTheme["midColor"]), ("active", currentTheme["midColor"])],        
+                    "expand": [("selected", 0), ("active", 2)]                
                 }
             },
             "TButton": {
@@ -309,7 +319,7 @@ def LoadTheme(defaultFont, themeName):
     staticFont = Font(family="Arial", size=16)
     style.configure("BordlessBtn.TButton", relief = FLAT)
     style.configure("midColor.TCheckbutton", padding=(20, 10))
-    style.configure("centeredTabs.TNotebook", tabposition= "nw")
+    style.configure("centeredTabs.TNotebook", tabposition= "nw", borderwidth=0)
     style.configure("STATIC.TButton", font=staticFont)
     style.configure("BorderlessLabel.TLabel", background=currentTheme["darkColor"], foreground=UI_Colors.White)
     style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
@@ -317,6 +327,7 @@ def LoadTheme(defaultFont, themeName):
     style.configure("Tag.TLabel", background= currentTheme["midGray"], relief="flat", padding=(9,2), margin=(5,0))
     style.configure("DescriptionImage.TLabel", background= currentTheme["midColor"])
     style.configure("noMargin.TLabel", margin=(0,0), padding=(20,0))
+
     # Since Canvas and Roots arrent affected by normal styling
     for canvas in CanvasesForStyling:
         try:
