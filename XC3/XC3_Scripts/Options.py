@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XC3.XC3_Scripts import Shortcuts
+from XC3.XC3_Scripts import Shortcuts, Skills
 scripts.Interactables.Game = "XC3" 
 
 General = 1
@@ -19,6 +19,8 @@ Tabs = {
 }
 
 TestOption = Option("Empty", General, "Nothing to see yet!")
+
+SkillOptions = Option("Class Skills", Character, "Randomizes class skills", [lambda: Skills.SkillRando()])
 
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_Tutorials = SubOption("Tutorial Skip", ShortcutsOption, [lambda: Shortcuts.TutorialSkips()])
