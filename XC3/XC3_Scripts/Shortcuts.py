@@ -1,7 +1,7 @@
 import json, random
 from scripts import JSONParser, Helper, PopupDescriptions
 
-def TutorialSkips():
+def TutorialSkips(): # For some reason visually the game wont load the entire hud until aftyer the first boss in the intro but thats fine
     with open("XC3/JsonOutputs/prg/SYS_Tutorial.json", 'r+', encoding='utf-8') as tutFile:
         tutData = json.load(tutFile)
         for tut in tutData["rows"]:
