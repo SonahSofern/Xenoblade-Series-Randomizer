@@ -3,7 +3,6 @@ from scripts import UI_Colors
 from tkinter import font, ttk
 import random, subprocess, shutil, os, threading, traceback, time, sys, datetime
 import json
-# I need to figure out this dumb logic where Im repeating variables (for example staticfont) 
 from scripts import SavedOptions, PopupDescriptions
 
 
@@ -107,26 +106,10 @@ def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme, Game):
         GUIWindow.focus()
         GUIWindow.deiconify() # unminimizes
     
-def ToggleLightDarkMode(togButton, defaultFont, defaultTheme):
-    if togButton.cget("text") == "Dark Mode":
-        togButton.config(text="Light Mode")
-        defaultTheme.set("Light Mode")
-        LoadTheme(defaultFont, "Light Mode")
-    else:
-        togButton.config(text="Dark Mode")
-        defaultTheme.set("Dark Mode")
-        LoadTheme(defaultFont, "Dark Mode")
         
 def LoadTheme(defaultFont, themeName):
     style= ttk.Style()
     # Initial colors for the themes
-    lightThemeColors = {
-    "backgroundColor": UI_Colors.Red,
-    "darkColor": UI_Colors.LightGray,
-    "midColor": UI_Colors.White,
-    "midGray": UI_Colors.MiddleLightGray,
-    "lightColor": UI_Colors.LightBlack,
-    }
 
     darkThemeColors = {
     "backgroundColor": UI_Colors.DarkerPurple,
@@ -135,10 +118,7 @@ def LoadTheme(defaultFont, themeName):
     "midGray": UI_Colors.MediumGray,
     "lightColor": UI_Colors.White,
     }
-    if themeName == "Dark Mode":
-        currentTheme = darkThemeColors
-    else:
-        currentTheme = lightThemeColors
+    currentTheme = darkThemeColors
     try:
         style.theme_create(themeName, settings={
             "TNotebook": {

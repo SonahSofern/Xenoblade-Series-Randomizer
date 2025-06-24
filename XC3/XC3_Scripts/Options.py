@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XC3.XC3_Scripts import Shortcuts, Skills
+from XC3.XC3_Scripts import Shortcuts, Skills, Characters
 scripts.Interactables.Game = "XC3" 
 
 General = 1
@@ -18,7 +18,7 @@ Tabs = {
     Musica: '♪ Music',
 }
 
-TestOption = Option("Empty", General, "Nothing to see yet!")
+CharactersOption = Option("Characters", Character, "Randomizes heroes and the main party", [lambda: Characters.CharacterSwaps()])
 
 SkillOptions = Option("Class Skills", Character, "Randomizes class skills", [lambda: Skills.SkillRando()])
 
