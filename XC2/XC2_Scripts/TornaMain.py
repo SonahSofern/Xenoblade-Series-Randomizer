@@ -1162,6 +1162,16 @@ def DisableUnrequiredQuests(): # we want the npcs for non-required quests to not
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/_internal/JsonOutputs/common/RSC_NpcList.json", 'r+', encoding='utf-8') as file: # this removes the ability to get npcs to join your community if they're part of an unrequired sidequest
+        data = json.load(file)
+        for sq in AllUnrequiredSidequests:
+            for row in data["rows"]:
+                if row["$id"] in sq.npcids:
+                    row["HitonowaFlag"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    
 
 def AddTaskLogsforKeys(): # to help the player know what they need, we add a task log for the key items that we're requiring they have for various story events.
     CurQuestCollectRowID = Helper.GetMaxValue("./XC2/_internal/JsonOutputs/common/FLD_QuestCollect.json", "$id") + 1
