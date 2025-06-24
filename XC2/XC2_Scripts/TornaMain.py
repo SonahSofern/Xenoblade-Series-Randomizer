@@ -435,12 +435,16 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
         'gormottcollectionpoint': [x for x in SelFull if x not in SelUpgradeList + SelRecipeList],
     }
     for cat in CatList:
+        if cat.category == "shop":
+            OddsCheckNum = 75
+        else:
+            OddsCheckNum = 15
         ValidItems = ValidItemtoLoc[cat.category]
         if cat.category not in ["uniquemonster", "normalenemy", "boss", "questenemy"]:
             for remloc in cat.fullloclist:
                 for item in range(len(remloc.randomizeditems)):
                     if remloc.randomizeditems[item] in [0, -1]:
-                        if Helper.OddsCheck(15):
+                        if Helper.OddsCheck(OddsCheckNum):
                             ChosenValidItem = random.choice(ValidItems)
                             remloc.randomizeditems[item] = ChosenValidItem.id
                             if ChosenValidItem in SelUpgradeList:
@@ -454,7 +458,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
             for remloc in cat.fullloclist:
                 for item in range(8):
                     if remloc.randomizeditems[item] in [0, -1]:
-                        if Helper.OddsCheck(15):
+                        if Helper.OddsCheck(OddsCheckNum):
                             ChosenValidItem = random.choice(ValidItems)
                             remloc.randomizeditems[item] = ChosenValidItem.id
                             if ChosenValidItem in SelUpgradeList:
@@ -464,7 +468,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
                         else:
                             remloc.randomizeditems[item] = 0
                 if remloc.randomizeditems[8] in [0, -1]:
-                    if Helper.OddsCheck(35):
+                    if Helper.OddsCheck(OddsCheckNum * 2):
                         try:
                             ChosenValidItem = random.choice(SelUpgradeList)
                             remloc.randomizeditems[8] = ChosenValidItem.id
