@@ -19,33 +19,21 @@ https://xenobladedata.github.io/
 
 ### Requirements:
 [Python v3.11.0](https://www.python.org/downloads/release/python-3110/)\
-Legal Dump of Xenoblade 1 DE Switch v1.1.2\
 Homebrewed Switch or Emulator\
-[NXDumpTool](https://github.com/DarkMatterCore/nxdumptool)\
-[XenoLib](https://github.com/PredatorCZ/XenoLib/)
 
 ### Console Also Requires:
-microSD card (A 32GB minimum exFAT-formatted microSD card is recommended; FAT32 will split up your files and youll have to take an extra step to combine them.)\
+microSD card\
 Modded Nintendo Switch with Atmosphere
 
 ## Process:
 If you have any issues come to the [discord](https://discord.gg/h93yqZHG8z) where we can help!
 
-### Console
-1. Use [NXDumpTool](https://github.com/DarkMatterCore/nxdumptool) to perform a full dump of XCDE's RomFS to your microSD card, and put it into your computer.
-2. Inside the dump there should now be a folder named "bdat"; This is the folder that the randomizer program targets as the input folder. The output folder should be: This PC/Nintendo Switch/SD Card/atmosphere/contents/0100FF500E34A000 (This is on your microsd card)
-3. Choose your preferred settings, then use the randomizer program to randomize the contents of the game.
-4. Put your microSD card back into your Switch and Launch the game. Pressing L bypasses the active patches, so if you wish to play the vanilla game again, you can do so in this way.
-5. You should be ready to start playing!
+1. Download and launch the randomizer's exe.
+2. Set where you want to output the randomized files to.
+>![image](https://github.com/user-attachments/assets/bc26971c-f2a8-4410-aa1b-4b264c86fcc1)
+FOR YUZU: C:/Users/yourName/AppData/Roaming/yuzu/load/0100FF500E34A000/Randomizer\
+FOR RYUJINX: C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/contents/0100FF500E34A000\
+FOR CONSOLE: This PC/Nintendo Switch/SD Card/atmosphere/contents/0100FF500E34A000 (This is on your microsd card)
 
-### Emulator
-1. Use your emulator's built-in tool to perform a full dump of XCDE's RomFS.
-2. Inside the dump there should now be a folder named "bdat"; This is the folder that the randomizer program targets as the input folder. The output folder should be:  
->FOR YUZU:\
-C:/Users/yourName/AppData/Roaming/yuzu/load/0100FF500E34A000/Randomizer\
-
->FOR RYUJINX:\
-C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/contents/0100FF500E34A000\
-
-4. Choose your preferred settings, then use the randomizer program (.exe) to randomize the contents of the game.
-5. You should be ready to start playing!
+3. Choose your preferred game and settings, then click the randomize button to randomize the contents of the chosen game.
+4. You should be ready to start playing!
