@@ -23,19 +23,13 @@ https://gitlab.com/damysteryman/XC2SaveNETThingy/-/tags/r6.1
 
 ### Requirements:
 [Python v3.11.0](https://www.python.org/downloads/release/python-3110/)\
-Legal Dump of Xenoblade 2 Switch v2.1.0 + Torna\
 Homebrewed Switch or Emulator\
-[NXDumpTool](https://github.com/DarkMatterCore/nxdumptool)\
-[XenoLib](https://github.com/PredatorCZ/XenoLib/)
 
 ### Console Also Requires:
-microSD card (A 32GB minimum exFAT-formatted microSD card is recommended; FAT32 will split up your files and youll have to take an extra step to combine them.)\
 Modded Nintendo Switch with Atmosphere
-
 
 ### Process:
 If you have any issues come to the [discord](https://discord.gg/h93yqZHG8z) where we can help!
-
 
 1. Download and launch the randomizer's exe.
 2. Set where you want to output the randomized files to.
