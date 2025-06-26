@@ -358,7 +358,7 @@ def ResizeWindow(top, innerFrame, padx = 37):
     
 def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
     def ThreadedRandomize():
-        entrySpot = fileEntryVar.get().strip()
+        entrySpot = fileEntryVar
         outSpot = f"{outputDirVar.get().strip()}/romfs/bdat"
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)

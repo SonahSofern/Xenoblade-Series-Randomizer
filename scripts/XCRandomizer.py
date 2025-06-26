@@ -83,7 +83,7 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     import tkinter as tk
     seedEntryVar = StringVar()
     permalinkVar = StringVar()
-    fileEntryVar = StringVar()
+    fileEntryVar = f"{Game}/bdat"
     windowPadding = 50
     global isOneFile
     SavedOptionsFileName = f"LastSave.txt"
@@ -151,11 +151,7 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
 
     bottomFrame = ttk.Frame(background, style="NoBackground.TFrame", padding=(0,0))
     bottomFrame.pack(anchor="w", padx=windowPadding, fill=X)
-    
-    bdatButton = ttk.Button(bottomFrame, width=17, text="Choose Input Folder", command= lambda: Helper.DirectoryChoice("Choose your folder containing common.bdat, common_ms.bdat and common_gmk.bdat", bdatFilePathEntry))
-    bdatButton.pack(side="left", pady=0)
-    bdatFilePathEntry = ttk.Entry(bottomFrame, textvariable=fileEntryVar)
-    bdatFilePathEntry.pack(side="left", expand=True, fill=X, pady=0)
+
     
     OutputDirectoryFrame = ttk.Frame(background, style="NoBackground.TFrame", padding=(0,0))
     OutputDirectoryFrame.pack(anchor="w", padx=windowPadding, fill=X)
@@ -176,7 +172,6 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     GenRandomSeed(seedEntryVar) # Gen a random seed if you have no save data 
     randoSeedEntry = ttk.Entry(SeedFrame, textvariable=seedEntryVar)
     
-    fileEnt = SavedOptions.SavedEntry("Input Bdats",fileEntryVar)
     fileOut = SavedOptions.SavedEntry("Output Bdats", outputDirVar)
     permLink = SavedOptions.SavedEntry("Permalink", permalinkVar)
     seedVar = SavedOptions.SavedEntry("Seed", seedEntryVar)
@@ -184,7 +179,7 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     seedDesc.pack(side='left')
     randoSeedEntry.pack(side='left', fill=X, expand=True)
     # Save and Load Last Options
-    EntriesToSave = ([fileEnt, fileOut, permLink, seedVar])
+    EntriesToSave = ([fileOut, permLink, seedVar])
     SavedOptions.loadData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game)
     EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.XenoOptionDict[Game])) + list((x.spinBoxVal for x in Interactables.XenoOptionDict[Game] if x.hasSpinBox)) + list((sub.checkBoxVal for x in Interactables.XenoOptionDict[Game] for sub in x.subOptions)) + list((sub.spinBoxVal for x in Interactables.XenoOptionDict[Game] for sub in x.subOptions if sub.hasSpinBox))
 
@@ -206,7 +201,7 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     randoProgressDisplay.pack(pady=0, side=LEFT)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(XCFrame, RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles)))
+    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(XCFrame, RandomizeButton, fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles)))
     RandomizeButton.pack(pady=(5,windowPadding),side="left", padx=(windowPadding, 0), anchor=CENTER)
     
     # Options Cog

@@ -11,8 +11,8 @@ def CharacterSwaps(): # For some reason visually the game wont load the entire h
         for char in charData["rows"]:
             if char["$id"] in [1,2,3,4,5,6]:
                 continue
-            for i in range(0,len(Chars)):
-                pass
+        for i in range(0,len(Chars)):
+            pass
         JSONParser.CloseFile(charData, charFile)
 
         

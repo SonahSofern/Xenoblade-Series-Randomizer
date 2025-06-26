@@ -25,4 +25,13 @@ SkillOptions = Option("Class Skills", Character, "Randomizes class skills", [lam
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_Tutorials = SubOption("Tutorial Skip", ShortcutsOption, [lambda: Shortcuts.TutorialSkips()])
 
+# Gems
+# Enemies
+# Movespeed QOL
+# All Item Randos (Enemy Drops, Containers, Quest Drops, Shops, Supply Drops, Collectables, Ether Cylinders?)
+# Class (unlock, skills)
+# Arts
+# Costumes
+
+
 #Roguelike enemy files https://xenobladedata.github.io/xb3_200_dlc4/BTL_ChSU_EnemyTable.html
