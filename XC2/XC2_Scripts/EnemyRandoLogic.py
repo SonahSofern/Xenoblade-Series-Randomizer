@@ -903,6 +903,30 @@ def BalanceEnemyGroups(DefaultEnemyIDs, RandomizedEnemyIDs):
         else: # No more violations, bail
             break
 
+def GetEnemyZoneIDs(): # fixes the issue where the objective marker points to a different map.
+    OriginalEnemyIDtoZone = {}
+    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            OriginalEnemyIDtoZone[row["$id"]] = row["ZoneID"]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    return OriginalEnemyIDtoZone
+
+def FixZoneIDs(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs, EnemyZoneIDs): # fixes the zone id issue
+    NewEnemyIDtoOldEnemyID = {}
+    for enemy in range(len(TotalDefaultEnemyIDs)):
+        NewEnemyIDtoOldEnemyID[TotalRandomizedEnemyIDs[enemy]] = TotalDefaultEnemyIDs[enemy]
+    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in TotalDefaultEnemyIDs:
+                row["ZoneID"] = EnemyZoneIDs[NewEnemyIDtoOldEnemyID[row["$id"]]]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
 def EnemyLogic():
     if Options.UMHuntOption.GetState():
         raise Exception(f"UM Hunt already randomizes the enemies. Disable {Options.EnemiesOption.name} to fix this error.")
@@ -931,6 +955,7 @@ def EnemyLogic():
         CheckboxList = ["Story Bosses", "Quest Enemies", "Unique Monsters", "Superbosses", "Normal Enemies", "Mix Enemies Between Types", "Use All Original Encounter Levels"]
         CheckboxStates = [StoryBossesBox, QuestEnemyBox, UniqueMonstersBox, SuperbossesBox, NormalEnemiesBox, MixEnemiesBetweenTypesBox, KeepAllEnemyLevelsBox]
     if EnemyRandoOn == True:
+        EnemyZoneIDs = GetEnemyZoneIDs()
         print("Randomizing Enemies")
         TotalDefaultEnemyIDs = []
         TotalRandomizedEnemyIDs = []
@@ -1016,6 +1041,7 @@ def EnemyLogic():
         FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
         SwimmingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
         Helper.SubColumnAdjust("./XC2/JsonOutputs/common/CHR_EnParam.json", "Flag", "FldDmgType", 0)
+        FixZoneIDs(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs, EnemyZoneIDs)
         TornaWave1FightChanges()
         #DebugEnemyAggro(NewBossIDs, NewQuestIDs, OtherEnemyIDs)
 
