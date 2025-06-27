@@ -21,30 +21,6 @@ class ForcedArt:
 enAreaFiles = areaFileListNumbers.copy()
 enAreaFiles.remove("5001")
 
-# Finds locked enemies
-# enemiesInLock = []
-# for file in enAreaFiles:
-#     try:
-#         with open(f"./XCDE/JsonOutputs/bdat_ma{file}/FieldLock{file}.json", 'r+', encoding='utf-8') as eneLockFile:
-#             with open(f"./XCDE/JsonOutputs/bdat_ma{file}/poplist{file}.json", 'r+', encoding='utf-8') as enePopFile:
-#                 enePopData = json.load(enePopFile)
-#                 eneLockData = json.load(eneLockFile)
-#                 locks = []
-#                 for lock in eneLockData["rows"]:
-#                     for i in range(1,4):
-#                         if lock[f"popID{i}"] != 0:  
-#                             locks.append(lock[f"popID{i}"])
-#                 for pop in enePopData["rows"]:
-#                     if pop["$id"] in locks:
-#                         for j in range(1,6):
-#                             if pop[f"ene{j}ID"] != 0:
-#                                 enemiesInLock.append(pop[f"ene{j}ID"])
-#     except:
-#         pass
-# print(enemiesInLock)
-                            
-
-
 def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     MetalFace = ForcedArt(61, 2, 565)
     MysteriousFace = ForcedArt(268,5,611)
@@ -366,6 +342,7 @@ def EnemyDesc(categoryName):
     myDesc.Tag("Enemy stats do not scale with level in this game, so instead it takes the original enemies stat total and distributes it in the replacement enemies stat ratios.\nSo, if an enemy has a high attack stat compared to their other stats, they will still have a high attack stat but balanced with the replacement enemies' stats", pady=(5,5))
     myDesc.Tag("Mechon Enemies have their resistances removed for forced fights before you can damage mechon, toppling is not guaranteed with art randomization so this fix is needed.", pady=(5,5))
     myDesc.Tag("Telethia enemies Soul Reads are disabled for boss fights before monado purge is unlocked.", pady=(5,5))
+    myDesc.Tag("The Egil fight in Mechonis core is a special case, the enemy will still look like egil but the attacks/stats and everything else will be a random enemy. The mechonis is tied to egils actions there and can easily break without him there.", pady=(5,5))
     myDesc.Tag("Enemy spikes are tuned for their new level", pady=(5,5))
     myDesc.Tag(f"Instant Death Spikes are removed for fights below level {instantDeathSpikeThreshold}", pady=(5,5))
     myDesc.Tag("A few boss fights require certain arts to be used to end. Mysterious Face in spiral valley for example.\nIn this case the enemy that replaces Mysterious Face will have that art added to their list in the slot it requires. (Only affects 4 fights in the game)", pady=(5,5))
@@ -400,3 +377,25 @@ def EnemyDesc(categoryName):
                             #                     if file == "0301" and enemy["$id"] in [261]: # Game doenst like the pods being replaced here
                             # continue # 233 leg lizard [227,241, 233] try 264 this range crashes (260,265)
                         
+
+# Finds locked enemies
+# enemiesInLock = []
+# for file in enAreaFiles:
+#     try:
+#         with open(f"./XCDE/JsonOutputs/bdat_ma{file}/FieldLock{file}.json", 'r+', encoding='utf-8') as eneLockFile:
+#             with open(f"./XCDE/JsonOutputs/bdat_ma{file}/poplist{file}.json", 'r+', encoding='utf-8') as enePopFile:
+#                 enePopData = json.load(enePopFile)
+#                 eneLockData = json.load(eneLockFile)
+#                 locks = []
+#                 for lock in eneLockData["rows"]:
+#                     for i in range(1,4):
+#                         if lock[f"popID{i}"] != 0:  
+#                             locks.append(lock[f"popID{i}"])
+#                 for pop in enePopData["rows"]:
+#                     if pop["$id"] in locks:
+#                         for j in range(1,6):
+#                             if pop[f"ene{j}ID"] != 0:
+#                                 enemiesInLock.append(pop[f"ene{j}ID"])
+#     except:
+#         pass
+# print(enemiesInLock)

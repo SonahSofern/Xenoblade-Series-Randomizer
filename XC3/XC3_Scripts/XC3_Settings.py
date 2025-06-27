@@ -1,4 +1,4 @@
-import scripts.JSONParser
+import scripts.JSONParser, scripts.XCRandomizer
 from XC3.XC3_Scripts import SeedNames, Options
 Version = "BETA"
 
@@ -7,6 +7,8 @@ backgrounds = ["col9.jpg"]
 
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["menu/msg_mnu_title.json"],[11], ["name"], f"Randomizer v{Version}", Game="XC3") # Change Title Version to Randomizer vX.x.x
+seedEntryVar = scripts.XCRandomizer.StringVar()
+permalinkVar = scripts.XCRandomizer.StringVar()
 
 extraArgs= ["--hashes", "Toolset/xbc3Hashes.txt"]
 extraCommands = [lambda: ShowTitleScreenText()]
