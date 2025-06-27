@@ -5,10 +5,7 @@ from tkinter import ttk
 from tkinter.font import Font
 root = Tk()
 from scripts import GUISettings, XCRandomizer
-import XCDE.XCDE_Scripts.XCDE_Settings as XCDE
-import XC2.XC2_Scripts.XC2_Settings as XC2
-import XC3.XC3_Scripts.XC3_Settings as XC3
-import XCXDE.XCXDE_Scripts.XCXDE_Settings as XCXDE
+
 
 GUISettings.RootsForStyling.append(root)
 
@@ -33,6 +30,10 @@ else:
 icon = PhotoImage(file=icon_path)
 root.iconphoto(True, icon)
 
+import XCDE.XCDE_Scripts.XCDE_Settings as XCDE
+import XC2.XC2_Scripts.XC2_Settings as XC2
+import XC3.XC3_Scripts.XC3_Settings as XC3
+import XCXDE.XCXDE_Scripts.XCXDE_Settings as XCXDE
 XCRandomizer.CreateMainWindow(root, MainWindow, "XCDE", XCDE.Version, "Xenoblade Chronicles DE Randomizer", XCDE.Options.Tabs, XCDE.extraCommands, XCDE.mainFolderNames, XCDE.subFolderNames, XCDE.SeedNames.Nouns, XCDE.SeedNames.Verbs, backgroundImages=XCDE.backgrounds, extraFiles=[XCDE.TitlescreenSplash])
 XCRandomizer.CreateMainWindow(root, MainWindow, "XC2", XC2.Version, "Xenoblade Chronicles 2 Randomizer", XC2.Options.Tabs, XC2.extraCommands, XC2.mainFolderNames, XC2.subFolderNames, XC2.SeedNames.Nouns, XC2.SeedNames.Verbs, backgroundImages=XC2.backgrounds, extraFiles=[XC2.TitlescreenSplash])
 XCRandomizer.CreateMainWindow(root, MainWindow, "XC3", XC3.Version, "Xenoblade Chronicles 3 Randomizer", XC3.Options.Tabs, XC3.extraCommands, XC3.mainFolderNames, XC3.subFolderNames, XC3.SeedNames.Nouns, XC3.SeedNames.Verbs, XC3.textFolderName,extraArgs=XC3.extraArgs, backgroundImages=XC3.backgrounds)

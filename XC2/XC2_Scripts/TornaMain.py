@@ -92,9 +92,8 @@ QuestGiverNPCIDtoQuestNumber = {40017: 32, 40023: 33, 40039: 2, 40047: 40, 41010
 
 SidequestNPCNumbertoTextIDRow = {73: 1108, 64: 1109, 67: 1110, 59: 1112, 69: 1133, 72: 1138, 60: 1148, 66: 1177, 65: 1210, 68: 1211, 71: 1212, 62: 1214, 61: 1215, 63: 1218, 70: 1216, 74: 1225}
 
-def PassAlongSpoilerLogInfo(fileEntryVar2, Version2, permalinkVar2, seedEntryVar2):
-    global fileEntryVar, Version, permalinkVar, seedEntryVar
-    fileEntryVar = fileEntryVar2
+def PassAlongSpoilerLogInfo(Version2, permalinkVar2, seedEntryVar2):
+    global Version, permalinkVar, seedEntryVar
     Version = Version2
     permalinkVar = permalinkVar2
     seedEntryVar = seedEntryVar2

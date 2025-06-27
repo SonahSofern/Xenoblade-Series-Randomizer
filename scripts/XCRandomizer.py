@@ -83,9 +83,12 @@ def CreateMainWindow(root, window, Game, Version, Title, TabDict = {}, Extracomm
     import tkinter as tk
     seedEntryVar = StringVar()
     permalinkVar = StringVar()
-    fileEntryVar = f"{Game}/bdat"
     windowPadding = 50
     global isOneFile
+    if isOneFile:
+        fileEntryVar = os.path.join(sys._MEIPASS, Game, 'bdat')
+    else:
+        fileEntryVar = f"{Game}/bdat"
     SavedOptionsFileName = f"LastSave.txt"
     JsonOutput = f"./{Game}/JsonOutputs"
     SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt", f"{Game}/GUI")
