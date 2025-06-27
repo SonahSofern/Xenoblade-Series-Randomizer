@@ -4,7 +4,7 @@ from scripts import PackedBits
 import base64
 import struct
 import scripts.SavedOptions
-# most of this is from github.com/LagoLunatic/wwrando
+# credit to github.com/LagoLunatic/wwrando
 
 def SanitizeUserSeed(SeedName):
     SeedName = str(SeedName)
@@ -81,7 +81,7 @@ def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version, buttonS
             permaLinkVar.set(compressedPermalink)
         
     permaLinkVar.trace_add("write", lambda i,x,o: PermalinkFromEntry())
-    for interactAble in traceObjects[3:]:
+    for interactAble in traceObjects[2:]:
         try:
             interactAble.trace_add("write", lambda i,x,o: PermalinkEntryUpdate())
         except:
