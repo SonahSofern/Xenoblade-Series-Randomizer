@@ -1525,7 +1525,7 @@ def CreateSpoilerLog(Version, permalinkVar, seedEntryVar):
     DesiredSpoilerLogDirectory = "XC2/Torna_Spoiler_Logs"
     if not os.path.exists(DesiredSpoilerLogDirectory):
         os.makedirs(DesiredSpoilerLogDirectory)
-    DesiredSpoilerLogLocation = os.path.dirname(f"Torna_Spoiler_Logs/{seedEntryVar.get()}.txt")
+    DesiredSpoilerLogLocation = f"{DesiredSpoilerLogDirectory}/{seedEntryVar.get()}.txt"
     if not os.path.exists(DesiredSpoilerLogLocation):
         with open(DesiredSpoilerLogLocation, "w", encoding= "utf-8") as debugfile:
             pass
