@@ -1,9 +1,7 @@
 from scripts import Helper, JSONParser, PopupDescriptions
-import json
-import random
-import time
-from IDs import *
-import Options
+import json, random, time
+from XC2.XC2_Scripts.IDs import *
+from XC2.XC2_Scripts import Options
 
 QuestIDtoNPCIDDict = {
     49: [3385, 3384, 3423],
