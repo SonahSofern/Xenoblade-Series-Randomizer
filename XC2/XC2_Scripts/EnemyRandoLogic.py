@@ -304,7 +304,7 @@ def FightBalancing(filenames, TargetIDs, LevelChange): #Changes the level scalin
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)                            
 
-def BigEnemyCollisionFix(): # Fixes ophion/other large enemies going outside the spawn circle and flying out of range in a boss fight
+def BigEnemyCollisionFix(): # Fixes ophion/other large enemies going outside the spawn circle and flying out of range in a boss fight. no longer used
     with open("./XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as file: 
         BigEnemies = [64,65,70,154,245,249,252]
         data = json.load(file)
@@ -773,6 +773,61 @@ def GerolfSovereignFix(): # Gerolf Sovereign gets summoned by Mk VI. Sovereign, 
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+def AllyRefightHPMatch(): # when you refight allies, some of the enemies can have insane stats that are really hard to deal with. so we take the hp modifiers that the allies have, and slap them on the replacement enemies.
+    AllyHPParams = [500,600,400,350]
+    ReplacementEnemyList = []
+    with open("./XC2/JsonOutputs/common_gmk/ma21a_FLD_EnemyPop.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in [21001, 21002, 21003, 21004]: # this still preserves order fine, since they show up in the same order here as they do in CHR_EnArrange
+                ReplacementEnemyList.append(row["ene1ID"])
+            else:
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    ReplacementEnemyParamIDs = []
+    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for enemy in ReplacementEnemyList:
+            for row in data["rows"]:
+                if row["$id"] == enemy:
+                    ReplacementEnemyParamIDs.append(row["ParamID"])
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    NewEnParamRow = Helper.GetMaxValue("./XC2/JsonOutputs/common/CHR_EnParam.json", "$id") + 1
+    StartingEnParamRow = NewEnParamRow
+    NewParamRows = []
+    with open("./XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for enemyparam in ReplacementEnemyParamIDs:
+            for row in data["rows"]:
+                if row["$id"] == enemyparam:
+                    NewParamRows.append(row)
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    for row in range(len(NewParamRows)):
+        NewParamRows[row]["$id"] = NewEnParamRow
+        NewParamRows[row]["HpMaxRev"] = AllyHPParams[row]
+        NewEnParamRow += 1
+    JSONParser.ExtendJSONFile("common/CHR_EnParam.json", [NewParamRows])
+    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for enemy in ReplacementEnemyList:
+            for row in data["rows"]:
+                if row["$id"] == enemy:
+                    row["ParamID"] = StartingEnParamRow
+                    StartingEnParamRow += 1
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+
 def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/fights
     ReducePCHPBattle1()
     SummonsLevelAdjustment()
@@ -784,6 +839,7 @@ def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/f
     EarthBreathNerf()
     PadraigFightFix()
     GerolfSovereignFix()
+    AllyRefightHPMatch()
 
 # returns list of all indices which did not satisfy the count conditions
 def getMaxCountViolations(DefaultEnemyIDs, RandomizedEnemyIDs):
@@ -847,6 +903,30 @@ def BalanceEnemyGroups(DefaultEnemyIDs, RandomizedEnemyIDs):
         else: # No more violations, bail
             break
 
+def GetEnemyZoneIDs(): # fixes the issue where the objective marker points to a different map.
+    OriginalEnemyIDtoZone = {}
+    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            OriginalEnemyIDtoZone[row["$id"]] = row["ZoneID"]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    return OriginalEnemyIDtoZone
+
+def FixZoneIDs(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs, EnemyZoneIDs): # fixes the zone id issue
+    NewEnemyIDtoOldEnemyID = {}
+    for enemy in range(len(TotalDefaultEnemyIDs)):
+        NewEnemyIDtoOldEnemyID[TotalRandomizedEnemyIDs[enemy]] = TotalDefaultEnemyIDs[enemy]
+    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in TotalDefaultEnemyIDs:
+                row["ZoneID"] = EnemyZoneIDs[NewEnemyIDtoOldEnemyID[row["$id"]]]
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
 def EnemyLogic():
     if Options.UMHuntOption.GetState():
         raise Exception(f"UM Hunt already randomizes the enemies. Disable {Options.EnemiesOption.name} to fix this error.")
@@ -875,6 +955,7 @@ def EnemyLogic():
         CheckboxList = ["Story Bosses", "Quest Enemies", "Unique Monsters", "Superbosses", "Normal Enemies", "Mix Enemies Between Types", "Use All Original Encounter Levels"]
         CheckboxStates = [StoryBossesBox, QuestEnemyBox, UniqueMonstersBox, SuperbossesBox, NormalEnemiesBox, MixEnemiesBetweenTypesBox, KeepAllEnemyLevelsBox]
     if EnemyRandoOn == True:
+        EnemyZoneIDs = GetEnemyZoneIDs()
         print("Randomizing Enemies")
         TotalDefaultEnemyIDs = []
         TotalRandomizedEnemyIDs = []
@@ -960,6 +1041,7 @@ def EnemyLogic():
         FlyingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
         SwimmingEnemyFix(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs)
         Helper.SubColumnAdjust("./XC2/JsonOutputs/common/CHR_EnParam.json", "Flag", "FldDmgType", 0)
+        FixZoneIDs(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs, EnemyZoneIDs)
         TornaWave1FightChanges()
         #DebugEnemyAggro(NewBossIDs, NewQuestIDs, OtherEnemyIDs)
 

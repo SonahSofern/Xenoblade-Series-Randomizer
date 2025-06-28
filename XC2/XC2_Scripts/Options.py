@@ -167,7 +167,7 @@ EnemyAggroOption = Option("Enemy Aggro", Enemies, "The percentage of all non-bos
 
 # Misc
 MusicOption = Option("Music", Misce, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
-MusicOption_MixBattleAndEnv = SubOption("Mix Battle and Environment Themes", MusicOption, _defState = False)
+MusicOption_MixBattleAndEnv = SubOption("Mix Battle/Environment Themes", MusicOption, _defState = False)
 CustomCoreCrystalOption = Option("Custom Core Crystals", Items, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], _prio = 52, hasSpinBox = True, _spinDesc = "% of Chests", descData= lambda: CoreCrystalAdjustments.Description())
 # DifficultyOption = Option("Difficulty", Misce, "Forces this difficulty, regardless of what is chosen in the options menu")
 # DifficultyOption_Easy = SubOption("Easy", DifficultyOption)

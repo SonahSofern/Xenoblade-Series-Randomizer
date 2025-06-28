@@ -3,9 +3,12 @@ from XC2.XC2_Scripts.Enhancements import *
 
 
 def RandomizeAuxCoreEnhancements():
+
     InvalidSkillEnhancements = [ForcedHPPotionOnHit,ArtCancel,HpPotChanceFor2, EyeOfJustice, XStartBattle, YStartBattle, BStartBattle, EvadeDrainHp, EvadeDriverArt,ArtDamageHeal, BladeSwitchDamageUp]
 
     ValidSkills = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
+
+    NewAuxCoreNameRow = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/itm_orb.json", "$id") + 1
 
     with open("./XC2/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as AuxCoreFile:
         with open("./XC2/JsonOutputs/common_ms/itm_orb.json", 'r+', encoding='utf-8') as auxNamesFile:
@@ -14,9 +17,8 @@ def RandomizeAuxCoreEnhancements():
                 enhanceData = json.load(AuxCoreFile)
                 auxNameData = json.load(auxNamesFile)
                 
-
-                
-                for aux in poppiAuxData["rows"]: # Must do poppis first because of overlap name ids then I update them later down below
+                for aux in poppiAuxData["rows"]:
+                    aux["Name"] = NewAuxCoreNameRow
                     enhancement:Enhancement = random.choice(ValidSkills)
                     enhancement.RollEnhancement()
                     skillNameID = aux["Name"]
@@ -25,29 +27,25 @@ def RandomizeAuxCoreEnhancements():
                     if cat > 255: # not great temp solution cant set category above 255 but you cant equip things of the same category at once
                         cat -= random.randrange(14,256)
                     aux["EnhanceCategory"] = cat
-                    for skillName in auxNameData["rows"]:  
-                        if skillName["$id"] == skillNameID:    
-                            skillName["name"] = f"{enhancement.name} Core"
-                            break
-                    
+                    # make new itm_orb row at end 
+                    auxNameData["rows"].append({"$id": NewAuxCoreNameRow, "style": 36, "name": f"{enhancement.name} Core"})
+                    NewAuxCoreNameRow += 1
                 
                 for Aux in enhanceData["rows"]:
                     skillNameID = Aux["Name"]
                     enhancement:Enhancement = random.choice(ValidSkills)
                     enhancement.RollEnhancement()
                     # ValidSkills.remove(enhancement) # Need full pool to remove 
-
-
                 
                     for skillName in auxNameData["rows"]:  
                         if skillName["$id"] == skillNameID:    
                             skillName["name"] = f"{enhancement.name} Core"
                             break
                         
-                    for poppiAux in poppiAuxData["rows"]: # Since poppi uses the same names and I cant add more, poppis must match the effects of the rolled name
-                        if poppiAux["Name"] == skillNameID:
-                            poppiAux["Enhance"] = enhancement.id
-                            break
+                    #for poppiAux in poppiAuxData["rows"]: # Since poppi uses the same names and I cant add more, poppis must match the effects of the rolled name
+                    #    if poppiAux["Name"] == skillNameID:
+                    #        poppiAux["Enhance"] = enhancement.id
+                    #        break
                                             
                     Aux["Enhance"] = enhancement.id
                     Aux["Rarity"] = enhancement.Rarity
@@ -55,7 +53,6 @@ def RandomizeAuxCoreEnhancements():
                     if cat > 255: # not great temp solution cant set category above 255 but you cant equip things of the same category at once
                         cat -= random.randrange(14,256)
                     aux["EnhanceCategory"] = cat
-
                     
                 poppiAuxEnhancementsFile.seek(0)
                 poppiAuxEnhancementsFile.truncate()
