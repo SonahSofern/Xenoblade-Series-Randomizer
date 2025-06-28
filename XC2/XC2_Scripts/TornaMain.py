@@ -92,13 +92,9 @@ QuestGiverNPCIDtoQuestNumber = {40017: 32, 40023: 33, 40039: 2, 40047: 40, 41010
 
 SidequestNPCNumbertoTextIDRow = {73: 1108, 64: 1109, 67: 1110, 59: 1112, 69: 1133, 72: 1138, 60: 1148, 66: 1177, 65: 1210, 68: 1211, 71: 1212, 62: 1214, 61: 1215, 63: 1218, 70: 1216, 74: 1225}
 
-def PassAlongSpoilerLogInfo(Version2, permalinkVar2, seedEntryVar2):
-    global Version, permalinkVar, seedEntryVar
-    Version = Version2
-    permalinkVar = permalinkVar2
-    seedEntryVar = seedEntryVar2
+def PassAlongSpoilerLogInfo(Version, permalinkVar, seedEntryVar):
     if Options.TornaCreateSpoilerLog.GetState():
-        CreateSpoilerLog()
+        CreateSpoilerLog(Version, permalinkVar, seedEntryVar)
 
 def AllTornaRando():
     CheckforIncompatibleSettings()
@@ -598,7 +594,7 @@ def PutItemsInSpots(Locs2): # now we actually feed the items into their correspo
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     
-    for file in ["./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_EnemyPop.json", "./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_EnemyPop.json"]:
+    for file in ["XC2/JsonOutputs/common_gmk/ma40a_FLD_EnemyPop.json", "./XC2/JsonOutputs/common_gmk/ma41a_FLD_EnemyPop.json"]:
         Helper.ColumnAdjust(file, ["POP_TIME"], 256)
         Helper.ColumnAdjust(file, "popWeather", 255)
 
@@ -1111,7 +1107,7 @@ def CharacterUnlocks(): # sets up the character unlock keys
 def DisableUnrequiredQuests(): # we want the npcs for non-required quests to not have any quest giving ability
     global AllUnrequiredSidequests
     AllUnrequiredSidequests = [sq for sq in Sidequests if sq not in AllRequiredSidequests]
-    for filename in ["./XC2/_internal/JsonOutputs/common_gmk/ma40a_FLD_NpcPop.json", "./XC2/_internal/JsonOutputs/common_gmk/ma41a_FLD_NpcPop.json"]:
+    for filename in ["./XC2/JsonOutputs/common_gmk/ma40a_FLD_NpcPop.json", "./XC2/JsonOutputs/common_gmk/ma41a_FLD_NpcPop.json"]:
         with open(filename, 'r+', encoding='utf-8') as file:
             data = json.load(file)
             for sq in AllUnrequiredSidequests:
@@ -1378,7 +1374,7 @@ def GildedCheckNames():
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
     if RequiredNPCs != []:
-        with open("./XC2/_internal/JsonOutputs/common_ms/fld_npcname.json", 'r+', encoding='utf-8') as file: 
+        with open("./XC2/JsonOutputs/common_ms/fld_npcname.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
             for npc in RequiredNPCs:
                 for row in data["rows"]:
@@ -1514,7 +1510,7 @@ def AddNewFlagPointers(GateCommReq, GateNumber): # if we reduce the required com
         JSONParser.ChangeJSONLine(["common/FLD_ConditionList.json"], [2919], ["Condition1"], NewCondFlagRowID)
         JSONParser.ExtendJSONFile("common/FLD_ConditionFlag.json", [[{"$id": NewCondFlagRowID, "FlagType": 4, "FlagID": 652, "FlagMin": GateCommReq, "FlagMax": 6}]])
 
-def CreateSpoilerLog():
+def CreateSpoilerLog(Version, permalinkVar, seedEntryVar):
     IDstoAdd = []
     try: 
         if HintedItemText != []:
@@ -1526,10 +1522,10 @@ def CreateSpoilerLog():
             pass
     except:
         HintedLocText = []
-    DesiredSpoilerLogDirectory = os.path.dirname(fileEntryVar.get()) + "/Torna_Spoiler_Logs"
+    DesiredSpoilerLogDirectory = "XC2/Torna_Spoiler_Logs"
     if not os.path.exists(DesiredSpoilerLogDirectory):
         os.makedirs(DesiredSpoilerLogDirectory)
-    DesiredSpoilerLogLocation = os.path.dirname(fileEntryVar.get()) + f"/Torna_Spoiler_Logs/{seedEntryVar.get()}.txt"
+    DesiredSpoilerLogLocation = os.path.dirname(f"Torna_Spoiler_Logs/{seedEntryVar.get()}.txt")
     if not os.path.exists(DesiredSpoilerLogLocation):
         with open(DesiredSpoilerLogLocation, "w", encoding= "utf-8") as debugfile:
             pass
