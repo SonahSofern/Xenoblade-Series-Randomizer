@@ -2,17 +2,93 @@ from scripts import Helper, JSONParser, PopupDescriptions
 import json
 import random
 import time
-from XC2.XC2_Scripts.IDs import *
-from scripts import Helper
+from IDs import *
+import Options
+
+QuestIDtoNPCIDDict = {
+    49: [3385, 3384, 3423],
+    66: [3415],
+    51: [3661, 3396],
+    48: [3399, 3378],
+    11: [3440],
+    60: [3651],
+    54: [3414],
+    41: [3393, 3391],
+    26: [3434],
+    46: [3374, 3372],
+    31: [3373],
+    40: [3390],
+    45: [3383, 3382],
+    65: [3405],
+    62: [3444],
+    35: [3367, 3366],
+    7: [3427],
+    61: [3635],
+    13: [3422],
+    74: [3632],
+    53: [3368, 3386],
+    57: [3371, 3411],
+    71: [3658],
+    29: [3381],
+    56: [3410, 3395],
+    39: [3531, 3438],
+    12: [3441],
+    23: [3412, 3420, 3421],
+    3: [3435],
+    33: [3370, 3369],
+    15: [3425, 3424],
+    24: [3419, 3417],
+    2: [3432],
+    19: [3698, 3697],
+    67: [3633],
+    36: [3398],
+    43: [3389, 3388, 3418],
+    5: [3436, 3402],
+    38: [3437, 3439],
+    37: [3380],
+    59: [3400],
+    52: [3407, 3394],
+    73: [3377],
+    58: [3659, 3660],
+    68: [3631],
+    55: [3403, 3431],
+    47: [3397],
+    32: [3365],
+    21: [3413],
+    63: [3634],
+    42: [3387],
+    34: [3408],
+    28: [3430],
+    72: [3379],
+    6: [3428],
+    50: [3409],
+    69: [3376],
+    44: [3406],
+    20: [3416],
+    70: [3657],
+    64: [3375],
+    16: [3426],
+}
 
 class TornaSideQuest: # created to allow me to pass these objects easier
-    def __init__(self, input, addtolist, rewardnumber):
+    def __init__(self, input, addtolist, rewardnumber, RecipeList):
         self.id = input["Quest Number"]
         self.name = input["Quest Name"]
         self.mainreq = input["Main Story Req"]
         self.sideprereq = input["Sidequest Pre-Req"]
-        if self.id == 20:
-            pass
+        self.reqrecipenames = []
+        self.reqsoloitems = []
+        for itmlist in input["Item Requirements"]:
+            if isinstance(itmlist, list) and itmlist[0] >= 30000 and len(itmlist) > 1:
+                for recipe in RecipeList:
+                    if set(recipe.components) == set([item for item in itmlist if item >= 30000]):
+                        self.reqrecipenames.append(recipe.shopchangenametext)
+                        break
+            else:
+                if isinstance(itmlist, int):
+                    self.reqsoloitems.append(itmlist)
+                elif isinstance(itmlist, list):
+                    self.reqsoloitems.extend([item for item in itmlist])
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input["Item Requirements"])
         self.complus = input["Community Gained"]
         self.comreq = input["Community Level Req"]
@@ -26,6 +102,10 @@ class TornaSideQuest: # created to allow me to pass these objects easier
         else:
             self.hasprogression = False
         self.shopchangeids = input["Shop Change IDs"]
+        try:
+            self.npcids = QuestIDtoNPCIDDict[input["Quest Number"]]
+        except:
+            self.npcids = []
         addtolist.append(self)
 
 class TornaMainQuest:
@@ -37,7 +117,7 @@ class TornaMainQuest:
         addtolist.append(self)
         self.id = addtolist.index(self) + 1
 
-def SelectRandomPointGoal(): # There are some sidequests that require you to feed items into a shop, any combination of items to get you to the point requirement. This function randomly chooses 1 of the items in that shop, and notes it down as the logical requirement, restricting it to be placed logically accessible before the quest
+def SelectRandomPointGoal(Recipes): # There are some sidequests that require you to feed items into a shop, any combination of items to get you to the point requirement. This function randomly chooses 1 of the items in that shop, and notes it down as the logical requirement, restricting it to be placed logically accessible before the quest
     # there's probably a much easier way to do this that I'm just not thinking of, but it gets the job done. Probably a dictionary now that I think about it more, but at this point it works, why fix it
     OptionalRows = [91,95,99,100,96,101,102,97,98,103,92] # needs to stay in this order or else the indexes will be wrong!
     TaskLists = []
@@ -79,8 +159,7 @@ def SelectRandomPointGoal(): # There are some sidequests that require you to fee
     AllOptionals = [Quest15Optional, Quest28Optional, Quest29Optional1, Quest29Optional2, Quest30Optional, Quest34Optional1, Quest34Optional2, Quest44Optional1, Quest44Optional2, Quest47Optional, Quest55Optional]
     for optional in range(len(AllOptionals)):
         AllOptionals[optional] = AllQuestListTasks[optional][TaskIndexes[optional]]
-    
-    with open("./XC2/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file:
+    with open("XC2/JsonOutputs/common/MNU_ShopChange.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for optional in range(len(OptionalRows)):
             for row in data["rows"]:
@@ -102,13 +181,13 @@ def SelectRandomPointGoal(): # There are some sidequests that require you to fee
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, Community2Gate): # Selects the community quests that logically unlock Story Events 38 and 50 (lv 2 and lv 4 community)
+def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, Community2Gate, RecipeList): # Selects the community quests that logically unlock Story Events 38 and 50 (lv 2 and lv 4 community)
     TornaSidequest1 = {
         'Quest Name': 'What Bars the Way',
         'Quest Number': 1,
         'Main Story Req': 9,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [HazeKey, [ManipEtherKey[0]], [HazeAff[0]], MythraKey, [LightKey[0]]], # LevelUpTokens[:11]],
+        'Item Requirements': [HazeKey, [ManipEtherKey[0]]], # LevelUpTokens[:11]],
         'Community Gained': 0,
         'Community Level Req': 0,
         'Reward Set IDs': [1082],
@@ -284,7 +363,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Quest Number': 17,
         'Main Story Req': 25,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [[30380] , [30438] , [30347]],
+        'Item Requirements': [[30380] , [30438] , [30347], [30365]],
         'Community Gained': 0,
         'Community Level Req': 0,
         'Reward Set IDs': [1085],
@@ -923,7 +1002,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
     TornaSidequests = [] # holds the TornaSideQuest class objects
 
     for sidequest in TornaSidequestDict:
-        TornaSideQuest(sidequest, TornaSidequests, QuestRewardQty)
+        TornaSideQuest(sidequest, TornaSidequests, QuestRewardQty, RecipeList)
 
     TornaMainQuest1 = {
         'FLD_QuestTask $id': 1,
@@ -983,7 +1062,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'FLD_QuestTask $id': 7,
         'Task Summary': 'Complete \"What Bars the Way\"',
         'Community Level Req': 0,
-        'Item Requirements': [[ManipEtherKey[0]], [HazeAff[0]], [LightKey[0]]]
+        'Item Requirements': [[ManipEtherKey[0]]]
     }
     TornaMainQuest11 = {
         'FLD_QuestTask $id': 55,
@@ -1304,8 +1383,12 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
     TotalGate1QuestRequirements, TotalGate2QuestRequirements = [], []
 
     if Community1Gate != 0:
+        InvalidRemovableQuests = []
         while ChosenPeopleGained < CommunityReqs[Community1Gate - 1]:
-            CurrentQuest = random.choice(AlteredGate1Quests)
+            ValidAlteredGate1Quests = [quest for quest in AlteredGate1Quests if quest.complus != 0]
+            CurrentQuest = random.choice(ValidAlteredGate1Quests)
+            if CurrentQuest.complus == 0:
+                continue
             ChosenGate1Quests.append(CurrentQuest)
             ChosenGate2Quests.append(CurrentQuest)
             ChosenPeopleGained += CurrentQuest.complus
@@ -1322,9 +1405,70 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
                                     ChosenPeopleGained += TornaSidequests[prereq - 1].complus
                                     AlteredGate1Quests.remove(TornaSidequests[prereq - 1])
                                     AlteredGate2Quests.remove(TornaSidequests[prereq - 1])
+            CurCom1QuestCount = len(ChosenGate1Quests)
+            while ChosenPeopleGained > CommunityReqs[Community1Gate - 1]: # if we have too many required quests, we want to remove some to get the expected time to complete the seed closer to what the player selected when generating the seed
+                if len(ChosenGate1Quests) > 1:
+                    if CurrentQuest in ChosenGate1Quests: # if we have the current quest, remove it, provided it still leaves us with over or equal to the required amount of quests.
+                        if ChosenPeopleGained - CurrentQuest.complus >= CommunityReqs[Community1Gate - 1]:
+                            ChosenGate1Quests.remove(CurrentQuest)
+                            AlteredGate1Quests.append(CurrentQuest)
+                            ChosenGate2Quests.remove(CurrentQuest)
+                            AlteredGate2Quests.append(CurrentQuest)
+                            ChosenPeopleGained -= CurrentQuest.complus
+                        else: # if it leaves us below the threshold, see if we can't remove some other quests that don't leave us below the threshold
+                            for quest in ChosenGate1Quests:
+                                if ChosenPeopleGained - quest.complus < CommunityReqs[Community1Gate - 1]: # if removing the quest doesnt take us under the required number of community members, then we can safely remove it
+                                    InvalidRemovableQuests.append(quest)
+                                    continue
+                                else:
+                                    for quest2 in ChosenGate1Quests:
+                                        if quest in quest2.sideprereq: # if the quest we're trying to remove is in another quest's pre-reqs, then we can't remove it
+                                            InvalidRemovableQuests.append(quest)
+                                            break
+                            ValidRemovableQuests = [x for x in ChosenGate1Quests if x not in InvalidRemovableQuests]
+                            random.shuffle(ValidRemovableQuests)
+                            if ValidRemovableQuests != []:
+                                for quest in ValidRemovableQuests:
+                                    if ChosenPeopleGained == CommunityReqs[Community1Gate - 1]:
+                                        break
+                                    elif ChosenPeopleGained - quest.complus >= CommunityReqs[Community1Gate - 1]:
+                                        ChosenGate1Quests.remove(quest)
+                                        AlteredGate1Quests.append(quest)
+                                        ChosenGate2Quests.remove(quest)
+                                        AlteredGate2Quests.append(quest)
+                                        ChosenPeopleGained -= quest.complus
+                    else: # if we've already removed the current quest, then start trying to remove a random quest from the remaining ones, provided it itself isn't a pre-req to any quest in the list
+                        for quest in ChosenGate1Quests:
+                            if ChosenPeopleGained - quest.complus < CommunityReqs[Community1Gate - 1]: # if removing the quest doesnt take us under the required number of community members, then we can safely remove it
+                                InvalidRemovableQuests.append(quest)
+                                continue
+                            else:
+                                for quest2 in ChosenGate1Quests:
+                                    if quest in quest2.sideprereq: # if the quest we're trying to remove is in another quest's pre-reqs, then we can't remove it
+                                        InvalidRemovableQuests.append(quest)
+                                        break
+                        ValidRemovableQuests = [x for x in ChosenGate1Quests if x not in InvalidRemovableQuests]
+                        random.shuffle(ValidRemovableQuests)
+                        if ValidRemovableQuests != []:
+                            for quest in ValidRemovableQuests:
+                                if ChosenPeopleGained == CommunityReqs[Community1Gate - 1]:
+                                    break
+                                elif ChosenPeopleGained - quest.complus >= CommunityReqs[Community1Gate - 1]:
+                                    ChosenGate1Quests.remove(quest)
+                                    AlteredGate1Quests.append(quest)
+                                    ChosenGate2Quests.remove(quest)
+                                    AlteredGate2Quests.append(quest)
+                                    ChosenPeopleGained -= quest.complus
+                if len(ChosenGate1Quests) == CurCom1QuestCount: # if we weren't able to remove any quests, then just abandon the removal of any more quests.
+                    break
+
     if Community2Gate != 0:
+        InvalidRemovableQuests = []
         while ChosenPeopleGained < CommunityReqs[Community2Gate - 1]:
-            CurrentQuest = random.choice(AlteredGate2Quests)
+            ValidAlteredGate2Quests = [quest for quest in AlteredGate2Quests if quest.complus != 0]
+            CurrentQuest = random.choice(ValidAlteredGate2Quests)
+            if CurrentQuest.complus == 0:
+                continue
             ChosenGate2Quests.append(CurrentQuest)
             ChosenPeopleGained += CurrentQuest.complus
             AlteredGate2Quests.remove(CurrentQuest)
@@ -1337,6 +1481,57 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
                                     ChosenGate2Quests.append(TornaSidequests[prereq - 1])
                                     ChosenPeopleGained += TornaSidequests[prereq - 1].complus
                                     AlteredGate2Quests.remove(TornaSidequests[prereq - 1])
+            CurCom2QuestCount = len(ChosenGate2Quests)
+            while ChosenPeopleGained > CommunityReqs[Community2Gate - 1] and CommunityReqs[Community2Gate - 1] > CommunityReqs[Community1Gate - 1]: # if we have too many required quests, we want to remove some to get the expected time to complete the seed closer to what the player selected when generating the seed
+                if len(ChosenGate2Quests) > 1:
+                    if CurrentQuest in ChosenGate2Quests: # if we have the current quest, remove it, provided it still leaves us with over or equal to the required amount of quests.
+                        if ChosenPeopleGained - CurrentQuest.complus >= CommunityReqs[Community2Gate - 1]:
+                            ChosenGate2Quests.remove(CurrentQuest)
+                            AlteredGate2Quests.append(CurrentQuest)
+                            ChosenPeopleGained -= CurrentQuest.complus
+                        else: # if it leaves us below the threshold, see if we can't remove some other quests that don't leave us below the threshold
+                            for quest in ChosenGate2Quests:
+                                if quest in ChosenGate1Quests or ChosenPeopleGained - quest.complus < CommunityReqs[Community2Gate - 1]: # if removing the quest doesnt take us under the required number of community members, then we can safely remove it, provided it's not in the set of quests chosen for the first story gate
+                                    InvalidRemovableQuests.append(quest)
+                                    continue
+                                else:
+                                    for quest2 in ChosenGate2Quests:
+                                        if quest in quest2.sideprereq: # if the quest we're trying to remove is in another quest's pre-reqs, then we can't remove it
+                                            InvalidRemovableQuests.append(quest)
+                                            break
+                            ValidRemovableQuests = [x for x in ChosenGate2Quests if x not in InvalidRemovableQuests]
+                            random.shuffle(ValidRemovableQuests)
+                            if ValidRemovableQuests != []:
+                                for quest in ValidRemovableQuests:
+                                    if ChosenPeopleGained == CommunityReqs[Community2Gate - 1]:
+                                        break
+                                    elif ChosenPeopleGained - quest.complus >= CommunityReqs[Community2Gate - 1]:
+                                        ChosenGate2Quests.remove(quest)
+                                        AlteredGate2Quests.append(quest)
+                                        ChosenPeopleGained -= quest.complus
+                    else: # if we've already removed the current quest, then start trying to remove a random quest from the remaining ones, provided it itself isn't a pre-req to any quest in the list
+                        for quest in ChosenGate2Quests:
+                            if quest in ChosenGate1Quests or ChosenPeopleGained - quest.complus < CommunityReqs[Community2Gate - 1]: # if removing the quest doesnt take us under the required number of community members, then we can safely remove it, provided it's not in the set of quests chosen for the first story gate
+                                InvalidRemovableQuests.append(quest)
+                                continue
+                            else:
+                                for quest2 in ChosenGate2Quests:
+                                    if quest in quest2.sideprereq: # if the quest we're trying to remove is in another quest's pre-reqs, then we can't remove it
+                                        InvalidRemovableQuests.append(quest)
+                                        break
+                        ValidRemovableQuests = [x for x in ChosenGate2Quests if x not in InvalidRemovableQuests]
+                        random.shuffle(ValidRemovableQuests)
+                        if ValidRemovableQuests != []:
+                            for quest in ValidRemovableQuests:
+                                if ChosenPeopleGained == CommunityReqs[Community2Gate - 1]:
+                                    break
+                                elif ChosenPeopleGained - quest.complus >= CommunityReqs[Community2Gate - 1]:
+                                    ChosenGate2Quests.remove(quest)
+                                    AlteredGate2Quests.append(quest)
+                                    ChosenPeopleGained -= quest.complus
+                if len(ChosenGate2Quests) == CurCom2QuestCount: # if we weren't able to remove any quests, then just abandon the removal of any more quests.
+                    break
+            
     for quest in ChosenGate1Quests:
         TotalGate1QuestRequirements.extend(quest.itemreqs)
     for quest in ChosenGate2Quests:
@@ -1347,6 +1542,11 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
     TotalGate2QuestRequirements = list(set(TotalGate2QuestRequirements))
     TotalGate1QuestRequirements.sort()
     TotalGate2QuestRequirements.sort()
+
+    if not Options.TornaRewardsonUnreqSidequests.GetState():
+        for sidequest in TornaSidequests:
+            if sidequest not in ChosenGate2Quests + [quest for quest in TornaSidequests if quest.name in ["What Bars the Way", "Power Unimaginable", "Where's the Boy Gone?", "Feeding an Army", "Lett Bridge Restoration", "To Cross a Desert"]]:
+                sidequest.randomizeditems = [0,0,0,0] # no progression can be placed on the sidequest
 
     StackStoryRequirements(TotalGate1QuestRequirements, TotalGate2QuestRequirements)
     #ChangeQuestShops()

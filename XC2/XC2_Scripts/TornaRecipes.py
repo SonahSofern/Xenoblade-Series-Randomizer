@@ -7,19 +7,19 @@ from XC2.XC2_Scripts.IDs import ValidEnemies, TornaUMIDs
 
 def CreateTornaRecipeList():
     TornaRecipeIDs = []
-    TornaRegularEnemyIDs = []
-    TornaMA40AEnemyIDs = []
-    TornaMA41AEnemyIDs = []
 
     class TornaRecipe:
         def __init__(self, id):
             self.shopchangetaskid = id
             self.components = list()
+            self.componentqty = list()
             subcomponentid = 0
             for i in range(1, 6):
                 subcomponentid = Helper.FindValues("./XC2/JsonOutputs/common/MNU_ShopChangeTask.json", ["$id"], [self.shopchangetaskid], f"SetItem{i}")
+                subcomponentqty = Helper.FindValues("./XC2/JsonOutputs/common/MNU_ShopChangeTask.json", ["$id"], [self.shopchangetaskid], f"SetNumber{i}")
                 if subcomponentid != [0]:
                     self.components.extend(subcomponentid)
+                    self.componentqty.extend(subcomponentqty)
             self.shopchangenameid = Helper.FindValues("./XC2/JsonOutputs/common/MNU_ShopChangeTask.json", ["$id"], [self.shopchangetaskid], "Name")[0]
             self.shopchangenametext = Helper.FindValues("./XC2/JsonOutputs/common_ms/fld_shopchange.json", ["$id"], [self.shopchangenameid], "name")[0]
             self.itmnametext = Helper.FindValues("./XC2/JsonOutputs/common_ms/itm_favorite.json", ["name"], [self.shopchangenametext], "$id")
@@ -28,7 +28,7 @@ def CreateTornaRecipeList():
             self.itmfavlistid = Helper.FindValues("./XC2/JsonOutputs/common/ITM_FavoriteList.json", ["Name"], [self.itmnametext], "$id")
             if self.itmfavlistid != []:
                 self.itmfavlistid = self.itmfavlistid[0]
-            print("{'Shop Task ID': " + str(self.shopchangetaskid) + ", 'Ingredients': " + str(self.components) +"}")
+            #print("{'Shop Task ID': " + str(self.shopchangetaskid) + ", 'Ingredients': " + str(self.components) +"}")
             TornaRecipeIDs.append(self)
 
     with open("./XC2/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file:

@@ -222,8 +222,8 @@ UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
 UMHuntOption_RandomLandmarks = SubOption("Random Starting Landmarks", UMHuntOption)
 
 # Torna
-TornaMainOption = Option("Torna Randomization", TornaTab, "Randomizes the Torna DLC, in a logic-based method.", [lambda: TornaMain.AllTornaRando()], descData=lambda:TornaMain.TornaMainDescription())
-TornaMainOption_CollectionPoints = SubOption("Collection Points", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 4, spinIncr = 1, spinWidth = 1, spinDefault = 1, spinDesc = "Items")
+TornaMainOption = Option("Torna Randomization", TornaTab, "Randomizes the Torna DLC, in a logic-based method.", [lambda: TornaMain.AllTornaRando(TornaCompatibleOptions)], descData=lambda:TornaMain.TornaMainDescription())
+TornaMainOption_CollectionPoints = SubOption("Collection Points", TornaMainOption)
 TornaMainOption_EnemyDrops = SubOption("Enemy Drops", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 9, spinIncr = 1, spinWidth = 1, spinDefault = 1, spinDesc = "Items")
 TornaMainOption_GroundItems = SubOption("Ground Items", TornaMainOption)
 TornaMainOption_Shops = SubOption("Shops", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 15, spinIncr = 1, spinWidth = 2, spinDefault = 1, spinDesc = "Items")
@@ -235,11 +235,15 @@ TornaAddHints_ItemHints = SubOption("Item Hints", TornaAddHints, hasSpinBox = Tr
 TornaAddHints_LocProgHints = SubOption("Location Hints", TornaAddHints, hasSpinBox = True, spinMin = 1, spinMax = 12, spinIncr = 1, spinWidth = 2, spinDefault = 1, spinDesc = "Hints")
 TornaObjectColorMatchesContents = Option("Gilded Required Check Names", TornaTab, "Turns names of Checks with Progression Items gold.", descData=lambda:TornaMain.TornaCCMCDescription())
 TornaChooseCommunityReqs = Option("Community Level Story Requirements", TornaTab, "Changes the Community Level requirement for the story events.", descData=lambda:TornaMain.TornaStoryReqChangeDescription())
-TornaChooseCommunityReqs_Gate1Req = SubOption("Community Gate 1 Required Level", TornaChooseCommunityReqs, hasSpinBox = True, spinMin = 0, spinMax = 2, spinIncr = 1, spinWidth = 1, spinDefault = 0)
-TornaChooseCommunityReqs_Gate2Req = SubOption("Community Gate 2 Required Level", TornaChooseCommunityReqs, hasSpinBox = True, spinMin = 0, spinMax = 4, spinIncr = 1, spinWidth = 1, spinDefault = 0)
+TornaChooseCommunityReqs_Gate1Req = SubOption("Gate 1 Required Level", TornaChooseCommunityReqs, hasSpinBox = True, spinMin = 0, spinMax = 2, spinIncr = 1, spinWidth = 1, spinDefault = 0)
+TornaChooseCommunityReqs_Gate2Req = SubOption("Gate 2 Required Level", TornaChooseCommunityReqs, hasSpinBox = True, spinMin = 0, spinMax = 4, spinIncr = 1, spinWidth = 1, spinDefault = 0)
 TornaRemoveGormottChecks = Option("Remove Certain Gormott Checks", TornaTab, "Progression Items will not be found in Checks near locations in Gormott selected below.")
 for loc in TornaMain.GormottNametoLocID.keys(): # Automatically Generates these
     SubOption(loc, TornaRemoveGormottChecks, _defState = True)
+TornaRewardsonUnreqSidequests = Option("Progression on Unrequired Sidequests", TornaTab, "Sidequests not chosen for the main story requirements or story gates can have progression items on their rewards.")
+
+TornaCompatibleOptions = [BladeSpecialButtonsOption, TornaChooseCommunityReqs, CondenseGoldOption, TornaCreateSpoilerLog, EnhancementDisplayOption, EverlastingPouchItemsOption, FieldItemOption, TornaObjectColorMatchesContents, StartwithIncreasedMovespeedOption, MusicOption, MutePopupsOption, NPCSizeOption, TornaRemoveGormottChecks, ShortcutsOption, TornaAddHints, TornaMainOption, TreasureChestVisOption, TrustLineOption, TornaRewardsonUnreqSidequests]
+
 
 
 # Currently Disabled for Various Reasons
