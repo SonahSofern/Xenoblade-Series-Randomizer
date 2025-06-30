@@ -29,6 +29,12 @@ def CreateTornaRecipeList():
             if self.itmfavlistid != []:
                 self.itmfavlistid = self.itmfavlistid[0]
             #print("{'Shop Task ID': " + str(self.shopchangetaskid) + ", 'Ingredients': " + str(self.components) +"}")
+            self.id = self.itmfavlistid
+            self.name = self.itmnametext
+            self.mainreq = 4
+            self.itemreqs = self.components
+            self.randomizeditems = [self.id]
+            self.type = "recipe"
             TornaRecipeIDs.append(self)
 
     with open("./XC2/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as file:
@@ -41,31 +47,3 @@ def CreateTornaRecipeList():
         json.dump(data, file, indent=2, ensure_ascii=False)
 
     return TornaRecipeIDs
-
-#    with open("./XC2/JsonOutputs/common_gmk/ma40a_FLD_EnemyPop.json", 'r+', encoding='utf-8') as file:
-#        data = json.load(file)
-#        for row in data["rows"]:
-#            if row["name"][:2] not in ["bo", "cf", "qs", "  "]:
-#                for i in range(1, 5):
-#                    if row[f"ene{i}ID"] in ValidEnemies and row[f"ene{i}ID"] not in TornaUMIDs:
-#                        TornaMA40AEnemyIDs.append(row[f"ene{i}ID"])
-#        file.seek(0)
-#        file.truncate()
-#        json.dump(data, file, indent=2, ensure_ascii=False)
-#    with open("./XC2/JsonOutputs/common_gmk/ma41a_FLD_EnemyPop.json", 'r+', encoding='utf-8') as file:
-#        data = json.load(file)
-#        for row in data["rows"]:
-#            if row["name"][:2] not in ["bo", "cf", "qs", "  "]:
-#                for i in range(1, 5):
-#                    if row[f"ene{i}ID"] in ValidEnemies and row[f"ene{i}ID"] not in TornaUMIDs:
-#                        TornaMA41AEnemyIDs.append(row[f"ene{i}ID"])
-#        file.seek(0)
-#        file.truncate()
-#        json.dump(data, file, indent=2, ensure_ascii=False)
-#    TornaMA40AEnemyIDs = list(set(TornaMA40AEnemyIDs))
-#    print(len(TornaMA40AEnemyIDs))
-#    TornaMA41AEnemyIDs = list(set(TornaMA41AEnemyIDs))
-#    print(len(TornaMA41AEnemyIDs))
-#    TornaRegularEnemyIDs = TornaMA40AEnemyIDs + TornaMA41AEnemyIDs
-#    TornaRegularEnemyIDs = list(set(TornaRegularEnemyIDs))
-#    print(TornaRegularEnemyIDs)
