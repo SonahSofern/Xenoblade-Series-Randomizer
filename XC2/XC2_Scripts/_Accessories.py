@@ -3,7 +3,7 @@ from XC2.XC2_Scripts.Enhancements import *
 from scripts import PopupDescriptions
 from XC2.XC2_Scripts import Options
 
-InvalidSkillEnhancements = [PhyAndEthDefenseUp,ForcedHPPotionOnHit,BlockBoost,FlatBlockBoost,CritBoost, FlatCritBoost, PartyCritMaxAffinity, DamageAndCritUpMaxAffinity,HpPotChanceFor2,EyeOfJustice, BladeSwitchDamageUp, ArtCancel, XStartBattle, YStartBattle, BStartBattle, EvadeDriverArt, EvadeDrainHp,ArtDamageHeal, BladeSwapDamage, FlatAgiBoost,FlatDefBoost,FlatDexBoost, FlatEtherBoost, FlatHPBoost, FlatStrengthBoost, FlatLuckBoost, BladeComboOrbAdder]
+InvalidSkillEnhancements = [PhyAndEthDefenseUp,ForcedHPPotionOnHit,BlockBoost,FlatBlockBoost,CritBoost, FlatCritBoost, PartyCritMaxAffinity, DamageAndCritUpMaxAffinity,HpPotChanceFor2,EyeOfJustice, BladeSwitchDamageUp, ArtCancel, XStartBattle, YStartBattle, BStartBattle, EvadeDriverArt, EvadeDrainHp,ArtDamageHeal, BladeSwapDamage, FlatAgiBoost,FlatDefBoost,FlatDexBoost, FlatEtherBoost, FlatHPBoost, FlatStrengthBoost, FlatLuckBoost, BladeComboOrbAdder, FlatEthDefBoost, PhysDefBoost, EthDefBoost]
 ValidSkills:list[Enhancement] = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
 
 def RandomizeAccessoryEnhancements():
