@@ -1,4 +1,4 @@
-import json, random
+import json, random, scripts.PopupDescriptions
 from XC2.XC2_Scripts.Enhancements import *
 from XC2.XC2_Scripts import Options
 
@@ -260,3 +260,12 @@ def Debuff(art):
     art["ArtsDeBuff"] = value
     return f"[System:Color name=red]{name}[/System:Color]"
     
+
+def EnemyArtEnhancementDescriptions():
+    myDesc = scripts.PopupDescriptions.Description()
+    myDesc.Header(Options.EnemyArtEffectsOption.name)
+    myDesc.Text(f"Adds various bonus effects to enemies arts, this will NOT override original art effects to get the vanilla feel of the game.")
+    return myDesc
+
+
+

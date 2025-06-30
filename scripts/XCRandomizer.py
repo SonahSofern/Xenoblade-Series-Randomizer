@@ -208,12 +208,12 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     
     # Options Cog
     if isOneFile:  # If the app is running as a bundled executable
-        icon_path = os.path.join(sys._MEIPASS, 'images', 'SmallSettingsCog.png')
+        icon_path = os.path.join(sys._MEIPASS, 'images', 'LinesIcon.png')
     else:  # If running as a script (not bundled)
-        icon_path = "images/SmallSettingsCog.png"
-    Cog = PhotoImage(file=icon_path)
-    iconCollector.append(Cog)
-    SettingsButton = ttk.Button(background,padding=5, image=Cog, command=lambda: GUISettings.OpenSettingsWindow(XCFrame, defaultFont, GUISettings.defGUIThemeVar, Game))
+        icon_path = "images/LinesIcon.png"
+    HelpIcon = PhotoImage(file=icon_path)
+    iconCollector.append(HelpIcon)
+    SettingsButton = ttk.Button(background,padding=5,image=HelpIcon, command=lambda: GUISettings.OpenSettingsWindow(XCFrame, defaultFont, GUISettings.defGUIThemeVar, Game))
     SettingsButton.pack(pady=(5,windowPadding),anchor="e",expand=True, side=RIGHT, padx=windowPadding) 
     saveCommands.append(lambda: SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game))
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())

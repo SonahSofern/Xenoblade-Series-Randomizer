@@ -127,7 +127,21 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
         JSONParser.CloseFile(eneData, eneFile)
         RingRemoval()
         NoCooldownFix()
-    
+
+FinalBossOptions = {
+    "Zanza" : [2407,2408,2411],
+    "Magestic Mordred": [2227],
+    "Despotic Arsene": [548],
+    "Avalanche Abaasy": [1448],
+    "Blizzard Belgazas": [1449],
+    "Final Marcus": [1438],
+    "Ancient Daedala": [1733],
+    "Immovable Gonzales": [284],
+    "Territorial Rotbart": [282]
+}
+def ChallengingFinalBoss():
+    pass
+
 def ForcedArts(enemy, ForcedStoryArts):
     # Fixes boss fights that require the enemy to use an art slot to end the fight 
     for id in ForcedStoryArts:

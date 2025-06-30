@@ -123,6 +123,8 @@ BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption)
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption)
 
+FinalBossOption = Option("Final Boss", Enemies, "Forces the final boss to be one of your choices")
+
 
 # Character
 GemOption = Option("Gems", Character, "Randomizes the effects of Gems and Crystals", [lambda: Gems.Gems()], descData=lambda: Gems.GemDescriptions())

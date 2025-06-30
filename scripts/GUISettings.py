@@ -380,7 +380,6 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
 
         except:
             print(f"{traceback.format_exc()}") # shows the full error
-            randoProgressDisplay.config(text="Failed Inputs")
             time.sleep(3)
             RandomizeButton.config(state=NORMAL)
             return
