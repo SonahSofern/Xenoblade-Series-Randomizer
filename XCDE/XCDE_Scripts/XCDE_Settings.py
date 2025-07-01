@@ -1,7 +1,7 @@
 import scripts.XCRandomizer, scripts.JSONParser
 from XCDE.XCDE_Scripts import SeedNames, IDs, Options
 
-Title = "Xenoblade Chronicles Randomizer"
+Title = "Xenoblade Chronicles DE Randomizer"
 Game = "XCDE"
 Version = "1.1.0"
 def ShowTitleScreenText():

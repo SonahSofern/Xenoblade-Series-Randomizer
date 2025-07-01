@@ -17,7 +17,7 @@ defaultFont = Font(family="Calibri", size=14)
 MainWindow = ttk.Notebook(root, padding=0, style = "centeredTabs.TNotebook")
 MainWindow.pack(fill="both", expand=True, padx=0, pady=0)
 
-root.title(f"Xenoblade Chronicles Series Randomizer v{Version}")
+root.title(f"Xenoblade Chronicles Series Randomizer - {Version}")
 root.option_add("*Font", defaultFont)
 root.geometry(f'{windowWidth}x{windowHeight}')
 GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
