@@ -76,7 +76,7 @@ def resize_bg(event, root, bg_image, background, Game):
 
 saveCommands = []
 
-def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= []):
+def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= [], setupHelpDesc = None):
     import  os, sys
     from scripts import SavedOptions, Helper, GUISettings, PermalinkManagement, Seed, Interactables, SettingsPresets
     from tkinter.font import Font
@@ -213,7 +213,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
         icon_path = "images/LinesIcon.png"
     HelpIcon = PhotoImage(file=icon_path)
     iconCollector.append(HelpIcon)
-    SettingsButton = ttk.Button(background,padding=5,image=HelpIcon, command=lambda: GUISettings.OpenSettingsWindow(XCFrame, defaultFont, GUISettings.defGUIThemeVar, Game))
+    SettingsButton = ttk.Button(background,padding=5,image=HelpIcon, command=lambda: PopupDescriptions.GenPopup(f"{Title} Version {Version}", setupHelpDesc , window, defaultFont))
     SettingsButton.pack(pady=(5,windowPadding),anchor="e",expand=True, side=RIGHT, padx=windowPadding) 
     saveCommands.append(lambda: SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game))
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())

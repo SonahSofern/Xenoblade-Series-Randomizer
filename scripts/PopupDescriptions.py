@@ -72,7 +72,7 @@ class PopHeader(DescriptionObject):
             for child in self.childGroup:
                 child.SpecialPack()
 
-def GenPopup(optionName, descData, root, defaultFont):
+def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
     # Check if a popup with the same title is already open
     for top in OpenWindows:
         if top.winfo_exists() and top.title() == optionName:
@@ -121,7 +121,7 @@ def GenPopup(optionName, descData, root, defaultFont):
         elif isinstance(descObj, PopTag): # Tag
             descObj.obj = ttk.Label(curFrame, text=descObj.data, style="Tag.TLabel")
             curHeader.childGroup.append(descObj)
-        if hasFewHeaders: # If we have less than 3 headers go ahead and pack everything
+        if hasFewHeaders or isForcedPack: # If we have less than 3 headers go ahead and pack everything
             descObj.SpecialPack()
 
     scripts.GUISettings.ResizeWindow(top, InnerFrame, myDescription.bonusWidth)

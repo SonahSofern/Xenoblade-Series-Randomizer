@@ -8,6 +8,9 @@ This program randomizes the BDAT files in The Xenoblade Chronicles Games. Only X
 # Contact Us
 Discord: https://discord.gg/h93yqZHG8z
 
+### Requirements:
+[Python v3.11.0](https://www.python.org/downloads/release/python-3110/) or higher\
+
 # Credits
 https://github.com/roccodev/bdat-rs \
 https://xenobladedata.github.io/ \
