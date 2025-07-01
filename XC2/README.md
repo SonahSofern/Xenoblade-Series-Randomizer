@@ -1,23 +1,3 @@
-# XC2_Randomizer
-A randomizer project for Xenoblade 2 capable of randomizing: Enemies, Accessories, Blades, Drivers, Loot and much more!
-
-
-# General Description
-This program randomizes the BDAT files in Xenoblade Chronicles 2. Tested on the main story of the English Version 2.1.0 + DLC only. The project is still a work in progress, please report bugs or suggestions to our discord so we can make this better!
-
-# Contact Us
-Discord: https://discord.gg/h93yqZHG8z
-
-# Known Issues
-Race Mode will overwrite some settings. (for example Treasure Chest Contents will be overwritten if race mode is on)\
-Torna has not been tested at all, it may or may not work.
-
-
-# Credits
-https://github.com/roccodev/bdat-rs \
-https://frontiernav.net/wiki/xenoblade-chronicles-2 \
-https://xenobladedata.github.io/ \
-https://gitlab.com/damysteryman/XC2SaveNETThingy/-/tags/r6.1 
 
 # Setup
 
