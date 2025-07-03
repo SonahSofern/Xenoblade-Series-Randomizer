@@ -170,9 +170,8 @@ def LoadTheme(defaultFont, themeName):
                     
                 },
                 "map": {
-                    "background": [("active", currentTheme["midColor"])],
+                    "background": [("pressed", currentTheme["darkColor"]),("active", currentTheme["midColor"])],
                     "foreground": [("disabled", currentTheme["midGray"])],
-
                 }
             },
             "TCheckbutton": {
