@@ -17,6 +17,7 @@ class Option():
         self.descData = descData
         self.spinDefault = spinDefault
         self.isDevOption = isDevOption
+        self.clickCommands = []
         
         # Initial Data
         self.name =  _name
@@ -55,7 +56,7 @@ class Option():
         optionPanel.grid(row = rowIncrement, column = 0, sticky="ew")
         
         # Major Option Checkbox
-        self.checkBox = ttk.Checkbutton(optionPanel, variable= self.checkBoxVal, text=self.name, width=30, style="midColor.TCheckbutton", command=lambda: self.StateUpdate())
+        self.checkBox = ttk.Checkbutton(optionPanel, variable= self.checkBoxVal, text=self.name, width=30, style="midColor.TCheckbutton", command=lambda: (self.StateUpdate(), [cmd() for cmd in self.clickCommands]))
         self.checkBox.grid(row=rowIncrement, column = 0, sticky="w")
         
         if self.descData == None:
@@ -174,3 +175,16 @@ def UpdateAllStates(Game):
     for opt in XenoOptionDict[Game]:
         opt.StateUpdate()
 
+class MutuallyExclusivePairing():
+    def __init__(self, group1:list[Option], group2:list[Option]):
+        for op in group1:
+            op.clickCommands.append(lambda op=op: MutuallyExclusiveToggle(op, group2))
+        for op in group2:
+            op.clickCommands.append(lambda op=op: MutuallyExclusiveToggle(op, group1))
+
+def MutuallyExclusiveToggle(op, pairGroup):
+    if op.checkBoxVal.get() == False:
+        pass
+    else:
+        for op in pairGroup:
+            op.checkBoxVal.set(False)

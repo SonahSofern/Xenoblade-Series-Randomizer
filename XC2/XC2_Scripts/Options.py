@@ -3,7 +3,7 @@ from scripts import JSONParser,Helper
 from XC2.XC2_Scripts.IDs import *
 from tkinter import *
 from XC2.XC2_Scripts import _Accessories, _DriverArts, SkillTrees, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeStats,TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UMHuntMain, Cosmetics, AccessoryShops, CollectionPoints, PouchItemShops, TreasureChests, ButtonCombos, EnemyDrops, _EleCombo,_YellowSkills, _BladeSpecials, Scales, DLCFlagQOL, CharacterRandomization, TornaMain, ObjectNameCleanup
-from scripts.Interactables import Option, SubOption
+from scripts.Interactables import Option, SubOption, MutuallyExclusivePairing
 import scripts.Interactables
 scripts.Interactables.Game = "XC2"
 # Prio
@@ -244,8 +244,7 @@ TornaRewardsonUnreqSidequests = Option("Progression on Unrequired Sidequests", T
 
 TornaCompatibleOptions = [BladeSpecialButtonsOption, TornaChooseCommunityReqs, CondenseGoldOption, TornaCreateSpoilerLog, EnhancementDisplayOption, EverlastingPouchItemsOption, FieldItemOption, TornaObjectColorMatchesContents, StartwithIncreasedMovespeedOption, MusicOption, MutePopupsOption, NPCSizeOption, TornaRemoveGormottChecks, ShortcutsOption, TornaAddHints, TornaMainOption, TreasureChestVisOption, TrustLineOption, TornaRewardsonUnreqSidequests]
 
-
-
+MutuallyExclusivePairing([TornaMainOption], [DriverArtsOption])
 # Currently Disabled for Various Reasons
 # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
 # GenStandardOption("Blade Names", TabBlades, "Randomizes a Blade's name", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])

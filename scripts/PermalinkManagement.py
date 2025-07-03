@@ -70,7 +70,7 @@ def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version, buttonS
         try:
             seedName, options = GenerateSettingsFromPermalink(permaLinkVar.get(), traceObjects)
             seedEntryVar.set(seedName)
-            buttonStateUpdates()
+            # buttonStateUpdates()
         except:
             print("Invalid Permalink")
             permaLinkVar.set("")
