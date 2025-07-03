@@ -13,8 +13,10 @@ def TutorialSkips(): # For some reason visually the game wont load the entire hu
         JSONParser.CloseFile(tutData, tutFile)
     with open("XC3/JsonOutputs/sys/SYS_SystemOpen.json", 'r+', encoding='utf-8') as tutFile:
         tutData = json.load(tutFile)
+        nonTutorialIds = [47,48,49,50,51,58,59,65,66,67,72,77,84]
         for tut in tutData["rows"]:
-            # if tut["$id"] in  [Arts, TalentArts]:
+            if tut["$id"] in  nonTutorialIds:
+                continue
             tut["Flag"] = 21022 # Flag set very early instantly unlocks everything basically probably will cause issues so testing is required
         JSONParser.CloseFile(tutData, tutFile)
         

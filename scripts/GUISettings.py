@@ -356,7 +356,7 @@ def ResizeWindow(top, innerFrame, padx = 37):
     top.geometry(f"{w}x{h}")
  
     
-def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
+def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[], isOneFile = False):
     def ThreadedRandomize():
         entrySpot = fileEntryVar
         outSpot = f"{outputDirVar.get().strip()}/romfs/bdat"
@@ -391,10 +391,15 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
             
         randoProgressDisplay.config(text="Packing BDATs")
     
+        
+        # Packs BDATs
+        # If we are packed for users we dont want to create a window. For us we want this window to see errors from bdat-rs
+        if isOneFile:
+            creationFlags = subprocess.CREATE_NO_WINDOW
+        else:
+            creationFlags = 0
         try:
-            # Packs BDATs
-            subprocess.run([bdat_path, "pack", JsonOutput, "-o", outSpot, "-f", "json"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-            
+            subprocess.run([bdat_path, "pack", JsonOutput, "-o", outSpot, "-f", "json"],check=True,stderr=None,stdout=None, creationflags=creationFlags)
             # for file in 
             # Outputs common_ms in the correct file structure
             os.makedirs(f"{outSpot}/{textFolderName}", exist_ok=True)
@@ -413,7 +418,7 @@ def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgr
             
             print(f"Finished at {datetime.datetime.now()}")
         except:
-            print(f"{traceback.format_exc()}") # shows the full error
+            # print(f"{traceback.format_exc()}") # shows the full error
             randoProgressDisplay.config(text="Failed Outputs")
 
         

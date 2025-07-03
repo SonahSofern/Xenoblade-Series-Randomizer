@@ -18,7 +18,7 @@ Tabs = {
     Musica: '♪ Music',
 }
 
-CharactersOption = Option("Characters", Character, "Randomizes heroes and the main party", [lambda: Characters.CharacterSwaps()])
+# CharactersOption = Option("Heroes", Character, "Randomizes heroes", [lambda: Characters.CharacterSwaps()])
 
 SkillOptions = Option("Class Skills", Character, "Randomizes class skills", [lambda: Skills.SkillRando()])
 

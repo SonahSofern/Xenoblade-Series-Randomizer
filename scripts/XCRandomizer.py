@@ -37,6 +37,21 @@ class FileReplacer:
 
 iconCollector = []# Globals to prevent garbage collection
 
+def UserNeedsUpdate(version, root):
+    '''Checks the repos latest version tag to see if we have a new release'''
+    import requests
+    try:
+        response = requests.get("https://api.github.com/repos/SonahSofern/Xenoblade-Series-Randomizer/releases/latest")
+        data = response.json()
+        latest_tag = data.get("tag_name")
+        if latest_tag == version:
+            return
+        else:
+            updateMessage = ttk.Button(root, text=f"Download Latest Version ({latest_tag})")
+            updateMessage.pack()
+    except:
+        pass
+
 def CreateImage(imagePath):
     if isOneFile: 
         bg_image = Image.open(os.path.join(sys._MEIPASS, imagePath))
@@ -203,7 +218,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     randoProgressDisplay.pack(pady=0, side=LEFT)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(XCFrame, RandomizeButton, fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles)))
+    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(XCFrame, RandomizeButton, fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles, isOneFile=isOneFile)))
     RandomizeButton.pack(pady=(5,windowPadding),side="left", padx=(windowPadding, 0), anchor=CENTER)
     
     # Options Cog

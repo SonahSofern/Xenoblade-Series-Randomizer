@@ -2,7 +2,7 @@ import scripts.XCRandomizer, scripts.JSONParser
 from XC2.XC2_Scripts import SeedNames, Options
 
 Game = "XC2"
-Title = "Xenoblade Chronicles 2 Randomizer"
+Title = "Xenoblade Chronicles 2"
 Version = "1.5.0"
 backgrounds = ["titlescreen1.png"]
 for i in range(1,11):
