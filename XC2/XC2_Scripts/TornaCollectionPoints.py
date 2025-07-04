@@ -15,7 +15,7 @@ class TornaCollectionPoint: # created to allow me to pass these objects easier
         self.nearloc = input['Location Near']
         self.rarity = input['Rarity']
         self.collectiontableid = input['CollectionTableID']
-        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 4, "0") # holds ids, -1 for progression, 0 for filler spots
+        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], rewardnumber, "-1"), 4, "-2") # holds ids, -1 for progression, 0 for filler spots, -2 for no item
         if rewardnumber > 0:
             self.hasprogression = True
         else:
