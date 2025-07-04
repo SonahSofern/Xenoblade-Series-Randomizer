@@ -78,7 +78,7 @@ def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version, buttonS
     def PermalinkEntryUpdate():
         global disableStateUpdates
         if not scripts.SavedOptions.stopPermalinkUpdate:
-            disableStateUpdates = True
+            disableStateUpdates = True # Essentially we dont want when we click a button for it to update the permaLinkVar and trigger that trace and update every single button
             permaLinkVar.set(GenerateCompressedPermalink(seedEntryVar.get(), traceObjects, version))
             disableStateUpdates = False
         
