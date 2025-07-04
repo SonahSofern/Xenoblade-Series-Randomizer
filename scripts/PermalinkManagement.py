@@ -63,30 +63,26 @@ def GenerateSettingsFromPermalink(base64_encoded_permalink, OptionsList):
             OptionsList[i].set(intvalue)    
     return(seed, OptionsList)
 
-
+disableStateUpdates = None # This is messy and I dont like it.
 def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version, buttonStateUpdates):
-    
     def PermalinkFromEntry():
         try:
+            if disableStateUpdates:
+                return
             seedName, options = GenerateSettingsFromPermalink(permaLinkVar.get(), traceObjects)
             seedEntryVar.set(seedName)
-            # buttonStateUpdates()
+            buttonStateUpdates()
         except:
             print("Invalid Permalink")
-            permaLinkVar.set("")
     
     def PermalinkEntryUpdate():
+        global disableStateUpdates
         if not scripts.SavedOptions.stopPermalinkUpdate:
-            compressedPermalink = GenerateCompressedPermalink(seedEntryVar.get(), traceObjects, version)
-            permaLinkVar.set(compressedPermalink)
+            disableStateUpdates = True
+            permaLinkVar.set(GenerateCompressedPermalink(seedEntryVar.get(), traceObjects, version))
+            disableStateUpdates = False
         
     permaLinkVar.trace_add("write", lambda i,x,o: PermalinkFromEntry())
     for interactAble in traceObjects[2:]:
-        try:
-            interactAble.trace_add("write", lambda i,x,o: PermalinkEntryUpdate())
-        except:
-            pass
+        interactAble.trace_add("write", lambda i,x,o: PermalinkEntryUpdate())
         
-# dont include input folder and output folder entry in interactable
-# dont calculate until no input for 1 second to stop lag typing
-# it prints invalid permalink because when it deleted the link with seedEntry.delete

@@ -182,9 +182,10 @@ class MutuallyExclusivePairing():
         for op in group2:
             op.clickCommands.append(lambda op=op: MutuallyExclusiveToggle(op, group1))
 
-def MutuallyExclusiveToggle(op, pairGroup):
+def MutuallyExclusiveToggle(op:Option, pairGroup):
     if op.checkBoxVal.get() == False:
         pass
     else:
         for op in pairGroup:
             op.checkBoxVal.set(False)
+            op.StateUpdate()
