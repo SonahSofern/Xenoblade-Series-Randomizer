@@ -1,8 +1,7 @@
 from tkinter import *
 from scripts import UI_Colors
-from tkinter import font, ttk
-import random, subprocess, shutil, os, threading, traceback, time, sys, datetime
-import json
+from tkinter import ttk
+import random, subprocess, shutil, os, threading, traceback, time, datetime
 from scripts import SavedOptions, PopupDescriptions
 
 
@@ -17,95 +16,6 @@ fontType = SavedOptions.SavedEntry("Font", defFontVar)
 fontSizeSave = SavedOptions.SavedEntry("Font Size", defFontSizeVar)
 GUITheme = SavedOptions.SavedEntry("Theme", defGUIThemeVar)
 
-GUIWindow = None
-
-def OpenSettingsWindow(rootWindow, defaultFont, defaultTheme, Game):
-    
-    def LoadFontByName(name):
-        defaultFont.config(family=name)
-
-    def LoadFontSize(size):
-        if ((size != "") and (0 < int(size)) and (int(size) < 60)):
-            defaultFont.config(size=int(size))
-
-    def NextFont(event= None):
-        nonlocal iter
-        iter += 1
-        fontName.delete(0, END)
-        fontName.insert(0,allFonts[iter])
-        defaultFont.config(family=allFonts[iter])
-
-    def PreviousFont(event = None):
-        nonlocal iter        
-        iter -= 1
-        fontName.delete(0, END)
-        fontName.insert(0,allFonts[iter])
-        defaultFont.config(family=allFonts[iter])
-
-    def SaveUIChanges(event = None):
-        fontType.checkBoxVal.set(defaultFont.cget("family"))
-        fontSizeSave.checkBoxVal.set(defaultFont.cget("size"))
-        SavedOptions.saveData([fontType,fontSizeSave,GUITheme], "GUISavedOptions.txt", f"{Game}/GUI")
-
-    def IncreaseFontSize(event = None):
-        newSize = defaultFont.cget("size") + 1
-        LoadFontSize(newSize)
-        fontSize.delete(0, END)
-        fontSize.insert(0,newSize)
-        
-    def DecreaseFontSize(event = None):
-        newSize = defaultFont.cget("size") - 1
-        LoadFontSize(newSize)
-        fontSize.delete(0, END)
-        fontSize.insert(0,newSize)
-    
-    global GUIWindow
-    if GUIWindow == None or (not GUIWindow.winfo_exists()):      
-        newWindow = Toplevel(rootWindow)
-        GUIWindow = newWindow
-        newWindow.protocol("WM_DELETE_WINDOW", lambda: (RootsForStyling.remove(newWindow), newWindow.destroy()))
-        iter = 0
-        fontSizeVar = StringVar()
-        newWindow.title("GUI Settings")
-        newWindow.geometry("1000x300")
-        RootsForStyling.append(newWindow)
-        allFonts = font.families()
-        # Font Option Controls
-        newWindow.bind("<Right>", NextFont)
-        newWindow.bind("<Left>", PreviousFont) 
-        newWindow.bind("<Return>", SaveUIChanges)
-        newWindow.bind("<Up>", IncreaseFontSize)
-        newWindow.bind("<Down>", DecreaseFontSize) 
-        newWindow.config(padx=10, pady=10)
-        fontNameVar.trace_add("write", lambda name, index, mode: LoadFontByName(fontNameVar.get()))
-        fontSizeVar.trace_add("write", lambda name, index, mode: LoadFontSize(fontSizeVar.get()))
-        from tkinter.font import Font
-        staticFont = Font(family="Arial", size=16)
-        fontTestBack = ttk.Button(newWindow, text="Previous", command=PreviousFont, width=10, style="STATIC.TButton")
-        fontName = ttk.Entry(newWindow, width=20, textvariable=fontNameVar)
-        fontTestNext = ttk.Button(newWindow, text="Next", command=NextFont, style="STATIC.TButton")
-        saveGUI = ttk.Button(newWindow, text="Save Changes 🖫", command=SaveUIChanges, style="STATIC.TButton")
-        fontSize = ttk.Entry(newWindow, textvariable=fontSizeVar)
-        fontSize.delete(0, END)
-        fontSize.insert(0,defaultFont.cget("size"))
-        fontName.delete(0, END)
-        fontName.insert(0,defaultFont.cget("family"))
-        fontName.grid(row=0, column=0, padx=5, pady=5)
-        fontSize.grid(row=0, column=1, padx=5, pady=5)
-        fontTestBack.grid(row=0, column=2, padx=5, pady=5)
-        fontTestNext.grid(row=0, column =3, padx=5, pady=5)
-        saveGUI.grid(row=2, column=1, padx=5, pady=5)
-        fontName.configure(font=staticFont)
-        fontSize.configure(font=staticFont) # Have to config them like this for entry it doesnt accept style= whn you make the thing
-        LoadTheme(defaultFont, defaultTheme.get())
-        
-        # # Dark Mode Controls
-        # darkMode = ttk.Button(newWindow, text=defaultTheme.get(), command=lambda: ToggleLightDarkMode(darkMode, defaultFont, defaultTheme), style="STATIC.TButton")
-        # darkMode.grid(row=1, column=0, sticky="w", padx=5, pady=5)
-    else:
-        GUIWindow.focus()
-        GUIWindow.deiconify() # unminimizes
-    
         
 def LoadTheme(defaultFont, themeName):
     style= ttk.Style()
@@ -509,15 +419,3 @@ def SlowBurn(progressBar, nextStop):
     while(progressBar['value'] < nextStop):
         time.sleep(0.02)
         progressBar['value'] += 0.05
-
-def RandomizeButtonDice(button:ttk.Button):
-    selection = [ "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
-    curText = button.cget("text")
-    dice1 = random.choice(selection)
-    dice2 = random.choice(selection)
-    newText = f"{dice1} {curText} {dice2}"
-    button.config(text=newText)
-    time.sleep(1)
-    
-    # Place random dice on both sides of the word
-    # Randomly swap them every second to simulate movement and randomization

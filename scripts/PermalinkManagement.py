@@ -63,6 +63,7 @@ def GenerateSettingsFromPermalink(base64_encoded_permalink, OptionsList):
             OptionsList[i].set(intvalue)    
     return(seed, OptionsList)
 
+
 disableStateUpdates = None # This is messy and I dont like it.
 def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version, buttonStateUpdates):
     def PermalinkFromEntry():
