@@ -88,6 +88,8 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                                                     
                         chosen:Enemy = random.choice(filteredEnemyData) # Choose an enemy                
                         
+                        # if Options.FinalBossOption.GetState() and enemy["$id"] in []: # Choose a valid final boss option
+                            
                         VoicedEnemiesFix(eneVoiceData, chosen, enemy)                                
                         SpikeBalancer(enemy, chosen.eneListArea)
                         

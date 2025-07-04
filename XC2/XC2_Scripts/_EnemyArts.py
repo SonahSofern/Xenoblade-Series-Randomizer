@@ -264,7 +264,7 @@ def Debuff(art):
 def EnemyArtEnhancementDescriptions():
     myDesc = scripts.PopupDescriptions.Description()
     myDesc.Header(Options.EnemyArtEffectsOption.name)
-    myDesc.Text(f"Adds various bonus effects to enemies arts, this will NOT override original art effects to get the vanilla feel of the game.")
+    myDesc.Text(f"Adds various bonus effects to enemies arts, this will NOT override original art effects to keep the vanilla feel of the game.")
     return myDesc
 
 
