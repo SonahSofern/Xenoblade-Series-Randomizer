@@ -1703,8 +1703,8 @@ def AddNewFlagPointers(GateCommReq, GateNumber): # if we reduce the required com
         JSONParser.ExtendJSONFile("common/FLD_ConditionFlag.json", [[{"$id": NewCondFlagRowID, "FlagType": 4, "FlagID": 652, "FlagMin": GateCommReq, "FlagMax": 6}]])
 
 def CreateSpoilerLog(Version, permalinkVar, seedEntryVar):
-    if DontMakeSpoilerLog:
-        return
+    #if DontMakeSpoilerLog:
+    #    return
     IDstoAdd = []
     MainQuestNamestoStorySteps = {"What Bars the Way": 10, "Power Unimaginable": 17, "Where's the Boy Gone?": 21, "Feeding an Army": 26, "Lett Bridge Restoration": 27, "To Cross a Desert": 33}
     try: 
