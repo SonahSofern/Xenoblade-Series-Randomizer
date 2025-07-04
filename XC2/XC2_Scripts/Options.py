@@ -222,7 +222,7 @@ UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
 UMHuntOption_RandomLandmarks = SubOption("Random Starting Landmarks", UMHuntOption)
 
 # Torna
-TornaMainOption = Option("Torna Randomization", TornaTab, "Randomizes the Torna DLC, in a logic-based method.", [lambda: TornaMain.AllTornaRando(TornaCompatibleOptions)], descData=lambda:TornaMain.TornaMainDescription())
+TornaMainOption = Option("Torna Randomization", TornaTab, "Randomizes the Torna DLC, in a logic-based method.", [lambda: TornaMain.AllTornaRando()], descData=lambda:TornaMain.TornaMainDescription())
 TornaMainOption_CollectionPoints = SubOption("Collection Points", TornaMainOption)
 TornaMainOption_EnemyDrops = SubOption("Enemy Drops", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 9, spinIncr = 1, spinWidth = 1, spinDefault = 1, spinDesc = "Items")
 TornaMainOption_GroundItems = SubOption("Ground Items", TornaMainOption)
@@ -242,9 +242,23 @@ for loc in TornaMain.GormottNametoLocID.keys(): # Automatically Generates these
     SubOption(loc, TornaRemoveGormottChecks, _defState = True)
 TornaRewardsonUnreqSidequests = Option("Progression on Unrequired Sidequests", TornaTab, "Sidequests not chosen for the main story requirements or story gates can have progression items on their rewards.")
 
-TornaCompatibleOptions = [BladeSpecialButtonsOption, TornaChooseCommunityReqs, CondenseGoldOption, TornaCreateSpoilerLog, EnhancementDisplayOption, EverlastingPouchItemsOption, FieldItemOption, TornaObjectColorMatchesContents, StartwithIncreasedMovespeedOption, MusicOption, MutePopupsOption, NPCSizeOption, TornaRemoveGormottChecks, ShortcutsOption, TornaAddHints, TornaMainOption, TreasureChestVisOption, TrustLineOption, TornaRewardsonUnreqSidequests, EnemyEnhancementsOption, EnemyArtEffectsOption, BladeWeaponChipsOption, BladeSpecialOption, BladeBattleSkillsOption]
+#TornaCompatibleOptions = [BladeSpecialButtonsOption, TornaChooseCommunityReqs, CondenseGoldOption, TornaCreateSpoilerLog, EnhancementDisplayOption, EverlastingPouchItemsOption, FieldItemOption, TornaObjectColorMatchesContents, StartwithIncreasedMovespeedOption, MusicOption, MutePopupsOption, NPCSizeOption, TornaRemoveGormottChecks, ShortcutsOption, TornaAddHints, TornaMainOption, TreasureChestVisOption, TrustLineOption, TornaRewardsonUnreqSidequests, EnemyEnhancementsOption, EnemyArtEffectsOption, BladeWeaponChipsOption, BladeSpecialOption, BladeBattleSkillsOption]
 
-MutuallyExclusivePairing([TornaMainOption], [DriverArtsOption])
+IncompatibleOptionsWithTorna = [AccessoriesOption, AuxCoresOption, AccessoryShopsOption, CollectionPointsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, DriverArtsOption, DriverSkillTreesOption, BladesOption, BladeArtsOption, BladeFieldSkillsOption, BladeWeaponChipsOption, BladeCombosOption, BladeStatsOption, EnemiesOption, EnemyDropOption, EnemyAggroOption, CustomCoreCrystalOption, FreelyEngageBladesOption, CTMCOption, RemoveFieldSkillsOption, EasySkillTreesOption, FasterLevelsOption, NewGamePlusFlagsOptions, ProjTreasureChestOption, EnemySizeOption, BladeWeaponCosmeticsOption, CosmeticsOption, RaceModeOption, UMHuntOption]
+
+# any torna option with a lambda gets the incompatible list
+MutuallyExclusivePairing([TornaMainOption], IncompatibleOptionsWithTorna)
+MutuallyExclusivePairing([TornaAddHints], IncompatibleOptionsWithTorna)
+MutuallyExclusivePairing([TornaObjectColorMatchesContents], IncompatibleOptionsWithTorna)
+MutuallyExclusivePairing([TornaChooseCommunityReqs], IncompatibleOptionsWithTorna)
+
+IncompatibleOptionsWithUMHunt = [AccessoryShopsOption, CollectionPointsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladeWeaponChipsOption, AccessoriesOption, AuxCoresOption, EnemiesOption, EnemyDropOption, CustomCoreCrystalOption, FasterDriverSkillTrees, EasySkillTreesOption, FasterLevelsOption, RaceModeOption]
+
+#for opt in IncompatibleOptionsWithUMHunt:
+#    print("TornaMainDesc.Text(" + '"• ' + opt.name + '"' + ")")
+
+MutuallyExclusivePairing([UMHuntOption], IncompatibleOptionsWithUMHunt)
+
 # Currently Disabled for Various Reasons
 # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
 # GenStandardOption("Blade Names", TabBlades, "Randomizes a Blade's name", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])
