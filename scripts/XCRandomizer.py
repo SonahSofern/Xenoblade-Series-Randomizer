@@ -50,7 +50,7 @@ def UserNeedsUpdate(version, root):
             import webbrowser
             def link():
                 webbrowser.open_new(f"https://github.com/SonahSofern/Xenoblade-Series-Randomizer/releases/tag/{latest_tag}")
-            updateMessage = ttk.Button(root, command=lambda: link(), text=f"UPDATE AVAILABLE: Download Latest Version ({latest_tag})")
+            updateMessage = ttk.Button(root, command=lambda: link(), text=f"Download Latest Version {latest_tag}")
             updateMessage.pack(pady=10)
     except:
         pass
