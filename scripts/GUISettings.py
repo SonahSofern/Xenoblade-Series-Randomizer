@@ -77,7 +77,6 @@ def LoadTheme(defaultFont, themeName):
                     "padding": (5,3,5,3),
                     "focuscolor":"",
                     "relief": "ridge",
-                    
                 },
                 "map": {
                     "background": [("pressed", currentTheme["darkColor"]),("active", currentTheme["midColor"])],
@@ -216,6 +215,8 @@ def LoadTheme(defaultFont, themeName):
     style.configure("Tag.TLabel", background= currentTheme["midGray"], relief="flat", padding=(9,2), margin=(5,0))
     style.configure("DescriptionImage.TLabel", background= currentTheme["midColor"])
     style.configure("noMargin.TLabel", margin=(0,0), padding=(20,0))
+    style.configure("CenteredLabel.TLabel")
+    style.configure("CenteredButton.TButton", anchor = "center")
 
     # Since Canvas and Roots arrent affected by normal styling
     for canvas in CanvasesForStyling:

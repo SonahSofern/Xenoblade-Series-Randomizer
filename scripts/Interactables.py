@@ -1,6 +1,7 @@
 from tkinter import ttk
 from tkinter import *
-from scripts import PopupDescriptions
+from scripts import PopupDescriptions, GUISettings
+from tkinter.font import Font
 
 Game = "" # Used to tell what option goes to what games tab
 
@@ -183,8 +184,76 @@ class MutuallyExclusivePairing():
             op.clickCommands.append(lambda op=op: MutuallyExclusiveToggle(op, group1))
 
 def MutuallyExclusiveToggle(op:Option, pairGroup):
+    enabledOption = op
+    conflictingOptions = [opt for opt in pairGroup if opt.checkBoxVal.get() == True]
+
     if op.checkBoxVal.get() == False:
         pass
+    elif conflictingOptions != []:
+        ChosenOption = AskToChooseOption(enabledOption.name, conflictingOptions)
+        if ChosenOption == True:
+            for op in pairGroup:
+                op.checkBoxVal.set(False)
+        else:
+            enabledOption.checkBoxVal.set(False)
+            
+def AskToChooseOption(enabledOption, conflictingOptions):
+    defaultFont = Font(family="Calibri", size=14)
+    conflictWindow = "Conflicting Settings"
+    
+    newroot = ttk.Notebook()
+
+    top = Toplevel(newroot, padx=10, pady=10)  # Create a new top-level window
+    top.title(conflictWindow)
+    top.geometry("600x600")
+    top.protocol("WM_DELETE_WINDOW", doNotClose()) # this doesn't seem to work
+    GUISettings.RootsForStyling.append(top)
+    Outerframe = ttk.Frame(top) 
+    canv = Canvas(Outerframe)
+    InnerFrame = ttk.Frame(canv)
+    GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
+    GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
+
+    conflictDesc = ttk.Label(InnerFrame, text= f"The following options are incompatible with the {enabledOption} option:", justify = "center")
+    conflictDesc.grid(column = 1, row = 0, sticky=(N, S, E, W))
+    
+    CurRow = 1
+
+    InnerFrame.grid_rowconfigure(CurRow, minsize = 20, weight = 1)
+    CurRow += 1
+
+    for option in conflictingOptions:
+        incompatibleOption = ttk.Label(InnerFrame, text = option.name, style = "CenteredLabel.TLabel", anchor = "center", padding = (0, 5))
+        incompatibleOption.grid(column = 1, row = CurRow, sticky = (N, S, E, W))
+        CurRow += 1
+
+    opt1Pressed = BooleanVar(InnerFrame)
+    opt2Pressed = BooleanVar(InnerFrame)
+
+    opt1Button = ttk.Button(InnerFrame, text= "Disable Incompatible Options", command=lambda: (opt1Pressed.set(True), top.destroy()), style = "CenteredButton.TButton")
+    opt1Button.grid(column = 0, row = CurRow + 1, sticky = (N, S, E, W))
+    opt2Button = ttk.Button(InnerFrame, text= f"Disable {enabledOption}", command=lambda: (opt2Pressed.set(True), top.destroy()), style = "CenteredButton.TButton")
+    opt2Button.grid(column = 2, row = CurRow + 1, sticky = (N, S, E, W))
+
+    InnerFrame.grid_rowconfigure(CurRow, minsize = 20, weight = 1)
+
+    for col in range(3):
+        InnerFrame.grid_columnconfigure(col, weight = 1, minsize = 250)
+
+    GUISettings.ResizeWindow(top, InnerFrame)
+
+    top.focus()
+    top.deiconify()
+
+    top.wait_window(top)
+
+    if opt1Pressed.get() == True:
+        ChosenResolution = True
     else:
-        for op in pairGroup:
-            op.checkBoxVal.set(False)
+        ChosenResolution = False
+
+    return ChosenResolution
+
+def doNotClose(): # keeps user from closing out of window using x, instead of choosing an option.
+    # this doesn't seem to work...
+    pass
