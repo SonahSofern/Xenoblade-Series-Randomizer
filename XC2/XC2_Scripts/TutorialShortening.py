@@ -1,5 +1,5 @@
 import json
-from scripts import Helper
+from scripts import Helper, JSONParser
 from XC2.XC2_Scripts import Options, EnemyRandoLogic
 
 def ShortenedTutorial():
@@ -184,3 +184,10 @@ def RaceModeTutorialShortening(): # we need to call this from the race mode func
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+def IndolQuizSkip():
+    JSONParser.ChangeJSONLine(["common/FLD_QuestList.json"],[156], ["NextQuestA"], 158)
+    #JSONParser.ChangeJSONLine(["common/EVT_listBf.json"],[10261], ["nextID", "nextIDtheater"], 10262)
+    JSONParser.ChangeJSONLineInMultipleSpots(["common/EVT_chgBf01.json"],[10255], ["chgName", "chgType", "id"], ["bf06_140_130", 1, 6020])
+    #JSONParser.ChangeJSONLineInMultipleSpots(["common_gmk/ma11a_FLD_LandmarkPop.json"],[1116], ["category", "MAPJUMPID"], [2, 0])
+    #JSONParser.ChangeJSONLineInMultipleSpots(["common_gmk/ma11a_FLD_LandmarkPop.json"],[1117], ["category", "MAPJUMPID"], [0, 132])
+    JSONParser.ChangeJSONLineInMultipleSpots(["common/FLD_LODList.json"], [162], ["ScenarioFlagMin1", "ScenarioFlagMax1", "QuestFlag1", "QuestFlagMin1", "QuestFlagMax1"], [6019, 6025, 0, 0, 0])
