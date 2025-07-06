@@ -188,4 +188,3 @@ def MutuallyExclusiveToggle(op:Option, pairGroup):
     else:
         for op in pairGroup:
             op.checkBoxVal.set(False)
-            op.StateUpdate()
