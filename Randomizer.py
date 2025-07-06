@@ -39,8 +39,8 @@ import XC3.XC3_Scripts.XC3_Settings as XC3
 import XCXDE.XCXDE_Scripts.XCXDE_Settings as XCXDE
 XCRandomizer.CreateMainWindow(root, MainWindow, XCDE.Game, XCDE.Version, XCDE.Title, XCDE.seedEntryVar, XCDE.permalinkVar, XCDE.Options.Tabs, XCDE.extraCommands, XCDE.mainFolderNames, XCDE.subFolderNames, XCDE.SeedNames.Nouns, XCDE.SeedNames.Verbs, backgroundImages=XCDE.backgrounds, extraFiles=[XCDE.TitlescreenSplash], setupHelpDesc=lambda: XCDE.XCDEHelp())
 XCRandomizer.CreateMainWindow(root, MainWindow, XC2.Game, XC2.Version, XC2.Title, XC2.seedEntryVar, XC2.permalinkVar, XC2.Options.Tabs, XC2.extraCommands, XC2.mainFolderNames, XC2.subFolderNames, XC2.SeedNames.Nouns, XC2.SeedNames.Verbs, backgroundImages=XC2.backgrounds, extraFiles=[XC2.TitlescreenSplash], setupHelpDesc=lambda: XC2.XC2Help())
-XCRandomizer.CreateMainWindow(root, MainWindow, XC3.Game, XC3.Version, XC3.Title, XC3.seedEntryVar, XC3.permalinkVar, XC3.Options.Tabs, XC3.extraCommands, XC3.mainFolderNames, XC3.subFolderNames, XC3.SeedNames.Nouns, XC3.SeedNames.Verbs, XC3.textFolderName,extraArgs=XC3.extraArgs, backgroundImages=XC3.backgrounds)
-XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.Game, XCXDE.Version, XCXDE.Title, XCXDE.seedEntryVar, XCXDE.permalinkVar, XCXDE.Options.Tabs, XCXDE.extraCommands, XCXDE.mainFolderNames, XCXDE.subFolderNames, XCXDE.SeedNames.Nouns, XCXDE.SeedNames.Verbs, backgroundImages=XCXDE.backgrounds)
+# XCRandomizer.CreateMainWindow(root, MainWindow, XC3.Game, XC3.Version, XC3.Title, XC3.seedEntryVar, XC3.permalinkVar, XC3.Options.Tabs, XC3.extraCommands, XC3.mainFolderNames, XC3.subFolderNames, XC3.SeedNames.Nouns, XC3.SeedNames.Verbs, XC3.textFolderName,extraArgs=XC3.extraArgs, backgroundImages=XC3.backgrounds)
+# XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.Game, XCXDE.Version, XCXDE.Title, XCXDE.seedEntryVar, XCXDE.permalinkVar, XCXDE.Options.Tabs, XCXDE.extraCommands, XCXDE.mainFolderNames, XCXDE.subFolderNames, XCXDE.SeedNames.Nouns, XCXDE.SeedNames.Verbs, backgroundImages=XCXDE.backgrounds)
 
 root.protocol("WM_DELETE_WINDOW", lambda: ([cmd() for cmd in XCRandomizer.saveCommands] and root.destroy()))
 

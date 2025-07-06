@@ -57,31 +57,26 @@ def GenerateSettingsFromPermalink(base64_encoded_permalink, OptionsList):
         optionvalue = OptionsList[i].get()
         if isinstance(optionvalue, bool):
             boolean_value = bool(bitsreader.read(1))
-            OptionsList[i].set(boolean_value)
+            if OptionsList[i].get() != boolean_value: # if the option is not changed dont recalculate things by setting it
+                OptionsList[i].set(boolean_value)
         elif isinstance(optionvalue, int):
             intvalue = bitsreader.read(8)
-            OptionsList[i].set(intvalue)    
+            if OptionsList[i].get() != intvalue:
+                OptionsList[i].set(intvalue)    
     return(seed, OptionsList)
 
 
-disableStateUpdates = None # This is messy and I dont like it.
-def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version, buttonStateUpdates):
+def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version):
     def PermalinkFromEntry():
         try:
-            if disableStateUpdates:
-                return
             seedName, options = GenerateSettingsFromPermalink(permaLinkVar.get(), traceObjects)
             seedEntryVar.set(seedName)
-            buttonStateUpdates()
         except:
             print("Invalid Permalink")
     
     def PermalinkEntryUpdate():
-        global disableStateUpdates
         if not scripts.SavedOptions.stopPermalinkUpdate:
-            disableStateUpdates = True # Essentially we dont want when we click a button for it to update the permaLinkVar and trigger that trace and update every single button
             permaLinkVar.set(GenerateCompressedPermalink(seedEntryVar.get(), traceObjects, version))
-            disableStateUpdates = False
         
     permaLinkVar.trace_add("write", lambda i,x,o: PermalinkFromEntry())
     for interactAble in traceObjects[2:]:

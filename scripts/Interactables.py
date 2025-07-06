@@ -36,6 +36,7 @@ class Option():
         self.spinDesc = _spinDesc
         self.spinWidth = _spinWidth
         self.spinIncr = _spinIncr
+        
 
     def DisplayOption(self, tab, root, defFont, defTheme):
         self.root = root
@@ -74,6 +75,8 @@ class Option():
             padx= 0
         self.descObj.grid(row=rowIncrement, column = 1, sticky="w", padx=padx)
         
+        self.checkBoxVal.trace_add("write",  lambda name, index, mode: self.StateUpdate())
+        
         # % Boxes
         if self.hasSpinBox:
             self.spinBoxVal = IntVar(value=self.spinDefault)
@@ -86,6 +89,7 @@ class Option():
         for sub in self.subOptions:
             rowIncrement += 1
             sub.checkBoxVal = BooleanVar(value=sub.defState)
+            sub.checkBoxVal.trace_add("write",  lambda name, index, mode: self.StateUpdate())
             sub.checkBox = ttk.Checkbutton(optionPanel, text=sub.name, variable=sub.checkBoxVal, width=25)
             sub.checkBox.grid(row=rowIncrement, column=0, sticky="sw")
             if sub.hasSpinBox:
@@ -170,10 +174,6 @@ XenoOptionDict = {
     "XC3": [],
     "XCXDE": [],
 }
-
-def UpdateAllStates(Game):
-    for opt in XenoOptionDict[Game]:
-        opt.StateUpdate()
 
 class MutuallyExclusivePairing():
     def __init__(self, group1:list[Option], group2:list[Option]):
