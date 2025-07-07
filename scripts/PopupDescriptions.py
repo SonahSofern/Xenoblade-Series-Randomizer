@@ -125,6 +125,16 @@ def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
             descObj.SpecialPack()
 
     scripts.GUISettings.ResizeWindow(top, InnerFrame, myDescription.bonusWidth)
+    center(top)
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
 
             
+def center(win):
+    win.update_idletasks()  # ensure winfo_width/height are up-to-date
+    width = win.winfo_width()
+    height = win.winfo_height()
+    screen_w = win.winfo_screenwidth()
+    screen_h = win.winfo_screenheight()
+    x = (screen_w // 2) - (width // 2)
+    y = (screen_h // 2) - (height // 2)
+    win.geometry(f"+{x}+{y}")

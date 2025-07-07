@@ -184,29 +184,27 @@ class MutuallyExclusivePairing():
             op.clickCommands.append(lambda op=op: MutuallyExclusiveToggle(op, group1))
 
 def MutuallyExclusiveToggle(op:Option, pairGroup):
-    enabledOption = op
-    conflictingOptions = [opt for opt in pairGroup if opt.checkBoxVal.get() == True]
-
     if op.checkBoxVal.get() == False:
-        pass
-    elif conflictingOptions != []:
-        ChosenOption = AskToChooseOption(enabledOption.name, conflictingOptions)
-        if ChosenOption == True:
-            for op in pairGroup:
-                op.checkBoxVal.set(False)
-        else:
-            enabledOption.checkBoxVal.set(False)
+        return
+    
+    conflictingOpt = [opt for opt in pairGroup if opt.GetState() == True]
+    if conflictingOpt == []:
+        return
+    
+    if AskToChooseOption(op.name, conflictingOpt):
+        for op in pairGroup:
+            op.checkBoxVal.set(False)
+    else:
+        op.checkBoxVal.set(False)
             
 def AskToChooseOption(enabledOption, conflictingOptions):
     defaultFont = Font(family="Calibri", size=14)
     conflictWindow = "Conflicting Settings"
-    
-    newroot = ttk.Notebook()
 
-    top = Toplevel(newroot, padx=10, pady=10)  # Create a new top-level window
+    top = Toplevel(padx=10, pady=10)  # Create a new top-level window
     top.title(conflictWindow)
     top.geometry("600x600")
-    top.protocol("WM_DELETE_WINDOW", doNotClose()) # this doesn't seem to work
+    
     GUISettings.RootsForStyling.append(top)
     Outerframe = ttk.Frame(top) 
     canv = Canvas(Outerframe)
@@ -247,13 +245,10 @@ def AskToChooseOption(enabledOption, conflictingOptions):
 
     top.wait_window(top)
 
+    
     if opt1Pressed.get() == True:
         ChosenResolution = True
     else:
         ChosenResolution = False
 
     return ChosenResolution
-
-def doNotClose(): # keeps user from closing out of window using x, instead of choosing an option.
-    # this doesn't seem to work...
-    pass
