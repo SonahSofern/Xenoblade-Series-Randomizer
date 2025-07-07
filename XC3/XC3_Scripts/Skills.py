@@ -1,9 +1,10 @@
 import json, random
 from scripts import JSONParser, Helper, PopupDescriptions
-
+import XC3.XC3_Scripts.Options
 
 def SkillRando():
     copiedStats = ["Name", "Caption", "Type", "Enhance1","Enhance2","Enhance3","Enhance4","Enhance5", "Icon"]
+    skillOdds = XC3.XC3_Scripts.Options.SkillOptions.GetSpinbox()
     with open("XC3/JsonOutputs/btl/BTL_Skill_PC.json", 'r+', encoding='utf-8') as skillFile:
         skillData = json.load(skillFile)
         TalentList = []
@@ -16,7 +17,7 @@ def SkillRando():
             TalentList.append(testDict)
 
         for skill in skillData["rows"]: # Replace the list
-            if not SkillCheck(skill):
+            if not SkillCheck(skill, skillOdds):
                 continue
             chosen = random.choice(TalentList)
             for stat in copiedStats:
@@ -25,9 +26,11 @@ def SkillRando():
 
         JSONParser.CloseFile(skillData, skillFile)
 
-def SkillCheck(skill):
+def SkillCheck(skill, odds = 100):
     ignoreSkills = [100,101,105,106,107]
     if skill["$id"] in ignoreSkills:
+        return False
+    if not Helper.OddsCheck(odds):
         return False
     for i in range(1,6):
         if skill[f"Enhance{i}"] == 0:

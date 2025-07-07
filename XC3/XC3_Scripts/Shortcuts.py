@@ -19,8 +19,8 @@ def TutorialSkips(): # For some reason visually the game wont load the entire hu
                 continue
             tut["Flag"] = 21022 # Flag set very early instantly unlocks everything basically probably will cause issues so testing is required
         JSONParser.CloseFile(tutData, tutFile)
-        
-        
+# https://xenobladedata.github.io/xb3_200_dlc4/MNU_option_notice.html Can set a default of dont show tips cause you get a barrage of them
+        # https://github.com/roccodev/xcnx-file-loader/issues
         
         
         
