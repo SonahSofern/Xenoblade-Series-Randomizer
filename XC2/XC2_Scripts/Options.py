@@ -229,7 +229,7 @@ TornaMainOption_GroundItems = SubOption("Ground Items", TornaMainOption)
 TornaMainOption_Shops = SubOption("Shops", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 15, spinIncr = 1, spinWidth = 2, spinDefault = 1, spinDesc = "Items")
 TornaMainOption_SideQuests = SubOption("Side Quests", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 4, spinIncr = 1, spinWidth = 1, spinDefault = 1, spinDesc = "Items")
 TornaMainOption_TreasureChests = SubOption("Treasure Chests", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 8, spinIncr = 1, spinWidth = 1, spinDefault = 1, spinDesc = "Items")
-TornaCreateSpoilerLog = Option("Create Torna Spoiler Log", TornaTab, "Outputs a Spoiler Log containing information on where each item is placed, located one level above your input folder, in a separate folder called 'Torna_Spoiler_Logs'.")
+TornaCreateSpoilerLog = Option("Create Torna Spoiler Log", TornaTab, "Outputs a Spoiler Log containing information on where each item is placed, located in XC2/Torna_Spoiler_Logs folder.")
 TornaAddHints = Option("Torna In-Game Hints", TornaTab, "Adds hints to the in the \"Tips\" Submenu in-game.", descData=lambda:TornaMain.TornaHintDescription())
 TornaAddHints_ItemHints = SubOption("Item Hints", TornaAddHints, hasSpinBox = True, spinMin = 1, spinMax = 12, spinIncr = 1, spinWidth = 2, spinDefault = 1, spinDesc = "Hints")
 TornaAddHints_LocProgHints = SubOption("Location Hints", TornaAddHints, hasSpinBox = True, spinMin = 1, spinMax = 12, spinIncr = 1, spinWidth = 2, spinDefault = 1, spinDesc = "Hints")
@@ -240,7 +240,7 @@ TornaChooseCommunityReqs_Gate2Req = SubOption("Gate 2 Required Level", TornaChoo
 TornaRemoveGormottChecks = Option("Remove Certain Gormott Checks", TornaTab, "Progression Items will not be found in Checks near locations in Gormott selected below.")
 for loc in TornaMain.GormottNametoLocID.keys(): # Automatically Generates these
     SubOption(loc, TornaRemoveGormottChecks, _defState = True)
-TornaRewardsonUnreqSidequests = Option("Progression on Unrequired Sidequests", TornaTab, "Sidequests not chosen for the main story requirements or story gates can have progression items on their rewards.")
+TornaRewardsonUnreqSidequests = Option("Progression on Unrequired Sidequests", TornaTab, "Sidequests not chosen for the main story requirements or story gates can have Progression Items on their rewards.")
 
 #TornaCompatibleOptions = [BladeSpecialButtonsOption, TornaChooseCommunityReqs, CondenseGoldOption, TornaCreateSpoilerLog, EnhancementDisplayOption, EverlastingPouchItemsOption, FieldItemOption, TornaObjectColorMatchesContents, StartwithIncreasedMovespeedOption, MusicOption, MutePopupsOption, NPCSizeOption, TornaRemoveGormottChecks, ShortcutsOption, TornaAddHints, TornaMainOption, TreasureChestVisOption, TrustLineOption, TornaRewardsonUnreqSidequests, EnemyEnhancementsOption, EnemyArtEffectsOption, BladeWeaponChipsOption, BladeSpecialOption, BladeBattleSkillsOption]
 
