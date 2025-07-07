@@ -16,19 +16,20 @@ def EarlyMoveSpeed():
         colonyData = json.load(colonyFile)
         for colony in colonyData["rows"]:
             if colony["$id"] == 1:
-                colony["Level1"] = 0 # Instantly get it
+                colony["Level1"] = 10 # Instantly get it
                 colony["Reward1"] = 70 # Movespeed
-                colony["Condition"] = 0 # Remove the affinity condition
-                colony["RespectFlag"] = 21022 # Remove the condition
+                colony["Condition"] = 253 # Remove the affinity condition (Setting it to a required quest early on)
+                colony["RespectFlag"] = 21022
                 break
         JSONParser.CloseFile(colonyData,colonyFile)
     with open(f"XC3//JsonOutputs/fld/FLD_PerkResource.json", 'r+', encoding='utf-8') as perkFile: # Increase the power of the movespeed deeds
         perkData = json.load(perkFile)
         for perk in perkData["rows"]:
             if perk["$id"] == 1:
-                newVal = Options.MoveSpeedOption.GetSpinbox() *10
+                newVal = Options.MoveSpeedOption.GetSpinbox()
                 perk["Value1"] = newVal
                 perk["Value2"] = newVal
+                perk["Value3"] = newVal # Add this because im not removing the old value so u can get 3 of these
                 break
         JSONParser.CloseFile(perkData, perkFile)
     

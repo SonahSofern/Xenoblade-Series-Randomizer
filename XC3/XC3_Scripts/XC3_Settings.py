@@ -11,7 +11,7 @@ def ShowTitleScreenText():
 seedEntryVar = scripts.XCRandomizer.StringVar()
 permalinkVar = scripts.XCRandomizer.StringVar()
 
-extraArgs= ["--hashes", "Toolset/xbc3Hashes.txt"]
+extraArgs= ["--hashes", "XC3/xbc3Hashes.txt"]
 extraCommands = [lambda: ShowTitleScreenText()]
 mainFolderNames = ["des", "btl", "evt", "fld", "map", "prg", "qst", "sys", "zzz"] # "mnu"
 subFolderNames = ["autotalk", "battle", "field", "menu", "quest", "system"]

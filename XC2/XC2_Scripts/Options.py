@@ -68,7 +68,7 @@ PouchItemShopOption_CoreCrystals = SubOption("Core Crystals", PouchItemShopOptio
 PouchItemShopOption_Deeds = SubOption("Shop Deeds", PouchItemShopOption)
 PouchItemShopOption_CollectionPointMaterials = SubOption("Collection Point Materials", PouchItemShopOption)
 PouchItemShopOption_PouchItems = SubOption("Pouch Items", PouchItemShopOption)
-TreasureChestOption = Option("Treasure Chests", Items, "Randomizes the contents of Treasure Chests",[lambda: TreasureChests.RandoTreasureBoxes()], _prio = 51, hasSpinBox = True, descData=lambda: TreasureChests.TreasureChestDescription())
+TreasureChestOption = Option("Treasure Chests", Items, "Randomizes the contents of Treasure Chests",[lambda: TreasureChests.RandoTreasureBoxes()], prio = 51, hasSpinBox = True, descData=lambda: TreasureChests.TreasureChestDescription())
 TreasureChestOption_Accessories = SubOption("Accessories", TreasureChestOption)
 TreasureChestOption_TornaAccessories = SubOption("Torna Accessories", TreasureChestOption)
 TreasureChestOption_WeaponChips = SubOption("Weapon Chips", TreasureChestOption)
@@ -168,7 +168,7 @@ EnemyAggroOption = Option("Enemy Aggro", Enemies, "The percentage of all non-bos
 # Misc
 MusicOption = Option("Music", Misce, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
 MusicOption_MixBattleAndEnv = SubOption("Mix Battle/Environment Themes", MusicOption, _defState = False)
-CustomCoreCrystalOption = Option("Custom Core Crystals", Items, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], _prio = 52, hasSpinBox = True, _spinDesc = "% of Chests", descData= lambda: CoreCrystalAdjustments.Description())
+CustomCoreCrystalOption = Option("Custom Core Crystals", Items, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], prio = 52, hasSpinBox = True, spinDesc = "% of Chests", descData= lambda: CoreCrystalAdjustments.Description())
 # DifficultyOption = Option("Difficulty", Misce, "Forces this difficulty, regardless of what is chosen in the options menu")
 # DifficultyOption_Easy = SubOption("Easy", DifficultyOption)
 # DifficultyOption_Normal = SubOption("Normal", DifficultyOption)
@@ -177,7 +177,7 @@ CustomCoreCrystalOption = Option("Custom Core Crystals", Items, "Adds Core Cryst
 
 # QOL
 FreelyEngageBladesOption = Option("Freely Engage Blades", QOL, "Allows blades to be freely engaged by all valid drivers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["FreeEngage"], [0], [1], [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1075, 1076, 1103])])
-CTMCOption = Option("Chest Type Matches Contents", QOL, "Chest model and label changes depending on tier of loot", [lambda: RaceMode.ChestTypeMatching()], _prio = 95, descData = lambda: RaceMode.CTMCDescription())
+CTMCOption = Option("Chest Type Matches Contents", QOL, "Chest model and label changes depending on tier of loot", [lambda: RaceMode.ChestTypeMatching()], prio = 95, descData = lambda: RaceMode.CTMCDescription())
 TreasureChestVisOption =  Option("Treasure Chest Visibility", QOL, "Increases the range you can see treasure chests from", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["msgVisible", "msgdigVisible"], Helper.InclRange(0,200), [255])])
 RemoveFieldSkillsOption = Option("Remove Story Field Skills", QOL, "Removes field skill checks", [lambda: FieldSkillAdjustments.RemoveFieldSkills()], ["Remove All Field Skills", []])
 RemoveFieldSkillsOption_AllFieldSkills = SubOption("Remove All Field Skills", RemoveFieldSkillsOption)
@@ -187,14 +187,14 @@ MutePopupsOption = Option("Mute Popups", QOL, "Stops blade skill and pouch item 
 MutePopupsOption_Landmarks = SubOption("Landmarks", MutePopupsOption, [lambda: (JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[85], ["sheet04"], [""]),JSONParser.ChangeJSONLine(["common/MNU_Layer_Dlc03.json"],[316], ["sheet04"], [""]))])
 EnhancementDisplayOption = Option("Enhancement Display", QOL, "Shows when enhancements activate in battle", [lambda: Enhancements.SearchAndSetDisplayIDs()])
 EasySkillTreesOption = Option("Easy Affinity Trees", QOL, "Makes trust the only condition for levelling up a blade's affinity tree", [lambda: SkillTrees.BladeSkillTreeShortening()])
-FasterDriverSkillTrees = Option("Fast Driver Skill Trees", QOL, "Decreases SP required for each node", [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["./XC2/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./XC2/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./XC2/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], [f'row[key] // {FasterDriverSkillTrees.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, _spinIncr = 1,  _spinDesc = "x Faster")
-FasterLevelsOption = Option("Faster Levels", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["./XC2/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2,_spinIncr = 1, _spinDesc = "x Faster")
+FasterDriverSkillTrees = Option("Fast Driver Skill Trees", QOL, "Decreases SP required for each node", [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["./XC2/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "./XC2/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "./XC2/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], [f'row[key] // {FasterDriverSkillTrees.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1,  spinDesc = "x Faster")
+FasterLevelsOption = Option("Faster Levels", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["./XC2/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2,spinIncr = 1, spinDesc = "x Faster")
 ShortcutsOption = Option("Shortcuts", QOL, "Various speedups for the main story quests")
 ShortcutsOption_Tutorials = SubOption("Tutorials Skip", ShortcutsOption, [lambda: TutorialShortening.ShortenedTutorial()])
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
 ShortcutsOption_IndolQuiz = SubOption("Indol Quiz Skip", ShortcutsOption, [lambda: TutorialShortening.IndolQuizSkip()])
-StartwithIncreasedMovespeedOption = Option("Increased Movespeed", QOL, "Adds a shop deed to the DLC items to increase your movement speed", [lambda: DLCFlagQOL.AddMovespeedDeed()], hasSpinBox = True, _spinMin = 0, _spinMax = 50, _spinIncr = 5, _spinDesc = "% Increase (x10)", _spinWidth = 2, spinDefault = 50)
+StartwithIncreasedMovespeedOption = Option("Increased Movespeed", QOL, "Adds a shop deed to the DLC items to increase your movement speed", [lambda: DLCFlagQOL.AddMovespeedDeed()], hasSpinBox = True, spinMin = 0, spinMax = 50, spinIncr = 5, spinDesc = "% Increase (x10)", spinWidth = 2, spinDefault = 50)
 NewGamePlusFlagsOptions = Option("NG+ Flags", QOL, "Enables many NG+ behaviours like unlocked hidden driver skill trees, unlocked chain attacks from the start, unlocked blade slots etc. These must be accepted from the DLC Menu to work.", [lambda: DLCFlagQOL.CreateDLCtoSetFlag(["2nd Blade Equip Slot", "3rd Blade Equip Slot"], [35327, 35328], [2,2], [0,0], [1,1], [1,1])])
 NewGamePlusFlagsOptions_Blades = SubOption("NG+ Blades", NewGamePlusFlagsOptions, [lambda: GachaModifications.UnlockNGPlusBlades()])
 NewGamePlusFlagsOptionsHiddenDriverSkillTree = SubOption("Hidden Skill Tree Unlocked", NewGamePlusFlagsOptions, [lambda: DLCFlagQOL.FixIssuesCausedByNGPlusFlag()])
@@ -209,7 +209,7 @@ FieldItemOption = Option("Field Item Size", Funny, "Randomizes the size and spin
 # Cosmetics
 BladeWeaponCosmeticsOption = Option("Blade Weapon Cosmetics", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])], spinDefault=25)
 TrustLineOption = Option("Blade Trust Lines", CosmeticsTab, "Randomizes blade-driver trust lines in battle (colors, power, etc.)", [lambda: TrustBeam.BeamRandomizer()])
-CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()],_prio=51, hasSpinBox = True, descData=lambda: Cosmetics.CosmeticsDescription()) # Sub are created by another class
+CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()],prio=51, hasSpinBox = True, descData=lambda: Cosmetics.CosmeticsDescription()) # Sub are created by another class
 for opt in Cosmetics.CosmeticsList: # To gen these since listing them here would be annoying
     opt.CreateSubOptions(CosmeticsOption)
 
@@ -217,7 +217,7 @@ for opt in Cosmetics.CosmeticsList: # To gen these since listing them here would
 RaceModeOption = Option("Race Mode", GameModeTab, "Play through a condensed version of the game in this mode!", [lambda: RaceMode.RaceModeChanging()], descData = lambda: RaceMode.RaceModeDescription())
 RaceModeOption_Zohar = SubOption("Zohar Fragment Hunt", RaceModeOption)
 RaceModeOption_DLC = SubOption("DLC Item Removal", RaceModeOption)
-UMHuntOption = Option("Unique Monster Hunt", GameModeTab, "Defeat Unique Monsters in this Roguelike mode!", [lambda: UMHuntMain.UMHunt()], hasSpinBox = True, _spinMin = 1, _spinMax = 10, _spinIncr = 1, _spinDesc = "Round(s)", _spinWidth = 2, spinDefault = 10, descData= lambda: UMHuntMain.Description())
+UMHuntOption = Option("Unique Monster Hunt", GameModeTab, "Defeat Unique Monsters in this Roguelike mode!", [lambda: UMHuntMain.UMHunt()], hasSpinBox = True, spinMin = 1, spinMax = 10, spinIncr = 1, spinDesc = "Round(s)", spinWidth = 2, spinDefault = 10, descData= lambda: UMHuntMain.Description())
 UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
 UMHuntOption_RandomLandmarks = SubOption("Random Starting Landmarks", UMHuntOption)
 
