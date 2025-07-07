@@ -130,7 +130,7 @@ def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
 
             
 def center(win):
-    win.update_idletasks()  # ensure winfo_width/height are up-to-date
+    win.update_idletasks()
     width = win.winfo_width()
     height = win.winfo_height()
     screen_w = win.winfo_screenwidth()
