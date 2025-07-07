@@ -224,7 +224,7 @@ UMHuntOption_RandomLandmarks = SubOption("Random Starting Landmarks", UMHuntOpti
 # Torna
 TornaMainOption = Option("Torna Randomization", TornaTab, "Randomizes the Torna DLC, in a logic-based method.", [lambda: TornaMain.AllTornaRando()], descData=lambda:TornaMain.TornaMainDescription())
 TornaMainOption_CollectionPoints = SubOption("Collection Points", TornaMainOption)
-TornaMainOption_EnemyDrops = SubOption("Enemy Drops", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 9, spinIncr = 1, spinWidth = 1, spinDefault = 1, spinDesc = "Items")
+TornaMainOption_EnemyDrops = SubOption("Enemy Drops", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 8, spinIncr = 1, spinWidth = 1, spinDefault = 1, spinDesc = "Items")
 TornaMainOption_GroundItems = SubOption("Ground Items", TornaMainOption)
 TornaMainOption_Shops = SubOption("Shops", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 15, spinIncr = 1, spinWidth = 2, spinDefault = 1, spinDesc = "Items")
 TornaMainOption_SideQuests = SubOption("Side Quests", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 4, spinIncr = 1, spinWidth = 1, spinDefault = 1, spinDesc = "Items")

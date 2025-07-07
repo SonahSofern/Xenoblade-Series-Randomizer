@@ -15,7 +15,7 @@ class TornaEnemyNormalDrops: # created to allow me to pass these objects easier
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Required Items'])
         self.summonedby = input['Summoned By']
         self.droptableids = [EnemyDropCounter]
-        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], max(rewardnumber - 1, 0), "-1"), 8, "0") # holds ids, -1 for progression, 0 for filler spots
+        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], max(rewardnumber, 0), "-1"), 8, "0") # holds ids, -1 for progression, 0 for filler spots
         if rewardnumber > 0:
             self.hasprogression = True
             self.randomizeditems = Helper.ExtendListtoLength(self.randomizeditems, 9, "-1")
