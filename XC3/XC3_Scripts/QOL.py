@@ -15,11 +15,10 @@ def EarlyMoveSpeed():
     with open(f"XC3//JsonOutputs/fld/FLD_ColonyList.json", 'r+', encoding='utf-8') as colonyFile: # Make it a movespeed deed
         colonyData = json.load(colonyFile)
         for colony in colonyData["rows"]:
-            if colony["$id"] == 1:
+            if colony["$id"] == 4:
                 colony["Level1"] = 10 # Instantly get it
                 colony["Reward1"] = 70 # Movespeed
                 colony["Condition"] = 253 # Remove the affinity condition (Setting it to a required quest early on)
-                colony["RespectFlag"] = 21022
                 break
         JSONParser.CloseFile(colonyData,colonyFile)
     with open(f"XC3//JsonOutputs/fld/FLD_PerkResource.json", 'r+', encoding='utf-8') as perkFile: # Increase the power of the movespeed deeds

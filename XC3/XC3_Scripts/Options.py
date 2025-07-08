@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XC3.XC3_Scripts import Shortcuts, Skills, Characters, QOL as Quality
+from XC3.XC3_Scripts import Shortcuts, Skills, Characters, QOL as Quality, Enemy
 scripts.Interactables.Game = "XC3" 
 
 General = 1
@@ -17,7 +17,25 @@ Tabs = {
     QOL: '🐇 Quality of Life',
 }
 
-CharactersOption = Option("Heroes", Character, "Randomizes heroes", [lambda: Characters.CharacterSwaps()])
+# CharactersOption = Option("Heroes", Character, "Randomizes heroes", [lambda: Characters.CharacterSwaps()])
+EnemyOption = Option("Enemies", Enemies, "Randomizes enemies", [lambda: Enemy.Enemies()])
+# NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: EnemiesScript.Enemies(IDs.NormalEnemies, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption)], descData=lambda: EnemiesScript.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
+# NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption)
+# NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption)
+# NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption)
+# NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption)
+
+# UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: EnemiesScript.Enemies(IDs.UniqueEnemies + IDs.SuperbossEnemies, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption)], descData=lambda: EnemiesScript.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True)
+# UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption)
+# UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption)
+# UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption)
+# UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption)
+
+# BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: EnemiesScript.Enemies(IDs.BossEnemies, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption), lambda: EnemiesScript.EgilArenaFix()], descData=lambda: EnemiesScript.EnemyDesc(BossEnemyOption.name), hasSpinBox = True)
+# BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption)
+# BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption)
+# BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption)
+# BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption)
 
 SkillOptions = Option("Class Skills", Character, "Randomizes class skills", [lambda: Skills.SkillRando()], hasSpinBox=True)
 
