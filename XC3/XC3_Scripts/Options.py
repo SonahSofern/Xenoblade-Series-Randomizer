@@ -45,13 +45,4 @@ ClassLearningOption = Option("Class Aptitude", QOL, "Increases the rate at which
 MoveSpeedOption = Option("Movespeed", QOL, "Colony 4's affinity reward will be instant and a movespeed deed.", [lambda: Quality.EarlyMoveSpeed()], hasSpinBox=True, spinDesc = "% Speed", spinMin=1, spinMax=255, spinIncr=10)
 AscendedClassOption = Option("Ascended Classes", QOL, "Classes begin the game being able to reach rank 20", []) # https://xenobladedata.github.io/xb3_200_dlc4/MNU_HeroDictionary.html set the wakeupquest to 120
 
-# Gems
-# Enemies
-# Movespeed QOL
-# All Item Randos (Enemy Drops, Containers, Quest Drops, Shops, Supply Drops, Collectables, Ether Cylinders?)
-# Class (unlock, skills)
-# Arts
-# Costumes
-
-
 #Roguelike enemy files https://xenobladedata.github.io/xb3_200_dlc4/BTL_ChSU_EnemyTable.html

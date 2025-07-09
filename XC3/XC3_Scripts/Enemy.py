@@ -2,7 +2,14 @@
 import json, random, copy, traceback, math
 from scripts import Helper, JSONParser, PopupDescriptions
 
-
+# def Enemies():
+#     with open(f"XC3/JsonOutputs/btl/BTL_Enemy.json", 'r+', encoding='utf-8') as eneFile: # This file swap method doesnt swap names is probably not better
+       
+# To fix: 
+# Water Enemies instantly dying on land
+# Land Enemies falling beneath water
+# Land enemies falling in the sky          
+# Too many agnus/keves soldier enemies dillutes the pool of intereszting enemies                                                                                                                                                                                                                                                                                                                                          
 def Enemies():
     with open(f"XC3/JsonOutputs/fld/FLD_EnemyData.json", 'r+', encoding='utf-8') as eneFile:
         eneData = json.load(eneFile)

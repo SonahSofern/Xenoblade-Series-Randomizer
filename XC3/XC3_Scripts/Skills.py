@@ -28,9 +28,7 @@ def SkillRando():
 
 def SkillCheck(skill, odds = 100):
     ignoreSkills = [100,101,105,106,107]
-    if skill["$id"] in ignoreSkills:
-        return False
-    if not Helper.OddsCheck(odds):
+    if (skill["$id"] in ignoreSkills) or (not Helper.OddsCheck(odds)):
         return False
     for i in range(1,6):
         if skill[f"Enhance{i}"] == 0:

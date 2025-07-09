@@ -13,6 +13,6 @@ permalinkVar = scripts.XCRandomizer.StringVar()
 
 extraArgs= ["--hashes", "XC3/xbc3Hashes.txt"]
 extraCommands = [lambda: ShowTitleScreenText()]
-mainFolderNames = ["des", "btl", "evt", "fld", "map", "prg", "qst", "sys", "zzz"] # "mnu"
+mainFolderNames = ["des", "btl", "evt", "fld", "map", "prg", "qst", "sys", "zzz", "mnu"] # "mnu"
 subFolderNames = ["autotalk", "battle", "field", "menu", "quest", "system"]
 textFolderName="gb/game"
