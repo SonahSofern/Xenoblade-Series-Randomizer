@@ -33,6 +33,6 @@ def SetTipNotificationsOff(): # Barrage of notifications should be off by defaul
         notiData = json.load(notiFile)
         for noti in notiData["rows"]:
             if noti["$id"] == 44:
-                noti["default_value"] = 100
+                noti["default_value"] = 1
                 break
         JSONParser.CloseFile(notiData, notiFile)

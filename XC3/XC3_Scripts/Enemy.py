@@ -14,7 +14,7 @@ def Enemies():
     with open(f"XC3/JsonOutputs/fld/FLD_EnemyData.json", 'r+', encoding='utf-8') as eneFile:
         eneData = json.load(eneFile)
         enGroup = []
-        ignoreKeys = ["$id", "ID", "Level", "IdMove", "NamedFlag", "IdDropPrecious"]
+        ignoreKeys = ["$id", "ID", "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgKeepSword", "FlgNoVanish", "FlgDmgFloor", "FlgMoveFloor", "FlgLevAttack", "FlgLevBattleOff", "FlgFixed", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "FlgNoFalling"]
         # Make keys list
         keysList = []
         testList = []
