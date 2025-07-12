@@ -140,7 +140,7 @@ def SelectRandomPointGoal(Recipes): # There are some sidequests that require you
     TaskIndexes = []
     for tasklist in TaskLists: # choose the index
         TaskIndexes.append(random.choice(Helper.InclRange(0, len(tasklist) - 1)))
-    Quest15List = [[30347,30352,30379],[30400,30404,30403],[30407,30438,30408,30411],[30384,30404,30352,30407,30408],[30363,30352,30353],[30406,30404,30408,30407,30403,26146],[30386,30365,30409,30407,26147]]
+    Quest15List = [[30347,30352,30379],[30400,30404,30403],[30407,30438,30408,30411],[30384,30404,30352,30407,30408],[30363,30352,30353],[30406,30404,30408,30407,30403,25639],[30386,30365,30409,30407,25640]]
     Quest28List = [[30353],[30403],[30438],[30356]]
     Quest29List1 = [[30373],[30374],[30375],[30377],[30378]]
     Quest29List2 = [[30425],[30426],[30427],[30428],[30429],[30430]]
@@ -306,7 +306,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Quest Number': 12,
         'Main Story Req': 16,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [[30347,30379,30406,30418,26149] , [30400,30379,30406,30418,30402,26191]],
+        'Item Requirements': [[30347,30379,30406,30418,25642] , [30400,30379,30406,30418,30402,25679]],
         'Community Gained': 1,
         'Community Level Req': 0,
         'Reward Set IDs': [1075],
@@ -570,7 +570,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Quest Number': 36,
         'Main Story Req': 46,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [[25458,30342,30368,30429,26164] , [25458]],
+        'Item Requirements': [[25458,30342,30368,30429,25657] , [25458]],
         'Community Gained': 1,
         'Community Level Req': 2,
         'Reward Set IDs': [1036],
@@ -746,7 +746,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Quest Number': 52,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [34],
-        'Item Requirements': [[30382,30384,30347,30383,30408,26148] , [30405,30400,30347,30398,30438,26150]],
+        'Item Requirements': [[30382,30384,30347,30383,30408,25641] , [30405,30400,30347,30398,30438,25643]],
         'Community Gained': 2,
         'Community Level Req': 4,
         'Reward Set IDs': [1047, 1048],
@@ -768,7 +768,7 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
         'Quest Number': 54,
         'Main Story Req': 49,
         'Sidequest Pre-Req': [],
-        'Item Requirements': [AegaeonKey, ComWaterKey[:2], AegaeonAff[:2] , [25463,30413,30423,30359,26182]], # LevelUpTokens[:39]],
+        'Item Requirements': [AegaeonKey, ComWaterKey[:2], AegaeonAff[:2] , [25463,30413,30423,30359,25670]], # LevelUpTokens[:39]],
         'Community Gained': 1,
         'Community Level Req': 4,
         'Reward Set IDs': [1045],
