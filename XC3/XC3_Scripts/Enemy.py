@@ -8,7 +8,8 @@ from scripts import Helper, JSONParser, PopupDescriptions
 # To fix: 
 # Land Enemies falling beneath water
 # Land enemies falling in the sky          
-# Too many agnus/keves soldier enemies dillutes the pool of intereszting enemies             
+# Too many agnus/keves soldier enemies dillutes the pool of intereszting enemies         
+# Keves Queen is unkillable (its not the NoKill (its named slightly different) Flag on enemy)    
 class EnemyGroup():
     def __init__(self):
         self.originalGroup = []
