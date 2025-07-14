@@ -157,16 +157,6 @@ BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True)
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, hasSpinBox=True)
 
-
-# EnemiesOption = Option("Enemies", Enemies, "Randomizes what enemies appear in the world", [lambda: EnemyRandoLogic.EnemyLogic()], descData= lambda: EnemyRandoLogic.Description())
-# EnemiesOption_Bosses = SubOption("Bosses", EnemiesOption)
-# EnemiesOption_QuestEnemies = SubOption("Quest Enemies", EnemiesOption)
-# EnemiesOption_UniqueMonsters = SubOption("Unique Monsters", EnemiesOption)
-# EnemiesOption_Superbosses = SubOption("Superbosses", EnemiesOption)
-# EnemiesOption_NormalEnemies = SubOption("Normal Enemies", EnemiesOption)
-# EnemiesOption_MixedTypes = SubOption("Mix Enemies Between Types", EnemiesOption)
-# EnemiesOption_BalancedLevels = SubOption("Balanced Levels", EnemiesOption)
-# EnemiesOption_BalanceEnemyGroups = SubOption("Balanced Enemy Groups", EnemiesOption)
 EnemyEnhancementsOption = Option("Enemy Enhancements", Enemies, "Gives enemies a random enhancement; it is displayed by their name", [lambda: _EnemyEnhancements.EnemyEnhances()], hasSpinBox = True, descData=lambda: _EnemyEnhancements.EnemyEnhancementDescriptions())
 EnemyArtEffectsOption = Option("Enemy Art Effects", Enemies, "Gives enemies a random bonus effect to their arts; it is displayed by their\nart's name", [lambda: _EnemyArts.EnemyArtAttributes()], hasSpinBox = True, descData=lambda: _EnemyArts.EnemyArtEnhancementDescriptions())
 EnemyArtEffectsOption_Reactions = SubOption("Reactions", EnemyArtEffectsOption)
@@ -189,11 +179,6 @@ EnemyAggroOption = Option("Enemy Aggro", Enemies, "The percentage of all non-bos
 MusicOption = Option("Music", Misce, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
 MusicOption_MixBattleAndEnv = SubOption("Mix Battle/Environment Themes", MusicOption, _defState = False)
 CustomCoreCrystalOption = Option("Custom Core Crystals", Items, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], prio = 52, hasSpinBox = True, spinDesc = "% of Chests", descData= lambda: CoreCrystalAdjustments.Description())
-# DifficultyOption = Option("Difficulty", Misce, "Forces this difficulty, regardless of what is chosen in the options menu")
-# DifficultyOption_Easy = SubOption("Easy", DifficultyOption)
-# DifficultyOption_Normal = SubOption("Normal", DifficultyOption)
-# DifficultyOption_BOC = SubOption("Bringer of Chaos", DifficultyOption)
-# DifficultyOption_Ultimate = SubOption("Ultimate", DifficultyOption)
 
 # QOL
 FreelyEngageBladesOption = Option("Freely Engage Blades", QOL, "Allows blades to be freely engaged by all valid drivers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["FreeEngage"], [0], [1], [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1075, 1076, 1103])])

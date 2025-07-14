@@ -35,7 +35,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
         JSONParser.CloseFile(eneData, eneFile)
 
 def RandomAssignment(eneData, targetGroup, weights, isEnemies):
-    keysList = ['ParamID', 'EnemyBladeID', 'BladeID', 'BladeAtr', 'ExtraParts', 'Name', 'Debug_Name', 'HpOver', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'Scale', 'ChrSize', 'TurnSize', 'CamSize', 'Flag', 'LinkRadius', 'BatInterval', 'BatArea', 'EN_WATER_DEAD_NONE', 'BatAreaType', 'DrawWait', 'AiGroup', 'AiGroupNum', 'BookID', 'EnhanceID1', 'EnhanceID2', 'EnhanceID3', 'ParamRev', 'RstDebuffRev', 'HealPotTypeRev', 'SummonID', 'BGMID', 'SeEnvID', 'Race', 'LvMin', 'LvMax', 'ScaleMin', 'ScaleMax']
+    keysList = ['ParamID', 'EnemyBladeID', 'BladeID', 'BladeAtr', 'ExtraParts', 'Name', 'Debug_Name', 'HpOver', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'Scale', 'ChrSize', 'TurnSize', 'CamSize', 'LinkRadius', 'BatInterval', 'BatArea', 'EN_WATER_DEAD_NONE', 'BatAreaType', 'DrawWait', 'AiGroup', 'AiGroupNum', 'BookID', 'EnhanceID1', 'EnhanceID2', 'EnhanceID3', 'ParamRev', 'RstDebuffRev', 'HealPotTypeRev', 'SummonID', 'BGMID', 'SeEnvID', 'Race', 'LvMin', 'LvMax', 'ScaleMin', 'ScaleMax']
     # Randomly Assign
     for en in eneData["rows"]:
         if not (en["$id"] in targetGroup):
@@ -60,6 +60,7 @@ def isBadEnemy(en):
 def GenEnemyData(eneData):
     '''Creates the data in a nested list if it does not already exist, this is only to be copied from never altered'''
     if NormalGroup.isEmpty():
+        
         for en in eneData["rows"]:
             if isBadEnemy(en):
                 continue
@@ -89,7 +90,7 @@ def GenWeights(isNormal, isUnique, isBoss, isSuperboss):
     return weights
 
 def ForcedWinFights(fights = []):
-    filename = "./XC2/JsonOutputs/common/FLD_QuestBattle.json"
+    filename = "XC2/JsonOutputs/common/FLD_QuestBattle.json"
     with open(filename, 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
@@ -99,7 +100,7 @@ def ForcedWinFights(fights = []):
 
 
 def AeshmaCoreHPNerf(): #this fight sucks
-    with open("./XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
+    with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 318:
@@ -108,7 +109,7 @@ def AeshmaCoreHPNerf(): #this fight sucks
   
 
 def BigEnemyCollisionFix(): # Fixes ophion/other large enemies going outside the spawn circle and flying out of range in a boss fight. no longer used
-    with open("./XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as file: 
+    with open("XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as file: 
         BigEnemies = [64,65,70,154,245,249,252]
         data = json.load(file)
         for row in data["rows"]:
@@ -120,7 +121,7 @@ def BigEnemyCollisionFix(): # Fixes ophion/other large enemies going outside the
 
 
 def GortOgreUppercutRemoval(): # Gort 2's Ogre Uppercut seems to be buggy, reported to crash game in certain situations, so it's being removed for the time being.
-    with open("./XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
+    with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 1434:
@@ -128,7 +129,7 @@ def GortOgreUppercutRemoval(): # Gort 2's Ogre Uppercut seems to be buggy, repor
         JSONParser.CloseFile(data, file)
 
 def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy happens to show up early. Nerfed by 3/4ths.
-    with open("./XC2/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as file:
+    with open("XC2/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 218:
@@ -151,6 +152,7 @@ def Bandaids():
     # Is enemydupebosscondition still a problem need to test
     # Fish Fix
     # Flying Fix
+    # Summons Level Fix
     
 def EnemyAggro(): 
     odds = Options.EnemyAggroOption.GetSpinbox()
@@ -159,7 +161,11 @@ def EnemyAggro():
         for en in eneData["rows"]:
             if not Helper.OddsCheck(odds):
                 continue
-    
+            if en["Flag"]["mBoss"]:
+                continue
+            en["Detects"] = 0
+        JSONParser.CloseFile(eneData, eneFile)
+            
 def EnemyDesc(name):
     pass
 
