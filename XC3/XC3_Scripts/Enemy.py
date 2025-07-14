@@ -2,41 +2,50 @@
 import json, random, copy, traceback, math
 from scripts import Helper, JSONParser, PopupDescriptions
 
-# def Enemies():
-#     with open(f"XC3/JsonOutputs/btl/BTL_Enemy.json", 'r+', encoding='utf-8') as eneFile: # This file swap method doesnt swap names is probably not better
-       
+# https://xenobladedata.github.io/xb3_130/SYS_GimmickLocation.html#25513 useful file has enemy xyz and probably how fights dteremine where try again places you
+
 # To fix: 
-# Water Enemies instantly dying on land
 # Land Enemies falling beneath water
 # Land enemies falling in the sky          
-# Too many agnus/keves soldier enemies dillutes the pool of intereszting enemies                                                                                                                                                                                                                                                                                                                                          
+# Too many agnus/keves soldier enemies dillutes the pool of intereszting enemies             
+badEnemies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 25, 63, 65, 92, 93, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 240, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395, 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 506, 507, 508, 509, 563, 768, 775, 790, 791, 891, 1317, 1472, 1488, 1489, 1490, 1491, 1492, 1493, 1630, 1642, 1643, 1644, 1645, 1648, 1806, 1883, 1925, 1926, 1990, 1991, 2067, 2068, 2099, 2100, 2189, 2190, 2191, 2192, 2214, 2215, 2294, 2373, 2374, 2375, 2381, 2382, 2383, 2384, 2464, 2498, 2499, 2500, 2501, 2502, 2594, 2595, 2596, 2597, 2598, 2599, 2600, 2601, 2602, 2603, 2604, 2605, 2606, 2607, 2608, 2609, 2610, 2611, 2612, 2613, 2614, 2615, 2616, 2617, 2618, 2619, 2620, 2621, 2622, 2623, 2624, 2625, 2626, 2627, 2628, 2629, 2630, 2631, 2632, 2633, 2634, 2635, 3686, 3687, 3688, 3689, 3690, 3691, 3692, 3693, 3694, 3695, 3696, 3697, 3698, 3699, 3700, 3701, 3702, 3703, 3704, 3705, 3706, 3707, 3708, 3709, 3710, 3711, 3712, 3713, 3714, 3715, 3716, 3717, 3718, 3719, 3720, 3721, 3722, 3723, 3724, 3725, 3726, 3727, 3728, 3729, 3730, 3731, 3732, 3733, 3734, 3735, 3736, 3737, 3738, 3747, 3748, 3769, 3770, 3771, 3840, 3841, 3842, 3887, 3888, 4484, 4498, 4516, 4555, 4556, 4557, 4558, 4580, 4603, 4604, 4605, 4606, 4607, 4608, 4609, 4654, 4655, 4658, 4659, 4660, 4961]
+UniqueMonsters = [603, 621, 644, 697, 715, 742, 743, 744, 745, 746, 747, 748, 749, 750, 751, 752, 753, 754, 755, 756, 757, 758, 759, 760, 761, 762, 763, 785, 1129, 1154, 1174, 1195, 1218, 1219, 1220, 1221, 1222, 1223, 1224, 1225, 1226, 1227, 1228, 1229, 1230, 1231, 1232, 1233, 1234, 1235, 1236, 1237, 1238, 1239, 1240, 1241, 1242, 1243, 1244, 1358, 1498, 1499, 1500, 1501, 1502, 1503, 1504, 1505, 1506, 1507, 1508, 1509, 1510, 1511, 1512, 1513, 1514, 1515, 1516, 1517, 1518, 1682, 1683, 1684, 1685, 1686, 1687, 1688, 1834, 1835, 1836, 1837, 1838, 1839, 1876, 2073, 2109, 2237, 2238, 2239, 2240, 2241, 2242, 2243, 2244, 2245, 2246, 2247, 2248, 2249, 2250, 2251, 2252, 2253, 2254, 2255, 2256, 2257, 2258, 2259, 2260, 2261, 2262, 2263, 2264, 2265, 2266, 2267, 2268, 2269, 2270, 2271, 2272, 2273, 2274, 2275, 2485, 2486, 2503, 2509, 2510, 2523, 2580, 2581, 2582, 2583, 2584, 2585, 2586, 2587, 2588, 2589, 2590, 2591, 2592, 2593, 3780, 3781, 4615, 4616, 4617, 4618, 4619, 4620, 4621, 4622, 4623, 4624, 4625, 4626, 4627, 4628, 4633, 4634, 4635, 4636, 4637, 4638, 4639, 4640, 4641, 4642, 4643, 4644, 4645, 4646, 4647, 4648, 4649]
+BossMonsters = [2, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 475, 476, 477, 478, 479, 480, 481, 482, 483, 484, 485, 486, 487, 489, 490, 491, 492, 493, 495, 496, 497, 498, 499, 510, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 531, 532, 536, 537, 538, 539, 540, 541, 542, 794, 795, 796, 797, 798, 884, 885, 892, 894, 896, 915, 916, 924, 925, 941, 952, 1257, 1289, 1290, 1294, 1296, 1346, 1531, 1577, 1588, 1602, 1603, 1625, 1626, 1692, 1722, 1723, 1724, 1764, 2299, 2314, 2376, 2377, 2378, 2379, 2455, 2456, 2457, 2494, 3774, 3775, 3776, 3782, 3791, 3797, 3798, 3831, 3832, 4427, 4428, 4429, 4430, 4432, 4433, 4434, 4435, 4436, 4437, 4438, 4439, 4440, 4441, 4442, 4443, 4444, 4445, 4446, 4448, 4449]
+SuperbossMonsters = [762, 1498, 2253, 2254, 2266, 2510, 3944, 3945, 3946, 3947, 3948, 3949, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4649]
+     
+                                                                                                                                                                                                                                                                                                                             
 def Enemies():
     with open(f"XC3/JsonOutputs/fld/FLD_EnemyData.json", 'r+', encoding='utf-8') as eneFile:
         eneData = json.load(eneFile)
+        keysList = ['DebugName', 'MapID', 'CatMain', 'CatBGM', '<B569BFB1>', '<352C263C>', '<BA57B736>', 'Scale', 'EliteScale', 'ScalePlus', 'WeaponScale', 'ChrSize', 'TurnSize', 'LevPlus', '<64251F47>', '<3B6DFBC4>', '<EE7FFF6D>', '<F36BAFFD>', 'AiBase', '<0F7768D2>', '<9B3B9099>', 'IdBgm', 'IdBattleEnemy', '<C6717CFE>', 'FlgColiOff', '<EFCB57EC>', 'IconOffset', 'FlgSpDead', '<3828CCE4>', 'FlgSerious', '<3CEBD0A4>', '<9A220E4D>', 'KillEffType', 'SpBattle', '<EC666A80>', '<AB4BA3D5>', '<1104E9C5>', '<B5C5F3B3>', 'MsgName', 'NPCName', 'AlliesMsg', '<D3F77DFD>', 'GetRatio', 'GetEnArts', 'GetEnSkill', 'FootPrintDetection', 'EffConvert', '<7C2FCBE1>', '<97002EDA>', 'VoGroup', 'NotEconomy', 'ExpRate', 'GoldRate', '<91DD0357>', 'AttenuationScale', '<C4D88A2B>', '<7D3D5DCB>', 'NamedSpCond', '<C313305B>', 'Score', '<4BAF120D>', '<7EFBB833>', '<277C5BBD>', '<65449302>', '<192EEE69>', '<F36D8D42>', '<76A4C736>']
+        # ignoreKeys = ["$id", "ID", "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgKeepSword", "FlgNoVanish", "FlgDmgFloor", "FlgMoveFloor", "FlgLevAttack", "FlgLevBattleOff", "FlgFixed", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "FlgNoFalling"]
+        
+        # Create group
         enGroup = []
-        ignoreKeys = ["$id", "ID", "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgKeepSword", "FlgNoVanish", "FlgDmgFloor", "FlgMoveFloor", "FlgLevAttack", "FlgLevBattleOff", "FlgFixed", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "FlgNoFalling"]
-        # Make keys list
-        keysList = []
-        testList = []
         for en in eneData["rows"]:
-
-            for key in en.keys():
-                if key in ignoreKeys:
-                    continue
-                keysList.append(key)
-            break
-            
-        for en in eneData["rows"]:
-            if en["FlgSerious"] == 1:
-                testList.append(en["$id"])
+            if isBadEnemy(en):
+                continue
             enGroup.append(en.copy())
-        print(testList)
+
+        # Randomly Assign
         for en in eneData["rows"]:
+            if isBadEnemy(en):
+                continue
             newEn = random.choice(enGroup)
             enGroup.remove(newEn)
             for key in keysList:
                 en[key] = newEn[key]
         JSONParser.CloseFile(eneData, eneFile)
-        
-   
-# https://xenobladedata.github.io/xb3_130/SYS_GimmickLocation.html#25513 useful file has enemy xyz and probably how fights dteremine where try again places you
+        SwimmingEnemiesDoomFix()
+
+def SwimmingEnemiesDoomFix():
+    with open(f"XC3/JsonOutputs/btl/BTL_EnRsc.json", 'r+', encoding='utf-8') as eneFile:
+        eneData = json.load(eneFile)
+        for en in eneData["rows"]:
+            if en["ActType"] == 1:
+                en["ActType"] = 0
+        JSONParser.CloseFile(eneData, eneFile)
+ 
+def isBadEnemy(en):
+    if en["$id"] in badEnemies:
+        return True
