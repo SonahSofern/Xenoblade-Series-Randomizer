@@ -2,7 +2,7 @@ from tkinter import ttk
 from scripts import JSONParser,Helper
 from XC2.XC2_Scripts.IDs import *
 from tkinter import *
-from XC2.XC2_Scripts import _Accessories, _DriverArts, SkillTrees, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeStats,TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UMHuntMain, Cosmetics, AccessoryShops, CollectionPoints, PouchItemShops, TreasureChests, ButtonCombos, EnemyDrops, _EleCombo,_YellowSkills, _BladeSpecials, Scales, DLCFlagQOL, CharacterRandomization, TornaMain, ObjectNameCleanup
+from XC2.XC2_Scripts import _Accessories, _DriverArts, SkillTrees, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeStats,TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UMHuntMain, Cosmetics, AccessoryShops, CollectionPoints, PouchItemShops, TreasureChests, ButtonCombos, EnemyDrops, _EleCombo,_YellowSkills, _BladeSpecials, Scales, DLCFlagQOL, CharacterRandomization, TornaMain, ObjectNameCleanup, Enemy
 from scripts.Interactables import Option, SubOption, MutuallyExclusivePairing
 import scripts.Interactables
 scripts.Interactables.Game = "XC2"
@@ -138,15 +138,35 @@ BladeStatsOption_Mods = SubOption("Stat Mods", BladeStatsOption, [lambda: JSONPa
 BladeStatsOption_Class = SubOption("Weapon Class", BladeStatsOption, [lambda: BladeStats.BladeWeaponClassRandomization()])
 
 # Enemies
-EnemiesOption = Option("Enemies", Enemies, "Randomizes what enemies appear in the world", [lambda: EnemyRandoLogic.EnemyLogic()], descData= lambda: EnemyRandoLogic.Description())
-EnemiesOption_Bosses = SubOption("Bosses", EnemiesOption)
-EnemiesOption_QuestEnemies = SubOption("Quest Enemies", EnemiesOption)
-EnemiesOption_UniqueMonsters = SubOption("Unique Monsters", EnemiesOption)
-EnemiesOption_Superbosses = SubOption("Superbosses", EnemiesOption)
-EnemiesOption_NormalEnemies = SubOption("Normal Enemies", EnemiesOption)
-EnemiesOption_MixedTypes = SubOption("Mix Enemies Between Types", EnemiesOption)
-EnemiesOption_BalancedLevels = SubOption("Balanced Levels", EnemiesOption)
-EnemiesOption_BalanceEnemyGroups = SubOption("Balanced Enemy Groups", EnemiesOption)
+
+NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsters, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption)], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True, prio=First)
+NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True)
+NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption, hasSpinBox=True)
+NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption, hasSpinBox=True)
+NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, hasSpinBox=True)
+
+UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: Enemy.Enemies(IDs.UniqueMonsters + IDs.SuperbossMonsters, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption)], descData=lambda: Enemy.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True, prio=First)
+UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption, hasSpinBox=True)
+UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption, hasSpinBox=True)
+UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption, hasSpinBox=True)
+UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption, hasSpinBox=True)
+
+BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption)], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True, prio=First)
+BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True)
+BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True)
+BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True)
+BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, hasSpinBox=True)
+
+
+# EnemiesOption = Option("Enemies", Enemies, "Randomizes what enemies appear in the world", [lambda: EnemyRandoLogic.EnemyLogic()], descData= lambda: EnemyRandoLogic.Description())
+# EnemiesOption_Bosses = SubOption("Bosses", EnemiesOption)
+# EnemiesOption_QuestEnemies = SubOption("Quest Enemies", EnemiesOption)
+# EnemiesOption_UniqueMonsters = SubOption("Unique Monsters", EnemiesOption)
+# EnemiesOption_Superbosses = SubOption("Superbosses", EnemiesOption)
+# EnemiesOption_NormalEnemies = SubOption("Normal Enemies", EnemiesOption)
+# EnemiesOption_MixedTypes = SubOption("Mix Enemies Between Types", EnemiesOption)
+# EnemiesOption_BalancedLevels = SubOption("Balanced Levels", EnemiesOption)
+# EnemiesOption_BalanceEnemyGroups = SubOption("Balanced Enemy Groups", EnemiesOption)
 EnemyEnhancementsOption = Option("Enemy Enhancements", Enemies, "Gives enemies a random enhancement; it is displayed by their name", [lambda: _EnemyEnhancements.EnemyEnhances()], hasSpinBox = True, descData=lambda: _EnemyEnhancements.EnemyEnhancementDescriptions())
 EnemyArtEffectsOption = Option("Enemy Art Effects", Enemies, "Gives enemies a random bonus effect to their arts; it is displayed by their\nart's name", [lambda: _EnemyArts.EnemyArtAttributes()], hasSpinBox = True, descData=lambda: _EnemyArts.EnemyArtEnhancementDescriptions())
 EnemyArtEffectsOption_Reactions = SubOption("Reactions", EnemyArtEffectsOption)
@@ -163,7 +183,7 @@ EnemyDropOption_RefinedAuxCores = SubOption("Refined Aux Cores", EnemyDropOption
 EnemyDropOption_CoreCrystals = SubOption("Core Crystals", EnemyDropOption)
 EnemyDropOption_Deeds = SubOption("Shop Deeds", EnemyDropOption)
 EnemyDropOption_CollectionPointMaterials = SubOption("Collection Point Materials", EnemyDropOption)
-EnemyAggroOption = Option("Enemy Aggro", Enemies, "The percentage of all non-boss and non-quest enemies that will aggro the player", [lambda: EnemyRandoLogic.EnemyAggroProportion()], hasSpinBox = True)
+EnemyAggroOption = Option("Enemy Aggro", Enemies, "The percentage of all non-boss and non-quest enemies that will aggro the player", [lambda: Enemy.EnemyAggro()], hasSpinBox = True)
 
 # Misc
 MusicOption = Option("Music", Misce, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
@@ -245,9 +265,9 @@ TornaRewardsonUnreqSidequests = Option("Progression on Unrequired Sidequests", T
 #TornaCompatibleOptions = [BladeSpecialButtonsOption, TornaChooseCommunityReqs, CondenseGoldOption, TornaCreateSpoilerLog, EnhancementDisplayOption, EverlastingPouchItemsOption, FieldItemOption, TornaObjectColorMatchesContents, StartwithIncreasedMovespeedOption, MusicOption, MutePopupsOption, NPCSizeOption, TornaRemoveGormottChecks, ShortcutsOption, TornaAddHints, TornaMainOption, TreasureChestVisOption, TrustLineOption, TornaRewardsonUnreqSidequests, EnemyEnhancementsOption, EnemyArtEffectsOption, BladeWeaponChipsOption, BladeSpecialOption, BladeBattleSkillsOption]
 
 # any torna option with a lambda gets the incompatible list
-MutuallyExclusivePairing([TornaMainOption, TornaAddHints, TornaObjectColorMatchesContents, TornaChooseCommunityReqs, TornaCreateSpoilerLog, TornaRemoveGormottChecks, TornaRewardsonUnreqSidequests], [AccessoriesOption, AuxCoresOption, AccessoryShopsOption, CollectionPointsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, DriverArtsOption, DriverSkillTreesOption, BladesOption, BladeArtsOption, BladeFieldSkillsOption, BladeWeaponChipsOption, BladeCombosOption, BladeStatsOption, EnemiesOption, EnemyDropOption, EnemyAggroOption, CustomCoreCrystalOption, FreelyEngageBladesOption, CTMCOption, RemoveFieldSkillsOption, EasySkillTreesOption, FasterLevelsOption, NewGamePlusFlagsOptions, ProjTreasureChestOption, EnemySizeOption, BladeWeaponCosmeticsOption, CosmeticsOption, RaceModeOption, UMHuntOption])
+MutuallyExclusivePairing([TornaMainOption, TornaAddHints, TornaObjectColorMatchesContents, TornaChooseCommunityReqs, TornaCreateSpoilerLog, TornaRemoveGormottChecks, TornaRewardsonUnreqSidequests], [AccessoriesOption, AuxCoresOption, AccessoryShopsOption, CollectionPointsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, DriverArtsOption, DriverSkillTreesOption, BladesOption, BladeArtsOption, BladeFieldSkillsOption, BladeWeaponChipsOption, BladeCombosOption, BladeStatsOption,  NormalEnemyOption, BossEnemyOption, UniqueEnemyOption, EnemyDropOption, EnemyAggroOption, CustomCoreCrystalOption, FreelyEngageBladesOption, CTMCOption, RemoveFieldSkillsOption, EasySkillTreesOption, FasterLevelsOption, NewGamePlusFlagsOptions, ProjTreasureChestOption, EnemySizeOption, BladeWeaponCosmeticsOption, CosmeticsOption, RaceModeOption, UMHuntOption])
 
-MutuallyExclusivePairing([UMHuntOption], [AccessoryShopsOption, CollectionPointsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladeWeaponChipsOption, AccessoriesOption, AuxCoresOption, EnemiesOption, EnemyDropOption, CustomCoreCrystalOption, FasterDriverSkillTrees, EasySkillTreesOption, FasterLevelsOption, RaceModeOption])
+MutuallyExclusivePairing([UMHuntOption], [AccessoryShopsOption, CollectionPointsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladeWeaponChipsOption, AccessoriesOption, AuxCoresOption, NormalEnemyOption, BossEnemyOption, UniqueEnemyOption, EnemyDropOption, CustomCoreCrystalOption, FasterDriverSkillTrees, EasySkillTreesOption, FasterLevelsOption, RaceModeOption])
 
 # Currently Disabled for Various Reasons
 # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)

@@ -185,16 +185,7 @@ def ReducePCHPBattle1():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if (row["$id"] == 633) or (row["$id"] == 1346): #battle on gramps at start of game
-                row["ExpRev"] = 1000
-            if row["$id"] == 1346:
-                break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii= False)
+
 
 def SummonsLevelAdjustment(): # We want the summoned enemies to be the same level as the enemy that summoned them
     OriginalSummonedFirstIDs = [724, 1369, 1304, 1385, 1372, 1308, 242, 1376, 1378, 1379, 1807, 1373, 1377, 1380, 1806, 1285, 725, 1358, 1362, 1700, 1521, 728, 846, 1347, 1370, 1354, 1352, 1367, 1371, 1368, 1356, 1357, 1365, 1384, 1593, 1599, 1353, 1349, 1355, 1361, 1382, 1364, 1350, 1724, 1724, 1724, 1724, 1731, 1787, 1788, 1789, 1805, 1881, 1883, 1885, 1641, 1533, 1568, 1569, 1569]
@@ -497,15 +488,7 @@ def PostRandomizationNonBossandQuestAggroAdjustments(OtherEnemyIDs): #when enemy
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
           
-def AeshmaCoreHPNerf(): #this fight sucks
-    with open("./XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 318:
-                row["HpMaxRev"] = 1500 # nerfed hp by 5/6ths
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)        
+    
 
 def GortOgreUppercutRemoval(): # Gort 2's Ogre Uppercut seems to be buggy, reported to crash game in certain situations, so it's being removed for the time being.
     with open("./XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
@@ -827,6 +810,15 @@ def AllyRefightHPMatch(): # when you refight allies, some of the enemies can hav
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
+def AeshmaCoreHPNerf(): #this fight sucks
+    with open("./XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 318:
+                row["HpMaxRev"] = 1500 # nerfed hp by 5/6ths
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def BalanceFixes(): # All the bandaids I slapped on to fix problematic enemies/fights
     ReducePCHPBattle1()
