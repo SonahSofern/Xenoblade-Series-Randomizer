@@ -582,13 +582,13 @@ def DetermineValidItemSpots(ChosenItem, ChosenItemCat, CatList, CurrentStoryStep
     ValidItemSpots = [x for x in ValidItemSpots if x not in InvalidSidequestLocs] # want to make sure the item isn't being placed on a sidequest where you just talk to the npc (you cannot get items this way)
     TempValidItemSpots = [loc for loc in ValidItemSpots if ChosenItem not in loc.itemreqs] # make sure the item isn't put in a spot locked by itself
     if TempValidItemSpots == []:
-        raise Exception(f"Ran out of valid locations when trying to ensure {ChosenItem}: ({ItemIDtoItemName[ChosenItem]} was not locked by itself!")
+        raise Exception(f"Ran out of valid locations when trying to ensure {ChosenItem}: {ItemIDtoItemName[ChosenItem]} was not locked by itself!")
     else:
         ValidItemSpots = TempValidItemSpots
     if CurrentStoryStep != -1:
         TempValidItemSpots = [loc for loc in ValidItemSpots if loc.mainreq < CurrentStoryStep + 1] # make sure the item isn't past the spot in the story where it can be accessed
         if TempValidItemSpots == []:
-            raise Exception(f"Ran out of valid locations when trying to ensure {ChosenItem}: ({ItemIDtoItemName[ChosenItem]} was not placed further ahead in the story than the player can reach!")
+            raise Exception(f"Ran out of valid locations when trying to ensure {ChosenItem}: {ItemIDtoItemName[ChosenItem]} was not placed further ahead in the story than the player can reach!")
         else:
             ValidItemSpots = TempValidItemSpots
     InvalidNonSidequestLocs = []
@@ -598,7 +598,7 @@ def DetermineValidItemSpots(ChosenItem, ChosenItemCat, CatList, CurrentStoryStep
                 InvalidNonSidequestLocs.append(loc)
     TempValidItemSpots = [loc for loc in ValidItemSpots if loc not in InvalidNonSidequestLocs]
     if TempValidItemSpots == []:
-        raise Exception(f"Ran out of valid locations when trying to ensure {ChosenItem}: ({ItemIDtoItemName[ChosenItem]} was not locked by itself!")
+        raise Exception(f"Ran out of valid locations when trying to ensure {ChosenItem}: {ItemIDtoItemName[ChosenItem]} was not locked by itself!")
     else:
         ValidItemSpots = TempValidItemSpots
     return ValidItemSpots
@@ -1821,254 +1821,257 @@ def AddNewFlagPointers(GateCommReq, GateNumber): # if we reduce the required com
 def CreateSpoilerLog(Version, permalinkVar, seedEntryVar):
     #if DontMakeSpoilerLog:
     #    return
-    IDstoAdd = []
-    MainQuestNamestoStorySteps = {"What Bars the Way": 10, "Power Unimaginable": 17, "Where's the Boy Gone?": 21, "Feeding an Army": 26, "Lett Bridge Restoration": 27, "To Cross a Desert": 33}
-    try: 
-        if HintedItemText != []:
-            pass
-    except:
-        HintedItemText = []
-    try: 
-        if HintedLocText != []:
-            pass
-    except:
-        HintedLocText = []
-    DesiredSpoilerLogDirectory = "XC2/Torna_Spoiler_Logs"
-    if not os.path.exists(DesiredSpoilerLogDirectory):
-        os.makedirs(DesiredSpoilerLogDirectory)
-    DesiredSpoilerLogLocation = f"{DesiredSpoilerLogDirectory}/{seedEntryVar.get()}.txt"
-    if not os.path.exists(DesiredSpoilerLogLocation):
-        with open(DesiredSpoilerLogLocation, "w", encoding= "utf-8") as debugfile:
-            pass
-    debugfile = open(DesiredSpoilerLogLocation, "w", encoding= "utf-8")
-    debugfile.write(f"Xenoblade 2 Randomizer Version {Version}\n\n")
-    debugfile.write(f"Permalink: {permalinkVar.get()}\n\n")
-    debugfile.write(f"Seed Name: {seedEntryVar.get()}\n\n")
-    debugfile.write("Options Selected:\n")
-    for option in XenoOptionDict["XC2"]: # for each option
-        OptionName = option.name   
-        OptionVal = option.GetState()
-        if OptionVal: # if the option is checked
-            if option.hasSpinBox:
-                OptionOdds = option.GetSpinbox()
-                debugfile.write(f" {OptionName}: {OptionOdds};")
-            else:
-                debugfile.write(f" {OptionName};")
-    debugfile.write("\n\n")
-    debugfile.write("Suboptions Selected:\n")
-    for option in XenoOptionDict["XC2"]:
-        OptionName = option.name
-        OptionVal = option.GetState()
-        if OptionVal:
-            for subOption in option.subOptions: # looping through all suboptions
-                SubOptionName = subOption.name
-                SubOptionVal = subOption.GetState()
-                if SubOptionVal: # if the suboption is a checkbox and checked
-                    if subOption.hasSpinBox:
-                        subOptionOdds = subOption.GetSpinbox()
-                        debugfile.write(f" {OptionName}: {SubOptionName}: [{subOptionOdds}];")
-                    else:
-                        debugfile.write(f" {OptionName}: {SubOptionName};")
-    debugfile.write("\n")   
-    debugfile.close()
-    debugfileread = open(DesiredSpoilerLogLocation, "r", encoding= "utf-8")
-    alllines = debugfileread.readlines()
-    alllines[7] = alllines[7][1:]
-    alllines[7] = alllines[7][:-2]
-    alllines[7] += "\n"
-    alllines[10] = alllines[10][1:]
-    alllines[10] = alllines[10][:-2]
-    alllines[10] += "\n"
-    debugfilewrite = open(DesiredSpoilerLogLocation, "w", encoding= "utf-8")
-    debugfilewrite.writelines(alllines)
-    debugfilewrite.close()
-    debugfileread = open(DesiredSpoilerLogLocation, "r", encoding= "utf-8")
-    alllines = debugfileread.readlines()
-    alllines.append("\n")
-    if HintedItemText != [] or HintedLocText != []:
-        alllines.append("Hints:")
-        alllines.append("\n\n")
-        if HintedItemText != []:
-            alllines.append("     Item Hints:\n\n")
-            for hint in HintedItemText:
-                alllines.append(f"          {hint}\n")
-            alllines.append("\n")
-        if HintedLocText != []:
-            alllines.append("     Location Progression Count Hints:\n\n")
-            for hint in HintedLocText:
-                alllines.append(f"          {hint}\n")
-            alllines.append("\n")
-        alllines.append("\n")
-    alllines.append("Chosen Required Quests and NPC Conversations by Community Level Requirement:\n")
-    alllines.append("\n")
-    QuestListByCommReq = {0:[],1:[],2:[],3:[],4:[],5:[]}
-    QuestNamesAlreadyUsed = []
-    for sq in AllRequiredSidequests:
-        QuestListByCommReq[sq.comreq].append(sq)
-    for commlevel in range(0, 6):
-        if commlevel == 0:
-            alllines.append(f"     No Community Level Requirement:\n\n")
-        else:
-            alllines.append(f"     Community Level {commlevel} Required:\n\n")
-        for quest in QuestListByCommReq[commlevel]:
-            if quest.name not in QuestNamesAlreadyUsed:
-                if quest not in ChosenLevel2Quests + ChosenLevel4Quests + [quest for quest in Sidequests if quest.name in ["What Bars the Way", "Power Unimaginable", "Where's the Boy Gone?", "Feeding an Army", "Lett Bridge Restoration", "To Cross a Desert"]]:
-                    alllines.append(f"          {quest.name} (Quest Reward Required)\n")
-                    QuestNamesAlreadyUsed.append(quest.name)
-                elif quest.name in ["What Bars the Way", "Power Unimaginable", "Where's the Boy Gone?", "Feeding an Army", "Lett Bridge Restoration", "To Cross a Desert"]:
-                    alllines.append(f"          {quest.name} (Required for Story Step {MainQuestNamestoStorySteps[quest.name]})\n")
-                    QuestNamesAlreadyUsed.append(quest.name)
-                elif quest in ChosenLevel2Quests:
-                    alllines.append(f"          {quest.name} (Required for Story Step 38)\n")
-                    QuestNamesAlreadyUsed.append(quest.name)
-                else:
-                    alllines.append(f"          {quest.name} (Required for Story Step 50)\n")
-                    QuestNamesAlreadyUsed.append(quest.name)
-        if QuestListByCommReq[commlevel] == []:
-            alllines.append("          None\n")
-        alllines.append("\n")
-    alllines.append("Chosen Required Crafted Items:\n")
-    alllines.append("\n")
-    RequiredCraftList = ["Trout Stralu"]
-    alllines.append("     Trout Stralu\n")
-    for sq in AllRequiredSidequests:
-        if sq.reqrecipenames != []:
-            for recipe in sq.reqrecipenames:
-                if recipe not in RequiredCraftList:
-                    alllines.append(f"     {recipe}\n")
-                    RequiredCraftList.append(recipe)
-    SilverSeekerSet = set([30387,30411,30421,30360,30444])
-    GoldenSeekerSet = set([30378,30428,30372,30388,30436])
-    SilverSeekerReq, GoldenSeekerReq = 0, 0
-    if "Silver Seeker" in RequiredCraftList:
-        SilverSeekerReq = 1
-    if "Golden Seeker" in RequiredCraftList:
-        GoldenSeekerReq = 1
-    for loc in KeyItemtoLocDict.values():
-        if SilverSeekerReq + GoldenSeekerReq == 2:
-            break
-        LocItemReqSet = set(loc.itemreqs)
-        if SilverSeekerReq == 0:
-            if SilverSeekerSet.issubset(LocItemReqSet):
-                alllines.append("     Silver Seeker\n")
-                RequiredCraftList.append("Silver Seeker")
-                SilverSeekerReq = 1
-        if GoldenSeekerReq == 0:
-            if GoldenSeekerSet.issubset(LocItemReqSet):
-                alllines.append("     Golden Seeker\n")
-                RequiredCraftList.append("Golden Seeker")
-                GoldenSeekerReq = 1
-    alllines.append("\n")
-    alllines.append("Logical Playthrough:\n")
-    alllines.append("\n")
-    for MQ in range(len(Mainquests)):
-        alllines.append(f"     Step {Mainquests[MQ].id}: {Mainquests[MQ].summary}\n")
-        alllines.append("\n")
-        CurStepLocList = []
-        if MQ == 49:
-            pass
-        if MQ != 0:
-            NewStepReqs = [item for item in Mainquests[MQ].itemreqs if item not in Mainquests[MQ - 1].itemreqs]
-            for item in NewStepReqs:
-                CurStepLocList.append(KeyItemtoLocDict.get(item))
-            CurStepLocList = list(set(CurStepLocList))
-            
-            # logic for determining sphere in step
-            SpheretoLoc = {}
-            NonSphere0s = []
-            CurStepLocListCopy = copy.deepcopy(CurStepLocList)
-            LoctoLocCopy = {}
-            for index in range(len(CurStepLocList)):
-                LoctoLocCopy[CurStepLocListCopy[index]] = CurStepLocList[index] # this ties the old and new locs together
-            for loc in CurStepLocListCopy:
-                for item in NewStepReqs:
-                    if item in loc.itemreqs: # if this location requires an item that was logically added this step, it can't be sphere 0 for the step
-                        NonSphere0s.append(loc)
-                        break
-            Sphere0s = [loc for loc in CurStepLocListCopy if loc not in NonSphere0s]
-            CurrSphere0Items = list(set(Helper.MultiLevelListToSingleLevelList([loc.randomizeditems for loc in Sphere0s])))
-            CurrSphere0Items = [item for item in CurrSphere0Items if item in NewStepReqs + Mainquests[MQ].itemreqs]
-            CurrSphere0Items.extend(Mainquests[MQ-1].itemreqs)
-            CurrSphere0Items = list(set(CurrSphere0Items))
-            SpheretoLoc[0] = []
-            CurrSphere = 0
-            for loc in Sphere0s:
-                SpheretoLoc[0].append(loc)
-            CurStepLocListCopy = [loc for loc in CurStepLocListCopy if loc not in Sphere0s]
-            PrevSphereItems = CurrSphere0Items
-            while len(CurStepLocListCopy) >= 1:
-                CurrSphere += 1
-                if CurrSphere == 2:
-                    pass
-                SpheretoLoc[CurrSphere] = []
-                SpheretoLoc[CurrSphere + 1] = []
-                SpheretoLoc[CurrSphere].extend(CurStepLocListCopy)
-                for loc in SpheretoLoc[CurrSphere - 1]:
-                    PrevSphereItems.extend(loc.randomizeditems)
-                PrevSphereItems = list(set([x for x in PrevSphereItems if x in Mainquests[MQ].itemreqs]))
-                for loc in SpheretoLoc[CurrSphere]:
-                    if not all(item in PrevSphereItems for item in set(loc.itemreqs)):
-                        SpheretoLoc[CurrSphere + 1].append(loc)
-                if SpheretoLoc[CurrSphere] == SpheretoLoc[CurrSphere + 1]: # bandaid for now, my head hurts
-                    del SpheretoLoc[CurrSphere + 1]
-                    break
-                SpheretoLoc[CurrSphere] = [loc for loc in SpheretoLoc[CurrSphere] if loc not in SpheretoLoc[CurrSphere + 1]]
-                CurStepLocListCopy = [loc for loc in CurStepLocListCopy if loc not in SpheretoLoc[CurrSphere]]
-            try:
-                if SpheretoLoc[CurrSphere + 1] == []:
-                    del SpheretoLoc[CurrSphere + 1]
-            except:
+    try:
+        IDstoAdd = []
+        MainQuestNamestoStorySteps = {"What Bars the Way": 10, "Power Unimaginable": 17, "Where's the Boy Gone?": 21, "Feeding an Army": 26, "Lett Bridge Restoration": 27, "To Cross a Desert": 33}
+        try: 
+            if HintedItemText != []:
                 pass
-            for item in range(len(SpheretoLoc)):
-                for loc in range(len(SpheretoLoc[item])):
-                    SpheretoLoc[item][loc] = LoctoLocCopy[SpheretoLoc[item][loc]]
-            if CurStepLocList != []:
-                for sphere in range(0, max(SpheretoLoc.keys()) + 1):
-                    alllines.append(f"          Sphere {sphere}:\n\n")                
-                    for loc in CurStepLocList:
-                        if loc in SpheretoLoc[sphere]:
-                            if loc.type != "sidequest":
-                                alllines.append(f"               {AreaIDtoNameDict[loc.nearloc].name}: {loc.name} (Story Step {loc.mainreq})\n")
-                            else:
-                                alllines.append(f"               Sidequest: {loc.name} (Story Step {loc.mainreq})\n")
-                            for reward in range(len(loc.randomizeditems)):
-                                if loc.randomizeditems[reward] in NewStepReqs:
-                                    alllines.append(f"                    Item {reward + 1}: {ItemIDtoItemName.get(loc.randomizeditems[reward])}\n")
-                            alllines.append("\n")
-    alllines.append("\n")
-    alllines.append("Items per Check (by Category):\n")
-    alllines.append("\n")
-    alllines.append(f"     {LocTypetoSpoilerLogHeader[AllLocations[0].type]}:")
-    alllines.append("\n\n")
-    for loc in range(len(AllLocations)):
-        CurLocType = LocTypetoSpoilerLogHeader[AllLocations[loc].type]
-        if loc != 0 and CurLocType != LocTypetoSpoilerLogHeader[AllLocations[loc - 1].type]:
-            alllines.append("\n")
-            alllines.append(f"     {LocTypetoSpoilerLogHeader[AllLocations[loc].type]}:")
-            alllines.append("\n")
-            alllines.append("\n")
-        alllines.append(f"          {AllLocations[loc].name}:\n")
-        for reward in range(len(AllLocations[loc].randomizeditems)):
-            if ItemIDtoItemName.get(AllLocations[loc].randomizeditems[reward]) == None and AllLocations[loc].randomizeditems[reward] != 0:
-                IDstoAdd.append(AllLocations[loc].randomizeditems[reward])
-            alllines.append(f"               Item {reward + 1}: {ItemIDtoItemName.get(AllLocations[loc].randomizeditems[reward])}\n")
-    alllines.append("\n\n")
-    alllines.append("Items per Check (by Location (Excludes Sidequests!)):\n\n")
-    for loc in AreaIDtoNameDict.keys():
-        alllines.append(f"     {AreaIDtoNameDict[loc].name}\n\n")
-        for check in range(len(AllLocations)):
-            if AllLocations[check].type != "sidequest":
-                if AllLocations[check].nearloc == loc:
-                    alllines.append(f"          {AllLocations[check].name}:\n")
-                    for reward in range(len(AllLocations[check].randomizeditems)):
-                        if ItemIDtoItemName.get(AllLocations[check].randomizeditems[reward]) == None and AllLocations[check].randomizeditems[reward] != 0:
-                            IDstoAdd.append(AllLocations[check].randomizeditems[reward])
-                        alllines.append(f"               Item {reward + 1}: {ItemIDtoItemName.get(AllLocations[check].randomizeditems[reward])}\n")
+        except:
+            HintedItemText = []
+        try: 
+            if HintedLocText != []:
+                pass
+        except:
+            HintedLocText = []
+        DesiredSpoilerLogDirectory = "XC2/Torna_Spoiler_Logs"
+        if not os.path.exists(DesiredSpoilerLogDirectory):
+            os.makedirs(DesiredSpoilerLogDirectory)
+        DesiredSpoilerLogLocation = f"{DesiredSpoilerLogDirectory}/{seedEntryVar.get()}.txt"
+        if not os.path.exists(DesiredSpoilerLogLocation):
+            with open(DesiredSpoilerLogLocation, "w", encoding= "utf-8") as debugfile:
+                pass
+        debugfile = open(DesiredSpoilerLogLocation, "w", encoding= "utf-8")
+        debugfile.write(f"Xenoblade 2 Randomizer Version {Version}\n\n")
+        debugfile.write(f"Permalink: {permalinkVar.get()}\n\n")
+        debugfile.write(f"Seed Name: {seedEntryVar.get()}\n\n")
+        debugfile.write("Options Selected:\n")
+        for option in XenoOptionDict["XC2"]: # for each option
+            OptionName = option.name   
+            OptionVal = option.GetState()
+            if OptionVal: # if the option is checked
+                if option.hasSpinBox:
+                    OptionOdds = option.GetSpinbox()
+                    debugfile.write(f" {OptionName}: {OptionOdds};")
+                else:
+                    debugfile.write(f" {OptionName};")
+        debugfile.write("\n\n")
+        debugfile.write("Suboptions Selected:\n")
+        for option in XenoOptionDict["XC2"]:
+            OptionName = option.name
+            OptionVal = option.GetState()
+            if OptionVal:
+                for subOption in option.subOptions: # looping through all suboptions
+                    SubOptionName = subOption.name
+                    SubOptionVal = subOption.GetState()
+                    if SubOptionVal: # if the suboption is a checkbox and checked
+                        if subOption.hasSpinBox:
+                            subOptionOdds = subOption.GetSpinbox()
+                            debugfile.write(f" {OptionName}: {SubOptionName}: [{subOptionOdds}];")
+                        else:
+                            debugfile.write(f" {OptionName}: {SubOptionName};")
+        debugfile.write("\n")   
+        debugfile.close()
+        debugfileread = open(DesiredSpoilerLogLocation, "r", encoding= "utf-8")
+        alllines = debugfileread.readlines()
+        alllines[7] = alllines[7][1:]
+        alllines[7] = alllines[7][:-2]
+        alllines[7] += "\n"
+        alllines[10] = alllines[10][1:]
+        alllines[10] = alllines[10][:-2]
+        alllines[10] += "\n"
+        debugfilewrite = open(DesiredSpoilerLogLocation, "w", encoding= "utf-8")
+        debugfilewrite.writelines(alllines)
+        debugfilewrite.close()
+        debugfileread = open(DesiredSpoilerLogLocation, "r", encoding= "utf-8")
+        alllines = debugfileread.readlines()
         alllines.append("\n")
-    alllines.append("\n\n")
-    debugfilewrite = open(DesiredSpoilerLogLocation, "w", encoding= "utf-8")
-    debugfilewrite.writelines(alllines)
-    debugfilewrite.close()
+        if HintedItemText != [] or HintedLocText != []:
+            alllines.append("Hints:")
+            alllines.append("\n\n")
+            if HintedItemText != []:
+                alllines.append("     Item Hints:\n\n")
+                for hint in HintedItemText:
+                    alllines.append(f"          {hint}\n")
+                alllines.append("\n")
+            if HintedLocText != []:
+                alllines.append("     Location Progression Count Hints:\n\n")
+                for hint in HintedLocText:
+                    alllines.append(f"          {hint}\n")
+                alllines.append("\n")
+            alllines.append("\n")
+        alllines.append("Chosen Required Quests and NPC Conversations by Community Level Requirement:\n")
+        alllines.append("\n")
+        QuestListByCommReq = {0:[],1:[],2:[],3:[],4:[],5:[]}
+        QuestNamesAlreadyUsed = []
+        for sq in AllRequiredSidequests:
+            QuestListByCommReq[sq.comreq].append(sq)
+        for commlevel in range(0, 6):
+            if commlevel == 0:
+                alllines.append(f"     No Community Level Requirement:\n\n")
+            else:
+                alllines.append(f"     Community Level {commlevel} Required:\n\n")
+            for quest in QuestListByCommReq[commlevel]:
+                if quest.name not in QuestNamesAlreadyUsed:
+                    if quest not in ChosenLevel2Quests + ChosenLevel4Quests + [quest for quest in Sidequests if quest.name in ["What Bars the Way", "Power Unimaginable", "Where's the Boy Gone?", "Feeding an Army", "Lett Bridge Restoration", "To Cross a Desert"]]:
+                        alllines.append(f"          {quest.name} (Quest Reward Required)\n")
+                        QuestNamesAlreadyUsed.append(quest.name)
+                    elif quest.name in ["What Bars the Way", "Power Unimaginable", "Where's the Boy Gone?", "Feeding an Army", "Lett Bridge Restoration", "To Cross a Desert"]:
+                        alllines.append(f"          {quest.name} (Required for Story Step {MainQuestNamestoStorySteps[quest.name]})\n")
+                        QuestNamesAlreadyUsed.append(quest.name)
+                    elif quest in ChosenLevel2Quests:
+                        alllines.append(f"          {quest.name} (Required for Story Step 38)\n")
+                        QuestNamesAlreadyUsed.append(quest.name)
+                    else:
+                        alllines.append(f"          {quest.name} (Required for Story Step 50)\n")
+                        QuestNamesAlreadyUsed.append(quest.name)
+            if QuestListByCommReq[commlevel] == []:
+                alllines.append("          None\n")
+            alllines.append("\n")
+        alllines.append("Chosen Required Crafted Items:\n")
+        alllines.append("\n")
+        RequiredCraftList = ["Trout Stralu"]
+        alllines.append("     Trout Stralu\n")
+        for sq in AllRequiredSidequests:
+            if sq.reqrecipenames != []:
+                for recipe in sq.reqrecipenames:
+                    if recipe not in RequiredCraftList:
+                        alllines.append(f"     {recipe}\n")
+                        RequiredCraftList.append(recipe)
+        SilverSeekerSet = set([30387,30411,30421,30360,30444])
+        GoldenSeekerSet = set([30378,30428,30372,30388,30436])
+        SilverSeekerReq, GoldenSeekerReq = 0, 0
+        if "Silver Seeker" in RequiredCraftList:
+            SilverSeekerReq = 1
+        if "Golden Seeker" in RequiredCraftList:
+            GoldenSeekerReq = 1
+        for loc in KeyItemtoLocDict.values():
+            if SilverSeekerReq + GoldenSeekerReq == 2:
+                break
+            LocItemReqSet = set(loc.itemreqs)
+            if SilverSeekerReq == 0:
+                if SilverSeekerSet.issubset(LocItemReqSet):
+                    alllines.append("     Silver Seeker\n")
+                    RequiredCraftList.append("Silver Seeker")
+                    SilverSeekerReq = 1
+            if GoldenSeekerReq == 0:
+                if GoldenSeekerSet.issubset(LocItemReqSet):
+                    alllines.append("     Golden Seeker\n")
+                    RequiredCraftList.append("Golden Seeker")
+                    GoldenSeekerReq = 1
+        alllines.append("\n")
+        alllines.append("Logical Playthrough:\n")
+        alllines.append("\n")
+        for MQ in range(len(Mainquests)):
+            alllines.append(f"     Step {Mainquests[MQ].id}: {Mainquests[MQ].summary}\n")
+            alllines.append("\n")
+            CurStepLocList = []
+            if MQ == 49:
+                pass
+            if MQ != 0:
+                NewStepReqs = [item for item in Mainquests[MQ].itemreqs if item not in Mainquests[MQ - 1].itemreqs]
+                for item in NewStepReqs:
+                    CurStepLocList.append(KeyItemtoLocDict.get(item))
+                CurStepLocList = list(set(CurStepLocList))
+                
+                # logic for determining sphere in step
+                SpheretoLoc = {}
+                NonSphere0s = []
+                CurStepLocListCopy = copy.deepcopy(CurStepLocList)
+                LoctoLocCopy = {}
+                for index in range(len(CurStepLocList)):
+                    LoctoLocCopy[CurStepLocListCopy[index]] = CurStepLocList[index] # this ties the old and new locs together
+                for loc in CurStepLocListCopy:
+                    for item in NewStepReqs:
+                        if item in loc.itemreqs: # if this location requires an item that was logically added this step, it can't be sphere 0 for the step
+                            NonSphere0s.append(loc)
+                            break
+                Sphere0s = [loc for loc in CurStepLocListCopy if loc not in NonSphere0s]
+                CurrSphere0Items = list(set(Helper.MultiLevelListToSingleLevelList([loc.randomizeditems for loc in Sphere0s])))
+                CurrSphere0Items = [item for item in CurrSphere0Items if item in NewStepReqs + Mainquests[MQ].itemreqs]
+                CurrSphere0Items.extend(Mainquests[MQ-1].itemreqs)
+                CurrSphere0Items = list(set(CurrSphere0Items))
+                SpheretoLoc[0] = []
+                CurrSphere = 0
+                for loc in Sphere0s:
+                    SpheretoLoc[0].append(loc)
+                CurStepLocListCopy = [loc for loc in CurStepLocListCopy if loc not in Sphere0s]
+                PrevSphereItems = CurrSphere0Items
+                while len(CurStepLocListCopy) >= 1:
+                    CurrSphere += 1
+                    if CurrSphere == 2:
+                        pass
+                    SpheretoLoc[CurrSphere] = []
+                    SpheretoLoc[CurrSphere + 1] = []
+                    SpheretoLoc[CurrSphere].extend(CurStepLocListCopy)
+                    for loc in SpheretoLoc[CurrSphere - 1]:
+                        PrevSphereItems.extend(loc.randomizeditems)
+                    PrevSphereItems = list(set([x for x in PrevSphereItems if x in Mainquests[MQ].itemreqs]))
+                    for loc in SpheretoLoc[CurrSphere]:
+                        if not all(item in PrevSphereItems for item in set(loc.itemreqs)):
+                            SpheretoLoc[CurrSphere + 1].append(loc)
+                    if SpheretoLoc[CurrSphere] == SpheretoLoc[CurrSphere + 1]: # bandaid for now, my head hurts
+                        del SpheretoLoc[CurrSphere + 1]
+                        break
+                    SpheretoLoc[CurrSphere] = [loc for loc in SpheretoLoc[CurrSphere] if loc not in SpheretoLoc[CurrSphere + 1]]
+                    CurStepLocListCopy = [loc for loc in CurStepLocListCopy if loc not in SpheretoLoc[CurrSphere]]
+                try:
+                    if SpheretoLoc[CurrSphere + 1] == []:
+                        del SpheretoLoc[CurrSphere + 1]
+                except:
+                    pass
+                for item in range(len(SpheretoLoc)):
+                    for loc in range(len(SpheretoLoc[item])):
+                        SpheretoLoc[item][loc] = LoctoLocCopy[SpheretoLoc[item][loc]]
+                if CurStepLocList != []:
+                    for sphere in range(0, max(SpheretoLoc.keys()) + 1):
+                        alllines.append(f"          Sphere {sphere}:\n\n")                
+                        for loc in CurStepLocList:
+                            if loc in SpheretoLoc[sphere]:
+                                if loc.type != "sidequest":
+                                    alllines.append(f"               {AreaIDtoNameDict[loc.nearloc].name}: {loc.name} (Story Step {loc.mainreq})\n")
+                                else:
+                                    alllines.append(f"               Sidequest: {loc.name} (Story Step {loc.mainreq})\n")
+                                for reward in range(len(loc.randomizeditems)):
+                                    if loc.randomizeditems[reward] in NewStepReqs:
+                                        alllines.append(f"                    Item {reward + 1}: {ItemIDtoItemName.get(loc.randomizeditems[reward])}\n")
+                                alllines.append("\n")
+        alllines.append("\n")
+        alllines.append("Items per Check (by Category):\n")
+        alllines.append("\n")
+        alllines.append(f"     {LocTypetoSpoilerLogHeader[AllLocations[0].type]}:")
+        alllines.append("\n\n")
+        for loc in range(len(AllLocations)):
+            CurLocType = LocTypetoSpoilerLogHeader[AllLocations[loc].type]
+            if loc != 0 and CurLocType != LocTypetoSpoilerLogHeader[AllLocations[loc - 1].type]:
+                alllines.append("\n")
+                alllines.append(f"     {LocTypetoSpoilerLogHeader[AllLocations[loc].type]}:")
+                alllines.append("\n")
+                alllines.append("\n")
+            alllines.append(f"          {AllLocations[loc].name}:\n")
+            for reward in range(len(AllLocations[loc].randomizeditems)):
+                if ItemIDtoItemName.get(AllLocations[loc].randomizeditems[reward]) == None and AllLocations[loc].randomizeditems[reward] != 0:
+                    IDstoAdd.append(AllLocations[loc].randomizeditems[reward])
+                alllines.append(f"               Item {reward + 1}: {ItemIDtoItemName.get(AllLocations[loc].randomizeditems[reward])}\n")
+        alllines.append("\n\n")
+        alllines.append("Items per Check (by Location (Excludes Sidequests!)):\n\n")
+        for loc in AreaIDtoNameDict.keys():
+            alllines.append(f"     {AreaIDtoNameDict[loc].name}\n\n")
+            for check in range(len(AllLocations)):
+                if AllLocations[check].type != "sidequest":
+                    if AllLocations[check].nearloc == loc:
+                        alllines.append(f"          {AllLocations[check].name}:\n")
+                        for reward in range(len(AllLocations[check].randomizeditems)):
+                            if ItemIDtoItemName.get(AllLocations[check].randomizeditems[reward]) == None and AllLocations[check].randomizeditems[reward] != 0:
+                                IDstoAdd.append(AllLocations[check].randomizeditems[reward])
+                            alllines.append(f"               Item {reward + 1}: {ItemIDtoItemName.get(AllLocations[check].randomizeditems[reward])}\n")
+            alllines.append("\n")
+        alllines.append("\n\n")
+        debugfilewrite = open(DesiredSpoilerLogLocation, "w", encoding= "utf-8")
+        debugfilewrite.writelines(alllines)
+        debugfilewrite.close()
+    except:
+        pass
     #IDstoAdd = list(set(IDstoAdd))
     #print(IDstoAdd)
     #print(f"Average Story Step: {round(sum(StoryStepList)/len(StoryStepList), 2)}")
