@@ -18,7 +18,6 @@ Tabs = {
 }
 
 # CharactersOption = Option("Heroes", Character, "Randomizes heroes", [lambda: Characters.CharacterSwaps()])
-EnemyOption = Option("Enemies", Enemies, "Randomizes enemies", [lambda: Enemy.Enemies()])
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsters, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption)], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
 NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True)
 NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption, hasSpinBox=True)

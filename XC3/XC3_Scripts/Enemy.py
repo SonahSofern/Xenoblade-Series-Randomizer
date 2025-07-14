@@ -35,7 +35,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
         
         GenEnemyData(eneData)
         
-        RandomAssignment(eneData, StaticEnemyData, targetGroup, GenWeights(isNormal, isUnique, isBoss, isSuperboss), isEnemies)
+        RandomAssignment(eneData, targetGroup, GenWeights(isNormal, isUnique, isBoss, isSuperboss), isEnemies)
 
         Bandaids()
         
