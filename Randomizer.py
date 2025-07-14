@@ -9,7 +9,7 @@ import requests
 
 
 GUISettings.RootsForStyling.append(root)
-Version = "1.0.0"
+Version = "1.0.1"
 windowWidth = "1600"
 windowHeight = "900"
 defaultFont = Font(family="Calibri", size=14)
