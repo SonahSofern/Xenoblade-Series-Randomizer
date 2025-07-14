@@ -19,3 +19,6 @@ https://tcrf.net/Notes:Xenoblade_Chronicles/Music_Tracks
 https://www.xenoserieswiki.org  
 https://frontiernav.net/wiki/xenoblade-chronicles-2  
 https://gitlab.com/damysteryman/XC2SaveNETThingy/-/tags/r6.1  
+
+# Setup
+Guides can be found in the randomizer program for each game, a button with this icon ☰.

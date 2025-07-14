@@ -1,102 +1,111 @@
 
 import json, random, copy, traceback, math
-from XCDE.XCDE_Scripts import Options, IDs
+from XC3.XC3_Scripts import IDs
 from scripts import Helper, JSONParser, PopupDescriptions
-from XCDE.XCDE_Scripts.IDs import *
 
-class Enemy:
-    def __init__(self, enelistArea, enelist):
-        self.eneListArea = enelistArea
-        self.enelist = enelist
+# https://xenobladedata.github.io/xb3_130/SYS_GimmickLocation.html#25513 useful file has enemy xyz and probably how fights dteremine where try again places you
 
-OriginalEnemyData = []
-
-instantDeathSpikeThreshold = 60
-
-
-def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
-
-    isNormal = normal.GetState()
-    isUnique = unique.GetState()
-    isBoss = boss.GetState()
-    isSuper = superboss.GetState()
-    odds = odds.GetSpinbox()
-    ChosenEnemyIds = []
-    if isNormal:
-        ChosenEnemyIds.extend(NormalEnemies)
-    if isUnique:
-        ChosenEnemyIds.extend(UniqueEnemies)
-    if isBoss:
-        ChosenEnemyIds.extend(BossEnemies)
-    if isSuper:
-        ChosenEnemyIds.extend(SuperbossEnemies)
-    # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame",  "avoid", "spike_dmg", "spike_state_val"
-    CopiedStats = ["move_speed", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "delay", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_state", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
-    CopiedStatsWithRatios = ["str", "eth"] # Not doing agility or hp , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
-    CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
+# To fix: 
+# Land Enemies falling beneath water
+# Land enemies falling in the sky          
+# Too many agnus/keves soldier enemies dillutes the pool of intereszting enemies         
+# Keves Queen is unkillable (its not the NoKill (its named slightly different) Flag on enemy)    
+class EnemyGroup():
+    def __init__(self):
+        self.originalGroup = []
+        self.currentGroup = []
+        
+    def isEmpty(self):
+        if self.originalGroup == []:
+            return True
+        else:
+            return False
     
-    # 5001 doesnt have enemies
-    enAreaFiles = areaFileListNumbers.copy()
-    enAreaFiles.remove("5001")
-    
-    with open(f"./XCDE/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
-        eneData = json.load(eneFile)    
-        
-        if OriginalEnemyData == []:
-            CreateEnemyDataClass(eneData, enAreaFiles)
-            
-        filteredEnemyData = OriginalEnemyData.copy() 
-        
-        # Filter the list so we randomly choose from the enem types we want
-        filteredEnemyData = [en for en in filteredEnemyData if en.enelist["$id"] in ChosenEnemyIds]
-        
-        filteredEnemyDataCopy = filteredEnemyData.copy() # Used to repopulate the list after removing
-        
-        # Randomly Assign Enemies
-        for file in enAreaFiles:
-            with open(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
-                with open(f"./XCDE/JsonOutputs/bdat_common/VoEnemy.json", 'r+', encoding='utf-8') as eneVoiceFile:
-                    eneVoiceData = json.load(eneVoiceFile)
-                    eneAreaData = json.load(eneAreaFile)
-                    
-                    for enemy in eneAreaData["rows"]:   
-                        
-                        if not Helper.OddsCheck(odds):
-                            continue
-                        
-                        if enemy["$id"] not in monsterTypeList: # Only want to replace enemies chosen from our groups
-                            continue
-                                                    
-                        chosen:Enemy = random.choice(filteredEnemyData) # Choose an enemy                
-                        
-                        VoicedEnemiesFix(eneVoiceData, chosen, enemy)                                
-                        SpikeBalancer(enemy, chosen.eneListArea)
-                        
-                        # Copy stats with ratios to original stats
-                        replacementTotalStats = TotalStats(chosen.eneListArea, CopiedStatsWithRatios)
-                        originalTotalStats = TotalStats(enemy, CopiedStatsWithRatios)
-                        
-                        # Copy chosen stats over
-                        for key in CopiedStats: 
-                            enemy[key] = chosen.eneListArea[key]
-                        
-                        if (not FirstFights(enemy)) and (enemy["$id"] not in GroupEnemies):
-                            for key in CopiedStatsWithRatios:
-                                enemy[key] = KeepStatRatio(enemy, chosen.eneListArea, key, replacementTotalStats, originalTotalStats)
-                            
-                        for ene in eneData["rows"]:
-                            if (ene["$id"] == enemy["$id"]):
-                                for key in CopiedInfo:
-                                    ene[key] = chosen.enelist[key]
-                                break
+    def RefreshCurrentGroup(self):
+        self.currentGroup = copy.deepcopy(self.originalGroup)
 
-                        
-                        # Allows no dupes if possible if we dont have enough choices it reshuffles the original pool
-                        filteredEnemyData.remove(chosen)   
-                        if filteredEnemyData == []: # repopulate it if the group is empty
-                                filteredEnemyData = filteredEnemyDataCopy.copy()
+NormalGroup = EnemyGroup()
+UniqueGroup = EnemyGroup()
+BossGroup = EnemyGroup()
+SuperbossGroup = EnemyGroup()
+StaticEnemyData = [NormalGroup, UniqueGroup, BossGroup, SuperbossGroup]
+                                                                                                                                                                                                                                                                                                                
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
+    with open(f"XC3/JsonOutputs/fld/FLD_EnemyData.json", 'r+', encoding='utf-8') as eneFile:
+        eneData = json.load(eneFile)
+        
+        GenEnemyData(eneData)
+        
+        RandomAssignment(eneData, targetGroup, GenWeights(isNormal, isUnique, isBoss, isSuperboss), isEnemies)
 
-                    JSONParser.CloseFile(eneVoiceData, eneVoiceFile)
-                    JSONParser.CloseFile(eneAreaData, eneAreaFile)  
+        Bandaids()
+        
         JSONParser.CloseFile(eneData, eneFile)
 
+def RandomAssignment(eneData, targetGroup, weights, isEnemies):
+    keysList = ['DebugName', 'MapID', 'CatMain', 'CatBGM', '<B569BFB1>', '<352C263C>', '<BA57B736>', 'Scale', 'EliteScale', 'ScalePlus', 'WeaponScale', 'ChrSize', 'TurnSize', 'LevPlus', '<64251F47>', '<3B6DFBC4>', '<EE7FFF6D>', '<F36BAFFD>', 'AiBase', '<0F7768D2>', '<9B3B9099>', 'IdBgm', 'IdBattleEnemy', '<C6717CFE>', 'FlgColiOff', '<EFCB57EC>', 'IconOffset', 'FlgSpDead', '<3828CCE4>', 'FlgSerious', '<3CEBD0A4>', '<9A220E4D>', 'KillEffType', 'SpBattle', '<EC666A80>', '<AB4BA3D5>', '<1104E9C5>', '<B5C5F3B3>', 'MsgName', 'NPCName', 'AlliesMsg', '<D3F77DFD>', 'GetRatio', 'GetEnArts', 'GetEnSkill', 'FootPrintDetection', 'EffConvert', '<7C2FCBE1>', '<97002EDA>', 'VoGroup', 'NotEconomy', 'ExpRate', 'GoldRate', '<91DD0357>', 'AttenuationScale', '<C4D88A2B>', '<7D3D5DCB>', 'NamedSpCond', '<C313305B>', 'Score', '<4BAF120D>', '<7EFBB833>', '<277C5BBD>', '<65449302>', '<192EEE69>', '<F36D8D42>', '<76A4C736>']         # ignoreKeys = ["$id", "ID", "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgKeepSword", "FlgNoVanish", "FlgDmgFloor", "FlgMoveFloor", "FlgLevAttack", "FlgLevBattleOff", "FlgFixed", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "FlgNoFalling"]
+    # Randomly Assign
+    for en in eneData["rows"]:
+        if not (en["$id"] in targetGroup):
+            continue
+        if not Helper.OddsCheck(isEnemies.GetSpinbox()):
+            continue
+     
+        enemyGroup = random.choices(StaticEnemyData, weights)[0]
+        newEn = random.choice(enemyGroup.currentGroup)
+        
+        enemyGroup.currentGroup.remove(newEn) # If group is empty
+        if enemyGroup.currentGroup == []:
+            enemyGroup.RefreshCurrentGroup()
+            
+        for key in keysList:
+            en[key] = newEn[key]
+ 
+def isBadEnemy(en):
+    if en["$id"] in IDs.badEnemies:
+        return True
+
+def GenEnemyData(eneData):
+    '''Creates the data in a nested list if it does not already exist, this is only to be copied from never altered'''
+    if NormalGroup.isEmpty():
+        for en in eneData["rows"]:
+            if isBadEnemy(en):
+                continue
+            enID = en["$id"]
+            if enID in IDs.NormalMonsters:
+                group = NormalGroup
+            elif enID in IDs.UniqueMonsters:
+                group = UniqueGroup
+            elif enID in IDs.BossMonsters:
+                group = BossGroup
+            elif enID in IDs.SuperbossMonsters:
+                group = SuperbossGroup
+            
+            group.currentGroup.append(en.copy())
+            group.originalGroup.append(en.copy())
+
+def GenWeights(isNormal, isUnique, isBoss, isSuperboss):
+    weights = [0,0,0,0]
+    if isNormal.GetState():
+        weights[0] = isNormal.GetSpinbox()
+    if isUnique.GetState():
+        weights[1] = isUnique.GetSpinbox()
+    if isBoss.GetState():
+        weights[2] = isBoss.GetSpinbox()
+    if isSuperboss.GetState():
+        weights[3] = isSuperboss.GetSpinbox()
+    return weights
+
+def SwimmingEnemiesDoomFix():
+    with open(f"XC3/JsonOutputs/btl/BTL_EnRsc.json", 'r+', encoding='utf-8') as eneFile:
+        eneData = json.load(eneFile)
+        for en in eneData["rows"]:
+            if en["ActType"] == 1:
+                en["ActType"] = 0
+        JSONParser.CloseFile(eneData, eneFile)
+
+def Bandaids():
+    SwimmingEnemiesDoomFix()
+    
+def EnemyDesc(name):
+    pass

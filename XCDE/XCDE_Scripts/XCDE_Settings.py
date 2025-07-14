@@ -37,6 +37,7 @@ def XCDEHelp():
     descData.Text("Choose your output location for the program. This is where your game will load the randomized files from.", anchor="w")
     descData.Image("outputLocation.png", Game, 800)
     descData.Text("Your path should look similar to this:\n\nYUZU: C:/Users/yourName/AppData/Roaming/yuzu/load/0100FF500E34A000/Randomizer\nRYUJINX: C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/contents/0100FF500E34A000\nCONSOLE: This PC/Nintendo Switch/SD Card/atmosphere/contents/0100FF500E34A000 (This is on your microsd card)", anchor="w")
+    descData.Text("The 0100FF500E34A000 folder might not exist yet in that location, go ahead and create it if so.")
     descData.Tag("Step 2")
     descData.Text("Choose your preferred settings, then click the randomize button.", anchor="w")
     descData.Text("If you want to know more about a setting you can click on its description (not all settings have descriptions).", anchor="w")

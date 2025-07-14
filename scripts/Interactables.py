@@ -6,7 +6,7 @@ from tkinter.font import Font
 Game = "" # Used to tell what option goes to what games tab
 
 class Option():
-    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], _defState = False, _prio = 50,hasSpinBox = False, _spinMin = 0, _spinMax = 100, _spinDesc = "% randomized", _spinWidth = 3, _spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False):
+    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], defState = False, prio = 50,hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
@@ -27,16 +27,16 @@ class Option():
         self.commands:list = _commands
         self.preRandoCommands:list = preRandoCommands
         self.hasSpinBox = hasSpinBox
-        self.subDefState = _defState
-        self.prio = _prio
+        self.subDefState = defState
+        self.prio = prio
         XenoOptionDict[Game].append(self)
         
         # Custom Spinboxes
-        self.spinBoxMin = _spinMin
-        self.spinBoxMax = _spinMax
-        self.spinDesc = _spinDesc
-        self.spinWidth = _spinWidth
-        self.spinIncr = _spinIncr
+        self.spinBoxMin = spinMin
+        self.spinBoxMax = spinMax
+        self.spinDesc = spinDesc
+        self.spinWidth = spinWidth
+        self.spinIncr = spinIncr
         
 
     def DisplayOption(self, tab, root, defFont, defTheme):

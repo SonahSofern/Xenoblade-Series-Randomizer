@@ -2,6 +2,10 @@ import json, random
 from scripts import JSONParser, Helper, PopupDescriptions
 
 def TutorialSkips(): # For some reason visually the game wont load the entire hud until aftyer the first boss in the intro but thats fine
+    TutorialRemoval()
+    UnlockAllSystemsTutorialsLocked()
+        
+def TutorialRemoval():  
     with open("XC3/JsonOutputs/prg/SYS_Tutorial.json", 'r+', encoding='utf-8') as tutFile:
         tutData = json.load(tutFile)
         for tut in tutData["rows"]:
@@ -10,7 +14,9 @@ def TutorialSkips(): # For some reason visually the game wont load the entire hu
             tut["EnemyInfo"] = 0
             tut["Repeat"] = 0
             tut["<CA1A7DB1>"] = 0
-        JSONParser.CloseFile(tutData, tutFile)
+        JSONParser.CloseFile(tutData, tutFile)   
+        
+def UnlockAllSystemsTutorialsLocked():
     with open("XC3/JsonOutputs/sys/SYS_SystemOpen.json", 'r+', encoding='utf-8') as tutFile:
         tutData = json.load(tutFile)
         nonTutorialIds = [47,48,49,50,51,58,59,65,66,67,72,77,84]
@@ -19,76 +25,14 @@ def TutorialSkips(): # For some reason visually the game wont load the entire hu
                 continue
             tut["Flag"] = 21022 # Flag set very early instantly unlocks everything basically probably will cause issues so testing is required
         JSONParser.CloseFile(tutData, tutFile)
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-# with open("XC3/JsonOutputs/prg/SYS_TutorialEnemyInfo.json", 'r+', encoding='utf-8') as tutFile:
-#     tutData = json.load(tutFile)
-#     for tut in tutData["rows"]:
-#         tut["<10FF2123>"] = 0
-#         tut["<1A391DEB>"] = 0
-#         tut["<032170A4>"] = 0
-#     JSONParser.CloseFile(tutData, tutFile)
+    SetTipNotificationsOff()
+# https://xenobladedata.github.io/xb3_200_dlc4/MNU_option_notice.html Can set a default of dont show tips cause you get a barrage of them
 
-
-# def TutorialSkips():
-# Unskippable = [277]
-# # with open("XC3/JsonOutputs/fld/FLD_ConditionTutorial.json", 'r+', encoding='utf-8') as tutFile:
-# #     tutData = json.load(tutFile)
-# #     for tut in tutData["rows"]:
-# #         if tut["$id"] in Unskippable:
-# #             continue
-# #         tut["TutorialID"] = 0
-# #     JSONParser.CloseFile(tutData, tutFile)
-# # with open("XC3/JsonOutputs/fld/FLD_ConditionList.json", 'r+', encoding='utf-8') as tutFile:
-# #     # 5 
-# #     tutData = json.load(tutFile)
-# #     for tut in tutData["rows"]:
-# #         if tut["$id"] in Unskippable:
-# #             continue
-# #         tut["Condition"] = 0
-# #     JSONParser.CloseFile(tutData, tutFile)
-# with open("XC3/JsonOutputs/mnu/MNU_TipsList.json", 'r+', encoding='utf-8') as tutFile:
-#     # 5 
-#     tutData = json.load(tutFile)
-#     for tut in tutData["rows"]:
-#         if tut["Condition1"] in Unskippable:
-#             continue
-#         tut["Condition1"] = 0
-#         tut["Title"] = 0
-#         tut["BaseImageNo"] = 0
-#         for i in range(1,4):  
-#             tut[f"Comment{i}"] = 0
-#             tut[f"ImageNo{i}"] = 0
-#             tut[f"PageTitle{i}"] = 0
-
-        
-#     JSONParser.CloseFile(tutData, tutFile)
-# # with open("XC3/JsonOutputs/prg/SYS_Tutorial.json", 'r+', encoding='utf-8') as tutFile:
-# #     tutData = json.load(tutFile)
-# #     for tut in tutData["rows"]:
-# #         tut["EnemyInfo"] = 0
-# #         tut["Repeat"] = 0
-# #         tut["<CA1A7DB1>"] = 0
-# #     JSONParser.CloseFile(tutData, tutFile)
+def SetTipNotificationsOff(): # Barrage of notifications should be off by default if you unlock the systems
+    with open("XC3/JsonOutputs/mnu/MNU_option_notice.json", 'r+', encoding='utf-8') as notiFile:
+        notiData = json.load(notiFile)
+        for noti in notiData["rows"]:
+            if noti["$id"] == 44:
+                noti["default_value"] = 1
+                break
+        JSONParser.CloseFile(notiData, notiFile)
