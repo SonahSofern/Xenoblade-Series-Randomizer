@@ -37,26 +37,37 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
 def RandomAssignment(eneData, targetGroup, weights, isEnemies):
     keysList = ['ParamID', 'EnemyBladeID', 'BladeID', 'BladeAtr', 'ExtraParts', 'Name', 'Debug_Name', 'HpOver', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'Scale', 'ChrSize', 'TurnSize', 'CamSize', 'LinkRadius', 'BatInterval', 'BatArea', 'EN_WATER_DEAD_NONE', 'BatAreaType', 'DrawWait', 'AiGroup', 'AiGroupNum', 'BookID', 'EnhanceID1', 'EnhanceID2', 'EnhanceID3', 'ParamRev', 'RstDebuffRev', 'HealPotTypeRev', 'SummonID', 'BGMID', 'SeEnvID', 'Race', 'LvMin', 'LvMax', 'ScaleMin', 'ScaleMax']
     # Randomly Assign
-    for en in eneData["rows"]:
-        if not (en["$id"] in targetGroup):
-            continue
-        if not Helper.OddsCheck(isEnemies.GetSpinbox()):
-            continue
-        if isBadEnemy(en):
-            continue
-     
-        enemyGroup = random.choices(StaticEnemyData, weights)[0]
-        newEn = random.choice(enemyGroup.currentGroup)
-        
-        enemyGroup.currentGroup.remove(newEn) # If group is empty
-        if enemyGroup.currentGroup == []:
-            enemyGroup.RefreshCurrentGroup()
+    with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
+        with open("XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as RSCfile:
+            paramData = json.load(paramFile)
+            RSCData = json.load(RSCfile)
+            for en in eneData["rows"]:
+                if not (en["$id"] in targetGroup):
+                    continue
+                if not Helper.OddsCheck(isEnemies.GetSpinbox()):
+                    continue
+                if isBadEnemy(en):
+                    continue
             
-        for key in keysList:
-            en[key] = newEn[key]
+                enemyGroup = random.choices(StaticEnemyData, weights)[0]
+                newEn = random.choice(enemyGroup.currentGroup)
+                
+            
+                enemyGroup.currentGroup.remove(newEn) # If group is empty
+                if enemyGroup.currentGroup == []:
+                    enemyGroup.RefreshCurrentGroup()
+                
+                ActTypeFix(newEn, en, RSCData, paramData)
+                    
+                for key in keysList:
+                    en[key] = newEn[key]
+                    
+                
+            JSONParser.CloseFile(paramData, paramFile)                
+            JSONParser.CloseFile(RSCData, RSCfile)   
  
 def isBadEnemy(en):
-    if en["$id"] not in (IDs.NormalMonsters + IDs.BossMonsters + IDs.UniqueMonsters + IDs.SuperbossMonsters + SummonedEnemies):
+    if en["$id"] not in (IDs.NormalMonsters + IDs.BossMonsters + IDs.UniqueMonsters + IDs.SuperbossMonsters):
         return True
 
 def GenEnemyData(eneData):
@@ -150,18 +161,28 @@ def Bandaids():
     GortOgreUppercutRemoval()
     EarthBreathNerf()
     TornaWave1FightChanges()
-    FishFix()
-    FlyingFix()
-    SummonsFix()
+    # SummonsFix()
     # Is enemydupebosscondition still a problem need to test
 
-def FishFix():
-    pass
+def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData):
+    
+    def FindRSC(param, rsc, enemy):
+        for param in paramData["rows"]:
+            if param["$id"] == enemy["ParamID"]:
+                for rsc in RSCData["rows"]:
+                    if param["ResourceID"] == rsc["$id"]:
+                        return rsc
+            
+    oldRSC = FindRSC(paramData, RSCData, oldEnemy)
+    newRSC = FindRSC(paramData, RSCData, newEnemy)
 
-def FlyingFix():
-    pass
-# Going to not randomize these summonsed enemies and set their level to whatever the original summoners level is now
-SummonedEnemies = [1, 6, 1568, 1569, 1593, 1599, 66, 67, 1641, 122, 135, 150, 152, 154, 1700, 1724, 1725, 1726, 1727, 1731, 724, 725, 726, 727, 728, 242, 1371, 1881, 1787, 1788, 1789, 1285, 1805, 1806, 1807, 1304, 1308, 1347, 1349, 1350, 1351, 1352, 1353, 1354, 1355, 1356, 1357, 1358, 1359, 1360, 1361, 846, 1362, 1364, 1365, 1363, 1367, 1368, 1369, 1370, 1883, 1372, 1885, 1373, 1374, 1375, 1376, 1377, 1378, 1379, 1380, 1381, 1382, 1384, 1385, 1383, 1420, 1521, 1533]
+    if oldRSC["ActType"] != newRSC["ActType"]:
+        newRow = copy.deepcopy(oldRSC)
+        newRow["ActType"] = newRSC["ActType"]
+        newRow["$id"] = len(RSCData["rows"]) + 1
+        RSCData["rows"].append(newRow)
+             
+
 def SummonsFix():
     with open("XC2/JsonOutputs/common/BTL_Summon.json", 'r+', encoding='utf-8') as summonFile:
         with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
