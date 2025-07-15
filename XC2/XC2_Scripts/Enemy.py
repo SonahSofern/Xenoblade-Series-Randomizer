@@ -42,6 +42,8 @@ def RandomAssignment(eneData, targetGroup, weights, isEnemies):
             continue
         if not Helper.OddsCheck(isEnemies.GetSpinbox()):
             continue
+        if isBadEnemy(en):
+            continue
      
         enemyGroup = random.choices(StaticEnemyData, weights)[0]
         newEn = random.choice(enemyGroup.currentGroup)
@@ -54,7 +56,7 @@ def RandomAssignment(eneData, targetGroup, weights, isEnemies):
             en[key] = newEn[key]
  
 def isBadEnemy(en):
-    if en["$id"] not in (IDs.NormalMonsters + IDs.BossMonsters + IDs.UniqueMonsters + IDs.SuperbossMonsters):
+    if en["$id"] not in (IDs.NormalMonsters + IDs.BossMonsters + IDs.UniqueMonsters + IDs.SuperbossMonsters + SummonedEnemies):
         return True
 
 def GenEnemyData(eneData):
@@ -141,7 +143,6 @@ def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy 
                 row["DmgMgn6"] = 500
         JSONParser.CloseFile(data, file)
 
-
 def Bandaids():
     ForcedWinFights([3,6])
     AeshmaCoreHPNerf()
@@ -149,11 +150,43 @@ def Bandaids():
     GortOgreUppercutRemoval()
     EarthBreathNerf()
     TornaWave1FightChanges()
+    FishFix()
+    FlyingFix()
+    SummonsFix()
     # Is enemydupebosscondition still a problem need to test
-    # Fish Fix
-    # Flying Fix
-    # Summons Level Fix
-    
+
+def FishFix():
+    pass
+
+def FlyingFix():
+    pass
+# Going to not randomize these summonsed enemies and set their level to whatever the original summoners level is now
+SummonedEnemies = [1, 6, 1568, 1569, 1593, 1599, 66, 67, 1641, 122, 135, 150, 152, 154, 1700, 1724, 1725, 1726, 1727, 1731, 724, 725, 726, 727, 728, 242, 1371, 1881, 1787, 1788, 1789, 1285, 1805, 1806, 1807, 1304, 1308, 1347, 1349, 1350, 1351, 1352, 1353, 1354, 1355, 1356, 1357, 1358, 1359, 1360, 1361, 846, 1362, 1364, 1365, 1363, 1367, 1368, 1369, 1370, 1883, 1372, 1885, 1373, 1374, 1375, 1376, 1377, 1378, 1379, 1380, 1381, 1382, 1384, 1385, 1383, 1420, 1521, 1533]
+def SummonsFix():
+    with open("XC2/JsonOutputs/common/BTL_Summon.json", 'r+', encoding='utf-8') as summonFile:
+        with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
+            with open(f"XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as enParamFile:
+                with open(f"XC2/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as artFile:
+                    summonData = json.load(summonFile)
+                    eneData = json.load(eneFile)
+                    artData = json.load(artFile)
+                    enParamData = json.load(enParamFile)
+                    testlist = []
+                    for sum in summonData["rows"]:
+                        for sumGroup in sum["EnemyID"]:
+                            if sumGroup != 0:
+                                testlist.append(sumGroup)
+                    print(list(set(testlist)))
+                    
+                    # for art in artData["rows"]:
+                    #     if art["Summon"] != 0:
+                    #         for en in 
+                            
+                            
+                    # JSONParser.CloseFile()
+            
+
+  
 def EnemyAggro(): 
     odds = Options.EnemyAggroOption.GetSpinbox()
     with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
