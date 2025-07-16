@@ -35,7 +35,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
         JSONParser.CloseFile(eneData, eneFile)
 
 def RandomAssignment(eneData, targetGroup, weights, isEnemies):
-    keysList = ['ParamID', 'EnemyBladeID', 'BladeID', 'BladeAtr', 'ExtraParts', 'Name', 'Debug_Name', 'HpOver', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'Scale', 'ChrSize', 'TurnSize', 'CamSize', 'LinkRadius', 'BatInterval', 'BatArea', 'EN_WATER_DEAD_NONE', 'BatAreaType', 'DrawWait', 'AiGroup', 'AiGroupNum', 'BookID', 'EnhanceID1', 'EnhanceID2', 'EnhanceID3', 'ParamRev', 'RstDebuffRev', 'HealPotTypeRev', 'SummonID', 'BGMID', 'SeEnvID', 'Race', 'LvMin', 'LvMax', 'ScaleMin', 'ScaleMax']
+    keysList = ['EnemyBladeID', 'BladeID', 'BladeAtr', 'ParamID', 'ExtraParts', 'Name', 'Debug_Name', 'HpOver', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'Scale', 'ChrSize', 'TurnSize', 'CamSize', 'LinkRadius', 'BatInterval', 'BatArea', 'EN_WATER_DEAD_NONE', 'BatAreaType', 'DrawWait', 'AiGroup', 'AiGroupNum', 'BookID', 'EnhanceID1', 'EnhanceID2', 'EnhanceID3', 'ParamRev', 'RstDebuffRev', 'HealPotTypeRev', 'SummonID', 'BGMID', 'SeEnvID', 'Race', 'LvMin', 'LvMax', 'ScaleMin', 'ScaleMax']
     # Randomly Assign
     with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
         with open("XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as RSCfile:
@@ -58,7 +58,7 @@ def RandomAssignment(eneData, targetGroup, weights, isEnemies):
                     enemyGroup.RefreshCurrentGroup()
                 
                 ActTypeFix(newEn, en, RSCData, paramData)
-                    
+                
                 for key in keysList:
                     en[key] = newEn[key]
                     
@@ -166,23 +166,36 @@ def Bandaids():
 
 def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData):
     
-    def FindRSC(param, rsc, enemy):
+    def FindRSC(paramData, RSCData, enemy):
+        param = FindParam(paramData, enemy)
+        for rsc in RSCData["rows"]:
+            if param["ResourceID"] == rsc["$id"]:
+                return rsc
+
+    def FindParam(paramData, enemy):
         for param in paramData["rows"]:
             if param["$id"] == enemy["ParamID"]:
-                for rsc in RSCData["rows"]:
-                    if param["ResourceID"] == rsc["$id"]:
-                        return rsc
+                return param
             
     oldRSC = FindRSC(paramData, RSCData, oldEnemy)
     newRSC = FindRSC(paramData, RSCData, newEnemy)
 
     if oldRSC["ActType"] != newRSC["ActType"]:
-        newRow = copy.deepcopy(oldRSC)
-        newRow["ActType"] = newRSC["ActType"]
-        newRow["$id"] = len(RSCData["rows"]) + 1
+        
+        # Add new row
+        newRow = copy.deepcopy(newRSC)
+        for key in ["ActType", "FlyHeight", "FldMoveType"]:
+            newRow[key] = oldRSC[key]
+        newID = len(RSCData["rows"]) + 1
+        if newID == 786:
+            pass
+        newRow["$id"] = newID
         RSCData["rows"].append(newRow)
-             
-
+        
+        # Assign EnParam of newEnemy to that row
+        paramTest = FindParam(paramData, newEnemy)
+        paramTest["ResourceID"] = newID
+   
 def SummonsFix():
     with open("XC2/JsonOutputs/common/BTL_Summon.json", 'r+', encoding='utf-8') as summonFile:
         with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
