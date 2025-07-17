@@ -164,7 +164,17 @@ def Bandaids():
     # SummonsFix()
     # Is enemydupebosscondition still a problem need to test
 
-def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData):
+Land = 2
+Aquatic = 1
+Sky = 3
+prio = {
+    Aquatic : 2,
+    Land : 1,
+    Sky : 3
+    
+}
+
+def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData): # Duplicate placements of enemies breaks this
     
     def FindRSC(paramData, RSCData, enemy):
         param = FindParam(paramData, enemy)
@@ -179,8 +189,8 @@ def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData):
             
     oldRSC = FindRSC(paramData, RSCData, oldEnemy)
     newRSC = FindRSC(paramData, RSCData, newEnemy)
-
-    if oldRSC["ActType"] != newRSC["ActType"]:
+    
+    if prio[oldRSC["ActType"]] > prio[newRSC["ActType"]]:
         
         # Add new row
         newRow = copy.deepcopy(newRSC)
@@ -197,27 +207,32 @@ def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData):
         paramTest["ResourceID"] = newID
    
 def SummonsFix():
-    with open("XC2/JsonOutputs/common/BTL_Summon.json", 'r+', encoding='utf-8') as summonFile:
-        with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
-            with open(f"XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as enParamFile:
-                with open(f"XC2/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as artFile:
-                    summonData = json.load(summonFile)
-                    eneData = json.load(eneFile)
-                    artData = json.load(artFile)
-                    enParamData = json.load(enParamFile)
-                    testlist = []
-                    for sum in summonData["rows"]:
-                        for sumGroup in sum["EnemyID"]:
-                            if sumGroup != 0:
-                                testlist.append(sumGroup)
-                    print(list(set(testlist)))
+    with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
+        eneData = json.load(eneFile)
+        for ene in eneData["rows"]:
+            if ene["$id"] in IDs.SummonedEnemies:
+                ene["DriverLev"] = 1 # Not a great solution the other way is to make a duplicate enemy for each time they are summoned and I woulid have to make new summon tables
+    # with open("XC2/JsonOutputs/common/BTL_Summon.json", 'r+', encoding='utf-8') as summonFile:
+    #     with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
+    #         with open(f"XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as enParamFile:
+    #             with open(f"XC2/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as artFile:
+    #                 summonData = json.load(summonFile)
+    #                 eneData = json.load(eneFile)
+    #                 artData = json.load(artFile)
+    #                 enParamData = json.load(enParamFile)
+    #                 testlist = []
+    #                 for sum in summonData["rows"]:
+    #                     for sumGroup in sum["EnemyID"]:
+    #                         if sumGroup != 0:
+    #                             testlist.append(sumGroup)
+    #                 print(list(set(testlist)))
                     
-                    # for art in artData["rows"]:
-                    #     if art["Summon"] != 0:
-                    #         for en in 
+    #                 # for art in artData["rows"]:
+    #                 #     if art["Summon"] != 0:
+    #                 #         for en in 
                             
                             
-                    # JSONParser.CloseFile()
+    #                 # JSONParser.CloseFile()
             
 
   
