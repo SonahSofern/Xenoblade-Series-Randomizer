@@ -60,9 +60,9 @@ def RandomAssignment(eneData, targetGroup, weights, isEnemies):
                 ActTypeFix(newEn, en, RSCData, paramData)
                 
                 if Options.BossEnemyOption_Solo.GetState():
-                    SoloFights(en, enemyGroup)
+                    BalanceSoloFights(en, enemyGroup)
                 if Options.BossEnemyOption_Group.GetState():
-                    GroupFights(en, newEn)
+                    BalanceGroupFights(en, newEn)
                 
                 BigEnemyRedCircleSizeFix(en, newEn)
                 
@@ -129,7 +129,7 @@ def AeshmaCoreHPNerf(): #this fight sucks
                 row["HpMaxRev"] = 1500 # nerfed hp by 5/6ths
         JSONParser.CloseFile(data, file)
   
-def SoloFights(originalEn, enemyGroup): # 
+def BalanceSoloFights(originalEn, enemyGroup): # 
     soloFightIDs = [179, 182, 258, 260, 262, 256] # Add torna
     if originalEn["$id"] in soloFightIDs:
         if enemyGroup == SuperbossGroup:
@@ -145,34 +145,64 @@ def SoloFights(originalEn, enemyGroup): #
         # print(f"Lowered lv of {originalEn["$id"]} by {lvDrop} to {originalEn["Lv"]}")
 
 class Violation:
-    def __init__(self, ids, lvDrop):
+    def __init__(self, ids, lvDiff = -5):
         """
         Initialize a Violation.
         Args:
-            ids (list): List of IDs that represent the violation enemy.
-            lvDrop (int): The number of levels this enemy loses when placed in a group.
+            ids (list): List of IDs that represent the violation enemy, from CHR_EnArrange.
+            lvDiff (int): The number of levels this enemy loses/gains when placed in a group fight.
         """        
         self.ids = ids
-        self.lvDrop = lvDrop
+        self.lvDiff = lvDiff
         ViolationList.append(self)
         
     def ResolveViolation(self, enemy):
-        enemy["Lv"] = enemy["Lv"] - self.lvDrop
+        if self.lvDiff < 0: # If we are losing levels only let them lose up to half their original level
+            mult = 1.5
+        else:
+            mult = 0.5
+        levelCap = max(int(enemy["Lv"] // mult), 1)
+        newLv = max(enemy["Lv"] + self.lvDiff, levelCap)
+        print(f"Resolved violation from level {enemy["Lv"]} to level: {newLv}")
+        enemy["Lv"] = newLv
         
 ViolationList:list[Violation] = []
-Jin = Violation([1754], 10)
+Jin = Violation([1754, 231, 241, 244, 253, 272], -10)
+Akhos = Violation([212, 238, 267])
+Malos = Violation([214, 243, 245, 268, 273], -10)
+Patroka = Violation([223, 239, 270])
+Mikhail = Violation([225, 240, 271])
+Aeshma = Violation([232,233,234], -10)
+Amalthus = Violation([254], -10)
+Aion = Violation([265, 275], -20)
+UniqueMonstersViolations = Violation(IDs.UniqueMonsters, -5)
+SuperbossMonstersViolations = Violation(IDs.SuperbossMonsters, -20)
+BossMonsterViolations = Violation(IDs.BossMonsters, -10)
+NormalMonsterViolation = Violation(IDs.NormalMonsters, 5)
 
-def GroupFights(oldEn, newEn):
-    GroupFightIDs = []
+ArdanianSoldiers = [189,190,219]
+Puffots = [195]
+Bandits = [196,197,198]
+VandhamTrio = [199,201,202]
+Tirkin = [220, 235]
+TantaleseKnight = [237]
+AkhosTrio = [238,239,240]
+Phantasm = [242]
+Guldos = [249]
+IndolSoldier = [252]
+
+GroupFightIDs = Puffots + Bandits + VandhamTrio + ArdanianSoldiers
+
+def BalanceGroupFights(oldEn, newEn):
     if oldEn["$id"] not in GroupFightIDs:
         return
     for vio in ViolationList:
         if newEn["$id"] in vio.ids:
             vio.ResolveViolation(oldEn)
-            print("Found a violation")
+            break
     
 def BigEnemyRedCircleSizeFix(oldEn, newEn): # Makes big enemies in boss fights smaller
-    if oldEn["$id"] not in BossGroup.originalGroup:
+    if oldEn["$id"] not in IDs.BossMonsters:
         return
     Massive = 3
     Large = 2
