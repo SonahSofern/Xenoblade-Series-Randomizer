@@ -65,7 +65,7 @@ def RandomAssignment(eneData, targetGroup, weights, isEnemies):
                     BalanceGroupFights(en, newEn)
                 
                 BigEnemyRedCircleSizeFix(en, newEn)
-                
+                CloneEnemiesDefeatCondition(en, newEn)
                 
                 for key in keysList:
                     en[key] = newEn[key]
@@ -158,10 +158,10 @@ class Violation:
         
     def ResolveViolation(self, enemy):
         if self.lvDiff < 0: # If we are losing levels only let them lose up to half their original level
-            mult = 1.5
+            mult = 0.6
         else:
-            mult = 0.5
-        levelCap = max(int(enemy["Lv"] // mult), 1)
+            mult = 1.25
+        levelCap = max(int(enemy["Lv"] * mult), 1)
         newLv = max(enemy["Lv"] + self.lvDiff, levelCap)
         print(f"Resolved violation from level {enemy["Lv"]} to level: {newLv}")
         enemy["Lv"] = newLv
@@ -190,8 +190,7 @@ AkhosTrio = [238,239,240]
 Phantasm = [242]
 Guldos = [249]
 IndolSoldier = [252]
-
-GroupFightIDs = Puffots + Bandits + VandhamTrio + ArdanianSoldiers
+GroupFightIDs = Puffots + Bandits + VandhamTrio + ArdanianSoldiers + Tirkin + TantaleseKnight + AkhosTrio + Phantasm + Guldos + IndolSoldier
 
 def BalanceGroupFights(oldEn, newEn):
     if oldEn["$id"] not in GroupFightIDs:
@@ -218,8 +217,20 @@ def BigEnemyRedCircleSizeFix(oldEn, newEn): # Makes big enemies in boss fights s
         return
     newEn["Scale"] = max(int(newEn["Scale"] * scaleMult), minScale)
              
-def CloneEnemiesDefeatCondition(): # Forces all copies of enemies that clone themselves to be defeated in a boss encounter
-    pass
+def CloneEnemiesDefeatCondition(oldEn, newEn): # Forces all copies of enemies that clone themselves to be defeated in a boss encounter
+    CloneEnemyIDs = [242, 281, 1882, 1884]
+    if oldEn["$id"] not in IDs.BossMonsters:
+        return
+    if newEn["$id"] not in CloneEnemyIDs:
+        return
+    with open("XC2/JsonOutputs/common/FLD_QuestBattle.json", 'r+', encoding='utf-8') as questFile:
+        questData = json.load(questFile)
+        for quest in questData["rows"]:
+            if quest["EnemyID"] == oldEn["$id"]:
+                quest["DeadAll"] = 1
+                print(f"Added DeadAll to row {quest["$id"]} of QuestBattle, because it got {newEn["$id"]}")
+                break
+        JSONParser.CloseFile(questData, questFile)
 
 def GortOgreUppercutRemoval(): # Gort 2's Ogre Uppercut seems to be buggy, reported to crash game in certain situations, so it's being removed for the time being.
     with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
@@ -249,7 +260,6 @@ def Bandaids():
     EarthBreathNerf()
     TornaWave1FightChanges()
     SummonsFix()
-    CloneEnemiesDefeatCondition()
 
 Land = 2
 Aquatic = 1
