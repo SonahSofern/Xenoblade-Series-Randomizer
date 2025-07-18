@@ -60,17 +60,19 @@ def RandomAssignment(eneData, targetGroup, weights, isEnemies):
                 ActTypeFix(newEn, en, RSCData, paramData)
                 
                 if Options.BossEnemyOption_Solo.GetState():
-                    SoloFights(en, newEn, enemyGroup)
+                    SoloFights(en, enemyGroup)
                 if Options.BossEnemyOption_Group.GetState():
                     GroupFights(en, newEn)
                 
-                BigEnemyCollisionFix(en, newEn)
+                BigEnemySizeFix(en, newEn)
                 
                 
                 for key in keysList:
                     en[key] = newEn[key]
                     
-                
+            for group in StaticEnemyData:
+                group.RefreshCurrentGroup()
+                  
             JSONParser.CloseFile(paramData, paramFile)                
             JSONParser.CloseFile(RSCData, RSCfile)   
  
@@ -119,7 +121,6 @@ def ForcedWinFights(fights = []):
                 row["ReducePCHP"] = 1
         JSONParser.CloseFile(data, file)
 
-
 def AeshmaCoreHPNerf(): #this fight sucks
     with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
@@ -128,40 +129,55 @@ def AeshmaCoreHPNerf(): #this fight sucks
                 row["HpMaxRev"] = 1500 # nerfed hp by 5/6ths
         JSONParser.CloseFile(data, file)
   
-def SoloFights(originalEn, newEn, enemyGroup): # 
+def SoloFights(originalEn, enemyGroup): # 
     soloFightIDs = [179, 182, 258, 260, 262, 256]
-    if enemyGroup == SuperbossGroup:
-        lvDrop = 30
-    elif enemyGroup == BossGroup:
-        lvDrop = 15
-    elif enemyGroup == UniqueGroup:
-        lvDrop = 15 
-    else:
-        lvDrop = 0
-    minLv = 1
     if originalEn["$id"] in soloFightIDs:
-        newEn["Lv"] = max(newEn["Lv"] - lvDrop, minLv)
-    print(f"Lowered lv of {newEn["$id"]} by {lvDrop} to {newEn["Lv"]}")
+        if enemyGroup == SuperbossGroup:
+            lvDrop = 30
+        elif enemyGroup == BossGroup:
+            lvDrop = 15
+        elif enemyGroup == UniqueGroup:
+            lvDrop = 15 
+        else:
+            return
+        halfOriginalLevel = max(int(originalEn["Lv"] // 2), 1)
+        originalEn["Lv"] = max(originalEn["Lv"] - lvDrop, halfOriginalLevel)
+        print(f"Lowered lv of {originalEn["$id"]} by {lvDrop} to {originalEn["Lv"]}")
     
-def GroupFights():
+def GroupFights(oldEn, newEn):
     GroupFightIDs = []
-    pass
 
-def BigEnemyCollisionFix(oldEn, newEn): # Makes big enemies in boss fights smaller
+def BigEnemySizeFix(oldEn, newEn): # Makes big enemies in boss fights smaller
+    if oldEn["$id"] not in BossGroup.originalGroup:
+        return
     Ophion = [247,285,1137]
     Squood = [1034, 1073, 1144, 1195, 1273, 1722, 1745, 1786, 1395, 1110]
     Kurodil = [1018, 1022, 1812]
-    ArdanianWalker = [] # Cant find him
-    Behemoths = []
+    ArdanianWalker = [] # Cant find him the things that walk around alba cavanich
+    Behemoths = [1027]
+    Gargoyle = [1632, 1633, 1444, 1431, 246]
+    GigaRosa = [279, 236, 1804] # and true rosa
+    Sauros = [1019, 1756, 977, 659, 348, 349]
     InfernalGuldo = [283, 1733, 274, 250]
     Aion = [265, 275]
-    BigEnemyIDs = Ophion + Squood + Kurodil + ArdanianWalker + Behemoths + InfernalGuldo + Aion 
-    if oldEn["$id"] in BossGroup.originalGroup:
-        if newEn["$id"] in BigEnemyIDs:
-            newEn["Scale"] = 30
+    Aeshma = [232, 233, 234]
+    Arachno = [666, 204, 839, 572, 1681]
+    
+    BigEnemyIDs =  ArdanianWalker + Behemoths + Gargoyle + GigaRosa + Aeshma + Arachno
+    MassiveEnemyIDs = Ophion + Squood + Aion + Sauros + Kurodil + InfernalGuldo 
+    
+    minScale = 25
+    
+    if newEn["$id"] in BigEnemyIDs:
+        scaleMult = .5
+    elif newEn["$id"] in MassiveEnemyIDs:
+        scaleMult = .25
+    elif newEn["Scale"] >= 200: # Some enemies are scaled up even if they arent normally gigantic
+        scaleMult = .5
+    else:
+        return
+    newEn["Scale"] = max(int(newEn["Scale"] * scaleMult), minScale)
              
-
-
 def CloneEnemiesDefeatCondition(): # Forces all copies of enemies that clone themselves to be defeated in a boss encounter
     pass
 
@@ -189,7 +205,6 @@ def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy 
 def Bandaids():
     ForcedWinFights([3,6])
     AeshmaCoreHPNerf()
-    BigEnemyCollisionFix()
     GortOgreUppercutRemoval()
     EarthBreathNerf()
     TornaWave1FightChanges()
@@ -199,12 +214,7 @@ def Bandaids():
 Land = 2
 Aquatic = 1
 Sky = 3
-prio = {
-    Aquatic : 2,
-    Land : 1,
-    Sky : 3
-    
-}
+prio = {Aquatic : 2, Land : 1, Sky : 3}
 
 def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData): 
     '''Changes enemies act types to accommodate random spawn locations'''
@@ -245,30 +255,7 @@ def SummonsFix():
         for ene in eneData["rows"]:
             if ene["$id"] in IDs.SummonedEnemies:
                 ene["DriverLev"] = 1 # Not a great solution the other way is to make a duplicate enemy for each time they are summoned and I woulid have to make new summon tables
-    # with open("XC2/JsonOutputs/common/BTL_Summon.json", 'r+', encoding='utf-8') as summonFile:
-    #     with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
-    #         with open(f"XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as enParamFile:
-    #             with open(f"XC2/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as artFile:
-    #                 summonData = json.load(summonFile)
-    #                 eneData = json.load(eneFile)
-    #                 artData = json.load(artFile)
-    #                 enParamData = json.load(enParamFile)
-    #                 testlist = []
-    #                 for sum in summonData["rows"]:
-    #                     for sumGroup in sum["EnemyID"]:
-    #                         if sumGroup != 0:
-    #                             testlist.append(sumGroup)
-    #                 print(list(set(testlist)))
-                    
-    #                 # for art in artData["rows"]:
-    #                 #     if art["Summon"] != 0:
-    #                 #         for en in 
-                            
-                            
-    #                 # JSONParser.CloseFile()
             
-
-  
 def EnemyAggro(): 
     odds = Options.EnemyAggroOption.GetSpinbox()
     with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
@@ -276,14 +263,13 @@ def EnemyAggro():
         for en in eneData["rows"]:
             if not Helper.OddsCheck(odds):
                 continue
-            if en["id"] in IDs.BossMonsters:
+            if en["$id"] in IDs.BossMonsters:
                 continue
             en["Detects"] = 0
         JSONParser.CloseFile(eneData, eneFile)
             
 def EnemyDesc(name):
     pass
-
 
 #------------------------------------------------------TORNA SPECIFIC------------------------------------------------------#
 
