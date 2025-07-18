@@ -64,7 +64,7 @@ def RandomAssignment(eneData, targetGroup, weights, isEnemies):
                 if Options.BossEnemyOption_Group.GetState():
                     GroupFights(en, newEn)
                 
-                BigEnemySizeFix(en, newEn)
+                BigEnemyRedCircleSizeFix(en, newEn)
                 
                 
                 for key in keysList:
@@ -142,35 +142,23 @@ def SoloFights(originalEn, enemyGroup): #
             return
         halfOriginalLevel = max(int(originalEn["Lv"] // 2), 1)
         originalEn["Lv"] = max(originalEn["Lv"] - lvDrop, halfOriginalLevel)
-        print(f"Lowered lv of {originalEn["$id"]} by {lvDrop} to {originalEn["Lv"]}")
+        # print(f"Lowered lv of {originalEn["$id"]} by {lvDrop} to {originalEn["Lv"]}")
     
 def GroupFights(oldEn, newEn):
-    GroupFightIDs = []
-
-def BigEnemySizeFix(oldEn, newEn): # Makes big enemies in boss fights smaller
     if oldEn["$id"] not in BossGroup.originalGroup:
         return
-    Ophion = [247,285,1137]
-    Squood = [1034, 1073, 1144, 1195, 1273, 1722, 1745, 1786, 1395, 1110]
-    Kurodil = [1018, 1022, 1812]
-    ArdanianWalker = [] # Cant find him the things that walk around alba cavanich
-    Behemoths = [1027]
-    Gargoyle = [1632, 1633, 1444, 1431, 246]
-    GigaRosa = [279, 236, 1804] # and true rosa
-    Sauros = [1019, 1756, 977, 659, 348, 349]
-    InfernalGuldo = [283, 1733, 274, 250]
-    Aion = [265, 275]
-    Aeshma = [232, 233, 234]
-    Arachno = [666, 204, 839, 572, 1681]
-    
-    BigEnemyIDs =  ArdanianWalker + Behemoths + Gargoyle + GigaRosa + Aeshma + Arachno
-    MassiveEnemyIDs = Ophion + Squood + Aion + Sauros + Kurodil + InfernalGuldo 
-    
+    GroupFightIDs = []
+
+def BigEnemyRedCircleSizeFix(oldEn, newEn): # Makes big enemies in boss fights smaller
+    if oldEn["$id"] not in BossGroup.originalGroup:
+        return
+    Massive = 3
+    Large = 2
     minScale = 25
     
-    if newEn["$id"] in BigEnemyIDs:
+    if newEn["ChrSize"] == Large:
         scaleMult = .5
-    elif newEn["$id"] in MassiveEnemyIDs:
+    elif newEn["ChrSize"] == Massive:
         scaleMult = .25
     elif newEn["Scale"] >= 200: # Some enemies are scaled up even if they arent normally gigantic
         scaleMult = .5
