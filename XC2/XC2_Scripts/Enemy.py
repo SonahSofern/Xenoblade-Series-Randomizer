@@ -130,7 +130,7 @@ def AeshmaCoreHPNerf(): #this fight sucks
         JSONParser.CloseFile(data, file)
   
 def SoloFights(originalEn, enemyGroup): # 
-    soloFightIDs = [179, 182, 258, 260, 262, 256]
+    soloFightIDs = [179, 182, 258, 260, 262, 256] # Add torna
     if originalEn["$id"] in soloFightIDs:
         if enemyGroup == SuperbossGroup:
             lvDrop = 30
@@ -143,12 +143,34 @@ def SoloFights(originalEn, enemyGroup): #
         halfOriginalLevel = max(int(originalEn["Lv"] // 2), 1)
         originalEn["Lv"] = max(originalEn["Lv"] - lvDrop, halfOriginalLevel)
         # print(f"Lowered lv of {originalEn["$id"]} by {lvDrop} to {originalEn["Lv"]}")
-    
-def GroupFights(oldEn, newEn):
-    if oldEn["$id"] not in BossGroup.originalGroup:
-        return
-    GroupFightIDs = []
 
+class Violation:
+    def __init__(self, ids, lvDrop):
+        """
+        Initialize a Violation.
+        Args:
+            ids (list): List of IDs that represent the violation enemy.
+            lvDrop (int): The number of levels this enemy loses when placed in a group.
+        """        
+        self.ids = ids
+        self.lvDrop = lvDrop
+        ViolationList.append(self)
+        
+    def ResolveViolation(self, enemy):
+        enemy["Lv"] = enemy["Lv"] - self.lvDrop
+        
+ViolationList:list[Violation] = []
+Jin = Violation([1754], 10)
+
+def GroupFights(oldEn, newEn):
+    GroupFightIDs = []
+    if oldEn["$id"] not in GroupFightIDs:
+        return
+    for vio in ViolationList:
+        if newEn["$id"] in vio.ids:
+            vio.ResolveViolation(oldEn)
+            print("Found a violation")
+    
 def BigEnemyRedCircleSizeFix(oldEn, newEn): # Makes big enemies in boss fights smaller
     if oldEn["$id"] not in BossGroup.originalGroup:
         return
