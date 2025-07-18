@@ -1,5 +1,5 @@
 import json, random
-from XC2.XC2_Scripts import Options
+from XC2.XC2_Scripts import Options, IDs
 from scripts import Helper
 
 
@@ -42,6 +42,8 @@ def EnemyScales():
         odds = Options.EnemySizeOption.GetSpinbox()
         for en in enData["rows"]:
             if not Helper.OddsCheck(odds): # Check spinbox
+                continue
+            if en["$id"] in IDs.BossMonsters: # Dont make bosses bigger or smaller red rings
                 continue
             en["Scale"] = random.choice(EnemyScales)  # Make our selection
         enFile.seek(0)

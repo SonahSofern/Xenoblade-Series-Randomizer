@@ -52,12 +52,20 @@ def RandomAssignment(eneData, targetGroup, weights, isEnemies):
                 enemyGroup = random.choices(StaticEnemyData, weights)[0]
                 newEn = random.choice(enemyGroup.currentGroup)
                 
-            
-                enemyGroup.currentGroup.remove(newEn) # If group is empty
+                # Remove enemy from group
+                enemyGroup.currentGroup.remove(newEn)
                 if enemyGroup.currentGroup == []:
                     enemyGroup.RefreshCurrentGroup()
                 
                 ActTypeFix(newEn, en, RSCData, paramData)
+                
+                if Options.BossEnemyOption_Solo.GetState():
+                    SoloFights(en, newEn, enemyGroup)
+                if Options.BossEnemyOption_Group.GetState():
+                    GroupFights(en, newEn)
+                
+                BigEnemyCollisionFix(en, newEn)
+                
                 
                 for key in keysList:
                     en[key] = newEn[key]
@@ -120,18 +128,42 @@ def AeshmaCoreHPNerf(): #this fight sucks
                 row["HpMaxRev"] = 1500 # nerfed hp by 5/6ths
         JSONParser.CloseFile(data, file)
   
+def SoloFights(originalEn, newEn, enemyGroup): # 
+    soloFightIDs = [179, 182, 258, 260, 262, 256]
+    if enemyGroup == SuperbossGroup:
+        lvDrop = 30
+    elif enemyGroup == BossGroup:
+        lvDrop = 15
+    elif enemyGroup == UniqueGroup:
+        lvDrop = 15 
+    else:
+        lvDrop = 0
+    minLv = 1
+    if originalEn["$id"] in soloFightIDs:
+        newEn["Lv"] = max(newEn["Lv"] - lvDrop, minLv)
+    print(f"Lowered lv of {newEn["$id"]} by {lvDrop} to {newEn["Lv"]}")
+    
+def GroupFights():
+    GroupFightIDs = []
+    pass
 
-def BigEnemyCollisionFix(): # Fixes ophion/other large enemies going outside the spawn circle and flying out of range in a boss fight. no longer used
-    with open("XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as file: 
-        BigEnemies = [64,65,70,154,245,249,252]
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] in BigEnemies:
-                row["CharColli"] = 0 #removes enemy collision
-                row["EnRadius"] = 255 #sets radius you can hit them
-                row["EnRadius2"] = 255 # sets radius they can hit you
-        JSONParser.CloseFile(data, file)
+def BigEnemyCollisionFix(oldEn, newEn): # Makes big enemies in boss fights smaller
+    Ophion = [247,285,1137]
+    Squood = [1034, 1073, 1144, 1195, 1273, 1722, 1745, 1786, 1395, 1110]
+    Kurodil = [1018, 1022, 1812]
+    ArdanianWalker = [] # Cant find him
+    Behemoths = []
+    InfernalGuldo = [283, 1733, 274, 250]
+    Aion = [265, 275]
+    BigEnemyIDs = Ophion + Squood + Kurodil + ArdanianWalker + Behemoths + InfernalGuldo + Aion 
+    if oldEn["$id"] in BossGroup.originalGroup:
+        if newEn["$id"] in BigEnemyIDs:
+            newEn["Scale"] = 30
+             
 
+
+def CloneEnemiesDefeatCondition(): # Forces all copies of enemies that clone themselves to be defeated in a boss encounter
+    pass
 
 def GortOgreUppercutRemoval(): # Gort 2's Ogre Uppercut seems to be buggy, reported to crash game in certain situations, so it's being removed for the time being.
     with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
@@ -161,8 +193,8 @@ def Bandaids():
     GortOgreUppercutRemoval()
     EarthBreathNerf()
     TornaWave1FightChanges()
-    # SummonsFix()
-    # Is enemydupebosscondition still a problem need to test
+    SummonsFix()
+    CloneEnemiesDefeatCondition()
 
 Land = 2
 Aquatic = 1
@@ -174,8 +206,8 @@ prio = {
     
 }
 
-def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData): # Duplicate placements of enemies breaks this
-    
+def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData): 
+    '''Changes enemies act types to accommodate random spawn locations'''
     def FindRSC(paramData, RSCData, enemy):
         param = FindParam(paramData, enemy)
         for rsc in RSCData["rows"]:
@@ -190,7 +222,7 @@ def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData): # Duplicate placements o
     oldRSC = FindRSC(paramData, RSCData, oldEnemy)
     newRSC = FindRSC(paramData, RSCData, newEnemy)
     
-    if prio[oldRSC["ActType"]] > prio[newRSC["ActType"]]:
+    if prio[oldRSC["ActType"]] > prio[newRSC["ActType"]]:            
         
         # Add new row
         newRow = copy.deepcopy(newRSC)
@@ -207,6 +239,7 @@ def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData): # Duplicate placements o
         paramTest["ResourceID"] = newID
    
 def SummonsFix():
+    '''Forces summoned enemies to match driver 1's level (Originally Rex)'''
     with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
         eneData = json.load(eneFile)
         for ene in eneData["rows"]:
@@ -243,7 +276,7 @@ def EnemyAggro():
         for en in eneData["rows"]:
             if not Helper.OddsCheck(odds):
                 continue
-            if en["Flag"]["mBoss"]:
+            if en["id"] in IDs.BossMonsters:
                 continue
             en["Detects"] = 0
         JSONParser.CloseFile(eneData, eneFile)

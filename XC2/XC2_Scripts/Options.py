@@ -156,6 +156,8 @@ BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True)
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True)
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, hasSpinBox=True)
+BossEnemyOption_Solo = SubOption("Balance Solo Fights", BossEnemyOption)
+BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
 
 EnemyEnhancementsOption = Option("Enemy Enhancements", Enemies, "Gives enemies a random enhancement; it is displayed by their name", [lambda: _EnemyEnhancements.EnemyEnhances()], hasSpinBox = True, descData=lambda: _EnemyEnhancements.EnemyEnhancementDescriptions())
 EnemyArtEffectsOption = Option("Enemy Art Effects", Enemies, "Gives enemies a random bonus effect to their arts; it is displayed by their\nart's name", [lambda: _EnemyArts.EnemyArtAttributes()], hasSpinBox = True, descData=lambda: _EnemyArts.EnemyArtEnhancementDescriptions())
