@@ -34,10 +34,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
         
         JSONParser.CloseFile(eneData, eneFile)
         
-        
-
 def RandomAssignment(eneData, targetGroup, weights, isEnemies):
-    keysList = ['EnemyBladeID', 'BladeID', 'BladeAtr', 'ParamID', 'ExtraParts', 'Name', 'Debug_Name', 'HpOver', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'Scale', 'ChrSize', 'TurnSize', 'CamSize', 'LinkRadius', 'BatInterval', 'BatArea', 'EN_WATER_DEAD_NONE', 'BatAreaType', 'DrawWait', 'AiGroup', 'AiGroupNum', 'BookID', 'EnhanceID1', 'EnhanceID2', 'EnhanceID3', 'ParamRev', 'RstDebuffRev', 'HealPotTypeRev', 'SummonID', 'BGMID', 'SeEnvID', 'Race', 'LvMin', 'LvMax', 'ScaleMin', 'ScaleMax']
+    keysList = ['EnemyBladeID', 'BladeID', 'BladeAtr', 'ParamID', 'ExtraParts', 'Name', 'Debug_Name', 'HpOver', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'Scale', 'ChrSize', 'TurnSize', 'CamSize', 'LinkRadius', 'EN_WATER_DEAD_NONE', 'DrawWait', 'AiGroup', 'AiGroupNum', 'BookID', 'EnhanceID1', 'EnhanceID2', 'EnhanceID3', 'ParamRev', 'RstDebuffRev', 'HealPotTypeRev', 'SummonID', 'BGMID', 'SeEnvID', 'Race', 'LvMin', 'LvMax', 'ScaleMin', 'ScaleMax']
     # Randomly Assign
     with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
         with open("XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as RSCfile:
@@ -266,7 +264,6 @@ def Bandaids():
     EarthBreathNerf()
     SummonsFix()
     
-
 Land = 2
 Aquatic = 1
 Sky = 3
@@ -354,6 +351,8 @@ def ChangeStats(enemyIDs = [], HP = None, Str = None, Eth = None, Dex = None, Ag
 def TornaIntroChanges():
     ChangeStats([1430, 1429, 1428, 1454], HP=10)
 
+def AionHitboxFix(): # Aion is big and some enemies dont sit at same height as him so they walk to you but they dont fly up towards you so you cant hit them
+    pass
  
 def EnemyDesc(name):
     pass
