@@ -61,6 +61,11 @@ def RandomAssignment(eneData, targetGroup, weights, isEnemies):
                 
                 ActTypeFix(newEn, en, RSCData, paramData)
                 
+                if newEn["EnemyBladeID"] != 0:
+                    for enBlade in eneData["rows"]:
+                        if enBlade['$id'] == newEn['EnemyBladeID']:
+                            ActTypeFix(enBlade, en, RSCData, paramData)
+                
                 if Options.BossEnemyOption_Solo.GetState():
                     BalanceSoloFights(en, enemyGroup)
                 if Options.BossEnemyOption_Group.GetState():
