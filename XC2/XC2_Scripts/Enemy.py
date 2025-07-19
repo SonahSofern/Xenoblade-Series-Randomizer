@@ -6,12 +6,6 @@ class EnemyGroup():
     def __init__(self):
         self.originalGroup = []
         self.currentGroup = []
-        
-    def isEmpty(self):
-        if self.originalGroup == []:
-            return True
-        else:
-            return False
     
     def RefreshCurrentGroup(self):
         self.currentGroup = copy.deepcopy(self.originalGroup)
@@ -87,7 +81,7 @@ def isBadEnemy(en):
 
 def GenEnemyData(eneData):
     '''Creates the data in a nested list if it does not already exist, this is only to be copied from never altered'''
-    if NormalGroup.isEmpty():
+    if NormalGroup.originalGroup == []:
         
         for en in eneData["rows"]:
             if isBadEnemy(en):
