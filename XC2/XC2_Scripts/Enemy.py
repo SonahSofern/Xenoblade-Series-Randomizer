@@ -258,11 +258,6 @@ def Bandaids():
     EarthBreathNerf()
     SummonsFix()
     
-Land = 2
-Aquatic = 1
-Sky = 3
-prio = {Aquatic : 2, Land : 1, Sky : 3}
-
 def FindRSC(paramData, RSCData, enemy):
     param = FindParam(paramData, enemy)
     for rsc in RSCData["rows"]:
@@ -280,7 +275,7 @@ def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData):
     oldRSC = FindRSC(paramData, RSCData, oldEnemy)
     newRSC = FindRSC(paramData, RSCData, newEnemy)
     
-    if prio[oldRSC["ActType"]] > prio[newRSC["ActType"]]:            
+    if oldRSC["ActType"] > newRSC["ActType"]:            
         
         # Add new row
         newRow = copy.deepcopy(newRSC)

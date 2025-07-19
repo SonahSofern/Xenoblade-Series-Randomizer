@@ -54,7 +54,7 @@ def AddMovespeedDeed():
 
 def FixIssuesCausedByNGPlusFlag():
     CreateDLCtoSetFlag(["Driver Skill Tree Key"], [48589], Condition = [1853]) # 1853 is a pre-existing flag that requires the Scenario to be 2001 or higher (when you get pyra)
-    if not Options.EnemiesOption.GetState(): # we need to force the enemies to drop their item, if enemy randomization is off
-        EnemyRandoLogic.KeyItemsReAdd()
+    # if not Options.EnemiesOption.GetState(): # we need to force the enemies to drop their item, if enemy randomization is off
+    #     EnemyRandoLogic.KeyItemsReAdd()
     if Options.TreasureChestOption.GetState(): #if treasure chests are randomized loot, we need to force the ladder key in mor ardain to drop, allowing us to unlock the factory
         JSONParser.ChangeJSONLine(["common_gmk/ma08a_FLD_TboxPop.json"], [870], ["itm1ID"], 25409)
