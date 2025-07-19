@@ -24,9 +24,10 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
         
         RandomAssignment(eneData, targetGroup, GenWeights(isNormal, isUnique, isBoss, isSuperboss), isEnemies)
 
+        Bandaids(eneData)
+        
         JSONParser.CloseFile(eneData, eneFile)
         
-        Bandaids()
         
 def RandomAssignment(eneData, targetGroup, weights, isEnemies):
     keysList = ['EnemyBladeID', 'BladeID', 'BladeAtr', 'ParamID', 'ExtraParts', 'Name', 'Debug_Name', 'HpOver', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'Scale', 'ChrSize', 'TurnSize', 'CamSize', 'LinkRadius', 'EN_WATER_DEAD_NONE', 'AiGroup', 'AiGroupNum', 'BookID', 'EnhanceID1', 'EnhanceID2', 'EnhanceID3', 'ParamRev', 'RstDebuffRev', 'HealPotTypeRev', 'SummonID', 'BGMID', 'SeEnvID', 'Race', 'LvMin', 'LvMax', 'ScaleMin', 'ScaleMax']
@@ -251,12 +252,12 @@ def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy 
                 row["DmgMgn6"] = 500
         JSONParser.CloseFile(data, file)
 
-def Bandaids():
+def Bandaids(eneData):
     ForcedWinFights([3,6])
     AeshmaCoreHPNerf()
     GortOgreUppercutRemoval()
     EarthBreathNerf()
-    SummonsFix()
+    SummonsFix(eneData)
     
 def FindRSC(paramData, RSCData, enemy):
     param = FindParam(paramData, enemy)
@@ -291,15 +292,11 @@ def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData):
         paramTest = FindParam(paramData, newEnemy)
         paramTest["ResourceID"] = newID
    
-def SummonsFix():
-    '''Forces summoned enemies to match driver 1's level (Originally Rex)'''
-    with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
-        eneData = json.load(eneFile)
-        for ene in eneData["rows"]:
-            if ene["$id"] in IDs.SummonedEnemies:
-                ene["DriverLev"] = 1 # Not a great solution the other way is to make a duplicate enemy for each time they are summoned and I woulid have to make new summon tables
-        JSONParser.CloseFile(eneData, eneFile)
-        
+def SummonsFix(eneData):
+    for ene in eneData["rows"]:
+        if ene["$id"] in IDs.SummonedEnemies:
+            ene["DriverLev"] = 1 # Not a great solution the other way is to make a duplicate enemy for each time they are summoned and I woulid have to make new summon tables
+    
 def EnemyAggro(): 
     odds = Options.EnemyAggroOption.GetSpinbox()
     with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:

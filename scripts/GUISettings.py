@@ -398,7 +398,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
         for command in opt.commands:
             try:
                 errorMsg = command()
-
+                    
             except Exception as error:
                 status = "FAILED Randomization"
                 print(f"ERROR: {opt.name} | {error}")
