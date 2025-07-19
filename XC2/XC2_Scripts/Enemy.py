@@ -24,9 +24,9 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
         
         RandomAssignment(eneData, targetGroup, GenWeights(isNormal, isUnique, isBoss, isSuperboss), isEnemies)
 
-        Bandaids()
-        
         JSONParser.CloseFile(eneData, eneFile)
+        
+        Bandaids()
         
 def RandomAssignment(eneData, targetGroup, weights, isEnemies):
     keysList = ['EnemyBladeID', 'BladeID', 'BladeAtr', 'ParamID', 'ExtraParts', 'Name', 'Debug_Name', 'HpOver', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'Scale', 'ChrSize', 'TurnSize', 'CamSize', 'LinkRadius', 'EN_WATER_DEAD_NONE', 'AiGroup', 'AiGroupNum', 'BookID', 'EnhanceID1', 'EnhanceID2', 'EnhanceID3', 'ParamRev', 'RstDebuffRev', 'HealPotTypeRev', 'SummonID', 'BGMID', 'SeEnvID', 'Race', 'LvMin', 'LvMax', 'ScaleMin', 'ScaleMax']
