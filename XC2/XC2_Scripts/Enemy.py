@@ -33,6 +33,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
         Bandaids()
         
         JSONParser.CloseFile(eneData, eneFile)
+        
+        
 
 def RandomAssignment(eneData, targetGroup, weights, isEnemies):
     keysList = ['EnemyBladeID', 'BladeID', 'BladeAtr', 'ParamID', 'ExtraParts', 'Name', 'Debug_Name', 'HpOver', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'Scale', 'ChrSize', 'TurnSize', 'CamSize', 'LinkRadius', 'BatInterval', 'BatArea', 'EN_WATER_DEAD_NONE', 'BatAreaType', 'DrawWait', 'AiGroup', 'AiGroupNum', 'BookID', 'EnhanceID1', 'EnhanceID2', 'EnhanceID3', 'ParamRev', 'RstDebuffRev', 'HealPotTypeRev', 'SummonID', 'BGMID', 'SeEnvID', 'Race', 'LvMin', 'LvMax', 'ScaleMin', 'ScaleMax']
@@ -113,8 +115,7 @@ def GenWeights(isNormal, isUnique, isBoss, isSuperboss):
     return weights
 
 def ForcedWinFights(fights = []):
-    filename = "XC2/JsonOutputs/common/FLD_QuestBattle.json"
-    with open(filename, 'r+', encoding='utf-8') as file:
+    with open("XC2/JsonOutputs/common/FLD_QuestBattle.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] in fights: #battle on gramps at start of game
@@ -130,7 +131,7 @@ def AeshmaCoreHPNerf(): #this fight sucks
         JSONParser.CloseFile(data, file)
   
 def BalanceSoloFights(originalEn, enemyGroup): # 
-    soloFightIDs = [179, 182, 258, 260, 262, 256] # Add torna
+    soloFightIDs = [179, 182, 258, 260, 262, 256]
     if originalEn["$id"] in soloFightIDs:
         if enemyGroup == SuperbossGroup:
             lvDrop = 30
@@ -163,7 +164,7 @@ class Violation:
             mult = 1.25
         levelCap = max(int(enemy["Lv"] * mult), 1)
         newLv = max(enemy["Lv"] + self.lvDiff, levelCap)
-        print(f"Resolved violation from level {enemy["Lv"]} to level: {newLv}")
+        # print(f"Resolved violation from level {enemy["Lv"]} to level: {newLv}")
         enemy["Lv"] = newLv
         
 ViolationList:list[Violation] = []
@@ -258,26 +259,27 @@ def Bandaids():
     AeshmaCoreHPNerf()
     GortOgreUppercutRemoval()
     EarthBreathNerf()
-    TornaWave1FightChanges()
     SummonsFix()
+    
 
 Land = 2
 Aquatic = 1
 Sky = 3
 prio = {Aquatic : 2, Land : 1, Sky : 3}
 
+def FindRSC(paramData, RSCData, enemy):
+    param = FindParam(paramData, enemy)
+    for rsc in RSCData["rows"]:
+        if param["ResourceID"] == rsc["$id"]:
+            return rsc
+
+def FindParam(paramData, enemy):
+    for param in paramData["rows"]:
+        if param["$id"] == enemy["ParamID"]:
+            return param
+
 def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData): 
     '''Changes enemies act types to accommodate random spawn locations'''
-    def FindRSC(paramData, RSCData, enemy):
-        param = FindParam(paramData, enemy)
-        for rsc in RSCData["rows"]:
-            if param["ResourceID"] == rsc["$id"]:
-                return rsc
-
-    def FindParam(paramData, enemy):
-        for param in paramData["rows"]:
-            if param["$id"] == enemy["ParamID"]:
-                return param
             
     oldRSC = FindRSC(paramData, RSCData, oldEnemy)
     newRSC = FindRSC(paramData, RSCData, newEnemy)
@@ -317,31 +319,36 @@ def EnemyAggro():
                 continue
             en["Detects"] = 0
         JSONParser.CloseFile(eneData, eneFile)
-            
+   
+def ChangeStats(enemyIDs = [], HP = None, Str = None, Eth = None, Dex = None, Agility = None, Parmor = None, EArmor= None ):
+    """
+    Allows changing the stats of an individual enemy on EnArrange by giving it a new ParamID
+    Args:
+        enemyID (list[int]): The IDs from EnArrange.
+    """  
+    with open("XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as arrangeFile:
+        with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
+            arrangeData = json.load(arrangeFile)
+            paramData = json.load(paramFile)
+            for en in arrangeData["rows"]:
+                if en["$id"] in enemyIDs:
+                    param = FindParam(paramData, en)
+                    newParam = copy.deepcopy(param)
+                    newParamID =  len(paramData["rows"]) + 1
+                    newParam["$id"] = newParamID
+                    en["ParamID"] = newParamID
+                    if HP != None:
+                        newParam["HpMaxRev"] = HP
+                    
+                    
+                    paramData["rows"].append(newParam)
+                    
+            JSONParser.CloseFile(arrangeData, arrangeFile)
+            JSONParser.CloseFile(paramData, paramFile)   
+
+def TornaIntroChanges():
+    ChangeStats([1430, 1429, 1428, 1454], HP=10)
+
+ 
 def EnemyDesc(name):
     pass
-
-#------------------------------------------------------TORNA SPECIFIC------------------------------------------------------#
-
-def TornaWave1FightChanges(): # we can't allow the player to lose the first fight, since the quest condition is a gimmick corresponding to clearing the entire enemy wave, not a battle that they can lose through the param ReducePCHP
-    DesiredParams = [307, 17, 306, 308] # basically give the new enemy the old enemy's stats
-    TargetIDs = [0,0,0,0] # IDs we want to target to give the nerfed stats
-    with open("./XC2/JsonOutputs/common_gmk/ma40a_FLD_EnemyPop.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            CurRowID = row["$id"]
-            match CurRowID:
-                case 40547:
-                    TargetIDs[0] = row["ene1ID"]
-                case 40548:
-                    TargetIDs[1] = row["ene1ID"]
-                    TargetIDs[2] = row["ene2ID"]
-                case 40549:
-                    TargetIDs[3] = row["ene1ID"]
-                case 40550:
-                    break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    for enemy in range(len(TargetIDs)):
-        JSONParser.ChangeJSONLine(["common/CHR_EnArrange.json"], [TargetIDs[enemy]], ["ParamRev"], DesiredParams[enemy])   
