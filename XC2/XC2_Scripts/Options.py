@@ -151,7 +151,7 @@ UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption, hasSpinBox=Tru
 UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption, hasSpinBox=True)
 UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption, hasSpinBox=True)
 
-BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption), lambda: Enemy.TornaIntroChanges()], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True, prio=First)
+BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption), lambda: Enemy.TornaIntroChanges(), lambda: Enemy.AionHitboxFix()], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True, prio=First)
 BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True)
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True)
@@ -175,7 +175,7 @@ EnemyDropOption_RefinedAuxCores = SubOption("Refined Aux Cores", EnemyDropOption
 EnemyDropOption_CoreCrystals = SubOption("Core Crystals", EnemyDropOption)
 EnemyDropOption_Deeds = SubOption("Shop Deeds", EnemyDropOption)
 EnemyDropOption_CollectionPointMaterials = SubOption("Collection Point Materials", EnemyDropOption)
-EnemyAggroOption = Option("Enemy Aggro", Enemies, "The percentage of all non-boss and non-quest enemies that will aggro the player", [lambda: Enemy.EnemyAggro()], hasSpinBox = True)
+EnemyAggroOption = Option("Enemy Aggro", Enemies, "Reduces the number of enemies who aggro you by a percentage", [lambda: Enemy.EnemyAggro()], hasSpinBox = True)
 
 # Misc
 MusicOption = Option("Music", Misce, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())

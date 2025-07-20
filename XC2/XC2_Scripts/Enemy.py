@@ -30,7 +30,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
         
         
 def RandomAssignment(eneData, targetGroup, weights, isEnemies):
-    keysList = ['EnemyBladeID', 'BladeID', 'BladeAtr', 'ParamID', 'ExtraParts', 'Name', 'Debug_Name', 'HpOver', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'Scale', 'ChrSize', 'TurnSize', 'CamSize', 'LinkRadius', 'EN_WATER_DEAD_NONE', 'AiGroup', 'AiGroupNum', 'BookID', 'EnhanceID1', 'EnhanceID2', 'EnhanceID3', 'ParamRev', 'RstDebuffRev', 'HealPotTypeRev', 'SummonID', 'BGMID', 'SeEnvID', 'Race', 'LvMin', 'LvMax', 'ScaleMin', 'ScaleMax']
+    keysList = ['EnemyBladeID', 'BladeID', 'BladeAtr', 'ParamID', 'ExtraParts', 'Name', 'Debug_Name', 'HpOver', 'Scale', 'ChrSize', 'TurnSize', 'CamSize', 'LinkRadius', 'EN_WATER_DEAD_NONE', 'AiGroup', 'AiGroupNum', 'BookID', 'EnhanceID1', 'EnhanceID2', 'EnhanceID3', 'ParamRev', 'RstDebuffRev', 'HealPotTypeRev', 'SummonID', 'BGMID', 'SeEnvID', 'Race', 'LvMin', 'LvMax', 'ScaleMin', 'ScaleMax']
     # Randomly Assign
     with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
         with open("XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as RSCfile:
@@ -52,12 +52,12 @@ def RandomAssignment(eneData, targetGroup, weights, isEnemies):
                 if enemyGroup.currentGroup == []:
                     enemyGroup.RefreshCurrentGroup()
                 
-                ActTypeFix(newEn, en, RSCData, paramData)
+                ActTypeFix(newEn, en, RSCData, paramData, eneData)
                 
                 if newEn["EnemyBladeID"] != 0:
                     for enBlade in eneData["rows"]:
                         if enBlade['$id'] == newEn['EnemyBladeID']:
-                            ActTypeFix(enBlade, en, RSCData, paramData)
+                            ActTypeFix(enBlade, en, RSCData, paramData, eneData)
                 
                 if Options.BossEnemyOption_Solo.GetState():
                     BalanceSoloFights(en, enemyGroup)
@@ -82,23 +82,23 @@ def isBadEnemy(en):
 
 def GenEnemyData(eneData):
     '''Creates the data in a nested list if it does not already exist, this is only to be copied from never altered'''
-    if NormalGroup.originalGroup == []:
+    if NormalGroup.originalGroup != []:
+        return
+    for en in eneData["rows"]:
+        if isBadEnemy(en):
+            continue
+        enID = en["$id"]
+        if enID in IDs.NormalMonsters:
+            group = NormalGroup
+        elif enID in IDs.UniqueMonsters:
+            group = UniqueGroup
+        elif enID in IDs.BossMonsters:
+            group = BossGroup
+        elif enID in IDs.SuperbossMonsters:
+            group = SuperbossGroup
         
-        for en in eneData["rows"]:
-            if isBadEnemy(en):
-                continue
-            enID = en["$id"]
-            if enID in IDs.NormalMonsters:
-                group = NormalGroup
-            elif enID in IDs.UniqueMonsters:
-                group = UniqueGroup
-            elif enID in IDs.BossMonsters:
-                group = BossGroup
-            elif enID in IDs.SuperbossMonsters:
-                group = SuperbossGroup
-            
-            group.currentGroup.append(en.copy())
-            group.originalGroup.append(en.copy())
+        group.currentGroup.append(en.copy())
+        group.originalGroup.append(en.copy())
 
 def GenWeights(isNormal, isUnique, isBoss, isSuperboss):
     weights = [0,0,0,0]
@@ -120,7 +120,7 @@ def ForcedWinFights(fights = []):
                 row["ReducePCHP"] = 1
         JSONParser.CloseFile(data, file)
 
-def AeshmaCoreHPNerf(): #this fight sucks
+def AeshmaCoreHPNerf(): # Aeshma is almost unkillable with its regen active
     with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
@@ -129,7 +129,7 @@ def AeshmaCoreHPNerf(): #this fight sucks
         JSONParser.CloseFile(data, file)
   
 def BalanceSoloFights(originalEn, enemyGroup): # 
-    soloFightIDs = [179, 182, 258, 260, 262, 256]
+    soloFightIDs = [179, 182, 258, 260, 262, 256, 604]
     if originalEn["$id"] in soloFightIDs:
         if enemyGroup == SuperbossGroup:
             lvDrop = 30
@@ -177,7 +177,7 @@ Aion = Violation([265, 275], -20)
 UniqueMonstersViolations = Violation(IDs.UniqueMonsters, -5)
 SuperbossMonstersViolations = Violation(IDs.SuperbossMonsters, -20)
 BossMonsterViolations = Violation(IDs.BossMonsters, -10)
-NormalMonsterViolation = Violation(IDs.NormalMonsters, 5)
+NormalMonsterViolation = Violation(IDs.NormalMonsters, 2)
 
 ArdanianSoldiers = [189,190,219]
 Puffots = [195]
@@ -207,7 +207,7 @@ def BigEnemyRedCircleSizeFix(oldEn, newEn): # Makes big enemies in boss fights s
     minScale = 25
     
     if newEn["ChrSize"] == Large:
-        scaleMult = .5
+        scaleMult = .6
     elif newEn["ChrSize"] == Massive:
         scaleMult = .25
     elif newEn["Scale"] >= 200: # Some enemies are scaled up even if they arent normally gigantic
@@ -270,34 +270,21 @@ def FindParam(paramData, enemy):
         if param["$id"] == enemy["ParamID"]:
             return param
 
-def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData): 
-    '''Changes enemies act types to accommodate random spawn locations'''
+def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData, arrangeData): 
+    '''Changes enemies act types to accommodate random spawn locations''' # This should be fixable by extending the RSCEN and EnParam
             
     oldRSC = FindRSC(paramData, RSCData, oldEnemy)
     newRSC = FindRSC(paramData, RSCData, newEnemy)
-    
-    if oldRSC["ActType"] > newRSC["ActType"]:            
-        
-        # Add new row
-        newRow = copy.deepcopy(newRSC)
-        for key in ["ActType", "FlyHeight", "FldMoveType"]:
-            newRow[key] = oldRSC[key]
-        newID = len(RSCData["rows"]) + 1
-        if newID == 786:
-            pass
-        newRow["$id"] = newID
-        RSCData["rows"].append(newRow)
-        
-        # Assign EnParam of newEnemy to that row
-        paramTest = FindParam(paramData, newEnemy)
-        paramTest["ResourceID"] = newID
+    if oldRSC["ActType"] != newRSC["ActType"]:            
+        ChangeStats([newEnemy], [("ActType", oldRSC["ActType"]), ("FlyHeight", oldRSC["FlyHeight"])], arrangeData, paramData, RSCData)
+
    
 def SummonsFix(eneData):
     for ene in eneData["rows"]:
         if ene["$id"] in IDs.SummonedEnemies:
             ene["DriverLev"] = 1 # Not a great solution the other way is to make a duplicate enemy for each time they are summoned and I woulid have to make new summon tables
     
-def EnemyAggro(): 
+def EnemyAggro(): # Not going to add aggro to enemies because it would be disproportional to the area there enemy is in. For example if i tgive them batArea and a large area you could get stuck inside a small area (ship) with enemies perma aggroing you
     odds = Options.EnemyAggroOption.GetSpinbox()
     with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
         eneData = json.load(eneFile)
@@ -309,37 +296,61 @@ def EnemyAggro():
             en["Detects"] = 0
         JSONParser.CloseFile(eneData, eneFile)
    
-def ChangeStats(enemyIDs = [], HP = None, Str = None, Eth = None, Dex = None, Agility = None, Parmor = None, EArmor= None ):
+def ChangeStats(enemy = [], keyVal = [], arrangeData = None, paramData = None, RSCData = None):
     """
-    Allows changing the stats of an individual enemy on EnArrange by giving it a new ParamID
+    Allows changing the stats of an individual enemy ID in EnArrange by changing stats in EnParam or RSC_En.
     Args:
         enemyID (list[int]): The IDs from EnArrange.
+        keys (list[tuple]): The keys and their new value in EnParam to change.
+        arrangeData, paramData, RSCData: If left as default this will open the files and get the data, change it then close, otherwise you can pass the data.
     """  
-    with open("XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as arrangeFile:
-        with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
-            arrangeData = json.load(arrangeFile)
-            paramData = json.load(paramFile)
-            for en in arrangeData["rows"]:
-                if en["$id"] in enemyIDs:
-                    param = FindParam(paramData, en)
-                    newParam = copy.deepcopy(param)
-                    newParamID =  len(paramData["rows"]) + 1
-                    newParam["$id"] = newParamID
-                    en["ParamID"] = newParamID
-                    if HP != None:
-                        newParam["HpMaxRev"] = HP
-                    
-                    
-                    paramData["rows"].append(newParam)
-                    
-            JSONParser.CloseFile(arrangeData, arrangeFile)
-            JSONParser.CloseFile(paramData, paramFile)   
+    def LocalChange(paramData, RSCData, en):
+        param = FindParam(paramData, en)
+        newParam = copy.deepcopy(param)
+        newParamID =  len(paramData["rows"]) + 1
+        newParam["$id"] = newParamID
+        
+        rsc = FindRSC(paramData, RSCData, en)
+        newRSC = copy.deepcopy(rsc)
+        newRSCID =  len(RSCData["rows"]) + 1
+        newRSC["$id"] = newRSCID
+        
+        for key, val in keyVal:
+            if key in newParam:
+                newParam[key] = val
+                
+        for key, val in keyVal:
+            if key in newRSC:
+                newRSC[key] = val
+
+        en["ParamID"] = newParamID
+        newParam["ResourceID"] = newRSCID
+        paramData["rows"].append(newParam)
+        RSCData["rows"].append(newRSC)
+                
+    if arrangeData == None: 
+        with open("XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as arrangeFile:
+            with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
+                with open("XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as RSCFile:   
+                    arrangeData = json.load(arrangeFile)
+                    paramData = json.load(paramFile)
+                    RSCData = json.load(RSCFile)
+                    for en in arrangeData["rows"]:
+                        if en["$id"] in enemy:
+                            LocalChange(paramData, RSCData, en)
+                    JSONParser.CloseFile(arrangeData, arrangeFile)
+                    JSONParser.CloseFile(paramData, paramFile)   
+                    JSONParser.CloseFile(RSCData, RSCFile)
+    else:
+        for en in enemy:
+            LocalChange(paramData, RSCData, en)
+        
 
 def TornaIntroChanges():
-    ChangeStats([1430, 1429, 1428, 1454], HP=10)
+    ChangeStats([1430, 1429, 1428, 1454], [("HpMaxRev", 10)])
 
 def AionHitboxFix(): # Aion is big and some enemies dont sit at same height as him so they walk to you but they dont fly up towards you so you cant hit them
-    pass
+    ChangeStats([265,275], [("EnRadius", 100), ("EnRadius2", 70)])
  
 def EnemyDesc(name):
     pass
