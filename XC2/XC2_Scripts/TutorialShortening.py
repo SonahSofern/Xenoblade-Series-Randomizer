@@ -1,6 +1,6 @@
-import json
+import json, copy, os
 from scripts import Helper, JSONParser
-from XC2.XC2_Scripts import Options, EnemyRandoLogic
+from XC2.XC2_Scripts import Options, EnemyRandoLogic, IDs
 
 def ShortenedTutorial():
     RaceModeBox = Options.RaceModeOption.GetState()
@@ -191,3 +191,54 @@ def IndolQuizSkip():
     #JSONParser.ChangeJSONLineInMultipleSpots(["common_gmk/ma11a_FLD_LandmarkPop.json"],[1116], ["category", "MAPJUMPID"], [2, 0])
     #JSONParser.ChangeJSONLineInMultipleSpots(["common_gmk/ma11a_FLD_LandmarkPop.json"],[1117], ["category", "MAPJUMPID"], [0, 132])
     JSONParser.ChangeJSONLineInMultipleSpots(["common/FLD_LODList.json"], [162], ["ScenarioFlagMin1", "ScenarioFlagMax1", "QuestFlag1", "QuestFlagMin1", "QuestFlagMax1"], [6019, 6025, 0, 0, 0])
+    
+# def TutorialEnemySwaps(): # Swap id in enarrange to an unused enemy so that tutorials no longer activate
+#     TutorialEnemyIDs = [179, 181, 182, 184, 187, 191, 193, 199, 203, 206, 272, 254, 185, 193, 250]
+    
+#     def AreaLoop(id, newID):
+#         # Swap IDs in the gimmick files
+#         for area in IDs.MajorAreaIds:
+#             filename = f"XC2/JsonOutputs/common_gmk/ma{area}a_FLD_EnemyPop.json"
+#             if not os.path.isfile(filename):
+#                 continue
+#             with open(filename, 'r+', encoding='utf-8') as popFile:
+#                 popData = json.load(popFile)
+#                 for en in popData["rows"]:
+#                     for i in range(1,5):
+#                         if en[f"ene{i}ID"] == id:
+#                             en[f"ene{i}ID"] = newID
+#                             JSONParser.CloseFile(popData, popFile)
+#                             return
+    
+#     # Swap stats for the IDs in EnArrange
+#     def ArrangeSwap(id, newID):
+#         with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
+#             eneData = json.load(eneFile)
+            
+#             for en in eneData["rows"]: # Find the new ID
+#                 if en["$id"] == newID:
+#                     newEn = en
+#                     break
+            
+#             invalidKeys = ["$id"]     
+#             for en in eneData["rows"]: # Swap with the old
+#                 if en["$id"] == id:
+#                     oldEn = copy.deepcopy(en)
+#                     for key in newEn:
+#                         if key in invalidKeys:
+#                             continue
+#                         newEn[key] = oldEn[key]
+#                     break
+#             JSONParser.CloseFile(eneData, eneFile)
+        
+                   
+#     # Swap IDs in the IDs variables
+#     newID = 7 # Going to start at 7 since theres a swathe of enemies that arent used from 7-65
+#     for id in TutorialEnemyIDs:
+#         for bossId in IDs.BossMonsters:
+#             if id == bossId:
+#                 bossId = newID
+#                 newID += 1
+#                 break
+#         AreaLoop(id, newID)
+#         ArrangeSwap(id, newID)

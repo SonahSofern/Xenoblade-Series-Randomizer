@@ -20,11 +20,12 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
     with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
         eneData = json.load(eneFile)
         
-        GenEnemyData(eneData)
+        firstGen = GenEnemyData(eneData)
         
         RandomAssignment(eneData, targetGroup, GenWeights(isNormal, isUnique, isBoss, isSuperboss), isEnemies)
 
-        Bandaids(eneData)
+        if firstGen:
+            Bandaids(eneData)
         
         JSONParser.CloseFile(eneData, eneFile)
         
@@ -66,6 +67,7 @@ def RandomAssignment(eneData, targetGroup, weights, isEnemies):
                 
                 BigEnemyRedCircleSizeFix(en, newEn)
                 CloneEnemiesDefeatCondition(en, newEn)
+                AionRoomFix(en, newEn, RSCData, paramData, eneData)
                 
                 for key in keysList:
                     en[key] = newEn[key]
@@ -83,7 +85,7 @@ def isBadEnemy(en):
 def GenEnemyData(eneData):
     '''Creates the data in a nested list if it does not already exist, this is only to be copied from never altered'''
     if NormalGroup.originalGroup != []:
-        return
+        return False
     for en in eneData["rows"]:
         if isBadEnemy(en):
             continue
@@ -99,7 +101,8 @@ def GenEnemyData(eneData):
         
         group.currentGroup.append(en.copy())
         group.originalGroup.append(en.copy())
-
+    return True
+    
 def GenWeights(isNormal, isUnique, isBoss, isSuperboss):
     weights = [0,0,0,0]
     if isNormal.GetState():
@@ -253,9 +256,10 @@ def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy 
         JSONParser.CloseFile(data, file)
 
 def Bandaids(eneData):
+    '''Some bandaids intended to run if any rando is on, keep in mind these are meant to be ran once after initial randomization. Some things are better fixed during randomization.'''
     ForcedWinFights([3,6])
     AeshmaCoreHPNerf()
-    GortOgreUppercutRemoval()
+    # GortOgreUppercutRemoval()
     EarthBreathNerf()
     SummonsFix(eneData)
     
@@ -298,11 +302,11 @@ def EnemyAggro(): # Not going to add aggro to enemies because it would be dispro
    
 def ChangeStats(enemy = [], keyVal = [], arrangeData = None, paramData = None, RSCData = None):
     """
-    Allows changing the stats of an individual enemy ID in EnArrange by changing stats in EnParam or RSC_En.
+    Allows changing the stats of an individual enemy ID in EnArrange by creating new EnParam and RSC_En for that enemy.
     Args:
         enemyID (list[int]): The IDs from EnArrange.
         keys (list[tuple]): The keys and their new value in EnParam to change.
-        arrangeData, paramData, RSCData: If left as default this will open the files and get the data, change it then close, otherwise you can pass the data.
+        arrangeData/paramData/RSCData: If left as default this will open the files and get the data, change it then close, otherwise you can pass the data.
     """  
     def LocalChange(paramData, RSCData, en):
         param = FindParam(paramData, en)
@@ -349,8 +353,10 @@ def ChangeStats(enemy = [], keyVal = [], arrangeData = None, paramData = None, R
 def TornaIntroChanges():
     ChangeStats([1430, 1429, 1428, 1454], [("HpMaxRev", 10)])
 
-def AionHitboxFix(): # Aion is big and some enemies dont sit at same height as him so they walk to you but they dont fly up towards you so you cant hit them
-    ChangeStats([265,275], [("EnRadius", 100), ("EnRadius2", 70)])
+def AionRoomFix(origEn, newEn, rscData, paramData, enData): # Aion sits really far down so raise enemies up
+    AionIDs = [265, 275]
+    if ((origEn["$id"] in AionIDs) and (newEn["$id"] not in AionIDs)): # Need a clause to keep original flyheight if the enemy is actually aion
+        ChangeStats([newEn], [("FlyHeight", 0)], enData, paramData, rscData)   
  
 def EnemyDesc(name):
     pass
