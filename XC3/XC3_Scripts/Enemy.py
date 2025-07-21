@@ -1,6 +1,6 @@
 
 import json, random, copy, traceback, math
-from XC3.XC3_Scripts import IDs
+from XC3.XC3_Scripts import IDs, Options
 from scripts import Helper, JSONParser, PopupDescriptions, Enemies as Enemy
 
 # https://xenobladedata.github.io/xb3_130/SYS_GimmickLocation.html#25513 useful file has enemy xyz and probably how fights dteremine where try again places you
@@ -9,11 +9,8 @@ from scripts import Helper, JSONParser, PopupDescriptions, Enemies as Enemy
 # Too many agnus/keves soldier enemies dillutes the pool of intereszting enemies         
 # Keves Queen is unkillable (its not the NoKill (its named slightly different) Flag on enemy)    
 
-NormalGroup = Enemy.EnemyGroup()
-UniqueGroup = Enemy.EnemyGroup()
-BossGroup = Enemy.EnemyGroup()
-SuperbossGroup = Enemy.EnemyGroup()
-StaticEnemyData = [NormalGroup, UniqueGroup, BossGroup, SuperbossGroup]
+StaticEnemyData:list[Enemy.EnemyGroup] = []
+
                                                                                                                                                                                                                                                                                                                 
 def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
     global StaticEnemyData
@@ -44,7 +41,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                 
                     eRando.ActTypeFix(newEn, en)
                     
-                    if Options.BossEnemyOption_Group.GetState():
+                    if Options.BossEnemyOption_GroupFights.GetState():
                         eRando.BalanceFight(en, newEn, GroupFightIDs, GroupFightViolations)
                         
                     eRando.BigEnemyBossFightSizeFix(en, newEn)
@@ -57,6 +54,12 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                 JSONParser.CloseFile(eneData, eneFile)
                 JSONParser.CloseFile(paramData, paramFile)
                 JSONParser.CloseFile(rscData, rscFile)
+
+def GetGroupFightViolations():
+    return []
+
+def GetGroupFightIDs():
+    return []
 
 def IntroFightBalances(eRando):
     pass

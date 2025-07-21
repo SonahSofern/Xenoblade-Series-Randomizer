@@ -35,6 +35,7 @@ BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True)
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True)
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, hasSpinBox=True)
+BossEnemyOption_GroupFights = SubOption("Balance Group Fights", BossEnemyOption)
 
 SkillOptions = Option("Class Skills", Character, "Randomizes class skills", [lambda: Skills.SkillRando()], hasSpinBox=True)
 
