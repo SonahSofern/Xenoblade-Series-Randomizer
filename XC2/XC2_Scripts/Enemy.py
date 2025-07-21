@@ -2,95 +2,65 @@ import json, random, copy, traceback, math
 from XC2.XC2_Scripts import IDs, Options
 from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e
 
-NormalGroup = e.EnemyGroup()
-UniqueGroup = e.EnemyGroup()
-BossGroup = e.EnemyGroup()
-SuperbossGroup = e.EnemyGroup()
-StaticEnemyData = [NormalGroup, UniqueGroup, BossGroup, SuperbossGroup]
-                                                                                                                                                                                                                                                                                                                
+
+StaticEnemyData:list[e.EnemyGroup] = []
+                                                                                                                                                                                                                                                                                                          
 def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
-    with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
-        eneData = json.load(eneFile)
-        
-        if NormalGroup.originalGroup == []:
-            Bandaids(eneData) 
-            e.GenEnemyData(eneData, IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, NormalGroup, UniqueGroup, BossGroup, SuperbossGroup)
-
-        ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'Detects', 'SearchRange', 'SearchAngle', 'SearchRadius', 'BatInterval', 'BatArea', 'BatAreaType', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev']
-        RandomAssignment(eneData, targetGroup, e.GenWeights(isNormal, isUnique, isBoss, isSuperboss), isEnemies, ignoreKeys, "XC2/JsonOutputs/common/CHR_EnParam.json", "XC2/JsonOutputs/common/RSC_En.json")
-        
-        JSONParser.CloseFile(eneData, eneFile)
-   
-def RandomAssignment(eneData, targetGroup, weights, isEnemies, ignoreKeys, paramFilePath, RSCFilePath):
-    # Randomly Assign
-    with open(paramFilePath, 'r+', encoding='utf-8') as paramFile:
-        with open(RSCFilePath, 'r+', encoding='utf-8') as RSCfile:
-            paramData = json.load(paramFile)
-            RSCData = json.load(RSCfile)
-            for en in eneData["rows"]:
-                if e.FilterEnemies(en, targetGroup, isEnemies, IDs.NormalMonsters + IDs.BossMonsters + IDs.UniqueMonsters + IDs.SuperbossMonsters):
-                    continue 
-                        
-                enemyGroup = random.choices(StaticEnemyData, weights)[0]
-                newEn = enemyGroup.SelectRandomMember()
-            
-                e.ActTypeFix(newEn, en, RSCData, paramData, eneData)
+    global StaticEnemyData
+    GroupFightViolations = GetGroupFightViolations()
+    GroupFightIDs = GetGroupFightIDs()
+    SoloFightViolations = GetSoloFightViolations()
+    soloFightIDs = [179, 182, 258, 260, 262, 256, 604]
+    ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'Detects', 'SearchRange', 'SearchAngle', 'SearchRadius', 'BatInterval', 'BatArea', 'BatAreaType', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev']
+    
+    with open("XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
+        with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
+            with open("XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as rscFile:
+                paramData = json.load(paramFile)
+                rscData = json.load(rscFile)
+                eneData = json.load(eneFile)
                 
-                # Blade Act Fix
-                if newEn["EnemyBladeID"] != 0:
-                    for enBlade in eneData["rows"]:
-                        if enBlade['$id'] == newEn['EnemyBladeID']:
-                            e.ActTypeFix(enBlade, en, RSCData, paramData, eneData)
+                eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData)
                 
-                if Options.BossEnemyOption_Solo.GetState():
-                    e.BalanceFight(en, enemyGroup, soloFightIDs, SoloFightViolations)
-                if Options.BossEnemyOption_Group.GetState():
-                    e.BalanceFight(en, newEn, GroupFightIDs, GroupFightViolations)
-                e.BigEnemyBossFightSizeFix(en, newEn, IDs.BossMonsters)
-                CloneEnemiesDefeatCondition(en, newEn)
-                AionRoomFix(en, newEn, RSCData, paramData, eneData)
+                if StaticEnemyData == []:
+                    StaticEnemyData = eRando.GenEnemyData()
+                    Bandaids(eneData)
+                    if isBoss.GetState():
+                        BaseGameIntroChanges(eRando)
+                        TornaIntroChanges(eRando)
                 
-                e.CopyKeys(en, newEn, ignoreKeys)
+                for en in eneData["rows"]:
+                    if eRando.FilterEnemies(en, targetGroup):
+                        continue 
                     
-            for group in StaticEnemyData:
-                group.RefreshCurrentGroup()
-                  
-            JSONParser.CloseFile(paramData, paramFile)                
-            JSONParser.CloseFile(RSCData, RSCfile)   
+                    newEn = eRando.GetRandomEnemy(StaticEnemyData)
+                
+                    eRando.ActTypeFix(newEn, en)
+                    
+                    # Blade Act Fix
+                    if newEn["EnemyBladeID"] != 0:
+                        for enBlade in eneData["rows"]:
+                            if enBlade['$id'] == newEn['EnemyBladeID']:
+                                eRando.ActTypeFix(enBlade, en)
+                    
+                    if Options.BossEnemyOption_Solo.GetState():
+                        eRando.BalanceFight(en, newEn, soloFightIDs, SoloFightViolations)
+                    if Options.BossEnemyOption_Group.GetState():
+                        eRando.BalanceFight(en, newEn, GroupFightIDs, GroupFightViolations)
+                        
+                    eRando.BigEnemyBossFightSizeFix(en, newEn)
+                    CloneEnemiesDefeatCondition(en, newEn)
+                    AionRoomFix(en, newEn, eRando)
+                    
+                    eRando.CopyKeys(en, newEn, ignoreKeys)
+                        
+                for group in StaticEnemyData:
+                    group.RefreshCurrentGroup()
+                
+                JSONParser.CloseFile(eneData, eneFile)
+                JSONParser.CloseFile(paramData, paramFile)
+                JSONParser.CloseFile(rscData, rscFile)
 
-# Group Fight Violations 
-Jin = e.Violation([1754, 231, 241, 244, 253, 272], -10)
-Akhos = e.Violation([212, 238, 267])
-Malos = e.Violation([214, 243, 245, 268, 273], -10)
-Patroka = e.Violation([223, 239, 270])
-Mikhail = e.Violation([225, 240, 271])
-Aeshma = e.Violation([232,233,234], -10)
-Amalthus = e.Violation([254], -10)
-Aion = e.Violation([265, 275], -20)
-GroupUniqueMonstersViolations = e.Violation(IDs.UniqueMonsters, -5)
-GroupSuperbossMonstersViolations = e.Violation(IDs.SuperbossMonsters, -20)
-GroupBossMonsterViolations = e.Violation(IDs.BossMonsters, -10)
-GroupNormalMonsterViolation = e.Violation(IDs.NormalMonsters, 2)
-GroupFightViolations:list[e.Violation] = [Jin, Akhos, Malos, Patroka, Mikhail, Aeshma, Amalthus, Aion, GroupUniqueMonstersViolations, GroupSuperbossMonstersViolations, GroupBossMonsterViolations, GroupNormalMonsterViolation]
-
-ArdanianSoldiers = [189,190,219]
-Puffots = [195]
-Bandits = [196,197,198]
-VandhamTrio = [199,201,202]
-Tirkin = [220, 235]
-TantaleseKnight = [237]
-AkhosTrio = [238,239,240]
-Phantasm = [242]
-Guldos = [249]
-IndolSoldier = [252]
-GroupFightIDs = Puffots + Bandits + VandhamTrio + ArdanianSoldiers + Tirkin + TantaleseKnight + AkhosTrio + Phantasm + Guldos + IndolSoldier
-
-# Solo Fight Violations
-SoloUniqueMonstersViolations = e.Violation(IDs.UniqueMonsters, -15)
-SoloSuperbossMonstersViolations = e.Violation(IDs.SuperbossMonsters, -30)
-SoloBossMonsterViolations = e.Violation(IDs.BossMonsters, -15)
-SoloFightViolations:list[e.Violation] = [SoloUniqueMonstersViolations, SoloSuperbossMonstersViolations, SoloBossMonsterViolations]
-soloFightIDs = [179, 182, 258, 260, 262, 256, 604]
 
 def Bandaids(eneData):
     '''Bandaids intented to be ran once'''
@@ -99,6 +69,45 @@ def Bandaids(eneData):
     # GortOgreUppercutRemoval()
     EarthBreathNerf()
     SummonsFix(eneData)
+
+def GetSoloFightViolations():
+        # Solo Fight Violations
+    SoloUniqueMonstersViolations = e.Violation(IDs.UniqueMonsters, -15)
+    SoloSuperbossMonstersViolations = e.Violation(IDs.SuperbossMonsters, -30)
+    SoloBossMonsterViolations = e.Violation(IDs.BossMonsters, -15)
+    SoloFightViolations:list[e.Violation] = [SoloUniqueMonstersViolations, SoloSuperbossMonstersViolations, SoloBossMonsterViolations]
+    return SoloFightViolations
+
+def GetGroupFightViolations():
+        # Group Fight Violations 
+    Jin = e.Violation([1754, 231, 241, 244, 253, 272], -10)
+    Akhos = e.Violation([212, 238, 267])
+    Malos = e.Violation([214, 243, 245, 268, 273], -10)
+    Patroka = e.Violation([223, 239, 270])
+    Mikhail = e.Violation([225, 240, 271])
+    Aeshma = e.Violation([232,233,234], -10)
+    Amalthus = e.Violation([254], -10)
+    Aion = e.Violation([265, 275], -20)
+    GroupUniqueMonstersViolations = e.Violation(IDs.UniqueMonsters, -5)
+    GroupSuperbossMonstersViolations = e.Violation(IDs.SuperbossMonsters, -20)
+    GroupBossMonsterViolations = e.Violation(IDs.BossMonsters, -10)
+    GroupNormalMonsterViolation = e.Violation(IDs.NormalMonsters, 2)
+    GroupFightViolations:list[e.Violation] = [Jin, Akhos, Malos, Patroka, Mikhail, Aeshma, Amalthus, Aion, GroupUniqueMonstersViolations, GroupSuperbossMonstersViolations, GroupBossMonsterViolations, GroupNormalMonsterViolation]
+    return GroupFightViolations
+
+def GetGroupFightIDs():
+    ArdanianSoldiers = [189,190,219]
+    Puffots = [195]
+    Bandits = [196,197,198]
+    VandhamTrio = [199,201,202]
+    Tirkin = [220, 235]
+    TantaleseKnight = [237]
+    AkhosTrio = [238,239,240]
+    Phantasm = [242]
+    Guldos = [249]
+    IndolSoldier = [252]
+    GroupFightIDs = Puffots + Bandits + VandhamTrio + ArdanianSoldiers + Tirkin + TantaleseKnight + AkhosTrio + Phantasm + Guldos + IndolSoldier
+    return GroupFightIDs
 
 def CloneEnemiesDefeatCondition(oldEn, newEn): # Forces all copies of enemies that clone themselves to be defeated in a boss encounter
     CloneEnemyIDs = [242, 281, 1882, 1884]
@@ -153,10 +162,10 @@ def EnemyAggro(): # Not going to add aggro to enemies because it would be dispro
             en["Detects"] = 0
         JSONParser.CloseFile(eneData, eneFile)
         
-def BaseGameIntroChanges():
+def BaseGameIntroChanges(e:e.EnemyRandomizer):
     e.ChangeStats([179], [("HpMaxRev", 50)])
     
-def TornaIntroChanges():
+def TornaIntroChanges(e:e.EnemyRandomizer):
     e.ChangeStats([1430, 1429, 1428, 1454], [("HpMaxRev", 10)])
 
 def ForcedWinFights(fights = []):
@@ -175,10 +184,10 @@ def AeshmaCoreHPNerf(): # Aeshma is almost unkillable with its regen active
                 row["HpMaxRev"] = 1500 # nerfed hp by 5/6ths
         JSONParser.CloseFile(data, file)
     
-def AionRoomFix(origEn, newEn, rscData, paramData, enData): # Aion sits really far down so raise enemies up
+def AionRoomFix(origEn, newEn, eRando:e.EnemyRandomizer): # Aion sits really far down so raise enemies up
     AionIDs = [265, 275]
     if ((origEn["$id"] in AionIDs) and (newEn["$id"] not in AionIDs)): # Need a clause to keep original flyheight if the enemy is actually aion
-        e.ChangeStats([newEn], [("FlyHeight", 0)], enData, paramData, rscData)   
+        eRando.ChangeStats([newEn], [("FlyHeight", 200)])   
  
 def EnemyDesc(name):
     pass
