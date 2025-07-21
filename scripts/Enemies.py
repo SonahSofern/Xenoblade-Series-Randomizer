@@ -42,7 +42,7 @@ class Violation:
 
 
 class EnemyRandomizer():
-    def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData):
+    def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, scaleKey = "Scale"):
         # Enemy Groups
         self.NormalIDs = NormalIDs
         self.UniqueIDs = UniqueIDs
@@ -58,6 +58,7 @@ class EnemyRandomizer():
         
         self.rscKey = rscKey
         self.paramKey = paramKey
+        self.scaleKey = scaleKey
         
         # File Data
         self.paramData = paramData 
@@ -191,14 +192,20 @@ class EnemyRandomizer():
     def BigEnemyBossFightSizeFix(self, oldEn, newEn): # Makes big enemies in boss fights smaller
         if oldEn["$id"] not in self.BossIDs:
             return
+        UltraFauna = 5
+        Huge = 4
         Massive = 3
         Large = 2
         minScale = 25
         
-        if newEn["ChrSize"] == Large:
+        newSize = newEn["ChrSize"]
+        
+        if newSize == Large:
             scaleMult = .6
-        elif newEn["ChrSize"] == Massive:
+        elif ((newSize == Massive) or (newSize == Huge)):
             scaleMult = .25
+        elif newSize == UltraFauna:
+            scaleMult = .1
         elif newEn["Scale"] >= 200: # Some enemies are scaled up even if they arent normally gigantic
             scaleMult = .5
         else:

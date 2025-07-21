@@ -1,0 +1,4 @@
+NormalMonsterIDs = []
+TyrantMonsterIDs = []
+BossMonstersIDs = []
+SuperbossMonstersIDs = []
