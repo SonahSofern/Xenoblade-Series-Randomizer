@@ -19,8 +19,8 @@ class EnemyGroup():
         if self.currentGroup == []:
             self.RefreshCurrentGroup()
         
-def isBadEnemy(en, badEnemies):
-    if en["$id"] not in badEnemies:
+def isBadEnemy(en, validEnemies):
+    if en["$id"] not in validEnemies:
         return True
     
 def GenEnemyData(eneData, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, NormalGroup, UniqueGroup, BossGroup, SuperbossGroup):
@@ -40,7 +40,6 @@ def GenEnemyData(eneData, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, NormalGro
         
         group.currentGroup.append(en.copy())
         group.originalGroup.append(en.copy())
-    return True
         
  
 def GenWeights(isNormal, isUnique, isBoss, isSuperboss):
@@ -95,13 +94,13 @@ def FindParam(paramData, enemy, paramKey):
         if param["$id"] == enemy[paramKey]:
             return param
 
-def FilterEnemies(en, targetGroup, isEnemies, NormalMonsters, BossMonsters, UniqueMonsters, SuperbossMonsters):
+def FilterEnemies(en, targetGroup, isEnemies, validEnemies):
     '''Returns true if enemy has been filtered out'''
     if not (en["$id"] in targetGroup):
         return True
     if not Helper.OddsCheck(isEnemies.GetSpinbox()):
         return True
-    if isBadEnemy(en, NormalMonsters + BossMonsters + UniqueMonsters + SuperbossMonsters):
+    if isBadEnemy(en, validEnemies):
         return True
 
 def CopyKeys(en, newEn, ignoreKeys):
@@ -118,7 +117,7 @@ def ActTypeFix(newEnemy, oldEnemy, RSCData, paramData, arrangeData):
     if oldRSC["ActType"] != newRSC["ActType"]:  
         ChangeStats([newEnemy], [("ActType", oldRSC["ActType"]), ("FlyHeight", oldRSC["FlyHeight"])], arrangeData, paramData, RSCData)
          
-def ChangeStats(enemy = [], keyVal = [], arrangeData = None, paramData = None, RSCData = None):
+def ChangeStats(enemy = [], keyVal = [], arrangeData = None, paramData = None, RSCData = None, paramKey = "", rscKey = "", arrangeFilePath = "", paramFilePath = "", rscFilePath = ""):
     """
     Allows changing the stats of an individual enemy ID in EnArrange by creating new EnParam and RSC_En for that enemy.
     Args:
@@ -151,9 +150,9 @@ def ChangeStats(enemy = [], keyVal = [], arrangeData = None, paramData = None, R
         RSCData["rows"].append(newRSC)
                 
     if arrangeData == None: 
-        with open("XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as arrangeFile:
-            with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
-                with open("XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as RSCFile:   
+        with open(arrangeFilePath, 'r+', encoding='utf-8') as arrangeFile:
+            with open(paramFilePath, 'r+', encoding='utf-8') as paramFile:
+                with open(rscFilePath, 'r+', encoding='utf-8') as RSCFile:   
                     arrangeData = json.load(arrangeFile)
                     paramData = json.load(paramFile)
                     RSCData = json.load(RSCFile)

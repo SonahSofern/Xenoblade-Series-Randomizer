@@ -28,7 +28,7 @@ def RandomAssignment(eneData, targetGroup, weights, isEnemies, ignoreKeys, param
             paramData = json.load(paramFile)
             RSCData = json.load(RSCfile)
             for en in eneData["rows"]:
-                if e.FilterEnemies(en, targetGroup, isEnemies, ):
+                if e.FilterEnemies(en, targetGroup, isEnemies, IDs.NormalMonsters + IDs.BossMonsters + IDs.UniqueMonsters + IDs.SuperbossMonsters):
                     continue 
                         
                 enemyGroup = random.choices(StaticEnemyData, weights)[0]
@@ -93,7 +93,7 @@ SoloFightViolations:list[e.Violation] = [SoloUniqueMonstersViolations, SoloSuper
 soloFightIDs = [179, 182, 258, 260, 262, 256, 604]
 
 def Bandaids(eneData):
-    '''Bandaids intented to be ran once, after '''
+    '''Bandaids intented to be ran once'''
     ForcedWinFights([3,6])
     AeshmaCoreHPNerf()
     # GortOgreUppercutRemoval()
