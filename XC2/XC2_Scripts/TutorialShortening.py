@@ -192,7 +192,7 @@ def IndolQuizSkip():
     #JSONParser.ChangeJSONLineInMultipleSpots(["common_gmk/ma11a_FLD_LandmarkPop.json"],[1117], ["category", "MAPJUMPID"], [0, 132])
     JSONParser.ChangeJSONLineInMultipleSpots(["common/FLD_LODList.json"], [162], ["ScenarioFlagMin1", "ScenarioFlagMax1", "QuestFlag1", "QuestFlagMin1", "QuestFlagMax1"], [6019, 6025, 0, 0, 0])
     
-# def TutorialEnemySwaps(): # Swap id in enarrange to an unused enemy so that tutorials no longer activate
+# def TutorialEnemySwaps(): # Swap id in enarrange to an unused enemy so that tutorials no longer activate (Didnt work, the code works but tutorials still show)
 #     TutorialEnemyIDs = [179, 181, 182, 184, 187, 191, 193, 199, 203, 206, 272, 254, 185, 193, 250]
     
 #     def AreaLoop(id, newID):

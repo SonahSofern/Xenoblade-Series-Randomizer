@@ -151,7 +151,7 @@ UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption, hasSpinBox=Tru
 UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption, hasSpinBox=True)
 UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption, hasSpinBox=True)
 
-BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption), lambda: Enemy.TornaIntroChanges()], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True, prio=2)
+BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption), lambda: Enemy.TornaIntroChanges(), lambda: Enemy.BaseGameIntroChanges()], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True, prio=2)
 BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True)
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True)

@@ -5,7 +5,6 @@ from tkinter import ttk
 from tkinter.font import Font
 root = Tk()
 from scripts import GUISettings, XCRandomizer
-import requests
 import XCDE.XCDE_Scripts.XCDE_Settings as XCDE
 import XC2.XC2_Scripts.XC2_Settings as XC2
 import XC3.XC3_Scripts.XC3_Settings as XC3
@@ -43,7 +42,4 @@ XCRandomizer.CreateMainWindow(root, MainWindow, XC3.Game, XC3.Version, XC3.Title
 XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.Game, XCXDE.Version, XCXDE.Title, XCXDE.seedEntryVar, XCXDE.permalinkVar, XCXDE.Options.Tabs, XCXDE.extraCommands, XCXDE.mainFolderNames, XCXDE.subFolderNames, XCXDE.SeedNames.Nouns, XCXDE.SeedNames.Verbs, backgroundImages=XCXDE.backgrounds)
 
 root.protocol("WM_DELETE_WINDOW", lambda: ([cmd() for cmd in XCRandomizer.saveCommands] and root.destroy()))
-
-
-
 root.mainloop()
