@@ -102,13 +102,9 @@ def CharacterRandomization():
     randomize_drivers = Options.DriversOption.GetState()
     randomize_blades = Options.BladesOption.GetState()
 
-    # Disable driver randomization if custom mode is used
-    if Options.RaceModeOption.GetState():
-        print("Driver randomization is not supported in Race Mode")
-        randomize_drivers = False
-    if Options.UMHuntOption.GetState():
-        print("Driver randomization is not supported in UM Hunt")
-        randomize_drivers = False
+    # If we have driver randomization, we can't salvage, so we turn on the tutorial shortening (if not already on) to skip the forced salvaging in the tutorial.
+    if not Options.ShortcutsOption_Tutorials.GetState():
+        JSONParser.ChangeJSONLine(["common/FLD_QuestListNormal.json"], [2004], ["NextQuestA"], 2008)
 
     if include_printouts:
         print("Character Randomization: ")

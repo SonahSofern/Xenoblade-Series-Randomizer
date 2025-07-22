@@ -131,13 +131,13 @@ def AllTornaRando():
     global ItemIDtoItemName
     ItemIDtoItemName = CreateFullItemDict()
     FixInfoReferences()
-    #CheckforIncompatibleSettings(TornaCompatibleOptions) no longer needed
+    CheckforIncompatibleSettings()
     global Recipes
     Recipes = TornaRecipes.CreateTornaRecipeList()
     TornaQuests.SelectRandomPointGoal(Recipes)
     ChosenSupporterAmounts = [1,16,32,48,64] # have a few sliders going forwards to let the player change this amount
     global ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, Areas, AreaIDtoNameDict, MaxDropTableID, Enemies, Shops, RedBags, MiscItems, Chests, TornaCollectionPointList, GormottCollectionPointList, FullItemList, NormalEnemies, QuestEnemies, Bosses, UniqueMonsters, AllSidequestProgressionItems, UnusedRecipes
-    ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, AllSidequestProgressionItems = TornaQuests.SelectCommunityQuests(ChosenSupporterAmounts, ProgressionLocTypes[0], ProgressionLocTypes[6], ProgressionLocTypes[7], Recipes)
+    ChosenLevel2Quests, ChosenLevel4Quests, Sidequests, Mainquests, AllSidequestProgressionItems = TornaQuests.SelectCommunityQuests(ChosenSupporterAmounts, ProgressionLocTypes, Recipes)
     Areas, AreaIDtoNameDict = TornaAreas.CreateAreaInfo(Sidequests, Mainquests)
     Enemies, MaxDropTableID = TornaEnemies.AdjustEnemyRequirements(Sidequests, Mainquests, Areas, ProgressionLocTypes[2])
     Shops = TornaShops.CreateShopInfo(Mainquests, Areas, ProgressionLocTypes[4])
@@ -168,34 +168,9 @@ def AllTornaRando():
         ChangeReqItemRarities()
         #AddSpawnConditionsforRequiredChecks()
 
-def CheckforIncompatibleSettings(TornaCompatibleOptions):
-    global DontMakeSpoilerLog
-    ConflictingOptions = []
-    ConflictingOptionNames = []
-    ConflictingSubOptions = []
-    exceptionmsg = ""
-    for opt in XenoOptionDict["XC2"]:
-        if opt.GetState() and opt not in TornaCompatibleOptions:
-            ConflictingOptions.append(opt)
-            ConflictingOptionNames.append(opt.name)
-    for opt in XenoOptionDict["XC2"]:
-        if opt.name == 'Shortcuts':
-            if opt.GetState():
-                for sub in opt.subOptions:
-                    if sub.GetState() and sub.name != 'Tutorials Skip':
-                        ConflictingSubOptions.append(sub.name)
-    if ConflictingOptions != []:
-        exceptionmsg += f"Torna Randomization did not complete due to the following conflicting options:\n{ConflictingOptionNames}.\n\n"
-    if ConflictingSubOptions != []:
-        exceptionmsg += f"Torna Randomization did not complete due to the following conflicting suboptions:\nShortcuts: {ConflictingSubOptions}."
-    if exceptionmsg != "":
-        DontMakeSpoilerLog = True
-        raise Exception(exceptionmsg)
-    elif ProgressionLocTypes[:6] == [0,0,0,0,0,0]:
-        DontMakeSpoilerLog = True
+def CheckforIncompatibleSettings():
+    if ProgressionLocTypes[:6] == [0,0,0,0,0,0]:
         raise Exception("There are no progression locations enabled, cannot generate seed!")
-    else:
-        DontMakeSpoilerLog = False
 
 def DetermineSettings():
     global ProgressionLocTypes
@@ -475,9 +450,9 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
         if item.id in HelpfulUpgrades and item.id not in PlacedItems:
             HelpfulUnplacedUpgrades.append(item)
     PoolMaxItemsPerCategory = [250, 40, 40, 250, 200, 0, 400] 
-    AccessoryList = [acc for acc in FullItemList[0] if acc not in FullItemReqList]
+    AccessoryList = [acc for acc in FullItemList[0] if acc.id not in FullItemReqList]
     WeaponAccessoryList = FullItemList[1]
-    WeaponChipList = [chip for chip in FullItemList[2] if chip not in FullItemReqList]
+    WeaponChipList = [chip for chip in FullItemList[2] if chip.id not in FullItemReqList]
     AuxCoreList = FullItemList[3]
     CollectionMaterialList = FullItemList[4]
     CollectionMaterialList = [item for item in CollectionMaterialList if item.id not in FullItemReqList]
@@ -1204,7 +1179,12 @@ def CampfireUnlocks(): # adds conditions to the campfire unlocks
     with open("./XC2/JsonOutputs/common_gmk/FLD_CampPop.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:
-            row["ConditionID"] = StartingFLDConditionListID + row["$id"] - 1
+            if row["$id"] != 5:
+                row["ConditionID"] = StartingFLDConditionListID + row["$id"] - 1
+            elif ProgressionLocTypes[1] + ProgressionLocTypes[2] != 0: # when both enemy drops and collection points are off, there's not enough spots to put the trout stralu ingredients + campfire unlock in logical locations, so we just let the player cook at porton village any time.
+                row["ConditionID"] = StartingFLDConditionListID + row["$id"] - 1
+            else:
+                row["ConditionID"] = 0
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
@@ -1279,7 +1259,8 @@ def DisableUnrequiredQuests(): # we want the npcs for non-required quests to not
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    
+    if ProgressionLocTypes[1] + ProgressionLocTypes[2] == 0:
+        JSONParser.ChangeJSONLineInMultipleSpots(["common/FLD_QuestListIra.json"], [3], ["NextQuestA", "CallEventA"], [4, 10616]) # when both enemy drops and collection points are off, there's not enough spots to put the trout stralu ingredients + campfire unlock in logical locations, so we skip the required cooking session
 
 def AddTaskLogsforKeys(): # to help the player know what they need, we add a task log for the key items that we're requiring they have for various story events.
     CurQuestCollectRowID = Helper.GetMaxValue("./XC2/JsonOutputs/common/FLD_QuestCollect.json", "$id") + 1
@@ -1930,8 +1911,11 @@ def CreateSpoilerLog(Version, permalinkVar, seedEntryVar):
             alllines.append("\n")
         alllines.append("Chosen Required Crafted Items:\n")
         alllines.append("\n")
-        RequiredCraftList = ["Trout Stralu"]
-        alllines.append("     Trout Stralu\n")
+        if ProgressionLocTypes[1] + ProgressionLocTypes[2] != 0:
+            RequiredCraftList = ["Trout Stralu"]
+            alllines.append("     Trout Stralu\n")
+        else:
+            RequiredCraftList = []
         for sq in AllRequiredSidequests:
             if sq.reqrecipenames != []:
                 for recipe in sq.reqrecipenames:

@@ -179,7 +179,12 @@ def SelectRandomPointGoal(Recipes): # There are some sidequests that require you
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, Community2Gate, RecipeList): # Selects the community quests that logically unlock Story Events 38 and 50 (lv 2 and lv 4 community)
+def SelectCommunityQuests(CommunityReqs: list, ProgressionLocTypes, RecipeList): # Selects the community quests that logically unlock Story Events 38 and 50 (lv 2 and lv 4 community)
+    
+    QuestRewardQty = ProgressionLocTypes[0]
+    Community1Gate = ProgressionLocTypes[6]
+    Community2Gate = ProgressionLocTypes[7]
+    
     TornaSidequest1 = {
         'Quest Name': 'What Bars the Way',
         'Quest Number': 1,
@@ -1348,6 +1353,9 @@ def SelectCommunityQuests(CommunityReqs: list, QuestRewardQty, Community1Gate, C
     global TornaMainquests # holds the TornaMainQuest class objects
     TornaMainquests = []
     TornaMainQuestDict = [TornaMainQuest1, TornaMainQuest2, TornaMainQuest3, TornaMainQuest4, TornaMainQuest5, TornaMainQuest6, TornaMainQuest7, TornaMainQuest8, TornaMainQuest9, TornaMainQuest10, TornaMainQuest11, TornaMainQuest12, TornaMainQuest13, TornaMainQuest14, TornaMainQuest15, TornaMainQuest16, TornaMainQuest17, TornaMainQuest18, TornaMainQuest19, TornaMainQuest20, TornaMainQuest21, TornaMainQuest22, TornaMainQuest23, TornaMainQuest24, TornaMainQuest25, TornaMainQuest26, TornaMainQuest27, TornaMainQuest28, TornaMainQuest29, TornaMainQuest30, TornaMainQuest31, TornaMainQuest32, TornaMainQuest33, TornaMainQuest34, TornaMainQuest35, TornaMainQuest36, TornaMainQuest37, TornaMainQuest38, TornaMainQuest39, TornaMainQuest40, TornaMainQuest41, TornaMainQuest42, TornaMainQuest43, TornaMainQuest44, TornaMainQuest45, TornaMainQuest46, TornaMainQuest47, TornaMainQuest48, TornaMainQuest49, TornaMainQuest50, TornaMainQuest51, TornaMainQuest52, TornaMainQuest53, TornaMainQuest54, TornaMainQuest55, TornaMainQuest56, TornaMainQuest57]
+
+    if ProgressionLocTypes[1] + ProgressionLocTypes[2] == 0: # when both enemy drops and collection points are off, there's not enough spots to put the trout stralu ingredients + campfire unlock in logical locations, so we skip the required cooking session
+        TornaMainQuest3['Item Requirements'] = []
 
     for mainquest in TornaMainQuestDict:
         TornaMainQuest(mainquest, TornaMainquests)
