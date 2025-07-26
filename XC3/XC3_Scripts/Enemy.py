@@ -16,7 +16,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
     global StaticEnemyData
     GroupFightViolations = GetGroupFightViolations()
     GroupFightIDs = GetGroupFightIDs()
-    ignoreKeys = ["$id", "ID", "Level", "Scale", "EliteScale", "IdMove", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "IdMove", "FlgNoVanish", "FlgSerious", "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"]
+    RetryBattleLandmark = "<9A220E4D>"
+    ignoreKeys = ["$id", "ID", "Level", "Scale", "EliteScale", "IdMove", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "IdMove", "FlgNoVanish", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"]
     actKeys = ["ActType", "FlyHeight", "SwimHeight"]
     with open("XC3/JsonOutputs/fld/FLD_EnemyData.json", 'r+', encoding='utf-8') as eneFile:
         with open("XC3/JsonOutputs/btl/BTL_Enemy.json", 'r+', encoding='utf-8') as paramFile:
@@ -67,9 +68,9 @@ def EnemySizeHelper(oldEn, newEn, eRando:Enemy.EnemyRandomizer):
         (Large, Normal): 3,
         (Large, Small): 4,
         (Normal, Small): 1.5,
-    
     }
-    eRando.EnemySizeMatch(oldEn, newEn, multDict)
+    keys = ["Scale", "EliteScale", "WeaponScale"]
+    eRando.EnemySizeMatch(oldEn, newEn, keys, multDict)
 
 def GetGroupFightViolations():
     return []
@@ -77,12 +78,14 @@ def GetGroupFightViolations():
 def GetGroupFightIDs():
     return []
 
-def IntroFightBalances(eRando):
-    pass
+def IntroFightBalances(eRando:Enemy.EnemyRandomizer):
+    introFights = [449, 450, 451, 452, 453, 454, 455]
+    bossIntroFights = [456]
+    eRando.ChangeStats(introFights, [("StRevHp", 20)])
+    eRando.ChangeStats(bossIntroFights, [("StRevHp", 50)])
 
 def Bandaids(isBoss, eRando):
-    if isBoss.GetState():
-        IntroFightBalances(eRando)
+    IntroFightBalances(eRando)
     
 def EnemyDesc(name):
     pass

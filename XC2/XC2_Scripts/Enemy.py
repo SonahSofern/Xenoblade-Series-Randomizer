@@ -83,7 +83,8 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer): # Probably want to 
         (Large, Small): 3,
         (Normal, Small): 1.5,
     }
-    eRando.EnemySizeMatch(oldEn, newEn, multDict)
+    keys = ["Scale"]
+    eRando.EnemySizeMatch(oldEn, newEn, keys, multDict)
 
 def Bandaids(eneData, isBoss, eRando):
     '''Bandaids intented to be ran once'''

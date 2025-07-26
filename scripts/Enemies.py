@@ -148,7 +148,7 @@ class EnemyRandomizer():
             if key in newEn:
                 en[key] = newEn[key]
            
-    def EnemySizeMatch(self, oldEn, newEn, multDict): # Makes big enemies in boss fights smaller
+    def EnemySizeMatch(self, oldEn, newEn, keysList, multDict): # Makes big enemies in boss fights smaller
         '''Enemies that are replaced will have that enemy attempt to match the size of the original'''
         defMult = 1
         defScale = 100
@@ -163,8 +163,9 @@ class EnemyRandomizer():
             newMult = (1/multDict[(newSize, oldSize)])
         else:
             newMult = 1
-            
-        newEn["Scale"] = max(int(defScale * newMult), minScale) 
+        
+        for key in keysList:
+            newEn[key] = max(int(defScale * newMult), minScale) 
         
     def ActTypeFix(self, newEnemy, oldEnemy): 
         '''Changes enemies act types to accommodate random spawn locations'''
