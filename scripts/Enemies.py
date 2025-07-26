@@ -42,7 +42,7 @@ class Violation:
 
 
 class EnemyRandomizer():
-    def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, scaleKey = "Scale", permanentBandaids = []):
+    def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, scaleKey = "Scale", permanentBandaids = [], actKeys = []):
         # Enemy Groups
         self.NormalIDs = NormalIDs
         self.UniqueIDs = UniqueIDs
@@ -59,6 +59,7 @@ class EnemyRandomizer():
         self.rscKey = rscKey
         self.paramKey = paramKey
         self.scaleKey = scaleKey
+        self.actKeys = actKeys
         
         # File Data
         self.paramData = paramData 
@@ -146,14 +147,36 @@ class EnemyRandomizer():
                 continue
             if key in newEn:
                 en[key] = newEn[key]
+           
+    def EnemySizeMatch(self, oldEn, newEn, multDict): # Makes big enemies in boss fights smaller
+        '''Enemies that are replaced will have that enemy attempt to match the size of the original'''
+        defMult = 1
+        defScale = 100
+        minScale = 10
+        
+        newSize = newEn["ChrSize"]
+        oldSize = oldEn["ChrSize"]
+
+        if (oldSize, newSize) in multDict:
+            newMult = multDict[(oldSize, newSize)]
+        elif (newSize, oldSize) in multDict:
+            newMult = (1/multDict[(newSize, oldSize)])
+        else:
+            newMult = 1
             
+        newEn["Scale"] = max(int(defScale * newMult), minScale) 
+        
     def ActTypeFix(self, newEnemy, oldEnemy): 
         '''Changes enemies act types to accommodate random spawn locations'''
         oldRSC = self.FindRSC(oldEnemy)
         newRSC = self.FindRSC(newEnemy)
         
+        actKeysList = []
+        for key in self.actKeys:
+            actKeysList.append((key, oldRSC[key]))
+        
         if oldRSC["ActType"] != newRSC["ActType"]:  
-            self.ChangeStats([newEnemy], [("ActType", oldRSC["ActType"]), ("FlyHeight", oldRSC["FlyHeight"])])
+            self.ChangeStats([newEnemy], actKeysList)
     
     def CreateRandomEnemy(self, StaticEnemyData:list[EnemyGroup]):
         '''Returns a random enemy using weights from the groups generated'''

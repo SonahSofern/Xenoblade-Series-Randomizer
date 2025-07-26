@@ -11,7 +11,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
     SoloFightViolations = GetSoloFightViolations()
     soloFightIDs = [179, 182, 258, 260, 262, 256, 604]
     ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'Detects', 'SearchRange', 'SearchAngle', 'SearchRadius', 'BatInterval', 'BatArea', 'BatAreaType', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev']
-    
+    actKeys = ["FlyHeight", "ActType"]
     with open("XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
         with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
             with open("XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as rscFile:
@@ -19,7 +19,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                 rscData = json.load(rscFile)
                 eneData = json.load(eneFile)
                 
-                eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, permanentBandaids=[lambda: EarthBreathNerf(), lambda: AeshmaCoreHPNerf()])
+                eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, permanentBandaids=[lambda: EarthBreathNerf(), lambda: AeshmaCoreHPNerf()], actKeys=actKeys)
                 
                 if StaticEnemyData == []:
                     StaticEnemyData = eRando.GenEnemyData()
@@ -35,7 +35,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                     if Options.BossEnemyOption_Group.GetState():
                         eRando.BalanceFight(oldEn, newEn, GroupFightIDs, GroupFightViolations) 
                         
-                    EnemySizeMatch(oldEn, newEn)
+                    EnemySizeHelper(oldEn, newEn, eRando)
                     CloneEnemiesDefeatCondition(oldEn, newEn) 
                     
                     eRando.ActTypeFix(newEn, oldEn)
@@ -45,7 +45,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                         for enBlade in eRando.arrangeData["rows"]:
                             if enBlade['$id'] == newEn['EnemyBladeID']:
                                 eRando.ActTypeFix(enBlade, oldEn) # Because there is only 1 blade referenced for each enemy we have to create new blades (Since blades are not referenced in gimmick files it is fine)
-                                EnemySizeMatch(oldEn, enBlade)
+                                EnemySizeHelper(oldEn, enBlade, eRando)
                                 break
                             
                     AionRoomFix(oldEn, newEn, eRando) 
@@ -61,40 +61,25 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                 JSONParser.CloseFile(eRando.paramData, paramFile)
                 JSONParser.CloseFile(eRando.rscData, rscFile)
 
-def EnemySizeMatch(oldEn, newEn): # Makes big enemies in boss fights smaller
-    '''Enemies that are replaced will have that enemy attempt to match the size of the original'''
-    
+def CreateBlade():
+    pass
+
+def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     Massive = 3
     Large = 2
     Normal = 1
     Small = 0
     
-    defMult = 1
-    minScale = 10
-    
     multDict = {
-        (Massive, Large): 2,
+        (Massive, Large): 4,
         (Massive, Normal): 10,
         (Massive, Small): 15,
-        (Large, Massive): 0.3,
         (Large, Normal): 2,
-        (Large, Small): 5,
-        (Normal, Massive): 0.1,
-        (Normal, Large): 0.5,
-        (Normal, Small): 2,
-        (Small, Massive): 0.05,
-        (Small, Large): 0.2,
-        (Small, Normal): 0.7
+        (Large, Small): 3,
+        (Normal, Small): 1.5,
+    
     }
-    
-    newSize = newEn["ChrSize"]
-    oldSize = oldEn["ChrSize"]
-    
-    newMult = multDict.get((oldSize, newSize),defMult)
-    
-    newEn["Scale"] = max(int(newEn["Scale"] * newMult), minScale)
-    
-
+    eRando.EnemySizeMatch(oldEn, newEn, multDict)
 
 def Bandaids(eneData, isBoss, eRando):
     '''Bandaids intented to be ran once'''
