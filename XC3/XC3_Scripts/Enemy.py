@@ -81,8 +81,8 @@ def GetGroupFightIDs():
 def IntroFightBalances(eRando:Enemy.EnemyRandomizer):
     introFights = [449, 450, 451, 452, 453, 454, 455]
     bossIntroFights = [456]
-    eRando.ChangeStats(introFights, [("StRevHp", 20)])
-    eRando.ChangeStats(bossIntroFights, [("StRevHp", 50)])
+    eRando.ChangeStats(introFights, [("StRevHp", 5)])
+    eRando.ChangeStats(bossIntroFights, [("StRevHp", 10)])
 
 def Bandaids(isBoss, eRando):
     IntroFightBalances(eRando)

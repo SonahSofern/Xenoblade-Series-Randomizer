@@ -150,13 +150,16 @@ class EnemyRandomizer():
            
     def EnemySizeMatch(self, oldEn, newEn, keysList, multDict): # Makes big enemies in boss fights smaller
         '''Enemies that are replaced will have that enemy attempt to match the size of the original'''
+        newSize = newEn["ChrSize"]
+        oldSize = oldEn["ChrSize"]
+        
+        if newSize == oldSize:
+            return
+
         defMult = 1
         defScale = 100
         minScale = 10
         
-        newSize = newEn["ChrSize"]
-        oldSize = oldEn["ChrSize"]
-
         if (oldSize, newSize) in multDict:
             newMult = multDict[(oldSize, newSize)]
         elif (newSize, oldSize) in multDict:
@@ -223,6 +226,6 @@ class EnemyRandomizer():
             newParam[self.rscKey] = newRSCID
             self.paramData["rows"].append(newParam)
             self.rscData["rows"].append(newRSC)
-            break
+
 
                 
