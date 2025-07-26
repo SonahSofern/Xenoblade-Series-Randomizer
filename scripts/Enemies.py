@@ -42,7 +42,7 @@ class Violation:
 
 
 class EnemyRandomizer():
-    def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, scaleKey = "Scale"):
+    def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, scaleKey = "Scale", permanentBandaids = []):
         # Enemy Groups
         self.NormalIDs = NormalIDs
         self.UniqueIDs = UniqueIDs
@@ -69,12 +69,16 @@ class EnemyRandomizer():
         self.UniqueGroup = EnemyGroup()
         self.BossGroup = EnemyGroup()
         self.SuperbossGroup = EnemyGroup()
+        
+        self.permanentBandaids = permanentBandaids
   
     def isBadEnemy(self, en):
         if en["$id"] not in self.NormalIDs + self.UniqueIDs + self.BossIDs + self.SuperbossIDs:
             return True
         
     def GenEnemyData(self):
+        for aid in self.permanentBandaids:
+            aid()
         '''Creates the data in a nested list if it does not already exist, this is only to be copied from never altered'''
         for en in self.arrangeData["rows"]:
             if self.isBadEnemy(en):
@@ -197,26 +201,4 @@ class EnemyRandomizer():
             self.rscData["rows"].append(newRSC)
             break
 
-    def BigEnemyBossFightSizeFix(self, oldEn, newEn): # Makes big enemies in boss fights smaller
-        if oldEn["$id"] not in self.BossIDs:
-            return
-        UltraFauna = 5
-        Huge = 4
-        Massive = 3
-        Large = 2
-        minScale = 25
-        
-        newSize = newEn["ChrSize"]
-        
-        if newSize == Large:
-            scaleMult = .6
-        elif ((newSize == Massive) or (newSize == Huge)):
-            scaleMult = .25
-        elif newSize == UltraFauna:
-            scaleMult = .1
-        elif newEn["Scale"] >= 200: # Some enemies are scaled up even if they arent normally gigantic
-            scaleMult = .5
-        else:
-            return
-        newEn["Scale"] = max(int(newEn["Scale"] * scaleMult), minScale)
                 

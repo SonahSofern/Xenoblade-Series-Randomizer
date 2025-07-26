@@ -32,7 +32,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                     newEn = eRando.CreateRandomEnemy(StaticEnemyData)
                 
                     # eRando.ActTypeFix(newEn, en)
-                    eRando.BigEnemyBossFightSizeFix(en, newEn)
+                    eRando.EnemySizeMatch(en, newEn)
                     eRando.CopyKeys(en, newEn, ignoreKeys)
                         
                 for group in StaticEnemyData:

@@ -29,9 +29,6 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                 
                 if StaticEnemyData == []:
                     StaticEnemyData = eRando.GenEnemyData()
-                    Bandaids(eneData)
-                    if isBoss.GetState():
-                        IntroFightBalances(eRando)
                 
                 for en in eneData["rows"]:
                     if eRando.FilterEnemies(en, targetGroup):
@@ -44,12 +41,14 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                     if Options.BossEnemyOption_GroupFights.GetState():
                         eRando.BalanceFight(en, newEn, GroupFightIDs, GroupFightViolations)
                         
-                    eRando.BigEnemyBossFightSizeFix(en, newEn)
+                    eRando.EnemySizeMatch(en, newEn)
                     
                     eRando.CopyKeys(en, newEn, ignoreKeys)
                         
                 for group in StaticEnemyData:
                     group.RefreshCurrentGroup()
+                
+                Bandaids(isBoss, eRando)
                 
                 JSONParser.CloseFile(eneData, eneFile)
                 JSONParser.CloseFile(paramData, paramFile)
@@ -64,8 +63,9 @@ def GetGroupFightIDs():
 def IntroFightBalances(eRando):
     pass
 
-def Bandaids(eneData):
-    pass
+def Bandaids(isBoss, eRando):
+    if isBoss.GetState():
+        IntroFightBalances(eRando)
     
 def EnemyDesc(name):
     pass
