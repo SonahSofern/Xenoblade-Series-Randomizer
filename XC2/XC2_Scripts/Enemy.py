@@ -9,7 +9,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
     GroupFightViolations = GetGroupFightViolations()
     GroupFightIDs = GetGroupFightIDs()
     SoloFightViolations = GetSoloFightViolations()
-    soloFightIDs = [179, 182, 258, 260, 262, 256, 604]
+    soloFightIDs = [179, 182, 184, 185, 186, 187, 189, 190, 258, 260, 262, 256, 604] # Includes both 1 and 2 person party fights
     ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'Detects', 'SearchRange', 'SearchAngle', 'SearchRadius', 'BatInterval', 'BatArea', 'BatAreaType', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev']
     actKeys = ["FlyHeight", "ActType"]
     with open("XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
@@ -69,7 +69,7 @@ def CreateBlade(enBlade, oldEn, newEn, eRando:e.EnemyRandomizer):
     eRando.ActTypeFix(newBlade, oldEn) # Because there is only 1 blade referenced for each enemy we have to create new blades (Since blades are not referenced in gimmick files it is fine)
     EnemySizeHelper(oldEn, newBlade, eRando)
 
-def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
+def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer): # Probably want to keep enemy scale of original in future
     Massive = 3
     Large = 2
     Normal = 1
@@ -77,12 +77,11 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     
     multDict = {
         (Massive, Large): 4,
-        (Massive, Normal): 10,
-        (Massive, Small): 15,
+        (Massive, Normal): 6,
+        (Massive, Small): 8,
         (Large, Normal): 2,
         (Large, Small): 3,
         (Normal, Small): 1.5,
-    
     }
     eRando.EnemySizeMatch(oldEn, newEn, multDict)
 
