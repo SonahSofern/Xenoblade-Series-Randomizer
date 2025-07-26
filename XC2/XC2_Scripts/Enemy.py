@@ -44,8 +44,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                     if newEn["EnemyBladeID"] != 0:
                         for enBlade in eRando.arrangeData["rows"]:
                             if enBlade['$id'] == newEn['EnemyBladeID']:
-                                eRando.ActTypeFix(enBlade, oldEn) # Because there is only 1 blade referenced for each enemy we have to create new blades (Since blades are not referenced in gimmick files it is fine)
-                                EnemySizeHelper(oldEn, enBlade, eRando)
+                                CreateBlade(enBlade, oldEn, newEn, eRando)
                                 break
                             
                     AionRoomFix(oldEn, newEn, eRando) 
@@ -61,8 +60,14 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                 JSONParser.CloseFile(eRando.paramData, paramFile)
                 JSONParser.CloseFile(eRando.rscData, rscFile)
 
-def CreateBlade():
-    pass
+def CreateBlade(enBlade, oldEn, newEn, eRando:e.EnemyRandomizer):
+    newBlade = copy.deepcopy(enBlade)
+    newID =  len(eRando.arrangeData["rows"]) + 1
+    newBlade["$id"] = newID
+    eRando.arrangeData["rows"].append(newBlade)
+    newEn["EnemyBladeID"] = newID
+    eRando.ActTypeFix(newBlade, oldEn) # Because there is only 1 blade referenced for each enemy we have to create new blades (Since blades are not referenced in gimmick files it is fine)
+    EnemySizeHelper(oldEn, newBlade, eRando)
 
 def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     Massive = 3
