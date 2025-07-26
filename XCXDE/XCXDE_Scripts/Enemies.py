@@ -29,7 +29,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                     if eRando.FilterEnemies(en, targetGroup):
                         continue 
                     
-                    newEn = eRando.GetRandomEnemy(StaticEnemyData)
+                    newEn = eRando.CreateRandomEnemy(StaticEnemyData)
                 
                     # eRando.ActTypeFix(newEn, en)
                     eRando.BigEnemyBossFightSizeFix(en, newEn)

@@ -6,7 +6,7 @@ from tkinter.font import Font
 Game = "" # Used to tell what option goes to what games tab
 
 class Option():
-    def __init__(self, _name:str, _tab, _desc:str, _commands:list = [], defState = False, prio = 50,hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False):
+    def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", _commands:list = [], defState = False, prio = 50,hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False):
         # Objects
         self.descObj = None
         self.spinBoxObj = None

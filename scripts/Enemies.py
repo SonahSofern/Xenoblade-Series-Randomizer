@@ -12,7 +12,7 @@ class EnemyGroup():
     def SelectRandomMember(self):
         en = random.choice(self.currentGroup)
         self.RemoveMember(en)
-        return en
+        return copy.deepcopy(en)
         
     def RemoveMember(self, en):
         self.currentGroup.remove(en)
@@ -37,7 +37,7 @@ class Violation:
             mult = 1.25
         levelCap = max(int(enemy["Lv"] * mult), 1)
         newLv = max(enemy["Lv"] + self.lvDiff, levelCap)
-        print(f"Resolved violation from level {enemy["Lv"]} to level: {newLv}")
+        # print(f"Resolved violation from level {enemy["Lv"]} to level: {newLv}")
         enemy["Lv"] = newLv
 
 
@@ -105,7 +105,7 @@ class EnemyRandomizer():
             weights[3] = self.isSuperboss.GetSpinbox()
         return weights
 
-    def BalanceFight(self, oldEn, newEn, fightIDs, violationList):
+    def BalanceFight(self, oldEn, newEn, fightIDs, violationList:list[Violation]):
         if oldEn["$id"] not in fightIDs:
             return
         for vio in violationList:
@@ -151,20 +151,28 @@ class EnemyRandomizer():
         if oldRSC["ActType"] != newRSC["ActType"]:  
             self.ChangeStats([newEnemy], [("ActType", oldRSC["ActType"]), ("FlyHeight", oldRSC["FlyHeight"])])
     
-    def GetRandomEnemy(self, StaticEnemyData):
+    def CreateRandomEnemy(self, StaticEnemyData:list[EnemyGroup]):
+        '''Returns a random enemy using weights from the groups generated'''
         newEn = random.choices(StaticEnemyData, self.GenWeights())[0].SelectRandomMember()
         return newEn
        
-    def ChangeStats(self, targetIDs = [], keyVal = []):
+    def ChangeStats(self, targetEn = [], keyVal = []):
         """
         Allows changing the stats of an individual enemy ID in EnArrange by creating new EnParam and RSC_En for that enemy.
         Args:
-            targetIDs (list[int]): The IDs from EnArrange.
+            targetIDs (list[int]): The IDs from EnArrange OR an enemy dictionary.
             keys (list[tuple]): The keys and their new value in parameters or resource files to change.
         """  
-        for en in self.arrangeData["rows"]:
-            if en["$id"] not in targetIDs:
-                continue
+        handledTargetEn = []
+        for target in targetEn:
+            if isinstance(target, dict):
+                handledTargetEn.append(target)
+            else:
+                for en in self.arrangeData["rows"]:
+                    if en["$id"] in targetEn:
+                        handledTargetEn.append(en)
+        
+        for en in handledTargetEn:
             param = self.FindParam(en)
             newParam = copy.deepcopy(param)
             newParamID =  len(self.paramData["rows"]) + 1
@@ -183,11 +191,11 @@ class EnemyRandomizer():
                 if key in newRSC:
                     newRSC[key] = val
 
-            en["ParamID"] = newParamID
-            newParam["ResourceID"] = newRSCID
+            en[self.paramKey] = newParamID
+            newParam[self.rscKey] = newRSCID
             self.paramData["rows"].append(newParam)
             self.rscData["rows"].append(newRSC)
-                    
+            break
 
     def BigEnemyBossFightSizeFix(self, oldEn, newEn): # Makes big enemies in boss fights smaller
         if oldEn["$id"] not in self.BossIDs:
