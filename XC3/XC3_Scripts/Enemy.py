@@ -39,7 +39,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                     
                     newEn = eRando.CreateRandomEnemy(StaticEnemyData)
                 
-                    eRando.ActTypeFix(newEn, en)
+                    eRando.ActTypeFix(newEn, en) # Flying Enemies and some enemies in Erythia will still fall despite act type fix
                     
                     if Options.BossEnemyOption_GroupFights.GetState():
                         eRando.BalanceFight(en, newEn, GroupFightIDs, GroupFightViolations)

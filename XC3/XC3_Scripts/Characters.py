@@ -2,7 +2,7 @@
 import json, random
 from scripts import JSONParser, Helper, PopupDescriptions
 
-def CharacterSwaps(): # For some reason visually the game wont load the entire hud until aftyer the first boss in the intro but thats fine
+def CharacterSwaps():
     with open("XC3/JsonOutputs/sys/CHR_PC.json", 'r+', encoding='utf-8') as charFile: # This method didnt work cant change motion and also icons (probably should just use the quest that unlocks them, swapping it to unlocking another)
         charData = json.load(charFile)
         ignoreChar = [1,2,3,4,5,6,30,31,28,14,9,34,35,36,37,38,39,40,41,42,43]

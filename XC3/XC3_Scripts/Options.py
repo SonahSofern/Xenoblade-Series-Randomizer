@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XC3.XC3_Scripts import Shortcuts, Skills, Characters, QOL as Quality, Enemy , IDs
+from XC3.XC3_Scripts import Shortcuts, Skills, Characters, QOL as Quality, Enemy , IDs, Enhancements
 scripts.Interactables.Game = "XC3" 
 
 General = 1
