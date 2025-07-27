@@ -16,8 +16,10 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
     global StaticEnemyData
     GroupFightViolations = GetGroupFightViolations()
     GroupFightIDs = GetGroupFightIDs()
+    Aggro = ["<AB4BA3D5>", "<1104E9C5>", "<B5C5F3B3>"]
     RetryBattleLandmark = "<9A220E4D>"
-    ignoreKeys = ["$id", "ID", "Level", "Scale", "EliteScale", "IdMove", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "IdMove", "FlgNoVanish", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"]
+    PostBattleConqueredPopup = "CatMain" # Currently not using it has weird effects fights take a long time to end after enemy goes down without it happens eithery way with UMs so something is wrong with UMS
+    ignoreKeys = ["$id", "ID", PostBattleConqueredPopup,  "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "IdMove", "FlgNoVanish", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"] + Aggro
     actKeys = ["ActType", "FlyHeight", "SwimHeight"]
     with open("XC3/JsonOutputs/fld/FLD_EnemyData.json", 'r+', encoding='utf-8') as eneFile:
         with open("XC3/JsonOutputs/btl/BTL_Enemy.json", 'r+', encoding='utf-8') as paramFile:
@@ -49,7 +51,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                 for group in StaticEnemyData:
                     group.RefreshCurrentGroup()
                 
-                Bandaids(isBoss, eRando)
+                Bandaids(eRando)
                 
                 JSONParser.CloseFile(eneData, eneFile)
                 JSONParser.CloseFile(paramData, paramFile)
@@ -80,11 +82,11 @@ def GetGroupFightIDs():
 
 def IntroFightBalances(eRando:Enemy.EnemyRandomizer):
     introFights = [449, 450, 451, 452, 453, 454, 455]
-    bossIntroFights = [456]
+    bossIntroFights = [456, 457]
     eRando.ChangeStats(introFights, [("StRevHp", 5)])
-    eRando.ChangeStats(bossIntroFights, [("StRevHp", 10)])
+    eRando.ChangeStats(bossIntroFights, [("StRevHp", 20)])
 
-def Bandaids(isBoss, eRando):
+def Bandaids(eRando):
     IntroFightBalances(eRando)
     
 def EnemyDesc(name):

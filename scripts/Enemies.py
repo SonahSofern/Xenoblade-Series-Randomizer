@@ -159,6 +159,8 @@ class EnemyRandomizer():
         defMult = 1
         defScale = 100
         minScale = 10
+        if oldEn["$id"] == 455:
+            pass
         
         if (oldSize, newSize) in multDict:
             newMult = multDict[(oldSize, newSize)]
