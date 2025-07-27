@@ -42,7 +42,7 @@ class Violation:
 
 
 class EnemyRandomizer():
-    def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, scaleKey = "Scale", permanentBandaids = [], actKeys = []):
+    def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, scaleKey = "Scale", permanentBandaids = [], actKeys = [], duringRandomizationBandaids = []):
         # Enemy Groups
         self.NormalIDs = NormalIDs
         self.UniqueIDs = UniqueIDs

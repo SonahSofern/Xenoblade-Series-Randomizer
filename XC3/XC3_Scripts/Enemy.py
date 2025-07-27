@@ -16,7 +16,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
     global StaticEnemyData
     GroupFightViolations = GetGroupFightViolations()
     GroupFightIDs = GetGroupFightIDs()
-    Aggro = ["<AB4BA3D5>", "<1104E9C5>", "<B5C5F3B3>"]
+    Aggro = ["<AB4BA3D5>", "<1104E9C5>", "<B5C5F3B3>", "<EC666A80>", "<64251F47>", "<3B6DFBC4>"]
     RetryBattleLandmark = "<9A220E4D>"
     PostBattleConqueredPopup = "CatMain" # Currently not using it has weird effects fights take a long time to end after enemy goes down without it happens eithery way with UMs so something is wrong with UMS
     ignoreKeys = ["$id", "ID", PostBattleConqueredPopup,  "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "IdMove", "FlgNoVanish", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"] + Aggro

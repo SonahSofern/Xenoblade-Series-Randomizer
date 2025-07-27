@@ -214,4 +214,14 @@ def AionRoomFix(origEn, newEn, eRando:e.EnemyRandomizer): # Aion sits really far
         eRando.ChangeStats([newEn], [("FlyHeight", 500)])   
  
 def EnemyDesc(name):
-    pass
+    EnemyRandoDesc = PopupDescriptions.Description()
+    EnemyRandoDesc.Header(name)
+    EnemyRandoDesc.Text(f"{name} are the target group to be randomized.")
+    EnemyRandoDesc.Text(f"The suboption for those categories are what those enemies will be randomized into.")
+    EnemyRandoDesc.Text(f"The spinbox for each option is the weight of that category.")
+    if name == Options.BossEnemyOption.name:
+        EnemyRandoDesc.Header(Options.BossEnemyOption_Solo.name)
+        EnemyRandoDesc.Text("This will balance required fights that are fought solo, by adjusting the levels of the encounter. This is recommended for new players.")
+        EnemyRandoDesc.Header(Options.BossEnemyOption_Group.name)
+        EnemyRandoDesc.Text("This will balance required fights that are large groups of enemies, by adjusting the levels of the encounter if an enemy is strong in groups. This is recommended for new players.")
+    return EnemyRandoDesc
