@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XC3.XC3_Scripts import Shortcuts, Skills, Characters, QOL as Quality, Enemy , IDs, Enhancements
+from XC3.XC3_Scripts import Shortcuts, Skills, Heroes, QOL as Quality, Enemy , IDs, Enhancements
 scripts.Interactables.Game = "XC3" 
 
 General = 1
@@ -18,6 +18,9 @@ Tabs = {
 }
 
 Accessories = Option("Accessories", General, "Randomizes the effects of Accessories")
+Accessories_Unused = SubOption("Unused Effects", Accessories)
+GemsOption = Option("Gems", General, "Randomizes the effects of gems.")
+GemsOption_Unused = SubOption("Unused Gems", GemsOption)
 
 # CharactersOption = Option("Heroes", Character, "Randomizes heroes", [lambda: Characters.CharacterSwaps()])
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsters, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption)], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
@@ -40,7 +43,9 @@ BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, hasSpinBox
 BossEnemyOption_GroupFights = SubOption("Balance Group Fights", BossEnemyOption)
 
 SkillOptions = Option("Class Skills", Character, "Randomizes class skills", [lambda: Skills.SkillRando()], hasSpinBox=True)
-GemsOption = Option("Gems", Character, "Randomizes the effects of gems.")
+SkillOptions_Unused = SubOption("Unused Skills", SkillOptions)
+PlayerArtsOption = Option("Arts", Character) # Probably only want to add extra effects not create entirely new arts like 2 and alter already exisiting effects strengths
+HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])
 
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_Tutorials = SubOption("Tutorial Skip", ShortcutsOption, [lambda: Shortcuts.TutorialSkips()])

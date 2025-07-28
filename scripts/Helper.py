@@ -1,4 +1,4 @@
-import json, random, time
+import json, random, time, copy
 from tkinter import filedialog
 import tkinter as tk
 
@@ -212,3 +212,40 @@ def TheTunneler(filepaths: list[str], rowvalues: list[int], inputheaders: list[s
     
     return tempholder2
     
+class RandomGroup():
+    def __init__(self, data):
+        self.originalGroup = []
+        self.currentGroup = []
+        self.GenData(data)
+    
+    def GenData(self, data):    
+        for item in data: # Build the list from the original data
+            self.originalGroup.append(copy.deepcopy(item))
+        self.currentGroup = copy.deepcopy(self.originalGroup)
+    
+    def AddNewData(self, data):
+        self.originalGroup.append(data)
+        self.currentGroup.append(data)
+    
+    def RefreshCurrentGroup(self):
+        self.currentGroup = copy.deepcopy(self.originalGroup)
+    
+    def SelectRandomMember(self):
+        en = random.choice(self.currentGroup)
+        self.RemoveMember(en)
+        return copy.deepcopy(en)
+    
+    def CopyKeys(self, item, chosenItem, ignoreKeys = []):
+        for key in item:
+            if key in ignoreKeys:
+                continue
+            item[key] = chosenItem[key]
+    
+    def FilterMember(self, target):
+        self.originalGroup.remove(target)
+        self.currentGroup.remove(target)
+    
+    def RemoveMember(self, en):
+        self.currentGroup.remove(en)
+        if self.currentGroup == []:
+            self.RefreshCurrentGroup()
