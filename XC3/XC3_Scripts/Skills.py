@@ -65,7 +65,7 @@ def AddNewSkill(skillList:Helper.RandomGroup, e:Enhancements.Enhancement):
       "UroProb2": 40,
       "UroProb3": 80,
       "Role": 0,
-      "Icon": e.icon,
+      "Icon": e.skillIcon,
       "SortNo": 0
     }
       
