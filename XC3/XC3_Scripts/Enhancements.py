@@ -1,17 +1,13 @@
 # Gems, Skills, Arts, Accessories, Archsage Gauntlet ↓
-    # {
-    #   "$id": 16,
-    #   "label": "<22D84240>",
-    #   "style": 79,
-    #   "name": "Increases Critical Rate by [ML:EnhanceParam paramtype=1 ]\npercentage points."
-    # },
+
 import json, random
 
+# Lists to be populated during randomization
 EnhancementsList = []
 ArtsEnhancementList = []
 AccessoryEnhancementList = []
 SkillEnhancementList = []
-
+GemEnhancementsList = []
 
 # Used for skills to choose icons for 
 M = 0 #Mixed/Misc
@@ -19,8 +15,10 @@ A = 1#atk
 H = 2#healer
 D = 3#defender
 
+defaultSkillIcon = -1
+
 class Enhancement:
-    def __init__(self, name, effID, captionID, field3E70C175, roleType = M, param1 = [], param2 = [], skillIcon = 0, isArts = True, isSkill = True, isAccessory = True):
+    def __init__(self, name, effID, captionID, field3E70C175, roleType = M, param1 = [], param2 = [], skillIcon = defaultSkillIcon, isArts = True, isGem = True, isAccessory = True):
         self.name = name
         self.effID = effID
         self.captionID = captionID
@@ -33,8 +31,10 @@ class Enhancement:
             ArtsEnhancementList.append(self)
         if isAccessory:
             AccessoryEnhancementList.append(self)
-        if isSkill:
+        if skillIcon != defaultSkillIcon:
             SkillEnhancementList.append(self)
+        if isGem:
+            GemEnhancementsList.append(self)
         EnhancementsList.append(self)
     
     def CreateEffect(self, BTL_EnhanceData, param1 = None, param2 = None):
@@ -85,441 +85,433 @@ with open(f"XC3/JsonOutputs/btl/BTL_Enhance.json", 'r+', encoding='utf-8') as en
                     raw_id = enh["ID"]
                     # Keep only alphanumeric characters
                     clean_id = ''.join(c for c in raw_id if c.isalnum())
-                    print(f'{clean_id} = Enhancement("", {enh["EnhanceEffect"]}, {enh["Caption"]}, {enh["<3E70C175>"]}, Misc{param1}{param2}, icon=0)')
+                    print(f'Enhancement("", {enh["EnhanceEffect"]}, {enh["Caption"]}, {enh["<3E70C175>"]}, M{param1}{param2}, icon=0) # {raw_id}')
   
-
-                    
-MaxHPUp = Enhancement('Healthy', 1, 1, 1, D, [10,100], skillIcon=1)
-AttackUp = Enhancement('Strong', 2, 3, 1, A, [10,100], skillIcon=2)
-HealingUp = Enhancement('Medic', 3, 4, 1, H, [10,100], skillIcon=1)
-DexterityUp = Enhancement('Dextrous', 4, 5, 1, A, [10,100], skillIcon=8)
-AgilityUp = Enhancement('Agile', 5, 6, 1, D, [10,100], skillIcon=9)
-CriticalRateUp = Enhancement('Critical', 6, 7, 1, A, [10,100], skillIcon=10)
-PhysicalDefenseUp = Enhancement('Iron', 7, 8, 1, D, [10,50], skillIcon=6)
-EtherDefenseUp = Enhancement('Ether', 8, 9, 1, D, [10,50], skillIcon=7)
-BlockRateUp = Enhancement('Deflection', 9, 10, 1, D, [10,50], skillIcon=4)
-MaxHPPlus = Enhancement("Hearty", 10, 11, 1, D, [100,2000], skillIcon=38)
-AttackPlus = Enhancement("Strength", 11, 12, 1, A, [50,200], skillIcon=2)
-HealingPlus = Enhancement("Medical", 12, 13, 1, H, [50,200], skillIcon=1)
-DexterityPlus = Enhancement("Dextrous", 13, 14, 1, A, [50,200], skillIcon=8)
-AgilityPlus = Enhancement("Agile", 14, 15, 1, D, [20,100], skillIcon=9)
-CriticalRatePlus = Enhancement("Critical", 15, 16, 1, A, [10,60], skillIcon=10)
-PhysicalDefensePlus = Enhancement("Iron", 16, 17, 1, D, [10,50], skillIcon=6)
-EtherDefensePlus = Enhancement("Ether", 17, 18, 1, D, [10,50], skillIcon=7)
-BlockRatePlus = Enhancement("Blocker", 18, 19, 1, D, [10,40], skillIcon=4)
-SpeciesExpertTerrestrial = Enhancement("Terrestrial", 19, 0, 1, A, [0], [50,200], skillIcon=37)
-SpeciesExpertAquatic = Enhancement("Aquatic", 19, 0, 1, A, [1], [50,200], skillIcon=37)
-SpeciesExpertAerial = Enhancement("Aerial", 19, 0, 1, A, [2], [50,200], skillIcon=37)
-SpeciesExpertAgnus = Enhancement("Agnus", 19, 0, 1, A, [3], [50,200], skillIcon=37)
-SpeciesExpertMachines = Enhancement("Machine", 19, 0, 1, A, [6], [50,300], skillIcon=37)
-SpeciesExpertKeves = Enhancement("Keves", 19, 0, 1, A, [4], [50,200], skillIcon=37)
-DamageCounter = Enhancement("Counter", 21, 30, 1, D, [50,500], skillIcon=27)
-EvasionCounter = Enhancement("Reversal", 22, 31, 1, D, [50,500], skillIcon=27)
-AutoAttackHealSelf = Enhancement("Absorber", 23, 32, 1, H, [50,100], skillIcon=44)
-AutoAttackHealAllies = Enhancement("Absorber", 24, 36, 1, H, [50,100], [5,10], skillIcon=44)
-CriticalHitPlus = Enhancement("Exploit", 25, 38, 1, A, [20,150], skillIcon=10)
-DoubleAttack = Enhancement("Doublestrike", 26, 39, 1, A, [20,100], skillIcon=35)
-FrontAttack = Enhancement("Frontal", 27, 40, 1, A, [50,100], skillIcon=8)
-SideAttack = Enhancement("Blindside", 28, 42, 1, A, [50,200], skillIcon=8)
-BackAttack = Enhancement("Backstab", 29, 43, 1, A, [30,100], skillIcon=8)
-Toppled = Enhancement("Toppler", 30, 44, 1, A, [50,200], skillIcon=14)
-Launched = Enhancement("Volley", 31, 45, 1, A, [50,200], skillIcon=14)
-SmashEffectUp = Enhancement("Gravity", 32, 47, 1, A, [100,500], skillIcon=28)
-Dazed = Enhancement("Dazy", 33, 48, 1, A, [50,200], skillIcon=29)
-BurstEffectUp = Enhancement("Burst", 34, 49, 1, M, [100,500], skillIcon=49)
-Challenger = Enhancement("Bravery", 35, 50, 1, A, [50,150], skillIcon=42)
-Avenger = Enhancement("Avenger", 36, 51, 1, A, [50,200], skillIcon=2)
-Unblockable = Enhancement("Piercing", 37, 52, 1, A, [30,100], skillIcon=5)
-DamageUpHPLow = Enhancement("Desperation", 38, 54, 1, A, [30,60], [50,200], skillIcon=44)
-DamageUpHPHigh = Enhancement("Overwhelm", 39, 55, 1, A, [90,60], [50,150], skillIcon=13)
-KickStarter = Enhancement("Rush", 40, 57, 1, A, [30,90], [25,120], skillIcon=17)
-EnemyKODamageUp = Enhancement("Bloodbath", 41, 58, 1, A, [20,60], [250,500], skillIcon=42)
-BreakDurationUp = Enhancement("Breaker", 42, 59, 1, M, [100,300], skillIcon=39)
-ToppleDurationUp = Enhancement("Toppler", 43, 60, 1, M, [50,150], skillIcon=39)
-LaunchDurationUp = Enhancement("Airborne", 44, 61, 1, M, [50,150], skillIcon=39)
-DazeDurationUp = Enhancement("Concussive", 45, 62, 1, M, [50,150], skillIcon=39)
-AutoAttackUp = Enhancement("Auto", 46, 63, 1, A, [100,500], skillIcon=13)
-AutoAttackCriticalRateUp = Enhancement("Critical", 47, 64, 1, A, [100,500], skillIcon=13)
-AutoAttackAccuracyUp = Enhancement("Honed", 48, 65, 1, A, [100,500], skillIcon=8)
-Aggroed = Enhancement("Clash", 49, 66, 1, M, [50,200], skillIcon=37)
-Indoors = Enhancement("Indoor", 50, 67, 1, A, [50,200], skillIcon=2)
-Outdoors = Enhancement("Outdoor", 51, 68, 1, A, [50,150], skillIcon=2)
-BreakResistDown = Enhancement("Breaker", 52, 69, 1, M, [20,100], skillIcon=14)
-# SanguineFire = Enhancement("", 53, 70, 1, M, [], skillIcon=0)
-# 64C914AD = Enhancement("", 54, 71, 1, M, [], skillIcon=0)
-# 52EE5A17 = Enhancement("", 55, 72, 1, M, [], skillIcon=0)
-PerfectShield = Enhancement("Dream", 56, 73, 1, D, [20,80], skillIcon=46)
-PhysicalAbsorb = Enhancement("Absorber", 57, 74, 1, D, [20,80], skillIcon=46)
-EtherAbsorb = Enhancement("Absorber", 58, 75, 1, D, [20,80], skillIcon=46)
-AbsorbAwaken = Enhancement("Awaken", 59, 76, 1, D, [20,80], [4,10], isSkill=False, isAccessory=False)
-ShieldSpike = Enhancement("", 60, 77, 1, M, [], [], skillIcon=0)
-ReflectorShield = Enhancement("", 61, 78, 1, M, [], skillIcon=0)
-EvasionUpLowHP = Enhancement("", 62, 79, 1, M, [], [], skillIcon=0)
-EvasionUpMobile = Enhancement("", 63, 80, 1, M, [], skillIcon=0)
-EvasionUpStationary = Enhancement("", 64, 81, 1, M, [], skillIcon=0)
-EvasionUpArt = Enhancement("", 65, 82, 1, M, [], skillIcon=0)
-BlockRatePlusLowHP = Enhancement("", 66, 83, 1, M, [], [], skillIcon=0)
-FortitudeLowHP = Enhancement("", 67, 85, 1, M, [], [], skillIcon=0)
-C3E35259 = Enhancement("", 68, 86, 1, M, [], skillIcon=0)
-BreakResist = Enhancement("", 69, 87, 1, M, [], skillIcon=0)
-ToppleResist = Enhancement("", 70, 88, 1, M, [], skillIcon=0)
-LaunchResist = Enhancement("", 71, 89, 1, M, [], skillIcon=0)
-SmashResist = Enhancement("", 72, 90, 1, M, [], skillIcon=0)
-DazeResist = Enhancement("", 73, 91, 1, M, [], skillIcon=0)
-A7C9AAD4 = Enhancement("", 74, 92, 1, M, [], skillIcon=0)
-BlowdownResist = Enhancement("", 75, 93, 1, M, [], skillIcon=0)
-KnockbackResist = Enhancement("", 76, 94, 1, M, [], skillIcon=0)
-SlowerAutoAttackAggro = Enhancement("", 77, 95, 1, M, [], skillIcon=0)
-FasterAutoAttackAggro = Enhancement("", 78, 96, 1, M, [], skillIcon=0)
-SlowerArtsAggro = Enhancement("", 79, 97, 1, M, [], skillIcon=0)
-FasterArtsAggro = Enhancement("", 80, 98, 1, M, [], skillIcon=0)
-AggroReductionUp = Enhancement("", 81, 101, 1, M, [], skillIcon=0)
-AutoAggroUp = Enhancement("", 82, 102, 1, M, [], skillIcon=0)
-AggroStarter = Enhancement("", 83, 107, 1, M, [], skillIcon=0)
-FasterDamageAggro = Enhancement("", 84, 108, 1, M, [], skillIcon=0)
-D18934AB = Enhancement("", 85, 0, 1, M, [], skillIcon=0)
-RescueHPUpOther = Enhancement("", 86, 109, 1, M, [], skillIcon=0)
-ArtsHeal = Enhancement("", 87, 111, 1, M, [], [], skillIcon=0)
-HealingArtsUp = Enhancement("", 88, 112, 1, M, [], skillIcon=0)
-SlowerHealingAggro = Enhancement("", 89, 113, 1, M, [], skillIcon=0)
-HPRecoveryUp = Enhancement("", 90, 114, 1, M, [], skillIcon=0)
-DamageHealSelf = Enhancement("", 91, 115, 1, M, [], [], skillIcon=0)
-DamageHealAllies = Enhancement("", 92, 116, 1, M, [], [], skillIcon=0)
-CancelUp = Enhancement("", 93, 117, 1, M, [], skillIcon=0)
-Unbeatable = Enhancement("", 94, 119, 1, M, [], skillIcon=0)
-NightVision = Enhancement("", 95, 120, 1, M, [], skillIcon=0)
-SunlightEye = Enhancement("", 96, 121, 1, M, [], skillIcon=0)
-4943A920 = Enhancement("", 97, 0, 1, M, [], skillIcon=0)
-09F52558 = Enhancement("", 98, 0, 1, M, [], skillIcon=0)
-BuffEffectUp = Enhancement("", 99, 122, 1, M, [], skillIcon=0)
-LongerBuffTimers = Enhancement("", 100, 123, 1, M, [], skillIcon=0)
-DebuffEffectUp = Enhancement("", 101, 124, 1, M, [], skillIcon=0)
-LongerDebuffTimers = Enhancement("", 102, 125, 1, M, [], skillIcon=0)
-DebuffSuccessRatePlus = Enhancement("", 103, 126, 1, M, [], skillIcon=0)
-13BB4D7D = Enhancement("", 104, 127, 1, M, [], skillIcon=0)
-ChainGaugeUpCritical = Enhancement("", 105, 128, 1, M, [], skillIcon=0)
-ChainGaugeUpArt = Enhancement("", 106, 129, 1, M, [], skillIcon=0)
-EnemyCountDamageUp = Enhancement("", 107, 130, 1, M, [], [], skillIcon=0)
-RangedAttackRangeUp = Enhancement("", 108, 131, 1, M, [], skillIcon=0)
-KOHealAllies = Enhancement("", 109, 132, 1, M, [], skillIcon=0)
-FE200865 = Enhancement("", 110, 134, 1, M, [], skillIcon=0)
-AntiDeflection = Enhancement("", 111, 135, 1, M, skillIcon=0)
-AEE52010 = Enhancement("", 112, 0, 1, M, [], skillIcon=0)
-B05AB2EB = Enhancement("", 113, 0, 1, M, [], skillIcon=0)
-C4D784E6 = Enhancement("", 114, 136, 1, M, [], [], skillIcon=0)
-AccuracyEvasionUpAllies = Enhancement("", 115, 138, 1, M, [], [], skillIcon=0)
-554E9057 = Enhancement("", 116, 0, 1, M, [], [], skillIcon=0)
-SlowerAttackAggro = Enhancement("", 117, 139, 1, M, [], skillIcon=0)
-AllDefensesPlus = Enhancement("", 118, 140, 1, M, [], skillIcon=0)
-PerfectHitEvasion = Enhancement("", 119, 141, 1, M, [], skillIcon=0)
-Reflection = Enhancement("", 120, 142, 1, M, [], skillIcon=0)
-ToppledLaunched = Enhancement("", 121, 143, 1, M, [], skillIcon=0)
-1902ADDB = Enhancement("", 122, 0, 1, M, [], skillIcon=0)
-EnemyKOHealAllies = Enhancement("", 123, 144, 1, M, [], skillIcon=0)
-E48EE6DF = Enhancement("", 124, 0, 1, M, [], [], skillIcon=0)
-PowerUpDireBattle = Enhancement("", 125, 145, 1, M, [], [], skillIcon=0)
-2B78D893 = Enhancement("", 126, 0, 1, M, [], skillIcon=0)
-ResistComboReaction = Enhancement("", 127, 149, 1, M, [], skillIcon=0)
-UniqueBoss = Enhancement("", 128, 150, 1, M, [], skillIcon=0)
-ContinuousArts = Enhancement("", 129, 151, 1, M, [], skillIcon=0)
-PiercingAttacks = Enhancement("", 130, 152, 1, M, [], skillIcon=0)
-AutoAttackSpeedUp = Enhancement("", 131, 154, 1, M, [], skillIcon=0)
-34426628 = Enhancement("", 132, 156, 1, M, [], skillIcon=0)
-BB6A576F = Enhancement("", 133, 159, 1, M, [], skillIcon=0)
-RecoverRechargeCritical = Enhancement("", 134, 160, 1, M, [], skillIcon=0)
-RegenerationLowHP = Enhancement("", 135, 161, 1, M, [], [], skillIcon=0)
-DamageUpTalentArt = Enhancement("", 136, 162, 1, M, [], [], skillIcon=0)
-DamageCounterReaction = Enhancement("", 137, 163, 1, M, [], [], skillIcon=0)
-8220967D = Enhancement("", 138, 0, 1, M, skillIcon=0)
-BiggerCancelWindow = Enhancement("", 139, 164, 1, M, [], skillIcon=0)
-3F363F42 = Enhancement("", 140, 165, 1, M, [], skillIcon=0)
-0C909AAE = Enhancement("", 141, 167, 1, M, [], skillIcon=0)
-RangedEvasion = Enhancement("", 142, 168, 1, M, [], skillIcon=0)
-HoldAggroSelfKO = Enhancement("", 143, 169, 1, M, [], skillIcon=0)
-DamageUpAllyKO = Enhancement("", 144, 170, 1, M, [], skillIcon=0)
-4724B11C = Enhancement("", 145, 0, 1, M, [], [], skillIcon=0)
-1DDE9148 = Enhancement("", 146, 171, 1, M, [], [], skillIcon=0)
-AttackShift = Enhancement("", 147, 172, 1, M, [], [], skillIcon=0)
-DefenseShift = Enhancement("", 148, 173, 1, M, [], [], skillIcon=0)
-DebuffResistAll = Enhancement("", 149, 174, 1, M, [], skillIcon=0)
-ShorterDebuffTimers = Enhancement("", 150, 175, 1, M, [], skillIcon=0)
-DamageUpCancel = Enhancement("", 151, 176, 1, M, [], skillIcon=0)
-CE6DB1B1 = Enhancement("", 152, 0, 1, M, [], skillIcon=0)
-SoulHacking = Enhancement("", 153, 177, 1, M, skillIcon=0)
-1DD0CB32 = Enhancement("", 154, 178, 1, M, [], skillIcon=0)
-0D99005B = Enhancement("", 155, 0, 1, M, [], skillIcon=0)
-EA4FE79F = Enhancement("", 156, 0, 1, M, [], skillIcon=0)
-7F54F93E = Enhancement("", 157, 0, 1, M, [], skillIcon=0)
-C719FE0D = Enhancement("", 158, 179, 1, M, [], skillIcon=0)
-1C89FC37 = Enhancement("", 159, 180, 1, M, [], skillIcon=0)
-621F1009 = Enhancement("", 160, 181, 1, M, [], skillIcon=0)
-DamageUpEnemyArts = Enhancement("", 161, 182, 1, M, [], skillIcon=0)
-3C2BDC90 = Enhancement("", 162, 183, 1, M, [], skillIcon=0)
-AccuracyUpEnemyArts = Enhancement("", 163, 184, 1, M, [], skillIcon=0)
-0282C4D5 = Enhancement("", 164, 185, 1, M, [], skillIcon=0)
-WoundedEnemy = Enhancement("", 165, 186, 1, M, [], [], skillIcon=0)
-AccuracyUpMiss = Enhancement("", 166, 189, 1, M, [], skillIcon=0)
-DebuffedEnemy = Enhancement("", 167, 190, 1, M, [], [], skillIcon=0)
-ED6CBA7D = Enhancement("", 168, 0, 1, M, [], skillIcon=0)
-3F91CECC = Enhancement("", 169, 193, 1, M, [], skillIcon=0)
-E7C12D95 = Enhancement("", 170, 194, 1, M, [], skillIcon=0)
-C29024C3 = Enhancement("", 171, 0, 1, M, [], skillIcon=0)
-DamageBombSelfKO = Enhancement("", 172, 197, 1, M, [], [], skillIcon=0)
-PartyRechargeSelfKO = Enhancement("", 173, 198, 1, M, [], skillIcon=0)
-48F464E4 = Enhancement("", 174, 0, 1, M, [], [], skillIcon=0)
-PerfectHitCancel = Enhancement("", 175, 199, 1, M, skillIcon=0)
-A8B4FF50 = Enhancement("", 176, 0, 1, M, [], [], skillIcon=0)
-FortitudeArtDuration = Enhancement("", 177, 200, 1, M, [], skillIcon=0)
-DamageUpFullRecharge = Enhancement("", 178, 202, 1, M, [], skillIcon=0)
-0007E213 = Enhancement("", 179, 203, 1, M, [], skillIcon=0)
-PersistentDamageUp = Enhancement("", 180, 0, 1, M, [], [], skillIcon=0)
-SequentialAutoAttackUp = Enhancement("", 181, 206, 1, M, [], [], skillIcon=0)
-StanceDurationUp = Enhancement("", 182, 210, 1, M, [], skillIcon=0)
-BuffHeal = Enhancement("", 183, 211, 1, M, [], skillIcon=0)
-CF9BFB20 = Enhancement("", 184, 0, 1, M, [], [], skillIcon=0)
-TenderAutoAttack = Enhancement("", 185, 215, 1, M, [], skillIcon=0)
-TenderArts = Enhancement("", 186, 216, 1, M, [], skillIcon=0)
-FusionArtsUp = Enhancement("", 187, 217, 1, M, [], skillIcon=0)
-27C116CB = Enhancement("", 188, 218, 1, M, [], [], skillIcon=0)
-AggroReduceUpTargeted = Enhancement("", 189, 219, 1, M, [], skillIcon=0)
-DrawAggroEvasion = Enhancement("", 190, 220, 1, M, [], skillIcon=0)
-IncrementalDamageUp = Enhancement("", 191, 223, 1, M, [], skillIcon=0)
-PreemptiveBuff = Enhancement("", 192, 0, 1, M, [], [], skillIcon=0)
-5EA32440 = Enhancement("", 193, 225, 1, M, skillIcon=0)
-DamageUpBuffNo = Enhancement("", 194, 226, 1, M, [], skillIcon=0)
-AerialRecovery = Enhancement("", 195, 227, 1, M, [], [], skillIcon=0)
-RiskyRechargeUp = Enhancement("", 196, 229, 1, M, [], skillIcon=0)
-DamageUpElemDischarge = Enhancement("", 197, 230, 1, M, [], skillIcon=0)
-EXDamageBaseAttack = Enhancement("", 198, 231, 1, M, [], [], skillIcon=0)
-EXDamageBaseHealing = Enhancement("", 199, 232, 1, M, [], [], skillIcon=0)
-59C16213 = Enhancement("", 200, 233, 1, M, [], [], skillIcon=0)
-3BFA4DC7 = Enhancement("", 201, 0, 1, M, [], [], skillIcon=0)
-DamageUpAllyHeal = Enhancement("", 202, 0, 1, M, [], skillIcon=0)
-PreventAttackNearbyAllies = Enhancement("", 203, 235, 1, M, [], [], skillIcon=0)
-FieldDurationUp = Enhancement("", 204, 236, 1, M, [], skillIcon=0)
-FieldDamageUp = Enhancement("", 205, 237, 1, M, [], skillIcon=0)
-FieldDissolutionDmgUp = Enhancement("", 206, 238, 1, M, [], skillIcon=0)
-3C8F6C0E = Enhancement("", 207, 239, 1, M, [], skillIcon=0)
-EnableRescue = Enhancement("", 208, 241, 1, M, skillIcon=0)
-EvasionChance = Enhancement("", 209, 242, 1, M, [], skillIcon=0)
-PhysicalDamageUp = Enhancement("", 210, 243, 1, M, [], skillIcon=0)
-EtherDamageUp = Enhancement("", 211, 244, 1, M, [], skillIcon=0)
-ReactionSuccessUp = Enhancement("", 212, 245, 1, M, [], skillIcon=0)
-TalentArtStarter = Enhancement("", 213, 246, 1, M, [], skillIcon=0)
-GuardEfficiencyUp = Enhancement("", 214, 248, 1, M, [], skillIcon=0)
-6B7B5B21 = Enhancement("", 215, 0, 1, M, [], skillIcon=0)
-ComboHPHealAllies = Enhancement("", 216, 249, 1, M, [], [], skillIcon=0)
-PiercePhysicalDefense = Enhancement("", 217, 250, 1, M, [], skillIcon=0)
-PierceEtherDefense = Enhancement("", 218, 251, 1, M, [], skillIcon=0)
-CriticalRateUpHit = Enhancement("", 219, 252, 1, M, [], skillIcon=0)
-HealingUpDebuffClear = Enhancement("", 220, 253, 1, M, [], skillIcon=0)
-DamageUpBuff = Enhancement("", 221, 254, 1, M, [], skillIcon=0)
-DamageUpDebuff = Enhancement("", 222, 255, 1, M, [], skillIcon=0)
-29AEFFA8 = Enhancement("", 223, 0, 1, M, [], skillIcon=0)
-745DD649 = Enhancement("", 224, 0, 1, M, [], skillIcon=0)
-4B82A9D2 = Enhancement("", 225, 0, 1, M, [], skillIcon=0)
-F1A4DB56 = Enhancement("", 226, 256, 1, M, [], skillIcon=0)
-7F104DB2 = Enhancement("", 227, 0, 1, M, [], skillIcon=0)
-55351493 = Enhancement("", 228, 0, 1, M, [], skillIcon=0)
-0147B3BB = Enhancement("", 229, 0, 1, M, [], [], skillIcon=0)
-4E126891 = Enhancement("", 230, 0, 1, M, [], [], skillIcon=0)
-224D3D2A = Enhancement("", 231, 259, 1, M, [], skillIcon=0)
-E0D09216 = Enhancement("", 232, 260, 1, M, [], skillIcon=0)
-NearbyAllyFortitude = Enhancement("", 233, 261, 1, M, [], [], skillIcon=0)
-1E3DEC99 = Enhancement("", 234, 0, 1, M, [], [], skillIcon=0)
-AwakenDamageStack = Enhancement("", 235, 264, 1, M, [], [], skillIcon=0)
-0662DEEF = Enhancement("", 236, 265, 1, M, [], [], skillIcon=0)
-AttackUpAllAllies = Enhancement("", 237, 266, 1, M, [], [], skillIcon=0)
-ElementalUp = Enhancement("", 238, 267, 1, M, [], [], skillIcon=0)
-DefRecoveryUpAllAllies = Enhancement("", 239, 269, 1, M, [], [], skillIcon=0)
-8A98413D = Enhancement("", 240, 0, 1, M, [], skillIcon=0)
-RescueBuff = Enhancement("", 241, 0, 1, M, [], skillIcon=0)
-2D37CF4F = Enhancement("", 242, 0, 1, M, [], [], skillIcon=0)
-PierceDefenseCritical = Enhancement("", 243, 271, 1, M, [], skillIcon=0)
-4078B801 = Enhancement("", 244, 272, 1, M, [], skillIcon=0)
-ExtendComboTimeArtHit = Enhancement("", 245, 274, 1, M, [], skillIcon=0)
-54F2F7D0 = Enhancement("", 246, 275, 1, M, [], [], skillIcon=0)
-EvasionUpTargeted = Enhancement("", 247, 276, 1, M, [], skillIcon=0)
-E599A89B = Enhancement("", 248, 277, 1, M, [], [], skillIcon=0)
-183D62F0 = Enhancement("", 249, 278, 1, M, [], skillIcon=0)
-6E886F68 = Enhancement("", 250, 280, 1, M, [], [], skillIcon=0)
-5DA2D73A = Enhancement("", 251, 281, 1, M, [], skillIcon=0)
-747EC061 = Enhancement("", 252, 283, 1, M, [], skillIcon=0)
-SlowerDebuffExpiry = Enhancement("", 253, 284, 1, M, [], skillIcon=0)
-SlowerBuffExpiry = Enhancement("", 254, 287, 1, M, [], skillIcon=0)
-7B2E3FC1 = Enhancement("", 255, 290, 1, M, [], skillIcon=0)
-3C65A37E = Enhancement("", 256, 292, 1, M, [], [], skillIcon=0)
-NegateComboReactionArt = Enhancement("", 257, 293, 1, M, [], skillIcon=0)
-DamageUpTargetedNo = Enhancement("", 258, 294, 1, M, [], skillIcon=0)
-A9068BC4 = Enhancement("", 259, 297, 1, M, [], skillIcon=0)
-E0A5E317 = Enhancement("", 260, 298, 1, M, [], skillIcon=0)
-96E9BE64 = Enhancement("", 261, 299, 1, M, [], skillIcon=0)
-DebuffResist = Enhancement("", 262, 0, 1, M, [], [], skillIcon=0)
-71289EF7 = Enhancement("", 263, 0, 1, M, [], [], skillIcon=0)
-C427566B = Enhancement("", 264, 0, 1, M, [], [], skillIcon=0)
-32D6A4FD = Enhancement("", 265, 0, 1, M, [], [], skillIcon=0)
-ArtsLink = Enhancement("", 266, 307, 1, M, [], skillIcon=0)
-RecoverRechargeEneKO = Enhancement("", 267, 0, 1, M, [], skillIcon=0)
-DamageUpCritical = Enhancement("", 268, 309, 1, M, [], skillIcon=0)
-CriticalUpLaunched = Enhancement("", 269, 310, 1, M, [], skillIcon=0)
-RechargeRecUpDanger = Enhancement("", 270, 311, 1, M, [], skillIcon=0)
-ReduceAggroAllyKO = Enhancement("", 271, 312, 1, M, [], skillIcon=0)
-EvasionBuff = Enhancement("", 272, 0, 1, M, [], [], skillIcon=0)
-TargetLockDanger = Enhancement("", 273, 315, 1, M, [], [], skillIcon=0)
-DamageUpTime = Enhancement("", 274, 316, 1, M, [], skillIcon=0)
-ReduceAggroAutoAttack = Enhancement("", 275, 317, 1, M, [], skillIcon=0)
-CriticalRateDamageUp = Enhancement("", 276, 318, 1, M, [], [], skillIcon=0)
-EmergencyRescue = Enhancement("", 277, 319, 1, M, [], skillIcon=0)
-DamageUpUnharmed = Enhancement("", 278, 320, 1, M, [], skillIcon=0)
-EnemyKOBuff = Enhancement("", 279, 0, 1, M, [], [], skillIcon=0)
-ExtremeAttackShift = Enhancement("", 280, 322, 1, M, [], skillIcon=0)
-AutoAtkSpdUpSameRole = Enhancement("", 281, 323, 1, M, [], skillIcon=0)
-AttackerMastery = Enhancement("", 282, 324, 1, M, [], skillIcon=0)
-DefenderMastery = Enhancement("", 283, 325, 1, M, [], skillIcon=0)
-HealerMastery = Enhancement("", 284, 326, 1, M, [], skillIcon=0)
-RushedHealingArts = Enhancement("", 285, 327, 1, M, [], [], skillIcon=0)
-AllyKOBuff = Enhancement("", 286, 328, 1, M, [], [], skillIcon=0)
-FortitudeNoArtsReady = Enhancement("", 287, 329, 1, M, [], skillIcon=0)
-RecoverRechargeAllyKO = Enhancement("", 288, 330, 1, M, [], skillIcon=0)
-BlockRecharge = Enhancement("", 289, 331, 1, M, [], skillIcon=0)
-RecoverHPLowHP = Enhancement("", 290, 332, 1, M, [], [], skillIcon=0)
-TargetLockRevival = Enhancement("", 291, 333, 1, M, [], skillIcon=0)
-PowerUpRevival = Enhancement("", 292, 334, 1, M, [], [], skillIcon=0)
-DamageTransfer = Enhancement("", 293, 335, 1, M, [], skillIcon=0)
-D33620B5 = Enhancement("", 294, 0, 1, M, [], skillIcon=0)
-3A8B75DC = Enhancement("", 295, 337, 1, M, [], skillIcon=0)
-108C6BDC = Enhancement("", 296, 0, 1, M, [], [], skillIcon=0)
-3DC91AB4 = Enhancement("", 297, 0, 1, M, [], skillIcon=0)
-B45078E8 = Enhancement("", 298, 0, 1, M, [], skillIcon=0)
-5D432F9D = Enhancement("", 299, 372, 1, M, [], skillIcon=0)
-699CD98E = Enhancement("", 300, 373, 1, M, [], skillIcon=0)
-01DFEBDE = Enhancement("", 301, 374, 1, M, [], skillIcon=0)
-6A7AE143 = Enhancement("", 302, 375, 1, M, [], skillIcon=0)
-3B070EC3 = Enhancement("", 303, 376, 1, M, [], skillIcon=0)
-ADD9368C = Enhancement("", 304, 0, 1, M, [], skillIcon=0)
-170EE93C = Enhancement("", 305, 377, 1, M, [], [], skillIcon=0)
-F62D628F = Enhancement("", 306, 378, 1, M, [], skillIcon=0)
-6C84E6C5 = Enhancement("", 307, 0, 1, M, [], [], skillIcon=0)
-1CC5A345 = Enhancement("", 308, 0, 1, M, [], [], skillIcon=0)
-A34DB1D7 = Enhancement("", 309, 382, 1, M, [], [], skillIcon=0)
-665C44C7 = Enhancement("", 310, 383, 1, M, [], skillIcon=0)
-42203200 = Enhancement("", 311, 384, 1, M, [], skillIcon=0)
-44DED265 = Enhancement("", 312, 0, 1, M, [], skillIcon=0)
-697730B7 = Enhancement("", 313, 0, 1, M, [], [], skillIcon=0)
-A8EEF413 = Enhancement("", 314, 386, 1, M, [], skillIcon=0)
-D30612A6 = Enhancement("", 315, 0, 1, M, [], [], skillIcon=0)
-C42DC4C1 = Enhancement("", 316, 397, 1, M, [], skillIcon=0)
-E371CADF = Enhancement("", 317, 0, 1, M, [], skillIcon=0)
-AttackAOERangeUp = Enhancement("", 318, 398, 1, M, [], skillIcon=0)
-ReactionRecharge = Enhancement("", 319, 400, 1, M, [], skillIcon=0)
-DamageUpInWater = Enhancement("", 320, 401, 1, M, [], skillIcon=0)
-RechargeUpInWater = Enhancement("", 321, 402, 1, M, [], skillIcon=0)
-DamageUpOnLand = Enhancement("", 322, 403, 1, M, [], skillIcon=0)
-RechargeUpOnLand = Enhancement("", 323, 404, 1, M, [], skillIcon=0)
-DamageUpSelfDebuff = Enhancement("", 324, 405, 1, M, [], skillIcon=0)
-FortitudeEnemyKO = Enhancement("", 325, 406, 1, M, [], skillIcon=0)
-81E4C3B5 = Enhancement("", 326, 324, 1, M, [], skillIcon=0)
-69CE51B7 = Enhancement("", 327, 0, 1, M, [], skillIcon=0)
-EE1FAEA1 = Enhancement("", 328, 0, 1, M, [], skillIcon=0)
-DF068DFA = Enhancement("", 329, 0, 1, M, [], skillIcon=0)
-1ABA7C2B = Enhancement("", 330, 0, 1, M, [], skillIcon=0)
-D450C258 = Enhancement("", 331, 0, 1, M, [], skillIcon=0)
-2661B30A = Enhancement("", 332, 0, 1, M, [], skillIcon=0)
-78B0628E = Enhancement("", 333, 0, 1, M, [], [], skillIcon=0)
-94556EFC = Enhancement("", 334, 412, 1, M, [], [], skillIcon=0)
-2F1CE75E = Enhancement("", 335, 0, 1, M, [], [], skillIcon=0)
-03522C97 = Enhancement("", 336, 0, 1, M, [], skillIcon=0)
-CoverLowHPAllies = Enhancement("", 337, 415, 1, M, [], [], skillIcon=0)
-RangedCounter = Enhancement("", 338, 416, 1, M, [], [], skillIcon=0)
-2307272B = Enhancement("", 339, 417, 1, M, [], skillIcon=0)
-13E86D62 = Enhancement("", 340, 0, 1, M, [], skillIcon=0)
-5AA8EF8D = Enhancement("", 341, 422, 1, M, skillIcon=0)
-8321536A = Enhancement("", 342, 423, 1, M, skillIcon=0)
-12290987 = Enhancement("", 343, 424, 1, M, skillIcon=0)
-AE3060F1 = Enhancement("", 344, 425, 1, M, skillIcon=0)
-DABAB9B0 = Enhancement("", 345, 426, 1, M, skillIcon=0)
-635B23F8 = Enhancement("", 346, 427, 1, M, skillIcon=0)
-FBF26980 = Enhancement("", 347, 0, 1, M, [], [], skillIcon=0)
-BDD4CC17 = Enhancement("", 348, 0, 1, M, [], [], skillIcon=0)
-3868CBC6 = Enhancement("", 349, 0, 1, M, [], skillIcon=0)
-299669B7 = Enhancement("", 350, 0, 1, M, [], skillIcon=0)
-B469390D = Enhancement("", 351, 0, 1, M, [], skillIcon=0)
-D021D9EE = Enhancement("", 352, 0, 1, M, [], [], skillIcon=0)
-FF3CFA6B = Enhancement("", 353, 0, 1, M, [], [], skillIcon=0)
-3DFBD363 = Enhancement("", 354, 0, 1, M, [], [], skillIcon=0)
-B7DE0EBC = Enhancement("", 355, 0, 1, M, [], [], skillIcon=0)
-QuickMoveEvasionUp = Enhancement("", 356, 428, 1, M, [], [], skillIcon=0)
-QuickMoveDamageUp = Enhancement("", 357, 429, 1, M, [], [], skillIcon=0)
-QuickMoveAOEDamage = Enhancement("", 358, 430, 1, M, [], [], skillIcon=0)
-FasterInterlinkLevelGain = Enhancement("", 359, 431, 1, M, [], [], skillIcon=0)
-RecoverRechargeRescue = Enhancement("", 360, 432, 1, M, [], [], skillIcon=0)
-StartingMasterArts = Enhancement("", 361, 433, 1, M, [], [], skillIcon=0)
-ClassAptitudeUp = Enhancement("", 362, 441, 1, M, [], skillIcon=0)
-ExtraPositionalArts = Enhancement("", 363, 442, 1, M, [], skillIcon=0)
-ExtraFieldArts = Enhancement("", 364, 443, 1, M, [], skillIcon=0)
-FC852C14 = Enhancement("", 365, 444, 1, M, [], skillIcon=0)
-0A83170C = Enhancement("", 366, 0, 1, M, [], skillIcon=0)
-5E206C1B = Enhancement("", 367, 0, 1, M, [], skillIcon=0)
-85F2BABF = Enhancement("", 368, 0, 1, M, [], skillIcon=0)
-AbsorbAttacksinRange = Enhancement("", 369, 447, 1, M, [], [], skillIcon=0)
-6AED9FC9 = Enhancement("", 370, 448, 1, M, [], skillIcon=0)
-StarterTPPlus = Enhancement("", 371, 450, 1, M, [], skillIcon=0)
-FastRescueHealingPlus = Enhancement("", 372, 240, 1, M, [], [], skillIcon=0)
-RescueHPHealingPlus = Enhancement("", 373, 110, 1, M, [], [], skillIcon=0)
- = Enhancement("", 374, 451, 1, Misc, icon=0)
- = Enhancement("", 375, 452, 1, Misc, icon=0)
-D90DECBD = Enhancement("", 376, 453, 1, M, [], skillIcon=0)
-887EC595 = Enhancement("", 377, 455, 1, M, [], skillIcon=0)
-5228990D = Enhancement("", 378, 457, 1, M, skillIcon=0)
-C006052B = Enhancement("", 379, 459, 1, M, [], skillIcon=0)
-9E09B0E3 = Enhancement("", 380, 460, 1, M, [], skillIcon=0)
-C682C0B2 = Enhancement("", 381, 462, 1, M, [], skillIcon=0)
-ACEEE2B3 = Enhancement("", 382, 464, 1, M, skillIcon=0)
-F5A970B0 = Enhancement("", 383, 466, 1, M, skillIcon=0)
-1C953DC1 = Enhancement("", 384, 468, 1, M, [], [], skillIcon=0)
-119C145F = Enhancement("", 385, 470, 1, M, [], skillIcon=0)
-819DAB29 = Enhancement("", 386, 472, 1, M, [], skillIcon=0)
-8166DDA7 = Enhancement("", 387, 474, 1, M, [], skillIcon=0)
-727B2C77 = Enhancement("", 388, 476, 1, M, [], skillIcon=0)
-9BE9B1DB = Enhancement("", 389, 478, 1, M, skillIcon=0)
-67C12EA7 = Enhancement("", 390, 480, 1, M, [], [], skillIcon=0)
-BD2FFC2C = Enhancement("", 391, 482, 1, M, [], skillIcon=0)
-44DD9F9C = Enhancement("", 392, 484, 1, M, [], skillIcon=0)
-BBA3F2C3 = Enhancement("", 393, 486, 1, M, skillIcon=0)
-8B5865D2 = Enhancement("", 394, 488, 1, M, [], skillIcon=0)
-CBAEDB1D = Enhancement("", 395, 0, 1, M, [], [], skillIcon=0)
-RecoverHPSelfEvasion = Enhancement("", 396, 490, 1, M, [], skillIcon=0)
-RecoverRechargeEvasion = Enhancement("", 397, 491, 1, M, [], skillIcon=0)
-7BA9A48D = Enhancement("", 398, 492, 1, M, [], skillIcon=0)
-RechargeUpSelfKO = Enhancement("", 399, 494, 1, M, [], skillIcon=0)
-FB5146DB = Enhancement("", 400, 495, 1, M, [], skillIcon=0)
-RechargeNearbyAllyHit = Enhancement("", 401, 499, 1, M, [], [], skillIcon=0)
-RangedHealCritical = Enhancement("", 402, 500, 1, M, [], skillIcon=0)
- = Enhancement("", 403, 501, 1, Misc, [], [], icon=0)
-CriticalHitPlusAllAllies = Enhancement("", 404, 502, 1, M, [], [], skillIcon=0)
-PowerUpInField = Enhancement("", 405, 503, 1, M, [], [], skillIcon=0)
-MaxFieldsUp = Enhancement("", 406, 504, 1, M, skillIcon=0)
-D8498101 = Enhancement("", 407, 505, 1, M, [], [], skillIcon=0)
-SeveralStatsUp = Enhancement("", 408, 507, 1, M, [], skillIcon=0)
-WeakenParty = Enhancement("", 409, 508, 1, M, [], [], skillIcon=0)
-554E813F = Enhancement("", 410, 173, 0, M, [], [], skillIcon=0)
-83D1DC60 = Enhancement("", 419, 0, 1, M, [], skillIcon=0)
-03956403 = Enhancement("", 411, 0, 1, M, [], skillIcon=0)
-UnityComboDamageUp = Enhancement("", 412, 509, 1, M, [], skillIcon=0)
-D3A726C0 = Enhancement("", 413, 525, 1, M, [], [], skillIcon=0)
-EF72174A = Enhancement("", 414, 529, 1, M, [], skillIcon=0)
-E110F3CA = Enhancement("", 415, 530, 1, M, [], [], skillIcon=0)
-QuickMoveAOEDamage = Enhancement("", 416, 430, 1, M, [], [], skillIcon=0)
-WeaknessDamageUp = Enhancement("", 417, 532, 1, M, [], skillIcon=0)
-DamageUpTime = Enhancement("", 418, 316, 1, M, [], skillIcon=0)
-B665A1F1 = Enhancement("", 421, 0, 1, M, [], [], skillIcon=0)
-AttackAOERangeDmgUp = Enhancement("", 424, 399, 1, M, [], [], skillIcon=0)
-UnitySpecialStarter = Enhancement("", 425, 534, 1, M, [], skillIcon=0)
-11BB435A = Enhancement("", 426, 0, 1, M, [], skillIcon=0)
-AutoAttackTwofoldHaste = Enhancement("", 428, 0, 1, M, [], [], skillIcon=0)
-StartingOuroborosPowers = Enhancement("", 427, 434, 0, M, [], skillIcon=0)
-C7118AF0 = Enhancement("", 422, 0, 0, M, [], [], skillIcon=0)
-EBFBFD29 = Enhancement("", 423, 0, 0, M, [], skillIcon=0)
-378C7FD9 = Enhancement("", 420, 0, 0, M, [], skillIcon=0)
-
-Unsure = Enhancement("", 20, 0, 1, M, [], [], skillIcon=0)
+def CreateEnhancements():                 
+    Enhancement('Healthy', 1, 1, 1, D, [10,100], skillIcon=1) # Max HP Up
+    Enhancement('Strong', 2, 3, 1, A, [10,100], skillIcon=2) # Attack Up
+    Enhancement('Medic', 3, 4, 1, H, [10,100], skillIcon=1) # Healing Up
+    Enhancement('Dextrous', 4, 5, 1, A, [10,100], skillIcon=8) # Dexterity Up
+    Enhancement('Agile', 5, 6, 1, D, [10,100], skillIcon=9) # Agility Up
+    Enhancement('Critical', 6, 7, 1, A, [10,100], skillIcon=10) # Critical Rate Up
+    Enhancement('Iron', 7, 8, 1, D, [10,50], skillIcon=6) # Physical Defense Up
+    Enhancement('Ether', 8, 9, 1, D, [10,50], skillIcon=7) # Ether Defense Up
+    Enhancement('Deflection', 9, 10, 1, D, [10,50], skillIcon=4) # Block Rate Up
+    Enhancement("Hearty", 10, 11, 1, D, [100,2000], skillIcon=38) # Max HP Plus
+    Enhancement("Strength", 11, 12, 1, A, [50,200], skillIcon=2) # Attack Plus
+    Enhancement("Medical", 12, 13, 1, H, [50,200], skillIcon=1) # Healing Plus
+    Enhancement("Dextrous", 13, 14, 1, A, [50,200], skillIcon=8) # Dexterity Plus
+    Enhancement("Agile", 14, 15, 1, D, [20,100], skillIcon=9) # Agility Plus
+    Enhancement("Critical", 15, 16, 1, A, [10,60], skillIcon=10) # Critical Rate Plus
+    Enhancement("Iron", 16, 17, 1, D, [10,50], skillIcon=6) # Physical Defense Plus
+    Enhancement("Ether", 17, 18, 1, D, [10,50], skillIcon=7) # Ether Defense Plus
+    Enhancement("Blocker", 18, 19, 1, D, [10,40], skillIcon=4) # Block Rate Plus
+    Enhancement("Terrestrial", 19, 0, 1, A, [0], [50,200], skillIcon=37) # Species Expert
+    Enhancement("Aquatic", 19, 0, 1, A, [1], [50,200], skillIcon=37) # Species Expert
+    Enhancement("Aerial", 19, 0, 1, A, [2], [50,200], skillIcon=37) # Species Expert
+    Enhancement("Agnus", 19, 0, 1, A, [3], [50,200], skillIcon=37) # Species Expert
+    Enhancement("Machine", 19, 0, 1, A, [6], [50,300], skillIcon=37) # Species Expert
+    Enhancement("Keves", 19, 0, 1, A, [4], [50,200], skillIcon=37) # Species Expert
+    # Enhancement("", 20, 0, 1, M, [], [], icon=0) # <CAE39FB6>
+    Enhancement("Counter", 21, 30, 1, D, [50,500], skillIcon=27) # Damage Counter
+    Enhancement("Reversal", 22, 31, 1, D, [50,500], skillIcon=27) # Evasion Counter
+    Enhancement("Absorber", 23, 32, 1, H, [50,100], skillIcon=44) # Auto-Attack Heal: Self
+    Enhancement("Absorber", 24, 36, 1, H, [50,100], [5,10], skillIcon=44) # Auto-Attack Heal Allies
+    CriticalHitPlus = Enhancement("Exploit", 25, 38, 1, A, [20,150], skillIcon=10) # Critical Hit Plus
+    DoubleAttack = Enhancement("Doublestrike", 26, 39, 1, A, [20,100], skillIcon=35)
+    FrontAttack = Enhancement("Frontal", 27, 40, 1, A, [50,100], skillIcon=8)
+    SideAttack = Enhancement("Blindside", 28, 42, 1, A, [50,200], skillIcon=8)
+    BackAttack = Enhancement("Backstab", 29, 43, 1, A, [30,100], skillIcon=8)
+    Toppled = Enhancement("Toppler", 30, 44, 1, A, [50,200], skillIcon=14)
+    Launched = Enhancement("Volley", 31, 45, 1, A, [50,200], skillIcon=14)
+    SmashEffectUp = Enhancement("Gravity", 32, 47, 1, A, [100,500], skillIcon=28)
+    Dazed = Enhancement("Dazy", 33, 48, 1, A, [50,200], skillIcon=29)
+    BurstEffectUp = Enhancement("Burst", 34, 49, 1, M, [100,500], skillIcon=49)
+    Challenger = Enhancement("Bravery", 35, 50, 1, A, [50,150], skillIcon=42)
+    Avenger = Enhancement("Avenger", 36, 51, 1, A, [50,200], skillIcon=2)
+    Unblockable = Enhancement("Piercing", 37, 52, 1, A, [30,100], skillIcon=5)
+    DamageUpHPLow = Enhancement("Desperation", 38, 54, 1, A, [30,60], [50,200], skillIcon=44)
+    DamageUpHPHigh = Enhancement("Overwhelm", 39, 55, 1, A, [90,60], [50,150], skillIcon=13)
+    KickStarter = Enhancement("Rush", 40, 57, 1, A, [30,90], [25,120], skillIcon=17)
+    EnemyKODamageUp = Enhancement("Bloodbath", 41, 58, 1, A, [20,60], [250,500], skillIcon=42)
+    BreakDurationUp = Enhancement("Breaker", 42, 59, 1, M, [100,300], skillIcon=39)
+    ToppleDurationUp = Enhancement("Toppler", 43, 60, 1, M, [50,150], skillIcon=39)
+    LaunchDurationUp = Enhancement("Airborne", 44, 61, 1, M, [50,150], skillIcon=39)
+    DazeDurationUp = Enhancement("Concussive", 45, 62, 1, M, [50,150], skillIcon=39)
+    AutoAttackUp = Enhancement("Auto", 46, 63, 1, A, [100,500], skillIcon=13)
+    AutoAttackCriticalRateUp = Enhancement("Critical", 47, 64, 1, A, [100,500], skillIcon=13)
+    AutoAttackAccuracyUp = Enhancement("Honed", 48, 65, 1, A, [100,500], skillIcon=8)
+    Aggroed = Enhancement("Clash", 49, 66, 1, M, [50,200], skillIcon=37)
+    Indoors = Enhancement("Indoor", 50, 67, 1, A, [50,200], skillIcon=2)
+    Outdoors = Enhancement("Outdoor", 51, 68, 1, A, [50,150], skillIcon=2)
+    BreakResistDown = Enhancement("Breaker", 52, 69, 1, M, [20,100], skillIcon=14)
+    # SanguineFire = Enhancement("", 53, 70, 1, M, [], skillIcon=0)
+    # 64C914AD = Enhancement("", 54, 71, 1, M, [], skillIcon=0)
+    # 52EE5A17 = Enhancement("", 55, 72, 1, M, [], skillIcon=0)
+    PerfectShield = Enhancement("Dream", 56, 73, 1, D, [20,80], skillIcon=46)
+    PhysicalAbsorb = Enhancement("Absorber", 57, 74, 1, D, [20,80], skillIcon=46)
+    EtherAbsorb = Enhancement("Absorber", 58, 75, 1, D, [20,80], skillIcon=46)
+    Enhancement("Awaken", 59, 76, 1, D, [20,80], [4,10], isSkill=False, isAccessory=False) # Absorb Awaken
+    Enhancement("", 60, 77, 1, M, [], [], icon=0) # Shield Spike
+    Enhancement("", 61, 78, 1, M, [], icon=0) # Reflector Shield
+    Enhancement("", 62, 79, 1, M, [], [], icon=0) # Evasion Up (Low HP)  
+    Enhancement("", 63, 80, 1, M, [], icon=0) # Evasion Up (Mobile)      
+    Enhancement("", 64, 81, 1, M, [], icon=0) # Evasion Up (Stationary)  
+    Enhancement("", 65, 82, 1, M, [], icon=0) # Evasion Up (Art)
+    Enhancement("", 66, 83, 1, M, [], [], icon=0) # Block Rate Plus (Low HP)
+    Enhancement("", 67, 85, 1, M, [], [], icon=0) # Fortitude (Low HP)   
+    Enhancement("", 68, 86, 1, M, [], icon=0) # <C3E35259>
+    Enhancement("", 69, 87, 1, M, [], icon=0) # Break Resist
+    Enhancement("", 70, 88, 1, M, [], icon=0) # Topple Resist
+    Enhancement("", 71, 89, 1, M, [], icon=0) # Launch Resist
+    Enhancement("", 72, 90, 1, M, [], icon=0) # Smash Resist
+    Enhancement("", 73, 91, 1, M, [], icon=0) # Daze Resist
+    Enhancement("", 74, 92, 1, M, [], icon=0) # <A7C9AAD4>
+    Enhancement("", 75, 93, 1, M, [], icon=0) # Blowdown Resist
+    Enhancement("", 76, 94, 1, M, [], icon=0) # Knockback Resist
+    Enhancement("", 77, 95, 1, M, [], icon=0) # Slower Auto-Attack Aggro 
+    Enhancement("", 78, 96, 1, M, [], icon=0) # Faster Auto-Attack Aggro 
+    Enhancement("", 79, 97, 1, M, [], icon=0) # Slower Arts Aggro        
+    Enhancement("", 80, 98, 1, M, [], icon=0) # Faster Arts Aggro        
+    Enhancement("", 81, 101, 1, M, [], icon=0) # Aggro Reduction Up      
+    Enhancement("", 82, 102, 1, M, [], icon=0) # Auto Aggro Up
+    Enhancement("", 83, 107, 1, M, [], icon=0) # Aggro Starter
+    Enhancement("", 84, 108, 1, M, [], icon=0) # Faster Damage Aggro     
+    Enhancement("", 85, 0, 1, M, [], icon=0) # <D18934AB>
+    Enhancement("", 86, 109, 1, M, [], icon=0) # Rescue HP Up: Other     
+    Enhancement("", 87, 111, 1, M, [], [], icon=0) # Arts Heal
+    Enhancement("", 88, 112, 1, M, [], icon=0) # Healing Arts Up
+    Enhancement("", 89, 113, 1, M, [], icon=0) # Slower Healing Aggro    
+    Enhancement("", 90, 114, 1, M, [], icon=0) # HP Recovery Up
+    Enhancement("", 91, 115, 1, M, [], [], icon=0) # Damage Heal: Self   
+    Enhancement("", 92, 116, 1, M, [], [], icon=0) # Damage Heal: Allies 
+    Enhancement("", 93, 117, 1, M, [], icon=0) # Cancel Up
+    Enhancement("", 94, 119, 1, M, [], icon=0) # Unbeatable
+    Enhancement("", 95, 120, 1, M, [], icon=0) # Night Vision
+    Enhancement("", 96, 121, 1, M, [], icon=0) # Sunlight Eye
+    Enhancement("", 97, 0, 1, M, [], icon=0) # <4943A920>
+    Enhancement("", 98, 0, 1, M, [], icon=0) # <09F52558>
+    Enhancement("", 99, 122, 1, M, [], icon=0) # Buff Effect Up
+    Enhancement("", 100, 123, 1, M, [], icon=0) # Longer Buff Timers     
+    Enhancement("", 101, 124, 1, M, [], icon=0) # Debuff Effect Up       
+    Enhancement("", 102, 125, 1, M, [], icon=0) # Longer Debuff Timers   
+    Enhancement("", 103, 126, 1, M, [], icon=0) # Debuff Success Rate Plus
+    Enhancement("", 104, 127, 1, M, [], icon=0) # <13BB4D7D>
+    Enhancement("", 105, 128, 1, M, [], icon=0) # Chain Gauge Up (Critical)
+    Enhancement("", 106, 129, 1, M, [], icon=0) # Chain Gauge Up (Art)   
+    Enhancement("", 107, 130, 1, M, [], [], icon=0) # Enemy Count Damage Up
+    Enhancement("", 108, 131, 1, M, [], icon=0) # Ranged Attack Range Up 
+    Enhancement("", 109, 132, 1, M, [], icon=0) # KO Heal: Allies        
+    Enhancement("", 110, 134, 1, M, [], icon=0) # <FE200865>
+    Enhancement("", 111, 135, 1, M, icon=0) # Anti-Deflection
+    Enhancement("", 112, 0, 1, M, [], icon=0) # <AEE52010>
+    Enhancement("", 113, 0, 1, M, [], icon=0) # <B05AB2EB>
+    Enhancement("", 114, 136, 1, M, [], [], icon=0) # <C4D784E6>
+    Enhancement("", 115, 138, 1, M, [], [], icon=0) # Accuracy/Evasion Up: Allies
+    Enhancement("", 116, 0, 1, M, [], [], icon=0) # <554E9057>
+    Enhancement("", 117, 139, 1, M, [], icon=0) # Slower Attack Aggro    
+    Enhancement("", 118, 140, 1, M, [], icon=0) # All Defenses Plus      
+    Enhancement("", 119, 141, 1, M, [], icon=0) # Perfect Hit/Evasion    
+    Enhancement("", 120, 142, 1, M, [], icon=0) # Reflection
+    Enhancement("", 121, 143, 1, M, [], icon=0) # Toppled/Launched↑      
+    Enhancement("", 122, 0, 1, M, [], icon=0) # <1902ADDB>
+    Enhancement("", 123, 144, 1, M, [], icon=0) # Enemy KO Heal: Allies  
+    Enhancement("", 124, 0, 1, M, [], [], icon=0) # <E48EE6DF>
+    Enhancement("", 125, 145, 1, M, [], [], icon=0) # Power Up (Dire Battle)
+    Enhancement("", 126, 0, 1, M, [], icon=0) # <2B78D893>
+    Enhancement("", 127, 149, 1, M, [], icon=0) # Resist Combo Reaction  
+    Enhancement("", 128, 150, 1, M, [], icon=0) # Unique/Boss↑
+    Enhancement("", 129, 151, 1, M, [], icon=0) # Continuous Arts        
+    Enhancement("", 130, 152, 1, M, [], icon=0) # Piercing Attacks       
+    Enhancement("", 131, 154, 1, M, [], icon=0) # Auto-Attack Speed Up   
+    Enhancement("", 132, 156, 1, M, [], icon=0) # <34426628>
+    Enhancement("", 133, 159, 1, M, [], icon=0) # <BB6A576F>
+    Enhancement("", 134, 160, 1, M, [], icon=0) # Recover Recharge (Critical)
+    Enhancement("", 135, 161, 1, M, [], [], icon=0) # Regeneration (Low HP)
+    Enhancement("", 136, 162, 1, M, [], [], icon=0) # Damage Up (Talent Art)
+    Enhancement("", 137, 163, 1, M, [], [], icon=0) # Damage Counter: Reaction
+    Enhancement("", 138, 0, 1, M, icon=0) # <8220967D>
+    Enhancement("", 139, 164, 1, M, [], icon=0) # Bigger Cancel Window   
+    Enhancement("", 140, 165, 1, M, [], icon=0) # <3F363F42>
+    Enhancement("", 141, 167, 1, M, [], icon=0) # <0C909AAE>
+    Enhancement("", 142, 168, 1, M, [], icon=0) # Ranged Evasion
+    Enhancement("", 143, 169, 1, M, [], icon=0) # Hold Aggro (Self KO)   
+    Enhancement("", 144, 170, 1, M, [], icon=0) # Damage Up (Ally KO)    
+    Enhancement("", 145, 0, 1, M, [], [], icon=0) # <4724B11C>
+    Enhancement("", 146, 171, 1, M, [], [], icon=0) # <1DDE9148>
+    Enhancement("", 147, 172, 1, M, [], [], icon=0) # Attack Shift       
+    Enhancement("", 148, 173, 1, M, [], [], icon=0) # Defense Shift      
+    Enhancement("", 149, 174, 1, M, [], icon=0) # Debuff Resist: All     
+    Enhancement("", 150, 175, 1, M, [], icon=0) # Shorter Debuff Timers  
+    Enhancement("", 151, 176, 1, M, [], icon=0) # Damage Up (Cancel)     
+    Enhancement("", 152, 0, 1, M, [], icon=0) # <CE6DB1B1>
+    Enhancement("", 153, 177, 1, M, icon=0) # Soul Hacking
+    Enhancement("", 154, 178, 1, M, [], icon=0) # <1DD0CB32>
+    Enhancement("", 155, 0, 1, M, [], icon=0) # <0D99005B>
+    Enhancement("", 156, 0, 1, M, [], icon=0) # <EA4FE79F>
+    Enhancement("", 157, 0, 1, M, [], icon=0) # <7F54F93E>
+    Enhancement("", 158, 179, 1, M, [], icon=0) # <C719FE0D>
+    Enhancement("", 159, 180, 1, M, [], icon=0) # <1C89FC37>
+    Enhancement("", 160, 181, 1, M, [], icon=0) # <621F1009>
+    Enhancement("", 161, 182, 1, M, [], icon=0) # Damage Up (Enemy Arts) 
+    Enhancement("", 162, 183, 1, M, [], icon=0) # <3C2BDC90>
+    Enhancement("", 163, 184, 1, M, [], icon=0) # Accuracy Up (Enemy Arts)
+    Enhancement("", 164, 185, 1, M, [], icon=0) # <0282C4D5>
+    Enhancement("", 165, 186, 1, M, [], [], icon=0) # Wounded Enemy↑     
+    Enhancement("", 166, 189, 1, M, [], icon=0) # Accuracy Up (Miss)     
+    Enhancement("", 167, 190, 1, M, [], [], icon=0) # Debuffed Enemy↑    
+    Enhancement("", 168, 0, 1, M, [], icon=0) # <ED6CBA7D>
+    Enhancement("", 169, 193, 1, M, [], icon=0) # <3F91CECC>
+    Enhancement("", 170, 194, 1, M, [], icon=0) # <E7C12D95>
+    Enhancement("", 171, 0, 1, M, [], icon=0) # <C29024C3>
+    Enhancement("", 172, 197, 1, M, [], [], icon=0) # Damage Bomb (Self KO)
+    Enhancement("", 173, 198, 1, M, [], icon=0) # Party Recharge (Self KO)
+    Enhancement("", 174, 0, 1, M, [], [], icon=0) # <48F464E4>
+    Enhancement("", 175, 199, 1, M, icon=0) # Perfect Hit (Cancel)       
+    Enhancement("", 176, 0, 1, M, [], [], icon=0) # <A8B4FF50>
+    Enhancement("", 177, 200, 1, M, [], icon=0) # Fortitude (Art Duration)
+    Enhancement("", 178, 202, 1, M, [], icon=0) # Damage Up (Full Recharge)
+    Enhancement("", 179, 203, 1, M, [], icon=0) # <0007E213>
+    Enhancement("", 180, 0, 1, M, [], [], icon=0) # Persistent Damage Up 
+    Enhancement("", 181, 206, 1, M, [], [], icon=0) # Sequential Auto-Attack Up
+    Enhancement("", 182, 210, 1, M, [], icon=0) # Stance Duration Up     
+    Enhancement("", 183, 211, 1, M, [], icon=0) # Buff Heal
+    Enhancement("", 184, 0, 1, M, [], [], icon=0) # <CF9BFB20>
+    Enhancement("", 185, 215, 1, M, [], icon=0) # Tender Auto-Attack     
+    Enhancement("", 186, 216, 1, M, [], icon=0) # Tender Arts
+    Enhancement("", 187, 217, 1, M, [], icon=0) # Fusion Arts Up
+    Enhancement("", 188, 218, 1, M, [], [], icon=0) # <27C116CB>
+    Enhancement("", 189, 219, 1, M, [], icon=0) # Aggro Reduce Up (Targeted)
+    Enhancement("", 190, 220, 1, M, [], icon=0) # Draw Aggro (Evasion)   
+    Enhancement("", 191, 223, 1, M, [], icon=0) # Incremental Damage Up  
+    Enhancement("", 192, 0, 1, M, [], [], icon=0) # Preemptive Buff      
+    Enhancement("", 193, 225, 1, M, icon=0) # <5EA32440>
+    Enhancement("", 194, 226, 1, M, [], icon=0) # Damage Up (Buff No.)   
+    Enhancement("", 195, 227, 1, M, [], [], icon=0) # Aerial Recovery    
+    Enhancement("", 196, 229, 1, M, [], icon=0) # Risky Recharge Up      
+    Enhancement("", 197, 230, 1, M, [], icon=0) # Damage Up (Elem. Discharge)
+    Enhancement("", 198, 231, 1, M, [], [], icon=0) # EX Damage (Base Attack)
+    Enhancement("", 199, 232, 1, M, [], [], icon=0) # EX Damage (Base Healing)
+    Enhancement("", 200, 233, 1, M, [], [], icon=0) # <59C16213>
+    Enhancement("", 201, 0, 1, M, [], [], icon=0) # <3BFA4DC7>
+    Enhancement("", 202, 0, 1, M, [], icon=0) # Damage Up (Ally Heal)    
+    Enhancement("", 203, 235, 1, M, [], [], icon=0) # Prevent Attack: Nearby Allies
+    Enhancement("", 204, 236, 1, M, [], icon=0) # Field Duration Up      
+    Enhancement("", 205, 237, 1, M, [], icon=0) # Field Damage Up        
+    Enhancement("", 206, 238, 1, M, [], icon=0) # Field Dissolution Dmg. Up
+    Enhancement("", 207, 239, 1, M, [], icon=0) # <3C8F6C0E>
+    Enhancement("", 208, 241, 1, M, icon=0) # Enable Rescue
+    Enhancement("", 209, 242, 1, M, [], icon=0) # Evasion Chance
+    Enhancement("", 210, 243, 1, M, [], icon=0) # Physical Damage Up     
+    Enhancement("", 211, 244, 1, M, [], icon=0) # Ether Damage Up        
+    Enhancement("", 212, 245, 1, M, [], icon=0) # Reaction Success Up    
+    Enhancement("", 213, 246, 1, M, [], icon=0) # Talent Art Starter     
+    Enhancement("", 214, 248, 1, M, [], icon=0) # Guard Efficiency Up    
+    Enhancement("", 215, 0, 1, M, [], icon=0) # <6B7B5B21>
+    Enhancement("", 216, 249, 1, M, [], [], icon=0) # Combo HP Heal: Allies
+    Enhancement("", 217, 250, 1, M, [], icon=0) # Pierce Physical DefenseEnhancement("", 218, 251, 1, M, [], icon=0) # Pierce Ether Defense   
+    Enhancement("", 219, 252, 1, M, [], icon=0) # Critical Rate Up (Hit) 
+    Enhancement("", 220, 253, 1, M, [], icon=0) # Healing Up (Debuff Clear)
+    Enhancement("", 221, 254, 1, M, [], icon=0) # Damage Up (Buff)       
+    Enhancement("", 222, 255, 1, M, [], icon=0) # Damage Up (Debuff)     
+    Enhancement("", 223, 0, 1, M, [], icon=0) # <29AEFFA8>
+    Enhancement("", 224, 0, 1, M, [], icon=0) # <745DD649>
+    Enhancement("", 225, 0, 1, M, [], icon=0) # <4B82A9D2>
+    Enhancement("", 226, 256, 1, M, [], icon=0) # <F1A4DB56>
+    Enhancement("", 227, 0, 1, M, [], icon=0) # <7F104DB2>
+    Enhancement("", 228, 0, 1, M, [], icon=0) # <55351493>
+    Enhancement("", 229, 0, 1, M, [], [], icon=0) # <0147B3BB>
+    Enhancement("", 230, 0, 1, M, [], [], icon=0) # <4E126891>
+    Enhancement("", 231, 259, 1, M, [], icon=0) # <224D3D2A>
+    Enhancement("", 232, 260, 1, M, [], icon=0) # <E0D09216>
+    Enhancement("", 233, 261, 1, M, [], [], icon=0) # Nearby Ally Fortitude
+    Enhancement("", 234, 0, 1, M, [], [], icon=0) # <1E3DEC99>
+    Enhancement("", 235, 264, 1, M, [], [], icon=0) # Awaken (Damage Stack)
+    Enhancement("", 236, 265, 1, M, [], [], icon=0) # <0662DEEF>
+    Enhancement("", 237, 266, 1, M, [], [], icon=0) # Attack Up: All Allies
+    Enhancement("", 238, 267, 1, M, [], [], icon=0) # Elemental Up       
+    Enhancement("", 239, 269, 1, M, [], [], icon=0) # Def./Recovery Up: All Allies
+    Enhancement("", 240, 0, 1, M, [], icon=0) # <8A98413D>
+    Enhancement("", 241, 0, 1, M, [], icon=0) # Rescue Buff
+    Enhancement("", 242, 0, 1, M, [], [], icon=0) # <2D37CF4F>
+    Enhancement("", 243, 271, 1, M, [], icon=0) # Pierce Defense (Critical)
+    Enhancement("", 244, 272, 1, M, [], icon=0) # <4078B801>
+    Enhancement("", 245, 274, 1, M, [], icon=0) # Extend Combo Time (Art Hit)
+    Enhancement("", 246, 275, 1, M, [], [], icon=0) # <54F2F7D0>
+    Enhancement("", 247, 276, 1, M, [], icon=0) # Evasion Up (Targeted)  
+    Enhancement("", 248, 277, 1, M, [], [], icon=0) # <E599A89B>
+    Enhancement("", 249, 278, 1, M, [], icon=0) # <183D62F0>
+    Enhancement("", 250, 280, 1, M, [], [], icon=0) # <6E886F68>
+    Enhancement("", 251, 281, 1, M, [], icon=0) # <5DA2D73A>
+    Enhancement("", 252, 283, 1, M, [], icon=0) # <747EC061>
+    Enhancement("", 253, 284, 1, M, [], icon=0) # Slower Debuff Expiry   
+    Enhancement("", 254, 287, 1, M, [], icon=0) # Slower Buff Expiry     
+    Enhancement("", 255, 290, 1, M, [], icon=0) # <7B2E3FC1>
+    Enhancement("", 256, 292, 1, M, [], [], icon=0) # <3C65A37E>
+    Enhancement("", 257, 293, 1, M, [], icon=0) # Negate Combo Reaction (Art)
+    Enhancement("", 258, 294, 1, M, [], icon=0) # Damage Up (Targeted No.)
+    Enhancement("", 259, 297, 1, M, [], icon=0) # <A9068BC4>
+    Enhancement("", 260, 298, 1, M, [], icon=0) # <E0A5E317>
+    Enhancement("", 261, 299, 1, M, [], icon=0) # <96E9BE64>
+    Enhancement("", 262, 0, 1, M, [], [], icon=0) # Debuff Resist        
+    Enhancement("", 263, 0, 1, M, [], [], icon=0) # <71289EF7>
+    Enhancement("", 264, 0, 1, M, [], [], icon=0) # <C427566B>
+    Enhancement("", 265, 0, 1, M, [], [], icon=0) # <32D6A4FD>
+    Enhancement("", 266, 307, 1, M, [], icon=0) # Arts Link
+    Enhancement("", 267, 0, 1, M, [], icon=0) # Recover Recharge (Ene. KO)
+    Enhancement("", 268, 309, 1, M, [], icon=0) # Damage Up (Critical)   
+    Enhancement("", 269, 310, 1, M, [], icon=0) # Critical Up (Launched) 
+    Enhancement("", 270, 311, 1, M, [], icon=0) # Recharge Rec. Up (Danger)
+    Enhancement("", 271, 312, 1, M, [], icon=0) # Reduce Aggro (Ally KO) 
+    Enhancement("", 272, 0, 1, M, [], [], icon=0) # Evasion Buff
+    Enhancement("", 273, 315, 1, M, [], [], icon=0) # Target Lock (Danger)
+    Enhancement("", 274, 316, 1, M, [], icon=0) # Damage Up (Time)       
+    Enhancement("", 275, 317, 1, M, [], icon=0) # Reduce Aggro (Auto-Attack)
+    Enhancement("", 276, 318, 1, M, [], [], icon=0) # Critical Rate + Damage Up
+    Enhancement("", 277, 319, 1, M, [], icon=0) # Emergency Rescue       
+    Enhancement("", 278, 320, 1, M, [], icon=0) # Damage Up (Unharmed)   
+    Enhancement("", 279, 0, 1, M, [], [], icon=0) # Enemy KO Buff        
+    Enhancement("", 280, 322, 1, M, [], icon=0) # Extreme Attack Shift   
+    Enhancement("", 281, 323, 1, M, [], icon=0) # Auto-Atk Spd Up (Same Role)
+    Enhancement("", 282, 324, 1, M, [], icon=0) # Attacker Mastery       
+    Enhancement("", 283, 325, 1, M, [], icon=0) # Defender Mastery       
+    Enhancement("", 284, 326, 1, M, [], icon=0) # Healer Mastery
+    Enhancement("", 285, 327, 1, M, [], [], icon=0) # Rushed Healing ArtsEnhancement("", 286, 328, 1, M, [], [], icon=0) # Ally KO Buff       
+    Enhancement("", 287, 329, 1, M, [], icon=0) # Fortitude (No Arts Ready)
+    Enhancement("", 288, 330, 1, M, [], icon=0) # Recover Recharge (Ally KO)
+    Enhancement("", 289, 331, 1, M, [], icon=0) # Block Recharge
+    Enhancement("", 290, 332, 1, M, [], [], icon=0) # Recover HP (Low HP)Enhancement("", 291, 333, 1, M, [], icon=0) # Target Lock (Revival)  
+    Enhancement("", 292, 334, 1, M, [], [], icon=0) # Power Up (Revival) 
+    Enhancement("", 293, 335, 1, M, [], icon=0) # Damage Transfer        
+    Enhancement("", 294, 0, 1, M, [], icon=0) # <D33620B5>
+    Enhancement("", 295, 337, 1, M, [], icon=0) # <3A8B75DC>
+    Enhancement("", 296, 0, 1, M, [], [], icon=0) # <108C6BDC>
+    Enhancement("", 297, 0, 1, M, [], icon=0) # <3DC91AB4>
+    Enhancement("", 298, 0, 1, M, [], icon=0) # <B45078E8>
+    Enhancement("", 299, 372, 1, M, [], icon=0) # <5D432F9D>
+    Enhancement("", 300, 373, 1, M, [], icon=0) # <699CD98E>
+    Enhancement("", 301, 374, 1, M, [], icon=0) # <01DFEBDE>
+    Enhancement("", 302, 375, 1, M, [], icon=0) # <6A7AE143>
+    Enhancement("", 303, 376, 1, M, [], icon=0) # <3B070EC3>
+    Enhancement("", 304, 0, 1, M, [], icon=0) # <ADD9368C>
+    Enhancement("", 305, 377, 1, M, [], [], icon=0) # <170EE93C>
+    Enhancement("", 306, 378, 1, M, [], icon=0) # <F62D628F>
+    Enhancement("", 307, 0, 1, M, [], [], icon=0) # <6C84E6C5>
+    Enhancement("", 308, 0, 1, M, [], [], icon=0) # <1CC5A345>
+    Enhancement("", 309, 382, 1, M, [], [], icon=0) # <A34DB1D7>
+    Enhancement("", 310, 383, 1, M, [], icon=0) # <665C44C7>
+    Enhancement("", 311, 384, 1, M, [], icon=0) # <42203200>
+    Enhancement("", 312, 0, 1, M, [], icon=0) # <44DED265>
+    Enhancement("", 313, 0, 1, M, [], [], icon=0) # <697730B7>
+    Enhancement("", 314, 386, 1, M, [], icon=0) # <A8EEF413>
+    Enhancement("", 315, 0, 1, M, [], [], icon=0) # <D30612A6>
+    Enhancement("", 316, 397, 1, M, [], icon=0) # <C42DC4C1>
+    Enhancement("", 317, 0, 1, M, [], icon=0) # <E371CADF>
+    Enhancement("", 318, 398, 1, M, [], icon=0) # Attack AOE Range Up    
+    Enhancement("", 319, 400, 1, M, [], icon=0) # Reaction Recharge      
+    Enhancement("", 320, 401, 1, M, [], icon=0) # Damage Up (In Water)
+    Enhancement("", 321, 402, 1, M, [], icon=0) # Recharge Up (In Water) 
+    Enhancement("", 322, 403, 1, M, [], icon=0) # Damage Up (On Land)    
+    Enhancement("", 323, 404, 1, M, [], icon=0) # Recharge Up (On Land)  
+    Enhancement("", 324, 405, 1, M, [], icon=0) # Damage Up (Self Debuff)Enhancement("", 325, 406, 1, M, [], icon=0) # Fortitude (Enemy KO)   
+    Enhancement("", 326, 324, 1, M, [], icon=0) # <81E4C3B5>
+    Enhancement("", 327, 0, 1, M, [], icon=0) # <69CE51B7>
+    Enhancement("", 328, 0, 1, M, [], icon=0) # <EE1FAEA1>
+    Enhancement("", 329, 0, 1, M, [], icon=0) # <DF068DFA>
+    Enhancement("", 330, 0, 1, M, [], icon=0) # <1ABA7C2B>
+    Enhancement("", 331, 0, 1, M, [], icon=0) # <D450C258>
+    Enhancement("", 332, 0, 1, M, [], icon=0) # <2661B30A>
+    Enhancement("", 333, 0, 1, M, [], [], icon=0) # <78B0628E>
+    Enhancement("", 334, 412, 1, M, [], [], icon=0) # <94556EFC>
+    Enhancement("", 335, 0, 1, M, [], [], icon=0) # <2F1CE75E>
+    Enhancement("", 336, 0, 1, M, [], icon=0) # <03522C97>
+    Enhancement("", 337, 415, 1, M, [], [], icon=0) # Cover Low HP AlliesEnhancement("", 338, 416, 1, M, [], [], icon=0) # Ranged Counter     
+    Enhancement("", 339, 417, 1, M, [], icon=0) # <2307272B>
+    Enhancement("", 340, 0, 1, M, [], icon=0) # <13E86D62>
+    Enhancement("", 341, 422, 1, M, icon=0) # <5AA8EF8D>
+    Enhancement("", 342, 423, 1, M, icon=0) # <8321536A>
+    Enhancement("", 343, 424, 1, M, icon=0) # <12290987>
+    Enhancement("", 344, 425, 1, M, icon=0) # <AE3060F1>
+    Enhancement("", 345, 426, 1, M, icon=0) # <DABAB9B0>
+    Enhancement("", 346, 427, 1, M, icon=0) # <635B23F8>
+    Enhancement("", 347, 0, 1, M, [], [], icon=0) # <FBF26980>
+    Enhancement("", 348, 0, 1, M, [], [], icon=0) # <BDD4CC17>
+    Enhancement("", 349, 0, 1, M, [], icon=0) # <3868CBC6>
+    Enhancement("", 350, 0, 1, M, [], icon=0) # <299669B7>
+    Enhancement("", 351, 0, 1, M, [], icon=0) # <B469390D>
+    Enhancement("", 352, 0, 1, M, [], [], icon=0) # <D021D9EE>
+    Enhancement("", 353, 0, 1, M, [], [], icon=0) # <FF3CFA6B>
+    Enhancement("", 354, 0, 1, M, [], [], icon=0) # <3DFBD363>
+    Enhancement("", 355, 0, 1, M, [], [], icon=0) # <B7DE0EBC>
+    Enhancement("", 356, 428, 1, M, [], [], icon=0) # Quick Move Evasion Up
+    Enhancement("", 357, 429, 1, M, [], [], icon=0) # Quick Move Damage Up
+    Enhancement("", 358, 430, 1, M, [], [], icon=0) # Quick Move AOE Damage
+    Enhancement("", 359, 431, 1, M, [], [], icon=0) # Faster Interlink Level Gain
+    Enhancement("", 360, 432, 1, M, [], [], icon=0) # Recover Recharge (Rescue)
+    Enhancement("", 361, 433, 1, M, [], [], icon=0) # Starting Master Arts
+    Enhancement("", 362, 441, 1, M, [], icon=0) # Class Aptitude Up      
+    Enhancement("", 363, 442, 1, M, [], icon=0) # Extra Positional Arts  
+    Enhancement("", 364, 443, 1, M, [], icon=0) # Extra Field Arts       
+    Enhancement("", 365, 444, 1, M, [], icon=0) # <FC852C14>
+    Enhancement("", 366, 0, 1, M, [], icon=0) # <0A83170C>
+    Enhancement("", 367, 0, 1, M, [], icon=0) # <5E206C1B>
+    Enhancement("", 368, 0, 1, M, [], icon=0) # <85F2BABF>
+    Enhancement("", 369, 447, 1, M, [], [], icon=0) # Absorb Attacks in Range
+    Enhancement("", 370, 448, 1, M, [], icon=0) # <6AED9FC9>
+    Enhancement("", 371, 450, 1, M, [], icon=0) # Starter TP Plus        
+    Enhancement("", 372, 240, 1, M, [], [], icon=0) # Fast Rescue & Healing Plus
+    Enhancement("", 373, 110, 1, M, [], [], icon=0) # Rescue HP & Healing Plus
+    Enhancement("", 374, 451, 1, M, icon=0) #
+    Enhancement("", 375, 452, 1, M, icon=0) #
+    Enhancement("", 376, 453, 1, M, [], icon=0) # <D90DECBD>
+    Enhancement("", 377, 455, 1, M, [], icon=0) # <887EC595>
+    Enhancement("", 378, 457, 1, M, icon=0) # <5228990D>
+    Enhancement("", 379, 459, 1, M, [], icon=0) # <C006052B>
+    Enhancement("", 380, 460, 1, M, [], icon=0) # <9E09B0E3>
+    Enhancement("", 381, 462, 1, M, [], icon=0) # <C682C0B2>
+    Enhancement("", 382, 464, 1, M, icon=0) # <ACEEE2B3>
+    Enhancement("", 383, 466, 1, M, icon=0) # <F5A970B0>
+    Enhancement("", 384, 468, 1, M, [], [], icon=0) # <1C953DC1>
+    Enhancement("", 385, 470, 1, M, [], icon=0) # <119C145F>
+    Enhancement("", 386, 472, 1, M, [], icon=0) # <819DAB29>
+    Enhancement("", 387, 474, 1, M, [], icon=0) # <8166DDA7>
+    Enhancement("", 388, 476, 1, M, [], icon=0) # <727B2C77>
+    Enhancement("", 389, 478, 1, M, icon=0) # <9BE9B1DB>
+    Enhancement("", 390, 480, 1, M, [], [], icon=0) # <67C12EA7>
+    Enhancement("", 391, 482, 1, M, [], icon=0) # <BD2FFC2C>
+    Enhancement("", 392, 484, 1, M, [], icon=0) # <44DD9F9C>
+    Enhancement("", 393, 486, 1, M, icon=0) # <BBA3F2C3>
+    Enhancement("", 394, 488, 1, M, [], icon=0) # <8B5865D2>
+    Enhancement("", 395, 0, 1, M, [], [], icon=0) # <CBAEDB1D>
+    Enhancement("", 396, 490, 1, M, [], icon=0) # Recover HP: Self (Evasion)
+    Enhancement("", 397, 491, 1, M, [], icon=0) # Recover Recharge (Evasion)
+    Enhancement("", 398, 492, 1, M, [], icon=0) # <7BA9A48D>
+    Enhancement("", 399, 494, 1, M, [], icon=0) # Recharge Up (Self KO)  
+    Enhancement("", 400, 495, 1, M, [], icon=0) # <FB5146DB>
+    Enhancement("", 401, 499, 1, M, [], [], icon=0) # Recharge (Nearby Ally Hit)
+    Enhancement("", 402, 500, 1, M, [], icon=0) # Ranged Heal (Critical) 
+    Enhancement("", 403, 501, 1, M, [], [], icon=0) #
+    Enhancement("", 404, 502, 1, M, [], [], icon=0) # Critical Hit Plus: All Allies
+    Enhancement("", 405, 503, 1, M, [], [], icon=0) # Power Up (In Field)Enhancement("", 406, 504, 1, M, icon=0) # Max Fields Up
+    Enhancement("", 407, 505, 1, M, [], [], icon=0) # <D8498101>
+    Enhancement("", 408, 507, 1, M, [], icon=0) # Several Stats Up       
+    Enhancement("", 409, 508, 1, M, [], [], icon=0) # Weaken Party       
+    Enhancement("", 410, 173, 0, M, [], [], icon=0) # <554E813F>
+    Enhancement("", 419, 0, 1, M, [], icon=0) # <83D1DC60>
+    Enhancement("", 411, 0, 1, M, [], icon=0) # <03956403>
+    Enhancement("", 412, 509, 1, M, [], icon=0) # Unity Combo Damage Up  
+    Enhancement("", 413, 525, 1, M, [], [], icon=0) # <D3A726C0>
+    Enhancement("", 414, 529, 1, M, [], icon=0) # <EF72174A>
+    Enhancement("", 415, 530, 1, M, [], [], icon=0) # <E110F3CA>
+    Enhancement("", 416, 430, 1, M, [], [], icon=0) # Quick Move AOE Damage
+    Enhancement("", 417, 532, 1, M, [], icon=0) # Weakness Damage Up     
+    Enhancement("", 418, 316, 1, M, [], icon=0) # Damage Up (Time)       
+    Enhancement("", 421, 0, 1, M, [], [], icon=0) # <B665A1F1>
+    Enhancement("", 424, 399, 1, M, [], [], icon=0) # Attack AOE Range + Dmg Up
+    Enhancement("", 425, 534, 1, M, [], icon=0) # Unity Special Starter  
+    Enhancement("", 426, 0, 1, M, [], icon=0) # <11BB435A>
+    Enhancement("", 428, 0, 1, M, [], [], icon=0) # Auto-Attack Twofold Haste
+    Enhancement("", 427, 434, 0, M, [], icon=0) # Starting Ouroboros Powers
+    Enhancement("", 422, 0, 0, M, [], [], icon=0) # <C7118AF0>
+    Enhancement("", 423, 0, 0, M, [], icon=0) # <EBFBFD29>
+    Enhancement("", 420, 0, 0, M, [], icon=0) # <378C7FD9>
