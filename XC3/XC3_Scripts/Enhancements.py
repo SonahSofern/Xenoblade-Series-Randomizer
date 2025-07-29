@@ -8,15 +8,19 @@
 import json, random
 
 EnhancementsList = []
+ArtsEnhancementList = []
+AccessoryEnhancementList = []
+SkillEnhancementList = []
+
 
 # Used for skills to choose icons for 
-M = 0 #Misc
+M = 0 #Mixed/Misc
 A = 1#atk
 H = 2#healer
 D = 3#defender
 
 class Enhancement:
-    def __init__(self, name, effID, captionID, field3E70C175, roleType = M, param1 = [], param2 = [], skillIcon = 0):
+    def __init__(self, name, effID, captionID, field3E70C175, roleType = M, param1 = [], param2 = [], skillIcon = 0, isArts = True, isSkill = True, isAccessory = True):
         self.name = name
         self.effID = effID
         self.captionID = captionID
@@ -25,6 +29,12 @@ class Enhancement:
         self.param2 = param2
         self.roleType = roleType
         self.skillIcon = skillIcon
+        if isArts:
+            ArtsEnhancementList.append(self)
+        if isAccessory:
+            AccessoryEnhancementList.append(self)
+        if isSkill:
+            SkillEnhancementList.append(self)
         EnhancementsList.append(self)
     
     def CreateEffect(self, BTL_EnhanceData, param1 = None, param2 = None):
@@ -112,36 +122,36 @@ DoubleAttack = Enhancement("Doublestrike", 26, 39, 1, A, [20,100], skillIcon=35)
 FrontAttack = Enhancement("Frontal", 27, 40, 1, A, [50,100], skillIcon=8)
 SideAttack = Enhancement("Blindside", 28, 42, 1, A, [50,200], skillIcon=8)
 BackAttack = Enhancement("Backstab", 29, 43, 1, A, [30,100], skillIcon=8)
-Toppled = Enhancement("", 30, 44, 1, M, [], skillIcon=0)
-Launched = Enhancement("", 31, 45, 1, M, [], skillIcon=0)
-SmashEffectUp = Enhancement("", 32, 47, 1, M, [], skillIcon=0)
-Dazed = Enhancement("", 33, 48, 1, M, [], skillIcon=0)
-BurstEffectUp = Enhancement("", 34, 49, 1, M, [], skillIcon=0)
-Challenger = Enhancement("", 35, 50, 1, M, [], skillIcon=0)
-Avenger = Enhancement("", 36, 51, 1, M, [], skillIcon=0)
-Unblockable = Enhancement("", 37, 52, 1, M, [], skillIcon=0)
-DamageUpHPLow = Enhancement("", 38, 54, 1, M, [], [], skillIcon=0)
-DamageUpHPHigh = Enhancement("", 39, 55, 1, M, [], [], skillIcon=0)
-KickStarter = Enhancement("", 40, 57, 1, M, [], [], skillIcon=0)
-EnemyKODamageUp = Enhancement("", 41, 58, 1, M, [], [], skillIcon=0)
-BreakDurationUp = Enhancement("", 42, 59, 1, M, [], skillIcon=0)
-ToppleDurationUp = Enhancement("", 43, 60, 1, M, [], skillIcon=0)
-LaunchDurationUp = Enhancement("", 44, 61, 1, M, [], skillIcon=0)
-DazeDurationUp = Enhancement("", 45, 62, 1, M, [], skillIcon=0)
-AutoAttackUp = Enhancement("", 46, 63, 1, M, [], skillIcon=0)
-AutoAttackCriticalRateUp = Enhancement("", 47, 64, 1, M, [], skillIcon=0)
-AutoAttackAccuracyUp = Enhancement("", 48, 65, 1, M, [], skillIcon=0)
-Aggroed = Enhancement("", 49, 66, 1, M, [], skillIcon=0)
-Indoors = Enhancement("", 50, 67, 1, M, [], skillIcon=0)
-Outdoors = Enhancement("", 51, 68, 1, M, [], skillIcon=0)
-BreakResistDown = Enhancement("", 52, 69, 1, M, [], skillIcon=0)
-55E46532 = Enhancement("", 53, 70, 1, M, [], skillIcon=0)
-64C914AD = Enhancement("", 54, 71, 1, M, [], skillIcon=0)
-52EE5A17 = Enhancement("", 55, 72, 1, M, [], skillIcon=0)
-PerfectShield = Enhancement("", 56, 73, 1, M, [], skillIcon=0)
-PhysicalAbsorb = Enhancement("", 57, 74, 1, M, [], skillIcon=0)
-EtherAbsorb = Enhancement("", 58, 75, 1, M, [], skillIcon=0)
-AB04FCD4 = Enhancement("", 59, 76, 1, M, [], [], skillIcon=0)
+Toppled = Enhancement("Toppler", 30, 44, 1, A, [50,200], skillIcon=14)
+Launched = Enhancement("Volley", 31, 45, 1, A, [50,200], skillIcon=14)
+SmashEffectUp = Enhancement("Gravity", 32, 47, 1, A, [100,500], skillIcon=28)
+Dazed = Enhancement("Dazy", 33, 48, 1, A, [50,200], skillIcon=29)
+BurstEffectUp = Enhancement("Burst", 34, 49, 1, M, [100,500], skillIcon=49)
+Challenger = Enhancement("Bravery", 35, 50, 1, A, [50,150], skillIcon=42)
+Avenger = Enhancement("Avenger", 36, 51, 1, A, [50,200], skillIcon=2)
+Unblockable = Enhancement("Piercing", 37, 52, 1, A, [30,100], skillIcon=5)
+DamageUpHPLow = Enhancement("Desperation", 38, 54, 1, A, [30,60], [50,200], skillIcon=44)
+DamageUpHPHigh = Enhancement("Overwhelm", 39, 55, 1, A, [90,60], [50,150], skillIcon=13)
+KickStarter = Enhancement("Rush", 40, 57, 1, A, [30,90], [25,120], skillIcon=17)
+EnemyKODamageUp = Enhancement("Bloodbath", 41, 58, 1, A, [20,60], [250,500], skillIcon=42)
+BreakDurationUp = Enhancement("Breaker", 42, 59, 1, M, [100,300], skillIcon=39)
+ToppleDurationUp = Enhancement("Toppler", 43, 60, 1, M, [50,150], skillIcon=39)
+LaunchDurationUp = Enhancement("Airborne", 44, 61, 1, M, [50,150], skillIcon=39)
+DazeDurationUp = Enhancement("Concussive", 45, 62, 1, M, [50,150], skillIcon=39)
+AutoAttackUp = Enhancement("Auto", 46, 63, 1, A, [100,500], skillIcon=13)
+AutoAttackCriticalRateUp = Enhancement("Critical", 47, 64, 1, A, [100,500], skillIcon=13)
+AutoAttackAccuracyUp = Enhancement("Honed", 48, 65, 1, A, [100,500], skillIcon=8)
+Aggroed = Enhancement("Clash", 49, 66, 1, M, [50,200], skillIcon=37)
+Indoors = Enhancement("Indoor", 50, 67, 1, A, [50,200], skillIcon=2)
+Outdoors = Enhancement("Outdoor", 51, 68, 1, A, [50,150], skillIcon=2)
+BreakResistDown = Enhancement("Breaker", 52, 69, 1, M, [20,100], skillIcon=14)
+# SanguineFire = Enhancement("", 53, 70, 1, M, [], skillIcon=0)
+# 64C914AD = Enhancement("", 54, 71, 1, M, [], skillIcon=0)
+# 52EE5A17 = Enhancement("", 55, 72, 1, M, [], skillIcon=0)
+PerfectShield = Enhancement("Dream", 56, 73, 1, D, [20,80], skillIcon=46)
+PhysicalAbsorb = Enhancement("Absorber", 57, 74, 1, D, [20,80], skillIcon=46)
+EtherAbsorb = Enhancement("Absorber", 58, 75, 1, D, [20,80], skillIcon=46)
+AbsorbAwaken = Enhancement("Awaken", 59, 76, 1, D, [20,80], [4,10], isSkill=False, isAccessory=False)
 ShieldSpike = Enhancement("", 60, 77, 1, M, [], [], skillIcon=0)
 ReflectorShield = Enhancement("", 61, 78, 1, M, [], skillIcon=0)
 EvasionUpLowHP = Enhancement("", 62, 79, 1, M, [], [], skillIcon=0)
