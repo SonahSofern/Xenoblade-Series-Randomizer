@@ -6,32 +6,32 @@ from XC3.XC3_Scripts import Enhancements
 def SkillRando():
     ignoreKeys = ["$id", "UseTalent"]
     ignoreSkillIDs = [100,101,105,106,107] 
-    InvalidEnhancements = [Enhancements.AgilityUp]
     skillOdds = XC3.XC3_Scripts.Options.SkillOptions.GetSpinbox()
     unusedSkills = XC3.XC3_Scripts.Options.SkillOptions_Unused.GetState()
     with open("XC3/JsonOutputs/btl/BTL_Skill_PC.json", 'r+', encoding='utf-8') as skillFile:
-        skillData = json.load(skillFile)
+        with open(f"XC3/JsonOutputs/btl/BTL_Enhance.json", 'r+', encoding='utf-8') as enhanceFile:
+            enhanceData = json.load(enhanceFile)
+            skillData = json.load(skillFile)
 
-        skillList = Helper.RandomGroup(skillData["rows"])
-        for skill in (skillList.originalGroup):
-            if not PassSkillCheck(skill, ignoreSkillIDs):
-                skillList.FilterMember(skill)
-                
-        if unusedSkills:
-            for enh in Enhancements.EnhancementsList:
-                if enh in InvalidEnhancements:
+            skillList = Helper.RandomGroup(skillData["rows"])
+            for skill in (skillList.originalGroup):
+                if not PassSkillCheck(skill, ignoreSkillIDs):
+                    skillList.FilterMember(skill)
+                    
+            if unusedSkills:
+                for enh in Enhancements.SkillEnhancementList:
+                    skillList.AddNewData(AddNewSkill(skillList, enh, enhanceData))
+            
+            for skill in skillData["rows"]: # Replace the list
+                if not Helper.OddsCheck(skillOdds):
                     continue
-                skillList.AddNewData(AddNewSkill(skillList, enh))
-        
-        for skill in skillData["rows"]: # Replace the list
-            if not Helper.OddsCheck(skillOdds):
-                continue
-            if not PassSkillCheck(skill, ignoreSkillIDs):
-                continue
-            chosenSkill = skillList.SelectRandomMember()
-            skillList.CopyKeys(skill, chosenSkill, ignoreKeys)
+                if not PassSkillCheck(skill, ignoreSkillIDs):
+                    continue
+                chosenSkill = skillList.SelectRandomMember()
+                skillList.CopyKeys(skill, chosenSkill, ignoreKeys)
 
-        JSONParser.CloseFile(skillData, skillFile)
+            JSONParser.CloseFile(skillData, skillFile)
+            JSONParser.CloseFile(enhanceData, enhanceFile)
 
 def PassSkillCheck(skill, ignoreSkills):
     if skill["$id"] in ignoreSkills:
@@ -41,7 +41,7 @@ def PassSkillCheck(skill, ignoreSkills):
             return False
     return True
 
-def AddNewSkill(skillList:Helper.RandomGroup, e:Enhancements.Enhancement):
+def AddNewSkill(skillList:Helper.RandomGroup, e:Enhancements.Enhancement, enhanceData):
       return  {
       "$id": len(skillList.originalGroup) + 1,
       "ID": "<30F895AE>",
@@ -51,11 +51,11 @@ def AddNewSkill(skillList:Helper.RandomGroup, e:Enhancements.Enhancement):
       "Type": 0,
       "UseTalent": 0,
       "UseChr": 0,
-      "Enhance1": e.CreateEffect(),
-      "Enhance2": e.CreateEffect(),
-      "Enhance3": e.CreateEffect(),
-      "Enhance4": e.CreateEffect(),
-      "Enhance5": e.CreateEffect(),
+      "Enhance1": e.CreateEffect(enhanceData),
+      "Enhance2": e.CreateEffect(enhanceData),
+      "Enhance3": e.CreateEffect(enhanceData),
+      "Enhance4": e.CreateEffect(enhanceData),
+      "Enhance5": e.CreateEffect(enhanceData),
       "EnSkillAchieve": 0,
       "RoleParam1": 0,
       "RoleParam2": 0,
