@@ -44,6 +44,6 @@ def DetermineRecommendedCategory(acce, enhancement:Enhancements.Enhancement):
     
 def ApplyNewName(acce, nameData, newEnhancement:Enhancements.Enhancement):
     for name in nameData["rows"]:
-        if name["$id"] == acce["Name"]:
+        if name["$id"] == acce["Name"]: # Duplicate Names will have to extend the tables
             name["name"] = newEnhancement.name
             break
