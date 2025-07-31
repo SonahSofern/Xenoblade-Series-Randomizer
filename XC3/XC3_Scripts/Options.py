@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XC3.XC3_Scripts import Shortcuts, Skills, Heroes, QOL as Quality, Enemy , IDs, Enhancements
+from XC3.XC3_Scripts import Shortcuts, Skills, Heroes, QOL as Quality, Enemy , IDs, Enhancements, Accessories
 scripts.Interactables.Game = "XC3" 
 
 General = 1
@@ -17,8 +17,7 @@ Tabs = {
     QOL: '🐇 Quality of Life',
 }
 
-Accessories = Option("Accessories", General, "Randomizes the effects of Accessories")
-Accessories_Unused = SubOption("Unused Effects", Accessories)
+AccessoriesOption = Option("Accessories", General, "Randomizes the effects of Accessories", [lambda: Accessories.AccessoryRando()])
 GemsOption = Option("Gems", General, "Randomizes the effects of gems.")
 GemsOption_Unused = SubOption("Unused Gems", GemsOption)
 
@@ -43,6 +42,7 @@ BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, hasSpinBox
 BossEnemyOption_GroupFights = SubOption("Balance Group Fights", BossEnemyOption)
 
 SkillOptions = Option("Class Skills", Character, "Randomizes class skills", [lambda: Skills.SkillRando()], hasSpinBox=True)
+SkillOptions_Vanilla = SubOption("Vanilla Skills", SkillOptions)
 SkillOptions_Unused = SubOption("Unused Skills", SkillOptions)
 PlayerArtsOption = Option("Arts", Character) # Probably only want to add extra effects not create entirely new arts like 2 and alter already exisiting effects strengths
 HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])

@@ -213,10 +213,9 @@ def TheTunneler(filepaths: list[str], rowvalues: list[int], inputheaders: list[s
     return tempholder2
     
 class RandomGroup():
-    def __init__(self, data):
+    def __init__(self):
         self.originalGroup = []
         self.currentGroup = []
-        self.GenData(data)
     
     def GenData(self, data):    
         for item in data: # Build the list from the original data
