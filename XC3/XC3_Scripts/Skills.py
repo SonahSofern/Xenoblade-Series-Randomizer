@@ -20,14 +20,14 @@ def SkillRando():
                 originalNames = Helper.RandomGroup()
                 originalNames.GenData(nameData["rows"])
 
-                if vanillaSkills:
+                if vanillaSkills: # Generate Vanilla Skill List
                     skillList.GenData(skillData["rows"])
                     for skill in (skillList.originalGroup):
                         if not PassSkillCheck(skill, ignoreSkillIDs):
                             skillList.FilterMember(skill)
                         
-                if unusedSkills:
-                    for enh in Enhancements.SkillEnhancementList:
+                if unusedSkills: # Generate Custom Skill List
+                    for enh in Enhancements.SkillEnhancementList.originalGroup:
                         skillList.AddNewData(enh)
                 
                 for skill in skillData["rows"]: # Replace the list
@@ -39,7 +39,7 @@ def SkillRando():
                     chosenSkill = skillList.SelectRandomMember()
                     
                     if isinstance(chosenSkill, Enhancements.Enhancement): # If we get a custom enhancement convert it to workable data
-                        chosenSkill = DefineNewSkill(skillList, enh, enhanceData, skill, nameData)
+                        chosenSkill = DefineNewSkill(skillList, enh, enhanceData)
                         DetermineName(enh, skill, nameData)
                     # Apply the original names
                     skillList.CopyKeys(skill, chosenSkill, ignoreKeys)
@@ -56,21 +56,22 @@ def PassSkillCheck(skill, ignoreSkills):
             return False
     return True
 
-def DefineNewSkill(skillList:Helper.RandomGroup, e:Enhancements.Enhancement, enhanceData, skill):
-      return  {
-      "$id": len(skillList.originalGroup) + 1,
-      "ID": "<30F895AE>",
+def DefineNewSkill(skillList:Helper.RandomGroup, e:Enhancements.Enhancement, enhanceData):
+    newID = len(skillList.originalGroup) + 1
+    return  {
+      "$id": newID,
+      "ID": f"{newID}",
       "Name": e.name,
       "DebugName": "",
       "Caption": 0,
       "Type": 0,
       "UseTalent": 0,
       "UseChr": 0,
-      "Enhance1": e.CreateEffect(enhanceData, powerPercent=20),
-      "Enhance2": e.CreateEffect(enhanceData, powerPercent=40),
-      "Enhance3": e.CreateEffect(enhanceData, powerPercent=60),
-      "Enhance4": e.CreateEffect(enhanceData, powerPercent=80),
-      "Enhance5": e.CreateEffect(enhanceData, powerPercent=100),
+      "Enhance1": e.CreateEffect(enhanceData, powerPercent=.2),
+      "Enhance2": e.CreateEffect(enhanceData, powerPercent=.4),
+      "Enhance3": e.CreateEffect(enhanceData, powerPercent=.6),
+      "Enhance4": e.CreateEffect(enhanceData, powerPercent=.8),
+      "Enhance5": e.CreateEffect(enhanceData, powerPercent=1),
       "EnSkillAchieve": 0,
       "RoleParam1": 0,
       "RoleParam2": 0,
