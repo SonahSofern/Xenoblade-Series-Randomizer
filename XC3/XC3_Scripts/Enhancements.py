@@ -56,7 +56,7 @@ class Enhancement:
         newID = len(BTL_EnhanceData["rows"])+1
         newEffect = {
         "$id": newID,
-        "ID": "",
+        "ID": f"{newID}",
         "EnhanceEffect": self.effID,
         "Param1": self.CalculatePower(param1, powerPercent),
         "Param2": self.CalculatePower(param2, powerPercent),
@@ -81,7 +81,7 @@ class Enhancement:
         diff = max - min
         chosen = min + (diff*power)
         newParam = chosen
-        return newParam
+        return int(newParam)
     
 # with open(f"XC3/JsonOutputs/btl/BTL_Enhance.json", 'r+', encoding='utf-8') as enhanceFile:
 #     with open(f"XC3/JsonOutputs/btl/BTL_EnhanceEff.json", 'r+', encoding='utf-8') as enhanceEffFile:
@@ -139,12 +139,12 @@ def CreateEnhancements():
     Enhancement("Iron", 16, 17, 1, D, [10,50], skillIcon=6) # Physical Defense Plus
     Enhancement("Ether", 17, 18, 1, D, [10,50], skillIcon=7) # Ether Defense Plus
     Enhancement("Blocker", 18, 19, 1, D, [10,40], skillIcon=4) # Block Rate Plus
-    Enhancement("Terrestrial", 19, 0, 1, A, [0], [50,200], skillIcon=37) # Species Expert
-    Enhancement("Aquatic", 19, 0, 1, A, [1], [50,200], skillIcon=37) # Species Expert
-    Enhancement("Aerial", 19, 0, 1, A, [2], [50,200], skillIcon=37) # Species Expert
-    Enhancement("Agnus", 19, 0, 1, A, [3], [50,200], skillIcon=37) # Species Expert
-    Enhancement("Machine", 19, 0, 1, A, [6], [50,300], skillIcon=37) # Species Expert
-    Enhancement("Keves", 19, 0, 1, A, [4], [50,200], skillIcon=37) # Species Expert
+    Enhancement("Terrestrial", 19, 20, 1, A, [0], [50,200], skillIcon=37) # Species Expert
+    Enhancement("Aquatic", 19, 21, 1, A, [1], [50,200], skillIcon=37) # Species Expert
+    Enhancement("Aerial", 19, 23, 1, A, [2], [50,200], skillIcon=37) # Species Expert
+    Enhancement("Agnus", 19, 27, 1, A, [3], [50,200], skillIcon=37) # Species Expert
+    Enhancement("Machine", 19, 29, 1, A, [6], [50,300], skillIcon=37) # Species Expert
+    Enhancement("Keves", 19, 26, 1, A, [4], [50,200], skillIcon=37) # Species Expert
     # Enhancement("", 20, 0, 1, M, [], [], skillIcon=0) # <CAE39FB6>
     Enhancement("Counter", 21, 30, 1, D, [50,500], skillIcon=27) # Damage Counter
     Enhancement("Reversal", 22, 31, 1, D, [50,500], skillIcon=27) # Evasion Counter

@@ -1,4 +1,4 @@
-import json, random
+import json, random, copy
 from XC3.XC3_Scripts import Enhancements
 from scripts import JSONParser
 
@@ -9,14 +9,16 @@ def AccessoryRando():
                 enhData = json.load(enhanceFile)
                 itmData = json.load(itmFile)
                 nameData = json.load(nameFile)
+                originalNameData = copy.deepcopy(nameData)
                 
                 for item in itmData["rows"]:
+                    if item["Enhance"] == 0 or item["Name"] == 0: # Ignore debug items
+                        continue
                     newEnhancement:Enhancements.Enhancement = Enhancements.AccessoryEnhancementList.SelectRandomMember()
-                    powerLv = DetermineAccessoryPower(item)
                     DetermineRecommendedCategory(item, newEnhancement)
-                    newID = newEnhancement.CreateEffect(enhData, powerPercent=powerLv)
+                    newID = newEnhancement.CreateEffect(enhData, powerPercent=DetermineAccessoryPower(item))
                     item["Enhance"] = newID
-                    ApplyNewName(item, nameData, newEnhancement)
+                    item["Name"] = CreateNewName(item, nameData, newEnhancement, originalNameData)
                     
                 JSONParser.CloseFile(itmData, itmFile)
                 JSONParser.CloseFile(enhData, enhanceFile)
@@ -29,7 +31,7 @@ def DetermineAccessoryPower(item):
         powerLevel = random.randrange(40,70)
     else:
         powerLevel = random.randrange(0,40)
-    return powerLevel//100
+    return powerLevel/100
 
 def DetermineRecommendedCategory(acce, enhancement:Enhancements.Enhancement):
     acce["Flag_RecTank"] = 0
@@ -42,8 +44,18 @@ def DetermineRecommendedCategory(acce, enhancement:Enhancements.Enhancement):
     elif enhancement.roleType == Enhancements.D:
         acce["Flag_RecTank"] = 1
     
-def ApplyNewName(acce, nameData, newEnhancement:Enhancements.Enhancement):
-    for name in nameData["rows"]:
-        if name["$id"] == acce["Name"]: # Duplicate Names will have to extend the tables
-            name["name"] = newEnhancement.name
+def CreateNewName(acce ,nameData, newEnhancement:Enhancements.Enhancement, originalNameData):
+    for name in originalNameData["rows"]:
+        if name["$id"] == acce["Name"]:
+            secondWord = name["name"].split()[-1]
             break
+
+    newNameId = len(nameData["rows"]) + 1
+    newName = {
+      "$id": newNameId,
+      "label": f"{newNameId}", # To ignore error messages over dupe IDs
+      "style": 15,
+      "name": f"{newEnhancement.name} {secondWord}"
+    }
+    nameData["rows"].append(newName)
+    return newNameId

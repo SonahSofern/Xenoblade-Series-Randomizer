@@ -17,9 +17,6 @@ Tabs = {
     QOL: '🐇 Quality of Life',
 }
 
-AccessoriesOption = Option("Accessories", General, "Randomizes the effects of Accessories", [lambda: Accessories.AccessoryRando()])
-GemsOption = Option("Gems", General, "Randomizes the effects of gems.")
-GemsOption_Unused = SubOption("Unused Gems", GemsOption)
 
 # CharactersOption = Option("Heroes", Character, "Randomizes heroes", [lambda: Characters.CharacterSwaps()])
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsters, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption)], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
@@ -41,6 +38,9 @@ BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True)
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, hasSpinBox=True)
 BossEnemyOption_GroupFights = SubOption("Balance Group Fights", BossEnemyOption)
 
+AccessoriesOption = Option("Accessories", Character, "Randomizes the effects of Accessories", [lambda: Accessories.AccessoryRando()])
+GemsOption = Option("Gems", Character, "Randomizes the effects of gems.")
+GemsOption_Unused = SubOption("Unused Gems", GemsOption)
 SkillOptions = Option("Class Skills", Character, "Randomizes class skills", [lambda: Skills.SkillRando()], hasSpinBox=True)
 SkillOptions_Vanilla = SubOption("Vanilla Skills", SkillOptions)
 SkillOptions_Unused = SubOption("Unused Skills", SkillOptions)
