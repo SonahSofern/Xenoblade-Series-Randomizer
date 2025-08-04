@@ -23,7 +23,7 @@ high = 0
 defaultSkillIcon = -1
 
 class Enhancement:
-    def __init__(self, name, effID, captionID, field3E70C175, roleType = M, param1 = [low,high], param2 = [low,high], skillIcon = defaultSkillIcon, isArts = True, isGem = True, isAccessory = True):
+    def __init__(self, name, effID, captionID, field3E70C175, roleType = M, param1 = [low,high], param2 = [low,high], skillIcon = defaultSkillIcon, isArts = True, isGem = True, isAccessory = True, isBaseGame = True, isFutureRedeemed = True):
         self.name = name
         self.effID = effID
         self.captionID = captionID
@@ -32,6 +32,8 @@ class Enhancement:
         self.param2 = param2
         self.roleType = roleType
         self.skillIcon = skillIcon
+        self.BaseGame = isBaseGame
+        self.FutureRedeemed = isFutureRedeemed
         if isArts:
             ArtsEnhancementList.AddNewData(self)
         if isAccessory:
@@ -348,56 +350,56 @@ def CreateEnhancements():
     Enhancement("Cleansing", 220, 253, 1, H, [25,50], skillIcon=16) # Healing Up (Debuff Clear)
     Enhancement("Buffer", 221, 254, 1, A, [50,100], skillIcon=18) # Damage Up (Buff)
     Enhancement("Debuffer", 222, 255, 1, A, [50,100], skillIcon=24) # Damage Up (Debuff)
-    # # Enhancement("", 223, 0, 1, M, [], skillIcon=0) # <29AEFFA8>
-    # # Enhancement("", 224, 0, 1, M, [], skillIcon=0) # <745DD649>
-    # # Enhancement("", 225, 0, 1, M, [], skillIcon=0) # <4B82A9D2>
-    # Enhancement("", 226, 256, 1, M, [], skillIcon=0) # <F1A4DB56>
-    # # Enhancement("", 227, 0, 1, M, [], skillIcon=0) # <7F104DB2>
-    # # Enhancement("", 228, 0, 1, M, [], skillIcon=0) # <55351493>
-    # # Enhancement("", 229, 0, 1, M, [], [], skillIcon=0) # <0147B3BB>
-    # # Enhancement("", 230, 0, 1, M, [], [], skillIcon=0) # <4E126891>
-    # Enhancement("", 231, 259, 1, M, [], skillIcon=0) # <224D3D2A>
+    # Enhancement("", 223, 0, 1, M, [], skillIcon=0) # <29AEFFA8>
+    # Enhancement("", 224, 0, 1, M, [], skillIcon=0) # <745DD649>
+    # Enhancement("", 225, 0, 1, M, [], skillIcon=0) # <4B82A9D2>
+    Enhancement("Eagle", 226, 256, 1, M, [50,300], skillIcon=8) # <F1A4DB56> Accuracy Up
+    # Enhancement("", 227, 0, 1, M, [], skillIcon=0) # <7F104DB2>
+    # Enhancement("", 228, 0, 1, M, [], skillIcon=0) # <55351493>
+    # Enhancement("", 229, 0, 1, M, [], [], skillIcon=0) # <0147B3BB>
+    # Enhancement("", 230, 0, 1, M, [], [], skillIcon=0) # <4E126891>
+    Enhancement("Cleanser", 231, 259, 1, M, [10,60], isGem=False, isAccessory=False) # <224D3D2A> Buff removal on art hit
     # Enhancement("", 232, 260, 1, M, [], skillIcon=0) # <E0D09216>
-    # Enhancement("", 233, 261, 1, M, [], [], skillIcon=0) # Nearby Ally Fortitude
-    # # Enhancement("", 234, 0, 1, M, [], [], skillIcon=0) # <1E3DEC99>
-    # Enhancement("", 235, 264, 1, M, [], [], skillIcon=0) # Awaken (Damage Stack)
-    # Enhancement("", 236, 265, 1, M, [], [], skillIcon=0) # <0662DEEF>
-    # Enhancement("", 237, 266, 1, M, [], [], skillIcon=0) # Attack Up: All Allies
-    # Enhancement("", 238, 267, 1, M, [], [], skillIcon=0) # Elemental Up
-    # Enhancement("", 239, 269, 1, M, [], [], skillIcon=0) # Def./Recovery Up: All Allies        
-    # # Enhancement("", 240, 0, 1, M, [], skillIcon=0) # <8A98413D>
-    # # Enhancement("", 241, 0, 1, M, [], skillIcon=0) # Rescue Buff
-    # # Enhancement("", 242, 0, 1, M, [], [], skillIcon=0) # <2D37CF4F>
-    # Enhancement("", 243, 271, 1, M, [], skillIcon=0) # Pierce Defense (Critical)
-    # Enhancement("", 244, 272, 1, M, [], skillIcon=0) # <4078B801>
-    # Enhancement("", 245, 274, 1, M, [], skillIcon=0) # Extend Combo Time (Art Hit)
-    # Enhancement("", 246, 275, 1, M, [], [], skillIcon=0) # <54F2F7D0>
-    # Enhancement("", 247, 276, 1, M, [], skillIcon=0) # Evasion Up (Targeted)
-    # Enhancement("", 248, 277, 1, M, [], [], skillIcon=0) # <E599A89B>
-    # Enhancement("", 249, 278, 1, M, [], skillIcon=0) # <183D62F0>
-    # Enhancement("", 250, 280, 1, M, [], [], skillIcon=0) # <6E886F68>
-    # Enhancement("", 251, 281, 1, M, [], skillIcon=0) # <5DA2D73A>
-    # Enhancement("", 252, 283, 1, M, [], skillIcon=0) # <747EC061>
-    # Enhancement("", 253, 284, 1, M, [], skillIcon=0) # Slower Debuff Expiry
-    # Enhancement("", 254, 287, 1, M, [], skillIcon=0) # Slower Buff Expiry
-    # Enhancement("", 255, 290, 1, M, [], skillIcon=0) # <7B2E3FC1>
-    # Enhancement("", 256, 292, 1, M, [], [], skillIcon=0) # <3C65A37E>
-    # Enhancement("", 257, 293, 1, M, [], skillIcon=0) # Negate Combo Reaction (Art)
-    # Enhancement("", 258, 294, 1, M, [], skillIcon=0) # Damage Up (Targeted No.)
-    # Enhancement("", 259, 297, 1, M, [], skillIcon=0) # <A9068BC4>
-    # Enhancement("", 260, 298, 1, M, [], skillIcon=0) # <E0A5E317>
-    # Enhancement("", 261, 299, 1, M, [], skillIcon=0) # <96E9BE64>
-    # # Enhancement("", 262, 0, 1, M, [], [], skillIcon=0) # Debuff Resist
-    # # Enhancement("", 263, 0, 1, M, [], [], skillIcon=0) # <71289EF7>
-    # # Enhancement("", 264, 0, 1, M, [], [], skillIcon=0) # <C427566B>
-    # # Enhancement("", 265, 0, 1, M, [], [], skillIcon=0) # <32D6A4FD>
-    # Enhancement("", 266, 307, 1, M, [], skillIcon=0) # Arts Link
-    # # Enhancement("", 267, 0, 1, M, [], skillIcon=0) # Recover Recharge (Ene. KO)
-    # Enhancement("", 268, 309, 1, M, [], skillIcon=0) # Damage Up (Critical)
-    # Enhancement("", 269, 310, 1, M, [], skillIcon=0) # Critical Up (Launched)
-    # Enhancement("", 270, 311, 1, M, [], skillIcon=0) # Recharge Rec. Up (Danger)
-    # Enhancement("", 271, 312, 1, M, [], skillIcon=0) # Reduce Aggro (Ally KO)
-    # # Enhancement("", 272, 0, 1, M, [], [], skillIcon=0) # Evasion Buff
+    Enhancement("Guardian", 233, 261, 1, D, [2,10], [20,50], skillIcon=41) # Nearby Ally Fortitude
+    # Enhancement("", 234, 0, 1, M, [], [], skillIcon=0) # <1E3DEC99>
+    Enhancement("Ascendancy", 235, 264, 1, A, [20,50], [4,10], skillIcon=22) # Awaken (Damage Stack)
+    Enhancement("Discharge", 236, 265, 1, A, [50,100], [200,300], isGem=False, isAccessory=False) # <0662DEEF> Discharge all elementals
+    Enhancement("Fighter", 237, 266, 1, A, [50,100], [10,50], skillIcon=2) # Attack Up: All Allies
+    Enhancement("Elementalist", 238, 267, 1, A, [100,200], [100,400], skillIcon=51) # Elemental Up
+    Enhancement("Mountain", 239, 269, 1, D, [20,50], [50,200], skillIcon=6) # Def./Recovery Up: All Allies        
+    # Enhancement("", 240, 0, 1, M, [], skillIcon=0) # <8A98413D>
+    # Enhancement("", 241, 0, 1, M, [], skillIcon=0) # Rescue Buff
+    # Enhancement("", 242, 0, 1, M, [], [], skillIcon=0) # <2D37CF4F>
+    Enhancement("Supercharged", 243, 271, 1, A, [50,100], skillIcon=33) # Pierce Defense (Critical)
+    Enhancement("Burning", 244, 272, 1, A, [1,2], skillIcon=19, isFutureRedeemed=False) # <4078B801> Damage increase with heat gauge
+    Enhancement("Locking", 245, 274, 1, M, [30,60], isGem=False, isAccessory=False) # Extend Combo Time (Art Hit)
+    Enhancement("Counterattack", 246, 275, 1, D, [200,500], [20,100], isGem=False, isAccessory=False) # <54F2F7D0> Evade deals damage and increases your damage up to a %
+    Enhancement("Slippery", 247, 276, 1, D, [50,300], skillIcon=9) # Evasion Up (Targeted)
+    Enhancement("Ouroboros", 248, 277, 1, A, [100,400], [100,100], isGem=False, isAccessory=False) # <E599A89B> Damage up to moebius, cannot be blocked
+    Enhancement("Angel", 249, 278, 1, H, [1,5], isGem=False, isAccessory=False) # <183D62F0> Revive all and overheat
+    Enhancement("Spiked", 250, 280, 1, A, [5,10], [50,200], isGem=False, isAccessory=False) # <6E886F68> Damage to enemies in range
+    Enhancement("Shredded", 251, 281, 1, A, [50,100], isGem=False, isAccessory=False) # <5DA2D73A> Increase damage based on amount of buffs on yourself
+    Enhancement("Inflictor", 252, 283, 1, M, [30,60], isGem=False, isAccessory=False) # <747EC061> Enemy debuff resistance down
+    Enhancement("Squeeze", 253, 284, 1, M, [30,90], skillIcon=20) # Slower Debuff Expiry
+    Enhancement("Saints", 254, 287, 1, M, [30,90], skillIcon=20) # Slower Buff Expiry
+    Enhancement("Crisping", 255, 290, 1, A, [20,70], isGem=False, isAccessory=False) # <7B2E3FC1> Increases damage based on debuffs of ALL enemies
+    Enhancement("Forcefield", 256, 292, 1, D, [20,60], [100,300], isGem=False, isAccessory=False) # <3C65A37E> Reduces damage to team when art is active and counters attacks at self
+    Enhancement("Flow", 257, 293, 1, M, [80,100], isGem=False, isAccessory=False) # Negate Combo Reaction (Art)
+    Enhancement("Lightningrod", 258, 294, 1, A, [50,100], skillIcon=42) # Damage Up (Targeted No.)
+    Enhancement("Breaking", 259, 297, 1, A, [20,70], isGem=False, isAccessory=False) # <A9068BC4> Negate enemy guard and inflict break
+    Enhancement("Combo", 260, 298, 1, A, [50,100], isGem=False, isAccessory=False) # <E0A5E317> Comboes increase damage (unclear to what effect)
+    Enhancement("Combo", 261, 299, 1, A, [50,100], isGem=False, isAccessory=False) # <96E9BE64> attacking a comboed enemy increased damage (also unclear)
+    # Enhancement("", 262, 0, 1, M, [], [], skillIcon=0) # Debuff Resist
+    # Enhancement("", 263, 0, 1, M, [], [], skillIcon=0) # <71289EF7>
+    # Enhancement("", 264, 0, 1, M, [], [], skillIcon=0) # <C427566B>
+    # Enhancement("", 265, 0, 1, M, [], [], skillIcon=0) # <32D6A4FD>
+    Enhancement("Linked", 266, 307, 1, A, [3,5], skillIcon=35) # Arts Link
+    Enhancement("Steamroll", 267, 0, 1, M, [30,70], skillIcon=17) # Recover Recharge (Ene. KO) (needs description)
+    Enhancement("Critique", 268, 309, 1, A, [10,50], skillIcon=10) # Damage Up (Critical)
+    Enhancement("Expose", 269, 310, 1, A, [50,100], skillIcon=8) # Critical Up (Launched)
+    Enhancement("Savior", 270, 311, 1, H, [50,200], skillIcon=16) # Recharge Rec. Up (Danger)
+    Enhancement("Distraction", 271, 312, 1, M, [50,100], skillIcon=12) # Reduce Aggro (Ally KO)
+    # Enhancement("", 272, 0, 1, M, [], [], skillIcon=0) # Evasion Buff
     # Enhancement("", 273, 315, 1, M, [], [], skillIcon=0) # Target Lock (Danger)
     # Enhancement("", 274, 316, 1, M, [], skillIcon=0) # Damage Up (Time)
     # Enhancement("", 275, 317, 1, M, [], skillIcon=0) # Reduce Aggro (Auto-Attack)
