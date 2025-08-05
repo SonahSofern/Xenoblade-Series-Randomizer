@@ -5,10 +5,7 @@ from scripts import Helper
 
 # Lists to be populated during randomization
 EnhancementsList = Helper.RandomGroup()
-ArtsEnhancementList = Helper.RandomGroup()
-AccessoryEnhancementList = Helper.RandomGroup()
-SkillEnhancementList = Helper.RandomGroup()
-GemEnhancementsList = Helper.RandomGroup()
+
 
 Normal = [10,100]
 
@@ -23,7 +20,7 @@ high = 0
 defaultSkillIcon = -1
 
 class Enhancement:
-    def __init__(self, name, effID, captionID, field3E70C175, roleType = M, param1 = [low,high], param2 = [low,high], skillIcon = defaultSkillIcon, isArts = True, isGem = True, isAccessory = True, isBaseGame = True, isFutureRedeemed = True):
+    def __init__(self, name, effID, captionID, field3E70C175, roleType = M, param1 = [low,high], param2 = [low,high], skillIcon = defaultSkillIcon, isArts = False, isGem = True, isAccessory = True, isBaseGame = True, isFutureRedeemed = True, isChainOrder = False):
         self.name = name
         self.effID = effID
         self.captionID = captionID
@@ -34,14 +31,6 @@ class Enhancement:
         self.skillIcon = skillIcon
         self.BaseGame = isBaseGame
         self.FutureRedeemed = isFutureRedeemed
-        if isArts:
-            ArtsEnhancementList.AddNewData(self)
-        if isAccessory:
-            AccessoryEnhancementList.AddNewData(self)
-        if skillIcon != defaultSkillIcon:
-            SkillEnhancementList.AddNewData(self)
-        if isGem:
-            GemEnhancementsList.AddNewData(self)
         EnhancementsList.AddNewData(self)
     
     def CreateEffect(self, BTL_EnhanceData, overrideParam1 = None, overrideParam2 = None, powerPercent = 0.5):
@@ -174,7 +163,7 @@ def CreateEnhancements():
     Enhancement("Airborne", 44, 61, 1, M, [50,150], skillIcon=39) # Launch Duration Up
     Enhancement("Concussive", 45, 62, 1, M, [50,150], skillIcon=39) # Daze Duration Up
     Enhancement("Auto", 46, 63, 1, A, [100,500], skillIcon=13) # Auto-Attack Up
-    Enhancement("Critical", 47, 64, 1, A, [100,500], skillIcon=13) # Auto-Attack Critical Rate Up
+    Enhancement("Critsy", 47, 64, 1, A, [100,500], skillIcon=13) # Auto-Attack Critical Rate Up
     Enhancement("Honed", 48, 65, 1, A, [100,500], skillIcon=8) # Auto-Attack Accuracy Up
     Enhancement("Clash", 49, 66, 1, M, [50,200], skillIcon=37) # Aggroed↑
     Enhancement("Indoor", 50, 67, 1, A, [50,200], skillIcon=2) # Indoors↑
@@ -213,7 +202,7 @@ def CreateEnhancements():
     Enhancement("Battlecry", 83, 107, 1, D, [1000,2000], skillIcon=12) # Aggro Starter
     Enhancement("Flourish", 84, 108, 1, D, [100,500], skillIcon=12) # Faster Damage Aggro     
     # Enhancement("", 85, 0, 1, M, [], skillIcon=0) # <D18934AB>
-    Enhancement("Angelic", 86, 109, 1, H, [50,100], skillIcon=32) # Rescue HP Up: Other     
+    Enhancement("Rescue", 86, 109, 1, H, [50,100], skillIcon=32) # Rescue HP Up: Other     
     Enhancement("Vamp", 87, 111, 1, H, [100,200], [3,10], skillIcon=16) # Arts Heal
     Enhancement("Support", 88, 112, 1, H, [50,150], skillIcon=16) # Healing Arts Up
     Enhancement("Whisper", 89, 113, 1, H, [50,150], skillIcon=16) # Slower Healing Aggro    
@@ -273,7 +262,7 @@ def CreateEnhancements():
     Enhancement("Retainer", 143, 169, 1, D, [50,100], skillIcon=26) # Hold Aggro (Self KO)
     Enhancement("Martyr", 144, 170, 1, A, [50,100], skillIcon=26) # Damage Up (Ally KO)
     # Enhancement("", 145, 0, 1, M, [], [], skillIcon=0) # <4724B11C>
-    Enhancement("Ascendancy", 146, 171, 1, A, [1,10], [1,10], skillIcon=0) # <1DDE9148> Crit strikes increase damage dealt and crit rate
+    Enhancement("Swordmanship", 146, 171, 1, A, [1,10], [1,10], skillIcon=0) # <1DDE9148> Crit strikes increase damage dealt and crit rate
     Enhancement("Reckless", 147, 172, 1, A, [20,120], [10,60], skillIcon=19) # Attack Shift
     Enhancement("Sheltered", 148, 173, 1, D, [10,60], [10,60], skillIcon=4) # Defense Shift
     Enhancement("Immunity", 149, 174, 1, M, [25,85], skillIcon=52) # Debuff Resist: All
@@ -362,7 +351,7 @@ def CreateEnhancements():
     # Enhancement("", 232, 260, 1, M, [], skillIcon=0) # <E0D09216>
     Enhancement("Guardian", 233, 261, 1, D, [2,10], [20,50], skillIcon=41) # Nearby Ally Fortitude
     # Enhancement("", 234, 0, 1, M, [], [], skillIcon=0) # <1E3DEC99>
-    Enhancement("Ascendancy", 235, 264, 1, A, [20,50], [4,10], skillIcon=22) # Awaken (Damage Stack)
+    Enhancement("Awakening", 235, 264, 1, A, [20,50], [4,10], skillIcon=22) # Awaken (Damage Stack)
     Enhancement("Discharge", 236, 265, 1, A, [50,100], [200,300], isGem=False, isAccessory=False) # <0662DEEF> Discharge all elementals
     Enhancement("Fighter", 237, 266, 1, A, [50,100], [10,50], skillIcon=2) # Attack Up: All Allies
     Enhancement("Elementalist", 238, 267, 1, A, [100,200], [100,400], skillIcon=51) # Elemental Up
@@ -376,7 +365,7 @@ def CreateEnhancements():
     Enhancement("Counterattack", 246, 275, 1, D, [200,500], [20,100], isGem=False, isAccessory=False) # <54F2F7D0> Evade deals damage and increases your damage up to a %
     Enhancement("Slippery", 247, 276, 1, D, [50,300], skillIcon=9) # Evasion Up (Targeted)
     Enhancement("Ouroboros", 248, 277, 1, A, [100,400], [100,100], isGem=False, isAccessory=False) # <E599A89B> Damage up to moebius, cannot be blocked
-    Enhancement("Angel", 249, 278, 1, H, [1,5], isGem=False, isAccessory=False) # <183D62F0> Revive all and overheat
+    Enhancement("Revive All Overheat", 249, 278, 1, H, [1,5], isGem=False, isAccessory=False) # <183D62F0> Revive all and overheat
     Enhancement("Spiked", 250, 280, 1, A, [5,10], [50,200], isGem=False, isAccessory=False) # <6E886F68> Damage to enemies in range
     Enhancement("Shredded", 251, 281, 1, A, [50,100], isGem=False, isAccessory=False) # <5DA2D73A> Increase damage based on amount of buffs on yourself
     Enhancement("Inflictor", 252, 283, 1, M, [30,60], isGem=False, isAccessory=False) # <747EC061> Enemy debuff resistance down
@@ -400,54 +389,54 @@ def CreateEnhancements():
     Enhancement("Savior", 270, 311, 1, H, [50,200], skillIcon=16) # Recharge Rec. Up (Danger)
     Enhancement("Distraction", 271, 312, 1, M, [50,100], skillIcon=12) # Reduce Aggro (Ally KO)
     # Enhancement("", 272, 0, 1, M, [], [], skillIcon=0) # Evasion Buff
-    # Enhancement("", 273, 315, 1, M, [], [], skillIcon=0) # Target Lock (Danger)
-    # Enhancement("", 274, 316, 1, M, [], skillIcon=0) # Damage Up (Time)
-    # Enhancement("", 275, 317, 1, M, [], skillIcon=0) # Reduce Aggro (Auto-Attack)
-    # Enhancement("", 276, 318, 1, M, [], [], skillIcon=0) # Critical Rate + Damage Up
-    # Enhancement("", 277, 319, 1, M, [], skillIcon=0) # Emergency Rescue
-    # Enhancement("", 278, 320, 1, M, [], skillIcon=0) # Damage Up (Unharmed)
-    # # Enhancement("", 279, 0, 1, M, [], [], skillIcon=0) # Enemy KO Buff
-    # Enhancement("", 280, 322, 1, M, [], skillIcon=0) # Extreme Attack Shift
-    # Enhancement("", 281, 323, 1, M, [], skillIcon=0) # Auto-Atk Spd Up (Same Role)
-    # Enhancement("", 282, 324, 1, M, [], skillIcon=0) # Attacker Mastery
-    # Enhancement("", 283, 325, 1, M, [], skillIcon=0) # Defender Mastery
-    # Enhancement("", 284, 326, 1, M, [], skillIcon=0) # Healer Mastery
-    # Enhancement("", 285, 327, 1, M, [], [], skillIcon=0) # Rushed Healing Arts
-    # Enhancement("", 286, 328, 1, M, [], [], skillIcon=0) # Ally KO Buff
-    # Enhancement("", 287, 329, 1, M, [], skillIcon=0) # Fortitude (No Arts Ready)
-    # Enhancement("", 288, 330, 1, M, [], skillIcon=0) # Recover Recharge (Ally KO)
-    # Enhancement("", 289, 331, 1, M, [], skillIcon=0) # Block Recharge
-    # Enhancement("", 290, 332, 1, M, [], [], skillIcon=0) # Recover HP (Low HP)
-    # Enhancement("", 291, 333, 1, M, [], skillIcon=0) # Target Lock (Revival)
-    # Enhancement("", 292, 334, 1, M, [], [], skillIcon=0) # Power Up (Revival)
-    # Enhancement("", 293, 335, 1, M, [], skillIcon=0) # Damage Transfer
-    # # Enhancement("", 294, 0, 1, M, [], skillIcon=0) # <D33620B5>
-    # Enhancement("", 295, 337, 1, M, [], skillIcon=0) # <3A8B75DC>
-    # # Enhancement("", 296, 0, 1, M, [], [], skillIcon=0) # <108C6BDC>
-    # # Enhancement("", 297, 0, 1, M, [], skillIcon=0) # <3DC91AB4>
-    # # Enhancement("", 298, 0, 1, M, [], skillIcon=0) # <B45078E8>
-    # Enhancement("", 299, 372, 1, M, [], skillIcon=0) # <5D432F9D>
-    # Enhancement("", 300, 373, 1, M, [], skillIcon=0) # <699CD98E>
-    # Enhancement("", 301, 374, 1, M, [], skillIcon=0) # <01DFEBDE>
-    # Enhancement("", 302, 375, 1, M, [], skillIcon=0) # <6A7AE143>
-    # Enhancement("", 303, 376, 1, M, [], skillIcon=0) # <3B070EC3>
-    # # Enhancement("", 304, 0, 1, M, [], skillIcon=0) # <ADD9368C>
-    # Enhancement("", 305, 377, 1, M, [], [], skillIcon=0) # <170EE93C>
-    # Enhancement("", 306, 378, 1, M, [], skillIcon=0) # <F62D628F>
-    # # Enhancement("", 307, 0, 1, M, [], [], skillIcon=0) # <6C84E6C5>
-    # # Enhancement("", 308, 0, 1, M, [], [], skillIcon=0) # <1CC5A345>
-    # Enhancement("", 309, 382, 1, M, [], [], skillIcon=0) # <A34DB1D7>
-    # Enhancement("", 310, 383, 1, M, [], skillIcon=0) # <665C44C7>
-    # Enhancement("", 311, 384, 1, M, [], skillIcon=0) # <42203200>
-    # # Enhancement("", 312, 0, 1, M, [], skillIcon=0) # <44DED265>
-    # # Enhancement("", 313, 0, 1, M, [], [], skillIcon=0) # <697730B7>
-    # Enhancement("", 314, 386, 1, M, [], skillIcon=0) # <A8EEF413>
-    # # Enhancement("", 315, 0, 1, M, [], [], skillIcon=0) # <D30612A6>
-    # Enhancement("", 316, 397, 1, M, [], skillIcon=0) # <C42DC4C1>
-    # # Enhancement("", 317, 0, 1, M, [], skillIcon=0) # <E371CADF>
-    # Enhancement("", 318, 398, 1, M, [], skillIcon=0) # Attack AOE Range Up
-    # Enhancement("", 319, 400, 1, M, [], skillIcon=0) # Reaction Recharge
-    # Enhancement("", 320, 401, 1, M, [], skillIcon=0) # Damage Up (In Water)
+    Enhancement("Salvador", 273, 315, 1, D, [50,100], [200,400], skillIcon=12) # Target Lock (Danger)
+    Enhancement("Ascendancy", 274, 316, 1, A, [5], skillIcon=50) # Damage Up (Time)
+    Enhancement("Concussive", 275, 317, 1, M, [5,20], skillIcon=12) # Reduce Aggro (Auto-Attack)
+    Enhancement("Supreme", 276, 318, 1, A, [5,30], [20,100], skillIcon=22) # Critical Rate + Damage Up
+    Enhancement("Angel", 277, 319, 1, H, [30,100], skillIcon=16) # Emergency Rescue
+    Enhancement("Fragile", 278, 320, 1, A, [100,300], skillIcon=21) # Damage Up (Unharmed)
+    # Enhancement("", 279, 0, 1, M, [], [], skillIcon=0) # Enemy KO Buff
+    Enhancement("Glass", 280, 322, 1, A, [100,200], skillIcon=2) # Extreme Attack Shift
+    Enhancement("Echelon", 281, 323, 1, A, [40,70], skillIcon=21) # Auto-Atk Spd Up (Same Role)
+    Enhancement("Mastery", 282, 324, 1, A, [3,5], skillIcon=2) # Attacker Mastery
+    Enhancement("Mastery", 283, 325, 1, D, [1,1], skillIcon=4) # Defender Mastery
+    Enhancement("Mastery", 284, 326, 1, H, [3,5], skillIcon=1) # Healer Mastery
+    Enhancement("Hustle", 285, 327, 1, H, [40,70], [60,20], skillIcon=9) # Rushed Healing Arts
+    Enhancement("Rally", 286, 328, 1, M, [50,100], [2,5], skillIcon=26) # Ally KO Buff
+    Enhancement("Stockpile", 287, 329, 1, M, [70,100], skillIcon=41) # Fortitude (No Arts Ready)
+    Enhancement("Recharge", 288, 330, 1, M, [50,100], skillIcon=17) # Recover Recharge (Ally KO)
+    Enhancement("Charging", 289, 331, 1, D, [30,50], skillIcon=47) # Block Recharge
+    Enhancement("Pulse", 290, 332, 1, M, [30,100], [300,100], skillIcon=32) # Recover HP (Low HP)
+    Enhancement("Lock", 291, 333, 1, D, [300,50], skillIcon=26) # Target Lock (Revival)
+    Enhancement("Risen", 292, 334, 1, A, [40,70], [40,70], skillIcon=25) # Power Up (Revival)
+    Enhancement("Cowardly", 293, 335, 1, M, [50,20], skillIcon=41) # Damage Transfer
+    # Enhancement("", 294, 0, 1, M, [], skillIcon=0) # <D33620B5>
+    Enhancement("Charging", 295, 337, 1, M, [20,60], isAccessory=False, isGem=False) # <3A8B75DC> Charge other arts on this art hit
+    # Enhancement("", 296, 0, 1, M, [], [], skillIcon=0) # <108C6BDC>
+    # Enhancement("", 297, 0, 1, M, [], skillIcon=0) # <3DC91AB4>
+    # Enhancement("", 298, 0, 1, M, [], skillIcon=0) # <B45078E8>
+    Enhancement("Bypass", 299, 372, 1, A, [50,100], skillIcon=18) # <5D432F9D> Attacks during chain attack bypass defense
+    Enhancement("Prime", 300, 373, 1, M, [50,100], isAccessory=False, isGem=False, isChainOrder=True) # <699CD98E> Attacker Healer aggro down
+    Enhancement("Pierce", 301, 374, 1, A, [50,100], skillIcon=33) # <01DFEBDE> Enemy physical defense down
+    Enhancement("Pierce", 302, 375, 1, A, [50,100], skillIcon=33) # <6A7AE143> Enemy ether defense down
+    Enhancement("Unblockable", 303, 376, 1, A, [50,100], skillIcon=18) # <3B070EC3> Unblockable attacks
+    # Enhancement("", 304, 0, 1, M, [], skillIcon=0) # <ADD9368C>
+    Enhancement("Reactivate", 305, 377, 1, H, [50,100], [1,2], isGem=False, isAccessory=False, isChainOrder=True) # <170EE93C> Reactivate char
+    Enhancement("Revival", 306, 378, 1, H, [50,100], isGem=False, isAccessory=False, isChainOrder=True) # <F62D628F> Revive all party member allowing chain 
+    # Enhancement("", 307, 0, 1, M, [], [], skillIcon=0) # <6C84E6C5>
+    # Enhancement("", 308, 0, 1, M, [], [], skillIcon=0) # <1CC5A345>
+    Enhancement("Chain Heal", 309, 382, 1, H, [5,10], [100,200], skillIcon=38) # <A34DB1D7> During chain attack heals 10% of damage as hp up to 200% healing power
+    Enhancement("Critical", 310, 383, 1, A, [50,100], skillIcon=10) # <665C44C7> Critical in chain attack
+    Enhancement("Finisher", 311, 384, 1, A, [100,300], skillIcon=37) # <42203200>
+    # Enhancement("", 312, 0, 1, M, [], skillIcon=0) # <44DED265>
+    # Enhancement("", 313, 0, 1, M, [], [], skillIcon=0) # <697730B7>
+    Enhancement("Critical", 314, 386, 1, A, [50,100], skillIcon=10) # <A8EEF413> Crit damage in chain attack up
+    # Enhancement("", 315, 0, 1, M, [], [], skillIcon=0) # <D30612A6>
+    Enhancement("Slow", 316, 397, 1, M, [20,80], skillIcon=17, isFutureRedeemed=False) # <C42DC4C1> Slows heat buildup
+    # Enhancement("", 317, 0, 1, M, [], skillIcon=0) # <E371CADF>
+    Enhancement("Wide", 318, 398, 1, M, [50,200], skillIcon=28) # Attack AOE Range Up
+    Enhancement("Momentum", 319, 400, 1, M, [25,75], skillIcon=40) # Reaction Recharge
+    Enhancement("Riptide", 320, 401, 1, A, [100,200], skillIcon=2) # Damage Up (In Water)
     # Enhancement("", 321, 402, 1, M, [], skillIcon=0) # Recharge Up (In Water)
     # Enhancement("", 322, 403, 1, M, [], skillIcon=0) # Damage Up (On Land)
     # Enhancement("", 323, 404, 1, M, [], skillIcon=0) # Recharge Up (On Land)
