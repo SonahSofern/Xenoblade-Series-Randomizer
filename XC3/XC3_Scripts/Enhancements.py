@@ -5,8 +5,6 @@ from scripts import Helper
 
 # Lists to be populated during randomization
 EnhancementsList = Helper.RandomGroup()
-
-
 Normal = [10,100]
 
 # Used for skills to choose icons for 
@@ -20,7 +18,7 @@ high = 0
 defaultSkillIcon = -1
 
 class Enhancement:
-    def __init__(self, name, effID, captionID, field3E70C175, roleType = M, param1 = [low,high], param2 = [low,high], skillIcon = defaultSkillIcon, isArts = False, isGem = True, isAccessory = True, isBaseGame = True, isFutureRedeemed = True, isChainOrder = False):
+    def __init__(self, name, effID, captionID, field3E70C175, roleType = M, param1 = [low,high], param2 = [low,high], skillIcon = defaultSkillIcon, isArts = False, isGem = True, isAccessory = True, isBaseGame = True, isFutureRedeemed = True, isChainOrder = False, isChainActivation = False):
         self.name = name
         self.effID = effID
         self.captionID = captionID
@@ -437,113 +435,114 @@ def CreateEnhancements():
     Enhancement("Wide", 318, 398, 1, M, [50,200], skillIcon=28) # Attack AOE Range Up
     Enhancement("Momentum", 319, 400, 1, M, [25,75], skillIcon=40) # Reaction Recharge
     Enhancement("Riptide", 320, 401, 1, A, [100,200], skillIcon=2) # Damage Up (In Water)
-    # Enhancement("", 321, 402, 1, M, [], skillIcon=0) # Recharge Up (In Water)
-    # Enhancement("", 322, 403, 1, M, [], skillIcon=0) # Damage Up (On Land)
-    # Enhancement("", 323, 404, 1, M, [], skillIcon=0) # Recharge Up (On Land)
-    # Enhancement("", 324, 405, 1, M, [], skillIcon=0) # Damage Up (Self Debuff)
-    # Enhancement("", 325, 406, 1, M, [], skillIcon=0) # Fortitude (Enemy KO)
-    # Enhancement("", 326, 324, 1, M, [], skillIcon=0) # <81E4C3B5>
-    # # Enhancement("", 327, 0, 1, M, [], skillIcon=0) # <69CE51B7>
-    # # Enhancement("", 328, 0, 1, M, [], skillIcon=0) # <EE1FAEA1>
-    # # Enhancement("", 329, 0, 1, M, [], skillIcon=0) # <DF068DFA>
-    # # Enhancement("", 330, 0, 1, M, [], skillIcon=0) # <1ABA7C2B>
-    # # Enhancement("", 331, 0, 1, M, [], skillIcon=0) # <D450C258>
-    # # Enhancement("", 332, 0, 1, M, [], skillIcon=0) # <2661B30A>
-    # # Enhancement("", 333, 0, 1, M, [], [], skillIcon=0) # <78B0628E>
-    # Enhancement("", 334, 412, 1, M, [], [], skillIcon=0) # <94556EFC>
-    # # Enhancement("", 335, 0, 1, M, [], [], skillIcon=0) # <2F1CE75E>
-    # # Enhancement("", 336, 0, 1, M, [], skillIcon=0) # <03522C97>
-    # Enhancement("", 337, 415, 1, M, [], [], skillIcon=0) # Cover Low HP Allies
-    # Enhancement("", 338, 416, 1, M, [], [], skillIcon=0) # Ranged Counter
+    Enhancement("Tidal", 321, 402, 1, M, [50,150], skillIcon=15) # Recharge Up (In Water)
+    Enhancement("Earthy", 322, 403, 1, A, [50,150], skillIcon=21) # Damage Up (On Land)
+    Enhancement("Quicksand", 323, 404, 1, M, [50,150], skillIcon=23) # Recharge Up (On Land)
+    Enhancement("Grit", 324, 405, 1, A, [50,150], skillIcon=41) # Damage Up (Self Debuff)
+    Enhancement("Surpassing", 325, 406, 1, M, [5,10], skillIcon=42) # Fortitude (Enemy KO)
+    Enhancement("Headhunter", 326, 324, 1, A, [1,5], skillIcon=42) # <81E4C3B5>
+    # Enhancement("", 327, 0, 1, M, [], skillIcon=0) # <69CE51B7>
+    # Enhancement("", 328, 0, 1, M, [], skillIcon=0) # <EE1FAEA1>
+    # Enhancement("", 329, 0, 1, M, [], skillIcon=0) # <DF068DFA>
+    # Enhancement("", 330, 0, 1, M, [], skillIcon=0) # <1ABA7C2B>
+    # Enhancement("", 331, 0, 1, M, [], skillIcon=0) # <D450C258>
+    # Enhancement("", 332, 0, 1, M, [], skillIcon=0) # <2661B30A>
+    # Enhancement("", 333, 0, 1, M, [], [], skillIcon=0) # <78B0628E>
+    Enhancement("Headbutt", 334, 412, 1, M, [1], [3], skillIcon=48) # <94556EFC>
+    # Enhancement("", 335, 0, 1, M, [], [], skillIcon=0) # <2F1CE75E>
+    # Enhancement("", 336, 0, 1, M, [], skillIcon=0) # <03522C97>
+    Enhancement("Cover", 337, 415, 1, D, [], [], skillIcon=41) # Cover Low HP Allies
+    Enhancement("Coverfire", 338, 416, 1, M, [], [], skillIcon=49) # Ranged Counter
     # Enhancement("", 339, 417, 1, M, [], skillIcon=0) # <2307272B>
-    # # Enhancement("", 340, 0, 1, M, [], skillIcon=0) # <13E86D62>
-    # Enhancement("", 341, 422, 1, M, skillIcon=0) # <5AA8EF8D>
-    # Enhancement("", 342, 423, 1, M, skillIcon=0) # <8321536A>
-    # Enhancement("", 343, 424, 1, M, skillIcon=0) # <12290987>
-    # Enhancement("", 344, 425, 1, M, skillIcon=0) # <AE3060F1>
-    # Enhancement("", 345, 426, 1, M, skillIcon=0) # <DABAB9B0>
-    # Enhancement("", 346, 427, 1, M, skillIcon=0) # <635B23F8>
-    # # Enhancement("", 347, 0, 1, M, [], [], skillIcon=0) # <FBF26980>
-    # # Enhancement("", 348, 0, 1, M, [], [], skillIcon=0) # <BDD4CC17>
-    # # Enhancement("", 349, 0, 1, M, [], skillIcon=0) # <3868CBC6>
-    # # Enhancement("", 350, 0, 1, M, [], skillIcon=0) # <299669B7>
-    # # Enhancement("", 351, 0, 1, M, [], skillIcon=0) # <B469390D>
-    # # Enhancement("", 352, 0, 1, M, [], [], skillIcon=0) # <D021D9EE>
-    # # Enhancement("", 353, 0, 1, M, [], [], skillIcon=0) # <FF3CFA6B>
-    # # Enhancement("", 354, 0, 1, M, [], [], skillIcon=0) # <3DFBD363>
-    # # Enhancement("", 355, 0, 1, M, [], [], skillIcon=0) # <B7DE0EBC>
-    # Enhancement("", 356, 428, 1, M, [], [], skillIcon=0) # Quick Move Evasion Up
-    # Enhancement("", 357, 429, 1, M, [], [], skillIcon=0) # Quick Move Damage Up
-    # Enhancement("", 358, 430, 1, M, [], [], skillIcon=0) # Quick Move AOE Damage
-    # Enhancement("", 359, 431, 1, M, [], [], skillIcon=0) # Faster Interlink Level Gain
-    # Enhancement("", 360, 432, 1, M, [], [], skillIcon=0) # Recover Recharge (Rescue)
-    # Enhancement("", 361, 433, 1, M, [], [], skillIcon=0) # Starting Master Arts
-    # Enhancement("", 362, 441, 1, M, [], skillIcon=0) # Class Aptitude Up
-    # Enhancement("", 363, 442, 1, M, [], skillIcon=0) # Extra Positional Arts
-    # Enhancement("", 364, 443, 1, M, [], skillIcon=0) # Extra Field Arts
-    # Enhancement("", 365, 444, 1, M, [], skillIcon=0) # <FC852C14>
-    # # Enhancement("", 366, 0, 1, M, [], skillIcon=0) # <0A83170C>
-    # # Enhancement("", 367, 0, 1, M, [], skillIcon=0) # <5E206C1B>
-    # # Enhancement("", 368, 0, 1, M, [], skillIcon=0) # <85F2BABF>
-    # Enhancement("", 369, 447, 1, M, [], [], skillIcon=0) # Absorb Attacks in Range
-    # Enhancement("", 370, 448, 1, M, [], skillIcon=0) # <6AED9FC9>
-    # Enhancement("", 371, 450, 1, M, [], skillIcon=0) # Starter TP Plus
-    # Enhancement("", 372, 240, 1, M, [], [], skillIcon=0) # Fast Rescue & Healing Plus
-    # Enhancement("", 373, 110, 1, M, [], [], skillIcon=0) # Rescue HP & Healing Plus
+    # Enhancement("", 340, 0, 1, M, [], skillIcon=0) # <13E86D62>
+    Enhancement("Interlinks", 341, 422, 1, M, isGem=False, isAccessory=False, isFutureRedeemed=False) # <5AA8EF8D> Interlink 3 Break All
+    Enhancement("Interlinks", 342, 423, 1, M, isGem=False, isAccessory=False, isFutureRedeemed=False) # <8321536A> I3 Topple All
+    Enhancement("Interlinks", 343, 424, 1, M, isGem=False, isAccessory=False, isFutureRedeemed=False) # <12290987> I3 Launch All
+    Enhancement("Interlinks", 344, 425, 1, M, isGem=False, isAccessory=False, isFutureRedeemed=False) # <AE3060F1> I3 Smash All
+    Enhancement("Interlinks", 345, 426, 1, M, isGem=False, isAccessory=False, isFutureRedeemed=False) # <DABAB9B0> I3 Daze All
+    Enhancement("Interlinks", 346, 427, 1, M, isGem=False, isAccessory=False, isFutureRedeemed=False) # <635B23F8> I3 Burst All
+    # Enhancement("", 347, 0, 1, M, [], [], skillIcon=0) # <FBF26980>
+    # Enhancement("", 348, 0, 1, M, [], [], skillIcon=0) # <BDD4CC17>
+    # Enhancement("", 349, 0, 1, M, [], skillIcon=0) # <3868CBC6>
+    # Enhancement("", 350, 0, 1, M, [], skillIcon=0) # <299669B7>
+    # Enhancement("", 351, 0, 1, M, [], skillIcon=0) # <B469390D>
+    # Enhancement("", 352, 0, 1, M, [], [], skillIcon=0) # <D021D9EE>
+    # Enhancement("", 353, 0, 1, M, [], [], skillIcon=0) # <FF3CFA6B>
+    # Enhancement("", 354, 0, 1, M, [], [], skillIcon=0) # <3DFBD363>
+    # Enhancement("", 355, 0, 1, M, [], [], skillIcon=0) # <B7DE0EBC>
+    Enhancement("Instinct", 356, 428, 1, M, [], [], skillIcon=9) # Quick Move Evasion Up
+    Enhancement("Crowhop", 357, 429, 1, M, [], [], skillIcon=40) # Quick Move Damage Up
+    Enhancement("Sonic", 358, 430, 1, M, [], [], skillIcon=48) # Quick Move AOE Damage
+    Enhancement("Bonding", 359, 431, 1, M, [], [], skillIcon=17, isFutureRedeemed=False) # Faster Interlink Level Gain
+    Enhancement("Miracle", 360, 432, 1, M, [], [], skillIcon=0) # Recover Recharge (Rescue)
+    Enhancement("Master", 361, 433, 1, M, [], [], skillIcon=0) # Starting Master Arts
+    Enhancement("Aptitude", 362, 441, 1, M, [], skillIcon=0) # Class Aptitude Up
+    Enhancement("Strategist", 363, 442, 1, M, [], skillIcon=0) # Extra Positional Arts
+    Enhancement("Focus", 364, 443, 1, M, [], skillIcon=0) # Extra Field Arts
+    Enhancement("Hydraulic", 365, 444, 1, M, [], skillIcon=0, isFutureRedeemed=False) # <FC852C14> Heat Gauge cancel reduces buildup from the cancel
+    # Enhancement("", 366, 0, 1, M, [], skillIcon=0) # <0A83170C>
+    # Enhancement("", 367, 0, 1, M, [], skillIcon=0) # <5E206C1B>
+    # Enhancement("", 368, 0, 1, M, [], skillIcon=0) # <85F2BABF>
+    Enhancement("Void", 369, 447, 1, M, [], [], skillIcon=0) # Absorb Attacks in Range
+    Enhancement("Technical", 370, 448, 1, M, [], skillIcon=0) # <6AED9FC9> All TP up by 10
+    Enhancement("Headstart", 371, 450, 1, M, [], skillIcon=0) # Starter TP Plus
+    Enhancement("Medic", 372, 240, 1, M, [], [], skillIcon=0) # Fast Rescue & Healing Plus
+    Enhancement("Revitalize", 373, 110, 1, M, [], [], skillIcon=0) # Rescue HP & Healing Plus
     # Enhancement("", 374, 451, 1, M, skillIcon=0) #
-    # Enhancement("", 375, 452, 1, M, skillIcon=0) #
-    # Enhancement("", 376, 453, 1, M, [], skillIcon=0) # <D90DECBD>
-    # Enhancement("", 377, 455, 1, M, [], skillIcon=0) # <887EC595>
-    # Enhancement("", 378, 457, 1, M, skillIcon=0) # <5228990D>
-    # Enhancement("", 379, 459, 1, M, [], skillIcon=0) # <C006052B>
-    # Enhancement("", 380, 460, 1, M, [], skillIcon=0) # <9E09B0E3>
-    # Enhancement("", 381, 462, 1, M, [], skillIcon=0) # <C682C0B2>
-    # Enhancement("", 382, 464, 1, M, skillIcon=0) # <ACEEE2B3>
-    # Enhancement("", 383, 466, 1, M, skillIcon=0) # <F5A970B0>
-    # Enhancement("", 384, 468, 1, M, [], [], skillIcon=0) # <1C953DC1>
-    # Enhancement("", 385, 470, 1, M, [], skillIcon=0) # <119C145F>
-    # Enhancement("", 386, 472, 1, M, [], skillIcon=0) # <819DAB29>
-    # Enhancement("", 387, 474, 1, M, [], skillIcon=0) # <8166DDA7>
-    # Enhancement("", 388, 476, 1, M, [], skillIcon=0) # <727B2C77>
-    # Enhancement("", 389, 478, 1, M, skillIcon=0) # <9BE9B1DB>
-    # Enhancement("", 390, 480, 1, M, [], [], skillIcon=0) # <67C12EA7>
-    # Enhancement("", 391, 482, 1, M, [], skillIcon=0) # <BD2FFC2C>
-    # Enhancement("", 392, 484, 1, M, [], skillIcon=0) # <44DD9F9C>
-    # Enhancement("", 393, 486, 1, M, skillIcon=0) # <BBA3F2C3>
-    # Enhancement("", 394, 488, 1, M, [], skillIcon=0) # <8B5865D2>
-    # # Enhancement("", 395, 0, 1, M, [], [], skillIcon=0) # <CBAEDB1D>
-    # Enhancement("", 396, 490, 1, M, [], skillIcon=0) # Recover HP: Self (Evasion)
-    # Enhancement("", 397, 491, 1, M, [], skillIcon=0) # Recover Recharge (Evasion)
-    # Enhancement("", 398, 492, 1, M, [], skillIcon=0) # <7BA9A48D>
-    # Enhancement("", 399, 494, 1, M, [], skillIcon=0) # Recharge Up (Self KO)
-    # Enhancement("", 400, 495, 1, M, [], skillIcon=0) # <FB5146DB>
-    # Enhancement("", 401, 499, 1, M, [], [], skillIcon=0) # Recharge (Nearby Ally Hit)
-    # Enhancement("", 402, 500, 1, M, [], skillIcon=0) # Ranged Heal (Critical)
+    # Enhancement("", 375, 452, 1, M, skillIcon=0) # 
+    Enhancement("First", 376, 453, 1, M, [], skillIcon=0, isChainActivation=True) # <D90DECBD> 
+    Enhancement("To You", 377, 455, 1, M, [], skillIcon=0, isChainActivation=True) # <887EC595>
+    Enhancement("Bravo", 378, 457, 1, M, skillIcon=0, isChainActivation=True) # <5228990D>
+    Enhancement("Mio", 379, 459, 1, M, [], skillIcon=0, isChainActivation=True) # <C006052B>
+    Enhancement("Initial", 380, 460, 1, M, [], skillIcon=0, isChainActivation=True) # <9E09B0E3>
+    Enhancement("Retread", 381, 462, 1, M, [], skillIcon=0, isChainActivation=True) # <C682C0B2>
+    Enhancement("Rebound", 382, 464, 1, M, skillIcon=0, isChainActivation=True) # <ACEEE2B3>
+    Enhancement("Surpass", 383, 466, 1, M, skillIcon=0, isChainActivation=True) # <F5A970B0>
+    Enhancement("Machina", 384, 468, 1, M, [], [], skillIcon=0, isChainActivation=True) # <1C953DC1>
+    Enhancement("Brainy", 385, 470, 1, M, [], skillIcon=0, isChainActivation=True) # <119C145F>
+    Enhancement("Sharing", 386, 472, 1, M, [], skillIcon=0, isChainActivation=True) # <819DAB29>
+    Enhancement("Critical", 387, 474, 1, M, [], skillIcon=0, isChainActivation=True) # <8166DDA7>
+    Enhancement("Ratio", 388, 476, 1, M, [], skillIcon=0, isChainActivation=True) # <727B2C77>
+    Enhancement("Amazing", 389, 478, 1, M, skillIcon=0, isChainActivation=True) # <9BE9B1DB>
+    Enhancement("Gambler", 390, 480, 1, M, [], [], skillIcon=0, isChainActivation=True) # <67C12EA7>
+    Enhancement("Mult", 391, 482, 1, M, [], skillIcon=0, isChainActivation=True) # <BD2FFC2C>
+    Enhancement("Complete", 392, 484, 1, M, [], skillIcon=0, isChainActivation=True) # <44DD9F9C>
+    Enhancement("Self", 393, 486, 1, M, skillIcon=0, isChainActivation=True) # <BBA3F2C3>
+    Enhancement("Ratio", 394, 488, 1, M, [], skillIcon=0, isChainActivation=True) # <8B5865D2>
+    # Enhancement("", 395, 0, 1, M, [], [], skillIcon=0) # <CBAEDB1D>
+
+    # Future Redeemed
+    Enhancement("Evasive", 396, 490, 1, M, [], skillIcon=0) # Recover HP: Self (Evasion)
+    Enhancement("Revade", 397, 491, 1, M, [], skillIcon=0) # Recover Recharge (Evasion)
+    Enhancement("Revenge", 398, 492, 1, M, [], skillIcon=0) # <7BA9A48D> Stacking Damage up on revive
+    Enhancement("Revitalize", 399, 494, 1, M, [], skillIcon=0) # Recharge Up (Self KO)
+    Enhancement("TP", 400, 495, 1, M, [], skillIcon=0, isChainActivation=True) # <FB5146DB> 
+    Enhancement("Protector", 401, 499, 1, M, [], [], skillIcon=0) # Recharge (Nearby Ally Hit)
+    Enhancement("Critvamp", 402, 500, 1, M, [], skillIcon=0) # Ranged Heal (Critical)
     # Enhancement("", 403, 501, 1, M, [], [], skillIcon=0) #
-    # Enhancement("", 404, 502, 1, M, [], [], skillIcon=0) # Critical Hit Plus: All Allies       
-    # Enhancement("", 405, 503, 1, M, [], [], skillIcon=0) # Power Up (In Field)
-    # Enhancement("", 406, 504, 1, M, skillIcon=0) # Max Fields Up
-    # Enhancement("", 407, 505, 1, M, [], [], skillIcon=0) # <D8498101>
-    # Enhancement("", 408, 507, 1, M, [], skillIcon=0) # Several Stats Up
-    # Enhancement("", 409, 508, 1, M, [], [], skillIcon=0) # Weaken Party
-    # Enhancement("", 410, 173, 0, M, [], [], skillIcon=0) # <554E813F>
-    # # Enhancement("", 419, 0, 1, M, [], skillIcon=0) # <83D1DC60>
-    # # Enhancement("", 411, 0, 1, M, [], skillIcon=0) # <03956403>
-    # Enhancement("", 412, 509, 1, M, [], skillIcon=0) # Unity Combo Damage Up
-    # Enhancement("", 413, 525, 1, M, [], [], skillIcon=0) # <D3A726C0>
-    # Enhancement("", 414, 529, 1, M, [], skillIcon=0) # <EF72174A>
-    # Enhancement("", 415, 530, 1, M, [], [], skillIcon=0) # <E110F3CA>
-    # Enhancement("", 416, 430, 1, M, [], [], skillIcon=0) # Quick Move AOE Damage
-    # Enhancement("", 417, 532, 1, M, [], skillIcon=0) # Weakness Damage Up
-    # Enhancement("", 418, 316, 1, M, [], skillIcon=0) # Damage Up (Time)
-    # # Enhancement("", 421, 0, 1, M, [], [], skillIcon=0) # <B665A1F1>
-    # Enhancement("", 424, 399, 1, M, [], [], skillIcon=0) # Attack AOE Range + Dmg Up
-    # Enhancement("", 425, 534, 1, M, [], skillIcon=0) # Unity Special Starter
-    # # Enhancement("", 426, 0, 1, M, [], skillIcon=0) # <11BB435A>
-    # # Enhancement("", 428, 0, 1, M, [], [], skillIcon=0) # Auto-Attack Twofold Haste
-    # Enhancement("", 427, 434, 0, M, [], skillIcon=0) # Starting Ouroboros Powers
-    # # Enhancement("", 422, 0, 0, M, [], [], skillIcon=0) # <C7118AF0>
-    # # Enhancement("", 423, 0, 0, M, [], skillIcon=0) # <EBFBFD29>
-    # # Enhancement("", 420, 0, 0, M, [], skillIcon=0) # <378C7FD9>
+    Enhancement("Critcrux", 404, 502, 1, M, [], [], skillIcon=0) # Critical Hit Plus: All Allies       
+    Enhancement("Field", 405, 503, 1, M, [], [], skillIcon=0) # Power Up (In Field)
+    Enhancement("Setter", 406, 504, 1, M, skillIcon=0) # Max Fields Up
+    Enhancement("Tradeoff", 407, 505, 1, M, [], [], skillIcon=0) # <D8498101>
+    Enhancement("Blooming", 408, 507, 1, M, [], skillIcon=0) # Several Stats Up
+    Enhancement("Cursed", 409, 508, 1, M, [], [], skillIcon=0) # Weaken Party
+    Enhancement("Safety", 410, 173, 0, M, [], [], skillIcon=0) # <554E813F>
+    # Enhancement("", 419, 0, 1, M, [], skillIcon=0) # <83D1DC60>
+    # Enhancement("", 411, 0, 1, M, [], skillIcon=0) # <03956403>
+    Enhancement("Unity", 412, 509, 1, M, [], skillIcon=0, isBaseGame=False) # Unity Combo Damage Up
+    Enhancement("Backcharge", 413, 525, 1, M, [], [], skillIcon=0) # <D3A726C0>
+    Enhancement("Suprise", 414, 529, 1, M, [], skillIcon=0) # <EF72174A>
+    Enhancement("Backbreaker", 415, 530, 1, M, [], [], skillIcon=0) # <E110F3CA>
+    Enhancement("Spark", 416, 430, 1, M, [], [], skillIcon=0) # Quick Move AOE Damage
+    Enhancement("Pinpoint", 417, 532, 1, M, [], skillIcon=0, isBaseGame=False) # Weakness Damage Up
+    # Enhancement("", 421, 0, 1, M, [], [], skillIcon=0) # <B665A1F1>
+    Enhancement("Expansive", 424, 399, 1, M, [], [], skillIcon=0) # Attack AOE Range + Dmg Up
+    Enhancement("Unity", 425, 534, 1, M, [], skillIcon=0, isBaseGame=False) # Unity Special Starter
+    # Enhancement("", 426, 0, 1, M, [], skillIcon=0) # <11BB435A>
+    # Enhancement("", 428, 0, 1, M, [], [], skillIcon=0) # Auto-Attack Twofold Haste
+    Enhancement("Ouro", 427, 434, 0, M, [], skillIcon=0) # Starting Ouroboros Powers
+    # Enhancement("", 422, 0, 0, M, [], [], skillIcon=0) # <C7118AF0>
+    # Enhancement("", 423, 0, 0, M, [], skillIcon=0) # <EBFBFD29>
+    # Enhancement("", 420, 0, 0, M, [], skillIcon=0) # <378C7FD9>
 
 CreateEnhancements()
