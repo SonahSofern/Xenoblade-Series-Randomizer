@@ -32,6 +32,11 @@ class Enhancement:
         self.roleType = roleType
         self.skillIcon = skillIcon
         self.BaseGame = isBaseGame
+        self.isAccessory = isAccessory
+        self.isGem = isGem
+        self.isArts = isArts
+        self.isChainOrder = isChainOrder
+        self.isChainActivation = isChainActivation
         self.FutureRedeemed = isFutureRedeemed
         EnhancementsList.AddNewData(self)
     

@@ -11,10 +11,19 @@ def AccessoryRando():
                 nameData = json.load(nameFile)
                 originalNameData = copy.deepcopy(nameData)
                 
+                # Filter the list
+                newList = copy.deepcopy(Enhancements.EnhancementsList)
+                enhList:list[Enhancements.Enhancement] = newList.currentGroup
+                for enh in enhList:
+                    if enh.isAccessory:
+                        continue
+                    newList.RemoveMember(enh)
+                
                 for item in itmData["rows"]:
                     if item["Enhance"] == 0 or item["Name"] == 0: # Ignore debug items
                         continue
-                    newEnhancement:Enhancements.Enhancement = Enhancements.AccessoryEnhancementList.SelectRandomMember()
+                    newEnhancement:Enhancements.Enhancement = Enhancements.EnhancementsList.SelectRandomMember()
+                    
                     DetermineRecommendedCategory(item, newEnhancement)
                     newID = newEnhancement.CreateEffect(enhData, powerPercent=DetermineAccessoryPower(item))
                     item["Enhance"] = newID
