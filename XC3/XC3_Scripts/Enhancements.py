@@ -218,8 +218,8 @@ def CreateEnhancements():
     Enhancement("Mending", 92, 116, 1, H, [20,90], [50,150], skillIcon=52) # Damage Heal: Allies 
     Enhancement("Perfect", 93, 117, 1, A, [50,100], skillIcon=36) # Cancel Up
     Enhancement("Unbeatable", 94, 119, 1, M, [20,70], skillIcon=32) # Unbeatable
-    Enhancement("Diurnal", 95, 120, 1, A, [20,150], skillIcon=12) # Night Vision
-    Enhancement("Nocturnal", 96, 121, 1, M, [20,150], skillIcon=12) # Sunlight Eye
+    Enhancement("Nocturnal", 95, 120, 1, A, [20,150], skillIcon=12) # Night Vision
+    Enhancement("Diurnal", 96, 121, 1, M, [20,150], skillIcon=12) # Sunlight Eye
     # Enhancement("", 97, 0, 1, M, [], skillIcon=0) # <4943A920>
     # Enhancement("", 98, 0, 1, M, [], skillIcon=0) # <09F52558>
     Enhancement("Potent", 99, 122, 1, H, [50,100], skillIcon=23) # Buff Effect Up
@@ -282,7 +282,7 @@ def CreateEnhancements():
     # Enhancement("", 156, 0, 1, M, [], skillIcon=0) # <EA4FE79F>
     # Enhancement("", 157, 0, 1, M, [], skillIcon=0) # <7F54F93E>
     Enhancement("Plague", 158, 179, 1, M, [5,20], skillIcon=23) # <C719FE0D> Spread debuffs to other enemies when you hit them
-    Enhancement("Rejuvenate", 159, 180, 1, M, [50,100], skillIcon=39) # <1C89FC37> Restore all art cooldowns for team except self
+    Enhancement("Rejuvenate", 159, 180, 1, M, [50,100], isGem=False, isAccessory=False) # <1C89FC37> Restore all art cooldowns for team except self
     Enhancement("Disrupter", 160, 181, 1, M, [1,3], skillIcon=27) # <621F1009> Enemys using arts will be knocked back
     Enhancement("Viper", 161, 182, 1, A, [50,300], skillIcon=8) # Damage Up (Enemy Arts)
     Enhancement("Sniper", 162, 183, 1, A, [10,100], skillIcon=8) # <3C2BDC90> Crit Up (Enemy Arts)

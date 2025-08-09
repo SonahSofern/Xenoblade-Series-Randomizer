@@ -42,9 +42,9 @@ def SkillRando():
                     chosenSkill = skillList.SelectRandomMember()
                     
                     if isinstance(chosenSkill, Enhancements.Enhancement): # If we get a custom enhancement convert it to workable data
-                        chosenSkill = DefineNewSkill(skillList, enh, enhanceData)
-                        DetermineName(enh, skill, nameData)
-                    # Apply the original names
+                        DetermineName(chosenSkill, skill, nameData)
+                        chosenSkill = DefineNewSkill(chosenSkill, enhanceData, skillData)
+                        
                     skillList.CopyKeys(skill, chosenSkill, ignoreKeys)
 
                 JSONParser.CloseFile(skillData, skillFile)
@@ -59,22 +59,21 @@ def PassSkillCheck(skill, ignoreSkills):
             return False
     return True
 
-def DefineNewSkill(skillList:Helper.RandomGroup, e:Enhancements.Enhancement, enhanceData):
-    newID = len(skillList.originalGroup) + 1
+def DefineNewSkill(chosenSkill:Enhancements.Enhancement, enhanceData, skillData):
     return  {
-      "$id": newID,
-      "ID": f"{newID}",
-      "Name": e.name,
+      "$id": "null",
+      "ID": "null",
+      "Name": chosenSkill.name,
       "DebugName": "",
       "Caption": 0,
       "Type": 0,
       "UseTalent": 0,
       "UseChr": 0,
-      "Enhance1": e.CreateEffect(enhanceData, powerPercent=.2),
-      "Enhance2": e.CreateEffect(enhanceData, powerPercent=.4),
-      "Enhance3": e.CreateEffect(enhanceData, powerPercent=.6),
-      "Enhance4": e.CreateEffect(enhanceData, powerPercent=.8),
-      "Enhance5": e.CreateEffect(enhanceData, powerPercent=1),
+      "Enhance1": chosenSkill.CreateEffect(enhanceData, powerPercent=.2),
+      "Enhance2": chosenSkill.CreateEffect(enhanceData, powerPercent=.4),
+      "Enhance3": chosenSkill.CreateEffect(enhanceData, powerPercent=.6),
+      "Enhance4": chosenSkill.CreateEffect(enhanceData, powerPercent=.8),
+      "Enhance5": chosenSkill.CreateEffect(enhanceData, powerPercent=1),
       "EnSkillAchieve": 0,
       "RoleParam1": 0,
       "RoleParam2": 0,
@@ -84,14 +83,14 @@ def DefineNewSkill(skillList:Helper.RandomGroup, e:Enhancements.Enhancement, enh
       "UroProb2": 40,
       "UroProb3": 80,
       "Role": 0,
-      "Icon": e.skillIcon,
+      "Icon": chosenSkill.skillIcon,
       "SortNo": 0
     }
       
-def DetermineName(enh:Enhancements.Enhancement, skill, nameData):
+def DetermineName(chosenSkill:Enhancements.Enhancement, skill, nameData):
     for name in nameData["rows"]:
         if name["$id"] == skill["Name"]:
             secondWord = random.choice(["Aura", "Power", "Stance"])
-            name["name"] = f"{enh.name} {secondWord}"
+            name["name"] = f"{chosenSkill.name} {secondWord}"
             break
  
