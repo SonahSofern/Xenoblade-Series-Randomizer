@@ -2,6 +2,8 @@ import json, random, copy
 from XC3.XC3_Scripts import Enhancements
 from scripts import JSONParser
 
+# Currently allowing future redeemed or base game only skills because the amount of effort to fix like 5 effects would be not worth the time right now.
+
 def AccessoryRando():
     with open("XC3/JsonOutputs/sys/ITM_Accessory.json", 'r+', encoding='utf-8') as itmFile:
         with open(f"XC3/JsonOutputs/btl/BTL_Enhance.json", 'r+', encoding='utf-8') as enhanceFile:

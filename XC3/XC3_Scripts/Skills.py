@@ -25,10 +25,13 @@ def SkillRando():
                     for skill in (skillList.originalGroup):
                         if not PassSkillCheck(skill, ignoreSkillIDs):
                             skillList.FilterMember(skill)
-                        
+                
                 if unusedSkills: # Generate Custom Skill List
-                    for enh in Enhancements.SkillEnhancementList.originalGroup:
-                        skillList.AddNewData(enh)
+                    copyList = copy.deepcopy(Enhancements.EnhancementsList)
+                    copyListCurrentGroup:list[Enhancements.Enhancement] = copyList.currentGroup
+                    for enh in copyListCurrentGroup:
+                        if enh.skillIcon != Enhancements.defaultSkillIcon:
+                            skillList.AddNewData(enh)
                 
                 for skill in skillData["rows"]: # Replace the list
                     if not Helper.OddsCheck(skillOdds):
