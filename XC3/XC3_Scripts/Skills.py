@@ -43,7 +43,7 @@ def SkillRando():
                     
                     if isinstance(chosenSkill, Enhancements.Enhancement): # If we get a custom enhancement convert it to workable data
                         DetermineName(chosenSkill, skill, nameData)
-                        chosenSkill = DefineNewSkill(chosenSkill, enhanceData, skillData)
+                        chosenSkill = DefineNewSkill(chosenSkill, enhanceData)
                         
                     skillList.CopyKeys(skill, chosenSkill, ignoreKeys)
 
@@ -59,7 +59,7 @@ def PassSkillCheck(skill, ignoreSkills):
             return False
     return True
 
-def DefineNewSkill(chosenSkill:Enhancements.Enhancement, enhanceData, skillData):
+def DefineNewSkill(chosenSkill:Enhancements.Enhancement, enhanceData):
     return  {
       "$id": "null",
       "ID": "null",
@@ -69,11 +69,11 @@ def DefineNewSkill(chosenSkill:Enhancements.Enhancement, enhanceData, skillData)
       "Type": 0,
       "UseTalent": 0,
       "UseChr": 0,
-      "Enhance1": chosenSkill.CreateEffect(enhanceData, powerPercent=.2),
-      "Enhance2": chosenSkill.CreateEffect(enhanceData, powerPercent=.4),
-      "Enhance3": chosenSkill.CreateEffect(enhanceData, powerPercent=.6),
-      "Enhance4": chosenSkill.CreateEffect(enhanceData, powerPercent=.8),
-      "Enhance5": chosenSkill.CreateEffect(enhanceData, powerPercent=1),
+      "Enhance1": chosenSkill.CreateEffect(enhanceData, powerPercent=RandomDecimal(0,20)),
+      "Enhance2": chosenSkill.CreateEffect(enhanceData, powerPercent=RandomDecimal(21,40)),
+      "Enhance3": chosenSkill.CreateEffect(enhanceData, powerPercent=RandomDecimal(41,60)),
+      "Enhance4": chosenSkill.CreateEffect(enhanceData, powerPercent=RandomDecimal(61,80)),
+      "Enhance5": chosenSkill.CreateEffect(enhanceData, powerPercent=RandomDecimal(81,100)),
       "EnSkillAchieve": 0,
       "RoleParam1": 0,
       "RoleParam2": 0,
@@ -86,7 +86,11 @@ def DefineNewSkill(chosenSkill:Enhancements.Enhancement, enhanceData, skillData)
       "Icon": chosenSkill.skillIcon,
       "SortNo": 0
     }
-      
+
+def RandomDecimal(low, high, mult = 0.01):
+    return (random.randrange(low, high)*mult)
+    
+     
 def DetermineName(chosenSkill:Enhancements.Enhancement, skill, nameData):
     for name in nameData["rows"]:
         if name["$id"] == skill["Name"]:
