@@ -3,7 +3,7 @@ from scripts import JSONParser, Helper, PopupDescriptions
 import XC3.XC3_Scripts.Options
 from XC3.XC3_Scripts import Enhancements
 
-def SkillRando():
+def SkillRando(): # Match class to skill type probably or at least an option to
     ignoreKeys = ["$id", "UseTalent", "Name"]
     ignoreSkillIDs = [100,101,105,106,107] 
     skillOdds = XC3.XC3_Scripts.Options.SkillOptions.GetSpinbox()
@@ -22,7 +22,8 @@ def SkillRando():
 
                 if vanillaSkills: # Generate Vanilla Skill List
                     skillList.GenData(skillData["rows"])
-                    for skill in (skillList.originalGroup):
+                    filteringList = copy.deepcopy(skillList.originalGroup) # Make a copy because we cant filter this while looping over it
+                    for skill in (filteringList):
                         if not PassSkillCheck(skill, ignoreSkillIDs):
                             skillList.FilterMember(skill)
                 
@@ -40,7 +41,7 @@ def SkillRando():
                         continue
                     
                     chosenSkill = skillList.SelectRandomMember()
-                    
+
                     if isinstance(chosenSkill, Enhancements.Enhancement): # If we get a custom enhancement convert it to workable data
                         DetermineName(chosenSkill, skill, nameData)
                         chosenSkill = DefineNewSkill(chosenSkill, enhanceData)
@@ -92,9 +93,18 @@ def RandomDecimal(low, high, mult = 0.01):
     
      
 def DetermineName(chosenSkill:Enhancements.Enhancement, skill, nameData):
+    if chosenSkill.roleType == Enhancements.Atk:
+        secondWordList = ["Strikes", "Hits", "Blast"]
+    elif chosenSkill.roleType == Enhancements.Hlr:
+        secondWordList = ["Support", "Soothing", "Assist"]
+    elif chosenSkill.roleType == Enhancements.Def:
+        secondWordList = ["Footwork", "Defenses", "Stance"]
+    else:
+        secondWordList = ["Aura", "Power"]
+        
     for name in nameData["rows"]:
         if name["$id"] == skill["Name"]:
-            secondWord = random.choice(["Aura", "Power", "Stance"])
+            secondWord = random.choice(secondWordList)
             name["name"] = f"{chosenSkill.name} {secondWord}"
             break
  

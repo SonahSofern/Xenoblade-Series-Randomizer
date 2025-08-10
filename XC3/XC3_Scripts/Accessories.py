@@ -48,11 +48,11 @@ def DetermineRecommendedCategory(acce, enhancement:Enhancements.Enhancement):
     acce["Flag_RecTank"] = 0
     acce["Flag_RecAttacker"] = 0
     acce["Flag_RecHealer"] = 0
-    if enhancement.roleType == Enhancements.H:
+    if enhancement.roleType == Enhancements.Hlr:
         acce["Flag_RecHealer"] = 1
-    elif enhancement.roleType == Enhancements.A:
+    elif enhancement.roleType == Enhancements.Atk:
         acce["Flag_RecAttacker"] = 1
-    elif enhancement.roleType == Enhancements.D:
+    elif enhancement.roleType == Enhancements.Def:
         acce["Flag_RecTank"] = 1
     
 def CreateNewName(acce ,nameData, newEnhancement:Enhancements.Enhancement, originalNameData):
