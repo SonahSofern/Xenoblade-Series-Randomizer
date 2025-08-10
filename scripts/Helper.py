@@ -234,12 +234,6 @@ class RandomGroup():
         self.RemoveMember(en)
         return copy.deepcopy(en)
     
-    def CopyKeys(self, item, chosenItem, ignoreKeys = []):
-        for key in item:
-            if key in ignoreKeys:
-                continue
-            item[key] = chosenItem[key]
-    
     def FilterMember(self, target):
         self.originalGroup.remove(target)
         self.currentGroup.remove(target)
@@ -248,3 +242,12 @@ class RandomGroup():
         self.currentGroup.remove(en)
         if self.currentGroup == []:
             self.RefreshCurrentGroup()
+
+def RandomDecimal(low, high, mult = 0.01):
+    return (random.randrange(low, high)*mult)
+
+def CopyKeys(item, chosenItem, ignoreKeys = []):
+    for key in item:
+        if key in ignoreKeys:
+            continue
+        item[key] = chosenItem[key]

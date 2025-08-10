@@ -46,7 +46,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                         
                     EnemySizeHelper(en, newEn, eRando)
                     
-                    eRando.CopyKeys(en, newEn, ignoreKeys)
+                    Helper.CopyKeys(en, newEn, ignoreKeys)
                         
                 for group in StaticEnemyData:
                     group.RefreshCurrentGroup()

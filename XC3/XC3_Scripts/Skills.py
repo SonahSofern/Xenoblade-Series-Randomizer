@@ -17,8 +17,6 @@ def SkillRando(): # Match class to skill type probably or at least an option to
                 nameData = json.load(nameFile)
                 
                 skillList = Helper.RandomGroup()
-                originalNames = Helper.RandomGroup()
-                originalNames.GenData(nameData["rows"])
 
                 if vanillaSkills: # Generate Vanilla Skill List
                     skillList.GenData(skillData["rows"])
@@ -46,7 +44,7 @@ def SkillRando(): # Match class to skill type probably or at least an option to
                         DetermineName(chosenSkill, skill, nameData)
                         chosenSkill = DefineNewSkill(chosenSkill, enhanceData)
                         
-                    skillList.CopyKeys(skill, chosenSkill, ignoreKeys)
+                    Helper.CopyKeys(skill, chosenSkill, ignoreKeys)
 
                 JSONParser.CloseFile(skillData, skillFile)
                 JSONParser.CloseFile(enhanceData, enhanceFile)
@@ -70,11 +68,11 @@ def DefineNewSkill(chosenSkill:Enhancements.Enhancement, enhanceData):
       "Type": 0,
       "UseTalent": 0,
       "UseChr": 0,
-      "Enhance1": chosenSkill.CreateEffect(enhanceData, powerPercent=RandomDecimal(0,20)),
-      "Enhance2": chosenSkill.CreateEffect(enhanceData, powerPercent=RandomDecimal(21,40)),
-      "Enhance3": chosenSkill.CreateEffect(enhanceData, powerPercent=RandomDecimal(41,60)),
-      "Enhance4": chosenSkill.CreateEffect(enhanceData, powerPercent=RandomDecimal(61,80)),
-      "Enhance5": chosenSkill.CreateEffect(enhanceData, powerPercent=RandomDecimal(81,100)),
+      "Enhance1": chosenSkill.CreateEffect(enhanceData, powerPercent=Helper.RandomDecimal(0,20)),
+      "Enhance2": chosenSkill.CreateEffect(enhanceData, powerPercent=Helper.RandomDecimal(21,40)),
+      "Enhance3": chosenSkill.CreateEffect(enhanceData, powerPercent=Helper.RandomDecimal(41,60)),
+      "Enhance4": chosenSkill.CreateEffect(enhanceData, powerPercent=Helper.RandomDecimal(61,80)),
+      "Enhance5": chosenSkill.CreateEffect(enhanceData, powerPercent=Helper.RandomDecimal(81,100)),
       "EnSkillAchieve": 0,
       "RoleParam1": 0,
       "RoleParam2": 0,
@@ -88,9 +86,6 @@ def DefineNewSkill(chosenSkill:Enhancements.Enhancement, enhanceData):
       "SortNo": 0
     }
 
-def RandomDecimal(low, high, mult = 0.01):
-    return (random.randrange(low, high)*mult)
-    
      
 def DetermineName(chosenSkill:Enhancements.Enhancement, skill, nameData):
     if chosenSkill.roleType == Enhancements.Atk:
