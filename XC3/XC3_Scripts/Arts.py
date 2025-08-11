@@ -41,3 +41,12 @@ def isValidArt(art):
     if art["Voice1"] == "":
         return False
     return True
+
+def ArtEffects():
+    with open("XC3/JsonOutputs/btl/BTL_Arts_PC.json", 'r+', encoding='utf-8') as artFile:
+        artData = json.load(artFile)
+        for art in artData["rows"]:
+            if isValidArt(art):
+                continue
+        
+        JSONParser.CloseFile(artData, artFile)

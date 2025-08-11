@@ -26,15 +26,20 @@ def GemRando(): # Match class to skill type probably or at least an option to
                 copyList = copy.deepcopy(Enhancements.EnhancementsList)
                 copyListCurrentGroup:list[Enhancements.Enhancement] = copyList.currentGroup
                 for enh in copyListCurrentGroup:
-                    if enh.isGem:
-                        if enh.roleType == Enhancements.Atk:
-                            AttackerGemList.AddNewData(enh)
-                        elif enh.roleType == Enhancements.Def:
-                            DefenderGemList.AddNewData(enh)
-                        elif enh.roleType == Enhancements.Hlr:
-                            HealerGemList.AddNewData(enh)
-                        else:
-                            MiscGemList.AddNewData(enh)
+                    if not enh.isGem:
+                        continue
+                    if enh.isChainActivation:
+                        continue
+                    if enh.isChainOrder:
+                        continue
+                    if enh.roleType == Enhancements.Atk:
+                        AttackerGemList.AddNewData(enh)
+                    elif enh.roleType == Enhancements.Def:
+                        DefenderGemList.AddNewData(enh)
+                    elif enh.roleType == Enhancements.Hlr:
+                        HealerGemList.AddNewData(enh)
+                    else:
+                        MiscGemList.AddNewData(enh)
                 # Replace the gems file
                 for gem in gemData["rows"]: 
                     if gem["$id"]%10 == 0 or gem["$id"] == 12001: # Every 10 gems choose a new skill for level 1-10

@@ -246,8 +246,8 @@ class RandomGroup():
 def RandomDecimal(low, high, mult = 0.01):
     return (random.randrange(low, high)*mult)
 
-def CopyKeys(item, chosenItem, ignoreKeys = []):
-    for key in item:
+def CopyKeys(originalItem, chosenItem, ignoreKeys = []):
+    for key in originalItem:
         if key in ignoreKeys:
             continue
-        item[key] = chosenItem[key]
+        originalItem[key] = chosenItem[key]

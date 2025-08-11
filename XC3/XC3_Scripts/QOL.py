@@ -50,3 +50,6 @@ def ArtOfFlowEarly():
                 en["IdDropPrecious"] = artOfFlowId
                 break
         JSONParser.CloseFile(eneData, eneFile)
+        
+        
+# Speedups for quests can probably be done here by settings TASKIDs https://xenobladedata.github.io/xb3_200_dlc4/QST_Task.html#718

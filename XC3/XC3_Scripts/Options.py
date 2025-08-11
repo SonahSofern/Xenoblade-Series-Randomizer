@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XC3.XC3_Scripts import Shortcuts, Skills, Heroes, QOL as Quality, Enemy , IDs, Enhancements, Accessories, Gems, Arts, Items
+from XC3.XC3_Scripts import Shortcuts, Skills, Heroes, QOL as Quality, Enemy , IDs, Enhancements, Accessories, Gems, Arts, Items, Costumes, Class
 scripts.Interactables.Game = "XC3" 
 
 General = 1
@@ -18,6 +18,7 @@ Tabs = {
 }
 
 ShopOption = Option("Shops", General, "Randomizes shop contents", [lambda: Items.Shops()])
+EnemyNormalDropOption = Option("Enemy Drops", General, "Randomizes enemy accessory drops", [lambda: Items.EnemyNormalDrops()])
 
 # CharactersOption = Option("Heroes", Character, "Randomizes heroes", [lambda: Characters.CharacterSwaps()])
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsters, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_MatchSize)], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
@@ -43,13 +44,17 @@ BossEnemyOption_GroupFights = SubOption("Balance Group Fights", BossEnemyOption)
 BossEnemyOption_MatchSize = SubOption("Match Size", BossEnemyOption)
 
 AccessoriesOption = Option("Accessories", Character, "Randomizes the effects of Accessories", [lambda: Accessories.AccessoryRando()])
-GemsOption = Option("Gems", Character, "Randomizes the effects of gems", [lambda: Gems.GemRando()])
+GemsOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.GemRando()])
 SkillOptions = Option("Class Skills", Character, "Randomizes class skills", [lambda: Skills.SkillRando()], hasSpinBox=True)
 SkillOptions_Vanilla = SubOption("Vanilla Skills", SkillOptions)
 SkillOptions_Unused = SubOption("Unused Skills", SkillOptions)
 # SkillOptions_MatchSkillClass = SubOption("Match Class Type", SkillOptions)
-PlayerArtsOption = Option("Class Arts", Character, "Shuffles arts among the classes", [lambda: Arts.ArtRando()], hasSpinBox=True)
+PlayerArtsOption = Option("Class Arts", Character, "Randomizes arts among the classes", [lambda: Arts.ArtRando()], hasSpinBox=True)
 # HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])
+CostumesOption = Option("Class Costumes", Character, "Randomizes class outfits", [lambda: Costumes.CostumeRando()])
+ClassOption = Option("Class", Character, "Randomizes classes unlock events", [lambda: Class.TalentRando()])
+ClassOption_DefaultClasses = SubOption("Default Classes", ClassOption)
+ClassOption_HeroClasses = SubOption("Hero Classes", ClassOption)
 
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_Tutorials = SubOption("Tutorial Skip", ShortcutsOption, [lambda: Shortcuts.TutorialSkips()])
