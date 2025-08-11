@@ -12,7 +12,7 @@ from scripts import Helper, JSONParser, PopupDescriptions, Enemies as Enemy
 StaticEnemyData:list[Enemy.EnemyGroup] = []
 
                                                                                                                                                                                                                                                                                                                 
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSizeOption:Options.Option):
     global StaticEnemyData
     GroupFightViolations = GetGroupFightViolations()
     GroupFightIDs = GetGroupFightIDs()
@@ -20,13 +20,14 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
     RetryBattleLandmark = "<9A220E4D>"
     PostBattleConqueredPopup = "CatMain" # Currently not using it has weird effects fights take a long time to end after enemy goes down without it happens eithery way with UMs so something is wrong with UMS
     ignoreKeys = ["$id", "ID", PostBattleConqueredPopup,  "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "IdMove", "FlgNoVanish", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"] + Aggro
-    actKeys = ["ActType", "SwimHeight"]
+    actKeys = ["ActType", "FlyHeight", "SwimHeight"]
     with open("XC3/JsonOutputs/fld/FLD_EnemyData.json", 'r+', encoding='utf-8') as eneFile:
         with open("XC3/JsonOutputs/btl/BTL_Enemy.json", 'r+', encoding='utf-8') as paramFile:
             with open("XC3/JsonOutputs/btl/BTL_EnRsc.json", 'r+', encoding='utf-8') as rscFile:
                 paramData = json.load(paramFile)
                 rscData = json.load(rscFile)
                 eneData = json.load(eneFile)
+                isMatchSize = isMatchSizeOption.GetState()
                 
                 eRando = Enemy.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "Resource", "IdBattleEnemy", eneData, paramData, rscData, actKeys=actKeys)
                 
@@ -41,10 +42,11 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                 
                     eRando.ActTypeFix(newEn, en) # Flying Enemies and some enemies in Erythia will still fall despite act type fix
                     
-                    if Options.BossEnemyOption_GroupFights.GetState():
+                    if isMatchSize:
                         eRando.BalanceFight(en, newEn, GroupFightIDs, GroupFightViolations)
                         
-                    EnemySizeHelper(en, newEn, eRando)
+                    if isMatchSizeOption.GetState():
+                        EnemySizeHelper(en, newEn, eRando)
                     
                     Helper.CopyKeys(en, newEn, ignoreKeys)
                         
