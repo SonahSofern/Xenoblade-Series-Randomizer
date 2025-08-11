@@ -1,4 +1,5 @@
 import json, random, time, copy
+from scripts import JSONParser
 from tkinter import filedialog
 import tkinter as tk
 
@@ -251,3 +252,16 @@ def CopyKeys(originalItem, chosenItem, ignoreKeys = []):
         if key in ignoreKeys:
             continue
         originalItem[key] = chosenItem[key]
+        
+def FileShuffle(fileName, ignoreKeys):
+    with open(fileName, 'r+', encoding='utf-8') as file:
+        fileData = json.load(file)
+        
+        fileGroup = RandomGroup()
+        fileGroup.GenData(fileData["rows"])
+        
+        for item in fileData["rows"]:
+            randomMem = fileGroup.SelectRandomMember()
+            CopyKeys(item, randomMem, ignoreKeys)
+        
+        JSONParser.CloseFile(fileData, file)

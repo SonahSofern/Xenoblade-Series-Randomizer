@@ -18,8 +18,14 @@ Tabs = {
 }
 
 ShopOption = Option("Shops", General, "Randomizes shop contents", [lambda: Items.Shops()])
+ShopOption_IndividualItems = SubOption("Randomize Individual Items", ShopOption)
+ShopOption_ShuffleShops = SubOption("Shuffle Shops", ShopOption)
+
 EnemyNormalDropOption = Option("Enemy Drops", General, "Randomizes enemy accessory drops", [lambda: Items.EnemyNormalDrops()])
-TreasureBoxOption = Option("Containers", General, "Randomizes the contents of containers and treasure boxes", [lambda: Items.TreasureBoxes()])
+
+TreasureBoxOption = Option("Containers", General, "Randomizes the contents of containers", [lambda: Items.TreasureBoxes()])
+TreasureBoxOption_IndividualItems = SubOption("Randomize Individual Items", TreasureBoxOption)
+TreasureBoxOption_ShuffleBoxes = SubOption("Shuffle Containers", TreasureBoxOption)
 
 # CharactersOption = Option("Heroes", Character, "Randomizes heroes", [lambda: Characters.CharacterSwaps()])
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsters, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_MatchSize)], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
@@ -65,6 +71,6 @@ MoveSpeedOption = Option("Movespeed", QOL, "Colony 4's affinity reward will be i
 # AscendedClassOption = Option("Ascended Classes", QOL, "Classes begin the game being able to reach rank 20 (DOESNT WORK)", [lambda: Quality.AscendedClassEarly()]) # https://xenobladedata.github.io/xb3_200_dlc4/MNU_HeroDictionary.html set the wakeupquest to 120
 EarlyArtsCancel = Option("Early Arts Cancel", QOL, "The Art of Flow is given during the introduction", [lambda: Quality.ArtOfFlowEarly()])
 
-#Roguelike enemy files https://xenobladedata.github.io/xb3_200_dlc4/BTL_ChSU_EnemyTable.html
+# Roguelike enemy files https://xenobladedata.github.io/xb3_200_dlc4/BTL_ChSU_EnemyTable.html
 
 # XYZ of literally everything in the field https://xenobladedata.github.io/xb3_200_dlc4/SYS_GimmickLocation_dlc04.html#27830

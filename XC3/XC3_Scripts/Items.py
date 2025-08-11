@@ -1,25 +1,39 @@
-from XC3.XC3_Scripts import IDs
-from scripts import JSONParser
+from XC3.XC3_Scripts import IDs, Options
+from scripts import JSONParser, Helper
 import json, random
-def Shops():
-    with open("XC3/JsonOutputs/mnu/MNU_ShopTable.json", 'r+', encoding='utf-8') as shopFile:
-        shopData = json.load(shopFile)
-        group = IDs.DLC4AccessoriesIDs + IDs.AccessoriesIDs + IDs.BaseGamePreciousIDs
-        for shop in shopData["rows"]:
-            for i in range(1,21):
-                newItemId = random.choice(group)
-                if (shop[f"ShopItem{i}"] in [1]) and (shop["$id"] in [1,2,3]): # Dont replace bronze temple guard in shop 1 for tutorial
-                    continue
-                shop[f"ShopItem{i}"] = newItemId
-        JSONParser.CloseFile(shopData,shopFile)
 
+def Shops():
+    if Options.ShopOption_IndividualItems.GetState():
+        with open("XC3/JsonOutputs/mnu/MNU_ShopTable.json", 'r+', encoding='utf-8') as shopFile:
+            shopData = json.load(shopFile)
+            group = IDs.DLC4AccessoriesIDs + IDs.AccessoriesIDs + IDs.BaseGamePreciousIDs
+            for shop in shopData["rows"]:
+                for i in range(1,21):
+                    newItemId = random.choice(group)
+                    if (shop[f"ShopItem{i}"] in [1]) and (shop["$id"] in [1,2,3]): # Dont replace bronze temple guard in shop 1 for tutorial
+                        continue
+                    shop[f"ShopItem{i}"] = newItemId
+            JSONParser.CloseFile(shopData,shopFile)
+    if Options.ShopOption_ShuffleShops.GetState():
+        Helper.FileShuffle("XC3/JsonOutputs/mnu/MNU_ShopTable.json", ["$id"])
 
 def EnemyNormalDrops():
-    with open("XC3/JsonOutputs/mnu/MNU_ShopTable.json", 'r+', encoding='utf-8') as eneDropFile:
+    with open("XC3/JsonOutputs/btl/BTL_EnemyDrop_Normal.json", 'r+', encoding='utf-8') as eneDropFile:
         eneDropData = json.load(eneDropFile)
         for drop in eneDropData["rows"]:
             drop["ItemID"] = random.choice(IDs.AccessoriesIDs)
         JSONParser.CloseFile(eneDropData, eneDropFile)
         
 def TreasureBoxes():
-    pass
+    if Options.TreasureBoxOption_IndividualItems.GetState():
+        with open("XC3/JsonOutputs/sys/ITM_RewardAssort.json", 'r+', encoding='utf-8') as containerFile:
+            containerData = json.load(containerFile)
+            for container in containerData["rows"]:
+                for i in range(1,20):
+                    if container[f"Reward{i}"] in IDs.BaseGamePreciousIDs + IDs.DLC4PreciousIDs: # Dont replace Precious Items
+                        continue
+                    container[f"Reward{i}"] = random.choice(IDs.AccessoriesIDs)
+            JSONParser.CloseFile(containerData, containerFile)
+    if Options.TreasureBoxOption_ShuffleBoxes.GetState():
+        Helper.FileShuffle("XC3/JsonOutputs/sys/ITM_RewardAssort.json", ["$id"])
+        

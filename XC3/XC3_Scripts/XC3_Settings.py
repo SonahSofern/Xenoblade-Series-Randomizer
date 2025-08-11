@@ -12,7 +12,7 @@ seedEntryVar = scripts.XCRandomizer.StringVar()
 permalinkVar = scripts.XCRandomizer.StringVar()
 
 extraArgs= ["--hashes", "XC3/xbc3Hashes.txt"]
-extraCommands = [lambda: ShowTitleScreenText()]
+extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.EnhancementsList.RefreshCurrentGroup()]
 mainFolderNames = ["des", "btl", "evt", "fld", "map", "prg", "qst", "sys", "zzz", "mnu"]
 subFolderNames = ["autotalk", "battle", "field", "menu", "quest", "system"]
 textFolderName="gb/game"
