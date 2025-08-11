@@ -20,3 +20,6 @@ def EnemyNormalDrops():
         for drop in eneDropData["rows"]:
             drop["ItemID"] = random.choice(IDs.AccessoriesIDs)
         JSONParser.CloseFile(eneDropData, eneDropFile)
+        
+def TreasureBoxes():
+    pass

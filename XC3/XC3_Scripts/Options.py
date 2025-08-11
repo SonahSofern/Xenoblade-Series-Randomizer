@@ -19,6 +19,7 @@ Tabs = {
 
 ShopOption = Option("Shops", General, "Randomizes shop contents", [lambda: Items.Shops()])
 EnemyNormalDropOption = Option("Enemy Drops", General, "Randomizes enemy accessory drops", [lambda: Items.EnemyNormalDrops()])
+TreasureBoxOption = Option("Containers", General, "Randomizes the contents of containers and treasure boxes", [lambda: Items.TreasureBoxes()])
 
 # CharactersOption = Option("Heroes", Character, "Randomizes heroes", [lambda: Characters.CharacterSwaps()])
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsters, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_MatchSize)], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
@@ -65,3 +66,5 @@ MoveSpeedOption = Option("Movespeed", QOL, "Colony 4's affinity reward will be i
 EarlyArtsCancel = Option("Early Arts Cancel", QOL, "The Art of Flow is given during the introduction", [lambda: Quality.ArtOfFlowEarly()])
 
 #Roguelike enemy files https://xenobladedata.github.io/xb3_200_dlc4/BTL_ChSU_EnemyTable.html
+
+# XYZ of literally everything in the field https://xenobladedata.github.io/xb3_200_dlc4/SYS_GimmickLocation_dlc04.html#27830
