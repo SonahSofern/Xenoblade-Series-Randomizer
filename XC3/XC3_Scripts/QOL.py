@@ -39,3 +39,14 @@ def AscendedClassEarly():
             char["WakeupCondition"] = 21022
             char["WakeupQuest"] = 120
         JSONParser.CloseFile(charData, charFile)
+        
+def ArtOfFlowEarly():
+    artOfFlowId = 16119
+    FirstTutorialEnemyID = 449
+    with open("XC3/JsonOutputs/fld/FLD_EnemyData.json", 'r+', encoding='utf-8') as eneFile:
+        eneData = json.load(eneFile)
+        for en in eneData["rows"]:
+            if en["$id"] == FirstTutorialEnemyID:
+                en["IdDropPrecious"] = artOfFlowId
+                break
+        JSONParser.CloseFile(eneData, eneFile)

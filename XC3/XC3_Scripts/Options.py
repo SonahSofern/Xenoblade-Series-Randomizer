@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XC3.XC3_Scripts import Shortcuts, Skills, Heroes, QOL as Quality, Enemy , IDs, Enhancements, Accessories, Gems
+from XC3.XC3_Scripts import Shortcuts, Skills, Heroes, QOL as Quality, Enemy , IDs, Enhancements, Accessories, Gems, Arts, Items
 scripts.Interactables.Game = "XC3" 
 
 General = 1
@@ -17,6 +17,7 @@ Tabs = {
     QOL: '🐇 Quality of Life',
 }
 
+ShopOption = Option("Shops", General, "Randomizes shop contents", [lambda: Items.Shops()])
 
 # CharactersOption = Option("Heroes", Character, "Randomizes heroes", [lambda: Characters.CharacterSwaps()])
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsters, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption)], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
@@ -39,17 +40,19 @@ BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, hasSpinBox
 BossEnemyOption_GroupFights = SubOption("Balance Group Fights", BossEnemyOption)
 
 AccessoriesOption = Option("Accessories", Character, "Randomizes the effects of Accessories", [lambda: Accessories.AccessoryRando()])
-GemsOption = Option("Gems", Character, "Randomizes the effects of gems.", [lambda: Gems.GemRando()])
+GemsOption = Option("Gems", Character, "Randomizes the effects of gems", [lambda: Gems.GemRando()])
 SkillOptions = Option("Class Skills", Character, "Randomizes class skills", [lambda: Skills.SkillRando()], hasSpinBox=True)
 SkillOptions_Vanilla = SubOption("Vanilla Skills", SkillOptions)
 SkillOptions_Unused = SubOption("Unused Skills", SkillOptions)
-PlayerArtsOption = Option("Arts", Character) # Probably only want to add extra effects not create entirely new arts like 2 and alter already exisiting effects strengths
-HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])
+# SkillOptions_MatchSkillClass = SubOption("Match Class Type", SkillOptions)
+PlayerArtsOption = Option("Arts", Character, "Shuffles arts among the classes", [lambda: Arts.ArtRando()], hasSpinBox=True)
+# HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])
 
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_Tutorials = SubOption("Tutorial Skip", ShortcutsOption, [lambda: Shortcuts.TutorialSkips()])
 ClassLearningOption = Option("Class Aptitude", QOL, "Increases the rate at which your characters learn classes", [lambda: Quality.ClassAptitude()], hasSpinBox=True, spinDesc = "x Faster")
 MoveSpeedOption = Option("Movespeed", QOL, "Colony 4's affinity reward will be instant and a movespeed deed.", [lambda: Quality.EarlyMoveSpeed()], hasSpinBox=True, spinDesc = "% Speed", spinMin=1, spinMax=255, spinIncr=10)
 # AscendedClassOption = Option("Ascended Classes", QOL, "Classes begin the game being able to reach rank 20 (DOESNT WORK)", [lambda: Quality.AscendedClassEarly()]) # https://xenobladedata.github.io/xb3_200_dlc4/MNU_HeroDictionary.html set the wakeupquest to 120
+EarlyArtsCancel = Option("Early Arts Cancel", QOL, "The Art of Flow is dropped during the introduction fights", [lambda: Quality.ArtOfFlowEarly()])
 
 #Roguelike enemy files https://xenobladedata.github.io/xb3_200_dlc4/BTL_ChSU_EnemyTable.html

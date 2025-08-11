@@ -3,7 +3,7 @@ from scripts import JSONParser, Helper, PopupDescriptions
 import XC3.XC3_Scripts.Options
 from XC3.XC3_Scripts import Enhancements
 
-def SkillRando(): # Match class to skill type probably or at least an option to
+def SkillRando():
     ignoreKeys = ["$id", "UseTalent", "Name"]
     ignoreSkillIDs = [100,101,105,106,107] 
     skillOdds = XC3.XC3_Scripts.Options.SkillOptions.GetSpinbox()
