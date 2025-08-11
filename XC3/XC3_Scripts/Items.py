@@ -6,12 +6,13 @@ def Shops():
     if Options.ShopOption_IndividualItems.GetState():
         with open("XC3/JsonOutputs/mnu/MNU_ShopTable.json", 'r+', encoding='utf-8') as shopFile:
             shopData = json.load(shopFile)
-            group = IDs.DLC4AccessoriesIDs + IDs.AccessoriesIDs + IDs.BaseGamePreciousIDs
+            chosenGroup = IDs.DLC4AccessoriesIDs + IDs.AccessoriesIDs
+            ignoreGroup = [1] + IDs.DLC4PreciousIDs + IDs.BaseGamePreciousIDs
             for shop in shopData["rows"]:
                 for i in range(1,21):
-                    newItemId = random.choice(group)
-                    if (shop[f"ShopItem{i}"] in [1]) and (shop["$id"] in [1,2,3]): # Dont replace bronze temple guard in shop 1 for tutorial
+                    if (shop[f"ShopItem{i}"] in ignoreGroup) and (shop["$id"] in [1,2,3]):
                         continue
+                    newItemId = random.choice(chosenGroup)
                     shop[f"ShopItem{i}"] = newItemId
             JSONParser.CloseFile(shopData,shopFile)
     if Options.ShopOption_ShuffleShops.GetState():
