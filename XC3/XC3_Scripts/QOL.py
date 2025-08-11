@@ -5,7 +5,7 @@ from XC3.XC3_Scripts import Options
 def ClassAptitude():
     with open(f"XC3/JsonOutputs/btl/BTL_Talent.json", 'r+', encoding='utf-8') as talentFile:
         talentData = json.load(talentFile)
-        mult = Options.ClassLearningOption.GetSpinbox()
+        mult = Options.FasterApitudeOption.GetSpinbox()
         for talent in talentData["rows"]:
             for i in range(2,21):
                 talent[f"NeedExpLv{i:02}"] = int(talent[f"NeedExpLv{i:02}"]//mult)
