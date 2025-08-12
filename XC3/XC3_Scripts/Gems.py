@@ -103,3 +103,13 @@ def DetermineName(chosenSkill:Enhancements.Enhancement, gem, nameData):
             name["name"] = f"{chosenSkill.name} {Numerals[gem["GemLv"]]}"
             break
  
+def EasyGemCrafting():
+    with open("XC3/JsonOutputs/btl/BTL_GemCraft.json", 'r+', encoding='utf-8') as gemFile:
+        gemData = json.load(gemFile)
+        for gem in gemData["rows"]:
+            for i in range(1,7):
+                if gem[f"ItemNum{i}"] > 1:
+                    gem[f"ItemNum{i}"] = 1
+            gem["NcNum"] == gem["NcNum"]//5
+            gem["Condition"] = 0
+        JSONParser.CloseFile(gemData,gemFile)

@@ -19,11 +19,21 @@ def Shops():
         Helper.FileShuffle("XC3/JsonOutputs/mnu/MNU_ShopTable.json", ["$id"])
 
 def EnemyNormalDrops():
-    with open("XC3/JsonOutputs/btl/BTL_EnemyDrop_Normal.json", 'r+', encoding='utf-8') as eneDropFile:
-        eneDropData = json.load(eneDropFile)
-        for drop in eneDropData["rows"]:
-            drop["ItemID"] = random.choice(IDs.AccessoriesIDs)
-        JSONParser.CloseFile(eneDropData, eneDropFile)
+    if Options.EnemyNormalDropOption_IndividualItems.GetState():
+        with open("XC3/JsonOutputs/btl/BTL_EnemyDrop_Normal.json", 'r+', encoding='utf-8') as eneDropFile:
+            eneDropData = json.load(eneDropFile)
+            for drop in eneDropData["rows"]:
+                drop["ItemID"] = random.choice(IDs.AccessoriesIDs)
+            JSONParser.CloseFile(eneDropData, eneDropFile)
+        with open("XC3/JsonOutputs/btl/BTL_EnemyDrop_Normal_dlc04.json", 'r+', encoding='utf-8') as eneDropFile: # FR
+            eneDropData = json.load(eneDropFile)
+            for drop in eneDropData["rows"]:
+                drop["ItemID"] = random.choice(IDs.AccessoriesIDs + IDs.DLC4AccessoriesIDs)
+            JSONParser.CloseFile(eneDropData, eneDropFile)
+    if Options.EnemyNormalDropOption_ShuffleDrops.GetState():
+        Helper.FileShuffle("XC3/JsonOutputs/btl/BTL_EnemyDrop_Normal.json", ["$id", "LvMin", "LvMax", "Param", "<36D6C799>"])
+        Helper.FileShuffle("XC3/JsonOutputs/btl/BTL_EnemyDrop_Normal_dlc04.json", ["$id", "LvMin", "LvMax", "Param", "<36D6C799>"]) # FR
+        
         
 def TreasureBoxes():
     if Options.TreasureBoxOption_IndividualItems.GetState():

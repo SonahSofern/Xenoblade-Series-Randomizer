@@ -22,6 +22,8 @@ ShopOption_IndividualItems = SubOption("Randomize Individual Items", ShopOption)
 ShopOption_ShuffleShops = SubOption("Shuffle Shops", ShopOption)
 
 EnemyNormalDropOption = Option("Enemy Drops", General, "Randomizes enemy accessory drops", [lambda: Items.EnemyNormalDrops()])
+EnemyNormalDropOption_IndividualItems = SubOption("Randomize Individual Drops", EnemyNormalDropOption)
+EnemyNormalDropOption_ShuffleDrops = SubOption("Shuffle Drops", EnemyNormalDropOption)
 
 TreasureBoxOption = Option("Containers", General, "Randomizes the contents of containers", [lambda: Items.TreasureBoxes()])
 TreasureBoxOption_IndividualItems = SubOption("Randomize Individual Items", TreasureBoxOption)
@@ -52,9 +54,13 @@ BossEnemyOption_MatchSize = SubOption("Match Size", BossEnemyOption)
 
 AccessoriesOption = Option("Accessories", Character, "Randomizes the effects of Accessories", [lambda: Accessories.AccessoryRando()])
 GemsOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.GemRando()])
-SkillOptions = Option("Class Skills", Character, "Randomizes class skills", [lambda: Skills.SkillRando()], hasSpinBox=True)
-SkillOptions_Vanilla = SubOption("Vanilla Skills", SkillOptions)
-SkillOptions_Unused = SubOption("Unused Skills", SkillOptions)
+SkillOptions = Option("Skills", Character, "Randomizes class skills", [lambda: Skills.SkillRandoMain()], hasSpinBox=True)
+SkillOptions_Vanilla = SubOption("Allow Vanilla Skills", SkillOptions)
+SkillOptions_Unused = SubOption("Allow Unused Skills", SkillOptions)
+SkillOptions_Class = SubOption("Randomize Class Skills", SkillOptions)
+SkillOptions_Ouroborous = SubOption("Randomize Ouroborous Skills", SkillOptions)
+SkillOptions_SoulHacker = SubOption("Randomize Soulhacker Skills", SkillOptions)
+SkillOptions_SingleNode = SubOption("Randomize Node Skills", SkillOptions)
 # SkillOptions_MatchSkillClass = SubOption("Match Class Type", SkillOptions)
 PlayerArtsOption = Option("Class Arts", Character, "Randomizes arts among the classes", [lambda: Arts.ArtRando()], hasSpinBox=True)
 # HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])
@@ -69,8 +75,13 @@ FasterLevelsOption = Option("Faster Levels", QOL, "Decreases EXP required for ea
 FasterApitudeOption = Option("Faster Class Points", QOL, "Increases the rate at which your characters learn classes", [lambda: Quality.ClassAptitude()], hasSpinBox=True, spinDesc = "x Faster", spinDefault=2)
 MoveSpeedOption = Option("Movespeed", QOL, "Colony 4's affinity reward will be instant and a movespeed deed.", [lambda: Quality.EarlyMoveSpeed()], hasSpinBox=True, spinDesc = "% Speed", spinMin=1, spinMax=255, spinIncr=10)
 # AscendedClassOption = Option("Ascended Classes", QOL, "Classes begin the game being able to reach rank 20 (DOESNT WORK)", [lambda: Quality.AscendedClassEarly()]) # https://xenobladedata.github.io/xb3_200_dlc4/MNU_HeroDictionary.html set the wakeupquest to 120
-EarlyArtsCancel = Option("Early Arts Cancel", QOL, "The Art of Flow is given during the introduction", [lambda: Quality.ArtOfFlowEarly()])
+EarlyArtsCancelOption = Option("Early Arts Cancel", QOL, "The Art of Flow is given during the introduction", [lambda: Quality.ArtOfFlowEarly()])
+GemCraftingOption = Option("Cheaper Gem Crafting", QOL, "Reduces the material requirements for gem crafting", [lambda: Gems.EasyGemCrafting()])
 
 # Roguelike enemy files https://xenobladedata.github.io/xb3_200_dlc4/BTL_ChSU_EnemyTable.html
 
 # XYZ of literally everything in the field https://xenobladedata.github.io/xb3_200_dlc4/SYS_GimmickLocation_dlc04.html#27830
+
+# How do DLC4 Combos work like the explosion finishers on launched enemies
+# Nopon shops are weird
+# All main quest here https://xenobladedata.github.io/xb3_200_dlc4/QST_Purpose.html#3
