@@ -57,10 +57,10 @@ GemsOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda
 SkillOptions = Option("Skills", Character, "Randomizes class skills", [lambda: Skills.SkillRandoMain()], hasSpinBox=True)
 SkillOptions_Vanilla = SubOption("Allow Vanilla Skills", SkillOptions)
 SkillOptions_Unused = SubOption("Allow Unused Skills", SkillOptions)
-SkillOptions_Class = SubOption("Randomize Class Skills", SkillOptions)
-SkillOptions_Ouroborous = SubOption("Randomize Ouroborous Skills", SkillOptions)
-SkillOptions_SoulHacker = SubOption("Randomize Soulhacker Skills", SkillOptions)
-SkillOptions_SingleNode = SubOption("Randomize Node Skills", SkillOptions)
+SkillOptions_Class = SubOption("Class Skills", SkillOptions)
+SkillOptions_Ouroborous = SubOption("Ouroborous Skills", SkillOptions)
+SkillOptions_SoulHacker = SubOption("Soulhacker Skills", SkillOptions)
+SkillOptions_SingleNode = SubOption("Node Skills", SkillOptions)
 # SkillOptions_MatchSkillClass = SubOption("Match Class Type", SkillOptions)
 PlayerArtsOption = Option("Class Arts", Character, "Randomizes arts among the classes", [lambda: Arts.ArtRando()], hasSpinBox=True)
 # HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])
@@ -76,7 +76,7 @@ FasterApitudeOption = Option("Faster Class Points", QOL, "Increases the rate at 
 MoveSpeedOption = Option("Movespeed", QOL, "Colony 4's affinity reward will be instant and a movespeed deed.", [lambda: Quality.EarlyMoveSpeed()], hasSpinBox=True, spinDesc = "% Speed", spinMin=1, spinMax=255, spinIncr=10)
 # AscendedClassOption = Option("Ascended Classes", QOL, "Classes begin the game being able to reach rank 20 (DOESNT WORK)", [lambda: Quality.AscendedClassEarly()]) # https://xenobladedata.github.io/xb3_200_dlc4/MNU_HeroDictionary.html set the wakeupquest to 120
 EarlyArtsCancelOption = Option("Early Arts Cancel", QOL, "The Art of Flow is given during the introduction", [lambda: Quality.ArtOfFlowEarly()])
-GemCraftingOption = Option("Cheaper Gem Crafting", QOL, "Reduces the material requirements for gem crafting", [lambda: Gems.EasyGemCrafting()])
+GemCraftingOption = Option("Easy Gem Crafting", QOL, "Reduces the material requirements for gem crafting", [lambda: Gems.EasyGemCrafting()])
 
 # Roguelike enemy files https://xenobladedata.github.io/xb3_200_dlc4/BTL_ChSU_EnemyTable.html
 
