@@ -25,32 +25,34 @@ def SkillRandoMain():
                             skillList.AddNewData(enh)
                 
                 if Options.SkillOptions_Class:
-                    SkillRando(IDs.BaseGameClassSkills, [(0,20),(21,40),(41,60),(61,80),(81,100)], skillList)
-                    SkillRando(IDs.InoSkillTree, [(20,30),(40,50),(60,100)], skillList)
-                    SkillRando(IDs.DLC4Skills, [(20,40),(50,70),(80,100)], skillList)
-                    SkillRando(IDs.PairSkills, [(30,60),(70,100)], skillList)
+                    SkillRando(IDs.BaseGameClassSkills, [(0,20),(21,40),(41,60),(61,80),(81,100)], skillList, skillData, nameData, enhanceData)
+                    SkillRando(IDs.InoSkillTree, [(20,30),(40,50),(60,100)], skillList, skillData, nameData, enhanceData)
+                    SkillRando(IDs.DLC4Skills, [(20,40),(50,70),(80,100)], skillList, skillData, nameData, enhanceData)
+                    SkillRando(IDs.PairSkills, [(30,60),(70,100)], skillList, skillData, nameData, enhanceData)
                 if Options.SkillOptions_SingleNode.GetState():
-                    SkillRando(IDs.DLC4SingleSkills, [(50,80)], skillList)
-                    SkillRando(IDs.InoTreeNodes, [(10,30)], skillList)
-                    SkillRando(IDs.DLC4SingleSkills, [(30,80)], skillList)
-                    SkillRando(IDs.DLC4TreeNodes, [(20,40)], skillList)
+                    SkillRando(IDs.DLC4SingleSkills, [(50,80)], skillList, skillData, nameData, enhanceData)
+                    SkillRando(IDs.InoTreeNodes, [(10,30)], skillList, skillData, nameData, enhanceData)
+                    SkillRando(IDs.DLC4SingleSkills, [(30,80)], skillList, skillData, nameData, enhanceData)
+                    SkillRando(IDs.DLC4TreeNodes, [(20,40)], skillList, skillData, nameData, enhanceData)
                 if Options.SkillOptions_Ouroborous.GetState():
-                    SkillRando(IDs.UroSkills, [(20,50), (70,80)], skillList)
+                    SkillRando(IDs.UroSkills, [(20,50), (70,80)], skillList, skillData, nameData, enhanceData)
                 if Options.SkillOptions_Ouroborous.GetState() and Options.SkillOptions_SingleNode.GetState():
-                    SkillRando(IDs.UroTreeNodes, [(10,30)], skillList)
+                    SkillRando(IDs.UroTreeNodes, [(10,30)], skillList, skillData, nameData, enhanceData)
                 if Options.SkillOptions_SoulHacker.GetState():
-                    SkillRando(IDs.SoulhackerSkills, [(20,40), (60,90)], skillList)
+                    SkillRando(IDs.SoulhackerSkills, [(20,40), (60,90)], skillList, skillData, nameData, enhanceData)
         
                 JSONParser.CloseFile(skillData, skillFile)
                 JSONParser.CloseFile(enhanceData, enhanceFile)
                 JSONParser.CloseFile(nameData, nameFile)
         
-def SkillRando(targetSkillIDs, skillEnhancementRanges, skillList:Helper.RandomGroup, skillData):       # Create the list once  
+def SkillRando(targetSkillIDs, skillEnhancementRanges, skillList:Helper.RandomGroup, skillData, nameData, enhanceData): # Create the list once  
     ignoreKeys = ["$id", "UseTalent", "Name"]
     skillOdds = Options.SkillOptions.GetSpinbox()
     
     filteringList = copy.deepcopy(skillList.originalGroup) # Make a copy because we cant filter this while looping over it
     for skill in (filteringList):
+        if isinstance(skill, Enhancements.Enhancement): # If we get a custom enhancement convert it to workable data
+            continue
         if not PassSkillCheck(skill, targetSkillIDs):
             skillList.FilterMember(skill)
     
@@ -69,6 +71,8 @@ def SkillRando(targetSkillIDs, skillEnhancementRanges, skillList:Helper.RandomGr
             chosenSkill = DefineNewSkill(chosenSkill, enhanceData, skillEnhancementRanges)
             
         Helper.CopyKeys(skill, chosenSkill, ignoreKeys)
+
+    skillList.RefreshCurrentGroup()
 
 def PassSkillCheck(skill, allowSkills):
     if skill["$id"] in allowSkills:
@@ -100,8 +104,8 @@ def DefineNewSkill(chosenSkill:Enhancements.Enhancement, enhanceData, ranges):
     for i in range(1,6):
         if len(ranges) < i:
             newSkill[f"Enhance{i}"] = 0
-            continue
-        newSkill[f"Enhance{i}"] = chosenSkill.CreateEffect(enhanceData, powerPercent=Helper.RandomDecimal(ranges[i-1][0],ranges[i-1][1]))
+        else:
+            newSkill[f"Enhance{i}"] = chosenSkill.CreateEffect(enhanceData, powerPercent=Helper.RandomDecimal(ranges[i-1][0],ranges[i-1][1]))
     return newSkill
 
 def DetermineName(chosenSkill:Enhancements.Enhancement, skill, nameData):
