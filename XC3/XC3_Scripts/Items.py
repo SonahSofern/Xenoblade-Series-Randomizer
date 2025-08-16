@@ -1,5 +1,5 @@
 from XC3.XC3_Scripts import IDs, Options
-from scripts import JSONParser, Helper
+from scripts import JSONParser, Helper, PopupDescriptions
 import json, random
 
 def Shops():

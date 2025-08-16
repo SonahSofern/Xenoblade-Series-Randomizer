@@ -24,14 +24,14 @@ lastHeight = -1
 garbageCollectionStopper = []# Globals to prevent garbage collection
     
 class FileReplacer:
-    def __init__(self, images, location, filename, game):
+    def __init__(self, files, location, filename = None, game = ""):
         self.images = []
-        for image in images:
+        for file in files:
             if isOneFile:
-                image = os.path.join(sys._MEIPASS,game, image)
+                file = os.path.join(sys._MEIPASS,game, file)
             else:
-                image = f"{game}/{image}"
-            self.images.append(image)
+                file = f"{game}/{file}"
+            self.images.append(file)
         self.location = location
         self.filename = filename
 

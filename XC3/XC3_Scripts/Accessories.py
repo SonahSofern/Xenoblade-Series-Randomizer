@@ -14,7 +14,7 @@ def AccessoryRando():
                 originalNameData = copy.deepcopy(nameData)
                 
                 # Filter the list
-                newList = copy.deepcopy(Enhancements.EnhancementsList)
+                newList:Enhancements.Helper.RandomGroup = copy.deepcopy(Enhancements.EnhancementsList)
                 enhList:list[Enhancements.Enhancement] = newList.currentGroup
                 for enh in enhList:
                     if enh.isAccessory:
@@ -24,7 +24,7 @@ def AccessoryRando():
                 for item in itmData["rows"]:
                     if item["Enhance"] == 0 or item["Name"] == 0: # Ignore debug items
                         continue
-                    newEnhancement:Enhancements.Enhancement = Enhancements.EnhancementsList.SelectRandomMember()
+                    newEnhancement:Enhancements.Enhancement = newList.SelectRandomMember()
                     
                     DetermineRecommendedCategory(item, newEnhancement)
                     newID = newEnhancement.CreateEffect(enhData, powerPercent=DetermineAccessoryPower(item))
@@ -70,3 +70,6 @@ def CreateNewName(acce ,nameData, newEnhancement:Enhancements.Enhancement, origi
     }
     nameData["rows"].append(newName)
     return newNameId
+
+def AccessoryDesc():
+    pass

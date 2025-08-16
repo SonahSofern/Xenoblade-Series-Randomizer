@@ -1,10 +1,10 @@
 import json, random, copy, traceback, math
 from XC2.XC2_Scripts import IDs, Options
-from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e
+from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e, Interactables
 
 StaticEnemyData:list[e.EnemyGroup] = []
                                                                                                                                                                                                                                                                                                           
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isVanillaAggro):
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isVanillaAggro, matchSize:Interactables.Option):
     global StaticEnemyData
     GroupFightViolations = GetGroupFightViolations()
     GroupFightIDs = GetGroupFightIDs()
@@ -12,7 +12,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
     soloFightIDs = [179, 182, 184, 185, 186, 187, 189, 190, 258, 260, 262, 256, 604] # Includes both 1 and 2 person party fights
     ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev']
     aggroKeys = ['Detects', 'SearchRange', 'SearchAngle', 'SearchRadius', 'BatInterval', 'BatArea', 'BatAreaType']
-    
+    isMatchSize = matchSize.GetState()
     if isVanillaAggro:
         ignoreKeys.extend(aggroKeys)
     
@@ -40,7 +40,9 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                     if Options.BossEnemyOption_Group.GetState():
                         eRando.BalanceFight(oldEn, newEn, GroupFightIDs, GroupFightViolations) 
                         
-                    EnemySizeHelper(oldEn, newEn, eRando)
+                    if isMatchSize:
+                        EnemySizeHelper(oldEn, newEn, eRando)
+                        
                     CloneEnemiesDefeatCondition(oldEn, newEn) 
                     
                     eRando.ActTypeFix(newEn, oldEn)
@@ -232,4 +234,6 @@ def EnemyDesc(name):
     if name != Options.BossEnemyOption.name:
         EnemyRandoDesc.Header(Options.NormalEnemyOption_Aggro.name)
         EnemyRandoDesc.Text("If this setting is on, enemies will keep their original aggro. For example a krabble replaced by Amalthus will keep the krabble's aggro type and radius.")
+    EnemyRandoDesc.Header(Options.NormalEnemyOption_Size.name)
+    EnemyRandoDesc.Text("This will match the size of the new enemy to the original enemy. For example Ophion (a big enemy) when replaced with a krabble (a small enemy), will cause the krabble to be gigantic. This helps with indoor areas as massive enemies will be shrunk to match their new environment.")
     return EnemyRandoDesc

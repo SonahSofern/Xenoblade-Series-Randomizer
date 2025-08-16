@@ -266,7 +266,7 @@ def ResizeWindow(top, innerFrame, padx = 37):
     top.geometry(f"{w}x{h}")
  
     
-def Randomize(root,RandomizeButton,fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[], isOneFile = False):
+def Randomize(root, RandomizeButton, fileEntryVar, randoProgressDisplay, randoProgressFill, SettingsButton, pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[], isOneFile = False):
     def ThreadedRandomize():
         entrySpot = fileEntryVar
         outSpot = f"{outputDirVar.get().strip()}/romfs/bdat"
@@ -343,8 +343,6 @@ def AddFileToOutput(output, files):
         outputSpot = f"{os.path.dirname(output)}/{file.location}"
         os.makedirs(outputSpot, exist_ok=True)
         shutil.copy(random.choice(file.images), f"{outputSpot}/{file.filename}")
-
-
 
 def SumTotalCommands(OptionList):
     TotalCommands = 1

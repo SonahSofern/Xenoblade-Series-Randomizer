@@ -65,7 +65,7 @@ SkillOptions_SingleNode = SubOption("Node Skills", SkillOptions)
 PlayerArtsOption = Option("Class Arts", Character, "Randomizes arts among the classes", [lambda: Arts.ArtRando()], hasSpinBox=True)
 # HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])
 CostumesOption = Option("Class Costumes", Character, "Randomizes class outfits", [lambda: Costumes.CostumeRando()])
-ClassOption = Option("Class", Character, "Randomizes classes unlock events", [lambda: Class.TalentRando()])
+ClassOption = Option("Class", Character, "Randomizes classes", [lambda: Class.TalentRando()])
 ClassOption_DefaultClasses = SubOption("Default Classes", ClassOption)
 # ClassOption_HeroClasses = SubOption("Hero Classes", ClassOption)
 
