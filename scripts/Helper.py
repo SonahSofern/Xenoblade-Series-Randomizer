@@ -253,7 +253,7 @@ def CopyKeys(originalItem, chosenItem, ignoreKeys = []):
             continue
         originalItem[key] = chosenItem[key]
         
-def FileShuffle(fileName, ignoreKeys):
+def FileShuffle(fileName, ignoreKeys = ["$id"]):
     with open(fileName, 'r+', encoding='utf-8') as file:
         fileData = json.load(file)
         

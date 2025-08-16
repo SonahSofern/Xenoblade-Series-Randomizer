@@ -3,7 +3,7 @@ from scripts import JSONParser, Helper, PopupDescriptions
 import XC3.XC3_Scripts.Options
 
 def ArtRando():
-    ignoreKeys = ["$id", 'WpnType']
+    ignoreKeys = ["$id", 'WpnType', "ArtsCategory"]
      
     StateKeys = ['StateName', 'StateName2', 'StateLoopNum', 'HitFrm01', 'HitFrm02', 'HitFrm03', 'HitFrm04', 'HitFrm05', 'HitFrm06', 'HitFrm07', 'HitFrm08', 'HitFrm09', 'HitFrm10', 'HitFrm11', 'HitFrm12', 'HitFrm13', 'HitFrm14', 'HitFrm15', 'HitFrm16'] # So actions match the original art
 

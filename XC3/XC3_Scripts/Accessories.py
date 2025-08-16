@@ -15,12 +15,14 @@ def AccessoryRando():
                 
                 # Filter the list
                 newList:Enhancements.Helper.RandomGroup = copy.deepcopy(Enhancements.EnhancementsList)
-                enhList:list[Enhancements.Enhancement] = newList.currentGroup
-                for enh in enhList:
-                    if enh.isAccessory:
-                        continue
-                    newList.RemoveMember(enh)
+                removeList = []
+                for enh in newList.currentGroup:
+                    if not enh.isAccessory:
+                        removeList.append(enh)
                 
+                for enh in removeList:
+                    newList.RemoveMember(enh)
+
                 for item in itmData["rows"]:
                     if item["Enhance"] == 0 or item["Name"] == 0: # Ignore debug items
                         continue

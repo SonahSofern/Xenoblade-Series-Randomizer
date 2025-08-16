@@ -22,7 +22,7 @@ high = 0
 defaultSkillIcon = -1
 
 class Enhancement:
-    def __init__(self, name, effID, captionID, field3E70C175, roleType = Misc, param1 = [low,high], param2 = [low,high], skillIcon = defaultSkillIcon, isArts = False, isGem = True, isAccessory = True, isBaseGame = True, isFutureRedeemed = True, isChainOrder = False, isChainActivation = False):
+    def __init__(self, name, effID, captionID, field3E70C175, roleType = Misc, param1 = [low,high], param2 = [low,high], skillIcon = defaultSkillIcon, isArts = False, isGem = True, isAccessory = True, isBaseGameOnly = False, isFutureRedeemedOnly = False, isChainOrder = False, isChainActivation = False):
         self.name = name
         self.effID = effID
         self.captionID = captionID
@@ -31,13 +31,13 @@ class Enhancement:
         self.param2 = param2
         self.roleType = roleType
         self.skillIcon = skillIcon
-        self.BaseGame = isBaseGame
+        self.isBaseGameOnly = isBaseGameOnly
         self.isAccessory = isAccessory
         self.isGem = isGem
         self.isArts = isArts
         self.isChainOrder = isChainOrder
         self.isChainActivation = isChainActivation
-        self.FutureRedeemed = isFutureRedeemed
+        self.isFutureRedeemedOnly = isFutureRedeemedOnly
         EnhancementsList.AddNewData(self)
     
     def CreateEffect(self, BTL_EnhanceData, overrideParam1 = None, overrideParam2 = None, powerPercent = 0.5):
@@ -367,7 +367,7 @@ def CreateEnhancements():
     # Enhancement("", 241, 0, 1, M, [], skillIcon=0) # Rescue Buff
     # Enhancement("", 242, 0, 1, M, [], [], skillIcon=0) # <2D37CF4F>
     Enhancement("Supercharged", 243, 271, 1, Atk, [50,100], skillIcon=33) # Pierce Defense (Critical)
-    Enhancement("Burning", 244, 272, 1, Atk, [1,2], skillIcon=19, isFutureRedeemed=False) # <4078B801> Damage increase with heat gauge
+    Enhancement("Burning", 244, 272, 1, Atk, [1,2], skillIcon=19, isBaseGameOnly=True) # <4078B801> Damage increase with heat gauge
     Enhancement("Locking", 245, 274, 1, Misc, [30,60], isGem=False, isAccessory=False) # Extend Combo Time (Art Hit)
     Enhancement("Counterattack", 246, 275, 1, Def, [200,500], [20,100], isGem=False, isAccessory=False) # <54F2F7D0> Evade deals damage and increases your damage up to a %
     Enhancement("Slippery", 247, 276, 1, Def, [50,300], skillIcon=9) # Evasion Up (Targeted)
@@ -439,7 +439,7 @@ def CreateEnhancements():
     # Enhancement("", 313, 0, 1, M, [], [], skillIcon=0) # <697730B7>
     Enhancement("Critical", 314, 386, 1, Atk, [50,100], skillIcon=10) # <A8EEF413> Crit damage in chain attack up
     # Enhancement("", 315, 0, 1, M, [], [], skillIcon=0) # <D30612A6>
-    Enhancement("Slow", 316, 397, 1, Misc, [20,80], skillIcon=17, isFutureRedeemed=False) # <C42DC4C1> Slows heat buildup
+    Enhancement("Slow", 316, 397, 1, Misc, [20,80], skillIcon=17, isBaseGameOnly=True) # <C42DC4C1> Slows heat buildup
     # Enhancement("", 317, 0, 1, M, [], skillIcon=0) # <E371CADF>
     Enhancement("Wide", 318, 398, 1, Misc, [50,200], skillIcon=28) # Attack AOE Range Up
     Enhancement("Momentum", 319, 400, 1, Misc, [25,75], skillIcon=40) # Reaction Recharge
@@ -464,12 +464,12 @@ def CreateEnhancements():
     Enhancement("Coverfire", 338, 416, 1, Atk, [5,10], [100,300], skillIcon=49) # Ranged Counter
     # Enhancement("", 339, 417, 1, M, [], skillIcon=0) # <2307272B>
     # Enhancement("", 340, 0, 1, M, [], skillIcon=0) # <13E86D62>
-    Enhancement("Interlinks", 341, 422, 1, Misc, isGem=False, isAccessory=False, isFutureRedeemed=False) # <5AA8EF8D> Interlink 3 Break All
-    Enhancement("Interlinks", 342, 423, 1, Misc, isGem=False, isAccessory=False, isFutureRedeemed=False) # <8321536A> I3 Topple All
-    Enhancement("Interlinks", 343, 424, 1, Misc, isGem=False, isAccessory=False, isFutureRedeemed=False) # <12290987> I3 Launch All
-    Enhancement("Interlinks", 344, 425, 1, Misc, isGem=False, isAccessory=False, isFutureRedeemed=False) # <AE3060F1> I3 Smash All
-    Enhancement("Interlinks", 345, 426, 1, Misc, isGem=False, isAccessory=False, isFutureRedeemed=False) # <DABAB9B0> I3 Daze All
-    Enhancement("Interlinks", 346, 427, 1, Misc, isGem=False, isAccessory=False, isFutureRedeemed=False) # <635B23F8> I3 Burst All
+    Enhancement("Interlink", 341, 422, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True) # <5AA8EF8D> Interlink 3 Break All
+    Enhancement("Interlink", 342, 423, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True) # <8321536A> I3 Topple All
+    Enhancement("Interlink", 343, 424, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True) # <12290987> I3 Launch All
+    Enhancement("Interlink", 344, 425, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True) # <AE3060F1> I3 Smash All
+    Enhancement("Interlink", 345, 426, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True) # <DABAB9B0> I3 Daze All
+    Enhancement("Interlink", 346, 427, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True) # <635B23F8> I3 Burst All
     # Enhancement("", 347, 0, 1, M, [], [], skillIcon=0) # <FBF26980>
     # Enhancement("", 348, 0, 1, M, [], [], skillIcon=0) # <BDD4CC17>
     # Enhancement("", 349, 0, 1, M, [], skillIcon=0) # <3868CBC6>
@@ -482,13 +482,13 @@ def CreateEnhancements():
     Enhancement("Instinct", 356, 428, 1, Def, [50,300], [5], skillIcon=9) # Quick Move Evasion Up
     Enhancement("Crowhop", 357, 429, 1, Atk, [50,150], [5], skillIcon=40) # Quick Move Damage Up
     Enhancement("Sonic", 358, 430, 1, Atk, [25,75], [5,50], skillIcon=48) # Quick Move AOE Damage
-    Enhancement("Bonding", 359, 431, 1, Misc, [50,100], [5], skillIcon=17, isFutureRedeemed=False) # Faster Interlink Level Gain
+    Enhancement("Bonding", 359, 431, 1, Misc, [50,100], [5], skillIcon=17, isBaseGameOnly=True) # Faster Interlink Level Gain
     Enhancement("Miracle", 360, 432, 1, Hlr, [50,100], [5], skillIcon=3) # Recover Recharge (Rescue)
     Enhancement("Master", 361, 433, 1, Misc, [50,100], [5], skillIcon=17) # Starting Master Arts
     Enhancement("Aptitude", 362, 441, 1, Misc, [1], skillIcon=19) # Class Aptitude Up
     Enhancement("Strategist", 363, 442, 1, Misc, [1], skillIcon=0) # Extra Positional Arts
     Enhancement("Focus", 364, 443, 1, Misc, [1], skillIcon=21) # Extra Field Arts
-    Enhancement("Hydraulic", 365, 444, 1, Misc, [50], skillIcon=15, isFutureRedeemed=False) # <FC852C14> Heat Gauge cancel reduces buildup from the cancel
+    Enhancement("Hydraulic", 365, 444, 1, Misc, [50], skillIcon=15, isBaseGameOnly=True) # <FC852C14> Heat Gauge cancel reduces buildup from the cancel
     # Enhancement("", 366, 0, 1, M, [], skillIcon=0) # <0A83170C>
     # Enhancement("", 367, 0, 1, M, [], skillIcon=0) # <5E206C1B>
     # Enhancement("", 368, 0, 1, M, [], skillIcon=0) # <85F2BABF>
@@ -538,18 +538,18 @@ def CreateEnhancements():
     Enhancement("Safety", 410, 173, 0, Def, [10,50], [20,70], skillIcon=6) # <554E813F>
     # Enhancement("", 419, 0, 1, M, [], skillIcon=0) # <83D1DC60>
     # Enhancement("", 411, 0, 1, M, [], skillIcon=0) # <03956403>
-    Enhancement("Unity", 412, 509, 1, Misc, [100,500], skillIcon=37, isBaseGame=False) # Unity Combo Damage Up
+    Enhancement("Unity", 412, 509, 1, Misc, [100,500], skillIcon=37, isFutureRedeemedOnly=True) # Unity Combo Damage Up
     Enhancement("Backcharge", 413, 525, 1, Misc, [2], [6], skillIcon=14) # <D3A726C0>
     Enhancement("Suprise", 414, 529, 1, Misc, [1], skillIcon=14) # <EF72174A>
     Enhancement("Backbreaker", 415, 530, 1, Misc, [2], [5], skillIcon=14) # <E110F3CA>
     Enhancement("Spark", 416, 430, 1, Misc, [5,10], [100,300], skillIcon=49) # Quick Move AOE Damage
-    Enhancement("Pinpoint", 417, 532, 1, Atk, [100,500], skillIcon=46, isBaseGame=False) # Weakness Damage Up
+    Enhancement("Pinpoint", 417, 532, 1, Atk, [100,500], skillIcon=46, isFutureRedeemedOnly=True) # Weakness Damage Up
     # Enhancement("", 421, 0, 1, M, [], [], skillIcon=0) # <B665A1F1>
     Enhancement("Expansive", 424, 399, 1, Atk, [50,100], [50,100], skillIcon=48) # Attack AOE Range + Dmg Up
-    Enhancement("Unity", 425, 534, 1, Misc, [50,100], skillIcon=39, isBaseGame=False) # Unity Special Starter
+    Enhancement("Unity", 425, 534, 1, Misc, [50,100], skillIcon=39, isFutureRedeemedOnly=True) # Unity Special Starter
     # Enhancement("", 426, 0, 1, M, [], skillIcon=0) # <11BB435A>
     # Enhancement("", 428, 0, 1, M, [], [], skillIcon=0) # Auto-Attack Twofold Haste
-    Enhancement("Ouro", 427, 434, 0, Misc, [50,100], skillIcon=39, isBaseGame=False) # Starting Ouroboros Powers
+    Enhancement("Ouro", 427, 434, 0, Misc, [50,100], skillIcon=39, isFutureRedeemedOnly=True) # Starting Ouroboros Powers
     # Enhancement("", 422, 0, 0, M, [], [], skillIcon=0) # <C7118AF0>
     # Enhancement("", 423, 0, 0, M, [], skillIcon=0) # <EBFBFD29>
     # Enhancement("", 420, 0, 0, M, [], skillIcon=0) # <378C7FD9>

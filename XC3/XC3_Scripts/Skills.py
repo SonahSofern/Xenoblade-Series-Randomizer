@@ -119,9 +119,9 @@ class SkillRandoFiles():
 
     def DetermineName(self,chosenSkill:Enhancements.Enhancement, skill):
         if chosenSkill.roleType == Enhancements.Atk:
-            secondWordList = ["Strikes", "Hits", "Blast"]
+            secondWordList = ["Strikes", "Edge", "Blast"]
         elif chosenSkill.roleType == Enhancements.Hlr:
-            secondWordList = ["Support", "Soothing", "Assist"]
+            secondWordList = ["Support", "Training", "Assist"]
         elif chosenSkill.roleType == Enhancements.Def:
             secondWordList = ["Footwork", "Defenses", "Stance"]
         else:

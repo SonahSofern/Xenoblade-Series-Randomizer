@@ -67,8 +67,8 @@ def EnemySizeHelper(oldEn, newEn, eRando:Enemy.EnemyRandomizer):
     
     multDict = {
         (Massive, Large): 3,
-        (Massive, Normal): 6,
-        (Massive, Small): 9,
+        (Massive, Normal): 4,
+        (Massive, Small): 5,
         (Large, Normal): 3,
         (Large, Small): 4,
         (Normal, Small): 1.5,

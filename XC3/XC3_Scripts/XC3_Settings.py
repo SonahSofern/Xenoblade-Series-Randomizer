@@ -17,7 +17,7 @@ Exefs = scripts.XCRandomizer.FileReplacer(["loader/skyline"], "/menu/image", gam
 
 extraArgs= ["--hashes", "XC3/xbc3Hashes.txt"]
 extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.EnhancementsList.RefreshCurrentGroup()]
-mainFolderNames = ["des", "btl", "evt", "fld", "map", "prg", "qst", "sys", "zzz", "mnu"]
+mainFolderNames = ["des", "btl", "evt", "fld", "map", "prg", "qst", "sys", "zzz", "mnu", "dlc"]
 subFolderNames = ["autotalk", "battle", "field", "menu", "quest", "system"]
 textFolderName="gb/game"
 

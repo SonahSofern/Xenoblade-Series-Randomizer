@@ -138,7 +138,7 @@ BladeStatsOption_Mods = SubOption("Stat Mods", BladeStatsOption, [lambda: JSONPa
 BladeStatsOption_Class = SubOption("Weapon Class", BladeStatsOption, [lambda: BladeStats.BladeWeaponClassRandomization()])
 
 # Enemies
-enemyWeightSpinDefault = 1
+enemyWeightSpinDefault = 10
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsters, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_Aggro, NormalEnemyOption_Size)], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True, prio=2)
 NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault)
 NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault)

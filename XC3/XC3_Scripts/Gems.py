@@ -28,9 +28,7 @@ def GemRando(): # Match class to skill type probably or at least an option to
                 for enh in copyListCurrentGroup:
                     if not enh.isGem:
                         continue
-                    if enh.isChainActivation:
-                        continue
-                    if enh.isChainOrder:
+                    if enh.isChainActivation or enh.isChainOrder or enh.isFutureRedeemedOnly or enh.isBaseGameOnly:
                         continue
                     if enh.roleType == Enhancements.Atk:
                         AttackerGemList.AddNewData(enh)
@@ -43,7 +41,7 @@ def GemRando(): # Match class to skill type probably or at least an option to
                 # Replace the gems file
                 for gem in gemData["rows"]: 
                     if gem["$id"]%10 == 0 or gem["$id"] == 12001: # Every 10 gems choose a new skill for level 1-10
-                        gemCategory  = gem["Category"]
+                        gemCategory = gem["Category"]
                         if gemCategory in AttackerCategory:
                             chosenEnhancement = AttackerGemList.SelectRandomMember()
                         elif gemCategory in DefenderCategory:

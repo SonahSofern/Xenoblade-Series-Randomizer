@@ -1,20 +1,22 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XC3.XC3_Scripts import Shortcuts, Skills, Heroes, QOL as Quality, Enemy , IDs, Enhancements, Accessories, Gems, Arts, Items, Costumes, Class
+from XC3.XC3_Scripts import Shortcuts, Skills, Heroes, QOL as Quality, Enemy , IDs, Enhancements, Accessories, Gems, Arts, Items, Costumes, Class, Chaos
 scripts.Interactables.Game = "XC3" 
 
 General = 1
 Character  = 2
 Enemies = 3
-Musica = 5
 QOL = 4
+Funny = 5
 
 Tabs = {
     General: '🞛 Items',
     Character: '🧍 Characters',
     Enemies: '💀 Enemies',
     QOL: '🐇 Quality of Life',
+    Funny: '😄 Funny',
+
 }
 
 ShopOption = Option("Shops", General, "Randomizes shop contents", [lambda: Items.Shops()])
@@ -30,25 +32,26 @@ TreasureBoxOption_IndividualItems = SubOption("Randomize Individual Items", Trea
 TreasureBoxOption_ShuffleBoxes = SubOption("Shuffle Containers", TreasureBoxOption)
 
 # CharactersOption = Option("Heroes", Character, "Randomizes heroes", [lambda: Characters.CharacterSwaps()])
+enemySpinDefaultVal = 10
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsters, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_MatchSize)], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
-NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True)
-NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption, hasSpinBox=True)
-NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption, hasSpinBox=True)
-NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, hasSpinBox=True)
+NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
+NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
+NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
+NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
 NormalEnemyOption_MatchSize = SubOption("Match Size", NormalEnemyOption)
 
 UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: Enemy.Enemies(IDs.UniqueMonsters + IDs.SuperbossMonsters, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption, UniqueEnemyOption_MatchSize)], descData=lambda: Enemy.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True)
-UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption, hasSpinBox=True)
-UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption, hasSpinBox=True)
-UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption, hasSpinBox=True)
-UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption, hasSpinBox=True)
+UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
+UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
+UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
+UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
 UniqueEnemyOption_MatchSize = SubOption("Match Size", UniqueEnemyOption)
 
 BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, BossEnemyOption_MatchSize)], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True)
-BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True)
-BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True)
-BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True)
-BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, hasSpinBox=True)
+BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
+BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
+BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
+BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
 BossEnemyOption_GroupFights = SubOption("Balance Group Fights", BossEnemyOption)
 BossEnemyOption_MatchSize = SubOption("Match Size", BossEnemyOption)
 
@@ -78,6 +81,11 @@ MoveSpeedOption = Option("Movespeed", QOL, "Colony 4's affinity reward will be i
 EarlyArtsCancelOption = Option("Early Arts Cancel", QOL, "The Art of Flow is given during the introduction", [lambda: Quality.ArtOfFlowEarly()])
 GemCraftingOption = Option("Easy Gem Crafting", QOL, "Reduces the material requirements for gem crafting", [lambda: Gems.EasyGemCrafting()])
 
+
+# Funny
+ChaosOption = Option("Chaos", Funny, "Shuffles a ton of files around, from voice lines to chain attack cameras. This will make your game chaotic and unstable.")
+for opt in Chaos.ChaosSubOptions:
+    SubOption(opt.name, ChaosOption, [opt.function], _defState = True)
 # Roguelike enemy files https://xenobladedata.github.io/xb3_200_dlc4/BTL_ChSU_EnemyTable.html
 
 # XYZ of literally everything in the field https://xenobladedata.github.io/xb3_200_dlc4/SYS_GimmickLocation_dlc04.html#27830
