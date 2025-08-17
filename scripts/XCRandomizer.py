@@ -14,6 +14,18 @@ class Tab():
         self.canvas = canvas
         self.inner = inner
 
+class FileReplacer:
+    def __init__(self, files, location, newName = None, game = ""):
+        self.files = []
+        for file in files:
+            if isOneFile:
+                file = os.path.join(sys._MEIPASS,game, file)
+            else:
+                file = f"{game}/{file}"
+            self.files.append(file)
+        self.location = location
+        self.newName = newName
+
 if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
     isOneFile = True
 else:
@@ -21,20 +33,7 @@ else:
 
 lastWidth = -1
 lastHeight = -1
-garbageCollectionStopper = []# Globals to prevent garbage collection
-    
-class FileReplacer:
-    def __init__(self, files, location, filename = None, game = ""):
-        self.images = []
-        for file in files:
-            if isOneFile:
-                file = os.path.join(sys._MEIPASS,game, file)
-            else:
-                file = f"{game}/{file}"
-            self.images.append(file)
-        self.location = location
-        self.filename = filename
-
+garbageCollectionStopper = [] # Globals to prevent garbage collection
 iconCollector = []# Globals to prevent garbage collection
 
 def UserNeedsUpdate(version, root):

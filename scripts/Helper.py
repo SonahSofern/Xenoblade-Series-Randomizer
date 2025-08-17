@@ -253,7 +253,7 @@ def CopyKeys(originalItem, chosenItem, ignoreKeys = []):
             continue
         originalItem[key] = chosenItem[key]
         
-def FileShuffle(fileName, ignoreKeys = ["$id"]):
+def FileShuffle(fileName, ignoreKeys = ["$id"], ignoreIDs = []):
     with open(fileName, 'r+', encoding='utf-8') as file:
         fileData = json.load(file)
         
@@ -261,7 +261,12 @@ def FileShuffle(fileName, ignoreKeys = ["$id"]):
         fileGroup.GenData(fileData["rows"])
         
         for item in fileData["rows"]:
+            if item["$id"] in ignoreIDs:
+                continue
             randomMem = fileGroup.SelectRandomMember()
             CopyKeys(item, randomMem, ignoreKeys)
         
         JSONParser.CloseFile(fileData, file)
+        
+def roundToBase(x, base=5):
+    return base * round(x/base)

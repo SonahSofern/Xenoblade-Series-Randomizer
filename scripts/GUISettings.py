@@ -339,10 +339,24 @@ def Randomize(root, RandomizeButton, fileEntryVar, randoProgressDisplay, randoPr
     threading.Thread(target=ThreadedRandomize).start()
 
 def AddFileToOutput(output, files):
-    for file in files:
-        outputSpot = f"{os.path.dirname(output)}/{file.location}"
-        os.makedirs(outputSpot, exist_ok=True)
-        shutil.copy(random.choice(file.images), f"{outputSpot}/{file.filename}")
+    try:
+        for file in files:
+            outputFolder = os.path.join(os.path.dirname(output), file.location)
+            os.makedirs(outputFolder, exist_ok=True)
+
+            src = random.choice(file.files)
+
+            if os.path.isdir(src):  # Handle Folders
+                destPath = os.path.join(outputFolder, file.newName or os.path.basename(src))
+                shutil.copytree(src, destPath, dirs_exist_ok=True)
+
+            else: # Handle file
+                destPath = os.path.join(outputFolder, file.newName or os.path.basename(src))
+                shutil.copy(src, destPath)
+    except Exception as e:
+        print(e)
+        
+
 
 def SumTotalCommands(OptionList):
     TotalCommands = 1

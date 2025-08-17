@@ -4,6 +4,7 @@ from XC3.XC3_Scripts import Options
 
 def TalentRando():
     ValidTalents = [1,2,3,4,5,6,7]
+    TestClasses = []
     invalidTalents = [13,27,28,29,30,31]
     mainChars = [1,2,3,4,5,6]
     isDefClass = Options.ClassOption_DefaultClasses.GetState()

@@ -79,8 +79,11 @@ class Enhancement:
         diff = max - min
         chosen = min + (diff*power)
         newParam = chosen
+        if newParam > 15:
+            newParam = Helper.roundToBase(newParam)
         return int(newParam)
     
+
 # with open(f"XC3/JsonOutputs/btl/BTL_Enhance.json", 'r+', encoding='utf-8') as enhanceFile:
 #     with open(f"XC3/JsonOutputs/btl/BTL_EnhanceEff.json", 'r+', encoding='utf-8') as enhanceEffFile:
 #         with open(f"XC3/JsonOutputs/battle/msg_btl_enhance_cap.json", 'r+', encoding='utf-8') as captionFile:

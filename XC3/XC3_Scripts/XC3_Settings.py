@@ -4,16 +4,15 @@ Version = "BETA"
 Game = "XC3"
 Title = "Xenoblade Chronicles 3"
 
-backgrounds = ["col9.jpg"]
+backgrounds = ["col9.jpg", "aetia.jpg", "desert.jpg", "makna.jpg", "noahUraya.jpg", "omnia.jpg", "senaDesert.jpg", "uraya.jpg"]
 
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["menu/msg_mnu_title.json"],[11], ["name"], f"  Randomizer v{Version}", Game="XC3") # Change Title Version to Randomizer vX.x.x
 seedEntryVar = scripts.XCRandomizer.StringVar()
 permalinkVar = scripts.XCRandomizer.StringVar()
 
-Skyline = scripts.XCRandomizer.FileReplacer(["loader/exefs"], "/menu/image", game= "XC3")
-Exefs = scripts.XCRandomizer.FileReplacer(["loader/skyline"], "/menu/image", game= "XC3")
-
+Exefs = scripts.XCRandomizer.FileReplacer(["Loader/exefs"], "../", game= "XC3")
+Skyline = scripts.XCRandomizer.FileReplacer(["Loader/skyline"], "", game= "XC3")
 
 extraArgs= ["--hashes", "XC3/xbc3Hashes.txt"]
 extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.EnhancementsList.RefreshCurrentGroup()]

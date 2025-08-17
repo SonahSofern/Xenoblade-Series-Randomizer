@@ -22,7 +22,7 @@ def AccessoryRando():
                 
                 for enh in removeList:
                     newList.RemoveMember(enh)
-
+                    
                 for item in itmData["rows"]:
                     if item["Enhance"] == 0 or item["Name"] == 0: # Ignore debug items
                         continue
