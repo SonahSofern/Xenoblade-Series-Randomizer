@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XC3.XC3_Scripts import Shortcuts, Skills, Heroes, QOL as Quality, Enemy , IDs, Enhancements, Accessories, Gems, Arts, Items, Costumes, Class, Chaos
+from XC3.XC3_Scripts import Shortcuts, Skills, Heroes, QOL as Quality, Enemy , IDs, Enhancements, Accessories, Gems, Arts, Items, Costumes, Class, Chaos, Music
 scripts.Interactables.Game = "XC3" 
 
 General = 1
@@ -9,6 +9,7 @@ Character  = 2
 Enemies = 3
 QOL = 4
 Funny = 5
+Musica = 6
 
 Tabs = {
     General: '🞛 Items',
@@ -16,7 +17,7 @@ Tabs = {
     Enemies: '💀 Enemies',
     QOL: '🐇 Quality of Life',
     Funny: '😄 Funny',
-
+    # Musica: "♪ Music",
 }
 
 ShopOption = Option("Shops", General, "Randomizes shop contents", [lambda: Items.Shops()])
@@ -70,7 +71,7 @@ PlayerArtsOption = Option("Class Arts", Character, "Randomizes arts among the cl
 CostumesOption = Option("Class Costumes", Character, "Randomizes class outfits", [lambda: Costumes.CostumeRando()])
 ClassOption = Option("Class", Character, "Randomizes classes", [lambda: Class.TalentRando()])
 ClassOption_DefaultClasses = SubOption("Default Classes", ClassOption)
-# ClassOption_HeroClasses = SubOption("Hero Classes", ClassOption)
+ClassOption_HeroClasses = SubOption("Hero Classes", ClassOption)
 
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_Tutorials = SubOption("Tutorial Skip", ShortcutsOption, [lambda: Shortcuts.TutorialSkips()])
@@ -81,15 +82,17 @@ MoveSpeedOption = Option("Movespeed", QOL, "Colony 4's affinity reward will be i
 EarlyArtsCancelOption = Option("Early Arts Cancel", QOL, "The Art of Flow is given during the introduction", [lambda: Quality.ArtOfFlowEarly()])
 GemCraftingOption = Option("Easy Gem Crafting", QOL, "Reduces the material requirements for gem crafting", [lambda: Gems.EasyGemCrafting()])
 
-
 # Funny
 ChaosOption = Option("Chaos", Funny, "Shuffles a ton of files around, from voice lines to chain attack cameras. This will make your game chaotic and unstable.")
 for opt in Chaos.ChaosSubOptions:
     SubOption(opt.name, ChaosOption, [opt.function], _defState = True)
+    
+# Music
+# TestMusicOption = Option("Music", Musica, "", [lambda: Music.Music()])
 # Roguelike enemy files https://xenobladedata.github.io/xb3_200_dlc4/BTL_ChSU_EnemyTable.html
 
 # XYZ of literally everything in the field https://xenobladedata.github.io/xb3_200_dlc4/SYS_GimmickLocation_dlc04.html#27830
-
+# Cutscenes https://xenobladedata.github.io/xb3_200_dlc4/EVT_listEv.html#10277
 # How do DLC4 Combos work like the explosion finishers on launched enemies
 # Nopon shops are weird
 # All main quest here https://xenobladedata.github.io/xb3_200_dlc4/QST_Purpose.html#3

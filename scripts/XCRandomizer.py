@@ -44,7 +44,7 @@ def UserNeedsUpdate(version, root):
         response = requests.get("https://api.github.com/repos/SonahSofern/Xenoblade-Series-Randomizer/releases/latest")
         data = response.json()
         latest_tag = data.get("tag_name")
-        if latest_tag == version:
+        if latest_tag <= version:
             return
         else:
             import webbrowser

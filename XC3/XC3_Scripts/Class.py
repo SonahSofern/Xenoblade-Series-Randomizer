@@ -16,4 +16,13 @@ def TalentRando():
                     char["DefTalent"] = random.choice(ValidTalents)
                 
             JSONParser.CloseFile(charData, charFile)
-    
+    if Options.ClassOption_HeroClasses.GetState():
+        Helper.FileShuffle("XC3/JsonOutputs/mnu/MNU_HeroList.json", ["$id", "PcID"]) # This is the choose hero menu (NOT the list of all classes)
+        # with open("XC3/JsonOutputs/mnu/MNU_HeroList.json", 'r+', encoding='utf-8') as heroFile:        
+        #     heroData = json.load(heroFile)
+        #     testIds = [1]
+        #     for hero in heroData["rows"]:
+        #         if hero["$id"] in testIds:
+        #             hero["TalentID"] = 8
+                
+        #     JSONParser.CloseFile(heroData, heroFile)
