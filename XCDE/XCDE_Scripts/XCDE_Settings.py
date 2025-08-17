@@ -14,7 +14,7 @@ permalinkVar = scripts.XCRandomizer.StringVar()
 
 
 backgrounds = ["stars.png", "morning2.png", "stars3.png", "sunset2.png", "day.png"]
-TitlescreenSplash = scripts.XCRandomizer.FileReplacer(["Images/Logos/conflict.wilay", "Images/Logos/monado.wilay", "Images/Logos/red.wilay", "Images/Logos/thedivine.wilay"],  "/menu/image", "mnu001_cont02_en.wilay", "XCDE")
+TitlescreenSplash = scripts.XCRandomizer.FilePlacer(["Images/Logos/conflict.wilay", "Images/Logos/monado.wilay", "Images/Logos/red.wilay", "Images/Logos/thedivine.wilay"],  "/menu/image", "mnu001_cont02_en.wilay", "XCDE")
 
 
 # Folder Names 

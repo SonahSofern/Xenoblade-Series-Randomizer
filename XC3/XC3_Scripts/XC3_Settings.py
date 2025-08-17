@@ -11,8 +11,8 @@ def ShowTitleScreenText():
 seedEntryVar = scripts.XCRandomizer.StringVar()
 permalinkVar = scripts.XCRandomizer.StringVar()
 
-Exefs = scripts.XCRandomizer.FileReplacer(["Loader/exefs"], "../", game= "XC3")
-Skyline = scripts.XCRandomizer.FileReplacer(["Loader/skyline"], "", game= "XC3")
+Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../", game= "XC3")
+Skyline = scripts.XCRandomizer.FilePlacer(["Loader/skyline"], "", game= "XC3")
 
 extraArgs= ["--hashes", "XC3/xbc3Hashes.txt"]
 extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.EnhancementsList.RefreshCurrentGroup()]

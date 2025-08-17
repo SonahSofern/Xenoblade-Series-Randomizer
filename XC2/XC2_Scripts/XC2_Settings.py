@@ -11,7 +11,7 @@ for i in range(1,11):
 seedEntryVar = scripts.XCRandomizer.StringVar()
 permalinkVar = scripts.XCRandomizer.StringVar()
 
-TitlescreenSplash = scripts.XCRandomizer.FileReplacer(["Images/Logos/Aegis.wilay"],  "/menu/image", "mnu001_titlelogo_us.wilay", "XC2")
+TitlescreenSplash = scripts.XCRandomizer.FilePlacer(["Images/Logos/Aegis.wilay"],  "/menu/image", "mnu001_titlelogo_us.wilay", "XC2")
 
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], f"Randomizer v{Version}") # Change Title Version to Randomizer vX.x.x

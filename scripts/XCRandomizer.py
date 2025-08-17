@@ -14,7 +14,8 @@ class Tab():
         self.canvas = canvas
         self.inner = inner
 
-class FileReplacer:
+class FilePlacer:
+    '''Copy files to the output of the game (used for things like exefs/skyline and other files besides the bdats)'''
     def __init__(self, files, location, newName = None, game = ""):
         self.files = []
         for file in files:
