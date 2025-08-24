@@ -193,8 +193,8 @@ NPCScaleOption = Option("NPC Scale", Funny, "Randomizes a % of npc sizes.", [lam
 RemoveStartingArmorOption = Option("Remove Starting Equipment", Funny, "Removes starting armor on all the main characters.", [lambda: Armor.RemoveStartingGear()])
 NPCModelsOption = Option("NPC Models", Funny, "Randomizes NPC models *Experimental, can cause crashes", [lambda: NPC.NPCModelRando()], hasSpinBox = True)
 
-# ShopOption = Option() #https://xenobladedata.github.io/xb1de/bdat/bdat_common/shoplist.html
-
 # Character models rando https://xenobladedata.github.io/xb1de/bdat/bdat_common/MNU_Stream_full_dr.html
 
 # Collectapedia bdat_menu_item
+
+# https://nenkai.github.io/XenoDocs/xc1de/tables/bdat_common/
