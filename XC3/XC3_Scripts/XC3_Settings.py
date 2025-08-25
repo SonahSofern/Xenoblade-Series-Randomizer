@@ -4,7 +4,7 @@ Version = "BETA"
 Game = "XC3"
 Title = "Xenoblade Chronicles 3"
 
-backgrounds = ["col9.jpg", "aetia.jpg", "desert.jpg", "makna.jpg", "noahUraya.jpg", "omnia.jpg", "senaDesert.jpg", "uraya.jpg"]
+backgrounds = ["aetia.jpg", "desert.jpg", "makna.jpg", "ocean.jpg", "omnia.jpg", "uraya.jpg", "origin.jpg", "sand.jpg", "snow.jpg"]
 
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["menu/msg_mnu_title.json"],[11], ["name"], f"  Randomizer v{Version}", Game="XC3") # Change Title Version to Randomizer vX.x.x

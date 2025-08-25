@@ -16,7 +16,7 @@ Tabs = {
     Character: '🧍 Characters',
     Enemies: '💀 Enemies',
     QOL: '🐇 Quality of Life',
-    Funny: '😄 Funny',
+    # Funny: '😄 Funny',
     # Musica: "♪ Music",
 }
 
@@ -58,7 +58,7 @@ BossEnemyOption_MatchSize = SubOption("Match Size", BossEnemyOption)
 
 AccessoriesOption = Option("Accessories", Character, "Randomizes the effects of Accessories", [lambda: Accessories.AccessoryRando()])
 GemsOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.GemRando()])
-SkillOptions = Option("Skills", Character, "Randomizes class skills", [lambda: Skills.SkillRandoMain()], hasSpinBox=True)
+SkillOptions = Option("Skills", Character, "Randomizes character skills", [lambda: Skills.SkillRandoMain()], hasSpinBox=True)
 SkillOptions_Vanilla = SubOption("Allow Vanilla Skills", SkillOptions)
 SkillOptions_Unused = SubOption("Allow Unused Skills", SkillOptions)
 SkillOptions_Class = SubOption("Class Skills", SkillOptions)
@@ -66,7 +66,22 @@ SkillOptions_Ouroborous = SubOption("Ouroborous Skills", SkillOptions)
 SkillOptions_SoulHacker = SubOption("Soulhacker Skills", SkillOptions)
 SkillOptions_SingleNode = SubOption("Node Skills", SkillOptions)
 # SkillOptions_MatchSkillClass = SubOption("Match Class Type", SkillOptions)
-PlayerArtsOption = Option("Class Arts", Character, "Adds bonus effects to your arts", [lambda: Arts.ArtRando()], hasSpinBox=True)
+
+ArtsOption = Option("Class Arts", Character, "Randomizes class arts into the chosen types", [lambda: Arts.ArtRando()], hasSpinBox=True)
+ArtsOption_Arts = SubOption("Arts", ArtsOption)
+ArtsOption_OuroArts = SubOption("Ouroborous Arts", ArtsOption)
+ArtsOption_TalentArts = SubOption("Talent Arts", ArtsOption)
+
+OuroArtsOption = Option("Ouroborous Arts", Character, "Randomizes Ouroborous arts into the chosen types", [lambda: Arts.ArtRando()], hasSpinBox=True)
+OuroArtsOption_Arts = SubOption("Arts", OuroArtsOption)
+OuroArtsOption_OuroArts = SubOption("Ouroborous Arts", OuroArtsOption)
+OuroArtsOption_TalentArts = SubOption("Talent Arts", OuroArtsOption)
+
+TalentArtsOption = Option("Talent Arts", Character, "Randomizes Talent arts into the chosen types", [lambda: Arts.ArtRando()], hasSpinBox=True)
+TalentArtsOption_Arts = SubOption("Arts", TalentArtsOption)
+TalentArtsOption_OuroArts = SubOption("Ouroborous Arts", TalentArtsOption)
+TalentArtsOption_TalentArts = SubOption("Talent Arts", TalentArtsOption)
+
 # HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])
 CostumesOption = Option("Class Costumes", Character, "Randomizes class outfits", [lambda: Costumes.CostumeRando()])
 ClassOption = Option("Class", Character, "Randomizes classes", [lambda: Class.TalentRando()])
@@ -82,10 +97,10 @@ MoveSpeedOption = Option("Movespeed", QOL, "Colony 4's affinity reward will be i
 EarlyArtsCancelOption = Option("Early Arts Cancel", QOL, "The Art of Flow is given during the introduction", [lambda: Quality.ArtOfFlowEarly()])
 GemCraftingOption = Option("Easy Gem Crafting", QOL, "Reduces the material requirements for gem crafting", [lambda: Gems.EasyGemCrafting()])
 
-# Funny
-ChaosOption = Option("Chaos", Funny, "Shuffles a ton of files around, from voice lines to chain attack cameras. This will make your game chaotic and unstable.")
-for opt in Chaos.ChaosSubOptions:
-    SubOption(opt.name, ChaosOption, [opt.function], _defState = True)
+# # Funny
+# ChaosOption = Option("Chaos", Funny, "Shuffles a ton of files around, from voice lines to chain attack cameras. This will make your game chaotic and unstable.")
+# for opt in Chaos.ChaosSubOptions:
+#     SubOption(opt.name, ChaosOption, [opt.function], _defState = True)
     
 # Music
 # TestMusicOption = Option("Music", Musica, "", [lambda: Music.Music()])

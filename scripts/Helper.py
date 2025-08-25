@@ -236,8 +236,10 @@ class RandomGroup():
         return copy.deepcopy(en)
     
     def FilterMember(self, target):
-        self.originalGroup.remove(target)
-        self.currentGroup.remove(target)
+        if target in self.originalGroup:
+            self.originalGroup.remove(target)
+        if target in self.currentGroup:
+            self.currentGroup.remove(target)
     
     def RemoveMember(self, en):
         self.currentGroup.remove(en)

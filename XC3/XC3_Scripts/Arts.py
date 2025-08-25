@@ -32,11 +32,11 @@ class Art:
     
 def ArtRando():
     unlockFlag = "<A2275574>"
-    ignoreKeys = ["$id", 'WpnType', "ArtsCategory", unlockFlag]
-     
-    StateKeys = ['StateName', 'StateName2', 'StateLoopNum', 'HitFrm01', 'HitFrm02', 'HitFrm03', 'HitFrm04', 'HitFrm05', 'HitFrm06', 'HitFrm07', 'HitFrm08', 'HitFrm09', 'HitFrm10', 'HitFrm11', 'HitFrm12', 'HitFrm13', 'HitFrm14', 'HitFrm15', 'HitFrm16'] # So actions match the original art
-
-    artOdds = XC3.XC3_Scripts.Options.PlayerArtsOption.GetSpinbox()
+    StateKeys = ['StateName', 'StateName2', 'StateLoopNum', 'WpnType'] # So actions match the original art
+    HitFrames = ['HitFrm01', 'HitFrm02', 'HitFrm03', 'HitFrm04', 'HitFrm05', 'HitFrm06', 'HitFrm07', 'HitFrm08', 'HitFrm09', 'HitFrm10', 'HitFrm11', 'HitFrm12', 'HitFrm13', 'HitFrm14', 'HitFrm15', 'HitFrm16']
+    ignoreKeys = ["$id",  unlockFlag, "UseChr", "UseTalent", "WpnType"] + StateKeys + HitFrames
+    
+    artOdds = XC3.XC3_Scripts.Options.ArtsOption.GetSpinbox()
     with open("XC3/JsonOutputs/btl/BTL_Arts_PC.json", 'r+', encoding='utf-8') as artFile:
         with open("XC3/JsonOutputs/battle/msg_btl_arts_name.json", 'r+', encoding='utf-8') as nameFile:
             artData = json.load(artFile)
@@ -58,21 +58,29 @@ def ArtRando():
                         if newArt.isFullyPopulated():
                             break
                 artList.AddNewData(newArt)
-                
+            
+            
             
             # Replace the list
-            for name in nameData["rows"]:
-                for art in artData["rows"]:
-                    if not isValidArt(art):
-                        continue  
-                    if not Helper.OddsCheck(artOdds):
-                        continue
+            try:
+                for name in nameData["rows"]:
                     chosenArt:Art = artList.SelectRandomMember()
-                    if art["Name"] == name["$id"]:
-                        if art["UseChr"] != 0:
-                            Helper.CopyKeys(art, chosenArt.originalUserArt, ignoreKeys+StateKeys)
-                        else:
-                            Helper.CopyKeys(art, chosenArt.learnedUserArt, ignoreKeys+StateKeys)
+                    while not chosenArt.isFullyPopulated():
+                        artList.FilterMember(chosenArt)
+                        chosenArt:Art = artList.SelectRandomMember()
+                        
+                    for art in artData["rows"]:
+                        if not isValidArt(art):
+                            continue  
+                        if not Helper.OddsCheck(artOdds):
+                            continue
+                        if art["Name"] == name["$id"]:
+                            if art["UseChr"] != 0:
+                                Helper.CopyKeys(art, chosenArt.originalUserArt, ignoreKeys)
+                            else:
+                                Helper.CopyKeys(art, chosenArt.learnedUserArt, ignoreKeys)
+            except Exception as e:
+                print(e)
                             
             JSONParser.CloseFile(artData, artFile)
 
@@ -85,6 +93,6 @@ def isValidArt(art):
         return False
     if art["Voice1"] == "":
         return False
-    if art["ArtsCategory"] == 0: # Auto Attacks
+    if art["ArtsCategory"] != 1: # Only do Arts
         return False
     return True
