@@ -226,9 +226,9 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     
     # Options Cog
     if isOneFile:  # If the app is running as a bundled executable
-        icon_path = os.path.join(sys._MEIPASS, 'images', 'LinesIcon.png')
+        icon_path = os.path.join(sys._MEIPASS, 'images', 'Question.png')
     else:  # If running as a script (not bundled)
-        icon_path = "images/LinesIcon.png"
+        icon_path = "images/Question.png"
     HelpIcon = PhotoImage(file=icon_path)
     iconCollector.append(HelpIcon)
     SettingsButton = ttk.Button(background,padding=5,image=HelpIcon, command=lambda: PopupDescriptions.GenPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window, defaultFont))
