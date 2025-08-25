@@ -225,13 +225,13 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     RandomizeButton.pack(pady=(5,windowPadding),side="left", padx=(windowPadding, 0), anchor=CENTER)
     
     # Options Cog
-    if isOneFile:  # If the app is running as a bundled executable
-        icon_path = os.path.join(sys._MEIPASS, 'images', 'Question.png')
-    else:  # If running as a script (not bundled)
-        icon_path = "images/Question.png"
-    HelpIcon = PhotoImage(file=icon_path)
-    iconCollector.append(HelpIcon)
-    SettingsButton = ttk.Button(background,padding=5,image=HelpIcon, command=lambda: PopupDescriptions.GenPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window, defaultFont))
+    # if isOneFile:  # If the app is running as a bundled executable
+    #     icon_path = os.path.join(sys._MEIPASS, 'images', 'Question.png')
+    # else:  # If running as a script (not bundled)
+    #     icon_path = "images/Question.png"
+    # HelpIcon = PhotoImage(file=icon_path)
+    # iconCollector.append(HelpIcon)
+    SettingsButton = ttk.Button(background,padding=5, text=" ? ",command=lambda: PopupDescriptions.GenPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window, defaultFont))
     SettingsButton.pack(pady=(5,windowPadding),anchor="e",expand=True, side=RIGHT, padx=windowPadding) 
     saveCommands.append(lambda: SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game))
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())

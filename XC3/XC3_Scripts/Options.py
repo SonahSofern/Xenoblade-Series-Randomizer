@@ -71,16 +71,19 @@ ArtsOption = Option("Class Arts", Character, "Randomizes class arts into the cho
 ArtsOption_Arts = SubOption("Arts", ArtsOption)
 ArtsOption_OuroArts = SubOption("Ouroborous Arts", ArtsOption)
 ArtsOption_TalentArts = SubOption("Talent Arts", ArtsOption)
+ArtsOption_HackerArts = SubOption("Soul Hacker Arts", ArtsOption)
 
 OuroArtsOption = Option("Ouroborous Arts", Character, "Randomizes Ouroborous arts into the chosen types", [lambda: Arts.ArtRando()], hasSpinBox=True)
 OuroArtsOption_Arts = SubOption("Arts", OuroArtsOption)
 OuroArtsOption_OuroArts = SubOption("Ouroborous Arts", OuroArtsOption)
 OuroArtsOption_TalentArts = SubOption("Talent Arts", OuroArtsOption)
+OuroArtsOption_HackerArts = SubOption("Soul Hacker Arts", OuroArtsOption)
 
 TalentArtsOption = Option("Talent Arts", Character, "Randomizes Talent arts into the chosen types", [lambda: Arts.ArtRando()], hasSpinBox=True)
 TalentArtsOption_Arts = SubOption("Arts", TalentArtsOption)
 TalentArtsOption_OuroArts = SubOption("Ouroborous Arts", TalentArtsOption)
 TalentArtsOption_TalentArts = SubOption("Talent Arts", TalentArtsOption)
+TalentArtsOption_HackerArts = SubOption("Soul Hacker Arts", TalentArtsOption)
 
 # HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])
 CostumesOption = Option("Class Costumes", Character, "Randomizes class outfits", [lambda: Costumes.CostumeRando()])
