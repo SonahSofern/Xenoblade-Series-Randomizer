@@ -1,4 +1,4 @@
-from scripts.Interactables import Option, SubOption
+from scripts.Interactables import Option, SubOption, Header
 from scripts import Helper
 import scripts.Interactables
 from XC3.XC3_Scripts import Shortcuts, Skills, Heroes, QOL as Quality, Enemy , IDs, Enhancements, Accessories, Gems, Arts, Items, Costumes, Class, Chaos, Music
@@ -62,28 +62,41 @@ SkillOptions = Option("Skills", Character, "Randomizes character skills", [lambd
 SkillOptions_Vanilla = SubOption("Allow Vanilla Skills", SkillOptions)
 SkillOptions_Unused = SubOption("Allow Unused Skills", SkillOptions)
 SkillOptions_Class = SubOption("Class Skills", SkillOptions)
-SkillOptions_Ouroborous = SubOption("Ouroborous Skills", SkillOptions)
+SkillOptions_Ouroboros = SubOption("Ouroboros Skills", SkillOptions)
 SkillOptions_SoulHacker = SubOption("Soulhacker Skills", SkillOptions)
 SkillOptions_SingleNode = SubOption("Node Skills", SkillOptions)
 # SkillOptions_MatchSkillClass = SubOption("Match Class Type", SkillOptions)
 
+
 ArtsOption = Option("Class Arts", Character, "Randomizes class arts into the chosen types", [lambda: Arts.ArtRando()], hasSpinBox=True)
 ArtsOption_Arts = SubOption("Arts", ArtsOption)
-ArtsOption_OuroArts = SubOption("Ouroborous Arts", ArtsOption)
+ArtsOption_OuroArts = SubOption("Ouroboros Arts", ArtsOption)
 ArtsOption_TalentArts = SubOption("Talent Arts", ArtsOption)
 ArtsOption_HackerArts = SubOption("Soul Hacker Arts", ArtsOption)
+ArtsOption_OuroTalentArts = SubOption("Ouroboros Talent Arts", ArtsOption)
 
-OuroArtsOption = Option("Ouroborous Arts", Character, "Randomizes Ouroborous arts into the chosen types", [lambda: Arts.ArtRando()], hasSpinBox=True)
+OuroArtsOption = Option("Ouroboros Arts", Character, "Randomizes Ouroboros arts into the chosen types", [lambda: Arts.ArtRando()], hasSpinBox=True)
 OuroArtsOption_Arts = SubOption("Arts", OuroArtsOption)
-OuroArtsOption_OuroArts = SubOption("Ouroborous Arts", OuroArtsOption)
+OuroArtsOption_OuroArts = SubOption("Ouroboros Arts", OuroArtsOption)
 OuroArtsOption_TalentArts = SubOption("Talent Arts", OuroArtsOption)
 OuroArtsOption_HackerArts = SubOption("Soul Hacker Arts", OuroArtsOption)
+OuroArtsOption_OuroTalentArts = SubOption("Ouroboros Talent Arts", OuroArtsOption)
 
 TalentArtsOption = Option("Talent Arts", Character, "Randomizes Talent arts into the chosen types", [lambda: Arts.ArtRando()], hasSpinBox=True)
 TalentArtsOption_Arts = SubOption("Arts", TalentArtsOption)
-TalentArtsOption_OuroArts = SubOption("Ouroborous Arts", TalentArtsOption)
+TalentArtsOption_OuroArts = SubOption("Ouroboros Arts", TalentArtsOption)
 TalentArtsOption_TalentArts = SubOption("Talent Arts", TalentArtsOption)
 TalentArtsOption_HackerArts = SubOption("Soul Hacker Arts", TalentArtsOption)
+TalentArtsOption_OuroTalentArts = SubOption("Ouroboros Talent Arts", TalentArtsOption)
+
+OuroTalentArtsOption = Option("Ouroboros Talent Arts", Character, "Randomizes Ouroboros Talent arts into the chosen types", [lambda: Arts.ArtRando()], hasSpinBox=True)
+OuroTalentArtsOption_Arts = SubOption("Arts", OuroTalentArtsOption)
+OuroTalentArtsOption_OuroArts = SubOption("Ouroboros Arts", OuroTalentArtsOption)
+OuroTalentArtsOption_TalentArts = SubOption("Talent Arts", OuroTalentArtsOption)
+OuroTalentArtsOption_HackerArts = SubOption("Soul Hacker Arts", OuroTalentArtsOption)
+OuroTalentArtsOption_OuroTalentArts = SubOption("Ouroboros Talent Arts", OuroTalentArtsOption)
+
+ArtsOptionHeader = Header([ArtsOption, OuroArtsOption, OuroTalentArtsOption])
 
 # HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])
 CostumesOption = Option("Class Costumes", Character, "Randomizes class outfits", [lambda: Costumes.CostumeRando()])

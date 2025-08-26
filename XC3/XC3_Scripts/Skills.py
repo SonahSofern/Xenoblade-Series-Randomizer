@@ -36,9 +36,9 @@ def SkillRandoMain():
                     skillFiles.SkillRando(IDs.InoTreeNodes, [(10,30)])
                     skillFiles.SkillRando(IDs.DLC4SingleSkills, [(30,80)])
                     skillFiles.SkillRando(IDs.DLC4TreeNodes, [(20,40)])
-                if Options.SkillOptions_Ouroborous.GetState():
+                if Options.SkillOptions_Ouroboros.GetState():
                     skillFiles.SkillRando(IDs.UroSkills, [(20,50), (70,80)])
-                if Options.SkillOptions_Ouroborous.GetState() and Options.SkillOptions_SingleNode.GetState():
+                if Options.SkillOptions_Ouroboros.GetState() and Options.SkillOptions_SingleNode.GetState():
                     skillFiles.SkillRando(IDs.UroTreeNodes, [(10,30)])
                 if Options.SkillOptions_SoulHacker.GetState():
                     skillFiles.SkillRando(IDs.SoulhackerSkills, [(20,40), (60,90)])

@@ -252,3 +252,13 @@ def AskToChooseOption(enabledOption, conflictingOptions):
         ChosenResolution = False
 
     return ChosenResolution
+
+
+class Header():
+    def __init__(self, childList:list[Option]):
+        tab = childList[0].tab
+        
+        dropdown = ttk.Button()
+        # make a dropdown button
+        # add children into its care
+        pass

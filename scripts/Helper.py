@@ -245,6 +245,12 @@ class RandomGroup():
         self.currentGroup.remove(en)
         if self.currentGroup == []:
             self.RefreshCurrentGroup()
+            
+    def isEmpty(self):
+        if self.originalGroup == []:
+            return True
+        else:
+            return False
 
 def RandomDecimal(low, high, mult = 0.01):
     return (random.randrange(low, high)*mult)

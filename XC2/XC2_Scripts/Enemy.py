@@ -228,9 +228,9 @@ def EnemyDesc(name):
     EnemyRandoDesc.Text(f"The spinbox for each option is the weight of that category.")
     if name == Options.BossEnemyOption.name:
         EnemyRandoDesc.Header(Options.BossEnemyOption_Solo.name)
-        EnemyRandoDesc.Text("This will balance required fights that are fought solo, by adjusting the levels of the encounter. This is recommended for new players.")
+        EnemyRandoDesc.Text("This will balance required fights that are fought solo, by adjusting the levels of the encounter")
         EnemyRandoDesc.Header(Options.BossEnemyOption_Group.name)
-        EnemyRandoDesc.Text("This will balance required fights that are large groups of enemies, by adjusting the levels of the encounter if an enemy is strong in groups. This is recommended for new players.")
+        EnemyRandoDesc.Text("This will balance required fights that are large groups of enemies, by adjusting the levels of the encounter if an enemy is strong in groups.")
     if name != Options.BossEnemyOption.name:
         EnemyRandoDesc.Header(Options.NormalEnemyOption_Aggro.name)
         EnemyRandoDesc.Text("If this setting is on, enemies will keep their original aggro. For example a krabble replaced by Amalthus will keep the krabble's aggro type and radius.")

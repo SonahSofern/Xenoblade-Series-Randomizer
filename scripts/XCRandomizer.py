@@ -7,6 +7,7 @@ import tkinter as tk
 from scripts.GUISettings import *
 from PIL import Image, ImageTk
 
+
 class Tab():
     def __init__(self, name, outer, canvas, inner):
         self.name = name
@@ -37,7 +38,7 @@ lastHeight = -1
 garbageCollectionStopper = [] # Globals to prevent garbage collection
 iconCollector = []# Globals to prevent garbage collection
 
-def UserNeedsUpdate(version, root):
+def CheckIfUserNeedsUpdate(version, root):
     '''Checks the repos latest version tag to see if we have a new release'''
     import requests
     try:
