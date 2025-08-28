@@ -1,6 +1,6 @@
 import scripts.JSONParser, scripts.XCRandomizer
 from XC3.XC3_Scripts import SeedNames, Options
-Version = "BETA"
+Version = "1.0.0"
 Game = "XC3"
 Title = "Xenoblade Chronicles 3"
 

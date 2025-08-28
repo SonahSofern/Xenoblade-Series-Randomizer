@@ -143,6 +143,7 @@ def GetMinValue(filename: str, columnname: str): # Returns the maximum Value for
     return MinID
 
 def OddsCheck(odds):
+    '''Returns true if odds are greater than a random number between 0-99'''
     if odds > random.randrange(0,99):
         return True
     else:

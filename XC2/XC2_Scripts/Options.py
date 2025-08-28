@@ -35,6 +35,8 @@ Tabs = {
     TornaTab: "🞛 Torna"
 }
 
+weightsSpinDescription = "Weights ↓"
+
 
 # General
 AccessoriesOption = Option("Accessories", Items, "Randomizes effects of Accessories", [lambda: _Accessories.RandomizeAccessoryEnhancements()], descData=lambda: _Accessories.AccessoriesDesc())
@@ -140,7 +142,7 @@ BladeStatsOption_Class = SubOption("Weapon Class", BladeStatsOption, [lambda: Bl
 # Enemies
 enemyWeightSpinDefault = 10
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsters, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_Aggro, NormalEnemyOption_Size)], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True, prio=2)
-NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault)
+NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault, spinDesc=weightsSpinDescription)
 NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault)
 NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault)
 NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault)
@@ -148,7 +150,7 @@ NormalEnemyOption_Aggro = SubOption("Vanilla Aggro", NormalEnemyOption)
 NormalEnemyOption_Size = SubOption("Match Size", NormalEnemyOption)
 
 UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: Enemy.Enemies(IDs.UniqueMonsters + IDs.SuperbossMonsters, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption, UniqueEnemyOption_Aggro, UniqueEnemyOption_Size)], descData=lambda: Enemy.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True, prio=2)
-UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault)
+UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault, spinDesc=weightsSpinDescription)
 UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault)
 UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault)
 UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault)
@@ -156,7 +158,7 @@ UniqueEnemyOption_Aggro = SubOption("Vanilla Aggro", UniqueEnemyOption)
 UniqueEnemyOption_Size = SubOption("Match Size", UniqueEnemyOption)
 
 BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, True, BossEnemyOption_Size)], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True, prio=2)
-BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault)
+BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault, spinDesc=weightsSpinDescription)
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault)
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, hasSpinBox=True, spinDefault=enemyWeightSpinDefault)

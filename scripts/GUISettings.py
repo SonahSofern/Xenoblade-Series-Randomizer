@@ -65,7 +65,7 @@ def LoadTheme(defaultFont, themeName):
                 "map": {
                     "foreground": [("selected", currentTheme["lightColor"]), ("active", currentTheme["lightColor"])],
                     "background": [("selected", currentTheme["midColor"]), ("active", currentTheme["midColor"])],        
-                    "expand": [("selected", 0), ("active", 2)]                
+                    # "expand": [("selected", 0), ("active", 2)]                
                 }
             },
             "TButton": {

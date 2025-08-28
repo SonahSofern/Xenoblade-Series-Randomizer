@@ -20,6 +20,8 @@ Tabs = {
     # Musica: "♪ Music",
 }
 
+weightsSpinDescription = "Weights ↓"
+
 ShopOption = Option("Shops", General, "Randomizes shop contents", [lambda: Items.Shops()])
 ShopOption_IndividualItems = SubOption("Randomize Individual Items", ShopOption)
 ShopOption_ShuffleShops = SubOption("Shuffle Shops", ShopOption)
@@ -35,21 +37,21 @@ TreasureBoxOption_ShuffleBoxes = SubOption("Shuffle Containers", TreasureBoxOpti
 # CharactersOption = Option("Heroes", Character, "Randomizes heroes", [lambda: Characters.CharacterSwaps()])
 enemySpinDefaultVal = 10
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsters, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_MatchSize)], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
-NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
+NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal, spinDesc=weightsSpinDescription)
 NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
 NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
 NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
 NormalEnemyOption_MatchSize = SubOption("Match Size", NormalEnemyOption)
 
 UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: Enemy.Enemies(IDs.UniqueMonsters + IDs.SuperbossMonsters, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption, UniqueEnemyOption_MatchSize)], descData=lambda: Enemy.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True)
-UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
+UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal, spinDesc=weightsSpinDescription)
 UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
 UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
 UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
 UniqueEnemyOption_MatchSize = SubOption("Match Size", UniqueEnemyOption)
 
 BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, BossEnemyOption_MatchSize)], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True)
-BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
+BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal, spinDesc=weightsSpinDescription)
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
@@ -67,36 +69,37 @@ SkillOptions_SoulHacker = SubOption("Soulhacker Skills", SkillOptions)
 SkillOptions_SingleNode = SubOption("Node Skills", SkillOptions)
 # SkillOptions_MatchSkillClass = SubOption("Match Class Type", SkillOptions)
 
+defaultArtSpinWeight = 1
 
 ArtsOption = Option("Class Arts", Character, "Randomizes class arts into the chosen types", [lambda: Arts.ArtRando()], hasSpinBox=True)
-ArtsOption_Arts = SubOption("Arts", ArtsOption)
-ArtsOption_OuroArts = SubOption("Ouroboros Arts", ArtsOption)
-ArtsOption_TalentArts = SubOption("Talent Arts", ArtsOption)
-ArtsOption_HackerArts = SubOption("Soul Hacker Arts", ArtsOption)
-ArtsOption_OuroTalentArts = SubOption("Ouroboros Talent Arts", ArtsOption)
+ArtsOption_Arts = SubOption("Arts", ArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight, spinDesc=weightsSpinDescription)
+ArtsOption_OuroArts = SubOption("Ouroboros Arts", ArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight, )
+ArtsOption_TalentArts = SubOption("Talent Arts", ArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight, )
+ArtsOption_HackerArts = SubOption("Soul Hacker Arts", ArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight, )
+ArtsOption_OuroTalentArts = SubOption("Ouroboros Talent Arts", ArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight, )
 
 OuroArtsOption = Option("Ouroboros Arts", Character, "Randomizes Ouroboros arts into the chosen types", [lambda: Arts.ArtRando()], hasSpinBox=True)
-OuroArtsOption_Arts = SubOption("Arts", OuroArtsOption)
-OuroArtsOption_OuroArts = SubOption("Ouroboros Arts", OuroArtsOption)
-OuroArtsOption_TalentArts = SubOption("Talent Arts", OuroArtsOption)
-OuroArtsOption_HackerArts = SubOption("Soul Hacker Arts", OuroArtsOption)
-OuroArtsOption_OuroTalentArts = SubOption("Ouroboros Talent Arts", OuroArtsOption)
+OuroArtsOption_Arts = SubOption("Arts", OuroArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight, spinDesc=weightsSpinDescription)
+OuroArtsOption_OuroArts = SubOption("Ouroboros Arts", OuroArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight, )
+OuroArtsOption_TalentArts = SubOption("Talent Arts", OuroArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight, )
+OuroArtsOption_HackerArts = SubOption("Soul Hacker Arts", OuroArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight, )
+OuroArtsOption_OuroTalentArts = SubOption("Ouroboros Talent Arts", OuroArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight, )
 
 TalentArtsOption = Option("Talent Arts", Character, "Randomizes Talent arts into the chosen types", [lambda: Arts.ArtRando()], hasSpinBox=True)
-TalentArtsOption_Arts = SubOption("Arts", TalentArtsOption)
-TalentArtsOption_OuroArts = SubOption("Ouroboros Arts", TalentArtsOption)
-TalentArtsOption_TalentArts = SubOption("Talent Arts", TalentArtsOption)
-TalentArtsOption_HackerArts = SubOption("Soul Hacker Arts", TalentArtsOption)
-TalentArtsOption_OuroTalentArts = SubOption("Ouroboros Talent Arts", TalentArtsOption)
+TalentArtsOption_Arts = SubOption("Arts", TalentArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight, spinDesc=weightsSpinDescription)
+TalentArtsOption_OuroArts = SubOption("Ouroboros Arts", TalentArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight)
+TalentArtsOption_TalentArts = SubOption("Talent Arts", TalentArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight)
+TalentArtsOption_HackerArts = SubOption("Soul Hacker Arts", TalentArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight)
+TalentArtsOption_OuroTalentArts = SubOption("Ouroboros Talent Arts", TalentArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight)
 
 OuroTalentArtsOption = Option("Ouroboros Talent Arts", Character, "Randomizes Ouroboros Talent arts into the chosen types", [lambda: Arts.ArtRando()], hasSpinBox=True)
-OuroTalentArtsOption_Arts = SubOption("Arts", OuroTalentArtsOption)
-OuroTalentArtsOption_OuroArts = SubOption("Ouroboros Arts", OuroTalentArtsOption)
-OuroTalentArtsOption_TalentArts = SubOption("Talent Arts", OuroTalentArtsOption)
-OuroTalentArtsOption_HackerArts = SubOption("Soul Hacker Arts", OuroTalentArtsOption)
-OuroTalentArtsOption_OuroTalentArts = SubOption("Ouroboros Talent Arts", OuroTalentArtsOption)
+OuroTalentArtsOption_Arts = SubOption("Arts", OuroTalentArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight, spinDesc=weightsSpinDescription)
+OuroTalentArtsOption_OuroArts = SubOption("Ouroboros Arts", OuroTalentArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight)
+OuroTalentArtsOption_TalentArts = SubOption("Talent Arts", OuroTalentArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight)
+OuroTalentArtsOption_HackerArts = SubOption("Soul Hacker Arts", OuroTalentArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight)
+OuroTalentArtsOption_OuroTalentArts = SubOption("Ouroboros Talent Arts", OuroTalentArtsOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight)
 
-ArtsOptionHeader = Header([ArtsOption, OuroArtsOption, OuroTalentArtsOption])
+ArtsOptionHeader = Header([ArtsOption, TalentArtsOption, OuroArtsOption, OuroTalentArtsOption])
 
 # HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])
 CostumesOption = Option("Class Costumes", Character, "Randomizes class outfits", [lambda: Costumes.CostumeRando()])
