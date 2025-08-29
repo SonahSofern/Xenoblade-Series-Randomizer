@@ -10,16 +10,16 @@ talentArtGroupData = Helper.RandomGroup()
 hackerArtGroupData = Helper.RandomGroup()
 groupData:list[Helper.RandomGroup] = [artGroupData, ouroArtGroupData,talentArtGroupData, ouroTalentArtGroupData, hackerArtGroupData]
 
-def ArtRando(targetGroupIDs, artOption, ouroArtOption, talentArtOption, ouroTalentArtOption, hackerArtOption, spinbox):  
+
+def ArtRando(targetGroupIDs, artOption, ouroArtOption, talentArtOption, ouroTalentArtOption, hackerArtOption, spinbox, extraIgnoreKeys):  
     global groupData  
     unlockFlag = "<A2275574>"
     StateKeys = ['StateName', 'StateName2', 'StateLoopNum', 'WpnType'] # So actions match the original art
     HitFrames = ['HitFrm01', 'HitFrm02', 'HitFrm03', 'HitFrm04', 'HitFrm05', 'HitFrm06', 'HitFrm07', 'HitFrm08', 'HitFrm09', 'HitFrm10', 'HitFrm11', 'HitFrm12', 'HitFrm13', 'HitFrm14', 'HitFrm15', 'HitFrm16']
-    ignoreKeys = ["$id",  unlockFlag, "UseChr", "UseTalent", "WpnType"] + StateKeys + HitFrames
+    ignoreKeys = ["$id",  unlockFlag, "UseChr", "UseTalent", "WpnType"] + StateKeys + HitFrames + extraIgnoreKeys
     
     with open("XC3/JsonOutputs/btl/BTL_Arts_PC.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
-        odds = spinbox.GetSpinbox()
         
         if artGroupData.isEmpty(): 
             for art in artData["rows"]:
@@ -43,29 +43,48 @@ def ArtRando(targetGroupIDs, artOption, ouroArtOption, talentArtOption, ouroTale
         for art in artData["rows"]:
             if art["$id"] not in targetGroupIDs:
                 continue
-            if not Helper.OddsCheck(odds):
+            if not Helper.OddsCheck(spinbox):
                 continue
             
             # Choose an art group with weights and then a random member from the group
-            chosenGroup:Helper.RandomGroup = random.choices(groupData,Weights,1)[0]
-            chosen = chosenGroup.SelectRandomMember()
-            
+            chosen = random.choices(groupData,Weights)[0].SelectRandomMember()            
             
             # Handle Duplicate named arts (just copy the result onto ones with the same name)
-            HandleArtCopies()
+            if targetGroupIDs == IDs.ArtIDs:
+                HandleArtCopies(chosen, art, artData, ignoreKeys)
             
             # Copy Keys
             Helper.CopyKeys(art, chosen, ignoreKeys)
         
-        groupData.RefreshCurrentGroup()
+        # Refresh groups
+        for group in groupData:
+            group.RefreshCurrentGroup()
+            
         JSONParser.CloseFile(artData, artFile)
 
-def GenWeights():
-    pass
+def GenWeights(art, ouroArt, talentArt, ouroTalentArt, hackerArt):
+    weights = [0,0,0,0,0]
+    if art.GetState():
+        weights[0] = art.GetSpinbox()
+    if ouroArt.GetState():
+        weights[1] = ouroArt.GetSpinbox()
+    if talentArt.GetState():
+        weights[2] = talentArt.GetSpinbox()
+    if ouroTalentArt.GetState():
+        weights[3] = ouroTalentArt.GetSpinbox()
+    if hackerArt.GetState():
+        weights[4] = hackerArt.GetSpinbox()
+    return weights
 
-def HandleArtCopies():
-    pass
+def HandleArtCopies(chosen, art, artData, ignoreKeys):
+    for localArt in artData["rows"]:
+        if localArt["Name"] == art["Name"] and localArt["UseChr"] == 0:
+            Helper.CopyKeys(localArt, chosen, ignoreKeys)
 
+
+def FixMismatchLevelUpSlots():
+    # Some arts have 0s in slots when levelled up past a certain point
+    pass
 # ArtCategory 
 # 0 : Autos
 # 1 : Arts, Mega Slash finishers, 

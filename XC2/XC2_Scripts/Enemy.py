@@ -86,9 +86,9 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer): # Probably want to 
         (Massive, Large): 4,
         (Massive, Normal): 6,
         (Massive, Small): 8,
-        (Large, Normal): 2,
+        (Large, Normal): 1,
         (Large, Small): 3,
-        (Normal, Small): 1.5,
+        (Normal, Small): 1,
     }
     keys = ["Scale"]
     eRando.EnemySizeMatch(oldEn, newEn, keys, multDict)
