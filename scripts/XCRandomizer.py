@@ -232,7 +232,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     #     icon_path = "images/Question.png"
     # HelpIcon = PhotoImage(file=icon_path)
     # iconCollector.append(HelpIcon)
-    SettingsButton = ttk.Button(background,padding=5, text=" ? ",command=lambda: PopupDescriptions.GenPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window, defaultFont))
+    SettingsButton = ttk.Button(background,padding=5, text="Help",command=lambda: PopupDescriptions.GenPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window, defaultFont))
     SettingsButton.pack(pady=(5,windowPadding),anchor="e",expand=True, side=RIGHT, padx=windowPadding) 
     saveCommands.append(lambda: SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game))
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())

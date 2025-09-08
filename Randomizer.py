@@ -1,5 +1,4 @@
 import sys, os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))) # Allows us to use the scripts folder as a module
 from tkinter import *
 from tkinter import ttk
 from tkinter.font import Font

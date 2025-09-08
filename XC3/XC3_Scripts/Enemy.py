@@ -92,5 +92,9 @@ def Bandaids(eRando):
     IntroFightBalances(eRando)
     
 def EnemyDesc(name):
-    
-    pass
+    desc = PopupDescriptions.Description()
+    desc.Header("Enemies")
+    desc.Text("This randomizes enemies in the world from the target category into the chosen ones.")
+    desc.Header(Options.BossEnemyOption_MatchSize.name)
+    desc.Text("Shrinks/grows enemies to match the size of the original enemy.")
+    return desc

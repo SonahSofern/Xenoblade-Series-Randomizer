@@ -12,7 +12,7 @@ Funny = 5
 Musica = 6
 
 Tabs = {
-    General: '🞛 Items',
+    General: '🎁 Items',
     Character: '🧍 Characters',
     Enemies: '💀 Enemies',
     QOL: '🐇 Quality of Life',

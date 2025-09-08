@@ -6,6 +6,8 @@ import scripts.PopupDescriptions
 
 Nope = [MaxAffinityHeal,ReduceDamageFromNearbyEnemies, DamageUpOnEnemyKill] # Retry these used on armu enemy with dupe
 ValidSkills = []   
+MaxLettersInNameTag = 23
+
 
 def EnemyEnhances():
     prevNames = []
@@ -18,7 +20,7 @@ def EnemyEnhances():
                 if spinbox < random.randrange(0,100):
                     continue
                         
-                enh = random.choice(ValidSkills)
+                enh:Enhancement = random.choice(ValidSkills)
                 prevNames.append({"myName" :Enemy["Name"], "myEnhance": enh})
                 
                 for pair in prevNames: # Ensures the same name has the same enhancement
@@ -34,7 +36,7 @@ def EnemyEnhances():
                     if name["$id"] == Enemy["Name"]:
                         oldName = name["name"]
                         enhanceName = enh.name +  ('+'*(enh.Rarity))
-                        if len(enhanceName + oldName) > 20:
+                        if len(enhanceName + oldName) > MaxLettersInNameTag:
                             oldnameList = oldName.split()
                             oldName = oldnameList[-1]           
                         name["name"] = f"[System:Color name=tutorial]{enhanceName}[/System:Color] {oldName}"
@@ -63,24 +65,24 @@ class EnemyEnhancement(Enhancement):
    
 Healthy = EnemyEnhancement("Healthy", HPBoost, [100,150,200,300])
 Strong = EnemyEnhancement("Strong", StrengthBoost, [50,100,150,200])
-Etheras = EnemyEnhancement("Etherite", EtherBoost, [50,100,150,200])
-EtherBlock = EnemyEnhancement("E. Def", FlatEthDefBoost, [60,70,80,100])
-PhyBlock = EnemyEnhancement("P. Def", FlatDefBoost, [60,70,80,100])
+Etheras = EnemyEnhancement("Ether", EtherBoost, [50,100,150,200])
+EtherBlock = EnemyEnhancement("E.Def", FlatEthDefBoost, [60,70,80,100])
+PhyBlock = EnemyEnhancement("P.Def", FlatDefBoost, [60,70,80,100])
 Spike = EnemyEnhancement("Spiky", EtherCounter, [30,40,50,60])
 Pursuer = EnemyEnhancement("Pursuer", CombatMoveSpeed, [100,200,300,400])
 AllReactionNull = EnemyEnhancement("Stable", TranquilGuard,[40,60,80,100])
-BlowdownSpike = EnemyEnhancement("Bouncy", GravityPinwheel, [10,15,20,25], [1,2,3,5])
-TasSnack = EnemyEnhancement("Devourer", TastySnack, [30,50,70,100])
-Desperate = EnemyEnhancement("Desperate", HpDownDamageUp,[10,15,20,25])
-Wish = EnemyEnhancement("Sacrificial", WhenDiesHealAllies,[50,70,80,100])
-FirstStrike = EnemyEnhancement("Supriser", FirstArtDamage,[300,500,600,700])
-Lightning  = EnemyEnhancement("Lightning", AutoSpeedArtsSpeed,[300,400,500,600],[200,300,400,500])
+BlowdownSpike = EnemyEnhancement("Bouncy", GravityPinwheel, [3,6,9,12], [1,2,3,5])
+TasSnack = EnemyEnhancement("Devour", TastySnack, [30,50,70,100])
+Desperate = EnemyEnhancement("Frenzy", HpDownDamageUp,[10,15,20,25])
+Wish = EnemyEnhancement("Wish", WhenDiesHealAllies,[50,70,80,100])
+FirstStrike = EnemyEnhancement("Ambush", FirstArtDamage,[300,500,600,700])
+Lightning  = EnemyEnhancement("Fleet", AutoSpeedArtsSpeed,[300,400,500,600],[200,300,400,500])
 Repeat = EnemyEnhancement("Repeat", DidIDoThat,[20,40,60,80])
-Enraged = EnemyEnhancement("Avenger", AllyDownDamageUp,[60,80,100,120])
-Regen = EnemyEnhancement("Regen", PermaRegen,[30,60,90,120], [0.02,0.03,0.04,0.05], revP1=True, isRounded=False)
-CloseArmor = EnemyEnhancement("Guardian", ReduceDamageFromNearbyEnemies, [30,50,70,90])
-Swarm = EnemyEnhancement("Swarming", PerAllyDamageUp, [20,40,60,80])
-Sealing = EnemyEnhancement("Sealing", ChainAttackSeal, [2,2,3,4], revP1=True)
+Enraged = EnemyEnhancement("Avenge", AllyDownDamageUp,[60,80,100,120])
+Regen = EnemyEnhancement("Regen", PermaRegen,[60,90,120,150], [0.01,0.015,0.02,0.03], revP1=True, isRounded=False)
+CloseArmor = EnemyEnhancement("Solid", ReduceDamageFromNearbyEnemies, [30,50,70,90])
+Swarm = EnemyEnhancement("Swarm", PerAllyDamageUp, [20,40,60,80])
+Sealing = EnemyEnhancement("Seal", ChainAttackSeal, [2,2,2,3], revP1=True)
 
 #New testing
 TestSkills = [Regen]

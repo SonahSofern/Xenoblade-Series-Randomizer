@@ -24,7 +24,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                 rscData = json.load(rscFile)
                 eneData = json.load(eneFile)
                 
-                eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, permanentBandaids=[lambda: EarthBreathNerf(), lambda: AeshmaCoreHPNerf()], actKeys=actKeys)
+                eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, permanentBandaids=[lambda: EarthBreathNerf(), lambda: AeshmaCoreHPNerf(), lambda: GortOgreUppercutRemoval()], actKeys=actKeys)
                 
                 if StaticEnemyData == []:
                     StaticEnemyData = eRando.GenEnemyData()
@@ -83,11 +83,11 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer): # Probably want to 
     Small = 0
     
     multDict = {
-        (Massive, Large): 4,
-        (Massive, Normal): 6,
-        (Massive, Small): 8,
+        (Massive, Large): 2,
+        (Massive, Normal): 3,
+        (Massive, Small): 5,
         (Large, Normal): 1,
-        (Large, Small): 3,
+        (Large, Small): 2,
         (Normal, Small): 1,
     }
     keys = ["Scale"]
@@ -151,7 +151,7 @@ def CloneEnemiesDefeatCondition(oldEn, newEn): # Forces all copies of enemies th
         for quest in questData["rows"]:
             if quest["EnemyID"] == oldEn["$id"]:
                 quest["DeadAll"] = 1
-                print(f"Added DeadAll to row {quest["$id"]} of QuestBattle, because it got {newEn["$id"]}")
+                # print(f"Added DeadAll to row {quest["$id"]} of QuestBattle, because it got {newEn["$id"]}")
                 break
         JSONParser.CloseFile(questData, questFile)
 
@@ -233,7 +233,7 @@ def EnemyDesc(name):
         EnemyRandoDesc.Text("This will balance required fights that are large groups of enemies, by adjusting the levels of the encounter if an enemy is strong in groups.")
     if name != Options.BossEnemyOption.name:
         EnemyRandoDesc.Header(Options.NormalEnemyOption_Aggro.name)
-        EnemyRandoDesc.Text("If this setting is on, enemies will keep their original aggro. For example a krabble replaced by Amalthus will keep the krabble's aggro type and radius.")
+        EnemyRandoDesc.Text("If this setting is on, enemies will keep their original aggro. For example, if a Krabble is replaced by Amalthus, it will keep the krabble's aggro type and radius.")
     EnemyRandoDesc.Header(Options.NormalEnemyOption_Size.name)
-    EnemyRandoDesc.Text("This will match the size of the new enemy to the original enemy. For example Ophion (a big enemy) when replaced with a krabble (a small enemy), will cause the krabble to be gigantic. This helps with indoor areas as massive enemies will be shrunk to match their new environment.")
+    EnemyRandoDesc.Text("This will match the size of the new enemy to the original enemy. For example, Ophion (a big enemy), when replaced with a krabble (a small enemy), will force the Krabble to match Ophions size for that instance of it. This helps with indoor areas as massive enemies will be shrunk to match their new environment.")
     return EnemyRandoDesc
