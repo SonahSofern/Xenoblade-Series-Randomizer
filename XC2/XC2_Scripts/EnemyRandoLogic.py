@@ -859,6 +859,8 @@ def getMaxCountViolations(DefaultEnemyIDs, RandomizedEnemyIDs):
         272: 1,  # Jin from Jin/Malos fight in Cliffs of Morytha (phase 2)
         273: 1,  # Malos from Jin/Malos fight in Cliffs of Morytha (phase 2)
         286: 1,  # Jin, unsure which
+        1441: 2, # Slithe Jagron, Phase 1
+        1442: 2, # Slithe Jagron, Phase 2
         1443: 1,  # Malos from Torna
         1446: 1,  # Malos from Torna
         1447: 1,  # Malos from Torna
