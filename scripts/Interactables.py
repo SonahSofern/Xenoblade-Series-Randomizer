@@ -38,7 +38,6 @@ class Option():
         self.spinWidth = spinWidth
         self.spinIncr = spinIncr
         
-
     def DisplayOption(self, tab, root, defFont, defTheme):
         self.root = root
         self.defFont = defFont
@@ -46,7 +45,8 @@ class Option():
         self.GenStandardOption(tab)
         self.StateUpdate()
         
-    def GenStandardOption(self, parentTab):    # This probably shouldnt be a class function what if we want to make a nonstandard option we could make a carveout and let you call a custom function but how would you set everything with a custom function
+    def GenStandardOption(self, parentTab, stylePrefix = "Dark"):    # This probably shouldnt be a class function what if we want to make a nonstandard option we could make a carveout and let you call a custom function but how would you set everything with a custom function
+
         # Variables
         global rowIncrement
         self.checkBoxVal = BooleanVar()
@@ -54,11 +54,11 @@ class Option():
         self.spinBoxObj = ttk.Spinbox()
 
         # Parent Frame
-        optionPanel = ttk.Frame(parentTab)
+        optionPanel = ttk.Frame(parentTab, style=f"{stylePrefix}.TFrame")
         optionPanel.grid(row = rowIncrement, column = 0, sticky="ew")
         
         # Major Option Checkbox
-        self.checkBox = ttk.Checkbutton(optionPanel, variable= self.checkBoxVal, text=self.name, width=30, style="midColor.TCheckbutton", command=lambda: (self.StateUpdate(), [cmd() for cmd in self.clickCommands]))
+        self.checkBox = ttk.Checkbutton(optionPanel, variable= self.checkBoxVal, text=self.name, width=30, style=f"{stylePrefix}.TCheckbutton", command=lambda: (self.StateUpdate(), [cmd() for cmd in self.clickCommands]))
         self.checkBox.grid(row=rowIncrement, column = 0, sticky="w")
         
         if self.descData == None:
@@ -68,10 +68,10 @@ class Option():
         
         # Description Label or Button
         if self.descData != None:
-            self.descObj = ttk.Button(optionPanel, text = text, command=lambda: PopupDescriptions.GenPopup(self.name, self.descData, self.root, self.defFont), style="BordlessBtn.TButton", width=60)
+            self.descObj = ttk.Button(optionPanel, text = text, command=lambda: PopupDescriptions.GenPopup(self.name, self.descData, self.root, self.defFont), style=f"{stylePrefix}.TButton", width=60)
             padx = 13
         else:
-            self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, wraplength=400)
+            self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, style=f"{stylePrefix}.TLabel", wraplength=400)
             padx= 0
         self.descObj.grid(row=rowIncrement, column = 1, sticky="w", padx=padx)
         
@@ -82,7 +82,7 @@ class Option():
             self.spinBoxVal = IntVar(value=self.spinDefault)
             self.spinBoxObj = ttk.Spinbox(optionPanel, from_=self.spinBoxMin, to=self.spinBoxMax, textvariable=self.spinBoxVal, wrap=True, width=self.spinWidth, increment=self.spinIncr, justify="right")
             self.spinBoxObj.grid(row=rowIncrement, column = 3, padx=(15,0))
-            self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w")
+            self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w", style=f"{stylePrefix}.TLabel")
             self.spinBoxLabel.grid(row=rowIncrement, column = 4, sticky="w", padx=0)
 
 
@@ -90,13 +90,13 @@ class Option():
             rowIncrement += 1
             sub.checkBoxVal = BooleanVar(value=sub.defState)
             sub.checkBoxVal.trace_add("write",  lambda name, index, mode: self.StateUpdate())
-            sub.checkBox = ttk.Checkbutton(optionPanel, text=sub.name, variable=sub.checkBoxVal, width=25)
+            sub.checkBox = ttk.Checkbutton(optionPanel, text=sub.name, variable=sub.checkBoxVal, style=f"{stylePrefix}Sub.TCheckbutton", width=25)
             sub.checkBox.grid(row=rowIncrement, column=0, sticky="sw")
             if sub.hasSpinBox:
                 sub.spinBoxVal = IntVar(value=sub.spinDefault)
                 sub.spinBoxObj = ttk.Spinbox(optionPanel, from_=sub.spinBoxMin, to=sub.spinBoxMax, textvariable=sub.spinBoxVal, wrap=True, width=sub.spinWidth, increment=sub.spinIncr, justify="right")
                 sub.spinBoxObj.grid(row=rowIncrement, column=1, padx=(20,0), pady=(0,0), sticky="w")
-                sub.spinBoxLabel = ttk.Label(optionPanel, text=sub.spinDesc, style="noMargin.TLabel")
+                sub.spinBoxLabel = ttk.Label(optionPanel, text=sub.spinDesc, style=f"{stylePrefix}NoMargin.TLabel")
                 sub.spinBoxLabel.grid(row=rowIncrement, column=1, sticky="w", padx=(80,0))
 
         rowIncrement += 1

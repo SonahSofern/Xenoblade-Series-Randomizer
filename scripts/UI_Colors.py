@@ -1,5 +1,6 @@
 Black = "#000000"
 LightBlack="#262626"
+OffLightBlack="#303030"
 White = "#ffffff"
 Gray = "#D5D5D5"
 DarkGray = "#525151"

@@ -115,16 +115,15 @@ def GetGroupFightViolations():
     Akhos = e.Violation([212, 238, 267])
     Malos = e.Violation([214, 243, 245, 268, 273], -10)
     Patroka = e.Violation([223, 239, 270])
-    Mikhail = e.Violation([225, 240, 271])
+    Mikhail = e.Violation([225, 271])
     Aeshma = e.Violation([232,233,234], -10)
     Amalthus = e.Violation([254], -10)
     Aion = e.Violation([265, 275], -20)
     GroupUniqueMonstersViolations = e.Violation(IDs.UniqueMonsters, -5)
     GroupSuperbossMonstersViolations = e.Violation(IDs.SuperbossMonsters, -20)
-    GroupBossMonsterViolations = e.Violation(IDs.BossMonsters, -10)
+    GroupBossMonsterViolations = e.Violation(IDs.BossMonsters, -5)
     GroupNormalMonsterViolation = e.Violation(IDs.NormalMonsters, 2)
-    GroupFightViolations:list[e.Violation] = [Jin, Akhos, Malos, Patroka, Mikhail, Aeshma, Amalthus, Aion, GroupUniqueMonstersViolations, GroupSuperbossMonstersViolations, GroupBossMonsterViolations, GroupNormalMonsterViolation]
-    return GroupFightViolations
+    return [Jin, Akhos, Malos, Patroka, Mikhail, Aeshma, Amalthus, Aion, GroupUniqueMonstersViolations, GroupSuperbossMonstersViolations, GroupBossMonsterViolations, GroupNormalMonsterViolation]
 
 def GetGroupFightIDs():
     ArdanianSoldiers = [189,190,219]
@@ -137,8 +136,7 @@ def GetGroupFightIDs():
     Phantasm = [242]
     Guldos = [249]
     IndolSoldier = [252]
-    GroupFightIDs = Puffots + Bandits + VandhamTrio + ArdanianSoldiers + Tirkin + TantaleseKnight + AkhosTrio + Phantasm + Guldos + IndolSoldier
-    return GroupFightIDs
+    return Puffots + Bandits + VandhamTrio + ArdanianSoldiers + Tirkin + TantaleseKnight + AkhosTrio + Phantasm + Guldos + IndolSoldier
 
 def CloneEnemiesDefeatCondition(oldEn, newEn): # Forces all copies of enemies that clone themselves to be defeated in a boss encounter
     CloneEnemyIDs = [242, 281, 1882, 1884]

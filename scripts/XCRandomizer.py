@@ -159,7 +159,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     MainWindow.pack(expand = True, fill ="both", padx=windowPadding, pady=(windowPadding, 5))
 
 
-    Interactables.XenoOptionDict[Game].sort(key= lambda x: x.name) # Sorts alphabetically
+    # Interactables.XenoOptionDict[Game].sort(key= lambda x: x.name) # Sorts alphabetically
     for opt in Interactables.XenoOptionDict[Game]:
         
         if isOneFile and opt.isDevOption: # Dont show dev options when packed for users

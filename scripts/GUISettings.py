@@ -205,8 +205,27 @@ def LoadTheme(defaultFont, themeName):
     style.theme_use(themeName)
     from tkinter.font import Font
     staticFont = Font(family="Arial", size=16)
+    
+    # Light
+    style.configure("Light.TFrame", background=UI_Colors.OffLightBlack)
+    style.configure("Light.TButton", background=UI_Colors.OffLightBlack, relief = FLAT)
+    style.configure("Light.TSpinbox", background=UI_Colors.OffLightBlack)
+    style.configure("Light.TLabel", background=UI_Colors.OffLightBlack)
+    style.configure("Light.TCheckbutton", background=UI_Colors.OffLightBlack, padding=(20, 10))
+    style.configure("LightSub.TCheckbutton", background=UI_Colors.OffLightBlack)
+    style.configure("LightNoMargin.TLabel", margin=(0,0), padding=(20,0), background=UI_Colors.OffLightBlack)
+
+    # Dark
+    style.configure("Dark.TFrame", background=currentTheme["darkColor"])
+    style.configure("Dark.TButton", background=currentTheme["darkColor"], relief = FLAT)
+    style.configure("Dark.TSpinbox", background=currentTheme["darkColor"])
+    style.configure("Dark.TLabel", background=currentTheme["darkColor"])
+    style.configure("Dark.TCheckbutton", background=currentTheme["darkColor"], padding=(20, 10))
+    style.configure("DarkSub.TCheckbutton", background=currentTheme["darkColor"])
+    style.configure("DarkNoMargin.TLabel", margin=(0,0), padding=(20,0), background=currentTheme["darkColor"])
+    
+    
     style.configure("BordlessBtn.TButton", relief = FLAT)
-    style.configure("midColor.TCheckbutton", padding=(20, 10))
     style.configure("centeredTabs.TNotebook", tabposition= "nw", borderwidth=0)
     style.configure("STATIC.TButton", font=staticFont)
     style.configure("BorderlessLabel.TLabel", background=currentTheme["darkColor"], foreground=UI_Colors.White)
@@ -214,7 +233,6 @@ def LoadTheme(defaultFont, themeName):
     style.configure("Header.TButton", borderwidth=0, background=currentTheme["midGray"])
     style.configure("Tag.TLabel", background= currentTheme["midGray"], relief="flat", padding=(9,2), margin=(5,0))
     style.configure("DescriptionImage.TLabel", background= currentTheme["midColor"])
-    style.configure("noMargin.TLabel", margin=(0,0), padding=(20,0))
     style.configure("CenteredLabel.TLabel")
     style.configure("CenteredButton.TButton", anchor = "center")
 
