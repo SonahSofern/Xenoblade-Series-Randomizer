@@ -14,11 +14,16 @@ permalinkVar = scripts.XCRandomizer.StringVar()
 Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../", game= "XC3")
 Skyline = scripts.XCRandomizer.FilePlacer(["Loader/skyline"], "", game= "XC3")
 
-extraArgs= ["--hashes", "XC3/xbc3Hashes.txt"]
+hashFile = "XC3/Loader/xbc3Hashes.txt"
+if scripts.XCRandomizer.isOneFile:
+    extraArgs = ["--hashes", scripts.XCRandomizer.os.path.join(scripts.XCRandomizer.sys._MEIPASS, hashFile)]
+else:  
+    extraArgs= ["--hashes", hashFile]
+    
 extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.EnhancementsList.RefreshCurrentGroup()]
 mainFolderNames = ["des", "btl", "evt", "fld", "map", "prg", "qst", "sys", "zzz", "mnu", "dlc"]
 subFolderNames = ["autotalk", "battle", "field", "menu", "quest", "system"]
-textFolderName="gb/game"
+textFolderName= "gb/game"
 
 def XC3Help():
     descData = scripts.XCRandomizer.PopupDescriptions.Description((900,900))

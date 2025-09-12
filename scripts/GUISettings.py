@@ -300,6 +300,7 @@ def Randomize(root, RandomizeButton, fileEntryVar, randoProgressDisplay, randoPr
         os.makedirs(outSpot, exist_ok=True) # Make the directory for them
         try:
             for file in BDATFiles:
+                # print("BDAT:", JsonOutput, "Exists:", os.path.exists(JsonOutput))
                 subprocess.run([bdat_path, "extract", f"{entrySpot}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
             for file in SubBDATFiles:
                 subprocess.run([bdat_path, "extract", f"{entrySpot}/{textFolderName}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)

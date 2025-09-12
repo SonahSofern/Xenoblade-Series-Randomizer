@@ -193,12 +193,14 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     GenRandomSeed(seedEntryVar) # Gen a random seed if you have no save data 
     randoSeedEntry = ttk.Entry(SeedFrame, textvariable=seedEntryVar)
     
+    # Bottom Menu Options
     fileOut = SavedOptions.SavedEntry("Output Bdats", outputDirVar)
     permLink = SavedOptions.SavedEntry("Permalink", permalinkVar)
     seedVar = SavedOptions.SavedEntry("Seed", seedEntryVar)
     SeedFrame.pack(anchor="w", padx=windowPadding, fill=X)
     seedDesc.pack(side='left')
     randoSeedEntry.pack(side='left', fill=X, expand=True)
+    
     # Save and Load Last Options
     EntriesToSave = ([fileOut, permLink, seedVar])
     SavedOptions.loadData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game)
