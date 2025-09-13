@@ -125,11 +125,7 @@ def RandomizeSkillEnhancements():
         
 def SlotCostZero(ids): # Used since art cancel gets put here
     for i in range(1, 10):
-        if i < 7:
-            TargetFile = f"./XC2/JsonOutputs/common/BTL_Skill_Dr_Table0{i}.json"
-        else:
-            TargetFile = f"./XC2/JsonOutputs/common/BTL_Skill_Dr_Table1{i}.json"
-        with open(TargetFile, 'r+', encoding='utf-8') as driverFiles:
+        with open(f"./XC2/JsonOutputs/common/BTL_Skill_Dr_Table{i:02}.json", 'r+', encoding='utf-8') as driverFiles:
             dFile = json.load(driverFiles)
             for item in dFile["rows"]:
                 if item["$id"] in ids: 

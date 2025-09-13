@@ -434,9 +434,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
                 status = "FAILED Randomization"
                 print(f"ERROR: {opt.name} | {error}")
                 print(traceback.format_exc()) # shows the full error
-                try:
-                    print(errorMsg)
-                except:
+                if errorMsg == None:
                     errorMsg = error
                 errorMsgObj.Header(f"Error: {opt.name}")
                 errorMsgObj.Text(errorMsg)
