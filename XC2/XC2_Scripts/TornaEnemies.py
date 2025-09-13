@@ -15,7 +15,7 @@ class TornaEnemyNormalDrops: # created to allow me to pass these objects easier
         self.itemreqs = Helper.MultiLevelListToSingleLevelList(input['Required Items'])
         self.summonedby = input['Summoned By']
         self.droptableids = [EnemyDropCounter]
-        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], max(rewardnumber - 1, 0), "-1"), 8, "0") # holds ids, -1 for progression, 0 for filler spots
+        self.randomizeditems = Helper.ExtendListtoLength(Helper.ExtendListtoLength([], max(rewardnumber, 0), "-1"), 8, "0") # holds ids, -1 for progression, 0 for filler spots
         if rewardnumber > 0:
             self.hasprogression = True
             self.randomizeditems = Helper.ExtendListtoLength(self.randomizeditems, 9, "-1")
@@ -1187,7 +1187,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': [26192, 473],
+        'Required Items': [25680, 473],
         'Enemy Drop Table IDs': [481]
     }
     HurricaneAnise = {
@@ -1199,7 +1199,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': [26193],
+        'Required Items': [25681],
         'Enemy Drop Table IDs': [482]
     }
     MesmerTlaloc = {
@@ -1211,7 +1211,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': [26194, 479],
+        'Required Items': [25682, 479],
         'Enemy Drop Table IDs': [483]
     }
     SentinelCarpathia = {
@@ -1223,7 +1223,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [],
-        'Required Items': [26195],
+        'Required Items': [25683],
         'Enemy Drop Table IDs': [484]
     }
     RavineBunnit = {
@@ -1283,7 +1283,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [1562],
-        'Required Items': [26195],
+        'Required Items': [25683],
         'Enemy Drop Table IDs': []
     }
     ApostleRhogul = {
@@ -1295,7 +1295,7 @@ def AdjustEnemyRequirements(Sidequests, Mainquests, Areas, DropQty): # the enemy
         'During Quest': [],
         'Quest Completion Pre-Req': [],
         'Summoned By': [1560],
-        'Required Items': [26193],
+        'Required Items': [25681],
         'Enemy Drop Table IDs': []
     }
     SteekyHox = {

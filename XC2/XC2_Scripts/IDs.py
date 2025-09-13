@@ -263,3 +263,5 @@ AegaeonKey = [25630]
 
 # Level Up Unlocks (no longer used, kept in for reference)
 LevelUpTokens = Helper.InclRange(25631,25726) # 96 tokens, we assume we get 2 levels from intro fight (stats required to beat fight?), and start at lv 1.
+
+KeyItemIDsforInfo = Helper.InclRange(25632, 25683)

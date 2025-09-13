@@ -79,9 +79,12 @@ def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
             top.focus()
             top.deiconify() # unminimizes
             return  # If it exists, don't create a new one
-        
+
+    mainwindow = root.winfo_toplevel()
+
     myDescription:Description = descData()
     top = Toplevel(root, padx=10, pady=10)  # Create a new top-level window
+    top.attributes(alpha=0.0)
     top.title(optionName)
     scripts.GUISettings.RootsForStyling.append(top)
     OpenWindows.append(top)
@@ -125,16 +128,20 @@ def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
             descObj.SpecialPack()
 
     scripts.GUISettings.ResizeWindow(top, InnerFrame, myDescription.bonusWidth)
-    center(top)
+    center(top, mainwindow)
+    top.attributes(alpha = 1.0)
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
 
             
-def center(win):
-    win.update_idletasks()
+def center(win, mainwindow):
+    win.update()
+    mainwindow.update()
     width = win.winfo_width()
     height = win.winfo_height()
-    screen_w = win.winfo_screenwidth()
-    screen_h = win.winfo_screenheight()
-    x = (screen_w // 2) - (width // 2)
-    y = (screen_h // 2) - (height // 2)
+    parentwidth = mainwindow.winfo_width()
+    parentheight = mainwindow.winfo_height()
+    parentxcoord = mainwindow.winfo_x()
+    parentycoord = mainwindow.winfo_y()
+    x = parentxcoord + (parentwidth - width) // 2
+    y = parentycoord + (parentheight - height) // 2
     win.geometry(f"+{x}+{y}")

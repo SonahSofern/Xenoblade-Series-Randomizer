@@ -4,6 +4,7 @@ from XC2.XC2_Scripts.IDs import Arts, AutoAttacks
 from XC2.XC2_Scripts import Options
 import scripts.PopupDescriptions
 from XC2.XC2_Scripts._Arts import *
+from scripts import Helper, JSONParser
 
 def DriverArtRandomizer():
     with open("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as artFile:
@@ -92,6 +93,8 @@ def DriverArtRandomizer():
         artFile.seek(0)
         artFile.truncate()
         json.dump(artData, artFile, indent=2, ensure_ascii=False)
+
+    TornaFailsafes()
  
 def CopyArt(artData, copyID, artID): # Copies all relevant effects of the art for shared captions
     for art in artData["rows"]:
@@ -292,7 +295,66 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False, enhancementK
         ArtsFile.seek(0)
         ArtsFile.truncate()
         json.dump(artsData, ArtsFile, indent=2, ensure_ascii=False)
-        
+
+
+def TornaFailsafes(): # there are a couple Torna quests which require you to driver combo enemies. We need to guarantee these are completeable, even when reactions are randomized
+    # it should be possible to do to lora art (break) -> vanguard swap to jin (topple) -> vanguard swap to lora (launch) -> vanguard swap to haze (smash), but in case it isn't, then I need to make this code check for if jin got assigned the topple, then don't assign the launch to lora or smash to haze, and same for if lora got assigned the launch, don't assign the smash to haze 
+    DriverCoachingIDstoCheck = Helper.InclRange(582, 631)
+    FurtherDriverCoachingIDstoCheck = Helper.InclRange(582, 671, Helper.InclRange(632, 641))
+    ChosenFailsafeBreak = 587
+    ChosenFailsafeTopple = random.choice([601, 621])
+    ChosenFailsafeLaunch = random.choice([615, 671, 591])
+    ChosenFailsafeSmash = random.choice([611, 651, 631])
+    FoundBreak, FoundTopple, FoundLaunch, FoundSmash = 0,0,0,0
+    with open("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            if FoundBreak + FoundTopple + FoundLaunch + FoundSmash == 4:
+                break
+            if row["$id"] in DriverCoachingIDstoCheck:
+                index = 1
+                while index < 17 and row[f"HitFrm{index}"] != 0:
+                    CurReaction = row[f"ReAct{index}"]
+                    match CurReaction:
+                        case 1:
+                            FoundBreak = 1
+                        case 2:
+                            FoundTopple = 1
+                    index += 1
+            if row["$id"] in FurtherDriverCoachingIDstoCheck:
+                index = 1
+                while index < 17 and row[f"HitFrm{index}"] != 0:
+                    CurReaction = row[f"ReAct{index}"]
+                    match CurReaction:
+                        case 3:
+                            FoundLaunch = 1
+                        case 4:
+                            FoundSmash = 1
+                    index += 1
+
+        for row in data["rows"]:
+            if FoundBreak + FoundTopple + FoundLaunch + FoundSmash == 4:
+                break
+            else:
+                if row["$id"] == ChosenFailsafeBreak and FoundBreak == 0:
+                    row["ReAct2"] = 1
+                    FoundBreak = 1
+                elif row["$id"] == ChosenFailsafeTopple and FoundTopple == 0:
+                    row["ReAct1"] = 2
+                    FoundTopple = 1
+                elif row["$id"] == ChosenFailsafeLaunch and FoundLaunch == 0: # this one either has the launch on 2nd or 1st hit, depending on the art that gets chosen.
+                    index = 1
+                    for index in range(1, 15):
+                        if row[f"HitFrm{index + 1}"] == 0:
+                            row[f"ReAct{index}"] = 3
+                            FoundLaunch = 1
+                            break
+                elif row["$id"] == ChosenFailsafeSmash and FoundSmash == 0:
+                    row["ReAct1"] = 4
+                    FoundSmash = 1
+                    
+        JSONParser.CloseFile(data, file)
+
         
 def DriverArtDescription():
     desc= scripts.PopupDescriptions.Description()

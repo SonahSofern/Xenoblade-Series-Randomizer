@@ -282,6 +282,7 @@ def ResizeWindow(top, innerFrame, padx = 37):
     w = innerFrame.winfo_width() + padx
     h = min(innerFrame.winfo_height() + 20, 700)
     top.geometry(f"{w}x{h}")
+    top.update()
  
     
 def Randomize(root, RandomizeButton, fileEntryVar, randoProgressDisplay, randoProgressFill, SettingsButton, pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[], isOneFile = False):
@@ -340,7 +341,6 @@ def Randomize(root, RandomizeButton, fileEntryVar, randoProgressDisplay, randoPr
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
             pb['value'] = 100
-            time.sleep(1.5)
             popup()
             randoProgressFill.pack_forget()
             pb.pack_forget()
@@ -434,7 +434,9 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
                 status = "FAILED Randomization"
                 print(f"ERROR: {opt.name} | {error}")
                 print(traceback.format_exc()) # shows the full error
-                if errorMsg == None:
+                try:
+                    print(errorMsg)
+                except:
                     errorMsg = error
                 errorMsgObj.Header(f"Error: {opt.name}")
                 errorMsgObj.Text(errorMsg)

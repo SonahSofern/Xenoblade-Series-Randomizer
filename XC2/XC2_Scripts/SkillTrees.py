@@ -4,10 +4,10 @@ from XC2.XC2_Scripts import Options
 from scripts import PopupDescriptions
 
 def RandomizeSkillEnhancements():
-    DefaultArtsCancelSlots, DefaultXSlots, DefaultYSlots, DefaultBSlots  = [12,55,82,102,131,161], [1,51,61,91,121,162], [11,31,71,101,141,171], [21,52,62,92,122,151]
+    DefaultArtsCancelSlots, DefaultXSlots, DefaultYSlots, DefaultBSlots  = [12,55,82,102,131,161,192,221,251], [1,51,61,91,121,162,181,222,241], [11,31,71,101,141,171,191,231,261], [21,52,62,92,122,151,201,211,242]
     ArtsCancelSlots, X_Slots, Y_Slots, B_Slots = [], [], [], []
-    Rex, Nia, Tora, Vandham, Morag, Zeke = Helper.InclRange(1, 30), Helper.InclRange(31, 60), Helper.InclRange(61, 90), Helper.InclRange(91, 120), Helper.InclRange (121, 150), Helper.InclRange(151, 180)
-    DriverList = [Rex, Nia, Tora, Vandham, Morag, Zeke]
+    Rex, Nia, Tora, Vandham, Morag, Zeke, Lora, Addam, Hugo = Helper.InclRange(1, 30), Helper.InclRange(31, 60), Helper.InclRange(61, 90), Helper.InclRange(91, 120), Helper.InclRange (121, 150), Helper.InclRange(151, 180), Helper.InclRange(181, 210), Helper.InclRange(211, 240), Helper.InclRange(241, 270)
+    DriverList = [Rex, Nia, Tora, Vandham, Morag, Zeke, Lora, Addam, Hugo]
     isVanilla = not Options.DriverSkillTreesOption_NonstandardSkills.GetState()
     isEarlyArtsCancel = Options.DriverSkillTreesOption_EarlyArtsCancel.GetState()
     isEarlyXYB = Options.DriverSkillTreesOption_EarlyXYBAttack.GetState()
@@ -124,8 +124,12 @@ def RandomizeSkillEnhancements():
         json.dump(enhanceFile, enhancementFile, indent=2, ensure_ascii=False)
         
 def SlotCostZero(ids): # Used since art cancel gets put here
-    for i in range(1, 7):
-        with open(f"./XC2/JsonOutputs/common/BTL_Skill_Dr_Table0{i}.json", 'r+', encoding='utf-8') as driverFiles:
+    for i in range(1, 10):
+        if i < 7:
+            TargetFile = f"./XC2/JsonOutputs/common/BTL_Skill_Dr_Table0{i}.json"
+        else:
+            TargetFile = f"./XC2/JsonOutputs/common/BTL_Skill_Dr_Table1{i}.json"
+        with open(TargetFile, 'r+', encoding='utf-8') as driverFiles:
             dFile = json.load(driverFiles)
             for item in dFile["rows"]:
                 if item["$id"] in ids: 
@@ -133,6 +137,7 @@ def SlotCostZero(ids): # Used since art cancel gets put here
             driverFiles.seek(0)
             driverFiles.truncate()
             json.dump(dFile, driverFiles, indent=2, ensure_ascii=False)
+
 
 def BladeSkillTreeShortening(): #how do you do, fellow skill tree randomization functions
     JSONParser.ChangeJSONLine(["common/CHR_Bl.json"],[0],Helper.StartsWith("ArtsAchievement",1,3) + Helper.StartsWith("SkillAchievement",1,3) + Helper.StartsWith("FskillAchivement",1,3) + ["KeyAchievement"], 15, replaceAll=True) # 15 is a trust condition and sets everything to that, so its all on trust with this
