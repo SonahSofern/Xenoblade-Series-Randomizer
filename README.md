@@ -21,4 +21,4 @@ https://gitlab.com/damysteryman/XC2SaveNETThingy/-/tags/r6.1
 https://github.com/roccodev/xcnx-file-loader/releases/tag/2.0.1
 
 # Setup
-Guides can be found in the randomizer program for each game, a button with this icon ☰.
+Guides can be found in the randomizer program for each game by clicking the help button.

@@ -26,9 +26,6 @@ class Gem:
         GemList.append(self)
 GemList:list[Gem] = []
             
-
-
-
      
 def StandardGems(gemData, gemMSData, gemHelpMSData):    
     badEffects = [60, 0, 83, 84, 87, 82, 44, 61, 194, 231, 161]

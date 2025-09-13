@@ -24,7 +24,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                 rscData = json.load(rscFile)
                 eneData = json.load(eneFile)
                 
-                eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, permanentBandaids=[lambda: EarthBreathNerf(), lambda: AeshmaCoreHPNerf(), lambda: GortOgreUppercutRemoval()], actKeys=actKeys)
+                eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, permanentBandaids=[lambda: EarthBreathNerf(), lambda: AeshmaCoreHPNerf(paramData), lambda: GortOgreUppercutRemoval(paramData)], actKeys=actKeys)
                 
                 if StaticEnemyData == []:
                     StaticEnemyData = eRando.GenEnemyData()
@@ -67,13 +67,13 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                 JSONParser.CloseFile(eRando.paramData, paramFile)
                 JSONParser.CloseFile(eRando.rscData, rscFile)
 
-def CreateBlade(enBlade, oldEn, newEn, eRando:e.EnemyRandomizer):
+def CreateBlade(enBlade, oldEn, newEn, eRando:e.EnemyRandomizer): # Because there is only 1 blade referenced for each enemy we have to create new blades (Since blades are not referenced in gimmick files it is fine)
     newBlade = copy.deepcopy(enBlade)
     newID =  len(eRando.arrangeData["rows"]) + 1
     newBlade["$id"] = newID
     eRando.arrangeData["rows"].append(newBlade)
     newEn["EnemyBladeID"] = newID
-    eRando.ActTypeFix(newBlade, oldEn) # Because there is only 1 blade referenced for each enemy we have to create new blades (Since blades are not referenced in gimmick files it is fine)
+    eRando.ActTypeFix(newBlade, oldEn)
     EnemySizeHelper(oldEn, newBlade, eRando)
 
 def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer): # Probably want to keep enemy scale of original in future
@@ -153,13 +153,11 @@ def CloneEnemiesDefeatCondition(oldEn, newEn): # Forces all copies of enemies th
                 break
         JSONParser.CloseFile(questData, questFile)
 
-def GortOgreUppercutRemoval(): # Gort 2's Ogre Uppercut seems to be buggy, reported to crash game in certain situations, so it's being removed for the time being.
-    with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 1434:
-                row["ArtsNum4"] = 963 # replaced Ogre Uppercut with a second instance of Ogre Flame
-        JSONParser.CloseFile(data, file)
+def GortOgreUppercutRemoval(paramData): # Gort 2's Ogre Uppercut seems to be buggy, reported to crash game in certain situations, so it's being removed for the time being.
+    for row in paramData["rows"]:
+        if row["$id"] == 1434:
+            row["ArtsNum4"] = 963 # replaced Ogre Uppercut with a second instance of Ogre Flame
+            break
 
 def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy happens to show up early. Nerfed by 3/4ths.
     with open("XC2/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as file:
@@ -205,13 +203,10 @@ def ForcedWinFights(fights = []):
                 row["ReducePCHP"] = 1
         JSONParser.CloseFile(data, file)
 
-def AeshmaCoreHPNerf(): # Aeshma is almost unkillable with its regen active
-    with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 318:
-                row["HpMaxRev"] = 1500 # nerfed hp by 5/6ths
-        JSONParser.CloseFile(data, file)
+def AeshmaCoreHPNerf(paramData): # Aeshma is almost unkillable with its regen active
+    for row in paramData["rows"]:
+        if row["$id"] == 318:
+            row["HpMaxRev"] = 1500 # nerfed hp by 5/6ths
     
 def AionRoomFix(origEn, newEn, eRando:e.EnemyRandomizer): # Aion sits really far down so raise enemies up
     AionIDs = [265, 275]
