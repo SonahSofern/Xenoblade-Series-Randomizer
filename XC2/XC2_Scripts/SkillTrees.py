@@ -124,7 +124,7 @@ def RandomizeSkillEnhancements():
         json.dump(enhanceFile, enhancementFile, indent=2, ensure_ascii=False)
         
 def SlotCostZero(ids): # Used since art cancel gets put here
-    for i in range(1, 10):
+    for i in [1, 2, 3, 4, 5, 6, 17, 18, 19]:
         with open(f"./XC2/JsonOutputs/common/BTL_Skill_Dr_Table{i:02}.json", 'r+', encoding='utf-8') as driverFiles:
             dFile = json.load(driverFiles)
             for item in dFile["rows"]:
