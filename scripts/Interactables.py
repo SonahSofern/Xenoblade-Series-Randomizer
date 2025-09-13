@@ -64,7 +64,7 @@ class Option():
         if self.descData == None:
             text = self.desc
         else:
-            text = f"{self.desc} 🗗"
+            text = f"{self.desc} 🛈"
         
         # Description Label or Button
         if self.descData != None:
