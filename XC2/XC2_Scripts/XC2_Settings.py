@@ -23,7 +23,7 @@ subFolderNames = ["common_ms"]
 def XC2Help():
     descData = scripts.XCRandomizer.PopupDescriptions.Description((900,900))
     descData.Header("Info")
-    descData.Text(f"This is version {Version} of the randomizer project for Xenoblade Chronicles 2.\ncapable of randomizing: Enemies, Accessories, Blades, Drivers, Loot and much more!", anchor="w")
+    descData.Text(f"This is version {Version} of the randomizer project for Xenoblade Chronicles 2.\nCapable of randomizing: Enemies, Accessories, Blades, Drivers, Loot and much more!", anchor="w")
     descData.Text("This program is tested on the combined XC2 + DLC (Torna) 2.1.0 English Version of the game. It is recommended you also use that version of the game.\n\nPlease report bugs or suggestions to our discord (link on github) so we can make the randomizer better!", anchor="w")
     descData.Header("Setup")
     descData.Tag("Requirements")
