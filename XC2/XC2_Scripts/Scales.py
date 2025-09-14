@@ -1,6 +1,6 @@
 import json, random
 from XC2.XC2_Scripts import Options, IDs
-from scripts import Helper
+from scripts import Helper, JSONParser
 
 
 def BladeScales():
@@ -35,7 +35,7 @@ def NPCScales():
 
 
 def EnemyScales():
-    EnemyScales= [10,20,30,40,50,60,70,80,90,110,120,130,140,160,180,200,400,600]
+    EnemyScales = [10,20,30,40,50,60,70,80,90,110,120,130,140,160,180,200,400,600]
     
     with open(f"./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as enFile:
         enData = json.load(enFile)
@@ -43,9 +43,5 @@ def EnemyScales():
         for en in enData["rows"]:
             if not Helper.OddsCheck(odds): # Check spinbox
                 continue
-            if en["$id"] in IDs.BossMonsters: # Dont make bosses bigger or smaller red rings
-                continue
             en["Scale"] = random.choice(EnemyScales)  # Make our selection
-        enFile.seek(0)
-        enFile.truncate()
-        json.dump(enData, enFile, indent=2, ensure_ascii=False)
+        JSONParser.CloseFile(enData, enFile)

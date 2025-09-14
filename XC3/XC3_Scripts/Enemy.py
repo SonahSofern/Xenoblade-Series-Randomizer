@@ -12,7 +12,7 @@ from scripts import Helper, JSONParser, PopupDescriptions, Enemies as Enemy
 StaticEnemyData:list[Enemy.EnemyGroup] = []
 
                                                                                                                                                                                                                                                                                                                 
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSizeOption:Options.Option):
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSizeOption:Options.Option, isBossGroupBalancing):
     global StaticEnemyData
     GroupFightViolations = GetGroupFightViolations()
     GroupFightIDs = GetGroupFightIDs()
@@ -42,7 +42,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                 
                     eRando.ActTypeFix(newEn, en) # Flying Enemies and some enemies in Erythia will still fall despite act type fix
                     
-                    if isMatchSize:
+                    if isBossGroupBalancing:
                         eRando.BalanceFight(en, newEn, GroupFightIDs, GroupFightViolations)
                         
                     if isMatchSizeOption.GetState():
