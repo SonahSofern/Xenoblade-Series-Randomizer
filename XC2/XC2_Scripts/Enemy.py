@@ -86,10 +86,8 @@ def RedRingRemoval():
             popData = json.load(popFile)
             for pop in popData["rows"]:
                 pop["battlelockname"] = 0
-                
+            JSONParser.CloseFile(popData, popFile)
         
-
-
 def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     Massive = 3
     Large = 2
