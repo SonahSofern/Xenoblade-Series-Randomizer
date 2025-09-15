@@ -360,7 +360,7 @@ def Randomize(root, RandomizeButton, fileEntryVar, randoProgressDisplay, randoPr
 def AddFileToOutput(output, files):
     try:
         for file in files:
-            outputFolder = os.path.join(os.path.dirname(output), file.location)
+            outputFolder = os.path.join(output, file.location)
             os.makedirs(outputFolder, exist_ok=True)
 
             src = random.choice(file.files)

@@ -11,8 +11,9 @@ def ShowTitleScreenText():
 seedEntryVar = scripts.XCRandomizer.StringVar()
 permalinkVar = scripts.XCRandomizer.StringVar()
 
-Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../", game= "XC3")
-Skyline = scripts.XCRandomizer.FilePlacer(["Loader/skyline"], "", game= "XC3")
+Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../../", game= "XC3")
+Skyline = scripts.XCRandomizer.FilePlacer(["Loader/skyline"], "../", game= "XC3")
+Titlescreen = scripts.XCRandomizer.FilePlacer(["Images/Logos/original.wilay"],  "../menu/image", "mnu001_cont01_en.wilay", "XC3")
 
 hashFile = "XC3/Loader/xbc3Hashes.txt"
 if scripts.XCRandomizer.isOneFile:
