@@ -39,8 +39,8 @@ class Violation:
         newLv = max(enemy["Lv"] + self.lvDiff, levelCap)
         # print(f"Resolved violation from level {enemy["Lv"]} to level: {newLv}")
         enemy["Lv"] = newLv
-
-
+        
+        
 class EnemyRandomizer():
     def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, scaleKey = "Scale", permanentBandaids = [], actKeys = [], duringRandomizationBandaids = []):
         # Enemy Groups

@@ -90,9 +90,7 @@ def DriverArtRandomizer():
         CopyArt(artData,306,5)
         CopyArt(artData,308,6)
         CopyArt(artData,307,7)
-        artFile.seek(0)
-        artFile.truncate()
-        json.dump(artData, artFile, indent=2, ensure_ascii=False)
+        JSONParser.CloseFile(artData, artFile)
 
     TornaFailsafes()
  
@@ -165,8 +163,6 @@ def Enhancements(art):
     enh = random.choice(Enhancement.ids) # Choose the inner group
     for i in range(1,7):
         art[f"Enhance{i}"] = enh[i-1]
-
-
 
 def Buffs(art):
     buff = random.choice(BuffGroup)
@@ -287,14 +283,9 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False, enhancementK
                                 break
                         desc["name"] = TotalArtDescription
                         break
-
                     
-            DescFile.seek(0)
-            DescFile.truncate()
-            json.dump(descData, DescFile, indent=2, ensure_ascii=False)             
-        ArtsFile.seek(0)
-        ArtsFile.truncate()
-        json.dump(artsData, ArtsFile, indent=2, ensure_ascii=False)
+            JSONParser.CloseFile(descData,DescFile)          
+        JSONParser.CloseFile(artsData,ArtsFile)
 
 
 def TornaFailsafes(): # there are a couple Torna quests which require you to driver combo enemies. We need to guarantee these are completeable, even when reactions are randomized
