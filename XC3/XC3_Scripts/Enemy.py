@@ -42,6 +42,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                 
                     eRando.ActTypeFix(newEn, en) # Flying Enemies and some enemies in Erythia will still fall despite act type fix
                     
+                    HPLimitFix(en, newEn)
+                    
                     if isBossGroupBalancing:
                         eRando.BalanceFight(en, newEn, GroupFightIDs, GroupFightViolations)
                         
@@ -58,6 +60,10 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                 JSONParser.CloseFile(eneData, eneFile)
                 JSONParser.CloseFile(paramData, paramFile)
                 JSONParser.CloseFile(rscData, rscFile)
+
+def HPLimitFix(en, newEn):
+    # New enemy takes old enemy hp limit
+    pass
 
 def EnemySizeHelper(oldEn, newEn, eRando:Enemy.EnemyRandomizer):
     Massive = 3

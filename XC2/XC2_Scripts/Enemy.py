@@ -126,6 +126,7 @@ def GetGroupFightViolations():
     Jin = e.Violation([1754, 231, 241, 244, 253, 272], -10)
     Akhos = e.Violation([212, 238, 267])
     Malos = e.Violation([214, 243, 245, 268, 273], -10)
+    Malos = e.Violation([214, 243, 245, 268, 273], [("HpMaxRev", 50)]) # Need to figure a way to change the number here based on enemy count or whatever formula you desire
     Patroka = e.Violation([223, 239, 270])
     Mikhail = e.Violation([225, 271])
     Aeshma = e.Violation([232,233,234], -10)

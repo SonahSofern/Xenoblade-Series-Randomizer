@@ -20,7 +20,7 @@ class EnemyGroup():
             self.RefreshCurrentGroup()
 
 class Violation:
-    def __init__(self, ids, lvDiff = -5):
+    def __init__(self, ids, params):
         """
         Initialize a Violation.
         Args:
@@ -28,17 +28,7 @@ class Violation:
             lvDiff (int): The number of levels this enemy loses/gains when placed in a group fight.
         """        
         self.ids = ids
-        self.lvDiff = lvDiff
-        
-    def ResolveViolation(self, enemy):
-        if self.lvDiff < 0: # If we are losing levels only let them lose up to half their original level
-            mult = 0.6
-        else:
-            mult = 1.25
-        levelCap = max(int(enemy["Lv"] * mult), 1)
-        newLv = max(enemy["Lv"] + self.lvDiff, levelCap)
-        # print(f"Resolved violation from level {enemy["Lv"]} to level: {newLv}")
-        enemy["Lv"] = newLv
+        self.params = params
         
         
 class EnemyRandomizer():
@@ -115,7 +105,7 @@ class EnemyRandomizer():
             return
         for vio in violationList:
             if newEn["$id"] in vio.ids:
-                vio.ResolveViolation(oldEn)
+                self.ChangeStats(vio.ids, vio.params)
                 break
             
     def FindRSC(self, enemy):
