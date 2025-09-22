@@ -192,8 +192,10 @@ class EnemyRandomizer():
                 handledTargetEn.append(target)
             else:
                 for en in self.arrangeData["rows"]:
-                    if en["$id"] in targetEn:
+                    if en["$id"] == target:
                         handledTargetEn.append(en)
+                        break
+                        
         
         for en in handledTargetEn:
             param = self.FindParam(en)
