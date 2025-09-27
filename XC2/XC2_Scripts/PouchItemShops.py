@@ -4,13 +4,13 @@ from scripts import Helper, PopupDescriptions
 def RandoPouchShops():
     ValidReplacements = []
     if Options.PouchItemShopOption_Accessories.GetState():
-        ValidReplacements.extend(IDs.Accessories)
+        ValidReplacements.extend(IDs.AccessoryIDs)
     if Options.PouchItemShopOption_TornaAccessories.GetState():
         ValidReplacements.extend(IDs.TornaAccessories)
     if Options.PouchItemShopOption_WeaponChips.GetState():
-        ValidReplacements.extend(IDs.WeaponChips)
+        ValidReplacements.extend(IDs.WeaponChipIDs)
     if Options.PouchItemShopOption_AuxCores.GetState():
-        ValidReplacements.extend(IDs.AuxCores)
+        ValidReplacements.extend(IDs.AuxCoreIDs)
     if Options.PouchItemShopOption_RefinedAuxCores.GetState():
         ValidReplacements.extend(IDs.RefinedAuxCores)
     if Options.PouchItemShopOption_CoreCrystals.GetState():

@@ -22,3 +22,10 @@ https://github.com/roccodev/xcnx-file-loader/releases/tag/2.0.1
 
 # Setup
 Guides can be found in the randomizer program for each game by clicking the ⓘ button.
+
+# Build from source (Only if you want to change the rando program)
+Download the source code from your desired location.
+You will be able to run the program by running the Randomizer.py file in the root.
+There are some required packages to download, use the error messages to get what packages you need.
+In order to randomize you will have to extract the bdats of the game (details can be found in various places, or you can ask in the discord) and put the folder of them into the root of the game you are targeting. For example,
+RandomizerRootFolder/XC2/bdat

@@ -1,7 +1,7 @@
 from scripts import Helper, JSONParser, PopupDescriptions
 from XC2.XC2_Scripts import EnemyRandoLogic, DebugLog, CoreCrystalAdjustments, Options, TutorialShortening
 import random, time, math, json
-from XC2.XC2_Scripts.IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, Accessories, WeaponChips, AuxCores, RefinedAuxCores, CollectionPointMaterials, TornaAccessories
+from XC2.XC2_Scripts.IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, AccessoryIDs, WeaponChipIDs, AuxCoreIDs, RefinedAuxCores, CollectionPointMaterials, TornaAccessories
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
@@ -437,7 +437,7 @@ def RaceModeLootChanges(NGPlusBladeCrystalIDs):
     AuxCoreEnh = Options.AuxCoresOption.GetState()
     if DriverAccesEnh: # If we have the wacky enhancements:
         CommonDAcc, RareDAcc, LegDAcc = Helper.FindValues("./XC2/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [0], "$id"), Helper.FindValues("./XC2/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [1], "$id"), Helper.FindValues("./XC2/JsonOutputs/common/ITM_PcEquip.json", ["Rarity"], [2], "$id")
-        CommonDAcc, RareDAcc, LegDAcc = [x for x in CommonDAcc if x in Accessories], [x for x in RareDAcc if x in Accessories], [x for x in LegDAcc if x in Accessories]
+        CommonDAcc, RareDAcc, LegDAcc = [x for x in CommonDAcc if x in AccessoryIDs], [x for x in RareDAcc if x in AccessoryIDs], [x for x in LegDAcc if x in AccessoryIDs]
         CommonDAcc, RareDAcc, LegDAcc = [x for x in CommonDAcc if x not in TornaAccessories], [x for x in RareDAcc if x not in TornaAccessories], [x for x in LegDAcc if x not in TornaAccessories]
         random.shuffle(CommonDAcc)
         random.shuffle(RareDAcc)
@@ -1122,7 +1122,7 @@ def ChestTypeMatching():  # Chest type matches Contents
                                 break
                     if not rowcatfound:
                         for j in range(1, 9):
-                            if row[f"itm{j}ID"] in Accessories + WeaponChips + AuxCores + RefinedAuxCores:
+                            if row[f"itm{j}ID"] in AccessoryIDs + WeaponChipIDs + AuxCoreIDs + RefinedAuxCores:
                                 row["RSC_ID"] = ChestTierListIDs[3]
                                 rowcatfound = True
                                 break

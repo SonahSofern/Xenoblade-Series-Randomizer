@@ -1,5 +1,6 @@
 import json, random,  math,  time
-from XC2.XC2_Scripts import IDs, EnemyRandoLogic, RaceMode,Options,FieldSkillAdjustments
+from XC2.XC2_Scripts import IDs,Options
+from XC2.XC2_Scripts.Race_Mode import RaceMode
 from XC2.XC2_Scripts.Enhancements import *
 from XC2.XC2_Scripts.CharacterRandomization import ReplacementCharacter2Original
 from scripts import Helper

@@ -1,5 +1,7 @@
 import json, random,  math,  time
-from XC2.XC2_Scripts import IDs, EnemyRandoLogic, RaceMode,Options,FieldSkillAdjustments, UMHuntDebugFunctions, UMHuntShopCreation, TutorialShortening
+from XC2.XC2_Scripts import IDs, EnemyRandoLogic, Options,FieldSkillAdjustments, TutorialShortening
+from XC2.XC2_Scripts.Race_Mode import RaceMode
+from XC2.XC2_Scripts.UM_Hunt import UMHuntDebugFunctions, UMHuntShopCreation
 from XC2.XC2_Scripts.Enhancements import *
 from scripts import Helper, JSONParser, PopupDescriptions
 

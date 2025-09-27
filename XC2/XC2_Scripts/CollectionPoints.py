@@ -4,13 +4,13 @@ from scripts import Helper, PopupDescriptions
 def RandoCollectionPoints():
     ValidReplacements = []
     if Options.CollectionPointsOption_Accessories.GetState():
-        ValidReplacements.extend(IDs.Accessories)
+        ValidReplacements.extend(IDs.AccessoryIDs)
     if Options.CollectionPointsOption_TornaAccessories.GetState():
         ValidReplacements.extend(IDs.TornaAccessories)
     if Options.CollectionPointsOption_WeaponChips.GetState():
-        ValidReplacements.extend(IDs.WeaponChips)
+        ValidReplacements.extend(IDs.WeaponChipIDs)
     if Options.CollectionPointsOption_AuxCores.GetState():
-        ValidReplacements.extend(IDs.AuxCores)
+        ValidReplacements.extend(IDs.AuxCoreIDs)
     if Options.CollectionPointsOption_RefinedAuxCores.GetState():
         ValidReplacements.extend(IDs.RefinedAuxCores)
     if Options.CollectionPointsOption_CoreCrystals.GetState():
