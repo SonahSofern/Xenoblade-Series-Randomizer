@@ -6,10 +6,10 @@ StaticEnemyData:list[e.EnemyGroup] = []
                                                                                                                                                                                                                                                                                                           
 def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isVanillaAggro, matchSize:Interactables.Option):
     global StaticEnemyData
-    GroupFightViolations = GetGroupFightViolations()
-    GroupFightIDs = GetGroupFightIDs()
-    SoloFightViolations = GetSoloFightViolations()
-    soloFightIDs = [179, 182, 184, 185, 186, 187, 189, 190, 258, 260, 262, 256, 604] # Includes both 1 and 2 person party fights
+    # GroupFightViolations = GetGroupFightViolations()
+    # GroupFightIDs = GetGroupFightIDs()
+    # SoloFightViolations = GetSoloFightViolations()
+    # soloFightIDs = [179, 182, 184, 185, 186, 187, 189, 190, 258, 260, 262, 256, 604] # Includes both 1 and 2 person party fights
     ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev', "HpOver"]
     aggroKeys = ['Detects', 'SearchRange', 'SearchAngle', 'SearchRadius', 'BatInterval', 'BatArea', 'BatAreaType']
     isMatchSize = matchSize.GetState()
@@ -35,10 +35,10 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                     
                     newEn = eRando.CreateRandomEnemy(StaticEnemyData)
                   
-                    if Options.BossEnemyOption_Solo.GetState():
-                        eRando.BalanceFight(oldEn, newEn, soloFightIDs, SoloFightViolations) 
-                    if Options.BossEnemyOption_Group.GetState():
-                        eRando.BalanceFight(oldEn, newEn, GroupFightIDs, GroupFightViolations) 
+                    # if Options.BossEnemyOption_Solo.GetState():
+                    #     eRando.BalanceFight(oldEn, newEn, soloFightIDs, SoloFightViolations) 
+                    # if Options.BossEnemyOption_Group.GetState():
+                    #     eRando.BalanceFight(oldEn, newEn, GroupFightIDs, GroupFightViolations) 
                         
                     if isMatchSize:
                         EnemySizeHelper(oldEn, newEn, eRando)
@@ -126,7 +126,7 @@ def GetGroupFightViolations():
     Jin = e.Violation([1754, 231, 241, 244, 253, 272], -10)
     Akhos = e.Violation([212, 238, 267])
     Malos = e.Violation([214, 243, 245, 268, 273], -10)
-    Malos = e.Violation([214, 243, 245, 268, 273], [("HpMaxRev", 50)]) # Need to figure a way to change the number here based on enemy count or whatever formula you desire
+    Malos = e.Violation([214, 243, 245, 268, 273], [("Lv", 15)])
     Patroka = e.Violation([223, 239, 270])
     Mikhail = e.Violation([225, 271])
     Aeshma = e.Violation([232,233,234], -10)

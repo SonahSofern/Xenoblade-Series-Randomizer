@@ -25,7 +25,7 @@ class Violation:
         Initialize a Violation.
         Args:
             ids (list): List of IDs that represent the violation enemy, from CHR_EnArrange.
-            lvDiff (int): The number of levels this enemy loses/gains when placed in a group fight.
+            params list(tuple): A llist of tuples containting stat key and its new value (HpMaxRev, 10)
         """        
         self.ids = ids
         self.params = params

@@ -1364,7 +1364,7 @@ def ChangeReqItemRarities(): # we want the useful items that get dropped from ch
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
     
-    WeaponChipIDs.ChangeWeaponRankNames() # we want to make the weapon chip names have their ranks too
+    WeaponChips.ChangeWeaponRankNames() # we want to make the weapon chip names have their ranks too
 
 def GildedCheckNames():
     # current problems:
