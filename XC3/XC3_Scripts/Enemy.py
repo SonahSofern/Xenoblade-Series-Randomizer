@@ -36,25 +36,28 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                 for en in eneData["rows"]:
                     if eRando.FilterEnemies(en, targetGroup):
                         continue 
-                    
+                        
                     newEn = eRando.CreateRandomEnemy(StaticEnemyData)
                 
                     eRando.ActTypeFix(newEn, en) # Flying Enemies and some enemies in Erythia will still fall despite act type fix
                     
                     HPLimitFix(en, newEn, eRando)
                     
-                    if isBossGroupBalancing:
-                        eRando.BalanceFight(en, newEn, GroupFightIDs, GroupFightViolations)
+                    # if isBossGroupBalancing:
+                    #     eRando.BalanceFight(en, newEn, GroupFightIDs, GroupFightViolations)
                         
                     if isMatchSize:
                         EnemySizeHelper(en, newEn, eRando)
+                        
+                    IntroFightBalances(en, newEn, eRando)
                     
                     Helper.CopyKeys(en, newEn, ignoreKeys)
                         
                 for group in StaticEnemyData:
                     group.RefreshCurrentGroup()
                 
-                Bandaids(eRando)
+                if StaticEnemyData == []:
+                    Bandaids(eRando)
                 
                 JSONParser.CloseFile(eneData, eneFile)
                 JSONParser.CloseFile(paramData, paramFile)
@@ -100,23 +103,34 @@ def GetGroupFightViolations():
 def GetGroupFightIDs():
     return []
 
-def IntroFightBalances(eRando:Enemy.EnemyRandomizer):
-    introFights = [449, 450, 451, 452, 453, 454, 455]
+def BreakTutorial(eRando:Enemy.EnemyRandomizer): # Tutorial that requires an enemy to be break, topple, dazed
+    breakTutorial = [738]
+    eRando.ChangeStats(breakTutorial, [("RstBreak", 0)])
+
+def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
+    introTutorial = [449, 450, 451, 452, 453, 454, 455]
     bossIntroFights = [456, 457]
     returningToColony =  [737 ,739]
     breakTutorial = [738]
     Piranhax = [588]
     DrifterRopl = [458]
     StealthShip = [460,461,462]
-    eRando.ChangeStats(introFights, [("StRevHp", 5), ("StRevStr", 50), ("StRevHeal", 50)])
-    eRando.ChangeStats(bossIntroFights, [("StRevHp", 20), ("StRevStr", 70), ("StRevHeal", 70)])
-    eRando.ChangeStats(returningToColony, [("StRevHp", 20)])
-    eRando.ChangeStats(breakTutorial, [("RstBreak", 0), ("StRevHp", 150)])
-    eRando.ChangeStats(Piranhax + DrifterRopl, [("StRevHp", 150)])
-    eRando.ChangeStats(StealthShip, [("StRevHp", 100)])
+    Sentry = [463]
+    AgnusTrio = [464,465,466]
+    MysteriousEnemy = [467]
+    cantLoseFights = introTutorial + bossIntroFights + returningToColony
+    introFights = breakTutorial + Piranhax + DrifterRopl + Sentry + StealthShip + AgnusTrio + MysteriousEnemy + cantLoseFights
 
+    if en["$id"] in introFights:
+        oldEnParam = eRando.FindParam(en)
+        if en["$id"] in cantLoseFights:
+            hpChange = 5
+        else:
+            hpChange = oldEnParam["StRevHp"]
+        eRando.ChangeStats([newEn], [("StRevHp", hpChange),("StRevStr", oldEnParam["StRevStr"]),("StRevHeal", oldEnParam["StRevHeal"]),("StRevDex", oldEnParam["StRevDex"]),("StRevAgi", oldEnParam["StRevAgi"])])
+    
 def Bandaids(eRando):
-    IntroFightBalances(eRando)
+    BreakTutorial(eRando)
     SummonFix()
     
 def EnemyDesc(name):

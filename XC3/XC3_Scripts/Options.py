@@ -50,12 +50,12 @@ UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption, hasSpinBox=True,
 UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
 UniqueEnemyOption_MatchSize = SubOption("Match Size", UniqueEnemyOption)
 
-BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, BossEnemyOption_MatchSize, BossEnemyOption_GroupFights.GetState())], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True)
+BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, BossEnemyOption_MatchSize, False)], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True)
 BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal, spinDesc=weightsSpinDescription)
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal)
-BossEnemyOption_GroupFights = SubOption("Balance Group Fights", BossEnemyOption)
+# BossEnemyOption_GroupFights = SubOption("Balance Group Fights", BossEnemyOption)
 BossEnemyOption_MatchSize = SubOption("Match Size", BossEnemyOption)
 
 AccessoriesOption = Option("Accessories", Character, "Randomizes the effects of Accessories", [lambda: Accessories.AccessoryRando()])
