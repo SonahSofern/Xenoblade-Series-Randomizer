@@ -179,7 +179,7 @@ def SmallAreaFights(enemy):
 
 # Create our list of enemies from all the area files and Combine the data into the class
 def CreateEnemyDataClass(eneData, enAreaFiles):
-    for file in enAreaFiles:  
+    for file in enAreaFiles:
         with open(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
             eneAreaData = json.load(eneAreaFile)
             for enemy in eneAreaData["rows"]:
@@ -226,8 +226,8 @@ def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
         # print(f"Level: {enemy["lv"]}")
         # print(f"Spike Damage: {enemy["spike_dmg"] * 10}")
         # print(f"Mult: {spikeMult}")
-    if (chosen["spike_state_val"] == 220) and (enemy["lv"] <= instantDeathSpikeThreshold): # Removes instant death spikes from all fights below level 60
-        enemy["spike_state_val"] = 0
+    if (chosen["spike_state"] == 220) and (enemy["lv"] <= instantDeathSpikeThreshold): # Removes instant death spikes from all fights below level 60
+            enemy["spike_state_val"] = 0
     else:
         enemy["spike_state_val"] = chosen["spike_state_val"]
 
