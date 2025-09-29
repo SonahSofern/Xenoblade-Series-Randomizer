@@ -1,4 +1,3 @@
-
 import json, random, copy, traceback, math
 from XCDE.XCDE_Scripts import Options, IDs
 from scripts import Helper, JSONParser, PopupDescriptions
@@ -50,7 +49,8 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     if isSuper:
         ChosenEnemyIds.extend(SuperbossEnemies)
     # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame",  "avoid", "spike_dmg", "spike_state_val"
-    CopiedStats = ["move_speed", "size", "scale", "family","elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "delay", "hit_range_near", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_state", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
+    CopiedStats = ["move_speed", "size", "scale", "family", "elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "delay", "hit_range_near", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_state", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
+    LockCopiedStats = [stat for stat in CopiedStats if stat not in ["size", "scale"]]
     CopiedStatsWithRatios = ["str", "eth"] # Not doing agility or hp , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
     CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
     
@@ -79,7 +79,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                     eneAreaData = json.load(eneAreaFile)
                     
                     for enemy in eneAreaData["rows"]:   
-                        
+
                         if not Helper.OddsCheck(odds):
                             continue
                         
@@ -87,7 +87,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                             continue
                                                     
                         chosen:Enemy = random.choice(filteredEnemyData) # Choose an enemy                
-                        
+
                         # if Options.FinalBossOption.GetState() and enemy["$id"] in []: # Choose a valid final boss option
                             
                         VoicedEnemiesFix(eneVoiceData, chosen, enemy)                                
@@ -97,8 +97,14 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                         replacementTotalStats = TotalStats(chosen.eneListArea, CopiedStatsWithRatios)
                         originalTotalStats = TotalStats(enemy, CopiedStatsWithRatios)
                         
+                        # need to check if the enemy is a boss enemy (enclosed arena, if the size gets randomized, it causes issues sometimes)
+                        if enemy["$id"] in LockEnemyFights:
+                            UsedStats = LockCopiedStats
+                        else:
+                            UsedStats = CopiedStats
+                        
                         # Copy chosen stats over
-                        for key in CopiedStats: 
+                        for key in UsedStats: 
                             enemy[key] = chosen.eneListArea[key]
                         
                         if (not FirstFights(enemy)) and (enemy["$id"] not in GroupEnemies):
@@ -115,7 +121,6 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                         BossSelfDestructs(enemy, chosen, selfDestructArts)
                         MechonEarly(enemy, chosen, [1,2,4], [30, 31, 32,33, 63, 64, 65]) # Mechon before enchant
                         MechonEarly(enemy, chosen, [2], [67, 68, 68, 66, 69, 70, 71, 134, 138, 138, 138, 139, 138, 138, 138, 139, 269, 269, 266, 265, 267, 267, 268, 327, 326, 328, 326, 338, 339, 341, 340, 340, 416, 417, 422, 421, 421, 420, 534, 636, 636, 636, 637, 638, 906, 905, 907, 908, 909, 909, 1039, 1101, 1103, 1103, 1102, 1102]) # Face mechon before monado shackles released
-                        SmallAreaFights(enemy)
                         ForcedArts(enemy, ForcedStoryArts)
                         DevicesAttachedToEgilFix(enemy)
                         
@@ -159,7 +164,6 @@ def HighActIDFix():
                 break
         JSONParser.CloseFile(artData, artFile)
     
-
 def VoicedEnemiesFix(eneVoiceData, chosen, enemy):
     newVoiceList = []
     for voiceID in eneVoiceData["rows"]:
@@ -170,12 +174,6 @@ def VoicedEnemiesFix(eneVoiceData, chosen, enemy):
             newVoiceList.append(newVoice)
             break    
     eneVoiceData["rows"].extend(newVoiceList)
-
-# Big enemies in small areas can break the ai and you cant target them if they go into ceilings (Had this in the two ancient machines fight with a big dragon)
-def SmallAreaFights(enemy):
-    SmallFights = [30,31, 1617]
-    if (enemy["$id"] in SmallFights) and (enemy["size"] >= 4):
-        enemy["scale"] = max(int(enemy["scale"] /3),1)
 
 # Create our list of enemies from all the area files and Combine the data into the class
 def CreateEnemyDataClass(eneData, enAreaFiles):
@@ -395,23 +393,24 @@ def EnemyDesc(categoryName):
                         
 
 # Finds locked enemies
-# enemiesInLock = []
-# for file in enAreaFiles:
-#     try:
-#         with open(f"./XCDE/JsonOutputs/bdat_ma{file}/FieldLock{file}.json", 'r+', encoding='utf-8') as eneLockFile:
-#             with open(f"./XCDE/JsonOutputs/bdat_ma{file}/poplist{file}.json", 'r+', encoding='utf-8') as enePopFile:
-#                 enePopData = json.load(enePopFile)
-#                 eneLockData = json.load(eneLockFile)
-#                 locks = []
-#                 for lock in eneLockData["rows"]:
-#                     for i in range(1,4):
-#                         if lock[f"popID{i}"] != 0:  
-#                             locks.append(lock[f"popID{i}"])
-#                 for pop in enePopData["rows"]:
-#                     if pop["$id"] in locks:
-#                         for j in range(1,6):
-#                             if pop[f"ene{j}ID"] != 0:
-#                                 enemiesInLock.append(pop[f"ene{j}ID"])
-#     except:
-#         pass
-# print(enemiesInLock)
+def GetLockedEnemies():
+    enemiesInLock = []
+    for file in enAreaFiles:
+        try:
+            with open(f"./XCDE/JsonOutputs/bdat_ma{file}/FieldLock{file}.json", 'r+', encoding='utf-8') as eneLockFile:
+                with open(f"./XCDE/JsonOutputs/bdat_ma{file}/poplist{file}.json", 'r+', encoding='utf-8') as enePopFile:
+                    enePopData = json.load(enePopFile)
+                    eneLockData = json.load(eneLockFile)
+                    locks = []
+                    for lock in eneLockData["rows"]:
+                        for i in range(1,4):
+                            if lock[f"popID{i}"] != 0:  
+                                locks.append(lock[f"popID{i}"])
+                    for pop in enePopData["rows"]:
+                        if pop["$id"] in locks:
+                            for j in range(1,6):
+                                if pop[f"ene{j}ID"] != 0:
+                                    enemiesInLock.append(pop[f"ene{j}ID"])
+        except:
+            pass
+    print(enemiesInLock)
