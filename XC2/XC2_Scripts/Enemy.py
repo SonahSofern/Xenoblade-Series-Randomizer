@@ -11,15 +11,12 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
     global StaticEnemyData
     EnemyCounts = GetEnemyCounts()
     GroupFightViolations = GetGroupFightViolations()
-    #GroupFightIDs = GetGroupFightIDs()
     SoloFightViolations = GetSoloFightViolations()
-    #soloFightIDs = [179, 182, 184, 185, 186, 187, 189, 190, 258, 260, 262, 256, 604] # Includes both 1 and 2 person party fights
     ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev', "HpOver"]
     aggroKeys = ['Detects', 'SearchRange', 'SearchAngle', 'SearchRadius', 'BatInterval', 'BatArea', 'BatAreaType']
     isMatchSize = matchSize.GetState()
     if isVanillaAggro:
         ignoreKeys.extend(aggroKeys)
-
     actKeys = ["FlyHeight", "ActType"]
     with open("XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
         with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
@@ -140,22 +137,23 @@ def Bandaids(eneData, isBoss, eRando):
 
 def GetEnemyCounts():
     enemyCounts = dict()
+    # I don't want regular overworld enemies to be stronger/weaker because they spawn several of them in a pack, and
+    # it's not consistent when they do that (standard Wolffs are sometimes 1, sometimes 2, etc). I want to keep counts
+    # only for bosses, UMs, quest enemies, etc
+    BossLikeEnemies = [IDs.BossMonsters, IDs.UniqueMonsters, IDs.SuperbossMonsters]
     for name in ValidEnemyPopFileNames:
         with open(f"XC2/JsonOutputs/common_gmk/{name}", 'r+', encoding='utf-8') as popFile:
             popData = json.load(popFile)
             for row in popData["rows"]:
-                # Enemies may appear as more than one enemy in the same fight. For example, the Tirkins in chapter 4 are separated as two groups of 3 and 1, despite being the exact same enemy
+                # Enemies may appear as more than one enemy in the same fight. For example, the Tirkins in chapter 4
+                # are separated as two groups of 3 and 1, despite being the exact same enemy
                 # To account for this, we sum all the instances before adding it to the overall counter
                 thisFightCount = dict()
                 for i in Helper.InclRange(1,4):
-                    if row[f"ene{i}ID"] != 0: # Valid enemy
-                        if row["battlelockname"] != 0: # Boss fight. This is the red ring check. TODO: This is lazy for now to test things, I should use the global IDs instead. I don't want regular overworld enemies to be stronger/weaker because they spawn several of them in a pack, because it's not consistent when they do that (standard Wolffs are sometimes 1, sometimes 2, etc). I want to keep counts only for bosses, UMs, quest enemies, etc
-                            id = row[f"ene{i}ID"]
-                            count = row[f"ene{i}num"]
-                            if id in thisFightCount.keys():
-                                thisFightCount[id] = thisFightCount[id] + count
-                            else:
-                                thisFightCount[id] = count
+                    id = row[f"ene{i}ID"]
+                    count = row[f"ene{i}num"]
+                    if id in BossLikeEnemies: # Valid enemy
+                        thisFightCount[id] = thisFightCount.get(id, 0) + count
                 for key, val in thisFightCount.items():
                     enemyCounts[key] = val
 
@@ -203,19 +201,6 @@ def GetGroupFightViolations():
     ])
 
     return [Default, Akhos_Obrona, Akhos_Bow, Jin, Malos_Monado, Aion]
-
-#def GetGroupFightIDs(): # TODO: No longer needed. Logic is now applied for all fights
-#    ArdanianSoldiers = [189,190,219]
-#    Puffots = [195]
-#    Bandits = [196,197,198]
-#    VandhamTrio = [199,201,202]
-#    Tirkin = [220, 235]
-#    TantaleseKnight = [237]
-#    AkhosTrio = [238,239,240]
-#    Phantasm = [242]
-#    Guldos = [249]
-#    IndolSoldier = [252]
-#    return Puffots + Bandits + VandhamTrio + ArdanianSoldiers + Tirkin + TantaleseKnight + AkhosTrio + Phantasm + Guldos + IndolSoldier
 
 def CloneEnemiesDefeatCondition(oldEn, newEn): # Forces all copies of enemies that clone themselves to be defeated in a boss encounter
     CloneEnemyIDs = [242, 281, 1882, 1884]

@@ -39,9 +39,11 @@ class Violation:
         """
         Initialize a Violation.
         Args:
-            ids (list): List of IDs that represent the violation enemy, from CHR_EnArrange.
-            lvDiff (int): The number of levels this enemy loses/gains when placed in a group fight.
-            TODO: Once done, fix this block comment
+            oldIDs (list): List of IDs that represent the original enemy, from CHR_EnArrange. Either this or newIDs may be used, but you don't need both
+            newIDs (list): List of IDs that represent the replacement enemy, from CHR_EnArrange. Either this or oldIDs may be used, but you don't need both
+            paramMods(list): List of parameter modifications to CHR_EnParam
+            artMods(list): List of art modifications to BTL_Arts_En
+            lvDiff (int): The number of levels this enemy loses/gains when placed in a violation fight.
         """
         self.oldIDs = oldIDs
         self.newIDs = newIDs
@@ -135,11 +137,44 @@ class EnemyRandomizer():
         return weights
 
     def BalanceFight(self, oldEn, newEn, violationList:list[Violation], enemyCounts:dict):
-        # TODO: Document formula
+        """
+        Calculates a dynamic stat multiplier for game balancing based on a
+        proportional change in the number of enemies.
+
+        This function is designed to scale character stats up or down when they are
+        randomized into a fight with a different number of enemies than they were
+        originally designed for. For example, it can buff a character designed for a
+        group of 4 when they fight alone, or nerf a solo boss when they appear in a
+        group of 8.
+
+        The core of the formula is based on the ratio of the new group size (N) to
+        the original (M), making the scaling effect relative to the character's
+        original context.
+
+        Formula:                           K
+          sgn( (N/M) - 1 ) * | (N/M) - 1 |^
+        C^
+
+        Args:
+            M (int): The original number of enemies for the character.
+            N (int): The new, randomized number of enemies.
+            C (float): The base balancing constant. This value determines the
+                       strength of the multiplier. A good starting point is 0.5,
+                       which would halve stats if the group size doubles.
+            K (float): The scaling exponent, which tunes the "aggressiveness"
+                       of the curve.
+                       - K=1.0 provides a standard curve.
+                       - K<1.0 makes the scaling less aggressive (decreased effect per additional enemy).
+                       - K>1.0 makes the scaling more aggressive (increased effect per additional enemy).
+
+        Returns:
+            float: The calculated stat multiplier. A value > 1.0 is a buff,
+                   and a value < 1.0 is a nerf.
+        """
         def BalanceFormula(M, N, C, K):
-            # return C ** (math.copysign(1, N - M) * (abs(N - M) ** K)) # Old Formula
             return C ** (math.copysign(1, N / M - 1) * (abs(N / M - 1) ** K))
 
+        # Helper function to get the violations which apply to this fight
         def GetViolations():
             # Find the violation for this specific enemy
             vios = list()
@@ -166,25 +201,28 @@ class EnemyRandomizer():
 
             return vios
 
+        # Iterate over each violation which applies to the current fight
         vios = GetViolations()
-
         for vio in vios:
             vio.ResolveLevelDiff(oldEn)
-
-            M = enemyCounts[newEn["$id"]] if newEn["$id"] in enemyCounts.keys() else 1
-            N = enemyCounts[oldEn["$id"]] if oldEn["$id"] in enemyCounts.keys() else 1
 
             oldParams = self.FindParam(newEn)
             allParamChanges = []
 
+            M = enemyCounts[newEn["$id"]] if newEn["$id"] in enemyCounts.keys() else 1
+            N = enemyCounts[oldEn["$id"]] if oldEn["$id"] in enemyCounts.keys() else 1
+
+            # Iterate over each art modification
             # Arts are changed first because a change in arts creates another change in the params
             for artMod in vio.artMods:
+                # Iterate over each parameter which contains a reference to an art.
                 for paramField in artMod.paramFields:
                     allArtChanges = []
                     art = self.FindArt(oldParams[paramField])
+                    # Iterate over each art field which needs to change
                     for artField in artMod.artFieldNames:
                         multiplier = BalanceFormula(M, N, artMod.C, artMod.K)
-                        if multiplier == 1: # Do not make this change unless something actually changes
+                        if multiplier == 1: # Do not make the change unless something actually changes
                             continue
                         oldValue = art[artField]
                         if artMod.isReciprocal:
@@ -192,15 +230,18 @@ class EnemyRandomizer():
                         else:
                             newValue = math.floor(oldValue * multiplier)
                         allArtChanges.append((artField, newValue))
+                    # Apply any changes to the arts
                     if allArtChanges:
-                        self.ChangeArts(newEn, paramField, art, allArtChanges)
+                        self.ChangeArts(art, allArtChanges)
                         newArtID = len(self.artData["rows"])
                         allParamChanges.append((paramField, newArtID))
 
+            # Iterate over each parameter modification
             for paramMod in vio.paramMods:
+                # Iterate over each parameter which needs to change
                 for paramField in paramMod.fieldNames:
                     multiplier = BalanceFormula(M, N, paramMod.C, paramMod.K)
-                    if multiplier == 1: # Do not make this change unless something actually changes
+                    if multiplier == 1: # Do not make the change unless something actually changes
                         continue
                     oldValue = oldParams[paramField]
                     if paramMod.isReciprocal:
@@ -208,6 +249,7 @@ class EnemyRandomizer():
                     else:
                         newValue = math.floor(oldValue * multiplier)
                     allParamChanges.append((paramField, newValue))
+            # Apply changes to the parameters
             if allParamChanges:
                 self.ChangeStats([newEn], allParamChanges)
             
@@ -327,13 +369,12 @@ class EnemyRandomizer():
             self.paramData["rows"].append(newParam)
             self.rscData["rows"].append(newRSC)
 
-    def ChangeArts(self, en, paramField, art, keyVal=[]):
+    def ChangeArts(self, art, keyVal=[]):
         """
         Allows changing the stats of an individual enemy ID in EnArrange by creating new EnParam and RSC_En for that enemy.
         Args:
-            targetIDs (list[int]): The IDs from EnArrange OR an enemy dictionary.
-            keys (list[tuple]): The keys and their new value in parameters or resource files to change.
-            TODO: Create correct block comment
+            art (dict): art dictionary.
+            keyVal (list[tuple]): The keys and their new value in art files to change.
         """
         newArt = copy.deepcopy(art)
         newArtID = len(self.artData["rows"]) + 1
@@ -342,7 +383,5 @@ class EnemyRandomizer():
         for key, val in keyVal:
             if key in newArt:
                 newArt[key] = val
-
-        #self.ChangeStats(en, [(paramField, newArtID)])
 
         self.artData["rows"].append(newArt)
