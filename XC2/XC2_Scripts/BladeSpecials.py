@@ -1,5 +1,5 @@
 import json, random
-from XC2.XC2_Scripts import Options, _DriverArts, _Arts
+from XC2.XC2_Scripts import Arts, DriverArts, Options
 from scripts import Helper
 
 
@@ -15,7 +15,7 @@ def BladeSpecials():
         for art in artData["rows"]:
             if isReact:
                 if Helper.OddsCheck(odds):
-                    _DriverArts.Reaction(art, True, 100)
+                    DriverArts.Reaction(art, True, 100)
                 
             if isEnhancements:
                 if Helper.OddsCheck(odds):
@@ -24,17 +24,17 @@ def BladeSpecials():
             if isDebuffs:
                 art["ArtsDeBuff"] = 0
                 if Helper.OddsCheck(odds):
-                    _DriverArts.Debuffs(art)
+                    DriverArts.Debuffs(art)
 
         BladeEXSpecials()     
         artFile.seek(0)
         artFile.truncate()
         json.dump(artData, artFile, indent=2, ensure_ascii=False)
-    _DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_Bl.json", "./XC2/JsonOutputs/common_ms/btl_arts_bl_ms.json", True)
+    DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_Bl.json", "./XC2/JsonOutputs/common_ms/btl_arts_bl_ms.json", True)
 
 
 def Enhancements(art): 
-    Enhancement = random.choice(_Arts.EnhancementGroup)
+    Enhancement = random.choice(Arts.EnhancementGroup)
     Enh = random.choice(Enhancement.ids)
     for i in range(1,7):
         
@@ -58,7 +58,7 @@ def BladeEXSpecials(): # Ex specials use different keys and dont have all 6 legv
                     if art[f"ReAct{i}"] > 14: # Ignore special cases that just move the blade around
                         continue
                 if Helper.OddsCheck(odds):
-                    _DriverArts.Reaction(art, True, 100)
+                    DriverArts.Reaction(art, True, 100)
                 
             if isEnhancements:
                 if Helper.OddsCheck(odds):
@@ -67,9 +67,9 @@ def BladeEXSpecials(): # Ex specials use different keys and dont have all 6 legv
         artFile.seek(0)
         artFile.truncate()
         json.dump(artData, artFile, indent=2, ensure_ascii=False)
-    _DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_BlSp.json", "./XC2/JsonOutputs/common_ms/btl_arts_blsp_ms.json", True, "Enhance")
+    DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_BlSp.json", "./XC2/JsonOutputs/common_ms/btl_arts_blsp_ms.json", True, "Enhance")
 
 def EXEnhancements(art):
-    Enhancement = random.choice(_Arts.EnhancementGroup)
+    Enhancement = random.choice(Arts.EnhancementGroup)
     enh = random.choice(Enhancement.ids)
     art[f"Enhance"] = enh[-1]

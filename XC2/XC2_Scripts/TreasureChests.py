@@ -5,13 +5,13 @@ def RandoTreasureBoxes():
     ValidReplacements = []
     if not Options.RaceModeOption.GetState(): # if race mode is on, we don't want to do any of this
         if Options.TreasureChestOption_Accessories.GetState():
-            ValidReplacements.extend(IDs.Accessories)
+            ValidReplacements.extend(IDs.AccessoryIDs)
         if Options.TreasureChestOption_TornaAccessories.GetState():
             ValidReplacements.extend(IDs.TornaAccessories)
         if Options.TreasureChestOption_WeaponChips.GetState():
-            ValidReplacements.extend(IDs.WeaponChips)
+            ValidReplacements.extend(IDs.WeaponChipIDs)
         if Options.TreasureChestOption_AuxCores.GetState():
-            ValidReplacements.extend(IDs.AuxCores)
+            ValidReplacements.extend(IDs.AuxCoreIDs)
         if Options.TreasureChestOption_RefinedAuxCores.GetState():
             ValidReplacements.extend(IDs.RefinedAuxCores)
         if Options.TreasureChestOption_CoreCrystals.GetState() and not Options.CustomCoreCrystalOption.GetState():

@@ -1,8 +1,8 @@
-import XC2.XC2_Scripts.EnemyRandoLogic
 import json
 from scripts import Helper, JSONParser, PopupDescriptions
 import random
-from XC2.XC2_Scripts import Options, IDs, RaceMode
+from XC2.XC2_Scripts import Options, IDs
+from XC2.XC2_Scripts.Race_Mode import RaceMode
 
 FLDSkillMaxLv = [3, 5, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 3, 5, 3, 3, 3, 5, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 5, 3, 3, 5, 3, 5, 3, 3, 5, 5, 5, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 5, 5]
 # Helper.FindValues("./XC2/JsonOutputs/common/FLD_FieldSkillList.json", ["$id"], Helper.inclRange(2, 7) + Helper.inclRange(9,74), "MaxLevel")

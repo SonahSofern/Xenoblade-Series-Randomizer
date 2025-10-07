@@ -7,12 +7,10 @@ def Shops():
         with open("XC3/JsonOutputs/mnu/MNU_ShopTable.json", 'r+', encoding='utf-8') as shopFile:
             shopData = json.load(shopFile)
             chosenGroup = IDs.DLC4AccessoriesIDs + IDs.AccessoriesIDs
-            ignoreGroup = [1] + IDs.DLC4PreciousIDs + IDs.BaseGamePreciousIDs
+            ignoreGroup = [0,1] + IDs.DLC4PreciousIDs + IDs.BaseGamePreciousIDs
             for shop in shopData["rows"]:
                 for i in range(1,21):
                     if (shop[f"ShopItem{i}"] in ignoreGroup):
-                        continue
-                    if shop[f"ShopItem{i}"] == 0:
                         continue
                     newItemId = random.choice(chosenGroup)
                     shop[f"ShopItem{i}"] = newItemId
@@ -48,15 +46,16 @@ def EnemyNormalDrops():
         
         
 def TreasureBoxes():
+    AttackStone = [471] # Tutorials require this
     if Options.TreasureBoxOption_IndividualItems.GetState():
         with open("XC3/JsonOutputs/sys/ITM_RewardAssort.json", 'r+', encoding='utf-8') as containerFile:
             containerData = json.load(containerFile)
             for container in containerData["rows"]:
                 for i in range(1,20):
-                    if container[f"Reward{i}"] in IDs.BaseGamePreciousIDs + IDs.DLC4PreciousIDs + [0]: # Dont replace Precious Items
+                    if container[f"Reward{i}"] in IDs.BaseGamePreciousIDs + IDs.DLC4PreciousIDs + [0] + AttackStone: # Dont replace Precious Items
                         continue
                     container[f"Reward{i}"] = random.choice(IDs.AccessoriesIDs)
             JSONParser.CloseFile(containerData, containerFile)
     if Options.TreasureBoxOption_ShuffleBoxes.GetState():
-        Helper.FileShuffle("XC3/JsonOutputs/sys/ITM_RewardAssort.json", ["$id"])
+        Helper.FileShuffle("XC3/JsonOutputs/sys/ITM_RewardAssort.json", ["$id"], [7])
         

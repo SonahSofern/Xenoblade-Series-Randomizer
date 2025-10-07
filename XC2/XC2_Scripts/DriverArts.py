@@ -3,7 +3,7 @@ import random
 from XC2.XC2_Scripts.IDs import Arts, AutoAttacks
 from XC2.XC2_Scripts import Options
 import scripts.PopupDescriptions
-from XC2.XC2_Scripts._Arts import *
+from XC2.XC2_Scripts.Arts import *
 from scripts import Helper, JSONParser
 
 def DriverArtRandomizer():

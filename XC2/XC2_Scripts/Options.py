@@ -1,11 +1,15 @@
-from tkinter import ttk
 from scripts import JSONParser,Helper
 from XC2.XC2_Scripts.IDs import *
 from tkinter import *
-from XC2.XC2_Scripts import _Accessories, _DriverArts, SkillTrees, _AuxCores, IDs, _GreenSkills, _WeaponChips, EnemyRandoLogic, _EnemyEnhancements, _EnemyArts, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeStats,TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, RaceMode, UMHuntMain, Cosmetics, AccessoryShops, CollectionPoints, PouchItemShops, TreasureChests, ButtonCombos, EnemyDrops, _EleCombo,_YellowSkills, _BladeSpecials, Scales, DLCFlagQOL, CharacterRandomization, TornaMain, ObjectNameCleanup, Enemy
+from XC2.XC2_Scripts import Accessories, AuxCores, BladeSpecials, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, GreenSkills, SkillTrees, IDs, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeStats,TutorialShortening, GachaModifications, FieldSkillAdjustments, Enhancements, BigItems, Cosmetics, AccessoryShops, CollectionPoints, PouchItemShops, TreasureChests, ButtonCombos, EnemyDrops, Scales, DLCFlagQOL, CharacterRandomization, Enemy, WeaponChips, YellowSkills
+from XC2.XC2_Scripts.Race_Mode import RaceMode
+from XC2.XC2_Scripts.Torna_Logic import TornaMain
+from XC2.XC2_Scripts.UM_Hunt import UMHuntMain
+
 from scripts.Interactables import Option, SubOption, MutuallyExclusivePairing
 import scripts.Interactables
 scripts.Interactables.Game = "XC2"
+
 # Prio
 First = 0
 Last = 100
@@ -39,8 +43,8 @@ weightsSpinDescription = "Weights ↓"
 
 
 # General
-AccessoriesOption = Option("Accessories", Items, "Randomizes effects of Accessories", [lambda: _Accessories.RandomizeAccessoryEnhancements()], descData=lambda: _Accessories.AccessoriesDesc())
-AuxCoresOption = Option("Aux Cores", Items, "Randomizes the effects of Aux Cores", [lambda: _AuxCores.RandomizeAuxCoreEnhancements()])
+AccessoriesOption = Option("Accessories", Items, "Randomizes effects of Accessories", [lambda: Accessories.RandomizeAccessoryEnhancements()], descData=lambda: Accessories.AccessoriesDesc())
+AuxCoresOption = Option("Aux Cores", Items, "Randomizes the effects of Aux Cores", [lambda: AuxCores.RandomizeAuxCoreEnhancements()])
 AccessoryShopsOption = Option("Accessory Shops", Items, "Randomizes the contents of Accessory Shops", [lambda: AccessoryShops.RandoAccessoryShops()], hasSpinBox = True, descData=lambda: AccessoryShops.AccessoryShopDescription())
 AccessoryShopsOption_Accessories = SubOption("Accessories", AccessoryShopsOption)
 AccessoryShopsOption_TornaAccessories = SubOption("Torna Accessories", AccessoryShopsOption)
@@ -79,12 +83,12 @@ TreasureChestOption_RefinedAuxCores = SubOption("Refined Aux Cores", TreasureChe
 TreasureChestOption_CoreCrystals = SubOption("Core Crystals", TreasureChestOption)
 TreasureChestOption_Deeds = SubOption("Shop Deeds", TreasureChestOption)
 TreasureChestOption_CollectionPointMaterials = SubOption("Collection Point Materials", TreasureChestOption)
-WeaponChipShopOption = Option("Weapon Chip Shops", Items, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChips, WeaponChips)], descData=lambda: _WeaponChips.WeaponChipDesc())
+WeaponChipShopOption = Option("Weapon Chip Shops", Items, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: JSONParser.ChangeJSONFile(["common/MNU_ShopNormal.json"], Helper.StartsWith("DefItem", 1, 10), WeaponChipIDs, WeaponChipIDs)], descData=lambda: WeaponChips.WeaponChipDesc())
 
 # Drivers
 DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.DriversDescriptions())
 DriversOption_Nia = SubOption("Guarantee Early Nia", DriversOption, _defState = False)
-DriverArtsOption = Option("Driver Arts", Driver, "Randomizes effects of all driver arts", [lambda: (_DriverArts.DriverArtRandomizer(), _DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], hasSpinBox = True,spinDefault=40, descData=lambda: _DriverArts.DriverArtDescription())
+DriverArtsOption = Option("Driver Arts", Driver, "Randomizes effects of all driver arts", [lambda: (DriverArts.DriverArtRandomizer(), DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], hasSpinBox = True,spinDefault=40, descData=lambda: DriverArts.DriverArtDescription())
 spinArts = "%"
 DriverArtsOption_AutoAttacks = SubOption("Auto Attacks", DriverArtsOption, [], _defState = False, hasSpinBox=True, spinDesc="% of auto attacks", spinDefault=20)
 DriverArtsOption_SingleReaction = SubOption("Single Reaction", DriverArtsOption, [], hasSpinBox=True, spinDesc=spinArts, spinDefault=20)
@@ -106,9 +110,9 @@ BladesOption = Option("Blades", Blade, "Randomizes when blades appear in the sto
 BladesOption_Dromarch = SubOption("Randomize Dromarch", BladesOption)
 BladesOption_Healer = SubOption("Guarantee Healing Art", BladesOption)
 BladeArtsOption = Option("Blade Arts", Blade, "Randomizes a Blade's combat arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])
-BladeBattleSkillsOption = Option("Blade Battle Skills", Blade, "Randomizes a Blade's battle (yellow) skill tree", [lambda: _YellowSkills.RandomizeBattleSkills()], hasSpinBox = True)
+BladeBattleSkillsOption = Option("Blade Battle Skills", Blade, "Randomizes a Blade's battle (yellow) skill tree", [lambda: YellowSkills.RandomizeBattleSkills()], hasSpinBox = True)
 BladeBattleSkillsOption_Duplicates = SubOption("Allow Duplicates", BladeBattleSkillsOption)
-BladeFieldSkillsOption = Option("Blade Field Skills", Blade, "Randomizes a Blade's field (green) skill tree", [lambda: _GreenSkills.RandomizeFieldSkills()])
+BladeFieldSkillsOption = Option("Blade Field Skills", Blade, "Randomizes a Blade's field (green) skill tree", [lambda: GreenSkills.RandomizeFieldSkills()])
 BladeFieldSkillsOption_QuestSkills = SubOption("Quest Skills", BladeFieldSkillsOption)
 BladeSpecialButtonsOption = Option("Blade Button Combos", Funny, "Randomizes what button a special uses for its button challenge",[lambda: ButtonCombos.BladeSpecialButtonChallenges()])
 BladeSpecialButtonsOption_A = SubOption("A", BladeSpecialButtonsOption)
@@ -116,16 +120,16 @@ BladeSpecialButtonsOption_B = SubOption("B", BladeSpecialButtonsOption)
 BladeSpecialButtonsOption_X = SubOption("X", BladeSpecialButtonsOption)
 BladeSpecialButtonsOption_Y = SubOption("Y", BladeSpecialButtonsOption)
 BladeSpecialButtonsOption_Mystery = SubOption("?", BladeSpecialButtonsOption)
-BladeSpecialOption = Option("Blade Specials", Blade, "Randomizes each hit of a blade special to have a random effects", [lambda:(_BladeSpecials.BladeSpecials())], hasSpinBox = True)
+BladeSpecialOption = Option("Blade Specials", Blade, "Randomizes each hit of a blade special to have a random effects", [lambda:(BladeSpecials.BladeSpecials())], hasSpinBox = True)
 BladeSpecialOption_Reaction = SubOption("Reactions", BladeSpecialOption)
 BladeSpecialOption_Enhancement = SubOption("Enhancement", BladeSpecialOption)
 BladeSpecialOption_Debuffs = SubOption("Debuff", BladeSpecialOption)
-BladeWeaponChipsOption = Option("Blade Weapon Chips", Blade, "Randomizes the effects of weapon chips", [lambda:_WeaponChips.ChangeWeaponRankNames()], hasSpinBox = True)
+BladeWeaponChipsOption = Option("Blade Weapon Chips", Blade, "Randomizes the effects of weapon chips", [lambda:WeaponChips.ChangeWeaponRankNames()], hasSpinBox = True)
 BladeWeaponChipsOption_AutoAtk = SubOption("Auto Attacks", BladeWeaponChipsOption, _defState= True)
 BladeWeaponChipsOption_CritRate = SubOption("Crit Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["CriRate"],Helper.InclRange(0,100), BladeWeaponCritDistribution)],_defState= True)
 BladeWeaponChipsOption_GuardRate = SubOption("Guard Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["GuardRate"],Helper.InclRange(0,100), BladeWeaponGuardDistribution)],_defState= True)
-BladeWeaponChipsOption_Enhancement = SubOption("Enhancements", BladeWeaponChipsOption, [lambda: _WeaponChips.RandomizeWeaponEnhancements()], _defState= True)
-BladeCombosOption = Option("Blade Combos", Blade, "Randomizes blade elemental combos", [lambda: _EleCombo.BladeComboRandomization()], descData=lambda: _EleCombo.BladeCombosDescription())
+BladeWeaponChipsOption_Enhancement = SubOption("Enhancements", BladeWeaponChipsOption, [lambda: WeaponChips.RandomizeWeaponEnhancements()], _defState= True)
+BladeCombosOption = Option("Blade Combos", Blade, "Randomizes blade elemental combos", [lambda: EleCombo.BladeComboRandomization()], descData=lambda: EleCombo.BladeCombosDescription())
 BladeCombosOption_ElementRoutes = SubOption("Element Routes", BladeCombosOption)
 BladeCombosOption_Damage = SubOption("Damage", BladeCombosOption)
 BladeCombosOption_DOT = SubOption("DoT", BladeCombosOption)
@@ -167,8 +171,8 @@ BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
 BossEnemyOption_Size = SubOption("Match Size", BossEnemyOption)
 
 
-EnemyEnhancementsOption = Option("Enemy Enhancements", Enemies, "Gives enemies a random enhancement; it is displayed by their name", [lambda: _EnemyEnhancements.EnemyEnhances()], hasSpinBox = True, descData=lambda: _EnemyEnhancements.EnemyEnhancementDescriptions())
-EnemyArtEffectsOption = Option("Enemy Art Effects", Enemies, "Gives enemies a random bonus effect to their arts; it is displayed by their\nart's name", [lambda: _EnemyArts.EnemyArtAttributes()], hasSpinBox = True, descData=lambda: _EnemyArts.EnemyArtEnhancementDescriptions())
+EnemyEnhancementsOption = Option("Enemy Enhancements", Enemies, "Gives enemies a random enhancement; it is displayed by their name", [lambda: EnemyEnhancements.EnemyEnhances()], hasSpinBox = True, descData=lambda: EnemyEnhancements.EnemyEnhancementDescriptions())
+EnemyArtEffectsOption = Option("Enemy Art Effects", Enemies, "Gives enemies a random bonus effect to their arts; it is displayed by their\nart's name", [lambda: EnemyArts.EnemyArtAttributes()], hasSpinBox = True, descData=lambda: EnemyArts.EnemyArtEnhancementDescriptions())
 EnemyArtEffectsOption_Reactions = SubOption("Reactions", EnemyArtEffectsOption)
 EnemyArtEffectsOption_AOE = SubOption("AOE", EnemyArtEffectsOption)
 EnemyArtEffectsOption_Buffs = SubOption("Buffs", EnemyArtEffectsOption)

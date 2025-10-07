@@ -370,7 +370,7 @@ def CreateEnhancements():
     # Enhancement("", 241, 0, 1, M, [], skillIcon=0) # Rescue Buff
     # Enhancement("", 242, 0, 1, M, [], [], skillIcon=0) # <2D37CF4F>
     Enhancement("Supercharged", 243, 271, 1, Atk, [50,100], skillIcon=33) # Pierce Defense (Critical)
-    Enhancement("Burning", 244, 272, 1, Atk, [1,2], skillIcon=19, isBaseGameOnly=True) # <4078B801> Damage increase with heat gauge
+    Enhancement("Burning", 244, 272, 1, Atk, [1,2], isBaseGameOnly=True) # <4078B801> Damage increase with heat gauge
     Enhancement("Locking", 245, 274, 1, Misc, [30,60], isGem=False, isAccessory=False) # Extend Combo Time (Art Hit)
     Enhancement("Counterattack", 246, 275, 1, Def, [200,500], [20,100], isGem=False, isAccessory=False) # <54F2F7D0> Evade deals damage and increases your damage up to a %
     Enhancement("Slippery", 247, 276, 1, Def, [50,300], skillIcon=9) # Evasion Up (Targeted)
@@ -491,7 +491,7 @@ def CreateEnhancements():
     Enhancement("Aptitude", 362, 441, 1, Misc, [1], skillIcon=19) # Class Aptitude Up
     Enhancement("Strategist", 363, 442, 1, Misc, [1], skillIcon=0) # Extra Positional Arts
     Enhancement("Focus", 364, 443, 1, Misc, [1], skillIcon=21) # Extra Field Arts
-    Enhancement("Hydraulic", 365, 444, 1, Misc, [50], skillIcon=15, isBaseGameOnly=True) # <FC852C14> Heat Gauge cancel reduces buildup from the cancel
+    Enhancement("Hydraulic", 365, 444, 1, Misc, [50], isBaseGameOnly=True) # <FC852C14> Heat Gauge cancel reduces buildup from the cancel
     # Enhancement("", 366, 0, 1, M, [], skillIcon=0) # <0A83170C>
     # Enhancement("", 367, 0, 1, M, [], skillIcon=0) # <5E206C1B>
     # Enhancement("", 368, 0, 1, M, [], skillIcon=0) # <85F2BABF>

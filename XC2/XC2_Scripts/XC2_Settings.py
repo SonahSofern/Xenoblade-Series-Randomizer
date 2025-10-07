@@ -1,5 +1,5 @@
 import scripts.XCRandomizer, scripts.JSONParser
-from XC2.XC2_Scripts import SeedNames, Options
+from XC2.XC2_Scripts import SeedNames, Options, ObjectNameCleanup
 
 Game = "XC2"
 Title = "Xenoblade Chronicles 2"
@@ -16,7 +16,7 @@ TitlescreenSplash = scripts.XCRandomizer.FilePlacer(["Images/Logos/Aegis.wilay"]
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], f"Randomizer v{Version}") # Change Title Version to Randomizer vX.x.x
 
-extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.AddCustomEnhancements(), lambda: Options.TornaMain.PassAlongSpoilerLogInfo(Version, permalinkVar, seedEntryVar), lambda: Options.ObjectNameCleanup.ReassignAlphabeticalSort()]
+extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.AddCustomEnhancements(), lambda: Options.TornaMain.PassAlongSpoilerLogInfo(Version, permalinkVar, seedEntryVar), lambda: ObjectNameCleanup.ReassignAlphabeticalSort()]
 mainFolderNames = ["common", "common_gmk"]
 subFolderNames = ["common_ms"]
 

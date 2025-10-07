@@ -1,7 +1,8 @@
 from scripts import Helper, JSONParser, PopupDescriptions
 from XC2.XC2_Scripts.IDs import *
 import time, copy, os, math, random, json
-from XC2.XC2_Scripts import TornaRecipes,_WeaponChips, TornaQuests, TornaEnemies, TornaAreas, TornaShops, TornaRedBagItems, TornaMiscItems, TornaChests, TornaCollectionPoints, Options
+from XC2.XC2_Scripts.Torna_Logic import TornaRecipes, TornaQuests, TornaEnemies, TornaAreas, TornaShops, TornaRedBagItems, TornaMiscItems, TornaChests, TornaCollectionPoints
+from XC2.XC2_Scripts import Options, WeaponChips
 from scripts.Interactables import XenoOptionDict
 
 # TO DO
@@ -1363,7 +1364,7 @@ def ChangeReqItemRarities(): # we want the useful items that get dropped from ch
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
     
-    _WeaponChips.ChangeWeaponRankNames() # we want to make the weapon chip names have their ranks too
+    WeaponChips.ChangeWeaponRankNames() # we want to make the weapon chip names have their ranks too
 
 def GildedCheckNames():
     # current problems:

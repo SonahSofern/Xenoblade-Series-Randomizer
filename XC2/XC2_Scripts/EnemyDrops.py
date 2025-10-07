@@ -4,13 +4,13 @@ from scripts import Helper
 def RandoEnemyDrops():
     ValidReplacements = []
     if Options.EnemyDropOption_Accessories.GetState():
-        ValidReplacements.extend(IDs.Accessories)
+        ValidReplacements.extend(IDs.AccessoryIDs)
     if Options.EnemyDropOption_TornaAccessories.GetState():
         ValidReplacements.extend(IDs.TornaAccessories)
     if Options.EnemyDropOption_WeaponChips.GetState():
-        ValidReplacements.extend(IDs.WeaponChips)
+        ValidReplacements.extend(IDs.WeaponChipIDs)
     if Options.EnemyDropOption_AuxCores.GetState():
-        ValidReplacements.extend(IDs.AuxCores)
+        ValidReplacements.extend(IDs.AuxCoreIDs)
     if Options.EnemyDropOption_RefinedAuxCores.GetState():
         ValidReplacements.extend(IDs.RefinedAuxCores)
     if Options.EnemyDropOption_CoreCrystals.GetState():

@@ -274,7 +274,7 @@ def AeshmaCoreHPNerf(paramData): # Aeshma is almost unkillable with its regen ac
     
 def AionRoomFix(origEn, newEn, eRando:e.EnemyRandomizer): # Aion sits really far down so raise enemies up
     AionIDs = [265, 275]
-    if ((origEn["$id"] in AionIDs) and (newEn["$id"] not in AionIDs)): # Need a clause to keep original flyheight if the enemy is actually aion
+    if ((origEn["$id"] in AionIDs) and (newEn["$id"] not in AionIDs)):
         eRando.ChangeStats([newEn], [("FlyHeight", 500)])   
  
 def EnemyDesc(name):

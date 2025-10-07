@@ -4,13 +4,13 @@ from scripts import Helper, PopupDescriptions
 def RandoAccessoryShops():
     ValidReplacements = []
     if Options.AccessoryShopsOption_Accessories.GetState():
-        ValidReplacements.extend(IDs.Accessories)
+        ValidReplacements.extend(IDs.AccessoryIDs)
     if Options.AccessoryShopsOption_TornaAccessories.GetState():
         ValidReplacements.extend(IDs.TornaAccessories)
     if Options.AccessoryShopsOption_WeaponChips.GetState():
-        ValidReplacements.extend(IDs.WeaponChips)
+        ValidReplacements.extend(IDs.WeaponChipIDs)
     if Options.AccessoryShopsOption_AuxCores.GetState():
-        ValidReplacements.extend(IDs.AuxCores)
+        ValidReplacements.extend(IDs.AuxCoreIDs)
     if Options.AccessoryShopsOption_RefinedAuxCores.GetState():
         ValidReplacements.extend(IDs.RefinedAuxCores)
     if Options.AccessoryShopsOption_CoreCrystals.GetState():
@@ -29,7 +29,7 @@ def RandoAccessoryShops():
         shopData = json.load(shopFile)
         odds = Options.AccessoryShopsOption.GetSpinbox()
         for shop in shopData["rows"]:
-            if shop[f"DefItem1"] not in (IDs.Accessories + IDs.TornaAccessories): # Ensures it is an accessory shop
+            if shop[f"DefItem1"] not in (IDs.AccessoryIDs + IDs.TornaAccessories): # Ensures it is an accessory shop
                 continue
             for i in range(1,11):
                 if not Helper.OddsCheck(odds): # Check spinbox
