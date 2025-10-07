@@ -106,7 +106,7 @@ def GetEnemyCounts():
     # I don't want regular overworld enemies to be stronger/weaker because they spawn several of them in a pack, and
     # it's not consistent when they do that (standard Volffs are sometimes 1, sometimes 2, etc). I want to keep counts
     # only for bosses, UMs, quest enemies, etc
-    BossLikeEnemies = [IDs.BossMonsters, IDs.UniqueMonsters, IDs.SuperbossMonsters]
+    #BossLikeEnemies = [IDs.BossMonsters, IDs.UniqueMonsters, IDs.SuperbossMonsters]
 
     basePath = Path("XC3/JsonOutputs")
 
@@ -133,8 +133,8 @@ def GetEnemyCounts():
                 for i in Helper.InclRange(1,6):
                     id = row[f"EnemyID{i}"]
                     count = row[f"PopCount{i}"]
-                    if id in BossLikeEnemies: # Valid enemy
-                        thisFightCount[id] = thisFightCount.get(id, 0) + count
+                    #if id in BossLikeEnemies: # Valid enemy
+                    thisFightCount[id] = thisFightCount.get(id, 0) + count
                 for key, val in thisFightCount.items():
                     enemyCounts[key] = val
 
@@ -143,7 +143,7 @@ def GetEnemyCounts():
 def GetGroupFightViolations():
     Default_Params = [
         Enemy.ParamModification(['StRevStr', 'StRevHeal']),
-        Enemy.ParamModification(['StRevHP'], C=0.7)
+        Enemy.ParamModification(['StRevHp'], C=0.7)
     ]
     Default = Enemy.Violation([], [], Default_Params)
 
