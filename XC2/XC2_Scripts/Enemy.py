@@ -138,7 +138,7 @@ def Bandaids(eneData, isBoss, eRando):
 def GetEnemyCounts():
     enemyCounts = dict()
     # I don't want regular overworld enemies to be stronger/weaker because they spawn several of them in a pack, and
-    # it's not consistent when they do that (standard Wolffs are sometimes 1, sometimes 2, etc). I want to keep counts
+    # it's not consistent when they do that (standard Volffs are sometimes 1, sometimes 2, etc). I want to keep counts
     # only for bosses, UMs, quest enemies, etc
     BossLikeEnemies = [IDs.BossMonsters, IDs.UniqueMonsters, IDs.SuperbossMonsters]
     for name in ValidEnemyPopFileNames:

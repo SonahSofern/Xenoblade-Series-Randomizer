@@ -151,9 +151,9 @@ class EnemyRandomizer():
         the original (M), making the scaling effect relative to the character's
         original context.
 
-        Formula:                           K
-          sgn( (N/M) - 1 ) * | (N/M) - 1 |^
-        C^
+        Formula:                         K
+                  sgn(N-M) * |(N/M) - 1|^
+                C^
 
         Args:
             M (int): The original number of enemies for the character.
@@ -172,7 +172,7 @@ class EnemyRandomizer():
                    and a value < 1.0 is a nerf.
         """
         def BalanceFormula(M, N, C, K):
-            return C ** (math.copysign(1, N / M - 1) * (abs(N / M - 1) ** K))
+            return C ** (math.copysign(1, N-M) * (abs(N/M - 1) ** K))
 
         # Helper function to get the violations which apply to this fight
         def GetViolations():
