@@ -192,7 +192,7 @@ EnemyAggroOption = Option("Enemy Aggro", Enemies, "Reduces the number of enemies
 # Misc
 MusicOption = Option("Music", Misce, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
 MusicOption_MixBattleAndEnv = SubOption("Mix Battle/Environment Themes", MusicOption, _defState = False)
-CustomCoreCrystalOption = Option("Custom Core Crystals", Items, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], prio = 52, hasSpinBox = True, spinDesc = "% of Chests", descData= lambda: CoreCrystalAdjustments.Description())
+CustomCoreCrystalOption = Option("Custom Core Crystals", Items, "Adds Core Crystals with guaranteed Rare Blades to Treasure Chests", [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], prio = 52, hasSpinBox = True, spinDefault=5, spinDesc = "% of Chests", descData= lambda: CoreCrystalAdjustments.Description())
 
 # QOL
 FreelyEngageBladesOption = Option("Freely Engage Blades", QOL, "Allows blades to be freely engaged by all valid drivers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["FreeEngage"], [0], [1], [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1075, 1076, 1103])])
@@ -228,7 +228,7 @@ FieldItemOption = Option("Field Item Size", Funny, "Randomizes the size and spin
 # Cosmetics
 BladeWeaponCosmeticsOption = Option("Blade Weapon Cosmetics", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])], spinDefault=25)
 TrustLineOption = Option("Blade Trust Lines", CosmeticsTab, "Randomizes blade-driver trust lines in battle (colors, power, etc.)", [lambda: TrustBeam.BeamRandomizer()])
-CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()],prio=51, hasSpinBox = True, descData=lambda: Cosmetics.CosmeticsDescription()) # Sub are created by another class
+CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()],prio=51, hasSpinBox = True, spinDefault=10, descData=lambda: Cosmetics.CosmeticsDescription()) # Sub are created by another class
 for opt in Cosmetics.CosmeticsList: # To gen these since listing them here would be annoying
     opt.CreateSubOptions(CosmeticsOption)
 

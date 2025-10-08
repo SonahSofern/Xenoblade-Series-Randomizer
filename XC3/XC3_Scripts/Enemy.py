@@ -100,15 +100,19 @@ def GetGroupFightViolations():
 def GetGroupFightIDs():
     return []
 
-def IntroFightBalances(eRando:Enemy.EnemyRandomizer):
-    introFights = [449, 450, 451, 452, 453, 454, 455]
+def BreakTutorial(eRando:Enemy.EnemyRandomizer): # Tutorial that requires an enemy to be break, topple, dazed
+    breakTutorial = [738]
+    eRando.ChangeStats(breakTutorial, [("RstBreak", 0)])
+
+def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer): # some of this down the line could be removed once a general balancing of stats occurs
+    introTutorial = [449, 450, 451, 452, 453, 454, 455]
     bossIntroFights = [456, 457]
     returningToColony =  [737 ,739]
     breakTutorial = [738]
     Piranhax = [588]
     DrifterRopl = [458]
     StealthShip = [460,461,462]
-    eRando.ChangeStats(introFights, [("StRevHp", 5), ("StRevStr", 50), ("StRevHeal", 50)])
+    eRando.ChangeStats(introTutorial, [("StRevHp", 5), ("StRevStr", 50), ("StRevHeal", 50)])
     eRando.ChangeStats(bossIntroFights, [("StRevHp", 20), ("StRevStr", 70), ("StRevHeal", 70)])
     eRando.ChangeStats(returningToColony, [("StRevHp", 20)])
     eRando.ChangeStats(breakTutorial, [("RstBreak", 0), ("StRevHp", 150)])
