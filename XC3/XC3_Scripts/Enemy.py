@@ -3,10 +3,10 @@ import json, random, copy, traceback, math
 from XC3.XC3_Scripts import IDs, Options
 from scripts import Helper, JSONParser, PopupDescriptions, Enemies as Enemy
 
-# https://xenobladedata.github.io/xb3_130/SYS_GimmickLocation.html#25513 useful file has enemy xyz and probably how fights dteremine where try again places you
+# https://xenobladedata.github.io/xb3_130/SYS_GimmickLocation.html#25513 useful file has enemy xyz
 
 # To fix:         
-# Too many agnus/keves soldier enemies dillutes the pool of intereszting enemies         
+# Too many agnus/keves soldier enemies dillutes the pool of interesting enemies         
 
 StaticEnemyData:list[Enemy.EnemyGroup] = []
 

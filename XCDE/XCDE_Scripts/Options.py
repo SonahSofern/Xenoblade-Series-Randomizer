@@ -109,7 +109,7 @@ NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monste
 NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption)
 NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption)
 NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption)
-NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption)
+NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, defState=False)
 
 UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: EnemiesScript.Enemies(IDs.UniqueEnemies + IDs.SuperbossEnemies, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption)], descData=lambda: EnemiesScript.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True)
 UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption)
@@ -121,7 +121,7 @@ BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the ch
 BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption)
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption)
-BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption)
+BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=False)
 
 # FinalBossOption = Option("Final Boss", Enemies, "Forces the final boss to be one of your choices")
 

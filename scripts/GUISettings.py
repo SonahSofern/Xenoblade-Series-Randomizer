@@ -289,6 +289,7 @@ def Randomize(root, RandomizeButton, fileEntryVar, randoProgressDisplay, randoPr
     def ThreadedRandomize():
         entrySpot = fileEntryVar
         outSpot = f"{outputDirVar.get().strip()}/romfs/bdat"
+        
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
         # Showing Progress Diplay 
@@ -321,7 +322,6 @@ def Randomize(root, RandomizeButton, fileEntryVar, randoProgressDisplay, randoPr
             
         randoProgressDisplay.config(text="Packing BDATs")
     
-        
         # Packs BDATs
         # If we are packed for users we dont want to create a window. For us we want this window to see errors from bdat-rs
         if isOneFile:
@@ -334,8 +334,6 @@ def Randomize(root, RandomizeButton, fileEntryVar, randoProgressDisplay, randoPr
             # Outputs common_ms in the correct file structure
             os.makedirs(f"{outSpot}/{textFolderName}", exist_ok=True)
             for file in SubBDATFiles:
-                # print(f"{outputDirVar.get().strip()}/{file}.bdat")
-                # print(f"{outputDirVar.get().strip()}/{textFolderName}/{file}.bdat")
                 shutil.move(f"{outSpot}/{file}.bdat", f"{outSpot}/{textFolderName}/{file}.bdat")
             AddFileToOutput(outSpot, extraFiles)
             # Displays Done and Clears Text
@@ -440,9 +438,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
                 errorMsgObj.Text(errorMsg)
         pb['value'] = nextStep
 
-    return lambda: PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(),root,defFontVar)
-
-    
+    return lambda: PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(), root, defFontVar)
 
 OptionColorLight = UI_Colors.White
 OptionColorDark = UI_Colors.Gray

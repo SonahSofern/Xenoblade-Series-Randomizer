@@ -46,7 +46,7 @@ class Music:
             defState = True
         else:
             defState = False
-        Interactables.SubOption(self.songName, parent, [lambda: list.append(self)],_defState=defState)
+        Interactables.SubOption(self.songName, parent, [lambda: list.append(self)],defState=defState)
 
 
 def MusicRando(Songs:list[Music], TempList:list[Music]):
