@@ -13,6 +13,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
     ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev', "HpOver"]
     aggroKeys = ['Detects', 'SearchRange', 'SearchAngle', 'SearchRadius', 'BatInterval', 'BatArea', 'BatAreaType']
     isMatchSize = matchSize.GetState()
+    isStatBalance = True
     if isVanillaAggro:
         ignoreKeys.extend(aggroKeys)
     
@@ -46,6 +47,10 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                     if not isMatchSize and targetGroup == IDs.BossMonsters: # Forces red rings to be gone if you dont scale bosses to avoid softlocks, you cannot hit enemies outside rings and they can spawn weird when big
                         RedRingRemoval()
                         
+                    if isStatBalance:
+                        StatBalancing(oldEn, newEn, eRando)
+                        
+                        
                     CloneEnemiesDefeatCondition(oldEn, newEn) 
                     
                     eRando.ActTypeFix(newEn, oldEn)
@@ -60,6 +65,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                     AionRoomFix(oldEn, newEn, eRando) 
                                                 
                     eRando.CopyKeys(oldEn, newEn, ignoreKeys) # Keep in mind this will overwrite changes made to the old enemy 
+                    
                         
                 for group in StaticEnemyData:
                     group.RefreshCurrentGroup()
@@ -69,6 +75,10 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                 JSONParser.CloseFile(eRando.arrangeData, eneFile)
                 JSONParser.CloseFile(eRando.paramData, paramFile)
                 JSONParser.CloseFile(eRando.rscData, rscFile)
+
+
+def StatBalancing(oldEn, newEn, eRando:e.EnemyRandomizer):
+    eRando.ChangeStats([newEn], [("HpMaxRev", eRando.FindParam(oldEn)["HpMaxRev"])]) # Makes HP match previous enemy stats in XC2 generally stay around 1000 and dont need balancing but HP varies wildly and can lead to unfair early games this will stop that
 
 def CreateBlade(enBlade, oldEn, newEn, eRando:e.EnemyRandomizer): # Because there is only 1 blade referenced for each enemy we have to create new blades (Since blades are not referenced in gimmick files it is fine)
     newBlade = copy.deepcopy(enBlade)
@@ -110,7 +120,6 @@ def Bandaids(eneData, isBoss, eRando):
     ForcedWinFights([3,6])
     SummonsFix(eneData)
     if isBoss.GetState():
-        BaseGameIntroChanges(eRando)
         TornaIntroChanges(eRando)
 
  # Solo Fight Violations
@@ -201,9 +210,7 @@ def EnemyAggro(): # Not going to add aggro to enemies because it would be dispro
                 continue
             en["Detects"] = 0
         JSONParser.CloseFile(eneData, eneFile)
-        
-def BaseGameIntroChanges(e:e.EnemyRandomizer):
-    e.ChangeStats([179], [("HpMaxRev", 50)])
+
     
 def TornaIntroChanges(e:e.EnemyRandomizer):
     e.ChangeStats([1430, 1429, 1428, 1454], [("HpMaxRev", 10)])

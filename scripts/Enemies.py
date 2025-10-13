@@ -222,4 +222,5 @@ class EnemyRandomizer():
             self.rscData["rows"].append(newRSC)
 
 
-                
+def StatBalancing(statAndRatios): # Generally Balance stats by the enemy that used to be there
+    pass
