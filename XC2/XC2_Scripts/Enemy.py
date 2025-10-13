@@ -1,80 +1,80 @@
 import json, random, copy, traceback, math
 from XC2.XC2_Scripts import IDs, Options
 from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e, Interactables
+from scripts.Enemies import ParamModification, ArtModification
 
 StaticEnemyData:list[e.EnemyGroup] = []
+
+ValidEnemyPopFileNames = ["ma01a_FLD_EnemyPop.json", "ma02a_FLD_EnemyPop.json", "ma04a_FLD_EnemyPop.json", "ma05a_FLD_EnemyPop.json", "ma05c_FLD_EnemyPop.json", "ma07a_FLD_EnemyPop.json", "ma07c_FLD_EnemyPop.json", "ma08a_FLD_EnemyPop.json", "ma08c_FLD_EnemyPop.json", "ma10a_FLD_EnemyPop.json", "ma10c_FLD_EnemyPop.json", "ma11a_FLD_EnemyPop.json", "ma13a_FLD_EnemyPop.json", "ma13c_FLD_EnemyPop.json", "ma15a_FLD_EnemyPop.json", "ma15c_FLD_EnemyPop.json", "ma16a_FLD_EnemyPop.json", "ma17a_FLD_EnemyPop.json", "ma17c_FLD_EnemyPop.json", "ma18a_FLD_EnemyPop.json", "ma18c_FLD_EnemyPop.json", "ma20a_FLD_EnemyPop.json", "ma20c_FLD_EnemyPop.json", "ma21a_FLD_EnemyPop.json", "ma40a_FLD_EnemyPop.json", "ma41a_FLD_EnemyPop.json", "ma42a_FLD_EnemyPop.json"]
                                                                                                                                                                                                                                                                                                           
 def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isVanillaAggro, matchSize:Interactables.Option):
     global StaticEnemyData
-    # GroupFightViolations = GetGroupFightViolations()
-    # GroupFightIDs = GetGroupFightIDs()
-    # SoloFightViolations = GetSoloFightViolations()
-    # soloFightIDs = [179, 182, 184, 185, 186, 187, 189, 190, 258, 260, 262, 256, 604] # Includes both 1 and 2 person party fights
+    EnemyCounts = GetEnemyCounts()
+    GroupFightViolations = GetGroupFightViolations()
+    SoloFightViolations = GetSoloFightViolations()
     ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev', "HpOver"]
     aggroKeys = ['Detects', 'SearchRange', 'SearchAngle', 'SearchRadius', 'BatInterval', 'BatArea', 'BatAreaType']
     isMatchSize = matchSize.GetState()
-    isStatBalance = True
     if isVanillaAggro:
         ignoreKeys.extend(aggroKeys)
-    
     actKeys = ["FlyHeight", "ActType"]
     with open("XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
         with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
             with open("XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as rscFile:
-                paramData = json.load(paramFile)
-                rscData = json.load(rscFile)
-                eneData = json.load(eneFile)
-                
-                eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, permanentBandaids=[lambda: EarthBreathNerf(), lambda: AeshmaCoreHPNerf(paramData), lambda: GortOgreUppercutRemoval(paramData)], actKeys=actKeys)
-                
-                if StaticEnemyData == []:
-                    StaticEnemyData = eRando.GenEnemyData()
-                
-                for oldEn in eRando.arrangeData["rows"]:
-                    if eRando.FilterEnemies(oldEn, targetGroup):
-                        continue 
-                    
-                    newEn = eRando.CreateRandomEnemy(StaticEnemyData)
-                  
-                    # if Options.BossEnemyOption_Solo.GetState():
-                    #     eRando.BalanceFight(oldEn, newEn, soloFightIDs, SoloFightViolations) 
-                    # if Options.BossEnemyOption_Group.GetState():
-                    #     eRando.BalanceFight(oldEn, newEn, GroupFightIDs, GroupFightViolations) 
-                        
-                    if isMatchSize:
-                        EnemySizeHelper(oldEn, newEn, eRando)
-                        
-                    if not isMatchSize and targetGroup == IDs.BossMonsters: # Forces red rings to be gone if you dont scale bosses to avoid softlocks, you cannot hit enemies outside rings and they can spawn weird when big
-                        RedRingRemoval()
-                        
-                    if isStatBalance:
+                with open("XC2/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as artFile:
+                    paramData = json.load(paramFile)
+                    rscData = json.load(rscFile)
+                    eneData = json.load(eneFile)
+                    artData = json.load(artFile)
+
+                    eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, artData, permanentBandaids=[lambda: EarthBreathNerf(), lambda: AeshmaCoreHPNerf(paramData), lambda: GortOgreUppercutRemoval(paramData)], actKeys=actKeys)
+
+                    if StaticEnemyData == []:
+                        StaticEnemyData = eRando.GenEnemyData()
+
+                    for oldEn in eRando.arrangeData["rows"]:
+                        if eRando.FilterEnemies(oldEn, targetGroup):
+                            continue
+
+                        newEn = eRando.CreateRandomEnemy(StaticEnemyData)
+
+                        if Options.BossEnemyOption_Solo.GetState():
+                            eRando.BalanceFight(oldEn, newEn, SoloFightViolations, EnemyCounts)
+                        if Options.BossEnemyOption_Group.GetState():
+                            eRando.BalanceFight(oldEn, newEn, GroupFightViolations, EnemyCounts)
+
+                        if isMatchSize:
+                            EnemySizeHelper(oldEn, newEn, eRando)
+
+                        if not isMatchSize and targetGroup == IDs.BossMonsters: # Forces red rings to be gone if you dont scale bosses to avoid softlocks, you cannot hit enemies outside rings and they can spawn weird when big
+                            RedRingRemoval()
+
+                        CloneEnemiesDefeatCondition(oldEn, newEn)
+
+                        eRando.ActTypeFix(newEn, oldEn)
+
+                        # Blade Act Fix
+                        if newEn["EnemyBladeID"] != 0:
+                            for enBlade in eRando.arrangeData["rows"]:
+                                if enBlade['$id'] == newEn['EnemyBladeID']:
+                                    CreateBlade(enBlade, oldEn, newEn, eRando)
+                                    break
+
                         StatBalancing(oldEn, newEn, eRando)
                         
-                        
-                    CloneEnemiesDefeatCondition(oldEn, newEn) 
-                    
-                    eRando.ActTypeFix(newEn, oldEn)
-                    
-                    # Blade Act Fix
-                    if newEn["EnemyBladeID"] != 0:
-                        for enBlade in eRando.arrangeData["rows"]:
-                            if enBlade['$id'] == newEn['EnemyBladeID']:
-                                CreateBlade(enBlade, oldEn, newEn, eRando)
-                                break
-                            
-                    AionRoomFix(oldEn, newEn, eRando) 
-                                                
-                    eRando.CopyKeys(oldEn, newEn, ignoreKeys) # Keep in mind this will overwrite changes made to the old enemy 
-                    
-                        
-                for group in StaticEnemyData:
-                    group.RefreshCurrentGroup()
-                                        
-                Bandaids(eneData, isBoss, eRando) # Changes based on ID after the initial swap
+                        AionRoomFix(oldEn, newEn, eRando)
 
-                JSONParser.CloseFile(eRando.arrangeData, eneFile)
-                JSONParser.CloseFile(eRando.paramData, paramFile)
-                JSONParser.CloseFile(eRando.rscData, rscFile)
+                        eRando.CopyKeys(oldEn, newEn, ignoreKeys) # Keep in mind this will overwrite changes made to the old enemy
+
+                    for group in StaticEnemyData:
+                        group.RefreshCurrentGroup()
+
+                    Bandaids(eneData, isBoss, eRando) # Changes based on ID after the initial swap
+
+                    JSONParser.CloseFile(eRando.arrangeData, eneFile)
+                    JSONParser.CloseFile(eRando.paramData, paramFile)
+                    JSONParser.CloseFile(eRando.rscData, rscFile)
+                    JSONParser.CloseFile(eRando.artData, artFile)
 
 
 def StatBalancing(oldEn, newEn, eRando:e.EnemyRandomizer):
@@ -90,7 +90,6 @@ def CreateBlade(enBlade, oldEn, newEn, eRando:e.EnemyRandomizer): # Because ther
     EnemySizeHelper(oldEn, newBlade, eRando)
 
 def RedRingRemoval():
-    ValidEnemyPopFileNames = ["ma01a_FLD_EnemyPop.json", "ma02a_FLD_EnemyPop.json", "ma04a_FLD_EnemyPop.json", "ma05a_FLD_EnemyPop.json", "ma05c_FLD_EnemyPop.json", "ma07a_FLD_EnemyPop.json", "ma07c_FLD_EnemyPop.json", "ma08a_FLD_EnemyPop.json", "ma08c_FLD_EnemyPop.json", "ma10a_FLD_EnemyPop.json", "ma10c_FLD_EnemyPop.json", "ma11a_FLD_EnemyPop.json", "ma13a_FLD_EnemyPop.json", "ma13c_FLD_EnemyPop.json", "ma15a_FLD_EnemyPop.json", "ma15c_FLD_EnemyPop.json", "ma16a_FLD_EnemyPop.json", "ma17a_FLD_EnemyPop.json", "ma17c_FLD_EnemyPop.json", "ma18a_FLD_EnemyPop.json", "ma18c_FLD_EnemyPop.json", "ma20a_FLD_EnemyPop.json", "ma20c_FLD_EnemyPop.json", "ma21a_FLD_EnemyPop.json", "ma40a_FLD_EnemyPop.json", "ma41a_FLD_EnemyPop.json", "ma42a_FLD_EnemyPop.json"]
     for name in ValidEnemyPopFileNames:
         with open(f"XC2/JsonOutputs/common_gmk/{name}", 'r+', encoding='utf-8') as popFile:
             popData = json.load(popFile)
@@ -99,12 +98,25 @@ def RedRingRemoval():
             JSONParser.CloseFile(popData, popFile)
         
 def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
+    Supermassive = 4
     Massive = 3
     Large = 2
     Normal = 1
     Small = 0
+
+    # Aion, Ophion, and Siren
+    SupermassiveEnemies = [265, 275, 1137, 1449, 1450]
+
+    if oldEn["$id"] in SupermassiveEnemies:
+        oldEn["ChrSize"] = Supermassive
+    if newEn["$id"] in SupermassiveEnemies:
+        newEn["ChrSize"] = Supermassive
     
     multDict = {
+        (Supermassive, Massive): 4,
+        (Supermassive, Large): 6,
+        (Supermassive, Normal): 8,
+        (Supermassive, Small): 10,
         (Massive, Large): 2,
         (Massive, Normal): 3,
         (Massive, Small): 5,
@@ -115,6 +127,12 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     keys = ["Scale"]
     eRando.EnemySizeMatch(oldEn, newEn, keys, multDict)
 
+    # Reset size if scaled higher than massive
+    if oldEn["ChrSize"] > Massive:
+        oldEn["ChrSize"] = Massive
+    if newEn["ChrSize"] > Massive:
+        newEn["ChrSize"] = Massive
+
 def Bandaids(eneData, isBoss, eRando):
     '''Bandaids intented to be ran once'''
     ForcedWinFights([3,6])
@@ -122,43 +140,72 @@ def Bandaids(eneData, isBoss, eRando):
     if isBoss.GetState():
         TornaIntroChanges(eRando)
 
+def GetEnemyCounts():
+    enemyCounts = dict()
+    # I don't want regular overworld enemies to be stronger/weaker because they spawn several of them in a pack, and
+    # it's not consistent when they do that (standard Volffs are sometimes 1, sometimes 2, etc). I want to keep counts
+    # only for bosses, UMs, quest enemies, etc
+    BossLikeEnemies = [IDs.BossMonsters, IDs.UniqueMonsters, IDs.SuperbossMonsters]
+    for name in ValidEnemyPopFileNames:
+        with open(f"XC2/JsonOutputs/common_gmk/{name}", 'r+', encoding='utf-8') as popFile:
+            popData = json.load(popFile)
+            for row in popData["rows"]:
+                # Enemies may appear as more than one enemy in the same fight. For example, the Tirkins in chapter 4
+                # are separated as two groups of 3 and 1, despite being the exact same enemy
+                # To account for this, we sum all the instances before adding it to the overall counter
+                thisFightCount = dict()
+                for i in Helper.InclRange(1,4):
+                    id = row[f"ene{i}ID"]
+                    count = row[f"ene{i}num"]
+                    if id in BossLikeEnemies: # Valid enemy
+                        thisFightCount[id] = thisFightCount.get(id, 0) + count
+                for key, val in thisFightCount.items():
+                    enemyCounts[key] = val
+
+    return enemyCounts
+
  # Solo Fight Violations
 def GetSoloFightViolations():
-    SoloUniqueMonstersViolations = e.Violation(IDs.UniqueMonsters, -15)
-    SoloSuperbossMonstersViolations = e.Violation(IDs.SuperbossMonsters, -30)
-    SoloBossMonsterViolations = e.Violation(IDs.BossMonsters, -15)
+    soloFightIDs = [179, 182, 184, 185, 186, 187, 189, 190, 258, 260, 262, 256, 604] # Includes both 1 and 2 person party fights
+
+    SoloUniqueMonstersViolations = e.Violation(soloFightIDs, IDs.UniqueMonsters, lvDiff=-15)
+    SoloSuperbossMonstersViolations = e.Violation(soloFightIDs, IDs.SuperbossMonsters, lvDiff=-30)
+    SoloBossMonsterViolations = e.Violation(soloFightIDs, IDs.BossMonsters, lvDiff=-15)
     SoloFightViolations:list[e.Violation] = [SoloUniqueMonstersViolations, SoloSuperbossMonstersViolations, SoloBossMonsterViolations]
+
     return SoloFightViolations
 
 # Group Fight Violations 
 def GetGroupFightViolations():
-    Jin = e.Violation([1754, 231, 241, 244, 253, 272], -10)
-    Akhos = e.Violation([212, 238, 267])
-    Malos = e.Violation([214, 243, 245, 268, 273], -10)
-    Malos = e.Violation([214, 243, 245, 268, 273], [("Lv", 15)])
-    Patroka = e.Violation([223, 239, 270])
-    Mikhail = e.Violation([225, 271])
-    Aeshma = e.Violation([232,233,234], -10)
-    Amalthus = e.Violation([254], -10)
-    Aion = e.Violation([265, 275], -20)
-    GroupUniqueMonstersViolations = e.Violation(IDs.UniqueMonsters, -5)
-    GroupSuperbossMonstersViolations = e.Violation(IDs.SuperbossMonsters, -20)
-    GroupBossMonsterViolations = e.Violation(IDs.BossMonsters, -5)
-    GroupNormalMonsterViolation = e.Violation(IDs.NormalMonsters, 2)
-    return [Jin, Akhos, Malos, Patroka, Mikhail, Aeshma, Amalthus, Aion, GroupUniqueMonstersViolations, GroupSuperbossMonstersViolations, GroupBossMonsterViolations, GroupNormalMonsterViolation]
+    Default_Params = [
+        e.ParamModification(['StrengthRev', 'PowEtherRev']),
+        e.ParamModification(['HpMaxRev'], C=0.7)
+    ]
+    Default = e.Violation([], [], Default_Params)
 
-def GetGroupFightIDs():
-    ArdanianSoldiers = [189,190,219]
-    Puffots = [195]
-    Bandits = [196,197,198]
-    VandhamTrio = [199,201,202]
-    Tirkin = [220, 235]
-    TantaleseKnight = [237]
-    AkhosTrio = [238,239,240]
-    Phantasm = [242]
-    Guldos = [249]
-    IndolSoldier = [252]
-    return Puffots + Bandits + VandhamTrio + ArdanianSoldiers + Tirkin + TantaleseKnight + AkhosTrio + Phantasm + Guldos + IndolSoldier
+    # Note: The following were checked explicitly and I don't think they need nerfing besides the universal nerfs, so they're not listed below:
+    # - Malos w/ Sever
+    # - Patroka (both w/ Perdido and with her lance)
+    # - Mikhail (both w/ Cressidus and with his fans)
+    # - Aeshma's Core (Phase 1 might need the healing re-evaluated though)
+    # - Amalthus (Though we should keep an eye on Domination)
+    # - Slithe Jagron
+    #
+    # The following nerfs are currently implemented:
+    # - Akhos w/ Obrona: cooldown of Checkmate
+    # - Akhos w/ bow: cooldown of Black Wave and White Wave
+    # - Jin: cooldown of Skyward Slash
+    # - Malos w/ Monado: cooldown of Monado Cyclone, Monado Jail, and Monado Eater
+    Akhos_Obrona = e.Violation([], [206, 212, 267], Default_Params, [e.ArtModification(['ArtsNum3'], ['Recast'], isReciprocal=True)])
+    Akhos_Bow = e.Violation([], [238], Default_Params,[e.ArtModification(['ArtsNum3', 'ArtsNum4'], ['Recast'], isReciprocal=True)])
+    Jin = e.Violation([], [231, 241, 244, 272, 253], Default_Params, [e.ArtModification(['ArtsNum2'], ['Recast'], isReciprocal=True)])
+    Malos_Monado = e.Violation([], [243, 245, 273, 1443, 1446, 1447], Default_Params, [e.ArtModification(['ArtsNum3', 'ArtsNum4', 'ArtsNum6'], ['Recast'], isReciprocal=True)])
+    Aion = e.Violation([], [265, 275], [
+        e.ParamModification(['StrengthRev', 'PowEtherRev']),
+        e.ParamModification(['HpMaxRev'], C=0.7, K=1) # Much heavier HP scaling based on number of enemies
+    ])
+
+    return [Default, Akhos_Obrona, Akhos_Bow, Jin, Malos_Monado, Aion]
 
 def CloneEnemiesDefeatCondition(oldEn, newEn): # Forces all copies of enemies that clone themselves to be defeated in a boss encounter
     CloneEnemyIDs = [242, 281, 1882, 1884]

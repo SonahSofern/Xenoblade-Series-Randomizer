@@ -165,8 +165,8 @@ BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, s
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True, spinDefault=4)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True, spinDefault=10)
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=False, hasSpinBox=True, spinDefault=1)
-# BossEnemyOption_Solo = SubOption("Balance Solo Fights", BossEnemyOption)
-# BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
+BossEnemyOption_Solo = SubOption("Balance Solo Fights", BossEnemyOption)
+BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
 BossEnemyOption_Size = SubOption("Match Size", BossEnemyOption)
 
 
