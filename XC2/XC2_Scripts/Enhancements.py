@@ -120,32 +120,27 @@ def HandleAllRange(start, stop, step):
 
 def SearchAndSetDisplayIDs():
     global DisplayTagID
-    with open("./XC2/JsonOutputs/common/BTL_EnhanceEff.json", 'r+', encoding='utf-8') as EnEffFile:
+    with open("./XC2/JsonOutputs/common/BTL_EnhanceEff.json", 'r+', encoding='utf-8') as enEffFile:
         with open("./XC2/JsonOutputs/common_ms/btl_buff_ms.json", 'r+', encoding='utf-8') as btlBuffFile:
-            EnEff = json.load(EnEffFile)
-            btlBuff = json.load(btlBuffFile)
+            enEffData = json.load(enEffFile)
+            btlBuffData = json.load(btlBuffFile)
             disList = DisplayTagList
 
-            
-            for eff in EnEff["rows"]:   # sets names in EnhanceEff File
+            for eff in enEffData["rows"]:   # sets names in EnhanceEff File
                 for enhancement in disList:        
                     if enhancement["enhanceEff"] == eff["$id"]:
                         eff["Name"] = enhancement["$id"]
                         break
 
             for item in disList: # adds name to ms file
-                btlBuff["rows"].append({
+                btlBuffData["rows"].append({
                     "$id": item["$id"],
                     "style": item["style"],
                     "name": item["name"],   
                 })
-        
-            btlBuffFile.seek(0)
-            btlBuffFile.truncate()
-            json.dump(btlBuff, btlBuffFile, indent=2, ensure_ascii=False)       
-        EnEffFile.seek(0)
-        EnEffFile.truncate()
-        json.dump(EnEff,  EnEffFile, indent=2, ensure_ascii=False)    
+
+            JSONParser.CloseFile(btlBuffData, btlBuffFile)
+            JSONParser.CloseFile(enEffData, enEffFile)   
 
 
 
