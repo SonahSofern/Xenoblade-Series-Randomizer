@@ -285,6 +285,8 @@ def EnemyDesc(name):
     EnemyRandoDesc.Text(f"{name} are the target group to be randomized.")
     EnemyRandoDesc.Text(f"The suboption for those categories are what those enemies will be randomized into.")
     EnemyRandoDesc.Text(f"The spinbox for each option is the weight of that category.")
+    EnemyRandoDesc.Header(Options.NormalEnemyOption_Stats.name)
+    EnemyRandoDesc.Text("This balances stats (mainly HP) for all fights of this category. Hp varies greatly in XC2 and this helps counterract that.")
     if name == Options.BossEnemyOption.name:
         EnemyRandoDesc.Header(Options.BossEnemyOption_Solo.name)
         EnemyRandoDesc.Text("This will balance required fights that are fought solo, by adjusting the levels of the encounter")
@@ -295,4 +297,5 @@ def EnemyDesc(name):
         EnemyRandoDesc.Text("If this setting is on, enemies will keep their original aggro. For example, if a Krabble is replaced by Amalthus, it will keep the krabble's aggro type and radius.")
     EnemyRandoDesc.Header(Options.NormalEnemyOption_Size.name)
     EnemyRandoDesc.Text("This will match the size of the new enemy to the original enemy. For example, Ophion (a big enemy), when replaced with a krabble (a small enemy), will force the Krabble to match Ophions size for that instance of it. This helps with indoor areas as massive enemies will be shrunk to match their new environment.")
+    
     return EnemyRandoDesc

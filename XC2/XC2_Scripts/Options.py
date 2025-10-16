@@ -150,8 +150,8 @@ NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=Tru
 NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption, hasSpinBox=True, spinDefault=3)
 NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption, hasSpinBox=True, spinDefault=3)
 NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, hasSpinBox=True, spinDefault=1)
+NormalEnemyOption_Stats = SubOption("Balance Stats", NormalEnemyOption)
 NormalEnemyOption_Aggro = SubOption("Vanilla Aggro", NormalEnemyOption)
-NormalEnemyOption_Stats = SubOption("Stat Balancing", NormalEnemyOption)
 NormalEnemyOption_Size = SubOption("Match Size", NormalEnemyOption)
 
 UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: Enemy.Enemies(IDs.UniqueMonsters + IDs.SuperbossMonsters, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption, UniqueEnemyOption_Aggro, UniqueEnemyOption_Size, UniqueEnemyOption_Stats)], descData=lambda: Enemy.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True, prio=2)
@@ -159,8 +159,8 @@ UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption, hasSpinBox=Tru
 UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption, hasSpinBox=True, spinDefault=10)
 UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=5)
 UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=1)
+UniqueEnemyOption_Stats = SubOption("Balance Stats", UniqueEnemyOption)
 UniqueEnemyOption_Aggro = SubOption("Vanilla Aggro", UniqueEnemyOption)
-UniqueEnemyOption_Stats = SubOption("Stat Balancing", UniqueEnemyOption)
 UniqueEnemyOption_Size = SubOption("Match Size", UniqueEnemyOption)
 
 BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, True, BossEnemyOption_Size, BossEnemyOption_Stats)], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True, prio=2)
@@ -168,9 +168,9 @@ BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, s
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True, spinDefault=4)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True, spinDefault=10)
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=False, hasSpinBox=True, spinDefault=1)
+BossEnemyOption_Stats = SubOption("Balance Stats", BossEnemyOption)
 BossEnemyOption_Solo = SubOption("Balance Solo Fights", BossEnemyOption)
 BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
-BossEnemyOption_Stats = SubOption("Stat Balancing", BossEnemyOption)
 BossEnemyOption_Size = SubOption("Match Size", BossEnemyOption)
 
 EnemyEnhancementsOption = Option("Enemy Enhancements", Enemies, "Gives enemies a random enhancement; it is displayed by their name", [lambda: EnemyEnhancements.EnemyEnhances()], hasSpinBox = True, spinDefault=30, descData=lambda: EnemyEnhancements.EnemyEnhancementDescriptions())
