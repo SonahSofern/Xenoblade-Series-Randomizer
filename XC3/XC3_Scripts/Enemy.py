@@ -54,6 +54,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                             EnemySizeHelper(en, newEn, eRando)
 
                         IntroFightBalances(en, newEn, eRando)
+                        
+                        eRando.HealthBalancing(en, newEn, 'StRevHp')
 
                         Helper.CopyKeys(en, newEn, ignoreKeys)
 
@@ -152,7 +154,7 @@ def GetGroupFightViolations():
 def BreakTutorial(eRando:Enemy.EnemyRandomizer): # Tutorial that requires an enemy to be break, topple, dazed
     breakTutorial = [738]
     eRando.ChangeStats(breakTutorial, [("RstBreak", 0)])
-
+    
 def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
     introTutorial = [449, 450, 451, 452, 453, 454, 455]
     bossIntroFights = [456, 457]

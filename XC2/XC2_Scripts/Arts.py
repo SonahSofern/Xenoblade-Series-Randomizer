@@ -30,6 +30,7 @@ PDefDown = ArtEffect([23], "P Def↓", "Reduces Physical Defense", [DebuffGroup]
 EDefDown = ArtEffect([24], "E Def↓", "Reduces Ether Defense", [DebuffGroup])
 ResistanceDown = ArtEffect([25], "Res↓", "Inflicts Resistance Down", [DebuffGroup])
 WindsOfTime = ArtEffect([30], "Freeze", "Stops enemy from acting for a time")
+Inexaustible = ArtEffect([29], "Omnibuff", "Trades red health (torna) for all stat increases")
 Enrage = ArtEffect([35], "Enrage", "Enrages the target if possible")
 
 BuffGroup:list[ArtEffect] = []

@@ -6,14 +6,16 @@ StaticEnemyData:list[e.EnemyGroup] = []
 
 ValidEnemyPopFileNames = ["ma01a_FLD_EnemyPop.json", "ma02a_FLD_EnemyPop.json", "ma04a_FLD_EnemyPop.json", "ma05a_FLD_EnemyPop.json", "ma05c_FLD_EnemyPop.json", "ma07a_FLD_EnemyPop.json", "ma07c_FLD_EnemyPop.json", "ma08a_FLD_EnemyPop.json", "ma08c_FLD_EnemyPop.json", "ma10a_FLD_EnemyPop.json", "ma10c_FLD_EnemyPop.json", "ma11a_FLD_EnemyPop.json", "ma13a_FLD_EnemyPop.json", "ma13c_FLD_EnemyPop.json", "ma15a_FLD_EnemyPop.json", "ma15c_FLD_EnemyPop.json", "ma16a_FLD_EnemyPop.json", "ma17a_FLD_EnemyPop.json", "ma17c_FLD_EnemyPop.json", "ma18a_FLD_EnemyPop.json", "ma18c_FLD_EnemyPop.json", "ma20a_FLD_EnemyPop.json", "ma20c_FLD_EnemyPop.json", "ma21a_FLD_EnemyPop.json", "ma40a_FLD_EnemyPop.json", "ma41a_FLD_EnemyPop.json", "ma42a_FLD_EnemyPop.json"]
                                                                                                                                                                                                                                                                                                           
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isVanillaAggro, matchSize:Interactables.Option):
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isVanillaAggro, matchSize:Interactables.SubOption, balanceStats:Interactables.SubOption):
     global StaticEnemyData
     EnemyCounts = GetEnemyCounts()
     GroupFightViolations = GetGroupFightViolations()
     SoloFightViolations = GetSoloFightViolations()
-    ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev', "HpOver"]
+    paramRev = ["ParamRev"] # https://www.xenoserieswiki.org/wiki/Module:XC2_enemy_stat
+    ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev', "HpOver"] + paramRev
     aggroKeys = ['Detects', 'SearchRange', 'SearchAngle', 'SearchRadius', 'BatInterval', 'BatArea', 'BatAreaType']
     isMatchSize = matchSize.GetState()
+    isBalanceStats = balanceStats.GetState()
     if isVanillaAggro:
         ignoreKeys.extend(aggroKeys)
     actKeys = ["FlyHeight", "ActType"]
@@ -58,8 +60,9 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                                 if enBlade['$id'] == newEn['EnemyBladeID']:
                                     CreateBlade(enBlade, oldEn, newEn, eRando)
                                     break
-
-                        StatBalancing(oldEn, newEn, eRando)
+                        
+                        if isBalanceStats:
+                            eRando.HealthBalancing(oldEn, newEn, "HpMaxRev")
                         
                         AionRoomFix(oldEn, newEn, eRando)
 
@@ -75,9 +78,6 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                     JSONParser.CloseFile(eRando.rscData, rscFile)
                     JSONParser.CloseFile(eRando.artData, artFile)
 
-
-def StatBalancing(oldEn, newEn, eRando:e.EnemyRandomizer):
-    eRando.ChangeStats([newEn], [("HpMaxRev", eRando.FindParam(oldEn)["HpMaxRev"])]) # Makes HP match previous enemy stats in XC2 generally stay around 1000 and dont need balancing but HP varies wildly and can lead to unfair early games this will stop that
 
 def CreateBlade(enBlade, oldEn, newEn, eRando:e.EnemyRandomizer): # Because there is only 1 blade referenced for each enemy we have to create new blades (Since blades are not referenced in gimmick files it is fine)
     newBlade = copy.deepcopy(enBlade)

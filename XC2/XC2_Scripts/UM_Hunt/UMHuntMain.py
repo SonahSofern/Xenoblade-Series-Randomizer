@@ -1,5 +1,5 @@
 import json, random,  math,  time
-from XC2.XC2_Scripts import IDs, EnemyRandoLogic, Options,FieldSkillAdjustments, TutorialShortening
+from XC2.XC2_Scripts import IDs, EnemyRandoLogic, Options,FieldSkills, TutorialShortening
 from XC2.XC2_Scripts.Race_Mode import RaceMode
 from XC2.XC2_Scripts.UM_Hunt import UMHuntDebugFunctions, UMHuntShopCreation
 from XC2.XC2_Scripts.Enhancements import *
@@ -123,7 +123,7 @@ def GimmickAdjustments():
     Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/FLD_ElevatorGimmick.json", ["OP_Condition"], 0)
     Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/FLD_EffectPop.json", ["Condition", "QuestFlagMin", "QuestFlagMax"], 0)
     if not Options.RemoveFieldSkillsOption.GetState(): # if this isn't already enabled, turn it on. We need to remove all field skill checks for this mode.
-        FieldSkillAdjustments.RemoveFieldSkills()
+        FieldSkills.RemoveFieldSkills()
     with open("./XC2/JsonOutputs/common/FLD_LODList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:

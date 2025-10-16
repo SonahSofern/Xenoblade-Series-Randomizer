@@ -98,12 +98,12 @@ def ShortenedTutorial():
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-        with open("./XC2/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing tutorials in tutorial
+        with open("./XC2/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing tutorials in field
             data = json.load(file)
             for row in data["rows"]:
                 if row["$id"] == 30005:
                     row["chgEdID"] = 30007
-                if row["scriptName"][:3] == "tut": # if first 3 letters in script name = "tut"
+                if "tut_" in row["scriptName"] or "aoc_tut" in row["scriptName"]:
                     row["scriptName"] = ""
                     row["scriptStartId"] = 0
             file.seek(0)
@@ -127,7 +127,7 @@ def ShortenedTutorial():
             json.dump(data, file, indent=2, ensure_ascii=False)
         with open("./XC2/JsonOutputs/common/EVT_listQst01.json", 'r+', encoding='utf-8') as file: # removing torna tutorials
             data = json.load(file)
-            removables = ["aoc_tut14", "aoc_tut11", "aoc_tut12", "aoc_tut26", "aoc_tut22", "aoc_tut20", "aoc_tut15", "aoc_tut017"]
+            removables = ["aoc_tut14", "aoc_tut11", "aoc_tut12", "aoc_tut26", "aoc_tut22", "aoc_tut20", "aoc_tut15", "aoc_tut17"]
             for row in data["rows"]:
                 if row["scriptName"] in removables:
                     row["scriptName"] = ""

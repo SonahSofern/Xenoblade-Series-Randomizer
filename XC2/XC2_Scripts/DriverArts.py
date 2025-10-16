@@ -187,6 +187,7 @@ def AOE(art):
 
 
 def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False, enhancementKey = "Enhance1"):
+    ignoreDescriptionIDs = [678,679,680,681,682,683,684,685,686] # Torna Special Arts (Inexaustible, Haze timeStop)
     with open(artsFile, "r+", encoding='utf-8') as ArtsFile:     
         with open(descFile, "r+", encoding='utf-8') as DescFile:     
             artsData = json.load(ArtsFile)
@@ -194,6 +195,9 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False, enhancementK
             AnchorShotDesc = 0
             
             for art in artsData["rows"]:
+                if art["$id"] in ignoreDescriptionIDs:
+                    continue
+                
                 CurrDesc = art["Caption"]
                 CombinedCaption = ["","","","",""]
                 FirstDescriptionMod = 0

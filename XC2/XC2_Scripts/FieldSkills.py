@@ -1,8 +1,8 @@
 import json, random
+from scripts import JSONParser
 from XC2.XC2_Scripts import Options, IDs
 
 def RandomizeFieldSkills(): # Make logic to have all skills in the game
-    # Drivers
     with open("./XC2/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:
         bladeData = json.load(bladeFile)
         
@@ -22,7 +22,8 @@ def RandomizeFieldSkills(): # Make logic to have all skills in the game
             1001: ["FSkill1","FSkill2"], # Pyra fire mastery and focus
             1008: ["FSkill2"], # Roc Miasma
             1005: ["FSkill3"], # Poppia superstrength
-            1127: ["FSkill2"]  # Jin Swift Swordplay
+            1127: ["FSkill2"],  # Jin Swift Swordplay
+            1128: ["FSkill2"] # Haze Ether Miasma
         }
         Slots = ["FSkill1","FSkill2", "FSkill3"]
         
@@ -55,7 +56,51 @@ def RandomizeFieldSkills(): # Make logic to have all skills in the game
                 Skill = random.choice(Pool) # Choose and Set a skill
                 Pool.remove(Skill)
                 blade[slot] = Skill
+                
+        JSONParser.CloseFile(bladeData, bladeFile)
+        
+        
+def RemoveFieldSkills():
+    isAllChecks  = Options.RemoveFieldSkillsOption_AllFieldSkills.GetState()
+    UMHUNT = Options.UMHuntOption.GetState()
+    if isAllChecks or UMHUNT:
+        mapGimmickIds = range(1,186)
+        npcPopIds = range(1,50000)     
+        jumpGimiickIds = range(1,45)
+        tBoxIds = range(1,4000)
+        diveIds = range(1,12)
+    else:
+        mapGimmickIds = [
+            4, 5,           # Trees in early Gormott
+            16, 11,          # Vent/Valve in Gormott Titan Battleship
+            36,             # Tardy Gate flood blockade
+            7,              # Ether Miasma
+            55, 57,         # Old Factory ventilation fans
+            111,            # Spider Web
+            113,            # Stele of Judgement
+            37,             # World Tree Skyport
+            129             # The Door
+        ]
+        npcPopIds = [
+            8006,           # Green Barrel
+            5267,           # Pyra's Cooking
+            5268            # Pyra's Cooking
+        ]    
+        jumpGimiickIds = [
+            34, 33, 38,      # Cliffs of Morytha
+            39, 42           # Temperantia wind jump
+        ]        
+        
+        tBoxIds = [] # No required treasure chests
+        
+        diveIds = [] # No required dive spots
 
-        bladeFile.seek(0)
-        bladeFile.truncate()
-        json.dump(bladeData, bladeFile, indent=2, ensure_ascii=False)
+    JSONParser.ChangeJSONLine(["common_gmk/FLD_MapGimmick.json"], mapGimmickIds, ["FSID"], 0)
+    JSONParser.ChangeJSONLine(["common_gmk/FLD_JumpGimmick.json"], jumpGimiickIds, ["FSID"], 0)
+    JSONParser.ChangeJSONLine(["common_gmk/FLD_WarpGimmick.json"], diveIds, ["FSID"], 0)
+    
+    JSONParser.ChangeJSONLine(["common/FLD_FieldSkillSetting.json"],[1294,1077],["FieldSkillLevel1", "FieldSkillLevel2"], 0)
+    for i in range(51):
+        JSONParser.ChangeJSONLine([f"common_gmk/ma{i:02}a_FLD_NpcPop.json"], npcPopIds, ["FSID1", "FSID2", "FSID3"], 0)
+        JSONParser.ChangeJSONLine([f"common_gmk/ma{i:02}a_FLD_TboxPop.json"], tBoxIds, ["FSID", "FSID2"], 0)
+

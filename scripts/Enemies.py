@@ -136,6 +136,17 @@ class EnemyRandomizer():
             weights[3] = self.isSuperboss.GetSpinbox()
         return weights
 
+    def HealthBalancing(self, oldEn, newEn, healthParamKey, maxMult = 2):
+        '''
+        This function is neccessary because the HP stat in XC2 and XC3 vary wildly. Creating unbalanced fights. 
+        '''
+        oldEnParam = self.FindParam(oldEn)
+        newEnParam = self.FindParam(newEn)
+        calculatedMult = newEnParam[healthParamKey]/oldEnParam[healthParamKey] # Get the mult difference between the two 
+        chosenMult = min(maxMult, calculatedMult) # Choose which is smaller 
+        # print(chosenMult)
+        self.ChangeStats([newEn], [(healthParamKey, int(chosenMult*oldEnParam[healthParamKey]))])
+
     def BalanceFight(self, oldEn, newEn, violationList:list[Violation], enemyCounts:dict):
         """
         Calculates a dynamic stat multiplier for game balancing based on a
