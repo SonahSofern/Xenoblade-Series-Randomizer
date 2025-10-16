@@ -13,10 +13,10 @@ def EnemyEnhances():
     prevNames = []
     with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as EnArrangeFile:
         with open("./XC2/JsonOutputs/common_ms/fld_enemyname.json", 'r+', encoding='utf-8') as NamesFile:      
-            EnArr = json.load(EnArrangeFile)
-            Names = json.load(NamesFile)
+            enArrData = json.load(EnArrangeFile)
+            nameData = json.load(NamesFile)
             spinbox  = Options.EnemyEnhancementsOption.GetSpinbox()
-            for Enemy in EnArr["rows"]:
+            for Enemy in enArrData["rows"]:
                 if spinbox < random.randrange(0,100):
                     continue
                         
@@ -32,7 +32,7 @@ def EnemyEnhances():
                   
                 Enemy["EnhanceID3"] = enh.id
                 
-                for name in Names["rows"]: # Changes Names
+                for name in nameData["rows"]: # Changes Names
                     if name["$id"] == Enemy["Name"]:
                         oldName = name["name"]
                         enhanceName = enh.name +  ('+'*(enh.Rarity))
@@ -42,13 +42,9 @@ def EnemyEnhances():
                         name["name"] = f"[System:Color name=tutorial]{enhanceName}[/System:Color] {oldName}"
                         break
 
-            
-            NamesFile.seek(0)
-            NamesFile.truncate()
-            json.dump(Names, NamesFile, indent=2, ensure_ascii=False)
-        EnArrangeFile.seek(0)
-        EnArrangeFile.truncate()
-        json.dump(EnArr, EnArrangeFile, indent=2, ensure_ascii=False)
+            JSONParser.CloseFile(nameData, NamesFile)
+            JSONParser.CloseFile(enArrData, EnArrangeFile)
+
         
 class EnemyEnhancement(Enhancement):
     def __init__(self, name, enhancement, para1 = [0,0,0,0],para2 = [0,0,0,0], revP1 = False, revp2 = False, isRounded = True):
@@ -75,12 +71,12 @@ BlowdownSpike = EnemyEnhancement("Bouncy", GravityPinwheel, [3,6,9,12], [1,2,3,5
 TasSnack = EnemyEnhancement("Devour", TastySnack, [30,50,70,100])
 Desperate = EnemyEnhancement("Frenzy", HpDownDamageUp,[10,15,20,25])
 Wish = EnemyEnhancement("Wish", WhenDiesHealAllies,[50,70,80,100])
-FirstStrike = EnemyEnhancement("Ambush", FirstArtDamage,[300,500,600,700])
+FirstStrike = EnemyEnhancement("Ambush", FirstArtDamage, [300,500,600,700])
 Lightning  = EnemyEnhancement("Fleet", AutoSpeedArtsSpeed,[300,400,500,600],[200,300,400,500])
 Repeat = EnemyEnhancement("Repeat", DidIDoThat,[20,40,60,80])
 Enraged = EnemyEnhancement("Avenge", AllyDownDamageUp,[60,80,100,120])
 Regen = EnemyEnhancement("Regen", PermaRegen,[60,90,120,150], [0.005,0.007,0.01,0.012], revP1=True, isRounded=False)
-CloseArmor = EnemyEnhancement("Solid", ReduceDamageFromNearbyEnemies, [30,50,70,90])
+CloseArmor = EnemyEnhancement("Solid", ReduceDamageFromNearbyEnemies, [10,20,30,40])
 Swarm = EnemyEnhancement("Swarm", PerAllyDamageUp, [20,40,60,80])
 Sealing = EnemyEnhancement("Seal", ChainAttackSeal, [2,2,2,3], revP1=True)
 

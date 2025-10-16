@@ -1,5 +1,6 @@
 import json, random
 from XC2.XC2_Scripts import Options, IDs
+
 def RandomizeFieldSkills(): # Make logic to have all skills in the game
     # Drivers
     with open("./XC2/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:
@@ -20,13 +21,13 @@ def RandomizeFieldSkills(): # Make logic to have all skills in the game
         KeepVanilla = {
             1001: ["FSkill1","FSkill2"], # Pyra fire mastery and focus
             1008: ["FSkill2"], # Roc Miasma
-            1005: ["FSkill3"] # Poppia superstrength
+            1005: ["FSkill3"], # Poppia superstrength
+            1127: ["FSkill2"]  # Jin Swift Swordplay
         }
         Slots = ["FSkill1","FSkill2", "FSkill3"]
         
         if ShuffleQuestSkills: # Add in our quest skills
             BaseSkillPool.extend(QuestSkillPool) 
-        
         
         for blade in bladeData["rows"]:     
             
@@ -58,15 +59,3 @@ def RandomizeFieldSkills(): # Make logic to have all skills in the game
         bladeFile.seek(0)
         bladeFile.truncate()
         json.dump(bladeData, bladeFile, indent=2, ensure_ascii=False)
-    
-    
-
-
-# Match element of blade to element mastery
-
- #   GenStandardOption("Blade Field Skills", TabBlades, "Randomizes a Blade's field (green) skill tree", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("FSkill", 1, 3), BladeFieldSkills, BladeFieldSkills,[1001], IgnoreID_AND_Key=[[1005, "FSkill3"], [1008, "FSkill2"]])])
-            # if blade["$id"] not in [1124,1125,1126,1127,1128,1129,1130,1131,1132]:
-            #     for i in range(1,4):
-            #         Skill = blade[f"FSkill{i}"]
-            #         if Skill != 0:
-            #             print(Skill, end=",")
