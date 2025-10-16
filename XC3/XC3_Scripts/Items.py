@@ -52,7 +52,7 @@ def TreasureBoxes():
             containerData = json.load(containerFile)
             for container in containerData["rows"]:
                 for i in range(1,20):
-                    if container[f"Reward{i}"] in IDs.BaseGamePreciousIDs + IDs.DLC4PreciousIDs + [0] + AttackStone: # Dont replace Precious Items
+                    if container[f"Reward{i}"] in (IDs.BaseGamePreciousIDs + IDs.DLC4PreciousIDs + [0] + AttackStone): # Dont replace Precious Items
                         continue
                     container[f"Reward{i}"] = random.choice(IDs.AccessoriesIDs)
             JSONParser.CloseFile(containerData, containerFile)

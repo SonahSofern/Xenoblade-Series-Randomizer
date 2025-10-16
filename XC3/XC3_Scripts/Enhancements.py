@@ -83,44 +83,6 @@ class Enhancement:
             newParam = Helper.roundToBase(newParam)
         return int(newParam)
     
-
-# with open(f"XC3/JsonOutputs/btl/BTL_Enhance.json", 'r+', encoding='utf-8') as enhanceFile:
-#     with open(f"XC3/JsonOutputs/btl/BTL_EnhanceEff.json", 'r+', encoding='utf-8') as enhanceEffFile:
-#         with open(f"XC3/JsonOutputs/battle/msg_btl_enhance_cap.json", 'r+', encoding='utf-8') as captionFile:
-#             with open(f"XC3/JsonOutputs/battle/msg_btl_enhance_name.json", 'r+', encoding='utf-8') as nameFile:
-#                 enhanceData = json.load(enhanceFile)
-#                 enhanceEffData = json.load(enhanceEffFile)
-#                 captionData = json.load(captionFile)
-#                 nameData = json.load(nameFile)
-#                 TestList = []
-#                 PreviousEffects = [0]
-#                 for enh in enhanceData["rows"]:
-#                     if enh["EnhanceEffect"] not in PreviousEffects:
-#                         TestList.append(enh)
-#                         PreviousEffects.append(enh["EnhanceEffect"])
-#                         for enhEff in enhanceEffData["rows"]:
-#                             if enhEff["$id"] == enh["EnhanceEffect"]:
-#                                 for name in nameData["rows"]:
-#                                     if name["$id"] == enhEff["Name"]:
-#                                         enh["ID"] = name["name"]
-#                                 break
-                            
-#                 for enh in TestList:
-#                     param1 = ""
-#                     param2 = ""
-#                     if enh["Param1"] != 0:
-#                         param1 = ", []"
-#                     if enh["Param2"] != 0:
-#                         param2 = ", []"
-#                     if enh["Caption"] == 0:
-#                         comment = "# "
-#                     else:
-#                         comment = ""
-#                     raw_id = enh["ID"]
-#                     # Keep only alphanumeric characters
-#                     clean_id = ''.join(c for c in raw_id if c.isalnum())
-#                     print(f'{comment}Enhancement("", {enh["EnhanceEffect"]}, {enh["Caption"]}, {enh["<3E70C175>"]}, M{param1}{param2}, skillIcon=0) # {raw_id}')
-  
 def CreateEnhancements():                 
     Enhancement('Healthy', 1, 1, 1, Def, [10,100], skillIcon=1) # Max HP Up
     Enhancement('Strong', 2, 3, 1, Atk, [10,100], skillIcon=2) # Attack Up
@@ -558,3 +520,43 @@ def CreateEnhancements():
     # Enhancement("", 420, 0, 0, M, [], skillIcon=0) # <378C7FD9>
 
 CreateEnhancements()
+
+
+
+# with open(f"XC3/JsonOutputs/btl/BTL_Enhance.json", 'r+', encoding='utf-8') as enhanceFile:
+#     with open(f"XC3/JsonOutputs/btl/BTL_EnhanceEff.json", 'r+', encoding='utf-8') as enhanceEffFile:
+#         with open(f"XC3/JsonOutputs/battle/msg_btl_enhance_cap.json", 'r+', encoding='utf-8') as captionFile:
+#             with open(f"XC3/JsonOutputs/battle/msg_btl_enhance_name.json", 'r+', encoding='utf-8') as nameFile:
+#                 enhanceData = json.load(enhanceFile)
+#                 enhanceEffData = json.load(enhanceEffFile)
+#                 captionData = json.load(captionFile)
+#                 nameData = json.load(nameFile)
+#                 TestList = []
+#                 PreviousEffects = [0]
+#                 for enh in enhanceData["rows"]:
+#                     if enh["EnhanceEffect"] not in PreviousEffects:
+#                         TestList.append(enh)
+#                         PreviousEffects.append(enh["EnhanceEffect"])
+#                         for enhEff in enhanceEffData["rows"]:
+#                             if enhEff["$id"] == enh["EnhanceEffect"]:
+#                                 for name in nameData["rows"]:
+#                                     if name["$id"] == enhEff["Name"]:
+#                                         enh["ID"] = name["name"]
+#                                 break
+                            
+#                 for enh in TestList:
+#                     param1 = ""
+#                     param2 = ""
+#                     if enh["Param1"] != 0:
+#                         param1 = ", []"
+#                     if enh["Param2"] != 0:
+#                         param2 = ", []"
+#                     if enh["Caption"] == 0:
+#                         comment = "# "
+#                     else:
+#                         comment = ""
+#                     raw_id = enh["ID"]
+#                     # Keep only alphanumeric characters
+#                     clean_id = ''.join(c for c in raw_id if c.isalnum())
+#                     print(f'{comment}Enhancement("", {enh["EnhanceEffect"]}, {enh["Caption"]}, {enh["<3E70C175>"]}, M{param1}{param2}, skillIcon=0) # {raw_id}')
+  

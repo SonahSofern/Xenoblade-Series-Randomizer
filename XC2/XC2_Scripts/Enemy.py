@@ -1,7 +1,6 @@
 import json, random, copy, traceback, math
 from XC2.XC2_Scripts import IDs, Options
 from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e, Interactables
-from scripts.Enemies import ParamModification, ArtModification
 
 StaticEnemyData:list[e.EnemyGroup] = []
 
@@ -104,8 +103,8 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     Normal = 1
     Small = 0
 
-    # Aion, Ophion, and Siren
-    SupermassiveEnemies = [265, 275, 1137, 1449, 1450]
+    # Aion, Ophion, and Siren, Nekkel Mammut (Not truly supermassive but its actual size is much bigger than its chrsize (2))
+    SupermassiveEnemies = [265, 275, 1137, 1449, 1450, 1758]
 
     if oldEn["$id"] in SupermassiveEnemies:
         oldEn["ChrSize"] = Supermassive
@@ -113,9 +112,9 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
         newEn["ChrSize"] = Supermassive
     
     multDict = {
-        (Supermassive, Massive): 4,
-        (Supermassive, Large): 6,
-        (Supermassive, Normal): 8,
+        (Supermassive, Massive): 3,
+        (Supermassive, Large): 5,
+        (Supermassive, Normal): 7,
         (Supermassive, Small): 10,
         (Massive, Large): 2,
         (Massive, Normal): 3,

@@ -11,13 +11,11 @@ Mega = [60,200,400,600]
 Massive = [300,600,1000,1500]
 Giga = [1000,1700,2500,3000]
 
-
 EnhanceEffectsList = []
 DisplayTagList = []
 EnhanceClassList = []
 EnhanceID = 3896
 DisplayTagID = 65
-
 
 class Enhancement: 
     id = 0
@@ -33,6 +31,7 @@ class Enhancement:
     ReversePar2 = False
     addToList = True
     DisTag = ""
+    
     def __init__(self,Name, Enhancement, Caption, Param1 = [0,0,0,0], Param2 = [0,0,0,0], Description = "", ReversePar1 = False, ReversePar2  = False, addToList = True, DisTag = "", max = [0,0], isRounded = True):
         self.name = Name
         self.EnhanceEffect = Enhancement
@@ -63,16 +62,20 @@ class Enhancement:
 
     def RollEnhancement(self, forcedRarity = None, scalingFactor = 1):
         global EnhanceID
+        
         self.id = EnhanceID
         EnhanceID += 1
         Common = 0
         Rare = 1
         Legendary = 2
+        
         if forcedRarity == None:
-            self.Rarity = random.choice([Common,Common,Common, Rare,Rare, Legendary])
+            self.Rarity = random.choice([Common,Common,Common,Common,Common, Rare,Rare,Rare, Legendary])
         else:
             self.Rarity = forcedRarity
+            
         self.scalingFactor = scalingFactor
+        
         def SetParams(ParameterChoices, isReverse):
             Multiplier = 1/scalingFactor if isReverse else scalingFactor
 
@@ -81,7 +84,11 @@ class Enhancement:
             elif len(ParameterChoices) == 1:
                 Parameter = ParameterChoices[0]
             else:
-                Parameter = random.uniform(ParameterChoices[self.Rarity+(1*isReverse)],ParameterChoices[self.Rarity + 1 - (2*isReverse)])
+                if isReverse:
+                    # print(f"{ParameterChoices[-(self.Rarity + 2)]} to {ParameterChoices[-(self.Rarity + 2)+1]}")
+                    Parameter = random.uniform(ParameterChoices[-(self.Rarity + 2)], ParameterChoices[-(self.Rarity + 2)+1])
+                else:
+                    Parameter = random.uniform(ParameterChoices[self.Rarity], ParameterChoices[self.Rarity + 1])
 
                     
             Parameter *= Multiplier
@@ -107,9 +114,9 @@ class Enhancement:
 def AddCustomEnhancements():
     global EnhanceID
     JSONParser.ChangeJSONFile(["common/BTL_EnhanceEff.json"],["Param"], Helper.InclRange(1,1000), [1000], [241, 250, 245,54,143,257,259])
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randrange(20,51, 5)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randrange(30,71, 5)) # Healing with low HP
-    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randrange(10,61,5)) # Healing with low HP
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[45], ["Param"], random.randrange(20, 51, 5)) # Battle damage up after a certain time uses nonstandard parameter this fixes it
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[181], ["Param"], random.randrange(30, 71, 5)) # Healing with low HP
+    JSONParser.ChangeJSONLine(["common/BTL_EnhanceEff.json"],[90], ["Param"], random.randrange(10, 61, 5)) # Healing with low HP
     JSONParser.ExtendJSONFile("common/BTL_Enhance.json", EnhanceEffectsList)
     EnhanceID = 3896
     EnhanceEffectsList.clear()

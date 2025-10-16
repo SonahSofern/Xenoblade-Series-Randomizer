@@ -224,7 +224,7 @@ EnemySizeOption = Option("Enemy Size", Funny, "Randomizes the size of enemies", 
 FieldItemOption = Option("Field Item Size", Funny, "Randomizes the size and spin rate of items dropped on the field.", [lambda: BigItems.BigItemsRando()], descData=lambda: BigItems.BigItemsDesc())
 
 # Cosmetics
-BladeWeaponCosmeticsOption = Option("Blade Weapon Cosmetics", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])], spinDefault=25)
+BladeWeaponCosmeticsOption = Option("Default Weapon Appearance", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])], spinDefault=25)
 TrustLineOption = Option("Blade Trust Lines", CosmeticsTab, "Randomizes blade-driver trust lines in battle (colors, power, etc.)", [lambda: TrustBeam.BeamRandomizer()])
 CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()],prio=51, hasSpinBox = True, spinDefault=10, descData=lambda: Cosmetics.CosmeticsDescription()) # Sub are created by another class
 for opt in Cosmetics.CosmeticsList: # To gen these since listing them here would be annoying
