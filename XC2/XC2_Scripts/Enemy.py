@@ -245,17 +245,17 @@ def SummonsFix(eneData):
         if ene["$id"] in IDs.SummonedEnemies:
             ene["DriverLev"] = 1 # Not a great solution the other way is to make a duplicate enemy for each time they are summoned and I woulid have to make new summon tables
     
-def EnemyAggro(): # Not going to add aggro to enemies because it would be disproportional to the area there enemy is in. For example if i tgive them batArea and a large area you could get stuck inside a small area (ship) with enemies perma aggroing you
-    odds = Options.EnemyAggroOption.GetSpinbox()
-    with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
-        eneData = json.load(eneFile)
-        for en in eneData["rows"]:
-            if not Helper.OddsCheck(odds):
-                continue
-            if en["$id"] in IDs.BossMonsters:
-                continue
-            en["Detects"] = 0
-        JSONParser.CloseFile(eneData, eneFile)
+# def EnemyAggro(): # Not going to add aggro to enemies because it would be disproportional to the area there enemy is in. For example if i tgive them batArea and a large area you could get stuck inside a small area (ship) with enemies perma aggroing you
+#     odds = Options.EnemyAggroOption.GetSpinbox()
+#     with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
+#         eneData = json.load(eneFile)
+#         for en in eneData["rows"]:
+#             if not Helper.OddsCheck(odds):
+#                 continue
+#             if en["$id"] in IDs.BossMonsters:
+#                 continue
+#             en["Detects"] = 0
+#         JSONParser.CloseFile(eneData, eneFile)
 
     
 def TornaIntroChanges(e:e.EnemyRandomizer):

@@ -75,7 +75,7 @@ PouchItemShopOption_CoreCrystals = SubOption("Core Crystals", PouchItemShopOptio
 PouchItemShopOption_Deeds = SubOption("Shop Deeds", PouchItemShopOption)
 PouchItemShopOption_CollectionPointMaterials = SubOption("Collection Point Materials", PouchItemShopOption)
 PouchItemShopOption_PouchItems = SubOption("Pouch Items", PouchItemShopOption)
-TreasureChestOption = Option("Treasure Chests", Items, "Randomizes the contents of Treasure Chests",[lambda: TreasureChests.RandoTreasureBoxes()], prio = 51, hasSpinBox = True, descData=lambda: TreasureChests.TreasureChestDescription())
+TreasureChestOption = Option("Treasure Chests", Items, "Randomizes the contents of Treasure Chests",[lambda: TreasureChests.TreasureBoxRando()], prio = 51, hasSpinBox = True, descData=lambda: TreasureChests.TreasureChestDescription())
 TreasureChestOption_Accessories = SubOption("Accessories", TreasureChestOption)
 TreasureChestOption_TornaAccessories = SubOption("Torna Accessories", TreasureChestOption, defState=False)
 TreasureChestOption_WeaponChips = SubOption("Weapon Chips", TreasureChestOption)
@@ -126,7 +126,7 @@ BladeSpecialOption_Reaction = SubOption("Reactions", BladeSpecialOption)
 BladeSpecialOption_Enhancement = SubOption("Enhancement", BladeSpecialOption)
 BladeSpecialOption_Debuffs = SubOption("Debuff", BladeSpecialOption)
 BladeWeaponChipsOption = Option("Blade Weapon Chips", Blade, "Randomizes the effects of weapon chips", [lambda:WeaponChips.ChangeWeaponRankNames()], hasSpinBox = True)
-BladeWeaponChipsOption_AutoAtk = SubOption("Auto Attacks", BladeWeaponChipsOption, defState= True)
+# BladeWeaponChipsOption_AutoAtk = SubOption("Auto Attacks", BladeWeaponChipsOption, defState= True)
 BladeWeaponChipsOption_CritRate = SubOption("Crit Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["CriRate"],Helper.InclRange(0,100), BladeWeaponCritDistribution)],defState= True)
 BladeWeaponChipsOption_GuardRate = SubOption("Guard Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["GuardRate"],Helper.InclRange(0,100), BladeWeaponGuardDistribution)],defState= True)
 BladeWeaponChipsOption_Enhancement = SubOption("Enhancements", BladeWeaponChipsOption, [lambda: WeaponChips.RandomizeWeaponEnhancements()], defState= True)
@@ -189,7 +189,7 @@ EnemyDropOption_RefinedAuxCores = SubOption("Refined Aux Cores", EnemyDropOption
 EnemyDropOption_CoreCrystals = SubOption("Core Crystals", EnemyDropOption)
 EnemyDropOption_Deeds = SubOption("Shop Deeds", EnemyDropOption)
 EnemyDropOption_CollectionPointMaterials = SubOption("Collection Point Materials", EnemyDropOption)
-EnemyAggroOption = Option("Enemy Aggro", Enemies, "Reduces the number of enemies who aggro you by a percentage", [lambda: Enemy.EnemyAggro()], hasSpinBox = True)
+# EnemyAggroOption = Option("Enemy Aggro", Enemies, "Reduces the number of enemies who aggro you by a percentage", [lambda: Enemy.EnemyAggro()], hasSpinBox = True)
 
 # Misc
 MusicOption = Option("Music", Misce, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
@@ -264,7 +264,7 @@ TornaRewardsonUnreqSidequests = Option("Progression on Unrequired Sidequests", T
 #TornaCompatibleOptions = [BladeSpecialButtonsOption, TornaChooseCommunityReqs, CondenseGoldOption, TornaCreateSpoilerLog, EnhancementDisplayOption, EverlastingPouchItemsOption, FieldItemOption, TornaObjectColorMatchesContents, StartwithIncreasedMovespeedOption, MusicOption, MutePopupsOption, NPCSizeOption, TornaRemoveGormottChecks, ShortcutsOption, TornaAddHints, TornaMainOption, TreasureChestVisOption, TrustLineOption, TornaRewardsonUnreqSidequests, EnemyEnhancementsOption, EnemyArtEffectsOption, BladeWeaponChipsOption, BladeSpecialOption, BladeBattleSkillsOption]
 
 # any torna option with a lambda gets the incompatible list
-MutuallyExclusivePairing([TornaMainOption, TornaAddHints, TornaObjectColorMatchesContents, TornaChooseCommunityReqs, TornaCreateSpoilerLog, TornaRemoveGormottChecks, TornaRewardsonUnreqSidequests], [AccessoriesOption, AuxCoresOption, AccessoryShopsOption, CollectionPointsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladesOption, BladeArtsOption, BladeFieldSkillsOption, BladeWeaponChipsOption, BladeCombosOption, BladeStatsOption, NormalEnemyOption, UniqueEnemyOption, BossEnemyOption, EnemyDropOption, EnemyAggroOption, CustomCoreCrystalOption, FreelyEngageBladesOption, CTMCOption, RemoveFieldSkillsOption, EasySkillTreesOption, FasterLevelsOption, NewGamePlusFlagsOptions, ProjTreasureChestOption, EnemySizeOption, BladeWeaponCosmeticsOption, CosmeticsOption, RaceModeOption, UMHuntOption])
+MutuallyExclusivePairing([TornaMainOption, TornaAddHints, TornaObjectColorMatchesContents, TornaChooseCommunityReqs, TornaCreateSpoilerLog, TornaRemoveGormottChecks, TornaRewardsonUnreqSidequests], [AccessoriesOption, AuxCoresOption, AccessoryShopsOption, CollectionPointsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladesOption, BladeArtsOption, BladeFieldSkillsOption, BladeWeaponChipsOption, BladeCombosOption, BladeStatsOption, NormalEnemyOption, UniqueEnemyOption, BossEnemyOption, EnemyDropOption, CustomCoreCrystalOption, FreelyEngageBladesOption, CTMCOption, RemoveFieldSkillsOption, EasySkillTreesOption, FasterLevelsOption, NewGamePlusFlagsOptions, ProjTreasureChestOption, EnemySizeOption, BladeWeaponCosmeticsOption, CosmeticsOption, RaceModeOption, UMHuntOption])
 
 MutuallyExclusivePairing([UMHuntOption], [AccessoryShopsOption, CollectionPointsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladeWeaponChipsOption, AccessoriesOption, AuxCoresOption, NormalEnemyOption, BossEnemyOption, UniqueEnemyOption, EnemyDropOption, CustomCoreCrystalOption, FasterDriverSkillTrees, EasySkillTreesOption, FasterLevelsOption, RaceModeOption])
 
