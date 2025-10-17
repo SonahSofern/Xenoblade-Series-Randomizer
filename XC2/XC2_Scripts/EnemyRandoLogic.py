@@ -406,7 +406,7 @@ def EnemyAggroProportion():
     if EnemyRandoOnBox:
         if StoryBossesBox or UniqueMonstersBox or SuperbossesBox or NormalEnemiesBox or QuestEnemyBox: # do nothing, got handled after enemy randomization
             return
-    # EnemyAggroSliderOdds = Options.EnemyAggroOption.GetSpinbox()
+    EnemyAggroSliderOdds = Options.EnemyAggroOption.GetSpinbox()
     NewBossIDs, NewQuestIDs, OtherEnemyIDs = NewNonBossandQuestIDs()
     if EnemyAggroSliderOdds == 0: #if the slider is 0, turn every enemy passive
         with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as file: 

@@ -39,24 +39,12 @@ def EnemyArtAttributes():
                             ChangeArts(enBlArtsData, enBlArtsNameData)
                             # ChangeArts(blArtsData, blArtNameData, spinBox) # Currently this will change ally and enemy because they use the same files :/
                             
-                            BlArtsFile.seek(0)
-                            BlArtsFile.truncate()
-                            json.dump(blArtsData, BlArtsFile, indent=2, ensure_ascii=False)  
-                        BlArtsNamesFile.seek(0)
-                        BlArtsNamesFile.truncate()
-                        json.dump(blArtNameData, BlArtsNamesFile, indent=2, ensure_ascii=False)  
-                    EnBlArtsNamesFile.seek(0)
-                    EnBlArtsNamesFile.truncate()
-                    json.dump(enBlArtsNameData, EnBlArtsNamesFile, indent=2, ensure_ascii=False)  
-                EnArtsNamesFile.seek(0)
-                EnArtsNamesFile.truncate()
-                json.dump(enArtsNameData, EnArtsNamesFile, indent=2, ensure_ascii=False)  
-            EnBlArtsFile.seek(0)
-            EnBlArtsFile.truncate()
-            json.dump(enBlArtsData, EnBlArtsFile, indent=2, ensure_ascii=False)
-        EnArtsFile.seek(0)
-        EnArtsFile.truncate()
-        json.dump(enArtsData, EnArtsFile, indent=2, ensure_ascii=False)
+                            JSONParser.CloseFile(blArtsData, BlArtsFile)
+                            JSONParser.CloseFile(blArtNameData, BlArtsNamesFile)
+                            JSONParser.CloseFile(enBlArtsNameData, EnBlArtsNamesFile)
+                            JSONParser.CloseFile(enArtsNameData, EnArtsNamesFile)
+                            JSONParser.CloseFile(enBlArtsData, EnBlArtsFile)
+                            JSONParser.CloseFile(enArtsData, EnArtsFile)
         
 def ChangeArts(artData, artNameData):
     newNameID = 457 # Starting id to add new names to old names file

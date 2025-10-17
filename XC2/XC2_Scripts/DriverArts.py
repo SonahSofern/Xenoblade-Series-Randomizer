@@ -1,6 +1,6 @@
 import json
 import random
-from XC2.XC2_Scripts.IDs import Arts, AutoAttacks
+from XC2.XC2_Scripts.IDs import Arts, AutoAttacks, TornaTalentArtIDs
 from XC2.XC2_Scripts import Options
 import scripts.PopupDescriptions
 from XC2.XC2_Scripts.Arts import *
@@ -8,6 +8,8 @@ from scripts import Helper, JSONParser
 
 def DriverArtRandomizer():
     with open("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as artFile:
+        ignoreArts = [4,5,6,7] + TornaTalentArtIDs # Dont change aegis since they get copied to later # Dont change torna talent arts
+        
         artData = json.load(artFile)
         
         isAutoAttacks = Options.DriverArtsOption_AutoAttacks.GetState()
@@ -37,7 +39,7 @@ def DriverArtRandomizer():
             if not OddCheck(odds):
                 continue
             
-            if art["$id"] in [4,5,6,7]: # Dont change aegis since they get copied to later
+            if art["$id"] in ignoreArts:
                 continue
             
             if art["Name"] == 0: # If we are an auto attack
@@ -187,7 +189,6 @@ def AOE(art):
 
 
 def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False, enhancementKey = "Enhance1"):
-    ignoreDescriptionIDs = [678,679,680,681,682,683,684,685,686] # Torna Special Arts (Inexaustible, Haze timeStop)
     with open(artsFile, "r+", encoding='utf-8') as ArtsFile:     
         with open(descFile, "r+", encoding='utf-8') as DescFile:     
             artsData = json.load(ArtsFile)
@@ -195,7 +196,7 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False, enhancementK
             AnchorShotDesc = 0
             
             for art in artsData["rows"]:
-                if art["$id"] in ignoreDescriptionIDs:
+                if art["$id"] in TornaTalentArtIDs:
                     continue
                 
                 CurrDesc = art["Caption"]

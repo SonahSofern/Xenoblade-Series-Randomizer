@@ -6,10 +6,35 @@ from scripts import Helper, PopupDescriptions, JSONParser
 
 valueDict = {}
 
-def GenItemIDValueDict():
-    with open(f"XC2/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as accFile:
-    # open all the files with items and tie their id to a value
-    # Add to the dict
+def PopulateValue(file, key = "Price", mult = 1):
+    '''
+    Adds dictionary items linking every ITM with a gold value
+    This value is useful to balance loot drops
+    '''
+    with open(f"XC2/JsonOutputs/common/{file}.json", 'r+', encoding='utf-8') as curFile:
+        curData = json.load(curFile)
+        for data in curData["rows"]:
+            valueDict[data["$id"]] = int(data[key] * mult)
+
+def PopulateAll():
+    PopulateValue("ITM_Orb")
+    PopulateValue("ITM_OrbEquip")
+    PopulateValue("ITM_PcEquip")
+    PopulateValue("ITM_PreciousList")
+    PopulateValue("ITM_PreciousListIra")
+    PopulateValue("ITM_SalvageList")
+    PopulateValue("ITM_TresureList")
+    PopulateValue("ITM_PcWpnChip", mult=5)
+    PopulateValue("ITM_CrystalList")
+    PopulateValue("ITM_BoosterList")
+    PopulateValue("ITM_CollectionList")
+    PopulateValue("ITM_FavoriteList")
+    PopulateValue("ITM_HanaAssist", key="NeedEther", mult=2)
+    PopulateValue("ITM_HanaArtsEnh", key="NeedEther", mult=2)
+    PopulateValue("ITM_HanaAtr", key="NeedEther", mult=2)
+    PopulateValue("ITM_HanaNArtsSet", key="NeedEther", mult=2)
+    PopulateValue("ITM_HanaRole", key="NeedEther", mult=3)
+    PopulateValue("ITM_InfoList")
 
 def EvaluateTboxGoldValue(tbox):
     totalGold = 0
@@ -20,27 +45,31 @@ def EvaluateTboxGoldValue(tbox):
     
     # Items
     for i in range(1,9):
-        itemVal = valueDict[tbox[f"itm{i}ID"]]
-        amount = tbox[f"itm{i}Num"]
-        totalGold += (itemVal * amount)
+        if tbox[f"itm{i}ID"] in valueDict:
+            itemVal = valueDict[tbox[f"itm{i}ID"]]
+            amount = tbox[f"itm{i}Num"]
+            totalGold += (itemVal * amount)
         
     return totalGold    
   
 def TreasureBoxRando():
     SetBoxDescriptions()
+    PopulateAll()
     for area in IDs.MajorAreaIds:
+        areaBoxes = []
         try:
             with open(f"XC2/JsonOutputs/common_gmk/ma{area}a_FLD_TboxPop.json", 'r+', encoding='utf-8') as tboxFile:
                 tboxData = json.load(tboxFile)
                 for box in tboxData["rows"]:
-                    goldVal = EvaluateTboxGoldValue(box)
-
-                    
-                    box["RSC_ID"] = AssignRarity(goldVal) # based on median values of the area
+                    goldVal = int(EvaluateTboxGoldValue(box))
+                    areaBoxes.append(goldVal)
+                
+                for box in tboxData["rows"]:
+                    box["RSC_ID"] = GetRarity(goldVal) # based on median values of the area
                     
                 JSONParser.CloseFile(tboxData, tboxFile)
-        except:
-            pass
+        except Exception as e:
+            print(e)
     
 def SetBoxDescriptions(): # Hardcoded New Boxes and descriptions
     class CreditRarityRelation():
@@ -75,10 +104,10 @@ def SetBoxDescriptions(): # Hardcoded New Boxes and descriptions
                 break
         JSONParser.CloseFile(tboxData, tboxFile)
 
-def AssignRarity(credits):
-    if credits < 100:
+def GetRarity(gold):
+    if gold < 100:
         return 1
-    elif credits > 200:
+    elif gold > 200:
         return 2
     else:
         return 3

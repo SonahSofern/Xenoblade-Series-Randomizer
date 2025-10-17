@@ -18,7 +18,7 @@ Items = 1
 Driver  = 2
 Blade = 3
 Enemies = 4
-Misce = 5
+# Misce = 5
 QOL = 6
 Funny = 7
 CosmeticsTab = 8
@@ -31,7 +31,7 @@ Tabs = {
     Driver: "🧍 Drivers",
     Blade: "🔷 Blades",
     Enemies: "💀 Enemies",
-    Misce: "♪ Music",
+    # Misce: "♪ Music",
     QOL: "🐇 Quality of Life",
     Funny: "😄 Funny",
     CosmeticsTab: "👚 Cosmetics",
@@ -192,7 +192,7 @@ EnemyDropOption_CollectionPointMaterials = SubOption("Collection Point Materials
 # EnemyAggroOption = Option("Enemy Aggro", Enemies, "Reduces the number of enemies who aggro you by a percentage", [lambda: Enemy.EnemyAggro()], hasSpinBox = True)
 
 # Misc
-MusicOption = Option("Music", Misce, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
+MusicOption = Option("Music", Funny, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
 MusicOption_MixBattleAndEnv = SubOption("Mix Battle/Environment Themes", MusicOption, defState = False)
 
 # QOL
@@ -201,6 +201,7 @@ ShortcutsOption_Tutorials = SubOption("Tutorials Skip", ShortcutsOption, [lambda
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
 ShortcutsOption_IndolQuiz = SubOption("Indol Quiz Skip", ShortcutsOption, [lambda: TutorialShortening.IndolQuizSkip()])
+ShortcutsOption_CommunitySkip = SubOption("Torna Community Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_ConditionFlag.json"],[1394,1395,1396,1397], ["FlagMin"], 1)])
 RemoveFieldSkillsOption = Option("Remove Story Field Skills", QOL, "Removes field skill checks", [lambda: FieldSkills.RemoveFieldSkills()], ["Remove All Field Skills", []])
 RemoveFieldSkillsOption_AllFieldSkills = SubOption("Remove All Field Skills", RemoveFieldSkillsOption)
 EasySkillTreesOption = Option("Easy Affinity Trees", QOL, "Makes trust the only condition for levelling up a blade's affinity tree", [lambda: SkillTrees.BladeSkillTreeShortening()])

@@ -1,5 +1,6 @@
+from XC2.XC2_Scripts.Unfinished import DebugLog
 from scripts import Helper, JSONParser, PopupDescriptions
-from XC2.XC2_Scripts import EnemyRandoLogic, DebugLog, CoreCrystalAdjustments, Options, TutorialShortening
+from XC2.XC2_Scripts import EnemyRandoLogic, CoreCrystalAdjustments, Options, TutorialShortening
 import random, time, math, json
 from XC2.XC2_Scripts.IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, AccessoryIDs, WeaponChipIDs, AuxCoreIDs, RefinedAuxCores, CollectionPointMaterials, TornaAccessories
 

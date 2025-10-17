@@ -95,7 +95,12 @@ def RedRingRemoval():
             for pop in popData["rows"]:
                 pop["battlelockname"] = 0
             JSONParser.CloseFile(popData, popFile)
-        
+
+def ChangeSize(enList, targetGroup, newsize):
+    for en in enList:
+        if en in targetGroup:
+            en["ChrSize"] = newsize
+  
 def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     Supermassive = 4
     Massive = 3
@@ -103,13 +108,12 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     Normal = 1
     Small = 0
 
-    # Aion, Ophion, and Siren, Nekkel Mammut (Not truly supermassive but its actual size is much bigger than its chrsize (2))
+    # Aion, Ophion, and Siren,
     SupermassiveEnemies = [265, 275, 1137, 1449, 1450, 1758]
+    MassiveEnemies = [1758, 707] # Nekkel Mammut, Rotbart
 
-    if oldEn["$id"] in SupermassiveEnemies:
-        oldEn["ChrSize"] = Supermassive
-    if newEn["$id"] in SupermassiveEnemies:
-        newEn["ChrSize"] = Supermassive
+    ChangeSize([oldEn, newEn], SupermassiveEnemies, Supermassive)
+    ChangeSize([oldEn, newEn], MassiveEnemies, Massive)
     
     multDict = {
         (Supermassive, Massive): 3,
@@ -123,14 +127,20 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
         (Large, Small): 2,
         (Normal, Small): 1,
     }
-    keys = ["Scale"]
-    eRando.EnemySizeMatch(oldEn, newEn, keys, multDict)
+    eRando.EnemySizeMatch(oldEn, newEn, ["Scale"], multDict)
+    
 
     # Reset size if scaled higher than massive
-    if oldEn["ChrSize"] > Massive:
-        oldEn["ChrSize"] = Massive
-    if newEn["ChrSize"] > Massive:
-        newEn["ChrSize"] = Massive
+    ChangeSize([oldEn, newEn], SupermassiveEnemies, Massive)
+    
+
+def BadlySizedEnemies(arrangeData, enemiesIDs, newChrSize):
+    '''
+    Some enemies in XC2 are improperly sized (ChrSize) 
+    '''
+    for row in arrangeData["rows"]:
+        if row["$id"] in enemiesIDs:
+            row["ChrSize"] = newChrSize
 
 def Bandaids(eneData, isBoss, eRando):
     '''Bandaids intented to be ran once'''

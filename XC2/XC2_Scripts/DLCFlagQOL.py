@@ -51,6 +51,18 @@ def AddMovespeedDeed():
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
         CreateDLCtoSetFlag(["Movespeed Deed"], [65000], [1], [25249], [1])
+        
+        with open("XC2/JsonOutputs/common/MNU_ShopChangeTask.json", 'r+', encoding='utf-8') as shopFile: # Torna free 
+            shopData = json.load(shopFile)
+            for shop in shopData["rows"]:
+                if shop["$id"] == 739:
+                    shop["Name"] = 590
+                    shop["Reward"] = 1106
+                    for i in range(1,4):
+                        shop[f"SetItem{i}"] = 0
+                        shop[f"SetNumber{i}"] = 0
+            JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [60], ["Value"], BonusMovespeed)
+            JSONParser.CloseFile(shopData, shopFile)
 
 def FixIssuesCausedByNGPlusFlag():
     CreateDLCtoSetFlag(["Driver Skill Tree Key"], [48589], Condition = [1853]) # 1853 is a pre-existing flag that requires the Scenario to be 2001 or higher (when you get pyra)
