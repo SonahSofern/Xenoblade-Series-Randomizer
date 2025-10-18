@@ -10,7 +10,7 @@ import XC3.XC3_Scripts.XC3_Settings as XC3
 import XCXDE.XCXDE_Scripts.XCXDE_Settings as XCXDE
 
 GUISettings.RootsForStyling.append(root)
-Version = "1.1.1"
+Version = "1.1.2"
 windowWidth = "1600"
 windowHeight = "900"
 defaultFont = Font(family="Calibri", size=14)
