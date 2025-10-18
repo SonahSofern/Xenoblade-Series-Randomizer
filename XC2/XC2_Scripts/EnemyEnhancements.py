@@ -16,6 +16,7 @@ def EnemyEnhances():
             enArrData = json.load(EnArrangeFile)
             nameData = json.load(NamesFile)
             spinbox  = Options.EnemyEnhancementsOption.GetSpinbox()
+            isShowInName = Options.EnemyEnhancementsOption_ShowInName.GetState()
             for Enemy in enArrData["rows"]:
                 if spinbox < random.randrange(0,100):
                     continue
@@ -32,15 +33,16 @@ def EnemyEnhances():
                   
                 Enemy["EnhanceID3"] = enh.id
                 
-                for name in nameData["rows"]: # Changes Names
-                    if name["$id"] == Enemy["Name"]:
-                        oldName = name["name"]
-                        enhanceName = enh.name +  ('+'*(enh.Rarity))
-                        if len(enhanceName + oldName) > MaxLettersInNameTag:
-                            oldnameList = oldName.split()
-                            oldName = oldnameList[-1]           
-                        name["name"] = f"[System:Color name=tutorial]{enhanceName}[/System:Color] {oldName}"
-                        break
+                if isShowInName:
+                    for name in nameData["rows"]: # Changes Names
+                        if name["$id"] == Enemy["Name"]:
+                            oldName = name["name"]
+                            enhanceName = enh.name +  ('+'*(enh.Rarity))
+                            if len(enhanceName + oldName) > MaxLettersInNameTag:
+                                oldnameList = oldName.split()
+                                oldName = oldnameList[-1]           
+                            name["name"] = f"[System:Color name=tutorial]{enhanceName}[/System:Color] {oldName}"
+                            break
 
             JSONParser.CloseFile(nameData, NamesFile)
             JSONParser.CloseFile(enArrData, EnArrangeFile)

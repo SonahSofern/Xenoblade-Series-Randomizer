@@ -98,15 +98,14 @@ def ShortenedTutorial():
         json.dump(data, file, indent=2, ensure_ascii=False)
     with open("./XC2/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing tutorials in field
         data = json.load(file)
+        removables = ["aoc_tut14", "aoc_tut11", "aoc_tut12", "aoc_tut26", "aoc_tut22", "aoc_tut20", "aoc_tut15", "aoc_tut17"]
         for row in data["rows"]:
             if row["$id"] == 30005:
                 row["chgEdID"] = 30007
-            if "tut_" in row["scriptName"] or "aoc_tut" in row["scriptName"]:
+            if "tut_sys" in row["scriptName"] or row["scriptName"] in removables:
                 row["scriptName"] = ""
                 row["scriptStartId"] = 0
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+        JSONParser.CloseFile(data, file)                
         
     Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial.json", ["script_file"], "aoc_challenge_tutorial") # Shortens battle tutorials
     Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial.json", ["start_id"], 0)
@@ -114,18 +113,9 @@ def ShortenedTutorial():
     Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["param1"], 0)
     Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["script_file"], "aoc_challenge_tutorial")
     Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["start_id"], 0)
-    with open("./XC2/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing torna tutorials
-        data = json.load(file)
-        removables = ["aoc_tut04", "aoc_tut25", "aoc_tut14", "aoc_tut21", "aoc_tut06", "aoc_tut07", "aoc_tut09", "aoc_tut08"] # "aoc_tut10"
-        for row in data["rows"]:
-            if row["scriptName"] in removables:
-                row["scriptName"] = ""
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+
     with open("./XC2/JsonOutputs/common/EVT_listQst01.json", 'r+', encoding='utf-8') as file: # removing torna tutorials
         data = json.load(file)
-        removables = ["aoc_tut14", "aoc_tut11", "aoc_tut12", "aoc_tut26", "aoc_tut22", "aoc_tut20", "aoc_tut15", "aoc_tut17"]
         for row in data["rows"]:
             if row["scriptName"] in removables:
                 row["scriptName"] = ""

@@ -174,6 +174,8 @@ BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
 BossEnemyOption_Size = SubOption("Match Size", BossEnemyOption)
 
 EnemyEnhancementsOption = Option("Enemy Enhancements", Enemies, "Gives enemies a random enhancement; it is displayed by their name", [lambda: EnemyEnhancements.EnemyEnhances()], hasSpinBox = True, spinDefault=30, descData=lambda: EnemyEnhancements.EnemyEnhancementDescriptions())
+EnemyEnhancementsOption_ShowInName = Option("Show In Nametag", EnemyEnhancementsOption)
+
 EnemyArtEffectsOption = Option("Enemy Art Effects", Enemies, "Gives enemies a random bonus effect to their arts; it is displayed by their\nart's name", [lambda: EnemyArts.EnemyArtAttributes()], hasSpinBox = True, spinDefault=50, descData=lambda: EnemyArts.EnemyArtEnhancementDescriptions())
 EnemyArtEffectsOption_Reactions = SubOption("Reactions", EnemyArtEffectsOption)
 EnemyArtEffectsOption_AOE = SubOption("AOE", EnemyArtEffectsOption)
@@ -267,7 +269,7 @@ TornaRewardsonUnreqSidequests = Option("Progression on Unrequired Sidequests", T
 # any torna option with a lambda gets the incompatible list
 MutuallyExclusivePairing([TornaMainOption, TornaAddHints, TornaObjectColorMatchesContents, TornaChooseCommunityReqs, TornaCreateSpoilerLog, TornaRemoveGormottChecks, TornaRewardsonUnreqSidequests], [AccessoriesOption, AuxCoresOption, AccessoryShopsOption, CollectionPointsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladesOption, BladeArtsOption, BladeFieldSkillsOption, BladeWeaponChipsOption, BladeCombosOption, BladeStatsOption, NormalEnemyOption, UniqueEnemyOption, BossEnemyOption, EnemyDropOption, CustomCoreCrystalOption, FreelyEngageBladesOption, CTMCOption, RemoveFieldSkillsOption, EasySkillTreesOption, FasterLevelsOption, NewGamePlusFlagsOptions, ProjTreasureChestOption, EnemySizeOption, BladeWeaponCosmeticsOption, CosmeticsOption, RaceModeOption, UMHuntOption])
 
-MutuallyExclusivePairing([UMHuntOption], [AccessoryShopsOption, CollectionPointsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladeWeaponChipsOption, AccessoriesOption, AuxCoresOption, NormalEnemyOption, BossEnemyOption, UniqueEnemyOption, EnemyDropOption, CustomCoreCrystalOption, FasterDriverSkillTrees, EasySkillTreesOption, FasterLevelsOption, RaceModeOption])
+MutuallyExclusivePairing([UMHuntOption], [AccessoryShopsOption, CollectionPointsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladeWeaponChipsOption, AccessoriesOption, AuxCoresOption, NormalEnemyOption, BossEnemyOption, UniqueEnemyOption, EnemyDropOption, CustomCoreCrystalOption, StartwithIncreasedMovespeedOption, FasterDriverSkillTrees, EasySkillTreesOption, FasterLevelsOption, RaceModeOption])
 
 MutuallyExclusivePairing([RaceModeOption], [DriversOption, BladesOption, ShortcutsOption])
 
