@@ -31,11 +31,7 @@ def PresetsWindow(optionName, root, defaultFont, dir, interactAbles, game):
     saveasPresetBtn = ttk.Button(InnerFrame, text="Save Current Settings as Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName ,game), CreatePreset(defaultName, InnerFrame, interactAbles, game, dir, top)))
     saveasPresetBtn.pack()
 
-    
     LoadPresets(InnerFrame, dir, interactAbles, game, top)
-
-
-    
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy(), garbList.clear())) # remove windows from list on close
 
 garbList = []
