@@ -269,7 +269,7 @@ def SummonsFix(eneData):
 
     
 def TornaIntroChanges(e:e.EnemyRandomizer):
-    e.ChangeStats([1430, 1429, 1428, 1454], [("HpMaxRev", 10)])
+    e.ChangeStats([1430, 1429, 1428, 1454], [("HpMaxRev", 50)])
 
 def ForcedWinFights(fights = []):
     with open("XC2/JsonOutputs/common/FLD_QuestBattle.json", 'r+', encoding='utf-8') as file:

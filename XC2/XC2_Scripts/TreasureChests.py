@@ -50,26 +50,25 @@ def EvaluateTboxGoldValue(tbox):
             amount = tbox[f"itm{i}Num"]
             totalGold += (itemVal * amount)
         
-    return totalGold    
+    return int(totalGold)    
   
 def TreasureBoxRando():
     SetBoxDescriptions()
     PopulateAll()
-    for area in IDs.MajorAreaIds:
+    for area in IDs.ValidTboxMapNames:
         areaBoxes = []
-        try:
-            with open(f"XC2/JsonOutputs/common_gmk/ma{area}a_FLD_TboxPop.json", 'r+', encoding='utf-8') as tboxFile:
-                tboxData = json.load(tboxFile)
-                for box in tboxData["rows"]:
-                    goldVal = int(EvaluateTboxGoldValue(box))
-                    areaBoxes.append(goldVal)
+        with open(area, 'r+', encoding='utf-8') as tboxFile:
+            tboxData = json.load(tboxFile)
+            for box in tboxData["rows"]:
+                goldVal = EvaluateTboxGoldValue(box)
+                areaBoxes.append(goldVal)
+            
+            for box in tboxData["rows"]:
+                goldVal = EvaluateTboxGoldValue(box)
+                box["RSC_ID"] = GetRarity(goldVal) # based on median values of the area
                 
-                for box in tboxData["rows"]:
-                    box["RSC_ID"] = GetRarity(goldVal) # based on median values of the area
-                    
-                JSONParser.CloseFile(tboxData, tboxFile)
-        except Exception as e:
-            print(e)
+            JSONParser.CloseFile(tboxData, tboxFile)
+
     
 def SetBoxDescriptions(): # Hardcoded New Boxes and descriptions
     class CreditRarityRelation():

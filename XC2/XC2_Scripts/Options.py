@@ -201,7 +201,7 @@ ShortcutsOption_Tutorials = SubOption("Tutorials Skip", ShortcutsOption, [lambda
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
 ShortcutsOption_IndolQuiz = SubOption("Indol Quiz Skip", ShortcutsOption, [lambda: TutorialShortening.IndolQuizSkip()])
-ShortcutsOption_CommunitySkip = SubOption("Torna Community Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_ConditionFlag.json"],[1394,1395,1396,1397], ["FlagMin"], 1)])
+ShortcutsOption_CommunitySkip = SubOption("Community Levels Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_ConditionFlag.json"],[1394,1395,1396,1397], ["FlagMin"], 1)])
 RemoveFieldSkillsOption = Option("Remove Story Field Skills", QOL, "Removes field skill checks", [lambda: FieldSkills.RemoveFieldSkills()], ["Remove All Field Skills", []])
 RemoveFieldSkillsOption_AllFieldSkills = SubOption("Remove All Field Skills", RemoveFieldSkillsOption)
 EasySkillTreesOption = Option("Easy Affinity Trees", QOL, "Makes trust the only condition for levelling up a blade's affinity tree", [lambda: SkillTrees.BladeSkillTreeShortening()])
@@ -269,7 +269,7 @@ MutuallyExclusivePairing([TornaMainOption, TornaAddHints, TornaObjectColorMatche
 
 MutuallyExclusivePairing([UMHuntOption], [AccessoryShopsOption, CollectionPointsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladeWeaponChipsOption, AccessoriesOption, AuxCoresOption, NormalEnemyOption, BossEnemyOption, UniqueEnemyOption, EnemyDropOption, CustomCoreCrystalOption, FasterDriverSkillTrees, EasySkillTreesOption, FasterLevelsOption, RaceModeOption])
 
-MutuallyExclusivePairing([RaceModeOption], [DriversOption, BladesOption])
+MutuallyExclusivePairing([RaceModeOption], [DriversOption, BladesOption, ShortcutsOption])
 
 # Currently Disabled for Various Reasons
 # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
