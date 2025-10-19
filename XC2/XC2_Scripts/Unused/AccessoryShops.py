@@ -42,10 +42,3 @@ def RandoAccessoryShops():
         shopFile.truncate()
         json.dump(shopData, shopFile, indent=2, ensure_ascii=False)
         
-def AccessoryShopDescription():
-    desc = PopupDescriptions.Description()
-    desc.Header(Options.AccessoryShopsOption.name)
-    desc.Text("This option randomizes a % of all non-key items in Accessory Shops into the types of items chosen from suboptions.")
-    desc.Text("If no sub-options are selected this will do nothing.")
-    desc.Image("AccessoryShopIcon.png", "XC2")
-    return desc

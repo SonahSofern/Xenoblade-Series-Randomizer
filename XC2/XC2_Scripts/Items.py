@@ -34,7 +34,7 @@ def RandomizeNormalShops(shopIDs, valTable:Values.ValueTable, doNotReplaceIDs = 
                 valTable.SelectValuedMember(shop, f"DefItem{i}", doNotReplaceIDs)
                 
             for j in range(1,6):
-                valTable.SelectValuedMember(shop, f"Addtem{i}", doNotReplaceIDs)
+                valTable.SelectValuedMember(shop, f"Addtem{j}", doNotReplaceIDs)
                                             
         JSONParser.CloseFile(shopData, shopFile)
 
@@ -100,26 +100,26 @@ def RandomizeEnemyDropsHelper(dropIDs, dontChangeIDs, valTable:Values.ValueTable
         JSONParser.CloseFile(dropData, dropFile)
 
 
-def GetTreasureBoxValue(tbox):
-    totalVal = 0
+# def GetTreasureBoxValue(tbox):
+#     totalVal = 0
     
-    # Gold
-    avgGold = (tbox["goldMin"] + tbox["goldMax"])/2
-    totalVal += avgGold
+#     # Gold
+#     avgGold = (tbox["goldMin"] + tbox["goldMax"])/2
+#     totalVal += avgGold
     
-    # Items
-    for i in range(1,9):
-        itemID = tbox[f"itm{i}ID"]
+#     # Items
+#     for i in range(1,9):
+#         itemID = tbox[f"itm{i}ID"]
         
-        if itemID == 0: # Ignore empty slots
-            continue
+#         if itemID == 0: # Ignore empty slots
+#             continue
         
-        item:Values.ValuedItem = valTable.GetByID(itemID)
-        if item:
-            amount = tbox[f"itm{i}Num"]
-            totalVal += (item.value * amount)
+#         item:Values.ValuedItem = valTable.GetByID(itemID)
+#         if item:
+#             amount = tbox[f"itm{i}Num"]
+#             totalVal += (item.value * amount)
 
-    return int(totalVal)    
+#     return int(totalVal)    
 
 def CreateCTMCDescriptions(): # Hardcoded New Boxes and descriptions
     class CreditRarityRelation():
@@ -187,6 +187,14 @@ def WeaponChipDesc():
     desc.Text("Randomizes all chips in each weapon chip shop.\nTheir price is tied to the chip not the shop.")
     desc.Image("WeaponChipRando.png", "XC2", 800)
     desc.Text("This often makes the game very easy as weapon chips are one of the most important things in damage calculations.")
+    return desc
+
+def AccessoryShopDescription():
+    desc = PopupDescriptions.Description()
+    desc.Header(Options.AccessoryShopsOption.name)
+    desc.Text("This option randomizes a % of all non-key items in Accessory Shops into the types of items chosen from suboptions.")
+    desc.Text("If no sub-options are selected this will do nothing.")
+    desc.Image("AccessoryShopIcon.png", "XC2")
     return desc
 
 def CollectionPointDescriptions():

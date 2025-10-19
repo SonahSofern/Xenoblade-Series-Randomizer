@@ -14,7 +14,7 @@ class ValuedItem():
 
 class ValueTable():
     def __init__(self):
-        self.valuesList = []
+        self.valuesList:list[Helper.RandomGroup] = []
         self.weightList = []
         
     def PopulateValues(self, file:ValueFile, validIDs, weight = 1):
@@ -43,22 +43,29 @@ class ValueTable():
         else:
             return False
     
-    def SelectValuedMember(self, data, key, dontChangeIDs, range = 10):
+    def SelectValuedMember(self, data, key, dontChangeIDs):
         
         if data[key] in dontChangeIDs + [0]: # dont change some things and empty spots
             return
         
         originalItem = self.GetByID(data[key])
         
-        category:Helper.RandomGroup = random.choices(self.valuesList, self.weightList, k=1) # Select a category off weights
+        if originalItem == None:
+            print(f"Item could not be found: {data[key]}")
+            return
         
-        indexOfOriginalItem = category.originalGroup.index(originalItem)
+        category:Helper.RandomGroup = random.choices(self.valuesList, self.weightList, k=1)[0] # Select a category off weights
         
-        lowerBound = max(indexOfOriginalItem - range, 0)
-        upperBound = min(indexOfOriginalItem + range, len(category.originalGroup))
+        indexOfSimilarValueItem = min(range(len(category.originalGroup)), key=lambda i: abs(category.originalGroup[i].value - originalItem.value))
+            
+        # range should depend on the length of the category and maybe the values nearby
+        targetRange = int(len(category.originalGroup)/15)
+        
+        lowerBound = max(indexOfSimilarValueItem - targetRange, 0)
+        upperBound = min(indexOfSimilarValueItem + targetRange, len(category.originalGroup))
         
         
-        categoryRange = category.originalGroup[lowerBound, upperBound]
+        categoryRange = category.originalGroup[lowerBound:upperBound]
         
         chosen:ValuedItem = random.choice(categoryRange) # Want to select a random member based on a similar valued item from this category # not using Random Group methods because if you remove choices it could lead to unbalanced things since we are looking at nearby elements in a sorted list by value
         
@@ -68,7 +75,7 @@ class ValueTable():
     def GetByID(self, id):
         """Given an id, search the valuesList for the ValuedItem."""
         for list in self.valuesList:
-            for item in list:
+            for item in list.originalGroup:
                 if item.id == id:
                     return item
         return None
