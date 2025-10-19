@@ -24,10 +24,10 @@ def RandomizeNormalShops(shopIDs, allowedIDs, doNotReplaceIDs = []):
                 continue
                 
             for i in range(1,11):
-                ReplaceWithSimilarValueItem(shop[f"DefItem{i}"], [allowedIDs], doNotReplaceIDs)
+                ReplaceWithSimilarValueItem(shop, f"DefItem{i}", [allowedIDs], doNotReplaceIDs)
                 
             for j in range(1,6):
-                ReplaceWithSimilarValueItem(shop[f"Addtem{j}"], [allowedIDs], doNotReplaceIDs)
+                ReplaceWithSimilarValueItem(shop, f"Addtem{j}", [allowedIDs], doNotReplaceIDs)
                             
         JSONParser.CloseFile(shopData, shopFile)
 
@@ -42,7 +42,7 @@ def RandomizeTreasureBoxesHelper(areas, dontChangeIDs, itemCategories = []):
             tboxData = json.load(tboxFile)
             for box in tboxData["rows"]:
                 for i in range(1,9):
-                    ReplaceWithSimilarValueItem(box[f"itm{i}ID"], itemCategories, dontChangeIDs)
+                    ReplaceWithSimilarValueItem(box, f"itm{i}ID", itemCategories, dontChangeIDs)
                 
             
                 # areaBoxes.append(goldVal)
@@ -50,7 +50,7 @@ def RandomizeTreasureBoxesHelper(areas, dontChangeIDs, itemCategories = []):
                 
             JSONParser.CloseFile(tboxData, tboxFile)
 
-def RandomizeEnemyDrops():
+def RandomizeEnemyDrops(): # Up top here we define the RandomGroups instead of just the IDs cause we want to use random groups
     FerisBeastmeat = [30380]
     sharedArgs = [(IDs.AuxCoreIDs, Options.EnemyDropOption_AuxCores.GetSpinbox()), (IDs.RefinedAuxCoreIDs, Options.EnemyDropOption_RefinedAuxCores.GetSpinbox()), (IDs.WeaponChipIDs, Options.EnemyDropOption_WeaponChips.GetSpinbox()), (IDs.CoreCrystals, Options.EnemyDropOption_CoreCrystals)]
     RandomizeEnemyDropsHelper(IDs.BaseDropTableIDs, IDs.PreciousItems, sharedArgs + [(IDs.AccessoryIDs, Options.EnemyDropOption_Accessories.GetSpinbox())])
@@ -61,19 +61,21 @@ def RandomizeEnemyDropsHelper(dropIDs, dontChangeIDs, itemCategories = []):
         dropData = json.load(dropFile)
         for drop in dropData["rows"]:
             for i in range(1,9):
-                ReplaceWithSimilarValueItem(drop[f"ItemID{i}"], itemCategories, dontChangeIDs)
+                ReplaceWithSimilarValueItem(drop, f"ItemID{i}", itemCategories, dontChangeIDs)
             
         JSONParser.CloseFile(dropData, dropFile)
 
-def ReplaceWithSimilarValueItem(originalItemID, validReplacementIDs = [], doNotReplaceIDs = []):
+def ReplaceWithSimilarValueItem(ogItem, key, validReplacementIDs = [], doNotReplaceIDs = []):
     
     if valTable.isEmpty():
         PopulateValueCalcXC2()
     
-    if originalItemID in doNotReplaceIDs:
+    if ogItem in doNotReplaceIDs:
         return
         
-    originalItem:Values.ValuedItem = valTable.GetByID(originalItemID)
+    valuedOgItem:Values.ValuedItem = valTable.GetByID(ogItem[key])
+    
+    replacementCategory = random.choices(validReplacementIDs, [], k=1)
     
     # Need to filter the valTable to get only what we want (But that might be bad performance to do every call of this maybe filtering happens above)
     # Involve weights and choose from item type not a combined list (since some have way more than others)
