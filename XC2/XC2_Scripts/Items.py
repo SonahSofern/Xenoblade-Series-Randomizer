@@ -48,7 +48,7 @@ def RandomizeTreasureBoxes():
     
     # Torna
     tornaValTable = copy.deepcopy(valTable) # Copy it before we put in just base game accessory IDs
-    tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.TornaAccessories + IDs.AccessoryIDs, Options.TreasureChestOption_Accessories.GetSpinbox())
+    tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AllowedTornaAccessories, Options.TreasureChestOption_Accessories.GetSpinbox())
     valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Options.TreasureChestOption_Accessories.GetSpinbox())
     
     RandomizeTreasureBoxesHelper(IDs.ValidTboxMapNames, IDs.PreciousItems, valTable)
@@ -79,7 +79,7 @@ def RandomizeEnemyDrops(): # Up top here we define the RandomGroups instead of j
     # Torna
     tornaValTable = copy.deepcopy(valTable) # Copy it before we put in just base game accessory IDs
     FerisBeastmeat = [30380]
-    tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.TornaAccessories + IDs.AccessoryIDs, Options.EnemyDropOption_Accessories.GetSpinbox())
+    tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AllowedTornaAccessories, Options.EnemyDropOption_Accessories.GetSpinbox())
     valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Options.EnemyDropOption_Accessories.GetSpinbox())
     
     RandomizeEnemyDropsHelper(IDs.BaseDropTableIDs, IDs.PreciousItems, valTable)
@@ -167,7 +167,7 @@ def TreasureChestDescription():
     myDesc.Text("This option randomizes a % of all non-key items in Treasure Chests into the types of items chosen from suboptions.")
     myDesc.Text("If no sub-options are selected this will do nothing.")
     myDesc.Image("TreasureChest.png", "XC2")
-    myDesc.Header(Options.CustomCoreCrystalOption.name)
+    myDesc.Header(Options.TreasureChestOption_RareBlades.name)
     myDesc.Text("When enabled, a percentage of all the chests in the game (chosen by the spinbox) will have a randomly chosen Custom Core Crystal in them.\n\nThese Custom Core Crystals will be named after the blade inside.")
     myDesc.Image("Custom Core Crystals.png", "XC2", 700)
     return myDesc

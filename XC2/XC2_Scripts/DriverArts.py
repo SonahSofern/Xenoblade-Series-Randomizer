@@ -1,6 +1,6 @@
 import json
 import random
-from XC2.XC2_Scripts.IDs import Arts, AutoAttacks, TornaTalentArtIDs
+from XC2.XC2_Scripts.IDs import Arts, AutoAttacks, TornaTalentArtIDs, TornaSwitchArtIDs
 from XC2.XC2_Scripts import Options
 import scripts.PopupDescriptions
 from XC2.XC2_Scripts.Arts import *
@@ -8,7 +8,7 @@ from scripts import Helper, JSONParser
 
 def DriverArtRandomizer():
     with open("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as artFile:
-        ignoreArts = [4,5,6,7] + TornaTalentArtIDs # Dont change aegis since they get copied to later # Dont change torna talent arts
+        ignoreArts = [4,5,6,7] + TornaTalentArtIDs +  TornaSwitchArtIDs # Dont change aegis since they get copied to later # Dont change torna talent arts or switch arts
         
         artData = json.load(artFile)
         

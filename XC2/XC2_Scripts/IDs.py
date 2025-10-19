@@ -27,6 +27,7 @@ BladeArts = [0,1,2,3,4,5,6,7,8,9]
 ArtDebuffs = [0,11,12,13,14,15,21,23,24,25,30,35]
 VanillaEnhancements = Helper.InclRange(1,3894)
 TornaTalentArtIDs = [678,679,680,681,682,683,684,685,686]
+TornaSwitchArtIDs = [591, 601, 611, 621, 631, 641, 651, 661, 671]
 
 DriverSkillTrees = Helper.InclRange(1,270)
 HitReactions = Helper.InclRange(0,16)

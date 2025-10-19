@@ -304,7 +304,7 @@ def DetermineNGPlusBladeCrystalIDs():
     #    NGPlusBladeIDs = RandomizedBladeIDs
     #    print(NGPlusBladeIDs)
     NGPlusBladeCrystalIDs = []
-    if (Options.CustomCoreCrystalOption.GetState()) or (Options.UMHuntOption.GetState()):
+    if (Options.TreasureChestOption_RareBlades.GetState()) or (Options.UMHuntOption.GetState()):
         with open("./XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
             data = json.load(file)
             for i in range(0, len(NGPlusBladeIDs)):
@@ -902,7 +902,7 @@ def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy 
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def FindtheBladeNames():
-    if Options.CustomCoreCrystalOption.GetState():
+    if Options.TreasureChestOption_RareBlades.GetState():
         ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
         CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./XC2/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
         CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("./XC2/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
@@ -1011,7 +1011,7 @@ def WeaponChipShopPowerLevelIncrease(): # Common issue at start of run is first 
 def ChestTypeMatching():  # Chest type matches Contents
     RaceModeOn = Options.RaceModeOption.GetState()
     ZoharFragOn = Options.RaceModeOption_Zohar.GetState()
-    CoreCrystalRandoOn = Options.CustomCoreCrystalOption.GetState()
+    CoreCrystalRandoOn = Options.TreasureChestOption_RareBlades.GetState()
     ZoharFragItemIDs = [25135, 25136, 25137, 25138]
     CoreCrystalIDs = AllCoreCrystals
     MovespeedDeedIDs = Helper.InclRange(25249, 25300)
