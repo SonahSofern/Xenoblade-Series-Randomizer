@@ -197,10 +197,3 @@ def CoreCrystalChanges():
         FixOpeningSoftlock() # Removes ability to pull before you get Pyra, softlocking if you don't get a blade with arts 
         FixArtReleaseLevels()
         RaceMode.FindtheBladeNames()
-
-def Description():
-    CustomCoreCrystalDesc = PopupDescriptions.Description()
-    CustomCoreCrystalDesc.Header(Options.CustomCoreCrystalOption.name)
-    CustomCoreCrystalDesc.Text("When enabled, a percentage of all the chests in the game (chosen by the spinbox) will have a randomly chosen Custom Core Crystal in them.\n\nThese Custom Core Crystals will be named after the blade inside.")
-    CustomCoreCrystalDesc.Image("Custom Core Crystals.png", "XC2", 700)
-    return CustomCoreCrystalDesc

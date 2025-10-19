@@ -1,4 +1,3 @@
-from XC2.XC2_Scripts.Unfinished import DebugLog
 from scripts import Helper, JSONParser, PopupDescriptions
 from XC2.XC2_Scripts import EnemyRandoLogic, CoreCrystalAdjustments, Options, TutorialShortening
 import random, time, math, json
