@@ -1,21 +1,28 @@
 from XC2.XC2_Scripts import Options, IDs
-import json, random
+import json, random, copy
 from scripts import Helper, PopupDescriptions, JSONParser, Values
 
-valTable = Values.ValueTable()
 
 def RandomizeAccessoryShops():
+    valTable = Values.ValueTable()
+    valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs)
+    tornaValTable = Values.ValueTable()
+    tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs + IDs.TornaAccessories)
     AbyssVest = [1]
-    RandomizeNormalShops(IDs.BaseGameAccessoryShopIDs, IDs.AccessoryIDs, AbyssVest)
-    RandomizeNormalShops(IDs.TornaAccessoryShopIDs, IDs.AccessoryIDs + IDs.TornaAccessories)
+    RandomizeNormalShops(IDs.BaseGameAccessoryShopIDs, valTable, AbyssVest)
+    RandomizeNormalShops(IDs.TornaAccessoryShopIDs, tornaValTable)
 
 def RandomizePouchItemShops():
-    RandomizeNormalShops(IDs.BaseGamePouchShopIDs, IDs.PouchItems)
+    valTable = Values.ValueTable()
+    valTable.PopulateValues(Values.ValueFile("ITM_FavoriteList"), IDs.PouchItems)
+    RandomizeNormalShops(IDs.BaseGamePouchShopIDs, valTable)
     
 def RandomizeWeaponChipShops():
-    RandomizeNormalShops(IDs.BaseGameWeaponChipShopIDs + IDs.TornaWeaponChipShopIDs, IDs.WeaponChipIDs)
+    valTable = Values.ValueTable()
+    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip"), IDs.WeaponChipIDs)
+    RandomizeNormalShops(IDs.BaseGameWeaponChipShopIDs + IDs.TornaWeaponChipShopIDs, valTable)
 
-def RandomizeNormalShops(shopIDs, allowedIDs, doNotReplaceIDs = []):    
+def RandomizeNormalShops(shopIDs, valTable:Values.ValueTable, doNotReplaceIDs = []):    
     with open("XC2/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as shopFile:
         shopData = json.load(shopFile)
         for shop in shopData["rows"]:
@@ -24,25 +31,36 @@ def RandomizeNormalShops(shopIDs, allowedIDs, doNotReplaceIDs = []):
                 continue
                 
             for i in range(1,11):
-                ReplaceWithSimilarValueItem(shop, f"DefItem{i}", [allowedIDs], doNotReplaceIDs)
+                valTable.SelectValuedMember(shop, f"DefItem{i}", doNotReplaceIDs)
                 
             for j in range(1,6):
-                ReplaceWithSimilarValueItem(shop, f"Addtem{j}", [allowedIDs], doNotReplaceIDs)
-                            
+                valTable.SelectValuedMember(shop, f"Addtem{i}", doNotReplaceIDs)
+                                            
         JSONParser.CloseFile(shopData, shopFile)
 
 def RandomizeTreasureBoxes():
-    sharedArgs = [(IDs.AuxCoreIDs, Options.TreasureChestOption_AuxCores.GetSpinbox()), (IDs.RefinedAuxCoreIDs, Options.TreasureChestOption_RefinedAuxCores.GetSpinbox()), (IDs.WeaponChipIDs, Options.TreasureChestOption_WeaponChips.GetSpinbox()), (IDs.CoreCrystals, Options.TreasureChestOption_CoreCrystals)]
-    RandomizeTreasureBoxesHelper(IDs.ValidTboxMapNames, IDs.PreciousItems, sharedArgs + [(IDs.AccessoryIDs, Options.TreasureChestOption_Accessories.GetSpinbox())])
-    RandomizeTreasureBoxesHelper(IDs.ValidTornaTboxMapNames, IDs.TornaPreciousIDs, sharedArgs + [(IDs.AccessoryIDs + IDs.TornaAccessories, Options.TreasureChestOption_Accessories.GetSpinbox())])
+    # Base Game
+    valTable = Values.ValueTable()
+    valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs, Options.TreasureChestOption_AuxCores.GetSpinbox())
+    valTable.PopulateValues(Values.ValueFile("ITM_OrbEquip"), IDs.RefinedAuxCoreIDs, Options.TreasureChestOption_RefinedAuxCores.GetSpinbox())
+    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=5), IDs.WeaponChipIDs, Options.TreasureChestOption_WeaponChips.GetSpinbox())
+    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=5), IDs.CoreCrystals, Options.TreasureChestOption_CoreCrystals.GetSpinbox())
+    
+    # Torna
+    tornaValTable = copy.deepcopy(valTable) # Copy it before we put in just base game accessory IDs
+    tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.TornaAccessories + IDs.AccessoryIDs, Options.TreasureChestOption_Accessories.GetSpinbox())
+    valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Options.TreasureChestOption_Accessories.GetSpinbox())
+    
+    RandomizeTreasureBoxesHelper(IDs.ValidTboxMapNames, IDs.PreciousItems, valTable)
+    RandomizeTreasureBoxesHelper(IDs.ValidTornaTboxMapNames, IDs.TornaPreciousIDs, tornaValTable)
 
-def RandomizeTreasureBoxesHelper(areas, dontChangeIDs, itemCategories = []):
+def RandomizeTreasureBoxesHelper(areas, dontChangeIDs, valTable:Values.ValueTable):
     for area in areas:        
         with open(area, 'r+', encoding='utf-8') as tboxFile:
             tboxData = json.load(tboxFile)
             for box in tboxData["rows"]:
                 for i in range(1,9):
-                    ReplaceWithSimilarValueItem(box, f"itm{i}ID", itemCategories, dontChangeIDs)
+                    valTable.SelectValuedMember(box, f"itm{i}ID", dontChangeIDs)
                 
             
                 # areaBoxes.append(goldVal)
@@ -51,58 +69,36 @@ def RandomizeTreasureBoxesHelper(areas, dontChangeIDs, itemCategories = []):
             JSONParser.CloseFile(tboxData, tboxFile)
 
 def RandomizeEnemyDrops(): # Up top here we define the RandomGroups instead of just the IDs cause we want to use random groups
+    # Base Game
+    valTable = Values.ValueTable()
+    valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs, Options.EnemyDropOption_AuxCores.GetSpinbox())
+    valTable.PopulateValues(Values.ValueFile("ITM_OrbEquip"), IDs.RefinedAuxCoreIDs, Options.EnemyDropOption_RefinedAuxCores.GetSpinbox())
+    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=5), IDs.WeaponChipIDs, Options.EnemyDropOption_WeaponChips.GetSpinbox())
+    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=5), IDs.CoreCrystals, Options.EnemyDropOption_CoreCrystals.GetSpinbox())
+    
+    # Torna
+    tornaValTable = copy.deepcopy(valTable) # Copy it before we put in just base game accessory IDs
     FerisBeastmeat = [30380]
-    sharedArgs = [(IDs.AuxCoreIDs, Options.EnemyDropOption_AuxCores.GetSpinbox()), (IDs.RefinedAuxCoreIDs, Options.EnemyDropOption_RefinedAuxCores.GetSpinbox()), (IDs.WeaponChipIDs, Options.EnemyDropOption_WeaponChips.GetSpinbox()), (IDs.CoreCrystals, Options.EnemyDropOption_CoreCrystals)]
-    RandomizeEnemyDropsHelper(IDs.BaseDropTableIDs, IDs.PreciousItems, sharedArgs + [(IDs.AccessoryIDs, Options.EnemyDropOption_Accessories.GetSpinbox())])
-    RandomizeEnemyDropsHelper(IDs.TornaDropTableIDs, IDs.TornaPreciousIDs + FerisBeastmeat, sharedArgs + [(IDs.AccessoryIDs + IDs.TornaAccessories, Options.EnemyDropOption_Accessories.GetSpinbox())])
+    tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.TornaAccessories + IDs.AccessoryIDs, Options.EnemyDropOption_Accessories.GetSpinbox())
+    valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Options.EnemyDropOption_Accessories.GetSpinbox())
+    
+    RandomizeEnemyDropsHelper(IDs.BaseDropTableIDs, IDs.PreciousItems, valTable)
+    RandomizeEnemyDropsHelper(IDs.TornaDropTableIDs, IDs.TornaPreciousIDs + FerisBeastmeat, tornaValTable)
 
-def RandomizeEnemyDropsHelper(dropIDs, dontChangeIDs, itemCategories = []):
+def RandomizeEnemyDropsHelper(dropIDs, dontChangeIDs, valTable:Values.ValueTable):
     with open("XC2/JsonOutputs/common/BTL_EnDropItem.json", 'r+', encoding='utf-8') as dropFile:
         dropData = json.load(dropFile)
+    
         for drop in dropData["rows"]:
+            
+            if drop["$id"] not in dropIDs:
+                continue
+            
             for i in range(1,9):
-                ReplaceWithSimilarValueItem(drop, f"ItemID{i}", itemCategories, dontChangeIDs)
+                valTable.SelectValuedMember(drop, f"ItemID{i}", dontChangeIDs)
             
         JSONParser.CloseFile(dropData, dropFile)
 
-def ReplaceWithSimilarValueItem(ogItem, key, validReplacementIDs = [], doNotReplaceIDs = []):
-    
-    if valTable.isEmpty():
-        PopulateValueCalcXC2()
-    
-    if ogItem in doNotReplaceIDs:
-        return
-        
-    valuedOgItem:Values.ValuedItem = valTable.GetByID(ogItem[key])
-    
-    replacementCategory = random.choices(validReplacementIDs, [], k=1)
-    
-    # Need to filter the valTable to get only what we want (But that might be bad performance to do every call of this maybe filtering happens above)
-    # Involve weights and choose from item type not a combined list (since some have way more than others)
-    
-def PopulateValueCalcXC2():
-    files = [
-        Values.ValueFile("ITM_Orb"),
-        Values.ValueFile("ITM_OrbEquip"),
-        Values.ValueFile("ITM_PcEquip"),
-        Values.ValueFile("ITM_PreciousList", mult=2),
-        Values.ValueFile("ITM_PreciousListIra", mult=2),
-        Values.ValueFile("ITM_SalvageList"),
-        Values.ValueFile("ITM_TresureList"),
-        Values.ValueFile("ITM_PcWpnChip", mult=5),
-        Values.ValueFile("ITM_CrystalList"),
-        Values.ValueFile("ITM_BoosterList"),
-        Values.ValueFile("ITM_CollectionList"),
-        Values.ValueFile("ITM_FavoriteList"),
-        Values.ValueFile("ITM_HanaAssist", key="NeedEther", mult=2),
-        Values.ValueFile("ITM_HanaArtsEnh", key="NeedEther", mult=2),
-        Values.ValueFile("ITM_HanaAtr", key="NeedEther", mult=2),
-        Values.ValueFile("ITM_HanaNArtsSet", key="NeedEther", mult=2),
-        Values.ValueFile("ITM_HanaRole", key="NeedEther", mult=3),
-        Values.ValueFile("ITM_InfoList"),  
-    ]
-    for file in files:
-        valTable.PopulateValues(file)
 
 def GetTreasureBoxValue(tbox):
     totalVal = 0
@@ -201,3 +197,28 @@ def CollectionPointDescriptions():
     desc.Text("If no sub-options are selected this will do nothing.")
     desc.Image("ColPointIcon.png", "XC2")
     return desc
+
+
+# def PopulateValueCalcXC2():
+#     files = [
+#         Values.ValueFile("ITM_Orb"),
+#         Values.ValueFile("ITM_OrbEquip"),
+#         Values.ValueFile("ITM_PcEquip"),
+#         Values.ValueFile("ITM_PreciousList", mult=2),
+#         Values.ValueFile("ITM_PreciousListIra", mult=2),
+#         Values.ValueFile("ITM_SalvageList"),
+#         Values.ValueFile("ITM_TresureList"),
+#         Values.ValueFile("ITM_PcWpnChip", mult=5),
+#         Values.ValueFile("ITM_CrystalList"),
+#         Values.ValueFile("ITM_BoosterList"),
+#         Values.ValueFile("ITM_CollectionList"),
+#         Values.ValueFile("ITM_FavoriteList"),
+#         Values.ValueFile("ITM_HanaAssist", key="NeedEther", mult=2),
+#         Values.ValueFile("ITM_HanaArtsEnh", key="NeedEther", mult=2),
+#         Values.ValueFile("ITM_HanaAtr", key="NeedEther", mult=2),
+#         Values.ValueFile("ITM_HanaNArtsSet", key="NeedEther", mult=2),
+#         Values.ValueFile("ITM_HanaRole", key="NeedEther", mult=3),
+#         Values.ValueFile("ITM_InfoList"),  
+#     ]
+#     for file in files:
+#         valTable.PopulateValues(file)
