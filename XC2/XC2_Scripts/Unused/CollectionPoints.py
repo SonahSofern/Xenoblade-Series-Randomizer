@@ -24,8 +24,8 @@ def RandoCollectionPoints():
     
     if ValidReplacements == []: # In case they dont select anything
         return
-    
-    for area in IDs.MajorAreaIds:
+    MajorAreaCopy = IDs.MajorAreaIds
+    for area in MajorAreaCopy:
         try:
             with open(f"./XC2/JsonOutputs/common_gmk/ma{area}a_FLD_CollectionPopList.json", 'r+', encoding='utf-8') as collFile:
                 collData = json.load(collFile)
@@ -40,13 +40,16 @@ def RandoCollectionPoints():
                 collFile.truncate()
                 json.dump(collData, collFile, indent=2, ensure_ascii=False)
         except:
+            MajorAreaCopy.remove(area)
             pass # Ignores wrong files
+    print(MajorAreaCopy)
 
-def CollectionPointDescriptions():
-    desc = PopupDescriptions.Description()
-    desc.Header(Options.CollectionPointsOption.name)
-    # Insert image of accessory shop icon
-    desc.Text("This option randomizes a % of all non-key items in Collection Points into the types of items chosen from suboptions.")
-    desc.Text("If no sub-options are selected this will do nothing.")
-    desc.Image("ColPointIcon.png", "XC2")
-    return desc
+# CollectionPointsOption = Option("Collection Points", Items, "Randomizes the contents of Collection Points", [lambda: CollectionPoints.RandoCollectionPoints()], hasSpinBox = True, descData=lambda: CollectionPoints.CollectionPointDescriptions())
+# CollectionPointsOption_Accessories = SubOption("Accessories", CollectionPointsOption)
+# CollectionPointsOption_TornaAccessories = SubOption("Torna Accessories", CollectionPointsOption, defState=False)
+# CollectionPointsOption_WeaponChips = SubOption("Weapon Chips", CollectionPointsOption)
+# CollectionPointsOption_AuxCores = SubOption("Aux Cores", CollectionPointsOption, defState=False)
+# CollectionPointsOption_RefinedAuxCores = SubOption("Refined Aux Cores", CollectionPointsOption)
+# CollectionPointsOption_CoreCrystals = SubOption("Core Crystals", CollectionPointsOption)
+# CollectionPointsOption_Deeds = SubOption("Shop Deeds", CollectionPointsOption)
+# CollectionPointsOption_CollectionPointMaterials = SubOption("Collection Point Materials", CollectionPointsOption)

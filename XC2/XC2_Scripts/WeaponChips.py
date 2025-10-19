@@ -104,11 +104,3 @@ def ChangeWeaponRankNames():
             json.dump(data, file, indent=2, ensure_ascii=False)
 
 
-
-def WeaponChipDesc():
-    desc = PopupDescriptions.Description()
-    desc.Header(Options.WeaponChipShopOption.name)
-    desc.Text("Randomizes all chips in each weapon chip shop.\nTheir price is tied to the chip not the shop.")
-    desc.Image("WeaponChipRando.png", "XC2", 800)
-    desc.Text("This often makes the game very easy as weapon chips are one of the most important things in damage calculations.")
-    return desc
