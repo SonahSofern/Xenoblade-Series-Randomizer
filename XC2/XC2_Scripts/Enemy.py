@@ -38,6 +38,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                             continue
 
                         newEn = eRando.CreateRandomEnemy(StaticEnemyData)
+                        
+                        newEn = RerollTornaBladedEnemies(oldEn, newEn, eRando)
 
                         if Options.BossEnemyOption_Solo.GetState():
                             eRando.BalanceFight(oldEn, newEn, SoloFightViolations, EnemyCounts)
@@ -78,6 +80,22 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                     JSONParser.CloseFile(eRando.rscData, rscFile)
                     JSONParser.CloseFile(eRando.artData, artFile)
 
+def RerollTornaBladedEnemies(oldEn, newEn, eRando:e.EnemyRandomizer):
+    '''
+    Bladed enemies in torna do not function properly (probably due to the vanguard system)
+    They will just stand there and cant use their blades
+    '''
+    if oldEn["ZoneID"] in [52, 53]: # Torna Locations
+        failsafeCount = 0
+        while newEn["EnemyBladeID"] != 0:
+            
+            newEn = eRando.CreateRandomEnemy(StaticEnemyData)
+            failsafeCount += 1
+            
+            if failsafeCount > 50:
+                print("BAD! ROLLING A LOT")
+                break
+    return newEn
 
 def CreateBlade(enBlade, oldEn, newEn, eRando:e.EnemyRandomizer): # Because there is only 1 blade referenced for each enemy we have to create new blades (Since blades are not referenced in gimmick files it is fine)
     newBlade = copy.deepcopy(enBlade)

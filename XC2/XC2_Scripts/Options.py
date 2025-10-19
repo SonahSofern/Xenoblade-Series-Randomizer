@@ -174,7 +174,7 @@ BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
 BossEnemyOption_Size = SubOption("Match Size", BossEnemyOption)
 
 EnemyEnhancementsOption = Option("Enemy Enhancements", Enemies, "Gives enemies a random enhancement; it is displayed by their name", [lambda: EnemyEnhancements.EnemyEnhances()], hasSpinBox = True, spinDefault=30, descData=lambda: EnemyEnhancements.EnemyEnhancementDescriptions())
-EnemyEnhancementsOption_ShowInName = Option("Show In Nametag", EnemyEnhancementsOption)
+EnemyEnhancementsOption_ShowInName = SubOption("Display Name", EnemyEnhancementsOption)
 
 EnemyArtEffectsOption = Option("Enemy Art Effects", Enemies, "Gives enemies a random bonus effect to their arts; it is displayed by their\nart's name", [lambda: EnemyArts.EnemyArtAttributes()], hasSpinBox = True, spinDefault=50, descData=lambda: EnemyArts.EnemyArtEnhancementDescriptions())
 EnemyArtEffectsOption_Reactions = SubOption("Reactions", EnemyArtEffectsOption)
