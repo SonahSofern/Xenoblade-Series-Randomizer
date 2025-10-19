@@ -1,6 +1,22 @@
 import json, random
 from scripts import Helper
 
+differenceList = []
+allowedRange = 0.05
+
+def ItemValueStatistics():
+    import statistics
+
+    if not differenceList:
+        print("No data in differenceList.")
+        return
+
+    print(f"For allowed range: {allowedRange*100}%")
+    print(f"Mean Difference:  {statistics.mean(differenceList)}")
+    print(f"Median Difference: {statistics.median(differenceList)}")
+    print(f"Std Deviation:    {statistics.stdev(differenceList)}")
+
+
 class ValueFile():
     def __init__(self, filename, key = "Price", mult = 1, path = "XC2/JsonOutputs/common/"):
         self.filename = f"{path}{filename}.json" # file to look at
@@ -51,15 +67,16 @@ class ValueTable():
         originalItem = self.GetByID(data[key])
         
         if originalItem == None:
-            print(f"Item could not be found: {data[key]}")
+            # print(f"Item could not be found: {data[key]}")
             return
         
         category:Helper.RandomGroup = random.choices(self.valuesList, self.weightList, k=1)[0] # Select a category off weights
         
         indexOfSimilarValueItem = min(range(len(category.originalGroup)), key=lambda i: abs(category.originalGroup[i].value - originalItem.value))
             
+
         # range should depend on the length of the category and maybe the values nearby
-        targetRange = int(len(category.originalGroup)/15)
+        targetRange = max(int(len(category.originalGroup)*allowedRange), 3)
         
         lowerBound = max(indexOfSimilarValueItem - targetRange, 0)
         upperBound = min(indexOfSimilarValueItem + targetRange, len(category.originalGroup))
@@ -69,6 +86,9 @@ class ValueTable():
         
         chosen:ValuedItem = random.choice(categoryRange) # Want to select a random member based on a similar valued item from this category # not using Random Group methods because if you remove choices it could lead to unbalanced things since we are looking at nearby elements in a sorted list by value
         
+        # print(f"Original Item Value: {originalItem.value} New Item Value: {chosen.value}")
+        
+        differenceList.append(originalItem.value - chosen.value)
         
         data[key] = chosen.id # Assign the item
     

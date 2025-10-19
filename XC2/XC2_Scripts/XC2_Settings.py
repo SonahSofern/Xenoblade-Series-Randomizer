@@ -16,7 +16,7 @@ TitlescreenSplash = scripts.XCRandomizer.FilePlacer(["Images/Logos/Aegis.wilay"]
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], f"Randomizer v{Version}") # Change Title Version to Randomizer vX.x.x
 
-extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.AddCustomEnhancements(), lambda: Options.TornaMain.PassAlongSpoilerLogInfo(Version, permalinkVar, seedEntryVar), lambda: ObjectNameCleanup.ReassignAlphabeticalSort()]
+extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.I.Values.ItemValueStatistics(), lambda: Options.Enhancements.AddCustomEnhancements(), lambda: Options.TornaMain.PassAlongSpoilerLogInfo(Version, permalinkVar, seedEntryVar), lambda: ObjectNameCleanup.ReassignAlphabeticalSort()]
 mainFolderNames = ["common", "common_gmk"]
 subFolderNames = ["common_ms"]
 
