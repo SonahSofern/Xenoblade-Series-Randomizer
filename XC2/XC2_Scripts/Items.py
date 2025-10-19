@@ -15,7 +15,7 @@ def RandomizePouchItemShops():
 def RandomizeWeaponChipShops():
     RandomizeNormalShops(IDs.BaseGameWeaponChipShopIDs + IDs.TornaWeaponChipShopIDs, IDs.WeaponChipIDs)
 
-def RandomizeNormalShops(shopIDs, allowedIDs, doNotReplaceIDs, addItemDoNotReplaceIDs):    
+def RandomizeNormalShops(shopIDs, allowedIDs, doNotReplaceIDs = [], addItemDoNotReplaceIDs = []):    
     with open("XC2/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as shopFile:
         shopData = json.load(shopFile)
         for shop in shopData["rows"]:
@@ -24,14 +24,49 @@ def RandomizeNormalShops(shopIDs, allowedIDs, doNotReplaceIDs, addItemDoNotRepla
                 continue
                 
             for i in range(1,11):
-                ReplaceWithSimilarValueItem(shop[f"DefItem{i}"], allowedIDs, doNotReplaceIDs)
+                ReplaceWithSimilarValueItem(shop[f"DefItem{i}"], [allowedIDs], doNotReplaceIDs)
                 
             for j in range(1,6):
-                ReplaceWithSimilarValueItem(shop[f"Addtem{j}"], allowedIDs, addItemDoNotReplaceIDs)
+                ReplaceWithSimilarValueItem(shop[f"Addtem{j}"], [allowedIDs], addItemDoNotReplaceIDs)
                             
         JSONParser.CloseFile(shopData, shopFile)
 
-def ReplaceWithSimilarValueItem(originalItemID, validReplacementIDs, doNotReplaceIDs = []):
+def RandomizeTreasureBoxes():
+    sharedArgs = [(IDs.AuxCoreIDs, Options.TreasureChestOption_AuxCores.GetSpinbox()), (IDs.RefinedAuxCoreIDs, Options.TreasureChestOption_RefinedAuxCores.GetSpinbox()), (IDs.WeaponChipIDs, Options.TreasureChestOption_WeaponChips.GetSpinbox()), (IDs.CoreCrystals, Options.TreasureChestOption_CoreCrystals)]
+    RandomizeTreasureBoxesHelper(IDs.ValidTboxMapNames, IDs.PreciousItems, sharedArgs + [(IDs.AccessoryIDs, Options.TreasureChestOption_Accessories.GetSpinbox())])
+    RandomizeTreasureBoxesHelper(IDs.ValidTornaTboxMapNames, IDs.TornaPreciousIDs, sharedArgs + [(IDs.AccessoryIDs + IDs.TornaAccessories, Options.TreasureChestOption_Accessories.GetSpinbox())])
+
+def RandomizeTreasureBoxesHelper(areas, dontChangeIDs, itemCategories = []):
+    for area in areas:        
+        with open(area, 'r+', encoding='utf-8') as tboxFile:
+            tboxData = json.load(tboxFile)
+            for box in tboxData["rows"]:
+                for i in range(1,9):
+                    ReplaceWithSimilarValueItem(box[f"itm{i}ID"], itemCategories, dontChangeIDs)
+                
+            
+                # areaBoxes.append(goldVal)
+                # box["RSC_ID"] = GetRarity(originalGoldVal - goldVal) # based on median values of the area
+                
+            JSONParser.CloseFile(tboxData, tboxFile)
+
+def RandomizeEnemyDrops():
+    FerisBeastmeat = [30380]
+    sharedArgs = [(IDs.AuxCoreIDs, Options.EnemyDropOption_AuxCores.GetSpinbox()), (IDs.RefinedAuxCoreIDs, Options.EnemyDropOption_RefinedAuxCores.GetSpinbox()), (IDs.WeaponChipIDs, Options.EnemyDropOption_WeaponChips.GetSpinbox()), (IDs.CoreCrystals, Options.EnemyDropOption_CoreCrystals)]
+    RandomizeEnemyDropsHelper(IDs.BaseDropTableIDs, IDs.PreciousItems, sharedArgs + [(IDs.AccessoryIDs, Options.EnemyDropOption_Accessories.GetSpinbox())])
+    RandomizeEnemyDropsHelper(IDs.TornaDropTableIDs, IDs.TornaPreciousIDs + FerisBeastmeat, sharedArgs + [(IDs.AccessoryIDs + IDs.TornaAccessories, Options.EnemyDropOption_Accessories.GetSpinbox())])
+
+def RandomizeEnemyDropsHelper(dropIDs, dontChangeIDs, itemCategories = []):
+    with open("XC2/JsonOutputs/common/BTL_EnDropItem.json", 'r+', encoding='utf-8') as dropFile:
+        dropData = json.load(dropFile)
+        for drop in dropData["rows"]:
+            for i in range(1,9):
+                ReplaceWithSimilarValueItem(drop[f"ItemID{i}"], itemCategories, dontChangeIDs)
+            
+        JSONParser.CloseFile(dropData, dropFile)
+
+
+def ReplaceWithSimilarValueItem(originalItemID, validReplacementIDs = [], doNotReplaceIDs = []):
     
     if valTable.isEmpty():
         PopulateValueCalcXC2()
@@ -41,8 +76,10 @@ def ReplaceWithSimilarValueItem(originalItemID, validReplacementIDs, doNotReplac
         
     originalItem:Values.ValuedItem = valTable.GetByID(originalItemID)
     
-        
-
+    # Need to filter the valTable to get only what we want (But that might be bad performance to do every call of this maybe filtering happens above)
+    # Involve weights and choose from item type not a combined list (since some have way more than others)
+    
+    
 def PopulateValueCalcXC2():
     files = [
         Values.ValueFile("ITM_Orb"),
@@ -67,67 +104,27 @@ def PopulateValueCalcXC2():
     for file in files:
         valTable.PopulateValues(file)
 
-# def TreasureBoxRando():
 
-#     CreateCTMCDescriptions()
-#     for area in IDs.ValidTboxMapNames:
-#         areaBoxes = []
-#         with open(area, 'r+', encoding='utf-8') as tboxFile:
-#             tboxData = json.load(tboxFile)
-#             for box in tboxData["rows"]:
-#                 goldVal = originalGoldVal = EvaluateTboxGoldValue(box)
-#                 ClearTbox(box)
-                
-#                 while goldVal > 0: # While the goldVal > 0 
-#                     chosenItem = valTable.SelectRandomMember()  # Pick an item with less value than the total val of the box to put in the box
-#                     goldVal -= chosenItem.value # Subtract that from the goldVal
-#                     # Find empty spot if box is full then ignore
-#                     for i in range(1,9):
-#                         if box[f"itm{i}ID"] == 0:
-#                             box[f"itm{i}ID"] = chosenItem.id
-#                             break
-#                         break # If all spots are full break
-            
-#                 # areaBoxes.append(goldVal)
-#                 box["RSC_ID"] = GetRarity(originalGoldVal - goldVal) # based on median values of the area
-                
-#             JSONParser.CloseFile(tboxData, tboxFile)
-        
+def GetTreasureBoxValue(tbox):
+    totalVal = 0
     
+    # Gold
+    avgGold = (tbox["goldMin"] + tbox["goldMax"])/2
+    totalVal += avgGold
+    
+    # Items
+    for i in range(1,9):
+        itemID = tbox[f"itm{i}ID"]
         
-class TreasureBox(Values.ValueContainer):
+        if itemID == 0: # Ignore empty slots
+            continue
+        
+        item:Values.ValuedItem = valTable.GetByID(itemID)
+        if item:
+            amount = tbox[f"itm{i}Num"]
+            totalVal += (item.value * amount)
 
-    def ClearContainer(tbox):
-        tbox["goldMin"] = 0    
-        tbox["goldMax"] = 0    
-        tbox["goldPopMin"] = 0    
-        tbox["goldPopMax"] = 0  
-        
-        for i in range(1,9):
-            if tbox[f"itm{i}ID"] in IDs.PreciousItems + IDs.TornaPreciousIDs + [0]: # Dont clear precious items
-                continue
-            tbox[f"itm{i}ID"] = 0
-
-    def GetContainerValue(tbox):
-        totalVal = 0
-        
-        # Gold
-        avgGold = (tbox["goldMin"] + tbox["goldMax"])/2
-        totalVal += avgGold
-        
-        # Items
-        for i in range(1,9):
-            itemID = tbox[f"itm{i}ID"]
-            
-            if itemID == 0: # Ignore empty slots
-                continue
-            
-            item:Values.ValuedItem = valTable.GetByID(itemID)
-            if item:
-                amount = tbox[f"itm{i}Num"]
-                totalVal += (item.value * amount)
-
-        return int(totalVal)    
+    return int(totalVal)    
 
 def CreateCTMCDescriptions(): # Hardcoded New Boxes and descriptions
     class CreditRarityRelation():

@@ -1,7 +1,7 @@
 from scripts import Helper, JSONParser, PopupDescriptions
 from XC2.XC2_Scripts import EnemyRandoLogic, CoreCrystalAdjustments, Options, TutorialShortening
 import random, time, math, json
-from XC2.XC2_Scripts.IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, AccessoryIDs, WeaponChipIDs, AuxCoreIDs, RefinedAuxCores, CollectionPointMaterials, TornaAccessories
+from XC2.XC2_Scripts.IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, AccessoryIDs, WeaponChipIDs, AuxCoreIDs, RefinedAuxCoreIDs, CollectionPointMaterials, TornaAccessories
 
 AllMapIDs = [["Gormott", "ma05a"], ["Uraya", "ma07a"], ["Mor Ardain","ma08a"], ["Leftherian Archipelago", "ma15a"], ["Indoline Praetorium", "ma11a"], ["Tantal", "ma13a"], ["Spirit Crucible Elpys", "ma16a"], ["Cliffs of Morytha", "ma17a"], ["World Tree", "ma20a"], ["Final Stretch", "ma21a"]] #that we care about lol
 
@@ -1122,7 +1122,7 @@ def ChestTypeMatching():  # Chest type matches Contents
                                 break
                     if not rowcatfound:
                         for j in range(1, 9):
-                            if row[f"itm{j}ID"] in AccessoryIDs + WeaponChipIDs + AuxCoreIDs + RefinedAuxCores:
+                            if row[f"itm{j}ID"] in AccessoryIDs + WeaponChipIDs + AuxCoreIDs + RefinedAuxCoreIDs:
                                 row["RSC_ID"] = ChestTierListIDs[3]
                                 rowcatfound = True
                                 break

@@ -12,7 +12,7 @@ def RandoCollectionPoints():
     if Options.CollectionPointsOption_AuxCores.GetState():
         ValidReplacements.extend(IDs.AuxCoreIDs)
     if Options.CollectionPointsOption_RefinedAuxCores.GetState():
-        ValidReplacements.extend(IDs.RefinedAuxCores)
+        ValidReplacements.extend(IDs.RefinedAuxCoreIDs)
     if Options.CollectionPointsOption_CoreCrystals.GetState():
         ValidReplacements.extend(IDs.CoreCrystals)
     if Options.CollectionPointsOption_Deeds.GetState():

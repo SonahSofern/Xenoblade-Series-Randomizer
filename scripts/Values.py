@@ -1,18 +1,6 @@
 import json
 from scripts import Helper
 
-class ValueContainer():
-    def __init__(self):
-        pass   
-    
-    def ClearContainer(self):
-        ''' Empty the containers contents '''
-        pass
-    
-    def GetContainerValue(self):
-        ''' Return a number value for the container '''
-        return -1
-
 class ValueFile():
     def __init__(self, filename, key = "Price", mult = 1, path = "XC2/JsonOutputs/common/"):
         self.filename = f"{path}{filename}.json" # file to look at

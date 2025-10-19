@@ -3,7 +3,7 @@ import json
 
 #HELPFUL VARIABLES
 AuxCoreIDs = Helper.InclRange(15001, 15406)
-RefinedAuxCores = Helper.InclRange(17001, 17424)
+RefinedAuxCoreIDs = Helper.InclRange(17001, 17424)
 WeaponChipIDs = Helper.InclRange(10001, 10060)
 AllCoreCrystals = Helper.InclRange(45001,45057)
 CoreCrystals = [45001,45002,45003,45004,45005,45006,45007,45008,45009,45011,45012,45013,45016,45056,45057]
@@ -37,7 +37,8 @@ MajorAreaIds = ["01","02","03","04","05","07","08","10","11","13","15","17","18"
 MajorAreaWithCollectionPointIDs = ['02', '04', '05', '07', '08', '10', '11', '13', '15', '17', '18', '20', '21', '40', '42', '50', '90']
 BaseShopIDs = Helper.InclRange(11, 221)
 TornaShopIDs = Helper.InclRange(223, 255)
-
+BaseDropTableIDs = Helper.InclRange(1, 297) # BTL_EnDropItem
+TornaDropTableIDs = Helper.InclRange(298, 501)
 
 BladeSpecialIDs = Helper.InclRange(1,269)
 BladeTreeUnlockConditions = Helper.InclRange(1,1768)

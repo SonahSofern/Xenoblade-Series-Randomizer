@@ -12,7 +12,7 @@ def RandoAccessoryShops():
     if Options.AccessoryShopsOption_AuxCores.GetState():
         ValidReplacements.extend(IDs.AuxCoreIDs)
     if Options.AccessoryShopsOption_RefinedAuxCores.GetState():
-        ValidReplacements.extend(IDs.RefinedAuxCores)
+        ValidReplacements.extend(IDs.RefinedAuxCoreIDs)
     if Options.AccessoryShopsOption_CoreCrystals.GetState():
         ValidReplacements.extend(IDs.CoreCrystals)
     if Options.AccessoryShopsOption_Deeds.GetState():

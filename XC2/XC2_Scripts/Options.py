@@ -1,7 +1,7 @@
 from scripts import JSONParser,Helper
 from XC2.XC2_Scripts.IDs import *
 from tkinter import *
-from XC2.XC2_Scripts import Accessories, AuxCores, BladeSpecials, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeStats,TutorialShortening, GachaModifications, Enhancements, BigItems, Cosmetics, AccessoryShops, Items, ButtonCombos, EnemyDrops, Scales, DLCFlagQOL, CharacterRandomization, Enemy, WeaponChips, YellowSkills
+from XC2.XC2_Scripts import Accessories, AuxCores, BladeSpecials, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeStats,TutorialShortening, GachaModifications, Enhancements, BigItems, Cosmetics, AccessoryShops, Items, ButtonCombos, Scales, DLCFlagQOL, CharacterRandomization, Enemy, WeaponChips, YellowSkills
 from XC2.XC2_Scripts.Race_Mode import RaceMode
 from XC2.XC2_Scripts.Torna_Logic import TornaMain
 from XC2.XC2_Scripts.UM_Hunt import UMHuntMain
@@ -46,21 +46,19 @@ AuxCoresOption = Option("Aux Cores", Items, "Randomizes the effects of Aux Cores
 AccessoryShopsOption = Option("Accessory Shops", Items, "Randomizes the contents of Accessory Shops", [lambda: Items.RandomizeAccessoryShops()], hasSpinBox = True, descData=lambda: AccessoryShops.AccessoryShopDescription())
 PouchItemShopOption = Option("Pouch Item Shops", Items, "Randomizes the contents of Pouch Item Shops", [lambda: Items.RandomizePouchItemShops()], hasSpinBox = True, descData=lambda: Items.PouchItemShopDesc())
 WeaponChipShopOption = Option("Weapon Chip Shops", Items, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: Items.RandomizeWeaponChipShops()], descData=lambda: Items.WeaponChipDesc())
-TreasureChestOption = Option("Treasure Chests", Items, "Randomizes the contents of Treasure Chests", preRandoCommands=[], prio = 51, hasSpinBox = True, descData=lambda: Items.TreasureChestDescription())
+TreasureChestOption = Option("Treasure Chests", Items, "Randomizes the contents of Treasure Chests", preRandoCommands=[lambda: Items.RandomizeTreasureBoxes()], prio = 51, hasSpinBox = True, descData=lambda: Items.TreasureChestDescription())
 TreasureChestOption_RareBlades = SubOption("Rare Blades", TreasureChestOption, [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], hasSpinBox = True, spinDefault=5, spinDesc = "% of Chests")
-TreasureChestOption_Accessories = SubOption("Accessories", TreasureChestOption)
-TreasureChestOption_WeaponChips = SubOption("Weapon Chips", TreasureChestOption)
-TreasureChestOption_AuxCores = SubOption("Aux Cores", TreasureChestOption, defState=False)
-TreasureChestOption_RefinedAuxCores = SubOption("Refined Aux Cores", TreasureChestOption)
-TreasureChestOption_CoreCrystals = SubOption("Core Crystals", TreasureChestOption)
-TreasureChestOption_Deeds = SubOption("Shop Deeds", TreasureChestOption)
-EnemyDropOption = Option("Enemy Drops", Items, "Randomizes enemy drops", [lambda: EnemyDrops.RandoEnemyDrops()], hasSpinBox = True)
-EnemyDropOption_Accessories = SubOption("Accessories", EnemyDropOption)
-EnemyDropOption_WeaponChips = SubOption("Weapon Chips", EnemyDropOption)
-EnemyDropOption_AuxCores = SubOption("Aux Cores", EnemyDropOption)
-EnemyDropOption_RefinedAuxCores = SubOption("Refined Aux Cores", EnemyDropOption)
-EnemyDropOption_CoreCrystals = SubOption("Core Crystals", EnemyDropOption)
-EnemyDropOption_Deeds = SubOption("Shop Deeds", EnemyDropOption)
+TreasureChestOption_Accessories = SubOption("Accessories", TreasureChestOption, hasSpinBox=True, spinDefault=50, spinDesc=weightsSpinDescription)
+TreasureChestOption_WeaponChips = SubOption("Weapon Chips", TreasureChestOption, hasSpinBox=True, spinDefault=10)
+TreasureChestOption_AuxCores = SubOption("Aux Cores", TreasureChestOption, hasSpinBox=True, spinDefault=10)
+TreasureChestOption_RefinedAuxCores = SubOption("Refined Aux Cores", TreasureChestOption, hasSpinBox=True, spinDefault=10)
+TreasureChestOption_CoreCrystals = SubOption("Core Crystals", TreasureChestOption, hasSpinBox=True, spinDefault=5)
+EnemyDropOption = Option("Enemy Drops", Items, "Randomizes enemy drops", [lambda: Items.RandomizeEnemyDrops()], hasSpinBox = True)
+EnemyDropOption_Accessories = SubOption("Accessories", EnemyDropOption, hasSpinBox=True, spinDefault=50, spinDesc=weightsSpinDescription)
+EnemyDropOption_WeaponChips = SubOption("Weapon Chips", EnemyDropOption, hasSpinBox=True, spinDefault=10)
+EnemyDropOption_AuxCores = SubOption("Aux Cores", EnemyDropOption, hasSpinBox=True, spinDefault=10)
+EnemyDropOption_RefinedAuxCores = SubOption("Refined Aux Cores", EnemyDropOption, hasSpinBox=True, spinDefault=10)
+EnemyDropOption_CoreCrystals = SubOption("Core Crystals", EnemyDropOption, hasSpinBox=True, spinDefault=5)
 
 # Drivers
 DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.DriversDescriptions())
