@@ -1,76 +1,134 @@
 from XC2.XC2_Scripts import Options, IDs
 import json, random
-from scripts import Helper, PopupDescriptions, JSONParser
+from scripts import Helper, PopupDescriptions, JSONParser, Values
 
-# Rework this rando to be a balanced version of tbox rando (Should make it a system applicable to anything item related so we can balance the entire game and other games too)
+valTable = Values.ValueTable()
 
-valueDict = {}
+def RandomizeAccessoryShops():
+    AccessoryValTable = Values.ValueTable()
+    AccessoryValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"))
+    # Choose an Accessory of similar value to replace a shop item (With some variance)
 
-def PopulateValue(file, key = "Price", mult = 1):
-    '''
-    Adds dictionary items linking every ITM with a gold value
-    This value is useful to balance loot drops
-    '''
-    with open(f"XC2/JsonOutputs/common/{file}.json", 'r+', encoding='utf-8') as curFile:
-        curData = json.load(curFile)
-        for data in curData["rows"]:
-            valueDict[data["$id"]] = int(data[key] * mult)
 
-def PopulateAll():
-    PopulateValue("ITM_Orb")
-    PopulateValue("ITM_OrbEquip")
-    PopulateValue("ITM_PcEquip")
-    PopulateValue("ITM_PreciousList")
-    PopulateValue("ITM_PreciousListIra")
-    PopulateValue("ITM_SalvageList")
-    PopulateValue("ITM_TresureList")
-    PopulateValue("ITM_PcWpnChip", mult=5)
-    PopulateValue("ITM_CrystalList")
-    PopulateValue("ITM_BoosterList")
-    PopulateValue("ITM_CollectionList")
-    PopulateValue("ITM_FavoriteList")
-    PopulateValue("ITM_HanaAssist", key="NeedEther", mult=2)
-    PopulateValue("ITM_HanaArtsEnh", key="NeedEther", mult=2)
-    PopulateValue("ITM_HanaAtr", key="NeedEther", mult=2)
-    PopulateValue("ITM_HanaNArtsSet", key="NeedEther", mult=2)
-    PopulateValue("ITM_HanaRole", key="NeedEther", mult=3)
-    PopulateValue("ITM_InfoList")
 
-def EvaluateTboxGoldValue(tbox):
-    totalGold = 0
+def PopulateValueCalcXC2():
+    files = [
+        Values.ValueFile("ITM_Orb"),
+        Values.ValueFile("ITM_OrbEquip"),
+        Values.ValueFile("ITM_PcEquip"),
+        Values.ValueFile("ITM_PreciousList"),
+        Values.ValueFile("ITM_PreciousListIra"),
+        Values.ValueFile("ITM_SalvageList"),
+        Values.ValueFile("ITM_TresureList"),
+        Values.ValueFile("ITM_PcWpnChip", mult=5),
+        Values.ValueFile("ITM_CrystalList"),
+        Values.ValueFile("ITM_BoosterList"),
+        Values.ValueFile("ITM_CollectionList"),
+        Values.ValueFile("ITM_FavoriteList"),
+        Values.ValueFile("ITM_HanaAssist", key="NeedEther", mult=2),
+        Values.ValueFile("ITM_HanaArtsEnh", key="NeedEther", mult=2),
+        Values.ValueFile("ITM_HanaAtr", key="NeedEther", mult=2),
+        Values.ValueFile("ITM_HanaNArtsSet", key="NeedEther", mult=2),
+        Values.ValueFile("ITM_HanaRole", key="NeedEther", mult=3),
+        Values.ValueFile("ITM_InfoList"),  
+    ]
+    for file in files:
+        valTable.PopulateValues(file)
+
+def ItemRando(): # Randomizes everything
+    if valTable.isEmpty():
+        PopulateValueCalcXC2()
+    # Open files
+    # Loop through desired things
+    # Evaluate them
+    # Clear them
+    # Put new items in them
+    # Close
     
-    # Gold
-    avgGold = (tbox["goldMin"] + tbox["goldMax"])/2
-    totalGold += avgGold
-    
-    # Items
-    for i in range(1,9):
-        if tbox[f"itm{i}ID"] in valueDict:
-            itemVal = valueDict[tbox[f"itm{i}ID"]]
-            amount = tbox[f"itm{i}Num"]
-            totalGold += (itemVal * amount)
-        
-    return int(totalGold)    
-  
 def TreasureBoxRando():
-    SetBoxDescriptions()
-    PopulateAll()
+
+    CreateCTMCDescriptions()
     for area in IDs.ValidTboxMapNames:
         areaBoxes = []
         with open(area, 'r+', encoding='utf-8') as tboxFile:
             tboxData = json.load(tboxFile)
             for box in tboxData["rows"]:
-                goldVal = EvaluateTboxGoldValue(box)
-                areaBoxes.append(goldVal)
+                goldVal = originalGoldVal = EvaluateTboxGoldValue(box)
+                ClearTbox(box)
+                
+                while goldVal > 0: # While the goldVal > 0 
+                    chosenItem = valTable.SelectRandomMember()  # Pick an item with less value than the total val of the box to put in the box
+                    goldVal -= chosenItem.value # Subtract that from the goldVal
+                    # Find empty spot if box is full then ignore
+                    for i in range(1,9):
+                        if box[f"itm{i}ID"] == 0:
+                            box[f"itm{i}ID"] = chosenItem.id
+                            break
+                        break # If all spots are full break
             
-            for box in tboxData["rows"]:
-                goldVal = EvaluateTboxGoldValue(box)
-                box["RSC_ID"] = GetRarity(goldVal) # based on median values of the area
+                # areaBoxes.append(goldVal)
+                box["RSC_ID"] = GetRarity(originalGoldVal - goldVal) # based on median values of the area
                 
             JSONParser.CloseFile(tboxData, tboxFile)
+        
+class TreasureBox(Values.ValueContainer):
+
+    def ClearContainer(tbox):
+        tbox["goldMin"] = 0    
+        tbox["goldMax"] = 0    
+        tbox["goldPopMin"] = 0    
+        tbox["goldPopMax"] = 0  
+        
+        for i in range(1,9):
+            if tbox[f"itm{i}ID"] in IDs.PreciousItems + IDs.TornaPreciousIDs + [0]: # Dont clear precious items
+                continue
+            tbox[f"itm{i}ID"] = 0
+
+    def GetContainerValue(tbox):
+        totalVal = 0
+        
+        # Gold
+        avgGold = (tbox["goldMin"] + tbox["goldMax"])/2
+        totalVal += avgGold
+        
+        # Items
+        for i in range(1,9):
+            itemID = tbox[f"itm{i}ID"]
+            
+            if itemID == 0: # Ignore empty slots
+                continue
+            
+            item:Values.ValuedItem = valTable.GetByID(itemID)
+            if item:
+                amount = tbox[f"itm{i}Num"]
+                totalVal += (item.value * amount)
+
+        return int(totalVal)    
+
+class EnemyDrops(Values.ValueContainer):
+
+    def ClearContainer(drops):
+        for i in range(1,9):
+            if drops[f"ItemID{i}"] in IDs.TornaPreciousIDs + IDs.PreciousItems + [0]:
+                continue
+            drops[f"ItemID{i}"] = 0
+
+    def GetContainerValue(drops):
+        for i in range(1,9):
+            itemID = drops[f"ItemID{i}"]
+            if itemID == 0: # Ignore empty slots
+                continue
+            
+            item:Values.ValuedItem = valTable.GetByID(itemID)
+            if item:
+                amount = drops[f"itm{i}Num"]
+                totalGold += (item.value * amount)
+
+        return int(totalGold)    
+
 
     
-def SetBoxDescriptions(): # Hardcoded New Boxes and descriptions
+def CreateCTMCDescriptions(): # Hardcoded New Boxes and descriptions
     class CreditRarityRelation():
         def __init__(self, name, rscId, credits, msId):
             self.name = name
@@ -104,9 +162,9 @@ def SetBoxDescriptions(): # Hardcoded New Boxes and descriptions
         JSONParser.CloseFile(tboxData, tboxFile)
 
 def GetRarity(gold):
-    if gold < 100:
+    if gold < 5000:
         return 1
-    elif gold > 200:
+    elif gold < 10000:
         return 2
     else:
         return 3

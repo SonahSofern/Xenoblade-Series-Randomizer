@@ -111,7 +111,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     JsonOutput = f"./{Game}/JsonOutputs"
     SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt", f"{Game}/GUI")
     defaultFont = Font(family=GUISettings.defFontVar.get(), size=GUISettings.defFontSizeVar.get())
-    
+    saveCommand = lambda: SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game)
     XCFrame = ttk.Frame(window) # Outer Frame
     RootsForStyling.append(XCFrame)
 
@@ -224,13 +224,13 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     randoProgressDisplay.pack(pady=0, side=LEFT)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: GUISettings.Randomize(XCFrame, RandomizeButton, fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles, isOneFile=isOneFile)))
+    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: (saveCommand(), GUISettings.Randomize(XCFrame, RandomizeButton, fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles, isOneFile=isOneFile))))
     RandomizeButton.pack(pady=(5,windowPadding),side="left", padx=(windowPadding, 0), anchor=CENTER)
     
     # Options Cog
     SettingsButton = ttk.Button(background,padding=5, text="ⓘ",command=lambda: PopupDescriptions.GenPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window, defaultFont))
     SettingsButton.pack(pady=(5,windowPadding),anchor="e",expand=True, side=RIGHT, padx=windowPadding) 
-    saveCommands.append(lambda: SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game))
+    saveCommands.append(saveCommand)
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
 
     pb = ttk.Progressbar(
