@@ -15,7 +15,7 @@ def RandomizePouchItemShops():
 def RandomizeWeaponChipShops():
     RandomizeNormalShops(IDs.BaseGameWeaponChipShopIDs + IDs.TornaWeaponChipShopIDs, IDs.WeaponChipIDs)
 
-def RandomizeNormalShops(shopIDs, allowedIDs, doNotReplaceIDs = [], addItemDoNotReplaceIDs = []):    
+def RandomizeNormalShops(shopIDs, allowedIDs, doNotReplaceIDs = []):    
     with open("XC2/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as shopFile:
         shopData = json.load(shopFile)
         for shop in shopData["rows"]:
@@ -27,7 +27,7 @@ def RandomizeNormalShops(shopIDs, allowedIDs, doNotReplaceIDs = [], addItemDoNot
                 ReplaceWithSimilarValueItem(shop[f"DefItem{i}"], [allowedIDs], doNotReplaceIDs)
                 
             for j in range(1,6):
-                ReplaceWithSimilarValueItem(shop[f"Addtem{j}"], [allowedIDs], addItemDoNotReplaceIDs)
+                ReplaceWithSimilarValueItem(shop[f"Addtem{j}"], [allowedIDs], doNotReplaceIDs)
                             
         JSONParser.CloseFile(shopData, shopFile)
 
@@ -65,7 +65,6 @@ def RandomizeEnemyDropsHelper(dropIDs, dontChangeIDs, itemCategories = []):
             
         JSONParser.CloseFile(dropData, dropFile)
 
-
 def ReplaceWithSimilarValueItem(originalItemID, validReplacementIDs = [], doNotReplaceIDs = []):
     
     if valTable.isEmpty():
@@ -78,7 +77,6 @@ def ReplaceWithSimilarValueItem(originalItemID, validReplacementIDs = [], doNotR
     
     # Need to filter the valTable to get only what we want (But that might be bad performance to do every call of this maybe filtering happens above)
     # Involve weights and choose from item type not a combined list (since some have way more than others)
-    
     
 def PopulateValueCalcXC2():
     files = [
@@ -103,7 +101,6 @@ def PopulateValueCalcXC2():
     ]
     for file in files:
         valTable.PopulateValues(file)
-
 
 def GetTreasureBoxValue(tbox):
     totalVal = 0
