@@ -3,6 +3,7 @@ import json, random, copy
 from scripts import Helper, PopupDescriptions, JSONParser, Values
 
 
+
 def RandomizeAccessoryShops():
     valTable = Values.ValueTable()
     valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs)
@@ -41,17 +42,17 @@ def RandomizeNormalShops(shopIDs, valTable:Values.ValueTable, doNotReplaceIDs = 
 def RandomizeTreasureBoxes():
     # Base Game
     valTable = Values.ValueTable()
-    valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs, Options.TreasureChestOption_AuxCores.GetSpinbox())
-    valTable.PopulateValues(Values.ValueFile("ITM_OrbEquip"), IDs.RefinedAuxCoreIDs, Options.TreasureChestOption_RefinedAuxCores.GetSpinbox())
-    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=5), IDs.WeaponChipIDs, Options.TreasureChestOption_WeaponChips.GetSpinbox())
+    valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs, Values.WeightOptionMethod(Options.TreasureChestOption_AuxCores))
+    valTable.PopulateValues(Values.ValueFile("ITM_OrbEquip"), IDs.RefinedAuxCoreIDs, Values.WeightOptionMethod(Options.TreasureChestOption_RefinedAuxCores))
+    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=5), IDs.WeaponChipIDs, Values.WeightOptionMethod(Options.TreasureChestOption_WeaponChips))
     
     # Torna
     tornaValTable = copy.deepcopy(valTable) # Copy it before we put in just base game accessory IDs or Core Crystals
-    tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AllowedTornaAccessories, Options.TreasureChestOption_Accessories.GetSpinbox())
+    tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AllowedTornaAccessories, Values.WeightOptionMethod(Options.TreasureChestOption_Accessories))
     
-    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=5), IDs.CoreCrystals, Options.TreasureChestOption_CoreCrystals.GetSpinbox())
-    valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Options.TreasureChestOption_Accessories.GetSpinbox())
-    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList"), IDs.CustomCrystalIDs, Options.TreasureChestOption_RareBlades.GetSpinbox())
+    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=5), IDs.CoreCrystals, Values.WeightOptionMethod(Options.TreasureChestOption_CoreCrystals))
+    valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Values.WeightOptionMethod(Options.TreasureChestOption_Accessories))
+    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList"), IDs.CustomCrystalIDs, Values.WeightOptionMethod(Options.TreasureChestOption_RareBlades))
     
     RandomizeTreasureBoxesHelper(IDs.ValidTboxMapNames, IDs.PreciousItems, valTable)
     RandomizeTreasureBoxesHelper(IDs.ValidTornaTboxMapNames, IDs.TornaPreciousIDs, tornaValTable)
@@ -68,16 +69,16 @@ def RandomizeTreasureBoxesHelper(areas, dontChangeIDs, valTable:Values.ValueTabl
 def RandomizeEnemyDrops(): # Up top here we define the RandomGroups instead of just the IDs cause we want to use random groups
     # Base Game
     valTable = Values.ValueTable()
-    valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs, Options.EnemyDropOption_AuxCores.GetSpinbox())
-    valTable.PopulateValues(Values.ValueFile("ITM_OrbEquip"), IDs.RefinedAuxCoreIDs, Options.EnemyDropOption_RefinedAuxCores.GetSpinbox())
-    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=5), IDs.WeaponChipIDs, Options.EnemyDropOption_WeaponChips.GetSpinbox())
-    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=5), IDs.CoreCrystals, Options.EnemyDropOption_CoreCrystals.GetSpinbox())
+    valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs, Values.WeightOptionMethod(Options.EnemyDropOption_AuxCores))
+    valTable.PopulateValues(Values.ValueFile("ITM_OrbEquip"), IDs.RefinedAuxCoreIDs, Values.WeightOptionMethod(Options.EnemyDropOption_RefinedAuxCores))
+    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=5), IDs.WeaponChipIDs, Values.WeightOptionMethod(Options.EnemyDropOption_WeaponChips))
+    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=5), IDs.CoreCrystals, Values.WeightOptionMethod(Options.EnemyDropOption_CoreCrystals))
     
     # Torna
     tornaValTable = copy.deepcopy(valTable) # Copy it before we put in just base game accessory IDs
     FerisBeastmeat = [30380]
-    tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AllowedTornaAccessories, Options.EnemyDropOption_Accessories.GetSpinbox())
-    valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Options.EnemyDropOption_Accessories.GetSpinbox())
+    tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AllowedTornaAccessories, Values.WeightOptionMethod(Options.EnemyDropOption_Accessories))
+    valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Values.WeightOptionMethod(Options.EnemyDropOption_Accessories))
     
     RandomizeEnemyDropsHelper(IDs.BaseDropTableIDs, IDs.PreciousItems, valTable)
     RandomizeEnemyDropsHelper(IDs.TornaDropTableIDs, IDs.TornaPreciousIDs + FerisBeastmeat, tornaValTable)
@@ -197,44 +198,43 @@ def ChestTypeMatchesContentsValue():
 def TreasureChestDescription():
     myDesc = PopupDescriptions.Description()
     myDesc.Header(Options.TreasureChestOption.name)
-    myDesc.Text("This option randomizes a % of all non-key items in Treasure Chests into the types of items chosen from suboptions.")
-    myDesc.Text("If no sub-options are selected this will do nothing.")
+    myDesc.Text("This option will randomize the contents of treasure chests into the chosen categories")
+    myDesc.Text("Turning off a category will put its weight to 0")
+    myDesc.Text(Values.ItemLogicDesciption)
     myDesc.Image("TreasureChest.png", "XC2")
     myDesc.Header(Options.TreasureChestOption_RareBlades.name)
-    myDesc.Text("When enabled, a percentage of all the chests in the game (chosen by the spinbox) will have a randomly chosen Custom Core Crystal in them.\n\nThese Custom Core Crystals will be named after the blade inside.")
+    myDesc.Text("This adds Custom Core Crystal into the item pool.\n\nThese crystals will guarantee a certain blade and are named after them.")
     myDesc.Image("Custom Core Crystals.png", "XC2", 700)
+    return myDesc
+
+def EnemyDropDescription():
+    myDesc = PopupDescriptions.Description()
+    myDesc.Header(Options.EnemyDropOption.name)
+    myDesc.Text("This option will randomize the drops of enemies into the chosen categories")
+    myDesc.Text("Turning off a category will put its weight to 0")
+    myDesc.Text(Values.ItemLogicDesciption)
     return myDesc
 
 def PouchItemShopDesc():
     desc = PopupDescriptions.Description()
     desc.Header(Options.PouchItemShopOption.name)
-    # Insert image of accessory shop icon
-    desc.Text("This option randomizes a % of all items in Pouch Item Shops into the types of items chosen from suboptions.")
-    desc.Text("If no sub-options are selected this will do nothing.")
+    desc.Text("This option will randomize the contents of pouch item shops into other pouch items")
+    desc.Text(Values.ItemLogicDesciption)
     desc.Image("PouchItemShops.png", "XC2")
     return desc
 
 def WeaponChipDesc():
     desc = PopupDescriptions.Description()
     desc.Header(Options.WeaponChipShopOption.name)
-    desc.Text("Randomizes all chips in each weapon chip shop.\nTheir price is tied to the chip not the shop.")
+    desc.Text("Randomizes chips in weapon chip shops.")
+    desc.Text(Values.ItemLogicDesciption)
     desc.Image("WeaponChipRando.png", "XC2", 800)
-    desc.Text("This often makes the game very easy as weapon chips are one of the most important things in damage calculations.")
     return desc
 
 def AccessoryShopDescription():
     desc = PopupDescriptions.Description()
     desc.Header(Options.AccessoryShopsOption.name)
-    desc.Text("This option randomizes a % of all non-key items in Accessory Shops into the types of items chosen from suboptions.")
-    desc.Text("If no sub-options are selected this will do nothing.")
+    desc.Text("This option randomizes the contents of Accessory Shops into other accessories.")
+    desc.Text(Values.ItemLogicDesciption)
     desc.Image("AccessoryShopIcon.png", "XC2")
-    return desc
-
-def CollectionPointDescriptions():
-    desc = PopupDescriptions.Description()
-    desc.Header(Options.CollectionPointsOption.name)
-    # Insert image of accessory shop icon
-    desc.Text("This option randomizes a % of all non-key items in Collection Points into the types of items chosen from suboptions.")
-    desc.Text("If no sub-options are selected this will do nothing.")
-    desc.Image("ColPointIcon.png", "XC2")
     return desc

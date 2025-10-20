@@ -47,14 +47,14 @@ AccessoryShopsOption = Option("Accessory Shops", Items, "Randomizes the contents
 PouchItemShopOption = Option("Pouch Item Shops", Items, "Randomizes the contents of Pouch Item Shops", [lambda: I.RandomizePouchItemShops()], descData=lambda: I.PouchItemShopDesc())
 WeaponChipShopOption = Option("Weapon Chip Shops", Items, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: I.RandomizeWeaponChipShops()], descData=lambda: I.WeaponChipDesc())
 TreasureChestOption = Option("Treasure Chests", Items, "Randomizes the contents of Treasure Chests", preRandoCommands=[lambda: I.RandomizeTreasureBoxes()], prio = 51, descData=lambda: I.TreasureChestDescription())
-TreasureChestOption_RareBlades = SubOption("Rare Blades", TreasureChestOption, [lambda: CoreCry.CustomCoreCrystalRando()], hasSpinBox = True, spinDefault=5, spinDesc=weightsSpinDescription)
-TreasureChestOption_Accessories = SubOption("Accessories", TreasureChestOption, hasSpinBox=True, spinDefault=50)
+TreasureChestOption_Accessories = SubOption("Accessories", TreasureChestOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
 TreasureChestOption_WeaponChips = SubOption("Weapon Chips", TreasureChestOption, hasSpinBox=True, spinDefault=10)
 TreasureChestOption_AuxCores = SubOption("Aux Cores", TreasureChestOption, hasSpinBox=True, spinDefault=10)
 TreasureChestOption_RefinedAuxCores = SubOption("Refined Aux Cores", TreasureChestOption, hasSpinBox=True, spinDefault=10)
 TreasureChestOption_CoreCrystals = SubOption("Core Crystals", TreasureChestOption, hasSpinBox=True, spinDefault=5)
-EnemyDropOption = Option("Enemy Drops", Items, "Randomizes enemy drops", [lambda: I.RandomizeEnemyDrops()])
-EnemyDropOption_Accessories = SubOption("Accessories", EnemyDropOption, hasSpinBox=True, spinDefault=50, spinDesc=weightsSpinDescription)
+TreasureChestOption_RareBlades = SubOption("Rare Blades", TreasureChestOption, [lambda: CoreCry.CustomCoreCrystalRando()], hasSpinBox = True, spinDefault=5)
+EnemyDropOption = Option("Enemy Drops", Items, "Randomizes enemy drops", [lambda: I.RandomizeEnemyDrops()], prio=51, descData=lambda: I.EnemyDropDescription())
+EnemyDropOption_Accessories = SubOption("Accessories", EnemyDropOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
 EnemyDropOption_WeaponChips = SubOption("Weapon Chips", EnemyDropOption, hasSpinBox=True, spinDefault=10)
 EnemyDropOption_AuxCores = SubOption("Aux Cores", EnemyDropOption, hasSpinBox=True, spinDefault=10)
 EnemyDropOption_RefinedAuxCores = SubOption("Refined Aux Cores", EnemyDropOption, hasSpinBox=True, spinDefault=10)
@@ -175,7 +175,7 @@ FasterDriverSkillTrees = Option("Fast Driver Skill Trees", QOL, "Decreases SP re
 FasterLevelsOption = Option("Faster Levels", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["./XC2/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2,spinIncr = 1, spinDesc = "x Faster")
 StartwithIncreasedMovespeedOption = Option("Increased Movespeed", QOL, "Adds a shop deed to the DLC items to increase your movement speed", [lambda: DLCFlagQOL.AddMovespeedDeed()], hasSpinBox = True, spinMin = 0, spinMax = 50, spinIncr = 5, spinDesc = "% Increase (x10)", spinWidth = 2, spinDefault = 50)
 FreelyEngageBladesOption = Option("Freely Engage Blades", QOL, "Allows blades to be freely engaged by all valid drivers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["FreeEngage"], [0], [1], [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1075, 1076, 1103])])
-CTMCOption = Option("Chest Type Matches Contents", QOL, "Chest model and label changes depending on tier of loot", [lambda: I.ChestTypeMatchesContentsValue()], prio = Last)
+CTMCOption = Option("Chest Type Matches Contents", QOL, "Chest appearance changes to match the loot inside", [lambda: I.ChestTypeMatchesContentsValue()], prio = Last)
 TreasureChestVisOption =  SubOption("Increase Chest Visibility", CTMCOption, [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"), ["msgVisible", "msgdigVisible"], Helper.InclRange(0,200), [255])])
 EverlastingPouchItemsOption = Option("Everlasting Pouch Items", QOL, "Makes Pouch Items last as long as possible", [lambda: JSONParser.ChangeJSONFile(["common/ITM_FavoriteList.json"],["Time"], Helper.InclRange(0,255), [6099])])
 CondenseGoldOption = Option("Condense Gold Loot", QOL, "Condenses gold in chests so you can see other items", [lambda: JSONParser.ChangeJSONFile(Helper.InsertHelper(2,1,90, "maa_FLD_TboxPop.json", "common_gmk/"),["goldPopMin", "goldPopMax"], Helper.InclRange(0,100000), [1])])
@@ -195,7 +195,7 @@ FieldItemOption = Option("Field Item Size", Funny, "Randomizes the size and spin
 # Cosmetics
 BladeWeaponCosmeticsOption = Option("Default Weapon Appearance", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])], spinDefault=25)
 TrustLineOption = Option("Blade Trust Lines", CosmeticsTab, "Randomizes blade-driver trust lines in battle (colors, power, etc.)", [lambda: Misc.BeamRandomizer()])
-CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()],prio=51, hasSpinBox = True, spinDefault=10, descData=lambda: Cosmetics.CosmeticsDescription()) # Sub are created by another class
+CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()], prio=51, hasSpinBox = True, spinDefault=10, descData=lambda: Cosmetics.CosmeticsDescription()) # Sub are created by another class
 for opt in Cosmetics.CosmeticsList: # To gen these since listing them here would be annoying
     opt.CreateSubOptions(CosmeticsOption)
 

@@ -1,8 +1,10 @@
 import json, random
-from scripts import Helper
+from scripts import Helper, Interactables
 
 differenceList = []
 allowedRange = 0.05
+ItemLogicDesciption = "This is done in a balanced way, by replacing the original item with an item of similar value."
+
 
 def ItemValueStatistics():
     import statistics
@@ -69,14 +71,12 @@ class ValueTable():
         if originalItem == None:
             # print(f"Item could not be found: {data[key]}")
             return
-        
+      
         category:Helper.RandomGroup = random.choices(self.valuesList, self.weightList, k=1)[0] # Select a category off weights
-        
+    
         indexOfSimilarValueItem = min(range(len(category.originalGroup)), key=lambda i: abs(category.originalGroup[i].value - originalItem.value))
-            
-
-        # range should depend on the length of the category and maybe the values nearby
-        targetRange = max(int(len(category.originalGroup)*allowedRange), 3)
+        
+        targetRange = max(int(len(category.originalGroup)*allowedRange), 3) # A range depending on the length of the group
         
         lowerBound = max(indexOfSimilarValueItem - targetRange, 0)
         upperBound = min(indexOfSimilarValueItem + targetRange, len(category.originalGroup))
@@ -99,3 +99,9 @@ class ValueTable():
                 if item.id == id:
                     return item
         return None
+
+def WeightOptionMethod(option:Interactables.Option):
+    ''' Basically just a shortcut so I can pass the option itself and if it is off treat the weight as 0, otherwise look at the spinbox'''
+    if not option.GetState():
+        return 0
+    return option.GetSpinbox()
