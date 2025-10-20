@@ -1,5 +1,6 @@
+from XC2.XC2_Scripts.Unused import EnemyRandoLogic
 from scripts import Helper, JSONParser, PopupDescriptions
-from XC2.XC2_Scripts import EnemyRandoLogic, Options, TutorialShortening, CoreCrystals
+from XC2.XC2_Scripts import Options, TutorialShortening, CoreCrystals
 import random, time, math, json
 from XC2.XC2_Scripts.IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, AccessoryIDs, WeaponChipIDs, AuxCoreIDs, RefinedAuxCoreIDs, CollectionPointMaterials, TornaAccessories
 
@@ -187,7 +188,7 @@ def RaceModeChanging():
     print("Filling Chests with Custom Loot")
     RaceModeLootChanges(NGPlusBladeCrystalIDs)
     StackableCoreCrystalsandKeyItems()
-    CoreCrystals.FindtheBladeNames()
+    CoreCrystals.ApplyNewBladeNames()
     print("Reducing amount of grinding")
     LessGrinding()
     if NGPlusBladeCrystalIDs != None:

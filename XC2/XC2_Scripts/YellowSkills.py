@@ -12,6 +12,7 @@ def RandomizeBattleSkills(): # Make logic to have all skills in the game
         KeepVanilla = {
             1111: ["BSkill1"] # Elma Overdrive
         }
+        
         Slots = ["BSkill1","BSkill2", "BSkill3"]
         
         for blade in bladeData["rows"]:     

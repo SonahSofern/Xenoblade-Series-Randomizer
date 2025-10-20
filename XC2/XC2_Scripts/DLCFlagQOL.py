@@ -1,5 +1,6 @@
 import json
-from XC2.XC2_Scripts import EnemyRandoLogic, Options
+from XC2.XC2_Scripts import Options
+from XC2.XC2_Scripts.Unused import EnemyRandoLogic
 from scripts import Helper, JSONParser
 FreeDLCFlags = Helper.InclRange(65000, 65534)
 

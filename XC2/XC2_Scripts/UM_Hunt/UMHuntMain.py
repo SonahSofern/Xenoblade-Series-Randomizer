@@ -1,8 +1,9 @@
 import json, random,  math,  time
-from XC2.XC2_Scripts import IDs, EnemyRandoLogic, Options,FieldSkills, TutorialShortening
+from XC2.XC2_Scripts import IDs, Options,FieldSkills, TutorialShortening
 from XC2.XC2_Scripts.Race_Mode import RaceMode
 from XC2.XC2_Scripts.UM_Hunt import UMHuntDebugFunctions, UMHuntShopCreation
 from XC2.XC2_Scripts.Enhancements import *
+from XC2.XC2_Scripts.Unused import EnemyRandoLogic
 from scripts import Helper, JSONParser, PopupDescriptions
 
 #Keeping these 3 separate from the already existing IDs in EnemyRandoLogic in case I want to do some balancing or something

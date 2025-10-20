@@ -34,7 +34,7 @@ def RandomizeAuxCoreEnhancements():
                 for Aux in enhanceData["rows"]:
                     skillNameID = Aux["Name"]
                     enhancement:Enhancement = random.choice(ValidSkills)
-                    enhancement.RollEnhancement()
+                    enhancement.RollEnhancement(forcedRarity=Aux["Rarity"])
                     # ValidSkills.remove(enhancement) # Need full pool to remove 
                 
                     for skillName in auxNameData["rows"]:  

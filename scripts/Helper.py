@@ -230,6 +230,7 @@ class RandomGroup():
         self.currentGroup = copy.deepcopy(self.originalGroup)
     
     def SelectRandomMember(self):
+        '''Selects a random member from current group and removes it from that group'''
         en = random.choice(self.currentGroup)
         self.RemoveMember(en)
         return copy.deepcopy(en)

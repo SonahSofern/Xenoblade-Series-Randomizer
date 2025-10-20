@@ -2,9 +2,7 @@ import json
 from scripts import Helper, JSONParser, PopupDescriptions
 import random
 from XC2.XC2_Scripts import Options, IDs
-from XC2.XC2_Scripts.Race_Mode import RaceMode
 
-# BladeIDs = [1008, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1050, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1104, 1108, 1109, 1105, 1106, 1107, 1111]
 
 ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
 
@@ -59,77 +57,50 @@ def FixOpeningSoftlock():
                 row["Condition"] = StartingCondListRow
         JSONParser.CloseFile(data, file)    
 
-
-
 def RandomizeCrystalList():
-    Crystals = Helper.RandomGroup()
-    Crystals.AddNewData(ValidCrystalListIDs)
+    CrystalIDsGroup = Helper.RandomGroup()
+    CrystalIDsGroup.AddNewData(ValidCrystalListIDs)
     CrystalCount = 0
+    
     with open("XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as cryFile:
         cryData = json.load(cryFile)
         for cry in cryData["rows"]:
+            
+            if cry in [45011,45012,45013]: # Turns off rare blade pulls
+                cry["RareTableProb"] = 0
+                cry["RareBladeRev"] = 0
+                cry["AssureP"] = 0
+            
             if cry["$id"] not in ValidCrystalListIDs:
                 continue
+            
+            chosenBladeID = CrystalIDsGroup.SelectRandomMember()
             CrystalCount += 1
-            cry["BladeID"] = Crystals.SelectRandomMember()
+            cry["BladeID"] = chosenBladeID
             cry["Price"] = 20000
             cry["Condition"] = 0
             cry["ValueMax"] = 1
-            cry["NoMultiple"] = CrystalCount*11
-            # Choose a blade
-            # Remove from list
+            cry["NoMultiple"] = CrystalCount*11 # 11 was here because it worked weirdly the nomultiple value it needed a difference of 10 or something to work
             
-    
+        JSONParser.CloseFile(cryData, cryFile)
+            
+def ApplyNewBladeNames():
+    CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("XC2/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
+    CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("XC2/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
+    CorrespondingBladeNames = Helper.AdjustedFindBadValuesList("XC2/JsonOutputs/common_ms/chr_bl_ms.json", ["$id"], CorrespondingBladeNameIDs, "name")
 
-def AdjustingCrystalList():
-    Helper.ColumnAdjust("XC2/JsonOutputs/common/ITM_CrystalList.json", ["Condition", "BladeID", "CommonID", "CommonWPN", "CommonAtr"], 0)
-    ITMCrystalFile = 
-    with open(ITMCrystalFile, 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        RandomBlades = BladeIDs.copy()
-        random.shuffle(RandomBlades)
-        for k in range(0, len(ValidCrystalListIDs)):
-            for row in data["rows"]:
-                if row["$id"] == ValidCrystalListIDs[k]:
-                    row["BladeID"] = RandomBlades[k]
-                    row["Condition"] = 0
-                    row["ValueMax"] = 1
-                    row["NoMultiple"] = k + 11
-                    break
-        for row in data["rows"]:
-            for i in range(45011,45014):
-                if row["$id"] == i:
-                    row["RareTableProb"] = 0
-                    row["RareBladeRev"] = 0
-                    row["AssureP"] = 0
-        JSONParser.CloseFile(data, file)
-
-def FindtheBladeNames():
-    if Options.TreasureChestOption_RareBlades.GetState():
-        ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
-        CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./XC2/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
-        CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("./XC2/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
-        CorrespondingBladeNames = Helper.AdjustedFindBadValuesList("./XC2/JsonOutputs/common_ms/chr_bl_ms.json", ["$id"], CorrespondingBladeNameIDs, "name")
-        # DebugLog.DebugCoreCrystalAddition(ValidCrystalListIDs, CorrespondingBladeNames)
-        ITMCrystalAdditions(CorrespondingBladeNames, CorrespondingBladeIDs)
-
-def ITMCrystalAdditions(BladeNames, CorrespondingBladeIDs):
-    with open("./XC2/JsonOutputs/common_ms/itm_crystal.json", "r+", encoding='utf-8') as file:     
+    with open("XC2/JsonOutputs/common_ms/itm_crystal.json", "r+", encoding='utf-8') as file:     
         IDNumbers = Helper.InclRange(16, 58)
         data = json.load(file)
         for i in range(0, len(IDNumbers)):
-            data["rows"].append({"$id": IDNumbers[i], "style": 36, "name": f"{BladeNames[i]}\'s Core Crystal"})
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
+            data["rows"].append({"$id": IDNumbers[i], "style": 36, "name": f"{CorrespondingBladeNames[i]}\'s Core Crystal"})
+        JSONParser.CloseFile(data, file)
+    with open("XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
         data = json.load(file)
         for row in data["rows"]:
             for i in range(0, len(CorrespondingBladeIDs)):
                 if row["BladeID"] == CorrespondingBladeIDs[i]:
                     row["Name"] = IDNumbers[i]
                     break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+        JSONParser.CloseFile(data, file)
 

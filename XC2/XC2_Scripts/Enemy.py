@@ -193,11 +193,11 @@ def GetEnemyCounts():
 
  # Solo Fight Violations
 def GetSoloFightViolations():
-    soloFightIDs = [179, 182, 184, 185, 186, 187, 189, 190, 258, 260, 262, 256, 604, 1437, 1438, 1439, 1440] # Includes both 1 and 2 person party fights
+    soloFightIDs = [179, 182, 184, 185, 186, 187, 189, 190, 258, 260, 262, 256, 604, 1431, 1432, 1433, 1437, 1438, 1439, 1440] # Includes both 1 and 2 person party fights
 
-    SoloUniqueMonstersViolations = e.Violation(soloFightIDs, IDs.UniqueMonsters, lvDiff=-15)
-    SoloSuperbossMonstersViolations = e.Violation(soloFightIDs, IDs.SuperbossMonsters, lvDiff=-30)
-    SoloBossMonsterViolations = e.Violation(soloFightIDs, IDs.BossMonsters, lvDiff=-15)
+    SoloUniqueMonstersViolations = e.Violation(soloFightIDs, IDs.UniqueMonsters)
+    SoloSuperbossMonstersViolations = e.Violation(soloFightIDs, IDs.SuperbossMonsters)
+    SoloBossMonsterViolations = e.Violation(soloFightIDs, IDs.BossMonsters)
     SoloFightViolations:list[e.Violation] = [SoloUniqueMonstersViolations, SoloSuperbossMonstersViolations, SoloBossMonsterViolations]
 
     return SoloFightViolations

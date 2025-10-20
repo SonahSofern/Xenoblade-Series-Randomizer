@@ -44,11 +44,12 @@ def RandomizeTreasureBoxes():
     valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs, Options.TreasureChestOption_AuxCores.GetSpinbox())
     valTable.PopulateValues(Values.ValueFile("ITM_OrbEquip"), IDs.RefinedAuxCoreIDs, Options.TreasureChestOption_RefinedAuxCores.GetSpinbox())
     valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=5), IDs.WeaponChipIDs, Options.TreasureChestOption_WeaponChips.GetSpinbox())
-    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=5), IDs.CoreCrystals, Options.TreasureChestOption_CoreCrystals.GetSpinbox())
     
     # Torna
-    tornaValTable = copy.deepcopy(valTable) # Copy it before we put in just base game accessory IDs
+    tornaValTable = copy.deepcopy(valTable) # Copy it before we put in just base game accessory IDs or Core Crystals
     tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AllowedTornaAccessories, Options.TreasureChestOption_Accessories.GetSpinbox())
+    
+    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=5), IDs.CoreCrystals, Options.TreasureChestOption_CoreCrystals.GetSpinbox())
     valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Options.TreasureChestOption_Accessories.GetSpinbox())
     
     RandomizeTreasureBoxesHelper(IDs.ValidTboxMapNames, IDs.PreciousItems, valTable)
