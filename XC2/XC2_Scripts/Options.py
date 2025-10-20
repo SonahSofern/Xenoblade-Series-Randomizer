@@ -1,8 +1,7 @@
-from XC2.XC2_Scripts.Unused import AccessoryShops, CoreCrystalAdjustments
 from scripts import JSONParser,Helper
 from XC2.XC2_Scripts.IDs import *
 from tkinter import *
-from XC2.XC2_Scripts import Accessories, AuxCores, Misc, BladeSpecials, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, BladeStats,TutorialShortening, GachaModifications, Enhancements, Cosmetics, Items as I, ButtonCombos, Scales, DLCFlagQOL, CharacterRandomization, Enemy, WeaponChips, YellowSkills
+from XC2.XC2_Scripts import Accessories, AuxCores, Misc, BladeSpecials, CoreCrystals as CoreCry, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, BladeStats,TutorialShortening, GachaModifications, Enhancements, Cosmetics, Items as I, ButtonCombos, Scales, DLCFlagQOL, CharacterRandomization, Enemy, WeaponChips, YellowSkills
 from XC2.XC2_Scripts.Race_Mode import RaceMode
 from XC2.XC2_Scripts.Torna_Logic import TornaMain
 from XC2.XC2_Scripts.UM_Hunt import UMHuntMain
@@ -44,17 +43,17 @@ weightsSpinDescription = "Weights ↓"
 # General
 AccessoriesOption = Option("Accessories", Items, "Randomizes effects of Accessories", [lambda: Accessories.RandomizeAccessoryEnhancements(), lambda: Accessories.SearchAndSetDisplayIDs()], descData=lambda: Accessories.AccessoriesDesc())
 AuxCoresOption = Option("Aux Cores", Items, "Randomizes the effects of Aux Cores", [lambda: AuxCores.RandomizeAuxCoreEnhancements(), lambda: Accessories.SearchAndSetDisplayIDs()])
-AccessoryShopsOption = Option("Accessory Shops", Items, "Randomizes the contents of Accessory Shops", [lambda: I.RandomizeAccessoryShops()], hasSpinBox = True, descData=lambda: I.AccessoryShopDescription())
-PouchItemShopOption = Option("Pouch Item Shops", Items, "Randomizes the contents of Pouch Item Shops", [lambda: I.RandomizePouchItemShops()], hasSpinBox = True, descData=lambda: I.PouchItemShopDesc())
+AccessoryShopsOption = Option("Accessory Shops", Items, "Randomizes the contents of Accessory Shops", [lambda: I.RandomizeAccessoryShops()], descData=lambda: I.AccessoryShopDescription())
+PouchItemShopOption = Option("Pouch Item Shops", Items, "Randomizes the contents of Pouch Item Shops", [lambda: I.RandomizePouchItemShops()], descData=lambda: I.PouchItemShopDesc())
 WeaponChipShopOption = Option("Weapon Chip Shops", Items, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: I.RandomizeWeaponChipShops()], descData=lambda: I.WeaponChipDesc())
-TreasureChestOption = Option("Treasure Chests", Items, "Randomizes the contents of Treasure Chests", preRandoCommands=[lambda: I.RandomizeTreasureBoxes()], prio = 51, hasSpinBox = True, descData=lambda: I.TreasureChestDescription())
-TreasureChestOption_RareBlades = SubOption("Rare Blades", TreasureChestOption, [lambda: CoreCrystalAdjustments.CoreCrystalChanges()], hasSpinBox = True, spinDefault=5, spinDesc=weightsSpinDescription)
+TreasureChestOption = Option("Treasure Chests", Items, "Randomizes the contents of Treasure Chests", preRandoCommands=[lambda: I.RandomizeTreasureBoxes()], prio = 51, descData=lambda: I.TreasureChestDescription())
+TreasureChestOption_RareBlades = SubOption("Rare Blades", TreasureChestOption, [lambda: CoreCry.CustomCoreCrystalRando()], hasSpinBox = True, spinDefault=5, spinDesc=weightsSpinDescription)
 TreasureChestOption_Accessories = SubOption("Accessories", TreasureChestOption, hasSpinBox=True, spinDefault=50)
 TreasureChestOption_WeaponChips = SubOption("Weapon Chips", TreasureChestOption, hasSpinBox=True, spinDefault=10)
 TreasureChestOption_AuxCores = SubOption("Aux Cores", TreasureChestOption, hasSpinBox=True, spinDefault=10)
 TreasureChestOption_RefinedAuxCores = SubOption("Refined Aux Cores", TreasureChestOption, hasSpinBox=True, spinDefault=10)
 TreasureChestOption_CoreCrystals = SubOption("Core Crystals", TreasureChestOption, hasSpinBox=True, spinDefault=5)
-EnemyDropOption = Option("Enemy Drops", Items, "Randomizes enemy drops", [lambda: I.RandomizeEnemyDrops()], hasSpinBox = True)
+EnemyDropOption = Option("Enemy Drops", Items, "Randomizes enemy drops", [lambda: I.RandomizeEnemyDrops()])
 EnemyDropOption_Accessories = SubOption("Accessories", EnemyDropOption, hasSpinBox=True, spinDefault=50, spinDesc=weightsSpinDescription)
 EnemyDropOption_WeaponChips = SubOption("Weapon Chips", EnemyDropOption, hasSpinBox=True, spinDefault=10)
 EnemyDropOption_AuxCores = SubOption("Aux Cores", EnemyDropOption, hasSpinBox=True, spinDefault=10)
@@ -62,7 +61,7 @@ EnemyDropOption_RefinedAuxCores = SubOption("Refined Aux Cores", EnemyDropOption
 EnemyDropOption_CoreCrystals = SubOption("Core Crystals", EnemyDropOption, hasSpinBox=True, spinDefault=5)
 
 # Drivers
-DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.DriversDescriptions())
+DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()],  prio=First,  preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.DriversDescriptions())
 DriversOption_Nia = SubOption("Guarantee Early Nia", DriversOption, defState = False)
 DriverArtsOption = Option("Driver Arts", Driver, "Randomizes effects of all driver arts", [lambda: (DriverArts.DriverArtRandomizer(), DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], hasSpinBox = True,spinDefault=40, descData=lambda: DriverArts.DriverArtDescription())
 spinArts = "%"
@@ -82,7 +81,7 @@ DriverSkillTreesOption_EarlyArtsCancel = SubOption("Early Arts Cancel", DriverSk
 DriverSkillTreesOption_EarlyXYBAttack = SubOption("Early XYB Attack", DriverSkillTreesOption)
 
 # Blades
-BladesOption = Option("Blades", Blade, "Randomizes when blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], hasSpinBox = True, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.BladesDescriptions())
+BladesOption = Option("Blades", Blade, "Randomizes when blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], prio=First, hasSpinBox = True, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.BladesDescriptions())
 BladesOption_Dromarch = SubOption("Randomize Dromarch", BladesOption)
 BladesOption_Healer = SubOption("Guarantee Healing Art", BladesOption)
 BladeArtsOption = Option("Blade Arts", Blade, "Randomizes a Blade's combat arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])

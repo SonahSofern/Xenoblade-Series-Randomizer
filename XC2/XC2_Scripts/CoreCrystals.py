@@ -3,6 +3,15 @@ from scripts import Helper, JSONParser, PopupDescriptions
 import random
 from XC2.XC2_Scripts import Options, IDs
 
+def CustomCoreCrystalRando():
+    RandomizeCrystalList()
+    ApplyNewBladeNames()
+    FixOpeningSoftlock()
+    FixRoc()
+    FixArtReleaseLevels()
+    RareBladeProbabilityEqualizer()
+    LandofChallengeRelease()
+
 def RareBladeProbabilityEqualizer(): # makes it so all blades are equally likely to be pulled
     Helper.ColumnAdjust("XC2/JsonOutputs/common/BLD_RareList.json", ["Condition", "Assure1", "Assure2", "Assure3", "Assure4", "Assure5"] , 0)
     Helper.ColumnAdjust("XC2/JsonOutputs/common/BLD_RareList.json", ["Prob1", "Prob2", "Prob3", "Prob4", "Prob5"] , 1)
@@ -22,7 +31,7 @@ def FixArtReleaseLevels(): # Fixes issue with NG+ blades having incredibly high 
 def FixRoc(): # Fixes Roc softlock as you need to pull him legit for a quest
     rocCrystalId = None
     with open("XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as cryFile:
-        cryData = json.load(blFile)
+        cryData = json.load(cryFile)
         for cry in cryData["rows"]:
             if cry["BladeID"] == 1008:
                 cry["Condition"] = 2212
@@ -55,9 +64,11 @@ def FixOpeningSoftlock():
         JSONParser.CloseFile(data, file)    
 
 def RandomizeCrystalList():
-    CrystalIDsGroup = Helper.RandomGroup()
-    CrystalIDsGroup.AddNewData(IDs.CustomCrystalIDs)
     CrystalCount = 0
+    
+    BladeIDsGroup = Helper.RandomGroup()
+    for id in IDs.BladeIDs:
+        BladeIDsGroup.AddNewData(id)
 
     with open("XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as cryFile:
         cryData = json.load(cryFile)
@@ -71,7 +82,7 @@ def RandomizeCrystalList():
             if cry["$id"] not in IDs.CustomCrystalIDs:
                 continue
             
-            chosenBladeID = CrystalIDsGroup.SelectRandomMember()
+            chosenBladeID = BladeIDsGroup.SelectRandomMember()
             CrystalCount += 1
             cry["BladeID"] = chosenBladeID
             cry["Price"] = 20000
@@ -80,7 +91,7 @@ def RandomizeCrystalList():
             cry["NoMultiple"] = CrystalCount*11 # 11 was here because it worked weirdly the nomultiple value it needed a difference of 10 or something to work
             
         JSONParser.CloseFile(cryData, cryFile)
-            
+    
 def ApplyNewBladeNames(): # Dont love this because it loops back over everything and applies new things. Would be better to do it all the same time 
     CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("XC2/JsonOutputs/common/ITM_CrystalList.json",["$id"], IDs.CustomCrystalIDs, "BladeID")
     CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("XC2/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
