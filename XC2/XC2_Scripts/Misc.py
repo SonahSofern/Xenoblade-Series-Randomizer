@@ -1,6 +1,6 @@
 import json
 import random
-from scripts import PopupDescriptions, JSONParser
+from scripts import PopupDescriptions, JSONParser, Helper
 from XC2.XC2_Scripts import Options
 
 def BigItemsRando():
@@ -18,3 +18,8 @@ def BigItemsDesc():
     BigItemDesc.Text("When enabled, this option randomizes the size and spinrate of all items dropped from Enemies, Collection Points, and Treasure Chests.")
     BigItemDesc.Image("RandomLootSize.png", "XC2", 700)
     return BigItemDesc
+
+
+def BeamRandomizer():
+    JSONParser.ChangeJSONFile(["common/EFF_KizunaLink.json"], ["Red1","Red2", "Green1", "Green2", "Blue1", "Blue2"], Helper.InclRange(0,255), Helper.InclRange(0,255))
+    JSONParser.ChangeJSONFile(["common/EFF_KizunaLink.json"], ["WavePower"],[100,120,140,200,300,400], Helper.InclRange(0,1000))

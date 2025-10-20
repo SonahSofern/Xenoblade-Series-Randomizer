@@ -3,7 +3,12 @@ from scripts import JSONParser, Helper, PopupDescriptions
 from XC2.XC2_Scripts import Options
 import json
 
-from XC2.XC2_Scripts.IDs import WeaponTypeRoles
+WeaponTypeRoles = [2,3,3,1,1,1,1,2,2,2,2,2,1,1,3,3,2,2,1,3,2,1,2,2,1,1,2,2,2,1,3,2,2,3,2,1]
+BladeDefenseDistribution = [0,0,0,0,5,5,5,5,5,5,5,10,10,10,10,10,15,15,15,15,15,15,15,15,20,20,20,20,20,20,20,20,25,25,25,30,30,35,35,40,40,45,50,55]
+BladeModDistribution = [5,5,5,10,10,10,10,10,15,15,15,20,20,20,25,25,25,25,25,30,30,30,30,35,35,40,40,45,45,50]
+BladeAuxCoreSlotDistribution = [0,1,1,1,2,2,2,2,2,3,3]
+BladeWeaponCritDistribution = [0,0,0,0,5,5,5,5,5,5,5,5,5,10,10,10,10,10,10,15,15,15,15,15,15,20,20,20,25,30,35,40,45,50,70,100]
+BladeWeaponGuardDistribution = [0,0,0,0,5,5,5,5,5,5,5,5,5,10,10,10,10,10,10,15,15,15,15,15,15,20,20,20,25,30,35,40,45,50,70,100]
 
 def BladeWeaponClassRandomization():
     PoppiNewTypeRoles = []

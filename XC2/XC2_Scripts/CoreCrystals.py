@@ -58,7 +58,7 @@ def RandomizeCrystalList():
     CrystalIDsGroup = Helper.RandomGroup()
     CrystalIDsGroup.AddNewData(IDs.CustomCrystalIDs)
     CrystalCount = 0
-    
+
     with open("XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as cryFile:
         cryData = json.load(cryFile)
         for cry in cryData["rows"]:
@@ -81,7 +81,7 @@ def RandomizeCrystalList():
             
         JSONParser.CloseFile(cryData, cryFile)
             
-def ApplyNewBladeNames():
+def ApplyNewBladeNames(): # Dont love this because it loops back over everything and applies new things. Would be better to do it all the same time 
     CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("XC2/JsonOutputs/common/ITM_CrystalList.json",["$id"], IDs.CustomCrystalIDs, "BladeID")
     CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("XC2/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
     CorrespondingBladeNames = Helper.AdjustedFindBadValuesList("XC2/JsonOutputs/common_ms/chr_bl_ms.json", ["$id"], CorrespondingBladeNameIDs, "name")
