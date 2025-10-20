@@ -51,6 +51,7 @@ def RandomizeTreasureBoxes():
     
     valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=5), IDs.CoreCrystals, Options.TreasureChestOption_CoreCrystals.GetSpinbox())
     valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Options.TreasureChestOption_Accessories.GetSpinbox())
+    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList"), IDs.CustomCrystalIDs, Options.TreasureChestOption_RareBlades.GetSpinbox())
     
     RandomizeTreasureBoxesHelper(IDs.ValidTboxMapNames, IDs.PreciousItems, valTable)
     RandomizeTreasureBoxesHelper(IDs.ValidTornaTboxMapNames, IDs.TornaPreciousIDs, tornaValTable)
@@ -138,7 +139,7 @@ def ChestTypeMatchesContentsValue():
         nameData = json.load(nameFile)
         nameData["rows"].append({"$id": Common.msId, "style": 36, "name": ColoredName(Common.name, ["blue"])})
         nameData["rows"].append({"$id": Rare.msId, "style": 36, "name": ColoredName(Rare.name,["red"])})
-        nameData["rows"].append({"$id": Legendary.msId, "style": 36, "name": ColoredName(Legendary.name, ["green", "red", "tutorial", "blue"] )})
+        nameData["rows"].append({"$id": Legendary.msId, "style": 36, "name": ColoredName(Legendary.name, ["tutorial"] )})
         JSONParser.CloseFile(nameData, nameFile)
             
     with open("XC2/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as tboxFile:
@@ -152,7 +153,7 @@ def ChestTypeMatchesContentsValue():
             elif box["$id"] == Rare.rscId:
                 box["MSG_ID"] = Rare.msId
             elif box["$id"] == Legendary.rscId:
-                box["MSG_ID"] = Legendary.rscId
+                box["MSG_ID"] = Legendary.msId
             else:
                 break
         JSONParser.CloseFile(tboxData, tboxFile)

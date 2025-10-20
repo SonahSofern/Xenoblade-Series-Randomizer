@@ -1,7 +1,7 @@
 import json
 from scripts import Helper, JSONParser, PopupDescriptions
 import random
-from XC2.XC2_Scripts import Options, IDs
+from XC2.XC2_Scripts import Options, IDs,  CoreCrystals
 from XC2.XC2_Scripts.Race_Mode import RaceMode
 
 FLDSkillMaxLv = [3, 5, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 3, 5, 3, 3, 3, 5, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 5, 3, 3, 5, 3, 5, 3, 3, 5, 5, 5, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 5, 5]
@@ -196,4 +196,4 @@ def CoreCrystalChanges():
         FixRoc()
         FixOpeningSoftlock() # Removes ability to pull before you get Pyra, softlocking if you don't get a blade with arts 
         FixArtReleaseLevels()
-        RaceMode.FindtheBladeNames()
+        CoreCrystals.ApplyNewBladeNames()

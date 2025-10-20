@@ -3,9 +3,6 @@ from scripts import Helper, JSONParser, PopupDescriptions
 import random
 from XC2.XC2_Scripts import Options, IDs
 
-
-ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
-
 def RareBladeProbabilityEqualizer(): # makes it so all blades are equally likely to be pulled
     Helper.ColumnAdjust("XC2/JsonOutputs/common/BLD_RareList.json", ["Condition", "Assure1", "Assure2", "Assure3", "Assure4", "Assure5"] , 0)
     Helper.ColumnAdjust("XC2/JsonOutputs/common/BLD_RareList.json", ["Prob1", "Prob2", "Prob3", "Prob4", "Prob5"] , 1)
@@ -59,7 +56,7 @@ def FixOpeningSoftlock():
 
 def RandomizeCrystalList():
     CrystalIDsGroup = Helper.RandomGroup()
-    CrystalIDsGroup.AddNewData(ValidCrystalListIDs)
+    CrystalIDsGroup.AddNewData(IDs.CustomCrystalIDs)
     CrystalCount = 0
     
     with open("XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as cryFile:
@@ -71,7 +68,7 @@ def RandomizeCrystalList():
                 cry["RareBladeRev"] = 0
                 cry["AssureP"] = 0
             
-            if cry["$id"] not in ValidCrystalListIDs:
+            if cry["$id"] not in IDs.CustomCrystalIDs:
                 continue
             
             chosenBladeID = CrystalIDsGroup.SelectRandomMember()
@@ -85,7 +82,7 @@ def RandomizeCrystalList():
         JSONParser.CloseFile(cryData, cryFile)
             
 def ApplyNewBladeNames():
-    CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("XC2/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
+    CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("XC2/JsonOutputs/common/ITM_CrystalList.json",["$id"], IDs.CustomCrystalIDs, "BladeID")
     CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("XC2/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
     CorrespondingBladeNames = Helper.AdjustedFindBadValuesList("XC2/JsonOutputs/common_ms/chr_bl_ms.json", ["$id"], CorrespondingBladeNameIDs, "name")
 

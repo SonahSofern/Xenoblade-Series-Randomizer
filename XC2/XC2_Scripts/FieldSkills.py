@@ -19,7 +19,7 @@ def RandomizeFieldSkills(): # Make logic to have all skills in the game
 
         # Carveouts to make sure the story is completeable
         KeepVanilla = {
-            1001: ["FSkill1","FSkill2"], # Pyra fire mastery and focus
+            1001: ["FSkill1","FSkill2", "FSkill3"], # Pyra fire mastery and focus, cooking
             1008: ["FSkill2"], # Roc Miasma
             1005: ["FSkill3"], # Poppia superstrength
             1127: ["FSkill2"],  # Jin Swift Swordplay
