@@ -3,7 +3,7 @@ from scripts import JSONParser
 from XC2.XC2_Scripts import Options, IDs
 
 def RandomizeFieldSkills(): # Make logic to have all skills in the game
-    with open("./XC2/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:
+    with open("XC2/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:
         bladeData = json.load(bladeFile)
         
         # Base 
@@ -60,10 +60,8 @@ def RandomizeFieldSkills(): # Make logic to have all skills in the game
         JSONParser.CloseFile(bladeData, bladeFile)
         
         
-def RemoveFieldSkills():
-    isAllChecks  = Options.RemoveFieldSkillsOption_AllFieldSkills.GetState()
-    UMHUNT = Options.UMHuntOption.GetState()
-    if isAllChecks or UMHUNT:
+def RemoveFieldSkills(isAllChecks):
+    if isAllChecks:
         mapGimmickIds = range(1,186)
         npcPopIds = range(1,50000)     
         jumpGimiickIds = range(1,45)
