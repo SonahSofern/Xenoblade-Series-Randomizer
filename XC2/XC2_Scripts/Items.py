@@ -61,11 +61,6 @@ def RandomizeTreasureBoxesHelper(areas, dontChangeIDs, valTable:Values.ValueTabl
             for box in tboxData["rows"]:
                 for i in range(1,9):
                     valTable.SelectValuedMember(box, f"itm{i}ID", dontChangeIDs)
-                
-            
-                # areaBoxes.append(goldVal)
-                # box["RSC_ID"] = GetRarity(originalGoldVal - goldVal) # based on median values of the area
-                
             JSONParser.CloseFile(tboxData, tboxFile)
 
 def RandomizeEnemyDrops(): # Up top here we define the RandomGroups instead of just the IDs cause we want to use random groups
@@ -100,49 +95,58 @@ def RandomizeEnemyDropsHelper(dropIDs, dontChangeIDs, valTable:Values.ValueTable
         JSONParser.CloseFile(dropData, dropFile)
 
 
-# def GetTreasureBoxValue(tbox):
-#     totalVal = 0
+def GetTreasureBoxValue(tbox, valTable:Values.ValueTable):
+    totalVal = 0
     
-#     # Gold
-#     avgGold = (tbox["goldMin"] + tbox["goldMax"])/2
-#     totalVal += avgGold
+    # Gold
+    avgGold = (tbox["goldMin"] + tbox["goldMax"])/2
+    totalVal += avgGold
     
-#     # Items
-#     for i in range(1,9):
-#         itemID = tbox[f"itm{i}ID"]
+    # Items
+    for i in range(1,9):
+        itemID = tbox[f"itm{i}ID"]
         
-#         if itemID == 0: # Ignore empty slots
-#             continue
+        if itemID == 0: # Ignore empty slots
+            continue
         
-#         item:Values.ValuedItem = valTable.GetByID(itemID)
-#         if item:
-#             amount = tbox[f"itm{i}Num"]
-#             totalVal += (item.value * amount)
+        item:Values.ValuedItem = valTable.GetByID(itemID)
+        if item:
+            amount = tbox[f"itm{i}Num"]
+            totalVal += (item.value * amount)
 
-#     return int(totalVal)    
+    return int(totalVal)    
 
-def CreateCTMCDescriptions(): # Hardcoded New Boxes and descriptions
-    class CreditRarityRelation():
+def ColoredName(name, colors):
+    newName = ""
+    for char in name:
+        newName+= f"[System:Color name={random.choice(colors)}]{char}[/System:Color]" 
+    return newName
+
+def ChestTypeMatchesContentsValue():
+    class ChestType():
         def __init__(self, name, rscId, msId):
             self.name = name
             self.rscId = rscId # RSC ID of the chest
             self.msId = msId
     
-    Common = CreditRarityRelation("Common", 1, 154)
-    Rare = CreditRarityRelation("Rare", 2, 155)
-    Legendary = CreditRarityRelation("Legendary", 3, 156)
+    Common = ChestType("Common", 1, 154)
+    Rare = ChestType("Rare", 2, 155)
+    Legendary = ChestType("Legendary", 3, 156)
     
+     # Hardcoded New Boxes and descriptions
     with open("XC2/JsonOutputs/common_ms/fld_gmkname.json", 'r+', encoding='utf-8') as nameFile:
         nameData = json.load(nameFile)
-        nameData["rows"].append({"$id": Common.msId, "style": 36, "name": Common.name})
-        nameData["rows"].append({"$id": Rare.msId, "style": 36, "name": Rare.name})
-        nameData["rows"].append({"$id": Legendary.msId, "style": 36, "name": Legendary.name})
+        nameData["rows"].append({"$id": Common.msId, "style": 36, "name": ColoredName(Common.name, ["blue"])})
+        nameData["rows"].append({"$id": Rare.msId, "style": 36, "name": ColoredName(Rare.name,["red"])})
+        nameData["rows"].append({"$id": Legendary.msId, "style": 36, "name": ColoredName(Legendary.name, ["green", "red", "tutorial", "blue"] )})
         JSONParser.CloseFile(nameData, nameFile)
             
     with open("XC2/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as tboxFile:
         tboxData = json.load(tboxFile)
         for box in tboxData["rows"]:
-            box["initWaitTimeRand"] = 0.1 # reduces wait time for chest down to 0.1 sec
+            box["initWaitTimeRand"] = 0 
+            box["initWaitTime"] = 0 
+            box["TBOX_open_starttime"] = 0 
             if box["$id"] == Common.rscId:
                 box["MSG_ID"] = Common.msId
             elif box["$id"] == Rare.rscId:
@@ -152,6 +156,42 @@ def CreateCTMCDescriptions(): # Hardcoded New Boxes and descriptions
             else:
                 break
         JSONParser.CloseFile(tboxData, tboxFile)
+    
+    valTable = Values.ValueTable()
+    valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs)
+    valTable.PopulateValues(Values.ValueFile("ITM_OrbEquip"), IDs.RefinedAuxCoreIDs)
+    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=5), IDs.WeaponChipIDs)
+    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=5), IDs.CoreCrystals)
+    valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs + IDs.TornaAccessories)
+    
+    for area in IDs.ValidTboxMapNames + IDs.ValidTornaTboxMapNames:        
+        with open(area, 'r+', encoding='utf-8') as tboxFile:
+            tboxData = json.load(tboxFile)
+            
+            # Get Area Box Value Distribution
+            boxesTotalValues:list[Values.ValuedItem] = []
+            for box in tboxData["rows"]:
+                boxesTotalValues.append(Values.ValuedItem(box["$id"], GetTreasureBoxValue(box, valTable)))
+                        
+            boxesTotalValues.sort(key=lambda x: x.value)
+            
+            # Assign rarities based on percentile in the sorted list
+            for i, box in enumerate(boxesTotalValues):
+                percentile = i / len(boxesTotalValues)
+                
+                if percentile > 0.8:
+                    rarity = Legendary
+                elif percentile > 0.5:
+                    rarity = Rare
+                else:
+                    rarity = Common
+                
+                for tbox in tboxData["rows"]:
+                    if tbox["$id"] == box.id:
+                        tbox["RSC_ID"] = rarity.rscId
+                
+            JSONParser.CloseFile(tboxData, tboxFile)
+
 
 def GetRarity(gold):
     if gold < 5000:
