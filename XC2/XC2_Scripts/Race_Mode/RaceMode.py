@@ -1,5 +1,5 @@
 from scripts import Helper, JSONParser, PopupDescriptions
-from XC2.XC2_Scripts import EnemyRandoLogic, CoreCrystalAdjustments, Options, TutorialShortening
+from XC2.XC2_Scripts import EnemyRandoLogic, Options, TutorialShortening, CoreCrystals
 import random, time, math, json
 from XC2.XC2_Scripts.IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, AccessoryIDs, WeaponChipIDs, AuxCoreIDs, RefinedAuxCoreIDs, CollectionPointMaterials, TornaAccessories
 
@@ -187,7 +187,7 @@ def RaceModeChanging():
     print("Filling Chests with Custom Loot")
     RaceModeLootChanges(NGPlusBladeCrystalIDs)
     StackableCoreCrystalsandKeyItems()
-    FindtheBladeNames()
+    CoreCrystals.FindtheBladeNames()
     print("Reducing amount of grinding")
     LessGrinding()
     if NGPlusBladeCrystalIDs != None:
@@ -206,12 +206,40 @@ def RaceModeChanging():
     print("Removing enemy drops")
     EnemyDropRemoval()
     EnemyRandoLogic.KeyItemsReAdd()
-    CoreCrystalAdjustments.FieldSkillLevelAdjustment()
+    FieldSkillLevelAdjustment()
     if Options.RaceModeOption_DLC.GetState():
         print("Nerfing Corvin and Crossette")
         DLCItemChanges()
     TutorialShortening.RaceModeTutorialShortening()
     SeedHash()
+
+FieldSkillAchievementIDs = Helper.InclRange(1,3824)
+ChangeableFieldSkillAchievementIDs = [12, 13, 14, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84, 92, 93, 94, 102, 103, 104, 112, 113, 114, 122, 123, 124, 132, 133, 134, 142, 143, 144, 152, 153, 154, 162, 163, 164, 172, 173, 174, 182, 183, 184, 192, 193, 194, 202, 203, 204, 212, 213, 214, 222, 223, 224, 232, 233, 234, 242, 243, 244, 252, 253, 254, 262, 263, 264, 272, 273, 274, 282, 283, 284, 292, 293, 294, 302, 303, 304, 312, 313, 314, 322, 323, 324, 332, 333, 334, 342, 343, 344, 352, 353, 354, 362, 363, 364, 372, 373, 374, 382, 383, 384, 392, 393, 394, 402, 403, 404, 412, 413, 414, 422, 423, 424, 432, 433, 434, 442, 443, 444, 452, 453, 454, 462, 463, 464, 1645, 1646, 1647, 1655, 1656, 1657, 1665, 1666, 1667, 1675, 1676, 1677, 1746, 1747, 1748, 1756, 1757, 1758, 1766, 1767, 1768]
+
+def FieldSkillLevelAdjustment():
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/FLD_FieldSkillList.json", ["MaxLevel"] , 1)
+    FieldAchievementSetFile = "./XC2/JsonOutputs/common/FLD_AchievementSet.json"
+    with open(FieldAchievementSetFile, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        for row in data["rows"]:
+            for i in range(0, len(ChangeableFieldSkillAchievementIDs)):
+                if row["$id"] == ChangeableFieldSkillAchievementIDs[i]:
+                    if row["AchievementID1"] != 0:
+                        row["AchievementID1"] = 40
+                    if row["AchievementID2"] != 0:
+                        row["AchievementID2"] = 40
+                    if row["AchievementID3"] != 0:
+                        row["AchievementID3"] = 40
+                    if row["AchievementID4"] != 0:
+                        row["AchievementID4"] = 40
+                    if row["AchievementID5"] != 0:
+                        row["AchievementID5"] = 40
+                    break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    # JSONParser.ChangeJSONFile("common/FLD_AchievementSet.json",Helper.StartsWith("AchievementID",1,5), Helper.InclRange(1,3824), [40], (x for x in FieldSkillAchievementIDs if x in ChangeableFieldSkillAchievementIDs) )
+
 
 def RaceModeDescription():
     RaceModeDesc = PopupDescriptions.Description()
@@ -897,35 +925,6 @@ def StackableCoreCrystalsandKeyItems(): # Allows us to shuffle more than 1 copy 
         for row in data["rows"]:
             if row["$id"] in Helper.InclRange(25218, 25222):
                 row["ValueMax"] = 3
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-
-def FindtheBladeNames():
-    if Options.TreasureChestOption_RareBlades.GetState():
-        ValidCrystalListIDs = Helper.InclRange(45002,45004) + Helper.InclRange(45006, 45009) + [45016] + Helper.InclRange(45017,45049) + [45056, 45057]
-        CorrespondingBladeIDs = Helper.AdjustedFindBadValuesList("./XC2/JsonOutputs/common/ITM_CrystalList.json",["$id"], ValidCrystalListIDs, "BladeID")
-        CorrespondingBladeNameIDs = Helper.AdjustedFindBadValuesList("./XC2/JsonOutputs/common/CHR_Bl.json", ["$id"], CorrespondingBladeIDs, "Name")
-        CorrespondingBladeNames = Helper.AdjustedFindBadValuesList("./XC2/JsonOutputs/common_ms/chr_bl_ms.json", ["$id"], CorrespondingBladeNameIDs, "name")
-        # DebugLog.DebugCoreCrystalAddition(ValidCrystalListIDs, CorrespondingBladeNames)
-        ITMCrystalAdditions(CorrespondingBladeNames, CorrespondingBladeIDs)
-
-def ITMCrystalAdditions(BladeNames, CorrespondingBladeIDs):
-    with open("./XC2/JsonOutputs/common_ms/itm_crystal.json", "r+", encoding='utf-8') as file:     
-        IDNumbers = Helper.InclRange(16, 58)
-        data = json.load(file)
-        for i in range(0, len(IDNumbers)):
-            data["rows"].append({"$id": IDNumbers[i], "style": 36, "name": f"{BladeNames[i]}\'s Core Crystal"})
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as file: 
-        data = json.load(file)
-        for row in data["rows"]:
-            for i in range(0, len(CorrespondingBladeIDs)):
-                if row["BladeID"] == CorrespondingBladeIDs[i]:
-                    row["Name"] = IDNumbers[i]
-                    break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)

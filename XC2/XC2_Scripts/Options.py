@@ -1,8 +1,8 @@
-from XC2.XC2_Scripts.Unused import AccessoryShops
+from XC2.XC2_Scripts.Unused import AccessoryShops, CoreCrystalAdjustments
 from scripts import JSONParser,Helper
 from XC2.XC2_Scripts.IDs import *
 from tkinter import *
-from XC2.XC2_Scripts import Accessories, AuxCores, BladeSpecials, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, TrustBeam, CoreCrystalAdjustments, BladeStats,TutorialShortening, GachaModifications, Enhancements, BigItems, Cosmetics, Items as I, ButtonCombos, Scales, DLCFlagQOL, CharacterRandomization, Enemy, WeaponChips, YellowSkills
+from XC2.XC2_Scripts import Accessories, AuxCores, BladeSpecials, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, TrustBeam, BladeStats,TutorialShortening, GachaModifications, Enhancements, BigItems, Cosmetics, Items as I, ButtonCombos, Scales, DLCFlagQOL, CharacterRandomization, Enemy, WeaponChips, YellowSkills
 from XC2.XC2_Scripts.Race_Mode import RaceMode
 from XC2.XC2_Scripts.Torna_Logic import TornaMain
 from XC2.XC2_Scripts.UM_Hunt import UMHuntMain
@@ -233,7 +233,7 @@ MutuallyExclusivePairing([TornaMainOption, TornaAddHints, TornaObjectColorMatche
 
 MutuallyExclusivePairing([UMHuntOption], [AccessoryShopsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladeWeaponChipsOption, AccessoriesOption, AuxCoresOption, NormalEnemyOption, BossEnemyOption, UniqueEnemyOption, EnemyDropOption, TreasureChestOption, StartwithIncreasedMovespeedOption, FasterDriverSkillTrees, EasySkillTreesOption, FasterLevelsOption, RaceModeOption])
 
-MutuallyExclusivePairing([RaceModeOption], [DriversOption, BladesOption, ShortcutsOption])
+MutuallyExclusivePairing([RaceModeOption], [DriversOption, BladesOption, ShortcutsOption, CTMCOption])
 
 # Currently Disabled for Various Reasons
 # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)

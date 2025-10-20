@@ -94,7 +94,6 @@ def RandomizeEnemyDropsHelper(dropIDs, dontChangeIDs, valTable:Values.ValueTable
             
         JSONParser.CloseFile(dropData, dropFile)
 
-
 def GetTreasureBoxValue(tbox, valTable:Values.ValueTable):
     totalVal = 0
     
@@ -189,17 +188,9 @@ def ChestTypeMatchesContentsValue():
                 for tbox in tboxData["rows"]:
                     if tbox["$id"] == box.id:
                         tbox["RSC_ID"] = rarity.rscId
+                # print(f"Value: {box.value} given rarity: {rarity.name}")
                 
             JSONParser.CloseFile(tboxData, tboxFile)
-
-
-def GetRarity(gold):
-    if gold < 5000:
-        return 1
-    elif gold < 10000:
-        return 2
-    else:
-        return 3
 
 def TreasureChestDescription():
     myDesc = PopupDescriptions.Description()
@@ -245,28 +236,3 @@ def CollectionPointDescriptions():
     desc.Text("If no sub-options are selected this will do nothing.")
     desc.Image("ColPointIcon.png", "XC2")
     return desc
-
-
-# def PopulateValueCalcXC2():
-#     files = [
-#         Values.ValueFile("ITM_Orb"),
-#         Values.ValueFile("ITM_OrbEquip"),
-#         Values.ValueFile("ITM_PcEquip"),
-#         Values.ValueFile("ITM_PreciousList", mult=2),
-#         Values.ValueFile("ITM_PreciousListIra", mult=2),
-#         Values.ValueFile("ITM_SalvageList"),
-#         Values.ValueFile("ITM_TresureList"),
-#         Values.ValueFile("ITM_PcWpnChip", mult=5),
-#         Values.ValueFile("ITM_CrystalList"),
-#         Values.ValueFile("ITM_BoosterList"),
-#         Values.ValueFile("ITM_CollectionList"),
-#         Values.ValueFile("ITM_FavoriteList"),
-#         Values.ValueFile("ITM_HanaAssist", key="NeedEther", mult=2),
-#         Values.ValueFile("ITM_HanaArtsEnh", key="NeedEther", mult=2),
-#         Values.ValueFile("ITM_HanaAtr", key="NeedEther", mult=2),
-#         Values.ValueFile("ITM_HanaNArtsSet", key="NeedEther", mult=2),
-#         Values.ValueFile("ITM_HanaRole", key="NeedEther", mult=3),
-#         Values.ValueFile("ITM_InfoList"),  
-#     ]
-#     for file in files:
-#         valTable.PopulateValues(file)

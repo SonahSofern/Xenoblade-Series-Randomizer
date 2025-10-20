@@ -127,9 +127,7 @@ def GetMaxValue(filename: str, columnname: str): # Returns the maximum Value for
         data = json.load(file)
         MaxRow = max(data["rows"], key = lambda x:x[columnname])
         MaxID = MaxRow[columnname]
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+        JSONParser.CloseFile(data, file)
     return MaxID
 
 def GetMinValue(filename: str, columnname: str): # Returns the maximum Value for a given column in a given file
