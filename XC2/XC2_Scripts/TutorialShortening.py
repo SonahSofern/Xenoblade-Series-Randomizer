@@ -166,7 +166,7 @@ def ShortenedTutorial():
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def RaceModeTutorialShortening(): # we need to call this from the race mode function
-    if not Options.ShortcutsOption_Tutorials.GetState():
+    if not Options.ShortcutsOption.GetState() or not Options.ShortcutsOption_Tutorials.GetState():
         ShortenedTutorial()
     Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/FLD_Tutorial.json", ["ScenarioFlagMin", "QuestFlag", "QuestFlagMin", "QuestFlagMax", "SysMultiFlag"], 0)
     Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/RSC_GmkSetList.json", ["tutorial", "tutorial_bdat"], "")

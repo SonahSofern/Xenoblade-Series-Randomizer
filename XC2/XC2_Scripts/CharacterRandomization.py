@@ -103,7 +103,7 @@ def CharacterRandomization():
     randomize_blades = Options.BladesOption.GetState()
 
     # If we have driver randomization, we can't salvage, so we turn on the tutorial shortening (if not already on) to skip the forced salvaging in the tutorial.
-    if not Options.ShortcutsOption_Tutorials.GetState():
+    if not Options.ShortcutsOption.GetState() or not Options.ShortcutsOption_Tutorials.GetState():
         JSONParser.ChangeJSONLine(["common/FLD_QuestListNormal.json"], [2004], ["NextQuestA"], 2008)
 
     if include_printouts:
