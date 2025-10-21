@@ -29,27 +29,6 @@ def ShortenedTutorial():
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
         EnemyRandoLogic.KeyItemsReAdd()
-        with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: #allows waypoints to work, and us to skip Melolo
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] <= 2005:
-                    row["ScenarioFlagMin"] = 1003
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
-        with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: #this makes it so spraine will talk to us no matter how small the flag
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] == 2045:
-                    row["ScenarioFlagMin"] = 10047
-                    row["ScenarioFlagMax"] = 10048
-                if row["$id"] == 2046:
-                    row["ScenarioFlagMin"] = 1008
-                    row["ScenarioFlagMax"] = 1012
-                    break
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
         with open("./XC2/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: # shortens opening section
             data = json.load(file)
             for row in data["rows"]:
@@ -65,108 +44,130 @@ def ShortenedTutorial():
             file.seek(0)
             file.truncate()
             json.dump(data, file, indent=2, ensure_ascii=False)
-        with open("./XC2/JsonOutputs/common/FLD_QuestListNormal.json", 'r+', encoding='utf-8') as file: #shortens tutorials
-            data = json.load(file)
-            for row in data["rows"]:
-                if (row["$id"] >= 2001) and (row["$id"] <= 2008):
-                    row["PurposeID"] = 2001
-                if row["$id"] == 2709:
-                    row["PurposeID"] = 2001
-                    break
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
-        with open("./XC2/JsonOutputs/common/FLD_QuestTaskNormal.json", 'r+', encoding='utf-8') as file: #adjusting tutorial quests
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] == 2001:
-                    row["TaskType1"] = 12
-                    row["TaskID1"] = 1710
-                    row["TaskLog1"] = 1066 #it calls these ids from common_ms/fld_quest_normal, so I chose a funny one
-                    break
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
-        with open("./XC2/JsonOutputs/common/FLD_Achievement.json", 'r+', encoding='utf-8') as file: #adjusting tutorial quests
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] == 1710:
-                    row["StatsID"] = 60
-                    row["Count"] = 1
-                    row["DebugName"] = "WALK_TOTAL" # these change the quest to only have to walk 1 step (after starting quest, since it needs to update for some reason) to complete this
-                    break
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
-        with open("./XC2/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing tutorials in tutorial
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] == 30005:
-                    row["chgEdID"] = 30007
-                if row["scriptName"][:3] == "tut": # if first 3 letters in script name = "tut"
-                    row["scriptName"] = ""
-                    row["scriptStartId"] = 0
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
-            
-        Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial.json", ["script_file"], "aoc_challenge_tutorial") # Shortens battle tutorials
-        Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial.json", ["start_id"], 0)
-        Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial.json", ["param1"], 0)
-        Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["param1"], 0)
-        Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["script_file"], "aoc_challenge_tutorial")
-        Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["start_id"], 0)
-        with open("./XC2/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing torna tutorials
-            data = json.load(file)
-            removables = ["aoc_tut04", "aoc_tut25", "aoc_tut14", "aoc_tut21", "aoc_tut06", "aoc_tut07", "aoc_tut09", "aoc_tut08"] # "aoc_tut10"
-            for row in data["rows"]:
-                if row["scriptName"] in removables:
-                    row["scriptName"] = ""
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
-        with open("./XC2/JsonOutputs/common/EVT_listQst01.json", 'r+', encoding='utf-8') as file: # removing torna tutorials
-            data = json.load(file)
-            removables = ["aoc_tut14", "aoc_tut11", "aoc_tut12", "aoc_tut26", "aoc_tut22", "aoc_tut20", "aoc_tut15", "aoc_tut017"]
-            for row in data["rows"]:
-                if row["scriptName"] in removables:
-                    row["scriptName"] = ""
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: #allows waypoints to work, and us to skip Melolo
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] <= 2005:
+                row["ScenarioFlagMin"] = 1003
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: #this makes it so spraine will talk to us no matter how small the flag
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 2045:
+                row["ScenarioFlagMin"] = 10047
+                row["ScenarioFlagMax"] = 10048
+            if row["$id"] == 2046:
+                row["ScenarioFlagMin"] = 1008
+                row["ScenarioFlagMax"] = 1012
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/JsonOutputs/common/FLD_QuestListNormal.json", 'r+', encoding='utf-8') as file: #shortens tutorials
+        data = json.load(file)
+        for row in data["rows"]:
+            if (row["$id"] >= 2001) and (row["$id"] <= 2008):
+                row["PurposeID"] = 2001
+            if row["$id"] == 2709:
+                row["PurposeID"] = 2001
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/JsonOutputs/common/FLD_QuestTaskNormal.json", 'r+', encoding='utf-8') as file: #adjusting tutorial quests
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 2001:
+                row["TaskType1"] = 12
+                row["TaskID1"] = 1710
+                row["TaskLog1"] = 1066 #it calls these ids from common_ms/fld_quest_normal, so I chose a funny one
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/JsonOutputs/common/FLD_Achievement.json", 'r+', encoding='utf-8') as file: #adjusting tutorial quests
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 1710:
+                row["StatsID"] = 60
+                row["Count"] = 1
+                row["DebugName"] = "WALK_TOTAL" # these change the quest to only have to walk 1 step (after starting quest, since it needs to update for some reason) to complete this
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing tutorials in tutorial
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 30005:
+                row["chgEdID"] = 30007
+            if row["scriptName"][:3] == "tut": # if first 3 letters in script name = "tut"
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
         
-        with open("./XC2/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # removing more tutorials
-            data = json.load(file)
-            removables = ["tut_sys26", "tut_sys22", "tut_sys14", "tut_sys02", "tut_btl23", "aoc_tut27"]
-            for row in data["rows"]:
-                if row["scriptName"] in removables:
-                    row["scriptName"] = ""
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial.json", ["script_file"], "aoc_challenge_tutorial") # Shortens battle tutorials
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial.json", ["start_id"], 0)
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial.json", ["param1"], 0)
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["param1"], 0)
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["script_file"], "aoc_challenge_tutorial")
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["start_id"], 0)
+    with open("./XC2/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing torna tutorials
+        data = json.load(file)
+        removables = ["aoc_tut04", "aoc_tut25", "aoc_tut14", "aoc_tut21", "aoc_tut06", "aoc_tut07", "aoc_tut09", "aoc_tut08"] # "aoc_tut10"
+        for row in data["rows"]:
+            if row["scriptName"] in removables:
+                row["scriptName"] = ""
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/JsonOutputs/common/EVT_listQst01.json", 'r+', encoding='utf-8') as file: # removing torna tutorials
+        data = json.load(file)
+        removables = ["aoc_tut14", "aoc_tut11", "aoc_tut12", "aoc_tut26", "aoc_tut22", "aoc_tut20", "aoc_tut15", "aoc_tut017"]
+        for row in data["rows"]:
+            if row["scriptName"] in removables:
+                row["scriptName"] = ""
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    
+    with open("./XC2/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # removing more tutorials
+        data = json.load(file)
+        removables = ["tut_sys26", "tut_sys22", "tut_sys14", "tut_sys02", "tut_btl23", "aoc_tut27"]
+        for row in data["rows"]:
+            if row["scriptName"] in removables:
+                row["scriptName"] = ""
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
-        #with open("./XC2/JsonOutputs/common/EVT_chgBf01.json", 'r+', encoding='utf-8') as file: # skipping an area reload
-        #    data = json.load(file)
-        #    for row in data["rows"]:
-        #        if row["$id"] == 10910:
-        #            row["id"] = 11004
-        #    file.seek(0)
-        #    file.truncate()
-        #    json.dump(data, file, indent=2, ensure_ascii=False)
+    #with open("./XC2/JsonOutputs/common/EVT_chgBf01.json", 'r+', encoding='utf-8') as file: # skipping an area reload
+    #    data = json.load(file)
+    #    for row in data["rows"]:
+    #        if row["$id"] == 10910:
+    #            row["id"] = 11004
+    #    file.seek(0)
+    #    file.truncate()
+    #    json.dump(data, file, indent=2, ensure_ascii=False)
 
-        with open("./XC2/JsonOutputs/common_gmk/ma40a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: # skipping an area reload
-            data = json.load(file)
-            for row in data["rows"]:
-                if row["$id"] in [40053, 40054, 40055, 40056]:
-                    row["ScenarioFlagMin"] = row["ScenarioFlagMax"] = 11130
-                #elif row["$id"] == 40001:
-                #    row["ScenarioFlagMin"] = row["ScenarioFlagMax"] = 11004
-            file.seek(0)
-            file.truncate()
-            json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/JsonOutputs/common_gmk/ma40a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: # skipping an area reload
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] in [40053, 40054, 40055, 40056]:
+                row["ScenarioFlagMin"] = row["ScenarioFlagMax"] = 11130
+            #elif row["$id"] == 40001:
+            #    row["ScenarioFlagMin"] = row["ScenarioFlagMax"] = 11004
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def RaceModeTutorialShortening(): # we need to call this from the race mode function
-    ShortenedTutorial()
+    if not Options.ShortcutsOption_Tutorials.GetState():
+        ShortenedTutorial()
     Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/FLD_Tutorial.json", ["ScenarioFlagMin", "QuestFlag", "QuestFlagMin", "QuestFlagMax", "SysMultiFlag"], 0)
     Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/RSC_GmkSetList.json", ["tutorial", "tutorial_bdat"], "")
     with open("./XC2/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: # shortens opening section
