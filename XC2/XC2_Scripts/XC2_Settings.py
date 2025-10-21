@@ -41,8 +41,6 @@ def XC2Help():
     descData.Text("Once the randomizer finishes, launch your game and you should see the version somewhere on the title screen.", anchor="w")
     descData.Text("If so, you're ready to start playing!", anchor="w")
     descData.Header("Common Issues")
-    descData.Tag("Game Modes")
-    descData.Text("Race Mode and Unique Monster Hunt do not work with all other settings, they will overwrite the incompatible choices.", anchor="w")
     descData.Tag("Mods")
     descData.Text("This mod is NOT compatible with other mods that edit the bdats. Ensure that this is the only active one for your game. (60fps and other visual mods should be okay)", anchor="w")
     return descData
