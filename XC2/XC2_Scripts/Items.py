@@ -119,35 +119,29 @@ def GetTreasureBoxValue(tbox, valTable:Values.ValueTable):
 
     return int(totalVal)    
 
-def ColoredName(name, colors):
-    if len(colors) == 0:
-        return name
-    
-    newName = ""
-    for char in name:
-        newName+= f"[System:Color name={random.choice(colors)}]{char}[/System:Color]" 
-    return newName
+def ColoredString(name, color):    
+    return f"[System:Color name={color}]{name}[/System:Color]" 
 
 def ChestTypeMatchesContentsValue():
     class ChestType():
-        def __init__(self, name, rscId, msId, percentile, color = []):
+        def __init__(self, name, rscId, msId, percentile, stars = 1):
             self.name = name
             self.rscId = rscId # RSC ID of the chest
             self.msId = msId
             self.percentile = percentile
-            self.color = color
-    
-    Common = ChestType("Common", 1, 154, 0)
-    Uncommon = ChestType("Uncommon", 4, 155, 0.3, ["green"])
-    Rare = ChestType("Rare", 2, 156, 0.5, ["red"])
-    Epic = ChestType("Epic", 6, 157, 0.7, ["blue"])
-    Legendary = ChestType("Legendary", 3, 158, 0.9, ["tutorial"])
+            self.stars = stars
+            
+    Common = ChestType(" [ML:wide ]Common", 1, 154, 0, stars=1)
+    Uncommon = ChestType("Uncommon", 4, 155, 0.3, stars=2)
+    Rare = ChestType("Rare", 2, 156, 0.5, stars=3)
+    Epic = ChestType("Epic", 6, 157, 0.7, 4)
+    Legendary = ChestType("Legendary", 3, 158, 0.9, 5)
     Rarities:list[ChestType] = [Common, Uncommon, Rare, Epic, Legendary]
     
     with open("XC2/JsonOutputs/common_ms/fld_gmkname.json", 'r+', encoding='utf-8') as nameFile:
         nameData = json.load(nameFile)
         for rar in Rarities:
-            nameData["rows"].append({"$id": rar.msId, "style": 36, "name": ColoredName(rar.name, rar.color)})
+            nameData["rows"].append({"$id": rar.msId, "style": 36, "name": f"{rar.name} {ColoredString("★"*rar.stars, "tutorial")}"})
         JSONParser.CloseFile(nameData, nameFile)
             
     with open("XC2/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as tboxFile:
