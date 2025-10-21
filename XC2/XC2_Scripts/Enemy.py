@@ -269,9 +269,16 @@ def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy 
         JSONParser.CloseFile(data, file)
     
 def SummonsFix(eneData):
+    Lora = 17
+    Rex = 1
     for ene in eneData["rows"]:
-        if ene["$id"] in IDs.SummonedEnemies:
-            ene["DriverLev"] = 1 # Not a great solution the other way is to make a duplicate enemy for each time they are summoned and I woulid have to make new summon tables
+        enID = ene["$id"]
+        if enID in IDs.SummonedEnemies:
+            if ene["ZoneID"] in [52,53]: # Torna Areas
+                targetDriver = Lora
+            else:
+                targetDriver = Rex
+            ene["DriverLev"] = targetDriver # Not a great solution the other way is to make a duplicate enemy for each time they are summoned and I woulid have to make new summon tables
     
 # def EnemyAggro(): # Not going to add aggro to enemies because it would be disproportional to the area there enemy is in. For example if i tgive them batArea and a large area you could get stuck inside a small area (ship) with enemies perma aggroing you
 #     odds = Options.EnemyAggroOption.GetSpinbox()

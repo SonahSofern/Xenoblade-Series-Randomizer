@@ -71,13 +71,14 @@ def RandomizeEnemyDrops(): # Up top here we define the RandomGroups instead of j
     valTable = Values.ValueTable()
     valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs, Values.WeightOptionMethod(Options.EnemyDropOption_AuxCores))
     valTable.PopulateValues(Values.ValueFile("ITM_OrbEquip"), IDs.RefinedAuxCoreIDs, Values.WeightOptionMethod(Options.EnemyDropOption_RefinedAuxCores))
-    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=5), IDs.WeaponChipIDs, Values.WeightOptionMethod(Options.EnemyDropOption_WeaponChips))
-    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=5), IDs.CoreCrystals, Values.WeightOptionMethod(Options.EnemyDropOption_CoreCrystals))
+    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=3), IDs.WeaponChipIDs, Values.WeightOptionMethod(Options.EnemyDropOption_WeaponChips))
     
     # Torna
     tornaValTable = copy.deepcopy(valTable) # Copy it before we put in just base game accessory IDs
     FerisBeastmeat = [30380]
     tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AllowedTornaAccessories, Values.WeightOptionMethod(Options.EnemyDropOption_Accessories))
+    
+    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=3), IDs.CoreCrystals, Values.WeightOptionMethod(Options.EnemyDropOption_CoreCrystals))
     valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Values.WeightOptionMethod(Options.EnemyDropOption_Accessories))
     
     RandomizeEnemyDropsHelper(IDs.BaseDropTableIDs, IDs.PreciousItems, valTable)
@@ -119,6 +120,9 @@ def GetTreasureBoxValue(tbox, valTable:Values.ValueTable):
     return int(totalVal)    
 
 def ColoredName(name, colors):
+    if len(colors) == 0:
+        return name
+    
     newName = ""
     for char in name:
         newName+= f"[System:Color name={random.choice(colors)}]{char}[/System:Color]" 
@@ -126,37 +130,36 @@ def ColoredName(name, colors):
 
 def ChestTypeMatchesContentsValue():
     class ChestType():
-        def __init__(self, name, rscId, msId):
+        def __init__(self, name, rscId, msId, percentile, color = []):
             self.name = name
             self.rscId = rscId # RSC ID of the chest
             self.msId = msId
+            self.percentile = percentile
+            self.color = color
     
-    Common = ChestType("Common", 1, 154)
-    Rare = ChestType("Rare", 2, 155)
-    Legendary = ChestType("Legendary", 3, 156)
+    Common = ChestType("Common", 1, 154, 0)
+    Uncommon = ChestType("Uncommon", 4, 155, 0.3, ["green"])
+    Rare = ChestType("Rare", 2, 156, 0.5, ["red"])
+    Epic = ChestType("Epic", 6, 157, 0.7, ["blue"])
+    Legendary = ChestType("Legendary", 3, 158, 0.9, ["tutorial"])
+    Rarities:list[ChestType] = [Common, Uncommon, Rare, Epic, Legendary]
     
-     # Hardcoded New Boxes and descriptions
     with open("XC2/JsonOutputs/common_ms/fld_gmkname.json", 'r+', encoding='utf-8') as nameFile:
         nameData = json.load(nameFile)
-        nameData["rows"].append({"$id": Common.msId, "style": 36, "name": ColoredName(Common.name, ["blue"])})
-        nameData["rows"].append({"$id": Rare.msId, "style": 36, "name": ColoredName(Rare.name,["red"])})
-        nameData["rows"].append({"$id": Legendary.msId, "style": 36, "name": ColoredName(Legendary.name, ["tutorial"] )})
+        for rar in Rarities:
+            nameData["rows"].append({"$id": rar.msId, "style": 36, "name": ColoredName(rar.name, rar.color)})
         JSONParser.CloseFile(nameData, nameFile)
             
     with open("XC2/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as tboxFile:
         tboxData = json.load(tboxFile)
-        for box in tboxData["rows"]:
-            box["initWaitTimeRand"] = 0 
-            box["initWaitTime"] = 0 
-            box["TBOX_open_starttime"] = 0 
-            if box["$id"] == Common.rscId:
-                box["MSG_ID"] = Common.msId
-            elif box["$id"] == Rare.rscId:
-                box["MSG_ID"] = Rare.msId
-            elif box["$id"] == Legendary.rscId:
-                box["MSG_ID"] = Legendary.msId
-            else:
-                break
+        for rar in Rarities:
+            for box in tboxData["rows"]:
+                box["initWaitTimeRand"] = 0 
+                box["initWaitTime"] = 0 
+                box["TBOX_open_starttime"] = 0 
+                if box["$id"] == rar.rscId:
+                    box["MSG_ID"] = rar.msId
+                    break
         JSONParser.CloseFile(tboxData, tboxFile)
     
     valTable = Values.ValueTable()
@@ -181,17 +184,16 @@ def ChestTypeMatchesContentsValue():
             for i, box in enumerate(boxesTotalValues):
                 percentile = i / len(boxesTotalValues)
                 
-                if percentile > 0.8:
-                    rarity = Legendary
-                elif percentile > 0.5:
-                    rarity = Rare
-                else:
-                    rarity = Common
+                for rar in Rarities:
+                    if percentile >= rar.percentile:
+                        rarity = rar
+                    else:
+                        break
                 
                 for tbox in tboxData["rows"]:
                     if tbox["$id"] == box.id:
                         tbox["RSC_ID"] = rarity.rscId
-                # print(f"Value: {box.value} given rarity: {rarity.name}")
+                print(f"Value: {box.value} given rarity: {rarity.name}")
                 
             JSONParser.CloseFile(tboxData, tboxFile)
 
