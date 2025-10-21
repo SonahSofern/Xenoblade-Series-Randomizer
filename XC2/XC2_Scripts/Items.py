@@ -131,7 +131,7 @@ def ChestTypeMatchesContentsValue():
             self.percentile = percentile
             self.stars = stars
             
-    Common = ChestType(" [ML:wide ]Common", 1, 154, 0, stars=1)
+    Common = ChestType("Common", 1, 154, 0, stars=1)
     Uncommon = ChestType("Uncommon", 4, 155, 0.3, stars=2)
     Rare = ChestType("Rare", 2, 156, 0.5, stars=3)
     Epic = ChestType("Epic", 6, 157, 0.7, 4)

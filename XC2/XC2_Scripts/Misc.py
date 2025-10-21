@@ -29,6 +29,7 @@ def SystemBalanceEditor():
         sysData = json.load(sysFile)
         for sys in sysData["rows"]:
             UnlockSkillTrees(sys)
+        JSONParser.CloseFile(sysData, sysFile)
             
 def UnlockSkillTrees(sys):
     if sys["$id"] in [136,137]:
