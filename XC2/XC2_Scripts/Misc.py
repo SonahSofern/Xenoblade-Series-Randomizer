@@ -25,7 +25,7 @@ def BeamRandomizer():
     JSONParser.ChangeJSONFile(["common/EFF_KizunaLink.json"], ["WavePower"],[100,120,140,200,300,400], Helper.InclRange(0,1000))
     
 def SystemBalanceEditor():
-    with open("./XC2/JsonOutputs/common/BTL_SystemBalance.json", 'r+', encoding='utf-8') as sysFile:
+    with open("XC2/JsonOutputs/common/BTL_SystemBalance.json", 'r+', encoding='utf-8') as sysFile:
         sysData = json.load(sysFile)
         for sys in sysData["rows"]:
             UnlockSkillTrees(sys)
@@ -33,4 +33,4 @@ def SystemBalanceEditor():
             
 def UnlockSkillTrees(sys):
     if sys["$id"] in [136,137]:
-        sys["param"] = 0
+        sys["Param"] = 0
