@@ -42,7 +42,6 @@ def RandomizeNormalShops(shopIDs, valTable:Values.ValueTable, doNotReplaceIDs = 
 def RandomizeTreasureBoxes():
     # Base Game
     valTable = Values.ValueTable()
-    valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs, Values.WeightOptionMethod(Options.TreasureChestOption_AuxCores))
     valTable.PopulateValues(Values.ValueFile("ITM_OrbEquip"), IDs.RefinedAuxCoreIDs, Values.WeightOptionMethod(Options.TreasureChestOption_RefinedAuxCores))
     valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=5), IDs.WeaponChipIDs, Values.WeightOptionMethod(Options.TreasureChestOption_WeaponChips))
     
@@ -50,6 +49,7 @@ def RandomizeTreasureBoxes():
     tornaValTable = copy.deepcopy(valTable) # Copy it before we put in just base game accessory IDs or Core Crystals
     tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AllowedTornaAccessories, Values.WeightOptionMethod(Options.TreasureChestOption_Accessories))
     
+    valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs, Values.WeightOptionMethod(Options.TreasureChestOption_AuxCores))
     valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=5), IDs.CoreCrystals, Values.WeightOptionMethod(Options.TreasureChestOption_CoreCrystals))
     valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Values.WeightOptionMethod(Options.TreasureChestOption_Accessories))
     valTable.PopulateValues(Values.ValueFile("ITM_CrystalList"), IDs.CustomCrystalIDs, Values.WeightOptionMethod(Options.TreasureChestOption_RareBlades))
@@ -69,7 +69,6 @@ def RandomizeTreasureBoxesHelper(areas, dontChangeIDs, valTable:Values.ValueTabl
 def RandomizeEnemyDrops(): # Up top here we define the RandomGroups instead of just the IDs cause we want to use random groups
     # Base Game
     valTable = Values.ValueTable()
-    valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs, Values.WeightOptionMethod(Options.EnemyDropOption_AuxCores))
     valTable.PopulateValues(Values.ValueFile("ITM_OrbEquip"), IDs.RefinedAuxCoreIDs, Values.WeightOptionMethod(Options.EnemyDropOption_RefinedAuxCores))
     valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=3), IDs.WeaponChipIDs, Values.WeightOptionMethod(Options.EnemyDropOption_WeaponChips))
     
@@ -78,6 +77,7 @@ def RandomizeEnemyDrops(): # Up top here we define the RandomGroups instead of j
     FerisBeastmeat = [30380]
     tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AllowedTornaAccessories, Values.WeightOptionMethod(Options.EnemyDropOption_Accessories))
     
+    valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs, Values.WeightOptionMethod(Options.EnemyDropOption_AuxCores))
     valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=3), IDs.CoreCrystals, Values.WeightOptionMethod(Options.EnemyDropOption_CoreCrystals))
     valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Values.WeightOptionMethod(Options.EnemyDropOption_Accessories))
     

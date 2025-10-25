@@ -206,7 +206,7 @@ def Buff(art):
         "Block": 3,
         "Counter": 6,
         "↑Counter": 7,
-        "Rflct": 5,
+        # "Rflct": 5,
         "Inv": 4,
         "Absorb":  17,
     }

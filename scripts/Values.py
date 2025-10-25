@@ -2,15 +2,14 @@ import json, random
 from scripts import Helper, Interactables
 
 differenceList = []
-allowedRange = 0.05
+allowedRange = 0.1
 ItemLogicDesciption = "This is done in a balanced way, by replacing the original item with an item of similar value."
 
 
 def ItemValueStatistics():
     import statistics
 
-    if not differenceList:
-        print("No data in differenceList.")
+    if len(differenceList) == 0:
         return
 
     print(f"For allowed range: {allowedRange*100}%")
@@ -82,9 +81,9 @@ class ValueTable():
         upperBound = min(indexOfSimilarValueItem + targetRange, len(category.originalGroup))
         
         
-        categoryRange = category.originalGroup[lowerBound:upperBound]
+        categoryGroupRange = category.originalGroup[lowerBound:upperBound]
         
-        chosen:ValuedItem = random.choice(categoryRange) # Want to select a random member based on a similar valued item from this category # not using Random Group methods because if you remove choices it could lead to unbalanced things since we are looking at nearby elements in a sorted list by value
+        chosen:ValuedItem = random.choice(categoryGroupRange) # Want to select a random member based on a similar valued item from this category # not using Random Group methods because if you remove choices it could lead to unbalanced things since we are looking at nearby elements in a sorted list by value
         
         # print(f"Original Item Value: {originalItem.value} New Item Value: {chosen.value}")
         
