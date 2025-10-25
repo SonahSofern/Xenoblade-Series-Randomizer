@@ -63,7 +63,7 @@ EnemyDropOption_CoreCrystals = SubOption("Core Crystals", EnemyDropOption, hasSp
 # Drivers
 DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()],  prio=First,  preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.DriversDescriptions())
 DriversOption_Nia = SubOption("Guarantee Early Nia", DriversOption, defState = False)
-DriverArtsOption = Option("Driver Arts", Driver, "Randomizes effects of all driver arts", [lambda: (DriverArts.DriverArtRandomizer(), DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], hasSpinBox = True,spinDefault=40, descData=lambda: DriverArts.DriverArtDescription())
+DriverArtsOption = Option("Driver Arts", Driver, "Randomizes effects of all driver arts", [lambda: (DriverArts.DriverArtRandomizer(), DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], hasSpinBox = True,spinDefault=100, descData=lambda: DriverArts.DriverArtDescription())
 spinArts = "%"
 DriverArtsOption_AutoAttacks = SubOption("Auto Attacks", DriverArtsOption, [], defState = False, hasSpinBox=True, spinDesc="% of auto attacks", spinDefault=20)
 DriverArtsOption_SingleReaction = SubOption("Single Reaction", DriverArtsOption, [], hasSpinBox=True, spinDesc=spinArts, spinDefault=20)
@@ -113,7 +113,7 @@ BladeCombosOption_AOE = SubOption("AOE", BladeCombosOption)
 BladeStatsOption = Option("Blade Stats", Blade, "Randomizes various stats of blades")
 BladeStatsOption_AuxCoreSlots = SubOption("Aux Core Slots", BladeStatsOption, [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["OrbNum"], Helper.InclRange(0,3), BladeStats.BladeAuxCoreSlotDistribution)])
 BladeStatsOption_Cooldown = SubOption("Cooldowns", BladeStatsOption, [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["CoolTime"], Helper.InclRange(1,1000), Helper.InclRange(1,1000))])
-BladeStatsOption_Element = SubOption("Elements", BladeStatsOption, [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["Atr"], Helper.InclRange(1,8), Helper.InclRange(1,8))])
+BladeStatsOption_Element = SubOption("Elements", BladeStatsOption, [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"],["Atr"], Helper.InclRange(1,8), Helper.InclRange(1,8), TornaBladeIDs)]) # Ignoring torna blade IDs because their art and special effects break on other elements
 BladeStatsOption_Defenses = SubOption("Defenses", BladeStatsOption, [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["PArmor", "EArmor"], Helper.InclRange(0,100), BladeStats.BladeDefenseDistribution)])
 BladeStatsOption_Mods = SubOption("Stat Mods", BladeStatsOption, [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["HpMaxRev", "StrengthRev", "PowEtherRev", "DexRev", "AgilityRev", "LuckRev"], Helper.InclRange(1,100), BladeStats.BladeModDistribution)])
 BladeStatsOption_Class = SubOption("Weapon Class", BladeStatsOption, [lambda: BladeStats.BladeWeaponClassRandomization()])
@@ -167,6 +167,8 @@ ShortcutsOption_Tutorials = SubOption("Tutorials Skip", ShortcutsOption, [lambda
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
 ShortcutsOption_IndolQuiz = SubOption("Indol Quiz Skip", ShortcutsOption, [lambda: TutorialShortening.IndolQuizSkip()])
+ShortcutsOption_FeedingAnArmy = SubOption("Feeding an Army Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[293,294,295,296], ["Count"], 0)])
+ShortcutsOption_FeedingAnArmy = SubOption("To Cross a Desert Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[300,301], ["Count"], 0)])
 ShortcutsOption_CommunitySkip = SubOption("Community Levels Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_ConditionFlag.json"],[1394,1395,1396,1397], ["FlagMin"], 1)])
 RemoveFieldSkillsOption = Option("Remove Story Field Skills", QOL, "Removes field skill checks", [lambda: FieldSkills.RemoveFieldSkills(RemoveFieldSkillsOption_AllFieldSkills.GetState())], ["Remove All Field Skills", []])
 RemoveFieldSkillsOption_AllFieldSkills = SubOption("Remove All Field Skills", RemoveFieldSkillsOption)
