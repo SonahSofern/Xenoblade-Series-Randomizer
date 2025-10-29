@@ -43,7 +43,7 @@ def RandomizeTreasureBoxes():
     # Base Game
     valTable = Values.ValueTable()
     valTable.PopulateValues(Values.ValueFile("ITM_OrbEquip"), IDs.RefinedAuxCoreIDs, Values.WeightOptionMethod(Options.TreasureChestOption_RefinedAuxCores))
-    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=5), IDs.WeaponChipIDs, Values.WeightOptionMethod(Options.TreasureChestOption_WeaponChips))
+    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=2), IDs.WeaponChipIDs, Values.WeightOptionMethod(Options.TreasureChestOption_WeaponChips))
     
     # Torna
     tornaValTable = copy.deepcopy(valTable) # Copy it before we put in just base game accessory IDs or Core Crystals
@@ -70,7 +70,7 @@ def RandomizeEnemyDrops(): # Up top here we define the RandomGroups instead of j
     # Base Game
     valTable = Values.ValueTable()
     valTable.PopulateValues(Values.ValueFile("ITM_OrbEquip"), IDs.RefinedAuxCoreIDs, Values.WeightOptionMethod(Options.EnemyDropOption_RefinedAuxCores))
-    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=3), IDs.WeaponChipIDs, Values.WeightOptionMethod(Options.EnemyDropOption_WeaponChips))
+    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=2), IDs.WeaponChipIDs, Values.WeightOptionMethod(Options.EnemyDropOption_WeaponChips))
     
     # Torna
     tornaValTable = copy.deepcopy(valTable) # Copy it before we put in just base game accessory IDs

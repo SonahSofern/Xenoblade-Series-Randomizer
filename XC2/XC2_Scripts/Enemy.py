@@ -129,9 +129,11 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     # Aion, Ophion, and Siren,
     SupermassiveEnemies = [265, 275, 1137, 1449, 1450, 1758]
     MassiveEnemies = [1758, 707] # Nekkel Mammut, Rotbart
+    SmallEnemies = [243] # This malos is given CHR size 3 for no reason
 
     ChangeSize([oldEn, newEn], SupermassiveEnemies, Supermassive)
     ChangeSize([oldEn, newEn], MassiveEnemies, Massive)
+    ChangeSize([oldEn, newEn], SmallEnemies, Normal)
     
     multDict = {
         (Supermassive, Massive): 3,
@@ -147,7 +149,6 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     }
     eRando.EnemySizeMatch(oldEn, newEn, ["Scale"], multDict)
     
-
     # Reset size if scaled higher than massive
     ChangeSize([oldEn, newEn], SupermassiveEnemies, Massive)
     
