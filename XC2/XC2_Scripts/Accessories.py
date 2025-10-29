@@ -5,6 +5,7 @@ from XC2.XC2_Scripts import Options
 
 InvalidSkillEnhancements = [PhyAndEthDefenseUp,ForcedHPPotionOnHit,BlockBoost,FlatBlockBoost,CritBoost, FlatCritBoost, PartyCritMaxAffinity, DamageAndCritUpMaxAffinity,HpPotChanceFor2,EyeOfJustice, BladeSwitchDamageUp, ArtCancel, XStartBattle, YStartBattle, BStartBattle, EvadeDriverArt, EvadeDrainHp,ArtDamageHeal, BladeSwapDamage, FlatAgiBoost,FlatDefBoost,FlatDexBoost, FlatEtherBoost, FlatHPBoost, FlatStrengthBoost, FlatLuckBoost, BladeComboOrbAdder]
 ValidSkills:list[Enhancement] = [x for x in EnhanceClassList if x not in InvalidSkillEnhancements]
+GoldPerRarity = 3500
 
 def RandomizeAccessoryEnhancements():
     with open("./XC2/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as EnhanceFile:
@@ -26,7 +27,7 @@ def RandomizeAccessoryEnhancements():
                 enhancement.RollEnhancement()
                 
                 Acc["Enhance1"] = enhancement.id
-                Acc["Price"] = (enhancement.Rarity+1) * 5000
+                Acc["Price"] = (enhancement.Rarity+1) * GoldPerRarity
                 Acc["Rarity"] = enhancement.Rarity      
                 
                 for skillName in NameFile["rows"]:  # Changes names

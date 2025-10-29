@@ -114,8 +114,8 @@ def GetTreasureBoxValue(tbox, valTable:Values.ValueTable):
         
         item:Values.ValuedItem = valTable.GetByID(itemID)
         if item:
-            amount = tbox[f"itm{i}Num"]
-            totalVal += (item.value * amount)
+            amount = tbox[f"itm{i}Num"] # Not using for now it feels bad to get crappy loot in a legendary chest just because there is an abundance of it
+            totalVal += (item.value)
 
     return int(totalVal)    
 
