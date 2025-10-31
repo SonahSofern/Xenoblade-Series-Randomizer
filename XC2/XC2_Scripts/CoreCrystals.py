@@ -85,7 +85,7 @@ def RandomizeCrystalList():
             chosenBladeID = BladeIDsGroup.SelectRandomMember()
             CrystalCount += 1
             cry["BladeID"] = chosenBladeID
-            cry["Price"] = 20000
+            cry["Price"] = 5000
             cry["Condition"] = 0
             cry["ValueMax"] = 1
             cry["NoMultiple"] = CrystalCount*11 # 11 was here because it worked weirdly the nomultiple value it needed a difference of 10 or something to work

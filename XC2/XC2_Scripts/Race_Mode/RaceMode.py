@@ -1159,7 +1159,7 @@ def ChestTypeMatching():  # Chest type matches Contents
 
 def CTMCDescription():
     CTMCDesc = PopupDescriptions.Description()
-    CTMCDesc.Header(Options.CTMCOption.name)
+    CTMCDesc.Header(Options.ChestOption_CTMCOption.name)
     CTMCDesc.Text("CTMC will let you know at a glance what is inside a chest or barrel. It will help you decide what chests are worthwhile to get.")
     CTMCDesc.Image("CTMC.png", "XC2", 700)
     CTMCDesc.Header("Chest Hierarchies")

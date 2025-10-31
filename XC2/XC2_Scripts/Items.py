@@ -49,7 +49,7 @@ def RandomizeTreasureBoxes():
     tornaValTable = copy.deepcopy(valTable) # Copy it before we put in just base game accessory IDs or Core Crystals
     tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AllowedTornaAccessories, Values.WeightOptionMethod(Options.TreasureChestOption_Accessories))
     
-    valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs, Values.WeightOptionMethod(Options.TreasureChestOption_AuxCores))
+    valTable.PopulateValues(Values.ValueFile("ITM_Orb", mult=0.5), IDs.AuxCoreIDs, Values.WeightOptionMethod(Options.TreasureChestOption_AuxCores))
     valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=5), IDs.CoreCrystals, Values.WeightOptionMethod(Options.TreasureChestOption_CoreCrystals))
     valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Values.WeightOptionMethod(Options.TreasureChestOption_Accessories))
     valTable.PopulateValues(Values.ValueFile("ITM_CrystalList"), IDs.CustomCrystalIDs, Values.WeightOptionMethod(Options.TreasureChestOption_RareBlades))
@@ -77,7 +77,7 @@ def RandomizeEnemyDrops(): # Up top here we define the RandomGroups instead of j
     FerisBeastmeat = [30380]
     tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AllowedTornaAccessories, Values.WeightOptionMethod(Options.EnemyDropOption_Accessories))
     
-    valTable.PopulateValues(Values.ValueFile("ITM_Orb"), IDs.AuxCoreIDs, Values.WeightOptionMethod(Options.EnemyDropOption_AuxCores))
+    valTable.PopulateValues(Values.ValueFile("ITM_Orb", mult=0.5), IDs.AuxCoreIDs, Values.WeightOptionMethod(Options.EnemyDropOption_AuxCores))
     valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=3), IDs.CoreCrystals, Values.WeightOptionMethod(Options.EnemyDropOption_CoreCrystals))
     valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Values.WeightOptionMethod(Options.EnemyDropOption_Accessories))
     
@@ -115,7 +115,7 @@ def GetTreasureBoxValue(tbox, valTable:Values.ValueTable):
         item:Values.ValuedItem = valTable.GetByID(itemID)
         if item:
             amount = tbox[f"itm{i}Num"] # Not using for now it feels bad to get crappy loot in a legendary chest just because there is an abundance of it
-            totalVal += (item.value)
+            totalVal += (item.value) # * amount
 
     return int(totalVal)    
 
@@ -146,11 +146,12 @@ def ChestTypeMatchesContentsValue():
             
     with open("XC2/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as tboxFile:
         tboxData = json.load(tboxFile)
-        for rar in Rarities:
-            for box in tboxData["rows"]:
-                box["initWaitTimeRand"] = 0 
-                box["initWaitTime"] = 0 
-                box["TBOX_open_starttime"] = 0 
+        for box in tboxData["rows"]:
+            box["initWaitTimeRand"] = 0 
+            box["initWaitTime"] = 0 
+            box["TBOX_open_starttime"] = 0 
+            box["flag"]["TBOX_category"] = 1 
+            for rar in Rarities:
                 if box["$id"] == rar.rscId:
                     box["MSG_ID"] = rar.msId
                     break

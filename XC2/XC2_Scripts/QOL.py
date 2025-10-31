@@ -33,25 +33,25 @@ def AddMovespeedDeed():
     #JSONParser.ChangeJSONLine(["common/FLD_OwnerBonusParam.json"],[1],["Max"], 1000)
     #Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", ["FSID", "FSID2"], 0)
     # Torna Exclusive debug
-    CurrentNameID = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
-    BonusMovespeed = Options.StartwithIncreasedMovespeedOption.GetSpinbox() * 10
-    JSONParser.ChangeJSONLine(["common/ITM_PreciousList.json"], [25249], ["Name"], CurrentNameID)
-    JSONParser.ChangeJSONLine(["common/ITM_PreciousList.json"], [25249], ["Caption"], CurrentNameID + 1)
-    JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [1], ["Value"], BonusMovespeed)
-    JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [1], ["Type"], 1)
-    JSONParser.ChangeJSONLine(["common/FLD_OwnerBonusParam.json"], [1], ["Max"], 750)
-    with open("./XC2/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
-        data = json.load(file)
-        data["rows"].append({"$id": CurrentNameID, "style": 36, "name": "Movespeed Deed"})
-        data["rows"].append({"$id": CurrentNameID + 1, "style": 61, "name": f"Increases running speed by {BonusMovespeed}%."})
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    CreateDLCtoSetFlag(["Movespeed Deed"], [65000], [1], [25249], [1])
+    # CurrentNameID = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
+    # JSONParser.ChangeJSONLine(["common/ITM_PreciousList.json"], [25249], ["Name"], CurrentNameID)
+    # JSONParser.ChangeJSONLine(["common/ITM_PreciousList.json"], [25249], ["Caption"], CurrentNameID + 1)
+    # JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [1], ["Value"], BonusMovespeed)
+    # JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [1], ["Type"], 1)
+    # JSONParser.ChangeJSONLine(["common/FLD_OwnerBonusParam.json"], [1], ["Max"], 750)
+    # with open("./XC2/JsonOutputs/common_ms/itm_precious.json", 'r+', encoding='utf-8') as file: # Changes name text file
+    #     data = json.load(file)
+    #     data["rows"].append({"$id": CurrentNameID, "style": 36, "name": "Movespeed Deed"})
+    #     data["rows"].append({"$id": CurrentNameID + 1, "style": 61, "name": f"Increases running speed by {BonusMovespeed}%."})
+    #     file.seek(0)
+    #     file.truncate()
+    #     json.dump(data, file, indent=2, ensure_ascii=False)
+    # CreateDLCtoSetFlag(["Movespeed Deed"], [65000], [1], [25249], [1])
     
     # First enemy drops movespeed deed
+    BonusMovespeed = Options.StartwithIncreasedMovespeedOption.GetSpinbox() * 10
     JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [9], ["Value"], BonusMovespeed)
-    JSONParser.ChangeJSONLine(["common/CHR_EnArrange.json"], [1430], ["PreciousID"], 25257)
+    JSONParser.ChangeJSONLine(["common/CHR_EnArrange.json"], [1430 , 179], ["PreciousID"], 25257)
 
 def FixIssuesCausedByNGPlusFlag():
     CreateDLCtoSetFlag(["Driver Skill Tree Key"], [48589], Condition = [1853]) # 1853 is a pre-existing flag that requires the Scenario to be 2001 or higher (when you get pyra)
