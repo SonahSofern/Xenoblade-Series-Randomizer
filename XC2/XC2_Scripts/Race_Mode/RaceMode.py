@@ -188,7 +188,6 @@ def RaceModeChanging():
     print("Filling Chests with Custom Loot")
     RaceModeLootChanges(NGPlusBladeCrystalIDs)
     StackableCoreCrystalsandKeyItems()
-    CoreCrystals.ApplyNewBladeNames()
     print("Reducing amount of grinding")
     LessGrinding()
     if NGPlusBladeCrystalIDs != None:

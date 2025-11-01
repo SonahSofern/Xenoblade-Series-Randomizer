@@ -37,6 +37,8 @@ def BaseGameStorySkip(skippable, isTorna = "", newTaskID = 3, newTaskType = 1):
         for data in testData["rows"]:
             if data["$id"] in skippable:
                 for i in range(1,5):
+                    if data[f"TaskID{i}"] == 0:
+                        break
                     data[f"TaskID{i}"] = newTaskID
                     data[f"TaskType{i}"] = newTaskType
         JSONParser.CloseFile(testData, testFile)
