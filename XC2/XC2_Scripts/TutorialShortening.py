@@ -4,66 +4,89 @@ from scripts import Helper, JSONParser
 from XC2.XC2_Scripts import Options, IDs, QOL
 
 def ShortenedTutorial():
-    print("Shortening Tutorials")
     Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Condition.json", ["cond"], 1)
-    with open("./XC2/JsonOutputs/common_gmk/FLD_Tutorial.json", 'r+', encoding='utf-8') as file: # part of core crystal tutorial
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] not in [65, 67, 70]:
-                row["ScenarioFlagMin"] = 10048
-                row["QuestFlag"] = 0
-                row["QuestFlagMin"] = 0
-                row["QuestFlagMax"] = 0
-                row["SysMultiFlag"] = 0
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/JsonOutputs/common_gmk/RSC_GmkSetList.json", 'r+', encoding='utf-8') as file: # part of core crystal tutorial
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["tutorial"] != "ma05a_tutorial":
-                row["tutorial"] = ""
-                row["tutorial_bdat"] = ""
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+    CoreCrystalTutorials()
     EnemyRandoLogic.KeyItemsReAdd()
-    with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: #allows waypoints to work, and us to skip Melolo
+    MeloloWaypoint()
+    SpraineTalk()
+    Tutorials()
+    QOL.BaseGameStorySkip([7,8,9,10,11,13,15]) #10 # Can just skip some story quests by tying them to an early event
+    removables = ["aoc_tut14", "aoc_tut11", "aoc_tut12", "aoc_tut26", "aoc_tut22", "aoc_tut20", "aoc_tut15", "aoc_tut17"]
+    FieldTutorials(removables)                
+    BattleTutorials()
+    TornaQuestTutorials(removables)
+    BFTutorials()
+    AreaReloadSkip()
+    MinimizeTutorialBoxes()
+    
+def RaceModeTutorialSkips():
+    pass 
+
+
+
+
+def MinimizeTutorialBoxes():
+    with open("XC2/JsonOutputs/common/MNU_Tutorial_Tips.json", 'r+', encoding='utf-8') as tipFile: # Minimizing the number of boxes a tutorial has
+        tipData = json.load(tipFile)
+        for tip in tipData["rows"]:
+            for i in range(1,4):
+                tip[f"window_y{i}"] = 0
+                tip[f"message{i}"] = 0
+        JSONParser.CloseFile(tipData, tipFile)
+
+def AreaReloadSkip():
+    with open("./XC2/JsonOutputs/common_gmk/ma40a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: # skipping an area reload
         data = json.load(file)
         for row in data["rows"]:
-            if row["$id"] <= 2005:
-                row["ScenarioFlagMin"] = 1003
+            if row["$id"] in [40053, 40054, 40055, 40056]:
+                row["ScenarioFlagMin"] = row["ScenarioFlagMax"] = 11130
+            #elif row["$id"] == 40001:
+            #    row["ScenarioFlagMin"] = row["ScenarioFlagMax"] = 11004
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: #this makes it so spraine will talk to us no matter how small the flag
+
+def BFTutorials():
+    with open("./XC2/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # removing more tutorials
         data = json.load(file)
+        removables = ["tut_sys26", "tut_sys22", "tut_sys14", "tut_sys02", "tut_btl23", "aoc_tut27"] # "aoc_tut24" plays right at the start but unlocks your current object menu and some other stuff
         for row in data["rows"]:
-            if row["$id"] == 2045:
-                row["ScenarioFlagMin"] = 10047
-                row["ScenarioFlagMax"] = 10048
-            if row["$id"] == 2046:
-                row["ScenarioFlagMin"] = 1008
-                row["ScenarioFlagMax"] = 1012
-                break
+            if row["scriptName"] in removables:
+                row["scriptName"] = ""
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-    # with open("./XC2/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: # shortens opening section
-    #     data = json.load(file)
-    #     for row in data["rows"]:
-    #         if row["$id"] == 7: #if we go to argentum
-    #             row["NextQuestA"] = 9 # then go explore argentum
-    #         if row["$id"] == 10: #if we go to bana's room
-    #             row["NextQuestA"] = 12 # then complete the big prep quest
-    #         if row["$id"] == 13: # if we rest at lemour inn (this seems to make the flags go away that were keeping you from shopping and going further upstairs in argentum)
-    #             row["NextQuestA"] = 15 # then talk to spraine
-    #         if row["$id"] == 15: #talk to spraine
-    #             row["NextQuestA"] = 17 #sets next quest to be to go to the top of the Maelstrom
-    #             break
-    #     file.seek(0)
-    #     file.truncate()
-    #     json.dump(data, file, indent=2, ensure_ascii=False)
+
+def TornaQuestTutorials(removables):
+    with open("./XC2/JsonOutputs/common/EVT_listQst01.json", 'r+', encoding='utf-8') as file: # removing torna tutorials
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["scriptName"] in removables:
+                row["scriptName"] = ""
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+def BattleTutorials():
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial.json", ["script_file"], "aoc_challenge_tutorial") # Shortens battle tutorials
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial.json", ["start_id"], 0)
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial.json", ["param1"], 0)
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["param1"], 0)
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["script_file"], "aoc_challenge_tutorial")
+    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["start_id"], 0)
+
+def FieldTutorials(removables):
+    with open("./XC2/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing tutorials in field
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 30005:
+                row["chgEdID"] = 30007
+            if "tut_sys" in row["scriptName"] or row["scriptName"] in removables:
+                row["scriptName"] = ""
+                row["scriptStartId"] = 0
+        JSONParser.CloseFile(data, file)
+
+def Tutorials():
     with open("./XC2/JsonOutputs/common/FLD_QuestListNormal.json", 'r+', encoding='utf-8') as file: #shortens tutorials
         data = json.load(file)
         for row in data["rows"]:
@@ -107,73 +130,53 @@ def ShortenedTutorial():
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-    # Can just skip some story quests by tying them to the same event as Killing crustip
-    QOL.BaseGameStorySkip([7,8,9,10,11,13,15]) #10
-        
-    with open("./XC2/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing tutorials in field
-        data = json.load(file)
-        removables = ["aoc_tut14", "aoc_tut11", "aoc_tut12", "aoc_tut26", "aoc_tut22", "aoc_tut20", "aoc_tut15", "aoc_tut17"]
-        for row in data["rows"]:
-            if row["$id"] == 30005:
-                row["chgEdID"] = 30007
-            if "tut_sys" in row["scriptName"] or row["scriptName"] in removables:
-                row["scriptName"] = ""
-                row["scriptStartId"] = 0
-        JSONParser.CloseFile(data, file)                
-        
-    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial.json", ["script_file"], "aoc_challenge_tutorial") # Shortens battle tutorials
-    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial.json", ["start_id"], 0)
-    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial.json", ["param1"], 0)
-    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["param1"], 0)
-    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["script_file"], "aoc_challenge_tutorial")
-    Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Tutorial_Ira.json", ["start_id"], 0)
-
-    with open("./XC2/JsonOutputs/common/EVT_listQst01.json", 'r+', encoding='utf-8') as file: # removing torna tutorials
+def SpraineTalk():
+    with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_NpcPop.json", 'r+', encoding='utf-8') as file: #this makes it so spraine will talk to us no matter how small the flag
         data = json.load(file)
         for row in data["rows"]:
-            if row["scriptName"] in removables:
-                row["scriptName"] = ""
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
-    
-    with open("./XC2/JsonOutputs/common/EVT_listBf.json", 'r+', encoding='utf-8') as file: # removing more tutorials
-        data = json.load(file)
-        removables = ["tut_sys26", "tut_sys22", "tut_sys14", "tut_sys02", "tut_btl23", "aoc_tut27"] # "aoc_tut24" plays right at the start but unlocks your current object menu and some other stuff
-        for row in data["rows"]:
-            if row["scriptName"] in removables:
-                row["scriptName"] = ""
+            if row["$id"] == 2045:
+                row["ScenarioFlagMin"] = 10047
+                row["ScenarioFlagMax"] = 10048
+            if row["$id"] == 2046:
+                row["ScenarioFlagMin"] = 1008
+                row["ScenarioFlagMax"] = 1012
+                break
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-    #with open("./XC2/JsonOutputs/common/EVT_chgBf01.json", 'r+', encoding='utf-8') as file: # skipping an area reload
-    #    data = json.load(file)
-    #    for row in data["rows"]:
-    #        if row["$id"] == 10910:
-    #            row["id"] = 11004
-    #    file.seek(0)
-    #    file.truncate()
-    #    json.dump(data, file, indent=2, ensure_ascii=False)
-
-    with open("./XC2/JsonOutputs/common_gmk/ma40a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: # skipping an area reload
+def MeloloWaypoint():
+    with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: #allows waypoints to work, and us to skip Melolo
         data = json.load(file)
         for row in data["rows"]:
-            if row["$id"] in [40053, 40054, 40055, 40056]:
-                row["ScenarioFlagMin"] = row["ScenarioFlagMax"] = 11130
-            #elif row["$id"] == 40001:
-            #    row["ScenarioFlagMin"] = row["ScenarioFlagMax"] = 11004
+            if row["$id"] <= 2005:
+                row["ScenarioFlagMin"] = 1003
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
-        
-    with open("XC2/JsonOutputs/common/MNU_Tutorial_Tips.json", 'r+', encoding='utf-8') as tipFile: # Minimizing the number of boxes a tutorial has
-        tipData = json.load(tipFile)
-        for tip in tipData["rows"]:
-            for i in range(1,4):
-                tip[f"window_y{i}"] = 0
-                tip[f"message{i}"] = 0
-        JSONParser.CloseFile(tipData, tipFile)
+
+def CoreCrystalTutorials():
+    with open("./XC2/JsonOutputs/common_gmk/FLD_Tutorial.json", 'r+', encoding='utf-8') as file: # part of core crystal tutorial
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] not in [65, 67, 70]:
+                row["ScenarioFlagMin"] = 10048
+                row["QuestFlag"] = 0
+                row["QuestFlagMin"] = 0
+                row["QuestFlagMax"] = 0
+                row["SysMultiFlag"] = 0
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/JsonOutputs/common_gmk/RSC_GmkSetList.json", 'r+', encoding='utf-8') as file: # part of core crystal tutorial
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["tutorial"] != "ma05a_tutorial":
+                row["tutorial"] = ""
+                row["tutorial_bdat"] = ""
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def RaceModeTutorialShortening(): # we need to call this from the race mode function
     ShortenedTutorial()
