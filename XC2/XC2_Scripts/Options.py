@@ -34,7 +34,7 @@ Tabs = {
     Funny: "😄 Funny",
     CosmeticsTab: "👚 Cosmetics",
     GameModeTab: "♘ Game Modes",
-    TornaTab: "🞛 Torna"
+    TornaTab: "🞛 Logical Torna"
 }
 
 weightsSpinDescription = "Weights ↓"
