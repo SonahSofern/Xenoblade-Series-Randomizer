@@ -2,25 +2,6 @@ import json, random, scripts.PopupDescriptions
 from XC2.XC2_Scripts.Enhancements import *
 from XC2.XC2_Scripts import Options
 
-def EnemyArts(spinbox):
-    Arts = {
-        "Skin Upgrade": 176,
-        "Life Plant": 393,
-        "Reset Punch": 50,
-        "Element Breaker": 990,
-        "Cold Era": 582
-    }
-    with open("./XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as EnFile:
-        EnData = json.load(EnFile) # Adds a single new art to enemies to art 16
-        for en in EnData["rows"]:
-            if spinbox < random.randrange(0,100): # Spinbox value check
-                continue
-            en["ArtsNum16"] = random.choice(list(Arts.values()))
-        EnFile.seek(0)
-        EnFile.truncate()
-        json.dump(EnData, EnFile, indent=2, ensure_ascii=False)  
-
-
 def EnemyArtAttributes():
     with open("./XC2/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as EnArtsFile:
         with open("./XC2/JsonOutputs/common/BTL_Arts_BlSp.json", 'r+', encoding='utf-8') as EnBlArtsFile:
@@ -104,7 +85,7 @@ def FindValidChanges(art, isReactions, isDebuffs, isBuffs, isEnhancements, isAOE
         ValidChanges.append(lambda: Debuff(art))           # Debuff
     if isBuffs and art["ArtsBuff"] == 0: # Change arts that dont already do buff stuff (Current AOE is placed only on these things so gotta fix that)
         ValidChanges.append(lambda: Buff(art))
-    if isEnhancements and (art.get("Enhance") != None) and art["Enhance"] == 0 and art["Target"] == 0 and art["ArtsType"] != 4: # Add enhancements only to arts without them and that target enemies
+    if isEnhancements and (art.get("Enhance") != None) and art["Enhance"] == 0 and art["Target"] == 0 and art["ArtsType"] in [1,2]: # Add enhancements only to arts without them and that damage enemies
         ValidChanges.append(lambda: Enhancements(art))
     if isAOE and art["RangeType"] == 0 and art["ArtsType"] in [1,2,3]: # Make sure art is single target and a physical ether or healing move
         ValidChanges.append(lambda: AOE(art))
@@ -117,7 +98,7 @@ def FindValidChanges(art, isReactions, isDebuffs, isBuffs, isEnhancements, isAOE
 
 ValidSkills = []
 class EnemyArtEnhancements(Enhancement):
-    def __init__(self, name, enhancement, para1 = [0,0,0,0],para2 = [0,0,0,0], isRounded = True):
+    def __init__(self, name, enhancement:Enhancement, para1 = [0,0,0,0],para2 = [0,0,0,0], isRounded = True):
         self.name = name
         self.EnhanceEffect = enhancement.EnhanceEffect
         self.Caption = 0

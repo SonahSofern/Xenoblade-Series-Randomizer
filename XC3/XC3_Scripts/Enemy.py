@@ -63,7 +63,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                     if StaticEnemyData == []:
                         Bandaids()
                         
-                    BreakTutorial()
+                    BreakTutorial(eRando)
 
                     JSONParser.CloseFile(eneData, eneFile)
                     JSONParser.CloseFile(paramData, paramFile)

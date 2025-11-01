@@ -212,10 +212,8 @@ class EnemyRandomizer():
             return vios
 
         # Iterate over each violation which applies to the current fight
-        vios = GetViolations()
+        vios:list[Violation] = GetViolations()
         for vio in vios:
-            vio.ResolveLevelDiff(oldEn)
-
             oldParams = self.FindParam(newEn)
             allParamChanges = []
 

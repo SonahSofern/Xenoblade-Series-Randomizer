@@ -53,6 +53,10 @@ def AddMovespeedDeed():
     JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [9], ["Value"], BonusMovespeed)
     JSONParser.ChangeJSONLine(["common/CHR_EnArrange.json"], [1430 , 179], ["PreciousID"], 25257)
 
+def CollectionRange():
+    JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [10], ["Value"], 150)
+    JSONParser.ChangeJSONLine(["common/CHR_EnArrange.json"], [1429 , 180], ["PreciousID"], 25258)
+
 def FixIssuesCausedByNGPlusFlag():
     CreateDLCtoSetFlag(["Driver Skill Tree Key"], [48589], Condition = [1853]) # 1853 is a pre-existing flag that requires the Scenario to be 2001 or higher (when you get pyra)
     # if not Options.EnemiesOption.GetState(): # we need to force the enemies to drop their item, if enemy randomization is off

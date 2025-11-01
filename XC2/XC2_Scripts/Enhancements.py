@@ -208,7 +208,7 @@ AllyDownDamageUp = Enhancement("Comeback",41,42, Mega, DisTag="Strength ↑")
 GuardAnnulAttack = Enhancement("Pierce",42,43, Medium, DisTag="Pierce")
 AnnulReflect = Enhancement("Phase",43,44, Medium, DisTag="Phase")
 DamageUpWhenHpDown = Enhancement("Desperation",44,45, Small, Large, DisTag="Desperation Attack")
-BattleDurationDamageUp = Enhancement("Delayed",45,46, High, DisTag="Strength ↑") # Uses weird parameter see above
+BattleDurationDamageUp = Enhancement("Delayed",45,46, High) # Uses weird parameter see above
 DamageUpOnEnemyKill = Enhancement("Massacre",46,47, Medium, DisTag="Damage ↑", max=[100,600])
 BreakDurationUp = Enhancement("Break",47,48, Medium, DisTag="Break Duration ↑")
 ToppleDurationUp = Enhancement("Topple",48,49, Medium, DisTag="Topple Duration ↑")

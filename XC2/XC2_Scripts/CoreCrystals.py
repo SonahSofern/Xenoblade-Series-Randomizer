@@ -45,7 +45,7 @@ def FixRoc(): # Fixes Roc softlock as you need to pull him legit for a quest
                 bl["limited_item"] = rocCrystalId
         JSONParser.CloseFile(blData, blFile)
 
-def FixOpeningSoftlock():
+def FixOpeningSoftlock(): # Game doesnt like it if we open cores before a certain point in the game iirc
     StartingCondListRow = Helper.GetMaxValue("XC2/JsonOutputs/common/FLD_ConditionList.json", "$id") + 1
     StartingCondScenarioRow = Helper.GetMaxValue("XC2/JsonOutputs/common/FLD_ConditionScenario.json", "$id") + 1
     with open("XC2/JsonOutputs/common/FLD_ConditionList.json", 'r+', encoding='utf-8') as file:
@@ -73,11 +73,6 @@ def RandomizeCrystalList():
     with open("XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as cryFile:
         cryData = json.load(cryFile)
         for cry in cryData["rows"]:
-            
-            if cry in [45011,45012,45013]: # Turns off rare blade pulls
-                cry["RareTableProb"] = 0
-                cry["RareBladeRev"] = 0
-                cry["AssureP"] = 0
             
             if cry["$id"] not in IDs.CustomCrystalIDs:
                 continue

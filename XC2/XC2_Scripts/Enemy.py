@@ -12,7 +12,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
     GroupFightViolations = GetGroupFightViolations()
     SoloFightViolations = GetSoloFightViolations()
     paramRev = ["ParamRev"] # https://www.xenoserieswiki.org/wiki/Module:XC2_enemy_stat
-    retainNonArrangeKeys = ["FldDmgType" ,"FlyHeight", "ActType"]
+    retainNonArrangeKeys = ["FldDmgType"]
+    actKeys = ["FlyHeight", "ActType"]
     ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev', "HpOver"] + paramRev
     aggroKeys = ['Detects', 'SearchRange', 'SearchAngle', 'SearchRadius', 'BatInterval', 'BatArea', 'BatAreaType']
     isMatchSize = matchSize.GetState()
@@ -28,7 +29,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                     eneData = json.load(eneFile)
                     artData = json.load(artFile)
 
-                    eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, artData, permanentBandaids=[lambda: EarthBreathNerf(), lambda: AeshmaCoreHPNerf(paramData), lambda: GortOgreUppercutRemoval(paramData)])
+                    eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, artData, permanentBandaids=[lambda: AeshmaCoreHPNerf(paramData), lambda: GortOgreUppercutRemoval(paramData)])
 
                     if StaticEnemyData == []:
                         StaticEnemyData = eRando.GenEnemyData()
@@ -54,14 +55,13 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
 
                         CloneEnemiesDefeatCondition(oldEn, newEn)
 
-                        eRando.ActTypeFix(newEn, oldEn)
-                        eRando.RetainNonArrangeStats(newEn, oldEn, retainNonArrangeKeys)                    
+                        eRando.RetainNonArrangeStats(newEn, oldEn, retainNonArrangeKeys + actKeys)                    
 
                         # Blade Act Fix
                         if newEn["EnemyBladeID"] != 0:
                             for enBlade in eRando.arrangeData["rows"]:
                                 if enBlade['$id'] == newEn['EnemyBladeID']:
-                                    CreateBlade(enBlade, oldEn, newEn, eRando)
+                                    CreateBlade(enBlade, oldEn, newEn, eRando, actKeys)
                                     break
                         
                         if isBalanceStats:
@@ -98,13 +98,13 @@ def RerollTornaBladedEnemies(oldEn, newEn, eRando:e.EnemyRandomizer):
                 break
     return newEn
 
-def CreateBlade(enBlade, oldEn, newEn, eRando:e.EnemyRandomizer): # Because there is only 1 blade referenced for each enemy we have to create new blades (Since blades are not referenced in gimmick files it is fine)
+def CreateBlade(enBlade, oldEn, newEn, eRando:e.EnemyRandomizer, keys): # Because there is only 1 blade referenced for each enemy we have to create new blades (Since blades are not referenced in gimmick files it is fine)
     newBlade = copy.deepcopy(enBlade)
     newID =  len(eRando.arrangeData["rows"]) + 1
     newBlade["$id"] = newID
     eRando.arrangeData["rows"].append(newBlade)
     newEn["EnemyBladeID"] = newID
-    eRando.ActTypeFix(newBlade, oldEn)
+    eRando.RetainNonArrangeStats(newBlade, oldEn, keys)                    
     EnemySizeHelper(oldEn, newBlade, eRando)
 
 def RedRingRemoval():
@@ -187,7 +187,7 @@ def GetEnemyCounts():
  # Solo Fight Violations
 def GetSoloFightViolations():
     soloFightIDs = [179, 182, 184, 185, 186, 187, 189, 190, 258, 260, 262, 256, 604, 1431, 1432, 1433] # Includes both 1 and 2 person party fights
-    gortAndGoons = e.Violation([1437, 1438, 1439, 1440], paramMods= [e.ParamModification(['HpMaxRev'], C=0.3)]) # Gort and his gooners vs Lora+Haze
+    gortAndGoons = e.Violation([1437, 1438, 1439, 1440], paramMods= [e.ParamModification(['HpMaxRev', 'StrengthRev', 'PowEtherRev'], C=0.3)]) # Gort and his gooners vs Lora+Haze
     
     
     SoloUniqueMonstersViolations = e.Violation(soloFightIDs, IDs.UniqueMonsters)
@@ -250,18 +250,18 @@ def GortOgreUppercutRemoval(paramData): # Gort 2's Ogre Uppercut seems to be bug
             row["ArtsNum4"] = 963 # replaced Ogre Uppercut with a second instance of Ogre Flame
             break
 
-def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy happens to show up early. Nerfed by 3/4ths.
-    with open("XC2/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 218:
-                row["DmgMgn1"] = 500
-                row["DmgMgn2"] = 500
-                row["DmgMgn3"] = 500
-                row["DmgMgn4"] = 500
-                row["DmgMgn5"] = 500
-                row["DmgMgn6"] = 500
-        JSONParser.CloseFile(data, file)
+# def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy happens to show up early. Nerfed by 3/4ths.
+#     with open("XC2/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as file:
+#         data = json.load(file)
+#         for row in data["rows"]:
+#             if row["$id"] == 218:
+#                 row["DmgMgn1"] = 500
+#                 row["DmgMgn2"] = 500
+#                 row["DmgMgn3"] = 500
+#                 row["DmgMgn4"] = 500
+#                 row["DmgMgn5"] = 500
+#                 row["DmgMgn6"] = 500
+#         JSONParser.CloseFile(data, file)
     
 def SummonsFix(eneData):
     Lora = 17
