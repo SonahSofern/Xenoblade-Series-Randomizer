@@ -21,7 +21,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     RetryBattleLandmark = "<9A220E4D>"
     PostBattleConqueredPopup = "CatMain" # Currently not using it has weird effects fights take a long time to end after enemy goes down without it happens eithery way with UMs so something is wrong with UMS
     ignoreKeys = ["$id", "ID", PostBattleConqueredPopup, "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "FlgFixed", "IdMove", "SpBattle", "FlgNoVanish", "FlgSpDead" , "KillEffType", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"] + Aggro
-    actKeys = ["ActType"]
+    retainNonArrangeKeys = ["ActType", "LowerLimitHP"]
     with open("XC3/JsonOutputs/fld/FLD_EnemyData.json", 'r+', encoding='utf-8') as eneFile:
         with open("XC3/JsonOutputs/btl/BTL_Enemy.json", 'r+', encoding='utf-8') as paramFile:
             with open("XC3/JsonOutputs/btl/BTL_EnRsc.json", 'r+', encoding='utf-8') as rscFile:
@@ -32,7 +32,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                     artData = json.load(artFile)
                     isMatchSize = isMatchSizeOption.GetState()
 
-                    eRando = Enemy.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "Resource", "IdBattleEnemy", eneData, paramData, rscData, artData, actKeys=actKeys)
+                    eRando = Enemy.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "Resource", "IdBattleEnemy", eneData, paramData, rscData, artData)
 
                     if StaticEnemyData == []:
                         StaticEnemyData = eRando.GenEnemyData()
@@ -43,14 +43,12 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
 
                         newEn = eRando.CreateRandomEnemy(StaticEnemyData)
 
-                        eRando.ActTypeFix(newEn, en) # Flying Enemies and some enemies in Erythia will still fall despite act type fix
-
-                        HPLimitFix(en, newEn, eRando)
+                        eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys) # Flying Enemies and some enemies in Erythia will still fall despite act type fix
 
                         if isBossGroupBalancing:
                             eRando.BalanceFight(en, newEn, GroupFightViolations, EnemyCounts)
 
-                        if isMatchSizeOption.GetState():
+                        if isMatchSize:
                             EnemySizeHelper(en, newEn, eRando)
 
                         IntroFightBalances(en, newEn, eRando)
@@ -63,20 +61,13 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                         group.RefreshCurrentGroup()
 
                     if StaticEnemyData == []:
-                        Bandaids(eRando)
-
-                    Bandaids(eRando)
+                        Bandaids()
+                        
+                    BreakTutorial()
 
                     JSONParser.CloseFile(eneData, eneFile)
                     JSONParser.CloseFile(paramData, paramFile)
                     JSONParser.CloseFile(rscData, rscFile)
-
-def HPLimitFix(en, newEn, eRando:Enemy.EnemyRandomizer):
-    oldRSC = eRando.FindParam(en)
-    newRSC = eRando.FindParam(newEn)
-    
-    if oldRSC["LowerLimitHP"] != newRSC["LowerLimitHP"]:  
-        eRando.ChangeStats([newEn], [("LowerLimitHP", oldRSC["LowerLimitHP"])])
 
 def SummonFix(): # For now this is lower priority for how difficult it would be to fix so im removing summons
     with open("XC3/JsonOutputs/btl/BTL_EnSummon.json", 'r+', encoding='utf-8') as summonFile:
@@ -177,8 +168,7 @@ def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
             hpChange = oldEnParam["StRevHp"]
         eRando.ChangeStats([newEn], [("StRevHp", hpChange),("StRevStr", oldEnParam["StRevStr"]),("StRevHeal", oldEnParam["StRevHeal"]),("StRevDex", oldEnParam["StRevDex"]),("StRevAgi", oldEnParam["StRevAgi"])])
     
-def Bandaids(eRando):
-    BreakTutorial(eRando)
+def Bandaids():
     SummonFix()
     
 def EnemyDesc(name):

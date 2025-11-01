@@ -51,23 +51,23 @@ class Violation:
         self.artMods = artMods
         self.lvDiff = lvDiff
 
-    def ResolveLevelDiff(self, enemy):
-        if self.lvDiff == 0:
-            return
+    # def ResolveLevelDiff(self, enemy): # Not using because level gap changes XP rewards
+    #     if self.lvDiff == 0:
+    #         return
 
-        if self.lvDiff < 0:  # If we are losing levels only let them lose up to half their original level
-            mult = 0.6
-        else:
-            mult = 1.25
-        levelCap = max(int(enemy["Lv"] * mult), 1)
-        newLv = max(enemy["Lv"] + self.lvDiff, levelCap)
-        #print(f"Resolved violation from level {enemy["Lv"]} to level: {newLv} for enemyID={enemy["$id"]}")
+    #     if self.lvDiff < 0:  # If we are losing levels only let them lose up to half their original level
+    #         mult = 0.6
+    #     else:
+    #         mult = 1.25
+    #     levelCap = max(int(enemy["Lv"] * mult), 1)
+    #     newLv = max(enemy["Lv"] + self.lvDiff, levelCap)
+    #     #print(f"Resolved violation from level {enemy["Lv"]} to level: {newLv} for enemyID={enemy["$id"]}")
 
-        enemy["Lv"] = newLv
+    #     enemy["Lv"] = newLv
         
         
 class EnemyRandomizer():
-    def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, artData, scaleKey = "Scale", permanentBandaids = [], actKeys = [], duringRandomizationBandaids = []):
+    def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, artData, scaleKey = "Scale", permanentBandaids = [], duringRandomizationBandaids = []):
         # Enemy Groups
         self.NormalIDs = NormalIDs
         self.UniqueIDs = UniqueIDs
@@ -84,7 +84,6 @@ class EnemyRandomizer():
         self.rscKey = rscKey
         self.paramKey = paramKey
         self.scaleKey = scaleKey
-        self.actKeys = actKeys
         
         # File Data
         self.paramData = paramData 
@@ -323,17 +322,27 @@ class EnemyRandomizer():
         for key in keysList:
             newEn[key] = max(int(defScale * newMult), minScale) 
         
-    def ActTypeFix(self, newEnemy, oldEnemy): 
-        '''Changes enemies act types to accommodate random spawn locations'''
-        oldRSC = self.FindRSC(oldEnemy)
-        newRSC = self.FindRSC(newEnemy)
+    def RetainNonArrangeStats(self, newEn, oldEn, keys):
+        '''For retaining the old enemies stats that aren't controlled by enarrange, automatically handles flag nested dicts'''
+        oldRSC = self.FindRSC(oldEn)
+        oldPar = self.FindParam(newEn)
+        keyVals = []
         
-        actKeysList = []
-        for key in self.actKeys:
-            actKeysList.append((key, oldRSC[key]))
+        def FlagHandler(key, dict):
+            if key in dict:
+                return dict[key]
+            elif ("flag" in dict) and (key in dict["flag"]):
+                return dict["flag"][key]
+            else:
+                return None
         
-        if oldRSC["ActType"] != newRSC["ActType"]:  
-            self.ChangeStats([newEnemy], actKeysList)
+        for key in keys:
+            if key in oldPar:
+                keyVals.append((key, FlagHandler(key, oldPar)))
+            elif key in oldRSC:
+                keyVals.append((key, FlagHandler(key, oldRSC)))
+        
+        self.ChangeStats([newEn], keyVals)
     
     def CreateRandomEnemy(self, StaticEnemyData:list[EnemyGroup]):
         '''Returns a random enemy using weights from the groups generated'''

@@ -12,13 +12,13 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
     GroupFightViolations = GetGroupFightViolations()
     SoloFightViolations = GetSoloFightViolations()
     paramRev = ["ParamRev"] # https://www.xenoserieswiki.org/wiki/Module:XC2_enemy_stat
+    retainNonArrangeKeys = ["FldDmgType" ,"FlyHeight", "ActType"]
     ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev', "HpOver"] + paramRev
     aggroKeys = ['Detects', 'SearchRange', 'SearchAngle', 'SearchRadius', 'BatInterval', 'BatArea', 'BatAreaType']
     isMatchSize = matchSize.GetState()
     isBalanceStats = balanceStats.GetState()
     if isVanillaAggro:
         ignoreKeys.extend(aggroKeys)
-    actKeys = ["FlyHeight", "ActType"]
     with open("XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
         with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
             with open("XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as rscFile:
@@ -28,7 +28,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                     eneData = json.load(eneFile)
                     artData = json.load(artFile)
 
-                    eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, artData, permanentBandaids=[lambda: EarthBreathNerf(), lambda: AeshmaCoreHPNerf(paramData), lambda: GortOgreUppercutRemoval(paramData)], actKeys=actKeys)
+                    eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, artData, permanentBandaids=[lambda: EarthBreathNerf(), lambda: AeshmaCoreHPNerf(paramData), lambda: GortOgreUppercutRemoval(paramData)])
 
                     if StaticEnemyData == []:
                         StaticEnemyData = eRando.GenEnemyData()
@@ -55,6 +55,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                         CloneEnemiesDefeatCondition(oldEn, newEn)
 
                         eRando.ActTypeFix(newEn, oldEn)
+                        eRando.RetainNonArrangeStats(newEn, oldEn, retainNonArrangeKeys)                    
 
                         # Blade Act Fix
                         if newEn["EnemyBladeID"] != 0:
@@ -151,15 +152,6 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     
     # Reset size if scaled higher than massive
     ChangeSize([oldEn, newEn], SupermassiveEnemies, Massive)
-    
-
-def BadlySizedEnemies(arrangeData, enemiesIDs, newChrSize):
-    '''
-    Some enemies in XC2 are improperly sized (ChrSize) 
-    '''
-    for row in arrangeData["rows"]:
-        if row["$id"] in enemiesIDs:
-            row["ChrSize"] = newChrSize
 
 def Bandaids(eneData, isBoss, eRando):
     '''Bandaids intented to be ran once'''
@@ -194,12 +186,14 @@ def GetEnemyCounts():
 
  # Solo Fight Violations
 def GetSoloFightViolations():
-    soloFightIDs = [179, 182, 184, 185, 186, 187, 189, 190, 258, 260, 262, 256, 604, 1431, 1432, 1433, 1437, 1438, 1439, 1440] # Includes both 1 and 2 person party fights
-
+    soloFightIDs = [179, 182, 184, 185, 186, 187, 189, 190, 258, 260, 262, 256, 604, 1431, 1432, 1433] # Includes both 1 and 2 person party fights
+    gortAndGoons = e.Violation([1437, 1438, 1439, 1440], paramMods= [e.ParamModification(['HpMaxRev'], C=0.3)]) # Gort and his gooners vs Lora+Haze
+    
+    
     SoloUniqueMonstersViolations = e.Violation(soloFightIDs, IDs.UniqueMonsters)
     SoloSuperbossMonstersViolations = e.Violation(soloFightIDs, IDs.SuperbossMonsters)
     SoloBossMonsterViolations = e.Violation(soloFightIDs, IDs.BossMonsters)
-    SoloFightViolations:list[e.Violation] = [SoloUniqueMonstersViolations, SoloSuperbossMonstersViolations, SoloBossMonsterViolations]
+    SoloFightViolations:list[e.Violation] = [SoloUniqueMonstersViolations, SoloSuperbossMonstersViolations, SoloBossMonsterViolations, gortAndGoons]
 
     return SoloFightViolations
 
@@ -297,13 +291,13 @@ def SummonsFix(eneData):
 def TornaIntroChanges(e:e.EnemyRandomizer):
     e.ChangeStats([1430, 1429, 1428, 1454], [("HpMaxRev", 50)])
 
-def ForcedWinFights(fights = []):
-    with open("XC2/JsonOutputs/common/FLD_QuestBattle.json", 'r+', encoding='utf-8') as file:
-        data = json.load(file)
-        for row in data["rows"]:
+def ForcedWinFights(fights:list):
+    with open("XC2/JsonOutputs/common/FLD_QuestBattle.json", 'r+', encoding='utf-8') as btlFile:
+        btlData = json.load(btlFile)
+        for row in btlData["rows"]:
             if row["$id"] in fights: #battle on gramps at start of game
                 row["ReducePCHP"] = 1
-        JSONParser.CloseFile(data, file)
+        JSONParser.CloseFile(btlData, btlFile)
 
 def AeshmaCoreHPNerf(paramData): # Aeshma is almost unkillable with its regen active
     for row in paramData["rows"]:
