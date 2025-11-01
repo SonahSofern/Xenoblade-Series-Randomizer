@@ -167,9 +167,10 @@ ShortcutsOption_Tutorials = SubOption("Tutorials Skip", ShortcutsOption, [lambda
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
 ShortcutsOption_IndolQuiz = SubOption("Indol Quiz Skip", ShortcutsOption, [lambda: TutorialShortening.IndolQuizSkip()])
-ShortcutsOption_FeedingAnArmy = SubOption("Feeding an Army Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[293,294,295,296], ["Count"], 0)])
-ShortcutsOption_FeedingAnArmy = SubOption("To Cross a Desert Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[300,301], ["Count"], 0)])
-ShortcutsOption_CommunitySkip = SubOption("Community Levels Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_ConditionFlag.json"],[1394,1395,1396,1397], ["FlagMin"], 1)])
+ShortcutsOption_FeedingAnArmy = SubOption("Feeding an Army Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"], [293,294,295,296], ["Count"], 0)])
+ShortcutsOption_CrossDesert = SubOption("To Cross a Desert Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"], [300,301], ["Count"], 0)])
+ShortcutsOption_CommunitySkip = SubOption("Community Levels Skip", ShortcutsOption, [lambda: QualityOfLife.TornaStorySkip([33, 42])])
+# ShortcutsOption_CommunitySkip = SubOption("Community Levels Skip", ShortcutsOption, [StorySkip([33, 42], "Ira", 106, 8)lambda: JSONParser.ChangeJSONLine(["common/FLD_ConditionFlag.json"],[1394,1395,1396,1397], ["FlagMin"], 1)])
 RemoveFieldSkillsOption = Option("Remove Story Field Skills", QOL, "Removes field skill checks", [lambda: FieldSkills.RemoveFieldSkills(RemoveFieldSkillsOption_AllFieldSkills.GetState())], ["Remove All Field Skills", []])
 RemoveFieldSkillsOption_AllFieldSkills = SubOption("Remove All Field Skills", RemoveFieldSkillsOption)
 EasySkillTreesOption = Option("Easy Affinity Trees", QOL, "Makes trust the only condition for levelling up a blade's affinity tree", [lambda: SkillTrees.BladeSkillTreeShortening()])
@@ -237,17 +238,6 @@ MutuallyExclusivePairing([TornaMainOption, TornaAddHints, TornaObjectColorMatche
 MutuallyExclusivePairing([UMHuntOption], [AccessoryShopsOption, NewGamePlusFlagsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladeWeaponChipsOption, AccessoriesOption, AuxCoresOption, NormalEnemyOption, BossEnemyOption, UniqueEnemyOption, EnemyDropOption, TreasureChestOption, StartwithIncreasedMovespeedOption, FasterDriverSkillTrees, EasySkillTreesOption, FasterLevelsOption, RaceModeOption, RemoveFieldSkillsOption])
 
 MutuallyExclusivePairing([RaceModeOption], [DriversOption, BladesOption, ShortcutsOption, ChestOption])
-
-def test():
-    with open("XC2/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as testFile:
-        skippable = [8,9,10,11,14,17,18]
-        testData = json.load(testFile)
-        for data in testData["rows"]:
-            if data["$id"] in skippable:
-                data["PurposeID"] = 6
-                data["AutoStart"] = 1
-            
-        JSONParser.CloseFile(testData, testFile)
     
 
 # Currently Disabled for Various Reasons

@@ -27,6 +27,21 @@ def CreateDLCtoSetFlag(ItemName: list[str], Flag: list[int], Category: list[int]
         
         JSONParser.CloseFile(data, file)
 
+def TornaStorySkip(skipIDs):
+    BaseGameStorySkip(skipIDs, "Ira", 106, 8)
+
+def BaseGameStorySkip(skippable, isTorna = "", newTaskID = 3, newTaskType = 1):
+    '''Skips story events by tying them to earlier set tasks and making them autoplay'''
+    with open(f"XC2/JsonOutputs/common/FLD_QuestTask{isTorna}.json", 'r+', encoding='utf-8') as testFile:
+        testData = json.load(testFile)
+        for data in testData["rows"]:
+            if data["$id"] in skippable:
+                for i in range(1,5):
+                    data[f"TaskID{i}"] = newTaskID
+                    data[f"TaskType{i}"] = newTaskType
+        JSONParser.CloseFile(testData, testFile)
+
+
 def AddMovespeedDeed():
     # Torna Exclusive debug
     #JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"],[49],["Value"], 500)

@@ -1,7 +1,7 @@
 import json, copy, os
 from XC2.XC2_Scripts.Unused import EnemyRandoLogic
 from scripts import Helper, JSONParser
-from XC2.XC2_Scripts import Options, IDs
+from XC2.XC2_Scripts import Options, IDs, QOL
 
 def ShortenedTutorial():
     print("Shortening Tutorials")
@@ -97,6 +97,19 @@ def ShortenedTutorial():
         file.seek(0)
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
+    with open("./XC2/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: #adjusting tutorial quests
+        data = json.load(file)
+        for row in data["rows"]:
+            if row["$id"] == 11:
+                row["NextQuestA"] = 13
+                break
+        file.seek(0)
+        file.truncate()
+        json.dump(data, file, indent=2, ensure_ascii=False)
+
+    # Can just skip some story quests by tying them to the same event as Killing crustip
+    QOL.BaseGameStorySkip([7,8,9,10,11,13,15]) #10
+        
     with open("./XC2/JsonOutputs/common/EVT_listFev01.json", 'r+', encoding='utf-8') as file: # removing tutorials in field
         data = json.load(file)
         removables = ["aoc_tut14", "aoc_tut11", "aoc_tut12", "aoc_tut26", "aoc_tut22", "aoc_tut20", "aoc_tut15", "aoc_tut17"]
