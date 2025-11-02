@@ -28,7 +28,7 @@ def CreateDLCtoSetFlag(ItemName: list[str], Flag: list[int], Category: list[int]
         JSONParser.CloseFile(data, file)
 
 def TornaStorySkip(skipIDs):
-    BaseGameStorySkip(skipIDs, "Ira", 106, 8)
+    BaseGameStorySkip(skipIDs, "Ira", 634)
 
 def BaseGameStorySkip(skippable, isTorna = "", newTaskID = 3, newTaskType = 1):
     '''Skips story events by tying them to earlier set tasks'''

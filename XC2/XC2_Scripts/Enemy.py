@@ -117,10 +117,12 @@ def RedRingRemoval():
 
 def ChangeSize(enList, targetGroup, newsize):
     for en in enList:
-        if en in targetGroup:
+        if en["$id"] in targetGroup:
             en["ChrSize"] = newsize
   
 def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
+    if oldEn["$id"] in [1632]:
+        pass
     Supermassive = 4
     Massive = 3
     Large = 2
@@ -132,15 +134,16 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     MassiveEnemies = [1758, 707] # Nekkel Mammut, Rotbart
     SmallEnemies = [243] # This malos is given CHR size 3 for no reason
 
+
     ChangeSize([oldEn, newEn], SupermassiveEnemies, Supermassive)
     ChangeSize([oldEn, newEn], MassiveEnemies, Massive)
     ChangeSize([oldEn, newEn], SmallEnemies, Normal)
     
     multDict = {
-        (Supermassive, Massive): 3,
-        (Supermassive, Large): 5,
-        (Supermassive, Normal): 7,
-        (Supermassive, Small): 10,
+        (Supermassive, Massive): 5,
+        (Supermassive, Large): 7,
+        (Supermassive, Normal): 9,
+        (Supermassive, Small): 12,
         (Massive, Large): 2,
         (Massive, Normal): 3,
         (Massive, Small): 5,
