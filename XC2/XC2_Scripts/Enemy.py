@@ -129,8 +129,8 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     Normal = 1
     Small = 0
 
-    # Aion, Ophion, and Siren,
-    SupermassiveEnemies = [265, 275, 1137, 1449, 1450, 1758]
+    # Aion, Ophion, and Siren, Cloud sea king ken
+    SupermassiveEnemies = [265, 275, 1137, 1449, 1450, 1758 ,1786, 1110]
     MassiveEnemies = [1758, 707] # Nekkel Mammut, Rotbart
     SmallEnemies = [243] # This malos is given CHR size 3 for no reason
 
