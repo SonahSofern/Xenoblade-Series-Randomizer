@@ -4,14 +4,13 @@ from scripts import Helper, JSONParser
 from XC2.XC2_Scripts import Options, IDs, QOL
 
 def ShortenedTutorial():
+    removables = ["aoc_tut14", "aoc_tut11", "aoc_tut12", "aoc_tut26", "aoc_tut22", "aoc_tut20", "aoc_tut15", "aoc_tut17"]
     Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Condition.json", ["cond"], 1)
     CoreCrystalTutorials()
-    EnemyRandoLogic.KeyItemsReAdd()
     MeloloWaypoint()
     SpraineTalk()
     Tutorials()
     QOL.BaseGameStorySkip([7,8,9,10,11,13,15]) #10 # Can just skip some story quests by tying them to an early event
-    removables = ["aoc_tut14", "aoc_tut11", "aoc_tut12", "aoc_tut26", "aoc_tut22", "aoc_tut20", "aoc_tut15", "aoc_tut17"]
     FieldTutorials(removables)                
     BattleTutorials()
     TornaQuestTutorials(removables)

@@ -31,12 +31,14 @@ def TornaStorySkip(skipIDs):
     BaseGameStorySkip(skipIDs, "Ira", 106, 8)
 
 def BaseGameStorySkip(skippable, isTorna = "", newTaskID = 3, newTaskType = 1):
-    '''Skips story events by tying them to earlier set tasks and making them autoplay'''
+    '''Skips story events by tying them to earlier set tasks'''
     with open(f"XC2/JsonOutputs/common/FLD_QuestTask{isTorna}.json", 'r+', encoding='utf-8') as testFile:
         testData = json.load(testFile)
         for data in testData["rows"]:
             if data["$id"] in skippable:
                 for i in range(1,5):
+                    if data[f"TaskID{i}"] == 0:
+                        break
                     data[f"TaskID{i}"] = newTaskID
                     data[f"TaskType{i}"] = newTaskType
         JSONParser.CloseFile(testData, testFile)
