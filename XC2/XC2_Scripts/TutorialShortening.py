@@ -26,40 +26,12 @@ def RaceModeTutorialShortening(): # we need to call this from the race mode func
     MinimizeTutorialBoxes()
     Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/FLD_Tutorial.json", ["ScenarioFlagMin", "QuestFlag", "QuestFlagMin", "QuestFlagMax", "SysMultiFlag"], 0)
     Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/RSC_GmkSetList.json", ["tutorial", "tutorial_bdat"], "")
-    with open("./XC2/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: # shortens opening section
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 7: #if we go to argentum
-                row["NextQuestA"] = 9 # then go explore argentum
-            if row["$id"] == 10: #if we go to bana's room
-                row["NextQuestA"] = 12 # then complete the big prep quest
-            if row["$id"] == 13: # if we rest at lemour inn (this seems to make the flags go away that were keeping you from shopping and going further upstairs in argentum)
-                row["NextQuestA"] = 15 # then talk to spraine
-            if row["$id"] == 15: #talk to spraine
-                break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+    NextQuestSkipper({7:9, 10:12, 13:15})
 
 def UMHuntShortenedTutorial():
     Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Condition.json", ["cond"], 1)
     CoreCrystalTutorials()
-    # leaving this in because I'm worried it will mess up other stuff if I use the tutorials() function
-    with open("./XC2/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as file: # shortens opening section
-        data = json.load(file)
-        for row in data["rows"]:
-            if row["$id"] == 7: #if we go to argentum
-                row["NextQuestA"] = 9 # then go explore argentum
-            if row["$id"] == 10: #if we go to bana's room
-                row["NextQuestA"] = 12 # then complete the big prep quest
-            if row["$id"] == 13: # if we rest at lemour inn (this seems to make the flags go away that were keeping you from shopping and going further upstairs in argentum)
-                row["NextQuestA"] = 15 # then talk to spraine
-            if row["$id"] == 15: #talk to spraine
-                row["NextQuestA"] = 17 #sets next quest to be to go to the top of the Maelstrom
-                break
-        file.seek(0)
-        file.truncate()
-        json.dump(data, file, indent=2, ensure_ascii=False)
+    NextQuestSkipper({7:9, 10:12, 13:15, 15:17})
     MeloloWaypoint()
     SpraineTalk()
     Tutorials()
@@ -67,6 +39,14 @@ def UMHuntShortenedTutorial():
     BattleTutorials()
     BFTutorials()
     MinimizeTutorialBoxes()
+
+def NextQuestSkipper(questDict:dict):
+    with open("./XC2/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as qstFile: # shortens opening section
+        qstData = json.load(qstFile)
+        for qst in qstData["rows"]:
+            if qst["$id"] in questDict:
+                qst["NextQuestA"] = questDict[qst["$id"]]
+        JSONParser.CloseFile(qstData, qstFile)
 
 def RemoveBanaCutscene():
     with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: # shortens opening section
