@@ -9,7 +9,7 @@ def ShortenedTutorial():
     MeloloWaypoint()
     SpraineTalk()
     Tutorials()
-    QOL.BaseGameStorySkip([7,8,9,10,11,13,15]) #10 # Can just skip some story quests by tying them to an early event
+    QOL.BaseGameStorySkip([7,9,10,11,13,15]) #10 # Can just skip some story quests by tying them to an early event
     FieldTutorials()                
     BattleTutorials()
     TornaQuestTutorials(["aoc_tut04", "aoc_tut25", "aoc_tut14", "aoc_tut21", "aoc_tut06", "aoc_tut07", "aoc_tut09", "aoc_tut08"])
