@@ -7,18 +7,20 @@ import os
 garbList = []
 
 def PresetsWindow(parent, interactAbles, game):
-    defaultName = "Enter preset name.txt"
+    defaultName = "Enter name.txt"
     dir = f"{game}/SaveData"
     
     Outerframe = ttk.Frame(parent) 
     canv = tk.Canvas(Outerframe)
     InnerFrame = ttk.Frame(canv, style="bordered.TFrame")
     
-
+    titleLabel = ttk.Label(parent, text="Presets",style="Title.TLabel")
+    titleLabel.pack(anchor="w", pady = (0,10))
+    
     LoadPresets(InnerFrame, dir, interactAbles, game)
     GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
-    saveasPresetBtn = ttk.Button(Outerframe, text="Save Current Settings as Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName, game), CreatePreset(defaultName, InnerFrame, interactAbles, game, dir)))
-    saveasPresetBtn.pack(pady=(0,10),padx=(10,0), anchor="e")
+    saveasPresetBtn = ttk.Button(parent, text="Save Current Settings as Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName, game), CreatePreset(defaultName, InnerFrame, interactAbles, game, dir)))
+    saveasPresetBtn.pack(pady=(0,10),padx=(5,0), anchor="nw")
 
 def LoadPresets(innerFrame, dir, interactables, game):
     for filename in os.listdir(dir):

@@ -141,6 +141,7 @@ def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
             descObj.SpecialPack()
 
     scripts.GUISettings.ResizeWindow(top, InnerFrame, myDescription.bonusWidth)
+    center(top, root)
     top.attributes(alpha = 1.0)
     top.deiconify()
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close

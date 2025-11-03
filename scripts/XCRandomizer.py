@@ -94,11 +94,6 @@ def resize_bg(event, root, bg_image, background, Game):
 
 saveCommands = []
 
-def TitleLabel(parent, text, anchor):
-    titleLabel = ttk.Label(parent, text=text,style="Title.TLabel")
-    titleLabel.pack(anchor=anchor, pady = (0,10))
-    return titleLabel
-
 # Some of the oldest code and messy for sure. 
 def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= [], setupHelpDesc = None):
     import  os, sys
@@ -112,7 +107,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
         fileEntryVar = os.path.join(sys._MEIPASS, Game, 'bdat')
     else:
         fileEntryVar = f"{Game}/bdat"
-    SavedOptionsFileName = f"LastSave.txt"
+    SavedOptionsFileName = f"Last Save.txt"
     JsonOutput = f"./{Game}/JsonOutputs"
     SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt", f"{Game}/GUI")
     defaultFont = Font(family=GUISettings.defFontVar.get(), size=GUISettings.defFontSizeVar.get())
@@ -160,7 +155,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     
     # Frames/Tabs
     outerHomeFrame = ttk.Frame(MainWindow, padding=10)
-    MainWindow.add(outerHomeFrame, text="Settings")
+    MainWindow.add(outerHomeFrame, text="⚙ Configs")
     
     for tab, value in NewTabDictionary.items():
         MainWindow.add(value, text =TabDict[tab]) 
@@ -219,7 +214,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: (saveCommand(), GUISettings.Randomize(XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles, isOneFile=isOneFile))))
+    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), GUISettings.Randomize(XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles, isOneFile=isOneFile))))
     RandomizeButton.pack(pady=(5,windowPadding), padx=(windowPadding, 0), anchor="w", side="left")
     saveCommands.append(saveCommand)
 

@@ -228,6 +228,7 @@ def LoadTheme(defaultFont, themeName):
     from tkinter.font import Font
     titleFont = Font(family="Calibri", size=25)
     style.configure("Title.TLabel",font=titleFont,foreground="white",background=currentTheme["midColor"],padding=5)
+    style.configure("Randomize.TButton")
     style.configure("BordlessBtn.TButton", relief = FLAT)
     style.configure("bordered.TFrame", relief = SOLID, borderwidth= 2)
     style.configure("centeredTabs.TNotebook", tabposition= "nw", borderwidth=0)
@@ -311,6 +312,8 @@ def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, rand
         randoProgressDisplay.config(text="Unpacking BDATs")
         randoProgressFill.pack(pady=(30,0))
         pb.pack(padx=0,pady=(0,20))
+        PopupDescriptions.center(progressPopup, root)
+        
         random.seed(permalinkVar.get())
         print("Seed: " + randoSeedEntry.get())
         print("Permalink: "+  permalinkVar.get())
