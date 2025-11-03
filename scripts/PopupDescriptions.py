@@ -72,22 +72,32 @@ class PopHeader(DescriptionObject):
             for child in self.childGroup:
                 child.SpecialPack()
 
-def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
-    # Check if a popup with the same title is already open
+def GenericPopup(root, title, font):
     for top in OpenWindows:
-        if top.winfo_exists() and top.title() == optionName:
+        if top.winfo_exists() and top.title() == title:
             top.focus()
             top.deiconify() # unminimizes
-            return  # If it exists, don't create a new one
-
+            return top # If it exists, don't create a new one
+        
     mainwindow = root.winfo_toplevel()
-
-    myDescription:Description = descData()
     top = Toplevel(root, padx=10, pady=10)  # Create a new top-level window
+    top.withdraw()
     top.attributes(alpha=0.0)
-    top.title(optionName)
+    top.title(title)
     scripts.GUISettings.RootsForStyling.append(top)
     OpenWindows.append(top)
+    
+    top.attributes(alpha = 1.0)
+    top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
+    center(top, mainwindow)
+    scripts.GUISettings.LoadTheme(font, scripts.GUISettings.defGUIThemeVar.get())
+    
+    return top
+    
+
+def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
+    top = GenericPopup(root, optionName, defaultFont)
+    myDescription:Description = descData()
     
     Outerframe = ttk.Frame(top) 
     
@@ -99,6 +109,7 @@ def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
     InnerFrame = ttk.Frame(canv)
     scripts.GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
     scripts.GUISettings.LoadTheme(defaultFont, scripts.GUISettings.defGUIThemeVar.get())
+    
     # loop over data from the description class and parse it
     hasFewHeaders = sum(isinstance(item, PopHeader) for item in myDescription.data) < 3
     for descObj in myDescription.data:
@@ -128,8 +139,8 @@ def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
             descObj.SpecialPack()
 
     scripts.GUISettings.ResizeWindow(top, InnerFrame, myDescription.bonusWidth)
-    center(top, mainwindow)
     top.attributes(alpha = 1.0)
+    top.deiconify()
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
 
             

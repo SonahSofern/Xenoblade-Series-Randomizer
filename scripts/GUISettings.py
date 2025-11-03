@@ -285,13 +285,24 @@ def ResizeWindow(top, innerFrame, padx = 37):
     top.update()
  
     
-def Randomize(root, RandomizeButton, fileEntryVar, randoProgressDisplay, randoProgressFill, SettingsButton, pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[], isOneFile = False):
+def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[], isOneFile = False):
     def ThreadedRandomize():
         entrySpot = fileEntryVar
         outSpot = f"{outputDirVar.get().strip()}/romfs/bdat"
         
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
+        
+        # Make Popup
+        progressPopup = PopupDescriptions.GenericPopup(root, f"Log {datetime.datetime.now()}", defFontVar)
+        # Bottom Left Progress Display Text
+        randoProgressFill = ttk.Frame(progressPopup, padding=0)
+        randoProgressDisplay = ttk.Label(randoProgressFill, padding=5)
+        randoProgressDisplay.pack(pady=0)
+        
+        pb = ttk.Progressbar(progressPopup ,orient='horizontal',mode='determinate',length=500)
+        progressPopup.deiconify() # Wait until things are ready to show
+    
         # Showing Progress Diplay 
         randoProgressDisplay.config(text="Unpacking BDATs")
         randoProgressFill.pack(pady=(30,0))
@@ -339,9 +350,8 @@ def Randomize(root, RandomizeButton, fileEntryVar, randoProgressDisplay, randoPr
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
             pb['value'] = 100
-            popup()
-            randoProgressFill.pack_forget()
-            pb.pack_forget()
+            randoProgressFill.destroy()
+            pb.destroy()
             
             print(f"Finished at {datetime.datetime.now()}")
         except:
@@ -351,7 +361,6 @@ def Randomize(root, RandomizeButton, fileEntryVar, randoProgressDisplay, randoPr
         
         # Re-Enables Randomize Button
         RandomizeButton.config(state=NORMAL)
-        pb["value"] = 0
 
     threading.Thread(target=ThreadedRandomize).start()
 

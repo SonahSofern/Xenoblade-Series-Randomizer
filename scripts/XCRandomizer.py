@@ -7,7 +7,6 @@ import tkinter as tk
 from scripts.GUISettings import *
 from PIL import Image, ImageTk
 
-
 class Tab():
     def __init__(self, name, outer, canvas, inner):
         self.name = name
@@ -95,6 +94,12 @@ def resize_bg(event, root, bg_image, background, Game):
 
 saveCommands = []
 
+def TitleLabel(parent, text, anchor):
+    titleLabel = ttk.Label(parent, text=text)
+    titleLabel.pack(anchor="n")
+
+
+# Some of the oldest code and messy for sure. 
 def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= [], setupHelpDesc = None):
     import  os, sys
     from scripts import SavedOptions, Helper, GUISettings, PermalinkManagement, Seed, Interactables, SettingsPresets
@@ -122,6 +127,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     else:
         bdat_path = f"Toolset/bdat-toolset-win64.exe"
 
+    # Background Images
     bg = random.choice(backgroundImages)
     if isOneFile: 
         bg_image = Image.open(os.path.join(sys._MEIPASS, Game, 'Images', bg))
@@ -133,7 +139,6 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     background.pack(fill="both", expand=True, padx=0, pady=0)
     background.create_image(0, 0, image=bg_photo, anchor="nw")
 
-    
     # The Notebook
     MainWindow = ttk.Notebook(background)
     outerList = []
@@ -152,19 +157,17 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
         InnerDict[tab] = scrollable
 
     GUISettings.CreateScrollBars(outerList,canvasList,innerList)
-
+    
+    # Frames/Tabs
+    outerHomeFrame = ttk.Frame(MainWindow, padding=10)
+    MainWindow.add(outerHomeFrame, text="General")
+    
     for tab, value in NewTabDictionary.items():
         MainWindow.add(value, text =TabDict[tab]) 
         
     MainWindow.pack(expand = True, fill ="both", padx=windowPadding, pady=(windowPadding, 5))
 
-
-    # Interactables.XenoOptionDict[Game].sort(key= lambda x: x.name) # Sorts alphabetically
     for opt in Interactables.XenoOptionDict[Game]:
-        
-        if isOneFile and opt.isDevOption: # Dont show dev options when packed for users
-            continue
-        
         opt.DisplayOption(InnerDict[opt.tab], XCFrame, defaultFont, GUISettings.defGUIThemeVar.get())
 
     def GenRandomSeed(randoSeedEntryVar):
@@ -173,7 +176,6 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     bottomFrame = ttk.Frame(background, style="NoBackground.TFrame", padding=(0,0))
     bottomFrame.pack(anchor="w", padx=windowPadding, fill=X)
 
-    
     OutputDirectoryFrame = ttk.Frame(background, style="NoBackground.TFrame", padding=(0,0))
     OutputDirectoryFrame.pack(anchor="w", padx=windowPadding, fill=X)
     
@@ -185,7 +187,6 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     
     SeedFrame = ttk.Frame(background, style="NoBackground.TFrame")
     seedDesc = ttk.Button(SeedFrame, text="Seed", command=lambda: GenRandomSeed(seedEntryVar))
-
 
     GUISettings.RootsForStyling.append(bottomFrame)
 
@@ -211,35 +212,41 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     permalinkEntry = ttk.Entry(permalinkFrame, textvariable=permalinkVar)
     CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
     permalinkVar.set(CompressedPermalink)
-    permalinkButton = ttk.Button(permalinkFrame, text="Preset", command=lambda: SettingsPresets.PresetsWindow("Presets", XCFrame, defaultFont, f"{Game}/SaveData", EntriesToSave + Interactables.XenoOptionDict[Game], Game))
+    permalinkButton = ttk.Button(permalinkFrame, text="Settings String")
     permalinkFrame.pack(padx=windowPadding, anchor="w", fill=X)
     permalinkButton.pack(side="left")
     permalinkEntry.pack(side='left', fill=X, expand=True)
     PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version)
 
-
-    # Bottom Left Progress Display Text
-    randoProgressFill = ttk.Frame(background, padding=0)
-    randoProgressDisplay = ttk.Label(randoProgressFill, padding=5)
-    randoProgressDisplay.pack(pady=0, side=LEFT)
-
     # Randomize Button
-    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: (saveCommand(), GUISettings.Randomize(XCFrame, RandomizeButton, fileEntryVar, randoProgressDisplay,randoProgressFill,SettingsButton,pb, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles, isOneFile=isOneFile))))
-    RandomizeButton.pack(pady=(5,windowPadding),side="left", padx=(windowPadding, 0), anchor=CENTER)
-    
-    # Options Cog
-    SettingsButton = ttk.Button(background,padding=5, text="ⓘ",command=lambda: PopupDescriptions.GenPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window, defaultFont))
-    SettingsButton.pack(pady=(5,windowPadding),anchor="e",expand=True, side=RIGHT, padx=windowPadding) 
+    RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: (saveCommand(), GUISettings.Randomize(XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles, isOneFile=isOneFile))))
+    RandomizeButton.pack(pady=(5,windowPadding), padx=(windowPadding, 0), anchor="w")
     saveCommands.append(saveCommand)
-    GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
 
-    pb = ttk.Progressbar(
-        background,
-        orient='horizontal',
-        mode='determinate',
-        length=3000
-    )
     global lastGame
     lastGame = Game
+    
+    ######### Home Page
+    TitleLabel(outerHomeFrame, text=f"{Title} Randomizer", anchor="n")
+
+    # Left
+    leftHomeFrame = ttk.Frame(outerHomeFrame)
+    leftHomeFrame.pack(side="left", anchor="n", fill="both", expand=True)
+
+    TitleLabel(leftHomeFrame, text="Presets", anchor="n")
+    SettingsPresets.PresetsWindow(leftHomeFrame, EntriesToSave + Interactables.XenoOptionDict[Game], Game)
+    
+    # Right
+    rightHomeFrame = ttk.Frame(outerHomeFrame)
+    rightHomeFrame.pack(side="right", anchor="n", fill="both", expand=True)
+    
+    TitleLabel(rightHomeFrame, text="General Options", anchor="n")
+    
+    SettingsButton = ttk.Button(rightHomeFrame, text="Help", command=lambda: PopupDescriptions.GenPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window, defaultFont))
+    SettingsButton.pack(anchor="e") 
+    ######## Home Page
+    
+    
+    GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
     root.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background, Game), add="+")
 
