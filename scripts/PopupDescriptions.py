@@ -77,7 +77,7 @@ def GenericPopup(root, title, font):
         if top.winfo_exists() and top.title() == title:
             top.focus()
             top.deiconify() # unminimizes
-            return top # If it exists, don't create a new one
+            return None # If it exists, don't create a new one
         
     mainwindow = root.winfo_toplevel()
     top = Toplevel(root, padx=10, pady=10)  # Create a new top-level window
@@ -97,6 +97,8 @@ def GenericPopup(root, title, font):
 
 def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
     top = GenericPopup(root, optionName, defaultFont)
+    if top == None:
+        return # Dont do this again if top window already exists
     myDescription:Description = descData()
     
     Outerframe = ttk.Frame(top) 

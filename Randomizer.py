@@ -23,6 +23,8 @@ MainWindow.pack(fill="both", expand=True, padx=0, pady=0)
 
 root.title(f"Xenoblade Chronicles Series Randomizer {Version}")
 root.option_add("*Font", defaultFont)
+
+
 root.geometry(f'{windowWidth}x{windowHeight}')
 GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
 

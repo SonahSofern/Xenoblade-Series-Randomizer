@@ -95,9 +95,8 @@ def resize_bg(event, root, bg_image, background, Game):
 saveCommands = []
 
 def TitleLabel(parent, text, anchor):
-    titleLabel = ttk.Label(parent, text=text)
-    titleLabel.pack(anchor="n")
-
+    titleLabel = ttk.Label(parent, text=text,style="Title.TLabel")
+    titleLabel.pack(anchor=anchor)
 
 # Some of the oldest code and messy for sure. 
 def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= [], setupHelpDesc = None):
@@ -160,7 +159,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     
     # Frames/Tabs
     outerHomeFrame = ttk.Frame(MainWindow, padding=10)
-    MainWindow.add(outerHomeFrame, text="General")
+    MainWindow.add(outerHomeFrame, text="Settings")
     
     for tab, value in NewTabDictionary.items():
         MainWindow.add(value, text =TabDict[tab]) 
@@ -226,25 +225,24 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     global lastGame
     lastGame = Game
     
-    ######### Home Page
+    # Home Page
     TitleLabel(outerHomeFrame, text=f"{Title} Randomizer", anchor="n")
 
     # Left
     leftHomeFrame = ttk.Frame(outerHomeFrame)
     leftHomeFrame.pack(side="left", anchor="n", fill="both", expand=True)
 
-    TitleLabel(leftHomeFrame, text="Presets", anchor="n")
     SettingsPresets.PresetsWindow(leftHomeFrame, EntriesToSave + Interactables.XenoOptionDict[Game], Game)
     
     # Right
     rightHomeFrame = ttk.Frame(outerHomeFrame)
     rightHomeFrame.pack(side="right", anchor="n", fill="both", expand=True)
     
-    TitleLabel(rightHomeFrame, text="General Options", anchor="n")
+    TitleLabel(rightHomeFrame, text="Info", anchor="n")
     
     SettingsButton = ttk.Button(rightHomeFrame, text="Help", command=lambda: PopupDescriptions.GenPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window, defaultFont))
     SettingsButton.pack(anchor="e") 
-    ######## Home Page
+
     
     
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())

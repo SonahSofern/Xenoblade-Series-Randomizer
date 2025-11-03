@@ -140,6 +140,7 @@ def LoadTheme(defaultFont, themeName):
                 "configure": {
                     "background": currentTheme["darkColor"],
                     "relief": "flat",
+                    "borderwidth": 0,
                 },
                 "map": {
                     "background": [("active", currentTheme["midColor"])],
@@ -224,8 +225,11 @@ def LoadTheme(defaultFont, themeName):
     style.configure("DarkSub.TCheckbutton", background=currentTheme["darkColor"])
     style.configure("DarkNoMargin.TLabel", margin=(0,0), padding=(20,0), background=currentTheme["darkColor"])
     
-    
+    from tkinter.font import Font
+    titleFont = Font(family="Calibri", size=25)
+    style.configure("Title.TLabel",font=titleFont,foreground="white",background="#007ACC",padding=5)
     style.configure("BordlessBtn.TButton", relief = FLAT)
+    style.configure("bordered.TFrame", relief = SOLID, borderwidth= 2)
     style.configure("centeredTabs.TNotebook", tabposition= "nw", borderwidth=0)
     style.configure("STATIC.TButton", font=staticFont)
     style.configure("BorderlessLabel.TLabel", background=currentTheme["darkColor"], foreground=UI_Colors.White)

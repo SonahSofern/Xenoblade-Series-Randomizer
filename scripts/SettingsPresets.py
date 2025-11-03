@@ -12,17 +12,15 @@ def PresetsWindow(parent, interactAbles, game):
     
     Outerframe = ttk.Frame(parent) 
     canv = tk.Canvas(Outerframe)
-    InnerFrame = ttk.Frame(canv)
+    InnerFrame = ttk.Frame(canv, style="bordered.TFrame")
     
-    saveasPresetBtn = ttk.Button(Outerframe, text="Save Current Settings as Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName, game), CreatePreset(defaultName, InnerFrame, interactAbles, game, dir)))
-    saveasPresetBtn.pack()
+    saveasPresetBtn = ttk.Button(Outerframe, text="💾 Create Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName, game), CreatePreset(defaultName, InnerFrame, interactAbles, game, dir)))
+    saveasPresetBtn.pack(pady=(0,10),padx=(10,0), anchor="w")
 
     LoadPresets(InnerFrame, dir, interactAbles, game)
     GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
 
 def LoadPresets(innerFrame, dir, interactables, game):
-    seperator = ttk.Label(innerFrame, text="Saved Presets")
-    seperator.pack()
     for filename in os.listdir(dir):
         CreatePreset(filename, innerFrame, interactables, game, dir)
 
@@ -34,14 +32,14 @@ def CreatePreset(filename, innerFrame, interactables, game, dir):
     presetFrame.pack(padx=3, pady=3, fill="both")
     garbList.append(pnameVar) # Garbage collection strikes again
     
-    loadBtn = ttk.Button(presetFrame, text="Load", command=lambda: SavedOptions.loadData(interactables, f"{pnameVar.get()}.txt", game))
-    loadBtn.pack(side="left")
-    
     name = ttk.Entry(presetFrame, textvariable=pnameVar)
     pnameVar.trace_add("write", lambda *args: OnNameChange(dir, pnameVar, oldnameVar))
-    name.pack(side="left")
+    name.pack(side="left", padx=(0,5))
     
-    deleteBtn = ttk.Button(presetFrame, text=" X ", command=lambda preset=presetFrame: (DeletePreset(preset, pnameVar, game)))
+    loadBtn = ttk.Button(presetFrame, text="📥 Load", command=lambda: SavedOptions.loadData(interactables, f"{pnameVar.get()}.txt", game))
+    loadBtn.pack(side="left", padx=(0,5))
+    
+    deleteBtn = ttk.Button(presetFrame, text="✖ Delete", command=lambda preset=presetFrame: (DeletePreset(preset, pnameVar, game)))
     deleteBtn.pack(side="left")
 
 def OnNameChange(dir, var, oldnameVar):
