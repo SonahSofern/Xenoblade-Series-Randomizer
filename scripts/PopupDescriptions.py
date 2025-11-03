@@ -125,7 +125,7 @@ def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
             
         elif isinstance(descObj, PopHeader): # Header
             curFrame = ttk.Frame(InnerFrame)
-            descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=10, command=lambda obj= descObj: (obj.Dropdown(), scripts.GUISettings.ResizeWindow(top, InnerFrame)))
+            descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=10, command=lambda obj= descObj: (obj.Dropdown(), scripts.GUISettings.ResizeWindow(top, InnerFrame), center(top, root)))
             curHeader = descObj
             curFrame.pack(fill="x", expand=True)
             descObj.SpecialPack()

@@ -14,11 +14,11 @@ def PresetsWindow(parent, interactAbles, game):
     canv = tk.Canvas(Outerframe)
     InnerFrame = ttk.Frame(canv, style="bordered.TFrame")
     
-    saveasPresetBtn = ttk.Button(Outerframe, text="💾 Create Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName, game), CreatePreset(defaultName, InnerFrame, interactAbles, game, dir)))
-    saveasPresetBtn.pack(pady=(0,10),padx=(10,0), anchor="w")
 
     LoadPresets(InnerFrame, dir, interactAbles, game)
     GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
+    saveasPresetBtn = ttk.Button(Outerframe, text="Save Current Settings as Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName, game), CreatePreset(defaultName, InnerFrame, interactAbles, game, dir)))
+    saveasPresetBtn.pack(pady=(0,10),padx=(10,0), anchor="e")
 
 def LoadPresets(innerFrame, dir, interactables, game):
     for filename in os.listdir(dir):

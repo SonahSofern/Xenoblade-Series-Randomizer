@@ -227,7 +227,7 @@ def LoadTheme(defaultFont, themeName):
     
     from tkinter.font import Font
     titleFont = Font(family="Calibri", size=25)
-    style.configure("Title.TLabel",font=titleFont,foreground="white",background="#007ACC",padding=5)
+    style.configure("Title.TLabel",font=titleFont,foreground="white",background=currentTheme["midColor"],padding=5)
     style.configure("BordlessBtn.TButton", relief = FLAT)
     style.configure("bordered.TFrame", relief = SOLID, borderwidth= 2)
     style.configure("centeredTabs.TNotebook", tabposition= "nw", borderwidth=0)
@@ -297,13 +297,13 @@ def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, rand
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
         
+        
         # Make Popup
         progressPopup = PopupDescriptions.GenericPopup(root, f"Log {datetime.datetime.now()}", defFontVar)
-        # Bottom Left Progress Display Text
+
         randoProgressFill = ttk.Frame(progressPopup, padding=0)
         randoProgressDisplay = ttk.Label(randoProgressFill, padding=5)
         randoProgressDisplay.pack(pady=0)
-        
         pb = ttk.Progressbar(progressPopup ,orient='horizontal',mode='determinate',length=500)
         progressPopup.deiconify() # Wait until things are ready to show
     

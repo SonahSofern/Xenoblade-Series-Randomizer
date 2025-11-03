@@ -96,7 +96,8 @@ saveCommands = []
 
 def TitleLabel(parent, text, anchor):
     titleLabel = ttk.Label(parent, text=text,style="Title.TLabel")
-    titleLabel.pack(anchor=anchor)
+    titleLabel.pack(anchor=anchor, pady = (0,10))
+    return titleLabel
 
 # Some of the oldest code and messy for sure. 
 def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= [], setupHelpDesc = None):
@@ -219,14 +220,11 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
 
     # Randomize Button
     RandomizeButton = ttk.Button(background,text='Randomize', padding=5,command=(lambda: (saveCommand(), GUISettings.Randomize(XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles, isOneFile=isOneFile))))
-    RandomizeButton.pack(pady=(5,windowPadding), padx=(windowPadding, 0), anchor="w")
+    RandomizeButton.pack(pady=(5,windowPadding), padx=(windowPadding, 0), anchor="w", side="left")
     saveCommands.append(saveCommand)
 
     global lastGame
     lastGame = Game
-    
-    # Home Page
-    TitleLabel(outerHomeFrame, text=f"{Title} Randomizer", anchor="n")
 
     # Left
     leftHomeFrame = ttk.Frame(outerHomeFrame)
@@ -234,17 +232,17 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
 
     SettingsPresets.PresetsWindow(leftHomeFrame, EntriesToSave + Interactables.XenoOptionDict[Game], Game)
     
-    # Right
-    rightHomeFrame = ttk.Frame(outerHomeFrame)
-    rightHomeFrame.pack(side="right", anchor="n", fill="both", expand=True)
+    # # Right
+    # rightHomeFrame = ttk.Frame(outerHomeFrame)
+    # rightHomeFrame.pack(side="right", anchor="n", fill="both", expand=True)
+        
+    SettingsButton = ttk.Button(background, text="Help", command=lambda: PopupDescriptions.GenPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window, defaultFont), padding=5)
+    SettingsButton.pack(pady=(5,windowPadding), padx=(0, windowPadding), anchor="e", side="right")
     
-    TitleLabel(rightHomeFrame, text="Info", anchor="n")
     
-    SettingsButton = ttk.Button(rightHomeFrame, text="Help", command=lambda: PopupDescriptions.GenPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window, defaultFont))
-    SettingsButton.pack(anchor="e") 
+    # SettingsButton = ttk.Button(rightHomeFrame, text="Discord")
+    # SettingsButton.pack(anchor="e") 
 
-    
-    
     GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
     root.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background, Game), add="+")
 
