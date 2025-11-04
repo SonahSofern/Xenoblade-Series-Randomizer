@@ -27,23 +27,6 @@ def CreateDLCtoSetFlag(ItemName: list[str], Flag: list[int], Category: list[int]
         
         JSONParser.CloseFile(data, file)
 
-def TornaStorySkip(skipIDs):
-    BaseGameStorySkip(skipIDs, "Ira", 634)
-
-def BaseGameStorySkip(skippable, isTorna = "", newTaskID = 3, newTaskType = 1):
-    '''Skips story events by tying them to earlier set tasks'''
-    with open(f"XC2/JsonOutputs/common/FLD_QuestTask{isTorna}.json", 'r+', encoding='utf-8') as testFile:
-        testData = json.load(testFile)
-        for data in testData["rows"]:
-            if data["$id"] in skippable:
-                for i in range(1,5):
-                    if data[f"TaskID{i}"] == 0:
-                        break
-                    data[f"TaskID{i}"] = newTaskID
-                    data[f"TaskType{i}"] = newTaskType
-        JSONParser.CloseFile(testData, testFile)
-
-
 def AddMovespeedDeed():
     # Torna Exclusive debug
     #JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"],[49],["Value"], 500)
@@ -68,11 +51,11 @@ def AddMovespeedDeed():
     # First enemy drops movespeed deed
     BonusMovespeed = Options.StartwithIncreasedMovespeedOption.GetSpinbox() * 10
     JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [9], ["Value"], BonusMovespeed)
-    JSONParser.ChangeJSONLine(["common/CHR_EnArrange.json"], [1430 , 179], ["PreciousID"], 25257)
+    JSONParser.ChangeJSONLine(["common/CHR_EnArrange.json"], [1430 , 180], ["PreciousID"], 25257)
 
 def CollectionRange():
     JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [10], ["Value"], 150)
-    JSONParser.ChangeJSONLine(["common/CHR_EnArrange.json"], [1429 , 180], ["PreciousID"], 25258)
+    JSONParser.ChangeJSONLine(["common/CHR_EnArrange.json"], [1429 , 181], ["PreciousID"], 25258)
 
 def FixIssuesCausedByNGPlusFlag():
     CreateDLCtoSetFlag(["Driver Skill Tree Key"], [48589], Condition = [1853]) # 1853 is a pre-existing flag that requires the Scenario to be 2001 or higher (when you get pyra)

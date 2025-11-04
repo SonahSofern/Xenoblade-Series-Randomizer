@@ -17,10 +17,11 @@ def PresetsWindow(parent, interactAbles, game):
     titleLabel = ttk.Label(parent, text="Presets",style="Title.TLabel")
     titleLabel.pack(anchor="w", pady = (0,10))
     
-    LoadPresets(InnerFrame, dir, interactAbles, game)
-    GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
     saveasPresetBtn = ttk.Button(parent, text="Save Current Settings as Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName, game), CreatePreset(defaultName, InnerFrame, interactAbles, game, dir)))
     saveasPresetBtn.pack(pady=(0,10),padx=(5,0), anchor="nw")
+    
+    LoadPresets(InnerFrame, dir, interactAbles, game)
+    GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
 
 def LoadPresets(innerFrame, dir, interactables, game):
     for filename in os.listdir(dir):

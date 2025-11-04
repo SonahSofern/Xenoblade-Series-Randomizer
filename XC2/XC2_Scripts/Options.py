@@ -1,7 +1,7 @@
 from scripts import JSONParser,Helper
 from XC2.XC2_Scripts.IDs import *
 from tkinter import *
-from XC2.XC2_Scripts import QOL as QualityOfLife, Accessories, AuxCores, Misc, BladeSpecials, CoreCrystals as CoreCry, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, BladeStats,TutorialShortening, GachaModifications, Enhancements, Cosmetics, Items as I, ButtonCombos, Scales, CharacterRandomization, Enemy, WeaponChips, YellowSkills
+from XC2.XC2_Scripts import QOL as QualityOfLife, Accessories, AuxCores, Misc, BladeSpecials, CoreCrystals as CoreCry, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, BladeStats, Skips,GachaModifications, Enhancements, Cosmetics, Items as I, ButtonCombos, Scales, CharacterRandomization, Enemy, WeaponChips, YellowSkills
 from XC2.XC2_Scripts.Race_Mode import RaceMode
 from XC2.XC2_Scripts.Torna_Logic import TornaMain
 from XC2.XC2_Scripts.UM_Hunt import UMHuntMain
@@ -165,12 +165,12 @@ MusicOption_MixBattleAndEnv = SubOption("Mix Battle/Environment Themes", MusicOp
 ShortcutsOption = Option("Shortcuts", QOL, "Various speedups for the main story quests")
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
-ShortcutsOption_IndolQuiz = SubOption("Indol Quiz Skip", ShortcutsOption, [lambda: TutorialShortening.IndolQuizSkip()])
+ShortcutsOption_IndolQuiz = SubOption("Indol Quiz Skip", ShortcutsOption, [lambda: Skips.IndolQuizSkip()])
 ShortcutsOption_FeedingAnArmy = SubOption("Feeding an Army Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"], [293,294,295,296], ["Count"], 0)])
 ShortcutsOption_CrossDesert = SubOption("To Cross a Desert Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"], [300,301], ["Count"], 0)])
-ShortcutsOption_CommunitySkip = SubOption("Community Levels Skip", ShortcutsOption, [lambda: QualityOfLife.TornaStorySkip([33, 42])])
+ShortcutsOption_CommunitySkip = SubOption("Community Levels Skip", ShortcutsOption, [lambda: Skips.TornaStorySkip([33, 42])])
 # ShortcutsOption_CommunitySkip = SubOption("Community Levels Skip", ShortcutsOption, [StorySkip([33, 42], "Ira", 106, 8)lambda: JSONParser.ChangeJSONLine(["common/FLD_ConditionFlag.json"],[1394,1395,1396,1397], ["FlagMin"], 1)])
-TutorialShorteningOption = Option("Tutorial Shortening", QOL, "Skips as many of the tutorials as possible.", [lambda: TutorialShortening.ShortenedTutorial()])
+TutorialShorteningOption = Option("Tutorial Shortening", QOL, "Skips as many tutorials as possible.", [lambda: Skips.ShortenedTutorial()])
 RemoveFieldSkillsOption = Option("Remove Story Field Skills", QOL, "Removes field skill checks", [lambda: FieldSkills.RemoveFieldSkills(RemoveFieldSkillsOption_AllFieldSkills.GetState())], ["Remove All Field Skills", []])
 RemoveFieldSkillsOption_AllFieldSkills = SubOption("Remove All Field Skills", RemoveFieldSkillsOption)
 EasySkillTreesOption = Option("Easy Affinity Trees", QOL, "Makes trust the only condition for levelling up a blade's affinity tree", [lambda: SkillTrees.BladeSkillTreeShortening()])
