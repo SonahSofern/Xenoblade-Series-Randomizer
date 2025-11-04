@@ -225,7 +225,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     leftHomeFrame = ttk.Frame(outerHomeFrame)
     leftHomeFrame.pack(side="left", anchor="n", fill="both", expand=True)
 
-    SettingsPresets.PresetsWindow(leftHomeFrame, EntriesToSave + Interactables.XenoOptionDict[Game], Game)
+    SettingsPresets.PresetsWindow(leftHomeFrame,  [seedVar] + Interactables.XenoOptionDict[Game], Game)
     
     # # Right
     # rightHomeFrame = ttk.Frame(outerHomeFrame)
