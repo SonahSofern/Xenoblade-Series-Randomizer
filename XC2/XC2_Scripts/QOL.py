@@ -30,7 +30,6 @@ def CreateDLCtoSetFlag(ItemName: list[str], Flag: list[int], Category: list[int]
 def AddMovespeedDeed():
     # Torna Exclusive debug
     #JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"],[49],["Value"], 500)
-    #JSONParser.ChangeJSONLine(["common/FLD_OwnerBonusParam.json"],[1],["Max"], 1000)
     #Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/ma40a_FLD_TboxPop.json", ["FSID", "FSID2"], 0)
     # Torna Exclusive debug
     # CurrentNameID = Helper.GetMaxValue("./XC2/JsonOutputs/common_ms/itm_precious.json", "$id") + 1
@@ -49,6 +48,7 @@ def AddMovespeedDeed():
     # CreateDLCtoSetFlag(["Movespeed Deed"], [65000], [1], [25249], [1])
     
     # First enemy drops movespeed deed
+    JSONParser.ChangeJSONLine(["common/FLD_OwnerBonusParam.json"],[1],["Max"], 1000)
     BonusMovespeed = Options.StartwithIncreasedMovespeedOption.GetSpinbox() * 10
     JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [9], ["Value"], BonusMovespeed)
     JSONParser.ChangeJSONLine(["common/CHR_EnArrange.json"], [1430 , 180], ["PreciousID"], 25257)

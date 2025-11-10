@@ -2,8 +2,6 @@ from XC2.XC2_Scripts import Options, IDs
 import json, random, copy
 from scripts import Helper, PopupDescriptions, JSONParser, Values
 
-
-
 def RandomizeAccessoryShops():
     valTable = Values.ValueTable()
     valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs)

@@ -159,7 +159,7 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
 def Bandaids(eneData, isBoss, eRando):
     '''Bandaids intented to be ran once'''
     ForcedWinFights([3,6])
-    SummonsFix(eneData)
+    SummonsLevelFix(eneData)
     if isBoss.GetState():
         TornaIntroChanges(eRando)
 
@@ -265,19 +265,7 @@ def GortOgreUppercutRemoval(paramData): # Gort 2's Ogre Uppercut seems to be bug
 #                 row["DmgMgn5"] = 500
 #                 row["DmgMgn6"] = 500
 #         JSONParser.CloseFile(data, file)
-    
-def SummonsFix(eneData):
-    Lora = 17
-    Rex = 1
-    for ene in eneData["rows"]:
-        enID = ene["$id"]
-        if enID in IDs.SummonedEnemies:
-            if ene["ZoneID"] in [52,53]: # Torna Areas
-                targetDriver = Lora
-            else:
-                targetDriver = Rex
-            ene["DriverLev"] = targetDriver # Not a great solution the other way is to make a duplicate enemy for each time they are summoned and I woulid have to make new summon tables
-    
+
 # def EnemyAggro(): # Not going to add aggro to enemies because it would be disproportional to the area there enemy is in. For example if i tgive them batArea and a large area you could get stuck inside a small area (ship) with enemies perma aggroing you
 #     odds = Options.EnemyAggroOption.GetSpinbox()
 #     with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
@@ -305,13 +293,34 @@ def ForcedWinFights(fights:list):
 def AeshmaCoreHPNerf(paramData): # Aeshma is almost unkillable with its regen active
     for row in paramData["rows"]:
         if row["$id"] == 318:
-            row["HpMaxRev"] = 1500 # nerfed hp by 5/6ths
+            row["HpMaxRev"] = 500 # nerfed hp by 5/6ths
     
 def AionRoomFix(origEn, newEn, eRando:e.EnemyRandomizer): # Aion sits really far down so raise enemies up
     AionIDs = [265, 275]
     if ((origEn["$id"] in AionIDs) and (newEn["$id"] not in AionIDs)):
         eRando.ChangeStats([newEn], [("FlyHeight", 500)])   
  
+def SummonIDFix(eneData): # Need to put summoned enemies Ids back into the pool after this in their proper spots
+    '''Fixes the summons being both enemies in the game and summoned enemies'''
+    SummonedEnemies = [1, 6, 1568, 1569, 1593, 1599, 66, 67, 1641, 122, 135, 150, 152, 154, 1700, 1724, 1725, 1726, 1727, 1731, 724, 725, 726, 727, 728, 242, 1371, 1881, 1787, 1788, 1789, 1285, 1805, 1806, 1807, 1304, 1308, 1347, 1349, 1350, 1351, 1352, 1353, 1354, 1355, 1356, 1357, 1358, 1359, 1360, 1361, 846, 1362, 1364, 1365, 1363, 1367, 1368, 1369, 1370, 1883, 1372, 1885, 1373, 1374, 1375, 1376, 1377, 1378, 1379, 1380, 1381, 1382, 1384, 1385, 1383, 1420, 1521, 1533]
+    
+    # Makes copies of all summoned enemies
+    # Replaces the summon list with the copies IDS
+    SummonsLevelFix(eneData, ) # Apply level fix to the new ones
+  
+def SummonsLevelFix(eneData, summonedEnemies):
+    Lora = 17
+    Rex = 1
+    for ene in eneData["rows"]:
+        enID = ene["$id"]
+        if enID in  summonedEnemies:
+            if ene["ZoneID"] in [52,53]: # Torna Areas
+                targetDriver = Lora
+            else:
+                targetDriver = Rex
+            ene["DriverLev"] = targetDriver # Not a great solution the other way is to make a duplicate enemy for each time they are summoned and I woulid have to make new summon tables
+    
+    
 def EnemyDesc(name):
     EnemyRandoDesc = PopupDescriptions.Description()
     EnemyRandoDesc.Header(name)
