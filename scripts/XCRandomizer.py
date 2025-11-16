@@ -6,6 +6,7 @@ from tkinter import *
 import tkinter as tk
 from scripts.GUISettings import *
 from PIL import Image, ImageTk
+from scripts import ScrollPanel
 
 class Tab():
     def __init__(self, name, outer, canvas, inner):
@@ -136,26 +137,17 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
 
     # The Notebook
     MainWindow = ttk.Notebook(background)
-    outerList = []
-    canvasList = []
-    innerList = []
     NewTabDictionary:dict = {}
     InnerDict:dict = {}
     for tab, value in TabDict.items():
-        outerTab = ttk.Frame(MainWindow)
-        canvas = Canvas(outerTab)
-        scrollable = ttk.Frame(canvas)
-        outerList.append(outerTab)
-        canvasList.append(canvas)
-        innerList.append(scrollable)
-        NewTabDictionary[tab] = outerTab
-        InnerDict[tab] = scrollable
+        scroll = ScrollPanel.ScrollablePanel(MainWindow)
+        NewTabDictionary[tab] = scroll.outerFrame
+        InnerDict[tab] = scroll.innerFrame
 
-    GUISettings.CreateScrollBars(outerList,canvasList,innerList)
     
     # Frames/Tabs
     outerHomeFrame = ttk.Frame(MainWindow, padding=10)
-    MainWindow.add(outerHomeFrame, text="⚙ Configs")
+    MainWindow.add(outerHomeFrame, text="⚙ Presets")
     
     for tab, value in NewTabDictionary.items():
         MainWindow.add(value, text =TabDict[tab]) 
@@ -231,13 +223,12 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     # rightHomeFrame = ttk.Frame(outerHomeFrame)
     # rightHomeFrame.pack(side="right", anchor="n", fill="both", expand=True)
         
-    SettingsButton = ttk.Button(background, text="Help", command=lambda: PopupDescriptions.GenPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window, defaultFont), padding=5)
+    SettingsButton = ttk.Button(background, text="Help", command=lambda: PopupDescriptions.GenPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window), padding=5)
     SettingsButton.pack(pady=(5,windowPadding), padx=(0, windowPadding), anchor="e", side="right")
-    
     
     # SettingsButton = ttk.Button(rightHomeFrame, text="Discord")
     # SettingsButton.pack(anchor="e") 
 
-    GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
+    GUISettings.LoadTheme(GUISettings.defGUIThemeVar.get())
     root.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background, Game), add="+")
 

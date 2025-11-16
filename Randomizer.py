@@ -13,7 +13,6 @@ GUISettings.RootsForStyling.append(root)
 Version = "1.1.2"
 windowWidth = "1600"
 windowHeight = "900"
-defaultFont = Font(family="Calibri", size=14)
 
 XCRandomizer.CheckIfUserNeedsUpdate(Version, root)
 
@@ -22,11 +21,11 @@ MainWindow = ttk.Notebook(root, padding=0, style = "centeredTabs.TNotebook")
 MainWindow.pack(fill="both", expand=True, padx=0, pady=0)
 
 root.title(f"Xenoblade Chronicles Series Randomizer {Version}")
-root.option_add("*Font", defaultFont)
+root.option_add("*Font", GUISettings.defaultFont)
 
 
 root.geometry(f'{windowWidth}x{windowHeight}')
-GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
+GUISettings.LoadTheme(GUISettings.defGUIThemeVar.get())
 
 if XCRandomizer.isOneFile: 
     icon_path = os.path.join(sys._MEIPASS, 'images', 'XCIcon.png')
@@ -41,7 +40,7 @@ XCRandomizer.CreateMainWindow(root, MainWindow, XC2.Game, XC2.Version, XC2.Title
 XCRandomizer.CreateMainWindow(root, MainWindow, XC3.Game, XC3.Version, XC3.Title, XC3.seedEntryVar, XC3.permalinkVar, XC3.Options.Tabs, XC3.extraCommands, XC3.mainFolderNames, XC3.subFolderNames, XC3.SeedNames.Nouns, XC3.SeedNames.Verbs, XC3.textFolderName,extraArgs=XC3.extraArgs, backgroundImages=XC3.backgrounds, extraFiles=[XC3.Skyline, XC3.Exefs], setupHelpDesc=lambda: XC3.XC3Help())
 # XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.Game, XCXDE.Version, XCXDE.Title, XCXDE.seedEntryVar, XCXDE.permalinkVar, XCXDE.Options.Tabs, XCXDE.extraCommands, XCXDE.mainFolderNames, XCXDE.subFolderNames, XCXDE.SeedNames.Nouns, XCXDE.SeedNames.Verbs, backgroundImages=XCXDE.backgrounds)
 
-def CloseProtocol():
+def CloseProtocol(): # Save before closing
     for cmd in XCRandomizer.saveCommands:
         cmd() 
     root.destroy()

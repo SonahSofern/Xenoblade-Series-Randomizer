@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from scripts import GUISettings, SavedOptions
+from scripts import GUISettings, SavedOptions, Interactables, ScrollPanel
 import tkinter as tk
 import os
 
@@ -9,25 +9,31 @@ garbList = []
 def PresetsWindow(parent, interactAbles, game):
     defaultName = "Enter name.txt"
     dir = f"{game}/SaveData"
+    premadeDir = f"{game}/Presets"
     
-    Outerframe = ttk.Frame(parent) 
-    canv = tk.Canvas(Outerframe)
-    InnerFrame = ttk.Frame(canv, style="bordered.TFrame")
+    outerCustomFrame = ttk.Frame(parent)
+    outerPremadeFrame = ttk.Frame(parent)
+    outerPremadeFrame.pack(side="left", fill="both", expand=True)
+    outerCustomFrame.pack(side="left", fill="both", expand=True)
     
-    titleLabel = ttk.Label(parent, text="Presets",style="Title.TLabel")
-    titleLabel.pack(anchor="w", pady = (0,10))
+    titleLabel = ttk.Label(outerPremadeFrame, text="Get started with some recommended presets",style="Title.TLabel")
+    titleLabel.pack(anchor="w", pady = (5,5))
+    PremadePresetScroll = ScrollPanel.ScrollablePanel(outerPremadeFrame)
+    customTitleLabel = ttk.Label(outerCustomFrame, text="Add your own custom presets",style="Title.TLabel")
+    customTitleLabel.pack(anchor="w", pady = (5,5))
+    CustomPresetScroll = ScrollPanel.ScrollablePanel(outerCustomFrame)
     
-    saveasPresetBtn = ttk.Button(parent, text="Save Current Settings as Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName, game), CreatePreset(defaultName, InnerFrame, interactAbles, game, dir)))
-    saveasPresetBtn.pack(pady=(0,10),padx=(5,0), anchor="nw")
+    saveasPresetBtn = ttk.Button(outerCustomFrame, text="Save Current Settings as Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName, game), CreatePreset(defaultName, CustomPresetScroll.innerFrame, interactAbles, game, dir, True)))
+    saveasPresetBtn.pack(pady=(5,5),padx=(0,0), anchor="nw")
     
-    LoadPresets(InnerFrame, dir, interactAbles, game)
-    GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
-
-def LoadPresets(innerFrame, dir, interactables, game):
+    GetPresets(PremadePresetScroll.innerFrame, premadeDir, interactAbles, game, False)
+    GetPresets(CustomPresetScroll.innerFrame, dir, interactAbles, game, True)
+    
+def GetPresets(innerFrame, dir, interacts, game, isDeletable): 
     for filename in os.listdir(dir):
-        CreatePreset(filename, innerFrame, interactables, game, dir)
+        CreatePreset(filename, innerFrame, interacts, game, dir, isDeletable)
 
-def CreatePreset(filename, innerFrame, interactables, game, dir):
+def CreatePreset(filename, innerFrame, interactables, game, dir, isDeletable):
     # print("Created Preset")
     pnameVar = tk.StringVar(value=filename.replace(".txt", ""))
     oldnameVar = tk.StringVar(value=pnameVar.get())
@@ -42,8 +48,9 @@ def CreatePreset(filename, innerFrame, interactables, game, dir):
     loadBtn = ttk.Button(presetFrame, text="📥 Load", command=lambda: SavedOptions.loadData(interactables, f"{pnameVar.get()}.txt", game))
     loadBtn.pack(side="left", padx=(0,5))
     
-    deleteBtn = ttk.Button(presetFrame, text="✖ Delete", command=lambda preset=presetFrame: (DeletePreset(preset, pnameVar, game)))
-    deleteBtn.pack(side="left")
+    if isDeletable:
+        deleteBtn = ttk.Button(presetFrame, text="✖ Delete", command=lambda preset=presetFrame: (DeletePreset(preset, pnameVar, game)))
+        deleteBtn.pack(side="left")
 
 def OnNameChange(dir, var, oldnameVar):
     RenamePreset(dir, var, oldnameVar)

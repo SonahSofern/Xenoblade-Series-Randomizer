@@ -1,7 +1,7 @@
 # This will be the template for when you click a more info thing it will load some markdown into this template to be viewed
 from tkinter import *
 from tkinter import ttk
-import scripts.GUISettings, os, sys
+import scripts.GUISettings, os, sys, scripts.ScrollPanel
 from PIL import Image, ImageTk
 ImageGroup = [] # Needed because garbage collection will delete pictures otherwise
 OpenWindows = []
@@ -72,7 +72,8 @@ class PopHeader(DescriptionObject):
             for child in self.childGroup:
                 child.SpecialPack()
 
-def GenericPopup(root, title, font):
+
+def GenericPopup(root, title):
     for top in OpenWindows:
         if top.winfo_exists() and top.title() == title:
             top.focus()
@@ -90,27 +91,25 @@ def GenericPopup(root, title, font):
     top.attributes(alpha = 1.0)
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
     center(top, mainwindow)
-    scripts.GUISettings.LoadTheme(font, scripts.GUISettings.defGUIThemeVar.get())
+    scripts.GUISettings.LoadTheme(scripts.GUISettings.defGUIThemeVar.get())
     
     return top
     
 
-def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
-    top = GenericPopup(root, optionName, defaultFont)
+def GenPopup(optionName, descData, root, isForcedPack = False):
+    top = GenericPopup(root, optionName)
     if top == None:
         return # Dont do this again if top window already exists
     myDescription:Description = descData()
+    scrollPanel = scripts.ScrollPanel.ScrollablePanel(top)
     
-    Outerframe = ttk.Frame(top) 
     
-    canv = Canvas(Outerframe)
+    
     
     curHeader:PopHeader = None # Tracks how to place children under headers
     curFrame:ttk.Frame = None # Groups our options so they can collapse and regroup together
     
-    InnerFrame = ttk.Frame(canv)
-    scripts.GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
-    scripts.GUISettings.LoadTheme(defaultFont, scripts.GUISettings.defGUIThemeVar.get())
+    scripts.GUISettings.LoadTheme(scripts.GUISettings.defGUIThemeVar.get())
     
     # loop over data from the description class and parse it
     hasFewHeaders = sum(isinstance(item, PopHeader) for item in myDescription.data) < 3
@@ -124,7 +123,7 @@ def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
             curHeader.childGroup.append(descObj)
             
         elif isinstance(descObj, PopHeader): # Header
-            curFrame = ttk.Frame(InnerFrame)
+            curFrame = ttk.Frame(scrollPanel.innerFrame)
             descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=10, command=lambda obj= descObj: (obj.Dropdown(), scripts.GUISettings.ResizeWindow(top, InnerFrame), center(top, root)))
             curHeader = descObj
             curFrame.pack(fill="x", expand=True)
@@ -140,7 +139,7 @@ def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
         if hasFewHeaders or isForcedPack: # If we have less than 3 headers go ahead and pack everything
             descObj.SpecialPack()
 
-    scripts.GUISettings.ResizeWindow(top, InnerFrame, myDescription.bonusWidth)
+    scripts.GUISettings.ResizeWindow(top, scrollPanel.innerFrame, myDescription.bonusWidth)
     center(top, root)
     top.attributes(alpha = 1.0)
     top.deiconify()

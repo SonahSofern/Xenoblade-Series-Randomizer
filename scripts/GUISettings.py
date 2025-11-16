@@ -3,6 +3,7 @@ from scripts import UI_Colors
 from tkinter import ttk
 import random, subprocess, shutil, os, threading, traceback, time, datetime
 from scripts import SavedOptions, PopupDescriptions
+from tkinter.font import Font
 
 
 CanvasesForStyling = []
@@ -15,9 +16,9 @@ fontNameVar = StringVar()
 fontType = SavedOptions.SavedEntry("Font", defFontVar)
 fontSizeSave = SavedOptions.SavedEntry("Font Size", defFontSizeVar)
 GUITheme = SavedOptions.SavedEntry("Theme", defGUIThemeVar)
-
+defaultFont = Font(family="Calibri", size=14)
         
-def LoadTheme(defaultFont, themeName):
+def LoadTheme(themeName):
     style= ttk.Style()
     # Initial colors for the themes
 
@@ -240,6 +241,7 @@ def LoadTheme(defaultFont, themeName):
     style.configure("DescriptionImage.TLabel", background= currentTheme["midColor"])
     style.configure("CenteredLabel.TLabel")
     style.configure("CenteredButton.TButton", anchor = "center")
+    
 
     # Since Canvas and Roots arrent affected by normal styling
     for canvas in CanvasesForStyling:
@@ -253,34 +255,6 @@ def LoadTheme(defaultFont, themeName):
             root.config(background=currentTheme["backgroundColor"])
         except:
             pass
-
-def _on_mousewheel(event, canvas:Canvas):
-    canvas.update_idletasks()
-    canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-    # print(canvas.cget("scrollregion"))
-    
-def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFrames:list[ttk.Frame], genScrollbar = True):
-    for i in range(len(Canvases)):
-        InnerFrames[i].pack(fill=BOTH, expand=True)
-
-        scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
-        Canvases[i].config(yscrollcommand=scrollbar.set, borderwidth=0, relief="flat", highlightthickness=0)
-        CanvasesForStyling.append(Canvases[i])
-        # OuterFrames[i].config(borderwidth=0, relief="flat")
-        InnerFrames[i].bind("<Configure>", lambda e, canvas=Canvases[i]: canvas.configure(scrollregion=canvas.bbox("all")))
-
-        Canvases[i].create_window((0, 0), window=InnerFrames[i], anchor="nw")
-
-        Canvases[i].pack(side="left", fill=BOTH, expand=True)
-        if genScrollbar:
-            scrollbar.pack(side="right", fill="y")
-
-        OuterFrames[i].bind("<Enter>", lambda e, canvas=Canvases[i]: canvas.bind_all("<MouseWheel>", lambda event: _on_mousewheel(event, canvas)))
-        OuterFrames[i].bind("<Leave>", lambda e, canvas=Canvases[i]: canvas.unbind_all("<MouseWheel>"))
-        
-        OuterFrames[i].pack_propagate(False)
-        OuterFrames[i].pack(fill=BOTH, expand=True)
-
 
 def ResizeWindow(top, innerFrame, padx = 37):
     innerFrame.update_idletasks()  # Ensure the geometry is up to date
@@ -454,7 +428,7 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
                 errorMsgObj.Text(errorMsg)
         pb['value'] = nextStep
 
-    return lambda: PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(), root, defFontVar)
+    return lambda: PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(), root)
 
 OptionColorLight = UI_Colors.White
 OptionColorDark = UI_Colors.Gray

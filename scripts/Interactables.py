@@ -1,6 +1,6 @@
 from tkinter import ttk
 from tkinter import *
-from scripts import PopupDescriptions, GUISettings
+from scripts import PopupDescriptions, GUISettings, ScrollPanel
 from tkinter.font import Font
 
 Game = "" # Used to tell what option goes to what games tab
@@ -68,7 +68,7 @@ class Option():
         
         # Description Label or Button
         if self.descData != None:
-            self.descObj = ttk.Button(optionPanel, text = text, command=lambda: PopupDescriptions.GenPopup(self.name, self.descData, self.root, self.defFont), style=f"{stylePrefix}.TButton", width=60)
+            self.descObj = ttk.Button(optionPanel, text = text, command=lambda: PopupDescriptions.GenPopup(self.name, self.descData, self.root), style=f"{stylePrefix}.TButton", width=60)
             padx = 13
         else:
             self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, style=f"{stylePrefix}.TLabel", wraplength=400)
@@ -182,7 +182,7 @@ class MutuallyExclusivePairing():
         for op in group2:
             op.clickCommands.append(lambda op=op: MutuallyExclusiveToggle(op, group1))
 
-def MutuallyExclusiveToggle(op:Option, pairGroup):
+def MutuallyExclusiveToggle(op:Option, pairGroup:list[Option]):
     if op.checkBoxVal.get() == False:
         return
     
@@ -196,48 +196,43 @@ def MutuallyExclusiveToggle(op:Option, pairGroup):
     else:
         op.checkBoxVal.set(False)
             
-def AskToChooseOption(enabledOption, conflictingOptions):
-    defaultFont = Font(family="Calibri", size=14)
-    conflictWindow = "Conflicting Settings"
-
+def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
     top = Toplevel(padx=10, pady=10)  # Create a new top-level window
-    top.title(conflictWindow)
+    top.title("Conflicting Settings")
     top.geometry("600x600")
     
     GUISettings.RootsForStyling.append(top)
-    Outerframe = ttk.Frame(top) 
-    canv = Canvas(Outerframe)
-    InnerFrame = ttk.Frame(canv)
-    GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
-    GUISettings.LoadTheme(defaultFont, GUISettings.defGUIThemeVar.get())
+    
+    scrollablePanel = ScrollPanel.ScrollablePanel(top)
+    GUISettings.LoadTheme(GUISettings.defGUIThemeVar.get())
 
-    conflictDesc = ttk.Label(InnerFrame, text= f"The following options are incompatible with the {enabledOption} option:", justify = "center")
+    conflictDesc = ttk.Label(scrollablePanel.innerFrame, text= f"The following options are incompatible with the {enabledOption} option:", justify = "center")
     conflictDesc.grid(column = 1, row = 0, sticky=(N, S, E, W))
     
     CurRow = 1
 
-    InnerFrame.grid_rowconfigure(CurRow, minsize = 20, weight = 1)
+    scrollablePanel.innerFrame.grid_rowconfigure(CurRow, minsize = 20, weight = 1)
     CurRow += 1
 
     for option in conflictingOptions:
-        incompatibleOption = ttk.Label(InnerFrame, text = option.name, style = "CenteredLabel.TLabel", anchor = "center", padding = (0, 5))
+        incompatibleOption = ttk.Label(scrollablePanel.innerFrame, text = option.name, style = "CenteredLabel.TLabel", anchor = "center", padding = (0, 5))
         incompatibleOption.grid(column = 1, row = CurRow, sticky = (N, S, E, W))
         CurRow += 1
 
-    opt1Pressed = BooleanVar(InnerFrame)
-    opt2Pressed = BooleanVar(InnerFrame)
+    opt1Pressed = BooleanVar(scrollablePanel.innerFrame)
+    opt2Pressed = BooleanVar(scrollablePanel.innerFrame)
 
-    opt1Button = ttk.Button(InnerFrame, text= "Disable Incompatible Options", command=lambda: (opt1Pressed.set(True), top.destroy()), style = "CenteredButton.TButton")
+    opt1Button = ttk.Button(scrollablePanel.innerFrame, text= "Disable Incompatible Options", command=lambda: (opt1Pressed.set(True), top.destroy()), style = "CenteredButton.TButton")
     opt1Button.grid(column = 0, row = CurRow + 1, sticky = (N, S, E, W))
-    opt2Button = ttk.Button(InnerFrame, text= f"Disable {enabledOption}", command=lambda: (opt2Pressed.set(True), top.destroy()), style = "CenteredButton.TButton")
+    opt2Button = ttk.Button(scrollablePanel.innerFrame, text= f"Disable {enabledOption}", command=lambda: (opt2Pressed.set(True), top.destroy()), style = "CenteredButton.TButton")
     opt2Button.grid(column = 2, row = CurRow + 1, sticky = (N, S, E, W))
 
-    InnerFrame.grid_rowconfigure(CurRow, minsize = 20, weight = 1)
+    scrollablePanel.innerFrame.grid_rowconfigure(CurRow, minsize = 20, weight = 1)
 
     for col in range(3):
-        InnerFrame.grid_columnconfigure(col, weight = 1, minsize = 250)
+        scrollablePanel.innerFrame.grid_columnconfigure(col, weight = 1, minsize = 250)
 
-    GUISettings.ResizeWindow(top, InnerFrame)
+    GUISettings.ResizeWindow(top, scrollablePanel.innerFrame)
 
     top.focus()
     top.deiconify()
@@ -251,13 +246,3 @@ def AskToChooseOption(enabledOption, conflictingOptions):
         ChosenResolution = False
 
     return ChosenResolution
-
-
-class Header():
-    def __init__(self, childList:list[Option]):
-        tab = childList[0].tab
-        
-        dropdown = ttk.Button()
-        # make a dropdown button
-        # add children into its care
-        pass
