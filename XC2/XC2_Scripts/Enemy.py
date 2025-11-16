@@ -278,6 +278,8 @@ def GortOgreUppercutRemoval(paramData): # Gort 2's Ogre Uppercut seems to be bug
 #             en["Detects"] = 0
 #         JSONParser.CloseFile(eneData, eneFile)
 
+def CutsceneOnlyEnemyMatch():
+    pass # Match overworld enemies that have NoTarget to their replacement. For example the aligo on the ancient ship you can see before the cutscene but it doesnt get updated to a new paramID
     
 def TornaIntroChanges(e:e.EnemyRandomizer):
     e.ChangeStats([1430, 1429, 1428, 1454], [("HpMaxRev", 50)])
