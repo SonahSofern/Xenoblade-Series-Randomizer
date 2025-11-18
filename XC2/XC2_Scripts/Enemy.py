@@ -253,7 +253,7 @@ def GortOgreUppercutRemoval(paramData): # Gort 2's Ogre Uppercut seems to be bug
             row["ArtsNum4"] = 963 # replaced Ogre Uppercut with a second instance of Ogre Flame
             break
 
-# def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy happens to show up early. Nerfed by 3/4ths.
+# def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy happens to show up early. Nerfed by 3/4ths. (removed now that enemy hp cant get too out of hand early due to matching paramRev)
 #     with open("XC2/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as file:
 #         data = json.load(file)
 #         for row in data["rows"]:
