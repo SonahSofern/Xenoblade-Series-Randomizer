@@ -1,6 +1,6 @@
 from tkinter import ttk
 from tkinter import *
-from scripts import PopupDescriptions, GUISettings, ScrollPanel
+from scripts import GUIHelper, PopupDescriptions, ScrollPanel
 from tkinter.font import Font
 
 Game = "" # Used to tell what option goes to what games tab
@@ -201,10 +201,10 @@ def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
     top.title("Conflicting Settings")
     top.geometry("600x600")
     
-    GUISettings.RootsForStyling.append(top)
+    GUIHelper.RootsForStyling.append(top)
     
     scrollablePanel = ScrollPanel.ScrollablePanel(top)
-    GUISettings.LoadTheme(GUISettings.defGUIThemeVar.get())
+    GUIHelper.LoadTheme(GUIHelper.defGUIThemeVar.get())
 
     conflictDesc = ttk.Label(scrollablePanel.innerFrame, text= f"The following options are incompatible with the {enabledOption} option:", justify = "center")
     conflictDesc.grid(column = 1, row = 0, sticky=(N, S, E, W))
@@ -232,7 +232,7 @@ def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
     for col in range(3):
         scrollablePanel.innerFrame.grid_columnconfigure(col, weight = 1, minsize = 250)
 
-    GUISettings.ResizeWindow(top, scrollablePanel.innerFrame)
+    GUIHelper.ResizeWindow(top, scrollablePanel.innerFrame)
 
     top.focus()
     top.deiconify()

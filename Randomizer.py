@@ -3,13 +3,13 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.font import Font
 root = Tk()
-from scripts import GUISettings, XCRandomizer
+from scripts import GUIHelper, XCRandomizer
 import XCDE.XCDE_Scripts.XCDE_Settings as XCDE
 import XC2.XC2_Scripts.XC2_Settings as XC2
 import XC3.XC3_Scripts.XC3_Settings as XC3
 import XCXDE.XCXDE_Scripts.XCXDE_Settings as XCXDE
 
-GUISettings.RootsForStyling.append(root)
+GUIHelper.RootsForStyling.append(root)
 Version = "1.1.2"
 windowWidth = "1600"
 windowHeight = "900"
@@ -21,11 +21,11 @@ MainWindow = ttk.Notebook(root, padding=0, style = "centeredTabs.TNotebook")
 MainWindow.pack(fill="both", expand=True, padx=0, pady=0)
 
 root.title(f"Xenoblade Chronicles Series Randomizer {Version}")
-root.option_add("*Font", GUISettings.defaultFont)
+root.option_add("*Font", GUIHelper.defaultFont)
 
 
 root.geometry(f'{windowWidth}x{windowHeight}')
-GUISettings.LoadTheme(GUISettings.defGUIThemeVar.get())
+GUIHelper.LoadTheme(GUIHelper.defGUIThemeVar.get())
 
 if XCRandomizer.isOneFile: 
     icon_path = os.path.join(sys._MEIPASS, 'images', 'XCIcon.png')

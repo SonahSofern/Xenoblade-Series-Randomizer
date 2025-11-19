@@ -2,6 +2,7 @@ garbList = []
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
+from scripts import Theme
 
 class ScrollablePanel():
     def __init__(self, parent):
@@ -20,7 +21,7 @@ def CreateScrollBars(OuterFrames:list[ttk.Frame], Canvases:list[Canvas], InnerFr
 
         scrollbar = ttk.Scrollbar(OuterFrames[i], orient="vertical", command=Canvases[i].yview)
         Canvases[i].config(yscrollcommand=scrollbar.set, borderwidth=0, relief="flat", highlightthickness=0)
-        CanvasesForStyling.append(Canvases[i])
+        Theme.CanvasesForStyling.append(Canvases[i])
         # OuterFrames[i].config(borderwidth=0, relief="flat")
         InnerFrames[i].bind("<Configure>", lambda e, canvas=Canvases[i]: canvas.configure(scrollregion=canvas.bbox("all")))
 

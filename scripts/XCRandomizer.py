@@ -4,9 +4,10 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
-from scripts.GUISettings import *
+from scripts.GUIHelper import *
 from PIL import Image, ImageTk
-from scripts import ScrollPanel
+from scripts import GUIHelper, ScrollPanel, UI_Colors, PopupDescriptions, Theme
+import random, subprocess, shutil, os, threading, traceback, time, datetime
 
 class Tab():
     def __init__(self, name, outer, canvas, inner):
@@ -98,7 +99,7 @@ saveCommands = []
 # Some of the oldest code and messy for sure. 
 def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= [], setupHelpDesc = None):
     import  os, sys
-    from scripts import SavedOptions, Helper, GUISettings, PermalinkManagement, Seed, Interactables, SettingsPresets
+    from scripts import SavedOptions, Helper, PermalinkManagement, Seed, Interactables, SettingsPresets
     from tkinter.font import Font
     import tkinter as tk
 
@@ -110,11 +111,11 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
         fileEntryVar = f"{Game}/bdat"
     SavedOptionsFileName = f"Last Save.txt"
     JsonOutput = f"./{Game}/JsonOutputs"
-    SavedOptions.loadData([GUISettings.fontSizeSave, GUISettings.fontType, GUISettings.GUITheme], "GUISavedOptions.txt", f"{Game}/GUI")
-    defaultFont = Font(family=GUISettings.defFontVar.get(), size=GUISettings.defFontSizeVar.get())
+    SavedOptions.loadData([GUIHelper.fontSizeSave, GUIHelper.fontType, GUIHelper.GUITheme], "GUISavedOptions.txt", f"{Game}/GUI")
+    defaultFont = Font(family=GUIHelper.defFontVar.get(), size=GUIHelper.defFontSizeVar.get())
     saveCommand = lambda: SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game)
     XCFrame = ttk.Frame(window) # Outer Frame
-    RootsForStyling.append(XCFrame)
+    Theme.RootsForStyling.append(XCFrame)
 
     window.add(XCFrame, text =Version, image=CreateImage(f"{Game}/Images/{Game}Icon.png"), compound="left") 
 
@@ -155,7 +156,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     MainWindow.pack(expand = True, fill ="both", padx=windowPadding, pady=(windowPadding, 5))
 
     for opt in Interactables.XenoOptionDict[Game]:
-        opt.DisplayOption(InnerDict[opt.tab], XCFrame, defaultFont, GUISettings.defGUIThemeVar.get())
+        opt.DisplayOption(InnerDict[opt.tab], XCFrame, defaultFont, GUIHelper.defGUIThemeVar.get())
 
     def GenRandomSeed(randoSeedEntryVar):
         randoSeedEntryVar.set(Seed.RandomSeedName(SeedNouns, SeedVerbs))
@@ -175,7 +176,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     SeedFrame = ttk.Frame(background, style="NoBackground.TFrame")
     seedDesc = ttk.Button(SeedFrame, text="Seed", command=lambda: GenRandomSeed(seedEntryVar))
 
-    GUISettings.RootsForStyling.append(bottomFrame)
+    GUIHelper.RootsForStyling.append(bottomFrame)
 
     # Seed entry box
     GenRandomSeed(seedEntryVar) # Gen a random seed if you have no save data 
@@ -206,7 +207,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), GUISettings.Randomize(XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles, isOneFile=isOneFile))))
+    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), GUIHelper.Randomize(XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles, isOneFile=isOneFile))))
     RandomizeButton.pack(pady=(5,windowPadding), padx=(windowPadding, 0), anchor="w", side="left")
     saveCommands.append(saveCommand)
 
@@ -229,6 +230,176 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     # SettingsButton = ttk.Button(rightHomeFrame, text="Discord")
     # SettingsButton.pack(anchor="e") 
 
-    GUISettings.LoadTheme(GUISettings.defGUIThemeVar.get())
+    Theme.LoadTheme(Theme.defGUIThemeVar.get())
     root.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background, Game), add="+")
 
+def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[], isOneFile = False):
+    def ThreadedRandomize():
+        entrySpot = fileEntryVar
+        outSpot = f"{outputDirVar.get().strip()}/romfs/bdat"
+        
+        # Disable Repeated Button Click
+        RandomizeButton.config(state=DISABLED)
+        
+        # Make Popup
+        progressPopup = PopupDescriptions.GenericPopup(root, f"Log {datetime.datetime.now()}", Theme.defFontVar)
+
+        randoProgressFill = ttk.Frame(progressPopup, padding=0)
+        randoProgressDisplay = ttk.Label(randoProgressFill, padding=5)
+        randoProgressDisplay.pack(pady=0)
+        pb = ttk.Progressbar(progressPopup ,orient='horizontal',mode='determinate',length=500)
+        progressPopup.deiconify() # Wait until things are ready to show
+    
+        # Showing Progress Diplay 
+        randoProgressDisplay.config(text="Unpacking BDATs")
+        randoProgressFill.pack(pady=(30,0))
+        pb.pack(padx=0,pady=(0,20))
+        PopupDescriptions.center(progressPopup, root)
+        
+        random.seed(permalinkVar.get())
+        print("Seed: " + randoSeedEntry.get())
+        print("Permalink: "+  permalinkVar.get())
+        os.makedirs(outSpot, exist_ok=True) # Make the directory for them
+        try:
+            for file in BDATFiles:
+                # print("BDAT:", JsonOutput, "Exists:", os.path.exists(JsonOutput))
+                subprocess.run([bdat_path, "extract", f"{entrySpot}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            for file in SubBDATFiles:
+                subprocess.run([bdat_path, "extract", f"{entrySpot}/{textFolderName}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+
+            # Unpacks BDATs
+
+        except:
+            print(f"{traceback.format_exc()}") # shows the full error
+            time.sleep(3)
+            RandomizeButton.config(state=NORMAL)
+            return
+
+        # Runs all randomization
+        popup = RunOptions(OptionList, randoProgressDisplay, root, randoSeedEntry.get(), permalinkVar.get(), pb)
+        for command in ExtraCommands: # Runs extra commands like show title screen
+            command()
+            
+        randoProgressDisplay.config(text="Packing BDATs")
+    
+        # Packs BDATs
+        # If we are packed for users we dont want to create a window. For us we want this window to see errors from bdat-rs
+        if isOneFile:
+            creationFlags = subprocess.CREATE_NO_WINDOW
+        else:
+            creationFlags = 0
+        try:
+            subprocess.run([bdat_path, "pack", JsonOutput, "-o", outSpot, "-f", "json"],check=True,stderr=None,stdout=None, creationflags=creationFlags)
+            # for file in 
+            # Outputs common_ms in the correct file structure
+            os.makedirs(f"{outSpot}/{textFolderName}", exist_ok=True)
+            for file in SubBDATFiles:
+                shutil.move(f"{outSpot}/{file}.bdat", f"{outSpot}/{textFolderName}/{file}.bdat")
+            AddFileToOutput(outSpot, extraFiles)
+            # Displays Done and Clears Text
+            randoProgressDisplay.config(text="Done")
+            pb['value'] = 100
+            randoProgressFill.destroy()
+            pb.destroy()
+            
+            print(f"Finished at {datetime.datetime.now()}")
+        except:
+            # print(f"{traceback.format_exc()}") # shows the full error
+            randoProgressDisplay.config(text="Failed Outputs")
+
+        
+        # Re-Enables Randomize Button
+        RandomizeButton.config(state=NORMAL)
+
+    threading.Thread(target=ThreadedRandomize).start()
+
+def AddFileToOutput(output, files):
+    try:
+        for file in files:
+            outputFolder = os.path.join(output, file.location)
+            os.makedirs(outputFolder, exist_ok=True)
+
+            src = random.choice(file.files)
+
+            if os.path.isdir(src):  # Handle Folders
+                destPath = os.path.join(outputFolder, file.newName or os.path.basename(src))
+                shutil.copytree(src, destPath, dirs_exist_ok=True)
+
+            else: # Handle file
+                destPath = os.path.join(outputFolder, file.newName or os.path.basename(src))
+                shutil.copy(src, destPath)
+    except Exception as e:
+        print(e)
+        
+def SumTotalCommands(OptionList):
+    TotalCommands = 1
+    for opt in OptionList:
+        if opt.GetState(): # Checks state
+            TotalCommands += 1
+    return TotalCommands
+
+def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
+    
+    OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
+    
+    errorMsgObj = PopupDescriptions.Description(bonusWidth= 15)
+    errorMsgObj.Header("Randomization Finished")
+    errorMsgObj.Tag(f"Seed: {seed}", pady=5, anchor="center") # Seed
+    # errorMsgObj.Tag(f"Settings: {permalink}", pady=5, anchor="center") # Permalink
+    errorMsgObj.Tag(f"Time: {datetime.datetime.now()}", pady=5, anchor="center") # Time
+    
+    def ErrorLog():
+        return errorMsgObj
+
+    for opt in OptionList: # runs pre-randomization commands before the actual options
+        for command in opt.preRandoCommands:
+            try:
+                command()
+            except Exception as error:
+                print(f"ERROR: {opt.name} | {error}")
+                print(f"{traceback.format_exc()}") # shows the full error
+    TotalCommands = SumTotalCommands(OptionList)       
+
+    for opt in OptionList:
+        if not opt.GetState(): # Checks state
+            continue
+        opt.subOptions.sort(key= lambda x: x.prio) # Sort suboptions by priority
+            
+        for sub in opt.subOptions:
+            if not sub.checkBoxVal.get(): # Checks state
+                continue
+            try:
+                for command in sub.commands:
+                    command()
+            except Exception as error:
+                print(f"ERROR: {opt.name}: {sub.name} | {error}")
+                print(f"{traceback.format_exc()}") # shows the full error
+                
+        randoProgressDisplay.config(text=opt.name)
+        
+        nextStep =  pb['value'] + (100/TotalCommands) # Cache it here so it doesnt matter how far the bar goes 
+        threading.Thread(target=lambda: SlowBurn(pb, nextStep)).start()
+
+        for command in opt.commands:
+            try:
+                errorMsg = command()
+                    
+            except Exception as error:
+                status = "FAILED Randomization"
+                print(f"ERROR: {opt.name} | {error}")
+                print(traceback.format_exc()) # shows the full error
+                if errorMsg == None:
+                    errorMsg = error
+                errorMsgObj.Header(f"Error: {opt.name}")
+                errorMsgObj.Text(errorMsg)
+        pb['value'] = nextStep
+
+    return lambda: PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(), root)
+
+OptionColorLight = UI_Colors.White
+OptionColorDark = UI_Colors.Gray
+
+def SlowBurn(progressBar, nextStop):
+    while(progressBar['value'] < nextStop):
+        time.sleep(0.02)
+        progressBar['value'] += 0.05

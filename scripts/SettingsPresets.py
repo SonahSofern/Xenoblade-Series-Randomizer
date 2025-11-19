@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from scripts import GUISettings, SavedOptions, Interactables, ScrollPanel
+from scripts import GUIHelper, SavedOptions, Interactables, ScrollPanel
 import tkinter as tk
 import os
 
