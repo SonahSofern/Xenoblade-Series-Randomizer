@@ -4,9 +4,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
-from scripts.GUIHelper import *
 from PIL import Image, ImageTk
-from scripts import GUIHelper, ScrollPanel, UI_Colors, PopupDescriptions, Theme
+from scripts import ScrollPanel, UI_Colors, PopupDescriptions, Theme
 import random, subprocess, shutil, os, threading, traceback, time, datetime
 
 class Tab():
@@ -111,8 +110,6 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
         fileEntryVar = f"{Game}/bdat"
     SavedOptionsFileName = f"Last Save.txt"
     JsonOutput = f"./{Game}/JsonOutputs"
-    SavedOptions.loadData([GUIHelper.fontSizeSave, GUIHelper.fontType, GUIHelper.GUITheme], "GUISavedOptions.txt", f"{Game}/GUI")
-    defaultFont = Font(family=GUIHelper.defFontVar.get(), size=GUIHelper.defFontSizeVar.get())
     saveCommand = lambda: SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game)
     XCFrame = ttk.Frame(window) # Outer Frame
     Theme.RootsForStyling.append(XCFrame)
@@ -156,7 +153,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     MainWindow.pack(expand = True, fill ="both", padx=windowPadding, pady=(windowPadding, 5))
 
     for opt in Interactables.XenoOptionDict[Game]:
-        opt.DisplayOption(InnerDict[opt.tab], XCFrame, defaultFont, GUIHelper.defGUIThemeVar.get())
+        opt.DisplayOption(InnerDict[opt.tab], XCFrame)
 
     def GenRandomSeed(randoSeedEntryVar):
         randoSeedEntryVar.set(Seed.RandomSeedName(SeedNouns, SeedVerbs))
@@ -176,7 +173,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     SeedFrame = ttk.Frame(background, style="NoBackground.TFrame")
     seedDesc = ttk.Button(SeedFrame, text="Seed", command=lambda: GenRandomSeed(seedEntryVar))
 
-    GUIHelper.RootsForStyling.append(bottomFrame)
+    Theme.RootsForStyling.append(bottomFrame)
 
     # Seed entry box
     GenRandomSeed(seedEntryVar) # Gen a random seed if you have no save data 
@@ -207,7 +204,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), GUIHelper.Randomize(XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles, isOneFile=isOneFile))))
+    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), Randomize(XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles, isOneFile=isOneFile))))
     RandomizeButton.pack(pady=(5,windowPadding), padx=(windowPadding, 0), anchor="w", side="left")
     saveCommands.append(saveCommand)
 

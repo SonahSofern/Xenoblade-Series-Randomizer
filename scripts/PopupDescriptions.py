@@ -1,7 +1,8 @@
 # This will be the template for when you click a more info thing it will load some markdown into this template to be viewed
 from tkinter import *
 from tkinter import ttk
-import scripts.GUIHelper, os, sys, scripts.ScrollPanel, Theme
+import scripts.GUIHelper, os, sys, scripts.ScrollPanel
+from scripts import Theme
 from PIL import Image, ImageTk
 ImageGroup = [] # Needed because garbage collection will delete pictures otherwise
 OpenWindows = []

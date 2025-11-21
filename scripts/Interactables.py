@@ -38,10 +38,8 @@ class Option():
         self.spinWidth = spinWidth
         self.spinIncr = spinIncr
         
-    def DisplayOption(self, tab, root, defFont, defTheme):
+    def DisplayOption(self, tab, root):
         self.root = root
-        self.defFont = defFont
-        self.defTheme = defTheme
         self.GenStandardOption(tab)
         self.StateUpdate()
         
