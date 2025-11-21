@@ -73,32 +73,30 @@ class PopHeader(DescriptionObject):
             for child in self.childGroup:
                 child.SpecialPack()
 
-
-def GenericPopup(root, title):
+def GenericPopup(title):
     for top in OpenWindows:
         if top.winfo_exists() and top.title() == title:
             top.focus()
             top.deiconify() # unminimizes
             return None # If it exists, don't create a new one
         
-    mainwindow = root.winfo_toplevel()
-    top = Toplevel(root, padx=10, pady=10)  # Create a new top-level window
+    top = Toplevel(padx=10, pady=10)  # Create a new top-level window
     top.withdraw()
     top.attributes(alpha=0.0)
     top.title(title)
-    Theme.RootsForStyling.append(top)
     OpenWindows.append(top)
     
     top.attributes(alpha = 1.0)
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
-    center(top, mainwindow)
+    # center(top, mainwindow)
+    Theme.RootsForStyling.append(top)
     Theme.LoadTheme(Theme.defGUIThemeVar.get())
     
     return top
     
 
 def GenPopup(optionName, descData, root, isForcedPack = False):
-    top = GenericPopup(root, optionName)
+    top = GenericPopup(optionName)
     if top == None:
         return # Dont do this again if top window already exists
     myDescription:Description = descData()
@@ -106,9 +104,7 @@ def GenPopup(optionName, descData, root, isForcedPack = False):
     
     curHeader:PopHeader = None # Tracks how to place children under headers
     curFrame:ttk.Frame = None # Groups our options so they can collapse and regroup together
-    
-    # scripts.GUIHelper.LoadTheme(scripts.GUIHelper.defGUIThemeVar.get())
-    
+        
     # loop over data from the description class and parse it
     hasFewHeaders = sum(isinstance(item, PopHeader) for item in myDescription.data) < 3
     for descObj in myDescription.data:
@@ -137,10 +133,12 @@ def GenPopup(optionName, descData, root, isForcedPack = False):
         if hasFewHeaders or isForcedPack: # If we have less than 3 headers go ahead and pack everything
             descObj.SpecialPack()
 
+    Theme.LoadTheme(Theme.defGUIThemeVar.get())
     scripts.GUIHelper.ResizeWindow(top, scrollPanel.innerFrame, myDescription.bonusWidth)
     center(top, root)
     top.attributes(alpha = 1.0)
     top.deiconify()
+    
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
 
             

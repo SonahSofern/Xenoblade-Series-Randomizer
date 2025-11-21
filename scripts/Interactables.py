@@ -1,6 +1,6 @@
 from tkinter import ttk
 from tkinter import *
-from scripts import GUIHelper, PopupDescriptions, ScrollPanel
+from scripts import GUIHelper, PopupDescriptions, ScrollPanel, Theme
 from tkinter.font import Font
 
 Game = "" # Used to tell what option goes to what games tab
@@ -195,14 +195,13 @@ def MutuallyExclusiveToggle(op:Option, pairGroup:list[Option]):
         op.checkBoxVal.set(False)
             
 def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
-    top = Toplevel(padx=10, pady=10)  # Create a new top-level window
-    top.title("Conflicting Settings")
-    top.geometry("600x600")
-    
-    GUIHelper.RootsForStyling.append(top)
+    top = PopupDescriptions.GenericPopup("Conflicting Settings")
+    if top == None:
+        return # Dont do this again if top window already exists
     
     scrollablePanel = ScrollPanel.ScrollablePanel(top)
-    GUIHelper.LoadTheme(GUIHelper.defGUIThemeVar.get())
+    Theme.RootsForStyling.append(top)
+    Theme.LoadTheme(Theme.defGUIThemeVar.get())
 
     conflictDesc = ttk.Label(scrollablePanel.innerFrame, text= f"The following options are incompatible with the {enabledOption} option:", justify = "center")
     conflictDesc.grid(column = 1, row = 0, sticky=(N, S, E, W))

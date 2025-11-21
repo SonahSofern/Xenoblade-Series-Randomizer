@@ -21,7 +21,7 @@ class FilePlacer:
         self.files = []
         for file in files:
             if isOneFile:
-                file = os.path.join(sys._MEIPASS,game, file)
+                file = os.path.join(sys._MEIPASS, game, file)
             else:
                 file = f"{game}/{file}"
             self.files.append(file)
@@ -239,7 +239,7 @@ def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, rand
         RandomizeButton.config(state=DISABLED)
         
         # Make Popup
-        progressPopup = PopupDescriptions.GenericPopup(root, f"Log {datetime.datetime.now()}", Theme.defFontVar)
+        progressPopup = PopupDescriptions.GenericPopup(f"Log {datetime.datetime.now()}")
 
         randoProgressFill = ttk.Frame(progressPopup, padding=0)
         randoProgressDisplay = ttk.Label(randoProgressFill, padding=5)
@@ -392,9 +392,6 @@ def RunOptions(OptionList, randoProgressDisplay, root, seed, permalink, pb):
         pb['value'] = nextStep
 
     return lambda: PopupDescriptions.GenPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(), root)
-
-OptionColorLight = UI_Colors.White
-OptionColorDark = UI_Colors.Gray
 
 def SlowBurn(progressBar, nextStop):
     while(progressBar['value'] < nextStop):

@@ -11,6 +11,8 @@ class ScrollablePanel():
         self.innerFrame = ttk.Frame(self.canvas)
         self.Scroll()
         garbList.append(self)
+        Theme.CanvasesForStyling.append(self.canvas)
+        
         
     def Scroll(self):
         CreateScrollBars([self.outerFrame], [self.canvas], [self.innerFrame])
