@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from scripts import GUIHelper, SavedOptions, Interactables, ScrollPanel
+from scripts import SavedOptions, ScrollPanel
 import tkinter as tk
 import os
 
@@ -13,29 +13,29 @@ def PresetsWindow(parent, interactAbles, game):
     
     outerCustomFrame = ttk.Frame(parent)
     outerPremadeFrame = ttk.Frame(parent)
-    outerPremadeFrame.pack(side="left", fill="both", expand=True)
-    outerCustomFrame.pack(side="left", fill="both", expand=True)
+    outerPremadeFrame.pack(side="left", fill="both", expand=True, padx=(0,10))
+    outerCustomFrame.pack(side="left", fill="both", expand=True, padx=(10,0))
     
-    titleLabel = ttk.Label(outerPremadeFrame, text="Get started with some recommended presets",style="Title.TLabel")
+    titleLabel = ttk.Label(outerPremadeFrame, text="Get started with some recommended presets", style="Title.TLabel")
     titleLabel.pack(anchor="w", pady = (5,5))
     PremadePresetScroll = ScrollPanel.ScrollablePanel(outerPremadeFrame)
-    customTitleLabel = ttk.Label(outerCustomFrame, text="Add your own custom presets",style="Title.TLabel")
+    customTitleLabel = ttk.Label(outerCustomFrame, text="Use your own custom presets", style="Title.TLabel")
     customTitleLabel.pack(anchor="w", pady = (5,5))
     CustomPresetScroll = ScrollPanel.ScrollablePanel(outerCustomFrame)
     
-    saveasPresetBtn = ttk.Button(outerCustomFrame, text="Save Current Settings as Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName, game), CreatePreset(defaultName, CustomPresetScroll.innerFrame, interactAbles, game, dir, True)))
+    saveasPresetBtn = ttk.Button(outerCustomFrame, text="Add Current Settings as Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName, f"{game}/SaveData"), CreatePreset(defaultName, CustomPresetScroll.innerFrame, interactAbles, dir, False)))
     saveasPresetBtn.pack(pady=(5,5),padx=(0,0), anchor="nw")
     
-    GetPresets(PremadePresetScroll.innerFrame, premadeDir, interactAbles, game, False)
-    GetPresets(CustomPresetScroll.innerFrame, dir, interactAbles, game, True)
+    GetPresets(PremadePresetScroll.innerFrame, premadeDir, interactAbles, True)
+    GetPresets(CustomPresetScroll.innerFrame, dir, interactAbles, False)
     
-def GetPresets(innerFrame, dir, interacts, game, isDeletable): 
+def GetPresets(innerFrame, dir, interacts, isFinal): 
     for filename in os.listdir(dir):
-        CreatePreset(filename, innerFrame, interacts, game, dir, isDeletable)
+        CreatePreset(filename, innerFrame, interacts, dir, isFinal)
 
-def CreatePreset(filename, innerFrame, interactables, game, dir, isDeletable):
+def CreatePreset(filename, innerFrame, interactables, dir, isFinal):
     # print("Created Preset")
-    pnameVar = tk.StringVar(value=filename.replace(".txt", ""))
+    pnameVar = tk.StringVar(value=filename.replace(".txt", "")) # Used so we have a reference variable that can be updated onNameChange and still load properly
     oldnameVar = tk.StringVar(value=pnameVar.get())
     presetFrame = ttk.Frame(innerFrame)
     presetFrame.pack(padx=3, pady=3, fill="both")
@@ -45,12 +45,16 @@ def CreatePreset(filename, innerFrame, interactables, game, dir, isDeletable):
     pnameVar.trace_add("write", lambda *args: OnNameChange(dir, pnameVar, oldnameVar))
     name.pack(side="left", padx=(0,5))
     
-    loadBtn = ttk.Button(presetFrame, text="📥 Load", command=lambda: SavedOptions.loadData(interactables, f"{pnameVar.get()}.txt", game))
+    loadBtn = ttk.Button(presetFrame, text="📥 Load", command=lambda: SavedOptions.loadData(interactables, f"{pnameVar.get()}.txt", dir))
     loadBtn.pack(side="left", padx=(0,5))
-    
-    if isDeletable:
-        deleteBtn = ttk.Button(presetFrame, text="✖ Delete", command=lambda preset=presetFrame: (DeletePreset(preset, pnameVar, game)))
+        
+    if not isFinal:
+        deleteBtn = ttk.Button(presetFrame, text="✖ Delete", command=lambda preset=presetFrame: (DeletePreset(preset, pnameVar, dir)))
         deleteBtn.pack(side="left")
+        
+    if isFinal:
+        name.config(state="readonly")
+        
 
 def OnNameChange(dir, var, oldnameVar):
     RenamePreset(dir, var, oldnameVar)
@@ -62,7 +66,7 @@ def UpdateOldName(old, curName):
 # Delete a Preset
 def DeletePreset(preset, file, game):
     preset.destroy()
-    os.remove(f"{game}/SaveData/{file.get()}.txt")
+    os.remove(f"{game}/{file.get()}.txt")
     
 # Option to name preset
 def RenamePreset(dir,  strvar, oldVar):

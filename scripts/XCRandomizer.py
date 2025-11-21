@@ -110,7 +110,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
         fileEntryVar = f"{Game}/bdat"
     SavedOptionsFileName = f"Last Save.txt"
     JsonOutput = f"./{Game}/JsonOutputs"
-    saveCommand = lambda: SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game)
+    saveCommand = lambda: SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, f"{Game}/SaveData")
     XCFrame = ttk.Frame(window) # Outer Frame
     Theme.RootsForStyling.append(XCFrame)
 

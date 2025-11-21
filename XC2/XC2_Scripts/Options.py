@@ -162,7 +162,7 @@ MusicOption = Option("Music", Funny, "Randomizes Music", [lambda: MusicShuffling
 MusicOption_MixBattleAndEnv = SubOption("Mix Battle/Environment Themes", MusicOption, defState = False)
 
 # QOL
-ShortcutsOption = Option("Quest Skips", QOL, "Various speedups/skips for the main story quests")
+ShortcutsOption = Option("Quest Skips", QOL, "Various speedups/skips for main story quests")
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
 ShortcutsOption_IndolQuiz = SubOption("Indol Quiz Skip", ShortcutsOption, [lambda: Skips.IndolQuizSkip()])
