@@ -6,7 +6,8 @@ from tkinter import *
 import tkinter as tk
 from PIL import Image, ImageTk
 from scripts import ScrollPanel, UI_Colors, PopupDescriptions, Theme
-import random, subprocess, shutil, os, threading, traceback, time, datetime
+import random, subprocess, shutil, os, threading, traceback, time, datetime, webbrowser
+from scripts import SavedOptions, Helper, PermalinkManagement, Seed, Interactables, SettingsPresets
 
 class Tab():
     def __init__(self, name, outer, canvas, inner):
@@ -48,7 +49,6 @@ def CheckIfUserNeedsUpdate(version, root):
         if latest_tag <= version:
             return
         else:
-            import webbrowser
             def link():
                 webbrowser.open_new(f"https://github.com/SonahSofern/Xenoblade-Series-Randomizer/releases/tag/{latest_tag}")
             updateMessage = ttk.Button(root, command=lambda: link(), text=f"Download Latest Version {latest_tag}")
@@ -56,12 +56,13 @@ def CheckIfUserNeedsUpdate(version, root):
     except:
         pass
 
-def CreateImage(imagePath):
+def CreateImage(imagePath, resize = (40,40)):
     if isOneFile: 
         bg_image = Image.open(os.path.join(sys._MEIPASS, imagePath))
     else:
         bg_image = Image.open(imagePath)
-    bg_image = bg_image.resize((40,40))
+    if resize != None:
+        bg_image = bg_image.resize(resize)
     newimg = ImageTk.PhotoImage(bg_image)
     iconCollector.append(newimg)
     return newimg
@@ -96,12 +97,7 @@ def resize_bg(event, root, bg_image, background, Game):
 saveCommands = []
 
 # Some of the oldest code and messy for sure. 
-def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= [], setupHelpDesc = None):
-    import  os, sys
-    from scripts import SavedOptions, Helper, PermalinkManagement, Seed, Interactables, SettingsPresets
-    from tkinter.font import Font
-    import tkinter as tk
-
+def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= [], setupHelpDesc = None): 
     windowPadding = 50
     global isOneFile
     if isOneFile:
@@ -144,8 +140,8 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
 
     
     # Frames/Tabs
-    outerHomeFrame = ttk.Frame(MainWindow, padding=10)
-    MainWindow.add(outerHomeFrame, text="⚙ Presets")
+    outerPresetFrame = ttk.Frame(MainWindow, padding=10)
+    MainWindow.add(outerPresetFrame, text="⚙ Presets")
     
     for tab, value in NewTabDictionary.items():
         MainWindow.add(value, text =TabDict[tab]) 
@@ -189,7 +185,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     
     # Save and Load Last Options
     EntriesToSave = ([fileOut, permLink, seedVar])
-    SavedOptions.loadData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, Game)
+    SavedOptions.loadData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, f"{Game}/SaveData")
     EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.XenoOptionDict[Game])) + list((x.spinBoxVal for x in Interactables.XenoOptionDict[Game] if x.hasSpinBox)) + list((sub.checkBoxVal for x in Interactables.XenoOptionDict[Game] for sub in x.subOptions)) + list((sub.spinBoxVal for x in Interactables.XenoOptionDict[Game] for sub in x.subOptions if sub.hasSpinBox))
 
     # Permalink Options/Variables
@@ -212,20 +208,13 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     lastGame = Game
 
     # Left
-    leftHomeFrame = ttk.Frame(outerHomeFrame)
-    leftHomeFrame.pack(side="left", anchor="n", fill="both", expand=True)
+    leftPreset = ttk.Frame(outerPresetFrame)
+    leftPreset.pack(side="left", anchor="n", fill="both", expand=True)
 
-    SettingsPresets.PresetsWindow(leftHomeFrame,  [seedVar] + Interactables.XenoOptionDict[Game], Game)
+    SettingsPresets.PresetsWindow(leftPreset,  [seedVar] + Interactables.XenoOptionDict[Game], Game)
     
-    # # Right
-    # rightHomeFrame = ttk.Frame(outerHomeFrame)
-    # rightHomeFrame.pack(side="right", anchor="n", fill="both", expand=True)
-        
     SettingsButton = ttk.Button(background, text="Help", command=lambda: PopupDescriptions.GenPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window), padding=5)
-    SettingsButton.pack(pady=(5,windowPadding), padx=(0, windowPadding), anchor="e", side="right")
-    
-    # SettingsButton = ttk.Button(rightHomeFrame, text="Discord")
-    # SettingsButton.pack(anchor="e") 
+    SettingsButton.pack(anchor="e", side="right", pady=(5,windowPadding), padx=(0, windowPadding))
 
     Theme.LoadTheme(Theme.defGUIThemeVar.get())
     root.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background, Game), add="+")
