@@ -212,6 +212,9 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     SettingsButton = ttk.Button(background, text="Help", command=lambda: PopupDescriptions.StyledPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window), padding=5)
     SettingsButton.pack(anchor="e", side="right", pady=(5,windowPadding), padx=(0, windowPadding))
 
+    DiscordButton = ttk.Button(background, image=CreateImage(f"Images/Discord-Symbol-White.png", (28,23)), command=lambda: webbrowser.open_new(f"https://discord.gg/64FK78ScvJ"), padding=5)
+    DiscordButton.pack(anchor="e", side="right", pady=(5,windowPadding), padx=(0, 5)) 
+
     Theme.ThemeUpdate()
     root.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background, Game), add="+")
 

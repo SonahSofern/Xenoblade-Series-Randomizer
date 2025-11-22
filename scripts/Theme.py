@@ -174,12 +174,12 @@ try:
                 "fieldbackground": currentTheme["midColor"],
                 "darkcolor": currentTheme["darkColor"],
                 "lightcolor": currentTheme["darkColor"],
-                "insertcolor": currentTheme["midColor"],
+                "insertcolor": currentTheme["lightColor"],
                 # "relief": "ridge",  No longer works lol idk why
                 "padding": (4,0),
                 "focuscolor":"",
-                "selectforeground": currentTheme["lightColor"],
-                "selectbackground": currentTheme["midColor"],
+                "selectbackground": currentTheme["lightColor"],
+                "selectforeground": currentTheme["midColor"],
                 "arrowcolor": currentTheme["lightColor"],
             },
             "map": {

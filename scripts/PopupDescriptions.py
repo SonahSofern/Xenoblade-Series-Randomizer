@@ -140,7 +140,6 @@ def StyledPopup(title, descData, root, isForcedPack = False):
     
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
     center(top, root)
-    
     return top
 
             
