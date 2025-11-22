@@ -91,7 +91,7 @@ def GenericPopup(title):
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
     # center(top, mainwindow)
     Theme.RootsForStyling.append(top)
-    Theme.LoadTheme(Theme.defGUIThemeVar.get())
+    Theme.ThemeUpdate()
     
     return top
 
@@ -134,7 +134,7 @@ def StyledPopup(title, descData, root, isForcedPack = False):
         if hasFewHeaders or isForcedPack: # If we have less than 3 headers go ahead and pack everything
             descObj.SpecialPack()
 
-    Theme.LoadTheme(Theme.defGUIThemeVar.get())
+    Theme.ThemeUpdate()
     scripts.GUIHelper.ResizeWindow(top, scrollPanel.innerFrame, myDescription.bonusWidth)
     top.attributes(alpha = 1.0)
     top.deiconify()
@@ -144,7 +144,7 @@ def StyledPopup(title, descData, root, isForcedPack = False):
     return top
 
             
-def center(win, mainwindow):
+def center(win:Toplevel, mainwindow:Toplevel):
     win.update()
     mainwindow.update()
     width = win.winfo_width()

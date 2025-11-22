@@ -29,7 +29,7 @@ root.option_add("*Font", Theme.defaultFont)
 
 
 root.geometry(f'{windowWidth}x{windowHeight}')
-Theme.LoadTheme(Theme.defGUIThemeVar.get())
+Theme.ThemeUpdate()
 
 if XCRandomizer.isOneFile: 
     icon_path = os.path.join(sys._MEIPASS, 'images', 'XCIcon.png')

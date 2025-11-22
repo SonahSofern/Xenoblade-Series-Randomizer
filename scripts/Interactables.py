@@ -201,7 +201,7 @@ def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
     
     scrollablePanel = ScrollPanel.ScrollablePanel(top)
     Theme.RootsForStyling.append(top)
-    Theme.LoadTheme(Theme.defGUIThemeVar.get())
+    Theme.ThemeUpdate()
 
     conflictDesc = ttk.Label(scrollablePanel.innerFrame, text= f"The following options are incompatible with the {enabledOption} option:", justify = "center")
     conflictDesc.grid(column = 1, row = 0, sticky=(N, S, E, W))

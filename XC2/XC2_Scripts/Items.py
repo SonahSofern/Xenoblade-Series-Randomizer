@@ -187,7 +187,7 @@ def ChestTypeMatchesContentsValue():
                 for tbox in tboxData["rows"]:
                     if tbox["$id"] == box.id:
                         tbox["RSC_ID"] = rarity.rscId
-                print(f"Value: {box.value} given rarity: {rarity.name}")
+                # print(f"Value: {box.value} given rarity: {rarity.name}")
                 
             JSONParser.CloseFile(tboxData, tboxFile)
 

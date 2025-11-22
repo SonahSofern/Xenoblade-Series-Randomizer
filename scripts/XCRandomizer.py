@@ -212,7 +212,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     SettingsButton = ttk.Button(background, text="Help", command=lambda: PopupDescriptions.StyledPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window), padding=5)
     SettingsButton.pack(anchor="e", side="right", pady=(5,windowPadding), padx=(0, windowPadding))
 
-    Theme.LoadTheme(Theme.defGUIThemeVar.get())
+    Theme.ThemeUpdate()
     root.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background, Game), add="+")
 
 def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[], isOneFile = False):
@@ -224,12 +224,12 @@ def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, rand
         RandomizeButton.config(state=DISABLED)
         
         # Make Popup
-        progressPopup = PopupDescriptions.StyledPopup(f"Log {datetime.datetime.now()}", [], root, False) 
+        progressPopup = PopupDescriptions.GenericPopup(f"Log {datetime.datetime.now()}") 
 
         randoProgressFill = ttk.Frame(progressPopup, padding=0)
         randoProgressDisplay = ttk.Label(randoProgressFill, padding=5)
         randoProgressDisplay.pack(pady=0)
-        pb = ttk.Progressbar(progressPopup ,orient='horizontal',mode='determinate',length=500)
+        pb = ttk.Progressbar(progressPopup, orient='horizontal', mode='determinate', length=500)
         progressPopup.deiconify() # Wait until things are ready to show
     
         # Showing Progress Diplay 
@@ -258,7 +258,7 @@ def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, rand
             return
 
         # Runs all randomization
-        runLog:RunLog = RunOptions(OptionList, randoProgressDisplay, randoSeedEntry.get(), pb)
+        runLog = RunOptions(OptionList, randoProgressDisplay, root, randoSeedEntry.get(), pb)
         for command in ExtraCommands: # Runs extra commands like show title screen
             command()
             
@@ -278,23 +278,19 @@ def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, rand
             for file in SubBDATFiles:
                 shutil.move(f"{outSpot}/{file}.bdat", f"{outSpot}/{textFolderName}/{file}.bdat")
             AddFileToOutput(outSpot, extraFiles)
-            # Displays Done and Clears Text
-            randoProgressDisplay.config(text="Done")
-            pb['value'] = 100
-            randoProgressFill.destroy()
-            pb.destroy()
             
+            # Displays Done and Clears Text
+            runLog()
+            randoProgressDisplay.config(text="Done")
+            progressPopup.destroy()
             print(f"Finished at {datetime.datetime.now()}")
         except:
             # print(f"{traceback.format_exc()}") # shows the full error
             randoProgressDisplay.config(text="Failed Outputs")
 
-        
         # Re-Enables Randomize Button
         RandomizeButton.config(state=NORMAL)
-        runLog.ShowResults(progressPopup)
         
-        PopupDescriptions.center(progressPopup, root)
 
     threading.Thread(target=ThreadedRandomize).start()
 
@@ -323,27 +319,16 @@ def SumTotalCommands(OptionList):
             TotalCommands += 1
     return TotalCommands
 
-class RunLog():
-    def __init__(self, status, seed):
-        self.status = status
-        self.seed = seed
-        self.errors = []
-        
-    def ShowResults(self, parent):
-        labl = ttk.Label(parent, text=self.FormatResults())
-        labl.pack()
-        for error in self.errors:
-            err = ttk.Label(parent, text=error, width=50, wraplength=50)
-            err.pack(pady=(5,0))
-        
-    def FormatResults(self):
-        results = f"Randomization {self.status}\n"
-        results += f"Seed: {self.seed}"
-        return results
-
-def RunOptions(OptionList:list[Interactables.Option], randoProgressDisplay, seed, pb):
-    runLog = RunLog("Finished", seed)
+def RunOptions(OptionList:list[Interactables.Option], randoProgressDisplay, root, seed, pb):
+    
     OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
+    
+    errorMsgObj = PopupDescriptions.Description(bonusWidth= 15)
+    errorMsgObj.Header("Randomization Finished")
+    errorMsgObj.Tag(f"Seed: {seed}", pady=5, anchor="center") # Seed
+    
+    def ErrorLog():
+        return errorMsgObj
 
     for opt in OptionList: # runs pre-randomization commands before the actual options
         for command in opt.preRandoCommands:
@@ -383,11 +368,12 @@ def RunOptions(OptionList:list[Interactables.Option], randoProgressDisplay, seed
                 print(traceback.format_exc()) # shows the full error
                 if errorMsg == None:
                     errorMsg = error
-                runLog.errors.append(f"Error: {opt.name} - {errorMsg}")
-                runLog.status = "Failed"
+                errorMsgObj.Header(f"Error: {opt.name}")
+                errorMsgObj.Text(errorMsg)
         pb['value'] = nextStep
 
-    return runLog
+    return lambda: PopupDescriptions.StyledPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(), root)
+
 
 def SlowBurn(progressBar, nextStop):
     while(progressBar['value'] < nextStop):
