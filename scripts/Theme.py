@@ -1,8 +1,21 @@
 from tkinter import *
-from scripts import UI_Colors, SavedOptions
 from tkinter import ttk
 from tkinter.font import Font
 
+Black = "#000000"
+LightBlack="#262626"
+OffLightBlack="#303030"
+White = "#ffffff"
+Gray = "#D5D5D5"
+DarkGray = "#525151"
+MediumGray = "#707070"
+LightGray = "#e0e0e0"
+MiddleLightGray = "#919090"
+Red = "#632424"
+LightBlue = "#7bb8dc"
+LightRed = "#e94141"
+DarkPurple = "#4f324e"
+DarkerPurple = "#1a121a"
 
 CanvasesForStyling = []
 RootsForStyling = []
@@ -10,19 +23,17 @@ defFontVar = StringVar(value="Calibri")
 defFontSizeVar = IntVar(value=14)
 defGUIThemeVar = StringVar(value="Dark Mode")
 fontNameVar = StringVar()
-
-
 defaultFont = Font(family="Calibri", size=14)
 
 style= ttk.Style()
-    # Initial colors for the themes
 
+# Initial colors for the themes
 darkThemeColors = {
-"backgroundColor": UI_Colors.DarkerPurple,
-"darkColor": UI_Colors.LightBlack,
-"midColor": UI_Colors.DarkGray,
-"midGray": UI_Colors.MediumGray,
-"lightColor": UI_Colors.White,
+"backgroundColor": DarkerPurple,
+"darkColor": LightBlack,
+"midColor": DarkGray,
+"midGray": MediumGray,
+"lightColor": White,
 }
 currentTheme = darkThemeColors
 try:
@@ -204,13 +215,13 @@ from tkinter.font import Font
 staticFont = Font(family="Arial", size=16)
 
 # Light
-style.configure("Light.TFrame", background=UI_Colors.OffLightBlack)
-style.configure("Light.TButton", background=UI_Colors.OffLightBlack, relief = FLAT)
-style.configure("Light.TSpinbox", background=UI_Colors.OffLightBlack)
-style.configure("Light.TLabel", background=UI_Colors.OffLightBlack)
-style.configure("Light.TCheckbutton", background=UI_Colors.OffLightBlack, padding=(20, 10))
-style.configure("LightSub.TCheckbutton", background=UI_Colors.OffLightBlack)
-style.configure("LightNoMargin.TLabel", margin=(0,0), padding=(20,0), background=UI_Colors.OffLightBlack)
+style.configure("Light.TFrame", background=OffLightBlack)
+style.configure("Light.TButton", background=OffLightBlack, relief = FLAT)
+style.configure("Light.TSpinbox", background=OffLightBlack)
+style.configure("Light.TLabel", background=OffLightBlack)
+style.configure("Light.TCheckbutton", background=OffLightBlack, padding=(20, 10))
+style.configure("LightSub.TCheckbutton", background=OffLightBlack)
+style.configure("LightNoMargin.TLabel", margin=(0,0), padding=(20,0), background=OffLightBlack)
 
 # Dark
 style.configure("Dark.TFrame", background=currentTheme["darkColor"])
@@ -229,7 +240,7 @@ style.configure("BordlessBtn.TButton", relief = FLAT)
 style.configure("bordered.TFrame", relief = SOLID, borderwidth= 2)
 style.configure("centeredTabs.TNotebook", tabposition= "nw", borderwidth=0)
 style.configure("STATIC.TButton", font=staticFont)
-style.configure("BorderlessLabel.TLabel", background=currentTheme["darkColor"], foreground=UI_Colors.White)
+style.configure("BorderlessLabel.TLabel", background=currentTheme["darkColor"], foreground=White)
 style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
 style.configure("Header.TButton", borderwidth=0, background=currentTheme["midGray"])
 style.configure("Tag.TLabel", background= currentTheme["midGray"], relief="flat", padding=(9,2), margin=(5,0))
@@ -238,8 +249,8 @@ style.configure("CenteredLabel.TLabel")
 style.configure("CenteredButton.TButton", anchor = "center")
 
 
-# Since Canvas and Roots arrent affected by normal styling they must be updated each time they are created   
-def ThemeUpdate():
+def ThemeUpdate(): # Probably could be done better by making a custom version of Canvas/Root but this is what I made
+    '''Since Canvas and Roots arrent affected by normal styling they must be updated each time they are created'''
     for canvas in CanvasesForStyling:
         try:
             canvas.config(background=currentTheme["darkColor"])
