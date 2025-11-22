@@ -14,7 +14,7 @@ def PresetsWindow(parent, interactAbles, game):
     outerCustomFrame = ttk.Frame(parent)
     outerPremadeFrame = ttk.Frame(parent)
     outerPremadeFrame.pack(side="left", fill="both", expand=True, padx=(0,10))
-    outerCustomFrame.pack(side="left", fill="both", expand=True, padx=(10,0))
+    outerCustomFrame.pack(side="right", fill="both", expand=True, padx=(10,0))
     
     titleLabel = ttk.Label(outerPremadeFrame, text="Get started with some recommended presets", style="Title.TLabel")
     titleLabel.pack(anchor="w", pady = (5,5))
@@ -55,7 +55,6 @@ def CreatePreset(filename, innerFrame, interactables, dir, isFinal):
     if isFinal:
         name.config(state="readonly")
         
-
 def OnNameChange(dir, var, oldnameVar):
     RenamePreset(dir, var, oldnameVar)
     UpdateOldName(oldnameVar, var)

@@ -35,6 +35,7 @@ class Description:
     
     def Header(self, text:str, padx=2, pady=(0,5), anchor="w"):
             self.data.append(PopHeader(text, padx, pady, anchor))
+            
 
 class DescriptionObject():
     def __init__(self, data, padx,pady, anchor, fill = None, expand = None, side=None):
@@ -93,12 +94,12 @@ def GenericPopup(title):
     Theme.LoadTheme(Theme.defGUIThemeVar.get())
     
     return top
-    
 
-def GenPopup(optionName, descData, root, isForcedPack = False):
-    top = GenericPopup(optionName)
+def StyledPopup(title, descData, root, isForcedPack = False):
+    top = GenericPopup(title)
     if top == None:
         return # Dont do this again if top window already exists
+    center(top, root)
     myDescription:Description = descData()
     scrollPanel = scripts.ScrollPanel.ScrollablePanel(top)
     
@@ -135,11 +136,12 @@ def GenPopup(optionName, descData, root, isForcedPack = False):
 
     Theme.LoadTheme(Theme.defGUIThemeVar.get())
     scripts.GUIHelper.ResizeWindow(top, scrollPanel.innerFrame, myDescription.bonusWidth)
-    center(top, root)
     top.attributes(alpha = 1.0)
     top.deiconify()
     
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
+    
+    return top
 
             
 def center(win, mainwindow):
