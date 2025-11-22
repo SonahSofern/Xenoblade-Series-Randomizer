@@ -10,7 +10,6 @@ def RandomizeAccessoryShops():
     AbyssVest = [1]
     RandomizeNormalShops(IDs.BaseGameAccessoryShopIDs, valTable, AbyssVest)
     RandomizeNormalShops(IDs.TornaAccessoryShopIDs, tornaValTable)
-    AbyssVest.remove("2")
 
 def RandomizePouchItemShops():
     valTable = Values.ValueTable()
