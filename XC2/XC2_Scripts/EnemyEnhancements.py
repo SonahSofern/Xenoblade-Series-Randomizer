@@ -79,7 +79,7 @@ Repeat = EnemyEnhancement("Repeat", DidIDoThat,[20,40,60,80])
 Enraged = EnemyEnhancement("Avenge", AllyDownDamageUp,[60,80,100,120])
 Regen = EnemyEnhancement("Regen", PermaRegen,[60,90,120,150], [0.01,0.015,0.02,0.025], revP1=True, isRounded=False)
 CloseArmor = EnemyEnhancement("Solid", ReduceDamageFromNearbyEnemies, [10,20,30,40])
-Swarm = EnemyEnhancement("Swarm", PerAllyDamageUp, [20,40,60,80])
+Swarm = EnemyEnhancement("Swarm", PerAllyDamageUp, [5,15,20,25])
 Sealing = EnemyEnhancement("Seal", ChainAttackSeal, [2,2,2,3], revP1=True)
 
 #New testing

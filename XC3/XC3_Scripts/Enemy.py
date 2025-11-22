@@ -15,6 +15,12 @@ ValidEnemyPopFileNames = ["ma01a_GMK_EnemyPop.json", "ma04a_GMK_EnemyPop.json", 
 
 def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSizeOption:Options.Option, isBossGroupBalancing):
     global StaticEnemyData
+    
+    if StaticEnemyData == []:
+        firstRun = True
+    else:
+        firstRun = False
+    
     EnemyCounts = GetEnemyCounts()
     GroupFightViolations = GetGroupFightViolations()
     Aggro = ["<AB4BA3D5>", "<1104E9C5>", "<B5C5F3B3>", "<EC666A80>", "<64251F47>", "<3B6DFBC4>"]
@@ -34,7 +40,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
 
                     eRando = Enemy.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "Resource", "IdBattleEnemy", eneData, paramData, rscData, artData)
 
-                    if StaticEnemyData == []:
+                    if firstRun:
                         StaticEnemyData = eRando.GenEnemyData()
 
                     for en in eneData["rows"]:
@@ -60,7 +66,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                     for group in StaticEnemyData:
                         group.RefreshCurrentGroup()
 
-                    if StaticEnemyData == []:
+                    if firstRun:
                         Bandaids()
                         
                     BreakTutorial(eRando)

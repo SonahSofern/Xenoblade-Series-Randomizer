@@ -1,7 +1,8 @@
 # This will be the template for when you click a more info thing it will load some markdown into this template to be viewed
 from tkinter import *
 from tkinter import ttk
-import scripts.GUISettings, os, sys
+import scripts.GUIHelper, os, sys, scripts.ScrollPanel
+from scripts import Theme
 from PIL import Image, ImageTk
 ImageGroup = [] # Needed because garbage collection will delete pictures otherwise
 OpenWindows = []
@@ -34,6 +35,7 @@ class Description:
     
     def Header(self, text:str, padx=2, pady=(0,5), anchor="w"):
             self.data.append(PopHeader(text, padx, pady, anchor))
+            
 
 class DescriptionObject():
     def __init__(self, data, padx,pady, anchor, fill = None, expand = None, side=None):
@@ -72,33 +74,37 @@ class PopHeader(DescriptionObject):
             for child in self.childGroup:
                 child.SpecialPack()
 
-def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
-    # Check if a popup with the same title is already open
+def GenericPopup(title):
     for top in OpenWindows:
-        if top.winfo_exists() and top.title() == optionName:
+        if top.winfo_exists() and top.title() == title:
             top.focus()
             top.deiconify() # unminimizes
-            return  # If it exists, don't create a new one
-
-    mainwindow = root.winfo_toplevel()
-
-    myDescription:Description = descData()
-    top = Toplevel(root, padx=10, pady=10)  # Create a new top-level window
+            return None # If it exists, don't create a new one
+        
+    top = Toplevel(padx=10, pady=10)  # Create a new top-level window
+    top.withdraw()
     top.attributes(alpha=0.0)
-    top.title(optionName)
-    scripts.GUISettings.RootsForStyling.append(top)
+    top.title(title)
     OpenWindows.append(top)
     
-    Outerframe = ttk.Frame(top) 
+    top.attributes(alpha = 1.0)
+    top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
+    # center(top, mainwindow)
+    Theme.RootsForStyling.append(top)
+    Theme.ThemeUpdate()
     
-    canv = Canvas(Outerframe)
+    return top
+
+def StyledPopup(title, descData, root, isForcedPack = False):
+    top = GenericPopup(title)
+    if top == None:
+        return # Dont do this again if top window already exists
+    myDescription:Description = descData()
+    scrollPanel = scripts.ScrollPanel.ScrollablePanel(top)
     
     curHeader:PopHeader = None # Tracks how to place children under headers
     curFrame:ttk.Frame = None # Groups our options so they can collapse and regroup together
-    
-    InnerFrame = ttk.Frame(canv)
-    scripts.GUISettings.CreateScrollBars([Outerframe], [canv], [InnerFrame])
-    scripts.GUISettings.LoadTheme(defaultFont, scripts.GUISettings.defGUIThemeVar.get())
+        
     # loop over data from the description class and parse it
     hasFewHeaders = sum(isinstance(item, PopHeader) for item in myDescription.data) < 3
     for descObj in myDescription.data:
@@ -111,8 +117,8 @@ def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
             curHeader.childGroup.append(descObj)
             
         elif isinstance(descObj, PopHeader): # Header
-            curFrame = ttk.Frame(InnerFrame)
-            descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=10, command=lambda obj= descObj: (obj.Dropdown(), scripts.GUISettings.ResizeWindow(top, InnerFrame)))
+            curFrame = ttk.Frame(scrollPanel.innerFrame)
+            descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=10, command=lambda obj= descObj: (obj.Dropdown(), scripts.GUIHelper.ResizeWindow(top, scrollPanel.innerFrame), center(top, root)))
             curHeader = descObj
             curFrame.pack(fill="x", expand=True)
             descObj.SpecialPack()
@@ -127,21 +133,39 @@ def GenPopup(optionName, descData, root, defaultFont, isForcedPack = False):
         if hasFewHeaders or isForcedPack: # If we have less than 3 headers go ahead and pack everything
             descObj.SpecialPack()
 
-    scripts.GUISettings.ResizeWindow(top, InnerFrame, myDescription.bonusWidth)
-    center(top, mainwindow)
+    Theme.ThemeUpdate()
+    scripts.GUIHelper.ResizeWindow(top, scrollPanel.innerFrame, myDescription.bonusWidth)
     top.attributes(alpha = 1.0)
+    top.deiconify()
+    
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
+    center(top, root)
+    
+    return top
 
             
-def center(win, mainwindow):
-    win.update()
-    mainwindow.update()
+def center(win:Toplevel, mainwindow:Toplevel):
+    '''Centers a window in top window'''
+    mainwindow.update_idletasks()
+    win.update_idletasks()
     width = win.winfo_width()
     height = win.winfo_height()
     parentwidth = mainwindow.winfo_width()
     parentheight = mainwindow.winfo_height()
-    parentxcoord = mainwindow.winfo_x()
-    parentycoord = mainwindow.winfo_y()
+    parentxcoord = mainwindow.winfo_rootx()
+    parentycoord = mainwindow.winfo_rooty()
     x = parentxcoord + (parentwidth - width) // 2
     y = parentycoord + (parentheight - height) // 2
     win.geometry(f"+{x}+{y}")
+
+
+def center_window(window):
+    '''Centers root window based on screen size'''
+    window.update_idletasks()
+    width = window.winfo_width()
+    height = window.winfo_height()
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+    window.geometry(f"{width}x{height}+{x}+{y}")

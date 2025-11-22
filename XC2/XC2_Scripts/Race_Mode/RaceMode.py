@@ -1,6 +1,6 @@
 from XC2.XC2_Scripts.Unused import EnemyRandoLogic
 from scripts import Helper, JSONParser, PopupDescriptions
-from XC2.XC2_Scripts import Options, TutorialShortening, CoreCrystals
+from XC2.XC2_Scripts import Options, Skips, CoreCrystals
 import random, time, math, json
 from XC2.XC2_Scripts.IDs import AllRaceModeItemTypeIDs, RaceModeAuxCoreIDs, A1RaceModeCoreChipIDs, A2RaceModeCoreChipIDs, A3RaceModeCoreChipIDs, A4RaceModeCoreChipIDs, SeedHashAdj, SeedHashNoun, ValidTboxMapNames, AllCoreCrystals, InvalidTreasureBoxIDs, PreciousItems, AccessoryIDs, WeaponChipIDs, AuxCoreIDs, RefinedAuxCoreIDs, CollectionPointMaterials, TornaAccessories
 
@@ -210,7 +210,7 @@ def RaceModeChanging():
     if Options.RaceModeOption_DLC.GetState():
         print("Nerfing Corvin and Crossette")
         DLCItemChanges()
-    TutorialShortening.RaceModeTutorialShortening()
+    Skips.RaceModeTutorialShortening()
     SeedHash()
 
 FieldSkillAchievementIDs = Helper.InclRange(1,3824)

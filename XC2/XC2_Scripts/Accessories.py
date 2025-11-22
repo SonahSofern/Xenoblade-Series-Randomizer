@@ -63,7 +63,7 @@ def AccessoriesDesc():
                             effectDescription = des["name"]  
                             break
             except:
-                effectDescription = "No files to load descriptions from."
+                effectDescription = "Randomization must be ran once to generate descriptions."
         else:
             effectDescription = effect.Description # keep descriptions that I create for the class
             

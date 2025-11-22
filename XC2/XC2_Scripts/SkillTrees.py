@@ -134,7 +134,6 @@ def SlotCostZero(ids): # Used since art cancel gets put here
             driverFiles.truncate()
             json.dump(dFile, driverFiles, indent=2, ensure_ascii=False)
 
-
 def BladeSkillTreeShortening(): #how do you do, fellow skill tree randomization functions
     JSONParser.ChangeJSONLine(["common/CHR_Bl.json"],[0],Helper.StartsWith("ArtsAchievement",1,3) + Helper.StartsWith("SkillAchievement",1,3) + Helper.StartsWith("FskillAchivement",1,3) + ["KeyAchievement"], 15, replaceAll=True) # 15 is a trust condition and sets everything to that, so its all on trust with this
 

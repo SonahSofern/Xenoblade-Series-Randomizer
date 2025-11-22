@@ -1,5 +1,5 @@
 import json, random,  math,  time
-from XC2.XC2_Scripts import IDs, Options,FieldSkills, TutorialShortening
+from XC2.XC2_Scripts import IDs, Options,FieldSkills, Skips
 from XC2.XC2_Scripts.Race_Mode import RaceMode
 from XC2.XC2_Scripts.UM_Hunt import UMHuntDebugFunctions, UMHuntShopCreation
 from XC2.XC2_Scripts.Enhancements import *
@@ -32,7 +32,7 @@ ValidRandomizeableBladeIDs = [1001, 1002, 1008, 1009, 1010, 1011, 1014, 1015, 10
 # Poppiswap is going to be fucked up with custom enhancements
 
 def UMHunt():
-    TutorialShortening.UMHuntShortenedTutorial() # we want to always run the tutorial shortening, otherwise it breaks stuff. spent 2 hours trying to figure out why completely unrelated changes were bricking my save file
+    Skips.UMHuntShortenedTutorial() # we want to always run the tutorial shortening, otherwise it breaks stuff. spent 2 hours trying to figure out why completely unrelated changes were bricking my save file
     UMHuntShopCreation.CreateShopDictionaries()
     global SetCount, UMHuntDisableCondListID, UMHuntEnableCondListIDs
     SetCount = Options.UMHuntOption.GetSpinbox()

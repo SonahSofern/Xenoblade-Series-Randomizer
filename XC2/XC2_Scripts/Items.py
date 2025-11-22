@@ -2,8 +2,6 @@ from XC2.XC2_Scripts import Options, IDs
 import json, random, copy
 from scripts import Helper, PopupDescriptions, JSONParser, Values
 
-
-
 def RandomizeAccessoryShops():
     valTable = Values.ValueTable()
     valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs)
@@ -12,6 +10,7 @@ def RandomizeAccessoryShops():
     AbyssVest = [1]
     RandomizeNormalShops(IDs.BaseGameAccessoryShopIDs, valTable, AbyssVest)
     RandomizeNormalShops(IDs.TornaAccessoryShopIDs, tornaValTable)
+    AbyssVest.remove("2")
 
 def RandomizePouchItemShops():
     valTable = Values.ValueTable()
@@ -188,7 +187,7 @@ def ChestTypeMatchesContentsValue():
                 for tbox in tboxData["rows"]:
                     if tbox["$id"] == box.id:
                         tbox["RSC_ID"] = rarity.rscId
-                print(f"Value: {box.value} given rarity: {rarity.name}")
+                # print(f"Value: {box.value} given rarity: {rarity.name}")
                 
             JSONParser.CloseFile(tboxData, tboxFile)
 

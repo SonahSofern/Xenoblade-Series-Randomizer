@@ -1,4 +1,4 @@
-from scripts.Interactables import Option, SubOption, Header
+from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
 from XC3.XC3_Scripts import Shortcuts, Skills, Heroes, QOL as Quality, Enemy , IDs, Enhancements, Accessories, Gems, Arts, Items, Costumes, Class, Chaos, Music
