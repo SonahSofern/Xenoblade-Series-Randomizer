@@ -135,24 +135,37 @@ def StyledPopup(title, descData, root, isForcedPack = False):
 
     Theme.ThemeUpdate()
     scripts.GUIHelper.ResizeWindow(top, scrollPanel.innerFrame, myDescription.bonusWidth)
-    center(top, root)
     top.attributes(alpha = 1.0)
     top.deiconify()
     
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
+    center(top, root)
     
     return top
 
             
 def center(win:Toplevel, mainwindow:Toplevel):
-    win.update()
-    mainwindow.update()
+    '''Centers a window in top window'''
+    mainwindow.update_idletasks()
+    win.update_idletasks()
     width = win.winfo_width()
     height = win.winfo_height()
     parentwidth = mainwindow.winfo_width()
     parentheight = mainwindow.winfo_height()
-    parentxcoord = mainwindow.winfo_x()
-    parentycoord = mainwindow.winfo_y()
+    parentxcoord = mainwindow.winfo_rootx()
+    parentycoord = mainwindow.winfo_rooty()
     x = parentxcoord + (parentwidth - width) // 2
     y = parentycoord + (parentheight - height) // 2
     win.geometry(f"+{x}+{y}")
+
+
+def center_window(window):
+    '''Centers root window based on screen size'''
+    window.update_idletasks()
+    width = window.winfo_width()
+    height = window.winfo_height()
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+    window.geometry(f"{width}x{height}+{x}+{y}")

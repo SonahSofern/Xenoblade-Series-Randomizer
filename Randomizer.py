@@ -52,4 +52,5 @@ def CloseProtocol(): # Save before closing
 
 root.protocol("WM_DELETE_WINDOW", CloseProtocol)
 
+XCRandomizer.PopupDescriptions.center_window(root)
 root.mainloop()
