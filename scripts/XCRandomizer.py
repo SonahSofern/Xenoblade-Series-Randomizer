@@ -5,9 +5,9 @@ from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
 from PIL import Image, ImageTk
-from scripts import ScrollPanel, UI_Colors, PopupDescriptions, Theme
+from scripts import Presets, ScrollPanel, PopupDescriptions, Theme
 import random, subprocess, shutil, os, threading, traceback, time, datetime, webbrowser
-from scripts import SavedOptions, Helper, PermalinkManagement, Seed, Interactables, SettingsPresets
+from scripts import SavedOptions, Helper, PermalinkManagement, Seed, Interactables
 
 class Tab():
     def __init__(self, name, outer, canvas, inner):
@@ -207,7 +207,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     global lastGame
     lastGame = Game
 
-    SettingsPresets.PresetsWindow(outerPresetFrame,  [seedVar] + Interactables.XenoOptionDict[Game], Game)
+    Presets.PresetsWindow(outerPresetFrame,  [seedVar] + Interactables.XenoOptionDict[Game], Game)
     
     SettingsButton = ttk.Button(background, text="Help", command=lambda: PopupDescriptions.StyledPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window), padding=5)
     SettingsButton.pack(anchor="e", side="right", pady=(5,windowPadding), padx=(0, windowPadding))

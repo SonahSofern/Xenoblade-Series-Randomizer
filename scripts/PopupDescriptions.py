@@ -99,7 +99,6 @@ def StyledPopup(title, descData, root, isForcedPack = False):
     top = GenericPopup(title)
     if top == None:
         return # Dont do this again if top window already exists
-    center(top, root)
     myDescription:Description = descData()
     scrollPanel = scripts.ScrollPanel.ScrollablePanel(top)
     
@@ -136,6 +135,7 @@ def StyledPopup(title, descData, root, isForcedPack = False):
 
     Theme.ThemeUpdate()
     scripts.GUIHelper.ResizeWindow(top, scrollPanel.innerFrame, myDescription.bonusWidth)
+    center(top, root)
     top.attributes(alpha = 1.0)
     top.deiconify()
     

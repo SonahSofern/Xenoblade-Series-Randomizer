@@ -49,6 +49,6 @@ def XCDEHelp():
     descData.Tag("Future Connected")
     descData.Text("The story expansion Future Connected has not been tested at all, it may or may not work.", anchor="w")
     descData.Tag("Mods")
-    descData.Text("This mod is NOT compatible with other mods that edit the bdats. Ensure that this is the only active one for your game. (60fps and other visual mods should be okay)", anchor="w")
+    descData.Text("This mod is NOT compatible with other mods that edit the bdats. Ensure that this is the only active one for your game. (60fps and other visual mods are okay)", anchor="w")
     return descData
 
