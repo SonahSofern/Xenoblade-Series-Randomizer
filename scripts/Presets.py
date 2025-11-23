@@ -24,13 +24,13 @@ def PresetsWindow(parent, interactAbles, game):
     CustomPresetScroll = ScrollPanel.ScrollablePanel(outerCustomFrame)
     
     saveasPresetBtn = ttk.Button(outerCustomFrame, text="Add Current Settings as Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName, f"{game}/SaveData"), CreatePreset(defaultName, CustomPresetScroll.innerFrame, interactAbles, dir, False)))
-    saveasPresetBtn.pack(pady=(5,5),padx=(0,0), anchor="nw")
+    saveasPresetBtn.pack(pady=(5,5), padx=(0,0), anchor="nw")
     
     GetPresets(PremadePresetScroll.innerFrame, premadeDir, interactAbles, True)
     GetPresets(CustomPresetScroll.innerFrame, dir, interactAbles, False)
     
 def GetPresets(innerFrame, dir, interacts, isFinal): 
-    for filename in os.listdir(dir):
+    for filename in os.listdir(f"{dir}"):
         CreatePreset(filename, innerFrame, interacts, dir, isFinal)
 
 def CreatePreset(filename, innerFrame, interactables, dir, isFinal):

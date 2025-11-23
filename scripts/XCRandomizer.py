@@ -377,7 +377,6 @@ def RunOptions(OptionList:list[Interactables.Option], randoProgressDisplay, root
 
     return lambda: PopupDescriptions.StyledPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(), root)
 
-
 def SlowBurn(progressBar, nextStop):
     while(progressBar['value'] < nextStop):
         time.sleep(0.02)

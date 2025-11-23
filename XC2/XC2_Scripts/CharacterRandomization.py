@@ -947,7 +947,6 @@ def DriversDescriptions():
     DriversDesc.Text(f"- This option is incompatible with {Options.RaceModeOption.name} and {Options.UMHuntOption.name}. If those game modes are selected, drivers will not be randomized.", anchor="w")
     DriversDesc.Text("- Zeke's Eye of Shining Justice skill does not work properly when Zeke gets randomized. This skill is replaced by Rex's Combo Breaker in this case.", anchor="w")
     DriversDesc.Text("- A handful of voice lines do not work correctly, such as when unlocking affinity nodes.", anchor="w")
-    DriversDesc.Text("- A handful of voice lines do not work correctly, such as when unlocking affinity nodes.", anchor="w")
     DriversDesc.Text("- This option introduces a weird glitch. See the section below about Blade Warping.", anchor="w")
 
     DriversDesc.Header(Options.DriversOption_Nia.name)
