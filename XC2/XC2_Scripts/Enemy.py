@@ -163,6 +163,14 @@ def Bandaids(eneData, isBoss, eRando):
     if isBoss.GetState():
         TornaIntroChanges(eRando)
 
+def RemoveSkinUpgrade(oldEn, newEn, eRando:e.EnemyRandomizer):
+    '''Bosses having skin upgrade is unfair to suddenly deal insane dmg and heal to full'''
+    SkinUpgradeArtIDs = [175,176,177,178]
+    if oldEn in IDs.BossMonsters:
+        # see if they have skin upgrade
+        # replace with something else if so
+        eRando.ChangeStats()
+        
 def GetEnemyCounts():
     enemyCounts = dict()
     # I don't want regular overworld enemies to be stronger/weaker because they spawn several of them in a pack, and

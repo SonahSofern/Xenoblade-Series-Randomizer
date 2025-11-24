@@ -45,6 +45,7 @@ try:
                 "borderwidth": 1,
                 "bordercolor": currentTheme["backgroundColor"],
                 "relief": FLAT,
+                # "highlightthickness": 0, doesnt work
                 "focuscolor":"", # Checkbutton focus border
                 "padding": 0,
                 "tabposition": "nw", # Cool for styling but gonnna kjeep it default for now

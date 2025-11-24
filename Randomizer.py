@@ -1,7 +1,6 @@
 import sys, os
 from tkinter import *
 from tkinter import ttk
-from tkinter.font import Font
 root = Tk()
 from scripts import Theme, XCRandomizer, Theme
 import XCDE.XCDE_Scripts.XCDE_Settings as XCDE
@@ -23,10 +22,7 @@ MainWindow.pack(fill="both", expand=True, padx=0, pady=0)
 
 root.title(title)
 root.option_add("*Font", Theme.defaultFont)
-
-
 root.geometry(f'{windowWidth}x{windowHeight}')
-Theme.ThemeUpdate()
 
 if XCRandomizer.isOneFile: 
     icon_path = os.path.join(sys._MEIPASS, 'images', 'XCIcon.png')
