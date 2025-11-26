@@ -1,17 +1,12 @@
 # This will be the template for when you click a more info thing it will load some markdown into this template to be viewed
 from tkinter import *
 from tkinter import ttk
-import scripts.GUIHelper, os, sys, scripts.ScrollPanel
+import scripts.GUIHelper, os, sys, scripts.ScrollPanel, scripts.Onefile
 from scripts import Theme
 from PIL import Image, ImageTk
 ImageGroup = [] # Needed because garbage collection will delete pictures otherwise
 OpenWindows = []
 
-
-if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
-    isOnefile = True
-else:
-    isOnefile = False
 
 class Description:
 
@@ -27,7 +22,7 @@ class Description:
         self.data.append(PopText(text,padx,pady, anchor, side=side))
 
     def Image(self,imagePath:str, game, size = 400, padx=5, pady=(5,5), anchor=None, side=None):
-        if isOnefile: # Images come from a different path when packed to one file
+        if scripts.Onefile.isOneFile: # Images come from a different path when packed to one file
             imagePath = os.path.join(sys._MEIPASS,game, "Images", imagePath)
         else:
             imagePath = f"./{game}/Images/{imagePath}"

@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from scripts import SavedOptions, ScrollPanel
+from scripts import SavedOptions, ScrollPanel, Onefile
 import tkinter as tk
 import os
 
@@ -26,10 +26,13 @@ def PresetsWindow(parent, interactAbles, game):
     saveasPresetBtn = ttk.Button(outerCustomFrame, text="Add Current Settings as Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName, f"{game}/SaveData"), CreatePreset(defaultName, CustomPresetScroll.innerFrame, interactAbles, dir, False)))
     saveasPresetBtn.pack(pady=(5,5), padx=(0,0), anchor="nw")
     
-    GetPresets(PremadePresetScroll.innerFrame, premadeDir, interactAbles, True)
-    GetPresets(CustomPresetScroll.innerFrame, dir, interactAbles, False)
+    GetPresets(PremadePresetScroll.innerFrame, Onefile.Directory(premadeDir), interactAbles, True)
+    GetPresets(CustomPresetScroll.innerFrame, f"./{dir}", interactAbles, False)
     
 def GetPresets(innerFrame, dir, interacts, isFinal): 
+    if not os.path.exists(dir):
+        print(f"Cannot find filepath: {dir}")
+        return
     for filename in os.listdir(f"{dir}"):
         CreatePreset(filename, innerFrame, interacts, dir, isFinal)
 

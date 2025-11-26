@@ -5,7 +5,7 @@ from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
 from PIL import Image, ImageTk
-from scripts import Presets, ScrollPanel, PopupDescriptions, Theme
+from scripts import Presets, ScrollPanel, PopupDescriptions, Theme, Onefile
 import random, subprocess, shutil, os, threading, traceback, time, datetime, webbrowser
 from scripts import SavedOptions, Helper, PermalinkManagement, Seed, Interactables
 
@@ -21,18 +21,13 @@ class FilePlacer:
     def __init__(self, files, location, newName = None, game = ""):
         self.files = []
         for file in files:
-            if isOneFile:
+            if Onefile.isOneFile:
                 file = os.path.join(sys._MEIPASS, game, file)
             else:
                 file = f"{game}/{file}"
             self.files.append(file)
         self.location = location
         self.newName = newName
-
-if getattr(sys, 'frozen', False):  # If the app is running as a bundled executable
-    isOneFile = True
-else:
-    isOneFile = False
 
 lastWidth = -1
 lastHeight = -1
@@ -57,10 +52,8 @@ def CheckIfUserNeedsUpdate(version, root):
         pass
 
 def CreateImage(imagePath, resize = (40,40)):
-    if isOneFile: 
-        bg_image = Image.open(os.path.join(sys._MEIPASS, imagePath))
-    else:
-        bg_image = Image.open(imagePath)
+    imagePath = Onefile.Directory(imagePath)
+    bg_image = Image.open(imagePath)
     if resize != None:
         bg_image = bg_image.resize(resize)
     newimg = ImageTk.PhotoImage(bg_image)
@@ -99,8 +92,7 @@ saveCommands = []
 # Some of the oldest code and messy for sure. 
 def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= [], setupHelpDesc = None): 
     windowPadding = 50
-    global isOneFile
-    if isOneFile:
+    if Onefile.isOneFile:
         fileEntryVar = os.path.join(sys._MEIPASS, Game, 'bdat')
     else:
         fileEntryVar = f"{Game}/bdat"
@@ -112,14 +104,14 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
 
     window.add(XCFrame, text =Version, image=CreateImage(f"{Game}/Images/{Game}Icon.png"), compound="left") 
 
-    if isOneFile:
+    if Onefile.isOneFile:
         bdat_path = os.path.join(sys._MEIPASS, 'Toolset', 'bdat-toolset-win64.exe')
     else:
         bdat_path = f"Toolset/bdat-toolset-win64.exe"
 
     # Background Images
     bg = random.choice(backgroundImages)
-    if isOneFile: 
+    if Onefile.isOneFile: 
         bg_image = Image.open(os.path.join(sys._MEIPASS, Game, 'Images', bg))
     else:
         bg_image = Image.open(f"./{Game}/Images/{bg}")
@@ -200,7 +192,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), Randomize(XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles, isOneFile=isOneFile))))
+    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), Randomize(XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles))))
     RandomizeButton.pack(pady=(5,windowPadding), padx=(windowPadding, 0), anchor="w", side="left")
     saveCommands.append(saveCommand)
 
@@ -218,7 +210,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     Theme.ThemeUpdate()
     root.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background, Game), add="+")
 
-def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[], isOneFile = False):
+def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
     def ThreadedRandomize():
         entrySpot = fileEntryVar
         outSpot = f"{outputDirVar.get().strip()}/romfs/bdat"
@@ -269,7 +261,7 @@ def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, rand
     
         # Packs BDATs
         # If we are packed for users we dont want to create a window. For us we want this window to see errors from bdat-rs
-        if isOneFile:
+        if Onefile.isOneFile:
             creationFlags = subprocess.CREATE_NO_WINDOW
         else:
             creationFlags = 0

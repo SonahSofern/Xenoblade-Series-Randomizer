@@ -16,7 +16,7 @@ Skyline = scripts.XCRandomizer.FilePlacer(["Loader/skyline"], "../", game= "XC3"
 Titlescreen = scripts.XCRandomizer.FilePlacer(["Images/Logos/original.wilay"],  "../menu/image", "mnu001_cont01_en.wilay", "XC3")
 
 hashFile = "XC3/Loader/xbc3Hashes.txt"
-if scripts.XCRandomizer.isOneFile:
+if scripts.XCRandomizer.Onefile.isOneFile:
     extraArgs = ["--hashes", scripts.XCRandomizer.os.path.join(scripts.XCRandomizer.sys._MEIPASS, hashFile)]
 else:  
     extraArgs= ["--hashes", hashFile]
