@@ -134,7 +134,6 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     MassiveEnemies = [1758, 707] # Nekkel Mammut, Rotbart
     SmallEnemies = [243] # This malos is given CHR size 3 for no reason
 
-
     ChangeSize([oldEn, newEn], SupermassiveEnemies, Supermassive)
     ChangeSize([oldEn, newEn], MassiveEnemies, Massive)
     ChangeSize([oldEn, newEn], SmallEnemies, Normal)
@@ -159,7 +158,7 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
 def Bandaids(eneData, isBoss, eRando):
     '''Bandaids intented to be ran once'''
     ForcedWinFights([3,6])
-    SummonsLevelFix(eneData)
+    SummonIDFix(eneData)
     if isBoss.GetState():
         TornaIntroChanges(eRando)
 
@@ -261,31 +260,6 @@ def GortOgreUppercutRemoval(paramData): # Gort 2's Ogre Uppercut seems to be bug
             row["ArtsNum4"] = 963 # replaced Ogre Uppercut with a second instance of Ogre Flame
             break
 
-# def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy happens to show up early. Nerfed by 3/4ths. (removed now that enemy hp cant get too out of hand early due to matching paramRev)
-#     with open("XC2/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as file:
-#         data = json.load(file)
-#         for row in data["rows"]:
-#             if row["$id"] == 218:
-#                 row["DmgMgn1"] = 500
-#                 row["DmgMgn2"] = 500
-#                 row["DmgMgn3"] = 500
-#                 row["DmgMgn4"] = 500
-#                 row["DmgMgn5"] = 500
-#                 row["DmgMgn6"] = 500
-#         JSONParser.CloseFile(data, file)
-
-# def EnemyAggro(): # Not going to add aggro to enemies because it would be disproportional to the area there enemy is in. For example if i tgive them batArea and a large area you could get stuck inside a small area (ship) with enemies perma aggroing you
-#     odds = Options.EnemyAggroOption.GetSpinbox()
-#     with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
-#         eneData = json.load(eneFile)
-#         for en in eneData["rows"]:
-#             if not Helper.OddsCheck(odds):
-#                 continue
-#             if en["$id"] in IDs.BossMonsters:
-#                 continue
-#             en["Detects"] = 0
-#         JSONParser.CloseFile(eneData, eneFile)
-
 def CutsceneOnlyEnemyMatch():
     pass # Match overworld enemies that have NoTarget to their replacement. For example the aligo on the ancient ship you can see before the cutscene but it doesnt get updated to a new paramID
     
@@ -310,27 +284,33 @@ def AionRoomFix(origEn, newEn, eRando:e.EnemyRandomizer): # Aion sits really far
     if ((origEn["$id"] in AionIDs) and (newEn["$id"] not in AionIDs)):
         eRando.ChangeStats([newEn], [("FlyHeight", 500)])   
  
+ # NOTE This will only work sometimes because the summoner could be in both games. And it has no way of resolving that yet.
 def SummonIDFix(eneData): # Need to put summoned enemies Ids back into the pool after this in their proper spots
-    '''Fixes the summons being both enemies in the game and summoned enemies'''
+    '''Fixes the summons being both enemies in the game and summoned enemies by making new enemies in enArrange and putting those in the summon table'''
     SummonedEnemies = [1, 6, 1568, 1569, 1593, 1599, 66, 67, 1641, 122, 135, 150, 152, 154, 1700, 1724, 1725, 1726, 1727, 1731, 724, 725, 726, 727, 728, 242, 1371, 1881, 1787, 1788, 1789, 1285, 1805, 1806, 1807, 1304, 1308, 1347, 1349, 1350, 1351, 1352, 1353, 1354, 1355, 1356, 1357, 1358, 1359, 1360, 1361, 846, 1362, 1364, 1365, 1363, 1367, 1368, 1369, 1370, 1883, 1372, 1885, 1373, 1374, 1375, 1376, 1377, 1378, 1379, 1380, 1381, 1382, 1384, 1385, 1383, 1420, 1521, 1533]
-    
-    # Makes copies of all summoned enemies
-    # Replaces the summon list with the copies IDS
-    SummonsLevelFix(eneData, ) # Apply level fix to the new ones
-  
-def SummonsLevelFix(eneData, summonedEnemies):
+    with open("XC2/JsonOutputs/common/BTL_Summon.json", 'r+', encoding='utf-8') as smnFile:
+        smnData = json.load(smnFile)
+        for en in eneData["rows"]:
+            if en["$id"] in SummonedEnemies:
+                enCopy = copy.deepcopy(en)
+                enCopy["$id"] = len(eneData["rows"]) + 1
+                eneData["rows"].append(enCopy)
+                SummonsLevelFix(enCopy) # Apply level fix to the new ones
+                
+                # Replaces the summon list with the copies IDS
+                for smn in smnData["rows"]:
+                    smn["EnemyID"] = [enCopy["$id"] if x == en["$id"] else x for x in smn["EnemyID"]]
+        JSONParser.CloseFile(smnData, smnFile)
+
+def SummonsLevelFix(ene): 
     Lora = 17
     Rex = 1
-    for ene in eneData["rows"]:
-        enID = ene["$id"]
-        if enID in  summonedEnemies:
-            if ene["ZoneID"] in [52,53]: # Torna Areas
-                targetDriver = Lora
-            else:
-                targetDriver = Rex
-            ene["DriverLev"] = targetDriver # Not a great solution the other way is to make a duplicate enemy for each time they are summoned and I woulid have to make new summon tables
-    
-    
+    if ene["ZoneID"] in [52,53]: # Torna Areas
+        targetDriver = Lora
+    else:
+        targetDriver = Rex
+    ene["DriverLev"] = targetDriver # Not a great solution the other way is to make a duplicate enemy for each time they are summoned and I woulid have to make new summon tables
+
 def EnemyDesc(name):
     EnemyRandoDesc = PopupDescriptions.Description()
     EnemyRandoDesc.Header(name)
@@ -351,3 +331,30 @@ def EnemyDesc(name):
     EnemyRandoDesc.Text("This will match the size of the new enemy to the original enemy. For example, Ophion (a big enemy), when replaced with a krabble (a small enemy), will force the Krabble to match Ophions size for that instance of it. This helps with indoor areas as massive enemies will be shrunk to match their new environment.")
     
     return EnemyRandoDesc
+
+# ------ Not used
+
+# def EarthBreathNerf(): # Cressidus's Earth Breath is pretty strong if the enemy happens to show up early. Nerfed by 3/4ths. (removed now that enemy hp cant get too out of hand early due to matching paramRev)
+#     with open("XC2/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as file:
+#         data = json.load(file)
+#         for row in data["rows"]:
+#             if row["$id"] == 218:
+#                 row["DmgMgn1"] = 500
+#                 row["DmgMgn2"] = 500
+#                 row["DmgMgn3"] = 500
+#                 row["DmgMgn4"] = 500
+#                 row["DmgMgn5"] = 500
+#                 row["DmgMgn6"] = 500
+#         JSONParser.CloseFile(data, file)
+
+# def EnemyAggro(): # Not going to add aggro to enemies because it would be disproportional to the area there enemy is in. For example if i tgive them batArea and a large area you could get stuck inside a small area (ship) with enemies perma aggroing you
+#     odds = Options.EnemyAggroOption.GetSpinbox()
+#     with open(f"XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
+#         eneData = json.load(eneFile)
+#         for en in eneData["rows"]:
+#             if not Helper.OddsCheck(odds):
+#                 continue
+#             if en["$id"] in IDs.BossMonsters:
+#                 continue
+#             en["Detects"] = 0
+#         JSONParser.CloseFile(eneData, eneFile)

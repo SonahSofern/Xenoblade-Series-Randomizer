@@ -1,6 +1,6 @@
 from XC2.XC2_Scripts import Options, IDs
-import json, random, copy
-from scripts import Helper, PopupDescriptions, JSONParser, Values
+import json, copy
+from scripts import PopupDescriptions, JSONParser, Values
 
 def RandomizeAccessoryShops():
     valTable = Values.ValueTable()
@@ -21,6 +21,37 @@ def RandomizeWeaponChipShops():
     valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip"), IDs.WeaponChipIDs)
     RandomizeNormalShops(IDs.BaseGameWeaponChipShopIDs + IDs.TornaWeaponChipShopIDs, valTable)
 
+def RandomizeQuestRewards(): # Put lower mults on these to make quests more worthwhile you get 2x stronger loot
+    # Base Game
+    valTable = Values.ValueTable()
+    valTable.PopulateValues(Values.ValueFile("ITM_OrbEquip", mult=0.5), IDs.RefinedAuxCoreIDs, Values.WeightOptionMethod(Options.QuestRewardsOption_RefinedAuxCores))
+    valTable.PopulateValues(Values.ValueFile("ITM_PcWpnChip", mult=0.5), IDs.WeaponChipIDs, Values.WeightOptionMethod(Options.QuestRewardsOption_WeaponChips))
+    
+    # Torna
+    tornaValTable = copy.deepcopy(valTable) # Copy it before we put in just base game accessory IDs or Core Crystals
+    tornaValTable.PopulateValues(Values.ValueFile("ITM_PcEquip", mult=0.5), IDs.AllowedTornaAccessories, Values.WeightOptionMethod(Options.QuestRewardsOption_Accessories))
+    
+    valTable.PopulateValues(Values.ValueFile("ITM_Orb", mult=0.5), IDs.AuxCoreIDs, Values.WeightOptionMethod(Options.QuestRewardsOption_AuxCores))
+    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=2), IDs.CoreCrystals, Values.WeightOptionMethod(Options.QuestRewardsOption_CoreCrystals))
+    valTable.PopulateValues(Values.ValueFile("ITM_PcEquip", mult=0.5), IDs.AccessoryIDs, Values.WeightOptionMethod(Options.QuestRewardsOption_Accessories))
+    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=0.5), IDs.CustomCrystalIDs, Values.WeightOptionMethod(Options.QuestRewardsOption_RareBlades))
+    
+    RandomizeFLDQuestReward(IDs.TornaQuestRewardIDs, tornaValTable)
+    RandomizeFLDQuestReward(IDs.BaseQuestRewardIDs + IDs.MercMissionRewardIDs + IDs.QuestListMiniIDs, valTable)
+
+def RandomizeFLDQuestReward(shopIDs, valTable:Values.ValueTable):
+    '''Randomizes the FLD_QuestRewardFile which has merc mission, quest rewards, and shop changes (seems like crafting)'''      
+    with open("XC2/JsonOutputs/common/FLD_QuestReward.json", 'r+', encoding='utf-8') as qstFile:
+        qstData = json.load(qstFile)
+        for qst in qstData["rows"]:
+            if qst["$id"] not in shopIDs:
+                continue
+            
+            for i in range(1,5):
+                valTable.SelectValuedMember(qst, f"ItemID{i}", IDs.PreciousItems + IDs.TornaPreciousIDs)
+            
+        JSONParser.CloseFile(qstData, qstFile)
+        
 def RandomizeNormalShops(shopIDs, valTable:Values.ValueTable, doNotReplaceIDs = []):    
     with open("XC2/JsonOutputs/common/MNU_ShopNormal.json", 'r+', encoding='utf-8') as shopFile:
         shopData = json.load(shopFile)

@@ -212,6 +212,11 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
 
 def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
     def ThreadedRandomize():
+        if outputDirVar.get().strip() == "":
+            errorMsgObj = PopupDescriptions.Description(bonusWidth= 15)
+            errorMsgObj.Header("Error: No Output Location")
+            PopupDescriptions.StyledPopup(f"Log {datetime.datetime.now()}", lambda: errorMsgObj, root)
+            return
         entrySpot = fileEntryVar
         outSpot = f"{outputDirVar.get().strip()}/romfs/bdat"
         
@@ -370,6 +375,9 @@ def RunOptions(OptionList:list[Interactables.Option], randoProgressDisplay, root
     return lambda: PopupDescriptions.StyledPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(), root)
 
 def SlowBurn(progressBar, nextStop):
-    while(progressBar['value'] < nextStop):
-        time.sleep(0.02)
-        progressBar['value'] += 0.05
+    try: # Throwing a try excpet here because I have had times in Debug mode where this throws errors saying something about pb. 
+        while(progressBar['value'] < nextStop):
+            time.sleep(0.02)
+            progressBar['value'] += 0.05
+    except Exception as e:
+        print(e)

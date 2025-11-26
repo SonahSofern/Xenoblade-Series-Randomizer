@@ -19,6 +19,7 @@ def ItemValueStatistics():
 
 
 class ValueFile():
+    '''mult - Multiplier on the keys value, higher mult means this item will cost more to place'''
     def __init__(self, filename, key = "Price", mult = 1, path = "XC2/JsonOutputs/common/"):
         self.filename = f"{path}{filename}.json" # file to look at
         self.key = key # Key that indicates a value for the item

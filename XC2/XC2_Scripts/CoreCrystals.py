@@ -4,6 +4,8 @@ import random
 from XC2.XC2_Scripts import Options, IDs
 
 def CustomCoreCrystalRando():
+    if HasRanOnce():
+        return
     RandomizeCrystalList()
     ApplyNewBladeNames()
     FixOpeningSoftlock()
@@ -63,6 +65,15 @@ def FixOpeningSoftlock(): # Game doesnt like it if we open cores before a certai
                 row["Condition"] = StartingCondListRow
         JSONParser.CloseFile(data, file)    
 
+def HasRanOnce():
+    '''Checks if the crystals have been randomized already'''
+    with open("XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as cryFile:
+        cryData = json.load(cryFile)
+        for cry in cryData["rows"]:
+            if cry["$id"] == 45002 and cry["Price"] != 0:
+                return True
+        return False
+    
 def RandomizeCrystalList():
     CrystalCount = 0
     

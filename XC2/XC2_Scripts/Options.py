@@ -59,6 +59,14 @@ EnemyDropOption_WeaponChips = SubOption("Weapon Chips", EnemyDropOption, hasSpin
 EnemyDropOption_AuxCores = SubOption("Aux Cores", EnemyDropOption, hasSpinBox=True, spinDefault=10)
 EnemyDropOption_RefinedAuxCores = SubOption("Refined Aux Cores", EnemyDropOption, hasSpinBox=True, spinDefault=10)
 EnemyDropOption_CoreCrystals = SubOption("Core Crystals", EnemyDropOption, hasSpinBox=True, spinDefault=5)
+QuestRewardsOption = Option("Quest Rewards", Items, "Randomizes quest rewards, including merc missions", [lambda: I.RandomizeQuestRewards()], prio=51)
+QuestRewardsOption_Accessories = SubOption("Accessories", QuestRewardsOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
+QuestRewardsOption_WeaponChips = SubOption("Weapon Chips", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
+QuestRewardsOption_AuxCores = SubOption("Aux Cores", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
+QuestRewardsOption_RefinedAuxCores = SubOption("Refined Aux Cores", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
+QuestRewardsOption_CoreCrystals = SubOption("Core Crystals", QuestRewardsOption, hasSpinBox=True, spinDefault=5)
+QuestRewardsOption_RareBlades = SubOption("Rare Blades", QuestRewardsOption, [lambda: CoreCry.CustomCoreCrystalRando()], hasSpinBox = True, spinDefault=5)
+
 
 # Drivers
 DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()],  prio=First,  preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.DriversDescriptions())
@@ -165,6 +173,7 @@ MusicOption_MixBattleAndEnv = SubOption("Mix Battle/Environment Themes", MusicOp
 ShortcutsOption = Option("Quest Skips", QOL, "Various speedups/skips for main story quests")
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
+# ShortcutsOption_MorArdainEnterFactory = SubOption("Pre Factory Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
 ShortcutsOption_IndolQuiz = SubOption("Indol Quiz Skip", ShortcutsOption, [lambda: Skips.IndolQuizSkip()])
 ShortcutsOption_FeedingAnArmy = SubOption("Feeding an Army Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"], [293,294,295,296], ["Count"], 0)])
 ShortcutsOption_CrossDesert = SubOption("To Cross a Desert Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"], [300,301], ["Count"], 0)])
@@ -176,6 +185,7 @@ RemoveFieldSkillsOption_AllFieldSkills = SubOption("Remove All Field Skills", Re
 EasySkillTreesOption = Option("Easy Affinity Trees", QOL, "Makes trust the only condition for levelling up a blade's affinity tree", [lambda: SkillTrees.BladeSkillTreeShortening()])
 FasterDriverSkillTrees = Option("Fast Driver Skill Trees", QOL, "Decreases SP required for each node", [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["XC2/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "XC2/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "XC2/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], [f'row[key] // {FasterDriverSkillTrees.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1,  spinDesc = "x Faster")
 FasterLevelsOption = Option("Faster Levels", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["./XC2/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2,spinIncr = 1, spinDesc = "x Faster")
+FasterWeaponPointsOption = Option("Faster Weapon Points", QOL, "Decreases WP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XC2/JsonOutputs/common/BTL_Arts_Dr.json"], ["NeedWP1", "NeedWP2", "NeedWP3", "NeedWP4"], [f'row[key] // {FasterWeaponPointsOption.GetSpinbox()}'])], hasSpinBox=True, spinMin=1, spinDefault=2,spinIncr = 1, spinDesc = "x Faster")
 StartwithIncreasedMovespeedOption = Option("Increased Movespeed", QOL, "Increases your running speed", [lambda: QualityOfLife.AddMovespeedDeed()], hasSpinBox = True, spinMin = 0, spinMax = 50, spinIncr = 5, spinDesc = "% Increase (x10)", spinWidth = 2, spinDefault = 50)
 FreelyEngageBladesOption = Option("Freely Engage Blades", QOL, "Allows blades to be freely engaged by all valid drivers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["FreeEngage"], [0], [1], [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1075, 1076, 1103])])
 ChestOption = Option("Treasure Chests", QOL, "Suboptions control various things about treasure chests", prio = Last) # Not using the description because that only applies to Race Mode. Race Mode should just automatically enforce CTMC
