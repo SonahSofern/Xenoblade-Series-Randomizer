@@ -3,7 +3,7 @@ from scripts import JSONParser, Helper, PopupDescriptions, Values
 from  XCDE.XCDE_Scripts import Options, IDs
 
 # Gems have no way to reconcile the rank right now they are all treated the same,  ideally when making it would just have a handler that multiplies the price found in skillist by the gems rank which is found in itemlist
-# Add mults to things that should feel rewarding (giants chest and collectapedia)
+# Gettings items in weird spots like a gem was counted as a weapon in my inverntory when dropped from an UM
 
 def AllItemPricer():
     '''Adds prices to all items so they can be valued, basically just combines the tables since prices are held in seperate file'''
@@ -137,7 +137,7 @@ def Shops():
             for i in range(1,13):
                 wpnValTable.SelectValuedMember(shop, f"wpn{i}")
                 headValTable.SelectValuedMember(shop, f"head{i}")
-                headValTable.SelectValuedMember(shop, f"body{i}")
+                bodyValTable.SelectValuedMember(shop, f"body{i}")
                 armValTable.SelectValuedMember(shop, f"arm{i}")
                 waistValTable.SelectValuedMember(shop, f"waist{i}")
                 leggValTable.SelectValuedMember(shop, f"legg{i}")
@@ -153,13 +153,14 @@ def ShopsDesc():
 
 
 def EnemyDrops():
-    valTable = Values.ValueTable(path = "XCDE/JsonOutputs/bdat_common")
-    valTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.MaterialIDs, Values.WeightOptionMethod(Options.EnemyDropOptions_Materials))
-    valTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.CollectableIDs, Values.WeightOptionMethod(Options.EnemyDropOptions_Collectables))
-    valTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.ArmorIDs, Values.WeightOptionMethod(Options.EnemyDropOptions_Armor))
-    valTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.WeaponIDs, Values.WeightOptionMethod(Options.EnemyDropOptions_Weapons))
-    valTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.GemIDs, Values.WeightOptionMethod(Options.EnemyDropOptions_Gems))
-    valTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.ArtBookIDs, Values.WeightOptionMethod(Options.EnemyDropOptions_ArtBooks))
+    matValTable = Values.ValueTable(path = "XCDE/JsonOutputs/bdat_common")
+    matValTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.MaterialIDs, Values.WeightOptionMethod(Options.EnemyDropOptions_Materials))
+    wpnValTable = Values.ValueTable(path = "XCDE/JsonOutputs/bdat_common")
+    wpnValTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.WeaponIDs, Values.WeightOptionMethod(Options.EnemyDropOptions_Weapons))
+    armorValTable = Values.ValueTable(path = "XCDE/JsonOutputs/bdat_common")
+    armorValTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.ArmorIDs, Values.WeightOptionMethod(Options.EnemyDropOptions_Armor))
+    artValTable = Values.ValueTable(path = "XCDE/JsonOutputs/bdat_common")
+    artValTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.ArtBookIDs, Values.WeightOptionMethod(Options.EnemyDropOptions_ArtBooks))
     
     nmlFiles = []
     rarFiles = []
@@ -176,7 +177,7 @@ def EnemyDrops():
             dropData = json.load(dropFile)
             for drop in dropData["rows"]:
                 for i in range(1,3):
-                    valTable.SelectValuedMember(drop, f"materia{i}", IDs.KeyItemIDs)
+                    matValTable.SelectValuedMember(drop, f"materia{i}", IDs.KeyItemIDs)
             JSONParser.CloseFile(dropData, dropFile)
     
     for file in rarFiles:
@@ -184,8 +185,8 @@ def EnemyDrops():
             dropData = json.load(dropFile)
             for drop in dropData["rows"]:
                 for i in range(1,5):
-                    valTable.SelectValuedMember(drop, f"wpn{i}")
-                    valTable.SelectValuedMember(drop, f"equip{i}")
+                    wpnValTable.SelectValuedMember(drop, f"wpn{i}")
+                    armorValTable.SelectValuedMember(drop, f"equip{i}")
             JSONParser.CloseFile(dropData, dropFile)
             
     for file in sprFiles:
@@ -193,11 +194,11 @@ def EnemyDrops():
             dropData = json.load(dropFile)
             for drop in dropData["rows"]:
                 for i in range(1,5):
-                    valTable.SelectValuedMember(drop, f"wpn{i}")
+                    wpnValTable.SelectValuedMember(drop, f"wpn{i}")
                 for i in range(1,9):
-                    valTable.SelectValuedMember(drop, f"uni_wpn{i}")
-                    valTable.SelectValuedMember(drop, f"uni_equip{i}")
-                    valTable.SelectValuedMember(drop, f"arts{i}")
+                    wpnValTable.SelectValuedMember(drop, f"uni_wpn{i}")
+                    armorValTable.SelectValuedMember(drop, f"uni_equip{i}")
+                    artValTable.SelectValuedMember(drop, f"arts{i}")
             JSONParser.CloseFile(dropData, dropFile)
     
 

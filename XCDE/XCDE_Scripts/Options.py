@@ -23,7 +23,7 @@ Tabs = {
 
 # General
 ShopOption = Option("Shops", General, "Randomizes the contents of shops", [lambda: Items.Shops()], descData=lambda: Items.ShopsDesc()) # Key item rando settings would be fun 
-TradeOption = Option("Trading", General, "Randomizes the offers of NPC trades into the chosen options", [lambda: Items.TradeOptions()], descData=lambda: Items.TradeOptionsDesc())
+TradeOption = Option("Trading", General, "Randomizes the offers of NPC trades", [lambda: Items.TradeOptions()], descData=lambda: Items.TradeOptionsDesc())
 
 CollectableOptions = Option("Collectable Orbs", General, "Randomizes collectables on the field into the chosen options", [lambda: Items.Collectables()], descData=lambda: Items.CollectDesc())
 CollectableOptions_Collectables = SubOption("Collectables", CollectableOptions, hasSpinBox=True, spinDefault=30, spinDesc="Weights ↓")

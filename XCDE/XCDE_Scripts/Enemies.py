@@ -113,7 +113,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                                 break
                         
                         TelethiaEarly(enemy, chosen)
-                        BossSelfDestructs(enemy, chosen, selfDestructArts)
+                        BossSelfDestructs(enemy, selfDestructArts)
                         MechonEarly(enemy, chosen, [1,2,4], [30, 31, 32,33, 63, 64, 65]) # Mechon before enchant
                         MechonEarly(enemy, chosen, [2], [67, 68, 68, 66, 69, 70, 71, 134, 138, 138, 138, 139, 138, 138, 138, 139, 269, 269, 266, 265, 267, 267, 268, 327, 326, 328, 326, 338, 339, 341, 340, 340, 416, 417, 422, 421, 421, 420, 534, 636, 636, 636, 637, 638, 906, 905, 907, 908, 909, 909, 1039, 1101, 1103, 1103, 1102, 1102]) # Face mechon before monado shackles released
                         ForcedArts(enemy, ForcedStoryArts)
@@ -144,7 +144,7 @@ FinalBossOptions = {
 def ChallengingFinalBoss():
     pass
 
-def ForcedArts(enemy, ForcedStoryArts):
+def ForcedArts(enemy, ForcedStoryArts:list[ForcedArt]):
     # Fixes boss fights that require the enemy to use an art slot to end the fight 
     for id in ForcedStoryArts:
         if id.id == enemy["$id"]:
@@ -224,7 +224,7 @@ def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
     else:
         enemy["spike_state_val"] = chosen["spike_state_val"]
 
-def BossSelfDestructs(enemy, chosen:Enemy, selfDestructArts):
+def BossSelfDestructs(enemy, selfDestructArts):
     if (enemy["limit"] > 0): # If enemy has a health threshold remove the self destruct art
         for i in range(1,9):
             if enemy[f"arts{i}"] in selfDestructArts:
@@ -262,39 +262,6 @@ def KeepStatRatio(enemy, chosen, key, replacementTotal, originalTotal):
     newStat = min(math.ceil((ratio*originalTotal)), 65535)
     # print(f"{key}: {origStat} - {newStat}")
     return newStat
-
-# dummylist = []
-def PrintEnemy(enemy:Enemy):
-    with open(f"./XCDE/JsonOutputs/bdat_common_ms/BTL_enelist_ms.json", 'r+', encoding='utf-8') as enNamesFile:
-        with open(f"./XCDE/JsonOutputs/bdat_common_ms/ene_arts_ms.json", 'r+', encoding='utf-8') as enArtNamesFile:
-            with open(f"./XCDE/Enemies.txt", 'a', encoding='utf-8') as enemyTXT:
-                enemyNameData = json.load(enNamesFile)
-                enemyArtNameData = json.load(enArtNamesFile)
-
-                for name in enemyNameData["rows"]:
-                    if enemy.enelist["name"] == name["$id"]:
-                        # if "Dummy" in name["name"]:#  used to weed out dummy enemies
-                        #     dummylist.append(enemy.enelist["$id"])
-                        # print(f"Name: {name['name']}")
-                        enemyTXT.write(f" Name: {name['name']} ")
-                        break
-                for name in enemyArtNameData["rows"]:
-                    for i in range(1,9):
-                        if enemy.eneListArea[f"arts{i}"] == name["$id"]:
-                            # print(f"Art {i}: {name['name']}")
-                            enemyTXT.write(f" Art {i}: {name['name']} ")
-                            break
-                enemyTXT.write("\n")
-        #     enArtNamesFile.seek(0)
-        #     enArtNamesFile.truncate()
-        #     json.dump(enemyArtNameData, enArtNamesFile, indent=2, ensure_ascii=False)
-        # enNamesFile.seek(0)
-        # enNamesFile.truncate()
-        # json.dump(enemyNameData, enArtNamesFile, indent=2, ensure_ascii=False)
-    
-    # with open(f"./XCDE/Enemies.txt", 'a', encoding='utf-8') as enemyTXT: # Clear our enemies file
-    #     enemyTXT.seek(0)
-    #     enemyTXT.truncate()
 
 # Used for starting fight had some weird thing with the enemies
 def RingRemoval():
@@ -409,3 +376,37 @@ def GetLockedEnemies():
         except:
             pass
     print(enemiesInLock)
+    
+    
+    # dummylist = []
+def PrintEnemy(enemy:Enemy):
+    with open(f"./XCDE/JsonOutputs/bdat_common_ms/BTL_enelist_ms.json", 'r+', encoding='utf-8') as enNamesFile:
+        with open(f"./XCDE/JsonOutputs/bdat_common_ms/ene_arts_ms.json", 'r+', encoding='utf-8') as enArtNamesFile:
+            with open(f"./XCDE/Enemies.txt", 'a', encoding='utf-8') as enemyTXT:
+                enemyNameData = json.load(enNamesFile)
+                enemyArtNameData = json.load(enArtNamesFile)
+
+                for name in enemyNameData["rows"]:
+                    if enemy.enelist["name"] == name["$id"]:
+                        # if "Dummy" in name["name"]:#  used to weed out dummy enemies
+                        #     dummylist.append(enemy.enelist["$id"])
+                        # print(f"Name: {name['name']}")
+                        enemyTXT.write(f" Name: {name['name']} ")
+                        break
+                for name in enemyArtNameData["rows"]:
+                    for i in range(1,9):
+                        if enemy.eneListArea[f"arts{i}"] == name["$id"]:
+                            # print(f"Art {i}: {name['name']}")
+                            enemyTXT.write(f" Art {i}: {name['name']} ")
+                            break
+                enemyTXT.write("\n")
+        #     enArtNamesFile.seek(0)
+        #     enArtNamesFile.truncate()
+        #     json.dump(enemyArtNameData, enArtNamesFile, indent=2, ensure_ascii=False)
+        # enNamesFile.seek(0)
+        # enNamesFile.truncate()
+        # json.dump(enemyNameData, enArtNamesFile, indent=2, ensure_ascii=False)
+    
+    # with open(f"./XCDE/Enemies.txt", 'a', encoding='utf-8') as enemyTXT: # Clear our enemies file
+    #     enemyTXT.seek(0)
+    #     enemyTXT.truncate()
