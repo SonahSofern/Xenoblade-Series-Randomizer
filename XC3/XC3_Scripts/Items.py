@@ -1,6 +1,36 @@
 from XC3.XC3_Scripts import IDs, Options
-from scripts import JSONParser, Helper, PopupDescriptions
+from scripts import JSONParser, Helper, PopupDescriptions, Values
 import json, random
+
+# Shops
+# Enemy Drops
+# Containers
+# Supply Drops
+# Quest Rewards
+# Collectapedia Card Rewards
+
+def QuestRewards():
+    valTable = Values.ValueTable(path = "XCDE/JsonOutputs/bdat_common")
+    valTable.PopulateValues(Values.ValueFile("ITM_Accessory"), IDs.MaterialIDs, Values.WeightOptionMethod(Options.QuestRewardsOptions_Materials))
+
+    
+    areas = []
+    rewardTypes = ["A1", "A2", "A3", "B1", "B2", "B3"]
+    for area in IDs.areaFileListNumbers:
+        testArea = f"XCDE/JsonOutputs/bdat_common/JNL_quest{area}.json"
+        if os.path.exists(testArea):
+            areas.append(testArea)
+        
+    for area in areas:
+        with open(area, 'r+', encoding='utf-8') as rewFile:
+            rewData = json.load(rewFile)
+            for rew in rewData["rows"]:
+                for type in rewardTypes:
+                    valTable.SelectValuedMember(rew, f"reward_{type}", IDs.KeyItemIDs)
+            JSONParser.CloseFile(rewData, rewFile)
+
+def Shops():
+    pass
 
 def Shops():
     if Options.ShopOption_IndividualItems.GetState():

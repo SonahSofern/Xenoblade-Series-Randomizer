@@ -3,7 +3,6 @@ from scripts import JSONParser, Helper, PopupDescriptions, Values
 from  XCDE.XCDE_Scripts import Options, IDs
 
 # Gems have no way to reconcile the rank right now they are all treated the same,  ideally when making it would just have a handler that multiplies the price found in skillist by the gems rank which is found in itemlist
-# Gettings items in weird spots like a gem was counted as a weapon in my inverntory when dropped from an UM
 
 def AllItemPricer():
     '''Adds prices to all items so they can be valued, basically just combines the tables since prices are held in seperate file'''
@@ -11,14 +10,14 @@ def AllItemPricer():
     AddPriceValuesToItemList("ITM_collectlist", IDs.CollectableIDs)
     AddPriceValuesToItemList("ITM_equiplist", IDs.ArmorIDs)
     AddPriceValuesToItemList("ITM_wpnlist", IDs.WeaponIDs)
-    AddPriceValuesToItemList("BTL_skilllist", IDs.GemIDs)
+    AddPriceValuesToItemList("BTL_skilllist", IDs.GemIDs, True)
     AddPriceValuesToItemList("ITM_artslist", IDs.ArtBookIDs)
     
 # Not randomizing crystals because the effects can already be randomized from gem rando. Crystals cant be randomized in anything besides enemies. And there no point in randomizing them in enemies, because it would only be the strength of the crystal but strength is intended to be matched by item rando.
 
 # Some extra logic because Xenoblade DE keeps its prices seperate from the items
 # Add the price to the data at the start of rando then remove before packing
-def AddPriceValuesToItemList(itemPriceFile, targetIDs):
+def AddPriceValuesToItemList(itemPriceFile, targetIDs, useRankType = False):
     with open(f"XCDE/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as itmFile:
         with open(f"XCDE/JsonOutputs/bdat_common/{itemPriceFile}.json", 'r+', encoding='utf-8') as priceFile:
             itmData = json.load(itmFile)
@@ -27,7 +26,13 @@ def AddPriceValuesToItemList(itemPriceFile, targetIDs):
                 if itm["$id"] in targetIDs:
                     for price in priceData["rows"]:
                         if price["$id"] == itm["itemID"]:
-                            itm["Price"] = price["money"]
+                            
+                            if useRankType:
+                                priceValue = price["money"] * itm["rankType"] * 2
+                            else:
+                                priceValue = price["money"] 
+                                
+                            itm["Price"] = priceValue
                             break
             JSONParser.CloseFile(itmData, itmFile)
 
