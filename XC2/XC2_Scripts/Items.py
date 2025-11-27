@@ -109,6 +109,8 @@ def RandomizeEnemyDrops(): # Up top here we define the RandomGroups instead of j
     valTable.PopulateValues(Values.ValueFile("ITM_Orb", mult=0.5), IDs.AuxCoreIDs, Values.WeightOptionMethod(Options.EnemyDropOption_AuxCores))
     valTable.PopulateValues(Values.ValueFile("ITM_CrystalList", mult=3), IDs.CoreCrystals, Values.WeightOptionMethod(Options.EnemyDropOption_CoreCrystals))
     valTable.PopulateValues(Values.ValueFile("ITM_PcEquip"), IDs.AccessoryIDs, Values.WeightOptionMethod(Options.EnemyDropOption_Accessories))
+    valTable.PopulateValues(Values.ValueFile("ITM_CrystalList"), IDs.CustomCrystalIDs, Values.WeightOptionMethod(Options.EnemyDropOption_RareBlades))
+    
     
     RandomizeEnemyDropsHelper(IDs.BaseDropTableIDs, IDs.PreciousItems, valTable)
     RandomizeEnemyDropsHelper(IDs.TornaDropTableIDs, IDs.TornaPreciousIDs + FerisBeastmeat, tornaValTable)

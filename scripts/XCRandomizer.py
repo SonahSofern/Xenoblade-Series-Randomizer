@@ -90,7 +90,7 @@ def resize_bg(event, root, bg_image, background, Game):
 saveCommands = []
 
 # Some of the oldest code and messy for sure. 
-def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, Extracommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= [], setupHelpDesc = None): 
+def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, postCommands = [], preCommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= [], setupHelpDesc = None): 
     windowPadding = 50
     if Onefile.isOneFile:
         fileEntryVar = os.path.join(sys._MEIPASS, Game, 'bdat')
@@ -192,7 +192,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), Randomize(XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames,Extracommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles))))
+    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), Randomize(XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames, postCommands, preCommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles))))
     RandomizeButton.pack(pady=(5,windowPadding), padx=(windowPadding, 0), anchor="w", side="left")
     saveCommands.append(saveCommand)
 
@@ -210,7 +210,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     Theme.ThemeUpdate()
     root.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background, Game), add="+")
 
-def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], ExtraCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
+def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], postCommands = [], preCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
     def ThreadedRandomize():
         if outputDirVar.get().strip() == "":
             errorMsgObj = PopupDescriptions.Description(bonusWidth= 15)
@@ -258,8 +258,12 @@ def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, rand
             return
 
         # Runs all randomization
+        for command in preCommands: 
+            command()
+            
         runLog = RunOptions(OptionList, randoProgressDisplay, root, randoSeedEntry.get(), pb)
-        for command in ExtraCommands: # Runs extra commands like show title screen
+        
+        for command in postCommands: # Runs post commands like show title screen
             command()
             
         randoProgressDisplay.config(text="Packing BDATs")

@@ -7,7 +7,9 @@ Version = "1.1.1"
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["bdat_common_ms/MNU_title_ms.json"],[8], ["name"], f"Randomizer v{Version}", Game="XCDE") # Change Title Version to Randomizer vX.x.x
 
-extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.EnemiesScript.OriginalEnemyData.clear()]
+postCommands = [lambda: ShowTitleScreenText(), lambda: Options.EnemiesScript.OriginalEnemyData.clear(), lambda: Options.Items.RemovePriceValuesFromItemList()]
+
+preCommands = [lambda: Options.Items.AllItemPricer()]
 
 seedEntryVar = scripts.XCRandomizer.StringVar()
 permalinkVar = scripts.XCRandomizer.StringVar()

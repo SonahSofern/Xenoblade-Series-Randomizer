@@ -21,7 +21,7 @@ if scripts.XCRandomizer.Onefile.isOneFile:
 else:  
     extraArgs= ["--hashes", hashFile]
     
-extraCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.EnhancementsList.RefreshCurrentGroup()]
+postCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.EnhancementsList.RefreshCurrentGroup()]
 mainFolderNames = ["des", "btl", "evt", "fld", "map", "prg", "qst", "sys", "zzz", "mnu", "dlc"]
 subFolderNames = ["autotalk", "battle", "field", "menu", "quest", "system"]
 textFolderName= "gb/game"

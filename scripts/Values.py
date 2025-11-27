@@ -20,8 +20,8 @@ def ItemValueStatistics():
 
 class ValueFile():
     '''mult - Multiplier on the keys value, higher mult means this item will cost more to place'''
-    def __init__(self, filename, key = "Price", mult = 1, path = "XC2/JsonOutputs/common/"):
-        self.filename = f"{path}{filename}.json" # file to look at
+    def __init__(self, filename, key = "Price", mult = 1):
+        self.filename = filename # file to look at
         self.key = key # Key that indicates a value for the item
         self.mult = mult # multiplier on that keys value
 
@@ -31,9 +31,10 @@ class ValuedItem():
         self.value = value
 
 class ValueTable():
-    def __init__(self):
+    def __init__(self, path = "XC2/JsonOutputs/common"):
         self.valuesList:list[Helper.RandomGroup] = []
         self.weightList = []
+        self.path = path
         
     def PopulateValues(self, file:ValueFile, validIDs, weight = 1):
         '''
@@ -44,7 +45,7 @@ class ValueTable():
         validIDs: list of ids that are allowed to be populated
         weight: weight of this category
         '''
-        with open(file.filename, 'r+', encoding='utf-8') as curFile:
+        with open(f"{self.path}/{file.filename}.json", 'r+', encoding='utf-8') as curFile:
             curData = json.load(curFile)
             newList = Helper.RandomGroup()
             self.valuesList.append(newList)

@@ -59,6 +59,7 @@ EnemyDropOption_WeaponChips = SubOption("Weapon Chips", EnemyDropOption, hasSpin
 EnemyDropOption_AuxCores = SubOption("Aux Cores", EnemyDropOption, hasSpinBox=True, spinDefault=10)
 EnemyDropOption_RefinedAuxCores = SubOption("Refined Aux Cores", EnemyDropOption, hasSpinBox=True, spinDefault=10)
 EnemyDropOption_CoreCrystals = SubOption("Core Crystals", EnemyDropOption, hasSpinBox=True, spinDefault=5)
+EnemyDropOption_RareBlades = SubOption("Rare Blades", EnemyDropOption, [lambda: CoreCry.CustomCoreCrystalRando()], hasSpinBox = True, spinDefault=5)
 QuestRewardsOption = Option("Quest Rewards", Items, "Randomizes quest rewards, including merc missions", [lambda: I.RandomizeQuestRewards()], prio=51)
 QuestRewardsOption_Accessories = SubOption("Accessories", QuestRewardsOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
 QuestRewardsOption_WeaponChips = SubOption("Weapon Chips", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
