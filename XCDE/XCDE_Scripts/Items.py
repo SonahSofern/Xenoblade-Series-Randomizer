@@ -1,4 +1,4 @@
-import json, random, copy
+import json, os
 from scripts import JSONParser, Helper, PopupDescriptions, Values
 from  XCDE.XCDE_Scripts import Options, IDs
 
@@ -104,7 +104,7 @@ def GiantsChests():
         tboxData = json.load(tboxFile)
         for col in tboxData["rows"]:
             for i in range(1,5):
-                valTable.SelectValuedMember(col, f"item{i}ID", IDs.KeyItemIDs + IDs.ArtBookIDs)
+                valTable.SelectValuedMember(col, f"itm{i}ID", IDs.KeyItemIDs + IDs.ArtBookIDs)
         JSONParser.CloseFile(tboxData, tboxFile)
         
 def GiantsChestsDesc():
@@ -131,7 +131,7 @@ def Shops():
     
     
     # Randomization
-    with open(f"XCDE/JsonOutputs/bdat_common/FLD_tboxlist.json", 'r+', encoding='utf-8') as shopFile:
+    with open(f"XCDE/JsonOutputs/bdat_common/shoplist.json", 'r+', encoding='utf-8') as shopFile:
         shopData = json.load(shopFile)
         for shop in shopData["rows"]:
             for i in range(1,13):
@@ -165,9 +165,10 @@ def EnemyDrops():
     rarFiles = []
     sprFiles = []
     for file in IDs.areaFileListNumbers:
-        nmlFiles.append(f"bdat_ma{file}/drop_nmllist{file}")
-        rarFiles.append(f"bdat_ma{file}/drop_rarlist{file}")
-        sprFiles.append(f"bdat_ma{file}/drop_sprlist{file}")
+        if os.path.exists(f"XCDE/JsonOutputs/bdat_ma{file}/drop_sprlist{file}.json"):
+            nmlFiles.append(f"bdat_ma{file}/drop_nmllist{file}")
+            rarFiles.append(f"bdat_ma{file}/drop_rarlist{file}")
+            sprFiles.append(f"bdat_ma{file}/drop_sprlist{file}")
         
     # Randomization
     for file in nmlFiles:
@@ -184,7 +185,6 @@ def EnemyDrops():
             for drop in dropData["rows"]:
                 for i in range(1,5):
                     valTable.SelectValuedMember(drop, f"wpn{i}")
-                for i in range(1,5):
                     valTable.SelectValuedMember(drop, f"equip{i}")
             JSONParser.CloseFile(dropData, dropFile)
             
@@ -195,9 +195,9 @@ def EnemyDrops():
                 for i in range(1,5):
                     valTable.SelectValuedMember(drop, f"wpn{i}")
                 for i in range(1,9):
-                    valTable.SelectValuedMember(drop, f"equip{i}")
                     valTable.SelectValuedMember(drop, f"uni_wpn{i}")
                     valTable.SelectValuedMember(drop, f"uni_equip{i}")
+                    valTable.SelectValuedMember(drop, f"arts{i}")
             JSONParser.CloseFile(dropData, dropFile)
     
 
@@ -220,10 +220,12 @@ def QuestRewards():
     areas = []
     rewardTypes = ["A1", "A2", "A3", "B1", "B2", "B3"]
     for area in IDs.areaFileListNumbers:
-        areas.append(f"bdat_common/JNL_quest{area}")
+        testArea = f"XCDE/JsonOutputs/bdat_common/JNL_quest{area}.json"
+        if os.path.exists(testArea):
+            areas.append(testArea)
         
     for area in areas:
-        with open(f"XCDE/JsonOutputs/{area}.json", 'r+', encoding='utf-8') as rewFile:
+        with open(area, 'r+', encoding='utf-8') as rewFile:
             rewData = json.load(rewFile)
             for rew in rewData["rows"]:
                 for type in rewardTypes:
@@ -262,10 +264,12 @@ def TradeOptions():
     
     areas = []
     for area in IDs.areaFileListNumbers:
-        areas.append(f"bdat_ma{area}/exchangelist{area}")
+        testArea = f"XCDE/JsonOutputs/bdat_ma{area}/exchangelist{area}.json"
+        if os.path.exists(testArea):
+            areas.append(testArea)
     
     for area in areas:
-        with open(f"XCDE/JsonOutputs/bdat_ma{area}/exchangelist{area}.json", 'r+', encoding='utf-8') as exchFile:
+        with open(area, 'r+', encoding='utf-8') as exchFile:
             exchData = json.load(exchFile)
             for exch in exchData["rows"]:
                 wpnValTable.SelectValuedMember(exch, "wpn1")

@@ -62,7 +62,7 @@ class ValueTable():
         else:
             return False
     
-    def SelectValuedMember(self, data, key, dontChangeIDs):
+    def SelectValuedMember(self, data, key, dontChangeIDs = []):
         
         if data[key] in dontChangeIDs + [0]: # dont change some things and empty spots
             return
