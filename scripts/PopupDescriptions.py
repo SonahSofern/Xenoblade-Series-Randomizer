@@ -77,14 +77,10 @@ def GenericPopup(title):
             return None # If it exists, don't create a new one
         
     top = Toplevel(padx=10, pady=10)  # Create a new top-level window
-    top.withdraw()
-    top.attributes(alpha=0.0)
     top.title(title)
     OpenWindows.append(top)
     
-    top.attributes(alpha = 1.0)
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
-    # center(top, mainwindow)
     Theme.RootsForStyling.append(top)
     Theme.ThemeUpdate()
     
@@ -94,6 +90,7 @@ def StyledPopup(title, descData, root, isForcedPack = False):
     top = GenericPopup(title)
     if top == None:
         return # Dont do this again if top window already exists
+    top.attributes(alpha = 0)
     myDescription:Description = descData()
     scrollPanel = scripts.ScrollPanel.ScrollablePanel(top)
     
@@ -131,8 +128,7 @@ def StyledPopup(title, descData, root, isForcedPack = False):
     Theme.ThemeUpdate()
     scripts.GUIHelper.ResizeWindow(top, scrollPanel.innerFrame, myDescription.bonusWidth)
     center(top, root)
-    top.attributes(alpha = 1.0)
-    top.deiconify()
+    top.attributes(alpha = 1) # Show after centering (cant use deiconify because then the deiconify dimensions dont get updated) 
     
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
     return top
@@ -140,8 +136,8 @@ def StyledPopup(title, descData, root, isForcedPack = False):
             
 def center(win:Toplevel, mainwindow:Toplevel):
     '''Centers a window in top window'''
-    mainwindow.update_idletasks()
-    win.update_idletasks()
+    mainwindow.update()
+    win.update()
     width = win.winfo_width()
     height = win.winfo_height()
     parentwidth = mainwindow.winfo_width()

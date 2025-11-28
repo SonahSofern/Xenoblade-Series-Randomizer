@@ -170,19 +170,23 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     DiscordButton.pack(anchor="e", side="right", pady=(5,windowPadding), padx=(0, 5)) 
 
     Theme.ThemeUpdate()
-        
+    
     # Background Images
     bg = random.choice(backgroundImages)
     if Onefile.isOneFile: 
         bg_image = Image.open(os.path.join(sys._MEIPASS, Game, 'Images', bg))
     else:
         bg_image = Image.open(f"./{Game}/Images/{bg}")
-    bg_photo = ImageTk.PhotoImage(bg_image)
-
+    
+    # hardcoded because thats the height of the window that actually uses the background. But that height is unaccessable when this is called.
+    resized = bg_image.resize((int(Theme.windowWidth), 840))
+    bg_photo = ImageTk.PhotoImage(resized)
+    garbageCollectionStopper.append(bg_photo)
     background.create_image(0, 0, image=bg_photo, anchor="nw")
     
-    XCFrame.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background))
+    # Tkinter is so bad at this, winfowidth does not work the only way to get the right dimensions is through a configure event... crazy.
     XCFrame.update()
+    XCFrame.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background))
     # root.bind("<Configure>", lambda event: resize_bg(event, XCFrame, root, bg_image, background), add="+")
 
 lastHeight = -1
@@ -222,12 +226,14 @@ def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, rand
         
         # Make Popup
         progressPopup = PopupDescriptions.GenericPopup(f"Log {datetime.datetime.now()}") 
+        progressPopup.attributes(alpha = 0)
 
         randoProgressFill = ttk.Frame(progressPopup, padding=0)
         randoProgressDisplay = ttk.Label(randoProgressFill, padding=5)
         randoProgressDisplay.pack(pady=0)
         pb = ttk.Progressbar(progressPopup, orient='horizontal', mode='determinate', length=500)
-        progressPopup.deiconify() # Wait until things are ready to show
+        progressPopup.attributes(alpha = 1)
+
     
         # Showing Progress Diplay 
         randoProgressDisplay.config(text="Unpacking BDATs")
