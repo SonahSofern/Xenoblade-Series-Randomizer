@@ -60,32 +60,6 @@ def CreateImage(imagePath, resize = (40,40)):
     iconCollector.append(newimg)
     return newimg
 
-lastHeight = -1
-lastWidth = -1
-lastGame = "" # Keeps tracks of when to update UI, dont love this solution though
-
-def resize_bg(event, root, bg_image, background, Game):
-    global lastWidth, lastHeight
-
-    if (root.winfo_width() != lastWidth) or (root.winfo_height() != lastHeight):
-        width, height = event.width, event.height
-
-        if Game == lastGame:
-            lastWidth = width
-            lastHeight = height
-
-        def resize_and_update(): # Processes the images on another thread because it slows down main thread a lot
-            resized_image = bg_image.resize((width, height))
-            bg_photo = ImageTk.PhotoImage(resized_image)
-
-            def update_gui(): # Update GUI on main thread because tkinter is not thread safe
-                garbageCollectionStopper.append(bg_photo)
-                background.delete("all")
-                background.create_image(0, 0, image=bg_photo, anchor="nw")
-
-            root.after(0, update_gui)
-
-        threading.Thread(target=resize_and_update, daemon=True).start()
 
 saveCommands = []
 
@@ -109,17 +83,8 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     else:
         bdat_path = f"Toolset/bdat-toolset-win64.exe"
 
-    # Background Images
-    bg = random.choice(backgroundImages)
-    if Onefile.isOneFile: 
-        bg_image = Image.open(os.path.join(sys._MEIPASS, Game, 'Images', bg))
-    else:
-        bg_image = Image.open(f"./{Game}/Images/{bg}")
-    bg_photo = ImageTk.PhotoImage(bg_image)
-
     background = tk.Canvas(XCFrame)
     background.pack(fill="both", expand=True, padx=0, pady=0)
-    background.create_image(0, 0, image=bg_photo, anchor="nw")
 
     # The Notebook
     MainWindow = ttk.Notebook(background)
@@ -196,9 +161,6 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     RandomizeButton.pack(pady=(5,windowPadding), padx=(windowPadding, 0), anchor="w", side="left")
     saveCommands.append(saveCommand)
 
-    global lastGame
-    lastGame = Game
-
     Presets.PresetsWindow(outerPresetFrame,  [seedVar] + Interactables.XenoOptionDict[Game], Game)
     
     SettingsButton = ttk.Button(background, text="Help", command=lambda: PopupDescriptions.StyledPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window), padding=5)
@@ -208,7 +170,42 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     DiscordButton.pack(anchor="e", side="right", pady=(5,windowPadding), padx=(0, 5)) 
 
     Theme.ThemeUpdate()
-    root.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background, Game), add="+")
+        
+    # Background Images
+    bg = random.choice(backgroundImages)
+    if Onefile.isOneFile: 
+        bg_image = Image.open(os.path.join(sys._MEIPASS, Game, 'Images', bg))
+    else:
+        bg_image = Image.open(f"./{Game}/Images/{bg}")
+    bg_photo = ImageTk.PhotoImage(bg_image)
+
+    background.create_image(0, 0, image=bg_photo, anchor="nw")
+    
+    XCFrame.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background))
+    XCFrame.update()
+    # root.bind("<Configure>", lambda event: resize_bg(event, XCFrame, root, bg_image, background), add="+")
+
+lastHeight = -1
+lastWidth = -1
+
+def resize_bg(event, root, bg_image, background):
+    global lastWidth, lastHeight
+
+    if (root.winfo_width() != lastWidth) or (root.winfo_height() != lastHeight):
+        width, height = event.width, event.height
+
+        def resize_and_update(): # Processes the images on another thread because it slows down main thread a lot
+            resized_image = bg_image.resize((width, height))
+            bg_photo = ImageTk.PhotoImage(resized_image)
+
+            def update_gui(): # Update GUI on main thread because tkinter is not thread safe
+                garbageCollectionStopper.append(bg_photo)
+                background.delete("all")
+                background.create_image(0, 0, image=bg_photo, anchor="nw")
+
+            root.after(0, update_gui)
+
+        threading.Thread(target=resize_and_update, daemon=True).start()
 
 def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], postCommands = [], preCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
     def ThreadedRandomize():
