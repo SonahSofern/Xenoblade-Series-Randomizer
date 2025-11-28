@@ -244,7 +244,6 @@ def QuestRewardsDesc():
     myDesc.Text("Randomizes rewards from quests. You can choose the weights for the categories you have chosen.")
     return myDesc
 
-
 def TradeOptions():
     wpnValTable = Values.ValueTable(path = "XCDE/JsonOutputs/bdat_common")
     wpnValTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.WeaponIDs)

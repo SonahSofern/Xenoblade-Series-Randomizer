@@ -2,6 +2,9 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.font import Font
 
+windowWidth = "1600"
+windowHeight = "900"
+
 Black = "#000000"
 LightBlack="#262626"
 OffLightBlack="#303030"

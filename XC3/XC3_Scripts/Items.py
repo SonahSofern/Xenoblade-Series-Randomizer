@@ -1,6 +1,6 @@
 from XC3.XC3_Scripts import IDs, Options
 from scripts import JSONParser, Helper, PopupDescriptions, Values
-import json, random
+import json, random, os
 
 # Shops
 # Enemy Drops
