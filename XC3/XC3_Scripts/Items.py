@@ -1,91 +1,74 @@
 from XC3.XC3_Scripts import IDs, Options
 from scripts import JSONParser, Helper, PopupDescriptions, Values
-import json, random, os
+import json
 
-# Shops
-# Enemy Drops
-# Containers
-# Supply Drops
-# Quest Rewards
-# Collectapedia Card Rewards
-
-def QuestRewards():
-    valTable = Values.ValueTable(path = "XCDE/JsonOutputs/bdat_common")
-    valTable.PopulateValues(Values.ValueFile("ITM_Accessory"), IDs.MaterialIDs, Values.WeightOptionMethod(Options.QuestRewardsOptions_Materials))
-
+# Small helpers to generate a standard valtable since they will probably reuse this a lot
+def StandardValTable(Accessories = None, Precious = None, Collectables = None):
+    valTable = Values.ValueTable(path = "XC3/JsonOutputs/sys")
+    if Accessories != None:
+        valTable.PopulateValues(Values.ValueFile("ITM_Accessory"), IDs.AccessoriesIDs, Values.WeightOptionMethod(Accessories))
+    if Precious != None:
+        valTable.PopulateValues(Values.ValueFile("ITM_Precious", key="Price1"), IDs.BaseGamePreciousIDs, Values.WeightOptionMethod(Precious))
+    if Collectables != None:
+        valTable.PopulateValues(Values.ValueFile("ITM_Collection", key="Price3"), IDs.CollectableIDs, Values.WeightOptionMethod(Collectables))
+    return valTable
     
-    areas = []
-    rewardTypes = ["A1", "A2", "A3", "B1", "B2", "B3"]
-    for area in IDs.areaFileListNumbers:
-        testArea = f"XCDE/JsonOutputs/bdat_common/JNL_quest{area}.json"
-        if os.path.exists(testArea):
-            areas.append(testArea)
-        
-    for area in areas:
-        with open(area, 'r+', encoding='utf-8') as rewFile:
-            rewData = json.load(rewFile)
-            for rew in rewData["rows"]:
-                for type in rewardTypes:
-                    valTable.SelectValuedMember(rew, f"reward_{type}", IDs.KeyItemIDs)
-            JSONParser.CloseFile(rewData, rewFile)
+def DLC4StandardValTable(Accessories = None, Precious = None, Collectables = None):
+    dlc4ValTable = Values.ValueTable(path = "XC3/JsonOutputs/sys")
+    if Accessories != None:
+        dlc4ValTable.PopulateValues(Values.ValueFile("ITM_Accessory", key="Price_dlc04"), IDs.AccessoriesIDs + IDs.DLC4AccessoriesIDs, Values.WeightOptionMethod(Accessories))
+    if Precious != None:
+        dlc4ValTable.PopulateValues(Values.ValueFile("ITM_Precious", key="Price1"), IDs.DLC4PreciousIDs, Values.WeightOptionMethod(Precious))
+    if Collectables != None:
+        dlc4ValTable.PopulateValues(Values.ValueFile("ITM_Collection", key="Price3_dlc04"), IDs.DLC4CollectableIDs, Values.WeightOptionMethod(Collectables))
+    return dlc4ValTable
 
 def Shops():
-    pass
+    valTable:Values.ValueTable = StandardValTable(Options.ShopOption_Accessories, Options.ShopOption_Precious, Options.ShopOption_Collectables)
+    dlc4ValTable:Values.ValueTable = DLC4StandardValTable(Options.ShopOption_Accessories, Options.ShopOption_Precious, Options.ShopOption_Collectables)
 
-def Shops():
-    if Options.ShopOption_IndividualItems.GetState():
-        with open("XC3/JsonOutputs/mnu/MNU_ShopTable.json", 'r+', encoding='utf-8') as shopFile:
+    DLC4ShopIDs = [54,55,56,57]
+    BronzeTempleGuard = [1]
+    with open("XC3/JsonOutputs/mnu/MNU_ShopTable.json", 'r+', encoding='utf-8') as shopFile:
             shopData = json.load(shopFile)
-            chosenGroup = IDs.DLC4AccessoriesIDs + IDs.AccessoriesIDs
-            ignoreGroup = [0,1] + IDs.DLC4PreciousIDs + IDs.BaseGamePreciousIDs
             for shop in shopData["rows"]:
                 for i in range(1,21):
-                    if (shop[f"ShopItem{i}"] in ignoreGroup):
-                        continue
-                    newItemId = random.choice(chosenGroup)
-                    shop[f"ShopItem{i}"] = newItemId
+                    if shop["$id"] in DLC4ShopIDs:
+                        dlc4ValTable.SelectValuedMember(shop, f"ShopItem{i}", IDs.DLC4PreciousIDs)
+                    else:
+                        valTable.SelectValuedMember(shop, f"ShopItem{i}", IDs.BaseGamePreciousIDs + BronzeTempleGuard)
+                    
             JSONParser.CloseFile(shopData,shopFile)
-    if Options.ShopOption_ShuffleShops.GetState():
-        Helper.FileShuffle("XC3/JsonOutputs/mnu/MNU_ShopTable.json", ["$id"])
-        FixTutorialItems()
 
-def FixTutorialItems():
-    with open("XC3/JsonOutputs/mnu/MNU_ShopTable.json", 'r+', encoding='utf-8') as shopFile:
-        shopData = json.load(shopFile)
-        for shop in shopData["rows"]:
-            if shop["$id"] in [1,2,3]:
-                shop["ShopItem1"] = 1
-        JSONParser.CloseFile(shopData,shopFile)
+def EnemyDrops():
+    valTable = StandardValTable(Options.EnemyNormalDrop_Accessories, Options.EnemyNormalDrop_Precious)
+    dlc4ValTable = DLC4StandardValTable(Options.EnemyNormalDrop_Accessories, Options.EnemyNormalDrop_Precious)
+    
+    with open("XC3/JsonOutputs/btl/BTL_EnemyDrop_Normal.json", 'r+', encoding='utf-8') as eneDropFile:
+        eneDropData = json.load(eneDropFile)
+        for drop in eneDropData["rows"]:
+            valTable.SelectValuedMember(drop, ["ItemID"])
+        JSONParser.CloseFile(eneDropData, eneDropFile)
         
-
-def EnemyNormalDrops():
-    if Options.EnemyNormalDropOption_IndividualItems.GetState():
-        with open("XC3/JsonOutputs/btl/BTL_EnemyDrop_Normal.json", 'r+', encoding='utf-8') as eneDropFile:
-            eneDropData = json.load(eneDropFile)
-            for drop in eneDropData["rows"]:
-                drop["ItemID"] = random.choice(IDs.AccessoriesIDs)
-            JSONParser.CloseFile(eneDropData, eneDropFile)
-        with open("XC3/JsonOutputs/dlc/BTL_EnemyDrop_Normal_dlc04.json", 'r+', encoding='utf-8') as eneDropFile: # FR
-            eneDropData = json.load(eneDropFile)
-            for drop in eneDropData["rows"]:
-                drop["ItemID"] = random.choice(IDs.AccessoriesIDs + IDs.DLC4AccessoriesIDs)
-            JSONParser.CloseFile(eneDropData, eneDropFile)
-    if Options.EnemyNormalDropOption_ShuffleDrops.GetState():
-        Helper.FileShuffle("XC3/JsonOutputs/btl/BTL_EnemyDrop_Normal.json", ["$id", "LvMin", "LvMax", "Param", "<36D6C799>"])
-        Helper.FileShuffle("XC3/JsonOutputs/dlc/BTL_EnemyDrop_Normal_dlc04.json", ["$id", "LvMin", "LvMax", "Param", "<36D6C799>"]) # FR
-        
+    with open("XC3/JsonOutputs/dlc/BTL_EnemyDrop_Normal_dlc04.json", 'r+', encoding='utf-8') as eneDropFile: # FR
+        eneDropData = json.load(eneDropFile)
+        for drop in eneDropData["rows"]:
+            dlc4ValTable.SelectValuedMember(drop, ["ItemID"])
+        JSONParser.CloseFile(eneDropData, eneDropFile)
         
 def TreasureBoxes():
+    valTable = StandardValTable(Options.TreasureBoxOption_Accessories, Options.TreasureBoxOption_Precious, Options.TreasureBoxOption_Collectables)
+    dlc4ValTable = DLC4StandardValTable(Options.TreasureBoxOption_Accessories, Options.TreasureBoxOption_Precious, Options.TreasureBoxOption_Collectables)
+    
+    dlc4TboxIDs = Helper.InclRange(429, 501)
     AttackStone = [471] # Tutorials require this
-    if Options.TreasureBoxOption_IndividualItems.GetState():
-        with open("XC3/JsonOutputs/sys/ITM_RewardAssort.json", 'r+', encoding='utf-8') as containerFile:
-            containerData = json.load(containerFile)
-            for container in containerData["rows"]:
-                for i in range(1,20):
-                    if container[f"Reward{i}"] in (IDs.BaseGamePreciousIDs + IDs.DLC4PreciousIDs + [0] + AttackStone): # Dont replace Precious Items
-                        continue
-                    container[f"Reward{i}"] = random.choice(IDs.AccessoriesIDs)
-            JSONParser.CloseFile(containerData, containerFile)
-    if Options.TreasureBoxOption_ShuffleBoxes.GetState():
-        Helper.FileShuffle("XC3/JsonOutputs/sys/ITM_RewardAssort.json", ["$id"], [7])
+    
+    with open("XC3/JsonOutputs/sys/ITM_RewardAssort.json", 'r+', encoding='utf-8') as tboxFile:
+        tboxData = json.load(tboxFile)
         
+        for tbox in tboxData["rows"]:
+            for i in range(1,21):
+                if tbox["$id"] in dlc4TboxIDs:
+                    dlc4ValTable.SelectValuedMember(tbox, [f"Reward{i}"], IDs.DLC4PreciousIDs)
+                else:
+                    valTable.SelectValuedMember(tbox, [f"Reward{i}"], IDs.BaseGamePreciousIDs + AttackStone)
