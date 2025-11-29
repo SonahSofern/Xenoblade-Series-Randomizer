@@ -47,13 +47,13 @@ def EnemyDrops():
     with open("XC3/JsonOutputs/btl/BTL_EnemyDrop_Normal.json", 'r+', encoding='utf-8') as eneDropFile:
         eneDropData = json.load(eneDropFile)
         for drop in eneDropData["rows"]:
-            valTable.SelectValuedMember(drop, ["ItemID"])
+            valTable.SelectValuedMember(drop, "ItemID")
         JSONParser.CloseFile(eneDropData, eneDropFile)
         
     with open("XC3/JsonOutputs/dlc/BTL_EnemyDrop_Normal_dlc04.json", 'r+', encoding='utf-8') as eneDropFile: # FR
         eneDropData = json.load(eneDropFile)
         for drop in eneDropData["rows"]:
-            dlc4ValTable.SelectValuedMember(drop, ["ItemID"])
+            dlc4ValTable.SelectValuedMember(drop, "ItemID")
         JSONParser.CloseFile(eneDropData, eneDropFile)
         
 def TreasureBoxes():
@@ -69,6 +69,32 @@ def TreasureBoxes():
         for tbox in tboxData["rows"]:
             for i in range(1,21):
                 if tbox["$id"] in dlc4TboxIDs:
-                    dlc4ValTable.SelectValuedMember(tbox, [f"Reward{i}"], IDs.DLC4PreciousIDs)
+                    dlc4ValTable.SelectValuedMember(tbox, f"Reward{i}", IDs.DLC4PreciousIDs)
                 else:
-                    valTable.SelectValuedMember(tbox, [f"Reward{i}"], IDs.BaseGamePreciousIDs + AttackStone)
+                    valTable.SelectValuedMember(tbox, f"Reward{i}", IDs.BaseGamePreciousIDs + AttackStone)
+        JSONParser.CloseFile(tboxData, tboxFile)
+                    
+def QuestRewards():
+    valTable = StandardValTable(Options.QuestRewardOption_Accessories, Options.QuestRewardOption_Precious, Options.QuestRewardOption_Collectables)
+    dlc4ValTable = DLC4StandardValTable(Options.QuestRewardOption_Accessories, Options.QuestRewardOption_Precious, Options.QuestRewardOption_Collectables)
+    
+    dlc4QuestRewards = Helper.InclRange(198,242)
+    
+    with open("XC3/JsonOutputs/sys/ITM_RewardQuest.json", 'r+', encoding='utf-8') as questFile:
+        questData = json.load(questFile)
+        for quest in questData["rows"]:
+            for i in range(1,5):
+                if quest["$id"] in dlc4QuestRewards:
+                    dlc4ValTable.SelectValuedMember(quest, f"Reward{i}", IDs.DLC4PreciousIDs)
+                else:
+                    valTable.SelectValuedMember(quest, f"Reward{i}", IDs.BaseGamePreciousIDs)
+        JSONParser.CloseFile(questData, questFile)
+        
+def CollectopaediaCards():
+    valTable = StandardValTable(Options.CollectapediaRewardsOption_Accessories, Options.CollectapediaRewardsOption_Precious, Options.CollectapediaRewardsOption_Collectables)
+    
+    with open("XC3/JsonOutputs/sys/ITM_RewardCollepedia.json", 'r+', encoding='utf-8') as colFile:
+        colData = json.load(colFile)
+        for col in colData["rows"]:
+            valTable.SelectValuedMember(col, f"Reward1", IDs.BaseGamePreciousIDs)
+        JSONParser.CloseFile(colData, colFile)
