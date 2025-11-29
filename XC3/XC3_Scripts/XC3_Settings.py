@@ -1,6 +1,6 @@
 import scripts.JSONParser, scripts.XCRandomizer
 from XC3.XC3_Scripts import SeedNames, Options
-Version = "1.0.2"
+Version = "1.1.0"
 Game = "XC3"
 Title = "Xenoblade Chronicles 3"
 
@@ -15,12 +15,8 @@ Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../../", game= "XC3")
 Skyline = scripts.XCRandomizer.FilePlacer(["Loader/skyline"], "../", game= "XC3")
 Titlescreen = scripts.XCRandomizer.FilePlacer(["Images/Logos/original.wilay"],  "../menu/image", "mnu001_cont01_en.wilay", "XC3")
 
-hashFile = "XC3/Loader/xbc3Hashes.txt"
-if scripts.XCRandomizer.Onefile.isOneFile:
-    extraArgs = ["--hashes", scripts.XCRandomizer.os.path.join(scripts.XCRandomizer.sys._MEIPASS, hashFile)]
-else:  
-    extraArgs= ["--hashes", hashFile]
-    
+extraArgs = ["--hashes", scripts.XCRandomizer.Onefile.Directory("XC3/Loader/xbc3Hashes.txt")] # Hash Table
+
 postCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.EnhancementsList.RefreshCurrentGroup()]
 mainFolderNames = ["des", "btl", "evt", "fld", "map", "prg", "qst", "sys", "zzz", "mnu", "dlc"]
 subFolderNames = ["autotalk", "battle", "field", "menu", "quest", "system"]

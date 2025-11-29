@@ -3,7 +3,7 @@ from XC2.XC2_Scripts import SeedNames, Options, ObjectNameCleanup
 
 Game = "XC2"
 Title = "Xenoblade Chronicles 2"
-Version = "1.7.0"
+Version = "1.7.1"
 
 # Backgrounds
 backgrounds = ["titlescreen1.png"]

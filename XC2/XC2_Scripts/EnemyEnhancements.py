@@ -8,7 +8,6 @@ Nope = [MaxAffinityHeal,ReduceDamageFromNearbyEnemies, DamageUpOnEnemyKill] # Re
 ValidSkills = []   
 MaxLettersInNameTag = 23
 
-
 def EnemyEnhances():
     prevNames = []
     with open("./XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as EnArrangeFile:

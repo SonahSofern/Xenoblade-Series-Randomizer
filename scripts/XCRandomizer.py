@@ -1,12 +1,11 @@
 import sys, os
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))) # Allows us to use the scripts folder as a module
 from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
 from PIL import Image, ImageTk
 from scripts import Presets, SaveLoad, ScrollPanel, PopupDescriptions, Theme, Onefile, Helper, PermalinkManagement, Seed, Interactables
-import random, subprocess, shutil, os, threading, traceback, time, datetime, webbrowser
+import random, subprocess, shutil, threading, traceback, time, datetime, webbrowser
 
 class Tab():
     def __init__(self, name, outer, canvas, inner):
@@ -223,7 +222,7 @@ def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, rand
         RandomizeButton.config(state=DISABLED)
         
         # Make Popup
-        progressPopup = PopupDescriptions.GenericPopup(f"Log {datetime.datetime.now()}") 
+        progressPopup = PopupDescriptions.GenericPopup("Randomizing") 
         progressPopup.attributes(alpha = 0)
 
         randoProgressFill = ttk.Frame(progressPopup, padding=0)
