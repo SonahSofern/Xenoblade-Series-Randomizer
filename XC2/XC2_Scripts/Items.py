@@ -48,7 +48,7 @@ def RandomizeFLDQuestReward(shopIDs, valTable:Values.ValueTable):
                 continue
             
             for i in range(1,5):
-                valTable.SelectValuedMember(qst, f"ItemID{i}", IDs.PreciousItems + IDs.TornaPreciousIDs + IDs.InfoIDs + IDs.TornaInfoIDs)
+                valTable.SelectValuedMember(qst, f"ItemID{i}", IDs.PreciousItems + IDs.TornaPreciousIDs + IDs.InfoIDs + IDs.TornaInfoIDs + IDs.AllCoreCrystals)
             
         JSONParser.CloseFile(qstData, qstFile)
         
