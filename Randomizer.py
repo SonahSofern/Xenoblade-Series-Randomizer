@@ -12,7 +12,7 @@ Theme.windowWidth = str(int(root.winfo_screenwidth() * 0.8))
 Theme.windowHeight = str(int(root.winfo_screenheight() * 0.8))
 
 Theme.RootsForStyling.append(root)
-Version = "1.1.2"
+Version = "1.2.0"
 title = f"Xenoblade Chronicles Series Randomizer {Version}"
 
 XCRandomizer.CheckIfUserNeedsUpdate(Version, root)
