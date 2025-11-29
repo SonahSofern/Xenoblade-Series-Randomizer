@@ -43,18 +43,18 @@ def UMHuntShortenedTutorial():
 def TornaStorySkip(skipIDs):
     BaseGameStorySkip(skipIDs, "Ira", 634)
 
-def BaseGameStorySkip(skippable, isTorna = "", newTaskID = 5, newTaskType = 2):
+def BaseGameStorySkip(skippable, taskFileName = "", newTaskID = 5, newTaskType = 2):
     '''Skips story events by tying them to earlier set tasks'''
-    with open(f"XC2/JsonOutputs/common/FLD_QuestTask{isTorna}.json", 'r+', encoding='utf-8') as testFile:
-        testData = json.load(testFile)
-        for data in testData["rows"]:
+    with open(f"XC2/JsonOutputs/common/FLD_QuestTask{taskFileName}.json", 'r+', encoding='utf-8') as skipFile:
+        skipData = json.load(skipFile)
+        for data in skipData["rows"]:
             if data["$id"] in skippable:
                 for i in range(1,5):
                     if data[f"TaskID{i}"] == 0:
                         break
                     data[f"TaskID{i}"] = newTaskID
                     data[f"TaskType{i}"] = newTaskType
-        JSONParser.CloseFile(testData, testFile)
+        JSONParser.CloseFile(skipData, skipFile)
 
 def NextQuestSkipper(questDict:dict):
     with open("./XC2/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as qstFile: # shortens opening section

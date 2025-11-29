@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from scripts import SavedOptions, ScrollPanel, Onefile
+from scripts import SaveLoad, ScrollPanel, Onefile
 import tkinter as tk
 import os
 
@@ -23,7 +23,7 @@ def PresetsWindow(parent, interactAbles, game):
     customTitleLabel.pack(anchor="w", pady = (5,5))
     CustomPresetScroll = ScrollPanel.ScrollablePanel(outerCustomFrame)
     
-    saveasPresetBtn = ttk.Button(outerCustomFrame, text="Add Current Settings as Preset", command=lambda: (SavedOptions.saveData(interactAbles, defaultName, f"{game}/SaveData"), CreatePreset(defaultName, CustomPresetScroll.innerFrame, interactAbles, dir, False)))
+    saveasPresetBtn = ttk.Button(outerCustomFrame, text="Add Current Settings as Preset", command=lambda: (SaveLoad.saveData(interactAbles, defaultName, f"{game}/SaveData"), CreatePreset(defaultName, CustomPresetScroll.innerFrame, interactAbles, dir, False)))
     saveasPresetBtn.pack(pady=(5,5), padx=(0,0), anchor="nw")
     
     GetPresets(PremadePresetScroll.innerFrame, Onefile.Directory(premadeDir), interactAbles, True)
@@ -48,7 +48,7 @@ def CreatePreset(filename, innerFrame, interactables, dir, isFinal):
     pnameVar.trace_add("write", lambda *args: OnNameChange(dir, pnameVar, oldnameVar))
     name.pack(side="left", padx=(0,5))
     
-    loadBtn = ttk.Button(presetFrame, text="📥 Load", command=lambda: SavedOptions.loadData(interactables, f"{pnameVar.get()}.txt", dir))
+    loadBtn = ttk.Button(presetFrame, text="📥 Load", command=lambda: SaveLoad.loadData(interactables, f"{pnameVar.get()}.txt", dir))
     loadBtn.pack(side="left", padx=(0,5))
         
     if not isFinal:

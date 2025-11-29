@@ -44,7 +44,7 @@ QuestRewardOption_Precious = SubOption("Key Items", QuestRewardsOption, hasSpinB
 CollectapediaRewardsOption = Option("Collectopaedia Card Rewards", General, "Randomizes the item rewards from Collectopaedia Cards", [lambda: Items.CollectopaediaCards()])
 CollectapediaRewardsOption_Accessories = SubOption("Accessories", CollectapediaRewardsOption, hasSpinBox=True, spinDefault=20)
 CollectapediaRewardsOption_Collectables = SubOption("Collectables", CollectapediaRewardsOption, hasSpinBox=True, spinDefault=1)
-CollectapediaRewardsOption_Precious = SubOption("Key Items", TreasureBoxOption, hasSpinBox=True, spinDefault=4)
+CollectapediaRewardsOption_Precious = SubOption("Key Items", CollectapediaRewardsOption, hasSpinBox=True, spinDefault=4)
 
 # CharactersOption = Option("Heroes", Character, "Randomizes heroes", [lambda: Characters.CharacterSwaps()])
 enemySpinDefaultVal = 10

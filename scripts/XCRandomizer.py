@@ -5,9 +5,9 @@ from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
 from PIL import Image, ImageTk
-from scripts import Presets, ScrollPanel, PopupDescriptions, Theme, Onefile
+from scripts import Presets, SaveLoad, ScrollPanel, PopupDescriptions, Theme, Onefile
 import random, subprocess, shutil, os, threading, traceback, time, datetime, webbrowser
-from scripts import SavedOptions, Helper, PermalinkManagement, Seed, Interactables
+from scripts import Helper, PermalinkManagement, Seed, Interactables
 
 class Tab():
     def __init__(self, name, outer, canvas, inner):
@@ -49,7 +49,7 @@ def CheckIfUserNeedsUpdate(version, root):
             updateMessage = ttk.Button(root, command=lambda: link(), text=f"Download Latest Version {latest_tag}")
             updateMessage.pack(pady=10)
     except:
-        pass
+        pass # They probably arent connected to internet
 
 def CreateImage(imagePath, resize = (40,40)):
     imagePath = Onefile.Directory(imagePath)
@@ -59,7 +59,6 @@ def CreateImage(imagePath, resize = (40,40)):
     newimg = ImageTk.PhotoImage(bg_image)
     iconCollector.append(newimg)
     return newimg
-
 
 saveCommands = []
 
@@ -72,7 +71,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
         fileEntryVar = f"{Game}/bdat"
     SavedOptionsFileName = f"Last Save.txt"
     JsonOutput = f"./{Game}/JsonOutputs"
-    saveCommand = lambda: SavedOptions.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, f"{Game}/SaveData")
+    saveCommand = lambda: SaveLoad.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, f"{Game}/SaveData")
     XCFrame = ttk.Frame(window) # Outer Frame
     Theme.RootsForStyling.append(XCFrame)
 
@@ -133,16 +132,16 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     randoSeedEntry = ttk.Entry(SeedFrame, textvariable=seedEntryVar)
     
     # Bottom Menu Options
-    fileOut = SavedOptions.SavedEntry("Output Bdats", outputDirVar)
-    permLink = SavedOptions.SavedEntry("Permalink", permalinkVar)
-    seedVar = SavedOptions.SavedEntry("Seed", seedEntryVar)
+    fileOut = SaveLoad.SavedEntry("Output Bdats", outputDirVar)
+    permLink = SaveLoad.SavedEntry("Permalink", permalinkVar)
+    seedVar = SaveLoad.SavedEntry("Seed", seedEntryVar)
     SeedFrame.pack(anchor="w", padx=windowPadding, fill=X)
     seedDesc.pack(side='left')
     randoSeedEntry.pack(side='left', fill=X, expand=True)
     
     # Save and Load Last Options
     EntriesToSave = ([fileOut, permLink, seedVar])
-    SavedOptions.loadData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, f"{Game}/SaveData")
+    SaveLoad.loadData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, f"{Game}/SaveData")
     EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.XenoOptionDict[Game])) + list((x.spinBoxVal for x in Interactables.XenoOptionDict[Game] if x.hasSpinBox)) + list((sub.checkBoxVal for x in Interactables.XenoOptionDict[Game] for sub in x.subOptions)) + list((sub.spinBoxVal for x in Interactables.XenoOptionDict[Game] for sub in x.subOptions if sub.hasSpinBox))
 
     # Permalink Options/Variables

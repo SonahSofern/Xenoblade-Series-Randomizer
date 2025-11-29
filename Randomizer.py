@@ -22,14 +22,11 @@ root.title(title)
 root.option_add("*Font", Theme.defaultFont)
 root.geometry(f'{Theme.windowWidth}x{Theme.windowHeight}')
 
-if XCRandomizer.Onefile.isOneFile: 
-    icon_path = os.path.join(sys._MEIPASS, 'images', 'XCIcon.png')
-else:
-    icon_path = "images/XCIcon.png"
+iconPath = XCRandomizer.Onefile.Directory("images/XCIcon.png")
     
-icon = PhotoImage(file=icon_path)
+icon = PhotoImage(file=iconPath)
 root.iconphoto(True, icon)
-root.withdraw()
+root.attributes(alpha=0)
 
 XCRandomizer.CreateMainWindow(root, MainWindow, XCDE.Game, XCDE.Version, XCDE.Title, XCDE.seedEntryVar, XCDE.permalinkVar, XCDE.Options.Tabs, XCDE.postCommands, XCDE.preCommands, XCDE.mainFolderNames, XCDE.subFolderNames, XCDE.SeedNames.Nouns, XCDE.SeedNames.Verbs, backgroundImages=XCDE.backgrounds, extraFiles=[XCDE.TitlescreenSplash], setupHelpDesc=lambda: XCDE.XCDEHelp())
 XCRandomizer.CreateMainWindow(root, MainWindow, XC2.Game, XC2.Version, XC2.Title, XC2.seedEntryVar, XC2.permalinkVar, XC2.Options.Tabs, XC2.postCommands, [], XC2.mainFolderNames, XC2.subFolderNames, XC2.SeedNames.Nouns, XC2.SeedNames.Verbs, backgroundImages=XC2.backgrounds, extraFiles=[XC2.TitlescreenSplash], setupHelpDesc=lambda: XC2.XC2Help())
@@ -37,7 +34,7 @@ XCRandomizer.CreateMainWindow(root, MainWindow, XC3.Game, XC3.Version, XC3.Title
 if not XCRandomizer.Onefile.isOneFile:
     XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.Game, XCXDE.Version, XCXDE.Title, XCXDE.seedEntryVar, XCXDE.permalinkVar, XCXDE.Options.Tabs, XCXDE.postCommands, [], XCXDE.mainFolderNames, XCXDE.subFolderNames, XCXDE.SeedNames.Nouns, XCXDE.SeedNames.Verbs, backgroundImages=XCXDE.backgrounds)
 
-root.deiconify()
+root.attributes(alpha=1)
 
 def CloseProtocol(): # Save before closing
     for cmd in XCRandomizer.saveCommands:

@@ -3,7 +3,7 @@ import string
 from scripts import PackedBits
 import base64
 import struct
-import scripts.SavedOptions
+import scripts.SaveLoad
 # credit to github.com/LagoLunatic/wwrando
 
 def SanitizeUserSeed(SeedName):
@@ -75,7 +75,7 @@ def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version):
             print("Invalid Permalink")
     
     def PermalinkEntryUpdate():
-        if not scripts.SavedOptions.stopPermalinkUpdate:
+        if not scripts.SaveLoad.stopPermalinkUpdate:
             permaLinkVar.set(GenerateCompressedPermalink(seedEntryVar.get(), traceObjects, version))
         
     permaLinkVar.trace_add("write", lambda i,x,o: PermalinkFromEntry())
