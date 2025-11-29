@@ -176,7 +176,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
         bg_image = Image.open(f"./{Game}/Images/{bg}")
     
     # hardcoded because thats the height of the window that actually uses the background. But that height is unaccessable when this is called.
-    resized = bg_image.resize((int(Theme.windowWidth), 840))
+    resized = bg_image.resize((int(Theme.windowWidth), int(Theme.windowHeight)))
     bg_photo = ImageTk.PhotoImage(resized)
     garbageCollectionStopper.append(bg_photo)
     background.create_image(0, 0, image=bg_photo, anchor="nw")
