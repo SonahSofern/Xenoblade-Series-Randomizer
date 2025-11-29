@@ -4,9 +4,8 @@ from tkinter import ttk
 import scripts.GUIHelper, os, sys, scripts.ScrollPanel, scripts.Onefile
 from scripts import Theme
 from PIL import Image, ImageTk
-ImageGroup = [] # Needed because garbage collection will delete pictures otherwise
+GarbColImageGroup = [] # Needed because garbage collection will delete pictures otherwise
 OpenWindows = []
-
 
 class Description:
 
@@ -105,7 +104,7 @@ def StyledPopup(title, descData, root, isForcedPack = False):
             img.thumbnail((descObj.size, descObj.size), Image.LANCZOS) # Resizes our image and keeps ratio
             img = ImageTk.PhotoImage(img)
             descObj.obj = ttk.Label(curFrame, image=img, padding=5, style="DescriptionImage.TLabel")
-            ImageGroup.append(img)
+            GarbColImageGroup.append(img)
             curHeader.childGroup.append(descObj)
             
         elif isinstance(descObj, PopHeader): # Header
@@ -122,6 +121,7 @@ def StyledPopup(title, descData, root, isForcedPack = False):
         elif isinstance(descObj, PopTag): # Tag
             descObj.obj = ttk.Label(curFrame, text=descObj.data, style="Tag.TLabel")
             curHeader.childGroup.append(descObj)
+            
         if hasFewHeaders or isForcedPack: # If we have less than 3 headers go ahead and pack everything
             descObj.SpecialPack()
 
@@ -149,7 +149,7 @@ def center(win:Toplevel, mainwindow:Toplevel):
     win.geometry(f"+{x}+{y}")
 
 
-def center_window(window):
+def center_window(window:Toplevel):
     '''Centers root window based on screen size'''
     window.update_idletasks()
     width = window.winfo_width()

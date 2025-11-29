@@ -5,9 +5,8 @@ from tkinter import PhotoImage, ttk
 from tkinter import *
 import tkinter as tk
 from PIL import Image, ImageTk
-from scripts import Presets, SaveLoad, ScrollPanel, PopupDescriptions, Theme, Onefile
+from scripts import Presets, SaveLoad, ScrollPanel, PopupDescriptions, Theme, Onefile, Helper, PermalinkManagement, Seed, Interactables
 import random, subprocess, shutil, os, threading, traceback, time, datetime, webbrowser
-from scripts import Helper, PermalinkManagement, Seed, Interactables
 
 class Tab():
     def __init__(self, name, outer, canvas, inner):

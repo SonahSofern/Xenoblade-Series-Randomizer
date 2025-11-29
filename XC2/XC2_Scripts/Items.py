@@ -178,10 +178,6 @@ def ChestTypeMatchesContentsValue():
     with open("XC2/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as tboxFile:
         tboxData = json.load(tboxFile)
         for box in tboxData["rows"]:
-            box["initWaitTimeRand"] = 0 
-            box["initWaitTime"] = 0 
-            box["TBOX_open_starttime"] = 0 
-            box["flag"]["TBOX_category"] = 1 
             for rar in Rarities:
                 if box["$id"] == rar.rscId:
                     box["MSG_ID"] = rar.msId
@@ -222,6 +218,17 @@ def ChestTypeMatchesContentsValue():
                 # print(f"Value: {box.value} given rarity: {rarity.name}")
                 
             JSONParser.CloseFile(tboxData, tboxFile)
+
+def ChestOpeningQOL():
+    '''Makes chests faster, disappear after opening to let you get the loot,'''
+    with open("XC2/JsonOutputs/common/RSC_TboxList.json", 'r+', encoding='utf-8') as tboxFile:
+        tboxData = json.load(tboxFile)
+        for box in tboxData["rows"]:
+            box["initWaitTimeRand"] = 0 
+            box["initWaitTime"] = 0 
+            box["TBOX_open_starttime"] = 0 
+            box["flag"]["TBOX_category"] = 1 
+        JSONParser.CloseFile(tboxData, tboxFile)
 
 def TreasureChestDescription():
     myDesc = PopupDescriptions.Description()

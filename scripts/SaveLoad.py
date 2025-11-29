@@ -1,7 +1,7 @@
 saveFolderName = "SaveData"
 import os, json
 
-class SavedEntry:
+class SavedEntry: # Kinda hacky ):
     def __init__(self, _name, _val):
         self.name =_name
         self.checkBoxVal = _val 

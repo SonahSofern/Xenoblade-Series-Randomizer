@@ -321,9 +321,9 @@ def EnemyDesc(name):
     EnemyRandoDesc.Text("This balances stats (mainly HP) for all fights of this category. Hp varies greatly in XC2 and this helps counterract that.")
     if name == Options.BossEnemyOption.name:
         EnemyRandoDesc.Header(Options.BossEnemyOption_Solo.name)
-        EnemyRandoDesc.Text("This will balance required fights that are fought solo, by adjusting the levels of the encounter")
+        EnemyRandoDesc.Text("This will balance required fights that are fought solo, by adjusting stats of the encounter")
         EnemyRandoDesc.Header(Options.BossEnemyOption_Group.name)
-        EnemyRandoDesc.Text("This will balance required fights that are large groups of enemies, by adjusting the levels of the encounter if an enemy is strong in groups.")
+        EnemyRandoDesc.Text("This will balance required fights that are large groups of enemies, by adjusting the stats and sometimes arts (powerful arts that are unfair when chained together) if an enemy is strong in groups.")
     if name != Options.BossEnemyOption.name:
         EnemyRandoDesc.Header(Options.NormalEnemyOption_Aggro.name)
         EnemyRandoDesc.Text("If this setting is on, enemies will keep their original aggro. For example, if a Krabble is replaced by Amalthus, it will keep the krabble's aggro type and radius.")
