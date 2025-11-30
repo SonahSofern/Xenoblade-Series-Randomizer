@@ -230,7 +230,7 @@ def Randomize(GameTitle, root, RandomizeButton, fileEntryVar, bdat_path, permali
         outerBorder = ttk.Frame(progressPopup, padding=10)
         outerBorder.pack(expand=True, fill=BOTH)
         
-        randoProgressDisplay = ttk.Label(outerBorder, anchor=CENTER, padding=(0,5))
+        randoProgressDisplay = ttk.Label(outerBorder, anchor=CENTER, padding=(0,0,0,5))
         pb = ttk.Progressbar(outerBorder, orient='horizontal', mode='determinate', length=500, value=1)
         progressPopup.attributes(alpha = 1)
 
