@@ -224,6 +224,8 @@ def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, rand
         # Make Popup
         progressPopup = PopupDescriptions.GenericPopup("Randomizing") 
         progressPopup.attributes(alpha = 0)
+        progressPopup.overrideredirect(True)
+        progressPopup.grab_set()
 
         randoProgressFill = ttk.Frame(progressPopup, padding=0)
         randoProgressDisplay = ttk.Label(randoProgressFill, padding=5)
@@ -284,9 +286,9 @@ def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, rand
             AddFileToOutput(outSpot, extraFiles)
             
             # Displays Done and Clears Text
-            runLog()
             randoProgressDisplay.config(text="Done")
             progressPopup.destroy()
+            runLog()
             print(f"Finished at {datetime.datetime.now()}")
         except:
             # print(f"{traceback.format_exc()}") # shows the full error

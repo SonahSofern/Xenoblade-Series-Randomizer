@@ -198,44 +198,34 @@ def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
     top = PopupDescriptions.GenericPopup("Conflicting Settings")
     if top == None:
         return # Dont do this again if top window already exists
-    
-    scrollablePanel = ScrollPanel.ScrollablePanel(top)
+    top.grab_set()
+    top.overrideredirect(True)
+    top.attributes(alpha=0)
     Theme.RootsForStyling.append(top)
-    Theme.ThemeUpdate()
-
-    conflictDesc = ttk.Label(scrollablePanel.innerFrame, text= f"The following options are incompatible with the {enabledOption} option:", justify = "center")
-    conflictDesc.grid(column = 1, row = 0, sticky=(N, S, E, W))
     
-    CurRow = 1
+    scrollablePanel = ScrollPanel.ScrollablePanel(top)    
 
-    scrollablePanel.innerFrame.grid_rowconfigure(CurRow, minsize = 20, weight = 1)
-    CurRow += 1
-
+    conflictDesc = ttk.Label(scrollablePanel.innerFrame, text= f"The following options are incompatible with the {enabledOption} option:")
+    conflictDesc.pack()
+    
     for option in conflictingOptions:
-        incompatibleOption = ttk.Label(scrollablePanel.innerFrame, text = option.name, style = "CenteredLabel.TLabel", anchor = "center", padding = (0, 5))
-        incompatibleOption.grid(column = 1, row = CurRow, sticky = (N, S, E, W))
-        CurRow += 1
+        incompatibleOption = ttk.Label(scrollablePanel.innerFrame, text = option.name, padding = (2, 5))
+        incompatibleOption.pack()
 
     opt1Pressed = BooleanVar(scrollablePanel.innerFrame)
     opt2Pressed = BooleanVar(scrollablePanel.innerFrame)
 
-    opt1Button = ttk.Button(scrollablePanel.innerFrame, text= "Disable Incompatible Options", command=lambda: (opt1Pressed.set(True), top.destroy()), style = "CenteredButton.TButton")
-    opt1Button.grid(column = 0, row = CurRow + 1, sticky = (N, S, E, W))
-    opt2Button = ttk.Button(scrollablePanel.innerFrame, text= f"Disable {enabledOption}", command=lambda: (opt2Pressed.set(True), top.destroy()), style = "CenteredButton.TButton")
-    opt2Button.grid(column = 2, row = CurRow + 1, sticky = (N, S, E, W))
+    opt1Button = ttk.Button(top, text= "Disable Incompatible Options", command=lambda: (opt1Pressed.set(True), top.destroy()))
+    opt1Button.pack(side=LEFT)
+    opt2Button = ttk.Button(top, text= f"Disable {enabledOption}", command=lambda: (opt2Pressed.set(True), top.destroy()))
+    opt2Button.pack(side=RIGHT)
+    
+    GUIHelper.ResizeWindow(top, scrollablePanel.innerFrame, pady=70)
 
-    scrollablePanel.innerFrame.grid_rowconfigure(CurRow, minsize = 20, weight = 1)
-
-    for col in range(3):
-        scrollablePanel.innerFrame.grid_columnconfigure(col, weight = 1, minsize = 250)
-
-    GUIHelper.ResizeWindow(top, scrollablePanel.innerFrame)
-
-    top.focus()
-    top.deiconify()
-
+    PopupDescriptions.center_window(top)
+    top.attributes(alpha=1)
+    Theme.ThemeUpdate()
     top.wait_window(top)
-
     
     if opt1Pressed.get() == True:
         ChosenResolution = True
