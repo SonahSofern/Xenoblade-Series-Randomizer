@@ -1,9 +1,9 @@
 from tkinter import ttk
 from tkinter import *
-from scripts import GUIHelper, PopupDescriptions, ScrollPanel, Theme
-from tkinter.font import Font
+from scripts import GUIHelper, PopupDescriptions, ScrollPanel, Theme, Helper
 
 Game = "" # Used to tell what option goes to what games tab
+DescriptionIndicator = "🛈"
 
 class Option():
     def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", _commands:list = [], defState = False, prio = 50,hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False):
@@ -43,7 +43,7 @@ class Option():
         self.GenStandardOption(tab)
         self.StateUpdate()
         
-    def GenStandardOption(self, parentTab, stylePrefix = "Dark"):    # This probably shouldnt be a class function what if we want to make a nonstandard option we could make a carveout and let you call a custom function but how would you set everything with a custom function
+    def GenStandardOption(self, parentTab):    # This probably shouldnt be a class function what if we want to make a nonstandard option we could make a carveout and let you call a custom function but how would you set everything with a custom function
 
         # Variables
         global rowIncrement
@@ -52,24 +52,24 @@ class Option():
         self.spinBoxObj = ttk.Spinbox()
 
         # Parent Frame
-        optionPanel = ttk.Frame(parentTab, style=f"{stylePrefix}.TFrame")
+        optionPanel = ttk.Frame(parentTab, style=f"Dark.TFrame")
         optionPanel.grid(row = rowIncrement, column = 0, sticky="ew")
         
         # Major Option Checkbox
-        self.checkBox = ttk.Checkbutton(optionPanel, variable= self.checkBoxVal, text=self.name, width=30, style=f"{stylePrefix}.TCheckbutton", command=lambda: (self.StateUpdate(), [cmd() for cmd in self.clickCommands]))
+        self.checkBox = ttk.Checkbutton(optionPanel, variable= self.checkBoxVal, text=self.name, width=30, style="Dark.TCheckbutton", command=lambda: (self.StateUpdate(), [cmd() for cmd in self.clickCommands]))
         self.checkBox.grid(row=rowIncrement, column = 0, sticky="w")
         
         if self.descData == None:
             text = self.desc
         else:
-            text = f"{self.desc} 🛈"
+            text = f"{self.desc} {DescriptionIndicator}"
         
         # Description Label or Button
         if self.descData != None:
-            self.descObj = ttk.Button(optionPanel, text = text, command=lambda: PopupDescriptions.StyledPopup(self.name, self.descData, self.root), style=f"{stylePrefix}.TButton", width=60)
+            self.descObj = ttk.Button(optionPanel, text = text, command=lambda: PopupDescriptions.StyledPopup(self.name, self.descData, self.root), style="Dark.TButton", width=60)
             padx = 13
         else:
-            self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, style=f"{stylePrefix}.TLabel", wraplength=400)
+            self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, style="Dark.TLabel", wraplength=400)
             padx= 0
         self.descObj.grid(row=rowIncrement, column = 1, sticky="w", padx=padx)
         
@@ -80,22 +80,24 @@ class Option():
             self.spinBoxVal = IntVar(value=self.spinDefault)
             self.spinBoxObj = ttk.Spinbox(optionPanel, from_=self.spinBoxMin, to=self.spinBoxMax, textvariable=self.spinBoxVal, wrap=True, width=self.spinWidth, increment=self.spinIncr, justify="right")
             self.spinBoxObj.grid(row=rowIncrement, column = 3, padx=(15,0))
-            self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w", style=f"{stylePrefix}.TLabel")
+            self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w", style="Dark.TLabel")
             self.spinBoxLabel.grid(row=rowIncrement, column = 4, sticky="w", padx=0)
+            disable_spinbox_scroll(self.spinBoxObj)
 
 
         for sub in self.subOptions:
             rowIncrement += 1
             sub.checkBoxVal = BooleanVar(value=sub.defState)
             sub.checkBoxVal.trace_add("write",  lambda name, index, mode: self.StateUpdate())
-            sub.checkBox = ttk.Checkbutton(optionPanel, text=sub.name, variable=sub.checkBoxVal, style=f"{stylePrefix}Sub.TCheckbutton", width=25)
+            sub.checkBox = ttk.Checkbutton(optionPanel, text=sub.name, variable=sub.checkBoxVal, style="DarkSub.TCheckbutton", width=25)
             sub.checkBox.grid(row=rowIncrement, column=0, sticky="sw")
             if sub.hasSpinBox:
                 sub.spinBoxVal = IntVar(value=sub.spinDefault)
                 sub.spinBoxObj = ttk.Spinbox(optionPanel, from_=sub.spinBoxMin, to=sub.spinBoxMax, textvariable=sub.spinBoxVal, wrap=True, width=sub.spinWidth, increment=sub.spinIncr, justify="right")
                 sub.spinBoxObj.grid(row=rowIncrement, column=1, padx=(20,0), pady=(0,0), sticky="w")
-                sub.spinBoxLabel = ttk.Label(optionPanel, text=sub.spinDesc, style=f"{stylePrefix}NoMargin.TLabel")
+                sub.spinBoxLabel = ttk.Label(optionPanel, text=sub.spinDesc, style="DarkNoMargin.TLabel")
                 sub.spinBoxLabel.grid(row=rowIncrement, column=1, sticky="w", padx=(80,0))
+                disable_spinbox_scroll(sub.spinBoxObj)
 
         rowIncrement += 1
 
@@ -165,6 +167,14 @@ class SubOption():
     def GetSpinbox(self):
         return self.spinBoxVal.get()
 
+def disable_spinbox_scroll(spinbox):
+    '''Used to stop spinbox scrollwheel conflicts'''
+    def stop(event):
+        return "break"
+    spinbox.bind("<MouseWheel>", stop)
+    spinbox.bind("<Button-4>", stop)
+    spinbox.bind("<Button-5>", stop)
+
 rowIncrement = 0   
 XenoOptionDict = {
     "XCDE": [],
@@ -199,7 +209,7 @@ def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
     if top == None:
         return # Dont do this again if top window already exists
     top.grab_set()
-    top.overrideredirect(True)
+    top.protocol("WM_DELETE_WINDOW", Helper.NoOP)
     top.attributes(alpha=0)
     Theme.RootsForStyling.append(top)
     

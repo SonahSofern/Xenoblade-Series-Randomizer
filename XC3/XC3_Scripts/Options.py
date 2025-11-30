@@ -23,26 +23,26 @@ Tabs = {
 weightsSpinDescription = "Weights ↓"
 
 ShopOption = Option("Shops", General, "Randomizes shop contents", [lambda: Items.Shops()])
-ShopOption_Accessories = SubOption("Accessories", ShopOption, hasSpinBox=True, spinDefault=20)
+ShopOption_Accessories = SubOption("Accessories", ShopOption, hasSpinBox=True, spinDefault=20, spinDesc=weightsSpinDescription)
 ShopOption_Collectables = SubOption("Collectables", ShopOption, hasSpinBox=True, spinDefault=5)
 ShopOption_Precious = SubOption("Key Items", ShopOption, hasSpinBox=True, spinDefault=1)
 
 EnemyNormalDropOption = Option("Enemy Drops", General, "Randomizes Enemy Drops (not including materials)", [lambda: Items.EnemyDrops()])
-EnemyNormalDrop_Accessories = SubOption("Accessories", EnemyNormalDropOption, hasSpinBox=True, spinDefault=20)
+EnemyNormalDrop_Accessories = SubOption("Accessories", EnemyNormalDropOption, hasSpinBox=True, spinDefault=20, spinDesc=weightsSpinDescription)
 EnemyNormalDrop_Precious = SubOption("Key Items", EnemyNormalDropOption, hasSpinBox=True, spinDefault=2)
 
 TreasureBoxOption = Option("Containers", General, "Randomizes the contents of Containers and Supply Drops", [lambda: Items.TreasureBoxes()])
-TreasureBoxOption_Accessories = SubOption("Accessories", TreasureBoxOption, hasSpinBox=True, spinDefault=20)
+TreasureBoxOption_Accessories = SubOption("Accessories", TreasureBoxOption, hasSpinBox=True, spinDefault=20, spinDesc=weightsSpinDescription)
 TreasureBoxOption_Collectables = SubOption("Collectables", TreasureBoxOption, hasSpinBox=True, spinDefault=5)
 TreasureBoxOption_Precious = SubOption("Key Items", TreasureBoxOption, hasSpinBox=True, spinDefault=1)
 
 QuestRewardsOption = Option("Quest Rewards", General, "Randomizes the item rewards from Quests", [lambda: Items.QuestRewards()])
-QuestRewardOption_Accessories = SubOption("Accessories", QuestRewardsOption, hasSpinBox=True, spinDefault=20)
+QuestRewardOption_Accessories = SubOption("Accessories", QuestRewardsOption, hasSpinBox=True, spinDefault=20, spinDesc=weightsSpinDescription)
 QuestRewardOption_Collectables = SubOption("Collectables", QuestRewardsOption, hasSpinBox=True, spinDefault=5)
 QuestRewardOption_Precious = SubOption("Key Items", QuestRewardsOption, hasSpinBox=True, spinDefault=1)
 
 CollectapediaRewardsOption = Option("Collectopaedia Card Rewards", General, "Randomizes the item rewards from Collectopaedia Cards", [lambda: Items.CollectopaediaCards()])
-CollectapediaRewardsOption_Accessories = SubOption("Accessories", CollectapediaRewardsOption, hasSpinBox=True, spinDefault=20)
+CollectapediaRewardsOption_Accessories = SubOption("Accessories", CollectapediaRewardsOption, hasSpinBox=True, spinDefault=20, spinDesc=weightsSpinDescription)
 CollectapediaRewardsOption_Collectables = SubOption("Collectables", CollectapediaRewardsOption, hasSpinBox=True, spinDefault=1)
 CollectapediaRewardsOption_Precious = SubOption("Key Items", CollectapediaRewardsOption, hasSpinBox=True, spinDefault=4)
 

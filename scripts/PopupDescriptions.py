@@ -132,8 +132,7 @@ def StyledPopup(title, descData, root, isForcedPack = False):
     
     top.protocol("WM_DELETE_WINDOW", lambda: (OpenWindows.remove(top), top.destroy())) # remove windows from list on close
     return top
-
-            
+   
 def center(win:Toplevel, mainwindow:Toplevel):
     '''Centers a window in top window'''
     mainwindow.update()
@@ -147,7 +146,6 @@ def center(win:Toplevel, mainwindow:Toplevel):
     x = parentxcoord + (parentwidth - width) // 2
     y = parentycoord + (parentheight - height) // 2
     win.geometry(f"+{x}+{y}")
-
 
 def center_window(window:Toplevel):
     '''Centers root window based on screen size'''

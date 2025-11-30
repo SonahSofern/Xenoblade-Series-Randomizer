@@ -6,7 +6,7 @@ from XC2.XC2_Scripts.Race_Mode import RaceMode
 from XC2.XC2_Scripts.Torna_Logic import TornaMain
 from XC2.XC2_Scripts.UM_Hunt import UMHuntMain
 
-from scripts.Interactables import Option, SubOption, MutuallyExclusivePairing
+from scripts.Interactables import Option, SubOption, MutuallyExclusivePairing, DescriptionIndicator
 import scripts.Interactables
 scripts.Interactables.Game = "XC2"
 

@@ -204,7 +204,8 @@ try:
     "darkcolor": currentTheme["darkColor"],
     "lightcolor": currentTheme["lightColor"],
     "thickness": 2,
-    "padding": 0,
+
+    "troughrelief": "flat",
 },
 "map": {
     "background": [("disabled", currentTheme["midGray"])],
@@ -215,19 +216,7 @@ except:
     pass
 
 style.theme_use("Dark Mode")
-from tkinter.font import Font
-staticFont = Font(family="Arial", size=16)
 
-# Light
-style.configure("Light.TFrame", background=OffLightBlack)
-style.configure("Light.TButton", background=OffLightBlack, relief = FLAT)
-style.configure("Light.TSpinbox", background=OffLightBlack)
-style.configure("Light.TLabel", background=OffLightBlack)
-style.configure("Light.TCheckbutton", background=OffLightBlack, padding=(20, 10))
-style.configure("LightSub.TCheckbutton", background=OffLightBlack)
-style.configure("LightNoMargin.TLabel", margin=(0,0), padding=(20,0), background=OffLightBlack)
-
-# Dark
 style.configure("Dark.TFrame", background=currentTheme["darkColor"])
 style.configure("Dark.TButton", background=currentTheme["darkColor"], relief = FLAT)
 style.configure("Dark.TSpinbox", background=currentTheme["darkColor"])
@@ -236,14 +225,11 @@ style.configure("Dark.TCheckbutton", background=currentTheme["darkColor"], paddi
 style.configure("DarkSub.TCheckbutton", background=currentTheme["darkColor"])
 style.configure("DarkNoMargin.TLabel", margin=(0,0), padding=(20,0), background=currentTheme["darkColor"])
 
-from tkinter.font import Font
-titleFont = Font(family="Calibri", size=25)
-style.configure("Title.TLabel",font=titleFont,foreground="white",background=currentTheme["midColor"],padding=5)
+style.configure("Title.TLabel",foreground="white",background=currentTheme["midColor"],padding=5)
 style.configure("Randomize.TButton")
 style.configure("BordlessBtn.TButton", relief = FLAT)
 style.configure("bordered.TFrame", relief = SOLID, borderwidth= 2)
 style.configure("centeredTabs.TNotebook", tabposition= "nw", borderwidth=0)
-style.configure("STATIC.TButton", font=staticFont)
 style.configure("BorderlessLabel.TLabel", background=currentTheme["darkColor"], foreground=White)
 style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
 style.configure("Header.TButton", borderwidth=0, background=currentTheme["midGray"])

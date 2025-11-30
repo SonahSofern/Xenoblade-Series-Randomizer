@@ -154,7 +154,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), Randomize(XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames, postCommands, preCommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles))))
+    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), Randomize(Title, XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames, postCommands, preCommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles))))
     RandomizeButton.pack(pady=(5,windowPadding), padx=(windowPadding, 0), anchor="w", side="left")
     saveCommands.append(saveCommand)
 
@@ -208,12 +208,12 @@ def resize_bg(event, root, bg_image, background):
 
         threading.Thread(target=resize_and_update, daemon=True).start()
 
-def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], postCommands = [], preCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
+def Randomize(GameTitle, root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], postCommands = [], preCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
     def ThreadedRandomize():
         if outputDirVar.get().strip() == "":
             errorMsgObj = PopupDescriptions.Description(bonusWidth= 15)
             errorMsgObj.Header("Error: No Output Location")
-            PopupDescriptions.StyledPopup(f"Log {datetime.datetime.now()}", lambda: errorMsgObj, root)
+            PopupDescriptions.StyledPopup(f"{GameTitle} {datetime.datetime.now()}", lambda: errorMsgObj, root)
             return
         entrySpot = fileEntryVar
         outSpot = f"{outputDirVar.get().strip()}/romfs/bdat"
@@ -222,22 +222,22 @@ def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, rand
         RandomizeButton.config(state=DISABLED)
         
         # Make Popup
-        progressPopup = PopupDescriptions.GenericPopup("Randomizing") 
+        progressPopup = PopupDescriptions.GenericPopup(f"Randomizing {GameTitle}") 
         progressPopup.attributes(alpha = 0)
-        progressPopup.overrideredirect(True)
+        progressPopup.protocol("WM_DELETE_WINDOW", Helper.NoOP)
         progressPopup.grab_set()
-
-        randoProgressFill = ttk.Frame(progressPopup, padding=0)
-        randoProgressDisplay = ttk.Label(randoProgressFill, padding=5)
-        randoProgressDisplay.pack(pady=0)
-        pb = ttk.Progressbar(progressPopup, orient='horizontal', mode='determinate', length=500)
+        
+        outerBorder = ttk.Frame(progressPopup, padding=10)
+        outerBorder.pack(expand=True, fill=BOTH)
+        
+        randoProgressDisplay = ttk.Label(outerBorder, anchor=CENTER, padding=(0,5))
+        pb = ttk.Progressbar(outerBorder, orient='horizontal', mode='determinate', length=500, value=1)
         progressPopup.attributes(alpha = 1)
 
-    
         # Showing Progress Diplay 
         randoProgressDisplay.config(text="Unpacking BDATs")
-        randoProgressFill.pack(pady=(30,0))
-        pb.pack(padx=0,pady=(0,20))
+        randoProgressDisplay.pack()
+        pb.pack()
         PopupDescriptions.center(progressPopup, root)
         
         random.seed(permalinkVar.get())
@@ -263,7 +263,7 @@ def Randomize(root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, rand
         for command in preCommands: 
             command()
             
-        runLog = RunOptions(OptionList, randoProgressDisplay, root, randoSeedEntry.get(), pb)
+        runLog = RunOptions(GameTitle, OptionList, randoProgressDisplay, root, randoSeedEntry.get(), pb)
         
         for command in postCommands: # Runs post commands like show title screen
             command()
@@ -325,7 +325,7 @@ def SumTotalCommands(OptionList):
             TotalCommands += 1
     return TotalCommands
 
-def RunOptions(OptionList:list[Interactables.Option], randoProgressDisplay, root, seed, pb):
+def RunOptions(GameTitle, OptionList:list[Interactables.Option], randoProgressDisplay, root, seed, pb):
     
     OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
     
@@ -378,7 +378,7 @@ def RunOptions(OptionList:list[Interactables.Option], randoProgressDisplay, root
                 errorMsgObj.Text(errorMsg)
         pb['value'] = nextStep
 
-    return lambda: PopupDescriptions.StyledPopup(f"Log {datetime.datetime.now()}", lambda: ErrorLog(), root)
+    return lambda: PopupDescriptions.StyledPopup(f"{GameTitle} {datetime.datetime.now()}", lambda: ErrorLog(), root)
 
 def SlowBurn(progressBar, nextStop):
     try: # Throwing a try excpet here because I have had times in Debug mode where this throws errors saying something about pb. 

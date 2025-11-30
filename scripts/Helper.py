@@ -3,6 +3,9 @@ from scripts import JSONParser
 from tkinter import filedialog
 import tkinter as tk
 
+def NoOP():
+    pass
+
 def InclRange(start, end, excluded = []):
     tempList = list(range(start, end+1))
     return list((x for x in tempList if x not in excluded))
