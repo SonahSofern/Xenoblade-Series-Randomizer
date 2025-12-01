@@ -10,8 +10,7 @@ PaddedValueWithoutScrollbar = 18
 maxHeight = int(int(Theme.windowHeight) * 0.7)
 
 class ScrollablePanel():
-    def __init__(self, parent:Toplevel):
-        self.top = parent
+    def __init__(self, parent):
         self.outerFrame = ttk.Frame(parent) 
         self.canvas = tk.Canvas(self.outerFrame)
         self.innerFrame = ttk.Frame(self.canvas)
@@ -20,6 +19,7 @@ class ScrollablePanel():
         Theme.CanvasesForStyling.append(self.canvas)
            
     def CreateScrollBar(self):
+        # self.innerFrame.pack(expand=True, fill=BOTH)
         self.scrollbar = ttk.Scrollbar(self.outerFrame, orient="vertical", command=self.canvas.yview)
         self.canvas.config(yscrollcommand=self.scrollbar.set, borderwidth=0, relief="flat", highlightthickness=0)
         Theme.CanvasesForStyling.append(self.canvas)
@@ -50,12 +50,12 @@ class ScrollablePanel():
             self.scrollbar.pack_forget()
             return PaddedValueWithoutScrollbar
         
-    def ResizeScrollPanel(self, pady=15):
+    def ResizeScrollPanel(self, top:Toplevel, pady=15):
         self.innerFrame.update()  # Ensure the geometry is up to date
         w = self.innerFrame.winfo_width() + self.ScrollbarShowCheck(self.innerFrame.winfo_height() >= maxHeight)
-        h = min(self.innerFrame.winfo_height() + pady, maxHeight)
-        self.top.geometry(f"{w}x{h}")
-        self.top.update()
+        h = min(self.innerFrame.winfo_height() + pady, maxHeight)        
+        top.geometry(f"{w}x{h}")
+        top.update()
         
         
         

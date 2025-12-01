@@ -207,12 +207,13 @@ def MutuallyExclusiveToggle(op:Option, pairGroup:list[Option]):
             
 def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
     top = PopupDescriptions.GenericPopup("Conflicting Settings")
-    if top == None:
-        return # Dont do this again if top window already exists
     top.grab_set()
     top.protocol("WM_DELETE_WINDOW", Helper.NoOP)
     top.attributes(alpha=0)
     Theme.RootsForStyling.append(top)
+    
+    contolFrame = ttk.Frame(top, padding=10)
+    contolFrame.pack(fill=BOTH, expand=True)
     
     scrollablePanel = ScrollPanel.ScrollablePanel(top)    
 
@@ -223,19 +224,18 @@ def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
         incompatibleOption = ttk.Label(scrollablePanel.innerFrame, text = option.name, padding = (2, 5))
         incompatibleOption.pack()
 
-    opt1Pressed = BooleanVar(scrollablePanel.innerFrame)
-    opt2Pressed = BooleanVar(scrollablePanel.innerFrame)
-
-    opt1Button = ttk.Button(top, text= "Disable Incompatible Options", command=lambda: (opt1Pressed.set(True), top.destroy()))
+    opt1Button = ttk.Button(contolFrame, text= "Disable Incompatible Options", command=lambda: (opt1Pressed.set(True), top.destroy()))
     opt1Button.pack(side=LEFT)
-    opt2Button = ttk.Button(top, text= f"Disable {enabledOption}", command=lambda: (opt2Pressed.set(True), top.destroy()))
+    opt2Button = ttk.Button(contolFrame, text= f"Disable {enabledOption}", command=lambda: (opt2Pressed.set(True), top.destroy()))
     opt2Button.pack(side=RIGHT)
     
-    scrollablePanel.ResizeScrollPanel()
+    opt1Pressed = BooleanVar(scrollablePanel.innerFrame)
+    opt2Pressed = BooleanVar(scrollablePanel.innerFrame)
 
     PopupDescriptions.center_window(top)
     top.attributes(alpha=1)
     Theme.ThemeUpdate()
+    scrollablePanel.ResizeScrollPanel(top, 70)
     top.wait_window(top)
     
     if opt1Pressed.get() == True:

@@ -108,7 +108,7 @@ def StyledPopup(title, descData, root, isForcedPack = False):
             
         elif isinstance(descObj, PopHeader): # Header
             curFrame = ttk.Frame(scrollPanel.innerFrame)
-            descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=(10,10,50,10), command=lambda obj= descObj: (obj.Dropdown(), scrollPanel.ResizeScrollPanel(), center(top, root)))
+            descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=(10,10,50,10), command=lambda obj= descObj: (obj.Dropdown(), scrollPanel.ResizeScrollPanel(top), center(top, root)))
             curHeader = descObj
             curFrame.pack(fill="x", expand=True)
             descObj.SpecialPack()
@@ -125,7 +125,7 @@ def StyledPopup(title, descData, root, isForcedPack = False):
             descObj.SpecialPack()
 
     Theme.ThemeUpdate()
-    scrollPanel.ResizeScrollPanel()
+    scrollPanel.ResizeScrollPanel(top)
     center(top, root)
     top.attributes(alpha = 1) # Show after centering (cant use deiconify because then the deiconify dimensions dont get updated) 
     
