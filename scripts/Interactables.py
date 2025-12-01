@@ -212,8 +212,8 @@ def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
     top.attributes(alpha=0)
     Theme.RootsForStyling.append(top)
     
-    contolFrame = ttk.Frame(top, padding=10)
-    contolFrame.pack(fill=BOTH, expand=True)
+    contolFrame = ttk.Frame(top, padding=3)
+    contolFrame.pack(fill=BOTH)
     
     scrollablePanel = ScrollPanel.ScrollablePanel(top)    
 
@@ -232,10 +232,10 @@ def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
     opt1Pressed = BooleanVar(scrollablePanel.innerFrame)
     opt2Pressed = BooleanVar(scrollablePanel.innerFrame)
 
-    PopupDescriptions.center_window(top)
-    top.attributes(alpha=1)
     Theme.ThemeUpdate()
     scrollablePanel.ResizeScrollPanel(top, 70)
+    PopupDescriptions.center_window(top)
+    top.attributes(alpha=1)
     top.wait_window(top)
     
     if opt1Pressed.get() == True:

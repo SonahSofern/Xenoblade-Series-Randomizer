@@ -211,8 +211,8 @@ def resize_bg(event, root, bg_image, background):
 def Randomize(GameTitle, root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], postCommands = [], preCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
     def ThreadedRandomize():
         if outputDirVar.get().strip() == "":
-            errorMsgObj = PopupDescriptions.Description(bonusWidth= 15)
-            errorMsgObj.Header("Error: No Output Location")
+            errorMsgObj = PopupDescriptions.Description()
+            errorMsgObj.Header("Select an Output Location Before Randomizing")
             PopupDescriptions.StyledPopup(f"{GameTitle} {datetime.datetime.now()}", lambda: errorMsgObj, root)
             return
         entrySpot = fileEntryVar
