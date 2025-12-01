@@ -1,7 +1,7 @@
 # This will be the template for when you click a more info thing it will load some markdown into this template to be viewed
 from tkinter import *
 from tkinter import ttk
-import scripts.GUIHelper, os, sys, scripts.ScrollPanel, scripts.Onefile
+import os, sys, scripts.ScrollPanel, scripts.Onefile
 from scripts import Theme
 from PIL import Image, ImageTk
 GarbColImageGroup = [] # Needed because garbage collection will delete pictures otherwise
@@ -9,9 +9,8 @@ OpenWindows = []
 
 class Description:
 
-    def __init__(self, geometry = (800,800), bonusWidth = 37):
+    def __init__(self, geometry = (800,800)):
         self.geometry = geometry
-        self.bonusWidth = bonusWidth
         self.data:list[DescriptionObject] = []
         
     def Tag(self, text:str, padx=(20,20), pady=(0,0), anchor="w", side=None):
@@ -109,13 +108,13 @@ def StyledPopup(title, descData, root, isForcedPack = False):
             
         elif isinstance(descObj, PopHeader): # Header
             curFrame = ttk.Frame(scrollPanel.innerFrame)
-            descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=10, command=lambda obj= descObj: (obj.Dropdown(), scripts.GUIHelper.ResizeWindow(top, scrollPanel.innerFrame), center(top, root)))
+            descObj.obj = ttk.Button(curFrame,text=descObj.data, style="Header.TButton", padding=(10,10,50,10), command=lambda obj= descObj: (obj.Dropdown(), scrollPanel.ResizeScrollPanel(), center(top, root)))
             curHeader = descObj
             curFrame.pack(fill="x", expand=True)
             descObj.SpecialPack()
 
         elif isinstance(descObj, PopText): # Text
-            descObj.obj = ttk.Label(curFrame,text=descObj.data, wraplength=myDescription.geometry[1] - 60)
+            descObj.obj = ttk.Label(curFrame, text=descObj.data, wraplength=myDescription.geometry[1] - 60)
             curHeader.childGroup.append(descObj)
         
         elif isinstance(descObj, PopTag): # Tag
@@ -126,7 +125,7 @@ def StyledPopup(title, descData, root, isForcedPack = False):
             descObj.SpecialPack()
 
     Theme.ThemeUpdate()
-    scripts.GUIHelper.ResizeWindow(top, scrollPanel.innerFrame, myDescription.bonusWidth)
+    scrollPanel.ResizeScrollPanel()
     center(top, root)
     top.attributes(alpha = 1) # Show after centering (cant use deiconify because then the deiconify dimensions dont get updated) 
     

@@ -329,7 +329,7 @@ def RunOptions(GameTitle, OptionList:list[Interactables.Option], randoProgressDi
     
     OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
     
-    errorMsgObj = PopupDescriptions.Description(bonusWidth= 15)
+    errorMsgObj = PopupDescriptions.Description()
     errorMsgObj.Header("Randomization Finished")
     errorMsgObj.Tag(f"Seed: {seed}", pady=5, anchor="center") # Seed
     

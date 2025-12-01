@@ -1,6 +1,6 @@
 from tkinter import ttk
 from tkinter import *
-from scripts import GUIHelper, PopupDescriptions, ScrollPanel, Theme, Helper
+from scripts import PopupDescriptions, ScrollPanel, Theme, Helper
 
 Game = "" # Used to tell what option goes to what games tab
 DescriptionIndicator = "🛈"
@@ -230,7 +230,7 @@ def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
     opt2Button = ttk.Button(top, text= f"Disable {enabledOption}", command=lambda: (opt2Pressed.set(True), top.destroy()))
     opt2Button.pack(side=RIGHT)
     
-    GUIHelper.ResizeWindow(top, scrollablePanel.innerFrame, pady=70)
+    scrollablePanel.ResizeScrollPanel(pady=70)
 
     PopupDescriptions.center_window(top)
     top.attributes(alpha=1)

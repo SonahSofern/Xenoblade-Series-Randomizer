@@ -22,10 +22,6 @@ DarkerPurple = "#1a121a"
 
 CanvasesForStyling = []
 RootsForStyling = []
-defFontVar = StringVar(value="Calibri")
-defFontSizeVar = IntVar(value=14)
-defGUIThemeVar = StringVar(value="Dark Mode")
-fontNameVar = StringVar()
 defaultFont = Font(family="Calibri", size=14)
 
 style= ttk.Style()
@@ -232,7 +228,7 @@ style.configure("bordered.TFrame", relief = SOLID, borderwidth= 2)
 style.configure("centeredTabs.TNotebook", tabposition= "nw", borderwidth=0)
 style.configure("BorderlessLabel.TLabel", background=currentTheme["darkColor"], foreground=White)
 style.configure("NoBackground.TFrame", background=currentTheme["backgroundColor"])
-style.configure("Header.TButton", borderwidth=0, background=currentTheme["midGray"])
+style.configure("Header.TButton", borderwidth=0, background=currentTheme["midGray"], padding=0)
 style.configure("Tag.TLabel", background= currentTheme["midGray"], relief="flat", padding=(9,2), margin=(5,0))
 style.configure("DescriptionImage.TLabel", background= currentTheme["midColor"])
 style.configure("CenteredLabel.TLabel")
