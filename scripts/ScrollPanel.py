@@ -7,7 +7,7 @@ from scripts import Theme
 # Horrid setup variables for getting correctly sized window. Can't figure out how to get the correct width.
 PaddedValueWithScrollbar = 36
 PaddedValueWithoutScrollbar = 18
-maxHeight = int(int(Theme.windowHeight) * 0.5)
+maxHeight = int(int(Theme.windowHeight) * 0.7)
 
 class ScrollablePanel():
     def __init__(self, parent:Toplevel):
@@ -40,10 +40,10 @@ class ScrollablePanel():
         canvas.update_idletasks()
         canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
         
-    def ScrollbarShowCheck(self, isForced = False):
+    def ScrollbarShowCheck(self, isForced):
         '''Checks if the height of an the innerframe warrants showing the scrollbar.'''
         self.innerFrame.update()  # Ensure the geometry is up to date
-        if isForced or self.innerFrame.winfo_height() >= maxHeight:
+        if isForced:
             self.scrollbar.pack(side="right", fill="y")
             return PaddedValueWithScrollbar
         else:
@@ -52,7 +52,7 @@ class ScrollablePanel():
         
     def ResizeScrollPanel(self, pady=15):
         self.innerFrame.update()  # Ensure the geometry is up to date
-        w = self.innerFrame.winfo_width() + self.ScrollbarShowCheck()
+        w = self.innerFrame.winfo_width() + self.ScrollbarShowCheck(self.innerFrame.winfo_height() >= maxHeight)
         h = min(self.innerFrame.winfo_height() + pady, maxHeight)
         self.top.geometry(f"{w}x{h}")
         self.top.update()

@@ -330,7 +330,7 @@ def RunOptions(GameTitle, OptionList:list[Interactables.Option], randoProgressDi
     OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
     
     errorMsgObj = PopupDescriptions.Description()
-    errorMsgObj.Header("Randomization Finished")
+    errorMsgObj.Header(f"{GameTitle} Randomization Finished")
     errorMsgObj.Tag(f"Seed: {seed}", pady=5, anchor="center") # Seed
     
     def ErrorLog():
@@ -363,7 +363,7 @@ def RunOptions(GameTitle, OptionList:list[Interactables.Option], randoProgressDi
         randoProgressDisplay.config(text=opt.name)
         
         nextStep =  pb['value'] + (100/TotalCommands) # Cache it here so it doesnt matter how far the bar goes 
-        threading.Thread(target=lambda: SlowBurn(pb, nextStep)).start()
+        threading.Thread(target=lambda: SlowBurn(pb, nextStep, opt.stepSpeed)).start()
 
         for command in opt.commands:
             try:
@@ -380,10 +380,10 @@ def RunOptions(GameTitle, OptionList:list[Interactables.Option], randoProgressDi
 
     return lambda: PopupDescriptions.StyledPopup(f"{GameTitle} {datetime.datetime.now()}", lambda: ErrorLog(), root)
 
-def SlowBurn(progressBar, nextStop):
+def SlowBurn(progressBar, nextStop, stepSpeed):
     try: # Throwing a try excpet here because I have had times in Debug mode where this throws errors saying something about pb. 
         while(progressBar['value'] < nextStop):
             time.sleep(0.02)
-            progressBar['value'] += 0.05
+            progressBar['value'] += stepSpeed
     except Exception as e:
         print(e)

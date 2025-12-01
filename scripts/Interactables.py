@@ -6,7 +6,7 @@ Game = "" # Used to tell what option goes to what games tab
 DescriptionIndicator = "🛈"
 
 class Option():
-    def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", _commands:list = [], defState = False, prio = 50,hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False):
+    def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", _commands:list = [], defState = False, prio = 50,hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False, stepSpeed = 0.05):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
@@ -29,6 +29,7 @@ class Option():
         self.hasSpinBox = hasSpinBox
         self.subDefState = defState
         self.prio = prio
+        self.stepSpeed = stepSpeed # Controls how fast the progressbar moves during while this setting runs. 
         XenoOptionDict[Game].append(self)
         
         # Custom Spinboxes
@@ -230,7 +231,7 @@ def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
     opt2Button = ttk.Button(top, text= f"Disable {enabledOption}", command=lambda: (opt2Pressed.set(True), top.destroy()))
     opt2Button.pack(side=RIGHT)
     
-    scrollablePanel.ResizeScrollPanel(pady=70)
+    scrollablePanel.ResizeScrollPanel()
 
     PopupDescriptions.center_window(top)
     top.attributes(alpha=1)

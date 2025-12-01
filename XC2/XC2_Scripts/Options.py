@@ -216,10 +216,10 @@ for opt in Cosmetics.CosmeticsList: # To gen these since listing them here would
     opt.CreateSubOptions(CosmeticsOption)
 
 # Game Modes
-RaceModeOption = Option("Race Mode", GameModeTab, "Play through a condensed version of the game in this mode!", [lambda: RaceMode.RaceModeChanging()], descData = lambda: RaceMode.RaceModeDescription())
+RaceModeOption = Option("Race Mode", GameModeTab, "Play through a condensed version of the game in this mode!", [lambda: RaceMode.RaceModeChanging()], descData = lambda: RaceMode.RaceModeDescription(), stepSpeed=0.01)
 RaceModeOption_Zohar = SubOption("Zohar Fragment Hunt", RaceModeOption)
 RaceModeOption_DLC = SubOption("DLC Item Removal", RaceModeOption)
-UMHuntOption = Option("Unique Monster Hunt", GameModeTab, "Defeat Unique Monsters in this Roguelike mode!", [lambda: UMHuntMain.UMHunt()], hasSpinBox = True, spinMin = 1, spinMax = 10, spinIncr = 1, spinDesc = "Round(s)", spinWidth = 2, spinDefault = 10, descData= lambda: UMHuntMain.Description())
+UMHuntOption = Option("Unique Monster Hunt", GameModeTab, "Defeat Unique Monsters in this Roguelike mode!", [lambda: UMHuntMain.UMHunt()], hasSpinBox = True, spinMin = 1, spinMax = 10, spinIncr = 1, spinDesc = "Round(s)", spinWidth = 2, spinDefault = 10, descData= lambda: UMHuntMain.Description(), stepSpeed=0.01)
 UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
 UMHuntOption_RandomLandmarks = SubOption("Random Starting Landmarks", UMHuntOption)
 

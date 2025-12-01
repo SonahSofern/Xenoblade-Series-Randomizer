@@ -48,7 +48,7 @@ CollectapediaRewardsOption_Precious = SubOption("Key Items", CollectapediaReward
 
 # CharactersOption = Option("Heroes", Character, "Randomizes heroes", [lambda: Characters.CharacterSwaps()])
 enemySpinDefaultVal = 10
-NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsters, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_MatchSize, False)], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
+NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsters, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_MatchSize, False)], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True, stepSpeed=0.005)
 NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True, spinDefault=enemySpinDefaultVal, spinDesc=weightsSpinDescription)
 NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption, hasSpinBox=True, spinDefault=2)
 NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption, hasSpinBox=True, spinDefault=2)
