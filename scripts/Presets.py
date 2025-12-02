@@ -48,11 +48,11 @@ def CreatePreset(filename, innerFrame, interactables, dir, isFinal):
     pnameVar.trace_add("write", lambda *args: OnNameChange(dir, pnameVar, oldnameVar))
     name.pack(side="left", padx=(0,5))
     
-    loadBtn = ttk.Button(presetFrame, text="📥 Load", command=lambda: SaveLoad.loadData(interactables, f"{pnameVar.get()}.txt", dir))
+    loadBtn = ttk.Button(presetFrame, text="Load", command=lambda: SaveLoad.loadData(interactables, f"{pnameVar.get()}.txt", dir))
     loadBtn.pack(side="left", padx=(0,5))
         
     if not isFinal:
-        deleteBtn = ttk.Button(presetFrame, text="✖ Delete", command=lambda preset=presetFrame: (DeletePreset(preset, pnameVar, dir)))
+        deleteBtn = ttk.Button(presetFrame, text="Delete", command=lambda preset=presetFrame: (DeletePreset(preset, pnameVar, dir)))
         deleteBtn.pack(side="left")
         
     if isFinal:

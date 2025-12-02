@@ -112,6 +112,7 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                                     ene[key] = chosen.enelist[key]
                                 break
                         
+                        SizeHelper(enemy, chosen)
                         TelethiaEarly(enemy, chosen)
                         BossSelfDestructs(enemy, selfDestructArts)
                         MechonEarly(enemy, chosen, [1,2,4], [30, 31, 32,33, 63, 64, 65]) # Mechon before enchant
@@ -144,6 +145,10 @@ FinalBossOptions = {
 def ChallengingFinalBoss():
     pass
 
+def SizeHelper(enemy, chosen):
+    '''Helps match enemy size to replacement size'''
+    pass
+    
 def ForcedArts(enemy, ForcedStoryArts:list[ForcedArt]):
     # Fixes boss fights that require the enemy to use an art slot to end the fight 
     for id in ForcedStoryArts:

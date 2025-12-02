@@ -11,6 +11,7 @@ from pathlib import Path
 
 StaticEnemyData:list[Enemy.EnemyGroup] = []
 
+
 ValidEnemyPopFileNames = ["ma01a_GMK_EnemyPop.json", "ma04a_GMK_EnemyPop.json", "ma07a_GMK_EnemyPop.json", "ma09a_GMK_EnemyPop.json", "ma11a_GMK_EnemyPop.json", "ma14a_GMK_EnemyPop.json", "ma15a_GMK_EnemyPop.json", "ma17a_GMK_EnemyPop.json", "ma22a_GMK_EnemyPop.json", "ma25a_01_GMK_EnemyPop.json", "ma25a_02_GMK_EnemyPop.json", "ma25a_03_GMK_EnemyPop.json", "ma25a_04_GMK_EnemyPop.json", "ma25a_05_GMK_EnemyPop.json", "ma25a_06_GMK_EnemyPop.json", "ma25a_07_GMK_EnemyPop.json", "ma25a_08_GMK_EnemyPop.json", "ma25a_09_GMK_EnemyPop.json", "ma25a_10_GMK_EnemyPop.json", "ma25a_11_GMK_EnemyPop.json", "ma25a_12_GMK_EnemyPop.json", "ma25a_13_GMK_EnemyPop.json", "ma25a_14_GMK_EnemyPop.json", "ma25a_15_GMK_EnemyPop.json", "ma25a_16_GMK_EnemyPop.json", "ma25a_17_GMK_EnemyPop.json", "ma25a_18_GMK_EnemyPop.json", "ma25a_19_GMK_EnemyPop.json", "ma25a_50_GMK_EnemyPop.json", "ma25a_51_GMK_EnemyPop.json", "ma25a_52_GMK_EnemyPop.json", "ma25a_53_GMK_EnemyPop.json", "ma40a_GMK_EnemyPop.json", "ma44a_GMK_EnemyPop.json", "ma45a_GMK_EnemyPop.json", "ma46a_GMK_EnemyPop.json", "ma90a_GMK_EnemyPop.json", "ma90gmk_GMK_EnemyPop.json"]
 
 def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSizeOption:Options.Option, isBossGroupBalancing):
@@ -27,7 +28,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     RetryBattleLandmark = "<9A220E4D>"
     PostBattleConqueredPopup = "CatMain" # Currently not using it has weird effects fights take a long time to end after enemy goes down without it happens eithery way with UMs so something is wrong with UMS
     ignoreKeys = ["$id", "ID", PostBattleConqueredPopup, "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "FlgFixed", "IdMove", "SpBattle", "FlgNoVanish", "FlgSpDead" , "KillEffType", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"] + Aggro
-    retainNonArrangeKeys = ["ActType", "LowerLimitHP"]
+    HPLimits = ["LowerLimitHP", "<60FB333A>"]
+    retainNonArrangeKeys = ["ActType"] + HPLimits
     with open("XC3/JsonOutputs/fld/FLD_EnemyData.json", 'r+', encoding='utf-8') as eneFile:
         with open("XC3/JsonOutputs/btl/BTL_Enemy.json", 'r+', encoding='utf-8') as paramFile:
             with open("XC3/JsonOutputs/btl/BTL_EnRsc.json", 'r+', encoding='utf-8') as rscFile:
@@ -51,11 +53,13 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
 
                         eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys) # Flying Enemies and some enemies in Erythia will still fall despite act type fix
 
+                        ForcedArtsManager(en, newEn, eRando)
+                        
                         if isBossGroupBalancing:
                             eRando.BalanceFight(en, newEn, GroupFightViolations, EnemyCounts)
 
-                        if isMatchSize:
-                            EnemySizeHelper(en, newEn, eRando)
+                        # if isMatchSize:
+                        #     EnemySizeHelper(en, newEn, eRando)
 
                         IntroFightBalances(en, newEn, eRando)
                         
@@ -74,6 +78,17 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                     JSONParser.CloseFile(eneData, eneFile)
                     JSONParser.CloseFile(paramData, paramFile)
                     JSONParser.CloseFile(rscData, rscFile)
+
+def ForcedArtsManager(oldEn, newEn, eRando:Enemy.EnemyRandomizer): # Do these enemies with party wiping arts that are meant to end a scene need to be removed?
+    EnemyIDsWithForcedArts = [545, 941, 885, 4431, 3782, 378, 499, 4434, 4445, 4447] # FLD_EnemyData IDs
+    if oldEn["$id"] in EnemyIDsWithForcedArts:
+        ForcedArtsIDs = [426, 111, 1436, 943, 1887, 1897, 1959, 1962] # Arts that the game uses to progress a cutscene/story event
+        oldPar = eRando.FindParam(oldEn)
+        for i in range(0, 16):
+            if oldPar[f"ArtsSlot{i}"] in ForcedArtsIDs:
+                eRando.ChangeStats([newEn], [(f"ArtsSlot{i}", oldPar[f"ArtsSlot{i}"])])
+                print((f"ArtsSlot{i}", oldPar[f"ArtsSlot{i}"]))
+                break
 
 def SummonFix(): # For now this is lower priority for how difficult it would be to fix so im removing summons
     with open("XC3/JsonOutputs/btl/BTL_EnSummon.json", 'r+', encoding='utf-8') as summonFile:

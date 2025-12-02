@@ -323,7 +323,7 @@ class EnemyRandomizer():
     def RetainNonArrangeStats(self, newEn, oldEn, keys):
         '''For retaining the old enemies stats that aren't controlled by enarrange, automatically handles flag nested dicts'''
         oldRSC = self.FindRSC(oldEn)
-        oldPar = self.FindParam(newEn)
+        oldPar = self.FindParam(oldEn)
         keyVals = []
         
         def FlagHandler(key, dict):
@@ -339,7 +339,6 @@ class EnemyRandomizer():
                 keyVals.append((key, FlagHandler(key, oldPar)))
             elif key in oldRSC:
                 keyVals.append((key, FlagHandler(key, oldRSC)))
-        
         self.ChangeStats([newEn], keyVals)
     
     def CreateRandomEnemy(self, StaticEnemyData:list[EnemyGroup]):

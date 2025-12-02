@@ -92,7 +92,6 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
         NewTabDictionary[tab] = scroll.outerFrame
         InnerDict[tab] = scroll.innerFrame
 
-    
     # Frames/Tabs
     outerPresetFrame = ttk.Frame(MainWindow, padding=10)
     MainWindow.add(outerPresetFrame, text="⚙ Presets")
