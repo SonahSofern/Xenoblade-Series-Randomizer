@@ -58,8 +58,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                         if isBossGroupBalancing:
                             eRando.BalanceFight(en, newEn, GroupFightViolations, EnemyCounts)
 
-                        # if isMatchSize:
-                        #     EnemySizeHelper(en, newEn, eRando)
+                        if isMatchSize:
+                            EnemySizeHelper(en, newEn, eRando)
 
                         IntroFightBalances(en, newEn, eRando)
                         
