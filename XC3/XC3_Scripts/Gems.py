@@ -38,9 +38,10 @@ def GemRando(): # Match class to skill type probably or at least an option to
                         HealerGemList.AddNewData(enh)
                     else:
                         MiscGemList.AddNewData(enh)
+                        
                 # Replace the gems file
                 for gem in gemData["rows"]: 
-                    if gem["$id"]%10 == 0 or gem["$id"] == 12001: # Every 10 gems choose a new skill for level 1-10
+                    if (gem["$id"]-1)%10 == 0: # Every 10 gems choose a new skill for level 1-10
                         gemCategory = gem["Category"]
                         if gemCategory in AttackerCategory:
                             chosenEnhancement = AttackerGemList.SelectRandomMember()
