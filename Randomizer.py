@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 root = Tk()
-from scripts import Theme, XCRandomizer, Theme
+from scripts import Theme, XCRandomizer
 import XCDE.XCDE_Scripts.XCDE_Settings as XCDE
 import XC2.XC2_Scripts.XC2_Settings as XC2
 import XC3.XC3_Scripts.XC3_Settings as XC3

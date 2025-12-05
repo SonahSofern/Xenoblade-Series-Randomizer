@@ -6,14 +6,12 @@ Title = "Xenoblade Chronicles 2"
 Version = "1.7.1"
 
 # Backgrounds
-backgrounds = ["titlescreen1.png"]
-for i in range(1,11):
-    backgrounds.append(f"ch{i}.png")
+backgrounds = ["ch9.png", "ch1.png", "ch3.png", "ch4.png", "ch6.png"]
     
 seedEntryVar = scripts.XCRandomizer.StringVar()
 permalinkVar = scripts.XCRandomizer.StringVar()
 
-TitlescreenSplash = scripts.XCRandomizer.FilePlacer(["Images/Logos/Aegis.wilay"],  "../menu/image", "mnu001_titlelogo_us.wilay", "XC2")
+TitlescreenSplash = scripts.XCRandomizer.FilePlacer(["Images/Logos/crystal.wilay"],  "../menu/image", "mnu001_titlelogo_us.wilay", "XC2")
 
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], f"Randomizer v{Version}") # Change Title Version to Randomizer vX.x.x

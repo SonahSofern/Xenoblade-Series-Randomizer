@@ -1,4 +1,5 @@
-class PackedBitsWriter: # from github.com/LagoLunatic/wwrando
+ # based on github.com/LagoLunatic/wwrando
+class PackedBitsWriter:
     def __init__(self):
         self.bits_left_in_byte = 8
         self.current_byte = 0

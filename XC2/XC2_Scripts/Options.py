@@ -26,15 +26,15 @@ TornaTab = 9
 
 
 Tabs = {
-    Items: "🎁 Items",
-    Driver: "🧍 Drivers",
-    Blade: "🔷 Blades",
-    Enemies: "💀 Enemies",
-    QOL: "🐇 Quality of Life",
-    Funny: "😄 Funny",
-    CosmeticsTab: "👚 Cosmetics",
-    GameModeTab: "♘ Game Modes",
-    TornaTab: "🞛 Logical Torna"
+    Items: "Items",
+    Driver: "Drivers",
+    Blade: "Blades",
+    Enemies: "Enemies",
+    QOL: "Quality of Life",
+    Funny: "Funny",
+    CosmeticsTab: "Cosmetics",
+    GameModeTab: "Game Modes",
+    TornaTab: "Logical Torna"
 }
 
 weightsSpinDescription = "Weights ↓"

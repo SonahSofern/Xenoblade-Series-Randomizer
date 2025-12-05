@@ -12,12 +12,12 @@ Funny = 5
 Musica = 6
 
 Tabs = {
-    General: '🎁 Items',
-    Character: '🧍 Characters',
-    Enemies: '💀 Enemies',
-    QOL: '🐇 Quality of Life',
-    # Funny: '😄 Funny',
-    # Musica: "♪ Music",
+    General: 'Items',
+    Character: 'Characters',
+    Enemies: 'Enemies',
+    QOL: 'Quality of Life',
+    # Funny: 'Funny',
+    # Musica: "Music",
 }
 
 weightsSpinDescription = "Weights ↓"

@@ -94,7 +94,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
 
     # Frames/Tabs
     outerPresetFrame = ttk.Frame(MainWindow, padding=10)
-    MainWindow.add(outerPresetFrame, text="⚙ Presets")
+    MainWindow.add(outerPresetFrame, text="Presets")
     
     for tab, value in NewTabDictionary.items():
         MainWindow.add(value, text =TabDict[tab]) 
@@ -162,7 +162,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     SettingsButton = ttk.Button(background, text="Help", command=lambda: PopupDescriptions.StyledPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window), padding=5)
     SettingsButton.pack(anchor="e", side="right", pady=(5,windowPadding), padx=(0, windowPadding))
 
-    DiscordButton = ttk.Button(background, image=CreateImage(f"Images/Discord-Symbol-White.png", (28,23)), command=lambda: webbrowser.open_new(f"https://discord.gg/64FK78ScvJ"), padding=5)
+    DiscordButton = ttk.Button(background, image=CreateImage(f"Images/Discord-Symbol-White.png", (28,23)), text="Discord", compound=LEFT, command=lambda: webbrowser.open_new(f"https://discord.gg/64FK78ScvJ"), padding=5)
     DiscordButton.pack(anchor="e", side="right", pady=(5,windowPadding), padx=(0, 5)) 
 
     Theme.ThemeUpdate()

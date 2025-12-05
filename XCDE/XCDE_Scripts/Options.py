@@ -13,12 +13,12 @@ QOL = 4
 Funny = 6
 
 Tabs = {
-    General: '🎁 Items',
-    Character: '🧍 Characters',
-    Enemies: '💀 Enemies',
-    QOL: '🐇 Quality of Life',
-    Musica: '♪ Music',
-    Funny: '😄 Funny',
+    General: 'Items',
+    Character: 'Characters',
+    Enemies: 'Enemies',
+    QOL: 'Quality of Life',
+    Musica: 'Music',
+    Funny: 'Funny',
 }
 
 # General

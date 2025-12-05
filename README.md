@@ -20,6 +20,7 @@ https://gitlab.com/damysteryman/XC2SaveNETThingy/-/tags/r6.1
 https://github.com/roccodev/xcnx-file-loader/releases/tag/2.0.1
 
 # Setup
+Download the EXE from the releases page.  
 Guides can be found in the randomizer program for each game by clicking the Help button.
 
 # Build From Source
