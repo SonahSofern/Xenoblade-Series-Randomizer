@@ -2,13 +2,14 @@ from XC3.XC3_Scripts import IDs, Options
 from scripts import JSONParser, Helper, PopupDescriptions, Values
 import json
 
+PreciousMult = 0 # Precious items valued at 0 so they are all the same value. These items dont scale like other types of items so making them all worth the same is best and easiest way to get balanced precious items
 # Small helpers to generate a standard valtable since they will probably reuse this a lot
 def StandardValTable(Accessories = None, Precious = None, Collectables = None):
     valTable = Values.ValueTable(path = "XC3/JsonOutputs/sys")
     if Accessories != None:
         valTable.PopulateValues(Values.ValueFile("ITM_Accessory"), IDs.AccessoriesIDs, Values.WeightOptionMethod(Accessories))
     if Precious != None:
-        valTable.PopulateValues(Values.ValueFile("ITM_Precious", key="Price1"), IDs.BaseGamePreciousIDs, Values.WeightOptionMethod(Precious))
+        valTable.PopulateValues(Values.ValueFile("ITM_Precious", key="Price1", mult=PreciousMult), IDs.BaseGamePreciousIDs, Values.WeightOptionMethod(Precious))
     if Collectables != None:
         valTable.PopulateValues(Values.ValueFile("ITM_Collection", key="Price3"), IDs.CollectableIDs, Values.WeightOptionMethod(Collectables))
     return valTable
@@ -18,7 +19,7 @@ def DLC4StandardValTable(Accessories = None, Precious = None, Collectables = Non
     if Accessories != None:
         dlc4ValTable.PopulateValues(Values.ValueFile("ITM_Accessory", key="Price_dlc04"), IDs.AccessoriesIDs + IDs.DLC4AccessoriesIDs, Values.WeightOptionMethod(Accessories))
     if Precious != None:
-        dlc4ValTable.PopulateValues(Values.ValueFile("ITM_Precious", key="Price1"), IDs.DLC4PreciousIDs, Values.WeightOptionMethod(Precious))
+        dlc4ValTable.PopulateValues(Values.ValueFile("ITM_Precious", key="Price1", mult=PreciousMult), IDs.DLC4PreciousIDs, Values.WeightOptionMethod(Precious))
     if Collectables != None:
         dlc4ValTable.PopulateValues(Values.ValueFile("ITM_Collection", key="Price3_dlc04"), IDs.DLC4CollectableIDs, Values.WeightOptionMethod(Collectables))
     return dlc4ValTable

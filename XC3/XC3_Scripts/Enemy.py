@@ -48,6 +48,9 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                     for en in eneData["rows"]:
                         if eRando.FilterEnemies(en, targetGroup):
                             continue
+                        
+                        if FilterNPCEnemies(en["NPCName"]):
+                            continue
 
                         newEn = eRando.CreateRandomEnemy(StaticEnemyData)
 
@@ -79,6 +82,12 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                     JSONParser.CloseFile(paramData, paramFile)
                     JSONParser.CloseFile(rscData, rscFile)
 
+def FilterNPCEnemies(enNPC):
+    if enNPC == "<00000000>":
+        return False
+    else:
+        return True
+
 def ForcedArtsManager(oldEn, newEn, eRando:Enemy.EnemyRandomizer): # Do these enemies with party wiping arts that are meant to end a scene need to be removed?
     EnemyIDsWithForcedArts = [545, 941, 885, 4431, 3782, 378, 499, 4434, 4445, 4447] # FLD_EnemyData IDs
     if oldEn["$id"] in EnemyIDsWithForcedArts:
@@ -87,7 +96,7 @@ def ForcedArtsManager(oldEn, newEn, eRando:Enemy.EnemyRandomizer): # Do these en
         for i in range(0, 16):
             if oldPar[f"ArtsSlot{i}"] in ForcedArtsIDs:
                 eRando.ChangeStats([newEn], [(f"ArtsSlot{i}", oldPar[f"ArtsSlot{i}"])])
-                print((f"ArtsSlot{i}", oldPar[f"ArtsSlot{i}"]))
+                # print((f"ArtsSlot{i}", oldPar[f"ArtsSlot{i}"]))
                 break
 
 def SummonFix(): # For now this is lower priority for how difficult it would be to fix so im removing summons
