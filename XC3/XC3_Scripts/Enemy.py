@@ -196,7 +196,7 @@ def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
             hpChange = 5
         else:
             hpChange = oldEnParam["StRevHp"]
-        eRando.ChangeStats([newEn], [("StRevHp", hpChange),("StRevStr", oldEnParam["StRevStr"]),("StRevHeal", oldEnParam["StRevHeal"]),("StRevDex", oldEnParam["StRevDex"]),("StRevAgi", oldEnParam["StRevAgi"])])
+        eRando.ChangeStats([newEn], [("StRevHp", hpChange), ("StRevStr", oldEnParam["StRevStr"]), ("StRevHeal", oldEnParam["StRevHeal"]), ("StRevDex", oldEnParam["StRevDex"]), ("StRevAgi", oldEnParam["StRevAgi"])])
     
 def Bandaids():
     SummonFix()
