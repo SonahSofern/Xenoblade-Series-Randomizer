@@ -21,8 +21,13 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
         firstRun = True
     else:
         firstRun = False
-    passedTest = ['Model','ActType','ChestHeight', 'FlyHeight', 'SwimHeight', 'Motion', 'MotRetarget', 'Effect', 'EffStandLoop']
-    testKeys = ['RscType', 'ChrID',  'RscPreset', 'StoryRsc', 'SwitchModel1', 'Visible1', 'SwitchModel2', 'Visible2', 'SwitchModel3', 'Visible3', 'SwitchModel4', 'Visible4', 'Color',  'Radius', 'EffScale',  'AngleFront', 'OffsetID', 'IK', '<DB52EFEF>', '<20C8E401>', 'BoneCenter', 'BoneCamera', 'WpnType', 'WeaponA', 'WeaponB', 'WeaponC', 'MountOut', 'MountIN', 'Sound', 'VoiceID', 'VoiceRand', 'VoiceDead', 'UniqueDirection', 'modelDirection', 'Event', '<5E3BE057>', '<28DE8575>', 'MoveBtlRate', 'CollisionRadius', '<8281BB89>', 'EffectType', '<B604D9F3>', '<3B53F852>', '<E4EB3419>', '<9693E350>', '<693A2A44>', '<6D9580C6>']
+    
+    foundone =['CatBGM',  '<EE7FFF6D>', '<F36BAFFD>','<0F7768D2>', '<9B3B9099>'] 
+    curTesting = []
+    specialFields = ['<B569BFB1>', '<352C263C>', '<BA57B736>',] # These fields being kept fixed a bug where cutscenes couldnt end fights and you would just sit there while the enemy kept aggroing you
+    findAggroFlags = [ '<EFCB57EC>', 'IconOffset', 'FlgMoveFloor', '<3828CCE4>', 'AlliesMsg', '<D3F77DFD>', 'FootPrintDetection', 'EffConvert', '<7C2FCBE1>', '<97002EDA>', 'VoGroup', 'NotEconomy', '<91DD0357>', 'AttenuationScale', '<C4D88A2B>', '<7D3D5DCB>', '<C313305B>', 'Score', '<4BAF120D>', '<7EFBB833>', '<277C5BBD>', '<65449302>', '<192EEE69>', '<F36D8D42>', '<76A4C736>']
+    # passedTest = []
+    # testKeys = ['Model','ActType','ChestHeight', 'FlyHeight', 'SwimHeight', 'Motion', 'MotRetarget', 'Effect', 'EffStandLoop','RscType', 'ChrID',  'RscPreset', 'StoryRsc', 'SwitchModel1', 'Visible1', 'SwitchModel2', 'Visible2', 'SwitchModel3', 'Visible3', 'SwitchModel4', 'Visible4', 'Color',  'Radius', 'EffScale',  'AngleFront', 'OffsetID', 'IK', '<DB52EFEF>', '<20C8E401>', 'BoneCenter', 'BoneCamera', 'WpnType', 'WeaponA', 'WeaponB', 'WeaponC', 'MountOut', 'MountIN', 'Sound', 'VoiceID', 'VoiceRand', 'VoiceDead', 'UniqueDirection', 'modelDirection', 'Event', '<5E3BE057>', '<28DE8575>', 'MoveBtlRate', 'CollisionRadius', '<8281BB89>', 'EffectType', '<B604D9F3>', '<3B53F852>', '<E4EB3419>', '<9693E350>', '<693A2A44>', '<6D9580C6>']
     EnemyCounts = GetEnemyCounts()
     GroupFightViolations = GetGroupFightViolations()
     Aggro = ["<AB4BA3D5>", "<1104E9C5>", "<B5C5F3B3>", "<EC666A80>", "<64251F47>", "<3B6DFBC4>"]
@@ -42,7 +47,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                     isMatchSize = isMatchSizeOption.GetState()
                     
                     eRando = Enemy.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "Resource", "IdBattleEnemy", eneData, paramData, rscData, artData)
-
+        
                     if firstRun:
                         StaticEnemyData = eRando.GenEnemyData()
 
@@ -69,7 +74,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                         
                         eRando.HealthBalancing(en, newEn, 'StRevHp')
 
-                        Helper.CopyKeys(en, newEn, ignoreKeys)
+                        Helper.CopyKeys(en, newEn, ignoreKeys + curTesting)
 
                     for group in StaticEnemyData:
                         group.RefreshCurrentGroup()
