@@ -21,7 +21,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
         firstRun = True
     else:
         firstRun = False
-    
+    passedTest = ['Model','ActType','ChestHeight', 'FlyHeight', 'SwimHeight', 'Motion', 'MotRetarget', 'Effect', 'EffStandLoop']
+    testKeys = ['RscType', 'ChrID',  'RscPreset', 'StoryRsc', 'SwitchModel1', 'Visible1', 'SwitchModel2', 'Visible2', 'SwitchModel3', 'Visible3', 'SwitchModel4', 'Visible4', 'Color',  'Radius', 'EffScale',  'AngleFront', 'OffsetID', 'IK', '<DB52EFEF>', '<20C8E401>', 'BoneCenter', 'BoneCamera', 'WpnType', 'WeaponA', 'WeaponB', 'WeaponC', 'MountOut', 'MountIN', 'Sound', 'VoiceID', 'VoiceRand', 'VoiceDead', 'UniqueDirection', 'modelDirection', 'Event', '<5E3BE057>', '<28DE8575>', 'MoveBtlRate', 'CollisionRadius', '<8281BB89>', 'EffectType', '<B604D9F3>', '<3B53F852>', '<E4EB3419>', '<9693E350>', '<693A2A44>', '<6D9580C6>']
     EnemyCounts = GetEnemyCounts()
     GroupFightViolations = GetGroupFightViolations()
     Aggro = ["<AB4BA3D5>", "<1104E9C5>", "<B5C5F3B3>", "<EC666A80>", "<64251F47>", "<3B6DFBC4>"]
@@ -29,7 +30,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     PostBattleConqueredPopup = "CatMain" # Currently not using it has weird effects fights take a long time to end after enemy goes down without it happens eithery way with UMs so something is wrong with UMS
     ignoreKeys = ["$id", "ID", PostBattleConqueredPopup, "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "FlgFixed", "IdMove", "SpBattle", "FlgNoVanish", "FlgSpDead" , "KillEffType", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"] + Aggro
     HPLimits = ["LowerLimitHP", "<60FB333A>"]
-    retainNonArrangeKeys = ["ActType"] + HPLimits
+    retainNonArrangeKeys = ["ActType", 'FlyHeight', 'SwimHeight'] + HPLimits
     with open("XC3/JsonOutputs/fld/FLD_EnemyData.json", 'r+', encoding='utf-8') as eneFile:
         with open("XC3/JsonOutputs/btl/BTL_Enemy.json", 'r+', encoding='utf-8') as paramFile:
             with open("XC3/JsonOutputs/btl/BTL_EnRsc.json", 'r+', encoding='utf-8') as rscFile:
@@ -39,7 +40,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                     eneData = json.load(eneFile)
                     artData = json.load(artFile)
                     isMatchSize = isMatchSizeOption.GetState()
-
+                    
                     eRando = Enemy.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "Resource", "IdBattleEnemy", eneData, paramData, rscData, artData)
 
                     if firstRun:
@@ -54,10 +55,10 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
 
                         newEn = eRando.CreateRandomEnemy(StaticEnemyData)
 
-                        eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys) # Flying Enemies and some enemies in Erythia will still fall despite act type fix
-
-                        ForcedArtsManager(en, newEn, eRando)
+                        eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys) # Flying Enemies and some enemies in Erythia will still fall despite act type fix (After testing I found this is because of the motion file in rsc. So there is no fix unless we change every enemies motion as they are being placed)
                         
+                        ForcedArtsManager(en, newEn, eRando)
+                            
                         if isBossGroupBalancing:
                             eRando.BalanceFight(en, newEn, GroupFightViolations, EnemyCounts)
 
@@ -81,6 +82,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                     JSONParser.CloseFile(eneData, eneFile)
                     JSONParser.CloseFile(paramData, paramFile)
                     JSONParser.CloseFile(rscData, rscFile)
+                    JSONParser.CloseFile(artData, artFile)
 
 def FilterNPCEnemies(enNPC):
     if enNPC == "<00000000>":
@@ -93,11 +95,47 @@ def ForcedArtsManager(oldEn, newEn, eRando:Enemy.EnemyRandomizer): # Do these en
     if oldEn["$id"] in EnemyIDsWithForcedArts:
         ForcedArtsIDs = [426, 111, 1436, 943, 1887, 1897, 1959, 1962] # Arts that the game uses to progress a cutscene/story event
         oldPar = eRando.FindParam(oldEn)
+        newPar = eRando.FindParam(newEn)
+        
+        # Find the forced art
         for i in range(0, 16):
             if oldPar[f"ArtsSlot{i}"] in ForcedArtsIDs:
-                eRando.ChangeStats([newEn], [(f"ArtsSlot{i}", oldPar[f"ArtsSlot{i}"])])
-                # print((f"ArtsSlot{i}", oldPar[f"ArtsSlot{i}"]))
+                for art in eRando.artData["rows"]:
+                    if art["$id"] == oldPar[f"ArtsSlot{i}"]:
+                        forcedArt = copy.deepcopy(art)
+                        break
                 break
+        
+        newArt = 0
+        
+        # Find new enemy art
+        for i in range(0,16):
+            if (newPar[f"ArtsSlot{i}"] != 0):
+                for art in eRando.artData["rows"]:
+                    if art["$id"] == newPar[f"ArtsSlot{i}"]:
+                        newArt = copy.deepcopy(art)
+                        break
+                break
+            
+        if newArt == 0: # If we found NO arts look for the statename of the autoattacks and put that on the art
+            for i in range(0,3):
+                if (newPar[f"AutoSlot{i}"] != 0):
+                    for art in eRando.artData["rows"]:
+                        if art["$id"] == newPar[f"ArtsSlot{i}"]:
+                            newArt = copy.deepcopy(art)
+                            break
+                    break
+        
+        if newArt == 0: # If its still 0 we found an enemy with no arts and no autos this should be reported
+            raise Exception(f"Invalid Enemy. Report this ID to our discord please! (ID: {newEn["$id"]})")
+            
+        # newArtID = eRando.CreateArt(newArt, [("IntervalAT", forcedArt["IntervalAT"]), ("IntervalArts", forcedArt["IntervalArts"]), ("<7A0315FE>", forcedArt["<7A0315FE>"]), ("<F9031946>", forcedArt["<F9031946>"]), ("<59CE461C>", forcedArt["<59CE461C>"]), ("AiCond1", forcedArt["AiCond1"]), ("AiRate1", forcedArt["AiRate1"]), ("AiParam1", forcedArt["AiParam1"])]) # Ensures that a valid state for that enemy is on the art or else they wont use the art
+        newArtID = eRando.CreateArt(forcedArt, [("StateName", newArt["StateName"]), ("WpnType", newArt["WpnType"])]) # Ensures that a valid state for that enemy is on the art or else they wont use the art
+        
+        # Plug that art into the enemy in slot 15 the last slot (very few enemies use this and the fight ends at this art anyway)
+        eRando.ChangeStats([newEn], [(f"ArtsSlot15", newArtID)])
+        
+        return False
 
 def SummonFix(): # For now this is lower priority for how difficult it would be to fix so im removing summons
     with open("XC3/JsonOutputs/btl/BTL_EnSummon.json", 'r+', encoding='utf-8') as summonFile:

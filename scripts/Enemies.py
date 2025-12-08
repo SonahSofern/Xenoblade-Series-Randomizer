@@ -240,7 +240,7 @@ class EnemyRandomizer():
                         allArtChanges.append((artField, newValue))
                     # Apply any changes to the arts
                     if allArtChanges:
-                        self.ChangeArts(art, allArtChanges)
+                        self.CreateArt(art, allArtChanges)
                         newArtID = len(self.artData["rows"])
                         allParamChanges.append((paramField, newArtID))
 
@@ -388,11 +388,11 @@ class EnemyRandomizer():
             self.paramData["rows"].append(newParam)
             self.rscData["rows"].append(newRSC)
 
-    def ChangeArts(self, art, keyVal=[]):
+    def CreateArt(self, art, keyVal=[]):
         """
-        Allows changing the stats of an individual enemy ID in EnArrange by creating new EnParam and RSC_En for that enemy.
+        Creates a new art using a target art as the base. Returns the art ID.
         Args:
-            art (dict): art dictionary.
+            art (dict): art.
             keyVal (list[tuple]): The keys and their new value in art files to change.
         """
         newArt = copy.deepcopy(art)
@@ -404,3 +404,5 @@ class EnemyRandomizer():
                 newArt[key] = val
 
         self.artData["rows"].append(newArt)
+        
+        return newArtID

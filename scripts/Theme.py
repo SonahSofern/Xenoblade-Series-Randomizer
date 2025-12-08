@@ -118,7 +118,6 @@ try:
                 "selectbackground": currentTheme["lightColor"],
                 "selectforeground": currentTheme["darkColor"],
                 "selectborderwidth": 0,
-                "relief":"ridge",
                 "insertcolor": currentTheme["lightColor"],
             }
         },
