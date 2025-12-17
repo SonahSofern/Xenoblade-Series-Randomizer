@@ -22,7 +22,6 @@ QOL = 5
 Funny = 6
 CosmeticsTab = 7
 GameModeTab = 8
-TornaTab = 9
 
 
 Tabs = {
@@ -34,7 +33,6 @@ Tabs = {
     Funny: "Funny",
     CosmeticsTab: "Cosmetics",
     GameModeTab: "Game Modes",
-    TornaTab: "Logical Torna"
 }
 
 weightsSpinDescription = "Weights ↓"
@@ -183,10 +181,10 @@ TutorialShorteningOption = Option("Tutorial Skips", QOL, "Skips as many tutorial
 RemoveFieldSkillsOption = Option("Remove Story Field Skills", QOL, "Removes field skill checks", [lambda: FieldSkills.RemoveFieldSkills(RemoveFieldSkillsOption_AllFieldSkills.GetState())], ["Remove All Field Skills", []])
 RemoveFieldSkillsOption_AllFieldSkills = SubOption("Remove All Field Skills", RemoveFieldSkillsOption)
 EasySkillTreesOption = Option("Easy Affinity Trees", QOL, "Makes trust the only condition for levelling up a blade's affinity tree", [lambda: SkillTrees.BladeSkillTreeShortening()])
-FasterDriverSkillTrees = Option("Fast Driver Skill Trees", QOL, "Decreases SP required for each node", [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["XC2/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "XC2/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "XC2/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], [f'row[key] // {FasterDriverSkillTrees.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1,  spinDesc = "x Faster")
-FasterLevelsOption = Option("Faster Levels", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["./XC2/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2,spinIncr = 1, spinDesc = "x Faster")
-FasterWeaponPointsOption = Option("Faster Weapon Points", QOL, "Decreases WP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XC2/JsonOutputs/common/BTL_Arts_Dr.json"], ["NeedWP1", "NeedWP2", "NeedWP3", "NeedWP4"], [f'row[key] // {FasterWeaponPointsOption.GetSpinbox()}'])], hasSpinBox=True, spinMin=1, spinDefault=2,spinIncr = 1, spinDesc = "x Faster")
-StartwithIncreasedMovespeedOption = Option("Increased Movespeed", QOL, "Increases your running speed", [lambda: QualityOfLife.AddMovespeedDeed()], hasSpinBox = True, spinMin = 0, spinMax = 50, spinIncr = 5, spinDesc = "% Increase (x10)", spinWidth = 2, spinDefault = 50)
+FasterDriverSkillTrees = Option("SP Boost", QOL, "Decreases SP required for driver skill trees", [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["XC2/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "XC2/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "XC2/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], [f'row[key] // {FasterDriverSkillTrees.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1,  spinDesc = "x Faster")
+FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["./XC2/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2,spinIncr = 1, spinDesc = "x Faster")
+FasterWeaponPointsOption = Option("WP Boost", QOL, "Decreases weapon points required for arts levelups", [lambda: Helper.MathmaticalColumnAdjust(["XC2/JsonOutputs/common/BTL_Arts_Dr.json"], ["NeedWP1", "NeedWP2", "NeedWP3", "NeedWP4"], [f'row[key] // {FasterWeaponPointsOption.GetSpinbox()}'])], hasSpinBox=True, spinMin=1, spinDefault=2,spinIncr = 1, spinDesc = "x Faster")
+StartwithIncreasedMovespeedOption = Option("Speed Boost", QOL, "Increases your running speed", [lambda: QualityOfLife.AddMovespeedDeed()], hasSpinBox = True, spinMin = 0, spinMax = 50, spinIncr = 5, spinDesc = "% Increase (x10)", spinWidth = 2, spinDefault = 50)
 FreelyEngageBladesOption = Option("Freely Engage Blades", QOL, "Allows blades to be freely engaged by all valid drivers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["FreeEngage"], [0], [1], [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1075, 1076, 1103])])
 ChestOption = Option("Treasure Chests", QOL, "Suboptions control various things about treasure chests", prio = Last) # Not using the description because that only applies to Race Mode. Race Mode should just automatically enforce CTMC
 ChestOption_CTMCOption = SubOption("Chest Type Matches Contents", ChestOption, [lambda: I.ChestTypeMatchesContentsValue()], prio = Last)
@@ -223,25 +221,25 @@ UMHuntOption_SuperbossWave = SubOption("Superboss Wave", UMHuntOption)
 UMHuntOption_RandomLandmarks = SubOption("Random Starting Landmarks", UMHuntOption)
 
 # Torna
-TornaMainOption = Option("Torna Randomization", TornaTab, "Randomizes the Torna DLC, in a logic-based method.", [lambda: TornaMain.AllTornaRando()], descData=lambda:TornaMain.TornaMainDescription())
+TornaMainOption = Option("Torna Randomization", GameModeTab, "Randomizes the Torna DLC, in a logic-based method.", [lambda: TornaMain.AllTornaRando()], descData=lambda:TornaMain.TornaMainDescription())
 TornaMainOption_CollectionPoints = SubOption("Collection Points", TornaMainOption)
 TornaMainOption_EnemyDrops = SubOption("Enemy Drops", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 8, spinIncr = 1, spinWidth = 1, spinDefault = 1, spinDesc = "Items")
 TornaMainOption_GroundItems = SubOption("Ground Items", TornaMainOption)
 TornaMainOption_Shops = SubOption("Shops", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 15, spinIncr = 1, spinWidth = 2, spinDefault = 1, spinDesc = "Items")
 TornaMainOption_SideQuests = SubOption("Side Quests", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 4, spinIncr = 1, spinWidth = 1, spinDefault = 1, spinDesc = "Items")
 TornaMainOption_TreasureChests = SubOption("Treasure Chests", TornaMainOption, hasSpinBox = True, spinMin = 1, spinMax = 8, spinIncr = 1, spinWidth = 1, spinDefault = 1, spinDesc = "Items")
-TornaCreateSpoilerLog = Option("Create Torna Spoiler Log", TornaTab, "Outputs a Spoiler Log containing information on where each item is placed, located in XC2/Torna_Spoiler_Logs folder.")
-TornaAddHints = Option("Torna In-Game Hints", TornaTab, "Adds hints to the in the \"Tips\" Submenu in-game.", descData=lambda:TornaMain.TornaHintDescription())
+TornaCreateSpoilerLog = Option("Torna Spoiler Log", GameModeTab, "Outputs a Spoiler Log containing information on where each item is placed, located in XC2/Torna_Spoiler_Logs folder.")
+TornaAddHints = Option("Torna In-Game Hints", GameModeTab, "Adds hints to the in the \"Tips\" Submenu in-game.", descData=lambda:TornaMain.TornaHintDescription())
 TornaAddHints_ItemHints = SubOption("Item Hints", TornaAddHints, hasSpinBox = True, spinMin = 1, spinMax = 12, spinIncr = 1, spinWidth = 2, spinDefault = 1, spinDesc = "Hints")
 TornaAddHints_LocProgHints = SubOption("Location Hints", TornaAddHints, hasSpinBox = True, spinMin = 1, spinMax = 12, spinIncr = 1, spinWidth = 2, spinDefault = 1, spinDesc = "Hints")
-TornaObjectColorMatchesContents = Option("Gilded Required Check Names", TornaTab, "Turns names of Checks with Progression Items gold.", descData=lambda:TornaMain.TornaCCMCDescription())
-TornaChooseCommunityReqs = Option("Community Level Story Requirements", TornaTab, "Changes the Community Level requirement for the story events.", descData=lambda:TornaMain.TornaStoryReqChangeDescription())
+TornaObjectColorMatchesContents = Option("Torna Gilded Required Check Names", GameModeTab, "Turns names of Checks with Progression Items gold.", descData=lambda:TornaMain.TornaCCMCDescription())
+TornaChooseCommunityReqs = Option("Torna Community Level Requirements", GameModeTab, "Changes the Community Level requirement for the story events.", descData=lambda:TornaMain.TornaStoryReqChangeDescription())
 TornaChooseCommunityReqs_Gate1Req = SubOption("Gate 1 Required Level", TornaChooseCommunityReqs, hasSpinBox = True, spinMin = 0, spinMax = 2, spinIncr = 1, spinWidth = 1, spinDefault = 0)
 TornaChooseCommunityReqs_Gate2Req = SubOption("Gate 2 Required Level", TornaChooseCommunityReqs, hasSpinBox = True, spinMin = 0, spinMax = 4, spinIncr = 1, spinWidth = 1, spinDefault = 0)
-TornaRemoveGormottChecks = Option("Remove Certain Gormott Checks", TornaTab, "Progression Items will not be found in Checks near locations in Gormott selected below.")
+TornaRemoveGormottChecks = Option("Torna Gormott Exceptions", GameModeTab, "Progression Items will not be found in Checks near locations in Gormott selected below.")
 for loc in TornaMain.GormottNametoLocID.keys(): # Automatically Generates these
     SubOption(loc, TornaRemoveGormottChecks, defState = True)
-TornaRewardsonUnreqSidequests = Option("Progression on Unrequired Sidequests", TornaTab, "Sidequests not chosen for the main story requirements or story gates can have Progression Items on their rewards.")
+TornaRewardsonUnreqSidequests = Option("Torna Unrequired Sidequests", GameModeTab, "Sidequests not chosen for the main story requirements or story gates can have Progression Items on their rewards.")
 
 MutuallyExclusivePairing([TornaMainOption, TornaAddHints, TornaObjectColorMatchesContents, TornaChooseCommunityReqs, TornaCreateSpoilerLog, TornaRemoveGormottChecks, TornaRewardsonUnreqSidequests], [AccessoriesOption, QuestRewardsOption, AuxCoresOption, AccessoryShopsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladesOption, BladeArtsOption, BladeFieldSkillsOption, BladeWeaponChipsOption, BladeCombosOption, BladeStatsOption, NormalEnemyOption, UniqueEnemyOption, BossEnemyOption, EnemyDropOption, TreasureChestOption, FreelyEngageBladesOption, ChestOption, RemoveFieldSkillsOption, EasySkillTreesOption, FasterLevelsOption, NewGamePlusFlagsOption, ProjTreasureChestOption, EnemySizeOption, BladeWeaponCosmeticsOption, CosmeticsOption, RaceModeOption, UMHuntOption])
 

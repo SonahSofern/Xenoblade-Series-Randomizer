@@ -113,12 +113,10 @@ def GearAppearance(isCrazy):
         Waists = FindCosmeticLists("Waists", "waistlist")
         Legs = FindCosmeticLists("Legs", "legglist")
         
-        
         originalList = [Helms, Chests, Gloves, Waists, Legs]
         armorList = copy.deepcopy(originalList)
         
-        # Loop over characters and Dole out the choices to the armours
-            
+        # Loop over characters and dole out the choices to the armours
         for eq in eqData["rows"]:
             parts = (eq["parts"] - 1)
             # Defined here so that each new equipment 
