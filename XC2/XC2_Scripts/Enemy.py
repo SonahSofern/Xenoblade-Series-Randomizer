@@ -149,7 +149,7 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
         (Large, Small): 2,
         (Normal, Small): 1,
     }
-    eRando.EnemySizeMatch(oldEn, newEn, ["Scale"], multDict)
+    e.EnemySizeMatch(oldEn, newEn, ["Scale"], multDict)
     
     # Reset size if scaled higher than massive
     ChangeSize([oldEn, newEn], SupermassiveEnemies, Massive)

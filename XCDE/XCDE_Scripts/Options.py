@@ -68,19 +68,21 @@ QuestRewardsOptions_ArtBooks = SubOption("Art Books", QuestRewardsOption, hasSpi
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/FLD_valpoplist.html#1 Red orbs found here not sure what to do with them yet
 
 # Enemy
-NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: EnemiesScript.Enemies(IDs.NormalEnemies, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption)], descData=lambda: EnemiesScript.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
+NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: EnemiesScript.Enemies(IDs.NormalEnemies, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_Size.GetState())], descData=lambda: EnemiesScript.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
 NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption)
 NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption)
 NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption)
 NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, defState=False)
+NormalEnemyOption_Size = SubOption("Match Size", NormalEnemyOption)
 
-UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: EnemiesScript.Enemies(IDs.UniqueEnemies + IDs.SuperbossEnemies, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption)], descData=lambda: EnemiesScript.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True)
+UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: EnemiesScript.Enemies(IDs.UniqueEnemies + IDs.SuperbossEnemies, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption, UniqueEnemyOption_Size.GetState())], descData=lambda: EnemiesScript.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True)
 UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption)
 UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption)
 UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption)
 UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption)
+UniqueEnemyOption_Size = SubOption("Match Size", UniqueEnemyOption)
 
-BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: EnemiesScript.Enemies(IDs.BossEnemies, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption), lambda: EnemiesScript.EgilArenaFix()], descData=lambda: EnemiesScript.EnemyDesc(BossEnemyOption.name), hasSpinBox = True)
+BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: EnemiesScript.Enemies(IDs.BossEnemies, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, True), lambda: EnemiesScript.EgilArenaFix()], descData=lambda: EnemiesScript.EnemyDesc(BossEnemyOption.name), hasSpinBox = True)
 BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption)
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption)
@@ -113,7 +115,7 @@ PlayerArtsOption_Summons = SubOption("Keep Melia's Summons", PlayerArtsOption)
 # PlayerArtsOption_Cooldown = SubOption("Cooldown", PlayerArtsOption)
 EquipmentOption = Option("Armor", Character, "Randomizes effects of Armor", [lambda: Armor.ArmorRando()], descData=lambda: Armor.ArmorDesc())
 EquipmentOption_Appearance = SubOption("Appearance", EquipmentOption)
-EquipmentOption_CrazyAppearance = SubOption("Crazy Appearance", EquipmentOption)
+EquipmentOption_CrazyAppearance = SubOption("Crazy Appearance", EquipmentOption, hasSpinBox=True)
 # EquipmentOption_Defenses = SubOption("Defenses", EquipmentOption)
 EquipmentOption_GemSlots = SubOption("Gem Slots", EquipmentOption)
 EquipmentOption_WeightClass = SubOption("Weight Class", EquipmentOption)

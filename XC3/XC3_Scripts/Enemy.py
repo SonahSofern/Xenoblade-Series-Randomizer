@@ -179,7 +179,7 @@ def EnemySizeHelper(oldEn, newEn, eRando:Enemy.EnemyRandomizer):
         (Normal, Small): 1,
     }
     keys = ["Scale", "EliteScale", "WeaponScale"]
-    eRando.EnemySizeMatch(oldEn, newEn, keys, multDict)
+    Enemy.EnemySizeMatch(oldEn, newEn, keys, multDict)
 
 def GetEnemyCounts():
     enemyCounts = dict()

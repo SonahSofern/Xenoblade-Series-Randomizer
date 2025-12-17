@@ -295,30 +295,6 @@ class EnemyRandomizer():
                 continue
             if key in newEn:
                 en[key] = newEn[key]
-           
-    def EnemySizeMatch(self, oldEn, newEn, keysList, multDict): # Makes big enemies in boss fights smaller
-        '''Enemies that are replaced will have that enemy attempt to match the size of the original'''
-        newSize = newEn["ChrSize"]
-        oldSize = oldEn["ChrSize"]
-        
-        if newSize == oldSize:
-            return
-
-        defMult = 1
-        defScale = 100
-        minScale = 10
-        if oldEn["$id"] == 455:
-            pass
-        
-        if (oldSize, newSize) in multDict:
-            newMult = multDict[(oldSize, newSize)]
-        elif (newSize, oldSize) in multDict:
-            newMult = (1/multDict[(newSize, oldSize)])
-        else:
-            newMult = 1
-        
-        for key in keysList:
-            newEn[key] = max(int(defScale * newMult), minScale) 
         
     def RetainNonArrangeStats(self, newEn, oldEn, keys):
         '''For retaining the old enemies stats that aren't controlled by enarrange, automatically handles flag nested dicts'''
@@ -406,3 +382,22 @@ class EnemyRandomizer():
         self.artData["rows"].append(newArt)
         
         return newArtID
+
+
+def EnemySizeMatch(oldEn, newEn, keysList, multDict, scaleKey = "ChrSize", defScale = 100, minScale = 10, maxScale = 1000): # Makes big enemies in boss fights smaller
+    '''Enemies that are replaced will have that enemy attempt to match the size of the original'''
+    newSize = newEn[scaleKey]
+    oldSize = oldEn[scaleKey]
+    
+    if newSize == oldSize:
+        return
+    
+    if (oldSize, newSize) in multDict:
+        newMult = multDict[(oldSize, newSize)]
+    elif (newSize, oldSize) in multDict:
+        newMult = (1/multDict[(newSize, oldSize)])
+    else:
+        newMult = 1
+    
+    for key in keysList:
+        newEn[key] = min(max(int(defScale * newMult), minScale), maxScale) 

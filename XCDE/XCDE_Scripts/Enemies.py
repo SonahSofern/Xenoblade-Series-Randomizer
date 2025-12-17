@@ -1,6 +1,6 @@
 import json, random, copy, traceback, math
 from XCDE.XCDE_Scripts import Options, IDs
-from scripts import Helper, JSONParser, PopupDescriptions
+from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e
 from XCDE.XCDE_Scripts.IDs import *
 
 class Enemy:
@@ -20,7 +20,7 @@ class ForcedArt:
 enAreaFiles = areaFileListNumbers.copy()
 enAreaFiles.remove("5001")
 
-def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
+def Enemies(monsterTypeList, normal, unique, boss, superboss, odds, size):
     MetalFace = ForcedArt(61, 2, 565)
     MysteriousFace = ForcedArt(268,5,611)
     GoldFace = ForcedArt(1622, 1, 740)
@@ -87,6 +87,8 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                             
                         VoicedEnemiesFix(eneVoiceData, chosen, enemy)                                
                         SpikeBalancer(enemy, chosen.eneListArea)
+                        if size:
+                            SizeHelper(enemy, chosen.eneListArea)
                         
                         # Copy stats with ratios to original stats
                         replacementTotalStats = TotalStats(chosen.eneListArea, CopiedStatsWithRatios)
@@ -108,7 +110,6 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
                                     ene[key] = chosen.enelist[key]
                                 break
                         
-                        SizeHelper(enemy, chosen)
                         TelethiaEarly(enemy, chosen)
                         BossSelfDestructs(enemy, selfDestructArts)
                         MechonEarly(enemy, chosen, [1,2,4], [30, 31, 32,33, 63, 64, 65]) # Mechon before enchant
@@ -143,7 +144,25 @@ def ChallengingFinalBoss():
 
 def SizeHelper(enemy, chosen):
     '''Helps match enemy size to replacement size'''
-    pass
+    Mini = 1
+    Small = 2
+    Normal = 3
+    Large = 4
+    Massive = 5
+    
+    multDict = {
+        (Massive, Large): 2,
+        (Massive, Normal): 2.5,
+        (Massive, Small): 4,
+        (Massive, Mini): 5,
+        (Large, Normal): 1,
+        (Large, Small): 2,
+        (Large, Mini): 3,
+        (Normal, Small): 1,
+        (Normal, Mini): 1,
+        (Small, Mini): 1
+    }
+    e.EnemySizeMatch(enemy, chosen, ["scale"], multDict, "size", chosen["size"], 2, 255)
     
 def ForcedArts(enemy, ForcedStoryArts:list[ForcedArt]):
     # Fixes boss fights that require the enemy to use an art slot to end the fight 
