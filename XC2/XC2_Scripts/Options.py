@@ -41,8 +41,8 @@ weightsSpinDescription = "Weights ↓"
 
 
 # General
-AccessoriesOption = Option("Accessories", Items, "Randomizes effects of Accessories", [lambda: Accessories.RandomizeAccessoryEnhancements(), lambda: Accessories.SearchAndSetDisplayIDs()], descData=lambda: Accessories.AccessoriesDesc())
-AuxCoresOption = Option("Aux Cores", Items, "Randomizes the effects of Aux Cores", [lambda: AuxCores.RandomizeAuxCoreEnhancements(), lambda: Accessories.SearchAndSetDisplayIDs()])
+AccessoriesOption = Option("Accessories", Items, "Randomizes the effects of Accessories", [lambda: Accessories.RandomizeAccessoryEnhancements(), lambda: Accessories.SearchAndSetDisplayIDs()], descData=lambda: Accessories.AccessoriesDesc(AccessoriesOption.name, "accessory"))
+AuxCoresOption = Option("Aux Cores", Items, "Randomizes the effects of Aux Cores", [lambda: AuxCores.RandomizeAuxCoreEnhancements(), lambda: Accessories.SearchAndSetDisplayIDs()], descData=lambda: Accessories.AccessoriesDesc(AuxCoresOption.name, "aux core"))
 AccessoryShopsOption = Option("Accessory Shops", Items, "Randomizes the contents of Accessory Shops", [lambda: I.RandomizeAccessoryShops()], descData=lambda: I.AccessoryShopDescription())
 PouchItemShopOption = Option("Pouch Item Shops", Items, "Randomizes the contents of Pouch Item Shops", [lambda: I.RandomizePouchItemShops()], descData=lambda: I.PouchItemShopDesc())
 WeaponChipShopOption = Option("Weapon Chip Shops", Items, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: I.RandomizeWeaponChipShops()], descData=lambda: I.WeaponChipDesc())
@@ -72,7 +72,7 @@ QuestRewardsOption_RareBlades = SubOption("Rare Blades", QuestRewardsOption, [la
 # Drivers
 DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()],  prio=First,  preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.DriversDescriptions())
 DriversOption_Nia = SubOption("Guarantee Early Nia", DriversOption, defState = False)
-DriverArtsOption = Option("Driver Arts", Driver, "Randomizes effects of all driver arts", [lambda: (DriverArts.DriverArtRandomizer(), DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], hasSpinBox = True,spinDefault=100, descData=lambda: DriverArts.DriverArtDescription())
+DriverArtsOption = Option("Driver Arts", Driver, "Randomizes the effects of driver arts", [lambda: (DriverArts.DriverArtRandomizer(), DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], hasSpinBox = True,spinDefault=100, descData=lambda: DriverArts.DriverArtDescription())
 spinArts = "%"
 DriverArtsOption_AutoAttacks = SubOption("Auto Attacks", DriverArtsOption, [], defState = False, hasSpinBox=True, spinDesc="% of auto attacks", spinDefault=20)
 DriverArtsOption_SingleReaction = SubOption("Single Reaction", DriverArtsOption, [], hasSpinBox=True, spinDesc=spinArts, spinDefault=20)
@@ -104,7 +104,7 @@ BladeSpecialButtonsOption_B = SubOption("B", BladeSpecialButtonsOption)
 BladeSpecialButtonsOption_X = SubOption("X", BladeSpecialButtonsOption)
 BladeSpecialButtonsOption_Y = SubOption("Y", BladeSpecialButtonsOption)
 BladeSpecialButtonsOption_Mystery = SubOption("?", BladeSpecialButtonsOption)
-BladeSpecialOption = Option("Blade Specials", Blade, "Randomizes each hit of a blade special to have a random effect", [lambda:(BladeSpecials.BladeSpecials())], hasSpinBox = True, spinDefault=10)
+BladeSpecialOption = Option("Blade Specials", Blade, "Randomizes each hit of a blade special to have a random effect", [lambda:(BladeSpecials.BladeSpecials())], hasSpinBox = True, spinDefault=10, spinMax=30)
 BladeSpecialOption_Reaction = SubOption("Reactions", BladeSpecialOption)
 BladeSpecialOption_Enhancement = SubOption("Enhancement", BladeSpecialOption)
 BladeSpecialOption_Debuffs = SubOption("Debuff", BladeSpecialOption)

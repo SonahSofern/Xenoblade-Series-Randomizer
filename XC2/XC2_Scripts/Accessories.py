@@ -45,12 +45,12 @@ def RandomizeAccessoryEnhancements():
         EnhanceFile.truncate()
         json.dump(enhanceFile, EnhanceFile, indent=2, ensure_ascii=False)
         
-def AccessoriesDesc():
+def AccessoriesDesc(name, itemType):
     desc = PopupDescriptions.Description()
-    desc.Header(Options.AccessoriesOption.name)
-    desc.Text("This option randomizes all accessory effects, even to effects that could not be obtained in normal gameplay.")
+    desc.Header(name)
+    desc.Text(f"This option randomizes all {itemType} effects, even to effects that could not be obtained in normal gameplay.")
     desc.Image("accessoryeffects.png", "XC2", 700)
-    desc.Text("This also replaces the first word of accessories to fit their new effect.")
+    desc.Text("This also replaces the first word of the item to fit their new effect.")
     effectDescription:str
     ValidSkills.sort(key=lambda x: x.name) # Alphabetic Sort
     for effect in ValidSkills:

@@ -1,6 +1,6 @@
-import json, random
+import json, random, copy
 from XC2.XC2_Scripts import Arts, DriverArts, Options
-from scripts import Helper
+from scripts import Helper, JSONParser
 
 
 def BladeSpecials():
@@ -26,19 +26,22 @@ def BladeSpecials():
                 if Helper.OddsCheck(odds):
                     DriverArts.Debuffs(art)
 
-        BladeEXSpecials()     
-        artFile.seek(0)
-        artFile.truncate()
-        json.dump(artData, artFile, indent=2, ensure_ascii=False)
+        BladeEXSpecials()   
+        JSONParser.CloseFile(artData, artFile)
     DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_Bl.json", "./XC2/JsonOutputs/common_ms/btl_arts_bl_ms.json", True)
 
 
 def Enhancements(art): 
-    Enhancement = random.choice(Arts.EnhancementGroup)
+    while True:
+        Enhancement = random.choice(Arts.EnhancementGroup)
+        if Enhancement.ids not in [Arts.CritCDDown.ids]:
+            break
+        
     Enh = random.choice(Enhancement.ids)
+        
     for i in range(1,7):
         
-        if art["Enhance1"] == 0: # Ignore specials that dont already have effects
+        if art["Enhance1"] == 0: # Ignore specials that already have effects
             break
         
         art[f"Enhance{i}"] = Enh[i-1]
