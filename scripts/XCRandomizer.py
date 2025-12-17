@@ -215,6 +215,7 @@ def Randomize(GameTitle, root, RandomizeButton, fileEntryVar, bdat_path, permali
         if outputDirVar.get().strip() == "":
             errorMsgObj = PopupDescriptions.Description()
             errorMsgObj.Header("Select an Output Location Before Randomizing")
+            errorMsgObj.Text("This is where the randomizer will output the randomized mod. See the help button for instructions on how to use mods.")
             PopupDescriptions.StyledPopup(f"{GameTitle} {datetime.datetime.now()}", lambda: errorMsgObj, root)
             return
         entrySpot = fileEntryVar

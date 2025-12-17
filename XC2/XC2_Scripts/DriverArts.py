@@ -203,6 +203,7 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False, enhancementK
                 CombinedCaption = ["","","","",""]
                 FirstDescriptionMod = 0
                 LastDescriptionMod = 0
+                
                 # AOE
                 for aoe in AOEGroup:    
                     if art["RangeType"] in aoe.ids:
@@ -273,7 +274,10 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False, enhancementK
 
 
                 if TotalArtDescription == "":
-                    TotalArtDescription = "No Effects"
+                    if art["ArtsType"] == 3: # Healing Arts
+                        TotalArtDescription = f"[System:Color name=green]Heal party[/System:Color]"
+                    else:
+                        TotalArtDescription = "No Effects"
 
                 # Update Descriptions
                 for desc in descData["rows"]:

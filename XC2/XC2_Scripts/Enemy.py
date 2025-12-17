@@ -16,7 +16,6 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
     actKeys = ["FlyHeight", "ActType"]
     ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev', "HpOver"] + paramRev
     aggroKeys = ['Detects', 'SearchRange', 'SearchAngle', 'SearchRadius', 'BatInterval', 'BatArea', 'BatAreaType']
-    isMatchSize = matchSize.GetState()
     isBalanceStats = balanceStats.GetState()
     if isVanillaAggro:
         ignoreKeys.extend(aggroKeys)
@@ -47,7 +46,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                         if Options.BossEnemyOption_Group.GetState():
                             eRando.BalanceFight(oldEn, newEn, GroupFightViolations, EnemyCounts)
 
-                        if isMatchSize:
+                        if matchSize:
                             EnemySizeHelper(oldEn, newEn, eRando)
 
                         # if not isMatchSize and targetGroup == IDs.BossMonsters: # Forces red rings to be gone if you dont scale bosses to avoid softlocks, you cannot hit enemies outside rings and they can spawn weird when big
