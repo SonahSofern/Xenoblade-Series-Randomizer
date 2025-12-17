@@ -146,7 +146,7 @@ UniqueEnemyOption_Stats = SubOption("Balance Stats", UniqueEnemyOption)
 UniqueEnemyOption_Aggro = SubOption("Vanilla Aggro", UniqueEnemyOption)
 UniqueEnemyOption_Size = SubOption("Match Size", UniqueEnemyOption)
 
-BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, True, BossEnemyOption_Size, BossEnemyOption_Stats)], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True, prio=2)
+BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, True, True, BossEnemyOption_Stats)], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True, prio=2)
 BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, spinDefault=2, spinDesc=weightsSpinDescription)
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True, spinDefault=4)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True, spinDefault=10)
@@ -154,7 +154,6 @@ BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=F
 BossEnemyOption_Stats = SubOption("Balance Stats", BossEnemyOption)
 BossEnemyOption_Solo = SubOption("Balance Solo Fights", BossEnemyOption)
 BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
-BossEnemyOption_Size = SubOption("Match Size", BossEnemyOption)
 
 EnemyEnhancementsOption = Option("Enemy Enhancements", Enemies, "Gives enemies a random enhancement", [lambda: EnemyEnhancements.EnemyEnhances()], hasSpinBox = True, spinDefault=30, descData=lambda: EnemyEnhancements.EnemyEnhancementDescriptions())
 EnemyEnhancementsOption_ShowInName = SubOption("Display in Name", EnemyEnhancementsOption)
@@ -211,7 +210,7 @@ FieldItemOption = Option("Field Item Size", Funny, "Randomizes the size and spin
 # Cosmetics
 BladeWeaponCosmeticsOption = Option("Default Weapon Appearance", CosmeticsTab, "Keeps all default weapon models regardless of chips", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["OnlyWpn"], [0], [1])], spinDefault=25)
 TrustLineOption = Option("Blade Trust Lines", CosmeticsTab, "Randomizes blade-driver trust lines in battle (colors, power, etc.)", [lambda: Misc.BeamRandomizer()])
-CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()], prio=51, hasSpinBox = True, spinDefault=10, descData=lambda: Cosmetics.CosmeticsDescription()) # Sub are created by another class
+CosmeticsOption = Option("Character Outfits", CosmeticsTab, "Randomizes Cosmetics on Accessories and Aux Cores", [lambda: Cosmetics.Cosmetics()], prio=51, hasSpinBox = True, spinDefault=10, spinMax=30, descData=lambda: Cosmetics.CosmeticsDescription()) # Sub are created by another class
 for opt in Cosmetics.CosmeticsList: # To gen these since listing them here would be annoying
     opt.CreateSubOptions(CosmeticsOption)
 

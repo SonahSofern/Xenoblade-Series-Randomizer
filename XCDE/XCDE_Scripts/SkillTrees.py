@@ -60,6 +60,7 @@ def SkillRando():
                     
                     if skill["$id"] in invalidSkills:
                         continue
+                    
                     if isEffect:
                         chosen:Skill = random.choice(SkillList)
                         SkillList.remove(chosen)

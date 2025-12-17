@@ -422,7 +422,7 @@ def CreateEnhancements():
     # Enhancement("", 331, 0, 1, M, [], skillIcon=0) # <D450C258>
     # Enhancement("", 332, 0, 1, M, [], skillIcon=0) # <2661B30A>
     # Enhancement("", 333, 0, 1, M, [], [], skillIcon=0) # <78B0628E>
-    Enhancement("Headbutt", 334, 412, 1, Misc, [1], [3], skillIcon=48) # <94556EFC>
+    Enhancement("Headbutt", 334, 412, 1, Misc, [1], [3]) # <94556EFC>
     # Enhancement("", 335, 0, 1, M, [], [], skillIcon=0) # <2F1CE75E>
     # Enhancement("", 336, 0, 1, M, [], skillIcon=0) # <03522C97>
     Enhancement("Cover", 337, 415, 1, Def, [5,10], [30,60], skillIcon=41) # Cover Low HP Allies

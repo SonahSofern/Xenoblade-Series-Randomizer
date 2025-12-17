@@ -11,7 +11,7 @@ def TutorialSkips():
         dupeFlags = []
         for f in tutData["rows"]:
             
-            f["page"] = 1 # Makes the tutorial only 1 page skipping unnesccesary ones
+            f["page"] = 1 # Makes the tutorial only 1 page skipping unnecessary ones
             
             if f["$id"] in UnskippableTutorials:
                 continue
@@ -22,7 +22,7 @@ def TutorialSkips():
                 
             if f["scenario_flag"] in dupeFlags:
                 f["type"] = 0
-                f["proc_type"] = 0 # Set these for fights with tutorials seem to crash wthiout it
+                f["proc_type"] = 0 # Set these for fights with tutorials seem to crash without it
                 f["proc_value1"] = 0
                 f["proc_value2"] = 0
             else:

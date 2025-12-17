@@ -32,8 +32,6 @@ class ArtGroup:
         self.chosenChar = random.choice(charList)
         return self.chosenChar
         
-
-
 # Setting that just shuffles arts
 def RandomizePcArts():
     ShulkActs = ActMatch(1, _SingleAttack=[0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[1,3,2,6,10,13,14])
@@ -70,8 +68,6 @@ def RandomizePcArts():
         
     invalidArtIds = TalentArts + DunbanMonadoArts + ShulkMonadoArts + PonspectorDLCArts + DLCArts + GuestArts
     
-    
-        
     with open("./XCDE/JsonOutputs/bdat_common/pc_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
         if isArts:
@@ -159,14 +155,11 @@ def Mult(art, keys = [], mults = [60,180], rollOnce = False, maxVal = 255):
             if not rollOnce:
                 mult = random.choice(mults)
 
-
-
 def Power(art):
-    
     Mult(art,["grow_powl", "grow_powh"], rollOnce=True)
     
     Mult(art,["rate1", "rate2"], [70,180], True, 4095)
-    
+
     Mult(art,["st_time"], [70,140], maxVal=2047)
     Mult(art,["grow_st_time"])
     

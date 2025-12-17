@@ -6,7 +6,7 @@ Game = "" # Used to tell what option goes to what games tab
 DescriptionIndicator = "🛈"
 
 class Option():
-    def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", _commands:list = [], defState = False, prio = 50,hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False, stepSpeed = 0.05):
+    def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", _commands:list = [], defState = False, prio = 50, hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False, stepSpeed = 0.05):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
@@ -74,12 +74,14 @@ class Option():
             padx= 0
         self.descObj.grid(row=rowIncrement, column = 1, sticky="w", padx=padx)
         
-        self.checkBoxVal.trace_add("write",  lambda name, index, mode: self.StateUpdate())
+        self.checkBoxVal.trace_add("write", lambda name, index, mode: self.StateUpdate())
         
         # % Boxes
         if self.hasSpinBox:
             self.spinBoxVal = IntVar(value=self.spinDefault)
-            self.spinBoxObj = ttk.Spinbox(optionPanel, from_=self.spinBoxMin, to=self.spinBoxMax, textvariable=self.spinBoxVal, wrap=True, width=self.spinWidth, increment=self.spinIncr, justify="right")
+            self.spinBoxObj = ttk.Spinbox(optionPanel, validate="key", from_=self.spinBoxMin, to=self.spinBoxMax, textvariable=self.spinBoxVal, wrap=True, width=self.spinWidth, increment=self.spinIncr, justify="right")
+            self.spinBoxObj.configure(validatecommand=(self.spinBoxObj.register(validateSpinbox), "%P", self.spinBoxMin, self.spinBoxMax))
+            self.spinBoxObj.bind("<FocusOut>", lambda e, val=self.spinBoxVal: EmptyboxHandler(val))
             self.spinBoxObj.grid(row=rowIncrement, column = 3, padx=(15,0))
             self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w", style="Dark.TLabel")
             self.spinBoxLabel.grid(row=rowIncrement, column = 4, sticky="w", padx=0)
@@ -89,12 +91,14 @@ class Option():
         for sub in self.subOptions:
             rowIncrement += 1
             sub.checkBoxVal = BooleanVar(value=sub.defState)
-            sub.checkBoxVal.trace_add("write",  lambda name, index, mode: self.StateUpdate())
+            sub.checkBoxVal.trace_add("write", lambda name, index, mode: self.StateUpdate())
             sub.checkBox = ttk.Checkbutton(optionPanel, text=sub.name, variable=sub.checkBoxVal, style="DarkSub.TCheckbutton", width=25)
             sub.checkBox.grid(row=rowIncrement, column=0, sticky="sw")
             if sub.hasSpinBox:
                 sub.spinBoxVal = IntVar(value=sub.spinDefault)
-                sub.spinBoxObj = ttk.Spinbox(optionPanel, from_=sub.spinBoxMin, to=sub.spinBoxMax, textvariable=sub.spinBoxVal, wrap=True, width=sub.spinWidth, increment=sub.spinIncr, justify="right")
+                sub.spinBoxObj = ttk.Spinbox(optionPanel, validate="key", from_=sub.spinBoxMin, to=sub.spinBoxMax, textvariable=sub.spinBoxVal, wrap=True, width=sub.spinWidth, increment=sub.spinIncr, justify="right")
+                sub.spinBoxObj.configure(validatecommand=(sub.spinBoxObj.register(validateSpinbox), "%P", sub.spinBoxMin, sub.spinBoxMax))
+                sub.spinBoxObj.bind("<FocusOut>", lambda e, val=sub.spinBoxVal: EmptyboxHandler(val))
                 sub.spinBoxObj.grid(row=rowIncrement, column=1, padx=(20,0), pady=(0,0), sticky="w")
                 sub.spinBoxLabel = ttk.Label(optionPanel, text=sub.spinDesc, style="DarkNoMargin.TLabel")
                 sub.spinBoxLabel.grid(row=rowIncrement, column=1, sticky="w", padx=(80,0))
@@ -140,6 +144,24 @@ class Option():
     def GetState(self):
         return self.checkBoxVal.get()
 
+def EmptyboxHandler(val):
+    '''Because you can delete the entire string in a box if you defocus it while its empty it makes its value 0'''
+    try:
+        val.get() # If we cannot get the value just safely set it to 0
+    except:
+        val.set(0)
+
+def validateSpinbox(input, min, max):
+    if input == "": # Allow deleting the whole thing
+        return True
+    if not input.isdigit():
+        return False
+    input = int(input)
+    if input <= int(max) and input >= int(min):
+        return True
+    return False
+
+
 class SubOption():
     def __init__(self, _name, _parent:Option, _commands = [], defState = True, prio = 0, spinDefault = 0, spinMin = 0, spinMax = 100, spinWidth = 3, spinIncr = 10, hasSpinBox = False, spinPadX = 15, spinDesc = "", preRandoCommands:list = []):
         self.name = _name
@@ -160,7 +182,6 @@ class SubOption():
         self.spinIncr = spinIncr
         self.spinDesc = spinDesc
         _parent.subOptions.append(self)
-
 
     def GetState(self):
         return self.checkBoxVal.get()

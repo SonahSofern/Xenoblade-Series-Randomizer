@@ -3,7 +3,7 @@ from XCDE.XCDE_Scripts import Options
 from scripts import JSONParser, Helper
 from XCDE.XCDE_Scripts.IDs import *
 
-def EnemyScales(): # Try editing the size flag as well since
+def EnemyScales():
     scales = [0.2,0.3,0.5,0.7,0.9,1.1,1.3,1.5,1.7,1.9,2.1]
     odds = Options.EnemyScaleOption.GetSpinbox()
     for file in areaFileListNumbers:

@@ -62,7 +62,7 @@ saveCommands = []
 
 # Some of the oldest code and messy for sure. 
 def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, postCommands = [], preCommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= [], setupHelpDesc = None): 
-    windowPadding = 50
+    windowPadding = 20
     if Onefile.isOneFile:
         fileEntryVar = os.path.join(sys._MEIPASS, Game, 'bdat')
     else:
@@ -195,15 +195,18 @@ def resize_bg(event, root, bg_image, background):
         width, height = event.width, event.height
 
         def resize_and_update(): # Processes the images on another thread because it slows down main thread a lot
-            resized_image = bg_image.resize((width, height))
-            bg_photo = ImageTk.PhotoImage(resized_image)
+            try:
+                resized_image = bg_image.resize((width, height))
+                bg_photo = ImageTk.PhotoImage(resized_image)
 
-            def update_gui(): # Update GUI on main thread because tkinter is not thread safe
-                garbageCollectionStopper.append(bg_photo)
-                background.delete("all")
-                background.create_image(0, 0, image=bg_photo, anchor="nw")
+                def update_gui(): # Update GUI on main thread because tkinter is not thread safe
+                    garbageCollectionStopper.append(bg_photo)
+                    background.delete("all")
+                    background.create_image(0, 0, image=bg_photo, anchor="nw")
 
-            root.after(0, update_gui)
+                root.after(0, update_gui)
+            except:
+                pass
 
         threading.Thread(target=resize_and_update, daemon=True).start()
 

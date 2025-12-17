@@ -50,8 +50,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                         if isMatchSize:
                             EnemySizeHelper(oldEn, newEn, eRando)
 
-                        if not isMatchSize and targetGroup == IDs.BossMonsters: # Forces red rings to be gone if you dont scale bosses to avoid softlocks, you cannot hit enemies outside rings and they can spawn weird when big
-                            RedRingRemoval()
+                        # if not isMatchSize and targetGroup == IDs.BossMonsters: # Forces red rings to be gone if you dont scale bosses to avoid softlocks, you cannot hit enemies outside rings and they can spawn weird when big
+                        #     RedRingRemoval()
 
                         CloneEnemiesDefeatCondition(oldEn, newEn)
 

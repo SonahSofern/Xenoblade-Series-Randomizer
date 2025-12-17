@@ -104,16 +104,16 @@ class ArtShuffleOption():
 # SoulHackerArtOption = ArtShuffleOption(nameHackerArts, IDs.HackerArtIDs)
 
 # HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])
-CostumesOption = Option("Class Costumes", Character, "Randomizes class outfits", [lambda: Costumes.CostumeRando()])
+CostumesOption = Option("Class Costumes", Character, "Randomizes class outfits", [lambda: Costumes.LearnedClassOutfits()])
 # ClassOption = Option("Class", Character, "Randomizes classes", [lambda: Class.TalentRando()])
 # ClassOption_DefaultClasses = SubOption("Default Classes", ClassOption)
 # ClassOption_HeroClasses = SubOption("Hero Classes", ClassOption)
 
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_Tutorials = SubOption("Tutorial Skip", ShortcutsOption, [lambda: Shortcuts.TutorialSkips()])
-FasterLevelsOption = Option("Faster Levels", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XC3/JsonOutputs/btl/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
-FasterApitudeOption = Option("Faster Class Points", QOL, "Increases the rate at which your characters learn classes", [lambda: Quality.ClassAptitude()], hasSpinBox=True, spinDesc = "x Faster", spinDefault=2)
-MoveSpeedOption = Option("Movespeed", QOL, "Colony 4's affinity reward will be instant and a movespeed deed", [lambda: Quality.EarlyMoveSpeed()], hasSpinBox=True, spinDesc = "% Speed", spinMin=1, spinMax=255, spinIncr=10)
+FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XC3/JsonOutputs/btl/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
+FasterApitudeOption = Option("CP Boost", QOL, "Increases the rate at which your characters learn classes", [lambda: Quality.ClassAptitude()], hasSpinBox=True, spinDesc = "x Faster", spinDefault=2)
+MoveSpeedOption = Option("Speed Boost", QOL, "Colony 4's affinity reward will be instant and a movespeed deed", [lambda: Quality.EarlyMoveSpeed()], hasSpinBox=True, spinDesc = "% Speed", spinMin=1, spinMax=255, spinIncr=10)
 # AscendedClassOption = Option("Ascended Classes", QOL, "Classes begin the game being able to reach rank 20 (DOESNT WORK)", [lambda: Quality.AscendedClassEarly()]) # https://xenobladedata.github.io/xb3_200_dlc4/MNU_HeroDictionary.html set the wakeupquest to 120
 EarlyArtsCancelOption = Option("Early Arts Cancel", QOL, "The Art of Flow is given during the introduction", [lambda: Quality.ArtOfFlowEarly()])
 GemCraftingOption = Option("Easy Gem Crafting", QOL, "Reduces the material requirements for gem crafting", [lambda: Gems.EasyGemCrafting()])

@@ -6,12 +6,7 @@ from pathlib import Path
 
 # https://xenobladedata.github.io/xb3_130/SYS_GimmickLocation.html#25513 useful file has enemy xyz
 
-# To fix:         
-# Too many agnus/keves soldier enemies dillutes the pool of interesting enemies         
-
 StaticEnemyData:list[Enemy.EnemyGroup] = []
-
-
 ValidEnemyPopFileNames = ["ma01a_GMK_EnemyPop.json", "ma04a_GMK_EnemyPop.json", "ma07a_GMK_EnemyPop.json", "ma09a_GMK_EnemyPop.json", "ma11a_GMK_EnemyPop.json", "ma14a_GMK_EnemyPop.json", "ma15a_GMK_EnemyPop.json", "ma17a_GMK_EnemyPop.json", "ma22a_GMK_EnemyPop.json", "ma25a_01_GMK_EnemyPop.json", "ma25a_02_GMK_EnemyPop.json", "ma25a_03_GMK_EnemyPop.json", "ma25a_04_GMK_EnemyPop.json", "ma25a_05_GMK_EnemyPop.json", "ma25a_06_GMK_EnemyPop.json", "ma25a_07_GMK_EnemyPop.json", "ma25a_08_GMK_EnemyPop.json", "ma25a_09_GMK_EnemyPop.json", "ma25a_10_GMK_EnemyPop.json", "ma25a_11_GMK_EnemyPop.json", "ma25a_12_GMK_EnemyPop.json", "ma25a_13_GMK_EnemyPop.json", "ma25a_14_GMK_EnemyPop.json", "ma25a_15_GMK_EnemyPop.json", "ma25a_16_GMK_EnemyPop.json", "ma25a_17_GMK_EnemyPop.json", "ma25a_18_GMK_EnemyPop.json", "ma25a_19_GMK_EnemyPop.json", "ma25a_50_GMK_EnemyPop.json", "ma25a_51_GMK_EnemyPop.json", "ma25a_52_GMK_EnemyPop.json", "ma25a_53_GMK_EnemyPop.json", "ma40a_GMK_EnemyPop.json", "ma44a_GMK_EnemyPop.json", "ma45a_GMK_EnemyPop.json", "ma46a_GMK_EnemyPop.json", "ma90a_GMK_EnemyPop.json", "ma90gmk_GMK_EnemyPop.json"]
 
 def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSizeOption:Options.Option, isBossGroupBalancing):
@@ -24,18 +19,19 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     
     foundone =['CatBGM',  '<EE7FFF6D>', '<F36BAFFD>','<0F7768D2>', '<9B3B9099>'] 
     curTesting = []
-    specialFields = ['<B569BFB1>', '<352C263C>', '<BA57B736>',] # These fields being kept fixed a bug where cutscenes couldnt end fights and you would just sit there while the enemy kept aggroing you
     findAggroFlags = [ '<EFCB57EC>', 'IconOffset', 'FlgMoveFloor', '<3828CCE4>', 'AlliesMsg', '<D3F77DFD>', 'FootPrintDetection', 'EffConvert', '<7C2FCBE1>', '<97002EDA>', 'VoGroup', 'NotEconomy', '<91DD0357>', 'AttenuationScale', '<C4D88A2B>', '<7D3D5DCB>', '<C313305B>', 'Score', '<4BAF120D>', '<7EFBB833>', '<277C5BBD>', '<65449302>', '<192EEE69>', '<F36D8D42>', '<76A4C736>']
-    # passedTest = []
-    # testKeys = ['Model','ActType','ChestHeight', 'FlyHeight', 'SwimHeight', 'Motion', 'MotRetarget', 'Effect', 'EffStandLoop','RscType', 'ChrID',  'RscPreset', 'StoryRsc', 'SwitchModel1', 'Visible1', 'SwitchModel2', 'Visible2', 'SwitchModel3', 'Visible3', 'SwitchModel4', 'Visible4', 'Color',  'Radius', 'EffScale',  'AngleFront', 'OffsetID', 'IK', '<DB52EFEF>', '<20C8E401>', 'BoneCenter', 'BoneCamera', 'WpnType', 'WeaponA', 'WeaponB', 'WeaponC', 'MountOut', 'MountIN', 'Sound', 'VoiceID', 'VoiceRand', 'VoiceDead', 'UniqueDirection', 'modelDirection', 'Event', '<5E3BE057>', '<28DE8575>', 'MoveBtlRate', 'CollisionRadius', '<8281BB89>', 'EffectType', '<B604D9F3>', '<3B53F852>', '<E4EB3419>', '<9693E350>', '<693A2A44>', '<6D9580C6>']
+    # passedTest = ['Model','ActType', 'FlyHeight', 'SwimHeight', 'Motion', 'MotRetarget','RscType', 'ChrID', 'IK', 'Sound', 'VoiceID', 'VoiceRand', 'VoiceDead', 'UniqueDirection', 'modelDirection', 'Event', '<5E3BE057>', '<28DE8575>', 'MoveBtlRate', 'CollisionRadius', '<8281BB89>', 'EffectType', '<B604D9F3>', '<3B53F852>', '<E4EB3419>', '<9693E350>', '<693A2A44>', '<6D9580C6>', 'WeaponA', 'WeaponB', 'WeaponC', 'RscPreset', 'StoryRsc', 'ChestHeight', , 'SwitchModel1', 'Visible1', 'SwitchModel2', 'Visible2', 'SwitchModel3', 'Visible3', 'SwitchModel4', 'Visible4', 'Color',  'EffStandLoop','Effect', ]
+    # testNonArrangeKeys = ['Radius', 'EffScale',  'AngleFront', 'OffsetID',  '<DB52EFEF>', '<20C8E401>', 'BoneCenter', 'BoneCamera']
+    testNonArrangeKeys = []
     EnemyCounts = GetEnemyCounts()
     GroupFightViolations = GetGroupFightViolations()
     Aggro = ["<AB4BA3D5>", "<1104E9C5>", "<B5C5F3B3>", "<EC666A80>", "<64251F47>", "<3B6DFBC4>"]
+    specialFields = ['<B569BFB1>', '<352C263C>', '<BA57B736>'] # These fields being kept fixed a bug where cutscenes couldnt end fights and you would just sit there while the enemy kept aggroing you
     RetryBattleLandmark = "<9A220E4D>"
     PostBattleConqueredPopup = "CatMain" # Currently not using it has weird effects fights take a long time to end after enemy goes down without it happens eithery way with UMs so something is wrong with UMS
-    ignoreKeys = ["$id", "ID", PostBattleConqueredPopup, "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "FlgFixed", "IdMove", "SpBattle", "FlgNoVanish", "FlgSpDead" , "KillEffType", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"] + Aggro
+    ignoreKeys = ["$id", "ID", specialFields, PostBattleConqueredPopup, "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "FlgFixed", "IdMove", "SpBattle", "FlgNoVanish", "FlgSpDead" , "KillEffType", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"] + Aggro
     HPLimits = ["LowerLimitHP", "<60FB333A>"]
-    retainNonArrangeKeys = ["ActType", 'FlyHeight', 'SwimHeight'] + HPLimits
+    retainNonArrangeKeys = ['FlyHeight', 'SwimHeight'] + HPLimits
     with open("XC3/JsonOutputs/fld/FLD_EnemyData.json", 'r+', encoding='utf-8') as eneFile:
         with open("XC3/JsonOutputs/btl/BTL_Enemy.json", 'r+', encoding='utf-8') as paramFile:
             with open("XC3/JsonOutputs/btl/BTL_EnRsc.json", 'r+', encoding='utf-8') as rscFile:
@@ -59,8 +55,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                             continue
 
                         newEn = eRando.CreateRandomEnemy(StaticEnemyData)
-
-                        eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys) # Flying Enemies and some enemies in Erythia will still fall despite act type fix (After testing I found this is because of the motion file in rsc. So there is no fix unless we change every enemies motion as they are being placed)
+                        
+                        eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys + testNonArrangeKeys + ActTypeFix(eRando, en, newEn) + MotionFix()) # Flying Enemies and some enemies in Erythia will still fall despite act type fix (After testing I found this is because of the motion file in rsc. So there is no fix unless we change every enemies motion as they are being placed)
                         
                         ForcedArtsManager(en, newEn, eRando)
                             
@@ -89,6 +85,24 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                     JSONParser.CloseFile(rscData, rscFile)
                     JSONParser.CloseFile(artData, artFile)
 
+def ActTypeFix(eRando:Enemy.EnemyRandomizer, oldEn, newEn):
+    '''In XC3 its not enough to just swap act types to the old enemys spot. There are behaviors under the hood that rely on act type. For example a normally flying enemy will start soaring 50 feet above you if put as a grounded enemy. Normally flying enemy locations will just fall even if set to act type 2 and chest height fly height etc are kept. Same with some locations in the Erythia Sea. Instead we will conditionally swap act types. The behavior that lets normally swimming enemies survive on land is fixed by this method and the reverse.
+    Returns the key to act type if we should keep it
+    '''
+    oldRSC = eRando.FindRSC(oldEn)
+    newRSC = eRando.FindRSC(newEn)    
+    Swim = 1
+    
+    if newRSC["ActType"] == Swim or oldRSC["ActType"] == Swim:
+        return ["ActType"]
+    
+    return []
+    
+def MotionFix():
+    '''Certain enemies will not work in new environments without motion of the old enemy. Flying enemies over cliffs will still fall and enemies deep in erythia waters will fall under the waves. This keeps the original motion.'''
+    return ["Motion"]
+    
+    
 def FilterNPCEnemies(enNPC):
     if enNPC == "<00000000>":
         return False

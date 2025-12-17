@@ -2,7 +2,9 @@
 A randomizer project for the Xenoblade Chronicles series on the switch.
 
 # General Description
-This program randomizes the BDAT files in The Xenoblade Chronicles Games. This allows us to randomize almost anything in the games. Enemies, Equipment, Characters, Stats, etc.  Xenoblade 1 DE, Xenoblade 2, and Xenoblade 3 have been published as of now.
+This program randomizes the BDAT files in The Xenoblade Chronicles Games. This allows us to randomize almost anything in the games. Enemies, Equipment, Characters, Stats, etc.  
+
+Xenoblade 1 DE, Xenoblade 2, and Xenoblade 3 have been published as of now.
 
 # Contact Us
 Discord: https://discord.gg/h93yqZHG8z
@@ -24,7 +26,7 @@ Download the EXE from the releases page.
 Guides can be found in the randomizer program for each game by clicking the Help button.
 
 # Build From Source
-#### This is only if you want to change the rando program itself.
+#### This is only if you want to change the randomizer program itself.
 Download the source code from your desired location.  
 You will be able to run the program by running the Randomizer.py file in the root.  
 There are some required packages to download, use the error messages to get what packages you need.  

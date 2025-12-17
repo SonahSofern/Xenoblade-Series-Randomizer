@@ -26,7 +26,7 @@ class Description:
             imagePath = f"./{game}/Images/{imagePath}"
         self.data.append(PopImage(imagePath, size, padx, pady, anchor, side=side))
     
-    def Header(self, text:str, padx=2, pady=(0,5), anchor="w"):
+    def Header(self, text:str, padx=0, pady=(0,5), anchor="w"):
             self.data.append(PopHeader(text, padx, pady, anchor))
             
 

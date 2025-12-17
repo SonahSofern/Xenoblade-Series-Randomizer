@@ -53,10 +53,6 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds):
     CopiedStatsWithRatios = ["str", "eth"] # Not doing agility or hp , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
     CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
     
-    # 5001 doesnt have enemies
-    enAreaFiles = areaFileListNumbers.copy()
-    enAreaFiles.remove("5001")
-    
     with open(f"./XCDE/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
         eneData = json.load(eneFile)    
         
