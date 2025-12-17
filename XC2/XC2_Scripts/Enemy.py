@@ -14,7 +14,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
     paramRev = ["ParamRev"] # https://www.xenoserieswiki.org/wiki/Module:XC2_enemy_stat
     retainNonArrangeKeys = ["FldDmgType"]
     actKeys = ["FlyHeight", "ActType"]
-    ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev', "HpOver"] + paramRev
+    ignoreKeys = ['$id', 'Lv', 'LvRand', 'ExpRev', 'GoldRev', 'WPRev', 'SPRev', 'BGMID', 'DropTableID', 'DropTableID2', 'DropTableID3', 'PreciousID', 'Score', 'ECube', 'Flag', 'DrawWait', 'ZoneID', 'TimeSet', 'WeatherSet', 'DriverLev', "HpOver"] + paramRev
     aggroKeys = ['Detects', 'SearchRange', 'SearchAngle', 'SearchRadius', 'BatInterval', 'BatArea', 'BatAreaType']
     isBalanceStats = balanceStats.GetState()
     if isVanillaAggro:
