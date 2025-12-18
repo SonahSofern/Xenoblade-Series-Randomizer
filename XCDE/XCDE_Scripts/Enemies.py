@@ -9,9 +9,6 @@ class Enemy:
     def __init__(self, enelistArea, enelist):
         self.eneListArea = enelistArea
         self.enelist = enelist
-    
-    def copy(self):
-        return self
         
 class ForcedArt:
     def __init__(self, id, artSlot, artId):
@@ -38,7 +35,7 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size)
             eRando = e.EnemyRandomizer(IDs.NormalEnemies, IDs.UniqueEnemies, IDs.BossEnemies, IDs.SuperbossEnemies, enemyOption, normal, unique, boss, superboss, "", "", eneData, eneData, eneData, eneData)
             
             if StaticEnemyData == []:
-                StaticEnemyData = eRando.GenEnemyData(XCDEGenEnemyDataAdapter(eneData, IDs.areaEnemyFileList), lambda e: getEnID(e))
+                StaticEnemyData = eRando.GenEnemyData(XCDEGenEnemyDataAdapter(eneData, IDs.areaEnemyFileList, eRando), lambda e: getEnID(e))
                 
             for file in IDs.areaEnemyFileList:
                 with open(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
@@ -65,7 +62,9 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size)
                         eRando.CopyKeys(oldEn, newEn.eneListArea, CopiedStats, isGoodKeys=True)
                         # enelist keys
                         for ene in eneData["rows"]:
-                            eRando.CopyKeys(ene, newEn.enelist, CopiedInfo, isGoodKeys=True)
+                            if ene["$id"] == oldEn["$id"]:
+                                eRando.CopyKeys(ene, newEn.enelist, CopiedInfo, isGoodKeys=True)
+                                break
                         # stat keys
                         if oldEn["$id"] not in GroupEnemies + EarlyFights:
                             for key in CopiedStatsWithRatios:
@@ -77,10 +76,11 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size)
                         FamilyChange(oldEn, newEn, [2], [67, 68, 68, 66, 69, 70, 71, 134, 138, 138, 138, 139, 138, 138, 138, 139, 269, 269, 266, 265, 267, 267, 268, 327, 326, 328, 326, 338, 339, 341, 340, 340, 416, 417, 422, 421, 421, 420, 534, 636, 636, 636, 637, 638, 906, 905, 907, 908, 909, 909, 1039, 1101, 1103, 1103, 1102, 1102]) # Face mechon before monado shackles released
                         ForcedArts(oldEn, ForcedStoryArts)
                         DevicesAttachedToEgilFix(oldEn)
-                        
-                    JSONParser.CloseFile(eneVoiceData, eneVoiceFile)
                     JSONParser.CloseFile(eneAreaData, eneAreaFile)  
             JSONParser.CloseFile(eneData, eneFile)
+            JSONParser.CloseFile(eneVoiceData, eneVoiceFile)
+            for group in StaticEnemyData:
+                group.RefreshCurrentGroup()
             RingRemoval()
             NoCooldownFix()
 
@@ -134,7 +134,7 @@ def SizeHelper(enemy, chosen):
         (Normal, Mini): 1,
         (Small, Mini): 1
     }
-    e.EnemySizeMatch(enemy, chosen, ["scale"], multDict, "size", chosen["size"], 2, 255)
+    e.EnemySizeMatch(enemy, chosen, ["scale"], multDict, "size", chosen["scale"], 2, 255)
     
 def ForcedArts(enemy, ForcedStoryArts:list[ForcedArt]):
     # Fixes boss fights that require the enemy to use an art slot to end the fight 
@@ -153,16 +153,17 @@ def VoicedEnemiesFix(eneVoiceData, chosen:Enemy, enemy):
             break    
     eneVoiceData["rows"].extend(newVoiceList)
 
-def XCDEGenEnemyDataAdapter(eneData, enAreaFiles):
+def XCDEGenEnemyDataAdapter(eneData, enAreaFiles, eRando:e.EnemyRandomizer):
     '''Helps format enemies into workable data for the genenemydata function'''
     tempData = []
     for file in enAreaFiles:
         with open(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
             eneAreaData = json.load(eneAreaFile)
             for enemy in eneAreaData["rows"]:
+                if eRando.isBadEnemy(enemy["$id"]): # These are filtered later this is just for speedup
+                    continue
                 for en in eneData["rows"]:
-                    enID = en["$id"]
-                    if enID == enemy["$id"]:
+                    if en["$id"] == enemy["$id"]:
                         enemyCopy = copy.copy(enemy)
                         enCopy = copy.copy(en)
                         newEnemy = Enemy(enemyCopy, enCopy)

@@ -86,7 +86,7 @@ class EnemyRandomizer():
             elif enID in self.SuperbossIDs:
                 group = self.SuperbossGroup
             
-            group.AddNewData(en.copy())
+            group.AddNewData(copy.deepcopy(en))
         return [self.NormalGroup, self.UniqueGroup, self.BossGroup, self.SuperbossGroup]
     
     def GenWeights(self):
