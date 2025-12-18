@@ -1,7 +1,6 @@
 import json, random, copy, math
 from XCDE.XCDE_Scripts import IDs
 from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e
-from XCDE.XCDE_Scripts.IDs import *
 
 StaticEnemyData:list[Helper.RandomGroup] = []
 instantDeathSpikeThreshold = 60
@@ -10,6 +9,9 @@ class Enemy:
     def __init__(self, enelistArea, enelist):
         self.eneListArea = enelistArea
         self.enelist = enelist
+    
+    def copy(self):
+        return self
         
 class ForcedArt:
     def __init__(self, id, artSlot, artId):
@@ -17,10 +19,8 @@ class ForcedArt:
         self.artSlot = artSlot
         self.artId = artId
         
-enAreaFiles = areaFileListNumbers.copy()
-enAreaFiles.remove("5001")
-
 def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size):
+    global StaticEnemyData
     GroupEnemies = [135,136,137,138,139]
     EarlyFights = [32, 33, 1501, 1502, 1503] # The first few fights can be really tough before cheering allies or any arts lets leave their stats vanilla
     selfDestructArts = [1005,1015,1017,1009, 1007, 1013, 396, 406, 915, 408, 812, 814, 400, 923, 1053, 398, 899, 404, 410, 1127, 820] + Helper.InclRange(900, 929)
@@ -38,10 +38,9 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size)
             eRando = e.EnemyRandomizer(IDs.NormalEnemies, IDs.UniqueEnemies, IDs.BossEnemies, IDs.SuperbossEnemies, enemyOption, normal, unique, boss, superboss, "", "", eneData, eneData, eneData, eneData)
             
             if StaticEnemyData == []:
-                StaticEnemyData = eRando.GenEnemyData(XCDEGenEnemyDataHelper(eneData, enAreaFiles))
+                StaticEnemyData = eRando.GenEnemyData(XCDEGenEnemyDataAdapter(eneData, IDs.areaEnemyFileList), lambda e: getEnID(e))
                 
-            # Randomly Assign Enemies
-            for file in enAreaFiles:
+            for file in IDs.areaEnemyFileList:
                 with open(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
                     eneAreaData = json.load(eneAreaFile)
                     
@@ -66,7 +65,7 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size)
                         eRando.CopyKeys(oldEn, newEn.eneListArea, CopiedStats, isGoodKeys=True)
                         # enelist keys
                         for ene in eneData["rows"]:
-                            eRando.CopyKeys(ene, newEn, CopiedInfo, isGoodKeys=True)
+                            eRando.CopyKeys(ene, newEn.enelist, CopiedInfo, isGoodKeys=True)
                         # stat keys
                         if oldEn["$id"] not in GroupEnemies + EarlyFights:
                             for key in CopiedStatsWithRatios:
@@ -84,6 +83,7 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size)
             JSONParser.CloseFile(eneData, eneFile)
             RingRemoval()
             NoCooldownFix()
+
 
 def GetForcedArts():
     '''(EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use an art that ends the fight they actually need an art to use'''
@@ -153,7 +153,7 @@ def VoicedEnemiesFix(eneVoiceData, chosen:Enemy, enemy):
             break    
     eneVoiceData["rows"].extend(newVoiceList)
 
-def XCDEGenEnemyDataHelper(eneData, enAreaFiles):
+def XCDEGenEnemyDataAdapter(eneData, enAreaFiles):
     '''Helps format enemies into workable data for the genenemydata function'''
     tempData = []
     for file in enAreaFiles:
@@ -171,6 +171,10 @@ def XCDEGenEnemyDataHelper(eneData, enAreaFiles):
                         break   
             JSONParser.CloseFile(eneAreaData, eneAreaFile)
     return tempData
+         
+def getEnID(e:Enemy):
+    '''Helper for genenemydata'''
+    return e.eneListArea["$id"]
 
 # There is no fix for topple spikes always being active just nerfed all spikes instead
 def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
@@ -332,7 +336,7 @@ def EnemyDesc(categoryName):
 # Finds locked enemies
 def GetLockedEnemies():
     enemiesInLock = []
-    for file in enAreaFiles:
+    for file in IDs.areaEnemyFileList:
         try:
             with open(f"./XCDE/JsonOutputs/bdat_ma{file}/FieldLock{file}.json", 'r+', encoding='utf-8') as eneLockFile:
                 with open(f"./XCDE/JsonOutputs/bdat_ma{file}/poplist{file}.json", 'r+', encoding='utf-8') as enePopFile:

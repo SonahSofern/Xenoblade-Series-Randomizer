@@ -21,12 +21,14 @@ Tabs = {
     Funny: 'Funny',
 }
 
+weightsSpinDescription = "Weights ↓"
+
 # General
 ShopOption = Option("Shops", General, "Randomizes the contents of shops", [lambda: Items.Shops()], descData=lambda: Items.ShopsDesc()) # Key item rando settings would be fun 
 TradeOption = Option("Trading", General, "Randomizes the offers of NPC trades", [lambda: Items.TradeOptions()], descData=lambda: Items.TradeOptionsDesc())
 
 CollectableOptions = Option("Collectable Orbs", General, "Randomizes collectables on the field into the chosen options", [lambda: Items.Collectables()], descData=lambda: Items.CollectDesc())
-CollectableOptions_Collectables = SubOption("Collectables", CollectableOptions, hasSpinBox=True, spinDefault=30, spinDesc="Weights ↓")
+CollectableOptions_Collectables = SubOption("Collectables", CollectableOptions, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
 CollectableOptions_Materials = SubOption("Materials", CollectableOptions, hasSpinBox=True, spinDefault=30)
 CollectableOptions_Armor = SubOption("Armor", CollectableOptions, hasSpinBox=True, spinDefault=5)
 CollectableOptions_Weapons = SubOption("Weapons", CollectableOptions, hasSpinBox=True, spinDefault=5)
@@ -34,7 +36,7 @@ CollectableOptions_Gems = SubOption("Gems", CollectableOptions, hasSpinBox=True,
 CollectableOptions_ArtBooks = SubOption("Art Books", CollectableOptions, hasSpinBox=True, spinDefault=1)
 
 CollectapediaOptions = Option("Collectapedia Rewards", General, "Randomizes rewards from the collectapedia into the chosen options", [lambda: Items.Collectapedia()], descData=lambda: Items.CollectapediaDesc())
-CollectapediaOptions_Collectables = SubOption("Collectables", CollectapediaOptions, hasSpinBox=True, spinDesc="Weights ↓", spinDefault=1)
+CollectapediaOptions_Collectables = SubOption("Collectables", CollectapediaOptions, hasSpinBox=True, spinDesc=weightsSpinDescription, spinDefault=1)
 CollectapediaOptions_Materials = SubOption("Materials", CollectapediaOptions, hasSpinBox=True, spinDefault=1)
 CollectapediaOptions_Armor = SubOption("Armor", CollectapediaOptions, hasSpinBox=True, spinDefault=15)
 CollectapediaOptions_Weapons = SubOption("Weapons", CollectapediaOptions, hasSpinBox=True, spinDefault=15)
@@ -42,7 +44,7 @@ CollectapediaOptions_Gems = SubOption("Gems", CollectapediaOptions, hasSpinBox=T
 CollectapediaOptions_ArtBooks = SubOption("Art Books", CollectapediaOptions, hasSpinBox=True, spinDefault=10)
 
 EnemyDropOption = Option("Enemy Drops", General, "Randomizes loot from enemies", [lambda: Items.EnemyDrops()], descData=lambda: Items.EnemyDropsDesc())
-EnemyDropOptions_Collectables = SubOption("Collectables", EnemyDropOption, hasSpinBox=True, spinDesc="Weights ↓", spinDefault=2)
+EnemyDropOptions_Collectables = SubOption("Collectables", EnemyDropOption, hasSpinBox=True, spinDesc=weightsSpinDescription, spinDefault=2)
 EnemyDropOptions_Materials = SubOption("Materials", EnemyDropOption, hasSpinBox=True, spinDefault=10)
 EnemyDropOptions_Armor = SubOption("Armor", EnemyDropOption, hasSpinBox=True, spinDefault=5)
 EnemyDropOptions_Weapons = SubOption("Weapons", EnemyDropOption, hasSpinBox=True, spinDefault=5)
@@ -50,7 +52,7 @@ EnemyDropOptions_Gems = SubOption("Gems", EnemyDropOption, hasSpinBox=True, spin
 EnemyDropOptions_ArtBooks = SubOption("Art Books", EnemyDropOption, hasSpinBox=True, spinDefault=1)
 
 GiantsChestOption = Option("Giants Chests", General, "Randomizes the contents of Giants Chests into the chosen options", [lambda: Items.GiantsChests()], descData=lambda: Items.GiantsChestsDesc())
-GiantsChestOptions_Collectables = SubOption("Collectables", GiantsChestOption, hasSpinBox=True, spinDesc="Weights ↓", defState=False, spinDefault=0)
+GiantsChestOptions_Collectables = SubOption("Collectables", GiantsChestOption, hasSpinBox=True, spinDesc=weightsSpinDescription, defState=False, spinDefault=0)
 GiantsChestOptions_Materials = SubOption("Materials", GiantsChestOption, hasSpinBox=True, spinDefault=1)
 GiantsChestOptions_Armor = SubOption("Armor", GiantsChestOption, hasSpinBox=True, spinDefault=10)
 GiantsChestOptions_Weapons = SubOption("Weapons", GiantsChestOption, hasSpinBox=True, spinDefault=10)
@@ -58,7 +60,7 @@ GiantsChestOptions_Gems = SubOption("Gems", GiantsChestOption, hasSpinBox=True, 
 GiantsChestOptions_ArtBooks = SubOption("Art Books", GiantsChestOption, hasSpinBox=True, spinDefault=10)
 
 QuestRewardsOption = Option("Quest Rewards", General, "Randomizes the rewards from quests into the chosen options", [lambda: Items.QuestRewards()], descData=lambda: Items.QuestRewardsDesc())
-QuestRewardsOptions_Collectables = SubOption("Collectables", QuestRewardsOption, hasSpinBox=True, spinDesc="Weights ↓", spinDefault=1)
+QuestRewardsOptions_Collectables = SubOption("Collectables", QuestRewardsOption, hasSpinBox=True, spinDesc=weightsSpinDescription, spinDefault=1)
 QuestRewardsOptions_Materials = SubOption("Materials", QuestRewardsOption, hasSpinBox=True, spinDefault=5)
 QuestRewardsOptions_Armor = SubOption("Armor", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
 QuestRewardsOptions_Weapons = SubOption("Weapons", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
@@ -67,31 +69,29 @@ QuestRewardsOptions_ArtBooks = SubOption("Art Books", QuestRewardsOption, hasSpi
 
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/FLD_valpoplist.html#1 Red orbs found here not sure what to do with them yet
 
-weightsSpinDescription = "Weights ↓"
 
 # Enemy
-NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: EnemiesScript.Enemies(IDs.NormalEnemies, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_Size.GetState())], descData=lambda: EnemiesScript.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
-NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True, spinDefault=1, spinDesc=weightsSpinDescription)
-NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption, hasSpinBox=True, spinDefault=1)
-NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption, hasSpinBox=True, spinDefault=1)
+NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: EnemiesScript.Enemies(IDs.NormalEnemies, NormalEnemyOption, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption_Size.GetState())], descData=lambda: EnemiesScript.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
+NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True, spinDefault=15, spinDesc=weightsSpinDescription)
+NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption, hasSpinBox=True, spinDefault=3)
+NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption, hasSpinBox=True, spinDefault=3)
 NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, defState=False, hasSpinBox=True, spinDefault=1)
 NormalEnemyOption_Size = SubOption("Match Size", NormalEnemyOption)
 
-UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: EnemiesScript.Enemies(IDs.UniqueEnemies + IDs.SuperbossEnemies, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption, UniqueEnemyOption_Size.GetState())], descData=lambda: EnemiesScript.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True)
+UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: EnemiesScript.Enemies(IDs.UniqueEnemies + IDs.SuperbossEnemies, UniqueEnemyOption, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption_Size.GetState())], descData=lambda: EnemiesScript.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True)
 UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption, hasSpinBox=True, spinDefault=1, spinDesc=weightsSpinDescription)
-UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption, hasSpinBox=True, spinDefault=1)
-UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=1)
-UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=1)
+UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption, hasSpinBox=True, spinDefault=15)
+UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=5)
+UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=2)
 UniqueEnemyOption_Size = SubOption("Match Size", UniqueEnemyOption)
 
-BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: EnemiesScript.Enemies(IDs.BossEnemies, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, True), lambda: EnemiesScript.EgilArenaFix()], descData=lambda: EnemiesScript.EnemyDesc(BossEnemyOption.name), hasSpinBox = True)
-BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, spinDefault=1, spinDesc=weightsSpinDescription)
-BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True, spinDefault=1)
-BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True, spinDefault=1)
+BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: EnemiesScript.Enemies(IDs.BossEnemies, BossEnemyOption, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, True), lambda: EnemiesScript.EgilArenaFix()], descData=lambda: EnemiesScript.EnemyDesc(BossEnemyOption.name), hasSpinBox = True)
+BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, spinDefault=2, spinDesc=weightsSpinDescription)
+BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True, spinDefault=4)
+BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True, spinDefault=10)
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=False, hasSpinBox=True, spinDefault=1)
 
 # FinalBossOption = Option("Final Boss", Enemies, "Forces the final boss to be one of your choices")
-
 
 # Character
 GemOption = Option("Gems", Character, "Randomizes the effects of Gems and Crystals", [lambda: Gems.Gems()], descData=lambda: Gems.GemDescriptions())
