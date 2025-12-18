@@ -1,17 +1,16 @@
-import json, random, copy, traceback, math
-from XCDE.XCDE_Scripts import Options, IDs
+import json, random, copy, math
+from XCDE.XCDE_Scripts import IDs
 from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e
 from XCDE.XCDE_Scripts.IDs import *
+
+StaticEnemyData:list[Helper.RandomGroup] = []
+instantDeathSpikeThreshold = 60
 
 class Enemy:
     def __init__(self, enelistArea, enelist):
         self.eneListArea = enelistArea
         self.enelist = enelist
-
-StaticEnemyData:list[Helper.RandomGroup] = []
-
-instantDeathSpikeThreshold = 60
-
+        
 class ForcedArt:
     def __init__(self, id, artSlot, artId):
         self.id = id
@@ -36,10 +35,10 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size)
             eneData = json.load(eneFile)    
             eneVoiceData = json.load(eneVoiceFile)
             
-            eRando = e.EnemyRandomizer(IDs.NormalEnemies, IDs.UniqueEnemies, IDs.BossEnemies, IDs.SuperbossEnemies, enemyOption, normal, unique, boss, superboss, "", "", eneData, eneData, eneData, eneData,  )
+            eRando = e.EnemyRandomizer(IDs.NormalEnemies, IDs.UniqueEnemies, IDs.BossEnemies, IDs.SuperbossEnemies, enemyOption, normal, unique, boss, superboss, "", "", eneData, eneData, eneData, eneData)
             
             if StaticEnemyData == []:
-                CreateEnemyDataClass(eneData, enAreaFiles) # Run custom get here
+                StaticEnemyData = eRando.GenEnemyData(XCDEGenEnemyDataHelper(eneData, enAreaFiles))
                 
             # Randomly Assign Enemies
             for file in enAreaFiles:
@@ -50,7 +49,7 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size)
                         if eRando.FilterEnemies(oldEn, monsterTypeList):
                             continue
                         
-                        newEn:Enemy =  eRando.CreateRandomEnemy(StaticEnemyData) # Choose an enemy                
+                        newEn:Enemy = eRando.CreateRandomEnemy(StaticEnemyData) # Choose an enemy                
 
                         ChallengingFinalBoss()
                         VoicedEnemiesFix(eneVoiceData, newEn, oldEn)                                
@@ -63,22 +62,20 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size)
                         replacementTotalStats = TotalStats(newEn.eneListArea, CopiedStatsWithRatios)
                         originalTotalStats = TotalStats(oldEn, CopiedStatsWithRatios)
                         
+                        # area keys
                         eRando.CopyKeys(oldEn, newEn.eneListArea, CopiedStats, isGoodKeys=True)
-                        
+                        # enelist keys
+                        for ene in eneData["rows"]:
+                            eRando.CopyKeys(ene, newEn, CopiedInfo, isGoodKeys=True)
+                        # stat keys
                         if oldEn["$id"] not in GroupEnemies + EarlyFights:
                             for key in CopiedStatsWithRatios:
                                 oldEn[key] = KeepStatRatio(oldEn, newEn.eneListArea, key, replacementTotalStats, originalTotalStats)
                             
-                        for ene in eneData["rows"]:
-                            if (ene["$id"] == oldEn["$id"]):
-                                for key in CopiedInfo:
-                                    ene[key] = newEn.enelist[key]
-                                break
-                        
                         TelethiaEarly(oldEn, newEn)
                         BossSelfDestructs(oldEn, selfDestructArts)
-                        MechonEarly(oldEn, newEn, [1,2,4], [30, 31, 32,33, 63, 64, 65]) # Mechon before enchant
-                        MechonEarly(oldEn, newEn, [2], [67, 68, 68, 66, 69, 70, 71, 134, 138, 138, 138, 139, 138, 138, 138, 139, 269, 269, 266, 265, 267, 267, 268, 327, 326, 328, 326, 338, 339, 341, 340, 340, 416, 417, 422, 421, 421, 420, 534, 636, 636, 636, 637, 638, 906, 905, 907, 908, 909, 909, 1039, 1101, 1103, 1103, 1102, 1102]) # Face mechon before monado shackles released
+                        FamilyChange(oldEn, newEn, [1,2,4], [30, 31, 32,33, 63, 64, 65]) # Mechon before enchant
+                        FamilyChange(oldEn, newEn, [2], [67, 68, 68, 66, 69, 70, 71, 134, 138, 138, 138, 139, 138, 138, 138, 139, 269, 269, 266, 265, 267, 267, 268, 327, 326, 328, 326, 338, 339, 341, 340, 340, 416, 417, 422, 421, 421, 420, 534, 636, 636, 636, 637, 638, 906, 905, 907, 908, 909, 909, 1039, 1101, 1103, 1103, 1102, 1102]) # Face mechon before monado shackles released
                         ForcedArts(oldEn, ForcedStoryArts)
                         DevicesAttachedToEgilFix(oldEn)
                         
@@ -156,24 +153,24 @@ def VoicedEnemiesFix(eneVoiceData, chosen:Enemy, enemy):
             break    
     eneVoiceData["rows"].extend(newVoiceList)
 
-# Create our list of enemies from all the area files and Combine the data into the class
-def CreateEnemyDataClass(eneData, enAreaFiles):
+def XCDEGenEnemyDataHelper(eneData, enAreaFiles):
+    '''Helps format enemies into workable data for the genenemydata function'''
+    tempData = []
     for file in enAreaFiles:
         with open(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
             eneAreaData = json.load(eneAreaFile)
             for enemy in eneAreaData["rows"]:
-                # if enemy["$id"] not in ChosenEnemyIds: # Ignore non chosen enemies
-                #     continue
                 for en in eneData["rows"]:
                     enID = en["$id"]
                     if enID == enemy["$id"]:
                         enemyCopy = copy.copy(enemy)
                         enCopy = copy.copy(en)
                         newEnemy = Enemy(enemyCopy, enCopy)
-                        StaticEnemyData.append(newEnemy)
+                        tempData.append(newEnemy)
                         # PrintEnemy(newEnemy)
                         break   
             JSONParser.CloseFile(eneAreaData, eneAreaFile)
+    return tempData
 
 # There is no fix for topple spikes always being active just nerfed all spikes instead
 def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
@@ -224,7 +221,7 @@ def TelethiaEarly(enemy, chosen:Enemy):
             if enemy[f"arts{i}"] == 666:
                 enemy[f"arts{i}"] = 0 # Remove soul read if we get an early telethia
 
-def MechonEarly(enemy, chosen, BadFamily = [], BadSpots = [], replacementFamily = 3):
+def FamilyChange(enemy, chosen, BadFamily = [], BadSpots = [], replacementFamily = 3):
     if (enemy["$id"] in BadSpots) and (chosen.eneListArea["family"] in BadFamily):# 4 Seems to share a lot of enemies that are aquatic, but mumkhar is family 4 and we dont want him early so it cuts a few enemies off that we mightve wanted otherwise oh well
         enemy["family"] = replacementFamily
 

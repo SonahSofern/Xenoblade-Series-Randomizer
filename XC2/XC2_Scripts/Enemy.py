@@ -31,7 +31,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                     eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, artData, permanentBandaids=[lambda: AeshmaCoreHPNerf(paramData), lambda: GortOgreUppercutRemoval(paramData)])
 
                     if StaticEnemyData == []:
-                        StaticEnemyData = eRando.GenEnemyData()
+                        StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
 
                     for oldEn in eRando.arrangeData["rows"]:
                         if eRando.FilterEnemies(oldEn, targetGroup):

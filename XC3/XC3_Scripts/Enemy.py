@@ -45,7 +45,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                     eRando = Enemy.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "Resource", "IdBattleEnemy", eneData, paramData, rscData, artData)
         
                     if firstRun:
-                        StaticEnemyData = eRando.GenEnemyData()
+                        StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
 
                     for en in eneData["rows"]:
                         if eRando.FilterEnemies(en, targetGroup):
@@ -56,7 +56,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
 
                         newEn = eRando.CreateRandomEnemy(StaticEnemyData)
                         
-                        eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys + testNonArrangeKeys + ActTypeFix(eRando, en, newEn) + MotionFix()) # Flying Enemies and some enemies in Erythia will still fall despite act type fix (After testing I found this is because of the motion file in rsc. So there is no fix unless we change every enemies motion as they are being placed)
+                        eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys + testNonArrangeKeys + ActTypeFix(eRando, en, newEn)) # Flying Enemies and some enemies in Erythia will still fall despite act type fix (After testing I found this is because of the motion file in rsc. So there is no fix unless we change every enemies motion as they are being placed)
                         
                         ForcedArtsManager(en, newEn, eRando)
                             
@@ -102,8 +102,8 @@ def MotionFix():
     '''Certain enemies will not work in new environments without motion of the old enemy. Flying enemies over cliffs will still fall and enemies deep in erythia waters will fall under the waves. This keeps the original motion.'''
     return ["Motion"]
     
-    
 def FilterNPCEnemies(enNPC):
+    '''NPCs are also considered enemies in some cases so for now we will not randomize them'''
     if enNPC == "<00000000>":
         return False
     else:

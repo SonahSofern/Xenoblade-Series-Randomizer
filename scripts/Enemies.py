@@ -65,18 +65,18 @@ class EnemyRandomizer():
         self.permanentBandaids = permanentBandaids
         self.weights = self.GenWeights()
   
-    def isBadEnemy(self, en):
-        if en["$id"] not in self.NormalIDs + self.UniqueIDs + self.BossIDs + self.SuperbossIDs:
+    def isBadEnemy(self, enID):
+        if enID not in self.NormalIDs + self.UniqueIDs + self.BossIDs + self.SuperbossIDs:
             return True
         
-    def GenEnemyData(self):
+    def GenEnemyData(self, enGroup):
         for aid in self.permanentBandaids:
             aid()
         '''Creates the data in a nested list if it does not already exist, this is only to be copied from never altered'''
-        for en in self.arrangeData["rows"]:
-            if self.isBadEnemy(en):
-                continue
+        for en in enGroup:
             enID = en["$id"]
+            if self.isBadEnemy(enID):
+                continue
             if enID in self.NormalIDs:
                 group = self.NormalGroup
             elif enID in self.UniqueIDs:
@@ -252,7 +252,7 @@ class EnemyRandomizer():
             return True
         if not Helper.OddsCheck(self.isEnemies.GetSpinbox()):
             return True
-        if self.isBadEnemy(en):
+        if self.isBadEnemy(en["$id"]):
             return True
 
     def CopyKeys(self, en, newEn, keys = [], isGoodKeys = False):
