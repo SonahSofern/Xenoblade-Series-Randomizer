@@ -214,7 +214,7 @@ def TheTunneler(filepaths: list[str], rowvalues: list[int], inputheaders: list[s
         tempholder = ExtendListtoLength([], len(rowvalues), "False")
     
     return tempholder2
-    
+     
 class RandomGroup():
     def __init__(self):
         self.originalGroup = []
@@ -234,9 +234,9 @@ class RandomGroup():
     
     def SelectRandomMember(self):
         '''Selects a random member from current group and removes it from that group'''
-        en = random.choice(self.currentGroup)
-        self.RemoveMember(en)
-        return copy.deepcopy(en)
+        mem = random.choice(self.currentGroup)
+        self.RemoveMember(mem)
+        return copy.deepcopy(mem)
     
     def FilterMember(self, target):
         if target in self.originalGroup:

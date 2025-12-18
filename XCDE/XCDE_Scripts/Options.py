@@ -67,26 +67,28 @@ QuestRewardsOptions_ArtBooks = SubOption("Art Books", QuestRewardsOption, hasSpi
 
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/FLD_valpoplist.html#1 Red orbs found here not sure what to do with them yet
 
+weightsSpinDescription = "Weights ↓"
+
 # Enemy
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: EnemiesScript.Enemies(IDs.NormalEnemies, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_Size.GetState())], descData=lambda: EnemiesScript.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
-NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption)
-NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption)
-NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption)
-NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, defState=False)
+NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True, spinDefault=1, spinDesc=weightsSpinDescription)
+NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption, hasSpinBox=True, spinDefault=1)
+NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption, hasSpinBox=True, spinDefault=1)
+NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, defState=False, hasSpinBox=True, spinDefault=1)
 NormalEnemyOption_Size = SubOption("Match Size", NormalEnemyOption)
 
 UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: EnemiesScript.Enemies(IDs.UniqueEnemies + IDs.SuperbossEnemies, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption, UniqueEnemyOption_Size.GetState())], descData=lambda: EnemiesScript.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True)
-UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption)
-UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption)
-UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption)
-UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption)
+UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption, hasSpinBox=True, spinDefault=1, spinDesc=weightsSpinDescription)
+UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption, hasSpinBox=True, spinDefault=1)
+UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=1)
+UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=1)
 UniqueEnemyOption_Size = SubOption("Match Size", UniqueEnemyOption)
 
 BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: EnemiesScript.Enemies(IDs.BossEnemies, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, True), lambda: EnemiesScript.EgilArenaFix()], descData=lambda: EnemiesScript.EnemyDesc(BossEnemyOption.name), hasSpinBox = True)
-BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption)
-BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption)
-BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption)
-BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=False)
+BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, spinDefault=1, spinDesc=weightsSpinDescription)
+BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True, spinDefault=1)
+BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True, spinDefault=1)
+BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=False, hasSpinBox=True, spinDefault=1)
 
 # FinalBossOption = Option("Final Boss", Enemies, "Forces the final boss to be one of your choices")
 

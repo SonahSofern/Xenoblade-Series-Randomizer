@@ -1,24 +1,6 @@
 import json, random, copy, traceback, math
 from scripts import Helper, JSONParser
 
-class EnemyGroup():
-    def __init__(self):
-        self.originalGroup = []
-        self.currentGroup = []
-    
-    def RefreshCurrentGroup(self):
-        self.currentGroup = copy.deepcopy(self.originalGroup)
-    
-    def SelectRandomMember(self):
-        en = random.choice(self.currentGroup)
-        self.RemoveMember(en)
-        return copy.deepcopy(en)
-        
-    def RemoveMember(self, en):
-        self.currentGroup.remove(en)
-        if self.currentGroup == []:
-            self.RefreshCurrentGroup()
-
 class ParamModification:
     def __init__(self, fieldNames:list[str], C=0.5, K=0.5, isReciprocal=False):
         self.fieldNames = fieldNames
@@ -51,21 +33,6 @@ class Violation:
         self.artMods = artMods
         self.lvDiff = lvDiff
 
-    # def ResolveLevelDiff(self, enemy): # Not using because level gap changes XP rewards
-    #     if self.lvDiff == 0:
-    #         return
-
-    #     if self.lvDiff < 0:  # If we are losing levels only let them lose up to half their original level
-    #         mult = 0.6
-    #     else:
-    #         mult = 1.25
-    #     levelCap = max(int(enemy["Lv"] * mult), 1)
-    #     newLv = max(enemy["Lv"] + self.lvDiff, levelCap)
-    #     #print(f"Resolved violation from level {enemy["Lv"]} to level: {newLv} for enemyID={enemy["$id"]}")
-
-    #     enemy["Lv"] = newLv
-        
-        
 class EnemyRandomizer():
     def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, artData, scaleKey = "Scale", permanentBandaids = [], duringRandomizationBandaids = []):
         # Enemy Groups
@@ -91,12 +58,13 @@ class EnemyRandomizer():
         self.rscData = rscData
         self.artData = artData
         
-        self.NormalGroup = EnemyGroup()
-        self.UniqueGroup = EnemyGroup()
-        self.BossGroup = EnemyGroup()
-        self.SuperbossGroup = EnemyGroup()
+        self.NormalGroup = Helper.RandomGroup()
+        self.UniqueGroup = Helper.RandomGroup()
+        self.BossGroup = Helper.RandomGroup()
+        self.SuperbossGroup = Helper.RandomGroup()
         
         self.permanentBandaids = permanentBandaids
+        self.weights = self.GenWeights()
   
     def isBadEnemy(self, en):
         if en["$id"] not in self.NormalIDs + self.UniqueIDs + self.BossIDs + self.SuperbossIDs:
@@ -317,9 +285,9 @@ class EnemyRandomizer():
                 keyVals.append((key, FlagHandler(key, oldRSC)))
         self.ChangeStats([newEn], keyVals)
     
-    def CreateRandomEnemy(self, StaticEnemyData:list[EnemyGroup]):
+    def CreateRandomEnemy(self, StaticEnemyData:list[Helper.RandomGroup]):
         '''Returns a random enemy using weights from the groups generated'''
-        newEn = random.choices(StaticEnemyData, self.GenWeights())[0].SelectRandomMember()
+        newEn = random.choices(StaticEnemyData, self.weights)[0].SelectRandomMember()
         return newEn
        
     def ChangeStats(self, targetEn = [], keyVal = []):
@@ -383,8 +351,7 @@ class EnemyRandomizer():
         
         return newArtID
 
-
-def EnemySizeMatch(oldEn, newEn, keysList, multDict, scaleKey = "ChrSize", defScale = 100, minScale = 10, maxScale = 1000): # Makes big enemies in boss fights smaller
+def EnemySizeMatch(oldEn, newEn, keysList, multDict, scaleKey = "ChrSize", defScale = 100, minScale = 10, maxScale = 1000): 
     '''Enemies that are replaced will have that enemy attempt to match the size of the original'''
     newSize = newEn[scaleKey]
     oldSize = oldEn[scaleKey]
@@ -401,3 +368,22 @@ def EnemySizeMatch(oldEn, newEn, keysList, multDict, scaleKey = "ChrSize", defSc
     
     for key in keysList:
         newEn[key] = min(max(int(defScale * newMult), minScale), maxScale) 
+        
+        
+        
+
+# def ResolveLevelDiff(self, enemy): # Not using because level gap changes XP rewards
+#     if self.lvDiff == 0:
+#         return
+
+#     if self.lvDiff < 0:  # If we are losing levels only let them lose up to half their original level
+#         mult = 0.6
+#     else:
+#         mult = 1.25
+#     levelCap = max(int(enemy["Lv"] * mult), 1)
+#     newLv = max(enemy["Lv"] + self.lvDiff, levelCap)
+#     #print(f"Resolved violation from level {enemy["Lv"]} to level: {newLv} for enemyID={enemy["$id"]}")
+
+#     enemy["Lv"] = newLv
+    
+    
