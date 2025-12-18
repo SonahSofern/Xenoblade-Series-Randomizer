@@ -8,7 +8,7 @@ class Enemy:
         self.eneListArea = enelistArea
         self.enelist = enelist
 
-OriginalEnemyData = []
+StaticEnemyData:list[Helper.RandomGroup] = []
 
 instantDeathSpikeThreshold = 60
 
@@ -17,10 +17,79 @@ class ForcedArt:
         self.id = id
         self.artSlot = artSlot
         self.artId = artId
+        
 enAreaFiles = areaFileListNumbers.copy()
 enAreaFiles.remove("5001")
 
-def Enemies(monsterTypeList, normal, unique, boss, superboss, odds, size):
+def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size):
+    GroupEnemies = [135,136,137,138,139]
+    EarlyFights = [32, 33, 1501, 1502, 1503] # The first few fights can be really tough before cheering allies or any arts lets leave their stats vanilla
+    selfDestructArts = [1005,1015,1017,1009, 1007, 1013, 396, 406, 915, 408, 812, 814, 400, 923, 1053, 398, 899, 404, 410, 1127, 820] + Helper.InclRange(900, 929)
+    ForcedStoryArts = GetForcedArts()
+    # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame",  "avoid", "spike_dmg", "spike_state_val"
+    CopiedStats = ["move_speed", "size", "scale", "family", "elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "delay", "hit_range_near", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_state", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
+    CopiedStatsWithRatios = ["str", "eth"] # Not doing agility or hp , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
+    CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
+    
+    with open(f"./XCDE/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
+        with open(f"./XCDE/JsonOutputs/bdat_common/VoEnemy.json", 'r+', encoding='utf-8') as eneVoiceFile:
+            eneData = json.load(eneFile)    
+            eneVoiceData = json.load(eneVoiceFile)
+            
+            eRando = e.EnemyRandomizer(IDs.NormalEnemies, IDs.UniqueEnemies, IDs.BossEnemies, IDs.SuperbossEnemies, enemyOption, normal, unique, boss, superboss, "", "", eneData, eneData, eneData, eneData,  )
+            
+            if StaticEnemyData == []:
+                CreateEnemyDataClass(eneData, enAreaFiles) # Run custom get here
+                
+            # Randomly Assign Enemies
+            for file in enAreaFiles:
+                with open(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
+                    eneAreaData = json.load(eneAreaFile)
+                    
+                    for oldEn in eneAreaData["rows"]:   
+                        if eRando.FilterEnemies(oldEn, monsterTypeList):
+                            continue
+                        
+                        newEn:Enemy =  eRando.CreateRandomEnemy(StaticEnemyData) # Choose an enemy                
+
+                        ChallengingFinalBoss()
+                        VoicedEnemiesFix(eneVoiceData, newEn, oldEn)                                
+                        SpikeBalancer(oldEn, newEn.eneListArea)
+                        
+                        if size:
+                            SizeHelper(oldEn, newEn.eneListArea)
+                        
+                        # Copy stats with ratios to original stats
+                        replacementTotalStats = TotalStats(newEn.eneListArea, CopiedStatsWithRatios)
+                        originalTotalStats = TotalStats(oldEn, CopiedStatsWithRatios)
+                        
+                        eRando.CopyKeys(oldEn, newEn.eneListArea, CopiedStats, isGoodKeys=True)
+                        
+                        if oldEn["$id"] not in GroupEnemies + EarlyFights:
+                            for key in CopiedStatsWithRatios:
+                                oldEn[key] = KeepStatRatio(oldEn, newEn.eneListArea, key, replacementTotalStats, originalTotalStats)
+                            
+                        for ene in eneData["rows"]:
+                            if (ene["$id"] == oldEn["$id"]):
+                                for key in CopiedInfo:
+                                    ene[key] = newEn.enelist[key]
+                                break
+                        
+                        TelethiaEarly(oldEn, newEn)
+                        BossSelfDestructs(oldEn, selfDestructArts)
+                        MechonEarly(oldEn, newEn, [1,2,4], [30, 31, 32,33, 63, 64, 65]) # Mechon before enchant
+                        MechonEarly(oldEn, newEn, [2], [67, 68, 68, 66, 69, 70, 71, 134, 138, 138, 138, 139, 138, 138, 138, 139, 269, 269, 266, 265, 267, 267, 268, 327, 326, 328, 326, 338, 339, 341, 340, 340, 416, 417, 422, 421, 421, 420, 534, 636, 636, 636, 637, 638, 906, 905, 907, 908, 909, 909, 1039, 1101, 1103, 1103, 1102, 1102]) # Face mechon before monado shackles released
+                        ForcedArts(oldEn, ForcedStoryArts)
+                        DevicesAttachedToEgilFix(oldEn)
+                        
+                    JSONParser.CloseFile(eneVoiceData, eneVoiceFile)
+                    JSONParser.CloseFile(eneAreaData, eneAreaFile)  
+            JSONParser.CloseFile(eneData, eneFile)
+            RingRemoval()
+            NoCooldownFix()
+
+def GetForcedArts():
+    '''(EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use an art that ends the fight they actually need an art to use'''
     MetalFace = ForcedArt(61, 2, 565)
     MysteriousFace = ForcedArt(268,5,611)
     GoldFace = ForcedArt(1622, 1, 740)
@@ -31,117 +100,23 @@ def Enemies(monsterTypeList, normal, unique, boss, superboss, odds, size):
     SurenyTelethia = ForcedArt(2601, 1, 870)
     # EnergyDevice = ForcedArt(2506, 1, 848) # Not using since the enemies have removed their limits anyway to account for UM who cant be instakilled
     # EnergyDeviceTwo = ForcedArt(2506, 2, 848)
-    GroupEnemies = [135,136,137,138,139]
-    selfDestructArts = [1005,1015,1017,1009, 1007, 1013, 396, 406, 915, 408, 812, 814, 400, 923, 1053, 398, 899, 404, 410, 1127, 820] + Helper.InclRange(900, 929)
-    ForcedStoryArts = [MetalFace, MysteriousFace, GoldFace, DiscipleDickson, Yaldabaoth, YaldabaothTwo, SurenyTelethia, YaldabaothThree] # (EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use the ultimate art that ends the fight they actually need an art to use
-    isNormal = normal.GetState()
-    isUnique = unique.GetState()
-    isBoss = boss.GetState()
-    isSuper = superboss.GetState()
-    odds = odds.GetSpinbox()
-    ChosenEnemyIds = []
-    if isNormal:
-        ChosenEnemyIds.extend(NormalEnemies)
-    if isUnique:
-        ChosenEnemyIds.extend(UniqueEnemies)
-    if isBoss:
-        ChosenEnemyIds.extend(BossEnemies)
-    if isSuper:
-        ChosenEnemyIds.extend(SuperbossEnemies)
-    # "run_speed" Do NOT include run speed it lags the game to 1 fps "detects", "assist", "search_range", "search_angle", "frame",  "avoid", "spike_dmg", "spike_state_val"
-    CopiedStats = ["move_speed", "size", "scale", "family", "elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "delay", "hit_range_near", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_state", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
-    CopiedStatsWithRatios = ["str", "eth"] # Not doing agility or hp , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
-    CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
-    
-    with open(f"./XCDE/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
-        eneData = json.load(eneFile)    
-        
-        if OriginalEnemyData == []:
-            CreateEnemyDataClass(eneData, enAreaFiles)
-            
-        filteredEnemyData = OriginalEnemyData.copy() 
-        
-        # Filter the list so we randomly choose from the enem types we want
-        filteredEnemyData = [en for en in filteredEnemyData if en.enelist["$id"] in ChosenEnemyIds]
-        
-        filteredEnemyDataCopy = filteredEnemyData.copy() # Used to repopulate the list after removing
-        
-        # Randomly Assign Enemies
-        for file in enAreaFiles:
-            with open(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
-                with open(f"./XCDE/JsonOutputs/bdat_common/VoEnemy.json", 'r+', encoding='utf-8') as eneVoiceFile:
-                    eneVoiceData = json.load(eneVoiceFile)
-                    eneAreaData = json.load(eneAreaFile)
-                    
-                    for enemy in eneAreaData["rows"]:   
+    return [MetalFace, MysteriousFace, GoldFace, DiscipleDickson, Yaldabaoth, YaldabaothTwo, SurenyTelethia, YaldabaothThree] 
 
-                        if not Helper.OddsCheck(odds):
-                            continue
-                        
-                        if enemy["$id"] not in monsterTypeList: # Only want to replace enemies chosen from our groups
-                            continue
-                                                    
-                        chosen:Enemy = random.choice(filteredEnemyData) # Choose an enemy                
-
-                        # if Options.FinalBossOption.GetState() and enemy["$id"] in []: # Choose a valid final boss option
-                            
-                        VoicedEnemiesFix(eneVoiceData, chosen, enemy)                                
-                        SpikeBalancer(enemy, chosen.eneListArea)
-                        if size:
-                            SizeHelper(enemy, chosen.eneListArea)
-                        
-                        # Copy stats with ratios to original stats
-                        replacementTotalStats = TotalStats(chosen.eneListArea, CopiedStatsWithRatios)
-                        originalTotalStats = TotalStats(enemy, CopiedStatsWithRatios)
-                        
-                        # Copy chosen stats over
-                        for key in CopiedStats: 
-                            if enemy["$id"] in LockEnemyFights and key == "scale": # need to check if the enemy is a boss enemy (enclosed arena, if the size gets randomized, it causes issues sometimes)
-                                continue
-                            enemy[key] = chosen.eneListArea[key]
-                        
-                        if (not FirstFights(enemy)) and (enemy["$id"] not in GroupEnemies):
-                            for key in CopiedStatsWithRatios:
-                                enemy[key] = KeepStatRatio(enemy, chosen.eneListArea, key, replacementTotalStats, originalTotalStats)
-                            
-                        for ene in eneData["rows"]:
-                            if (ene["$id"] == enemy["$id"]):
-                                for key in CopiedInfo:
-                                    ene[key] = chosen.enelist[key]
-                                break
-                        
-                        TelethiaEarly(enemy, chosen)
-                        BossSelfDestructs(enemy, selfDestructArts)
-                        MechonEarly(enemy, chosen, [1,2,4], [30, 31, 32,33, 63, 64, 65]) # Mechon before enchant
-                        MechonEarly(enemy, chosen, [2], [67, 68, 68, 66, 69, 70, 71, 134, 138, 138, 138, 139, 138, 138, 138, 139, 269, 269, 266, 265, 267, 267, 268, 327, 326, 328, 326, 338, 339, 341, 340, 340, 416, 417, 422, 421, 421, 420, 534, 636, 636, 636, 637, 638, 906, 905, 907, 908, 909, 909, 1039, 1101, 1103, 1103, 1102, 1102]) # Face mechon before monado shackles released
-                        ForcedArts(enemy, ForcedStoryArts)
-                        DevicesAttachedToEgilFix(enemy)
-                        
-                        # Allows no dupes if possible if we dont have enough choices it reshuffles the original pool
-                        filteredEnemyData.remove(chosen)   
-                        if filteredEnemyData == []: # repopulate it if the group is empty
-                                filteredEnemyData = filteredEnemyDataCopy.copy()
-
-                    JSONParser.CloseFile(eneVoiceData, eneVoiceFile)
-                    JSONParser.CloseFile(eneAreaData, eneAreaFile)  
-        JSONParser.CloseFile(eneData, eneFile)
-        RingRemoval()
-        NoCooldownFix()
-
-FinalBossOptions = {
-    "Zanza" : [2407,2408,2411],
-    "Magestic Mordred": [2227],
-    "Despotic Arsene": [548],
-    "Avalanche Abaasy": [1448],
-    "Blizzard Belgazas": [1449],
-    "Final Marcus": [1438],
-    "Ancient Daedala": [1733],
-    "Immovable Gonzales": [284],
-    "Territorial Rotbart": [282]
-}
 def ChallengingFinalBoss():
-    pass
-
+    '''To make the final fight interesting we can force some enemies'''
+    FinalBossOptions = {
+        "Zanza" : [2407,2408,2411],
+        "Magestic Mordred": [2227],
+        "Despotic Arsene": [548],
+        "Avalanche Abaasy": [1448],
+        "Blizzard Belgazas": [1449],
+        "Final Marcus": [1438],
+        "Ancient Daedala": [1733],
+        "Immovable Gonzales": [284],
+        "Territorial Rotbart": [282]
+    }
+    # if Options.FinalBossOption.GetState() and enemy["$id"] in []: # Choose a valid final boss option
+    
 def SizeHelper(enemy, chosen):
     '''Helps match enemy size to replacement size'''
     Mini = 1
@@ -169,17 +144,8 @@ def ForcedArts(enemy, ForcedStoryArts:list[ForcedArt]):
     for id in ForcedStoryArts:
         if id.id == enemy["$id"]:
             enemy[f"arts{id.artSlot}"] = id.artId  # Change it to their art
-
-def HighActIDFix():
-    with open(f"./XCDE/JsonOutputs/bdat_common/ene_arts.json", 'r+', encoding='utf-8') as artFile:
-        artData = json.load(artFile)
-        for art in artData["rows"]:
-            if art["$id"] == 846:
-                art["act_idx"] = 0
-                break
-        JSONParser.CloseFile(artData, artFile)
     
-def VoicedEnemiesFix(eneVoiceData, chosen, enemy):
+def VoicedEnemiesFix(eneVoiceData, chosen:Enemy, enemy):
     newVoiceList = []
     for voiceID in eneVoiceData["rows"]:
         if chosen.enelist["$id"] == voiceID["enemy"]: # If the chosen enemy has a voice
@@ -204,7 +170,7 @@ def CreateEnemyDataClass(eneData, enAreaFiles):
                         enemyCopy = copy.copy(enemy)
                         enCopy = copy.copy(en)
                         newEnemy = Enemy(enemyCopy, enCopy)
-                        OriginalEnemyData.append(newEnemy)
+                        StaticEnemyData.append(newEnemy)
                         # PrintEnemy(newEnemy)
                         break   
             JSONParser.CloseFile(eneAreaData, eneAreaFile)
@@ -258,14 +224,6 @@ def TelethiaEarly(enemy, chosen:Enemy):
             if enemy[f"arts{i}"] == 666:
                 enemy[f"arts{i}"] = 0 # Remove soul read if we get an early telethia
 
-# The first few fights can be really tough before cheering allies or any arts lets leave their stats vanilla
-def FirstFights(enemy):
-    EarlyFights = [32, 33, 1501, 1502, 1503]
-    if enemy["$id"] in EarlyFights:
-        return True
-    else:
-        return False
-
 def MechonEarly(enemy, chosen, BadFamily = [], BadSpots = [], replacementFamily = 3):
     if (enemy["$id"] in BadSpots) and (chosen.eneListArea["family"] in BadFamily):# 4 Seems to share a lot of enemies that are aquatic, but mumkhar is family 4 and we dont want him early so it cuts a few enemies off that we mightve wanted otherwise oh well
         enemy["family"] = replacementFamily
@@ -285,16 +243,17 @@ def KeepStatRatio(enemy, chosen, key, replacementTotal, originalTotal):
 
 # Used for starting fight had some weird thing with the enemies
 def RingRemoval():
-    RemoveLocks = [2]
+    RemoveLocksFightIDs = [2]
     with open(f"./XCDE/JsonOutputs/bdat_ma1401/FieldLock1401.json", 'r+', encoding='utf-8') as lockFile:
         lockData = json.load(lockFile)
         for lock in lockData["rows"]:
-            if lock["$id"] in RemoveLocks:
+            if lock["$id"] in RemoveLocksFightIDs:
                 lock["popID1"] = 0
                 lock["popID2"] = 0
         JSONParser.CloseFile(lockData, lockFile)
 
 def NoCooldownFix():
+    '''Some enemies have no cooldown on arts for some reason, they will spam it and destroy you without this, it must have something to do with the enemy AI'''
     Cooldowns = [10,15,20,25,30]
     with open(f"./XCDE/JsonOutputs/bdat_common/ene_arts.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
@@ -309,7 +268,6 @@ def NoCooldownFix():
 def DevicesAttachedToEgilFix(enemy):
     if enemy["$id"] == 2506: # Remove the limit on these because unique monsters cannot be inflicted with instant death like their art wants to do
         enemy["limit"] = 0
-
 
 def EgilArenaFix():
     with open(f"./XCDE/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:

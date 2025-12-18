@@ -1,5 +1,5 @@
-import json, random, copy, traceback, math
-from scripts import Helper, JSONParser
+import random, copy, math
+from scripts import Helper
 
 class ParamModification:
     def __init__(self, fieldNames:list[str], C=0.5, K=0.5, isReciprocal=False):
@@ -34,7 +34,7 @@ class Violation:
         self.lvDiff = lvDiff
 
 class EnemyRandomizer():
-    def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, artData, scaleKey = "Scale", permanentBandaids = [], duringRandomizationBandaids = []):
+    def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, artData, permanentBandaids = []):
         # Enemy Groups
         self.NormalIDs = NormalIDs
         self.UniqueIDs = UniqueIDs
@@ -50,7 +50,6 @@ class EnemyRandomizer():
         
         self.rscKey = rscKey
         self.paramKey = paramKey
-        self.scaleKey = scaleKey
         
         # File Data
         self.paramData = paramData 
@@ -86,9 +85,8 @@ class EnemyRandomizer():
                 group = self.BossGroup
             elif enID in self.SuperbossIDs:
                 group = self.SuperbossGroup
-
-            group.currentGroup.append(en.copy())
-            group.originalGroup.append(en.copy())
+            
+            group.AddNewData(en.copy())
         return [self.NormalGroup, self.UniqueGroup, self.BossGroup, self.SuperbossGroup]
     
     def GenWeights(self):
@@ -257,9 +255,10 @@ class EnemyRandomizer():
         if self.isBadEnemy(en):
             return True
 
-    def CopyKeys(self, en, newEn, ignoreKeys = []):
+    def CopyKeys(self, en, newEn, keys = [], isGoodKeys = False):
+        '''isGoodKeys: Set to true to instead copy the keys provided, false means you ignore the keys provided'''
         for key in en:
-            if key in ignoreKeys:
+            if isGoodKeys != (key in keys):
                 continue
             if key in newEn:
                 en[key] = newEn[key]
