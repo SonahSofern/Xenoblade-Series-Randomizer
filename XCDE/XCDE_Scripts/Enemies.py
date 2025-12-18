@@ -123,13 +123,13 @@ def SizeHelper(enemy, chosen):
     Massive = 5
     
     multDict = {
-        (Massive, Large): 2,
-        (Massive, Normal): 2.5,
-        (Massive, Small): 3,
-        (Massive, Mini): 3.5,
-        (Large, Normal): 1,
-        (Large, Small): 2,
-        (Large, Mini): 2.5,
+        (Massive, Large): 3,
+        (Massive, Normal): 3.5,
+        (Massive, Small): 4,
+        (Massive, Mini): 4.5,
+        (Large, Normal): 2,
+        (Large, Small): 3,
+        (Large, Mini): 3.5,
         (Normal, Small): 1,
         (Normal, Mini): 1,
         (Small, Mini): 1
