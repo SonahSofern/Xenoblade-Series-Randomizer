@@ -125,18 +125,44 @@ def RandomizeSkillEnhancements():
         
 def SlotCostZero(ids): # Used since art cancel gets put here
     for i in [1, 2, 3, 4, 5, 6, 17, 18, 19]:
-        with open(f"./XC2/JsonOutputs/common/BTL_Skill_Dr_Table{i:02}.json", 'r+', encoding='utf-8') as driverFiles:
-            dFile = json.load(driverFiles)
-            for item in dFile["rows"]:
+        with open(f"./XC2/JsonOutputs/common/BTL_Skill_Dr_Table{i:02}.json", 'r+', encoding='utf-8') as skillTreeFile:
+            skillTreeData = json.load(skillTreeFile)
+            for item in skillTreeData["rows"]:
                 if item["$id"] in ids: 
                     item["NeedSp"] = 0
-            driverFiles.seek(0)
-            driverFiles.truncate()
-            json.dump(dFile, driverFiles, indent=2, ensure_ascii=False)
+            JSONParser.CloseFile(skillTreeData, skillTreeFile)
 
-def BladeSkillTreeShortening(): #how do you do, fellow skill tree randomization functions
-    JSONParser.ChangeJSONLine(["common/CHR_Bl.json"],[0],Helper.StartsWith("ArtsAchievement",1,3) + Helper.StartsWith("SkillAchievement",1,3) + Helper.StartsWith("FskillAchivement",1,3) + ["KeyAchievement"], 15, replaceAll=True) # 15 is a trust condition and sets everything to that, so its all on trust with this
-
+def BladeSkillTreeShortening(targetBlades, requirementSetID):
+    trustDict = {
+        2: 100,
+        3: 200,
+        4: 300,
+        5: 400
+    }
+    # Set them all to a certain requirement
+    with open(f"XC2/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:
+        bladeData = json.load(bladeFile)
+        for blade in bladeData["rows"]:
+            if blade["$id"] not in targetBlades:
+                continue
+            for i in range(1,4):
+                if blade[f"FSkill{i}"] == 0:
+                    continue
+                blade[f"ArtsAchievement{i}"] = requirementSetID
+                blade[f"SkillAchievement{i}"] = requirementSetID
+                blade[f"FskillAchivement{i}"] = requirementSetID
+                blade["KeyAchievement"] = requirementSetID
+        JSONParser.CloseFile(bladeData, bladeFile)
+    
+    # Reduce that requirement
+    with open(f"XC2/JsonOutputs/common/FLD_ConditionIdea.json", 'r+', encoding='utf-8') as trustFile:
+        trustData = json.load(trustFile)
+        for trust in trustData["rows"]:
+            trustID = trust["$id"]
+            if trustDict.get(trustID):
+                trust["TrustPoint"] = trustDict[trustID]  
+        JSONParser.CloseFile(trustData, trustFile)
+        
 def Descriptions():
     SkillTreeDesc = PopupDescriptions.Description()
     SkillTreeDesc.Header(Options.DriverSkillTreesOption.name)

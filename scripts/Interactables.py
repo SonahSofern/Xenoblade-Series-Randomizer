@@ -6,7 +6,7 @@ Game = "" # Used to tell what option goes to what games tab
 DescriptionIndicator = "🛈"
 
 class Option():
-    def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", _commands:list = [], defState = False, prio = 50, hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False, stepSpeed = 0.05):
+    def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", commands:list = [], defState = False, prio = 50, hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False, stepSpeed = 0.05):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
@@ -24,7 +24,7 @@ class Option():
         self.name =  _name
         self.tab = _tab
         self.desc = _desc
-        self.commands:list = _commands
+        self.commands:list = commands
         self.preRandoCommands:list = preRandoCommands
         self.hasSpinBox = hasSpinBox
         self.subDefState = defState
@@ -163,11 +163,11 @@ def validateSpinbox(input, min, max):
 
 
 class SubOption():
-    def __init__(self, _name, _parent:Option, _commands = [], defState = True, prio = 0, spinDefault = 0, spinMin = 0, spinMax = 100, spinWidth = 3, spinIncr = 10, hasSpinBox = False, spinPadX = 15, spinDesc = "", preRandoCommands:list = []):
+    def __init__(self, _name, _parent:Option, commands = [], defState = True, prio = 0, spinDefault = 0, spinMin = 0, spinMax = 100, spinWidth = 3, spinIncr = 10, hasSpinBox = False, spinPadX = 15, spinDesc = "", preRandoCommands:list = []):
         self.name = _name
         self.checkBoxVal = BooleanVar
         self.checkBox:ttk.Checkbutton = None
-        self.commands = _commands    
+        self.commands = commands    
         self.defState = defState
         self.prio = prio
         self.parent = _parent

@@ -70,9 +70,9 @@ class EnemyRandomizer():
             return True
         
     def GenEnemyData(self, enGroup, getID = lambda e: e["$id"]):
+        '''Creates the data in a nested list if it does not already exist, this is only to be copied from never altered'''
         for aid in self.permanentBandaids:
             aid()
-        '''Creates the data in a nested list if it does not already exist, this is only to be copied from never altered'''
         for en in enGroup:
             enID = getID(en)
             if self.isBadEnemy(enID):
@@ -85,6 +85,8 @@ class EnemyRandomizer():
                 group = self.BossGroup
             elif enID in self.SuperbossIDs:
                 group = self.SuperbossGroup
+            else:
+                continue
             
             group.AddNewData(copy.deepcopy(en))
         return [self.NormalGroup, self.UniqueGroup, self.BossGroup, self.SuperbossGroup]

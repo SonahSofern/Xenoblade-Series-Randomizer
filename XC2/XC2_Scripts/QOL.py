@@ -63,3 +63,20 @@ def FixIssuesCausedByNGPlusFlag():
     #     EnemyRandoLogic.KeyItemsReAdd()
     # if Options.TreasureChestOption.GetState(): #if treasure chests are randomized loot, we need to force the ladder key in mor ardain to drop, allowing us to unlock the factory
     #     JSONParser.ChangeJSONLine(["common_gmk/ma08a_FLD_TboxPop.json"], [870], ["itm1ID"], 25409)
+
+def CommunityQOL():
+    with open("XC2/JsonOutputs/common/FLD_wildcardData.json", 'r+', encoding='utf-8') as wildFile:
+        wildData = json.load(wildFile)
+        valDict = {
+            76: Options.CommunityMembersOption_LV1,
+            77: Options.CommunityMembersOption_LV2,
+            78: Options.CommunityMembersOption_LV3,
+            79: Options.CommunityMembersOption_LV4,
+            80: Options.CommunityMembersOption_LV5,
+            95: Options.CommunityMembersOption_LVMAX
+        }
+        for wild in wildData["rows"]:
+            wildID = wild["$id"]
+            if valDict.get(wildID):
+                wild["valueU2"] = valDict[wildID].GetSpinbox()
+        JSONParser.CloseFile(wildData, wildFile)
