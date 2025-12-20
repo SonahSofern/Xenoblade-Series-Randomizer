@@ -295,6 +295,7 @@ def EnemyDesc(categoryName):
     myDesc.Header(categoryName)
     myDesc.Text(f"Randomizes the chosen categories of enemies onto {categoryName}.")
     myDesc.Text("There is various logic to prevent bad situations:", anchor="w")
+    myDesc.Tag("Boss enemies are resized to fit their new enviroments", pady=(5,5))
     myDesc.Tag("Enemy stats do not scale with level in this game, so instead it takes the original enemies stat total and distributes it in the replacement enemies stat ratios.\nSo, if an enemy has a high attack stat compared to their other stats, they will still have a high attack stat but balanced with the replacement enemies' stats", pady=(5,5))
     myDesc.Tag("Mechon Enemies have their resistances removed for forced fights before you can damage mechon, toppling is not guaranteed with art randomization so this fix is needed.", pady=(5,5))
     myDesc.Tag("Telethia enemies Soul Reads are disabled for boss fights before monado purge is unlocked.", pady=(5,5))

@@ -6,7 +6,7 @@ StaticEnemyData:list[Helper.RandomGroup] = []
 
 ValidEnemyPopFileNames = ["ma01a_FLD_EnemyPop.json", "ma02a_FLD_EnemyPop.json", "ma04a_FLD_EnemyPop.json", "ma05a_FLD_EnemyPop.json", "ma05c_FLD_EnemyPop.json", "ma07a_FLD_EnemyPop.json", "ma07c_FLD_EnemyPop.json", "ma08a_FLD_EnemyPop.json", "ma08c_FLD_EnemyPop.json", "ma10a_FLD_EnemyPop.json", "ma10c_FLD_EnemyPop.json", "ma11a_FLD_EnemyPop.json", "ma13a_FLD_EnemyPop.json", "ma13c_FLD_EnemyPop.json", "ma15a_FLD_EnemyPop.json", "ma15c_FLD_EnemyPop.json", "ma16a_FLD_EnemyPop.json", "ma17a_FLD_EnemyPop.json", "ma17c_FLD_EnemyPop.json", "ma18a_FLD_EnemyPop.json", "ma18c_FLD_EnemyPop.json", "ma20a_FLD_EnemyPop.json", "ma20c_FLD_EnemyPop.json", "ma21a_FLD_EnemyPop.json", "ma40a_FLD_EnemyPop.json", "ma41a_FLD_EnemyPop.json", "ma42a_FLD_EnemyPop.json"]
                                                                                                                                                                                                                                                                                                           
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isVanillaAggro, matchSize:Interactables.SubOption, balanceStats:Interactables.SubOption):
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isVanillaAggro, matchSize:Interactables.SubOption, balanceStats:Interactables.SubOption, matchPhase = False):
     global StaticEnemyData
     EnemyCounts = GetEnemyCounts()
     GroupFightViolations = GetGroupFightViolations()
@@ -75,11 +75,17 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                         group.RefreshCurrentGroup()
 
                     Bandaids(eneData, isBoss, eRando) # Changes based on ID after the key swap
+                    
+                    if matchPhase:
+                        MatchPhase()
 
                     JSONParser.CloseFile(eRando.arrangeData, eneFile)
                     JSONParser.CloseFile(eRando.paramData, paramFile)
                     JSONParser.CloseFile(eRando.rscData, rscFile)
                     JSONParser.CloseFile(eRando.artData, artFile)
+
+def MatchPhase():
+    '''Matches phase 1 and 2 of enemies to be the same enemy type'''
 
 def RerollTornaBladedEnemies(oldEn, newEn, eRando:e.EnemyRandomizer):
     '''
