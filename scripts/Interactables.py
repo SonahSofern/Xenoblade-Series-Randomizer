@@ -161,7 +161,6 @@ def validateSpinbox(input, min, max):
         return True
     return False
 
-
 class SubOption():
     def __init__(self, _name, _parent:Option, commands = [], defState = True, prio = 0, spinDefault = 0, spinMin = 0, spinMax = 100, spinWidth = 3, spinIncr = 10, hasSpinBox = False, spinPadX = 15, spinDesc = "", preRandoCommands:list = []):
         self.name = _name

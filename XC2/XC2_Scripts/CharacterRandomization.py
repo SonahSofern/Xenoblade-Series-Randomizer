@@ -478,7 +478,7 @@ def ApplyBladeRandomization(blade):
     # 2. Pneuma skills, for purposes of Driver randomization without Blade randomization
     excluded_skills = dict()
 
-    if not Options.RemoveFieldSkillsOption.GetState():
+    if not Options.FieldSkillOption.GetState():
         excluded_skills[1001] = ['FSkill1', 'FSkill2', 'FSkill3', 'FskillAchivement1', 'FskillAchivement2', 'FskillAchivement3']  # Pyra: Fire Mastery, Focus, Cooking
         excluded_skills[1005] = ['FSkill3', 'FskillAchievement3']  # Poppi Alpha: Superstrength
         excluded_skills[1008] = ['FSkill2', 'FskillAchievement2']  # Roc: Miasma Dispersal

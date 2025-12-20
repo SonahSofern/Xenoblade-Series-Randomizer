@@ -2,7 +2,7 @@ import json, random
 from scripts import JSONParser
 from XC2.XC2_Scripts import Options, IDs
 
-def RandomizeFieldSkills(): # Make logic to have all skills in the game
+def RandomizeFieldSkills():
     with open("XC2/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:
         bladeData = json.load(bladeFile)
         
@@ -59,46 +59,51 @@ def RandomizeFieldSkills(): # Make logic to have all skills in the game
                 
         JSONParser.CloseFile(bladeData, bladeFile)
         
-        
-def RemoveFieldSkills(isAllChecks):
-    if isAllChecks:
-        mapGimmickIds = range(1,186)
-        npcPopIds = range(1,50000)     
-        jumpGimiickIds = range(1,45)
-        tBoxIds = range(1,4000)
-        diveIds = range(1,12)
-    else:
-        mapGimmickIds = [
-            4, 5,           # Trees in early Gormott
-            16, 11,          # Vent/Valve in Gormott Titan Battleship
-            36,             # Tardy Gate flood blockade
-            7,              # Ether Miasma
-            55, 57,         # Old Factory ventilation fans
-            111,            # Spider Web
-            113,            # Stele of Judgement
-            37,             # World Tree Skyport
-            129             # The Door
-        ]
-        npcPopIds = [
-            8006,           # Green Barrel
-            5267,           # Pyra's Cooking
-            5268            # Pyra's Cooking
-        ]    
-        jumpGimiickIds = [
-            34, 33, 38,      # Cliffs of Morytha
-            39, 42           # Temperantia wind jump
-        ]        
-        
-        tBoxIds = [] # No required treasure chests
-        
-        diveIds = [] # No required dive spots
-
-    JSONParser.ChangeJSONLine(["common_gmk/FLD_MapGimmick.json"], mapGimmickIds, ["FSID"], 0)
-    JSONParser.ChangeJSONLine(["common_gmk/FLD_JumpGimmick.json"], jumpGimiickIds, ["FSID"], 0)
-    JSONParser.ChangeJSONLine(["common_gmk/FLD_WarpGimmick.json"], diveIds, ["FSID"], 0)
+def RemoveStoryFieldSkills():
+    mapGimmickIds = [
+        4, 5,           # Trees in early Gormott
+        16, 11,          # Vent/Valve in Gormott Titan Battleship
+        36,             # Tardy Gate flood blockade
+        7,              # Ether Miasma
+        55, 57,         # Old Factory ventilation fans
+        111,            # Spider Web
+        113,            # Stele of Judgement
+        37,             # World Tree Skyport
+        129             # The Door
+    ]
+    npcPopIds = [
+        8006,           # Green Barrel
+        5267,           # Pyra's Cooking
+        5268            # Pyra's Cooking
+    ]    
+    jumpGimmickIds = [
+        34, 33, 38,      # Cliffs of Morytha
+        39, 42           # Temperantia wind jump
+    ]        
     
-    JSONParser.ChangeJSONLine(["common/FLD_FieldSkillSetting.json"],[1294,1077],["FieldSkillLevel1", "FieldSkillLevel2"], 0)
-    for i in range(51):
-        JSONParser.ChangeJSONLine([f"common_gmk/ma{i:02}a_FLD_NpcPop.json"], npcPopIds, ["FSID1", "FSID2", "FSID3"], 0)
-        JSONParser.ChangeJSONLine([f"common_gmk/ma{i:02}a_FLD_TboxPop.json"], tBoxIds, ["FSID", "FSID2"], 0)
+    tBoxIds = [] # No required treasure chests
+    
+    diveIds = [] # No required dive spots
+    RemoveFieldSkills(False, mapGimmickIds, jumpGimmickIds, diveIds, npcPopIds, tBoxIds)
 
+def RemoveAllFieldSkills():
+    RemoveFieldSkills(True)
+    
+def RemoveFieldSkills(isAllChecks, mapIDs = [], jumpIDs = [], diveIDs = [], npcPopIDs = [], tboxIDs = []):
+    JSONParser.ChangeJSONLine(["common_gmk/FLD_MapGimmick.json"], mapIDs, ["FSID"], 0, isAllChecks)
+    JSONParser.ChangeJSONLine(["common_gmk/FLD_JumpGimmick.json"], jumpIDs, ["FSID"], 0, isAllChecks)
+    JSONParser.ChangeJSONLine(["common_gmk/FLD_WarpGimmick.json"], diveIDs, ["FSID"], 0, isAllChecks)
+    for i in range(51):
+        JSONParser.ChangeJSONLine([f"common_gmk/ma{i:02}a_FLD_NpcPop.json"], npcPopIDs, ["FSID1", "FSID2", "FSID3"], 0, isAllChecks)
+        JSONParser.ChangeJSONLine([f"common_gmk/ma{i:02}a_FLD_TboxPop.json"], tboxIDs, ["FSID", "FSID2"], 0, isAllChecks)
+    JSONParser.ChangeJSONLine(["common/FLD_FieldSkillSetting.json"], [1294,1077], ["FieldSkillLevel1", "FieldSkillLevel2"], 0) # These arent in gimmick they reduce the requirement to 0 since thats the only place these exist like pyras cooking
+
+def ReduceFieldSkillsLevels():
+    spinAmt = Options.FieldSkillOption_Reduce.GetSpinbox()
+    minLv = 1
+    with open("XC2/JsonOutputs/common/FLD_FieldSkillSetting.json", 'r+', encoding='utf-8') as fSkillFile:
+        fSkillData = json.load(fSkillFile)
+        for fSkill in fSkillData["rows"]:
+            for i in range(1,3):
+                fSkill[f"FieldSkillLevel{i}"] = max(fSkill[f"FieldSkillLevel{i}"] - spinAmt, minLv)
+        JSONParser.CloseFile(fSkillData, fSkillFile)

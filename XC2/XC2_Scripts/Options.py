@@ -168,7 +168,7 @@ MusicOption = Option("Music", Funny, "Randomizes Music", [lambda: MusicShuffling
 MusicOption_MixBattleAndEnv = SubOption("Mix Battle/Environment Themes", MusicOption, defState = False)
 
 # QOL
-ShortcutsOption = Option("Quest Skips", QOL, "Various speedups/skips for main story quests")
+ShortcutsOption = Option("Quest Skips", QOL, "Various speedups/skips for tedious main story quests")
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
 ShortcutsOption_ThiefRumours = SubOption("Roc Thief Rumours Skip", ShortcutsOption, [lambda: Skips.BaseGameStorySkip([2028], "Normal")])
@@ -185,8 +185,10 @@ CommunityMembersOption_LV3 = SubOption("Level 3", CommunityMembersOption, hasSpi
 CommunityMembersOption_LV4 = SubOption("Level 4", CommunityMembersOption, hasSpinBox=True, spinDesc=communitySpinDesc, spinMax=48, spinDefault=4)
 CommunityMembersOption_LV5 = SubOption("Level 5", CommunityMembersOption, hasSpinBox=True, spinDesc=communitySpinDesc, spinMax=64, spinDefault=5)
 CommunityMembersOption_LVMAX = SubOption("Level MAX", CommunityMembersOption, hasSpinBox=True, spinDesc=communitySpinDesc, spinMax=89, spinDefault=6)
-RemoveFieldSkillsOption = Option("Remove Story Field Skills", QOL, "Removes field skill checks", [lambda: FieldSkills.RemoveFieldSkills(RemoveFieldSkillsOption_AllFieldSkills.GetState())], ["Remove All Field Skills", []])
-RemoveFieldSkillsOption_AllFieldSkills = SubOption("Remove All Field Skills", RemoveFieldSkillsOption)
+FieldSkillOption = Option("Field Skills", QOL, "Options to reduce field skill tedium")
+FieldSkillOption_Reduce = SubOption("Reduce Skill Checks", FieldSkillOption, hasSpinBox=True, spinDesc= "Level(s) Reduced", spinMax=12, spinDefault=1, spinIncr=1, commands=[lambda: FieldSkills.ReduceFieldSkillsLevels()])
+FieldSkillOption_RemoveStory = SubOption("Remove Story Field Skills", FieldSkillOption, defState=False, commands=[lambda: FieldSkills.RemoveStoryFieldSkills()])
+FieldSkillsOption_RemoveAll = SubOption("Remove All Field Skills", FieldSkillOption,  defState=False, commands=[lambda: FieldSkills.RemoveAllFieldSkills()])
 EasySkillTreesOption = Option("Easy Affinity Trees", QOL, "Makes trust the only condition for leveling up a blade's affinity tree", [lambda: SkillTrees.BladeSkillTreeShortening(IDs.BladeIDs, 15), lambda: SkillTrees.BladeSkillTreeShortening(IDs.TornaBladeIDs, 15)])
 FasterDriverSkillTrees = Option("SP Boost", QOL, "Decreases SP required for driver skill trees", [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["XC2/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "XC2/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "XC2/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], [f'row[key] // {FasterDriverSkillTrees.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1,  spinDesc = "x Faster")
 FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["./XC2/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2,spinIncr = 1, spinDesc = "x Faster")
@@ -248,9 +250,9 @@ for loc in TornaMain.GormottNametoLocID.keys(): # Automatically Generates these
     SubOption(loc, TornaRemoveGormottChecks, defState = True)
 TornaRewardsonUnreqSidequests = Option("Torna Unrequired Sidequests", GameModeTab, "Sidequests not chosen for the main story requirements or story gates can have Progression Items on their rewards.")
 
-MutuallyExclusivePairing([TornaMainOption, TornaAddHints, TornaObjectColorMatchesContents, TornaChooseCommunityReqs, TornaCreateSpoilerLog, TornaRemoveGormottChecks, TornaRewardsonUnreqSidequests], [AccessoriesOption, CommunityMembersOption, QuestRewardsOption, AuxCoresOption, AccessoryShopsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladesOption, BladeArtsOption, BladeFieldSkillsOption, BladeWeaponChipsOption, BladeCombosOption, BladeStatsOption, NormalEnemyOption, UniqueEnemyOption, BossEnemyOption, EnemyDropOption, TreasureChestOption, FreelyEngageBladesOption, ChestOption, RemoveFieldSkillsOption, EasySkillTreesOption, FasterLevelsOption, NewGamePlusFlagsOption, ProjTreasureChestOption, EnemySizeOption, BladeWeaponCosmeticsOption, CosmeticsOption, RaceModeOption, UMHuntOption])
+MutuallyExclusivePairing([TornaMainOption, TornaAddHints, TornaObjectColorMatchesContents, TornaChooseCommunityReqs, TornaCreateSpoilerLog, TornaRemoveGormottChecks, TornaRewardsonUnreqSidequests], [AccessoriesOption, CommunityMembersOption, QuestRewardsOption, AuxCoresOption, AccessoryShopsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladesOption, BladeArtsOption, BladeFieldSkillsOption, BladeWeaponChipsOption, BladeCombosOption, BladeStatsOption, NormalEnemyOption, UniqueEnemyOption, BossEnemyOption, EnemyDropOption, TreasureChestOption, FreelyEngageBladesOption, ChestOption, FieldSkillOption, EasySkillTreesOption, FasterLevelsOption, NewGamePlusFlagsOption, ProjTreasureChestOption, EnemySizeOption, BladeWeaponCosmeticsOption, CosmeticsOption, RaceModeOption, UMHuntOption])
 
-MutuallyExclusivePairing([UMHuntOption], [TutorialShorteningOption, AccessoryShopsOption, NewGamePlusFlagsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladeWeaponChipsOption, AccessoriesOption, AuxCoresOption, NormalEnemyOption, BossEnemyOption, UniqueEnemyOption, EnemyDropOption, TreasureChestOption, StartwithIncreasedMovespeedOption, FasterDriverSkillTrees, EasySkillTreesOption, FasterLevelsOption, RaceModeOption, RemoveFieldSkillsOption])
+MutuallyExclusivePairing([UMHuntOption], [TutorialShorteningOption, AccessoryShopsOption, NewGamePlusFlagsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladeWeaponChipsOption, AccessoriesOption, AuxCoresOption, NormalEnemyOption, BossEnemyOption, UniqueEnemyOption, EnemyDropOption, TreasureChestOption, StartwithIncreasedMovespeedOption, FasterDriverSkillTrees, EasySkillTreesOption, FasterLevelsOption, RaceModeOption, FieldSkillOption])
 
 MutuallyExclusivePairing([RaceModeOption], [DriversOption, BladesOption, ShortcutsOption, ChestOption, TutorialShorteningOption])
     
