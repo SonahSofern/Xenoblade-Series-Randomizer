@@ -74,7 +74,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                     for group in StaticEnemyData:
                         group.RefreshCurrentGroup()
 
-                    Bandaids(eneData, isBoss, eRando) # Changes based on ID after the initial swap
+                    Bandaids(eneData, isBoss, eRando) # Changes based on ID after the key swap
 
                     JSONParser.CloseFile(eRando.arrangeData, eneFile)
                     JSONParser.CloseFile(eRando.paramData, paramFile)
