@@ -53,6 +53,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                         #     RedRingRemoval()
 
                         CloneEnemiesDefeatCondition(oldEn, newEn)
+                        AdjustSkinUpgrades(oldEn, newEn, eRando)
 
                         eRando.RetainNonArrangeStats(newEn, oldEn, retainNonArrangeKeys + actKeys)                    
 
@@ -149,7 +150,7 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
         (Large, Small): 2,
         (Normal, Small): 1,
     }
-    e.EnemySizeMatch(oldEn, newEn, ["Scale"], multDict)
+    e.EnemySizeMatch(oldEn, newEn, ["Scale"], multDict, minScale=10, maxScale=400)
     
     # Reset size if scaled higher than massive
     ChangeSize([oldEn, newEn], SupermassiveEnemies, Massive)
@@ -160,15 +161,20 @@ def Bandaids(eneData, isBoss, eRando):
     SummonIDFix(eneData)
     if isBoss.GetState():
         TornaIntroChanges(eRando)
+    CutsceneOnlyEnemyMatch(eRando)
 
-def RemoveSkinUpgrade(oldEn, newEn, eRando:e.EnemyRandomizer):
-    '''Bosses having skin upgrade is unfair to suddenly deal insane dmg and heal to full'''
-    SkinUpgradeArtIDs = [175,176,177,178]
-    if oldEn in IDs.BossMonsters:
-        # see if they have skin upgrade
-        # replace with something else if so
-        eRando.ChangeStats()
-        
+def AdjustSkinUpgrades(oldEn, newEn, eRando:e.EnemyRandomizer):
+    '''Bosses having skin upgrade is unfair to suddenly deal insane dmg and heal to full. This changes their skin upgrade to give less levels depending on the enemies level'''
+    if oldEn["$id"] in IDs.BossMonsters: # If we are a boss and we have a skin upgrade art we adjust it
+        SkinUpgradeArtIDs = [175,176,177,178]
+        MaxLevelDiv = 4 # Part of what determines the levels added by upgrades
+        newPar = eRando.FindParam(newEn)
+        for i in range(2,17):
+            artID = newPar[f"ArtsNum{i}"]
+            if artID in SkinUpgradeArtIDs:
+                newArtID = eRando.CreateArt(artID, [("DmgMgn", Helper.Clamp(int(oldEn["Lv"]/MaxLevelDiv), 1, 10))])
+                eRando.ChangeStats([newEn], [(f"ArtsNum{i}", newArtID)])
+            
 def GetEnemyCounts():
     enemyCounts = dict()
     # I don't want regular overworld enemies to be stronger/weaker because they spawn several of them in a pack, and
@@ -259,8 +265,18 @@ def GortOgreUppercutRemoval(paramData): # Gort 2's Ogre Uppercut seems to be bug
             row["ArtsNum4"] = 963 # replaced Ogre Uppercut with a second instance of Ogre Flame
             break
 
-def CutsceneOnlyEnemyMatch():
-    pass # Match overworld enemies that have NoTarget to their replacement. For example the aligo on the ancient ship you can see before the cutscene but it doesnt get updated to a new paramID
+def CutsceneOnlyEnemyMatch(eRando:e.EnemyRandomizer):
+    '''Match overworld enemies that have NoTarget to their replacement. For example the aligo on the ancient ship you can see before the cutscene but it doesnt get updated to a new paramID'''
+    cutDict = { # The ArrangeID of No Target En: Arrange ID of enemy that it supposed to look like
+        1633: 1632, # Gargoyle
+        1018: 1022, # Kurodil
+        1319: 181, # Megalo Aligo
+    }
+    for untargetableEn in eRando.arrangeData["rows"]:
+        untargetableID = untargetableEn["$id"]
+        if cutDict.get(untargetableID):
+            untargetableEn["ParamID"] = eRando.FindParam(cutDict[untargetableID])["$id"]
+
     
 def TornaIntroChanges(e:e.EnemyRandomizer):
     e.ChangeStats([1430, 1429, 1428, 1454], [("HpMaxRev", 50)])
@@ -276,7 +292,7 @@ def ForcedWinFights(fights:list):
 def AeshmaCoreHPNerf(paramData): # Aeshma is almost unkillable with its regen active
     for row in paramData["rows"]:
         if row["$id"] == 318:
-            row["HpMaxRev"] = 500 # nerfed hp by 5/6ths
+            row["HpMaxRev"] = 500
     
 def AionRoomFix(origEn, newEn, eRando:e.EnemyRandomizer): # Aion sits really far down so raise enemies up
     AionIDs = [265, 275]
@@ -308,7 +324,7 @@ def SummonsLevelFix(ene):
         targetDriver = Lora
     else:
         targetDriver = Rex
-    ene["DriverLev"] = targetDriver # Not a great solution the other way is to make a duplicate enemy for each time they are summoned and I woulid have to make new summon tables
+    ene["DriverLev"] = targetDriver 
 
 def EnemyDesc(name):
     EnemyRandoDesc = PopupDescriptions.Description()

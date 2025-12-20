@@ -281,3 +281,7 @@ def FileShuffle(fileName, ignoreKeys = ["$id"], ignoreIDs = []):
         
 def roundToBase(x, base=5):
     return base * round(x/base)
+
+def Clamp(val, low, high):
+    '''Returns a value closest to the given val within the range'''
+    return max(low, min(val, high))

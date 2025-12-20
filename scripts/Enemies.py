@@ -232,16 +232,17 @@ class EnemyRandomizer():
     def FindRSC(self, enemy):
         param = self.FindParam(enemy)
         for rsc in self.rscData["rows"]:
-            try:
-                if param[self.rscKey] == rsc["$id"]:
-                    return rsc
-            except:
-                pass
+            if param[self.rscKey] == rsc["$id"]:
+                return rsc
 
     def FindParam(self, enemy):
+        handledEnemy = self.HandleIDandDict(enemy, self.arrangeData["rows"])
         for param in self.paramData["rows"]:
-            if param["$id"] == enemy[self.paramKey]:
-                return param
+            try:
+                if param["$id"] == handledEnemy[self.paramKey]:
+                    return param
+            except:
+                pass
 
     def FindArt(self, artId):
         for art in self.artData["rows"]:
@@ -290,7 +291,18 @@ class EnemyRandomizer():
         '''Returns a random enemy using weights from the groups generated'''
         newEn = random.choices(StaticEnemyData, self.weights)[0].SelectRandomMember()
         return newEn
-       
+    
+    def HandleIDandDict(self, target, data):
+        '''Allows passing just the ID or the entire enemy'''
+        if isinstance(target, dict):
+            handledTarget = target
+        else:
+            for artD in data:
+                if artD["$id"] == target:
+                    handledTarget = artD
+                    break
+        return handledTarget
+    
     def ChangeStats(self, targetEn = [], keyVal = []):
         """
         Allows changing the stats of an individual enemy ID in EnArrange by creating new EnParam and RSC_En for that enemy.
@@ -300,15 +312,8 @@ class EnemyRandomizer():
         """  
         handledTargetEn = []
         for target in targetEn:
-            if isinstance(target, dict):
-                handledTargetEn.append(target)
-            else:
-                for en in self.arrangeData["rows"]:
-                    if en["$id"] == target:
-                        handledTargetEn.append(en)
-                        break
+            handledTargetEn.append(self.HandleIDandDict(target, self.arrangeData["rows"]))
                         
-        
         for en in handledTargetEn:
             param = self.FindParam(en)
             newParam = copy.deepcopy(param)
@@ -337,10 +342,13 @@ class EnemyRandomizer():
         """
         Creates a new art using a target art as the base. Returns the art ID.
         Args:
-            art (dict): art.
+            art (dict or int): art or ID to the artdata.
             keyVal (list[tuple]): The keys and their new value in art files to change.
         """
-        newArt = copy.deepcopy(art)
+        
+        targetArt = self.HandleIDandDict(art, self.artData["rows"])
+                    
+        newArt = copy.deepcopy(targetArt)
         newArtID = len(self.artData["rows"]) + 1
         newArt["$id"] = newArtID
 
@@ -370,9 +378,7 @@ def EnemySizeMatch(oldEn, newEn, keysList, multDict, scaleKey = "ChrSize", defSc
     for key in keysList:
         newEn[key] = min(max(int(defScale * newMult), minScale), maxScale) 
         
-        
-        
-
+    
 # def ResolveLevelDiff(self, enemy): # Not using because level gap changes XP rewards
 #     if self.lvDiff == 0:
 #         return

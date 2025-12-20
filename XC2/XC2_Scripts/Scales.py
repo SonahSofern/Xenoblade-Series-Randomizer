@@ -4,7 +4,7 @@ from scripts import Helper, JSONParser
 
 
 def BladeScales():
-    BladeScales = [20,30,40,50,60,70,80,90,110,120,130,140,160,180,200,400]
+    BladeScales = [50,60,70,80,90,110,120,130,140,160,180,200,300]
 
     with open(f"./XC2/JsonOutputs/common/CHR_Bl.json", 'r+', encoding='utf-8') as bladeFile:
         bladeData = json.load(bladeFile)
@@ -20,7 +20,7 @@ def BladeScales():
         json.dump(bladeData, bladeFile, indent=2, ensure_ascii=False)
 
 def NPCScales():
-    NPCScales = [20,30,40,50,60,70,80,90,110,120,130,140,160,180,200,400,600]
+    NPCScales = [20,30,40,50,60,70,80,90,110,120,130,140,160,180,200,400]
     
     with open(f"./XC2/JsonOutputs/common/RSC_NpcList.json", 'r+', encoding='utf-8') as npcFile:
         npcData = json.load(npcFile)
