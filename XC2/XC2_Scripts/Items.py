@@ -59,7 +59,7 @@ def RandomizeNormalShops(shopIDs, valTable:Values.ValueTable, doNotReplaceIDs = 
             
             if shop["$id"] not in shopIDs:
                 continue
-                
+            
             for i in range(1,11):
                 valTable.SelectValuedMember(shop, f"DefItem{i}", doNotReplaceIDs)
                 

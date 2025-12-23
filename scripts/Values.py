@@ -20,11 +20,15 @@ def ItemValueStatistics():
 class RandomValuedGroup(Helper.RandomGroup):
     def __init__(self):
         super().__init__()
-        self.stDev = 0
+        self.stDev = None
     
     def SetStDevOverMean(self):
         pricesList = [x.value for x in self.originalGroup]
-        self.stDev = statistics.stdev(pricesList)/ statistics.mean(pricesList)
+        mean = statistics.mean(pricesList)
+        if mean == 0:
+            self.stDev = 0
+        else:
+            self.stDev = abs(statistics.stdev(pricesList)/mean) 
 
 class ValueFile():
     '''mult - Multiplier on the keys value, higher mult means this item will cost more to place'''
@@ -83,6 +87,9 @@ class ValueTable():
         if originalItem == None:
             # print(f"Item could not be found: {data[key]}")
             return
+        
+        if not any(self.weightList):
+            return Exception("Not enough item categories chosen")
         
         category:Helper.RandomGroup = random.choices(self.valuesList, self.weightList, k=1)[0] # Select a category off weights
                 

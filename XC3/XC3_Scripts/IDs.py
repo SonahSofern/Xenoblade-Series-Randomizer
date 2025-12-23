@@ -17,7 +17,8 @@ DLC4PreciousIDs = Helper.InclRange(16134, 16207)
 
 BaseGameClassSkills = Helper.InclRange(1,112) + Helper.InclRange(178,182) + Helper.InclRange(268,274) + Helper.InclRange(291, 302)
 UroSkills = Helper.InclRange(113,136)
-UroTreeNodes = Helper.InclRange(137,177)
+UroTreeNodes = Helper.InclRange(137,168)
+UroCancelNodes = [169, 170, 171, 172, 173, 174, 175, 176, 177]
 SoulhackerSkills = Helper.InclRange(183, 267)
 InoSkillTree = Helper.InclRange(275, 278)
 InoTreeNodes = Helper.InclRange(279,290)
@@ -26,7 +27,6 @@ DLC4Skills = Helper.InclRange(303,306) + Helper.InclRange(312,315) + Helper.Incl
 DLC4SingleSkills = Helper.InclRange(307,311) + Helper.InclRange(316,320) + Helper.InclRange(325, 330) + Helper.InclRange(335,340) + Helper.InclRange(345, 349) + Helper.InclRange(354, 362)
 DLC4TreeNodes = Helper.InclRange(363, 400)
 PairSkills = Helper.InclRange(401,415)
-
 DebugSkills = Helper.InclRange(416,419)
 
 

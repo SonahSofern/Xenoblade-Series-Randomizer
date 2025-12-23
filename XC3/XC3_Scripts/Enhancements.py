@@ -356,7 +356,7 @@ def CreateEnhancements():
     # Enhancement("", 265, 0, 1, M, [], [], skillIcon=0) # <32D6A4FD>
     Enhancement("Linked", 266, 307, 1, Atk, [3,5], skillIcon=35) # Arts Link
     Enhancement("Steamroll", 267, 0, 1, Misc, [30,70], skillIcon=17) # Recover Recharge (Ene. KO) (needs description)
-    Enhancement("Critique", 268, 309, 1, Atk, [10,50], skillIcon=10) # Damage Up (Critical)
+    Enhancement("Critique", 268, 309, 1, Atk, [5,20], skillIcon=10) # Damage Up (Critical)
     Enhancement("Expose", 269, 310, 1, Atk, [50,100], skillIcon=8) # Critical Up (Launched)
     Enhancement("Savior", 270, 311, 1, Hlr, [50,200], skillIcon=16) # Recharge Rec. Up (Danger)
     Enhancement("Distraction", 271, 312, 1, Misc, [50,100], skillIcon=12) # Reduce Aggro (Ally KO)

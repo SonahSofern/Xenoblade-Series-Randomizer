@@ -1,10 +1,27 @@
 import json, random, copy
-from scripts import JSONParser, Helper, PopupDescriptions
+from scripts import JSONParser, Helper
 from XC3.XC3_Scripts import Enhancements, IDs, Options
 
-def SkillRandoMain():
-    unusedSkills = Options.SkillOptions_Unused.GetState()
-    vanillaSkills = Options.SkillOptions_Vanilla.GetState()
+def MinorSkillShuffle(targetSkills): # Seperated to keep balancing intact. We could make these full skills but id rather not.
+    with open("XC3/JsonOutputs/btl/BTL_Skill_PC.json", 'r+', encoding='utf-8') as skillFile:
+        skillData = json.load(skillFile)        
+        skillGroup = Helper.RandomGroup()
+        
+        # Create list
+        for skill in skillData["rows"]:
+            if skill["$id"] in targetSkills:
+                skillGroup.AddNewData(skill)
+                
+        # Shuffle
+        for skill in skillData["rows"]:
+            if skill["$id"] in targetSkills:
+                newSkill = skillGroup.SelectRandomMember()
+                Helper.CopyKeys(skill, newSkill, ["$id", "UseTalent"])
+                
+        JSONParser.CloseFile(skillData, skillFile)
+        
+
+def SkillRandoMain(targetSkills):
     with open("XC3/JsonOutputs/btl/BTL_Skill_PC.json", 'r+', encoding='utf-8') as skillFile:
         with open(f"XC3/JsonOutputs/btl/BTL_Enhance.json", 'r+', encoding='utf-8') as enhanceFile:
             with open(f"XC3/JsonOutputs/battle/msg_btl_skill_name.json", 'r+', encoding='utf-8') as nameFile:
@@ -14,33 +31,33 @@ def SkillRandoMain():
                 
                 skillList = Helper.RandomGroup()
 
-                if vanillaSkills: # Generate Vanilla Skill List
-                    skillList.GenData(skillData["rows"])
+                if Options.MajorSkillOption_VanillaSkills.GetState(): # Generate Vanilla Skill List
+                    for skill in skillData["rows"]:
+                        if skill["$id"] in targetSkills:
+                            skillList.AddNewData(skill)
                 
-                if unusedSkills: # Generate Custom Skill List
-                    copyList = copy.deepcopy(Enhancements.EnhancementsList)
-                    copyListCurrentGroup:list[Enhancements.Enhancement] = copyList.currentGroup
+                if Options.MajorSkillOption_CustomSkills.GetState(): # Generate Custom Skill List
+                    copyListCurrentGroup:list[Enhancements.Enhancement] = Enhancements.EnhancementsList.currentGroup
                     for enh in copyListCurrentGroup:
                         if enh.skillIcon != Enhancements.defaultSkillIcon:
-                            skillList.AddNewData(enh)
+                            skillList.AddNewData(copy.copy(enh))
+                            
+                if skillList.isEmpty():
+                    raise Exception("Empty pool of choices, choose Vanilla, Custom or Both")
                 
-                skillFiles = SkillRandoFiles(skillList, skillData, nameData, enhanceData)
+                skillFiles = SkillRandoFiles(skillList, skillData, nameData, enhanceData, Options.MajorSkillOption.GetSpinbox())
                 
-                if Options.SkillOptions_Class:
+                if Options.MajorSkillOption_ClassSkills.GetState():
                     skillFiles.SkillRando(IDs.BaseGameClassSkills, [(0,20),(21,40),(41,60),(61,80),(81,100)])
+                if Options.MajorSkillOption_InoSkills.GetState():
                     skillFiles.SkillRando(IDs.InoSkillTree, [(20,30),(40,50),(60,100)])
+                if Options.MajorSkillOption_AffinityGrowthSkills.GetState():
                     skillFiles.SkillRando(IDs.DLC4Skills, [(20,40),(50,70),(80,100)])
+                if Options.MajorSkillOption_UnitySkills.GetState():
                     skillFiles.SkillRando(IDs.PairSkills, [(30,60),(70,100)])
-                if Options.SkillOptions_SingleNode.GetState():
-                    skillFiles.SkillRando(IDs.DLC4SingleSkills, [(50,80)])
-                    skillFiles.SkillRando(IDs.InoTreeNodes, [(10,30)])
-                    skillFiles.SkillRando(IDs.DLC4SingleSkills, [(30,80)])
-                    skillFiles.SkillRando(IDs.DLC4TreeNodes, [(20,40)])
-                if Options.SkillOptions_Ouroboros.GetState():
+                if Options.MajorSkillOption_OuroSkills.GetState():
                     skillFiles.SkillRando(IDs.UroSkills, [(20,50), (70,80)])
-                if Options.SkillOptions_Ouroboros.GetState() and Options.SkillOptions_SingleNode.GetState():
-                    skillFiles.SkillRando(IDs.UroTreeNodes, [(10,30)])
-                if Options.SkillOptions_SoulHacker.GetState():
+                if Options.MajorSkillOption_HackerSkills.GetState():
                     skillFiles.SkillRando(IDs.SoulhackerSkills, [(20,40), (60,90)])
         
                 JSONParser.CloseFile(skillData, skillFile)
@@ -48,67 +65,52 @@ def SkillRandoMain():
                 JSONParser.CloseFile(nameData, nameFile)
 
 class SkillRandoFiles():
-    def __init__(self, skillList, skillData, nameData, enhanceData):
+    def __init__(self, skillList, skillData, nameData, enhanceData, odds):
         self.skillList:Helper.RandomGroup = skillList
         self.skillData = skillData
         self.nameData = nameData
         self.enhanceData = enhanceData
+        self.odds = odds
         
-    def SkillRando(self,targetSkillIDs, skillEnhancementRanges): # Create the list once  
-        ignoreKeys = ["$id", "UseTalent", "Name"]
-        skillOdds = Options.SkillOptions.GetSpinbox()
-        
-        filteringList = copy.deepcopy(self.skillList.originalGroup) # Make a copy because we cant filter this while looping over it
-        for skill in (filteringList):
-            if isinstance(skill, Enhancements.Enhancement): # If we get a custom enhancement convert it to workable data
-                continue
-            if not self.PassSkillCheck(skill, targetSkillIDs):
-                self.skillList.FilterMember(skill)
-        
+    def SkillRando(self,targetSkillIDs, skillEnhancementRanges):
         for skill in self.skillData["rows"]: # Replace the list
-            if not Helper.OddsCheck(skillOdds):
+            copyKeys = ["Enhance1", "Enhance2", "Enhance3", "Enhance4", "Enhance5", "Icon"]
+            if not Helper.OddsCheck(self.odds):
                 continue
-            if not self.PassSkillCheck(skill, targetSkillIDs):
-                continue
-            if len(self.skillList.originalGroup) < 1:
+            if not self.isValidTargetSkill(skill, targetSkillIDs):
                 continue
             
             chosenSkill = self.skillList.SelectRandomMember()
-
+    
             if isinstance(chosenSkill, Enhancements.Enhancement): # If we get a custom enhancement convert it to workable data
                 self.DetermineName(chosenSkill, skill)
                 chosenSkill = self.DefineNewSkill(chosenSkill, skillEnhancementRanges)
-                
-            Helper.CopyKeys(skill, chosenSkill, ignoreKeys)
+            else:
+                copyKeys.append("Name") # Names should be copied if they are vanilla skills
+                originalSkillLength = self.GetSkillLevels(skill)
+                # Handle Mismatch of Vanilla Skill Lengths
+            
+            Helper.CopyKeys(skill, chosenSkill, copyKeys, isGoodKeys=True)
 
         self.skillList.RefreshCurrentGroup()
 
-    def PassSkillCheck(self, skill, allowSkills):
+    def GetSkillLevels(self, skill):
+        maxLevels = 5
+        
+        for i in range(1,6):
+            if skill[f"Enhance{i}"] == 0:
+                return i-1
+        return maxLevels
+
+    def isValidTargetSkill(self, skill, allowSkills):
         if skill["$id"] in allowSkills:
             return True
         return False
 
-    def DefineNewSkill(self, chosenSkill:Enhancements.Enhancement, ranges):
+    def DefineNewSkill(self, chosenSkill:Enhancements.Enhancement, ranges): 
         newSkill = {
-        "$id": "null",
-        "ID": "null",
         "Name": chosenSkill.name,
-        "DebugName": "",
-        "Caption": 0,
-        "Type": 0,
-        "UseTalent": 0,
-        "UseChr": 0,
-        "EnSkillAchieve": 0,
-        "RoleParam1": 0,
-        "RoleParam2": 0,
-        "<43BA3C37>": 0,
-        "<A6E42F10>": 0,
-        "UroProb1": 20,
-        "UroProb2": 40,
-        "UroProb3": 80,
-        "Role": 0,
         "Icon": chosenSkill.skillIcon,
-        "SortNo": 0
         }
         for i in range(1,6):
             if len(ranges) < i:
@@ -119,7 +121,7 @@ class SkillRandoFiles():
 
     def DetermineName(self,chosenSkill:Enhancements.Enhancement, skill):
         if chosenSkill.roleType == Enhancements.Atk:
-            secondWordList = ["Strikes", "Edge", "Blast"]
+            secondWordList = ["Strikes", "Edge", "Blast", "Slashes"]
         elif chosenSkill.roleType == Enhancements.Hlr:
             secondWordList = ["Support", "Training", "Assist"]
         elif chosenSkill.roleType == Enhancements.Def:

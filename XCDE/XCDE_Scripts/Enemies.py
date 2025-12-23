@@ -62,11 +62,11 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size,
                         originalTotalStats = TotalStats(oldEn, CopiedStatsWithRatios)
                         
                         # area keys
-                        eRando.CopyKeys(oldEn, newEn.eneListArea, CopiedStats, isGoodKeys=True)
+                        Helper.CopyKeys(oldEn, newEn.eneListArea, CopiedStats, isGoodKeys=True)
                         # enelist keys
                         for ene in eneData["rows"]:
                             if ene["$id"] == oldEn["$id"]:
-                                eRando.CopyKeys(ene, newEn.enelist, CopiedInfo, isGoodKeys=True)
+                                Helper.CopyKeys(ene, newEn.enelist, CopiedInfo, isGoodKeys=True)
                                 break
                         # stat keys
                         if oldEn["$id"] not in GroupEnemies + EarlyFights:

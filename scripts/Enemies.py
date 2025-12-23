@@ -257,14 +257,6 @@ class EnemyRandomizer():
             return True
         if self.isBadEnemy(en["$id"]):
             return True
-
-    def CopyKeys(self, en, newEn, keys = [], isGoodKeys = False):
-        '''isGoodKeys: Set to true to instead copy the keys provided, false means you ignore the keys provided'''
-        for key in en:
-            if isGoodKeys != (key in keys):
-                continue
-            if key in newEn:
-                en[key] = newEn[key]
         
     def RetainNonArrangeStats(self, newEn, oldEn, keys):
         '''For retaining the old enemies stats that aren't controlled by enarrange, automatically handles flag nested dicts'''

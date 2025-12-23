@@ -72,14 +72,18 @@ BossEnemyOption_MatchSize = SubOption("Match Size", BossEnemyOption)
 
 AccessoriesOption = Option("Accessories", Character, "Randomizes the effects of Accessories", [lambda: Accessories.AccessoryRando()])
 GemsOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.GemRando()])
-SkillOptions = Option("Skills", Character, "Randomizes character skills", [lambda: Skills.SkillRandoMain()], hasSpinBox=True)
-SkillOptions_Vanilla = SubOption("Allow Vanilla Skills", SkillOptions)
-SkillOptions_Unused = SubOption("Allow Unused Skills", SkillOptions)
-SkillOptions_Class = SubOption("Class Skills", SkillOptions)
-SkillOptions_Ouroboros = SubOption("Ouroboros Skills", SkillOptions)
-SkillOptions_SoulHacker = SubOption("Soulhacker Skills", SkillOptions)
-SkillOptions_SingleNode = SubOption("Node Skills", SkillOptions)
-# SkillOptions_MatchSkillClass = SubOption("Match Class Type", SkillOptions)
+
+MajorSkillOption = Option("Major Skills", Character, "Randomizes the chosen major skill categories", [lambda: Skills.SkillRandoMain(IDs.InoSkillTree + IDs.UroSkills + IDs.DLC4Skills + IDs.PairSkills + IDs.SoulhackerSkills + IDs.BaseGameClassSkills + IDs.DLC4SingleSkills)], hasSpinBox=True)
+MajorSkillOption_ClassSkills = SubOption("Class Skills", MajorSkillOption)
+MajorSkillOption_OuroSkills = SubOption("Ouroboros Skills", MajorSkillOption)
+MajorSkillOption_HackerSkills = SubOption("Soul Hacker Skills", MajorSkillOption)
+MajorSkillOption_InoSkills = SubOption("Ino Skills", MajorSkillOption)
+MajorSkillOption_AffinityGrowthSkills = SubOption("Affinity Growth Skills", MajorSkillOption)
+MajorSkillOption_UnitySkills = SubOption("Unity Pairing Skills", MajorSkillOption)
+MajorSkillOption_VanillaSkills = SubOption("Allow Vanilla Pool", MajorSkillOption)
+MajorSkillOption_CustomSkills = SubOption("Allow Custom Pool", MajorSkillOption)
+
+MinorSkillOption = Option("Minor Skills", Character, "Randomizes minor skills among themselves", [lambda: Skills.MinorSkillShuffle(IDs.InoTreeNodes + IDs.UroTreeNodes + IDs.DLC4TreeNodes)])
 
 nameClassArts = "Class Arts"
 nameOuroArts = "Ouroborous Arts"

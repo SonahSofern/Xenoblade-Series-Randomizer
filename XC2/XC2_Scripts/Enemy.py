@@ -72,7 +72,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                         
                         AionRoomFix(oldEn, newEn, eRando)
 
-                        eRando.CopyKeys(oldEn, newEn, ignoreKeys) # Keep in mind this will overwrite changes made to the old enemy
+                        Helper.CopyKeys(oldEn, newEn, ignoreKeys) # Keep in mind this will overwrite changes made to the old enemy
 
                     for group in StaticEnemyData:
                         group.RefreshCurrentGroup()

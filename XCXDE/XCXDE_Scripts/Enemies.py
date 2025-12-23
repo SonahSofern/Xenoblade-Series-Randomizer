@@ -33,7 +33,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies):
                 
                     # eRando.ActTypeFix(newEn, en)
                     eRando.EnemySizeMatch(en, newEn)
-                    eRando.CopyKeys(en, newEn, ignoreKeys)
+                    Helper.CopyKeys(en, newEn, ignoreKeys)
                         
                 for group in StaticEnemyData:
                     group.RefreshCurrentGroup()

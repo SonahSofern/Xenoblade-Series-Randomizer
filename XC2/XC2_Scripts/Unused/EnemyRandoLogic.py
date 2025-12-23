@@ -920,8 +920,6 @@ def FixZoneIDs(TotalDefaultEnemyIDs, TotalRandomizedEnemyIDs, EnemyZoneIDs): # f
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 def EnemyLogic():
-    if Options.UMHuntOption.GetState():
-        raise Exception(f"UM Hunt already randomizes the enemies. Disable {Options.EnemiesOption.name} to fix this error.")
     EnemyRandoOn = False
     EnemiestoPass = []
     LevelstoPass = []

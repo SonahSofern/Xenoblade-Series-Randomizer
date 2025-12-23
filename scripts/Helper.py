@@ -258,11 +258,13 @@ class RandomGroup():
 def RandomDecimal(low, high, mult = 0.01):
     return (random.randrange(low, high)*mult)
 
-def CopyKeys(originalItem, chosenItem, ignoreKeys = []):
-    for key in originalItem:
-        if key in ignoreKeys:
+def CopyKeys(original, chosen, keys = [], isGoodKeys = False):
+    '''isGoodKeys: Set to true to instead copy the keys provided, false means you ignore the keys provided'''
+    for key in original:
+        if isGoodKeys != (key in keys):
             continue
-        originalItem[key] = chosenItem[key]
+        if key in chosen:
+            original[key] = chosen[key]
         
 def FileShuffle(fileName, ignoreKeys = ["$id"], ignoreIDs = []):
     with open(fileName, 'r+', encoding='utf-8') as file:
