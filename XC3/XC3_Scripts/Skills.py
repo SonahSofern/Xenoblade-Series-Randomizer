@@ -72,7 +72,7 @@ class SkillRandoFiles():
         self.enhanceData = enhanceData
         self.odds = odds
         
-    def SkillRando(self,targetSkillIDs, skillEnhancementRanges):
+    def SkillRando(self, targetSkillIDs, skillEnhancementRanges):
         for skill in self.skillData["rows"]: # Replace the list
             copyKeys = ["Enhance1", "Enhance2", "Enhance3", "Enhance4", "Enhance5", "Icon"]
             if not Helper.OddsCheck(self.odds):
@@ -87,20 +87,29 @@ class SkillRandoFiles():
                 chosenSkill = self.DefineNewSkill(chosenSkill, skillEnhancementRanges)
             else:
                 copyKeys.append("Name") # Names should be copied if they are vanilla skills
-                originalSkillLength = self.GetSkillLevels(skill)
-                # Handle Mismatch of Vanilla Skill Lengths
+                chosenSkill = self.DefineNewSkill(self.GetEnhancement(skill), self.GetSkillRange(skill))  # Handle Mismatch of Vanilla Skill Lengths
             
             Helper.CopyKeys(skill, chosenSkill, copyKeys, isGoodKeys=True)
 
         self.skillList.RefreshCurrentGroup()
 
-    def GetSkillLevels(self, skill):
-        maxLevels = 5
-        
+    def GetEnhancement(self, skill):
+        for enh in self.enhanceData["rows"]:
+            if skill["Enhance1"] == enh["$id"]:
+                for enhEff in Enhancements.EnhancementsList.originalGroup:
+                    if enh["EnhanceEffect"] == enhEff.effID:
+                        return enhEff
+        raise Exception(f"What the fuck")
+
+    def GetSkillRange(self, skill): 
+        levels = 5    
         for i in range(1,6):
             if skill[f"Enhance{i}"] == 0:
-                return i-1
-        return maxLevels
+                levels = i
+        
+        ranges = [(1,10), (10,20), (20,40), (40,60), (60,100)]
+        return ranges[:levels]
+        
 
     def isValidTargetSkill(self, skill, allowSkills):
         if skill["$id"] in allowSkills:
