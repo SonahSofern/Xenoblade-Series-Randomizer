@@ -97,7 +97,7 @@ def ChangeWeaponRankNames():
             for row in data["rows"]:
                 for rank in range(len(WeaponStrengthNameList)):
                     if row["$id"] in WeaponStrengthNameList[rank]:
-                        row["name"] = f"{row["name"]} [System:Color name=red]({rank + 1})[/System:Color]"
+                        row["name"] = f"{row["name"]} [System:Color name=red]{rank + 1}[/System:Color]"
                         break
             file.seek(0)
             file.truncate()

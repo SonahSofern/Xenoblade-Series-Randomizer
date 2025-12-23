@@ -134,6 +134,7 @@ def NewGamePlusBladeBalancing():
                     wpn["Rank"] = 1
                     wpn["Damage"] = random.randrange(10,20)
                     wpn["CriRate"] = random.choice([5,10,15,20]) 
+                    wpn["Flag"]["Private"] = 0
                     
                     
             # Connect chips to new weapons
@@ -143,7 +144,7 @@ def NewGamePlusBladeBalancing():
                     # Create new weapons
                     
                 
-                    chip[f"CreateWpn{i}"] = 5971
+                    chip[f"CreateWpn{i}"] = 5973
                     
             JSONParser.CloseFile(chipData, chipFile)     
             JSONParser.CloseFile(wpnData, wpnFile)

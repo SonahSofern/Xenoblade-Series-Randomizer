@@ -21,6 +21,10 @@ class RandomValuedGroup(Helper.RandomGroup):
     def __init__(self):
         super().__init__()
         self.stDev = 0
+    
+    def SetStDevOverMean(self):
+        pricesList = [x.value for x in self.originalGroup]
+        self.stDev = statistics.stdev(pricesList)/ statistics.mean(pricesList)
 
 class ValueFile():
     '''mult - Multiplier on the keys value, higher mult means this item will cost more to place'''
@@ -59,10 +63,7 @@ class ValueTable():
                     newList.AddNewData(ValuedItem(data["$id"], int(data[file.key] * file.mult)))
             newList.currentGroup.sort(key=lambda x: x.value)
             newList.originalGroup.sort(key=lambda x: x.value)
-            
-            # Set the stdev of the values
-            pricesList = [x.value for x in newList.originalGroup]
-            newList.stDev = statistics.stdev(pricesList)/ statistics.mean(pricesList)
+            newList.SetStDevOverMean()
     
     def isEmpty(self):        
         if len(self.valuesList) == 0:
