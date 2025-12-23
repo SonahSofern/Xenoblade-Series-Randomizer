@@ -1,7 +1,7 @@
 import json
-from scripts import Helper, JSONParser, PopupDescriptions
+from scripts import Helper, JSONParser
 import random
-from XC2.XC2_Scripts import Options, IDs
+from XC2.XC2_Scripts import IDs
 
 def CustomCoreCrystalRando():
     if HasRanOnce():
@@ -13,6 +13,7 @@ def CustomCoreCrystalRando():
     FixArtReleaseLevels()
     RareBladeProbabilityEqualizer()
     LandofChallengeRelease()
+    NewGamePlusBladeBalancing()
 
 def RareBladeProbabilityEqualizer(): # makes it so all blades are equally likely to be pulled
     Helper.ColumnAdjust("XC2/JsonOutputs/common/BLD_RareList.json", ["Condition", "Assure1", "Assure2", "Assure3", "Assure4", "Assure5"] , 0)
@@ -118,3 +119,44 @@ def ApplyNewBladeNames(): # Dont love this because it loops back over everything
                     break
         JSONParser.CloseFile(data, file)
 
+def NewGamePlusBladeBalancing():
+    ''' Make NG+ blades balanced by starting them at lower power and allowing chips to be put in their weapons'''
+    
+    # Edit their default weapons to be on par with lead chips (baby starting chips) and add new ones
+    with open("XC2/JsonOutputs/common/ITM_PcWpn.json", "r+", encoding='utf-8') as wpnFile:     
+        with open("XC2/JsonOutputs/common/ITM_PcWpnChip.json", "r+", encoding='utf-8') as chipFile:
+            wpnData = json.load(wpnFile)
+            chipData = json.load(chipFile)
+            
+            # Fix default weapons
+            for wpn in wpnData["rows"]:
+                if wpn["$id"] in [5971, 5972, 5973, 5974, 5975, 5976, 5977]:
+                    wpn["Rank"] = 1
+                    wpn["Damage"] = random.randrange(10,20)
+                    wpn["CriRate"] = random.choice([5,10,15,20]) 
+                    
+                    
+            # Connect chips to new weapons
+            for chip in chipData["rows"]:
+                for i in range(20,27): # CreateWeapons 20-27 which correspond to those NG+ blade weapons
+                
+                    # Create new weapons
+                    
+                
+                    chip[f"CreateWpn{i}"] = 5971
+                    
+            JSONParser.CloseFile(chipData, chipFile)     
+            JSONParser.CloseFile(wpnData, wpnFile)
+        
+    # Allow chip building on these blades
+    with open("XC2/JsonOutputs/common/CHR_Bl.json", "r+", encoding='utf-8') as blFile:
+        blData = json.load(blFile)
+        for bl in blData["rows"]:
+            if bl["$id"] in [1043, 1044, 1045, 1046, 1047, 1048, 1049]:
+                bl["Flag"]["OnlyWpn"] = 1
+                bl["Flag"]["NoBuildWpn"] = 0     
+        JSONParser.CloseFile(blData, blFile)
+        
+
+        
+    

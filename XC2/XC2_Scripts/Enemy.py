@@ -6,7 +6,7 @@ StaticEnemyData:list[Helper.RandomGroup] = []
 
 ValidEnemyPopFileNames = ["ma01a_FLD_EnemyPop.json", "ma02a_FLD_EnemyPop.json", "ma04a_FLD_EnemyPop.json", "ma05a_FLD_EnemyPop.json", "ma05c_FLD_EnemyPop.json", "ma07a_FLD_EnemyPop.json", "ma07c_FLD_EnemyPop.json", "ma08a_FLD_EnemyPop.json", "ma08c_FLD_EnemyPop.json", "ma10a_FLD_EnemyPop.json", "ma10c_FLD_EnemyPop.json", "ma11a_FLD_EnemyPop.json", "ma13a_FLD_EnemyPop.json", "ma13c_FLD_EnemyPop.json", "ma15a_FLD_EnemyPop.json", "ma15c_FLD_EnemyPop.json", "ma16a_FLD_EnemyPop.json", "ma17a_FLD_EnemyPop.json", "ma17c_FLD_EnemyPop.json", "ma18a_FLD_EnemyPop.json", "ma18c_FLD_EnemyPop.json", "ma20a_FLD_EnemyPop.json", "ma20c_FLD_EnemyPop.json", "ma21a_FLD_EnemyPop.json", "ma40a_FLD_EnemyPop.json", "ma41a_FLD_EnemyPop.json", "ma42a_FLD_EnemyPop.json"]
                                                                                                                                                                                                                                                                                                           
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isVanillaAggro, matchSize:Interactables.SubOption, balanceStats:Interactables.SubOption, matchPhase = False):
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isVanillaAggro, matchSize:Interactables.SubOption, balanceStats:Interactables.SubOption, matchPhase = False, finalBoss = False):
     global StaticEnemyData
     EnemyCounts = GetEnemyCounts()
     GroupFightViolations = GetGroupFightViolations()
@@ -35,6 +35,9 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
 
                     for oldEn in eRando.arrangeData["rows"]:
                         if eRando.FilterEnemies(oldEn, targetGroup):
+                            continue
+                        
+                        if finalBoss and isFinalBoss(oldEn):
                             continue
 
                         newEn = eRando.CreateRandomEnemy(StaticEnemyData)
@@ -83,6 +86,12 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                     JSONParser.CloseFile(eRando.paramData, paramFile)
                     JSONParser.CloseFile(eRando.rscData, rscFile)
                     JSONParser.CloseFile(eRando.artData, artFile)
+
+def isFinalBoss(oldEn):
+    if oldEn["$id"] in IDs.FinalbossMonsters + IDs.TornaFinalbossMonsters:
+        return True
+    else:
+        return False
 
 def MatchPhase():
     '''Matches phase 1 and 2 of enemies to be the same enemy type'''
@@ -341,6 +350,8 @@ def EnemyDesc(name):
     EnemyRandoDesc.Header(Options.NormalEnemyOption_Stats.name)
     EnemyRandoDesc.Text("This balances stats (mainly HP) for all fights of this category. Hp varies greatly in XC2 and this helps counterract that.")
     if name == Options.BossEnemyOption.name:
+        EnemyRandoDesc.Header(Options.BossEnemyOption_FinalBoss.name)
+        EnemyRandoDesc.Text("This controls whether or not the final fights of the game Aion, and of the DLC Malos and Gort are randomized. These enemies are in the pool of replacements regardless of this option")
         EnemyRandoDesc.Header(Options.BossEnemyOption_Solo.name)
         EnemyRandoDesc.Text("This will balance required fights that are fought solo, by adjusting stats of the encounter")
         EnemyRandoDesc.Header(Options.BossEnemyOption_Group.name)

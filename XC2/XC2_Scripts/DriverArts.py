@@ -276,6 +276,8 @@ def GenCustomArtDescriptions(artsFile, descFile, isSpecial = False, enhancementK
                 if TotalArtDescription == "":
                     if art["ArtsType"] == 3: # Healing Arts
                         TotalArtDescription = f"[System:Color name=green]Heal party[/System:Color]"
+                    elif art["ArtsType"] == 11:
+                        TotalArtDescription = f"[System:Color name=tutorial]Defense[/System:Color]"
                     else:
                         TotalArtDescription = "No Effects"
 

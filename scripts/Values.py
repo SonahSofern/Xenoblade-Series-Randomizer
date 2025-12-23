@@ -1,5 +1,6 @@
 import json, random
 from scripts import Helper, Interactables
+import statistics
 
 differenceList = []
 allowedRange = 0.1
@@ -7,7 +8,6 @@ ItemLogicDesciption = "This is done in a balanced way, by replacing the original
 
 
 def ItemValueStatistics():
-    import statistics
 
     if len(differenceList) == 0:
         return
@@ -17,6 +17,10 @@ def ItemValueStatistics():
     print(f"Median Difference: {statistics.median(differenceList)}")
     print(f"Std Deviation:    {statistics.stdev(differenceList)}")
 
+class RandomValuedGroup(Helper.RandomGroup):
+    def __init__(self):
+        super().__init__()
+        self.stDev = 0
 
 class ValueFile():
     '''mult - Multiplier on the keys value, higher mult means this item will cost more to place'''
@@ -32,7 +36,7 @@ class ValuedItem():
 
 class ValueTable():
     def __init__(self, path = "XC2/JsonOutputs/common"):
-        self.valuesList:list[Helper.RandomGroup] = []
+        self.valuesList:list[RandomValuedGroup] = []
         self.weightList = []
         self.path = path
         
@@ -47,7 +51,7 @@ class ValueTable():
         '''
         with open(f"{self.path}/{file.filename}.json", 'r+', encoding='utf-8') as curFile:
             curData = json.load(curFile)
-            newList = Helper.RandomGroup()
+            newList = RandomValuedGroup()
             self.valuesList.append(newList)
             self.weightList.append(weight)
             for data in curData["rows"]:
@@ -55,6 +59,10 @@ class ValueTable():
                     newList.AddNewData(ValuedItem(data["$id"], int(data[file.key] * file.mult)))
             newList.currentGroup.sort(key=lambda x: x.value)
             newList.originalGroup.sort(key=lambda x: x.value)
+            
+            # Set the stdev of the values
+            pricesList = [x.value for x in newList.originalGroup]
+            newList.stDev = statistics.stdev(pricesList)/ statistics.mean(pricesList)
     
     def isEmpty(self):        
         if len(self.valuesList) == 0:
@@ -63,6 +71,8 @@ class ValueTable():
             return False
     
     def SelectValuedMember(self, data, key, dontChangeIDs = []):
+        minRange = 5 # The minimum steps you can take in either direction choosing an item from the list so minRange = 10 means +- 10 items from the target value
+        minStandardDeviationOverMean = 0.5
         
         if data[key] in dontChangeIDs + [0]: # dont change some things and empty spots
             return
@@ -72,17 +82,18 @@ class ValueTable():
         if originalItem == None:
             # print(f"Item could not be found: {data[key]}")
             return
-      
+        
         category:Helper.RandomGroup = random.choices(self.valuesList, self.weightList, k=1)[0] # Select a category off weights
-    
+                
         indexOfSimilarValueItem = min(range(len(category.originalGroup)), key=lambda i: abs(category.originalGroup[i].value - originalItem.value))
         
-        targetRange = max(int(len(category.originalGroup)*allowedRange), 3) # A range depending on the length of the group
+        if category.stDev < minStandardDeviationOverMean:
+            targetRange = len(category.originalGroup) # Forced full range when the St Dev of the data is low to keep randomness
+        else:
+            targetRange = max(int(len(category.originalGroup)*allowedRange), minRange) # A range depending on the length of the group
         
         lowerBound = max(indexOfSimilarValueItem - targetRange, 0)
         upperBound = min(indexOfSimilarValueItem + targetRange, len(category.originalGroup))
-        
-        
         categoryGroupRange = category.originalGroup[lowerBound:upperBound]
         
         chosen:ValuedItem = random.choice(categoryGroupRange) # Want to select a random member based on a similar valued item from this category # not using Random Group methods because if you remove choices it could lead to unbalanced things since we are looking at nearby elements in a sorted list by value

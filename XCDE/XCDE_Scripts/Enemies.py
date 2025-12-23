@@ -16,7 +16,7 @@ class ForcedArt:
         self.artSlot = artSlot
         self.artId = artId
         
-def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size):
+def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size, finalBoss = False):
     global StaticEnemyData
     GroupEnemies = [135,136,137,138,139]
     EarlyFights = [32, 33, 1501, 1502, 1503] # The first few fights can be really tough before cheering allies or any arts lets leave their stats vanilla
@@ -43,6 +43,9 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size)
                     
                     for oldEn in eneAreaData["rows"]:   
                         if eRando.FilterEnemies(oldEn, monsterTypeList):
+                            continue
+                        
+                        if finalBoss and isFinalBoss(oldEn):
                             continue
                         
                         newEn:Enemy = eRando.CreateRandomEnemy(StaticEnemyData) # Choose an enemy                
@@ -84,6 +87,11 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size)
             RingRemoval()
             NoCooldownFix()
 
+def isFinalBoss(oldEn):
+    if oldEn["$id"] in IDs.FinalBossEnemies + IDs.FCFinalBossEnemies:
+        return True
+    else:
+        return False
 
 def GetForcedArts():
     '''(EnemyID, ArtSlots) Needed to make sure when the story requires the enemy to use an art that ends the fight they actually need an art to use'''
