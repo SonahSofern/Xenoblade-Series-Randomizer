@@ -227,7 +227,12 @@ def Randomize(GameTitle, root, RandomizeButton, fileEntryVar, bdat_path, permali
         # Make Popup
         progressPopup = PopupDescriptions.GenericPopup(f"Randomizing {GameTitle}") 
         progressPopup.attributes(alpha = 0)
-        progressPopup.protocol("WM_DELETE_WINDOW", Helper.NoOP)
+        
+        def progressClose():
+            progressPopup.destroy()
+            RandomizeButton.config(state=NORMAL)
+        
+        progressPopup.protocol("WM_DELETE_WINDOW", progressClose)
         progressPopup.grab_set()
         
         outerBorder = ttk.Frame(progressPopup, padding=10)

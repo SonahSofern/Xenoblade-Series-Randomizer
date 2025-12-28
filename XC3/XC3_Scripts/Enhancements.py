@@ -19,10 +19,10 @@ Def = 3 #defender
 
 low = 0 
 high = 0
-defaultSkillIcon = -1
+invalidSkillIcon = -1
 
 class Enhancement:
-    def __init__(self, name, effID, captionID, field3E70C175, roleType = Misc, param1 = [low,high], param2 = [low,high], skillIcon = defaultSkillIcon, isArts = False, isGem = True, isAccessory = True, isBaseGameOnly = False, isFutureRedeemedOnly = False, isChainOrder = False, isChainActivation = False):
+    def __init__(self, name, effID, captionID, field3E70C175, roleType = Misc, param1 = [low,high], param2 = [low,high], skillIcon = invalidSkillIcon, isArts = False, isGem = True, isAccessory = True, isBaseGameOnly = False, isFutureRedeemedOnly = False, isChainOrder = False, isChainActivation = False):
         self.name = name
         self.effID = effID
         self.captionID = captionID
@@ -170,7 +170,7 @@ def CreateEnhancements():
     Enhancement("Whisper", 79, 97, 1, Atk, [20,60], skillIcon=12) # Slower Arts Aggro        
     Enhancement("Flourish", 80, 98, 1, Def, [60,120], skillIcon=12) # Faster Arts Aggro        
     Enhancement("Shadowed", 81, 101, 1, Atk, [50,150], skillIcon=12) # Aggro Reduction Up      
-    Enhancement("Garish", 82, 102, 1, Def, [50,150], skillIcon=12) # Auto Aggro Up
+    Enhancement("Garish", 82, 102, 1, Def, [50,150], skillIcon=12) # Aggro Automatically Up
     Enhancement("Battlecry", 83, 107, 1, Def, [1000,2000], skillIcon=12) # Aggro Starter
     Enhancement("Flourish", 84, 108, 1, Def, [100,500], skillIcon=12) # Faster Damage Aggro     
     # Enhancement("", 85, 0, 1, M, [], skillIcon=0) # <D18934AB>

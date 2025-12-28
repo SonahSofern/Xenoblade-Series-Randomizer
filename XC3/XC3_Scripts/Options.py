@@ -73,7 +73,7 @@ BossEnemyOption_MatchSize = SubOption("Match Size", BossEnemyOption)
 AccessoriesOption = Option("Accessories", Character, "Randomizes the effects of Accessories", [lambda: Accessories.AccessoryRando()])
 GemsOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.GemRando()])
 
-MajorSkillOption = Option("Major Skills", Character, "Randomizes the chosen major skill categories", [lambda: Skills.SkillRandoMain(IDs.InoSkillTree + IDs.UroSkills + IDs.DLC4Skills + IDs.PairSkills + IDs.SoulhackerSkills + IDs.BaseGameClassSkills + IDs.DLC4SingleSkills)], hasSpinBox=True)
+MajorSkillOption = Option("Major Skills", Character, "Randomizes the chosen major skill categories", [lambda: Skills.SkillRandoMain()], hasSpinBox=True)
 MajorSkillOption_ClassSkills = SubOption("Class Skills", MajorSkillOption)
 MajorSkillOption_OuroSkills = SubOption("Ouroboros Skills", MajorSkillOption)
 MajorSkillOption_HackerSkills = SubOption("Soul Hacker Skills", MajorSkillOption)
