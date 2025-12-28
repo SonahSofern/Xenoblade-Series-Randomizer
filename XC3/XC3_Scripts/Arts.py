@@ -1,6 +1,5 @@
-import json, random, copy
+import json, random
 from scripts import JSONParser, Helper, PopupDescriptions
-import XC3.XC3_Scripts.Options
 from XC3.XC3_Scripts import IDs
 
 artGroupData = Helper.RandomGroup()
@@ -22,21 +21,7 @@ def ArtRando(targetGroupIDs, artOption, ouroArtOption, talentArtOption, ouroTale
         artData = json.load(artFile)
         
         if artGroupData.isEmpty(): 
-            for art in artData["rows"]:
-                id = art["$id"]
-                if id in IDs.ArtIDs:
-                    artGroupData.AddNewData(art)
-                elif id in IDs.TalentArtIDs:
-                    talentArtGroupData.AddNewData(art)
-                elif id in IDs.OuroborosArtIDs:
-                    ouroArtGroupData.AddNewData(art)
-                elif id in IDs.OuroTalentArtIDs:
-                    ouroTalentArtGroupData.AddNewData(art)
-                elif id in IDs.HackerArtIDs:
-                    hackerArtGroupData.AddNewData(art)
-                else:
-                    continue
-                  
+            GenArtData(artData)  
             
         Weights = GenWeights(artOption, ouroArtOption, talentArtOption, ouroTalentArtOption, hackerArtOption)
         
@@ -46,21 +31,35 @@ def ArtRando(targetGroupIDs, artOption, ouroArtOption, talentArtOption, ouroTale
             if not Helper.OddsCheck(spinbox):
                 continue
             
-            # Choose an art group with weights and then a random member from the group
-            chosen = random.choices(groupData,Weights)[0].SelectRandomMember()            
+            chosenArt = random.choices(groupData, Weights)[0].SelectRandomMember()            
             
             # Handle Duplicate named arts (just copy the result onto ones with the same name)
             if targetGroupIDs == IDs.ArtIDs:
-                HandleArtCopies(chosen, art, artData, ignoreKeys)
+                HandleArtCopies(chosenArt, art, artData, ignoreKeys)
             
-            # Copy Keys
-            Helper.CopyKeys(art, chosen, ignoreKeys)
+            Helper.CopyKeys(art, chosenArt, ignoreKeys)
         
         # Refresh groups
         for group in groupData:
             group.RefreshCurrentGroup()
             
         JSONParser.CloseFile(artData, artFile)
+
+def GenArtData(artData):
+    for art in artData["rows"]:
+        id = art["$id"]
+        if id in IDs.ArtIDs:
+            artGroupData.AddNewData(art)
+        elif id in IDs.TalentArtIDs:
+            talentArtGroupData.AddNewData(art)
+        elif id in IDs.OuroborosArtIDs:
+            ouroArtGroupData.AddNewData(art)
+        elif id in IDs.OuroTalentArtIDs:
+            ouroTalentArtGroupData.AddNewData(art)
+        elif id in IDs.HackerArtIDs:
+            hackerArtGroupData.AddNewData(art)
+        else:
+            continue
 
 def GenWeights(art, ouroArt, talentArt, ouroTalentArt, hackerArt):
     weights = [0,0,0,0,0]
@@ -85,6 +84,7 @@ def HandleArtCopies(chosen, art, artData, ignoreKeys):
 def FixMismatchLevelUpSlots():
     # Some arts have 0s in slots when levelled up past a certain point
     pass
+
 # ArtCategory 
 # 0 : Autos
 # 1 : Arts, Mega Slash finishers, 

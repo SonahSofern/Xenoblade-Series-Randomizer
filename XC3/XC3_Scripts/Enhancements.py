@@ -242,7 +242,7 @@ def CreateEnhancements():
     Enhancement("Resistance", 150, 175, 1, Misc, [25,75], skillIcon=52) # Shorter Debuff Timers
     Enhancement("Precision", 151, 176, 1, Atk, [10,30], skillIcon=8) # Damage Up (Cancel)
     # Enhancement("", 152, 0, 1, M, [], skillIcon=0) # <CE6DB1B1>
-    Enhancement("Hacker", 153, 177, 1, Misc, skillIcon=19) # Soul Hacking
+    Enhancement("Hacker", 153, 177, 1, Misc, isBaseGameOnly=True, skillIcon=19) # Soul Hacking
     Enhancement("Chained", 154, 178, 1, Misc, [20,50], skillIcon=5) # <1DD0CB32> During chain attack reduces enemy ether defense
     # Enhancement("", 155, 0, 1, M, [], skillIcon=0) # <0D99005B>
     # Enhancement("", 156, 0, 1, M, [], skillIcon=0) # <EA4FE79F>

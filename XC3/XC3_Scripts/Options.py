@@ -74,6 +74,7 @@ AccessoriesOption = Option("Accessories", Character, "Randomizes the effects of 
 GemsOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda: Gems.GemRando()])
 
 MajorSkillOption = Option("Major Skills", Character, "Randomizes the chosen major skill categories", [lambda: Skills.SkillRandoMain()], hasSpinBox=True)
+MajorSkillOption_MatchClassType = SubOption("Match Role Type", MajorSkillOption, hasSpinBox=True, spinDesc="% Matching Skills", spinDefault=70)
 MajorSkillOption_ClassSkills = SubOption("Class Skills", MajorSkillOption)
 MajorSkillOption_OuroSkills = SubOption("Ouroboros Skills", MajorSkillOption)
 MajorSkillOption_HackerSkills = SubOption("Soul Hacker Skills", MajorSkillOption)
@@ -82,7 +83,6 @@ MajorSkillOption_AffinityGrowthSkills = SubOption("Affinity Growth Skills", Majo
 MajorSkillOption_UnitySkills = SubOption("Unity Pairing Skills", MajorSkillOption)
 MajorSkillOption_VanillaSkills = SubOption("Allow Vanilla Pool", MajorSkillOption)
 MajorSkillOption_CustomSkills = SubOption("Allow Custom Pool", MajorSkillOption)
-MajorSkillOption_MatchClassType = SubOption("Match Role Type", MajorSkillOption, hasSpinBox=True, spinDesc="% Matching Skills", spinDefault=70)
 
 MinorSkillOption = Option("Minor Skills", Character, "Randomizes minor skills among themselves", [lambda: Skills.MinorSkillShuffle(IDs.InoTreeNodes + IDs.UroTreeNodes + IDs.DLC4TreeNodes)])
 
@@ -102,11 +102,11 @@ class ArtShuffleOption():
         subOuroTalentArts = SubOption(nameOuroTalentArts, mainOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight)
         subHackerArts = SubOption(nameHackerArts, mainOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight)
 
-# ClassArtOption = ArtShuffleOption(nameClassArts, IDs.ArtIDs)
-# OuroArtOption = ArtShuffleOption(nameOuroArts, IDs.OuroborosArtIDs)
-# TalentArtOption = ArtShuffleOption(nameTalentArts, IDs.TalentArtIDs)
-# OuroTalentArtOption = ArtShuffleOption(nameOuroTalentArts, IDs.OuroTalentArtIDs)
-# SoulHackerArtOption = ArtShuffleOption(nameHackerArts, IDs.HackerArtIDs)
+ClassArtOption = ArtShuffleOption(nameClassArts, IDs.ArtIDs)
+OuroArtOption = ArtShuffleOption(nameOuroArts, IDs.OuroborosArtIDs)
+TalentArtOption = ArtShuffleOption(nameTalentArts, IDs.TalentArtIDs)
+OuroTalentArtOption = ArtShuffleOption(nameOuroTalentArts, IDs.OuroTalentArtIDs)
+SoulHackerArtOption = ArtShuffleOption(nameHackerArts, IDs.HackerArtIDs)
 
 # HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])
 CostumesOption = Option("Class Costumes", Character, "Randomizes class outfits", [lambda: Costumes.LearnedClassOutfits()])
