@@ -20,7 +20,6 @@ def MinorSkillShuffle(targetSkills): # Seperated to keep balancing intact. We co
                 
         JSONParser.CloseFile(skillData, skillFile)
         
-
 def SkillRandoMain():
     with open("XC3/JsonOutputs/btl/BTL_Skill_PC.json", 'r+', encoding='utf-8') as skillFile:
         with open(f"XC3/JsonOutputs/btl/BTL_Enhance.json", 'r+', encoding='utf-8') as enhanceFile:
@@ -57,7 +56,7 @@ def SkillRandoMain():
 
 class SkillRandoFiles():
     def __init__(self, skillData, nameData, enhanceData, odds):
-        self.originalSkillData = skillData
+        self.originalSkillData = copy.deepcopy(skillData) # A copy of the original data to pull vanilla skills from
         self.skillData = skillData
         self.nameData = nameData
         self.enhanceData = enhanceData
@@ -68,7 +67,7 @@ class SkillRandoFiles():
         skillList:Helper.RandomGroup = self.CreateSkillList(replacementSkillIDs, invalidReplacementIDs, isCustomReplacementBaseGameOnly)
         
         for skill in self.skillData["rows"]: # Replace the list
-            copyKeys = ["Enhance1", "Enhance2", "Enhance3", "Enhance4", "Enhance5", "Icon"]
+            copyKeys = ["Name", "Enhance1", "Enhance2", "Enhance3", "Enhance4", "Enhance5", "Icon"]
             if not Helper.OddsCheck(self.odds):
                 continue
             if skill["$id"] not in targetSkillIDs:
@@ -77,10 +76,8 @@ class SkillRandoFiles():
             chosenSkill = skillList.SelectRandomMember()
     
             if isinstance(chosenSkill, Enhancements.Enhancement): # If we get a custom enhancement convert it to workable data
-                self.DetermineName(chosenSkill, skill)
                 chosenSkill = self.DefineNewSkill(chosenSkill, customSkillEnhancementRanges)
             else:
-                copyKeys.append("Name") # Names should be copied if they are vanilla skills
                 self.ExtendSkillLength(chosenSkill)
             
             Helper.CopyKeys(skill, chosenSkill, copyKeys, isGoodKeys=True)
@@ -126,7 +123,7 @@ class SkillRandoFiles():
 
     def DefineNewSkill(self, chosenSkill:Enhancements.Enhancement, ranges): 
         newSkill = {
-        "Name": chosenSkill.name,
+        "Name": self.DetermineName(chosenSkill),
         "Icon": chosenSkill.skillIcon,
         }
         for i in range(1,6):
@@ -136,7 +133,7 @@ class SkillRandoFiles():
                 newSkill[f"Enhance{i}"] = chosenSkill.CreateEffect(self.enhanceData, powerPercent=Helper.RandomDecimal(ranges[i-1][0],ranges[i-1][1]))
         return newSkill
 
-    def DetermineName(self,chosenSkill:Enhancements.Enhancement, skill):
+    def DetermineName(self, chosenSkill:Enhancements.Enhancement):
         if chosenSkill.roleType == Enhancements.Atk:
             secondWordList = ["Strikes", "Edge", "Blast", "Slashes"]
         elif chosenSkill.roleType == Enhancements.Hlr:
@@ -146,9 +143,18 @@ class SkillRandoFiles():
         else:
             secondWordList = ["Aura", "Power"]
             
-        for name in self.nameData["rows"]:
-            if name["$id"] == skill["Name"]:
-                secondWord = random.choice(secondWordList)
-                name["name"] = f"{chosenSkill.name} {secondWord}"
-                break
+        newName = {
+            "$id": len(self.nameData["rows"])+1,
+            "label": "<D776CC82>",
+            "style": 15,
+            "name": f"{chosenSkill.name} {random.choice(secondWordList)}"
+        }
+        
+        self.nameData["rows"].append(newName)
+        
+        return newName["$id"]
+            
+
+            
+        
  
