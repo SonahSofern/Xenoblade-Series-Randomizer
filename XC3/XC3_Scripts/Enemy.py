@@ -1,5 +1,5 @@
 
-import json, random, copy, traceback, math
+import json, copy
 from XC3.XC3_Scripts import IDs, Options
 from scripts import Helper, JSONParser, PopupDescriptions, Enemies as Enemy
 from pathlib import Path

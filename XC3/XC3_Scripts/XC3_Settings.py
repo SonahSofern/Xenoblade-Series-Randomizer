@@ -18,6 +18,7 @@ Titlescreen = scripts.XCRandomizer.FilePlacer(["Images/Logos/original.wilay"],  
 extraArgs = ["--hashes", scripts.XCRandomizer.Onefile.Directory("XC3/Loader/xbc3Hashes.txt")] # Hash Table
 
 postCommands = [lambda: ShowTitleScreenText(), lambda: Options.Enhancements.EnhancementsList.RefreshCurrentGroup()]
+preCommands = [lambda: Options.Enhancements.CreateEnhancements()]
 mainFolderNames = ["des", "btl", "evt", "fld", "map", "prg", "qst", "sys", "zzz", "mnu", "dlc"]
 subFolderNames = ["autotalk", "battle", "field", "menu", "quest", "system"]
 textFolderName= "gb/game"

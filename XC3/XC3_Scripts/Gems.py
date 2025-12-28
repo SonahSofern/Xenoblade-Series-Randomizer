@@ -2,8 +2,6 @@ import json, random, copy
 from scripts import JSONParser, Helper, PopupDescriptions
 from XC3.XC3_Scripts import Enhancements
 
-
-
 def GemRando(): # Match class to skill type probably or at least an option to
     ignoreKeys = ["$id", "Category", "GemLv", "Name", "Rarity", "Price", "Craft", "Craft2", "Icon", "Name_dlc04", "<227CA3FA>"]
     MiscCategory = [1,2,3,4,5]

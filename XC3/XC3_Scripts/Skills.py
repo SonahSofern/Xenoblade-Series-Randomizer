@@ -62,10 +62,18 @@ class SkillRandoFiles():
         self.enhanceData = enhanceData
         self.odds = odds
         
-    def SkillRando(self, targetSkillIDs, replacementSkillIDs, invalidReplacementIDs, isCustomReplacementBaseGameOnly, customSkillEnhancementRanges):
+    def SkillRando(self, targetSkillIDs, replacementSkillIDs, invalidReplacementIDs, isCustomReplacementBaseGameOnly, customSkillEnhancementRanges):     
+        matchClassType = Options.MajorSkillOption_MatchClassType.GetState()
         
-        skillList:Helper.RandomGroup = self.CreateSkillList(replacementSkillIDs, invalidReplacementIDs, isCustomReplacementBaseGameOnly)
-        
+        if matchClassType:
+            classTypeWeight = Options.MajorSkillOption_MatchClassType.GetSpinbox()
+            AttackerGroup = self.CreateRoleGroup(IDs.AttackerSkillIDs, Enhancements.Atk, replacementSkillIDs, invalidReplacementIDs, isCustomReplacementBaseGameOnly)
+            DefenderGroup = self.CreateRoleGroup(IDs.DefenderSkillIDs, Enhancements.Def, replacementSkillIDs, invalidReplacementIDs, isCustomReplacementBaseGameOnly)
+            HealerGroup = self.CreateRoleGroup(IDs.HealerSkillIDs, Enhancements.Hlr, replacementSkillIDs, invalidReplacementIDs, isCustomReplacementBaseGameOnly)
+            MixedGroup = self.CreateRoleGroup(IDs.MixedSkillIDs, Enhancements.Misc, replacementSkillIDs, invalidReplacementIDs, isCustomReplacementBaseGameOnly)
+        else:
+            skillList:Helper.RandomGroup = self.CreateSkillList(replacementSkillIDs, invalidReplacementIDs, isCustomReplacementBaseGameOnly)
+            
         for skill in self.skillData["rows"]: # Replace the list
             copyKeys = ["Name", "Enhance1", "Enhance2", "Enhance3", "Enhance4", "Enhance5", "Icon"]
             if not Helper.OddsCheck(self.odds):
@@ -73,8 +81,13 @@ class SkillRandoFiles():
             if skill["$id"] not in targetSkillIDs:
                 continue
             
-            chosenSkill = skillList.SelectRandomMember()
-    
+            if matchClassType:
+                group:Helper.RandomGroup = random.choices(self.SelectRoleTypedMember(skill, AttackerGroup, DefenderGroup, HealerGroup, MixedGroup), [classTypeWeight, 100-classTypeWeight], k=1)[0]
+            else:
+                group = skillList
+                
+            chosenSkill = group.SelectRandomMember()
+                
             if isinstance(chosenSkill, Enhancements.Enhancement): # If we get a custom enhancement convert it to workable data
                 chosenSkill = self.DefineNewSkill(chosenSkill, customSkillEnhancementRanges)
             else:
@@ -82,7 +95,21 @@ class SkillRandoFiles():
             
             Helper.CopyKeys(skill, chosenSkill, copyKeys, isGoodKeys=True)
 
-    def CreateSkillList(self, replacementSkillIDs, invalidReplacementIDs, isCustomReplacementBaseGameOnly):
+    def CreateRoleGroup(self, roleSkillIDs, roleType, replacementSkillIDs, invalidReplacementIDs, isCustomReplacementBaseGameOnly):
+        matching = self.CreateSkillList([x for x in roleSkillIDs if x in replacementSkillIDs], invalidReplacementIDs, isCustomReplacementBaseGameOnly, roleType)
+        nonMatching = self.CreateSkillList([x for x in replacementSkillIDs if x not in roleSkillIDs], invalidReplacementIDs, isCustomReplacementBaseGameOnly, roleType)
+        return [matching, nonMatching]
+    
+    def SelectRoleTypedMember(self, skill, AttackerGroup, DefenderGroup, HealerGroup, MixedGroup):
+        if skill["$id"] in IDs.AttackerSkillIDs:
+            return AttackerGroup
+        if skill["$id"] in IDs.DefenderSkillIDs:
+            return DefenderGroup
+        if skill["$id"] in IDs.HealerSkillIDs:
+            return HealerGroup
+        return MixedGroup
+
+    def CreateSkillList(self, replacementSkillIDs, invalidReplacementIDs, isCustomReplacementBaseGameOnly, customReplacementTargetRole = None):
         skillList = Helper.RandomGroup()
         
         if Options.MajorSkillOption_VanillaSkills.GetState(): # Generate Vanilla Replacement Skill List
@@ -102,6 +129,8 @@ class SkillRandoFiles():
                     elif enh.isBaseGameOnly:  # Dont add Base Game only enhancement to the pool 
                         continue
                 if enh.skillIcon == Enhancements.invalidSkillIcon:
+                    continue
+                if customReplacementTargetRole != None and enh.roleType != customReplacementTargetRole:
                     continue
                 skillList.AddNewData(copy.copy(enh))
                     
@@ -135,13 +164,13 @@ class SkillRandoFiles():
 
     def DetermineName(self, chosenSkill:Enhancements.Enhancement):
         if chosenSkill.roleType == Enhancements.Atk:
-            secondWordList = ["Strikes", "Edge", "Blast", "Slashes"]
+            secondWordList = ["Strikes", "Edge", "Blast", "Slashes", "Barrages", "Fists", "Combos"]
         elif chosenSkill.roleType == Enhancements.Hlr:
-            secondWordList = ["Support", "Training", "Assist"]
+            secondWordList = ["Support", "Training", "Assist", "Recovery", "Gambit", "Blessing"]
         elif chosenSkill.roleType == Enhancements.Def:
-            secondWordList = ["Footwork", "Defenses", "Stance"]
+            secondWordList = ["Footwork", "Defenses", "Stance", "Eye", "Sanctuary", "Formation"]
         else:
-            secondWordList = ["Aura", "Power"]
+            secondWordList = ["Aura", "Power", "Boost", "System", "Potential"]
             
         newName = {
             "$id": len(self.nameData["rows"])+1,
@@ -157,4 +186,34 @@ class SkillRandoFiles():
 
             
         
- 
+ # Used to get IDs
+# def GetSkillRoleType(targetRoleType):
+#     roleList = []
+#     import json
+#     with open("XC3/JsonOutputs/btl/BTL_Skill_PC.json", 'r+', encoding='utf-8') as skillFile:
+#         with open(f"XC3/JsonOutputs/btl/BTL_Enhance.json", 'r+', encoding='utf-8') as enhanceFile:
+#             with open(f"XC3/JsonOutputs/btl/BTL_EnhanceEff.json", 'r+', encoding='utf-8') as enhanceEffFile:
+#                 skillData = json.load(skillFile)
+#                 enhanceData = json.load(enhanceFile)
+#                 enhanceEffData = json.load(enhanceEffFile)
+#                 replacementIDs =  IDs.BaseGameClassSkills + IDs.InoSkillTree + IDs.SoulhackerSkills + IDs.UroSkills + IDs.DLC4Skills + IDs.PairSkills
+#                 for skill in skillData["rows"]:
+#                     if skill["$id"] > 96:
+#                         if skill["$id"] in replacementIDs:
+#                             if skill["$id"] not in AttackerSkillIDs + DefenderSkillIDs + HealerSkillIDs:
+#                                 roleList.append(skill["$id"])
+#                             # for enh in enhanceData["rows"]:
+#                             #     if skill["Enhance1"] == enh["$id"]:
+#                             #         for enhEff in EnhancementsList.originalGroup:
+#                             #             if enh["EnhanceEffect"] == enhEff.effID:
+#                             #                 if enhEff.roleType == targetRoleType:
+#                             #                     roleList.append(skill["$id"])
+                                        
+#                 return roleList
+
+# AttackerSkillIDs = [1, 2, 3, 4, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 41, 42, 43, 44, 53, 54, 55, 56, 69, 70, 71, 72, 73, 74, 75, 76, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 109, 110, 112, 114, 115, 116, 118, 122, 124, 128, 132, 133, 135, 136, 178, 179, 181, 200, 203, 205, 211, 212, 213, 218, 220, 221, 223, 227, 233, 237, 240, 243, 245, 247, 252, 253, 256, 257, 263, 293, 295, 296, 297, 299, 300, 302, 303, 304, 305, 315, 341, 342, 350, 351, 353, 401, 402, 403, 405, 409, 412, 415]
+# DefenderSkillIDs = [5, 6, 7, 8, 17, 18, 19, 20, 45, 46, 47, 48, 61, 62, 63, 64, 77, 78, 79, 80, 111, 117, 120, 130, 131, 189, 190, 196, 199, 201, 208, 209, 214, 224, 232, 235, 244, 251, 255, 258, 260, 261, 262, 272, 276, 322, 323, 324, 343, 411]
+# HealerSkillIDs = [9, 10, 11, 12, 13, 14, 15, 16, 33, 34, 35, 36, 37, 38, 39, 40, 49, 50, 51, 52, 57, 58, 59, 60, 65, 66, 67, 68, 81, 82, 83, 84, 121, 191, 210, 215, 216, 217, 225, 226, 238, 264, 270, 291, 313, 331, 332, 333, 334]
+# MixedSkillIDs = [] + GetSkillRoleType(1)
+
+# print(MixedSkillIDs)

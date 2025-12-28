@@ -1,6 +1,7 @@
 # Gems, Skills, Arts, Accessories, Archsage Gauntlet ↓
 
 import json, random
+from XC3.XC3_Scripts import IDs
 from scripts import Helper
 
 # TODO
@@ -13,9 +14,9 @@ Normal = [10,100]
 
 # Used for skills to choose icons for 
 Misc = 0 #Mixed/Misc
-Atk = 1 #atk
-Hlr = 2 #healer
-Def = 3 #defender
+Atk = 2 #atk
+Hlr = 3 #healer
+Def = 1 #defender
 
 low = 0 
 high = 0
@@ -260,7 +261,7 @@ def CreateEnhancements():
     Enhancement("Devils", 169, 193, 1, Misc, [1,5], isGem=False, isAccessory=False) # <3F91CECC> Apply param1 random debuffs on art
     Enhancement("Blessed", 170, 194, 1, Misc, [1,5], skillIcon=22) # <E7C12D95> # Wonder if this works as a passive
     # Enhancement("", 171, 0, 1, M, [], skillIcon=0) # <C29024C3>
-    Enhancement("Explosive", 172, 197, 1, Misc, [5,15], [300,800], skillIcon=49) # Damage Bomb (Self KO)
+    Enhancement("Explosive", 172, 197, 1, Atk, [5,15], [300,800], skillIcon=49) # Damage Bomb (Self KO)
     Enhancement("Spirit", 173, 198, 1, Misc, [20,80], skillIcon=26) # Party Recharge (Self KO)
     # Enhancement("", 174, 0, 1, M, [], [], skillIcon=0) # <48F464E4>
     Enhancement("Perfect", 175, 199, 1, Misc, skillIcon=22) # Perfect Hit (Cancel)
@@ -518,8 +519,6 @@ def CreateEnhancements():
     # Enhancement("", 422, 0, 0, M, [], [], skillIcon=0) # <C7118AF0>
     # Enhancement("", 423, 0, 0, M, [], skillIcon=0) # <EBFBFD29>
     # Enhancement("", 420, 0, 0, M, [], skillIcon=0) # <378C7FD9>
-
-CreateEnhancements()
 
 
 

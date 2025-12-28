@@ -82,6 +82,7 @@ MajorSkillOption_AffinityGrowthSkills = SubOption("Affinity Growth Skills", Majo
 MajorSkillOption_UnitySkills = SubOption("Unity Pairing Skills", MajorSkillOption)
 MajorSkillOption_VanillaSkills = SubOption("Allow Vanilla Pool", MajorSkillOption)
 MajorSkillOption_CustomSkills = SubOption("Allow Custom Pool", MajorSkillOption)
+MajorSkillOption_MatchClassType = SubOption("Match Role Type", MajorSkillOption, hasSpinBox=True, spinDesc="% Matching Skills", spinDefault=70)
 
 MinorSkillOption = Option("Minor Skills", Character, "Randomizes minor skills among themselves", [lambda: Skills.MinorSkillShuffle(IDs.InoTreeNodes + IDs.UroTreeNodes + IDs.DLC4TreeNodes)])
 
