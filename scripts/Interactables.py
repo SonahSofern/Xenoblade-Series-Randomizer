@@ -2,8 +2,12 @@ from tkinter import ttk
 from tkinter import *
 from scripts import PopupDescriptions, ScrollPanel, Theme, Helper
 
-Game = "" # Used to tell what option goes to what games tab
+Game = "" # Used to tell what option goes to what games tab at runtime
 DescriptionIndicator = "🛈"
+
+class Label():
+    def __init__(self):
+        pass
 
 class Option():
     def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", commands:list = [], defState = False, prio = 50, hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False, stepSpeed = 0.05):
@@ -39,12 +43,12 @@ class Option():
         self.spinWidth = spinWidth
         self.spinIncr = spinIncr
         
-    def DisplayOption(self, tab, root):
+    def DisplayOption(self, tab, root, style):
         self.root = root
-        self.GenStandardOption(tab)
+        self.GenStandardOption(tab, style)
         self.StateUpdate()
         
-    def GenStandardOption(self, parentTab):    # This probably shouldnt be a class function what if we want to make a nonstandard option we could make a carveout and let you call a custom function but how would you set everything with a custom function
+    def GenStandardOption(self, parentTab, style):    # This probably shouldnt be a class function what if we want to make a nonstandard option we could make a carveout and let you call a custom function but how would you set everything with a custom function
 
         # Variables
         global rowIncrement
@@ -53,11 +57,11 @@ class Option():
         self.spinBoxObj = ttk.Spinbox()
 
         # Parent Frame
-        optionPanel = ttk.Frame(parentTab, style=f"Dark.TFrame")
+        optionPanel = ttk.Frame(parentTab, style=f"{style}.TFrame", padding=(0,0,2000,0))
         optionPanel.grid(row = rowIncrement, column = 0, sticky="ew")
         
         # Major Option Checkbox
-        self.checkBox = ttk.Checkbutton(optionPanel, variable= self.checkBoxVal, text=self.name, width=30, style="Dark.TCheckbutton", command=lambda: (self.StateUpdate(), [cmd() for cmd in self.clickCommands]))
+        self.checkBox = ttk.Checkbutton(optionPanel, variable= self.checkBoxVal, text=self.name, width=30, style=f"{style}.TCheckbutton", command=lambda: (self.StateUpdate(), [cmd() for cmd in self.clickCommands]))
         self.checkBox.grid(row=rowIncrement, column = 0, sticky="w")
         
         if self.descData == None:
@@ -67,10 +71,10 @@ class Option():
         
         # Description Label or Button
         if self.descData != None:
-            self.descObj = ttk.Button(optionPanel, text = text, command=lambda: PopupDescriptions.StyledPopup(self.name, self.descData, self.root), style="Dark.TButton", width=60)
+            self.descObj = ttk.Button(optionPanel, text = text, command=lambda: PopupDescriptions.StyledPopup(self.name, self.descData, self.root), style=f"{style}.TButton", width=60)
             padx = 13
         else:
-            self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, style="Dark.TLabel", wraplength=400)
+            self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, style=f"{style}.TLabel", wraplength=400)
             padx= 0
         self.descObj.grid(row=rowIncrement, column = 1, sticky="w", padx=padx)
         
@@ -83,16 +87,15 @@ class Option():
             self.spinBoxObj.configure(validatecommand=(self.spinBoxObj.register(validateSpinbox), "%P", self.spinBoxMin, self.spinBoxMax))
             self.spinBoxObj.bind("<FocusOut>", lambda e, val=self.spinBoxVal: EmptyboxHandler(val))
             self.spinBoxObj.grid(row=rowIncrement, column = 3, padx=(15,0))
-            self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w", style="Dark.TLabel")
+            self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w", style=f"{style}.TLabel")
             self.spinBoxLabel.grid(row=rowIncrement, column = 4, sticky="w", padx=0)
             disable_spinbox_scroll(self.spinBoxObj)
-
 
         for sub in self.subOptions:
             rowIncrement += 1
             sub.checkBoxVal = BooleanVar(value=sub.defState)
             sub.checkBoxVal.trace_add("write", lambda name, index, mode: self.StateUpdate())
-            sub.checkBox = ttk.Checkbutton(optionPanel, text=sub.name, variable=sub.checkBoxVal, style="DarkSub.TCheckbutton", width=25)
+            sub.checkBox = ttk.Checkbutton(optionPanel, text=sub.name, variable=sub.checkBoxVal, style=f"{style}Sub.TCheckbutton", width=25)
             sub.checkBox.grid(row=rowIncrement, column=0, sticky="sw")
             if sub.hasSpinBox:
                 sub.spinBoxVal = IntVar(value=sub.spinDefault)
@@ -100,7 +103,7 @@ class Option():
                 sub.spinBoxObj.configure(validatecommand=(sub.spinBoxObj.register(validateSpinbox), "%P", sub.spinBoxMin, sub.spinBoxMax))
                 sub.spinBoxObj.bind("<FocusOut>", lambda e, val=sub.spinBoxVal: EmptyboxHandler(val))
                 sub.spinBoxObj.grid(row=rowIncrement, column=1, padx=(20,0), pady=(0,0), sticky="w")
-                sub.spinBoxLabel = ttk.Label(optionPanel, text=sub.spinDesc, style="DarkNoMargin.TLabel")
+                sub.spinBoxLabel = ttk.Label(optionPanel, text=sub.spinDesc, style=f"{style}NoMargin.TLabel")
                 sub.spinBoxLabel.grid(row=rowIncrement, column=1, sticky="w", padx=(80,0))
                 disable_spinbox_scroll(sub.spinBoxObj)
 
@@ -152,6 +155,7 @@ def EmptyboxHandler(val):
         val.set(0)
 
 def validateSpinbox(input, min, max):
+    '''Because tkinters handling of spinboxes doesn't work when typing values, made one to accomodate typing in values'''
     if input == "": # Allow deleting the whole thing
         return True
     if not input.isdigit():
@@ -264,3 +268,4 @@ def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
         ChosenResolution = False
 
     return ChosenResolution
+

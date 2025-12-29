@@ -1,4 +1,4 @@
-from scripts.Interactables import Option, SubOption
+from scripts.Interactables import Option, SubOption, Label
 from scripts import Helper
 import scripts.Interactables
 from XC3.XC3_Scripts import Shortcuts, Skills, Heroes, QOL as Quality, Enemy , IDs, Enhancements, Accessories, Gems, Arts, Items, Costumes, Class, Chaos, Music
@@ -62,7 +62,7 @@ UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption, hasSpinBox=True,
 UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=2)
 UniqueEnemyOption_MatchSize = SubOption("Match Size", UniqueEnemyOption)
 
-BossEnemyOption = Option("Story Bosses", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, BossEnemyOption_MatchSize, BossEnemyOption_GroupFights)], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True)
+BossEnemyOption = Option("Boss Monsters", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, BossEnemyOption_MatchSize, BossEnemyOption_GroupFights)], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True)
 BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, spinDefault=3, spinDesc=weightsSpinDescription)
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True, spinDefault=6)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True, spinDefault=20)
@@ -75,14 +75,14 @@ GemsOption = Option("Gems", Character, "Randomizes the effects of Gems", [lambda
 
 MajorSkillOption = Option("Major Skills", Character, "Randomizes the chosen major skill categories", [lambda: Skills.SkillRandoMain()], hasSpinBox=True)
 MajorSkillOption_MatchClassType = SubOption("Match Role Type", MajorSkillOption, hasSpinBox=True, spinDesc="% Matching Skills", spinDefault=70)
+MajorSkillOption_VanillaSkills = SubOption("Allow Vanilla Pool", MajorSkillOption)
+MajorSkillOption_CustomSkills = SubOption("Allow Custom Pool", MajorSkillOption)
 MajorSkillOption_ClassSkills = SubOption("Class Skills", MajorSkillOption)
 MajorSkillOption_OuroSkills = SubOption("Ouroboros Skills", MajorSkillOption)
 MajorSkillOption_HackerSkills = SubOption("Soul Hacker Skills", MajorSkillOption)
 MajorSkillOption_InoSkills = SubOption("Ino Skills", MajorSkillOption)
 MajorSkillOption_AffinityGrowthSkills = SubOption("Affinity Growth Skills", MajorSkillOption)
 MajorSkillOption_UnitySkills = SubOption("Unity Pairing Skills", MajorSkillOption)
-MajorSkillOption_VanillaSkills = SubOption("Allow Vanilla Pool", MajorSkillOption)
-MajorSkillOption_CustomSkills = SubOption("Allow Custom Pool", MajorSkillOption)
 
 MinorSkillOption = Option("Minor Skills", Character, "Randomizes minor skills among themselves", [lambda: Skills.MinorSkillShuffle(IDs.InoTreeNodes + IDs.UroTreeNodes + IDs.DLC4TreeNodes)])
 

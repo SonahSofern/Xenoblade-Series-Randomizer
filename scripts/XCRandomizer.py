@@ -100,9 +100,17 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
         MainWindow.add(value, text =TabDict[tab]) 
         
     MainWindow.pack(expand = True, fill ="both", padx=windowPadding, pady=(windowPadding, 5))
-
+    
+    def AlternateStyle(curStyle):
+        if curStyle == "Dark":
+            return "Light"
+        else:
+            return "Dark"
+        
+    style= "Dark"
     for opt in Interactables.XenoOptionDict[Game]:
-        opt.DisplayOption(InnerDict[opt.tab], XCFrame)
+        style = AlternateStyle(style)
+        opt.DisplayOption(InnerDict[opt.tab], XCFrame, style)
 
     def GenRandomSeed(randoSeedEntryVar):
         randoSeedEntryVar.set(Seed.RandomSeedName(SeedNouns, SeedVerbs))

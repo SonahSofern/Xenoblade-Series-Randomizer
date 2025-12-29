@@ -7,6 +7,8 @@ windowHeight = "900"
 
 Black = "#000000"
 LightBlack="#262626"
+DarkerBlack="#1F1F1F"
+# LighterBlack="#303030"
 OffLightBlack="#303030"
 White = "#ffffff"
 Gray = "#D5D5D5"
@@ -212,13 +214,15 @@ except:
 
 style.theme_use("Dark Mode")
 
-style.configure("Dark.TFrame", background=currentTheme["darkColor"])
-style.configure("Dark.TButton", background=currentTheme["darkColor"], relief = FLAT)
-style.configure("Dark.TSpinbox", background=currentTheme["darkColor"])
-style.configure("Dark.TLabel", background=currentTheme["darkColor"])
-style.configure("Dark.TCheckbutton", background=currentTheme["darkColor"], padding=(20, 10))
-style.configure("DarkSub.TCheckbutton", background=currentTheme["darkColor"])
-style.configure("DarkNoMargin.TLabel", margin=(0,0), padding=(20,0), background=currentTheme["darkColor"])
+for customStyle in [("Light", DarkerBlack), ("Dark", LightBlack)]:
+    style.configure(f"{customStyle[0]}.TFrame", background=customStyle[1])
+    style.configure(f"{customStyle[0]}.TButton", background=customStyle[1], relief = FLAT)
+    style.configure(f"{customStyle[0]}.TSpinbox", background=customStyle[1])
+    style.configure(f"{customStyle[0]}.TLabel", background=customStyle[1])
+    style.configure(f"{customStyle[0]}.TCheckbutton", background=customStyle[1], padding=(20, 10))
+    style.configure(f"{customStyle[0]}Sub.TCheckbutton", background=customStyle[1])
+    style.configure(f"{customStyle[0]}NoMargin.TLabel", margin=(0,0), padding=(20,0), background=customStyle[1])
+
 
 style.configure("Title.TLabel",foreground="white",background=currentTheme["midColor"],padding=5)
 style.configure("Randomize.TButton")
