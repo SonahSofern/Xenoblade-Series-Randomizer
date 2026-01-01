@@ -1,7 +1,7 @@
 import json, random
 from XC2.XC2_Scripts.CharacterRandomization import ReplacementCharacter2Original
 from XC2.XC2_Scripts import CharacterRandomization, Options
-from scripts import Helper, PopupDescriptions
+from scripts import Helper, PopupDescriptions, JSONParser
 # Lists of cosmetics to choose from
 ValidDriverCosmetics = []
 ValidBladeCosmetics = [] 
@@ -141,7 +141,7 @@ def CosmeticPairs(nameData, itmData,odds, charKeyWord, cosmeticsList):
                     oldName = _Acc["name"]
                     oldNameList = oldName.split()
                     firstWord = oldNameList[0]
-                    _Acc["name"] = f"{firstWord} {cosm.characterName}"  
+                    _Acc["name"] = f"{cosm.characterName}'s {firstWord}"  
                     # print(_Acc["name"])
                     break
                 
@@ -156,19 +156,15 @@ def Cosmetics():
     odds = Options.CosmeticsOption.GetSpinbox()
     
     # Drivers
-    with open("./XC2/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as file:
+    with open("./XC2/JsonOutputs/common/ITM_PcEquip.json", 'r+', encoding='utf-8') as eqFile:
         with open("./XC2/JsonOutputs/common_ms/itm_pcequip.json", 'r+', encoding='utf-8') as nameFile:  
-            eqData = json.load(file)
+            eqData = json.load(eqFile)
             accNameData = json.load(nameFile)
             
             CosmeticPairs(accNameData, eqData, odds, "Driver", ValidDriverCosmetics)
             
-            nameFile.seek(0)
-            nameFile.truncate()
-            json.dump(accNameData, nameFile, indent=2, ensure_ascii=False)
-        file.seek(0)
-        file.truncate()
-        json.dump(eqData, file, indent=2, ensure_ascii=False)
+            JSONParser.CloseFile(accNameData, nameFile)
+            JSONParser.CloseFile(eqData, eqFile)
         
     # Blades
     with open("./XC2/JsonOutputs/common/ITM_OrbEquip.json", 'r+', encoding='utf-8') as orbFile:
@@ -178,16 +174,13 @@ def Cosmetics():
             
             CosmeticPairs(nameData,orbData,odds,"Blade", ValidBladeCosmetics)
             
-            nameFile.seek(0)
-            nameFile.truncate()
-            json.dump(nameData, nameFile, indent=2, ensure_ascii=False)
-        orbFile.seek(0)
-        orbFile.truncate()
-        json.dump(orbData, orbFile, indent=2, ensure_ascii=False)
+            JSONParser.CloseFile(nameData, nameFile)
+            JSONParser.CloseFile(orbData, orbFile)
+
         
     # ArtificialBlades 
-    with open("./XC2/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as file:
-        eqData = json.load(file)
+    with open("./XC2/JsonOutputs/common/ITM_HanaAssist.json", 'r+', encoding='utf-8') as eqFile:
+        eqData = json.load(eqFile)
         for Acc in eqData["rows"]:
             if (odds > random.randint(0,99)):
                 try:
@@ -199,9 +192,7 @@ def Cosmetics():
                     Acc["Blade"] = ReplacementCharacter2Original[cosm.characterID]
                 else:
                     Acc["Blade"] = cosm.characterID
-        file.seek(0)
-        file.truncate()
-        json.dump(eqData, file, indent=2, ensure_ascii=False)
+        JSONParser.CloseFile(eqData, eqFile)
         
     # Clear globals
     ValidDriverCosmetics.clear()

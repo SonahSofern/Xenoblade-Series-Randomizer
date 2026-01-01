@@ -62,7 +62,7 @@ saveCommands = []
 
 # Some of the oldest code and messy for sure. 
 def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, postCommands = [], preCommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= [], setupHelpDesc = None): 
-    windowPadding = 20
+    windowPadding = 30
     if Onefile.isOneFile:
         fileEntryVar = os.path.join(sys._MEIPASS, Game, 'bdat')
     else:

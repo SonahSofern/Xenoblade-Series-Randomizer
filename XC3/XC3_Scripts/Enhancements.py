@@ -274,8 +274,8 @@ def CreateEnhancements():
     Enhancement("Stance", 182, 210, 1, Misc, [50,250], skillIcon=0) # Stance Duration Up
     Enhancement("Buffer", 183, 211, 1, Misc, [5,20], skillIcon=38) # Buff Heal
     # Enhancement("", 184, 0, 1, M, [], [], skillIcon=0) # <CF9BFB20>
-    Enhancement("Tender", 185, 215, 1, Misc, [100,100], skillIcon=24) # Tender Auto-Attack
-    Enhancement("Tender", 186, 216, 1, Misc, [100,100], skillIcon=24) # Tender Arts
+    Enhancement("Tender", 185, 215, 1, Misc, [70,100], skillIcon=24) # Tender Auto-Attack
+    Enhancement("Tender", 186, 216, 1, Misc, [70,100], skillIcon=24) # Tender Arts
     Enhancement("Fusion", 187, 217, 1, Atk, [50,150], skillIcon=13) # Fusion Arts Up
     # Enhancement("", 188, 218, 1, M, [], [], skillIcon=0) # <27C116CB>
     Enhancement("Pacifist", 189, 219, 1, Misc, [100,400], skillIcon=12) # Aggro Reduce Up (Targeted)

@@ -106,7 +106,7 @@ ClassArtOption = ArtShuffleOption(nameClassArts, IDs.ArtIDs)
 OuroArtOption = ArtShuffleOption(nameOuroArts, IDs.OuroborosArtIDs)
 TalentArtOption = ArtShuffleOption(nameTalentArts, IDs.TalentArtIDs)
 OuroTalentArtOption = ArtShuffleOption(nameOuroTalentArts, IDs.OuroTalentArtIDs)
-SoulHackerArtOption = ArtShuffleOption(nameHackerArts, IDs.HackerArtIDs)
+# SoulHackerArtOption = ArtShuffleOption(nameHackerArts, IDs.HackerArtIDs)
 
 # HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])
 CostumesOption = Option("Class Costumes", Character, "Randomizes class outfits", [lambda: Costumes.LearnedClassOutfits()])
