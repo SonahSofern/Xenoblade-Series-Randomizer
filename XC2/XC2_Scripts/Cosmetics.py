@@ -121,7 +121,7 @@ BloodWitchNia = Cosmetic("pc/pc120201", 2, Nia, "Blood Witch Nia", Driver)
 # DefaultDriverNia = Cosmetic("pc/pc000201", 2, Nia, "Default Nia", Driver)
 
 
-def CosmeticPairs(nameData, itmData, odds, charKeyWord, cosmeticsList:Helper.RandomGroup):
+def CosmeticPairs(nameData, itmData, odds, charKeyWord, cosmeticsList:Helper.RandomGroup, isEquipLocked = False):
     pairs = {}
     for Acc in itmData["rows"]:
 
@@ -150,8 +150,12 @@ def CosmeticPairs(nameData, itmData, odds, charKeyWord, cosmeticsList:Helper.Ran
         
         if (CharacterRandomization.randomize_drivers or CharacterRandomization.randomize_blades) and (cosm.characterID in ReplacementCharacter2Original):
             Acc[f"{charKeyWord}"] = ReplacementCharacter2Original[cosm.characterID]
+            if isEquipLocked:
+                Acc["Flag"][f"EqPC{ReplacementCharacter2Original[cosm.characterID]:02}"] = 1 # Ensures the character can actually equip the item
         else:
             Acc[f"{charKeyWord}"] = cosm.characterID
+            if isEquipLocked:
+                Acc["Flag"][f"EqPC{cosm.characterID:02}"] = 1
                 
 def Cosmetics():
     global ValidArtificialBladeCosmetics, ValidBladeCosmetics, ValidDriverCosmetics
@@ -164,7 +168,7 @@ def Cosmetics():
             eqData = json.load(eqFile)
             accNameData = json.load(nameFile)
             
-            CosmeticPairs(accNameData, eqData, odds, "Driver", ValidDriverCosmetics)
+            CosmeticPairs(accNameData, eqData, odds, "Driver", ValidDriverCosmetics, True)
             
             JSONParser.CloseFile(accNameData, nameFile)
             JSONParser.CloseFile(eqData, eqFile)
