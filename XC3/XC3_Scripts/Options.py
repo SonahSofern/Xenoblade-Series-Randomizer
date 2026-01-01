@@ -114,8 +114,8 @@ CostumesOption = Option("Class Costumes", Character, "Randomizes class outfits",
 # ClassOption_DefaultClasses = SubOption("Default Classes", ClassOption)
 # ClassOption_HeroClasses = SubOption("Hero Classes", ClassOption)
 
-ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
-ShortcutsOption_Tutorials = SubOption("Tutorial Skip", ShortcutsOption, [lambda: Shortcuts.TutorialSkips()])
+# ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
+TutorialSkipOption = Option("Tutorial Skip", QOL, "Removes tutorials, also gives access to all systems from the start", [lambda: Shortcuts.TutorialSkips()])
 FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XC3/JsonOutputs/btl/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
 FasterApitudeOption = Option("CP Boost", QOL, "Increases the rate at which your characters learn classes", [lambda: Quality.ClassAptitude()], hasSpinBox=True, spinDesc = "x Faster", spinDefault=2)
 MoveSpeedOption = Option("Speed Boost", QOL, "Colony 4's affinity reward will be instant and a movespeed deed", [lambda: Quality.EarlyMoveSpeed()], hasSpinBox=True, spinDesc = "% Speed", spinMin=1, spinMax=255, spinIncr=10)

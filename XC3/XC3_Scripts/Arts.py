@@ -9,10 +9,9 @@ talentArtGroupData = Helper.RandomGroup()
 hackerArtGroupData = Helper.RandomGroup()
 groupData:list[Helper.RandomGroup] = [artGroupData, ouroArtGroupData,talentArtGroupData, ouroTalentArtGroupData, hackerArtGroupData]
 
-# Art level fixes
-# Art hits fixes (for example if it has a break topple combo and only 1 hit it cant do that)
+# Art hits fixes (need to match the original arts animations hits, so sword strike only hits once it just combines effects, but what about reactions hits)
 
-# Tutorial Fights need to be vetted (theres one that forces you to break topple daze for example)
+# Tutorial Fights need to be vetted (theres one that forces you to break topple daze for example) # Am going to just remove the requirement
 
 def ArtRando(targetGroupIDs, artOption, ouroArtOption, talentArtOption, ouroTalentArtOption, hackerArtOption, spinbox, extraIgnoreKeys):  
     global groupData  
@@ -20,7 +19,7 @@ def ArtRando(targetGroupIDs, artOption, ouroArtOption, talentArtOption, ouroTale
     SortingKeys =  ["ArtsCategory", "ArtsType"] # Keep things sorted in the menus
     StateKeys = ['StateName', 'StateName2', 'StateLoopNum', 'WpnType'] # So actions match the original art
     HitFrames = ['HitFrm01', 'HitFrm02', 'HitFrm03', 'HitFrm04', 'HitFrm05', 'HitFrm06', 'HitFrm07', 'HitFrm08', 'HitFrm09', 'HitFrm10', 'HitFrm11', 'HitFrm12', 'HitFrm13', 'HitFrm14', 'HitFrm15', 'HitFrm16']
-    ignoreKeys = ["$id",  unlockFlag, "UseChr", "UseTalent", "WpnType", "HitEff"] + StateKeys + HitFrames + extraIgnoreKeys + SortingKeys
+    ignoreKeys = ["$id",  unlockFlag, "UseChr", "UseTalent", "WpnType"] + StateKeys + HitFrames + extraIgnoreKeys + SortingKeys
 
     with open("XC3/JsonOutputs/btl/BTL_Arts_PC.json", 'r+', encoding='utf-8') as artFile:
         artData = json.load(artFile)
@@ -37,7 +36,12 @@ def ArtRando(targetGroupIDs, artOption, ouroArtOption, talentArtOption, ouroTale
                 continue
             
             chosenGroup = random.choices(groupData, Weights)
-            chosenArt = chosenGroup[0].SelectRandomMember()    
+            chosenArt = chosenGroup[0].SelectRandomMember()  
+            
+            GrowMatchStrongest(chosenArt, art, "Stance")
+            GrowMatchStrongest(chosenArt, art, "Recast") 
+            GrowMatchStrongest(chosenArt, art, "DmgMgn") 
+            GrowMatchStrongest(chosenArt, art, "Enhance")
             
             # Handle Duplicate named arts (just copy the result onto ones with the same name)
             if targetGroupIDs == IDs.ArtIDs:
@@ -50,6 +54,29 @@ def ArtRando(targetGroupIDs, artOption, ouroArtOption, talentArtOption, ouroTale
             group.RefreshCurrentGroup()
             
         JSONParser.CloseFile(artData, artFile)
+        
+def GetMatchLength(art, key, upper = 6):
+    '''Returns the max levels + 1 for the art'''
+    for i in range(1,upper):
+        if art[f"{key}{i}"] == 0:
+            return i
+    return 6
+
+def GrowMatchStrongest(chosenArt, originalArt, key):
+    '''Matches levels between arts, some arts don't level up as much as others and it breaks them if so'''
+    chosenMaxLength = GetMatchLength(chosenArt, key)
+    originalMaxLength = GetMatchLength(originalArt, key)
+    
+    if chosenMaxLength == 1: # The chosen art does not scale through levels through this key so we dont bother
+        return
+    
+    if originalMaxLength > chosenMaxLength:
+        for i in range(chosenMaxLength, originalMaxLength):
+            chosenArt[f"{key}{i}"] = chosenArt[f"{key}{chosenMaxLength-1}"]
+    elif originalMaxLength < chosenMaxLength:
+        pass
+    else:
+        pass
 
 def HandleRecastKeys(chosenArt, originalArt):
     '''Various logic determining how to recast the art depending on the group and its replacement'''
@@ -93,11 +120,6 @@ def HandleArtCopies(chosen, art, artData, ignoreKeys):
     for localArt in artData["rows"]:
         if localArt["Name"] == art["Name"] and localArt["UseChr"] == 0:
             Helper.CopyKeys(localArt, chosen, ignoreKeys)
-
-
-def FixMismatchLevelUpSlots():
-    # Some arts have 0s in slots when levelled up past a certain point
-    pass
 
 # ArtCategory 
 # 0 : Autos

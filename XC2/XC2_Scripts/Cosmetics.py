@@ -2,10 +2,11 @@ import json, random
 from XC2.XC2_Scripts.CharacterRandomization import ReplacementCharacter2Original
 from XC2.XC2_Scripts import CharacterRandomization, Options
 from scripts import Helper, PopupDescriptions, JSONParser
+
 # Lists of cosmetics to choose from
-ValidDriverCosmetics = []
-ValidBladeCosmetics = [] 
-ValidArtificialBladeCosmetics = [] 
+ValidDriverCosmetics = Helper.RandomGroup()
+ValidBladeCosmetics = Helper.RandomGroup()
+ValidArtificialBladeCosmetics = Helper.RandomGroup()
 
 # List passed to gen the options 
 CosmeticsList = []
@@ -15,7 +16,6 @@ Blade = 1
 Driver = 2
 ArtBlade = 3
 
-# Character Numbers
 Rex = "Rex"
 Nia = "Nia"
 Tora = "Tora"
@@ -38,13 +38,14 @@ class Cosmetic:
         self.cosmeticName = cosmeticName
         self.type = type
         CosmeticsList.append(self)
+        
     def CreateSubOptions(self, parentOption):
         if self.type == Driver:
-            Options.SubOption(self.cosmeticName, parentOption,  [lambda: ValidDriverCosmetics.append(self)])
+            Options.SubOption(self.cosmeticName, parentOption, [lambda: ValidDriverCosmetics.AddNewData(self)])
         elif self.type == Blade:
-            Options.SubOption(self.cosmeticName, parentOption,  [lambda: ValidBladeCosmetics.append(self)])
+            Options.SubOption(self.cosmeticName, parentOption, [lambda: ValidBladeCosmetics.AddNewData(self)])
         elif self.type == ArtBlade:
-            Options.SubOption(self.cosmeticName, parentOption,  [lambda: ValidArtificialBladeCosmetics.append(self)])
+            Options.SubOption(self.cosmeticName, parentOption, [lambda: ValidArtificialBladeCosmetics.AddNewData(self)])
 
 # Blades
 JadeOrchidBrighid = Cosmetic("bl/bl121001", 1009, Brighid, "Jade Orchid Brighid", Blade)
@@ -106,8 +107,8 @@ ScarletInquisitorMorag = Cosmetic("pc/pc120601", 6, Morag, "Scarlet Inquisitor M
 SurfinatorZeke = Cosmetic("pc/pc110501", 3, Zeke, "Surfinator Zeke", Driver)
 EmbercakeZeke = Cosmetic("pc/pc100501", 3, Zeke, "Embercake Zeke", Driver)
 ShiningJusticeZeke = Cosmetic("pc/pc120501", 3, Zeke, "Shining Justice Zeke", Driver)
-# DefaultZeke = Cosmetic("pc/pc000501", 3, Zeke, "Default Zeke", Driver)
 HoodedZeke = Cosmetic("pc/pc000502", 3, Zeke, "Hooded Zeke", Driver)
+# DefaultZeke = Cosmetic("pc/pc000501", 3, Zeke, "Default Zeke", Driver)
 
 BestGirlFanTora = Cosmetic("pc/pc110301", 4, Tora, "Best Girl Fan Tora", Driver)
 BusterModeTora = Cosmetic("pc/pc100301", 4, Tora, "Buster Mode Tora", Driver)
@@ -120,39 +121,41 @@ BloodWitchNia = Cosmetic("pc/pc120201", 2, Nia, "Blood Witch Nia", Driver)
 # DefaultDriverNia = Cosmetic("pc/pc000201", 2, Nia, "Default Nia", Driver)
 
 
-def CosmeticPairs(nameData, itmData,odds, charKeyWord, cosmeticsList):
+def CosmeticPairs(nameData, itmData, odds, charKeyWord, cosmeticsList:Helper.RandomGroup):
     pairs = {}
     for Acc in itmData["rows"]:
-        if Helper.OddsCheck(odds):
-            try:
-                cosm:Cosmetic = random.choice(cosmeticsList)
-            except:
+
+        # Keep pairing since we cant make more names
+        if Acc["Name"] in pairs:
+            cosm = pairs[Acc["Name"]]["cosm"]
+        else:
+            if not Helper.OddsCheck(odds):
                 continue
-            
-            # Keep pairing since we cant make more names
-            if Acc["Name"] in pairs:
-                cosm = pairs[Acc["Name"]]["cosm"]
-            else:
-                pairs[Acc["Name"]] = {"cosm": cosm}
-            
+            cosm:Cosmetic = cosmeticsList.SelectRandomMember()
+            pairs[Acc["Name"]] = {"cosm": cosm}
             
             for _Acc in nameData["rows"]: # Set name
                 if _Acc["$id"] == Acc["Name"]:
                     oldName = _Acc["name"]
                     oldNameList = oldName.split()
-                    firstWord = oldNameList[0]
+                    if len(oldNameList) > 2:
+                        firstWord = oldNameList[0] + " " + oldNameList[1]
+                    else:
+                        firstWord = oldNameList[0]
                     _Acc["name"] = f"{cosm.characterName}'s {firstWord}"  
                     # print(_Acc["name"])
                     break
+     
+        Acc["Model"] = cosm.model
+        
+        if (CharacterRandomization.randomize_drivers or CharacterRandomization.randomize_blades) and (cosm.characterID in ReplacementCharacter2Original):
+            Acc[f"{charKeyWord}"] = ReplacementCharacter2Original[cosm.characterID]
+        else:
+            Acc[f"{charKeyWord}"] = cosm.characterID
                 
-            Acc["Model"] = cosm.model
-            if (CharacterRandomization.randomize_drivers or CharacterRandomization.randomize_blades) and (cosm.characterID in ReplacementCharacter2Original):
-                Acc[f"{charKeyWord}"] = ReplacementCharacter2Original[cosm.characterID]
-            else:
-                Acc[f"{charKeyWord}"] = cosm.characterID
-            
 def Cosmetics():
-    # Slider
+    global ValidArtificialBladeCosmetics, ValidBladeCosmetics, ValidDriverCosmetics
+
     odds = Options.CosmeticsOption.GetSpinbox()
     
     # Drivers
@@ -172,7 +175,7 @@ def Cosmetics():
             orbData = json.load(orbFile)
             nameData = json.load(nameFile)
             
-            CosmeticPairs(nameData,orbData,odds,"Blade", ValidBladeCosmetics)
+            CosmeticPairs(nameData, orbData, odds ,"Blade", ValidBladeCosmetics)
             
             JSONParser.CloseFile(nameData, nameFile)
             JSONParser.CloseFile(orbData, orbFile)
@@ -194,11 +197,11 @@ def Cosmetics():
                     Acc["Blade"] = cosm.characterID
         JSONParser.CloseFile(eqData, eqFile)
         
-    # Clear globals
-    ValidDriverCosmetics.clear()
-    ValidBladeCosmetics.clear()
-    ValidArtificialBladeCosmetics.clear()
-
+    # Reset
+    ValidDriverCosmetics = Helper.RandomGroup()
+    ValidBladeCosmetics = Helper.RandomGroup()
+    ValidArtificialBladeCosmetics = Helper.RandomGroup()
+    
 
 def CosmeticsDescription():
     desc = PopupDescriptions.Description()
