@@ -96,9 +96,6 @@ BladeBattleSkillsOption = Option("Blade Battle Skills", Blade, "Randomizes a Bla
 BladeBattleSkillsOption_Duplicates = SubOption("Allow Duplicates", BladeBattleSkillsOption)
 BladeFieldSkillsOption = Option("Blade Field Skills", Blade, "Randomizes a Blade's field (green) skill tree", [lambda: FieldSkills.RandomizeFieldSkills()])
 BladeFieldSkillsOption_QuestSkills = SubOption("Quest Skills", BladeFieldSkillsOption)
-BladeSpecialButtonsOption = Option("Button Combos", Funny, "Randomizes inputs for button challenges", [lambda: ButtonCombos.BladeSpecialButtonChallenges()])
-BladeSpecialButtonsOption_ABXY = SubOption("ABXY", BladeSpecialButtonsOption)
-BladeSpecialButtonsOption_Mystery = SubOption("?", BladeSpecialButtonsOption)
 BladeSpecialOption = Option("Blade Specials", Blade, "Randomizes each hit of a blade special to have a random effect", [lambda:(BladeSpecials.BladeSpecials())], hasSpinBox = True, spinDefault=10, spinMax=30)
 BladeSpecialOption_Reaction = SubOption("Reactions", BladeSpecialOption)
 BladeSpecialOption_Enhancement = SubOption("Enhancement", BladeSpecialOption)
@@ -206,6 +203,9 @@ NewGamePlusFlagsOptions_Blades = SubOption("NG+ Blades", NewGamePlusFlagsOption,
 NewGamePlusFlagsOptionsHiddenDriverSkillTree = SubOption("Hidden Skill Tree Unlocked", NewGamePlusFlagsOption, [lambda: QualityOfLife.FixIssuesCausedByNGPlusFlag()])
 
 # Funny
+BladeSpecialButtonsOption = Option("Button Combos", Funny, "Randomizes inputs for button challenges", [lambda: ButtonCombos.BladeSpecialButtonChallenges()])
+BladeSpecialButtonsOption_ABXY = SubOption("ABXY", BladeSpecialButtonsOption)
+BladeSpecialButtonsOption_Mystery = SubOption("?", BladeSpecialButtonsOption)
 ProjTreasureChestOption = Option("Projectile Treasure Chests", Funny, "Launches your items from chests",[lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [15])])
 BladeSizeOption = Option("Blade Size", Funny, "Randomizes the size of Blades", [lambda: Scales.BladeScales()], hasSpinBox = True, prio=0)
 NPCSizeOption = Option("NPC Size", Funny, "Randomizes the size of NPCs", [lambda: Scales.NPCScales()], hasSpinBox = True)

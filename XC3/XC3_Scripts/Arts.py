@@ -10,13 +10,14 @@ hackerArtGroupData = Helper.RandomGroup()
 groupData:list[Helper.RandomGroup] = [artGroupData, ouroArtGroupData,talentArtGroupData, ouroTalentArtGroupData, hackerArtGroupData]
 
 # Art hits fixes (need to match the original arts animations hits, so sword strike only hits once it just combines effects, but what about reactions hits)
+# Getting your talent art up can be impossible depending on what arts you get
 
 # Tutorial Fights need to be vetted (theres one that forces you to break topple daze for example) # Am going to just remove the requirement
 
 def ArtRando(targetGroupIDs, artOption, ouroArtOption, talentArtOption, ouroTalentArtOption, hackerArtOption, spinbox, extraIgnoreKeys):  
     global groupData  
     unlockFlag = "<A2275574>"
-    SortingKeys =  ["ArtsCategory", "ArtsType"] # Keep things sorted in the menus
+    SortingKeys =  ["ArtsCategory"] # Keep things sorted in the menus
     StateKeys = ['StateName', 'StateName2', 'StateLoopNum', 'WpnType'] # So actions match the original art
     HitFrames = ['HitFrm01', 'HitFrm02', 'HitFrm03', 'HitFrm04', 'HitFrm05', 'HitFrm06', 'HitFrm07', 'HitFrm08', 'HitFrm09', 'HitFrm10', 'HitFrm11', 'HitFrm12', 'HitFrm13', 'HitFrm14', 'HitFrm15', 'HitFrm16']
     ignoreKeys = ["$id",  unlockFlag, "UseChr", "UseTalent", "WpnType"] + StateKeys + HitFrames + extraIgnoreKeys + SortingKeys
@@ -82,9 +83,7 @@ def HandleRecastKeys(chosenArt, originalArt):
     '''Various logic determining how to recast the art depending on the group and its replacement'''
     if (originalArt["$id"] in IDs.ArtIDs + IDs.HackerArtIDs) and (chosenArt["$id"] in IDs.ArtIDs + IDs.HackerArtIDs): # Art, Hacker -> Art, Hacker (If so we copy the recast keys)
         return []
-    recastKeys = ["RecastType", "Recast1", "Recast2", "Recast3", "Recast4", "Recast5", "Region"]
-    ouroborousRecastKeys = ["SpRecast1", "SpRecast2"]
-    return recastKeys + ouroborousRecastKeys
+    return ["RecastType", "Recast1", "Recast2", "Recast3", "Recast4", "Recast5", "Region", "SpRecast1", "SpRecast2"]
 
 def GenArtData(artData):
     for art in artData["rows"]:
