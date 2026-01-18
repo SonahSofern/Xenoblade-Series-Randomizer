@@ -102,10 +102,10 @@ class ArtShuffleOption():
         subOuroTalentArts = SubOption(nameOuroTalentArts, mainOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight)
         subHackerArts = SubOption(nameHackerArts, mainOption, hasSpinBox=True, spinDefault=defaultArtSpinWeight)
 
-ClassArtOption = ArtShuffleOption(nameClassArts, IDs.ArtIDs)
-OuroArtOption = ArtShuffleOption(nameOuroArts, IDs.OuroborosArtIDs)
-TalentArtOption = ArtShuffleOption(nameTalentArts, IDs.TalentArtIDs)
-OuroTalentArtOption = ArtShuffleOption(nameOuroTalentArts, IDs.OuroTalentArtIDs)
+# ClassArtOption = ArtShuffleOption(nameClassArts, IDs.ArtIDs)
+# OuroArtOption = ArtShuffleOption(nameOuroArts, IDs.OuroborosArtIDs)
+# TalentArtOption = ArtShuffleOption(nameTalentArts, IDs.TalentArtIDs)
+# OuroTalentArtOption = ArtShuffleOption(nameOuroTalentArts, IDs.OuroTalentArtIDs)
 # SoulHackerArtOption = ArtShuffleOption(nameHackerArts, IDs.HackerArtIDs)
 
 # HerosOption = Option("Heroes", Character, "Randomizes what heroes appear in the world", [lambda: Heroes.HeroSwaps()])

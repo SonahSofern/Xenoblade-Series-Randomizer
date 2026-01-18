@@ -109,10 +109,24 @@ def FilterNPCEnemies(enNPC):
     else:
         return True
 
+
 def ForcedArtsManager(oldEn, newEn, eRando:Enemy.EnemyRandomizer): # Do these enemies with party wiping arts that are meant to end a scene need to be removed?
     EnemyIDsWithForcedArts = [545, 941, 885, 4431, 3782, 378, 499, 4434, 4445, 4447] # FLD_EnemyData IDs
+    ForcedArtsIDs = [426, 111, 1436, 943, 1887, 1897, 1959, 1962] # Arts that the game uses to progress a cutscene/story event
+    
+    '''Enemies with cutscene starting arts (Ghondor for example) need the effects removed when put in a different spot'''
+    if newEn["$id"] in EnemyIDsWithForcedArts:
+        newPar = eRando.FindParam(newEn)
+        
+        # Find the forced art
+        for i in range(0, 16):
+            if newPar[f"ArtsSlot{i}"] in ForcedArtsIDs:
+                for art in eRando.artData["rows"]:
+                    if art["$id"] == newPar[f"ArtsSlot{i}"]:
+                        newPar[f"ArtsSlot{i}"] = 0
+                break
+            
     if oldEn["$id"] in EnemyIDsWithForcedArts:
-        ForcedArtsIDs = [426, 111, 1436, 943, 1887, 1897, 1959, 1962] # Arts that the game uses to progress a cutscene/story event
         oldPar = eRando.FindParam(oldEn)
         newPar = eRando.FindParam(newEn)
         
