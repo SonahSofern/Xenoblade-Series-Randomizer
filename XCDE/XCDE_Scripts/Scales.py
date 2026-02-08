@@ -11,12 +11,12 @@ def EnemyScales():
             with open(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
                 eneAreaData = json.load(eneAreaFile)
                 for en in eneAreaData["rows"]:
-                    if en["$id"] in (BossEnemies + [2504]): # Excluded Mechonis in Egil Fight
+                    if en["$id"] in (BossEnemies + [2501, 2504, 2506]): # Excluded Mechonis in Egil Fight
                         continue
                     if Helper.OddsCheck(odds):
                         mult = random.choice(scales)
-                        en["scale"] = min(int(en["scale"] * mult),255)
-                        en["size"] = min(int(en["size"] * mult),8)
+                        en["scale"] = min(int(en["scale"] * mult), 255)
+                        en["size"] = min(int(en["size"] * mult), 8)
                 JSONParser.CloseFile(eneAreaData, eneAreaFile)
         except:
             pass

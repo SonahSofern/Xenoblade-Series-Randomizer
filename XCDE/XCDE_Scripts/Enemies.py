@@ -75,8 +75,8 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size,
                             
                         TelethiaEarly(oldEn, newEn)
                         BossSelfDestructs(oldEn, selfDestructArts)
-                        FamilyChange(oldEn, newEn, [1,2,4], [30, 31, 32,33, 63, 64, 65]) # Mechon before enchant
-                        FamilyChange(oldEn, newEn, [2], [67, 68, 68, 66, 69, 70, 71, 134, 138, 138, 138, 139, 138, 138, 138, 139, 269, 269, 266, 265, 267, 267, 268, 327, 326, 328, 326, 338, 339, 341, 340, 340, 416, 417, 422, 421, 421, 420, 534, 636, 636, 636, 637, 638, 906, 905, 907, 908, 909, 909, 1039, 1101, 1103, 1103, 1102, 1102]) # Face mechon before monado shackles released
+                        FamilyChange(oldEn, newEn, [1,2,4], [30, 31, 32, 33, 61, 62, 63, 64, 65]) # Mechon before enchant
+                        FamilyChange(oldEn, newEn, [2], [67, 68, 66, 69, 70, 71, 134, 138, 139, 269, 266, 265, 267, 268, 327, 328, 326, 339, 341, 340, 415, 416, 417, 422, 421, 420, 534, 636, 637, 638, 906, 905, 907, 908, 909, 1039, 1101, 1103, 1102]) # Face mechon before monado shackles released
                         ForcedArts(oldEn, ForcedStoryArts)
                         DevicesAttachedToEgilFix(oldEn)
                     JSONParser.CloseFile(eneAreaData, eneAreaFile)  
@@ -228,7 +228,7 @@ def BossSelfDestructs(enemy, selfDestructArts):
 
 def TelethiaEarly(enemy, chosen:Enemy):
     TelethiaFamily = 9
-    BadForTelethia = [30,31,61,62, 134, 265, 266, 268, 416, 417, 534] # Ids for early game so you dont get soul readed
+    BadForTelethia = [30, 31, 32, 33, 61, 62, 63, 64, 65, 67, 68, 66, 69, 70, 71, 134, 138, 139, 269, 266, 265, 267, 268, 327, 328, 326, 339, 341, 340, 415, 416, 417, 422, 421, 420, 534] # Ids for early game so you dont get soul readed
     if (enemy["$id"] in BadForTelethia) and (chosen.eneListArea["family"] == TelethiaFamily):
         for i in range(1,9):
             if enemy[f"arts{i}"] == 666:
