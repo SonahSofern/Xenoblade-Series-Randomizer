@@ -17,14 +17,13 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     ignoreKeys = []
     # EnemyCounts = GetEnemyCounts()
     # GroupFightViolations = GetGroupFightViolations()
-    retainNonArrangeKeys = ['FlyHeight', 'SwimHeight']
+    retainNonArrangeKeys = [] #'FlyHeight', 'SwimHeight'
     with open("XCXDE/JsonOutputs/common/CHR_EnList.json", 'r+', encoding='utf-8') as eneFile:
         with open("XCXDE/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
             with open("XCXDE/JsonOutputs/common/RSC_EnList.json", 'r+', encoding='utf-8') as rscFile:
                 paramData = json.load(paramFile)
                 rscData = json.load(rscFile)
                 eneData = json.load(eneFile)
-                isMatchSize = isMatchSizeOption.GetState()
                 
                 eRando = Enemy.EnemyRandomizer(IDs.NormalMonsterIDs, IDs.TyrantMonsterIDs, IDs.BossMonstersIDs, IDs.SuperbossMonstersIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "Resource", "IdBattleEnemy", eneData, paramData, rscData)
     
@@ -56,18 +55,10 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                 for group in StaticEnemyData:
                     group.RefreshCurrentGroup()
 
-                if firstRun:
-                    Bandaids()
+                # if firstRun:
+                #     Bandaids()
                     
                 JSONParser.CloseFile(eneData, eneFile)
                 JSONParser.CloseFile(paramData, paramFile)
                 JSONParser.CloseFile(rscData, rscFile)
                                                                                                                                                                                                                                                                                                             
-def IntroFightBalances(eRando):
-    pass
-
-def Bandaids(eneData):
-    pass
-    
-def EnemyDesc(name):
-    pass

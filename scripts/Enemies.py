@@ -34,7 +34,7 @@ class Violation:
         self.lvDiff = lvDiff
 
 class EnemyRandomizer():
-    def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, artData, permanentBandaids = []):
+    def __init__(self, NormalIDs, UniqueIDs, BossIDs, SuperbossIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, rscKey, paramKey, arrangeData, paramData, rscData, artData = None, permanentBandaids = []):
         # Enemy Groups
         self.NormalIDs = NormalIDs
         self.UniqueIDs = UniqueIDs
