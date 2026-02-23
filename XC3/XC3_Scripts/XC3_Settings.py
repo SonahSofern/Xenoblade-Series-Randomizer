@@ -47,3 +47,5 @@ def XC3Help():
     descData.Tag("Mods")
     descData.Text("This mod is NOT compatible with other mods that edit the bdats. Ensure that this is the only active one for your game. (60fps and other visual mods are okay)", anchor="w")
     return descData
+
+WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, preCommands,  mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, textFolderName, extraArgs=extraArgs, backgroundImages=backgrounds, extraFiles=[Skyline, Exefs, Titlescreen], setupHelpDesc=lambda: XC3Help())

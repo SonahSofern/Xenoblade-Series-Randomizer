@@ -31,11 +31,11 @@ icon = PhotoImage(file=iconPath)
 root.iconphoto(True, icon)
 root.attributes(alpha=0)
 
-XCRandomizer.CreateMainWindow(root, MainWindow, XCDE.Game, XCDE.Version, XCDE.Title, XCDE.seedEntryVar, XCDE.permalinkVar, XCDE.Options.Tabs, XCDE.postCommands, XCDE.preCommands, XCDE.mainFolderNames, XCDE.subFolderNames, XCDE.SeedNames.Nouns, XCDE.SeedNames.Verbs, backgroundImages=XCDE.backgrounds, extraFiles=[XCDE.TitlescreenSplash], setupHelpDesc=lambda: XCDE.XCDEHelp())
-XCRandomizer.CreateMainWindow(root, MainWindow, XC2.Game, XC2.Version, XC2.Title, XC2.seedEntryVar, XC2.permalinkVar, XC2.Options.Tabs, XC2.postCommands, [], XC2.mainFolderNames, XC2.subFolderNames, XC2.SeedNames.Nouns, XC2.SeedNames.Verbs, backgroundImages=XC2.backgrounds, extraFiles=[XC2.TitlescreenSplash], setupHelpDesc=lambda: XC2.XC2Help())
-XCRandomizer.CreateMainWindow(root, MainWindow, XC3.Game, XC3.Version, XC3.Title, XC3.seedEntryVar, XC3.permalinkVar, XC3.Options.Tabs, XC3.postCommands, XC3.preCommands,  XC3.mainFolderNames, XC3.subFolderNames, XC3.SeedNames.Nouns, XC3.SeedNames.Verbs, XC3.textFolderName, extraArgs=XC3.extraArgs, backgroundImages=XC3.backgrounds, extraFiles=[XC3.Skyline, XC3.Exefs, XC3.Titlescreen], setupHelpDesc=lambda: XC3.XC3Help())
+XCRandomizer.CreateMainWindow(root, MainWindow, XCDE.WindowData)
+XCRandomizer.CreateMainWindow(root, MainWindow, XC2.WindowData)
+XCRandomizer.CreateMainWindow(root, MainWindow, XC3.WindowData)
 if not XCRandomizer.Onefile.isOneFile:
-    XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.Game, XCXDE.Version, XCXDE.Title, XCXDE.seedEntryVar, XCXDE.permalinkVar, XCXDE.Options.Tabs, XCXDE.postCommands, [], XCXDE.mainFolderNames, XCXDE.subFolderNames, XCXDE.SeedNames.Nouns, XCXDE.SeedNames.Verbs, extraArgs=XCXDE.extraArgs, textFolderName=XCXDE.textFolderName, extraFiles=[XCXDE.Exefs], backgroundImages=XCXDE.backgrounds, outputRomfsSpec=XCXDE.outputRomfsPath)
+    XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.WindowData)
 
 root.attributes(alpha=1)
 

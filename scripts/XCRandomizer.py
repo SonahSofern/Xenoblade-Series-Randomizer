@@ -61,23 +61,41 @@ def CreateImage(imagePath, resize = (40,40)):
 saveCommands = []
 
 class GameWindowData:
-    def __init__(self, game):
+    def __init__(self, game, version, title, seedVar, permalinkVar, tabs, postCommands = [], preCommands = [], mainFolderNames = [], subFolderNames = [], nouns = [], verbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], setupHelpDesc = None, outputRomfsSpec = "/romfs/bdat"):
         self.game = game
+        self.version = version
+        self.title = title
+        self.seedVar = seedVar
+        self.permalinkVar = permalinkVar
+        self.tabs = tabs
+        self.postCommands = postCommands
+        self.preCommands = preCommands
+        self.mainFolderNames = mainFolderNames
+        self.subFolderNames = subFolderNames
+        self.nouns = nouns
+        self.verbs = verbs
+        self.textFolderName = textFolderName
+        self.extraArgs = extraArgs
+        self.backgroundImages = backgroundImages
+        self.extraFiles = extraFiles
+        self.setupHelpDesc = setupHelpDesc
+        self.outputRomfsSpec = outputRomfsSpec
 
+# Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, postCommands = [], preCommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], setupHelpDesc = None, outputRomfsSpec = "/romfs/bdat"
 # Some of the oldest code and messy for sure. 
-def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, postCommands = [], preCommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], setupHelpDesc = None, outputRomfsSpec = "/romfs/bdat"): 
+def CreateMainWindow(root, window, gameData:GameWindowData): 
     windowPadding = 30
     if Onefile.isOneFile:
-        fileEntryVar = os.path.join(sys._MEIPASS, Game, 'bdat')
+        fileEntryVar = os.path.join(sys._MEIPASS, gameData.game, 'bdat')
     else:
-        fileEntryVar = f"{Game}/bdat"
+        fileEntryVar = f"{gameData.game}/bdat"
     SavedOptionsFileName = f"Last Save.txt"
-    JsonOutput = f"./{Game}/JsonOutputs"
-    saveCommand = lambda: SaveLoad.saveData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, f"{Game}/SaveData")
+    JsonOutput = f"./{gameData.game}/JsonOutputs"
+    saveCommand = lambda: SaveLoad.saveData(EntriesToSave + Interactables.XenoOptionDict[gameData.game], SavedOptionsFileName, f"{gameData.game}/SaveData")
     XCFrame = ttk.Frame(window) # Outer Frame
     Theme.RootsForStyling.append(XCFrame)
 
-    window.add(XCFrame, text =Version, image=CreateImage(f"{Game}/Images/{Game}Icon.png"), compound="left") 
+    window.add(XCFrame, text =gameData.version, image=CreateImage(f"{gameData.game}/Images/{gameData.game}Icon.png"), compound="left") 
 
     if Onefile.isOneFile:
         bdat_path = os.path.join(sys._MEIPASS, 'Toolset', 'bdat-toolset-win64.exe')
@@ -91,7 +109,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     MainWindow = ttk.Notebook(background)
     NewTabDictionary:dict = {}
     InnerDict:dict = {}
-    for tab, value in TabDict.items():
+    for tab, value in gameData.tabs.items():
         scroll = ScrollPanel.ScrollablePanel(MainWindow)
         NewTabDictionary[tab] = scroll.outerFrame
         InnerDict[tab] = scroll.innerFrame
@@ -101,7 +119,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     MainWindow.add(outerPresetFrame, text="Presets")
     
     for tab, value in NewTabDictionary.items():
-        MainWindow.add(value, text =TabDict[tab]) 
+        MainWindow.add(value, text =gameData.tabs[tab]) 
         
     MainWindow.pack(expand = True, fill ="both", padx=windowPadding, pady=(windowPadding, 5))
     
@@ -112,12 +130,12 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
             return "Dark"
         
     style= "Dark"
-    for opt in Interactables.XenoOptionDict[Game]:
+    for opt in Interactables.XenoOptionDict[gameData.game]:
         style = AlternateStyle(style)
         opt.DisplayOption(InnerDict[opt.tab], XCFrame, style)
 
     def GenRandomSeed(randoSeedEntryVar):
-        randoSeedEntryVar.set(Seed.RandomSeedName(SeedNouns, SeedVerbs))
+        randoSeedEntryVar.set(Seed.RandomSeedName(gameData.nouns, gameData.verbs))
 
     bottomFrame = ttk.Frame(background, style="NoBackground.TFrame", padding=(0,0))
     bottomFrame.pack(anchor="w", padx=windowPadding, fill=X)
@@ -132,46 +150,46 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     outDirEntry.pack(side="left", expand=True, fill=X)
     
     SeedFrame = ttk.Frame(background, style="NoBackground.TFrame")
-    seedDesc = ttk.Button(SeedFrame, text="Seed", command=lambda: GenRandomSeed(seedEntryVar))
+    seedDesc = ttk.Button(SeedFrame, text="Seed", command=lambda: GenRandomSeed(gameData.seedVar))
 
     Theme.RootsForStyling.append(bottomFrame)
 
     # Seed entry box
-    GenRandomSeed(seedEntryVar) # Gen a random seed if you have no save data 
-    randoSeedEntry = ttk.Entry(SeedFrame, textvariable=seedEntryVar)
+    GenRandomSeed(gameData.seedVar) # Gen a random seed if you have no save data 
+    randoSeedEntry = ttk.Entry(SeedFrame, textvariable=gameData.seedVar)
     
     # Bottom Menu Options
     fileOut = SaveLoad.SavedEntry("Output Bdats", outputDirVar)
-    permLink = SaveLoad.SavedEntry("Permalink", permalinkVar)
-    seedVar = SaveLoad.SavedEntry("Seed", seedEntryVar)
+    permLink = SaveLoad.SavedEntry("Permalink", gameData.permalinkVar)
+    seedVar = SaveLoad.SavedEntry("Seed", gameData.seedVar)
     SeedFrame.pack(anchor="w", padx=windowPadding, fill=X)
     seedDesc.pack(side='left')
     randoSeedEntry.pack(side='left', fill=X, expand=True)
     
     # Save and Load Last Options
     EntriesToSave = ([fileOut, permLink, seedVar])
-    SaveLoad.loadData(EntriesToSave + Interactables.XenoOptionDict[Game], SavedOptionsFileName, f"{Game}/SaveData")
-    EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.XenoOptionDict[Game])) + list((x.spinBoxVal for x in Interactables.XenoOptionDict[Game] if x.hasSpinBox)) + list((sub.checkBoxVal for x in Interactables.XenoOptionDict[Game] for sub in x.subOptions)) + list((sub.spinBoxVal for x in Interactables.XenoOptionDict[Game] for sub in x.subOptions if sub.hasSpinBox))
+    SaveLoad.loadData(EntriesToSave + Interactables.XenoOptionDict[gameData.game], SavedOptionsFileName, f"{gameData.game}/SaveData")
+    EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.XenoOptionDict[gameData.game])) + list((x.spinBoxVal for x in Interactables.XenoOptionDict[gameData.game] if x.hasSpinBox)) + list((sub.checkBoxVal for x in Interactables.XenoOptionDict[gameData.game] for sub in x.subOptions)) + list((sub.spinBoxVal for x in Interactables.XenoOptionDict[gameData.game] for sub in x.subOptions if sub.hasSpinBox))
 
     # Permalink Options/Variables
     permalinkFrame = ttk.Frame(background,style="NoBackground.TFrame")
-    permalinkEntry = ttk.Entry(permalinkFrame, textvariable=permalinkVar)
-    CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, Version)
-    permalinkVar.set(CompressedPermalink)
+    permalinkEntry = ttk.Entry(permalinkFrame, textvariable=gameData.permalinkVar)
+    CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, gameData.version)
+    gameData.permalinkVar.set(CompressedPermalink)
     permalinkButton = ttk.Button(permalinkFrame, text="Settings String")
     permalinkFrame.pack(padx=windowPadding, anchor="w", fill=X)
     permalinkButton.pack(side="left")
     permalinkEntry.pack(side='left', fill=X, expand=True)
-    PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version)
+    PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, gameData.permalinkVar, gameData.seedVar, gameData.version)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), Randomize(Title, XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], outputRomfsSpec, mainFolderFileNames, subFolderFileNames, postCommands, preCommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles))))
+    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), Randomize(gameData, XCFrame, RandomizeButton, fileEntryVar, bdat_path, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[gameData.game]))))
     RandomizeButton.pack(pady=(5,windowPadding), padx=(windowPadding, 0), anchor="w", side="left")
     saveCommands.append(saveCommand)
 
-    Presets.PresetsWindow(outerPresetFrame,  [seedVar] + Interactables.XenoOptionDict[Game], Game)
+    Presets.PresetsWindow(outerPresetFrame,  [seedVar] + Interactables.XenoOptionDict[gameData.game], gameData.game)
     
-    SettingsButton = ttk.Button(background, text="Help", command=lambda: PopupDescriptions.StyledPopup(f"{Title} Randomizer Version {Version}", setupHelpDesc , window), padding=5)
+    SettingsButton = ttk.Button(background, text="Help", command=lambda: PopupDescriptions.StyledPopup(f"{gameData.title} Randomizer Version {gameData.version}", gameData.setupHelpDesc , window), padding=5)
     SettingsButton.pack(anchor="e", side="right", pady=(5,windowPadding), padx=(0, windowPadding))
 
     DiscordButton = ttk.Button(background, image=CreateImage(f"Images/Discord-Symbol-White.png", (28,23)), text="Discord", compound=LEFT, command=lambda: webbrowser.open_new(f"https://discord.gg/64FK78ScvJ"), padding=5)
@@ -180,11 +198,11 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     Theme.ThemeUpdate()
     
     # Background Images
-    bg = random.choice(backgroundImages)
+    bg = random.choice(gameData.backgroundImages)
     if Onefile.isOneFile: 
-        bg_image = Image.open(os.path.join(sys._MEIPASS, Game, 'Images', bg))
+        bg_image = Image.open(os.path.join(sys._MEIPASS, gameData.game, 'Images', bg))
     else:
-        bg_image = Image.open(f"./{Game}/Images/{bg}")
+        bg_image = Image.open(f"./{gameData.game}/Images/{bg}")
     
     # hardcoded because thats the height of the window that actually uses the background. But that height is unaccessable when this is called.
     resized = bg_image.resize((int(Theme.windowWidth), int(Theme.windowHeight)))
@@ -222,22 +240,22 @@ def resize_bg(event, root, bg_image, background):
 
         threading.Thread(target=resize_and_update, daemon=True).start()
 
-def Randomize(GameTitle, root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, romfsOutputSpec, BDATFiles = [],SubBDATFiles = [], postCommands = [], preCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
+def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat_path, randoSeedEntry, JsonOutput, outputDirVar, OptionList):
     def ThreadedRandomize():
         if outputDirVar.get().strip() == "":
             errorMsgObj = PopupDescriptions.Description()
             errorMsgObj.Header("Select an Output Location Before Randomizing")
             errorMsgObj.Text("This is where the randomizer will output the randomized mod. See the help button for instructions on how to use mods.")
-            PopupDescriptions.StyledPopup(f"{GameTitle} {datetime.datetime.now()}", lambda: errorMsgObj, root)
+            PopupDescriptions.StyledPopup(f"{gameData.title} {datetime.datetime.now()}", lambda: errorMsgObj, root)
             return
         entrySpot = fileEntryVar
-        outSpot = f"{outputDirVar.get().strip()}/{romfsOutputSpec}"
+        outSpot = f"{outputDirVar.get().strip()}/{gameData.outputRomfsSpec}"
         
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)
         
         # Make Popup
-        progressPopup = PopupDescriptions.GenericPopup(f"Randomizing {GameTitle}") 
+        progressPopup = PopupDescriptions.GenericPopup(f"Randomizing {gameData.title}") 
         progressPopup.attributes(alpha = 0)
         
         def progressClose():
@@ -260,16 +278,16 @@ def Randomize(GameTitle, root, RandomizeButton, fileEntryVar, bdat_path, permali
         pb.pack()
         PopupDescriptions.center(progressPopup, root)
         
-        random.seed(permalinkVar.get())
+        random.seed(gameData.permalinkVar.get())
         print("Seed: " + randoSeedEntry.get())
-        print("Permalink: "+  permalinkVar.get())
+        print("Permalink: "+  gameData.permalinkVar.get())
         os.makedirs(outSpot, exist_ok=True) # Make the directory for them
         try:
-            for file in BDATFiles:
+            for file in gameData.mainFolderNames:
                 # print("BDAT:", JsonOutput, "Exists:", os.path.exists(JsonOutput))
-                subprocess.run([bdat_path, "extract", f"{entrySpot}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-            for file in SubBDATFiles:
-                subprocess.run([bdat_path, "extract", f"{entrySpot}/{textFolderName}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+                subprocess.run([bdat_path, "extract", f"{entrySpot}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + gameData.extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            for file in gameData.subFolderNames:
+                subprocess.run([bdat_path, "extract", f"{entrySpot}/{gameData.textFolderName}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + gameData.extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
             # Unpacks BDATs
 
@@ -280,12 +298,12 @@ def Randomize(GameTitle, root, RandomizeButton, fileEntryVar, bdat_path, permali
             return
 
         # Runs all randomization
-        for command in preCommands: 
+        for command in gameData.preCommands: 
             command()
             
-        runLog = RunOptions(GameTitle, OptionList, randoProgressDisplay, root, randoSeedEntry.get(), pb)
+        runLog = RunOptions(gameData.title, OptionList, randoProgressDisplay, root, randoSeedEntry.get(), pb)
         
-        for command in postCommands: # Runs post commands like show title screen
+        for command in gameData.postCommands: # Runs post commands like show title screen
             command()
             
         randoProgressDisplay.config(text="Packing BDATs")
@@ -300,10 +318,10 @@ def Randomize(GameTitle, root, RandomizeButton, fileEntryVar, bdat_path, permali
             subprocess.run([bdat_path, "pack", JsonOutput, "-o", outSpot, "-f", "json"],check=True,stderr=None,stdout=None, creationflags=creationFlags)
             # for file in 
             # Outputs common_ms in the correct file structure
-            os.makedirs(f"{outSpot}/{textFolderName}", exist_ok=True)
-            for file in SubBDATFiles:
-                shutil.move(f"{outSpot}/{file}.bdat", f"{outSpot}/{textFolderName}/{file}.bdat")
-            AddFileToOutput(outSpot, extraFiles)
+            os.makedirs(f"{outSpot}/{gameData.textFolderName}", exist_ok=True)
+            for file in gameData.subFolderNames:
+                shutil.move(f"{outSpot}/{file}.bdat", f"{outSpot}/{gameData.textFolderName}/{file}.bdat")
+            AddFileToOutput(outSpot, gameData.extraFiles)
             
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
