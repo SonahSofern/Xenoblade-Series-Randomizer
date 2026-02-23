@@ -60,8 +60,12 @@ def CreateImage(imagePath, resize = (40,40)):
 
 saveCommands = []
 
+class GameWindowData:
+    def __init__(self, game):
+        self.game = game
+
 # Some of the oldest code and messy for sure. 
-def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, postCommands = [], preCommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], optionsList= [], setupHelpDesc = None): 
+def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, postCommands = [], preCommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], setupHelpDesc = None, outputRomfsSpec = "/romfs/bdat"): 
     windowPadding = 30
     if Onefile.isOneFile:
         fileEntryVar = os.path.join(sys._MEIPASS, Game, 'bdat')
@@ -161,7 +165,7 @@ def CreateMainWindow(root, window, Game, Version, Title, seedEntryVar, permalink
     PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, permalinkVar, seedEntryVar, Version)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), Randomize(Title, XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], mainFolderFileNames, subFolderFileNames, postCommands, preCommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles))))
+    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), Randomize(Title, XCFrame, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[Game], outputRomfsSpec, mainFolderFileNames, subFolderFileNames, postCommands, preCommands, textFolderName,extraArgs=extraArgs, windowPadding=windowPadding, extraFiles=extraFiles))))
     RandomizeButton.pack(pady=(5,windowPadding), padx=(windowPadding, 0), anchor="w", side="left")
     saveCommands.append(saveCommand)
 
@@ -218,7 +222,7 @@ def resize_bg(event, root, bg_image, background):
 
         threading.Thread(target=resize_and_update, daemon=True).start()
 
-def Randomize(GameTitle, root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, BDATFiles = [],SubBDATFiles = [], postCommands = [], preCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
+def Randomize(GameTitle, root, RandomizeButton, fileEntryVar, bdat_path, permalinkVar, randoSeedEntry, JsonOutput, outputDirVar, OptionList, romfsOutputSpec, BDATFiles = [],SubBDATFiles = [], postCommands = [], preCommands = [], textFolderName = "gb", extraArgs = [], windowPadding = 0, extraFiles=[]):
     def ThreadedRandomize():
         if outputDirVar.get().strip() == "":
             errorMsgObj = PopupDescriptions.Description()
@@ -227,7 +231,7 @@ def Randomize(GameTitle, root, RandomizeButton, fileEntryVar, bdat_path, permali
             PopupDescriptions.StyledPopup(f"{GameTitle} {datetime.datetime.now()}", lambda: errorMsgObj, root)
             return
         entrySpot = fileEntryVar
-        outSpot = f"{outputDirVar.get().strip()}/romfs/bdat"
+        outSpot = f"{outputDirVar.get().strip()}/{romfsOutputSpec}"
         
         # Disable Repeated Button Click
         RandomizeButton.config(state=DISABLED)

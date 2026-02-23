@@ -35,7 +35,7 @@ XCRandomizer.CreateMainWindow(root, MainWindow, XCDE.Game, XCDE.Version, XCDE.Ti
 XCRandomizer.CreateMainWindow(root, MainWindow, XC2.Game, XC2.Version, XC2.Title, XC2.seedEntryVar, XC2.permalinkVar, XC2.Options.Tabs, XC2.postCommands, [], XC2.mainFolderNames, XC2.subFolderNames, XC2.SeedNames.Nouns, XC2.SeedNames.Verbs, backgroundImages=XC2.backgrounds, extraFiles=[XC2.TitlescreenSplash], setupHelpDesc=lambda: XC2.XC2Help())
 XCRandomizer.CreateMainWindow(root, MainWindow, XC3.Game, XC3.Version, XC3.Title, XC3.seedEntryVar, XC3.permalinkVar, XC3.Options.Tabs, XC3.postCommands, XC3.preCommands,  XC3.mainFolderNames, XC3.subFolderNames, XC3.SeedNames.Nouns, XC3.SeedNames.Verbs, XC3.textFolderName, extraArgs=XC3.extraArgs, backgroundImages=XC3.backgrounds, extraFiles=[XC3.Skyline, XC3.Exefs, XC3.Titlescreen], setupHelpDesc=lambda: XC3.XC3Help())
 if not XCRandomizer.Onefile.isOneFile:
-    XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.Game, XCXDE.Version, XCXDE.Title, XCXDE.seedEntryVar, XCXDE.permalinkVar, XCXDE.Options.Tabs, XCXDE.postCommands, [], XCXDE.mainFolderNames, XCXDE.subFolderNames, XCXDE.SeedNames.Nouns, XCXDE.SeedNames.Verbs, backgroundImages=XCXDE.backgrounds)
+    XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.Game, XCXDE.Version, XCXDE.Title, XCXDE.seedEntryVar, XCXDE.permalinkVar, XCXDE.Options.Tabs, XCXDE.postCommands, [], XCXDE.mainFolderNames, XCXDE.subFolderNames, XCXDE.SeedNames.Nouns, XCXDE.SeedNames.Verbs, extraArgs=XCXDE.extraArgs, textFolderName=XCXDE.textFolderName, extraFiles=[XCXDE.Exefs], backgroundImages=XCXDE.backgrounds, outputRomfsSpec=XCXDE.outputRomfsPath)
 
 root.attributes(alpha=1)
 

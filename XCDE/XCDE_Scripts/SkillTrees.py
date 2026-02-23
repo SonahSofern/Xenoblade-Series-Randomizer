@@ -41,7 +41,7 @@ def SkillRando():
                 descData = json.load(skillDescFile)
                 odds = Options.AffinityTreeOption.GetSpinbox()
                 
-                SkillList:list[Skill]= []
+                SkillList = scripts.Helper.RandomGroup()
                 invalidSkills = yoinkSkills + MeliaSkills + MechonisArmor + SharlaCoolOff + ReynTaunts
                 for skill in skillData["rows"]:
                     if skill["$id"] in invalidSkills:
@@ -52,7 +52,7 @@ def SkillRando():
                             newIcon = ps["icon"]
                             break
                     newSkill = Skill(skill["name"], skill["shape"], skill["target"], skill["skill"], skill["val1"], skill["val2"], skill["time"], skill["point_PP"], skill["point_SP"], skill["flag"], skill["$id"], newType, newIcon)
-                    SkillList.append(newSkill)
+                    SkillList.AddNewData(newSkill)
                 
                 for skill in skillData["rows"]:
                     if not scripts.Helper.OddsCheck(odds):
@@ -62,8 +62,7 @@ def SkillRando():
                         continue
                     
                     if isEffect:
-                        chosen:Skill = random.choice(SkillList)
-                        SkillList.remove(chosen)
+                        chosen:Skill = SkillList.SelectRandomMember()
                         skill["name"] = chosen.name
                         skill["shape"] = chosen.shape
                         skill["target"] = chosen.target
