@@ -53,21 +53,21 @@ BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=F
 BossEnemyOption_FinalBoss = SubOption("Vanilla Final Boss", BossEnemyOption, defState=False)
 # BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
 
-ClassTreeOption = Option("Class Tree", Character, "Randomizes the class advancement tree") # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_ClassInfo.html
+# ClassTreeOption = Option("Class Tree", Character, "Randomizes the class advancement tree") # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_ClassInfo.html
 # Gems https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_ItemSkill_inner.html#2191
 
 
-ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
-ShortcutsOption_MainQuestReqs = SubOption("Chapter Prerequisites Skip", ShortcutsOption)
-TutorialSkipOption = Option("Tutorial Skip", QOL, "Removes tutorials") 
+# ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
+# ShortcutsOption_MainQuestReqs = SubOption("Chapter Prerequisites Skip", ShortcutsOption)
+# TutorialSkipOption = Option("Tutorial Skip", QOL, "Removes tutorials") 
 FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_Growlist.json"], ["LevelExp"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
 FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each class levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_ClassGrowlist.json"], ["LevelCpR0", "LevelCpR1", "LevelCpR2"], [f'row[key] // {FasterClassOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
-BetterFrontierNavOption = Option("Frontier Nav Boost", QOL, "Faster rewards from FrontierNav")
-Skell = Option("Skell", QOL, "QOL options for Skells")
-Skell_EasyLisc = SubOption("Easy Skell Liscense", Skell)
-Skell_EarlyLisc = SubOption("Early Skell Liscense", Skell)
-Skell_EasyFlight = SubOption("Easy Flight Module", Skell)
-Skell_EarlyFlight = SubOption("Early Flight Module", Skell)
+# BetterFrontierNavOption = Option("Frontier Nav Boost", QOL, "Faster rewards from FrontierNav")
+# Skell = Option("Skell", QOL, "QOL options for Skells")
+# Skell_EasyLisc = SubOption("Easy Skell Liscense", Skell)
+# Skell_EarlyLisc = SubOption("Early Skell Liscense", Skell)
+# Skell_EasyFlight = SubOption("Easy Flight Module", Skell)
+# Skell_EarlyFlight = SubOption("Early Flight Module", Skell)
 
 
 # Funny
