@@ -1,11 +1,11 @@
 
-import json, random, copy, traceback, math
+import json
 from XCXDE.XCXDE_Scripts import IDs, Options
 from scripts import Helper, JSONParser, PopupDescriptions, Enemies as Enemy
 
 StaticEnemyData:list[Helper.RandomGroup] = []
 
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSizeOption:Options.Option, isBossGroupBalancing, isMatchStats = False, finalBoss = False):
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isBossGroupBalancing, isMatchStats = False, finalBoss = False):
     global StaticEnemyData
     
     if StaticEnemyData == []:
@@ -13,7 +13,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     else:
         firstRun = False
     
-    ignoreKeys = []
+    ignoreKeys = ["LvMin", "LvMax", "LvRev", "Exp" "ZoneUD", "Flag(Named)", "Flag(mBoss)", "ignoreLv", "FAOff", "BGMID", "NoEncountSkip", "SearchParamID", "MoveRange", "FieldPatternID"]
     # EnemyCounts = GetEnemyCounts()
     # GroupFightViolations = GetGroupFightViolations()
     retainNonArrangeKeys = [] #'FlyHeight', 'SwimHeight'
@@ -23,7 +23,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                 paramData = json.load(paramFile)
                 rscData = json.load(rscFile)
                 eneData = json.load(eneFile)
-                
+                                
                 eRando = Enemy.EnemyRandomizer(IDs.NormalMonsterIDs, IDs.TyrantMonsterIDs, IDs.BossMonstersIDs, IDs.SuperbossMonstersIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ParamID", "ResourceID", eneData, paramData, rscData)
     
                 if firstRun:
@@ -43,9 +43,9 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                     #     eRando.BalanceFight(en, newEn, GroupFightViolations, EnemyCounts)
 
                     # if isMatchSize:
-                    #     EnemySizeHelper(en, newEn, eRando)
+                    #     EnemySizeHelper(en, newEn, eRando) # Because size is so important to X and its open world best to leave it vanilla, except maybe indoor areas
 
-                    # IntroFightBalances(en, newEn, eRando)
+                    IntroFightBalances(en, newEn, eRando)
                     
                     # eRando.HealthBalancing(en, newEn, 'HpMaxRev')
 
@@ -60,4 +60,13 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                 JSONParser.CloseFile(eneData, eneFile)
                 JSONParser.CloseFile(paramData, paramFile)
                 JSONParser.CloseFile(rscData, rscFile)
+    
+def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
+    introFightIDs = [348, 349, 350]
+    if en["$id"] in introFightIDs:
+        oldEnParam = eRando.FindParam(en)
+        eRando.ChangeStats([newEn], [("HpMaxRev", oldEnParam["HpMaxRev"]), ("PowFightRev", oldEnParam["PowFightRev"]), ("PowShootRev", oldEnParam["PowShootRev"]), ("PowMindRev", oldEnParam["PowMindRev"]), ("DodgeRev", oldEnParam["DodgeRev"]), ("DexFightRev", oldEnParam["DexFightRev"]), ("DexShootRev", oldEnParam["DexShootRev"]), ("Def", oldEnParam["Def"]), ("RstPhysics", oldEnParam["RstPhysics"]), ("RstDebuffHalf", oldEnParam["RstDebuffHalf"]), ("RstDebuffFull", oldEnParam["RstDebuffFull"]) ])
                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                            
+def EnemyDesc():
+    pass
