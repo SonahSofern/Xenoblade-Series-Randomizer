@@ -5,7 +5,7 @@ from scripts import Helper, JSONParser, PopupDescriptions, Enemies as Enemy
 
 StaticEnemyData:list[Helper.RandomGroup] = []
 
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSizeOption:Options.Option, isBossGroupBalancing):
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSizeOption:Options.Option, isBossGroupBalancing, isMatchStats = False, finalBoss = False):
     global StaticEnemyData
     
     if StaticEnemyData == []:
@@ -13,7 +13,6 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     else:
         firstRun = False
     
-    testNonArrangeKeys = []
     ignoreKeys = []
     # EnemyCounts = GetEnemyCounts()
     # GroupFightViolations = GetGroupFightViolations()
@@ -25,7 +24,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                 rscData = json.load(rscFile)
                 eneData = json.load(eneFile)
                 
-                eRando = Enemy.EnemyRandomizer(IDs.NormalMonsterIDs, IDs.TyrantMonsterIDs, IDs.BossMonstersIDs, IDs.SuperbossMonstersIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "Resource", "IdBattleEnemy", eneData, paramData, rscData)
+                eRando = Enemy.EnemyRandomizer(IDs.NormalMonsterIDs, IDs.TyrantMonsterIDs, IDs.BossMonstersIDs, IDs.SuperbossMonstersIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ParamID", "ResourceID", eneData, paramData, rscData)
     
                 if firstRun:
                     StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
@@ -36,7 +35,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
 
                     newEn = eRando.CreateRandomEnemy(StaticEnemyData)
                     
-                    eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys + testNonArrangeKeys) # Flying Enemies and some enemies in Erythia will still fall despite act type fix (After testing I found this is because of the motion file in rsc. So there is no fix unless we change every enemies motion as they are being placed)
+                    # eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys) # Flying Enemies and some enemies in Erythia will still fall despite act type fix (After testing I found this is because of the motion file in rsc. So there is no fix unless we change every enemies motion as they are being placed)
                     
                     # ForcedArtsManager(en, newEn, eRando)
                         
@@ -46,9 +45,9 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                     # if isMatchSize:
                     #     EnemySizeHelper(en, newEn, eRando)
 
-                    IntroFightBalances(en, newEn, eRando)
+                    # IntroFightBalances(en, newEn, eRando)
                     
-                    eRando.HealthBalancing(en, newEn, 'StRevHp')
+                    # eRando.HealthBalancing(en, newEn, 'HpMaxRev')
 
                     Helper.CopyKeys(en, newEn, ignoreKeys)
 
