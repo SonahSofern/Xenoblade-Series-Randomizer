@@ -5,7 +5,7 @@ from scripts import Helper, JSONParser, PopupDescriptions, Enemies as Enemy
 
 StaticEnemyData:list[Helper.RandomGroup] = []
 
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isBossGroupBalancing, isMatchStats = False, finalBoss = False):
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isBossGroupBalancing = False, isMatchStats = False, finalBoss = False):
     global StaticEnemyData
     
     if StaticEnemyData == []:
@@ -24,7 +24,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isB
                 rscData = json.load(rscFile)
                 eneData = json.load(eneFile)
                                 
-                eRando = Enemy.EnemyRandomizer(IDs.NormalMonsterIDs, IDs.TyrantMonsterIDs, IDs.BossMonstersIDs, IDs.SuperbossMonstersIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ParamID", "ResourceID", eneData, paramData, rscData)
+                eRando = Enemy.EnemyRandomizer(IDs.NormalMonsterIDs, IDs.TyrantMonsterIDs, IDs.BossMonstersIDs, IDs.SuperbossMonstersIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID",  "ParamID", eneData, paramData, rscData)
     
                 if firstRun:
                     StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])

@@ -22,20 +22,22 @@ Tabs = {
 weightsSpinDescription = "Weights ↓"
 
 # Enemy/Appendage Drops (NO POINT)
-# Items
-
 # https://xenobladedata.github.io/xbx/bdat/common_local_us/DRP_ItemTable.html#309
-# Field Skill Drops # https://xenobladedata.github.io/xbx/bdat/common_local_us/FLD_TboxAll.html
+
+# Items
+# Field Skill Drops
 TboxOption = Option("Treasures", Items, "Randomizes treasures from Archaeological, Mechanical and Biological field checks", [lambda: Item.Tbox()])
 TboxOption_Gear = SubOption("Ground Gear", TboxOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
-TboxOption_SkellGear = SubOption("Skell Gear", TboxOption, hasSpinBox=True, spinDefault=30)
+# TboxOption_SkellGear = SubOption("Skell Gear", TboxOption, hasSpinBox=True, spinDefault=30) # Dont know the category so cant put them here yet probably can find with testing
 TboxOption_Gems = SubOption("Augments", TboxOption, hasSpinBox=True, spinDefault=30)
 TboxOption_SkellGems = SubOption("Skell Augments", TboxOption, hasSpinBox=True, spinDefault=30)
 TboxOption_Probes = SubOption("Probes", TboxOption, hasSpinBox=True, spinDefault=30)
 TboxOption_Collectibles = SubOption("Collectibles", TboxOption, hasSpinBox=True, spinDefault=30)
+TboxOption_Materials = SubOption("Materials", TboxOption, hasSpinBox=True, spinDefault=30)
+TboxOption_Precious = SubOption("Key Items", TboxOption, hasSpinBox=True, spinDefault=30)
 
-
-# Quest Rewards
+# Ticket Shop https://xenobladedata.github.io/xbx/bdat/common_local_us/ITM_TradeList.html
+# Quest Rewards https://xenobladedata.github.io/xbx/bdat/common_local_us/QUEST_itemset.html
 # Shops (SHP_* )
 # Collectapedia Rewards https://xenobladedata.github.io/xbx/bdat/common_local_us/collepediareward.html
 

@@ -90,7 +90,8 @@ class ValueTable():
             return
         
         if not any(self.weightList):
-            return Exception("Not enough item categories chosen")
+            raise Exception("Not enough item categories chosen")
+            return
         
         category:Helper.RandomGroup = random.choices(self.valuesList, self.weightList, k=1)[0] # Select a category off weights
                 
