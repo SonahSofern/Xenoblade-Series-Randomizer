@@ -134,7 +134,6 @@ def Shops():
     bodyValTable = Values.ValueTable(path = "XCDE/JsonOutputs/bdat_common")
     bodyValTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.ChestIDs)
     
-    
     # Randomization
     with open(f"XCDE/JsonOutputs/bdat_common/shoplist.json", 'r+', encoding='utf-8') as shopFile:
         shopData = json.load(shopFile)

@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XCXDE.XCXDE_Scripts import Enemy, IDs
+from XCXDE.XCXDE_Scripts import Enemy, IDs, Items as Item
 
 scripts.Interactables.Game = "XCXDE" 
 
@@ -9,10 +9,12 @@ Items = 1
 Character  = 2
 Enemies = 3
 QOL = 4
+Skells = 5 
 
 Tabs = {
     Items: 'Items',
     Character: 'Characters',
+    Skells: 'Skells',
     Enemies: 'Enemies',
     QOL: 'Quality of Life',
 }
@@ -24,10 +26,20 @@ weightsSpinDescription = "Weights ↓"
 
 # https://xenobladedata.github.io/xbx/bdat/common_local_us/DRP_ItemTable.html#309
 # Field Skill Drops # https://xenobladedata.github.io/xbx/bdat/common_local_us/FLD_TboxAll.html
+TboxOption = Option("Treasures", Items, "Randomizes treasures from Archaeological, Mechanical and Biological field checks", [lambda: Item.Tbox()])
+TboxOption_Gear = SubOption("Ground Gear", TboxOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
+TboxOption_SkellGear = SubOption("Skell Gear", TboxOption, hasSpinBox=True, spinDefault=30)
+TboxOption_Gems = SubOption("Augments", TboxOption, hasSpinBox=True, spinDefault=30)
+TboxOption_SkellGems = SubOption("Skell Augments", TboxOption, hasSpinBox=True, spinDefault=30)
+TboxOption_Probes = SubOption("Probes", TboxOption, hasSpinBox=True, spinDefault=30)
+TboxOption_Collectibles = SubOption("Collectibles", TboxOption, hasSpinBox=True, spinDefault=30)
+
+
 # Quest Rewards
 # Shops (SHP_* )
 # Collectapedia Rewards https://xenobladedata.github.io/xbx/bdat/common_local_us/collepediareward.html
 
+# Probe effects https://xenobladedata.github.io/xbx/bdat/common_local_us/ITM_BeaconList.html
 
 
 # Enemies
@@ -55,7 +67,9 @@ BossEnemyOption_FinalBoss = SubOption("Vanilla Final Boss", BossEnemyOption, def
 
 # ClassTreeOption = Option("Class Tree", Character, "Randomizes the class advancement tree") # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_ClassInfo.html
 # Gems https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_ItemSkill_inner.html#2191
-
+# Weapons
+# Armor
+# Skells
 
 # ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 # ShortcutsOption_MainQuestReqs = SubOption("Chapter Prerequisites Skip", ShortcutsOption)

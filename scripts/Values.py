@@ -38,9 +38,10 @@ class ValueFile():
         self.mult = mult # multiplier on that keys value
 
 class ValuedItem():
-    def __init__(self, id, value):
+    def __init__(self, id, value, category):
         self.id = id
         self.value = value
+        self.category = category # Only XCXDE uses this rn
 
 class ValueTable():
     def __init__(self, path = "XC2/JsonOutputs/common"):
@@ -48,7 +49,7 @@ class ValueTable():
         self.weightList = []
         self.path = path
         
-    def PopulateValues(self, file:ValueFile, validIDs, weight = 1):
+    def PopulateValues(self, file:ValueFile, validIDs, weight = 1, category = 0):
         '''
         List of RandomGroups linking every ITM with a gold value
         This value is useful to balance loot drops
@@ -64,7 +65,7 @@ class ValueTable():
             self.weightList.append(weight)
             for data in curData["rows"]:
                 if data["$id"] in validIDs:
-                    newList.AddNewData(ValuedItem(data["$id"], int(data[file.key] * file.mult)))
+                    newList.AddNewData(ValuedItem(data["$id"], int(data[file.key] * file.mult), category))
             newList.currentGroup.sort(key=lambda x: x.value)
             newList.originalGroup.sort(key=lambda x: x.value)
             newList.SetStDevOverMean()
@@ -111,6 +112,8 @@ class ValueTable():
         differenceList.append(originalItem.value - chosen.value)
         
         data[key] = chosen.id # Assign the item
+        
+        return chosen
     
     def GetByID(self, id):
         """Given an id, search the valuesList for the ValuedItem."""
