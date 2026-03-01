@@ -76,14 +76,17 @@ class ValueTable():
         else:
             return False
     
-    def SelectValuedMember(self, data, key, dontChangeIDs = []):
+    def SelectValuedMember(self, data, key, dontChangeIDs = [], catKey = None):
         minRange = 5 # The minimum steps you can take in either direction choosing an item from the list so minRange = 10 means +- 10 items from the target value
         minStandardDeviationOverMean = 0.5
         
         if data[key] in dontChangeIDs + [0]: # dont change some things and empty spots
             return
         
-        originalItem = self.GetByID(data[key])
+        if catKey == None:
+            originalItem = self.GetByIDCat(data[key])
+        else:
+            originalItem = self.GetByIDCat(data[key], data[catKey])
         
         if originalItem == None:
             # print(f"Item could not be found: {data[key]}")
@@ -91,7 +94,6 @@ class ValueTable():
         
         if not any(self.weightList):
             raise Exception("Not enough item categories chosen")
-            return
         
         category:Helper.RandomGroup = random.choices(self.valuesList, self.weightList, k=1)[0] # Select a category off weights
                 
@@ -116,12 +118,15 @@ class ValueTable():
         
         return chosen
     
-    def GetByID(self, id):
-        """Given an id, search the valuesList for the ValuedItem."""
+    def GetByIDCat(self, id, cat = None):
+        """Given an id and optionally a category, search the valuesList for the ValuedItem."""
         for list in self.valuesList:
             for item in list.originalGroup:
                 if item.id == id:
-                    return item
+                    if cat == None: # If no category given return the match
+                        return item
+                    elif item.category == cat: # If category given also check category
+                        return item
         return None
 
 def WeightOptionMethod(option:Interactables.Option):

@@ -25,6 +25,7 @@ weightsSpinDescription = "Weights ↓"
 # https://xenobladedata.github.io/xbx/bdat/common_local_us/DRP_ItemTable.html#309
 
 # Items
+
 # Field Skill Drops
 TboxOption = Option("Treasures", Items, "Randomizes treasures from Archaeological, Mechanical and Biological field checks", [lambda: Item.Tbox()])
 TboxOption_Gear = SubOption("Ground Gear", TboxOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
@@ -37,6 +38,16 @@ TboxOption_Materials = SubOption("Materials", TboxOption, hasSpinBox=True, spinD
 TboxOption_Precious = SubOption("Key Items", TboxOption, hasSpinBox=True, spinDefault=30)
 
 # Ticket Shop https://xenobladedata.github.io/xbx/bdat/common_local_us/ITM_TradeList.html
+TicketExchangeOption = Option("Treasures", Items, "Randomizes treasures from Archaeological, Mechanical and Biological field checks", [lambda: Item.Tbox()])
+TicketExchangeOption_Gear = SubOption("Ground Gear", TicketExchangeOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
+# TicketExchangeOption_SkellGear = SubOption("Skell Gear", TicketExchangeOption, hasSpinBox=True, spinDefault=30) # Dont know the category so cant put them here yet probably can find with testing
+TicketExchangeOption_Gems = SubOption("Augments", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
+TicketExchangeOption_SkellGems = SubOption("Skell Augments", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
+TicketExchangeOption_Probes = SubOption("Probes", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
+TicketExchangeOption_Collectibles = SubOption("Collectibles", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
+TicketExchangeOption_Materials = SubOption("Materials", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
+TicketExchangeOption_Precious = SubOption("Key Items", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
+
 # Quest Rewards https://xenobladedata.github.io/xbx/bdat/common_local_us/QUEST_itemset.html
 # Shops (SHP_* )
 # Collectapedia Rewards https://xenobladedata.github.io/xbx/bdat/common_local_us/collepediareward.html
