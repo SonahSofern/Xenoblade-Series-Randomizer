@@ -25,9 +25,16 @@ weightsSpinDescription = "Weights ↓"
 # https://xenobladedata.github.io/xbx/bdat/common_local_us/DRP_ItemTable.html#309
 
 # Items
+# Shops (SHP_* ) (NO POINT theres only one shop and it has almost every item in the game, just randomize the item effects themselves)
+# ShopOption = Option("Shops", Items, "Randomizes NLA's shop inventories into the same item type", [lambda: Item.QuestRewards()])
+# ShopOption_Wep = SubOption("Weapon Shop", ShopOption)
+# ShopOption_Arm = SubOption("Armor Shop", ShopOption)
+# ShopOption_SkWep = SubOption("Skell Weapon Shop", ShopOption)
+# ShopOption_SkArm = SubOption("Skell Armor Shop", ShopOption)
+# ShopOption_SkFrame = SubOption("Skell Frame Shop", ShopOption)
 
 # Field Skill Drops
-TboxOption = Option("Treasures", Items, "Randomizes treasures from Archaeological, Mechanical and Biological field checks", [lambda: Item.Tbox()])
+TboxOption = Option("Field Checks", Items, "Randomizes treasures from field checks into the chosen types", [lambda: Item.Tbox()])
 TboxOption_Gear = SubOption("Ground Gear", TboxOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
 TboxOption_Gems = SubOption("Augments", TboxOption, hasSpinBox=True, spinDefault=30)
 TboxOption_SkellGear = SubOption("Skell Gear", TboxOption, hasSpinBox=True, spinDefault=30) 
@@ -38,8 +45,20 @@ TboxOption_Materials = SubOption("Materials", TboxOption, hasSpinBox=True, spinD
 TboxOption_Precious = SubOption("Key Items", TboxOption, hasSpinBox=True, spinDefault=30)
 TboxOption_Misc = SubOption("Misc.", TboxOption, hasSpinBox=True, spinDefault=30)
 
+# Quest Rewards https://xenobladedata.github.io/xbx/bdat/common_local_us/QUEST_itemset.html
+QuestRewardOption = Option("Quest Rewards", Items, "Randomizes quest rewards into the chosen types", [lambda: Item.QuestRewards()])
+QuestRewardOption_Gear = SubOption("Ground Gear", QuestRewardOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
+QuestRewardOption_Gems = SubOption("Augments", QuestRewardOption, hasSpinBox=True, spinDefault=30)
+QuestRewardOption_SkellGear = SubOption("Skell Gear", QuestRewardOption, hasSpinBox=True, spinDefault=30) 
+QuestRewardOption_SkellGems = SubOption("Skell Augments", QuestRewardOption, hasSpinBox=True, spinDefault=30)
+QuestRewardOption_Probes = SubOption("Probes", QuestRewardOption, hasSpinBox=True, spinDefault=30)
+QuestRewardOption_Collectibles = SubOption("Collectibles", QuestRewardOption, hasSpinBox=True, spinDefault=30)
+QuestRewardOption_Materials = SubOption("Materials", QuestRewardOption, hasSpinBox=True, spinDefault=30)
+QuestRewardOption_Precious = SubOption("Key Items", QuestRewardOption, hasSpinBox=True, spinDefault=30)
+QuestRewardOption_Misc = SubOption("Misc.", QuestRewardOption, hasSpinBox=True, spinDefault=30)
+
 # Ticket Shop https://xenobladedata.github.io/xbx/bdat/common_local_us/ITM_TradeList.html
-TicketExchangeOption = Option("Treasures", Items, "Randomizes treasures from Archaeological, Mechanical and Biological field checks", [lambda: Item.Tbox()])
+TicketExchangeOption = Option("Ticket Rewards", Items, "Randomizes the ticket exchange shop into the chosen types", [lambda: Item.TicketShop()])
 TicketExchangeOption_Gear = SubOption("Ground Gear", TicketExchangeOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
 TicketExchangeOption_Gems = SubOption("Augments", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
 TicketExchangeOption_SkellGear = SubOption("Skell Gear", TicketExchangeOption, hasSpinBox=True, spinDefault=30) 
@@ -50,9 +69,19 @@ TicketExchangeOption_Materials = SubOption("Materials", TicketExchangeOption, ha
 TicketExchangeOption_Precious = SubOption("Key Items", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
 TicketExchangeOption_Misc = SubOption("Misc.", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
 
-# Quest Rewards https://xenobladedata.github.io/xbx/bdat/common_local_us/QUEST_itemset.html
-# Shops (SHP_* )
 # Collectapedia Rewards https://xenobladedata.github.io/xbx/bdat/common_local_us/collepediareward.html
+CollectapediaRewardOption = Option("Collectapedia Rewards", Items, "Randomizes collectapedia rewards into the chosen types", [lambda: Item.CollectapediaRewards()])
+CollectapediaRewardOption_Gear = SubOption("Ground Gear", CollectapediaRewardOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
+CollectapediaRewardOption_Gems = SubOption("Augments", CollectapediaRewardOption, hasSpinBox=True, spinDefault=30)
+CollectapediaRewardOption_SkellGear = SubOption("Skell Gear", CollectapediaRewardOption, hasSpinBox=True, spinDefault=30) 
+CollectapediaRewardOption_SkellGems = SubOption("Skell Augments", CollectapediaRewardOption, hasSpinBox=True, spinDefault=30)
+CollectapediaRewardOption_Probes = SubOption("Probes", CollectapediaRewardOption, hasSpinBox=True, spinDefault=30)
+CollectapediaRewardOption_Collectibles = SubOption("Collectibles", CollectapediaRewardOption, hasSpinBox=True, spinDefault=30)
+CollectapediaRewardOption_Materials = SubOption("Materials", CollectapediaRewardOption, hasSpinBox=True, spinDefault=30)
+CollectapediaRewardOption_Precious = SubOption("Key Items", CollectapediaRewardOption, hasSpinBox=True, spinDefault=30)
+CollectapediaRewardOption_Misc = SubOption("Misc.", CollectapediaRewardOption, hasSpinBox=True, spinDefault=30)
+
+
 
 # Probe effects https://xenobladedata.github.io/xbx/bdat/common_local_us/ITM_BeaconList.html
 

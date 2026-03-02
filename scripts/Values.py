@@ -76,11 +76,14 @@ class ValueTable():
         else:
             return False
     
-    def SelectValuedMember(self, data, key, dontChangeIDs = [], catKey = None):
+    def SelectValuedMember(self, data, key, dontChangeIDs = [], catKey = None, dontChangeCat = []):
         minRange = 5 # The minimum steps you can take in either direction choosing an item from the list so minRange = 10 means +- 10 items from the target value
         minStandardDeviationOverMean = 0.5
         
-        if data[key] in dontChangeIDs + [0]: # dont change some things and empty spots
+        if catKey != None:
+            if (data[catKey] in dontChangeCat) and (data[key] in dontChangeIDs + [0]): # dont change some things and empty spots
+                return
+        elif data[key] in dontChangeIDs + [0]: # dont change some things and empty spots
             return
         
         if catKey == None:
@@ -115,6 +118,9 @@ class ValueTable():
         differenceList.append(originalItem.value - chosen.value)
         
         data[key] = chosen.id # Assign the item
+        
+        if catKey != None: # If it has a category requirement assign it
+            data[catKey] = chosen.category
         
         return chosen
     

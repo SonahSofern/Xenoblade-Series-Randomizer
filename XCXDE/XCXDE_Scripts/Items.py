@@ -66,18 +66,12 @@ def FullValTable(GearOpt, SkellGearOpt, GemOpt, SkellGemOpt, MaterOpt, CollOpt, 
     
     return valTable
 
-def SelectValuedMemberWithCategory(valTable:Values.ValueTable, slot, key, catKey):
-    '''Xenoblade X requires a category to be given in all item slots, to know what bdat table the ID refers to'''
-    chosen = valTable.SelectValuedMember(slot, key, IDs.PreciousItemIDs, catKey)
-    if chosen != None: # SelectValuedMember can fail inside the function 
-        slot[catKey] = chosen.category
-
 def TicketShop():
     valTable = FullValTable(Options.TicketExchangeOption_Gear, Options.TicketExchangeOption_SkellGear, Options.TicketExchangeOption_Gems, Options.TicketExchangeOption_SkellGems, Options.TicketExchangeOption_Materials, Options.TicketExchangeOption_Collectibles, Options.TicketExchangeOption_Probes, Options.TicketExchangeOption_Precious, Options.TicketExchangeOption_Misc)
     with open(f"XCXDE/JsonOutputs/common/ITM_TradeList.json", 'r+', encoding='utf-8') as tradFile:
         tradData = json.load(tradFile)
         for trad in tradData["rows"]:
-            SelectValuedMemberWithCategory(valTable, trad, "ItemID", "ItemType")
+            valTable.SelectValuedMember(valTable, trad, "ItemID", "ItemType")
         JSONParser.CloseFile(tradData, tradFile)
 
 
@@ -90,10 +84,43 @@ def Tbox():
         tboxData = json.load(tboxFile)
         for box in tboxData["rows"]:
             if box["item_id"] != 0: # Not all boxes have items some have gold, exp, bp
-                SelectValuedMemberWithCategory(valTable, box, "item_id", "item_cat")
+                valTable.SelectValuedMember(valTable, box, "item_id", "item_cat")
             else:
                 for key in ["money", "innerExp", "battlePoint"]:   # Apply random mults to the money exp or bp 
                     if box[key] != 0:
                         box[key] = int(box[key] * random.choice(multChoices))
                         break
         JSONParser.CloseFile(tboxData, tboxFile)
+
+
+def QuestRewards():
+    valTable = FullValTable(Options.QuestRewardOption_Gear, Options.QuestRewardOption_SkellGear, Options.QuestRewardOption_Gems, Options.QuestRewardOption_SkellGems, Options.QuestRewardOption_Materials, Options.QuestRewardOption_Collectibles, Options.QuestRewardOption_Probes, Options.QuestRewardOption_Precious, Options.QuestRewardOption_Misc)
+    multChoices = [.7, .9, 1.2, 1.5, 1.7]
+    
+    # Randomization
+    with open(f"XCXDE/JsonOutputs/common/QUEST_itemset.json", 'r+', encoding='utf-8') as qstRewardFile:
+        qstRewardData = json.load(qstRewardFile)
+        for qstRew in qstRewardData["rows"]:
+            for i in range(1,5):
+                valTable.SelectValuedMember(valTable, qstRew, f"item_id{i}", f"ref_item_bdat_{i}")
+
+        for key in ["money", "exp", "friend_point"]:   # Apply random mults to the money exp or bp 
+            qstRew[key] = int(qstRew[key] * random.choice(multChoices))
+        JSONParser.CloseFile(qstRewardData, qstRewardFile)
+
+def CollectapediaRewards():
+    valTable = FullValTable(Options.CollectapediaRewardOption_Gear, Options.CollectapediaRewardOption_SkellGear, Options.CollectapediaRewardOption_Gems, Options.CollectapediaRewardOption_SkellGems, Options.CollectapediaRewardOption_Materials, Options.CollectapediaRewardOption_Collectibles, Options.CollectapediaRewardOption_Probes, Options.CollectapediaRewardOption_Precious, Options.CollectapediaRewardOption_Misc)
+    multChoices = [1.2, 1.5, 1.7, 3.4]
+    
+    # Randomization
+    with open(f"XCXDE/JsonOutputs/common/collepediareward.json", 'r+', encoding='utf-8') as colRewardFile:
+        colRewardData = json.load(colRewardFile)
+        for colRew in colRewardData["rows"]:
+            for i in range(1,5):
+                valTable.SelectValuedMember(valTable, colRew, "Item_ID", "Lgroup")
+
+        for key in ["battlePoint"]: 
+            colRew[key] = int(colRew[key] * random.choice(multChoices))
+        JSONParser.CloseFile(colRewardData, colRewardFile)
+        
+    

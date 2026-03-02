@@ -27,7 +27,7 @@ weightsSpinDescription = "Weights ↓"
 ShopOption = Option("Shops", General, "Randomizes the contents of shops", [lambda: Items.Shops()], descData=lambda: Items.ShopsDesc()) # Key item rando settings would be fun 
 TradeOption = Option("Trading", General, "Randomizes the offers of NPC trades", [lambda: Items.TradeOptions()], descData=lambda: Items.TradeOptionsDesc())
 
-CollectableOptions = Option("Collectable Orbs", General, "Randomizes collectables on the field into the chosen options", [lambda: Items.Collectables()], descData=lambda: Items.CollectDesc())
+CollectableOptions = Option("Collectable Orbs", General, "Randomizes collectables on the field into the chosen types", [lambda: Items.Collectables()], descData=lambda: Items.CollectDesc())
 CollectableOptions_Collectables = SubOption("Collectables", CollectableOptions, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
 CollectableOptions_Materials = SubOption("Materials", CollectableOptions, hasSpinBox=True, spinDefault=30)
 CollectableOptions_Armor = SubOption("Armor", CollectableOptions, hasSpinBox=True, spinDefault=5)
@@ -35,7 +35,7 @@ CollectableOptions_Weapons = SubOption("Weapons", CollectableOptions, hasSpinBox
 CollectableOptions_Gems = SubOption("Gems", CollectableOptions, hasSpinBox=True, spinDefault=10)
 CollectableOptions_ArtBooks = SubOption("Art Books", CollectableOptions, hasSpinBox=True, spinDefault=1)
 
-CollectapediaOptions = Option("Collectapedia Rewards", General, "Randomizes rewards from the collectapedia into the chosen options", [lambda: Items.Collectapedia()], descData=lambda: Items.CollectapediaDesc())
+CollectapediaOptions = Option("Collectapedia Rewards", General, "Randomizes rewards from the collectapedia into the chosen types", [lambda: Items.Collectapedia()], descData=lambda: Items.CollectapediaDesc())
 CollectapediaOptions_Collectables = SubOption("Collectables", CollectapediaOptions, hasSpinBox=True, spinDesc=weightsSpinDescription, spinDefault=1)
 CollectapediaOptions_Materials = SubOption("Materials", CollectapediaOptions, hasSpinBox=True, spinDefault=1)
 CollectapediaOptions_Armor = SubOption("Armor", CollectapediaOptions, hasSpinBox=True, spinDefault=15)
@@ -43,15 +43,13 @@ CollectapediaOptions_Weapons = SubOption("Weapons", CollectapediaOptions, hasSpi
 CollectapediaOptions_Gems = SubOption("Gems", CollectapediaOptions, hasSpinBox=True, spinDefault=15)
 CollectapediaOptions_ArtBooks = SubOption("Art Books", CollectapediaOptions, hasSpinBox=True, spinDefault=10)
 
-EnemyDropOption = Option("Enemy Drops", General, "Randomizes loot from enemies", [lambda: Items.EnemyDrops()], descData=lambda: Items.EnemyDropsDesc())
-EnemyDropOptions_Collectables = SubOption("Collectables", EnemyDropOption, hasSpinBox=True, spinDesc=weightsSpinDescription, spinDefault=2)
-EnemyDropOptions_Materials = SubOption("Materials", EnemyDropOption, hasSpinBox=True, spinDefault=10)
-EnemyDropOptions_Armor = SubOption("Armor", EnemyDropOption, hasSpinBox=True, spinDefault=5)
-EnemyDropOptions_Weapons = SubOption("Weapons", EnemyDropOption, hasSpinBox=True, spinDefault=5)
-EnemyDropOptions_Gems = SubOption("Gems", EnemyDropOption, hasSpinBox=True, spinDefault=5)
-EnemyDropOptions_ArtBooks = SubOption("Art Books", EnemyDropOption, hasSpinBox=True, spinDefault=1)
+EnemyDropOption = Option("Enemy Drops", General, "Randomizes the chosen types of loot from enemies", [lambda: Items.EnemyDrops()], descData=lambda: Items.EnemyDropsDesc())
+EnemyDropOptions_Materials = SubOption("Materials", EnemyDropOption)
+EnemyDropOptions_Armor = SubOption("Armor", EnemyDropOption)
+EnemyDropOptions_Weapons = SubOption("Weapons", EnemyDropOption)
+EnemyDropOptions_ArtBooks = SubOption("Art Books", EnemyDropOption)
 
-GiantsChestOption = Option("Giants Chests", General, "Randomizes the contents of Giants Chests into the chosen options", [lambda: Items.GiantsChests()], descData=lambda: Items.GiantsChestsDesc())
+GiantsChestOption = Option("Giants Chests", General, "Randomizes the contents of Giants Chests into the chosen types", [lambda: Items.GiantsChests()], descData=lambda: Items.GiantsChestsDesc())
 GiantsChestOptions_Collectables = SubOption("Collectables", GiantsChestOption, hasSpinBox=True, spinDesc=weightsSpinDescription, defState=False, spinDefault=0)
 GiantsChestOptions_Materials = SubOption("Materials", GiantsChestOption, hasSpinBox=True, spinDefault=1)
 GiantsChestOptions_Armor = SubOption("Armor", GiantsChestOption, hasSpinBox=True, spinDefault=10)
@@ -59,7 +57,7 @@ GiantsChestOptions_Weapons = SubOption("Weapons", GiantsChestOption, hasSpinBox=
 GiantsChestOptions_Gems = SubOption("Gems", GiantsChestOption, hasSpinBox=True, spinDefault=10)
 GiantsChestOptions_ArtBooks = SubOption("Art Books", GiantsChestOption, hasSpinBox=True, spinDefault=10)
 
-QuestRewardsOption = Option("Quest Rewards", General, "Randomizes the rewards from quests into the chosen options", [lambda: Items.QuestRewards()], descData=lambda: Items.QuestRewardsDesc())
+QuestRewardsOption = Option("Quest Rewards", General, "Randomizes the rewards from quests into the chosen types", [lambda: Items.QuestRewards()], descData=lambda: Items.QuestRewardsDesc())
 QuestRewardsOptions_Collectables = SubOption("Collectables", QuestRewardsOption, hasSpinBox=True, spinDesc=weightsSpinDescription, spinDefault=1)
 QuestRewardsOptions_Materials = SubOption("Materials", QuestRewardsOption, hasSpinBox=True, spinDefault=5)
 QuestRewardsOptions_Armor = SubOption("Armor", QuestRewardsOption, hasSpinBox=True, spinDefault=10)

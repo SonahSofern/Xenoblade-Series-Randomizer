@@ -158,13 +158,13 @@ def ShopsDesc():
 
 def EnemyDrops():
     matValTable = Values.ValueTable(path = "XCDE/JsonOutputs/bdat_common")
-    matValTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.MaterialIDs, Values.WeightOptionMethod(Options.EnemyDropOptions_Materials))
+    matValTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.MaterialIDs)
     wpnValTable = Values.ValueTable(path = "XCDE/JsonOutputs/bdat_common")
-    wpnValTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.WeaponIDs, Values.WeightOptionMethod(Options.EnemyDropOptions_Weapons))
+    wpnValTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.WeaponIDs)
     armorValTable = Values.ValueTable(path = "XCDE/JsonOutputs/bdat_common")
-    armorValTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.ArmorIDs, Values.WeightOptionMethod(Options.EnemyDropOptions_Armor))
+    armorValTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.ArmorIDs)
     artValTable = Values.ValueTable(path = "XCDE/JsonOutputs/bdat_common")
-    artValTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.ArtBookIDs, Values.WeightOptionMethod(Options.EnemyDropOptions_ArtBooks))
+    artValTable.PopulateValues(Values.ValueFile("ITM_itemlist"), IDs.ArtBookIDs)
     
     nmlFiles = []
     rarFiles = []
@@ -174,23 +174,31 @@ def EnemyDrops():
             nmlFiles.append(f"bdat_ma{file}/drop_nmllist{file}")
             rarFiles.append(f"bdat_ma{file}/drop_rarlist{file}")
             sprFiles.append(f"bdat_ma{file}/drop_sprlist{file}")
-        
+             
+    isWpn = Options.EnemyDropOptions_Weapons.GetState()
+    isArm = Options.EnemyDropOptions_Armor.GetState()
+    isArt = Options.EnemyDropOptions_ArtBooks.GetState()
+    isMat = Options.EnemyDropOptions_Materials.GetState()
+    
     # Randomization
-    for file in nmlFiles:
-        with open(f"XCDE/JsonOutputs/{file}.json", 'r+', encoding='utf-8') as dropFile:
-            dropData = json.load(dropFile)
-            for drop in dropData["rows"]:
-                for i in range(1,3):
-                    matValTable.SelectValuedMember(drop, f"materia{i}", IDs.KeyItemIDs)
-            JSONParser.CloseFile(dropData, dropFile)
+    if isMat:
+        for file in nmlFiles:
+            with open(f"XCDE/JsonOutputs/{file}.json", 'r+', encoding='utf-8') as dropFile:
+                dropData = json.load(dropFile)
+                for drop in dropData["rows"]:
+                    for i in range(1,3):
+                        matValTable.SelectValuedMember(drop, f"materia{i}", IDs.KeyItemIDs)
+                JSONParser.CloseFile(dropData, dropFile)
     
     for file in rarFiles:
         with open(f"XCDE/JsonOutputs/{file}.json", 'r+', encoding='utf-8') as dropFile:
             dropData = json.load(dropFile)
             for drop in dropData["rows"]:
                 for i in range(1,5):
-                    wpnValTable.SelectValuedMember(drop, f"wpn{i}")
-                    armorValTable.SelectValuedMember(drop, f"equip{i}")
+                    if isWpn:
+                        wpnValTable.SelectValuedMember(drop, f"wpn{i}")
+                    if isArm:
+                        armorValTable.SelectValuedMember(drop, f"equip{i}")
             JSONParser.CloseFile(dropData, dropFile)
             
     for file in sprFiles:
@@ -198,20 +206,22 @@ def EnemyDrops():
             dropData = json.load(dropFile)
             for drop in dropData["rows"]:
                 for i in range(1,5):
-                    wpnValTable.SelectValuedMember(drop, f"wpn{i}")
+                    if isWpn:
+                        wpnValTable.SelectValuedMember(drop, f"wpn{i}")
                 for i in range(1,9):
-                    wpnValTable.SelectValuedMember(drop, f"uni_wpn{i}")
-                    armorValTable.SelectValuedMember(drop, f"uni_equip{i}")
-                    artValTable.SelectValuedMember(drop, f"arts{i}")
+                    if isWpn:
+                        wpnValTable.SelectValuedMember(drop, f"uni_wpn{i}")
+                    if isArm:
+                        armorValTable.SelectValuedMember(drop, f"uni_equip{i}")
+                    if isArt:
+                        artValTable.SelectValuedMember(drop, f"arts{i}")
             JSONParser.CloseFile(dropData, dropFile)
     
-
 def EnemyDropsDesc():
     myDesc = PopupDescriptions.Description()
     myDesc.Header(Options.EnemyDropOption.name)
-    myDesc.Text("Randomizes the contents of chests dropped from enemies. You can choose the weights for the categories you have chosen. Crystals are not randomized through this setting.")
+    myDesc.Text("Randomizes the contents of chests dropped from enemies, the types are predetermined and unchanged. Crystals are not randomized through this setting.")
     return myDesc
-
 
 def QuestRewards():
     valTable = Values.ValueTable(path = "XCDE/JsonOutputs/bdat_common")
