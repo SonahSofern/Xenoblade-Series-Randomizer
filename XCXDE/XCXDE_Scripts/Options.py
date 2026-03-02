@@ -29,24 +29,26 @@ weightsSpinDescription = "Weights ↓"
 # Field Skill Drops
 TboxOption = Option("Treasures", Items, "Randomizes treasures from Archaeological, Mechanical and Biological field checks", [lambda: Item.Tbox()])
 TboxOption_Gear = SubOption("Ground Gear", TboxOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
-# TboxOption_SkellGear = SubOption("Skell Gear", TboxOption, hasSpinBox=True, spinDefault=30) # Dont know the category so cant put them here yet probably can find with testing
 TboxOption_Gems = SubOption("Augments", TboxOption, hasSpinBox=True, spinDefault=30)
+TboxOption_SkellGear = SubOption("Skell Gear", TboxOption, hasSpinBox=True, spinDefault=30) 
 TboxOption_SkellGems = SubOption("Skell Augments", TboxOption, hasSpinBox=True, spinDefault=30)
 TboxOption_Probes = SubOption("Probes", TboxOption, hasSpinBox=True, spinDefault=30)
 TboxOption_Collectibles = SubOption("Collectibles", TboxOption, hasSpinBox=True, spinDefault=30)
 TboxOption_Materials = SubOption("Materials", TboxOption, hasSpinBox=True, spinDefault=30)
 TboxOption_Precious = SubOption("Key Items", TboxOption, hasSpinBox=True, spinDefault=30)
+TboxOption_Misc = SubOption("Misc.", TboxOption, hasSpinBox=True, spinDefault=30)
 
 # Ticket Shop https://xenobladedata.github.io/xbx/bdat/common_local_us/ITM_TradeList.html
 TicketExchangeOption = Option("Treasures", Items, "Randomizes treasures from Archaeological, Mechanical and Biological field checks", [lambda: Item.Tbox()])
 TicketExchangeOption_Gear = SubOption("Ground Gear", TicketExchangeOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
-# TicketExchangeOption_SkellGear = SubOption("Skell Gear", TicketExchangeOption, hasSpinBox=True, spinDefault=30) # Dont know the category so cant put them here yet probably can find with testing
 TicketExchangeOption_Gems = SubOption("Augments", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
+TicketExchangeOption_SkellGear = SubOption("Skell Gear", TicketExchangeOption, hasSpinBox=True, spinDefault=30) 
 TicketExchangeOption_SkellGems = SubOption("Skell Augments", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
 TicketExchangeOption_Probes = SubOption("Probes", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
 TicketExchangeOption_Collectibles = SubOption("Collectibles", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
 TicketExchangeOption_Materials = SubOption("Materials", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
 TicketExchangeOption_Precious = SubOption("Key Items", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
+TicketExchangeOption_Misc = SubOption("Misc.", TicketExchangeOption, hasSpinBox=True, spinDefault=30)
 
 # Quest Rewards https://xenobladedata.github.io/xbx/bdat/common_local_us/QUEST_itemset.html
 # Shops (SHP_* )
