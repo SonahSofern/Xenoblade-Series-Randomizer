@@ -2,7 +2,7 @@ import copy
 import json, random, os
 
 
-class JFile:
+class File:
     '''Better approach to manipulating files, cuts out boilerplate and lets us expand functionality easily'''
     def __init__(self, filePath):
          self.file = open(filePath, 'r+', encoding='utf-8')

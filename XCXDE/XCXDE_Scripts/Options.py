@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XCXDE.XCXDE_Scripts import Enemy, IDs, Items as Item
+from XCXDE.XCXDE_Scripts import Enemy, IDs, Items as Item, QOL as q
 
 scripts.Interactables.Game = "XCXDE" 
 
@@ -136,6 +136,7 @@ ShortcutsOption_SkellHell = SubOption("Skip Skell License Exam", ShortcutsOption
 # TutorialSkipOption = Option("Tutorial Skip", QOL, "Removes tutorials") 
 FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_Growlist.json"], ["LevelExp"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
 FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each class levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_ClassGrowlist.json"], ["LevelCpR0", "LevelCpR1", "LevelCpR2"], [f'row[key] // {FasterClassOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
+YellowBubbleOption = Option("Info Range", QOL, "Increased range for collecting info bubbles", [lambda: q.InfoRangeIncrease()])
 # Faster Party Affinity
 # BetterFrontierNavOption = Option("Frontier Nav Boost", QOL, "Faster rewards from FrontierNav")
 # SkellLiscOption = Option("Skell License Unlock", QOL, "Sets the unlock chapter for skells")
@@ -145,7 +146,6 @@ FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each clas
 # SkellFlightOption = Option("Early Flight Module", QOL, "Flight is unlocked immediate after getting skells") # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
 # SkellEasyCruiseOption = Option("Easy Cruise Mode", QOL, "Hraesvelg Cruise Mode is unlocked") # FLD_questlist 2524 is the hraesvelg cruise mode quest, somethere there unlocks it.
 
-# YellowBubbleOption (Longer range to view yellow bubbles from)
 
 from scripts import Onefile
 if not Onefile.isOneFile:

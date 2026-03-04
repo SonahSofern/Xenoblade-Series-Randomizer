@@ -23,9 +23,9 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     rscKeys = [] + proxyIDs
     retainNonArrangeKeys = ["DistanceXZ", "DistanceY", "DepopDistanceXZ", "DepopDistanceY", "ReleaseDistanceXZ", "ReleaseDistanceY", "ReleasePcDistanceXZ", "ReleasePcDistanceXZ", "FightDistance", "PemitHeight", "RiseDescend", "Radius"] #'FlyHeight', 'SwimHeight'
     
-    eneFile = JSONParser.JFile("XCXDE/JsonOutputs/common/CHR_EnList.json")
-    paramFile = JSONParser.JFile("XCXDE/JsonOutputs/common/CHR_EnParam.json")
-    rscFile = JSONParser.JFile("XCXDE/JsonOutputs/common/RSC_EnList.json")
+    eneFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnList.json")
+    paramFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnParam.json")
+    rscFile = JSONParser.File("XCXDE/JsonOutputs/common/RSC_EnList.json")
     
     eRando = Enemy.EnemyRandomizer(IDs.NormalMonsterIDs, IDs.TyrantMonsterIDs, IDs.BossMonstersIDs, IDs.SuperbossMonstersIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID",  "ParamID", eneFile.data, paramFile.data, rscFile.data)
 
