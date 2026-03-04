@@ -138,12 +138,14 @@ FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each l
 FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each class levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_ClassGrowlist.json"], ["LevelCpR0", "LevelCpR1", "LevelCpR2"], [f'row[key] // {FasterClassOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
 # Faster Party Affinity
 # BetterFrontierNavOption = Option("Frontier Nav Boost", QOL, "Faster rewards from FrontierNav")
-SkellLiscOption = Option("Skell License", QOL, "Skell License QOL")
-SkellLiscOption_ChSelect = SubOption("Fixed Unlock", SkellLiscOption,hasSpinBox=True, spinMax=12, spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/FLD_questlist.html#1143
-SkellLiscOption_ChSelect = SubOption("Random Unlock", SkellLiscOption)
+# SkellLiscOption = Option("Skell License Unlock", QOL, "Sets the unlock chapter for skells")
+# SkellLiscOption_ChSelect = SubOption("Fixed Unlock", SkellLiscOption, hasSpinBox=True, spinMax=12, spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/FLD_questlist.html#1143
+# SkellLiscOption_ChSelect = SubOption("Random Unlock", SkellLiscOption)
 
-SkellFlightOption = Option("Early Flight Module", QOL, "Flight is unlocked immediate after getting skells") # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
-SkellEasyCruiseOption = Option("Easy Cruise Mode", QOL, "Hraesvelg Cruise Mode is unlocked") # FLD_questlist 2524 is the hraesvelg cruise mode quest, somethere there unlocks it.
+# SkellFlightOption = Option("Early Flight Module", QOL, "Flight is unlocked immediate after getting skells") # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
+# SkellEasyCruiseOption = Option("Easy Cruise Mode", QOL, "Hraesvelg Cruise Mode is unlocked") # FLD_questlist 2524 is the hraesvelg cruise mode quest, somethere there unlocks it.
+
+# YellowBubbleOption (Longer range to view yellow bubbles from)
 
 from scripts import Onefile
 if not Onefile.isOneFile:

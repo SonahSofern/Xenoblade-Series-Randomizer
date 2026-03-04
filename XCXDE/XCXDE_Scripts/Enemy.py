@@ -5,6 +5,8 @@ from scripts import Helper, JSONParser, PopupDescriptions, Enemies as Enemy
 
 StaticEnemyData:list[Helper.RandomGroup] = []
 
+# Enemy Names for map hexs should be updated with their replacement
+
 def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSize = False, isBossGroupBalancing = False, isMatchStats = False, finalBoss = False):
     global StaticEnemyData
     
@@ -20,53 +22,50 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     proxyIDs = ['ProxyID'] # Enemies need to keep their original proxy id because in boss fights they dont spawn
     rscKeys = [] + proxyIDs
     retainNonArrangeKeys = ["DistanceXZ", "DistanceY", "DepopDistanceXZ", "DepopDistanceY", "ReleaseDistanceXZ", "ReleaseDistanceY", "ReleasePcDistanceXZ", "ReleasePcDistanceXZ", "FightDistance", "PemitHeight", "RiseDescend", "Radius"] #'FlyHeight', 'SwimHeight'
-    with open("XCXDE/JsonOutputs/common/CHR_EnList.json", 'r+', encoding='utf-8') as eneFile:
-        with open("XCXDE/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
-            with open("XCXDE/JsonOutputs/common/RSC_EnList.json", 'r+', encoding='utf-8') as rscFile:
-                paramData = json.load(paramFile)
-                rscData = json.load(rscFile)
-                eneData = json.load(eneFile)
-                
-                              
-                eRando = Enemy.EnemyRandomizer(IDs.NormalMonsterIDs, IDs.TyrantMonsterIDs, IDs.BossMonstersIDs, IDs.SuperbossMonstersIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID",  "ParamID", eneData, paramData, rscData)
     
-                if firstRun:
-                    StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
+    eneFile = JSONParser.JFile("XCXDE/JsonOutputs/common/CHR_EnList.json")
+    paramFile = JSONParser.JFile("XCXDE/JsonOutputs/common/CHR_EnParam.json")
+    rscFile = JSONParser.JFile("XCXDE/JsonOutputs/common/RSC_EnList.json")
+    
+    eRando = Enemy.EnemyRandomizer(IDs.NormalMonsterIDs, IDs.TyrantMonsterIDs, IDs.BossMonstersIDs, IDs.SuperbossMonstersIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID",  "ParamID", eneFile.data, paramFile.data, rscFile.data)
 
-                for en in eneData["rows"]:
-                    if eRando.FilterEnemies(en, targetGroup):
-                        continue
+    if firstRun:
+        StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
 
-                    newEn = eRando.CreateRandomEnemy(StaticEnemyData)
-                    
-                    eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys + rscKeys) 
-                    
-                    # ForcedArtsManager(en, newEn, eRando)
-                        
-                    # if isBossGroupBalancing:
-                    #     eRando.BalanceFight(en, newEn, GroupFightViolations, EnemyCounts)
+    for en in eneFile.rows:
+        if eRando.FilterEnemies(en, targetGroup):
+            continue
 
-                    if isMatchSize:
-                        EnemySizeHelper(en, newEn)
+        newEn = eRando.CreateRandomEnemy(StaticEnemyData)
+        
+        eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys + rscKeys) 
+        
+        # ForcedArtsManager(en, newEn, eRando)
+            
+        # if isBossGroupBalancing:
+        #     eRando.BalanceFight(en, newEn, GroupFightViolations, EnemyCounts)
 
-                    IntroFightBalances(en, newEn, eRando)
-                    InvincibleEnemy(newEn)
-                    
-                    # eRando.HealthBalancing(en, newEn, 'HpMaxRev')
+        if isMatchSize:
+            EnemySizeHelper(en, newEn)
 
-                    Helper.CopyKeys(en, newEn, ignoreKeys)
+        IntroFightBalances(en, newEn, eRando)
+        InvincibleEnemy(newEn)
+        
+        # eRando.HealthBalancing(en, newEn, 'HpMaxRev')
 
-                    HpLimitEffects(en) # Removes HPLimit values from replacement enemies and enforces it in certain locationsa
+        Helper.CopyKeys(en, newEn, ignoreKeys)
 
-                for group in StaticEnemyData:
-                    group.RefreshCurrentGroup()
+        HpLimitEffects(en) # Removes HPLimit values from replacement enemies and enforces it in certain locationsa
 
-                # if firstRun:
-                #     Bandaids()
-                    
-                JSONParser.CloseFile(eneData, eneFile)
-                JSONParser.CloseFile(paramData, paramFile)
-                JSONParser.CloseFile(rscData, rscFile)
+    for group in StaticEnemyData:
+        group.RefreshCurrentGroup()
+
+    # if firstRun:
+    #     Bandaids()
+        
+    eneFile.Close()
+    paramFile.Close()
+    rscFile.Close()
 
 def EnemySizeHelper(enemy, chosen):
     '''Helps match enemy size to replacement size'''

@@ -2,6 +2,19 @@ import copy
 import json, random, os
 
 
+class JFile:
+    '''Better approach to manipulating files, cuts out boilerplate and lets us expand functionality easily'''
+    def __init__(self, filePath):
+         self.file = open(filePath, 'r+', encoding='utf-8')
+         self.data = json.load(self.file)
+         self.rows = self.data["rows"]
+         
+    def Close(self):
+        """Truncates and Closes Json Files"""
+        self.file.seek(0)
+        self.file.truncate()
+        json.dump(self.data, self.file, indent=2, ensure_ascii=False)
+
 def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list = [], rangeValidReplacements:list = [], InvalidTargetIDs:list = [], IgnoreID_AND_Key = [["",""]]): # make this a function to reuse, check the settings ot see if we even do this
 
     # print(f"Valid Replacements: {Replacements}")
