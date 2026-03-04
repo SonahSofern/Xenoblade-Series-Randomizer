@@ -5,7 +5,7 @@ from scripts import Helper, JSONParser, PopupDescriptions, Enemies as Enemy
 
 StaticEnemyData:list[Helper.RandomGroup] = []
 
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isBossGroupBalancing = False, isMatchStats = False, finalBoss = False):
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSize = False, isBossGroupBalancing = False, isMatchStats = False, finalBoss = False):
     global StaticEnemyData
     
     if StaticEnemyData == []:
@@ -13,17 +13,21 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isB
     else:
         firstRun = False
     
-    ignoreKeys = ["LvMin", "LvMax", "LvRev", "Exp" "ZoneUD", "Flag(Named)", "Flag(mBoss)", "ignoreLv", "FAOff", "BGMID", "NoEncountSkip", "SearchParamID", "MoveRange", "FieldPatternID"]
+    ignoreKeys = ["$id", "LvMin", "LvMax", "LvRev", "Exp" "ZoneUD", "Partner", "Flag(Named)", "Flag(mBoss)", "Flag(ignoreLv)", "Flag(Leader)", "AiLeader", "Flag(FAOff)", "BGMID", "NoEncountSkip", "SearchParamID", "MoveRange", "FieldPatternID", "ZoneID", "PopCost", 'PopProxyCost']
     # EnemyCounts = GetEnemyCounts()
     # GroupFightViolations = GetGroupFightViolations()
-    retainNonArrangeKeys = [] #'FlyHeight', 'SwimHeight'
+    rscTestKeys = ['Resource', 'TypeFamily', 'TypeGenus', 'Material', 'RiseDescend', 'ProxyID', 'Radius', 'FightDistance', 'PermitHeight', 'RayCheckU', 'RayCheckD', 'SearchBaseBone', 'UndX', 'UndZ', 'UndMinX', 'UndMaxX', 'UndMinZ', 'UndMaxZ', 'UndDeg', 'ExArea', 'TurnAngle', 'FrontAngle', 'NoEncountSkip', 'VoDir', 'EffPack', 'EffCmn', 'Parts', 'PathMot', 'PathChr', 'Action', 'SePack', 'ClipEvent', 'Com_SE', 'Com_Eff', 'Com_Vo', 'Mflag(Vip)', 'Mflag(Map)', 'Mflag(Evt)', 'AttackID', 'AttackNum', 'HudName', 'HudOffset', '<044870FF>', '<7D67F533>']
+    proxyIDs = ['ProxyID'] # Enemies need to keep their original proxy id because in boss fights they dont spawn
+    rscKeys = [] + proxyIDs
+    retainNonArrangeKeys = ["DistanceXZ", "DistanceY", "DepopDistanceXZ", "DepopDistanceY", "ReleaseDistanceXZ", "ReleaseDistanceY", "ReleasePcDistanceXZ", "ReleasePcDistanceXZ", "FightDistance", "PemitHeight", "RiseDescend", "Radius"] #'FlyHeight', 'SwimHeight'
     with open("XCXDE/JsonOutputs/common/CHR_EnList.json", 'r+', encoding='utf-8') as eneFile:
         with open("XCXDE/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
             with open("XCXDE/JsonOutputs/common/RSC_EnList.json", 'r+', encoding='utf-8') as rscFile:
                 paramData = json.load(paramFile)
                 rscData = json.load(rscFile)
                 eneData = json.load(eneFile)
-                                
+                
+                              
                 eRando = Enemy.EnemyRandomizer(IDs.NormalMonsterIDs, IDs.TyrantMonsterIDs, IDs.BossMonstersIDs, IDs.SuperbossMonstersIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID",  "ParamID", eneData, paramData, rscData)
     
                 if firstRun:
@@ -35,21 +39,24 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isB
 
                     newEn = eRando.CreateRandomEnemy(StaticEnemyData)
                     
-                    # eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys) # Flying Enemies and some enemies in Erythia will still fall despite act type fix (After testing I found this is because of the motion file in rsc. So there is no fix unless we change every enemies motion as they are being placed)
+                    eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys + rscKeys) 
                     
                     # ForcedArtsManager(en, newEn, eRando)
                         
                     # if isBossGroupBalancing:
                     #     eRando.BalanceFight(en, newEn, GroupFightViolations, EnemyCounts)
 
-                    # if isMatchSize:
-                    #     EnemySizeHelper(en, newEn, eRando) # Because size is so important to X and its open world best to leave it vanilla, except maybe indoor areas
+                    if isMatchSize:
+                        EnemySizeHelper(en, newEn)
 
                     IntroFightBalances(en, newEn, eRando)
+                    InvincibleEnemy(newEn)
                     
                     # eRando.HealthBalancing(en, newEn, 'HpMaxRev')
 
                     Helper.CopyKeys(en, newEn, ignoreKeys)
+
+                    HpLimitEffects(en) # Removes HPLimit values from replacement enemies and enforces it in certain locationsa
 
                 for group in StaticEnemyData:
                     group.RefreshCurrentGroup()
@@ -60,13 +67,67 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isB
                 JSONParser.CloseFile(eneData, eneFile)
                 JSONParser.CloseFile(paramData, paramFile)
                 JSONParser.CloseFile(rscData, rscFile)
+
+def EnemySizeHelper(enemy, chosen):
+    '''Helps match enemy size to replacement size'''
+    Small = 1
+    Medium = 2
+    Large = 3
+    XL = 4
+    Megafauna = 5
     
+    multDict = {
+        (Megafauna, XL): 5,
+        (Megafauna, Large): 6,
+        (Megafauna, Medium): 8,
+        (Megafauna, Small): 10,
+        (XL, Large): 3,
+        (XL, Medium): 4,
+        (XL, Small): 5,
+        (Large, Medium): 1.5,
+        (Large, Small): 2,
+        (Medium, Small): 1
+    }
+    Enemy.EnemySizeMatch(enemy, chosen, ["ScaleMin", "ScaleMax"], multDict, "ChrSize", chosen["ScaleMin"], 5, 5000)
+  
+def InvincibleEnemy(newEn):
+    '''Some enemies have invincible auras on startup that never end. This removes them.'''
+    InvincibleStartupBuffIDs = [134, 138, 159, 178, 192, 235]
+    if newEn["StartupBuff"] in InvincibleStartupBuffIDs:
+        newEn["StartupBuff"] = 0
+        newEn["StartupBuffLv"] = 0
+        
+
 def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
     introFightIDs = [348, 349, 350]
     if en["$id"] in introFightIDs:
         oldEnParam = eRando.FindParam(en)
         eRando.ChangeStats([newEn], [("HpMaxRev", oldEnParam["HpMaxRev"]), ("PowFightRev", oldEnParam["PowFightRev"]), ("PowShootRev", oldEnParam["PowShootRev"]), ("PowMindRev", oldEnParam["PowMindRev"]), ("DodgeRev", oldEnParam["DodgeRev"]), ("DexFightRev", oldEnParam["DexFightRev"]), ("DexShootRev", oldEnParam["DexShootRev"]), ("Def", oldEnParam["Def"]), ("RstPhysics", oldEnParam["RstPhysics"]), ("RstDebuffHalf", oldEnParam["RstDebuffHalf"]), ("RstDebuffFull", oldEnParam["RstDebuffFull"]) ])
                                                                                                                                                                                                                                                                                                             
-                                                                                                                                                                                                                                                                                                            
+
+def HpLimitEffects(en):
+    HPLimitFightIDs = [431,441,460,470,1755,1756] # DLC seemingly didnt have any but im skeptical because there is a VITA fight that ends at 50% hp (ID 4093)
+    NoKillEnhancement = 7809
+    '''Xenoblade X uses a Enhancement to stop characters from dying in phased fights, this keeps that effect on the location and removes it if not on a phased location'''
+    if en["$id"] not in HPLimitFightIDs: # Remove it from non HPLimitFights
+        for i in range(1,4):
+            if en[f"EnhanceID{i}"] == NoKillEnhancement: 
+                en[f"EnhanceID{i}"] = 0 
+    else: # Add it to limit required fights
+        foundLim = False
+        for i in range(1,4):
+            if en[f"EnhanceID{i}"] == NoKillEnhancement:
+                foundLim = True
+                break
+        if not foundLim:
+            slot = 3
+            # Find an empty slot if there is one
+            for i in range(1,4):
+                if en[f"EnhanceID{i}"] == 0:
+                    slot = i
+            en[f"EnhanceID{slot}"] = NoKillEnhancement
+            
+            
+                                                                                                                                                                                                                                                                                           
 def EnemyDesc():
     pass

@@ -71,7 +71,7 @@ def TicketShop():
     with open(f"XCXDE/JsonOutputs/common/ITM_TradeList.json", 'r+', encoding='utf-8') as tradFile:
         tradData = json.load(tradFile)
         for trad in tradData["rows"]:
-            valTable.SelectValuedMember(valTable, trad, "ItemID", "ItemType")
+            valTable.SelectValuedMember(trad, "ItemID", catKey="ItemType")
         JSONParser.CloseFile(tradData, tradFile)
 
 
@@ -84,7 +84,7 @@ def Tbox():
         tboxData = json.load(tboxFile)
         for box in tboxData["rows"]:
             if box["item_id"] != 0: # Not all boxes have items some have gold, exp, bp
-                valTable.SelectValuedMember(valTable, box, "item_id", "item_cat")
+                valTable.SelectValuedMember(box, "item_id", IDs.PreciousItemIDs,  "item_cat")
             else:
                 for key in ["money", "innerExp", "battlePoint"]:   # Apply random mults to the money exp or bp 
                     if box[key] != 0:
@@ -102,7 +102,7 @@ def QuestRewards():
         qstRewardData = json.load(qstRewardFile)
         for qstRew in qstRewardData["rows"]:
             for i in range(1,5):
-                valTable.SelectValuedMember(valTable, qstRew, f"item_id{i}", f"ref_item_bdat_{i}")
+                valTable.SelectValuedMember(qstRew, f"item_id{i}", IDs.PreciousItemIDs,  f"ref_item_bdat_{i}")
 
         for key in ["money", "exp", "friend_point"]:   # Apply random mults to the money exp or bp 
             qstRew[key] = int(qstRew[key] * random.choice(multChoices))
@@ -116,11 +116,22 @@ def CollectapediaRewards():
     with open(f"XCXDE/JsonOutputs/common/collepediareward.json", 'r+', encoding='utf-8') as colRewardFile:
         colRewardData = json.load(colRewardFile)
         for colRew in colRewardData["rows"]:
-            for i in range(1,5):
-                valTable.SelectValuedMember(valTable, colRew, "Item_ID", "Lgroup")
+            valTable.SelectValuedMember(colRew, "Item_ID", catKey="Lgroup")
 
         for key in ["battlePoint"]: 
             colRew[key] = int(colRew[key] * random.choice(multChoices))
         JSONParser.CloseFile(colRewardData, colRewardFile)
         
+def EnemyDrops():
+    valTable = FullValTable(Options.CollectapediaRewardOption_Gear, Options.CollectapediaRewardOption_SkellGear, Options.CollectapediaRewardOption_Gems, Options.CollectapediaRewardOption_SkellGems, Options.CollectapediaRewardOption_Materials, Options.CollectapediaRewardOption_Collectibles, Options.CollectapediaRewardOption_Probes, Options.CollectapediaRewardOption_Precious, Options.CollectapediaRewardOption_Misc)
     
+    for boxType in ["Bronze", "Silver", "Gold"]:
+        # Randomization
+        with open(f"XCXDE/JsonOutputs/common/DRP_{boxType}BoxTable.json", 'r+', encoding='utf-8') as boxFile:
+            boxData = json.load(boxFile)
+            for box in boxData["rows"]:
+                for i in range(1,13):
+                    if i > 8 and boxType == "Bronze":
+                        break
+                    valTable.SelectValuedMember(box, f"Item_{i:02}")
+            JSONParser.CloseFile(boxData, boxFile)
