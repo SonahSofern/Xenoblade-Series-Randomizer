@@ -130,9 +130,9 @@ BossEnemyOption_FinalBoss = SubOption("Vanilla Final Boss", BossEnemyOption, def
 # Skells
 
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
-ShortcutsOption_SkellHell = SubOption("Skip Skell License Exam", ShortcutsOption)
+ShortcutsOption_MainQuestReqs = SubOption("Skip Chapter Prerequisites", ShortcutsOption, [lambda: q.EasyStoryPrerequisites()])
+ShortcutsOption_SkellHell = SubOption("Easy Skell License Exam", ShortcutsOption)
 
-# ShortcutsOption_MainQuestReqs = SubOption("Chapter Prerequisites Skip", ShortcutsOption)
 # TutorialSkipOption = Option("Tutorial Skip", QOL, "Removes tutorials") 
 FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_Growlist.json"], ["LevelExp"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
 FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each class levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_ClassGrowlist.json"], ["LevelCpR0", "LevelCpR1", "LevelCpR2"], [f'row[key] // {FasterClassOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
@@ -149,22 +149,7 @@ YellowBubbleOption = Option("Info Range", QOL, "Increased range for collecting i
 
 from scripts import Onefile
 if not Onefile.isOneFile:
-    OPWeapon = Option("OP Weapons", QOL, "For Testing makes starter weapons op", [lambda: OpWep()])
-
-import json
-from scripts import JSONParser
-def OpWep():
-    with open("XCXDE/JsonOutputs/common/WPN_PcList.json", 'r+', encoding='utf-8') as wpFile:
-        wpData = json.load(wpFile)
-        for wep in wpData["rows"]:
-            if wep["$id"] in [1584]:
-                wep["Damage"] = 1500
-                wep["Magazine"] = 100
-                wep["DMRatio"] = 1500
-                wep["Recast"] = 1
-                
-                
-        JSONParser.CloseFile(wpData, wpFile)
+    OPWeapon = Option("OP Weapons", QOL, "For Testing makes starter weapons op", [lambda: q.OpWep()])
 
 
 # Funny

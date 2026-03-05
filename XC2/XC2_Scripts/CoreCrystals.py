@@ -79,7 +79,7 @@ def RandomizeCrystalList():
     CrystalCount = 0
     
     BladeIDsGroup = Helper.RandomGroup()
-    for id in IDs.BladeIDs:
+    for id in IDs.CoreCrystalBladeIDs:
         BladeIDsGroup.AddNewData(id)
 
     with open("XC2/JsonOutputs/common/ITM_CrystalList.json", 'r+', encoding='utf-8') as cryFile:

@@ -76,10 +76,10 @@ def EnemySizeHelper(enemy, chosen):
     Megafauna = 5
     
     multDict = {
-        (Megafauna, XL): 5,
-        (Megafauna, Large): 6,
-        (Megafauna, Medium): 8,
-        (Megafauna, Small): 10,
+        (Megafauna, XL): 7,
+        (Megafauna, Large): 9,
+        (Megafauna, Medium): 12,
+        (Megafauna, Small): 15,
         (XL, Large): 3,
         (XL, Medium): 4,
         (XL, Small): 5,
@@ -91,7 +91,7 @@ def EnemySizeHelper(enemy, chosen):
   
 def InvincibleEnemy(newEn):
     '''Some enemies have invincible auras on startup that never end. This removes them.'''
-    InvincibleStartupBuffIDs = [134, 138, 159, 178, 192, 235]
+    InvincibleStartupBuffIDs = [134, 138, 159, 178, 192, 235, 256]
     if newEn["StartupBuff"] in InvincibleStartupBuffIDs:
         newEn["StartupBuff"] = 0
         newEn["StartupBuffLv"] = 0
