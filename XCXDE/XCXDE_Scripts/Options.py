@@ -131,7 +131,8 @@ BossEnemyOption_FinalBoss = SubOption("Vanilla Final Boss", BossEnemyOption, def
 
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_MainQuestReqs = SubOption("Skip Chapter Prerequisites", ShortcutsOption, [lambda: q.EasyStoryPrerequisites()])
-ShortcutsOption_SkellHell = SubOption("Easy Skell License Exam", ShortcutsOption)
+ShortcutsOption_SkellHell = SubOption("Skip Skell License Exams", ShortcutsOption, [lambda: q.SkellExamSkip()])
+SkellFlightOption = Option("Early Flight Module", QOL, "Flight is unlocked immediate after getting skells", [lambda: q.EarlyFlight()]) # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
 
 # TutorialSkipOption = Option("Tutorial Skip", QOL, "Removes tutorials") 
 FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_Growlist.json"], ["LevelExp"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
@@ -143,7 +144,6 @@ YellowBubbleOption = Option("Info Range", QOL, "Increased range for collecting i
 # SkellLiscOption_ChSelect = SubOption("Fixed Unlock", SkellLiscOption, hasSpinBox=True, spinMax=12, spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/FLD_questlist.html#1143
 # SkellLiscOption_ChSelect = SubOption("Random Unlock", SkellLiscOption)
 
-# SkellFlightOption = Option("Early Flight Module", QOL, "Flight is unlocked immediate after getting skells") # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
 # SkellEasyCruiseOption = Option("Easy Cruise Mode", QOL, "Hraesvelg Cruise Mode is unlocked") # FLD_questlist 2524 is the hraesvelg cruise mode quest, somethere there unlocks it.
 
 

@@ -20,6 +20,35 @@ def EasyStoryPrerequisites():
         if qst["$id"] in chapterPrereqIDs:
             qst["HexCondition"] = 1
     qstFile.Close()
+
+def SkellExamSkip():
+    # Reduce the required count of certificates
+    colFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_QuestCollect.json")
+    for col in colFile.rows:
+        if col["$id"] == 175:
+            col["count"] = 0
+            break
+    colFile.Close()        
+    
+    
+    qstFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_questlist.json")
+    for qst in qstFile.rows: # Next quest to the actual scene of getting a skell so you just go directly to it
+        if qst["$id"] == 1143:
+            qst["next_quest_a"] = 1662
+            break
+    qstFile.Close()
+    
+def EarlyFlight():
+    '''Unlocks skell flight as soon as you get skells'''
+    sklFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_DlList.json")
+    for skl in sklFile.rows:
+        skl["FlgSky"] = 1
+    sklFile.Close()
+    
+    
+    
+                    
+
         
 def OpWep():
     with open("XCXDE/JsonOutputs/common/WPN_PcList.json", 'r+', encoding='utf-8') as wpFile:
