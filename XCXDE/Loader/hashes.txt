@@ -112139,3 +112139,4 @@ pc020000
 uni6570
 uni9998
 uni9999
+MNU_TipsList

@@ -5,12 +5,15 @@ def TutorialSkip():
     with open("XCXDE/JsonOutputs/common/MNU_Tutorial.json", 'r+', encoding='utf-8') as eneFile:
         pass
     
-def InfoRangeIncrease():
-    infoIDs = [1001,1101,1201,1301,1401,1501,1601,1701,2001,2201]
-    for info in infoIDs:
+def InfoRangeIncrease(rad, isMute):
+    areaInfoIDs = [1001,1101,1201,1301,1401,1501,1601,1701,2001,2201]
+    for info in areaInfoIDs:
         infoFile = JSONParser.File(f"XCXDE/JsonOutputs/common/FLD_TownInfo{info}.json")
         for info in infoFile.rows:
-            info["radius"] = 20
+            info["radius"] = rad
+            if isMute:
+                for i in range(1,6):
+                    info[f"voice{i}"] = ""
         infoFile.Close()
         
 def EasyStoryPrerequisites():
@@ -38,12 +41,13 @@ def SkellExamSkip():
             break
     qstFile.Close()
     
-    tutFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_EventPopList.json")
-    for tut in tutFile.rows: # Next quest to the actual scene of getting a skell so you just go directly to it
-        tut["script_name"] = ""
-        tut["script_start_id"] = 0
-    tutFile.Close()
-    
+
+# def TTRLSkip(): # Didnt work
+#     tutFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_EventPopList.json")
+#     for tut in tutFile.rows:
+#         tut["script_name"] = ""
+#         # tut["script_start_id"] = 0
+#     tutFile.Close()    
     
 def EarlyFlight():
     '''Unlocks skell flight as soon as you get skells'''
