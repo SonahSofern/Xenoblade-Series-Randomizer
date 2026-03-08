@@ -76,7 +76,7 @@ class ValueTable():
         else:
             return False
     
-    def SelectValuedMember(self, data, key, dontChangeIDs = [], catKey = None, dontChangeCat = []):
+    def SelectValuedMember(self, data, key, dontChangeIDs = [], catKey = None, dontChangeCat = [29]):
         minRange = 5 # The minimum steps you can take in either direction choosing an item from the list so minRange = 10 means +- 10 items from the target value
         minStandardDeviationOverMean = 0.5
         
