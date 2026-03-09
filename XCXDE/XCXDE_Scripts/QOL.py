@@ -1,16 +1,16 @@
 import json
-from scripts import JSONParser
+from scripts import JSONParser, Helper
 
 def TutorialSkip():
     with open("XCXDE/JsonOutputs/common/MNU_Tutorial.json", 'r+', encoding='utf-8') as eneFile:
         pass
     
-def InfoRangeIncrease(rad, isMute):
+def InfoRangeIncrease(mult, isMute):
     areaInfoIDs = [1001,1101,1201,1301,1401,1501,1601,1701,2001,2201]
     for info in areaInfoIDs:
         infoFile = JSONParser.File(f"XCXDE/JsonOutputs/common/FLD_TownInfo{info}.json")
         for info in infoFile.rows:
-            info["radius"] = rad
+            info["radius"] = info["radius"]*mult
             if isMute:
                 for i in range(1,6):
                     info[f"voice{i}"] = ""
@@ -48,7 +48,11 @@ def SkellExamSkip():
 #         tut["script_name"] = ""
 #         # tut["script_start_id"] = 0
 #     tutFile.Close()    
-    
+
+def FasterClassRanks(spin):
+    for i in range(1, 35):
+        Helper.MathmaticalColumnAdjust([f"XCXDE/JsonOutputs/common/CHR_Class{i:02}Growth.json"], ["Exp"], [f'row[key] // {spin}'])
+   
 def EarlyFlight():
     '''Unlocks skell flight as soon as you get skells'''
     sklFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_DlList.json")
@@ -56,11 +60,7 @@ def EarlyFlight():
         skl["FlgSky"] = 1
     sklFile.Close()
     
-    
-    
-                    
-
-        
+  
 def OpWep():
     with open("XCXDE/JsonOutputs/common/WPN_PcList.json", 'r+', encoding='utf-8') as wpFile:
         wpData = json.load(wpFile)

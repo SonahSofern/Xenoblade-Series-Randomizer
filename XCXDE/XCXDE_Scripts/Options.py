@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XCXDE.XCXDE_Scripts import Enemy, IDs, Items as Item, QOL as q
+from XCXDE.XCXDE_Scripts import Enemy, IDs, Items as Item, QOL as q, Class, PartyMem
 
 scripts.Interactables.Game = "XCXDE" 
 
@@ -123,11 +123,14 @@ BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=F
 BossEnemyOption_FinalBoss = SubOption("Vanilla Final Boss", BossEnemyOption, defState=False)
 # BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
 
-# ClassTreeOption = Option("Class Tree", Character, "Randomizes the class advancement tree") # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_ClassInfo.html
+ClassTreeOption = Option("Class Tree", Character, "Randomizes the class advancement tree", [lambda: Class.ClassTree()]) # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_ClassInfo.html
+CharacterOption = Option("Party Members", Character, "Randomizes party members", [lambda: PartyMem.Members()])
 # Gems https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_ItemSkill_inner.html#2191
 # Weapons
 # Armor
 # Skells
+
+# Levitaths = [161,162,215, 1341] Title Screen Levitaths?
 
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_MainQuestReqs = SubOption("Skip Chapter Prerequisites", ShortcutsOption, [lambda: q.EasyStoryPrerequisites()])
@@ -136,10 +139,12 @@ SkellFlightOption = Option("Early Flight Module", QOL, "Flight is unlocked immed
 
 # TutorialSkipOption = Option("Tutorial Skip", QOL, "Removes tutorials") 
 FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_Growlist.json"], ["LevelExp"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
-FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each class levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_ClassGrowlist.json"], ["LevelCpR0", "LevelCpR1", "LevelCpR2"], [f'row[key] // {FasterClassOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
-YellowBubbleOption = Option("Info Range", QOL, "Increased range for collecting info bubbles", [lambda: q.InfoRangeIncrease(YellowBubbleOption.GetSpinbox(), YellowBubbleOption_Mute.GetState())], hasSpinBox=True, spinDesc="New Range (game default:7)", spinDefault=25, spinMin=8)
+FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each class levelup", [lambda: q.FasterClassRanks(FasterClassOption.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
+YellowBubbleOption = Option("Info Range", QOL, "Increased range for collecting info bubbles", [lambda: q.InfoRangeIncrease(YellowBubbleOption.GetSpinbox(), YellowBubbleOption_Mute.GetState())], hasSpinBox=True, spinDesc="x Range", spinDefault=15, spinMin=2)
 YellowBubbleOption_Mute = SubOption("Mute Callouts", YellowBubbleOption)
+# SKell Flight Music? https://xenobladedata.github.io/xbx/bdat/common_local_us/RSC_BgmCondition.html
 # Faster Party Affinity
+
 # BetterFrontierNavOption = Option("Frontier Nav Boost", QOL, "Faster rewards from FrontierNav")
 # SkellLiscOption = Option("Skell License Unlock", QOL, "Sets the unlock chapter for skells")
 # SkellLiscOption_ChSelect = SubOption("Fixed Unlock", SkellLiscOption, hasSpinBox=True, spinMax=12, spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/FLD_questlist.html#1143

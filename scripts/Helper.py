@@ -220,9 +220,10 @@ class RandomGroup():
         self.originalGroup = []
         self.currentGroup = []
     
-    def GenData(self, data):    
+    def GenData(self, data, ignoreIDCallback = lambda: 1==1):    
         for item in data: # Build the list from the original data
-            self.originalGroup.append(copy.deepcopy(item))
+            if ignoreIDCallback(item):
+                self.originalGroup.append(copy.deepcopy(item))
         self.currentGroup = copy.deepcopy(self.originalGroup)
     
     def AddNewData(self, data):
@@ -266,15 +267,15 @@ def CopyKeys(original, chosen, keys = [], isGoodKeys = False):
         if key in chosen:
             original[key] = chosen[key]
         
-def FileShuffle(fileName, ignoreKeys = ["$id"], ignoreIDs = []):
+def FileShuffle(fileName, ignoreKeys = ["$id"], dontReplaceIDs = [], useAsReplacementIDCheck = lambda: 1==1):
     with open(fileName, 'r+', encoding='utf-8') as file:
         fileData = json.load(file)
         
         fileGroup = RandomGroup()
-        fileGroup.GenData(fileData["rows"])
+        fileGroup.GenData(fileData["rows"], useAsReplacementIDCheck)
         
         for item in fileData["rows"]:
-            if item["$id"] in ignoreIDs:
+            if item["$id"] in dontReplaceIDs:
                 continue
             randomMem = fileGroup.SelectRandomMember()
             CopyKeys(item, randomMem, ignoreKeys)

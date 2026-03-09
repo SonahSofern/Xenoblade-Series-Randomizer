@@ -75,7 +75,7 @@ def FullValTable(GearOpt, SkellGearOpt, GemOpt, SkellGemOpt, MaterOpt, CollOpt, 
 
 def TicketShop():
     valTable = FullValTable(Options.TicketExchangeOption_Gear, Options.TicketExchangeOption_SkellGear, Options.TicketExchangeOption_Gems, Options.TicketExchangeOption_SkellGems, Options.TicketExchangeOption_Materials, Options.TicketExchangeOption_Collectibles, Options.TicketExchangeOption_Probes, Options.TicketExchangeOption_Precious, Options.TicketExchangeOption_Misc)
-    with open(f"XCXDE/JsonOutputs/common/ITM_TradeList.json", 'r+', encoding='utf-8') as tradFile:
+    with open("XCXDE/JsonOutputs/common/ITM_TradeList.json", 'r+', encoding='utf-8') as tradFile:
         tradData = json.load(tradFile)
         for trad in tradData["rows"]:
             valTable.SelectValuedMember(trad, "ItemID", catKey="ItemType")
