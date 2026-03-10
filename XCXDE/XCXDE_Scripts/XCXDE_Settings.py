@@ -14,13 +14,14 @@ def ShowTitleScreenText():
 
 extraArgs = ["--hashes", scripts.XCRandomizer.Onefile.Directory("XCXDE/Loader/hashes.txt")] # Hash Table
 
-outputRomfsPath = "romfs/mod/bdat"
-
+TitlescreenSplash = scripts.XCRandomizer.FilePlacer(["Images/Logos/mainmen.wilay"],  "../ui/stream/us", "strm_title_thumb001.wilay", "XCXDE")
 Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../../../", game=Game)
+
+outputRomfsPath = "romfs/mod/bdat"
 
 postCommands = [lambda: ShowTitleScreenText()]
 
 seedEntryVar = scripts.XCRandomizer.StringVar()
 permalinkVar = scripts.XCRandomizer.StringVar()
 
-WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, [], mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, extraArgs=extraArgs, textFolderName=textFolderName, extraFiles=[Exefs], backgroundImages=backgrounds, outputRomfsSpec=outputRomfsPath)
+WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, [], mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, extraArgs=extraArgs, textFolderName=textFolderName, extraFiles=[Exefs, TitlescreenSplash], backgroundImages=backgrounds, outputRomfsSpec=outputRomfsPath)
