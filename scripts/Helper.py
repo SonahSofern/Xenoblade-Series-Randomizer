@@ -233,10 +233,11 @@ class RandomGroup():
     def RefreshCurrentGroup(self):
         self.currentGroup = copy.deepcopy(self.originalGroup)
     
-    def SelectRandomMember(self):
+    def SelectRandomMember(self, removeSelected = True):
         '''Returns a copy of a random member from current group and removes it from that group'''
         mem = random.choice(self.currentGroup)
-        self.RemoveMember(mem)
+        if removeSelected:
+            self.RemoveMember(mem)
         return copy.deepcopy(mem)
     
     def FilterMember(self, target):
@@ -259,10 +260,10 @@ class RandomGroup():
 def RandomDecimal(low, high, mult = 0.01):
     return (random.randrange(low, high)*mult)
 
-def CopyKeys(original, chosen, keys = [], isGoodKeys = False):
-    '''isGoodKeys: Set to true to instead copy the keys provided, false means you ignore the keys provided'''
+def CopyKeys(original, chosen, ignoreKeys = [], isGoodKeys = False):
+    '''isGoodKeys: Set to true to copy the keys provided, false means you ignore the keys provided'''
     for key in original:
-        if isGoodKeys != (key in keys):
+        if isGoodKeys != (key in ignoreKeys):
             continue
         if key in chosen:
             original[key] = chosen[key]

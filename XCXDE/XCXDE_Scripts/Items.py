@@ -1,5 +1,5 @@
 import json, random, copy
-from scripts import JSONParser, Helper, PopupDescriptions, Values
+from scripts import JSONParser, Values
 from  XCXDE.XCXDE_Scripts import Options, IDs
 
 # Categories:
@@ -75,11 +75,10 @@ def FullValTable(GearOpt, SkellGearOpt, GemOpt, SkellGemOpt, MaterOpt, CollOpt, 
 
 def TicketShop():
     valTable = FullValTable(Options.TicketExchangeOption_Gear, Options.TicketExchangeOption_SkellGear, Options.TicketExchangeOption_Gems, Options.TicketExchangeOption_SkellGems, Options.TicketExchangeOption_Materials, Options.TicketExchangeOption_Collectibles, Options.TicketExchangeOption_Probes, Options.TicketExchangeOption_Precious, Options.TicketExchangeOption_Misc)
-    with open("XCXDE/JsonOutputs/common/ITM_TradeList.json", 'r+', encoding='utf-8') as tradFile:
-        tradData = json.load(tradFile)
-        for trad in tradData["rows"]:
-            valTable.SelectValuedMember(trad, "ItemID", catKey="ItemType")
-        JSONParser.CloseFile(tradData, tradFile)
+    tradFile = JSONParser.File("XCXDE/JsonOutputs/common/ITM_TradeList.json")
+    for trad in tradFile.rows:
+        valTable.SelectValuedMember(trad, "ItemID", catKey="ItemType")
+    tradFile.Close()
 
 
 def Tbox():
@@ -87,17 +86,16 @@ def Tbox():
     multChoices = [.5, .7, .9, 1.2, 1.5, 1.7, 2.5, 5]
     
     # Randomization
-    with open(f"XCXDE/JsonOutputs/common/FLD_TboxAll.json", 'r+', encoding='utf-8') as tboxFile:
-        tboxData = json.load(tboxFile)
-        for box in tboxData["rows"]:
-            if box["item_id"] != 0: # Not all boxes have items some have gold, exp, bp
-                valTable.SelectValuedMember(box, "item_id", IDs.PreciousItemIDs,  "item_cat")
-            else:
-                for key in ["money", "innerExp", "battlePoint"]:   # Apply random mults to the money exp or bp 
-                    if box[key] != 0:
-                        box[key] = int(box[key] * random.choice(multChoices))
-                        break
-        JSONParser.CloseFile(tboxData, tboxFile)
+    tboxFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_TboxAll.json")
+    for box in tboxFile.rows:
+        if box["item_id"] != 0: # Not all boxes have items some have gold, exp, bp
+            valTable.SelectValuedMember(box, "item_id", IDs.PreciousItemIDs,  "item_cat")
+        else:
+            for key in ["money", "innerExp", "battlePoint"]:   # Apply random mults to the money exp or bp 
+                if box[key] != 0:
+                    box[key] = int(box[key] * random.choice(multChoices))
+                    break
+    tboxFile.Close()
 
 
 def QuestRewards(): # DOuble check precious rewards skell liscense exam not woring

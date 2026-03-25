@@ -27,7 +27,7 @@ def XC2Help():
     descData.Text("This program is tested on the combined XC2 + DLC (Torna) 2.1.0 English Version of the game. It is recommended you also use that version of the game.\n\nPlease report bugs or suggestions to our discord, so we can make the randomizer better!", anchor="w")
     descData.Header("Setup")
     descData.Tag("Requirements")
-    descData.Text("Homebrewed Switch or Emulator\nLegal Copy of Xenoblade Chronicles 2 with all DLC and update 2.1.0", anchor="w")
+    descData.Text("Homebrewed Switch or Emulator\nLegal Copy of Xenoblade Chronicles 2 with all DLC (Including Torna) and update 2.1.0", anchor="w")
     descData.Tag("Step 1")
     descData.Text("Choose your output location for the program. This is where your game will load the randomized files from.", anchor="w")
     descData.Image("outputLocation.png", "XCDE", 800)

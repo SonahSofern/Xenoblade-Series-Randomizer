@@ -91,12 +91,15 @@ class Option():
             self.spinBoxLabel.grid(row=rowIncrement, column = 4, sticky="w", padx=0)
             disable_spinbox_scroll(self.spinBoxObj)
 
+        count = 0
         for sub in self.subOptions:
+            count += 1
             rowIncrement += 1
             sub.checkBoxVal = BooleanVar(value=sub.defState)
             sub.checkBoxVal.trace_add("write", lambda name, index, mode: self.StateUpdate())
             sub.checkBox = ttk.Checkbutton(optionPanel, text=sub.name, variable=sub.checkBoxVal, style=f"{style}Sub.TCheckbutton", width=25)
             sub.checkBox.grid(row=rowIncrement, column=0, sticky="sw")
+
             if sub.hasSpinBox:
                 sub.spinBoxVal = IntVar(value=sub.spinDefault)
                 sub.spinBoxObj = ttk.Spinbox(optionPanel, validate="key", from_=sub.spinBoxMin, to=sub.spinBoxMax, textvariable=sub.spinBoxVal, wrap=True, width=sub.spinWidth, increment=sub.spinIncr, justify="right")
@@ -106,7 +109,13 @@ class Option():
                 sub.spinBoxLabel = ttk.Label(optionPanel, text=sub.spinDesc, style=f"{style}NoMargin.TLabel")
                 sub.spinBoxLabel.grid(row=rowIncrement, column=1, sticky="w", padx=(80,0))
                 disable_spinbox_scroll(sub.spinBoxObj)
-
+            
+            if count == len(self.subOptions): # If the final suboption add extra padding stupid solution but all this code is stupid and bad
+                newPad = (0, 10)
+                sub.checkBox.grid_configure(pady=newPad)
+                if sub.hasSpinBox:
+                    sub.spinBoxObj.grid_configure(pady=newPad)
+                    sub.spinBoxLabel.grid_configure(pady=newPad)
         rowIncrement += 1
 
     
@@ -176,11 +185,11 @@ class SubOption():
         self.parent = _parent
         self.hasSpinBox = hasSpinBox
         self.spinBoxVal = None
-        self.spinBoxObj = None
+        self.spinBoxObj:ttk.Spinbox = None
         self.spinBoxMin = spinMin
         self.spinBoxMax = spinMax
         self.spinDefault = spinDefault
-        self.spinBoxLabel = None
+        self.spinBoxLabel:ttk.Label = None
         self.spinWidth = spinWidth
         self.spinIncr = spinIncr
         self.spinDesc = spinDesc

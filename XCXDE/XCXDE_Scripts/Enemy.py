@@ -1,5 +1,4 @@
 
-import json
 from XCXDE.XCXDE_Scripts import IDs, Options
 from scripts import Helper, JSONParser, PopupDescriptions, Enemies as Enemy
 

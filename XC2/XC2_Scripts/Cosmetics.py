@@ -8,9 +8,6 @@ ValidDriverCosmetics = Helper.RandomGroup()
 ValidBladeCosmetics = Helper.RandomGroup()
 ValidArtificialBladeCosmetics = Helper.RandomGroup()
 
-# List passed to gen the options 
-CosmeticsList = []
-
 # Types
 Blade = 1
 Driver = 2
@@ -46,6 +43,9 @@ class Cosmetic:
             Options.SubOption(self.cosmeticName, parentOption, [lambda: ValidBladeCosmetics.AddNewData(self)])
         elif self.type == ArtBlade:
             Options.SubOption(self.cosmeticName, parentOption, [lambda: ValidArtificialBladeCosmetics.AddNewData(self)])
+
+# List passed to gen the options 
+CosmeticsList:list[Cosmetic] = []
 
 # Blades
 JadeOrchidBrighid = Cosmetic("bl/bl121001", 1009, Brighid, "Jade Orchid Brighid", Blade)

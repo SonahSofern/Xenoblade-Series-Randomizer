@@ -125,6 +125,8 @@ BossEnemyOption_FinalBoss = SubOption("Vanilla Final Boss", BossEnemyOption, def
 
 ClassTreeOption = Option("Class Tree", Character, "Randomizes the class advancement tree", [lambda: Class.ClassTree()]) # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_ClassInfo.html
 CharacterOption = Option("Party Members", Character, "Randomizes party members", [lambda: PartyMem.Members()])
+CharacterOption_Duplicates = SubOption("Allow Duplicates", CharacterOption)
+CharacterOption_BalanceGear = SubOption("Balance Starting Gear", CharacterOption)
 # Gems https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_ItemSkill_inner.html#2191
 # Weapons
 # Armor
