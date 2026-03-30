@@ -51,7 +51,10 @@ def SkellExamSkip():
 
 def FasterClassRanks(spin):
     for i in range(1, 35):
-        Helper.MathmaticalColumnAdjust([f"XCXDE/JsonOutputs/common/CHR_Class{i:02}Growth.json"], ["Exp"], [f'row[key] // {spin}'])
+        clsFile = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class{i:02}Growth.json")
+        for cls in clsFile.rows:
+            cls["Exp"] = max(cls["Exp"] // spin, 1)       
+        clsFile.Close()
    
 def EarlyFlight():
     '''Unlocks skell flight as soon as you get skells'''

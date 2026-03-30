@@ -50,6 +50,8 @@ def BalanceStartingGear(targetLv, newChar, wpnFile:JSONParser.File, amrFile:JSON
         
         allowedWeapons = []
         for wep in wpnFile.rows: # get similar weapons
+            if wep["$id"] not in IDs.MeleeWeaponIDs + IDs.RangedWeaponIDs:
+                continue
             if wep["TypeWpn"] != weaponType: # matches weapon type
                 continue
             if wep["EquLv"] > maxLv or wep["EquLv"] < minLv: # if within the level range

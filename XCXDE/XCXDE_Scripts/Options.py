@@ -141,7 +141,7 @@ SkellFlightOption = Option("Early Flight Module", QOL, "Flight is unlocked immed
 
 # TutorialSkipOption = Option("Tutorial Skip", QOL, "Removes tutorials") 
 FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_Growlist.json"], ["LevelExp"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
-FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each class levelup", [lambda: q.FasterClassRanks(FasterClassOption.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
+FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each class levelup", [lambda: q.FasterClassRanks(FasterClassOption.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinMax= 10, spinIncr = 1, spinDesc = "x Faster")
 YellowBubbleOption = Option("Info Range", QOL, "Increased range for collecting info bubbles", [lambda: q.InfoRangeIncrease(YellowBubbleOption.GetSpinbox(), YellowBubbleOption_Mute.GetState())], hasSpinBox=True, spinDesc="x Range", spinDefault=15, spinMin=2)
 YellowBubbleOption_Mute = SubOption("Mute Callouts", YellowBubbleOption)
 # SKell Flight Music? https://xenobladedata.github.io/xbx/bdat/common_local_us/RSC_BgmCondition.html
