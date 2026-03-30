@@ -1,4 +1,3 @@
-import json
 from XCXDE.XCXDE_Scripts import IDs, Options
 
 from scripts import JSONParser, Helper
@@ -15,6 +14,7 @@ def Members():
     testGroup.GenData(charFile.rows, lambda e: e["$id"] in IDs.PartyMembersIDs)
     isAllowDupes = Options.CharacterOption_Duplicates.GetState()
     isBalanceGear = Options.CharacterOption_BalanceGear.GetState()
+    
     for char in charFile.rows:
         if char["$id"] not in IDs.PartyMembersIDs:
             continue
@@ -26,6 +26,13 @@ def Members():
     charFile.Close()
     wpnFile.Close()
 
+def GetArmorFlags(armor):
+    flags = 0
+    parts = ["Head", "Body", "Arm_R", "Arm_L", "Legs"]
+    for part in parts:
+        flags = flags << 1 
+        flags = flags | armor[f"PartsBit({part})"]
+    return flags
 
 def BalanceStartingGear(targetLv, newChar, wpnFile:JSONParser.File, amrFile:JSONParser.File):
     '''Balance the starting gear since high level characters would be very strong and have gear they were underleveled for'''
@@ -49,50 +56,58 @@ def BalanceStartingGear(targetLv, newChar, wpnFile:JSONParser.File, amrFile:JSON
                 continue
             allowedWeapons.append(wep["$id"])
             
-        return Helper.random.choice(allowedWeapons)["$id"] # Return a random choice's id
-            
-    armorPiecemeal = [0,0,0,0,0] # Updated when a slot is filled, needed to handle equipment that takes multiple slots
-    
+        return Helper.random.choice(allowedWeapons) # Return a random choice's id
+                
     # Equip Level at the level of the member, grab the same type of weapon / gear and ensure gender can equip it
-    def GetBalancedArmor(targetGearID):
-        
+    def GetBalancedArmor(targetGearID, armorPiecemeal):
         # Account for bodysuits need to look at flags
         female = 2
         male = 1
         
-        # Get Gear Type
+        # Get Armor Type
+        armorType = 0
         for amr in amrFile.rows: 
             if amr["$id"] == targetGearID:
                 armorType = amr["TypeAmr"]
                 break
-            
         
+            
+        # Generate Allowed Armors
         allowedArmors = []
         for amr in amrFile.rows: 
+            # Only use valid armors
+            if amr["$id"] not in IDs.ArmorIDs:
+                continue
+            # Use the same type of armor
+            if amr["TypeAmr"] != armorType:
+                continue
+            # if within the level range
+            if amr["EquLv"] > maxLv or amr["EquLv"] < minLv: 
+                continue
+            # Remove armors that cannot be chosen with the current armor flags already set
+            if (armorPiecemeal & GetArmorFlags(amr)) != 0:
+                continue
             # Keep armors to allowed genders
             if amr["EquPc02"] == 0 and newChar["Sex"] == female: 
                 continue
             if amr["EquPc01"] == 0 and newChar["Sex"] == male:
                 continue
-            # Keep the same type of armor
-            if amr["TypeAmr"] != armorType:
-                continue
             allowedArmors.append(amr)
-            
+        
+        if len(allowedArmors) == 0:
+            return 0, armorPiecemeal
+        
+        # Choose valid armor
         chosenArmor = Helper.random.choice(allowedArmors)
         
         # Set flags that the armor takes spots
-            
-        return 
+        return chosenArmor["$id"], armorPiecemeal | GetArmorFlags(chosenArmor) # add with bitwise or
                
-
-    # "PartsBit(Head)": 0,
-    #   "PartsBit(Body)": 0,
-    #   "PartsBit(Arm_R)": 1,
-    #   "PartsBit(Arm_L)": 0,
-    #   "PartsBit(Legs)": 0,
+    armorPiecemeal = 0 # Updated when a slot is filled, needed to handle equipment that takes multiple slots
     for i in range(1,6):
-        newChar[f"DefAmr{i}"] = GetBalancedArmor(newChar[f"DefAmr{i}"])["$id"]
+        if newChar[f"DefAmr{i}"] == 0: # Only replace existing armors
+            continue
+        newChar[f"DefAmr{i}"], armorPiecemeal = GetBalancedArmor(newChar[f"DefAmr{i}"], armorPiecemeal)
     newChar["DefWpnFar"] = GetBalancedWeapon(newChar["DefWpnFar"])
     newChar["DefWpnNear"] = GetBalancedWeapon(newChar["DefWpnNear"])
 
