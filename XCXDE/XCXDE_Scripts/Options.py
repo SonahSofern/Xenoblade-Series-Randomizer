@@ -123,7 +123,8 @@ BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=F
 BossEnemyOption_FinalBoss = SubOption("Vanilla Final Boss", BossEnemyOption, defState=False)
 # BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
 
-ClassTreeOption = Option("Class Tree", Character, "Randomizes the class advancement tree", [lambda: Class.ClassTree()]) # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_ClassInfo.html
+# Too much hard coded stuff for this to work, also it doesn't really accomplish much the biggest change is your starting stuff which can just be randomized anyway
+# ClassTreeOption = Option("Class Tree", Character, "Randomizes the class advancement tree and default player class", [lambda: Class.ClassTree()]) # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_ClassInfo.html
 CharacterOption = Option("Party Members", Character, "Randomizes party members", [lambda: PartyMem.Members()])
 CharacterOption_Duplicates = SubOption("Allow Duplicates", CharacterOption)
 CharacterOption_BalanceGear = SubOption("Balance Starting Gear", CharacterOption)
