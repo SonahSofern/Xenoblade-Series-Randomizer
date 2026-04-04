@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XCXDE.XCXDE_Scripts import Enemy, IDs, Items as Item, QOL as q, Class, PartyMem
+from XCXDE.XCXDE_Scripts import Enemy, IDs, Items as Item, QOL as q, Class, PartyMem, Skell
 
 scripts.Interactables.Game = "XCXDE" 
 
@@ -132,13 +132,18 @@ CharacterOption_BalanceGear = SubOption("Balance Starting Gear", CharacterOption
 # Weapons
 # Armor
 # Skells
+SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells in a balanced way", [lambda: Skell.SkellBaseStats()])
+SkellArmor = Option("Skell Gear", Skells, "Randomizes the stats of Skell Gear")
+SkellArmor_Wep = SubOption("Skell Weapon", SkellArmor)
+SkellArmor_Arm = SubOption("Skell Armor", SkellArmor)
+SkellArts = Option("Skell Arts", Skells, "Randomizes the skell art strength")
 
 # Levitaths = [161,162,215, 1341] Title Screen Levitaths?
 
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_MainQuestReqs = SubOption("Skip Chapter Prerequisites", ShortcutsOption, [lambda: q.EasyStoryPrerequisites()])
-ShortcutsOption_SkellHell = SubOption("Skip Skell License Exams", ShortcutsOption, [lambda: q.SkellExamSkip()])
-SkellFlightOption = Option("Early Flight Module", QOL, "Flight is unlocked immediate after getting skells", [lambda: q.EarlyFlight()]) # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
+ShortcutsOption_SkellHell = SubOption("Skip Skell License Exam", ShortcutsOption, [lambda: q.SkellExamSkip()])
+SkellFlightOption = Option("Early Flight Module", QOL, "Flight Module is unlocked immediately after getting skells", [lambda: q.EarlyFlight()]) # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
 
 # TutorialSkipOption = Option("Tutorial Skip", QOL, "Removes tutorials") 
 FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_Growlist.json"], ["LevelExp"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1, spinDesc = "x Faster")
