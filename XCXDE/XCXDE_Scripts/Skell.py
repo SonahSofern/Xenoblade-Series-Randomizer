@@ -3,40 +3,45 @@ from XCXDE.XCXDE_Scripts import IDs, Options
 from scripts import JSONParser, Helper
 
 # Make a class that can randomize stats in a balanced way given an intensity and min and max val
+# Art Unlock Order
+# Class Weapon (What weapons a class uses)
 
-# Chosen on an individual basis not by users
-minVal = .1
-maxVal = 3
+# Skills (Make enhance file and option to add new skills)
 
-intensity = 10 # Chosen by users from 1-10
+# Overdrive Route Rando (Can't because theres no way to see what changed)
 
-valuesToGen = 10
-mid = 1
+# Skell (Stats)
+# Skell Weapons and Armor (Their stats and gem effects basically)
 
-mults = []
-variance = intensity * 0.1
-for i in range(1,valuesToGen):
-    # Choose a value based on intensity
-    change = round(Helper.random.uniform(0.1, variance), 1)
-    firstTest = Helper.random.randrange(1,intensity*100)/100 # This number represents how hard we deviate (Its random but gets higher and lower depending on intensity)
-    chosen = Helper.Clamp(firstTest, minVal, maxVal)
-    
-    # Add the positive and inverse of the number
-    mults.append(chosen)
-    mults.append(1/chosen)
+# Soul Voices https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_SoulArts.html
+
+class NumberRando():
+    def __init__(self, maxChangePercent, neutralChangePercent = 100):
+        self.maxChangePercent = maxChangePercent
+        self.neutralChangePercenet = neutralChangePercent
+
+    def GetBalancedRandomMult(self, intensity, reverseChance = 50):
+        '''Generally gets multipliers according to intensity, eg. intensity 90 with max at 300% gets you 90% towards the max so up to 270% variance'''
+        percVariance = intensity * .01
+        maxWithIntensity = percVariance * self.maxChangePercent
+
+        chosenMult = Helper.random.randrange(self.neutralChangePercenet, maxWithIntensity) # Choose a mult between neutral and max*intensity
+        
+        if Helper.OddsCheck(reverseChance):
+            return 100/chosenMult
+        else:
+            return chosenMult
 
 
-print(mults)
-
-
-def SkellBaseStats():
+def SkellBaseStats(intensity):
     statsFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_DlList.json")
-    validSkellIDs = []
     
     
     for skell in statsFile.rows:
-        if skell["$id"] not in validSkellIDs:
+        if skell["$id"] not in IDs.SkellFrameIDs:
             continue
+        for stat in ["Hp", "Fight", "Shoot", "Mind", "DexFight", "DexShoot", "Dodge", "Def", "FuelMax"]:
+            skell[stat] = NumberRando(200).GetBalancedRandomMult(intensity) # Pass the skell[stat] into the function and rename it the name blows
             
         
     statsFile.Close()
