@@ -132,7 +132,7 @@ CharacterOption_BalanceGear = SubOption("Balance Starting Gear", CharacterOption
 # Weapons
 # Armor
 # Skells
-SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells in a balanced way", [lambda: Skell.SkellBaseStats()])
+SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells in a balanced way", [lambda: Skell.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc="1 (Low) - 100 (High) Variance")
 SkellArmor = Option("Skell Gear", Skells, "Randomizes the stats of Skell Gear")
 SkellArmor_Wep = SubOption("Skell Weapon", SkellArmor)
 SkellArmor_Arm = SubOption("Skell Armor", SkellArmor)

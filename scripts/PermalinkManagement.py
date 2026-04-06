@@ -1,4 +1,3 @@
-import tkinter
 import string
 from scripts import PackedBits
 import base64
