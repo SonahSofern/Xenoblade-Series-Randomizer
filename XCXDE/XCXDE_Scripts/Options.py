@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XCXDE.XCXDE_Scripts import Enemy, IDs, Items as Item, QOL as q, Class, PartyMem, Skell
+from XCXDE.XCXDE_Scripts import Enemy, IDs, Items as Item, QOL as q, PartyMem, Skell
 
 scripts.Interactables.Game = "XCXDE" 
 
@@ -132,10 +132,12 @@ CharacterOption_BalanceGear = SubOption("Balance Starting Gear", CharacterOption
 # Weapons
 # Armor
 # Skells
-SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells in a balanced way", [lambda: Skell.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc="1 (Low) - 100 (High) Variance")
+intensityText= "Low(1) - High(100) Variance"
+
+SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells in a balanced way", [lambda: Skell.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMax=10)
 SkellArmor = Option("Skell Gear", Skells, "Randomizes the stats of Skell Gear")
-SkellArmor_Wep = SubOption("Skell Weapon", SkellArmor)
-SkellArmor_Arm = SubOption("Skell Armor", SkellArmor)
+SkellArmor_Arm = SubOption("Skell Armor", SkellArmor, [lambda: Skell.SkellArmorStats(SkellArmor_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMax=10)
+SkellArmor_Wep = SubOption("Skell Weapon", SkellArmor, [lambda: Skell.SkellWepStats(SkellArmor_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMax=10)
 SkellArts = Option("Skell Arts", Skells, "Randomizes the skell art strength")
 
 # Levitaths = [161,162,215, 1341] Title Screen Levitaths?
