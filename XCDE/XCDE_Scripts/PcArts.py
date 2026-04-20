@@ -32,7 +32,6 @@ class ArtGroup:
         self.chosenChar = random.choice(charList)
         return self.chosenChar
         
-# Setting that just shuffles arts
 def RandomizePcArts():
     ShulkActs = ActMatch(1, _SingleAttack=[0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[1,3,2,6,10,13,14])
     ReynActs = ActMatch(2, _SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,5,7,8,9,10,14], artSlots=17)

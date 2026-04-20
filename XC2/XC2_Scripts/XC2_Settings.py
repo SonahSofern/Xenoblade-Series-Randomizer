@@ -41,6 +41,8 @@ def XC2Help():
     descData.Text("Once the randomizer finishes, launch your game and you should see the version somewhere on the title screen.", anchor="w")
     descData.Text("If so, you're ready to start playing!", anchor="w")
     descData.Header("Common Issues")
+    descData.Tag("Torna")
+    descData.Text("Make sure you have Torna installed, the randomizer won't work without it.", anchor="w")
     descData.Tag("Mods")
     descData.Text("This mod is NOT compatible with other mods that edit the bdats. Ensure that this is the only active one for your game. (60fps and other visual mods are okay)", anchor="w")
     return descData

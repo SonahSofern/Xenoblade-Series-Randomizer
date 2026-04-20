@@ -85,9 +85,6 @@ def RemoveStoryFieldSkills():
     
     diveIds = [] # No required dive spots
     RemoveFieldSkills(False, mapGimmickIds, jumpGimmickIds, diveIds, npcPopIds, tBoxIds)
-
-def RemoveAllFieldSkills():
-    RemoveFieldSkills(True)
     
 def RemoveFieldSkills(isAllChecks, mapIDs = [], jumpIDs = [], diveIDs = [], npcPopIDs = [], tboxIDs = []):
     JSONParser.ChangeJSONLine(["common_gmk/FLD_MapGimmick.json"], mapIDs, ["FSID"], 0, isAllChecks)

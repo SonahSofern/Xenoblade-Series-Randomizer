@@ -126,7 +126,7 @@ def ForcedArtsManager(oldEn, newEn, eRando:Enemy.EnemyRandomizer): # Do these en
                         newPar[f"ArtsSlot{i}"] = 0
                 break
             
-    if oldEn["$id"] in EnemyIDsWithForcedArts:
+    if oldEn["$id"] in EnemyIDsWithForcedArts: # If the old enemy has a cutscene art
         oldPar = eRando.FindParam(oldEn)
         newPar = eRando.FindParam(newEn)
         

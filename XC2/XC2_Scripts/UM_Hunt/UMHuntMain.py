@@ -120,7 +120,7 @@ def GimmickAdjustments():
     Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/FLD_MapGimmick.json", ["Condition", "OP_Condition"], 0)
     Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/FLD_ElevatorGimmick.json", ["OP_Condition"], 0)
     Helper.ColumnAdjust("./XC2/JsonOutputs/common_gmk/FLD_EffectPop.json", ["Condition", "QuestFlagMin", "QuestFlagMax"], 0)
-    FieldSkills.RemoveAllFieldSkills(True)
+    FieldSkills.RemoveFieldSkills(True)
     with open("./XC2/JsonOutputs/common/FLD_LODList.json", 'r+', encoding='utf-8') as file:
         data = json.load(file)
         for row in data["rows"]:

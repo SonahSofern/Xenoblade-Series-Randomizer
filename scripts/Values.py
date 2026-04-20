@@ -38,7 +38,7 @@ class ValueFile():
         self.mult = mult # multiplier on that keys value
 
 class ValuedItem():
-    def __init__(self, id, value, category):
+    def __init__(self, id, value, category = 0):
         self.id = id
         self.value = value
         self.category = category # Only XCXDE uses this rn

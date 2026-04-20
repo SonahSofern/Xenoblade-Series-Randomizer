@@ -43,11 +43,6 @@ CollectapediaOptions_Weapons = SubOption("Weapons", CollectapediaOptions, hasSpi
 CollectapediaOptions_Gems = SubOption("Gems", CollectapediaOptions, hasSpinBox=True, spinDefault=15)
 CollectapediaOptions_ArtBooks = SubOption("Art Books", CollectapediaOptions, hasSpinBox=True, spinDefault=10)
 
-EnemyDropOption = Option("Enemy Drops", General, "Randomizes the chosen types of loot from enemies", [lambda: Items.EnemyDrops()], descData=lambda: Items.EnemyDropsDesc())
-EnemyDropOptions_Materials = SubOption("Materials", EnemyDropOption)
-EnemyDropOptions_Armor = SubOption("Armor", EnemyDropOption)
-EnemyDropOptions_Weapons = SubOption("Weapons", EnemyDropOption)
-EnemyDropOptions_ArtBooks = SubOption("Art Books", EnemyDropOption)
 
 GiantsChestOption = Option("Giants Chests", General, "Randomizes the contents of Giants Chests into the chosen types", [lambda: Items.GiantsChests()], descData=lambda: Items.GiantsChestsDesc())
 GiantsChestOptions_Collectables = SubOption("Collectables", GiantsChestOption, hasSpinBox=True, spinDesc=weightsSpinDescription, defState=False, spinDefault=0)
@@ -65,6 +60,11 @@ QuestRewardsOptions_Weapons = SubOption("Weapons", QuestRewardsOption, hasSpinBo
 QuestRewardsOptions_Gems = SubOption("Gems", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
 QuestRewardsOptions_ArtBooks = SubOption("Art Books", QuestRewardsOption, hasSpinBox=True, spinDefault=2)
 
+EnemyDropOption = Option("Enemy Drops", General, "Randomizes the chosen types of loot from enemies", [lambda: Items.EnemyDrops()], descData=lambda: Items.EnemyDropsDesc())
+EnemyDropOptions_Materials = SubOption("Materials", EnemyDropOption)
+EnemyDropOptions_Armor = SubOption("Armor", EnemyDropOption)
+EnemyDropOptions_Weapons = SubOption("Weapons", EnemyDropOption)
+EnemyDropOptions_ArtBooks = SubOption("Art Books", EnemyDropOption)
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/FLD_valpoplist.html#1 Red orbs found here not sure what to do with them yet
 
 

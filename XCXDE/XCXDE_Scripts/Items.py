@@ -60,7 +60,7 @@ def FullValTable(GearOpt, SkellGearOpt, GemOpt, SkellGemOpt, MaterOpt, CollOpt, 
         valTable.PopulateValues(Values.ValueFile("ITM_BeaconList"), IDs.ProbeIDs, Values.WeightOptionMethod(ProbeOpt), 28)
         valTable.PopulateValues(Values.ValueFile("ITM_PreciousList", "UI2"), IDs.PreciousItemIDs, Values.WeightOptionMethod(PreciousOpt), 29)
         
-        MiscWeight = Values.WeightOptionMethod(MiscOpt) / 6
+        MiscWeight = Values.WeightOptionMethod(MiscOpt) / 6 # Divide the weight by six because they use the same weight option to balance it
         valTable.PopulateValues(Values.ValueFile("ITM_PieceList"), IDs.AppendageFragIDs, MiscWeight, 30)
         valTable.PopulateValues(Values.ValueFile("ITM_BattleItem"), IDs.ConsumableIDs, MiscWeight, 31)
         valTable.PopulateValues(Values.ValueFile("ITM_FigList"), IDs.HolofigureIDs, MiscWeight, 64)

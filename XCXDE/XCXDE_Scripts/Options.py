@@ -132,12 +132,12 @@ CharacterOption_BalanceGear = SubOption("Balance Starting Gear", CharacterOption
 # Weapons
 # Armor
 # Skells
-intensityText= "Low(1) - High(100) Variance"
+intensityText= "Intensity (Low 1 - High 100)"
 
-SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells in a balanced way", [lambda: Skell.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMax=10)
+SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells in a balanced way", [lambda: Skell.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellArmor = Option("Skell Gear", Skells, "Randomizes the stats of Skell Gear")
-SkellArmor_Arm = SubOption("Skell Armor", SkellArmor, [lambda: Skell.SkellArmorStats(SkellArmor_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMax=10)
-SkellArmor_Wep = SubOption("Skell Weapon", SkellArmor, [lambda: Skell.SkellWepStats(SkellArmor_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMax=10)
+SkellArmor_Arm = SubOption("Skell Armor", SkellArmor, [lambda: Skell.SkellArmorStats(SkellArmor_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
+SkellArmor_Wep = SubOption("Skell Weapon", SkellArmor, [lambda: Skell.SkellWepStats(SkellArmor_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellArts = Option("Skell Arts", Skells, "Randomizes the skell art strength")
 
 # Levitaths = [161,162,215, 1341] Title Screen Levitaths?

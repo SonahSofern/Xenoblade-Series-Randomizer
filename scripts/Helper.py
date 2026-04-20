@@ -220,7 +220,7 @@ class RandomGroup():
         self.originalGroup = []
         self.currentGroup = []
     
-    def GenData(self, data, ignoreIDCallback = lambda: 1==1):    
+    def GenData(self, data, ignoreIDCallback = lambda e: 1==1):    
         for item in data: # Build the list from the original data
             if ignoreIDCallback(item):
                 self.originalGroup.append(copy.deepcopy(item))
