@@ -28,7 +28,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                     eneData = json.load(eneFile)
                     artData = json.load(artFile)
 
-                    eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, artData, permanentBandaids=[lambda: AeshmaCoreHPNerf(paramData), lambda: GortOgreUppercutRemoval(paramData)])
+                    eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, artData, permanentBandaids=[lambda: GortOgreUppercutRemoval(paramData)])
 
                     if StaticEnemyData == []:
                         StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
@@ -71,6 +71,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
                             eRando.HealthBalancing(oldEn, newEn, "HpMaxRev")
                         
                         AionRoomFix(oldEn, newEn, eRando)
+                        AeshmaCoreHPNerf(oldEn, newEn, eRando)
+                        AIFix(oldEn, newEn, eRando)
 
                         Helper.CopyKeys(oldEn, newEn, ignoreKeys) # Keep in mind this will overwrite changes made to the old enemy
 
@@ -304,15 +306,25 @@ def ForcedWinFights(fights:list):
                 row["ReducePCHP"] = 1
         JSONParser.CloseFile(btlData, btlFile)
 
-def AeshmaCoreHPNerf(paramData): # Aeshma is almost unkillable with its regen active
-    for row in paramData["rows"]:
-        if row["$id"] == 318:
-            row["HpMaxRev"] = 500
+def AeshmaCoreHPNerf(origEn, newEn, eRando:e.EnemyRandomizer): # Aeshma is almost unkillable with its regen active
+    regeneratingAeshma = 232
+    if newEn["$id"] == regeneratingAeshma and origEn["$id"] in IDs.BossMonsters:
+        newHp = 10 * origEn["Lv"] # 20 times the level should give a decently balanced HP (original was 8000 at level 38, but you were not intended to kill that)
+        eRando.ChangeStats([newEn], [("HpMaxRev", newHp)])
     
 def AionRoomFix(origEn, newEn, eRando:e.EnemyRandomizer): # Aion sits really far down so raise enemies up
     AionIDs = [265, 275]
     if ((origEn["$id"] in AionIDs) and (newEn["$id"] not in AionIDs)):
         eRando.ChangeStats([newEn], [("FlyHeight", 500)])   
+        
+def AIFix(origEn, newEn, eRando:e.EnemyRandomizer):
+    '''Some enemies (only ophion so far) might have broken AI, they just sit there and dont do anything'''
+    AmalthusAIID = 103 # Amalthus' AI seemed to work fine for him so whatever
+    OphionIDs = [247, 1137]
+    if newEn["$id"] in OphionIDs:
+        eRando.ChangeStats([newEn], [("AiID", AmalthusAIID)])   
+
+    
  
  # NOTE This will only work sometimes because the summoner could be in both games. And it has no way of resolving that yet.
 def SummonIDFix(eneData): # Need to put summoned enemies Ids back into the pool after this in their proper spots

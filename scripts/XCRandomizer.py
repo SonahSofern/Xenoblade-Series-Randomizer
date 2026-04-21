@@ -375,6 +375,8 @@ def RunOptions(GameTitle, OptionList:list[Interactables.Option], randoProgressDi
         return errorMsgObj
 
     for opt in OptionList: # runs pre-randomization commands before the actual options
+        if not opt.GetState():
+            continue
         for command in opt.preRandoCommands:
             try:
                 command()

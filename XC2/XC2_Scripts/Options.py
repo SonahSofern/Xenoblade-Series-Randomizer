@@ -44,7 +44,7 @@ AuxCoresOption = Option("Aux Cores", Items, "Randomizes the effects of Aux Cores
 AccessoryShopsOption = Option("Accessory Shops", Items, "Randomizes the contents of Accessory Shops", [lambda: I.RandomizeAccessoryShops()], descData=lambda: I.AccessoryShopDescription())
 PouchItemShopOption = Option("Pouch Item Shops", Items, "Randomizes the contents of Pouch Item Shops", [lambda: I.RandomizePouchItemShops()], descData=lambda: I.PouchItemShopDesc())
 WeaponChipShopOption = Option("Weapon Chip Shops", Items, "Randomizes Weapon Chips in Weapon Chip Shops", [lambda: I.RandomizeWeaponChipShops()], descData=lambda: I.WeaponChipDesc())
-TreasureChestOption = Option("Treasure Chests", Items, "Randomizes the contents of Treasure Chests", [lambda: I.RandomizeTreasureBoxes()], prio = 0, descData=lambda: I.TreasureChestDescription())
+TreasureChestOption = Option("Treasure Chests", Items, "Randomizes the contents of Treasure Chests", preRandoCommands=[lambda: I.RandomizeTreasureBoxes()], prio = 51, descData=lambda: I.TreasureChestDescription())
 TreasureChestOption_Accessories = SubOption("Accessories", TreasureChestOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
 TreasureChestOption_WeaponChips = SubOption("Weapon Chips", TreasureChestOption, hasSpinBox=True, spinDefault=10)
 TreasureChestOption_AuxCores = SubOption("Aux Cores", TreasureChestOption, hasSpinBox=True, spinDefault=10)
@@ -68,7 +68,7 @@ QuestRewardsOption_RareBlades = SubOption("Rare Blades", QuestRewardsOption, [la
 
 
 # Drivers
-DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()],  prio=First,  preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.DriversDescriptions())
+DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], prio=First, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.DriversDescriptions())
 DriversOption_Nia = SubOption("Guarantee Early Nia", DriversOption, defState = False)
 DriverArtsOption = Option("Driver Arts", Driver, "Randomizes the effects of driver arts", [lambda: (DriverArts.DriverArtRandomizer(), DriverArts.GenCustomArtDescriptions("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", "./XC2/JsonOutputs/common_ms/btl_arts_dr_cap.json"))], hasSpinBox = True,spinDefault=100, descData=lambda: DriverArts.DriverArtDescription())
 spinArts = "%"
