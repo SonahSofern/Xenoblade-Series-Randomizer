@@ -30,7 +30,7 @@ class FilePlacer:
 lastWidth = -1
 lastHeight = -1
 garbageCollectionStopper = [] # Globals to prevent garbage collection
-iconCollector = []# Globals to prevent garbage collection
+iconCollector = [] # Globals to prevent garbage collection
 
 def CheckIfUserNeedsUpdate(version, root):
     '''Checks the repos latest version tag to see if we have a new release'''

@@ -24,4 +24,30 @@ postCommands = [lambda: ShowTitleScreenText()]
 seedEntryVar = scripts.XCRandomizer.StringVar()
 permalinkVar = scripts.XCRandomizer.StringVar()
 
-WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, [], mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, extraArgs=extraArgs, textFolderName=textFolderName, extraFiles=[Exefs, TitlescreenSplash], backgroundImages=backgrounds, outputRomfsSpec=outputRomfsPath)
+def XCXDEHelp():
+    descData = scripts.XCRandomizer.PopupDescriptions.Description((900,900))
+    descData.Header("Info")
+    descData.Text(f"This is version {Version} of the randomizer project for Xenoblade Chronicles X DE.\nCapable of randomizing: Enemies, Characters, Loot and much more!", anchor="w")
+    descData.Text("Please report bugs or suggestions to our discord, so we can make the randomizer better!", anchor="w")
+    descData.Header("Setup")
+    descData.Tag("Requirements")
+    descData.Text("Homebrewed Switch or Emulator\nLegal Copy of Xenoblade Chronicles X DE", anchor="w")
+    descData.Tag("Step 1")
+    descData.Text("Choose your output location for the program. This is where your game will load the randomized files from.", anchor="w")
+    descData.Image("outputLocation.png", "XCDE", 800)
+    descData.Text("Your path should look similar to this:\nRYUJINX: C:/Users/yourName/AppData/Roaming/Ryujinx/mods/contents/0100453019AA8000\nCONSOLE: This PC/Nintendo Switch/SD Card/atmosphere/contents/0100453019AA8000 (This is on your microsd card)", anchor="w")
+    descData.Text("The 0100453019AA8000 folder might not exist yet in that location, go ahead and create it if so.")
+    descData.Text("If you're using a different emulator feel free to ask about the paths on discord, I have not tested with all of them.")
+    descData.Tag("Step 2")
+    descData.Text("Choose your preferred settings, then click the randomize button.", anchor="w")
+    descData.Text(f"If you want to know more about a setting you can click on its description marked by {Options.scripts.Interactables.DescriptionIndicator} (not all settings have descriptions).", anchor="w")
+    descData.Tag("Step 3")
+    descData.Text("Once the randomizer finishes, launch your game and you should see the version somewhere on the title screen.", anchor="w")
+    descData.Text("If so, you're ready to start playing!", anchor="w")
+    descData.Header("Common Issues")
+    descData.Tag("Mods")
+    descData.Text("This mod is NOT compatible with other mods that edit the bdats. Ensure that this is the only active one for your game. (60fps and other visual mods are okay)", anchor="w")
+    return descData
+
+
+WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, [], mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, extraArgs=extraArgs, textFolderName=textFolderName, extraFiles=[Exefs, TitlescreenSplash], backgroundImages=backgrounds, outputRomfsSpec=outputRomfsPath, setupHelpDesc=lambda: XCXDEHelp())

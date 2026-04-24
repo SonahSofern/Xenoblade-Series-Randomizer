@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XCXDE.XCXDE_Scripts import Enemy, IDs, Items as Item, QOL as q, PartyMem, Skell
+from XCXDE.XCXDE_Scripts import Enemy, IDs, Items as Item, QOL as q, PartyMem, Skell, Art
 
 scripts.Interactables.Game = "XCXDE" 
 
@@ -96,6 +96,7 @@ EnemyDropOption_Misc = SubOption("Misc.", EnemyDropOption, hasSpinBox=True, spin
 
 
 # Probe effects https://xenobladedata.github.io/xbx/bdat/common_local_us/ITM_BeaconList.html
+intensityText= "Intensity (Low 1 - High 100)"
 
 
 # Enemies
@@ -128,17 +129,23 @@ BossEnemyOption_FinalBoss = SubOption("Vanilla Final Boss", BossEnemyOption, def
 CharacterOption = Option("Party Members", Character, "Randomizes party members", [lambda: PartyMem.Members()])
 CharacterOption_Duplicates = SubOption("Allow Duplicates", CharacterOption)
 CharacterOption_BalanceGear = SubOption("Balance Starting Gear", CharacterOption)
+ArtStrengthOption = Option("Art Strength", Character, "Randomizes the values of arts (e.g. cooldown, damage)", [lambda: Art.ArtStats(ArtStrengthOption.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText)
 # Gems https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_ItemSkill_inner.html#2191
-# Weapons
-# Armor
-# Skells
-intensityText= "Intensity (Low 1 - High 100)"
+
+# Art Unlock Order
+
+# Skills (Make enhance file and option to add new skills)
+# Overdrive Route Rando (Can't because theres no way to see what changed)
+# Skell Weapons and Armor (Their stats and gem effects basically)
+# Soul Voices https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_SoulArts.html
+
+
 
 SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells in a balanced way", [lambda: Skell.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellArmor = Option("Skell Gear", Skells, "Randomizes the stats of Skell Gear")
 SkellArmor_Arm = SubOption("Skell Armor", SkellArmor, [lambda: Skell.SkellArmorStats(SkellArmor_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellArmor_Wep = SubOption("Skell Weapon", SkellArmor, [lambda: Skell.SkellWepStats(SkellArmor_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
-SkellArts = Option("Skell Arts", Skells, "Randomizes the skell art strength")
+# SkellArts = Option("Skell Arts", Skells, "Randomizes the skell art strength")
 
 # Levitaths = [161,162,215, 1341] Title Screen Levitaths?
 

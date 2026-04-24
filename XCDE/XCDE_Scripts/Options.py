@@ -27,6 +27,12 @@ weightsSpinDescription = "Weights ↓"
 ShopOption = Option("Shops", General, "Randomizes the contents of shops", [lambda: Items.Shops()], descData=lambda: Items.ShopsDesc()) # Key item rando settings would be fun 
 TradeOption = Option("Trading", General, "Randomizes the offers of NPC trades", [lambda: Items.TradeOptions()], descData=lambda: Items.TradeOptionsDesc())
 
+EnemyDropOption = Option("Enemy Drops", General, "Randomizes the chosen types of loot from enemies", [lambda: Items.EnemyDrops()], descData=lambda: Items.EnemyDropsDesc())
+EnemyDropOptions_Materials = SubOption("Materials", EnemyDropOption)
+EnemyDropOptions_Armor = SubOption("Armor", EnemyDropOption)
+EnemyDropOptions_Weapons = SubOption("Weapons", EnemyDropOption)
+EnemyDropOptions_ArtBooks = SubOption("Art Books", EnemyDropOption)
+
 CollectableOptions = Option("Collectable Orbs", General, "Randomizes collectables on the field into the chosen types", [lambda: Items.Collectables()], descData=lambda: Items.CollectDesc())
 CollectableOptions_Collectables = SubOption("Collectables", CollectableOptions, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
 CollectableOptions_Materials = SubOption("Materials", CollectableOptions, hasSpinBox=True, spinDefault=30)
@@ -59,12 +65,6 @@ QuestRewardsOptions_Armor = SubOption("Armor", QuestRewardsOption, hasSpinBox=Tr
 QuestRewardsOptions_Weapons = SubOption("Weapons", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
 QuestRewardsOptions_Gems = SubOption("Gems", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
 QuestRewardsOptions_ArtBooks = SubOption("Art Books", QuestRewardsOption, hasSpinBox=True, spinDefault=2)
-
-EnemyDropOption = Option("Enemy Drops", General, "Randomizes the chosen types of loot from enemies", [lambda: Items.EnemyDrops()], descData=lambda: Items.EnemyDropsDesc())
-EnemyDropOptions_Materials = SubOption("Materials", EnemyDropOption)
-EnemyDropOptions_Armor = SubOption("Armor", EnemyDropOption)
-EnemyDropOptions_Weapons = SubOption("Weapons", EnemyDropOption)
-EnemyDropOptions_ArtBooks = SubOption("Art Books", EnemyDropOption)
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/FLD_valpoplist.html#1 Red orbs found here not sure what to do with them yet
 
 

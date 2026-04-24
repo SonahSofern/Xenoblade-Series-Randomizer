@@ -1,7 +1,7 @@
 from scripts import Helper
 
 
-b8 = 256
+b8 = 255
 b16 = 65535
 
 class Stat():
@@ -15,11 +15,15 @@ class Stat():
         percVariance = self.intensity * .01
         maxWithIntensity = percVariance * self.maxPercentMult
 
-        chosenMult = Helper.random.randrange(neutralMultPercent, int(maxWithIntensity)) # Choose a mult between neutral and max*intensity
+        if (neutralMultPercent == int(maxWithIntensity)):
+            chosenMult = neutralMultPercent
+        else:
+            chosenMult = Helper.random.randrange(neutralMultPercent, int(maxWithIntensity)) # Choose a mult between neutral and max*intensity
         
         if Helper.OddsCheck(reverseChance):
             chosenMult = 100/chosenMult
                 
+        
         clampedMult = Helper.Clamp(target[stat]*chosenMult, min, max) # Clamp the result to the bounds
         
         if not allowFloat:

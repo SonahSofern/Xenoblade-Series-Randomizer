@@ -1,18 +1,6 @@
 from XCXDE.XCXDE_Scripts import IDs
 from scripts import JSONParser, Helper, StatRand
 
-# Make a class that can randomize stats in a balanced way given an intensity and min and max val
-# Art Unlock Order
-# Class Weapon (What weapons a class uses)
-
-# Skills (Make enhance file and option to add new skills)
-
-# Overdrive Route Rando (Can't because theres no way to see what changed)
-
-# Skell Weapons and Armor (Their stats and gem effects basically)
-
-# Soul Voices https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_SoulArts.html
-
 def SkellBaseStats(intensity):
     statsFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_DlList.json")
     statRando = StatRand.Stat(2, intensity)
@@ -32,8 +20,10 @@ def SkellArmorStats(intensity):
     for amr in statsFile.rows:
         if amr["$id"] not in IDs.SkellArmorIDs:
             continue
-        for stat in ["Hp", "def", "RstPhysics", "RstBeam", "RstDM", "RstFire", "RstVolt", "RstGravity"]:
+        for stat in ["Hp", "def"]:
             statRando.Balanced(amr, stat, StatRand.b16)
+        for stat in ["RstPhysics", "RstBeam", "RstDM", "RstFire", "RstVolt", "RstGravity"]:
+            statRando.Balanced(amr, stat, 100, -100)
             
         amr["AffixCount"] = Helper.random.choice(Helper.InclRange(1,8))
         amr["SlotNum"] = Helper.random.choice(Helper.InclRange(1,3))
@@ -47,9 +37,10 @@ def SkellWepStats(intensity):
     for wep in statsFile.rows:
         if wep["$id"] not in IDs.SkellWeaponIDs:
             continue
-        for stat in ["Damage", "Stability", "Magazine", "DMRatio", "Recast"]:
+        for stat in ["Damage", "DMRatio", "Recast"]:
             statRando.Balanced(wep, stat, StatRand.b16, -StatRand.b16)
-        
+        for stat in ["Stability", "Magazine"]:
+            statRando.Balanced(wep, stat, StatRand.b8)
         wep["AffixCount"] = Helper.random.choice(Helper.InclRange(1,8))
         wep["SlotNum"] = Helper.random.choice(Helper.InclRange(1,3))
     
