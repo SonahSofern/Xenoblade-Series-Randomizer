@@ -1,8 +1,7 @@
+from XCXDE.XCXDE_Scripts import IDs
 from scripts import JSONParser, StatRand
 
-
-
-def ArtStats(intensity):
+def SkillStats(intensity):
     artFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_PcArtsInfo.json")
     statRando = StatRand.Stat(1.5, intensity)
     

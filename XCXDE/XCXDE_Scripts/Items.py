@@ -1,5 +1,5 @@
 import json, random, copy
-from scripts import JSONParser, Values
+from scripts import JSONParser, Values, PopupDescriptions
 from  XCXDE.XCXDE_Scripts import Options, IDs
 
 # Categories:
@@ -96,6 +96,13 @@ def Tbox():
                     box[key] = int(box[key] * random.choice(multChoices))
                     break
     tboxFile.Close()
+    
+def TboxDescription(name):
+    tboxDesc = PopupDescriptions.Description()
+    tboxDesc.Header(name)
+    tboxDesc.Text(f"The rewards for field checks are randomized")
+    tboxDesc.Image("fieldchecks.png", "XCXDE", 700)
+    return tboxDesc
 
 
 def QuestRewards(): # DOuble check precious rewards skell liscense exam not woring
