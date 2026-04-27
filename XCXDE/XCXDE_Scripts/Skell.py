@@ -9,7 +9,7 @@ def SkellBaseStats(intensity):
         if skell["$id"] not in IDs.SkellFrameIDs:
             continue
         for stat in ["Hp", "Fight", "Shoot", "Mind", "DexFight", "DexShoot", "Dodge", "Def", "FuelMax"]:
-            statRando.Balanced(skell, stat, StatRand.b16)
+            statRando.ApplyMult(skell, stat, statRando.RollBalancedMult(), StatRand.b16)
     
     statsFile.Close()
     
@@ -21,9 +21,9 @@ def SkellArmorStats(intensity):
         if amr["$id"] not in IDs.SkellArmorIDs:
             continue
         for stat in ["Hp", "def"]:
-            statRando.Balanced(amr, stat, StatRand.b16)
+            statRando.ApplyMult(amr, stat, statRando.RollBalancedMult(), StatRand.b16)
         for stat in ["RstPhysics", "RstBeam", "RstDM", "RstFire", "RstVolt", "RstGravity"]:
-            statRando.Balanced(amr, stat, 100, -100)
+            statRando.ApplyMult(amr, stat, statRando.RollBalancedMult(), 100, -100)
             
         amr["AffixCount"] = Helper.random.choice(Helper.InclRange(1,8))
         amr["SlotNum"] = Helper.random.choice(Helper.InclRange(1,3))
@@ -38,9 +38,9 @@ def SkellWepStats(intensity):
         if wep["$id"] not in IDs.SkellWeaponIDs:
             continue
         for stat in ["Damage", "DMRatio", "Recast"]:
-            statRando.Balanced(wep, stat, StatRand.b16, -StatRand.b16)
+            statRando.ApplyMult(wep, stat, statRando.RollBalancedMult(), StatRand.b16, -StatRand.b16)
         for stat in ["Stability", "Magazine"]:
-            statRando.Balanced(wep, stat, StatRand.b8)
+            statRando.ApplyMult(wep, stat, statRando.RollBalancedMult(), StatRand.b8)
         wep["AffixCount"] = Helper.random.choice(Helper.InclRange(1,8))
         wep["SlotNum"] = Helper.random.choice(Helper.InclRange(1,3))
     

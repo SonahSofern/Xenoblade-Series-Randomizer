@@ -7077,6 +7077,10 @@ LearnArts02
 LearnSkill01
 LearnSkill02
 CHR_Class34Growth
+CHR_Class35Growth
+CHR_Class36Growth
+CHR_Class37Growth
+CHR_Class38Growth
 Exp
 LearnArts01
 LearnArts02

@@ -216,9 +216,9 @@ def TheTunneler(filepaths: list[str], rowvalues: list[int], inputheaders: list[s
     return tempholder2
      
 class RandomGroup():
-    def __init__(self):
-        self.originalGroup = []
-        self.currentGroup = []
+    def __init__(self, defaultGroup = []):
+        self.originalGroup:list = copy.deepcopy(defaultGroup)
+        self.currentGroup:list = copy.deepcopy(defaultGroup)
     
     def GenData(self, data, ignoreIDCallback = lambda e: 1==1):    
         for item in data: # Build the list from the original data
@@ -229,6 +229,10 @@ class RandomGroup():
     def AddNewData(self, data):
         self.originalGroup.append(data)
         self.currentGroup.append(data)
+    
+    def SetData(self, data):
+        self.originalGroup = copy.deepcopy(data)
+        self.currentGroup = copy.deepcopy(data)
     
     def RefreshCurrentGroup(self):
         self.currentGroup = copy.deepcopy(self.originalGroup)
