@@ -26,7 +26,11 @@ def ArtEnhancements(intensity):
                 statRando.ApplyMult(enh, stat, mult)
     
     enhFile.Close()
-    
+
+def ArtUnlockOrder():
+    ArtOrder()
+    FixStartingArts()
+
 def ArtOrder():
     class XCXClass():
         def __init__(self, meleeWepIDs, rangedWepIDs, classIndexes):
@@ -83,7 +87,8 @@ def ArtOrder():
             meleeLearn = rank[f"LearnArts01"]
             rangedLearn = rank[f"LearnArts02"]
             
-            if meleeLearn == 0 and rangedLearn == 0: continue # You dont learn arts here
+            # You dont learn arts here
+            if meleeLearn == 0 and rangedLearn == 0: continue 
             
             # You are learning 1 art, so we randomize if its melee or ranged
             if (meleeLearn != 0 and rangedLearn == 0) or (meleeLearn == 0 and rangedLearn != 0): 
@@ -92,7 +97,7 @@ def ArtOrder():
                 else:
                     rangedLearn = classGroup.ranged.SelectRandomMember()
             
-             # You learn 2 arts at same rank you get one of each ranged and melee
+            # You learn 2 arts at same rank you get one of each ranged and melee
             if meleeLearn != 0 and rangedLearn != 0:
                 meleeLearn = classGroup.melee.SelectRandomMember()
                 rangedLearn = classGroup.ranged.SelectRandomMember()
@@ -104,3 +109,26 @@ def ArtOrder():
         growFile.Close()
         
     # multigun is weird, special thing that can be equipped by all
+    
+def FixStartingArts():
+    # Need to fix not just crosses, all the starting arts for characters
+    
+    chrData = JSONParser.File("XCXDE/JsonOutputs/common/DEF_PcList.json")
+    drifterClass = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class01Growth.json")
+    
+    # Find what the new arts are
+    for rank in drifterClass.rows:
+        if rank["$id"] == 1:
+            newMeleeArt = rank["LearnArts01"]
+            newRangedArt = rank["LearnArts02"]
+    
+    # Find player char id(23)
+    for chr in chrData.rows:
+        if chr["$id"] == 23:
+            break
+    
+    # Remove the starting arts you get them by levelling
+    chr["ArtsNo1"] = newRangedArt
+    chr["ArtsNo8"] = newMeleeArt
+
+    chrData.Close()
