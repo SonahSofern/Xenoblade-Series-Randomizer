@@ -1,6 +1,10 @@
 from scripts import JSONParser, StatRand, Helper
 from XCXDE.XCXDE_Scripts import IDs
 
+def ArtStatRando(intensity):
+    ArtStats(intensity)
+    ArtEnhancements(intensity)
+
 def ArtStats(intensity):
     artFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_PcArtsInfo.json")
     statRando = StatRand.Stat(2, intensity)
@@ -12,8 +16,6 @@ def ArtStats(intensity):
                     statRando.ApplyMult(art, f"{stat}[{i}]", mult)
     artFile.Close()
     
-    ArtEnhancements(intensity)
-
 def ArtEnhancements(intensity):
     '''Art enhancement currently paired with stats, they are unique to arts so can be adjusted without messing with other things'''
     enhFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_Enhance.json")
@@ -72,6 +74,21 @@ def ArtOrder():
     
     AllClasses:list[XCXClass] = [Drifter, Striker, SamuraiGunner, Duelist, ShieldTrooper, BastionWarrior, Commando, WingedViper, FullMetalJaguar, PartisanEagle, AstralCrusader, Enforcer, Psycorrupter, Mastermind, BlastFencer, GalacticKnight]
     
+    def RollArt(group:Helper.RandomGroup, newLearnList = []):
+        '''Choose until we get a non duplicate art'''
+        newLearn = group.SelectRandomMember()
+        rollCount = 0
+        while newLearn in newLearnList:
+            newLearn = group.SelectRandomMember()
+            
+            # Because you can get a melee art in am originally ranged position it can lead to situation where you have to entire melee group and are still trying to get another melee art in that case you just dont get an art
+            rollCount += 1
+            if rollCount > 30:
+                newLearn = 0
+                break
+            
+        return newLearn
+    
     for i in range(1,39):
         growFile = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class{i:02}Growth.json")
         
@@ -83,6 +100,8 @@ def ArtOrder():
         if classGroup == None:
             return
             
+        newLearnList = [] # Keeps track of what arts this class already has
+        
         for rank in growFile.rows:
             meleeLearn = rank[f"LearnArts01"]
             rangedLearn = rank[f"LearnArts02"]
@@ -91,44 +110,62 @@ def ArtOrder():
             if meleeLearn == 0 and rangedLearn == 0: continue 
             
             # You are learning 1 art, so we randomize if its melee or ranged
-            if (meleeLearn != 0 and rangedLearn == 0) or (meleeLearn == 0 and rangedLearn != 0): 
+            elif (meleeLearn != 0 and rangedLearn == 0) or (meleeLearn == 0 and rangedLearn != 0): 
                 if Helper.OddsCheck(50):
-                    meleeLearn = classGroup.melee.SelectRandomMember()
+                    newMeleeLearn = RollArt(classGroup.melee, newLearnList)
+                    newRangedLearn = 0
                 else:
-                    rangedLearn = classGroup.ranged.SelectRandomMember()
+                    newRangedLearn = RollArt(classGroup.ranged, newLearnList)
+                    newMeleeLearn = 0
             
             # You learn 2 arts at same rank you get one of each ranged and melee
-            if meleeLearn != 0 and rangedLearn != 0:
-                meleeLearn = classGroup.melee.SelectRandomMember()
-                rangedLearn = classGroup.ranged.SelectRandomMember()
-            
+            elif meleeLearn != 0 and rangedLearn != 0:
+                newMeleeLearn = RollArt(classGroup.melee, newLearnList)
+                newRangedLearn = RollArt(classGroup.ranged, newLearnList)
+                                  
             # Assignment
-            rank[f"LearnArts01"] = meleeLearn 
-            rank[f"LearnArts02"] = rangedLearn
+            rank[f"LearnArts01"] = newMeleeLearn 
+            rank[f"LearnArts02"] = newRangedLearn
+            
+            # Add to keep track of what we learned so far
+            if newMeleeLearn != 0: newLearnList.append(newMeleeLearn) 
+            if newRangedLearn != 0: newLearnList.append(newRangedLearn)
             
         growFile.Close()
         
     # multigun is weird, special thing that can be equipped by all
-    
+   
 def FixStartingArts():
-    # Need to fix not just crosses, all the starting arts for characters
-    
+    # Needed to fix not just crosses, all the starting arts for characters
     chrData = JSONParser.File("XCXDE/JsonOutputs/common/DEF_PcList.json")
-    drifterClass = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class01Growth.json")
-    
-    # Find what the new arts are
-    for rank in drifterClass.rows:
-        if rank["$id"] == 1:
-            newMeleeArt = rank["LearnArts01"]
-            newRangedArt = rank["LearnArts02"]
-    
-    # Find player char id(23)
+    playerChar = [23]
+    # Loop over the characters
     for chr in chrData.rows:
-        if chr["$id"] == 23:
-            break
-    
-    # Remove the starting arts you get them by levelling
-    chr["ArtsNo1"] = newRangedArt
-    chr["ArtsNo8"] = newMeleeArt
-
+        if chr["$id"] not in IDs.PartyMembersIDs + playerChar:
+            continue
+        
+        # clear their defaults arts
+        for i in range(1,9):
+            chr[f"ArtsNo{i}"] = 0
+            chr[f"ArtsLv{i}"] = 0
+            
+        # Find the new arts IDs
+        clsRank = chr["ClassLevel"]
+        clsType = chr["ClassType"]
+        newArts = []
+        
+        growFile = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class{clsType:02}Growth.json")
+        for rank in growFile.rows:
+            if rank["$id"] > clsRank: break
+            if rank["LearnArts01"] != 0:
+                newArts.append(rank["LearnArts01"])
+            if rank["LearnArts02"] != 0:
+                newArts.append(rank["LearnArts02"])
+        growFile.Close()
+        
+        # Apply new art IDs to character PcList
+        for i in Helper.InclRange(1, len(newArts)):
+            chr[f"ArtsNo{i}"] = newArts[i - 1]
+            chr[f"ArtsLv{i}"] = 1
+            
     chrData.Close()

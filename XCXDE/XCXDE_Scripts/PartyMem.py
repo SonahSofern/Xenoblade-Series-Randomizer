@@ -60,9 +60,7 @@ def BalanceStartingGear(targetLv, newChar, wpnFile:JSONParser.File, amrFile:JSON
             
         return Helper.random.choice(allowedWeapons) # Return a random choice's id
                 
-    # Equip Level at the level of the member, grab the same type of weapon / gear and ensure gender can equip it
     def GetBalancedArmor(targetGearID, armorPiecemeal):
-        # Account for bodysuits need to look at flags
         female = 2
         male = 1
         
@@ -83,7 +81,7 @@ def BalanceStartingGear(targetLv, newChar, wpnFile:JSONParser.File, amrFile:JSON
             # Use the same type of armor
             if amr["TypeAmr"] != armorType:
                 continue
-            # if within the level range
+            # stay within the level range
             if amr["EquLv"] > maxLv or amr["EquLv"] < minLv: 
                 continue
             # Remove armors that cannot be chosen with the current armor flags already set

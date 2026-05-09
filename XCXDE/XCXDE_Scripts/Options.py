@@ -130,8 +130,8 @@ CharacterOption = Option("Party Members", Character, "Randomizes party members",
 CharacterOption_Duplicates = SubOption("Allow Duplicates", CharacterOption)
 CharacterOption_BalanceGear = SubOption("Balance Starting Gear", CharacterOption)
 ArtsOption = Option("Arts", Character, "Randomizes various attributes of arts")
-ArtsOption_Strength = SubOption("Art Strength", ArtsOption, [lambda: Art.ArtStats(ArtsOption_Strength.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinDefault=50)
-ArtsOption_LearnOrder = SubOption("Learn Order", ArtsOption, [lambda: Art.ArtUnlockOrder()])
+ArtsOption_Strength = SubOption("Art Strength", ArtsOption, [lambda: Art.ArtStatRando(ArtsOption_Strength.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinDefault=50)
+ArtsOption_LearnOrder = SubOption("Learned Arts", ArtsOption, [lambda: Art.ArtUnlockOrder()])
 
 SkillOption = Option("Skill", Character, "Randomizes various attributes of skills")
 SkillOption_Strength = SubOption("Skill Strength", SkillOption, [lambda: Skill.SkillStats(SkillOption_Strength.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinDefault=50)
