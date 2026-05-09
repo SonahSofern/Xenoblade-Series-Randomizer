@@ -3,6 +3,7 @@ from scripts import Helper
 
 b8 = 255
 b16 = 65535
+IntensityDescription = "Intensity controls how much of the max range the randomizer goes, if you have intensity 50 that means you will get 50% of the max mult. If the max mult was 2x, you would get 1.5x and 0.66x (1/1.5) as the high and low variance a stat would be multiplied to."
 
 class Stat():
     '''A class that randomizes stats by multiplying them, based on intensity and various modes'''

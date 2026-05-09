@@ -20,10 +20,18 @@ Tabs = {
 }
 
 weightsSpinDescription = "Weights ↓"
+intensityText= "Intensity (Low 1 - High 100)"
 
-# Enemy/Appendage Drops (NO POINT)
-# https://xenobladedata.github.io/xbx/bdat/common_local_us/DRP_ItemTable.html#309
+# ---------- POTENTIAL ----------
+# Probe effects https://xenobladedata.github.io/xbx/bdat/common_local_us/ITM_BeaconList.html
+# SKell Flight Music? https://xenobladedata.github.io/xbx/bdat/common_local_us/RSC_BgmCondition.html
+# SkellEasyCruiseOption = Option("Easy Cruise Mode", QOL, "Hraesvelg Cruise Mode is unlocked") # FLD_questlist 2524 is the hraesvelg cruise mode quest, somethere there unlocks it.
+# Color Randomization https://xenobladedata.github.io/xbx/bdat/common_local_us/CLR_List.html
+# ---------- POTENTIAL ----------
 
+# ---------- NOT DOING ----------
+# Overdrive Route Rando (Can't because theres no way to see what changed)
+# Enemy/Appendage Drops (NO POINT) https://xenobladedata.github.io/xbx/bdat/common_local_us/DRP_ItemTable.html#309
 # Items
 # Shops (SHP_* ) (NO POINT theres only one shop and it has almost every item in the game, just randomize the item effects themselves)
 # ShopOption = Option("Shops", Items, "Randomizes NLA's shop inventories into the same item type", [lambda: Item.QuestRewards()])
@@ -32,6 +40,8 @@ weightsSpinDescription = "Weights ↓"
 # ShopOption_SkWep = SubOption("Skell Weapon Shop", ShopOption)
 # ShopOption_SkArm = SubOption("Skell Armor Shop", ShopOption)
 # ShopOption_SkFrame = SubOption("Skell Frame Shop", ShopOption)
+# ClassTreeOption = Option("Class Tree", Character, "Randomizes the class advancement tree and default player class", [lambda: Class.ClassTree()]) # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_ClassInfo.html # Too much hard coded stuff for this to work, also it doesn't really accomplish much the biggest change is your starting stuff which can just be randomized anyway
+# ---------- NOT DOING ----------
 
 
 # Field Skill Drops
@@ -94,11 +104,6 @@ EnemyDropOption_Materials = SubOption("Materials", EnemyDropOption, hasSpinBox=T
 EnemyDropOption_Precious = SubOption("Key Items", EnemyDropOption, hasSpinBox=True, spinDefault=5)
 EnemyDropOption_Misc = SubOption("Misc.", EnemyDropOption, hasSpinBox=True, spinDefault=5)
 
-
-# Probe effects https://xenobladedata.github.io/xbx/bdat/common_local_us/ITM_BeaconList.html
-intensityText= "Intensity (Low 1 - High 100)"
-
-
 # Enemies
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsterIDs, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_Size.GetState())], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True, prio=2)
 NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True, spinDefault=10, spinDesc=weightsSpinDescription)
@@ -124,36 +129,26 @@ BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=F
 BossEnemyOption_FinalBoss = SubOption("Vanilla Final Boss", BossEnemyOption, defState=False)
 # BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
 
-# Too much hard coded stuff for this to work, also it doesn't really accomplish much the biggest change is your starting stuff which can just be randomized anyway
-# ClassTreeOption = Option("Class Tree", Character, "Randomizes the class advancement tree and default player class", [lambda: Class.ClassTree()]) # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_ClassInfo.html
 CharacterOption = Option("Party Members", Character, "Randomizes party members", [lambda: PartyMem.Members()], descData=lambda: PartyMem.PartyMemDesc(CharacterOption.name, CharacterOption_Duplicates.name))
 CharacterOption_Duplicates = SubOption("Allow Duplicates", CharacterOption)
 CharacterOption_BalanceGear = SubOption("Balance Starting Gear", CharacterOption)
-ArtsOption = Option("Arts", Character, "Randomizes various attributes of arts")
+ArtsOption = Option("Arts", Character, "Randomizes various attributes of arts", descData=lambda: Art.ArtDesc(ArtsOption_LearnOrder.name, ArtsOption_Strength.name))
+ArtsOption_LearnOrder = SubOption("Arts Learned", ArtsOption, [lambda: Art.ArtUnlockOrder()])
 ArtsOption_Strength = SubOption("Art Strength", ArtsOption, [lambda: Art.ArtStatRando(ArtsOption_Strength.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinDefault=50)
-ArtsOption_LearnOrder = SubOption("Learned Arts", ArtsOption, [lambda: Art.ArtUnlockOrder()])
 
 SkillOption = Option("Skill", Character, "Randomizes various attributes of skills")
 SkillOption_Strength = SubOption("Skill Strength", SkillOption, [lambda: Skill.SkillStats(SkillOption_Strength.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinDefault=50)
 
 # Gems https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_ItemSkill_inner.html#2191
 
-# Art Unlock Order
-
 # Skills (Make enhance file and option to add new skills)
-# Overdrive Route Rando (Can't because theres no way to see what changed)
-# Skell Weapons and Armor (Their stats and gem effects basically)
 # Soul Voices https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_SoulArts.html
-
-
 
 SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells in a balanced way", [lambda: Skell.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellArmor = Option("Skell Gear", Skells, "Randomizes the stats of Skell Gear")
 SkellArmor_Arm = SubOption("Skell Armor", SkellArmor, [lambda: Skell.SkellArmorStats(SkellArmor_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellArmor_Wep = SubOption("Skell Weapon", SkellArmor, [lambda: Skell.SkellWepStats(SkellArmor_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 # SkellArts = Option("Skell Arts", Skells, "Randomizes the skell art strength")
-
-# Levitaths = [161,162,215, 1341] Title Screen Levitaths?
 
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_MainQuestReqs = SubOption("Skip Chapter Prerequisites", ShortcutsOption, [lambda: q.EasyStoryPrerequisites()])
@@ -165,7 +160,6 @@ FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each l
 FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each class levelup", [lambda: q.FasterClassRanks(FasterClassOption.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinMax= 10, spinIncr = 1, spinDesc = "x Faster")
 YellowBubbleOption = Option("Info Range", QOL, "Increased range for collecting info bubbles", [lambda: q.InfoRangeIncrease(YellowBubbleOption.GetSpinbox(), YellowBubbleOption_Mute.GetState())], hasSpinBox=True, spinDesc="x Range", spinDefault=15, spinMin=2)
 YellowBubbleOption_Mute = SubOption("Mute Callouts", YellowBubbleOption)
-# SKell Flight Music? https://xenobladedata.github.io/xbx/bdat/common_local_us/RSC_BgmCondition.html
 # Faster Party Affinity
 
 # BetterFrontierNavOption = Option("Frontier Nav Boost", QOL, "Faster rewards from FrontierNav")
@@ -173,13 +167,8 @@ YellowBubbleOption_Mute = SubOption("Mute Callouts", YellowBubbleOption)
 # SkellLiscOption_ChSelect = SubOption("Fixed Unlock", SkellLiscOption, hasSpinBox=True, spinMax=12, spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/FLD_questlist.html#1143
 # SkellLiscOption_ChSelect = SubOption("Random Unlock", SkellLiscOption)
 
-# SkellEasyCruiseOption = Option("Easy Cruise Mode", QOL, "Hraesvelg Cruise Mode is unlocked") # FLD_questlist 2524 is the hraesvelg cruise mode quest, somethere there unlocks it.
-
-
 from scripts import Onefile
 if not Onefile.isOneFile:
     OPWeapon = Option("OP Weapons", QOL, "For Testing makes starter weapons op", [lambda: q.OpWep()])
 
 
-# Funny
-# Color Randomization https://xenobladedata.github.io/xbx/bdat/common_local_us/CLR_List.html

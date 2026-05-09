@@ -1,5 +1,7 @@
-from scripts import JSONParser, StatRand, Helper
-from XCXDE.XCXDE_Scripts import IDs
+from scripts import JSONParser, StatRand, Helper, PopupDescriptions
+from XCXDE.XCXDE_Scripts import IDs, Options
+
+maxMult = 2
 
 def ArtStatRando(intensity):
     ArtStats(intensity)
@@ -7,7 +9,7 @@ def ArtStatRando(intensity):
 
 def ArtStats(intensity):
     artFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_PcArtsInfo.json")
-    statRando = StatRand.Stat(2, intensity)
+    statRando = StatRand.Stat(maxMult, intensity)
     
     for art in artFile.rows:
         for stat in ["DmgMgn", "RecastFrm"]:
@@ -169,3 +171,13 @@ def FixStartingArts():
             chr[f"ArtsLv{i}"] = 1
             
     chrData.Close()
+    
+                                                                                                                                                                                                                                                                                
+def ArtDesc(name, newName):
+    artRandoDesc = PopupDescriptions.Description()
+    artRandoDesc.Header(name)
+    artRandoDesc.Text(f"Randomizes art unlocking. For example, Drifter uses rifle and knife, so the drifter class will be given random knife and rifle arts from any in the game.")
+    artRandoDesc.Header(newName)
+    artRandoDesc.Text(f"Randomizes the strength of arts within {1/maxMult}-{maxMult} times the original amount.")
+    artRandoDesc.Text(StatRand.IntensityDescription)
+    return artRandoDesc
