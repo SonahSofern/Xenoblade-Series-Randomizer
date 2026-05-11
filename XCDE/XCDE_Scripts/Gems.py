@@ -1,5 +1,6 @@
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_skilllist.html
-import json, random, scripts.PopupDescriptions, scripts.JSONParser
+from scripts import JSONParser, PopupDescriptions
+import json, random
 from XCDE.XCDE_Scripts import Options
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_bufflist.html#87 will be similar to enhancement in xc2 i can create gems with new effects and add back gems that dont get put in the game but already exist like cooldown reduc (cast quicken)
 # Cant extend gems, the descriptions wont load will have to replace old ones
@@ -243,7 +244,7 @@ def CrystalFix(gemLength): # Goes through and edits crystals that have values ou
             for i in range(1,3):
                 if crystal[f"skill{i}"] > gemLength:
                     crystal[f"skill{i}"] = random.randrange(1,gemLength+1)
-        scripts.JSONParser.CloseFile(cryData, crystalFile)
+        JSONParser.CloseFile(cryData, crystalFile)
             
     
 
@@ -264,10 +265,10 @@ def ItemPower(gemData, ranks):
             newGem = random.choice(gemData)
             gem["itemID"] = newGem["$id"]
             gem["percent"] = min(random.randrange(newGem[f"lower_{ranks[rank-1]}"], newGem[f"upper_{ranks[rank-1]}"]),255)
-        scripts.JSONParser.CloseFile(gemItemData, gemItemFile)
+        JSONParser.CloseFile(gemItemData, gemItemFile)
 
 def GemDescriptions():
-    GemDescription = scripts.PopupDescriptions.Description()
+    GemDescription = PopupDescriptions.Description()
     GemDescription.Header(Options.GemOption_Power.name)
     GemDescription.Text("This randomizes the power level of crafted and premade gems.")
     GemDescription.Header(f"{Options.GemOption_Effect.name}/{Options.GemOption_Unused.name}")

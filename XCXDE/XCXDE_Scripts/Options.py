@@ -144,8 +144,8 @@ SkillOption_Strength = SubOption("Skill Strength", SkillOption, [lambda: Skill.S
 # Skills (Make enhance file and option to add new skills)
 # Soul Voices https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_SoulArts.html
 
-SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells in a balanced way", [lambda: Skell.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
-SkellArmor = Option("Skell Gear", Skells, "Randomizes the stats of Skell Gear")
+SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells.", [lambda: Skell.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
+SkellArmor = Option("Skell Gear", Skells, "Randomizes the stats of skell gear")
 SkellArmor_Arm = SubOption("Skell Armor", SkellArmor, [lambda: Skell.SkellArmorStats(SkellArmor_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellArmor_Wep = SubOption("Skell Weapon", SkellArmor, [lambda: Skell.SkellWepStats(SkellArmor_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 # SkellArts = Option("Skell Arts", Skells, "Randomizes the skell art strength")

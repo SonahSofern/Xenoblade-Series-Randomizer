@@ -15,8 +15,6 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
         firstRun = False
     
     ignoreKeys = ["$id", "LvMin", "LvMax", "LvRev", "Exp" "ZoneUD", "Partner", "Flag(Named)", "Flag(mBoss)", "Flag(ignoreLv)", "Flag(Leader)", "AiLeader", "Flag(FAOff)", "BGMID", "NoEncountSkip", "SearchParamID", "MoveRange", "FieldPatternID", "ZoneID", "PopCost", 'PopProxyCost', "GroupID"]
-    # EnemyCounts = GetEnemyCounts()
-    # GroupFightViolations = GetGroupFightViolations()
     # rscTestKeys = ['Resource', 'TypeFamily', 'TypeGenus', 'Material', 'RiseDescend', 'ProxyID', 'Radius', 'FightDistance', 'PermitHeight', 'RayCheckU', 'RayCheckD', 'SearchBaseBone', 'UndX', 'UndZ', 'UndMinX', 'UndMaxX', 'UndMinZ', 'UndMaxZ', 'UndDeg', 'ExArea', 'TurnAngle', 'FrontAngle', 'NoEncountSkip', 'VoDir', 'EffPack', 'EffCmn', 'Parts', 'PathMot', 'PathChr', 'Action', 'SePack', 'ClipEvent', 'Com_SE', 'Com_Eff', 'Com_Vo', 'Mflag(Vip)', 'Mflag(Map)', 'Mflag(Evt)', 'AttackID', 'AttackNum', 'HudName', 'HudOffset', '<044870FF>', '<7D67F533>']
     proxyIDs = ['ProxyID'] # Enemies need to keep their original proxy id because in boss fights they dont spawn
     rscKeys = [] + proxyIDs
@@ -105,9 +103,9 @@ def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
                                                                                                                                                                                                                                                                                                             
 
 def HpLimitEffects(en):
+    '''Xenoblade X uses a Enhancement to stop characters from dying in phased fights, this keeps that effect on the location and removes it if not on a phased location'''
     HPLimitFightIDs = [431,441,460,470,1755,1756] # DLC seemingly didnt have any but im skeptical because there is a VITA fight that ends at 50% hp (ID 4093)
     NoKillEnhancement = 7809
-    '''Xenoblade X uses a Enhancement to stop characters from dying in phased fights, this keeps that effect on the location and removes it if not on a phased location'''
     if en["$id"] not in HPLimitFightIDs: # Remove it from non HPLimitFights
         for i in range(1,4):
             if en[f"EnhanceID{i}"] == NoKillEnhancement: 

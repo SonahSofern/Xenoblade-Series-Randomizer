@@ -218,6 +218,7 @@ XenoOptionDict = {
 }
 
 class MutuallyExclusivePairing():
+    '''For settings that are mutually exclusive'''
     def __init__(self, group1:list[Option], group2:list[Option]):
         for op in group1:
             op.clickCommands.append(lambda op=op: MutuallyExclusiveToggle(op, group2))

@@ -158,10 +158,6 @@ EnemyArtEffectsOption_Buffs = SubOption("Buffs", EnemyArtEffectsOption)
 EnemyArtEffectsOption_Debuffs = SubOption("Debuffs", EnemyArtEffectsOption)
 EnemyArtEffectsOption_Enhancements = SubOption("Enhancements", EnemyArtEffectsOption)
 
-# Misc
-MusicOption = Option("Music", Funny, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
-MusicOption_MixBattleAndEnv = SubOption("Mix Battle/Environment Themes", MusicOption, defState = False)
-
 # QOL
 ShortcutsOption = Option("Quest Skips", QOL, "Various speedups/skips for tedious main story quests")
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
@@ -203,6 +199,8 @@ NewGamePlusFlagsOptions_Blades = SubOption("NG+ Blades", NewGamePlusFlagsOption,
 NewGamePlusFlagsOptionsHiddenDriverSkillTree = SubOption("Hidden Skill Tree Unlocked", NewGamePlusFlagsOption, [lambda: QualityOfLife.FixIssuesCausedByNGPlusFlag()])
 
 # Funny
+MusicOption = Option("Music", Funny, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
+MusicOption_MixBattleAndEnv = SubOption("Mix Battle/Environment Themes", MusicOption, defState = False)
 BladeSpecialButtonsOption = Option("Button Combos", Funny, "Randomizes inputs for button challenges", [lambda: ButtonCombos.BladeSpecialButtonChallenges()])
 BladeSpecialButtonsOption_ABXY = SubOption("ABXY", BladeSpecialButtonsOption)
 BladeSpecialButtonsOption_Mystery = SubOption("?", BladeSpecialButtonsOption)
@@ -249,12 +247,9 @@ for loc in TornaMain.GormottNametoLocID.keys(): # Automatically Generates these
 TornaRewardsonUnreqSidequests = Option("Torna Unrequired Sidequests", GameModeTab, "Sidequests not chosen for the main story requirements or story gates can have Progression Items on their rewards.")
 
 MutuallyExclusivePairing([TornaMainOption, TornaAddHints, TornaObjectColorMatchesContents, TornaChooseCommunityReqs, TornaCreateSpoilerLog, TornaRemoveGormottChecks, TornaRewardsonUnreqSidequests], [AccessoriesOption, CommunityMembersOption, QuestRewardsOption, AuxCoresOption, AccessoryShopsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladesOption, BladeArtsOption, BladeFieldSkillsOption, BladeWeaponChipsOption, BladeCombosOption, BladeStatsOption, NormalEnemyOption, UniqueEnemyOption, BossEnemyOption, EnemyDropOption, TreasureChestOption, FreelyEngageBladesOption, ChestOption, FieldSkillOption, EasySkillTreesOption, FasterLevelsOption, NewGamePlusFlagsOption, ProjTreasureChestOption, EnemySizeOption, BladeWeaponCosmeticsOption, CosmeticsOption, RaceModeOption, UMHuntOption])
-
 MutuallyExclusivePairing([UMHuntOption], [TutorialShorteningOption, AccessoryShopsOption, NewGamePlusFlagsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladeWeaponChipsOption, AccessoriesOption, AuxCoresOption, NormalEnemyOption, BossEnemyOption, UniqueEnemyOption, EnemyDropOption, TreasureChestOption, StartwithIncreasedMovespeedOption, FasterDriverSkillTrees, EasySkillTreesOption, FasterLevelsOption, RaceModeOption, FieldSkillOption])
-
 MutuallyExclusivePairing([RaceModeOption], [DriversOption, BladesOption, ShortcutsOption, ChestOption, TutorialShorteningOption])
     
-
 # Currently Disabled for Various Reasons
 # Blade Names (moved so that blade name rando doesn't mess up Race Mode getting blade IDs)
 # GenStandardOption("Blade Names", TabBlades, "Randomizes a Blade's name", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["Name"], Helper.InclRange(0,1000), BladeNames)])

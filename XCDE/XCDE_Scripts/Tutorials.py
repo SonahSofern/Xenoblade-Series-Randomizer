@@ -1,10 +1,9 @@
 import json
-from  XCDE.XCDE_Scripts import Options
 from scripts import JSONParser
 
 
 def TutorialSkips(): 
-    UnskippableTutorials = [59, 61, 62, 64, 65]
+    UnskippableTutorials = [59, 61, 62, 64, 65, 105, 106, 107, 108] # IDs in MNU_ttrl
     MechonTutorials = [29] # Ids for tutorials relating to fights with mechon it wont load for some reason if the proc_type is default
     with open("./XCDE/JsonOutputs/bdat_menu_ttrl/MNU_ttrl.json", 'r+', encoding='utf-8') as tutFile:
         tutData = json.load(tutFile)
@@ -19,7 +18,6 @@ def TutorialSkips():
             if f["$id"] in MechonTutorials:
                 f["proc_type"] = 0
                 
-                
             if f["scenario_flag"] in dupeFlags:
                 f["type"] = 0
                 f["proc_type"] = 0 # Set these for fights with tutorials seem to crash without it
@@ -28,7 +26,5 @@ def TutorialSkips():
             else:
                 dupeFlags.append(f["scenario_flag"])
                 
-            
-            
                 # could this unlock your menu stuff https://xenobladedata.github.io/xb1de/bdat/bdat_common/MNU_game_option_item.html
         JSONParser.CloseFile(tutData, tutFile)

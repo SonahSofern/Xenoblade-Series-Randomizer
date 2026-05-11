@@ -16,7 +16,6 @@ def CustomCoreCrystalRando():
     NewGamePlusBladeBalancing()
 
 def RareBladeProbabilityEqualizer(): # makes it so all blades are equally likely to be pulled
-    Helper.ColumnAdjust("XC2/JsonOutputs/common/BLD_RareList.json", ["Condition", "Assure1", "Assure2", "Assure3", "Assure4", "Assure5"] , 0)
     Helper.ColumnAdjust("XC2/JsonOutputs/common/BLD_RareList.json", ["Prob1", "Prob2", "Prob3", "Prob4", "Prob5"] , 1)
 
 def LandofChallengeRelease(): #frees shulk, elma, fiora from land of challenge restriction
