@@ -13,7 +13,7 @@ def CustomCoreCrystalRando():
     FixArtReleaseLevels()
     RareBladeProbabilityEqualizer()
     LandofChallengeRelease()
-    NewGamePlusBladeBalancing()
+    # NewGamePlusBladeBalancing() # Currently doesnt work
 
 def RareBladeProbabilityEqualizer(): # makes it so all blades are equally likely to be pulled
     Helper.ColumnAdjust("XC2/JsonOutputs/common/BLD_RareList.json", ["Prob1", "Prob2", "Prob3", "Prob4", "Prob5"] , 1)

@@ -37,11 +37,6 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
         newEn = eRando.CreateRandomEnemy(StaticEnemyData)
         
         eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys) 
-        
-        # ForcedArtsManager(en, newEn, eRando)
-            
-        # if isBossGroupBalancing:
-        #     eRando.BalanceFight(en, newEn, GroupFightViolations, EnemyCounts)
 
         if isMatchSize:
             EnemySizeHelper(en, newEn)
@@ -53,13 +48,10 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
 
         Helper.CopyKeys(en, newEn, ignoreKeys)
 
-        HpLimitEffects(en) # Removes HPLimit values from replacement enemies and enforces it in certain locationsa
+        HpLimitEffects(en)
 
     for group in StaticEnemyData:
         group.RefreshCurrentGroup()
-
-    # if firstRun:
-    #     Bandaids()
         
     eneFile.Close()
     paramFile.Close()
@@ -123,8 +115,6 @@ def HpLimitEffects(en):
                 if en[f"EnhanceID{i}"] == 0:
                     slot = i
             en[f"EnhanceID{slot}"] = NoKillEnhancement
-            
-            
                                                                                                                                                                                                                                                                                            
 def EnemyDesc(name):
     EnemyRandoDesc = PopupDescriptions.Description()

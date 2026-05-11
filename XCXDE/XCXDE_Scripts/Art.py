@@ -20,16 +20,36 @@ def ArtStats(intensity):
     
 def ArtEnhancements(intensity):
     '''Art enhancement currently paired with stats, they are unique to arts so can be adjusted without messing with other things'''
-    enhFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_Enhance.json")
     statRando = StatRand.Stat(2, intensity)
+    enhFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_Enhance.json")
+    artFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_PcArtsInfo.json")
     
-    for enh in enhFile.rows:
-        if enh["$id"] in IDs.ArtEnhanceIDs:
-            mult = statRando.RollBalancedMult()
-            for stat in ["param1", "param2"]:
-                statRando.ApplyMult(enh, stat, mult)
+    # Ids from BTL_PcArtsInfo
+    param1MultArtIDs = [6, 8, 17, 19, 33, 81, 119, 142, 143, 158, 159] # Don't change param1 of this art
+    param2MultArtIDs = [6, 8, 17, 19, 33, 119, 161] # Don't change param2 of this art
+    ratioMultArtIDs = [33] # Change ratio of this art
+    
+    for art in artFile.rows:
+        if art[f"Enhance[0]"] == 0: continue # This art has no enhancements so go next
+        
+        # Get the 5 level of enhancements that the art has
+        targetEnhancementIDs = []
+        for i in range(0,5):
+            targetEnhancementIDs.append(art[f"Enhance[{i}]"])
+            
+        # Roll one mult for all 5 levels of this skill for each category
+        if art["$id"] not in param1MultArtIDs: param1Mult = statRando.RollBalancedMult() 
+        if art["$id"] not in param2MultArtIDs: param2Mult = statRando.RollBalancedMult()
+        if art["$id"] in ratioMultArtIDs: ratioMult = statRando.RollBalancedMult()
+    
+        for enh in enhFile.rows:
+            if enh["$id"] not in targetEnhancementIDs: continue
+            if art["$id"] not in param1MultArtIDs: statRando.ApplyMult(enh, "param1", param1Mult)
+            if art["$id"] not in param2MultArtIDs: statRando.ApplyMult(enh, "param2", param2Mult)
+            if art["$id"] in ratioMultArtIDs: statRando.ApplyMult(enh, "ratio", ratioMult)
     
     enhFile.Close()
+    artFile.Close()
 
 def ArtUnlockOrder():
     ArtOrder()
@@ -49,6 +69,7 @@ def ArtOrder():
     DualSwordsArtIDs = Helper.RandomGroup([72,73,74,75,76,77,78,79,80,81,145,146,147])
     JavelinArtIDs = Helper.RandomGroup([64,65,66,67,68,69,70,142,143,144,164])
     PhotonSaberArtIDs = Helper.RandomGroup([107,108,109,110,111,112,113,114,115,116,155,156,157,165])
+    
     # Ranged
     AssaultRifleArtIDs = Helper.RandomGroup([2,3,4,5,6,7,8,9,10,11,12,13,14,122,123,124])
     DualGunsArtIDs = Helper.RandomGroup([25,26,27,28,29,30,31,127,128,129,160])
@@ -57,6 +78,7 @@ def ArtOrder():
     RaygunArtIDs = Helper.RandomGroup([40,41,42,43,44,45,46,133,134,135,161])
     SniperArtIDs = Helper.RandomGroup([17,18,19,20,21,22,23,125,126,158])
     
+    # Classes
     Drifter = XCXClass(KnifeArtsIDs, AssaultRifleArtIDs, [1])
     Striker = XCXClass(LongswordArtIDs, AssaultRifleArtIDs, [2])
     SamuraiGunner = XCXClass(LongswordArtIDs, AssaultRifleArtIDs, [3, 21, 22])
@@ -83,7 +105,7 @@ def ArtOrder():
         while newLearn in newLearnList:
             newLearn = group.SelectRandomMember()
             
-            # Because you can get a melee art in am originally ranged position it can lead to situation where you have to entire melee group and are still trying to get another melee art in that case you just dont get an art
+            # Because you can get a melee art in am originally ranged position it can lead to situation where you have the entire melee group and are still trying to get another melee art in that case you just dont get an art
             rollCount += 1
             if rollCount > 30:
                 newLearn = 0
@@ -179,5 +201,6 @@ def ArtDesc(name, newName):
     artRandoDesc.Text(f"Randomizes art unlocking. For example, Drifter uses rifle and knife, so the drifter class will be given random knife and rifle arts from any in the game.")
     artRandoDesc.Header(newName)
     artRandoDesc.Text(f"Randomizes the strength of arts within {1/maxMult}-{maxMult} times the original amount.")
+    artRandoDesc.Tag("Intensity")
     artRandoDesc.Text(StatRand.IntensityDescription)
     return artRandoDesc

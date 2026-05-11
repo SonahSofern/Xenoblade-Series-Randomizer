@@ -273,9 +273,12 @@ def Bandaids():
     SummonFix()
     
 def EnemyDesc(name):
-    desc = PopupDescriptions.Description()
-    desc.Header("Enemies")
-    desc.Text("This randomizes enemies in the world from the target category into the chosen ones.")
-    desc.Header(Options.BossEnemyOption_MatchSize.name)
-    desc.Text("Shrinks/grows enemies to match the size of the original enemy.")
-    return desc
+    EnemyRandoDesc = PopupDescriptions.Description()
+    EnemyRandoDesc.Header(name)
+    EnemyRandoDesc.Text(f"{name} are the target group to be randomized.")
+    EnemyRandoDesc.Text(f"The suboption for those categories are what those enemies will be randomized into.")
+    EnemyRandoDesc.Text(f"The spinbox for each option is the weight of that category.")
+    if name != Options.BossEnemyOption.name:
+        EnemyRandoDesc.Header(Options.NormalEnemyOption_MatchSize.name)
+        EnemyRandoDesc.Text("Shrinks/grows enemies to match the size of the original enemy.")
+    return EnemyRandoDesc

@@ -23,6 +23,7 @@ weightsSpinDescription = "Weights ↓"
 intensityText= "Intensity (Low 1 - High 100)"
 
 # ---------- POTENTIAL ----------
+# Soul Voices https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_SoulArts.html
 # Probe effects https://xenobladedata.github.io/xbx/bdat/common_local_us/ITM_BeaconList.html
 # SKell Flight Music? https://xenobladedata.github.io/xbx/bdat/common_local_us/RSC_BgmCondition.html
 # SkellEasyCruiseOption = Option("Easy Cruise Mode", QOL, "Hraesvelg Cruise Mode is unlocked") # FLD_questlist 2524 is the hraesvelg cruise mode quest, somethere there unlocks it.
@@ -137,12 +138,11 @@ ArtsOption_LearnOrder = SubOption("Arts Learned", ArtsOption, [lambda: Art.ArtUn
 ArtsOption_Strength = SubOption("Art Strength", ArtsOption, [lambda: Art.ArtStatRando(ArtsOption_Strength.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinDefault=50)
 
 SkillOption = Option("Skill", Character, "Randomizes various attributes of skills")
-SkillOption_Strength = SubOption("Skill Strength", SkillOption, [lambda: Skill.SkillStats(SkillOption_Strength.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinDefault=50)
+SkillOption_Strength = SubOption("Skill Strength", SkillOption, [lambda: Skill.SkillEnhancements(SkillOption_Strength.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinDefault=50)
 
 # Gems https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_ItemSkill_inner.html#2191
 
 # Skills (Make enhance file and option to add new skills)
-# Soul Voices https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_SoulArts.html
 
 SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells.", [lambda: Skell.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellArmor = Option("Skell Gear", Skells, "Randomizes the stats of skell gear")
