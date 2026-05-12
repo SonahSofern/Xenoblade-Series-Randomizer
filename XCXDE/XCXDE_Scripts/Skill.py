@@ -1,5 +1,5 @@
 from XCXDE.XCXDE_Scripts import IDs
-from scripts import JSONParser, StatRand
+from scripts import JSONParser, StatRand, Helper
 
 maxMult = 2
 
@@ -34,3 +34,29 @@ def SkillEnhancements(intensity):
     
     enhFile.Close()
     skillFile.Close()
+    
+
+def SkillOrder():
+    skillIDs = Helper.RandomGroup(Helper.InclRange(1,94))
+    
+    for i in range(1,39):
+        growFile = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class{i:02}Growth.json")
+        newSkillList = [] # Keeps track of what skills this class already has
+        
+        for rank in growFile.rows:
+            for skillSlot in ["LearnSkill01", "LearnSkill02"]:
+                # You dont learn skill here
+                if rank[skillSlot] == 0: continue
+            
+                # Roll until we get a skill this class doesn't have yet            
+                newSkill = skillIDs.SelectRandomMember()
+                while newSkill in newSkillList:
+                    newSkill = skillIDs.SelectRandomMember()
+                
+                # Assign
+                rank[skillSlot] = newSkill
+                                    
+                # Add to keep track of what we learned so far
+                newSkillList.append(newSkill)
+        
+        growFile.Close()

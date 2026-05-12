@@ -158,7 +158,8 @@ def ArtOrder():
         growFile.Close()
         
     # multigun is weird, special thing that can be equipped by all
-   
+
+
 def FixStartingArts():
     # Needed to fix not just crosses, all the starting arts for characters
     chrData = JSONParser.File("XCXDE/JsonOutputs/common/DEF_PcList.json")
