@@ -115,14 +115,12 @@ def ArtOrder():
     
     for i in range(1,39):
         growFile = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class{i:02}Growth.json")
-        
+
         classGroup:XCXClass = None 
         for cls in AllClasses:
             if i in cls.classIndexes:
                 classGroup = cls
                 break
-        if classGroup == None:
-            return
             
         newLearnList = [] # Keeps track of what arts this class already has
         
@@ -166,8 +164,7 @@ def FixStartingArts():
     playerChar = [23]
     # Loop over the characters
     for chr in chrData.rows:
-        if chr["$id"] not in IDs.PartyMembersIDs + playerChar:
-            continue
+        if chr["$id"] not in IDs.PartyMembersIDs + playerChar: continue
         
         # clear their defaults arts
         for i in range(1,9):
@@ -175,18 +172,18 @@ def FixStartingArts():
             chr[f"ArtsLv{i}"] = 0
             
         # Find the new arts IDs
-        clsRank = chr["ClassLevel"]
+        clsRank = chr["ClassLevel"] 
         clsType = chr["ClassType"]
         newArts = []
-        
-        growFile = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class{clsType:02}Growth.json")
+
+        growFile = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class{clsType:02}Growth.json", 'r') # Must open in read mode because we are not editing and truncating breaks this, due to the file being locked by the previous iteration while it dumps the data
         for rank in growFile.rows:
             if rank["$id"] > clsRank: break
             if rank["LearnArts01"] != 0:
                 newArts.append(rank["LearnArts01"])
             if rank["LearnArts02"] != 0:
                 newArts.append(rank["LearnArts02"])
-        growFile.Close()
+        growFile.file.close()
         
         # Apply new art IDs to character PcList
         for i in Helper.InclRange(1, len(newArts)):

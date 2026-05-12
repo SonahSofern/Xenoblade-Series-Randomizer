@@ -40,7 +40,6 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                     rscData = json.load(rscFile)
                     eneData = json.load(eneFile)
                     artData = json.load(artFile)
-                    isMatchSize = isMatchSizeOption.GetState()
                     
                     eRando = Enemy.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "Resource", "IdBattleEnemy", eneData, paramData, rscData, artData)
         
@@ -63,7 +62,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                         if isBossGroupBalancing:
                             eRando.BalanceFight(en, newEn, GroupFightViolations, EnemyCounts)
 
-                        if isMatchSize:
+                        if isMatchSizeOption:
                             EnemySizeHelper(en, newEn, eRando)
 
                         IntroFightBalances(en, newEn, eRando)

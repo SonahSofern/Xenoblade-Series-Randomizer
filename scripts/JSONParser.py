@@ -1,19 +1,32 @@
 import copy
 import json, random, os
 
+openFiles = [] # To track the currently open files
 
 class File:
     '''Better approach to manipulating files, cuts out boilerplate and lets us expand functionality easily'''
-    def __init__(self, filePath):
-         self.file = open(filePath, 'r+', encoding='utf-8')
+    def __init__(self, filePath, fileOpenMode = 'r+'):
+         self.file = open(filePath, fileOpenMode, encoding='utf-8')
          self.data = json.load(self.file)
          self.rows = self.data["rows"]
+         self.filePath = filePath
+         openFiles.append(filePath)
          
     def Close(self):
         """Truncates and Closes Json Files"""
         self.file.seek(0)
         self.file.truncate()
         json.dump(self.data, self.file, indent=2, ensure_ascii=False)
+        self.file.close()
+        
+        self.RemoveTrackedFile()
+    
+    def RemoveTrackedFile(self):
+        # Remove 
+        for file in openFiles:
+            if file == self.filePath:
+                break
+        openFiles.remove(file)
 
 def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list = [], rangeValidReplacements:list = [], InvalidTargetIDs:list = [], IgnoreID_AND_Key = [["",""]]): # make this a function to reuse, check the settings ot see if we even do this
 

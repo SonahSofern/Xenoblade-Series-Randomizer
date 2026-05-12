@@ -25,6 +25,7 @@ def Members():
         
     charFile.Close()
     wpnFile.Close()
+    amrFile.Close()
 
 def GetArmorFlags(armor):
     flags = 0
@@ -116,7 +117,7 @@ def PartyMemDesc(name, allowDupeName):
     from scripts import PopupDescriptions
     partyMemDesc = PopupDescriptions.Description()
     partyMemDesc.Header(name)
-    partyMemDesc.Text("This randomizes the party members in the game. For example, In this picture Al has replaced Elma in the intro.")
+    partyMemDesc.Text("This randomizes the party members in the game. For example, In this picture Al has replaced Elma.")
     partyMemDesc.Image("charRando.png", "XCXDE", 500)
     partyMemDesc.Header(allowDupeName)
     partyMemDesc.Text("This allows copies of the party members, you could have a full team of Elma's.")

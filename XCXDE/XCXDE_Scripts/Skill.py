@@ -1,5 +1,5 @@
 from XCXDE.XCXDE_Scripts import IDs
-from scripts import JSONParser, StatRand, Helper
+from scripts import JSONParser, StatRand, Helper, PopupDescriptions
 
 maxMult = 2
 
@@ -41,6 +41,7 @@ def SkillOrder():
     
     for i in range(1,39):
         growFile = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class{i:02}Growth.json")
+
         newSkillList = [] # Keeps track of what skills this class already has
         
         for rank in growFile.rows:
@@ -60,3 +61,11 @@ def SkillOrder():
                 newSkillList.append(newSkill)
         
         growFile.Close()
+        
+def SkillDesc(name):
+    artRandoDesc = PopupDescriptions.Description()
+    artRandoDesc.Header(name)
+    artRandoDesc.Text(f"Randomizes the strength of skills within {1/maxMult}-{maxMult} times the original amount.")
+    artRandoDesc.Tag("Intensity")
+    artRandoDesc.Text(StatRand.IntensityDescription)
+    return artRandoDesc

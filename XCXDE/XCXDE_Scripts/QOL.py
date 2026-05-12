@@ -50,7 +50,7 @@ def SkellExamSkip():
 #     tutFile.Close()    
 
 def FasterClassRanks(spin):
-    for i in range(1, 35):
+    for i in range(1, 39):
         clsFile = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class{i:02}Growth.json")
         for cls in clsFile.rows:
             cls["Exp"] = max(cls["Exp"] // spin, 1)       
