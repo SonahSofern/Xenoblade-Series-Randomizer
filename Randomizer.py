@@ -34,8 +34,7 @@ root.attributes(alpha=0)
 XCRandomizer.CreateMainWindow(root, MainWindow, XCDE.WindowData)
 XCRandomizer.CreateMainWindow(root, MainWindow, XC2.WindowData)
 XCRandomizer.CreateMainWindow(root, MainWindow, XC3.WindowData)
-if not XCRandomizer.Onefile.isOneFile:
-    XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.WindowData)
+XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.WindowData)
 
 root.attributes(alpha=1)
 

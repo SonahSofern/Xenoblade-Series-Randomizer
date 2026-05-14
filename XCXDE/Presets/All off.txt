@@ -163,5 +163,5 @@
     "CP Boost Spinbox: ": 100,
     "Info Range": false,
     "Info Range Spinbox: ": 25,
-    "Info Range -> Mute Callouts": true,
+    "Info Range -> Mute Callouts": true
 }

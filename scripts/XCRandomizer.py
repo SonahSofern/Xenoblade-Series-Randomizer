@@ -285,8 +285,13 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
         try:
             for file in gameData.mainFolderNames:
                 # print("BDAT:", JsonOutput, "Exists:", os.path.exists(JsonOutput))
+                # print(bdat_path)
+                # print(f"{entrySpot}/{file}.bdat")
+                # print(JsonOutput)
+                # print(gameData.extraArgs)
                 subprocess.run([bdat_path, "extract", f"{entrySpot}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + gameData.extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
             for file in gameData.subFolderNames:
+                # print(f"{entrySpot}/{gameData.textFolderName}/{file}.bdat")
                 subprocess.run([bdat_path, "extract", f"{entrySpot}/{gameData.textFolderName}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + gameData.extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
             # Unpacks BDATs
