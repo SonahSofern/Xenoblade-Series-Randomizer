@@ -119,15 +119,16 @@ def OddCheck(odds):
     return (odds > random.randrange(0,100))
 
 def Reaction(art, multReact, multOdds):
+    reactionWeights = [12,7,5,3,5,5] # Break - Topple - Launch - Smash - KB - BD
     for i in range(1,17):
         if art[f"ReAct{i}"] > 14: # Dont replace weird ones that just move blades
             continue
         choice = random.choice(ReactionGroup)
         if art[f"HitFrm{i}"] == 0 and (i != 16 and art[f"HitFrm{i+1}"] == 0): # Need the second condition because zenobias Ascension Blade 129 has no hit on frame 1 but afterwards has hits # Make sure there is a hit
-            art[f"ReAct{i-1}"] = random.choice(choice.ids) # Adds something to the last hit
+            art[f"ReAct{i-1}"] = random.choices(choice.ids, reactionWeights, k=1) # Adds something to the last hit
             break
         if multReact and OddCheck(multOdds):
-            art[f"ReAct{i}"] =  random.choice(choice.ids) # Adds each hit
+            art[f"ReAct{i}"] =  random.choices(choice.ids, reactionWeights, k=1) # Adds each hit
 
 
 initialCooldownRange = [5,14]
