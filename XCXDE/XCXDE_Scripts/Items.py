@@ -29,10 +29,16 @@ fullValTable:Values.ValueTable = None
 
 def FullValTable(GearOpt, SkellGearOpt, GemOpt, SkellGemOpt, MaterOpt, CollOpt, ProbeOpt, PreciousOpt, MiscOpt):
     global fullValTable
+    
+    # Divide the weight by the number of options that use the weight to balance it
+    GearWeight = Values.WeightOptionMethod(GearOpt) / 7 
+    SkellGearWeight = Values.WeightOptionMethod(SkellGearOpt) / 10
+    MiscWeight = Values.WeightOptionMethod(MiscOpt) / 6 
+    
     if fullValTable == None:
         valTable = Values.ValueTable(path = "XCXDE/JsonOutputs/common")
         
-        GearWeight = Values.WeightOptionMethod(GearOpt) / 7 # Divide the weight by seven because they use the same weight option to balance it
+        # ORDER IS IMPORTANT FOR WEIGHTS DO NOT CHANGE WITHOUT ADJUSTING WEIGHTS REASSIGNMENT BELOW
         valTable.PopulateValues(Values.ValueFile("AMR_PcList"), IDs.HeadIDs, GearWeight, 1)
         valTable.PopulateValues(Values.ValueFile("AMR_PcList"), IDs.BodyIDs, GearWeight, 2)
         valTable.PopulateValues(Values.ValueFile("AMR_PcList"), IDs.ArmRIDs, GearWeight, 3)
@@ -41,7 +47,6 @@ def FullValTable(GearOpt, SkellGearOpt, GemOpt, SkellGemOpt, MaterOpt, CollOpt, 
         valTable.PopulateValues(Values.ValueFile("WPN_PcList"), IDs.RangedWeaponIDs, GearWeight, 6)
         valTable.PopulateValues(Values.ValueFile("WPN_PcList"), IDs.MeleeWeaponIDs, GearWeight, 7)
         
-        SkellGearWeight = Values.WeightOptionMethod(SkellGearOpt) / 10
         valTable.PopulateValues(Values.ValueFile("AMR_DlList"), IDs.SkellHeadIDs, SkellGearWeight, 10)
         valTable.PopulateValues(Values.ValueFile("AMR_DlList"), IDs.SkellBodyIDs, SkellGearWeight, 11)
         valTable.PopulateValues(Values.ValueFile("AMR_DlList"), IDs.SkellArmRIDs, SkellGearWeight, 12)
@@ -60,7 +65,6 @@ def FullValTable(GearOpt, SkellGearOpt, GemOpt, SkellGemOpt, MaterOpt, CollOpt, 
         valTable.PopulateValues(Values.ValueFile("ITM_BeaconList"), IDs.ProbeIDs, Values.WeightOptionMethod(ProbeOpt), 28)
         valTable.PopulateValues(Values.ValueFile("ITM_PreciousList", "UI2"), IDs.PreciousItemIDs, Values.WeightOptionMethod(PreciousOpt), 29)
         
-        MiscWeight = Values.WeightOptionMethod(MiscOpt) / 6 # Divide the weight by six because they use the same weight option to balance it
         valTable.PopulateValues(Values.ValueFile("ITM_PieceList"), IDs.AppendageFragIDs, MiscWeight, 30)
         valTable.PopulateValues(Values.ValueFile("ITM_BattleItem"), IDs.ConsumableIDs, MiscWeight, 31)
         valTable.PopulateValues(Values.ValueFile("ITM_FigList"), IDs.HolofigureIDs, MiscWeight, 64)
@@ -70,6 +74,8 @@ def FullValTable(GearOpt, SkellGearOpt, GemOpt, SkellGemOpt, MaterOpt, CollOpt, 
         fullValTable = copy.deepcopy(valTable)
     else:
         valTable = copy.deepcopy(fullValTable)
+        # Assign the weights here because if we just use the previous table the weights don't get updated for the new setting
+        valTable.weightList = [GearWeight, GearWeight, GearWeight, GearWeight, GearWeight, GearWeight, GearWeight, SkellGearWeight, SkellGearWeight, SkellGearWeight, SkellGearWeight, SkellGearWeight, SkellGearWeight, SkellGearWeight, SkellGearWeight, SkellGearWeight, SkellGearWeight, Values.WeightOptionMethod(GemOpt), Values.WeightOptionMethod(SkellGemOpt), Values.WeightOptionMethod(MaterOpt), Values.WeightOptionMethod(CollOpt), Values.WeightOptionMethod(ProbeOpt), Values.WeightOptionMethod(PreciousOpt), MiscWeight, MiscWeight, MiscWeight, MiscWeight, MiscWeight, MiscWeight]
         
     return valTable
 
@@ -114,7 +120,7 @@ def QuestRewards(): # DOuble check precious rewards skell liscense exam not wori
         qstRewardData = json.load(qstRewardFile)
         for qstRew in qstRewardData["rows"]:
             for i in range(1,5):
-                valTable.SelectValuedMember(qstRew, f"item_id{i}", IDs.PreciousItemIDs,  f"ref_item_bdat_{i}")
+                valTable.SelectValuedMember(qstRew, f"item_id{i}", IDs.PreciousItemIDs, f"ref_item_bdat_{i}")
 
         for key in ["money", "exp", "friend_point"]:   # Apply random mults to the money exp or bp 
             qstRew[key] = int(qstRew[key] * random.choice(multChoices))
@@ -135,7 +141,7 @@ def CollectapediaRewards():
         JSONParser.CloseFile(colRewardData, colRewardFile)
         
 def EnemyDrops():
-    valTable = FullValTable(Options.CollectapediaRewardOption_Gear, Options.CollectapediaRewardOption_SkellGear, Options.CollectapediaRewardOption_Gems, Options.CollectapediaRewardOption_SkellGems, Options.CollectapediaRewardOption_Materials, Options.CollectapediaRewardOption_Collectibles, Options.CollectapediaRewardOption_Probes, Options.CollectapediaRewardOption_Precious, Options.CollectapediaRewardOption_Misc)
+    valTable = FullValTable(Options.EnemyDropOption_Gear, Options.EnemyDropOption_SkellGear, Options.EnemyDropOption_Gems, Options.EnemyDropOption_SkellGems, Options.EnemyDropOption_Materials, Options.EnemyDropOption_Collectibles, Options.EnemyDropOption_Probes, Options.EnemyDropOption_Precious, Options.EnemyDropOption_Misc)
     
     for boxType in ["Bronze", "Silver", "Gold"]:
         # Randomization

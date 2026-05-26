@@ -14,12 +14,11 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     else:
         firstRun = False
     
-    ignoreKeys = ["$id", "LvMin", "LvMax", "LvRev", "Exp" "ZoneUD", "Partner", "Flag(Named)", "Flag(mBoss)", "Flag(ignoreLv)", "Flag(Leader)", "AiLeader", "Flag(FAOff)", "BGMID", "NoEncountSkip", "SearchParamID", "MoveRange", "FieldPatternID", "ZoneID", "PopCost", 'PopProxyCost', "GroupID"]
+    ignoreKeys = ["$id", "ParamRev", "LvMin", "LvMax", "LvRev", "Exp" "ZoneUD", "Partner", "Flag(Named)", "Flag(mBoss)", "Flag(ignoreLv)", "Flag(Leader)", "AiLeader", "Flag(FAOff)", "BGMID", "NoEncountSkip", "SearchParamID", "MoveRange", "FieldPatternID", "ZoneID", "PopCost", 'PopProxyCost', "GroupID"]
     # rscTestKeys = ['Resource', 'TypeFamily', 'TypeGenus', 'Material', 'RiseDescend', 'ProxyID', 'Radius', 'FightDistance', 'PermitHeight', 'RayCheckU', 'RayCheckD', 'SearchBaseBone', 'UndX', 'UndZ', 'UndMinX', 'UndMaxX', 'UndMinZ', 'UndMaxZ', 'UndDeg', 'ExArea', 'TurnAngle', 'FrontAngle', 'NoEncountSkip', 'VoDir', 'EffPack', 'EffCmn', 'Parts', 'PathMot', 'PathChr', 'Action', 'SePack', 'ClipEvent', 'Com_SE', 'Com_Eff', 'Com_Vo', 'Mflag(Vip)', 'Mflag(Map)', 'Mflag(Evt)', 'AttackID', 'AttackNum', 'HudName', 'HudOffset', '<044870FF>', '<7D67F533>']
-    proxyIDs = ['ProxyID'] # Enemies need to keep their original proxy id because in boss fights they dont spawn
-    rscKeys = [] + proxyIDs
+    proxyIDs = ["ProxyID", "Mflag(Vip)", "Mflag(Map)", "Mflag(Evt)"] # Enemies need to keep their original proxy id and Mflags because in boss fights they dont spawn
     drawDistanceThings = ["DistanceXZ", "DistanceY", "DepopDistanceXZ", "DepopDistanceY", "ReleaseDistanceXZ", "ReleaseDistanceY"]
-    retainNonArrangeKeys = ["ReleasePcDistanceXZ", "ReleasePcDistanceXZ", "FightDistance", "PemitHeight", "RiseDescend"] + rscKeys + drawDistanceThings #'FlyHeight', 'SwimHeight'
+    retainNonArrangeKeys = ["ReleasePcDistanceXZ", "ReleasePcDistanceXZ", "FightDistance", "PemitHeight", "RiseDescend"] + proxyIDs + drawDistanceThings #'FlyHeight', 'SwimHeight'
     
     eneFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnList.json")
     paramFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnParam.json")
