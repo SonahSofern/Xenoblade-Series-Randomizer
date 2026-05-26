@@ -32,7 +32,7 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size,
             eneData = json.load(eneFile)    
             eneVoiceData = json.load(eneVoiceFile)
             
-            eRando = e.EnemyRandomizer(IDs.NormalEnemies, IDs.UniqueEnemies, IDs.BossEnemies, IDs.SuperbossEnemies, enemyOption, normal, unique, boss, superboss, "", "", eneData, eneData, eneData, eneData)
+            eRando = e.EnemyRandomizer(IDs.NormalEnemies, IDs.UniqueEnemies, IDs.BossEnemies, IDs.SuperbossEnemies, enemyOption, normal, unique, boss, superboss, "", "", eneData, eneData, eneData, eneData, permanentBandaids=[lambda: SizeAdjustment()])
             
             if StaticEnemyData == []:
                 StaticEnemyData = eRando.GenEnemyData(XCDEGenEnemyDataAdapter(eneData, IDs.areaEnemyFileList, eRando), lambda e: getEnID(e))
@@ -54,7 +54,7 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size,
                         VoicedEnemiesFix(eneVoiceData, newEn, oldEn)                                
                         SpikeBalancer(oldEn, newEn.eneListArea)
                         
-                        if size:
+                        if size or (oldEn["$id"] in IDs.LockEnemyFights):
                             SizeHelper(oldEn, newEn.eneListArea)
                         
                         # Copy stats with ratios to original stats
@@ -84,8 +84,9 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size,
             JSONParser.CloseFile(eneVoiceData, eneVoiceFile)
             for group in StaticEnemyData:
                 group.RefreshCurrentGroup()
-            RingRemoval()
+            # RingRemoval()
             NoCooldownFix()
+            IntroTutorialEnemyPaths()
 
 def isFinalBoss(oldEn):
     if oldEn["$id"] in IDs.FinalBossEnemies + IDs.FCFinalBossEnemies:
@@ -120,29 +121,41 @@ def ChallengingFinalBoss():
         "Immovable Gonzales": [284],
         "Territorial Rotbart": [282]
     }
-    # if Options.FinalBossOption.GetState() and enemy["$id"] in []: # Choose a valid final boss option
+    # if Options.FinalBossOption.GetState() and enemy["$id"] in []: # Choose a valid final boss option    
+
+
+Mini = 1
+Small = 2
+Normal = 3
+Large = 4
+Massive = 5
     
+def SizeAdjustment():
+    largeAdjust = [1504]
+    
+    for file in IDs.areaEnemyFileList:
+        eneListFile = JSONParser.File(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json")
+        for en in eneListFile.rows:
+            if en["$id"] in largeAdjust: # Intro tutorial enemy is egregiously overvalued in size
+                en["size"] = Large
+        eneListFile.Close()
+
 def SizeHelper(enemy, chosen):
     '''Helps match enemy size to replacement size'''
-    Mini = 1
-    Small = 2
-    Normal = 3
-    Large = 4
-    Massive = 5
     
     multDict = {
         (Massive, Large): 3,
-        (Massive, Normal): 3.5,
-        (Massive, Small): 4,
-        (Massive, Mini): 4.5,
+        (Massive, Normal): 5,
+        (Massive, Small): 7,
+        (Massive, Mini): 8,
         (Large, Normal): 2,
-        (Large, Small): 3,
-        (Large, Mini): 3.5,
+        (Large, Small): 4,
+        (Large, Mini): 5,
         (Normal, Small): 1,
         (Normal, Mini): 1,
         (Small, Mini): 1
     }
-    e.EnemySizeMatch(enemy, chosen, ["scale"], multDict, "size", chosen["scale"], 2, 255)
+    e.EnemySizeMatch(enemy, chosen, ["scale"], multDict, "size", chosen["scale"], 1, 255)
     
 def ForcedArts(enemy, ForcedStoryArts:list[ForcedArt]):
     # Fixes boss fights that require the enemy to use an art slot to end the fight 
@@ -161,10 +174,10 @@ def VoicedEnemiesFix(eneVoiceData, chosen:Enemy, enemy):
             break    
     eneVoiceData["rows"].extend(newVoiceList)
 
-def XCDEGenEnemyDataAdapter(eneData, enAreaFiles, eRando:e.EnemyRandomizer):
+def XCDEGenEnemyDataAdapter(eneData, enAreaFileNames, eRando:e.EnemyRandomizer):
     '''Helps format enemies into workable data for the genenemydata function'''
     tempData = []
-    for file in enAreaFiles:
+    for file in enAreaFileNames:
         with open(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
             eneAreaData = json.load(eneAreaFile)
             for enemy in eneAreaData["rows"]:
@@ -251,6 +264,14 @@ def KeepStatRatio(enemy, chosen, key, replacementTotal, originalTotal):
     # print(f"{key}: {origStat} - {newStat}")
     return newStat
 
+def IntroTutorialEnemyPaths():
+    routeFile = JSONParser.File("XCDE/JsonOutputs/bdat_ma1401/routelist1401.json")
+    for route in routeFile.rows:
+        if route["$id"] in [16]:
+            route["posX"] = 950
+            break
+    routeFile.Close()
+    
 # Used for starting fight had some weird thing with the enemies
 def RingRemoval():
     RemoveLocksFightIDs = [2]
@@ -274,12 +295,12 @@ def NoCooldownFix():
                 art["recast"] = random.choice(Cooldowns)
         JSONParser.CloseFile(artData, artFile)
     
-
 def DevicesAttachedToEgilFix(enemy):
     if enemy["$id"] == 2506: # Remove the limit on these because unique monsters cannot be inflicted with instant death like their art wants to do
         enemy["limit"] = 0
 
 def EgilArenaFix():
+    '''The fight in mechonis core requires yaldabaoth's model, it is connected to the mechonis model and crashed my entire pc once somehow'''
     with open(f"./XCDE/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
         enData = json.load(eneFile)
         for en in enData["rows"]:
@@ -357,6 +378,8 @@ def GetLockedEnemies():
                         for i in range(1,4):
                             if lock[f"popID{i}"] != 0:  
                                 locks.append(lock[f"popID{i}"])
+                                
+                    
                     for pop in enePopData["rows"]:
                         if pop["$id"] in locks:
                             for j in range(1,6):
@@ -365,7 +388,6 @@ def GetLockedEnemies():
         except:
             pass
     print(enemiesInLock)
-    
     
     # dummylist = []
 def PrintEnemy(enemy:Enemy):

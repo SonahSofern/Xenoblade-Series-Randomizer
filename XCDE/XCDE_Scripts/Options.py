@@ -67,7 +67,6 @@ QuestRewardsOptions_Gems = SubOption("Gems", QuestRewardsOption, hasSpinBox=True
 QuestRewardsOptions_ArtBooks = SubOption("Art Books", QuestRewardsOption, hasSpinBox=True, spinDefault=2)
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/FLD_valpoplist.html#1 Red orbs found here not sure what to do with them yet
 
-
 # Enemy
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: EnemiesScript.Enemies(IDs.NormalEnemies, NormalEnemyOption, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption_Size.GetState())], descData=lambda: EnemiesScript.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
 NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True, spinDefault=15, spinDesc=weightsSpinDescription)

@@ -6,7 +6,7 @@ StaticEnemyData:list[Helper.RandomGroup] = []
 
 # Enemy Names for map hexs should be updated with their replacement
 
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSize = False, isBossGroupBalancing = False, isMatchStats = False, finalBoss = False):
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSize = False):
     global StaticEnemyData
     
     if StaticEnemyData == []:
@@ -67,9 +67,9 @@ def EnemySizeHelper(enemy, chosen):
     Megafauna = 5
     
     multDict = {
-        (Megafauna, XL): 7,
-        (Megafauna, Large): 9,
-        (Megafauna, Medium): 12,
+        (Megafauna, XL): 11,
+        (Megafauna, Large): 12,
+        (Megafauna, Medium): 13,
         (Megafauna, Small): 15,
         (XL, Large): 3,
         (XL, Medium): 4,
@@ -127,11 +127,15 @@ def HpLimitEffects(en):
 def NerfSummonEnemies():
     # cannot find the link to perform the above concept. It is probably hard coded to each art. Instead just setting level of all summoned enemies to 1
     eneFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnList.json")
-    summonedEnemyIDs = [433, 434, 435, 436, 437, 438, 439, 463, 465, 466, 467, 468, 3794, 3795, 3796, 1703, 1756, 3677, 2576, 3798, 3799, 3800, 3801, 3802, 3803, 3804, 4148, 4149, 4150]
     for en in eneFile.rows:
-        if en["$id"] in summonedEnemyIDs:
+        if en["$id"] in IDs.SummonMonsterIDs:
+            # Put summons levels to 1 because there is currently no way to balance them
             en["LvMin"] = 1
-            en["LvMax"] = 1     
+            en["LvMax"] = 1 
+            
+            # Shrink summons in case its a small arena
+            en["ScaleMin"] = en["ScaleMin"] // 3
+            en["ScaleMax"] = en["ScaleMax"] // 3   
     eneFile.Close()
                                                                                                                                                                                                                                                                                            
 def EnemyDesc(name):
