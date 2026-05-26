@@ -18,7 +18,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     # rscTestKeys = ['Resource', 'TypeFamily', 'TypeGenus', 'Material', 'RiseDescend', 'ProxyID', 'Radius', 'FightDistance', 'PermitHeight', 'RayCheckU', 'RayCheckD', 'SearchBaseBone', 'UndX', 'UndZ', 'UndMinX', 'UndMaxX', 'UndMinZ', 'UndMaxZ', 'UndDeg', 'ExArea', 'TurnAngle', 'FrontAngle', 'NoEncountSkip', 'VoDir', 'EffPack', 'EffCmn', 'Parts', 'PathMot', 'PathChr', 'Action', 'SePack', 'ClipEvent', 'Com_SE', 'Com_Eff', 'Com_Vo', 'Mflag(Vip)', 'Mflag(Map)', 'Mflag(Evt)', 'AttackID', 'AttackNum', 'HudName', 'HudOffset', '<044870FF>', '<7D67F533>']
     proxyIDs = ["ProxyID", "Mflag(Vip)", "Mflag(Map)", "Mflag(Evt)"] # Enemies need to keep their original proxy id and Mflags because in boss fights they dont spawn
     drawDistanceThings = ["DistanceXZ", "DistanceY", "DepopDistanceXZ", "DepopDistanceY", "ReleaseDistanceXZ", "ReleaseDistanceY"]
-    retainNonArrangeKeys = ["ReleasePcDistanceXZ", "ReleasePcDistanceXZ", "FightDistance", "PemitHeight", "RiseDescend"] + proxyIDs + drawDistanceThings #'FlyHeight', 'SwimHeight'
+    retainNonArrangeKeys = ["ReleasePcDistanceXZ", "ReleasePcDistanceXZ", "FightDistance", "PermitHeight", "RiseDescend"] + proxyIDs + drawDistanceThings #'FlyHeight', 'SwimHeight'
     
     eneFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnList.json")
     paramFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnParam.json")
@@ -51,6 +51,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
 
     for group in StaticEnemyData:
         group.RefreshCurrentGroup()
+    
+    NerfSummonEnemies()
         
     eneFile.Close()
     paramFile.Close()
@@ -114,6 +116,23 @@ def HpLimitEffects(en):
                 if en[f"EnhanceID{i}"] == 0:
                     slot = i
             en[f"EnhanceID{slot}"] = NoKillEnhancement
+   
+
+# A script to handle summoned enemy levels
+
+# After enemy randomization
+# Check all enemies that have summon arts
+# Create a new summon art for each
+# Create a new summon enemy for each with matching level to the summoning enemy
+def NerfSummonEnemies():
+    # cannot find the link to perform the above concept. It is probably hard coded to each art. Instead just setting level of all summoned enemies to 1
+    eneFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnList.json")
+    summonedEnemyIDs = [433, 434, 435, 436, 437, 438, 439, 463, 465, 466, 467, 468, 3794, 3795, 3796, 1703, 1756, 3677, 2576, 3798, 3799, 3800, 3801, 3802, 3803, 3804, 4148, 4149, 4150]
+    for en in eneFile.rows:
+        if en["$id"] in summonedEnemyIDs:
+            en["LvMin"] = 1
+            en["LvMax"] = 1     
+    eneFile.Close()
                                                                                                                                                                                                                                                                                            
 def EnemyDesc(name):
     EnemyRandoDesc = PopupDescriptions.Description()
