@@ -139,17 +139,33 @@ def CollectapediaRewards():
         for key in ["battlePoint"]: 
             colRew[key] = int(colRew[key] * random.choice(multChoices))
         JSONParser.CloseFile(colRewardData, colRewardFile)
-        
-def EnemyDrops():
-    valTable = FullValTable(Options.EnemyDropOption_Gear, Options.EnemyDropOption_SkellGear, Options.EnemyDropOption_Gems, Options.EnemyDropOption_SkellGems, Options.EnemyDropOption_Materials, Options.EnemyDropOption_Collectibles, Options.EnemyDropOption_Probes, Options.EnemyDropOption_Precious, Options.EnemyDropOption_Misc)
+
+# def EnemyDrops():
+#     # You already just get a bunch of random gear anyway from defeating enemies idk if randomizing enemy drops matters...
     
-    for boxType in ["Bronze", "Silver", "Gold"]:
-        # Randomization
-        with open(f"XCXDE/JsonOutputs/common/DRP_{boxType}BoxTable.json", 'r+', encoding='utf-8') as boxFile:
-            boxData = json.load(boxFile)
-            for box in boxData["rows"]:
-                for i in range(1,13):
-                    if i > 8 and boxType == "Bronze":
-                        break
-                    valTable.SelectValuedMember(box, f"Item_{i:02}")
-            JSONParser.CloseFile(boxData, boxFile)
+#     valTable = FullValTable(Options.EnemyDropOption_Gear, Options.EnemyDropOption_SkellGear, Options.EnemyDropOption_Gems, Options.EnemyDropOption_SkellGems, Options.EnemyDropOption_Materials, Options.EnemyDropOption_Collectibles, Options.EnemyDropOption_Probes, Options.EnemyDropOption_Precious, Options.EnemyDropOption_Misc)
+#     # Drop Item Table (Covers Silver Chests, Gold Chests, )
+#     itemFile = JSONParser.File("XCXDE/JsonOutputs/common/DRP_ItemTable.json")
+#     for itm in itemFile.rows:
+#         valTable.SelectValuedMember(itm, "ItemID", catKey="ItemType")
+#     itemFile.Close()
+    
+    # Why bother I want materials to match the enemy they come from, affixes are so customizable that randomization becomes unnoticable to 99% of players. 
+    # Bronze Box Rando
+    # valTable = Values.ValueTable(path = "XCXDE/JsonOutputs/common")
+    # valTable.PopulateValues(Values.ValueFile("ITM_MaterialList"), IDs.MaterialIDs)
+    # boxFile = JSONParser.File("XCXDE/JsonOutputs/common/DRP_BronzeBoxTable.json")
+    # for box in boxFile.rows:
+    #     for i in range(1,9):
+    #         valTable.SelectValuedMember(box, f"Item_0{i}")
+    # boxFile.Close()
+    
+    # # Affix Table
+    # valTable = Values.ValueTable(path = "XCXDE/JsonOutputs/common")
+    # valTable.PopulateValues(Values.ValueFile("BTL_ItemSkill_inner"), IDs.GroundAugmentsIDs)
+    # boxFile = JSONParser.File("XCXDE/JsonOutputs/common/DRP_AffixTable.json")
+    # for box in boxFile.rows:
+    #     for i in range(1,11):
+    #         valTable.SelectValuedMember(box, f"AffixID_{i:02}")
+    # boxFile.Close()
+

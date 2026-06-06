@@ -99,17 +99,17 @@ CollectapediaRewardOption_Materials = SubOption("Materials", CollectapediaReward
 CollectapediaRewardOption_Precious = SubOption("Key Items", CollectapediaRewardOption, hasSpinBox=True, spinDefault=5)
 CollectapediaRewardOption_Misc = SubOption("Misc.", CollectapediaRewardOption, hasSpinBox=True, spinDefault=1)
 
-# Enemy Drops
-EnemyDropOption = Option("Enemy Drops", Items, "Randomizes enemy drops into the chosen types", [lambda: Item.EnemyDrops()])
-EnemyDropOption_Gear = SubOption("Ground Gear", EnemyDropOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
-EnemyDropOption_Gems = SubOption("Augments", EnemyDropOption, hasSpinBox=True, spinDefault=20)
-EnemyDropOption_SkellGear = SubOption("Skell Gear", EnemyDropOption, hasSpinBox=True, spinDefault=20) 
-EnemyDropOption_SkellGems = SubOption("Skell Augments", EnemyDropOption, hasSpinBox=True, spinDefault=10)
-EnemyDropOption_Probes = SubOption("Probes", EnemyDropOption, hasSpinBox=True, spinDefault=1)
-EnemyDropOption_Collectibles = SubOption("Collectibles", EnemyDropOption, hasSpinBox=True, spinDefault=5)
-EnemyDropOption_Materials = SubOption("Materials", EnemyDropOption, hasSpinBox=True, spinDefault=50)
-EnemyDropOption_Precious = SubOption("Key Items", EnemyDropOption, hasSpinBox=True, spinDefault=5)
-EnemyDropOption_Misc = SubOption("Misc.", EnemyDropOption, hasSpinBox=True, spinDefault=5)
+# # Enemy Drops
+# EnemyDropOption = Option("Enemy Drops", Items, "Randomizes enemy drops into the chosen types", [lambda: Item.EnemyDrops()])
+# EnemyDropOption_Gear = SubOption("Ground Gear", EnemyDropOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
+# EnemyDropOption_Gems = SubOption("Augments", EnemyDropOption, hasSpinBox=True, spinDefault=20)
+# EnemyDropOption_SkellGear = SubOption("Skell Gear", EnemyDropOption, hasSpinBox=True, spinDefault=20) 
+# EnemyDropOption_SkellGems = SubOption("Skell Augments", EnemyDropOption, hasSpinBox=True, spinDefault=10)
+# EnemyDropOption_Probes = SubOption("Probes", EnemyDropOption, hasSpinBox=True, spinDefault=1)
+# EnemyDropOption_Collectibles = SubOption("Collectibles", EnemyDropOption, hasSpinBox=True, spinDefault=5)
+# EnemyDropOption_Materials = SubOption("Materials", EnemyDropOption, hasSpinBox=True, spinDefault=50)
+# EnemyDropOption_Precious = SubOption("Key Items", EnemyDropOption, hasSpinBox=True, spinDefault=5)
+# EnemyDropOption_Misc = SubOption("Misc.", EnemyDropOption, hasSpinBox=True, spinDefault=5)
 
 # Enemies
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsterIDs, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_Size.GetState())], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True, prio=2)

@@ -371,9 +371,8 @@ def EnemyDesc(name):
     if name != Options.BossEnemyOption.name:
         EnemyRandoDesc.Header(Options.NormalEnemyOption_Aggro.name)
         EnemyRandoDesc.Text("If this setting is on, enemies will keep their original aggro. For example, if a Krabble is replaced by Amalthus, it will keep the krabble's aggro type and radius.")
-    EnemyRandoDesc.Header(Options.NormalEnemyOption_Size.name)
-    EnemyRandoDesc.Text("This will match the size of the new enemy to the original enemy. For example, Ophion (a big enemy), when replaced with a krabble (a small enemy), will force the Krabble to match Ophions size for that instance of it. This helps with indoor areas as massive enemies will be shrunk to match their new environment.")
-    
+        EnemyRandoDesc.Header(Options.NormalEnemyOption_Size.name)
+        EnemyRandoDesc.Text("This will match the size of the new enemy to the original enemy. For example, Ophion (a big enemy), when replaced with a krabble (a small enemy), will force the Krabble to match Ophions size for that instance of it. This helps with indoor areas as massive enemies will be shrunk to match their new environment.")   
     return EnemyRandoDesc
 
 # ------ Not used
