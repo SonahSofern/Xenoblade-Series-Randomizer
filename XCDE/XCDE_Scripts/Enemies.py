@@ -54,7 +54,7 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size,
                         VoicedEnemiesFix(eneVoiceData, newEn, oldEn)                                
                         SpikeBalancer(oldEn, newEn.eneListArea)
                         
-                        if size or (oldEn["$id"] in IDs.LockEnemyFights):
+                        if size or (oldEn["$id"] in (IDs.LockEnemyFights + IDs.NonLockRequiredFights)):
                             SizeHelper(oldEn, newEn.eneListArea)
                         
                         # Copy stats with ratios to original stats

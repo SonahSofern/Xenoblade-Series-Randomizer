@@ -1,6 +1,7 @@
 import json
 from scripts import JSONParser
-from  XCDE.XCDE_Scripts import Options
+from  XCDE.XCDE_Scripts import Options, IDs
+
 def Quickstep(): # Originally wanted to give it to shulks default wep but you couldnt remnove it for some reason
     with open("./XCDE/JsonOutputs/bdat_common/BTL_skilllist.json", 'r+', encoding='utf-8') as gemFile:
         with open("./XCDE/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as itemFile:
@@ -33,3 +34,18 @@ def Quickstep(): # Originally wanted to give it to shulks default wep but you co
 
             JSONParser.CloseFile(itemData, itemFile)
             JSONParser.CloseFile(gemData, gemFile)
+
+
+def QuestAffinity():
+    '''Original Idea: Removes the cnd_famous which corresponds the number of stars a quest needs to be allowed to show up
+    Didnt work so now: All quests immediately max out your affinity with that area
+    '''
+    for fileName in IDs.areaListQuestNumbers:
+        qstFile = JSONParser.File(f"XCDE/JsonOutputs/bdat_common/JNL_quest{fileName}.json")
+        for qst in qstFile.rows:
+            # qst["cnd_famous"] = 0 # even set to 0 you still had to do a quest to gain affinity
+            for c in ["A", "B"]:
+                qst[f"up_famous_{c}"] = 10000 
+            # qst["flg_famous"] = 0 # flg_famous controls what area it checks for the cnd_famous
+        
+        qstFile.Close()

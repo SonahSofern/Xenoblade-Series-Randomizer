@@ -23,7 +23,7 @@ for id in IDs.areaFileListNumbers:
     areaFiles.append(f"bdat_ma{id}")
     
 mainFolderNames = ["bdat_common", "bdat_menu_psv", "bdat_menu_ttrl", "bdat_evt", "bdat_menu_map", "bdat_menu_item"] + areaFiles
-subFolderNames = ["bdat_common_ms", "bdat_menu_psv_ms", "bdat_menu_mes_ms"]
+subFolderNames = ["bdat_common_ms", "bdat_menu_psv_ms", "bdat_menu_mes_ms", "bdat_menu_item_ms"]
 
 def XCDEHelp():
     descData = scripts.XCRandomizer.PopupDescriptions.Description((900,900))
