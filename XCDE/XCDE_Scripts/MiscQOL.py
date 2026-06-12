@@ -49,3 +49,4 @@ def QuestAffinity():
             # qst["flg_famous"] = 0 # flg_famous controls what area it checks for the cnd_famous
         
         qstFile.Close()
+        

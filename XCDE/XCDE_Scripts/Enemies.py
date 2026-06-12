@@ -317,7 +317,6 @@ def EgilArenaFix():
     #                 en["posX"] = 5
     #                 en["posY"] = 0
     #         JSONParser.CloseFile(popData, enpopFile)
-  
         
 def EnemyDesc(categoryName):
     myDesc = PopupDescriptions.Description()

@@ -133,6 +133,7 @@ BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True, spi
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=False, hasSpinBox=True, spinDefault=1)
 # BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
 
+
 CharacterOption = Option("Party Members", Character, "Randomizes party members", [lambda: PartyMem.Members()], descData=lambda: PartyMem.PartyMemDesc(CharacterOption.name, CharacterOption_Duplicates.name))
 CharacterOption_Duplicates = SubOption("Allow Duplicates", CharacterOption)
 CharacterOption_BalanceGear = SubOption("Balance Starting Gear", CharacterOption)
@@ -161,6 +162,7 @@ FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each l
 FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each class levelup", [lambda: q.FasterClassRanks(FasterClassOption.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinMax= 10, spinIncr = 1, spinDesc = "x Faster")
 YellowBubbleOption = Option("Info Range", QOL, "Increased range for collecting info bubbles", [lambda: q.InfoRangeIncrease(YellowBubbleOption.GetSpinbox(), YellowBubbleOption_Mute.GetState())], hasSpinBox=True, spinDesc="x Range", spinDefault=15, spinMin=2)
 YellowBubbleOption_Mute = SubOption("Mute Callouts", YellowBubbleOption)
+EnemyWeatherQOLOption = Option("Weather Conditions", QOL, "Removes weather conditions from enemies", [lambda: q.ClearEnemyWeatherCondition()])
 
 # SkellLiscOption = Option("Skell License Unlock", QOL, "Sets the unlock chapter for skells")
 # SkellLiscOption_ChSelect = SubOption("Fixed Unlock", SkellLiscOption, hasSpinBox=True, spinMax=12, spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/FLD_questlist.html#1143

@@ -137,6 +137,7 @@ def NerfSummonEnemies():
             en["ScaleMin"] = en["ScaleMin"] // 3
             en["ScaleMax"] = en["ScaleMax"] // 3   
     eneFile.Close()
+   
                                                                                                                                                                                                                                                                                            
 def EnemyDesc(name):
     EnemyRandoDesc = PopupDescriptions.Description()
@@ -145,8 +146,8 @@ def EnemyDesc(name):
     EnemyRandoDesc.Text(f"The suboption for those categories are what those enemies will be randomized into.")
     EnemyRandoDesc.Text(f"The spinbox for each option is the weight of that category.")
     if name != Options.BossEnemyOption.name:
-        EnemyRandoDesc.Header(Options.NormalEnemyOption_Aggro.name)
-        EnemyRandoDesc.Text("This will leave enemy aggro with the original enemies. So that you can navigate areas in the originally balanced way. Otherwise you might have to fight many encounters to nagivate an area, or none in an area that you normally would.")
+        # EnemyRandoDesc.Header(Options.NormalEnemyOption_Aggro.name)
+        # EnemyRandoDesc.Text("This will leave enemy aggro with the original enemies. So that you can navigate areas in the originally balanced way. Otherwise you might have to fight many encounters to nagivate an area, or none in an area that you normally would.")
         EnemyRandoDesc.Header(Options.NormalEnemyOption_Size.name)
         EnemyRandoDesc.Text("This will match the size of the new enemy to the original enemy. For example, Terebra (a small enemy), when replaced with a Millesaur (a big enemy), will force the Millesaur to match the small size for that instance of it.")
     return EnemyRandoDesc

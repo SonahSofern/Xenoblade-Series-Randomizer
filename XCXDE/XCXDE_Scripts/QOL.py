@@ -76,3 +76,11 @@ def OpWep():
                 
                 
         JSONParser.CloseFile(wpData, wpFile)
+        
+def ClearEnemyWeatherCondition():
+    '''Enemies show up in all weather conditions'''
+    popFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnPopParam.json")
+    for pop in popFile.rows:
+        pop["DePopWeather"] = 0 # Does not disappear in any weather
+        pop["PopWeather"] = 4294967295 # THe bit mask for showing up in all weathers
+    popFile.Close()
