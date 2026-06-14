@@ -84,3 +84,30 @@ def ClearEnemyWeatherCondition():
         pop["DePopWeather"] = 0 # Does not disappear in any weather
         pop["PopWeather"] = 4294967295 # THe bit mask for showing up in all weathers
     popFile.Close()
+
+def EarlySkell(chosenChapter):
+    '''Users can choose what chapter they want to get the level 15 skell at and unlock skells in general'''
+    getSkellQuestID = 1662
+    chapterDict = {
+        1: 9,
+        2: 15,
+        3: 20,
+        4: 26,
+        5: 32,
+        6: 42
+    }
+    qstFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_questlist.json")
+    for qst in qstFile.rows:
+        if qst["$id"] == chapterDict[chosenChapter]:
+            qst["next_quest_a"] = getSkellQuestID
+    for qst in qstFile.rows:
+        if qst["$id"] == getSkellQuestID:
+            qst["next_quest_a"] = chapterDict[chosenChapter] + 1
+            qst["prt_quest_id"] = chapterDict[chosenChapter]
+    qstFile.Close()
+    
+# FLD_ConditionList_Scenario -> FLD_GameCondition -> FLD_NpcPopGimmick (CONDITION1 parameter)
+# So setting condition1 = 682 allows npc to show up all the time since 682 in FLD_GameCondition is during the whole game
+
+# FLD_Condition are just what a quest requires
+# ballooncond -> FLD_GameCondition

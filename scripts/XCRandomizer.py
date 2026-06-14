@@ -98,9 +98,9 @@ def CreateMainWindow(root, window, gameData:GameWindowData):
     window.add(XCFrame, text =gameData.version, image=CreateImage(f"{gameData.game}/Images/{gameData.game}Icon.png"), compound="left") 
 
     if Onefile.isOneFile:
-        bdat_path = os.path.join(sys._MEIPASS, 'Toolset', 'bdat-toolset-win64.exe')
+        bdat_path = os.path.join(sys._MEIPASS, 'toolset', 'bdat-toolset-win64.exe')
     else:
-        bdat_path = f"Toolset/bdat-toolset-win64.exe"
+        bdat_path = f"toolset/bdat-toolset-win64.exe"
 
     background = tk.Canvas(XCFrame)
     background.pack(fill="both", expand=True, padx=0, pady=0)

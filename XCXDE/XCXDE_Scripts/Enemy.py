@@ -14,10 +14,11 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     else:
         firstRun = False
     
-    ignoreKeys = ["$id", "ParamRev", "LvMin", "LvMax", "LvRev", "Exp" "ZoneUD", "Partner", "Flag(Named)", "Flag(mBoss)", "Flag(ignoreLv)", "Flag(Leader)", "AiLeader", "Flag(FAOff)", "BGMID", "NoEncountSkip", "SearchParamID", "MoveRange", "FieldPatternID", "ZoneID", "PopCost", 'PopProxyCost', "GroupID"]
+    # gameCondId controls if enemy spawns based on a condition so keep the original conditions
+    ignoreKeys = ["$id", "gameCondId", "ParamRev", "LvMin", "LvMax", "LvRev", "Exp" "ZoneUD", "Partner", "Flag(Named)", "Flag(mBoss)", "Flag(ignoreLv)", "Flag(Leader)", "AiLeader", "Flag(FAOff)", "BGMID", "NoEncountSkip", "SearchParamID", "MoveRange", "FieldPatternID", "ZoneID", "PopCost", 'PopProxyCost', "PopParamID", "GroupID"]
     # rscTestKeys = ['Resource', 'TypeFamily', 'TypeGenus', 'Material', 'RiseDescend', 'ProxyID', 'Radius', 'FightDistance', 'PermitHeight', 'RayCheckU', 'RayCheckD', 'SearchBaseBone', 'UndX', 'UndZ', 'UndMinX', 'UndMaxX', 'UndMinZ', 'UndMaxZ', 'UndDeg', 'ExArea', 'TurnAngle', 'FrontAngle', 'NoEncountSkip', 'VoDir', 'EffPack', 'EffCmn', 'Parts', 'PathMot', 'PathChr', 'Action', 'SePack', 'ClipEvent', 'Com_SE', 'Com_Eff', 'Com_Vo', 'Mflag(Vip)', 'Mflag(Map)', 'Mflag(Evt)', 'AttackID', 'AttackNum', 'HudName', 'HudOffset', '<044870FF>', '<7D67F533>']
     proxyIDs = ["ProxyID", "Mflag(Vip)", "Mflag(Map)", "Mflag(Evt)"] # Enemies need to keep their original proxy id and Mflags because in boss fights they dont spawn
-    drawDistanceThings = ["DistanceXZ", "DistanceY", "DepopDistanceXZ", "DepopDistanceY", "ReleaseDistanceXZ", "ReleaseDistanceY"]
+    drawDistanceThings = ["DistanceXZ", "DistanceY", "DepopDistanceXZ", "DepopDistanceY", "ReleaseDistanceXZ", "ReleaseDistanceY", "Radius"]
     retainNonArrangeKeys = ["ReleasePcDistanceXZ", "ReleasePcDistanceXZ", "FightDistance", "PermitHeight", "RiseDescend"] + proxyIDs + drawDistanceThings #'FlyHeight', 'SwimHeight'
     
     eneFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnList.json")
@@ -67,9 +68,9 @@ def EnemySizeHelper(enemy, chosen):
     Megafauna = 5
     
     multDict = {
-        (Megafauna, XL): 11,
-        (Megafauna, Large): 12,
-        (Megafauna, Medium): 13,
+        (Megafauna, XL): 6,
+        (Megafauna, Large): 7,
+        (Megafauna, Medium): 9,
         (Megafauna, Small): 15,
         (XL, Large): 3,
         (XL, Medium): 4,
@@ -144,7 +145,7 @@ def EnemyDesc(name):
     EnemyRandoDesc.Header(name)
     EnemyRandoDesc.Text(f"{name} are the target group to be randomized.")
     EnemyRandoDesc.Text(f"The suboption for those categories are what those enemies will be randomized into.")
-    EnemyRandoDesc.Text(f"The spinbox for each option is the weight of that category.")
+    EnemyRandoDesc.Text(f"The spinbox for each option is the weight of that category. The higher a weight the more likely a type of enemy will be chosen as a replacement enemy.")
     if name != Options.BossEnemyOption.name:
         # EnemyRandoDesc.Header(Options.NormalEnemyOption_Aggro.name)
         # EnemyRandoDesc.Text("This will leave enemy aggro with the original enemies. So that you can navigate areas in the originally balanced way. Otherwise you might have to fight many encounters to nagivate an area, or none in an area that you normally would.")
