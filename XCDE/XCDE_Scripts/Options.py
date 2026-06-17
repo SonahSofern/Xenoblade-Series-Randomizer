@@ -1,6 +1,6 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
-from XCDE.XCDE_Scripts import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales, NPC, Weapons, Items, Cutscenes, IDs, Landmarks
+from XCDE.XCDE_Scripts import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Armor, MiscQOL, Scales, NPC, Weapons, Items, IDs
 import scripts.Interactables
 
 scripts.Interactables.Game = "XCDE" 
@@ -144,7 +144,7 @@ for song in Music.AllJingles:
     song.CreateOption(JingleMusicOption, Music.UsedJingles)
 
 # QOL
-TutorialSkipsOption = Option("Tutorial Skips", QOL, "Reduces tutorials as much as possible", [lambda: Tutorials.TutorialSkips()])
+TutorialSkipsOption = Option("Tutorial Skip", QOL, "Removes tutorials", [lambda: MiscQOL.AddPlugin(TutorialSkipsOption.GetState(), "xcdeRemoveTutorials")])
 FasterLvOption = Option("EXP Boost", QOL, "Decreases level up requirements by a set amount (Recommended 3x to rush the story)", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], hasSpinBox = True, spinMin = 0, spinMax = 256, spinIncr = 1, spinDesc = "x", spinDefault=3)
 FasterSkillTrees = Option("SP Boost", QOL, "Decreases SP (skill point) requirements for skill trees", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/JsonOutputs/bdat_common/BTL_PSVskill.json"], ["point_PP"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], hasSpinBox = True, spinMin = 0, spinMax = 256, spinIncr = 1, spinDesc = "x", spinDefault=2)
 FasterArtLevels = Option("AP Boost", QOL, "Increases AP (art point) gains for art level ups",[lambda: Helper.MathmaticalColumnAdjust(["./XCDE/JsonOutputs/bdat_common/BTL_growlist.json"], ["en_ap"], [f'row[key] * {FasterLvOption.GetSpinbox()}'])], hasSpinBox = True, spinMin = 0, spinMax = 256, spinIncr = 1, spinDesc = "x", spinDefault=2)

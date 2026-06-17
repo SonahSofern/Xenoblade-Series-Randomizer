@@ -7,6 +7,11 @@ from PIL import Image, ImageTk
 from scripts import Presets, SaveLoad, ScrollPanel, PopupDescriptions, Theme, Onefile, Helper, PermalinkManagement, Seed, Interactables
 import random, subprocess, shutil, threading, traceback, time, datetime, webbrowser
 
+lastWidth = -1
+lastHeight = -1
+garbageCollectionStopper = [] # Globals to prevent garbage collection
+iconCollector = [] # Globals to prevent garbage collection
+
 class Tab():
     def __init__(self, name, outer, canvas, inner):
         self.name = name
@@ -26,11 +31,6 @@ class FilePlacer:
             self.files.append(file)
         self.location = location
         self.newName = newName
-
-lastWidth = -1
-lastHeight = -1
-garbageCollectionStopper = [] # Globals to prevent garbage collection
-iconCollector = [] # Globals to prevent garbage collection
 
 def CheckIfUserNeedsUpdate(version, root):
     '''Checks the repos latest version tag to see if we have a new release'''

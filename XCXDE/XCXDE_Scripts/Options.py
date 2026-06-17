@@ -131,22 +131,21 @@ BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, s
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True, spinDefault=12)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True, spinDefault=30)
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=False, hasSpinBox=True, spinDefault=1)
-# BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
 
-
+# Character
 CharacterOption = Option("Party Members", Character, "Randomizes party members", [lambda: PartyMem.Members()], descData=lambda: PartyMem.PartyMemDesc(CharacterOption.name, CharacterOption_Duplicates.name))
 CharacterOption_Duplicates = SubOption("Allow Duplicates", CharacterOption)
 CharacterOption_BalanceGear = SubOption("Balance Starting Gear", CharacterOption)
 ArtsOption = Option("Arts", Character, "Randomizes various attributes of arts", descData=lambda: Art.ArtDesc(ArtsOption_LearnOrder.name, ArtsOption_Strength.name))
 ArtsOption_LearnOrder = SubOption("Arts Learned", ArtsOption, [lambda: Art.ArtUnlockOrder()])
 ArtsOption_Strength = SubOption("Art Strength", ArtsOption, [lambda: Art.ArtStatRando(ArtsOption_Strength.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinDefault=50)
+SkillOption = Option("Skill", Character, "Randomizes various attributes of skills", descData=lambda: Skill.SkillDesc(SkillOption_Strength.name))
+SkillOption_LearnOrder = SubOption("Skills Learned", SkillOption, [lambda: Skill.SkillOrder()])
+SkillOption_Strength = SubOption("Skill Strength", SkillOption, [lambda: Skill.SkillEnhancements(SkillOption_Strength.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinDefault=50)
 PlayerGear = Option("Ground Gear", Character, "Randomizes the stats of ground gear", descData=lambda: Gear.GearDesc(PlayerGear_Arm.name, PlayerGear_Wep.name))
 PlayerGear_Arm = SubOption("Armor Stats", PlayerGear, [lambda: Gear.PlayerArmorStats(PlayerGear_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 PlayerGear_Wep = SubOption("Weapon Stats", PlayerGear, [lambda: Gear.PlayerWepStats(PlayerGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 
-SkillOption = Option("Skill", Character, "Randomizes various attributes of skills", descData=lambda: Skill.SkillDesc(SkillOption_Strength.name))
-SkillOption_LearnOrder = SubOption("Skills Learned", SkillOption, [lambda: Skill.SkillOrder()])
-SkillOption_Strength = SubOption("Skill Strength", SkillOption, [lambda: Skill.SkillEnhancements(SkillOption_Strength.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinDefault=50)
 
 SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells.", [lambda: Gear.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellGear = Option("Skell Gear", Skells, "Randomizes the stats of skell gear", descData=lambda: Gear.GearDesc(SkellGear_Arm.name, SkellGear_Wep.name))
@@ -156,6 +155,7 @@ SkellGear_Wep = SubOption("Weapon Stats", SkellGear, [lambda: Gear.SkellWepStats
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_MainQuestReqs = SubOption("Skip Chapter Prerequisites", ShortcutsOption, [lambda: q.EasyStoryPrerequisites()])
 ShortcutsOption_SkellHell = SubOption("Skip Skell License Exam", ShortcutsOption, [lambda: q.SkellExamSkip()])
+EarlySkellOption = Option("Early Skell", QOL, "Skells are unlocked at the start of the chosen chapter", [lambda: q.EarlySkell(EarlySkellOption.GetSpinbox())], hasSpinBox=True, spinDefault= 2, spinMax=6, spinMin=2, spinIncr=1 ,spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
 SkellFlightOption = Option("Early Flight Module", QOL, "Flight Module is unlocked immediately after getting skells", [lambda: q.EarlyFlight()]) # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
 
 FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_Growlist.json"], ["LevelExp"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinMin=2, spinIncr = 1, spinDesc = "x Faster")
@@ -163,6 +163,7 @@ FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each clas
 YellowBubbleOption = Option("Info Range", QOL, "Increased range for collecting info bubbles", [lambda: q.InfoRangeIncrease(YellowBubbleOption.GetSpinbox(), YellowBubbleOption_Mute.GetState())], hasSpinBox=True, spinDesc="x Range", spinDefault=15, spinMin=2)
 YellowBubbleOption_Mute = SubOption("Mute Callouts", YellowBubbleOption)
 EnemyWeatherQOLOption = Option("Weather Conditions", QOL, "Removes weather conditions from enemies", [lambda: q.ClearEnemyWeatherCondition()])
+# EasyGemCraftingOption = Option("Gem Crafting", QOL, "Makes miranium the only requirement for crafting gems to avoid material grinding", [lambda: q.EasyGemCrafting()])
 
 # SkellLiscOption = Option("Skell License Unlock", QOL, "Sets the unlock chapter for skells")
 # SkellLiscOption_ChSelect = SubOption("Fixed Unlock", SkellLiscOption, hasSpinBox=True, spinMax=12, spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/FLD_questlist.html#1143

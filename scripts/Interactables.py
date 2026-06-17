@@ -85,7 +85,7 @@ class Option():
             self.spinBoxVal = IntVar(value=self.spinDefault)
             self.spinBoxObj = ttk.Spinbox(optionPanel, validate="key", from_=self.spinBoxMin, to=self.spinBoxMax, textvariable=self.spinBoxVal, wrap=True, width=self.spinWidth, increment=self.spinIncr, justify="right")
             self.spinBoxObj.configure(validatecommand=(self.spinBoxObj.register(validateSpinbox), "%P", self.spinBoxMin, self.spinBoxMax))
-            self.spinBoxObj.bind("<FocusOut>", lambda e, val=self.spinBoxVal: EmptyboxHandler(val))
+            self.spinBoxObj.bind("<FocusOut>", lambda e, val=self.spinBoxVal: EmptyboxHandler(val, self.spinBoxMin))
             self.spinBoxObj.grid(row=rowIncrement, column = 3, padx=(15,0))
             self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w", style=f"{style}.TLabel")
             self.spinBoxLabel.grid(row=rowIncrement, column = 4, sticky="w", padx=0)
@@ -104,7 +104,7 @@ class Option():
                 sub.spinBoxVal = IntVar(value=sub.spinDefault)
                 sub.spinBoxObj = ttk.Spinbox(optionPanel, validate="key", from_=sub.spinBoxMin, to=sub.spinBoxMax, textvariable=sub.spinBoxVal, wrap=True, width=sub.spinWidth, increment=sub.spinIncr, justify="right")
                 sub.spinBoxObj.configure(validatecommand=(sub.spinBoxObj.register(validateSpinbox), "%P", sub.spinBoxMin, sub.spinBoxMax))
-                sub.spinBoxObj.bind("<FocusOut>", lambda e, val=sub.spinBoxVal: EmptyboxHandler(val))
+                sub.spinBoxObj.bind("<FocusOut>", lambda e, val=sub.spinBoxVal: EmptyboxHandler(val, sub.spinBoxMin))
                 sub.spinBoxObj.grid(row=rowIncrement, column=1, padx=(20,0), pady=(0,0), sticky="w")
                 sub.spinBoxLabel = ttk.Label(optionPanel, text=sub.spinDesc, style=f"{style}NoMargin.TLabel")
                 sub.spinBoxLabel.grid(row=rowIncrement, column=1, sticky="w", padx=(80,0))
@@ -156,12 +156,12 @@ class Option():
     def GetState(self):
         return self.checkBoxVal.get()
 
-def EmptyboxHandler(val):
+def EmptyboxHandler(val, minVal):
     '''Because you can delete the entire string in a box if you defocus it while its empty it makes its value 0'''
     try:
         val.get() # If we cannot get the value just safely set it to 0
     except:
-        val.set(0)
+        val.set(minVal)
 
 def validateSpinbox(input, min, max):
     '''Because tkinters handling of spinboxes doesn't work when typing values, made one to accomodate typing in values'''
