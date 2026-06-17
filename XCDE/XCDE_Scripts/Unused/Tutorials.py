@@ -1,6 +1,6 @@
 import json
 from scripts import JSONParser
-
+# Skyline replaced this
 
 def TutorialSkips(): 
     UnskippableTutorials = [59, 61, 62, 64, 65, 105, 106, 107, 108] # IDs in MNU_ttrl

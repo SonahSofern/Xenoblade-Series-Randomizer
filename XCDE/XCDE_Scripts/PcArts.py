@@ -1,5 +1,5 @@
 import json, random
-from XCDE.XCDE_Scripts import Options
+from XCDE.XCDE_Scripts import Options, IDs
 import scripts.Helper, scripts.JSONParser, scripts.PopupDescriptions
 
 TalentArts = [102,101,100,44,99,43,98,42,62,97,154,1,2,19,36,41,61,79,96,119,120,121,122,123,124,125,126,127,153,171,152] # Need to shuffle these seperately for various reasons
@@ -175,18 +175,56 @@ def Power(art):
     
 # Fixes art books
 def MatchArtBooks(artData):
-    with open("./XCDE/JsonOutputs/bdat_common/ITM_artslist.json", 'r+', encoding='utf-8') as artBookFile:
-        artBookData = json.load(artBookFile)
-        for book in artBookData["rows"]:
-            for art in artData["rows"]:
-                if art["$id"] == book["get_arts"]:
-                    book["pc_type"] = art["pc"]
+    
+    descDict = { # pcid: artDescID (Intermediate, Advanced, Master)
+        1: "Shulk", # Shulk
+        2: "Reyn", # Reyn
+        3: "Fiora", # Homs Fiora (Need to make this one)
+        4: "Dunban", # Dunban
+        5: "Sharla", # Sharla
+        6: "Riki", # Riki
+        7: "Melia", # Melia
+        8: "M. Fiora" # Mecha Fiora
+    }
+    
+    # Fixes the icons and when arts unlock
+    artBookFile = scripts.JSONParser.File("XCDE/JsonOutputs/bdat_common/ITM_artslist.json")
+    for book in artBookFile.rows:
+        for art in artData["rows"]:
+            if art["$id"] == book["get_arts"]:
+                book["pc_type"] = art["pc"]
+                break
+    
+    # Fix the names of the descriptions
+    itemFile = scripts.JSONParser.File("XCDE/JsonOutputs/bdat_common/ITM_itemlist.json")
+    artDescFile = scripts.JSONParser.File("XCDE/JsonOutputs/bdat_menu_item/MNU_item_mes_b.json")
+    artDescTextFile = scripts.JSONParser.File("XCDE/JsonOutputs/bdat_menu_item_ms/MNU_item_mes_b_ms.json")
+        
+    # Assign new name to the description
+    for itm in itemFile.rows:
+        if itm["$id"] not in IDs.ArtBookIDs: continue
+        
+        for book in artBookFile.rows:
+            if book["$id"] != itm["itemID"]: continue
+                
+            for desc in artDescFile.rows:
+                if desc["$id"] != itm["comment"]: continue
+
+                for text in artDescTextFile.rows:
+                    if text["$id"] != desc["comment"]: continue
+                    
+                    # Replace the name with the new name
+                    oldComment:list[str] = text["name"].split()
+                    oldName = oldComment[2] # Its always the 3rd word that is the name
+                    text["name"] = text["name"].replace(oldName, descDict[book["pc_type"]])
                     break
-    # with open("./XCDE/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as itemFile: currently dont care enough to rename the names in the descriptions
-    #     with open("./XCDE/JsonOutputs/bdat_menu_item/MNU_item_mes_b.json", 'r+', encoding='utf-8') as artDescFile:
-    #         with open("./XCDE/JsonOutputs/bdat_common/ITM_artslist.json", 'r+', encoding='utf-8') as artsListFile:
-    #             itemData = json.load(itemFile)
-    #             for art in artsListFile["rows"]:
+                break
+            break
+        
+    artBookFile.Close()
+    itemFile.Close()
+    artDescFile.Close()
+    artDescTextFile.Close()
                 
             
                 

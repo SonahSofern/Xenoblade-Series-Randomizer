@@ -1,11 +1,17 @@
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))) # Allows us to use the scripts folder as a module
 from tkinter import PhotoImage, ttk
+from pathlib import Path
 from tkinter import *
 import tkinter as tk
 from PIL import Image, ImageTk
 from scripts import Presets, SaveLoad, ScrollPanel, PopupDescriptions, Theme, Onefile, Helper, PermalinkManagement, Seed, Interactables
 import random, subprocess, shutil, threading, traceback, time, datetime, webbrowser
+
+lastWidth = -1
+lastHeight = -1
+garbageCollectionStopper = [] # Globals to prevent garbage collection
+iconCollector = [] # Globals to prevent garbage collection
 
 class Tab():
     def __init__(self, name, outer, canvas, inner):
@@ -27,10 +33,31 @@ class FilePlacer:
         self.location = location
         self.newName = newName
 
-lastWidth = -1
-lastHeight = -1
-garbageCollectionStopper = [] # Globals to prevent garbage collection
-iconCollector = [] # Globals to prevent garbage collection
+    def AddFileToOutput(self, output):
+        try:
+            outputFolder = os.path.join(output, self.location)           
+            os.makedirs(outputFolder, exist_ok=True)
+
+            src = random.choice(self.files)
+
+            if os.path.isdir(src):  # Handle Folders
+                destPath = os.path.join(outputFolder, self.newName or os.path.basename(src))
+                shutil.copytree(src, destPath, dirs_exist_ok=True)
+
+            else: # Handle file
+                destPath = os.path.join(outputFolder, self.newName or os.path.basename(src))
+                shutil.copy(src, destPath)
+        except Exception as e:
+            print(e)
+
+def ClearSkylinePlugins(pluginsLocation):
+    '''Clears the plugins folder upon generating a new seed, in case options were changed (usually the rando just replaces EVERY file in the output location, but if you were to turn off a file placer setting it wouldnt delete the previous folder)'''
+    base_path = Path(pluginsLocation).resolve()
+    targetDir = (base_path / ".." / "skyline" / "plugins").resolve()
+    if len(targetDir.parts) <= 2: # If the path is too small dont delete, safety measure
+        return
+    if os.path.exists(targetDir):
+        shutil.rmtree(targetDir)
 
 def CheckIfUserNeedsUpdate(version, root):
     '''Checks the repos latest version tag to see if we have a new release'''
@@ -77,7 +104,7 @@ class GameWindowData:
         self.textFolderName = textFolderName
         self.extraArgs = extraArgs
         self.backgroundImages = backgroundImages
-        self.extraFiles = extraFiles
+        self.extraFiles:list = extraFiles
         self.setupHelpDesc = setupHelpDesc
         self.outputRomfsSpec = outputRomfsSpec
 
@@ -98,9 +125,9 @@ def CreateMainWindow(root, window, gameData:GameWindowData):
     window.add(XCFrame, text =gameData.version, image=CreateImage(f"{gameData.game}/Images/{gameData.game}Icon.png"), compound="left") 
 
     if Onefile.isOneFile:
-        bdat_path = os.path.join(sys._MEIPASS, 'Toolset', 'bdat-toolset-win64.exe')
+        bdat_path = os.path.join(sys._MEIPASS, 'toolset', 'bdat-toolset-win64.exe')
     else:
-        bdat_path = f"Toolset/bdat-toolset-win64.exe"
+        bdat_path = f"toolset/bdat-toolset-win64.exe"
 
     background = tk.Canvas(XCFrame)
     background.pack(fill="both", expand=True, padx=0, pady=0)
@@ -240,7 +267,7 @@ def resize_bg(event, root, bg_image, background):
 
         threading.Thread(target=resize_and_update, daemon=True).start()
 
-def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat_path, randoSeedEntry, JsonOutput, outputDirVar, OptionList):
+def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat_path, randoSeedEntry, JsonOutput, outputDirVar, OptionList:list[Interactables.Option]):
     def ThreadedRandomize():
         if outputDirVar.get().strip() == "":
             errorMsgObj = PopupDescriptions.Description()
@@ -303,13 +330,19 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
             return
 
         # Runs all randomization
-        for command in gameData.preCommands: 
-            command()
+        for option in gameData.preCommands: 
+            option()
             
         runLog = RunOptions(gameData.title, OptionList, randoProgressDisplay, root, randoSeedEntry.get(), pb)
         
-        for command in gameData.postCommands: # Runs post commands like show title screen
-            command()
+        for option in gameData.postCommands: # Runs post commands like show title screen
+            option()
+        
+        extraFilePlaced = [] # Conditionally some files (skyline plugins are placed)
+        for option in OptionList: # Commands that add files to the output (I want to rework this entire logic but would be time consuming)
+            if (len(option.filePlaceCommands) > 0) and option.GetState():
+                for command in option.filePlaceCommands:
+                    extraFilePlaced.append(command())
             
         randoProgressDisplay.config(text="Packing BDATs")
     
@@ -326,7 +359,11 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
             os.makedirs(f"{outSpot}/{gameData.textFolderName}", exist_ok=True)
             for file in gameData.subFolderNames:
                 shutil.move(f"{outSpot}/{file}.bdat", f"{outSpot}/{gameData.textFolderName}/{file}.bdat")
-            AddFileToOutput(outSpot, gameData.extraFiles)
+            
+            # Clear skyline/plugins folder
+            ClearSkylinePlugins(outSpot)
+            for file in gameData.extraFiles + extraFilePlaced:
+                file.AddFileToOutput(outSpot)
             
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
@@ -334,7 +371,7 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
             runLog()
             print(f"Finished at {datetime.datetime.now()}")
         except:
-            # print(f"{traceback.format_exc()}") # shows the full error
+            print(f"{traceback.format_exc()}") # shows the full error
             randoProgressDisplay.config(text="Failed Outputs")
 
         # Re-Enables Randomize Button
@@ -342,24 +379,6 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
         
 
     threading.Thread(target=ThreadedRandomize).start()
-
-def AddFileToOutput(output, files):
-    try:
-        for file in files:
-            outputFolder = os.path.join(output, file.location)
-            os.makedirs(outputFolder, exist_ok=True)
-
-            src = random.choice(file.files)
-
-            if os.path.isdir(src):  # Handle Folders
-                destPath = os.path.join(outputFolder, file.newName or os.path.basename(src))
-                shutil.copytree(src, destPath, dirs_exist_ok=True)
-
-            else: # Handle file
-                destPath = os.path.join(outputFolder, file.newName or os.path.basename(src))
-                shutil.copy(src, destPath)
-    except Exception as e:
-        print(e)
         
 def SumTotalCommands(OptionList):
     TotalCommands = 1

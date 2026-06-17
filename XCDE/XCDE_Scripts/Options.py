@@ -1,9 +1,9 @@
 from scripts.Interactables import Option, SubOption
-from scripts import Helper
-from XCDE.XCDE_Scripts import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Tutorials, Armor, MiscQOL, Scales, NPC, Weapons, Items, Cutscenes, IDs, Landmarks
+from scripts import Helper, XCRandomizer
+from XCDE.XCDE_Scripts import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Armor, MiscQOL, Scales, NPC, Weapons, Items, IDs
 import scripts.Interactables
-
-scripts.Interactables.Game = "XCDE" 
+game = "XCDE"
+scripts.Interactables.Game = game
 
 General = 1
 Character  = 2
@@ -49,7 +49,6 @@ CollectapediaOptions_Weapons = SubOption("Weapons", CollectapediaOptions, hasSpi
 CollectapediaOptions_Gems = SubOption("Gems", CollectapediaOptions, hasSpinBox=True, spinDefault=15)
 CollectapediaOptions_ArtBooks = SubOption("Art Books", CollectapediaOptions, hasSpinBox=True, spinDefault=10)
 
-
 GiantsChestOption = Option("Giants Chests", General, "Randomizes the contents of Giants Chests into the chosen types", [lambda: Items.GiantsChests()], descData=lambda: Items.GiantsChestsDesc())
 GiantsChestOptions_Collectables = SubOption("Collectables", GiantsChestOption, hasSpinBox=True, spinDesc=weightsSpinDescription, defState=False, spinDefault=0)
 GiantsChestOptions_Materials = SubOption("Materials", GiantsChestOption, hasSpinBox=True, spinDefault=1)
@@ -66,7 +65,6 @@ QuestRewardsOptions_Weapons = SubOption("Weapons", QuestRewardsOption, hasSpinBo
 QuestRewardsOptions_Gems = SubOption("Gems", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
 QuestRewardsOptions_ArtBooks = SubOption("Art Books", QuestRewardsOption, hasSpinBox=True, spinDefault=2)
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/FLD_valpoplist.html#1 Red orbs found here not sure what to do with them yet
-
 
 # Enemy
 NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: EnemiesScript.Enemies(IDs.NormalEnemies, NormalEnemyOption, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption_Size.GetState())], descData=lambda: EnemiesScript.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True)
@@ -145,11 +143,13 @@ for song in Music.AllJingles:
     song.CreateOption(JingleMusicOption, Music.UsedJingles)
 
 # QOL
-TutorialSkipsOption = Option("Tutorial Skips", QOL, "Reduces tutorials as much as possible", [lambda: Tutorials.TutorialSkips()])
-FasterLvOption = Option("EXP Boost", QOL, "Decreases level up requirements by a set amount (Recommended 3x to rush the story).", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], hasSpinBox = True, spinMin = 0, spinMax = 256, spinIncr = 1, spinDesc = "x", spinDefault=3)
+TutorialSkipsOption = Option("Tutorial Skip", QOL, "Removes tutorials", filePlaceCommands=[lambda: XCRandomizer.FilePlacer(["Loader/plugins/xcdeRemoveTutorials.nro"], "../skyline/plugins", game=game)])
+FasterLvOption = Option("EXP Boost", QOL, "Decreases level up requirements by a set amount (Recommended 3x to rush the story)", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], hasSpinBox = True, spinMin = 0, spinMax = 256, spinIncr = 1, spinDesc = "x", spinDefault=3)
 FasterSkillTrees = Option("SP Boost", QOL, "Decreases SP (skill point) requirements for skill trees", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/JsonOutputs/bdat_common/BTL_PSVskill.json"], ["point_PP"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], hasSpinBox = True, spinMin = 0, spinMax = 256, spinIncr = 1, spinDesc = "x", spinDefault=2)
 FasterArtLevels = Option("AP Boost", QOL, "Increases AP (art point) gains for art level ups",[lambda: Helper.MathmaticalColumnAdjust(["./XCDE/JsonOutputs/bdat_common/BTL_growlist.json"], ["en_ap"], [f'row[key] * {FasterLvOption.GetSpinbox()}'])], hasSpinBox = True, spinMin = 0, spinMax = 256, spinIncr = 1, spinDesc = "x", spinDefault=2)
-MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free quickstep gems.", [lambda: MiscQOL.Quickstep()], hasSpinBox=True, spinDesc="% Speed", spinMax=100)
+MovespeedOption = Option("Quickstep", QOL, "The gem man will gift you two free quickstep gems", [lambda: MiscQOL.Quickstep()], hasSpinBox=True, spinDesc="% Speed", spinMax=100)
+AreaAffinityOption = Option("Easy Affinity", QOL, "Area affinity is maxed out after any quest", [lambda: MiscQOL.QuestAffinity()])
+
 
 # CutsceneSkipOption = Option("Cutscene Skips", QOL, "Skips all possible cutscenes", [lambda: Cutscenes.CutsceneSkipper()])
 

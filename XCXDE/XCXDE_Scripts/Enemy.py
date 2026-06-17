@@ -6,7 +6,7 @@ StaticEnemyData:list[Helper.RandomGroup] = []
 
 # Enemy Names for map hexs should be updated with their replacement
 
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSize = False, isBossGroupBalancing = False, isMatchStats = False, finalBoss = False):
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSize = False):
     global StaticEnemyData
     
     if StaticEnemyData == []:
@@ -14,12 +14,12 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     else:
         firstRun = False
     
-    ignoreKeys = ["$id", "LvMin", "LvMax", "LvRev", "Exp" "ZoneUD", "Partner", "Flag(Named)", "Flag(mBoss)", "Flag(ignoreLv)", "Flag(Leader)", "AiLeader", "Flag(FAOff)", "BGMID", "NoEncountSkip", "SearchParamID", "MoveRange", "FieldPatternID", "ZoneID", "PopCost", 'PopProxyCost', "GroupID"]
+    # gameCondId controls if enemy spawns based on a condition so keep the original conditions
+    ignoreKeys = ["$id", "gameCondId", "ParamRev", "LvMin", "LvMax", "LvRev", "Exp" "ZoneUD", "Partner", "Flag(Named)", "Flag(mBoss)", "Flag(ignoreLv)", "Flag(Leader)", "AiLeader", "Flag(FAOff)", "BGMID", "NoEncountSkip", "SearchParamID", "MoveRange", "FieldPatternID", "ZoneID", "PopCost", 'PopProxyCost', "PopParamID", "GroupID"]
     # rscTestKeys = ['Resource', 'TypeFamily', 'TypeGenus', 'Material', 'RiseDescend', 'ProxyID', 'Radius', 'FightDistance', 'PermitHeight', 'RayCheckU', 'RayCheckD', 'SearchBaseBone', 'UndX', 'UndZ', 'UndMinX', 'UndMaxX', 'UndMinZ', 'UndMaxZ', 'UndDeg', 'ExArea', 'TurnAngle', 'FrontAngle', 'NoEncountSkip', 'VoDir', 'EffPack', 'EffCmn', 'Parts', 'PathMot', 'PathChr', 'Action', 'SePack', 'ClipEvent', 'Com_SE', 'Com_Eff', 'Com_Vo', 'Mflag(Vip)', 'Mflag(Map)', 'Mflag(Evt)', 'AttackID', 'AttackNum', 'HudName', 'HudOffset', '<044870FF>', '<7D67F533>']
-    proxyIDs = ['ProxyID'] # Enemies need to keep their original proxy id because in boss fights they dont spawn
-    rscKeys = [] + proxyIDs
-    drawDistanceThings = ["DistanceXZ", "DistanceY", "DepopDistanceXZ", "DepopDistanceY", "ReleaseDistanceXZ", "ReleaseDistanceY"]
-    retainNonArrangeKeys = ["ReleasePcDistanceXZ", "ReleasePcDistanceXZ", "FightDistance", "PemitHeight", "RiseDescend"] + rscKeys + drawDistanceThings #'FlyHeight', 'SwimHeight'
+    proxyIDs = ["ProxyID", "Mflag(Vip)", "Mflag(Map)", "Mflag(Evt)"] # Enemies need to keep their original proxy id and Mflags because in boss fights they dont spawn
+    drawDistanceThings = ["DistanceXZ", "DistanceY", "DepopDistanceXZ", "DepopDistanceY", "ReleaseDistanceXZ", "ReleaseDistanceY", "Radius"]
+    retainNonArrangeKeys = ["ReleasePcDistanceXZ", "ReleasePcDistanceXZ", "FightDistance", "PermitHeight", "RiseDescend"] + proxyIDs + drawDistanceThings #'FlyHeight', 'SwimHeight'
     
     eneFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnList.json")
     paramFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnParam.json")
@@ -52,6 +52,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
 
     for group in StaticEnemyData:
         group.RefreshCurrentGroup()
+    
+    NerfSummonEnemies()
         
     eneFile.Close()
     paramFile.Close()
@@ -66,9 +68,9 @@ def EnemySizeHelper(enemy, chosen):
     Megafauna = 5
     
     multDict = {
-        (Megafauna, XL): 7,
-        (Megafauna, Large): 9,
-        (Megafauna, Medium): 12,
+        (Megafauna, XL): 6,
+        (Megafauna, Large): 7,
+        (Megafauna, Medium): 9,
         (Megafauna, Small): 15,
         (XL, Large): 3,
         (XL, Medium): 4,
@@ -115,16 +117,38 @@ def HpLimitEffects(en):
                 if en[f"EnhanceID{i}"] == 0:
                     slot = i
             en[f"EnhanceID{slot}"] = NoKillEnhancement
+   
+
+# A script to handle summoned enemy levels
+
+# After enemy randomization
+# Check all enemies that have summon arts
+# Create a new summon art for each
+# Create a new summon enemy for each with matching level to the summoning enemy
+def NerfSummonEnemies():
+    # cannot find the link to perform the above concept. It is probably hard coded to each art. Instead just setting level of all summoned enemies to 1
+    eneFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnList.json")
+    for en in eneFile.rows:
+        if en["$id"] in IDs.SummonMonsterIDs:
+            # Put summons levels to 1 because there is currently no way to balance them
+            en["LvMin"] = 1
+            en["LvMax"] = 1 
+            
+            # Shrink summons in case its a small arena
+            en["ScaleMin"] = en["ScaleMin"] // 3
+            en["ScaleMax"] = en["ScaleMax"] // 3   
+    eneFile.Close()
+   
                                                                                                                                                                                                                                                                                            
 def EnemyDesc(name):
     EnemyRandoDesc = PopupDescriptions.Description()
     EnemyRandoDesc.Header(name)
     EnemyRandoDesc.Text(f"{name} are the target group to be randomized.")
     EnemyRandoDesc.Text(f"The suboption for those categories are what those enemies will be randomized into.")
-    EnemyRandoDesc.Text(f"The spinbox for each option is the weight of that category.")
+    EnemyRandoDesc.Text(f"The spinbox for each option is the weight of that category. The higher a weight the more likely a type of enemy will be chosen as a replacement enemy.")
     if name != Options.BossEnemyOption.name:
-        EnemyRandoDesc.Header(Options.NormalEnemyOption_Aggro.name)
-        EnemyRandoDesc.Text("This will leave enemy aggro with the original enemies. So that you can navigate areas in the originally balanced way. Otherwise you might have to fight many encounters to nagivate an area, or none in an area that you normally would.")
+        # EnemyRandoDesc.Header(Options.NormalEnemyOption_Aggro.name)
+        # EnemyRandoDesc.Text("This will leave enemy aggro with the original enemies. So that you can navigate areas in the originally balanced way. Otherwise you might have to fight many encounters to nagivate an area, or none in an area that you normally would.")
         EnemyRandoDesc.Header(Options.NormalEnemyOption_Size.name)
         EnemyRandoDesc.Text("This will match the size of the new enemy to the original enemy. For example, Terebra (a small enemy), when replaced with a Millesaur (a big enemy), will force the Millesaur to match the small size for that instance of it.")
     return EnemyRandoDesc

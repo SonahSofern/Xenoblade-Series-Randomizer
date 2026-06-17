@@ -1,8 +1,9 @@
 from XCXDE.XCXDE_Scripts import SeedNames, Options
 import scripts.XCRandomizer, scripts.JSONParser
-Version = "1.0.0"
+Version = "1.1.0"
 Game = "XCXDE"
 Title = "Xenoblade Chronicles X DE"
+outputPath = "contents/0100453019AA8000/romfs/bdat"
 backgrounds = ["flower.jpg", "sunset.jpg", "purple.jpg"]
 postCommands = []
 mainFolderNames = ["common"]
@@ -16,8 +17,6 @@ extraArgs = ["--hashes", scripts.XCRandomizer.Onefile.Directory("XCXDE/Loader/ha
 
 TitlescreenSplash = scripts.XCRandomizer.FilePlacer(["Images/Logos/mainmen.wilay"],  "../ui/stream/us", "strm_title_thumb001.wilay", "XCXDE")
 Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../../../", game=Game)
-
-outputRomfsPath = "romfs/mod/bdat"
 
 postCommands = [lambda: ShowTitleScreenText()]
 
@@ -35,9 +34,7 @@ def XCXDEHelp():
     descData.Tag("Step 1")
     descData.Text("Choose your output location for the program. This is where your game will load the randomized files from.", anchor="w")
     descData.Image("outputLocation.png", "XCDE", 800)
-    descData.Text("Your path should look similar to this:\nRYUJINX: C:/Users/yourName/AppData/Roaming/Ryujinx/mods/contents/0100453019AA8000\nCONSOLE: This PC/Nintendo Switch/SD Card/atmosphere/contents/0100453019AA8000 (This is on your microsd card)", anchor="w")
-    descData.Text("The 0100453019AA8000 folder might not exist yet in that location, go ahead and create it if so.")
-    descData.Text("If you're using a different emulator feel free to ask about the paths on discord, I have not tested with all of them.")
+    descData.Text("Your output path should be the '"'atmosphere'"' folder of whatever platform you are playing on (emulators and console have this).\n\n e.g. C:/Users/your_name/AppData/Roaming/Ryujinx/sdcard/atmosphere", anchor="w")
     descData.Tag("Step 2")
     descData.Text("Choose your preferred settings, then click the randomize button.", anchor="w")
     descData.Text(f"If you want to know more about a setting you can click on its description marked by {Options.scripts.Interactables.DescriptionIndicator} (not all settings have descriptions).", anchor="w")
@@ -50,4 +47,4 @@ def XCXDEHelp():
     return descData
 
 
-WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, [], mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, extraArgs=extraArgs, textFolderName=textFolderName, extraFiles=[Exefs, TitlescreenSplash], backgroundImages=backgrounds, outputRomfsSpec=outputRomfsPath, setupHelpDesc=lambda: XCXDEHelp())
+WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, [], mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, extraArgs=extraArgs, textFolderName=textFolderName, extraFiles=[Exefs, TitlescreenSplash], backgroundImages=backgrounds, outputRomfsSpec=outputPath, setupHelpDesc=lambda: XCXDEHelp())

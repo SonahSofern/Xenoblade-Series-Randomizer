@@ -79,24 +79,40 @@ def ArtOrder():
     SniperArtIDs = Helper.RandomGroup([17,18,19,20,21,22,23,125,126,158])
     
     # Classes
+    # Plus Classes use alternate weapons
     Drifter = XCXClass(KnifeArtsIDs, AssaultRifleArtIDs, [1])
     Striker = XCXClass(LongswordArtIDs, AssaultRifleArtIDs, [2])
-    SamuraiGunner = XCXClass(LongswordArtIDs, AssaultRifleArtIDs, [3, 21, 22])
-    Duelist = XCXClass(LongswordArtIDs, AssaultRifleArtIDs, [4, 17, 37])
-    ShieldTrooper = XCXClass(ShieldArtIDs, GatlingGunArtIDs, [5, 18, 20, 28])
+    SamuraiGunner = XCXClass(LongswordArtIDs, AssaultRifleArtIDs, [3, 22])
+    SamuraiGunnerPlusGat = XCXClass(LongswordArtIDs, GatlingGunArtIDs, [21])
+    Duelist = XCXClass(LongswordArtIDs, AssaultRifleArtIDs, [4])
+    DuelistPlusGat = XCXClass(LongswordArtIDs, GatlingGunArtIDs, [17])
+    DuelistPlusSniper = XCXClass(LongswordArtIDs, SniperArtIDs, [37])
+    ShieldTrooper = XCXClass(ShieldArtIDs, GatlingGunArtIDs, [5, 28])
+    ShieldTrooperPlusPsy = XCXClass(ShieldArtIDs, PsychoLauncherArtIDs, [18])
+    ShieldTrooperPlusAssault = XCXClass(ShieldArtIDs, AssaultRifleArtIDs, [20])
     BastionWarrior = XCXClass(ShieldArtIDs, GatlingGunArtIDs, [6])
     Commando = XCXClass(DualSwordsArtIDs, DualGunsArtIDs, [7])
-    WingedViper = XCXClass(DualSwordsArtIDs, DualGunsArtIDs, [8, 26, 31])
-    FullMetalJaguar = XCXClass(DualSwordsArtIDs, DualGunsArtIDs, [9, 27, 35])
-    PartisanEagle = XCXClass(JavelinArtIDs, SniperArtIDs, [10, 19, 25, 32, 36])
+    WingedViper = XCXClass(DualSwordsArtIDs, DualGunsArtIDs, [8, 26])
+    WingedViperPlusPsy = XCXClass(DualSwordsArtIDs, PsychoLauncherArtIDs, [31])
+    FullMetalJaguar = XCXClass(DualSwordsArtIDs, DualGunsArtIDs, [9, 27])
+    FullMetalJaguarPlusPsy = XCXClass(DualSwordsArtIDs, PsychoLauncherArtIDs, [35])
+    PartisanEagle = XCXClass(JavelinArtIDs, SniperArtIDs, [10, 19, 25])
+    PartisanEaglePlusAssault = XCXClass(JavelinArtIDs, AssaultRifleArtIDs, [32])
+    PartisanEaglePlusDual = XCXClass(JavelinArtIDs, DualGunsArtIDs, [36])
     AstralCrusader = XCXClass(JavelinArtIDs, SniperArtIDs, [11])
     Enforcer = XCXClass(KnifeArtsIDs, RaygunArtIDs, [12])
-    Psycorrupter = XCXClass(KnifeArtsIDs, RaygunArtIDs, [13, 29, 30, 33, 34])
+    Psycorrupter = XCXClass(KnifeArtsIDs, RaygunArtIDs, [13, 34])
+    PsycorrupterPlusDual = XCXClass(KnifeArtsIDs, DualGunsArtIDs, [29])
+    PsycorrupterPlusAssault = XCXClass(KnifeArtsIDs, AssaultRifleArtIDs, [30])
+    PsycorrupterPlusPsy = XCXClass(KnifeArtsIDs, PsychoLauncherArtIDs, [33])
     Mastermind = XCXClass(KnifeArtsIDs, RaygunArtIDs, [14])
-    BlastFencer = XCXClass(PhotonSaberArtIDs, PsychoLauncherArtIDs, [15, 23, 24])
+    BlastFencer = XCXClass(PhotonSaberArtIDs, PsychoLauncherArtIDs, [15])
+    BlastFencerPlusRay = XCXClass(PhotonSaberArtIDs, RaygunArtIDs, [23, 24])
     GalacticKnight = XCXClass(PhotonSaberArtIDs, PsychoLauncherArtIDs, [16, 38])
+    GalacticKnightPlusRay = XCXClass(PhotonSaberArtIDs, RaygunArtIDs, [38])
     
-    AllClasses:list[XCXClass] = [Drifter, Striker, SamuraiGunner, Duelist, ShieldTrooper, BastionWarrior, Commando, WingedViper, FullMetalJaguar, PartisanEagle, AstralCrusader, Enforcer, Psycorrupter, Mastermind, BlastFencer, GalacticKnight]
+    PlusClasses = [SamuraiGunnerPlusGat, DuelistPlusGat, DuelistPlusSniper, ShieldTrooperPlusPsy, ShieldTrooperPlusAssault, WingedViperPlusPsy, FullMetalJaguarPlusPsy, PartisanEaglePlusAssault, PartisanEaglePlusDual, PsycorrupterPlusDual, PsycorrupterPlusAssault, PsycorrupterPlusPsy, BlastFencerPlusRay, GalacticKnightPlusRay]
+    AllClasses:list[XCXClass] = [Drifter, Striker, SamuraiGunner, Duelist, ShieldTrooper, BastionWarrior, Commando, WingedViper, FullMetalJaguar, PartisanEagle, AstralCrusader, Enforcer, Psycorrupter, Mastermind, BlastFencer, GalacticKnight] + PlusClasses
     
     def RollArt(group:Helper.RandomGroup, newLearnList = []):
         '''Choose until we get a non duplicate art'''
