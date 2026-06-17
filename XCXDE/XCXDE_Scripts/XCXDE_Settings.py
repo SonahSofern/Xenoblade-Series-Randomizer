@@ -1,6 +1,6 @@
 from XCXDE.XCXDE_Scripts import SeedNames, Options
 import scripts.XCRandomizer, scripts.JSONParser
-Version = "1.0.0"
+Version = "1.1.0"
 Game = "XCXDE"
 Title = "Xenoblade Chronicles X DE"
 outputPath = "contents/0100453019AA8000/romfs/bdat"

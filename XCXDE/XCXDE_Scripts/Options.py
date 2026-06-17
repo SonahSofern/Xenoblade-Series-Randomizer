@@ -171,6 +171,6 @@ EnemyWeatherQOLOption = Option("Weather Conditions", QOL, "Removes weather condi
 
 # from scripts import Onefile
 # if not Onefile.isOneFile:
-OPWeapon = Option("OP Weapons", QOL, "For Testing makes starter weapons op", [lambda: q.OpWep()])
+# OPWeapon = Option("OP Weapons", QOL, "For Testing makes starter weapons op", [lambda: q.OpWep()])
 
 

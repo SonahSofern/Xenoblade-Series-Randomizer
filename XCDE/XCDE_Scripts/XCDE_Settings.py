@@ -4,7 +4,7 @@ from XCDE.XCDE_Scripts import SeedNames, IDs, Options
 Title = "Xenoblade Chronicles DE"
 outputPath = "contents/0100FF500E34A000/romfs/bdat"
 Game = "XCDE"
-Version = "1.3.1"
+Version = "1.3.2"
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["bdat_common_ms/MNU_title_ms.json"],[8], ["name"], f"Randomizer v{Version}", Game="XCDE") # Change Title Version to Randomizer vX.x.x
 
@@ -19,7 +19,6 @@ backgrounds = ["stars.png", "morning2.png", "stars3.png", "sunset2.png", "day.pn
 TitlescreenSplash = scripts.XCRandomizer.FilePlacer(["Images/Logos/conflict.wilay"],  "../menu/image", "mnu001_cont02_en.wilay", "XCDE")
 
 Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../../", game=Game)
-plugins= scripts.XCRandomizer.FilePlacer(["Loader/skyline"], "../", game=Game)
 
 
 # Folder Names 
@@ -56,4 +55,4 @@ def XCDEHelp():
     descData.Text("This mod is NOT compatible with other mods that edit the bdats. Ensure that this is the only active one for your game. (60fps and other visual mods are okay)", anchor="w")
     return descData
 
-WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, preCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash, Exefs, plugins], setupHelpDesc=lambda: XCDEHelp(), outputRomfsSpec=outputPath)
+WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, preCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash, Exefs], setupHelpDesc=lambda: XCDEHelp(), outputRomfsSpec=outputPath)
