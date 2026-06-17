@@ -26,7 +26,8 @@ XCDE/Enemies.txt
 /.vscode
 XC2/Torna_Spoiler_Logs/
 commands.txt
-XCDE/Skyline/.git
-XCDE/Skyline/target
-XCDE/Skyline/Cargo.lock
-XCDE/Skyline/Cargo.toml
+
+
+*/Skyline/target
+*.lock
+*.toml

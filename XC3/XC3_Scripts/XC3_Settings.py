@@ -3,6 +3,7 @@ from XC3.XC3_Scripts import SeedNames, Options
 Version = "1.2.1"
 Game = "XC3"
 Title = "Xenoblade Chronicles 3"
+outputPath = "contents/010074F013262000/romfs/bdat"
 
 backgrounds = ["aetia.jpg", "desert.jpg", "makna.jpg", "ocean.jpg", "omnia.jpg", "uraya.jpg", "origin.jpg", "sand.jpg", "snow.jpg"]
 
@@ -34,8 +35,7 @@ def XC3Help():
     descData.Tag("Step 1")
     descData.Text("Choose your output location for the program. This is where your game will load the randomized files from.", anchor="w")
     descData.Image("outputLocation.png", "XCDE", 800)
-    descData.Text("Your path should look similar to this:\n\nYUZU: C:/Users/yourName/AppData/Roaming/yuzu/sdmc/atmosphere/contents/010074F013262000\nRYUJINX: C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/contents/010074F013262000\nCONSOLE: This PC/Nintendo Switch/SD Card/atmosphere/contents/010074F013262000 (This is on your microsd card)", anchor="w")
-    descData.Text("The 010074F013262000 folder might not exist yet in that location, go ahead and create it if so.")
+    descData.Text("Your output path should be the '"'atmosphere'"' folder of whatever platform you are playing on (emulators and console have this).\n\n e.g. C:/Users/your_name/AppData/Roaming/Ryujinx/sdcard/atmosphere", anchor="w")    
     descData.Tag('Step 2')
     descData.Text("Choose your preferred settings, then click the randomize button.", anchor="w")
     descData.Text(f"If you want to know more about a setting you can click on its description marked by {Options.scripts.Interactables.DescriptionIndicator} (not all settings have descriptions).", anchor="w")
@@ -48,4 +48,4 @@ def XC3Help():
     descData.Text("This mod is NOT compatible with other mods that edit the bdats. Ensure that this is the only active one for your game. (60fps and other visual mods are okay)", anchor="w")
     return descData
 
-WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, preCommands,  mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, textFolderName, extraArgs=extraArgs, backgroundImages=backgrounds, extraFiles=[Skyline, Exefs, Titlescreen], setupHelpDesc=lambda: XC3Help())
+WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, preCommands,  mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, textFolderName, extraArgs=extraArgs, backgroundImages=backgrounds, extraFiles=[Skyline, Exefs, Titlescreen], setupHelpDesc=lambda: XC3Help(), outputRomfsSpec=outputPath)

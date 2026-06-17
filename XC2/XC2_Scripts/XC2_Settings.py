@@ -3,6 +3,7 @@ from XC2.XC2_Scripts import SeedNames, Options, ObjectNameCleanup
 
 Game = "XC2"
 Title = "Xenoblade Chronicles 2"
+outputPath = "contents/0100E95004039001/romfs/bdat"
 Version = "1.7.3"
 
 # Backgrounds
@@ -31,8 +32,7 @@ def XC2Help():
     descData.Tag("Step 1")
     descData.Text("Choose your output location for the program. This is where your game will load the randomized files from.", anchor="w")
     descData.Image("outputLocation.png", "XCDE", 800)
-    descData.Text("Your path should look similar to this:\n\nYUZU: C:/Users/yourName/AppData/Roaming/yuzu/load/0100E95004039001/Randomizer\nRYUJINX: C:/Users/yourName/AppData/Roaming/Ryujinx/sdcard/atmosphere/contents/0100E95004039001\nCONSOLE: This PC/Nintendo Switch/SD Card/atmosphere/contents/0100E95004039001 (This is on your microsd card)", anchor="w")
-    descData.Text("The 0100E95004039001 folder might not exist yet in that location, go ahead and create it if so.")
+    descData.Text("Your output path should be the '"'atmosphere'"' folder of whatever platform you are playing on (emulators and console have this).\n\n e.g. C:/Users/your_name/AppData/Roaming/Ryujinx/sdcard/atmosphere", anchor="w")        
     descData.Tag("Step 2")
     descData.Text("Choose your preferred settings, then click the randomize button.", anchor="w")
     descData.Text(f"If you want to know more about a setting you can click on its description marked by {Options.DescriptionIndicator} (not all settings have descriptions).", anchor="w")
@@ -47,4 +47,4 @@ def XC2Help():
     descData.Text("This mod is NOT compatible with other mods that edit the bdats. Ensure that this is the only active one for your game. (60fps and other visual mods are okay)", anchor="w")
     return descData
 
-WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, [], mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash], setupHelpDesc=lambda: XC2Help())
+WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, [], mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash], setupHelpDesc=lambda: XC2Help(), outputRomfsSpec=outputPath)

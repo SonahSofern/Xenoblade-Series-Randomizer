@@ -1,6 +1,7 @@
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))) # Allows us to use the scripts folder as a module
 from tkinter import PhotoImage, ttk
+from pathlib import Path
 from tkinter import *
 import tkinter as tk
 from PIL import Image, ImageTk
@@ -31,6 +32,32 @@ class FilePlacer:
             self.files.append(file)
         self.location = location
         self.newName = newName
+
+    def AddFileToOutput(self, output):
+        try:
+            outputFolder = os.path.join(output, self.location)           
+            os.makedirs(outputFolder, exist_ok=True)
+
+            src = random.choice(self.files)
+
+            if os.path.isdir(src):  # Handle Folders
+                destPath = os.path.join(outputFolder, self.newName or os.path.basename(src))
+                shutil.copytree(src, destPath, dirs_exist_ok=True)
+
+            else: # Handle file
+                destPath = os.path.join(outputFolder, self.newName or os.path.basename(src))
+                shutil.copy(src, destPath)
+        except Exception as e:
+            print(e)
+
+def ClearSkylinePlugins(pluginsLocation):
+    '''Clears the plugins folder upon generating a new seed, in case options were changed (usually the rando just replaces EVERY file in the output location, but if you were to turn off a file placer setting it wouldnt delete the previous folder)'''
+    base_path = Path(pluginsLocation).resolve()
+    targetDir = (base_path / ".." / "skyline" / "plugins").resolve()
+    if len(targetDir.parts) <= 2: # If the path is too small dont delete, safety measure
+        return
+    if os.path.exists(targetDir):
+        shutil.rmtree(targetDir)
 
 def CheckIfUserNeedsUpdate(version, root):
     '''Checks the repos latest version tag to see if we have a new release'''
@@ -311,7 +338,6 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
         for option in gameData.postCommands: # Runs post commands like show title screen
             option()
         
-        # Need to delete previous skyline folder each time
         extraFilePlaced = [] # Conditionally some files (skyline plugins are placed)
         for option in OptionList: # Commands that add files to the output (I want to rework this entire logic but would be time consuming)
             if (len(option.filePlaceCommands) > 0) and option.GetState():
@@ -333,9 +359,11 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
             os.makedirs(f"{outSpot}/{gameData.textFolderName}", exist_ok=True)
             for file in gameData.subFolderNames:
                 shutil.move(f"{outSpot}/{file}.bdat", f"{outSpot}/{gameData.textFolderName}/{file}.bdat")
-                
+            
+            # Clear skyline/plugins folder
+            ClearSkylinePlugins(outSpot)
             for file in gameData.extraFiles + extraFilePlaced:
-                AddFileToOutput(outSpot, file)
+                file.AddFileToOutput(outSpot)
             
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
@@ -343,7 +371,7 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
             runLog()
             print(f"Finished at {datetime.datetime.now()}")
         except:
-            # print(f"{traceback.format_exc()}") # shows the full error
+            print(f"{traceback.format_exc()}") # shows the full error
             randoProgressDisplay.config(text="Failed Outputs")
 
         # Re-Enables Randomize Button
@@ -351,23 +379,6 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
         
 
     threading.Thread(target=ThreadedRandomize).start()
-
-def AddFileToOutput(output, file):
-    try:
-        outputFolder = os.path.join(output, file.location)
-        os.makedirs(outputFolder, exist_ok=True)
-
-        src = random.choice(file.files)
-
-        if os.path.isdir(src):  # Handle Folders
-            destPath = os.path.join(outputFolder, file.newName or os.path.basename(src))
-            shutil.copytree(src, destPath, dirs_exist_ok=True)
-
-        else: # Handle file
-            destPath = os.path.join(outputFolder, file.newName or os.path.basename(src))
-            shutil.copy(src, destPath)
-    except Exception as e:
-        print(e)
         
 def SumTotalCommands(OptionList):
     TotalCommands = 1
