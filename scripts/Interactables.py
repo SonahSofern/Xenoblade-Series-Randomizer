@@ -10,7 +10,7 @@ class Label():
         pass
 
 class Option():
-    def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", commands:list = [], defState = False, prio = 50, hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None,preRandoCommands:list = [], isDevOption = False, stepSpeed = 0.05):
+    def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", commands:list = [], defState = False, prio = 50, hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None, preRandoCommands:list = [], isDevOption = False, stepSpeed = 0.05, filePlaceCommands:list = []):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
@@ -30,6 +30,7 @@ class Option():
         self.desc = _desc
         self.commands:list = commands
         self.preRandoCommands:list = preRandoCommands
+        self.filePlaceCommands:list = filePlaceCommands
         self.hasSpinBox = hasSpinBox
         self.subDefState = defState
         self.prio = prio

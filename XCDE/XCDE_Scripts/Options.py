@@ -1,9 +1,9 @@
 from scripts.Interactables import Option, SubOption
-from scripts import Helper
+from scripts import Helper, XCRandomizer
 from XCDE.XCDE_Scripts import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Armor, MiscQOL, Scales, NPC, Weapons, Items, IDs
 import scripts.Interactables
-
-scripts.Interactables.Game = "XCDE" 
+game = "XCDE"
+scripts.Interactables.Game = game
 
 General = 1
 Character  = 2
@@ -48,7 +48,6 @@ CollectapediaOptions_Armor = SubOption("Armor", CollectapediaOptions, hasSpinBox
 CollectapediaOptions_Weapons = SubOption("Weapons", CollectapediaOptions, hasSpinBox=True, spinDefault=15)
 CollectapediaOptions_Gems = SubOption("Gems", CollectapediaOptions, hasSpinBox=True, spinDefault=15)
 CollectapediaOptions_ArtBooks = SubOption("Art Books", CollectapediaOptions, hasSpinBox=True, spinDefault=10)
-
 
 GiantsChestOption = Option("Giants Chests", General, "Randomizes the contents of Giants Chests into the chosen types", [lambda: Items.GiantsChests()], descData=lambda: Items.GiantsChestsDesc())
 GiantsChestOptions_Collectables = SubOption("Collectables", GiantsChestOption, hasSpinBox=True, spinDesc=weightsSpinDescription, defState=False, spinDefault=0)
@@ -144,7 +143,7 @@ for song in Music.AllJingles:
     song.CreateOption(JingleMusicOption, Music.UsedJingles)
 
 # QOL
-TutorialSkipsOption = Option("Tutorial Skip", QOL, "Removes tutorials", [lambda: MiscQOL.AddPlugin(TutorialSkipsOption.GetState(), "xcdeRemoveTutorials")])
+TutorialSkipsOption = Option("Tutorial Skip", QOL, "Removes tutorials", filePlaceCommands=[lambda: XCRandomizer.FilePlacer(["Loader/plugins/xcdeRemoveTutorials.nro"], "../skyline/plugins", game=game)])
 FasterLvOption = Option("EXP Boost", QOL, "Decreases level up requirements by a set amount (Recommended 3x to rush the story)", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/JsonOutputs/bdat_common/BTL_growlist.json"], ["level_exp"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], hasSpinBox = True, spinMin = 0, spinMax = 256, spinIncr = 1, spinDesc = "x", spinDefault=3)
 FasterSkillTrees = Option("SP Boost", QOL, "Decreases SP (skill point) requirements for skill trees", [lambda: Helper.MathmaticalColumnAdjust(["./XCDE/JsonOutputs/bdat_common/BTL_PSVskill.json"], ["point_PP"], [f'row[key] // {FasterLvOption.GetSpinbox()}'])], hasSpinBox = True, spinMin = 0, spinMax = 256, spinIncr = 1, spinDesc = "x", spinDefault=2)
 FasterArtLevels = Option("AP Boost", QOL, "Increases AP (art point) gains for art level ups",[lambda: Helper.MathmaticalColumnAdjust(["./XCDE/JsonOutputs/bdat_common/BTL_growlist.json"], ["en_ap"], [f'row[key] * {FasterLvOption.GetSpinbox()}'])], hasSpinBox = True, spinMin = 0, spinMax = 256, spinIncr = 1, spinDesc = "x", spinDefault=2)

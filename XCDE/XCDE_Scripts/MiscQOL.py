@@ -1,11 +1,12 @@
 import json
-from scripts import JSONParser
+from scripts import JSONParser, XCRandomizer
 from  XCDE.XCDE_Scripts import Options, IDs
 
-def AddPlugin(isAdd, pluginName):
-    if isAdd:
-        pass
-        
+def AddPlugin(pluginName, path):
+    '''Return the file'''
+    return XCRandomizer.FilePlacer([pluginName], path, game="XCDE")
+    # return XCRandomizer.FilePlacer(["Loader/exefs"], "../../", game="XCDE")
+
 
 def Quickstep(): # Originally wanted to give it to shulks default wep but you couldnt remnove it for some reason
     with open("./XCDE/JsonOutputs/bdat_common/BTL_skilllist.json", 'r+', encoding='utf-8') as gemFile:

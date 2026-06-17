@@ -77,7 +77,7 @@ class GameWindowData:
         self.textFolderName = textFolderName
         self.extraArgs = extraArgs
         self.backgroundImages = backgroundImages
-        self.extraFiles = extraFiles
+        self.extraFiles:list = extraFiles
         self.setupHelpDesc = setupHelpDesc
         self.outputRomfsSpec = outputRomfsSpec
 
@@ -240,7 +240,7 @@ def resize_bg(event, root, bg_image, background):
 
         threading.Thread(target=resize_and_update, daemon=True).start()
 
-def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat_path, randoSeedEntry, JsonOutput, outputDirVar, OptionList):
+def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat_path, randoSeedEntry, JsonOutput, outputDirVar, OptionList:list[Interactables.Option]):
     def ThreadedRandomize():
         if outputDirVar.get().strip() == "":
             errorMsgObj = PopupDescriptions.Description()
@@ -303,13 +303,20 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
             return
 
         # Runs all randomization
-        for command in gameData.preCommands: 
-            command()
+        for option in gameData.preCommands: 
+            option()
             
         runLog = RunOptions(gameData.title, OptionList, randoProgressDisplay, root, randoSeedEntry.get(), pb)
         
-        for command in gameData.postCommands: # Runs post commands like show title screen
-            command()
+        for option in gameData.postCommands: # Runs post commands like show title screen
+            option()
+        
+        # Need to delete previous skyline folder each time
+        extraFilePlaced = [] # Conditionally some files (skyline plugins are placed)
+        for option in OptionList: # Commands that add files to the output (I want to rework this entire logic but would be time consuming)
+            if (len(option.filePlaceCommands) > 0) and option.GetState():
+                for command in option.filePlaceCommands:
+                    extraFilePlaced.append(command())
             
         randoProgressDisplay.config(text="Packing BDATs")
     
@@ -326,7 +333,9 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
             os.makedirs(f"{outSpot}/{gameData.textFolderName}", exist_ok=True)
             for file in gameData.subFolderNames:
                 shutil.move(f"{outSpot}/{file}.bdat", f"{outSpot}/{gameData.textFolderName}/{file}.bdat")
-            AddFileToOutput(outSpot, gameData.extraFiles)
+                
+            for file in gameData.extraFiles + extraFilePlaced:
+                AddFileToOutput(outSpot, file)
             
             # Displays Done and Clears Text
             randoProgressDisplay.config(text="Done")
@@ -343,21 +352,20 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
 
     threading.Thread(target=ThreadedRandomize).start()
 
-def AddFileToOutput(output, files):
+def AddFileToOutput(output, file):
     try:
-        for file in files:
-            outputFolder = os.path.join(output, file.location)
-            os.makedirs(outputFolder, exist_ok=True)
+        outputFolder = os.path.join(output, file.location)
+        os.makedirs(outputFolder, exist_ok=True)
 
-            src = random.choice(file.files)
+        src = random.choice(file.files)
 
-            if os.path.isdir(src):  # Handle Folders
-                destPath = os.path.join(outputFolder, file.newName or os.path.basename(src))
-                shutil.copytree(src, destPath, dirs_exist_ok=True)
+        if os.path.isdir(src):  # Handle Folders
+            destPath = os.path.join(outputFolder, file.newName or os.path.basename(src))
+            shutil.copytree(src, destPath, dirs_exist_ok=True)
 
-            else: # Handle file
-                destPath = os.path.join(outputFolder, file.newName or os.path.basename(src))
-                shutil.copy(src, destPath)
+        else: # Handle file
+            destPath = os.path.join(outputFolder, file.newName or os.path.basename(src))
+            shutil.copy(src, destPath)
     except Exception as e:
         print(e)
         
