@@ -31,6 +31,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
         StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
 
     for en in eneFile.rows:
+        extraKeys = []
+        
         if eRando.FilterEnemies(en, targetGroup):
             continue
 
@@ -40,13 +42,14 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
 
         if isMatchSize:
             EnemySizeHelper(en, newEn)
+            extraKeys.append("ChrSize") # If you match enemy sizes the size mechanic in X should match so big enemies are still stronger
 
         IntroFightBalances(en, newEn, eRando)
         InvincibleEnemy(newEn)
         
         # eRando.HealthBalancing(en, newEn, 'HpMaxRev')
 
-        Helper.CopyKeys(en, newEn, ignoreKeys)
+        Helper.CopyKeys(en, newEn, ignoreKeys + extraKeys)
 
         HpLimitEffects(en)
 

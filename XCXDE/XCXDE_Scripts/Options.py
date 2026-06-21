@@ -158,8 +158,8 @@ ShortcutsOption_SkellHell = SubOption("Skip Skell License Exam", ShortcutsOption
 EarlySkellOption = Option("Early Skell", QOL, "Skells are unlocked at the start of the chosen chapter", [lambda: q.EarlySkell(EarlySkellOption.GetSpinbox())], hasSpinBox=True, spinDefault= 2, spinMax=6, spinMin=2, spinIncr=1 ,spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
 SkellFlightOption = Option("Early Flight Module", QOL, "Flight Module is unlocked immediately after getting skells", [lambda: q.EarlyFlight()]) # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
 
-FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_Growlist.json"], ["LevelExp"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinMin=2, spinIncr = 1, spinDesc = "x Faster")
-FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each class levelup", [lambda: q.FasterClassRanks(FasterClassOption.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinMax= 10, spinIncr = 1, spinDesc = "x Faster")
+FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: q.FasterLevels(FasterLevelsOption.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinIncr=1, spinMax=16, spinDesc = "x Faster")
+FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each class levelup", [lambda: q.FasterClassRanks(FasterClassOption.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinMax= 16, spinIncr = 1, spinDesc = "x Faster")
 YellowBubbleOption = Option("Info Range", QOL, "Increased range for collecting info bubbles", [lambda: q.InfoRangeIncrease(YellowBubbleOption.GetSpinbox(), YellowBubbleOption_Mute.GetState())], hasSpinBox=True, spinDesc="x Range", spinDefault=15, spinMin=2)
 YellowBubbleOption_Mute = SubOption("Mute Callouts", YellowBubbleOption)
 EnemyWeatherQOLOption = Option("Weather Conditions", QOL, "Removes weather conditions from enemies", [lambda: q.ClearEnemyWeatherCondition()])
@@ -169,8 +169,8 @@ EnemyWeatherQOLOption = Option("Weather Conditions", QOL, "Removes weather condi
 # SkellLiscOption_ChSelect = SubOption("Fixed Unlock", SkellLiscOption, hasSpinBox=True, spinMax=12, spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/FLD_questlist.html#1143
 # SkellLiscOption_ChSelect = SubOption("Random Unlock", SkellLiscOption)
 
-# from scripts import Onefile
-# if not Onefile.isOneFile:
-# OPWeapon = Option("OP Weapons", QOL, "For Testing makes starter weapons op", [lambda: q.OpWep()])
+from scripts import Onefile
+if not Onefile.isOneFile:
+    OPWeapon = Option("OP Weapons", QOL, "For Testing makes starter weapons op", [lambda: q.OpWep()])
 
 

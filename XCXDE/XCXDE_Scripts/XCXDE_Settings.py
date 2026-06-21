@@ -3,7 +3,7 @@ import scripts.XCRandomizer, scripts.JSONParser
 Version = "1.1.0"
 Game = "XCXDE"
 Title = "Xenoblade Chronicles X DE"
-outputPath = "contents/0100453019AA8000/romfs/bdat"
+outputPath = "contents/0100453019AA8000/romfs/mod/bdat"
 backgrounds = ["flower.jpg", "sunset.jpg", "purple.jpg"]
 postCommands = []
 mainFolderNames = ["common"]

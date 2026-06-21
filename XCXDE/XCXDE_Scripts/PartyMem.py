@@ -12,7 +12,7 @@ def Members():
     
     testGroup = Helper.RandomGroup()
     testGroup.GenData(charFile.rows, lambda e: e["$id"] in IDs.PartyMembersIDs)
-    isAllowDupes = Options.CharacterOption_Duplicates.GetState()
+    isAllowDupes = not Options.CharacterOption_Duplicates.GetState()
     isBalanceGear = Options.CharacterOption_BalanceGear.GetState()
     
     for char in charFile.rows:
@@ -61,18 +61,10 @@ def BalanceStartingGear(targetLv, newChar, wpnFile:JSONParser.File, amrFile:JSON
             
         return Helper.random.choice(allowedWeapons) # Return a random choice's id
                 
-    def GetBalancedArmor(targetGearID, armorPiecemeal):
+    def GetBalancedArmor(targetGearID, armorPiecemeal, armorType):
         female = 2
         male = 1
         
-        # Get Armor Type
-        armorType = 0
-        for amr in amrFile.rows: 
-            if amr["$id"] == targetGearID:
-                armorType = amr["TypeAmr"]
-                break
-        
-            
         # Generate Allowed Armors
         allowedArmors = []
         for amr in amrFile.rows: 
@@ -106,9 +98,8 @@ def BalanceStartingGear(targetLv, newChar, wpnFile:JSONParser.File, amrFile:JSON
                
     armorPiecemeal = 0 # Updated when a slot is filled, needed to handle equipment that takes multiple slots
     for i in range(1,6):
-        if newChar[f"DefAmr{i}"] == 0: # Only replace existing armors
-            continue
-        newChar[f"DefAmr{i}"], armorPiecemeal = GetBalancedArmor(newChar[f"DefAmr{i}"], armorPiecemeal)
+        if (armorPiecemeal & pow(5-i, 2)): continue # Bitwise & on armorPiecemeal and the slot we are currently trying to fill to check if it is already filled. [Head, Body, Arm R, Arm L, Leg]
+        newChar[f"DefAmr{i}"], armorPiecemeal = GetBalancedArmor(newChar[f"DefAmr{i}"], armorPiecemeal, i)
     newChar["DefWpnFar"] = GetBalancedWeapon(newChar["DefWpnFar"])
     newChar["DefWpnNear"] = GetBalancedWeapon(newChar["DefWpnNear"])
 

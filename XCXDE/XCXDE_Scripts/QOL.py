@@ -56,15 +56,28 @@ def FasterClassRanks(spin):
         for cls in clsFile.rows:
             cls["Exp"] = max(cls["Exp"] // spin, 1)       
         
-        # exp and cp menu just stays up this didnt fix it 1,2,3,4,5,6 etc.
-        # lastrow = 0
-        # for cls in clsFile.rows:
-        #     while cls["Exp"] <= lastrow:
-        #         cls["Exp"] += 1
-        #     lastrow = cls["Exp"]
+        # AdjustLevelsDifferently(clsFile, "Exp")
             
         clsFile.Close()
-   
+
+def AdjustLevelsDifferently(file:JSONParser.File, key):
+    '''Ensures each level up is a higher amount of XP (didnt help)'''
+    lastrow = 0
+    for cls in file.rows:
+        while cls[key] <= lastrow:
+            cls[key] += 1
+        lastrow = cls[key]
+
+def FasterLevels(mult):
+    ''''''
+    growFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_Growlist.json")
+    for lv in growFile.rows:
+        for key in ["LevelExp", "LevelExpRental"]:
+            lv[key] = max(lv[key] // mult, 1)
+    
+    growFile.Close()
+
+ 
 def EarlyFlight():
     '''Unlocks skell flight as soon as you get skells'''
     sklFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_DlList.json")
@@ -77,10 +90,10 @@ def OpWep():
     with open("XCXDE/JsonOutputs/common/WPN_PcList.json", 'r+', encoding='utf-8') as wpFile:
         wpData = json.load(wpFile)
         for wep in wpData["rows"]:
-            if wep["$id"] in [1584]:
-                wep["Damage"] = 1500
+            if wep["$id"] in [1583, 543]:
+                wep["Damage"] = 3500
                 wep["Magazine"] = 100
-                wep["DMRatio"] = 1500
+                wep["DMRatio"] = 3500
                 wep["Recast"] = 1
                 
                 
@@ -97,6 +110,8 @@ def ClearEnemyWeatherCondition():
 def EarlySkell(chosenChapter):
     '''Users can choose what chapter they want to get the level 15 skell at and unlock skells in general'''
     getSkellQuestID = 1662
+    # talkToWalter = 1145 (he requires the skell liscenses can probably remove that)
+    # getSkell
     chapterDict = {
         2: 15,
         3: 20,
