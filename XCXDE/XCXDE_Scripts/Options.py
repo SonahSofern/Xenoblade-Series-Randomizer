@@ -151,11 +151,19 @@ SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells.
 SkellGear = Option("Skell Gear", Skells, "Randomizes the stats of skell gear", descData=lambda: Gear.GearDesc(SkellGear_Arm.name, SkellGear_Wep.name))
 SkellGear_Arm = SubOption("Armor Stats", SkellGear, [lambda: Gear.SkellArmorStats(SkellGear_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 SkellGear_Wep = SubOption("Weapon Stats", SkellGear, [lambda: Gear.SkellWepStats(SkellGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
+# Yelv armor fuck up
+# Balance TP arts shouldnt get so many
+# Randomize length of buff effects
+# Randomize Skell Frames have balancing formulas
+# Early game slog skip (introduction to blade meeting lin etc., naig asks 3 questions)
 
+# http://127.0.0.1:5500/html/MNU_MemberChange.html#21 Party member join conditions?
+
+TutorialOption = Option("Tutorial Skips", QOL, "Skips tutorial popups", [lambda: q.TutorialSkip()])
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_MainQuestReqs = SubOption("Skip Chapter Prerequisites", ShortcutsOption, [lambda: q.EasyStoryPrerequisites()])
 ShortcutsOption_SkellHell = SubOption("Skip Skell License Exam", ShortcutsOption, [lambda: q.SkellExamSkip()])
-EarlySkellOption = Option("Early Skell", QOL, "Skells are unlocked at the start of the chosen chapter", [lambda: q.EarlySkell(EarlySkellOption.GetSpinbox())], hasSpinBox=True, spinDefault= 2, spinMax=6, spinMin=2, spinIncr=1 ,spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
+EarlySkellOption = Option("Early Skell", QOL, "Skells are unlocked at the start of the chosen chapter", [lambda: q.EarlyVandahmQuest()], hasSpinBox=True, spinDefault= 2, spinMax=6, spinMin=2, spinIncr=1 ,spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
 SkellFlightOption = Option("Early Flight Module", QOL, "Flight Module is unlocked immediately after getting skells", [lambda: q.EarlyFlight()]) # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
 
 FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: q.FasterLevels(FasterLevelsOption.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinIncr=1, spinMax=16, spinDesc = "x Faster")
