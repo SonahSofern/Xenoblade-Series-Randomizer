@@ -25,7 +25,6 @@ intensityText= "Intensity (Low 1 - High 100)"
 # ---------- POTENTIAL ----------
 # Faster Party Affinity
 # BetterFrontierNavOption = Option("Frontier Nav Boost", QOL, "Faster rewards from FrontierNav")
-# TutorialSkipOption = Option("Tutorial Skip", QOL, "Removes tutorials") 
 # Gems https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_ItemSkill_inner.html#2191
 # Skills (Make enhance file and option to add new skills)
 # SkellArts = Option("Skell Arts", Skells, "Randomizes the skell art strength")
@@ -151,20 +150,20 @@ SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells.
 SkellGear = Option("Skell Gear", Skells, "Randomizes the stats of skell gear", descData=lambda: Gear.GearDesc(SkellGear_Arm.name, SkellGear_Wep.name))
 SkellGear_Arm = SubOption("Armor Stats", SkellGear, [lambda: Gear.SkellArmorStats(SkellGear_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 SkellGear_Wep = SubOption("Weapon Stats", SkellGear, [lambda: Gear.SkellWepStats(SkellGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
-# Yelv armor fuck up
+
 # Balance TP arts shouldnt get so many
-# Randomize length of buff effects
+# Randomize length of buff effects http://127.0.0.1:5500/html/BTL_BuffList.html#58 Life field
 # Randomize Skell Frames have balancing formulas
-# Early game slog skip (introduction to blade meeting lin etc., naig asks 3 questions)
 
 # http://127.0.0.1:5500/html/MNU_MemberChange.html#21 Party member join conditions?
 
 TutorialOption = Option("Tutorial Skips", QOL, "Skips tutorial popups", [lambda: q.TutorialSkip()])
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
+# ShortcutsOption_Chapter1 = SubOption("Skip Chapter 1", ShortcutsOption, [lambda: q.Chapter1Skip()]) # Early game slog skip (introduction to blade meeting lin etc., naig asks 3 questions)
 ShortcutsOption_MainQuestReqs = SubOption("Skip Chapter Prerequisites", ShortcutsOption, [lambda: q.EasyStoryPrerequisites()])
 ShortcutsOption_SkellHell = SubOption("Skip Skell License Exam", ShortcutsOption, [lambda: q.SkellExamSkip()])
-EarlySkellOption = Option("Early Skell", QOL, "Skells are unlocked at the start of the chosen chapter", [lambda: q.EarlyVandahmQuest()], hasSpinBox=True, spinDefault= 2, spinMax=6, spinMin=2, spinIncr=1 ,spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
-SkellFlightOption = Option("Early Flight Module", QOL, "Flight Module is unlocked immediately after getting skells", [lambda: q.EarlyFlight()]) # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
+EarlySkellOption = Option("Early Skell", QOL, "Vandahm (Blade Barracks) will let you take the Skell Liscense Exam early", [lambda: q.EarlyVandahmQuest()]) 
+SkellFlightOption = Option("Early Flight Module", QOL, "Flight Module is unlocked immediately after getting skells", [lambda: q.EarlyFlight()])
 
 FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: q.FasterLevels(FasterLevelsOption.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinIncr=1, spinMax=16, spinDesc = "x Faster")
 FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each class levelup", [lambda: q.FasterClassRanks(FasterClassOption.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinMax= 16, spinIncr = 1, spinDesc = "x Faster")
@@ -173,9 +172,6 @@ YellowBubbleOption_Mute = SubOption("Mute Callouts", YellowBubbleOption)
 EnemyWeatherQOLOption = Option("Weather Conditions", QOL, "Removes weather conditions from enemies", [lambda: q.ClearEnemyWeatherCondition()])
 # EasyGemCraftingOption = Option("Gem Crafting", QOL, "Makes miranium the only requirement for crafting gems to avoid material grinding", [lambda: q.EasyGemCrafting()])
 
-# SkellLiscOption = Option("Skell License Unlock", QOL, "Sets the unlock chapter for skells")
-# SkellLiscOption_ChSelect = SubOption("Fixed Unlock", SkellLiscOption, hasSpinBox=True, spinMax=12, spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/FLD_questlist.html#1143
-# SkellLiscOption_ChSelect = SubOption("Random Unlock", SkellLiscOption)
 
 from scripts import Onefile
 if not Onefile.isOneFile:

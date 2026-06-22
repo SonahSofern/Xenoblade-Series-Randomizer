@@ -98,6 +98,7 @@ def BalanceStartingGear(targetLv, newChar, wpnFile:JSONParser.File, amrFile:JSON
                
     armorPiecemeal = 0 # Updated when a slot is filled, needed to handle equipment that takes multiple slots
     for i in range(1,6):
+        newChar[f"DefAmr{i}"] = 0 # Clear the original piece
         if (armorPiecemeal & pow(5-i, 2)): continue # Bitwise & on armorPiecemeal and the slot we are currently trying to fill to check if it is already filled. [Head, Body, Arm R, Arm L, Leg]
         newChar[f"DefAmr{i}"], armorPiecemeal = GetBalancedArmor(newChar[f"DefAmr{i}"], armorPiecemeal, i)
     newChar["DefWpnFar"] = GetBalancedWeapon(newChar["DefWpnFar"])

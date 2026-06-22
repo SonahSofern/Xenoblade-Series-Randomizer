@@ -9,8 +9,10 @@ def TutorialSkip():
         tip["type"] = 1
         # tip["flag"] = 28
     tipsFile.Close()
-    
-    
+
+def Chapter1Skip():
+    pass    
+ 
 def InfoRangeIncrease(mult, isMute):
     areaInfoIDs = [1001,1101,1201,1301,1401,1501,1601,1701,2001,2201]
     for info in areaInfoIDs:
