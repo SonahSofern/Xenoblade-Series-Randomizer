@@ -9,6 +9,13 @@ def TutorialSkip():
         tip["type"] = 1
         # tip["flag"] = 28
     tipsFile.Close()
+    
+# def TTRLSkip(): # Didnt work
+#     tutFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_EventPopList.json")
+#     for tut in tutFile.rows:
+#         tut["script_name"] = ""
+#         # tut["script_start_id"] = 0
+#     tutFile.Close()   
 
 def Chapter1Skip():
     qstFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_questlist.json")
@@ -57,13 +64,18 @@ def SkellExamSkip():
             break
     qstFile.Close()
     
+def FrontierNavBoost(boost):
+    fNavFile = JSONParser.File(f"XCXDE/JsonOutputs/common/ITM_BeaconList.json")
+    for nav in fNavFile.rows:
+        if nav["$id"] == 1:
+            nav["strorage"] = 500 # As a qol feature basic probes increase storage to account for boost
+        nav["tourism"] = nav["tourism"] * boost # Credits rate
+        nav["rate"] = nav["rate"] * boost # Miranium rate
+        nav["cost"] = 0 # No need for a swap cost
+        nav["raise"] = nav["raise"] * boost # Booster probes raise effects of nearby
+        nav["strorage"] = nav["strorage"] * boost # Storage increase
+    fNavFile.Close()
 
-# def TTRLSkip(): # Didnt work
-#     tutFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_EventPopList.json")
-#     for tut in tutFile.rows:
-#         tut["script_name"] = ""
-#         # tut["script_start_id"] = 0
-#     tutFile.Close()    
 
 def FasterClassRanks(spin):
     # might be breaking since you learn multiple ranks at once
@@ -114,7 +126,24 @@ def OpWep():
                 
                 
         JSONParser.CloseFile(wpData, wpFile)
-        
+
+# Didnt do anything for field skills being faster     
+# def fskill():
+#     popFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_TboxPopList.json")
+#     for pop in popFile.rows:
+#         pop["difficulty"] = 0
+#         pop["acsDownOffset"] = 0
+#     popFile.Close()
+
+# Was the players custom character's colors my character turned purple
+# def Colors():
+#     '''Enemies show up in all weather conditions'''
+#     popFile = JSONParser.File("XCXDE/JsonOutputs/common/CLR_List.json")
+#     for pop in popFile.rows:
+#         for key in ["RED", "GREEN", "BLUE", "ALPHA"]:
+#             pop[key] = Helper.random.randrange(1,255)
+#     popFile.Close()
+
 def ClearEnemyWeatherCondition():
     '''Enemies show up in all weather conditions'''
     popFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnPopParam.json")
@@ -124,6 +153,7 @@ def ClearEnemyWeatherCondition():
     popFile.Close()
 
 def EarlyVandahmQuest():
+    '''Vandahm gives skell license quest early'''
     # Just let them get skell whenever they want
     # Make that vandahm always show up (unless condition 2 which is the quest being complete so he goes away)
     vandahmCH6Condition = 3083

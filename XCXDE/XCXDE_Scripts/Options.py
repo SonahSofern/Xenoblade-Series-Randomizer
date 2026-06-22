@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XCXDE.XCXDE_Scripts import Enemy, Gear, IDs, Items as Item, QOL as q, PartyMem, Art, Skill
+from XCXDE.XCXDE_Scripts import Enemy, Gear, IDs, Items as Item, QOL as q, PartyMem, Art, Skill, SkellFrames
 
 scripts.Interactables.Game = "XCXDE" 
 
@@ -10,6 +10,7 @@ Character  = 2
 Enemies = 3
 QOL = 4
 Skells = 5 
+Misc = 6
 
 Tabs = {
     Items: 'Items',
@@ -17,25 +18,27 @@ Tabs = {
     Skells: 'Skells',
     Enemies: 'Enemies',
     QOL: 'Quality of Life',
+    Misc: 'Misc.'
 }
 
 weightsSpinDescription = "Weights ↓"
 intensityText= "Intensity (Low 1 - High 100)"
 
 # ---------- POTENTIAL ----------
+# Randomize Skell Frames have balancing formulas
+# http://127.0.0.1:5500/html/MNU_MemberChange.html#21 Party member join conditions?
 # Faster Party Affinity
 # BetterFrontierNavOption = Option("Frontier Nav Boost", QOL, "Faster rewards from FrontierNav")
 # Gems https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_ItemSkill_inner.html#2191
 # Skills (Make enhance file and option to add new skills)
 # SkellArts = Option("Skell Arts", Skells, "Randomizes the skell art strength")
 # Soul Voices https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_SoulArts.html
-# Probe effects https://xenobladedata.github.io/xbx/bdat/common_local_us/ITM_BeaconList.html
 # SKell Flight Music? https://xenobladedata.github.io/xbx/bdat/common_local_us/RSC_BgmCondition.html
 # SkellEasyCruiseOption = Option("Easy Cruise Mode", QOL, "Hraesvelg Cruise Mode is unlocked") # FLD_questlist 2524 is the hraesvelg cruise mode quest, somethere there unlocks it.
-# Color Randomization https://xenobladedata.github.io/xbx/bdat/common_local_us/CLR_List.html
 # ---------- POTENTIAL ----------
 
 # ---------- NOT DOING ----------
+# Color Randomization https://xenobladedata.github.io/xbx/bdat/common_local_us/CLR_List.html # Was the players colors not relevant
 # Overdrive Route Rando (Can't because theres no way to see what changed)
 # Enemy/Appendage Drops (NO POINT) https://xenobladedata.github.io/xbx/bdat/common_local_us/DRP_ItemTable.html#309
 # Items
@@ -144,33 +147,31 @@ PlayerGear = Option("Ground Gear", Character, "Randomizes the stats of ground ge
 PlayerGear_Arm = SubOption("Armor Stats", PlayerGear, [lambda: Gear.PlayerArmorStats(PlayerGear_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 PlayerGear_Wep = SubOption("Weapon Stats", PlayerGear, [lambda: Gear.PlayerWepStats(PlayerGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 
-
-SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells.", [lambda: Gear.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
+SkellFrameOption = Option("Skell Frame", Skells, "Randomizes skell frames", [lambda: SkellFrames.SkellMovement()])
+SkellFrameOption_Balance = SubOption("Balance Frames", SkellFrameOption, [])
+SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells", [lambda: Gear.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellGear = Option("Skell Gear", Skells, "Randomizes the stats of skell gear", descData=lambda: Gear.GearDesc(SkellGear_Arm.name, SkellGear_Wep.name))
 SkellGear_Arm = SubOption("Armor Stats", SkellGear, [lambda: Gear.SkellArmorStats(SkellGear_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 SkellGear_Wep = SubOption("Weapon Stats", SkellGear, [lambda: Gear.SkellWepStats(SkellGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 
-# Balance TP arts shouldnt get so many
-# Randomize length of buff effects http://127.0.0.1:5500/html/BTL_BuffList.html#58 Life field
-# Randomize Skell Frames have balancing formulas
-
-# http://127.0.0.1:5500/html/MNU_MemberChange.html#21 Party member join conditions?
-
 TutorialOption = Option("Tutorial Skips", QOL, "Skips tutorial popups", [lambda: q.TutorialSkip()])
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_MainQuestReqs = SubOption("Skip Chapter Prerequisites", ShortcutsOption, [lambda: q.EasyStoryPrerequisites()])
-ShortcutsOption_Chapter1 = SubOption("Skip Chapter 1", ShortcutsOption, [lambda: q.Chapter1Skip()]) # Early game slog skip (introduction to blade meeting lin etc., naig asks 3 questions)
+# ShortcutsOption_Chapter1 = SubOption("Skip Chapter 1", ShortcutsOption, [lambda: q.Chapter1Skip()]) # Early game slog skip (introduction to blade meeting lin etc., naig asks 3 questions)
 ShortcutsOption_SkellHell = SubOption("Skip Skell License Exam", ShortcutsOption, [lambda: q.SkellExamSkip()])
 EarlySkellOption = Option("Early Skell", QOL, "Talk to Vandahm (Blade Barracks) to take the Skell Liscense Exam early", [lambda: q.EarlyVandahmQuest()]) 
 SkellFlightOption = Option("Early Flight Module", QOL, "Flight Module is unlocked immediately after getting skells", [lambda: q.EarlyFlight()])
 BoostOption = Option("Resource Boosts", QOL, "Various resource boosts (exp, cp etc.)")
-FasterLevelsOption = SubOption("EXP Boost", BoostOption, [lambda: q.FasterLevels(FasterLevelsOption.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinIncr=1, spinMax=16, spinDesc = "x Faster")
-FasterClassOption = SubOption("CP Boost", BoostOption, [lambda: q.FasterClassRanks(FasterClassOption.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinMax= 16, spinIncr = 1, spinDesc = "x Faster")
+BoostOption_FNav = SubOption("FrontierNav Boost", BoostOption, [lambda: q.FrontierNavBoost(BoostOption_FNav.GetSpinbox())], hasSpinBox=True, spinDefault=10, spinMin=2, spinMax= 100, spinIncr = 1, spinDesc = "x Rewards")
+BoostOption_EXP = SubOption("EXP Boost", BoostOption, [lambda: q.FasterLevels(BoostOption_EXP.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinIncr=1, spinMax=16, spinDesc = "x Faster")
+BoostOption_CP = SubOption("CP Boost", BoostOption, [lambda: q.FasterClassRanks(BoostOption_CP.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinMax= 16, spinIncr = 1, spinDesc = "x Faster")
 YellowBubbleOption = Option("Info Range", QOL, "Increased range for collecting info bubbles", [lambda: q.InfoRangeIncrease(YellowBubbleOption.GetSpinbox(), YellowBubbleOption_Mute.GetState())], hasSpinBox=True, spinDesc="x Range", spinDefault=15, spinMin=2)
 YellowBubbleOption_Mute = SubOption("Mute Callouts", YellowBubbleOption)
 EnemyWeatherQOLOption = Option("Weather Conditions", QOL, "Removes weather conditions from enemies", [lambda: q.ClearEnemyWeatherCondition()])
 # EasyGemCraftingOption = Option("Gem Crafting", QOL, "Makes miranium the only requirement for crafting gems to avoid material grinding", [lambda: q.EasyGemCrafting()])
 
+# Misc
+ColorOption = Option("Colors", Misc, "Randomizes colors", [lambda: q.Colors()])
 
 from scripts import Onefile
 if not Onefile.isOneFile:

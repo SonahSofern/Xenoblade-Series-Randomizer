@@ -1,23 +1,44 @@
 from scripts import JSONParser, StatRand, Helper, PopupDescriptions
 from XCXDE.XCXDE_Scripts import IDs, Options
 
-maxMult = 2
+maxMult = 3
 
 def ArtStatRando(intensity):
     ArtStats(intensity)
     ArtEnhancements(intensity)
 
 def ArtStats(intensity):
-    artFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_PcArtsInfo.json")
     statRando = StatRand.Stat(maxMult, intensity)
     
-    for art in artFile.rows:
+    pcArtsFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_PcArtsInfo.json")
+    for art in pcArtsFile.rows:
+        # Damage, Cooldown
         for stat in ["DmgMgn", "RecastFrm"]:
             mult = statRando.RollBalancedMult()
             for i in range(0,5):
-                    statRando.ApplyMult(art, f"{stat}[{i}]", mult)
-    artFile.Close()
+                statRando.ApplyMult(art, f"{stat}[{i}]", mult)
+        
+        # Upgrade Cost
+        mult = statRando.RollBalancedMult()
+        for i in range(0,5):
+            statRando.ApplyMult(art, f"Btlpt[{i}]", mult, min=0, max=StatRand.b8)
+    pcArtsFile.Close()
     
+     # TP Cost
+    artsFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_ArtsList.json")
+    for art in artsFile.rows:
+        statRando.ApplyMult(art, "DecDmp", statRando.RollBalancedMult(), min=0)
+    artsFile.Close()
+        
+    # Buff Duration
+    buffFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_BuffList.json")
+    for buff in buffFile.rows:
+        if buff["$id"] not in Helper.InclRange(54,80) + [241,242,243,283,284,285,286]: continue
+        mult = statRando.RollBalancedMult()
+        for i in range(1,7):
+            statRando.ApplyMult(buff, f"Life{i}", mult)
+    buffFile.Close()
+
 def ArtEnhancements(intensity):
     '''Art enhancement currently paired with stats, they are unique to arts so can be adjusted without messing with other things'''
     statRando = StatRand.Stat(2, intensity)
@@ -175,7 +196,7 @@ def ArtOrder():
 
 
 def FixStartingArts():
-    # Needed to fix not just crosses, all the starting arts for characters
+    '''Equips the randomized arts to the characters default page so when they are first added to the party it matches the randomization'''
     chrData = JSONParser.File("XCXDE/JsonOutputs/common/DEF_PcList.json")
     playerChar = [23]
     # Loop over the characters
