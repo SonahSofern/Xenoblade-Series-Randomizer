@@ -49,7 +49,7 @@ def AddMovespeedDeed():
     
     # First enemy drops movespeed deed
     JSONParser.ChangeJSONLine(["common/FLD_OwnerBonusParam.json"],[1],["Max"], 1000)
-    BonusMovespeed = Options.StartwithIncreasedMovespeedOption.GetSpinbox() * 10
+    BonusMovespeed = Options.BoostOption_Speed.GetSpinbox() * 10
     JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [9], ["Value"], BonusMovespeed)
     JSONParser.ChangeJSONLine(["common/CHR_EnArrange.json"], [1430 , 180], ["PreciousID"], 25257)
 

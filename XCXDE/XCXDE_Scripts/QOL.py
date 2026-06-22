@@ -11,7 +11,15 @@ def TutorialSkip():
     tipsFile.Close()
 
 def Chapter1Skip():
-    pass    
+    qstFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_questlist.json")
+    for qst in qstFile.rows:
+        if qst["$id"] in [4,5,6,7]:
+            qst["next_quest_a"] = 8
+            qst["flg_type_b"] = 0
+        if qst["$id"] in [9]:
+            qst["next_quest_a"] = 14
+            qst["flg_type_b"] = 0
+    qstFile.Close()
  
 def InfoRangeIncrease(mult, isMute):
     areaInfoIDs = [1001,1101,1201,1301,1401,1501,1601,1701,2001,2201]

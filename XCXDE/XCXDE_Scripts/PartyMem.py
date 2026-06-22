@@ -1,26 +1,20 @@
 from XCXDE.XCXDE_Scripts import IDs, Options
-
 from scripts import JSONParser, Helper
-
-# Starting Gear
-# 
 
 def Members():
     charFile = JSONParser.File("XCXDE/JsonOutputs/common/DEF_PcList.json")
     wpnFile = JSONParser.File("XCXDE/JsonOutputs/common/WPN_PcList.json")
     amrFile = JSONParser.File("XCXDE/JsonOutputs/common/AMR_PcList.json")
     
-    testGroup = Helper.RandomGroup()
-    testGroup.GenData(charFile.rows, lambda e: e["$id"] in IDs.PartyMembersIDs)
+    partyMemGroup = Helper.RandomGroup()
+    partyMemGroup.GenData(charFile.rows, lambda e: e["$id"] in IDs.PartyMembersIDs)
     isAllowDupes = not Options.CharacterOption_Duplicates.GetState()
-    isBalanceGear = Options.CharacterOption_BalanceGear.GetState()
     
     for char in charFile.rows:
         if char["$id"] not in IDs.PartyMembersIDs:
             continue
-        newChar = testGroup.SelectRandomMember(isAllowDupes)
-        if isBalanceGear:
-            BalanceStartingGear(char["Lv"], newChar, wpnFile, amrFile)
+        newChar = partyMemGroup.SelectRandomMember(isAllowDupes)
+        BalanceStartingGear(char["Lv"], newChar, wpnFile, amrFile)
         Helper.CopyKeys(char, newChar, ["$id", "Lv", "InitBp"]) # Keep original Level and Bp for balancing
         
     charFile.Close()
@@ -61,7 +55,7 @@ def BalanceStartingGear(targetLv, newChar, wpnFile:JSONParser.File, amrFile:JSON
             
         return Helper.random.choice(allowedWeapons) # Return a random choice's id
                 
-    def GetBalancedArmor(targetGearID, armorPiecemeal, armorType):
+    def GetBalancedArmor(armorPiecemeal, armorType):
         female = 2
         male = 1
         
@@ -100,7 +94,7 @@ def BalanceStartingGear(targetLv, newChar, wpnFile:JSONParser.File, amrFile:JSON
     for i in range(1,6):
         newChar[f"DefAmr{i}"] = 0 # Clear the original piece
         if (armorPiecemeal & pow(5-i, 2)): continue # Bitwise & on armorPiecemeal and the slot we are currently trying to fill to check if it is already filled. [Head, Body, Arm R, Arm L, Leg]
-        newChar[f"DefAmr{i}"], armorPiecemeal = GetBalancedArmor(newChar[f"DefAmr{i}"], armorPiecemeal, i)
+        newChar[f"DefAmr{i}"], armorPiecemeal = GetBalancedArmor(armorPiecemeal, i)
     newChar["DefWpnFar"] = GetBalancedWeapon(newChar["DefWpnFar"])
     newChar["DefWpnNear"] = GetBalancedWeapon(newChar["DefWpnNear"])
 

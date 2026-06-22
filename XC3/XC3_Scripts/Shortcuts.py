@@ -4,6 +4,7 @@ from scripts import JSONParser, Helper, PopupDescriptions
 def TutorialSkips(): # For some reason visually the game wont load the entire hud until aftyer the first boss in the intro but thats fine
     TutorialRemoval()
     UnlockAllSystemsTutorialsLocked()
+    SetTipNotificationsOff()
         
 def TutorialRemoval():  
     with open("XC3/JsonOutputs/prg/SYS_Tutorial.json", 'r+', encoding='utf-8') as tutFile:
@@ -25,7 +26,6 @@ def UnlockAllSystemsTutorialsLocked():
                 continue
             tut["Flag"] = 21022 # Flag set very early instantly unlocks everything basically probably will cause issues so testing is required
         JSONParser.CloseFile(tutData, tutFile)
-    SetTipNotificationsOff()
 # https://xenobladedata.github.io/xb3_200_dlc4/MNU_option_notice.html Can set a default of dont show tips cause you get a barrage of them
 
 def SetTipNotificationsOff(): # Barrage of notifications should be off by default if you unlock the systems

@@ -336,7 +336,7 @@ def PlaceItems(FullItemList, ChosenLevel2Quests, ChosenLevel4Quests, Sidequests,
             AllNonProgressLocations.extend(loc)
     global AllLocations
     AllLocations = AllProgressLocations + AllNonProgressLocations
-    if Options.StartwithIncreasedMovespeedOption.GetState():
+    if Options.BoostOption.GetState() and Options.BoostOption_Speed.GetState():
         for loc in AllLocations:
             if loc.type == "boss":
                 if loc.id == 1430:
