@@ -143,6 +143,21 @@ def OpWep():
 #         for key in ["RED", "GREEN", "BLUE", "ALPHA"]:
 #             pop[key] = Helper.random.randrange(1,255)
 #     popFile.Close()
+def SkellMovement(mult):
+    '''Faster Skells'''
+    skellFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_DlActParam.json")
+    for skell in skellFile.rows:
+        # Driving Speed
+        skell["VF_CarDashMaxVelocity"] *= mult
+        skell["VF_CarDashMinVelocity"] *= mult
+        
+        # You cannot change the flying speed I tried changing them all and no speed increase
+        # # Backswing
+        # skell["VF_CarSwingBackSpringCon"] = 50
+        # skell["VF_CarDashMinVelocity"] = 50
+        # skell["VF_CarDashMinVelocity"] = 50
+    skellFile.Close()
+
 
 def ClearEnemyWeatherCondition():
     '''Enemies show up in all weather conditions'''

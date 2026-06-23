@@ -18,7 +18,7 @@ Tabs = {
     Skells: 'Skells',
     Enemies: 'Enemies',
     QOL: 'Quality of Life',
-    Misc: 'Misc.'
+    # Misc: 'Misc.'
 }
 
 weightsSpinDescription = "Weights ↓"
@@ -147,12 +147,13 @@ PlayerGear = Option("Ground Gear", Character, "Randomizes the stats of ground ge
 PlayerGear_Arm = SubOption("Armor Stats", PlayerGear, [lambda: Gear.PlayerArmorStats(PlayerGear_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 PlayerGear_Wep = SubOption("Weapon Stats", PlayerGear, [lambda: Gear.PlayerWepStats(PlayerGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 
-SkellFrameOption = Option("Skell Frame", Skells, "Randomizes skell frames", [lambda: SkellFrames.SkellMovement()])
-SkellFrameOption_Balance = SubOption("Balance Frames", SkellFrameOption, [])
+SkellFrameOption = Option("Skell Frames", Skells, "Randomizes skell frames", [lambda: SkellFrames.RandomizeSkells()])
+SkellFrameOption_Balance = SubOption("Balance Frames", SkellFrameOption)
 SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells", [lambda: Gear.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellGear = Option("Skell Gear", Skells, "Randomizes the stats of skell gear", descData=lambda: Gear.GearDesc(SkellGear_Arm.name, SkellGear_Wep.name))
 SkellGear_Arm = SubOption("Armor Stats", SkellGear, [lambda: Gear.SkellArmorStats(SkellGear_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 SkellGear_Wep = SubOption("Weapon Stats", SkellGear, [lambda: Gear.SkellWepStats(SkellGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
+SkellFrameOption = Option("Faster Skell", Skells, "Multiples your skell's driving speed", [lambda: q.SkellMovement(SkellFrameOption.GetSpinbox())], hasSpinBox=True, spinMax=10, spinMin=1, spinIncr=1, spinDefault=3)
 
 TutorialOption = Option("Tutorial Skips", QOL, "Skips tutorial popups", [lambda: q.TutorialSkip()])
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
@@ -169,9 +170,6 @@ YellowBubbleOption = Option("Info Range", QOL, "Increased range for collecting i
 YellowBubbleOption_Mute = SubOption("Mute Callouts", YellowBubbleOption)
 EnemyWeatherQOLOption = Option("Weather Conditions", QOL, "Removes weather conditions from enemies", [lambda: q.ClearEnemyWeatherCondition()])
 # EasyGemCraftingOption = Option("Gem Crafting", QOL, "Makes miranium the only requirement for crafting gems to avoid material grinding", [lambda: q.EasyGemCrafting()])
-
-# Misc
-ColorOption = Option("Colors", Misc, "Randomizes colors", [lambda: q.Colors()])
 
 from scripts import Onefile
 if not Onefile.isOneFile:
