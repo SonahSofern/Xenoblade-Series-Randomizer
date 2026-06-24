@@ -44,6 +44,7 @@ class ValuedItem():
         self.category = category # Only XCXDE uses this rn
 
 class ValueTable():
+    '''Holds data of all items and their categories to allow randomizing them to items of similar value'''
     def __init__(self, path = "XC2/JsonOutputs/common"):
         self.valuesList:list[RandomValuedGroup] = []
         self.weightList = []

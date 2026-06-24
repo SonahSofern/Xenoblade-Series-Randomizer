@@ -79,7 +79,7 @@ def BalanceStats(oldSkl, newSklFrame:SkellFrames):
         (20,30): [1.9, 1.7, 1.6, 1.5, 1.4, 1.3, 1.3, 1.3],
     }
     stats = ["Hp", "Fight", "Shoot", "Mind", "DexFight", "DexShoot", "Dodge", "FuelMax"]
-    # GetLevelMults(stats)
+    GetLevelMults(stats)
     
     if oldLv > newLv:
         mults = levelDict[(newLv, oldLv)]
@@ -94,6 +94,7 @@ def BalanceStats(oldSkl, newSklFrame:SkellFrames):
         else:
             newStat = int(newSklFrame.CHR[stat]/mult)
         newSklFrame.CHR[stat] = min(newStat, StatRand.b16)
+
 
 def GetLevelMults(stats):
     '''Averages the difference between skell levels stats for each stat'''
@@ -144,6 +145,8 @@ def GetLevelMults(stats):
             levelDict2[(lv, lv2)].append(avg)
     for lv, lv2 in levelDict2.keys():
         print(f"({lv},{lv2}): {levelDict2[(lv, lv2)]},")
+
+# GetLevelMults(["Hp", "Fight", "Shoot", "Mind", "DexFight", "DexShoot", "Dodge", "FuelMax"])
 
 def BalanceAresTypeGear(chrOldSkl, newSkell:SkellFrames, wpnFile:JSONParser.File, amrFile:JSONParser.File):
     '''Ares gear cannot be removed so it needs to be balanced for the skell it randomized into'''
@@ -200,5 +203,5 @@ def BalanceAresTypeGear(chrOldSkl, newSkell:SkellFrames, wpnFile:JSONParser.File
 def SkellFrameDesc(name):
     sklFrameDesc = PopupDescriptions.Description()
     sklFrameDesc.Header(name)
-    sklFrameDesc.Text("This randomizes the skells in the game. Your starting skell could be any normally obtainable skell. Skells are balanced for their new levels.")
+    sklFrameDesc.Text("This randomizes the skells in the game. For example, your starting skell could be any normally obtainable skell.\n\nSkells are balanced for their new levels.")
     return sklFrameDesc

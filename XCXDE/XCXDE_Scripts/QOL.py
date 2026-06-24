@@ -67,13 +67,13 @@ def SkellExamSkip():
 def FrontierNavBoost(boost):
     fNavFile = JSONParser.File(f"XCXDE/JsonOutputs/common/ITM_BeaconList.json")
     for nav in fNavFile.rows:
-        if nav["$id"] == 1:
-            nav["strorage"] = 500 # As a qol feature basic probes increase storage to account for boost
-        nav["tourism"] = nav["tourism"] * boost # Credits rate
-        nav["rate"] = nav["rate"] * boost # Miranium rate
+        # if nav["$id"] == 1:
+        #     nav["strorage"] = 500 # As a qol feature basic probes increase storage to account for boost
+        nav["tourism"] *= boost # Credits rate
+        nav["rate"] *= boost # Miranium rate
         nav["cost"] = 0 # No need for a swap cost
-        nav["raise"] = nav["raise"] * boost # Booster probes raise effects of nearby
-        nav["strorage"] = nav["strorage"] * boost # Storage increase
+        nav["raise"] *= boost # Booster probes raise effects of nearby
+        nav["strorage"] *= boost # Storage increase
     fNavFile.Close()
 
 
@@ -97,7 +97,6 @@ def AdjustLevelsDifferently(file:JSONParser.File, key):
         lastrow = cls[key]
 
 def FasterLevels(mult):
-    ''''''
     growFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_Growlist.json")
     for lv in growFile.rows:
         for key in ["LevelExp", "LevelExpRental"]:

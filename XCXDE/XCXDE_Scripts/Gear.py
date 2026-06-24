@@ -27,10 +27,12 @@ def ArmorStats(intensity, fileName, statKeys, affixMax, slotMax):
         amr["SlotNum"] = Helper.random.choice(Helper.InclRange(1, slotMax))
     
     amrFile.Close()
-    
+
+maxMult = 2
+
 def WeaponStats(intensity, fileName, affixMax, slotMax):
     statsFile = JSONParser.File(f"XCXDE/JsonOutputs/common/{fileName}.json")
-    statRando = StatRand.Stat(2, intensity)
+    statRando = StatRand.Stat(maxMult, intensity)
     
     for wep in statsFile.rows:
         if wep["$id"] not in IDs.SkellWeaponIDs:
@@ -39,11 +41,23 @@ def WeaponStats(intensity, fileName, affixMax, slotMax):
             statRando.ApplyMult(wep, stat, statRando.RollBalancedMult(), StatRand.b16, -StatRand.b16)
         for stat in ["Stability", "Magazine"]:
             statRando.ApplyMult(wep, stat, statRando.RollBalancedMult(), StatRand.b8)
+        for stat in ["EquLv"]:
+            statRando.ApplyMult(wep, stat, statRando.RollBalancedMult(), 60, 10)
         wep["AffixCount"] = Helper.random.choice(Helper.InclRange(1, affixMax))
         wep["SlotNum"] = Helper.random.choice(Helper.InclRange(1, slotMax))
     
     statsFile.Close()
-    
+
+def SkellArtRando(intensity):
+    dlArtsFile = JSONParser.File(f"XCXDE/JsonOutputs/common/BTL_DlArtsList.json")
+    statR = StatRand.Stat(maxMult, intensity)
+            
+    for wpn in dlArtsFile.rows:
+        for stat in ["Fuel", "DmgMgn"]:
+            statR.ApplyMult(wpn, stat, statR.RollBalancedMult())
+
+    dlArtsFile.Close()
+  
 def SkellArmorStats(intensity):
     ArmorStats(intensity, "AMR_DlList", ["Hp", "def"], 8, 3)
     
@@ -52,6 +66,7 @@ def PlayerArmorStats(intensity):
     
 def SkellWepStats(intensity):
     WeaponStats(intensity, "WPN_DlList", 8, 3)
+    SkellArtRando(intensity)
 
 def PlayerWepStats(intensity):
     WeaponStats(intensity, "WPN_PcList", 15, 3)

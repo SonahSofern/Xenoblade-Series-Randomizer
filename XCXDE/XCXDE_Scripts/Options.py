@@ -25,7 +25,6 @@ weightsSpinDescription = "Weights ↓"
 intensityText= "Intensity (Low 1 - High 100)"
 
 # ---------- POTENTIAL ----------
-# Randomize Skell Frames have balancing formulas
 # http://127.0.0.1:5500/html/MNU_MemberChange.html#21 Party member join conditions?
 # Faster Party Affinity
 # BetterFrontierNavOption = Option("Frontier Nav Boost", QOL, "Faster rewards from FrontierNav")
@@ -38,7 +37,7 @@ intensityText= "Intensity (Low 1 - High 100)"
 # ---------- POTENTIAL ----------
 
 # ---------- NOT DOING ----------
-# Color Randomization https://xenobladedata.github.io/xbx/bdat/common_local_us/CLR_List.html # Was the players colors not relevant
+# Color Randomization https://xenobladedata.github.io/xbx/bdat/common_local_us/CLR_List.html # Was the players colors and like the barracks not relevant
 # Overdrive Route Rando (Can't because theres no way to see what changed)
 # Enemy/Appendage Drops (NO POINT) https://xenobladedata.github.io/xbx/bdat/common_local_us/DRP_ItemTable.html#309
 # Items
@@ -147,15 +146,14 @@ PlayerGear = Option("Ground Gear", Character, "Randomizes the stats of ground ge
 PlayerGear_Arm = SubOption("Armor Stats", PlayerGear, [lambda: Gear.PlayerArmorStats(PlayerGear_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 PlayerGear_Wep = SubOption("Weapon Stats", PlayerGear, [lambda: Gear.PlayerWepStats(PlayerGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 
-SkellFrameOption = Option("Skell Frames", Skells, "Randomizes skell frames", [lambda: SkellFrames.RandomizeSkells()])
-SkellFrameOption_Balance = SubOption("Balance Frames", SkellFrameOption)
-SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells", [lambda: Gear.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
+SkellFrameOption = Option("Skell Frames", Skells, "Randomizes skell frames", [lambda: SkellFrames.RandomizeSkells()], descData=lambda: SkellFrames.SkellFrameDesc(SkellFrameOption.name))
+# SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells", [lambda: Gear.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellGear = Option("Skell Gear", Skells, "Randomizes the stats of skell gear", descData=lambda: Gear.GearDesc(SkellGear_Arm.name, SkellGear_Wep.name))
 SkellGear_Arm = SubOption("Armor Stats", SkellGear, [lambda: Gear.SkellArmorStats(SkellGear_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 SkellGear_Wep = SubOption("Weapon Stats", SkellGear, [lambda: Gear.SkellWepStats(SkellGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
-SkellFrameOption = Option("Faster Skell", Skells, "Multiples your skell's driving speed", [lambda: q.SkellMovement(SkellFrameOption.GetSpinbox())], hasSpinBox=True, spinMax=10, spinMin=1, spinIncr=1, spinDefault=3)
+SkellFrameOption = Option("Faster Skell", Skells, "Multiples your skell's driving speed", [lambda: q.SkellMovement(SkellFrameOption.GetSpinbox())], hasSpinBox=True, spinMax=10, spinMin=1, spinIncr=1, spinDefault=3, spinDesc="x Faster")
 
-TutorialOption = Option("Tutorial Skips", QOL, "Skips tutorial popups", [lambda: q.TutorialSkip()])
+TutorialOption = Option("Tutorial Skips", QOL, "Skips all tutorial popups", [lambda: q.TutorialSkip()])
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_MainQuestReqs = SubOption("Skip Chapter Prerequisites", ShortcutsOption, [lambda: q.EasyStoryPrerequisites()])
 # ShortcutsOption_Chapter1 = SubOption("Skip Chapter 1", ShortcutsOption, [lambda: q.Chapter1Skip()]) # Early game slog skip (introduction to blade meeting lin etc., naig asks 3 questions)
