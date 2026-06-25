@@ -17,7 +17,9 @@ https://tcrf.net/Notes:Xenoblade_Chronicles/Music_Tracks
 https://www.xenoserieswiki.org  
 https://frontiernav.net/wiki/xenoblade-chronicles-2  
 https://gitlab.com/damysteryman/XC2SaveNETThingy/-/tags/r6.1  
-https://github.com/roccodev/xcnx-file-loader/releases/tag/2.0.1
+https://github.com/roccodev/xcnx-file-loader/releases/tag/2.0.1  
+https://github.com/jam1garner/cargo-skyline  
+https://github.com/skyline-dev/skyline
 
 # Setup
 Download the EXE from the releases page.  
