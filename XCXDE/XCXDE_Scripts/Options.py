@@ -1,4 +1,4 @@
-from scripts.Interactables import Option, SubOption
+from scripts.Interactables import MainOption, SubOption
 from scripts import Helper
 import scripts.Interactables
 from XCXDE.XCXDE_Scripts import Enemy, Gear, IDs, Items as Item, QOL as q, PartyMem, Art, Skill, SkellFrames
@@ -53,7 +53,7 @@ intensityText= "Intensity (Low 1 - High 100)"
 
 
 # Field Skill Drops
-TboxOption = Option("Field Checks", Items, "Randomizes treasures from field checks into the chosen types", [lambda: Item.Tbox()], descData=lambda: Item.TboxDescription(TboxOption.name))
+TboxOption = MainOption("Field Checks", Items, "Randomizes treasures from field checks into the chosen types", [lambda: Item.Tbox()], descData=lambda: Item.TboxDescription(TboxOption.name))
 TboxOption_Gear = SubOption("Ground Gear", TboxOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
 TboxOption_Gems = SubOption("Augments", TboxOption, hasSpinBox=True, spinDefault=30)
 TboxOption_SkellGear = SubOption("Skell Gear", TboxOption, hasSpinBox=True, spinDefault=10) 
@@ -65,7 +65,7 @@ TboxOption_Precious = SubOption("Key Items", TboxOption, hasSpinBox=True, spinDe
 TboxOption_Misc = SubOption("Misc.", TboxOption, hasSpinBox=True, spinDefault=5)
 
 # Quest Rewards https://xenobladedata.github.io/xbx/bdat/common_local_us/QUEST_itemset.html
-QuestRewardOption = Option("Quest Rewards", Items, "Randomizes quest rewards into the chosen types", [lambda: Item.QuestRewards()])
+QuestRewardOption = MainOption("Quest Rewards", Items, "Randomizes quest rewards into the chosen types", [lambda: Item.QuestRewards()])
 QuestRewardOption_Gear = SubOption("Ground Gear", QuestRewardOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
 QuestRewardOption_Gems = SubOption("Augments", QuestRewardOption, hasSpinBox=True, spinDefault=20)
 QuestRewardOption_SkellGear = SubOption("Skell Gear", QuestRewardOption, hasSpinBox=True, spinDefault=20) 
@@ -77,7 +77,7 @@ QuestRewardOption_Precious = SubOption("Key Items", QuestRewardOption, hasSpinBo
 QuestRewardOption_Misc = SubOption("Misc.", QuestRewardOption, hasSpinBox=True, spinDefault=5)
 
 # Ticket Shop https://xenobladedata.github.io/xbx/bdat/common_local_us/ITM_TradeList.html
-TicketExchangeOption = Option("Material Market", Items, "Randomizes the material market (ticket shop) into the chosen types", [lambda: Item.TicketShop()])
+TicketExchangeOption = MainOption("Material Market", Items, "Randomizes the material market (ticket shop) into the chosen types", [lambda: Item.TicketShop()])
 TicketExchangeOption_Gear = SubOption("Ground Gear", TicketExchangeOption, hasSpinBox=True, spinDefault=10, spinDesc=weightsSpinDescription)
 TicketExchangeOption_Gems = SubOption("Augments", TicketExchangeOption, hasSpinBox=True, spinDefault=10)
 TicketExchangeOption_SkellGear = SubOption("Skell Gear", TicketExchangeOption, hasSpinBox=True, spinDefault=10) 
@@ -89,7 +89,7 @@ TicketExchangeOption_Precious = SubOption("Key Items", TicketExchangeOption, has
 TicketExchangeOption_Misc = SubOption("Misc.", TicketExchangeOption, hasSpinBox=True, spinDefault=40)
 
 # Collectapedia Rewards https://xenobladedata.github.io/xbx/bdat/common_local_us/collepediareward.html
-CollectapediaRewardOption = Option("Collectapedia Rewards", Items, "Randomizes collectapedia rewards into the chosen types", [lambda: Item.CollectapediaRewards()])
+CollectapediaRewardOption = MainOption("Collectapedia Rewards", Items, "Randomizes collectapedia rewards into the chosen types", [lambda: Item.CollectapediaRewards()])
 CollectapediaRewardOption_Gear = SubOption("Ground Gear", CollectapediaRewardOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
 CollectapediaRewardOption_Gems = SubOption("Augments", CollectapediaRewardOption, hasSpinBox=True, spinDefault=40)
 CollectapediaRewardOption_SkellGear = SubOption("Skell Gear", CollectapediaRewardOption, hasSpinBox=True, spinDefault=10) 
@@ -113,65 +113,65 @@ CollectapediaRewardOption_Misc = SubOption("Misc.", CollectapediaRewardOption, h
 # EnemyDropOption_Misc = SubOption("Misc.", EnemyDropOption, hasSpinBox=True, spinDefault=5)
 
 # Enemies
-NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsterIDs, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_Size.GetState())], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True, prio=2)
+NormalEnemyOption = MainOption("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: Enemy.Enemies(IDs.NormalMonsterIDs, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption, NormalEnemyOption_Size.GetState())], descData=lambda: Enemy.EnemyDesc(NormalEnemyOption.name), hasSpinBox = True, prio=2)
 NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption, hasSpinBox=True, spinDefault=20, spinDesc=weightsSpinDescription)
 NormalEnemyOption_Unique = SubOption("Unique", NormalEnemyOption, hasSpinBox=True, spinDefault=6)
 NormalEnemyOption_Boss = SubOption("Bosses", NormalEnemyOption, hasSpinBox=True, spinDefault=6)
 NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, hasSpinBox=True, spinDefault=1)
 NormalEnemyOption_Size = SubOption("Match Size", NormalEnemyOption)
 
-UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: Enemy.Enemies(IDs.TyrantMonsterIDs + IDs.SuperbossMonstersIDs, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption, UniqueEnemyOption_Size.GetState())], descData=lambda: Enemy.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True, prio=2)
+UniqueEnemyOption = MainOption("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: Enemy.Enemies(IDs.TyrantMonsterIDs + IDs.SuperbossMonstersIDs, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption, UniqueEnemyOption_Size.GetState())], descData=lambda: Enemy.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True, prio=2)
 UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption, hasSpinBox=True, spinDefault=1, spinDesc=weightsSpinDescription)
 UniqueEnemyOption_Unique = SubOption("Unique", UniqueEnemyOption, hasSpinBox=True, spinDefault=10)
 UniqueEnemyOption_Boss = SubOption("Bosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=5)
 UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption, hasSpinBox=True, spinDefault=1)
 UniqueEnemyOption_Size = SubOption("Match Size", UniqueEnemyOption)
 
-BossEnemyOption = Option("Boss Monsters", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonstersIDs, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, True)], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True, prio=2)
+BossEnemyOption = MainOption("Boss Monsters", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonstersIDs, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, True)], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), hasSpinBox = True, prio=2)
 BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption, hasSpinBox=True, spinDefault=6, spinDesc=weightsSpinDescription)
 BossEnemyOption_Unique = SubOption("Unique", BossEnemyOption, hasSpinBox=True, spinDefault=12)
 BossEnemyOption_Boss = SubOption("Bosses", BossEnemyOption, hasSpinBox=True, spinDefault=30)
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=False, hasSpinBox=True, spinDefault=1)
 
 # Character
-CharacterOption = Option("Party Members", Character, "Randomizes party members", [lambda: PartyMem.Members()], descData=lambda: PartyMem.PartyMemDesc(CharacterOption.name, CharacterOption_Duplicates.name))
+CharacterOption = MainOption("Party Members", Character, "Randomizes party members", [lambda: PartyMem.Members()], descData=lambda: PartyMem.PartyMemDesc(CharacterOption.name, CharacterOption_Duplicates.name))
 CharacterOption_Duplicates = SubOption("Allow Duplicates", CharacterOption)
-ArtsOption = Option("Arts", Character, "Randomizes various attributes of arts", descData=lambda: Art.ArtDesc(ArtsOption_LearnOrder.name, ArtsOption_Strength.name))
+ArtsOption = MainOption("Arts", Character, "Randomizes various attributes of arts", descData=lambda: Art.ArtDesc(ArtsOption_LearnOrder.name, ArtsOption_Strength.name))
 ArtsOption_LearnOrder = SubOption("Arts Learned", ArtsOption, [lambda: Art.ArtUnlockOrder()])
 ArtsOption_Strength = SubOption("Art Strength", ArtsOption, [lambda: Art.ArtStatRando(ArtsOption_Strength.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinDefault=50)
-SkillOption = Option("Skill", Character, "Randomizes various attributes of skills", descData=lambda: Skill.SkillDesc(SkillOption_Strength.name))
+SkillOption = MainOption("Skill", Character, "Randomizes various attributes of skills", descData=lambda: Skill.SkillDesc(SkillOption_Strength.name))
 SkillOption_LearnOrder = SubOption("Skills Learned", SkillOption, [lambda: Skill.SkillOrder()])
 SkillOption_Strength = SubOption("Skill Strength", SkillOption, [lambda: Skill.SkillEnhancements(SkillOption_Strength.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinDefault=50)
-PlayerGear = Option("Ground Gear", Character, "Randomizes the stats of ground gear", descData=lambda: Gear.GearDesc(PlayerGear_Arm.name, PlayerGear_Wep.name))
+PlayerGear = MainOption("Ground Gear", Character, "Randomizes the stats of ground gear", descData=lambda: Gear.GearDesc(PlayerGear_Arm.name, PlayerGear_Wep.name))
 PlayerGear_Arm = SubOption("Armor Stats", PlayerGear, [lambda: Gear.PlayerArmorStats(PlayerGear_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 PlayerGear_Wep = SubOption("Weapon Stats", PlayerGear, [lambda: Gear.PlayerWepStats(PlayerGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 
-SkellFrameOption = Option("Skell Frames", Skells, "Randomizes skell frames", [lambda: SkellFrames.RandomizeSkells()], descData=lambda: SkellFrames.SkellFrameDesc(SkellFrameOption.name))
+SkellFrameOption = MainOption("Skell Frames", Skells, "Randomizes skell frames", [lambda: SkellFrames.RandomizeSkells()], descData=lambda: SkellFrames.SkellFrameDesc(SkellFrameOption.name))
 
 # SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells", [lambda: Gear.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
-SkellGear = Option("Skell Gear", Skells, "Randomizes the stats of skell gear", descData=lambda: Gear.GearDesc(SkellGear_Arm.name, SkellGear_Wep.name))
+SkellGear = MainOption("Skell Gear", Skells, "Randomizes the stats of skell gear", descData=lambda: Gear.GearDesc(SkellGear_Arm.name, SkellGear_Wep.name))
 SkellGear_Arm = SubOption("Armor Stats", SkellGear, [lambda: Gear.SkellArmorStats(SkellGear_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 SkellGear_Wep = SubOption("Weapon Stats", SkellGear, [lambda: Gear.SkellWepStats(SkellGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
-SkellFrameOption = Option("Faster Skell", Skells, "Multiples your skell's driving speed", [lambda: q.SkellMovement(SkellFrameOption.GetSpinbox())], hasSpinBox=True, spinMax=10, spinMin=1, spinIncr=1, spinDefault=3, spinDesc="x Faster")
+SkellFrameOption = MainOption("Faster Skell", Skells, "Multiples your skell's driving speed", [lambda: q.SkellMovement(SkellFrameOption.GetSpinbox())], hasSpinBox=True, spinMax=10, spinMin=1, spinIncr=1, spinDefault=3, spinDesc="x Faster")
 
-TutorialOption = Option("Tutorial Skips", QOL, "Skips all tutorial popups", [lambda: q.TutorialSkip()])
-ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
+TutorialOption = MainOption("Tutorial Skips", QOL, "Skips all tutorial popups", [lambda: q.TutorialSkip()])
+ShortcutsOption = MainOption("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_MainQuestReqs = SubOption("Skip Chapter Prerequisites", ShortcutsOption, [lambda: q.EasyStoryPrerequisites()])
 # ShortcutsOption_Chapter1 = SubOption("Skip Chapter 1", ShortcutsOption, [lambda: q.Chapter1Skip()]) # Early game slog skip (introduction to blade meeting lin etc., naig asks 3 questions)
 ShortcutsOption_SkellHell = SubOption("Skip Skell License Exam", ShortcutsOption, [lambda: q.SkellExamSkip()])
-EarlySkellOption = Option("Early Skell", QOL, "Talk to Vandahm (Blade Barracks) to take the Skell Liscense Exam early", [lambda: q.EarlyVandahmQuest()]) 
-SkellFlightOption = Option("Early Flight Module", QOL, "Flight Module is unlocked immediately after getting skells", [lambda: q.EarlyFlight()])
-BoostOption = Option("Resource Boosts", QOL, "Various resource boosts (exp, cp etc.)")
+EarlySkellOption = MainOption("Early Skell", QOL, "Talk to Vandahm (Blade Barracks) to take the Skell Liscense Exam early", [lambda: q.EarlyVandahmQuest()]) 
+SkellFlightOption = MainOption("Early Flight Module", QOL, "Flight Module is unlocked immediately after getting skells", [lambda: q.EarlyFlight()])
+BoostOption = MainOption("Resource Boosts", QOL, "Various resource boosts (exp, cp etc.)")
 BoostOption_FNav = SubOption("FrontierNav Boost", BoostOption, [lambda: q.FrontierNavBoost(BoostOption_FNav.GetSpinbox())], hasSpinBox=True, spinDefault=10, spinMin=2, spinMax= 100, spinIncr = 1, spinDesc = "x Rewards")
 BoostOption_EXP = SubOption("EXP Boost", BoostOption, [lambda: q.FasterLevels(BoostOption_EXP.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinIncr=1, spinMax=16, spinDesc = "x Faster")
 BoostOption_CP = SubOption("CP Boost", BoostOption, [lambda: q.FasterClassRanks(BoostOption_CP.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinMax= 16, spinIncr = 1, spinDesc = "x Faster")
-YellowBubbleOption = Option("Info Range", QOL, "Increased range for collecting info bubbles", [lambda: q.InfoRangeIncrease(YellowBubbleOption.GetSpinbox(), YellowBubbleOption_Mute.GetState())], hasSpinBox=True, spinDesc="x Range", spinDefault=15, spinMin=2)
+YellowBubbleOption = MainOption("Info Range", QOL, "Increased range for collecting info bubbles", [lambda: q.InfoRangeIncrease(YellowBubbleOption.GetSpinbox(), YellowBubbleOption_Mute.GetState())], hasSpinBox=True, spinDesc="x Range", spinDefault=15, spinMin=2)
 YellowBubbleOption_Mute = SubOption("Mute Callouts", YellowBubbleOption)
-EnemyWeatherQOLOption = Option("Weather Conditions", QOL, "Removes weather conditions from enemies", [lambda: q.ClearEnemyWeatherCondition()])
+EnemyWeatherQOLOption = MainOption("Weather Conditions", QOL, "Removes weather conditions from enemies", [lambda: q.ClearEnemyWeatherCondition()])
 # EasyGemCraftingOption = Option("Gem Crafting", QOL, "Makes miranium the only requirement for crafting gems to avoid material grinding", [lambda: q.EasyGemCrafting()])
 
 from scripts import Onefile
 if not Onefile.isOneFile:
-    OPWeapon = Option("OP Weapons", QOL, "For Testing makes starter weapons op", [lambda: q.OpWep()])
+    OPWeapon = MainOption("OP Weapons", QOL, "For Testing makes starter weapons op", [lambda: q.OpWep()])
 
 

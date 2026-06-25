@@ -136,7 +136,7 @@ class ValueTable():
                         return item
         return None
 
-def WeightOptionMethod(option:Interactables.Option):
+def WeightOptionMethod(option:Interactables.MainOption):
     ''' Basically just a shortcut so I can pass the option itself and if it is off treat the weight as 0, otherwise look at the spinbox'''
     if not option.GetState():
         return 0

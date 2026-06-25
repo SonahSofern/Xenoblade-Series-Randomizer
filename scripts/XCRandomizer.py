@@ -267,7 +267,7 @@ def resize_bg(event, root, bg_image, background):
 
         threading.Thread(target=resize_and_update, daemon=True).start()
 
-def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat_path, randoSeedEntry, JsonOutput, outputDirVar, OptionList:list[Interactables.Option]):
+def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat_path, randoSeedEntry, JsonOutput, outputDirVar, OptionList:list[Interactables.MainOption]):
     def ThreadedRandomize():
         if outputDirVar.get().strip() == "":
             errorMsgObj = PopupDescriptions.Description()
@@ -387,7 +387,7 @@ def SumTotalCommands(OptionList):
             TotalCommands += 1
     return TotalCommands
 
-def RunOptions(GameTitle, OptionList:list[Interactables.Option], randoProgressDisplay, root, seed, pb):
+def RunOptions(GameTitle, OptionList:list[Interactables.MainOption], randoProgressDisplay, root, seed, pb):
     
     OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
     
