@@ -15,6 +15,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
         firstRun = False
     
     # gameCondId controls if enemy spawns based on a condition so keep the original conditions
+    soundEffects = "SeEnvID" # Controls the distance at which you hear the sound effects not what the SE is so if we keep it vanilla it should help with loud enemies (Zhu Pharg, )
     ignoreKeys = ["$id", "gameCondId", "ParamRev", "LvMin", "LvMax", "LvRev", "Exp" "ZoneUD", "Partner", "Flag(Named)", "Flag(mBoss)", "Flag(ignoreLv)", "Flag(Leader)", "AiLeader", "Flag(FAOff)", "BGMID", "NoEncountSkip", "SearchParamID", "MoveRange", "FieldPatternID", "ZoneID", "PopCost", 'PopProxyCost', "PopParamID", "GroupID"]
     # rscTestKeys = ['Resource', 'TypeFamily', 'TypeGenus', 'Material', 'RiseDescend', 'ProxyID', 'Radius', 'FightDistance', 'PermitHeight', 'RayCheckU', 'RayCheckD', 'SearchBaseBone', 'UndX', 'UndZ', 'UndMinX', 'UndMaxX', 'UndMinZ', 'UndMaxZ', 'UndDeg', 'ExArea', 'TurnAngle', 'FrontAngle', 'NoEncountSkip', 'VoDir', 'EffPack', 'EffCmn', 'Parts', 'PathMot', 'PathChr', 'Action', 'SePack', 'ClipEvent', 'Com_SE', 'Com_Eff', 'Com_Vo', 'Mflag(Vip)', 'Mflag(Map)', 'Mflag(Evt)', 'AttackID', 'AttackNum', 'HudName', 'HudOffset', '<044870FF>', '<7D67F533>']
     proxyIDs = ["ProxyID", "Mflag(Vip)", "Mflag(Map)", "Mflag(Evt)"] # Enemies need to keep their original proxy id and Mflags because in boss fights they dont spawn
@@ -49,7 +50,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
         
         # eRando.HealthBalancing(en, newEn, 'HpMaxRev')
 
-        Helper.CopyKeys(en, newEn, ignoreKeys + extraKeys)
+        Helper.CopyKeys(en, newEn, ignoreKeys + extraKeys + soundEffects)
 
         HpLimitEffects(en)
 

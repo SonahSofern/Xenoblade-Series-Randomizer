@@ -213,14 +213,14 @@ def FixStartingArts():
         clsType = chr["ClassType"]
         newArts = []
 
-        growFile = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class{clsType:02}Growth.json", 'r') # Must open in read mode because we are not editing and truncating breaks this, due to the file being locked by the previous iteration while it dumps the data
+        growFile = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class{clsType:02}Growth.json") 
         for rank in growFile.rows:
             if rank["$id"] > clsRank: break
             if rank["LearnArts01"] != 0:
                 newArts.append(rank["LearnArts01"])
             if rank["LearnArts02"] != 0:
                 newArts.append(rank["LearnArts02"])
-        growFile.file.close()
+        growFile.Close()
         
         # Apply new art IDs to character PcList
         for i in Helper.InclRange(1, len(newArts)):

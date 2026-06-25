@@ -41,8 +41,8 @@ def WeaponStats(intensity, fileName, affixMax, slotMax):
             statRando.ApplyMult(wep, stat, statRando.RollBalancedMult(), StatRand.b16, -StatRand.b16)
         for stat in ["Stability", "Magazine"]:
             statRando.ApplyMult(wep, stat, statRando.RollBalancedMult(), StatRand.b8)
-        for stat in ["EquLv"]:
-            statRando.ApplyMult(wep, stat, statRando.RollBalancedMult(), 60, 10)
+        # for stat in ["EquLv"]:
+        #     statRando.ApplyMult(wep, stat, statRando.RollBalancedMult(), 60, 10)
         wep["AffixCount"] = Helper.random.choice(Helper.InclRange(1, affixMax))
         wep["SlotNum"] = Helper.random.choice(Helper.InclRange(1, slotMax))
     
