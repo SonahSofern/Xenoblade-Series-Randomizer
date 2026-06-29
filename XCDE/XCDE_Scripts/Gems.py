@@ -1,7 +1,7 @@
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_skilllist.html
-from scripts import JSONParser, PopupDescriptions
+from scripts import JSONParser, PopupDescriptions, StatRand
 import json, random
-from XCDE.XCDE_Scripts import Options
+from XCDE.XCDE_Scripts import Options, IDs
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_bufflist.html#87 will be similar to enhancement in xc2 i can create gems with new effects and add back gems that dont get put in the game but already exist like cooldown reduc (cast quicken)
 # Cant extend gems, the descriptions wont load will have to replace old ones
 
@@ -28,21 +28,21 @@ class Gem:
 GemList:list[Gem] = []
             
      
-def StandardGems(gemData, gemMSData, gemHelpMSData):    
+def StandardGems(gemData:JSONParser.File, gemMSData:JSONParser.File, gemHelpMSData:JSONParser.File):    
     badEffects = [60, 0, 83, 84, 87, 82, 44, 61, 194, 231, 161]
-    for gem in gemData["rows"]:
+    for gem in gemData.rows:
         if gem["rvs_status"] in badEffects:
             continue
         # Find name
-        for name in gemMSData["rows"]:
+        for name in gemMSData.rows:
             if gem["name"] == name["$id"]:
                 newName = name["name"]
                 break
-        for helpName in gemMSData["rows"]:
+        for helpName in gemMSData.rows:
             if gem["rvs_caption"] == helpName["$id"]:
                 newHelpName = helpName["name"]
                 break
-        for gemDesc in gemHelpMSData["rows"]:
+        for gemDesc in gemHelpMSData.rows:
             if gemDesc["$id"] == gem["$id"]:
                 help = gemDesc["name"]
                 break
@@ -80,60 +80,48 @@ def UnusedGems():
                  
 def Gems():
     ranks = ["E", "D", "C", "B", "A", "S"] # Calculate proper gem amount based on rank
-    with open("./XCDE/JsonOutputs/bdat_common/BTL_skilllist.json", 'r+', encoding='utf-8') as gemFile:
-        with open("./XCDE/JsonOutputs/bdat_common_ms/BTL_skilllist_ms.json", 'r+', encoding='utf-8') as gemMSFile: 
-            with open("./XCDE/JsonOutputs/bdat_menu_mes_ms/MNU_skill_ms.json", 'r+', encoding='utf-8') as gemHelpMSFile: 
-                gemHelpMSData = json.load(gemHelpMSFile)
-                gemMSData = json.load(gemMSFile)
-                gemData = json.load(gemFile)
-                
-                isNotCapped = Options.GemOption_NoCap.GetState()
-                isFreeEquip = Options.GemOption_FreeEquip.GetState()
-                isPower = Options.GemOption_Power.GetState()
-                isEffect = Options.GemOption_Effect.GetState()
-                isUnusedGems = Options.GemOption_Unused.GetState()
-                
-                # Might move this into isEffect
-                if isEffect:
-                    StandardGems(gemData, gemMSData, gemHelpMSData)
-                
-                if isUnusedGems:
-                    UnusedGems()
-                
-                if isEffect or isUnusedGems:
-                    Effects(gemData, gemMSData, gemHelpMSData)
-                
-                
-                for gem in gemData["rows"]:
-                    if isNotCapped:
-                        if gem["rvs_status"] not in [146, 45]:
-                            gem["max"] = int(gem["max"] * random.choice([0.2,0.4,0.6,0.8,1.2,1.4,1.6,1.8,2.2,3,3,4]))
-                    if isFreeEquip:
-                        gem["attach"] = 0                # 0 Equip to anything                # 1 Equip to weapon                # 2 Equip to armor
-                    if isPower:
-                        RankPower(gem, ranks)
-                        
-                
-                if isPower or isEffect or isUnusedGems:
-                    ItemPower(gemData["rows"], ranks)
+    gemFile = JSONParser.File("XCDE/JsonOutputs/bdat_common/BTL_skilllist.json")
+    gemMSFile = JSONParser.File("XCDE/JsonOutputs/bdat_common_ms/BTL_skilllist_ms.json")
+    gemHelpMSFile = JSONParser.File("XCDE/JsonOutputs/bdat_menu_mes_ms/MNU_skill_ms.json")
+    
+    isNotCapped = Options.GemOption_NoCap.GetState()
+    isFreeEquip = Options.GemOption_FreeEquip.GetState()
+    isPower = Options.GemOption_Power.GetState()
+    isEffect = Options.GemOption_Effect.GetState()
+    isUnusedGems = Options.GemOption_Unused.GetState()
+    
+    if isEffect:
+        StandardGems(gemFile, gemMSFile, gemHelpMSFile)
+    
+    if isUnusedGems:
+        UnusedGems()
+    
+    if isEffect or isUnusedGems:
+        Effects(gemFile, gemMSFile, gemHelpMSFile)
+    
+    
+    for gem in gemFile.rows:
+        if isNotCapped:
+            if gem["rvs_status"] not in [146, 45]:
+                gem["max"] = int(gem["max"] * random.choice([0.2,0.4,0.6,0.8,1.2,1.4,1.6,1.8,2.2,3,3,4]))
+        if isFreeEquip:
+            gem["attach"] = 0                # 0 Equip to anything                # 1 Equip to weapon                # 2 Equip to armor
+        if isPower:
+            RankPower(gem, ranks)
+            
+    
+    if isPower or isEffect or isUnusedGems:
+        ItemPower(gemFile.rows, ranks)
                     
-                GemList.clear() # Clear the global list
+    GemList.clear() # Clear the global list
                 
-                gemFile.seek(0)
-                gemFile.truncate()
-                json.dump(gemData, gemFile, indent=2, ensure_ascii=False)
-                
-                gemHelpMSFile.seek(0)
-                gemHelpMSFile.truncate()
-                json.dump(gemHelpMSData, gemHelpMSFile, indent=2, ensure_ascii=False) 
-                
-                gemMSFile.seek(0)
-                gemMSFile.truncate()
-                json.dump(gemMSData, gemMSFile, indent=2, ensure_ascii=False)
+    gemFile.Close()
+    gemMSFile.Close()
+    gemHelpMSFile.Close()
 
 
     
-def Effects(gemData, gemMSData, gemHelpMSData):
+def Effects(gemData:JSONParser.File, gemMSData:JSONParser.File, gemHelpMSData:JSONParser.File):
     
     # Number of gems that the game will allow in a single file
     maxGems = 98
@@ -142,17 +130,16 @@ def Effects(gemData, gemMSData, gemHelpMSData):
     idCount = 1
     skillMSCount = 1
     
-    
     # Clear for repopulation
-    gemData["rows"].clear()
-    gemMSData["rows"].clear()
-    gemHelpMSData["rows"].clear()
+    gemData.rows.clear()
+    gemMSData.rows.clear()
+    gemHelpMSData.rows.clear()
     
     isQuickstepIn = False
     # Loop and generate our new gems
     for i in range(maxGems):
     
-        if (len(GemList) == 0):
+        if len(GemList) == 0: 
             break
         
         gem = random.choice(GemList)
@@ -169,8 +156,7 @@ def Effects(gemData, gemMSData, gemHelpMSData):
         incr = max(int((gem.power[-1] - gem.power[0])/12),1)
         pPowIncr = int(gem.pPower[-1]/6)
         
-        
-        gemData["rows"].append(
+        gemData.rows.append(
             {
                 "$id": idCount,
                 "name": skillMSCount,
@@ -207,7 +193,7 @@ def Effects(gemData, gemMSData, gemHelpMSData):
             }
         )
         
-        gemMSData["rows"].extend(
+        gemMSData.rows.extend(
             [{
             "$id": skillMSCount,
             "style": 9,
@@ -225,7 +211,7 @@ def Effects(gemData, gemMSData, gemHelpMSData):
             }  ]
         )
         
-        gemHelpMSData["rows"].append(
+        gemHelpMSData.rows.append(
             {
             "$id": idCount,
             "style": 117,
@@ -235,36 +221,63 @@ def Effects(gemData, gemMSData, gemHelpMSData):
         
         idCount += 1
         skillMSCount += 3
-    CrystalFix(len(gemData["rows"]))
+        
+    CrystalFix(len(gemData.rows))
 
-def CrystalFix(gemLength): # Goes through and edits crystals that have values outside the current population of skills
-    with open("./XCDE/JsonOutputs/bdat_common/ITM_dropcrystallist.json", 'r+', encoding='utf-8') as crystalFile: 
+def CrystalFix(gemLength): # 
+    '''Because the gems list is recreated references to the vanilla IDs can be too high for the new valid list this goes through and edits crystals that have values outside the current population of skills'''
+    with open("XCDE/JsonOutputs/bdat_common/ITM_dropcrystallist.json", 'r+', encoding='utf-8') as crystalFile: 
         cryData = json.load(crystalFile)
         for crystal in cryData["rows"]:
             for i in range(1,3):
                 if crystal[f"skill{i}"] > gemLength:
-                    crystal[f"skill{i}"] = random.randrange(1,gemLength+1)
+                    crystal[f"skill{i}"] = random.randrange(1, gemLength+1)
         JSONParser.CloseFile(cryData, crystalFile)
-            
     
-
-def RankPower(gem, ranks):
-    mult = random.choice([0.1, 0.2, 0.3, 0.4, 0.6, 0.8, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0, 2.5, 3.0])
-    for r in ranks:
-        gem[f"lower_{r}"] = min(max(int(gem[f"lower_{r}"] * mult), 1), 254) # Lotta of annoying math here to make sure that lower is smaller than upper but also between 0 and 255
-        gem[f"upper_{r}"] = min(int(gem[f"upper_{r}"] * mult), 253) + 2
+    futureConnectedAreas = [2501]
+    for area in IDs.areaFileListNumbers:
         
-# Changes gems that are already items given out during the story
+        if area in futureConnectedAreas: # FC uses diffferent names and slightly different implementation
+            name = "gemMineList"
+            gemrange = 9
+        else:
+            name = "minelist"
+            gemrange = 5
+            
+        areaMineFile = JSONParser.File(f"XCDE/JsonOutputs/bdat_ma{area}/{name}{area}.json")
+        if not areaMineFile.isOpen: continue
+        for mine in areaMineFile.rows:
+            for i in range(1,gemrange):
+                if mine[f"skill{i}"] > gemLength:
+                    mine[f"skill{i}"] = random.randrange(1, gemLength+1)
+        areaMineFile.Close()
+    
+    
+            
+def RankPower(gem, ranks):
+    statR = StatRand.Stat(3, 100)
+    mult = statR.RollBalancedMult()
+    for r in ranks:
+        statR.ApplyMult(gem, f"lower_{r}", mult, 253, 1)
+        statR.ApplyMult(gem, f"upper_{r}", mult, 255, 1)
+        
 def ItemPower(gemData, ranks):
+    '''Balances premade gems given thorughout the story for their level and new effect'''
+    gemType = 3
     with open("./XCDE/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as gemItemFile: 
         gemItemData = json.load(gemItemFile)
         for gem in gemItemData["rows"]:
-            if gem["itemType"] != 3: # If item is not a gem continue
-                continue
+            if gem["itemType"] != gemType: continue
             rank = gem["rankType"]
             newGem = random.choice(gemData)
             gem["itemID"] = newGem["$id"]
-            gem["percent"] = min(random.randrange(newGem[f"lower_{ranks[rank-1]}"], newGem[f"upper_{ranks[rank-1]}"]),255)
+            newMin = newGem[f"lower_{ranks[rank-1]}"]
+            newMax = newGem[f"upper_{ranks[rank-1]}"]
+            if newMin == newMax:
+                newVal = newMin
+            else:
+                newVal = random.randrange(newMin, newMax)
+            gem["percent"] = min(newVal, 255)
         JSONParser.CloseFile(gemItemData, gemItemFile)
 
 def GemDescriptions():

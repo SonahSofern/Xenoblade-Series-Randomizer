@@ -151,7 +151,7 @@ SkellFrameOption = Option("Skell Frames", Skells, "Randomizes skell frames", [la
 # SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells", [lambda: Gear.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellGear = Option("Skell Gear", Skells, "Randomizes the stats of skell gear", descData=lambda: Gear.GearDesc(SkellGear_Arm.name, SkellGear_Wep.name))
 SkellGear_Arm = SubOption("Armor Stats", SkellGear, [lambda: Gear.SkellArmorStats(SkellGear_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
-SkellGear_Wep = SubOption("Weapon Stats", SkellGear, [lambda: Gear.SkellWepStats(SkellGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
+SkellGear_Wep = SubOption("Weapon/Art Stats", SkellGear, [lambda: Gear.SkellWepStats(SkellGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 SkellFrameOption = Option("Faster Skell", Skells, "Multiples your skell's driving speed", [lambda: q.SkellMovement(SkellFrameOption.GetSpinbox())], hasSpinBox=True, spinMax=10, spinMin=1, spinIncr=1, spinDefault=3, spinDesc="x Faster")
 
 TutorialOption = Option("Tutorial Skips", QOL, "Skips all tutorial popups", [lambda: q.TutorialSkip()])

@@ -50,7 +50,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
         
         # eRando.HealthBalancing(en, newEn, 'HpMaxRev')
 
-        Helper.CopyKeys(en, newEn, ignoreKeys + extraKeys + soundEffects)
+        Helper.CopyKeys(en, newEn, ignoreKeys + extraKeys + [soundEffects])
 
         HpLimitEffects(en)
 

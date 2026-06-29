@@ -76,7 +76,7 @@ def GearDesc(armorName, wepName):
     gearDesc.Header(armorName)
     gearDesc.Text("Multiplies the def, resistances and slots of armor by a random multiplier")
     gearDesc.Header(wepName)
-    gearDesc.Text("Multiplies the attack, stability, magazine, cooldown and slots of weapons by a random multiplier")
+    gearDesc.Text("Multiplies the attack, stability, magazine, cooldown, fuel cost and slots of weapons by a random multiplier")
     gearDesc.Header("Intensity")
     gearDesc.Text(StatRand.IntensityDescription)
     return gearDesc
