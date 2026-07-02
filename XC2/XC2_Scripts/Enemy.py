@@ -19,75 +19,73 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
     isBalanceStats = balanceStats.GetState()
     if isVanillaAggro:
         ignoreKeys.extend(aggroKeys)
-    with open("XC2/JsonOutputs/common/CHR_EnArrange.json", 'r+', encoding='utf-8') as eneFile:
-        with open("XC2/JsonOutputs/common/CHR_EnParam.json", 'r+', encoding='utf-8') as paramFile:
-            with open("XC2/JsonOutputs/common/RSC_En.json", 'r+', encoding='utf-8') as rscFile:
-                with open("XC2/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as artFile:
-                    paramData = json.load(paramFile)
-                    rscData = json.load(rscFile)
-                    eneData = json.load(eneFile)
-                    artData = json.load(artFile)
+    
+    eneFile = JSONParser.File("XC2/JsonOutputs/common/CHR_EnArrange.json")
+    paramFile = JSONParser.File("XC2/JsonOutputs/common/CHR_EnParam.json")
+    rscFile = JSONParser.File("XC2/JsonOutputs/common/RSC_En.json")
+    artFile = JSONParser.File("XC2/JsonOutputs/common/BTL_Arts_En.json")
+    
+    eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneFile.data, paramFile.data, rscFile.data, artFile.data, permanentBandaids=[lambda: GortOgreUppercutRemoval(paramFile.data)])
 
-                    eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneData, paramData, rscData, artData, permanentBandaids=[lambda: GortOgreUppercutRemoval(paramData)])
+    if StaticEnemyData == []:
+        StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
 
-                    if StaticEnemyData == []:
-                        StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
+    for oldEn in eRando.arrangeData["rows"]:
+        if eRando.FilterEnemies(oldEn, targetGroup):
+            continue
+        
+        if finalBoss and isFinalBoss(oldEn):
+            continue
 
-                    for oldEn in eRando.arrangeData["rows"]:
-                        if eRando.FilterEnemies(oldEn, targetGroup):
-                            continue
-                        
-                        if finalBoss and isFinalBoss(oldEn):
-                            continue
+        newEn = eRando.CreateRandomEnemy(StaticEnemyData)
+        
+        newEn = RerollTornaBladedEnemies(oldEn, newEn, eRando)
 
-                        newEn = eRando.CreateRandomEnemy(StaticEnemyData)
-                        
-                        newEn = RerollTornaBladedEnemies(oldEn, newEn, eRando)
+        if Options.BossEnemyOption_Solo.GetState():
+            eRando.BalanceFight(oldEn, newEn, SoloFightViolations, EnemyCounts)
+        if Options.BossEnemyOption_Group.GetState():
+            eRando.BalanceFight(oldEn, newEn, GroupFightViolations, EnemyCounts)
 
-                        if Options.BossEnemyOption_Solo.GetState():
-                            eRando.BalanceFight(oldEn, newEn, SoloFightViolations, EnemyCounts)
-                        if Options.BossEnemyOption_Group.GetState():
-                            eRando.BalanceFight(oldEn, newEn, GroupFightViolations, EnemyCounts)
+        if matchSize:
+            EnemySizeHelper(oldEn, newEn, eRando)
 
-                        if matchSize:
-                            EnemySizeHelper(oldEn, newEn, eRando)
+        # if not isMatchSize and targetGroup == IDs.BossMonsters: # Forces red rings to be gone if you dont scale bosses to avoid softlocks, you cannot hit enemies outside rings and they can spawn weird when big
+        #     RedRingRemoval()
 
-                        # if not isMatchSize and targetGroup == IDs.BossMonsters: # Forces red rings to be gone if you dont scale bosses to avoid softlocks, you cannot hit enemies outside rings and they can spawn weird when big
-                        #     RedRingRemoval()
+        CloneEnemiesDefeatCondition(oldEn, newEn)
+        AdjustSkinUpgrades(oldEn, newEn, eRando)
 
-                        CloneEnemiesDefeatCondition(oldEn, newEn)
-                        AdjustSkinUpgrades(oldEn, newEn, eRando)
+        eRando.RetainNonArrangeStats(newEn, oldEn, retainNonArrangeKeys + actKeys)                    
 
-                        eRando.RetainNonArrangeStats(newEn, oldEn, retainNonArrangeKeys + actKeys)                    
+        # Blade Act Fix
+        if newEn["EnemyBladeID"] != 0:
+            for enBlade in eRando.arrangeData["rows"]:
+                if enBlade['$id'] == newEn['EnemyBladeID']:
+                    CreateBlade(enBlade, oldEn, newEn, eRando, actKeys)
+                    break
+        
+        if isBalanceStats:
+            eRando.HealthBalancing(oldEn, newEn, "HpMaxRev")
+        
+        AionRoomFix(oldEn, newEn, eRando)
+        AeshmaCoreHPNerf(oldEn, newEn, eRando)
+        AIFix(newEn, eRando)
 
-                        # Blade Act Fix
-                        if newEn["EnemyBladeID"] != 0:
-                            for enBlade in eRando.arrangeData["rows"]:
-                                if enBlade['$id'] == newEn['EnemyBladeID']:
-                                    CreateBlade(enBlade, oldEn, newEn, eRando, actKeys)
-                                    break
-                        
-                        if isBalanceStats:
-                            eRando.HealthBalancing(oldEn, newEn, "HpMaxRev")
-                        
-                        AionRoomFix(oldEn, newEn, eRando)
-                        AeshmaCoreHPNerf(oldEn, newEn, eRando)
-                        AIFix(oldEn, newEn, eRando)
+        Helper.CopyKeys(oldEn, newEn, ignoreKeys) # Keep in mind this will overwrite changes made to the old enemy
 
-                        Helper.CopyKeys(oldEn, newEn, ignoreKeys) # Keep in mind this will overwrite changes made to the old enemy
+    for group in StaticEnemyData:
+        group.RefreshCurrentGroup()
 
-                    for group in StaticEnemyData:
-                        group.RefreshCurrentGroup()
+    Bandaids(eneFile.data, isBoss, eRando) # Changes based on ID after the key swap
+    
+    if matchPhase:
+        MatchPhase()
+    
+    eneFile.Close()
+    paramFile.Close()
+    rscFile.Close()
+    artFile.Close()
 
-                    Bandaids(eneData, isBoss, eRando) # Changes based on ID after the key swap
-                    
-                    if matchPhase:
-                        MatchPhase()
-
-                    JSONParser.CloseFile(eRando.arrangeData, eneFile)
-                    JSONParser.CloseFile(eRando.paramData, paramFile)
-                    JSONParser.CloseFile(eRando.rscData, rscFile)
-                    JSONParser.CloseFile(eRando.artData, artFile)
 
 def isFinalBoss(oldEn):
     if oldEn["$id"] in IDs.FinalbossMonsters + IDs.TornaFinalbossMonsters:
@@ -312,20 +310,19 @@ def AeshmaCoreHPNerf(origEn, newEn, eRando:e.EnemyRandomizer): # Aeshma is almos
         newHp = 10 * origEn["Lv"] # 20 times the level should give a decently balanced HP (original was 8000 at level 38, but you were not intended to kill that)
         eRando.ChangeStats([newEn], [("HpMaxRev", newHp)])
     
-def AionRoomFix(origEn, newEn, eRando:e.EnemyRandomizer): # Aion sits really far down so raise enemies up
+def AionRoomFix(origEn, newEn, eRando:e.EnemyRandomizer): 
+    '''Aion sits really far down so raise enemies up and give them large hit radius so you can hit from far away (in case they get stuck)'''
     AionIDs = [265, 275]
     if ((origEn["$id"] in AionIDs) and (newEn["$id"] not in AionIDs)):
-        eRando.ChangeStats([newEn], [("FlyHeight", 500)])   
+        eRando.ChangeStats([newEn], [("FlyHeight", 500), ("EnRadius", 80), ("EnRadius2", 65)])   
         
-def AIFix(origEn, newEn, eRando:e.EnemyRandomizer):
-    '''Some enemies (only ophion so far) might have broken AI, they just sit there and dont do anything'''
+def AIFix(newEn, eRando:e.EnemyRandomizer):
+    '''Some enemies (only ophion so far) have broken AI, they just sit there and dont do anything'''
     AmalthusAIID = 103 # Amalthus' AI seemed to work fine for him so whatever
     OphionIDs = [247, 1137]
     if newEn["$id"] in OphionIDs:
         eRando.ChangeStats([newEn], [("AiID", AmalthusAIID)])   
 
-    
- 
  # NOTE This will only work sometimes because the summoner could be in both games. And it has no way of resolving that yet.
 def SummonIDFix(eneData): # Need to put summoned enemies Ids back into the pool after this in their proper spots
     '''Fixes the summons being both enemies in the game and summoned enemies by making new enemies in enArrange and putting those in the summon table'''
