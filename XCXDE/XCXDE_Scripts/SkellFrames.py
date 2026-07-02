@@ -79,7 +79,7 @@ def BalanceStats(oldSkl, newSklFrame:SkellFrames):
         (20,30): [1.9, 1.7, 1.6, 1.5, 1.4, 1.3, 1.3, 1.3],
     }
     stats = ["Hp", "Fight", "Shoot", "Mind", "DexFight", "DexShoot", "Dodge", "FuelMax"]
-    GetLevelMults(stats)
+    # GetLevelMults(stats)
     
     if oldLv > newLv:
         mults = levelDict[(newLv, oldLv)]

@@ -13,7 +13,7 @@ def Members():
     partyMemGroup.GenData(charFile.rows, lambda e: e["$id"] in IDs.PartyMembersIDs)
     
     partyMemAnnounceGroup = Helper.RandomGroup()
-    partyMemAnnounceGroup.GenData(announceFile, lambda e: e["NpcID"] in IDs.PartyMembersIDs)
+    partyMemAnnounceGroup.GenData(announceFile.rows, lambda e: e["NpcID"] in IDs.PartyMembersIDs)
     
     isAllowDupes = not Options.CharacterOption_Duplicates.GetState()
     
@@ -39,13 +39,16 @@ def ClearPartMemberSwapDict():
 def FixMenuInfo(originalChar, newChar, announceFile:JSONParser.File, announceGroup:Helper.RandomGroup):
     '''The party member menu needs info updated for the new characters'''
     newData = None
+    newCharID = newChar["$id"]
     # Find the data corresponding to the new character
     for ann in announceGroup.originalGroup: 
-        if ann["NpcID"] == newChar["$id"]:
+        if newCharID == 50: newCharID = 11 # Elma ID 50 is alien elma, which has no unique description so we just swap its description to base elma
+        if ann["NpcID"] == newCharID:
             newData = ann
             break
     
-    if newData == None: raise Exception("Invalid Character")
+    if newData is None: 
+        raise Exception("Invalid Character")
     
     # Apply it
     for ann in announceFile.rows:
