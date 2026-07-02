@@ -6,6 +6,7 @@ from pathlib import Path
 
 # https://xenobladedata.github.io/xb3_130/SYS_GimmickLocation.html#25513 useful file has enemy xyz
 
+
 StaticEnemyData:list[Helper.RandomGroup] = []
 ValidEnemyPopFileNames = ["ma01a_GMK_EnemyPop.json", "ma04a_GMK_EnemyPop.json", "ma07a_GMK_EnemyPop.json", "ma09a_GMK_EnemyPop.json", "ma11a_GMK_EnemyPop.json", "ma14a_GMK_EnemyPop.json", "ma15a_GMK_EnemyPop.json", "ma17a_GMK_EnemyPop.json", "ma22a_GMK_EnemyPop.json", "ma25a_01_GMK_EnemyPop.json", "ma25a_02_GMK_EnemyPop.json", "ma25a_03_GMK_EnemyPop.json", "ma25a_04_GMK_EnemyPop.json", "ma25a_05_GMK_EnemyPop.json", "ma25a_06_GMK_EnemyPop.json", "ma25a_07_GMK_EnemyPop.json", "ma25a_08_GMK_EnemyPop.json", "ma25a_09_GMK_EnemyPop.json", "ma25a_10_GMK_EnemyPop.json", "ma25a_11_GMK_EnemyPop.json", "ma25a_12_GMK_EnemyPop.json", "ma25a_13_GMK_EnemyPop.json", "ma25a_14_GMK_EnemyPop.json", "ma25a_15_GMK_EnemyPop.json", "ma25a_16_GMK_EnemyPop.json", "ma25a_17_GMK_EnemyPop.json", "ma25a_18_GMK_EnemyPop.json", "ma25a_19_GMK_EnemyPop.json", "ma25a_50_GMK_EnemyPop.json", "ma25a_51_GMK_EnemyPop.json", "ma25a_52_GMK_EnemyPop.json", "ma25a_53_GMK_EnemyPop.json", "ma40a_GMK_EnemyPop.json", "ma44a_GMK_EnemyPop.json", "ma45a_GMK_EnemyPop.json", "ma46a_GMK_EnemyPop.json", "ma90a_GMK_EnemyPop.json", "ma90gmk_GMK_EnemyPop.json"]
 
@@ -17,11 +18,11 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     else:
         firstRun = False
     
-    foundone =['CatBGM',  '<EE7FFF6D>', '<F36BAFFD>','<0F7768D2>', '<9B3B9099>'] 
-    curTesting = []
+    foundone = ['CatBGM',  '<EE7FFF6D>', '<F36BAFFD>','<0F7768D2>', '<9B3B9099>'] 
     findAggroFlags = [ '<EFCB57EC>', 'IconOffset', 'FlgMoveFloor', '<3828CCE4>', 'AlliesMsg', '<D3F77DFD>', 'FootPrintDetection', 'EffConvert', '<7C2FCBE1>', '<97002EDA>', 'VoGroup', 'NotEconomy', '<91DD0357>', 'AttenuationScale', '<C4D88A2B>', '<7D3D5DCB>', '<C313305B>', 'Score', '<4BAF120D>', '<7EFBB833>', '<277C5BBD>', '<65449302>', '<192EEE69>', '<F36D8D42>', '<76A4C736>']
     # passedTest = ['Model','ActType', 'FlyHeight', 'SwimHeight', 'Motion', 'MotRetarget','RscType', 'ChrID', 'IK', 'Sound', 'VoiceID', 'VoiceRand', 'VoiceDead', 'UniqueDirection', 'modelDirection', 'Event', '<5E3BE057>', '<28DE8575>', 'MoveBtlRate', 'CollisionRadius', '<8281BB89>', 'EffectType', '<B604D9F3>', '<3B53F852>', '<E4EB3419>', '<9693E350>', '<693A2A44>', '<6D9580C6>', 'WeaponA', 'WeaponB', 'WeaponC', 'RscPreset', 'StoryRsc', 'ChestHeight', , 'SwitchModel1', 'Visible1', 'SwitchModel2', 'Visible2', 'SwitchModel3', 'Visible3', 'SwitchModel4', 'Visible4', 'Color',  'EffStandLoop','Effect', ]
     # testNonArrangeKeys = ['Radius', 'EffScale',  'AngleFront', 'OffsetID',  '<DB52EFEF>', '<20C8E401>', 'BoneCenter', 'BoneCamera']
+    # nonUsedKeys = ['DebugName', 'MapID', 'CatMain', 'NamedFlag', 'CatBGM', '<B569BFB1>', '<352C263C>', '<BA57B736>', 'Scale', 'EliteScale', 'ScalePlus', 'WeaponScale', 'ChrSize', 'TurnSize', 'Level', 'LevPlus', '<64251F47>', '<3B6DFBC4>', '<EE7FFF6D>', '<F36BAFFD>', 'IdMove', 'AiBase', '<0F7768D2>', '<9B3B9099>', 'IdBgm', 'IdBattleEnemy', '<C6717CFE>', 'IdDropPrecious', 'FlgColiOff', '<EFCB57EC>', 'IconOffset', 'FlgFixed', 'FlgLevBattleOff', 'FlgLevAttack', 'FlgMoveFloor', 'FlgDmgFloor', 'FlgNoVanish', 'FlgSpDead', '<3828CCE4>', 'FlgSerious', '<3CEBD0A4>', 'FlgKeepSword', 'FlgColonyReleased', '<9A220E4D>', 'KillEffType', 'SpBattle', '<EC666A80>', '<AB4BA3D5>', '<1104E9C5>', '<B5C5F3B3>', 'MsgName', 'NPCName', 'AlliesMsg', '<D3F77DFD>', 'GetRatio', 'GetEnArts', 'GetEnSkill', 'FootPrintDetection', 'EffConvert', '<7C2FCBE1>', '<97002EDA>', 'VoGroup', 'NotEconomy', 'FlgNoDead', 'FlgNoTarget', 'ExpRate', 'GoldRate', '<91DD0357>', 'FlgNoFalling', 'AttenuationScale', '<C4D88A2B>', '<7D3D5DCB>', 'NamedSpCond', '<C313305B>', 'Score', '<4BAF120D>', '<7EFBB833>', '<277C5BBD>', '<65449302>', '<192EEE69>', '<F36D8D42>', '<76A4C736>']
     testNonArrangeKeys = []
     EnemyCounts = GetEnemyCounts()
     GroupFightViolations = GetGroupFightViolations()
@@ -29,7 +30,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     specialFields = ['<B569BFB1>', '<352C263C>', '<BA57B736>'] # These fields being kept fixed a bug where cutscenes couldnt end fights and you would just sit there while the enemy kept aggroing you
     RetryBattleLandmark = "<9A220E4D>"
     PostBattleConqueredPopup = "CatMain" # Currently not using it has weird effects fights take a long time to end after enemy goes down without it happens eithery way with UMs so something is wrong with UMS
-    ignoreKeys = ["$id", "ID", specialFields, PostBattleConqueredPopup, "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "FlgFixed", "IdMove", "SpBattle", "FlgNoVanish", "FlgSpDead" , "KillEffType", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"] + Aggro
+    battleEndFields = ['<B569BFB1>', '<352C263C>', '<BA57B736>' ] # Not sure exactly but without keeping these as original sometimes story fights take a LONG time to end
+    ignoreKeys = ["$id", "ID", specialFields, PostBattleConqueredPopup, "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "FlgFixed", "IdMove", "SpBattle", "FlgNoVanish", "FlgSpDead" , "KillEffType", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"] + Aggro + battleEndFields
     HPLimits = ["LowerLimitHP", "<60FB333A>"]
     retainNonArrangeKeys = ['FlyHeight', 'SwimHeight']
     with open("XC3/JsonOutputs/fld/FLD_EnemyData.json", 'r+', encoding='utf-8') as eneFile:
@@ -69,7 +71,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
                         
                         eRando.HealthBalancing(en, newEn, 'StRevHp')
 
-                        Helper.CopyKeys(en, newEn, ignoreKeys + curTesting)
+                        Helper.CopyKeys(en, newEn, ignoreKeys)
 
                     for group in StaticEnemyData:
                         group.RefreshCurrentGroup()

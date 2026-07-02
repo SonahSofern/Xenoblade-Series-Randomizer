@@ -1,25 +1,57 @@
 from XCXDE.XCXDE_Scripts import IDs, Options
 from scripts import JSONParser, Helper
 
+partyMemberSwapList:list[dict] = []
+
 def Members():
     charFile = JSONParser.File("XCXDE/JsonOutputs/common/DEF_PcList.json")
     wpnFile = JSONParser.File("XCXDE/JsonOutputs/common/WPN_PcList.json")
     amrFile = JSONParser.File("XCXDE/JsonOutputs/common/AMR_PcList.json")
+    announceFile = JSONParser.File("XCXDE/JsonOutputs/common/MNU_Announce.json")
     
     partyMemGroup = Helper.RandomGroup()
     partyMemGroup.GenData(charFile.rows, lambda e: e["$id"] in IDs.PartyMembersIDs)
+    
+    partyMemAnnounceGroup = Helper.RandomGroup()
+    partyMemAnnounceGroup.GenData(announceFile, lambda e: e["NpcID"] in IDs.PartyMembersIDs)
+    
     isAllowDupes = not Options.CharacterOption_Duplicates.GetState()
     
     for char in charFile.rows:
         if char["$id"] not in IDs.PartyMembersIDs:
             continue
         newChar = partyMemGroup.SelectRandomMember(isAllowDupes)
+        FixMenuInfo(char, newChar, announceFile, partyMemAnnounceGroup)
         BalanceStartingGear(char["Lv"], newChar, wpnFile, amrFile)
+        partyMemberSwapList.append({"Original" : char["$id"], "New" : newChar["$id"]})
         Helper.CopyKeys(char, newChar, ["$id", "Lv", "InitBp"]) # Keep original Level and Bp for balancing
         
     charFile.Close()
     wpnFile.Close()
     amrFile.Close()
+    announceFile.Close()
+
+def ClearPartMemberSwapDict():
+    '''Called in rando precommands so no matter what it is clear, if I called in this function I think you could close mid randomization and turn off this settings and then other stuff that uses the dict would be thrown off'''
+    partyMemberSwapList.clear()
+    
+
+def FixMenuInfo(originalChar, newChar, announceFile:JSONParser.File, announceGroup:Helper.RandomGroup):
+    '''The party member menu needs info updated for the new characters'''
+    newData = None
+    # Find the data corresponding to the new character
+    for ann in announceGroup.originalGroup: 
+        if ann["NpcID"] == newChar["$id"]:
+            newData = ann
+            break
+    
+    if newData == None: raise Exception("Invalid Character")
+    
+    # Apply it
+    for ann in announceFile.rows:
+        if ann["NpcID"] == originalChar["$id"]:
+            Helper.CopyKeys(ann, newData, ["txt[3]", "txt[4]", "txt[5]", "<1628874A>", "<0D10F668>"], isGoodKeys=True)
+            break
 
 def GetArmorFlags(armor):
     flags = 0

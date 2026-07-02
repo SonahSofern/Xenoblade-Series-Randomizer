@@ -227,8 +227,8 @@ class RandomGroup():
         self.currentGroup = copy.deepcopy(self.originalGroup)
     
     def AddNewData(self, data):
-        self.originalGroup.append(data)
-        self.currentGroup.append(data)
+        self.originalGroup.append(copy.deepcopy(data))
+        self.currentGroup.append(copy.deepcopy(data))
     
     def SetData(self, data):
         self.originalGroup = copy.deepcopy(data)

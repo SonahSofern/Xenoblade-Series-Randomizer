@@ -18,6 +18,7 @@ extraArgs = ["--hashes", scripts.XCRandomizer.Onefile.Directory("XCXDE/Loader/ha
 TitlescreenSplash = scripts.XCRandomizer.FilePlacer(["Images/Logos/mainmen.wilay"],  "../ui/stream/us", "strm_title_thumb001.wilay", "XCXDE")
 Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../../../", game=Game)
 
+preCommands = [lambda: Options.PartyMem.ClearPartMemberSwapDict()]
 postCommands = [lambda: ShowTitleScreenText()]
 
 seedEntryVar = scripts.XCRandomizer.StringVar()
@@ -47,4 +48,4 @@ def XCXDEHelp():
     return descData
 
 
-WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, [], mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, extraArgs=extraArgs, textFolderName=textFolderName, extraFiles=[Exefs, TitlescreenSplash], backgroundImages=backgrounds, outputRomfsSpec=outputPath, setupHelpDesc=lambda: XCXDEHelp())
+WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, preCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, extraArgs=extraArgs, textFolderName=textFolderName, extraFiles=[Exefs, TitlescreenSplash], backgroundImages=backgrounds, outputRomfsSpec=outputPath, setupHelpDesc=lambda: XCXDEHelp())

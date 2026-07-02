@@ -88,7 +88,7 @@ class EnemyRandomizer():
             else:
                 continue
             
-            group.AddNewData(copy.deepcopy(en))
+            group.AddNewData(en)
         return [self.NormalGroup, self.UniqueGroup, self.BossGroup, self.SuperbossGroup]
     
     def GenWeights(self):

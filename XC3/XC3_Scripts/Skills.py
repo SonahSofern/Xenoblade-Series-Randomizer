@@ -118,7 +118,7 @@ class SkillRandoFiles():
                     continue
                 if skill["$id"] not in replacementSkillIDs:
                     continue
-                skillList.AddNewData(copy.copy(skill))
+                skillList.AddNewData(skill)
         
         if Options.MajorSkillOption_CustomSkills.GetState(): # Generate Custom Replacement Skill List
             copyListCurrentGroup:list[Enhancements.Enhancement] = Enhancements.EnhancementsList.currentGroup
@@ -132,7 +132,7 @@ class SkillRandoFiles():
                     continue
                 if customReplacementTargetRole != None and enh.roleType != customReplacementTargetRole:
                     continue
-                skillList.AddNewData(copy.copy(enh))
+                skillList.AddNewData(enh)
                     
         if skillList.isEmpty():
             raise Exception("Empty pool of choices, choose Vanilla, Custom or Both")

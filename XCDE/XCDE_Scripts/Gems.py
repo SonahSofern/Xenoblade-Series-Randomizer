@@ -252,8 +252,6 @@ def CrystalFix(gemLength): #
                     mine[f"skill{i}"] = random.randrange(1, gemLength+1)
         areaMineFile.Close()
     
-    
-            
 def RankPower(gem, ranks):
     statR = StatRand.Stat(3, 100)
     mult = statR.RollBalancedMult()

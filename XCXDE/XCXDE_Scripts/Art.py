@@ -71,165 +71,52 @@ def ArtEnhancements(intensity):
     
     enhFile.Close()
     artFile.Close()
-
-def ArtUnlockOrder():
-    ArtOrder()
-    FixStartingArts()
-
-def ArtOrder():
-    class XCXClass():
-        def __init__(self, meleeWepIDs, rangedWepIDs, classIndexes):
-            self.melee:Helper.RandomGroup = meleeWepIDs
-            self.ranged:Helper.RandomGroup = rangedWepIDs
-            self.classIndexes = classIndexes # group representing the IDs that use this weapon combo and named this (for things like psycorrupter and psycorrupter+)
+    
+def ArtUnlockOrder(): # Fix the PCArtsInfo
+    artFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_ArtsList.json")
+    artInfoFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_PcArtsInfo.json") # '''PcArtsInfo is indirectly linked to BTL_ArtsList, so id 1 is the same art. Just need to shuffle this file with the other'''
+    rows = len(artFile.rows)
+    class Art():
+        def __init__(self, ArtsList, ArtsInfo):
+            self.artsList = ArtsList
+            self.artsInfo = ArtsInfo
+    
+    # Generate and sort the artgroup
+    AllSortedGroups:list[Helper.RandomGroup] = []
+    for group in IDs.AllWeaponGroups:
+        artGroup = Helper.RandomGroup()
+        
+        for artID in range(rows):
+            if artFile.rows[artID]["$id"] not in group: continue
             
-    # Melee
-    KnifeArtsIDs = Helper.RandomGroup([93,94,95,96,97,98,99,100,101,102,103,104,152,153,154])
-    LongswordArtIDs = Helper.RandomGroup([55,56,57,58,59,60,61,62,139,140,141,159])
-    ShieldArtIDs = Helper.RandomGroup([83,84,85,86,87,88,89,90,91,148,149,150,151])
-    DualSwordsArtIDs = Helper.RandomGroup([72,73,74,75,76,77,78,79,80,81,145,146,147])
-    JavelinArtIDs = Helper.RandomGroup([64,65,66,67,68,69,70,142,143,144,164])
-    PhotonSaberArtIDs = Helper.RandomGroup([107,108,109,110,111,112,113,114,115,116,155,156,157,165])
+            # and add to the correct group
+            artGroup.AddNewData(Art(artFile.rows[artID], artInfoFile.rows[artID]))
+                
+        AllSortedGroups.append(artGroup)
     
-    # Ranged
-    AssaultRifleArtIDs = Helper.RandomGroup([2,3,4,5,6,7,8,9,10,11,12,13,14,122,123,124])
-    DualGunsArtIDs = Helper.RandomGroup([25,26,27,28,29,30,31,127,128,129,160])
-    GatlingGunArtIDs = Helper.RandomGroup([33,34,35,36,37,38,120,131,132])
-    PsychoLauncherArtIDs = Helper.RandomGroup([48,49,50,51,52,53,136,137,138,162,163])
-    RaygunArtIDs = Helper.RandomGroup([40,41,42,43,44,45,46,133,134,135,161])
-    SniperArtIDs = Helper.RandomGroup([17,18,19,20,21,22,23,125,126,158])
-    
-    # Classes
-    # Plus Classes use alternate weapons
-    Drifter = XCXClass(KnifeArtsIDs, AssaultRifleArtIDs, [1])
-    Striker = XCXClass(LongswordArtIDs, AssaultRifleArtIDs, [2])
-    SamuraiGunner = XCXClass(LongswordArtIDs, AssaultRifleArtIDs, [3, 22])
-    SamuraiGunnerPlusGat = XCXClass(LongswordArtIDs, GatlingGunArtIDs, [21])
-    Duelist = XCXClass(LongswordArtIDs, AssaultRifleArtIDs, [4])
-    DuelistPlusGat = XCXClass(LongswordArtIDs, GatlingGunArtIDs, [17])
-    DuelistPlusSniper = XCXClass(LongswordArtIDs, SniperArtIDs, [37])
-    ShieldTrooper = XCXClass(ShieldArtIDs, GatlingGunArtIDs, [5, 28])
-    ShieldTrooperPlusPsy = XCXClass(ShieldArtIDs, PsychoLauncherArtIDs, [18])
-    ShieldTrooperPlusAssault = XCXClass(ShieldArtIDs, AssaultRifleArtIDs, [20])
-    BastionWarrior = XCXClass(ShieldArtIDs, GatlingGunArtIDs, [6])
-    Commando = XCXClass(DualSwordsArtIDs, DualGunsArtIDs, [7])
-    WingedViper = XCXClass(DualSwordsArtIDs, DualGunsArtIDs, [8, 26])
-    WingedViperPlusPsy = XCXClass(DualSwordsArtIDs, PsychoLauncherArtIDs, [31])
-    FullMetalJaguar = XCXClass(DualSwordsArtIDs, DualGunsArtIDs, [9, 27])
-    FullMetalJaguarPlusPsy = XCXClass(DualSwordsArtIDs, PsychoLauncherArtIDs, [35])
-    PartisanEagle = XCXClass(JavelinArtIDs, SniperArtIDs, [10, 19, 25])
-    PartisanEaglePlusAssault = XCXClass(JavelinArtIDs, AssaultRifleArtIDs, [32])
-    PartisanEaglePlusDual = XCXClass(JavelinArtIDs, DualGunsArtIDs, [36])
-    AstralCrusader = XCXClass(JavelinArtIDs, SniperArtIDs, [11])
-    Enforcer = XCXClass(KnifeArtsIDs, RaygunArtIDs, [12])
-    Psycorrupter = XCXClass(KnifeArtsIDs, RaygunArtIDs, [13, 34])
-    PsycorrupterPlusDual = XCXClass(KnifeArtsIDs, DualGunsArtIDs, [29])
-    PsycorrupterPlusAssault = XCXClass(KnifeArtsIDs, AssaultRifleArtIDs, [30])
-    PsycorrupterPlusPsy = XCXClass(KnifeArtsIDs, PsychoLauncherArtIDs, [33])
-    Mastermind = XCXClass(KnifeArtsIDs, RaygunArtIDs, [14])
-    BlastFencer = XCXClass(PhotonSaberArtIDs, PsychoLauncherArtIDs, [15])
-    BlastFencerPlusRay = XCXClass(PhotonSaberArtIDs, RaygunArtIDs, [23, 24])
-    GalacticKnight = XCXClass(PhotonSaberArtIDs, PsychoLauncherArtIDs, [16, 38])
-    GalacticKnightPlusRay = XCXClass(PhotonSaberArtIDs, RaygunArtIDs, [38])
-    
-    PlusClasses = [SamuraiGunnerPlusGat, DuelistPlusGat, DuelistPlusSniper, ShieldTrooperPlusPsy, ShieldTrooperPlusAssault, WingedViperPlusPsy, FullMetalJaguarPlusPsy, PartisanEaglePlusAssault, PartisanEaglePlusDual, PsycorrupterPlusDual, PsycorrupterPlusAssault, PsycorrupterPlusPsy, BlastFencerPlusRay, GalacticKnightPlusRay]
-    AllClasses:list[XCXClass] = [Drifter, Striker, SamuraiGunner, Duelist, ShieldTrooper, BastionWarrior, Commando, WingedViper, FullMetalJaguar, PartisanEagle, AstralCrusader, Enforcer, Psycorrupter, Mastermind, BlastFencer, GalacticKnight] + PlusClasses
-    
-    def RollArt(group:Helper.RandomGroup, newLearnList = []):
-        '''Choose until we get a non duplicate art'''
-        newLearn = group.SelectRandomMember()
-        rollCount = 0
-        while newLearn in newLearnList:
-            newLearn = group.SelectRandomMember()
-            
-            # Because you can get a melee art in am originally ranged position it can lead to situation where you have the entire melee group and are still trying to get another melee art in that case you just dont get an art
-            rollCount += 1
-            if rollCount > 30:
-                newLearn = 0
+    for artID in range(rows):
+        curID = artFile.rows[artID]["$id"]
+        if curID not in IDs.ArtIDs: continue
+        
+        # Find the arts weapon group
+        group = None
+        for artGroup in AllSortedGroups:
+            if any(originalArt.artsList.get("$id") == curID for originalArt in artGroup.originalGroup):
+                group = artGroup
                 break
-            
-        return newLearn
-    
-    for i in range(1,39):
-        growFile = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class{i:02}Growth.json")
-
-        classGroup:XCXClass = None 
-        for cls in AllClasses:
-            if i in cls.classIndexes:
-                classGroup = cls
-                break
-            
-        newLearnList = [] # Keeps track of what arts this class already has
+        if group == None: 
+            raise Exception("Couldn't find weapon group")
         
-        for rank in growFile.rows:
-            meleeLearn = rank[f"LearnArts01"]
-            rangedLearn = rank[f"LearnArts02"]
-            
-            # You dont learn arts here
-            if meleeLearn == 0 and rangedLearn == 0: continue 
-            
-            # You are learning 1 art, so we randomize if its melee or ranged
-            elif (meleeLearn != 0 and rangedLearn == 0) or (meleeLearn == 0 and rangedLearn != 0): 
-                if Helper.OddsCheck(50):
-                    newMeleeLearn = RollArt(classGroup.melee, newLearnList)
-                    newRangedLearn = 0
-                else:
-                    newRangedLearn = RollArt(classGroup.ranged, newLearnList)
-                    newMeleeLearn = 0
-            
-            # You learn 2 arts at same rank you get one of each ranged and melee
-            elif meleeLearn != 0 and rangedLearn != 0:
-                newMeleeLearn = RollArt(classGroup.melee, newLearnList)
-                newRangedLearn = RollArt(classGroup.ranged, newLearnList)
-                                  
-            # Assignment
-            rank[f"LearnArts01"] = newMeleeLearn 
-            rank[f"LearnArts02"] = newRangedLearn
-            
-            # Add to keep track of what we learned so far
-            if newMeleeLearn != 0: newLearnList.append(newMeleeLearn) 
-            if newRangedLearn != 0: newLearnList.append(newRangedLearn)
-            
-        growFile.Close()
+        # roll new art
+        newArt:Art = group.SelectRandomMember()
         
-    # multigun is weird, special thing that can be equipped by all
-
-
-def FixStartingArts():
-    '''Equips the randomized arts to the characters default page so when they are first added to the party it matches the randomization'''
-    chrData = JSONParser.File("XCXDE/JsonOutputs/common/DEF_PcList.json")
-    playerChar = [23]
-    # Loop over the characters
-    for chr in chrData.rows:
-        if chr["$id"] not in IDs.PartyMembersIDs + playerChar: continue
+        # Set new art
+        Helper.CopyKeys(artFile.rows[artID], newArt.artsList, ["$id", "ID"])
+        Helper.CopyKeys(artInfoFile.rows[artID], newArt.artsInfo, ["$id", "ID"])
         
-        # clear their defaults arts
-        for i in range(1,9):
-            chr[f"ArtsNo{i}"] = 0
-            chr[f"ArtsLv{i}"] = 0
-            
-        # Find the new arts IDs
-        clsRank = chr["ClassLevel"] 
-        clsType = chr["ClassType"]
-        newArts = []
-
-        growFile = JSONParser.File(f"XCXDE/JsonOutputs/common/CHR_Class{clsType:02}Growth.json") 
-        for rank in growFile.rows:
-            if rank["$id"] > clsRank: break
-            if rank["LearnArts01"] != 0:
-                newArts.append(rank["LearnArts01"])
-            if rank["LearnArts02"] != 0:
-                newArts.append(rank["LearnArts02"])
-        growFile.Close()
-        
-        # Apply new art IDs to character PcList
-        for i in Helper.InclRange(1, len(newArts)):
-            chr[f"ArtsNo{i}"] = newArts[i - 1]
-            chr[f"ArtsLv{i}"] = 1
-            
-    chrData.Close()
-    
-                                                                                                                                                                                                                                                                                
+    artFile.Close()
+    artInfoFile.Close()
+                                                                                                                                                                                                                                                                        
 def ArtDesc(name, newName):
     artRandoDesc = PopupDescriptions.Description()
     artRandoDesc.Header(newName)
