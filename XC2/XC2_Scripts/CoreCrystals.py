@@ -13,7 +13,7 @@ def CustomCoreCrystalRando():
     FixArtReleaseLevels()
     RareBladeProbabilityEqualizer()
     LandofChallengeRelease()
-    # NewGamePlusBladeBalancing() # Currently doesnt work
+    NewGamePlusBladeBalancing()
 
 def RareBladeProbabilityEqualizer(): # makes it so all blades are equally likely to be pulled
     Helper.ColumnAdjust("XC2/JsonOutputs/common/BLD_RareList.json", ["Prob1", "Prob2", "Prob3", "Prob4", "Prob5"] , 1)
@@ -122,41 +122,50 @@ def NewGamePlusBladeBalancing():
     ''' Make NG+ blades balanced by starting them at lower power and allowing chips to be put in their weapons'''
     
     # Edit their default weapons to be on par with lead chips (baby starting chips) and add new ones
-    with open("XC2/JsonOutputs/common/ITM_PcWpn.json", "r+", encoding='utf-8') as wpnFile:     
-        with open("XC2/JsonOutputs/common/ITM_PcWpnChip.json", "r+", encoding='utf-8') as chipFile:
-            wpnData = json.load(wpnFile)
-            chipData = json.load(chipFile)
+    wpnFile = JSONParser.File("XC2/JsonOutputs/common/ITM_PcWpn.json")
+    chipFile = JSONParser.File("XC2/JsonOutputs/common/ITM_PcWpnChip.json")
+    
+    ogWeaponTemplates = Helper.RandomGroup()
+    # Fix default weapons
+    for wpn in wpnFile.rows:
+        if wpn["$id"] in [5971, 5972, 5973, 5974, 5975, 5976, 5977]:
+            ogWeaponTemplates.AddNewData(wpn) # copy before altering the chips so the formula works down below
+            wpn["Rank"] = 1
+            wpn["Damage"] = random.randrange(10,20)
+            wpn["CriRate"] = random.choice([5,10,15,20]) 
+            wpn["Flag"]["Private"] = 0
             
-            # Fix default weapons
-            for wpn in wpnData["rows"]:
-                if wpn["$id"] in [5971, 5972, 5973, 5974, 5975, 5976, 5977]:
-                    wpn["Rank"] = 1
-                    wpn["Damage"] = random.randrange(10,20)
-                    wpn["CriRate"] = random.choice([5,10,15,20]) 
-                    wpn["Flag"]["Private"] = 0
-                    
-                    
-            # Connect chips to new weapons
-            for chip in chipData["rows"]:
-                for i in range(20,27): # CreateWeapons 20-27 which correspond to those NG+ blade weapons
-                
-                    # Create new weapons
-                    
-                
-                    chip[f"CreateWpn{i}"] = 5973
-                    
-            JSONParser.CloseFile(chipData, chipFile)     
-            JSONParser.CloseFile(wpnData, wpnFile)
+    # Connect chips to new weapons
+    for chip in chipFile.rows:
+        for i in range(20,27): # CreateWeapons 20-27 which correspond to those NG+ blade weapons
+            # find the target weapon
+            newWeapon = Helper.copy.deepcopy(ogWeaponTemplates.originalGroup[20-i])
+            
+            newID = wpnFile.rows[-1]["$id"] + 1
+            newWeapon["$id"] = newID # New ID
+            newWeapon["Rank"] = chip["Rank"] # Rank, chips also have a rank attribute so just use that
+            
+            # Update Damage, Stab, Crit, Guard
+            statMult = 1/(21-chip["Rank"]) # 
+            for stat in ["Damage", "Stability", "CriRate", "GuardRate"]:
+                newWeapon[stat] = int(newWeapon[stat] * statMult)
+            
+            # Add new weapon to rows
+            wpnFile.rows.append(newWeapon)
+            
+            # Update this chip for new weapon
+            chip[f"CreateWpn{i}"] = newID
+    
+    wpnFile.Close()
+    chipFile.Close()  
         
     # Allow chip building on these blades
-    with open("XC2/JsonOutputs/common/CHR_Bl.json", "r+", encoding='utf-8') as blFile:
-        blData = json.load(blFile)
-        for bl in blData["rows"]:
-            if bl["$id"] in [1043, 1044, 1045, 1046, 1047, 1048, 1049]:
-                bl["Flag"]["OnlyWpn"] = 1
-                bl["Flag"]["NoBuildWpn"] = 0     
-        JSONParser.CloseFile(blData, blFile)
-        
+    blFile = JSONParser.File("XC2/JsonOutputs/common/CHR_Bl.json")
+    for bl in blFile.rows:
+        if bl["$id"] in [1043, 1044, 1045, 1046, 1047, 1048, 1049]:
+            bl["Flag"]["OnlyWpn"] = 1
+            bl["Flag"]["NoBuildWpn"] = 0     
+    blFile.Close()
 
         
     

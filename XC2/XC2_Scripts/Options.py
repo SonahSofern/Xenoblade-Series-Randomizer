@@ -1,4 +1,4 @@
-from scripts import JSONParser,Helper
+from scripts import JSONParser,Helper, XCRandomizer
 from XC2.XC2_Scripts.IDs import *
 from tkinter import *
 from XC2.XC2_Scripts import QOL as QualityOfLife, Accessories, AuxCores, Misc, BladeSpecials, CoreCrystals as CoreCry, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, BladeStats, Skips,GachaModifications, Enhancements, Cosmetics, Items as I, ButtonCombos, Scales, CharacterRandomization, Enemy, WeaponChips, YellowSkills
@@ -8,7 +8,8 @@ from XC2.XC2_Scripts.UM_Hunt import UMHuntMain
 
 from scripts.Interactables import Option, SubOption, MutuallyExclusivePairing, DescriptionIndicator
 import scripts.Interactables
-scripts.Interactables.Game = "XC2"
+game = "XC2"
+scripts.Interactables.Game = game
 
 # Prio
 First = 0
@@ -88,7 +89,7 @@ DriverSkillTreesOption_EarlyArtsCancel = SubOption("Early Arts Cancel", DriverSk
 DriverSkillTreesOption_EarlyXYBAttack = SubOption("Early XYB Attack", DriverSkillTreesOption)
 
 # Blades
-BladesOption = Option("Blades", Blade, "Randomizes which blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], prio=First, hasSpinBox = True, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.BladesDescriptions())
+BladesOption = Option("Blades", Blade, "Randomizes which blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization(), lambda: CoreCry.NewGamePlusBladeBalancing()], filePlaceCommands=[lambda: XCRandomizer.FilePlacer(["Loader/plugins/ngPlusBladeChips.nro"], "../../../0100e95004038000/romfs/skyline/plugins", game=game)], prio=First, hasSpinBox = True, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.BladesDescriptions())
 BladesOption_Dromarch = SubOption("Randomize Dromarch", BladesOption)
 BladesOption_Healer = SubOption("Guarantee Healing Art", BladesOption)
 BladeArtsOption = Option("Blade Arts", Blade, "Randomizes a Blade's combat arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])
