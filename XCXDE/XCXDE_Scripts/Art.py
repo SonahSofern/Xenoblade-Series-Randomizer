@@ -26,9 +26,12 @@ def ArtStats(intensity):
     
      # TP Cost
     artsFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_ArtsList.json")
+    artsMsFile = JSONParser.File("XCXDE/JsonOutputs/common_ms/BTL_ArtsList_ms.json")
     for art in artsFile.rows:
-        statRando.ApplyMult(art, "DecDmp", statRando.RollBalancedMult(), min=0)
+        statRando.ApplyMult(art, "DecDmp", statRando.RollBalancedMult(), min=0, roundedDigits=-2)
+        ShowNewTpCosts(art, artsMsFile)
     artsFile.Close()
+    artsMsFile.Close()
         
     # Buff Duration
     buffFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_BuffList.json")
@@ -38,6 +41,17 @@ def ArtStats(intensity):
         for i in range(1,7):
             statRando.ApplyMult(buff, f"Life{i}", mult)
     buffFile.Close()
+
+def ShowNewTpCosts(art, artsMsFile:JSONParser.File):
+    '''When randomizing TP costs we add the new cost to the in battle UI'''
+    for artMs in artsMsFile.rows:
+        if artMs["$id"] == art["Caption"]:
+            oldName:str = artMs["name"]
+            if '(TP)' not in oldName: return
+            newTpCost = f"({art["DecDmp"]} TP)"
+            artMs["name"] = oldName.replace("(TP)", newTpCost)
+            return
+    
 
 def ArtEnhancements(intensity):
     '''Art enhancement currently paired with stats, they are unique to arts so can be adjusted without messing with other things'''

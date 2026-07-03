@@ -183,14 +183,18 @@ def BalanceAresTypeGear(chrOldSkl, newSkell:SkellFrames, wpnFile:JSONParser.File
     
     
     AGHASURA_IDs = [2674, 2675, 2676]
+    AGNIGATLING_IDs = [133, 2680, 2681]
     # Mult the weapons damage, price. affixes
     for i in range(0,10):
         targetWeaponID = newSkell.DEF[f"Wpn[{i}]"]
         for wpn in wpnFile.rows:
             if wpn["$id"] != targetWeaponID: continue
             
-            if wpn["$id"] in AGHASURA_IDs: # Ares AGHASURA cannon needs special nerf what the fk was monolith cooking
+            if wpn["$id"] in AGHASURA_IDs: # Ares AGHASURA cannon and AGNI needs special nerf what the fk was monolith cooking
                 wpn["Damage"] *= mult # Apply the mult an extra time
+            
+            if wpn["$id"] in AGNIGATLING_IDs:
+                wpn["Damage"] *= (mult/2)
                 
             for stat in ["Damage", "Price"]:
                 wpn[stat] = min(int(wpn[stat] * mult), StatRand.b16)

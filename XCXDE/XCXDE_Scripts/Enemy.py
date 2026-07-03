@@ -48,7 +48,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
         IntroFightBalances(en, newEn, eRando)
         InvincibleEnemy(newEn)
         
-        # eRando.HealthBalancing(en, newEn, 'HpMaxRev')
+        eRando.HealthBalancing(en, newEn, 'HpMaxRev')
 
         Helper.CopyKeys(en, newEn, ignoreKeys + extraKeys + [soundEffects])
 

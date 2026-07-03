@@ -50,13 +50,31 @@ def WeaponStats(intensity, fileName, affixMax, slotMax):
 
 def SkellArtRando(intensity):
     dlArtsFile = JSONParser.File(f"XCXDE/JsonOutputs/common/BTL_DlArtsList.json")
+    dlArtsMsFile = JSONParser.File(f"XCXDE/JsonOutputs/common_ms/BTL_DlArtsList_ms.json")
     statR = StatRand.Stat(maxMult, intensity)
             
     for wpn in dlArtsFile.rows:
-        for stat in ["Fuel", "DmgMgn"]:
-            statR.ApplyMult(wpn, stat, statR.RollBalancedMult())
+        statR.ApplyMult(wpn, "Fuel", statR.RollBalancedMult(), min=0, roundedDigits=-1)
+        UpdateFuelCostText(wpn, dlArtsMsFile)
+        
+        statR.ApplyMult(wpn, "DmgMgn", statR.RollBalancedMult())
 
     dlArtsFile.Close()
+    dlArtsMsFile.Close()
+
+def UpdateFuelCostText(wpn, dlArtsMsFile:JSONParser.File):
+    '''The fuel cost text is hard coded so have to update it this way'''
+    targetCaptionID = wpn["Caption"]
+    for cap in dlArtsMsFile.rows:
+        if cap["$id"] == targetCaptionID:
+            oldName:str = cap["name"]
+            if ')' not in oldName: return
+            targetIndex = oldName.index(')') # All fuel costs end in closed parenthesis
+            oldFuelCost = oldName[:targetIndex+1]
+            newFuelCost = f"({wpn["Fuel"]} Fuel)"
+            cap["name"] = oldName.replace(oldFuelCost, newFuelCost)
+            return
+    
   
 def SkellArmorStats(intensity):
     ArmorStats(intensity, "AMR_DlList", ["Hp", "def"], 8, 3)
