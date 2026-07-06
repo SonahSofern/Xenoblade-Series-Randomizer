@@ -1,5 +1,5 @@
 import copy, random
-from XC2.XC2_Scripts import Options
+from XC2.XC2_Scripts import Options, IDs
 from scripts import JSONParser, Helper, PopupDescriptions
 
 # TODO (blades):
@@ -62,8 +62,7 @@ PoppiForms = [1005, 1006, 1007]
 
 # Note: Every Blade besides Roc is randomizable. Roc being randomized would mess up Vandham, and he's exclusive to Rex anyway so may as well keep it that way.
 # The NG+ Exclusive blades cannot use weapon chips, so they cannot be randomized in Race Mode (where their chips are defined by the save file). Exclude those blades in Race Mode to account for this
-BladesAlwaysRandomized = [1001, 1002, 1009, 1010, 1011, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1050, 1104, 1105, 1106, 1107, 1108, 1109, 1111]
-NewGamePlusBlades = [1043, 1044, 1045, 1046, 1047, 1048, 1049] # Currently cannot be randomized, but I would like to figure this out eventually. Will be an option when that works though, because they would be unbalanced if you get them early on
+BladesAlwaysRandomized = [1001, 1002, 1009, 1010, 1011, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1050, 1104, 1105, 1106, 1107, 1108, 1109, 1111] + IDs.NewGamePlusBladeIDs
 
 first_character_randomization = True # Both drivers and blade options call this same function. Only run this logic once
 
@@ -272,9 +271,6 @@ def RandomizeBlades():
         if Options.BladesOption_Dromarch.GetState():
             blades_left_to_randomize = [1004] + blades_left_to_randomize
 
-        # TODO: Re-add this once NG+ blades' weapon chips work properly
-        # if not OptionsRunDict["Blades"]["subOptionObjects"]["Include NG+ Blades"]["subOptionTypeVal"]:
-        #    blades_left_to_randomize = blades_left_to_randomize + NewGamePlusBlades
         randomized_order = blades_left_to_randomize.copy()
         random.shuffle(randomized_order)
 

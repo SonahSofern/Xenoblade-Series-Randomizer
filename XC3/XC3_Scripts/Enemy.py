@@ -6,7 +6,6 @@ from pathlib import Path
 
 # https://xenobladedata.github.io/xb3_130/SYS_GimmickLocation.html#25513 useful file has enemy xyz
 
-
 StaticEnemyData:list[Helper.RandomGroup] = []
 ValidEnemyPopFileNames = ["ma01a_GMK_EnemyPop.json", "ma04a_GMK_EnemyPop.json", "ma07a_GMK_EnemyPop.json", "ma09a_GMK_EnemyPop.json", "ma11a_GMK_EnemyPop.json", "ma14a_GMK_EnemyPop.json", "ma15a_GMK_EnemyPop.json", "ma17a_GMK_EnemyPop.json", "ma22a_GMK_EnemyPop.json", "ma25a_01_GMK_EnemyPop.json", "ma25a_02_GMK_EnemyPop.json", "ma25a_03_GMK_EnemyPop.json", "ma25a_04_GMK_EnemyPop.json", "ma25a_05_GMK_EnemyPop.json", "ma25a_06_GMK_EnemyPop.json", "ma25a_07_GMK_EnemyPop.json", "ma25a_08_GMK_EnemyPop.json", "ma25a_09_GMK_EnemyPop.json", "ma25a_10_GMK_EnemyPop.json", "ma25a_11_GMK_EnemyPop.json", "ma25a_12_GMK_EnemyPop.json", "ma25a_13_GMK_EnemyPop.json", "ma25a_14_GMK_EnemyPop.json", "ma25a_15_GMK_EnemyPop.json", "ma25a_16_GMK_EnemyPop.json", "ma25a_17_GMK_EnemyPop.json", "ma25a_18_GMK_EnemyPop.json", "ma25a_19_GMK_EnemyPop.json", "ma25a_50_GMK_EnemyPop.json", "ma25a_51_GMK_EnemyPop.json", "ma25a_52_GMK_EnemyPop.json", "ma25a_53_GMK_EnemyPop.json", "ma40a_GMK_EnemyPop.json", "ma44a_GMK_EnemyPop.json", "ma45a_GMK_EnemyPop.json", "ma46a_GMK_EnemyPop.json", "ma90a_GMK_EnemyPop.json", "ma90gmk_GMK_EnemyPop.json"]
 
@@ -29,62 +28,59 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     Aggro = ["<AB4BA3D5>", "<1104E9C5>", "<B5C5F3B3>", "<EC666A80>", "<64251F47>", "<3B6DFBC4>"]
     specialFields = ['<B569BFB1>', '<352C263C>', '<BA57B736>'] # These fields being kept fixed a bug where cutscenes couldnt end fights and you would just sit there while the enemy kept aggroing you
     RetryBattleLandmark = "<9A220E4D>"
+    LevelPlus = "LevPlus" # Keep the level ranges on the original enemy no need to alter them
     PostBattleConqueredPopup = "CatMain" # Currently not using it has weird effects fights take a long time to end after enemy goes down without it happens eithery way with UMs so something is wrong with UMS
     battleEndFields = ['<B569BFB1>', '<352C263C>', '<BA57B736>' ] # Not sure exactly but without keeping these as original sometimes story fights take a LONG time to end
-    ignoreKeys = ["$id", "ID", specialFields, PostBattleConqueredPopup, "Level", "IdMove", "NamedFlag", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "FlgFixed", "IdMove", "SpBattle", "FlgNoVanish", "FlgSpDead" , "KillEffType", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"] + Aggro + battleEndFields
+    ignoreKeys = ["$id", "ID", specialFields, PostBattleConqueredPopup, "Level", LevelPlus, "IdMove", "NamedFlag", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "FlgFixed", "IdMove", "SpBattle", "FlgNoVanish", "FlgSpDead" , "KillEffType", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"] + Aggro + battleEndFields
     HPLimits = ["LowerLimitHP", "<60FB333A>"]
     retainNonArrangeKeys = ['FlyHeight', 'SwimHeight']
-    with open("XC3/JsonOutputs/fld/FLD_EnemyData.json", 'r+', encoding='utf-8') as eneFile:
-        with open("XC3/JsonOutputs/btl/BTL_Enemy.json", 'r+', encoding='utf-8') as paramFile:
-            with open("XC3/JsonOutputs/btl/BTL_EnRsc.json", 'r+', encoding='utf-8') as rscFile:
-                with open("XC3/JsonOutputs/btl/BTL_Arts_En.json", 'r+', encoding='utf-8') as artFile:
-                    paramData = json.load(paramFile)
-                    rscData = json.load(rscFile)
-                    eneData = json.load(eneFile)
-                    artData = json.load(artFile)
+    eneFile = JSONParser.File("XC3/JsonOutputs/fld/FLD_EnemyData.json")
+    paramFile = JSONParser.File("XC3/JsonOutputs/btl/BTL_Enemy.json")
+    rscFile = JSONParser.File("XC3/JsonOutputs/btl/BTL_EnRsc.json")
+    artFile = JSONParser.File("XC3/JsonOutputs/btl/BTL_Arts_En.json")
                     
-                    eRando = Enemy.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "Resource", "IdBattleEnemy", eneData, paramData, rscData, artData)
+    eRando = Enemy.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "Resource", "IdBattleEnemy", eneFile.data, paramFile.data, rscFile.data, artFile.data)
+
+    if firstRun:
+        StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
+
+    for en in eneFile.rows:
+        if eRando.FilterEnemies(en, targetGroup):
+            continue
         
-                    if firstRun:
-                        StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
+        if FilterNPCEnemies(en["NPCName"]):
+            continue
 
-                    for en in eneData["rows"]:
-                        if eRando.FilterEnemies(en, targetGroup):
-                            continue
-                        
-                        if FilterNPCEnemies(en["NPCName"]):
-                            continue
+        newEn = eRando.CreateRandomEnemy(StaticEnemyData)
+        
+        eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys + HPLimits + testNonArrangeKeys + ActTypeFix(eRando, en, newEn)) # Flying Enemies and some enemies in Erythia will still fall despite act type fix (After testing I found this is because of the motion file in rsc. So there is no fix unless we change every enemies motion as they are being placed)
+        
+        ForcedArtsManager(en, newEn, eRando)
+            
+        if isBossGroupBalancing:
+            eRando.BalanceFight(en, newEn, GroupFightViolations, EnemyCounts)
 
-                        newEn = eRando.CreateRandomEnemy(StaticEnemyData)
-                        
-                        eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys + HPLimits + testNonArrangeKeys + ActTypeFix(eRando, en, newEn)) # Flying Enemies and some enemies in Erythia will still fall despite act type fix (After testing I found this is because of the motion file in rsc. So there is no fix unless we change every enemies motion as they are being placed)
-                        
-                        ForcedArtsManager(en, newEn, eRando)
-                            
-                        if isBossGroupBalancing:
-                            eRando.BalanceFight(en, newEn, GroupFightViolations, EnemyCounts)
+        if isMatchSizeOption:
+            EnemySizeHelper(en, newEn)
 
-                        if isMatchSizeOption:
-                            EnemySizeHelper(en, newEn, eRando)
+        IntroFightBalances(en, newEn, eRando)
+        
+        eRando.HealthBalancing(en, newEn, 'StRevHp')
 
-                        IntroFightBalances(en, newEn, eRando)
-                        
-                        eRando.HealthBalancing(en, newEn, 'StRevHp')
+        Helper.CopyKeys(en, newEn, ignoreKeys)
 
-                        Helper.CopyKeys(en, newEn, ignoreKeys)
+    for group in StaticEnemyData:
+        group.RefreshCurrentGroup()
 
-                    for group in StaticEnemyData:
-                        group.RefreshCurrentGroup()
+    if firstRun:
+        Bandaids()
+        
+    BreakTutorial(eRando)
 
-                    if firstRun:
-                        Bandaids()
-                        
-                    BreakTutorial(eRando)
-
-                    JSONParser.CloseFile(eneData, eneFile)
-                    JSONParser.CloseFile(paramData, paramFile)
-                    JSONParser.CloseFile(rscData, rscFile)
-                    JSONParser.CloseFile(artData, artFile)
+    eneFile.Close()
+    paramFile.Close()
+    rscFile.Close()
+    artFile.Close()
 
 def ActTypeFix(eRando:Enemy.EnemyRandomizer, oldEn, newEn):
     '''In XC3 its not enough to just swap act types to the old enemys spot. There are behaviors under the hood that rely on act type. For example a normally flying enemy will start soaring 50 feet above you if put as a grounded enemy. Normally flying enemy locations will just fall even if set to act type 2 and chest height fly height etc are kept. Same with some locations in the Erythia Sea. Instead we will conditionally swap act types. The behavior that lets normally swimming enemies survive on land is fixed by this method and the reverse.
@@ -111,8 +107,8 @@ def FilterNPCEnemies(enNPC):
         return True
 
 
-def ForcedArtsManager(oldEn, newEn, eRando:Enemy.EnemyRandomizer): # Do these enemies with party wiping arts that are meant to end a scene need to be removed?
-    EnemyIDsWithForcedArts = [545, 941, 885, 4431, 3782, 378, 499, 4434, 4445, 4447] # FLD_EnemyData IDs
+def ForcedArtsManager(oldEn, newEn, eRando:Enemy.EnemyRandomizer):
+    EnemyIDsWithForcedArts = [545, 941, 885, 4431, 3782, 378, 499, 4431, 4434, 4445, 4447] # FLD_EnemyData IDs
     ForcedArtsIDs = [426, 111, 1436, 943, 1887, 1897, 1959, 1962] # Arts that the game uses to progress a cutscene/story event
     
     '''Enemies with cutscene starting arts (Ghondor for example) need the effects removed when put in a different spot'''
@@ -126,7 +122,8 @@ def ForcedArtsManager(oldEn, newEn, eRando:Enemy.EnemyRandomizer): # Do these en
                     if art["$id"] == newPar[f"ArtsSlot{i}"]:
                         newPar[f"ArtsSlot{i}"] = 0
                 break
-            
+    
+    '''Enemies who get replaced need to have a cutscene ending art on the replacement'''
     if oldEn["$id"] in EnemyIDsWithForcedArts: # If the old enemy has a cutscene art
         oldPar = eRando.FindParam(oldEn)
         newPar = eRando.FindParam(newEn)
@@ -141,6 +138,7 @@ def ForcedArtsManager(oldEn, newEn, eRando:Enemy.EnemyRandomizer): # Do these en
                 break
         
         newArt = 0
+        newArtSlot = 0
         
         # Find new enemy art
         for i in range(0,16):
@@ -148,6 +146,7 @@ def ForcedArtsManager(oldEn, newEn, eRando:Enemy.EnemyRandomizer): # Do these en
                 for art in eRando.artData["rows"]:
                     if art["$id"] == newPar[f"ArtsSlot{i}"]:
                         newArt = copy.deepcopy(art)
+                        newArtSlot = i
                         break
                 break
             
@@ -167,9 +166,9 @@ def ForcedArtsManager(oldEn, newEn, eRando:Enemy.EnemyRandomizer): # Do these en
         newArtID = eRando.CreateArt(forcedArt, [("StateName", newArt["StateName"]), ("WpnType", newArt["WpnType"])]) # Ensures that a valid state for that enemy is on the art or else they wont use the art
         
         # Plug that art into the enemy in slot 15 the last slot (very few enemies use this and the fight ends at this art anyway)
-        eRando.ChangeStats([newEn], [(f"ArtsSlot15", newArtID)])
+        # Slot 15 doesnt always work, some enemies never attempt to use the art, instead lets add it to a slot they are using
+        eRando.ChangeStats([newEn], [(f"ArtsSlot{newArtSlot}", newArtID)])
         
-        return False
 
 def SummonFix(): # For now this is lower priority for how difficult it would be to fix so im removing summons
     with open("XC3/JsonOutputs/btl/BTL_EnSummon.json", 'r+', encoding='utf-8') as summonFile:
@@ -179,13 +178,20 @@ def SummonFix(): # For now this is lower priority for how difficult it would be 
                 summon[f"EnemyID0{i}"] = 0
         JSONParser.CloseFile(summonData, summonFile)
     
-def EnemySizeHelper(oldEn, newEn, eRando:Enemy.EnemyRandomizer):
+def EnemySizeHelper(oldEn, newEn):
+    Ferronis = 4 # The future connected ferronis on a cliff fight needs the replacement enemy to be MASSIVE to be able to hit it
     Massive = 3
     Large = 2
     Normal = 1
     Small = 0
     
+    if oldEn["$id"] in [4439, 4440, 4441, 4442]: oldEn["ChrSize"] = Ferronis
+    
     multDict = {
+        (Ferronis, Massive): 10,
+        (Ferronis, Large): 30,
+        (Ferronis, Normal): 40,
+        (Ferronis, Small): 50,
         (Massive, Large): 3,
         (Massive, Normal): 4,
         (Massive, Small): 5,
@@ -194,7 +200,7 @@ def EnemySizeHelper(oldEn, newEn, eRando:Enemy.EnemyRandomizer):
         (Normal, Small): 1,
     }
     keys = ["Scale", "EliteScale", "WeaponScale"]
-    Enemy.EnemySizeMatch(oldEn, newEn, keys, multDict)
+    Enemy.EnemySizeMatch(oldEn, newEn, keys, multDict, maxScale=65500)
 
 def GetEnemyCounts():
     enemyCounts = dict()
@@ -249,6 +255,7 @@ def BreakTutorial(eRando:Enemy.EnemyRandomizer): # Tutorial that requires an ene
     eRando.ChangeStats(breakTutorial, [("RstBreak", 0)])
     
 def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
+    '''Keep original enemy stats on early game fight before having the full party to balance'''
     introTutorial = [449, 450, 451, 452, 453, 454, 455]
     bossIntroFights = [456, 457]
     returningToColony =  [737 ,739]
@@ -259,10 +266,16 @@ def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
     Sentry = [463]
     AgnusTrio = [464,465,466]
     MysteriousEnemy = [467]
+    introTutorialDlc = [4426]
+    NikolGlimmer = [4427, 4428]
+    MoebiusDuo = [4429, 4430]
+    Ghondor = [4431]
+    GlimmerSolo = [4433, 4437, 4438]
+    
     cantLoseFights = introTutorial + bossIntroFights + returningToColony
-    introFights = breakTutorial + Piranhax + DrifterRopl + Sentry + StealthShip + AgnusTrio + MysteriousEnemy + cantLoseFights
+    nerfedFights = breakTutorial + Piranhax + DrifterRopl + Sentry + StealthShip + AgnusTrio + MysteriousEnemy + cantLoseFights + introTutorialDlc + NikolGlimmer + MoebiusDuo + Ghondor + GlimmerSolo
 
-    if en["$id"] in introFights:
+    if en["$id"] in nerfedFights:
         oldEnParam = eRando.FindParam(en)
         if en["$id"] in cantLoseFights:
             hpChange = 5

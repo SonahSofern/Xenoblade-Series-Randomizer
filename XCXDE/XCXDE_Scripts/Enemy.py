@@ -57,7 +57,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     for group in StaticEnemyData:
         group.RefreshCurrentGroup()
     
-    NerfSummonEnemies()
+    NerfSummonEnemies(eneFile)
         
     eneFile.Close()
     paramFile.Close()
@@ -92,14 +92,12 @@ def InvincibleEnemy(newEn):
         newEn["StartupBuff"] = 0
         newEn["StartupBuffLv"] = 0
         
-
 def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
     introFightIDs = [348, 349, 350]
     if en["$id"] in introFightIDs:
         oldEnParam = eRando.FindParam(en)
         eRando.ChangeStats([newEn], [("HpMaxRev", oldEnParam["HpMaxRev"]), ("PowFightRev", oldEnParam["PowFightRev"]), ("PowShootRev", oldEnParam["PowShootRev"]), ("PowMindRev", oldEnParam["PowMindRev"]), ("DodgeRev", oldEnParam["DodgeRev"]), ("DexFightRev", oldEnParam["DexFightRev"]), ("DexShootRev", oldEnParam["DexShootRev"]), ("Def", oldEnParam["Def"]), ("RstPhysics", oldEnParam["RstPhysics"]), ("RstDebuffHalf", oldEnParam["RstDebuffHalf"]), ("RstDebuffFull", oldEnParam["RstDebuffFull"]) ])
                                                                                                                                                                                                                                                                                                             
-
 def HpLimitEffects(en):
     '''Xenoblade X uses a Enhancement to stop characters from dying in phased fights, this keeps that effect on the location and removes it if not on a phased location'''
     HPLimitFightIDs = [431,441,460,470,1755,1756] # DLC seemingly didnt have any but im skeptical because there is a VITA fight that ends at 50% hp (ID 4093)
@@ -122,16 +120,14 @@ def HpLimitEffects(en):
                     slot = i
             en[f"EnhanceID{slot}"] = NoKillEnhancement
    
-
 # A script to handle summoned enemy levels
 
 # After enemy randomization
 # Check all enemies that have summon arts
 # Create a new summon art for each
 # Create a new summon enemy for each with matching level to the summoning enemy
-def NerfSummonEnemies():
+def NerfSummonEnemies(eneFile:JSONParser.File):
     # cannot find the link to perform the above concept. It is probably hard coded to each art. Instead just setting level of all summoned enemies to 1
-    eneFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnList.json")
     for en in eneFile.rows:
         if en["$id"] in IDs.SummonMonsterIDs:
             # Put summons levels to 1 because there is currently no way to balance them
@@ -141,7 +137,6 @@ def NerfSummonEnemies():
             # Shrink summons in case its a small arena
             en["ScaleMin"] = en["ScaleMin"] // 3
             en["ScaleMax"] = en["ScaleMax"] // 3   
-    eneFile.Close()
    
                                                                                                                                                                                                                                                                                            
 def EnemyDesc(name):

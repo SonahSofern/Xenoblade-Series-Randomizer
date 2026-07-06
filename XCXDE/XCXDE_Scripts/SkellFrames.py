@@ -20,9 +20,9 @@ def RandomizeSkells():
         newSkell:SkellFrames = skellGroup.SelectRandomMember()
         
         # Force ares skell for testing
-        if defSkl["$id"] == 51: # Starter Skell
-            while newSkell.CHR["$id"] not in [251,250] :
-                newSkell:SkellFrames = skellGroup.SelectRandomMember()
+        # if defSkl["$id"] == 51: # Starter Skell
+        #     while newSkell.CHR["$id"] not in [251,250] :
+        #         newSkell:SkellFrames = skellGroup.SelectRandomMember()
         
         for chrSkl in sklChrFile.rows:
             if defSkl["Frame"] != chrSkl["$id"]: continue 

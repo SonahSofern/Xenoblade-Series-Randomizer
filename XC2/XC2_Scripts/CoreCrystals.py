@@ -162,7 +162,7 @@ def NewGamePlusBladeBalancing():
     # Allow chip building on these blades
     blFile = JSONParser.File("XC2/JsonOutputs/common/CHR_Bl.json")
     for bl in blFile.rows:
-        if bl["$id"] in [1043, 1044, 1045, 1046, 1047, 1048, 1049]:
+        if bl["$id"] in IDs.NewGamePlusBladeIDs:
             bl["Flag"]["OnlyWpn"] = 1
             bl["Flag"]["NoBuildWpn"] = 0     
     blFile.Close()
