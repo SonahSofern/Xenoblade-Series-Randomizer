@@ -1,12 +1,12 @@
 from scripts import JSONParser,Helper, XCRandomizer
 from XC2.XC2_Scripts.IDs import *
 from tkinter import *
-from XC2.XC2_Scripts import QOL as QualityOfLife, Accessories, AuxCores, Misc, BladeSpecials, CoreCrystals as CoreCry, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, BladeStats, Skips,GachaModifications, Enhancements, Cosmetics, Items as I, ButtonCombos, Scales, CharacterRandomization, Enemy, WeaponChips, YellowSkills
+from XC2.XC2_Scripts import QOL as QualityOfLife, Accessories, AuxCores, Misc, BladeSpecials, CoreCrystals as CoreCry, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, BladeStats, Skips, Enhancements, Cosmetics, Items as I, ButtonCombos, Scales, CharacterRandomization, Enemy, WeaponChips, YellowSkills
 from XC2.XC2_Scripts.Race_Mode import RaceMode
 from XC2.XC2_Scripts.Torna_Logic import TornaMain
 from XC2.XC2_Scripts.UM_Hunt import UMHuntMain
 
-from scripts.Interactables import Option, SubOption, MutuallyExclusivePairing, DescriptionIndicator
+from scripts.Interactables import Option, SubOption, MutuallyExclusivePairing
 import scripts.Interactables
 game = "XC2"
 scripts.Interactables.Game = game
@@ -67,7 +67,6 @@ QuestRewardsOption_RefinedAuxCores = SubOption("Refined Aux Cores", QuestRewards
 QuestRewardsOption_CoreCrystals = SubOption("Core Crystals", QuestRewardsOption, hasSpinBox=True, spinDefault=5)
 QuestRewardsOption_RareBlades = SubOption("Rare Blades", QuestRewardsOption, [lambda: CoreCry.CustomCoreCrystalRando()], hasSpinBox = True, spinDefault=5)
 
-
 # Drivers
 DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], prio=First, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.DriversDescriptions())
 DriversOption_Nia = SubOption("Guarantee Early Nia", DriversOption, defState = False)
@@ -92,6 +91,7 @@ DriverSkillTreesOption_EarlyXYBAttack = SubOption("Early XYB Attack", DriverSkil
 BladesOption = Option("Blades", Blade, "Randomizes which blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization(), lambda: CoreCry.NewGamePlusBladeBalancing()], filePlaceCommands=[lambda: XCRandomizer.FilePlacer(["Loader/plugins/ngPlusBladeChips.nro"], "../../../0100e95004038000/romfs/skyline/plugins", game=game)], prio=First, hasSpinBox = True, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.BladesDescriptions())
 BladesOption_Dromarch = SubOption("Randomize Dromarch", BladesOption)
 BladesOption_Healer = SubOption("Guarantee Healing Art", BladesOption)
+BladeNGPlusOption = Option("Enable NG+ Blades", Blade, "Allows NG+ blades to be included in randomization")
 BladeArtsOption = Option("Blade Arts", Blade, "Randomizes a Blade's combat arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])
 BladeBattleSkillsOption = Option("Blade Battle Skills", Blade, "Randomizes a Blade's battle (yellow) skill tree", [lambda: YellowSkills.RandomizeBattleSkills()], hasSpinBox = True)
 BladeBattleSkillsOption_Duplicates = SubOption("Allow Duplicates", BladeBattleSkillsOption)
@@ -105,7 +105,7 @@ BladeWeaponChipsOption = Option("Blade Weapon Chips", Blade, "Randomizes the eff
 # BladeWeaponChipsOption_AutoAtk = SubOption("Auto Attacks", BladeWeaponChipsOption, defState= True)
 BladeWeaponChipsOption_CritRate = SubOption("Crit Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["CriRate"],Helper.InclRange(0,100), BladeStats.BladeWeaponCritDistribution)],defState= True)
 BladeWeaponChipsOption_GuardRate = SubOption("Guard Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["GuardRate"],Helper.InclRange(0,100), BladeStats.BladeWeaponGuardDistribution)],defState= True)
-BladeWeaponChipsOption_Enhancement = SubOption("Enhancements", BladeWeaponChipsOption, [lambda: WeaponChips.RandomizeWeaponEnhancements()], defState= True)
+BladeWeaponChipsOption_Enhancement = SubOption("Enhancements", BladeWeaponChipsOption, [lambda: WeaponChips.RandomizeWeaponEnhancements()])
 BladeCombosOption = Option("Blade Combos", Blade, "Randomizes blade elemental combos", [lambda: EleCombo.BladeComboRandomization()], descData=lambda: EleCombo.BladeCombosDescription())
 BladeCombosOption_ElementRoutes = SubOption("Element Routes", BladeCombosOption)
 BladeCombosOption_Damage = SubOption("Damage", BladeCombosOption)
@@ -195,10 +195,8 @@ ChestOption_CondenseGoldOption = SubOption("Condense Gold Loot", ChestOption, [l
 # PickupRangeOption = Option("Increase Pickup Range", QOL, "Increases your pickup range" , [lambda: QualityOfLife.CollectionRange()]) No longer needed now that chests QOL is forced so they disappear and let you get the loot
 EverlastingPouchItemsOption = Option("Everlasting Pouch Items", QOL, "Makes Pouch Items last as long as possible", [lambda: JSONParser.ChangeJSONFile(["common/ITM_FavoriteList.json"],["Time"], Helper.InclRange(0,255), [6099])])
 MutePopupsOption = Option("Mute Popups", QOL, "Stops blade skill and pouch item refill popups", [lambda: (JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[89], ["sheet06"], [""]), JSONParser.ChangeJSONLine(["common/MNU_Layer_Dlc03.json"],[320], ["sheet06"], [""]))])
-MutePopupsOption_Landmarks = SubOption("Landmarks", MutePopupsOption, [lambda: (JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[85], ["sheet04"], [""]),JSONParser.ChangeJSONLine(["common/MNU_Layer_Dlc03.json"],[316], ["sheet04"], [""]))])
-NewGamePlusFlagsOption = Option("NG+ Flags", QOL, "Enables many NG+ behaviours like unlocked hidden driver skill trees, unlocked chain attacks from the start, unlocked blade slots etc. These must be accepted from the DLC Menu to work.", [lambda: QualityOfLife.CreateDLCtoSetFlag(["2nd Blade Equip Slot", "3rd Blade Equip Slot"], [35327, 35328], [2,2], [0,0], [1,1], [1,1])])
-NewGamePlusFlagsOptions_Blades = SubOption("NG+ Blades", NewGamePlusFlagsOption, [lambda: GachaModifications.UnlockNGPlusBlades()])
-NewGamePlusFlagsOptionsHiddenDriverSkillTree = SubOption("Hidden Skill Tree Unlocked", NewGamePlusFlagsOption, [lambda: QualityOfLife.FixIssuesCausedByNGPlusFlag()])
+MutePopupsOption_Landmarks = SubOption("Landmarks", MutePopupsOption, [lambda: (JSONParser.ChangeJSONLine(["common/MNU_Layer.json"], [85], ["sheet04"], [""]),JSONParser.ChangeJSONLine(["common/MNU_Layer_Dlc03.json"],[316], ["sheet04"], [""]))])
+NewGamePlusFlagsOption = Option("NG+ Flags", QOL, "Enables many NG+ behaviours like unlocked hidden driver skill trees, unlocked chain attacks from the start, unlocked blade slots etc. These must be accepted from the DLC Menu to work.", [lambda: QualityOfLife.CreateDLCtoSetFlag(["2nd Blade Equip Slot", "3rd Blade Equip Slot"], [35327, 35328], [2,2], [0,0], [1,1], [1,1]), lambda: QualityOfLife.CreateDLCtoSetFlag(["Driver Skill Tree Key"], [48589], Condition = [1853]), lambda: CoreCry.UnlockNGPlusBladesGacha()])
 
 # Funny
 MusicOption = Option("Music", Funny, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())

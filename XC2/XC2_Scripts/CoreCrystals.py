@@ -1,11 +1,10 @@
 import json
 from scripts import Helper, JSONParser
 import random
-from XC2.XC2_Scripts import IDs
+from XC2.XC2_Scripts import IDs, CharacterRandomization
 
 def CustomCoreCrystalRando():
-    if HasRanOnce():
-        return
+    if HasRanOnce(): return
     RandomizeCrystalList()
     ApplyNewBladeNames()
     FixOpeningSoftlock()
@@ -14,6 +13,8 @@ def CustomCoreCrystalRando():
     RareBladeProbabilityEqualizer()
     LandofChallengeRelease()
     NewGamePlusBladeBalancing()
+    AddMikhailToGacha()
+    UnlockNGPlusBladesGacha()
 
 def RareBladeProbabilityEqualizer(): # makes it so all blades are equally likely to be pulled
     Helper.ColumnAdjust("XC2/JsonOutputs/common/BLD_RareList.json", ["Prob1", "Prob2", "Prob3", "Prob4", "Prob5"] , 1)
@@ -146,7 +147,7 @@ def NewGamePlusBladeBalancing():
             newWeapon["Rank"] = chip["Rank"] # Rank, chips also have a rank attribute so just use that
             
             # Update Damage, Stab, Crit, Guard
-            statMult = 1/(21-chip["Rank"]) # 
+            statMult = 1/(21-chip["Rank"]) # Use the rank 20 chip stats as max and the target chip uses 1/rank as a mult
             for stat in ["Damage", "Stability", "CriRate", "GuardRate"]:
                 newWeapon[stat] = int(newWeapon[stat] * statMult)
             
@@ -167,5 +168,23 @@ def NewGamePlusBladeBalancing():
             bl["Flag"]["NoBuildWpn"] = 0     
     blFile.Close()
 
-        
-    
+def UnlockNGPlusBladesGacha():
+    blFile = JSONParser.File("XC2/JsonOutputs/common/BLD_RareList.json")
+    NGPlusCondition = 1789 # NG+ Blades
+    CompleteSaveCondition = 3219 # Telos
+    for bl in blFile.rows:
+        if bl["Condition"] in [NGPlusCondition + CompleteSaveCondition]:
+            bl["Condition"] = 0
+    blFile.Close()
+
+def AddMikhailToGacha():
+    # Adds Mikhail to the Gacha table
+    MikhailGachaRow = {
+        "$id": 38,
+        "Blade": CharacterRandomization.ReplacementCharacter2Original[1045],
+        "Condition": 0,
+    }
+    for i in Helper.InclRange(1, 5):
+        MikhailGachaRow["Prob" + str(i)] = 0.25  # Same as Akhos and Patroka
+        MikhailGachaRow["Assure" + str(i)] = 0
+    JSONParser.ExtendJSONFile("common/BLD_RareList.json", [[MikhailGachaRow]])
