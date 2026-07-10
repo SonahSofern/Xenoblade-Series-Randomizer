@@ -1,7 +1,7 @@
 import json
-from scripts import Helper, JSONParser
+from scripts import Helper, JSONParser, StatRand
 import random
-from XC2.XC2_Scripts import IDs, CharacterRandomization
+from XC2.XC2_Scripts import IDs, CharacterRandomization, Options
 
 def CustomCoreCrystalRando():
     if HasRanOnce(): return
@@ -12,9 +12,10 @@ def CustomCoreCrystalRando():
     FixArtReleaseLevels()
     RareBladeProbabilityEqualizer()
     LandofChallengeRelease()
-    NewGamePlusBladeBalancing()
-    AddMikhailToGacha()
-    UnlockNGPlusBladesGacha()
+    if Options.BladeNGPlusOption.GetState():
+        NewGamePlusBladeBalancing()
+        AddMikhailToGacha()
+        UnlockNGPlusBladesGacha()
 
 def RareBladeProbabilityEqualizer(): # makes it so all blades are equally likely to be pulled
     Helper.ColumnAdjust("XC2/JsonOutputs/common/BLD_RareList.json", ["Prob1", "Prob2", "Prob3", "Prob4", "Prob5"] , 1)
@@ -140,7 +141,7 @@ def NewGamePlusBladeBalancing():
     for chip in chipFile.rows:
         for i in range(20,27): # CreateWeapons 20-27 which correspond to those NG+ blade weapons
             # find the target weapon
-            newWeapon = Helper.copy.deepcopy(ogWeaponTemplates.originalGroup[20-i])
+            newWeapon = Helper.copy.deepcopy(ogWeaponTemplates.originalGroup[i-20])
             
             newID = wpnFile.rows[-1]["$id"] + 1
             newWeapon["$id"] = newID # New ID
@@ -149,7 +150,7 @@ def NewGamePlusBladeBalancing():
             # Update Damage, Stab, Crit, Guard
             statMult = 1/(21-chip["Rank"]) # Use the rank 20 chip stats as max and the target chip uses 1/rank as a mult
             for stat in ["Damage", "Stability", "CriRate", "GuardRate"]:
-                newWeapon[stat] = int(newWeapon[stat] * statMult)
+                StatRand.ApplyMult(newWeapon, stat, statMult, min=14)
             
             # Add new weapon to rows
             wpnFile.rows.append(newWeapon)

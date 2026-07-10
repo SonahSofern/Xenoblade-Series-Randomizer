@@ -176,7 +176,7 @@ def validateSpinbox(input, min, max):
     return False
 
 class SubOption():
-    def __init__(self, _name, _parent:Option, commands = [], defState = True, prio = 0, spinDefault = 0, spinMin = 0, spinMax = 100, spinWidth = 3, spinIncr = 10, hasSpinBox = False, spinPadX = 15, spinDesc = "", preRandoCommands:list = []):
+    def __init__(self, _name, _parent:Option, commands = [], defState = True, prio = 0, spinDefault = 0, spinMin = 0, spinMax = 100, spinWidth = 3, spinIncr = 10, hasSpinBox = False, spinPadX = 15, spinDesc = "", preRandoCommands:list = [], filePlaceCommands = []):
         self.name = _name
         self.checkBoxVal = BooleanVar
         self.checkBox:ttk.Checkbutton = None
@@ -194,6 +194,7 @@ class SubOption():
         self.spinWidth = spinWidth
         self.spinIncr = spinIncr
         self.spinDesc = spinDesc
+        self.filePlaceCommands = filePlaceCommands
         _parent.subOptions.append(self)
 
     def GetState(self):

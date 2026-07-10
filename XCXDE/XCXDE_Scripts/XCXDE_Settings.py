@@ -28,7 +28,7 @@ def XCXDEHelp():
     descData = scripts.XCRandomizer.PopupDescriptions.Description((900,900))
     descData.Header("Info")
     descData.Text(f"This is version {Version} of the randomizer project for Xenoblade Chronicles X DE.\nCapable of randomizing: Enemies, Characters, Loot and much more!", anchor="w")
-    descData.Text("Please report bugs or suggestions to our discord, so we can make the randomizer better!", anchor="w")
+    descData.Text("This program is tested on the 1.0.1 English version of the game. It is recommended you also use that version of the game.\n\nPlease report bugs or suggestions to our discord, so we can make the randomizer better!", anchor="w")
     descData.Header("Setup")
     descData.Tag("Requirements")
     descData.Text("Homebrewed Switch or Emulator\nLegal Copy of Xenoblade Chronicles X DE", anchor="w")

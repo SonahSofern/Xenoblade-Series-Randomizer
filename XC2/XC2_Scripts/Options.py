@@ -14,6 +14,8 @@ scripts.Interactables.Game = game
 # Prio
 First = 0
 Last = 100
+BladeRandoPrio = 0
+
 
 Items = 1
 Driver  = 2
@@ -88,10 +90,11 @@ DriverSkillTreesOption_EarlyArtsCancel = SubOption("Early Arts Cancel", DriverSk
 DriverSkillTreesOption_EarlyXYBAttack = SubOption("Early XYB Attack", DriverSkillTreesOption)
 
 # Blades
-BladesOption = Option("Blades", Blade, "Randomizes which blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization(), lambda: CoreCry.NewGamePlusBladeBalancing()], filePlaceCommands=[lambda: XCRandomizer.FilePlacer(["Loader/plugins/ngPlusBladeChips.nro"], "../../../0100e95004038000/romfs/skyline/plugins", game=game)], prio=First, hasSpinBox = True, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.BladesDescriptions())
+BladesOption = Option("Blades", Blade, "Randomizes which blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], prio=BladeRandoPrio, hasSpinBox = True, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.BladesDescriptions())
 BladesOption_Dromarch = SubOption("Randomize Dromarch", BladesOption)
 BladesOption_Healer = SubOption("Guarantee Healing Art", BladesOption)
-BladeNGPlusOption = Option("Enable NG+ Blades", Blade, "Allows NG+ blades to be included in randomization")
+BladeNGPlusOption = Option("Enable NG+ Blades", Blade, "Allows NG+ blades to be included in randomization", prio= BladeRandoPrio-1)
+BladeNGPlusOption_Balance = SubOption("Balance NG+ Blades", BladeNGPlusOption, [lambda: CoreCry.NewGamePlusBladeBalancing()], filePlaceCommands=[lambda: XCRandomizer.FilePlacer(["Loader/plugins/ngPlusBladeChips.nro"], "../../../0100e95004038000/romfs/skyline/plugins", game=game)])
 BladeArtsOption = Option("Blade Arts", Blade, "Randomizes a Blade's combat arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])
 BladeBattleSkillsOption = Option("Blade Battle Skills", Blade, "Randomizes a Blade's battle (yellow) skill tree", [lambda: YellowSkills.RandomizeBattleSkills()], hasSpinBox = True)
 BladeBattleSkillsOption_Duplicates = SubOption("Allow Duplicates", BladeBattleSkillsOption)

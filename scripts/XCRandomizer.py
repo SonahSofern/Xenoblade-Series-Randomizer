@@ -343,6 +343,10 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
             if (len(option.filePlaceCommands) > 0) and option.GetState():
                 for command in option.filePlaceCommands:
                     extraFilePlaced.append(command())
+                for sub in option.subOptions:
+                    if sub.GetState():
+                        for subCommand in sub.filePlaceCommands:
+                            extraFilePlaced.append(subCommand())
             
         randoProgressDisplay.config(text="Packing BDATs")
     
