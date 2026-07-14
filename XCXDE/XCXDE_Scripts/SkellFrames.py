@@ -26,10 +26,11 @@ def RandomizeSkells():
         
         for chrSkl in sklChrFile.rows:
             if defSkl["Frame"] != chrSkl["$id"]: continue 
+            isNewSkellAres = newSkell.CHR["flag(Ares)"]
             
             BalanceStats(chrSkl, newSkell)
             
-            if newSkell.CHR["flag(Ares)"]:
+            if isNewSkellAres:
                 BalanceAresTypeGear(chrSkl, newSkell, wpnFile, amrFile)
             else: 
                 ClearSkellGear(newSkell)

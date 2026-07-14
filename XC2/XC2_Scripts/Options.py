@@ -1,7 +1,7 @@
 from scripts import JSONParser,Helper, XCRandomizer
 from XC2.XC2_Scripts.IDs import *
 from tkinter import *
-from XC2.XC2_Scripts import QOL as QualityOfLife, Accessories, AuxCores, Misc, BladeSpecials, CoreCrystals as CoreCry, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, BladeStats, Skips, Enhancements, Cosmetics, Items as I, ButtonCombos, Scales, CharacterRandomization, Enemy, WeaponChips, YellowSkills
+from XC2.XC2_Scripts import QOL as QualityOfLife, Accessories, AuxCores, Misc, BladeSpecials, CoreCrystals as CoreCry, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, BladeStats, Skips, Enhancements, Cosmetics, Items as I, Scales, CharacterRandomization, Enemy, WeaponChips, YellowSkills
 from XC2.XC2_Scripts.Race_Mode import RaceMode
 from XC2.XC2_Scripts.Torna_Logic import TornaMain
 from XC2.XC2_Scripts.UM_Hunt import UMHuntMain
@@ -61,7 +61,7 @@ EnemyDropOption_AuxCores = SubOption("Aux Cores", EnemyDropOption, hasSpinBox=Tr
 EnemyDropOption_RefinedAuxCores = SubOption("Refined Aux Cores", EnemyDropOption, hasSpinBox=True, spinDefault=10)
 EnemyDropOption_CoreCrystals = SubOption("Core Crystals", EnemyDropOption, hasSpinBox=True, spinDefault=5)
 EnemyDropOption_RareBlades = SubOption("Rare Blades", EnemyDropOption, [lambda: CoreCry.CustomCoreCrystalRando()], hasSpinBox = True, spinDefault=5)
-QuestRewardsOption = Option("Quest Rewards", Items, "Randomizes quest rewards, including merc missions", [lambda: I.RandomizeQuestRewards()], prio=51)
+QuestRewardsOption = Option("Quest Rewards", Items, "Randomizes quest rewards, including merc missions", [lambda: I.RandomizeQuestRewards()], prio=51, descData=lambda: I.QuestRewardDescription())
 QuestRewardsOption_Accessories = SubOption("Accessories", QuestRewardsOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
 QuestRewardsOption_WeaponChips = SubOption("Weapon Chips", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
 QuestRewardsOption_AuxCores = SubOption("Aux Cores", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
@@ -93,7 +93,7 @@ DriverSkillTreesOption_EarlyXYBAttack = SubOption("Early XYB Attack", DriverSkil
 BladesOption = Option("Blades", Blade, "Randomizes which blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], prio=BladeRandoPrio, hasSpinBox = True, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.BladesDescriptions())
 BladesOption_Dromarch = SubOption("Randomize Dromarch", BladesOption)
 BladesOption_Healer = SubOption("Guarantee Healing Art", BladesOption)
-BladeNGPlusOption = Option("Enable NG+ Blades", Blade, "Allows NG+ blades to be included in randomization", prio= BladeRandoPrio-1)
+BladeNGPlusOption = Option("Enable NG+ Blades", Blade, "Allows NG+ blades to be included in randomization", prio= BladeRandoPrio-1, descData=lambda: CoreCry.NGPlusBladeDesc())
 BladeNGPlusOption_Balance = SubOption("Balance NG+ Blades", BladeNGPlusOption, [lambda: CoreCry.NewGamePlusBladeBalancing()], filePlaceCommands=[lambda: XCRandomizer.FilePlacer(["Loader/plugins/ngPlusBladeChips.nro"], "../../../0100e95004038000/romfs/skyline/plugins", game=game)])
 BladeArtsOption = Option("Blade Arts", Blade, "Randomizes a Blade's combat arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])
 BladeBattleSkillsOption = Option("Blade Battle Skills", Blade, "Randomizes a Blade's battle (yellow) skill tree", [lambda: YellowSkills.RandomizeBattleSkills()], hasSpinBox = True)
@@ -168,7 +168,7 @@ ShortcutsOption = Option("Quest Skips", QOL, "Various speedups/skips for tedious
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
 ShortcutsOption_ThiefRumours = SubOption("Roc Thief Rumours Skip", ShortcutsOption, [lambda: Skips.BaseGameStorySkip([2028], "Normal")])
-ShortcutsOption_MorArdainEnterFactory = SubOption("Materials Stakeout", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_MercenariesMission.json"],[248], ["RequestPerformance"], 1)])
+ShortcutsOption_MorArdainEnterFactory = SubOption("Materials Stakeout Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_MercenariesMission.json"],[248], ["RequestPerformance"], 1)])
 ShortcutsOption_IndolQuiz = SubOption("Indol Quiz Skip", ShortcutsOption, [lambda: Skips.IndolQuizSkip()])
 ShortcutsOption_FeedingAnArmy = SubOption("Feeding an Army Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"], [293,294,295,296], ["Count"], 0)])
 ShortcutsOption_CrossDesert = SubOption("To Cross a Desert Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"], [300,301], ["Count"], 0)])
@@ -204,7 +204,7 @@ NewGamePlusFlagsOption = Option("NG+ Flags", QOL, "Enables many NG+ behaviours l
 # Funny
 MusicOption = Option("Music", Funny, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
 MusicOption_MixBattleAndEnv = SubOption("Mix Battle/Environment Themes", MusicOption, defState = False)
-BladeSpecialButtonsOption = Option("Button Combos", Funny, "Randomizes inputs for button challenges", [lambda: ButtonCombos.BladeSpecialButtonChallenges()])
+BladeSpecialButtonsOption = Option("Button Combos", Funny, "Randomizes inputs for button challenges", [lambda: Misc.BladeSpecialButtonChallenges()])
 BladeSpecialButtonsOption_ABXY = SubOption("ABXY", BladeSpecialButtonsOption)
 BladeSpecialButtonsOption_Mystery = SubOption("?", BladeSpecialButtonsOption)
 ProjTreasureChestOption = Option("Projectile Treasure Chests", Funny, "Launches your items from chests",[lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [15])])

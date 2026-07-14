@@ -230,6 +230,12 @@ def ChestOpeningQOL():
             box["flag"]["TBOX_category"] = 1 
         JSONParser.CloseFile(tboxData, tboxFile)
 
+def CustomCoreCrystalDesc(myDesc:PopupDescriptions.Description, name):
+    myDesc.Header(name)
+    myDesc.Text("This adds Custom Core Crystals into the item pool.\n\nThese crystals will guarantee a certain blade and are named after them.")
+    myDesc.Image("Custom Core Crystals.png", "XC2", 700)
+    
+
 def TreasureChestDescription():
     myDesc = PopupDescriptions.Description()
     myDesc.Header(Options.TreasureChestOption.name)
@@ -237,9 +243,7 @@ def TreasureChestDescription():
     myDesc.Text("Turning off a category will put its weight to 0")
     myDesc.Text(Values.ItemLogicDesciption)
     myDesc.Image("TreasureChest.png", "XC2")
-    myDesc.Header(Options.TreasureChestOption_RareBlades.name)
-    myDesc.Text("This adds Custom Core Crystal into the item pool.\n\nThese crystals will guarantee a certain blade and are named after them.")
-    myDesc.Image("Custom Core Crystals.png", "XC2", 700)
+    CustomCoreCrystalDesc(myDesc, Options.TreasureChestOption_RareBlades.name)
     return myDesc
 
 def EnemyDropDescription():
@@ -248,6 +252,16 @@ def EnemyDropDescription():
     myDesc.Text("This option will randomize the drops of enemies into the chosen categories")
     myDesc.Text("Turning off a category will put its weight to 0")
     myDesc.Text(Values.ItemLogicDesciption)
+    CustomCoreCrystalDesc(myDesc, Options.EnemyDropOption_RareBlades.name)
+    return myDesc
+
+def QuestRewardDescription():
+    myDesc = PopupDescriptions.Description()
+    myDesc.Header(Options.QuestRewardsOption.name)
+    myDesc.Text("This option will randomize the rewards of quests into the chosen categories")
+    myDesc.Text("Turning off a category will put its weight to 0")
+    myDesc.Text(Values.ItemLogicDesciption)
+    CustomCoreCrystalDesc(myDesc, Options.QuestRewardsOption_RareBlades.name)
     return myDesc
 
 def PouchItemShopDesc():

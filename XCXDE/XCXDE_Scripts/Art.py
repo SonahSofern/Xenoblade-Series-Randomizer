@@ -130,7 +130,7 @@ def ArtUnlockOrder(): # Fix the PCArtsInfo
         
     artFile.Close()
     artInfoFile.Close()
-                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                   
 def ArtDesc(name, newName):
     artRandoDesc = PopupDescriptions.Description()
     artRandoDesc.Header(newName)

@@ -33,14 +33,14 @@ class ArtGroup:
         return self.chosenChar
         
 def RandomizePcArts():
-    ShulkActs = ActMatch(1, _SingleAttack=[0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[1,3,2,6,10,13,14])
-    ReynActs = ActMatch(2, _SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,5,7,8,9,10,14], artSlots=17)
-    FioraActs = ActMatch(3,  _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0],startLv=-3, artSlots = 4)
-    DunbanActs = ActMatch(4,  _SingleAttack=[0,1,3,5,9,14],_AOEAttack=[12,13,14],_Buff=[2,4,6,7,8,10,11,15])
-    SharlaActs = ActMatch(5,  _SingleAttack=[0,1,7,11,14],_AOEAttack=[6,8,15],_Buff=[0,2,3,4,5,6,9,10,12,13], startLv=10)
-    RikiActs = ActMatch(6,  _SingleAttack=[1,2,6,11,12,14,15],_AOEAttack=[0,4,6,7,9,10,13,15],_Buff=[0,3,5,8,10,13], startLv=10)
-    MeliaActs = ActMatch(7,  _SingleAttack=[4,12],_AOEAttack=[5,14,15],_Buff=[0,1,2,3,6,7,8,9,10,11,13], startLv=10)
-    SevenActs = ActMatch(8,  _SingleAttack=[0,2,3,10,11],_AOEAttack=[5,7,8,9,12,15],_Buff=[1,4,6,13,14], startLv=20)
+    ShulkActs = ActMatch(1,_SingleAttack=[0,4,8,9,11,12],_AOEAttack=[5,7,15],_Buff=[1,3,2,6,10,13,14])
+    ReynActs = ActMatch(2,_SingleAttack=[0,1,4,6,11,12],_AOEAttack=[3,13,15],_Buff=[0,2,5,7,8,9,10,14], artSlots=17)
+    FioraActs = ActMatch(3, _SingleAttack=[3,2,1,0],_AOEAttack=[3,2,1,0],_Buff=[3,2,1,0],startLv=-3, artSlots = 4)
+    DunbanActs = ActMatch(4,_SingleAttack=[0,1,3,5,9,14],_AOEAttack=[12,13,14],_Buff=[2,4,6,7,8,10,11,15])
+    SharlaActs = ActMatch(5,_SingleAttack=[0,1,7,11,14],_AOEAttack=[6,8,15],_Buff=[0,2,3,4,5,6,9,10,12,13], startLv=10)
+    RikiActs = ActMatch(6,_SingleAttack=[1,2,6,11,12,14,15],_AOEAttack=[0,4,6,7,9,10,13,15],_Buff=[0,3,5,8,10,13], startLv=10)
+    MeliaActs = ActMatch(7,_SingleAttack=[4,12],_AOEAttack=[5,14,15],_Buff=[0,1,2,3,6,7,8,9,10,11,13], startLv=10)
+    SevenActs = ActMatch(8,_SingleAttack=[0,2,3,10,11],_AOEAttack=[5,7,8,9,12,15],_Buff=[1,4,6,13,14], startLv=20)
     KinoActs = ActMatch(14,[0],[0],[0], artSlots=0)
     NeneActs = ActMatch(15,[0],[0],[0], artSlots=0)
     GaleSlashGroup = ArtGroup([107,91,89,95])
@@ -225,9 +225,7 @@ def MatchArtBooks(artData):
     itemFile.Close()
     artDescFile.Close()
     artDescTextFile.Close()
-                
-            
-                
+                     
 def AssignArt(art, char:ActMatch):
     if art["pc"] == char.pcID: # If they get a vanilla art dont change the act no
         return
@@ -241,7 +239,6 @@ def AssignArt(art, char:ActMatch):
     else:
         art["act_idx"] = random.choice(char.AOEAttack)      
         
-
 
 def ArtsDescriptions():
     ArtDesc = scripts.PopupDescriptions.Description()

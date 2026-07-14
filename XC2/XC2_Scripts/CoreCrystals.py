@@ -1,5 +1,5 @@
 import json
-from scripts import Helper, JSONParser, StatRand
+from scripts import Helper, JSONParser, StatRand, PopupDescriptions
 import random
 from XC2.XC2_Scripts import IDs, CharacterRandomization, Options
 
@@ -13,7 +13,6 @@ def CustomCoreCrystalRando():
     RareBladeProbabilityEqualizer()
     LandofChallengeRelease()
     if Options.BladeNGPlusOption.GetState():
-        NewGamePlusBladeBalancing()
         AddMikhailToGacha()
         UnlockNGPlusBladesGacha()
 
@@ -189,3 +188,11 @@ def AddMikhailToGacha():
         MikhailGachaRow["Prob" + str(i)] = 0.25  # Same as Akhos and Patroka
         MikhailGachaRow["Assure" + str(i)] = 0
     JSONParser.ExtendJSONFile("common/BLD_RareList.json", [[MikhailGachaRow]])
+
+def NGPlusBladeDesc():
+    desc = PopupDescriptions.Description()
+    desc.Header(Options.BladeNGPlusOption.name)
+    desc.Text("This allows NG+ blades to be included in blade randomization, the gacha system, and as custom core crystals from item randomization")
+    desc.Header(Options.BladeNGPlusOption_Balance.name)
+    desc.Text("This balances NG+ blades by giving them weaker starting chips and allowing them to buy and place new chips on their weapons.")
+    return desc
