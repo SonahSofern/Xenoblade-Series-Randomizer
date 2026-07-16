@@ -193,7 +193,7 @@
     "Jingles -> New Objective Received": true,
     "Jingles -> New Area Found": true,
     "Jingles -> Secret Area Found": true,
-    "Tutorial Skip": true,
+    "Tutorial Skips": true,
     "EXP Boost": true,
     "EXP Boost Spinbox: ": 3,
     "SP Boost": true,

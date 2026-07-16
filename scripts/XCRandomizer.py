@@ -50,10 +50,10 @@ class FilePlacer:
         except Exception as e:
             print(e)
 
-def ClearSkylinePlugins(pluginsLocation):
+def ClearSkylinePlugins(pluginsLocation, alternatePath):
     '''Clears the plugins folder upon generating a new seed, in case options were changed (usually the rando just replaces EVERY file in the output location, but if you were to turn off a file placer setting it wouldnt delete the previous folder)'''
     base_path = Path(pluginsLocation).resolve()
-    targetDir = (base_path / ".." / "skyline" / "plugins").resolve()
+    targetDir = (base_path / alternatePath / ".." / "skyline" / "plugins").resolve()
     if len(targetDir.parts) <= 2: # If the path is too small dont delete, safety measure
         return
     if os.path.exists(targetDir):
@@ -88,7 +88,7 @@ def CreateImage(imagePath, resize = (40,40)):
 saveCommands = []
 
 class GameWindowData:
-    def __init__(self, game, version, title, seedVar, permalinkVar, tabs, postCommands = [], preCommands = [], mainFolderNames = [], subFolderNames = [], nouns = [], verbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], setupHelpDesc = None, outputRomfsSpec = "/romfs/bdat"):
+    def __init__(self, game, version, title, seedVar, permalinkVar, tabs, postCommands = [], preCommands = [], mainFolderNames = [], subFolderNames = [], nouns = [], verbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], setupHelpDesc = None, outputRomfsSpec = "/romfs/bdat", clearFolderPath = ""):
         self.game = game
         self.version = version
         self.title = title
@@ -107,6 +107,7 @@ class GameWindowData:
         self.extraFiles:list = extraFiles
         self.setupHelpDesc = setupHelpDesc
         self.outputRomfsSpec = outputRomfsSpec
+        self.clearFolderPath = clearFolderPath
 
 # Game, Version, Title, seedEntryVar, permalinkVar, TabDict = {}, postCommands = [], preCommands = [], mainFolderFileNames = [], subFolderFileNames = [], SeedNouns = [], SeedVerbs = [], textFolderName = "gb", extraArgs = [], backgroundImages = [], extraFiles = [], setupHelpDesc = None, outputRomfsSpec = "/romfs/bdat"
 # Some of the oldest code and messy for sure. 
@@ -308,7 +309,10 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
         random.seed(gameData.permalinkVar.get())
         print("Seed: " + randoSeedEntry.get())
         print("Permalink: "+  gameData.permalinkVar.get())
-        os.makedirs(outSpot, exist_ok=True) # Make the directory for them
+        try:
+            os.makedirs(outSpot, exist_ok=True) # Make the directory for them
+        except:
+            raise Exception("Couldn't create the file in: " + outSpot) # need to add real error handling that lets users see the issue but I also want to rework this entire script anyway
         try:
             for file in gameData.mainFolderNames:
                 # print("BDAT:", JsonOutput, "Exists:", os.path.exists(JsonOutput))
@@ -340,9 +344,10 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
         
         extraFilePlaced = [] # Conditionally some files (skyline plugins are placed)
         for option in OptionList: # Commands that add files to the output (I want to rework this entire logic but would be time consuming)
-            if (len(option.filePlaceCommands) > 0) and option.GetState():
-                for command in option.filePlaceCommands:
-                    extraFilePlaced.append(command())
+            if option.GetState():
+                if (len(option.filePlaceCommands) > 0):
+                    for command in option.filePlaceCommands:
+                        extraFilePlaced.append(command())
                 for sub in option.subOptions:
                     if sub.GetState():
                         for subCommand in sub.filePlaceCommands:
@@ -365,7 +370,7 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
                 shutil.move(f"{outSpot}/{file}.bdat", f"{outSpot}/{gameData.textFolderName}/{file}.bdat")
             
             # Clear skyline/plugins folder
-            ClearSkylinePlugins(outSpot)
+            ClearSkylinePlugins(outSpot, gameData.clearFolderPath)
             for file in gameData.extraFiles + extraFilePlaced:
                 file.AddFileToOutput(outSpot)
             
@@ -449,7 +454,7 @@ def RunOptions(GameTitle, OptionList:list[Interactables.Option], randoProgressDi
     return lambda: PopupDescriptions.StyledPopup(f"{GameTitle} {datetime.datetime.now()}", lambda: ErrorLog(), root)
 
 def SlowBurn(progressBar, nextStop, stepSpeed):
-    try: # Throwing a try excpet here because I have had times in Debug mode where this throws errors saying something about pb. 
+    try: # Throwing a try excpet here because I have had times in Debug mode where this throws errors saying something about pb (progress bar). 
         while(progressBar['value'] < nextStop):
             time.sleep(0.02)
             progressBar['value'] += stepSpeed

@@ -82,7 +82,7 @@
     "Major Skills -> Unity Pairing Skills": true,
     "Minor Skills": false,
     "Class Costumes": false,
-    "Tutorial Skip": false,
+    "Tutorial Skips": false,
     "EXP Boost": false,
     "EXP Boost Spinbox: ": 2,
     "CP Boost": false,

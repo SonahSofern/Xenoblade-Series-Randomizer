@@ -14,6 +14,7 @@ permalinkVar = scripts.XCRandomizer.StringVar()
 
 TitlescreenSplash = scripts.XCRandomizer.FilePlacer(["Images/Logos/crystal.wilay"],  "../menu/image", "mnu001_titlelogo_us.wilay", "XC2")
 Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../../../0100e95004038000/", game=Game)
+alternatePath = "../../../0100e95004038000/romfs/bdat" # XC2 Plugins are located in a different folder
 
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"], [132], ["name"], f"Randomizer v{Version}") # Change Title Version to Randomizer vX.x.x
@@ -48,4 +49,4 @@ def XC2Help():
     descData.Text("This mod is NOT compatible with other mods that edit the bdats. Ensure that this is the only active one for your game. (60fps and other visual mods are okay)", anchor="w")
     return descData
 
-WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, [], mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash, Exefs], setupHelpDesc=lambda: XC2Help(), outputRomfsSpec=outputPath)
+WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, [], mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash, Exefs], setupHelpDesc=lambda: XC2Help(), outputRomfsSpec=outputPath, clearFolderPath=alternatePath)

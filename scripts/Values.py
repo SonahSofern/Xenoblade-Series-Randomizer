@@ -6,7 +6,6 @@ differenceList = []
 allowedRange = 0.1
 ItemLogicDesciption = "This is done in a balanced way, by replacing the original item with an item of similar value."
 
-
 def ItemValueStatistics():
 
     if len(differenceList) == 0:
