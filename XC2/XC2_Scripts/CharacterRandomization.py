@@ -1,5 +1,5 @@
 import copy, random
-from XC2.XC2_Scripts import Options
+from XC2.XC2_Scripts import Options, IDs
 from scripts import JSONParser, Helper, PopupDescriptions
 
 # TODO (blades):
@@ -63,7 +63,6 @@ PoppiForms = [1005, 1006, 1007]
 # Note: Every Blade besides Roc is randomizable. Roc being randomized would mess up Vandham, and he's exclusive to Rex anyway so may as well keep it that way.
 # The NG+ Exclusive blades cannot use weapon chips, so they cannot be randomized in Race Mode (where their chips are defined by the save file). Exclude those blades in Race Mode to account for this
 BladesAlwaysRandomized = [1001, 1002, 1009, 1010, 1011, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1050, 1104, 1105, 1106, 1107, 1108, 1109, 1111]
-NewGamePlusBlades = [1043, 1044, 1045, 1046, 1047, 1048, 1049] # Currently cannot be randomized, but I would like to figure this out eventually. Will be an option when that works though, because they would be unbalanced if you get them early on
 
 first_character_randomization = True # Both drivers and blade options call this same function. Only run this logic once
 
@@ -271,10 +270,10 @@ def RandomizeBlades():
         # Only add Dromarch to the pool if explicitly randomizing him
         if Options.BladesOption_Dromarch.GetState():
             blades_left_to_randomize = [1004] + blades_left_to_randomize
+            
+        if Options.BladeNGPlusOption.GetState(): # Add in NG+ blades 
+            blades_left_to_randomize += IDs.NewGamePlusBladeIDs 
 
-        # TODO: Re-add this once NG+ blades' weapon chips work properly
-        # if not OptionsRunDict["Blades"]["subOptionObjects"]["Include NG+ Blades"]["subOptionTypeVal"]:
-        #    blades_left_to_randomize = blades_left_to_randomize + NewGamePlusBlades
         randomized_order = blades_left_to_randomize.copy()
         random.shuffle(randomized_order)
 
@@ -816,6 +815,10 @@ def RebalanceDefaultWeapons():
         # Skip blades which were never randomized in the first place
         if blade['$id'] not in OriginalCharacter2Replacement:
             return
+        
+        # If we have NG+ blades leave theirs default, they are already balanced by the setting
+        if blade["$id"] in IDs.NewGamePlusBladeIDs:
+            return
 
         original_blade_id = blade['$id']
         original_blade = OriginalCharacters[original_blade_id]
@@ -919,7 +922,7 @@ def BladesDescriptions():
     BladesDesc.Text("- The blade which replaces Nia will be able to swap between blade form and Nia's driver form.", anchor="w")
     BladesDesc.Text("- Roc is not randomized, as that would break Vandham.", anchor="w")
     BladesDesc.Text("- Dagas's base form is inaccessible. His true form appears when blades are randomized. Admittedly, I have no idea what happens if you decide to complete his side quest.", anchor="w")
-    BladesDesc.Text("- The NG+ exclusive blades (Akhos, Obrona, Patroka, Perdido, Mikhail, Cressidus, and Sever) are not randomized. This is due to issues caused by their lack of unique weapon chips.", anchor="w")
+    # BladesDesc.Text("- The NG+ exclusive blades (Akhos, Obrona, Patroka, Perdido, Mikhail, Cressidus, and Sever) are not randomized. This is due to issues caused by their lack of unique weapon chips.", anchor="w")
     BladesDesc.Text("- A handful of voice lines do not work correctly, such as when using field skills.", anchor="w")
 
     BladesDesc.Header(Options.BladesOption_Dromarch.name)

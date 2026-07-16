@@ -33,11 +33,18 @@ class Stat():
         # print(f"Mult: {chosenMult}")
         return chosenMult
             
-    def ApplyMult(self, target, stat, chosenMult = 1, max = b16, min = 1, allowFloat = False):
-        '''Applies the mult to the stat, allowing for max and min values, as well as handling floats'''      
-        clampedMult = Helper.Clamp(target[stat]*chosenMult, min, max) # Clamp the result to the bounds
+    def ApplyMult(self, target, stat, chosenMult = 1, max = b16, min = 1, allowFloat = False, roundedDigits = 0):
+        ApplyMult(target, stat, chosenMult, max, min, allowFloat, roundedDigits)
+
+def ApplyMult(target, stat, chosenMult = 1, max = b16, min = 1, allowFloat = False, roundedDigits = 0):
+    '''Applies the mult to the stat, allowing for max and min values, as well as handling floats'''      
+    clampedMult = Helper.Clamp(target[stat]*chosenMult, min, max) # Clamp the result to the bounds
+    
+    if roundedDigits != 0:
+        clampedMult = round(clampedMult, roundedDigits)
         
-        if not allowFloat:
-            clampedMult = int(clampedMult)
+    if not allowFloat:
+        clampedMult = int(clampedMult)
         
-        target[stat] = clampedMult
+    
+    target[stat] = clampedMult

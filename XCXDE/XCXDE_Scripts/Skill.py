@@ -1,7 +1,7 @@
 from XCXDE.XCXDE_Scripts import IDs
 from scripts import JSONParser, StatRand, Helper, PopupDescriptions
 
-maxMult = 2
+maxMult = 3
 
 def SkillEnhancements(intensity):
     '''Art enhancement currently paired with stats, they are unique to arts so can be adjusted without messing with other things'''

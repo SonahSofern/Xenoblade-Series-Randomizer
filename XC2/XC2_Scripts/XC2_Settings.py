@@ -4,7 +4,7 @@ from XC2.XC2_Scripts import SeedNames, Options, ObjectNameCleanup
 Game = "XC2"
 Title = "Xenoblade Chronicles 2"
 outputPath = "contents/0100E95004039001/romfs/bdat"
-Version = "1.7.4"
+Version = "1.7.5"
 
 # Backgrounds
 backgrounds = ["ch9.png", "ch1.png", "ch3.png", "ch4.png", "ch6.png"]
@@ -13,9 +13,10 @@ seedEntryVar = scripts.XCRandomizer.StringVar()
 permalinkVar = scripts.XCRandomizer.StringVar()
 
 TitlescreenSplash = scripts.XCRandomizer.FilePlacer(["Images/Logos/crystal.wilay"],  "../menu/image", "mnu001_titlelogo_us.wilay", "XC2")
+Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../../../0100e95004038000/", game=Game)
 
 def ShowTitleScreenText():
-    scripts.JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"],[132], ["name"], f"Randomizer v{Version}") # Change Title Version to Randomizer vX.x.x
+    scripts.JSONParser.ChangeJSONLine(["common_ms/menu_ms.json"], [132], ["name"], f"Randomizer v{Version}") # Change Title Version to Randomizer vX.x.x
 
 postCommands = [lambda: ShowTitleScreenText(), lambda: Options.Misc.SystemBalanceEditor(), lambda: Options.I.ChestOpeningQOL(),  lambda: Options.Enhancements.AddCustomEnhancements(), lambda: Options.TornaMain.PassAlongSpoilerLogInfo(Version, permalinkVar, seedEntryVar), lambda: ObjectNameCleanup.ReassignAlphabeticalSort()]
 mainFolderNames = ["common", "common_gmk"]
@@ -47,4 +48,4 @@ def XC2Help():
     descData.Text("This mod is NOT compatible with other mods that edit the bdats. Ensure that this is the only active one for your game. (60fps and other visual mods are okay)", anchor="w")
     return descData
 
-WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, [], mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash], setupHelpDesc=lambda: XC2Help(), outputRomfsSpec=outputPath)
+WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, [], mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, backgroundImages=backgrounds, extraFiles=[TitlescreenSplash, Exefs], setupHelpDesc=lambda: XC2Help(), outputRomfsSpec=outputPath)

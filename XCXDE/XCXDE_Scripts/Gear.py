@@ -27,10 +27,12 @@ def ArmorStats(intensity, fileName, statKeys, affixMax, slotMax):
         amr["SlotNum"] = Helper.random.choice(Helper.InclRange(1, slotMax))
     
     amrFile.Close()
-    
+
+maxMult = 2
+
 def WeaponStats(intensity, fileName, affixMax, slotMax):
     statsFile = JSONParser.File(f"XCXDE/JsonOutputs/common/{fileName}.json")
-    statRando = StatRand.Stat(2, intensity)
+    statRando = StatRand.Stat(maxMult, intensity)
     
     for wep in statsFile.rows:
         if wep["$id"] not in IDs.SkellWeaponIDs:
@@ -39,11 +41,41 @@ def WeaponStats(intensity, fileName, affixMax, slotMax):
             statRando.ApplyMult(wep, stat, statRando.RollBalancedMult(), StatRand.b16, -StatRand.b16)
         for stat in ["Stability", "Magazine"]:
             statRando.ApplyMult(wep, stat, statRando.RollBalancedMult(), StatRand.b8)
+        # for stat in ["EquLv"]:
+        #     statRando.ApplyMult(wep, stat, statRando.RollBalancedMult(), 60, 10)
         wep["AffixCount"] = Helper.random.choice(Helper.InclRange(1, affixMax))
         wep["SlotNum"] = Helper.random.choice(Helper.InclRange(1, slotMax))
     
     statsFile.Close()
+
+def SkellArtRando(intensity):
+    dlArtsFile = JSONParser.File(f"XCXDE/JsonOutputs/common/BTL_DlArtsList.json")
+    dlArtsMsFile = JSONParser.File(f"XCXDE/JsonOutputs/common_ms/BTL_DlArtsList_ms.json")
+    statR = StatRand.Stat(maxMult, intensity)
+            
+    for wpn in dlArtsFile.rows:
+        statR.ApplyMult(wpn, "Fuel", statR.RollBalancedMult(), min=0, roundedDigits=-1)
+        UpdateFuelCostText(wpn, dlArtsMsFile)
+        
+        statR.ApplyMult(wpn, "DmgMgn", statR.RollBalancedMult())
+
+    dlArtsFile.Close()
+    dlArtsMsFile.Close()
+
+def UpdateFuelCostText(wpn, dlArtsMsFile:JSONParser.File):
+    '''The fuel cost text is hard coded so have to update it this way'''
+    targetCaptionID = wpn["Caption"]
+    for cap in dlArtsMsFile.rows:
+        if cap["$id"] == targetCaptionID:
+            oldName:str = cap["name"]
+            if ')' not in oldName: return
+            targetIndex = oldName.index(')') # All fuel costs end in closed parenthesis
+            oldFuelCost = oldName[:targetIndex+1]
+            newFuelCost = f"({wpn["Fuel"]} Fuel)"
+            cap["name"] = oldName.replace(oldFuelCost, newFuelCost)
+            return
     
+  
 def SkellArmorStats(intensity):
     ArmorStats(intensity, "AMR_DlList", ["Hp", "def"], 8, 3)
     
@@ -52,6 +84,7 @@ def PlayerArmorStats(intensity):
     
 def SkellWepStats(intensity):
     WeaponStats(intensity, "WPN_DlList", 8, 3)
+    SkellArtRando(intensity)
 
 def PlayerWepStats(intensity):
     WeaponStats(intensity, "WPN_PcList", 15, 3)
@@ -61,7 +94,7 @@ def GearDesc(armorName, wepName):
     gearDesc.Header(armorName)
     gearDesc.Text("Multiplies the def, resistances and slots of armor by a random multiplier")
     gearDesc.Header(wepName)
-    gearDesc.Text("Multiplies the attack, stability, magazine, cooldown and slots of weapons by a random multiplier")
+    gearDesc.Text("Multiplies the attack, stability, magazine, cooldown, fuel cost and slots of weapons by a random multiplier")
     gearDesc.Header("Intensity")
     gearDesc.Text(StatRand.IntensityDescription)
     return gearDesc

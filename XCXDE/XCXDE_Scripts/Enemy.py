@@ -15,6 +15,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
         firstRun = False
     
     # gameCondId controls if enemy spawns based on a condition so keep the original conditions
+    soundEffects = "SeEnvID" # Controls the distance at which you hear the sound effects not what the SE is so if we keep it vanilla it should help with loud enemies (Zhu Pharg, )
     ignoreKeys = ["$id", "gameCondId", "ParamRev", "LvMin", "LvMax", "LvRev", "Exp" "ZoneUD", "Partner", "Flag(Named)", "Flag(mBoss)", "Flag(ignoreLv)", "Flag(Leader)", "AiLeader", "Flag(FAOff)", "BGMID", "NoEncountSkip", "SearchParamID", "MoveRange", "FieldPatternID", "ZoneID", "PopCost", 'PopProxyCost', "PopParamID", "GroupID"]
     # rscTestKeys = ['Resource', 'TypeFamily', 'TypeGenus', 'Material', 'RiseDescend', 'ProxyID', 'Radius', 'FightDistance', 'PermitHeight', 'RayCheckU', 'RayCheckD', 'SearchBaseBone', 'UndX', 'UndZ', 'UndMinX', 'UndMaxX', 'UndMinZ', 'UndMaxZ', 'UndDeg', 'ExArea', 'TurnAngle', 'FrontAngle', 'NoEncountSkip', 'VoDir', 'EffPack', 'EffCmn', 'Parts', 'PathMot', 'PathChr', 'Action', 'SePack', 'ClipEvent', 'Com_SE', 'Com_Eff', 'Com_Vo', 'Mflag(Vip)', 'Mflag(Map)', 'Mflag(Evt)', 'AttackID', 'AttackNum', 'HudName', 'HudOffset', '<044870FF>', '<7D67F533>']
     proxyIDs = ["ProxyID", "Mflag(Vip)", "Mflag(Map)", "Mflag(Evt)"] # Enemies need to keep their original proxy id and Mflags because in boss fights they dont spawn
@@ -31,6 +32,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
         StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
 
     for en in eneFile.rows:
+        extraKeys = []
+        
         if eRando.FilterEnemies(en, targetGroup):
             continue
 
@@ -40,20 +43,21 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
 
         if isMatchSize:
             EnemySizeHelper(en, newEn)
+            extraKeys.append("ChrSize") # If you match enemy sizes the size mechanic in X should match so big enemies are still stronger
 
         IntroFightBalances(en, newEn, eRando)
         InvincibleEnemy(newEn)
         
-        # eRando.HealthBalancing(en, newEn, 'HpMaxRev')
+        eRando.HealthBalancing(en, newEn, 'HpMaxRev')
 
-        Helper.CopyKeys(en, newEn, ignoreKeys)
+        Helper.CopyKeys(en, newEn, ignoreKeys + extraKeys + [soundEffects])
 
         HpLimitEffects(en)
 
     for group in StaticEnemyData:
         group.RefreshCurrentGroup()
     
-    NerfSummonEnemies()
+    NerfSummonEnemies(eneFile)
         
     eneFile.Close()
     paramFile.Close()
@@ -88,14 +92,12 @@ def InvincibleEnemy(newEn):
         newEn["StartupBuff"] = 0
         newEn["StartupBuffLv"] = 0
         
-
 def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
     introFightIDs = [348, 349, 350]
     if en["$id"] in introFightIDs:
         oldEnParam = eRando.FindParam(en)
         eRando.ChangeStats([newEn], [("HpMaxRev", oldEnParam["HpMaxRev"]), ("PowFightRev", oldEnParam["PowFightRev"]), ("PowShootRev", oldEnParam["PowShootRev"]), ("PowMindRev", oldEnParam["PowMindRev"]), ("DodgeRev", oldEnParam["DodgeRev"]), ("DexFightRev", oldEnParam["DexFightRev"]), ("DexShootRev", oldEnParam["DexShootRev"]), ("Def", oldEnParam["Def"]), ("RstPhysics", oldEnParam["RstPhysics"]), ("RstDebuffHalf", oldEnParam["RstDebuffHalf"]), ("RstDebuffFull", oldEnParam["RstDebuffFull"]) ])
                                                                                                                                                                                                                                                                                                             
-
 def HpLimitEffects(en):
     '''Xenoblade X uses a Enhancement to stop characters from dying in phased fights, this keeps that effect on the location and removes it if not on a phased location'''
     HPLimitFightIDs = [431,441,460,470,1755,1756] # DLC seemingly didnt have any but im skeptical because there is a VITA fight that ends at 50% hp (ID 4093)
@@ -118,16 +120,14 @@ def HpLimitEffects(en):
                     slot = i
             en[f"EnhanceID{slot}"] = NoKillEnhancement
    
-
 # A script to handle summoned enemy levels
 
 # After enemy randomization
 # Check all enemies that have summon arts
 # Create a new summon art for each
 # Create a new summon enemy for each with matching level to the summoning enemy
-def NerfSummonEnemies():
+def NerfSummonEnemies(eneFile:JSONParser.File):
     # cannot find the link to perform the above concept. It is probably hard coded to each art. Instead just setting level of all summoned enemies to 1
-    eneFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnList.json")
     for en in eneFile.rows:
         if en["$id"] in IDs.SummonMonsterIDs:
             # Put summons levels to 1 because there is currently no way to balance them
@@ -137,7 +137,6 @@ def NerfSummonEnemies():
             # Shrink summons in case its a small arena
             en["ScaleMin"] = en["ScaleMin"] // 3
             en["ScaleMax"] = en["ScaleMax"] // 3   
-    eneFile.Close()
    
                                                                                                                                                                                                                                                                                            
 def EnemyDesc(name):

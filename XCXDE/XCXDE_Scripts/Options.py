@@ -1,7 +1,7 @@
 from scripts.Interactables import Option, SubOption
 from scripts import Helper
 import scripts.Interactables
-from XCXDE.XCXDE_Scripts import Enemy, Gear, IDs, Items as Item, QOL as q, PartyMem, Art, Skill
+from XCXDE.XCXDE_Scripts import Enemy, Gear, IDs, Items as Item, QOL as q, PartyMem, Art, Skill, SkellFrames
 
 scripts.Interactables.Game = "XCXDE" 
 
@@ -10,6 +10,7 @@ Character  = 2
 Enemies = 3
 QOL = 4
 Skells = 5 
+Misc = 6
 
 Tabs = {
     Items: 'Items',
@@ -17,26 +18,25 @@ Tabs = {
     Skells: 'Skells',
     Enemies: 'Enemies',
     QOL: 'Quality of Life',
+    # Misc: 'Misc.'
 }
 
 weightsSpinDescription = "Weights ↓"
 intensityText= "Intensity (Low 1 - High 100)"
 
 # ---------- POTENTIAL ----------
+# http://127.0.0.1:5500/html/MNU_MemberChange.html#21 Party member join conditions?
 # Faster Party Affinity
-# BetterFrontierNavOption = Option("Frontier Nav Boost", QOL, "Faster rewards from FrontierNav")
-# TutorialSkipOption = Option("Tutorial Skip", QOL, "Removes tutorials") 
 # Gems https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_ItemSkill_inner.html#2191
 # Skills (Make enhance file and option to add new skills)
 # SkellArts = Option("Skell Arts", Skells, "Randomizes the skell art strength")
 # Soul Voices https://xenobladedata.github.io/xbx/bdat/common_local_us/BTL_SoulArts.html
-# Probe effects https://xenobladedata.github.io/xbx/bdat/common_local_us/ITM_BeaconList.html
 # SKell Flight Music? https://xenobladedata.github.io/xbx/bdat/common_local_us/RSC_BgmCondition.html
 # SkellEasyCruiseOption = Option("Easy Cruise Mode", QOL, "Hraesvelg Cruise Mode is unlocked") # FLD_questlist 2524 is the hraesvelg cruise mode quest, somethere there unlocks it.
-# Color Randomization https://xenobladedata.github.io/xbx/bdat/common_local_us/CLR_List.html
 # ---------- POTENTIAL ----------
 
 # ---------- NOT DOING ----------
+# Color Randomization https://xenobladedata.github.io/xbx/bdat/common_local_us/CLR_List.html # Was the players colors and like the barracks not relevant
 # Overdrive Route Rando (Can't because theres no way to see what changed)
 # Enemy/Appendage Drops (NO POINT) https://xenobladedata.github.io/xbx/bdat/common_local_us/DRP_ItemTable.html#309
 # Items
@@ -135,7 +135,6 @@ BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=F
 # Character
 CharacterOption = Option("Party Members", Character, "Randomizes party members", [lambda: PartyMem.Members()], descData=lambda: PartyMem.PartyMemDesc(CharacterOption.name, CharacterOption_Duplicates.name))
 CharacterOption_Duplicates = SubOption("Allow Duplicates", CharacterOption)
-CharacterOption_BalanceGear = SubOption("Balance Starting Gear", CharacterOption)
 ArtsOption = Option("Arts", Character, "Randomizes various attributes of arts", descData=lambda: Art.ArtDesc(ArtsOption_LearnOrder.name, ArtsOption_Strength.name))
 ArtsOption_LearnOrder = SubOption("Arts Learned", ArtsOption, [lambda: Art.ArtUnlockOrder()])
 ArtsOption_Strength = SubOption("Art Strength", ArtsOption, [lambda: Art.ArtStatRando(ArtsOption_Strength.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinDefault=50)
@@ -146,31 +145,31 @@ PlayerGear = Option("Ground Gear", Character, "Randomizes the stats of ground ge
 PlayerGear_Arm = SubOption("Armor Stats", PlayerGear, [lambda: Gear.PlayerArmorStats(PlayerGear_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 PlayerGear_Wep = SubOption("Weapon Stats", PlayerGear, [lambda: Gear.PlayerWepStats(PlayerGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
 
-
-SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells.", [lambda: Gear.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
+SkellFrameOption = Option("Skell Frames", Skells, "Randomizes skell frames", [lambda: SkellFrames.RandomizeSkells()], descData=lambda: SkellFrames.SkellFrameDesc(SkellFrameOption.name))
+# SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells", [lambda: Gear.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellGear = Option("Skell Gear", Skells, "Randomizes the stats of skell gear", descData=lambda: Gear.GearDesc(SkellGear_Arm.name, SkellGear_Wep.name))
 SkellGear_Arm = SubOption("Armor Stats", SkellGear, [lambda: Gear.SkellArmorStats(SkellGear_Arm.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
-SkellGear_Wep = SubOption("Weapon Stats", SkellGear, [lambda: Gear.SkellWepStats(SkellGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
+SkellGear_Wep = SubOption("Weapon/Art Stats", SkellGear, [lambda: Gear.SkellWepStats(SkellGear_Wep.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1, spinDefault=50)
+SkellFrameOption = Option("Faster Skell", Skells, "Multiples your skell's driving speed (2x recommended)", [lambda: q.SkellMovement(SkellFrameOption.GetSpinbox())], hasSpinBox=True, spinMax=5, spinMin=2, spinIncr=1, spinDefault=2, spinDesc="x Faster")
 
+TutorialOption = Option("Tutorial Skips", QOL, "Skips all tutorial popups", [lambda: q.TutorialSkip()])
 ShortcutsOption = Option("Shortcuts", QOL, "Speeds up various parts of the main quest")
 ShortcutsOption_MainQuestReqs = SubOption("Skip Chapter Prerequisites", ShortcutsOption, [lambda: q.EasyStoryPrerequisites()])
+# ShortcutsOption_Chapter1 = SubOption("Skip Chapter 1", ShortcutsOption, [lambda: q.Chapter1Skip()]) # Early game slog skip (introduction to blade meeting lin etc., naig asks 3 questions)
 ShortcutsOption_SkellHell = SubOption("Skip Skell License Exam", ShortcutsOption, [lambda: q.SkellExamSkip()])
-EarlySkellOption = Option("Early Skell", QOL, "Skells are unlocked at the start of the chosen chapter", [lambda: q.EarlySkell(EarlySkellOption.GetSpinbox())], hasSpinBox=True, spinDefault= 2, spinMax=6, spinMin=2, spinIncr=1 ,spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
-SkellFlightOption = Option("Early Flight Module", QOL, "Flight Module is unlocked immediately after getting skells", [lambda: q.EarlyFlight()]) # https://xenobladedata.github.io/xbx/bdat/common_local_us/CHR_DlList.html
-
-FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["XCXDE/JsonOutputs/common/BTL_Growlist.json"], ["LevelExp"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinMin=2, spinIncr = 1, spinDesc = "x Faster")
-FasterClassOption = Option("CP Boost", QOL, "Decreases CP required for each class levelup", [lambda: q.FasterClassRanks(FasterClassOption.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinMax= 10, spinIncr = 1, spinDesc = "x Faster")
+EarlySkellOption = Option("Early Skell", QOL, "Talk to Vandahm (Blade Barracks) to take the Skell Liscense Exam early", [lambda: q.EarlyVandahmQuest()]) 
+SkellFlightOption = Option("Early Flight Module", QOL, "Flight Module is unlocked immediately after getting skells", [lambda: q.EarlyFlight()])
+BoostOption = Option("Resource Boosts", QOL, "Various resource boosts (exp, cp etc.)")
+BoostOption_FNav = SubOption("FrontierNav Boost", BoostOption, [lambda: q.FrontierNavBoost(BoostOption_FNav.GetSpinbox())], hasSpinBox=True, spinDefault=10, spinMin=2, spinMax= 100, spinIncr = 1, spinDesc = "x Rewards")
+BoostOption_EXP = SubOption("EXP Boost", BoostOption, [lambda: q.FasterLevels(BoostOption_EXP.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinIncr=1, spinMax=16, spinDesc = "x Faster")
+BoostOption_CP = SubOption("CP Boost", BoostOption, [lambda: q.FasterClassRanks(BoostOption_CP.GetSpinbox())], hasSpinBox=True, spinDefault=2, spinMin=2, spinMax= 16, spinIncr = 1, spinDesc = "x Faster")
 YellowBubbleOption = Option("Info Range", QOL, "Increased range for collecting info bubbles", [lambda: q.InfoRangeIncrease(YellowBubbleOption.GetSpinbox(), YellowBubbleOption_Mute.GetState())], hasSpinBox=True, spinDesc="x Range", spinDefault=15, spinMin=2)
 YellowBubbleOption_Mute = SubOption("Mute Callouts", YellowBubbleOption)
 EnemyWeatherQOLOption = Option("Weather Conditions", QOL, "Removes weather conditions from enemies", [lambda: q.ClearEnemyWeatherCondition()])
 # EasyGemCraftingOption = Option("Gem Crafting", QOL, "Makes miranium the only requirement for crafting gems to avoid material grinding", [lambda: q.EasyGemCrafting()])
 
-# SkellLiscOption = Option("Skell License Unlock", QOL, "Sets the unlock chapter for skells")
-# SkellLiscOption_ChSelect = SubOption("Fixed Unlock", SkellLiscOption, hasSpinBox=True, spinMax=12, spinDesc="Unlock Chapter") # https://xenobladedata.github.io/xbx/bdat/common_local_us/FLD_questlist.html#1143
-# SkellLiscOption_ChSelect = SubOption("Random Unlock", SkellLiscOption)
-
-# from scripts import Onefile
-# if not Onefile.isOneFile:
-# OPWeapon = Option("OP Weapons", QOL, "For Testing makes starter weapons op", [lambda: q.OpWep()])
+from scripts import Onefile
+if not Onefile.isOneFile:
+    OPWeapon = Option("OP Weapons", QOL, "For Testing makes starter weapons op", [lambda: q.OpWep()])
 
 

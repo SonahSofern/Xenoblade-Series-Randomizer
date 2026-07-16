@@ -49,20 +49,13 @@ def AddMovespeedDeed():
     
     # First enemy drops movespeed deed
     JSONParser.ChangeJSONLine(["common/FLD_OwnerBonusParam.json"],[1],["Max"], 1000)
-    BonusMovespeed = Options.StartwithIncreasedMovespeedOption.GetSpinbox() * 10
+    BonusMovespeed = Options.BoostOption_Speed.GetSpinbox() * 10
     JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [9], ["Value"], BonusMovespeed)
     JSONParser.ChangeJSONLine(["common/CHR_EnArrange.json"], [1430 , 180], ["PreciousID"], 25257)
 
 def CollectionRange():
     JSONParser.ChangeJSONLine(["common/FLD_OwnerBonus.json"], [10], ["Value"], 150)
     JSONParser.ChangeJSONLine(["common/CHR_EnArrange.json"], [1429 , 181], ["PreciousID"], 25258)
-
-def FixIssuesCausedByNGPlusFlag():
-    CreateDLCtoSetFlag(["Driver Skill Tree Key"], [48589], Condition = [1853]) # 1853 is a pre-existing flag that requires the Scenario to be 2001 or higher (when you get pyra)
-    # if not Options.EnemiesOption.GetState(): # we need to force the enemies to drop their item, if enemy randomization is off
-    #     EnemyRandoLogic.KeyItemsReAdd()
-    # if Options.TreasureChestOption.GetState(): #if treasure chests are randomized loot, we need to force the ladder key in mor ardain to drop, allowing us to unlock the factory
-    #     JSONParser.ChangeJSONLine(["common_gmk/ma08a_FLD_TboxPop.json"], [870], ["itm1ID"], 25409)
 
 def CommunityQOL():
     with open("XC2/JsonOutputs/common/FLD_wildcardData.json", 'r+', encoding='utf-8') as wildFile:

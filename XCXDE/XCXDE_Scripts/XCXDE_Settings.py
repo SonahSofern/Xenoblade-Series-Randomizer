@@ -1,9 +1,9 @@
 from XCXDE.XCXDE_Scripts import SeedNames, Options
 import scripts.XCRandomizer, scripts.JSONParser
-Version = "1.1.0"
+Version = "1.2.0"
 Game = "XCXDE"
 Title = "Xenoblade Chronicles X DE"
-outputPath = "contents/0100453019AA8000/romfs/bdat"
+outputPath = "contents/0100453019AA8000/romfs/mod/bdat"
 backgrounds = ["flower.jpg", "sunset.jpg", "purple.jpg"]
 postCommands = []
 mainFolderNames = ["common"]
@@ -18,6 +18,7 @@ extraArgs = ["--hashes", scripts.XCRandomizer.Onefile.Directory("XCXDE/Loader/ha
 TitlescreenSplash = scripts.XCRandomizer.FilePlacer(["Images/Logos/mainmen.wilay"],  "../ui/stream/us", "strm_title_thumb001.wilay", "XCXDE")
 Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../../../", game=Game)
 
+preCommands = [lambda: Options.PartyMem.ClearPartMemberSwapDict()]
 postCommands = [lambda: ShowTitleScreenText()]
 
 seedEntryVar = scripts.XCRandomizer.StringVar()
@@ -27,7 +28,7 @@ def XCXDEHelp():
     descData = scripts.XCRandomizer.PopupDescriptions.Description((900,900))
     descData.Header("Info")
     descData.Text(f"This is version {Version} of the randomizer project for Xenoblade Chronicles X DE.\nCapable of randomizing: Enemies, Characters, Loot and much more!", anchor="w")
-    descData.Text("Please report bugs or suggestions to our discord, so we can make the randomizer better!", anchor="w")
+    descData.Text("This program is tested on the 1.0.1 English version of the game. It is recommended you also use that version of the game.\n\nPlease report bugs or suggestions to our discord, so we can make the randomizer better!", anchor="w")
     descData.Header("Setup")
     descData.Tag("Requirements")
     descData.Text("Homebrewed Switch or Emulator\nLegal Copy of Xenoblade Chronicles X DE", anchor="w")
@@ -47,4 +48,4 @@ def XCXDEHelp():
     return descData
 
 
-WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, [], mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, extraArgs=extraArgs, textFolderName=textFolderName, extraFiles=[Exefs, TitlescreenSplash], backgroundImages=backgrounds, outputRomfsSpec=outputPath, setupHelpDesc=lambda: XCXDEHelp())
+WindowData = scripts.XCRandomizer.GameWindowData(Game, Version, Title, seedEntryVar, permalinkVar, Options.Tabs, postCommands, preCommands, mainFolderNames, subFolderNames, SeedNames.Nouns, SeedNames.Verbs, extraArgs=extraArgs, textFolderName=textFolderName, extraFiles=[Exefs, TitlescreenSplash], backgroundImages=backgrounds, outputRomfsSpec=outputPath, setupHelpDesc=lambda: XCXDEHelp())

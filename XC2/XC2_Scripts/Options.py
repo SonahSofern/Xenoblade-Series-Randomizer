@@ -1,18 +1,21 @@
-from scripts import JSONParser,Helper
+from scripts import JSONParser,Helper, XCRandomizer
 from XC2.XC2_Scripts.IDs import *
 from tkinter import *
-from XC2.XC2_Scripts import QOL as QualityOfLife, Accessories, AuxCores, Misc, BladeSpecials, CoreCrystals as CoreCry, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, BladeStats, Skips,GachaModifications, Enhancements, Cosmetics, Items as I, ButtonCombos, Scales, CharacterRandomization, Enemy, WeaponChips, YellowSkills
+from XC2.XC2_Scripts import QOL as QualityOfLife, Accessories, AuxCores, Misc, BladeSpecials, CoreCrystals as CoreCry, DriverArts, EleCombo, EnemyArts, EnemyEnhancements, FieldSkills, SkillTrees, IDs, MusicShuffling, BladeStats, Skips, Enhancements, Cosmetics, Items as I, Scales, CharacterRandomization, Enemy, WeaponChips, YellowSkills
 from XC2.XC2_Scripts.Race_Mode import RaceMode
 from XC2.XC2_Scripts.Torna_Logic import TornaMain
 from XC2.XC2_Scripts.UM_Hunt import UMHuntMain
 
-from scripts.Interactables import Option, SubOption, MutuallyExclusivePairing, DescriptionIndicator
+from scripts.Interactables import Option, SubOption, MutuallyExclusivePairing
 import scripts.Interactables
-scripts.Interactables.Game = "XC2"
+game = "XC2"
+scripts.Interactables.Game = game
 
 # Prio
 First = 0
 Last = 100
+BladeRandoPrio = 0
+
 
 Items = 1
 Driver  = 2
@@ -58,14 +61,13 @@ EnemyDropOption_AuxCores = SubOption("Aux Cores", EnemyDropOption, hasSpinBox=Tr
 EnemyDropOption_RefinedAuxCores = SubOption("Refined Aux Cores", EnemyDropOption, hasSpinBox=True, spinDefault=10)
 EnemyDropOption_CoreCrystals = SubOption("Core Crystals", EnemyDropOption, hasSpinBox=True, spinDefault=5)
 EnemyDropOption_RareBlades = SubOption("Rare Blades", EnemyDropOption, [lambda: CoreCry.CustomCoreCrystalRando()], hasSpinBox = True, spinDefault=5)
-QuestRewardsOption = Option("Quest Rewards", Items, "Randomizes quest rewards, including merc missions", [lambda: I.RandomizeQuestRewards()], prio=51)
+QuestRewardsOption = Option("Quest Rewards", Items, "Randomizes quest rewards, including merc missions", [lambda: I.RandomizeQuestRewards()], prio=51, descData=lambda: I.QuestRewardDescription())
 QuestRewardsOption_Accessories = SubOption("Accessories", QuestRewardsOption, hasSpinBox=True, spinDefault=30, spinDesc=weightsSpinDescription)
 QuestRewardsOption_WeaponChips = SubOption("Weapon Chips", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
 QuestRewardsOption_AuxCores = SubOption("Aux Cores", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
 QuestRewardsOption_RefinedAuxCores = SubOption("Refined Aux Cores", QuestRewardsOption, hasSpinBox=True, spinDefault=10)
 QuestRewardsOption_CoreCrystals = SubOption("Core Crystals", QuestRewardsOption, hasSpinBox=True, spinDefault=5)
 QuestRewardsOption_RareBlades = SubOption("Rare Blades", QuestRewardsOption, [lambda: CoreCry.CustomCoreCrystalRando()], hasSpinBox = True, spinDefault=5)
-
 
 # Drivers
 DriversOption = Option("Drivers", Driver, "Randomizes which drivers appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], prio=First, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.DriversDescriptions())
@@ -88,9 +90,11 @@ DriverSkillTreesOption_EarlyArtsCancel = SubOption("Early Arts Cancel", DriverSk
 DriverSkillTreesOption_EarlyXYBAttack = SubOption("Early XYB Attack", DriverSkillTreesOption)
 
 # Blades
-BladesOption = Option("Blades", Blade, "Randomizes when blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], prio=First, hasSpinBox = True, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.BladesDescriptions())
+BladesOption = Option("Blades", Blade, "Randomizes which blades appear in the story", [lambda: CharacterRandomization.CharacterRandomization()], prio=BladeRandoPrio, hasSpinBox = True, preRandoCommands=[lambda: CharacterRandomization.resetGlobals()], descData=lambda: CharacterRandomization.BladesDescriptions())
 BladesOption_Dromarch = SubOption("Randomize Dromarch", BladesOption)
 BladesOption_Healer = SubOption("Guarantee Healing Art", BladesOption)
+BladeNGPlusOption = Option("Enable NG+ Blades", Blade, "Allows NG+ blades to be included in randomization", prio= BladeRandoPrio-1, descData=lambda: CoreCry.NGPlusBladeDesc())
+BladeNGPlusOption_Balance = SubOption("Balance NG+ Blades", BladeNGPlusOption, [lambda: CoreCry.NewGamePlusBladeBalancing()], filePlaceCommands=[lambda: XCRandomizer.FilePlacer(["Loader/plugins/ngPlusBladeChips.nro"], "../../../0100e95004038000/romfs/skyline/plugins", game=game)])
 BladeArtsOption = Option("Blade Arts", Blade, "Randomizes a Blade's combat arts", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], Helper.StartsWith("NArts",1,3), BladeArts, BladeArts)])
 BladeBattleSkillsOption = Option("Blade Battle Skills", Blade, "Randomizes a Blade's battle (yellow) skill tree", [lambda: YellowSkills.RandomizeBattleSkills()], hasSpinBox = True)
 BladeBattleSkillsOption_Duplicates = SubOption("Allow Duplicates", BladeBattleSkillsOption)
@@ -104,7 +108,7 @@ BladeWeaponChipsOption = Option("Blade Weapon Chips", Blade, "Randomizes the eff
 # BladeWeaponChipsOption_AutoAtk = SubOption("Auto Attacks", BladeWeaponChipsOption, defState= True)
 BladeWeaponChipsOption_CritRate = SubOption("Crit Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["CriRate"],Helper.InclRange(0,100), BladeStats.BladeWeaponCritDistribution)],defState= True)
 BladeWeaponChipsOption_GuardRate = SubOption("Guard Rate", BladeWeaponChipsOption, [lambda: JSONParser.ChangeJSONFile(["common/ITM_PcWpn.json"],["GuardRate"],Helper.InclRange(0,100), BladeStats.BladeWeaponGuardDistribution)],defState= True)
-BladeWeaponChipsOption_Enhancement = SubOption("Enhancements", BladeWeaponChipsOption, [lambda: WeaponChips.RandomizeWeaponEnhancements()], defState= True)
+BladeWeaponChipsOption_Enhancement = SubOption("Enhancements", BladeWeaponChipsOption, [lambda: WeaponChips.RandomizeWeaponEnhancements()])
 BladeCombosOption = Option("Blade Combos", Blade, "Randomizes blade elemental combos", [lambda: EleCombo.BladeComboRandomization()], descData=lambda: EleCombo.BladeCombosDescription())
 BladeCombosOption_ElementRoutes = SubOption("Element Routes", BladeCombosOption)
 BladeCombosOption_Damage = SubOption("Damage", BladeCombosOption)
@@ -159,15 +163,15 @@ EnemyArtEffectsOption_Debuffs = SubOption("Debuffs", EnemyArtEffectsOption)
 EnemyArtEffectsOption_Enhancements = SubOption("Enhancements", EnemyArtEffectsOption)
 
 # QOL
+TutorialShorteningOption = Option("Tutorial Skips", QOL, "Skips as many tutorials and early argentum quests as possible.", [lambda: Skips.ShortenedTutorial()])
 ShortcutsOption = Option("Quest Skips", QOL, "Various speedups/skips for tedious main story quests")
 ShortcutsOption_PuzzleTreeWoodSkip = SubOption("Puzzletree Wood Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"],[18,19], ["Count"], 0)])
 ShortcutsOption_GatherNia = SubOption("Nia Rumours Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCondition.json"],[7], ["ConditionID"], 1)])
 ShortcutsOption_ThiefRumours = SubOption("Roc Thief Rumours Skip", ShortcutsOption, [lambda: Skips.BaseGameStorySkip([2028], "Normal")])
-ShortcutsOption_MorArdainEnterFactory = SubOption("Materials Stakeout", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_MercenariesMission.json"],[248], ["RequestPerformance"], 1)])
+ShortcutsOption_MorArdainEnterFactory = SubOption("Materials Stakeout Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_MercenariesMission.json"],[248], ["RequestPerformance"], 1)])
 ShortcutsOption_IndolQuiz = SubOption("Indol Quiz Skip", ShortcutsOption, [lambda: Skips.IndolQuizSkip()])
 ShortcutsOption_FeedingAnArmy = SubOption("Feeding an Army Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"], [293,294,295,296], ["Count"], 0)])
 ShortcutsOption_CrossDesert = SubOption("To Cross a Desert Skip", ShortcutsOption, [lambda: JSONParser.ChangeJSONLine(["common/FLD_QuestCollect.json"], [300,301], ["Count"], 0)])
-TutorialShorteningOption = Option("Tutorial Skips", QOL, "Skips as many tutorials and early argentum quests as possible.", [lambda: Skips.ShortenedTutorial()])
 communitySpinDesc = "Member(s)"
 CommunityMembersOption = Option("Community Members", QOL, "Adjusts how many members/quests are required for each community level in Torna", [lambda: QualityOfLife.CommunityQOL()])
 CommunityMembersOption_LV1 = SubOption("Level 1", CommunityMembersOption, hasSpinBox=True, spinDesc=communitySpinDesc, spinMax=1, spinDefault=1)
@@ -181,10 +185,11 @@ FieldSkillOption_Reduce = SubOption("Reduce All Field Skills", FieldSkillOption,
 FieldSkillOption_RemoveStory = SubOption("Remove Story Field Skills", FieldSkillOption, defState=False, commands=[lambda: FieldSkills.RemoveStoryFieldSkills()])
 FieldSkillsOption_RemoveAll = SubOption("Remove All Field Skills", FieldSkillOption,  defState=False, commands=[lambda: FieldSkills.RemoveFieldSkills(True)])
 EasySkillTreesOption = Option("Easy Affinity Trees", QOL, "Makes trust the only condition for leveling up a blade's affinity tree", [lambda: SkillTrees.BladeSkillTreeShortening(IDs.ValidBladeIDs, 15), lambda: SkillTrees.BladeSkillTreeShortening(IDs.TornaBladeIDs, 15)])
-FasterDriverSkillTrees = Option("SP Boost", QOL, "Decreases SP required for driver skill trees", [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["XC2/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "XC2/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "XC2/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], [f'row[key] // {FasterDriverSkillTrees.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1,  spinDesc = "x Faster")
-FasterLevelsOption = Option("EXP Boost", QOL, "Decreases EXP required for each levelup", [lambda: Helper.MathmaticalColumnAdjust(["./XC2/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {FasterLevelsOption.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2,spinIncr = 1, spinDesc = "x Faster")
-FasterWeaponPointsOption = Option("WP Boost", QOL, "Decreases WP required for arts levelups", [lambda: Helper.MathmaticalColumnAdjust(["XC2/JsonOutputs/common/BTL_Arts_Dr.json"], ["NeedWP1", "NeedWP2", "NeedWP3", "NeedWP4"], [f'row[key] // {FasterWeaponPointsOption.GetSpinbox()}'])], hasSpinBox=True, spinMin=1, spinDefault=2,spinIncr = 1, spinDesc = "x Faster")
-StartwithIncreasedMovespeedOption = Option("Speed Boost", QOL, "Increases your running speed", [lambda: QualityOfLife.AddMovespeedDeed()], hasSpinBox = True, spinMin = 0, spinMax = 50, spinIncr = 5, spinDesc = "% Increase (x10)", spinWidth = 2, spinDefault = 50)
+BoostOption = Option("Resource Boosts", QOL, "Various boosts to resources (exp, wp etc.)")
+BoostOption_EXP = SubOption("EXP Boost", BoostOption, [lambda: Helper.MathmaticalColumnAdjust(["./XC2/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {BoostOption_EXP.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2,spinIncr = 1, spinDesc = "x Faster")
+BoostOption_SP = SubOption("SP Boost", BoostOption, [lambda: Helper.MathmaticalColumnAdjust(Helper.StartsWith("./XC2/JsonOutputs/common/BTL_Skill_Dr_Table0", 1, 6, addJson=True) + ["XC2/JsonOutputs/common/BTL_Skill_Dr_Table17.json", "XC2/JsonOutputs/common/BTL_Skill_Dr_Table18.json", "XC2/JsonOutputs/common/BTL_Skill_Dr_Table19.json"], ["NeedSp"], [f'row[key] // {BoostOption_SP.GetSpinbox()}'])], hasSpinBox=True, spinDefault=2, spinIncr = 1,  spinDesc = "x Faster")
+BoostOption_WP = SubOption("WP Boost", BoostOption, [lambda: Helper.MathmaticalColumnAdjust(["XC2/JsonOutputs/common/BTL_Arts_Dr.json"], ["NeedWP1", "NeedWP2", "NeedWP3", "NeedWP4"], [f'row[key] // {BoostOption_WP.GetSpinbox()}'])], hasSpinBox=True, spinMin=1, spinDefault=2,spinIncr = 1, spinDesc = "x Faster")
+BoostOption_Speed = SubOption("Movespeed Boost", BoostOption, [lambda: QualityOfLife.AddMovespeedDeed()], hasSpinBox = True, spinMin = 0, spinMax = 50, spinIncr = 5, spinDesc = "% Increase (x10)", spinWidth = 2, spinDefault = 50)
 FreelyEngageBladesOption = Option("Freely Engage Blades", QOL, "Allows blades to be freely engaged by all valid drivers", [lambda: JSONParser.ChangeJSONFile(["common/CHR_Bl.json"], ["FreeEngage"], [0], [1], [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1075, 1076, 1103])])
 ChestOption = Option("Treasure Chests", QOL, "Suboptions control various things about treasure chests", prio = Last) # Not using the description because that only applies to Race Mode. Race Mode should just automatically enforce CTMC
 ChestOption_CTMCOption = SubOption("Chest Type Matches Contents", ChestOption, [lambda: I.ChestTypeMatchesContentsValue()], prio = Last)
@@ -193,15 +198,13 @@ ChestOption_CondenseGoldOption = SubOption("Condense Gold Loot", ChestOption, [l
 # PickupRangeOption = Option("Increase Pickup Range", QOL, "Increases your pickup range" , [lambda: QualityOfLife.CollectionRange()]) No longer needed now that chests QOL is forced so they disappear and let you get the loot
 EverlastingPouchItemsOption = Option("Everlasting Pouch Items", QOL, "Makes Pouch Items last as long as possible", [lambda: JSONParser.ChangeJSONFile(["common/ITM_FavoriteList.json"],["Time"], Helper.InclRange(0,255), [6099])])
 MutePopupsOption = Option("Mute Popups", QOL, "Stops blade skill and pouch item refill popups", [lambda: (JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[89], ["sheet06"], [""]), JSONParser.ChangeJSONLine(["common/MNU_Layer_Dlc03.json"],[320], ["sheet06"], [""]))])
-MutePopupsOption_Landmarks = SubOption("Landmarks", MutePopupsOption, [lambda: (JSONParser.ChangeJSONLine(["common/MNU_Layer.json"],[85], ["sheet04"], [""]),JSONParser.ChangeJSONLine(["common/MNU_Layer_Dlc03.json"],[316], ["sheet04"], [""]))])
-NewGamePlusFlagsOption = Option("NG+ Flags", QOL, "Enables many NG+ behaviours like unlocked hidden driver skill trees, unlocked chain attacks from the start, unlocked blade slots etc. These must be accepted from the DLC Menu to work.", [lambda: QualityOfLife.CreateDLCtoSetFlag(["2nd Blade Equip Slot", "3rd Blade Equip Slot"], [35327, 35328], [2,2], [0,0], [1,1], [1,1])])
-NewGamePlusFlagsOptions_Blades = SubOption("NG+ Blades", NewGamePlusFlagsOption, [lambda: GachaModifications.UnlockNGPlusBlades()])
-NewGamePlusFlagsOptionsHiddenDriverSkillTree = SubOption("Hidden Skill Tree Unlocked", NewGamePlusFlagsOption, [lambda: QualityOfLife.FixIssuesCausedByNGPlusFlag()])
+MutePopupsOption_Landmarks = SubOption("Landmarks", MutePopupsOption, [lambda: (JSONParser.ChangeJSONLine(["common/MNU_Layer.json"], [85], ["sheet04"], [""]),JSONParser.ChangeJSONLine(["common/MNU_Layer_Dlc03.json"],[316], ["sheet04"], [""]))])
+NewGamePlusFlagsOption = Option("NG+ Flags", QOL, "Enables many NG+ behaviours like unlocked hidden driver skill trees, unlocked chain attacks from the start, unlocked blade slots etc. These must be accepted from the DLC Menu to work.", [lambda: QualityOfLife.CreateDLCtoSetFlag(["2nd Blade Equip Slot", "3rd Blade Equip Slot"], [35327, 35328], [2,2], [0,0], [1,1], [1,1]), lambda: QualityOfLife.CreateDLCtoSetFlag(["Driver Skill Tree Key"], [48589], Condition = [1853]), lambda: CoreCry.UnlockNGPlusBladesGacha()])
 
 # Funny
 MusicOption = Option("Music", Funny, "Randomizes Music", [lambda: MusicShuffling.MusicShuffle()], descData=lambda: MusicShuffling.MusicRandoDescription())
 MusicOption_MixBattleAndEnv = SubOption("Mix Battle/Environment Themes", MusicOption, defState = False)
-BladeSpecialButtonsOption = Option("Button Combos", Funny, "Randomizes inputs for button challenges", [lambda: ButtonCombos.BladeSpecialButtonChallenges()])
+BladeSpecialButtonsOption = Option("Button Combos", Funny, "Randomizes inputs for button challenges", [lambda: Misc.BladeSpecialButtonChallenges()])
 BladeSpecialButtonsOption_ABXY = SubOption("ABXY", BladeSpecialButtonsOption)
 BladeSpecialButtonsOption_Mystery = SubOption("?", BladeSpecialButtonsOption)
 ProjTreasureChestOption = Option("Projectile Treasure Chests", Funny, "Launches your items from chests",[lambda: JSONParser.ChangeJSONFile(["common/RSC_TboxList.json"], ["box_distance"], [0,0.5,1], [15])])
@@ -246,8 +249,8 @@ for loc in TornaMain.GormottNametoLocID.keys(): # Automatically Generates these
     SubOption(loc, TornaRemoveGormottChecks, defState = True)
 TornaRewardsonUnreqSidequests = Option("Torna Unrequired Sidequests", GameModeTab, "Sidequests not chosen for the main story requirements or story gates can have Progression Items on their rewards.")
 
-MutuallyExclusivePairing([TornaMainOption, TornaAddHints, TornaObjectColorMatchesContents, TornaChooseCommunityReqs, TornaCreateSpoilerLog, TornaRemoveGormottChecks, TornaRewardsonUnreqSidequests], [AccessoriesOption, CommunityMembersOption, QuestRewardsOption, AuxCoresOption, AccessoryShopsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladesOption, BladeArtsOption, BladeFieldSkillsOption, BladeWeaponChipsOption, BladeCombosOption, BladeStatsOption, NormalEnemyOption, UniqueEnemyOption, BossEnemyOption, EnemyDropOption, TreasureChestOption, FreelyEngageBladesOption, ChestOption, FieldSkillOption, EasySkillTreesOption, FasterLevelsOption, NewGamePlusFlagsOption, ProjTreasureChestOption, EnemySizeOption, BladeWeaponCosmeticsOption, CosmeticsOption, RaceModeOption, UMHuntOption])
-MutuallyExclusivePairing([UMHuntOption], [TutorialShorteningOption, AccessoryShopsOption, NewGamePlusFlagsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladeWeaponChipsOption, AccessoriesOption, AuxCoresOption, NormalEnemyOption, BossEnemyOption, UniqueEnemyOption, EnemyDropOption, TreasureChestOption, StartwithIncreasedMovespeedOption, FasterDriverSkillTrees, EasySkillTreesOption, FasterLevelsOption, RaceModeOption, FieldSkillOption])
+MutuallyExclusivePairing([TornaMainOption, TornaAddHints, TornaObjectColorMatchesContents, TornaChooseCommunityReqs, TornaCreateSpoilerLog, TornaRemoveGormottChecks, TornaRewardsonUnreqSidequests], [AccessoriesOption, CommunityMembersOption, QuestRewardsOption, AuxCoresOption, AccessoryShopsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladesOption, BladeArtsOption, BladeFieldSkillsOption, BladeWeaponChipsOption, BladeCombosOption, BladeStatsOption, NormalEnemyOption, UniqueEnemyOption, BossEnemyOption, EnemyDropOption, TreasureChestOption, FreelyEngageBladesOption, ChestOption, FieldSkillOption, EasySkillTreesOption, BoostOption, NewGamePlusFlagsOption, ProjTreasureChestOption, EnemySizeOption, BladeWeaponCosmeticsOption, CosmeticsOption, RaceModeOption, UMHuntOption])
+MutuallyExclusivePairing([UMHuntOption], [TutorialShorteningOption, AccessoryShopsOption, NewGamePlusFlagsOption, PouchItemShopOption, TreasureChestOption, WeaponChipShopOption, DriversOption, BladeWeaponChipsOption, AccessoriesOption, AuxCoresOption, NormalEnemyOption, BossEnemyOption, UniqueEnemyOption, EnemyDropOption, TreasureChestOption, EasySkillTreesOption, BoostOption, RaceModeOption, FieldSkillOption])
 MutuallyExclusivePairing([RaceModeOption], [DriversOption, BladesOption, ShortcutsOption, ChestOption, TutorialShorteningOption])
     
 # Currently Disabled for Various Reasons

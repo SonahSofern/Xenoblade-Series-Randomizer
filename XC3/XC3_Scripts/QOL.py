@@ -33,7 +33,7 @@ def EarlyMoveSpeed():
         JSONParser.CloseFile(perkData, perkFile)
     
 def AscendedClassEarly():
-    with open(f"XC3//JsonOutputs/mnu/MNU_HeroDictionary.json", 'r+', encoding='utf-8') as charFile: # Increase the power of the movespeed deeds
+    with open(f"XC3//JsonOutputs/mnu/MNU_HeroDictionary.json", 'r+', encoding='utf-8') as charFile:
         charData = json.load(charFile)
         for char in charData["rows"]:
             char["WakeupCondition"] = 21022

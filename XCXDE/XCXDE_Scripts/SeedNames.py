@@ -1,2 +1,2 @@
 Nouns = ["Cross", "Elma", "Lin", "Nagi", "Irina", "Gwin", "Doug", "Lao", "L", "Frye", "Boze", "Celica", "Alexa", "H.B.", "Mia", "Murderess", "Phog", "Hope", "Neilnail", "Liesel", "Ga Jiarg", "Al"]
-Verbs = ["Staggers", "Topples", "Launches", "Flinches", "Stuns", "Binds", "Taunts", "Shocks"]
+Verbs = ["Staggers", "Topples", "Launches", "Flinches", "Stuns", "Binds", "Taunts", "Shocks", "Fatigues", "Blazes", "Pulls"]

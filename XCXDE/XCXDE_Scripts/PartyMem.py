@@ -1,31 +1,60 @@
 from XCXDE.XCXDE_Scripts import IDs, Options
-
 from scripts import JSONParser, Helper
 
-# Starting Gear
-# 
+partyMemberSwapList:list[dict] = []
 
 def Members():
     charFile = JSONParser.File("XCXDE/JsonOutputs/common/DEF_PcList.json")
     wpnFile = JSONParser.File("XCXDE/JsonOutputs/common/WPN_PcList.json")
     amrFile = JSONParser.File("XCXDE/JsonOutputs/common/AMR_PcList.json")
+    announceFile = JSONParser.File("XCXDE/JsonOutputs/common/MNU_Announce.json")
     
-    testGroup = Helper.RandomGroup()
-    testGroup.GenData(charFile.rows, lambda e: e["$id"] in IDs.PartyMembersIDs)
-    isAllowDupes = Options.CharacterOption_Duplicates.GetState()
-    isBalanceGear = Options.CharacterOption_BalanceGear.GetState()
+    partyMemGroup = Helper.RandomGroup()
+    partyMemGroup.GenData(charFile.rows, lambda e: e["$id"] in IDs.PartyMembersIDs)
+    
+    partyMemAnnounceGroup = Helper.RandomGroup()
+    partyMemAnnounceGroup.GenData(announceFile.rows, lambda e: e["NpcID"] in IDs.PartyMembersIDs)
+    
+    isAllowDupes = not Options.CharacterOption_Duplicates.GetState()
     
     for char in charFile.rows:
         if char["$id"] not in IDs.PartyMembersIDs:
             continue
-        newChar = testGroup.SelectRandomMember(isAllowDupes)
-        if isBalanceGear:
-            BalanceStartingGear(char["Lv"], newChar, wpnFile, amrFile)
+        newChar = partyMemGroup.SelectRandomMember(isAllowDupes)
+        FixMenuInfo(char, newChar, announceFile, partyMemAnnounceGroup)
+        BalanceStartingGear(char["Lv"], newChar, wpnFile, amrFile)
+        partyMemberSwapList.append({"Original" : char["$id"], "New" : newChar["$id"]})
         Helper.CopyKeys(char, newChar, ["$id", "Lv", "InitBp"]) # Keep original Level and Bp for balancing
         
     charFile.Close()
     wpnFile.Close()
     amrFile.Close()
+    announceFile.Close()
+
+def ClearPartMemberSwapDict():
+    '''Called in rando precommands so no matter what it is clear, if I called in this function I think you could close mid randomization and turn off this settings and then other stuff that uses the dict would be thrown off'''
+    partyMemberSwapList.clear()
+    
+
+def FixMenuInfo(originalChar, newChar, announceFile:JSONParser.File, announceGroup:Helper.RandomGroup):
+    '''The party member menu needs info updated for the new characters'''
+    newData = None
+    newCharID = newChar["$id"]
+    # Find the data corresponding to the new character
+    for ann in announceGroup.originalGroup: 
+        if newCharID == 50: newCharID = 11 # Elma ID 50 is alien elma, which has no unique description so we just swap its description to base elma
+        if ann["NpcID"] == newCharID:
+            newData = ann
+            break
+    
+    if newData is None: 
+        raise Exception("Invalid Character")
+    
+    # Apply it
+    for ann in announceFile.rows:
+        if ann["NpcID"] == originalChar["$id"]:
+            Helper.CopyKeys(ann, newData, ["txt[3]", "txt[4]", "txt[5]", "<1628874A>", "<0D10F668>"], isGoodKeys=True)
+            break
 
 def GetArmorFlags(armor):
     flags = 0
@@ -61,18 +90,10 @@ def BalanceStartingGear(targetLv, newChar, wpnFile:JSONParser.File, amrFile:JSON
             
         return Helper.random.choice(allowedWeapons) # Return a random choice's id
                 
-    def GetBalancedArmor(targetGearID, armorPiecemeal):
+    def GetBalancedArmor(armorPiecemeal, armorType):
         female = 2
         male = 1
         
-        # Get Armor Type
-        armorType = 0
-        for amr in amrFile.rows: 
-            if amr["$id"] == targetGearID:
-                armorType = amr["TypeAmr"]
-                break
-        
-            
         # Generate Allowed Armors
         allowedArmors = []
         for amr in amrFile.rows: 
@@ -106,9 +127,9 @@ def BalanceStartingGear(targetLv, newChar, wpnFile:JSONParser.File, amrFile:JSON
                
     armorPiecemeal = 0 # Updated when a slot is filled, needed to handle equipment that takes multiple slots
     for i in range(1,6):
-        if newChar[f"DefAmr{i}"] == 0: # Only replace existing armors
-            continue
-        newChar[f"DefAmr{i}"], armorPiecemeal = GetBalancedArmor(newChar[f"DefAmr{i}"], armorPiecemeal)
+        newChar[f"DefAmr{i}"] = 0 # Clear the original piece
+        if (armorPiecemeal & pow(5-i, 2)): continue # Bitwise & on armorPiecemeal and the slot we are currently trying to fill to check if it is already filled. [Head, Body, Arm R, Arm L, Leg]
+        newChar[f"DefAmr{i}"], armorPiecemeal = GetBalancedArmor(armorPiecemeal, i)
     newChar["DefWpnFar"] = GetBalancedWeapon(newChar["DefWpnFar"])
     newChar["DefWpnNear"] = GetBalancedWeapon(newChar["DefWpnNear"])
 

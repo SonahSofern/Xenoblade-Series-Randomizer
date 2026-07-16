@@ -2,9 +2,32 @@ import json
 from scripts import JSONParser, Helper
 
 def TutorialSkip():
-    with open("XCXDE/JsonOutputs/common/MNU_Tutorial.json", 'r+', encoding='utf-8') as eneFile:
-        pass
+    '''Makes all tutorials the kind that just appear in the menu and not interrupt gameplay'''
+    tipsFile = JSONParser.File("XCXDE/JsonOutputs/common/MNU_TipsList.json")
+    for tip in tipsFile.rows:
+        tip["operation"] = 2
+        tip["type"] = 1
+        # tip["flag"] = 28
+    tipsFile.Close()
     
+# def TTRLSkip(): # Didnt work
+#     tutFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_EventPopList.json")
+#     for tut in tutFile.rows:
+#         tut["script_name"] = ""
+#         # tut["script_start_id"] = 0
+#     tutFile.Close()   
+
+def Chapter1Skip():
+    qstFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_questlist.json")
+    for qst in qstFile.rows:
+        if qst["$id"] in [4,5,6,7]:
+            qst["next_quest_a"] = 8
+            qst["flg_type_b"] = 0
+        if qst["$id"] in [9]:
+            qst["next_quest_a"] = 14
+            qst["flg_type_b"] = 0
+    qstFile.Close()
+ 
 def InfoRangeIncrease(mult, isMute):
     areaInfoIDs = [1001,1101,1201,1301,1401,1501,1601,1701,2001,2201]
     for info in areaInfoIDs:
@@ -41,13 +64,18 @@ def SkellExamSkip():
             break
     qstFile.Close()
     
+def FrontierNavBoost(boost):
+    fNavFile = JSONParser.File(f"XCXDE/JsonOutputs/common/ITM_BeaconList.json")
+    for nav in fNavFile.rows:
+        # if nav["$id"] == 1:
+        #     nav["strorage"] = 500 # As a qol feature basic probes increase storage to account for boost
+        nav["tourism"] *= boost # Credits rate
+        nav["rate"] *= boost # Miranium rate
+        nav["cost"] = 0 # No need for a swap cost
+        nav["raise"] *= boost # Booster probes raise effects of nearby
+        nav["strorage"] *= boost # Storage increase
+    fNavFile.Close()
 
-# def TTRLSkip(): # Didnt work
-#     tutFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_EventPopList.json")
-#     for tut in tutFile.rows:
-#         tut["script_name"] = ""
-#         # tut["script_start_id"] = 0
-#     tutFile.Close()    
 
 def FasterClassRanks(spin):
     # might be breaking since you learn multiple ranks at once
@@ -56,15 +84,27 @@ def FasterClassRanks(spin):
         for cls in clsFile.rows:
             cls["Exp"] = max(cls["Exp"] // spin, 1)       
         
-        # exp and cp menu just stays up this didnt fix it 1,2,3,4,5,6 etc.
-        # lastrow = 0
-        # for cls in clsFile.rows:
-        #     while cls["Exp"] <= lastrow:
-        #         cls["Exp"] += 1
-        #     lastrow = cls["Exp"]
+        # AdjustLevelsDifferently(clsFile, "Exp")
             
         clsFile.Close()
-   
+
+def AdjustLevelsDifferently(file:JSONParser.File, key):
+    '''Ensures each level up is a higher amount of XP (didnt help)'''
+    lastrow = 0
+    for cls in file.rows:
+        while cls[key] <= lastrow:
+            cls[key] += 1
+        lastrow = cls[key]
+
+def FasterLevels(mult):
+    growFile = JSONParser.File("XCXDE/JsonOutputs/common/BTL_Growlist.json")
+    for lv in growFile.rows:
+        for key in ["LevelExp", "LevelExpRental"]:
+            lv[key] = max(lv[key] // mult, 1)
+    
+    growFile.Close()
+
+ 
 def EarlyFlight():
     '''Unlocks skell flight as soon as you get skells'''
     sklFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_DlList.json")
@@ -77,15 +117,47 @@ def OpWep():
     with open("XCXDE/JsonOutputs/common/WPN_PcList.json", 'r+', encoding='utf-8') as wpFile:
         wpData = json.load(wpFile)
         for wep in wpData["rows"]:
-            if wep["$id"] in [1584]:
-                wep["Damage"] = 1500
+            if wep["$id"] in [1583, 543]:
+                wep["Damage"] = 3500
                 wep["Magazine"] = 100
-                wep["DMRatio"] = 1500
+                wep["DMRatio"] = 3500
                 wep["Recast"] = 1
                 
                 
         JSONParser.CloseFile(wpData, wpFile)
+
+# Didnt do anything for field skills being faster     
+# def fskill():
+#     popFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_TboxPopList.json")
+#     for pop in popFile.rows:
+#         pop["difficulty"] = 0
+#         pop["acsDownOffset"] = 0
+#     popFile.Close()
+
+# Was the players custom character's colors my character turned purple
+# def Colors():
+#     '''Enemies show up in all weather conditions'''
+#     popFile = JSONParser.File("XCXDE/JsonOutputs/common/CLR_List.json")
+#     for pop in popFile.rows:
+#         for key in ["RED", "GREEN", "BLUE", "ALPHA"]:
+#             pop[key] = Helper.random.randrange(1,255)
+#     popFile.Close()
+def SkellMovement(mult):
+    '''Faster Skells'''
+    skellFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_DlActParam.json")
+    for skell in skellFile.rows:
+        # Driving Speed
+        skell["VF_CarDashMaxVelocity"] *= mult
+        skell["VF_CarDashMinVelocity"] *= mult
         
+        # You cannot change the flying speed I tried changing them all and no speed increase
+        # # Backswing
+        # skell["VF_CarSwingBackSpringCon"] = 50
+        # skell["VF_CarDashMinVelocity"] = 50
+        # skell["VF_CarDashMinVelocity"] = 50
+    skellFile.Close()
+
+
 def ClearEnemyWeatherCondition():
     '''Enemies show up in all weather conditions'''
     popFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnPopParam.json")
@@ -94,25 +166,60 @@ def ClearEnemyWeatherCondition():
         pop["PopWeather"] = 4294967295 # THe bit mask for showing up in all weathers
     popFile.Close()
 
-def EarlySkell(chosenChapter):
-    '''Users can choose what chapter they want to get the level 15 skell at and unlock skells in general'''
-    getSkellQuestID = 1662
-    chapterDict = {
-        2: 15,
-        3: 20,
-        4: 26,
-        5: 32,
-        6: 42
-    }
+def EarlyVandahmQuest():
+    '''Vandahm gives skell license quest early'''
+    # Just let them get skell whenever they want
+    # Make that vandahm always show up (unless condition 2 which is the quest being complete so he goes away)
+    vandahmCH6Condition = 3083
+    condFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_GameCondition.json")
+    for cond in condFile.rows:
+        if cond["$id"] == vandahmCH6Condition: 
+            cond["cond1"] = 115
+    condFile.Close()            
+    
+    # Make him ready to give the quest
+    talkFile = JSONParser.File("XCXDE/JsonOutputs/common/NPC_talk5000.json")
+    for talk in talkFile.rows:
+        if talk["$id"] in [4,5]: # YOu have to edit 4 AND 5 I do not know why
+            talk["script"] = "qev096101"
+            talk["check"] = 0
+            talk["uid"] = 24
+            talk["id"] = 1143
+    talkFile.Close()    
+    
+    # Make the submissions not show up to avoid clicking through them 
+    proficiencyExamIDs = [1146, 1148, 1150, 1152, 1154, 1156, 1158, 1160]
     qstFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_questlist.json")
     for qst in qstFile.rows:
-        if qst["$id"] == chapterDict[chosenChapter]:
-            qst["next_quest_a"] = getSkellQuestID
-    for qst in qstFile.rows:
-        if qst["$id"] == getSkellQuestID:
-            qst["next_quest_a"] = chapterDict[chosenChapter] + 1
-            qst["prt_quest_id"] = chapterDict[chosenChapter]
+        if qst["$id"] in proficiencyExamIDs:
+            qst["window_disp"] = 0
     qstFile.Close()
+    # category 4 # Didnt matter for displaying just changed the background
+    # windowdisplay 0
+    # flagtype = 0
+
+# # Didnt work menu wouldnt allow you to outfit, refuel reassign skells
+# def EarlySkell(chosenChapter):
+#     '''Users can choose what chapter they want to get the level 15 skell at and unlock skells in general'''
+#     getSkellQuestID = 1662
+#     # talkToWalter = 1145 (he requires the skell liscenses can probably remove that)
+#     # getSkell
+#     chapterDict = {
+#         2: 15,
+#         3: 20,
+#         4: 26,
+#         5: 32,
+#         6: 42
+#     }
+#     qstFile = JSONParser.File("XCXDE/JsonOutputs/common/FLD_questlist.json")
+#     for qst in qstFile.rows:
+#         if qst["$id"] == chapterDict[chosenChapter]:
+#             qst["next_quest_a"] = getSkellQuestID
+#     for qst in qstFile.rows:
+#         if qst["$id"] == getSkellQuestID:
+#             qst["next_quest_a"] = chapterDict[chosenChapter] + 1
+#             qst["prt_quest_id"] = chapterDict[chosenChapter]
+#     qstFile.Close()
     
 # Cant just zero out the fields it breaks. It requires one material and one rarersc minimum. Not worth it.
 # def EasyGemCrafting():

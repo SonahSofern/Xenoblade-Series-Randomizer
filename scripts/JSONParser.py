@@ -6,19 +6,24 @@ openFiles = [] # To track the currently open files
 class File:
     '''Better approach to manipulating files, cuts out boilerplate and lets us expand functionality easily'''
     def __init__(self, filePath, fileOpenMode = 'r+'):
-         self.file = open(filePath, fileOpenMode, encoding='utf-8')
-         self.data = json.load(self.file)
-         self.rows = self.data["rows"]
-         self.filePath = filePath
-         openFiles.append(filePath)
-         
+        try:
+            self.file = open(filePath, fileOpenMode, encoding='utf-8')
+            self.data = json.load(self.file)
+            self.rows:list[dict] = self.data["rows"]
+            self.filePath = filePath
+            openFiles.append(filePath)
+            self.isOpen = True
+        except:
+            self.isOpen = False
+            print(f"Couldn't open file: {filePath}")
+    
     def Close(self):
         """Truncates and Closes Json Files"""
         self.file.seek(0)
         self.file.truncate()
         json.dump(self.data, self.file, indent=2, ensure_ascii=False)
         self.file.close()
-        
+        self.isOpen = False
         self.RemoveTrackedFile()
     
     def RemoveTrackedFile(self):

@@ -4,7 +4,7 @@ from XCDE.XCDE_Scripts import SeedNames, IDs, Options
 Title = "Xenoblade Chronicles DE"
 outputPath = "contents/0100FF500E34A000/romfs/bdat"
 Game = "XCDE"
-Version = "1.3.2"
+Version = "1.3.3"
 def ShowTitleScreenText():
     scripts.JSONParser.ChangeJSONLine(["bdat_common_ms/MNU_title_ms.json"],[8], ["name"], f"Randomizer v{Version}", Game="XCDE") # Change Title Version to Randomizer vX.x.x
 

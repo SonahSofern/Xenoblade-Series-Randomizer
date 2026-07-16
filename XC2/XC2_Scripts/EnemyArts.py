@@ -3,29 +3,24 @@ from XC2.XC2_Scripts.Enhancements import *
 from XC2.XC2_Scripts import Options
 
 def EnemyArtAttributes():
-    with open("./XC2/JsonOutputs/common/BTL_Arts_En.json", 'r+', encoding='utf-8') as EnArtsFile:
-        with open("./XC2/JsonOutputs/common/BTL_Arts_BlSp.json", 'r+', encoding='utf-8') as EnBlArtsFile:
-            with open("./XC2/JsonOutputs/common_ms/btl_arts_en_ms.json", 'r+', encoding='utf-8') as EnArtsNamesFile:  
-                with open("./XC2/JsonOutputs/common_ms/btl_arts_blsp_ms.json", 'r+', encoding='utf-8') as EnBlArtsNamesFile:  
-                    with open("./XC2/JsonOutputs/common_ms/btl_arts_bl_ms.json", 'r+', encoding='utf-8') as BlArtsNamesFile:  
-                        with open("./XC2/JsonOutputs/common/BTL_Arts_Bl.json", 'r+', encoding='utf-8') as BlArtsFile:  
-                            enArtsData = json.load(EnArtsFile)
-                            enBlArtsData = json.load(EnBlArtsFile)
-                            enArtsNameData = json.load(EnArtsNamesFile)
-                            enBlArtsNameData = json.load(EnBlArtsNamesFile)
-                            blArtNameData = json.load(BlArtsNamesFile)
-                            blArtsData = json.load(BlArtsFile)
+    EnArtsFile = JSONParser.File("XC2/JsonOutputs/common/BTL_Arts_En.json")
+    EnBlArtsFile = JSONParser.File("XC2/JsonOutputs/common/BTL_Arts_BlSp.json")
+    EnArtsNamesFile = JSONParser.File("XC2/JsonOutputs/common_ms/btl_arts_en_ms.json")
+    EnBlArtsNamesFile = JSONParser.File("XC2/JsonOutputs/common_ms/btl_arts_blsp_ms.json")
+    BlArtsNamesFile = JSONParser.File("XC2/JsonOutputs/common_ms/btl_arts_bl_ms.json")
+    BlArtsFile = JSONParser.File("XC2/JsonOutputs/common/BTL_Arts_Bl.json")
                             
-                            ChangeArts(enArtsData, enArtsNameData)
-                            ChangeArts(enBlArtsData, enBlArtsNameData)
-                            # ChangeArts(blArtsData, blArtNameData, spinBox) # Currently this will change ally and enemy because they use the same files :/
-                            
-                            JSONParser.CloseFile(blArtsData, BlArtsFile)
-                            JSONParser.CloseFile(blArtNameData, BlArtsNamesFile)
-                            JSONParser.CloseFile(enBlArtsNameData, EnBlArtsNamesFile)
-                            JSONParser.CloseFile(enArtsNameData, EnArtsNamesFile)
-                            JSONParser.CloseFile(enBlArtsData, EnBlArtsFile)
-                            JSONParser.CloseFile(enArtsData, EnArtsFile)
+    ChangeArts(EnArtsFile.data, EnArtsNamesFile.data)
+    ChangeArts(EnBlArtsFile.data, EnBlArtsNamesFile.data)
+    # ChangeArts(blArtsData, blArtNameData, spinBox) # Currently this will change ally and enemy because they use the same files :/
+    
+    EnArtsFile.Close()
+    EnBlArtsFile.Close()
+    EnArtsNamesFile.Close()
+    EnBlArtsNamesFile.Close()
+    BlArtsNamesFile.Close()
+    BlArtsFile.Close()
+
         
 def ChangeArts(artData, artNameData):
     newNameID = 457 # Starting id to add new names to old names file
