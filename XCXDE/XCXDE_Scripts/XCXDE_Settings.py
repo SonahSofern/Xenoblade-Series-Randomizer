@@ -17,7 +17,8 @@ def ShowTitleScreenText():
 extraArgs = ["--hashes", scripts.XCRandomizer.Onefile.Directory("XCXDE/Loader/hashes.txt")] # Hash Table
 
 TitlescreenSplash = scripts.XCRandomizer.FilePlacer(["Images/Logos/mainmen.wilay"],  "../ui/stream/us", "strm_title_thumb001.wilay", "XCXDE")
-Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../../../", game=Game)
+# Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../../../", game=Game) # For ryujinx specifically
+Exefs = scripts.XCRandomizer.FilePlacer(["Loader/exefs"], "../../", game=Game)
 
 preCommands = [lambda: Options.PartyMem.ClearPartMemberSwapDict()]
 postCommands = [lambda: ShowTitleScreenText()]
@@ -36,7 +37,7 @@ def XCXDEHelp():
     descData.Tag("Step 1")
     descData.Text("Choose your output location for the program. This is where your game will load the randomized files from.", anchor="w")
     descData.Image("outputLocation.png", "XCDE", 800)
-    descData.Text("Your output path should be the '"'atmosphere'"' folder of whatever platform you are playing on (emulators and console have this).\n\n e.g. C:/Users/your_name/AppData/Roaming/Ryujinx/sdcard/atmosphere", anchor="w")
+    descData.Text("Your output path should be the '"'atmosphere'"' folder of whatever platform you are playing on (emulators and console have this).\n\n e.g. C:/Users/your_name/AppData/Roaming/emulator/sdcard/atmosphere\n\nNote: Ryujinx doesn't load the mod from the sdcard/atmosphere directory. You need to add a mod folder and load it from C:/Users/name/AppData/Roaming/Ryujinx/mods/contents/0100453019aa8000.", anchor="w")
     descData.Tag("Step 2")
     descData.Text("Choose your preferred settings, then click the randomize button.", anchor="w")
     descData.Text(f"If you want to know more about a setting you can click on its description marked by {Options.scripts.Interactables.DescriptionIndicator} (not all settings have descriptions).", anchor="w")
