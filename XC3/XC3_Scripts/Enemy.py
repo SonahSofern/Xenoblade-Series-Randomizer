@@ -1,11 +1,11 @@
 
 import json, copy
 from XC3.XC3_Scripts import IDs, Options
-from scripts import Helper, JSONParser, PopupDescriptions, Enemies as Enemy
+from scripts import Helper, JSONParser, PopupDescriptions, Enemies as Enemy, StatRand
 from pathlib import Path
 
 # https://xenobladedata.github.io/xb3_130/SYS_GimmickLocation.html#25513 useful file has enemy xyz
-
+isLogEnemy = True
 StaticEnemyData:list[Helper.RandomGroup] = []
 ValidEnemyPopFileNames = ["ma01a_GMK_EnemyPop.json", "ma04a_GMK_EnemyPop.json", "ma07a_GMK_EnemyPop.json", "ma09a_GMK_EnemyPop.json", "ma11a_GMK_EnemyPop.json", "ma14a_GMK_EnemyPop.json", "ma15a_GMK_EnemyPop.json", "ma17a_GMK_EnemyPop.json", "ma22a_GMK_EnemyPop.json", "ma25a_01_GMK_EnemyPop.json", "ma25a_02_GMK_EnemyPop.json", "ma25a_03_GMK_EnemyPop.json", "ma25a_04_GMK_EnemyPop.json", "ma25a_05_GMK_EnemyPop.json", "ma25a_06_GMK_EnemyPop.json", "ma25a_07_GMK_EnemyPop.json", "ma25a_08_GMK_EnemyPop.json", "ma25a_09_GMK_EnemyPop.json", "ma25a_10_GMK_EnemyPop.json", "ma25a_11_GMK_EnemyPop.json", "ma25a_12_GMK_EnemyPop.json", "ma25a_13_GMK_EnemyPop.json", "ma25a_14_GMK_EnemyPop.json", "ma25a_15_GMK_EnemyPop.json", "ma25a_16_GMK_EnemyPop.json", "ma25a_17_GMK_EnemyPop.json", "ma25a_18_GMK_EnemyPop.json", "ma25a_19_GMK_EnemyPop.json", "ma25a_50_GMK_EnemyPop.json", "ma25a_51_GMK_EnemyPop.json", "ma25a_52_GMK_EnemyPop.json", "ma25a_53_GMK_EnemyPop.json", "ma40a_GMK_EnemyPop.json", "ma44a_GMK_EnemyPop.json", "ma45a_GMK_EnemyPop.json", "ma46a_GMK_EnemyPop.json", "ma90a_GMK_EnemyPop.json", "ma90gmk_GMK_EnemyPop.json"]
 
@@ -17,8 +17,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     else:
         firstRun = False
     
-    foundone = ['CatBGM',  '<EE7FFF6D>', '<F36BAFFD>','<0F7768D2>', '<9B3B9099>'] 
-    findAggroFlags = [ '<EFCB57EC>', 'IconOffset', 'FlgMoveFloor', '<3828CCE4>', 'AlliesMsg', '<D3F77DFD>', 'FootPrintDetection', 'EffConvert', '<7C2FCBE1>', '<97002EDA>', 'VoGroup', 'NotEconomy', '<91DD0357>', 'AttenuationScale', '<C4D88A2B>', '<7D3D5DCB>', '<C313305B>', 'Score', '<4BAF120D>', '<7EFBB833>', '<277C5BBD>', '<65449302>', '<192EEE69>', '<F36D8D42>', '<76A4C736>']
+    # foundone = ['CatBGM',  '<EE7FFF6D>', '<F36BAFFD>','<0F7768D2>', '<9B3B9099>'] 
+    # findAggroFlags = [ '<EFCB57EC>', 'IconOffset', 'FlgMoveFloor', '<3828CCE4>', 'AlliesMsg', '<D3F77DFD>', 'FootPrintDetection', 'EffConvert', '<7C2FCBE1>', '<97002EDA>', 'VoGroup', 'NotEconomy', '<91DD0357>', 'AttenuationScale', '<C4D88A2B>', '<7D3D5DCB>', '<C313305B>', 'Score', '<4BAF120D>', '<7EFBB833>', '<277C5BBD>', '<65449302>', '<192EEE69>', '<F36D8D42>', '<76A4C736>']
     # passedTest = ['Model','ActType', 'FlyHeight', 'SwimHeight', 'Motion', 'MotRetarget','RscType', 'ChrID', 'IK', 'Sound', 'VoiceID', 'VoiceRand', 'VoiceDead', 'UniqueDirection', 'modelDirection', 'Event', '<5E3BE057>', '<28DE8575>', 'MoveBtlRate', 'CollisionRadius', '<8281BB89>', 'EffectType', '<B604D9F3>', '<3B53F852>', '<E4EB3419>', '<9693E350>', '<693A2A44>', '<6D9580C6>', 'WeaponA', 'WeaponB', 'WeaponC', 'RscPreset', 'StoryRsc', 'ChestHeight', , 'SwitchModel1', 'Visible1', 'SwitchModel2', 'Visible2', 'SwitchModel3', 'Visible3', 'SwitchModel4', 'Visible4', 'Color',  'EffStandLoop','Effect', ]
     # testNonArrangeKeys = ['Radius', 'EffScale',  'AngleFront', 'OffsetID',  '<DB52EFEF>', '<20C8E401>', 'BoneCenter', 'BoneCamera']
     # nonUsedKeys = ['DebugName', 'MapID', 'CatMain', 'NamedFlag', 'CatBGM', '<B569BFB1>', '<352C263C>', '<BA57B736>', 'Scale', 'EliteScale', 'ScalePlus', 'WeaponScale', 'ChrSize', 'TurnSize', 'Level', 'LevPlus', '<64251F47>', '<3B6DFBC4>', '<EE7FFF6D>', '<F36BAFFD>', 'IdMove', 'AiBase', '<0F7768D2>', '<9B3B9099>', 'IdBgm', 'IdBattleEnemy', '<C6717CFE>', 'IdDropPrecious', 'FlgColiOff', '<EFCB57EC>', 'IconOffset', 'FlgFixed', 'FlgLevBattleOff', 'FlgLevAttack', 'FlgMoveFloor', 'FlgDmgFloor', 'FlgNoVanish', 'FlgSpDead', '<3828CCE4>', 'FlgSerious', '<3CEBD0A4>', 'FlgKeepSword', 'FlgColonyReleased', '<9A220E4D>', 'KillEffType', 'SpBattle', '<EC666A80>', '<AB4BA3D5>', '<1104E9C5>', '<B5C5F3B3>', 'MsgName', 'NPCName', 'AlliesMsg', '<D3F77DFD>', 'GetRatio', 'GetEnArts', 'GetEnSkill', 'FootPrintDetection', 'EffConvert', '<7C2FCBE1>', '<97002EDA>', 'VoGroup', 'NotEconomy', 'FlgNoDead', 'FlgNoTarget', 'ExpRate', 'GoldRate', '<91DD0357>', 'FlgNoFalling', 'AttenuationScale', '<C4D88A2B>', '<7D3D5DCB>', 'NamedSpCond', '<C313305B>', 'Score', '<4BAF120D>', '<7EFBB833>', '<277C5BBD>', '<65449302>', '<192EEE69>', '<F36D8D42>', '<76A4C736>']
@@ -28,10 +28,11 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     Aggro = ["<AB4BA3D5>", "<1104E9C5>", "<B5C5F3B3>", "<EC666A80>", "<64251F47>", "<3B6DFBC4>"]
     specialFields = ['<B569BFB1>', '<352C263C>', '<BA57B736>'] # These fields being kept fixed a bug where cutscenes couldnt end fights and you would just sit there while the enemy kept aggroing you
     RetryBattleLandmark = "<9A220E4D>"
+    UnknownFutureRedeemedFields = ["<76A4C736>", "<277C5BBD>", "<65449302>", "<192EEE69>", "<F36D8D42>"]
     LevelPlus = "LevPlus" # Keep the level ranges on the original enemy no need to alter them
     PostBattleConqueredPopup = "CatMain" # Currently not using it has weird effects fights take a long time to end after enemy goes down without it happens eithery way with UMs so something is wrong with UMS
     battleEndFields = ['<B569BFB1>', '<352C263C>', '<BA57B736>' ] # Not sure exactly but without keeping these as original sometimes story fights take a LONG time to end
-    ignoreKeys = ["$id", "ID", specialFields, PostBattleConqueredPopup, "Level", LevelPlus, "IdMove", "NamedFlag", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "FlgFixed", "IdMove", "SpBattle", "FlgNoVanish", "FlgSpDead" , "KillEffType", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"] + Aggro + battleEndFields
+    ignoreKeys = ["$id", "ID", specialFields, PostBattleConqueredPopup, "Level", LevelPlus, "IdMove", "NamedFlag", "IdDropPrecious", "FlgLevAttack", "FlgLevBattleOff", "FlgDmgFloor", "FlgFixed", "IdMove", "SpBattle", "FlgNoVanish", "FlgSpDead" , "KillEffType", "FlgSerious", RetryBattleLandmark, "<3CEBD0A4>", "<C6717CFE>", "FlgKeepSword", "FlgColonyReleased", "FlgNoDead", "FlgNoTarget", "ExpRate", "GoldRate", "FlgNoFalling"] + Aggro + battleEndFields + UnknownFutureRedeemedFields
     HPLimits = ["LowerLimitHP", "<60FB333A>"]
     retainNonArrangeKeys = ['FlyHeight', 'SwimHeight']
     eneFile = JSONParser.File("XC3/JsonOutputs/fld/FLD_EnemyData.json")
@@ -52,6 +53,9 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
             continue
 
         newEn = eRando.CreateRandomEnemy(StaticEnemyData)
+
+        if isMatchSizeOption: # Runs before retainnonarrangestats so that it gets the values of swimming enemies before actypefix
+            EnemySizeHelper(en, newEn, eRando)
         
         eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys + HPLimits + testNonArrangeKeys + ActTypeFix(eRando, en, newEn)) # Flying Enemies and some enemies in Erythia will still fall despite act type fix (After testing I found this is because of the motion file in rsc. So there is no fix unless we change every enemies motion as they are being placed)
         
@@ -59,9 +63,6 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
             
         if isBossGroupBalancing:
             eRando.BalanceFight(en, newEn, GroupFightViolations, EnemyCounts)
-
-        if isMatchSizeOption:
-            EnemySizeHelper(en, newEn)
 
         IntroFightBalances(en, newEn, eRando)
         
@@ -89,11 +90,12 @@ def ActTypeFix(eRando:Enemy.EnemyRandomizer, oldEn, newEn):
     oldRSC = eRando.FindRSC(oldEn)
     newRSC = eRando.FindRSC(newEn)    
     Swim = 1
+    keys = []
     
     if newRSC["ActType"] == Swim or oldRSC["ActType"] == Swim:
-        return ["ActType"]
+        keys.append("ActType")
     
-    return []
+    return keys
     
 def MotionFix():
     '''Certain enemies will not work in new environments without motion of the old enemy. Flying enemies over cliffs will still fall and enemies deep in erythia waters will fall under the waves. This keeps the original motion.'''
@@ -105,7 +107,6 @@ def FilterNPCEnemies(enNPC):
         return False
     else:
         return True
-
 
 def ForcedArtsManager(oldEn, newEn, eRando:Enemy.EnemyRandomizer):
     EnemyIDsWithForcedArts = [545, 941, 885, 4431, 3782, 378, 499, 4431, 4434, 4445, 4447] # FLD_EnemyData IDs
@@ -168,17 +169,15 @@ def ForcedArtsManager(oldEn, newEn, eRando:Enemy.EnemyRandomizer):
         # Plug that art into the enemy in slot 15 the last slot (very few enemies use this and the fight ends at this art anyway)
         # Slot 15 doesnt always work, some enemies never attempt to use the art, instead lets add it to a slot they are using
         eRando.ChangeStats([newEn], [(f"ArtsSlot{newArtSlot}", newArtID)])
-        
 
 def SummonFix(): # For now this is lower priority for how difficult it would be to fix so im removing summons
-    with open("XC3/JsonOutputs/btl/BTL_EnSummon.json", 'r+', encoding='utf-8') as summonFile:
-        summonData = json.load(summonFile)
-        for summon in summonData["rows"]:
-            for i in range(1,4):
-                summon[f"EnemyID0{i}"] = 0
-        JSONParser.CloseFile(summonData, summonFile)
+    summonFile = JSONParser.File("XC3/JsonOutputs/btl/BTL_EnSummon.json")
+    for summon in summonFile.rows:
+        for i in range(1,4):
+            summon[f"EnemyID0{i}"] = 0
+    summonFile.Close()    
     
-def EnemySizeHelper(oldEn, newEn):
+def EnemySizeHelper(oldEn, newEn, eRando:Enemy.EnemyRandomizer):
     Ferronis = 4 # The future connected ferronis on a cliff fight needs the replacement enemy to be MASSIVE to be able to hit it
     Massive = 3
     Large = 2
@@ -195,12 +194,34 @@ def EnemySizeHelper(oldEn, newEn):
         (Massive, Large): 3,
         (Massive, Normal): 4,
         (Massive, Small): 5,
-        (Large, Normal): 3,
-        (Large, Small): 4,
+        (Large, Normal): 2,
+        (Large, Small): 3,
         (Normal, Small): 1,
     }
-    keys = ["Scale", "EliteScale", "WeaponScale"]
-    Enemy.EnemySizeMatch(oldEn, newEn, keys, multDict, maxScale=65500)
+    multDict = FixGroundedSizes(oldEn, newEn, eRando, multDict)
+    
+    Enemy.EnemySizeMatch(oldEn, newEn, ["Scale", "EliteScale", "WeaponScale"], multDict, maxScale=65500)
+
+def FixGroundedSizes(oldEn, newEn, eRando:Enemy.EnemyRandomizer, multDict:dict):
+    '''A case where a flying or swimming enemy replaced a grounded enemy, was shrunk down too much and was under the ground untargetable.
+       The solution is to increase the size of the new enemy by altering the mult dict
+    '''
+    oldRSC = eRando.FindRSC(oldEn)
+    newRSC = eRando.FindRSC(newEn)
+    grounded = 0
+    oldActType = oldRSC["ActType"]
+    newActType = newRSC["ActType"]
+    if newActType == 1: 
+        pass
+    if not (oldActType == grounded and newActType != grounded): return multDict
+    if newEn["ChrSize"] < oldEn["ChrSize"]: return multDict
+    # Return smaller values of the mult dict
+    for key, val in multDict.items():
+        StatRand.ApplyMult(multDict, key, .5, min=1)
+    
+    # if isLogEnemy: print(f"Grounded Old Enemy: {oldEn["$id"]} (ActType = {oldActType}), Nongrounded New Enemy: {newEn["$id"]} (ActType = {newActType})")
+    return multDict
+
 
 def GetEnemyCounts():
     enemyCounts = dict()
@@ -253,7 +274,7 @@ def GetGroupFightViolations():
 def BreakTutorial(eRando:Enemy.EnemyRandomizer): # Tutorial that requires an enemy to be break, topple, dazed
     breakTutorial = [738]
     eRando.ChangeStats(breakTutorial, [("RstBreak", 0)])
-    
+
 def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
     '''Keep original enemy stats on early game fight before having the full party to balance'''
     introTutorial = [449, 450, 451, 452, 453, 454, 455]
@@ -271,9 +292,10 @@ def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
     MoebiusDuo = [4429, 4430]
     Ghondor = [4431]
     GlimmerSolo = [4433, 4437, 4438]
+    EtaFerronis = [4439]
     
     cantLoseFights = introTutorial + bossIntroFights + returningToColony
-    nerfedFights = breakTutorial + Piranhax + DrifterRopl + Sentry + StealthShip + AgnusTrio + MysteriousEnemy + cantLoseFights + introTutorialDlc + NikolGlimmer + MoebiusDuo + Ghondor + GlimmerSolo
+    nerfedFights = breakTutorial + Piranhax + DrifterRopl + Sentry + StealthShip + AgnusTrio + MysteriousEnemy + cantLoseFights + introTutorialDlc + NikolGlimmer + MoebiusDuo + Ghondor + GlimmerSolo + EtaFerronis
 
     if en["$id"] in nerfedFights:
         oldEnParam = eRando.FindParam(en)
@@ -292,7 +314,7 @@ def EnemyDesc(name):
     EnemyRandoDesc.Text(f"{name} are the target group to be randomized.")
     EnemyRandoDesc.Text(f"The suboption for those categories are what those enemies will be randomized into.")
     EnemyRandoDesc.Text(f"The spinbox for each option is the weight of that category.")
-    if name != Options.BossEnemyOption.name:
-        EnemyRandoDesc.Header(Options.NormalEnemyOption_MatchSize.name)
-        EnemyRandoDesc.Text("Shrinks/grows enemies to match the size of the original enemy.")
+    # if name != Options.BossEnemyOption.name:
+    #     EnemyRandoDesc.Header(Options.NormalEnemyOption_MatchSize.name)
+    #     EnemyRandoDesc.Text("Shrinks/grows enemies to match the size of the original enemy.")
     return EnemyRandoDesc

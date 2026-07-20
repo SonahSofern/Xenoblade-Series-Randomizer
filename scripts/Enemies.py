@@ -358,8 +358,7 @@ def EnemySizeMatch(oldEn, newEn, keysList, multDict, scaleKey = "ChrSize", defSc
     newSize = newEn[scaleKey]
     oldSize = oldEn[scaleKey]
     
-    if newSize == oldSize:
-        return
+    if newSize == oldSize: return
     
     if (oldSize, newSize) in multDict:
         newMult = multDict[(oldSize, newSize)]
@@ -369,7 +368,7 @@ def EnemySizeMatch(oldEn, newEn, keysList, multDict, scaleKey = "ChrSize", defSc
         newMult = 1
     
     for key in keysList:
-        newEn[key] = min(max(int(defScale * newMult), minScale), maxScale) 
+        newEn[key] = Helper.Clamp(int(defScale * newMult), minScale, maxScale)
         
     
 # def ResolveLevelDiff(self, enemy): # Not using because level gap changes XP rewards

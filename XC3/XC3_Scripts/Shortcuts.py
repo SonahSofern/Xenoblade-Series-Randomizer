@@ -20,7 +20,7 @@ def TutorialRemoval():
 def UnlockAllSystemsTutorialsLocked():
     with open("XC3/JsonOutputs/sys/SYS_SystemOpen.json", 'r+', encoding='utf-8') as tutFile:
         tutData = json.load(tutFile)
-        nonTutorialIds = [47,48,49,50,51,58,59,65,66,67,72,77,84]
+        nonTutorialIds = [47,48,49,50,51,58,59,64,65,66,67,72,77,84]
         for tut in tutData["rows"]:
             if tut["$id"] in  nonTutorialIds:
                 continue
