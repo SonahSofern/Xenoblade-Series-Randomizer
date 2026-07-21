@@ -7,9 +7,9 @@ from scripts import Helper
 # TODO
 # Chain activations need custom descriptions to change values (for example they specify 125% but the param is 25, so in order to change have to update the text description not just the param)
 
-
 # Lists to be populated during randomization
-EnhancementsList = Helper.RandomGroup()
+ranOnce = False
+EnhancementsList = []
 Normal = [10,100]
 
 # Used for skills to choose icons for 
@@ -23,24 +23,23 @@ high = 0
 invalidSkillIcon = -1
 
 class Enhancement:
-    def __init__(self, name, effID, captionID, field3E70C175, roleType = Misc, param1 = [low,high], param2 = [low,high], skillIcon = invalidSkillIcon, isArts = False, isGem = True, isAccessory = True, isBaseGameOnly = False, isFutureRedeemedOnly = False, isChainOrder = False, isChainActivation = False):
+    def __init__(self, name, effID, captionID, field3E70C175, roleType = Misc, param1 = [low,high], param2 = [low,high], skillIcon = invalidSkillIcon, isArts = False, isGem = True, isAccessory = True, isBaseGameOnly = False, isFutureRedeemedOnly = False, isChainActivation = False):
         self.name = name
         self.effID = effID
         self.captionID = captionID
         self.field3E70C175 = field3E70C175
         self.param1 = param1
         self.param2 = param2
-        self.roleType = roleType
+        self.roleType = roleType # effects role (HLR, ATK, DEF)
         self.skillIcon = skillIcon
-        self.isBaseGameOnly = isBaseGameOnly
-        self.isAccessory = isAccessory
-        self.isGem = isGem
-        self.isArts = isArts
-        self.isChainOrder = isChainOrder
-        self.isChainActivation = isChainActivation
-        self.isFutureRedeemedOnly = isFutureRedeemedOnly
-        EnhancementsList.AddNewData(self)
-    
+        self.isBaseGameOnly = isBaseGameOnly # Only allowed in Base Game
+        self.isAccessory = isAccessory # Allowed on Accessories
+        self.isGem = isGem # Allowed on Gems
+        self.isArts = isArts # Allowed on Arts
+        self.isChainActivation = isChainActivation # Enhancements related to chain orders and manuals
+        self.isFutureRedeemedOnly = isFutureRedeemedOnly # Only allowed in FR
+        
+        EnhancementsList.append(self)
     def CreateEffect(self, BTL_EnhanceData, overrideParam1 = None, overrideParam2 = None, powerPercent = 0.5):
         if overrideParam1 == None:
             param1 = self.param1
@@ -84,7 +83,10 @@ class Enhancement:
             newParam = Helper.roundToBase(newParam)
         return int(newParam)
     
-def CreateEnhancements():                 
+def CreateEnhancements():
+    global ranOnce
+    if ranOnce: return
+    else: ranOnce = True         
     Enhancement('Healthy', 1, 1, 1, Def, [10,100], skillIcon=1) # Max HP Up
     Enhancement('Strong', 2, 3, 1, Atk, [10,100], skillIcon=2) # Attack Up
     Enhancement('Medic', 3, 4, 1, Hlr, [10,100], skillIcon=1) # Healing Up
@@ -389,13 +391,13 @@ def CreateEnhancements():
     # Enhancement("", 297, 0, 1, M, [], skillIcon=0) # <3DC91AB4>
     # Enhancement("", 298, 0, 1, M, [], skillIcon=0) # <B45078E8>
     Enhancement("Bypass", 299, 372, 1, Atk, [50,100], skillIcon=18) # <5D432F9D> Attacks during chain attack bypass defense
-    Enhancement("Prime", 300, 373, 1, Misc, [50,100], isAccessory=False, isGem=False, isChainOrder=True) # <699CD98E> Attacker Healer aggro down
+    Enhancement("Prime", 300, 373, 1, Misc, [50,100], isAccessory=False, isGem=False, isChainActivation=True) # <699CD98E> Attacker Healer aggro down
     Enhancement("Pierce", 301, 374, 1, Atk, [50,100], skillIcon=33) # <01DFEBDE> Enemy physical defense down
     Enhancement("Pierce", 302, 375, 1, Atk, [50,100], skillIcon=33) # <6A7AE143> Enemy ether defense down
     Enhancement("Unblockable", 303, 376, 1, Atk, [50,100], skillIcon=18) # <3B070EC3> Unblockable attacks
     # Enhancement("", 304, 0, 1, M, [], skillIcon=0) # <ADD9368C>
-    Enhancement("Reactivate", 305, 377, 1, Hlr, [50,100], [1,2], isGem=False, isAccessory=False, isChainOrder=True) # <170EE93C> Reactivate char
-    Enhancement("Revival", 306, 378, 1, Hlr, [50,100], isGem=False, isAccessory=False, isChainOrder=True) # <F62D628F> Revive all party member allowing chain 
+    Enhancement("Reactivate", 305, 377, 1, Hlr, [50,100], [1,2], isGem=False, isAccessory=False, isChainActivation=True) # <170EE93C> Reactivate char
+    Enhancement("Revival", 306, 378, 1, Hlr, [50,100], isGem=False, isAccessory=False, isChainActivation=True) # <F62D628F> Revive all party member allowing chain 
     # Enhancement("", 307, 0, 1, M, [], [], skillIcon=0) # <6C84E6C5>
     # Enhancement("", 308, 0, 1, M, [], [], skillIcon=0) # <1CC5A345>
     Enhancement("Chain Heal", 309, 382, 1, Hlr, [5,10], [100,200], skillIcon=38) # <A34DB1D7> During chain attack heals 10% of damage as hp up to 200% healing power
@@ -430,12 +432,12 @@ def CreateEnhancements():
     Enhancement("Coverfire", 338, 416, 1, Atk, [5,10], [100,300], skillIcon=49) # Ranged Counter
     # Enhancement("", 339, 417, 1, M, [], skillIcon=0) # <2307272B>
     # Enhancement("", 340, 0, 1, M, [], skillIcon=0) # <13E86D62>
-    Enhancement("Interlink", 341, 422, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True) # <5AA8EF8D> Interlink 3 Break All
-    Enhancement("Interlink", 342, 423, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True) # <8321536A> I3 Topple All
-    Enhancement("Interlink", 343, 424, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True) # <12290987> I3 Launch All
-    Enhancement("Interlink", 344, 425, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True) # <AE3060F1> I3 Smash All
-    Enhancement("Interlink", 345, 426, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True) # <DABAB9B0> I3 Daze All
-    Enhancement("Interlink", 346, 427, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True) # <635B23F8> I3 Burst All
+    Enhancement("Interlink", 341, 422, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True, isArts=True) # <5AA8EF8D> Interlink 3 Break All
+    Enhancement("Interlink", 342, 423, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True, isArts=True) # <8321536A> I3 Topple All
+    Enhancement("Interlink", 343, 424, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True, isArts=True) # <12290987> I3 Launch All
+    Enhancement("Interlink", 344, 425, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True, isArts=True) # <AE3060F1> I3 Smash All
+    Enhancement("Interlink", 345, 426, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True, isArts=True) # <DABAB9B0> I3 Daze All
+    Enhancement("Interlink", 346, 427, 1, Misc, isGem=False, isAccessory=False, isBaseGameOnly=True, isArts=True) # <635B23F8> I3 Burst All
     # Enhancement("", 347, 0, 1, M, [], [], skillIcon=0) # <FBF26980>
     # Enhancement("", 348, 0, 1, M, [], [], skillIcon=0) # <BDD4CC17>
     # Enhancement("", 349, 0, 1, M, [], skillIcon=0) # <3868CBC6>
@@ -459,31 +461,31 @@ def CreateEnhancements():
     # Enhancement("", 367, 0, 1, M, [], skillIcon=0) # <5E206C1B>
     # Enhancement("", 368, 0, 1, M, [], skillIcon=0) # <85F2BABF>
     Enhancement("Void", 369, 447, 1, Def, [300,500], [10,30], skillIcon=22) # Absorb Attacks in Range
-    Enhancement("Technical", 370, 448, 1, Misc, [5,10], isChainActivation=True) # <6AED9FC9> All TP up by 10
+    Enhancement("Technical", 370, 448, 1, Misc, [5,10], isChainActivation=True, isGem=False, isAccessory=False) # <6AED9FC9> All TP up by 10
     Enhancement("Headstart", 371, 450, 1, Misc, [10,30], skillIcon=53) # Starter TP Plus
     Enhancement("Medic", 372, 240, 1, Hlr, [10,50], [10,30], skillIcon=3) # Fast Rescue & Healing Plus
     Enhancement("Revitalize", 373, 110, 1, Hlr, [20,100], [10,30], skillIcon=32) # Rescue HP & Healing Plus
     # Enhancement("", 374, 451, 1, M, skillIcon=0) #
     # Enhancement("", 375, 452, 1, M, skillIcon=0) # 
-    Enhancement("First", 376, 453, 1, Atk, [50], isChainActivation=True) # <D90DECBD> 
-    Enhancement("To You", 377, 455, 1, Misc, [25], isChainActivation=True) # <887EC595>
-    Enhancement("Bravo", 378, 457, 1, Misc, isChainActivation=True) # <5228990D>
-    Enhancement("Mio", 379, 459, 1, Misc, [200], isChainActivation=True) # <C006052B>
-    Enhancement("Initial", 380, 460, 1, Misc, [100], isChainActivation=True) # <9E09B0E3>
-    Enhancement("Retread", 381, 462, 1, Misc, [10,35], isChainActivation=True) # <C682C0B2>
-    Enhancement("Rebound", 382, 464, 1, Misc, isChainActivation=True) # <ACEEE2B3>
-    Enhancement("Surpass", 383, 466, 1, Misc, isChainActivation=True) # <F5A970B0>
-    Enhancement("Machina", 384, 468, 1, Misc, [6], [30,50], isChainActivation=True) # <1C953DC1>
-    Enhancement("Brainy", 385, 470, 1, Misc, [15,30], isChainActivation=True) # <119C145F>
-    Enhancement("Sharing", 386, 472, 1, Misc, [10,20], isChainActivation=True) # <819DAB29>
-    Enhancement("Critical", 387, 474, 1, Atk, [25], isChainActivation=True) # <8166DDA7>
-    Enhancement("Ratio", 388, 476, 1, Atk, [50,100], isChainActivation=True) # <727B2C77>
-    Enhancement("Amazing", 389, 478, 1, Misc, isChainActivation=True) # <9BE9B1DB>
-    Enhancement("Gambler", 390, 480, 1, Misc, [10,100], [10,100], isChainActivation=True) # <67C12EA7>
-    Enhancement("Mult", 391, 482, 1, Misc, [20], isChainActivation=True) # <BD2FFC2C>
-    Enhancement("Complete", 392, 484, 1, Misc, [50], isChainActivation=True) # <44DD9F9C>
-    Enhancement("Self", 393, 486, 1, Misc, isChainActivation=True) # <BBA3F2C3>
-    Enhancement("Ratio", 394, 488, 1, Misc, [50], isChainActivation=True) # <8B5865D2>
+    Enhancement("First", 376, 453, 1, Atk, [50], isChainActivation=True, isGem=False, isAccessory=False) # <D90DECBD> 
+    Enhancement("To You", 377, 455, 1, Misc, [25], isChainActivation=True, isGem=False, isAccessory=False) # <887EC595>
+    Enhancement("Bravo", 378, 457, 1, Misc, isChainActivation=True, isGem=False, isAccessory=False) # <5228990D>
+    Enhancement("Mio", 379, 459, 1, Misc, [200], isChainActivation=True, isBaseGameOnly=True, isGem=False, isAccessory=False) # <C006052B>
+    Enhancement("Initial", 380, 460, 1, Misc, [100], isChainActivation=True, isGem=False, isAccessory=False) # <9E09B0E3>
+    Enhancement("Retread", 381, 462, 1, Misc, [10,35], isChainActivation=True, isGem=False, isAccessory=False) # <C682C0B2>
+    Enhancement("Rebound", 382, 464, 1, Misc, isChainActivation=True, isGem=False, isAccessory=False) # <ACEEE2B3>
+    Enhancement("Surpass", 383, 466, 1, Misc, isChainActivation=True, isGem=False, isAccessory=False) # <F5A970B0>
+    Enhancement("Machina", 384, 468, 1, Misc, [6], [30,50], isChainActivation=True, isGem=False, isAccessory=False) # <1C953DC1>
+    Enhancement("Brainy", 385, 470, 1, Misc, [15,30], isChainActivation=True, isGem=False, isAccessory=False) # <119C145F>
+    Enhancement("Sharing", 386, 472, 1, Misc, [10,20], isChainActivation=True, isGem=False, isAccessory=False) # <819DAB29>
+    Enhancement("Critical", 387, 474, 1, Atk, [25], isChainActivation=True, isGem=False, isAccessory=False) # <8166DDA7>
+    Enhancement("Ratio", 388, 476, 1, Atk, [50,100], isChainActivation=True, isGem=False, isAccessory=False) # <727B2C77>
+    Enhancement("Amazing", 389, 478, 1, Misc, isChainActivation=True, isGem=False, isAccessory=False) # <9BE9B1DB>
+    Enhancement("Gambler", 390, 480, 1, Misc, [10,100], [10,100], isChainActivation=True, isGem=False, isAccessory=False) # <67C12EA7>
+    Enhancement("Mult", 391, 482, 1, Misc, [20], isChainActivation=True, isGem=False, isAccessory=False) # <BD2FFC2C>
+    Enhancement("Complete", 392, 484, 1, Misc, [50], isChainActivation=True, isGem=False, isAccessory=False) # <44DD9F9C>
+    Enhancement("Self", 393, 486, 1, Misc, isChainActivation=True, isGem=False, isAccessory=False) # <BBA3F2C3>
+    Enhancement("Ratio", 394, 488, 1, Misc, [50], isChainActivation=True, isGem=False, isAccessory=False) # <8B5865D2>
     # Enhancement("", 395, 0, 1, M, [], [], skillIcon=0) # <CBAEDB1D>
 
     # Future Redeemed
@@ -491,14 +493,14 @@ def CreateEnhancements():
     Enhancement("Revade", 397, 491, 1, Misc, [10,30], skillIcon=9) # Recover Recharge (Evasion)
     Enhancement("Revenge", 398, 492, 1, Atk, [50,100], skillIcon=2) # <7BA9A48D> Stacking Damage up on revive
     Enhancement("Revitalize", 399, 494, 1, Misc, [5,25], skillIcon=26) # Recharge Up (Self KO)
-    Enhancement("TP", 400, 495, 1, Misc, [30,50], isChainActivation=True) # <FB5146DB> 
+    Enhancement("TP", 400, 495, 1, Misc, [30,50], isChainActivation=True, isGem=False, isAccessory=False) # <FB5146DB> 
     Enhancement("Protector", 401, 499, 1, Misc, [2,5], [20,50], skillIcon=17) # Recharge (Nearby Ally Hit)
     Enhancement("Critvamp", 402, 500, 1, Hlr, [100,200], skillIcon=28) # Ranged Heal (Critical)
     # Enhancement("", 403, 501, 1, M, [], [], skillIcon=0) #
     Enhancement("Critcrux", 404, 502, 1, Misc, [50,100], [50,150], skillIcon=29) # Critical Hit Plus: All Allies       
     Enhancement("Field", 405, 503, 1, Atk, [100,200], [50], skillIcon=21) # Power Up (In Field)
     Enhancement("Setter", 406, 504, 1, Misc, skillIcon=21) # Max Fields Up
-    Enhancement("Tradeoff", 407, 505, 1, Misc, [10,20], [10,20], isChainActivation=True) # <D8498101>
+    Enhancement("Tradeoff", 407, 505, 1, Misc, [10,20], [10,20], isChainActivation=True, isGem=False, isAccessory=False) # <D8498101>
     Enhancement("Blooming", 408, 507, 1, Misc, [10,40], skillIcon=45) # Several Stats Up
     Enhancement("Cursed", 409, 508, 1, Misc, [10,100], [10,100], skillIcon=19) # Weaken Party
     Enhancement("Safety", 410, 173, 0, Def, [10,50], [20,70], skillIcon=6) # <554E813F>

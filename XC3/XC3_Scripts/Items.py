@@ -7,7 +7,7 @@ PreciousMult = 0 # Precious items valued at 0 so they are all the same value. Th
 def StandardValTable(Accessories = None, Precious = None, Collectables = None):
     valTable = Values.ValueTable(path = "XC3/JsonOutputs/sys")
     if Accessories != None:
-        valTable.PopulateValues(Values.ValueFile("ITM_Accessory"), IDs.AccessoriesIDs, Values.WeightOptionMethod(Accessories))
+        valTable.PopulateValues(Values.ValueFile("ITM_Accessory"), IDs.BaseAccessoriesIDs, Values.WeightOptionMethod(Accessories))
     if Precious != None:
         valTable.PopulateValues(Values.ValueFile("ITM_Precious", key="Price1", mult=PreciousMult), IDs.BaseGamePreciousIDs, Values.WeightOptionMethod(Precious))
     if Collectables != None:
@@ -17,7 +17,7 @@ def StandardValTable(Accessories = None, Precious = None, Collectables = None):
 def DLC4StandardValTable(Accessories = None, Precious = None, Collectables = None):
     dlc4ValTable = Values.ValueTable(path = "XC3/JsonOutputs/sys")
     if Accessories != None:
-        dlc4ValTable.PopulateValues(Values.ValueFile("ITM_Accessory", key="Price_dlc04"), IDs.AccessoriesIDs + IDs.DLC4AccessoriesIDs, Values.WeightOptionMethod(Accessories))
+        dlc4ValTable.PopulateValues(Values.ValueFile("ITM_Accessory", key="Price_dlc04"), IDs.BaseAccessoriesIDs + IDs.DLC4AccessoriesIDs, Values.WeightOptionMethod(Accessories))
     if Precious != None:
         dlc4ValTable.PopulateValues(Values.ValueFile("ITM_Precious", key="Price1", mult=PreciousMult), IDs.DLC4PreciousIDs, Values.WeightOptionMethod(Precious))
     if Collectables != None:

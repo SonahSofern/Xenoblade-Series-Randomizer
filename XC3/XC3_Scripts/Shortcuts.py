@@ -29,10 +29,6 @@ def UnlockAllSystemsTutorialsLocked():
 # https://xenobladedata.github.io/xb3_200_dlc4/MNU_option_notice.html Can set a default of dont show tips cause you get a barrage of them
 
 def SetTipNotificationsOff(): # Barrage of notifications should be off by default if you unlock the systems
-    with open("XC3/JsonOutputs/mnu/MNU_option_notice.json", 'r+', encoding='utf-8') as notiFile:
-        notiData = json.load(notiFile)
-        for noti in notiData["rows"]:
-            if noti["$id"] == 44:
-                noti["default_value"] = 1
-                break
-        JSONParser.CloseFile(notiData, notiFile)
+    notiFile = JSONParser.File("XC3/JsonOutputs/mnu/MNU_option_notice.json")
+    notiFile.Alter(44, "default_value", 1)
+    notiFile.Close()

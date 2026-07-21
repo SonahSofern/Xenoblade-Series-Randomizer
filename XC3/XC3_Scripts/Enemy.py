@@ -17,12 +17,6 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     else:
         firstRun = False
     
-    # foundone = ['CatBGM',  '<EE7FFF6D>', '<F36BAFFD>','<0F7768D2>', '<9B3B9099>'] 
-    # findAggroFlags = [ '<EFCB57EC>', 'IconOffset', 'FlgMoveFloor', '<3828CCE4>', 'AlliesMsg', '<D3F77DFD>', 'FootPrintDetection', 'EffConvert', '<7C2FCBE1>', '<97002EDA>', 'VoGroup', 'NotEconomy', '<91DD0357>', 'AttenuationScale', '<C4D88A2B>', '<7D3D5DCB>', '<C313305B>', 'Score', '<4BAF120D>', '<7EFBB833>', '<277C5BBD>', '<65449302>', '<192EEE69>', '<F36D8D42>', '<76A4C736>']
-    # passedTest = ['Model','ActType', 'FlyHeight', 'SwimHeight', 'Motion', 'MotRetarget','RscType', 'ChrID', 'IK', 'Sound', 'VoiceID', 'VoiceRand', 'VoiceDead', 'UniqueDirection', 'modelDirection', 'Event', '<5E3BE057>', '<28DE8575>', 'MoveBtlRate', 'CollisionRadius', '<8281BB89>', 'EffectType', '<B604D9F3>', '<3B53F852>', '<E4EB3419>', '<9693E350>', '<693A2A44>', '<6D9580C6>', 'WeaponA', 'WeaponB', 'WeaponC', 'RscPreset', 'StoryRsc', 'ChestHeight', , 'SwitchModel1', 'Visible1', 'SwitchModel2', 'Visible2', 'SwitchModel3', 'Visible3', 'SwitchModel4', 'Visible4', 'Color',  'EffStandLoop','Effect', ]
-    # testNonArrangeKeys = ['Radius', 'EffScale',  'AngleFront', 'OffsetID',  '<DB52EFEF>', '<20C8E401>', 'BoneCenter', 'BoneCamera']
-    # nonUsedKeys = ['DebugName', 'MapID', 'CatMain', 'NamedFlag', 'CatBGM', '<B569BFB1>', '<352C263C>', '<BA57B736>', 'Scale', 'EliteScale', 'ScalePlus', 'WeaponScale', 'ChrSize', 'TurnSize', 'Level', 'LevPlus', '<64251F47>', '<3B6DFBC4>', '<EE7FFF6D>', '<F36BAFFD>', 'IdMove', 'AiBase', '<0F7768D2>', '<9B3B9099>', 'IdBgm', 'IdBattleEnemy', '<C6717CFE>', 'IdDropPrecious', 'FlgColiOff', '<EFCB57EC>', 'IconOffset', 'FlgFixed', 'FlgLevBattleOff', 'FlgLevAttack', 'FlgMoveFloor', 'FlgDmgFloor', 'FlgNoVanish', 'FlgSpDead', '<3828CCE4>', 'FlgSerious', '<3CEBD0A4>', 'FlgKeepSword', 'FlgColonyReleased', '<9A220E4D>', 'KillEffType', 'SpBattle', '<EC666A80>', '<AB4BA3D5>', '<1104E9C5>', '<B5C5F3B3>', 'MsgName', 'NPCName', 'AlliesMsg', '<D3F77DFD>', 'GetRatio', 'GetEnArts', 'GetEnSkill', 'FootPrintDetection', 'EffConvert', '<7C2FCBE1>', '<97002EDA>', 'VoGroup', 'NotEconomy', 'FlgNoDead', 'FlgNoTarget', 'ExpRate', 'GoldRate', '<91DD0357>', 'FlgNoFalling', 'AttenuationScale', '<C4D88A2B>', '<7D3D5DCB>', 'NamedSpCond', '<C313305B>', 'Score', '<4BAF120D>', '<7EFBB833>', '<277C5BBD>', '<65449302>', '<192EEE69>', '<F36D8D42>', '<76A4C736>']
-    testNonArrangeKeys = []
     EnemyCounts = GetEnemyCounts()
     GroupFightViolations = GetGroupFightViolations()
     Aggro = ["<AB4BA3D5>", "<1104E9C5>", "<B5C5F3B3>", "<EC666A80>", "<64251F47>", "<3B6DFBC4>"]
@@ -57,7 +51,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
         if isMatchSizeOption: # Runs before retainnonarrangestats so that it gets the values of swimming enemies before actypefix
             EnemySizeHelper(en, newEn, eRando)
         
-        eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys + HPLimits + testNonArrangeKeys + ActTypeFix(eRando, en, newEn)) # Flying Enemies and some enemies in Erythia will still fall despite act type fix (After testing I found this is because of the motion file in rsc. So there is no fix unless we change every enemies motion as they are being placed)
+        eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys + HPLimits + ActTypeFix(eRando, en, newEn)) # Flying Enemies and some enemies in Erythia will still fall despite act type fix (After testing I found this is because of the motion file in rsc. So there is no fix unless we change every enemies motion as they are being placed)
         
         ForcedArtsManager(en, newEn, eRando)
             
@@ -98,11 +92,14 @@ def ActTypeFix(eRando:Enemy.EnemyRandomizer, oldEn, newEn):
     return keys
     
 def MotionFix():
-    '''Certain enemies will not work in new environments without motion of the old enemy. Flying enemies over cliffs will still fall and enemies deep in erythia waters will fall under the waves. This keeps the original motion.'''
+    '''
+    Certain enemies will not work in new environments without motion of the old enemy. 
+    Flying enemies over cliffs will still fall and enemies deep in erythia waters will fall under the waves. This keeps the original motion.
+    '''
     return ["Motion"]
     
 def FilterNPCEnemies(enNPC):
-    '''NPCs are also considered enemies in some cases so for now we will not randomize them'''
+    '''NPCs are also considered enemies in some cases so for now we will not randomize them. Randomizing them can break the story and has reported crashes.'''
     if enNPC == "<00000000>":
         return False
     else:

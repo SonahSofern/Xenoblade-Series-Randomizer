@@ -1,41 +1,52 @@
 import json, random, copy
-from XC3.XC3_Scripts import Enhancements
-from scripts import JSONParser
+from XC3.XC3_Scripts import Enhancements, IDs
+from scripts import JSONParser, Helper
 
 # Currently allowing future redeemed or base game only skills because the amount of effort to fix like 5 effects would be not worth the time right now.
 
 def AccessoryRando():
-    with open("XC3/JsonOutputs/sys/ITM_Accessory.json", 'r+', encoding='utf-8') as itmFile:
-        with open(f"XC3/JsonOutputs/btl/BTL_Enhance.json", 'r+', encoding='utf-8') as enhanceFile:
-            with open(f"XC3/JsonOutputs/system/msg_item_accessory.json", 'r+', encoding='utf-8') as nameFile:
-                enhData = json.load(enhanceFile)
-                itmData = json.load(itmFile)
-                nameData = json.load(nameFile)
-                originalNameData = copy.deepcopy(nameData)
-                
-                # Filter the list
-                newList:Enhancements.Helper.RandomGroup = copy.deepcopy(Enhancements.EnhancementsList)
-                removeList = []
-                for enh in newList.currentGroup:
-                    if not enh.isAccessory:
-                        removeList.append(enh)
-                
-                for enh in removeList:
-                    newList.RemoveMember(enh)
-                    
-                for item in itmData["rows"]:
-                    if item["Enhance"] == 0 or item["Name"] == 0: # Ignore debug items
-                        continue
-                    newEnhancement:Enhancements.Enhancement = newList.SelectRandomMember()
-                    
-                    DetermineRecommendedCategory(item, newEnhancement)
-                    newID = newEnhancement.CreateEffect(enhData, powerPercent=DetermineAccessoryPower(item))
-                    item["Enhance"] = newID
-                    item["Name"] = CreateNewName(item, nameData, newEnhancement, originalNameData)
-                    
-                JSONParser.CloseFile(itmData, itmFile)
-                JSONParser.CloseFile(enhData, enhanceFile)
-                JSONParser.CloseFile(nameData, nameFile)
+    accFile = JSONParser.File("XC3/JsonOutputs/sys/ITM_Accessory.json")
+    enhanceFile = JSONParser.File("XC3/JsonOutputs/btl/BTL_Enhance.json")
+    nameFile = JSONParser.File("XC3/JsonOutputs/system/msg_item_accessory.json")
+    
+    # Validation and creation of the enhancement groups for game/item they are being placed on.
+    
+    def isDLC4Valid(enh:Enhancements.Enhancement):
+        return enh.isAccessory and not enh.isBaseGameOnly
+    dlc4List = Helper.RandomGroup(Enhancements.EnhancementsList)
+    dlc4List.FilterList(isDLC4Valid)
+    
+    def isBaseValid(enh:Enhancements.Enhancement):
+        return enh.isAccessory and not enh.isFutureRedeemedOnly
+    baseList = Helper.RandomGroup()
+    baseList.ExtendNewData(Enhancements.EnhancementsList)
+    baseList.FilterList(isBaseValid)
+    
+    # Manuals are special items that should only do chain attack things
+    def isManualValid(enh:Enhancements.Enhancement):
+        return enh.isChainActivation
+    manualList = Helper.RandomGroup(Enhancements.EnhancementsList) 
+    manualList.FilterList(isManualValid)
+    
+    for acc in accFile.rows:
+        if acc["$id"] not in IDs.BaseAccessoriesIDs + IDs.AccessoryManualIDs + IDs.DLC4AccessoriesIDs: continue
+        
+        # Choose the group to draw an enhancement from
+        if acc["$id"] in IDs.AccessoryManualIDs: targetList = manualList
+        elif acc["$id"] in IDs.BaseAccessoriesIDs: targetList = baseList
+        elif acc["$id"] in IDs.DLC4AccessoriesIDs: targetList = dlc4List
+        else: print(f"No group for accessory id: {acc["$id"]}")
+        
+        # Get new enhancement from group then apply it and add to the bdats
+        newEnhancement:Enhancements.Enhancement = targetList.SelectRandomMember()
+        DetermineRecommendedCategory(acc, newEnhancement)
+        newID = newEnhancement.CreateEffect(enhanceFile.data, powerPercent=DetermineAccessoryPower(acc))
+        acc["Enhance"] = newID
+        acc["Name"] = CreateNewName(acc, nameFile.data, newEnhancement, nameFile.originalData)
+        
+    accFile.Close()
+    enhanceFile.Close()
+    nameFile.Close()
 
 def DetermineAccessoryPower(item):
     if item["Rarity"] == 2:

@@ -9,6 +9,7 @@ class File:
         try:
             self.file = open(filePath, fileOpenMode, encoding='utf-8')
             self.data = json.load(self.file)
+            self.originalData = copy.deepcopy(self.data) # Make a copy of the original before any edits
             self.rows:list[dict] = self.data["rows"]
             self.filePath = filePath
             openFiles.append(filePath)
@@ -27,11 +28,17 @@ class File:
         self.RemoveTrackedFile()
     
     def RemoveTrackedFile(self):
-        # Remove 
         for file in openFiles:
             if file == self.filePath:
+                openFiles.remove(file)
                 break
-        openFiles.remove(file)
+        
+    def Alter(self, rowNum, key, newVal, rowKey = "$id"):
+        '''Alters a single row and key to a new value'''
+        for row in self.rows:
+            if row[rowKey] == rowNum:
+                row[key] = newVal
+                break
 
 def ChangeJSONFile(Filename: list, keyWords: list, rangeofValuesToReplace:list = [], rangeValidReplacements:list = [], InvalidTargetIDs:list = [], IgnoreID_AND_Key = [["",""]]): # make this a function to reuse, check the settings ot see if we even do this
 

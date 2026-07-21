@@ -229,7 +229,11 @@ class RandomGroup():
     def AddNewData(self, data):
         self.originalGroup.append(copy.deepcopy(data))
         self.currentGroup.append(copy.deepcopy(data))
-    
+        
+    def ExtendNewData(self, data):
+        self.originalGroup.extend(copy.deepcopy(data))
+        self.currentGroup.extend(copy.deepcopy(data))
+        
     def SetData(self, data):
         self.originalGroup = copy.deepcopy(data)
         self.currentGroup = copy.deepcopy(data)
@@ -241,16 +245,18 @@ class RandomGroup():
         '''Returns a copy of a random member from current group and optionally removes it from that group'''
         mem = random.choice(self.currentGroup)
         if removeSelected:
-            self.RemoveMember(mem)
+            self.RemoveCurrentMember(mem)
         return copy.deepcopy(mem)
-    
-    def FilterMember(self, target):
-        if target in self.originalGroup:
-            self.originalGroup.remove(target)
-        if target in self.currentGroup:
-            self.currentGroup.remove(target)
-    
-    def RemoveMember(self, en):
+            
+    def FilterList(self, filterCallback):
+        '''Filters the entire list based on a callback
+        callback returning false filters the item
+        '''
+        self.originalGroup = [item for item in self.originalGroup if filterCallback(item)]
+        self.currentGroup = [item for item in self.currentGroup if filterCallback(item)]
+                
+    def RemoveCurrentMember(self, en):
+        '''Removes the selected element from only the current group'''
         self.currentGroup.remove(en)
         if self.currentGroup == []:
             self.RefreshCurrentGroup()

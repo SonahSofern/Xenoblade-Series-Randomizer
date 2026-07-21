@@ -3,56 +3,52 @@ from scripts import JSONParser, Helper
 from XC3.XC3_Scripts import Enhancements, IDs, Options
 
 def MinorSkillShuffle(targetSkills): # Seperated to keep balancing intact. We could make these full skills but id rather not.
-    with open("XC3/JsonOutputs/btl/BTL_Skill_PC.json", 'r+', encoding='utf-8') as skillFile:
-        skillData = json.load(skillFile)        
-        skillGroup = Helper.RandomGroup()
-        
-        # Create list
-        for skill in skillData["rows"]:
-            if skill["$id"] in targetSkills:
-                skillGroup.AddNewData(skill)
-                
-        # Shuffle
-        for skill in skillData["rows"]:
-            if skill["$id"] in targetSkills:
-                newSkill = skillGroup.SelectRandomMember()
-                Helper.CopyKeys(skill, newSkill, ["$id", "UseTalent"])
-                
-        JSONParser.CloseFile(skillData, skillFile)
+    skillFile = JSONParser.File("XC3/JsonOutputs/btl/BTL_Skill_PC.json")
+    skillGroup = Helper.RandomGroup()
+    
+    # Create list
+    for skill in skillFile.rows:
+        if skill["$id"] in targetSkills:
+            skillGroup.AddNewData(skill)
+            
+    # Shuffle
+    for skill in skillFile.rows:
+        if skill["$id"] in targetSkills:
+            newSkill = skillGroup.SelectRandomMember()
+            Helper.CopyKeys(skill, newSkill, ["$id", "UseTalent"])
+            
+    skillFile.Close()
         
 def SkillRandoMain():
-    with open("XC3/JsonOutputs/btl/BTL_Skill_PC.json", 'r+', encoding='utf-8') as skillFile:
-        with open(f"XC3/JsonOutputs/btl/BTL_Enhance.json", 'r+', encoding='utf-8') as enhanceFile:
-            with open(f"XC3/JsonOutputs/battle/msg_btl_skill_name.json", 'r+', encoding='utf-8') as nameFile:
-                enhanceData = json.load(enhanceFile)
-                skillData = json.load(skillFile)
-                nameData = json.load(nameFile)
+    skillFile = JSONParser.File("XC3/JsonOutputs/btl/BTL_Skill_PC.json")
+    enhanceFile = JSONParser.File("XC3/JsonOutputs/btl/BTL_Enhance.json")
+    nameFile = JSONParser.File("XC3/JsonOutputs/battle/msg_btl_skill_name.json")
             
-                skillFiles = SkillRandoFiles(skillData, nameData, enhanceData, Options.MajorSkillOption.GetSpinbox())
-                
-                # Vanilla replacements used by all
-                replacementIDs =  IDs.BaseGameClassSkills + IDs.InoSkillTree + IDs.SoulhackerSkills + IDs.UroSkills + IDs.DLC4Skills + IDs.PairSkills
-                
-                # Vanilla skills that should stay in their respective game
-                baseGameOnlyIDs = [116, 223, 224, 225]
-                dlc4OnlyIDs = [330, 340, 404]
-                
-                if Options.MajorSkillOption_ClassSkills.GetState():
-                    skillFiles.SkillRando(IDs.BaseGameClassSkills, replacementIDs, dlc4OnlyIDs, True, [(0,20),(21,40),(41,60),(61,80),(81,100)])
-                if Options.MajorSkillOption_InoSkills.GetState():
-                    skillFiles.SkillRando(IDs.InoSkillTree, replacementIDs, dlc4OnlyIDs, True, [(20,30),(40,50),(60,100)])
-                if Options.MajorSkillOption_HackerSkills.GetState():
-                    skillFiles.SkillRando(IDs.SoulhackerSkills, replacementIDs, dlc4OnlyIDs, True, [(20,40), (60,90)])
-                if Options.MajorSkillOption_OuroSkills.GetState():
-                    skillFiles.SkillRando(IDs.UroSkills, replacementIDs, dlc4OnlyIDs, True, [(20,50), (70,80)])            
-                if Options.MajorSkillOption_AffinityGrowthSkills.GetState():
-                    skillFiles.SkillRando(IDs.DLC4Skills, replacementIDs, baseGameOnlyIDs, False, [(20,40),(50,70),(80,100)])
-                if Options.MajorSkillOption_UnitySkills.GetState():
-                    skillFiles.SkillRando(IDs.PairSkills, replacementIDs, baseGameOnlyIDs, False, [(30,60),(70,100)])
+    skillFiles = SkillRandoFiles(skillFile.data, nameFile.data, enhanceFile.data, Options.MajorSkillOption.GetSpinbox())
+    
+    # Vanilla replacements used by all
+    replacementIDs =  IDs.BaseGameClassSkills + IDs.InoSkillTree + IDs.SoulhackerSkills + IDs.UroSkills + IDs.DLC4Skills + IDs.PairSkills
+    
+    # Vanilla skills that should stay in their respective game
+    baseGameOnlyIDs = [116, 223, 224, 225]
+    dlc4OnlyIDs = [330, 340, 404]
+    
+    if Options.MajorSkillOption_ClassSkills.GetState():
+        skillFiles.SkillRando(IDs.BaseGameClassSkills, replacementIDs, dlc4OnlyIDs, True, [(0,20),(21,40),(41,60),(61,80),(81,100)])
+    if Options.MajorSkillOption_InoSkills.GetState():
+        skillFiles.SkillRando(IDs.InoSkillTree, replacementIDs, dlc4OnlyIDs, True, [(20,30),(40,50),(60,100)])
+    if Options.MajorSkillOption_HackerSkills.GetState():
+        skillFiles.SkillRando(IDs.SoulhackerSkills, replacementIDs, dlc4OnlyIDs, True, [(20,40), (60,90)])
+    if Options.MajorSkillOption_OuroSkills.GetState():
+        skillFiles.SkillRando(IDs.UroSkills, replacementIDs, dlc4OnlyIDs, True, [(20,50), (70,80)])            
+    if Options.MajorSkillOption_AffinityGrowthSkills.GetState():
+        skillFiles.SkillRando(IDs.DLC4Skills, replacementIDs, baseGameOnlyIDs, False, [(20,40),(50,70),(80,100)])
+    if Options.MajorSkillOption_UnitySkills.GetState():
+        skillFiles.SkillRando(IDs.PairSkills, replacementIDs, baseGameOnlyIDs, False, [(30,60),(70,100)])
         
-                JSONParser.CloseFile(skillData, skillFile)
-                JSONParser.CloseFile(enhanceData, enhanceFile)
-                JSONParser.CloseFile(nameData, nameFile)
+    skillFile.Close()
+    enhanceFile.Close()
+    nameFile.Close()
 
 class SkillRandoFiles():
     def __init__(self, skillData, nameData, enhanceData, odds):
