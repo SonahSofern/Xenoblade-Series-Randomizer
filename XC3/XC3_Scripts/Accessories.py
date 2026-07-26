@@ -10,7 +10,6 @@ def AccessoryRando():
     nameFile = JSONParser.File("XC3/JsonOutputs/system/msg_item_accessory.json")
     
     # Validation and creation of the enhancement groups for game/item they are being placed on.
-    
     def isDLC4Valid(enh:Enhancements.Enhancement):
         return enh.isAccessory and not enh.isBaseGameOnly
     dlc4List = Helper.RandomGroup(Enhancements.EnhancementsList)

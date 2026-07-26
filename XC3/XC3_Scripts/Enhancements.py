@@ -9,7 +9,6 @@ from scripts import Helper
 
 # Lists to be populated during randomization
 ranOnce = False
-EnhancementsList = []
 Normal = [10,100]
 
 # Used for skills to choose icons for 
@@ -75,14 +74,25 @@ class Enhancement:
         else:
             min = param[0]
             max = param[-1]
+        
+        if (not isinstance(min, int)) or (not isinstance(max, int)): isInt = False
+        else: isInt = True
             
         diff = max - min
-        chosen = min + (diff*power)
-        newParam = chosen
-        if newParam > 15:
-            newParam = Helper.roundToBase(newParam)
-        return int(newParam)
-    
+        newParam = min + (diff*power)
+        
+        isLargeNumber = newParam > 15 
+        if isInt: 
+            newParam = int(newParam) # Convert to int
+            if isLargeNumber: newParam = Helper.RoundToBase(newParam) # If we are a decently large value we snap to multiple of 5 
+        else: # If decimal round to same decimal places as min and max contain
+            newParam = round(newParam, Helper.CountDecimalPlaces(min))
+        
+        return newParam
+
+EnhancementsList:list[Enhancement] = []
+
+  
 def CreateEnhancements():
     global ranOnce
     if ranOnce: return
@@ -226,7 +236,7 @@ def CreateEnhancements():
     Enhancement("Reckless", 132, 156, 1, Atk, [10,40], isGem=False, isAccessory=False) # Lose % of HP on Art
     Enhancement("Concussive", 133, 159, 1, Misc, [20,60], isGem=False, isAccessory=False) # Art hit lose aggro
     Enhancement("Pinpoint", 134, 160, 1, Atk, [20,50], skillIcon=31) # Recover Recharge (Critical)
-    Enhancement("Regen", 135, 161, 1, Misc, [5,25], [5,10], skillIcon=1) # Regeneration (Low HP)
+    Enhancement("Regen", 135, 161, 1, Misc, [1,8], skillIcon=1) # Regeneration (Low HP)
     Enhancement("Talented", 136, 162, 1, Atk, [50,100], [250,500], skillIcon=35) # Damage Up (Talent Art)
     Enhancement("Bouncy", 137, 163, 1, Def, [20,50], [1,3], skillIcon=41) # Damage Counter: Reaction
     # Enhancement("", 138, 0, 1, M, skillIcon=0) # <8220967D>
@@ -310,7 +320,7 @@ def CreateEnhancements():
     Enhancement("Bursting", 216, 249, 1, Hlr, [1], [100,400], skillIcon=45) # Combo HP Heal: Allies
     Enhancement("Qigong", 217, 250, 1, Atk, [20,50], skillIcon=33) # Pierce Physical Defense
     Enhancement("Qigong", 218, 251, 1, Atk, [20,50], skillIcon=33) # Pierce Ether Defense
-    Enhancement("Hone", 219, 252, 1, Atk, [10,20], skillIcon=8) # Critical Rate Up (Hit)
+    Enhancement("Hone", 219, 252, 1, Atk, [5,10], skillIcon=8) # Critical Rate Up (Hit)
     Enhancement("Cleansing", 220, 253, 1, Hlr, [25,50], skillIcon=16) # Healing Up (Debuff Clear)
     Enhancement("Buffer", 221, 254, 1, Atk, [50,100], skillIcon=18) # Damage Up (Buff)
     Enhancement("Debuffer", 222, 255, 1, Atk, [50,100], skillIcon=24) # Damage Up (Debuff)
@@ -365,7 +375,7 @@ def CreateEnhancements():
     Enhancement("Distraction", 271, 312, 1, Misc, [50,100], skillIcon=12) # Reduce Aggro (Ally KO)
     # Enhancement("", 272, 0, 1, M, [], [], skillIcon=0) # Evasion Buff
     Enhancement("Salvador", 273, 315, 1, Def, [50,100], [200,400], skillIcon=12) # Target Lock (Danger)
-    Enhancement("Ascendancy", 274, 316, 1, Atk, [5], skillIcon=50) # Damage Up (Time)
+    Enhancement("Ascendancy", 274, 316, 1, Atk, [0.2,0.9], skillIcon=50) # Damage Up (Time)
     Enhancement("Concussive", 275, 317, 1, Misc, [5,20], skillIcon=12) # Reduce Aggro (Auto-Attack)
     Enhancement("Supreme", 276, 318, 1, Atk, [5,30], [20,100], skillIcon=22) # Critical Rate + Damage Up
     Enhancement("Angel", 277, 319, 1, Hlr, [30,100], skillIcon=16) # Emergency Rescue
@@ -373,9 +383,9 @@ def CreateEnhancements():
     # Enhancement("", 279, 0, 1, M, [], [], skillIcon=0) # Enemy KO Buff
     Enhancement("Glass", 280, 322, 1, Atk, [100,200], skillIcon=2) # Extreme Attack Shift
     Enhancement("Echelon", 281, 323, 1, Atk, [40,70], skillIcon=21) # Auto-Atk Spd Up (Same Role)
-    Enhancement("Mastery", 282, 324, 1, Atk, [3,5], skillIcon=2) # Attacker Mastery
-    Enhancement("Mastery", 283, 325, 1, Def, [1,1], skillIcon=4) # Defender Mastery
-    Enhancement("Mastery", 284, 326, 1, Hlr, [3,5], skillIcon=1) # Healer Mastery
+    Enhancement("Mastery", 282, 324, 1, Atk, [0.1,0.5], skillIcon=2, isBaseGameOnly=True) # Attacker Mastery
+    Enhancement("Mastery", 283, 325, 1, Def, [0.1,0.5], skillIcon=4, isBaseGameOnly=True) # Defender Mastery
+    Enhancement("Mastery", 284, 326, 1, Hlr, [0.1,0.5], skillIcon=1, isBaseGameOnly=True) # Healer Mastery
     Enhancement("Hustle", 285, 327, 1, Hlr, [40,70], [60,20], skillIcon=9) # Rushed Healing Arts
     Enhancement("Rally", 286, 328, 1, Misc, [50,100], [2,5], skillIcon=26) # Ally KO Buff
     Enhancement("Stockpile", 287, 329, 1, Misc, [70,100], skillIcon=41) # Fortitude (No Arts Ready)

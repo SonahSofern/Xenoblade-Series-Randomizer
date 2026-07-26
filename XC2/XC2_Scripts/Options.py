@@ -6,7 +6,7 @@ from XC2.XC2_Scripts.Race_Mode import RaceMode
 from XC2.XC2_Scripts.Torna_Logic import TornaMain
 from XC2.XC2_Scripts.UM_Hunt import UMHuntMain
 
-from scripts.Interactables import Option, SubOption, MutuallyExclusivePairing
+from scripts.Interactables import Option, SubOption, MutuallyExclusivePairing, Dropdown
 import scripts.Interactables
 game = "XC2"
 scripts.Interactables.Game = game
@@ -132,6 +132,8 @@ NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, hasSpi
 NormalEnemyOption_Stats = SubOption("Balance Stats", NormalEnemyOption)
 NormalEnemyOption_Aggro = SubOption("Vanilla Aggro", NormalEnemyOption)
 NormalEnemyOption_Size = SubOption("Match Size", NormalEnemyOption)
+NormalEnemyOption_OopsAll = SubOption("Oops All", NormalEnemyOption, dropDown=Dropdown(1, Enemy.GetOopsAllPool(), 4, 20))
+NormalEnemyOption_OopsAllsss = Option("Oops All", Enemies, "Test", dropDown=Dropdown(1, Enemy.GetOopsAllPool(), 15, 20))
 
 UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: Enemy.Enemies(IDs.UniqueMonsters + IDs.SuperbossMonsters, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption, UniqueEnemyOption_Aggro, UniqueEnemyOption_Size.GetState(), UniqueEnemyOption_Stats)], descData=lambda: Enemy.EnemyDesc(UniqueEnemyOption.name), hasSpinBox = True, prio=2)
 UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption, hasSpinBox=True, spinDefault=1, spinDesc=weightsSpinDescription)

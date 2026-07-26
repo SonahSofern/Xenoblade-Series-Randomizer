@@ -1,5 +1,5 @@
 import json, random
-from scripts import JSONParser, Helper, PopupDescriptions
+from scripts import JSONParser, Helper, PopupDescriptions, StatRand
 from XC3.XC3_Scripts import Options
 
 def ClassAptitude():
@@ -51,5 +51,10 @@ def ArtOfFlowEarly():
                 break
         JSONParser.CloseFile(eneData, eneFile)
         
-        
+def AffinityGrowthReduction(mult):
+    for file in ["86C85D35", "53C87704", "92A3D2AC", "610F9088", "AE656972", "C260F5C7", "F1F082F2"]:
+        growthFile = JSONParser.File(f"XC3/JsonOutputs/dlc/{file}.json")     
+        for row in growthFile.rows:
+            StatRand.ApplyMult(row, "NeedPoint", mult, min=0, max=64)
+        growthFile.Close()
 # Speedups for quests can probably be done here by settings TASKIDs https://xenobladedata.github.io/xb3_200_dlc4/QST_Task.html#718

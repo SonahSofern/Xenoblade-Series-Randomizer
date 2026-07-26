@@ -9,8 +9,21 @@ class Label():
     def __init__(self):
         pass
 
+class Interactable():
+    pass
+
+class Dropdown(Interactable):
+    def __init__(self, default, values, width, height):
+        self.default = default
+        self.values = values
+        self.width = width
+        self.height = height
+        
+    def Display():
+        pass
+
 class Option():
-    def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", commands:list = [], defState = False, prio = 50, hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None, preRandoCommands:list = [], isDevOption = False, stepSpeed = 0.05, filePlaceCommands:list = []):
+    def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", commands:list = [], defState = False, prio = 50, hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None, preRandoCommands:list = [], isDevOption = False, stepSpeed = 0.05, filePlaceCommands:list = [], dropDown:Dropdown = None):
         # Objects
         self.descObj = None
         self.spinBoxObj = None
@@ -43,6 +56,8 @@ class Option():
         self.spinDesc = spinDesc
         self.spinWidth = spinWidth
         self.spinIncr = spinIncr
+        
+        self.dropDown:Dropdown = dropDown
         
     def DisplayOption(self, tab, root, style):
         self.root = root
@@ -91,7 +106,12 @@ class Option():
             self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w", style=f"{style}.TLabel")
             self.spinBoxLabel.grid(row=rowIncrement, column = 4, sticky="w", padx=0)
             disable_spinbox_scroll(self.spinBoxObj)
-
+        elif self.dropDown != None:
+            test = ttk.Combobox(optionPanel, width=self.dropDown.width)
+            test.set(self.dropDown.default)
+            test['values'] = self.dropDown.values
+            test.grid(row=rowIncrement, column = 3, padx=(15,0))
+            
         count = 0
         for sub in self.subOptions:
             count += 1
@@ -120,7 +140,7 @@ class Option():
         rowIncrement += 1
 
     
-    def StateUpdate(self):
+    def StateUpdate(self): # This is obviously terrible, I need to fix this entire script 
         if self.GetState():
             for sub in self.subOptions:
                 sub.checkBox.state(["!disabled"])
@@ -158,7 +178,7 @@ class Option():
         return self.checkBoxVal.get()
 
 def EmptyboxHandler(val, minVal):
-    '''Because you can delete the entire string in a box if you defocus it while its empty it makes its value 0'''
+    '''Because you can delete the entire string in a box if you defocus it while its empty it makes its value the min val'''
     try:
         val.get() # If we cannot get the value just safely set it to 0
     except:
@@ -176,7 +196,7 @@ def validateSpinbox(input, min, max):
     return False
 
 class SubOption():
-    def __init__(self, _name, _parent:Option, commands = [], defState = True, prio = 0, spinDefault = 0, spinMin = 0, spinMax = 100, spinWidth = 3, spinIncr = 10, hasSpinBox = False, spinPadX = 15, spinDesc = "", preRandoCommands:list = [], filePlaceCommands = []):
+    def __init__(self, _name, _parent:Option, commands = [], defState = True, prio = 0, spinDefault = 0, spinMin = 0, spinMax = 100, spinWidth = 3, spinIncr = 10, hasSpinBox = False, spinPadX = 15, spinDesc = "", preRandoCommands:list = [], filePlaceCommands = [], dropDown = None):
         self.name = _name
         self.checkBoxVal = BooleanVar
         self.checkBox:ttk.Checkbutton = None
@@ -195,6 +215,7 @@ class SubOption():
         self.spinIncr = spinIncr
         self.spinDesc = spinDesc
         self.filePlaceCommands = filePlaceCommands
+        self.dropDown = dropDown
         _parent.subOptions.append(self)
 
     def GetState(self):

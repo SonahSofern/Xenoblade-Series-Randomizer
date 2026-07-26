@@ -350,6 +350,27 @@ def SummonsLevelFix(ene):
         targetDriver = Rex
     ene["DriverLev"] = targetDriver 
 
+def GetOopsAllPool():
+    '''Only works if the rando has ran once, but gets a list of all the enemies and their names to choose as an oops all'''
+    eneFile = JSONParser.File("XC2/JsonOutputs/common/CHR_EnArrange.json")
+    nameFile = JSONParser.File("XC2/JsonOutputs/common_ms/fld_enemyname.json")
+    
+    if not eneFile.isOpen or not nameFile.isOpen:
+        return ["Run randomization once to generate list"]
+    
+    nameList = []
+    for en in eneFile.rows:
+        if en["$id"] not in IDs.BossMonsters + IDs.NormalMonsters + IDs.UniqueMonsters + IDs.SuperbossMonsters: continue
+        for name in nameFile.rows:
+            if name["$id"] != en["Name"]: continue
+            nameList.append(f"{name["name"]} {en["$id"]}")
+            break
+    eneFile.Close()
+    nameFile.Close()
+    return nameList
+    
+    
+
 def EnemyDesc(name):
     EnemyRandoDesc = PopupDescriptions.Description()
     EnemyRandoDesc.Header(name)

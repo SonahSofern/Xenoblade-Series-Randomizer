@@ -2,7 +2,7 @@ import json, random, copy
 from scripts import JSONParser, Helper
 from XC3.XC3_Scripts import Enhancements, IDs, Options
 
-def MinorSkillShuffle(targetSkills): # Seperated to keep balancing intact. We could make these full skills but id rather not.
+def MinorSkillShuffle(targetSkills): # Seperated to keep balancing intact. We could mix these with the major skills but id rather not.
     skillFile = JSONParser.File("XC3/JsonOutputs/btl/BTL_Skill_PC.json")
     skillGroup = Helper.RandomGroup()
     
@@ -117,13 +117,13 @@ class SkillRandoFiles():
                 skillList.AddNewData(skill)
         
         if Options.MajorSkillOption_CustomSkills.GetState(): # Generate Custom Replacement Skill List
-            copyListCurrentGroup:list[Enhancements.Enhancement] = Enhancements.EnhancementsList.currentGroup
-            for enh in copyListCurrentGroup:            
+            for enh in Enhancements.EnhancementsList:            
                 if isCustomReplacementBaseGameOnly:
-                    if enh.isFutureRedeemedOnly: # Dont add FR only enhancement to the pool 
+                    if enh.isFutureRedeemedOnly: # Dont add FR only enhancement to the base game slots 
                             continue
-                    elif enh.isBaseGameOnly:  # Dont add Base Game only enhancement to the pool 
-                        continue
+                else:
+                    if enh.isBaseGameOnly:  # Dont add Base Game only enhancement to dlc4 slots
+                        continue  
                 if enh.skillIcon == Enhancements.invalidSkillIcon:
                     continue
                 if customReplacementTargetRole != None and enh.roleType != customReplacementTargetRole:

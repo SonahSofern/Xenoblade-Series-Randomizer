@@ -146,10 +146,14 @@ def NewGamePlusBladeBalancing():
             newWeapon["$id"] = newID # New ID
             newWeapon["Rank"] = chip["Rank"] # Rank, chips also have a rank attribute so just use that
             
+            # rank 10 we want 50% of the max
+            
             # Update Damage, Stab, Crit, Guard
-            statMult = 1/(21-chip["Rank"]) # Use the rank 20 chip stats as max and the target chip uses 1/rank as a mult
+            statMult = newWeapon["Rank"]/20 # Take a % of the rank 20 chip
             for stat in ["Damage", "Stability", "CriRate", "GuardRate"]:
                 StatRand.ApplyMult(newWeapon, stat, statMult, min=14)
+                
+            print(f"Weapon Type: {i} Rank: {newWeapon["Rank"]} Damage: {newWeapon["Damage"]}")
             
             # Add new weapon to rows
             wpnFile.rows.append(newWeapon)

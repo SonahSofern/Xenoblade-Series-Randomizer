@@ -36,7 +36,7 @@ def XC2Help():
     descData.Text("Your output path should be the '"'atmosphere'"' folder of whatever platform you are playing on (emulators and console have this).\n\n e.g. C:/Users/your_name/AppData/Roaming/Ryujinx/sdcard/atmosphere", anchor="w")        
     descData.Tag("Step 2")
     descData.Text("Choose your preferred settings, then click the randomize button.", anchor="w")
-    descData.Text(f"If you want to know more about a setting you can click on its description marked by {Options.DescriptionIndicator} (not all settings have descriptions).", anchor="w")
+    descData.Text(f"If you want to know more about a setting you can click on its description marked by {Options.scripts.Interactables.DescriptionIndicator} (not all settings have descriptions).", anchor="w")
     # descData.Text("This will not affect your original game or save data. It can be toggled on or off by deleting/removing the randomized files in the output location.", anchor="w")
     descData.Tag("Step 3")
     descData.Text("Once the randomizer finishes, launch your game and you should see the version somewhere on the title screen.", anchor="w")

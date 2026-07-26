@@ -151,7 +151,7 @@ def OddsCheck(odds):
         return False
     
 def TimeFunction(command):
-    start = time.perf_counter() # Make a funciton that does this and just takes any function as an arg
+    start = time.perf_counter() # Time a function
     me = lambda: command
     me()
     end = time.perf_counter()
@@ -293,9 +293,12 @@ def FileShuffle(fileName, ignoreKeys = ["$id"], dontReplaceIDs = [], useAsReplac
         
         JSONParser.CloseFile(fileData, file)
         
-def roundToBase(x, base=5):
+def RoundToBase(x, base=5):
     return base * round(x/base)
 
 def Clamp(val, low, high):
     '''Returns a value closest to the given val within the range'''
     return max(low, min(val, high))
+
+def CountDecimalPlaces(float):
+    return len(str(float).split('.')[1])

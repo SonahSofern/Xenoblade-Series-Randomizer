@@ -5,6 +5,8 @@ import struct
 import scripts.SaveLoad
 # credit to github.com/LagoLunatic/wwrando
 
+intBits = 14
+
 def SanitizeUserSeed(SeedName):
     SeedName = str(SeedName)
     SeedName = SeedName.strip()
@@ -30,7 +32,7 @@ def GenerateCompressedPermalink(SeedName, OptionsList, Version):
             if isinstance(optionvalue, bool):
                 bitswriter.write(int(optionvalue), 1)
             elif isinstance(optionvalue, int):
-                bitswriter.write(optionvalue, 8)
+                bitswriter.write(optionvalue, intBits)
         except:
             pass
 
@@ -59,7 +61,7 @@ def GenerateSettingsFromPermalink(base64_encoded_permalink, OptionsList):
             if OptionsList[i].get() != boolean_value: # if the option is not changed dont recalculate things by setting it
                 OptionsList[i].set(boolean_value)
         elif isinstance(optionvalue, int):
-            intvalue = bitsreader.read(8)
+            intvalue = bitsreader.read(intBits)
             if OptionsList[i].get() != intvalue:
                 OptionsList[i].set(intvalue)    
     return(seed, OptionsList)
