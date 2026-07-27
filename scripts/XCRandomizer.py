@@ -112,10 +112,7 @@ class GameWindowData:
 # Some of the oldest code and messy for sure. 
 def CreateMainWindow(root, window, gameData:GameWindowData): 
     windowPadding = 30
-    if Onefile.isOneFile:
-        fileEntryVar = os.path.join(sys._MEIPASS, gameData.game, 'bdat')
-    else:
-        fileEntryVar = f"{gameData.game}/bdat"
+    fileEntryVar = Onefile.Directory(f"{gameData.game}/bdat")
     SavedOptionsFileName = f"Last Save.txt"
     JsonOutput = f"./{gameData.game}/JsonOutputs"
     saveCommand = lambda: SaveLoad.saveData(EntriesToSave + Interactables.XenoOptionDict[gameData.game], SavedOptionsFileName, f"{gameData.game}/SaveData")
@@ -124,10 +121,7 @@ def CreateMainWindow(root, window, gameData:GameWindowData):
 
     window.add(XCFrame, text =gameData.version, image=CreateImage(f"{gameData.game}/Images/{gameData.game}Icon.png"), compound="left") 
 
-    if Onefile.isOneFile:
-        bdat_path = os.path.join(sys._MEIPASS, 'toolset', 'bdat-toolset-win64.exe')
-    else:
-        bdat_path = f"toolset/bdat-toolset-win64.exe"
+    bdat_path = Onefile.Directory("toolset/bdat-toolset-win64.exe")
 
     background = tk.Canvas(XCFrame)
     background.pack(fill="both", expand=True, padx=0, pady=0)
@@ -151,10 +145,8 @@ def CreateMainWindow(root, window, gameData:GameWindowData):
     MainWindow.pack(expand = True, fill ="both", padx=windowPadding, pady=(windowPadding, 5))
     
     def AlternateStyle(curStyle):
-        if curStyle == "Dark":
-            return "Light"
-        else:
-            return "Dark"
+        if curStyle == "Dark": return "Light"
+        else: return "Dark"
         
     style= "Dark"
     for opt in Interactables.XenoOptionDict[gameData.game]:
@@ -241,6 +233,9 @@ def CreateMainWindow(root, window, gameData:GameWindowData):
     XCFrame.update()
     XCFrame.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background))
     # root.bind("<Configure>", lambda event: resize_bg(event, XCFrame, root, bg_image, background), add="+")
+    
+    ExtractVanillaBdats(gameData, bdat_path, fileEntryVar)
+    
 
 lastHeight = -1
 lastWidth = -1
@@ -266,6 +261,16 @@ def resize_bg(event, root, bg_image, background):
                 pass
 
         threading.Thread(target=resize_and_update, daemon=True).start()
+
+def ExtractVanillaBdats(gameData:GameWindowData, bdat_path, entrySpot):
+    '''Get the vanilla bdats to use for info for users (options that load the data from the vanilla game e.g. Oops all enemy)'''
+    VanillaFilesOutput = f"./{gameData.game}/VanillaJson"
+    if os.path.exists(VanillaFilesOutput): return # Only extract when we need
+    os.makedirs(VanillaFilesOutput)
+    for file in gameData.mainFolderNames:
+        subprocess.run([bdat_path, "extract", f"{entrySpot}/{file}.bdat", "-o", VanillaFilesOutput, "-f", "json", "--pretty"] + gameData.extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+    for file in gameData.subFolderNames:
+        subprocess.run([bdat_path, "extract", f"{entrySpot}/{gameData.textFolderName}/{file}.bdat", "-o", VanillaFilesOutput, "-f", "json", "--pretty"] + gameData.extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
 def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat_path, randoSeedEntry, JsonOutput, outputDirVar, OptionList:list[Interactables.Option]):
     def ThreadedRandomize():
@@ -384,10 +389,10 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
 
     threading.Thread(target=ThreadedRandomize).start()
         
-def SumTotalCommands(OptionList):
+def SumTotalCommands(OptionList:list[Interactables.Option]):
     TotalCommands = 1
     for opt in OptionList:
-        if opt.GetState(): # Checks state
+        if opt.GetState():
             TotalCommands += 1
     return TotalCommands
 

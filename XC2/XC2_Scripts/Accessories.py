@@ -53,22 +53,15 @@ def AccessoriesDesc(name, itemType):
     desc.Text("This also replaces the first word of the item to fit their new effect.")
     effectDescription:str
     ValidSkills.sort(key=lambda x: x.name) # Alphabetic Sort
+    descFile = JSONParser.File("XC2/VanillaJson/common_ms/btl_enhance_cap.json")
     for effect in ValidSkills:
         if effect.Description == "":
-            try:
-                with open("./XC2/JsonOutputs/common_ms/btl_enhance_cap.json", 'r+', encoding='utf-8') as descFile:
-                    descData = json.load(descFile)
-                    for des in descData["rows"]:
-                        if des["$id"] == effect.Caption:   
-                            effectDescription = des["name"]  
-                            break
-            except:
-                effectDescription = "Randomization must be ran once to generate descriptions."
-        else:
-            effectDescription = effect.Description # keep descriptions that I create for the class
+            for des in descFile.rows:
+                if des["$id"] == effect.Caption:   
+                    effectDescription = des["name"]  
+                    break
             
         # Replace things we dont want user to see
-        effectDescription = effectDescription.replace('\n', " ") # Remove new lines
         effectDescription = effectDescription.replace("[ML:Enhance kind=Param1 ]", f"{effect.Param1[0]}-{effect.Param1[-1]}")
         effectDescription = effectDescription.replace("[ML:Enhance kind=Param1]", f"{effect.Param1[0]}-{effect.Param1[-1]}")
         effectDescription = effectDescription.replace("[ML:Enhance kind=Param2 ]", f"{effect.Param2[0]}-{effect.Param2[-1]}")
@@ -76,7 +69,7 @@ def AccessoriesDesc(name, itemType):
         effectDescription = effectDescription.replace("[ML:Enhance ]", f"{effect.max[0]}-{effect.max[-1]}")
         effectDescription = effectDescription.replace("[max: [ML:Enhance kind=Param2", f"max: {effect.Param2[0]}-{effect.Param2[-1]}")
 
-        
         desc.Tag(effect.name, padx=0)
         desc.Text(effectDescription)
+    descFile.Close()
     return desc

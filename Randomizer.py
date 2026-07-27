@@ -24,10 +24,8 @@ MainWindow.pack(fill="both", expand=True, padx=0, pady=0)
 root.title(title)
 root.option_add("*Font", Theme.defaultFont)
 root.geometry(f'{Theme.windowWidth}x{Theme.windowHeight}')
-
-iconPath = XCRandomizer.Onefile.Directory("images/XCIcon.png")
     
-icon = PhotoImage(file=iconPath)
+icon = PhotoImage(file=XCRandomizer.Onefile.Directory("images/XCIcon.png"))
 root.iconphoto(True, icon)
 root.attributes(alpha=0)
 

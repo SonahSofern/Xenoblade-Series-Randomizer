@@ -5,7 +5,6 @@ from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e, Interac
 StaticEnemyData:list[Helper.RandomGroup] = []
 
 ValidEnemyPopFileNames = ["ma01a_FLD_EnemyPop.json", "ma02a_FLD_EnemyPop.json", "ma04a_FLD_EnemyPop.json", "ma05a_FLD_EnemyPop.json", "ma05c_FLD_EnemyPop.json", "ma07a_FLD_EnemyPop.json", "ma07c_FLD_EnemyPop.json", "ma08a_FLD_EnemyPop.json", "ma08c_FLD_EnemyPop.json", "ma10a_FLD_EnemyPop.json", "ma10c_FLD_EnemyPop.json", "ma11a_FLD_EnemyPop.json", "ma13a_FLD_EnemyPop.json", "ma13c_FLD_EnemyPop.json", "ma15a_FLD_EnemyPop.json", "ma15c_FLD_EnemyPop.json", "ma16a_FLD_EnemyPop.json", "ma17a_FLD_EnemyPop.json", "ma17c_FLD_EnemyPop.json", "ma18a_FLD_EnemyPop.json", "ma18c_FLD_EnemyPop.json", "ma20a_FLD_EnemyPop.json", "ma20c_FLD_EnemyPop.json", "ma21a_FLD_EnemyPop.json", "ma40a_FLD_EnemyPop.json", "ma41a_FLD_EnemyPop.json", "ma42a_FLD_EnemyPop.json"]
-                                                                                                                                                                                                                                                                                                          
 def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isVanillaAggro, matchSize:Interactables.SubOption, balanceStats:Interactables.SubOption, matchPhase = False, finalBoss = False):
     global StaticEnemyData
     EnemyCounts = GetEnemyCounts()
@@ -352,11 +351,8 @@ def SummonsLevelFix(ene):
 
 def GetOopsAllPool():
     '''Only works if the rando has ran once, but gets a list of all the enemies and their names to choose as an oops all'''
-    eneFile = JSONParser.File("XC2/JsonOutputs/common/CHR_EnArrange.json")
-    nameFile = JSONParser.File("XC2/JsonOutputs/common_ms/fld_enemyname.json")
-    
-    if not eneFile.isOpen or not nameFile.isOpen:
-        return ["Run randomization once to generate list"]
+    eneFile = JSONParser.File("XC2/VanillaJson/common/CHR_EnArrange.json")
+    nameFile = JSONParser.File("XC2/VanillaJson/common_ms/fld_enemyname.json")
     
     nameList = []
     for en in eneFile.rows:
