@@ -4,36 +4,100 @@ from scripts import PopupDescriptions, ScrollPanel, Theme, Helper
 
 Game = "" # Used to tell what option goes to what games tab at runtime
 DescriptionIndicator = "🛈"
-
-class Label():
-    def __init__(self):
-        pass
+rowIncrement = 0   
+XenoOptionDict = {
+    "XCDE": [],
+    "XC2": [],
+    "XC3": [],
+    "XCXDE": [],
+}
 
 class Interactable():
-    pass
+    def GetState(self):
+        pass
+    
+    def SaveState(self):
+        pass
+    
+    def LoadState(self):
+        pass
+
+class Spinbox(Interactable):
+    def __init__(self, min = 0, max = 100, increment = 10, default = 100, width = 3, description = "% randomized"):
+        self.min = min
+        self.max = max
+        self.increment = increment
+        self.default = default
+        self.width = width
+        self.description = description
+        self.spinBoxObj:ttk.Spinbox = None
+        self.spinBoxLabel:ttk.Label = None
+        self.spinBoxVal = None
+
+    def Create(self, parent, style):
+        self.spinBoxVal = IntVar(value=self.default)
+        self.spinBoxObj = ttk.Spinbox(parent, validate="key", from_=self.min, to=self.max, textvariable=self.spinBoxVal, wrap=True, width=self.width, increment=self.increment, justify="right")
+        self.spinBoxObj.configure(validatecommand=(self.spinBoxObj.register(self.validateSpinbox), "%P", self.min, self.max))
+        self.spinBoxObj.bind("<FocusOut>", lambda e, val=self.spinBoxVal: self.EmptyboxHandler(val))
+        self.disableScroll(self.spinBoxObj)
+        self.spinBoxLabel = ttk.Label(parent, text=self.description, style=style)
+
+    def validateSpinbox(self, input):
+        '''Because tkinters handling of spinboxes doesn't work when typing values, made one to accomodate typing in values'''
+        if input == "": # Allow deleting the whole thing
+            return True
+        if not input.isdigit():
+            return False
+        input = int(input)
+        if input <= int(self.max) and input >= int(self.min):
+            return True
+        return False
+    
+    def EmptyboxHandler(self):
+        '''Because you can delete the entire string in a box if you defocus it while its empty it makes its value the min val'''
+        try:
+            self.spinBoxVal.get() # If we cannot get the value just safely set it to 0
+        except:
+            self.spinBoxVal.set(self.min)
+    
+    def GetState(self):
+        return self.spinBoxVal.get()
+    
+    def VisualStateUpdate(self):
+        pass
+    
+    def disableScroll(self, spinBox):
+        '''Used to stop spinbox scrollwheel conflicts'''
+        def stop(event):
+            return "break"
+        spinBox.bind("<MouseWheel>", stop)
+        spinBox.bind("<Button-4>", stop)
+        spinBox.bind("<Button-5>", stop)
 
 class Dropdown(Interactable):
     def __init__(self, default, values, width, height):
+        self.spinBoxVal = IntVar(default)
         self.default = default
         self.values = values
         self.width = width
         self.height = height
         
-    def Display():
-        pass
+    def Create(self, parent):
+        self.dropDownObj = ttk.Combobox(parent, width=self.width)
+        self.dropDownObj.set(self.default)
+        self.dropDownObj['values'] = self.values
 
-class Option():
-    def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", commands:list = [], defState = False, prio = 50, hasSpinBox = False, spinMin = 0, spinMax = 100, spinDesc = "% randomized", spinWidth = 3, spinIncr = 10, spinDefault = 100, descData = None, preRandoCommands:list = [], isDevOption = False, stepSpeed = 0.05, filePlaceCommands:list = [], dropDown:Dropdown = None):
+    def GetState(self):
+        return self.spinBoxVal.get()
+
+class Option(Interactable):
+    def __init__(self, _name:str ="No Name", _tab =1, _desc:str= "No Description", commands:list = [], defState = False, prio = 50, descData = None, preRandoCommands:list = [], isDevOption = False, stepSpeed = 0.05, filePlaceCommands:list = [], dropDown:Dropdown = None, spinBox:Spinbox = None):
         # Objects
         self.descObj = None
-        self.spinBoxObj = None
-        self.spinBoxLabel = None
-        self.spinBoxVal = None
         self.checkBox = None
         self.checkBoxVal = None
         self.subOptions:list[SubOption] = []
         self.descData = descData
-        self.spinDefault = spinDefault
         self.isDevOption = isDevOption
         self.clickCommands = []
         
@@ -44,31 +108,25 @@ class Option():
         self.commands:list = commands
         self.preRandoCommands:list = preRandoCommands
         self.filePlaceCommands:list = filePlaceCommands
-        self.hasSpinBox = hasSpinBox
         self.subDefState = defState
         self.prio = prio
-        self.stepSpeed = stepSpeed # Controls how fast the progressbar moves during while this setting runs. 
+        self.stepSpeed = stepSpeed # Controls how fast the progressbar moves while this setting runs. 
         XenoOptionDict[Game].append(self)
         
-        # Custom Spinboxes
-        self.spinBoxMin = spinMin
-        self.spinBoxMax = spinMax
-        self.spinDesc = spinDesc
-        self.spinWidth = spinWidth
-        self.spinIncr = spinIncr
-        
+        self.spinBox:Spinbox = spinBox
         self.dropDown:Dropdown = dropDown
         
     def DisplayOption(self, tab, root, style):
         self.root = root
         self.GenStandardOption(tab, style)
-        self.StateUpdate()
+        self.VisualStateUpdate()
         
-    def GenStandardOption(self, parentTab, style):    # This probably shouldnt be a class function what if we want to make a nonstandard option we could make a carveout and let you call a custom function but how would you set everything with a custom function
-
+    def GenStandardOption(self, parentTab, style): # This probably shouldnt be a class function what if we want to make a nonstandard option we could make a carveout and let you call a custom function but how would you set everything with a custom function
         # Variables
         global rowIncrement
         self.checkBoxVal = BooleanVar()
+        self.checkBoxVal.trace_add("write", lambda e: self.VisualStateUpdate())
+        
         self.spinBoxLabel = ttk.Label()
         self.spinBoxObj = ttk.Spinbox()
 
@@ -77,70 +135,38 @@ class Option():
         optionPanel.grid(row = rowIncrement, column = 0, sticky="ew")
         
         # Major Option Checkbox
-        self.checkBox = ttk.Checkbutton(optionPanel, variable= self.checkBoxVal, text=self.name, width=30, style=f"{style}.TCheckbutton", command=lambda: (self.StateUpdate(), [cmd() for cmd in self.clickCommands]))
+        self.checkBox = ttk.Checkbutton(optionPanel, variable= self.checkBoxVal, text=self.name, width=30, style=f"{style}.TCheckbutton", command=lambda: (self.VisualStateUpdate(), [cmd() for cmd in self.clickCommands]))
         self.checkBox.grid(row=rowIncrement, column = 0, sticky="w")
         
+        # Description Label or Button
         if self.descData == None:
             text = self.desc
-        else:
-            text = f"{self.desc} {DescriptionIndicator}"
-        
-        # Description Label or Button
-        if self.descData != None:
-            self.descObj = ttk.Button(optionPanel, text = text, command=lambda: PopupDescriptions.StyledPopup(self.name, self.descData, self.root), style=f"{style}.TButton", width=60)
-            padx = 13
-        else:
             self.descObj = ttk.Label(optionPanel, text=self.desc, anchor="w", width=60, style=f"{style}.TLabel", wraplength=400)
             padx= 0
+        else:
+            text = f"{self.desc} {DescriptionIndicator}"
+            self.descObj = ttk.Button(optionPanel, text = text, command=lambda: PopupDescriptions.StyledPopup(self.name, self.descData, self.root), style=f"{style}.TButton", width=60)
+            padx = 13
         self.descObj.grid(row=rowIncrement, column = 1, sticky="w", padx=padx)
         
-        self.checkBoxVal.trace_add("write", lambda name, index, mode: self.StateUpdate())
-        
         # % Boxes
-        if self.hasSpinBox:
-            self.spinBoxVal = IntVar(value=self.spinDefault)
-            self.spinBoxObj = ttk.Spinbox(optionPanel, validate="key", from_=self.spinBoxMin, to=self.spinBoxMax, textvariable=self.spinBoxVal, wrap=True, width=self.spinWidth, increment=self.spinIncr, justify="right")
-            self.spinBoxObj.configure(validatecommand=(self.spinBoxObj.register(validateSpinbox), "%P", self.spinBoxMin, self.spinBoxMax))
-            self.spinBoxObj.bind("<FocusOut>", lambda e, val=self.spinBoxVal: EmptyboxHandler(val, self.spinBoxMin))
-            self.spinBoxObj.grid(row=rowIncrement, column = 3, padx=(15,0))
-            self.spinBoxLabel = ttk.Label(optionPanel, text=self.spinDesc, anchor="w", style=f"{style}.TLabel")
-            self.spinBoxLabel.grid(row=rowIncrement, column = 4, sticky="w", padx=0)
-            disable_spinbox_scroll(self.spinBoxObj)
+        if self.spinBox != None:
+            self.spinBox.Create(optionPanel, f"{style}.TLabel")
+            self.spinBox.spinBoxObj.grid(row=rowIncrement, column = 3, padx=(15,0))
+            self.spinBox.spinBoxLabel.config(anchor="w")
+            self.spinBox.spinBoxLabel.grid(row=rowIncrement, column = 4, sticky="w", padx=0)
         elif self.dropDown != None:
-            test = ttk.Combobox(optionPanel, width=self.dropDown.width)
-            test.set(self.dropDown.default)
-            test['values'] = self.dropDown.values
-            test.grid(row=rowIncrement, column = 3, padx=(15,0))
+            self.dropDown.Create(optionPanel)
+            self.dropDown.dropDownObj.grid(row=rowIncrement, column = 3, padx=(15,0))
             
-        count = 0
+        subCount = 0
         for sub in self.subOptions:
-            count += 1
+            subCount += 1
             rowIncrement += 1
-            sub.checkBoxVal = BooleanVar(value=sub.defState)
-            sub.checkBoxVal.trace_add("write", lambda name, index, mode: self.StateUpdate())
-            sub.checkBox = ttk.Checkbutton(optionPanel, text=sub.name, variable=sub.checkBoxVal, style=f"{style}Sub.TCheckbutton", width=25)
-            sub.checkBox.grid(row=rowIncrement, column=0, sticky="sw")
-
-            if sub.hasSpinBox:
-                sub.spinBoxVal = IntVar(value=sub.spinDefault)
-                sub.spinBoxObj = ttk.Spinbox(optionPanel, validate="key", from_=sub.spinBoxMin, to=sub.spinBoxMax, textvariable=sub.spinBoxVal, wrap=True, width=sub.spinWidth, increment=sub.spinIncr, justify="right")
-                sub.spinBoxObj.configure(validatecommand=(sub.spinBoxObj.register(validateSpinbox), "%P", sub.spinBoxMin, sub.spinBoxMax))
-                sub.spinBoxObj.bind("<FocusOut>", lambda e, val=sub.spinBoxVal: EmptyboxHandler(val, sub.spinBoxMin))
-                sub.spinBoxObj.grid(row=rowIncrement, column=1, padx=(20,0), pady=(0,0), sticky="w")
-                sub.spinBoxLabel = ttk.Label(optionPanel, text=sub.spinDesc, style=f"{style}NoMargin.TLabel")
-                sub.spinBoxLabel.grid(row=rowIncrement, column=1, sticky="w", padx=(80,0))
-                disable_spinbox_scroll(sub.spinBoxObj)
-            
-            if count == len(self.subOptions): # If the final suboption add extra padding stupid solution but all this code is stupid and bad
-                newPad = (0, 10)
-                sub.checkBox.grid_configure(pady=newPad)
-                if sub.hasSpinBox:
-                    sub.spinBoxObj.grid_configure(pady=newPad)
-                    sub.spinBoxLabel.grid_configure(pady=newPad)
+            sub.Display(optionPanel, style, subCount == len(self.subOptions))
         rowIncrement += 1
-
-    
-    def StateUpdate(self): # This is obviously terrible, I need to fix this entire script 
+        
+    def VisualStateUpdate(self): # This is obviously terrible, I need to fix this entire script 
         if self.GetState():
             for sub in self.subOptions:
                 sub.checkBox.state(["!disabled"])
@@ -157,7 +183,7 @@ class Option():
                     sub.spinBoxLabel.grid()
             self.descObj.state(["!disabled"])
             self.spinBoxObj.state(["!disabled"])
-            if self.spinBoxLabel != None: # If we dont have one
+            if self.spinBoxLabel != None:
                 self.spinBoxLabel.state(["!disabled"])
         else:
             for sub in self.subOptions:
@@ -171,74 +197,62 @@ class Option():
             if self.spinBoxLabel != None:
                 self.spinBoxLabel.state(["disabled"])
     
+    def VisualStateUpdate(self): # I dont want to update this every time I add a new type of setting though?
+        if self.GetState():
+            self.descObj.state(["!disabled"])
+            self.spinBoxObj.state(["!disabled"])
+            if self.spinBoxLabel != None:
+                self.spinBoxLabel.state(["!disabled"])
+            for sub in self.subOptions:
+                sub.VisualStateUpdate()
+            self.spinBox.VisualStateUpdate()
+    
     def GetSpinbox(self):
-        return self.spinBoxVal.get()
+        return self.spinBox.GetState()
     
     def GetState(self):
         return self.checkBoxVal.get()
 
-def EmptyboxHandler(val, minVal):
-    '''Because you can delete the entire string in a box if you defocus it while its empty it makes its value the min val'''
-    try:
-        val.get() # If we cannot get the value just safely set it to 0
-    except:
-        val.set(minVal)
-
-def validateSpinbox(input, min, max):
-    '''Because tkinters handling of spinboxes doesn't work when typing values, made one to accomodate typing in values'''
-    if input == "": # Allow deleting the whole thing
-        return True
-    if not input.isdigit():
-        return False
-    input = int(input)
-    if input <= int(max) and input >= int(min):
-        return True
-    return False
-
-class SubOption():
-    def __init__(self, _name, _parent:Option, commands = [], defState = True, prio = 0, spinDefault = 0, spinMin = 0, spinMax = 100, spinWidth = 3, spinIncr = 10, hasSpinBox = False, spinPadX = 15, spinDesc = "", preRandoCommands:list = [], filePlaceCommands = [], dropDown = None):
-        self.name = _name
+class SubOption(Interactable):
+    def __init__(self, name, parent:Option, commands = [], defState = True, prio = 0, preRandoCommands:list = [], filePlaceCommands = [], dropDown = None, spinBox = None):
+        self.name = name
         self.checkBoxVal = BooleanVar
         self.checkBox:ttk.Checkbutton = None
         self.commands = commands    
         self.defState = defState
         self.prio = prio
-        self.parent = _parent
-        self.hasSpinBox = hasSpinBox
-        self.spinBoxVal = None
-        self.spinBoxObj:ttk.Spinbox = None
-        self.spinBoxMin = spinMin
-        self.spinBoxMax = spinMax
-        self.spinDefault = spinDefault
-        self.spinBoxLabel:ttk.Label = None
-        self.spinWidth = spinWidth
-        self.spinIncr = spinIncr
-        self.spinDesc = spinDesc
+        self.parent = parent
         self.filePlaceCommands = filePlaceCommands
-        self.dropDown = dropDown
-        _parent.subOptions.append(self)
+        self.spinBox:Spinbox = spinBox
+        self.dropDown:Dropdown = dropDown
+        parent.subOptions.append(self)
+    
+    def Display(self, parent, style, isFinal):
+        self.checkBoxVal = BooleanVar(value=self.defState)
+        self.checkBoxVal.trace_add("write", lambda e: self.VisualStateUpdate())
+        self.checkBox = ttk.Checkbutton(parent, text=self.name, variable=self.checkBoxVal, style=f"{style}Sub.TCheckbutton", width=25)
+        self.checkBox.grid(row=rowIncrement, column=0, sticky="sw")
+
+        if self.spinBox != None:
+            spinBox:Spinbox = self.spinBox.Create(parent, f"{style}NoMargin.TLabel")
+            spinBox.spinBoxObj.grid(row=rowIncrement, column=1, padx=(20,0), pady=(0,0), sticky="w")
+            spinBox.spinBoxLabel.grid(row=rowIncrement, column=1, sticky="w", padx=(80,0))
+
+        if isFinal: # If the final suboption add extra padding
+            newPad = (0, 10)
+            self.checkBox.grid_configure(pady=newPad)
+            if self.spinBox != None:
+                spinBox.spinBoxObj.grid_configure(pady=newPad)
+                spinBox.spinBoxLabel.grid_configure(pady=newPad)
+    
+    def VisualStateUpdate():
+        pass
 
     def GetState(self):
         return self.checkBoxVal.get()
     
     def GetSpinbox(self):
-        return self.spinBoxVal.get()
-
-def disable_spinbox_scroll(spinbox):
-    '''Used to stop spinbox scrollwheel conflicts'''
-    def stop(event):
-        return "break"
-    spinbox.bind("<MouseWheel>", stop)
-    spinbox.bind("<Button-4>", stop)
-    spinbox.bind("<Button-5>", stop)
-
-rowIncrement = 0   
-XenoOptionDict = {
-    "XCDE": [],
-    "XC2": [],
-    "XC3": [],
-    "XCXDE": [],
-}
+        return self.spinBox.GetState()
 
 class MutuallyExclusivePairing():
     '''For settings that are mutually exclusive'''

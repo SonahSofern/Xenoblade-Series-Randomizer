@@ -29,10 +29,10 @@ icon = PhotoImage(file=XCRandomizer.Onefile.Directory("images/XCIcon.png"))
 root.iconphoto(True, icon)
 root.attributes(alpha=0)
 
-XCRandomizer.CreateMainWindow(root, MainWindow, XCDE.WindowData)
-XCRandomizer.CreateMainWindow(root, MainWindow, XC2.WindowData)
+# XCRandomizer.CreateMainWindow(root, MainWindow, XCDE.WindowData)
+# XCRandomizer.CreateMainWindow(root, MainWindow, XC2.WindowData)
 XCRandomizer.CreateMainWindow(root, MainWindow, XC3.WindowData)
-XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.WindowData)
+# XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.WindowData)
 
 root.attributes(alpha=1)
 
