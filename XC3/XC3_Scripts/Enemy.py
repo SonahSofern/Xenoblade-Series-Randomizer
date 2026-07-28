@@ -38,6 +38,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
 
     if firstRun:
         StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
+        SummonFix()
 
     for en in eneFile.rows:
         if eRando.FilterEnemies(en, targetGroup):
@@ -66,9 +67,6 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
 
     for group in StaticEnemyData:
         group.RefreshCurrentGroup()
-
-    if firstRun:
-        Bandaids()
         
     BreakTutorial(eRando)
 
@@ -301,9 +299,6 @@ def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
         else:
             hpChange = oldEnParam["StRevHp"]
         eRando.ChangeStats([newEn], [("StRevHp", hpChange), ("StRevStr", oldEnParam["StRevStr"]), ("StRevHeal", oldEnParam["StRevHeal"]), ("StRevDex", oldEnParam["StRevDex"]), ("StRevAgi", oldEnParam["StRevAgi"])])
-    
-def Bandaids():
-    SummonFix()
     
 def EnemyDesc(name):
     EnemyRandoDesc = PopupDescriptions.Description()

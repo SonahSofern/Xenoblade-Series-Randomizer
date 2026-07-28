@@ -193,6 +193,12 @@ def AddMikhailToGacha():
         MikhailGachaRow["Assure" + str(i)] = 0
     JSONParser.ExtendJSONFile("common/BLD_RareList.json", [[MikhailGachaRow]])
 
+def CressidusTresspassRemoval():
+    '''Removes tresspass, for some reason cressidus tresspass consistently crashes the game, I suspect its related to NG+ somehow'''
+    blFile = JSONParser.File("XC2/JsonOutputs/common/CHR_Bl.json")
+    blFile.Alter(1048, "BSkill3", 16)
+    blFile.Close()
+
 def NGPlusBladeDesc():
     desc = PopupDescriptions.Description()
     desc.Header(Options.BladeNGPlusOption.name)

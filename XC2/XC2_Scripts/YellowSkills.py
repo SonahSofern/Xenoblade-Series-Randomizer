@@ -10,7 +10,8 @@ def RandomizeBattleSkills(): # Make logic to have all skills in the game
         SkillPool = list(IDs.BladeBattleSkills)
         
         KeepVanilla = {
-            1111: ["BSkill1"] # Elma Overdrive
+            1111: ["BSkill1"], # Elma Overdrive
+            1048: ["BSkill3"] # Cressidus Tresspass can crash leave it on him
         }
         
         Slots = ["BSkill1","BSkill2", "BSkill3"]
