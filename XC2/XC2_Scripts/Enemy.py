@@ -24,7 +24,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
     rscFile = JSONParser.File("XC2/JsonOutputs/common/RSC_En.json")
     artFile = JSONParser.File("XC2/JsonOutputs/common/BTL_Arts_En.json")
     
-    eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneFile.data, paramFile.data, rscFile.data, artFile.data, permanentBandaids=[lambda: GortOgreUppercutRemoval(paramFile.data)])
+    eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneFile.data, paramFile.data, rscFile.data, artFile.data, permanentBandaids=[lambda: GortOgreUppercutRemoval(paramFile)])
 
     if StaticEnemyData == []:
         StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
@@ -273,8 +273,8 @@ def CloneEnemiesDefeatCondition(oldEn, newEn): # Forces all copies of enemies th
                 break
         JSONParser.CloseFile(questData, questFile)
 
-def GortOgreUppercutRemoval(paramData): # Gort 2's Ogre Uppercut seems to be buggy, reported to crash game in certain situations, so it's being removed for the time being.
-    for row in paramData["rows"]:
+def GortOgreUppercutRemoval(paramFile:JSONParser.File): # Gort 2's Ogre Uppercut seems to be buggy, reported to crash game in certain situations, so it's being removed for the time being.
+    for row in paramFile.rows:
         if row["$id"] == 1434:
             row["ArtsNum4"] = 963 # replaced Ogre Uppercut with a second instance of Ogre Flame
             break
