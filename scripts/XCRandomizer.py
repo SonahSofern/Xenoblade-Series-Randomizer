@@ -149,9 +149,10 @@ def CreateMainWindow(root, window, gameData:GameWindowData):
         else: return "Dark"
         
     style= "Dark"
+    rowIncrement = {"Count": 0} # passed as dict so its by reference and can be updated
     for opt in Interactables.XenoOptionDict[gameData.game]:
         style = AlternateStyle(style)
-        opt.DisplayOption(InnerDict[opt.tab], XCFrame, style)
+        DisplayOption(opt, InnerDict[opt.tab], XCFrame, style, rowIncrement)
 
     def GenRandomSeed(randoSeedEntryVar):
         randoSeedEntryVar.set(Seed.RandomSeedName(gameData.nouns, gameData.verbs))
@@ -187,8 +188,9 @@ def CreateMainWindow(root, window, gameData:GameWindowData):
     
     # Save and Load Last Options
     EntriesToSave = ([fileOut, permLink, seedVar])
-    SaveLoad.loadData(EntriesToSave + Interactables.XenoOptionDict[gameData.game], SavedOptionsFileName, f"{gameData.game}/SaveData")
-    EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.XenoOptionDict[gameData.game])) + list((x.spinBoxVal for x in Interactables.XenoOptionDict[gameData.game] if x.hasSpinBox)) + list((sub.checkBoxVal for x in Interactables.XenoOptionDict[gameData.game] for sub in x.subOptions)) + list((sub.spinBoxVal for x in Interactables.XenoOptionDict[gameData.game] for sub in x.subOptions if sub.hasSpinBox))
+    # SaveLoad.loadData(EntriesToSave + Interactables.XenoOptionDict[gameData.game], SavedOptionsFileName, f"{gameData.game}/SaveData")
+    # EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.XenoOptionDict[gameData.game])) + list((x.spinBoxVal for x in Interactables.XenoOptionDict[gameData.game] if x.hasSpinBox)) + list((sub.checkBoxVal for x in Interactables.XenoOptionDict[gameData.game] for sub in x.subOptions)) + list((sub.spinBoxVal for x in Interactables.XenoOptionDict[gameData.game] for sub in x.subOptions if sub.hasSpinBox))
+    EveryObjectToSaveAndLoad = []
 
     # Permalink Options/Variables
     permalinkFrame = ttk.Frame(background,style="NoBackground.TFrame")
@@ -217,25 +219,47 @@ def CreateMainWindow(root, window, gameData:GameWindowData):
     Theme.ThemeUpdate()
     
     # Background Images
-    bg = random.choice(gameData.backgroundImages)
-    if Onefile.isOneFile: 
-        bg_image = Image.open(os.path.join(sys._MEIPASS, gameData.game, 'Images', bg))
-    else:
-        bg_image = Image.open(f"./{gameData.game}/Images/{bg}")
+    if len(gameData.backgroundImages) > 1: 
+        bg = random.choice(gameData.backgroundImages)
+        if Onefile.isOneFile: 
+            bg_image = Image.open(os.path.join(sys._MEIPASS, gameData.game, 'Images', bg))
+        else:
+            bg_image = Image.open(f"./{gameData.game}/Images/{bg}")
+        
+        # hardcoded because thats the height of the window that actually uses the background. But that height is unaccessable when this is called.
+        resized = bg_image.resize((int(Theme.windowWidth), int(Theme.windowHeight)))
+        bg_photo = ImageTk.PhotoImage(resized)
+        garbageCollectionStopper.append(bg_photo)
+        background.create_image(0, 0, image=bg_photo, anchor="nw")
+        
+        # Tkinter is so bad at this, winfowidth does not work the only way to get the right dimensions is through a configure event... crazy.
+        XCFrame.update()
+        XCFrame.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background))
+        # root.bind("<Configure>", lambda event: resize_bg(event, XCFrame, root, bg_image, background), add="+")
     
-    # hardcoded because thats the height of the window that actually uses the background. But that height is unaccessable when this is called.
-    resized = bg_image.resize((int(Theme.windowWidth), int(Theme.windowHeight)))
-    bg_photo = ImageTk.PhotoImage(resized)
-    garbageCollectionStopper.append(bg_photo)
-    background.create_image(0, 0, image=bg_photo, anchor="nw")
+    # Extract vanilla bdats for display use
+    VanillaFilesOutput = f"./{gameData.game}/VanillaJson"
+    if not os.path.exists(VanillaFilesOutput): # Only extract when we need
+        ExtractBdats(gameData, bdat_path, fileEntryVar, VanillaFilesOutput)
+  
+def DisplayOption(option:Interactables.Option, tab, root, style, rowIncrement):
+    option.root = root
     
-    # Tkinter is so bad at this, winfowidth does not work the only way to get the right dimensions is through a configure event... crazy.
-    XCFrame.update()
-    XCFrame.bind("<Configure>", lambda event: resize_bg(event, root, bg_image, background))
-    # root.bind("<Configure>", lambda event: resize_bg(event, XCFrame, root, bg_image, background), add="+")
+    # Parent Frame
+    optionPanel = ttk.Frame(tab, style=f"{style}.TFrame", padding=(0,0,2000,0))
+    optionPanel.grid(row = rowIncrement["Count"], column = 0, sticky="ew")
     
-    ExtractVanillaBdats(gameData, bdat_path, fileEntryVar)
-    
+    # Option
+    option.Create(optionPanel, style, rowIncrement)
+    option.VisualStateUpdate()  
+        
+    # subCount = 0
+    # for sub in self.subOptions:
+    #     subCount += 1
+    #     rowIncrement += 1
+    #     sub.Create(parent, style, subCount == len(self.subOptions))
+    # rowIncrement += 1
+        
 
 lastHeight = -1
 lastWidth = -1
@@ -265,12 +289,17 @@ def resize_bg(event, root, bg_image, background):
 def ExtractVanillaBdats(gameData:GameWindowData, bdat_path, entrySpot):
     '''Get the vanilla bdats to use for info for users (options that load the data from the vanilla game e.g. Oops all enemy)'''
     VanillaFilesOutput = f"./{gameData.game}/VanillaJson"
-    if os.path.exists(VanillaFilesOutput): return # Only extract when we need
     os.makedirs(VanillaFilesOutput)
+    if os.path.exists(VanillaFilesOutput): return # Only extract when we need
+    ExtractBdats(gameData, bdat_path, entrySpot, VanillaFilesOutput)
+
+def ExtractBdats(gameData:GameWindowData, bdat_path, entrySpot, JsonOutput):
     for file in gameData.mainFolderNames:
-        subprocess.run([bdat_path, "extract", f"{entrySpot}/{file}.bdat", "-o", VanillaFilesOutput, "-f", "json", "--pretty"] + gameData.extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+        subprocess.run([bdat_path, "extract", f"{entrySpot}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + gameData.extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
     for file in gameData.subFolderNames:
-        subprocess.run([bdat_path, "extract", f"{entrySpot}/{gameData.textFolderName}/{file}.bdat", "-o", VanillaFilesOutput, "-f", "json", "--pretty"] + gameData.extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+        subprocess.run([bdat_path, "extract", f"{entrySpot}/{gameData.textFolderName}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + gameData.extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+
+# Unpacks BDATs
 
 def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat_path, randoSeedEntry, JsonOutput, outputDirVar, OptionList:list[Interactables.Option]):
     def ThreadedRandomize():
@@ -315,19 +344,7 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
         print("Permalink: "+  gameData.permalinkVar.get())
         os.makedirs(outSpot, exist_ok=True) # Make the directory for them
         try:
-            for file in gameData.mainFolderNames:
-                # print("BDAT:", JsonOutput, "Exists:", os.path.exists(JsonOutput))
-                # print(bdat_path)
-                # print(f"{entrySpot}/{file}.bdat")
-                # print(JsonOutput)
-                # print(gameData.extraArgs)
-                subprocess.run([bdat_path, "extract", f"{entrySpot}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + gameData.extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-            for file in gameData.subFolderNames:
-                # print(f"{entrySpot}/{gameData.textFolderName}/{file}.bdat")
-                subprocess.run([bdat_path, "extract", f"{entrySpot}/{gameData.textFolderName}/{file}.bdat", "-o", JsonOutput, "-f", "json", "--pretty"] + gameData.extraArgs, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-
-            # Unpacks BDATs
-
+            ExtractBdats(gameData, bdat_path, entrySpot, JsonOutput)
         except:
             print(f"{traceback.format_exc()}") # shows the full error
             time.sleep(3)
