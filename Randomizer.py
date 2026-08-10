@@ -36,12 +36,13 @@ Tabs = {
 XCRandomizer.Interactables.Game = "XC2" 
 
 TboxOption = XCRandomizer.Interactables.Option("Field Checks", Test, "Randomizes treasures from field checks into the chosen types")
-TboxOption_Dropdown = XCRandomizer.Interactables.Dropdown(TboxOption)
+# TboxOption_Dropdown = XCRandomizer.Interactables.Dropdown(TboxOption)
 TboxOptionSub = XCRandomizer.Interactables.SubOption("Test", TboxOption)
-TboxOptionSub_Spinbox = XCRandomizer.Interactables.SubDropdown(TboxOptionSub, values=["Tesudo", ""])
+TboxOptionSub_Spinbox = XCRandomizer.Interactables.SubDropdown(TboxOptionSub, values=[XCRandomizer.Interactables.DropdownOption("Test", 123), XCRandomizer.Interactables.DropdownOption("Test1", 12223)])
 TboxOptionSub2 = XCRandomizer.Interactables.SubOption("Test2", TboxOption)
 TboxOptionSub2_Spinbox = XCRandomizer.Interactables.SubSpinbox(TboxOptionSub2)
 TboxOptionSub3 = XCRandomizer.Interactables.SubOption("Test3", TboxOption)
+
 
 TestOption = XCRandomizer.Interactables.Option("Field Checks", Test, "Randomizes treasures from field checks into the chosen types")
 TestOption_Spinbox = XCRandomizer.Interactables.Spinbox(TestOption)

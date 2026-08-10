@@ -103,7 +103,7 @@ class Option(Interactable):
     def Load(self, loadFile):
         self.checkBoxVal.set(loadFile[self.name])
         
-    def GetVar(self):
+    def GetPermalinkVar(self):
         return self.checkBoxVal
 
 class SubOption(Option):
@@ -210,7 +210,7 @@ class Spinbox(Interactable):
     def Load(self, loadFile):
         self.spinBoxVal.set(loadFile[f"{self.parent.name} Spinbox"])
         
-    def GetVar(self):
+    def GetPermalinkVar(self):
         return self.spinBoxVal
 
 class SubSpinbox(Spinbox):
@@ -238,14 +238,20 @@ class SubSpinbox(Spinbox):
 
 class DropdownOption():
     '''So that dropdowns can display one thing but do another behind the scenes: e.g. Users select Jin from a dropdown but the real value we use in code is his id'''
-
-    
+    def __init__(self, displayVal, realVal):
+        self.displayVal = displayVal
+        # self.realVal = realVal
     
 class Dropdown(Interactable):
-    def __init__(self, parent:Option, default = 0, values:list[DropdownOption] = [], width = 40, height = 10):
-        self.dropdownVal = IntVar(value=default)
-        self.default = default
-        self.values = values
+    def __init__(self, parent:Option, values:list[DropdownOption] = [], width = 40, height = 10):
+        
+        # Updated when a new option is selected
+        self.curDisplayVal = StringVar(value="") # Text value of the currently selected option
+        self.curRealVal = IntVar(value=0) # Index of the currently selected option
+        self.curDropdownOption:DropdownOption = values[0] # Defaulted to the first option
+        self.curDisplayVal.trace_add("write", self.SetValueByDisplayVal)
+        
+        self.values:list[DropdownOption] = values
         self.width = width
         self.height = height
         self.parent = parent
@@ -253,28 +259,49 @@ class Dropdown(Interactable):
         XenoOptionDict[Game].append(self) 
            
     def Create(self, parent, style, rowIncrement):
-        self.dropDownObj = ttk.Combobox(parent, width=self.width)
-        self.dropDownObj.set(self.default)
-        self.dropDownObj['values'] = self.values
+        self.dropDownObj = ttk.Combobox(parent, width=self.width, textvariable=self.curDisplayVal, state="readonly")
+        self.dropDownObj['values'] = [x.displayVal for x in self.values]
         self.dropDownObj.grid(row=rowIncrement["Count"], column = 3, padx=(15,0))
-
-    def GetDropdown(self):
-        return self.dropdownVal.get()
+    
+    def SetValueByDisplayVal(self, *args):
+        '''The string itself controls the values'''
+        # print(f"Cur Display Val: {self.curDisplayVal.get()}")
+        for val in self.values:
+            if val.displayVal == self.curDisplayVal.get():
+                self.curRealVal.set(val.realVal)
+                self.curDropdownOption = val
+                break
+      
+    def GetState(self):
+        '''Returns the real value for the currently displayed option'''
+        # return self.curDropdownOption.realVal
+        return self.curDropdownOption.displayVal
     
     def VisualStateUpdate(self):
         if self.parent.GetState():
             self.dropDownObj.state(["!disabled"])
         else:
             self.dropDownObj.state(["disabled"])
-            
+      
     def Save(self):
-        pass
-    
-    def Load(self):
-        pass
-    
-    def GetVar(self):
-        return self.dropdownVal
+        '''Dropdowns are saved by the index of the option chosen, otherwise we would have massive permalinks if we wanted to save the string value'''
+        index = 0
+        for i in range(0,len(self.values)):
+            if self.values[i] == self.curDropdownOption:
+                index = i
+        return {f"{self.parent.name} Dropdown": index}
+
+    def Load(self, loadFile):
+        '''Loads the dropdown by the saved index'''
+        index = loadFile.get(f"{self.parent.name} Dropdown")
+        if index is not None:
+            dropdownOption:DropdownOption = self.values[index]
+            self.curDropdownOption = dropdownOption
+            self.curDisplayVal.set(dropdownOption.displayVal)
+            # self.curRealVal.set(dropdownOption.realVal)
+
+    def GetPermalinkVar(self):
+        return self.curRealVal
 
 class SubDropdown(Dropdown):
     def Create(self, parent, style, rowIncrement):

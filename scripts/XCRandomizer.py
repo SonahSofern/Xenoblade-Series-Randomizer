@@ -31,7 +31,7 @@ class SavedSpecial(SaveLoad.SavedEntry):
     def Load(self, loadFile):
         self.var.set(loadFile[self.name])
         
-    def GetVar(self):
+    def GetPermalinkVar(self):
         return self.var
 
 class FilePlacer:
@@ -206,7 +206,7 @@ def CreateMainWindow(root, window, gameData:GameWindowData):
     SaveLoad.LoadData(EntriesToSave + Interactables.XenoOptionDict[gameData.game], SavedOptionsFileName, f"{gameData.game}/SaveData")
 
     # Permalink Options/Variables
-    PermalinkSavedObjects = [seedVar.GetVar()] + [x.GetVar() for x in Interactables.XenoOptionDict[gameData.game]]
+    PermalinkSavedObjects = [seedVar.GetPermalinkVar()] + [x.GetVar() for x in Interactables.XenoOptionDict[gameData.game]]
     permalinkFrame = ttk.Frame(background, style="NoBackground.TFrame")
     permalinkEntry = ttk.Entry(permalinkFrame, textvariable=gameData.permalinkVar)
     CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), PermalinkSavedObjects, gameData.version)

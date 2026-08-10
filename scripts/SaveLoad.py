@@ -9,7 +9,8 @@ class SavedEntry():
     def Load(self):
         pass
     
-    def GetVar(self):
+    def GetPermalinkVar(self):
+        '''Gets the var object that permalinks save'''
         pass
     
 def SaveData(dataList:list[SavedEntry], filename, gameFolder):

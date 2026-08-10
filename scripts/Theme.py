@@ -204,8 +204,8 @@ try:
                 "insertcolor": currentTheme["lightColor"],
                 "padding": (4,0),
                 "focuscolor":"",
-                "selectbackground": currentTheme["lightColor"],
-                "selectforeground": currentTheme["midColor"],
+                "selectbackground": "",
+                "selectforeground": currentTheme["lightColor"],
                 "arrowcolor": currentTheme["lightColor"],
             },
             "map": {
