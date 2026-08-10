@@ -16,6 +16,7 @@ First = 0
 Last = 100
 BladeRandoPrio = 0
 
+# Dont forget quest rando adding random quests into the main story to spice it up
 
 Items = 1
 Driver  = 2
