@@ -20,6 +20,20 @@ class Tab():
         self.canvas = canvas
         self.inner = inner
 
+class SavedSpecial(SaveLoad.SavedEntry):
+    def __init__(self, name, var:Variable):
+        self.name = name
+        self.var = var
+    
+    def Save(self):
+        return {f"{self.name}": f"{self.var.get()}"}
+    
+    def Load(self, loadFile):
+        self.var.set(loadFile[self.name])
+        
+    def GetVar(self):
+        return self.var
+
 class FilePlacer:
     '''Copy files to the output of the game (used for things like exefs/skyline and other files besides the bdats)'''
     def __init__(self, files, location, newName = None, game = ""):
@@ -115,7 +129,7 @@ def CreateMainWindow(root, window, gameData:GameWindowData):
     fileEntryVar = Onefile.Directory(f"{gameData.game}/bdat")
     SavedOptionsFileName = f"Last Save.txt"
     JsonOutput = f"./{gameData.game}/JsonOutputs"
-    saveCommand = lambda: SaveLoad.saveData(EntriesToSave + Interactables.XenoOptionDict[gameData.game], SavedOptionsFileName, f"{gameData.game}/SaveData")
+    saveCommand = lambda: SaveLoad.SaveData(EntriesToSave + Interactables.XenoOptionDict[gameData.game], SavedOptionsFileName, f"{gameData.game}/SaveData")
     XCFrame = ttk.Frame(window) # Outer Frame
     Theme.RootsForStyling.append(XCFrame)
 
@@ -151,8 +165,9 @@ def CreateMainWindow(root, window, gameData:GameWindowData):
     style= "Dark"
     rowIncrement = {"Count": 0} # passed as dict so its by reference and can be updated
     for opt in Interactables.XenoOptionDict[gameData.game]:
-        style = AlternateStyle(style)
-        DisplayOption(opt, InnerDict[opt.tab], XCFrame, style, rowIncrement)
+        if type(opt) is Interactables.Option: # Add option to the options dict
+            style = AlternateStyle(style)
+            DisplayOption(opt, InnerDict[opt.tab], XCFrame, style, rowIncrement)
 
     def GenRandomSeed(randoSeedEntryVar):
         randoSeedEntryVar.set(Seed.RandomSeedName(gameData.nouns, gameData.verbs))
@@ -179,36 +194,35 @@ def CreateMainWindow(root, window, gameData:GameWindowData):
     randoSeedEntry = ttk.Entry(SeedFrame, textvariable=gameData.seedVar)
     
     # Bottom Menu Options
-    fileOut = SaveLoad.SavedEntry("Output Bdats", outputDirVar)
-    permLink = SaveLoad.SavedEntry("Permalink", gameData.permalinkVar)
-    seedVar = SaveLoad.SavedEntry("Seed", gameData.seedVar)
+    fileOut = SavedSpecial("Output Bdats", outputDirVar)
+    permLink = SavedSpecial("Permalink", gameData.permalinkVar)
+    seedVar = SavedSpecial("Seed", gameData.seedVar)
     SeedFrame.pack(anchor="w", padx=windowPadding, fill=X)
     seedDesc.pack(side='left')
     randoSeedEntry.pack(side='left', fill=X, expand=True)
     
     # Save and Load Last Options
     EntriesToSave = ([fileOut, permLink, seedVar])
-    # SaveLoad.loadData(EntriesToSave + Interactables.XenoOptionDict[gameData.game], SavedOptionsFileName, f"{gameData.game}/SaveData")
-    # EveryObjectToSaveAndLoad = list((x.checkBoxVal for x in EntriesToSave)) + list((x.checkBoxVal for x in Interactables.XenoOptionDict[gameData.game])) + list((x.spinBoxVal for x in Interactables.XenoOptionDict[gameData.game] if x.hasSpinBox)) + list((sub.checkBoxVal for x in Interactables.XenoOptionDict[gameData.game] for sub in x.subOptions)) + list((sub.spinBoxVal for x in Interactables.XenoOptionDict[gameData.game] for sub in x.subOptions if sub.hasSpinBox))
-    EveryObjectToSaveAndLoad = []
+    SaveLoad.LoadData(EntriesToSave + Interactables.XenoOptionDict[gameData.game], SavedOptionsFileName, f"{gameData.game}/SaveData")
 
     # Permalink Options/Variables
-    permalinkFrame = ttk.Frame(background,style="NoBackground.TFrame")
+    PermalinkSavedObjects = [seedVar.GetVar()] + [x.GetVar() for x in Interactables.XenoOptionDict[gameData.game]]
+    permalinkFrame = ttk.Frame(background, style="NoBackground.TFrame")
     permalinkEntry = ttk.Entry(permalinkFrame, textvariable=gameData.permalinkVar)
-    CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), EveryObjectToSaveAndLoad, gameData.version)
+    CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), PermalinkSavedObjects, gameData.version)
     gameData.permalinkVar.set(CompressedPermalink)
     permalinkButton = ttk.Button(permalinkFrame, text="Settings String")
     permalinkFrame.pack(padx=windowPadding, anchor="w", fill=X)
     permalinkButton.pack(side="left")
-    permalinkEntry.pack(side='left', fill=X, expand=True)
-    PermalinkManagement.AddPermalinkTrace(EveryObjectToSaveAndLoad, gameData.permalinkVar, gameData.seedVar, gameData.version)
+    permalinkEntry.pack(side="left", fill=X, expand=True)
+    PermalinkManagement.AddPermalinkTrace(PermalinkSavedObjects, gameData.permalinkVar, gameData.seedVar, gameData.version)
 
     # Randomize Button
     RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), Randomize(gameData, XCFrame, RandomizeButton, fileEntryVar, bdat_path, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[gameData.game]))))
     RandomizeButton.pack(pady=(5,windowPadding), padx=(windowPadding, 0), anchor="w", side="left")
     saveCommands.append(saveCommand)
 
-    Presets.PresetsWindow(outerPresetFrame,  [seedVar] + Interactables.XenoOptionDict[gameData.game], gameData.game)
+    Presets.PresetsWindow(outerPresetFrame, [seedVar] + Interactables.XenoOptionDict[gameData.game], gameData.game)
     
     SettingsButton = ttk.Button(background, text="Help", command=lambda: PopupDescriptions.StyledPopup(f"{gameData.title} Randomizer Version {gameData.version}", gameData.setupHelpDesc , window), padding=5)
     SettingsButton.pack(anchor="e", side="right", pady=(5,windowPadding), padx=(0, windowPadding))
@@ -253,14 +267,6 @@ def DisplayOption(option:Interactables.Option, tab, root, style, rowIncrement):
     option.Create(optionPanel, style, rowIncrement)
     option.VisualStateUpdate()  
         
-    # subCount = 0
-    # for sub in self.subOptions:
-    #     subCount += 1
-    #     rowIncrement += 1
-    #     sub.Create(parent, style, subCount == len(self.subOptions))
-    # rowIncrement += 1
-        
-
 lastHeight = -1
 lastWidth = -1
 
@@ -285,13 +291,6 @@ def resize_bg(event, root, bg_image, background):
                 pass
 
         threading.Thread(target=resize_and_update, daemon=True).start()
-
-def ExtractVanillaBdats(gameData:GameWindowData, bdat_path, entrySpot):
-    '''Get the vanilla bdats to use for info for users (options that load the data from the vanilla game e.g. Oops all enemy)'''
-    VanillaFilesOutput = f"./{gameData.game}/VanillaJson"
-    os.makedirs(VanillaFilesOutput)
-    if os.path.exists(VanillaFilesOutput): return # Only extract when we need
-    ExtractBdats(gameData, bdat_path, entrySpot, VanillaFilesOutput)
 
 def ExtractBdats(gameData:GameWindowData, bdat_path, entrySpot, JsonOutput):
     for file in gameData.mainFolderNames:

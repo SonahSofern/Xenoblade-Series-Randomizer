@@ -1,6 +1,6 @@
 from tkinter import ttk
 from tkinter import *
-from scripts import PopupDescriptions, ScrollPanel, Theme, Helper
+from scripts import PopupDescriptions, ScrollPanel, Theme, Helper, SaveLoad
 
 DescriptionIndicator = "🛈"
 Game = "" # Used to tell what option goes to what games tab at runtime otherwise we would have to specify each time we create an option what game it belongs to
@@ -11,7 +11,7 @@ XenoOptionDict = {
     "XCXDE": [],
 }
 
-class Interactable():
+class Interactable(SaveLoad.SavedEntry):
     def GetState(self):
         pass
     
@@ -49,8 +49,7 @@ class Option(Interactable):
         self.prio = prio
         self.stepSpeed = stepSpeed # Controls how fast the progressbar moves while this setting runs. 
         
-        if type(self) is Option: # Add option to the options dict
-            XenoOptionDict[Game].append(self) 
+        XenoOptionDict[Game].append(self) 
         
     def Create(self, parent,  style, rowIncrement): 
         rowIncrement["Count"] += 1
@@ -97,6 +96,15 @@ class Option(Interactable):
     
     def GetState(self):
         return self.checkBoxVal.get()
+    
+    def Save(self):
+        return {f"{self.name}": f"{self.GetState()}"}
+    
+    def Load(self, loadFile):
+        self.checkBoxVal.set(loadFile[self.name])
+        
+    def GetVar(self):
+        return self.checkBoxVal
 
 class SubOption(Option):
     def __init__(self, name, parent:Option, commands = [], defState = True, prio = 0, preRandoCommands:list = [], filePlaceCommands = []):
@@ -143,6 +151,7 @@ class Spinbox(Interactable):
         self.spinBoxVal = None
         self.parent = parent
         parent.interactables.append(self)
+        XenoOptionDict[Game].append(self) 
 
     def Create(self, parent, style, rowIncrement):
         self.spinBoxVal = IntVar(value=self.default)
@@ -194,6 +203,15 @@ class Spinbox(Interactable):
         self.spinBoxObj.bind("<MouseWheel>", stop)
         self.spinBoxObj.bind("<Button-4>", stop)
         self.spinBoxObj.bind("<Button-5>", stop)
+    
+    def Save(self):
+        return {f"{self.parent.name} Spinbox":f"{self.GetState()}"}
+    
+    def Load(self, loadFile):
+        self.spinBoxVal.set(loadFile[f"{self.parent.name} Spinbox"])
+        
+    def GetVar(self):
+        return self.spinBoxVal
 
 class SubSpinbox(Spinbox):
     def GridDisplay(self, rowIncrement, style):
@@ -217,9 +235,14 @@ class SubSpinbox(Spinbox):
         else:
             self.spinBoxObj.state(["disabled"])
             self.spinBoxLabel.state(["disabled"])
+
+class DropdownOption():
+    '''So that dropdowns can display one thing but do another behind the scenes: e.g. Users select Jin from a dropdown but the real value we use in code is his id'''
+
+    
     
 class Dropdown(Interactable):
-    def __init__(self, parent:Option, default = 0, values = [], width = 10, height = 10):
+    def __init__(self, parent:Option, default = 0, values:list[DropdownOption] = [], width = 40, height = 10):
         self.dropdownVal = IntVar(value=default)
         self.default = default
         self.values = values
@@ -227,7 +250,8 @@ class Dropdown(Interactable):
         self.height = height
         self.parent = parent
         parent.interactables.append(self)
-        
+        XenoOptionDict[Game].append(self) 
+           
     def Create(self, parent, style, rowIncrement):
         self.dropDownObj = ttk.Combobox(parent, width=self.width)
         self.dropDownObj.set(self.default)
@@ -242,17 +266,21 @@ class Dropdown(Interactable):
             self.dropDownObj.state(["!disabled"])
         else:
             self.dropDownObj.state(["disabled"])
+            
+    def Save(self):
+        pass
+    
+    def Load(self):
+        pass
+    
+    def GetVar(self):
+        return self.dropdownVal
 
 class SubDropdown(Dropdown):
-    def __init__(self, parent:SubOption, default = 0, values = [], width = 10, height = 10):
-        super().__init__(parent, default, values, width, height)
-        
     def Create(self, parent, style, rowIncrement):
-        self.dropDownObj = ttk.Combobox(parent, width=self.width)
-        self.dropDownObj.set(self.default)
-        self.dropDownObj['values'] = self.values
-        self.dropDownObj.grid(row=rowIncrement["Count"], column = 3, padx=(15,0))
-    
+        super().Create(parent, style, rowIncrement)
+        self.dropDownObj.grid(row=rowIncrement["Count"], column=1, padx=(20,0), pady=(0,0), sticky="w")
+ 
     def VisualStateUpdate(self):
         # Hide when main option is on/off
         if self.parent.parent.GetState():
@@ -327,36 +355,3 @@ def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
         ChosenResolution = False
 
     return ChosenResolution
-
-
-
-    # def VisualStateUpdate(self): # This is obviously terrible, I need to fix this entire script 
-    #     if self.GetState():
-    #         for sub in self.subOptions:
-    #             sub.checkBox.state(["!disabled"])
-    #             sub.checkBox.grid()
-    #             if sub.spinBoxObj != None:
-    #                 if sub.GetState():
-    #                     sub.spinBoxObj.state(["!disabled"])
-    #                     sub.spinBoxLabel.state(["!disabled"])
-                        
-    #                 else:
-    #                     sub.spinBoxObj.state(["disabled"])
-    #                     sub.spinBoxLabel.state(["disabled"])
-    #                 sub.spinBoxObj.grid()
-    #                 sub.spinBoxLabel.grid()
-    #         self.descObj.state(["!disabled"])
-    #         self.spinBoxObj.state(["!disabled"])
-    #         if self.spinBoxLabel != None:
-    #             self.spinBoxLabel.state(["!disabled"])
-    #     else:
-    #         for sub in self.subOptions:
-    #             sub.checkBox.state(["disabled"])
-    #             sub.checkBox.grid_remove()
-    #             if sub.spinBoxObj != None:
-    #                 sub.spinBoxObj.grid_remove()
-    #                 sub.spinBoxLabel.grid_remove()
-    #         self.descObj.state(["disabled"])
-    #         self.spinBoxObj.state(["disabled"])
-    #         if self.spinBoxLabel != None:
-    #             self.spinBoxLabel.state(["disabled"])

@@ -194,6 +194,25 @@ try:
 
             },
         },
+        "TCombobox": {
+            "configure": {
+                "background": currentTheme["midColor"],
+                "foreground": currentTheme["lightColor"],
+                "fieldbackground": currentTheme["midColor"],
+                "darkcolor": currentTheme["darkColor"],
+                "lightcolor": currentTheme["darkColor"],
+                "insertcolor": currentTheme["lightColor"],
+                "padding": (4,0),
+                "focuscolor":"",
+                "selectbackground": currentTheme["lightColor"],
+                "selectforeground": currentTheme["midColor"],
+                "arrowcolor": currentTheme["lightColor"],
+            },
+            "map": {
+                "foreground": [("disabled", currentTheme["midGray"])],
+                "arrowcolor": [("disabled", currentTheme["midGray"])],
+            }
+        },
         "TProgressbar": {
 "configure": {
     "background": currentTheme["lightColor"],
@@ -249,5 +268,11 @@ def ThemeUpdate(): # Probably could be done better by making a custom version of
     for root in RootsForStyling:
         try:
             root.config(background=currentTheme["backgroundColor"])
+            
+            # Have to run these here because option_add only applies things created after it
+            root.option_add("*TCombobox*Listbox.background", currentTheme["midColor"])
+            root.option_add("*TCombobox*Listbox.foreground", currentTheme["lightColor"])
+            root.option_add("*TCombobox*Listbox.selectBackground", currentTheme["lightColor"])
+            root.option_add("*TCombobox*Listbox.selectForeground", currentTheme["midColor"])
         except:
             pass

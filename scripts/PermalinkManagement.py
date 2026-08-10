@@ -3,6 +3,7 @@ from scripts import PackedBits
 import base64
 import struct
 import scripts.SaveLoad
+from tkinter import Variable
 # credit to github.com/LagoLunatic/wwrando
 
 intBits = 14
@@ -14,7 +15,7 @@ def SanitizeUserSeed(SeedName):
     SeedName = SeedName[:40]
     return SeedName
 
-def GenerateCompressedPermalink(SeedName, OptionsList, Version):
+def GenerateCompressedPermalink(SeedName, OptionsList:list[Variable], Version):
     SeedName = SanitizeUserSeed(SeedName)
     fixedVersion = Version
     for char in ".":
@@ -26,7 +27,7 @@ def GenerateCompressedPermalink(SeedName, OptionsList, Version):
     Permalink += b"\0"
 
     bitswriter = PackedBits.PackedBitsWriter()
-    for i in range(2, len(OptionsList)):
+    for i in range(0, len(OptionsList)):
         try:
             optionvalue = OptionsList[i].get()
             if isinstance(optionvalue, bool):
@@ -43,7 +44,7 @@ def GenerateCompressedPermalink(SeedName, OptionsList, Version):
     base64_encoded_permalink = base64.b64encode(Permalink).decode("ascii")
     return base64_encoded_permalink
 
-def GenerateSettingsFromPermalink(base64_encoded_permalink, OptionsList):
+def GenerateSettingsFromPermalink(base64_encoded_permalink, OptionsList:list[Variable]):
     base64_encoded_permalink = base64_encoded_permalink.strip()
     if not base64_encoded_permalink:
         raise Exception(f"Permalink is blank.")
@@ -54,7 +55,7 @@ def GenerateSettingsFromPermalink(base64_encoded_permalink, OptionsList):
     seed = seed.decode("ascii")
     option_bytes = struct.unpack(">" + "B"*len(options_bytes), options_bytes)
     bitsreader = PackedBits.PackedBitsReader(option_bytes)
-    for i in range(2, len(OptionsList)):
+    for i in range(0, len(OptionsList)):
         optionvalue = OptionsList[i].get()
         if isinstance(optionvalue, bool):
             boolean_value = bool(bitsreader.read(1))
@@ -67,7 +68,7 @@ def GenerateSettingsFromPermalink(base64_encoded_permalink, OptionsList):
     return(seed, OptionsList)
 
 
-def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version):
+def AddPermalinkTrace(traceObjects:list[Variable], permaLinkVar:Variable, seedEntryVar:Variable, version):
     def PermalinkFromEntry():
         try:
             seedName, options = GenerateSettingsFromPermalink(permaLinkVar.get(), traceObjects)
@@ -76,10 +77,13 @@ def AddPermalinkTrace(traceObjects, permaLinkVar, seedEntryVar, version):
             print("Invalid Permalink")
     
     def PermalinkEntryUpdate():
-        if not scripts.SaveLoad.stopPermalinkUpdate:
-            permaLinkVar.set(GenerateCompressedPermalink(seedEntryVar.get(), traceObjects, version))
+        if scripts.SaveLoad.stopPermalinkUpdate: return
+        permaLinkVar.set(GenerateCompressedPermalink(seedEntryVar.get(), traceObjects, version))
         
+    for interactable in traceObjects:
+        interactable.trace_add("write", lambda i,x,o: PermalinkEntryUpdate())
+    
     permaLinkVar.trace_add("write", lambda i,x,o: PermalinkFromEntry())
-    for interactAble in traceObjects[2:]:
-        interactAble.trace_add("write", lambda i,x,o: PermalinkEntryUpdate())
+    # for interactAble in traceObjects[2:]:
+    #     interactAble.trace_add("write", lambda i,x,o: PermalinkEntryUpdate())
         
