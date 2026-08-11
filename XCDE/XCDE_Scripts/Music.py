@@ -1,26 +1,8 @@
 import json, random
 from scripts import Interactables
 
-Env = 1 # Environment Themes
-Cut = 2 # Cutscene Themes
-Battle = 3 # Battle Themes
-Boss = 4 # Boss Theme
-Jingle = 5 # Jingles
-
 Good = "Good"
 Bad = "Bad"
-
-AllEnvironmentThemes = []
-AllCutsceneThemes = []
-AllBattleThemes = []
-AllBossThemes = []
-AllJingles = []
-
-UsedEnvironmentThemes = []
-UsedCutsceneThemes = []
-UsedBattleThemes = []
-UsedBossThemes = []
-UsedJingles = []
 
 class Music:
     def __init__(self,_song, _fileName, _type = [], _isGood = Good):
@@ -47,6 +29,26 @@ class Music:
         else:
             defState = False
         Interactables.SubOption(self.songName, parent, [lambda: list.append(self)],defState=defState)
+
+
+Env = 1 # Environment Themes
+Cut = 2 # Cutscene Themes
+Battle = 3 # Battle Themes
+Boss = 4 # Boss Theme
+Jingle = 5 # Jingles
+
+
+AllEnvironmentThemes:list[Music] = []
+AllCutsceneThemes:list[Music] = []
+AllBattleThemes:list[Music] = []
+AllBossThemes:list[Music] = []
+AllJingles:list[Music] = []
+
+UsedEnvironmentThemes:list[Music] = []
+UsedCutsceneThemes:list[Music] = []
+UsedBattleThemes:list[Music] = []
+UsedBossThemes:list[Music] = []
+UsedJingles:list[Music] = []
 
 
 def MusicRando(Songs:list[Music], TempList:list[Music]):

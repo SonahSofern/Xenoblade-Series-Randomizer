@@ -1,6 +1,6 @@
 import json, random, copy, math
 from XCDE.XCDE_Scripts import IDs
-from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e
+from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e, Interactables
 
 StaticEnemyData:list[Helper.RandomGroup] = []
 instantDeathSpikeThreshold = 60
@@ -129,7 +129,7 @@ Small = 2
 Normal = 3
 Large = 4
 Massive = 5
-    
+
 def SizeAdjustment():
     largeAdjust = [1504]
     
@@ -197,6 +197,24 @@ def XCDEGenEnemyDataAdapter(eneData, enAreaFileNames, eRando:e.EnemyRandomizer):
 def getEnID(e:Enemy):
     '''Helper for genenemydata'''
     return e.eneListArea["$id"]
+
+def GetOopsAllDropdowns():
+    '''Creates dropdown options for the oops all pool'''
+    eneFile = JSONParser.File("XCDE/VanillaJson/bdat_common/BTL_enelist.json")
+    eneNameFile = JSONParser.File("XCDE/VanillaJson/bdat_common_ms/BTL_enelist_ms.json")
+    
+    DropdownOptions = []
+    for en in eneFile.rows:
+        if en["$id"] not in IDs.NormalEnemies + IDs.BossEnemies + IDs.UniqueEnemies + IDs.SuperbossEnemies: continue
+        for enName in eneNameFile.rows:
+            if enName["$id"] == en["name"]:
+                name = enName["name"]
+        DropdownOptions.append(Interactables.DropdownOption(f"{name} ({en["$id"]})", en["$id"]))
+    
+    eneFile.Close()
+    eneNameFile.Close()
+    
+    return DropdownOptions
 
 # There is no fix for topple spikes always being active just nerfed all spikes instead
 def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value

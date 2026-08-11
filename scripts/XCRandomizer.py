@@ -206,7 +206,7 @@ def CreateMainWindow(root, window, gameData:GameWindowData):
     SaveLoad.LoadData(EntriesToSave + Interactables.XenoOptionDict[gameData.game], SavedOptionsFileName, f"{gameData.game}/SaveData")
 
     # Permalink Options/Variables
-    PermalinkSavedObjects = [seedVar.GetPermalinkVar()] + [x.GetVar() for x in Interactables.XenoOptionDict[gameData.game]]
+    PermalinkSavedObjects = [seedVar.GetPermalinkVar()] + [x.GetPermalinkVar() for x in Interactables.XenoOptionDict[gameData.game]]
     permalinkFrame = ttk.Frame(background, style="NoBackground.TFrame")
     permalinkEntry = ttk.Entry(permalinkFrame, textvariable=gameData.permalinkVar)
     CompressedPermalink = PermalinkManagement.GenerateCompressedPermalink(randoSeedEntry.get(), PermalinkSavedObjects, gameData.version)
@@ -218,7 +218,7 @@ def CreateMainWindow(root, window, gameData:GameWindowData):
     PermalinkManagement.AddPermalinkTrace(PermalinkSavedObjects, gameData.permalinkVar, gameData.seedVar, gameData.version)
 
     # Randomize Button
-    RandomizeButton = ttk.Button(background, style="Randomize.TButton",text='Randomize', padding=5,command=(lambda: (saveCommand(), Randomize(gameData, XCFrame, RandomizeButton, fileEntryVar, bdat_path, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[gameData.game]))))
+    RandomizeButton = ttk.Button(background, style="Randomize.TButton", text='Randomize', padding=5,command=(lambda: (saveCommand(), Randomize(gameData, XCFrame, RandomizeButton, fileEntryVar, bdat_path, randoSeedEntry, JsonOutput, outputDirVar, Interactables.XenoOptionDict[gameData.game]))))
     RandomizeButton.pack(pady=(5,windowPadding), padx=(windowPadding, 0), anchor="w", side="left")
     saveCommands.append(saveCommand)
 
@@ -350,24 +350,24 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
             RandomizeButton.config(state=NORMAL)
             return
 
-        # Runs all randomization
-        for option in gameData.preCommands: 
-            option()
-            
+        # Pre Commands
+        for preCommand in gameData.preCommands: 
+            preCommand()
+        
+        # Main Commands
         runLog = RunOptions(gameData.title, OptionList, randoProgressDisplay, root, randoSeedEntry.get(), pb)
         
-        for option in gameData.postCommands: # Runs post commands like show title screen
-            option()
+        # Post Commands (like show title screen)
+        for postCommand in gameData.postCommands:
+            postCommand()
         
-        extraFilePlaced = [] # Conditionally some files (skyline plugins are placed)
+        # Conditionally some files (skyline plugins are placed)
+        extraFilePlaced = [] 
         for option in OptionList: # Commands that add files to the output (I want to rework this entire logic but would be time consuming)
-            if (len(option.filePlaceCommands) > 0) and option.GetState():
+            isOption = isinstance(option, Interactables.Option) # Using isinstance so that subclasses (suboption)
+            if (isOption and len(option.filePlaceCommands) > 0) and option.GetState():
                 for command in option.filePlaceCommands:
                     extraFilePlaced.append(command())
-                for sub in option.subOptions:
-                    if sub.GetState():
-                        for subCommand in sub.filePlaceCommands:
-                            extraFilePlaced.append(subCommand())
             
         randoProgressDisplay.config(text="Packing BDATs")
     
@@ -412,34 +412,51 @@ def SumTotalCommands(OptionList:list[Interactables.Option]):
             TotalCommands += 1
     return TotalCommands
 
-def RunOptions(GameTitle, OptionList:list[Interactables.Option], randoProgressDisplay, root, seed, pb):
-    
-    OptionList.sort(key=lambda x: x.prio) # Sort main options by priority
-    
+def RunOptions(GameTitle, InteractablesList:list[Interactables.Interactable], randoProgressDisplay, root, seed, progressBar):
     errorMsgObj = PopupDescriptions.Description()
     errorMsgObj.Header(f"{GameTitle} Randomization Finished")
     errorMsgObj.Tag(f"Seed: {seed}", pady=5, anchor="center") # Seed
     
     def ErrorLog():
         return errorMsgObj
+    
+    # Add option to the options dict
+    OptionsList:list[Interactables.Option] = []
+    for int in InteractablesList:
+        if type(int) is Interactables.Option: 
+            OptionsList.append(int)
+            
+    # Sort main options by priority
+    OptionsList.sort(key=lambda x: x.prio) 
 
-    for opt in OptionList: # runs pre-randomization commands before the actual options
-        if not opt.GetState():
-            continue
+    # runs pre-randomization commands before the actual options
+    for opt in OptionsList: 
+        if not opt.GetState(): continue
         for command in opt.preRandoCommands:
             try:
                 command()
             except Exception as error:
                 print(f"ERROR: {opt.name} | {error}")
                 print(f"{traceback.format_exc()}") # shows the full error
-    TotalCommands = SumTotalCommands(OptionList)       
+                
+    TotalCommands = SumTotalCommands(OptionsList)       
 
-    for opt in OptionList:
-        if not opt.GetState(): # Checks state
-            continue
-        opt.subOptions.sort(key= lambda x: x.prio) # Sort suboptions by priority
-            
-        for sub in opt.subOptions:
+    # Runs main options
+    for opt in OptionsList:
+        if not opt.GetState(): continue
+        
+        # Create suboptions list
+        subOptionsList:list[Interactables.SubOption] = []
+        for int in opt.interactables:
+            if type(int) is Interactables.SubOption: 
+                subOptionsList.append(int)
+        
+        
+         # Sort suboptions by priority
+        subOptionsList.sort(key= lambda x: x.prio)
+        
+        # Suboptions run before main options
+        for sub in subOptionsList:
             if not sub.checkBoxVal.get(): # Checks state
                 continue
             try:
@@ -451,13 +468,12 @@ def RunOptions(GameTitle, OptionList:list[Interactables.Option], randoProgressDi
                 
         randoProgressDisplay.config(text=opt.name)
         
-        nextStep =  pb['value'] + (100/TotalCommands) # Cache it here so it doesnt matter how far the bar goes 
-        threading.Thread(target=lambda: SlowBurn(pb, nextStep, opt.stepSpeed)).start()
+        nextStep =  progressBar['value'] + (100/TotalCommands) # Cache it here so it doesnt matter how far the bar goes 
+        threading.Thread(target=lambda: SlowBurn(progressBar, nextStep, opt.stepSpeed)).start()
 
         for command in opt.commands:
             try:
-                errorMsg = command()
-                    
+                errorMsg = command()    
             except Exception as error:
                 print(f"ERROR: {opt.name} | {error}")
                 print(traceback.format_exc()) # shows the full error
@@ -465,7 +481,7 @@ def RunOptions(GameTitle, OptionList:list[Interactables.Option], randoProgressDi
                     errorMsg = error
                 errorMsgObj.Header(f"Error: {opt.name}")
                 errorMsgObj.Text(errorMsg)
-        pb['value'] = nextStep
+        progressBar['value'] = nextStep
 
     return lambda: PopupDescriptions.StyledPopup(f"{GameTitle} {datetime.datetime.now()}", lambda: ErrorLog(), root)
 

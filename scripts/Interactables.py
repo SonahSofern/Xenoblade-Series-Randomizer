@@ -33,7 +33,7 @@ class Option(Interactable):
         self.descObj = None
         self.checkBox = None
         self.checkBoxVal = None
-        self.subOptions:list[SubOption] = []
+        # self.subOptions:list[SubOption] = []
         self.descData = descData
         self.isDevOption = isDevOption
         self.clickCommands = []
@@ -47,6 +47,7 @@ class Option(Interactable):
         self.preRandoCommands:list = preRandoCommands
         self.filePlaceCommands:list = filePlaceCommands
         self.prio = prio
+        self.identifier = self.name
         self.stepSpeed = stepSpeed # Controls how fast the progressbar moves while this setting runs. 
         
         XenoOptionDict[Game].append(self) 
@@ -98,10 +99,10 @@ class Option(Interactable):
         return self.checkBoxVal.get()
     
     def Save(self):
-        return {f"{self.name}": f"{self.GetState()}"}
+        return {self.identifier: self.GetState()}
     
     def Load(self, loadFile):
-        self.checkBoxVal.set(loadFile[self.name])
+        self.checkBoxVal.set(loadFile[self.identifier])
         
     def GetPermalinkVar(self):
         return self.checkBoxVal
@@ -111,6 +112,7 @@ class SubOption(Option):
         super().__init__(name, None, "", commands, prio, None, preRandoCommands, filePlaceCommands=filePlaceCommands)
         self.defState = defState
         self.parent = parent
+        self.identifier = f"{parent.name} {self.name} Suboption"
         parent.interactables.append(self)
     
     def Create(self, parent, style, rowIncrement):
@@ -150,6 +152,7 @@ class Spinbox(Interactable):
         self.spinBoxLabel:ttk.Label = None
         self.spinBoxVal = None
         self.parent = parent
+        self.identifier = f"{self.parent.name} Spinbox"
         parent.interactables.append(self)
         XenoOptionDict[Game].append(self) 
 
@@ -205,15 +208,19 @@ class Spinbox(Interactable):
         self.spinBoxObj.bind("<Button-5>", stop)
     
     def Save(self):
-        return {f"{self.parent.name} Spinbox":f"{self.GetState()}"}
+        return {self.identifier:f"{self.GetState()}"}
     
     def Load(self, loadFile):
-        self.spinBoxVal.set(loadFile[f"{self.parent.name} Spinbox"])
+        self.spinBoxVal.set(loadFile[self.identifier])
         
     def GetPermalinkVar(self):
         return self.spinBoxVal
 
 class SubSpinbox(Spinbox):
+    def __init__(self, parent:Option, min = 0, max = 100, increment = 10, default = 100, width = 3, description = ""):
+        super().__init__(parent, min, max, increment, default, width, description)
+        self.identifier = f"{self.parent.parent.name} {self.parent.name} Spinbox"
+    
     def GridDisplay(self, rowIncrement, style):
         self.spinBoxLabel.config(style=f"{style}NoMargin.TLabel")
         self.spinBoxObj.grid(row=rowIncrement["Count"], column=1, padx=(20,0), pady=(0,0), sticky="w")
@@ -248,15 +255,19 @@ class Dropdown(Interactable):
         # Updated when a new option is selected
         self.curDisplayVal = StringVar(value="") # Text value of the currently selected option
         self.curRealVal = IntVar(value=0) # Index of the currently selected option
-        self.curDropdownOption:DropdownOption = values[0] # Defaulted to the first option
         self.curDisplayVal.trace_add("write", self.SetValueByDisplayVal)
         
         self.values:list[DropdownOption] = values
         self.width = width
         self.height = height
         self.parent = parent
+        self.curDisplayVal.set(values[0].displayVal) # set default
         parent.interactables.append(self)
         XenoOptionDict[Game].append(self) 
+        self.identifier = f"{self.parent.name} Dropdown"
+        
+        
+        self.values.sort(key= lambda x: x.displayVal)
            
     def Create(self, parent, style, rowIncrement):
         self.dropDownObj = ttk.Combobox(parent, width=self.width, textvariable=self.curDisplayVal, state="readonly")
@@ -268,7 +279,7 @@ class Dropdown(Interactable):
         # print(f"Cur Display Val: {self.curDisplayVal.get()}")
         for val in self.values:
             if val.displayVal == self.curDisplayVal.get():
-                self.curRealVal.set(val.realVal)
+                # self.curRealVal.set(val.realVal)
                 self.curDropdownOption = val
                 break
       
@@ -289,11 +300,11 @@ class Dropdown(Interactable):
         for i in range(0,len(self.values)):
             if self.values[i] == self.curDropdownOption:
                 index = i
-        return {f"{self.parent.name} Dropdown": index}
+        return {self.identifier: index}
 
     def Load(self, loadFile):
         '''Loads the dropdown by the saved index'''
-        index = loadFile.get(f"{self.parent.name} Dropdown")
+        index = loadFile.get(self.identifier)
         if index is not None:
             dropdownOption:DropdownOption = self.values[index]
             self.curDropdownOption = dropdownOption
@@ -307,6 +318,7 @@ class SubDropdown(Dropdown):
     def Create(self, parent, style, rowIncrement):
         super().Create(parent, style, rowIncrement)
         self.dropDownObj.grid(row=rowIncrement["Count"], column=1, padx=(20,0), pady=(0,0), sticky="w")
+        self.identifier = f"{self.parent.parent.name} {self.parent.name} Dropdown"
  
     def VisualStateUpdate(self):
         # Hide when main option is on/off
