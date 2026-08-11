@@ -397,7 +397,7 @@ def Randomize(gameData:GameWindowData, root, RandomizeButton, fileEntryVar, bdat
             print(f"Finished at {datetime.datetime.now()}")
         except:
             print(f"{traceback.format_exc()}") # shows the full error
-            randoProgressDisplay.config(text="Failed Outputs")
+            randoProgressDisplay.config(text=f"Failed Outputs {traceback.format_exc()}")
 
         # Re-Enables Randomize Button
         RandomizeButton.config(state=NORMAL)

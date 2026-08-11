@@ -285,6 +285,13 @@ class EnemyRandomizer():
         newEn = random.choices(StaticEnemyData, self.weights)[0].SelectRandomMember()
         return newEn
     
+    def CreateForcedEnemy(self, StaticEnemyData:list[Helper.RandomGroup], forcedEnemyID, condition = lambda en: en["$id"]):
+        '''Returns a random enemy using weights from the groups generated'''
+        for group in StaticEnemyData:
+            for en in group.originalGroup:
+                if condition(en) == forcedEnemyID:
+                    return en
+    
     def HandleIDandDict(self, target, data):
         '''Allows passing just the ID or the entire enemy'''
         if isinstance(target, dict):

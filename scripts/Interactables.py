@@ -33,7 +33,6 @@ class Option(Interactable):
         self.descObj = None
         self.checkBox = None
         self.checkBoxVal = None
-        # self.subOptions:list[SubOption] = []
         self.descData = descData
         self.isDevOption = isDevOption
         self.clickCommands = []
@@ -52,7 +51,8 @@ class Option(Interactable):
         
         XenoOptionDict[Game].append(self) 
         
-    def Create(self, parent,  style, rowIncrement): 
+    def Create(self, parent, style, rowIncrement): 
+        self.style = style # So I can access during runtime for special description styles
         rowIncrement["Count"] += 1
         # Variables
         self.checkBoxVal = BooleanVar()
@@ -83,7 +83,12 @@ class Option(Interactable):
     def VisualStateUpdate(self):
         if self.GetState(): state = "!disabled"
         else: state = "disabled"
-        self.descObj.state([state])
+        
+        if self.descData != None:
+            self.descObj.config(style=f"{self.style}{state}.TButton") # Allows descriptions to be always clickable even if the setting is off
+        else:
+            self.descObj.state([state])
+            
         self.spinBoxObj.state([state])
 
         for int in self.interactables: # Update all the composites
@@ -247,11 +252,10 @@ class DropdownOption():
     '''So that dropdowns can display one thing but do another behind the scenes: e.g. Users select Jin from a dropdown but the real value we use in code is his id'''
     def __init__(self, displayVal, realVal):
         self.displayVal = displayVal
-        # self.realVal = realVal
+        self.realVal = realVal
     
 class Dropdown(Interactable):
     def __init__(self, parent:Option, values:list[DropdownOption] = [], width = 40, height = 10):
-        
         # Updated when a new option is selected
         self.curDisplayVal = StringVar(value="") # Text value of the currently selected option
         self.curRealVal = IntVar(value=0) # Index of the currently selected option
@@ -266,7 +270,6 @@ class Dropdown(Interactable):
         XenoOptionDict[Game].append(self) 
         self.identifier = f"{self.parent.name} Dropdown"
         
-        
         self.values.sort(key= lambda x: x.displayVal)
            
     def Create(self, parent, style, rowIncrement):
@@ -279,14 +282,14 @@ class Dropdown(Interactable):
         # print(f"Cur Display Val: {self.curDisplayVal.get()}")
         for val in self.values:
             if val.displayVal == self.curDisplayVal.get():
-                # self.curRealVal.set(val.realVal)
+                self.curRealVal.set(val.realVal)
                 self.curDropdownOption = val
                 break
       
     def GetState(self):
         '''Returns the real value for the currently displayed option'''
-        # return self.curDropdownOption.realVal
-        return self.curDropdownOption.displayVal
+        return self.curDropdownOption.realVal
+        # return self.curDropdownOption.displayVal
     
     def VisualStateUpdate(self):
         if self.parent.GetState():
@@ -309,7 +312,7 @@ class Dropdown(Interactable):
             dropdownOption:DropdownOption = self.values[index]
             self.curDropdownOption = dropdownOption
             self.curDisplayVal.set(dropdownOption.displayVal)
-            # self.curRealVal.set(dropdownOption.realVal)
+            self.curRealVal.set(dropdownOption.realVal)
 
     def GetPermalinkVar(self):
         return self.curRealVal

@@ -91,7 +91,7 @@ QuestRewardsOptions_ArtBooks_Spinbox = SubSpinbox(QuestRewardsOptions_ArtBooks, 
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/FLD_valpoplist.html#1 Red orbs found here not sure what to do with them yet
 
 # Enemy
-NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: EnemiesScript.Enemies(IDs.NormalEnemies, NormalEnemyOption, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption_Size.GetState())], descData=lambda: EnemiesScript.EnemyDesc(NormalEnemyOption.name))
+NormalEnemyOption = Option("Normal Monsters", Enemies, "Randomizes normal monsters into the chosen types", [lambda: EnemiesScript.Enemies(IDs.NormalEnemies, NormalEnemyOption, NormalEnemyOption_Normal, NormalEnemyOption_Unique, NormalEnemyOption_Boss, NormalEnemyOption_Superboss, NormalEnemyOption_Size.GetState(), NormalEnemyOption_OopsAll, NormalEnemyOption_OopsAll_Dropdown)], descData=lambda: EnemiesScript.EnemyDesc(NormalEnemyOption.name))
 NormalEnemyOption_Spinbox = Spinbox(NormalEnemyOption)
 NormalEnemyOption_Normal = SubOption("Normal", NormalEnemyOption)
 NormalEnemyOption_Normal_Spinbox = SubSpinbox(NormalEnemyOption_Normal, default=15, description=weightsSpinDescription)
@@ -104,8 +104,10 @@ NormalEnemyOption_Superboss_Spinbox = SubSpinbox(NormalEnemyOption_Superboss, de
 NormalEnemyOption_Size = SubOption("Match Size", NormalEnemyOption)
 NormalEnemyOption_OopsAll = SubOption("Oops All", NormalEnemyOption, defState=False)
 NormalEnemyOption_OopsAll_Dropdown = SubDropdown(NormalEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns())
+NormalEnemyOption_Mult = SubOption("Multiply Enemy Count", NormalEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(NormalEnemyOption_Mult_Spinbox.GetState(), IDs.NormalEnemies)])
+NormalEnemyOption_Mult_Spinbox = SubSpinbox(NormalEnemyOption_Mult, min=2, max=4, increment=1, default=2, description="x Enemies")
 
-UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: EnemiesScript.Enemies(IDs.UniqueEnemies + IDs.SuperbossEnemies, UniqueEnemyOption, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption_Size.GetState())], descData=lambda: EnemiesScript.EnemyDesc(UniqueEnemyOption.name))
+UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: EnemiesScript.Enemies(IDs.UniqueEnemies + IDs.SuperbossEnemies, UniqueEnemyOption, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption_Size.GetState(), UniqueEnemyOption_OopsAll, UniqueEnemyOption_OopsAll_Dropdown)], descData=lambda: EnemiesScript.EnemyDesc(UniqueEnemyOption.name))
 UniqueEnemyOption_Spinbox = Spinbox(UniqueEnemyOption)
 UniqueEnemyOption_Normal = SubOption("Normal", UniqueEnemyOption)
 UniqueEnemyOption_Normal_Spinbox = SubSpinbox(UniqueEnemyOption_Normal, default=1, description=weightsSpinDescription)
@@ -118,8 +120,10 @@ UniqueEnemyOption_Superboss_Spinbox = SubSpinbox(UniqueEnemyOption_Superboss, de
 UniqueEnemyOption_Size = SubOption("Match Size", UniqueEnemyOption)
 UniqueEnemyOption_OopsAll = SubOption("Oops All", UniqueEnemyOption, defState=False)
 UniqueEnemyOption_OopsAll_Dropdown = SubDropdown(UniqueEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns())
+UniqueEnemyOption_Mult = SubOption("Multiply Enemy Count", UniqueEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(UniqueEnemyOption_Mult_Spinbox.GetState(), IDs.UniqueEnemies)])
+UniqueEnemyOption_Mult_Spinbox = SubSpinbox(UniqueEnemyOption_Mult, min=2, max=4, increment=1, default=2, description="x Enemies")
 
-BossEnemyOption = Option("Boss Monsters", Enemies, "Randomizes bosses into the chosen types", [lambda: EnemiesScript.Enemies(IDs.BossEnemies, BossEnemyOption, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, True, BossEnemyOption_FinalBoss.GetState()), lambda: EnemiesScript.EgilArenaFix()], descData=lambda: EnemiesScript.EnemyDesc(BossEnemyOption.name))
+BossEnemyOption = Option("Boss Monsters", Enemies, "Randomizes bosses into the chosen types", [lambda: EnemiesScript.Enemies(IDs.BossEnemies, BossEnemyOption, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, True, BossEnemyOption_OopsAll, BossEnemyOption_OopsAll_Dropdown, BossEnemyOption_FinalBoss.GetState()), lambda: EnemiesScript.EgilArenaFix()], descData=lambda: EnemiesScript.EnemyDesc(BossEnemyOption.name))
 BossEnemyOption_Spinbox = Spinbox(BossEnemyOption)
 BossEnemyOption_Normal = SubOption("Normal", BossEnemyOption)
 BossEnemyOption_Normal_Spinbox = SubSpinbox(BossEnemyOption_Normal, default=2, description=weightsSpinDescription)
@@ -132,7 +136,8 @@ BossEnemyOption_Superboss_Spinbox = SubSpinbox(BossEnemyOption_Superboss, defaul
 BossEnemyOption_FinalBoss = SubOption("Vanilla Final Boss", BossEnemyOption, defState=False)
 BossEnemyOption_OopsAll = SubOption("Oops All", BossEnemyOption, defState=False)
 BossEnemyOption_OopsAll_Dropdown = SubDropdown(BossEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns())
-
+BossEnemyOption_Mult = SubOption("Multiply Enemy Count", BossEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(BossEnemyOption_Mult_Spinbox.GetState(), IDs.LockEnemyFights + IDs.NonLockRequiredFights)])
+BossEnemyOption_Mult_Spinbox = SubSpinbox(BossEnemyOption_Mult, min=2, max=4, increment=1, default=2, description="x Enemies")
 
 # FinalBossOption = Option("Final Boss", Enemies, "Forces the final boss to be one of your choices")
 
@@ -207,10 +212,10 @@ AreaAffinityOption = Option("Easy Affinity", QOL, "Area affinity is maxed out af
 # Funny
 # EnemyScaleOption = Option("Enemy Scale", Funny, "Randomizes a % of enemy sizes.", [lambda: Scales.EnemyScales()], hasSpinBox=True)
 NPCScaleOption = Option("NPC Scale", Funny, "Randomizes a % of npc sizes.", [lambda: Scales.NPCScales()])
-NPCScaleOption_Spinbox = Spinbox(NPCScaleOption)
+NPCScaleOption_Spinbox = Spinbox(NPCScaleOption, default=20)
 RemoveStartingArmorOption = Option("Remove Starting Equipment", Funny, "Removes starting armor on all the main characters.", [lambda: Armor.RemoveStartingGear()])
 NPCModelsOption = Option("NPC Models", Funny, "Randomizes NPC models *Experimental, can cause crashes", [lambda: NPC.NPCModelRando()])
-NPCModelsOption_Spinbox = Spinbox(NPCModelsOption)
+NPCModelsOption_Spinbox = Spinbox(NPCModelsOption, default=30)
 
 # Character models rando https://xenobladedata.github.io/xb1de/bdat/bdat_common/MNU_Stream_full_dr.html
 

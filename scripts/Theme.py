@@ -241,7 +241,8 @@ for customStyle in [("Light", DarkerBlack), ("Dark", LightBlack)]:
     style.configure(f"{customStyle[0]}.TCheckbutton", background=customStyle[1], padding=(20, 10))
     style.configure(f"{customStyle[0]}Sub.TCheckbutton", background=customStyle[1])
     style.configure(f"{customStyle[0]}NoMargin.TLabel", margin=(0,0), padding=(20,0), background=customStyle[1])
-
+    style.configure(f"{customStyle[0]}disabled.TButton", relief = FLAT, background=customStyle[1], foreground=currentTheme["midGray"])
+    style.configure(f"{customStyle[0]}!disabled.TButton", relief = FLAT, background=customStyle[1])
 
 style.configure("Title.TLabel",foreground="white",background=currentTheme["midColor"],padding=5)
 style.configure("Randomize.TButton")

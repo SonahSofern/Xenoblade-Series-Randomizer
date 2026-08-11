@@ -1,5 +1,5 @@
 import json, random, copy, math
-from XCDE.XCDE_Scripts import IDs
+from XCDE.XCDE_Scripts import IDs, Options
 from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e, Interactables
 
 StaticEnemyData:list[Helper.RandomGroup] = []
@@ -16,7 +16,7 @@ class ForcedArt:
         self.artSlot = artSlot
         self.artId = artId
         
-def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size, finalBoss = False):
+def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size, oopsAll:Interactables.SubOption, oopsAllDropdown:Interactables.SubDropdown, finalBoss = False):
     global StaticEnemyData
     GroupEnemies = [135,136,137,138,139]
     EarlyFights = [32, 33, 1501, 1502, 1503] # The first few fights can be really tough before cheering allies or any arts lets leave their stats vanilla
@@ -26,6 +26,8 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size,
     CopiedStats = ["move_speed", "size", "scale", "family", "elem_phx", "elem_eth", "anti_state", "resi_state", "elem_tol", "elem_tol_dir", "down_grd", "faint_grd", "front_angle", "delay", "hit_range_near", "hit_range_far", "dbl_atk", "cnt_atk", "chest_height", "spike_elem", "spike_type", "spike_range", "spike_state", "atk1", "atk2", "atk3", "arts1", "arts2", "arts3", "arts4", "arts5", "arts6", "arts7", "arts8"]
     CopiedStatsWithRatios = ["str", "eth"] # Not doing agility or hp , "Lv_up_hp", "Lv_up_str", "Lv_up_eth" its too finicky and scales slowly compared to the other stats
     CopiedInfo = ["name", "resource", "c_name_id", "mnu_vision_face"]
+    isOopsAll = oopsAll.GetState()
+    oopsAllVal = oopsAllDropdown.GetState()
     
     with open(f"./XCDE/JsonOutputs/bdat_common/BTL_enelist.json", 'r+', encoding='utf-8') as eneFile:
         with open(f"./XCDE/JsonOutputs/bdat_common/VoEnemy.json", 'r+', encoding='utf-8') as eneVoiceFile:
@@ -36,6 +38,9 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size,
             
             if StaticEnemyData == []:
                 StaticEnemyData = eRando.GenEnemyData(XCDEGenEnemyDataAdapter(eneData, IDs.areaEnemyFileList, eRando), lambda e: getEnID(e))
+                
+            if isOopsAll:
+                newEn:Enemy = eRando.CreateForcedEnemy(StaticEnemyData, oopsAllVal, lambda en: en.enelist["$id"])
                 
             for file in IDs.areaEnemyFileList:
                 with open(f"./XCDE/JsonOutputs/bdat_ma{file}/BTL_enelist{file}.json", 'r+', encoding='utf-8') as eneAreaFile:
@@ -48,7 +53,8 @@ def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size,
                         if finalBoss and isFinalBoss(oldEn):
                             continue
                         
-                        newEn:Enemy = eRando.CreateRandomEnemy(StaticEnemyData) # Choose an enemy                
+                        if not isOopsAll:
+                            newEn:Enemy = eRando.CreateRandomEnemy(StaticEnemyData) # Choose a random enemy                
 
                         ChallengingFinalBoss()
                         VoicedEnemiesFix(eneVoiceData, newEn, oldEn)                                
@@ -352,6 +358,12 @@ def EnemyDesc(categoryName):
     myDesc.Tag("Some fights have small green rings and if you get big enemies there it smashes you up against the wall. These fights will have the ring removed.", pady=(5,5))
     myDesc.Tag("Enemies who self destruct will not be able to if placed in certain boss fights that require arts to end", pady=(5,5))
     myDesc.Tag("The first two required fights in the game (Dunbans Prologue and Shulks Colony 9 introduction scene) are made easier to avoid softlocking.", pady=(5,5))
+    
+    myDesc.Header(Options.BossEnemyOption_OopsAll.name)
+    myDesc.Text("Forces all enemies of the group to randomize into the chosen enemy.")
+    
+    myDesc.Header(Options.BossEnemyOption_Mult.name)
+    myDesc.Text("Multiples the amount of enemies in the game. Higher multipliers are less stable.")
     return myDesc
 
 
@@ -379,7 +391,18 @@ def EnemyDesc(categoryName):
                         
                             #                     if file == "0301" and enemy["$id"] in [261]: # Game doenst like the pods being replaced here
                             # continue # 233 leg lizard [227,241, 233] try 264 this range crashes (260,265)
-                        
+
+def MultiplyEnemies(mult, targetIDs:list[int]):
+    for file in IDs.areaEnemyFileList:
+        enePopFile = JSONParser.File(f"XCDE/JsonOutputs/bdat_ma{file}/poplist{file}.json")
+        
+        for en in enePopFile.rows:
+            for i in range(1,6):
+                if f"ene{i}ID" in targetIDs:
+                    en[f"ene{i}num"] = en[f"ene{i}num"]*mult
+
+        enePopFile.Close()
+
 
 # Finds locked enemies
 def GetLockedEnemies():
