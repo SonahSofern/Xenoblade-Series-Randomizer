@@ -76,7 +76,6 @@ def FrontierNavBoost(boost):
         nav["strorage"] *= boost # Storage increase
     fNavFile.Close()
 
-
 def FasterClassRanks(spin):
     # might be breaking since you learn multiple ranks at once
     for i in range(1, 39):
@@ -103,7 +102,6 @@ def FasterLevels(mult):
             lv[key] = max(lv[key] // mult, 1)
     
     growFile.Close()
-
  
 def EarlyFlight():
     '''Unlocks skell flight as soon as you get skells'''
@@ -111,7 +109,6 @@ def EarlyFlight():
     for skl in sklFile.rows:
         skl["FlgSky"] = 1
     sklFile.Close()
-    
   
 def OpWep():
     with open("XCXDE/JsonOutputs/common/WPN_PcList.json", 'r+', encoding='utf-8') as wpFile:

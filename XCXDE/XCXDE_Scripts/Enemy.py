@@ -6,7 +6,7 @@ StaticEnemyData:list[Helper.RandomGroup] = []
 
 # Enemy Names for map hexs should be updated with their replacement
 
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSize = False):
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isOopsAll, oopsAllValue, isMatchSize = False):
     global StaticEnemyData
     
     if StaticEnemyData == []:
@@ -31,13 +31,17 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     if firstRun:
         StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
 
+    if isOopsAll:
+        newEn = eRando.CreateForcedEnemy(StaticEnemyData, oopsAllValue)
+    
     for en in eneFile.rows:
         extraKeys = []
         
         if eRando.FilterEnemies(en, targetGroup):
             continue
-
-        newEn = eRando.CreateRandomEnemy(StaticEnemyData)
+        
+        if not isOopsAll:
+            newEn = eRando.CreateRandomEnemy(StaticEnemyData)
         
         eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys) 
 
@@ -97,7 +101,14 @@ def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
     if en["$id"] in introFightIDs:
         oldEnParam = eRando.FindParam(en)
         eRando.ChangeStats([newEn], [("HpMaxRev", oldEnParam["HpMaxRev"]), ("PowFightRev", oldEnParam["PowFightRev"]), ("PowShootRev", oldEnParam["PowShootRev"]), ("PowMindRev", oldEnParam["PowMindRev"]), ("DodgeRev", oldEnParam["DodgeRev"]), ("DexFightRev", oldEnParam["DexFightRev"]), ("DexShootRev", oldEnParam["DexShootRev"]), ("Def", oldEnParam["Def"]), ("RstPhysics", oldEnParam["RstPhysics"]), ("RstDebuffHalf", oldEnParam["RstDebuffHalf"]), ("RstDebuffFull", oldEnParam["RstDebuffFull"]) ])
-                                                                                                                                                                                                                                                                                                            
+
+XCXDEOopsAllPool = []
+def GetOopsAllDropdowns():
+    global XCXDEOopsAllPool
+    if XCXDEOopsAllPool == []:
+        XCXDEOopsAllPool = Enemy.GetOopsAllPool("XCXDE/VanillaJson/common/CHR_EnList.json", "XCXDE/VanillaJson/common_ms/CHR_EnList_ms.json", IDs.NormalMonsterIDs + IDs.BossMonstersIDs + IDs.TyrantMonsterIDs + IDs.SuperbossMonstersIDs, "Name")
+    return XCXDEOopsAllPool
+                                                                                                                                                                                                                                                                                                           
 def HpLimitEffects(en):
     '''Xenoblade X uses a Enhancement to stop characters from dying in phased fights, this keeps that effect on the location and removes it if not on a phased location'''
     HPLimitFightIDs = [431,441,460,470,1755,1756] # DLC seemingly didnt have any but im skeptical because there is a VITA fight that ends at 50% hp (ID 4093)
@@ -150,4 +161,6 @@ def EnemyDesc(name):
         # EnemyRandoDesc.Text("This will leave enemy aggro with the original enemies. So that you can navigate areas in the originally balanced way. Otherwise you might have to fight many encounters to nagivate an area, or none in an area that you normally would.")
         EnemyRandoDesc.Header(Options.NormalEnemyOption_Size.name)
         EnemyRandoDesc.Text("This will match the size of the new enemy to the original enemy. For example, Terebra (a small enemy), when replaced with a Millesaur (a big enemy), will force the Millesaur to match the small size for that instance of it.")
+    EnemyRandoDesc.Header(Options.NormalEnemyOption_OopsAll.name)
+    EnemyRandoDesc.Text(Enemy.OopsAllDescription)
     return EnemyRandoDesc

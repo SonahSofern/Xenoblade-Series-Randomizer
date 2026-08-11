@@ -361,7 +361,7 @@ def EnemyDesc(categoryName):
     myDesc.Tag("The first two required fights in the game (Dunbans Prologue and Shulks Colony 9 introduction scene) are made easier to avoid softlocking.", pady=(5,5))
     
     myDesc.Header(Options.BossEnemyOption_OopsAll.name)
-    myDesc.Text("Forces all enemies of the group to randomize into the chosen enemy.")
+    myDesc.Text(e.OopsAllDescription)
     
     myDesc.Header(Options.BossEnemyOption_Mult.name)
     myDesc.Text("Multiples the amount of enemies in the game. Higher multipliers are less stable.")

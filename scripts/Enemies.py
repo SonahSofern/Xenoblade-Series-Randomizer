@@ -376,7 +376,9 @@ def EnemySizeMatch(oldEn, newEn, keysList, multDict, scaleKey = "ChrSize", defSc
     
     for key in keysList:
         newEn[key] = Helper.Clamp(int(defScale * newMult), minScale, maxScale)
-    
+
+OopsAllDescription = "Forces all enemies of the group to randomize into the chosen enemy."
+
 def GetOopsAllPool(enemyFile, enemyNameFile, validIDs, enemyFileNameKey):
     eneFile = JSONParser.File(enemyFile)
     eneNameFile = JSONParser.File(enemyNameFile)
