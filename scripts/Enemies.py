@@ -1,5 +1,5 @@
 import random, copy, math
-from scripts import Helper
+from scripts import Helper, JSONParser, Interactables
 
 class ParamModification:
     def __init__(self, fieldNames:list[str], C=0.5, K=0.5, isReciprocal=False):
@@ -376,7 +376,23 @@ def EnemySizeMatch(oldEn, newEn, keysList, multDict, scaleKey = "ChrSize", defSc
     
     for key in keysList:
         newEn[key] = Helper.Clamp(int(defScale * newMult), minScale, maxScale)
-        
+    
+def GetOopsAllPool(enemyFile, enemyNameFile, validIDs, enemyFileNameKey):
+    eneFile = JSONParser.File(enemyFile)
+    eneNameFile = JSONParser.File(enemyNameFile)
+    
+    DropdownOptions = []
+    for en in eneFile.rows:
+        if en["$id"] not in validIDs: continue  
+        for enName in eneNameFile.rows:
+            if enName["$id"] == en[enemyFileNameKey]:
+                name = enName["name"]
+        DropdownOptions.append(Interactables.DropdownOption(f"{name} ({en["$id"]})", en["$id"]))
+    
+    eneFile.Close()
+    eneNameFile.Close()  
+    
+    return DropdownOptions
     
 # def ResolveLevelDiff(self, enemy): # Not using because level gap changes XP rewards
 #     if self.lvDiff == 0:

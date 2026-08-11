@@ -42,6 +42,8 @@ def AccessoryRando():
         newID = newEnhancement.CreateEffect(enhanceFile.data, powerPercent=DetermineAccessoryPower(acc))
         acc["Enhance"] = newID
         acc["Name"] = CreateNewName(acc, nameFile.data, newEnhancement, nameFile.originalData)
+
+            
         
     accFile.Close()
     enhanceFile.Close()
@@ -81,7 +83,22 @@ def CreateNewName(acce ,nameData, newEnhancement:Enhancements.Enhancement, origi
       "name": f"{newEnhancement.name} {secondWord}"
     }
     nameData["rows"].append(newName)
+    
+    if acce["$id"] in [1] : # Bronze Temple Guard renaming
+        ChangeTutorialItemName(newName["name"])
+    
     return newNameId
+
+def ChangeTutorialItemName(newName):
+    '''Seen people get confused on the tutorial buying bronze temple guard so rename the quest text to match the item name'''
+    ttrlTextFile = JSONParser.File("XC3/JsonOutputs/quest/msg_qst_task.json")
+    
+    for text in ttrlTextFile.rows:
+        if text["$id"] in [168, 169]:
+            text["name"] = text["name"].replace("Bronze Temple Guard", newName)
+    
+    ttrlTextFile.Close()
+    
 
 def AccessoryDesc():
     pass

@@ -204,23 +204,13 @@ def getEnID(e:Enemy):
     '''Helper for genenemydata'''
     return e.eneListArea["$id"]
 
+XCDEOopsAllPool = []
 def GetOopsAllDropdowns():
     '''Creates dropdown options for the oops all pool'''
-    eneFile = JSONParser.File("XCDE/VanillaJson/bdat_common/BTL_enelist.json")
-    eneNameFile = JSONParser.File("XCDE/VanillaJson/bdat_common_ms/BTL_enelist_ms.json")
-    
-    DropdownOptions = []
-    for en in eneFile.rows:
-        if en["$id"] not in IDs.NormalEnemies + IDs.BossEnemies + IDs.UniqueEnemies + IDs.SuperbossEnemies: continue
-        for enName in eneNameFile.rows:
-            if enName["$id"] == en["name"]:
-                name = enName["name"]
-        DropdownOptions.append(Interactables.DropdownOption(f"{name} ({en["$id"]})", en["$id"]))
-    
-    eneFile.Close()
-    eneNameFile.Close()
-    
-    return DropdownOptions
+    global XCDEOopsAllPool
+    if XCDEOopsAllPool == []:
+        XCDEOopsAllPool = e.GetOopsAllPool("XCDE/VanillaJson/bdat_common/BTL_enelist.json", "XCDE/VanillaJson/bdat_common_ms/BTL_enelist_ms.json", IDs.NormalEnemies + IDs.BossEnemies + IDs.UniqueEnemies + IDs.SuperbossEnemies, "name")
+    return XCDEOopsAllPool
 
 # There is no fix for topple spikes always being active just nerfed all spikes instead
 def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value
@@ -341,6 +331,17 @@ def EgilArenaFix():
     #                 en["posX"] = 5
     #                 en["posY"] = 0
     #         JSONParser.CloseFile(popData, enpopFile)
+
+def MultiplyEnemies(mult, targetIDs:list[int]):
+    for file in IDs.areaEnemyFileList:
+        enePopFile = JSONParser.File(f"XCDE/JsonOutputs/bdat_ma{file}/poplist{file}.json")
+        
+        for en in enePopFile.rows:
+            for i in range(1,6):
+                if f"ene{i}ID" in targetIDs:
+                    en[f"ene{i}num"] = en[f"ene{i}num"]*mult
+
+    enePopFile.Close()
         
 def EnemyDesc(categoryName):
     myDesc = PopupDescriptions.Description()
@@ -392,16 +393,7 @@ def EnemyDesc(categoryName):
                             #                     if file == "0301" and enemy["$id"] in [261]: # Game doenst like the pods being replaced here
                             # continue # 233 leg lizard [227,241, 233] try 264 this range crashes (260,265)
 
-def MultiplyEnemies(mult, targetIDs:list[int]):
-    for file in IDs.areaEnemyFileList:
-        enePopFile = JSONParser.File(f"XCDE/JsonOutputs/bdat_ma{file}/poplist{file}.json")
-        
-        for en in enePopFile.rows:
-            for i in range(1,6):
-                if f"ene{i}ID" in targetIDs:
-                    en[f"ene{i}num"] = en[f"ene{i}num"]*mult
 
-        enePopFile.Close()
 
 
 # Finds locked enemies

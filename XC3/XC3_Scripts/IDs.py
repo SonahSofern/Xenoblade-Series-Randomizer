@@ -8,6 +8,8 @@ BaseGameFinalBosses = [444, 445, 446, 447, 448, 538, 539, 540, 541, 542] # Heavi
 RequiredMonsters = BossMonsters + [4958]
 # 4440, 4441, 4442, This ferronis fight is weird. They are invisible enemies. The entire model is on Moebius W just not randomizing this 
 
+AreaCodes = ["01", "04", "07", "09", "11", "14", "15", "17", "20", "21", "22", "25", "40", "44", "45", "46", "90"]
+
 InvalidAccessoryIDs = [37,38,39,70,214,215,216,312,313,314,345,486,487,488,545,546,547,578,719,720,721,793,775,776] + Helper.InclRange(243,271)
 BaseAccessoriesIDs = Helper.InclRange(1, 804, InvalidAccessoryIDs)   
 DLC4AccessoriesIDs = Helper.InclRange(805, 890)

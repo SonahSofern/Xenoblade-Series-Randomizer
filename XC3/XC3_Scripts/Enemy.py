@@ -9,7 +9,7 @@ isLogEnemy = True
 StaticEnemyData:list[Helper.RandomGroup] = []
 ValidEnemyPopFileNames = ["ma01a_GMK_EnemyPop.json", "ma04a_GMK_EnemyPop.json", "ma07a_GMK_EnemyPop.json", "ma09a_GMK_EnemyPop.json", "ma11a_GMK_EnemyPop.json", "ma14a_GMK_EnemyPop.json", "ma15a_GMK_EnemyPop.json", "ma17a_GMK_EnemyPop.json", "ma22a_GMK_EnemyPop.json", "ma25a_01_GMK_EnemyPop.json", "ma25a_02_GMK_EnemyPop.json", "ma25a_03_GMK_EnemyPop.json", "ma25a_04_GMK_EnemyPop.json", "ma25a_05_GMK_EnemyPop.json", "ma25a_06_GMK_EnemyPop.json", "ma25a_07_GMK_EnemyPop.json", "ma25a_08_GMK_EnemyPop.json", "ma25a_09_GMK_EnemyPop.json", "ma25a_10_GMK_EnemyPop.json", "ma25a_11_GMK_EnemyPop.json", "ma25a_12_GMK_EnemyPop.json", "ma25a_13_GMK_EnemyPop.json", "ma25a_14_GMK_EnemyPop.json", "ma25a_15_GMK_EnemyPop.json", "ma25a_16_GMK_EnemyPop.json", "ma25a_17_GMK_EnemyPop.json", "ma25a_18_GMK_EnemyPop.json", "ma25a_19_GMK_EnemyPop.json", "ma25a_50_GMK_EnemyPop.json", "ma25a_51_GMK_EnemyPop.json", "ma25a_52_GMK_EnemyPop.json", "ma25a_53_GMK_EnemyPop.json", "ma40a_GMK_EnemyPop.json", "ma44a_GMK_EnemyPop.json", "ma45a_GMK_EnemyPop.json", "ma46a_GMK_EnemyPop.json", "ma90a_GMK_EnemyPop.json", "ma90gmk_GMK_EnemyPop.json"]
 
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSizeOption:Options.Option, isBossGroupBalancing):
+def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSizeOption:Options.Option, isBossGroupBalancing, isOopsAll, OopsAllValue):
     global StaticEnemyData
     
     if StaticEnemyData == []:
@@ -17,8 +17,6 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     else:
         firstRun = False
     
-    EnemyCounts = GetEnemyCounts()
-    GroupFightViolations = GetGroupFightViolations()
     Aggro = ["<AB4BA3D5>", "<1104E9C5>", "<B5C5F3B3>", "<EC666A80>", "<64251F47>", "<3B6DFBC4>"]
     specialFields = ['<B569BFB1>', '<352C263C>', '<BA57B736>'] # These fields being kept fixed a bug where cutscenes couldnt end fights and you would just sit there while the enemy kept aggroing you
     RetryBattleLandmark = "<9A220E4D>"
@@ -39,7 +37,10 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     if firstRun:
         StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
         SummonFix()
-
+    
+    if isOopsAll:
+        newEn = eRando.CreateForcedEnemy(StaticEnemyData, OopsAllValue)
+        
     for en in eneFile.rows:
         if eRando.FilterEnemies(en, targetGroup):
             continue
@@ -47,7 +48,8 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
         if FilterNPCEnemies(en["NPCName"]):
             continue
 
-        newEn = eRando.CreateRandomEnemy(StaticEnemyData)
+        if not isOopsAll:
+            newEn = eRando.CreateRandomEnemy(StaticEnemyData)
 
         if isMatchSizeOption: # Runs before retainnonarrangestats so that it gets the values of swimming enemies before actypefix
             EnemySizeHelper(en, newEn, eRando)
@@ -55,9 +57,6 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
         eRando.RetainNonArrangeStats(newEn, en, retainNonArrangeKeys + HPLimits + ActTypeFix(eRando, en, newEn)) # Flying Enemies and some enemies in Erythia will still fall despite act type fix (After testing I found this is because of the motion file in rsc. So there is no fix unless we change every enemies motion as they are being placed)
         
         ForcedArtsManager(en, newEn, eRando)
-            
-        if isBossGroupBalancing:
-            eRando.BalanceFight(en, newEn, GroupFightViolations, EnemyCounts)
 
         IntroFightBalances(en, newEn, eRando)
         
@@ -171,7 +170,38 @@ def SummonFix(): # For now this is lower priority for how difficult it would be 
         for i in range(1,4):
             summon[f"EnemyID0{i}"] = 0
     summonFile.Close()    
-    
+
+XC3OopsAllPool = []
+def GetOopsAllPool():
+    global XC3OopsAllPool
+    if XC3OopsAllPool == []:
+        XC3OopsAllPool = Enemy.GetOopsAllPool("XC3/VanillaJson/fld/FLD_EnemyData.json", "XC3/VanillaJson/system/msg_enemy_name.json", IDs.UniqueMonsters + IDs.NormalMonsters + IDs.BossMonsters + IDs.SuperbossMonsters, "MsgName")
+    return XC3OopsAllPool
+
+def MultiplyEnemies(mult, targetIDs:list[int]):
+    qstTaskBattles = JSONParser.File("XC3/JsonOutputs/qst/QST_TaskBattle.json")
+    for code in IDs.AreaCodes:
+        if int(code) < 25:
+            folder = "map"
+        else:
+            folder = "dlc"
+            
+        enePopFile = JSONParser.File(f"XC3/JsonOutputs/{folder}/ma{code}a_GMK_EnemyPop.json")
+        if enePopFile.isOpen:
+            for en in enePopFile.rows:
+                for i in range(1,7):
+                    if en[f"EnemyID{i}"] in targetIDs:
+                        en[f"PopCount{i}"] = en[f"PopCount{i}"]*mult
+                        
+                        # Fix the quest that require a group of enemies to be killed to be the entire group
+                        for task in qstTaskBattles.rows:
+                            if task["TargetID"] == en[f"EnemyID{i}"]:
+                                task["Count"] = en[f"PopCount{i}"]
+                                break
+
+            enePopFile.Close()
+    qstTaskBattles.Close()
+
 def EnemySizeHelper(oldEn, newEn, eRando:Enemy.EnemyRandomizer):
     Ferronis = 4 # The future connected ferronis on a cliff fight needs the replacement enemy to be MASSIVE to be able to hit it
     Massive = 3

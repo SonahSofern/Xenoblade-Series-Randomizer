@@ -4,7 +4,7 @@ root = Tk()
 from scripts import Theme, XCRandomizer
 import XCDE.XCDE_Scripts.XCDE_Settings as XCDE
 # import XC2.XC2_Scripts.XC2_Settings as XC2
-# import XC3.XC3_Scripts.XC3_Settings as XC3
+import XC3.XC3_Scripts.XC3_Settings as XC3
 # import XCXDE.XCXDE_Scripts.XCXDE_Settings as XCXDE
 
 # Set the width and height based on the primary monitor pixel count
@@ -29,26 +29,9 @@ icon = PhotoImage(file=XCRandomizer.Onefile.Directory("images/XCIcon.png"))
 root.iconphoto(True, icon)
 root.attributes(alpha=0)
 
-# Test =1
-# Tabs = {
-#     Test: 'Test',
-# }
-# XCRandomizer.Interactables.Game = "XC2" 
-
-# TboxOption = XCRandomizer.Interactables.Option("Field Checks", Test, "Randomizes treasures from field checks into the chosen types")
-# # TboxOption_Dropdown = XCRandomizer.Interactables.Dropdown(TboxOption)
-# TboxOptionSub = XCRandomizer.Interactables.SubOption("Test", TboxOption)
-# TboxOptionSub_Spinbox = XCRandomizer.Interactables.SubDropdown(TboxOptionSub, values=[XCRandomizer.Interactables.DropdownOption("Test", 123), XCRandomizer.Interactables.DropdownOption("Test1", 12223)])
-# TboxOptionSub2 = XCRandomizer.Interactables.SubOption("Test2", TboxOption)
-# TboxOptionSub2_Spinbox = XCRandomizer.Interactables.SubSpinbox(TboxOptionSub2)
-# TboxOptionSub3 = XCRandomizer.Interactables.SubOption("Test3", TboxOption)
-# TestOption = XCRandomizer.Interactables.Option("Field Checks", Test, "Randomizes treasures from field checks into the chosen types")
-# TestOption_Spinbox = XCRandomizer.Interactables.Spinbox(TestOption)
-# XCRandomizer.CreateMainWindow(root, MainWindow, XCRandomizer.GameWindowData("XC2", "1", "Test", XCRandomizer.StringVar(), XCRandomizer.StringVar(), Tabs, nouns=["Test"], verbs=["Test"]))
-
 XCRandomizer.CreateMainWindow(root, MainWindow, XCDE.WindowData)
 # XCRandomizer.CreateMainWindow(root, MainWindow, XC2.WindowData)
-# XCRandomizer.CreateMainWindow(root, MainWindow, XC3.WindowData)
+XCRandomizer.CreateMainWindow(root, MainWindow, XC3.WindowData)
 # XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.WindowData)
 
 root.attributes(alpha=1)
