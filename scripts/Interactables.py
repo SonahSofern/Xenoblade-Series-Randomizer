@@ -219,7 +219,8 @@ class Spinbox(Interactable):
         return {self.identifier:f"{self.GetState()}"}
     
     def Load(self, loadFile):
-        self.spinBoxVal.set(loadFile[self.identifier])
+        if self.validateSpinbox(loadFile[self.identifier]): # Verify the value before loading it
+            self.spinBoxVal.set(loadFile[self.identifier])
         
     def GetPermalinkVar(self):
         return self.spinBoxVal
@@ -253,47 +254,68 @@ class SubSpinbox(Spinbox):
 
 class DropdownOption():
     '''So that dropdowns can display one thing but do another behind the scenes: e.g. Users select Jin from a dropdown but the real value we use in code is his id'''
-    def __init__(self, displayVal, realVal):
-        self.displayVal = displayVal
-        self.realVal = realVal
+    def __init__(self, displayVal, realVal = None):
+        self.displayVal = displayVal # value to be displayed
+        self.realVal = realVal # value hidden from users (for use in code)
+        
+        if realVal == None: # If none provided match the string display value
+            self.realVal = displayVal
+
     
 class Dropdown(Interactable):
-    def __init__(self, parent:Option, values:list[DropdownOption] = [], width = 40, height = 10):
+    def __init__(self, parent:Option, values:list[DropdownOption] = [], width = 20, height = 10, sort = False):
         # Updated when a new option is selected
+        self.indexVal = IntVar(value=0) # Index of currently selected option controls everything else
         self.curDisplayVal = StringVar(value="") # Text value of the currently selected option
-        self.curRealVal = IntVar(value=0) # Index of the currently selected option
-        self.curDisplayVal.trace_add("write", self.SetValueByDisplayVal)
-        
         self.values:list[DropdownOption] = values
+        self.indexVal.trace_add("write", self.SetOtherValuesByIndex)
+        self.indexVal.set(0) # Set the first option as default
+        
         self.width = width
         self.height = height
         self.parent = parent
-        self.curDisplayVal.set(values[0].displayVal) # set default
         parent.interactables.append(self)
         XenoOptionDict[Game].append(self) 
         self.identifier = f"{self.parent.name} Dropdown"
         
-        self.values.sort(key= lambda x: x.displayVal)
+        if sort: # Sort alphabetically optionally
+            self.values.sort(key= lambda x: x.displayVal)
            
     def Create(self, parent, style, rowIncrement):
-        self.dropDownObj = ttk.Combobox(parent, width=self.width, textvariable=self.curDisplayVal, state="readonly")
-        self.dropDownObj['values'] = [x.displayVal for x in self.values]
+        self.dropDownObj = ttk.Combobox(parent, width=self.width, textvariable=self.curDisplayVal, state="readonly", values=[x.displayVal for x in self.values])
+        self.dropDownObj.bind("<<ComboboxSelected>>", self.onSelected)
         self.dropDownObj.grid(row=rowIncrement["Count"], column = 3, padx=(15,0))
         disableScroll(self.dropDownObj)
     
-    def SetValueByDisplayVal(self, *args):
-        '''The string itself controls the values'''
-        # print(f"Cur Display Val: {self.curDisplayVal.get()}")
+    def onSelected(self, *args):
+        '''Triggered by changing the selection from the combobox, sets the index value triggering its event'''
         for val in self.values:
             if val.displayVal == self.curDisplayVal.get():
-                self.curRealVal.set(val.realVal)
-                self.curDropdownOption = val
+                self.indexVal.set(self.values.index(val))
                 break
-      
+        
+    def SetOtherValuesByIndex(self, *args):
+        '''When the index value is written to it triggers these events'''
+        self.curDropdownOption = self.values[self.indexVal.get()]
+        self.curDisplayVal.set(self.curDropdownOption.displayVal)
+        
+    def CheckState(self, state):
+        '''Returns true if the state exists and is the current selected option. To ensure that checking a string value raises an error if that value is not even in the options at all'''
+        found = False
+        for opt in self.values:
+            if opt.displayVal == state or opt.realVal == state:
+                found = True
+                break
+        
+        if not found:
+            raise Exception("State does not exist, check what value you are looking up by")
+        
+        if self.curDropdownOption.displayVal == state or self.curDropdownOption.realVal == state: # Found the state
+            return True
+    
     def GetState(self):
         '''Returns the real value for the currently displayed option'''
         return self.curDropdownOption.realVal
-        # return self.curDropdownOption.displayVal
     
     def VisualStateUpdate(self):
         if self.parent.GetState():
@@ -303,23 +325,16 @@ class Dropdown(Interactable):
       
     def Save(self):
         '''Dropdowns are saved by the index of the option chosen, otherwise we would have massive permalinks if we wanted to save the string value'''
-        index = 0
-        for i in range(0,len(self.values)):
-            if self.values[i] == self.curDropdownOption:
-                index = i
-        return {self.identifier: index}
+        return {self.identifier: self.indexVal.get()}
 
     def Load(self, loadFile):
         '''Loads the dropdown by the saved index'''
         index = loadFile.get(self.identifier)
         if index is not None:
-            dropdownOption:DropdownOption = self.values[index]
-            self.curDropdownOption = dropdownOption
-            self.curDisplayVal.set(dropdownOption.displayVal)
-            self.curRealVal.set(dropdownOption.realVal)
+            self.indexVal.set(index)
 
     def GetPermalinkVar(self):
-        return self.curRealVal
+        return self.indexVal
 
 class SubDropdown(Dropdown):
     def Create(self, parent, style, rowIncrement):

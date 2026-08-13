@@ -13,8 +13,7 @@ def DriverArtRandomizer():
         artData = json.load(artFile)
         
         isAutoAttacks = Options.DriverArtsOption_AutoAttacks.GetState()
-        isMultiReact = Options.DriverArtsOption_MultipleReactions.GetState()
-        isReactions = Options.DriverArtsOption_SingleReaction.GetState()
+        isReactions = Options.DriverArtsOption_Reaction.GetState()
         isCooldowns = Options.DriverArtsOption_Cooldown.GetState()
         isDamage = Options.DriverArtsOption_Damage.GetState()
         isEnhancements = Options.DriverArtsOption_Enhancements.GetState()
@@ -23,9 +22,9 @@ def DriverArtRandomizer():
         isAOE = Options.DriverArtsOption_AOE.GetState()
         isSpeed = Options.DriverArtsOption_AnimationSpeed.GetState()
         
+        dropdownReactions = Options.DriverArtsOption_Reaction_Dropdown
+        
         oddsAutoAttacks = Options.DriverArtsOption_AutoAttacks.GetSpinbox()
-        oddsMultiReact = Options.DriverArtsOption_MultipleReactions.GetSpinbox()
-        oddsReactions = Options.DriverArtsOption_SingleReaction.GetSpinbox()
         oddsCooldowns = Options.DriverArtsOption_Cooldown.GetSpinbox()
         oddsDamage = Options.DriverArtsOption_Damage.GetSpinbox()
         oddsEnhancements = Options.DriverArtsOption_Enhancements.GetSpinbox()
@@ -36,7 +35,7 @@ def DriverArtRandomizer():
         odds = Options.DriverArtsOption.GetSpinbox()
         
         for art in artData["rows"]:
-            if not OddCheck(odds):
+            if not Helper.OddsCheck(odds):
                 continue
             
             if art["$id"] in ignoreArts:
@@ -45,46 +44,46 @@ def DriverArtRandomizer():
             if art["Name"] == 0: # If we are an auto attack
                 if not isAutoAttacks: # Ignore auto attacks unless the option is clicked
                     continue
-                elif not OddCheck(oddsAutoAttacks): # If the option is on do a check for odds
+                elif not Helper.OddsCheck(oddsAutoAttacks): # If the option is on do a check for odds
                     continue
             
             
             isEnemyTarget = (art["Target"] in [0,4]) # Ensures Targeting Enemy
     
-            if (isReactions or isMultiReact) and isEnemyTarget:
+            if isReactions and isEnemyTarget:
                 for j in range(1,17):
                     art[f"ReAct{j}"] = 0 # Clearing Defaults these are needed bc torna arts are weird so i cant clear them blindly before hand gotta follow these conditions so this is the easiest way
-                if OddCheck(oddsReactions):
-                    Reaction(art, isMultiReact, oddsMultiReact)
+                if Helper.OddsCheck(25): # each art gets a 25% chance to react
+                    Reaction(art, dropdownReactions)
                     
-            if isCooldowns and OddCheck(oddsCooldowns):
+            if isCooldowns and Helper.OddsCheck(oddsCooldowns):
                 Cooldowns(art)
                 
-            if isDamage and OddCheck(oddsDamage):
+            if isDamage and Helper.OddsCheck(oddsDamage):
                 Damage(art)
                 
             if isEnhancements and isEnemyTarget:
                 for i in range(1,7):
                     art[f"Enhance{i}"] = 0
-                if OddCheck(oddsEnhancements):
+                if Helper.OddsCheck(oddsEnhancements):
                     Enhancements(art)
                     
             if isBuffs:
                 art["ArtsBuff"] = 0 
-                if OddCheck(oddsBuffs):
+                if Helper.OddsCheck(oddsBuffs):
                     Buffs(art)
                     
             if isDebuffs and isEnemyTarget:
                 art["ArtsDeBuff"] = 0
-                if OddCheck(oddsDebuffs):
+                if Helper.OddsCheck(oddsDebuffs):
                     Debuffs(art)
                     
             if isAOE and isEnemyTarget:
                 art["RangeType"] = 0
-                if OddCheck(oddsAOE):
+                if Helper.OddsCheck(oddsAOE):
                     AOE(art)
                     
-            if isSpeed and OddCheck(oddsSpeed):
+            if isSpeed and Helper.OddsCheck(oddsSpeed):
                 AnimationSpeed(art)
 
         # Since Aegis and Broadsword Share Captions they need the same effects
@@ -114,11 +113,7 @@ def CopyArt(artData, copyID, artID): # Copies all relevant effects of the art fo
             art["ArtsBuff"] = copy["ArtsBuff"]
             break
 
-
-def OddCheck(odds):
-    return (odds > random.randrange(0,100))
-
-def Reaction(art, multReact, multOdds):
+def Reaction(art, dropDown:Options.XCRandomizer.Interactables.SubDropdown):
     reactionWeights = [12,7,5,3,7,7] # [Break - Topple - Launch - Smash - KB - BD] Added so that break is more common as you cannot make use of topple, launch, smash without it
     for i in range(1,17):
         if art[f"ReAct{i}"] > 14: # Dont replace weird ones that just move blades
@@ -127,7 +122,7 @@ def Reaction(art, multReact, multOdds):
         if art[f"HitFrm{i}"] == 0 and (i != 16 and art[f"HitFrm{i+1}"] == 0): # Need the second condition because zenobias Ascension Blade 129 has no hit on frame 1 but afterwards has hits # Make sure there is a hit
             art[f"ReAct{i-1}"] = random.choice(choice.ids) # Adds something to the last hit
             break
-        if multReact and OddCheck(multOdds):
+        if dropDown.CheckState("Multi") and Helper.OddsCheck(20): # Each hit of an art with multi on has a 20% chance to get more reactions
             art[f"ReAct{i}"] =  random.choice(choice.ids) # Adds each hit
 
 

@@ -6,7 +6,7 @@ from XC2.XC2_Scripts.Race_Mode import RaceMode
 from XC2.XC2_Scripts.Torna_Logic import TornaMain
 from XC2.XC2_Scripts.UM_Hunt import UMHuntMain
 
-from scripts.Interactables import Option, SubOption, MutuallyExclusivePairing, Dropdown, Spinbox, SubSpinbox, SubDropdown
+from scripts.Interactables import Option, SubOption, MutuallyExclusivePairing, Dropdown, Spinbox, SubSpinbox, SubDropdown, DropdownOption
 import scripts.Interactables
 game = "XC2"
 scripts.Interactables.Game = game
@@ -98,10 +98,12 @@ DriverArtsOption_Spinbox = Spinbox(DriverArtsOption)
 spinArts = "%"
 DriverArtsOption_AutoAttacks = SubOption("Auto Attacks", DriverArtsOption, defState=False)
 DriverArtsOption_AutoAttacks_Spinbox = SubSpinbox(DriverArtsOption_AutoAttacks, default=20, description="% of auto attacks")
-DriverArtsOption_SingleReaction = SubOption("Single Reaction", DriverArtsOption)
-DriverArtsOption_SingleReaction_Spinbox = SubSpinbox(DriverArtsOption_SingleReaction, default=20, description=spinArts)
-DriverArtsOption_MultipleReactions = SubOption("Multiple Reactions", DriverArtsOption)
-DriverArtsOption_MultipleReactions_Spinbox = SubSpinbox(DriverArtsOption_MultipleReactions, default=20, description=spinArts)
+DriverArtsOption_Reaction = SubOption("Reaction", DriverArtsOption)
+DriverArtsOption_Reaction_Dropdown = SubDropdown(DriverArtsOption_Reaction, [DropdownOption("Single"), DropdownOption("Multi")])
+# DriverArtsOption_SingleReaction = SubOption("Single Reaction", DriverArtsOption)
+# DriverArtsOption_SingleReaction_Spinbox = SubSpinbox(DriverArtsOption_SingleReaction, default=20, description=spinArts)
+# DriverArtsOption_MultipleReactions = SubOption("Multiple Reactions", DriverArtsOption)
+# DriverArtsOption_MultipleReactions_Spinbox = SubSpinbox(DriverArtsOption_MultipleReactions, default=20, description=spinArts)
 DriverArtsOption_Debuffs = SubOption("Debuffs", DriverArtsOption)
 DriverArtsOption_Debuffs_Spinbox = SubSpinbox(DriverArtsOption_Debuffs, default=40, description=spinArts)
 DriverArtsOption_Buffs = SubOption("Buffs", DriverArtsOption)
@@ -175,9 +177,9 @@ NormalEnemyOption_Stats = SubOption("Balance Stats", NormalEnemyOption)
 NormalEnemyOption_Aggro = SubOption("Vanilla Aggro", NormalEnemyOption)
 NormalEnemyOption_Size = SubOption("Match Size", NormalEnemyOption)
 NormalEnemyOption_OopsAll = SubOption("Oops All", NormalEnemyOption, defState=False)
-NormalEnemyOption_OopsAll_Dropdown = SubDropdown(NormalEnemyOption_OopsAll, Enemy.GetOopsAllPool())
+NormalEnemyOption_OopsAll_Dropdown = SubDropdown(NormalEnemyOption_OopsAll, Enemy.GetOopsAllPool(), sort=True, width=40)
 NormalEnemyOption_Multiply = SubOption("More Enemies", NormalEnemyOption, [lambda: Enemy.EnemyMultiplier(NormalEnemyOption_Multiply_Spinbox.GetState(), IDs.NormalMonsters)], defState=False)
-NormalEnemyOption_Multiply_Spinbox = SubSpinbox(NormalEnemyOption_Multiply, 2, 5, 1, 2, 1, "x Enemies")
+NormalEnemyOption_Multiply_Spinbox = SubSpinbox(NormalEnemyOption_Multiply, 2, 7, 1, 2, 1, "x Enemies")
 
 UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: Enemy.Enemies(IDs.UniqueMonsters + IDs.SuperbossMonsters, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption, UniqueEnemyOption_Aggro, UniqueEnemyOption_Size.GetState(), UniqueEnemyOption_Stats, isOopsAll=UniqueEnemyOption_OopsAll.GetState(), oopsAllVal=UniqueEnemyOption_OopsAll_Dropdown.GetState())], descData=lambda: Enemy.EnemyDesc(UniqueEnemyOption.name), prio=2)
 UniqueEnemyOption_Spinbox = Spinbox(UniqueEnemyOption)
@@ -193,9 +195,9 @@ UniqueEnemyOption_Stats = SubOption("Balance Stats", UniqueEnemyOption)
 UniqueEnemyOption_Aggro = SubOption("Vanilla Aggro", UniqueEnemyOption)
 UniqueEnemyOption_Size = SubOption("Match Size", UniqueEnemyOption)
 UniqueEnemyOption_OopsAll = SubOption("Oops All", UniqueEnemyOption, defState=False)
-UniqueEnemyOption_OopsAll_Dropdown = SubDropdown(UniqueEnemyOption_OopsAll, Enemy.GetOopsAllPool())
+UniqueEnemyOption_OopsAll_Dropdown = SubDropdown(UniqueEnemyOption_OopsAll, Enemy.GetOopsAllPool(), sort=True, width=40)
 UniqueEnemyOption_Multiply = SubOption("More Enemies", UniqueEnemyOption, [lambda: Enemy.EnemyMultiplier(UniqueEnemyOption_Multiply_Spinbox.GetState(), IDs.UniqueMonsters)], defState=False)
-UniqueEnemyOption_Multiply_Spinbox = SubSpinbox(UniqueEnemyOption_Multiply, 2, 5, 1, 2, 1, "x Enemies")
+UniqueEnemyOption_Multiply_Spinbox = SubSpinbox(UniqueEnemyOption_Multiply, 2, 7, 1, 2, 1, "x Enemies")
 
 BossEnemyOption = Option("Boss Monsters", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonsters, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, True, True, BossEnemyOption_Stats, finalBoss=BossEnemyOption_FinalBoss.GetState(), isOopsAll=BossEnemyOption_OopsAll.GetState(), oopsAllVal=BossEnemyOption_OopsAll_Dropdown.GetState())], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), prio=2)
 BossEnemyOption_Spinbox = Spinbox(BossEnemyOption)
@@ -212,9 +214,9 @@ BossEnemyOption_FinalBoss = SubOption("Vanilla Final Boss", BossEnemyOption, def
 BossEnemyOption_Solo = SubOption("Balance Solo Fights", BossEnemyOption)
 BossEnemyOption_Group = SubOption("Balance Group Fights", BossEnemyOption)
 BossEnemyOption_OopsAll = SubOption("Oops All", BossEnemyOption, defState=False)
-BossEnemyOption_OopsAll_Dropdown = SubDropdown(BossEnemyOption_OopsAll, Enemy.GetOopsAllPool())
+BossEnemyOption_OopsAll_Dropdown = SubDropdown(BossEnemyOption_OopsAll, Enemy.GetOopsAllPool(), sort=True, width=40)
 BossEnemyOption_Multiply = SubOption("More Enemies", BossEnemyOption, [lambda: Enemy.EnemyMultiplier(BossEnemyOption_Multiply_Spinbox.GetState(), IDs.BossMonsters)], defState=False)
-BossEnemyOption_Multiply_Spinbox = SubSpinbox(BossEnemyOption_Multiply, 2, 5, 1, 2, 1, "x Enemies")
+BossEnemyOption_Multiply_Spinbox = SubSpinbox(BossEnemyOption_Multiply, 2, 7, 1, 2, 1, "x Enemies")
 
 EnemyEnhancementsOption = Option("Enemy Enhancements", Enemies, "Gives enemies a random enhancement", [lambda: EnemyEnhancements.EnemyEnhances()], descData=lambda: EnemyEnhancements.EnemyEnhancementDescriptions())
 EnemyArtEffectsOption_Spinbox = Spinbox(EnemyEnhancementsOption, default=30)
@@ -255,9 +257,9 @@ CommunityMembersOption_LVMAX_Spinbox = SubSpinbox(CommunityMembersOption_LVMAX, 
 
 FieldSkillOption = Option("Field Skills", QOL, "Reduce field skill tedium")
 FieldSkillOption_Reduce = SubOption("Reduce All Field Skills", FieldSkillOption, commands=[lambda: FieldSkills.ReduceFieldSkillsLevels()])
-FieldSkillOption_Reduce_Spinbox = SubSpinbox(FieldSkillOption_Reduce, max=12, default=3, increment=1, description="Level(s) Reduced")
-FieldSkillOption_RemoveStory = SubOption("Remove Story Field Skills", FieldSkillOption, defState=False, commands=[lambda: FieldSkills.RemoveStoryFieldSkills()])
-FieldSkillsOption_RemoveAll = SubOption("Remove All Field Skills", FieldSkillOption, defState=False, commands=[lambda: FieldSkills.RemoveFieldSkills(True)])
+FieldSkillOption_Reduce_Spinbox = SubSpinbox(FieldSkillOption_Reduce, max=12, default=3, increment=1, description="Level(s) Reduced", width=2)
+FieldSkillOption_Remove = SubOption("Remove Field Skills", FieldSkillOption, defState=False, commands=[lambda: FieldSkills.DropdownRemoveStoryFieldSkills()])
+FieldSkillOption_Remove_Dropdown = SubDropdown(FieldSkillOption_Remove, [DropdownOption("Story"), DropdownOption("All")], sort=False)
 EasySkillTreesOption = Option("Easy Affinity Trees", QOL, "Makes trust the only condition for leveling up a blade's affinity tree", [lambda: SkillTrees.BladeSkillTreeShortening(IDs.ValidBladeIDs, 15), lambda: SkillTrees.BladeSkillTreeShortening(IDs.TornaBladeIDs, 15)])
 BoostOption = Option("Resource Boosts", QOL, "Various boosts to resources (exp, wp etc.)")
 BoostOption_EXP = SubOption("EXP Boost", BoostOption, [lambda: Helper.MathmaticalColumnAdjust(["./XC2/JsonOutputs/common/BTL_Grow.json"], ["LevelExp", "LevelExp2"], [f'row[key] // {BoostOption_EXP_Spinbox.GetState()}'])])

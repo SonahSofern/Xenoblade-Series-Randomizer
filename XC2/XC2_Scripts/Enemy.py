@@ -1,6 +1,6 @@
 import json, copy
 from XC2.XC2_Scripts import IDs, Options
-from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e, Interactables
+from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e, Interactables, StatRand
 
 StaticEnemyData:list[Helper.RandomGroup] = []
 
@@ -114,6 +114,9 @@ def RerollTornaBladedEnemies(oldEn, newEn, eRando:e.EnemyRandomizer):
                 break
     return newEn
 
+def GetSecondPhaseIDs():
+    '''All the ids of the second phase of a fight so that we can match the enemy'''
+
 def CreateBlade(enBlade, oldEn, newEn, eRando:e.EnemyRandomizer, keys): # Because there is only 1 blade referenced for each enemy we have to create new blades (Since blades are not referenced in gimmick files it is fine)
     newBlade = copy.deepcopy(enBlade)
     newID =  len(eRando.arrangeData["rows"]) + 1
@@ -131,7 +134,7 @@ def RedRingRemoval():
                 pop["battlelockname"] = 0
             JSONParser.CloseFile(popData, popFile)
 
-def EnemyMultiplier(mult, targetIDs:list[int]):
+def EnemyMultiplier(mult, targetIDs:list[int], isBoss = False):
     qstTaskBattles = JSONParser.File("XC2/JsonOutputs/common/FLD_QuestBattle.json")
     
     for code in IDs.MajorAreaIds:
@@ -140,17 +143,21 @@ def EnemyMultiplier(mult, targetIDs:list[int]):
             for en in enePopFile.rows:
                 for i in range(1,5):
                     if en[f"ene{i}ID"] in targetIDs:
-                        en[f"ene{i}num"] = en[f"ene{i}num"]*mult
+                        maxCount = 7 # The squad ID 33 supports 7 enemies
+                        if en[f"ene{i}num"] > maxCount: continue # Enemy already exceed the max count leave as it was
+                    
+                        StatRand.ApplyMult(en, f"ene{i}num", mult, maxCount)
                         en["squadId"] = 33 # This is the guldo squad id so that the enemies are played apart from each other, otherwise they severely glitch out
-                        # en["party_flag"] = 1 # Not 
+                        # en["party_flag"] = 1 # Not needed
                         # Fix the quest that require a group of enemies to be killed to be the entire group
                         for task in qstTaskBattles.rows:
                             if task["EnemyID"] == en[f"ene{i}ID"]:
                                 task["Count"] = en[f"ene{i}num"]
                                 break
-
             enePopFile.Close()
+            
     qstTaskBattles.Close()
+    
 
 def ChangeSize(enList, targetGroup, newsize):
     for en in enList:

@@ -65,13 +65,13 @@ def GenerateSettingsFromPermalink(base64_encoded_permalink, OptionsList:list[Var
             intvalue = bitsreader.read(intBits)
             if OptionsList[i].get() != intvalue:
                 OptionsList[i].set(intvalue)    
-    return(seed, OptionsList)
+    return seed
 
 
 def AddPermalinkTrace(traceObjects:list[Variable], permaLinkVar:Variable, seedEntryVar:Variable, version):
     def PermalinkFromEntry():
         try:
-            seedName, options = GenerateSettingsFromPermalink(permaLinkVar.get(), traceObjects)
+            seedName = GenerateSettingsFromPermalink(permaLinkVar.get(), traceObjects)
             seedEntryVar.set(seedName)
         except:
             print("Invalid Permalink")

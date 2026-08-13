@@ -186,7 +186,7 @@ def MultiplyEnemies(mult, targetIDs:list[int]):
             for en in enePopFile.rows:
                 for i in range(1,7):
                     if en[f"EnemyID{i}"] in targetIDs:
-                        en[f"PopCount{i}"] = en[f"PopCount{i}"]*mult
+                        StatRand.ApplyMult(en, f"PopCount{i}", mult, 99)
                         
                         # Fix the quest that require a group of enemies to be killed to be the entire group
                         for task in qstTaskBattles.rows:

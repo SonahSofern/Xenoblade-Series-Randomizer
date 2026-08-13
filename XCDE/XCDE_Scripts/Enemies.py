@@ -1,6 +1,6 @@
 import json, random, copy, math
 from XCDE.XCDE_Scripts import IDs, Options
-from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e, Interactables
+from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e, Interactables, StatRand
 
 StaticEnemyData:list[Helper.RandomGroup] = []
 instantDeathSpikeThreshold = 60
@@ -337,7 +337,7 @@ def MultiplyEnemies(mult, targetIDs:list[int]):
         for en in enePopFile.rows:
             for i in range(1,6):
                 if f"ene{i}ID" in targetIDs:
-                    en[f"ene{i}num"] = en[f"ene{i}num"]*mult
+                    StatRand.ApplyMult(en, f"ene{i}num", mult, 99)
 
     enePopFile.Close()
         

@@ -88,17 +88,18 @@ def Gems():
     isFreeEquip = Options.GemOption_FreeEquip.GetState()
     isPower = Options.GemOption_Power.GetState()
     isEffect = Options.GemOption_Effect.GetState()
-    isUnusedGems = Options.GemOption_Unused.GetState()
+    
+    effectType = Options.GemOption_Effect_Dropdown
     
     if isEffect:
-        StandardGems(gemFile, gemMSFile, gemHelpMSFile)
-    
-    if isUnusedGems:
-        UnusedGems()
-    
-    if isEffect or isUnusedGems:
+        if effectType.CheckState("All"):
+            StandardGems(gemFile, gemMSFile, gemHelpMSFile)
+            UnusedGems()
+        elif effectType.CheckState("Vanilla"):
+            StandardGems(gemFile, gemMSFile, gemHelpMSFile)
+        elif effectType.CheckState("Custom"):
+            UnusedGems()
         Effects(gemFile, gemMSFile, gemHelpMSFile)
-    
     
     for gem in gemFile.rows:
         if isNotCapped:
@@ -110,7 +111,7 @@ def Gems():
             RankPower(gem, ranks)
             
     
-    if isPower or isEffect or isUnusedGems:
+    if isPower or isEffect:
         ItemPower(gemFile.rows, ranks)
                     
     GemList.clear() # Clear the global list
@@ -282,8 +283,10 @@ def GemDescriptions():
     GemDescription = PopupDescriptions.Description()
     GemDescription.Header(Options.GemOption_Power.name)
     GemDescription.Text("This randomizes the power level of crafted and premade gems.")
-    GemDescription.Header(f"{Options.GemOption_Effect.name}/{Options.GemOption_Unused.name}")
+    GemDescription.Header(f"{Options.GemOption_Effect.name}")
+    GemDescription.Tag(Options.GemOption_Effect_Dropdown.values[0].displayVal)
     GemDescription.Text("This randomizes what each gems effect is. Essentially shuffling the gems. Armors or weapons with unique gems will be randomized as well as any gems given throughout the story, this will also affect crystals.")
+    GemDescription.Tag(Options.GemOption_Effect_Dropdown.values[1].displayVal)
     GemDescription.Text("Unused effects will add gems that don't exist in the vanilla game. For example, cooldown reduction gems, or gems infused with monado enchant.")
     GemDescription.Image("crazygems.png", "XCDE", 800)
     GemDescription.Header(Options.GemOption_FreeEquip.name)

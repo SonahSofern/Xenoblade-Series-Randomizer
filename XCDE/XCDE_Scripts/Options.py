@@ -1,4 +1,4 @@
-from scripts.Interactables import Option, SubOption, Spinbox, SubSpinbox, SubDropdown, Dropdown
+from scripts.Interactables import Option, SubOption, Spinbox, SubSpinbox, SubDropdown, Dropdown, DropdownOption
 from scripts import Helper, XCRandomizer
 from XCDE.XCDE_Scripts import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Armor, MiscQOL, Scales, NPC, Weapons, Items, IDs
 import scripts.Interactables
@@ -103,7 +103,7 @@ NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, defSta
 NormalEnemyOption_Superboss_Spinbox = SubSpinbox(NormalEnemyOption_Superboss, default=1)
 NormalEnemyOption_Size = SubOption("Match Size", NormalEnemyOption)
 NormalEnemyOption_OopsAll = SubOption("Oops All", NormalEnemyOption, defState=False)
-NormalEnemyOption_OopsAll_Dropdown = SubDropdown(NormalEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns())
+NormalEnemyOption_OopsAll_Dropdown = SubDropdown(NormalEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns(), sort=True, width=40)
 NormalEnemyOption_Mult = SubOption("More Enemies", NormalEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(NormalEnemyOption_Mult_Spinbox.GetState(), IDs.NormalEnemies)], defState=False)
 NormalEnemyOption_Mult_Spinbox = SubSpinbox(NormalEnemyOption_Mult, min=2, max=4, increment=1, default=2, description="x Enemies")
 
@@ -119,7 +119,7 @@ UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption)
 UniqueEnemyOption_Superboss_Spinbox = SubSpinbox(UniqueEnemyOption_Superboss, default=2)
 UniqueEnemyOption_Size = SubOption("Match Size", UniqueEnemyOption)
 UniqueEnemyOption_OopsAll = SubOption("Oops All", UniqueEnemyOption, defState=False)
-UniqueEnemyOption_OopsAll_Dropdown = SubDropdown(UniqueEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns())
+UniqueEnemyOption_OopsAll_Dropdown = SubDropdown(UniqueEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns(), sort=True, width=40)
 UniqueEnemyOption_Mult = SubOption("More Enemies", UniqueEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(UniqueEnemyOption_Mult_Spinbox.GetState(), IDs.UniqueEnemies)], defState=False)
 UniqueEnemyOption_Mult_Spinbox = SubSpinbox(UniqueEnemyOption_Mult, min=2, max=4, increment=1, default=2, description="x Enemies")
 
@@ -135,7 +135,7 @@ BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=F
 BossEnemyOption_Superboss_Spinbox = SubSpinbox(BossEnemyOption_Superboss, default=1)
 BossEnemyOption_FinalBoss = SubOption("Vanilla Final Boss", BossEnemyOption, defState=False)
 BossEnemyOption_OopsAll = SubOption("Oops All", BossEnemyOption, defState=False)
-BossEnemyOption_OopsAll_Dropdown = SubDropdown(BossEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns())
+BossEnemyOption_OopsAll_Dropdown = SubDropdown(BossEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns(), sort=True, width=40)
 BossEnemyOption_Mult = SubOption("More Enemies", BossEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(BossEnemyOption_Mult_Spinbox.GetState(), IDs.LockEnemyFights + IDs.NonLockRequiredFights)], defState=False)
 BossEnemyOption_Mult_Spinbox = SubSpinbox(BossEnemyOption_Mult, min=2, max=4, increment=1, default=2, description="x Enemies")
 
@@ -145,7 +145,7 @@ BossEnemyOption_Mult_Spinbox = SubSpinbox(BossEnemyOption_Mult, min=2, max=4, in
 GemOption = Option("Gems", Character, "Randomizes the effects of Gems and Crystals", [lambda: Gems.Gems()], descData=lambda: Gems.GemDescriptions())
 GemOption_Power = SubOption("Power", GemOption)
 GemOption_Effect = SubOption("Effects", GemOption)
-GemOption_Unused = SubOption("Unused Effects", GemOption)
+GemOption_Effect_Dropdown = SubDropdown(GemOption_Effect, [DropdownOption("Vanilla"), DropdownOption("Custom"), DropdownOption("All")])
 GemOption_FreeEquip = SubOption("Freely Equip to Weapons/Armor", GemOption)
 GemOption_NoCap = SubOption("Gem Caps", GemOption)
 AffinityTreeOption = Option("Skill Trees", Character, "Randomizes all character's skill trees", [lambda: SkillTrees.SkillRando()], descData=lambda: SkillTrees.SkillTreeDesc())
@@ -166,7 +166,8 @@ PlayerArtsOption_Summons = SubOption("Keep Melia's Summons", PlayerArtsOption)
 # PlayerArtsOption_Cooldown = SubOption("Cooldown", PlayerArtsOption)
 EquipmentOption = Option("Armor", Character, "Randomizes effects of Armor", [lambda: Armor.ArmorRando()], descData=lambda: Armor.ArmorDesc())
 EquipmentOption_Appearance = SubOption("Appearance", EquipmentOption)
-EquipmentOption_CrazyAppearance = SubOption("Crazy Appearance", EquipmentOption)
+EquipmentOption_Appearance_Dropdown = SubDropdown(EquipmentOption_Appearance, [DropdownOption("Normal"), DropdownOption("Crazy")])
+# EquipmentOption_CrazyAppearance = SubOption("Crazy Appearance", EquipmentOption)
 # EquipmentOption_Defenses = SubOption("Defenses", EquipmentOption)
 EquipmentOption_GemSlots = SubOption("Gem Slots", EquipmentOption)
 EquipmentOption_WeightClass = SubOption("Weight Class", EquipmentOption)

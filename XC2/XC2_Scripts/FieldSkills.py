@@ -58,7 +58,14 @@ def RandomizeFieldSkills():
                 blade[slot] = Skill
                 
         JSONParser.CloseFile(bladeData, bladeFile)
-        
+
+def DropdownRemoveStoryFieldSkills():
+    dropVal = Options.FieldSkillOption_Remove_Dropdown.GetState()
+    if dropVal == "Story":
+        RemoveStoryFieldSkills()
+    else:
+        RemoveFieldSkills(True)
+ 
 def RemoveStoryFieldSkills():
     mapGimmickIds = [
         4, 5,           # Trees in early Gormott

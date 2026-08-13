@@ -6,12 +6,11 @@ def ArmorRando():
     isAppearance = Options.EquipmentOption_Appearance.GetState()
     isGemSlots = Options.EquipmentOption_GemSlots.GetState()
     isWeightClass = Options.EquipmentOption_WeightClass.GetState()
-    isCrazy = Options.EquipmentOption_CrazyAppearance.GetState()
     
     dontChange = [1,2,3,4,5]
     
-    if isAppearance or isCrazy:
-        GearAppearance(isCrazy)
+    if isAppearance:
+        GearAppearance(Options.EquipmentOption_Appearance_Dropdown)
    
     with open("./XCDE/JsonOutputs/bdat_common/ITM_equiplist.json", 'r+', encoding='utf-8') as armorFile:
         armData = json.load(armorFile)
@@ -99,9 +98,7 @@ def FindCosmeticLists(CosmeticTypeName, filename, bonusList = []):
         return TotalList
         # print(f"Misc{CosmeticTypeName} = {list(set(MiscList))}")
             
-
-
-def GearAppearance(isCrazy):
+def GearAppearance(appearanceVal:Options.SubDropdown):
     with open(f"./XCDE/JsonOutputs/bdat_common/ITM_equiplist.json", 'r+', encoding='utf-8') as equipFile:
         eqData = json.load(equipFile)
         invalidArmor = [190]
@@ -126,7 +123,7 @@ def GearAppearance(isCrazy):
                 if eq["pc"][i] == 0: # Ignore armors that you couldnt normally equip
                     continue
                 # If crazy armor we want to randomly choose a list, otherwise choose the list corresponsing with the current character (i)
-                if isCrazy:
+                if appearanceVal.CheckState("Crazy"):
                     # Used to seperate nopon and human cosmetics they dont mix well and even crash sometimes
                     human = [0,1,2,3,4,6,7,8,9,10,16] # 11,12
                     nopon = [5,13,14]
@@ -175,8 +172,9 @@ def RemoveStartingGear():
 def ArmorDesc():
     myDesc = PopupDescriptions.Description()
     myDesc.Header(Options.EquipmentOption_Appearance.name)
+    myDesc.Tag(Options.EquipmentOption_Appearance_Dropdown.values[0].displayVal)
     myDesc.Text("This randomizes the appearance of armor pieces. It will only randomize among your characters normally obtainable cosmetics.\nFor example, Dunban will always have Dunban armors.")
-    myDesc.Header(Options.EquipmentOption_CrazyAppearance.name)
+    myDesc.Tag(Options.EquipmentOption_Appearance_Dropdown.values[1].displayVal)
     myDesc.Text("This randomizes the appearance of armor pieces, including between different characters. This has amazing results.")
     myDesc.Image("alvisshulk.png","XCDE", 600)
     myDesc.Image("bikinishulk.png","XCDE", 600)
