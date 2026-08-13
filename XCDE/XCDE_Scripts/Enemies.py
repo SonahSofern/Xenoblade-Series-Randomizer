@@ -16,7 +16,9 @@ class ForcedArt:
         self.artSlot = artSlot
         self.artId = artId
         
-def Enemies(monsterTypeList, enemyOption, normal, unique, boss, superboss, size, oopsAll:Interactables.SubOption, oopsAllDropdown:Interactables.SubDropdown, finalBoss = False):
+def Enemies(monsterTypeList, enemyOption:Options.SubOption, normal:Options.SubOption, unique:Options.SubOption, boss:Options.SubOption, superboss:Options.SubOption, size, oopsAll:Interactables.SubOption, oopsAllDropdown:Interactables.SubDropdown, finalBoss = False):
+    if not (normal.GetState() or unique.GetState() or boss.GetState() or superboss.GetState() or oopsAll.GetState()): return # Didnt select any groups to replace the enemies so you just want the other suboptions
+    
     global StaticEnemyData
     GroupEnemies = [135,136,137,138,139]
     EarlyFights = [32, 33, 1501, 1502, 1503] # The first few fights can be really tough before cheering allies or any arts lets leave their stats vanilla
@@ -204,13 +206,9 @@ def getEnID(e:Enemy):
     '''Helper for genenemydata'''
     return e.eneListArea["$id"]
 
-XCDEOopsAllPool = []
 def GetOopsAllDropdowns():
     '''Creates dropdown options for the oops all pool'''
-    global XCDEOopsAllPool
-    if XCDEOopsAllPool == []:
-        XCDEOopsAllPool = e.GetOopsAllPool("XCDE/VanillaJson/bdat_common/BTL_enelist.json", "XCDE/VanillaJson/bdat_common_ms/BTL_enelist_ms.json", IDs.NormalEnemies + IDs.BossEnemies + IDs.UniqueEnemies + IDs.SuperbossEnemies, "name")
-    return XCDEOopsAllPool
+    return e.GetOopsAllPool("XCDE/VanillaJson/bdat_common/BTL_enelist.json", "XCDE/VanillaJson/bdat_common_ms/BTL_enelist_ms.json", IDs.NormalEnemies + IDs.BossEnemies + IDs.UniqueEnemies + IDs.SuperbossEnemies, "name", "XCDE")
 
 # There is no fix for topple spikes always being active just nerfed all spikes instead
 def SpikeBalancer(enemy, chosen): # spike damage is 10x the spike_dmg value

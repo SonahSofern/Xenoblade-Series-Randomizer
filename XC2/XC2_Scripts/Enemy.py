@@ -5,7 +5,9 @@ from scripts import Helper, JSONParser, PopupDescriptions, Enemies as e, Interac
 StaticEnemyData:list[Helper.RandomGroup] = []
 
 ValidEnemyPopFileNames = ["ma01a_FLD_EnemyPop.json", "ma02a_FLD_EnemyPop.json", "ma04a_FLD_EnemyPop.json", "ma05a_FLD_EnemyPop.json", "ma05c_FLD_EnemyPop.json", "ma07a_FLD_EnemyPop.json", "ma07c_FLD_EnemyPop.json", "ma08a_FLD_EnemyPop.json", "ma08c_FLD_EnemyPop.json", "ma10a_FLD_EnemyPop.json", "ma10c_FLD_EnemyPop.json", "ma11a_FLD_EnemyPop.json", "ma13a_FLD_EnemyPop.json", "ma13c_FLD_EnemyPop.json", "ma15a_FLD_EnemyPop.json", "ma15c_FLD_EnemyPop.json", "ma16a_FLD_EnemyPop.json", "ma17a_FLD_EnemyPop.json", "ma17c_FLD_EnemyPop.json", "ma18a_FLD_EnemyPop.json", "ma18c_FLD_EnemyPop.json", "ma20a_FLD_EnemyPop.json", "ma20c_FLD_EnemyPop.json", "ma21a_FLD_EnemyPop.json", "ma40a_FLD_EnemyPop.json", "ma41a_FLD_EnemyPop.json", "ma42a_FLD_EnemyPop.json"]
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isVanillaAggro, matchSize:Interactables.SubOption, balanceStats:Interactables.SubOption, matchPhase = False, finalBoss = False):
+def Enemies(targetGroup, normalOption:Interactables.Option, uniqueOption:Interactables.Option, bossOption:Interactables.Option, superBossOption:Interactables.Option, enemiesOption, isVanillaAggro, matchSize:Interactables.SubOption, balanceStats:Interactables.SubOption, matchPhase = False, finalBoss = False, isOopsAll = False, oopsAllVal = 0):
+    if not (normalOption.GetState() or uniqueOption.GetState() or bossOption.GetState() or superBossOption.GetState() or isOopsAll): return # Didnt select any groups to replace the enemies so you just want the other suboptions
+    
     global StaticEnemyData
     EnemyCounts = GetEnemyCounts()
     GroupFightViolations = GetGroupFightViolations()
@@ -24,21 +26,21 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
     rscFile = JSONParser.File("XC2/JsonOutputs/common/RSC_En.json")
     artFile = JSONParser.File("XC2/JsonOutputs/common/BTL_Arts_En.json")
     
-    eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID", "ParamID", eneFile.data, paramFile.data, rscFile.data, artFile.data, permanentBandaids=[lambda: GortOgreUppercutRemoval(paramFile)])
+    eRando = e.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, enemiesOption, normalOption, uniqueOption, bossOption, superBossOption, "ResourceID", "ParamID", eneFile.data, paramFile.data, rscFile.data, artFile.data, permanentBandaids=[lambda: GortOgreUppercutRemoval(paramFile)])
 
     if StaticEnemyData == []:
         StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
 
+    if isOopsAll:
+        newEn = eRando.CreateForcedEnemy(StaticEnemyData, oopsAllVal)
+    
     for oldEn in eRando.arrangeData["rows"]:
-        if eRando.FilterEnemies(oldEn, targetGroup):
-            continue
+        if eRando.FilterEnemies(oldEn, targetGroup): continue 
+        if finalBoss and isFinalBoss(oldEn): continue
         
-        if finalBoss and isFinalBoss(oldEn):
-            continue
-
-        newEn = eRando.CreateRandomEnemy(StaticEnemyData)
-        
-        newEn = RerollTornaBladedEnemies(oldEn, newEn, eRando)
+        if not isOopsAll:
+            newEn = eRando.CreateRandomEnemy(StaticEnemyData)
+            newEn = RerollTornaBladedEnemies(oldEn, newEn, eRando)
 
         if Options.BossEnemyOption_Solo.GetState():
             eRando.BalanceFight(oldEn, newEn, SoloFightViolations, EnemyCounts)
@@ -75,7 +77,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isV
     for group in StaticEnemyData:
         group.RefreshCurrentGroup()
 
-    Bandaids(eneFile.data, isBoss, eRando) # Changes based on ID after the key swap
+    Bandaids(eneFile.data, bossOption, eRando) # Changes based on ID after the key swap
     
     if matchPhase:
         MatchPhase()
@@ -129,11 +131,31 @@ def RedRingRemoval():
                 pop["battlelockname"] = 0
             JSONParser.CloseFile(popData, popFile)
 
+def EnemyMultiplier(mult, targetIDs:list[int]):
+    qstTaskBattles = JSONParser.File("XC2/JsonOutputs/common/FLD_QuestBattle.json")
+    
+    for code in IDs.MajorAreaIds:
+        enePopFile = JSONParser.File(f"XC2/JsonOutputs/common_gmk/ma{code}a_FLD_EnemyPop.json")
+        if enePopFile.isOpen:
+            for en in enePopFile.rows:
+                for i in range(1,5):
+                    if en[f"ene{i}ID"] in targetIDs:
+                        en[f"ene{i}num"] = en[f"ene{i}num"]*mult
+            
+                        # Fix the quest that require a group of enemies to be killed to be the entire group
+                        for task in qstTaskBattles.rows:
+                            if task["EnemyID"] == en[f"ene{i}ID"]:
+                                task["Count"] = en[f"ene{i}num"]
+                                break
+
+            enePopFile.Close()
+    qstTaskBattles.Close()
+
 def ChangeSize(enList, targetGroup, newsize):
     for en in enList:
         if en["$id"] in targetGroup:
             en["ChrSize"] = newsize
-  
+ 
 def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     if oldEn["$id"] in [1632]:
         pass
@@ -178,7 +200,7 @@ def Bandaids(eneData, isBoss, eRando):
     CutsceneOnlyEnemyMatch(eRando)
 
 def AdjustSkinUpgrades(oldEn, newEn, eRando:e.EnemyRandomizer):
-    '''Bosses having skin upgrade is unfair to suddenly deal insane dmg and heal to full. This changes their skin upgrade to give less levels depending on the enemies level'''
+    '''Boss enemies having skin upgrade is unfair to suddenly deal insane dmg and heal to full. This changes their skin upgrade to give levels depending on the enemies level'''
     if oldEn["$id"] in IDs.BossMonsters: # If we are a boss and we have a skin upgrade art we adjust it
         SkinUpgradeArtIDs = [175,176,177,178]
         MaxLevelDiv = 4 # Part of what determines the levels added by upgrades
@@ -350,22 +372,7 @@ def SummonsLevelFix(ene):
     ene["DriverLev"] = targetDriver 
 
 def GetOopsAllPool():
-    '''Only works if the rando has ran once, but gets a list of all the enemies and their names to choose as an oops all'''
-    eneFile = JSONParser.File("XC2/VanillaJson/common/CHR_EnArrange.json")
-    nameFile = JSONParser.File("XC2/VanillaJson/common_ms/fld_enemyname.json")
-    
-    nameList = []
-    for en in eneFile.rows:
-        if en["$id"] not in IDs.BossMonsters + IDs.NormalMonsters + IDs.UniqueMonsters + IDs.SuperbossMonsters: continue
-        for name in nameFile.rows:
-            if name["$id"] != en["Name"]: continue
-            nameList.append(f"{name["name"]} {en["$id"]}")
-            break
-    eneFile.Close()
-    nameFile.Close()
-    return nameList
-    
-    
+    return e.GetOopsAllPool("XC2/VanillaJson/common/CHR_EnArrange.json", "XC2/VanillaJson/common_ms/fld_enemyname.json", IDs.UniqueMonsters + IDs.NormalMonsters + IDs.BossMonsters + IDs.SuperbossMonsters + IDs.FinalbossMonsters + IDs.TornaFinalbossMonsters, "Name", "XC2")
 
 def EnemyDesc(name):
     EnemyRandoDesc = PopupDescriptions.Description()

@@ -9,7 +9,9 @@ isLogEnemy = True
 StaticEnemyData:list[Helper.RandomGroup] = []
 ValidEnemyPopFileNames = ["ma01a_GMK_EnemyPop.json", "ma04a_GMK_EnemyPop.json", "ma07a_GMK_EnemyPop.json", "ma09a_GMK_EnemyPop.json", "ma11a_GMK_EnemyPop.json", "ma14a_GMK_EnemyPop.json", "ma15a_GMK_EnemyPop.json", "ma17a_GMK_EnemyPop.json", "ma22a_GMK_EnemyPop.json", "ma25a_01_GMK_EnemyPop.json", "ma25a_02_GMK_EnemyPop.json", "ma25a_03_GMK_EnemyPop.json", "ma25a_04_GMK_EnemyPop.json", "ma25a_05_GMK_EnemyPop.json", "ma25a_06_GMK_EnemyPop.json", "ma25a_07_GMK_EnemyPop.json", "ma25a_08_GMK_EnemyPop.json", "ma25a_09_GMK_EnemyPop.json", "ma25a_10_GMK_EnemyPop.json", "ma25a_11_GMK_EnemyPop.json", "ma25a_12_GMK_EnemyPop.json", "ma25a_13_GMK_EnemyPop.json", "ma25a_14_GMK_EnemyPop.json", "ma25a_15_GMK_EnemyPop.json", "ma25a_16_GMK_EnemyPop.json", "ma25a_17_GMK_EnemyPop.json", "ma25a_18_GMK_EnemyPop.json", "ma25a_19_GMK_EnemyPop.json", "ma25a_50_GMK_EnemyPop.json", "ma25a_51_GMK_EnemyPop.json", "ma25a_52_GMK_EnemyPop.json", "ma25a_53_GMK_EnemyPop.json", "ma40a_GMK_EnemyPop.json", "ma44a_GMK_EnemyPop.json", "ma45a_GMK_EnemyPop.json", "ma46a_GMK_EnemyPop.json", "ma90a_GMK_EnemyPop.json", "ma90gmk_GMK_EnemyPop.json"]
 
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isMatchSizeOption:Options.Option, isBossGroupBalancing, isOopsAll, OopsAllValue):
+def Enemies(targetGroup, normalOption:Options.SubOption, uniqueOption:Options.SubOption, bossOption:Options.SubOption, superbossOption:Options.SubOption, enemiesOption:Options.Option, isMatchSizeOption:Options.Option, isBossGroupBalancing, isOopsAll, oopsAllValue):
+    if not (normalOption.GetState() or uniqueOption.GetState() or bossOption.GetState() or superbossOption.GetState() or isOopsAll): return # Didnt select any groups to replace the enemies so you just want the other suboptions
+    
     global StaticEnemyData
     
     if StaticEnemyData == []:
@@ -32,21 +34,18 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isM
     rscFile = JSONParser.File("XC3/JsonOutputs/btl/BTL_EnRsc.json")
     artFile = JSONParser.File("XC3/JsonOutputs/btl/BTL_Arts_En.json")
                     
-    eRando = Enemy.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "Resource", "IdBattleEnemy", eneFile.data, paramFile.data, rscFile.data, artFile.data)
+    eRando = Enemy.EnemyRandomizer(IDs.NormalMonsters, IDs.UniqueMonsters, IDs.BossMonsters, IDs.SuperbossMonsters, enemiesOption, normalOption, uniqueOption, bossOption, superbossOption, "Resource", "IdBattleEnemy", eneFile.data, paramFile.data, rscFile.data, artFile.data)
 
     if firstRun:
         StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
         SummonFix()
     
     if isOopsAll:
-        newEn = eRando.CreateForcedEnemy(StaticEnemyData, OopsAllValue)
+        newEn = eRando.CreateForcedEnemy(StaticEnemyData, oopsAllValue)
         
     for en in eneFile.rows:
-        if eRando.FilterEnemies(en, targetGroup):
-            continue
-        
-        if FilterNPCEnemies(en["NPCName"]):
-            continue
+        if eRando.FilterEnemies(en, targetGroup): continue
+        if FilterNPCEnemies(en["NPCName"]): continue
 
         if not isOopsAll:
             newEn = eRando.CreateRandomEnemy(StaticEnemyData)
@@ -171,12 +170,8 @@ def SummonFix(): # For now this is lower priority for how difficult it would be 
             summon[f"EnemyID0{i}"] = 0
     summonFile.Close()    
 
-XC3OopsAllPool = []
 def GetOopsAllPool():
-    global XC3OopsAllPool
-    if XC3OopsAllPool == []:
-        XC3OopsAllPool = Enemy.GetOopsAllPool("XC3/VanillaJson/fld/FLD_EnemyData.json", "XC3/VanillaJson/system/msg_enemy_name.json", IDs.UniqueMonsters + IDs.NormalMonsters + IDs.BossMonsters + IDs.SuperbossMonsters, "MsgName")
-    return XC3OopsAllPool
+    return Enemy.GetOopsAllPool("XC3/VanillaJson/fld/FLD_EnemyData.json", "XC3/VanillaJson/system/msg_enemy_name.json", IDs.UniqueMonsters + IDs.NormalMonsters + IDs.BossMonsters + IDs.SuperbossMonsters, "MsgName", "XC3")
 
 def MultiplyEnemies(mult, targetIDs:list[int]):
     qstTaskBattles = JSONParser.File("XC3/JsonOutputs/qst/QST_TaskBattle.json")

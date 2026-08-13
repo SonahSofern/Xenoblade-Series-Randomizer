@@ -153,7 +153,7 @@ def NewGamePlusBladeBalancing():
             for stat in ["Damage", "Stability", "CriRate", "GuardRate"]:
                 StatRand.ApplyMult(newWeapon, stat, statMult, min=14)
                 
-            print(f"Weapon Type: {i} Rank: {newWeapon["Rank"]} Damage: {newWeapon["Damage"]}")
+            # print(f"Weapon Type: {i} Rank: {newWeapon["Rank"]} Damage: {newWeapon["Damage"]}")
             
             # Add new weapon to rows
             wpnFile.rows.append(newWeapon)

@@ -3,7 +3,7 @@ from tkinter import ttk
 root = Tk()
 from scripts import Theme, XCRandomizer
 import XCDE.XCDE_Scripts.XCDE_Settings as XCDE
-# import XC2.XC2_Scripts.XC2_Settings as XC2
+import XC2.XC2_Scripts.XC2_Settings as XC2
 import XC3.XC3_Scripts.XC3_Settings as XC3
 import XCXDE.XCXDE_Scripts.XCXDE_Settings as XCXDE
 
@@ -30,7 +30,7 @@ root.iconphoto(True, icon)
 root.attributes(alpha=0)
 
 XCRandomizer.CreateMainWindow(root, MainWindow, XCDE.WindowData)
-# XCRandomizer.CreateMainWindow(root, MainWindow, XC2.WindowData)
+XCRandomizer.CreateMainWindow(root, MainWindow, XC2.WindowData)
 XCRandomizer.CreateMainWindow(root, MainWindow, XC3.WindowData)
 XCRandomizer.CreateMainWindow(root, MainWindow, XCXDE.WindowData)
 

@@ -104,7 +104,7 @@ NormalEnemyOption_Superboss_Spinbox = SubSpinbox(NormalEnemyOption_Superboss, de
 NormalEnemyOption_Size = SubOption("Match Size", NormalEnemyOption)
 NormalEnemyOption_OopsAll = SubOption("Oops All", NormalEnemyOption, defState=False)
 NormalEnemyOption_OopsAll_Dropdown = SubDropdown(NormalEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns())
-NormalEnemyOption_Mult = SubOption("Multiply Enemy Count", NormalEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(NormalEnemyOption_Mult_Spinbox.GetState(), IDs.NormalEnemies)])
+NormalEnemyOption_Mult = SubOption("More Enemies", NormalEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(NormalEnemyOption_Mult_Spinbox.GetState(), IDs.NormalEnemies)])
 NormalEnemyOption_Mult_Spinbox = SubSpinbox(NormalEnemyOption_Mult, min=2, max=4, increment=1, default=2, description="x Enemies")
 
 UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: EnemiesScript.Enemies(IDs.UniqueEnemies + IDs.SuperbossEnemies, UniqueEnemyOption, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption_Size.GetState(), UniqueEnemyOption_OopsAll, UniqueEnemyOption_OopsAll_Dropdown)], descData=lambda: EnemiesScript.EnemyDesc(UniqueEnemyOption.name))
@@ -120,7 +120,7 @@ UniqueEnemyOption_Superboss_Spinbox = SubSpinbox(UniqueEnemyOption_Superboss, de
 UniqueEnemyOption_Size = SubOption("Match Size", UniqueEnemyOption)
 UniqueEnemyOption_OopsAll = SubOption("Oops All", UniqueEnemyOption, defState=False)
 UniqueEnemyOption_OopsAll_Dropdown = SubDropdown(UniqueEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns())
-UniqueEnemyOption_Mult = SubOption("Multiply Enemy Count", UniqueEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(UniqueEnemyOption_Mult_Spinbox.GetState(), IDs.UniqueEnemies)])
+UniqueEnemyOption_Mult = SubOption("More Enemies", UniqueEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(UniqueEnemyOption_Mult_Spinbox.GetState(), IDs.UniqueEnemies)])
 UniqueEnemyOption_Mult_Spinbox = SubSpinbox(UniqueEnemyOption_Mult, min=2, max=4, increment=1, default=2, description="x Enemies")
 
 BossEnemyOption = Option("Boss Monsters", Enemies, "Randomizes bosses into the chosen types", [lambda: EnemiesScript.Enemies(IDs.BossEnemies, BossEnemyOption, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, True, BossEnemyOption_OopsAll, BossEnemyOption_OopsAll_Dropdown, BossEnemyOption_FinalBoss.GetState()), lambda: EnemiesScript.EgilArenaFix()], descData=lambda: EnemiesScript.EnemyDesc(BossEnemyOption.name))
@@ -136,7 +136,7 @@ BossEnemyOption_Superboss_Spinbox = SubSpinbox(BossEnemyOption_Superboss, defaul
 BossEnemyOption_FinalBoss = SubOption("Vanilla Final Boss", BossEnemyOption, defState=False)
 BossEnemyOption_OopsAll = SubOption("Oops All", BossEnemyOption, defState=False)
 BossEnemyOption_OopsAll_Dropdown = SubDropdown(BossEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns())
-BossEnemyOption_Mult = SubOption("Multiply Enemy Count", BossEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(BossEnemyOption_Mult_Spinbox.GetState(), IDs.LockEnemyFights + IDs.NonLockRequiredFights)])
+BossEnemyOption_Mult = SubOption("More Enemies", BossEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(BossEnemyOption_Mult_Spinbox.GetState(), IDs.LockEnemyFights + IDs.NonLockRequiredFights)])
 BossEnemyOption_Mult_Spinbox = SubSpinbox(BossEnemyOption_Mult, min=2, max=4, increment=1, default=2, description="x Enemies")
 
 # FinalBossOption = Option("Final Boss", Enemies, "Forces the final boss to be one of your choices")

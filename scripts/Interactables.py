@@ -95,6 +95,7 @@ class Option(Interactable):
             int.VisualStateUpdate()
     
     def GetSpinbox(self):
+        '''Legacy function so that previous code using GetSpinbox still works'''
         for int in self.interactables:
             if isinstance(int, Spinbox):
                 return int.GetState()

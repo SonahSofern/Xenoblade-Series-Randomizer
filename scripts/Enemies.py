@@ -239,11 +239,8 @@ class EnemyRandomizer():
     def FindParam(self, enemy):
         handledEnemy = self.HandleIDandDict(enemy, self.arrangeData["rows"])
         for param in self.paramData["rows"]:
-            try:
-                if param["$id"] == handledEnemy[self.paramKey]:
-                    return param
-            except:
-                pass
+            if param["$id"] == handledEnemy[self.paramKey]:
+                return param
 
     def FindArt(self, artId):
         for art in self.artData["rows"]:
@@ -282,15 +279,14 @@ class EnemyRandomizer():
     
     def CreateRandomEnemy(self, StaticEnemyData:list[Helper.RandomGroup]):
         '''Returns a random enemy using weights from the groups generated'''
-        newEn = random.choices(StaticEnemyData, self.weights)[0].SelectRandomMember()
-        return newEn
+        return random.choices(StaticEnemyData, self.weights)[0].SelectRandomMember()
     
     def CreateForcedEnemy(self, StaticEnemyData:list[Helper.RandomGroup], forcedEnemyID, condition = lambda en: en["$id"]):
-        '''Returns a random enemy using weights from the groups generated'''
+        '''Returns a forced enemy based on the ID and condition provided'''
         for group in StaticEnemyData:
             for en in group.originalGroup:
                 if condition(en) == forcedEnemyID:
-                    return en
+                    return copy.deepcopy(en)
     
     def HandleIDandDict(self, target, data):
         '''Allows passing just the ID or the entire enemy'''
@@ -379,22 +375,48 @@ def EnemySizeMatch(oldEn, newEn, keysList, multDict, scaleKey = "ChrSize", defSc
 
 OopsAllDescription = "Forces all enemies of the group to randomize into the chosen enemy."
 
-def GetOopsAllPool(enemyFile, enemyNameFile, validIDs, enemyFileNameKey):
-    eneFile = JSONParser.File(enemyFile)
-    eneNameFile = JSONParser.File(enemyNameFile)
+OopsAllGlobal = {
+    "XCDE": [],
+    "XC2": [],
+    "XC3": [],
+    "XCXDE": []
+}
+
+def EnemyMultiplier(mult, targetIDs:list[int], areaIDs, qstTaskFileName, enePopFileName, enCount, popFileIDKey, popFileCountKey):
+    qstTaskBattles = JSONParser.File(qstTaskFileName)
+    enePopFile = JSONParser.File(enePopFileName)
     
-    DropdownOptions = []
-    for en in eneFile.rows:
-        if en["$id"] not in validIDs: continue  
-        for enName in eneNameFile.rows:
-            if enName["$id"] == en[enemyFileNameKey]:
-                name = enName["name"]
-        DropdownOptions.append(Interactables.DropdownOption(f"{name} ({en["$id"]})", en["$id"]))
+    for en in enePopFile.rows:
+        for i in range(1,enCount):
+            if en[popFileIDKey] in targetIDs:
+                en[popFileCountKey] = en[popFileCountKey]*mult
     
-    eneFile.Close()
-    eneNameFile.Close()  
+                # Fix the quest that require a group of enemies to be killed to be the entire group
+                for task in qstTaskBattles.rows:
+                    if task["EnemyID"] == en[f"ene{i}ID"]:
+                        task["Count"] = en[f"ene{i}num"]
+                        break
+
+    enePopFile.Close()
+    qstTaskBattles.Close()
+
+def GetOopsAllPool(enemyFile, enemyNameFile, validIDs, enemyFileNameKey, game):
+    # Create the data if we don't already have it
+    if OopsAllGlobal[game] == []:
+        eneFile = JSONParser.File(enemyFile)
+        eneNameFile = JSONParser.File(enemyNameFile)
+        
+        for en in eneFile.rows:
+            if en["$id"] not in validIDs: continue  
+            for enName in eneNameFile.rows:
+                if enName["$id"] == en[enemyFileNameKey]:
+                    name = enName["name"]
+            OopsAllGlobal[game].append(Interactables.DropdownOption(f"{name} ({en["$id"]})", en["$id"]))
+        
+        eneFile.Close()
+        eneNameFile.Close()  
     
-    return DropdownOptions
+    return OopsAllGlobal[game]
     
 # def ResolveLevelDiff(self, enemy): # Not using because level gap changes XP rewards
 #     if self.lvDiff == 0:

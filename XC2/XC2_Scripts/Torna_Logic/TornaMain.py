@@ -3,7 +3,7 @@ from XC2.XC2_Scripts.IDs import *
 import time, copy, os, math, random, json
 from XC2.XC2_Scripts.Torna_Logic import TornaRecipes, TornaQuests, TornaEnemies, TornaAreas, TornaShops, TornaRedBagItems, TornaMiscItems, TornaChests, TornaCollectionPoints
 from XC2.XC2_Scripts import Options, WeaponChips
-from scripts.Interactables import XenoOptionDict
+from scripts.Interactables import XenoOptionDict, SubOption
 
 # TO DO
 # look into options for pre-completed quests or EZ-complete quests?
@@ -241,9 +241,9 @@ def DetermineRemovedGormottLocs():
     global RemovedGormottLocs
     RemovedGormottLocs = []
     if Options.TornaRemoveGormottChecks.GetState():
-        for subopt in Options.TornaRemoveGormottChecks.subOptions:
-            if subopt.GetState():
-                RemovedGormottLocs.append(GormottNametoLocID[subopt.name])
+        for interactable in Options.TornaRemoveGormottChecks.interactables:
+            if (type(interactable) is SubOption) and interactable.GetState():
+                RemovedGormottLocs.append(GormottNametoLocID[interactable.name])
 
 def CreateFullItemDict(): # we want to turn the info ids into key item ids so that we can have them drop from treasure chests just fine
     ItemIDtoItemNameTemp = {}

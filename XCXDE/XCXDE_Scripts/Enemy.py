@@ -6,7 +6,9 @@ StaticEnemyData:list[Helper.RandomGroup] = []
 
 # Enemy Names for map hexs should be updated with their replacement
 
-def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isOopsAll, oopsAllValue, isMatchSize = False):
+def Enemies(targetGroup, normalOption:Options.SubOption, uniqueOption:Options.SubOption, bossOption:Options.SubOption, superbossOption:Options.SubOption, enemiesOption:Options.Option, isOopsAll, oopsAllValue, isMatchSize = False):
+    if not (normalOption.GetState() or uniqueOption.GetState() or bossOption.GetState() or superbossOption.GetState() or isOopsAll): return # Didnt select any groups to replace the enemies so you just want the other suboptions
+    
     global StaticEnemyData
     
     if StaticEnemyData == []:
@@ -26,7 +28,7 @@ def Enemies(targetGroup, isNormal, isUnique, isBoss, isSuperboss, isEnemies, isO
     paramFile = JSONParser.File("XCXDE/JsonOutputs/common/CHR_EnParam.json")
     rscFile = JSONParser.File("XCXDE/JsonOutputs/common/RSC_EnList.json")
     
-    eRando = Enemy.EnemyRandomizer(IDs.NormalMonsterIDs, IDs.TyrantMonsterIDs, IDs.BossMonstersIDs, IDs.SuperbossMonstersIDs, isEnemies, isNormal, isUnique, isBoss, isSuperboss, "ResourceID",  "ParamID", eneFile.data, paramFile.data, rscFile.data)
+    eRando = Enemy.EnemyRandomizer(IDs.NormalMonsterIDs, IDs.TyrantMonsterIDs, IDs.BossMonstersIDs, IDs.SuperbossMonstersIDs, enemiesOption, normalOption, uniqueOption, bossOption, superbossOption, "ResourceID",  "ParamID", eneFile.data, paramFile.data, rscFile.data)
 
     if firstRun:
         StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
@@ -102,13 +104,9 @@ def IntroFightBalances(en, newEn, eRando:Enemy.EnemyRandomizer):
         oldEnParam = eRando.FindParam(en)
         eRando.ChangeStats([newEn], [("HpMaxRev", oldEnParam["HpMaxRev"]), ("PowFightRev", oldEnParam["PowFightRev"]), ("PowShootRev", oldEnParam["PowShootRev"]), ("PowMindRev", oldEnParam["PowMindRev"]), ("DodgeRev", oldEnParam["DodgeRev"]), ("DexFightRev", oldEnParam["DexFightRev"]), ("DexShootRev", oldEnParam["DexShootRev"]), ("Def", oldEnParam["Def"]), ("RstPhysics", oldEnParam["RstPhysics"]), ("RstDebuffHalf", oldEnParam["RstDebuffHalf"]), ("RstDebuffFull", oldEnParam["RstDebuffFull"]) ])
 
-XCXDEOopsAllPool = []
 def GetOopsAllDropdowns():
-    global XCXDEOopsAllPool
-    if XCXDEOopsAllPool == []:
-        XCXDEOopsAllPool = Enemy.GetOopsAllPool("XCXDE/VanillaJson/common/CHR_EnList.json", "XCXDE/VanillaJson/common_ms/CHR_EnList_ms.json", IDs.NormalMonsterIDs + IDs.BossMonstersIDs + IDs.TyrantMonsterIDs + IDs.SuperbossMonstersIDs, "Name")
-    return XCXDEOopsAllPool
-                                                                                                                                                                                                                                                                                                           
+    return Enemy.GetOopsAllPool("XCXDE/VanillaJson/common/CHR_EnList.json", "XCXDE/VanillaJson/common_ms/CHR_EnList_ms.json", IDs.NormalMonsterIDs + IDs.BossMonstersIDs + IDs.TyrantMonsterIDs + IDs.SuperbossMonstersIDs, "Name", "XCXDE")
+                                                                                                                                                                                                                                                                                                    
 def HpLimitEffects(en):
     '''Xenoblade X uses a Enhancement to stop characters from dying in phased fights, this keeps that effect on the location and removes it if not on a phased location'''
     HPLimitFightIDs = [431,441,460,470,1755,1756] # DLC seemingly didnt have any but im skeptical because there is a VITA fight that ends at 50% hp (ID 4093)
