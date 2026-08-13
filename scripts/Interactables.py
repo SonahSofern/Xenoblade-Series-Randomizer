@@ -37,6 +37,8 @@ class Option(Interactable):
         self.isDevOption = isDevOption
         self.clickCommands = []
         self.interactables:list[Interactable] = []
+        self.subOptionCount = 0 # Keeping track of padding at the end of suboptions
+        self.displayedSubOptionCount = 0 # Keeping track of padding at the end of suboptions
         
         # Initial Data
         self.name =  name
@@ -79,6 +81,7 @@ class Option(Interactable):
         # Option Interactables
         for interact in self.interactables:
             interact.Create(parent, style, rowIncrement)
+
     
     def VisualStateUpdate(self):
         if self.GetState(): state = "!disabled"
@@ -119,6 +122,8 @@ class SubOption(Option):
         self.defState = defState
         self.parent = parent
         self.identifier = f"{parent.name} {self.name} Suboption"
+        self.parent.subOptionCount += 1
+        self.padding = None # Keeping track of padding at the end of suboptions
         parent.interactables.append(self)
     
     def Create(self, parent, style, rowIncrement):
@@ -127,21 +132,26 @@ class SubOption(Option):
         self.checkBoxVal.trace_add("write", lambda e, w, z: self.VisualStateUpdate())
         self.checkBox = ttk.Checkbutton(parent, text=self.name, variable=self.checkBoxVal, style=f"{style}Sub.TCheckbutton", width=25)
         self.checkBox.grid(row=rowIncrement["Count"], column=0, sticky="sw")
-            
+        self.parent.displayedSubOptionCount += 1
+        
         for interactable in self.interactables:
             interactable.Create(parent, style, rowIncrement)
 
-        # if isFinal: # If the final suboption add extra padding
-        #     newPad = (0, 10)
-        #     self.checkBox.grid_configure(pady=newPad)
-        #     if self.spinBox != None:
-        #         spinBox.spinBoxObj.grid_configure(pady=newPad)
-        #         spinBox.spinBoxLabel.grid_configure(pady=newPad)
+        if self.parent.displayedSubOptionCount == self.parent.subOptionCount: # If the final suboption add extra padding
+            rowIncrement["Count"] += 1
+            self.padding = ttk.Frame(parent, height=10)
+            self.padding.grid(row=rowIncrement["Count"], column=0, pady=0)
     
     def VisualStateUpdate(self):
         # Shows/Hides dropdown based on parent state
-        if self.parent.GetState(): self.checkBox.grid()
-        else: self.checkBox.grid_remove()
+        if self.parent.GetState(): 
+            self.checkBox.grid()
+            if self.padding:
+                self.padding.grid()
+        else: 
+            self.checkBox.grid_remove()
+            if self.padding:
+                self.padding.grid_remove()
             
         for int in self.interactables:
             int.VisualStateUpdate()
@@ -167,8 +177,8 @@ class Spinbox(Interactable):
         self.spinBoxObj = ttk.Spinbox(parent, validate="key", from_=self.min, to=self.max, textvariable=self.spinBoxVal, wrap=True, width=self.width, increment=self.increment, justify="right")
         self.spinBoxObj.configure(validatecommand=(self.spinBoxObj.register(self.validateSpinbox), "%P"))
         self.spinBoxObj.bind("<FocusOut>", self.EmptyboxHandler)
-        self.disableScroll()
         self.spinBoxLabel = ttk.Label(parent, text=self.description, style=f"{style}.TLabel")
+        disableScroll(self.spinBoxObj)
         self.GridDisplay(rowIncrement, style)
     
     def GridDisplay(self, rowIncrement, style):
@@ -204,14 +214,6 @@ class Spinbox(Interactable):
         else:
             self.spinBoxObj.state(["disabled"])
             self.spinBoxLabel.state(["disabled"])
-    
-    def disableScroll(self):
-        '''Used to stop spinbox scrollwheel conflicts'''
-        def stop(event):
-            return "break"
-        self.spinBoxObj.bind("<MouseWheel>", stop)
-        self.spinBoxObj.bind("<Button-4>", stop)
-        self.spinBoxObj.bind("<Button-5>", stop)
     
     def Save(self):
         return {self.identifier:f"{self.GetState()}"}
@@ -277,6 +279,7 @@ class Dropdown(Interactable):
         self.dropDownObj = ttk.Combobox(parent, width=self.width, textvariable=self.curDisplayVal, state="readonly")
         self.dropDownObj['values'] = [x.displayVal for x in self.values]
         self.dropDownObj.grid(row=rowIncrement["Count"], column = 3, padx=(15,0))
+        disableScroll(self.dropDownObj)
     
     def SetValueByDisplayVal(self, *args):
         '''The string itself controls the values'''
@@ -336,7 +339,23 @@ class SubDropdown(Dropdown):
             self.dropDownObj.state(["!disabled"])
         else:
             self.dropDownObj.state(["disabled"])
-            
+
+# def disableScroll(self, obj:Widget):
+#     '''Used to stop spinbox scrollwheel conflicts'''
+#     def stop(event):
+#         return "break"
+#     self.spinBoxObj.bind("<MouseWheel>", stop)
+#     self.spinBoxObj.bind("<Button-4>", stop)
+#     self.spinBoxObj.bind("<Button-5>", stop)
+    
+def disableScroll(obj:Widget):
+    '''Used to stop spinbox scrollwheel conflicts'''
+    def stop(event):
+        return "break"
+    obj.bind("<MouseWheel>", stop)
+    obj.bind("<Button-4>", stop)
+    obj.bind("<Button-5>", stop)
+  
 class MutuallyExclusivePairing():
     '''For settings that are mutually exclusive'''
     def __init__(self, group1:list[Option], group2:list[Option]):
