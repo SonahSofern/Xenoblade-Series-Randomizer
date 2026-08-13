@@ -141,7 +141,8 @@ def EnemyMultiplier(mult, targetIDs:list[int]):
                 for i in range(1,5):
                     if en[f"ene{i}ID"] in targetIDs:
                         en[f"ene{i}num"] = en[f"ene{i}num"]*mult
-            
+                        en["squadId"] = 33 # This is the guldo squad id so that the enemies are played apart from each other, otherwise they severely glitch out
+                        # en["party_flag"] = 1 # Not 
                         # Fix the quest that require a group of enemies to be killed to be the entire group
                         for task in qstTaskBattles.rows:
                             if task["EnemyID"] == en[f"ene{i}ID"]:
