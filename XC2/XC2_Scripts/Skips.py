@@ -5,7 +5,7 @@ from XC2.XC2_Scripts import Options, IDs, QOL
 
 def ShortenedTutorial():
     Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Condition.json", ["cond"], 1)
-    CoreCrystalTutorials()
+    FLDTutorial()
     FieldTutorials()      
     SpraineTalk()
     MeloloWaypoint()
@@ -30,7 +30,7 @@ def RaceModeTutorialShortening(): # we need to call this from the race mode func
 
 def UMHuntShortenedTutorial():
     Helper.ColumnAdjust("./XC2/JsonOutputs/common/MNU_Condition.json", ["cond"], 1)
-    CoreCrystalTutorials()
+    FLDTutorial()
     NextQuestSkipper({7:9, 10:12, 13:15, 15:17})
     MeloloWaypoint()
     SpraineTalk()
@@ -56,8 +56,19 @@ def BaseGameStorySkip(skippable, taskFileName = "", newTaskID = 5, newTaskType =
                     data[f"TaskType{i}"] = newTaskType
         JSONParser.CloseFile(skipData, skipFile)
 
+# FLD_EventPop
+
+# QuestFlag (check if this quest has been completed and then shows a scene)
+
+# FLD_QuestTask
+
+# check if we have completed the TaskID
+
+# The scene that happens when pyra cooks after that we are forced into the find nia runmours quest, I want to skip that
+
 def NextQuestSkipper(questDict:dict):
-    with open("./XC2/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as qstFile: # shortens opening section
+    '''Dictionary with a quest id, and sets its next quest to the paired value'''
+    with open("XC2/JsonOutputs/common/FLD_QuestList.json", 'r+', encoding='utf-8') as qstFile: # shortens opening section
         qstData = json.load(qstFile)
         for qst in qstData["rows"]:
             if qst["$id"] in questDict:
@@ -65,7 +76,7 @@ def NextQuestSkipper(questDict:dict):
         JSONParser.CloseFile(qstData, qstFile)
 
 def RemoveBanaCutscene():
-    with open("./XC2/JsonOutputs/common_gmk/ma02a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: # shortens opening section
+    with open("XC2/JsonOutputs/common_gmk/ma02a_FLD_EventPop.json", 'r+', encoding='utf-8') as file: # shortens opening section
         data = json.load(file)
         for row in data["rows"]:
             if row["$id"] == 2006:
@@ -199,7 +210,7 @@ def SpraineTalk():
         file.truncate()
         json.dump(data, file, indent=2, ensure_ascii=False)
 
-def CoreCrystalTutorials():
+def FLDTutorial():
     with open("./XC2/JsonOutputs/common_gmk/FLD_Tutorial.json", 'r+', encoding='utf-8') as file: # part of core crystal tutorial
         data = json.load(file)
         for row in data["rows"]:

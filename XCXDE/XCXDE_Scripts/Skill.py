@@ -66,6 +66,4 @@ def SkillDesc(name):
     artRandoDesc = PopupDescriptions.Description()
     artRandoDesc.Header(name)
     artRandoDesc.Text(f"Randomizes the strength of skills within {1/maxMult}-{maxMult} times the original amount.")
-    artRandoDesc.Tag("Intensity")
-    artRandoDesc.Text(StatRand.IntensityDescription)
     return artRandoDesc

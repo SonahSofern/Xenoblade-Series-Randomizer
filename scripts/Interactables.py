@@ -15,16 +15,22 @@ class Interactable(SaveLoad.SavedEntry):
     def GetState(self):
         pass
     
-    def SaveState(self):
+    def Save(self):
         pass
     
-    def LoadState(self):
+    def Load(self, loadFile):
         pass
     
     def Create(self, parent, style, rowIncrement):
         pass
     
     def VisualStateUpdate(self):
+        pass
+    
+    def GridRemove(self):
+        pass
+        
+    def GridShow(self):
         pass
     
 class Option(Interactable):
@@ -82,6 +88,17 @@ class Option(Interactable):
         for interact in self.interactables:
             interact.Create(parent, style, rowIncrement)
 
+    def GridRemove(self):
+        self.checkBox.grid_remove()
+        self.descObj.grid_remove()
+        for int in self.interactables:
+            int.GridRemove
+        
+    def GridShow(self):
+        self.checkBox.grid()
+        self.descObj.grid()
+        for int in self.interactables:
+            int.GridShow()
     
     def VisualStateUpdate(self):
         if self.GetState(): state = "!disabled"
@@ -157,12 +174,11 @@ class SubOption(Option):
             int.VisualStateUpdate()
 
 class Spinbox(Interactable):
-    def __init__(self, parent:Option, min = 0, max = 100, increment = 10, default = 100, width = 3, description = "% randomized"):
+    def __init__(self, parent:Option, min = 0, max = 100, increment = 10, default = 100, description = "% randomized"):
         self.min = min
         self.max = max
         self.increment = increment
         self.default = default
-        self.width = width
         self.description = description
         self.spinBoxObj:ttk.Spinbox = None
         self.spinBoxLabel:ttk.Label = None
@@ -174,7 +190,7 @@ class Spinbox(Interactable):
 
     def Create(self, parent, style, rowIncrement):
         self.spinBoxVal = IntVar(value=self.default)
-        self.spinBoxObj = ttk.Spinbox(parent, validate="key", from_=self.min, to=self.max, textvariable=self.spinBoxVal, wrap=True, width=self.width, increment=self.increment, justify="right")
+        self.spinBoxObj = ttk.Spinbox(parent, validate="key", from_=self.min, to=self.max, textvariable=self.spinBoxVal, wrap=True, width=len(str(self.max)), increment=self.increment, justify="right")
         self.spinBoxObj.configure(validatecommand=(self.spinBoxObj.register(self.validateSpinbox), "%P"))
         self.spinBoxObj.bind("<FocusOut>", self.EmptyboxHandler)
         self.spinBoxLabel = ttk.Label(parent, text=self.description, style=f"{style}.TLabel")
@@ -185,7 +201,15 @@ class Spinbox(Interactable):
         self.spinBoxObj.grid(row=rowIncrement["Count"], column = 3, padx=(15,0))
         self.spinBoxLabel.config(anchor="w")
         self.spinBoxLabel.grid(row=rowIncrement["Count"], column = 4, sticky="w", padx=0)
+    
+    def GridRemove(self):
+        self.spinBoxObj.grid_remove()
+        self.spinBoxLabel.grid_remove()
         
+    def GridShow(self):
+        self.spinBoxObj.grid()
+        self.spinBoxLabel.grid()
+    
     def validateSpinbox(self, input):
         '''Because tkinters handling of spinboxes doesn't work when typing values, made one to accomodate typing in values'''
         if input == "": # Allow deleting the whole thing
@@ -226,23 +250,21 @@ class Spinbox(Interactable):
         return self.spinBoxVal
 
 class SubSpinbox(Spinbox):
-    def __init__(self, parent:Option, min = 0, max = 100, increment = 10, default = 100, width = 3, description = ""):
-        super().__init__(parent, min, max, increment, default, width, description)
+    def __init__(self, parent:Option, min = 0, max = 100, increment = 10, default = 100, description = ""):
+        super().__init__(parent, min, max, increment, default, description)
         self.identifier = f"{self.parent.parent.name} {self.parent.name} Spinbox"
     
     def GridDisplay(self, rowIncrement, style):
         self.spinBoxLabel.config(style=f"{style}NoMargin.TLabel")
         self.spinBoxObj.grid(row=rowIncrement["Count"], column=1, padx=(20,0), pady=(0,0), sticky="w")
         self.spinBoxLabel.grid(row=rowIncrement["Count"], column=1, sticky="w", padx=(80,0))
-        
+    
     def VisualStateUpdate(self):
         # Hide when main option is on/off
         if self.parent.parent.GetState():
-            self.spinBoxObj.grid()
-            self.spinBoxLabel.grid()
+            self.GridShow()
         else:
-            self.spinBoxObj.grid_remove()
-            self.spinBoxLabel.grid_remove()
+            self.GridRemove()
         
         # Toggle state when suboption is on/off
         if self.parent.GetState():
@@ -261,18 +283,14 @@ class DropdownOption():
         if realVal == None: # If none provided match the string display value
             self.realVal = displayVal
 
-    
 class Dropdown(Interactable):
-    def __init__(self, parent:Option, values:list[DropdownOption] = [], width = 20, height = 10, sort = False):
-        # Updated when a new option is selected
+    def __init__(self, parent:Option, values:list[DropdownOption] = [], sort = False, default = 0):
         self.indexVal = IntVar(value=0) # Index of currently selected option controls everything else
         self.curDisplayVal = StringVar(value="") # Text value of the currently selected option
         self.values:list[DropdownOption] = values
         self.indexVal.trace_add("write", self.SetOtherValuesByIndex)
-        self.indexVal.set(0) # Set the first option as default
+        self.indexVal.set(default) # Set the first option as default
         
-        self.width = width
-        self.height = height
         self.parent = parent
         parent.interactables.append(self)
         XenoOptionDict[Game].append(self) 
@@ -282,11 +300,18 @@ class Dropdown(Interactable):
             self.values.sort(key= lambda x: x.displayVal)
            
     def Create(self, parent, style, rowIncrement):
-        self.dropDownObj = ttk.Combobox(parent, width=self.width, textvariable=self.curDisplayVal, state="readonly", values=[x.displayVal for x in self.values])
+        self.dropDownObj = ttk.Combobox(parent, width=self.GetMaxWidth(), textvariable=self.curDisplayVal, state="readonly", values=[x.displayVal for x in self.values])
         self.dropDownObj.bind("<<ComboboxSelected>>", self.onSelected)
         self.dropDownObj.grid(row=rowIncrement["Count"], column = 3, padx=(15,0))
         disableScroll(self.dropDownObj)
     
+    def GetMaxWidth(self):
+        '''Based on all possible options gets the shortest required width to fit them all'''
+        maxWidth = 1
+        for val in self.values:
+            maxWidth = max(len(val.displayVal), maxWidth)
+        return maxWidth + 1
+        
     def onSelected(self, *args):
         '''Triggered by changing the selection from the combobox, sets the index value triggering its event'''
         for val in self.values:
@@ -432,3 +457,33 @@ def AskToChooseOption(enabledOption, conflictingOptions:list[Option]):
         ChosenResolution = False
 
     return ChosenResolution
+
+class Category(Interactable):
+    '''A category within a tab'''
+    def __init__(self, parent:Option, name):
+        self.toggleVal = BooleanVar(value=0)
+        self.options:list[Option] = []
+        self.name = name
+        
+        self.parent = parent
+        XenoOptionDict[Game].append(self) 
+        self.identifier = f"{self.name} TabCategory"
+    
+    def Save(self):
+        return {self.identifier:f"{self.toggleVal.get()}"}
+    
+    def Load(self, loadFile):
+        self.toggleVal.set(loadFile[self.identifier])
+    
+    def Create(self, parent, style, rowIncrement):
+        rowIncrement["Count"] += 1
+        self.button = ttk.Button(parent, text=self.name, command=self.VisualStateUpdate, style=f"{style}.TButton")
+        self.button.grid(row=rowIncrement["Count"],column=1)
+    
+    def VisualStateUpdate(self):
+        if self.toggleVal.get():
+            for opt in self.options:
+                opt.GridRemove()
+        else:
+            for opt in self.options:
+                opt.GridShow()

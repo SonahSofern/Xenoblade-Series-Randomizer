@@ -337,7 +337,7 @@ def MultiplyEnemies(mult, targetIDs:list[int]):
         for en in enePopFile.rows:
             for i in range(1,6):
                 if f"ene{i}ID" in targetIDs:
-                    StatRand.ApplyMult(en, f"ene{i}num", mult, 99)
+                    StatRand.ApplyMult(en, f"ene{i}num", mult, 99, 0)
 
     enePopFile.Close()
         

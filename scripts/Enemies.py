@@ -16,6 +16,12 @@ class ArtModification:
         self.K = K
         self.isReciprocal = isReciprocal
 
+class PhaseFight:
+    def __init__(self, phase1, phase2):
+        self.phase1 = phase1
+        self.phase2 = phase2
+        self.phase1Replacement = 0
+    
 class Violation:
     def __init__(self, oldIDs:list[int]=[], newIDs:list[int]=[], paramMods:list[ParamModification]=[], artMods:list[ArtModification]=[], lvDiff=0):
         """

@@ -198,7 +198,12 @@ def MakeAllArtsAccessible(art):
     # early on. For simplicity and potential future-proofing, just set all arts to level 1 besides the
     # Broadsword. It is desirable that the Junk Sword still behaves as intended prior to Rex getting
     # his first blade.
-    if art['WpnType'] not in [17]: # Broadsword
+    Broadsword = 17
+    
+    # Want to keep torna feeling vanilla so dont learn these immedaitely
+    BattleBraid = 28
+    Nodachi = 18
+    if art['WpnType'] not in [Broadsword, BattleBraid, Nodachi]:
         for i in Helper.InclRange(1,5):
             art['ReleaseLv' + str(i)] = 1
 
@@ -477,7 +482,7 @@ def ApplyBladeRandomization(blade):
     # 2. Pneuma skills, for purposes of Driver randomization without Blade randomization
     excluded_skills = dict()
 
-    if not ((Options.FieldSkillOption.GetState()) and (Options.FieldSkillOption_RemoveStory.GetState() or Options.FieldSkillsOption_RemoveAll.GetState())):
+    if not (Options.FieldSkillOption.GetState() and Options.FieldSkillOption_Remove.GetState()):
         excluded_skills[1001] = ['FSkill1', 'FSkill2', 'FSkill3', 'FskillAchivement1', 'FskillAchivement2', 'FskillAchivement3']  # Pyra: Fire Mastery, Focus, Cooking
         excluded_skills[1005] = ['FSkill3', 'FskillAchievement3']  # Poppi Alpha: Superstrength
         excluded_skills[1008] = ['FSkill2', 'FskillAchievement2']  # Roc: Miasma Dispersal

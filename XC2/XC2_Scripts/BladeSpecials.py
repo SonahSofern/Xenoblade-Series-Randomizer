@@ -14,8 +14,7 @@ def BladeSpecials():
         
         for art in artData["rows"]:
             if isReact:
-                if Helper.OddsCheck(odds):
-                    DriverArts.Reaction(art, True, 100)
+                DriverArts.Reaction(art, True, odds)
                 
             if isEnhancements:
                 if Helper.OddsCheck(odds):

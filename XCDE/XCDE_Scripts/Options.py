@@ -1,5 +1,5 @@
 from scripts.Interactables import Option, SubOption, Spinbox, SubSpinbox, SubDropdown, Dropdown, DropdownOption
-from scripts import Helper, XCRandomizer
+from scripts import Helper, XCRandomizer, StatRand
 from XCDE.XCDE_Scripts import PcArts, Music, SkillTrees, Gems, Enemies as EnemiesScript, Armor, MiscQOL, Scales, NPC, Weapons, Items, IDs
 import scripts.Interactables
 game = "XCDE"
@@ -103,7 +103,7 @@ NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption, defSta
 NormalEnemyOption_Superboss_Spinbox = SubSpinbox(NormalEnemyOption_Superboss, default=1)
 NormalEnemyOption_Size = SubOption("Match Size", NormalEnemyOption)
 NormalEnemyOption_OopsAll = SubOption("Oops All", NormalEnemyOption, defState=False)
-NormalEnemyOption_OopsAll_Dropdown = SubDropdown(NormalEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns(), sort=True, width=40)
+NormalEnemyOption_OopsAll_Dropdown = SubDropdown(NormalEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns(), sort=True)
 NormalEnemyOption_Mult = SubOption("More Enemies", NormalEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(NormalEnemyOption_Mult_Spinbox.GetState(), IDs.NormalEnemies)], defState=False)
 NormalEnemyOption_Mult_Spinbox = SubSpinbox(NormalEnemyOption_Mult, min=2, max=4, increment=1, default=2, description="x Enemies")
 
@@ -119,7 +119,7 @@ UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption)
 UniqueEnemyOption_Superboss_Spinbox = SubSpinbox(UniqueEnemyOption_Superboss, default=2)
 UniqueEnemyOption_Size = SubOption("Match Size", UniqueEnemyOption)
 UniqueEnemyOption_OopsAll = SubOption("Oops All", UniqueEnemyOption, defState=False)
-UniqueEnemyOption_OopsAll_Dropdown = SubDropdown(UniqueEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns(), sort=True, width=40)
+UniqueEnemyOption_OopsAll_Dropdown = SubDropdown(UniqueEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns(), sort=True)
 UniqueEnemyOption_Mult = SubOption("More Enemies", UniqueEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(UniqueEnemyOption_Mult_Spinbox.GetState(), IDs.UniqueEnemies)], defState=False)
 UniqueEnemyOption_Mult_Spinbox = SubSpinbox(UniqueEnemyOption_Mult, min=2, max=4, increment=1, default=2, description="x Enemies")
 
@@ -135,7 +135,7 @@ BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=F
 BossEnemyOption_Superboss_Spinbox = SubSpinbox(BossEnemyOption_Superboss, default=1)
 BossEnemyOption_FinalBoss = SubOption("Vanilla Final Boss", BossEnemyOption, defState=False)
 BossEnemyOption_OopsAll = SubOption("Oops All", BossEnemyOption, defState=False)
-BossEnemyOption_OopsAll_Dropdown = SubDropdown(BossEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns(), sort=True, width=40)
+BossEnemyOption_OopsAll_Dropdown = SubDropdown(BossEnemyOption_OopsAll, EnemiesScript.GetOopsAllDropdowns(), sort=True)
 BossEnemyOption_Mult = SubOption("More Enemies", BossEnemyOption,  [lambda: EnemiesScript.MultiplyEnemies(BossEnemyOption_Mult_Spinbox.GetState(), IDs.LockEnemyFights + IDs.NonLockRequiredFights)], defState=False)
 BossEnemyOption_Mult_Spinbox = SubSpinbox(BossEnemyOption_Mult, min=2, max=4, increment=1, default=2, description="x Enemies")
 
@@ -144,6 +144,7 @@ BossEnemyOption_Mult_Spinbox = SubSpinbox(BossEnemyOption_Mult, min=2, max=4, in
 # Character
 GemOption = Option("Gems", Character, "Randomizes the effects of Gems and Crystals", [lambda: Gems.Gems()], descData=lambda: Gems.GemDescriptions())
 GemOption_Power = SubOption("Power", GemOption)
+GemOption_Power_Dropdown = SubDropdown(GemOption_Power, StatRand.IntensityDropdownOptions, default=1)
 GemOption_Effect = SubOption("Effects", GemOption)
 GemOption_Effect_Dropdown = SubDropdown(GemOption_Effect, [DropdownOption("Vanilla"), DropdownOption("Custom"), DropdownOption("All")])
 GemOption_FreeEquip = SubOption("Freely Equip to Weapons/Armor", GemOption)
@@ -152,11 +153,13 @@ AffinityTreeOption = Option("Skill Trees", Character, "Randomizes all character'
 AffinityTreeOption_Spinbox = Spinbox(AffinityTreeOption)
 AffinityTreeOption_Effect = SubOption("Skill Shuffle", AffinityTreeOption)
 AffinityTreeOption_Power = SubOption("Power", AffinityTreeOption)
+AffinityTreeOption_Power_Dropdown = SubDropdown(AffinityTreeOption_Power, StatRand.IntensityDropdownOptions, default=1)
 AffinityTreeOption_LinkCost = SubOption("Affinity Coin Cost", AffinityTreeOption)
 AffinityTreeOption_Shape = SubOption("Node Shape", AffinityTreeOption)
 PlayerArtsOption = Option("Arts", Character, "Randomizes character's arts and their effects", [lambda: PcArts.RandomizePcArts()], descData=lambda: PcArts.ArtsDescriptions())
 PlayerArtsOption_Arts = SubOption("Arts Shuffle", PlayerArtsOption)
 PlayerArtsOption_Power = SubOption("Power", PlayerArtsOption)
+PlayerArtsOption_Power_Dropdown = SubDropdown(PlayerArtsOption_Power, StatRand.IntensityDropdownOptions, default=1)
 # PlayerArtsOption_BalancedUnlockLevels = SubOption("Balanced Unlock Levels", PlayerArtsOption)
 # PlayerArtsOption_Duplicates = SubOption("Allow Duplicates", PlayerArtsOption)
 # PlayerArtsOption_EarlyArtsUnlock = SubOption("Unlock All Arts at Level 1", PlayerArtsOption)

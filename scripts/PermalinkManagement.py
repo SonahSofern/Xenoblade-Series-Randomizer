@@ -81,9 +81,8 @@ def AddPermalinkTrace(traceObjects:list[Variable], permaLinkVar:Variable, seedEn
         permaLinkVar.set(GenerateCompressedPermalink(seedEntryVar.get(), traceObjects, version))
         
     for interactable in traceObjects:
-        interactable.trace_add("write", lambda i,x,o: PermalinkEntryUpdate())
+        if isinstance(interactable, Variable):
+            interactable.trace_add("write", lambda i,x,o: PermalinkEntryUpdate())
     
     permaLinkVar.trace_add("write", lambda i,x,o: PermalinkFromEntry())
-    # for interactAble in traceObjects[2:]:
-    #     interactAble.trace_add("write", lambda i,x,o: PermalinkEntryUpdate())
         

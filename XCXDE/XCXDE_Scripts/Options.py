@@ -1,5 +1,5 @@
-from scripts.Interactables import Option, SubOption, SubSpinbox, Spinbox, Dropdown, SubDropdown
-from scripts import Helper
+from scripts.Interactables import Option, SubOption, SubSpinbox, Spinbox, Dropdown, SubDropdown, DropdownOption
+from scripts import Helper, StatRand
 import scripts.Interactables
 from XCXDE.XCXDE_Scripts import Enemy, Gear, IDs, Items as Item, QOL as q, PartyMem, Art, Skill, SkellFrames
 
@@ -22,7 +22,7 @@ Tabs = {
 }
 
 weightsSpinDescription = "Weights ↓"
-intensityText= "Intensity (Low 1 - High 100)"
+# intensityText= "Intensity (Low 1 - High 100)"
 
 # ---------- POTENTIAL ----------
 # http://127.0.0.1:5500/html/MNU_MemberChange.html#21 Party member join conditions?
@@ -160,7 +160,7 @@ NormalEnemyOption_Superboss = SubOption("Superbosses", NormalEnemyOption)
 NormalEnemyOption_Superboss_Spinbox = SubSpinbox(NormalEnemyOption_Superboss, default=1)
 NormalEnemyOption_Size = SubOption("Match Size", NormalEnemyOption)
 NormalEnemyOption_OopsAll = SubOption("Oops All", NormalEnemyOption, defState=False)
-NormalEnemyOption_OopsAll_Dropdown = SubDropdown(NormalEnemyOption_OopsAll, Enemy.GetOopsAllDropdowns(), sort=True, width=40)
+NormalEnemyOption_OopsAll_Dropdown = SubDropdown(NormalEnemyOption_OopsAll, Enemy.GetOopsAllDropdowns(), sort=True)
 
 UniqueEnemyOption = Option("Unique Monsters", Enemies, "Randomizes unique monsters, including superbosses, into the chosen types", [lambda: Enemy.Enemies(IDs.TyrantMonsterIDs + IDs.SuperbossMonstersIDs, UniqueEnemyOption_Normal, UniqueEnemyOption_Unique, UniqueEnemyOption_Boss, UniqueEnemyOption_Superboss, UniqueEnemyOption, UniqueEnemyOption_OopsAll.GetState(), UniqueEnemyOption_OopsAll_Dropdown.GetState(), UniqueEnemyOption_Size.GetState())], descData=lambda: Enemy.EnemyDesc(UniqueEnemyOption.name), prio=2)
 UniqueEnemyOption_Spinbox = Spinbox(UniqueEnemyOption)
@@ -174,7 +174,7 @@ UniqueEnemyOption_Superboss = SubOption("Superbosses", UniqueEnemyOption)
 UniqueEnemyOption_Superboss_Spinbox = SubSpinbox(UniqueEnemyOption_Superboss, default=1)
 UniqueEnemyOption_Size = SubOption("Match Size", UniqueEnemyOption)
 UniqueEnemyOption_OopsAll = SubOption("Oops All", UniqueEnemyOption, defState=False)
-UniqueEnemyOption_OopsAll_Dropdown = SubDropdown(UniqueEnemyOption_OopsAll, Enemy.GetOopsAllDropdowns(), sort=True, width=40)
+UniqueEnemyOption_OopsAll_Dropdown = SubDropdown(UniqueEnemyOption_OopsAll, Enemy.GetOopsAllDropdowns(), sort=True)
 
 BossEnemyOption = Option("Boss Monsters", Enemies, "Randomizes bosses into the chosen types", [lambda: Enemy.Enemies(IDs.BossMonstersIDs, BossEnemyOption_Normal, BossEnemyOption_Unique, BossEnemyOption_Boss, BossEnemyOption_Superboss, BossEnemyOption, BossEnemyOption_OopsAll.GetState(), BossEnemyOption_OopsAll_Dropdown.GetState(), isMatchSize=True)], descData=lambda: Enemy.EnemyDesc(BossEnemyOption.name), prio=2)
 BossEnemyOption_Spinbox = Spinbox(BossEnemyOption)
@@ -187,32 +187,33 @@ BossEnemyOption_Boss_Spinbox = SubSpinbox(BossEnemyOption_Boss, default=30)
 BossEnemyOption_Superboss = SubOption("Superbosses", BossEnemyOption, defState=False)
 BossEnemyOption_Superboss_Spinbox = SubSpinbox(BossEnemyOption_Superboss, default=1)
 BossEnemyOption_OopsAll = SubOption("Oops All", BossEnemyOption, defState=False)
-BossEnemyOption_OopsAll_Dropdown = SubDropdown(BossEnemyOption_OopsAll, Enemy.GetOopsAllDropdowns(), sort=True, width=40)
+BossEnemyOption_OopsAll_Dropdown = SubDropdown(BossEnemyOption_OopsAll, Enemy.GetOopsAllDropdowns(), sort=True)
 
 # Character
+
 CharacterOption = Option("Party Members", Character, "Randomizes party members", [lambda: PartyMem.Members()], descData=lambda: PartyMem.PartyMemDesc(CharacterOption.name, CharacterOption_Duplicates.name))
 CharacterOption_Duplicates = SubOption("Allow Duplicates", CharacterOption)
 ArtsOption = Option("Arts", Character, "Randomizes various attributes of arts", descData=lambda: Art.ArtDesc(ArtsOption_LearnOrder.name, ArtsOption_Strength.name))
 ArtsOption_LearnOrder = SubOption("Arts Learned", ArtsOption, [lambda: Art.ArtUnlockOrder()])
-ArtsOption_Strength = SubOption("Art Strength", ArtsOption, [lambda: Art.ArtStatRando(ArtsOption_Strength_Spinbox.GetState())])
-ArtsOption_Strength_Spinbox = SubSpinbox(ArtsOption_Strength, default=50, description=intensityText)
+ArtsOption_Strength = SubOption("Art Strength", ArtsOption, [lambda: Art.ArtStatRando(ArtsOption_Strength_Dropdown.GetState())])
+ArtsOption_Strength_Dropdown = SubDropdown(ArtsOption_Strength, StatRand.IntensityDropdownOptions, default=1)
 SkillOption = Option("Skill", Character, "Randomizes various attributes of skills", descData=lambda: Skill.SkillDesc(SkillOption_Strength.name))
 SkillOption_LearnOrder = SubOption("Skills Learned", SkillOption, [lambda: Skill.SkillOrder()])
-SkillOption_Strength = SubOption("Skill Strength", SkillOption, [lambda: Skill.SkillEnhancements(SkillOption_Strength_Spinbox.GetState())])
-SkillOption_Strength_Spinbox = SubSpinbox(SkillOption_Strength, description=intensityText, default=50)
+SkillOption_Strength = SubOption("Skill Strength", SkillOption, [lambda: Skill.SkillEnhancements(SkillOption_Strength_Dropdown.GetState())])
+SkillOption_Strength_Dropdown = SubDropdown(SkillOption_Strength, StatRand.IntensityDropdownOptions, default=1)
 PlayerGear = Option("Ground Gear", Character, "Randomizes the stats of ground gear", descData=lambda: Gear.GearDesc(PlayerGear_Arm.name, PlayerGear_Wep.name))
-PlayerGear_Arm = SubOption("Armor Stats", PlayerGear, [lambda: Gear.PlayerArmorStats(PlayerGear_Arm_Spinbox.GetState())])
-PlayerGear_Arm_Spinbox = SubSpinbox(PlayerGear_Arm, min=1, default=50, description=intensityText)
+PlayerGear_Arm = SubOption("Armor Stats", PlayerGear, [lambda: Gear.PlayerArmorStats(PlayerGear_Arm_Dropdown.GetState())])
+PlayerGear_Arm_Dropdown = SubDropdown(PlayerGear_Arm, StatRand.IntensityDropdownOptions, default=1)
 PlayerGear_Wep = SubOption("Weapon Stats", PlayerGear, [lambda: Gear.PlayerWepStats(PlayerGear_Wep.GetSpinbox())])
-PlayerGear_Wep_Spinbox = SubSpinbox(PlayerGear_Wep, min=1, default=50, description=intensityText)
+PlayerGear_Wep_Dropdown = SubDropdown(PlayerGear_Wep, StatRand.IntensityDropdownOptions, default=1)
 
 SkellFrameOption = Option("Skell Frames", Skells, "Randomizes skell frames", [lambda: SkellFrames.RandomizeSkells()], descData=lambda: SkellFrames.SkellFrameDesc(SkellFrameOption.name))
 # SkellStats = Option("Skell Stats", Skells, "Randomizes the base stats of skells", [lambda: Gear.SkellBaseStats(SkellStats.GetSpinbox())], hasSpinBox=True, spinDesc=intensityText, spinMin=1)
 SkellGear = Option("Skell Gear", Skells, "Randomizes the stats of skell gear", descData=lambda: Gear.GearDesc(SkellGear_Arm.name, SkellGear_Wep.name))
 SkellGear_Arm = SubOption("Armor Stats", SkellGear, [lambda: Gear.SkellArmorStats(SkellGear_Arm.GetSpinbox())])
-SkellGear_Arm_Spinbox = SubSpinbox(SkellGear_Arm, 1, default=50, description=intensityText)
+SkellGear_Arm_Dropdown = SubDropdown(SkellGear_Arm, StatRand.IntensityDropdownOptions, default=1)
 SkellGear_Wep = SubOption("Weapon/Art Stats", SkellGear, [lambda: Gear.SkellWepStats(SkellGear_Wep.GetSpinbox())])
-SkellGear_Wep_Spinbox = SubSpinbox(SkellGear_Wep, 1, default=50, description=intensityText)
+SkellGear_Wep_Dropdown = SubDropdown(SkellGear_Wep, StatRand.IntensityDropdownOptions, default=1)
 SkellFrameOption = Option("Faster Skell", Skells, "Multiples your skell's driving speed (2x recommended)", [lambda: q.SkellMovement(SkellFrameOption_Spinbox.GetState())])
 SkellFrameOption_Spinbox = Spinbox(SkellFrameOption, 2, 5, 1, 2, description="x Faster")
 
@@ -225,7 +226,7 @@ EarlySkellOption = Option("Early Skell", QOL, "Talk to Vandahm (Blade Barracks) 
 SkellFlightOption = Option("Early Flight Module", QOL, "Flight Module is unlocked immediately after getting skells", [lambda: q.EarlyFlight()])
 BoostOption = Option("Resource Boosts", QOL, "Various resource boosts (exp, cp etc.)")
 BoostOption_FNav = SubOption("FrontierNav Boost", BoostOption, [lambda: q.FrontierNavBoost(BoostOption_FNav.GetSpinbox())])
-BoostOption_FNav_Spinbox = SubSpinbox(BoostOption_FNav, 2,100,1,10,description="x Rewards")
+BoostOption_FNav_Spinbox = SubSpinbox(BoostOption_FNav, 2,99,1,10,description="x Rewards")
 BoostOption_EXP = SubOption("EXP Boost", BoostOption, [lambda: q.FasterLevels(BoostOption_EXP.GetSpinbox())])
 BoostOption_EXP_Spinbox = SubSpinbox(BoostOption_EXP, 2,16,1,2,description="x Faster")
 BoostOption_CP = SubOption("CP Boost", BoostOption, [lambda: q.FasterClassRanks(BoostOption_CP_Spinbox.GetState())])

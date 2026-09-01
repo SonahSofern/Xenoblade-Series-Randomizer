@@ -1,6 +1,7 @@
 # https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_PSVskill.html
 import json, random, time
 import scripts.PopupDescriptions, scripts.JSONParser, scripts.Helper
+from scripts import StatRand
 from XCDE.XCDE_Scripts import Options
 
 yoinkSkills = [140,138]
@@ -8,6 +9,8 @@ MeliaSkills = [152,157,159]
 MechonisArmor = [176]
 SharlaCoolOff = [110]
 ReynTaunts = [32,35,46]
+
+maxLinkCostMult = 2
 
 # Tree focus buffs like dunban gets agility for focusing this tree https://xenobladedata.github.io/xb1de/bdat/bdat_common/BTL_PSVlink.html#6
 
@@ -40,6 +43,7 @@ def SkillRando():
                 skillData = json.load(skillFile)
                 descData = json.load(skillDescFile)
                 odds = Options.AffinityTreeOption.GetSpinbox()
+                powerValue = Options.AffinityTreeOption_Power_Dropdown.GetState()
                 
                 SkillList = scripts.Helper.RandomGroup()
                 invalidSkills = yoinkSkills + MeliaSkills + MechonisArmor + SharlaCoolOff + ReynTaunts
@@ -53,6 +57,11 @@ def SkillRando():
                             break
                     newSkill = Skill(skill["name"], skill["shape"], skill["target"], skill["skill"], skill["val1"], skill["val2"], skill["time"], skill["point_PP"], skill["point_SP"], skill["flag"], skill["$id"], newType, newIcon)
                     SkillList.AddNewData(newSkill)
+                
+                if isPower:
+                    powerStatRand = StatRand.Stat(3, powerValue)
+                if isLinkCost:
+                    linkCostRand = StatRand.Stat(maxLinkCostMult, 100)
                 
                 for skill in skillData["rows"]:
                     if not scripts.Helper.OddsCheck(odds):
@@ -83,14 +92,14 @@ def SkillRando():
                                 break
                         
                     if isPower:
-                        Power(skill)
+                        Power(skill, powerStatRand)
                     
                     if isShape:
                         Shape(skill, "shape")
                         SkillLinkNodeRando()
                         
                     if isLinkCost:
-                        LinkCost(skill)
+                        LinkCost(skill, linkCostRand)
                     
                 scripts.JSONParser.CloseFile(descData, skillDescFile)
             scripts.JSONParser.CloseFile(skillData, skillFile) 
@@ -104,19 +113,17 @@ def Shape(skill, key, excludeShapes = []):
     shapeChoices = list((x for x in [Circle,Square,Hexagon,Octagram,Diamond] if x not in excludeShapes))
     skill[key] = random.choice(shapeChoices)
 
-def Power(skill):
-    dist = [.3,.5,.7,.9,1.2,1.5,1.8,2,2.2,2.5,3]
-    val1, val2, time = (random.choices(dist,k=3))
-    skill["val1"] = min(int(skill["val1"] * val1),255)
+def Power(skill, powerStatRand:StatRand.Stat):
+    if skill["val1"] != 100: # Lets not change skills that are supposed to have 100% proc rate
+        powerStatRand.ApplyMult(skill, "val1", powerStatRand.RollBalancedMult(), 255, 0)
     if skill["val2"] != 100: # Lets not change skills that are supposed to have 100% proc rate
-        skill["val2"] = min(int(skill["val2"] * val2),100)
-    skill["time"] = min(int(skill["time"] * time),255)
+        powerStatRand.ApplyMult(skill, "val2", powerStatRand.RollBalancedMult(), 100, 0)
+    powerStatRand.ApplyMult(skill, "time", powerStatRand.RollBalancedMult(), 255, 0)
 
-linkCostRange = [.15,.25,.5,.7,1.2,1.5,2]
-def LinkCost(skill):
-    skillRoll = random.choice(linkCostRange)
-    skill["point_SP"] = int(skill["point_SP"] * skillRoll)
-
+def LinkCost(skill, linkCostRand:StatRand.Stat):
+    mult = linkCostRand.RollBalancedMult()
+    linkCostRand.ApplyMult(skill, "point_SP", mult)
+    
 def SkillLinkNodeRando():
     with open("./XCDE/JsonOutputs/bdat_menu_psv/MNU_PSset.json", 'r+', encoding='utf-8') as linkFile: # Randomizes the node shape for skill link trees
         linkData = json.load(linkFile)
@@ -137,7 +144,7 @@ def SkillTreeDesc():
     myDesc.Image("AmazingStars.png", "XCDE")
     myDesc.Text("Amazing Stars normally reduces only 15% of cooldown during night.", anchor="center")
     myDesc.Header(Options.AffinityTreeOption_LinkCost.name)
-    myDesc.Text(f"This randomizes the cost when linking skills to your allies between {linkCostRange[0]}x-{linkCostRange[-1]}x")
+    myDesc.Text(f"This randomizes the cost when linking skills to your allies between {1/maxLinkCostMult}x - {maxLinkCostMult}x")
     myDesc.Header(Options.AffinityTreeOption_Shape.name)
     myDesc.Text("This randomizes all skill node shapes into:\n- Circle\n- Square\n- Hexagon\n- Octagram\n- Diamond")
     myDesc.Image("SkillTreesNodeShape.png", "XCDE", 800)

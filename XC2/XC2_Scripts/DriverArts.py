@@ -8,7 +8,7 @@ from scripts import Helper, JSONParser
 
 def DriverArtRandomizer():
     with open("./XC2/JsonOutputs/common/BTL_Arts_Dr.json", 'r+', encoding='utf-8') as artFile:
-        ignoreArts = [4,5,6,7] + TornaTalentArtIDs +  TornaSwitchArtIDs # Dont change aegis since they get copied to later # Dont change torna talent arts or switch arts
+        ignoreArts = [4,5,6,7] + TornaTalentArtIDs +  TornaSwitchArtIDs # Dont change aegis since they get copied to later
         
         artData = json.load(artFile)
         
@@ -24,15 +24,25 @@ def DriverArtRandomizer():
         
         dropdownReactions = Options.DriverArtsOption_Reaction_Dropdown
         
-        oddsAutoAttacks = Options.DriverArtsOption_AutoAttacks.GetSpinbox()
-        oddsCooldowns = Options.DriverArtsOption_Cooldown.GetSpinbox()
-        oddsDamage = Options.DriverArtsOption_Damage.GetSpinbox()
-        oddsEnhancements = Options.DriverArtsOption_Enhancements.GetSpinbox()
-        oddsBuffs = Options.DriverArtsOption_Buffs.GetSpinbox()
-        oddsDebuffs = Options.DriverArtsOption_Debuffs.GetSpinbox()
-        oddsAOE = Options.DriverArtsOption_AOE.GetSpinbox()
-        oddsSpeed = Options.DriverArtsOption_AnimationSpeed.GetSpinbox()
-        odds = Options.DriverArtsOption.GetSpinbox()
+        # oddsAutoAttacks = Options.DriverArtsOption_AutoAttacks.GetSpinbox()
+        # oddsCooldowns = Options.DriverArtsOption_Cooldown.GetSpinbox()
+        # oddsDamage = Options.DriverArtsOption_Damage.GetSpinbox()
+        # oddsEnhancements = Options.DriverArtsOption_Enhancements.GetSpinbox()
+        # oddsBuffs = Options.DriverArtsOption_Buffs.GetSpinbox()
+        # oddsDebuffs = Options.DriverArtsOption_Debuffs.GetSpinbox()
+        # oddsAOE = Options.DriverArtsOption_AOE.GetSpinbox()
+        # oddsSpeed = Options.DriverArtsOption_AnimationSpeed.GetSpinbox()
+        # odds = Options.DriverArtsOption.GetSpinbox()
+        
+        oddsAutoAttacks = 20
+        oddsCooldowns = 40
+        oddsDamage = 50
+        oddsEnhancements = 80
+        oddsBuffs = 5
+        oddsDebuffs = 40
+        oddsAOE = 20
+        oddsSpeed = 20
+        odds = Options.DriverArtsOption_Spinbox.GetState()
         
         for art in artData["rows"]:
             if not Helper.OddsCheck(odds):
@@ -54,7 +64,7 @@ def DriverArtRandomizer():
                 for j in range(1,17):
                     art[f"ReAct{j}"] = 0 # Clearing Defaults these are needed bc torna arts are weird so i cant clear them blindly before hand gotta follow these conditions so this is the easiest way
                 if Helper.OddsCheck(25): # each art gets a 25% chance to react
-                    Reaction(art, dropdownReactions)
+                    Reaction(art, dropdownReactions.CheckState("Multi"), 20)
                     
             if isCooldowns and Helper.OddsCheck(oddsCooldowns):
                 Cooldowns(art)
@@ -113,7 +123,7 @@ def CopyArt(artData, copyID, artID): # Copies all relevant effects of the art fo
             art["ArtsBuff"] = copy["ArtsBuff"]
             break
 
-def Reaction(art, dropDown:Options.XCRandomizer.Interactables.SubDropdown):
+def Reaction(art, isMulti, odds):
     reactionWeights = [12,7,5,3,7,7] # [Break - Topple - Launch - Smash - KB - BD] Added so that break is more common as you cannot make use of topple, launch, smash without it
     for i in range(1,17):
         if art[f"ReAct{i}"] > 14: # Dont replace weird ones that just move blades
@@ -122,7 +132,7 @@ def Reaction(art, dropDown:Options.XCRandomizer.Interactables.SubDropdown):
         if art[f"HitFrm{i}"] == 0 and (i != 16 and art[f"HitFrm{i+1}"] == 0): # Need the second condition because zenobias Ascension Blade 129 has no hit on frame 1 but afterwards has hits # Make sure there is a hit
             art[f"ReAct{i-1}"] = random.choice(choice.ids) # Adds something to the last hit
             break
-        if dropDown.CheckState("Multi") and Helper.OddsCheck(20): # Each hit of an art with multi on has a 20% chance to get more reactions
+        if isMulti and Helper.OddsCheck(odds): # Each hit with multi on has a odds % chance to get more reactions
             art[f"ReAct{i}"] =  random.choice(choice.ids) # Adds each hit
 
 
@@ -363,7 +373,7 @@ def DriverArtDescription():
     desc.Header(Options.DriverArtsOption_AutoAttacks.name)
     
     desc.Text("Applies your chosen options to each driver's autoattacks as well as arts.")
-    desc.Header(f"{Options.DriverArtsOption_SingleReaction.name} / {Options.DriverArtsOption_MultipleReactions.name}")
+    desc.Header(f"{Options.DriverArtsOption_Reaction.name}")
     
     desc.Text("Allows single/multiple reaction(s) to be placed on arts, shown in yellow text. \nThese will be abbreviated if the description gets too long.\nIf both options are enabled multiple reactions will take priority.")
     for react in ReactionGroup:

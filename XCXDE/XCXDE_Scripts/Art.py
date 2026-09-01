@@ -137,6 +137,4 @@ def ArtDesc(name, newName):
     artRandoDesc.Text(f"Randomizes the strength (cooldown, damage, tp cost, etc.) of arts within {round(1/maxMult, 3)}-{maxMult} times the original amount.")
     artRandoDesc.Header(name)
     artRandoDesc.Text(f"Randomizes art unlocking. For example, Drifter uses rifle and knife, so the drifter class will be given random knife and rifle arts from any in the game.")
-    artRandoDesc.Tag("Intensity")
-    artRandoDesc.Text(StatRand.IntensityDescription)
     return artRandoDesc

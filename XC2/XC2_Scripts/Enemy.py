@@ -12,6 +12,7 @@ def Enemies(targetGroup, normalOption:Interactables.Option, uniqueOption:Interac
     EnemyCounts = GetEnemyCounts()
     GroupFightViolations = GetGroupFightViolations()
     SoloFightViolations = GetSoloFightViolations()
+    PhaseFights:list[e.PhaseFight] = GetPhaseFights()
     paramRev = ["ParamRev"] # https://www.xenoserieswiki.org/wiki/Module:XC2_enemy_stat
     retainNonArrangeKeys = ["FldDmgType"]
     actKeys = ["FlyHeight", "ActType"]
@@ -32,15 +33,29 @@ def Enemies(targetGroup, normalOption:Interactables.Option, uniqueOption:Interac
         StaticEnemyData = eRando.GenEnemyData(eRando.arrangeData["rows"])
 
     if isOopsAll:
-        newEn = eRando.CreateForcedEnemy(StaticEnemyData, oopsAllVal)
+        oopsAllEn = eRando.CreateForcedEnemy(StaticEnemyData, oopsAllVal)
     
     for oldEn in eRando.arrangeData["rows"]:
         if eRando.FilterEnemies(oldEn, targetGroup): continue 
         if finalBoss and isFinalBoss(oldEn): continue
         
-        if not isOopsAll:
+        if isOopsAll:
+            newEn = e.copy.deepcopy(oopsAllEn)
+        else:
             newEn = eRando.CreateRandomEnemy(StaticEnemyData)
             newEn = RerollTornaBladedEnemies(oldEn, newEn, eRando)
+        
+        if matchPhase:
+            # If we have a phase 1 enemy Track what the newEn ID was
+            for fight in PhaseFights:
+                if oldEn["$id"] == fight.phase1:
+                    fight.phase1Replacement = newEn["$id"]
+                    break  
+            # If we have a phase 2 enemy use its phase 1 ID
+            for fight in PhaseFights:
+                if oldEn["$id"] == fight.phase2:
+                    newEn = eRando.CreateForcedEnemy(StaticEnemyData, fight.phase1Replacement)
+                    break
 
         if Options.BossEnemyOption_Solo.GetState():
             eRando.BalanceFight(oldEn, newEn, SoloFightViolations, EnemyCounts)
@@ -79,9 +94,6 @@ def Enemies(targetGroup, normalOption:Interactables.Option, uniqueOption:Interac
 
     Bandaids(eneFile.data, bossOption, eRando) # Changes based on ID after the key swap
     
-    if matchPhase:
-        MatchPhase()
-    
     eneFile.Close()
     paramFile.Close()
     rscFile.Close()
@@ -94,8 +106,12 @@ def isFinalBoss(oldEn):
     else:
         return False
 
-def MatchPhase():
-    '''Matches phase 1 and 2 of enemies to be the same enemy type'''
+def GetPhaseFights():
+    PhaseFights = [(186, 189), (191, 266), (212, 267), (214,268), (222, 269), (223, 270), (225, 271), (244, 272), (245, 273), (250, 274), (265, 275), (1441, 1442)]
+    PhaseFightsClassList = []
+    for p in PhaseFights:
+        PhaseFightsClassList.append(e.PhaseFight(p[0], p[1]))
+    return PhaseFightsClassList
 
 def RerollTornaBladedEnemies(oldEn, newEn, eRando:e.EnemyRandomizer):
     '''
@@ -114,9 +130,6 @@ def RerollTornaBladedEnemies(oldEn, newEn, eRando:e.EnemyRandomizer):
                 break
     return newEn
 
-def GetSecondPhaseIDs():
-    '''All the ids of the second phase of a fight so that we can match the enemy'''
-
 def CreateBlade(enBlade, oldEn, newEn, eRando:e.EnemyRandomizer, keys): # Because there is only 1 blade referenced for each enemy we have to create new blades (Since blades are not referenced in gimmick files it is fine)
     newBlade = copy.deepcopy(enBlade)
     newID =  len(eRando.arrangeData["rows"]) + 1
@@ -134,31 +147,97 @@ def RedRingRemoval():
                 pop["battlelockname"] = 0
             JSONParser.CloseFile(popData, popFile)
 
-def EnemyMultiplier(mult, targetIDs:list[int], isBoss = False):
+# pop_smn (Malos didnt spawn at all no red ring but his fight music played and the quest started)
+# pop_cloud same thing
+# pop_act_type 2 made him tpose then he aggrod and was like normal the malos sitll fell and died
+# battlelock is required else the zekes dont spawn properly
+# batAreaType?
+
+def EnemyMultiplier(mult, targetIDs:list[int]):
     qstTaskBattles = JSONParser.File("XC2/JsonOutputs/common/FLD_QuestBattle.json")
+    enGroupFile = JSONParser.File("XC2/JsonOutputs/common/FLD_EnemyGroup.json")
     
     for code in IDs.MajorAreaIds:
         enePopFile = JSONParser.File(f"XC2/JsonOutputs/common_gmk/ma{code}a_FLD_EnemyPop.json")
         if enePopFile.isOpen:
-            for en in enePopFile.rows:
-                for i in range(1,5):
-                    if en[f"ene{i}ID"] in targetIDs:
-                        maxCount = 7 # The squad ID 33 supports 7 enemies
-                        if en[f"ene{i}num"] > maxCount: continue # Enemy already exceed the max count leave as it was
+            for enPopGroup in enePopFile.rows:   
+                if enPopGroup["$id"] in [40547, 40548, 40549]: continue # Bulofoo tutorial seems to be hardcoded in some way   https://xenobladedata.github.io/xb2/bdat/common_gmk/FLD_EnemyWaveIra.html LOOK THIS FILE
+                if not CheckValidPop(enPopGroup, targetIDs): continue
+    
+                if enPopGroup["battlelockname"] != 0: # Check if boss fight, we have to treat the entire group together
+                    enPopGroup["squadId"] = 33 # This is the guldo squad id so that the enemies are played apart from each other, otherwise they severely glitch out (couldnt find any squad with a larger number of enemies)
+                    # Has a limitation that we can only really have 8 enemies in a group at once.
+                    maxCount = 8 # Max amount of enemies allowed in a fight due to squadId 33
+                    curCount = GetCounts(enPopGroup) # Vanilla Count of enemies in this fight
+                        
+                    targetCount = min(curCount * mult, maxCount) # Max count determined by the mult or max
                     
-                        StatRand.ApplyMult(en, f"ene{i}num", mult, maxCount)
-                        en["squadId"] = 33 # This is the guldo squad id so that the enemies are played apart from each other, otherwise they severely glitch out
-                        # en["party_flag"] = 1 # Not needed
-                        # Fix the quest that require a group of enemies to be killed to be the entire group
-                        for task in qstTaskBattles.rows:
-                            if task["EnemyID"] == en[f"ene{i}ID"]:
-                                task["Count"] = en[f"ene{i}num"]
-                                break
+                    while curCount < targetCount:
+                        for i in range(1,5):
+                            if enPopGroup[f"ene{i}ID"] == 0: continue # Ignore empty slots
+                            # add 1 to each enemy group until we hit the cap
+                            enPopGroup[f"ene{i}num"] = enPopGroup[f"ene{i}num"] + 1
+                            curCount += 1
+                            if curCount >= targetCount: break
+                else: # If not a boss fight we can multiply freely
+                    for i in range(1,5):
+                        maxCount = 99
+                        if enPopGroup[f"ene{i}num"] >= maxCount: continue # Enemy already exceed the max count leave as it was
+                        StatRand.ApplyMult(enPopGroup, f"ene{i}num", mult, maxCount, 0)
+                
+                for task in qstTaskBattles.rows:
+                    if not isQuestTask(task, enPopGroup, enGroupFile): continue
+                    if task["EnemyID"] != 0: # Only count the enemy that is for this quest
+                        task["Count"] = GetCounts(enPopGroup, [task["EnemyID"]])
+                    else: # Count normally
+                        task["Count"] = GetCounts(enPopGroup)
+                    break                               
+
             enePopFile.Close()
             
     qstTaskBattles.Close()
-    
+    enGroupFile.Close()
 
+def CheckValidPop(enPopGroup, targetIDs):
+    '''Returns true if this group is valid for the targetIDs'''
+    for i in range(1,5):
+        if enPopGroup[f"ene{i}ID"] in targetIDs: return True # If we find any enemy of this pop in the valid IDs we are allowed to change this group
+    return False            
+
+def isQuestTask(task, enPopGroup, groupFile:JSONParser.File):
+    '''Returns true if the enemyPopGroup is part of a questBattle'''
+    # Check the ID
+    if task["EnemyID"] != 0:
+        for i in range(1,5):
+            if task["EnemyID"] == enPopGroup[f"ene{i}ID"]:
+                return True
+    else:
+        # Check if the group has the ID
+        for group in groupFile.rows:
+            if task["EnemyGroupID"] != group["$id"]: continue
+            
+            popGroup = []
+            for i in range(1,5):
+                if enPopGroup[f"ene{i}ID"] == 0: continue
+                popGroup.append(enPopGroup[f"ene{i}ID"])
+            
+            battleGroup = []
+            for j in range(1,13):
+                if group[f"EnemyID{j}"] == 0: continue
+                battleGroup.append(group[f"EnemyID{j}"])
+            
+            if set(popGroup) == set(battleGroup): # If they share all elements
+                return True
+    return False
+
+def GetCounts(enPopGroup, targetEn = []):
+    '''Returns the total number of enemies in an enPopGroup'''
+    count = 0
+    for i in range(1,5):
+        if targetEn == [] or enPopGroup[f"ene{i}ID"] in targetEn:
+            count += enPopGroup[f"ene{i}num"]
+    return count
+    
 def ChangeSize(enList, targetGroup, newsize):
     for en in enList:
         if en["$id"] in targetGroup:
@@ -199,7 +278,7 @@ def EnemySizeHelper(oldEn, newEn, eRando:e.EnemyRandomizer):
     # Reset size if scaled higher than massive
     ChangeSize([oldEn, newEn], SupermassiveEnemies, Massive)
 
-def Bandaids(eneData, isBoss, eRando):
+def Bandaids(eneData, isBoss:Interactables.Option, eRando):
     '''Bandaids intented to be ran once'''
     ForcedWinFights([3,6])
     SummonIDFix(eneData)
@@ -402,6 +481,9 @@ def EnemyDesc(name):
         EnemyRandoDesc.Text("If this setting is on, enemies will keep their original aggro. For example, if a Krabble is replaced by Amalthus, it will keep the krabble's aggro type and radius.")
         EnemyRandoDesc.Header(Options.NormalEnemyOption_Size.name)
         EnemyRandoDesc.Text("This will match the size of the new enemy to the original enemy. For example, Ophion (a big enemy), when replaced with a krabble (a small enemy), will force the Krabble to match Ophions size for that instance of it. This helps with indoor areas as massive enemies will be shrunk to match their new environment.")   
+    EnemyRandoDesc.Header(Options.NormalEnemyOption_Multiply.name)
+    EnemyRandoDesc.Text("This will multiply the amount of enemies in any given spot.\n\nFor boss fight there are special conditions\nYou can only have up to 8 enemies in a boss fight\nWave battles do not work properly when increased so those are unchanged.")
+    
     return EnemyRandoDesc
 
 # ------ Not used

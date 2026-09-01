@@ -1,6 +1,7 @@
 import json, random
 from XCDE.XCDE_Scripts import Options, IDs
 import scripts.Helper, scripts.JSONParser, scripts.PopupDescriptions
+from scripts import StatRand
 
 TalentArts = [102,101,100,44,99,43,98,42,62,97,154,1,2,19,36,41,61,79,96,119,120,121,122,123,124,125,126,127,153,171,152] # Need to shuffle these seperately for various reasons
 DLCArts = [155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187]
@@ -54,6 +55,7 @@ def RandomizePcArts():
     keepMeliaSummons = Options.PlayerArtsOption_Summons.GetState()
     isArtGroups = Options.PlayerArtsOption_ArtGroups.GetState()
     isPower = Options.PlayerArtsOption_Power.GetState()
+    powerIntensity = Options.PlayerArtsOption_Power_Dropdown.GetState()
     isArts = Options.PlayerArtsOption_Arts.GetState()
     
     editableList = CharacterList.copy()
@@ -97,17 +99,15 @@ def RandomizePcArts():
             
         if isPower:
             for art in artData["rows"]:
-                Power(art)
-
+                Power(art, powerIntensity)
 
         scripts.JSONParser.CloseFile(artData, artFile)
 
 
-def MeliaWeight(keepMeliaSummons, MeliaActs):
+def MeliaWeight(keepMeliaSummons, MeliaActs:ActMatch):
+    MeliaActs.slots = 15
     if keepMeliaSummons: # If melia keeps her summons we reduce her slots
-        MeliaActs.slots = 7
-    else:
-        MeliaActs.slots = 15
+        MeliaActs.slots -= len(MeliaSummonsNames)
 
 def ArtGroupManager(isArtGroups, art, ArtGroups):
     if isArtGroups:
@@ -154,24 +154,22 @@ def Mult(art, keys = [], mults = [60,180], rollOnce = False, maxVal = 255):
             if not rollOnce:
                 mult = random.choice(mults)
 
-def Power(art):
-    Mult(art,["grow_powl", "grow_powh"], rollOnce=True)
-    
-    Mult(art,["rate1", "rate2"], [70,180], True, 4095)
-
-    Mult(art,["st_time"], [70,140], maxVal=2047)
-    Mult(art,["grow_st_time"])
-    
-    Mult(art,["sp_val2"])
-    
-    Mult(art,["st_val", "st_val2"], [50, 250])
-    Mult(art,["grow_st_val"],[50,220])
-    
-    Mult(art,["tp"], [40,100], maxVal=127)
-    
-    Mult(art,["recast"], [80,120], True)
-    Mult(art,["glow_recast"], [80,120], True, 31)
-    
+def Mult(art, intensity,  keys = [], maxMult = 2, rollperKey = True, maxVal = 255, minVal = 0):
+    PowerStatRand = StatRand.Stat(maxMult, intensity)
+    mult = PowerStatRand.RollBalancedMult()
+    for key in keys:
+        PowerStatRand.ApplyMult(art, key, mult, maxVal, min=minVal)
+        if rollperKey:
+            mult = PowerStatRand.RollBalancedMult()
+            
+def Power(art, intensity):
+    Mult(art, intensity, ["grow_powl", "grow_powh"], rollperKey=False)
+    Mult(art, intensity, ["rate1", "rate2"], 2, rollperKey=False, maxVal=4095)
+    Mult(art, intensity, ["st_time"], maxVal=2047)
+    Mult(art, intensity, ["grow_st_time", "sp_val2", "st_val", "st_val2", "grow_st_val"])
+    Mult(art, intensity, ["tp"], 1.5, maxVal=100)
+    Mult(art, intensity, ["recast"], 1.5, maxVal=360)
+    Mult(art, intensity, ["glow_recast"], 1.5, maxVal=31)
     
 # Fixes art books
 def MatchArtBooks(artData):

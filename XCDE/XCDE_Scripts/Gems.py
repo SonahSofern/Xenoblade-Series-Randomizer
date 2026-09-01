@@ -87,6 +87,7 @@ def Gems():
     isNotCapped = Options.GemOption_NoCap.GetState()
     isFreeEquip = Options.GemOption_FreeEquip.GetState()
     isPower = Options.GemOption_Power.GetState()
+    powerLevel = Options.GemOption_Power_Dropdown.GetState()
     isEffect = Options.GemOption_Effect.GetState()
     
     effectType = Options.GemOption_Effect_Dropdown
@@ -101,26 +102,28 @@ def Gems():
             UnusedGems()
         Effects(gemFile, gemMSFile, gemHelpMSFile)
     
-    for gem in gemFile.rows:
-        if isNotCapped:
-            if gem["rvs_status"] not in [146, 45]:
-                gem["max"] = int(gem["max"] * random.choice([0.2,0.4,0.6,0.8,1.2,1.4,1.6,1.8,2.2,3,3,4]))
-        if isFreeEquip:
-            gem["attach"] = 0                # 0 Equip to anything                # 1 Equip to weapon                # 2 Equip to armor
-        if isPower:
-            RankPower(gem, ranks)
-            
+    maxRand = StatRand.Stat(3, 100)
+    powerRand = StatRand.Stat(2, powerLevel)
     
+    for gem in gemFile.rows:
+        if gem["rvs_status"] in [146]:
+            pass
+        if isNotCapped and (gem["rvs_status"] not in [146, 45]): # Unbeatable
+            mult = maxRand.RollBalancedMult()
+            StatRand.ApplyMult(gem, "max", mult)
+        if isFreeEquip:
+            gem["attach"] = 0 # 0 Equip to anything  # 1 Equip to weapon  # 2 Equip to armor
+        if isPower:
+            RankPower(gem, ranks, powerRand)
+            
     if isPower or isEffect:
-        ItemPower(gemFile.rows, ranks)
+        RebalanceItemPower(gemFile.rows, ranks)
                     
     GemList.clear() # Clear the global list
                 
     gemFile.Close()
     gemMSFile.Close()
     gemHelpMSFile.Close()
-
-
     
 def Effects(gemData:JSONParser.File, gemMSData:JSONParser.File, gemHelpMSData:JSONParser.File):
     
@@ -253,14 +256,13 @@ def CrystalFix(gemLength): #
                     mine[f"skill{i}"] = random.randrange(1, gemLength+1)
         areaMineFile.Close()
     
-def RankPower(gem, ranks):
-    statR = StatRand.Stat(3, 100)
+def RankPower(gem, ranks, statR:StatRand.Stat):
     mult = statR.RollBalancedMult()
     for r in ranks:
         statR.ApplyMult(gem, f"lower_{r}", mult, 253, 1)
         statR.ApplyMult(gem, f"upper_{r}", mult, 255, 1)
         
-def ItemPower(gemData, ranks):
+def RebalanceItemPower(gemData, ranks):
     '''Balances premade gems given thorughout the story for their level and new effect'''
     gemType = 3
     with open("./XCDE/JsonOutputs/bdat_common/ITM_itemlist.json", 'r+', encoding='utf-8') as gemItemFile: 

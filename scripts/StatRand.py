@@ -1,9 +1,11 @@
 from scripts import Helper
+from scripts.Interactables import DropdownOption
 
 
 b8 = 255
 b16 = 65535
 IntensityDescription = "Intensity controls how much of the max range the randomizer can reach, basically the higher the intensity the higher the stats can vary.\n\nIf you have intensity 50 that means you will get up to 50% of the maximum possible. If the max mult was 2x, you would get 1.5x and 0.66x (1/1.5) as the high and low variance a stat would be multiplied by."
+IntensityDropdownOptions = [DropdownOption("Low", 30), DropdownOption("Medium", 60), DropdownOption("High", 100)]
 
 class Stat():
     '''A class that randomizes stats by multiplying them, based on intensity and various modes'''
@@ -46,5 +48,4 @@ def ApplyMult(target, stat, chosenMult = 1, max = b16, min = 1, allowFloat = Fal
     if not allowFloat:
         clampedMult = int(clampedMult)
         
-    
     target[stat] = clampedMult
